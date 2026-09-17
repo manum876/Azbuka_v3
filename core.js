@@ -9,10 +9,9 @@
 
 /* ── CATÁLOGO GLOBAL ─────────────────────────────────────────
    Sacado directo de tu core.js real (títulos, desc y hrefs
-   tal cual están hoy en el repo). Única diferencia: la Unidad 13
-   no existe todavía en tu repo (ahí solo llegan a azbuka-12.html),
-   así que la dejo con título placeholder — avisame el título real
-   cuando la definas y lo cambio. */
+   tal cual están hoy en el repo). La Unidad 13 (Examen final)
+   todavía no existe como archivo — el link queda planteado
+   apuntando a azbuka-13.html igual que el resto. */
 const AZ_UNITS = [
   { id: 1, title: "Alfabeto y pronunciación", href: "azbuka-1.html" },
   { id: 2, title: "Presentaciones básicas", href: "azbuka-2.html" },
@@ -26,7 +25,7 @@ const AZ_UNITS = [
   { id: 10, title: "Casos restantes", href: "azbuka-10.html" },
   { id: 11, title: "Conversaciones cotidianas", href: "azbuka-11.html" },
   { id: 12, title: "Consolidación B1", href: "azbuka-12.html" },
-  { id: 13, title: "Unidad 13 (título a definir)", href: "azbuka-13.html" },
+  { id: 13, title: "Examen final", href: "azbuka-13.html" },
 ];
 
 /* Los 4 módulos de apoyo pedidos, con sus glifos cirílicos reales
@@ -40,26 +39,40 @@ const AZ_MODULES = [
 ];
 
 /* ── LÉXICO ──────────────────────────────────────────────────
-   La base real es data-lexicon.js (objeto LEXICON, clave
-   "LEX-<tipo>-NNN", campos ru/es/pos/gender/sources/introducedIn/
-   appearsIn — ver ese archivo). Cargalo ANTES de este script:
+   Base real: data-lexicon.js expone LEXICON_COMER — un ARRAY de
+   ~4.931 palabras (Comer 5000 + FreeDict), no un objeto LEXICON
+   como en el repo viejo. Cada entrada:
+     { id: "CMR-00003", ru, posNormalized, translit, ipa,
+       senses: [{ es, definitionEs, source }, ...],
+       gender?, introducedIn: [], appearsIn: [], ... }
+   La traducción NO es un campo plano "es" — vive adentro de
+   senses[], porque una palabra puede tener más de un sentido.
+   Ya trae lexComerById(id) / lexComerByRu(ru); acá solo se agrega
+   la búsqueda por substring en ru Y en los es de cada sense.
 
      <script src="data-lexicon.js"></script>
      <script src="core.js"></script>
 
-   data-lexicon.js ya expone lexById/lexByRu/lexByUnit/lexByTool,
-   pero ninguno busca por substring en ru Y es al mismo tiempo —
-   eso es lo que necesita el buscador del drawer, así que se
-   agrega acá. No inventa datos: lee LEXICON tal cual está.
-   El resultado apunta a ficha.html?id=<LEX-id> — la página
-   genérica que arma la ficha en runtime (ver ficha.html). */
-function azSearchLexico(query) {
+   No hace falta ningún otro data-*.js — Azbuka_v3 ya no reparte
+   el vocabulario por módulo, todo vive acá. */
+function azSearchLexicon(query) {
+  if (typeof LEXICON_COMER === "undefined") return [];
   const q = (query || "").trim().toLowerCase();
-  if (!q || typeof LEXICON === "undefined") return [];
-  return Object.entries(LEXICON)
-    .filter(([id, e]) => e.ru.toLowerCase().includes(q) || e.es.toLowerCase().includes(q))
-    .slice(0, 8)
-    .map(([id, e]) => ({ id, palabra: e.ru, traduccion: e.es, href: "ficha.html?id=" + id }));
+  if (!q) return [];
+  return LEXICON_COMER
+    .filter(e =>
+      e.ru.toLowerCase().includes(q) ||
+      (e.senses || []).some(s => s.es.toLowerCase().includes(q))
+    )
+    .slice(0, 40)
+    .map(e => ({
+      id: e.id,
+      ru: e.ru,
+      es: (e.senses || []).map(s => s.es).join(" · "),
+      pos: e.posNormalized,
+      gender: e.gender || null,
+      href: "ficha.html?id=" + e.id
+    }));
 }
 
 /* ── STORAGE ─────────────────────────────────────────────────

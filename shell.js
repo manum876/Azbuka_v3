@@ -75,12 +75,12 @@ function AzShell(props) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [lexQuery, setLexQuery] = useState("");
   const searchRef = useRef(null);
+  const listRef = useRef(null);
   const dark = darkMode;
   const c = azColors(dark);
 
-  const lexResults = lexQuery.trim() && typeof azSearchLexico === "function"
-    ? azSearchLexico(lexQuery)
-    : [];
+  const q = lexQuery.trim();
+  const results = q && typeof azSearchLexicon === "function" ? azSearchLexicon(q) : [];
 
   return React.createElement("div", {
     style: { background: c.bg, color: c.text, minHeight: "100vh", fontFamily: "'Inter','Helvetica Neue',sans-serif", transition: "background .3s, color .3s" }
@@ -104,15 +104,15 @@ function AzShell(props) {
         transition: "transform .28s cubic-bezier(.4,0,.2,1)"
       }
     },
-      /* Buscador de léxico — va DIRECTO a la base de palabras, no a
-         módulos. Los resultados llevan a la ficha de cada palabra;
-         de la ficha se sale hacia el módulo/unidad correspondiente. */
+      /* Buscador — va DIRECTO a LEXICON_COMER (las ~4.931 palabras),
+         no a módulos. Cada resultado lleva a su ficha. */
       React.createElement("div", { style: { padding: "6vh 16px 8px", flexShrink: 0 } },
         React.createElement("div", { style: { position: "relative" } },
           React.createElement("input", {
             ref: searchRef,
             value: lexQuery,
             onInput: (e) => setLexQuery(e.target.value),
+            onFocus: () => { if (listRef.current) listRef.current.scrollTop = 0; },
             placeholder: "Buscar en el léxico…",
             style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "9px 32px 9px 12px", color: c.text, fontSize: 13.5 }
           }),
@@ -121,30 +121,31 @@ function AzShell(props) {
             "aria-label": "Limpiar búsqueda",
             style: { position: "absolute", right: 6, top: "50%", transform: "translateY(-50%)", width: 22, height: 22, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 12, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
           }, "✕")
-        ),
-        lexResults.length > 0 && React.createElement("div", {
-          style: { marginTop: 6, background: c.card, border: `1px solid ${c.border}`, borderRadius: 9, overflow: "hidden" }
-        },
-          lexResults.map((r, i) => React.createElement("a", {
-            key: r.id, href: r.href,
-            style: {
-              display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 8,
-              padding: "9px 12px", fontSize: 13, textDecoration: "none",
-              borderTop: i === 0 ? "none" : `1px solid ${c.border}`
-            }
-          },
-            React.createElement("span", { style: { color: c.text, fontWeight: 600 } }, r.palabra),
-            React.createElement("span", { style: { color: c.textMuted, fontSize: 12 } }, r.traduccion)
-          ))
-        ),
-        lexQuery.trim() && lexResults.length === 0 && React.createElement("div", {
-          style: { marginTop: 6, fontSize: 12, color: c.textMuted, padding: "0 2px" }
-        }, "Sin resultados en el léxico")
+        )
       ),
+      q && results.length > 0 && React.createElement("div", {
+        style: { margin: "0 16px 8px", maxHeight: "40vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 9, flexShrink: 0 }
+      },
+        results.map((r, i) => React.createElement("a", {
+          key: r.id, href: r.href,
+          style: {
+            display: "flex", flexDirection: "column", gap: 2, padding: "9px 12px", textDecoration: "none",
+            borderTop: i === 0 ? "none" : `1px solid ${c.border}`
+          }
+        },
+          React.createElement("div", { style: { display: "flex", justifyContent: "space-between", gap: 8 } },
+            React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: 13.5 } }, r.ru),
+            React.createElement("span", { style: { color: c.textMuted, fontSize: 12, textAlign: "right" } }, r.es)
+          )
+        ))
+      ),
+      q && results.length === 0 && React.createElement("div", {
+        style: { margin: "0 16px 8px", fontSize: 12, color: c.textMuted, flexShrink: 0 }
+      }, "Sin resultados"),
 
       /* Índice + listado de unidades, y por separado los módulos de
          apoyo — esta es la única zona que scrollea dentro del drawer. */
-      React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "6px 8px" } },
+      React.createElement("div", { ref: listRef, style: { flex: 1, overflowY: "auto", padding: "6px 8px" } },
         React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "10px 10px 6px" } }, "Azbuka"),
         React.createElement("a", {
           href: "azbuka-index.html",
