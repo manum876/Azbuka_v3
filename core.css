@@ -1,0 +1,44 @@
+/* ============================================================
+   CORE.CSS — Reglas estáticas compartidas por todas las páginas
+   que usan el shell (drawer + header + bottom nav).
+   Lo que SÍ depende del tema claro/oscuro (colores de fondo,
+   bordes, texto) sigue viviendo en shell.js como estilos inline,
+   porque cambia en caliente al togglear el tema. Acá va solo lo
+   que es igual siempre.
+   ============================================================ */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+::selection { background: #C9A84C33; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2A2A38; border-radius: 3px; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.letter-card {
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease both;
+}
+.letter-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px #C9A84C20;
+  border-color: #C9A84C60 !important;
+}
+.letter-card:active { transform: scale(0.97); }
+
+.btn { transition: all 0.18s; cursor: pointer; border: none; font-family: inherit; }
+.btn:hover { opacity: 0.85; }
+.btn:active { transform: scale(0.96); }
+
+input { font-family: inherit; }
+input:focus { outline: none; border-color: #C9A84C !important; }
+
+@media (max-width: 600px) {
+  .letter-card { padding: 12px 6px !important; }
+}

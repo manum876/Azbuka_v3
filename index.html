@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Módulo A</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="core.js"></script>
+<script src="shell.js"></script>
+<script>
+const { useState, useEffect } = htmPreact;
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [view, setView] = useState("inicio");
+
+  useEffect(() => {
+    (async () => { setDarkMode((await azGet('az_theme', 'dark')) !== 'light'); })();
+  }, []);
+
+  return React.createElement(AzShell, {
+    darkMode, setDarkMode,
+    moduleId: "modulo-a",
+    title: "Азбука",
+    subtitle: "Módulo A",
+    tabs: [{ id: "inicio", icon: "⊞", label: "Inicio" }],
+    view, setView
+  },
+    /* ── CONTENIDO DE ESTA PÁGINA ── */
+    React.createElement("div", { style: { animation: "fadeIn 0.3s ease" } },
+      React.createElement("div", { style: { textAlign: "center", marginBottom: 28, padding: "24px 0 8px" } },
+        React.createElement("h1", { style: { fontSize: 22, fontWeight: 700, marginBottom: 6 } }, "Módulo A"),
+        React.createElement("p", { style: { fontSize: 14, color: "#8A847A" } }, "Esta página vive en index.html y usa el shell compartido.")
+      ),
+      React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(90px, 1fr))", gap: 10 } },
+        Array.from({ length: 6 }).map((_, i) =>
+          React.createElement("div", {
+            key: i, className: "letter-card",
+            style: { background: darkMode ? "#1A1A24" : "#FFFFFF", border: `1px solid ${darkMode ? "#2A2A38" : "#D5D0C8"}`, borderRadius: 16, padding: "16px 8px", textAlign: "center" }
+          },
+            React.createElement("div", { style: { fontSize: 22, fontWeight: 800, color: "#C9A84C" } }, "Ítem " + (i + 1))
+          )
+        )
+      )
+    )
+  );
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>
