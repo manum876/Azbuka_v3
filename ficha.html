@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Ficha de palabra</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
+<script src="core.js"></script>
+<script src="shell.js"></script>
+<script>
+/* ============================================================
+   FICHA.HTML — UNA sola página para las +5.000 palabras del
+   léxico. No hay (ni va a haber) un HTML por palabra: esta
+   página lee el id de la URL (?id=LEX-xxx-nnn), busca esa
+   entrada en el objeto LEXICON (data-lexicon.js) y arma el
+   contenido en runtime. Agregar una palabra nueva al léxico no
+   requiere tocar ni un archivo HTML — solo el dato en
+   data-lexicon.js ya es navegable vía ficha.html?id=<su-id>.
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+
+function getWordId() {
+  return new URLSearchParams(window.location.search).get("id");
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+
+  useEffect(() => {
+    (async () => { setDarkMode((await azGet('az_theme', 'dark')) !== 'light'); })();
+  }, []);
+
+  const id = getWordId();
+  const entry = id && typeof lexById === "function" ? lexById(id) : null;
+  const c = azColors(darkMode);
+
+  let content;
+  if (!entry) {
+    content = React.createElement("div", { style: { textAlign: "center", padding: "10vh 0" } },
+      React.createElement("h1", { style: { fontSize: 18, marginBottom: 8 } }, "Palabra no encontrada"),
+      React.createElement("p", { style: { fontSize: 13.5, color: c.textMuted } },
+        id ? `No hay ninguna entrada con id "${id}" en el léxico.` : "Faltó el parámetro ?id= en la URL.")
+    );
+  } else {
+    const units = (entry.introducedIn || [])
+      .map(n => (typeof AZ_UNITS !== "undefined" ? AZ_UNITS.find(u => u.id === n) : null))
+      .filter(Boolean);
+    const tools = (entry.appearsIn || [])
+      .map(t => (typeof AZ_MODULES !== "undefined" ? AZ_MODULES.find(m => m.id === t) : null))
+      .filter(Boolean);
+
+    content = React.createElement("div", { style: { animation: "fadeIn 0.3s ease" } },
+      React.createElement("div", { style: { textAlign: "center", padding: "24px 0 8px" } },
+        React.createElement("div", { style: { fontSize: 34, fontWeight: 800, color: c.gold } }, entry.ru),
+        React.createElement("div", { style: { fontSize: 16, color: c.textSub, marginTop: 6 } }, entry.es),
+        React.createElement("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, textTransform: "uppercase", letterSpacing: 1 } },
+          entry.pos + (entry.gender ? " · " + entry.gender : ""))
+      ),
+
+      units.length > 0 && React.createElement("div", { style: { marginTop: 24 } },
+        React.createElement("div", { style: { fontSize: 11, letterSpacing: 1.2, textTransform: "uppercase", color: c.textMuted, marginBottom: 8 } }, "Se enseña en"),
+        React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } },
+          units.map(u => React.createElement("a", {
+            key: u.id, href: u.href,
+            style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 12, padding: "12px 14px", color: c.text, textDecoration: "none", display: "flex", justifyContent: "space-between", alignItems: "center" }
+          },
+            React.createElement("span", null, "Unidad " + u.id + " — " + u.title),
+            React.createElement("span", { style: { color: c.gold } }, "→")
+          ))
+        )
+      ),
+
+      tools.length > 0 && React.createElement("div", { style: { marginTop: 20 } },
+        React.createElement("div", { style: { fontSize: 11, letterSpacing: 1.2, textTransform: "uppercase", color: c.textMuted, marginBottom: 8 } }, "También aparece en"),
+        React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } },
+          tools.map(m => {
+            const src = entry.sources && entry.sources[m.id];
+            return React.createElement("a", {
+              key: m.id, href: m.href,
+              style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 12, padding: "12px 14px", color: c.text, textDecoration: "none", display: "flex", justifyContent: "space-between", alignItems: "center" }
+            },
+              React.createElement("span", null, m.title + (src && src.ref ? " — " + src.ref : "")),
+              React.createElement("span", { style: { color: c.gold } }, "→")
+            );
+          })
+        )
+      )
+    );
+  }
+
+  return React.createElement(AzShell, {
+    darkMode, setDarkMode,
+    moduleId: null,
+    tabs: [],
+  }, content);
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

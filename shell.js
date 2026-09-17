@@ -108,13 +108,20 @@ function AzShell(props) {
          módulos. Los resultados llevan a la ficha de cada palabra;
          de la ficha se sale hacia el módulo/unidad correspondiente. */
       React.createElement("div", { style: { padding: "6vh 16px 8px", flexShrink: 0 } },
-        React.createElement("input", {
-          ref: searchRef,
-          value: lexQuery,
-          onInput: (e) => setLexQuery(e.target.value),
-          placeholder: "Buscar en el léxico…",
-          style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "9px 12px", color: c.text, fontSize: 13.5 }
-        }),
+        React.createElement("div", { style: { position: "relative" } },
+          React.createElement("input", {
+            ref: searchRef,
+            value: lexQuery,
+            onInput: (e) => setLexQuery(e.target.value),
+            placeholder: "Buscar en el léxico…",
+            style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "9px 32px 9px 12px", color: c.text, fontSize: 13.5 }
+          }),
+          lexQuery && React.createElement("button", {
+            onClick: () => { setLexQuery(""); if (searchRef.current) searchRef.current.focus(); },
+            "aria-label": "Limpiar búsqueda",
+            style: { position: "absolute", right: 6, top: "50%", transform: "translateY(-50%)", width: 22, height: 22, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 12, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
+          }, "✕")
+        ),
         lexResults.length > 0 && React.createElement("div", {
           style: { marginTop: 6, background: c.card, border: `1px solid ${c.border}`, borderRadius: 9, overflow: "hidden" }
         },
@@ -140,7 +147,7 @@ function AzShell(props) {
       React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "6px 8px" } },
         React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "10px 10px 6px" } }, "Azbuka"),
         React.createElement("a", {
-          href: "index.html",
+          href: "azbuka-index.html",
           style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: 13.5, textDecoration: "none" }
         }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, "00"), "Índice"),
         (typeof AZ_UNITS !== "undefined" ? AZ_UNITS : []).map(u => React.createElement("a", {
@@ -182,9 +189,9 @@ function AzShell(props) {
     },
       React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "flex-start", gap: 10 } },
         React.createElement("button", {
-          onClick: azGoBack, className: "btn", "aria-label": "Atrás",
-          style: { background: "none", border: "none", padding: "2px 4px 0 0", fontSize: 22, lineHeight: 1, color: c.text, cursor: "pointer", flexShrink: 0 }
-        }, "←"),
+          onClick: azGoBack, "aria-label": "Atrás",
+          style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: c.text, cursor: "pointer", padding: 0, flexShrink: 0, marginTop: 0 }
+        }, "<"),
         React.createElement("div", { style: { display: "flex", flexDirection: "column" } },
           React.createElement("span", { style: { fontSize: 24, color: c.gold, fontWeight: 900, letterSpacing: -1 } }, "Азбука"),
           React.createElement("span", { style: { marginTop: 3, fontSize: 12.5, color: c.textMuted, fontWeight: 500 } }, "Aprende ruso desde cero")

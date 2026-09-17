@@ -7,21 +7,36 @@
    Import en el HTML: <script src="core.js"></script>
    ============================================================ */
 
-/* ── CATÁLOGO GLOBAL (placeholder) ──────────────────────────
-   Fuente única de verdad para lo que se lista en el drawer.
-   Reemplazá estos arrays por las unidades/módulos reales del
-   proyecto — la forma (id, title, href) es lo único que el
-   shell necesita respetar. */
+/* ── CATÁLOGO GLOBAL ─────────────────────────────────────────
+   Sacado directo de tu core.js real (títulos, desc y hrefs
+   tal cual están hoy en el repo). Única diferencia: la Unidad 13
+   no existe todavía en tu repo (ahí solo llegan a azbuka-12.html),
+   así que la dejo con título placeholder — avisame el título real
+   cuando la definas y lo cambio. */
 const AZ_UNITS = [
-  { id: 1, title: "Unidad 1", href: "unidad-1.html" },
-  { id: 2, title: "Unidad 2", href: "unidad-2.html" },
-  { id: 3, title: "Unidad 3", href: "unidad-3.html" },
+  { id: 1, title: "Alfabeto y pronunciación", href: "azbuka-1.html" },
+  { id: 2, title: "Presentaciones básicas", href: "azbuka-2.html" },
+  { id: 3, title: "Sustantivos y género", href: "azbuka-3.html" },
+  { id: 4, title: "Casos básicos", href: "azbuka-4.html" },
+  { id: 5, title: "Verbos en presente", href: "azbuka-5.html" },
+  { id: 6, title: "Movimiento y ubicación", href: "azbuka-6.html" },
+  { id: 7, title: "Tiempo y rutina diaria", href: "azbuka-7.html" },
+  { id: 8, title: "Pasado", href: "azbuka-8.html" },
+  { id: 9, title: "Futuro", href: "azbuka-9.html" },
+  { id: 10, title: "Casos restantes", href: "azbuka-10.html" },
+  { id: 11, title: "Conversaciones cotidianas", href: "azbuka-11.html" },
+  { id: 12, title: "Consolidación B1", href: "azbuka-12.html" },
+  { id: 13, title: "Unidad 13 (título a definir)", href: "azbuka-13.html" },
 ];
 
+/* Los 4 módulos de apoyo pedidos, con sus glifos cirílicos reales
+   (mismos que ya usa tu core.js real). Diccionario existe en el
+   repo pero no lo pediste acá, así que no lo incluyo. */
 const AZ_MODULES = [
-  { id: "modulo-a", title: "Módulo A", href: "modulo-a.html", glyph: "A" },
-  { id: "modulo-b", title: "Módulo B", href: "modulo-b.html", glyph: "B" },
-  { id: "modulo-c", title: "Módulo C", href: "modulo-c.html", glyph: "C" },
+  { id: "alfabeto", title: "Alfabeto", href: "alfabeto.html", glyph: "Я" },
+  { id: "dialogos", title: "Diálogos", href: "dialogos.html", glyph: "Ди" },
+  { id: "verbos", title: "Verbos", href: "verbos.html", glyph: "Вб" },
+  { id: "casos", title: "Casos", href: "casos.html", glyph: "Пд" },
 ];
 
 /* ── LÉXICO ──────────────────────────────────────────────────
@@ -36,8 +51,8 @@ const AZ_MODULES = [
    pero ninguno busca por substring en ru Y es al mismo tiempo —
    eso es lo que necesita el buscador del drawer, así que se
    agrega acá. No inventa datos: lee LEXICON tal cual está.
-   El href a la ficha es un supuesto (ficha.html?id=<LEX-id>) —
-   ajustalo si la página de ficha real usa otra ruta/parámetro. */
+   El resultado apunta a ficha.html?id=<LEX-id> — la página
+   genérica que arma la ficha en runtime (ver ficha.html). */
 function azSearchLexico(query) {
   const q = (query || "").trim().toLowerCase();
   if (!q || typeof LEXICON === "undefined") return [];
