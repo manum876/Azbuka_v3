@@ -1,5 +1,5 @@
 /* ============================================================
-   SHELL.JS — Drawer + header (título arriba) + bottom nav,
+   SHELL.JS — Drawer + header (Азбука fijo + atrás) + bottom nav,
    como un único componente reusable.
 
    Orden de carga en el <head>/<body> de cada página:
@@ -7,11 +7,13 @@
      ...
      <div id="root"></div>
      <script src="preact.js"></script>   ← bundle htm+preact
-     <script src="core.js"></script>     ← AZ_UNITS, AZ_MODULES, azGet/azSet
+     <script src="core.js"></script>     ← AZ_UNITS, AZ_MODULES, AZ_LEXICO, azGet/azSet
      <script src="shell.js"></script>    ← este archivo
      <script> ... App propia de la página, ver ejemplo abajo ... </script>
 
-   Uso típico dentro de la página:
+   Uso típico dentro de la página (el título y la bajada ya NO se
+   pasan por props: son siempre "Азбука" / "Aprende ruso desde cero"
+   en todas las pantallas):
      const React = window.React;
      function App(){
        const [darkMode, setDarkMode] = useState(true);
@@ -21,7 +23,6 @@
        })(); }, []);
        return React.createElement(AzShell, {
          darkMode, setDarkMode, moduleId: "modulo-a",
-         title: "Азбука", subtitle: "Módulo A",
          tabs: [{ id: "inicio", icon: "⊞", label: "Inicio" }],
          view, setView
        }, React.createElement("div", null, "contenido de esta página"));
@@ -29,6 +30,7 @@
      htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
    ============================================================ */
 
+(function () {
 const { useState, useRef } = htmPreact;
 window.React = window.React || { createElement: htmPreact.h, Fragment: function (p) { return p.children; } };
 const React = window.React;
@@ -50,22 +52,35 @@ function azColors(dark) {
 }
 window.azColors = azColors;
 
+/* Vuelve a la pantalla anterior en el historial de navegación real
+   (no a un "padre" jerárquico). Si no hay historial previo (se entró
+   directo a esta URL), cae a index.html como fallback razonable. */
+function azGoBack() {
+  if (window.history.length > 1) window.history.back();
+  else window.location.href = "index.html";
+}
+
 /* Props:
    - darkMode, setDarkMode: estado de tema, manejado por la página
    - moduleId: id dentro de AZ_MODULES para resaltarlo en el drawer
-   - title, subtitle: header
-   - tabs: [{id, icon, label, action?}] para la bottom nav
+   - tabs: [{id, icon, label, action?}] para la bottom nav — si no
+     entran en el ancho de pantalla, esa zona scrollea horizontal
    - view, setView: estado de tab activo, manejado por la página
-   - children: contenido de <main> */
+   - children: contenido central de la pantalla */
 function AzShell(props) {
   const {
-    darkMode, setDarkMode, moduleId, title, subtitle,
+    darkMode, setDarkMode, moduleId,
     tabs = [], view, setView, children
   } = props;
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [lexQuery, setLexQuery] = useState("");
   const searchRef = useRef(null);
   const dark = darkMode;
   const c = azColors(dark);
+
+  const lexResults = lexQuery.trim() && typeof azSearchLexico === "function"
+    ? azSearchLexico(lexQuery)
+    : [];
 
   return React.createElement("div", {
     style: { background: c.bg, color: c.text, minHeight: "100vh", fontFamily: "'Inter','Helvetica Neue',sans-serif", transition: "background .3s, color .3s" }
@@ -73,7 +88,7 @@ function AzShell(props) {
     /* Fondo de html/body/#root sigue el tema — esto sí es dinámico */
     React.createElement("style", null, `html, body, #root { background: ${c.bg}; }`),
 
-    /* ── OVERLAY ── */
+    /* ── OVERLAY (el contenido central queda detrás, sin ajustarse) ── */
     drawerOpen && React.createElement("div", {
       onClick: () => setDrawerOpen(false),
       style: { position: "fixed", inset: 0, background: "rgba(0,0,0,.55)", zIndex: 200 }
@@ -89,18 +104,39 @@ function AzShell(props) {
         transition: "transform .28s cubic-bezier(.4,0,.2,1)"
       }
     },
-      React.createElement("div", { style: { padding: "6vh 16px 4px" } },
-        React.createElement("a", {
-          href: "index.html",
-          style: { display: "flex", alignItems: "center", gap: 8, background: "none", border: `1px solid ${c.border}`, borderRadius: 10, padding: "10px 16px", color: c.text, fontSize: 14.5, textDecoration: "none", boxSizing: "border-box" }
-        }, "🏠 Inicio")
-      ),
-      React.createElement("div", { style: { padding: "12px 16px 6px" } },
+      /* Buscador de léxico — va DIRECTO a la base de palabras, no a
+         módulos. Los resultados llevan a la ficha de cada palabra;
+         de la ficha se sale hacia el módulo/unidad correspondiente. */
+      React.createElement("div", { style: { padding: "6vh 16px 8px", flexShrink: 0 } },
         React.createElement("input", {
-          ref: searchRef, placeholder: "Buscar",
+          ref: searchRef,
+          value: lexQuery,
+          onInput: (e) => setLexQuery(e.target.value),
+          placeholder: "Buscar en el léxico…",
           style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "9px 12px", color: c.text, fontSize: 13.5 }
-        })
+        }),
+        lexResults.length > 0 && React.createElement("div", {
+          style: { marginTop: 6, background: c.card, border: `1px solid ${c.border}`, borderRadius: 9, overflow: "hidden" }
+        },
+          lexResults.map((r, i) => React.createElement("a", {
+            key: r.id, href: r.href,
+            style: {
+              display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 8,
+              padding: "9px 12px", fontSize: 13, textDecoration: "none",
+              borderTop: i === 0 ? "none" : `1px solid ${c.border}`
+            }
+          },
+            React.createElement("span", { style: { color: c.text, fontWeight: 600 } }, r.palabra),
+            React.createElement("span", { style: { color: c.textMuted, fontSize: 12 } }, r.traduccion)
+          ))
+        ),
+        lexQuery.trim() && lexResults.length === 0 && React.createElement("div", {
+          style: { marginTop: 6, fontSize: 12, color: c.textMuted, padding: "0 2px" }
+        }, "Sin resultados en el léxico")
       ),
+
+      /* Índice + listado de unidades, y por separado los módulos de
+         apoyo — esta es la única zona que scrollea dentro del drawer. */
       React.createElement("div", { style: { flex: 1, overflowY: "auto", padding: "6px 8px" } },
         React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "10px 10px 6px" } }, "Azbuka"),
         React.createElement("a", {
@@ -111,7 +147,8 @@ function AzShell(props) {
           key: u.id, href: u.href,
           style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: 13.5, textDecoration: "none" }
         }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, String(u.id).padStart(2, "0")), u.title)),
-        React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "16px 10px 6px" } }, "Herramientas"),
+
+        React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "16px 10px 6px" } }, "Módulos de apoyo"),
         (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).map(m => React.createElement("a", {
           key: m.id, href: m.href,
           style: {
@@ -121,46 +158,69 @@ function AzShell(props) {
           }
         }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, m.glyph), m.title))
       ),
-      React.createElement("div", { style: { padding: "12px 16px", borderTop: `1px solid ${c.border}`, display: "flex" } },
+
+      /* Pie fijo del drawer — nunca se tapa al scrollear el índice.
+         Toggle de tema + botón a la pantalla principal, uno al lado
+         del otro. */
+      React.createElement("div", { style: { padding: "12px 16px", borderTop: `1px solid ${c.border}`, display: "flex", gap: 10, flexShrink: 0 } },
         React.createElement("button", {
           onClick: () => { setDarkMode(!dark); azSet('az_theme', dark ? 'light' : 'dark'); },
-          style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, cursor: "pointer", padding: 0 }
-        }, dark ? "🌙" : "☀️")
+          style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, cursor: "pointer", padding: 0, flexShrink: 0 }
+        }, dark ? "🌙" : "☀️"),
+        React.createElement("a", {
+          href: "index.html",
+          style: { flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 10, color: c.text, fontSize: 13.5, textDecoration: "none" }
+        }, "🏠 Inicio")
       )
     ),
 
-    /* ── HEADER / TÍTULO ARRIBA ── */
+    /* ── HEADER: siempre visible (sticky), respeta 6% de zona segura
+       superior. Азбука fijo en todas las pantallas + bajada fija +
+       botón atrás (historial de navegación, no jerarquía). ── */
     React.createElement("header", {
-      style: { padding: "6vh 3vw 0", borderBottom: `1px solid ${c.border}`, background: c.bg, backdropFilter: "blur(12px)", position: "sticky", top: 0, zIndex: 100 }
+      style: { padding: "6vh 3vw 14px", borderBottom: `1px solid ${c.border}`, background: c.bg, backdropFilter: "blur(12px)", position: "sticky", top: 0, zIndex: 100 }
     },
-      React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", flexDirection: "column", justifyContent: "center", padding: "10px 0" } },
-        React.createElement("div", { style: { display: "flex", alignItems: "baseline", gap: 10 } },
-          React.createElement("span", { style: { fontSize: 24, color: c.gold, fontWeight: 900, letterSpacing: -1 } }, title)
-        ),
-        React.createElement("p", { style: { margin: "3px 0 0", fontSize: 12.5, color: c.textMuted, fontWeight: 500 } }, subtitle)
+      React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "flex-start", gap: 10 } },
+        React.createElement("button", {
+          onClick: azGoBack, className: "btn", "aria-label": "Atrás",
+          style: { background: "none", border: "none", padding: "2px 4px 0 0", fontSize: 22, lineHeight: 1, color: c.text, cursor: "pointer", flexShrink: 0 }
+        }, "←"),
+        React.createElement("div", { style: { display: "flex", flexDirection: "column" } },
+          React.createElement("span", { style: { fontSize: 24, color: c.gold, fontWeight: 900, letterSpacing: -1 } }, "Азбука"),
+          React.createElement("span", { style: { marginTop: 3, fontSize: 12.5, color: c.textMuted, fontWeight: 500 } }, "Aprende ruso desde cero")
+        )
       )
     ),
 
-    /* ── CONTENIDO DE LA PÁGINA ── */
+    /* ── CONTENIDO — queda detrás del drawer/overlay cuando está
+       abierto, nunca se ajusta ni reacomoda. ── */
     React.createElement("main", { style: { maxWidth: 960, margin: "0 auto", padding: "0 3vw 3vh" } }, children),
 
-    /* ── BOTTOM NAV ── */
+    /* ── BOTTOM NAV: de lado a lado. Burger fijo a la izquierda
+       (nunca se oculta), divisor, y a la derecha las tabs propias
+       de la unidad/módulo — scrolleable horizontal si no entran. ── */
     React.createElement("div", {
-      style: { position: "fixed", bottom: 0, left: 0, right: 0, background: c.bg, backdropFilter: "blur(12px)", borderTop: `1px solid ${c.border}`, padding: "10px 16px", zIndex: 100 }
+      style: { position: "fixed", bottom: 0, left: 0, right: 0, background: c.bg, backdropFilter: "blur(12px)", borderTop: `1px solid ${c.border}`, zIndex: 100 }
     },
-      React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", justifyContent: "space-around" } },
+      React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "center", padding: "6px 3vw" } },
         React.createElement("button", {
           onClick: () => setDrawerOpen(true),
-          style: { background: "none", border: "none", padding: "6px 20px", borderRadius: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: 3, color: c.textMuted, cursor: "pointer", fontFamily: "inherit" }
+          style: { flexShrink: 0, background: "none", border: "none", padding: "6px 14px 6px 0", display: "flex", flexDirection: "column", alignItems: "center", gap: 3, color: c.textMuted, cursor: "pointer", fontFamily: "inherit" }
         }, React.createElement("span", { style: { fontSize: 20 } }, "☰"), React.createElement("span", { style: { fontSize: 11, fontWeight: 600 } }, "Menú")),
-        tabs.map(tab => React.createElement("button", {
-          key: tab.id, className: "btn",
-          onClick: () => { if (tab.action) tab.action(); else setView(tab.id); },
-          style: { background: "none", padding: "6px 20px", borderRadius: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: 3, color: view === tab.id ? c.gold : c.textMuted }
-        }, React.createElement("span", { style: { fontSize: 20 } }, tab.icon), React.createElement("span", { style: { fontSize: 11, fontWeight: 600 } }, tab.label)))
+
+        tabs.length > 0 && React.createElement("div", { style: { width: 1, height: 32, background: c.border, margin: "0 8px", flexShrink: 0 } }),
+
+        React.createElement("div", { className: "bnav-scroll", style: { display: "flex", overflowX: "auto", flex: 1 } },
+          tabs.map(tab => React.createElement("button", {
+            key: tab.id, className: "btn",
+            onClick: () => { if (tab.action) tab.action(); else setView(tab.id); },
+            style: { flexShrink: 0, background: "none", padding: "6px 16px", borderRadius: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: 3, color: view === tab.id ? c.gold : c.textMuted }
+          }, React.createElement("span", { style: { fontSize: 20 } }, tab.icon), React.createElement("span", { style: { fontSize: 11, fontWeight: 600 } }, tab.label)))
+        )
       )
     ),
     React.createElement("div", { style: { height: "calc(80px + 3vh)" } })
   );
 }
 window.AzShell = AzShell;
+})();
