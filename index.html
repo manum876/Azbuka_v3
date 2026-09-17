@@ -11,6 +11,7 @@
 <body>
 <div id="root"></div>
 <script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
 <script src="core.js"></script>
 <script src="shell.js"></script>
 <script>
@@ -27,8 +28,6 @@ function App() {
   return React.createElement(AzShell, {
     darkMode, setDarkMode,
     moduleId: "modulo-a",
-    title: "Азбука",
-    subtitle: "Módulo A",
     tabs: [{ id: "inicio", icon: "⊞", label: "Inicio" }],
     view, setView
   },

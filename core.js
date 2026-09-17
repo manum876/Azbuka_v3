@@ -24,6 +24,29 @@ const AZ_MODULES = [
   { id: "modulo-c", title: "Módulo C", href: "modulo-c.html", glyph: "C" },
 ];
 
+/* ── LÉXICO ──────────────────────────────────────────────────
+   La base real es data-lexicon.js (objeto LEXICON, clave
+   "LEX-<tipo>-NNN", campos ru/es/pos/gender/sources/introducedIn/
+   appearsIn — ver ese archivo). Cargalo ANTES de este script:
+
+     <script src="data-lexicon.js"></script>
+     <script src="core.js"></script>
+
+   data-lexicon.js ya expone lexById/lexByRu/lexByUnit/lexByTool,
+   pero ninguno busca por substring en ru Y es al mismo tiempo —
+   eso es lo que necesita el buscador del drawer, así que se
+   agrega acá. No inventa datos: lee LEXICON tal cual está.
+   El href a la ficha es un supuesto (ficha.html?id=<LEX-id>) —
+   ajustalo si la página de ficha real usa otra ruta/parámetro. */
+function azSearchLexico(query) {
+  const q = (query || "").trim().toLowerCase();
+  if (!q || typeof LEXICON === "undefined") return [];
+  return Object.entries(LEXICON)
+    .filter(([id, e]) => e.ru.toLowerCase().includes(q) || e.es.toLowerCase().includes(q))
+    .slice(0, 8)
+    .map(([id, e]) => ({ id, palabra: e.ru, traduccion: e.es, href: "ficha.html?id=" + id }));
+}
+
 /* ── STORAGE ─────────────────────────────────────────────────
    localStorage estándar (NO window.storage — eso es exclusivo
    del preview de artifacts de Claude.ai y no existe en un
