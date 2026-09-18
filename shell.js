@@ -31,7 +31,7 @@
    ============================================================ */
 
 (function () {
-const { useState, useRef } = htmPreact;
+const { useState, useRef, useEffect, useLayoutEffect } = htmPreact;
 window.React = window.React || { createElement: htmPreact.h, Fragment: function (p) { return p.children; } };
 const React = window.React;
 
@@ -60,6 +60,28 @@ function azGoBack() {
   else window.location.href = "index.html";
 }
 
+/* En modo standalone de iOS (agregado a pantalla de inicio), un <a>
+   normal a veces lo abre Safari por afuera del standalone en vez de
+   navegar dentro de la misma app — se ve como un "popup" con la
+   interfaz de Safari. El arreglo es interceptar el click y forzar
+   la navegación por JS en la misma ventana; así WebKit nunca decide
+   por su cuenta abrir otra cosa. Deja pasar sin tocar: links a otro
+   origen (externos), los que declaran target="_blank" a propósito,
+   y clicks con modificador (cmd/ctrl/shift) para abrir en pestaña
+   nueva en desktop. Se registra una sola vez por página (cada HTML
+   es una recarga completa, no hay riesgo de duplicar el listener). */
+function azInterceptLinks() {
+  document.addEventListener("click", function (e) {
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest && e.target.closest("a[href]");
+    if (!a) return;
+    if (a.target === "_blank" || a.hasAttribute("download")) return;
+    if (a.origin !== window.location.origin) return;
+    e.preventDefault();
+    window.location.href = a.href;
+  });
+}
+
 /* Props:
    - darkMode, setDarkMode: estado de tema, manejado por la página
    - moduleId: id dentro de AZ_MODULES para resaltarlo en el drawer
@@ -76,11 +98,31 @@ function AzShell(props) {
   const [lexQuery, setLexQuery] = useState("");
   const searchRef = useRef(null);
   const listRef = useRef(null);
+  const headerRef = useRef(null);
+  const [headerH, setHeaderH] = useState(0);
   const dark = darkMode;
   const c = azColors(dark);
 
   const q = lexQuery.trim();
   const results = q && typeof azSearchLexicon === "function" ? azSearchLexicon(q) : [];
+
+  useEffect(() => { azInterceptLinks(); }, []);
+
+  /* Header ahora es position:fixed (ver más abajo) para quedar
+     100% clavado arriba, inmune al rebote elástico de iOS — al
+     salir del flujo normal, el contenido necesita este padding-top
+     exacto para no arrancar tapado debajo del header. useLayoutEffect
+     mide ANTES del primer paint (no useEffect) para que no haya ni
+     un frame de salto; se re-mide si cambia el tamaño de pantalla
+     (rotación, teclado, etc.). */
+  useLayoutEffect(() => {
+    function measure() {
+      if (headerRef.current) setHeaderH(headerRef.current.getBoundingClientRect().height);
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   return React.createElement("div", {
     style: { background: c.bg, color: c.text, minHeight: "100vh", fontFamily: "'Inter','Helvetica Neue',sans-serif", transition: "background .3s, color .3s" }
@@ -182,11 +224,13 @@ function AzShell(props) {
       )
     ),
 
-    /* ── HEADER: siempre visible (sticky), respeta 6% de zona segura
-       superior. Азбука fijo en todas las pantallas + bajada fija +
-       botón atrás (historial de navegación, no jerarquía). ── */
+    /* ── HEADER: fixed (NO sticky) — clavado al viewport, inmune
+       al rebote elástico de iOS al scrollear. Respeta 6% de zona
+       segura superior. Азбука fijo en todas las pantallas + bajada
+       fija + botón atrás (historial de navegación, no jerarquía). ── */
     React.createElement("header", {
-      style: { padding: "6vh 3vw 14px", borderBottom: `1px solid ${c.border}`, background: c.bg, backdropFilter: "blur(12px)", position: "sticky", top: 0, zIndex: 100 }
+      ref: headerRef,
+      style: { position: "fixed", top: 0, left: 0, right: 0, padding: "6vh 3vw 14px", borderBottom: `1px solid ${c.border}`, background: c.bg, backdropFilter: "blur(12px)", zIndex: 100 }
     },
       React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "flex-start", gap: 10 } },
         React.createElement("button", {
@@ -200,9 +244,11 @@ function AzShell(props) {
       )
     ),
 
-    /* ── CONTENIDO — queda detrás del drawer/overlay cuando está
-       abierto, nunca se ajusta ni reacomoda. ── */
-    React.createElement("main", { style: { maxWidth: 960, margin: "0 auto", padding: "0 3vw 3vh" } }, children),
+    /* ── CONTENIDO — el padding-top compensa el header fixed (si
+       headerH todavía no se midió, 6vh es el mínimo razonable para
+       no mostrar un salto). Sigue quedando detrás del drawer/overlay
+       cuando está abierto, nunca se ajusta ni reacomoda. ── */
+    React.createElement("main", { style: { maxWidth: 960, margin: "0 auto", padding: `${headerH ? headerH + "px" : "6vh"} 3vw 3vh` } }, children),
 
     /* ── BOTTOM NAV: de lado a lado. Burger fijo a la izquierda
        (nunca se oculta), divisor, y a la derecha las tabs propias
