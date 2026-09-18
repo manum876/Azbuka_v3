@@ -256,14 +256,14 @@ function App() {
             isVerbo && React.createElement("a", {
               className: "btn pr", href: "verbos.html?id=" + entry.id,
               onClick: (e) => azNavigate(e, "verbos.html?id=" + entry.id)
-            }, "🗣️ Ver en Verbos → conjugación completa"),
+            }, "🗣️ Ver en Verbos"),
             isSustantivo && React.createElement("a", {
               className: "btn pr", href: "casos.html?id=" + entry.id,
               onClick: (e) => azNavigate(e, "casos.html?id=" + entry.id)
-            }, "📐 Ver en Casos → declinaciones"),
+            }, "📐 Ver en Casos"),
             React.createElement("button", {
               className: "btn", onClick: () => azSpeak(entry.ru)
-            }, "▶ Escuchar pronunciación")
+            }, "▶ Pronunciación")
           )
         )
       )
