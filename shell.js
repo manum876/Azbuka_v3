@@ -61,15 +61,29 @@ function azGoBack() {
 }
 
 /* En modo standalone de iOS (agregado a pantalla de inicio), un <a>
-   normal a veces lo abre Safari por afuera del standalone en vez de
-   navegar dentro de la misma app — se ve como un "popup" con la
-   interfaz de Safari. El arreglo es interceptar el click y forzar
-   la navegación por JS en la misma ventana; así WebKit nunca decide
-   por su cuenta abrir otra cosa. Deja pasar sin tocar: links a otro
+   normal puede terminar navegando en el visor tipo Safari (con la X
+   y la brújula) en vez de quedarse en la misma app — se ve como un
+   "popup". La forma más confiable de evitarlo es no depender del
+   navegador procesando el click del <a> en absoluto: se cancela
+   apenas empieza (capture, antes que cualquier otra cosa lo vea) y
+   se navega a mano por JS. También se le saca el foco a cualquier
+   input activo antes de navegar — con el teclado todavía abierto,
+   iOS es más propenso a mandar la navegación al visor en vez de
+   quedarse en el standalone. Deja pasar sin tocar: links a otro
    origen (externos), los que declaran target="_blank" a propósito,
-   y clicks con modificador (cmd/ctrl/shift) para abrir en pestaña
-   nueva en desktop. Se registra una sola vez por página (cada HTML
-   es una recarga completa, no hay riesgo de duplicar el listener). */
+   los que tienen download, y clicks con modificador (cmd/ctrl/shift/
+   alt) para abrir en pestaña nueva en desktop. */
+function azNavigate(e, href) {
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  e.preventDefault();
+  if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  window.location.href = href;
+}
+
+/* Red de respaldo para links que no pasan por azNavigate directo
+   (por ejemplo, los que arme el contenido propio de cada unidad o
+   módulo, fuera de shell.js). Capture:true para llegar ANTES que
+   cualquier otro listener — no esperar a la fase de bubble. */
 function azInterceptLinks() {
   document.addEventListener("click", function (e) {
     if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -77,9 +91,8 @@ function azInterceptLinks() {
     if (!a) return;
     if (a.target === "_blank" || a.hasAttribute("download")) return;
     if (a.origin !== window.location.origin) return;
-    e.preventDefault();
-    window.location.href = a.href;
-  });
+    azNavigate(e, a.href);
+  }, true);
 }
 
 /* Props:
@@ -170,6 +183,7 @@ function AzShell(props) {
       },
         results.map((r, i) => React.createElement("a", {
           key: r.id, href: r.href,
+          onClick: (e) => azNavigate(e, r.href),
           style: {
             display: "flex", flexDirection: "column", gap: 2, padding: "9px 12px", textDecoration: "none",
             borderTop: i === 0 ? "none" : `1px solid ${c.border}`
@@ -191,16 +205,19 @@ function AzShell(props) {
         React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "10px 10px 6px" } }, "Azbuka"),
         React.createElement("a", {
           href: "azbuka-index.html",
+          onClick: (e) => azNavigate(e, "azbuka-index.html"),
           style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: 13.5, textDecoration: "none" }
         }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, "00"), "Índice"),
         (typeof AZ_UNITS !== "undefined" ? AZ_UNITS : []).map(u => React.createElement("a", {
           key: u.id, href: u.href,
+          onClick: (e) => azNavigate(e, u.href),
           style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: 13.5, textDecoration: "none" }
         }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, String(u.id).padStart(2, "0")), u.title)),
 
         React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "16px 10px 6px" } }, "Módulos de apoyo"),
         (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).map(m => React.createElement("a", {
           key: m.id, href: m.href,
+          onClick: (e) => azNavigate(e, m.href),
           style: {
             display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10,
             color: m.id === moduleId ? c.gold : c.textSub, fontWeight: m.id === moduleId ? 600 : 400,
@@ -219,6 +236,7 @@ function AzShell(props) {
         }, dark ? "🌙" : "☀️"),
         React.createElement("a", {
           href: "index.html",
+          onClick: (e) => azNavigate(e, "index.html"),
           style: { flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 10, color: c.text, fontSize: 13.5, textDecoration: "none" }
         }, "🏠 Inicio")
       )
