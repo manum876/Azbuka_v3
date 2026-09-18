@@ -32,7 +32,7 @@
    La base de datos (data-lexicon.js) es de SOLO LECTURA: esta
    página nunca la modifica, solo la lee y la muestra.
    ============================================================ */
-const { useState, useEffect, useRef } = htmPreact;
+const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
 
 const POS_LABEL = { sustantivo: "Sustantivo", verbo: "Verbo", adjetivo: "Adjetivo", otro: "Otro" };
 const GENDER_LABEL = { m: "masculino", f: "femenino", n: "neutro" };
@@ -84,7 +84,7 @@ function FichaStyles({ c }) {
     .sense-es{font-size:16px;font-weight:700;color:${c.text};display:inline;}
     .sense-def{font-size:13.5px;color:${c.textSub};margin-top:6px;margin-left:28px;}
     .buttons{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px;}
-    .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13px;text-decoration:none;cursor:pointer;font-family:inherit;}
+    .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit;}
     .btn.pr{background:${c.gold};border-color:${c.gold};color:${c.bg};font-weight:700;}
     .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12.5px;}
     .meta-item{background:${c.bg2};border-radius:8px;padding:8px 10px;}
@@ -100,6 +100,9 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [q, setQ] = useState("");
   const qRef = useRef(null);
+  const searchWrapRef = useRef(null);
+  const [headerH, setHeaderH] = useState(0);
+  const [searchH, setSearchH] = useState(0);
 
   useEffect(() => {
     (async () => { setDarkMode((await azGet('az_theme', 'dark')) !== 'light'); })();
@@ -110,36 +113,61 @@ function App() {
   const c = azColors(darkMode);
   const results = q.trim() && typeof azSearchLexicon === "function" ? azSearchLexicon(q) : [];
 
+  /* El header de AzShell es position:fixed y se mide a sí mismo (ver
+     shell.js) — acá lo volvemos a medir vía DOM para saber justo dónde
+     termina y clavar la barra de búsqueda pegada debajo, también fixed
+     (no sticky: mismo motivo que el header — sticky puede "acompañar"
+     el rebote elástico de iOS al scrollear, fixed no se mueve nunca).
+     Se mide antes del primer paint (useLayoutEffect) para que no haya
+     ni un frame de salto, y se re-mide en cada resize. */
+  useLayoutEffect(() => {
+    function measure() {
+      const header = document.querySelector("header");
+      if (header) setHeaderH(header.getBoundingClientRect().height);
+      if (searchWrapRef.current) setSearchH(searchWrapRef.current.getBoundingClientRect().height);
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [darkMode]);
+
   /* Buscador propio de la ficha — mismo estilo que el del drawer, pero
      acá el resultado es un desplegable que flota POR DELANTE del resto
      de la página (position:absolute + z-index), no un panel que empuja
-     y reacomoda la ficha hacia abajo como sí pasa en el drawer. */
-  const searchBar = React.createElement("div", { style: { marginTop: 18, marginBottom: 18, position: "relative" } },
-    React.createElement("input", {
-      ref: qRef,
-      value: q,
-      onInput: (e) => setQ(e.target.value),
-      placeholder: "Buscar en el léxico…",
-      style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 14 }
-    }),
-    q && React.createElement("button", {
-      onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); },
-      "aria-label": "Limpiar búsqueda",
-      style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
-    }, "✕"),
-    q.trim() && React.createElement("div", {
-      style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, boxShadow: "0 16px 40px rgba(0,0,0,.4)" }
-    },
-      results.length > 0
-        ? results.map((r, i) => React.createElement("a", {
-            key: r.id, href: r.href,
-            onClick: (e) => azNavigate(e, r.href),
-            style: { display: "flex", justifyContent: "space-between", gap: 10, padding: "10px 14px", textDecoration: "none", borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
-          },
-            React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: 14 } }, r.ru),
-            React.createElement("span", { style: { color: c.textMuted, fontSize: 12.5, textAlign: "right" } }, r.es)
-          ))
-        : React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados")
+     y reacomoda la ficha hacia abajo como sí pasa en el drawer. La
+     barra en sí queda clavada debajo del título, fija, sin moverse
+     nunca con el scroll. */
+  const searchBar = React.createElement("div", {
+    ref: searchWrapRef,
+    style: { position: "fixed", top: headerH, left: 0, right: 0, zIndex: 90, background: c.bg, backdropFilter: "blur(12px)", borderBottom: `1px solid ${c.border}`, padding: "12px 3vw" }
+  },
+    React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", position: "relative" } },
+      React.createElement("input", {
+        ref: qRef,
+        value: q,
+        onInput: (e) => setQ(e.target.value),
+        placeholder: "Buscar en el léxico…",
+        style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 14 }
+      }),
+      q && React.createElement("button", {
+        onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); },
+        "aria-label": "Limpiar búsqueda",
+        style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
+      }, "✕"),
+      q.trim() && React.createElement("div", {
+        style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, boxShadow: "0 16px 40px rgba(0,0,0,.4)" }
+      },
+        results.length > 0
+          ? results.map((r, i) => React.createElement("a", {
+              key: r.id, href: r.href,
+              onClick: (e) => azNavigate(e, r.href),
+              style: { display: "flex", justifyContent: "space-between", gap: 10, padding: "10px 14px", textDecoration: "none", borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
+            },
+              React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: 14 } }, r.ru),
+              React.createElement("span", { style: { color: c.textMuted, fontSize: 12.5, textAlign: "right" } }, r.es)
+            ))
+          : React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados")
+      )
     )
   );
 
@@ -274,7 +302,7 @@ function App() {
     darkMode, setDarkMode,
     moduleId: null,
     tabs: [],
-  }, searchBar, entryContent);
+  }, searchBar, React.createElement("div", { style: { paddingTop: searchH ? searchH + 14 + "px" : "18px" } }, entryContent));
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
 </script>
