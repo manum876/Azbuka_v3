@@ -22,14 +22,76 @@
    entrada con lexComerById() y arma el contenido en runtime.
    Agregar una palabra nueva al léxico no requiere tocar ni un
    archivo HTML — ya es navegable vía ficha.html?id=<su-id>.
+
+   El formato visual (clases .ficha/.hero/.sense/.meta-grid/etc.)
+   copia 1:1 preview-fichas-ejemplo.html del repo — mismas clases,
+   mismos nombres — solo que acá los colores salen de azColors()
+   para respetar el toggle de tema, y el contenido sale de campos
+   reales de LEXICON_COMER en vez de datos de prueba.
+
+   La base de datos (data-lexicon.js) es de SOLO LECTURA: esta
+   página nunca la modifica, solo la lee y la muestra.
    ============================================================ */
 const { useState, useEffect } = htmPreact;
 
 const POS_LABEL = { sustantivo: "Sustantivo", verbo: "Verbo", adjetivo: "Adjetivo", otro: "Otro" };
 const GENDER_LABEL = { m: "masculino", f: "femenino", n: "neutro" };
+const ANIMATE_LABEL = { yes: "Animado", no: "Inanimado" };
+const NUMBER_CLASS_LABEL = { pluraliaTantum: "Solo se usa en plural", singulariaTantum: "Solo se usa en singular" };
+const ASPECT_LABEL = { imperfectivo: "imperfectivo", perfectivo: "perfectivo" };
+/* learningStatus todavía no tiene valores reales cargados en la base
+   (hoy es null en las 4.931 entradas) — este mapa es una previsión
+   para cuando se empiece a poblar; lo no mapeado se muestra tal cual. */
+const LEARNING_STATUS_LABEL = { taught: "Enseñada", seen: "Vista", review: "En repaso", new: "Nueva" };
 
 function getWordId() {
   return new URLSearchParams(window.location.search).get("id");
+}
+
+function azSpeak(ru) {
+  try {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(ru);
+    u.lang = "ru-RU";
+    window.speechSynthesis.speak(u);
+  } catch (err) {}
+}
+
+/* Estilos de la ficha — mismas clases y mismos valores que
+   preview-fichas-ejemplo.html, con --bg/--gold/etc. tomados de
+   azColors(darkMode) en vez de hardcodeados, para que respete el
+   toggle de tema del shell. */
+function FichaStyles({ c }) {
+  return React.createElement("style", null, `
+    .ficha{background:${c.card};border:1px solid ${c.border};border-radius:14px;overflow:hidden;}
+    .hero{background:linear-gradient(135deg,${c.bg2},${c.bg3});padding:20px 20px 16px;border-bottom:1px solid ${c.border};}
+    .ru{font-size:34px;font-weight:800;color:${c.gold};line-height:1;}
+    .translit{font-size:14px;color:${c.textSub};font-style:italic;margin-top:6px;}
+    .ipa{font-size:12px;color:${c.textMuted};margin-top:2px;}
+    .pos-badge{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:${c.gold}33;color:${c.gold};border:1px solid ${c.gold};border-radius:8px;padding:3px 10px;}
+    .aspect-pair{margin-top:8px;font-size:12.5px;color:${c.textSub};}
+    .aspect-pair a{color:${c.gold};text-decoration:none;font-weight:600;}
+    .aspect-pair.empty{color:${c.textMuted};font-style:italic;}
+    .governance{margin-top:4px;font-size:12.5px;color:${c.textSub};}
+    .governance b{color:${c.text};font-weight:600;}
+    .irregular-tag{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;color:#E2884A;background:${c.bg3};border-radius:6px;padding:2px 8px;}
+    .fbody{padding:18px 20px;}
+    .section-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:20px 0 10px;}
+    .section-lbl:first-child{margin-top:0;}
+    .sense{background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+    .sense-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:${c.gold};color:${c.bg};font-size:11px;font-weight:800;border-radius:50%;margin-right:8px;}
+    .sense-es{font-size:16px;font-weight:700;color:${c.text};display:inline;}
+    .sense-def{font-size:13.5px;color:${c.textSub};margin-top:6px;margin-left:28px;}
+    .buttons{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px;}
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13px;text-decoration:none;cursor:pointer;font-family:inherit;}
+    .btn.pr{background:${c.gold};border-color:${c.gold};color:${c.bg};font-weight:700;}
+    .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12.5px;}
+    .meta-item{background:${c.bg2};border-radius:8px;padding:8px 10px;}
+    .meta-k{color:${c.textMuted};font-size:10px;text-transform:uppercase;letter-spacing:.5px;}
+    .meta-v{color:${c.text};margin-top:2px;}
+    .meta-v.empty{color:${c.textMuted};font-style:italic;}
+  `);
 }
 
 function App() {
@@ -52,54 +114,114 @@ function App() {
     );
   } else {
     const senses = entry.senses || [];
-    const units = (entry.introducedIn || [])
+    const isVerbo = entry.posNormalized === "verbo";
+    const isSustantivo = entry.posNormalized === "sustantivo";
+
+    const posBadgeText = (POS_LABEL[entry.posNormalized] || entry.posNormalized) +
+      (isVerbo && entry.aspect ? " · " + (ASPECT_LABEL[entry.aspect] || entry.aspect) : "");
+
+    const partnerId = (entry.aspectualPartner || [])[0] || null;
+    const partner = partnerId && typeof lexComerById === "function" ? lexComerById(partnerId) : null;
+
+    /* Governance (rección) vive adentro de comer[0] — solo la mostramos
+       para verbos, y solo si ese verbo puntual la tiene cargada. */
+    const governance = isVerbo && entry.comer && entry.comer[0] && entry.comer[0].Governance
+      ? entry.comer[0].Governance
+      : null;
+
+    const unitTitles = (entry.introducedIn || [])
       .map(n => (typeof AZ_UNITS !== "undefined" ? AZ_UNITS.find(u => u.id === n) : null))
-      .filter(Boolean);
-    const tools = (entry.appearsIn || [])
-      .map(t => (typeof AZ_MODULES !== "undefined" ? AZ_MODULES.find(m => m.id === t) : null))
-      .filter(Boolean);
+      .filter(Boolean)
+      .map(u => "Unidad " + u.id + " — " + u.title);
+
+    const learningStatusText = entry.learningStatus
+      ? (LEARNING_STATUS_LABEL[entry.learningStatus] || entry.learningStatus)
+      : null;
 
     content = React.createElement("div", { style: { animation: "fadeIn 0.3s ease" } },
-      React.createElement("div", { style: { textAlign: "center", padding: "24px 0 8px" } },
-        React.createElement("div", { style: { fontSize: 34, fontWeight: 800, color: c.gold } }, entry.ru),
-        entry.translit && React.createElement("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 4 } }, entry.translit),
-        React.createElement("div", { style: { fontSize: 16, color: c.textSub, marginTop: 8 } }, senses.map(s => s.es).join(" · ")),
-        React.createElement("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, textTransform: "uppercase", letterSpacing: 1 } },
-          (POS_LABEL[entry.posNormalized] || entry.posNormalized) + (entry.gender ? " · " + (GENDER_LABEL[entry.gender] || entry.gender) : ""))
-      ),
+      React.createElement(FichaStyles, { c }),
+      React.createElement("div", { className: "ficha" },
 
-      senses.some(s => s.definitionEs) && React.createElement("div", { style: { marginTop: 20, display: "flex", flexDirection: "column", gap: 8 } },
-        senses.filter(s => s.definitionEs).map((s, i) => React.createElement("div", {
-          key: i, style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 12, padding: "12px 14px" }
-        },
-          senses.length > 1 && React.createElement("div", { style: { fontSize: 12, fontWeight: 700, color: c.gold, marginBottom: 4 } }, s.es),
-          React.createElement("div", { style: { fontSize: 13, color: c.textSub } }, s.definitionEs)
-        ))
-      ),
+        /* ── HERO: título, transliteración, traducción y categoría ── */
+        React.createElement("div", { className: "hero" },
+          React.createElement("div", { className: "ru" }, entry.ru),
+          entry.translit && React.createElement("div", { className: "translit" }, entry.translit),
+          entry.ipa && React.createElement("div", { className: "ipa" }, "IPA: /" + entry.ipa + "/"),
+          React.createElement("span", { className: "pos-badge" }, posBadgeText),
 
-      units.length > 0 && React.createElement("div", { style: { marginTop: 24 } },
-        React.createElement("div", { style: { fontSize: 11, letterSpacing: 1.2, textTransform: "uppercase", color: c.textMuted, marginBottom: 8 } }, "Se enseña en"),
-        React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } },
-          units.map(u => React.createElement("a", {
-            key: u.id, href: u.href,
-            style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 12, padding: "12px 14px", color: c.text, textDecoration: "none", display: "flex", justifyContent: "space-between", alignItems: "center" }
-          },
-            React.createElement("span", null, "Unidad " + u.id + " — " + u.title),
-            React.createElement("span", { style: { color: c.gold } }, "→")
-          ))
-        )
-      ),
+          /* Pareja aspectual — solo para verbos, arriba del todo */
+          isVerbo && (
+            partner
+              ? React.createElement("div", { className: "aspect-pair" },
+                  "↔ Pareja aspectual: ",
+                  React.createElement("a", {
+                    href: "ficha.html?id=" + partner.id,
+                    onClick: (e) => azNavigate(e, "ficha.html?id=" + partner.id)
+                  }, partner.ru)
+                )
+              : React.createElement("div", { className: "aspect-pair empty" }, "Sin pareja aspectual registrada")
+          ),
 
-      tools.length > 0 && React.createElement("div", { style: { marginTop: 20 } },
-        React.createElement("div", { style: { fontSize: 11, letterSpacing: 1.2, textTransform: "uppercase", color: c.textMuted, marginBottom: 8 } }, "También aparece en"),
-        React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } },
-          tools.map(m => React.createElement("a", {
-            key: m.id, href: m.href,
-            style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 12, padding: "12px 14px", color: c.text, textDecoration: "none", display: "flex", justifyContent: "space-between", alignItems: "center" }
-          },
-            React.createElement("span", null, m.title),
-            React.createElement("span", { style: { color: c.gold } }, "→")
-          ))
+          /* Rección (Governance) — solo para verbos, solo si está cargada */
+          governance && React.createElement("div", { className: "governance" },
+            "Rige: ", React.createElement("b", null, governance))
+        ),
+
+        React.createElement("div", { className: "fbody" },
+
+          /* ── ACEPCIONES ── */
+          React.createElement("div", { className: "section-lbl" }, "Acepciones"),
+          senses.map((s, i) => React.createElement("div", { key: i, className: "sense" },
+            React.createElement("span", { className: "sense-num" }, i + 1),
+            React.createElement("span", { className: "sense-es" }, s.es),
+            s.definitionEs && React.createElement("div", { className: "sense-def" }, s.definitionEs)
+          )),
+
+          /* ── CLASIFICACIÓN PEDAGÓGICA (traducida y filtrada) ── */
+          React.createElement("div", { className: "section-lbl" }, "Clasificación pedagógica"),
+          React.createElement("div", { className: "meta-grid" },
+            React.createElement("div", { className: "meta-item" },
+              React.createElement("div", { className: "meta-k" }, "Estado de aprendizaje"),
+              React.createElement("div", { className: "meta-v" + (learningStatusText ? "" : " empty") },
+                learningStatusText || "Sin asignar")
+            ),
+            React.createElement("div", { className: "meta-item" },
+              React.createElement("div", { className: "meta-k" }, "Se enseña en"),
+              React.createElement("div", { className: "meta-v" + (unitTitles.length ? "" : " empty") },
+                unitTitles.length ? unitTitles.join(", ") : "Sin asignar")
+            ),
+            isSustantivo && entry.gender && React.createElement("div", { className: "meta-item" },
+              React.createElement("div", { className: "meta-k" }, "Género"),
+              React.createElement("div", { className: "meta-v" }, GENDER_LABEL[entry.gender] || entry.gender)
+            ),
+            isSustantivo && entry.animate && React.createElement("div", { className: "meta-item" },
+              React.createElement("div", { className: "meta-k" }, "Animado"),
+              React.createElement("div", { className: "meta-v" }, ANIMATE_LABEL[entry.animate] || entry.animate)
+            ),
+            isSustantivo && (entry.pluralForm || entry.numberClass) && React.createElement("div", { className: "meta-item" },
+              React.createElement("div", { className: "meta-k" }, "Forma plural"),
+              React.createElement("div", { className: "meta-v" + (entry.pluralForm ? "" : " empty") },
+                entry.pluralForm || "No aplica",
+                entry.numberClass && NUMBER_CLASS_LABEL[entry.numberClass] &&
+                  React.createElement("span", { className: "irregular-tag" }, NUMBER_CLASS_LABEL[entry.numberClass])
+              )
+            )
+          ),
+
+          /* ── BOTONES: módulo correspondiente (si aplica) + audio ── */
+          React.createElement("div", { className: "buttons" },
+            isVerbo && React.createElement("a", {
+              className: "btn pr", href: "verbos.html?id=" + entry.id,
+              onClick: (e) => azNavigate(e, "verbos.html?id=" + entry.id)
+            }, "🗣️ Ver en Verbos → conjugación completa"),
+            isSustantivo && React.createElement("a", {
+              className: "btn pr", href: "casos.html?id=" + entry.id,
+              onClick: (e) => azNavigate(e, "casos.html?id=" + entry.id)
+            }, "📐 Ver en Casos → declinaciones"),
+            React.createElement("button", {
+              className: "btn", onClick: () => azSpeak(entry.ru)
+            }, "▶ Escuchar pronunciación")
+          )
         )
       )
     );

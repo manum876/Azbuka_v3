@@ -79,6 +79,7 @@ function azNavigate(e, href) {
   if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
   window.location.href = href;
 }
+window.azNavigate = azNavigate;
 
 /* Red de respaldo para links que no pasan por azNavigate directo
    (por ejemplo, los que arme el contenido propio de cada unidad o
