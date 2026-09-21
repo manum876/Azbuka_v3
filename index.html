@@ -5,8 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Азбука — Módulo A</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<title>Азбука · Ruso</title>
 <link rel="stylesheet" href="core.css">
+<style>
+  /* Específico de esta página — hero grande centrado + grid de módulos.
+     Los colores fijos de ícono (naranja/amarillo/azul/púrpura) no cambian
+     con el tema, igual que en el resto de la app (ver ESTETICA_AZBUKA.md §2). */
+  .hero-btn{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;padding:32px 20px;border-radius:20px;cursor:pointer;transition:.18s;margin-bottom:28px;}
+  .hero-btn:active{transform:scale(.98);}
+  .hero-icon{width:76px;height:76px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:#fff;background:#B5605C;margin:0 auto 16px;}
+  .hero-title{font-size:22px;font-weight:800;margin-bottom:7px;}
+  .hero-desc{font-size:13.5px;max-width:320px;margin:0 auto;line-height:1.5;}
+
+  .section-lbl{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 12px;}
+
+  .modules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  @media(min-width:480px){.modules-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}}
+  .mod-card{display:block;text-decoration:none;padding:15px;border-radius:16px;cursor:pointer;transition:.18s;box-sizing:border-box;}
+  .mod-card:active{transform:scale(.97);}
+  .mod-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;}
+  .mod-icon.red{background:#B5605C;}
+  .mod-icon.orange{background:#C48254;}
+  .mod-icon.yellow{background:#C9B369;color:#1a1a1a;}
+  .mod-icon.green{background:#5C9B78;}
+  .mod-icon.blue{background:#5D7DA6;}
+  .mod-icon.purple{background:#8871A8;}
+  .mod-title{font-size:14.5px;font-weight:700;margin-bottom:3px;}
+  .mod-desc{font-size:11.5px;line-height:1.35;}
+</style>
 </head>
 <body>
 <div id="root"></div>
@@ -19,31 +46,45 @@ const { useState, useEffect } = htmPreact;
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [view, setView] = useState("inicio");
 
   useEffect(() => {
     (async () => { setDarkMode((await azGet('az_theme', 'dark')) !== 'light'); })();
   }, []);
 
+  const c = azColors(darkMode);
+  const modules = typeof AZ_MODULES !== "undefined" ? AZ_MODULES : [];
+
   return React.createElement(AzShell, {
     darkMode, setDarkMode,
-    moduleId: "modulo-a",
-    tabs: [{ id: "inicio", icon: "⊞", label: "Inicio" }],
-    view, setView
+    moduleId: null,
+    tabs: []
   },
-    /* ── CONTENIDO DE ESTA PÁGINA ── */
     React.createElement("div", { style: { animation: "fadeIn 0.3s ease" } },
-      React.createElement("div", { style: { textAlign: "center", marginBottom: 28, padding: "24px 0 8px" } },
-        React.createElement("h1", { style: { fontSize: 22, fontWeight: 700, marginBottom: 6 } }, "Módulo A"),
-        React.createElement("p", { style: { fontSize: 14, color: "#8A847A" } }, "Esta página vive en index.html y usa el shell compartido.")
+
+      /* ── HERO: botón grande al curso, ícono/título/descripción centrados ── */
+      React.createElement("a", {
+        className: "hero-btn", href: "azbuka-index.html",
+        onClick: (e) => azNavigate(e, "azbuka-index.html"),
+        style: { background: c.card, border: `1px solid ${c.border}` }
+      },
+        React.createElement("div", { className: "hero-icon" }, "А"),
+        React.createElement("div", { className: "hero-title", style: { color: c.gold } }, "Curso Азбука"),
+        React.createElement("div", { className: "hero-desc", style: { color: c.textMuted } },
+          "12 unidades A1–B1, con progreso guardado")
       ),
-      React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(90px, 1fr))", gap: 10 } },
-        Array.from({ length: 6 }).map((_, i) =>
-          React.createElement("div", {
-            key: i, className: "letter-card",
-            style: { background: darkMode ? "#1A1A24" : "#FFFFFF", border: `1px solid ${darkMode ? "#2A2A38" : "#D5D0C8"}`, borderRadius: 16, padding: "16px 8px", textAlign: "center" }
+
+      /* ── MÓDULOS DE APOYO (antes "Herramientas") ── */
+      React.createElement("div", { className: "section-lbl", style: { color: c.textMuted } }, "Módulos de apoyo"),
+      React.createElement("div", { className: "modules-grid" },
+        modules.map(m =>
+          React.createElement("a", {
+            key: m.id, className: "mod-card", href: m.href,
+            onClick: (e) => azNavigate(e, m.href),
+            style: { background: c.card, border: `1px solid ${c.border}` }
           },
-            React.createElement("div", { style: { fontSize: 22, fontWeight: 800, color: "#C9A84C" } }, "Ítem " + (i + 1))
+            React.createElement("div", { className: `mod-icon ${m.icon}` }, m.glyph),
+            React.createElement("div", { className: "mod-title", style: { color: c.text } }, m.title),
+            React.createElement("div", { className: "mod-desc", style: { color: c.textMuted } }, m.desc)
           )
         )
       )
