@@ -10,32 +10,35 @@
 /* ── CATÁLOGO GLOBAL ─────────────────────────────────────────
    Sacado directo de tu core.js real (títulos, desc y hrefs
    tal cual están hoy en el repo). La Unidad 13 (Examen final)
-   todavía no existe como archivo — el link queda planteado
-   apuntando a azbuka-13.html igual que el resto. */
+   ya existe como entrada — el archivo azbuka-13.html se crea
+   cuando corresponda construirlo. */
 const AZ_UNITS = [
-  { id: 1, title: "Alfabeto y pronunciación", href: "azbuka-1.html" },
-  { id: 2, title: "Presentaciones básicas", href: "azbuka-2.html" },
-  { id: 3, title: "Sustantivos y género", href: "azbuka-3.html" },
-  { id: 4, title: "Casos básicos", href: "azbuka-4.html" },
-  { id: 5, title: "Verbos en presente", href: "azbuka-5.html" },
-  { id: 6, title: "Movimiento y ubicación", href: "azbuka-6.html" },
-  { id: 7, title: "Tiempo y rutina diaria", href: "azbuka-7.html" },
-  { id: 8, title: "Pasado", href: "azbuka-8.html" },
-  { id: 9, title: "Futuro", href: "azbuka-9.html" },
-  { id: 10, title: "Casos restantes", href: "azbuka-10.html" },
-  { id: 11, title: "Conversaciones cotidianas", href: "azbuka-11.html" },
-  { id: 12, title: "Consolidación B1", href: "azbuka-12.html" },
-  { id: 13, title: "Examen final", href: "azbuka-13.html" },
+  { id: 1, title: "Alfabeto y pronunciación", desc: "Las 33 letras, sonidos y primeras palabras.", href: "azbuka-1.html" },
+  { id: 2, title: "Presentaciones básicas", desc: "Saludos, nombres, primeras frases.", href: "azbuka-2.html" },
+  { id: 3, title: "Sustantivos y género", desc: "Masculino, femenino, neutro.", href: "azbuka-3.html" },
+  { id: 4, title: "Casos básicos", desc: "Nominativo y acusativo.", href: "azbuka-4.html" },
+  { id: 5, title: "Verbos en presente", desc: "Conjugación y uso cotidiano.", href: "azbuka-5.html" },
+  { id: 6, title: "Movimiento y ubicación", desc: "Verbos de movimiento, preposiciones.", href: "azbuka-6.html" },
+  { id: 7, title: "Tiempo y rutina diaria", desc: "Horas, días, rutinas.", href: "azbuka-7.html" },
+  { id: 8, title: "Pasado", desc: "Aspecto verbal y pasado.", href: "azbuka-8.html" },
+  { id: 9, title: "Futuro", desc: "Formas y uso del futuro.", href: "azbuka-9.html" },
+  { id: 10, title: "Casos restantes", desc: "Genitivo, dativo, instrumental.", href: "azbuka-10.html" },
+  { id: 11, title: "Conversaciones cotidianas", desc: "Diálogos extendidos, situaciones reales.", href: "azbuka-11.html" },
+  { id: 12, title: "Consolidación B1", desc: "Repaso integral del curso.", href: "azbuka-12.html" },
+  { id: 13, title: "Examen final", desc: "Evaluación integradora de las 12 unidades.", href: "azbuka-13.html" },
 ];
 
-/* Los 4 módulos de apoyo pedidos, con sus glifos cirílicos reales
-   (mismos que ya usa tu core.js real). Diccionario existe en el
-   repo pero no lo pediste acá, así que no lo incluyo. */
+/* Módulos de apoyo. Diccionario fue dado de baja (ya no existe
+   como módulo independiente) — solo quedan estos 4. desc/icon
+   se agregan acá (antes solo vivían en el index.html viejo) para
+   que cualquier página que liste los módulos (home, drawer, etc.)
+   los lea de una única fuente. icon es el nombre de color fijo
+   (no cambia con el tema, ver ESTETICA_AZBUKA.md §2). */
 const AZ_MODULES = [
-  { id: "alfabeto", title: "Alfabeto", href: "alfabeto.html", glyph: "Я" },
-  { id: "dialogos", title: "Diálogos", href: "dialogos.html", glyph: "Ди" },
-  { id: "verbos", title: "Verbos", href: "verbos.html", glyph: "Вб" },
-  { id: "casos", title: "Casos", href: "casos.html", glyph: "Пд" },
+  { id: "alfabeto", title: "Alfabeto", desc: "Letras, sonidos y caligrafía — consulta libre", href: "alfabeto.html", icon: "orange", glyph: "Я" },
+  { id: "dialogos", title: "Diálogos", desc: "30 conversaciones con audio y vocabulario", href: "dialogos.html", icon: "yellow", glyph: "Ди" },
+  { id: "verbos", title: "Verbos", desc: "Los 50 verbos más usados, con conjugación", href: "verbos.html", icon: "blue", glyph: "Вб" },
+  { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "purple", glyph: "Пд" },
 ];
 
 /* ── LÉXICO ──────────────────────────────────────────────────
