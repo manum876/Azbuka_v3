@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="610" viewBox="0 0 1200 610" role="img" aria-labelledby="title desc">
+  <title id="title">Azbuka learning structure</title>
+  <desc id="desc">A central Azbuka project connected to a progressive A1 to B1 course and five independent learning tools.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-opacity=".12"/>
+    </filter>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8860b"/>
+      <stop offset="1" stop-color="#d9a52d"/>
+    </linearGradient>
+    <linearGradient id="course" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#9b6df2"/>
+    </linearGradient>
+    <style>
+      .title{font:700 30px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#fff}
+      .sub{font:500 15px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#fff;opacity:.9}
+      .label{font:700 18px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#202124}
+      .small{font:500 13px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#5f6368}
+      .tool{font:700 15px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#202124}
+      .toolsub{font:500 11.5px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#6b7280}
+      .unit{font:700 12px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#fff}
+    </style>
+  </defs>
+
+  <rect width="1200" height="610" rx="28" fill="#f7f5f1"/>
+
+  <!-- Main hero -->
+  <rect x="370" y="35" width="460" height="105" rx="24" fill="url(#hero)" filter="url(#shadow)"/>
+  <text x="600" y="78" text-anchor="middle" class="title">АЗБУКА</text>
+  <text x="600" y="105" text-anchor="middle" class="sub">Ruso desde cero · Russian from zero</text>
+
+  <!-- connectors -->
+  <path d="M600 140 V176" stroke="#b8b2a7" stroke-width="3" fill="none"/>
+  <path d="M600 176 H285 V207" stroke="#b8b2a7" stroke-width="3" fill="none"/>
+  <path d="M600 176 H915 V207" stroke="#b8b2a7" stroke-width="3" fill="none"/>
+
+  <!-- Course -->
+  <rect x="70" y="207" width="430" height="345" rx="24" fill="#fff" stroke="#dedad2" filter="url(#shadow)"/>
+  <rect x="70" y="207" width="430" height="76" rx="24" fill="url(#course)"/>
+  <rect x="70" y="259" width="430" height="24" fill="url(#course)"/>
+  <text x="100" y="242" class="title" style="font-size:22px">📚 CURSO</text>
+  <text x="100" y="266" class="sub">12 unidades · A1 → B1</text>
+
+  <text x="100" y="315" class="label">Aprendizaje progresivo</text>
+  <text x="100" y="340" class="small">Gramática · vocabulario · lectura · escucha</text>
+  <text x="100" y="360" class="small">escritura · producción · ejercicios</text>
+
+  <!-- units -->
+  <g transform="translate(100,390)">
+    <rect width="54" height="42" rx="12" fill="#7c3aed"/><text x="27" y="26" text-anchor="middle" class="unit">01</text>
+    <rect x="62" width="54" height="42" rx="12" fill="#8050e0"/><text x="89" y="26" text-anchor="middle" class="unit">02</text>
+    <rect x="124" width="54" height="42" rx="12" fill="#8557e3"/><text x="151" y="26" text-anchor="middle" class="unit">03</text>
+    <rect x="186" width="54" height="42" rx="12" fill="#895ee5"/><text x="213" y="26" text-anchor="middle" class="unit">04</text>
+    <rect x="248" width="54" height="42" rx="12" fill="#8e65e7"/><text x="275" y="26" text-anchor="middle" class="unit">05</text>
+    <rect x="310" width="54" height="42" rx="12" fill="#936ce9"/><text x="337" y="26" text-anchor="middle" class="unit">06</text>
+    <rect x="0" y="54" width="54" height="42" rx="12" fill="#986feb"/><text x="27" y="80" text-anchor="middle" class="unit">07</text>
+    <rect x="62" y="54" width="54" height="42" rx="12" fill="#9b73ec"/><text x="89" y="80" text-anchor="middle" class="unit">08</text>
+    <rect x="124" y="54" width="54" height="42" rx="12" fill="#9f77ed"/><text x="151" y="80" text-anchor="middle" class="unit">09</text>
+    <rect x="186" y="54" width="54" height="42" rx="12" fill="#a37bee"/><text x="213" y="80" text-anchor="middle" class="unit">10</text>
+    <rect x="248" y="54" width="54" height="42" rx="12" fill="#a77fef"/><text x="275" y="80" text-anchor="middle" class="unit">11</text>
+    <rect x="310" y="54" width="54" height="42" rx="12" fill="#ab83f0"/><text x="337" y="80" text-anchor="middle" class="unit">12</text>
+  </g>
+
+  <!-- Tools -->
+  <rect x="700" y="207" width="430" height="345" rx="24" fill="#fff" stroke="#dedad2" filter="url(#shadow)"/>
+  <text x="730" y="242" class="label" style="font-size:22px">🧰 HERRAMIENTAS</text>
+  <text x="730" y="268" class="small">Acceso independiente · consulta transversal</text>
+
+  <g transform="translate(730,295)">
+    <rect width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <text x="18" y="28" class="tool">🔤 Alfabeto</text>
+    <text x="170" y="28" class="toolsub">33 letras · pronunciación · práctica</text>
+
+    <rect y="55" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <text x="18" y="83" class="tool">📖 Casos</text>
+    <text x="170" y="83" class="toolsub">6 casos · 381 sustantivos · 3 niveles</text>
+
+    <rect y="110" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <text x="18" y="138" class="tool">🗣️ Verbos</text>
+    <text x="170" y="138" class="toolsub">50 verbos frecuentes · conjugación</text>
+
+    <rect y="165" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <text x="18" y="193" class="tool">📚 Diccionario</text>
+    <text x="170" y="193" class="toolsub">400 palabras · 9 categorías · búsqueda</text>
+
+    <rect y="220" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <text x="18" y="248" class="tool">💬 Diálogos</text>
+    <text x="170" y="248" class="toolsub">30 situaciones · traducción · vocabulario</text>
+  </g>
+
+  <!-- Search note -->
+  <rect x="420" y="565" width="360" height="32" rx="16" fill="#ede9df"/>
+  <text x="600" y="587" text-anchor="middle" class="small">🔎 Buscador transversal · 💾 Progreso local · 🚫 Sin gamificación</text>
+</svg>
