@@ -205,8 +205,8 @@ function AzShell(props) {
       React.createElement("div", { ref: listRef, style: { flex: 1, overflowY: "auto", padding: "6px 8px" } },
         React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "10px 10px 6px" } }, "Azbuka"),
         React.createElement("a", {
-          href: "azbuka-index.html",
-          onClick: (e) => azNavigate(e, "azbuka-index.html"),
+          href: "azbuka-index-1.html",
+          onClick: (e) => azNavigate(e, "azbuka-index-1.html"),
           style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: 13.5, textDecoration: "none" }
         }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, "00"), "Índice"),
         (typeof AZ_UNITS !== "undefined" ? AZ_UNITS : []).map(u => React.createElement("a", {

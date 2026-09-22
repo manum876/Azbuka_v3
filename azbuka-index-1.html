@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<title>Азбука — Ruso desde cero</title>
+<link rel="stylesheet" href="core.css">
+<style>
+  .page-gap{margin-top:16px;}
+
+  .ugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
+  .uc{display:block;text-decoration:none;padding:16px;border-radius:16px;cursor:pointer;position:relative;overflow:hidden;transition:.18s;box-sizing:border-box;}
+  .uc:active{transform:scale(.97);}
+  .un{font-size:32px;font-weight:800;position:absolute;right:10px;top:2px;line-height:1;user-select:none;}
+  .ut{font-weight:700;font-size:14px;margin:22px 0 4px;max-width:82%;}
+  .ud{font-size:11.5px;margin-bottom:10px;min-height:28px;line-height:1.4;}
+  .goLbl{font-size:11.5px;font-weight:700;}
+  .uc-exam{grid-column:1 / -1;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
+<script src="core.js"></script>
+<script src="shell.js"></script>
+<script>
+const { useState, useEffect } = htmPreact;
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+
+  useEffect(() => {
+    (async () => { setDarkMode((await azGet('az_theme', 'dark')) !== 'light'); })();
+  }, []);
+
+  const c = azColors(darkMode);
+  const allUnits = typeof AZ_UNITS !== "undefined" ? AZ_UNITS : [];
+  const units = allUnits.filter(u => u.id <= 12);
+  const exam = allUnits.find(u => u.id === 13);
+
+  function unitCard(u, extraClass) {
+    return React.createElement("a", {
+      key: u.id, className: "uc" + (extraClass ? " " + extraClass : ""), href: u.href,
+      onClick: (e) => azNavigate(e, u.href),
+      style: { background: c.card, border: `1px solid ${c.border}`, color: c.text }
+    },
+      React.createElement("div", { className: "un", style: { color: c.border } }, String(u.id).padStart(2, "0")),
+      React.createElement("div", { className: "ut" }, u.title),
+      React.createElement("div", { className: "ud", style: { color: c.textMuted } }, u.desc),
+      React.createElement("span", { className: "goLbl", style: { color: c.gold } }, "Empezar →")
+    );
+  }
+
+  return React.createElement(AzShell, {
+    darkMode, setDarkMode,
+    moduleId: null,
+    tabs: []
+  },
+    React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
+      React.createElement("h1", { style: { fontSize: 26, fontWeight: 800, marginBottom: 8, color: c.text } }, "Твой курс русского"),
+      React.createElement("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, marginBottom: 8 } }, "Nivel A1 → B1"),
+      React.createElement("p", { style: { fontSize: 13.5, color: c.textMuted, marginBottom: 18, lineHeight: 1.6 } },
+        "12 unidades pensadas para un mes cada una."),
+
+      React.createElement("div", { className: "ugrid" },
+        units.map(u => unitCard(u)),
+        exam && unitCard(exam, "uc-exam")
+      )
+    )
+  );
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

@@ -9,29 +9,34 @@
 <title>Азбука · Ruso</title>
 <link rel="stylesheet" href="core.css">
 <style>
-  /* Específico de esta página — hero grande centrado + grid de módulos.
-     Los colores fijos de ícono (naranja/amarillo/azul/púrpura) no cambian
-     con el tema, igual que en el resto de la app (ver ESTETICA_AZBUKA.md §2). */
-  .hero-btn{display:block;width:100%;box-sizing:border-box;text-align:center;text-decoration:none;padding:32px 20px;border-radius:20px;cursor:pointer;transition:.18s;margin-bottom:28px;}
-  .hero-btn:active{transform:scale(.98);}
-  .hero-icon{width:76px;height:76px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:#fff;background:#B5605C;margin:0 auto 16px;}
-  .hero-title{font-size:22px;font-weight:800;margin-bottom:7px;}
-  .hero-desc{font-size:13.5px;max-width:320px;margin:0 auto;line-height:1.5;}
+  /* Específico de esta página. Los colores fijos de ícono (naranja/
+     amarillo/azul/púrpura) no cambian con el tema — ver ESTETICA_AZBUKA.md §2. */
+  .page-gap{margin-top:16px;}
+
+  .hero-card{width:100%;box-sizing:border-box;text-align:center;padding:34px 20px;border-radius:20px;margin-bottom:26px;}
+  .hero-icon{width:92px;height:92px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:#fff;background:#B5605C;margin:0 auto 18px;letter-spacing:-1px;}
+  .hero-title{font-size:24px;font-weight:800;margin-bottom:10px;}
+  .hero-desc{font-size:13.5px;max-width:360px;margin:0 auto;line-height:1.6;}
+
+  .level-row{display:flex;gap:8px;margin-top:20px;}
+  .level-btn{flex:1;text-align:center;padding:10px 6px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none;box-sizing:border-box;transition:.18s;}
+  .level-btn.active:active{transform:scale(.96);}
+  .level-sub{display:block;font-size:9px;font-weight:600;margin-top:3px;text-transform:uppercase;letter-spacing:.4px;}
 
   .section-lbl{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 12px;}
 
-  .modules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-  @media(min-width:480px){.modules-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}}
-  .mod-card{display:block;text-decoration:none;padding:15px;border-radius:16px;cursor:pointer;transition:.18s;box-sizing:border-box;}
-  .mod-card:active{transform:scale(.97);}
-  .mod-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;margin-bottom:10px;}
+  .mod-list{display:flex;flex-direction:column;gap:10px;}
+  .mod-card{display:flex;align-items:center;gap:14px;text-decoration:none;padding:14px 16px;border-radius:16px;cursor:pointer;transition:.18s;box-sizing:border-box;}
+  .mod-card:active{transform:scale(.98);}
+  .mod-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0;}
   .mod-icon.red{background:#B5605C;}
   .mod-icon.orange{background:#C48254;}
   .mod-icon.yellow{background:#C9B369;color:#1a1a1a;}
   .mod-icon.green{background:#5C9B78;}
   .mod-icon.blue{background:#5D7DA6;}
   .mod-icon.purple{background:#8871A8;}
-  .mod-title{font-size:14.5px;font-weight:700;margin-bottom:3px;}
+  .mod-text{display:flex;flex-direction:column;gap:2px;text-align:left;min-width:0;}
+  .mod-title{font-size:14.5px;font-weight:700;}
   .mod-desc{font-size:11.5px;line-height:1.35;}
 </style>
 </head>
@@ -59,23 +64,47 @@ function App() {
     moduleId: null,
     tabs: []
   },
-    React.createElement("div", { style: { animation: "fadeIn 0.3s ease" } },
+    React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
 
-      /* ── HERO: botón grande al curso, ícono/título/descripción centrados ── */
-      React.createElement("a", {
-        className: "hero-btn", href: "azbuka-index.html",
-        onClick: (e) => azNavigate(e, "azbuka-index.html"),
+      /* ── HERO: tarjeta (no es link), ícono/título/descripción centrados,
+         y debajo los 3 botones de nivel ── */
+      React.createElement("div", {
+        className: "hero-card",
         style: { background: c.card, border: `1px solid ${c.border}` }
       },
-        React.createElement("div", { className: "hero-icon" }, "А"),
-        React.createElement("div", { className: "hero-title", style: { color: c.gold } }, "Curso Азбука"),
+        React.createElement("div", { className: "hero-icon" }, "Аз"),
+        React.createElement("div", { className: "hero-title", style: { color: c.gold } }, "Азбука"),
         React.createElement("div", { className: "hero-desc", style: { color: c.textMuted } },
-          "12 unidades A1–B1, con progreso guardado")
+          "Un curso completo para aprender ruso desde cero, pensado para hispanohablantes. Combina teoría clara, ejercicios prácticos y ejemplos reales para que avances con confianza, de principiante a avanzado."),
+
+        React.createElement("div", { className: "level-row" },
+          React.createElement("a", {
+            className: "level-btn active", href: "azbuka-index-1.html",
+            onClick: (e) => azNavigate(e, "azbuka-index-1.html"),
+            style: { background: c.gold, color: "#0F0F14" }
+          },
+            "A1 → B1"
+          ),
+          React.createElement("div", {
+            className: "level-btn",
+            style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted, opacity: .65 }
+          },
+            "B1 → B2",
+            React.createElement("span", { className: "level-sub" }, "Próximamente")
+          ),
+          React.createElement("div", {
+            className: "level-btn",
+            style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted, opacity: .65 }
+          },
+            "B2 → C1",
+            React.createElement("span", { className: "level-sub" }, "Próximamente")
+          )
+        )
       ),
 
-      /* ── MÓDULOS DE APOYO (antes "Herramientas") ── */
+      /* ── MÓDULOS DE APOYO (antes "Herramientas") — filas horizontales ── */
       React.createElement("div", { className: "section-lbl", style: { color: c.textMuted } }, "Módulos de apoyo"),
-      React.createElement("div", { className: "modules-grid" },
+      React.createElement("div", { className: "mod-list" },
         modules.map(m =>
           React.createElement("a", {
             key: m.id, className: "mod-card", href: m.href,
@@ -83,8 +112,10 @@ function App() {
             style: { background: c.card, border: `1px solid ${c.border}` }
           },
             React.createElement("div", { className: `mod-icon ${m.icon}` }, m.glyph),
-            React.createElement("div", { className: "mod-title", style: { color: c.text } }, m.title),
-            React.createElement("div", { className: "mod-desc", style: { color: c.textMuted } }, m.desc)
+            React.createElement("div", { className: "mod-text" },
+              React.createElement("div", { className: "mod-title", style: { color: c.text } }, m.title),
+              React.createElement("div", { className: "mod-desc", style: { color: c.textMuted } }, m.desc)
+            )
           )
         )
       )
