@@ -38,7 +38,7 @@
   .det-hero{border-radius:18px;padding:22px 20px;margin-bottom:14px;}
   .det-top{display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
   .det-glyph{font-size:56px;font-weight:800;line-height:1;text-align:center;flex-shrink:0;}
-  .det-cursive{font-family:'CyrCursive',cursive;font-size:26px;opacity:.7;margin-top:4px;}
+  .det-cursive{font-family:'CyrCursive',cursive;font-size:56px;opacity:.7;margin-top:4px;}
   .det-name{font-size:20px;font-weight:800;margin-bottom:4px;}
   .det-translit{font-size:13px;margin-bottom:6px;}
   .det-pron{font-size:13.5px;line-height:1.5;margin-bottom:10px;}
@@ -128,6 +128,8 @@ function App() {
 
   const c = azColors(darkMode);
   const orange = darkMode ? "#E2884A" : "#C85A1A";
+  const yellow = "#C9B369";
+  const green = darkMode ? "#4CAF82" : "#2E7D55";
 
   const selected = selectedId ? ALPHABET.find(l => l.id === selectedId) : null;
   const idx = selected ? ALPHABET.findIndex(l => l.id === selected.id) : -1;
@@ -169,17 +171,17 @@ function App() {
           React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, "Total")
         ),
         React.createElement("div", { className: "stat-card", style: { background: c.card, border: `1px solid ${c.border}` } },
-          React.createElement("div", { className: "stat-num", style: { color: orange } }, learning),
+          React.createElement("div", { className: "stat-num", style: { color: yellow } }, learning),
           React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, "Aprendiendo")
         ),
         React.createElement("div", { className: "stat-card", style: { background: c.card, border: `1px solid ${c.border}` } },
-          React.createElement("div", { className: "stat-num", style: { color: c.gold } }, dominated),
+          React.createElement("div", { className: "stat-num", style: { color: green } }, dominated),
           React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, "Dominadas")
         )
       ),
 
       React.createElement("div", { className: "pbar-track", style: { background: c.bg3 } },
-        React.createElement("div", { className: "pbar-fill", style: { width: pct + "%", background: c.gold } })
+        React.createElement("div", { className: "pbar-fill", style: { width: pct + "%", background: green } })
       ),
 
       React.createElement("div", { className: "toggle-row" },
@@ -202,7 +204,7 @@ function App() {
       React.createElement("div", { className: "lgrid" },
         filtered.map(letter => {
           const lvl = letterLevels[letter.upper] || 0;
-          const lvlColor = lvl === 2 ? c.gold : lvl === 1 ? orange : c.textMuted;
+          const lvlColor = lvl === 2 ? green : lvl === 1 ? yellow : c.textMuted;
           return React.createElement("div", {
             key: letter.id, className: "lcard letter-card",
             onClick: () => openLetter(letter),
@@ -213,7 +215,7 @@ function App() {
               React.createElement("span", { style: { fontSize: 28, fontWeight: 800, color: c.gold } }, letter.upper),
               React.createElement("span", { style: { fontSize: 28, fontWeight: 500, color: c.textSub } }, letter.lower)
             ),
-            React.createElement("div", { className: "word-cursive", style: { color: c.gold, marginTop: 6 } }, letter.upper + " " + letter.lower),
+            React.createElement("div", { className: "word-cursive", style: { color: c.gold, marginTop: 6, fontSize: 28 } }, letter.upper + " " + letter.lower),
             showNames && React.createElement("div", { style: { fontSize: 10, color: c.textMuted, marginTop: 6, fontStyle: "italic" } }, letter.name),
             showPronun && React.createElement("div", { style: { fontSize: 10, color: c.textSub, marginTop: 3 } }, "/" + letter.translit + "/")
           );
@@ -246,7 +248,7 @@ function App() {
         React.createElement("div", { className: "status-row", style: { borderColor: c.border } },
           [0, 1, 2].map(lvl => {
             const active = (letterLevels[selected.upper] || 0) === lvl;
-            const col = lvl === 2 ? c.gold : lvl === 1 ? orange : c.textSub;
+            const col = lvl === 2 ? green : lvl === 1 ? yellow : orange;
             const label = lvl === 0 ? "No estudiada" : lvl === 1 ? "Aprendiendo" : "Dominada";
             return React.createElement("div", {
               key: lvl, className: "status-btn", onClick: () => setLevel(selected, lvl),
