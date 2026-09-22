@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<title>Азбука · Alfabeto</title>
+<link rel="stylesheet" href="core.css">
+<style>
+  .page-gap{margin-top:16px;}
+
+  /* ── Vista grid ── */
+  .abc-hero{width:100%;box-sizing:border-box;text-align:center;padding:30px 20px;border-radius:20px;margin-bottom:18px;}
+  .abc-hero-letters{font-size:30px;font-weight:800;letter-spacing:6px;margin-bottom:10px;}
+  .abc-hero-title{font-size:20px;font-weight:800;margin-bottom:6px;}
+  .abc-hero-tag{font-size:12.5px;}
+
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+  .stat-card{border-radius:14px;padding:12px 8px;text-align:center;}
+  .stat-num{font-size:20px;font-weight:800;line-height:1;}
+  .stat-lbl{font-size:9.5px;margin-top:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
+
+  .pbar-track{width:100%;height:6px;border-radius:3px;overflow:hidden;margin-bottom:16px;}
+  .pbar-fill{height:100%;border-radius:3px;transition:width .3s ease;}
+
+  .toggle-row{display:flex;gap:8px;margin-bottom:14px;}
+  .toggle-btn{flex:1;text-align:center;padding:8px 6px;border-radius:10px;font-size:11.5px;font-weight:600;cursor:pointer;transition:.18s;}
+
+  .abc-search{width:100%;box-sizing:border-box;border-radius:10px;padding:10px 14px;font-size:13.5px;margin-bottom:16px;}
+
+  .lgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+  @media (max-width:600px){.lgrid{grid-template-columns:repeat(3,1fr);}}
+  .lcard{position:relative;border-radius:14px;padding:14px 6px;text-align:center;}
+
+  /* ── Vista detalle ── */
+  .det-hero{border-radius:18px;padding:22px 20px;margin-bottom:14px;}
+  .det-top{display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+  .det-glyph{font-size:56px;font-weight:800;line-height:1;text-align:center;flex-shrink:0;}
+  .det-cursive{font-family:'CyrCursive',cursive;font-size:26px;opacity:.7;margin-top:4px;}
+  .det-name{font-size:20px;font-weight:800;margin-bottom:4px;}
+  .det-translit{font-size:13px;margin-bottom:6px;}
+  .det-pron{font-size:13.5px;line-height:1.5;margin-bottom:10px;}
+  .status-row{display:flex;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid;}
+  .status-btn{flex:1;text-align:center;padding:9px 4px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;transition:.18s;}
+
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  @media (max-width:600px){.info-grid{grid-template-columns:1fr;}}
+  .info-card{border-radius:14px;padding:16px;}
+  .info-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;}
+  .info-text{font-size:13px;line-height:1.55;margin-bottom:8px;}
+  .info-sub{font-size:11px;font-weight:700;margin-bottom:3px;}
+
+  .card{border-radius:14px;padding:16px;margin-bottom:14px;}
+
+  .word-row{display:flex;align-items:center;gap:12px;padding:12px 0;}
+  .word-row + .word-row{border-top:1px solid;}
+  .word-main{flex:1;min-width:0;}
+  .word-ru{font-size:16px;font-weight:700;}
+  .word-translit{font-size:11.5px;margin-top:1px;}
+  .word-cursive{font-family:'CyrCursive',cursive;font-size:15px;opacity:.7;margin-top:2px;}
+  .word-es{font-size:12.5px;margin-top:3px;}
+  .word-note{font-size:11px;font-style:italic;margin-top:3px;line-height:1.4;}
+  .word-btns{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+  .word-btn{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;flex-shrink:0;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
+<script src="core.js"></script>
+<script src="progress.js"></script>
+<script src="data-alphabet.js"></script>
+<script src="shell.js"></script>
+<script>
+const { useState, useEffect } = htmPreact;
+
+function speakRu(text) {
+  try {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "ru-RU";
+    u.rate = 0.85;
+    window.speechSynthesis.speak(u);
+  } catch (err) {}
+}
+
+function highlightWord(word, letter) {
+  return word.split("").map((ch, i) => {
+    const match = ch === letter.upper || ch === letter.lower;
+    return match ? React.createElement("span", { key: i, style: { color: "#C9A84C", fontWeight: 800 } }, ch) : ch;
+  });
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [page, setPage] = useState("grid"); // grid | detail
+  const [selectedId, setSelectedId] = useState(null);
+  const [search, setSearch] = useState("");
+  const [showPronun, setShowPronun] = useState(true);
+  const [showNames, setShowNames] = useState(true);
+  const [showTranslit, setShowTranslit] = useState(true);
+  const [letterLevels, setLetterLevels] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      await azLoadProgress();
+      const lv = {};
+      ALPHABET.forEach(l => { lv[l.upper] = azItem('alfabeto:' + l.upper).level; });
+      setLetterLevels(lv);
+      azModuleTouch('alfabeto');
+    })();
+  }, []);
+
+  function setLevel(letter, level) {
+    azSetItemLevel('alfabeto:' + letter.upper, level);
+    setLetterLevels(prev => ({ ...prev, [letter.upper]: level }));
+  }
+
+  function openLetter(letter) {
+    setSelectedId(letter.id);
+    setPage("detail");
+  }
+
+  const c = azColors(darkMode);
+  const orange = darkMode ? "#E2884A" : "#C85A1A";
+
+  const selected = selectedId ? ALPHABET.find(l => l.id === selectedId) : null;
+  const idx = selected ? ALPHABET.findIndex(l => l.id === selected.id) : -1;
+  function goPrev() { if (idx > 0) setSelectedId(ALPHABET[idx - 1].id); }
+  function goNext() { if (idx < ALPHABET.length - 1) setSelectedId(ALPHABET[idx + 1].id); }
+
+  const learning = Object.values(letterLevels).filter(v => v === 1).length;
+  const dominated = Object.values(letterLevels).filter(v => v === 2).length;
+  const pct = Math.round((dominated / ALPHABET.length) * 100);
+
+  const q = search.trim().toLowerCase();
+  const filtered = !q ? ALPHABET : ALPHABET.filter(l =>
+    l.upper.toLowerCase().includes(q) || l.lower.includes(q) ||
+    l.name.toLowerCase().includes(q) || l.pronunciation.toLowerCase().includes(q)
+  );
+
+  const tabs = page === "detail" ? [
+    { id: "back", icon: "⊞", label: "Alfabeto", action: () => setPage("grid") },
+    { id: "prev", icon: "‹", label: "Anterior", action: goPrev },
+    { id: "count", icon: "", label: `${idx + 1}/${ALPHABET.length}` },
+    { id: "next", icon: "›", label: "Siguiente", action: goNext }
+  ] : [];
+
+  return React.createElement(AzShell, {
+    darkMode, setDarkMode, moduleId: "alfabeto", tabs
+  },
+
+    page === "grid" && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
+
+      React.createElement("div", { className: "abc-hero", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "abc-hero-letters", style: { color: c.gold } }, "А Б В Г"),
+        React.createElement("div", { className: "abc-hero-title", style: { color: c.text } }, "El Alfabeto Cirílico Ruso"),
+        React.createElement("div", { className: "abc-hero-tag", style: { color: c.textMuted } }, "33 letras · Pronunciación, escritura y uso real")
+      ),
+
+      React.createElement("div", { className: "stat-row" },
+        React.createElement("div", { className: "stat-card", style: { background: c.card, border: `1px solid ${c.border}` } },
+          React.createElement("div", { className: "stat-num", style: { color: c.text } }, ALPHABET.length),
+          React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, "Total")
+        ),
+        React.createElement("div", { className: "stat-card", style: { background: c.card, border: `1px solid ${c.border}` } },
+          React.createElement("div", { className: "stat-num", style: { color: orange } }, learning),
+          React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, "Aprendiendo")
+        ),
+        React.createElement("div", { className: "stat-card", style: { background: c.card, border: `1px solid ${c.border}` } },
+          React.createElement("div", { className: "stat-num", style: { color: c.gold } }, dominated),
+          React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, "Dominadas")
+        )
+      ),
+
+      React.createElement("div", { className: "pbar-track", style: { background: c.bg3 } },
+        React.createElement("div", { className: "pbar-fill", style: { width: pct + "%", background: c.gold } })
+      ),
+
+      React.createElement("div", { className: "toggle-row" },
+        React.createElement("div", {
+          className: "toggle-btn", onClick: () => setShowPronun(v => !v),
+          style: { background: showPronun ? c.gold : c.bg3, color: showPronun ? "#0F0F14" : c.textMuted, border: `1px solid ${showPronun ? c.gold : c.border}` }
+        }, "Pronunciación"),
+        React.createElement("div", {
+          className: "toggle-btn", onClick: () => setShowNames(v => !v),
+          style: { background: showNames ? c.gold : c.bg3, color: showNames ? "#0F0F14" : c.textMuted, border: `1px solid ${showNames ? c.gold : c.border}` }
+        }, "Nombres")
+      ),
+
+      React.createElement("input", {
+        className: "abc-search", value: search, onInput: (e) => setSearch(e.target.value),
+        placeholder: "Buscar letra…",
+        style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text }
+      }),
+
+      React.createElement("div", { className: "lgrid" },
+        filtered.map(letter => {
+          const lvl = letterLevels[letter.upper] || 0;
+          const lvlColor = lvl === 2 ? c.gold : lvl === 1 ? orange : c.textMuted;
+          return React.createElement("div", {
+            key: letter.id, className: "lcard letter-card",
+            onClick: () => openLetter(letter),
+            style: { background: c.card, border: `1px solid ${lvl > 0 ? lvlColor + "55" : c.border}` }
+          },
+            lvl > 0 && React.createElement("span", { style: { position: "absolute", top: 6, right: 8, fontSize: 10, color: lvlColor } }, lvl === 2 ? "●" : "◑"),
+            React.createElement("div", { style: { display: "flex", alignItems: "baseline", justifyContent: "center", gap: 8, lineHeight: 1 } },
+              React.createElement("span", { style: { fontSize: 28, fontWeight: 800, color: c.gold } }, letter.upper),
+              React.createElement("span", { style: { fontSize: 28, fontWeight: 500, color: c.textSub } }, letter.lower)
+            ),
+            React.createElement("div", { className: "word-cursive", style: { color: c.gold, marginTop: 6 } }, letter.upper + " " + letter.lower),
+            showNames && React.createElement("div", { style: { fontSize: 10, color: c.textMuted, marginTop: 6, fontStyle: "italic" } }, letter.name),
+            showPronun && React.createElement("div", { style: { fontSize: 10, color: c.textSub, marginTop: 3 } }, "/" + letter.translit + "/")
+          );
+        })
+      ),
+
+      filtered.length === 0 && React.createElement("div", { style: { textAlign: "center", padding: 40, color: c.textMuted } },
+        React.createElement("div", { style: { fontSize: 32, marginBottom: 6 } }, "🔍"),
+        React.createElement("p", null, `No se encontraron letras para "${search}"`))
+    ),
+
+    page === "detail" && selected && React.createElement("div", { style: { animation: "fadeIn 0.25s ease" } },
+
+      React.createElement("div", { className: "det-hero", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "det-top" },
+          React.createElement("div", null,
+            React.createElement("div", { className: "det-glyph", style: { color: c.gold } }, selected.upper + " " + selected.lower),
+            React.createElement("div", { className: "det-cursive", style: { color: c.gold, textAlign: "center" } }, selected.upper + "\u2009" + selected.lower)
+          ),
+          React.createElement("div", { style: { flex: 1, minWidth: 180 } },
+            React.createElement("div", { className: "det-name", style: { color: c.text } }, selected.name),
+            React.createElement("div", { className: "det-translit", style: { color: c.textSub } }, "Transliteración: /" + selected.translit + "/"),
+            React.createElement("div", { className: "det-pron", style: { color: c.textMuted } }, selected.pronunciation),
+            React.createElement("button", {
+              className: "btn", onClick: () => speakRu(selected.lower),
+              style: { background: c.gold, color: "#0F0F14", fontWeight: 700, fontSize: 12.5, padding: "9px 16px", borderRadius: 10 }
+            }, "▶ Escuchar letra")
+          )
+        ),
+        React.createElement("div", { className: "status-row", style: { borderColor: c.border } },
+          [0, 1, 2].map(lvl => {
+            const active = (letterLevels[selected.upper] || 0) === lvl;
+            const col = lvl === 2 ? c.gold : lvl === 1 ? orange : c.textSub;
+            const label = lvl === 0 ? "No estudiada" : lvl === 1 ? "Aprendiendo" : "Dominada";
+            return React.createElement("div", {
+              key: lvl, className: "status-btn", onClick: () => setLevel(selected, lvl),
+              style: { background: active ? col + "22" : c.bg3, border: `1px solid ${active ? col : c.border}`, color: active ? col : c.textMuted }
+            }, label);
+          })
+        )
+      ),
+
+      React.createElement("div", { className: "info-grid" },
+        React.createElement("div", { className: "info-card", style: { background: c.card, border: `1px solid ${c.border}` } },
+          React.createElement("div", { className: "info-title", style: { color: c.gold } }, "Cómo pronunciarlo"),
+          React.createElement("div", { className: "info-text", style: { color: c.text } }, selected.details.description),
+          React.createElement("div", { className: "info-sub", style: { color: c.textSub } }, "Parecido en español"),
+          React.createElement("div", { className: "info-text", style: { color: c.textMuted, marginBottom: 0 } }, selected.details.similar)
+        ),
+        React.createElement("div", { className: "info-card", style: { background: c.card, border: `1px solid ${c.border}` } },
+          React.createElement("div", { className: "info-title", style: { color: c.gold } }, "Errores comunes"),
+          React.createElement("div", { className: "info-text", style: { color: c.text } }, selected.details.mistakes),
+          React.createElement("div", { className: "info-sub", style: { color: c.textSub } }, "Consejo"),
+          React.createElement("div", { className: "info-text", style: { color: c.textMuted, marginBottom: 0 } }, selected.details.tips)
+        )
+      ),
+
+      React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "info-title", style: { color: c.gold } }, "Letras similares"),
+        React.createElement("div", { className: "info-text", style: { color: c.text, marginBottom: 0 } }, selected.details.similar_letters)
+      ),
+
+      React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "info-title", style: { color: c.gold, marginBottom: 4 } }, "Palabras de práctica"),
+        selected.words.map((w, i) => {
+          /* TODO: agregar w.lexId (id real CMR-xxxxx de data-lexicon-comer)
+             y renderizar acá un segundo botón "📖" del mismo tamaño que
+             el de escuchar, con href a ficha.html?id=<w.lexId>. Pendiente
+             de que subas las tandas/partes del léxico a Project Knowledge
+             para buscar el id real de cada palabra — ver mensaje del chat. */
+          return React.createElement("div", { key: i, className: "word-row", style: { borderColor: c.border } },
+            React.createElement("div", { className: "word-main" },
+              React.createElement("div", { className: "word-ru", style: { color: c.text } }, highlightWord(w.cyrillic, selected)),
+              showTranslit && React.createElement("div", { className: "word-translit", style: { color: c.textSub } }, w.translit),
+              React.createElement("div", { className: "word-cursive", style: { color: c.gold } }, w.cyrillic),
+              React.createElement("div", { className: "word-es", style: { color: c.textMuted } }, w.meaning),
+              React.createElement("div", { className: "word-note", style: { color: c.textSub } }, w.note)
+            ),
+            React.createElement("div", { className: "word-btns" },
+              React.createElement("button", {
+                className: "word-btn btn", onClick: () => speakRu(w.cyrillic),
+                style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
+              }, "▶")
+            )
+          );
+        })
+      )
+    )
+  );
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

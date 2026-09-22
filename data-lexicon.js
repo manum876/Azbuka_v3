@@ -28,8 +28,8 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 4931,
-  mergedFrom: "tanda1..tanda24"
+  totalEntries: 4943,
+  mergedFrom: "tanda1..tanda24 + alfabeto-enrichment (CMR-05003..CMR-05014)"
 };
 const LEXICON_COMER = [
  {
@@ -295354,6 +295354,738 @@ const LEXICON_COMER = [
   "animate": "no",
   "pluralForm": "диапазоны",
   "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05003",
+  "ru": "аптека",
+  "posNormalized": "sustantivo",
+  "translit": "ʌptEka",
+  "ipa": "ʌptʲˈeka",
+  "senses": [
+   {
+    "es": "farmacia",
+    "definitionEs": "Local donde se venden medicamentos y otros productos de cuidado de la salud.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "аптека",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "аптек",
+    "Suffix1": "а",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra А) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "pluralForm": "аптеки",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05004",
+  "ru": "арбуз",
+  "posNormalized": "sustantivo",
+  "translit": "ʌrbUs",
+  "ipa": "ʌrbˈus",
+  "senses": [
+   {
+    "es": "sandía",
+    "definitionEs": "Fruta grande, redonda u ovalada, de cáscara verde y pulpa roja jugosa, típica del verano.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "арбуз",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "арбуз",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra А) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "pluralForm": "арбузы",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05005",
+  "ru": "алфавит",
+  "posNormalized": "sustantivo",
+  "translit": "ʌɭfʌvIt",
+  "ipa": "ʌɭfʌvʲˈit",
+  "senses": [
+   {
+    "es": "alfabeto",
+    "definitionEs": "Conjunto ordenado de las letras que se usan para escribir un idioma.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "алфавит",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "алфавит",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra А) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "pluralForm": "алфавиты",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05006",
+  "ru": "банан",
+  "posNormalized": "sustantivo",
+  "translit": "bʌnAn",
+  "ipa": "bʌnˈɑn",
+  "senses": [
+   {
+    "es": "banana",
+    "definitionEs": "Fruta alargada y curva, de cáscara amarilla, muy común y dulce.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "банан",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "банан",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra Б) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "pluralForm": "бананы",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05007",
+  "ru": "ёж",
+  "posNormalized": "sustantivo",
+  "translit": "Ɵʃ",
+  "ipa": "ˈɵʃ",
+  "senses": [
+   {
+    "es": "erizo",
+    "definitionEs": "Animal pequeño cubierto de púas, que se enrosca sobre sí mismo cuando se siente amenazado.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "ёж",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "2",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "ёж",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra Ё) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "m",
+  "animate": "yes",
+  "pluralForm": "ежи",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05008",
+  "ru": "мёд",
+  "posNormalized": "sustantivo",
+  "translit": "Ɵt",
+  "ipa": "ˈɵt",
+  "senses": [
+   {
+    "es": "miel",
+    "definitionEs": "Sustancia dulce y espesa que producen las abejas a partir del néctar de las flores.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "мёд",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "3",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "мёд",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra Ё) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "pluralForm": null,
+  "numberClass": "singulariaTantum"
+ },
+ {
+  "id": "CMR-05009",
+  "ru": "йогурт",
+  "posNormalized": "sustantivo",
+  "translit": "yOgurt",
+  "ipa": "jˈogurt",
+  "senses": [
+   {
+    "es": "yogur",
+    "definitionEs": "Producto lácteo espeso y de sabor ácido, obtenido por fermentación de la leche.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "йогурт",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "йогурт",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra Й) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "pluralForm": "йогурты",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05010",
+  "ru": "щи",
+  "posNormalized": "sustantivo",
+  "translit": "shI",
+  "ipa": "ɕˈi",
+  "senses": [
+   {
+    "es": "sopa de col (plato típico)",
+    "definitionEs": "Sopa tradicional rusa hecha a base de repollo o chucrut, típica de la cocina cotidiana.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "щи",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "2",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "щи",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra Щ) — no formaba parte de la lista de frecuencia Comer 5000 original. Sustantivo pluralia tantum (no tiene forma singular).",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": null,
+  "animate": "no",
+  "pluralForm": null,
+  "numberClass": "pluraliaTantum"
+ },
+ {
+  "id": "CMR-05011",
+  "ru": "борщ",
+  "posNormalized": "sustantivo",
+  "translit": "bOrsh",
+  "ipa": "bˈorɕ",
+  "senses": [
+   {
+    "es": "borsch (sopa de remolacha)",
+    "definitionEs": "Sopa tradicional de Europa del Este, de color rojo intenso por la remolacha, típica de la cocina rusa y ucraniana.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "борщ",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "борщ",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra Щ) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "pluralForm": null,
+  "numberClass": "singulariaTantum"
+ },
+ {
+  "id": "CMR-05012",
+  "ru": "мыло",
+  "posNormalized": "sustantivo",
+  "translit": "mYɭʌ",
+  "ipa": "mˈyɭʌ",
+  "senses": [
+   {
+    "es": "jabón",
+    "definitionEs": "Producto que se usa con agua para lavarse o limpiar, generalmente en forma de barra o líquido.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "мыло",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "мыл",
+    "Suffix1": "о",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra Ы) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "n",
+  "animate": "no",
+  "pluralForm": null,
+  "numberClass": "singulariaTantum"
+ },
+ {
+  "id": "CMR-05013",
+  "ru": "эхо",
+  "posNormalized": "sustantivo",
+  "translit": "Ejʌ",
+  "ipa": "ˈɛxʌ",
+  "senses": [
+   {
+    "es": "eco",
+    "definitionEs": "Repetición de un sonido que se produce al rebotar contra una superficie y volver al oído.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "эхо",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "3",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "эх",
+    "Suffix1": "о",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra Э) — no formaba parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": "n",
+  "animate": "no",
+  "pluralForm": null,
+  "numberClass": "singulariaTantum"
+ },
+ {
+  "id": "CMR-05014",
+  "ru": "люди",
+  "posNormalized": "sustantivo",
+  "translit": "ɭUdi",
+  "ipa": "ɭʲˈudʲi",
+  "senses": [
+   {
+    "es": "gente, personas",
+    "definitionEs": "Plural de человек (persona); se usa para referirse a varias personas o a la gente en general.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "люди",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "люд",
+    "Suffix1": "и",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para completar el vocabulario objetivo del módulo Alfabeto (palabra de ejemplo de la letra Ю) — no formaba parte de la lista de frecuencia Comer 5000 original. Plural supletivo de человек (CMR-00039); no tiene forma singular propia.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "alfabetoModuleEnrichment": true
+  },
+  "gender": null,
+  "animate": "yes",
+  "pluralForm": null,
+  "numberClass": "pluraliaTantum"
  }
 ];
 
