@@ -225,7 +225,7 @@ function App() {
         React.createElement("p", null, `No se encontraron letras para "${search}"`))
     ),
 
-    page === "detail" && selected && React.createElement("div", { style: { animation: "fadeIn 0.25s ease" } },
+    page === "detail" && selected && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.25s ease" } },
 
       React.createElement("div", { className: "det-hero", style: { background: c.card, border: `1px solid ${c.border}` } },
         React.createElement("div", { className: "det-top" },
