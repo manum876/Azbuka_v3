@@ -279,11 +279,6 @@ function App() {
       React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
         React.createElement("div", { className: "info-title", style: { color: c.gold, marginBottom: 4 } }, "Palabras de práctica"),
         selected.words.map((w, i) => {
-          /* TODO: agregar w.lexId (id real CMR-xxxxx de data-lexicon-comer)
-             y renderizar acá un segundo botón "📖" del mismo tamaño que
-             el de escuchar, con href a ficha.html?id=<w.lexId>. Pendiente
-             de que subas las tandas/partes del léxico a Project Knowledge
-             para buscar el id real de cada palabra — ver mensaje del chat. */
           return React.createElement("div", { key: i, className: "word-row", style: { borderColor: c.border } },
             React.createElement("div", { className: "word-main" },
               React.createElement("div", { className: "word-ru", style: { color: c.text } }, highlightWord(w.cyrillic, selected)),
@@ -296,7 +291,12 @@ function App() {
               React.createElement("button", {
                 className: "word-btn btn", onClick: () => speakRu(w.cyrillic),
                 style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
-              }, "▶")
+              }, "▶"),
+              w.lexId && React.createElement("a", {
+                className: "word-btn btn", href: "ficha.html?id=" + w.lexId,
+                onClick: (e) => azNavigate(e, "ficha.html?id=" + w.lexId),
+                style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.gold, textDecoration: "none" }
+              }, "📖")
             )
           );
         })
