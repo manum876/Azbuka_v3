@@ -14,6 +14,7 @@
 <script src="preact.js"></script>
 <script src="data-lexicon.js"></script>
 <script src="data-verbos.js"></script>
+<script src="data-gramatica.js"></script>
 <script src="core.js"></script>
 <script src="progress.js"></script>
 <script src="shell.js"></script>
@@ -207,7 +208,11 @@ function TablaTiempo({ filas, columnas, valor }) {
 
 /* Ficha a pantalla completa con la explicación de una pregunta de rección. */
 function GuiaSheet({ grupo, texto, onClose }) {
-  const g = VERBOS_GUIA_RECCION[grupo];
+  const g = GRAMATICA_RECCION[grupo];
+  /* El resumen general del caso se muestra solo cuando el grupo es una
+     construcción (preposición + caso, dónde, adónde…); en los grupos
+     de caso solo (dativo, genitivo…) ya lo dice la explicación. */
+  const caso = g && g.caso && g.titulo !== (gramaticaCaso(g.caso) || {}).nombre ? gramaticaCaso(g.caso) : null;
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -218,9 +223,13 @@ function GuiaSheet({ grupo, texto, onClose }) {
     h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
     h("div", { className: "sheet-in" },
       h("div", { className: "sheet-kicker" }, "Rección"),
-      h("div", { className: "sheet-title" }, g.caso),
+      h("div", { className: "sheet-title" }, g.titulo),
       h("div", { className: "sheet-q" }, texto),
       h("div", { className: "sheet-text" }, g.explicacion),
+      /* Explicación general del caso: sale de data-gramatica.js, la
+         misma que muestra el módulo Casos. */
+      caso && h("div", { className: "section-lbl", style: { marginTop: 24 } }, "El " + caso.nombre.toLowerCase()),
+      caso && h("div", { className: "sheet-text" }, caso.resumen),
       h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Ejemplos"),
       g.ejemplos.map((ej, i) => h("div", { key: i, className: "ex" },
         h("div", { style: { flex: 1, minWidth: 0 } },
@@ -254,7 +263,7 @@ function FichaVerbo({ id, c }) {
   const pareja = selId ? formasDe(selId) : null;
 
   const governance = lex.comer && lex.comer[0] && lex.comer[0].Governance ? lex.comer[0].Governance : null;
-  const grupos = governance ? verbosReccion(governance) : [];
+  const grupos = governance ? gramaticaReccion(governance) : [];
 
   const subAsp = (f) => ASPECT_LABEL[f.lex.aspect] || "";
   const columnas = [{ titulo: v.ru, sub: subAsp(base), formas: base }];

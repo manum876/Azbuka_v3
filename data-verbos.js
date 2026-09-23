@@ -46,11 +46,10 @@
    palabra lleva ё (ё siempre es tónica). Para la voz (TTS) la página
    puede enviar la forma tal cual o sin el acento.
 
-   GUÍA DE RECCIÓN (VERBOS_GUIA_RECCION)
-   Explicación genérica de las preguntas que trae el campo Governance
-   del léxico (кого? что?, кому? чему?…). verbosReccion(texto) divide
-   ese texto en grupos { grupo, texto } para mostrar cada grupo como
-   un botón que abre su explicación. El léxico no se modifica.
+   GUÍA DE RECCIÓN
+   Ya no vive acá: se movió a data-gramatica.js (GRAMATICA_RECCION y
+   gramaticaReccion), junto con las explicaciones de los casos, para
+   que Verbos, Casos y las unidades lean la misma fuente.
 
    FUENTES Y LICENCIA
    Formas tomadas de los datos de OpenRussian.org (Badestrand/
@@ -60,7 +59,7 @@
    corrigió a mano (ver INFORME_DATA_VERBOS.md). Por derivar de datos
    CC BY-SA, las tablas de conjugación de este archivo se distribuyen
    bajo CC BY-SA 4.0 (ver LICENSE-CONTENT). Las notas y la guía de
-   rección son redacción propia de AZBUKA.
+   rección (ahora en data-gramatica.js) son redacción propia de AZBUKA.
    ============================================================ */
 
 const VERBOS = {
@@ -6717,159 +6716,9 @@ const VERBOS = {
    nota:"Con el sentido «cosechar» se conjuga пожну́, пожнёшь… (el de «estrechar la mano», CMR-02303, es пожму́, пожмёшь…)." }
 };
 
-/* ── GUÍA DE RECCIÓN ─────────────────────────────────────────
-   Una entrada por grupo. "preguntas" = cómo aparece en el léxico. */
-const VERBOS_GUIA_RECCION = {
- acusativo: { caso:"Acusativo", preguntas:"кого? что?", explicacion:"Es el complemento directo: la cosa o la persona que recibe la acción («¿qué?» o «¿a quién?»).",
-   ejemplos:[["Я читаю книгу.","Leo un libro."],["Я вижу маму.","Veo a mamá."]] },
- genitivo: { caso:"Genitivo", preguntas:"кого? чего?", explicacion:"Algunos verbos piden genitivo en vez de acusativo: sobre todo los de miedo, espera, búsqueda o falta.",
-   ejemplos:[["Я жду ответа.","Espero una respuesta."],["Он боится темноты.","Le tiene miedo a la oscuridad."]] },
- dativo: { caso:"Dativo", preguntas:"кому? чему?", explicacion:"Indica a quién va dirigida la acción: el destinatario (en español suele llevar «a» o «le»).",
-   ejemplos:[["Я звоню маме.","Llamo a mamá."],["Он помогает другу.","Ayuda a su amigo."]] },
- instrumental: { caso:"Instrumental", preguntas:"кем? чем?", explicacion:"Indica con qué se hace algo, o en qué se convierte o de qué trabaja alguien.",
-   ejemplos:[["Я пишу ручкой.","Escribo con birome."],["Он работает врачом.","Trabaja de médico."]] },
- o_prep: { caso:"о + preposicional", preguntas:"о ком? о чём?", explicacion:"Indica de qué o de quién se habla, se piensa o se sabe algo.",
-   ejemplos:[["Мы говорим о фильме.","Hablamos de la película."],["Я думаю о тебе.","Pienso en vos."]] },
- na_acc: { caso:"на + acusativo", preguntas:"на кого? на что?", explicacion:"Indica hacia qué o hacia quién se dirige la acción (mirar a, contar con, enojarse con…).",
-   ejemplos:[["Я смотрю на небо.","Miro el cielo."],["Я надеюсь на тебя.","Cuento con vos."]] },
- na_prep: { caso:"на + preposicional", preguntas:"на ком? на чём?", explicacion:"Indica sobre qué o en qué se apoya la acción. También se usa para tocar instrumentos y para casarse (un hombre).",
-   ejemplos:[["Он играет на гитаре.","Toca la guitarra."],["Он женился на Ане.","Se casó con Ana."]] },
- v_acc: { caso:"в + acusativo", preguntas:"в кого? во что?", explicacion:"Indica hacia adentro de qué va la acción, o en qué se cree. También se usa para jugar juegos y deportes.",
-   ejemplos:[["Я верю в тебя.","Creo en vos."],["Дети играют в футбол.","Los chicos juegan al fútbol."]] },
- v_prep: { caso:"в + preposicional", preguntas:"в ком? в чём?", explicacion:"Indica en qué terreno o asunto ocurre la acción (dudar de algo, ayudar en algo…).",
-   ejemplos:[["Я сомневаюсь в этом.","Lo dudo."],["Она помогает мне в работе.","Me ayuda en el trabajo."]] },
- s_instr: { caso:"с + instrumental", preguntas:"с кем? с чем?", explicacion:"Indica compañía: con quién o con qué.",
-   ejemplos:[["Я говорю с другом.","Hablo con un amigo."],["Мы встретились с друзьями.","Nos encontramos con amigos."]] },
- s_gen: { caso:"с + genitivo", preguntas:"с кого? с чего?", explicacion:"Indica el punto de partida: desde dónde, a partir de qué, o de arriba de qué se saca algo.",
-   ejemplos:[["Начнём с начала.","Empecemos desde el principio."],["Он вернулся с работы.","Volvió del trabajo."]] },
- k_dat: { caso:"к + dativo", preguntas:"к кому? к чему?", explicacion:"Indica hacia quién o hacia qué se va o se acerca uno (también en sentido figurado).",
-   ejemplos:[["Я иду к врачу.","Voy al médico."],["Мы привыкли к холоду.","Nos acostumbramos al frío."]] },
- ot_gen: { caso:"от + genitivo", preguntas:"от кого? от чего?", explicacion:"Indica de quién o de qué viene algo, o de qué se aleja, se protege o se cansa uno.",
-   ejemplos:[["Я получил письмо от мамы.","Recibí una carta de mamá."],["Он устал от работы.","Se cansó del trabajo."]] },
- za_acc: { caso:"за + acusativo", preguntas:"за кого? за что?", explicacion:"Indica el motivo o a cambio de qué: agradecer por, pagar por, votar por.",
-   ejemplos:[["Я благодарю тебя за помощь.","Te agradezco la ayuda."],["Я плачу за кофе.","Pago el café."]] },
- za_instr: { caso:"за + instrumental", preguntas:"за кем? за чем?", explicacion:"Indica lo que se sigue, se vigila o se va a buscar.",
-   ejemplos:[["Я иду за хлебом.","Voy a buscar pan."],["Следи за ребёнком.","Vigilá al nene."]] },
- u_gen: { caso:"у + genitivo", preguntas:"у кого? у чего?", explicacion:"Indica de quién se recibe algo: a quién se le pregunta, se le pide o de quién se aprende.",
-   ejemplos:[["Я спросил у учителя.","Le pregunté al profesor."],["Я учусь у мамы.","Aprendo de mamá."]] },
- nad_instr: { caso:"над + instrumental", preguntas:"над кем? над чем?", explicacion:"Indica sobre qué se trabaja o se piensa, o de quién uno se ríe.",
-   ejemplos:[["Он работает над проектом.","Trabaja en un proyecto."],["Не смейся надо мной.","No te rías de mí."]] },
- do_gen: { caso:"до + genitivo", preguntas:"до кого? до чего?", explicacion:"Indica el límite: hasta dónde o hasta quién se llega.",
-   ejemplos:[["Мы дошли до парка.","Llegamos hasta el parque."],["Я не могу дозвониться до него.","No logro comunicarme con él."]] },
- iz_gen: { caso:"из + genitivo", preguntas:"из кого? из чего?", explicacion:"Indica de adentro de dónde sale algo, o de qué está hecho.",
-   ejemplos:[["Он вышел из дома.","Salió de casa."],["Суп делают из овощей.","La sopa se hace con verduras."]] },
- po_dat: { caso:"по + dativo", preguntas:"по кому? по чему?", explicacion:"Indica por dónde se mueve uno, o a quién se extraña.",
-   ejemplos:[["Я скучаю по тебе.","Te extraño."],["Он гуляет по парку.","Pasea por el parque."]] },
- mimo_gen: { caso:"мимо + genitivo", preguntas:"мимо кого? мимо чего?", explicacion:"Indica que se pasa por al lado de algo o de alguien, sin detenerse.",
-   ejemplos:[["Мы прошли мимо магазина.","Pasamos por al lado del negocio."]] },
- ob_acc: { caso:"о (обо) + acusativo", preguntas:"обо что?", explicacion:"Indica contra qué se choca o se golpea algo.",
-   ejemplos:[["Он ударился головой о дверь.","Se golpeó la cabeza contra la puerta."]] },
- cherez_acc: { caso:"через + acusativo", preguntas:"через что?", explicacion:"Indica que se atraviesa algo: a través de, de un lado al otro.",
-   ejemplos:[["Мы перешли через улицу.","Cruzamos la calle."]] },
- protiv_gen: { caso:"против + genitivo", preguntas:"против кого? против чего?", explicacion:"Indica oposición: contra quién o contra qué.",
-   ejemplos:[["Они играют против нас.","Juegan contra nosotros."]] },
- bez_gen: { caso:"без + genitivo", preguntas:"без кого? без чего?", explicacion:"Indica ausencia: sin quién o sin qué.",
-   ejemplos:[["Я не могу жить без музыки.","No puedo vivir sin música."]] },
- infinitivo: { caso:"+ infinitivo", preguntas:"делать что? сделать что?", explicacion:"El verbo va seguido de otro verbo en infinitivo. «делать что?» admite cualquier aspecto; «сделать что?» pide un infinitivo perfectivo.",
-   ejemplos:[["Я люблю читать.","Me encanta leer."],["Я успел закончить работу.","Llegué a terminar el trabajo."]] },
- donde: { caso:"Lugar (dónde)", preguntas:"где?", explicacion:"Indica dónde ocurre la acción, sin movimiento. Se construye con в / на + preposicional.",
-   ejemplos:[["Я живу в Москве.","Vivo en Moscú."],["Книга лежит на столе.","El libro está sobre la mesa."]] },
- adonde: { caso:"Dirección (adónde)", preguntas:"куда?", explicacion:"Indica hacia dónde va el movimiento. Se construye con в / на + acusativo (o к + dativo si es una persona).",
-   ejemplos:[["Я иду в школу.","Voy a la escuela."],["Положи книгу на стол.","Poné el libro en la mesa."]] },
- dedonde: { caso:"Origen (de dónde)", preguntas:"откуда?", explicacion:"Indica de dónde viene el movimiento. Se construye con из / с / от + genitivo.",
-   ejemplos:[["Мы приехали из Испании.","Llegamos de España."],["Он вернулся с работы.","Volvió del trabajo."]] },
- modo: { caso:"Modo (cómo)", preguntas:"как?", explicacion:"El verbo va acompañado de un adverbio o una expresión que dice cómo.",
-   ejemplos:[["Я чувствую себя хорошо.","Me siento bien."]] },
- cantidad: { caso:"Cantidad (cuánto)", preguntas:"сколько? сколько времени? на сколько?", explicacion:"El verbo va acompañado de una cantidad: un precio, un tiempo o una diferencia.",
-   ejemplos:[["Книга стоит сто рублей.","El libro cuesta cien rublos."],["Цены выросли на десять процентов.","Los precios subieron un diez por ciento."]] },
- sebya: { caso:"Reflexivo себя", preguntas:"себя", explicacion:"El verbo va con el pronombre себя («a sí mismo»), que se declina según el caso.",
-   ejemplos:[["Он любит только себя.","Solo se quiere a sí mismo."]] }
-};
-
-/* Pregunta → grupo. "кого" no está porque depende de su vecina:
-   junto a "чего" es genitivo; en cualquier otro caso, acusativo. */
-const VERBOS_RECCION_TOKENS = {
- "без кого":"bez_gen",
- "без чего":"bez_gen",
- "в кого":"v_acc",
- "в ком":"v_prep",
- "в чём":"v_prep",
- "во что":"v_acc",
- "где":"donde",
- "делать что":"infinitivo",
- "до кого":"do_gen",
- "до чего":"do_gen",
- "за кем":"za_instr",
- "за кого":"za_acc",
- "за чем":"za_instr",
- "за что":"za_acc",
- "из кого":"iz_gen",
- "из чего":"iz_gen",
- "к кому":"k_dat",
- "к чему":"k_dat",
- "как":"modo",
- "кем":"instrumental",
- "кому":"dativo",
- "куда":"adonde",
- "мимо кого":"mimo_gen",
- "мимо чего":"mimo_gen",
- "на кого":"na_acc",
- "на ком":"na_prep",
- "на сколько":"cantidad",
- "на что":"na_acc",
- "на чём":"na_prep",
- "над кем":"nad_instr",
- "над чем":"nad_instr",
- "о ком":"o_prep",
- "о чём":"o_prep",
- "обо что":"ob_acc",
- "от кого":"ot_gen",
- "от чего":"ot_gen",
- "откуда":"dedonde",
- "по кому":"po_dat",
- "по чему":"po_dat",
- "против кого":"protiv_gen",
- "против чего":"protiv_gen",
- "с кем":"s_instr",
- "с кого":"s_gen",
- "с чего":"s_gen",
- "с чем":"s_instr",
- "сделать что":"infinitivo",
- "себя":"sebya",
- "сколько":"cantidad",
- "сколько времени":"cantidad",
- "у кого":"u_gen",
- "у чего":"u_gen",
- "чего":"genitivo",
- "чем":"instrumental",
- "чему":"dativo",
- "через что":"cherez_acc",
- "что":"acusativo"
-};
-
 /* Devuelve la conjugación de un verbo por ID, o null. */
 function verboById(id) {
   return (id && VERBOS[id]) || null;
 }
 
-/* Divide el texto Governance del léxico ("кого? что? кому?") en
-   grupos consecutivos: [{ grupo: "acusativo", texto: "кого? что?" },
-   { grupo: "dativo", texto: "кому?" }]. grupo = null si la pregunta
-   no está en la guía (no debería pasar: está verificado). */
-function verbosReccion(gov) {
-  const t = (gov || "").split("?").map(function (s) { return s.trim(); }).filter(Boolean);
-  const out = [];
-  t.forEach(function (tok, i) {
-    let g;
-    if (tok === "кого") g = (t[i - 1] === "чего" || t[i + 1] === "чего") ? "genitivo" : "acusativo";
-    else g = VERBOS_RECCION_TOKENS[tok] || null;
-    const txt = tok === "себя" ? tok : tok + "?";
-    const last = out[out.length - 1];
-    if (last && g && last.grupo === g) last.texto += " " + txt;
-    else out.push({ grupo: g, texto: txt });
-  });
-  return out;
-}
-
 window.verboById = verboById;
-window.verbosReccion = verbosReccion;
