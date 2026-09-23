@@ -55,20 +55,30 @@ const AZ_MODULES = [
    Segundo parámetro opcional "pos": filtra por posNormalized
    ("verbo", "sustantivo"…) ANTES de cortar a 40 resultados — así un
    módulo busca solo en su categoría: azSearchLexicon(q, "verbo").
+   También acepta una lista: azSearchLexicon(q, ["sustantivo", "adjetivo"])
+   (Casos busca en todas las categorías que se declinan).
+   La búsqueda trata е y ё como iguales. Cada resultado trae "acento"
+   (la palabra con su marca de acento) para mostrarla en pantalla.
 
      <script src="data-lexicon.js"></script>
      <script src="core.js"></script>
 
    No hace falta ningún otro data-*.js — Azbuka_v3 ya no reparte
    el vocabulario por módulo, todo vive acá. */
+/* е y ё cuentan como la misma letra al buscar: así «еще» encuentra
+   «ещё». También ignora la marca de acento si alguien la pega. */
+function azNormRu(s) {
+  return (s || "").replace(/ё/g, "е").replace(/Ё/g, "Е").replace(/\u0301/g, "");
+}
 function azSearchLexicon(query, pos) {
   if (typeof LEXICON_COMER === "undefined") return [];
-  const q = (query || "").trim().toLowerCase();
+  const q = azNormRu((query || "").trim().toLowerCase());
   if (!q) return [];
+  const posOk = Array.isArray(pos) ? (p => pos.includes(p)) : (p => !pos || p === pos);
   return LEXICON_COMER
     .filter(e =>
-      (!pos || e.posNormalized === pos) && (
-        e.ru.toLowerCase().includes(q) ||
+      posOk(e.posNormalized) && (
+        azNormRu(e.ru.toLowerCase()).includes(q) ||
         (e.senses || []).some(s => s.es.toLowerCase().includes(q))
       )
     )
@@ -76,6 +86,7 @@ function azSearchLexicon(query, pos) {
     .map(e => ({
       id: e.id,
       ru: e.ru,
+      acento: e.acento || e.ru,
       es: (e.senses || []).map(s => s.es).join(" · "),
       pos: e.posNormalized,
       gender: e.gender || null,

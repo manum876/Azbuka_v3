@@ -35,12 +35,12 @@
 const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
 
 const POS_LABEL = {
-  sustantivo: "Sustantivo", verbo: "Verbo", adjetivo: "Adjetivo", pronombre: "Pronombre",
+  sustantivo: "Sustantivo", verbo: "Verbo", adjetivo: "Adjetivo", pronombre: "Pronombre", determinante: "Determinante",
   numeral: "Numeral", adverbio: "Adverbio", "preposición": "Preposición", "conjunción": "Conjunción",
   "partícula": "Partícula", "interjección": "Interjección", otro: "Otro"
 };
 /* Categorías que se declinan: son las que tienen tabla en Casos. */
-const POS_DECLINABLE = ["sustantivo", "adjetivo", "pronombre", "numeral"];
+const POS_DECLINABLE = ["sustantivo", "adjetivo", "pronombre", "determinante", "numeral"];
 const GENDER_LABEL = { m: "masculino", f: "femenino", n: "neutro" };
 /* El léxico usa "sí" / "no". "yes" se acepta solo mientras quede algún dato viejo. */
 const ANIMATE_LABEL = { "sí": "Animado", yes: "Animado", no: "Inanimado" };
@@ -204,7 +204,7 @@ function App() {
               onClick: (e) => azNavigate(e, r.href),
               style: { display: "flex", justifyContent: "space-between", gap: 10, padding: "10px 14px", textDecoration: "none", borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
             },
-              React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: 14 } }, r.ru),
+              React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: 14 } }, r.acento || r.ru),
               React.createElement("span", { style: { color: c.textMuted, fontSize: 12.5, textAlign: "right" } }, r.es)
             ))
           : React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados")
@@ -249,7 +249,7 @@ function App() {
 
         /* ── HERO: título, transliteración, traducción y categoría ── */
         React.createElement("div", { className: "hero" },
-          React.createElement("div", { className: "ru" }, entry.ru),
+          React.createElement("div", { className: "ru" }, entry.acento || entry.ru),
           entry.translit && React.createElement("div", { className: "translit" }, entry.translit),
           entry.ipa && React.createElement("div", { className: "ipa" }, "IPA: /" + entry.ipa + "/"),
           React.createElement("span", { className: "pos-badge" }, posBadgeText),
@@ -287,7 +287,7 @@ function App() {
                     React.createElement("a", {
                       href: "ficha.html?id=" + p.id,
                       onClick: (e) => azNavigate(e, "ficha.html?id=" + p.id)
-                    }, p.entry.ru)
+                    }, p.entry.acento || p.entry.ru)
                   ))
                 )
             );

@@ -114,7 +114,7 @@ const ALPHABET=[{
     translit: "vsyo",
     meaning: "todo",
     note: "В ante consonante, mantiene fricción",
-    lexId: "CMR-00035"
+    lexId: "CMR-05455"
   }, {
     cyrillic: "вечер",
     translit: "vecher",
@@ -280,7 +280,7 @@ const ALPHABET=[{
     translit: "vsyo",
     meaning: "todo",
     note: "Ё siempre tónica aquí",
-    lexId: "CMR-00035"
+    lexId: "CMR-05455"
   }, {
     cyrillic: "мёд",
     translit: "myod",
