@@ -28,7 +28,7 @@ const ALPHABET=[{
     translit: "apteka",
     meaning: "farmacia",
     note: "А inicial, sonido abierto y claro",
-    lexId: "CMR-05003"
+    lexId: "CMR-05404"
   }, {
     cyrillic: "август",
     translit: "avgust",
@@ -40,13 +40,13 @@ const ALPHABET=[{
     translit: "arbuz",
     meaning: "sandía",
     note: "А inicial enfatizada",
-    lexId: "CMR-05004"
+    lexId: "CMR-05405"
   }, {
     cyrillic: "алфавит",
     translit: "alfavit",
     meaning: "alfabeto",
     note: "А aparece dos veces; la primera es tónica",
-    lexId: "CMR-05005"
+    lexId: "CMR-05406"
   }]
 }, {
   id: 2,
@@ -68,7 +68,7 @@ const ALPHABET=[{
     translit: "banan",
     meaning: "banana",
     note: "Б inicial fuerte y clara",
-    lexId: "CMR-05006"
+    lexId: "CMR-05407"
   }, {
     cyrillic: "брат",
     translit: "brat",
@@ -268,7 +268,7 @@ const ALPHABET=[{
     translit: "yozh",
     meaning: "erizo",
     note: "Ё inicial siempre acentuada",
-    lexId: "CMR-05007"
+    lexId: "CMR-05408"
   }, {
     cyrillic: "её",
     translit: "yeyo",
@@ -286,7 +286,7 @@ const ALPHABET=[{
     translit: "myod",
     meaning: "miel",
     note: "Ё palataliza la 'м' anterior",
-    lexId: "CMR-05008"
+    lexId: "CMR-05409"
   }]
 }, {
   id: 8,
@@ -428,7 +428,7 @@ const ALPHABET=[{
     translit: "yogurt",
     meaning: "yogur",
     note: "Й inicial semivocal ante 'о'",
-    lexId: "CMR-05009"
+    lexId: "CMR-05410"
   }, {
     cyrillic: "чай",
     translit: "chay",
@@ -1068,7 +1068,7 @@ const ALPHABET=[{
     translit: "shchi",
     meaning: "sopa de col (plato típico)",
     note: "Щ inicial, suave palatal",
-    lexId: "CMR-05010"
+    lexId: "CMR-05411"
   }, {
     cyrillic: "щека",
     translit: "shcheka",
@@ -1080,7 +1080,7 @@ const ALPHABET=[{
     translit: "borshch",
     meaning: "borsch (sopa)",
     note: "Щ al final de palabra",
-    lexId: "CMR-05011"
+    lexId: "CMR-05412"
   }, {
     cyrillic: "овощи",
     translit: "ovoshchi",
@@ -1166,7 +1166,7 @@ const ALPHABET=[{
     translit: "mylo",
     meaning: "jabón",
     note: "Ы tónica, bien diferenciada de 'и'",
-    lexId: "CMR-05012"
+    lexId: "CMR-05413"
   }]
 }, {
   id: 30,
@@ -1240,7 +1240,7 @@ const ALPHABET=[{
     translit: "ekho",
     meaning: "eco",
     note: "Э inicial, préstamo del griego",
-    lexId: "CMR-05013"
+    lexId: "CMR-05414"
   }, {
     cyrillic: "поэт",
     translit: "poet",
@@ -1274,7 +1274,7 @@ const ALPHABET=[{
     translit: "lyudi",
     meaning: "gente / personas",
     note: "Ю palataliza la 'л'",
-    lexId: "CMR-05014"
+    lexId: "CMR-05415"
   }, {
     cyrillic: "любовь",
     translit: "lyubov'",

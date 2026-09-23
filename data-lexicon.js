@@ -1,32 +1,29 @@
 /* ============================================================
-   DATA-LEXICON-COMER.JS — Léxico central AZBUKA (Comer + FreeDict + enriquecimiento aspectual)
-   Total de entradas: 5347. Ordenado por ID.
+   DATA-LEXICON.JS — Léxico central AZBUKA (Comer + FreeDict + enriquecimiento aspectual)
+   Total de entradas: 5348. Ordenado por ID.
 
-   NUEVO: para los 17 verbos que tenían más de una pareja aspectual (polisemia
-   real o sinónimos compartiendo pareja), el array "senses" ahora tiene un
-   objeto por cada sentido diferenciado, y CADA sentido lleva su propio
-   campo "aspectualPartner" (array de IDs CMR) — así queda explícito cuál
-   pareja corresponde a cuál acepción. El ID de CMR funciona como el código
-   estable de enlace: no depende de la posición en el array, así que
-   sobrevive a reordenamientos o ediciones futuras. El campo
-   "aspectualPartner" de nivel superior (fuera de senses) se mantiene
-   intacto como la unión de todas las parejas, sin cambios, por
-   compatibilidad con el código actual (verbos.html/core.js todavía NO
-   están migrados para leer el nuevo campo a nivel de sense — pendiente).
-   Grupos afectados (52 verbos en total): говорить, считать, читать,
-   кричать, молчать, хватать, падать, сохранить(se), учить, оценить,
-   подождать, бросать, наступать, разделить/разделять/делить,
-   воспользоваться, засыпать, y todas sus parejas.
-
-   Historial previo:
-   - 4.929 lemas originales del Comer 5000 + CMR-05001/05002 (homógrafos)
-   - CMR-05003 a CMR-05403 (401 entradas): parejas aspectuales agregadas
-   - CMR-05404 a CMR-05415 (12 entradas): vocabulario del módulo Alfabeto
-     importado desde Azbuka_v3/data-lexicon.js
-   - CMR-05416 a CMR-05418: забивать, выучить, посчитать (auditoría cierre)
-   - 23/09/2026: traducciones revisadas en 10 verbos (verbos de movimiento
-     идти/ходить/ехать/ездить/нести/носить con matiz de dirección; любить,
-     смотреть, слышать, писать) y definición de ходить redactada de nuevo.
+   Correcciones aplicadas tras informe de auditoría (23/09/2026):
+   - найти: eliminado duplicado CMR-05376 (mal definido como "buscar");
+     CMR-00222 queda como única entrada, con pareja doble
+     [находить, искать]. искать actualizado para apuntar acá.
+   - пригрозить: eliminado duplicado CMR-05033; CMR-05016 queda como
+     única entrada, con pareja doble [грозить, угрожать]. угрожать
+     actualizado para apuntar acá.
+   - использовать: aspect corregido a "biaspectual" (antes imperfectivo
+     por error); ya no enlaza con воспользоваться (el link era por
+     parecido de significado, no por aspecto real).
+   - воспользоваться: pareja corregida a solo [пользоваться].
+   - 9 verbos corregidos a aspect:"biaspectual" (antes tenían aspect
+     imperfectivo/perfectivo con marca SIN_PAREJA:BIASPECTUAL
+     inconsistente): жениться, велеть, реализовать, исследовать,
+     контролировать, миновать, гарантировать, ранить, приветствовать.
+   - CMR-05419 проконтролировать (nueva): pareja perfectiva real de uso
+     común para контролировать.
+   - CMR-05420 реализовывать (nueva): pareja imperfectiva de uso técnico/
+     empresarial para реализовать.
+   - CMR-05421 отрезать imperfectivo (nueva, отреза́ть): homógrafo por
+     acento de CMR-03911 (отре́зать, perfectivo) — mismo tratamiento que
+     почитать/venerar (CMR-05002).
 
    Fuentes:
    - Comer, K. (Comer 5000). Portland State University, PDXScholar.
@@ -37,7 +34,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 5347
+  totalEntries: 5348
 };
 const LEXICON_COMER = [
  {
@@ -13613,7 +13610,11 @@ const LEXICON_COMER = [
    {
     "es": "encontrar",
     "definitionEs": "Dar con algo o alguien que se buscaba (aspecto perfectivo de 'находить').",
-    "source": "redactado (basado en FreeDict)"
+    "source": "redactado (basado en FreeDict)",
+    "aspectualPartner": [
+     "CMR-01365",
+     "CMR-00523"
+    ]
    }
   ],
   "learningStatus": null,
@@ -13661,7 +13662,8 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "CMR-01365"
+   "CMR-01365",
+   "CMR-00523"
   ]
  },
  {
@@ -25730,10 +25732,7 @@ const LEXICON_COMER = [
    {
     "es": "usar, utilizar",
     "definitionEs": "Emplear algo para un fin.",
-    "source": "redactado (basado en FreeDict)",
-    "aspectualPartner": [
-     "CMR-02791"
-    ]
+    "source": "redactado (basado en FreeDict)"
    }
   ],
   "learningStatus": null,
@@ -25779,9 +25778,9 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "freedictRuEs": "использовать"
   },
-  "aspect": "imperfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
-   "CMR-02791"
+   "SIN_PAREJA:BIASPECTUAL"
   ]
  },
  {
@@ -31701,7 +31700,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "CMR-05376"
+   "CMR-00222"
   ]
  },
  {
@@ -138985,7 +138984,7 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "freedictRuEs": "жениться"
   },
-  "aspect": "imperfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
    "SIN_PAREJA:BIASPECTUAL"
   ]
@@ -139640,7 +139639,7 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "freedictRuEs": "велеть"
   },
-  "aspect": "imperfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
    "SIN_PAREJA:BIASPECTUAL"
   ]
@@ -152946,9 +152945,9 @@ const LEXICON_COMER = [
    }
   ],
   "sourceRefs": {},
-  "aspect": "perfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
-   "SIN_PAREJA:BIASPECTUAL"
+   "CMR-05420"
   ]
  },
  {
@@ -166388,8 +166387,7 @@ const LEXICON_COMER = [
     "definitionEs": "Usar algo en beneficio propio (aspecto perfectivo de 'пользоваться').",
     "source": "redactado",
     "aspectualPartner": [
-     "CMR-00999",
-     "CMR-00422"
+     "CMR-00999"
     ]
    }
   ],
@@ -166438,8 +166436,7 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "CMR-00999",
-   "CMR-00422"
+   "CMR-00999"
   ]
  },
  {
@@ -172590,7 +172587,7 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "freedictRuEs": "исследовать"
   },
-  "aspect": "imperfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
    "SIN_PAREJA:BIASPECTUAL"
   ]
@@ -173825,9 +173822,9 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "freedictRuEs": "контролировать"
   },
-  "aspect": "imperfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
-   "SIN_PAREJA:BIASPECTUAL"
+   "CMR-05419"
   ]
  },
  {
@@ -227750,7 +227747,7 @@ const LEXICON_COMER = [
    }
   ],
   "sourceRefs": {},
-  "aspect": "perfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
    "SIN_PAREJA:BIASPECTUAL"
   ]
@@ -232531,7 +232528,10 @@ const LEXICON_COMER = [
    {
     "es": "cortar (separando)",
     "definitionEs": "Separar algo cortándolo (aspecto perfectivo de 'отрезать/отрезать').",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05421"
+    ]
    }
   ],
   "learningStatus": null,
@@ -232577,7 +232577,7 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:HOMOGRAFO_PENDIENTE"
+   "CMR-05421"
   ]
  },
  {
@@ -234189,7 +234189,7 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "freedictRuEs": null
   },
-  "aspect": "imperfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
    "SIN_PAREJA:BIASPECTUAL"
   ]
@@ -236041,7 +236041,7 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "freedictRuEs": "ранить"
   },
-  "aspect": "imperfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
    "SIN_PAREJA:BIASPECTUAL"
   ]
@@ -249092,7 +249092,7 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "freedictRuEs": null
   },
-  "aspect": "imperfectivo",
+  "aspect": "biaspectual",
   "aspectualPartner": [
    "SIN_PAREJA:BIASPECTUAL"
   ]
@@ -269396,7 +269396,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "CMR-05033"
+   "CMR-05016"
   ]
  },
  {
@@ -297454,7 +297454,11 @@ const LEXICON_COMER = [
    {
     "es": "amenazar (versión perfectiva)",
     "definitionEs": "Versión perfectiva de \"amenazar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "source": "manual",
+    "aspectualPartner": [
+     "CMR-03146",
+     "CMR-04538"
+    ]
    }
   ],
   "learningStatus": null,
@@ -297502,7 +297506,8 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "CMR-03146"
+   "CMR-03146",
+   "CMR-04538"
   ]
  },
  {
@@ -298479,67 +298484,6 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-04516"
-  ]
- },
- {
-  "id": "CMR-05033",
-  "ru": "пригрозить",
-  "posNormalized": "verbo",
-  "translit": "prigrʌʑIt",
-  "ipa": "prʲɪɡrʌʑʲˈitʲ",
-  "senses": [
-   {
-    "es": "amenazar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"amenazar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
-   }
-  ],
-  "learningStatus": null,
-  "introducedIn": [],
-  "appearsIn": [],
-  "comer": [
-   {
-    "ID1": "",
-    "Rank": "",
-    "Lemma": "пригрозить",
-    "POS": "v",
-    "MultipleEntry": "",
-    "Frequency": "",
-    "Fiction 1990-2000": "",
-    "Journalism 1990-2000": "",
-    "Length": "10",
-    "International": "",
-    "Inter_Derived": "",
-    "InterPossible": "",
-    "Compound": "",
-    "Calque": "",
-    "Prefix1": "",
-    "Prefix2": "",
-    "Root": "гроз",
-    "Suffix1": "ить",
-    "Suffix2": "",
-    "WordFamily": "",
-    "Member1": "",
-    "Member2": "",
-    "Member3": "",
-    "Member4": "",
-    "AdjAdvPair": "",
-    "AspectPair": "",
-    "WordFamilyNumber": "113",
-    "Notes": "Agregada por necesidad de aspectualPartner — no forma parte de la lista de frecuencia Comer 5000 original.",
-    "FamilyBranch": "",
-    "BranchMemberNo": "",
-    "Governance": "кому? чему? кем? чем?",
-    "VOM": "",
-    "ReflexPairNumber": ""
-   }
-  ],
-  "sourceRefs": {
-   "aspectualPartnerEnrichment": true
-  },
-  "aspect": "perfectivo",
-  "aspectualPartner": [
-   "CMR-04538"
   ]
  },
  {
@@ -319405,67 +319349,6 @@ const LEXICON_COMER = [
   ]
  },
  {
-  "id": "CMR-05376",
-  "ru": "найти",
-  "posNormalized": "verbo",
-  "translit": "nʌytI",
-  "ipa": "nʌjtʲˈi",
-  "senses": [
-   {
-    "es": "buscar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"buscar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
-   }
-  ],
-  "learningStatus": null,
-  "introducedIn": [],
-  "appearsIn": [],
-  "comer": [
-   {
-    "ID1": "",
-    "Rank": "",
-    "Lemma": "найти",
-    "POS": "v",
-    "MultipleEntry": "",
-    "Frequency": "",
-    "Fiction 1990-2000": "",
-    "Journalism 1990-2000": "",
-    "Length": "5",
-    "International": "",
-    "Inter_Derived": "",
-    "InterPossible": "",
-    "Compound": "",
-    "Calque": "",
-    "Prefix1": "",
-    "Prefix2": "",
-    "Root": "иск",
-    "Suffix1": "",
-    "Suffix2": "",
-    "WordFamily": "",
-    "Member1": "",
-    "Member2": "",
-    "Member3": "",
-    "Member4": "",
-    "AdjAdvPair": "",
-    "AspectPair": "",
-    "WordFamilyNumber": "207",
-    "Notes": "Agregada por necesidad de aspectualPartner — no forma parte de la lista de frecuencia Comer 5000 original.",
-    "FamilyBranch": "",
-    "BranchMemberNo": "",
-    "Governance": "кого? что? кого? чего?",
-    "VOM": "",
-    "ReflexPairNumber": ""
-   }
-  ],
-  "sourceRefs": {
-   "aspectualPartnerEnrichment": true
-  },
-  "aspect": "perfectivo",
-  "aspectualPartner": [
-   "CMR-00523"
-  ]
- },
- {
   "id": "CMR-05377",
   "ru": "назваться",
   "posNormalized": "verbo",
@@ -322032,6 +321915,198 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00206"
+  ]
+ },
+ {
+  "id": "CMR-05419",
+  "ru": "проконтролировать",
+  "posNormalized": "verbo",
+  "translit": "prʌkʌntrʌɭIrʌvʌt",
+  "ipa": "prʌkʌntrʌɭʲˈirʌvʌtʲ",
+  "senses": [
+   {
+    "es": "controlar, supervisar (versión perfectiva)",
+    "definitionEs": "Supervisar o verificar algo de principio a fin — pareja perfectiva de \"контролировать\", que en general se usa como biaspectual pero admite esta forma perfectiva de uso común.",
+    "source": "manual",
+    "aspectualPartner": [
+     "CMR-02915"
+    ]
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "проконтролировать",
+    "POS": "v",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "17",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "про",
+    "Prefix2": "",
+    "Root": "контрол",
+    "Suffix1": "ировать",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada tras revisión de biaspectuales: контролировать es biaspectual pero проконтролировать existe y es de uso común como su perfectivo.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "aspectualPartnerEnrichment": true
+  },
+  "aspect": "perfectivo",
+  "aspectualPartner": [
+   "CMR-02915"
+  ]
+ },
+ {
+  "id": "CMR-05420",
+  "ru": "реализовывать",
+  "posNormalized": "verbo",
+  "translit": "riʌɭizOvyvʌt",
+  "ipa": "rʲɪʌɭʲɪzˈovyvʌtʲ",
+  "senses": [
+   {
+    "es": "realizar, llevar a cabo (versión imperfectiva)",
+    "definitionEs": "Llevar a cabo o poner en práctica algo, como proceso — pareja imperfectiva de \"реализовать\", que en general se usa como biaspectual pero admite esta forma imperfectiva en registro técnico/empresarial.",
+    "source": "manual",
+    "aspectualPartner": [
+     "CMR-02562"
+    ]
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "реализовывать",
+    "POS": "v",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "13",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "реализ",
+    "Suffix1": "овывать",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada tras revisión de biaspectuales: реализовать es biaspectual pero реализовывать existe y se usa en registro técnico/empresarial como su imperfectivo.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "aspectualPartnerEnrichment": true
+  },
+  "aspect": "imperfectivo",
+  "aspectualPartner": [
+   "CMR-02562"
+  ]
+ },
+ {
+  "id": "CMR-05421",
+  "ru": "отрезать",
+  "posNormalized": "verbo",
+  "translit": "ʌtrizAt",
+  "ipa": "ʌtrʲɪzˈɑtʲ",
+  "senses": [
+   {
+    "es": "cortar (separando, en proceso)",
+    "definitionEs": "Separar algo con un instrumento cortante, como acción en proceso o repetida (verbo homónimo de CMR-03911: misma escritura, distinta pronunciación — отрезать perfectivo se acentúa отре́зать, este imperfectivo se acentúa отреза́ть).",
+    "source": "manual",
+    "aspectualPartner": [
+     "CMR-03911"
+    ]
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "отрезать",
+    "POS": "v",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "от",
+    "Prefix2": "",
+    "Root": "рез",
+    "Suffix1": "ать",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Entrada adicional: homógrafo verbal por acento de CMR-03911 (отре́зать, perfectivo). Mismo lexema, distinto aspecto y acentuación — no se distingue en la escritura sin tilde.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "aspectualPartnerEnrichment": true
+  },
+  "aspect": "imperfectivo",
+  "aspectualPartner": [
+   "CMR-03911"
   ]
  }
 ];
