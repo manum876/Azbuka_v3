@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<title>Азбука · Verbos</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
+<script src="data-verbos.js"></script>
+<script src="core.js"></script>
+<script src="progress.js"></script>
+<script src="shell.js"></script>
+<script>
+/* ============================================================
+   VERBOS.HTML — Módulo Verbos: un filtro del léxico central.
+   ------------------------------------------------------------
+   · Sin ?id=  → portada: solo el buscador (busca únicamente
+     verbos, vía azSearchLexicon(q, "verbo")).
+   · Con ?id=CMR-xxxxx → ficha de verbo:
+       arriba, datos del léxico central (palabra, transliteración,
+       IPA, traducción, definición, rección);
+       abajo, conjugaciones de data-verbos.js, con selector de
+       pareja aspectual para comparar en paralelo.
+   Esta página NO guarda datos de palabras: todo sale de
+   data-lexicon.js (palabra) y data-verbos.js (formas). Ambos son
+   de solo lectura. Las únicas reglas que arma la página son las
+   que no tienen excepciones: futuro compuesto (буду + infinitivo).
+   ============================================================ */
+const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
+const h = React.createElement;
+
+const ASPECT_LABEL = { imperfectivo: "imperfectivo", perfectivo: "perfectivo", biaspectual: "biaspectual" };
+const ASPECT_SHORT = { imperfectivo: "imperf.", perfectivo: "perf.", biaspectual: "biasp." };
+
+/* Traducción de las marcas SIN_PAREJA del léxico a texto de interfaz. */
+const SIN_PAREJA_LABEL = {
+  "ESTATIVO": "Verbo de estado: no tiene pareja perfectiva.",
+  "INDETERMINADO": "Verbo de movimiento en varias direcciones: no forma pareja perfectiva simple.",
+  "BIASPECTUAL": "Biaspectual: la misma forma sirve como imperfectivo y como perfectivo.",
+  "PASIVO_IMPERSONAL": "Verbo pasivo o impersonal: no forma pareja aspectual.",
+  "IDIOMATICO": "De uso idiomático: no forma pareja aspectual.",
+  "YA_CUBIERTO_POR_OTRO_PAR": "Su pareja está registrada en otra entrada.",
+  "HOMOGRAFO_PENDIENTE": "Pareja aspectual pendiente de revisión.",
+  "BAJA_FRECUENCIA_EN_LEXICO": "Su pareja no está en el léxico."
+};
+
+const PERSONAS = [["я", "yo"], ["ты", "vos"], ["он / она", "él / ella"], ["мы", "nosotros"], ["вы", "ustedes"], ["они", "ellos"]];
+const PASADO_FILAS = [["m", "он", "masculino"], ["f", "она", "femenino"], ["n", "оно", "neutro"], ["pl", "они", "plural"]];
+const IMPER_FILAS = [["ty", "ты", "vos"], ["vy", "вы", "ustedes"]];
+
+function getVerbId() {
+  return new URLSearchParams(window.location.search).get("id");
+}
+
+/* Voz: se envía sin el acento gráfico (U+0301), que algunas voces
+   leen mal. */
+function speakRu(text) {
+  try {
+    if (!text || !("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.replace(/\u0301/g, ""));
+    u.lang = "ru-RU";
+    u.rate = 0.85;
+    window.speechSynthesis.speak(u);
+  } catch (err) {}
+}
+
+/* Todas las formas de un verbo, ya resueltas, por tiempo.
+   Devuelve { presente: [6|null], futuro: [6|null], pasado: {..}|null, imperativo: {..}|null } */
+function formasDe(id) {
+  const lex = lexComerById(id);
+  const v = verboById(id);
+  if (!lex || !v) return null;
+  let futuro = v.futuro || null;
+  const presente = v.presente || null;
+  /* Futuro compuesto: forma de быть + infinitivo, solo en las
+     personas que tienen presente (así un impersonal da solo 3.ª). */
+  if (!futuro && presente && lex.aspect !== "perfectivo") {
+    const budu = (verboById("CMR-00006") || {}).futuro || [];
+    futuro = presente.map((p, i) => (p && budu[i] ? budu[i] + " " + v.ru : null));
+  }
+  return { lex, v, presente, futuro, pasado: v.pasado || null, imperativo: v.imperativo || null };
+}
+
+/* Parejas reales (IDs con conjugación cargada), con la acepción a la
+   que corresponde cada una cuando el léxico la registra por sentido. */
+function parejasDe(lex) {
+  const ids = (lex.aspectualPartner || []).filter(p => p.indexOf("CMR-") === 0 && verboById(p) && lexComerById(p));
+  return ids.map(pid => {
+    const sense = (lex.senses || []).find(s => (s.aspectualPartner || []).indexOf(pid) >= 0);
+    return { id: pid, lex: lexComerById(pid), v: verboById(pid), sentido: sense && (lex.senses || []).length > 1 ? sense.es : null };
+  });
+}
+function sinParejaDe(lex) {
+  const s = (lex.aspectualPartner || []).find(p => p.indexOf("SIN_PAREJA:") === 0);
+  return s ? (SIN_PAREJA_LABEL[s.slice(11)] || null) : null;
+}
+
+function VerbosStyles({ c }) {
+  return h("style", null, `
+    .ficha{background:${c.card};border:1px solid ${c.border};border-radius:14px;overflow:hidden;}
+    .hero{background:linear-gradient(135deg,${c.bg2},${c.bg3});padding:20px 20px 16px;border-bottom:1px solid ${c.border};}
+    .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+    .ru{font-size:34px;font-weight:800;color:${c.gold};line-height:1.05;word-break:break-word;}
+    .translit{font-size:14px;color:${c.textSub};font-style:italic;margin-top:6px;}
+    .ipa{font-size:12px;color:${c.textMuted};margin-top:2px;}
+    .pos-badge{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:${c.gold}33;color:${c.gold};border:1px solid ${c.gold};border-radius:8px;padding:3px 10px;}
+    .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
+    .gov{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:12.5px;color:${c.textSub};}
+    .gov-chip{background:${c.bg2};border:1px solid ${c.border};color:${c.text};border-radius:8px;padding:5px 9px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+    .gov-chip span{color:${c.gold};margin-left:5px;font-weight:700;}
+    .fbody{padding:18px 20px;}
+    .section-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:22px 0 10px;}
+    .section-lbl:first-child{margin-top:0;}
+    .sense{background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+    .sense-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:${c.gold};color:${c.bg};font-size:11px;font-weight:800;border-radius:50%;margin-right:8px;}
+    .sense-es{font-size:16px;font-weight:700;color:${c.text};display:inline;}
+    .sense-def{font-size:13.5px;color:${c.textSub};margin-top:6px;margin-left:28px;}
+    .pair-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px;}
+    .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
+    .pair-note{font-size:12.5px;color:${c.textMuted};font-style:italic;margin-bottom:6px;}
+    .ctable{width:100%;border-collapse:collapse;table-layout:fixed;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;overflow:hidden;}
+    .ctable th{font-size:11px;font-weight:700;text-align:left;padding:9px 8px;border-bottom:1px solid ${c.border};vertical-align:bottom;}
+    .ctable th .th-ru{display:block;font-size:14px;color:${c.gold};font-weight:800;word-break:break-word;}
+    .ctable th a.th-ru{text-decoration:none;}
+    .ctable th .th-sub{display:block;font-size:10px;color:${c.textMuted};font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+    .ctable td{padding:8px;border-top:1px solid ${c.border};vertical-align:middle;}
+    .ctable tr:first-child td{border-top:none;}
+    .p-ru{font-size:13px;font-weight:700;color:${c.text};}
+    .p-es{font-size:10.5px;color:${c.textMuted};margin-top:1px;}
+    .f-cell{display:flex;align-items:center;gap:6px;cursor:pointer;min-height:28px;}
+    .f-ru{font-size:15px;font-weight:600;color:${c.text};word-break:break-word;line-height:1.25;flex:1;min-width:0;}
+    .f-play{font-size:10px;color:${c.gold};flex-shrink:0;}
+    .f-none{font-size:15px;color:${c.textMuted};}
+    .tnote{font-size:11.5px;color:${c.textMuted};margin-top:6px;}
+    .nota{background:${c.bg2};border:1px solid ${c.border};border-left:3px solid ${c.gold};border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.5;color:${c.textSub};}
+    .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:11px 14px;text-decoration:none;}
+    .res-ru{color:${c.text};font-weight:600;font-size:14.5px;}
+    .res-asp{color:${c.textMuted};font-size:11px;margin-left:6px;font-weight:500;}
+    .res-es{color:${c.textMuted};font-size:12.5px;text-align:right;}
+    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};overflow-y:auto;-webkit-overflow-scrolling:touch;animation:popIn .25s ease;}
+    .sheet-in{max-width:960px;margin:0 auto;padding:6vh 3vw 4vh;}
+    .sheet-x{position:fixed;top:6vh;right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
+    .sheet-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-bottom:8px;}
+    .sheet-title{font-size:26px;font-weight:800;color:${c.text};line-height:1.15;padding-right:48px;}
+    .sheet-q{margin-top:8px;font-size:15px;color:${c.gold};font-weight:700;}
+    .sheet-text{margin-top:18px;font-size:15px;line-height:1.6;color:${c.textSub};}
+    .ex{display:flex;align-items:center;gap:12px;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-bottom:8px;}
+    .ex-ru{font-size:16px;font-weight:700;color:${c.text};}
+    .ex-es{font-size:13px;color:${c.textMuted};margin-top:3px;}
+    @keyframes popIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
+  `);
+}
+
+/* Celda con una forma: toca para escuchar. */
+function Forma({ text }) {
+  if (!text) return h("span", { className: "f-none" }, "—");
+  return h("div", { className: "f-cell", onClick: () => speakRu(text) },
+    h("span", { className: "f-ru" }, text),
+    h("span", { className: "f-play" }, "▶")
+  );
+}
+
+/* Tabla de un tiempo: filas × columnas (verbo propio y, si hay, pareja). */
+function TablaTiempo({ filas, columnas, valor }) {
+  return h("table", { className: "ctable" },
+    h("colgroup", null,
+      h("col", { style: { width: columnas.length > 1 ? "22%" : "30%" } }),
+      columnas.map((col, i) => h("col", { key: i }))
+    ),
+    h("thead", null, h("tr", null,
+      h("th", null, ""),
+      columnas.map((col, i) => h("th", { key: i },
+        col.href
+          ? h("a", { className: "th-ru", href: col.href, onClick: (e) => azNavigate(e, col.href) }, col.titulo + " ›")
+          : h("span", { className: "th-ru" }, col.titulo),
+        h("span", { className: "th-sub" }, col.sub)
+      ))
+    )),
+    /* Filas sin ninguna forma en ninguna columna (impersonales,
+       pasivos) no se muestran. */
+    h("tbody", null, filas.filter(f => columnas.some(col => valor(col.formas, f))).map((f, r) => h("tr", { key: r },
+      h("td", null, h("div", { className: "p-ru" }, f[1]), h("div", { className: "p-es" }, f[2])),
+      columnas.map((col, i) => h("td", { key: i }, h(Forma, { text: valor(col.formas, f) })))
+    )))
+  );
+}
+
+/* Ficha a pantalla completa con la explicación de una pregunta de rección. */
+function GuiaSheet({ grupo, texto, onClose }) {
+  const g = VERBOS_GUIA_RECCION[grupo];
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+  if (!g) return null;
+  return h("div", { className: "sheet", role: "dialog", "aria-modal": "true" },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "sheet-kicker" }, "Rección"),
+      h("div", { className: "sheet-title" }, g.caso),
+      h("div", { className: "sheet-q" }, texto),
+      h("div", { className: "sheet-text" }, g.explicacion),
+      h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Ejemplos"),
+      g.ejemplos.map((ej, i) => h("div", { key: i, className: "ex" },
+        h("div", { style: { flex: 1, minWidth: 0 } },
+          h("div", { className: "ex-ru" }, ej[0]),
+          h("div", { className: "ex-es" }, ej[1])
+        ),
+        h("button", { className: "play", onClick: () => speakRu(ej[0]), "aria-label": "Escuchar" }, "▶")
+      ))
+    )
+  );
+}
+
+function FichaVerbo({ id, c }) {
+  const base = formasDe(id);
+  const [parejaSel, setParejaSel] = useState(undefined); // undefined = por defecto (primera)
+  const [guia, setGuia] = useState(null);
+
+  if (!base) {
+    const lex = id ? lexComerById(id) : null;
+    return h("div", { style: { textAlign: "center", padding: "10vh 0" } },
+      h("h1", { style: { fontSize: 18, marginBottom: 8, color: c.text } }, "Verbo no encontrado"),
+      h("p", { style: { fontSize: 13.5, color: c.textMuted } },
+        lex ? `"${lex.ru}" no es un verbo del léxico.` : `No hay ningún verbo con id "${id}".`)
+    );
+  }
+
+  const { lex, v } = base;
+  const parejas = parejasDe(lex);
+  const sinPareja = parejas.length ? null : sinParejaDe(lex);
+  const selId = parejaSel === undefined ? (parejas[0] ? parejas[0].id : null) : parejaSel;
+  const pareja = selId ? formasDe(selId) : null;
+
+  const governance = lex.comer && lex.comer[0] && lex.comer[0].Governance ? lex.comer[0].Governance : null;
+  const grupos = governance ? verbosReccion(governance) : [];
+
+  const subAsp = (f) => ASPECT_LABEL[f.lex.aspect] || "";
+  const columnas = [{ titulo: v.ru, sub: subAsp(base), formas: base }];
+  if (pareja) columnas.push({ titulo: pareja.v.ru, sub: subAsp(pareja), formas: pareja, href: "verbos.html?id=" + selId });
+
+  const hayPresente = columnas.some(col => col.formas.presente);
+  const hayFuturo = columnas.some(col => col.formas.futuro);
+  const hayPasado = columnas.some(col => col.formas.pasado);
+  const hayImper = columnas.some(col => col.formas.imperativo);
+  const tituloPresente = lex.aspect === "biaspectual" ? "Presente · futuro" : "Presente";
+  const sinPresente = columnas.filter(col => !col.formas.presente && col.formas.lex.aspect === "perfectivo").map(col => col.titulo);
+
+  return h("div", { style: { animation: "fadeIn 0.3s ease" } },
+    h("div", { className: "ficha" },
+
+      /* ── HERO: palabra, pronunciación, categoría, rección ── */
+      h("div", { className: "hero" },
+        h("div", { className: "hero-top" },
+          h("div", { style: { minWidth: 0 } },
+            h("div", { className: "ru" }, v.ru),
+            lex.translit && h("div", { className: "translit" }, lex.translit),
+            lex.ipa && h("div", { className: "ipa" }, "IPA: /" + lex.ipa + "/")
+          ),
+          h("button", { className: "play", onClick: () => speakRu(v.ru), "aria-label": "Escuchar" }, "▶")
+        ),
+        h("span", { className: "pos-badge" }, "Verbo" + (lex.aspect ? " · " + (ASPECT_LABEL[lex.aspect] || lex.aspect) : "")),
+        grupos.length > 0 && h("div", { className: "gov" },
+          "Rige:",
+          grupos.map((g, i) => g.grupo
+            ? h("button", { key: i, className: "gov-chip", onClick: () => setGuia(g) }, g.texto, h("span", null, "?"))
+            : h("span", { key: i, className: "gov-chip", style: { cursor: "default" } }, g.texto))
+        )
+      ),
+
+      h("div", { className: "fbody" },
+
+        /* ── ACEPCIONES (léxico central) ── */
+        h("div", { className: "section-lbl" }, "Acepciones"),
+        (lex.senses || []).map((s, i) => h("div", { key: i, className: "sense" },
+          h("span", { className: "sense-num" }, i + 1),
+          h("span", { className: "sense-es" }, s.es),
+          s.definitionEs && h("div", { className: "sense-def" }, s.definitionEs)
+        )),
+
+        /* ── CONJUGACIONES (data-verbos.js) ── */
+        h("div", { className: "section-lbl" }, "Conjugación"),
+
+        /* Selector de pareja aspectual: arriba de las tablas */
+        parejas.length > 0
+          ? h("div", null,
+              h("div", { style: { fontSize: 11.5, color: c.textMuted, marginBottom: 6 } }, "Comparar con su pareja aspectual:"),
+              h("div", { className: "pair-row" },
+                parejas.map(p => {
+                  const on = p.id === selId;
+                  return h("button", {
+                    key: p.id, className: "pair-btn",
+                    onClick: () => setParejaSel(p.id),
+                    style: on
+                      ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold }
+                      : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }
+                  }, p.v.ru + (p.sentido ? " · " + p.sentido : ""));
+                }),
+                h("button", {
+                  className: "pair-btn", onClick: () => setParejaSel(null),
+                  style: selId === null
+                    ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold }
+                    : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }
+                }, "Sin comparar")
+              )
+            )
+          : (sinPareja && h("div", { className: "pair-note" }, sinPareja)),
+
+        hayPresente && h("div", null,
+          h("div", { className: "section-lbl", style: { marginTop: 16 } }, tituloPresente),
+          h(TablaTiempo, { filas: PERSONAS.map((p, i) => [i, p[0], p[1]]), columnas, valor: (f, fila) => f.presente ? f.presente[fila[0]] : null }),
+          sinPresente.length > 0 && h("div", { className: "tnote" }, sinPresente.join(", ") + ": el perfectivo no tiene presente.")
+        ),
+
+        hayFuturo && h("div", null,
+          h("div", { className: "section-lbl", style: { marginTop: 16 } }, "Futuro"),
+          h(TablaTiempo, { filas: PERSONAS.map((p, i) => [i, p[0], p[1]]), columnas, valor: (f, fila) => f.futuro ? f.futuro[fila[0]] : null })
+        ),
+
+        hayPasado && h("div", null,
+          h("div", { className: "section-lbl", style: { marginTop: 16 } }, "Pasado"),
+          h(TablaTiempo, { filas: PASADO_FILAS, columnas, valor: (f, fila) => f.pasado ? f.pasado[fila[0]] : null }),
+          h("div", { className: "tnote" }, "El pasado cambia por género y número, no por persona: я говорил (varón), я говорила (mujer).")
+        ),
+
+        hayImper && h("div", null,
+          h("div", { className: "section-lbl", style: { marginTop: 16 } }, "Imperativo"),
+          h(TablaTiempo, { filas: IMPER_FILAS, columnas, valor: (f, fila) => f.imperativo ? f.imperativo[fila[0]] : null })
+        ),
+
+        v.nota && h("div", null,
+          h("div", { className: "section-lbl", style: { marginTop: 16 } }, "Nota"),
+          h("div", { className: "nota" }, v.nota)
+        ),
+        pareja && pareja.v.nota && h("div", { className: "nota", style: { marginTop: 8 } },
+          h("b", { style: { color: c.text } }, pareja.v.ru + ": "), pareja.v.nota)
+      )
+    ),
+    guia && h(GuiaSheet, { grupo: guia.grupo, texto: guia.texto, onClose: () => setGuia(null) })
+  );
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [q, setQ] = useState("");
+  const qRef = useRef(null);
+  const searchWrapRef = useRef(null);
+  const [headerH, setHeaderH] = useState(0);
+  const [searchH, setSearchH] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      await azLoadProgress();
+      azModuleTouch('verbos');
+    })();
+  }, []);
+
+  /* Mismo patrón que ficha.html: la barra de búsqueda queda fija
+     justo debajo del header del shell (medido antes del primer paint). */
+  useLayoutEffect(() => {
+    function measure() {
+      const header = document.querySelector("header");
+      if (header) setHeaderH(header.getBoundingClientRect().height);
+      if (searchWrapRef.current) setSearchH(searchWrapRef.current.getBoundingClientRect().height);
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [darkMode]);
+
+  const id = getVerbId();
+  const c = azColors(darkMode);
+  const results = (q.trim() && typeof azSearchLexicon === "function" ? azSearchLexicon(q, "verbo") : [])
+    .map(r => Object.assign({}, r, { href: "verbos.html?id=" + r.id, asp: (lexComerById(r.id) || {}).aspect }));
+
+  const resultRows = results.map((r, i) => h("a", {
+      key: r.id, href: r.href, className: "res-row",
+      onClick: (e) => azNavigate(e, r.href),
+      style: { borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
+    },
+      h("span", null, h("span", { className: "res-ru" }, (verboById(r.id) || {}).ru || r.ru),
+        r.asp && h("span", { className: "res-asp" }, ASPECT_SHORT[r.asp] || "")),
+      h("span", { className: "res-es" }, r.es)
+    ));
+  const noResults = h("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados");
+
+  const searchBar = h("div", {
+    ref: searchWrapRef,
+    style: { position: "fixed", top: headerH, left: 0, right: 0, zIndex: 90, background: c.bg, backdropFilter: "blur(12px)", borderBottom: `1px solid ${c.border}`, padding: "12px 3vw" }
+  },
+    h("div", { style: { maxWidth: 960, margin: "0 auto", position: "relative" } },
+      h("input", {
+        ref: qRef, value: q,
+        onInput: (e) => setQ(e.target.value),
+        placeholder: "Buscar verbo…",
+        style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 14 }
+      }),
+      q && h("button", {
+        onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); },
+        "aria-label": "Limpiar búsqueda",
+        style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
+      }, "✕"),
+      /* En la ficha, los resultados flotan por delante (como ficha.html) */
+      id && q.trim() && h("div", {
+        style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, boxShadow: "0 16px 40px rgba(0,0,0,.4)" }
+      }, results.length ? resultRows : noResults)
+    )
+  );
+
+  /* Portada: solo el buscador; los resultados van en la página. */
+  const portada = q.trim()
+    ? h("div", { style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, overflow: "hidden", animation: "fadeIn 0.3s ease" } },
+        results.length ? resultRows : noResults)
+    : null;
+
+  return h(AzShell, { darkMode, setDarkMode, moduleId: "verbos", tabs: [] },
+    h(VerbosStyles, { c }),
+    searchBar,
+    h("div", { style: { paddingTop: searchH ? searchH + 14 + "px" : "18px" } },
+      id ? h(FichaVerbo, { key: id, id, c }) : portada)
+  );
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

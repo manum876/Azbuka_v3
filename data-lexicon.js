@@ -24,6 +24,9 @@
    - CMR-05404 a CMR-05415 (12 entradas): vocabulario del módulo Alfabeto
      importado desde Azbuka_v3/data-lexicon.js
    - CMR-05416 a CMR-05418: забивать, выучить, посчитать (auditoría cierre)
+   - 23/09/2026: traducciones revisadas en 10 verbos (verbos de movimiento
+     идти/ходить/ехать/ездить/нести/носить con matiz de dirección; любить,
+     смотреть, слышать, писать) y definición de ходить redactada de nuevo.
 
    Fuentes:
    - Comer, K. (Comer 5000). Portland State University, PDXScholar.
@@ -6033,7 +6036,7 @@ const LEXICON_COMER = [
   "ipa": "ɪtʲtʲˈɪ",
   "senses": [
    {
-    "es": "ir, andar, caminar",
+    "es": "ir (a pie, en una dirección / ahora)",
     "definitionEs": "Ir de un lugar a otro dando pasos.",
     "source": "freedict-directo+inverso"
    }
@@ -8468,7 +8471,7 @@ const LEXICON_COMER = [
   "ipa": "smʌtrʲˈetʲ",
   "senses": [
    {
-    "es": "mirar",
+    "es": "mirar; ver (tele, una película)",
     "definitionEs": "Dirigir la vista hacia algo.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -11129,7 +11132,7 @@ const LEXICON_COMER = [
   "ipa": "ɭʲubʲˈitʲ",
   "senses": [
    {
-    "es": "amar, querer",
+    "es": "amar, querer; encantar (algo)",
     "definitionEs": "Sentir amor por alguien o algo.",
     "source": "freedict-directo+inverso"
    }
@@ -13124,7 +13127,7 @@ const LEXICON_COMER = [
   "ipa": "pʲisˈɑtʲ",
   "senses": [
    {
-    "es": "escribir vt, escribir",
+    "es": "escribir",
     "definitionEs": "Trazar letras o palabras sobre una superficie para comunicar algo.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -20917,8 +20920,8 @@ const LEXICON_COMER = [
   "ipa": "xʌdʲˈitʲ",
   "senses": [
    {
-    "es": "andar",
-    "definitionEs": "Desplazarse de un lado a otro moviendo los pies, las personas, o las patas, los animales.",
+    "es": "ir (a pie, habitualmente o ida y vuelta), andar, caminar",
+    "definitionEs": "Ir a pie de forma habitual, en distintas direcciones o en viajes de ida y vuelta.",
     "source": "freedict-directo+inverso"
    }
   ],
@@ -25039,8 +25042,8 @@ const LEXICON_COMER = [
   "ipa": "sɭˈyʃʌtʲ",
   "senses": [
    {
-    "es": "oir, sentir",
-    "definitionEs": "Percibir sonidos con el oido.",
+    "es": "oír, sentir",
+    "definitionEs": "Percibir sonidos con el oído.",
     "source": "freedict-directo+inverso"
    }
   ],
@@ -33900,7 +33903,7 @@ const LEXICON_COMER = [
   "ipa": "jˈexʌtʲ",
   "senses": [
    {
-    "es": "ir (en vehículo)",
+    "es": "ir (en vehículo, en una dirección / ahora)",
     "definitionEs": "Trasladarse usando un medio de transporte.",
     "source": "redactado + Lingea (contraste puntual)"
    }
@@ -59552,7 +59555,7 @@ const LEXICON_COMER = [
   "ipa": "nʲisʲtʲˈɪ",
   "senses": [
    {
-    "es": "llevar (cargando)",
+    "es": "llevar (cargando, en una dirección / ahora)",
     "definitionEs": "Transportar algo sosteniéndolo, generalmente a pie.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -63020,7 +63023,7 @@ const LEXICON_COMER = [
   "ipa": "nʌsʲˈitʲ",
   "senses": [
    {
-    "es": "llevar, usar (ropa)",
+    "es": "llevar (cargando, habitualmente); usar, tener puesto (ropa)",
     "definitionEs": "Trasladar algo consigo, o tener puesta una prenda de vestir de forma habitual.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -78753,7 +78756,7 @@ const LEXICON_COMER = [
   "ipa": "jˈeʑdʲitʲ",
   "senses": [
    {
-    "es": "ir, viajar (en vehículo)",
+    "es": "ir (en vehículo, habitualmente o ida y vuelta), viajar",
     "definitionEs": "Trasladarse usando un medio de transporte, de forma habitual (aspecto imperfectivo).",
     "source": "redactado (basado en FreeDict)"
    }

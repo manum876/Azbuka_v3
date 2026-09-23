@@ -37,7 +37,7 @@ const AZ_UNITS = [
 const AZ_MODULES = [
   { id: "alfabeto", title: "Alfabeto", desc: "Letras, sonidos y caligrafía — consulta libre", href: "alfabeto.html", icon: "orange", glyph: "Я" },
   { id: "dialogos", title: "Diálogos", desc: "30 conversaciones con audio y vocabulario", href: "dialogos.html", icon: "yellow", glyph: "Ди" },
-  { id: "verbos", title: "Verbos", desc: "Los 50 verbos más usados, con conjugación", href: "verbos.html", icon: "blue", glyph: "Вб" },
+  { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "blue", glyph: "Вб" },
   { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "purple", glyph: "Пд" },
 ];
 
@@ -52,20 +52,25 @@ const AZ_MODULES = [
    senses[], porque una palabra puede tener más de un sentido.
    Ya trae lexComerById(id) / lexComerByRu(ru); acá solo se agrega
    la búsqueda por substring en ru Y en los es de cada sense.
+   Segundo parámetro opcional "pos": filtra por posNormalized
+   ("verbo", "sustantivo"…) ANTES de cortar a 40 resultados — así un
+   módulo busca solo en su categoría: azSearchLexicon(q, "verbo").
 
      <script src="data-lexicon.js"></script>
      <script src="core.js"></script>
 
    No hace falta ningún otro data-*.js — Azbuka_v3 ya no reparte
    el vocabulario por módulo, todo vive acá. */
-function azSearchLexicon(query) {
+function azSearchLexicon(query, pos) {
   if (typeof LEXICON_COMER === "undefined") return [];
   const q = (query || "").trim().toLowerCase();
   if (!q) return [];
   return LEXICON_COMER
     .filter(e =>
-      e.ru.toLowerCase().includes(q) ||
-      (e.senses || []).some(s => s.es.toLowerCase().includes(q))
+      (!pos || e.posNormalized === pos) && (
+        e.ru.toLowerCase().includes(q) ||
+        (e.senses || []).some(s => s.es.toLowerCase().includes(q))
+      )
     )
     .slice(0, 40)
     .map(e => ({

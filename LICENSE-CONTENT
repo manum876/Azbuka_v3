@@ -34,3 +34,25 @@ Please refer to the official license for the complete terms and conditions.
 Unless explicitly stated otherwise, third-party materials, browser APIs,
 fonts, or other components not authored by Juan Manuel Muñoz are not covered
 by this content license.
+
+EXCEPTION — VERB CONJUGATION TABLES (data-verbos.js)
+----------------------------------------------------
+
+The verb conjugation tables contained in data-verbos.js (the object
+VERBOS: inflected forms and stress marks) are derived from data published
+by OpenRussian.org (https://github.com/Badestrand/russian-dictionary),
+licensed under the Creative Commons Attribution-ShareAlike 4.0
+International License (CC BY-SA 4.0), and were cross-checked against the
+pymorphy3 morphological analyzer (OpenCorpora dictionary, CC BY-SA).
+
+In accordance with the ShareAlike condition, those conjugation tables are
+distributed under CC BY-SA 4.0, not under CC BY-NC-ND 4.0:
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Changes made: selection of the verbs present in the AZBUKA lexicon,
+correction of errors, choice among stress variants, removal of unused
+forms, and conversion to AZBUKA's data format.
+
+The usage notes ("nota"), the case-government guide
+(VERBOS_GUIA_RECCION) and all other original content in data-verbos.js
+remain under CC BY-NC-ND 4.0, like the rest of this repository.
