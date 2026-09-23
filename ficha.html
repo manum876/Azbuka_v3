@@ -34,9 +34,16 @@
    ============================================================ */
 const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
 
-const POS_LABEL = { sustantivo: "Sustantivo", verbo: "Verbo", adjetivo: "Adjetivo", otro: "Otro" };
+const POS_LABEL = {
+  sustantivo: "Sustantivo", verbo: "Verbo", adjetivo: "Adjetivo", pronombre: "Pronombre",
+  numeral: "Numeral", adverbio: "Adverbio", "preposición": "Preposición", "conjunción": "Conjunción",
+  "partícula": "Partícula", "interjección": "Interjección", otro: "Otro"
+};
+/* Categorías que se declinan: son las que tienen tabla en Casos. */
+const POS_DECLINABLE = ["sustantivo", "adjetivo", "pronombre", "numeral"];
 const GENDER_LABEL = { m: "masculino", f: "femenino", n: "neutro" };
-const ANIMATE_LABEL = { yes: "Animado", no: "Inanimado" };
+/* El léxico usa "sí" / "no". "yes" se acepta solo mientras quede algún dato viejo. */
+const ANIMATE_LABEL = { "sí": "Animado", yes: "Animado", no: "Inanimado" };
 const NUMBER_CLASS_LABEL = { pluraliaTantum: "Solo se usa en plural", singulariaTantum: "Solo se usa en singular" };
 const ASPECT_LABEL = { imperfectivo: "imperfectivo", perfectivo: "perfectivo", biaspectual: "biaspectual" };
 /* learningStatus todavía no tiene valores reales cargados en la base
@@ -216,6 +223,7 @@ function App() {
     const senses = entry.senses || [];
     const isVerbo = entry.posNormalized === "verbo";
     const isSustantivo = entry.posNormalized === "sustantivo";
+    const isDeclinable = POS_DECLINABLE.includes(entry.posNormalized);
 
     const posBadgeText = (POS_LABEL[entry.posNormalized] || entry.posNormalized) +
       (isVerbo && entry.aspect ? " · " + (ASPECT_LABEL[entry.aspect] || entry.aspect) : "");
@@ -327,7 +335,7 @@ function App() {
               className: "btn pr", href: "verbos.html?id=" + entry.id,
               onClick: (e) => azNavigate(e, "verbos.html?id=" + entry.id)
             }, "🗣️ Ver en Verbos"),
-            isSustantivo && React.createElement("a", {
+            isDeclinable && React.createElement("a", {
               className: "btn pr", href: "casos.html?id=" + entry.id,
               onClick: (e) => azNavigate(e, "casos.html?id=" + entry.id)
             }, "📐 Ver en Casos"),
