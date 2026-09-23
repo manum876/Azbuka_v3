@@ -38,11 +38,45 @@ const POS_LABEL = { sustantivo: "Sustantivo", verbo: "Verbo", adjetivo: "Adjetiv
 const GENDER_LABEL = { m: "masculino", f: "femenino", n: "neutro" };
 const ANIMATE_LABEL = { yes: "Animado", no: "Inanimado" };
 const NUMBER_CLASS_LABEL = { pluraliaTantum: "Solo se usa en plural", singulariaTantum: "Solo se usa en singular" };
-const ASPECT_LABEL = { imperfectivo: "imperfectivo", perfectivo: "perfectivo" };
+const ASPECT_LABEL = { imperfectivo: "imperfectivo", perfectivo: "perfectivo", biaspectual: "biaspectual" };
 /* learningStatus todavía no tiene valores reales cargados en la base
    (hoy es null en las 4.931 entradas) — este mapa es una previsión
    para cuando se empiece a poblar; lo no mapeado se muestra tal cual. */
 const LEARNING_STATUS_LABEL = { taught: "Enseñada", seen: "Vista", review: "En repaso", new: "Nueva" };
+
+/* Traducción de las marcas SIN_PAREJA del léxico a texto de interfaz.
+   Mismo diccionario que usa verbos.html — mantenerlos iguales si se edita. */
+const SIN_PAREJA_LABEL = {
+  "ESTATIVO": "Verbo de estado: no tiene pareja perfectiva.",
+  "INDETERMINADO": "Verbo de movimiento en varias direcciones: no forma pareja perfectiva simple.",
+  "BIASPECTUAL": "Biaspectual: la misma forma sirve como imperfectivo y como perfectivo.",
+  "PASIVO_IMPERSONAL": "Verbo pasivo o impersonal: no forma pareja aspectual.",
+  "IDIOMATICO": "De uso idiomático: no forma pareja aspectual.",
+  "YA_CUBIERTO_POR_OTRO_PAR": "Su pareja está registrada en otra entrada.",
+  "HOMOGRAFO_PENDIENTE": "Pareja aspectual pendiente de revisión.",
+  "BAJA_FRECUENCIA_EN_LEXICO": "Su pareja no está en el léxico."
+};
+
+/* Tipo de relación entre un verbo y su pareja: "aspectual" (default,
+   mismo verbo, cambia el aspecto) o "resultado" (verbo distinto que
+   describe el desenlace exitoso del primero, ej. искать → найти).
+   Solo las excepciones llevan aspectualPartnerTypes en el léxico —
+   si no está marcado, se asume "aspectual". */
+const PAIR_TYPE_LABEL = { aspectual: "Pareja aspectual", resultado: "Resultado de la acción" };
+
+/* Arma la lista de parejas a mostrar para UN sentido puntual (o para
+   toda la palabra, si no tiene más de un sentido). ids puede traer
+   IDs reales (CMR-xxxxx) o una marca SIN_PAREJA:xxx — nunca mezcla. */
+function parejasDeSentido(entry, ids) {
+  const sinPareja = (ids || []).find(x => x.indexOf("SIN_PAREJA:") === 0);
+  if (sinPareja) return { sinPareja: SIN_PAREJA_LABEL[sinPareja.slice(11)] || null };
+  const real = (ids || []).filter(x => x.indexOf("CMR-") === 0);
+  const types = entry.aspectualPartnerTypes || {};
+  const parejas = real
+    .map(pid => ({ id: pid, entry: typeof lexComerById === "function" ? lexComerById(pid) : null, tipo: types[pid] || "aspectual" }))
+    .filter(p => p.entry);
+  return { parejas };
+}
 
 function getWordId() {
   return new URLSearchParams(window.location.search).get("id");
@@ -70,9 +104,9 @@ function FichaStyles({ c }) {
     .translit{font-size:14px;color:${c.textSub};font-style:italic;margin-top:6px;}
     .ipa{font-size:12px;color:${c.textMuted};margin-top:2px;}
     .pos-badge{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:${c.gold}33;color:${c.gold};border:1px solid ${c.gold};border-radius:8px;padding:3px 10px;}
-    .aspect-pair{margin-top:8px;font-size:12.5px;color:${c.textSub};}
-    .aspect-pair a{color:${c.gold};text-decoration:none;font-weight:600;}
-    .aspect-pair.empty{color:${c.textMuted};font-style:italic;}
+    .sense-pair{margin-top:6px;margin-left:28px;font-size:12px;color:${c.textSub};}
+    .sense-pair a{color:${c.gold};text-decoration:none;font-weight:600;}
+    .sense-pair.empty{color:${c.textMuted};font-style:italic;}
     .governance{margin-top:4px;font-size:12.5px;color:${c.textSub};}
     .governance b{color:${c.text};font-weight:600;}
     .irregular-tag{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;color:#E2884A;background:${c.bg3};border-radius:6px;padding:2px 8px;}
@@ -186,9 +220,6 @@ function App() {
     const posBadgeText = (POS_LABEL[entry.posNormalized] || entry.posNormalized) +
       (isVerbo && entry.aspect ? " · " + (ASPECT_LABEL[entry.aspect] || entry.aspect) : "");
 
-    const partnerId = (entry.aspectualPartner || [])[0] || null;
-    const partner = partnerId && typeof lexComerById === "function" ? lexComerById(partnerId) : null;
-
     /* Governance (rección) vive adentro de comer[0] — solo la mostramos
        para verbos, y solo si ese verbo puntual la tiene cargada. */
     const governance = isVerbo && entry.comer && entry.comer[0] && entry.comer[0].Governance
@@ -215,19 +246,6 @@ function App() {
           entry.ipa && React.createElement("div", { className: "ipa" }, "IPA: /" + entry.ipa + "/"),
           React.createElement("span", { className: "pos-badge" }, posBadgeText),
 
-          /* Pareja aspectual — solo para verbos, arriba del todo */
-          isVerbo && (
-            partner
-              ? React.createElement("div", { className: "aspect-pair" },
-                  "↔ Pareja aspectual: ",
-                  React.createElement("a", {
-                    href: "ficha.html?id=" + partner.id,
-                    onClick: (e) => azNavigate(e, "ficha.html?id=" + partner.id)
-                  }, partner.ru)
-                )
-              : React.createElement("div", { className: "aspect-pair empty" }, "Sin pareja aspectual registrada")
-          ),
-
           /* Rección (Governance) — solo para verbos, solo si está cargada */
           governance && React.createElement("div", { className: "governance" },
             "Rige: ", React.createElement("b", null, governance))
@@ -237,11 +255,35 @@ function App() {
 
           /* ── ACEPCIONES ── */
           React.createElement("div", { className: "section-lbl" }, "Acepciones"),
-          senses.map((s, i) => React.createElement("div", { key: i, className: "sense" },
-            React.createElement("span", { className: "sense-num" }, i + 1),
-            React.createElement("span", { className: "sense-es" }, s.es),
-            s.definitionEs && React.createElement("div", { className: "sense-def" }, s.definitionEs)
-          )),
+          senses.map((s, i) => {
+            /* Si el sentido tiene su propio aspectualPartner (verbos con
+               más de una acepción, ver METODOLOGIA de senses), se usa ese.
+               Si no, y es el único sentido de la palabra, se cae al
+               aspectualPartner de nivel superior — así las ~1.630 palabras
+               de un solo sentido siguen mostrando su pareja igual. */
+            const idsDeEsteSentido = isVerbo
+              ? (s.aspectualPartner || (senses.length === 1 ? entry.aspectualPartner : null))
+              : null;
+            const info = idsDeEsteSentido ? parejasDeSentido(entry, idsDeEsteSentido) : null;
+
+            return React.createElement("div", { key: i, className: "sense" },
+              React.createElement("span", { className: "sense-num" }, i + 1),
+              React.createElement("span", { className: "sense-es" }, s.es),
+              s.definitionEs && React.createElement("div", { className: "sense-def" }, s.definitionEs),
+              info && info.sinPareja &&
+                React.createElement("div", { className: "sense-pair empty" }, info.sinPareja),
+              info && info.parejas && info.parejas.length > 0 &&
+                React.createElement("div", { className: "sense-pair" },
+                  info.parejas.map((p, j) => React.createElement("div", { key: p.id },
+                    (p.tipo === "resultado" ? "→ " : "↔ ") + PAIR_TYPE_LABEL[p.tipo] + ": ",
+                    React.createElement("a", {
+                      href: "ficha.html?id=" + p.id,
+                      onClick: (e) => azNavigate(e, "ficha.html?id=" + p.id)
+                    }, p.entry.ru)
+                  ))
+                )
+            );
+          }),
 
           /* ── CLASIFICACIÓN PEDAGÓGICA (traducida y filtrada) ── */
           React.createElement("div", { className: "section-lbl" }, "Clasificación pedagógica"),

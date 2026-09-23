@@ -89,13 +89,25 @@ function formasDe(id) {
   return { lex, v, presente, futuro, pasado: v.pasado || null, imperativo: v.imperativo || null };
 }
 
+/* Tipo de relación entre un verbo y su pareja: "aspectual" (default,
+   mismo verbo, cambia el aspecto) o "resultado" (verbo distinto que
+   describe el desenlace exitoso del primero, ej. искать → найти).
+   Solo las excepciones llevan aspectualPartnerTypes en el léxico. */
+const PAIR_TYPE_LABEL = { aspectual: null, resultado: "resultado" }; // null = no se muestra, es el caso normal
+
 /* Parejas reales (IDs con conjugación cargada), con la acepción a la
-   que corresponde cada una cuando el léxico la registra por sentido. */
+   que corresponde cada una cuando el léxico la registra por sentido,
+   y el tipo de relación cuando no es la aspectual estándar. */
 function parejasDe(lex) {
   const ids = (lex.aspectualPartner || []).filter(p => p.indexOf("CMR-") === 0 && verboById(p) && lexComerById(p));
+  const types = lex.aspectualPartnerTypes || {};
   return ids.map(pid => {
     const sense = (lex.senses || []).find(s => (s.aspectualPartner || []).indexOf(pid) >= 0);
-    return { id: pid, lex: lexComerById(pid), v: verboById(pid), sentido: sense && (lex.senses || []).length > 1 ? sense.es : null };
+    return {
+      id: pid, lex: lexComerById(pid), v: verboById(pid),
+      sentido: sense && (lex.senses || []).length > 1 ? sense.es : null,
+      tipo: types[pid] || "aspectual"
+    };
   });
 }
 function sinParejaDe(lex) {
@@ -303,7 +315,7 @@ function FichaVerbo({ id, c }) {
                     style: on
                       ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold }
                       : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }
-                  }, p.v.ru + (p.sentido ? " · " + p.sentido : ""));
+                  }, p.v.ru + (p.sentido ? " · " + p.sentido : "") + (PAIR_TYPE_LABEL[p.tipo] ? " · " + PAIR_TYPE_LABEL[p.tipo] : ""));
                 }),
                 h("button", {
                   className: "pair-btn", onClick: () => setParejaSel(null),

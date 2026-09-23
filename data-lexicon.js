@@ -2,28 +2,24 @@
    DATA-LEXICON.JS — Léxico central AZBUKA (Comer + FreeDict + enriquecimiento aspectual)
    Total de entradas: 5348. Ordenado por ID.
 
-   Correcciones aplicadas tras informe de auditoría (23/09/2026):
-   - найти: eliminado duplicado CMR-05376 (mal definido como "buscar");
-     CMR-00222 queda como única entrada, con pareja doble
-     [находить, искать]. искать actualizado para apuntar acá.
-   - пригрозить: eliminado duplicado CMR-05033; CMR-05016 queda como
-     única entrada, con pareja doble [грозить, угрожать]. угрожать
-     actualizado para apuntar acá.
-   - использовать: aspect corregido a "biaspectual" (antes imperfectivo
-     por error); ya no enlaza con воспользоваться (el link era por
-     parecido de significado, no por aspecto real).
-   - воспользоваться: pareja corregida a solo [пользоваться].
-   - 9 verbos corregidos a aspect:"biaspectual" (antes tenían aspect
-     imperfectivo/perfectivo con marca SIN_PAREJA:BIASPECTUAL
-     inconsistente): жениться, велеть, реализовать, исследовать,
-     контролировать, миновать, гарантировать, ранить, приветствовать.
-   - CMR-05419 проконтролировать (nueva): pareja perfectiva real de uso
-     común para контролировать.
-   - CMR-05420 реализовывать (nueva): pareja imperfectiva de uso técnico/
-     empresarial para реализовать.
-   - CMR-05421 отрезать imperfectivo (nueva, отреза́ть): homógrafo por
-     acento de CMR-03911 (отре́зать, perfectivo) — mismo tratamiento que
-     почитать/venerar (CMR-05002).
+   NUEVO: campo opcional "aspectualPartnerTypes" (objeto {id: tipo}),
+   solo en las entradas donde una pareja no es una pareja aspectual
+   gramatical de verdad, sino una relación de "resultado": el verbo
+   pareja describe el desenlace exitoso de una acción que puede
+   fracasar, no una transformación de aspecto del mismo verbo. Ejemplos:
+   искать → найти (buscar → encontrar: buscar no garantiza encontrar),
+   ловить → поймать (cazar/intentar atrapar → atrapar con éxito).
+   Cuando el campo no está presente, la relación es "aspectual" (caso
+   por default — no se marca en los ~1.650 pares restantes). найти,
+   al tener dos parejas de distinto tipo (находить=aspectual real,
+   искать=resultado), es el caso que motivó agregar esto.
+   Consumido por ficha.html (una línea por pareja, por sentido) y por
+   verbos.html (etiqueta "· resultado" en el botón de comparación).
+
+   Historial previo: ver versión anterior del header para el detalle
+   completo de las 401+ entradas de enriquecimiento aspectual, las 12
+   de vocabulario de Alfabeto, y las correcciones de duplicados
+   (найти/пригрозить) y biaspectuales del 23/09/2026.
 
    Fuentes:
    - Comer, K. (Comer 5000). Portland State University, PDXScholar.
@@ -13664,7 +13660,11 @@ const LEXICON_COMER = [
   "aspectualPartner": [
    "CMR-01365",
    "CMR-00523"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01365": "aspectual",
+   "CMR-00523": "resultado"
+  }
  },
  {
   "id": "CMR-00223",
@@ -31701,7 +31701,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-00222"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00222": "resultado"
+  }
  },
  {
   "id": "CMR-00524",
@@ -128624,7 +128627,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02436"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02436": "resultado"
+  }
  },
  {
   "id": "CMR-02155",
@@ -145434,7 +145440,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-02154"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02154": "resultado"
+  }
  },
  {
   "id": "CMR-02437",
