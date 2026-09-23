@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<title>Азбука · Casos</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
+<script src="data-casos.js"></script>
+<script src="data-gramatica.js"></script>
+<script src="core.js"></script>
+<script src="progress.js"></script>
+<script src="shell.js"></script>
+<script>
+/* ============================================================
+   CASOS.HTML — Módulo Casos: un filtro del léxico central.
+   ------------------------------------------------------------
+   · Sin ?id=  → portada: solo el buscador (busca sustantivos,
+     adjetivos, pronombres, determinantes y numerales, vía
+     azSearchLexicon(q, POS_DECLINABLE)).
+   · Con ?id=CMR-xxxxx → ficha de declinación:
+       arriba, datos del léxico central (palabra, transliteración,
+       IPA, categoría, género, animacidad, acepciones);
+       abajo, las tablas de data-casos.js.
+   · Cada caso y cada forma especial (locativo, partitivo, forma
+     corta, acusativo animado, н-, numerales) abre una ficha a
+     pantalla completa con la explicación de data-gramatica.js.
+   Esta página NO guarda datos de palabras ni explicaciones:
+   todo sale de data-lexicon.js, data-casos.js y data-gramatica.js.
+   ============================================================ */
+const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
+const h = React.createElement;
+
+/* Mismas etiquetas que ficha.html */
+const POS_LABEL = { sustantivo: "Sustantivo", adjetivo: "Adjetivo", pronombre: "Pronombre", determinante: "Determinante", numeral: "Numeral" };
+const POS_SHORT = { sustantivo: "sust.", adjetivo: "adj.", pronombre: "pron.", determinante: "det.", numeral: "num." };
+const POS_DECLINABLE = ["sustantivo", "adjetivo", "pronombre", "determinante", "numeral"];
+const GENDER_LABEL = { m: "masculino", f: "femenino", n: "neutro" };
+const ANIMATE_LABEL = { "sí": "animado", yes: "animado", no: "inanimado" };
+
+const GENEROS = [["m", "Masculino", "Masc."], ["f", "Femenino", "Fem."], ["n", "Neutro", "Neutro"], ["pl", "Plural", "Plural"]];
+const CORTA_FILAS = [["m", "он", "masculino"], ["f", "она", "femenino"], ["n", "оно", "neutro"], ["pl", "они", "plural"]];
+
+function getWordId() {
+  return new URLSearchParams(window.location.search).get("id");
+}
+
+/* Voz: se envía sin el acento gráfico (U+0301), que algunas voces
+   leen mal. */
+function speakRu(text) {
+  try {
+    if (!text || !("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.replace(/\u0301/g, ""));
+    u.lang = "ru-RU";
+    u.rate = 0.85;
+    window.speechSynthesis.speak(u);
+  } catch (err) {}
+}
+
+/* Pantalla ancha: las 4 columnas de género entran juntas. */
+function useWide() {
+  const q = "(min-width: 640px)";
+  const [wide, setWide] = useState(() => window.matchMedia(q).matches);
+  useEffect(() => {
+    const m = window.matchMedia(q);
+    const f = () => setWide(m.matches);
+    m.addEventListener ? m.addEventListener("change", f) : m.addListener(f);
+    return () => { m.removeEventListener ? m.removeEventListener("change", f) : m.removeListener(f); };
+  }, []);
+  return wide;
+}
+
+function CasosStyles({ c }) {
+  return h("style", null, `
+    .ficha{background:${c.card};border:1px solid ${c.border};border-radius:14px;overflow:hidden;}
+    .hero{background:linear-gradient(135deg,${c.bg2},${c.bg3});padding:20px 20px 16px;border-bottom:1px solid ${c.border};}
+    .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+    .ru{font-size:34px;font-weight:800;color:${c.gold};line-height:1.05;word-break:break-word;}
+    .translit{font-size:14px;color:${c.textSub};font-style:italic;margin-top:6px;}
+    .ipa{font-size:12px;color:${c.textMuted};margin-top:2px;}
+    .pos-badge{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:${c.gold}33;color:${c.gold};border:1px solid ${c.gold};border-radius:8px;padding:3px 10px;}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+    .tag{font-size:11.5px;font-weight:600;color:${c.textSub};background:${c.bg2};border:1px solid ${c.border};border-radius:8px;padding:4px 9px;}
+    .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
+    .fbody{padding:18px 20px;}
+    .section-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:22px 0 10px;}
+    .section-lbl:first-child{margin-top:0;}
+    .fbody > div > .section-lbl:first-child{margin-top:24px;}
+    .sense{background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+    .sense-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:${c.gold};color:${c.bg};font-size:11px;font-weight:800;border-radius:50%;margin-right:8px;}
+    .sense-es{font-size:16px;font-weight:700;color:${c.text};display:inline;}
+    .sense-def{font-size:13.5px;color:${c.textSub};margin-top:6px;margin-left:28px;}
+    .pair-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+    .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
+    .ctable{width:100%;border-collapse:collapse;table-layout:fixed;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;overflow:hidden;}
+    .ctable th{font-size:11px;font-weight:700;text-align:left;padding:9px 8px;border-bottom:1px solid ${c.border};vertical-align:bottom;}
+    .ctable th .th-ru{display:block;font-size:14px;color:${c.gold};font-weight:800;word-break:break-word;}
+    .ctable th .th-sub{display:block;font-size:10px;color:${c.textMuted};font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+    .ctable td{padding:8px;border-top:1px solid ${c.border};vertical-align:middle;}
+    .ctable tr:first-child td{border-top:none;}
+    .case-btn{display:block;width:100%;text-align:left;background:none;border:none;padding:0;cursor:pointer;font-family:inherit;}
+    .p-ru{font-size:13px;font-weight:700;color:${c.text};}
+    .p-ru span{color:${c.gold};margin-left:5px;font-weight:700;}
+    .p-es{font-size:10.5px;color:${c.textMuted};margin-top:1px;}
+    .f-cell{display:flex;align-items:center;gap:6px;cursor:pointer;min-height:28px;}
+    .f-ru{font-size:15px;font-weight:600;color:${c.text};word-break:break-word;line-height:1.25;flex:1;min-width:0;}
+    .f-play{font-size:10px;color:${c.gold};flex-shrink:0;}
+    .f-none{font-size:15px;color:${c.textMuted};}
+    .f-tag{font-size:10px;color:${c.textMuted};font-weight:600;text-transform:uppercase;letter-spacing:.4px;flex-shrink:0;}
+    .f-extra{margin-top:4px;padding-top:4px;border-top:1px dashed ${c.border};}
+    .f-extra .f-ru{font-size:13.5px;color:${c.textSub};}
+    .tnote{font-size:11.5px;color:${c.textMuted};margin-top:6px;line-height:1.5;}
+    .help-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+    .help-chip{background:${c.bg2};border:1px solid ${c.border};color:${c.text};border-radius:8px;padding:5px 9px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+    .help-chip span{color:${c.gold};margin-left:5px;font-weight:700;}
+    .nota{background:${c.bg2};border:1px solid ${c.border};border-left:3px solid ${c.gold};border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.5;color:${c.textSub};}
+    .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:11px 14px;text-decoration:none;}
+    .res-ru{color:${c.text};font-weight:600;font-size:14.5px;}
+    .res-asp{color:${c.textMuted};font-size:11px;margin-left:6px;font-weight:500;}
+    .res-es{color:${c.textMuted};font-size:12.5px;text-align:right;}
+    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};overflow-y:auto;-webkit-overflow-scrolling:touch;animation:popIn .25s ease;}
+    .sheet-in{max-width:960px;margin:0 auto;padding:calc(6vh + env(safe-area-inset-top)) 3vw calc(4vh + env(safe-area-inset-bottom));}
+    .sheet-x{position:fixed;top:calc(6vh + env(safe-area-inset-top));right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
+    .sheet-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-bottom:8px;}
+    .sheet-title{font-size:26px;font-weight:800;color:${c.text};line-height:1.15;padding-right:48px;}
+    .sheet-q{margin-top:8px;font-size:15px;color:${c.gold};font-weight:700;}
+    .sheet-text{margin-top:18px;font-size:15px;line-height:1.6;color:${c.textSub};}
+    .ex{display:flex;align-items:center;gap:12px;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-bottom:8px;}
+    .ex-t{font-size:11px;font-weight:700;color:${c.gold};text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+    .ex-ru{font-size:16px;font-weight:700;color:${c.text};}
+    .ex-es{font-size:13px;color:${c.textMuted};margin-top:3px;}
+    .prep-list{display:flex;flex-wrap:wrap;gap:6px;}
+    .prep{background:${c.card};border:1px solid ${c.border};border-radius:10px;padding:7px 10px;font-size:13px;color:${c.textSub};}
+    .prep b{color:${c.text};margin-right:6px;}
+    .word-box{margin-top:18px;background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:12px;padding:12px 14px;}
+    .word-box .wb-k{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.gold};margin-bottom:6px;}
+    .word-box .wb-row{display:flex;flex-wrap:wrap;gap:6px 14px;}
+    .word-box .wb-item{font-size:15px;font-weight:700;color:${c.text};cursor:pointer;}
+    .word-box .wb-item small{font-size:10.5px;font-weight:600;color:${c.textMuted};margin-left:5px;text-transform:uppercase;letter-spacing:.4px;}
+    @keyframes popIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
+  `);
+}
+
+/* Celda con una forma: toca para escuchar. Si es un par de
+   acusativos [inanimado, animado], muestra los dos. */
+function Forma({ text, extra }) {
+  if (Array.isArray(text)) {
+    return h("div", null,
+      h(FormaLinea, { text: text[0], tag: "inan." }),
+      h("div", { className: "f-extra" }, h(FormaLinea, { text: text[1], tag: "anim." }))
+    );
+  }
+  if (!text) return h("span", { className: "f-none" }, "—");
+  return h("div", null,
+    h(FormaLinea, { text }),
+    extra && extra.map((x, i) => h("div", { key: i, className: "f-extra" }, h(FormaLinea, { text: x[0], tag: x[1] })))
+  );
+}
+function FormaLinea({ text, tag }) {
+  if (!text) return h("span", { className: "f-none" }, "—");
+  return h("div", { className: "f-cell", onClick: () => speakRu(text) },
+    h("span", { className: "f-ru" }, text),
+    tag && h("span", { className: "f-tag" }, tag),
+    h("span", { className: "f-play" }, "▶")
+  );
+}
+
+/* Tabla de los 6 casos: filas = casos, columnas = sg/pl, géneros… */
+function TablaCasos({ columnas, valor, extra, onCaso }) {
+  return h("table", { className: "ctable" },
+    h("colgroup", null,
+      h("col", { style: { width: columnas.length > 2 ? "22%" : "31%" } }),
+      columnas.map((col, i) => h("col", { key: i }))
+    ),
+    h("thead", null, h("tr", null,
+      h("th", null, h("span", { className: "th-sub" }, "Caso")),
+      columnas.map((col, i) => h("th", { key: i },
+        h("span", { className: "th-ru" }, col.titulo),
+        col.sub && h("span", { className: "th-sub" }, col.sub)
+      ))
+    )),
+    h("tbody", null, GRAMATICA_CASOS_ORDEN.map((cid, r) => {
+      const caso = gramaticaCaso(cid);
+      return h("tr", { key: cid },
+        h("td", null, h("button", { className: "case-btn", onClick: () => onCaso(cid), "aria-label": "Qué es el " + caso.nombre.toLowerCase() },
+          h("div", { className: "p-ru" }, caso.nombre, h("span", null, "?")),
+          h("div", { className: "p-es" }, caso.preguntas)
+        )),
+        columnas.map((col, i) => h("td", { key: i }, h(Forma, { text: valor(col, r), extra: extra ? extra(col, r) : null })))
+      );
+    }))
+  );
+}
+
+/* Tabla simple de 4 filas (forma corta) */
+function TablaCorta({ corta }) {
+  return h("table", { className: "ctable" },
+    h("colgroup", null, h("col", { style: { width: "31%" } }), h("col", null)),
+    h("tbody", null, CORTA_FILAS.map((f, r) => h("tr", { key: r },
+      h("td", null, h("div", { className: "p-ru" }, f[1]), h("div", { className: "p-es" }, f[2])),
+      h("td", null, h(Forma, { text: corta[f[0]] }))
+    )))
+  );
+}
+
+/* Hoja a pantalla completa: un caso o una forma especial. */
+function useLockScroll() {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+}
+function Ejemplo({ ru, es, titulo }) {
+  return h("div", { className: "ex" },
+    h("div", { style: { flex: 1, minWidth: 0 } },
+      titulo && h("div", { className: "ex-t" }, titulo),
+      h("div", { className: "ex-ru" }, ru),
+      h("div", { className: "ex-es" }, es)
+    ),
+    h("button", { className: "play", onClick: () => speakRu(ru), "aria-label": "Escuchar" }, "▶")
+  );
+}
+function CasoSheet({ cid, formas, onClose }) {
+  useLockScroll();
+  const g = gramaticaCaso(cid);
+  if (!g) return null;
+  return h("div", { className: "sheet", role: "dialog", "aria-modal": "true" },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "sheet-kicker" }, "Caso"),
+      h("div", { className: "sheet-title" }, g.nombre),
+      h("div", { className: "sheet-q" }, g.ru + " · " + g.preguntas),
+      /* Las formas de la palabra de la ficha en este caso */
+      formas && formas.length > 0 && h("div", { className: "word-box" },
+        h("div", { className: "wb-k" }, "Esta palabra en " + g.nombre.toLowerCase()),
+        h("div", { className: "wb-row" }, formas.map((f, i) => h("span", { key: i, className: "wb-item", onClick: () => speakRu(f[0]) }, f[0], f[1] && h("small", null, f[1]))))
+      ),
+      h("div", { className: "sheet-text" }, g.resumen),
+      g.usos && g.usos.length > 0 && h("div", null,
+        h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Para qué se usa"),
+        g.usos.map((u, i) => h(Ejemplo, { key: i, titulo: u[0], ru: u[1], es: u[2] }))
+      ),
+      g.preposiciones && g.preposiciones.length > 0 && h("div", null,
+        h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Preposiciones"),
+        h("div", { className: "prep-list" }, g.preposiciones.map((p, i) => h("div", { key: i, className: "prep" }, h("b", null, p[0]), p[1])))
+      ),
+      h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Ejemplos"),
+      g.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1] }))
+    )
+  );
+}
+function FormaSheet({ fid, onClose }) {
+  useLockScroll();
+  const g = GRAMATICA_FORMAS[fid];
+  if (!g) return null;
+  return h("div", { className: "sheet", role: "dialog", "aria-modal": "true" },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "sheet-kicker" }, "Declinación"),
+      h("div", { className: "sheet-title" }, g.titulo),
+      h("div", { className: "sheet-text" }, g.texto),
+      h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Ejemplos"),
+      g.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1] }))
+    )
+  );
+}
+
+/* Botón «?» que abre una forma especial */
+function Ayuda({ fid, texto, onForma }) {
+  return h("button", { className: "help-chip", onClick: () => onForma(fid) }, texto, h("span", null, "?"));
+}
+
+/* Formas de la palabra en un caso (para la hoja del caso). */
+function formasEnCaso(d, r) {
+  if (!d) return [];
+  const out = [];
+  const push = (x, tag) => {
+    if (!x) return;
+    if (Array.isArray(x)) { out.push([x[0], (tag ? tag + " " : "") + "inan."]); out.push([x[1], (tag ? tag + " " : "") + "anim."]); }
+    else out.push([x, tag]);
+  };
+  if (d.tipo === "sustantivo") {
+    if (d.sg) push(d.sg[r], d.pl ? "sg." : "");
+    if (d.pl) push(d.pl[r], d.sg ? "pl." : "");
+    if (r === 1 && d.partitivo) push(d.partitivo, "partitivo");
+    if (r === 5 && d.loc2) push(d.loc2, "locativo");
+  }
+  else if (d.tipo === "adjetivo") GENEROS.forEach(g => d[g[0]] && push(d[g[0]][r], g[2].toLowerCase()));
+  else if (d.tipo === "personal") { push(d.formas[r], ""); if (d.n && d.n[r] && d.n[r] !== d.formas[r]) push(d.n[r], "con prep."); }
+  else if (d.tipo === "serie") push(d.formas[r], "");
+  const seen = new Set();
+  return out.filter(f => { const k = f[0] + "|" + f[1]; if (seen.has(k)) return false; seen.add(k); return true; });
+}
+
+function FichaCasos({ id, c }) {
+  const lex = id ? lexComerById(id) : null;
+  const d = id ? casosById(id) : null;
+  const wide = useWide();
+  const [gSel, setGSel] = useState("m");
+  const [caso, setCaso] = useState(null);
+  const [forma, setForma] = useState(null);
+
+  if (!lex || !d) {
+    return h("div", { style: { textAlign: "center", padding: "10vh 0" } },
+      h("h1", { style: { fontSize: 18, marginBottom: 8, color: c.text } }, "Palabra no encontrada"),
+      h("p", { style: { fontSize: 13.5, color: c.textMuted } },
+        lex ? `"${lex.ru}" no se declina.` : `No hay ninguna palabra con id "${id}".`)
+    );
+  }
+
+  const pos = lex.posNormalized;
+  const badge = [POS_LABEL[pos] || pos];
+  if (pos === "sustantivo" && lex.gender) badge.push(GENDER_LABEL[lex.gender] || lex.gender);
+  if (pos === "sustantivo" && lex.animate) badge.push(ANIMATE_LABEL[lex.animate] || lex.animate);
+
+  const tags = [];
+  if (d.tipo === "indeclinable") tags.push("No se declina");
+  if (d.tipo === "sustantivo" && !d.sg) tags.push("Solo se usa en plural");
+  if (d.tipo === "sustantivo" && !d.pl) tags.push("Solo se usa en singular");
+  if (d.adjetival) tags.push("Se declina como adjetivo");
+  if (d.tipo === "serie" && d.numero === "pl") tags.push("Plural");
+
+  /* Ayudas (formas especiales) que aplican a esta palabra */
+  const ayudas = [];
+  const tieneParAc = d.tipo === "adjetivo" || (d.formas && d.formas.some(Array.isArray));
+  if (tieneParAc) ayudas.push(["acusativoAnimado", "Acusativo animado"]);
+  if (d.loc2) ayudas.push(["locativo", "Locativo"]);
+  if (d.partitivo) ayudas.push(["partitivo", "Partitivo"]);
+  if (d.tipo === "personal" && d.n) ayudas.push(["pronombreN", "Formas con н-"]);
+  if (pos === "numeral") ayudas.push(["numerales", "Números y casos"]);
+  if (d.tipo === "indeclinable") ayudas.push(["indeclinable", "Palabras que no se declinan"]);
+
+  /* ── Tabla según el tipo ── */
+  let tabla = null, selector = null;
+  if (d.tipo === "sustantivo") {
+    const cols = [];
+    if (d.sg) cols.push({ titulo: "Singular", k: "sg" });
+    if (d.pl) cols.push({ titulo: "Plural", k: "pl" });
+    tabla = h(TablaCasos, {
+      columnas: cols, onCaso: setCaso,
+      valor: (col, r) => d[col.k][r],
+      /* partitivo junto al genitivo; locativo junto al preposicional */
+      extra: (col, r) => {
+        if (col.k !== "sg") return null;
+        if (r === 1 && d.partitivo) return [[d.partitivo, "coloq."]];
+        if (r === 5 && d.loc2) return [[d.loc2, "lugar"]];
+        return null;
+      }
+    });
+  } else if (d.tipo === "adjetivo" && (d.m || d.f || d.n || d.pl)) {
+    const gens = GENEROS.filter(g => d[g[0]]);
+    const sel = gens.some(g => g[0] === gSel) ? gSel : gens[0][0];
+    const cols = (wide ? gens : gens.filter(g => g[0] === sel)).map(g => ({ titulo: wide ? g[2] : g[1], k: g[0] }));
+    if (!wide && gens.length > 1) selector = h("div", { className: "pair-row" }, gens.map(g => {
+      const on = g[0] === sel;
+      return h("button", {
+        key: g[0], className: "pair-btn", onClick: () => setGSel(g[0]),
+        style: on
+          ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold }
+          : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }
+      }, g[1]);
+    }));
+    tabla = h(TablaCasos, { columnas: cols, onCaso: setCaso, valor: (col, r) => d[col.k][r] });
+  } else if (d.tipo === "personal") {
+    const cols = [{ titulo: "Forma", k: "formas" }];
+    if (d.n) cols.push({ titulo: "Con preposición", k: "n" });
+    tabla = h(TablaCasos, {
+      columnas: cols, onCaso: setCaso,
+      valor: (col, r) => d[col.k][r],
+      extra: (col, r) => {
+        const alt = col.k === "n" ? d.altN : d.alt;
+        const nombre = GRAMATICA_CASOS_ORDEN[r] === "instrumental" ? "inst" : null;
+        return alt && nombre && alt[nombre] ? [[alt[nombre], "también"]] : null;
+      }
+    });
+  } else if (d.tipo === "serie") {
+    tabla = h(TablaCasos, {
+      columnas: [{ titulo: d.numero === "pl" ? "Plural" : "Forma", k: "formas" }], onCaso: setCaso,
+      valor: (col, r) => d.formas[r],
+      extra: (col, r) => (d.alt && GRAMATICA_CASOS_ORDEN[r] === "instrumental" && d.alt.inst ? [[d.alt.inst, "también"]] : null)
+    });
+  }
+
+  return h("div", { style: { animation: "fadeIn 0.3s ease" } },
+    h("div", { className: "ficha" },
+
+      /* ── HERO: palabra, pronunciación, categoría ── */
+      h("div", { className: "hero" },
+        h("div", { className: "hero-top" },
+          h("div", { style: { minWidth: 0 } },
+            h("div", { className: "ru" }, d.ru),
+            lex.translit && h("div", { className: "translit" }, lex.translit),
+            lex.ipa && h("div", { className: "ipa" }, "IPA: /" + lex.ipa + "/")
+          ),
+          h("button", { className: "play", onClick: () => speakRu(d.ru), "aria-label": "Escuchar" }, "▶")
+        ),
+        h("span", { className: "pos-badge" }, badge.join(" · ")),
+        tags.length > 0 && h("div", { className: "tags" }, tags.map((t, i) => h("span", { key: i, className: "tag" }, t)))
+      ),
+
+      h("div", { className: "fbody" },
+
+        /* ── ACEPCIONES (léxico central) ── */
+        h("div", { className: "section-lbl" }, "Acepciones"),
+        (lex.senses || []).map((s, i) => h("div", { key: i, className: "sense" },
+          h("span", { className: "sense-num" }, i + 1),
+          h("span", { className: "sense-es" }, s.es),
+          s.definitionEs && h("div", { className: "sense-def" }, s.definitionEs)
+        )),
+
+        /* ── DECLINACIÓN (data-casos.js) ── */
+        tabla && h("div", null,
+          h("div", { className: "section-lbl" }, "Declinación"),
+          selector,
+          tabla,
+          h("div", { className: "tnote" }, "Tocá un caso para ver para qué se usa, o una forma para escucharla.")
+        ),
+        d.tipo === "indeclinable" && h("div", null,
+          h("div", { className: "section-lbl" }, "Declinación"),
+          h("div", { className: "nota" }, "Esta palabra no cambia: tiene la misma forma, ", h("b", { style: { color: c.text } }, d.ru), ", en todos los casos.")
+        ),
+
+        /* ── FORMA CORTA ── */
+        d.corta && h("div", null,
+          h("div", { className: "section-lbl" }, "Forma corta"),
+          h(TablaCorta, { corta: d.corta }),
+          h("div", { className: "help-row" }, h(Ayuda, { fid: "formaCorta", texto: "Forma corta", onForma: setForma }))
+        ),
+
+        ayudas.length > 0 && h("div", null,
+          h("div", { className: "section-lbl" }, "Formas especiales"),
+          d.loc2 && h("div", { className: "tnote", style: { marginTop: 0 } }, "Para decir dónde: ", h("b", { style: { color: c.text } }, d.loc2), ". Para hablar de algo se usa el preposicional normal."),
+          d.partitivo && h("div", { className: "tnote" }, "Partitivo coloquial: ", h("b", { style: { color: c.text } }, d.partitivo), " («un poco de»). El genitivo normal siempre es correcto."),
+          h("div", { className: "help-row" }, ayudas.map(a => h(Ayuda, { key: a[0], fid: a[0], texto: a[1], onForma: setForma })))
+        ),
+
+        d.nota && h("div", null,
+          h("div", { className: "section-lbl" }, "Nota"),
+          h("div", { className: "nota" }, d.nota)
+        )
+      )
+    ),
+    caso && h(CasoSheet, { cid: caso, formas: formasEnCaso(d, GRAMATICA_CASOS_ORDEN.indexOf(caso)), onClose: () => setCaso(null) }),
+    forma && h(FormaSheet, { fid: forma, onClose: () => setForma(null) })
+  );
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [q, setQ] = useState("");
+  const qRef = useRef(null);
+  const searchWrapRef = useRef(null);
+  const [headerH, setHeaderH] = useState(0);
+  const [searchH, setSearchH] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      await azLoadProgress();
+      azModuleTouch('casos');
+    })();
+  }, []);
+
+  /* Mismo patrón que ficha.html y verbos.html: la barra de búsqueda
+     queda fija justo debajo del header del shell. */
+  useLayoutEffect(() => {
+    function measure() {
+      const header = document.querySelector("header");
+      if (header) setHeaderH(header.getBoundingClientRect().height);
+      if (searchWrapRef.current) setSearchH(searchWrapRef.current.getBoundingClientRect().height);
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [darkMode]);
+
+  const id = getWordId();
+  const c = azColors(darkMode);
+  const results = (q.trim() && typeof azSearchLexicon === "function" ? azSearchLexicon(q, POS_DECLINABLE) : [])
+    .filter(r => casosById(r.id))
+    .map(r => Object.assign({}, r, { href: "casos.html?id=" + r.id }));
+
+  const resultRows = results.map((r, i) => h("a", {
+      key: r.id, href: r.href, className: "res-row",
+      onClick: (e) => azNavigate(e, r.href),
+      style: { borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
+    },
+      h("span", null, h("span", { className: "res-ru" }, r.acento || r.ru),
+        h("span", { className: "res-asp" }, POS_SHORT[r.pos] || "")),
+      h("span", { className: "res-es" }, r.es)
+    ));
+  const noResults = h("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados");
+
+  const searchBar = h("div", {
+    ref: searchWrapRef,
+    style: { position: "fixed", top: headerH, left: 0, right: 0, zIndex: 90, background: c.bg, backdropFilter: "blur(12px)", borderBottom: `1px solid ${c.border}`, padding: "12px 3vw" }
+  },
+    h("div", { style: { maxWidth: 960, margin: "0 auto", position: "relative" } },
+      h("input", {
+        ref: qRef, value: q,
+        onInput: (e) => setQ(e.target.value),
+        placeholder: "Buscar sustantivo, adjetivo, pronombre…",
+        style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 14 }
+      }),
+      q && h("button", {
+        onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); },
+        "aria-label": "Limpiar búsqueda",
+        style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
+      }, "✕"),
+      /* En la ficha, los resultados flotan por delante (como ficha.html) */
+      id && q.trim() && h("div", {
+        style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, boxShadow: "0 16px 40px rgba(0,0,0,.4)" }
+      }, results.length ? resultRows : noResults)
+    )
+  );
+
+  /* Portada: solo el buscador; los resultados van en la página. */
+  const portada = q.trim()
+    ? h("div", { style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, overflow: "hidden", animation: "fadeIn 0.3s ease" } },
+        results.length ? resultRows : noResults)
+    : null;
+
+  return h(AzShell, { darkMode, setDarkMode, moduleId: "casos", tabs: [] },
+    h(CasosStyles, { c }),
+    searchBar,
+    h("div", { style: { paddingTop: searchH ? searchH + 14 + "px" : "18px" } },
+      id ? h(FichaCasos, { key: id, id, c }) : portada)
+  );
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

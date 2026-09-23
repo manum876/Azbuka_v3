@@ -1,6 +1,6 @@
 /* ============================================================
    DATA-LEXICON.JS — Léxico central AZBUKA (Comer + FreeDict + enriquecimiento aspectual)
-   Total de entradas: 5395. Ordenado por ID.
+   Total de entradas: 5396. Ordenado por ID.
 
    NUEVO: campo opcional "aspectualPartnerTypes" (objeto {id: tipo}),
    solo en las entradas donde una pareja no es una pareja aspectual
@@ -32,7 +32,8 @@
    - "ru" y "pluralForm" llevan ё donde corresponde (ещё, ребёнок…).
    - "animate": solo "sí" / "no".
    - Homógrafos y heterónimos en entradas separadas (ver
-     HOMOGRAFOS_ADICIONALES.md). Entradas nuevas CMR-05422 a CMR-05468.
+     HOMOGRAFOS_ADICIONALES.md). Entradas nuevas CMR-05422 a CMR-05469 (la última: лист «hoja de papel»,
+     separada de лист «hoja de planta», CMR-00939).
    - Correcciones de tildes, eñes y definiciones (bloque CMR-00001–00420).
 
    Fuentes:
@@ -44,7 +45,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 5395
+  totalEntries: 5396
 };
 const LEXICON_COMER = [
  {
@@ -57635,8 +57636,8 @@ const LEXICON_COMER = [
   "ipa": "ɭʲˈist",
   "senses": [
    {
-    "es": "hoja",
-    "definitionEs": "Órgano verde y plano de las plantas, o cada una de las páginas de un cuaderno o libro.",
+    "es": "hoja (de planta)",
+    "definitionEs": "Órgano verde y plano de las plantas. Para la hoja de papel, ver CMR-05469.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -330358,6 +330359,68 @@ const LEXICON_COMER = [
   "aspectualPartner": [
    "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
   ]
+ },
+ {
+  "id": "CMR-05469",
+  "ru": "лист",
+  "acento": "лист",
+  "posNormalized": "sustantivo",
+  "translit": "list",
+  "ipa": "ɭʲˈist",
+  "senses": [
+   {
+    "es": "hoja (de papel)",
+    "definitionEs": "Pieza plana y delgada de papel; también, cada hoja de un cuaderno o libro.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "лист",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Homógrafo de CMR-00939: mismo acento, plurales distintos: ли́стья (hojas de planta) / листы́ (hojas de papel).",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "homografoSeparado": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "pluralForm": "листы",
+  "numberClass": "regular"
  }
 ];
 

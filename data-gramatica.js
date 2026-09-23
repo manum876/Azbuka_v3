@@ -14,7 +14,8 @@
      GRAMATICA_CASOS        los 6 casos (clave = id del caso)
      GRAMATICA_CASOS_ORDEN  orden tradicional ruso de los casos
      GRAMATICA_FORMAS       locativo, partitivo, forma corta,
-                            acusativo y animacidad, numerales
+                            acusativo y animacidad, numerales,
+                            pronombres con н-, indeclinables
      GRAMATICA_RECCION      grupos de rección de los verbos
                             (antes VERBOS_GUIA_RECCION, en data-verbos.js)
      gramaticaCaso(id)      devuelve un caso o null
@@ -154,6 +155,11 @@ const GRAMATICA_FORMAS = {
   titulo: "Números y casos",
   texto: "El número decide el caso del sustantivo que lo sigue: después de 1 va el nominativo singular; después de 2, 3 y 4, el genitivo singular; desde 5 en adelante, el genitivo plural. Cuenta la última cifra: 21 va como 1, 22 como 2 y 25 como 5 (salvo 11 a 14, que van como 5).",
   ejemplos: [["оди́н брат", "un hermano"], ["два бра́та", "dos hermanos"], ["пять бра́тьев", "cinco hermanos"], ["два́дцать оди́н год", "veintiún años"]]
+ },
+ pronombreN: {
+  titulo: "Pronombres con н- después de preposición",
+  texto: "Los pronombres de tercera persona (он, она́, оно́, они́) agregan una н- al principio cuando van después de una preposición. Sin preposición no llevan н-. En el preposicional siempre hay preposición, por eso esa forma empieza siempre con н-.",
+  ejemplos: [["Я ви́жу его́.", "Lo veo."], ["Я иду́ к нему́.", "Voy hacia él."], ["Мы говори́м о ней.", "Hablamos de ella."], ["У них есть маши́на.", "Ellos tienen auto."]]
  },
  indeclinable: {
   titulo: "Palabras que no se declinan",
