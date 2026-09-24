@@ -173,6 +173,7 @@ function azIndiceFormas() {
     if (!idx.has(k)) idx.set(k, []);
     idx.get(k).push([id, f, et]);
   }));
+  idx.claves = [...idx.keys()].sort();   /* ordenadas: para buscar por el principio */
   AZ_FORMAS = idx; AZ_FORMAS_SRC = src;
   return idx;
 }
@@ -196,24 +197,42 @@ function azCargarFormas() {
   });
 }
 
-/* Busca una forma exacta (sin importar acento ni е/ё).
-   Devuelve [{ id, lex, forma, etiquetas: [...], modulo }] */
+/* Busca formas que coincidan con lo escrito o que empiecen así
+   (sin importar acento ni е/ё): «скаж» ya encuentra скажу́, скажет…
+   Primero van las coincidencias exactas; después, las que empiezan
+   igual. De cada palabra se muestra la forma más corta que coincide.
+   Devuelve [{ id, lex, forma, etiquetas: [...], modulo, exacta }] */
 function azBuscarForma(q) {
   const k = azFormaClave(q);
   if (!k || typeof lexComerById !== "function") return [];
   azCargarFormas();
-  const hits = azIndiceFormas().get(k) || [];
+  const idx = azIndiceFormas();
+  const claves = idx.claves || [];
+  /* primera clave >= k (búsqueda binaria) y de ahí en adelante mientras empiecen con k */
+  let lo = 0, hi = claves.length;
+  while (lo < hi) { const m = (lo + hi) >> 1; if (claves[m] < k) lo = m + 1; else hi = m; }
   const porId = new Map();
-  hits.forEach(([id, f, et]) => {
-    if (!porId.has(id)) porId.set(id, { id, forma: f, etiquetas: [] });
-    const r = porId.get(id);
-    if (r.etiquetas.indexOf(et) < 0) r.etiquetas.push(et);
-  });
-  return [...porId.values()].map(r => {
-    r.lex = lexComerById(r.id);
-    r.modulo = typeof CASOS !== "undefined" && CASOS[r.id] ? "casos.html" : "verbos.html";
-    return r;
-  }).filter(r => r.lex);
+  for (let i = lo; i < claves.length && claves[i].startsWith(k); i++) {
+    const clave = claves[i], exacta = clave === k;
+    idx.get(clave).forEach(([id, f, et]) => {
+      const r = porId.get(id);
+      /* se queda con la exacta o, si no hay, con la forma más corta */
+      if (!r || (exacta && !r.exacta) || (!r.exacta && !exacta && clave.length < r.largo)) {
+        porId.set(id, { id, forma: f, etiquetas: [et], exacta, largo: clave.length });
+      } else if (r.forma === f && r.etiquetas.indexOf(et) < 0) {
+        r.etiquetas.push(et);
+      }
+    });
+    if (porId.size > 60) break;
+  }
+  return [...porId.values()]
+    .sort((a, b) => (b.exacta - a.exacta) || (a.largo - b.largo))
+    .slice(0, 20)
+    .map(r => {
+      r.lex = lexComerById(r.id);
+      r.modulo = typeof CASOS !== "undefined" && CASOS[r.id] ? "casos.html" : "verbos.html";
+      return r;
+    }).filter(r => r.lex);
 }
 
 /* ── STORAGE ─────────────────────────────────────────────────
