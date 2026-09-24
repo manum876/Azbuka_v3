@@ -6,6 +6,10 @@
    Expone: ALPHABET (33 letras) y generateQuizQuestion(letter, allLetters)
    Si corregís una nota de pronunciación o agregás una palabra de
    ejemplo, se edita UNA sola vez acá y se refleja en ambos módulos.
+   Transliteración (24/09/2026): sigue la Parte B de CONVENCION_IPA.md,
+   la pronunciación figurada en español (х = j, щ = sch, й = i). La de
+   cada palabra de ejemplo es la misma del léxico (campo translit de su
+   lexId): si cambia allá, hay que copiarla acá.
    ============================================================ */
 
 const ALPHABET=[{
@@ -25,25 +29,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "аптека",
-    translit: "apteka",
+    translit: "aptiéka",
     meaning: "farmacia",
     note: "А inicial, sonido abierto y claro",
     lexId: "CMR-05404"
   }, {
     cyrillic: "август",
-    translit: "avgust",
+    translit: "ávgust",
     meaning: "agosto",
     note: "А tónica al inicio",
     lexId: "CMR-01348"
   }, {
     cyrillic: "арбуз",
-    translit: "arbuz",
+    translit: "arbús",
     meaning: "sandía",
     note: "А inicial enfatizada",
     lexId: "CMR-05405"
   }, {
     cyrillic: "алфавит",
-    translit: "alfavit",
+    translit: "alfavít",
     meaning: "alfabeto",
     note: "А aparece dos veces; la primera es tónica",
     lexId: "CMR-05406"
@@ -65,7 +69,7 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "банан",
-    translit: "banan",
+    translit: "banán",
     meaning: "banana",
     note: "Б inicial fuerte y clara",
     lexId: "CMR-05407"
@@ -77,13 +81,13 @@ const ALPHABET=[{
     lexId: "CMR-00542"
   }, {
     cyrillic: "библиотека",
-    translit: "biblioteka",
+    translit: "bibliatiéka",
     meaning: "biblioteca",
     note: "Б aparece dos veces, ambas sonoras",
     lexId: "CMR-02059"
   }, {
     cyrillic: "большой",
-    translit: "bolshoy",
+    translit: "balshói",
     meaning: "grande",
     note: "Б inicial seguida de vocal 'o'",
     lexId: "CMR-00096"
@@ -105,19 +109,19 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "вода",
-    translit: "voda",
+    translit: "vadá",
     meaning: "agua",
     note: "В inicial fricativa, no oclusiva",
     lexId: "CMR-00191"
   }, {
     cyrillic: "всё",
-    translit: "vsyo",
+    translit: "fsio",
     meaning: "todo",
     note: "В ante consonante, mantiene fricción",
     lexId: "CMR-05455"
   }, {
     cyrillic: "вечер",
-    translit: "vecher",
+    translit: "viéchir",
     meaning: "tarde/noche",
     note: "В ante vocal frontal 'e'",
     lexId: "CMR-00295"
@@ -145,25 +149,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "город",
-    translit: "gorod",
+    translit: "górat",
     meaning: "ciudad",
     note: "Г inicial oclusiva fuerte",
     lexId: "CMR-00156"
   }, {
     cyrillic: "газета",
-    translit: "gazeta",
+    translit: "gazéta",
     meaning: "periódico",
     note: "Г ante 'а', sonido claro",
     lexId: "CMR-00449"
   }, {
     cyrillic: "голос",
-    translit: "golos",
+    translit: "gólas",
     meaning: "voz",
     note: "Г initial, seguida de 'o'",
     lexId: "CMR-00221"
   }, {
     cyrillic: "говорить",
-    translit: "govorit'",
+    translit: "gavarít",
     meaning: "hablar",
     note: "Г en inicio, forma verbal clave",
     lexId: "CMR-00058"
@@ -191,19 +195,19 @@ const ALPHABET=[{
     lexId: "CMR-00118"
   }, {
     cyrillic: "день",
-    translit: "den'",
+    translit: "dien",
     meaning: "día",
     note: "Д palatalizada ante 'е'",
     lexId: "CMR-00071"
   }, {
     cyrillic: "дорога",
-    translit: "doroga",
+    translit: "daróga",
     meaning: "camino",
     note: "Д inicial ante 'о'",
     lexId: "CMR-00300"
   }, {
     cyrillic: "друг",
-    translit: "drug",
+    translit: "druk",
     meaning: "amigo",
     note: "Д ante grupo consonántico 'р'",
     lexId: "CMR-00106"
@@ -225,25 +229,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "если",
-    translit: "yesli",
+    translit: "yésli",
     meaning: "si (condicional)",
     note: "Е inicial → 'ye'",
     lexId: "CMR-00053"
   }, {
     cyrillic: "лес",
-    translit: "lyes",
+    translit: "lies",
     meaning: "bosque",
     note: "Е palataliza la 'л' anterior",
     lexId: "CMR-00512"
   }, {
     cyrillic: "небо",
-    translit: "nyebo",
+    translit: "niéba",
     meaning: "cielo",
     note: "Е tras 'н', la palataliza",
     lexId: "CMR-00600"
   }, {
     cyrillic: "есть",
-    translit: "yest'",
+    translit: "yest",
     meaning: "hay / comer",
     note: "Е inicial con sonido 'ye'",
     lexId: "CMR-01290"
@@ -265,25 +269,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "ёж",
-    translit: "yozh",
+    translit: "yosh",
     meaning: "erizo",
     note: "Ё inicial siempre acentuada",
     lexId: "CMR-05408"
   }, {
     cyrillic: "её",
-    translit: "yeyo",
+    translit: "yiyó",
     meaning: "su / la (pron.)",
     note: "Ё en posición tónica",
     lexId: "CMR-00072"
   }, {
     cyrillic: "всё",
-    translit: "vsyo",
+    translit: "fsio",
     meaning: "todo",
     note: "Ё siempre tónica aquí",
     lexId: "CMR-05455"
   }, {
     cyrillic: "мёд",
-    translit: "myod",
+    translit: "miot",
     meaning: "miel",
     note: "Ё palataliza la 'м' anterior",
     lexId: "CMR-05409"
@@ -305,25 +309,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "журнал",
-    translit: "zhurnal",
+    translit: "zhurnál",
     meaning: "revista",
     note: "Ж inicial fricativa sonora",
     lexId: "CMR-00699"
   }, {
     cyrillic: "жизнь",
-    translit: "zhizn'",
+    translit: "zhizn",
     meaning: "vida",
     note: "Ж siempre dura aunque le siga 'и'",
     lexId: "CMR-00066"
   }, {
     cyrillic: "муж",
-    translit: "muzh",
+    translit: "mush",
     meaning: "marido",
     note: "Ж al final, sigue sonora",
     lexId: "CMR-00397"
   }, {
     cyrillic: "ужин",
-    translit: "uzhin",
+    translit: "úzhin",
     meaning: "cena",
     note: "Ж en posición intervocálica",
     lexId: "CMR-03030"
@@ -345,25 +349,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "земля",
-    translit: "zemlya",
+    translit: "zimliá",
     meaning: "tierra",
     note: "З inicial sonora ante 'е'",
     lexId: "CMR-00184"
   }, {
     cyrillic: "завтра",
-    translit: "zavtra",
+    translit: "záftra",
     meaning: "mañana",
     note: "З inicial ante 'а'",
     lexId: "CMR-00865"
   }, {
     cyrillic: "зима",
-    translit: "zima",
+    translit: "zimá",
     meaning: "invierno",
     note: "З inicial ante 'и'",
     lexId: "CMR-01147"
   }, {
     cyrillic: "газета",
-    translit: "gazeta",
+    translit: "gazéta",
     meaning: "periódico",
     note: "З intervocálica sonora",
     lexId: "CMR-00449"
@@ -385,25 +389,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "имя",
-    translit: "imya",
+    translit: "ímia",
     meaning: "nombre",
     note: "И inicial, vocal clara",
     lexId: "CMR-00239"
   }, {
     cyrillic: "идти",
-    translit: "idti",
+    translit: "ittí",
     meaning: "ir (a pie)",
     note: "И inicial tónica",
     lexId: "CMR-00095"
   }, {
     cyrillic: "книга",
-    translit: "kniga",
+    translit: "kníga",
     meaning: "libro",
     note: "И en sílaba tónica interior",
     lexId: "CMR-00230"
   }, {
     cyrillic: "писать",
-    translit: "pisat'",
+    translit: "pisát",
     meaning: "escribir",
     note: "И ante sílaba tónica",
     lexId: "CMR-00213"
@@ -413,9 +417,9 @@ const ALPHABET=[{
   upper: "Й",
   lower: "й",
   name: "И краткое",
-  translit: "y",
+  translit: "i",
   pronunciation: "Como la 'y' en 'yema' o la 'i' en 'aire'",
-  sounds: ["y"],
+  sounds: ["i"],
   details: {
     description: "Semivocal palatal. Sonido de deslizamiento, nunca forma sílaba sola.",
     similar: "Como la 'y' de 'yema', 'yerba'. O como la 'i' de 'aire', 'peine' (no silábica).",
@@ -425,25 +429,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "йогурт",
-    translit: "yogurt",
+    translit: "yógurt",
     meaning: "yogur",
     note: "Й inicial semivocal ante 'о'",
     lexId: "CMR-05410"
   }, {
     cyrillic: "чай",
-    translit: "chay",
+    translit: "chai",
     meaning: "té",
     note: "Й final en diptongo 'ай'",
     lexId: "CMR-01136"
   }, {
     cyrillic: "мой",
-    translit: "moy",
+    translit: "moi",
     meaning: "mi (pron.)",
     note: "Й final en diptongo 'ой'",
     lexId: "CMR-00060"
   }, {
     cyrillic: "майор",
-    translit: "mayor",
+    translit: "mayór",
     meaning: "mayor (rango)",
     note: "Й en diptongo interior",
     lexId: "CMR-02052"
@@ -471,19 +475,19 @@ const ALPHABET=[{
     lexId: "CMR-02793"
   }, {
     cyrillic: "книга",
-    translit: "kniga",
+    translit: "kníga",
     meaning: "libro",
     note: "К en grupo consonántico 'кн'",
     lexId: "CMR-00230"
   }, {
     cyrillic: "когда",
-    translit: "kogda",
+    translit: "kagdá",
     meaning: "cuando",
     note: "К inicial ante 'о'",
     lexId: "CMR-00055"
   }, {
     cyrillic: "красный",
-    translit: "krasny",
+    translit: "krásnyi",
     meaning: "rojo",
     note: "К en grupo inicial 'кр'",
     lexId: "CMR-00442"
@@ -505,13 +509,13 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "луна",
-    translit: "luna",
+    translit: "luná",
     meaning: "luna",
     note: "Л dura ante 'у'",
     lexId: "CMR-02525"
   }, {
     cyrillic: "лес",
-    translit: "lyes",
+    translit: "lies",
     meaning: "bosque",
     note: "Л suave ante 'е'",
     lexId: "CMR-00512"
@@ -523,7 +527,7 @@ const ALPHABET=[{
     lexId: "CMR-00237"
   }, {
     cyrillic: "любовь",
-    translit: "lyubov'",
+    translit: "liubóf",
     meaning: "amor",
     note: "Л suave ante 'ю'",
     lexId: "CMR-00307"
@@ -545,25 +549,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "мама",
-    translit: "mama",
+    translit: "máma",
     meaning: "mamá",
     note: "М inicial y media, clara",
     lexId: "CMR-00309"
   }, {
     cyrillic: "море",
-    translit: "morye",
+    translit: "móri",
     meaning: "mar",
     note: "М inicial ante 'о'",
     lexId: "CMR-00720"
   }, {
     cyrillic: "метро",
-    translit: "metro",
+    translit: "mitró",
     meaning: "metro",
     note: "М suave ante 'е'",
     lexId: "CMR-02395"
   }, {
     cyrillic: "музыка",
-    translit: "muzyka",
+    translit: "múzyka",
     meaning: "música",
     note: "М inicial ante 'у'",
     lexId: "CMR-00639"
@@ -585,25 +589,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "ночь",
-    translit: "noch'",
+    translit: "noch",
     meaning: "noche",
     note: "Н inicial ante 'о'",
     lexId: "CMR-00236"
   }, {
     cyrillic: "небо",
-    translit: "nyebo",
+    translit: "niéba",
     meaning: "cielo",
     note: "Н suave ante 'е'",
     lexId: "CMR-00600"
   }, {
     cyrillic: "нет",
-    translit: "nyet",
+    translit: "niet",
     meaning: "no",
     note: "Н suave, palabra muy frecuente",
     lexId: "CMR-00107"
   }, {
     cyrillic: "новый",
-    translit: "novy",
+    translit: "nóvyi",
     meaning: "nuevo",
     note: "Н inicial ante 'о'",
     lexId: "CMR-00073"
@@ -625,25 +629,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "окно",
-    translit: "akno",
+    translit: "aknó",
     meaning: "ventana",
     note: "Primera О átona → suena 'а'",
     lexId: "CMR-00370"
   }, {
     cyrillic: "молоко",
-    translit: "malako",
+    translit: "malakó",
     meaning: "leche",
     note: "Solo la última О es tónica",
     lexId: "CMR-02072"
   }, {
     cyrillic: "отец",
-    translit: "atyets",
+    translit: "atiéts",
     meaning: "padre",
     note: "О inicial átona → 'а'",
     lexId: "CMR-00192"
   }, {
     cyrillic: "город",
-    translit: "gorad",
+    translit: "górat",
     meaning: "ciudad",
     note: "Segunda О átona → 'а'",
     lexId: "CMR-00156"
@@ -665,25 +669,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "папа",
-    translit: "papa",
+    translit: "pápa",
     meaning: "papá",
     note: "П inicial clara y sin aspiración",
     lexId: "CMR-00826"
   }, {
     cyrillic: "письмо",
-    translit: "pis'mo",
+    translit: "pismó",
     meaning: "carta",
     note: "П suave ante 'и'",
     lexId: "CMR-00333"
   }, {
     cyrillic: "работа",
-    translit: "rabota",
+    translit: "rabóta",
     meaning: "trabajo",
     note: "П... (aquí usamos 'р')",
     lexId: "CMR-00087"
   }, {
     cyrillic: "помощь",
-    translit: "pomoshch'",
+    translit: "pómasch",
     meaning: "ayuda",
     note: "П inicial ante 'о'",
     lexId: "CMR-00338"
@@ -705,25 +709,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "река",
-    translit: "reka",
+    translit: "riká",
     meaning: "río",
     note: "Р inicial, siempre vibrante",
     lexId: "CMR-00916"
   }, {
     cyrillic: "работа",
-    translit: "rabota",
+    translit: "rabóta",
     meaning: "trabajo",
     note: "Р inicial ante 'а'",
     lexId: "CMR-00087"
   }, {
     cyrillic: "рука",
-    translit: "ruka",
+    translit: "ruká",
     meaning: "mano",
     note: "Р inicial ante 'у'",
     lexId: "CMR-00074"
   }, {
     cyrillic: "красный",
-    translit: "krasny",
+    translit: "krásnyi",
     meaning: "rojo",
     note: "Р en grupo consonántico",
     lexId: "CMR-00442"
@@ -751,19 +755,19 @@ const ALPHABET=[{
     lexId: "CMR-00769"
   }, {
     cyrillic: "слово",
-    translit: "slovo",
+    translit: "slóva",
     meaning: "palabra",
     note: "С en grupo consonántico 'сл'",
     lexId: "CMR-00094"
   }, {
     cyrillic: "страна",
-    translit: "strana",
+    translit: "straná",
     meaning: "país",
     note: "С en grupo 'стр'",
     lexId: "CMR-00125"
   }, {
     cyrillic: "сестра",
-    translit: "syestra",
+    translit: "sistrá",
     meaning: "hermana",
     note: "С suave ante 'е'",
     lexId: "CMR-00982"
@@ -797,7 +801,7 @@ const ALPHABET=[{
     lexId: "CMR-00103"
   }, {
     cyrillic: "телефон",
-    translit: "telefon",
+    translit: "tilifón",
     meaning: "teléfono",
     note: "Т suave ante 'е'",
     lexId: "CMR-00676"
@@ -825,25 +829,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "улица",
-    translit: "ulitsa",
+    translit: "úlitsa",
     meaning: "calle",
     note: "У inicial tónica",
     lexId: "CMR-00292"
   }, {
     cyrillic: "утро",
-    translit: "utro",
+    translit: "útra",
     meaning: "mañana",
     note: "У inicial tónica",
     lexId: "CMR-00336"
   }, {
     cyrillic: "рука",
-    translit: "ruka",
+    translit: "ruká",
     meaning: "mano",
     note: "У en sílaba tónica",
     lexId: "CMR-00074"
   }, {
     cyrillic: "слушать",
-    translit: "slushat'",
+    translit: "slúshat",
     meaning: "escuchar",
     note: "У en sílaba tónica",
     lexId: "CMR-00445"
@@ -865,7 +869,7 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "фото",
-    translit: "foto",
+    translit: "fóta",
     meaning: "foto",
     note: "Ф inicial ante 'о'",
     lexId: "CMR-03400"
@@ -877,13 +881,13 @@ const ALPHABET=[{
     lexId: "CMR-00661"
   }, {
     cyrillic: "форма",
-    translit: "forma",
+    translit: "fórma",
     meaning: "forma",
     note: "Ф inicial ante 'о'",
     lexId: "CMR-00282"
   }, {
     cyrillic: "кофе",
-    translit: "kofe",
+    translit: "kófi",
     meaning: "café",
     note: "Ф intervocálica",
     lexId: "CMR-01952"
@@ -893,9 +897,9 @@ const ALPHABET=[{
   upper: "Х",
   lower: "х",
   name: "Ха",
-  translit: "kh",
+  translit: "j",
   pronunciation: "Como la 'j' española en 'jardín'",
-  sounds: ["kh"],
+  sounds: ["j"],
   details: {
     description: "Consonante fricativa velar sorda. Muy similar a la 'j' española o a la 'ch' alemana en 'Bach'.",
     similar: "Como la 'j' de 'jardín', 'jamón'. O la 'g' de 'genio' en castellano estándar.",
@@ -905,25 +909,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "хлеб",
-    translit: "khleb",
+    translit: "jliep",
     meaning: "pan",
     note: "Х inicial, suena como 'j'",
     lexId: "CMR-01130"
   }, {
     cyrillic: "холодно",
-    translit: "kholadno",
+    translit: "jóladna",
     meaning: "hace frío",
     note: "Х inicial ante 'о'",
     lexId: "CMR-03218"
   }, {
     cyrillic: "хорошо",
-    translit: "khorosho",
+    translit: "jarashó",
     meaning: "bien / está bien",
     note: "Х inicial muy usada",
     lexId: "CMR-00190"
   }, {
     cyrillic: "плохо",
-    translit: "plokho",
+    translit: "plója",
     meaning: "mal",
     note: "Х en posición interior",
     lexId: "CMR-00947"
@@ -951,19 +955,19 @@ const ALPHABET=[{
     lexId: "CMR-00394"
   }, {
     cyrillic: "цена",
-    translit: "tsena",
+    translit: "tsiná",
     meaning: "precio",
     note: "Ц inicial ante 'е'",
     lexId: "CMR-00454"
   }, {
     cyrillic: "птица",
-    translit: "ptitsa",
+    translit: "ptítsa",
     meaning: "pájaro",
     note: "Ц interior ante 'а'",
     lexId: "CMR-01294"
   }, {
     cyrillic: "отец",
-    translit: "atyets",
+    translit: "atiéts",
     meaning: "padre",
     note: "Ц al final",
     lexId: "CMR-00192"
@@ -985,7 +989,7 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "чай",
-    translit: "chay",
+    translit: "chai",
     meaning: "té",
     note: "Ч inicial, sonido idéntico al español",
     lexId: "CMR-01136"
@@ -997,13 +1001,13 @@ const ALPHABET=[{
     lexId: "CMR-00200"
   }, {
     cyrillic: "ночь",
-    translit: "noch'",
+    translit: "noch",
     meaning: "noche",
     note: "Ч al final con signo blando",
     lexId: "CMR-00236"
   }, {
     cyrillic: "человек",
-    translit: "chelovyek",
+    translit: "chilaviék",
     meaning: "persona",
     note: "Ч inicial en palabra muy común",
     lexId: "CMR-00039"
@@ -1025,25 +1029,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "школа",
-    translit: "shkola",
+    translit: "shkóla",
     meaning: "escuela",
     note: "Ш en grupo 'шк'",
     lexId: "CMR-00315"
   }, {
     cyrillic: "шапка",
-    translit: "shapka",
+    translit: "shápka",
     meaning: "gorro",
     note: "Ш inicial ante 'а'",
     lexId: "CMR-02772"
   }, {
     cyrillic: "хорошо",
-    translit: "khorosho",
+    translit: "jarashó",
     meaning: "bien",
     note: "Ш final, muy frecuente",
     lexId: "CMR-00190"
   }, {
     cyrillic: "машина",
-    translit: "mashina",
+    translit: "mashína",
     meaning: "coche",
     note: "Ш intervocálica",
     lexId: "CMR-00187"
@@ -1053,9 +1057,9 @@ const ALPHABET=[{
   upper: "Щ",
   lower: "щ",
   name: "Ща",
-  translit: "shch",
-  pronunciation: "Como 'shch' o una 'sh' larga y suave",
-  sounds: ["shch"],
+  translit: "sch",
+  pronunciation: "Como una 'sh' larga y suave",
+  sounds: ["sch"],
   details: {
     description: "Consonante fricativa palatal sorda prolongada. Suave y larga, sin equivalente directo en español.",
     similar: "Como una 'sh' suave y alargada, o 'sch' en alemán 'Schule' pero más palatal.",
@@ -1065,25 +1069,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "щи",
-    translit: "shchi",
+    translit: "schi",
     meaning: "sopa de col (plato típico)",
     note: "Щ inicial, suave palatal",
     lexId: "CMR-05411"
   }, {
     cyrillic: "щека",
-    translit: "shcheka",
+    translit: "schiká",
     meaning: "mejilla",
     note: "Щ inicial ante 'е'",
     lexId: "CMR-01693"
   }, {
     cyrillic: "борщ",
-    translit: "borshch",
+    translit: "borsch",
     meaning: "borsch (sopa)",
     note: "Щ al final de palabra",
     lexId: "CMR-05412"
   }, {
     cyrillic: "овощи",
-    translit: "ovoshchi",
+    translit: "óvaschi",
     meaning: "verduras",
     note: "Щ interior palatal",
     lexId: "CMR-04968"
@@ -1105,25 +1109,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "съезд",
-    translit: "s'yezd",
+    translit: "syest",
     meaning: "congreso",
     note: "Ъ entre 'с' y 'е': la 'с' no se palataliza",
     lexId: "CMR-02269"
   }, {
     cyrillic: "объект",
-    translit: "ab'yekt",
+    translit: "abyékt",
     meaning: "objeto",
     note: "Ъ mantiene 'б' dura ante 'е'",
     lexId: "CMR-00528"
   }, {
     cyrillic: "подъезд",
-    translit: "pad'yezd",
+    translit: "padyést",
     meaning: "entrada (edificio)",
     note: "Ъ separa el prefijo",
     lexId: "CMR-02121"
   }, {
     cyrillic: "объём",
-    translit: "ab'yom",
+    translit: "abyóm",
     meaning: "volumen",
     note: "Ъ antes de 'ё'",
     lexId: "CMR-00687"
@@ -1151,7 +1155,7 @@ const ALPHABET=[{
     lexId: "CMR-00033"
   }, {
     cyrillic: "рыба",
-    translit: "ryba",
+    translit: "rýba",
     meaning: "pez",
     note: "Ы en sílaba tónica",
     lexId: "CMR-01436"
@@ -1163,7 +1167,7 @@ const ALPHABET=[{
     lexId: "CMR-00360"
   }, {
     cyrillic: "мыло",
-    translit: "mylo",
+    translit: "mýla",
     meaning: "jabón",
     note: "Ы tónica, bien diferenciada de 'и'",
     lexId: "CMR-05413"
@@ -1185,25 +1189,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "мать",
-    translit: "mat'",
+    translit: "mat",
     meaning: "madre",
     note: "Ь final palataliza la 'т'",
     lexId: "CMR-00301"
   }, {
     cyrillic: "день",
-    translit: "den'",
+    translit: "dien",
     meaning: "día",
     note: "Ь palataliza la 'н'",
     lexId: "CMR-00071"
   }, {
     cyrillic: "письмо",
-    translit: "pis'mo",
+    translit: "pismó",
     meaning: "carta",
     note: "Ь interior palataliza 'с'",
     lexId: "CMR-00333"
   }, {
     cyrillic: "учитель",
-    translit: "uchitel'",
+    translit: "uchítil",
     meaning: "profesor",
     note: "Ь final palataliza 'л'",
     lexId: "CMR-01060"
@@ -1225,25 +1229,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "это",
-    translit: "eto",
+    translit: "éta",
     meaning: "esto / eso",
     note: "Э inicial, muy frecuente",
     lexId: "CMR-00012"
   }, {
     cyrillic: "этаж",
-    translit: "etazh",
+    translit: "itásh",
     meaning: "piso (de edificio)",
     note: "Э inicial ante 'т' dura",
     lexId: "CMR-01181"
   }, {
     cyrillic: "эхо",
-    translit: "ekho",
+    translit: "éja",
     meaning: "eco",
     note: "Э inicial, préstamo del griego",
     lexId: "CMR-05414"
   }, {
     cyrillic: "поэт",
-    translit: "poet",
+    translit: "paét",
     meaning: "poeta",
     note: "Э interior, consonante anterior dura",
     lexId: "CMR-00747"
@@ -1265,25 +1269,25 @@ const ALPHABET=[{
   },
   words: [{
     cyrillic: "юг",
-    translit: "yug",
+    translit: "yuk",
     meaning: "sur",
     note: "Ю inicial → 'йу'",
     lexId: "CMR-02849"
   }, {
     cyrillic: "люди",
-    translit: "lyudi",
+    translit: "liúdi",
     meaning: "gente / personas",
     note: "Ю palataliza la 'л'",
     lexId: "CMR-05415"
   }, {
     cyrillic: "любовь",
-    translit: "lyubov'",
+    translit: "liubóf",
     meaning: "amor",
     note: "Ю palataliza 'л'",
     lexId: "CMR-00307"
   }, {
     cyrillic: "журнал",
-    translit: "zhurnal",
+    translit: "zhurnál",
     meaning: "revista",
     note: "Ю... (aquí usamos 'у')",
     lexId: "CMR-00699"
@@ -1311,19 +1315,19 @@ const ALPHABET=[{
     lexId: "CMR-00005"
   }, {
     cyrillic: "яблоко",
-    translit: "yabloko",
+    translit: "yáblaka",
     meaning: "manzana",
     note: "Я inicial → 'йа'",
     lexId: "CMR-02230"
   }, {
     cyrillic: "язык",
-    translit: "yazyk",
+    translit: "yizýk",
     meaning: "lengua / idioma",
     note: "Я inicial tónica",
     lexId: "CMR-00306"
   }, {
     cyrillic: "земля",
-    translit: "zemlya",
+    translit: "zimliá",
     meaning: "tierra",
     note: "Я palataliza 'л' final",
     lexId: "CMR-00184"

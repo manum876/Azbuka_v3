@@ -8,6 +8,10 @@
    (CMR-05033 y CMR-05376, duplicados eliminados del léxico) y el acento
    del infinitivo corregido según Zalizniak en подде́рживать, ука́зывать,
    почита́ть (×2), передава́ться y выре́зывать (este también en sus formas).
+   Actualizado el 24/09/2026: реализова́ть y минова́ть (biaspectuales)
+   pasan a guardar sus formas en "presente", como el resto de los
+   biaspectuales; вида́ть suma su presente (вида́ю…), que Zalizniak
+   registra como coloquial.
 
    QUÉ HAY ACÁ Y QUÉ NO
    Este archivo guarda SOLO las formas conjugadas. Todo lo demás
@@ -2353,7 +2357,7 @@ const VERBOS = {
    pasado:{ m:"заложи́л", f:"заложи́ла", n:"заложи́ло", pl:"заложи́ли" },
    imperativo:{ ty:"заложи́", vy:"заложи́те" } },
  "CMR-02562": { ru:"реализова́ть",
-   futuro:["реализу́ю","реализу́ешь","реализу́ет","реализу́ем","реализу́ете","реализу́ют"],
+   presente:["реализу́ю","реализу́ешь","реализу́ет","реализу́ем","реализу́ете","реализу́ют"],
    pasado:{ m:"реализова́л", f:"реализова́ла", n:"реализова́ло", pl:"реализова́ли" },
    imperativo:{ ty:"реализу́й", vy:"реализу́йте" } },
  "CMR-02566": { ru:"вы́яснить",
@@ -3732,10 +3736,10 @@ const VERBOS = {
    pasado:{ m:"скры́лся", f:"скры́лась", n:"скры́лось", pl:"скры́лись" },
    imperativo:{ ty:"скро́йся", vy:"скро́йтесь" } },
  "CMR-03758": { ru:"вида́ть",
-   presente:null,
+   presente:["вида́ю","вида́ешь","вида́ет","вида́ем","вида́ете","вида́ют"],
    pasado:{ m:"вида́л", f:"вида́ла", n:"вида́ло", pl:"вида́ли" },
    imperativo:null,
-   nota:"Se usa sobre todo como palabra suelta («видать» = «al parecer») y en pasado («видал» = «vi, conocí»). El presente casi no se usa." },
+   nota:"Se usa sobre todo como palabra suelta («видать» = «al parecer») y en pasado («видал» = «vi, conocí»). El presente existe, pero es coloquial y se usa poco." },
  "CMR-03759": { ru:"вы́жить",
    futuro:["вы́живу","вы́живешь","вы́живет","вы́живем","вы́живете","вы́живут"],
    pasado:{ m:"вы́жил", f:"вы́жила", n:"вы́жило", pl:"вы́жили" },
@@ -3793,7 +3797,7 @@ const VERBOS = {
    pasado:{ m:"шепта́л", f:"шепта́ла", n:"шепта́ло", pl:"шепта́ли" },
    imperativo:{ ty:"шепчи́", vy:"шепчи́те" } },
  "CMR-03830": { ru:"минова́ть",
-   futuro:["мину́ю","мину́ешь","мину́ет","мину́ем","мину́ете","мину́ют"],
+   presente:["мину́ю","мину́ешь","мину́ет","мину́ем","мину́ете","мину́ют"],
    pasado:{ m:"минова́л", f:"минова́ла", n:"минова́ло", pl:"минова́ли" },
    imperativo:{ ty:"мину́й", vy:"мину́йте" } },
  "CMR-03834": { ru:"разделя́ть",
