@@ -2,265 +2,184 @@
 
 # Азбука
 
-### Ruso desde cero · Russian from zero
+### Russian from zero
 
 [🇬🇧 English](README.md) · [🇪🇸 Español](README.es.md)
 
-**A free, open-source web course for Spanish speakers learning Russian from scratch.**
+**A free, open-source web course for Spanish speakers who want to learn Russian from scratch.**
 
-[**▶ Open Azbuka**](https://manum876.github.io/AZBUKA/) · [**Repository**](https://github.com/manum876/AZBUKA)
+[**▶ Open Azbuka**](https://manum876.github.io/Azbuka_v3/) · [**Repository**](https://github.com/manum876/Azbuka_v3)
 
 </div>
 
 ---
 
-## About
+## About the project
 
-**Азбука (Azbuka)** is a personal project designed to help Spanish-speaking learners study Russian from beginner level to approximately **B1**.
+**Азбука (Azbuka)** is a personal project that helps Spanish speakers learn Russian from zero up to roughly **B1 level**. The interface and all explanations are in Spanish (Rioplatense variety).
 
-The project combines a structured **12-unit course** with a set of independent reference and practice tools. The goal is not to turn language learning into a game, but to provide a clear learning path that can also be used as a practical reference whenever a specific word, verb, case, or expression is needed.
+It combines a **12-unit course** with **reference tools** that can be opened at any time. All vocabulary lives in a **central dictionary** shared by the course and the tools: each word is written once, and every module shows it in its own way.
 
-There are **no streaks, XP, lives, leaderboards, or daily requirements**. Progress is saved locally, but the learner decides when and what to study.
+There are **no streaks, XP, lives, leaderboards or daily obligations**. Progress is stored in the browser, and learners decide when and what to study.
 
-> **Learn in order. Look things up whenever you need them. Practice what you want.**
-
----
-
-## How Azbuka is organized
-
-<img src="docs/azbuka-structure.svg" alt="Azbuka structure: a progressive A1-B1 course connected to five independent learning tools" width="900">
-
-The project has two complementary parts:
-
-- **Course** — 12 progressive units covering approximately A1 to B1.
-- **Tools** — independent modules that can be accessed at any time, without having to find the corresponding course unit first.
-
-The application also includes a **cross-module search**, making it possible to look up Russian vocabulary and expressions from different parts of the application.
+> **Learn in order. Look up what you need. Practise what you want.**
 
 ---
 
-## Course
+## How it is organised
 
-The course is divided into **12 progressive units**, each designed to represent roughly one month of study.
+<img src="azbuka-structure.svg" alt="Azbuka structure: A1-B1 course connected to the reference tools" width="900">
 
-Each unit combines grammar, vocabulary, reading, listening, writing, and interactive exercises. Previously learned material is continuously recycled throughout the course.
+- **Course:** 12 progressive units, A1 to B1, plus a final exam.
+- **Tools:** reference and practice modules, independent of the course order.
+- **Central dictionary:** the shared foundation.
+- **Search:** finds words in Russian or Spanish, including inflected and conjugated forms.
 
-| Unit | Main focus |
+---
+
+## The course
+
+Twelve progressive units, each designed for about a month of study:
+
+| Unit | Main topic |
 |---|---|
-| **01** | Cyrillic alphabet & pronunciation |
-| **02** | Greetings & basic conversations |
-| **03** | Nouns, gender & number |
-| **04** | Cases I — Nominative & Accusative |
-| **05** | Present tense & everyday actions |
-| **06** | Location, movement & Prepositional case |
-| **07** | Time, dates & daily routines |
-| **08** | Past tense & personal experiences |
-| **09** | Future tense & plans |
-| **10** | Cases II — Genitive, Dative & Instrumental |
-| **11** | Everyday communication & real-world Russian |
-| **12** | B1 consolidation & communication |
+| **01** | Alphabet and pronunciation |
+| **02** | Basic introductions |
+| **03** | Nouns and gender |
+| **04** | Basic cases: nominative and accusative |
+| **05** | Present-tense verbs |
+| **06** | Movement and location |
+| **07** | Time and daily routine |
+| **08** | Past tense |
+| **09** | Future tense |
+| **10** | Remaining cases: genitive, dative and instrumental |
+| **11** | Everyday conversations |
+| **12** | B1 consolidation |
 
-### Learning approach
+The approach is **production-oriented**: learners write, translate, listen and build their own sentences, not just recognise answers. The course is cumulative, and each unit recycles earlier material.
 
-Azbuka follows a **production-first approach**. Learners are progressively asked to write, translate, listen, read, and construct their own sentences rather than only recognize correct answers.
-
-Exercises move from recognition and controlled practice toward increasingly independent language production.
-
-The course is cumulative: each unit builds on previously introduced vocabulary and grammar instead of functioning as an isolated lesson.
+> The units are being migrated to the new version of the app.
 
 ---
 
-## Independent tools
+## Tools
 
-### 📖 Cases
+### 📚 Dictionary
 
-Practice all **six Russian grammatical cases**:
+The foundation of the app: **5,397 words** (Comer 5000 plus additional vocabulary). Each word has:
 
-- Nominative
-- Accusative
-- Genitive
-- Dative
-- Instrumental
-- Prepositional
+- its **stress** marked;
+- **IPA** and a **Spanish-style pronunciation guide** (jarashó, spasíba);
+- its part of speech;
+- one or more **senses**, with translation and definition in Spanish;
+- gender, animacy and number for nouns, and aspect and aspectual partner for verbs.
 
-Includes basic theory and declension exercises across **three difficulty levels**, with **381 nouns** and their declensions.
-
----
-
-### 🔤 Alphabet
-
-A complete reference and practice module for the **33 letters and signs of the Russian Cyrillic alphabet**.
-
-Includes:
-
-- Uppercase and lowercase print forms
-- Uppercase and lowercase cursive forms
-- Transliteration
-- Text-to-speech pronunciation
-- Individual practice exercises
-- Spanish explanations of pronunciation
-- Common pronunciation and reading mistakes
-- Similar-looking Russian letters
-- Progress tracking for letters already mastered
-
----
+Every word has its own entry page, with audio.
 
 ### 🗣️ Verbs
 
-A collection of the **50 most frequently used Russian verbs**, with conjugations in the present tense for all personal pronouns.
+Conjugations for all **1,654 verbs** in the dictionary:
 
-The verb module is designed to grow over time, with past and future forms planned for future development.
+- present, future, past and imperative, with audio for every form;
+- side-by-side comparison with the **aspectual partner** (imperfective / perfective);
+- **government**: which case each verb takes, with explanations and examples.
 
----
+### 📖 Cases
 
-### 📚 Thematic dictionary
+Declensions for **3,229 words**: nouns, adjectives, pronouns, determiners and numerals.
 
-Around **400 common words and short expressions**, organized into nine thematic categories:
+- The **6 cases**, singular and plural (or by gender for adjectives), with audio.
+- Special forms: locative (в лесу́), partitive (ча́ю), short adjectives and the animate accusative.
+- An explanation of each case, with examples that highlight which word is in that case and why.
 
-1. Basic concepts
-2. The person
-3. Food
-4. The city
-5. Work
-6. Nature
-7. Key verbs
-8. Travel
-9. Health
+### 🔤 Alphabet
 
-Each category is further divided into small thematic groups. Entries include Spanish, Russian, and transliteration, with Russian text-to-speech planned for future development.
-
----
+Reference and practice for the **33 letters** of the Cyrillic alphabet: print and cursive forms, pronunciation explained in Spanish, common mistakes, look-alike letters, example words with audio, and tracking of mastered letters.
 
 ### 💬 Dialogues
 
-A growing collection of **30 dialogues** covering common everyday situations.
-
-Each dialogue contains:
-
-- Two interlocutors
-- Short, natural exchanges
-- Spanish translation
-- Transliteration
-- Vocabulary and grammatical notes for the words used in each line
-
-The dialogues module is currently the least developed part of the application and will continue to expand.
+Conversations for everyday situations, with translation and vocabulary. *Being migrated to the new version.*
 
 ---
 
 ## Philosophy
 
-Azbuka is intentionally different from gamified language-learning platforms.
+**1. A clear path.** The course offers an ordered progression from zero to B1.
 
-There is no requirement to study every day. There are no streaks to maintain and no XP to collect.
+**2. Freedom of use.** The tools can be opened at any time, without following the course order.
 
-Instead, the project is designed around three ideas:
-
-**1. A clear path**  
-The course provides an ordered progression from absolute beginner to approximately B1.
-
-**2. Freedom of use**  
-The independent tools can be opened at any time, without requiring the learner to follow the course sequence.
-
-**3. Practical reference**  
-If you need to remember how to say something, check a verb, understand a case, or look up vocabulary, Azbuka should be useful on its own — without having to resort immediately to a translator or an AI assistant.
+**3. A reliable reference.** To remember how to say something, conjugate a verb or understand a case, Azbuka should be enough on its own. That is why forms are never invented: they come from cross-checked sources and are reviewed by hand.
 
 ---
 
 ## Features
 
-- 🎓 12-unit Russian course
-- 📈 Approximately A1 → B1 progression
-- 🔎 Cross-module search
-- 📖 Six-case declension practice
-- 🔤 Complete Russian Cyrillic alphabet reference
-- 🗣️ 50 high-frequency verbs
-- 📚 Thematic Spanish–Russian dictionary
-- 💬 Everyday dialogues
-- 🔊 Browser-based Russian text-to-speech
-- 💾 Local progress tracking
-- 🌓 Light/dark theme
-- 📱 Responsive web interface
-- 🚫 No gamification
-- 🚫 No external APIs
-- 🚫 No AI features
-
-Progress and preferences are stored locally in the browser using `localStorage`.
+- 🎓 12-unit course, A1 → B1
+- 📚 Central dictionary of 5,397 words, with stress, IPA and a pronunciation guide
+- 🗣️ 1,654 conjugated verbs, with aspectual partners and government
+- 📖 3,229 words declined in all 6 cases
+- 🔤 Complete Cyrillic alphabet reference
+- 🔎 Search in Russian or Spanish that also recognises inflected and conjugated forms
+- 🔊 Russian audio via the browser's speech engine
+- 💾 Progress stored in the browser
+- 🌓 Light and dark themes
+- 📱 Mobile-first
+- 🚫 No gamification, no accounts, no servers or external APIs, no AI features
 
 ---
 
 ## Technology
 
-Azbuka is intentionally lightweight.
-
-The application is built with:
-
-- **HTML**
-- **CSS**
-- **Vanilla JavaScript**
-- Browser `localStorage`
-- Browser Web Speech API for Russian text-to-speech
-
-There is no backend, build system, external database, or external API.
-
-The application is deployed using **GitHub Pages**.
+- HTML, CSS and JavaScript, **no build step**.
+- [Preact](https://preactjs.com/) + htm, bundled in the repository (`preact.js`).
+- `localStorage` for progress and theme.
+- The browser's Web Speech API for Russian audio.
+- Hosted on **GitHub Pages**.
 
 ---
 
-## Run locally
+## Data sources
 
-Azbuka is a static web application and does not require a package manager or build step.
+- **Vocabulary:** Comer, K. *Comer 5000* (Portland State University) and the [FreeDict](https://freedict.org/) Russian–Spanish dictionaries (CC BY-SA 3.0).
+- **Conjugations and declensions:** data from [OpenRussian.org](https://github.com/Badestrand/russian-dictionary) (CC BY-SA 4.0).
+- **Cross-checks:** the pymorphy3 morphological analyzer (OpenCorpora dictionary) and the stress indexes of Zaliznyak's Grammatical Dictionary.
+- **Original content:** definitions, explanations and notes written for Azbuka.
 
-Clone the repository:
+---
+
+## Running locally
 
 ```bash
-git clone https://github.com/manum876/AZBUKA.git
-cd AZBUKA
+git clone https://github.com/manum876/Azbuka_v3.git
+cd Azbuka_v3
+python3 -m http.server
 ```
 
-Then open `index.html` in a browser, or serve the folder with any local static web server.
-
----
-
-## Project status
-
-🚧 **Active development**
-
-Azbuka is still an evolving personal project. The current application contains the core course structure and independent tools, but content, exercises, interface details, and functionality are still being expanded and refined.
-
-Planned improvements include:
-
-- Expanding the verb database
-- Adding past and future conjugations
-- Adding Russian TTS throughout the dictionary
-- Expanding the dialogue library
-- Improving and expanding exercises
-- Refining existing course units
-- Adding further review and assessment features
+Then open `http://localhost:8000` in your browser. A local server is needed because some pages load data files.
 
 ---
 
 ## Repository structure
 
-The repository is intentionally simple and organized around the application's modules.
-
 ```text
-AZBUKA/
-├── index.html
-├── azbuka-index.html
-├── azbuka-*.html
+Azbuka_v3/
+├── index.html            ← home
+├── azbuka-index-1.html   ← A1 → B1 course index
+├── ficha.html            ← word entry (dictionary)
 ├── alfabeto.html
-├── casos.html
 ├── verbos.html
-├── diccionario.html
-├── dialogos.html
-├── core.js
-├── core.css
-├── data-alphabet.js
-├── data-casos.js
-├── data-diccionario.js
-├── data-verbos.js
-├── docs/
-│   └── azbuka-structure.svg
+├── casos.html
+├── core.css              ← shared styles
+├── core.js               ← catalogue, search, storage
+├── shell.js              ← side menu, header and bottom bar
+├── progress.js           ← progress
+├── preact.js             ← Preact + htm
+├── data-lexicon.js       ← central dictionary
+├── data-verbos.js        ← conjugations
+├── data-casos.js         ← declensions
+├── data-gramatica.js     ← grammar explanations
+├── data-alphabet.js      ← alphabet
+├── azbuka-structure.svg
 ├── README.md
 ├── README.es.md
 ├── LICENSE
@@ -269,35 +188,29 @@ AZBUKA/
 
 ---
 
-## Contributions
+## Project status
 
-Azbuka is a personal project maintained by **Juan Manuel Muñoz**.
+🚧 **Under active development.** The app is being migrated to a new architecture, with a central dictionary and a shared design system.
 
-The repository is open for people to explore, learn from, fork, and use according to the applicable licenses. However, the main `AZBUKA` repository is intentionally maintained as a single-author project; changes to the main repository are not open for direct contribution.
-
-If you find an error or have a suggestion, feel free to open an issue.
+- ✅ Home, course index, dictionary, Alphabet, Verbs and Cases.
+- 🔜 Dialogues and the 12 course units.
+- 🔜 Exercise bank and review.
 
 ---
 
-## License
+## Contributions
 
-Azbuka uses **two licenses**, because the software and the educational material serve different purposes.
+Azbuka is a personal project by **Juan Manuel Muñoz**. The repository is open to explore, learn from and fork under its licences, but it does not accept direct changes from third parties. If you find a bug or have a suggestion, please open an issue.
 
-### Code
+---
 
-The source code is released under the **MIT License**.
+## Licence
 
-See [`LICENSE`](LICENSE).
+Azbuka uses **two licences**, because software and educational content have different goals.
 
-### Educational content
-
-The original educational content — including course material, exercises, vocabulary, dialogues, and language-learning datasets — is released under **CC BY-NC-ND 4.0**.
-
-This license allows non-commercial sharing with attribution, but does not allow distribution of modified versions of the material.
-
-See [`LICENSE-CONTENT`](LICENSE-CONTENT).
-
-[Read the full CC BY-NC-ND 4.0 license](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+- **Code:** MIT License. See [`LICENSE`](LICENSE).
+- **Educational content** (course material, exercises, definitions, explanations): **CC BY-NC-ND 4.0**. See [`LICENSE-CONTENT`](LICENSE-CONTENT).
+- **Exception:** the conjugation tables (`data-verbos.js`) and declension tables (`data-casos.js`) are derived from OpenRussian.org data and are distributed under **CC BY-SA 4.0**, as their original licence requires.
 
 ---
 
@@ -305,8 +218,10 @@ See [`LICENSE-CONTENT`](LICENSE-CONTENT).
 
 **Juan Manuel Muñoz**
 
-Azbuka is an independent personal project created to make learning Russian from Spanish more structured, accessible, and practical.
+A personal, independent project to make learning Russian from Spanish more structured, accessible and practical.
 
-[▶ Try Azbuka](https://manum876.github.io/AZBUKA/)
+<div align="center">
+
+[▶ Try Azbuka](https://manum876.github.io/Azbuka_v3/)
 
 </div>

@@ -155,6 +155,22 @@ function CasosStyles({ c }) {
     .word-box .wb-row{display:flex;flex-wrap:wrap;gap:6px 14px;}
     .word-box .wb-item{font-size:15px;font-weight:700;color:${c.text};cursor:pointer;}
     .word-box .wb-item small{font-size:10.5px;font-weight:600;color:${c.textMuted};margin-left:5px;text-transform:uppercase;letter-spacing:.4px;}
+    .intro{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:18px 18px 14px;margin-bottom:14px;animation:fadeIn .3s ease;}
+    .intro-top{display:flex;align-items:center;gap:14px;}
+    .intro-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;flex-shrink:0;}
+    .intro-title{font-size:24px;font-weight:800;color:${c.text};line-height:1.1;}
+    .intro-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-top:4px;}
+    .intro-desc{font-size:13.5px;line-height:1.55;color:${c.textSub};margin-top:14px;}
+    .intro-item{display:flex;gap:10px;padding:9px 0;border-top:1px solid ${c.border};}
+    .intro-item:first-of-type{margin-top:12px;}
+    .intro-dot{width:6px;height:6px;border-radius:50%;background:${c.gold};margin-top:6px;flex-shrink:0;}
+    .intro-it{font-size:13px;font-weight:700;color:${c.text};}
+    .intro-id{font-size:12px;color:${c.textMuted};margin-top:1px;line-height:1.4;}
+    .search-hint{font-size:11.5px;color:${c.textMuted};margin:8px 2px 0;line-height:1.45;}
+    .try-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px;}
+    .try-lbl{font-size:11.5px;color:${c.textMuted};margin-right:2px;}
+    @media (max-height:720px){.intro{padding:14px 16px 10px;}.intro-desc{margin-top:10px;}.intro-id{display:none;}.intro-item{padding:7px 0;}}
+    .try-chip{padding:6px 11px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;background:${c.bg2};border:1px solid ${c.border};color:${c.text};}
     @keyframes popIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
   `);
 }
@@ -540,11 +556,9 @@ function App() {
     ));
   const noResults = h("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados");
 
-  const searchBar = h("div", {
-    ref: searchWrapRef,
-    style: { position: "fixed", top: headerH, left: 0, right: 0, zIndex: 90, background: c.bg, backdropFilter: "blur(12px)", borderBottom: `1px solid ${c.border}`, padding: "12px 3vw" }
-  },
-    h("div", { style: { maxWidth: 960, margin: "0 auto", position: "relative" } },
+  /* Campo de búsqueda: el mismo en la portada (dentro de la página)
+     y en la ficha (fijo debajo del header). */
+  const campo = [
       h("input", {
         ref: qRef, value: q,
         onInput: (e) => setQ(e.target.value),
@@ -555,7 +569,14 @@ function App() {
         onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); },
         "aria-label": "Limpiar búsqueda",
         style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
-      }, "✕"),
+      }, "✕")
+  ];
+  const searchBar = id && h("div", {
+    ref: searchWrapRef,
+    style: { position: "fixed", top: headerH, left: 0, right: 0, zIndex: 90, background: c.bg, backdropFilter: "blur(12px)", borderBottom: `1px solid ${c.border}`, padding: "12px 3vw" }
+  },
+    h("div", { style: { maxWidth: 960, margin: "0 auto", position: "relative" } },
+      ...campo,
       /* En la ficha, los resultados flotan por delante (como ficha.html) */
       id && q.trim() && h("div", {
         style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, boxShadow: "0 16px 40px rgba(0,0,0,.4)" }
@@ -563,16 +584,45 @@ function App() {
     )
   );
 
-  /* Portada: solo el buscador; los resultados van en la página. */
-  const portada = q.trim()
-    ? h("div", { style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, overflow: "hidden", animation: "fadeIn 0.3s ease" } },
-        results.length ? resultRows : noResults)
-    : null;
+  /* Portada: presentación del módulo (título, qué hay y para qué
+     sirve), el buscador y palabras para probar. Entra en una sola
+     pantalla de iPhone. Al escribir, la presentación se esconde y
+     quedan el buscador y los resultados. */
+  const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "casos") || {};
+  const ICON_COLOR = { red: "#B5605C", orange: "#C48254", yellow: "#C9B369", green: "#5C9B78", blue: "#5D7DA6", purple: "#8871A8" };
+  const total = typeof CASOS !== "undefined" ? Object.keys(CASOS).length.toLocaleString("es-AR") : "";
+  const INTRO_ITEMS = [["Tablas completas", "Los 6 casos de cada palabra, en singular y plural o por género."], ["Qué es cada caso", "Tocá un caso para ver para qué sirve, con ejemplos explicados."], ["Formas especiales", "Locativo, partitivo, forma corta y acusativo animado, cuando la palabra los tiene."]];
+  const EJEMPLOS = [["CMR-00230", "кни́га"], ["CMR-00096", "большо́й"], ["CMR-00007", "он"]];
+  const buscando = !!q.trim();
+  const portada = h("div", null,
+    !buscando && h("div", { className: "intro" },
+      h("div", { className: "intro-top" },
+        h("div", { className: "intro-icon", style: { background: ICON_COLOR[modulo.icon] || c.gold } }, modulo.glyph || ""),
+        h("div", null,
+          h("div", { className: "intro-title" }, modulo.title || ""),
+          total && h("div", { className: "intro-kicker" }, total + " palabras · 6 casos")
+        )
+      ),
+      h("div", { className: "intro-desc" }, "En ruso, las palabras cambian de terminación según su función en la oración. Acá encontrás cómo se declina cada sustantivo, adjetivo, pronombre y número del diccionario."),
+      INTRO_ITEMS.map((it, i) => h("div", { key: i, className: "intro-item" },
+        h("span", { className: "intro-dot" }),
+        h("div", null, h("div", { className: "intro-it" }, it[0]), h("div", { className: "intro-id" }, it[1]))
+      ))
+    ),
+    h("div", { style: { position: "relative" } }, ...campo),
+    !buscando && h("div", { className: "search-hint" }, "Podés buscar en ruso o en español, o escribir una forma declinada: тебе́ te lleva a ты."),
+    !buscando && h("div", { className: "try-row" },
+      h("span", { className: "try-lbl" }, "Probá con:"),
+      EJEMPLOS.map(e => h("a", { key: e[0], className: "try-chip", href: "casos.html?id=" + e[0], onClick: (ev) => azNavigate(ev, "casos.html?id=" + e[0]) }, e[1]))
+    ),
+    buscando && h("div", { style: { marginTop: 10, background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, overflow: "hidden", animation: "fadeIn 0.3s ease" } },
+      results.length ? resultRows : noResults)
+  );
 
   return h(AzShell, { darkMode, setDarkMode, moduleId: "casos", tabs: [] },
     h(CasosStyles, { c }),
     searchBar,
-    h("div", { style: { paddingTop: searchH ? searchH + 14 + "px" : "18px" } },
+    h("div", { style: { paddingTop: id ? (searchH ? searchH + 14 + "px" : "18px") : "16px" } },
       id ? h(FichaCasos, { key: id, id, c }) : portada)
   );
 }
