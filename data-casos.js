@@ -1,12 +1,14 @@
 /* ============================================================
    DATA-CASOS.JS — Declinaciones de las palabras del léxico AZBUKA
    ------------------------------------------------------------
-   Total: 3229 palabras (todas las entradas de data-lexicon.js con
+   Total: 3230 palabras (todas las entradas de data-lexicon.js con
    categoría sustantivo, adjetivo, pronombre, determinante o numeral).
    Generado el 23/09/2026. Ordenado por ID.
    Actualizado el 24/09/2026: лист y ко́рпус separados en dos entradas
    (CMR-05469, CMR-05470); plurales de дя́дя, се́ктор y ноль unificados
    con el léxico.
+   Actualizado el 24/09/2026 (módulo Diálogos): меню́ (CMR-05476),
+   indeclinable según OpenRussian y pymorphy3.
 
    QUÉ HAY ACÁ Y QUÉ NO
    Este archivo guarda SOLO las formas declinadas. Todo lo demás
@@ -11854,7 +11856,8 @@ const CASOS = {
    pl:["листы́", "листо́в", "листа́м", "листы́", "листа́ми", "листа́х"] },
  "CMR-05470": { ru:"ко́рпус", tipo:"sustantivo",
    sg:["ко́рпус", "ко́рпуса", "ко́рпусу", "ко́рпус", "ко́рпусом", "ко́рпусе"],
-   pl:["ко́рпусы", "ко́рпусов", "ко́рпусам", "ко́рпусы", "ко́рпусами", "ко́рпусах"] }
+   pl:["ко́рпусы", "ко́рпусов", "ко́рпусам", "ко́рпусы", "ко́рпусами", "ко́рпусах"] },
+ "CMR-05476": { ru:"меню́", tipo:"indeclinable" }
 };
 
 /* Devuelve la declinación de una palabra por ID, o null. */

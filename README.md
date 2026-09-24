@@ -66,7 +66,7 @@ The approach is **production-oriented**: learners write, translate, listen and b
 
 ### 📚 Dictionary
 
-The foundation of the app: **5,397 words** (Comer 5000 plus additional vocabulary). Each word has:
+The foundation of the app: **5,403 words** (Comer 5000 plus additional vocabulary). Each word has:
 
 - its **stress** marked;
 - **IPA** and a **Spanish-style pronunciation guide** (jarashó, spasíba);
@@ -78,7 +78,7 @@ Every word has its own entry page, with audio.
 
 ### 🗣️ Verbs
 
-Conjugations for all **1,654 verbs** in the dictionary:
+Conjugations for all **1,656 verbs** in the dictionary:
 
 - present, future, past and imperative, with audio for every form;
 - side-by-side comparison with the **aspectual partner** (imperfective / perfective);
@@ -86,7 +86,7 @@ Conjugations for all **1,654 verbs** in the dictionary:
 
 ### 📖 Cases
 
-Declensions for **3,229 words**: nouns, adjectives, pronouns, determiners and numerals.
+Declensions for **3,230 words**: nouns, adjectives, pronouns, determiners and numerals.
 
 - The **6 cases**, singular and plural (or by gender for adjectives), with audio.
 - Special forms: locative (в лесу́), partitive (ча́ю), short adjectives and the animate accusative.
@@ -98,7 +98,7 @@ Reference and practice for the **33 letters** of the Cyrillic alphabet: print an
 
 ### 💬 Dialogues
 
-Conversations for everyday situations, with translation and vocabulary. *Being migrated to the new version.*
+A conversation guide: **30 dialogues** for everyday situations, many with an informal (ты) and a formal (вы) version, audio, a pronunciation guide and every word linked to the dictionary. It adds **52 useful phrases** worth learning as a whole and **9 cultural notes** that compare Russian customs with those of the Río de la Plata. A practice mode lets you play one of the characters.
 
 ---
 
@@ -115,10 +115,11 @@ Conversations for everyday situations, with translation and vocabulary. *Being m
 ## Features
 
 - 🎓 12-unit course, A1 → B1
-- 📚 Central dictionary of 5,397 words, with stress, IPA and a pronunciation guide
-- 🗣️ 1,654 conjugated verbs, with aspectual partners and government
-- 📖 3,229 words declined in all 6 cases
+- 📚 Central dictionary of 5,403 words, with stress, IPA and a pronunciation guide
+- 🗣️ 1,656 conjugated verbs, with aspectual partners and government
+- 📖 3,230 words declined in all 6 cases
 - 🔤 Complete Cyrillic alphabet reference
+- 💬 30 dialogues, 52 useful phrases and 9 cultural notes
 - 🔎 Search in Russian or Spanish that also recognises inflected and conjugated forms
 - 🔊 Russian audio via the browser's speech engine
 - 💾 Progress stored in the browser
@@ -169,6 +170,7 @@ Azbuka_v3/
 ├── alfabeto.html
 ├── verbos.html
 ├── casos.html
+├── dialogos.html
 ├── core.css              ← shared styles
 ├── core.js               ← catalogue, search, storage
 ├── shell.js              ← side menu, header and bottom bar
@@ -179,6 +181,9 @@ Azbuka_v3/
 ├── data-casos.js         ← declensions
 ├── data-gramatica.js     ← grammar explanations
 ├── data-alphabet.js      ← alphabet
+├── data-dialogos.js      ← dialogues
+├── data-frases.js        ← useful phrases
+├── data-cultura.js       ← cultural notes
 ├── azbuka-structure.svg
 ├── README.md
 ├── README.es.md
@@ -192,8 +197,8 @@ Azbuka_v3/
 
 🚧 **Under active development.** The app is being migrated to a new architecture, with a central dictionary and a shared design system.
 
-- ✅ Home, course index, dictionary, Alphabet, Verbs and Cases.
-- 🔜 Dialogues and the 12 course units.
+- ✅ Home, course index, dictionary, Alphabet, Dialogues, Verbs and Cases.
+- 🔜 The 12 course units.
 - 🔜 Exercise bank and review.
 
 ---

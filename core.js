@@ -36,7 +36,7 @@ const AZ_UNITS = [
    (no cambia con el tema, ver ESTETICA_AZBUKA.md §2). */
 const AZ_MODULES = [
   { id: "alfabeto", title: "Alfabeto", desc: "Letras, sonidos y caligrafía — consulta libre", href: "alfabeto.html", icon: "orange", glyph: "Я" },
-  { id: "dialogos", title: "Diálogos", desc: "30 conversaciones con audio y vocabulario", href: "dialogos.html", icon: "yellow", glyph: "Ди" },
+  { id: "dialogos", title: "Diálogos", desc: "Conversaciones, frases útiles y notas culturales", href: "dialogos.html", icon: "yellow", glyph: "Ди" },
   { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "blue", glyph: "Вб" },
   { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "purple", glyph: "Пд" },
 ];

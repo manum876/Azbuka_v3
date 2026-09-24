@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<title>Азбука · Diálogos</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
+<script src="data-dialogos.js"></script>
+<script src="data-frases.js"></script>
+<script src="data-cultura.js"></script>
+<script src="core.js"></script>
+<script src="progress.js"></script>
+<script src="shell.js"></script>
+<script>
+/* ============================================================
+   DIALOGOS.HTML — Módulo Diálogos
+   ------------------------------------------------------------
+   · Sin ?id=  → portada (presentación + buscador) y, con las tabs
+     de la bottom nav, las listas: Diálogos (por situación), Frases
+     (por función) y Cultura (por tipo). ?v=dialogos|frases|cultura
+     abre directo una lista.
+   · Con ?id=DLG-xxx → ficha del diálogo: líneas con audio,
+     transliteración y traducción; versión ты / вы; modo práctica;
+     palabra por palabra (tocando una línea) conectada al léxico,
+     a Casos y a Verbos.
+   · Frases y notas culturales se abren en hoja a pantalla completa
+     (?frase=FRS-xxx y ?cul=CUL-xxx también las abren al cargar).
+   Esta página NO guarda datos: todo sale de data-dialogos.js,
+   data-frases.js, data-cultura.js y el léxico.
+   ============================================================ */
+const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
+const h = React.createElement;
+
+const PARAMS = new URLSearchParams(window.location.search);
+const ICON_COLOR = { red: "#B5605C", orange: "#C48254", yellow: "#C9B369", green: "#5C9B78", blue: "#5D7DA6", purple: "#8871A8" };
+const POS_SHORT = { sustantivo: "sust.", verbo: "verbo", adjetivo: "adj.", pronombre: "pron.", determinante: "det.", numeral: "num.", adverbio: "adv.", "preposición": "prep.", "conjunción": "conj.", "partícula": "part.", "interjección": "interj." };
+const RX_PALABRA = /[А-Яа-яЁё́]+(?:-[А-Яа-яЁё́]+)*/g;
+const SIT = Object.fromEntries(DLG_SITUACIONES);
+const FUN = Object.fromEntries(DLG_FUNCIONES);
+const TIPOS_CUL = ["Pragmática", "Nombres", "Rituales", "Vida práctica"];
+
+/* Para buscar: sin acentos (ruso y español), ё = е, minúsculas. */
+function norm(s) {
+  return (s || "").toLowerCase().normalize("NFD").replace(/[̀́̃̈]/g, "").normalize("NFC");
+}
+
+/* ── Voz ─────────────────────────────────────────────────────
+   ru-RU a 0,85. Si el dispositivo tiene una voz rusa de hombre y
+   otra de mujer, cada personaje habla con la suya; si no, se cambia
+   apenas el tono. El texto va sin la marca de acento. */
+const VOZ_F = /milena|katya|katerina|anna|irina|alena|elena|tatyana|female|женск/i;
+const VOZ_M = /yuri|maxim|pavel|dmitr|male|мужск/i;
+function vozPara(genero) {
+  try {
+    const ru = window.speechSynthesis.getVoices().filter(v => /^ru/i.test(v.lang));
+    if (genero === "f") return ru.find(v => VOZ_F.test(v.name)) || null;
+    if (genero === "m") return ru.find(v => VOZ_M.test(v.name) && !VOZ_F.test(v.name)) || null;
+  } catch (e) {}
+  return null;
+}
+function utter(text, genero) {
+  const u = new SpeechSynthesisUtterance(text.replace(/́/g, "").replace(/[{}]/g, ""));
+  u.lang = "ru-RU";
+  u.rate = 0.85;
+  const v = vozPara(genero);
+  if (v) u.voice = v;
+  else if (genero === "m") u.pitch = 0.85;
+  else if (genero === "f") u.pitch = 1.1;
+  return u;
+}
+function speakRu(text, genero) {
+  try {
+    if (!text || !("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utter(text, genero));
+  } catch (err) {}
+}
+/* Lee varias líneas seguidas; avisa cuál está sonando. */
+function speakSeq(items, onLine, onEnd) {
+  try {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    items.forEach((it, i) => {
+      const u = utter(it.text, it.genero);
+      u.onstart = () => onLine && onLine(i);
+      if (i === items.length - 1) u.onend = () => onEnd && onEnd();
+      window.speechSynthesis.speak(u);
+    });
+  } catch (err) {}
+}
+function stopSpeech() { try { window.speechSynthesis.cancel(); } catch (e) {} }
+
+function useLockScroll() {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+}
+
+/* Personaje de una línea, según el registro elegido */
+function personajeDe(d, clave, registro) {
+  const k = registro === "вы" && d.vy && d.vy[clave] ? d.vy[clave] : clave;
+  return Object.assign({ clave: k }, DLG_PERSONAJES[k] || { ru: k, es: k });
+}
+function lineaEn(l, registro) {
+  return registro === "вы" && l.vy ? Object.assign({}, l, l.vy) : l;
+}
+/* Diálogos que usan una frase / una nota cultural */
+function dialogosConFrase(fid) {
+  return DIALOGOS.filter(d => d.lineas.some(l => (l.f || []).includes(fid) || (l.vy && (l.vy.f || []).includes(fid))));
+}
+function dialogosConCultura(cid) {
+  return DIALOGOS.filter(d => d.lineas.some(l => l.cul === cid || (l.vy && l.vy.cul === cid)));
+}
+function frasesConCultura(cid) { return FRASES.filter(f => f.cul === cid); }
+
+function DlgStyles({ c }) {
+  return h("style", null, `
+    .ficha{background:${c.card};border:1px solid ${c.border};border-radius:14px;overflow:hidden;}
+    .hero{background:linear-gradient(135deg,${c.bg2},${c.bg3});padding:20px 20px 16px;border-bottom:1px solid ${c.border};}
+    .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+    .ru{font-size:30px;font-weight:800;color:${c.gold};line-height:1.1;word-break:break-word;}
+    .translit{font-size:14px;color:${c.textSub};font-style:italic;margin-top:6px;}
+    .pos-badge{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:${c.gold}33;color:${c.gold};border:1px solid ${c.gold};border-radius:8px;padding:3px 10px;}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+    .tag{font-size:11.5px;font-weight:600;color:${c.textSub};background:${c.bg2};border:1px solid ${c.border};border-radius:8px;padding:4px 9px;}
+    .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
+    .fbody{padding:18px 20px;}
+    .section-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:24px 0 10px;}
+    .fbody > .section-lbl:first-child{margin-top:0;}
+    .sheet-text + div > .section-lbl, .help-row + div > .section-lbl{margin-top:24px;}
+    .pair-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:10px;}
+    .pair-lbl{font-size:11.5px;color:${c.textMuted};margin-right:2px;}
+    .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
+    .ex{display:flex;align-items:center;gap:12px;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-bottom:8px;}
+    .ex-col{flex-direction:column;align-items:stretch;}
+    .ex-top{display:flex;align-items:center;gap:12px;}
+    .ex-hl{color:${c.gold};border-bottom:2px solid ${c.gold}88;}
+    .ex-why{margin-top:10px;padding-top:9px;border-top:1px dashed ${c.border};font-size:13px;line-height:1.5;color:${c.textSub};}
+    .ex-t{font-size:11px;font-weight:700;color:${c.gold};text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+    .ex-t span{color:${c.textMuted};font-weight:600;margin-left:6px;text-transform:none;letter-spacing:0;}
+    .ex-ru{font-size:16px;font-weight:700;color:${c.text};}
+    .ex-es{font-size:13px;color:${c.textMuted};margin-top:3px;}
+    .ln{background:${c.bg2};transition:border-color .18s;}
+    .ln-on{border-color:${c.gold};}
+    .ln-ru{cursor:pointer;}
+    .ln-tr{font-size:13px;color:${c.textSub};font-style:italic;margin-top:3px;}
+    .ln-turno{font-size:13px;color:${c.gold};font-weight:600;cursor:pointer;margin-top:6px;}
+    .ln-hint{font-size:10px;color:${c.textMuted};margin-left:6px;font-weight:600;}
+    .w-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:7px 0;border-top:1px solid ${c.border};text-decoration:none;}
+    .w-row:first-child{border-top:none;padding-top:2px;}
+    .w-ru{color:${c.text};font-weight:700;font-size:14px;}
+    .w-pos{color:${c.textMuted};font-size:10.5px;margin-left:6px;font-weight:500;}
+    .w-sub{display:block;color:${c.textMuted};font-size:11px;margin-top:1px;font-weight:500;}
+    .w-es{color:${c.textSub};font-size:12.5px;text-align:right;}
+    .w-go{color:${c.gold};font-size:12px;margin-left:6px;}
+    .help-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+    .help-chip{background:${c.bg2};border:1px solid ${c.border};color:${c.text};border-radius:8px;padding:5px 9px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;}
+    .help-chip span{color:${c.gold};margin-left:5px;font-weight:700;}
+    .nota{background:${c.bg2};border:1px solid ${c.border};border-left:3px solid ${c.gold};border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.5;color:${c.textSub};}
+    .tnote{font-size:11.5px;color:${c.textMuted};margin-top:6px;line-height:1.5;}
+    .list{background:${c.card};border:1px solid ${c.border};border-radius:10px;overflow:hidden;}
+    .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:11px 14px;text-decoration:none;cursor:pointer;border-top:1px solid ${c.border};background:none;width:100%;text-align:left;font-family:inherit;border-left:none;border-right:none;border-bottom:none;}
+    .res-row:first-child{border-top:none;}
+    .res-ru{color:${c.text};font-weight:600;font-size:14.5px;}
+    .res-asp{color:${c.textMuted};font-size:11px;margin-left:6px;font-weight:500;}
+    .res-es{color:${c.textMuted};font-size:12.5px;text-align:right;}
+    .res-col{flex-direction:column;align-items:stretch;gap:3px;}
+    .res-sum{color:${c.textMuted};font-size:12.5px;line-height:1.45;}
+    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};overflow-y:auto;-webkit-overflow-scrolling:touch;animation:popIn .25s ease;}
+    .sheet-in{max-width:960px;margin:0 auto;padding:6vh 3vw 4vh;}
+    .sheet-x{position:fixed;top:6vh;right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
+    .sheet-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-bottom:8px;}
+    .sheet-title{font-size:26px;font-weight:800;color:${c.text};line-height:1.15;padding-right:48px;}
+    .sheet-title-row{display:flex;align-items:center;gap:12px;padding-right:48px;}
+    .sheet-title-row .sheet-title{padding-right:0;}
+    .sheet-sub{margin-top:4px;font-size:15px;color:${c.textSub};font-style:italic;}
+    .sheet-q{margin-top:8px;font-size:15px;color:${c.gold};font-weight:700;}
+    .sheet-text{margin-top:18px;font-size:15px;line-height:1.6;color:${c.textSub};}
+    .intro{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:18px 18px 14px;margin-bottom:14px;animation:fadeIn .3s ease;}
+    .intro-top{display:flex;align-items:center;gap:14px;}
+    .intro-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;flex-shrink:0;}
+    .intro-title{font-size:24px;font-weight:800;color:${c.text};line-height:1.1;}
+    .intro-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-top:4px;}
+    .intro-desc{font-size:13.5px;line-height:1.55;color:${c.textSub};margin-top:14px;}
+    .intro-item{display:flex;gap:10px;padding:9px 0;border-top:1px solid ${c.border};}
+    .intro-item:first-of-type{margin-top:12px;}
+    .intro-dot{width:6px;height:6px;border-radius:50%;background:${c.gold};margin-top:6px;flex-shrink:0;}
+    .intro-it{font-size:13px;font-weight:700;color:${c.text};}
+    .intro-id{font-size:12px;color:${c.textMuted};margin-top:1px;line-height:1.4;}
+    .search-hint{font-size:11.5px;color:${c.textMuted};margin:8px 2px 0;line-height:1.45;}
+    .try-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px;}
+    .try-lbl{font-size:11.5px;color:${c.textMuted};margin-right:2px;}
+    @media (max-height:720px){.intro{padding:14px 16px 10px;}.intro-desc{margin-top:10px;}.intro-id{display:none;}.intro-item{padding:7px 0;}}
+    .try-chip{padding:6px 11px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;background:${c.bg2};border:1px solid ${c.border};color:${c.text};cursor:pointer;font-family:inherit;}
+    .nav-row{display:flex;justify-content:space-between;gap:10px;margin-top:14px;}
+    .nav-row a{max-width:48%;}
+    .page-title{font-size:24px;font-weight:800;color:${c.text};margin:4px 0 4px;}
+    .page-desc + div > .section-lbl{margin-top:16px;}
+    .page-desc{font-size:13.5px;color:${c.textSub};line-height:1.5;margin-bottom:6px;}
+    @keyframes popIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
+  `);
+}
+
+/* Ejemplo con la palabra marcada entre llaves (como data-gramatica.js) */
+function RuMarcado({ text }) {
+  return h("span", null, text.split(/(\{[^}]*\})/).map((p, i) =>
+    p.charAt(0) === "{" ? h("span", { key: i, className: "ex-hl" }, p.slice(1, -1)) : p));
+}
+function Ejemplo({ ru, es, por }) {
+  return h("div", { className: "ex ex-col" },
+    h("div", { className: "ex-top" },
+      h("div", { style: { flex: 1, minWidth: 0 } },
+        h("div", { className: "ex-ru" }, h(RuMarcado, { text: ru })),
+        h("div", { className: "ex-es" }, es)
+      ),
+      h("button", { className: "play", onClick: () => speakRu(ru), "aria-label": "Escuchar" }, "▶")
+    ),
+    por && h("div", { className: "ex-why" }, por)
+  );
+}
+
+/* ── Palabra por palabra ─────────────────────────────────────
+   Cada palabra rusa de un texto, con su ID del léxico (campo lex).
+   Si es una forma (тебе́, зову́t), dice de qué palabra viene y lleva
+   a Casos o Verbos con la forma resaltada; si no, a la ficha. */
+function Desglose({ texto }) {
+  const toks = texto.ru.match(RX_PALABRA) || [];
+  const vistos = new Set();
+  const filas = [];
+  toks.forEach((t, i) => {
+    const id = (texto.lex || [])[i];
+    const k = t.toLowerCase() + "|" + id;
+    if (vistos.has(k)) return;
+    vistos.add(k);
+    filas.push([t, id]);
+  });
+  return h("div", null, filas.map(([t, id], i) => {
+    if (id === "PROPIO") return h("div", { key: i, className: "w-row" },
+      h("span", { className: "w-ru" }, t), h("span", { className: "w-es" }, "nombre propio"));
+    const e = id ? lexComerById(id) : null;
+    if (!e) return h("div", { key: i, className: "w-row" },
+      h("span", { className: "w-ru" }, t), h("span", { className: "w-es" }, "todavía no está en el diccionario"));
+    const lema = e.acento || e.ru;
+    const esLema = azFormaClave(lema) === azFormaClave(t);
+    let etiq = [];
+    if (!esLema && typeof azFormasDe === "function") {
+      etiq = [...new Set(azFormasDe(id).filter(f => azFormaClave(f[0]) === azFormaClave(t)).map(f => f[1]))];
+    }
+    const enModulo = typeof CASOS !== "undefined" && CASOS[id] ? "casos.html" : (typeof VERBOS !== "undefined" && VERBOS[id] ? "verbos.html" : null);
+    const href = !esLema && enModulo && etiq.length ? enModulo + "?id=" + id + "&f=" + encodeURIComponent(t) : "ficha.html?id=" + id;
+    return h("a", { key: i, className: "w-row", href, onClick: (ev) => azNavigate(ev, href) },
+      h("span", null,
+        h("span", { className: "w-ru" }, t.toLowerCase()),
+        h("span", { className: "w-pos" }, POS_SHORT[e.posNormalized] || ""),
+        !esLema && h("span", { className: "w-sub" }, (etiq.length ? etiq.join(" / ") + " de " : "de ") + lema)
+      ),
+      h("span", { className: "w-es" }, (e.senses || []).map(s => s.es).slice(0, 2).join(" · "), h("span", { className: "w-go" }, "›"))
+    );
+  }));
+}
+
+/* ── Hoja de frase ── */
+function FraseSheet({ fid, onClose, onCultura, favs, toggleFav }) {
+  useLockScroll();
+  const f = fraseById(fid);
+  const [, setFormas] = useState(0);
+  useEffect(() => {
+    const on = () => setFormas(n => n + 1);
+    window.addEventListener("az-formas", on);
+    if (typeof azCargarFormas === "function") azCargarFormas();
+    return () => window.removeEventListener("az-formas", on);
+  }, []);
+  if (!f) return null;
+  const dls = dialogosConFrase(fid);
+  const cul = f.cul ? culturaById(f.cul) : null;
+  const key = "frases:" + f.id;
+  const fav = favs.indexOf(key) >= 0;
+  return h("div", { className: "sheet", role: "dialog", "aria-modal": "true" },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "sheet-kicker" }, "Frase · " + (FUN[f.funcion] || "")),
+      h("div", { className: "sheet-title-row" },
+        h("div", { className: "sheet-title" }, f.ru),
+        h("button", { className: "play", onClick: () => speakRu(f.ru), "aria-label": "Escuchar" }, "▶")
+      ),
+      h("div", { className: "sheet-sub" }, f.tr),
+      h("div", { className: "sheet-q" }, f.es),
+      h("div", { className: "tags" },
+        h("span", { className: "tag" }, f.registro === "ты" ? "Informal (ты)" : f.registro === "вы" ? "Formal (вы)" : "Informal y formal"),
+        h("span", { className: "tag" }, f.nivel)
+      ),
+      h("div", { className: "help-row" },
+        h("button", { className: "help-chip", onClick: () => toggleFav(key) }, fav ? "★ Guardada en mis frases" : "☆ Guardar en mis frases")
+      ),
+      h("div", { className: "section-lbl" }, "Cuándo se usa"),
+      h("div", { className: "sheet-text", style: { marginTop: 0 } }, f.uso),
+      h("div", { className: "section-lbl" }, "Palabra por palabra"),
+      h("div", { className: "list", style: { padding: "8px 14px" } }, h(Desglose, { texto: f })),
+      cul && h("div", null,
+        h("div", { className: "section-lbl" }, "Cultura"),
+        h("button", { className: "help-chip", onClick: () => onCultura(cul.id) }, cul.titulo, h("span", null, "?"))
+      ),
+      dls.length > 0 && h("div", null,
+        h("div", { className: "section-lbl" }, "En los diálogos"),
+        h(ListaDialogos, { lista: dls })
+      )
+    )
+  );
+}
+
+/* ── Hoja de nota cultural ── */
+function CulturaSheet({ cid, onClose, onFrase }) {
+  useLockScroll();
+  const n = culturaById(cid);
+  if (!n) return null;
+  const dls = dialogosConCultura(cid);
+  const frs = frasesConCultura(cid);
+  return h("div", { className: "sheet", role: "dialog", "aria-modal": "true" },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "sheet-kicker" }, "Cultura · " + n.tipo),
+      h("div", { className: "sheet-title" }, n.titulo),
+      h("div", { className: "sheet-text" }, n.texto),
+      n.rio && h("div", null,
+        h("div", { className: "section-lbl" }, "En el Río de la Plata"),
+        h("div", { className: "nota" }, n.rio)
+      ),
+      n.ejemplos && n.ejemplos.length > 0 && h("div", null,
+        h("div", { className: "section-lbl" }, "Ejemplos"),
+        n.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1], por: ej[2] }))
+      ),
+      n.lex && n.lex.length > 0 && h("div", null,
+        h("div", { className: "section-lbl" }, "Palabras"),
+        h("div", { className: "try-row", style: { marginTop: 0 } }, n.lex.map(id => {
+          const e = lexComerById(id);
+          if (!e) return null;
+          const href = "ficha.html?id=" + id;
+          return h("a", { key: id, className: "try-chip", href, onClick: (ev) => azNavigate(ev, href) }, e.acento || e.ru);
+        }))
+      ),
+      frs.length > 0 && h("div", null,
+        h("div", { className: "section-lbl" }, "Frases"),
+        h("div", { className: "list" }, frs.map(f => h(FilaFrase, { key: f.id, f, onClick: () => onFrase(f.id) })))
+      ),
+      dls.length > 0 && h("div", null,
+        h("div", { className: "section-lbl" }, "En los diálogos"),
+        h(ListaDialogos, { lista: dls })
+      )
+    )
+  );
+}
+
+/* ── Filas de lista (mismo estilo que los resultados de búsqueda) ── */
+function FilaDialogo({ d }) {
+  const href = "dialogos.html?id=" + d.id;
+  return h("a", { className: "res-row", href, onClick: (e) => { stopSpeech(); azNavigate(e, href); } },
+    h("span", null, h("span", { className: "res-ru" }, d.tituloRu), h("span", { className: "res-asp" }, d.nivel + (d.vy ? " · ты/вы" : ""))),
+    h("span", { className: "res-es" }, d.titulo)
+  );
+}
+function ListaDialogos({ lista }) {
+  return h("div", { className: "list" }, lista.map(d => h(FilaDialogo, { key: d.id, d })));
+}
+function FilaFrase({ f, onClick }) {
+  return h("button", { className: "res-row", onClick },
+    h("span", null, h("span", { className: "res-ru" }, f.ru), f.registro && h("span", { className: "res-asp" }, f.registro)),
+    h("span", { className: "res-es" }, f.es)
+  );
+}
+function FilaCultura({ n, onClick }) {
+  return h("button", { className: "res-row res-col", onClick },
+    h("span", { className: "res-ru" }, n.titulo),
+    h("span", { className: "res-sum" }, n.resumen)
+  );
+}
+
+/* ── Una línea del diálogo ── */
+function Linea({ d, l, idx, registro, showTr, showEs, oculta, onRevelar, abierta, onAbrir, sonando, onCultura }) {
+  const t = lineaEn(l, registro);
+  const p = personajeDe(d, l.p, registro);
+  const cul = t.cul ? culturaById(t.cul) : null;
+  const cab = h("div", { className: "ex-t" }, p.ru, h("span", null, p.es));
+  if (oculta) {
+    return h("div", { className: "ex ex-col ln" },
+      cab,
+      h("div", { className: "ex-es", style: { marginTop: 0 } }, "«" + t.es + "»"),
+      h("div", { className: "ln-turno", onClick: onRevelar }, "Tu turno: decilo en ruso y tocá para ver ›")
+    );
+  }
+  return h("div", { className: "ex ex-col ln" + (sonando ? " ln-on" : "") },
+    h("div", { className: "ex-top" },
+      h("div", { style: { flex: 1, minWidth: 0 } },
+        cab,
+        h("div", { className: "ex-ru ln-ru", onClick: onAbrir }, t.ru, h("span", { className: "ln-hint" }, abierta ? "▴" : "▾")),
+        showTr && h("div", { className: "ln-tr" }, t.tr),
+        showEs && h("div", { className: "ex-es" }, t.es)
+      ),
+      h("button", { className: "play", onClick: () => speakRu(t.ru, p.genero), "aria-label": "Escuchar" }, "▶")
+    ),
+    (t.obs || cul) && h("div", { className: "ex-why" },
+      t.obs,
+      cul && h("div", { className: "help-row", style: { marginTop: t.obs ? 8 : 0 } },
+        h("button", { className: "help-chip", onClick: () => onCultura(cul.id) }, "Cultura: " + cul.titulo, h("span", null, "?")))
+    ),
+    abierta && h("div", { className: "ex-why" }, h(Desglose, { texto: t }))
+  );
+}
+
+/* ── Ficha del diálogo ── */
+function FichaDialogo({ id, c, onFrase, onCultura }) {
+  const d = dialogoById(id);
+  const [registro, setRegistro] = useState("ты");
+  const [showTr, setShowTr] = useState(true);
+  const [showEs, setShowEs] = useState(true);
+  const [practica, setPractica] = useState(null);
+  const [reveladas, setReveladas] = useState({});
+  const [abierta, setAbierta] = useState(null);
+  const [sonando, setSonando] = useState(null);
+  const [, setFormas] = useState(0);
+
+  useEffect(() => {
+    const on = () => setFormas(n => n + 1);
+    window.addEventListener("az-formas", on);
+    return () => { window.removeEventListener("az-formas", on); stopSpeech(); };
+  }, []);
+
+  if (!d) {
+    return h("div", { style: { textAlign: "center", padding: "10vh 0" } },
+      h("h1", { style: { fontSize: 18, marginBottom: 8, color: c.text } }, "Diálogo no encontrado"),
+      h("p", { style: { fontSize: 13.5, color: c.textMuted } }, `No hay ningún diálogo con id "${id}".`)
+    );
+  }
+
+  const chip = (on, label, onClick, key) => h("button", {
+    key, className: "pair-btn", onClick,
+    style: on
+      ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold }
+      : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }
+  }, label);
+
+  const reg = d.vy ? registro : "ты";
+  const personajes = [...new Set(d.lineas.map(l => l.p))].map(k => personajeDe(d, k, reg));
+  const tituloRu = d.tituloRu;
+  const todas = () => {
+    if (sonando !== null) { stopSpeech(); setSonando(null); return; }
+    const items = d.lineas.map(l => ({ text: lineaEn(l, reg).ru, genero: personajeDe(d, l.p, reg).genero }));
+    setSonando(0);
+    speakSeq(items, i => setSonando(i), () => setSonando(null));
+  };
+  const abrir = (i) => {
+    setAbierta(abierta === i ? null : i);
+    if (typeof azCargarFormas === "function") azCargarFormas();
+  };
+  const frIds = [...new Set(d.lineas.flatMap(l => [...(lineaEn(l, reg).f || [])]))];
+  const culIds = [...new Set(d.lineas.map(l => lineaEn(l, reg).cul).filter(Boolean))];
+
+  /* anterior / siguiente, en el orden de la lista (por situación) */
+  const orden = DLG_SITUACIONES.flatMap(s => DIALOGOS.filter(x => x.situacion === s[0]));
+  const pos = orden.findIndex(x => x.id === d.id);
+  const prev = orden[pos - 1], next = orden[pos + 1];
+  const navLink = (x, label) => {
+    const href = "dialogos.html?id=" + x.id;
+    return h("a", { className: "try-chip", href, onClick: (e) => { stopSpeech(); azNavigate(e, href); } }, label);
+  };
+
+  return h("div", { style: { animation: "fadeIn 0.3s ease" } },
+    h("div", { className: "ficha" },
+      h("div", { className: "hero" },
+        h("div", { className: "hero-top" },
+          h("div", { style: { minWidth: 0 } },
+            h("div", { className: "ru" }, tituloRu),
+            h("div", { className: "translit" }, d.titulo)
+          ),
+          h("button", { className: "play", onClick: todas, "aria-label": sonando !== null ? "Detener" : "Escuchar todo el diálogo" }, sonando !== null ? "■" : "▶")
+        ),
+        h("span", { className: "pos-badge" }, d.nivel + " · " + (FUN[d.funcion] || "")),
+        h("div", { className: "tags" },
+          h("span", { className: "tag" }, SIT[d.situacion] || ""),
+          personajes.map(p => h("span", { key: p.clave, className: "tag" }, p.ru))
+        )
+      ),
+      h("div", { className: "fbody" },
+        h("div", { className: "section-lbl" }, "Diálogo"),
+        h("div", { className: "pair-row" },
+          d.vy && [chip(reg === "ты", "ты · informal", () => setRegistro("ты"), "ty"), chip(reg === "вы", "вы · formal", () => setRegistro("вы"), "vy")],
+          chip(showTr, "Transliteración", () => setShowTr(!showTr), "tr"),
+          chip(showEs, "Traducción", () => setShowEs(!showEs), "es")
+        ),
+        h("div", { className: "pair-row" },
+          h("span", { className: "pair-lbl" }, "Practicar:"),
+          chip(practica === null, "Ver todo", () => { setPractica(null); setReveladas({}); }, "all"),
+          personajes.map(p => chip(practica === p.clave, "Soy " + p.es, () => { setPractica(p.clave); setReveladas({}); }, p.clave))
+        ),
+        d.lineas.map((l, i) => h(Linea, {
+          key: i, d, l, idx: i, registro: reg, showTr, showEs,
+          oculta: practica !== null && personajeDe(d, l.p, reg).clave === practica && !reveladas[i],
+          onRevelar: () => setReveladas(Object.assign({}, reveladas, { [i]: true })),
+          abierta: abierta === i, onAbrir: () => abrir(i),
+          sonando: sonando === i, onCultura
+        })),
+        h("div", { className: "tnote" }, practica
+          ? "Leé la traducción, decí la línea en ruso en voz alta y tocá para comprobar."
+          : "Tocá una línea en ruso para ver cada palabra. ▶ escucha una línea; el de arriba, todo el diálogo."),
+
+        frIds.length > 0 && h("div", null,
+          h("div", { className: "section-lbl" }, "Frases de este diálogo"),
+          h("div", { className: "list" }, frIds.map(fid => { const f = fraseById(fid); return f && h(FilaFrase, { key: fid, f, onClick: () => onFrase(fid) }); }))
+        ),
+        culIds.length > 0 && h("div", null,
+          h("div", { className: "section-lbl" }, "Cultura"),
+          h("div", { className: "list" }, culIds.map(cid => { const n = culturaById(cid); return n && h(FilaCultura, { key: cid, n, onClick: () => onCultura(cid) }); }))
+        )
+      )
+    ),
+    h("div", { className: "nav-row" },
+      prev ? navLink(prev, "‹ " + prev.titulo) : h("span"),
+      next ? navLink(next, next.titulo + " ›") : h("span")
+    )
+  );
+}
+
+/* ── Búsqueda en diálogos, frases y notas ── */
+function buscar(q) {
+  const k = norm(q.trim());
+  if (!k) return [];
+  const out = [];
+  DIALOGOS.forEach(d => {
+    const textos = [d.titulo, d.tituloRu].concat(d.lineas.flatMap(l => [l.ru, l.es].concat(l.vy ? [l.vy.ru, l.vy.es] : [])));
+    if (textos.some(t => norm(t).includes(k))) out.push({ tipo: "dialogo", d });
+  });
+  FRASES.forEach(f => { if (norm(f.ru).includes(k) || norm(f.es).includes(k)) out.push({ tipo: "frase", f }); });
+  CULTURA.forEach(n => { if (norm(n.titulo).includes(k) || norm(n.resumen).includes(k)) out.push({ tipo: "cultura", n }); });
+  return out.slice(0, 40);
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const id = PARAMS.get("id");
+  const [view, setView] = useState(() => ["dialogos", "frases", "cultura"].includes(PARAMS.get("v")) ? PARAMS.get("v") : "inicio");
+  const [q, setQ] = useState("");
+  const [sheet, setSheet] = useState(() => PARAMS.get("frase") ? { t: "frase", id: PARAMS.get("frase") } : PARAMS.get("cul") ? { t: "cul", id: PARAMS.get("cul") } : null);
+  const [favs, setFavs] = useState([]);
+  const qRef = useRef(null);
+  const searchWrapRef = useRef(null);
+  const [headerH, setHeaderH] = useState(0);
+  const [searchH, setSearchH] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      await azLoadProgress();
+      azModuleTouch('dialogos');
+      setFavs((AZ_PROGRESS.favorites || []).filter(k => k.indexOf("frases:") === 0));
+    })();
+  }, []);
+
+  useLayoutEffect(() => {
+    function measure() {
+      const header = document.querySelector("header");
+      if (header) setHeaderH(header.getBoundingClientRect().height);
+      if (searchWrapRef.current) setSearchH(searchWrapRef.current.getBoundingClientRect().height);
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [darkMode]);
+
+  useEffect(() => { window.scrollTo(0, 0); }, [view]);
+
+  const c = azColors(darkMode);
+  const toggleFav = (key) => { azToggleFavorite(key); setFavs((AZ_PROGRESS.favorites || []).filter(k => k.indexOf("frases:") === 0)); };
+  const abrirFrase = (fid) => { setQ(""); setSheet({ t: "frase", id: fid }); };
+  const abrirCultura = (cid) => { setQ(""); setSheet({ t: "cul", id: cid }); };
+
+  const results = q.trim() ? buscar(q) : [];
+  const TIPO_LBL = { dialogo: "diálogo", frase: "frase", cultura: "cultura" };
+  const resultRows = results.map((r, i) => {
+    if (r.tipo === "dialogo") {
+      const href = "dialogos.html?id=" + r.d.id;
+      return h("a", { key: "d" + r.d.id, className: "res-row", href, onClick: (e) => azNavigate(e, href) },
+        h("span", null, h("span", { className: "res-ru" }, r.d.tituloRu), h("span", { className: "res-asp" }, TIPO_LBL.dialogo)),
+        h("span", { className: "res-es" }, r.d.titulo));
+    }
+    if (r.tipo === "frase") return h("button", { key: "f" + r.f.id, className: "res-row", onClick: () => abrirFrase(r.f.id) },
+      h("span", null, h("span", { className: "res-ru" }, r.f.ru), h("span", { className: "res-asp" }, TIPO_LBL.frase)),
+      h("span", { className: "res-es" }, r.f.es));
+    return h("button", { key: "c" + r.n.id, className: "res-row", onClick: () => abrirCultura(r.n.id) },
+      h("span", null, h("span", { className: "res-ru" }, r.n.titulo), h("span", { className: "res-asp" }, TIPO_LBL.cultura)),
+      h("span", { className: "res-es" }, r.n.tipo));
+  });
+  const noResults = h("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados");
+
+  const campo = [
+    h("input", {
+      ref: qRef, value: q,
+      onInput: (e) => setQ(e.target.value),
+      placeholder: "Buscar diálogo, frase o nota…",
+      style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 14 }
+    }),
+    q && h("button", {
+      onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); },
+      "aria-label": "Limpiar búsqueda",
+      style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
+    }, "✕")
+  ];
+  const searchBar = id && h("div", {
+    ref: searchWrapRef,
+    style: { position: "fixed", top: headerH, left: 0, right: 0, zIndex: 90, background: c.bg, backdropFilter: "blur(12px)", borderBottom: `1px solid ${c.border}`, padding: "12px 3vw" }
+  },
+    h("div", { style: { maxWidth: 960, margin: "0 auto", position: "relative" } },
+      ...campo,
+      q.trim() && h("div", {
+        style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, boxShadow: "0 16px 40px rgba(0,0,0,.4)" }
+      }, results.length ? resultRows : noResults)
+    )
+  );
+
+  /* ── Portada ── */
+  const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "dialogos") || {};
+  const kicker = DIALOGOS.length + " diálogos · " + FRASES.length + " frases · " + CULTURA.length + " notas";
+  const INTRO_ITEMS = [
+    ["Diálogos por situación", "Del saludo a una emergencia, muchos con versión informal (ты) y formal (вы)."],
+    ["Palabra por palabra", "Tocá una línea para ver cada palabra, de qué forma viene y su ficha."],
+    ["Frases y cultura", "Las fórmulas que conviene saber enteras y las costumbres que hay detrás."]
+  ];
+  const EJEMPLOS = ["DLG-001", "DLG-008", "DLG-028"].map(dialogoById).filter(Boolean);
+  const buscando = !!q.trim();
+  const portada = h("div", null,
+    !buscando && h("div", { className: "intro" },
+      h("div", { className: "intro-top" },
+        h("div", { className: "intro-icon", style: { background: ICON_COLOR[modulo.icon] || c.gold, color: modulo.icon === "yellow" ? "#1A1812" : "#fff" } }, modulo.glyph || ""),
+        h("div", null,
+          h("div", { className: "intro-title" }, modulo.title || "Diálogos"),
+          h("div", { className: "intro-kicker" }, kicker)
+        )
+      ),
+      h("div", { className: "intro-desc" }, "Conversaciones cortas de la vida real, con audio y transliteración, y cada palabra conectada al diccionario."),
+      INTRO_ITEMS.map((it, i) => h("div", { key: i, className: "intro-item" },
+        h("span", { className: "intro-dot" }),
+        h("div", null, h("div", { className: "intro-it" }, it[0]), h("div", { className: "intro-id" }, it[1]))
+      ))
+    ),
+    h("div", { style: { position: "relative" } }, ...campo),
+    !buscando && h("div", { className: "search-hint" }, "Podés buscar en ruso o en español: «gracias», «кафе́», «cumpleaños»."),
+    !buscando && h("div", { className: "try-row" },
+      h("span", { className: "try-lbl" }, "Probá con:"),
+      EJEMPLOS.map(d => { const href = "dialogos.html?id=" + d.id; return h("a", { key: d.id, className: "try-chip", href, onClick: (ev) => azNavigate(ev, href) }, d.titulo); })
+    ),
+    buscando && h("div", { className: "list", style: { marginTop: 10, animation: "fadeIn 0.3s ease" } }, results.length ? resultRows : noResults)
+  );
+
+  /* ── Listas ── */
+  const vistaDialogos = h("div", { style: { animation: "fadeIn 0.3s ease" } },
+    h("div", { className: "page-title" }, "Diálogos"),
+    h("div", { className: "page-desc" }, "Ordenados por situación. El nivel va al lado del título; «ты/вы» indica que tiene versión informal y formal."),
+    DLG_SITUACIONES.map(s => {
+      const lista = DIALOGOS.filter(d => d.situacion === s[0]);
+      return lista.length > 0 && h("div", { key: s[0] },
+        h("div", { className: "section-lbl" }, s[1]),
+        h(ListaDialogos, { lista })
+      );
+    })
+  );
+  const favFrases = favs.map(k => fraseById(k.slice(7))).filter(Boolean);
+  const vistaFrases = h("div", { style: { animation: "fadeIn 0.3s ease" } },
+    h("div", { className: "page-title" }, "Frases"),
+    h("div", { className: "page-desc" }, "Expresiones que conviene aprender enteras, ordenadas por lo que querés hacer. Tocá una para ver cuándo se usa."),
+    favFrases.length > 0 && h("div", null,
+      h("div", { className: "section-lbl" }, "Mis frases"),
+      h("div", { className: "list" }, favFrases.map(f => h(FilaFrase, { key: f.id, f, onClick: () => abrirFrase(f.id) })))
+    ),
+    DLG_FUNCIONES.map(fn => {
+      const lista = FRASES.filter(f => f.funcion === fn[0]);
+      return lista.length > 0 && h("div", { key: fn[0] },
+        h("div", { className: "section-lbl" }, fn[1]),
+        h("div", { className: "list" }, lista.map(f => h(FilaFrase, { key: f.id, f, onClick: () => abrirFrase(f.id) })))
+      );
+    })
+  );
+  const vistaCultura = h("div", { style: { animation: "fadeIn 0.3s ease" } },
+    h("div", { className: "page-title" }, "Cultura"),
+    h("div", { className: "page-desc" }, "Cómo se usa el idioma en la vida real, comparado con lo que hacemos en el Río de la Plata."),
+    TIPOS_CUL.map(t => {
+      const lista = CULTURA.filter(n => n.tipo === t);
+      return lista.length > 0 && h("div", { key: t },
+        h("div", { className: "section-lbl" }, t),
+        h("div", { className: "list" }, lista.map(n => h(FilaCultura, { key: n.id, n, onClick: () => abrirCultura(n.id) })))
+      );
+    })
+  );
+
+  /* Bottom nav: en la ficha, las tabs vuelven a las listas */
+  const irA = (v) => () => {
+    if (id) { stopSpeech(); window.location.href = "dialogos.html" + (v === "inicio" ? "" : "?v=" + v); }
+    else setView(v);
+  };
+  const tabs = [
+    { id: "inicio", icon: "⊞", label: "Inicio", action: irA("inicio") },
+    { id: "dialogos", icon: "❝", label: "Diálogos", action: irA("dialogos") },
+    { id: "frases", icon: "Аа", label: "Frases", action: irA("frases") },
+    { id: "cultura", icon: "✦", label: "Cultura", action: irA("cultura") }
+  ];
+
+  let contenido;
+  if (id) contenido = h(FichaDialogo, { key: id, id, c, onFrase: abrirFrase, onCultura: abrirCultura });
+  else if (view === "dialogos") contenido = vistaDialogos;
+  else if (view === "frases") contenido = vistaFrases;
+  else if (view === "cultura") contenido = vistaCultura;
+  else contenido = portada;
+
+  return h(AzShell, { darkMode, setDarkMode, moduleId: "dialogos", tabs, view: id ? "dialogos" : view, setView },
+    h(DlgStyles, { c }),
+    searchBar,
+    h("div", { style: { paddingTop: id ? (searchH ? searchH + 14 + "px" : "18px") : "16px" } }, contenido),
+    sheet && sheet.t === "frase" && h(FraseSheet, { key: sheet.id, fid: sheet.id, onClose: () => setSheet(null), onCultura: abrirCultura, favs, toggleFav }),
+    sheet && sheet.t === "cul" && h(CulturaSheet, { key: sheet.id, cid: sheet.id, onClose: () => setSheet(null), onFrase: abrirFrase })
+  );
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

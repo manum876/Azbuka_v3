@@ -12,6 +12,7 @@
 <div id="root"></div>
 <script src="preact.js"></script>
 <script src="data-lexicon.js"></script>
+<script src="data-cultura.js"></script>
 <script src="core.js"></script>
 <script src="shell.js"></script>
 <script>
@@ -313,6 +314,27 @@ function App() {
                 )
             );
           }),
+
+          /* ── CULTURA: notas de data-cultura.js que hablan de esta
+             palabra. Cada una abre su hoja en Diálogos. ── */
+          (() => {
+            const notas = typeof culturaDePalabra === "function" ? culturaDePalabra(entry.id) : [];
+            if (!notas.length) return null;
+            return React.createElement("div", null,
+              React.createElement("div", { className: "section-lbl", style: { marginTop: 20 } }, "Cultura"),
+              notas.map(n => {
+                const href = "dialogos.html?cul=" + n.id;
+                return React.createElement("a", {
+                  key: n.id, href, className: "sense",
+                  onClick: (e) => azNavigate(e, href),
+                  style: { display: "block", textDecoration: "none" }
+                },
+                  React.createElement("span", { className: "sense-es" }, n.titulo, React.createElement("span", { style: { color: c.gold, marginLeft: 6 } }, "›")),
+                  React.createElement("div", { className: "sense-def", style: { marginLeft: 0 } }, n.resumen)
+                );
+              })
+            );
+          })(),
 
           /* ── CLASIFICACIÓN PEDAGÓGICA (traducida y filtrada) ── */
           React.createElement("div", { className: "section-lbl" }, "Clasificación pedagógica"),

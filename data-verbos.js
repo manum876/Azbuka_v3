@@ -1,7 +1,7 @@
 /* ============================================================
    DATA-VERBOS.JS — Conjugaciones de los verbos del léxico AZBUKA
    ------------------------------------------------------------
-   Total: 1654 verbos (todos los posNormalized:"verbo" de
+   Total: 1656 verbos (todos los posNormalized:"verbo" de
    data-lexicon.js). Generado el 23/09/2026.
    Actualizado el 23/09/2026: 6 verbos nuevos (CMR-05419–05421 y los
    homógrafos separados CMR-05466–05468), 2 entradas huérfanas quitadas
@@ -12,6 +12,8 @@
    pasan a guardar sus formas en "presente", como el resto de los
    biaspectuales; вида́ть suma su presente (вида́ю…), que Zalizniak
    registra como coloquial.
+   Actualizado el 24/09/2026 (módulo Diálogos): дое́хать (CMR-05472) y
+   потеря́ться (CMR-05473). Formas de OpenRussian, cruzadas con pymorphy3.
 
    QUÉ HAY ACÁ Y QUÉ NO
    Este archivo guarda SOLO las formas conjugadas. Todo lo demás
@@ -6717,7 +6719,16 @@ const VERBOS = {
    futuro:["пожну́","пожнёшь","пожнёт","пожнём","пожнёте","пожну́т"],
    pasado:{ m:"пожа́л", f:"пожа́ла", n:"пожа́ло", pl:"пожа́ли" },
    imperativo:{ ty:"пожни́", vy:"пожни́те" },
-   nota:"Con el sentido «cosechar» se conjuga пожну́, пожнёшь… (el de «estrechar la mano», CMR-02303, es пожму́, пожмёшь…)." }
+   nota:"Con el sentido «cosechar» se conjuga пожну́, пожнёшь… (el de «estrechar la mano», CMR-02303, es пожму́, пожмёшь…)." },
+ "CMR-05472": { ru:"дое́хать",
+   futuro:["дое́ду","дое́дешь","дое́дет","дое́дем","дое́дете","дое́дут"],
+   pasado:{ m:"дое́хал", f:"дое́хала", n:"дое́хало", pl:"дое́хали" },
+   imperativo:{ ty:"доезжа́й", vy:"доезжа́йте" },
+   nota:"El imperativo se toma prestado del imperfectivo доезжа́ть, igual que приезжа́й en прие́хать." },
+ "CMR-05473": { ru:"потеря́ться",
+   futuro:["потеря́юсь","потеря́ешься","потеря́ется","потеря́емся","потеря́етесь","потеря́ются"],
+   pasado:{ m:"потеря́лся", f:"потеря́лась", n:"потеря́лось", pl:"потеря́лись" },
+   imperativo:{ ty:"потеря́йся", vy:"потеря́йтесь" } }
 };
 
 /* Devuelve la conjugación de un verbo por ID, o null. */

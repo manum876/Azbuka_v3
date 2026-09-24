@@ -1,6 +1,6 @@
 /* ============================================================
    DATA-LEXICON.JS — Léxico central AZBUKA (Comer + FreeDict + enriquecimiento aspectual)
-   Total de entradas: 5397. Ordenado por ID.
+   Total de entradas: 5403. Ordenado por ID.
 
    NUEVO: campo opcional "aspectualPartnerTypes" (objeto {id: tipo}),
    solo en las entradas donde una pareja no es una pareja aspectual
@@ -41,6 +41,10 @@
      Se conserva "numberClass" (solo singular / solo plural), que es una
      propiedad de la palabra.
    - Correcciones de tildes, eñes y definiciones (bloque CMR-00001–00420).
+   - 24/09/2026: 6 entradas nuevas para el módulo Diálogos (CMR-05471 a
+     CMR-05476): напра́во, дое́хать, потеря́ться, со́лнечно, по-англи́йски y
+     меню́. Marca en sourceRefs: "dialogosEnrichment". Las parejas de
+     дое́хать (доезжа́ть) y потеря́ться (теря́ться) no están en el léxico.
 
    Fuentes:
    - Comer, K. (Comer 5000). Portland State University, PDXScholar.
@@ -51,7 +55,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 5397
+  totalEntries: 5403
 };
 const LEXICON_COMER = [
  {
@@ -328163,6 +328167,371 @@ const LEXICON_COMER = [
   "gender": "m",
   "animate": "no",
   "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05471",
+  "ru": "направо",
+  "acento": "напра́во",
+  "posNormalized": "adverbio",
+  "translit": "napráva",
+  "ipa": "nʌprˈɑvʌ",
+  "senses": [
+   {
+    "es": "a la derecha",
+    "definitionEs": "Hacia el lado derecho o del lado derecho. Пото́м напра́во = después, a la derecha. Lo contrario es нале́во.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "направо",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "на",
+    "Prefix2": "",
+    "Root": "прав",
+    "Suffix1": "о",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para el módulo Diálogos — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "dialogosEnrichment": true
+  }
+ },
+ {
+  "id": "CMR-05472",
+  "ru": "доехать",
+  "acento": "дое́хать",
+  "posNormalized": "verbo",
+  "translit": "dayéjat",
+  "ipa": "dʌˈjexʌtʲ",
+  "senses": [
+   {
+    "es": "llegar (en un vehículo)",
+    "definitionEs": "Llegar hasta un lugar viajando en auto, colectivo, tren u otro transporte. Se usa con до + genitivo: дое́хать до це́нтра, «llegar al centro».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
+    ]
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "доехать",
+    "POS": "v",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "до",
+    "Prefix2": "",
+    "Root": "ед",
+    "Suffix1": "ать",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "163",
+    "Notes": "Agregada para el módulo Diálogos — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "до кого? до чего?",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "dialogosEnrichment": true
+  },
+  "aspect": "perfectivo",
+  "aspectualPartner": [
+   "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
+  ]
+ },
+ {
+  "id": "CMR-05473",
+  "ru": "потеряться",
+  "acento": "потеря́ться",
+  "posNormalized": "verbo",
+  "translit": "patiriátsa",
+  "ipa": "pʌtʲɪrʲˈɑtsʌ",
+  "senses": [
+   {
+    "es": "perderse",
+    "definitionEs": "No saber dónde uno está o no encontrar el camino; también, extraviarse algo: потеря́лись ключи́, «se perdieron las llaves».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
+    ]
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "потеряться",
+    "POS": "v",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "по",
+    "Prefix2": "",
+    "Root": "тер",
+    "Suffix1": "ять",
+    "Suffix2": "ся",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "582",
+    "Notes": "Agregada para el módulo Diálogos — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "где?",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "dialogosEnrichment": true
+  },
+  "aspect": "perfectivo",
+  "aspectualPartner": [
+   "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
+  ]
+ },
+ {
+  "id": "CMR-05474",
+  "ru": "солнечно",
+  "acento": "со́лнечно",
+  "posNormalized": "adverbio",
+  "translit": "sólnichna",
+  "ipa": "sˈoɭnʲɪtʃʲnʌ",
+  "senses": [
+   {
+    "es": "está soleado, hay sol",
+    "definitionEs": "Se usa para decir que hace sol: сего́дня со́лнечно, «hoy está soleado».",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "солнечно",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "солн",
+    "Suffix1": "ечн",
+    "Suffix2": "о",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "524",
+    "Notes": "Agregada para el módulo Diálogos — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "dialogosEnrichment": true
+  }
+ },
+ {
+  "id": "CMR-05475",
+  "ru": "по-английски",
+  "acento": "по-англи́йски",
+  "posNormalized": "adverbio",
+  "translit": "paanglíiski",
+  "ipa": "pʌʌnɡɭʲˈijskʲɪ",
+  "senses": [
+   {
+    "es": "en inglés",
+    "definitionEs": "En el idioma inglés, con verbos como hablar, leer o escribir: говори́ть по-англи́йски, «hablar inglés».",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "по-английски",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "12",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "TRUE",
+    "Calque": "",
+    "Prefix1": "по",
+    "Prefix2": "",
+    "Root": "англи",
+    "Suffix1": "йски",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "английский",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "11",
+    "Notes": "Agregada para el módulo Diálogos — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "dialogosEnrichment": true
+  }
+ },
+ {
+  "id": "CMR-05476",
+  "ru": "меню",
+  "acento": "меню́",
+  "posNormalized": "sustantivo",
+  "translit": "miniú",
+  "ipa": "mʲɪnʲˈu",
+  "senses": [
+   {
+    "es": "carta, menú",
+    "definitionEs": "Lista de las comidas y bebidas que ofrece un restaurante o un café; también, el menú de un programa o de un celular. No se declina.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "меню",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "TRUE",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para el módulo Diálogos — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "dialogosEnrichment": true
+  },
+  "gender": "n",
+  "animate": "no",
+  "numberClass": "singulariaTantum"
  }
 ];
 

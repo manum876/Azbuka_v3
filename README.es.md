@@ -66,7 +66,7 @@ El enfoque es **orientado a la producción**: además de reconocer respuestas, s
 
 ### 📚 Diccionario
 
-Es la base de toda la app: **5.397 palabras** (Comer 5000 más vocabulario propio). Cada una tiene:
+Es la base de toda la app: **5.403 palabras** (Comer 5000 más vocabulario propio). Cada una tiene:
 
 - la palabra con su **acento marcado**;
 - la **IPA** y una **pronunciación figurada en español** (jarashó, spasíba);
@@ -78,7 +78,7 @@ Cada palabra tiene su ficha, con audio.
 
 ### 🗣️ Verbos
 
-Las conjugaciones de los **1.654 verbos** del diccionario:
+Las conjugaciones de los **1.656 verbos** del diccionario:
 
 - presente, futuro, pasado e imperativo, con audio en cada forma;
 - comparación en paralelo con la **pareja aspectual** (imperfectivo / perfectivo);
@@ -86,7 +86,7 @@ Las conjugaciones de los **1.654 verbos** del diccionario:
 
 ### 📖 Casos
 
-Las declinaciones de **3.229 palabras**: sustantivos, adjetivos, pronombres, determinantes y numerales.
+Las declinaciones de **3.230 palabras**: sustantivos, adjetivos, pronombres, determinantes y numerales.
 
 - Los **6 casos** en singular y plural, o por género en los adjetivos, con audio.
 - Formas especiales: locativo (в лесу́), partitivo (ча́ю), forma corta de los adjetivos y acusativo animado.
@@ -98,7 +98,7 @@ Consulta y práctica de las **33 letras** del alfabeto cirílico: imprenta y cur
 
 ### 💬 Diálogos
 
-Conversaciones para situaciones cotidianas, con traducción y vocabulario. *Se está migrando a la versión nueva.*
+Una guía de conversación: **30 diálogos** de situaciones cotidianas, muchos con versión informal (ты) y formal (вы), audio, transliteración y cada palabra conectada al diccionario. Suma **52 frases útiles** que conviene aprender enteras y **9 notas culturales** que comparan las costumbres rusas con las del Río de la Plata. Tiene un modo para practicar haciendo de uno de los personajes.
 
 ---
 
@@ -115,10 +115,11 @@ Conversaciones para situaciones cotidianas, con traducción y vocabulario. *Se e
 ## Características
 
 - 🎓 Curso de 12 unidades, A1 → B1
-- 📚 Diccionario central de 5.397 palabras, con acento, IPA y pronunciación figurada
-- 🗣️ 1.654 verbos conjugados, con pareja aspectual y rección
-- 📖 3.229 palabras declinadas en los 6 casos
+- 📚 Diccionario central de 5.403 palabras, con acento, IPA y pronunciación figurada
+- 🗣️ 1.656 verbos conjugados, con pareja aspectual y rección
+- 📖 3.230 palabras declinadas en los 6 casos
 - 🔤 Alfabeto cirílico completo
+- 💬 30 diálogos, 52 frases útiles y 9 notas culturales
 - 🔎 Buscador en ruso y en español, que también reconoce formas declinadas y conjugadas
 - 🔊 Audio en ruso con la voz del navegador
 - 💾 Progreso guardado en el navegador
@@ -169,6 +170,7 @@ Azbuka_v3/
 ├── alfabeto.html
 ├── verbos.html
 ├── casos.html
+├── dialogos.html
 ├── core.css              ← estilos compartidos
 ├── core.js               ← catálogo, búsqueda, almacenamiento
 ├── shell.js              ← menú lateral, encabezado y barra inferior
@@ -179,6 +181,9 @@ Azbuka_v3/
 ├── data-casos.js         ← declinaciones
 ├── data-gramatica.js     ← explicaciones de gramática
 ├── data-alphabet.js      ← alfabeto
+├── data-dialogos.js      ← diálogos
+├── data-frases.js        ← frases útiles
+├── data-cultura.js       ← notas culturales
 ├── azbuka-structure.svg
 ├── README.md
 ├── README.es.md
@@ -192,8 +197,8 @@ Azbuka_v3/
 
 🚧 **En desarrollo activo.** La app se está migrando a una arquitectura nueva, con un diccionario central y un sistema de diseño compartido.
 
-- ✅ Inicio, índice del curso, diccionario, Alfabeto, Verbos y Casos.
-- 🔜 Diálogos y las 12 unidades del curso.
+- ✅ Inicio, índice del curso, diccionario, Alfabeto, Diálogos, Verbos y Casos.
+- 🔜 Las 12 unidades del curso.
 - 🔜 Banco de ejercicios y repaso.
 
 ---
