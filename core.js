@@ -64,7 +64,10 @@ const AZ_MODULES = [
      <script src="core.js"></script>
 
    No hace falta ningún otro data-*.js — Azbuka_v3 ya no reparte
-   el vocabulario por módulo, todo vive acá. */
+   el vocabulario por módulo, todo vive acá. Para encontrar formas
+   declinadas o conjugadas (тебе́, говорю́) se usan además
+   data-casos.js y data-verbos.js, que se cargan solos si la página
+   no los tiene (ver «FORMAS DECLINADAS Y CONJUGADAS» más abajo). */
 /* е y ё cuentan como la misma letra al buscar: así «еще» encuentra
    «ещё». También ignora la marca de acento si alguien la pega. */
 function azNormRu(s) {
@@ -75,7 +78,7 @@ function azSearchLexicon(query, pos) {
   const q = azNormRu((query || "").trim().toLowerCase());
   if (!q) return [];
   const posOk = Array.isArray(pos) ? (p => pos.includes(p)) : (p => !pos || p === pos);
-  return LEXICON_COMER
+  const base = LEXICON_COMER
     .filter(e =>
       posOk(e.posNormalized) && (
         azNormRu(e.ru.toLowerCase()).includes(q) ||
@@ -92,6 +95,125 @@ function azSearchLexicon(query, pos) {
       gender: e.gender || null,
       href: "ficha.html?id=" + e.id
     }));
+  /* Formas declinadas y conjugadas (тебе́ → ты, говорю́ → говори́ть).
+     Van primero porque son coincidencia exacta. Se saltean las
+     palabras que ya aparecen por su forma de diccionario. */
+  const ya = new Set(base.map(r => r.id));
+  const formas = azBuscarForma(q)
+    .filter(f => !ya.has(f.id) && posOk(f.lex.posNormalized))
+    .map(f => ({
+      id: f.id,
+      ru: f.lex.ru,
+      acento: f.forma,
+      es: f.etiquetas.join(" / ") + " de " + (f.lex.acento || f.lex.ru) + " · " + (f.lex.senses || []).map(s => s.es).join(" · "),
+      pos: f.lex.posNormalized,
+      gender: f.lex.gender || null,
+      forma: f.forma,
+      etiquetas: f.etiquetas,
+      href: f.modulo + "?id=" + f.id + "&f=" + encodeURIComponent(f.forma)
+    }));
+  return formas.concat(base);
+}
+
+/* ── FORMAS DECLINADAS Y CONJUGADAS ──────────────────────────
+   El buscador también encuentra formas: тебе́ (de ты), кни́ги
+   (de кни́га), говорю́ (de говори́ть). No hay ningún archivo índice:
+   el índice se arma en el momento leyendo data-casos.js (CASOS) y
+   data-verbos.js (VERBOS), que siguen siendo la única fuente. Así,
+   al agregar una palabra nueva a esos archivos, el buscador la
+   encuentra sola.
+   Si la página no cargó esos archivos, azBuscarForma los carga la
+   primera vez que alguien busca algo y avisa con el evento
+   "az-formas" para que la página vuelva a mostrar los resultados.
+   Cada resultado de forma lleva al módulo (casos.html o verbos.html)
+   con ?id=…&f=forma, y la ficha resalta esa forma en la tabla. */
+const AZ_CASOS_ETIQ = ["nominativo", "genitivo", "dativo", "acusativo", "instrumental", "preposicional"];
+const AZ_GEN_ETIQ = { m: "masculino", f: "femenino", n: "neutro", pl: "plural" };
+const AZ_PERS_ETIQ = ["я", "ты", "он/она", "мы", "вы", "они"];
+let AZ_FORMAS = null, AZ_FORMAS_SRC = "", AZ_FORMAS_CARGANDO = false;
+
+function azFormaClave(s) {
+  return azNormRu((s || "").toLowerCase()).trim();
+}
+
+/* Todas las formas de una palabra con su descripción: [[forma, etiqueta], …] */
+function azFormasDe(id) {
+  const out = [];
+  const add = (f, et) => { if (Array.isArray(f)) { if (f[0]) out.push([f[0], et + " (inanimado)"]); if (f[1]) out.push([f[1], et + " (animado)"]); } else if (f) out.push([f, et]); };
+  const d = typeof CASOS !== "undefined" ? CASOS[id] : null;
+  if (d) {
+    const fila = (row, suf) => (row || []).forEach((f, i) => add(f, AZ_CASOS_ETIQ[i] + suf));
+    if (d.tipo === "sustantivo") { fila(d.sg, d.pl ? " singular" : ""); fila(d.pl, d.sg ? " plural" : ""); }
+    if (d.tipo === "adjetivo") ["m", "f", "n", "pl"].forEach(g => fila(d[g], " " + AZ_GEN_ETIQ[g]));
+    if (d.tipo === "personal" || d.tipo === "serie") fila(d.formas, "");
+    if (d.n) (d.n || []).forEach((f, i) => add(f, AZ_CASOS_ETIQ[i] + " tras preposición"));
+    if (d.alt) Object.keys(d.alt).forEach(k => add(d.alt[k], "instrumental"));
+    if (d.altN) Object.keys(d.altN).forEach(k => add(d.altN[k], "instrumental tras preposición"));
+    if (d.corta) ["m", "f", "n", "pl"].forEach(g => add(d.corta[g], "forma corta " + AZ_GEN_ETIQ[g]));
+    if (d.loc2) out.push([d.loc2, "locativo"], [d.loc2.split(" ").pop(), "locativo"]);
+    if (d.partitivo) out.push([d.partitivo, "partitivo"]);
+  }
+  const v = typeof VERBOS !== "undefined" ? VERBOS[id] : null;
+  if (v) {
+    (v.presente || []).forEach((f, i) => add(f, "presente (" + AZ_PERS_ETIQ[i] + ")"));
+    (v.futuro || []).forEach((f, i) => add(f, "futuro (" + AZ_PERS_ETIQ[i] + ")"));
+    if (v.pasado) ["m", "f", "n", "pl"].forEach(g => add(v.pasado[g], "pasado " + AZ_GEN_ETIQ[g]));
+    if (v.imperativo) { add(v.imperativo.ty, "imperativo (ты)"); add(v.imperativo.vy, "imperativo (вы)"); }
+  }
+  return out;
+}
+
+function azIndiceFormas() {
+  const src = (typeof CASOS !== "undefined" ? "c" : "") + (typeof VERBOS !== "undefined" ? "v" : "");
+  if (AZ_FORMAS && AZ_FORMAS_SRC === src) return AZ_FORMAS;
+  const idx = new Map();
+  const ids = [].concat(typeof CASOS !== "undefined" ? Object.keys(CASOS) : [], typeof VERBOS !== "undefined" ? Object.keys(VERBOS) : []);
+  ids.forEach(id => azFormasDe(id).forEach(([f, et]) => {
+    const k = azFormaClave(f);
+    if (!idx.has(k)) idx.set(k, []);
+    idx.get(k).push([id, f, et]);
+  }));
+  AZ_FORMAS = idx; AZ_FORMAS_SRC = src;
+  return idx;
+}
+
+/* Carga data-casos.js y data-verbos.js si la página no los tiene. */
+function azCargarFormas() {
+  if (AZ_FORMAS_CARGANDO) return;
+  const faltan = [];
+  if (typeof CASOS === "undefined") faltan.push("data-casos.js");
+  if (typeof VERBOS === "undefined") faltan.push("data-verbos.js");
+  if (!faltan.length) return;
+  AZ_FORMAS_CARGANDO = true;
+  let pendientes = faltan.length;
+  faltan.forEach(src => {
+    const s = document.createElement("script");
+    s.src = src;
+    s.onload = s.onerror = () => {
+      if (--pendientes === 0) { AZ_FORMAS_CARGANDO = false; window.dispatchEvent(new Event("az-formas")); }
+    };
+    document.head.appendChild(s);
+  });
+}
+
+/* Busca una forma exacta (sin importar acento ni е/ё).
+   Devuelve [{ id, lex, forma, etiquetas: [...], modulo }] */
+function azBuscarForma(q) {
+  const k = azFormaClave(q);
+  if (!k || typeof lexComerById !== "function") return [];
+  azCargarFormas();
+  const hits = azIndiceFormas().get(k) || [];
+  const porId = new Map();
+  hits.forEach(([id, f, et]) => {
+    if (!porId.has(id)) porId.set(id, { id, forma: f, etiquetas: [] });
+    const r = porId.get(id);
+    if (r.etiquetas.indexOf(et) < 0) r.etiquetas.push(et);
+  });
+  return [...porId.values()].map(r => {
+    r.lex = lexComerById(r.id);
+    r.modulo = typeof CASOS !== "undefined" && CASOS[r.id] ? "casos.html" : "verbos.html";
+    return r;
+  }).filter(r => r.lex);
 }
 
 /* ── STORAGE ─────────────────────────────────────────────────

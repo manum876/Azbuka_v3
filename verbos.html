@@ -150,6 +150,9 @@ function VerbosStyles({ c }) {
     .p-es{font-size:10.5px;color:${c.textMuted};margin-top:1px;}
     .f-cell{display:flex;align-items:center;gap:6px;cursor:pointer;min-height:28px;}
     .f-ru{font-size:15px;font-weight:600;color:${c.text};word-break:break-word;line-height:1.25;flex:1;min-width:0;}
+    .f-hit{background:${c.gold}26;box-shadow:0 0 0 1px ${c.gold};border-radius:6px;padding:2px 5px;margin:-2px -5px;}
+    .busco{background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.5;color:${c.textSub};margin-bottom:12px;}
+    .busco b{color:${c.gold};}
     .f-play{font-size:10px;color:${c.gold};flex-shrink:0;}
     .f-none{font-size:15px;color:${c.textMuted};}
     .tnote{font-size:11.5px;color:${c.textMuted};margin-top:6px;}
@@ -172,10 +175,14 @@ function VerbosStyles({ c }) {
   `);
 }
 
+/* Forma buscada (?f=): se resalta en la tabla. */
+const FORMA_BUSCADA = azFormaClave(new URLSearchParams(window.location.search).get("f") || "");
+
 /* Celda con una forma: toca para escuchar. */
 function Forma({ text }) {
   if (!text) return h("span", { className: "f-none" }, "—");
-  return h("div", { className: "f-cell", onClick: () => speakRu(text) },
+  const hit = FORMA_BUSCADA && azFormaClave(text) === FORMA_BUSCADA;
+  return h("div", { className: "f-cell" + (hit ? " f-hit" : ""), onClick: () => speakRu(text) },
     h("span", { className: "f-ru" }, text),
     h("span", { className: "f-play" }, "▶")
   );
@@ -257,6 +264,9 @@ function FichaVerbo({ id, c }) {
   }
 
   const { lex, v } = base;
+  /* Si se llegó buscando una forma (?f=), se explica de dónde viene */
+  const bf = FORMA_BUSCADA ? azFormasDe(id).filter(x => azFormaClave(x[0]) === FORMA_BUSCADA) : [];
+  const buscada = bf.length ? { forma: bf[0][0], etiquetas: [...new Set(bf.map(x => x[1]))] } : null;
   const parejas = parejasDe(lex);
   const sinPareja = parejas.length ? null : sinParejaDe(lex);
   const selId = parejaSel === undefined ? (parejas[0] ? parejas[0].id : null) : parejaSel;
@@ -310,6 +320,7 @@ function FichaVerbo({ id, c }) {
 
         /* ── CONJUGACIONES (data-verbos.js) ── */
         h("div", { className: "section-lbl" }, "Conjugación"),
+        buscada && h("div", { className: "busco" }, h("b", null, buscada.forma), " es " + buscada.etiquetas.join(" / ") + " de ", h("b", null, v.ru), ". Está resaltada en la tabla."),
 
         /* Selector de pareja aspectual: arriba de las tablas */
         parejas.length > 0
@@ -377,6 +388,14 @@ function App() {
   const searchWrapRef = useRef(null);
   const [headerH, setHeaderH] = useState(0);
   const [searchH, setSearchH] = useState(0);
+  const [, setFormasListas] = useState(0);
+
+  /* Cuando terminan de cargarse las formas, se repite la búsqueda */
+  useEffect(() => {
+    const f = () => setFormasListas(n => n + 1);
+    window.addEventListener("az-formas", f);
+    return () => window.removeEventListener("az-formas", f);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -402,14 +421,14 @@ function App() {
   const id = getVerbId();
   const c = azColors(darkMode);
   const results = (q.trim() && typeof azSearchLexicon === "function" ? azSearchLexicon(q, "verbo") : [])
-    .map(r => Object.assign({}, r, { href: "verbos.html?id=" + r.id, asp: (lexComerById(r.id) || {}).aspect }));
+    .map(r => Object.assign({}, r, { href: r.forma ? r.href : "verbos.html?id=" + r.id, asp: (lexComerById(r.id) || {}).aspect }));
 
   const resultRows = results.map((r, i) => h("a", {
-      key: r.id, href: r.href, className: "res-row",
+      key: r.href, href: r.href, className: "res-row",
       onClick: (e) => azNavigate(e, r.href),
       style: { borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
     },
-      h("span", null, h("span", { className: "res-ru" }, (verboById(r.id) || {}).ru || r.ru),
+      h("span", null, h("span", { className: "res-ru" }, r.forma || (verboById(r.id) || {}).ru || r.ru),
         r.asp && h("span", { className: "res-asp" }, ASPECT_SHORT[r.asp] || "")),
       h("span", { className: "res-es" }, r.es)
     ));

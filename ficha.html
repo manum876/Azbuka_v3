@@ -144,6 +144,16 @@ function App() {
   const searchWrapRef = useRef(null);
   const [headerH, setHeaderH] = useState(0);
   const [searchH, setSearchH] = useState(0);
+  const [, setFormasListas] = useState(0);
+
+  /* Cuando terminan de cargarse las formas declinadas y conjugadas
+     (core.js las carga solas la primera vez que se busca), se repite
+     la búsqueda para que aparezcan. */
+  useEffect(() => {
+    const f = () => setFormasListas(n => n + 1);
+    window.addEventListener("az-formas", f);
+    return () => window.removeEventListener("az-formas", f);
+  }, []);
 
   useEffect(() => {
     (async () => { setDarkMode((await azGet('az_theme', 'dark')) !== 'light'); })();
@@ -200,7 +210,7 @@ function App() {
       },
         results.length > 0
           ? results.map((r, i) => React.createElement("a", {
-              key: r.id, href: r.href,
+              key: r.href, href: r.href,
               onClick: (e) => azNavigate(e, r.href),
               style: { display: "flex", justifyContent: "space-between", gap: 10, padding: "10px 14px", textDecoration: "none", borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
             },
