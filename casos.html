@@ -134,6 +134,10 @@ function CasosStyles({ c }) {
     .sheet-q{margin-top:8px;font-size:15px;color:${c.gold};font-weight:700;}
     .sheet-text{margin-top:18px;font-size:15px;line-height:1.6;color:${c.textSub};}
     .ex{display:flex;align-items:center;gap:12px;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-bottom:8px;}
+    .ex-col{flex-direction:column;align-items:stretch;}
+    .ex-top{display:flex;align-items:center;gap:12px;}
+    .ex-hl{color:${c.gold};border-bottom:2px solid ${c.gold}88;}
+    .ex-why{margin-top:10px;padding-top:9px;border-top:1px dashed ${c.border};font-size:13px;line-height:1.5;color:${c.textSub};}
     .ex-t{font-size:11px;font-weight:700;color:${c.gold};text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
     .ex-ru{font-size:16px;font-weight:700;color:${c.text};}
     .ex-es{font-size:13px;color:${c.textMuted};margin-top:3px;}
@@ -141,6 +145,9 @@ function CasosStyles({ c }) {
     .prep{background:${c.card};border:1px solid ${c.border};border-radius:10px;padding:7px 10px;font-size:13px;color:${c.textSub};}
     .prep b{color:${c.text};margin-right:6px;}
     .word-box{margin-top:18px;background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:12px;padding:12px 14px;}
+    .sheet-sub{margin-top:4px;font-size:15px;color:${c.textSub};font-weight:600;}
+    .sheet-q-k{color:${c.textMuted};font-weight:600;}
+    .word-box .wb-line + .wb-line{margin-top:10px;padding-top:10px;border-top:1px solid ${c.gold}33;}
     .word-box .wb-k{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.gold};margin-bottom:6px;}
     .word-box .wb-row{display:flex;flex-wrap:wrap;gap:6px 14px;}
     .word-box .wb-item{font-size:15px;font-weight:700;color:${c.text};cursor:pointer;}
@@ -219,42 +226,57 @@ function useLockScroll() {
     return () => { document.body.style.overflow = prev; };
   }, []);
 }
-function Ejemplo({ ru, es, titulo }) {
-  return h("div", { className: "ex" },
-    h("div", { style: { flex: 1, minWidth: 0 } },
-      titulo && h("div", { className: "ex-t" }, titulo),
-      h("div", { className: "ex-ru" }, ru),
-      h("div", { className: "ex-es" }, es)
+/* Ejemplo: la palabra que está en el caso viene entre llaves {…} en
+   data-gramatica.js; se resalta y abajo va la explicación. */
+function RuMarcado({ text }) {
+  return h("span", null, text.split(/(\{[^}]*\})/).map((p, i) =>
+    p.charAt(0) === "{" ? h("span", { key: i, className: "ex-hl" }, p.slice(1, -1)) : p));
+}
+function Ejemplo({ ru, es, titulo, por }) {
+  const limpio = ru.replace(/[{}]/g, "");
+  return h("div", { className: "ex ex-col" },
+    h("div", { className: "ex-top" },
+      h("div", { style: { flex: 1, minWidth: 0 } },
+        titulo && h("div", { className: "ex-t" }, titulo),
+        h("div", { className: "ex-ru" }, h(RuMarcado, { text: ru })),
+        h("div", { className: "ex-es" }, es)
+      ),
+      h("button", { className: "play", onClick: () => speakRu(limpio), "aria-label": "Escuchar" }, "▶")
     ),
-    h("button", { className: "play", onClick: () => speakRu(ru), "aria-label": "Escuchar" }, "▶")
+    por && h("div", { className: "ex-why" }, por)
   );
 }
-function CasoSheet({ cid, formas, onClose }) {
+function CasoSheet({ cid, formas, base, onClose }) {
   useLockScroll();
   const g = gramaticaCaso(cid);
   if (!g) return null;
+  const fila = (k, lista) => h("div", { className: "wb-line" },
+    h("div", { className: "wb-k" }, k),
+    h("div", { className: "wb-row" }, lista.map((f, i) => h("span", { key: i, className: "wb-item", onClick: () => speakRu(f[0]) }, f[0], f[1] && h("small", null, f[1]))))
+  );
   return h("div", { className: "sheet", role: "dialog", "aria-modal": "true" },
     h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
     h("div", { className: "sheet-in" },
       h("div", { className: "sheet-kicker" }, "Caso"),
       h("div", { className: "sheet-title" }, g.nombre),
-      h("div", { className: "sheet-q" }, g.ru + " · " + g.preguntas),
-      /* Las formas de la palabra de la ficha en este caso */
+      h("div", { className: "sheet-sub" }, g.ru),
+      h("div", { className: "sheet-q" }, h("span", { className: "sheet-q-k" }, "Responde a: "), g.preguntas),
+      /* La palabra de la ficha: primero en nominativo, después en este caso */
       formas && formas.length > 0 && h("div", { className: "word-box" },
-        h("div", { className: "wb-k" }, "Esta palabra en " + g.nombre.toLowerCase()),
-        h("div", { className: "wb-row" }, formas.map((f, i) => h("span", { key: i, className: "wb-item", onClick: () => speakRu(f[0]) }, f[0], f[1] && h("small", null, f[1]))))
+        cid !== "nominativo" && base && base.length > 0 && fila("La palabra (nominativo)", base),
+        fila(cid === "nominativo" ? "La palabra (nominativo)" : "En " + g.nombre.toLowerCase(), formas)
       ),
       h("div", { className: "sheet-text" }, g.resumen),
       g.usos && g.usos.length > 0 && h("div", null,
         h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Para qué se usa"),
-        g.usos.map((u, i) => h(Ejemplo, { key: i, titulo: u[0], ru: u[1], es: u[2] }))
+        g.usos.map((u, i) => h(Ejemplo, { key: i, titulo: u[0], ru: u[1], es: u[2], por: u[3] }))
       ),
       g.preposiciones && g.preposiciones.length > 0 && h("div", null,
         h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Preposiciones"),
         h("div", { className: "prep-list" }, g.preposiciones.map((p, i) => h("div", { key: i, className: "prep" }, h("b", null, p[0]), p[1])))
       ),
       h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Ejemplos"),
-      g.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1] }))
+      g.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1], por: ej[2] }))
     )
   );
 }
@@ -269,7 +291,7 @@ function FormaSheet({ fid, onClose }) {
       h("div", { className: "sheet-title" }, g.titulo),
       h("div", { className: "sheet-text" }, g.texto),
       h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Ejemplos"),
-      g.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1] }))
+      g.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1], por: ej[2] }))
     )
   );
 }
@@ -449,7 +471,7 @@ function FichaCasos({ id, c }) {
         )
       )
     ),
-    caso && h(CasoSheet, { cid: caso, formas: formasEnCaso(d, GRAMATICA_CASOS_ORDEN.indexOf(caso)), onClose: () => setCaso(null) }),
+    caso && h(CasoSheet, { cid: caso, formas: formasEnCaso(d, GRAMATICA_CASOS_ORDEN.indexOf(caso)), base: formasEnCaso(d, 0), onClose: () => setCaso(null) }),
     forma && h(FormaSheet, { fid: forma, onClose: () => setForma(null) })
   );
 }

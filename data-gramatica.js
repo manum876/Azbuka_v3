@@ -28,7 +28,9 @@
      vocal o con ё. Para la voz se envía sin la marca.
    · Español rioplatense. Redacción propia de AZBUKA
      (CC BY-NC-ND 4.0, ver LICENSE-CONTENT).
-   · ejemplos: pares [ruso, español].
+   · ejemplos de casos y formas: [ruso, español, explicación], con la
+     palabra en el caso entre llaves {…}. Los de rección siguen siendo
+     pares [ruso, español].
    ============================================================ */
 
 /* ── LOS 6 CASOS ──────────────────────────────────────────────
@@ -38,91 +40,117 @@
    abrev        abreviatura para tablas
    preguntas    preguntas típicas del caso
    resumen      una o dos oraciones: para qué sirve
-   usos         lista de usos, cada uno con su ejemplo
+   usos         lista de usos: [título, ejemplo ruso, traducción, explicación]
    preposiciones  [preposición, significado] que piden este caso
-   ejemplos     frases completas                                  */
+   ejemplos     frases completas: [ruso, traducción, explicación]
+   En el ruso de usos y ejemplos, la palabra que está en el caso va
+   entre llaves: кни́га {бра́та}. La página la resalta y la explicación
+   dice de qué forma viene y por qué va en ese caso. Las llaves no se
+   leen en voz alta.                                              */
 const GRAMATICA_CASOS = {
  nominativo: {
   id: "nominativo", nombre: "Nominativo", ru: "имени́тельный паде́ж", abrev: "Nom.",
   preguntas: "кто? что?",
   resumen: "Es la forma de diccionario. Se usa para el sujeto: quién o qué hace la acción, o de quién o de qué se habla.",
   usos: [
-   ["Sujeto de la oración", "Ма́ма чита́ет.", "Mamá lee."],
-   ["Para presentar algo con э́то", "Э́то мой брат.", "Este es mi hermano."],
-   ["Lo que se tiene, con у меня́ есть", "У меня́ есть соба́ка.", "Tengo un perro."]
+   ["Sujeto de la oración","{Ма́ма} чита́ет.","Mamá lee.","ма́ма va en nominativo, la forma de diccionario, porque es quien lee: el sujeto."],
+   ["Para presentar algo con э́то","Э́то мой {брат}.","Este es mi hermano.","брат queda en la forma de diccionario: después de э́то se nombra lo que se presenta."],
+   ["Lo que se tiene, con у меня́ есть","У меня́ есть {соба́ка}.","Tengo un perro.","соба́ка va en nominativo: en ruso lo que se tiene es el sujeto («en mí hay un perro»)."]
   ],
   preposiciones: [],
-  ejemplos: [["Где ма́ма?", "¿Dónde está mamá?"], ["Э́то моя́ кни́га.", "Este es mi libro."]]
+  ejemplos: [
+   ["Где {ма́ма}?","¿Dónde está mamá?","ма́ма es el sujeto: nominativo."],
+   ["Э́то моя́ {кни́га}.","Este es mi libro.","кни́га es lo que se presenta: nominativo. моя́ concuerda con ella en femenino."]
+  ]
  },
  genitivo: {
   id: "genitivo", nombre: "Genitivo", ru: "роди́тельный паде́ж", abrev: "Gen.",
   preguntas: "кого? чего?",
   resumen: "Indica de quién o de qué es algo («de»), lo que falta o no hay, y las cantidades. Es el caso con más preposiciones.",
   usos: [
-   ["Pertenencia: «de»", "кни́га бра́та", "el libro del hermano"],
-   ["Lo que no hay, con нет", "У меня́ нет вре́мени.", "No tengo tiempo."],
-   ["Cantidades: мно́го, ма́ло, ско́лько, не́сколько", "мно́го люде́й", "mucha gente"],
-   ["Después de 2, 3 y 4 va el genitivo singular", "два бра́та", "dos hermanos"],
-   ["Desde 5 en adelante va el genitivo plural", "пять книг", "cinco libros"]
+   ["Pertenencia: «de»","кни́га {бра́та}","el libro del hermano","брат → бра́та (masculino: se agrega -а). Dice de quién es el libro."],
+   ["Lo que no hay, con нет","У меня́ нет {вре́мени}.","No tengo tiempo.","вре́мя → вре́мени (neutro irregular en -мя). Lo que no hay va en genitivo después de нет."],
+   ["Cantidades: мно́го, ма́ло, ско́лько, не́сколько","мно́го {люде́й}","mucha gente","лю́ди → люде́й. Después de мно́го, lo que se cuenta va en genitivo plural."],
+   ["Después de 2, 3 y 4 va el genitivo singular","два {бра́та}","dos hermanos","брат → бра́та: genitivo singular, porque va después de два."],
+   ["Desde 5 en adelante va el genitivo plural","пять {книг}","cinco libros","кни́га → книг: el genitivo plural no tiene terminación (se cae la -а). Va así después de пять."]
   ],
   preposiciones: [
-   ["без", "sin"], ["для", "para"], ["до", "hasta, antes de"], ["из", "de (desde adentro)"],
-   ["от", "de (de parte de alguien), desde"], ["у", "junto a, en lo de; у меня́ = yo tengo"],
-   ["с", "desde (de arriba de)"], ["о́коло", "cerca de"], ["по́сле", "después de"],
-   ["кро́ме", "excepto, además de"], ["вокру́г", "alrededor de"], ["ми́мо", "por al lado de"],
-   ["про́тив", "contra"], ["из-за", "por culpa de, de atrás de"], ["из-под", "de debajo de"]
+   ["без","sin"], ["для","para"], ["до","hasta, antes de"], ["из","de (desde adentro)"], ["от","de (de parte de alguien), desde"], ["у","junto a, en lo de; у меня́ = yo tengo"], ["с","desde (de arriba de)"], ["о́коло","cerca de"], ["по́сле","después de"], ["кро́ме","excepto, además de"], ["вокру́г","alrededor de"], ["ми́мо","por al lado de"], ["про́тив","contra"], ["из-за","por culpa de, de atrás de"], ["из-под","de debajo de"]
   ],
-  ejemplos: [["Э́то дом моего́ дру́га.", "Esta es la casa de mi amigo."], ["Я пью ко́фе без са́хара.", "Tomo café sin azúcar."]]
+  ejemplos: [
+   ["Э́то дом {моего́ дру́га}.","Esta es la casa de mi amigo.","мой друг → моего́ дру́га: el posesivo (-его́) y el sustantivo (-а) van los dos en genitivo. Dice de quién es la casa."],
+   ["Я пью ко́фе без {са́хара}.","Tomo café sin azúcar.","са́хар → са́хара: без siempre pide genitivo."]
+  ]
  },
  dativo: {
   id: "dativo", nombre: "Dativo", ru: "да́тельный паде́ж", abrev: "Dat.",
   preguntas: "кому? чему?",
   resumen: "Indica a quién va dirigida la acción: el destinatario («a» o «le» en español). También se usa para decir lo que alguien siente o necesita.",
   usos: [
-   ["Destinatario: a quién se da, se dice o se escribe", "Я пишу́ ма́ме.", "Le escribo a mamá."],
-   ["La edad", "Мне два́дцать лет.", "Tengo veinte años."],
-   ["Lo que alguien siente o necesita", "Мне хо́лодно.", "Tengo frío."],
-   ["Lo que a alguien le gusta, con нра́виться", "Мне нра́вится му́зыка.", "Me gusta la música."]
+   ["Destinatario: a quién se da, se dice o se escribe","Я пишу́ {ма́ме}.","Le escribo a mamá.","ма́ма → ма́ме (femenino: la -а pasa a -е). Es a quién le escribo."],
+   ["La edad","{Мне} два́дцать лет.","Tengo veinte años.","я → мне. La persona que tiene la edad va en dativo."],
+   ["Lo que alguien siente o necesita","{Мне} хо́лодно.","Tengo frío.","я → мне. Quien siente algo va en dativo: literalmente, «a mí hace frío»."],
+   ["Lo que a alguien le gusta, con нра́виться","{Мне} нра́вится му́зыка.","Me gusta la música.","я → мне. Con нра́виться, la persona a la que le gusta algo va en dativo, y lo que gusta (му́зыка) es el sujeto."]
   ],
-  preposiciones: [["к", "hacia, a lo de (una persona)"], ["по", "por, a lo largo de; по телефо́ну = por teléfono"], ["благодаря́", "gracias a"]],
-  ejemplos: [["Я звоню́ дру́гу.", "Llamo a mi amigo."], ["Мы идём к врачу́.", "Vamos al médico."]]
+  preposiciones: [
+   ["к","hacia, a lo de (una persona)"], ["по","por, a lo largo de; по телефо́ну = por teléfono"], ["благодаря́","gracias a"]
+  ],
+  ejemplos: [
+   ["Я звоню́ {дру́гу}.","Llamo a mi amigo.","друг → дру́гу (masculino: se agrega -у). Звони́ть pide dativo: a quién llamo."],
+   ["Мы идём к {врачу́}.","Vamos al médico.","врач → врачу́: к siempre pide dativo."]
+  ]
  },
  acusativo: {
   id: "acusativo", nombre: "Acusativo", ru: "вини́тельный паде́ж", abrev: "Ac.",
   preguntas: "кого? что?",
   resumen: "Es el complemento directo: la cosa o la persona que recibe la acción. Con в y на indica hacia dónde se va.",
   usos: [
-   ["Complemento directo", "Я чита́ю кни́гу.", "Leo un libro."],
-   ["Dirección con в / на (¿adónde?)", "Я иду́ в шко́лу.", "Voy a la escuela."],
-   ["Duración o momento", "Я рабо́тал всю неде́лю.", "Trabajé toda la semana."]
+   ["Complemento directo","Я чита́ю {кни́гу}.","Leo un libro.","кни́га → кни́гу (femenino: la -а pasa a -у). Es lo que leo: el complemento directo."],
+   ["Dirección con в / на (¿adónde?)","Я иду́ в {шко́лу}.","Voy a la escuela.","шко́ла → шко́лу. в + acusativo indica adónde voy (hay movimiento)."],
+   ["Duración o momento","Я рабо́тал {всю неде́лю}.","Trabajé toda la semana.","вся неде́ля → всю неде́лю: cuánto duró algo va en acusativo, sin preposición."]
   ],
-  preposiciones: [["в", "a, hacia adentro de (dirección)"], ["на", "a, hacia (dirección); para (un tiempo)"], ["за", "por (a cambio de)"], ["че́рез", "a través de; dentro de (tiempo)"], ["про", "sobre, acerca de (coloquial)"]],
-  ejemplos: [["Я ви́жу ма́му.", "Veo a mamá."], ["Положи́ кни́гу на стол.", "Poné el libro en la mesa."]]
+  preposiciones: [
+   ["в","a, hacia adentro de (dirección)"], ["на","a, hacia (dirección); para (un tiempo)"], ["за","por (a cambio de)"], ["че́рез","a través de; dentro de (tiempo)"], ["про","sobre, acerca de (coloquial)"]
+  ],
+  ejemplos: [
+   ["Я ви́жу {ма́му}.","Veo a mamá.","ма́ма → ма́му: es a quién veo, el complemento directo."],
+   ["Положи́ кни́гу на {стол}.","Poné el libro en la mesa.","стол no cambia: en masculino inanimado el acusativo es igual al nominativo. на + acusativo dice adónde lo ponés."]
+  ]
  },
  instrumental: {
   id: "instrumental", nombre: "Instrumental", ru: "твори́тельный паде́ж", abrev: "Instr.",
   preguntas: "кем? чем?",
   resumen: "Indica con qué se hace algo y con quién (con с). También qué es o en qué se convierte alguien.",
   usos: [
-   ["Instrumento: con qué", "Я пишу́ ру́чкой.", "Escribo con birome."],
-   ["Compañía, con с", "Я гуля́ю с дру́гом.", "Paseo con un amigo."],
-   ["Profesión o estado, con рабо́тать, быть, стать", "Он рабо́тает врачо́м.", "Trabaja de médico."],
-   ["Momentos del día y estaciones", "у́тром, ле́том", "a la mañana, en verano"]
+   ["Instrumento: con qué","Я пишу́ {ру́чкой}.","Escribo con birome.","ру́чка → ру́чкой (femenino: la -а pasa a -ой). Es con qué escribo."],
+   ["Compañía, con с","Я гуля́ю с {дру́гом}.","Paseo con un amigo.","друг → дру́гом (masculino: se agrega -ом). с «con» pide instrumental."],
+   ["Profesión o estado, con рабо́тать, быть, стать","Он рабо́тает {врачо́м}.","Trabaja de médico.","врач → врачо́м. Con рабо́тать, la profesión va en instrumental."],
+   ["Momentos del día y estaciones","{у́тром}, {ле́том}","a la mañana, en verano","у́тро → у́тром, ле́то → ле́том: estos instrumentales funcionan como «a la mañana» o «en verano»."]
   ],
-  preposiciones: [["с", "con"], ["над", "sobre, encima de"], ["под", "debajo de (ubicación)"], ["пе́ред", "delante de, antes de"], ["за", "detrás de (ubicación)"], ["ме́жду", "entre"]],
-  ejemplos: [["Мы еди́м суп ло́жкой.", "Tomamos la sopa con cuchara."], ["Ла́мпа виси́т над столо́м.", "La lámpara cuelga sobre la mesa."]]
+  preposiciones: [
+   ["с","con"], ["над","sobre, encima de"], ["под","debajo de (ubicación)"], ["пе́ред","delante de, antes de"], ["за","detrás de (ubicación)"], ["ме́жду","entre"]
+  ],
+  ejemplos: [
+   ["Мы еди́м суп {ло́жкой}.","Tomamos la sopa con cuchara.","ло́жка → ло́жкой: con qué tomamos la sopa."],
+   ["Ла́мпа виси́т над {столо́м}.","La lámpara cuelga sobre la mesa.","стол → столо́м: над siempre pide instrumental."]
+  ]
  },
  preposicional: {
   id: "preposicional", nombre: "Preposicional", ru: "предло́жный паде́ж", abrev: "Prep.",
   preguntas: "о ком? о чём? где?",
   resumen: "Siempre va con preposición. Indica dónde está algo (con в o на) o de qué se habla (con о).",
   usos: [
-   ["Ubicación con в / на (¿dónde?)", "Я живу́ в Москве́.", "Vivo en Moscú."],
-   ["Tema con о / об: de qué se habla o se piensa", "Мы говори́м о фи́льме.", "Hablamos de la película."],
-   ["Medio de transporte con на", "Я е́ду на авто́бусе.", "Voy en colectivo."]
+   ["Ubicación con в / на (¿dónde?)","Я живу́ в {Москве́}.","Vivo en Moscú.","Москва́ → Москве́ (la -а pasa a -е). в + preposicional indica dónde (sin movimiento)."],
+   ["Tema con о / об: de qué se habla o se piensa","Мы говори́м о {фи́льме}.","Hablamos de la película.","фильм → фи́льме (se agrega -е). о + preposicional indica de qué se habla."],
+   ["Medio de transporte con на","Я е́ду на {авто́бусе}.","Voy en colectivo.","авто́бус → авто́бусе. на + preposicional: en qué medio de transporte voy."]
   ],
-  preposiciones: [["в", "en (adentro de)"], ["на", "en, sobre (superficie o evento)"], ["о / об / обо", "sobre, acerca de"], ["при", "en presencia de, en tiempos de"]],
-  ejemplos: [["Кни́га лежи́т на столе́.", "El libro está sobre la mesa."], ["Я ду́маю о тебе́.", "Pienso en vos."]]
+  preposiciones: [
+   ["в","en (adentro de)"], ["на","en, sobre (superficie o evento)"], ["о / об / обо","sobre, acerca de"], ["при","en presencia de, en tiempos de"]
+  ],
+  ejemplos: [
+   ["Кни́га лежи́т на {столе́}.","El libro está sobre la mesa.","стол → столе́: на + preposicional dice dónde está (sin movimiento)."],
+   ["Я ду́маю о {тебе́}.","Pienso en vos.","ты → тебе́: о + preposicional dice en qué o en quién pienso."]
+  ]
  }
 };
 const GRAMATICA_CASOS_ORDEN = ["nominativo", "genitivo", "dativo", "acusativo", "instrumental", "preposicional"];
@@ -134,37 +162,66 @@ const GRAMATICA_FORMAS = {
  acusativoAnimado: {
   titulo: "Acusativo: personas y animales",
   texto: "En el acusativo importa si la palabra es de una persona o de un animal (animada) o de una cosa (inanimada). En el masculino singular y en todo el plural, lo animado toma la forma del genitivo y lo inanimado la del nominativo. Por eso las tablas de adjetivos y determinantes muestran dos acusativos.",
-  ejemplos: [["Я ви́жу стол.", "Veo la mesa. (inanimado: igual al nominativo)"], ["Я ви́жу бра́та.", "Veo a mi hermano. (animado: igual al genitivo)"], ["Я ви́жу но́вых друзе́й.", "Veo a los amigos nuevos. (plural animado)"]]
+  ejemplos: [
+   ["Я ви́жу {стол}.","Veo la mesa.","стол es inanimado: el acusativo es igual al nominativo."],
+   ["Я ви́жу {бра́та}.","Veo a mi hermano.","брат es animado: el acusativo es igual al genitivo (бра́та)."],
+   ["Я ви́жу {но́вых друзе́й}.","Veo a los amigos nuevos.","но́вые друзья́ → но́вых друзе́й: en el plural animado, adjetivo y sustantivo toman la forma del genitivo."]
+  ]
  },
  locativo: {
   titulo: "Locativo (в лесу́, на полу́)",
   texto: "Algunos sustantivos masculinos tienen una forma especial terminada en -у́ (siempre acentuada) para decir dónde está algo. Solo aparece con в o на y con sentido de lugar. Para hablar de algo (con о) se usa el preposicional normal. Cada palabra lleva siempre la misma preposición, por eso se guarda junto con ella.",
-  ejemplos: [["Мы гуля́ем в лесу́.", "Paseamos por el bosque."], ["Мы говори́м о ле́се.", "Hablamos del bosque."], ["Ко́шка спит на полу́.", "El gato duerme en el piso."]]
+  ejemplos: [
+   ["Мы гуля́ем в {лесу́}.","Paseamos por el bosque.","лес → в лесу́: forma especial de lugar, con la -у́ acentuada."],
+   ["Мы говори́м о {ле́се}.","Hablamos del bosque.","Para hablar del bosque se usa el preposicional normal: о ле́се."],
+   ["Ко́шка спит на {полу́}.","El gato duerme en el piso.","пол → на полу́: locativo, siempre con на."]
+  ]
  },
  partitivo: {
   titulo: "Partitivo (coloquial)",
   texto: "Algunos sustantivos masculinos de cosas que no se cuentan tienen un genitivo alternativo terminado en -у / -ю, con el sentido de «un poco de». Es coloquial: el genitivo normal siempre es correcto. También aparece en algunas expresiones fijas.",
-  ejemplos: [["ча́шка ча́ю", "una taza de té (también: ча́шка ча́я)"], ["Доба́вь са́хару.", "Agregá un poco de azúcar."], ["из до́му", "de casa (expresión fija)"]]
+  ejemplos: [
+   ["ча́шка {ча́ю}","una taza de té","чай → ча́ю: partitivo coloquial, «un poco de té». También se puede decir ча́шка ча́я."],
+   ["Доба́вь {са́хару}.","Agregá un poco de azúcar.","са́хар → са́хару: partitivo, «un poco de azúcar». El genitivo normal también sirve: доба́вь са́хара."],
+   ["из {до́му}","de casa (expresión fija)","дом → до́му: expresión fija. Hoy es más común из до́ма."]
+  ]
  },
  formaCorta: {
   titulo: "Forma corta de los adjetivos",
   texto: "Muchos adjetivos tienen una forma corta que va después del sujeto, como predicado, y no se declina: solo cambia por género y número. Algunas son muy comunes desde el principio, como гото́в (listo), рад (contento), до́лжен (tener que) o прав (tener razón).",
-  ejemplos: [["Он гото́в.", "Él está listo."], ["Она́ гото́ва.", "Ella está lista."], ["Мы должны́ идти́.", "Tenemos que irnos."]]
+  ejemplos: [
+   ["Он {гото́в}.","Él está listo.","гото́вый → гото́в: forma corta masculina, va como predicado."],
+   ["Она́ {гото́ва}.","Ella está lista.","Forma corta femenina: se agrega -а."],
+   ["Мы {должны́} идти́.","Tenemos que irnos.","до́лжен → должны́: forma corta plural. Va con el infinitivo (идти́)."]
+  ]
  },
  numerales: {
   titulo: "Números y casos",
   texto: "El número decide el caso del sustantivo que lo sigue: después de 1 va el nominativo singular; después de 2, 3 y 4, el genitivo singular; desde 5 en adelante, el genitivo plural. Cuenta la última cifra: 21 va como 1, 22 como 2 y 25 como 5 (salvo 11 a 14, que van como 5).",
-  ejemplos: [["оди́н брат", "un hermano"], ["два бра́та", "dos hermanos"], ["пять бра́тьев", "cinco hermanos"], ["два́дцать оди́н год", "veintiún años"]]
+  ejemplos: [
+   ["оди́н {брат}","un hermano","Después de 1 va el nominativo singular."],
+   ["два {бра́та}","dos hermanos","Después de 2, 3 y 4 va el genitivo singular: бра́та."],
+   ["пять {бра́тьев}","cinco hermanos","Desde 5 va el genitivo plural: бра́тья → бра́тьев."],
+   ["два́дцать оди́н {год}","veintiún años","Cuenta la última cifra: 21 termina en 1, así que va en nominativo singular."]
+  ]
  },
  pronombreN: {
   titulo: "Pronombres con н- después de preposición",
   texto: "Los pronombres de tercera persona (он, она́, оно́, они́) agregan una н- al principio cuando van después de una preposición. Sin preposición no llevan н-. En el preposicional siempre hay preposición, por eso esa forma empieza siempre con н-.",
-  ejemplos: [["Я ви́жу его́.", "Lo veo."], ["Я иду́ к нему́.", "Voy hacia él."], ["Мы говори́м о ней.", "Hablamos de ella."], ["У них есть маши́на.", "Ellos tienen auto."]]
+  ejemplos: [
+   ["Я ви́жу {его́}.","Lo veo.","Sin preposición: его́, sin н-."],
+   ["Я иду́ к {нему́}.","Voy hacia él.","Con la preposición к: ему́ → нему́."],
+   ["Мы говори́м о {ней}.","Hablamos de ella.","Preposicional, que siempre lleva preposición: ней."],
+   ["У {них} есть маши́на.","Ellos tienen auto.","Con у: их → них."]
+  ]
  },
  indeclinable: {
   titulo: "Palabras que no se declinan",
   texto: "Algunas palabras, casi todas tomadas de otros idiomas, tienen la misma forma en todos los casos.",
-  ejemplos: [["Я пью ко́фе.", "Tomo café."], ["Мы е́дем на метро́.", "Vamos en subte."]]
+  ejemplos: [
+   ["Я пью {ко́фе}.","Tomo café.","ко́фе no cambia: acá está en acusativo, pero se ve igual."],
+   ["Мы е́дем на {метро́}.","Vamos en subte.","метро́ no cambia: acá está en preposicional."]
+  ]
  }
 };
 
