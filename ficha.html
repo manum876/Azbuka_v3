@@ -146,6 +146,14 @@ function App() {
   const [searchH, setSearchH] = useState(0);
   const [, setFormasListas] = useState(0);
 
+  /* Al abrir un sustantivo, se cargan las declinaciones (data-casos.js)
+     para mostrar su plural. Es la misma carga del buscador de formas:
+     avisa con "az-formas" y la ficha se vuelve a dibujar. */
+  useEffect(() => {
+    const e = getWordId() && typeof lexComerById === "function" ? lexComerById(getWordId()) : null;
+    if (e && e.posNormalized === "sustantivo" && typeof CASOS === "undefined" && typeof azCargarFormas === "function") azCargarFormas();
+  }, []);
+
   /* Cuando terminan de cargarse las formas declinadas y conjugadas
      (core.js las carga solas la primera vez que se busca), se repite
      la búsqueda para que aparezcan. */
@@ -233,6 +241,9 @@ function App() {
     const senses = entry.senses || [];
     const isVerbo = entry.posNormalized === "verbo";
     const isSustantivo = entry.posNormalized === "sustantivo";
+    const casosListo = typeof CASOS !== "undefined";
+    const dc = casosListo ? CASOS[entry.id] : null;
+    const plural = dc && dc.pl ? dc.pl[0] : null;
     const isDeclinable = POS_DECLINABLE.includes(entry.posNormalized);
 
     const posBadgeText = (POS_LABEL[entry.posNormalized] || entry.posNormalized) +
@@ -324,18 +335,21 @@ function App() {
               React.createElement("div", { className: "meta-k" }, "Animado"),
               React.createElement("div", { className: "meta-v" }, ANIMATE_LABEL[entry.animate] || entry.animate)
             ),
-            isSustantivo && (entry.pluralForm || entry.numberClass) && React.createElement("div", { className: "meta-item" },
+            /* Forma plural: se lee de data-casos.js (fuente única de las
+               declinaciones); el léxico ya no la guarda. Casos se carga
+               solo al abrir un sustantivo (ver useEffect en App). */
+            isSustantivo && React.createElement("div", { className: "meta-item" },
               React.createElement("div", { className: "meta-k" }, "Forma plural"),
-              entry.pluralForm
-                ? React.createElement("a", {
-                    className: "meta-v meta-link",
-                    href: "casos.html?id=" + entry.id,
-                    onClick: (e) => azNavigate(e, "casos.html?id=" + entry.id)
-                  }, entry.pluralForm)
-                : React.createElement("div", { className: "meta-v" },
-                    entry.numberClass && NUMBER_CLASS_LABEL[entry.numberClass] &&
-                      React.createElement("span", { className: "irregular-tag" }, NUMBER_CLASS_LABEL[entry.numberClass])
-                  )
+              entry.numberClass && NUMBER_CLASS_LABEL[entry.numberClass]
+                ? React.createElement("div", { className: "meta-v" },
+                    React.createElement("span", { className: "irregular-tag" }, NUMBER_CLASS_LABEL[entry.numberClass]))
+                : plural
+                  ? React.createElement("a", {
+                      className: "meta-v meta-link",
+                      href: "casos.html?id=" + entry.id,
+                      onClick: (e) => azNavigate(e, "casos.html?id=" + entry.id)
+                    }, plural)
+                  : React.createElement("div", { className: "meta-v empty" }, casosListo ? "No cambia" : "…")
             )
           ),
 

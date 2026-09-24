@@ -1,6 +1,6 @@
 /* ============================================================
    DATA-LEXICON.JS — Léxico central AZBUKA (Comer + FreeDict + enriquecimiento aspectual)
-   Total de entradas: 5396. Ordenado por ID.
+   Total de entradas: 5397. Ordenado por ID.
 
    NUEVO: campo opcional "aspectualPartnerTypes" (objeto {id: tipo}),
    solo en las entradas donde una pareja no es una pareja aspectual
@@ -29,11 +29,17 @@
    - "posNormalized": la categoría "otro" se repartió en pronombre,
      determinante, numeral, adverbio, preposición, conjunción, partícula
      e interjección.
-   - "ru" y "pluralForm" llevan ё donde corresponde (ещё, ребёнок…).
+   - "ru" lleva ё donde corresponde (ещё, ребёнок…).
    - "animate": solo "sí" / "no".
    - Homógrafos y heterónimos en entradas separadas (ver
-     HOMOGRAFOS_ADICIONALES.md). Entradas nuevas CMR-05422 a CMR-05469 (la última: лист «hoja de papel»,
-     separada de лист «hoja de planta», CMR-00939).
+     HOMOGRAFOS_ADICIONALES.md). Entradas nuevas CMR-05422 a CMR-05470 (las últimas: лист «hoja de papel»,
+     separada de лист «hoja de planta», CMR-00939; y корпус «tronco del
+     cuerpo», separada de корпус «edificio, casco», CMR-01939).
+   - 24/09/2026: se quitó el campo "pluralForm". El léxico no guarda formas
+     flexionadas: el plural (y todas las formas) de cada sustantivo vive
+     solo en data-casos.js, que es la fuente de verdad de las declinaciones.
+     Se conserva "numberClass" (solo singular / solo plural), que es una
+     propiedad de la palabra.
    - Correcciones de tildes, eñes y definiciones (bloque CMR-00001–00420).
 
    Fuentes:
@@ -45,7 +51,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 5396
+  totalEntries: 5397
 };
 const LEXICON_COMER = [
  {
@@ -1864,7 +1870,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "годы",
   "numberClass": "regular"
  },
  {
@@ -2615,7 +2620,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "люди",
   "numberClass": "regular"
  },
  {
@@ -3427,7 +3431,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "времена",
   "numberClass": "regular"
  },
  {
@@ -4279,7 +4282,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "дела",
   "numberClass": "regular"
  },
  {
@@ -4341,7 +4343,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "жизни",
   "numberClass": "regular"
  },
  {
@@ -4635,7 +4636,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "дни",
   "numberClass": "regular"
  },
  {
@@ -4813,7 +4813,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "руки",
   "numberClass": "regular"
  },
  {
@@ -5119,7 +5118,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "разы",
   "numberClass": "regular"
  },
  {
@@ -5680,7 +5678,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "работы",
   "numberClass": "regular"
  },
  {
@@ -6129,7 +6126,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "слова",
   "numberClass": "regular"
  },
  {
@@ -6369,7 +6365,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "места",
   "numberClass": "regular"
  },
  {
@@ -6667,7 +6662,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "лица",
   "numberClass": "regular"
  },
  {
@@ -6787,7 +6781,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "друзья",
   "numberClass": "regular"
  },
  {
@@ -7093,7 +7086,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "глаза",
   "numberClass": "regular"
  },
  {
@@ -7333,7 +7325,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вопросы",
   "numberClass": "regular"
  },
  {
@@ -7604,7 +7595,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "дома",
   "numberClass": "regular"
  },
  {
@@ -7724,7 +7714,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "стороны",
   "numberClass": "regular"
  },
  {
@@ -7968,7 +7957,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "страны",
   "numberClass": "regular"
  },
  {
@@ -8150,7 +8138,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "миры",
   "numberClass": "regular"
  },
  {
@@ -8328,7 +8315,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "случаи",
   "numberClass": "regular"
  },
  {
@@ -8390,7 +8376,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "головы",
   "numberClass": "regular"
  },
  {
@@ -8727,7 +8712,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "дети",
   "numberClass": "regular"
  },
  {
@@ -8975,7 +8959,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "силы",
   "numberClass": "regular"
  },
  {
@@ -9095,7 +9078,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "концы",
   "numberClass": "regular"
  },
  {
@@ -9308,7 +9290,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "виды",
   "numberClass": "regular"
  },
  {
@@ -9370,7 +9351,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "системы",
   "numberClass": "regular"
  },
  {
@@ -9792,7 +9772,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "части",
   "numberClass": "regular"
  },
  {
@@ -9916,7 +9895,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "города",
   "numberClass": "regular"
  },
  {
@@ -10280,7 +10258,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "отношения",
   "numberClass": "regular"
  },
  {
@@ -10787,7 +10764,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "женщины",
   "numberClass": "regular"
  },
  {
@@ -11190,7 +11166,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -11550,7 +11525,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "земли",
   "numberClass": "regular"
  },
  {
@@ -11763,7 +11737,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "машины",
   "numberClass": "regular"
  },
  {
@@ -12069,7 +12042,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "воды",
   "numberClass": "regular"
  },
  {
@@ -12131,7 +12103,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "отцы",
   "numberClass": "regular"
  },
  {
@@ -12468,7 +12439,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "проблемы",
   "numberClass": "regular"
  },
  {
@@ -12650,7 +12620,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "часы",
   "numberClass": "regular"
  },
  {
@@ -12770,7 +12739,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "права",
   "numberClass": "regular"
  },
  {
@@ -12890,7 +12858,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ноги",
   "numberClass": "regular"
  },
  {
@@ -13084,7 +13051,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "решения",
   "numberClass": "regular"
  },
  {
@@ -13208,7 +13174,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "двери",
   "numberClass": "regular"
  },
  {
@@ -13332,7 +13297,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "образы",
   "numberClass": "regular"
  },
  {
@@ -13456,7 +13420,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "истории",
   "numberClass": "regular"
  },
  {
@@ -13576,7 +13539,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "власти",
   "numberClass": "regular"
  },
  {
@@ -13638,7 +13600,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "законы",
   "numberClass": "regular"
  },
  {
@@ -13700,7 +13661,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "войны",
   "numberClass": "regular"
  },
  {
@@ -13762,7 +13722,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "боги",
   "numberClass": "regular"
  },
  {
@@ -13824,7 +13783,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "голоса",
   "numberClass": "regular"
  },
  {
@@ -14135,7 +14093,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тысячи",
   "numberClass": "regular"
  },
  {
@@ -14406,7 +14363,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "книги",
   "numberClass": "regular"
  },
  {
@@ -14646,7 +14602,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "возможности",
   "numberClass": "regular"
  },
  {
@@ -14708,7 +14663,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "результаты",
   "numberClass": "regular"
  },
  {
@@ -14770,7 +14724,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ночи",
   "numberClass": "regular"
  },
  {
@@ -14832,7 +14785,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "столы",
   "numberClass": "regular"
  },
  {
@@ -14952,7 +14904,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "имена",
   "numberClass": "regular"
  },
  {
@@ -15014,7 +14965,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "области",
   "numberClass": "regular"
  },
  {
@@ -15254,7 +15204,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "статьи",
   "numberClass": "regular"
  },
  {
@@ -15374,7 +15323,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "числа",
   "numberClass": "regular"
  },
  {
@@ -15436,7 +15384,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "компании",
   "numberClass": "regular"
  },
  {
@@ -15734,7 +15681,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "народы",
   "numberClass": "regular"
  },
  {
@@ -15912,7 +15858,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "жёны",
   "numberClass": "regular"
  },
  {
@@ -16090,7 +16035,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "группы",
   "numberClass": "regular"
  },
  {
@@ -16152,7 +16096,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "развития",
   "numberClass": "regular"
  },
  {
@@ -16214,7 +16157,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "процессы",
   "numberClass": "regular"
  },
  {
@@ -16276,7 +16218,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "суды",
   "numberClass": "regular"
  },
  {
@@ -16520,7 +16461,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "условия",
   "numberClass": "regular"
  },
  {
@@ -16733,7 +16673,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "средства",
   "numberClass": "regular"
  },
  {
@@ -16857,7 +16796,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "начала",
   "numberClass": "regular"
  },
  {
@@ -16984,7 +16922,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -17081,7 +17018,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -17143,7 +17079,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пути",
   "numberClass": "regular"
  },
  {
@@ -17205,7 +17140,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "души",
   "numberClass": "regular"
  },
  {
@@ -17499,7 +17433,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "уровни",
   "numberClass": "regular"
  },
  {
@@ -17619,7 +17552,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "формы",
   "numberClass": "regular"
  },
  {
@@ -17681,7 +17613,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "связи",
   "numberClass": "regular"
  },
  {
@@ -17836,7 +17767,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "минуты",
   "numberClass": "regular"
  },
  {
@@ -18250,7 +18180,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "улицы",
   "numberClass": "regular"
  },
  {
@@ -18432,7 +18361,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вечера",
   "numberClass": "regular"
  },
  {
@@ -18610,7 +18538,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "качества",
   "numberClass": "regular"
  },
  {
@@ -18672,7 +18599,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "мысли",
   "numberClass": "regular"
  },
  {
@@ -18734,7 +18660,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дороги",
   "numberClass": "regular"
  },
  {
@@ -18796,7 +18721,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "матери",
   "numberClass": "regular"
  },
  {
@@ -18858,7 +18782,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "действия",
   "numberClass": "regular"
  },
  {
@@ -18920,7 +18843,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "месяцы",
   "numberClass": "regular"
  },
  {
@@ -19044,7 +18966,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "государства",
   "numberClass": "regular"
  },
  {
@@ -19106,7 +19027,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "языки",
   "numberClass": "regular"
  },
  {
@@ -19168,7 +19088,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -19230,7 +19149,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "взгляды",
   "numberClass": "regular"
  },
  {
@@ -19292,7 +19210,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "мамы",
   "numberClass": "regular"
  },
  {
@@ -19594,7 +19511,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "века",
   "numberClass": "regular"
  },
  {
@@ -19656,7 +19572,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "школы",
   "numberClass": "regular"
  },
  {
@@ -19842,7 +19757,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "цели",
   "numberClass": "regular"
  },
  {
@@ -19962,7 +19876,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "общества",
   "numberClass": "regular"
  },
  {
@@ -20086,7 +19999,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -20148,7 +20060,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "организации",
   "numberClass": "regular"
  },
  {
@@ -20330,7 +20241,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "президенты",
   "numberClass": "regular"
  },
  {
@@ -20392,7 +20302,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "комнаты",
   "numberClass": "regular"
  },
  {
@@ -20454,7 +20363,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "порядки",
   "numberClass": "regular"
  },
  {
@@ -20516,7 +20424,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "моменты",
   "numberClass": "regular"
  },
  {
@@ -20578,7 +20485,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "театры",
   "numberClass": "regular"
  },
  {
@@ -20778,7 +20684,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "письма",
   "numberClass": "regular"
  },
  {
@@ -20956,7 +20861,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "утра",
   "numberClass": "regular"
  },
  {
@@ -21076,7 +20980,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -21138,7 +21041,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ситуации",
   "numberClass": "regular"
  },
  {
@@ -21200,7 +21102,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "роли",
   "numberClass": "regular"
  },
  {
@@ -21386,7 +21287,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рубли",
   "numberClass": "regular"
  },
  {
@@ -21572,7 +21472,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "смыслы",
   "numberClass": "regular"
  },
  {
@@ -21634,7 +21533,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "состояния",
   "numberClass": "regular"
  },
  {
@@ -21816,7 +21714,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "квартиры",
   "numberClass": "regular"
  },
  {
@@ -22052,7 +21949,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "органы",
   "numberClass": "regular"
  },
  {
@@ -22114,7 +22010,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -22176,7 +22071,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "тела",
   "numberClass": "regular"
  },
  {
@@ -22238,7 +22132,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "труды",
   "numberClass": "regular"
  },
  {
@@ -22424,7 +22317,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "сыновья",
   "numberClass": "regular"
  },
  {
@@ -22486,7 +22378,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "меры",
   "numberClass": "regular"
  },
  {
@@ -22606,7 +22497,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "смерти",
   "numberClass": "regular"
  },
  {
@@ -22726,7 +22616,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рынки",
   "numberClass": "regular"
  },
  {
@@ -22788,7 +22677,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "программы",
   "numberClass": "regular"
  },
  {
@@ -22850,7 +22738,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "задачи",
   "numberClass": "regular"
  },
  {
@@ -22912,7 +22799,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "предприятия",
   "numberClass": "regular"
  },
  {
@@ -23032,7 +22918,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "окна",
   "numberClass": "regular"
  },
  {
@@ -23307,7 +23192,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "разговоры",
   "numberClass": "regular"
  },
  {
@@ -23431,7 +23315,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "правительства",
   "numberClass": "regular"
  },
  {
@@ -23551,7 +23434,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "семьи",
   "numberClass": "regular"
  },
  {
@@ -23671,7 +23553,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "производства",
   "numberClass": "regular"
  },
  {
@@ -24174,7 +24055,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -24294,7 +24174,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "положения",
   "numberClass": "regular"
  },
  {
@@ -24538,7 +24417,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "центры",
   "numberClass": "regular"
  },
  {
@@ -24662,7 +24540,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ответы",
   "numberClass": "regular"
  },
  {
@@ -24724,7 +24601,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "мужья",
   "numberClass": "regular"
  },
  {
@@ -24786,7 +24662,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "авторы",
   "numberClass": "regular"
  },
  {
@@ -24906,7 +24781,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "стены",
   "numberClass": "regular"
  },
  {
@@ -25030,7 +24904,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "интересы",
   "numberClass": "regular"
  },
  {
@@ -25154,7 +25027,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "федерации",
   "numberClass": "regular"
  },
  {
@@ -25216,7 +25088,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "правила",
   "numberClass": "regular"
  },
  {
@@ -25452,7 +25323,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "управления",
   "numberClass": "regular"
  },
  {
@@ -25816,7 +25686,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "мужчины",
   "numberClass": "regular"
  },
  {
@@ -25971,7 +25840,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "правды",
   "numberClass": "regular"
  },
  {
@@ -26033,7 +25901,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "идеи",
   "numberClass": "regular"
  },
  {
@@ -26095,7 +25962,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "партии",
   "numberClass": "regular"
  },
  {
@@ -26699,7 +26565,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "советы",
   "numberClass": "regular"
  },
  {
@@ -26761,7 +26626,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "счета",
   "numberClass": "regular"
  },
  {
@@ -26823,7 +26687,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сердца",
   "numberClass": "regular"
  },
  {
@@ -26885,7 +26748,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "движения",
   "numberClass": "regular"
  },
  {
@@ -26947,7 +26809,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "вещи",
   "numberClass": "regular"
  },
  {
@@ -27009,7 +26870,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "материалы",
   "numberClass": "regular"
  },
  {
@@ -27071,7 +26931,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "недели",
   "numberClass": "regular"
  },
  {
@@ -27133,7 +26992,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "чувства",
   "numberClass": "regular"
  },
  {
@@ -27493,7 +27351,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "главы",
   "numberClass": "regular"
  },
  {
@@ -27675,7 +27532,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "науки",
   "numberClass": "regular"
  },
  {
@@ -27799,7 +27655,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ряды",
   "numberClass": "regular"
  },
  {
@@ -27861,7 +27716,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "газеты",
   "numberClass": "regular"
  },
  {
@@ -27923,7 +27777,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "причины",
   "numberClass": "regular"
  },
  {
@@ -28043,7 +27896,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "плечи",
   "numberClass": "regular"
  },
  {
@@ -28163,7 +28015,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "цены",
   "numberClass": "regular"
  },
  {
@@ -28225,7 +28076,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "планы",
   "numberClass": "regular"
  },
  {
@@ -28349,7 +28199,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "речи",
   "numberClass": "regular"
  },
  {
@@ -28531,7 +28380,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "точки",
   "numberClass": "regular"
  },
  {
@@ -28593,7 +28441,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "основы",
   "numberClass": "regular"
  },
  {
@@ -28655,7 +28502,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "товарищи",
   "numberClass": "regular"
  },
  {
@@ -28717,7 +28563,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "культуры",
   "numberClass": "regular"
  },
  {
@@ -29077,7 +28922,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -29201,7 +29045,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "мнения",
   "numberClass": "regular"
  },
  {
@@ -29379,7 +29222,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "документы",
   "numberClass": "regular"
  },
  {
@@ -29441,7 +29283,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "институты",
   "numberClass": "regular"
  },
  {
@@ -29503,7 +29344,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ходы",
   "numberClass": "regular"
  },
  {
@@ -29689,7 +29529,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "проекты",
   "numberClass": "regular"
  },
  {
@@ -29809,7 +29648,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "встречи",
   "numberClass": "regular"
  },
  {
@@ -29987,7 +29825,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "директора",
   "numberClass": "regular"
  },
  {
@@ -30521,7 +30358,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сроки",
   "numberClass": "regular"
  },
  {
@@ -30583,7 +30419,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пальцы",
   "numberClass": "regular"
  },
  {
@@ -30645,7 +30480,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "опыты",
   "numberClass": "regular"
  },
  {
@@ -30831,7 +30665,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "службы",
   "numberClass": "regular"
  },
  {
@@ -31257,7 +31090,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "судьбы",
   "numberClass": "regular"
  },
  {
@@ -31319,7 +31151,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "девушки",
   "numberClass": "regular"
  },
  {
@@ -31439,7 +31270,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "очереди",
   "numberClass": "regular"
  },
  {
@@ -31501,7 +31331,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "леса",
   "numberClass": "regular"
  },
  {
@@ -31834,7 +31663,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "составы",
   "numberClass": "regular"
  },
  {
@@ -32171,7 +31999,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "члены",
   "numberClass": "regular"
  },
  {
@@ -32356,7 +32183,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -32476,7 +32302,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "события",
   "numberClass": "regular"
  },
  {
@@ -32538,7 +32363,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "объекты",
   "numberClass": "regular"
  },
  {
@@ -32600,7 +32424,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "залы",
   "numberClass": "regular"
  },
  {
@@ -32662,7 +32485,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "создания",
   "numberClass": "regular"
  },
  {
@@ -32844,7 +32666,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "значения",
   "numberClass": "regular"
  },
  {
@@ -33026,7 +32847,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "периоды",
   "numberClass": "regular"
  },
  {
@@ -33181,7 +33001,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "шаги",
   "numberClass": "regular"
  },
  {
@@ -33425,7 +33244,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "братья",
   "numberClass": "regular"
  },
  {
@@ -33487,7 +33305,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "искусства",
   "numberClass": "regular"
  },
  {
@@ -33665,7 +33482,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "структуры",
   "numberClass": "regular"
  },
  {
@@ -33789,7 +33605,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "номера",
   "numberClass": "regular"
  },
  {
@@ -33913,7 +33728,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "примеры",
   "numberClass": "regular"
  },
  {
@@ -34037,7 +33851,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "исследования",
   "numberClass": "regular"
  },
  {
@@ -34099,7 +33912,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "граждане",
   "numberClass": "regular"
  },
  {
@@ -34281,7 +34093,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "игры",
   "numberClass": "regular"
  },
  {
@@ -34343,7 +34154,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "начальники",
   "numberClass": "regular"
  },
  {
@@ -34463,7 +34273,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -34645,7 +34454,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "темы",
   "numberClass": "regular"
  },
  {
@@ -34707,7 +34515,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "принципы",
   "numberClass": "regular"
  },
  {
@@ -35071,7 +34878,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "методы",
   "numberClass": "regular"
  },
  {
@@ -35133,7 +34939,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "типы",
   "numberClass": "regular"
  },
  {
@@ -35195,7 +35000,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "фильмы",
   "numberClass": "regular"
  },
  {
@@ -35497,7 +35301,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "края",
   "numberClass": "regular"
  },
  {
@@ -35675,7 +35478,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "гости",
   "numberClass": "regular"
  },
  {
@@ -35923,7 +35725,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -36225,7 +36026,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "характеры",
   "numberClass": "regular"
  },
  {
@@ -36287,7 +36087,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -36349,7 +36148,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -36531,7 +36329,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "размеры",
   "numberClass": "regular"
  },
  {
@@ -36655,7 +36452,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -36779,7 +36575,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "мальчики",
   "numberClass": "regular"
  },
  {
@@ -36841,7 +36636,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -36903,7 +36697,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "районы",
   "numberClass": "regular"
  },
  {
@@ -36965,7 +36758,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "небеса",
   "numberClass": "regular"
  },
  {
@@ -37085,7 +36877,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "армии",
   "numberClass": "regular"
  },
  {
@@ -37147,7 +36938,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "классы",
   "numberClass": "regular"
  },
  {
@@ -37209,7 +36999,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "представители",
   "numberClass": "regular"
  },
  {
@@ -37271,7 +37060,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -37333,7 +37121,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "девочки",
   "numberClass": "regular"
  },
  {
@@ -37395,7 +37182,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "политики",
   "numberClass": "regular"
  },
  {
@@ -37515,7 +37301,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "герои",
   "numberClass": "regular"
  },
  {
@@ -37577,7 +37362,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "картины",
   "numberClass": "regular"
  },
  {
@@ -37697,7 +37481,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "доллары",
   "numberClass": "regular"
  },
  {
@@ -37759,7 +37542,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "спины",
   "numberClass": "regular"
  },
  {
@@ -37821,7 +37603,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "территории",
   "numberClass": "regular"
  },
  {
@@ -37941,7 +37722,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "полы",
   "numberClass": "regular"
  },
  {
@@ -38119,7 +37899,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "поля",
   "numberClass": "regular"
  },
  {
@@ -38239,7 +38018,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "изменения",
   "numberClass": "regular"
  },
  {
@@ -38363,7 +38141,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "направления",
   "numberClass": "regular"
  },
  {
@@ -38425,7 +38202,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рисунки",
   "numberClass": "regular"
  },
  {
@@ -38487,7 +38263,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "течения",
   "numberClass": "regular"
  },
  {
@@ -38607,7 +38382,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "церкви",
   "numberClass": "regular"
  },
  {
@@ -38669,7 +38443,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "банки",
   "numberClass": "regular"
  },
  {
@@ -38905,7 +38678,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сцены",
   "numberClass": "regular"
  },
  {
@@ -38967,7 +38739,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -39029,7 +38800,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -39273,7 +39043,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -39517,7 +39286,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "свободы",
   "numberClass": "regular"
  },
  {
@@ -39579,7 +39347,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -39766,7 +39533,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "команды",
   "numberClass": "regular"
  },
  {
@@ -39890,7 +39656,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "союзы",
   "numberClass": "regular"
  },
  {
@@ -40107,7 +39872,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "врачи",
   "numberClass": "regular"
  },
  {
@@ -40227,7 +39991,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "договоры",
   "numberClass": "regular"
  },
  {
@@ -40475,7 +40238,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "деревья",
   "numberClass": "regular"
  },
  {
@@ -40595,7 +40357,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "факты",
   "numberClass": "regular"
  },
  {
@@ -40773,7 +40534,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "хозяева",
   "numberClass": "regular"
  },
  {
@@ -41009,7 +40769,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -41303,7 +41062,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "углы",
   "numberClass": "regular"
  },
  {
@@ -41423,7 +41181,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "телефоны",
   "numberClass": "regular"
  },
  {
@@ -41485,7 +41242,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "позиции",
   "numberClass": "regular"
  },
  {
@@ -41725,7 +41481,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "дворы",
   "numberClass": "regular"
  },
  {
@@ -41968,7 +41723,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "писатели",
   "numberClass": "regular"
  },
  {
@@ -42030,7 +41784,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "самолёты",
   "numberClass": "regular"
  },
  {
@@ -42092,7 +41845,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "объёмы",
   "numberClass": "regular"
  },
  {
@@ -42212,7 +41964,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "роды",
   "numberClass": "regular"
  },
  {
@@ -42274,7 +42025,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -42336,7 +42086,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -42398,7 +42147,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "берега",
   "numberClass": "regular"
  },
  {
@@ -42460,7 +42208,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "спектакли",
   "numberClass": "regular"
  },
  {
@@ -42522,7 +42269,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фирмы",
   "numberClass": "regular"
  },
  {
@@ -42584,7 +42330,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "способы",
   "numberClass": "regular"
  },
  {
@@ -42646,7 +42391,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "заводы",
   "numberClass": "regular"
  },
  {
@@ -42708,7 +42452,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "цвета",
   "numberClass": "regular"
  },
  {
@@ -42828,7 +42571,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "журналы",
   "numberClass": "regular"
  },
  {
@@ -42890,7 +42632,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "руководители",
   "numberClass": "regular"
  },
  {
@@ -42952,7 +42693,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "специалисты",
   "numberClass": "regular"
  },
  {
@@ -43320,7 +43060,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "оценки",
   "numberClass": "regular"
  },
  {
@@ -43742,7 +43481,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "регионы",
   "numberClass": "regular"
  },
  {
@@ -43866,7 +43604,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "песни",
   "numberClass": "regular"
  },
  {
@@ -43928,7 +43665,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "проценты",
   "numberClass": "regular"
  },
  {
@@ -43990,7 +43726,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "родители",
   "numberClass": "regular"
  },
  {
@@ -44172,7 +43907,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "моря",
   "numberClass": "regular"
  },
  {
@@ -44292,7 +44026,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "требования",
   "numberClass": "regular"
  },
  {
@@ -44528,7 +44261,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "основания",
   "numberClass": "regular"
  },
  {
@@ -44590,7 +44322,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "половины",
   "numberClass": "regular"
  },
  {
@@ -44954,7 +44685,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "романы",
   "numberClass": "regular"
  },
  {
@@ -45016,7 +44746,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "круги",
   "numberClass": "regular"
  },
  {
@@ -45078,7 +44807,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "анализы",
   "numberClass": "regular"
  },
  {
@@ -45140,7 +44868,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -45202,7 +44929,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "автомобили",
   "numberClass": "regular"
  },
  {
@@ -45322,7 +45048,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -45384,7 +45109,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -45446,7 +45170,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "бумаги",
   "numberClass": "regular"
  },
  {
@@ -45802,7 +45525,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "поэты",
   "numberClass": "regular"
  },
  {
@@ -45926,7 +45648,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "степени",
   "numberClass": "regular"
  },
  {
@@ -46112,7 +45833,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "господа",
   "numberClass": "regular"
  },
  {
@@ -46174,7 +45894,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "надежды",
   "numberClass": "regular"
  },
  {
@@ -46392,7 +46111,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "предметы",
   "numberClass": "regular"
  },
  {
@@ -46578,7 +46296,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "варианты",
   "numberClass": "regular"
  },
  {
@@ -46640,7 +46357,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "министры",
   "numberClass": "regular"
  },
  {
@@ -46818,7 +46534,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "границы",
   "numberClass": "regular"
  },
  {
@@ -46942,7 +46657,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -47004,7 +46718,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "модели",
   "numberClass": "regular"
  },
  {
@@ -47066,7 +46779,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "операции",
   "numberClass": "regular"
  },
  {
@@ -47128,7 +46840,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пары",
   "numberClass": "regular"
  },
  {
@@ -47190,7 +46901,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сны",
   "numberClass": "regular"
  },
  {
@@ -47345,7 +47055,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "названия",
   "numberClass": "regular"
  },
  {
@@ -47407,7 +47116,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -47469,7 +47177,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "поводы",
   "numberClass": "regular"
  },
  {
@@ -47531,7 +47238,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "старики",
   "numberClass": "regular"
  },
  {
@@ -47744,7 +47450,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "миллионы",
   "numberClass": "regular"
  },
  {
@@ -47922,7 +47627,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "успехи",
   "numberClass": "regular"
  },
  {
@@ -48162,7 +47866,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -48340,7 +48043,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -48460,7 +48162,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кабинеты",
   "numberClass": "regular"
  },
  {
@@ -48805,7 +48506,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "магазины",
   "numberClass": "regular"
  },
  {
@@ -48867,7 +48567,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "пространства",
   "numberClass": "regular"
  },
  {
@@ -48929,7 +48628,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "выходы",
   "numberClass": "regular"
  },
  {
@@ -49053,7 +48751,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "удары",
   "numberClass": "regular"
  },
  {
@@ -49115,7 +48812,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "базы",
   "numberClass": "regular"
  },
  {
@@ -49177,7 +48873,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "знания",
   "numberClass": "regular"
  },
  {
@@ -49239,7 +48934,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тексты",
   "numberClass": "regular"
  },
  {
@@ -49417,7 +49111,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -49546,7 +49239,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -49666,7 +49358,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "площади",
   "numberClass": "regular"
  },
  {
@@ -49728,7 +49419,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -49910,7 +49600,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -50108,7 +49797,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "участники",
   "numberClass": "regular"
  },
  {
@@ -50170,7 +49858,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "участки",
   "numberClass": "regular"
  },
  {
@@ -50290,7 +49977,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пункты",
   "numberClass": "regular"
  },
  {
@@ -50588,7 +50274,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "линии",
   "numberClass": "regular"
  },
  {
@@ -50712,7 +50397,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "желания",
   "numberClass": "regular"
  },
  {
@@ -50774,7 +50458,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "папы",
   "numberClass": "regular"
  },
  {
@@ -50956,7 +50639,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "доктора",
   "numberClass": "regular"
  },
  {
@@ -51018,7 +50700,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "губы",
   "numberClass": "regular"
  },
  {
@@ -51258,7 +50939,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "дочери",
   "numberClass": "regular"
  },
  {
@@ -51382,7 +51062,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "среды",
   "numberClass": "regular"
  },
  {
@@ -51444,7 +51123,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "председатели",
   "numberClass": "regular"
  },
  {
@@ -51506,7 +51184,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "представления",
   "numberClass": "regular"
  },
  {
@@ -51568,7 +51245,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "солдаты",
   "numberClass": "regular"
  },
  {
@@ -51630,7 +51306,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "художники",
   "numberClass": "regular"
  },
  {
@@ -51754,7 +51429,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "волосы",
   "numberClass": "regular"
  },
  {
@@ -51816,7 +51490,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -51940,7 +51613,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "соответствия",
   "numberClass": "regular"
  },
  {
@@ -52060,7 +51732,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ветры",
   "numberClass": "regular"
  },
  {
@@ -52180,7 +51851,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "парни",
   "numberClass": "regular"
  },
  {
@@ -52304,7 +51974,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -52428,7 +52097,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "генералы",
   "numberClass": "regular"
  },
  {
@@ -52552,7 +52220,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "огни",
   "numberClass": "regular"
  },
  {
@@ -52734,7 +52401,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "понятия",
   "numberClass": "regular"
  },
  {
@@ -52796,7 +52462,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -52858,7 +52523,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "уши",
   "numberClass": "regular"
  },
  {
@@ -52982,7 +52646,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "груди",
   "numberClass": "regular"
  },
  {
@@ -53044,7 +52707,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "носы",
   "numberClass": "regular"
  },
  {
@@ -53288,7 +52950,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -53350,7 +53011,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "услуги",
   "numberClass": "regular"
  },
  {
@@ -53621,7 +53281,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -53683,7 +53342,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -53745,7 +53403,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -53869,7 +53526,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "продукты",
   "numberClass": "regular"
  },
  {
@@ -53989,7 +53645,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "комплексы",
   "numberClass": "regular"
  },
  {
@@ -54051,7 +53706,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бизнесы",
   "numberClass": "regular"
  },
  {
@@ -54237,7 +53891,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сады",
   "numberClass": "regular"
  },
  {
@@ -54477,7 +54130,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "сотрудники",
   "numberClass": "regular"
  },
  {
@@ -54539,7 +54191,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -54780,7 +54431,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "курсы",
   "numberClass": "regular"
  },
  {
@@ -54909,7 +54559,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "предложения",
   "numberClass": "regular"
  },
  {
@@ -55269,7 +54918,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рты",
   "numberClass": "regular"
  },
  {
@@ -55389,7 +55037,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "технологии",
   "numberClass": "regular"
  },
  {
@@ -55602,7 +55249,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "реформы",
   "numberClass": "regular"
  },
  {
@@ -55664,7 +55310,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -55784,7 +55429,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "собаки",
   "numberClass": "regular"
  },
  {
@@ -55846,7 +55490,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "камни",
   "numberClass": "regular"
  },
  {
@@ -55908,7 +55551,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -56032,7 +55674,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рассказы",
   "numberClass": "regular"
  },
  {
@@ -56094,7 +55735,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -56218,7 +55858,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "реки",
   "numberClass": "regular"
  },
  {
@@ -56354,7 +55993,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -56416,7 +56054,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "суммы",
   "numberClass": "regular"
  },
  {
@@ -56478,7 +56115,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -56927,7 +56563,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "здания",
   "numberClass": "regular"
  },
  {
@@ -56989,7 +56624,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сферы",
   "numberClass": "regular"
  },
  {
@@ -57264,7 +56898,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -57384,7 +57017,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "фонды",
   "numberClass": "regular"
  },
  {
@@ -57566,7 +57198,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -57686,7 +57317,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "листья",
   "numberClass": "regular"
  },
  {
@@ -57864,7 +57494,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "республики",
   "numberClass": "regular"
  },
  {
@@ -57926,7 +57555,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -58228,7 +57856,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -58348,7 +57975,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бюджеты",
   "numberClass": "regular"
  },
  {
@@ -58534,7 +58160,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -58596,7 +58221,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "деревни",
   "numberClass": "regular"
  },
  {
@@ -58720,7 +58344,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "мужики",
   "numberClass": "regular"
  },
  {
@@ -58898,7 +58521,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "элементы",
   "numberClass": "regular"
  },
  {
@@ -58960,7 +58582,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "обстоятельства",
   "numberClass": "regular"
  },
  {
@@ -59084,7 +58705,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "немцы",
   "numberClass": "regular"
  },
  {
@@ -59204,7 +58824,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "победы",
   "numberClass": "regular"
  },
  {
@@ -59266,7 +58885,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "источники",
   "numberClass": "regular"
  },
  {
@@ -59865,7 +59483,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "звёзды",
   "numberClass": "regular"
  },
  {
@@ -59985,7 +59602,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "выборы",
   "numberClass": "regular"
  },
  {
@@ -60105,7 +59721,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "массы",
   "numberClass": "regular"
  },
  {
@@ -60229,7 +59844,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "итоги",
   "numberClass": "regular"
  },
  {
@@ -60291,7 +59905,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "сёстры",
   "numberClass": "regular"
  },
  {
@@ -60469,7 +60082,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "практики",
   "numberClass": "regular"
  },
  {
@@ -60713,7 +60325,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -60775,7 +60386,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "карманы",
   "numberClass": "regular"
  },
  {
@@ -61069,7 +60679,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -61131,7 +60740,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кухни",
   "numberClass": "regular"
  },
  {
@@ -61193,7 +60801,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "определения",
   "numberClass": "regular"
  },
  {
@@ -61378,7 +60985,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "функции",
   "numberClass": "regular"
  },
  {
@@ -61440,7 +61046,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "войска",
   "numberClass": "regular"
  },
  {
@@ -61502,7 +61107,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "комиссии",
   "numberClass": "regular"
  },
  {
@@ -61564,7 +61168,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -61626,7 +61229,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "капитаны",
   "numberClass": "regular"
  },
  {
@@ -61688,7 +61290,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "работники",
   "numberClass": "regular"
  },
  {
@@ -61870,7 +61471,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -61932,7 +61532,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "офицеры",
   "numberClass": "regular"
  },
  {
@@ -62114,7 +61713,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фамилии",
   "numberClass": "regular"
  },
  {
@@ -62176,7 +61774,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пределы",
   "numberClass": "regular"
  },
  {
@@ -62300,7 +61897,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -62517,7 +62113,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "ученые",
   "numberClass": "regular"
  },
  {
@@ -62788,7 +62383,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "бутылки",
   "numberClass": "regular"
  },
  {
@@ -62850,7 +62444,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бои",
   "numberClass": "regular"
  },
  {
@@ -63098,7 +62691,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "теории",
   "numberClass": "regular"
  },
  {
@@ -63160,7 +62752,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "зоны",
   "numberClass": "regular"
  },
  {
@@ -63222,7 +62813,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "отделы",
   "numberClass": "regular"
  },
  {
@@ -63284,7 +62874,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "зубы",
   "numberClass": "regular"
  },
  {
@@ -63346,7 +62935,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "разработки",
   "numberClass": "regular"
  },
  {
@@ -63745,7 +63333,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "личности",
   "numberClass": "regular"
  },
  {
@@ -63807,7 +63394,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "горы",
   "numberClass": "regular"
  },
  {
@@ -63931,7 +63517,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "товары",
   "numberClass": "regular"
  },
  {
@@ -64175,7 +63760,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "метры",
   "numberClass": "regular"
  },
  {
@@ -64361,7 +63945,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "праздники",
   "numberClass": "regular"
  },
  {
@@ -64423,7 +64006,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -64547,7 +64129,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "читатели",
   "numberClass": "regular"
  },
  {
@@ -64667,7 +64248,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -64729,7 +64309,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "актёры",
   "numberClass": "regular"
  },
  {
@@ -64791,7 +64370,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "слёзы",
   "numberClass": "regular"
  },
  {
@@ -64973,7 +64551,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -65035,7 +64612,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "учителя",
   "numberClass": "regular"
  },
  {
@@ -65097,7 +64673,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "акты",
   "numberClass": "regular"
  },
  {
@@ -65345,7 +64920,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -65407,7 +64981,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "множества",
   "numberClass": "regular"
  },
  {
@@ -65527,7 +65100,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "особенности",
   "numberClass": "regular"
  },
  {
@@ -65651,7 +65223,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "показатели",
   "numberClass": "regular"
  },
  {
@@ -65775,7 +65346,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "корабли",
   "numberClass": "regular"
  },
  {
@@ -65895,7 +65465,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "звуки",
   "numberClass": "regular"
  },
  {
@@ -66073,7 +65642,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "впечатления",
   "numberClass": "regular"
  },
  {
@@ -66193,7 +65761,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "частности",
   "numberClass": "regular"
  },
  {
@@ -66255,7 +65822,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -66317,7 +65883,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "выводы",
   "numberClass": "regular"
  },
  {
@@ -66379,7 +65944,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "профессора",
   "numberClass": "regular"
  },
  {
@@ -66499,7 +66063,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "доли",
   "numberClass": "regular"
  },
  {
@@ -66561,7 +66124,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "нормы",
   "numberClass": "regular"
  },
  {
@@ -66685,7 +66247,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -66805,7 +66366,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "командиры",
   "numberClass": "regular"
  },
  {
@@ -66867,7 +66427,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "коридоры",
   "numberClass": "regular"
  },
  {
@@ -66929,7 +66488,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -66991,7 +66549,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "рамки",
   "numberClass": "regular"
  },
  {
@@ -67227,7 +66784,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "враги",
   "numberClass": "regular"
  },
  {
@@ -67382,7 +66938,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "этапы",
   "numberClass": "regular"
  },
  {
@@ -67444,7 +66999,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "черти",
   "numberClass": "regular"
  },
  {
@@ -67506,7 +67060,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "деды",
   "numberClass": "regular"
  },
  {
@@ -67630,7 +67183,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "собрания",
   "numberClass": "regular"
  },
  {
@@ -67697,7 +67249,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "приёмы",
   "numberClass": "regular"
  },
  {
@@ -67817,7 +67368,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "болезни",
   "numberClass": "regular"
  },
  {
@@ -67884,7 +67434,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "клетки",
   "numberClass": "regular"
  },
  {
@@ -67946,7 +67495,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -68008,7 +67556,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "заявления",
   "numberClass": "regular"
  },
  {
@@ -68128,7 +67675,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "попытки",
   "numberClass": "regular"
  },
  {
@@ -68190,7 +67736,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сравнения",
   "numberClass": "regular"
  },
  {
@@ -68252,7 +67797,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -68372,7 +67916,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "депутаты",
   "numberClass": "regular"
  },
  {
@@ -68786,7 +68329,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "комитеты",
   "numberClass": "regular"
  },
  {
@@ -68848,7 +68390,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "знаки",
   "numberClass": "regular"
  },
  {
@@ -69092,7 +68633,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "дяди",
   "numberClass": "regular"
  },
  {
@@ -69154,7 +68694,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -69216,7 +68755,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -69525,7 +69063,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -69587,7 +69124,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "режимы",
   "numberClass": "regular"
  },
  {
@@ -69649,7 +69185,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -69711,7 +69246,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вирусы",
   "numberClass": "regular"
  },
  {
@@ -69889,7 +69423,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "выражения",
   "numberClass": "regular"
  },
  {
@@ -70071,7 +69604,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -70133,7 +69665,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -70322,7 +69853,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "десятки",
   "numberClass": "regular"
  },
  {
@@ -70384,7 +69914,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "глубины",
   "numberClass": "regular"
  },
  {
@@ -70446,7 +69975,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сети",
   "numberClass": "regular"
  },
  {
@@ -70508,7 +70036,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "студенты",
   "numberClass": "regular"
  },
  {
@@ -70632,7 +70159,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "секунды",
   "numberClass": "regular"
  },
  {
@@ -70694,7 +70220,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "скорости",
   "numberClass": "regular"
  },
  {
@@ -70756,7 +70281,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "поиски",
   "numberClass": "regular"
  },
  {
@@ -70876,7 +70400,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -70938,7 +70461,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "налоги",
   "numberClass": "regular"
  },
  {
@@ -71000,7 +70522,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ошибки",
   "numberClass": "regular"
  },
  {
@@ -71356,7 +70877,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "доходы",
   "numberClass": "regular"
  },
  {
@@ -71476,7 +70996,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "режиссёры",
   "numberClass": "regular"
  },
  {
@@ -71538,7 +71057,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "поверхности",
   "numberClass": "regular"
  },
  {
@@ -71600,7 +71118,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "ощущения",
   "numberClass": "regular"
  },
  {
@@ -71729,7 +71246,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "карты",
   "numberClass": "regular"
  },
  {
@@ -71791,7 +71307,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "клубы",
   "numberClass": "regular"
  },
  {
@@ -71911,7 +71426,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "станции",
   "numberClass": "regular"
  },
  {
@@ -71973,7 +71487,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "революции",
   "numberClass": "regular"
  },
  {
@@ -72035,7 +71548,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "колени",
   "numberClass": "regular"
  },
  {
@@ -72097,7 +71609,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "министерства",
   "numberClass": "regular"
  },
  {
@@ -72159,7 +71670,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "стёкла",
   "numberClass": "regular"
  },
  {
@@ -72221,7 +71731,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "этажи",
   "numberClass": "regular"
  },
  {
@@ -72341,7 +71850,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "высоты",
   "numberClass": "regular"
  },
  {
@@ -72461,7 +71969,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "бабушки",
   "numberClass": "regular"
  },
  {
@@ -72653,7 +72160,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "трубки",
   "numberClass": "regular"
  },
  {
@@ -73071,7 +72577,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "газы",
   "numberClass": "regular"
  },
  {
@@ -73191,7 +72696,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "мастера",
   "numberClass": "regular"
  },
  {
@@ -73404,7 +72908,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -73710,7 +73213,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "столицы",
   "numberClass": "regular"
  },
  {
@@ -73772,7 +73274,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "механизмы",
   "numberClass": "regular"
  },
  {
@@ -73834,7 +73335,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "передачи",
   "numberClass": "regular"
  },
  {
@@ -74016,7 +73516,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "способности",
   "numberClass": "regular"
  },
  {
@@ -74078,7 +73577,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "подходы",
   "numberClass": "regular"
  },
  {
@@ -74291,7 +73789,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -74411,7 +73908,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -74473,7 +73969,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "исполнения",
   "numberClass": "regular"
  },
  {
@@ -74593,7 +74088,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -74655,7 +74149,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -74717,7 +74210,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "заместители",
   "numberClass": "regular"
  },
  {
@@ -75019,7 +74511,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ресурсы",
   "numberClass": "regular"
  },
  {
@@ -75148,7 +74639,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "акции",
   "numberClass": "regular"
  },
  {
@@ -75268,7 +74758,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -75450,7 +74939,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "администрации",
   "numberClass": "regular"
  },
  {
@@ -75694,7 +75182,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -75756,7 +75243,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "улыбки",
   "numberClass": "regular"
  },
  {
@@ -75818,7 +75304,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "артисты",
   "numberClass": "regular"
  },
  {
@@ -76244,7 +75729,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "соседи",
   "numberClass": "regular"
  },
  {
@@ -76306,7 +75790,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фразы",
   "numberClass": "regular"
  },
  {
@@ -76426,7 +75909,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фигуры",
   "numberClass": "regular"
  },
  {
@@ -76550,7 +76032,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "субъекты",
   "numberClass": "regular"
  },
  {
@@ -76674,7 +76155,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "реакции",
   "numberClass": "regular"
  },
  {
@@ -76736,7 +76216,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "списки",
   "numberClass": "regular"
  },
  {
@@ -76798,7 +76277,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фотографии",
   "numberClass": "regular"
  },
  {
@@ -76860,7 +76338,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "журналисты",
   "numberClass": "regular"
  },
  {
@@ -76922,7 +76399,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -77108,7 +76584,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "нарушения",
   "numberClass": "regular"
  },
  {
@@ -77170,7 +76645,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "заседания",
   "numberClass": "regular"
  },
  {
@@ -77232,7 +76706,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "толпы",
   "numberClass": "regular"
  },
  {
@@ -77294,7 +76767,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "больницы",
   "numberClass": "regular"
  },
  {
@@ -77356,7 +76828,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "sí",
-  "pluralForm": "существа",
   "numberClass": "regular"
  },
  {
@@ -77596,7 +77067,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "свойства",
   "numberClass": "regular"
  },
  {
@@ -77658,7 +77128,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "долги",
   "numberClass": "regular"
  },
  {
@@ -77720,7 +77189,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "поколения",
   "numberClass": "regular"
  },
  {
@@ -77840,7 +77308,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "sí",
-  "pluralForm": "животные",
   "numberClass": "regular"
  },
  {
@@ -77902,7 +77369,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "схемы",
   "numberClass": "regular"
  },
  {
@@ -77964,7 +77430,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "усилия",
   "numberClass": "regular"
  },
  {
@@ -78026,7 +77491,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "отличия",
   "numberClass": "regular"
  },
  {
@@ -78208,7 +77672,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "острова",
   "numberClass": "regular"
  },
  {
@@ -78332,7 +77795,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "противники",
   "numberClass": "regular"
  },
  {
@@ -78394,7 +77856,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "волны",
   "numberClass": "regular"
  },
  {
@@ -78638,7 +78099,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "реализации",
   "numberClass": "regular"
  },
  {
@@ -78700,7 +78160,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "страницы",
   "numberClass": "regular"
  },
  {
@@ -78762,7 +78221,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -78824,7 +78282,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "жители",
   "numberClass": "regular"
  },
  {
@@ -79010,7 +78467,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -79188,7 +78644,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "птицы",
   "numberClass": "regular"
  },
  {
@@ -79374,7 +78829,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "растения",
   "numberClass": "regular"
  },
  {
@@ -79436,7 +78890,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тени",
   "numberClass": "regular"
  },
  {
@@ -79498,7 +78951,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "явления",
   "numberClass": "regular"
  },
  {
@@ -79560,7 +79012,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "храмы",
   "numberClass": "regular"
  },
  {
@@ -79622,7 +79073,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "запахи",
   "numberClass": "regular"
  },
  {
@@ -79742,7 +79192,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -79804,7 +79253,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -79982,7 +79430,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -80044,7 +79491,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -80168,7 +79614,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "кресла",
   "numberClass": "regular"
  },
  {
@@ -80265,7 +79710,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "больные",
   "numberClass": "regular"
  },
  {
@@ -80327,7 +79771,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "поезда",
   "numberClass": "regular"
  },
  {
@@ -80389,7 +79832,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "университеты",
   "numberClass": "regular"
  },
  {
@@ -80629,7 +80071,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "традиции",
   "numberClass": "regular"
  },
  {
@@ -80691,7 +80132,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "адреса",
   "numberClass": "regular"
  },
  {
@@ -80753,7 +80193,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -80815,7 +80254,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ладони",
   "numberClass": "regular"
  },
  {
@@ -80935,7 +80373,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сведения",
   "numberClass": "regular"
  },
  {
@@ -81055,7 +80492,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "цветы",
   "numberClass": "regular"
  },
  {
@@ -81237,7 +80673,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "лидеры",
   "numberClass": "regular"
  },
  {
@@ -81299,7 +80734,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -81361,7 +80795,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "занятия",
   "numberClass": "regular"
  },
  {
@@ -81547,7 +80980,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -81609,7 +81041,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "помещения",
   "numberClass": "regular"
  },
  {
@@ -81787,7 +81218,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -81911,7 +81341,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "зрители",
   "numberClass": "regular"
  },
  {
@@ -82089,7 +81518,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "редакции",
   "numberClass": "regular"
  },
  {
@@ -82271,7 +81699,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "стили",
   "numberClass": "regular"
  },
  {
@@ -82333,7 +81760,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -82453,7 +81879,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "факторы",
   "numberClass": "regular"
  },
  {
@@ -82515,7 +81940,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -82577,7 +82001,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "известия",
   "numberClass": "regular"
  },
  {
@@ -82639,7 +82062,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "зависимости",
   "numberClass": "regular"
  },
  {
@@ -82701,7 +82123,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -82879,7 +82300,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -82999,7 +82419,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "концерты",
   "numberClass": "regular"
  },
  {
@@ -83061,7 +82480,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "отделения",
   "numberClass": "regular"
  },
  {
@@ -83123,7 +82541,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "расходы",
   "numberClass": "regular"
  },
  {
@@ -83243,7 +82660,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "выставки",
   "numberClass": "regular"
  },
  {
@@ -83305,7 +82721,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -83607,7 +83022,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "переходы",
   "numberClass": "regular"
  },
  {
@@ -83731,7 +83145,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "эпохи",
   "numberClass": "regular"
  },
  {
@@ -83793,7 +83206,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -83917,7 +83329,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "произведения",
   "numberClass": "regular"
  },
  {
@@ -83979,7 +83390,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -84041,7 +83451,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -84103,7 +83512,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тайны",
   "numberClass": "regular"
  },
  {
@@ -84281,7 +83689,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "травы",
   "numberClass": "regular"
  },
  {
@@ -84405,7 +83812,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "лагеря",
   "numberClass": "regular"
  },
  {
@@ -84525,7 +83931,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -84649,7 +84054,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кровати",
   "numberClass": "regular"
  },
  {
@@ -85005,7 +84409,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "аппараты",
   "numberClass": "regular"
  },
  {
@@ -85125,7 +84528,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -85311,7 +84713,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -85431,7 +84832,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "клиенты",
   "numberClass": "regular"
  },
  {
@@ -85551,7 +84951,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "дамы",
   "numberClass": "regular"
  },
  {
@@ -85733,7 +85132,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "фронты",
   "numberClass": "regular"
  },
  {
@@ -85853,7 +85251,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "отрасли",
   "numberClass": "regular"
  },
  {
@@ -85915,7 +85312,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "стулья",
   "numberClass": "regular"
  },
  {
@@ -85977,7 +85373,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "беседы",
   "numberClass": "regular"
  },
  {
@@ -86337,7 +85732,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -86399,7 +85793,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "продажи",
   "numberClass": "regular"
  },
  {
@@ -86461,7 +85854,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "повышения",
   "numberClass": "regular"
  },
  {
@@ -86643,7 +86035,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "музеи",
   "numberClass": "regular"
  },
  {
@@ -86821,7 +86212,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "следы",
   "numberClass": "regular"
  },
  {
@@ -86941,7 +86331,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "полковники",
   "numberClass": "regular"
  },
  {
@@ -87065,7 +86454,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сомнения",
   "numberClass": "regular"
  },
  {
@@ -87127,7 +86515,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -87429,7 +86816,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -87491,7 +86877,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "князья",
   "numberClass": "regular"
  },
  {
@@ -87615,7 +87000,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "рыбы",
   "numberClass": "regular"
  },
  {
@@ -87975,7 +87359,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -88095,7 +87478,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кодексы",
   "numberClass": "regular"
  },
  {
@@ -88157,7 +87539,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -88219,7 +87600,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "чудеса",
   "numberClass": "regular"
  },
  {
@@ -88343,7 +87723,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "шеи",
   "numberClass": "regular"
  },
  {
@@ -88467,7 +87846,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "судьи",
   "numberClass": "regular"
  },
  {
@@ -88769,7 +88147,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "крыши",
   "numberClass": "regular"
  },
  {
@@ -88831,7 +88208,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "настроения",
   "numberClass": "regular"
  },
  {
@@ -89067,7 +88443,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "потоки",
   "numberClass": "regular"
  },
  {
@@ -89245,7 +88620,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "должности",
   "numberClass": "regular"
  },
  {
@@ -89307,7 +88681,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "преступления",
   "numberClass": "regular"
  },
  {
@@ -89431,7 +88804,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "мозги",
   "numberClass": "regular"
  },
  {
@@ -89609,7 +88981,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -89671,7 +89042,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "посты",
   "numberClass": "regular"
  },
  {
@@ -89869,7 +89239,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "евреи",
   "numberClass": "regular"
  },
  {
@@ -90051,7 +89420,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -90113,7 +89481,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сотни",
   "numberClass": "regular"
  },
  {
@@ -90767,7 +90134,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -90887,7 +90253,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лестницы",
   "numberClass": "regular"
  },
  {
@@ -91189,7 +90554,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дачи",
   "numberClass": "regular"
  },
  {
@@ -91309,7 +90673,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "установки",
   "numberClass": "regular"
  },
  {
@@ -91371,7 +90734,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -91433,7 +90795,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -91615,7 +90976,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "образцы",
   "numberClass": "regular"
  },
  {
@@ -91682,7 +91042,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "трубы",
   "numberClass": "regular"
  },
  {
@@ -91984,7 +91343,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -92352,7 +91710,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "костюмы",
   "numberClass": "regular"
  },
  {
@@ -92588,7 +91945,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "бабы",
   "numberClass": "regular"
  },
  {
@@ -92650,7 +92006,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ценности",
   "numberClass": "regular"
  },
  {
@@ -92712,7 +92067,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "обязанности",
   "numberClass": "regular"
  },
  {
@@ -92774,7 +92128,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пьесы",
   "numberClass": "regular"
  },
  {
@@ -92894,7 +92247,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "таблицы",
   "numberClass": "regular"
  },
  {
@@ -92956,7 +92308,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "вина",
   "numberClass": "regular"
  },
  {
@@ -93018,7 +92369,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "воспоминания",
   "numberClass": "regular"
  },
  {
@@ -93080,7 +92430,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "лошади",
   "numberClass": "regular"
  },
  {
@@ -93324,7 +92673,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "коллеги",
   "numberClass": "regular"
  },
  {
@@ -93386,7 +92734,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "организмы",
   "numberClass": "regular"
  },
  {
@@ -93506,7 +92853,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "ученики",
   "numberClass": "regular"
  },
  {
@@ -93568,7 +92914,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "учреждения",
   "numberClass": "regular"
  },
  {
@@ -93688,7 +93033,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "открытия",
   "numberClass": "regular"
  },
  {
@@ -93812,7 +93156,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тома",
   "numberClass": "regular"
  },
  {
@@ -93874,7 +93217,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "черты",
   "numberClass": "regular"
  },
  {
@@ -94060,7 +93402,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "характеристики",
   "numberClass": "regular"
  },
  {
@@ -94242,7 +93583,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -94304,7 +93644,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -94366,7 +93705,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "выступления",
   "numberClass": "regular"
  },
  {
@@ -94428,7 +93766,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "температуры",
   "numberClass": "regular"
  },
  {
@@ -94552,7 +93889,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "перспективы",
   "numberClass": "regular"
  },
  {
@@ -94676,7 +94012,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "подруги",
   "numberClass": "regular"
  },
  {
@@ -94738,7 +94073,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "приказы",
   "numberClass": "regular"
  },
  {
@@ -94858,7 +94192,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "жертвы",
   "numberClass": "regular"
  },
  {
@@ -95044,7 +94377,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рестораны",
   "numberClass": "regular"
  },
  {
@@ -95106,7 +94438,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "километры",
   "numberClass": "regular"
  },
  {
@@ -95242,7 +94573,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "споры",
   "numberClass": "regular"
  },
  {
@@ -95490,7 +94820,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вкусы",
   "numberClass": "regular"
  },
  {
@@ -95610,7 +94939,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "признаки",
   "numberClass": "regular"
  },
  {
@@ -95672,7 +95000,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -95792,7 +95119,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "американцы",
   "numberClass": "regular"
  },
  {
@@ -95854,7 +95180,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "лбы",
   "numberClass": "regular"
  },
  {
@@ -95921,7 +95246,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "заключения",
   "numberClass": "regular"
  },
  {
@@ -96041,7 +95365,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -96103,7 +95426,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "исключения",
   "numberClass": "regular"
  },
  {
@@ -96343,7 +95665,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ключи",
   "numberClass": "regular"
  },
  {
@@ -96405,7 +95726,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "постановления",
   "numberClass": "regular"
  },
  {
@@ -96587,7 +95907,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "слои",
   "numberClass": "regular"
  },
  {
@@ -96649,7 +95968,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бока",
   "numberClass": "regular"
  },
  {
@@ -96958,7 +96276,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -97078,7 +96395,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "переводы",
   "numberClass": "regular"
  },
  {
@@ -97140,7 +96456,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "секретари",
   "numberClass": "regular"
  },
  {
@@ -97202,7 +96517,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "куски",
   "numberClass": "regular"
  },
  {
@@ -97331,7 +96645,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "слухи",
   "numberClass": "regular"
  },
  {
@@ -97591,7 +96904,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -97653,7 +96965,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "звонки",
   "numberClass": "regular"
  },
  {
@@ -97777,7 +97088,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "обстановки",
   "numberClass": "regular"
  },
  {
@@ -98114,7 +97424,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "чиновники",
   "numberClass": "regular"
  },
  {
@@ -98238,7 +97547,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "соглашения",
   "numberClass": "regular"
  },
  {
@@ -98300,7 +97608,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "детали",
   "numberClass": "regular"
  },
  {
@@ -98420,7 +97727,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -98482,7 +97788,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "зарплаты",
   "numberClass": "regular"
  },
  {
@@ -98606,7 +97911,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "билеты",
   "numberClass": "regular"
  },
  {
@@ -98730,7 +98034,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "подарки",
   "numberClass": "regular"
  },
  {
@@ -98792,7 +98095,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тюрьмы",
   "numberClass": "regular"
  },
  {
@@ -98854,7 +98156,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ящики",
   "numberClass": "regular"
  },
  {
@@ -98916,7 +98217,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "конкурсы",
   "numberClass": "regular"
  },
  {
@@ -99036,7 +98336,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "книжки",
   "numberClass": "regular"
  },
  {
@@ -99160,7 +98459,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -99462,7 +98760,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "просьбы",
   "numberClass": "regular"
  },
  {
@@ -99524,7 +98821,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "цари",
   "numberClass": "regular"
  },
  {
@@ -99586,7 +98882,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -99648,7 +98943,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -99772,7 +99066,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сообщения",
   "numberClass": "regular"
  },
  {
@@ -99834,7 +99127,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "угрозы",
   "numberClass": "regular"
  },
  {
@@ -99896,7 +99188,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "беды",
   "numberClass": "regular"
  },
  {
@@ -100314,7 +99605,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "блоки",
   "numberClass": "regular"
  },
  {
@@ -100376,7 +99666,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "достижения",
   "numberClass": "regular"
  },
  {
@@ -100443,7 +99732,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "назначения",
   "numberClass": "regular"
  },
  {
@@ -100505,7 +99793,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "рекламы",
   "numberClass": "regular"
  },
  {
@@ -100683,7 +99970,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "портреты",
   "numberClass": "regular"
  },
  {
@@ -101043,7 +100329,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "масла",
   "numberClass": "regular"
  },
  {
@@ -101163,7 +100448,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "стаканы",
   "numberClass": "regular"
  },
  {
@@ -101348,7 +100632,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "уроки",
   "numberClass": "regular"
  },
  {
@@ -101472,7 +100755,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -101596,7 +100878,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "крики",
   "numberClass": "regular"
  },
  {
@@ -101840,7 +101121,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -101902,7 +101182,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "телевизоры",
   "numberClass": "regular"
  },
  {
@@ -102026,7 +101305,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "инструменты",
   "numberClass": "regular"
  },
  {
@@ -102150,7 +101428,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "концепции",
   "numberClass": "regular"
  },
  {
@@ -102270,7 +101547,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "лейтенанты",
   "numberClass": "regular"
  },
  {
@@ -102332,7 +101608,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "экраны",
   "numberClass": "regular"
  },
  {
@@ -102394,7 +101669,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -102456,7 +101730,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -102634,7 +101907,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "каналы",
   "numberClass": "regular"
  },
  {
@@ -102754,7 +102026,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -102816,7 +102087,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "щёки",
   "numberClass": "regular"
  },
  {
@@ -102994,7 +102264,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "конфликты",
   "numberClass": "regular"
  },
  {
@@ -103056,7 +102325,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -103176,7 +102444,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "записи",
   "numberClass": "regular"
  },
  {
@@ -103238,7 +102505,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вагоны",
   "numberClass": "regular"
  },
  {
@@ -103420,7 +102686,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "площадки",
   "numberClass": "regular"
  },
  {
@@ -103482,7 +102747,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "последствия",
   "numberClass": "regular"
  },
  {
@@ -103602,7 +102866,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -103722,7 +102985,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "зеркала",
   "numberClass": "regular"
  },
  {
@@ -103784,7 +103046,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тона",
   "numberClass": "regular"
  },
  {
@@ -103966,7 +103227,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "академии",
   "numberClass": "regular"
  },
  {
@@ -104335,7 +103595,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "палаты",
   "numberClass": "regular"
  },
  {
@@ -104397,7 +103656,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "потребности",
   "numberClass": "regular"
  },
  {
@@ -104583,7 +103841,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -104645,7 +103902,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "увеличения",
   "numberClass": "regular"
  },
  {
@@ -104769,7 +104025,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "дураки",
   "numberClass": "regular"
  },
  {
@@ -104889,7 +104144,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "поездки",
   "numberClass": "regular"
  },
  {
@@ -104951,7 +104205,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "обеды",
   "numberClass": "regular"
  },
  {
@@ -105075,7 +104328,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "потери",
   "numberClass": "regular"
  },
  {
@@ -105257,7 +104509,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -105381,7 +104632,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "мероприятия",
   "numberClass": "regular"
  },
  {
@@ -105443,7 +104693,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "парки",
   "numberClass": "regular"
  },
  {
@@ -105505,7 +104754,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -105567,7 +104815,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "устройства",
   "numberClass": "regular"
  },
  {
@@ -105629,7 +104876,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "вещества",
   "numberClass": "regular"
  },
  {
@@ -105931,7 +105177,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "категории",
   "numberClass": "regular"
  },
  {
@@ -106051,7 +105296,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сезоны",
   "numberClass": "regular"
  },
  {
@@ -106357,7 +105601,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "гостиницы",
   "numberClass": "regular"
  },
  {
@@ -106419,7 +105662,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "издания",
   "numberClass": "regular"
  },
  {
@@ -106783,7 +106025,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "объединения",
   "numberClass": "regular"
  },
  {
@@ -106910,7 +106151,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -106972,7 +106212,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -107220,7 +106459,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "колёса",
   "numberClass": "regular"
  },
  {
@@ -107282,7 +106520,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "опасности",
   "numberClass": "regular"
  },
  {
@@ -107406,7 +106643,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "разрешения",
   "numberClass": "regular"
  },
  {
@@ -107468,7 +106704,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "воздействия",
   "numberClass": "regular"
  },
  {
@@ -107530,7 +106765,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "коллективы",
   "numberClass": "regular"
  },
  {
@@ -107592,7 +106826,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "камеры",
   "numberClass": "regular"
  },
  {
@@ -107712,7 +106945,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "запасы",
   "numberClass": "regular"
  },
  {
@@ -107841,7 +107073,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "следствия",
   "numberClass": "regular"
  },
  {
@@ -107903,7 +107134,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "длины",
   "numberClass": "regular"
  },
  {
@@ -108081,7 +107311,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "крылья",
   "numberClass": "regular"
  },
  {
@@ -108143,7 +107372,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "округа",
   "numberClass": "regular"
  },
  {
@@ -108267,7 +107495,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "фоны",
   "numberClass": "regular"
  },
  {
@@ -108329,7 +107556,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "кандидаты",
   "numberClass": "regular"
  },
  {
@@ -108391,7 +107617,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "родственники",
   "numberClass": "regular"
  },
  {
@@ -108631,7 +107856,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -108817,7 +108041,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -108879,7 +108102,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -108999,7 +108221,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "доски",
   "numberClass": "regular"
  },
  {
@@ -109126,7 +108347,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "партнёры",
   "numberClass": "regular"
  },
  {
@@ -109188,7 +108408,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "двигатели",
   "numberClass": "regular"
  },
  {
@@ -109250,7 +108469,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "шумы",
   "numberClass": "regular"
  },
  {
@@ -109312,7 +108530,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -109494,7 +108711,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "грехи",
   "numberClass": "regular"
  },
  {
@@ -109614,7 +108830,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ножи",
   "numberClass": "regular"
  },
  {
@@ -109676,7 +108891,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "полёты",
   "numberClass": "regular"
  },
  {
@@ -109858,7 +109072,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "страсти",
   "numberClass": "regular"
  },
  {
@@ -110160,7 +109373,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "испытания",
   "numberClass": "regular"
  },
  {
@@ -110284,7 +109496,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "истины",
   "numberClass": "regular"
  },
  {
@@ -110408,7 +109619,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -110470,7 +109680,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "разницы",
   "numberClass": "regular"
  },
  {
@@ -110590,7 +109799,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "водители",
   "numberClass": "regular"
  },
  {
@@ -110768,7 +109976,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пакеты",
   "numberClass": "regular"
  },
  {
@@ -110830,7 +110037,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "снижения",
   "numberClass": "regular"
  },
  {
@@ -110954,7 +110160,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "формулы",
   "numberClass": "regular"
  },
  {
@@ -111074,7 +110279,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "животы",
   "numberClass": "regular"
  },
  {
@@ -111136,7 +110340,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "капиталы",
   "numberClass": "regular"
  },
  {
@@ -111504,7 +110707,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "мосты",
   "numberClass": "regular"
  },
  {
@@ -111682,7 +110884,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "новости",
   "numberClass": "regular"
  },
  {
@@ -111744,7 +110945,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "эффекты",
   "numberClass": "regular"
  },
  {
@@ -111806,7 +111006,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "входы",
   "numberClass": "regular"
  },
  {
@@ -111930,7 +111129,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "губернаторы",
   "numberClass": "regular"
  },
  {
@@ -112228,7 +111426,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "доклады",
   "numberClass": "regular"
  },
  {
@@ -112417,7 +111614,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "смены",
   "numberClass": "regular"
  },
  {
@@ -112479,7 +111675,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "убийства",
   "numberClass": "regular"
  },
  {
@@ -112541,7 +111736,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "эксперты",
   "numberClass": "regular"
  },
  {
@@ -112901,7 +112095,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "автобусы",
   "numberClass": "regular"
  },
  {
@@ -112963,7 +112156,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "платья",
   "numberClass": "regular"
  },
  {
@@ -113203,7 +112395,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кадры",
   "numberClass": "regular"
  },
  {
@@ -113323,7 +112514,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "тёти",
   "numberClass": "regular"
  },
  {
@@ -113505,7 +112695,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -113629,7 +112818,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -113691,7 +112879,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "львы",
   "numberClass": "regular"
  },
  {
@@ -113811,7 +112998,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пороги",
   "numberClass": "regular"
  },
  {
@@ -113873,7 +113059,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "проверки",
   "numberClass": "regular"
  },
  {
@@ -113997,7 +113182,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "процедуры",
   "numberClass": "regular"
  },
  {
@@ -114059,7 +113243,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ремонты",
   "numberClass": "regular"
  },
  {
@@ -114247,7 +113430,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "обращения",
   "numberClass": "regular"
  },
  {
@@ -114309,7 +113491,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -114429,7 +113610,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "ожидания",
   "numberClass": "regular"
  },
  {
@@ -114685,7 +113865,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "памятники",
   "numberClass": "regular"
  },
  {
@@ -114747,7 +113926,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "корни",
   "numberClass": "regular"
  },
  {
@@ -114809,7 +113987,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "наблюдения",
   "numberClass": "regular"
  },
  {
@@ -114933,7 +114110,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "буквы",
   "numberClass": "regular"
  },
  {
@@ -115053,7 +114229,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "доказательства",
   "numberClass": "regular"
  },
  {
@@ -115239,7 +114414,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "признания",
   "numberClass": "regular"
  },
  {
@@ -115456,7 +114630,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -115576,7 +114749,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "штабы",
   "numberClass": "regular"
  },
  {
@@ -115700,7 +114872,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "владельцы",
   "numberClass": "regular"
  },
  {
@@ -115762,7 +114933,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "компьютеры",
   "numberClass": "regular"
  },
  {
@@ -115940,7 +115110,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "инженеры",
   "numberClass": "regular"
  },
  {
@@ -116300,7 +115469,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "старухи",
   "numberClass": "regular"
  },
  {
@@ -116362,7 +115530,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лодки",
   "numberClass": "regular"
  },
  {
@@ -116424,7 +115591,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ракеты",
   "numberClass": "regular"
  },
  {
@@ -116544,7 +115710,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "серии",
   "numberClass": "regular"
  },
  {
@@ -116664,7 +115829,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "шутки",
   "numberClass": "regular"
  },
  {
@@ -116726,7 +115890,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "вершины",
   "numberClass": "regular"
  },
  {
@@ -116846,7 +116009,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "выпуски",
   "numberClass": "regular"
  },
  {
@@ -116908,7 +116070,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кулаки",
   "numberClass": "regular"
  },
  {
@@ -116970,7 +116131,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -117094,7 +116254,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -117330,7 +116489,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -117450,7 +116608,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -117512,7 +116669,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "цифры",
   "numberClass": "regular"
  },
  {
@@ -117524,8 +116680,8 @@ const LEXICON_COMER = [
   "ipa": "kˈorpus",
   "senses": [
    {
-    "es": "cuerpo, edificio, casco (de barco)",
-    "definitionEs": "Estructura principal de algo, como un edificio, un barco o el cuerpo humano.",
+    "es": "edificio, pabellón; casco (de barco)",
+    "definitionEs": "Edificio que forma parte de un conjunto, o estructura principal de un barco o de una máquina. Para el tronco del cuerpo, ver CMR-05470.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -117574,7 +116730,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "корпуса",
   "numberClass": "regular"
  },
  {
@@ -117698,7 +116853,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "недостатки",
   "numberClass": "regular"
  },
  {
@@ -117818,7 +116972,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сапоги",
   "numberClass": "regular"
  },
  {
@@ -117938,7 +117091,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -118000,7 +117152,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "таланты",
   "numberClass": "regular"
  },
  {
@@ -118182,7 +117333,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -118364,7 +117514,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -118488,7 +117637,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "полосы",
   "numberClass": "regular"
  },
  {
@@ -118848,7 +117996,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -119088,7 +118235,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -119328,7 +118474,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сборы",
   "numberClass": "regular"
  },
  {
@@ -119395,7 +118540,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "штаты",
   "numberClass": "regular"
  },
  {
@@ -119515,7 +118659,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "следователи",
   "numberClass": "regular"
  },
  {
@@ -119577,7 +118720,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -119639,7 +118781,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "мешки",
   "numberClass": "regular"
  },
  {
@@ -119763,7 +118904,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "описания",
   "numberClass": "regular"
  },
  {
@@ -119883,7 +119023,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кусты",
   "numberClass": "regular"
  },
  {
@@ -119945,7 +119084,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "отказы",
   "numberClass": "regular"
  },
  {
@@ -120072,7 +119210,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "замки",
   "numberClass": "regular"
  },
  {
@@ -120289,7 +119426,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "редакторы",
   "numberClass": "regular"
  },
  {
@@ -120409,7 +119545,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "дворцы",
   "numberClass": "regular"
  },
  {
@@ -120471,7 +119606,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "заботы",
   "numberClass": "regular"
  },
  {
@@ -120595,7 +119729,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -120773,7 +119906,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "диваны",
   "numberClass": "regular"
  },
  {
@@ -121017,7 +120149,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "столики",
   "numberClass": "regular"
  },
  {
@@ -121199,7 +120330,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "эксперименты",
   "numberClass": "regular"
  },
  {
@@ -121448,7 +120578,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "печати",
   "numberClass": "regular"
  },
  {
@@ -121696,7 +120825,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "кольца",
   "numberClass": "regular"
  },
  {
@@ -121932,7 +121060,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пистолеты",
   "numberClass": "regular"
  },
  {
@@ -122052,7 +121179,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -122114,7 +121240,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -122234,7 +121359,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "профессии",
   "numberClass": "regular"
  },
  {
@@ -122416,7 +121540,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -122478,7 +121601,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -122540,7 +121662,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -122602,7 +121723,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -122722,7 +121842,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "риски",
   "numberClass": "regular"
  },
  {
@@ -122846,7 +121965,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "окончания",
   "numberClass": "regular"
  },
  {
@@ -122966,7 +122084,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -123210,7 +122327,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "браки",
   "numberClass": "regular"
  },
  {
@@ -123272,7 +122388,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "величины",
   "numberClass": "regular"
  },
  {
@@ -123392,7 +122507,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "записки",
   "numberClass": "regular"
  },
  {
@@ -123454,7 +122568,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "инициативы",
   "numberClass": "regular"
  },
  {
@@ -123516,7 +122629,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -123640,7 +122752,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -123702,7 +122813,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кости",
   "numberClass": "regular"
  },
  {
@@ -123826,7 +122936,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -124236,7 +123345,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кредиты",
   "numberClass": "regular"
  },
  {
@@ -124418,7 +123526,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -124480,7 +123587,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "майоры",
   "numberClass": "regular"
  },
  {
@@ -124604,7 +123710,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "конференции",
   "numberClass": "regular"
  },
  {
@@ -124724,7 +123829,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "потолки",
   "numberClass": "regular"
  },
  {
@@ -124906,7 +124010,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "библиотеки",
   "numberClass": "regular"
  },
  {
@@ -125154,7 +124257,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "помощники",
   "numberClass": "regular"
  },
  {
@@ -125216,7 +124318,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "конструкции",
   "numberClass": "regular"
  },
  {
@@ -125278,7 +124379,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -125407,7 +124507,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ручки",
   "numberClass": "regular"
  },
  {
@@ -125534,7 +124633,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "металлы",
   "numberClass": "regular"
  },
  {
@@ -125716,7 +124814,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -125778,7 +124875,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "прокуроры",
   "numberClass": "regular"
  },
  {
@@ -125840,7 +124936,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -125964,7 +125059,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -126026,7 +125120,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "соединения",
   "numberClass": "regular"
  },
  {
@@ -126212,7 +125305,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "краски",
   "numberClass": "regular"
  },
  {
@@ -126332,7 +125424,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "расстояния",
   "numberClass": "regular"
  },
  {
@@ -126576,7 +125667,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "мечты",
   "numberClass": "regular"
  },
  {
@@ -126696,7 +125786,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сёла",
   "numberClass": "regular"
  },
  {
@@ -126758,7 +125847,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -127060,7 +126148,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -127122,7 +126209,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "подразделения",
   "numberClass": "regular"
  },
  {
@@ -127371,7 +126457,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сюжеты",
   "numberClass": "regular"
  },
  {
@@ -127433,7 +126518,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рубежи",
   "numberClass": "regular"
  },
  {
@@ -127495,7 +126579,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сигналы",
   "numberClass": "regular"
  },
  {
@@ -127557,7 +126640,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -127619,7 +126701,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кресты",
   "numberClass": "regular"
  },
  {
@@ -127739,7 +126820,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "веса",
   "numberClass": "regular"
  },
  {
@@ -127801,7 +126881,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "взрывы",
   "numberClass": "regular"
  },
  {
@@ -127863,7 +126942,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "контакты",
   "numberClass": "regular"
  },
  {
@@ -127987,7 +127065,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сигареты",
   "numberClass": "regular"
  },
  {
@@ -128123,7 +127200,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -128185,7 +127261,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -128425,7 +127500,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -128487,7 +127561,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "премии",
   "numberClass": "regular"
  },
  {
@@ -128669,7 +127742,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "короли",
   "numberClass": "regular"
  },
  {
@@ -128731,7 +127803,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "подъезды",
   "numberClass": "regular"
  },
  {
@@ -128793,7 +127864,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "шансы",
   "numberClass": "regular"
  },
  {
@@ -128860,7 +127930,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "автоматы",
   "numberClass": "regular"
  },
  {
@@ -128922,7 +127991,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "заказы",
   "numberClass": "regular"
  },
  {
@@ -128984,7 +128052,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "мальчишки",
   "numberClass": "regular"
  },
  {
@@ -129108,7 +128175,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -129226,7 +128292,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "миги",
   "numberClass": "regular"
  },
  {
@@ -129412,7 +128477,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "штуки",
   "numberClass": "regular"
  },
  {
@@ -129530,7 +128594,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -129648,7 +128711,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "посёлки",
   "numberClass": "regular"
  },
  {
@@ -129770,7 +128832,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "свидетели",
   "numberClass": "regular"
  },
  {
@@ -129837,7 +128898,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ставки",
   "numberClass": "regular"
  },
  {
@@ -130191,7 +129251,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сумки",
   "numberClass": "regular"
  },
  {
@@ -130253,7 +129312,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -130433,7 +129491,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "хвосты",
   "numberClass": "regular"
  },
  {
@@ -130495,7 +129552,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -130557,7 +129613,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "повороты",
   "numberClass": "regular"
  },
  {
@@ -130675,7 +129730,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "возвращения",
   "numberClass": "regular"
  },
  {
@@ -130980,7 +130034,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "мгновения",
   "numberClass": "regular"
  },
  {
@@ -131102,7 +130155,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "статусы",
   "numberClass": "regular"
  },
  {
@@ -131500,7 +130552,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "озёра",
   "numberClass": "regular"
  },
  {
@@ -131743,7 +130794,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "строи",
   "numberClass": "regular"
  },
  {
@@ -131861,7 +130911,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "параметры",
   "numberClass": "regular"
  },
  {
@@ -131985,7 +131034,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сказки",
   "numberClass": "regular"
  },
  {
@@ -132045,7 +131093,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тенденции",
   "numberClass": "regular"
  },
  {
@@ -132107,7 +131154,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -132169,7 +131215,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -132289,7 +131334,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "версии",
   "numberClass": "regular"
  },
  {
@@ -132405,7 +131449,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "масштабы",
   "numberClass": "regular"
  },
  {
@@ -132645,7 +131688,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "монастыри",
   "numberClass": "regular"
  },
  {
@@ -132769,7 +131811,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "хозяйки",
   "numberClass": "regular"
  },
  {
@@ -132831,7 +131872,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "дочки",
   "numberClass": "regular"
  },
  {
@@ -133017,7 +132057,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "танцы",
   "numberClass": "regular"
  },
  {
@@ -133257,7 +132296,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -133319,7 +132357,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "коммунисты",
   "numberClass": "regular"
  },
  {
@@ -133381,7 +132418,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пенсии",
   "numberClass": "regular"
  },
  {
@@ -133443,7 +132479,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "приятели",
   "numberClass": "regular"
  },
  {
@@ -133741,7 +132776,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "объяснения",
   "numberClass": "regular"
  },
  {
@@ -133865,7 +132899,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "наборы",
   "numberClass": "regular"
  },
  {
@@ -133925,7 +132958,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "производители",
   "numberClass": "regular"
  },
  {
@@ -133987,7 +133019,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -134049,7 +133080,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -134421,7 +133451,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "мощности",
   "numberClass": "regular"
  },
  {
@@ -134539,7 +133568,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "обязательства",
   "numberClass": "regular"
  },
  {
@@ -134662,7 +133690,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "уходы",
   "numberClass": "regular"
  },
  {
@@ -134782,7 +133809,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "горла",
   "numberClass": "regular"
  },
  {
@@ -134844,7 +133870,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кризисы",
   "numberClass": "regular"
  },
  {
@@ -135086,7 +134111,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "указания",
   "numberClass": "regular"
  },
  {
@@ -135322,7 +134346,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -135384,7 +134407,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "яблоки",
   "numberClass": "regular"
  },
  {
@@ -135568,7 +134590,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "препараты",
   "numberClass": "regular"
  },
  {
@@ -135630,7 +134651,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -135690,7 +134710,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "москвичи",
   "numberClass": "regular"
  },
  {
@@ -135814,7 +134833,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "остатки",
   "numberClass": "regular"
  },
  {
@@ -135936,7 +134954,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "изображения",
   "numberClass": "regular"
  },
  {
@@ -136054,7 +135071,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сделки",
   "numberClass": "regular"
  },
  {
@@ -136116,7 +135132,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сочинения",
   "numberClass": "regular"
  },
  {
@@ -136354,7 +135369,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "покупатели",
   "numberClass": "regular"
  },
  {
@@ -136416,7 +135430,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "танки",
   "numberClass": "regular"
  },
  {
@@ -136538,7 +135551,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "затраты",
   "numberClass": "regular"
  },
  {
@@ -136600,7 +135612,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "строки",
   "numberClass": "regular"
  },
  {
@@ -136662,7 +135673,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "единицы",
   "numberClass": "regular"
  },
  {
@@ -136722,7 +135732,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "обработки",
   "numberClass": "regular"
  },
  {
@@ -136784,7 +135793,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "чемпионаты",
   "numberClass": "regular"
  },
  {
@@ -137022,7 +136030,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лаборатории",
   "numberClass": "regular"
  },
  {
@@ -137140,7 +136147,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "милиционеры",
   "numberClass": "regular"
  },
  {
@@ -137262,7 +136268,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "регистрации",
   "numberClass": "regular"
  },
  {
@@ -137382,7 +136387,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "изделия",
   "numberClass": "regular"
  },
  {
@@ -137506,7 +136510,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "молитвы",
   "numberClass": "regular"
  },
  {
@@ -137568,7 +136571,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -137633,7 +136635,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "съезды",
   "numberClass": "regular"
  },
  {
@@ -137695,7 +136696,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -137755,7 +136755,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "введения",
   "numberClass": "regular"
  },
  {
@@ -137999,7 +136998,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -138061,7 +137059,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "цепи",
   "numberClass": "regular"
  },
  {
@@ -138185,7 +137182,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "корреспонденты",
   "numberClass": "regular"
  },
  {
@@ -138247,7 +137243,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "планеты",
   "numberClass": "regular"
  },
  {
@@ -138445,7 +137440,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "минимумы",
   "numberClass": "regular"
  },
  {
@@ -138507,7 +137501,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "обсуждения",
   "numberClass": "regular"
  },
  {
@@ -138569,7 +137562,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "полки",
   "numberClass": "regular"
  },
  {
@@ -138925,7 +137917,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вокзалы",
   "numberClass": "regular"
  },
  {
@@ -138985,7 +137976,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -139287,7 +138277,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -139349,7 +138338,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -139411,7 +138399,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "кони",
   "numberClass": "regular"
  },
  {
@@ -139589,7 +138576,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "могилы",
   "numberClass": "regular"
  },
  {
@@ -139767,7 +138753,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "стенки",
   "numberClass": "regular"
  },
  {
@@ -139887,7 +138872,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тревоги",
   "numberClass": "regular"
  },
  {
@@ -140007,7 +138991,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "напряжения",
   "numberClass": "regular"
  },
  {
@@ -140189,7 +139172,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -140425,7 +139407,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "распоряжения",
   "numberClass": "regular"
  },
  {
@@ -140611,7 +139592,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "задания",
   "numberClass": "regular"
  },
  {
@@ -140731,7 +139711,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "кошки",
   "numberClass": "regular"
  },
  {
@@ -140791,7 +139770,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "распределения",
   "numberClass": "regular"
  },
  {
@@ -141027,7 +140005,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сценарии",
   "numberClass": "regular"
  },
  {
@@ -141089,7 +140066,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "бригады",
   "numberClass": "regular"
  },
  {
@@ -141151,7 +140127,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "пятна",
   "numberClass": "regular"
  },
  {
@@ -141213,7 +140188,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "гробы",
   "numberClass": "regular"
  },
  {
@@ -141399,7 +140373,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "ограничения",
   "numberClass": "regular"
  },
  {
@@ -141579,7 +140552,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "надписи",
   "numberClass": "regular"
  },
  {
@@ -141759,7 +140731,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "термины",
   "numberClass": "regular"
  },
  {
@@ -141821,7 +140792,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ткани",
   "numberClass": "regular"
  },
  {
@@ -142003,7 +140973,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "визиты",
   "numberClass": "regular"
  },
  {
@@ -142123,7 +141092,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "океаны",
   "numberClass": "regular"
  },
  {
@@ -142305,7 +141273,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "предприниматели",
   "numberClass": "regular"
  },
  {
@@ -142367,7 +141334,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "приборы",
   "numberClass": "regular"
  },
  {
@@ -142491,7 +141457,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -142551,7 +141516,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "ведомства",
   "numberClass": "regular"
  },
  {
@@ -142795,7 +141759,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "паспорта",
   "numberClass": "regular"
  },
  {
@@ -142857,7 +141820,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "паузы",
   "numberClass": "regular"
  },
  {
@@ -143012,7 +141974,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "даты",
   "numberClass": "regular"
  },
  {
@@ -143196,7 +142157,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "постановки",
   "numberClass": "regular"
  },
  {
@@ -143258,7 +142218,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "поступки",
   "numberClass": "regular"
  },
  {
@@ -143325,7 +142284,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "стволы",
   "numberClass": "regular"
  },
  {
@@ -143385,7 +142343,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -143540,7 +142497,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -143664,7 +142620,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "адвокаты",
   "numberClass": "regular"
  },
  {
@@ -143786,7 +142741,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "контракты",
   "numberClass": "regular"
  },
  {
@@ -143910,7 +142864,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -144092,7 +143045,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "академики",
   "numberClass": "regular"
  },
  {
@@ -144216,7 +143168,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кампании",
   "numberClass": "regular"
  },
  {
@@ -144283,7 +143234,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "обороты",
   "numberClass": "regular"
  },
  {
@@ -144459,7 +143409,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "агентства",
   "numberClass": "regular"
  },
  {
@@ -144521,7 +143470,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "звери",
   "numberClass": "regular"
  },
  {
@@ -144583,7 +143531,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "нации",
   "numberClass": "regular"
  },
  {
@@ -144643,7 +143590,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "потребители",
   "numberClass": "regular"
  },
  {
@@ -144761,7 +143707,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "банки",
   "numberClass": "regular"
  },
  {
@@ -144823,7 +143768,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "коробки",
   "numberClass": "regular"
  },
  {
@@ -144885,7 +143829,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -145133,7 +144076,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "секреты",
   "numberClass": "regular"
  },
  {
@@ -145193,7 +144135,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "темпы",
   "numberClass": "regular"
  },
  {
@@ -145311,7 +144252,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -145435,7 +144375,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "дедушки",
   "numberClass": "regular"
  },
  {
@@ -145495,7 +144434,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "инвестиции",
   "numberClass": "regular"
  },
  {
@@ -145797,7 +144735,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "десятилетия",
   "numberClass": "regular"
  },
  {
@@ -145915,7 +144852,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "преимущества",
   "numberClass": "regular"
  },
  {
@@ -145977,7 +144913,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "публикации",
   "numberClass": "regular"
  },
  {
@@ -146039,7 +144974,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "стихотворения",
   "numberClass": "regular"
  },
  {
@@ -146252,7 +145186,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "отчёты",
   "numberClass": "regular"
  },
  {
@@ -146314,7 +145247,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "пальто",
   "numberClass": "regular"
  },
  {
@@ -146376,7 +145308,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "узлы",
   "numberClass": "regular"
  },
  {
@@ -146496,7 +145427,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "обмены",
   "numberClass": "regular"
  },
  {
@@ -146558,7 +145488,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "породы",
   "numberClass": "regular"
  },
  {
@@ -146618,7 +145547,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -146734,7 +145662,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -146796,7 +145723,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "заболевания",
   "numberClass": "regular"
  },
  {
@@ -146856,7 +145782,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "стремления",
   "numberClass": "regular"
  },
  {
@@ -146918,7 +145843,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "фестивали",
   "numberClass": "regular"
  },
  {
@@ -146980,7 +145904,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "шкафы",
   "numberClass": "regular"
  },
  {
@@ -147042,7 +145965,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -147104,7 +146026,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "заборы",
   "numberClass": "regular"
  },
  {
@@ -147222,7 +146143,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -147342,7 +146262,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -147404,7 +146323,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "морозы",
   "numberClass": "regular"
  },
  {
@@ -147704,7 +146622,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "перемены",
   "numberClass": "regular"
  },
  {
@@ -147766,7 +146683,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "костры",
   "numberClass": "regular"
  },
  {
@@ -147898,7 +146814,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "марки",
   "numberClass": "regular"
  },
  {
@@ -148022,7 +146937,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "протоколы",
   "numberClass": "regular"
  },
  {
@@ -148382,7 +147296,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "привычки",
   "numberClass": "regular"
  },
  {
@@ -148506,7 +147419,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "трудности",
   "numberClass": "regular"
  },
  {
@@ -148692,7 +147604,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -148754,7 +147665,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "матчи",
   "numberClass": "regular"
  },
  {
@@ -148872,7 +147782,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "плоды",
   "numberClass": "regular"
  },
  {
@@ -148996,7 +147905,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -149170,7 +148078,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "пассажиры",
   "numberClass": "regular"
  },
  {
@@ -149292,7 +148199,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "стандарты",
   "numberClass": "regular"
  },
  {
@@ -149352,7 +148258,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -149414,7 +148319,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "моторы",
   "numberClass": "regular"
  },
  {
@@ -149476,7 +148380,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "стадии",
   "numberClass": "regular"
  },
  {
@@ -149650,7 +148553,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "звания",
   "numberClass": "regular"
  },
  {
@@ -149771,7 +148673,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "утверждения",
   "numberClass": "regular"
  },
  {
@@ -149833,7 +148734,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "критерии",
   "numberClass": "regular"
  },
  {
@@ -150071,7 +148971,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -150195,7 +149094,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "борта",
   "numberClass": "regular"
  },
  {
@@ -150257,7 +149155,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "наказания",
   "numberClass": "regular"
  },
  {
@@ -150381,7 +149278,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "разделы",
   "numberClass": "regular"
  },
  {
@@ -150557,7 +149453,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "конституции",
   "numberClass": "regular"
  },
  {
@@ -150619,7 +149514,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "секторы",
   "numberClass": "regular"
  },
  {
@@ -150681,7 +149575,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "склады",
   "numberClass": "regular"
  },
  {
@@ -150741,7 +149634,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -150859,7 +149751,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "учения",
   "numberClass": "regular"
  },
  {
@@ -150921,7 +149812,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "карандаши",
   "numberClass": "regular"
  },
  {
@@ -151043,7 +149933,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "мотивы",
   "numberClass": "regular"
  },
  {
@@ -151163,7 +150052,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -151223,7 +150111,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "аресты",
   "numberClass": "regular"
  },
  {
@@ -151285,7 +150172,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "знакомства",
   "numberClass": "regular"
  },
  {
@@ -151521,7 +150407,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "мэры",
   "numberClass": "regular"
  },
  {
@@ -151701,7 +150586,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "символы",
   "numberClass": "regular"
  },
  {
@@ -151943,7 +150827,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "полномочия",
   "numberClass": "regular"
  },
  {
@@ -152129,7 +151012,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -152305,7 +151187,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "отряды",
   "numberClass": "regular"
  },
  {
@@ -152427,7 +151308,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -152675,7 +151555,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -152737,7 +151616,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -153093,7 +151971,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "поражения",
   "numberClass": "regular"
  },
  {
@@ -153155,7 +152032,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "рубашки",
   "numberClass": "regular"
  },
  {
@@ -153217,7 +152093,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "луны",
   "numberClass": "regular"
  },
  {
@@ -153279,7 +152154,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -153341,7 +152215,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -153403,7 +152276,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "соборы",
   "numberClass": "regular"
  },
  {
@@ -153463,7 +152335,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "съёмки",
   "numberClass": "regular"
  },
  {
@@ -153587,7 +152458,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "грузы",
   "numberClass": "regular"
  },
  {
@@ -153649,7 +152519,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "подробности",
   "numberClass": "regular"
  },
  {
@@ -153711,7 +152580,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "трагедии",
   "numberClass": "regular"
  },
  {
@@ -153887,7 +152755,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "политики",
   "numberClass": "regular"
  },
  {
@@ -154011,7 +152878,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "лучи",
   "numberClass": "regular"
  },
  {
@@ -154073,7 +152939,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -154135,7 +153000,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "экзамены",
   "numberClass": "regular"
  },
  {
@@ -154258,7 +153122,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -154318,7 +153181,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "проявления",
   "numberClass": "regular"
  },
  {
@@ -154380,7 +153242,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пули",
   "numberClass": "regular"
  },
  {
@@ -154442,7 +153303,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "жесты",
   "numberClass": "regular"
  },
  {
@@ -154808,7 +153668,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "свидетельства",
   "numberClass": "regular"
  },
  {
@@ -155047,7 +153906,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ассоциации",
   "numberClass": "regular"
  },
  {
@@ -155107,7 +153965,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "салоны",
   "numberClass": "regular"
  },
  {
@@ -155227,7 +154084,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "коровы",
   "numberClass": "regular"
  },
  {
@@ -155289,7 +154145,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -155349,7 +154204,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -155411,7 +154265,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -155533,7 +154386,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "девчонки",
   "numberClass": "regular"
  },
  {
@@ -155595,7 +154447,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "капли",
   "numberClass": "regular"
  },
  {
@@ -156193,7 +155044,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "дары",
   "numberClass": "regular"
  },
  {
@@ -156253,7 +155103,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "поставки",
   "numberClass": "regular"
  },
  {
@@ -156315,7 +155164,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "оркестры",
   "numberClass": "regular"
  },
  {
@@ -156747,7 +155595,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -156809,7 +155656,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -157003,7 +155849,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "миллиарды",
   "numberClass": "regular"
  },
  {
@@ -157183,7 +156028,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пожары",
   "numberClass": "regular"
  },
  {
@@ -157541,7 +156385,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -157603,7 +156446,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "шары",
   "numberClass": "regular"
  },
  {
@@ -157665,7 +156507,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "компоненты",
   "numberClass": "regular"
  },
  {
@@ -157725,7 +156566,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -157785,7 +156625,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "тётки",
   "numberClass": "regular"
  },
  {
@@ -157971,7 +156810,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "циклы",
   "numberClass": "regular"
  },
  {
@@ -158265,7 +157103,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "эпизоды",
   "numberClass": "regular"
  },
  {
@@ -158510,7 +157347,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "обиды",
   "numberClass": "regular"
  },
  {
@@ -158572,7 +157408,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -158632,7 +157467,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "потенциалы",
   "numberClass": "regular"
  },
  {
@@ -158814,7 +157648,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -158930,7 +157763,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "персонажи",
   "numberClass": "regular"
  },
  {
@@ -158992,7 +157824,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рули",
   "numberClass": "regular"
  },
  {
@@ -159054,7 +157885,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "совещания",
   "numberClass": "regular"
  },
  {
@@ -159418,7 +158248,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "религии",
   "numberClass": "regular"
  },
  {
@@ -159778,7 +158607,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -159900,7 +158728,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "различия",
   "numberClass": "regular"
  },
  {
@@ -160082,7 +158909,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вклады",
   "numberClass": "regular"
  },
  {
@@ -160144,7 +158970,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "карьеры",
   "numberClass": "regular"
  },
  {
@@ -160204,7 +159029,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "кладбища",
   "numberClass": "regular"
  },
  {
@@ -160266,7 +159090,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "облака",
   "numberClass": "regular"
  },
  {
@@ -160384,7 +159207,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "гонки",
   "numberClass": "regular"
  },
  {
@@ -160628,7 +159450,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рукава",
   "numberClass": "regular"
  },
  {
@@ -160690,7 +159511,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сокращения",
   "numberClass": "regular"
  },
  {
@@ -160752,7 +159572,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "туманы",
   "numberClass": "regular"
  },
  {
@@ -160812,7 +159631,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "шоферы",
   "numberClass": "regular"
  },
  {
@@ -160874,7 +159692,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "бандиты",
   "numberClass": "regular"
  },
  {
@@ -161056,7 +159873,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "чемоданы",
   "numberClass": "regular"
  },
  {
@@ -161118,7 +159934,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "атаки",
   "numberClass": "regular"
  },
  {
@@ -161360,7 +160175,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "розы",
   "numberClass": "regular"
  },
  {
@@ -161422,7 +160236,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "указы",
   "numberClass": "regular"
  },
  {
@@ -161484,7 +160297,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -161604,7 +160416,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сложности",
   "numberClass": "regular"
  },
  {
@@ -161726,7 +160537,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "игроки",
   "numberClass": "regular"
  },
  {
@@ -161912,7 +160722,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "построения",
   "numberClass": "regular"
  },
  {
@@ -161974,7 +160783,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "продолжения",
   "numberClass": "regular"
  },
  {
@@ -162036,7 +160844,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "скандалы",
   "numberClass": "regular"
  },
  {
@@ -162098,7 +160905,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "трупы",
   "numberClass": "regular"
  },
  {
@@ -162274,7 +161080,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -162336,7 +161141,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "путешествия",
   "numberClass": "regular"
  },
  {
@@ -162398,7 +161202,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -162460,7 +161263,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тонны",
   "numberClass": "regular"
  },
  {
@@ -162580,7 +161382,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "гарантии",
   "numberClass": "regular"
  },
  {
@@ -162698,7 +161499,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "вожди",
   "numberClass": "regular"
  },
  {
@@ -162760,7 +161560,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "месторождения",
   "numberClass": "regular"
  },
  {
@@ -162825,7 +161624,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "мины",
   "numberClass": "regular"
  },
  {
@@ -162887,7 +161685,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ордена",
   "numberClass": "regular"
  },
  {
@@ -162954,7 +161751,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пластинки",
   "numberClass": "regular"
  },
  {
@@ -163200,7 +161996,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "крестьяне",
   "numberClass": "regular"
  },
  {
@@ -163451,7 +162246,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "юноши",
   "numberClass": "regular"
  },
  {
@@ -163513,7 +162307,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "бабки",
   "numberClass": "regular"
  },
  {
@@ -163580,7 +162373,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вызовы",
   "numberClass": "regular"
  },
  {
@@ -163642,7 +162434,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "издательства",
   "numberClass": "regular"
  },
  {
@@ -163816,7 +162607,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "полки",
   "numberClass": "regular"
  },
  {
@@ -163992,7 +162782,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "sí",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -164174,7 +162963,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "покупки",
   "numberClass": "regular"
  },
  {
@@ -164418,7 +163206,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "брови",
   "numberClass": "regular"
  },
  {
@@ -164480,7 +163267,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -164666,7 +163452,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "колонны",
   "numberClass": "regular"
  },
  {
@@ -164786,7 +163571,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "падения",
   "numberClass": "regular"
  },
  {
@@ -164904,7 +163688,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "стратегии",
   "numberClass": "regular"
  },
  {
@@ -164964,7 +163747,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "бойцы",
   "numberClass": "regular"
  },
  {
@@ -165342,7 +164124,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -165593,7 +164374,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -165655,7 +164435,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тарелки",
   "numberClass": "regular"
  },
  {
@@ -165717,7 +164496,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -165777,7 +164555,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "деятели",
   "numberClass": "regular"
  },
  {
@@ -165957,7 +164734,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "выстрелы",
   "numberClass": "regular"
  },
  {
@@ -166079,7 +164855,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -166141,7 +164916,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "куртки",
   "numberClass": "regular"
  },
  {
@@ -166321,7 +165095,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "флоты",
   "numberClass": "regular"
  },
  {
@@ -166383,7 +165156,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -166507,7 +165279,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -166689,7 +165460,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "операторы",
   "numberClass": "regular"
  },
  {
@@ -166809,7 +165579,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -166931,7 +165700,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -167058,7 +165826,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "приходы",
   "numberClass": "regular"
  },
  {
@@ -167298,7 +166065,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "шефы",
   "numberClass": "regular"
  },
  {
@@ -167478,7 +166244,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -168086,7 +166851,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "шапки",
   "numberClass": "regular"
  },
  {
@@ -168210,7 +166974,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ложки",
   "numberClass": "regular"
  },
  {
@@ -168272,7 +167035,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "подписи",
   "numberClass": "regular"
  },
  {
@@ -168450,7 +167212,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "актрисы",
   "numberClass": "regular"
  },
  {
@@ -168684,7 +167445,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "колхозы",
   "numberClass": "regular"
  },
  {
@@ -168746,7 +167506,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кучи",
   "numberClass": "regular"
  },
  {
@@ -168870,7 +167629,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "прогнозы",
   "numberClass": "regular"
  },
  {
@@ -168997,7 +167755,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "цивилизации",
   "numberClass": "regular"
  },
  {
@@ -169064,7 +167821,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "белки",
   "numberClass": "regular"
  },
  {
@@ -169303,7 +168059,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "коты",
   "numberClass": "regular"
  },
  {
@@ -169365,7 +168120,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "остановки",
   "numberClass": "regular"
  },
  {
@@ -169427,7 +168181,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "платки",
   "numberClass": "regular"
  },
  {
@@ -169605,7 +168358,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "локти",
   "numberClass": "regular"
  },
  {
@@ -169727,7 +168479,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -169789,7 +168540,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -169851,7 +168601,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "яйца",
   "numberClass": "regular"
  },
  {
@@ -169913,7 +168662,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -170031,7 +168779,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "жалобы",
   "numberClass": "regular"
  },
  {
@@ -170093,7 +168840,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "концентрации",
   "numberClass": "regular"
  },
  {
@@ -170155,7 +168901,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "музыканты",
   "numberClass": "regular"
  },
  {
@@ -170275,7 +169020,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -170583,7 +169327,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "повести",
   "numberClass": "regular"
  },
  {
@@ -170707,7 +169450,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "глупости",
   "numberClass": "regular"
  },
  {
@@ -170769,7 +169511,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "картошки",
   "numberClass": "regular"
  },
  {
@@ -170831,7 +169572,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "переулки",
   "numberClass": "regular"
  },
  {
@@ -171073,7 +169813,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "домики",
   "numberClass": "regular"
  },
  {
@@ -171191,7 +169930,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "исполнители",
   "numberClass": "regular"
  },
  {
@@ -171315,7 +170053,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "страдания",
   "numberClass": "regular"
  },
  {
@@ -171377,7 +170114,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ветки",
   "numberClass": "regular"
  },
  {
@@ -171439,7 +170175,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "заказчики",
   "numberClass": "regular"
  },
  {
@@ -171501,7 +170236,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лапы",
   "numberClass": "regular"
  },
  {
@@ -171681,7 +170415,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "священники",
   "numberClass": "regular"
  },
  {
@@ -171741,7 +170474,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -171921,7 +170653,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "заведения",
   "numberClass": "regular"
  },
  {
@@ -171983,7 +170714,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "лекарства",
   "numberClass": "regular"
  },
  {
@@ -172045,7 +170775,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "мелочи",
   "numberClass": "regular"
  },
  {
@@ -172165,7 +170894,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -172227,7 +170955,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "свадьбы",
   "numberClass": "regular"
  },
  {
@@ -172351,7 +171078,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "подушки",
   "numberClass": "regular"
  },
  {
@@ -172475,7 +171201,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "справки",
   "numberClass": "regular"
  },
  {
@@ -172655,7 +171380,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -172717,7 +171441,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -172779,7 +171502,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "башни",
   "numberClass": "regular"
  },
  {
@@ -173019,7 +171741,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "обвинения",
   "numberClass": "regular"
  },
  {
@@ -173081,7 +171802,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -173143,7 +171863,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тарифы",
   "numberClass": "regular"
  },
  {
@@ -173203,7 +171922,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "умения",
   "numberClass": "regular"
  },
  {
@@ -173325,7 +172043,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "агенты",
   "numberClass": "regular"
  },
  {
@@ -173387,7 +172104,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "гении",
   "numberClass": "regular"
  },
  {
@@ -173449,7 +172165,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "иски",
   "numberClass": "regular"
  },
  {
@@ -173511,7 +172226,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лекции",
   "numberClass": "regular"
  },
  {
@@ -173629,7 +172343,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "нагрузки",
   "numberClass": "regular"
  },
  {
@@ -173691,7 +172404,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "намерения",
   "numberClass": "regular"
  },
  {
@@ -173815,7 +172527,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -173877,7 +172588,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ботинки",
   "numberClass": "regular"
  },
  {
@@ -174119,7 +172829,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "подвиги",
   "numberClass": "regular"
  },
  {
@@ -174181,7 +172890,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -174417,7 +173125,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "молодцы",
   "numberClass": "regular"
  },
  {
@@ -174541,7 +173248,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -174603,7 +173309,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "дневники",
   "numberClass": "regular"
  },
  {
@@ -174665,7 +173370,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "лётчики",
   "numberClass": "regular"
  },
  {
@@ -174785,7 +173489,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "одеяла",
   "numberClass": "regular"
  },
  {
@@ -174909,7 +173612,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вертолёты",
   "numberClass": "regular"
  },
  {
@@ -175143,7 +173845,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "приговоры",
   "numberClass": "regular"
  },
  {
@@ -175203,7 +173904,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -175323,7 +174023,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "внуки",
   "numberClass": "regular"
  },
  {
@@ -175615,7 +174314,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сочетания",
   "numberClass": "regular"
  },
  {
@@ -175791,7 +174489,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "бани",
   "numberClass": "regular"
  },
  {
@@ -175853,7 +174550,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -176157,7 +174853,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "диалоги",
   "numberClass": "regular"
  },
  {
@@ -176395,7 +175090,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "грибы",
   "numberClass": "regular"
  },
  {
@@ -176515,7 +175209,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "расширения",
   "numberClass": "regular"
  },
  {
@@ -176577,7 +175270,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "волнения",
   "numberClass": "regular"
  },
  {
@@ -176759,7 +175451,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -177005,7 +175696,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "богатства",
   "numberClass": "regular"
  },
  {
@@ -177072,7 +175762,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "измерения",
   "numberClass": "regular"
  },
  {
@@ -177134,7 +175823,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -177196,7 +175884,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пиджаки",
   "numberClass": "regular"
  },
  {
@@ -177320,7 +176007,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -177380,7 +176066,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "столетия",
   "numberClass": "regular"
  },
  {
@@ -177500,7 +176185,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "цирки",
   "numberClass": "regular"
  },
  {
@@ -177680,7 +176364,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "блага",
   "numberClass": "regular"
  },
  {
@@ -177802,7 +176485,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -177864,7 +176546,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -177926,7 +176607,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "коллекции",
   "numberClass": "regular"
  },
  {
@@ -177986,7 +176666,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "манеры",
   "numberClass": "regular"
  },
  {
@@ -178048,7 +176727,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -178226,7 +176904,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "цеха",
   "numberClass": "regular"
  },
  {
@@ -178286,7 +176963,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "бумажки",
   "numberClass": "regular"
  },
  {
@@ -178528,7 +177204,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "подъёмы",
   "numberClass": "regular"
  },
  {
@@ -178590,7 +177265,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "свидания",
   "numberClass": "regular"
  },
  {
@@ -178652,7 +177326,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "смеси",
   "numberClass": "regular"
  },
  {
@@ -178712,7 +177385,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -178772,7 +177444,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "империи",
   "numberClass": "regular"
  },
  {
@@ -178832,7 +177503,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "красавицы",
   "numberClass": "regular"
  },
  {
@@ -179120,7 +177790,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -179298,7 +177967,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -179360,7 +178028,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -179422,7 +178089,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -180010,7 +178676,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "студии",
   "numberClass": "regular"
  },
  {
@@ -180133,7 +178798,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "плиты",
   "numberClass": "regular"
  },
  {
@@ -180195,7 +178859,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пояса",
   "numberClass": "regular"
  },
  {
@@ -180317,7 +178980,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -180379,7 +179041,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "аэропорты",
   "numberClass": "regular"
  },
  {
@@ -180441,7 +179102,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -180563,7 +179223,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "рукописи",
   "numberClass": "regular"
  },
  {
@@ -180625,7 +179284,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -180687,7 +179345,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "графы",
   "numberClass": "regular"
  },
  {
@@ -180749,7 +179406,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дорожки",
   "numberClass": "regular"
  },
  {
@@ -180809,7 +179465,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "исследователи",
   "numberClass": "regular"
  },
  {
@@ -180871,7 +179526,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "историки",
   "numberClass": "regular"
  },
  {
@@ -180991,7 +179645,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -181229,7 +179882,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "тренеры",
   "numberClass": "regular"
  },
  {
@@ -181477,7 +180129,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "мыши",
   "numberClass": "regular"
  },
  {
@@ -181601,7 +180252,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -181663,7 +180313,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "замечания",
   "numberClass": "regular"
  },
  {
@@ -181723,7 +180372,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "замыслы",
   "numberClass": "regular"
  },
  {
@@ -181841,7 +180489,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "мышцы",
   "numberClass": "regular"
  },
  {
@@ -181903,7 +180550,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "продавцы",
   "numberClass": "regular"
  },
  {
@@ -182193,7 +180839,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "соотношения",
   "numberClass": "regular"
  },
  {
@@ -182429,7 +181074,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "карточки",
   "numberClass": "regular"
  },
  {
@@ -182793,7 +181437,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фабрики",
   "numberClass": "regular"
  },
  {
@@ -183031,7 +181674,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "послы",
   "numberClass": "regular"
  },
  {
@@ -183383,7 +182025,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "катастрофы",
   "numberClass": "regular"
  },
  {
@@ -183443,7 +182084,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пачки",
   "numberClass": "regular"
  },
  {
@@ -183505,7 +182145,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "столовые",
   "numberClass": "regular"
  },
  {
@@ -183567,7 +182206,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ужины",
   "numberClass": "regular"
  },
  {
@@ -183627,7 +182265,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -183874,7 +182511,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "училища",
   "numberClass": "regular"
  },
  {
@@ -183934,7 +182570,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -183996,7 +182631,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "акционеры",
   "numberClass": "regular"
  },
  {
@@ -184058,7 +182692,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "городки",
   "numberClass": "regular"
  },
  {
@@ -184118,7 +182751,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "картинки",
   "numberClass": "regular"
  },
  {
@@ -184180,7 +182812,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "легенды",
   "numberClass": "regular"
  },
  {
@@ -184296,7 +182927,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "соображения",
   "numberClass": "regular"
  },
  {
@@ -184358,7 +182988,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сообщества",
   "numberClass": "regular"
  },
  {
@@ -184420,7 +183049,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "иконы",
   "numberClass": "regular"
  },
  {
@@ -184482,7 +183110,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "коньяки",
   "numberClass": "regular"
  },
  {
@@ -184542,7 +183169,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "посетители",
   "numberClass": "regular"
  },
  {
@@ -184604,7 +183230,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "собеседники",
   "numberClass": "regular"
  },
  {
@@ -184722,7 +183347,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "волки",
   "numberClass": "regular"
  },
  {
@@ -184784,7 +183408,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -184902,7 +183525,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "халаты",
   "numberClass": "regular"
  },
  {
@@ -184964,7 +183586,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вузы",
   "numberClass": "regular"
  },
  {
@@ -185026,7 +183647,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "жанры",
   "numberClass": "regular"
  },
  {
@@ -185088,7 +183708,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "идеалы",
   "numberClass": "regular"
  },
  {
@@ -185262,7 +183881,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "поправки",
   "numberClass": "regular"
  },
  {
@@ -185324,7 +183942,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -185442,7 +184059,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ленты",
   "numberClass": "regular"
  },
  {
@@ -185628,7 +184244,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "частицы",
   "numberClass": "regular"
  },
  {
@@ -185690,7 +184305,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "бомбы",
   "numberClass": "regular"
  },
  {
@@ -185752,7 +184366,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "композиторы",
   "numberClass": "regular"
  },
  {
@@ -185814,7 +184427,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "крыльца",
   "numberClass": "regular"
  },
  {
@@ -185941,7 +184553,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "пациенты",
   "numberClass": "regular"
  },
  {
@@ -186003,7 +184614,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "соки",
   "numberClass": "regular"
  },
  {
@@ -186125,7 +184735,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -186187,7 +184796,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "штаммы",
   "numberClass": "regular"
  },
  {
@@ -186247,7 +184855,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "замены",
   "numberClass": "regular"
  },
  {
@@ -186367,7 +184974,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кусочки",
   "numberClass": "regular"
  },
  {
@@ -186485,7 +185091,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "победители",
   "numberClass": "regular"
  },
  {
@@ -186547,7 +185152,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "приезды",
   "numberClass": "regular"
  },
  {
@@ -186847,7 +185451,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "экспедиции",
   "numberClass": "regular"
  },
  {
@@ -186907,7 +185510,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "аспекты",
   "numberClass": "regular"
  },
  {
@@ -187081,7 +185683,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -187315,7 +185916,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "противоречия",
   "numberClass": "regular"
  },
  {
@@ -187557,7 +186157,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "преступники",
   "numberClass": "regular"
  },
  {
@@ -187857,7 +186456,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "строения",
   "numberClass": "regular"
  },
  {
@@ -187917,7 +186515,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -188041,7 +186638,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -188103,7 +186699,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "подростки",
   "numberClass": "regular"
  },
  {
@@ -188165,7 +186760,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "правления",
   "numberClass": "regular"
  },
  {
@@ -188289,7 +186883,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "чемпионы",
   "numberClass": "regular"
  },
  {
@@ -188351,7 +186944,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "архивы",
   "numberClass": "regular"
  },
  {
@@ -188471,7 +187063,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дискуссии",
   "numberClass": "regular"
  },
  {
@@ -188767,7 +187358,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -189072,7 +187662,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сооружения",
   "numberClass": "regular"
  },
  {
@@ -189254,7 +187843,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "копейки",
   "numberClass": "regular"
  },
  {
@@ -189434,7 +188022,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "нервы",
   "numberClass": "regular"
  },
  {
@@ -189614,7 +188201,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "растворы",
   "numberClass": "regular"
  },
  {
@@ -189676,7 +188262,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "туалеты",
   "numberClass": "regular"
  },
  {
@@ -189798,7 +188383,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "хоры",
   "numberClass": "regular"
  },
  {
@@ -189860,7 +188444,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "анекдоты",
   "numberClass": "regular"
  },
  {
@@ -190156,7 +188739,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -190274,7 +188856,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -190336,7 +188917,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -190694,7 +189274,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "плёнки",
   "numberClass": "regular"
  },
  {
@@ -190814,7 +189393,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -190876,7 +189454,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "репетиции",
   "numberClass": "regular"
  },
  {
@@ -191000,7 +189577,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "отражения",
   "numberClass": "regular"
  },
  {
@@ -191242,7 +189818,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -191371,7 +189946,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "экипажи",
   "numberClass": "regular"
  },
  {
@@ -191551,7 +190125,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "награды",
   "numberClass": "regular"
  },
  {
@@ -191671,7 +190244,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "походы",
   "numberClass": "regular"
  },
  {
@@ -192082,7 +190654,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "иностранцы",
   "numberClass": "regular"
  },
  {
@@ -192144,7 +190715,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "морды",
   "numberClass": "regular"
  },
  {
@@ -192206,7 +190776,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "перья",
   "numberClass": "regular"
  },
  {
@@ -192268,7 +190837,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "претензии",
   "numberClass": "regular"
  },
  {
@@ -192386,7 +190954,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "россияне",
   "numberClass": "regular"
  },
  {
@@ -192568,7 +191135,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -192748,7 +191314,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "четверти",
   "numberClass": "regular"
  },
  {
@@ -192810,7 +191375,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -192934,7 +191498,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -192996,7 +191559,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "маски",
   "numberClass": "regular"
  },
  {
@@ -193058,7 +191620,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "оперы",
   "numberClass": "regular"
  },
  {
@@ -193306,7 +191867,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -193424,7 +191984,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "госпитали",
   "numberClass": "regular"
  },
  {
@@ -193701,7 +192260,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "маршруты",
   "numberClass": "regular"
  },
  {
@@ -193819,7 +192377,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "сержанты",
   "numberClass": "regular"
  },
  {
@@ -193881,7 +192438,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "шляпы",
   "numberClass": "regular"
  },
  {
@@ -193943,7 +192499,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "экземпляры",
   "numberClass": "regular"
  },
  {
@@ -194010,7 +192565,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -194132,7 +192686,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "вёдра",
   "numberClass": "regular"
  },
  {
@@ -194194,7 +192747,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -194256,7 +192808,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "мастерские",
   "numberClass": "regular"
  },
  {
@@ -194432,7 +192983,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "офисы",
   "numberClass": "regular"
  },
  {
@@ -194662,7 +193212,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -194729,7 +193278,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ссылки",
   "numberClass": "regular"
  },
  {
@@ -194903,7 +193451,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -194965,7 +193512,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лампы",
   "numberClass": "regular"
  },
  {
@@ -195211,7 +193757,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -195273,7 +193818,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "убийцы",
   "numberClass": "regular"
  },
  {
@@ -195335,7 +193879,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фантазии",
   "numberClass": "regular"
  },
  {
@@ -195397,7 +193940,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -195575,7 +194117,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "любители",
   "numberClass": "regular"
  },
  {
@@ -195635,7 +194176,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "малыши",
   "numberClass": "regular"
  },
  {
@@ -195875,7 +194415,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "призывы",
   "numberClass": "regular"
  },
  {
@@ -196293,7 +194832,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -196473,7 +195011,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "преподаватели",
   "numberClass": "regular"
  },
  {
@@ -196533,7 +195070,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сайты",
   "numberClass": "regular"
  },
  {
@@ -196653,7 +195189,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -196769,7 +195304,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дивизии",
   "numberClass": "regular"
  },
  {
@@ -196893,7 +195427,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "избы",
   "numberClass": "regular"
  },
  {
@@ -196955,7 +195488,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "копии",
   "numberClass": "regular"
  },
  {
@@ -197255,7 +195787,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -197495,7 +196026,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -197729,7 +196259,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -197789,7 +196318,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "законопроекты",
   "numberClass": "regular"
  },
  {
@@ -197967,7 +196495,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "подвалы",
   "numberClass": "regular"
  },
  {
@@ -198029,7 +196556,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "порты",
   "numberClass": "regular"
  },
  {
@@ -198153,7 +196679,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "угли",
   "numberClass": "regular"
  },
  {
@@ -198275,7 +196800,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "укрепления",
   "numberClass": "regular"
  },
  {
@@ -198337,7 +196861,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "уставы",
   "numberClass": "regular"
  },
  {
@@ -198457,7 +196980,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бассейны",
   "numberClass": "regular"
  },
  {
@@ -198691,7 +197213,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "инстанции",
   "numberClass": "regular"
  },
  {
@@ -198753,7 +197274,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "медведи",
   "numberClass": "regular"
  },
  {
@@ -198871,7 +197391,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "отъезды",
   "numberClass": "regular"
  },
  {
@@ -199047,7 +197566,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "архитекторы",
   "numberClass": "regular"
  },
  {
@@ -199169,7 +197687,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -199231,7 +197748,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "мечи",
   "numberClass": "regular"
  },
  {
@@ -199291,7 +197807,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "охранники",
   "numberClass": "regular"
  },
  {
@@ -199469,7 +197984,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "суда",
   "numberClass": "regular"
  },
  {
@@ -199593,7 +198107,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "чашки",
   "numberClass": "regular"
  },
  {
@@ -199775,7 +198288,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -199842,7 +198354,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кварталы",
   "numberClass": "regular"
  },
  {
@@ -199904,7 +198415,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "куры",
   "numberClass": "regular"
  },
  {
@@ -200146,7 +198656,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "преобразования",
   "numberClass": "regular"
  },
  {
@@ -200330,7 +198839,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -200390,7 +198898,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -200452,7 +198959,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ветви",
   "numberClass": "regular"
  },
  {
@@ -200694,7 +199200,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "девицы",
   "numberClass": "regular"
  },
  {
@@ -200756,7 +199261,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "инвесторы",
   "numberClass": "regular"
  },
  {
@@ -200818,7 +199322,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "инструкции",
   "numberClass": "regular"
  },
  {
@@ -200880,7 +199383,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кнопки",
   "numberClass": "regular"
  },
  {
@@ -201118,7 +199620,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -201180,7 +199681,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -201424,7 +199924,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "палки",
   "numberClass": "regular"
  },
  {
@@ -201546,7 +200045,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -201670,7 +200168,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "фонари",
   "numberClass": "regular"
  },
  {
@@ -201848,7 +200345,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "наркотики",
   "numberClass": "regular"
  },
  {
@@ -201910,7 +200406,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "премьеры",
   "numberClass": "regular"
  },
  {
@@ -202034,7 +200529,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "активы",
   "numberClass": "regular"
  },
  {
@@ -202158,7 +200652,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "пользователи",
   "numberClass": "regular"
  },
  {
@@ -202278,7 +200771,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "соревнования",
   "numberClass": "regular"
  },
  {
@@ -202340,7 +200832,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "столбы",
   "numberClass": "regular"
  },
  {
@@ -202402,7 +200893,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "французы",
   "numberClass": "regular"
  },
  {
@@ -202464,7 +200954,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "холмы",
   "numberClass": "regular"
  },
  {
@@ -202582,7 +201071,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "большевики",
   "numberClass": "regular"
  },
  {
@@ -202762,7 +201250,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "печи",
   "numberClass": "regular"
  },
  {
@@ -203010,7 +201497,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "сиденья",
   "numberClass": "regular"
  },
  {
@@ -203070,7 +201556,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "выплаты",
   "numberClass": "regular"
  },
  {
@@ -203250,7 +201735,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "отставки",
   "numberClass": "regular"
  },
  {
@@ -203312,7 +201796,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "перестройки",
   "numberClass": "regular"
  },
  {
@@ -203681,7 +202164,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сорта",
   "numberClass": "regular"
  },
  {
@@ -203799,7 +202281,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "трассы",
   "numberClass": "regular"
  },
  {
@@ -203861,7 +202342,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "ангелы",
   "numberClass": "regular"
  },
  {
@@ -204103,7 +202583,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "лифты",
   "numberClass": "regular"
  },
  {
@@ -204285,7 +202764,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "профессионалы",
   "numberClass": "regular"
  },
  {
@@ -204345,7 +202823,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "рекомендации",
   "numberClass": "regular"
  },
  {
@@ -204467,7 +202944,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "градусы",
   "numberClass": "regular"
  },
  {
@@ -204527,7 +203003,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "запросы",
   "numberClass": "regular"
  },
  {
@@ -204589,7 +203064,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кабины",
   "numberClass": "regular"
  },
  {
@@ -204895,7 +203369,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "приобретения",
   "numberClass": "regular"
  },
  {
@@ -205019,7 +203492,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "террористы",
   "numberClass": "regular"
  },
  {
@@ -205081,7 +203553,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "штрафы",
   "numberClass": "regular"
  },
  {
@@ -205328,7 +203799,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "медали",
   "numberClass": "regular"
  },
  {
@@ -205510,7 +203980,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "последовательности",
   "numberClass": "regular"
  },
  {
@@ -205572,7 +204041,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "приглашения",
   "numberClass": "regular"
  },
  {
@@ -205632,7 +204100,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "уголки",
   "numberClass": "regular"
  },
  {
@@ -205756,7 +204223,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "фото",
   "numberClass": "regular"
  },
  {
@@ -205936,7 +204402,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "перерывы",
   "numberClass": "regular"
  },
  {
@@ -206058,7 +204523,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "разрывы",
   "numberClass": "regular"
  },
  {
@@ -206325,7 +204789,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "департаменты",
   "numberClass": "regular"
  },
  {
@@ -206387,7 +204850,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "комментарии",
   "numberClass": "regular"
  },
  {
@@ -206454,7 +204916,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "орудия",
   "numberClass": "regular"
  },
  {
@@ -206516,7 +204977,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "отели",
   "numberClass": "regular"
  },
  {
@@ -206821,7 +205281,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "эмоции",
   "numberClass": "regular"
  },
  {
@@ -206881,7 +205340,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "аудитории",
   "numberClass": "regular"
  },
  {
@@ -206943,7 +205401,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "жидкости",
   "numberClass": "regular"
  },
  {
@@ -207005,7 +205462,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "коэффициенты",
   "numberClass": "regular"
  },
  {
@@ -207067,7 +205523,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "мышки",
   "numberClass": "regular"
  },
  {
@@ -207129,7 +205584,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ножки",
   "numberClass": "regular"
  },
  {
@@ -207310,7 +205764,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "спутники",
   "numberClass": "regular"
  },
  {
@@ -207546,7 +205999,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "верёвки",
   "numberClass": "regular"
  },
  {
@@ -207606,7 +206058,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -207914,7 +206365,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "посольства",
   "numberClass": "regular"
  },
  {
@@ -208088,7 +206538,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "старушки",
   "numberClass": "regular"
  },
  {
@@ -208148,7 +206597,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ступени",
   "numberClass": "regular"
  },
  {
@@ -208273,7 +206721,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "бороды",
   "numberClass": "regular"
  },
  {
@@ -208333,7 +206780,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -208395,7 +206841,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "затылки",
   "numberClass": "regular"
  },
  {
@@ -208455,7 +206900,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "невесты",
   "numberClass": "regular"
  },
  {
@@ -208579,7 +207023,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "факультеты",
   "numberClass": "regular"
  },
  {
@@ -208639,7 +207082,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "группировки",
   "numberClass": "regular"
  },
  {
@@ -208701,7 +207143,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дыры",
   "numberClass": "regular"
  },
  {
@@ -208763,7 +207204,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "императоры",
   "numberClass": "regular"
  },
  {
@@ -208825,7 +207265,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "свечи",
   "numberClass": "regular"
  },
  {
@@ -209061,7 +207500,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -209775,7 +208213,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "блюда",
   "numberClass": "regular"
  },
  {
@@ -209835,7 +208272,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "грани",
   "numberClass": "regular"
  },
  {
@@ -209895,7 +208331,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "критики",
   "numberClass": "regular"
  },
  {
@@ -209955,7 +208390,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "организаторы",
   "numberClass": "regular"
  },
  {
@@ -210017,7 +208451,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "парламенты",
   "numberClass": "regular"
  },
  {
@@ -210084,7 +208517,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "посадки",
   "numberClass": "regular"
  },
  {
@@ -210146,7 +208578,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -210504,7 +208935,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "царства",
   "numberClass": "regular"
  },
  {
@@ -210566,7 +208996,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -210626,7 +209055,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "боевики",
   "numberClass": "regular"
  },
  {
@@ -210986,7 +209414,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "неприятности",
   "numberClass": "regular"
  },
  {
@@ -211294,7 +209721,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "портфели",
   "numberClass": "regular"
  },
  {
@@ -211698,7 +210124,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -211876,7 +210301,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "сторонники",
   "numberClass": "regular"
  },
  {
@@ -211938,7 +210362,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "супруги",
   "numberClass": "regular"
  },
  {
@@ -212302,7 +210725,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -212426,7 +210848,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "показания",
   "numberClass": "regular"
  },
  {
@@ -212602,7 +211023,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "послания",
   "numberClass": "regular"
  },
  {
@@ -212664,7 +211084,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -212724,7 +211143,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "профили",
   "numberClass": "regular"
  },
  {
@@ -212786,7 +211204,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "учебники",
   "numberClass": "regular"
  },
  {
@@ -213024,7 +211441,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "игрушки",
   "numberClass": "regular"
  },
  {
@@ -213142,7 +211558,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "крышки",
   "numberClass": "regular"
  },
  {
@@ -213207,7 +211622,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "наступления",
   "numberClass": "regular"
  },
  {
@@ -213334,7 +211748,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "оформления",
   "numberClass": "regular"
  },
  {
@@ -213817,7 +212230,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -213877,7 +212289,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "премьеры",
   "numberClass": "regular"
  },
  {
@@ -213999,7 +212410,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "телеграммы",
   "numberClass": "regular"
  },
  {
@@ -214177,7 +212587,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "высказывания",
   "numberClass": "regular"
  },
  {
@@ -214237,7 +212646,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "конкуренты",
   "numberClass": "regular"
  },
  {
@@ -214355,7 +212763,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "псы",
   "numberClass": "regular"
  },
  {
@@ -214535,7 +212942,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "скалы",
   "numberClass": "regular"
  },
  {
@@ -214655,7 +213061,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -214717,7 +213122,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "грузовики",
   "numberClass": "regular"
  },
  {
@@ -215013,7 +213417,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "перечни",
   "numberClass": "regular"
  },
  {
@@ -215075,7 +213478,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ритмы",
   "numberClass": "regular"
  },
  {
@@ -215137,7 +213539,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -215199,7 +213600,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "улучшения",
   "numberClass": "regular"
  },
  {
@@ -215261,7 +213661,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "философы",
   "numberClass": "regular"
  },
  {
@@ -215383,7 +213782,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "воины",
   "numberClass": "regular"
  },
  {
@@ -215445,7 +213843,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -215569,7 +213966,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "олигархи",
   "numberClass": "regular"
  },
  {
@@ -215760,7 +214156,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "строчки",
   "numberClass": "regular"
  },
  {
@@ -215822,7 +214217,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "фрагменты",
   "numberClass": "regular"
  },
  {
@@ -215884,7 +214278,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -216311,7 +214704,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "проспекты",
   "numberClass": "regular"
  },
  {
@@ -216373,7 +214765,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -216433,7 +214824,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сборные",
   "numberClass": "regular"
  },
  {
@@ -216735,7 +215125,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "зёрна",
   "numberClass": "regular"
  },
  {
@@ -216913,7 +215302,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "платежи",
   "numberClass": "regular"
  },
  {
@@ -216975,7 +215363,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -217341,7 +215728,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -217465,7 +215851,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кафедры",
   "numberClass": "regular"
  },
  {
@@ -217527,7 +215912,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "напитки",
   "numberClass": "regular"
  },
  {
@@ -217827,7 +216211,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ямы",
   "numberClass": "regular"
  },
  {
@@ -217889,7 +216272,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "англичане",
   "numberClass": "regular"
  },
  {
@@ -218189,7 +216571,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лицензии",
   "numberClass": "regular"
  },
  {
@@ -218373,7 +216754,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -218495,7 +216875,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -218617,7 +216996,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "роты",
   "numberClass": "regular"
  },
  {
@@ -218679,7 +217057,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "семейства",
   "numberClass": "regular"
  },
  {
@@ -218741,7 +217118,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сосны",
   "numberClass": "regular"
  },
  {
@@ -218803,7 +217179,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "убеждения",
   "numberClass": "regular"
  },
  {
@@ -218865,7 +217240,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "форумы",
   "numberClass": "regular"
  },
  {
@@ -218927,7 +217301,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -219045,7 +217418,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "оттенки",
   "numberClass": "regular"
  },
  {
@@ -219471,7 +217843,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пустыни",
   "numberClass": "regular"
  },
  {
@@ -219531,7 +217902,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сборники",
   "numberClass": "regular"
  },
  {
@@ -219711,7 +218081,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "военнослужащие",
   "numberClass": "regular"
  },
  {
@@ -219891,7 +218260,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "объявления",
   "numberClass": "regular"
  },
  {
@@ -219951,7 +218319,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "позы",
   "numberClass": "regular"
  },
  {
@@ -220133,7 +218500,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -220260,7 +218626,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "папки",
   "numberClass": "regular"
  },
  {
@@ -220320,7 +218685,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "размышления",
   "numberClass": "regular"
  },
  {
@@ -220556,7 +218920,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "современники",
   "numberClass": "regular"
  },
  {
@@ -220618,7 +218981,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "аварии",
   "numberClass": "regular"
  },
  {
@@ -220742,7 +219104,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "прогулки",
   "numberClass": "regular"
  },
  {
@@ -220864,7 +219225,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -220984,7 +219344,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -221046,7 +219405,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "степи",
   "numberClass": "regular"
  },
  {
@@ -221108,7 +219466,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "бизнесмены",
   "numberClass": "regular"
  },
  {
@@ -221226,7 +219583,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "дуры",
   "numberClass": "regular"
  },
  {
@@ -221288,7 +219644,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ковры",
   "numberClass": "regular"
  },
  {
@@ -221588,7 +219943,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -221706,7 +220060,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -221768,7 +220121,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -221828,7 +220180,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "верхи",
   "numberClass": "regular"
  },
  {
@@ -221888,7 +220239,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "внедрения",
   "numberClass": "regular"
  },
  {
@@ -221948,7 +220298,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "вступления",
   "numberClass": "regular"
  },
  {
@@ -222430,7 +220779,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "раны",
   "numberClass": "regular"
  },
  {
@@ -222609,7 +220957,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "трети",
   "numberClass": "regular"
  },
  {
@@ -222671,7 +221018,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "усы",
   "numberClass": "regular"
  },
  {
@@ -222733,7 +221079,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "флаги",
   "numberClass": "regular"
  },
  {
@@ -222795,7 +221140,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -222917,7 +221261,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "крепости",
   "numberClass": "regular"
  },
  {
@@ -223157,7 +221500,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "психологи",
   "numberClass": "regular"
  },
  {
@@ -223217,7 +221559,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -223279,7 +221620,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фазы",
   "numberClass": "regular"
  },
  {
@@ -223863,7 +222203,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -223983,7 +222322,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "валюты",
   "numberClass": "regular"
  },
  {
@@ -224215,7 +222553,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "палатки",
   "numberClass": "regular"
  },
  {
@@ -224275,7 +222612,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "перевозки",
   "numberClass": "regular"
  },
  {
@@ -224457,7 +222793,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "стойки",
   "numberClass": "regular"
  },
  {
@@ -224577,7 +222912,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "холодильники",
   "numberClass": "regular"
  },
  {
@@ -224637,7 +222971,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "ветераны",
   "numberClass": "regular"
  },
  {
@@ -224699,7 +223032,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "воры",
   "numberClass": "regular"
  },
  {
@@ -224764,7 +223096,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -224944,7 +223275,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "листки",
   "numberClass": "regular"
  },
  {
@@ -225068,7 +223398,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "предки",
   "numberClass": "regular"
  },
  {
@@ -225128,7 +223457,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "расследования",
   "numberClass": "regular"
  },
  {
@@ -225190,7 +223518,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "решётки",
   "numberClass": "regular"
  },
  {
@@ -225308,7 +223635,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "скамейки",
   "numberClass": "regular"
  },
  {
@@ -225424,7 +223750,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "торжества",
   "numberClass": "regular"
  },
  {
@@ -225486,7 +223811,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "экспертизы",
   "numberClass": "regular"
  },
  {
@@ -225604,7 +223928,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "делегации",
   "numberClass": "regular"
  },
  {
@@ -225724,7 +224047,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "мифы",
   "numberClass": "regular"
  },
  {
@@ -225786,7 +224108,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -225846,7 +224167,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ступеньки",
   "numberClass": "regular"
  },
  {
@@ -225908,7 +224228,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "турниры",
   "numberClass": "regular"
  },
  {
@@ -226032,7 +224351,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "щели",
   "numberClass": "regular"
  },
  {
@@ -226094,7 +224412,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -226338,7 +224655,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "льготы",
   "numberClass": "regular"
  },
  {
@@ -226458,7 +224774,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "менеджеры",
   "numberClass": "regular"
  },
  {
@@ -226647,7 +224962,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "предположения",
   "numberClass": "regular"
  },
  {
@@ -226825,7 +225139,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "батареи",
   "numberClass": "regular"
  },
  {
@@ -226945,7 +225258,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "контексты",
   "numberClass": "regular"
  },
  {
@@ -227065,7 +225377,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "познания",
   "numberClass": "regular"
  },
  {
@@ -227427,7 +225738,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -227609,7 +225919,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "избиратели",
   "numberClass": "regular"
  },
  {
@@ -227841,7 +226150,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рейтинги",
   "numberClass": "regular"
  },
  {
@@ -227957,7 +226265,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "скважины",
   "numberClass": "regular"
  },
  {
@@ -228019,7 +226326,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "специальности",
   "numberClass": "regular"
  },
  {
@@ -228143,7 +226449,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "аргументы",
   "numberClass": "regular"
  },
  {
@@ -228205,7 +226510,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дверцы",
   "numberClass": "regular"
  },
  {
@@ -228265,7 +226569,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "огоньки",
   "numberClass": "regular"
  },
  {
@@ -228327,7 +226630,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -228387,7 +226689,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "строители",
   "numberClass": "regular"
  },
  {
@@ -228623,7 +226924,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "гены",
   "numberClass": "regular"
  },
  {
@@ -228859,7 +227159,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "певцы",
   "numberClass": "regular"
  },
  {
@@ -229043,7 +227342,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ремни",
   "numberClass": "regular"
  },
  {
@@ -229105,7 +227403,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "соперники",
   "numberClass": "regular"
  },
  {
@@ -229167,7 +227464,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "соседки",
   "numberClass": "regular"
  },
  {
@@ -229287,7 +227583,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "завтраки",
   "numberClass": "regular"
  },
  {
@@ -229405,7 +227700,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "подозрения",
   "numberClass": "regular"
  },
  {
@@ -229587,7 +227881,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "ружья",
   "numberClass": "regular"
  },
  {
@@ -229763,7 +228056,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "балконы",
   "numberClass": "regular"
  },
  {
@@ -229881,7 +228173,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "заслуги",
   "numberClass": "regular"
  },
  {
@@ -229999,7 +228290,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -230061,7 +228351,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "конторы",
   "numberClass": "regular"
  },
  {
@@ -230185,7 +228474,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "огороды",
   "numberClass": "regular"
  },
  {
@@ -230301,7 +228589,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "приложения",
   "numberClass": "regular"
  },
  {
@@ -230426,7 +228713,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "речки",
   "numberClass": "regular"
  },
  {
@@ -230488,7 +228774,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -230613,7 +228898,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -230673,7 +228957,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -230735,7 +229018,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "эры",
   "numberClass": "regular"
  },
  {
@@ -231095,7 +229377,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "трамваи",
   "numberClass": "regular"
  },
  {
@@ -231157,7 +229438,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "финалы",
   "numberClass": "regular"
  },
  {
@@ -231339,7 +229619,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "галстуки",
   "numberClass": "regular"
  },
  {
@@ -231401,7 +229680,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "колбасы",
   "numberClass": "regular"
  },
  {
@@ -231463,7 +229741,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -231585,7 +229862,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -231705,7 +229981,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "патриархи",
   "numberClass": "regular"
  },
  {
@@ -231839,7 +230114,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "реконструкции",
   "numberClass": "regular"
  },
  {
@@ -231961,7 +230235,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "набережные",
   "numberClass": "regular"
  },
  {
@@ -232141,7 +230414,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -232201,7 +230473,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "переживания",
   "numberClass": "regular"
  },
  {
@@ -232387,7 +230658,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "балансы",
   "numberClass": "regular"
  },
  {
@@ -232571,7 +230841,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "девки",
   "numberClass": "regular"
  },
  {
@@ -232633,7 +230902,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "знамёна",
   "numberClass": "regular"
  },
  {
@@ -232757,7 +231025,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -233109,7 +231376,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "юбилеи",
   "numberClass": "regular"
  },
  {
@@ -233347,7 +231613,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кирпичи",
   "numberClass": "regular"
  },
  {
@@ -233409,7 +231674,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "несчастья",
   "numberClass": "regular"
  },
  {
@@ -233471,7 +231735,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "плащи",
   "numberClass": "regular"
  },
  {
@@ -233593,7 +231856,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -233779,7 +232041,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "рюмки",
   "numberClass": "regular"
  },
  {
@@ -233839,7 +232100,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -234189,7 +232449,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "исходы",
   "numberClass": "regular"
  },
  {
@@ -234307,7 +232566,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -234369,7 +232627,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "оболочки",
   "numberClass": "regular"
  },
  {
@@ -234429,7 +232686,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -234549,7 +232805,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "поступления",
   "numberClass": "regular"
  },
  {
@@ -234727,7 +232982,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -234851,7 +233105,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "школьники",
   "numberClass": "regular"
  },
  {
@@ -234913,7 +233166,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -235031,7 +233283,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "комбинаты",
   "numberClass": "regular"
  },
  {
@@ -235149,7 +233400,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "местности",
   "numberClass": "regular"
  },
  {
@@ -235211,7 +233461,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "нападения",
   "numberClass": "regular"
  },
  {
@@ -235515,7 +233764,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "биографии",
   "numberClass": "regular"
  },
  {
@@ -235697,7 +233945,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "допросы",
   "numberClass": "regular"
  },
  {
@@ -235759,7 +234006,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "звенья",
   "numberClass": "regular"
  },
  {
@@ -235821,7 +234067,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "лишения",
   "numberClass": "regular"
  },
  {
@@ -235883,7 +234128,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -236069,7 +234313,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -236249,7 +234492,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -236728,7 +234970,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "запреты",
   "numberClass": "regular"
  },
  {
@@ -236790,7 +235031,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "командировки",
   "numberClass": "regular"
  },
  {
@@ -236908,7 +235148,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -237033,7 +235272,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "протесты",
   "numberClass": "regular"
  },
  {
@@ -237095,7 +235333,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "супы",
   "numberClass": "regular"
  },
  {
@@ -237275,7 +235512,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -237337,7 +235573,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -237399,7 +235634,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "мухи",
   "numberClass": "regular"
  },
  {
@@ -237461,7 +235695,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "педагоги",
   "numberClass": "regular"
  },
  {
@@ -238011,7 +236244,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "видения",
   "numberClass": "regular"
  },
  {
@@ -238197,7 +236429,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "интонации",
   "numberClass": "regular"
  },
  {
@@ -238315,7 +236546,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "общежития",
   "numberClass": "regular"
  },
  {
@@ -238375,7 +236605,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "печки",
   "numberClass": "regular"
  },
  {
@@ -238435,7 +236664,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "рассуждения",
   "numberClass": "regular"
  },
  {
@@ -238557,7 +236785,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "семинары",
   "numberClass": "regular"
  },
  {
@@ -238617,7 +236844,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "собственники",
   "numberClass": "regular"
  },
  {
@@ -238679,7 +236905,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "спектры",
   "numberClass": "regular"
  },
  {
@@ -238741,7 +236966,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "туристы",
   "numberClass": "regular"
  },
  {
@@ -238803,7 +237027,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -238930,7 +237153,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "молнии",
   "numberClass": "regular"
  },
  {
@@ -239054,7 +237276,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "охотники",
   "numberClass": "regular"
  },
  {
@@ -239116,7 +237337,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "пилоты",
   "numberClass": "regular"
  },
  {
@@ -239178,7 +237398,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -239422,7 +237641,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "семена",
   "numberClass": "regular"
  },
  {
@@ -239484,7 +237702,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -239544,7 +237761,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "композиции",
   "numberClass": "regular"
  },
  {
@@ -240018,7 +238234,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "самцы",
   "numberClass": "regular"
  },
  {
@@ -240080,7 +238295,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фракции",
   "numberClass": "regular"
  },
  {
@@ -240142,7 +238356,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "черепа",
   "numberClass": "regular"
  },
  {
@@ -240325,7 +238538,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "подачи",
   "numberClass": "regular"
  },
  {
@@ -240503,7 +238715,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "разрушения",
   "numberClass": "regular"
  },
  {
@@ -240687,7 +238898,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "бочки",
   "numberClass": "regular"
  },
  {
@@ -240749,7 +238959,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "гаражи",
   "numberClass": "regular"
  },
  {
@@ -240873,7 +239082,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -240991,7 +239199,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "носители",
   "numberClass": "regular"
  },
  {
@@ -241177,7 +239384,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "подтверждения",
   "numberClass": "regular"
  },
  {
@@ -241237,7 +239443,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -241299,7 +239504,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тренировки",
   "numberClass": "regular"
  },
  {
@@ -241361,7 +239565,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "алгоритмы",
   "numberClass": "regular"
  },
  {
@@ -241421,7 +239624,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "глазки",
   "numberClass": "regular"
  },
  {
@@ -241607,7 +239809,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "корпорации",
   "numberClass": "regular"
  },
  {
@@ -241669,7 +239870,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -241729,7 +239929,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "президиумы",
   "numberClass": "regular"
  },
  {
@@ -241796,7 +239995,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "принадлежности",
   "numberClass": "regular"
  },
  {
@@ -241858,7 +240056,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "провода",
   "numberClass": "regular"
  },
  {
@@ -242043,7 +240240,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -242105,7 +240301,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "возрождения",
   "numberClass": "regular"
  },
  {
@@ -242165,7 +240360,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "заключённые",
   "numberClass": "regular"
  },
  {
@@ -242227,7 +240421,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кружки",
   "numberClass": "regular"
  },
  {
@@ -242289,7 +240482,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "мячи",
   "numberClass": "regular"
  },
  {
@@ -242407,7 +240599,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "референдумы",
   "numberClass": "regular"
  },
  {
@@ -242531,7 +240722,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сосуды",
   "numberClass": "regular"
  },
  {
@@ -242593,7 +240783,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "спальни",
   "numberClass": "regular"
  },
  {
@@ -242775,7 +240964,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "диски",
   "numberClass": "regular"
  },
  {
@@ -243017,7 +241205,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "поэмы",
   "numberClass": "regular"
  },
  {
@@ -243193,7 +241380,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "размещения",
   "numberClass": "regular"
  },
  {
@@ -243429,7 +241615,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "склоны",
   "numberClass": "regular"
  },
  {
@@ -243551,7 +241736,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "юбки",
   "numberClass": "regular"
  },
  {
@@ -243613,7 +241797,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "акценты",
   "numberClass": "regular"
  },
  {
@@ -243673,7 +241856,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ванные",
   "numberClass": "regular"
  },
  {
@@ -243791,7 +241973,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "инвалиды",
   "numberClass": "regular"
  },
  {
@@ -243858,7 +242039,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лавки",
   "numberClass": "regular"
  },
  {
@@ -244098,7 +242278,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -244158,7 +242337,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "платформы",
   "numberClass": "regular"
  },
  {
@@ -244398,7 +242576,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -244458,7 +242635,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "цепочки",
   "numberClass": "regular"
  },
  {
@@ -244520,7 +242696,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бокалы",
   "numberClass": "regular"
  },
  {
@@ -244823,7 +242998,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кисти",
   "numberClass": "regular"
  },
  {
@@ -245009,7 +243183,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "подбородки",
   "numberClass": "regular"
  },
  {
@@ -245195,7 +243368,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бары",
   "numberClass": "regular"
  },
  {
@@ -245315,7 +243487,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -245377,7 +243548,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "идиоты",
   "numberClass": "regular"
  },
  {
@@ -245439,7 +243609,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "инфекции",
   "numberClass": "regular"
  },
  {
@@ -245501,7 +243670,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "килограммы",
   "numberClass": "regular"
  },
  {
@@ -245563,7 +243731,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "койки",
   "numberClass": "regular"
  },
  {
@@ -245623,7 +243790,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -245739,7 +243905,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -245801,7 +243966,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -245919,7 +244083,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "трибуны",
   "numberClass": "regular"
  },
  {
@@ -246157,7 +244320,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "заявки",
   "numberClass": "regular"
  },
  {
@@ -246277,7 +244439,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "обычаи",
   "numberClass": "regular"
  },
  {
@@ -246401,7 +244562,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "резервы",
   "numberClass": "regular"
  },
  {
@@ -246579,7 +244739,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "туры",
   "numberClass": "regular"
  },
  {
@@ -246641,7 +244800,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "якоря",
   "numberClass": "regular"
  },
  {
@@ -246701,7 +244859,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "дипломы",
   "numberClass": "regular"
  },
  {
@@ -246763,7 +244920,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -246825,7 +244981,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -247185,7 +245340,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "учительницы",
   "numberClass": "regular"
  },
  {
@@ -247247,7 +245401,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "ядра",
   "numberClass": "regular"
  },
  {
@@ -247307,7 +245460,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вороты",
   "numberClass": "regular"
  },
  {
@@ -247427,7 +245579,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "загадки",
   "numberClass": "regular"
  },
  {
@@ -247487,7 +245638,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "заметки",
   "numberClass": "regular"
  },
  {
@@ -247659,7 +245809,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "окошки",
   "numberClass": "regular"
  },
  {
@@ -247721,7 +245870,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "опоры",
   "numberClass": "regular"
  },
  {
@@ -247781,7 +245929,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -248083,7 +246230,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -248201,7 +246347,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "шинели",
   "numberClass": "regular"
  },
  {
@@ -248387,7 +246532,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "конструкторы",
   "numberClass": "regular"
  },
  {
@@ -248565,7 +246709,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ногти",
   "numberClass": "regular"
  },
  {
@@ -248627,7 +246770,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "предупреждения",
   "numberClass": "regular"
  },
  {
@@ -249340,7 +247482,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "национальности",
   "numberClass": "regular"
  },
  {
@@ -249402,7 +247543,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -249464,7 +247604,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "топоры",
   "numberClass": "regular"
  },
  {
@@ -249526,7 +247665,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "физики",
   "numberClass": "regular"
  },
  {
@@ -249588,7 +247726,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "филиалы",
   "numberClass": "regular"
  },
  {
@@ -249650,7 +247787,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "бароны",
   "numberClass": "regular"
  },
  {
@@ -249710,7 +247846,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "владыки",
   "numberClass": "regular"
  },
  {
@@ -249772,7 +247907,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "диаметры",
   "numberClass": "regular"
  },
  {
@@ -249954,7 +248088,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "конверты",
   "numberClass": "regular"
  },
  {
@@ -250014,7 +248147,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "митрополиты",
   "numberClass": "regular"
  },
  {
@@ -250198,7 +248330,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пляжи",
   "numberClass": "regular"
  },
  {
@@ -250258,7 +248389,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "покрытия",
   "numberClass": "regular"
  },
  {
@@ -250436,7 +248566,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "спортсмены",
   "numberClass": "regular"
  },
  {
@@ -250498,7 +248627,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тесты",
   "numberClass": "regular"
  },
  {
@@ -250676,7 +248804,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бараки",
   "numberClass": "regular"
  },
  {
@@ -250738,7 +248865,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "болота",
   "numberClass": "regular"
  },
  {
@@ -250916,7 +249042,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "евангелия",
   "numberClass": "regular"
  },
  {
@@ -251036,7 +249161,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "куклы",
   "numberClass": "regular"
  },
  {
@@ -251220,7 +249344,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -251338,7 +249461,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -251398,7 +249520,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "старшины",
   "numberClass": "regular"
  },
  {
@@ -251522,7 +249643,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "эволюции",
   "numberClass": "regular"
  },
  {
@@ -251704,7 +249824,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "женихи",
   "numberClass": "regular"
  },
  {
@@ -251828,7 +249947,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "лозунги",
   "numberClass": "regular"
  },
  {
@@ -251890,7 +250008,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "носки",
   "numberClass": "regular"
  },
  {
@@ -252010,7 +250127,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "патроны",
   "numberClass": "regular"
  },
  {
@@ -252070,7 +250186,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "поручения",
   "numberClass": "regular"
  },
  {
@@ -252132,7 +250247,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сыворотки",
   "numberClass": "regular"
  },
  {
@@ -252250,7 +250364,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "неудачи",
   "numberClass": "regular"
  },
  {
@@ -252612,7 +250725,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рассветы",
   "numberClass": "regular"
  },
  {
@@ -252672,7 +250784,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "сволочи",
   "numberClass": "regular"
  },
  {
@@ -252734,7 +250845,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -252857,7 +250967,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -252977,7 +251086,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "мелодии",
   "numberClass": "regular"
  },
  {
@@ -253039,7 +251147,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -253461,7 +251568,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -253577,7 +251683,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -253755,7 +251860,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "намёки",
   "numberClass": "regular"
  },
  {
@@ -253933,7 +252037,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "рабы",
   "numberClass": "regular"
  },
  {
@@ -253995,7 +252098,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -254055,7 +252157,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "раненые",
   "numberClass": "regular"
  },
  {
@@ -254233,7 +252334,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "котлы",
   "numberClass": "regular"
  },
  {
@@ -254349,7 +252449,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -254409,7 +252508,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -254469,7 +252567,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -254531,7 +252628,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "принцы",
   "numberClass": "regular"
  },
  {
@@ -254651,7 +252747,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пруды",
   "numberClass": "regular"
  },
  {
@@ -254829,7 +252924,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "колебания",
   "numberClass": "regular"
  },
  {
@@ -255003,7 +253097,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "снаряды",
   "numberClass": "regular"
  },
  {
@@ -255189,7 +253282,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -255249,7 +253341,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "индивиды",
   "numberClass": "regular"
  },
  {
@@ -255311,7 +253402,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "луки",
   "numberClass": "regular"
  },
  {
@@ -255613,7 +253703,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -255857,7 +253946,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пушки",
   "numberClass": "regular"
  },
  {
@@ -256033,7 +254121,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "токи",
   "numberClass": "regular"
  },
  {
@@ -256449,7 +254536,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кремы",
   "numberClass": "regular"
  },
  {
@@ -256629,7 +254715,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пароходы",
   "numberClass": "regular"
  },
  {
@@ -257115,7 +255200,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -257177,7 +255261,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -257239,7 +255322,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "машинки",
   "numberClass": "regular"
  },
  {
@@ -257301,7 +255383,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "обещания",
   "numberClass": "regular"
  },
  {
@@ -257363,7 +255444,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "препятствия",
   "numberClass": "regular"
  },
  {
@@ -257607,7 +255687,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "слушатели",
   "numberClass": "regular"
  },
  {
@@ -257669,7 +255748,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "супруги",
   "numberClass": "regular"
  },
  {
@@ -257791,7 +255869,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "бёдра",
   "numberClass": "regular"
  },
  {
@@ -257853,7 +255930,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "иллюзии",
   "numberClass": "regular"
  },
  {
@@ -258029,7 +256105,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -258211,7 +256286,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пейзажи",
   "numberClass": "regular"
  },
  {
@@ -258391,7 +256465,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -258451,7 +256524,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "упражнения",
   "numberClass": "regular"
  },
  {
@@ -258569,7 +256641,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -258631,7 +256702,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "гвозди",
   "numberClass": "regular"
  },
  {
@@ -258749,7 +256819,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "гостиные",
   "numberClass": "regular"
  },
  {
@@ -258811,7 +256880,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -259461,7 +257529,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "порывы",
   "numberClass": "regular"
  },
  {
@@ -259583,7 +257650,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сетки",
   "numberClass": "regular"
  },
  {
@@ -259645,7 +257711,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "союзники",
   "numberClass": "regular"
  },
  {
@@ -260229,7 +258294,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "поставщики",
   "numberClass": "regular"
  },
  {
@@ -260291,7 +258355,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "проходы",
   "numberClass": "regular"
  },
  {
@@ -260409,7 +258472,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "советники",
   "numberClass": "regular"
  },
  {
@@ -260821,7 +258883,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "квалификации",
   "numberClass": "regular"
  },
  {
@@ -260883,7 +258944,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "колодцы",
   "numberClass": "regular"
  },
  {
@@ -260945,7 +259005,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "пенсионеры",
   "numberClass": "regular"
  },
  {
@@ -261130,7 +259189,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "реплики",
   "numberClass": "regular"
  },
  {
@@ -261192,7 +259250,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сараи",
   "numberClass": "regular"
  },
  {
@@ -261254,7 +259311,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "словари",
   "numberClass": "regular"
  },
  {
@@ -261316,7 +259372,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тучи",
   "numberClass": "regular"
  },
  {
@@ -261618,7 +259673,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -261680,7 +259734,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "опросы",
   "numberClass": "regular"
  },
  {
@@ -261742,7 +259795,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "подполковники",
   "numberClass": "regular"
  },
  {
@@ -261860,7 +259912,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "провинции",
   "numberClass": "regular"
  },
  {
@@ -261920,7 +259971,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -262038,7 +260088,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "слоны",
   "numberClass": "regular"
  },
  {
@@ -262098,7 +260147,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "чины",
   "numberClass": "regular"
  },
  {
@@ -262160,7 +260208,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -262222,7 +260269,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "альбомы",
   "numberClass": "regular"
  },
  {
@@ -262284,7 +260330,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "вены",
   "numberClass": "regular"
  },
  {
@@ -262406,7 +260451,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "обследования",
   "numberClass": "regular"
  },
  {
@@ -262466,7 +260510,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "старты",
   "numberClass": "regular"
  },
  {
@@ -262528,7 +260571,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "шкуры",
   "numberClass": "regular"
  },
  {
@@ -262590,7 +260632,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "антитела",
   "numberClass": "regular"
  },
  {
@@ -262708,7 +260749,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "близкие",
   "numberClass": "regular"
  },
  {
@@ -262768,7 +260808,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "вспышки",
   "numberClass": "regular"
  },
  {
@@ -262830,7 +260869,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "драки",
   "numberClass": "regular"
  },
  {
@@ -262948,7 +260986,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "младенцы",
   "numberClass": "regular"
  },
  {
@@ -263130,7 +261167,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ноты",
   "numberClass": "regular"
  },
  {
@@ -263192,7 +261228,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -263257,7 +261292,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "пособия",
   "numberClass": "regular"
  },
  {
@@ -263379,7 +261413,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "происшествия",
   "numberClass": "regular"
  },
  {
@@ -263851,7 +261884,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -263973,7 +262005,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -264035,7 +262066,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "защитники",
   "numberClass": "regular"
  },
  {
@@ -264097,7 +262127,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "посещения",
   "numberClass": "regular"
  },
  {
@@ -264157,7 +262186,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "постройки",
   "numberClass": "regular"
  },
  {
@@ -264217,7 +262245,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пробы",
   "numberClass": "regular"
  },
  {
@@ -264337,7 +262364,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "снимки",
   "numberClass": "regular"
  },
  {
@@ -264397,7 +262423,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "стуки",
   "numberClass": "regular"
  },
  {
@@ -264459,7 +262484,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тетради",
   "numberClass": "regular"
  },
  {
@@ -264521,7 +262545,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "японцы",
   "numberClass": "regular"
  },
  {
@@ -264699,7 +262722,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "казаки",
   "numberClass": "regular"
  },
  {
@@ -264761,7 +262783,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кислоты",
   "numberClass": "regular"
  },
  {
@@ -264823,7 +262844,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -264947,7 +262967,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "отверстия",
   "numberClass": "regular"
  },
  {
@@ -265123,7 +263142,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "правонарушения",
   "numberClass": "regular"
  },
  {
@@ -265359,7 +263377,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "христиане",
   "numberClass": "regular"
  },
  {
@@ -265593,7 +263610,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -265715,7 +263731,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "краны",
   "numberClass": "regular"
  },
  {
@@ -265833,7 +263848,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -265895,7 +263909,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "переводчики",
   "numberClass": "regular"
  },
  {
@@ -266311,7 +264324,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "галереи",
   "numberClass": "regular"
  },
  {
@@ -266373,7 +264385,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "державы",
   "numberClass": "regular"
  },
  {
@@ -266491,7 +264502,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -266553,7 +264563,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "моряки",
   "numberClass": "regular"
  },
  {
@@ -266917,7 +264926,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "прохожие",
   "numberClass": "regular"
  },
  {
@@ -266979,7 +264987,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рога",
   "numberClass": "regular"
  },
  {
@@ -267103,7 +265110,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "самки",
   "numberClass": "regular"
  },
  {
@@ -267165,7 +265171,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "туфли",
   "numberClass": "regular"
  },
  {
@@ -267287,7 +265292,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -267467,7 +265471,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "велосипеды",
   "numberClass": "regular"
  },
  {
@@ -267529,7 +265532,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -267707,7 +265709,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -267767,7 +265768,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "инспекторы",
   "numberClass": "regular"
  },
  {
@@ -267889,7 +265889,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "мадам",
   "numberClass": "regular"
  },
  {
@@ -268013,7 +266012,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "племена",
   "numberClass": "regular"
  },
  {
@@ -268131,7 +266129,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "свиньи",
   "numberClass": "regular"
  },
  {
@@ -268193,7 +266190,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тротуары",
   "numberClass": "regular"
  },
  {
@@ -268313,7 +266309,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -268435,7 +266430,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -268555,7 +266549,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "батальоны",
   "numberClass": "regular"
  },
  {
@@ -268737,7 +266730,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -268797,7 +266789,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кубки",
   "numberClass": "regular"
  },
  {
@@ -269093,7 +267084,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "родные",
   "numberClass": "regular"
  },
  {
@@ -269155,7 +267145,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "стрелки",
   "numberClass": "regular"
  },
  {
@@ -269275,7 +267264,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ароматы",
   "numberClass": "regular"
  },
  {
@@ -269687,7 +267675,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "неожиданности",
   "numberClass": "regular"
  },
  {
@@ -269809,7 +267796,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "поклонники",
   "numberClass": "regular"
  },
  {
@@ -270051,7 +268037,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тракторы",
   "numberClass": "regular"
  },
  {
@@ -270113,7 +268098,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -270237,7 +268221,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ягоды",
   "numberClass": "regular"
  },
  {
@@ -270355,7 +268338,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "битвы",
   "numberClass": "regular"
  },
  {
@@ -270415,7 +268397,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "головки",
   "numberClass": "regular"
  },
  {
@@ -270539,7 +268520,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "зрелища",
   "numberClass": "regular"
  },
  {
@@ -270659,7 +268639,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "монахи",
   "numberClass": "regular"
  },
  {
@@ -270951,7 +268930,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "приоритеты",
   "numberClass": "regular"
  },
  {
@@ -271071,7 +269049,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тряпки",
   "numberClass": "regular"
  },
  {
@@ -271255,7 +269232,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "граммы",
   "numberClass": "regular"
  },
  {
@@ -271317,7 +269293,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дырки",
   "numberClass": "regular"
  },
  {
@@ -271441,7 +269416,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -271559,7 +269533,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "комедии",
   "numberClass": "regular"
  },
  {
@@ -271789,7 +269762,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -271913,7 +269885,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "побеги",
   "numberClass": "regular"
  },
  {
@@ -272040,7 +270011,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "провалы",
   "numberClass": "regular"
  },
  {
@@ -272105,7 +270075,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "разряды",
   "numberClass": "regular"
  },
  {
@@ -272221,7 +270190,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -272283,7 +270251,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тылы",
   "numberClass": "regular"
  },
  {
@@ -272463,7 +270430,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "базары",
   "numberClass": "regular"
  },
  {
@@ -272585,7 +270551,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "брёвна",
   "numberClass": "regular"
  },
  {
@@ -272707,7 +270672,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "дежурные",
   "numberClass": "regular"
  },
  {
@@ -272769,7 +270733,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "драмы",
   "numberClass": "regular"
  },
  {
@@ -272831,7 +270794,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "климаты",
   "numberClass": "regular"
  },
  {
@@ -273071,7 +271033,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "наследники",
   "numberClass": "regular"
  },
  {
@@ -273131,7 +271092,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -273193,7 +271153,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -273311,7 +271270,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "нити",
   "numberClass": "regular"
  },
  {
@@ -273433,7 +271391,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -273551,7 +271508,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -273613,7 +271569,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -273737,7 +271692,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -273799,7 +271753,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "спинки",
   "numberClass": "regular"
  },
  {
@@ -273988,7 +271941,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "должники",
   "numberClass": "regular"
  },
  {
@@ -274346,7 +272298,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ранги",
   "numberClass": "regular"
  },
  {
@@ -274466,7 +272417,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -274586,7 +272536,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -274702,7 +272651,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "выявления",
   "numberClass": "regular"
  },
  {
@@ -274767,7 +272715,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "графики",
   "numberClass": "regular"
  },
  {
@@ -274829,7 +272776,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дозы",
   "numberClass": "regular"
  },
  {
@@ -275011,7 +272957,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "интерьеры",
   "numberClass": "regular"
  },
  {
@@ -275131,7 +273076,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "королевы",
   "numberClass": "regular"
  },
  {
@@ -275193,7 +273137,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "кредиторы",
   "numberClass": "regular"
  },
  {
@@ -275552,7 +273495,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "отборы",
   "numberClass": "regular"
  },
  {
@@ -275730,7 +273672,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "призы",
   "numberClass": "regular"
  },
  {
@@ -275912,7 +273853,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "уменьшения",
   "numberClass": "regular"
  },
  {
@@ -275974,7 +273914,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "урожаи",
   "numberClass": "regular"
  },
  {
@@ -276092,7 +274031,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "барьеры",
   "numberClass": "regular"
  },
  {
@@ -276272,7 +274210,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -276334,7 +274271,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ёлки",
   "numberClass": "regular"
  },
  {
@@ -276394,7 +274330,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "захваты",
   "numberClass": "regular"
  },
  {
@@ -276456,7 +274391,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "клиники",
   "numberClass": "regular"
  },
  {
@@ -276572,7 +274506,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -276930,7 +274863,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "частоты",
   "numberClass": "regular"
  },
  {
@@ -277110,7 +275042,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "быки",
   "numberClass": "regular"
  },
  {
@@ -277172,7 +275103,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "гитары",
   "numberClass": "regular"
  },
  {
@@ -277296,7 +275226,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лужи",
   "numberClass": "regular"
  },
  {
@@ -277478,7 +275407,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -277602,7 +275530,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "раки",
   "numberClass": "regular"
  },
  {
@@ -277726,7 +275653,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "спирты",
   "numberClass": "regular"
  },
  {
@@ -278024,7 +275950,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кузова",
   "numberClass": "regular"
  },
  {
@@ -278086,7 +276011,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -278148,7 +276072,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "матросы",
   "numberClass": "regular"
  },
  {
@@ -278332,7 +276255,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "разводы",
   "numberClass": "regular"
  },
  {
@@ -278454,7 +276376,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сантиметры",
   "numberClass": "regular"
  },
  {
@@ -278578,7 +276499,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "создатели",
   "numberClass": "regular"
  },
  {
@@ -278640,7 +276560,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "хирурги",
   "numberClass": "regular"
  },
  {
@@ -278758,7 +276677,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -278820,7 +276738,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "ванны",
   "numberClass": "regular"
  },
  {
@@ -278882,7 +276799,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "государи",
   "numberClass": "regular"
  },
  {
@@ -279000,7 +276916,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "желудки",
   "numberClass": "regular"
  },
  {
@@ -279062,7 +276977,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "изобретения",
   "numberClass": "regular"
  },
  {
@@ -279180,7 +277094,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "миссии",
   "numberClass": "regular"
  },
  {
@@ -279416,7 +277329,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рейсы",
   "numberClass": "regular"
  },
  {
@@ -279658,7 +277570,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -279892,7 +277803,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -280012,7 +277922,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "жиры",
   "numberClass": "regular"
  },
  {
@@ -280190,7 +278099,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "каноны",
   "numberClass": "regular"
  },
  {
@@ -280250,7 +278158,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "компенсации",
   "numberClass": "regular"
  },
  {
@@ -280428,7 +278335,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "представительства",
   "numberClass": "regular"
  },
  {
@@ -280490,7 +278396,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -280552,7 +278457,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "рыбаки",
   "numberClass": "regular"
  },
  {
@@ -280728,7 +278632,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -280790,7 +278693,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "щиты",
   "numberClass": "regular"
  },
  {
@@ -280852,7 +278754,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "апостолы",
   "numberClass": "regular"
  },
  {
@@ -280914,7 +278815,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бульвары",
   "numberClass": "regular"
  },
  {
@@ -280976,7 +278876,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -281630,7 +279529,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "уравнения",
   "numberClass": "regular"
  },
  {
@@ -281692,7 +279590,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -281752,7 +279649,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -281814,7 +279710,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ансамбли",
   "numberClass": "regular"
  },
  {
@@ -281938,7 +279833,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "диссертации",
   "numberClass": "regular"
  },
  {
@@ -282000,7 +279894,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "зайцы",
   "numberClass": "regular"
  },
  {
@@ -282062,7 +279955,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -282124,7 +280016,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "комиссары",
   "numberClass": "regular"
  },
  {
@@ -282184,7 +280075,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "консультации",
   "numberClass": "regular"
  },
  {
@@ -282304,7 +280194,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "лампочки",
   "numberClass": "regular"
  },
  {
@@ -282538,7 +280427,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "подоконники",
   "numberClass": "regular"
  },
  {
@@ -282660,7 +280548,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "рёбра",
   "numberClass": "regular"
  },
  {
@@ -282722,7 +280609,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "столкновения",
   "numberClass": "regular"
  },
  {
@@ -283196,7 +281082,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "приключения",
   "numberClass": "regular"
  },
  {
@@ -283258,7 +281143,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -283556,7 +281440,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "фрукты",
   "numberClass": "regular"
  },
  {
@@ -283618,7 +281501,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "вдовы",
   "numberClass": "regular"
  },
  {
@@ -283680,7 +281562,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "взятки",
   "numberClass": "regular"
  },
  {
@@ -283742,7 +281623,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "включения",
   "numberClass": "regular"
  },
  {
@@ -283804,7 +281684,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -283922,7 +281801,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "общины",
   "numberClass": "regular"
  },
  {
@@ -284044,7 +281922,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "оси",
   "numberClass": "regular"
  },
  {
@@ -284106,7 +281983,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "пулемёты",
   "numberClass": "regular"
  },
  {
@@ -284168,7 +282044,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -284230,7 +282105,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "цитаты",
   "numberClass": "regular"
  },
  {
@@ -284290,7 +282164,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "чайники",
   "numberClass": "regular"
  },
  {
@@ -284414,7 +282287,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "балеты",
   "numberClass": "regular"
  },
  {
@@ -284476,7 +282348,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "вести",
   "numberClass": "regular"
  },
  {
@@ -284596,7 +282467,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "казни",
   "numberClass": "regular"
  },
  {
@@ -284656,7 +282526,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "командующие",
   "numberClass": "regular"
  },
  {
@@ -284838,7 +282707,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "окраины",
   "numberClass": "regular"
  },
  {
@@ -284962,7 +282830,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "пророки",
   "numberClass": "regular"
  },
  {
@@ -285022,7 +282889,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "спасители",
   "numberClass": "regular"
  },
  {
@@ -285084,7 +282950,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "бабочки",
   "numberClass": "regular"
  },
  {
@@ -285200,7 +283065,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "навыки",
   "numberClass": "regular"
  },
  {
@@ -285262,7 +283126,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -285387,7 +283250,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пробки",
   "numberClass": "regular"
  },
  {
@@ -285505,7 +283367,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "ручьи",
   "numberClass": "regular"
  },
  {
@@ -285685,7 +283546,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "сэры",
   "numberClass": "regular"
  },
  {
@@ -285805,7 +283665,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -285987,7 +283846,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -286049,7 +283907,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "молекулы",
   "numberClass": "regular"
  },
  {
@@ -286467,7 +284324,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "разведчики",
   "numberClass": "regular"
  },
  {
@@ -286527,7 +284383,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "рамы",
   "numberClass": "regular"
  },
  {
@@ -286587,7 +284442,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "рубахи",
   "numberClass": "regular"
  },
  {
@@ -286709,7 +284563,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "таблетки",
   "numberClass": "regular"
  },
  {
@@ -286887,7 +284740,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "взводы",
   "numberClass": "regular"
  },
  {
@@ -287065,7 +284917,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "дистанции",
   "numberClass": "regular"
  },
  {
@@ -287245,7 +285096,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -287425,7 +285275,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "палочки",
   "numberClass": "regular"
  },
  {
@@ -287487,7 +285336,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "поцелуи",
   "numberClass": "regular"
  },
  {
@@ -287547,7 +285395,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "прихожие",
   "numberClass": "regular"
  },
  {
@@ -287729,7 +285576,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "сессии",
   "numberClass": "regular"
  },
  {
@@ -287789,7 +285635,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "служащие",
   "numberClass": "regular"
  },
  {
@@ -288027,7 +285872,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "убытки",
   "numberClass": "regular"
  },
  {
@@ -288149,7 +285993,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "увлечения",
   "numberClass": "regular"
  },
  {
@@ -288271,7 +286114,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "коллегии",
   "numberClass": "regular"
  },
  {
@@ -288445,7 +286287,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -288629,7 +286470,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -288689,7 +286529,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -288751,7 +286590,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -288935,7 +286773,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "кассы",
   "numberClass": "regular"
  },
  {
@@ -288995,7 +286832,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "лауреаты",
   "numberClass": "regular"
  },
  {
@@ -289057,7 +286893,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "прыжки",
   "numberClass": "regular"
  },
  {
@@ -289122,7 +286957,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "тройки",
   "numberClass": "regular"
  },
  {
@@ -289298,7 +287132,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "щенки",
   "numberClass": "regular"
  },
  {
@@ -289422,7 +287255,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "вздохи",
   "numberClass": "regular"
  },
  {
@@ -289546,7 +287378,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "выходные",
   "numberClass": "regular"
  },
  {
@@ -289608,7 +287439,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "гнёзда",
   "numberClass": "regular"
  },
  {
@@ -289668,7 +287498,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "демонстрации",
   "numberClass": "regular"
  },
  {
@@ -290144,7 +287973,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "феномены",
   "numberClass": "regular"
  },
  {
@@ -290204,7 +288032,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "юристы",
   "numberClass": "regular"
  },
  {
@@ -290266,7 +288093,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -290390,7 +288216,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "героини",
   "numberClass": "regular"
  },
  {
@@ -290452,7 +288277,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "дополнения",
   "numberClass": "regular"
  },
  {
@@ -290514,7 +288338,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -290808,7 +288631,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "официанты",
   "numberClass": "regular"
  },
  {
@@ -291112,7 +288934,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -291174,7 +288995,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "стрелы",
   "numberClass": "regular"
  },
  {
@@ -291234,7 +289054,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "чеченцы",
   "numberClass": "regular"
  },
  {
@@ -291294,7 +289113,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "шахты",
   "numberClass": "regular"
  },
  {
@@ -291530,7 +289348,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "воплощения",
   "numberClass": "regular"
  },
  {
@@ -291592,7 +289409,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -291652,7 +289468,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "дизайны",
   "numberClass": "regular"
  },
  {
@@ -291774,7 +289589,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "милости",
   "numberClass": "regular"
  },
  {
@@ -291839,7 +289653,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "очки",
   "numberClass": "regular"
  },
  {
@@ -291957,7 +289770,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "потомки",
   "numberClass": "regular"
  },
  {
@@ -292019,7 +289831,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рецепты",
   "numberClass": "regular"
  },
  {
@@ -292253,7 +290064,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "атомы",
   "numberClass": "regular"
  },
  {
@@ -292315,7 +290125,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "букеты",
   "numberClass": "regular"
  },
  {
@@ -292377,7 +290186,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -292495,7 +290303,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "змеи",
   "numberClass": "regular"
  },
  {
@@ -292555,7 +290362,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "китайцы",
   "numberClass": "regular"
  },
  {
@@ -292615,7 +290421,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -292737,7 +290542,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -292975,7 +290779,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "полотенца",
   "numberClass": "regular"
  },
  {
@@ -293097,7 +290900,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -293215,7 +291017,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "суждения",
   "numberClass": "regular"
  },
  {
@@ -293275,7 +291076,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тиражи",
   "numberClass": "regular"
  },
  {
@@ -293397,7 +291197,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "шпионы",
   "numberClass": "regular"
  },
  {
@@ -293459,7 +291258,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -293643,7 +291441,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "жильцы",
   "numberClass": "regular"
  },
  {
@@ -293947,7 +291744,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "осколки",
   "numberClass": "regular"
  },
  {
@@ -294009,7 +291805,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "палубы",
   "numberClass": "regular"
  },
  {
@@ -294071,7 +291866,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "превращения",
   "numberClass": "regular"
  },
  {
@@ -294249,7 +292043,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -294309,7 +292102,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "тезисы",
   "numberClass": "regular"
  },
  {
@@ -294369,7 +292161,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -294431,7 +292222,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "берёзы",
   "numberClass": "regular"
  },
  {
@@ -294493,7 +292283,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -294555,7 +292344,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "веки",
   "numberClass": "regular"
  },
  {
@@ -294677,7 +292465,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "задолженности",
   "numberClass": "regular"
  },
  {
@@ -294739,7 +292526,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "залоги",
   "numberClass": "regular"
  },
  {
@@ -294911,7 +292697,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "накопления",
   "numberClass": "regular"
  },
  {
@@ -295215,7 +293000,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пещеры",
   "numberClass": "regular"
  },
  {
@@ -295275,7 +293059,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "приступы",
   "numberClass": "regular"
  },
  {
@@ -295337,7 +293120,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -295517,7 +293299,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "спички",
   "numberClass": "regular"
  },
  {
@@ -295579,7 +293360,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "струи",
   "numberClass": "regular"
  },
  {
@@ -295641,7 +293421,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -295879,7 +293658,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -295939,7 +293717,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "внесения",
   "numberClass": "regular"
  },
  {
@@ -295999,7 +293776,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -296115,7 +293891,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -296237,7 +294012,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "наименования",
   "numberClass": "regular"
  },
  {
@@ -296479,7 +294253,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "плакаты",
   "numberClass": "regular"
  },
  {
@@ -296659,7 +294432,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -296897,7 +294669,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -296959,7 +294730,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "бури",
   "numberClass": "regular"
  },
  {
@@ -297146,7 +294916,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "закономерности",
   "numberClass": "regular"
  },
  {
@@ -297448,7 +295217,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "очерки",
   "numberClass": "regular"
  },
  {
@@ -297630,7 +295398,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -297752,7 +295519,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "церемонии",
   "numberClass": "regular"
  },
  {
@@ -297870,7 +295636,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "аэродромы",
   "numberClass": "regular"
  },
  {
@@ -297932,7 +295697,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "буфеты",
   "numberClass": "regular"
  },
  {
@@ -297994,7 +295758,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "винтовки",
   "numberClass": "regular"
  },
  {
@@ -298056,7 +295819,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -298178,7 +295940,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -298302,7 +296063,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "плоскости",
   "numberClass": "regular"
  },
  {
@@ -298364,7 +296124,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "плотности",
   "numberClass": "regular"
  },
  {
@@ -298484,7 +296243,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -298606,7 +296364,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -298722,7 +296479,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": "творения",
   "numberClass": "regular"
  },
  {
@@ -298964,7 +296720,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "выработки",
   "numberClass": "regular"
  },
  {
@@ -299086,7 +296841,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "гипотезы",
   "numberClass": "regular"
  },
  {
@@ -299208,7 +296962,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "зады",
   "numberClass": "regular"
  },
  {
@@ -299270,7 +297023,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "заложники",
   "numberClass": "regular"
  },
  {
@@ -299332,7 +297084,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "инстинкты",
   "numberClass": "regular"
  },
  {
@@ -299394,7 +297145,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кружки",
   "numberClass": "regular"
  },
  {
@@ -299454,7 +297204,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -299634,7 +297383,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -299821,7 +297569,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -300005,7 +297752,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "совпадения",
   "numberClass": "regular"
  },
  {
@@ -300357,7 +298103,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "f",
   "animate": "no",
-  "pluralForm": "интерпретации",
   "numberClass": "regular"
  },
  {
@@ -300419,7 +298164,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "классификации",
   "numberClass": "regular"
  },
  {
@@ -300481,7 +298225,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "конгрессы",
   "numberClass": "regular"
  },
  {
@@ -300541,7 +298284,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "кончики",
   "numberClass": "regular"
  },
  {
@@ -300837,7 +298579,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "перчатки",
   "numberClass": "regular"
  },
  {
@@ -300897,7 +298638,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -301019,7 +298759,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пуговицы",
   "numberClass": "regular"
  },
  {
@@ -301143,7 +298882,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -301265,7 +299003,6 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "no",
-  "pluralForm": "диапазоны",
   "numberClass": "regular"
  },
  {
@@ -301505,7 +299242,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "пасти",
   "numberClass": "regular"
  },
  {
@@ -326373,7 +324109,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "аптеки",
   "numberClass": "regular"
  },
  {
@@ -326435,7 +324170,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "арбузы",
   "numberClass": "regular"
  },
  {
@@ -326497,7 +324231,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "алфавиты",
   "numberClass": "regular"
  },
  {
@@ -326559,7 +324292,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "бананы",
   "numberClass": "regular"
  },
  {
@@ -326621,7 +324353,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "ежи",
   "numberClass": "regular"
  },
  {
@@ -326683,7 +324414,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -326745,7 +324475,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "йогурты",
   "numberClass": "regular"
  },
  {
@@ -326807,7 +324536,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -326869,7 +324597,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -326931,7 +324658,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -326993,7 +324719,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -327055,7 +324780,6 @@ const LEXICON_COMER = [
   },
   "gender": null,
   "animate": "sí",
-  "pluralForm": null,
   "numberClass": "pluraliaTantum"
  },
  {
@@ -327504,7 +325228,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "сыры",
   "numberClass": "regular"
  },
  {
@@ -327566,7 +325289,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "стадионы",
   "numberClass": "regular"
  },
  {
@@ -327628,7 +325350,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "апельсины",
   "numberClass": "regular"
  },
  {
@@ -327690,7 +325411,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "помидоры",
   "numberClass": "regular"
  },
  {
@@ -327752,7 +325472,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "лимоны",
   "numberClass": "regular"
  },
  {
@@ -327814,7 +325533,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -327876,7 +325594,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "рюкзаки",
   "numberClass": "regular"
  },
  {
@@ -327938,7 +325655,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "тигры",
   "numberClass": "regular"
  },
  {
@@ -328000,7 +325716,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "крокодилы",
   "numberClass": "regular"
  },
  {
@@ -328062,7 +325777,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "дельфины",
   "numberClass": "regular"
  },
  {
@@ -328124,7 +325838,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "верблюды",
   "numberClass": "regular"
  },
  {
@@ -328186,7 +325899,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "петухи",
   "numberClass": "regular"
  },
  {
@@ -328248,7 +325960,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "бараны",
   "numberClass": "regular"
  },
  {
@@ -328310,7 +326021,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "кролики",
   "numberClass": "regular"
  },
  {
@@ -328372,7 +326082,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "миллионеры",
   "numberClass": "regular"
  },
  {
@@ -328434,7 +326143,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "повара",
   "numberClass": "regular"
  },
  {
@@ -328496,7 +326204,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "космонавты",
   "numberClass": "regular"
  },
  {
@@ -328558,7 +326265,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "химики",
   "numberClass": "regular"
  },
  {
@@ -328620,7 +326326,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "календари",
   "numberClass": "regular"
  },
  {
@@ -328682,7 +326387,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "нули",
   "numberClass": "regular"
  },
  {
@@ -328744,7 +326448,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -328806,7 +326509,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "олени",
   "numberClass": "regular"
  },
  {
@@ -328868,7 +326570,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "гуси",
   "numberClass": "regular"
  },
  {
@@ -328930,7 +326631,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "тюлени",
   "numberClass": "regular"
  },
  {
@@ -328992,7 +326692,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "попугаи",
   "numberClass": "regular"
  },
  {
@@ -329054,7 +326753,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "фермы",
   "numberClass": "regular"
  },
  {
@@ -329116,7 +326814,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "sí",
-  "pluralForm": "студентки",
   "numberClass": "regular"
  },
  {
@@ -329178,7 +326875,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -329240,7 +326936,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -329302,7 +326997,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "значки",
   "numberClass": "regular"
  },
  {
@@ -329364,7 +327058,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "орлы",
   "numberClass": "regular"
  },
  {
@@ -329426,7 +327119,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "боевики",
   "numberClass": "regular"
  },
  {
@@ -329488,7 +327180,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "стихи",
   "numberClass": "regular"
  },
  {
@@ -329608,7 +327299,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": "нёба",
   "numberClass": "regular"
  },
  {
@@ -329670,7 +327360,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "замки",
   "numberClass": "regular"
  },
  {
@@ -329732,7 +327421,6 @@ const LEXICON_COMER = [
   },
   "gender": "n",
   "animate": "no",
-  "pluralForm": null,
   "numberClass": "singulariaTantum"
  },
  {
@@ -329794,7 +327482,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "полы",
   "numberClass": "regular"
  },
  {
@@ -329856,7 +327543,6 @@ const LEXICON_COMER = [
   },
   "gender": "f",
   "animate": "no",
-  "pluralForm": "среды",
   "numberClass": "regular"
  },
  {
@@ -329918,7 +327604,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "посты",
   "numberClass": "regular"
  },
  {
@@ -329980,7 +327665,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "патроны",
   "numberClass": "regular"
  },
  {
@@ -330042,7 +327726,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "луки",
   "numberClass": "regular"
  },
  {
@@ -330104,7 +327787,6 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "sí",
-  "pluralForm": "раки",
   "numberClass": "regular"
  },
  {
@@ -330419,7 +328101,67 @@ const LEXICON_COMER = [
   },
   "gender": "m",
   "animate": "no",
-  "pluralForm": "листы",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05470",
+  "ru": "корпус",
+  "acento": "ко́рпус",
+  "posNormalized": "sustantivo",
+  "translit": "kórpus",
+  "ipa": "kˈorpus",
+  "senses": [
+   {
+    "es": "tronco (del cuerpo), torso",
+    "definitionEs": "Parte central del cuerpo humano o de un animal, sin la cabeza ni las extremidades.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "корпус",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Homógrafo de CMR-01939: mismo acento, plurales distintos: корпуса́ (edificios, cascos) / ко́рпусы (troncos del cuerpo).",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "homografoSeparado": true
+  },
+  "gender": "m",
+  "animate": "no",
   "numberClass": "regular"
  }
 ];
