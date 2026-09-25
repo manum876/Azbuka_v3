@@ -331,8 +331,8 @@ window.azDiff = azDiff;
 /* ── Vista de la corrección (si la página usa Preact) ──────────
    AzCorreccion({ r, dark })  r = resultado de azCorregir
    Muestra: resultado; tu respuesta tal como la escribiste, con las
-   palabras equivocadas subrayadas (rojo = Mal o sobra, naranja =
-   Casi); la respuesta correcta con las palabras corregidas o que
+   palabras equivocadas en color y subrayadas (rojo = Mal o sobra,
+   naranja = Casi); la respuesta correcta con las palabras corregidas o que
    faltaban en verde; y la explicación de cada error. */
 (function () {
   if (typeof React === "undefined") return;
@@ -351,8 +351,8 @@ window.azDiff = azDiff;
       .az-cr-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:12px 0 5px;}
       .az-cr-linea{font-size:17px;font-weight:600;color:${c.text};line-height:1.6;word-break:break-word;}
       .az-cr-w{display:inline-block;margin-right:6px;}
-      .az-cr-w.casi{text-decoration:underline 2px #E2884A;text-underline-offset:4px;}
-      .az-cr-w.mal,.az-cr-w.sobra{text-decoration:underline 2px #B5605C;text-underline-offset:4px;}
+      .az-cr-w.casi{color:#E2884A;text-decoration:underline 2px #E2884A;text-underline-offset:4px;}
+      .az-cr-w.mal,.az-cr-w.sobra{color:#D9776F;text-decoration:underline 2px #B5605C;text-underline-offset:4px;}
       .az-cr-ok{font-size:17px;font-weight:700;color:${c.gold};line-height:1.5;}
       .az-cr-fix{color:#4CAF82;}
       .az-cr-exp{font-size:13.5px;line-height:1.5;color:${c.textSub};margin-top:6px;padding-left:10px;border-left:2px solid ${c.border};}
