@@ -54,6 +54,10 @@ function azClaveRu(t) {
   if (/[а-яё]/.test(w)) w = w.replace(/[acepxyk]/g, function (ch) { return AZ_LAT_CYR[ch]; });
   return w.replace(/ё/g, "е");
 }
+/* Transliteración: además, y = i y sin apóstrofos ('ya' = 'ia', «syest» = «s'yest») */
+function azClaveTr(t) {
+  return azClaveEs(t).replace(/y/g, "i").replace(/['"`’ʼ]/g, "");
+}
 function azClaveEs(t) {
   return azSinAcento(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").normalize("NFC");
 }
@@ -139,7 +143,7 @@ function azParseEsperada(s) {
 
 /* ── Clasificar una palabra escrita contra la esperada ── */
 function azClasificar(u, e, modo) {
-  const clave = modo === "ru" ? azClaveRu : azClaveEs;
+  const clave = modo === "ru" ? azClaveRu : modo === "translit" ? azClaveTr : azClaveEs;
   const ku = clave(u), ke = clave(e);
   const r = { escrito: u, esperado: e, estado: "ok", motivo: "", letras: null };
   if (ku === ke) {
@@ -156,6 +160,12 @@ function azClasificar(u, e, modo) {
     return r;
   }
 
+  if (/[a-z]/i.test(u) && !/[а-яё]/i.test(u)) {
+    r.estado = "mal";
+    r.motivo = "«" + u + "» está escrito con letras latinas. Usá el teclado ruso (en la práctica podés activarlo en pantalla).";
+    return r;
+  }
+  if (ke.length === 1) { r.estado = "mal"; r.motivo = "Acá va la letra «" + e + "»."; return r; }
   const au = azAnalizarPalabra(u), ae = azAnalizarPalabra(e);
   const comun = au.filter(function (x) { return ae.some(function (y) { return y.id === x.id; }); })[0];
   if (comun) {
@@ -188,7 +198,7 @@ function azClasificar(u, e, modo) {
 
 /* ── Alinear palabras escritas con las esperadas ── */
 function azAlinear(U, E, modo) {
-  const clave = modo === "ru" ? azClaveRu : azClaveEs;
+  const clave = modo === "ru" ? azClaveRu : modo === "translit" ? azClaveTr : azClaveEs;
   const n = E.length, m = U.length;
   const costo = function (e, u) {
     const a = clave(u), b = clave(e.t);
@@ -234,7 +244,7 @@ function azCorregir(respuesta, esperadas, opts) {
     return modo === "es" ? toks.filter(function (t) { return !AZ_ARTICULOS_ES.has(azClaveEs(t.t || t)); }) : toks;
   };
   /* «санкт петербург» → «санкт-петербург» si la esperada lleva guion */
-  const clave0 = modo === "ru" ? azClaveRu : azClaveEs;
+  const clave0 = modo === "ru" ? azClaveRu : modo === "translit" ? azClaveTr : azClaveEs;
   const conGuion = {};
   lista.forEach(function (x) { azParseEsperada(x).forEach(function (t) { if (t.t.indexOf("-") > 0) conGuion[clave0(t.t.split("-")[0])] = true; }); });
   const crudos = azTokens(respuesta).reduce(function (acc, t) {
@@ -278,7 +288,7 @@ function azCorregir(respuesta, esperadas, opts) {
 
   /* ¿Mismas palabras en otro orden? Casi, con el orden esperado */
   if (peor < AZ_R_BIEN && lista.length) {
-    const clave = modo === "ru" ? azClaveRu : azClaveEs;
+    const clave = modo === "ru" ? azClaveRu : modo === "translit" ? azClaveTr : azClaveEs;
     const bolsa = function (T) { return T.filter(function (t) { return !t.opc; }).map(function (t) { return clave(t.t || t); }).sort().join(" "); };
     const bu = bolsa(U);
     const ok = lista.some(function (s) { return bolsa(limpiar(azParseEsperada(s))) === bu; });

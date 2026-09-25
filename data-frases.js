@@ -2,6 +2,8 @@
    DATA-FRASES.JS — Frases útiles (fórmulas comunicativas)
    ------------------------------------------------------------
    Versión v3 (24/09/2026). Una frase es una expresión que se aprende
+   Actualizado el 25/09/2026: la preposición до, átona, se translitera
+   como suena («Da svidániya», «da záftra»).
    entera: Здра́вствуйте, Как дела́?, Не за что… Muchas no son una
    palabra del léxico, por eso viven acá.
    Cada frase: id estable FRS-xxx, función (DLG_FUNCIONES), texto con
@@ -23,8 +25,8 @@ const FRASES = [
   {"id":"FRS-007","funcion":"saludar","ru":"Как у вас дела́?","tr":"Kak u vas dilá?","es":"¿Cómo le va?","registro":"вы","nivel":"A1","uso":"La versión con вы de как дела́.","cul":"CUL-002","lex":["CMR-00019","CMR-00021","CMR-00038","CMR-00065"]},
   {"id":"FRS-008","funcion":"saludar","ru":"Норма́льно.","tr":"Narmálna.","es":"Bien, sin novedades.","registro":"","nivel":"A1","uso":"La respuesta más común a как дела́.","cul":"CUL-002","lex":["CMR-03966"]},
   {"id":"FRS-009","funcion":"despedirse","ru":"Пока́!","tr":"Paká!","es":"¡Chau!","registro":"ты","nivel":"A1","uso":"La despedida de confianza.","cul":"CUL-001","lex":["CMR-00267"]},
-  {"id":"FRS-010","funcion":"despedirse","ru":"До свида́ния!","tr":"Do svidániya!","es":"¡Hasta luego!","registro":"вы","nivel":"A1","uso":"La despedida formal; literalmente, «hasta volver a vernos».","cul":"CUL-001","lex":["CMR-00051","CMR-02946"]},
-  {"id":"FRS-011","funcion":"despedirse","ru":"До за́втра!","tr":"Do záftra!","es":"¡Hasta mañana!","registro":"","nivel":"A1","uso":"Sirve con ты y con вы.","lex":["CMR-00051","CMR-00865"]},
+  {"id":"FRS-010","funcion":"despedirse","ru":"До свида́ния!","tr":"Da svidániya!","es":"¡Hasta luego!","registro":"вы","nivel":"A1","uso":"La despedida formal; literalmente, «hasta volver a vernos».","cul":"CUL-001","lex":["CMR-00051","CMR-02946"]},
+  {"id":"FRS-011","funcion":"despedirse","ru":"До за́втра!","tr":"Da záftra!","es":"¡Hasta mañana!","registro":"","nivel":"A1","uso":"Sirve con ты y con вы.","lex":["CMR-00051","CMR-00865"]},
   {"id":"FRS-012","funcion":"despedirse","ru":"Уви́димся!","tr":"Uvídimsia!","es":"¡Nos vemos!","registro":"","nivel":"A1","uso":"Informal. Con fecha: уви́димся за́втра.","lex":["CMR-05249"]},
   {"id":"FRS-013","funcion":"despedirse","ru":"Мне пора́.","tr":"Mnie pará.","es":"Me tengo que ir.","registro":"","nivel":"A1","uso":"Literalmente, «para mí ya es hora». Para cortar una charla con amabilidad.","lex":["CMR-00005","CMR-00273"]},
   {"id":"FRS-014","funcion":"despedirse","ru":"Споко́йной но́чи!","tr":"Spakóinai nóchi!","es":"¡Que descanses!","registro":"","nivel":"A1","uso":"Solo antes de ir a dormir.","lex":["CMR-01488","CMR-00236"]},
@@ -51,7 +53,7 @@ const FRASES = [
   {"id":"FRS-035","funcion":"pedir","ru":"Возьму́.","tr":"Vazmú.","es":"Lo llevo.","registro":"","nivel":"A1","uso":"Futuro de взять: «lo voy a llevar».","lex":["CMR-00175"]},
   {"id":"FRS-036","funcion":"orientarse","ru":"Где…?","tr":"Gdie…?","es":"¿Dónde está…?","registro":"","nivel":"A1","uso":"Sin verbo: где метро́?, «¿dónde (está) el subte?».","lex":["CMR-00079"]},
   {"id":"FRS-037","funcion":"orientarse","ru":"Скажи́те, пожа́луйста…","tr":"Skazhíti, pazháluista…","es":"Disculpe…","registro":"вы","nivel":"A1","uso":"Literalmente, «dígame, por favor». Para empezar una pregunta en la calle.","cul":"CUL-009","lex":["CMR-00042","CMR-01243"]},
-  {"id":"FRS-038","funcion":"orientarse","ru":"Как дое́хать до…?","tr":"Kak dayéjat do…?","es":"¿Cómo llego a…?","registro":"","nivel":"A1","uso":"En transporte. До + genitivo: до це́нтра.","lex":["CMR-00019","CMR-05472","CMR-00051"]},
+  {"id":"FRS-038","funcion":"orientarse","ru":"Как дое́хать до…?","tr":"Kak dayéjat da…?","es":"¿Cómo llego a…?","registro":"","nivel":"A1","uso":"En transporte. До + genitivo: до це́нтра.","lex":["CMR-00019","CMR-05472","CMR-00051"]},
   {"id":"FRS-039","funcion":"orientarse","ru":"Э́то далеко́?","tr":"Éta dalikó?","es":"¿Es lejos?","registro":"","nivel":"A1","uso":"Respuestas: далеко́ (lejos), бли́зко (cerca).","lex":["CMR-00012","CMR-00688"]},
   {"id":"FRS-040","funcion":"ayuda","ru":"Помоги́те!","tr":"Pamaguíti!","es":"¡Ayuda! / ¿Me ayuda?","registro":"вы","nivel":"A1","uso":"Para pedir ayuda a cualquiera, con urgencia o con пожа́луйста.","cul":"CUL-008","lex":["CMR-00497"]},
   {"id":"FRS-041","funcion":"ayuda","ru":"Что случи́лось?","tr":"Shto sluchílas?","es":"¿Qué pasó?","registro":"","nivel":"A1","uso":"Para preguntar qué sucede.","lex":["CMR-00009","CMR-00638"]},

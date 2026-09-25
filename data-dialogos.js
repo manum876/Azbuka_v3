@@ -2,6 +2,8 @@
    DATA-DIALOGOS.JS — Diálogos del módulo Diálogos (dialogos.html)
    ------------------------------------------------------------
    Versión v3 (24/09/2026). Reemplaza al data-dialogos.js del repo viejo.
+   Actualizado el 25/09/2026: la preposición до, átona, se translitera
+   como suena («Da svidániya», «da záftra»).
 
    Qué hay:
    - DLG_PERSONAJES: el elenco fijo. Cada personaje tiene género,
@@ -123,9 +125,9 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-005","titulo":"Despedirse","tituloRu":"Пока́!","situacion":"conocer","funcion":"despedirse","nivel":"A1","personajes":["lucas","masha"],"vy":{"masha":"olga"},
   "lineas": [
-    {"p":"lucas","ru":"Ну, мне пора́. Пока́!","tr":"Nu, mnie pará. Paká!","es":"Bueno, me tengo que ir. ¡Chau!","lex":["CMR-00083","CMR-00005","CMR-00273","CMR-00267"],"f":["FRS-009","FRS-013"],"obs":"Мне пора́: «ya es hora (de irme)».","vy":{"ru":"Ну, мне пора́. До свида́ния!","tr":"Nu, mnie pará. Do svidániya!","es":"Bueno, me tengo que ir. ¡Hasta luego!","lex":["CMR-00083","CMR-00005","CMR-00273","CMR-00051","CMR-02946"],"f":["FRS-010","FRS-013"],"obs":"До свида́ния es la despedida formal: se usa con вы."}},
-    {"p":"masha","ru":"Пока́! Уви́димся за́втра?","tr":"Paká! Uvídimsia záftra?","es":"¡Chau! ¿Nos vemos mañana?","lex":["CMR-00267","CMR-05249","CMR-00865"],"f":["FRS-009","FRS-012"],"vy":{"ru":"До свида́ния! Уви́димся за́втра?","tr":"Do svidániya! Uvídimsia záftra?","es":"¡Hasta luego! ¿Nos vemos mañana?","lex":["CMR-00051","CMR-02946","CMR-05249","CMR-00865"],"f":["FRS-010","FRS-012"]}},
-    {"p":"lucas","ru":"Да, до за́втра!","tr":"Da, do záftra!","es":"Sí, ¡hasta mañana!","lex":["CMR-00116","CMR-00051","CMR-00865"],"f":["FRS-011"]}
+    {"p":"lucas","ru":"Ну, мне пора́. Пока́!","tr":"Nu, mnie pará. Paká!","es":"Bueno, me tengo que ir. ¡Chau!","lex":["CMR-00083","CMR-00005","CMR-00273","CMR-00267"],"f":["FRS-009","FRS-013"],"obs":"Мне пора́: «ya es hora (de irme)».","vy":{"ru":"Ну, мне пора́. До свида́ния!","tr":"Nu, mnie pará. Da svidániya!","es":"Bueno, me tengo que ir. ¡Hasta luego!","lex":["CMR-00083","CMR-00005","CMR-00273","CMR-00051","CMR-02946"],"f":["FRS-010","FRS-013"],"obs":"До свида́ния es la despedida formal: se usa con вы."}},
+    {"p":"masha","ru":"Пока́! Уви́димся за́втра?","tr":"Paká! Uvídimsia záftra?","es":"¡Chau! ¿Nos vemos mañana?","lex":["CMR-00267","CMR-05249","CMR-00865"],"f":["FRS-009","FRS-012"],"vy":{"ru":"До свида́ния! Уви́димся за́втра?","tr":"Da svidániya! Uvídimsia záftra?","es":"¡Hasta luego! ¿Nos vemos mañana?","lex":["CMR-00051","CMR-02946","CMR-05249","CMR-00865"],"f":["FRS-010","FRS-012"]}},
+    {"p":"lucas","ru":"Да, до за́втра!","tr":"Da, da záftra!","es":"Sí, ¡hasta mañana!","lex":["CMR-00116","CMR-00051","CMR-00865"],"f":["FRS-011"]}
   ] },
 { "id":"DLG-006","titulo":"Gracias y de nada","tituloRu":"Спаси́бо!","situacion":"cortesia","funcion":"agradecer","nivel":"A1","personajes":["lucas","dima"],
   "lineas": [
@@ -256,7 +258,7 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-024","titulo":"Cómo llegar","tituloRu":"Как дое́хать?","situacion":"ciudad","funcion":"orientarse","nivel":"A1","personajes":["lucas","transeunta"],
   "lineas": [
-    {"p":"lucas","ru":"Скажи́те, пожа́луйста, как дое́хать до це́нтра?","tr":"Skazhíti, pazháluista, kak dayéjat do tséntra?","es":"Disculpe, ¿cómo llego al centro?","lex":["CMR-00042","CMR-01243","CMR-00019","CMR-05472","CMR-00051","CMR-00394"],"f":["FRS-025","FRS-037","FRS-038"],"obs":"До + genitivo: центр → до це́нтра.","cul":"CUL-009"},
+    {"p":"lucas","ru":"Скажи́те, пожа́луйста, как дое́хать до це́нтра?","tr":"Skazhíti, pazháluista, kak dayéjat da tséntra?","es":"Disculpe, ¿cómo llego al centro?","lex":["CMR-00042","CMR-01243","CMR-00019","CMR-05472","CMR-00051","CMR-00394"],"f":["FRS-025","FRS-037","FRS-038"],"obs":"До + genitivo: центр → до це́нтра.","cul":"CUL-009"},
     {"p":"transeunta","ru":"На метро́ и́ли на авто́бусе.","tr":"Na mitró íli na aftóbusi.","es":"En subte o en colectivo.","lex":["CMR-00004","CMR-02395","CMR-00044","CMR-00004","CMR-01862"],"obs":"На + preposicional para el medio de transporte. Метро́ no cambia."},
     {"p":"lucas","ru":"А где ста́нция метро́?","tr":"A gdie stántsiya mitró?","es":"¿Y dónde está la estación de subte?","lex":["CMR-00010","CMR-00079","CMR-01176","CMR-02395"],"f":["FRS-036"]},
     {"p":"transeunta","ru":"Вон там, напра́во.","tr":"Von tam, napráva.","es":"Allá, a la derecha.","lex":["CMR-01856","CMR-00080","CMR-05471"]}
