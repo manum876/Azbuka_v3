@@ -58,7 +58,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 5406
+  totalEntries: 5407
 };
 const LEXICON_COMER = [
  {
@@ -308,7 +308,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -823,7 +825,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -974,7 +978,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -1833,7 +1839,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -1952,7 +1960,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -2161,7 +2171,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -2583,7 +2595,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -3278,7 +3292,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -3455,7 +3471,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -3571,7 +3589,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -3791,7 +3811,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -3912,7 +3934,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4306,7 +4330,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4483,7 +4509,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4599,7 +4627,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4660,7 +4690,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4718,7 +4750,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4776,7 +4810,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -5200,7 +5236,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -5351,7 +5389,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -5641,7 +5681,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -5818,7 +5860,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -5876,7 +5920,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -6089,7 +6135,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -6150,7 +6198,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -6212,7 +6262,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -6328,7 +6380,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -6567,7 +6621,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -6744,7 +6800,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -6805,7 +6863,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -7049,7 +7109,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -7558,7 +7620,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -7920,7 +7984,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -8101,7 +8167,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -8339,7 +8407,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -8493,7 +8563,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -8675,7 +8747,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -9553,7 +9627,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -9858,7 +9934,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -10850,7 +10928,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -11190,7 +11270,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -11488,7 +11570,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -11700,7 +11784,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -11912,7 +11998,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -12005,7 +12093,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -12066,7 +12156,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -12583,7 +12675,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -12644,7 +12738,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -13321,7 +13417,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -13746,7 +13844,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -14326,7 +14426,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -14687,7 +14789,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -14748,7 +14852,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -14867,7 +14973,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -15821,7 +15929,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -16366,7 +16476,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -17520,7 +17632,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -17916,7 +18030,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -18148,7 +18264,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -18329,7 +18447,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -18628,7 +18748,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -18689,7 +18811,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -18811,7 +18935,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -18995,7 +19121,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -19056,7 +19184,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -19178,7 +19308,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -19540,7 +19672,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -20453,7 +20587,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -20652,7 +20788,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -20829,7 +20967,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -20948,7 +21088,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -22285,7 +22427,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -22886,7 +23030,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -23402,7 +23548,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -24385,7 +24533,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -24569,7 +24719,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -26777,7 +26929,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -27261,7 +27415,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -27438,7 +27594,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -27684,7 +27842,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -27983,7 +28143,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -31299,7 +31461,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -32331,7 +32495,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -33212,7 +33378,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -35693,7 +35861,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -36726,7 +36896,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -39011,7 +39183,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -39840,7 +40014,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -40325,7 +40501,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -41149,7 +41327,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -41813,7 +41993,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -42539,7 +42721,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -43875,7 +44059,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -45493,7 +45679,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -46869,7 +47057,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -50426,7 +50616,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -52675,7 +52867,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -52798,7 +52992,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -55826,7 +56022,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -57766,7 +57964,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -59873,7 +60073,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -62842,7 +63044,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -64580,7 +64784,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -68723,7 +68929,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -69031,7 +69239,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -69633,7 +69843,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -71699,7 +71911,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -78373,7 +78587,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -78612,7 +78828,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -81908,7 +82126,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -86968,7 +87188,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -95633,7 +95855,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -102055,7 +102279,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -117482,7 +117708,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -123555,7 +123783,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -123978,7 +124208,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -124782,7 +125014,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -127771,7 +128005,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -134375,7 +134611,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -136539,7 +136777,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -136605,7 +136845,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -144220,7 +144462,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -145872,7 +146116,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -149780,7 +150026,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -152061,7 +152309,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -158395,7 +158645,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -166819,7 +167071,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -168027,7 +168281,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -171409,7 +171665,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -179070,7 +179328,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -182174,7 +182434,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -193307,7 +193569,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -204191,7 +204455,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -235301,7 +235567,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -297353,7 +297621,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324077,7 +324347,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324138,7 +324410,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324199,7 +324473,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324260,7 +324536,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324321,7 +324599,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324382,7 +324662,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324443,7 +324725,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324504,7 +324788,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324565,7 +324851,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324626,7 +324914,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324687,7 +324977,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324748,7 +325040,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -327209,7 +327503,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -328495,7 +328791,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   1
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -328733,6 +329031,79 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "dialogosEnrichment": true
   }
+ },
+ {
+  "id": "CMR-05480",
+  "ru": "жар",
+  "acento": "жар",
+  "posNormalized": "sustantivo",
+  "translit": "zhar",
+  "ipa": "ʒˈɑr",
+  "senses": [
+   {
+    "es": "calor intenso",
+    "definitionEs": "Calor fuerte que despide algo que quema o está muy caliente: el fuego, un horno, las brasas o el sol del mediodía.",
+    "source": "redactado"
+   },
+   {
+    "es": "fiebre",
+    "definitionEs": "Temperatura alta del cuerpo por una enfermedad. У меня́ жар: tengo fiebre.",
+    "source": "redactado"
+   },
+   {
+    "es": "ardor, entusiasmo",
+    "definitionEs": "Sentido figurado: pasión o entusiasmo con que alguien hace algo.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   1
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "жар",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "3",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "жар",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "жара́",
+    "Member2": "жа́ркий",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 1 (par mínimo Ж/Ш con шар) — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad1Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum"
  }
 ];
 

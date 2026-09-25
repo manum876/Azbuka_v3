@@ -1,7 +1,7 @@
 /* ============================================================
    DATA-CASOS.JS — Declinaciones de las palabras del léxico AZBUKA
    ------------------------------------------------------------
-   Total: 3230 palabras (todas las entradas de data-lexicon.js con
+   Total: 3231 palabras (todas las entradas de data-lexicon.js con
    categoría sustantivo, adjetivo, pronombre, determinante o numeral).
    Generado el 23/09/2026. Ordenado por ID.
    Actualizado el 24/09/2026: лист y ко́рпус separados en dos entradas
@@ -9,6 +9,8 @@
    con el léxico.
    Actualizado el 24/09/2026 (módulo Diálogos): меню́ (CMR-05476),
    indeclinable según OpenRussian y pymorphy3.
+   Actualizado el 25/09/2026 (Unidad 1): жар (CMR-05480), solo singular,
+   locativo в жару́ y partitivo жа́ру, según OpenRussian y pymorphy3.
    Campo nuevo "conteo" (24/09/2026): forma de conteo, la que va después
    de 2, 3 y 4 cuando es distinta del genitivo singular (час: два часа́,
    pero ча́са). Hoy solo en час.
@@ -11860,7 +11862,12 @@ const CASOS = {
  "CMR-05470": { ru:"ко́рпус", tipo:"sustantivo",
    sg:["ко́рпус", "ко́рпуса", "ко́рпусу", "ко́рпус", "ко́рпусом", "ко́рпусе"],
    pl:["ко́рпусы", "ко́рпусов", "ко́рпусам", "ко́рпусы", "ко́рпусами", "ко́рпусах"] },
- "CMR-05476": { ru:"меню́", tipo:"indeclinable" }
+ "CMR-05476": { ru:"меню́", tipo:"indeclinable" },
+ "CMR-05480": { ru:"жар", tipo:"sustantivo",
+   sg:["жар", "жа́ра", "жа́ру", "жар", "жа́ром", "жа́ре"],
+   pl:null,
+   loc2:"в жару́",
+   partitivo:"жа́ру" }
 };
 
 /* Devuelve la declinación de una palabra por ID, o null. */

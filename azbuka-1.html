@@ -149,23 +149,36 @@ function HojaLetra({ l, c, nivel, setNivel, onClose, green }) {
         }))));
 }
 
+/* Palabra de ejemplo sin repetir: cada letra tiene su «bolsa» con sus
+   palabras mezcladas; se sacan de a una y, cuando se vacía, se vuelve a
+   mezclar sin empezar por la última que se vio. */
+const BOLSAS = {};
+function palabraSiguiente(l) {
+  const b = BOLSAS[l.upper] || (BOLSAS[l.upper] = { resto: [], ult: -1 });
+  if (!b.resto.length) {
+    b.resto = l.words.map((_, k) => k).sort(() => Math.random() - .5);
+    if (b.resto.length > 1 && b.resto[b.resto.length - 1] === b.ult) b.resto.unshift(b.resto.pop());
+  }
+  b.ult = b.resto.pop();
+  return b.ult;
+}
+
 /* ── Tarjetas ── */
 function Tarjetas({ letras, titulo, c, niveles, setNivel, onClose, green, cursiva }) {
   const [orden, setOrden] = useState(letras);
   const [i, setI] = useState(0);
   const [vuelta, setVuelta] = useState(false);
-  const azar = () => Math.floor(Math.random() * 1000);
-  const [wi, setWi] = useState(azar);
+  const [wi, setWi] = useState(() => palabraSiguiente(LETRA[letras[0]]));
   const l = LETRA[orden[i]];
-  const ir = d => { setVuelta(false); setWi(azar()); setI(x => (x + d + orden.length) % orden.length); };
-  const mezclar = () => { const o = orden.slice().sort(() => Math.random() - .5); setOrden(o); setI(0); setVuelta(false); setWi(azar()); };
+  const ir = d => { const ni = (i + d + orden.length) % orden.length; setVuelta(false); setI(ni); setWi(palabraSiguiente(LETRA[orden[ni]])); };
+  const mezclar = () => { const o = orden.slice().sort(() => Math.random() - .5); setOrden(o); setI(0); setVuelta(false); setWi(palabraSiguiente(LETRA[o[0]])); };
   const marcar = v => { setNivel(l, v); ir(1); };
   useEffect(() => {
     const k = e => { if (e.key === "ArrowRight") ir(1); else if (e.key === "ArrowLeft") ir(-1); else if (e.key === " ") { e.preventDefault(); setVuelta(v => !v); } else if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", k); return () => window.removeEventListener("keydown", k);
-  }, [orden]);
+  }, [orden, i]);
   const nv = niveles[l.upper] || 0;
-  const w = l.words[wi % l.words.length];   /* una palabra distinta cada vez */
+  const w = l.words[wi] || l.words[0];   /* una palabra distinta cada vez */
   return h("div", { className: "sheet", role: "dialog" },
     h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
     h("div", { className: "sheet-in" },
