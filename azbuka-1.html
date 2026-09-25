@@ -301,7 +301,8 @@ function HojaDialogo({ d, c, onClose }) {
   const [tr, setTr] = useState(true);
   const [es, setEs] = useState(true);
   const chip = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
-  const todo = () => { try { speechSynthesis.cancel(); d.lineas.forEach(l => { const u = new SpeechSynthesisUtterance(l.ru.replace(/\u0301/g, "")); u.lang = "ru-RU"; u.rate = .85; speechSynthesis.speak(u); }); } catch (e) {} };
+  const genero = l => ((typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[l.p]) || {}).genero;
+  const todo = () => azHablarSecuencia(d.lineas.map(l => ({ texto: l.ru, genero: genero(l) })));
   const href = "dialogos.html?id=" + d.id;
   return h("div", { className: "sheet", role: "dialog" },
     h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
@@ -321,7 +322,7 @@ function HojaDialogo({ d, c, onClose }) {
             h("div", { style: { fontSize: 17, fontWeight: 700, lineHeight: 1.5 } }, h(AzTexto, { ru: l.ru, lex: l.lex, objetivo: OBJETIVO_U1 })),
             tr && h("div", { style: { fontSize: 13.5, color: c.textSub, fontStyle: "italic", marginTop: 2 } }, l.tr),
             es && h("div", { style: { fontSize: 14, color: c.text, marginTop: 4 } }, l.es)),
-          h("button", { className: "play", onClick: () => hablar(l.ru), "aria-label": "Escuchar" }, "▶"));
+          h("button", { className: "play", onClick: () => azHablarRu(l.ru, genero(l)), "aria-label": "Escuchar" }, "▶"));
       }),
       h("button", { className: "ubtn", onClick: todo }, "▶ Escuchar el diálogo"),
       h("a", { className: "ubtn sec", style: { marginTop: 10, textDecoration: "none" }, href, onClick: ev => azNavigate(ev, href) }, "Ver en Diálogos")));
