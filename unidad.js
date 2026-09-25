@@ -32,15 +32,18 @@
      escribir  { pide, grande?, audio?, pista?, esperadas, idioma, mayus?, completa? }
      ordenar   { pide, audio?, fichas, esperada }
      vf        { afirmacion, verdadero }
-     emparejar { pide, pares: [[izq, der], …] }
-   Todos: { id, tipo, dificultad, explicacion, recordar? }
+     emparejar { pide, pares: [[izq, der], …], audioIzq? }  (audioIzq: la izquierda es audio)
+   Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir? }
+     audio: botón ▶ (suena solo al aparecer salvo que haya «grande» o audioManual)
+     oir: lo que suena al responder (la respuesta correcta)
+   Criterios (Manu, 25/09/2026): audio en casi todo; nada de practicar
+   transliteración; desordenar lo mismo no es un ejercicio nuevo.
    El resultado de cada uno es AZ_BIEN / AZ_CASI / AZ_MAL.
    ============================================================ */
 (function () {
   const h = React.createElement;
   const { useState, useEffect, useRef } = htmPreact;
   const VERDE = "#4CAF82", NARANJA = "#E2884A", ROJO = "#B5605C";
-  const TECLAS = ["йцукенгшщзхъ", "фывапролджэ", "ячсмитьбюё"];
 
   function hablar(t) { if (typeof azHablarRu === "function") azHablarRu(t); }
   function mezclar(a) { return a.slice().sort(() => Math.random() - .5); }
@@ -75,11 +78,6 @@
       .pr-rec{margin-top:8px;font-size:13.5px;line-height:1.5;color:${c.textSub};padding-left:10px;border-left:2px solid ${c.gold}66;}
       .pr-res{display:inline-block;font-size:13px;font-weight:800;border-radius:8px;padding:3px 10px;margin-top:14px;}
       .pr-pie{margin-top:auto;padding-top:18px;}
-      .pr-chip{padding:6px 10px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
-      .pr-kb{margin-top:12px;background:${c.bg2};border:1px solid ${c.border};border-radius:12px;padding:6px 4px;user-select:none;-webkit-user-select:none;}
-      .pr-kb-row{display:flex;justify-content:center;gap:3px;margin:3px 0;}
-      .pr-kb button{flex:1;max-width:36px;height:40px;border-radius:7px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:16px;font-weight:600;padding:0;cursor:pointer;font-family:inherit;}
-      .pr-kb button.w{max-width:none;flex:3;font-size:13px;}
       .pr-fichas{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;min-height:48px;}
       .pr-ficha{min-width:44px;height:48px;padding:0 10px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:22px;font-weight:700;cursor:pointer;font-family:inherit;}
       .pr-armado{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:56px;padding:4px;border-bottom:2px solid ${c.gold}66;margin-top:14px;}
@@ -106,16 +104,6 @@
       r !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, "Para recordarlo: " + ej.recordar));
   }
 
-  /* ── Teclado ruso en pantalla ── */
-  function Teclado({ onKey, mayus }) {
-    return h("div", { className: "pr-kb", "aria-label": "Teclado ruso" },
-      TECLAS.map((f, i) => h("div", { key: i, className: "pr-kb-row" },
-        f.split("").map(k => h("button", { key: k, onClick: () => onKey(mayus ? k.toUpperCase() : k), lang: "ru" }, mayus ? k.toUpperCase() : k)))),
-      h("div", { className: "pr-kb-row" },
-        h("button", { className: "w", onClick: () => onKey(" ") }, "espacio"),
-        h("button", { className: "w", onClick: () => onKey("⌫") }, "⌫ borrar")));
-  }
-
   /* ── Formas ── */
   function Elegir({ ej, onRes, hecho }) {
     const [elegida, setElegida] = useState(null);
@@ -133,7 +121,7 @@
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
-  function Escribir({ ej, onRes, hecho, dark, teclado, setTeclado, c, examen }) {
+  function Escribir({ ej, onRes, hecho, dark, c, examen }) {
     const [txt, setTxt] = useState("");
     const [r, setR] = useState(null);
     const ref = useRef(null);
@@ -144,29 +132,21 @@
       setR(res);
       if (hecho == null) onRes(res.resultado);
     };
-    const tecla = k => {
-      setR(null);
-      setTxt(t => k === "⌫" ? t.slice(0, -1) : t + k);
-    };
-    const reintentar = () => { setTxt(""); setR(null); if (ref.current && !(ru && teclado)) ref.current.focus(); };
-    const chip = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
+    const reintentar = () => { setTxt(""); setR(null); if (ref.current) ref.current.focus(); };
     return h(React.Fragment, null,
       h("div", { className: "pr-pide" }, ej.pide),
       ej.grande && h("div", { className: "pr-grande", lang: "ru" }, ej.grande),
-      ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande }),
+      ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.pista && h("div", { className: "pr-pista" }, ej.pista),
       h("div", { className: "pr-in-row" },
         h("input", {
-          ref, className: "pr-input", value: txt, lang: ru ? "ru" : "es", readOnly: ru && teclado, inputMode: ru && teclado ? "none" : "text",
+          ref, className: "pr-input", value: txt, lang: ru ? "ru" : "es",
           autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
           placeholder: ru ? "Escribí en ruso…" : ej.idioma === "es" ? "Escribí en español…" : "Escribí con letras latinas…",
           onInput: e => { setTxt(e.target.value); setR(null); },
           onKeyDown: e => { if (e.key === "Enter") comprobar(); }
         }),
         h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || (r && r.resultado === AZ_BIEN) }, "Comprobar")),
-      ru && h("div", { style: { display: "flex", justifyContent: "flex-end", marginTop: 8 } },
-        h("button", { className: "pr-chip", style: chip(teclado), onClick: () => setTeclado(!teclado) }, "Teclado ruso en pantalla")),
-      ru && teclado && !(r && r.resultado === AZ_BIEN) && h(Teclado, { onKey: tecla, mayus: false }),
       r && h(AzCorreccion, { r, dark }),
       hecho != null && r && h("div", { className: "pr-exp" }, ej.explicacion),
       hecho != null && r && r.resultado !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, "Para recordarlo: " + ej.recordar),
@@ -200,8 +180,9 @@
     const tocar = v => { if (elegida != null) return; setElegida(v); onRes(v === ej.verdadero ? AZ_BIEN : AZ_MAL); };
     const cls = v => elegida == null ? "" : v === ej.verdadero ? " ok" : v === elegida ? " mal" : "";
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, "¿Verdadero o falso?"),
-      h("div", { className: "pr-grande", style: { fontSize: 24, color: "inherit", fontWeight: 700 } }, ej.afirmacion),
+      h("div", { className: "pr-pide" }, ej.audio ? "Escuchá. ¿Verdadero o falso?" : "¿Verdadero o falso?"),
+      ej.audio && h(Oir, { texto: ej.audio, auto: true }),
+      h("div", { className: "pr-grande", style: { fontSize: 24, color: "inherit", fontWeight: 700 }, lang: "ru" }, ej.afirmacion),
       h("div", { className: "pr-ops" },
         h("button", { className: "pr-op" + cls(true), disabled: elegida != null, onClick: () => tocar(true) }, "Verdadero"),
         h("button", { className: "pr-op" + cls(false), disabled: elegida != null, onClick: () => tocar(false) }, "Falso")),
@@ -225,12 +206,14 @@
       h("div", { className: "pr-pide" }, ej.pide),
       h("div", { className: "pr-em" },
         h("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, ej.pares.map((p, i) =>
-          h("button", { key: i, lang: "ru", className: "pr-op" + (listos.indexOf(i) >= 0 ? " ok hecho" : sel === i ? " sel" : ""), onClick: () => listos.indexOf(i) < 0 && setSel(i) }, p[0]))),
+          h("button", { key: i, lang: "ru", className: "pr-op" + (listos.indexOf(i) >= 0 ? " ok hecho" : sel === i ? " sel" : ""),
+            "aria-label": ej.audioIzq ? "Sonido " + (i + 1) : null,
+            onClick: () => { if (ej.audioIzq) hablar(p[0]); if (listos.indexOf(i) < 0) setSel(i); } }, ej.audioIzq ? "▶ " + (i + 1) : p[0]))),
         h("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, der.map(d => {
           const usada = listos.some(i => ej.pares[i][1] === d);
           return h("button", { key: d, className: "pr-op" + (usada ? " ok hecho" : malo === d ? " mal" : ""), disabled: usada, onClick: () => tocarDer(d) }, d);
         }))),
-      hecho == null && h("div", { className: "pr-pista", style: { marginTop: 12 } }, "Tocá una letra y después su sonido."),
+      hecho == null && h("div", { className: "pr-pista", style: { marginTop: 12 } }, ej.audioIzq ? "Tocá ▶ para escuchar y después la letra que corresponde." : "Tocá uno de la izquierda y después su pareja."),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
@@ -243,9 +226,6 @@
     const [lista, setLista] = useState([]);
     const [i, setI] = useState(0);
     const [res, setRes] = useState({});             /* id → resultado */
-    const [teclado, setTecladoSt] = useState(false);
-    useEffect(() => { (async () => setTecladoSt((await azGet("az_teclado_ru", false)) === true))(); }, []);
-    const setTeclado = v => { setTecladoSt(v); azSet("az_teclado_ru", v); };
 
     const empezar = () => {
       if (examen) {
@@ -268,6 +248,8 @@
     const anotar = r => {
       if (res[ej.id] != null) return;
       azRecordExercise(ej.id, r, unidad);
+      const sol = ej.oir || (ej.forma !== "emparejar" && ej.audio);
+      if (sol) setTimeout(() => hablar(sol), 450);   /* escuchar la respuesta siempre refuerza */
       setRes(x => Object.assign({}, x, { [ej.id]: r }));
     };
     const siguiente = () => {
@@ -298,7 +280,7 @@
         h("div", { className: "pr-kick" }, titulo + " · " + (i + 1) + " de " + lista.length),
         h("div", { className: "pr-bar" }, h("div", { style: { width: ((i + (hecho != null ? 1 : 0)) / lista.length * 100) + "%" } })),
         examen && h("div", { className: "pr-pista", style: { textAlign: "left", margin: "-8px 0 10px" } }, "Parte: " + ej.parte),
-        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, teclado, setTeclado, examen: !!examen }) : "Ejercicio desconocido"),
+        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, examen: !!examen }) : "Ejercicio desconocido"),
         h("div", { className: "pr-pie" },
           h("button", { className: "pr-btn", style: { width: "100%" }, disabled: hecho == null, onClick: siguiente }, i + 1 < lista.length ? "Siguiente" : "Ver resultado")));
     } else if (examen) {
