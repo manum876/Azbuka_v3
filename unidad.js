@@ -50,7 +50,7 @@
 
   function Estilos({ c }) {
     return h("style", null, `
-      .pr{position:fixed;inset:0;z-index:300;background:${c.bg};color:${c.text};font-family:'Inter','Helvetica Neue',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+      .pr{position:fixed;inset:0;z-index:300;background:${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
       .pr-in{max-width:640px;margin:0 auto;padding:6vh 3vw 4vh;min-height:100%;display:flex;flex-direction:column;}
       .pr-x{position:fixed;top:6vh;right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
       .pr-kick{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};padding-right:48px;}

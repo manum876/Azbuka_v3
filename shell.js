@@ -139,7 +139,7 @@ function AzShell(props) {
   }, []);
 
   return React.createElement("div", {
-    style: { background: c.bg, color: c.text, minHeight: "100vh", fontFamily: "'Inter','Helvetica Neue',sans-serif", transition: "background .3s, color .3s" }
+    style: { background: c.bg, color: c.text, minHeight: "100vh", fontFamily: "'Noto Sans',sans-serif", transition: "background .3s, color .3s" }
   },
     /* Fondo de html/body/#root sigue el tema — esto sí es dinámico */
     React.createElement("style", null, `html, body, #root { background: ${c.bg}; }`),

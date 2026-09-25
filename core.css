@@ -9,6 +9,33 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Fuente de la app (25/09/2026): Noto Sans, embebida. Inter (la fuente
+   anterior) ubicaba mal la marca de acento sobre las letras rusas
+   (молоко´); Noto Sans la pone bien. Recortada a español, ruso, IPA y
+   los símbolos de la interfaz, pesos 400–800. Licencia OFL:
+   noto-sans-OFL.txt. La pide shell.js (y body, para lo que queda fuera
+   del shell). */
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('noto-sans-azbuka.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+body { font-family: 'Noto Sans', sans-serif; }
+
+/* Cursiva cirílica (25/09/2026): Marck Script, embebida para que se vea
+   igual en todos los navegadores (la cursiva genérica del sistema cambia
+   según el navegador y en algunos es Comic Sans). Licencia OFL:
+   marck-script-OFL.txt. Se usa con font-family: 'CyrCursive', cursive. */
+@font-face {
+  font-family: 'CyrCursive';
+  src: url('marck-script.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 ::selection { background: #C9A84C33; }
 
 ::-webkit-scrollbar { width: 6px; }
