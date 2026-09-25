@@ -162,7 +162,7 @@ function azClasificar(u, e, modo) {
 
   if (/[a-z]/i.test(u) && !/[а-яё]/i.test(u)) {
     r.estado = "mal";
-    r.motivo = "«" + u + "» está escrito con letras latinas. Usá el teclado ruso (en la práctica podés activarlo en pantalla).";
+    r.motivo = "«" + u + "» está escrito con letras latinas. Usá el teclado ruso del teléfono.";
     return r;
   }
   if (ke.length === 1) { r.estado = "mal"; r.motivo = "Acá va la letra «" + e + "»."; return r; }
