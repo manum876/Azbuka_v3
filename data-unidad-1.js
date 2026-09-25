@@ -9,7 +9,9 @@
 
    Cada módulo: { id, n, titulo, tituloRu?, tipo, resumen, ... }
      tipo "intro"  → secciones de texto { titulo, texto }
-     tipo "letras" → letras (mayúsculas, en orden de estudio) e intro
+     tipo "letras" → letras (mayúsculas, en orden de estudio), intro y,
+                    opcionales, secciones de texto y pares de vocales
+                    [dura, blanda, sílaba dura, sílaba blanda]
      tipo "pronto" → módulo planificado, todavía sin contenido
    ============================================================ */
 
@@ -78,10 +80,30 @@ const UNIDAD_1 = {
     },
     {
       id: "u1m6", n: 6, tipo: "letras",
-      titulo: "Vocales con y",
-      resumen: "Я, Ё, Ю: una y delante de la vocal.",
+      titulo: "Vocales duras y blandas",
+      resumen: "Я, Ё, Ю y los cinco pares de vocales.",
       letras: ["Я", "Ё", "Ю"],
-      intro: "Estas vocales suenan como una y seguida de vocal: я es ya, ё es yo, ю es yu. Después de una consonante, en lugar de la y la ablandan: ня suena parecido a «ña». La Ё siempre es tónica."
+      intro: "Con Я, Ё y Ю ya conocés las diez vocales del ruso. No son diez sonidos sueltos: son cinco pares, y entender los pares te ahorra muchísimo esfuerzo.",
+      pares: [["А", "Я", "на", "ня"], ["Э", "Е", "нэ", "не"], ["Ы", "И", "ны", "ни"], ["О", "Ё", "но", "нё"], ["У", "Ю", "ну", "ню"]],
+      secciones: [
+        {
+          titulo: "Cinco pares de vocales",
+          texto: "Cada vocal dura tiene su pareja blanda: а–я, э–е, ы–и, о–ё, у–ю. La vocal suena casi igual; lo que cambia es la consonante de antes. Después de una vocal dura la consonante suena normal; después de una blanda, se ablanda (se palataliza): la lengua se apoya en el paladar, como para decir una i."
+        },
+        {
+          titulo: "Como la n y la ñ",
+          texto: "En español ya hacés esta diferencia sin darte cuenta: la ñ es una n blanda. «Nana» y «ñaña» se distinguen solo por eso. En ruso pasa lo mismo, pero con casi todas las consonantes: на suena «na» y ня suena «ña»; ма y мя, ло y лё, ту y тю se diferencian igual. Tocá los pares de la tabla y escuchá la diferencia.",
+          destacado: "La vocal blanda ablanda la consonante que tiene adelante, como la ñ es una n blanda."
+        },
+        {
+          titulo: "Al principio de la palabra",
+          texto: "Cuando no hay consonante delante (al principio de la palabra o después de otra vocal), las vocales blandas suenan con una y adelante: я es «ya», ё es «yo», ю es «yu», е es «ye». Por eso я́блоко se dice «yáblaka» y моя́ se dice «mayá»."
+        },
+        {
+          titulo: "La Й no es vocal",
+          texto: "La й (se llama «i kratkoe», i breve) se parece a la и, pero es una consonante: nunca forma sílaba sola, siempre va pegada a una vocal, como la y de «hoy» o de «rey»: мой, чай, но́вый. De hecho, las vocales blandas del principio son й más una vocal: я = й + а, ё = й + о, ю = й + у, е = й + э."
+        }
+      ]
     },
     {
       id: "u1m7", n: 7, tipo: "letras",
