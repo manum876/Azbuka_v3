@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Unidad 1: Alfabeto y pronunciación</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
+<script src="data-alphabet.js"></script>
+<script src="data-unidad-1.js"></script>
+<script src="core.js"></script>
+<script src="progress.js"></script>
+<script src="shell.js"></script>
+<script src="burbuja.js"></script>
+<script>
+/* ============================================================
+   AZBUKA-1.HTML — Unidad 1: Alfabeto y pronunciación
+   ------------------------------------------------------------
+   Paso 1 (25/09/2026): portada de la unidad, módulo de
+   introducción, los seis grupos de letras con su ficha y las
+   tarjetas. Contenido en data-unidad-1.js; letras en
+   data-alphabet.js; palabras en el léxico. El dominio de cada
+   letra es el mismo que usa Alfabeto (alfabeto:А).
+   URL: azbuka-1.html (portada) · azbuka-1.html?m=u1m3 (módulo)
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+const U = UNIDAD_1;
+const LETRA = Object.fromEntries(ALPHABET.map(l => [l.upper, l]));
+const YELLOW = "#C9B369";
+
+function hablar(t) { azHablarRu(t); }
+function sonidoLetra(l) { hablar(l.upper === "Ь" || l.upper === "Ъ" ? l.name : l.lower); }
+
+/* Palabra con la letra resaltada; toda la palabra abre su burbuja */
+function PalabraLetra({ w, letra, c, size }) {
+  const e = lexComerById(w.lexId);
+  const acento = e ? (e.acento || e.ru) : w.cyrillic;
+  const partes = acento.match(/.\u0301?/gu) || [];
+  const abrir = ev => { ev.stopPropagation(); azAbrirBurbuja("palabra", { id: w.lexId, forma: acento }, ev.currentTarget); };
+  return h("span", { className: "az-link", role: "button", tabIndex: 0, lang: "ru", onClick: abrir,
+    onKeyDown: ev => { if (ev.key === "Enter") abrir(ev); }, style: { fontSize: size || 17, fontWeight: 700 } },
+    partes.map((p, i) => (p[0] === letra.upper || p[0] === letra.lower)
+      ? h("span", { key: i, style: { color: c.gold, fontWeight: 800 } }, p) : p));
+}
+
+function Estilos({ c, green }) {
+  return h("style", null, `
+    .u-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-bottom:6px;}
+    .u-title{font-size:26px;font-weight:800;color:${c.text};line-height:1.15;}
+    .u-ru{font-size:15px;color:${c.textSub};font-style:italic;margin-top:4px;}
+    .u-text{font-size:15px;line-height:1.6;color:${c.textSub};}
+    .u-sec{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:24px 0 10px;}
+    .u-dest{margin-top:12px;background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:10px;padding:12px 14px;font-size:14.5px;line-height:1.5;color:${c.text};font-weight:600;}
+    .u-card{background:${c.card};border:1px solid ${c.border};border-radius:14px;}
+    .pbar-track{width:100%;height:6px;border-radius:3px;overflow:hidden;background:${c.bg3};margin-top:10px;}
+    .pbar-fill{height:100%;border-radius:3px;background:${green};transition:width .3s ease;}
+    .mod{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;margin-bottom:10px;cursor:pointer;text-decoration:none;color:${c.text};}
+    .mod.off{opacity:.45;cursor:default;}
+    .mod-n{font-size:22px;font-weight:800;color:${c.border};min-width:30px;line-height:1.1;}
+    .mod-t{font-size:16px;font-weight:700;}
+    .mod-d{font-size:13px;color:${c.textMuted};margin-top:2px;}
+    .mod-l{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
+    .mod-l span{font-size:13px;font-weight:700;min-width:24px;text-align:center;padding:2px 5px;border-radius:6px;background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};}
+    .tag-pronto{font-size:11px;font-weight:600;color:${c.textMuted};background:${c.bg2};border:1px solid ${c.border};border-radius:8px;padding:2px 8px;margin-left:8px;vertical-align:middle;}
+    .lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+    @media (min-width:600px){.lgrid{grid-template-columns:repeat(5,1fr);}}
+    .lcard{position:relative;border-radius:14px;padding:14px 6px;text-align:center;cursor:pointer;background:${c.card};}
+    .lcard:active{transform:scale(.97);}
+    .toggle-row{display:flex;gap:8px;margin:16px 0 12px;}
+    .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
+    .ubtn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:13px 16px;border-radius:10px;border:1px solid ${c.gold};background:${c.gold};color:${c.bg};font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:18px;}
+    .ubtn.sec{background:${c.bg3};border-color:${c.border};color:${c.text};}
+    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};color:${c.text};font-family:'Inter','Helvetica Neue',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:fadeIn .25s ease;}
+    .sheet-in{max-width:960px;margin:0 auto;padding:6vh 3vw 4vh;}
+    .sheet-x{position:fixed;top:6vh;right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
+    .glyph{font-size:64px;font-weight:800;color:${c.gold};line-height:1;}
+    .cursiva{font-family:'CyrCursive',cursive;font-size:44px;color:${c.gold};opacity:.7;margin-top:6px;}
+    .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
+    .status-row{display:flex;gap:8px;margin-top:16px;}
+    .status-btn{flex:1;text-align:center;padding:10px 4px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:.18s;}
+    .info{padding:16px;margin-top:12px;}
+    .info-t{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:${c.gold};margin-bottom:6px;}
+    .info-x{font-size:14px;line-height:1.55;color:${c.textSub};}
+    .wrow{display:flex;align-items:center;gap:12px;padding:12px 0;}
+    .wrow + .wrow{border-top:1px solid ${c.border};}
+    .fc{min-height:46vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 18px;cursor:pointer;border-radius:18px;background:${c.card};border:1px solid ${c.border};user-select:none;-webkit-user-select:none;}
+    .fc-ctl{display:flex;gap:8px;margin-top:12px;}
+    .fc-ctl button{flex:1;padding:11px 6px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+  `);
+}
+
+/* ── Ficha de una letra (hoja a pantalla completa) ── */
+function HojaLetra({ l, c, nivel, setNivel, onClose, green }) {
+  const cols = { 0: "#E2884A", 1: YELLOW, 2: green };
+  return h("div", { className: "sheet", role: "dialog" },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "u-kicker" }, "Letra"),
+      h("div", { style: { display: "flex", gap: 20, alignItems: "center", paddingRight: 48 } },
+        h("div", { style: { textAlign: "center" } },
+          h("div", { className: "glyph", lang: "ru" }, l.upper + " " + l.lower),
+          h("div", { className: "cursiva", lang: "ru" }, l.upper + "\u2009" + l.lower)),
+        h("div", { style: { flex: 1, minWidth: 0 } },
+          h("div", { style: { fontSize: 20, fontWeight: 800, color: c.text }, lang: "ru" }, l.name),
+          h("div", { style: { fontSize: 14, color: c.textSub, marginTop: 4 } }, "Suena: /" + l.translit + "/"),
+          h("button", { className: "play", style: { marginTop: 10 }, onClick: () => sonidoLetra(l), "aria-label": "Escuchar" }, "▶"))),
+      h("div", { className: "u-text", style: { marginTop: 14 } }, l.pronunciation),
+      h("div", { className: "status-row" },
+        [0, 1, 2].map(v => {
+          const on = nivel === v;
+          return h("button", { key: v, className: "status-btn", onClick: () => setNivel(l, v),
+            style: { background: on ? cols[v] + "22" : c.bg3, border: `1px solid ${on ? cols[v] : c.border}`, color: on ? cols[v] : c.textMuted } },
+            v === 0 ? "No estudiada" : v === 1 ? "Aprendiendo" : "Dominada");
+        })),
+      h("div", { className: "u-card info" },
+        h("div", { className: "info-t" }, "Cómo suena"),
+        h("div", { className: "info-x" }, l.details.description + " " + l.details.similar)),
+      h("div", { className: "u-card info" },
+        h("div", { className: "info-t" }, "Errores comunes"),
+        h("div", { className: "info-x" }, l.details.mistakes)),
+      h("div", { className: "u-card info" },
+        h("div", { className: "info-t" }, "Consejo"),
+        h("div", { className: "info-x" }, l.details.tips + (l.details.similar_letters ? " " + l.details.similar_letters : ""))),
+      h("div", { className: "u-sec" }, "Palabras para practicar"),
+      h("div", { className: "u-card", style: { padding: "4px 16px" } },
+        l.words.map((w, i) => {
+          const e = lexComerById(w.lexId);
+          return h("div", { key: i, className: "wrow" },
+            h("div", { style: { flex: 1, minWidth: 0 } },
+              h(PalabraLetra, { w, letra: l, c }),
+              h("div", { style: { fontSize: 12.5, color: c.textSub, fontStyle: "italic", marginTop: 2 } }, w.translit),
+              h("div", { style: { fontSize: 14, color: c.text, marginTop: 3 } }, w.meaning),
+              w.note && h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 3, lineHeight: 1.4 } }, w.note)),
+            h("button", { className: "play", onClick: () => hablar(e ? e.ru : w.cyrillic), "aria-label": "Escuchar" }, "▶"));
+        }))));
+}
+
+/* ── Tarjetas ── */
+function Tarjetas({ letras, titulo, c, niveles, setNivel, onClose, green }) {
+  const [orden, setOrden] = useState(letras);
+  const [i, setI] = useState(0);
+  const [vuelta, setVuelta] = useState(false);
+  const l = LETRA[orden[i]];
+  const ir = d => { setVuelta(false); setI(x => (x + d + orden.length) % orden.length); };
+  const mezclar = () => { const o = orden.slice().sort(() => Math.random() - .5); setOrden(o); setI(0); setVuelta(false); };
+  const marcar = v => { setNivel(l, v); ir(1); };
+  useEffect(() => {
+    const k = e => { if (e.key === "ArrowRight") ir(1); else if (e.key === "ArrowLeft") ir(-1); else if (e.key === " ") { e.preventDefault(); setVuelta(v => !v); } else if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", k); return () => window.removeEventListener("keydown", k);
+  }, [orden]);
+  const nv = niveles[l.upper] || 0;
+  const w = l.words[0];
+  return h("div", { className: "sheet", role: "dialog" },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "u-kicker" }, "Tarjetas · " + titulo),
+      h("div", { style: { fontSize: 14, color: c.textMuted, marginBottom: 14 } },
+        (i + 1) + " de " + orden.length + (nv ? " · " + (nv === 2 ? "dominada" : "aprendiendo") : "")),
+      h("div", { className: "fc", onClick: () => setVuelta(v => !v), role: "button", tabIndex: 0, "aria-label": "Dar vuelta la tarjeta" },
+        !vuelta
+          ? h(React.Fragment, null,
+              h("div", { className: "glyph", style: { fontSize: 96 }, lang: "ru" }, l.upper + " " + l.lower),
+              h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, "Tocá para ver cómo suena"))
+          : h(React.Fragment, null,
+              h("div", { className: "glyph", style: { fontSize: 44 }, lang: "ru" }, l.upper + " " + l.lower),
+              h("div", { style: { fontSize: 18, fontWeight: 800, color: c.text, marginTop: 12 }, lang: "ru" }, l.name),
+              h("div", { style: { fontSize: 15, color: c.gold, fontWeight: 700, marginTop: 4 } }, "/" + l.translit + "/"),
+              h("div", { className: "u-text", style: { marginTop: 10, fontSize: 14 } }, l.pronunciation),
+              h("div", { style: { marginTop: 16 } }, h(PalabraLetra, { w, letra: l, c, size: 22 })),
+              h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 2 } }, w.translit + " · " + w.meaning),
+              h("button", { className: "play", style: { marginTop: 12 }, onClick: e => { e.stopPropagation(); sonidoLetra(l); setTimeout(() => hablar(lexComerById(w.lexId).ru), 900); }, "aria-label": "Escuchar" }, "▶"))),
+      h("div", { className: "fc-ctl" },
+        h("button", { onClick: () => ir(-1) }, "‹ Anterior"),
+        h("button", { onClick: mezclar }, "Mezclar"),
+        h("button", { onClick: () => ir(1) }, "Siguiente ›")),
+      h("div", { className: "status-row" },
+        h("button", { className: "status-btn", onClick: () => marcar(1),
+          style: { background: nv === 1 ? YELLOW + "22" : c.bg3, border: `1px solid ${nv === 1 ? YELLOW : c.border}`, color: nv === 1 ? YELLOW : c.text } }, "Volver a estudiar"),
+        h("button", { className: "status-btn", onClick: () => marcar(2),
+          style: { background: nv === 2 ? green + "22" : c.bg3, border: `1px solid ${nv === 2 ? green : c.border}`, color: nv === 2 ? green : c.text } }, "Ya la sé"))));
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [modId, setModId] = useState(() => new URLSearchParams(location.search).get("m"));
+  const [niveles, setNiveles] = useState({});
+  const [hoja, setHoja] = useState(null);       // letra abierta
+  const [tarjetas, setTarjetas] = useState(false);
+  const [verPron, setVerPron] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      setVerPron((await azGet('az_u1_pron', true)) !== false);
+      await azLoadProgress();
+      const lv = {};
+      ALPHABET.forEach(l => { lv[l.upper] = azItem('alfabeto:' + l.upper).level; });
+      setNiveles(lv);
+      azSaveUnitProgress(1, {});
+    })();
+    const pop = () => { setModId(new URLSearchParams(location.search).get("m")); setHoja(null); setTarjetas(false); };
+    window.addEventListener("popstate", pop);
+    return () => window.removeEventListener("popstate", pop);
+  }, []);
+
+  const abrirModulo = id => {
+    history.pushState(null, "", id ? "?m=" + id : location.pathname);
+    setModId(id); window.scrollTo(0, 0);
+  };
+  const setNivel = (l, v) => { azSetItemLevel('alfabeto:' + l.upper, v); setNiveles(p => Object.assign({}, p, { [l.upper]: v })); };
+  const togglePron = () => { const v = !verPron; setVerPron(v); azSet('az_u1_pron', v); };
+
+  const c = azColors(darkMode);
+  const green = darkMode ? "#4CAF82" : "#2E7D55";
+  const mod = modId ? unidad1Modulo(modId) : null;
+  const dominadas = ALPHABET.filter(l => niveles[l.upper] === 2).length;
+  const idx = mod ? U.modulos.indexOf(mod) : -1;
+  const vecino = d => { for (let k = idx + d; k >= 0 && k < U.modulos.length; k += d) if (U.modulos[k].tipo !== "pronto") return U.modulos[k]; return null; };
+  const prev = mod && vecino(-1), next = mod && vecino(1);
+
+  const tabs = mod ? [
+    { id: "u", icon: "⊞", label: "Unidad", action: () => abrirModulo(null) },
+    { id: "p", icon: "‹", label: "Anterior", action: () => prev && abrirModulo(prev.id) },
+    { id: "s", icon: "›", label: "Siguiente", action: () => next && abrirModulo(next.id) }
+  ] : [];
+
+  /* ── Portada de la unidad ── */
+  const portada = h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+    h("div", { className: "u-kicker" }, "Unidad 1"),
+    h("h1", { className: "u-title" }, U.titulo),
+    h("div", { className: "u-ru", lang: "ru" }, U.tituloRu),
+    h("p", { className: "u-text", style: { marginTop: 12, fontSize: 14 } }, U.objetivo),
+    h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 6 } }, "Tiempo estimado: " + U.tiempo),
+    h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 18 } },
+      h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } },
+        h("span", { style: { fontSize: 14, fontWeight: 700, color: c.text } }, "Letras dominadas"),
+        h("span", { style: { fontSize: 14, fontWeight: 800, color: green } }, dominadas + " de " + ALPHABET.length)),
+      h("div", { className: "pbar-track" }, h("div", { className: "pbar-fill", style: { width: (dominadas / ALPHABET.length * 100) + "%" } }))),
+    h("div", { className: "u-sec" }, "Módulos"),
+    U.modulos.map(m => {
+      const off = m.tipo === "pronto";
+      return h("div", { key: m.id, className: "u-card mod" + (off ? " off" : ""), role: off ? null : "button", tabIndex: off ? -1 : 0,
+        onClick: () => !off && abrirModulo(m.id), onKeyDown: e => { if (!off && e.key === "Enter") abrirModulo(m.id); } },
+        h("div", { className: "mod-n" }, String(m.n).padStart(2, "0")),
+        h("div", { style: { flex: 1, minWidth: 0 } },
+          h("div", { className: "mod-t" }, m.titulo, off && h("span", { className: "tag-pronto" }, "Pronto")),
+          h("div", { className: "mod-d" }, m.resumen),
+          m.letras && h("div", { className: "mod-l" }, m.letras.map(x => h("span", { key: x, lang: "ru",
+            style: niveles[x] === 2 ? { color: green, borderColor: green + "88" } : niveles[x] === 1 ? { color: YELLOW, borderColor: YELLOW + "88" } : null }, x)))));
+    }));
+
+  /* ── Módulo ── */
+  const vistaModulo = mod && h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+    h("div", { className: "u-kicker" }, "Unidad 1 · Módulo " + mod.n),
+    h("h1", { className: "u-title" }, mod.titulo),
+    mod.tipo === "intro" && mod.secciones.map((s, i) => h("div", { key: i },
+      h("div", { className: "u-sec" }, s.titulo),
+      h("div", { className: "u-text" }, s.texto),
+      s.destacado && h("div", { className: "u-dest" }, s.destacado))),
+    mod.tipo === "intro" && next && h("button", { className: "ubtn", onClick: () => abrirModulo(next.id) }, "Empezar con las letras"),
+    mod.tipo === "letras" && h(React.Fragment, null,
+      h("p", { className: "u-text", style: { marginTop: 12 } }, mod.intro),
+      h("div", { className: "toggle-row" },
+        h("button", { className: "pair-btn", onClick: togglePron,
+          style: verPron ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted } },
+          "Pronunciación en español")),
+      h("div", { className: "lgrid" }, mod.letras.map(x => {
+        const l = LETRA[x], nv = niveles[x] || 0, col = nv === 2 ? green : nv === 1 ? YELLOW : null;
+        return h("div", { key: x, className: "lcard", role: "button", tabIndex: 0, onClick: () => setHoja(x),
+          onKeyDown: e => { if (e.key === "Enter") setHoja(x); },
+          style: { border: `1px solid ${col ? col + "55" : c.border}` } },
+          col && h("span", { style: { position: "absolute", top: 6, right: 8, fontSize: 10, color: col } }, nv === 2 ? "●" : "◑"),
+          h("div", { lang: "ru", style: { display: "flex", alignItems: "baseline", justifyContent: "center", gap: 8, lineHeight: 1 } },
+            h("span", { style: { fontSize: 30, fontWeight: 800, color: c.gold } }, l.upper),
+            h("span", { style: { fontSize: 30, fontWeight: 500, color: c.textSub } }, l.lower)),
+          h("div", { lang: "ru", style: { fontSize: 11, color: c.textMuted, marginTop: 8, fontStyle: "italic" } }, l.name),
+          verPron && h("div", { style: { fontSize: 12, color: c.textSub, marginTop: 3, fontWeight: 600 } }, "/" + l.translit + "/"));
+      })),
+      h("button", { className: "ubtn", onClick: () => setTarjetas(true) }, "Practicar con tarjetas (" + mod.letras.length + ")"),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo)));
+
+  return h(React.Fragment, null,
+    h(Estilos, { c, green }),
+    h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vistaModulo : portada),
+    hoja && h(HojaLetra, { l: LETRA[hoja], c, green, nivel: niveles[hoja] || 0, setNivel, onClose: () => setHoja(null) }),
+    tarjetas && mod && h(Tarjetas, { letras: mod.letras, titulo: mod.titulo, c, green, niveles, setNivel, onClose: () => setTarjetas(false) }),
+    h(AzBurbujaHost, { dark: darkMode }));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

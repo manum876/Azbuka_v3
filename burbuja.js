@@ -62,7 +62,7 @@
       .az-link:focus-visible{outline:2px solid ${c.gold};outline-offset:1px;}
       .az-frase{text-decoration-style:dashed;}
       .az-bb-velo{position:fixed;inset:0;z-index:400;}
-      .az-bb{position:fixed;z-index:401;background:${c.card};border:1px solid ${c.border};border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.4);padding:14px 16px 12px;color:${c.text};font-family:inherit;animation:azBbIn .16s ease both;}
+      .az-bb{position:fixed;z-index:401;background:${c.card};border:1px solid ${c.border};border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.4);padding:14px 16px 12px;color:${c.text};font-family:'Inter','Helvetica Neue',sans-serif;animation:azBbIn .16s ease both;}
       @keyframes azBbIn{from{opacity:0;transform:translateY(4px) scale(.98);}to{opacity:1;transform:none;}}
       @media (prefers-reduced-motion:reduce){.az-bb{animation:none;}}
       .az-bb-flecha{position:absolute;width:12px;height:12px;background:${c.card};transform:rotate(45deg);}

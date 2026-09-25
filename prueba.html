@@ -48,7 +48,7 @@ function Ejercicio({ ej, c, dark }) {
       h("input", {
         value: txt, lang: ej.idioma === "ru" ? "ru" : "es",
         autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-        placeholder: ej.idioma === "ru" ? "Escribí en ruso, sin acentos…" : "Escribí en español…",
+        placeholder: ej.idioma === "es" ? "Escribí en español…" : "Escribí en ruso…",
         onInput: e => { setTxt(e.target.value); setR(null); },
         onKeyDown: e => { if (e.key === "Enter") comprobar(); },
         style: { flex: 1, minWidth: 0, fontSize: 16, padding: "11px 12px", borderRadius: 9, background: c.bg3, border: `1px solid ${c.border}`, color: c.text }
@@ -84,8 +84,9 @@ function App() {
 
       h("div", { style: card },
         h("div", { style: lbl }, "Corrector"),
-        h("div", { style: { fontSize: 13, color: c.textMuted, lineHeight: 1.5 } },
-          "Los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. Tampoco importa si ponés е en lugar de ё. Probá errores como книга, ресторана o читает."),
+        h("div", { style: { background: c.gold + "14", border: `1px solid ${c.gold}66`, borderRadius: 10, padding: "12px 14px", fontSize: 14.5, lineHeight: 1.5, color: c.text, fontWeight: 600, marginBottom: 12 } },
+          "Los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. Tampoco importa si ponés е en lugar de ё."),
+        h("div", { style: { fontSize: 13, color: c.textMuted, lineHeight: 1.5, marginBottom: 4 } }, "Probá errores como книга, ресторана o читает."),
         EJ.map(ej => h(Ejercicio, { key: ej.id, ej, c, dark: darkMode })))),
     h(AzBurbujaHost, { dark: darkMode }));
 }
