@@ -183,14 +183,14 @@ const UNIDAD_1 = {
     {
       id: "u1m10", n: 10, tipo: "examen",
       titulo: "Evaluación",
-      resumen: "Lectura, audio, escritura y transliteración.",
+      resumen: "Letras, audio, lectura, dictado y escritura.",
       intro: "Veinte ejercicios de toda la unidad, en cinco partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada. Si no llegás, te digo qué conviene reforzar antes de seguir.",
       partes: [
-        { nombre: "Lectura", tipos: ["letra-sonido", "significado", "falsas-amigas"], n: 4 },
-        { nombre: "Audio", tipos: ["escuchar-letra", "pares"], n: 4 },
+        { nombre: "Letras", tipos: ["audio-letra", "vf", "escuchar-letra"], n: 4 },
+        { nombre: "Audio", tipos: ["pares"], n: 4 },
+        { nombre: "Lectura", tipos: ["significado"], n: 4 },
         { nombre: "Dictado", tipos: ["dictado"], n: 4 },
-        { nombre: "Transliteración", tipos: ["transliterar"], n: 4 },
-        { nombre: "Escritura", tipos: ["es-ru", "completar", "sonido-letra"], n: 4 }
+        { nombre: "Escritura", tipos: ["es-ru", "completar", "ordenar"], n: 4 }
       ],
       aprobado: 0.8
     }
@@ -220,22 +220,17 @@ window.unidad1Modulo = unidad1Modulo;
    Requiere ALPHABET y el léxico cargados.
    ============================================================ */
 const U1_SONIDO = { "Й": "i breve (la y de «hoy»)", "Ъ": "signo duro, sin sonido", "Ь": "signo blando, sin sonido" };
-const U1_LIT = { а:"a", б:"b", в:"v", г:"g", д:"d", е:"ie", ё:"io", ж:"zh", з:"z", и:"i", й:"i", к:"k", л:"l", м:"m", н:"n", о:"o", п:"p", р:"r", с:"s", т:"t", у:"u", ф:"f", х:"j", ц:"ts", ч:"ch", ш:"sh", щ:"sch", ъ:"", ы:"y", ь:"", э:"e", ю:"iu", я:"ia" };
-/* Falsas amigas: cómo las leería alguien que ve letras latinas */
-const U1_FALSA = { р:"p", н:"h", в:"b", с:"c", у:"y", х:"x" };
 
 function ejerciciosUnidad1() {
   const L = ALPHABET, out = [];
   const modDe = {};
   UNIDAD_1.modulos.forEach(m => (m.letras || []).forEach(x => { modDe[x] = m.n; }));
-  const sonido = l => U1_SONIDO[l.upper] || "/" + l.translit + "/";
   const baraja = (arr, semilla) => {         /* mezcla determinística: mismo orden siempre */
     const a = arr.slice(); let s = semilla;
     for (let i = a.length - 1; i > 0; i--) { s = (s * 9301 + 49297) % 233280; const j = Math.floor(s / 233280 * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
     return a;
   };
   const otros = (lista, excluir, n, semilla) => baraja(lista.filter(x => excluir.indexOf(x) < 0), semilla).slice(0, n);
-  const lit = w => w.toLowerCase().split("").map(ch => U1_LIT[ch] != null ? U1_LIT[ch] : ch).join("");
 
   /* Palabras de la unidad (una vez cada una) */
   const palabras = [];
@@ -248,66 +243,68 @@ function ejerciciosUnidad1() {
       modulo: Math.max.apply(null, letras.map(ch => modDe[ch])) });
   }));
 
-  /* 1. Letra → sonido (elegir) */
-  L.forEach((l, i) => {
-    const vistas = L.filter(x => modDe[x.upper] <= modDe[l.upper]);   /* distractores ya vistos */
-    const mal = otros(vistas, [l], 3, i + 7).map(sonido);
-    out.push({ id: "U1-ls-" + l.upper, tipo: "letra-sonido", forma: "elegir", dificultad: 1, modulo: modDe[l.upper], grupo: l.upper,
-      pide: "¿Cómo suena esta letra?", grande: l.upper + " " + l.lower, opciones: baraja([sonido(l)].concat(mal), i + 3), correcta: sonido(l),
-      explicacion: l.upper + " suena " + sonido(l) + ". " + l.pronunciation + ".", recordar: l.details.tips });
+  /* Todo con audio: el alumno escucha y reconoce la letra en cirílico.
+     No hay ejercicios de transliteración: la transliteración es solo
+     una ayuda de lectura, no algo que se practique. */
+  const conSonido = L.filter(l => !U1_SONIDO[l.upper] || l.upper === "Й");   /* Ъ y Ь no suenan */
+
+  /* 1. Escuchar y elegir la letra */
+  conSonido.forEach((l, i) => {
+    const vistas = conSonido.filter(x => modDe[x.upper] <= Math.max(modDe[l.upper], 3));
+    const mal = otros(vistas, [l], 3, i + 7).map(x => x.upper + " " + x.lower);
+    out.push({ id: "U1-ae-" + l.upper, tipo: "audio-letra", forma: "elegir", dificultad: 1, modulo: modDe[l.upper], grupo: l.upper,
+      pide: "Escuchá: ¿qué letra es?", audio: l.lower, opciones: baraja([l.upper + " " + l.lower].concat(mal), i + 3), correcta: l.upper + " " + l.lower,
+      explicacion: "Sonó la " + l.upper + " (" + l.name + "). " + l.pronunciation + ".", recordar: l.details.tips });
   });
 
-  /* 2. Sonido → escribir la letra */
-  L.filter(l => !U1_SONIDO[l.upper] || l.upper === "Й").forEach(l => {
-    out.push({ id: "U1-se-" + l.upper, tipo: "sonido-letra", forma: "escribir", dificultad: 2, modulo: modDe[l.upper], grupo: l.upper,
-      pide: "Escribí la letra que suena " + sonido(l) + ".", esperadas: [l.lower], idioma: "ru", mayus: true,
-      explicacion: "Es la " + l.upper + " (" + l.name + "): " + l.pronunciation + ".", recordar: l.details.similar_letters });
-  });
-
-  /* 3. Escuchar la letra y escribirla */
-  L.filter(l => !U1_SONIDO[l.upper]).forEach(l => {
+  /* 2. Escuchar la letra y escribirla */
+  conSonido.forEach(l => {
     out.push({ id: "U1-el-" + l.upper, tipo: "escuchar-letra", forma: "escribir", dificultad: 2, modulo: modDe[l.upper], grupo: l.upper,
       pide: "Escuchá y escribí la letra.", audio: l.lower, esperadas: [l.lower], idioma: "ru", mayus: true,
       explicacion: "Sonó la " + l.upper + ", que se llama " + l.name + ".", recordar: l.details.tips });
   });
 
-  /* 4. Verdadero o falso sobre el sonido de una letra */
-  L.forEach((l, i) => {
-    const otra = otros(L.filter(x => modDe[x.upper] <= modDe[l.upper] && !U1_SONIDO[x.upper]), [l], 1, i + 11)[0];
+  /* 3. Verdadero o falso con audio: ¿lo que suena es esta letra? */
+  conSonido.forEach((l, i) => {
+    const otra = otros(conSonido.filter(x => modDe[x.upper] <= Math.max(modDe[l.upper], 3)), [l], 1, i + 11)[0];
     out.push({ id: "U1-vf-" + l.upper + "-v", tipo: "vf", forma: "vf", dificultad: 1, modulo: modDe[l.upper], grupo: l.upper,
-      afirmacion: "La letra " + l.upper + " suena " + sonido(l) + ".", verdadero: true,
-      explicacion: "Verdadero: " + l.pronunciation + "." });
+      audio: l.lower, afirmacion: "Suena la letra " + l.upper + " " + l.lower + ".", verdadero: true,
+      explicacion: "Verdadero: sonó la " + l.upper + " (" + l.name + ")." });
     out.push({ id: "U1-vf-" + l.upper + "-f", tipo: "vf", forma: "vf", dificultad: 1, modulo: modDe[l.upper], grupo: l.upper,
-      afirmacion: "La letra " + l.upper + " suena " + sonido(otra) + ".", verdadero: false,
-      explicacion: "Falso: " + l.upper + " suena " + sonido(l) + ". " + sonido(otra) + " es el sonido de la " + otra.upper + "." });
+      audio: otra.lower, afirmacion: "Suena la letra " + l.upper + " " + l.lower + ".", verdadero: false,
+      explicacion: "Falso: sonó la " + otra.upper + " (" + otra.name + "), no la " + l.upper + "." });
   });
 
-  /* 5. Unir letras con su sonido (de a 4, dentro de cada módulo acumulado) */
+  /* 4. Unir sonidos con letras: grupos de 4 que no se repiten.
+     Desordenar las mismas 4 letras no es un ejercicio nuevo, así que
+     cada grupo es distinto y todos comparten grupo "unir": como mucho
+     uno por sesión. */
+  const usadosEm = new Set();
   UNIDAD_1.modulos.filter(m => m.letras).forEach(m => {
-    const hasta = L.filter(l => modDe[l.upper] <= m.n && !U1_SONIDO[l.upper]);
-    const base = m.letras.filter(x => !U1_SONIDO[x]);
-    for (let k = 0; k < base.length; k += 2) {
-      const propias = base.slice(k, k + 2).map(x => L.find(l => l.upper === x));
-      const extra = otros(hasta, propias, 4 - propias.length, m.n * 13 + k);
-      const set = propias.concat(extra);
-      out.push({ id: "U1-em-" + set.map(l => l.upper).join(""), tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: m.n, grupo: "em" + m.n + k,
-        pide: "Uní cada letra con su sonido.", pares: set.map(l => [l.upper + " " + l.lower, sonido(l)]),
-        explicacion: set.map(l => l.upper + " = " + sonido(l)).join(" · ") });
+    const propias = m.letras.filter(x => !U1_SONIDO[x] || x === "Й");
+    const anteriores = conSonido.filter(l => modDe[l.upper] < m.n).map(l => l.upper);
+    for (let k = 0; k < propias.length; k += 4) {
+      let set = propias.slice(k, k + 4);
+      if (set.length < 4) set = set.concat(baraja(anteriores, m.n * 13 + k).filter(x => set.indexOf(x) < 0).slice(0, 4 - set.length));
+      if (set.length < 4) continue;
+      const clave = set.slice().sort().join("");
+      if (usadosEm.has(clave)) continue;
+      usadosEm.add(clave);
+      const ls = set.map(x => L.find(l => l.upper === x));
+      out.push({ id: "U1-em-" + clave, tipo: "unir", forma: "emparejar", dificultad: 1, modulo: m.n, grupo: "unir",
+        pide: "Escuchá cada sonido y unilo con su letra.", audioIzq: true, pares: ls.map(l => [l.lower, l.upper + " " + l.lower]),
+        explicacion: ls.map(l => l.upper + " (" + l.name + ")").join(" · ") });
     }
   });
 
   /* 6–12. Ejercicios con palabras */
   palabras.forEach((p, i) => {
     const dif = p.ru.length <= 4 ? 0 : 1;
-    const base = { modulo: p.modulo, grupo: p.id, lex: [p.id] };
+    const base = { modulo: p.modulo, grupo: p.id, lex: [p.id], oir: p.ru };   /* oir: suena al responder */
     /* dictado */
     out.push(Object.assign({ id: "U1-dic-" + p.id, tipo: "dictado", forma: "escribir", dificultad: 2 + dif,
       pide: "Escuchá y escribí la palabra.", audio: p.ru, esperadas: [p.acento], idioma: "ru",
       explicacion: p.acento + " (" + p.tr + "): " + p.es + ".", recordar: p.nota }, base));
-    /* transliterar */
-    out.push(Object.assign({ id: "U1-tr-" + p.id, tipo: "transliterar", forma: "escribir", dificultad: 2 + dif,
-      pide: "Escribí cómo se lee con letras latinas.", grande: p.acento, esperadas: [p.tr, lit(p.ru)], idioma: "translit",
-      explicacion: "Se lee «" + p.tr + "». Letra por letra sería «" + lit(p.ru) + "»: las dos respuestas valen.", recordar: p.nota }, base));
     /* cirílico → español (elegir) */
     const dis = otros(palabras, [p], 3, i + 17).map(x => x.es);
     out.push(Object.assign({ id: "U1-sig-" + p.id, tipo: "significado", forma: "elegir", dificultad: 2,
@@ -315,14 +312,14 @@ function ejerciciosUnidad1() {
       explicacion: p.acento + " (" + p.tr + ") significa «" + p.es + "»." }, base));
     /* español → cirílico (escribir) */
     out.push(Object.assign({ id: "U1-esru-" + p.id, tipo: "es-ru", forma: "escribir", dificultad: 3 + dif,
-      pide: "Escribí en ruso: «" + p.es + "».", pista: "Empieza con " + p.ru[0].toUpperCase() + " y tiene " + p.ru.length + " letras.", esperadas: [p.acento], idioma: "ru",
+      pide: "Escribí en ruso: «" + p.es + "».", audio: p.ru, audioManual: true, pista: "Empieza con " + p.ru[0].toUpperCase() + " y tiene " + p.ru.length + " letras.", esperadas: [p.acento], idioma: "ru",
       explicacion: "Es " + p.acento + " (" + p.tr + ")." }, base));
     /* completar la letra que falta (la letra de la ficha) */
     const pos = p.ru.toLowerCase().indexOf(p.letra.lower);
     if (pos >= 0 && p.ru.length > 1) {
       out.push(Object.assign({ id: "U1-comp-" + p.id + "-" + p.letra.upper, tipo: "completar", forma: "escribir", dificultad: 2,
-        pide: "Completá la letra que falta.", grande: p.ru.slice(0, pos) + "_" + p.ru.slice(pos + 1), audio: p.ru, pista: p.es,
-        esperadas: [p.letra.lower], idioma: "ru", completa: p.acento,
+        pide: "Completá la letra que falta (o escribí la palabra entera).", grande: p.ru.slice(0, pos) + "_" + p.ru.slice(pos + 1), audio: p.ru, pista: p.es,
+        esperadas: [p.letra.lower, p.acento], idioma: "ru", completa: p.acento,
         explicacion: "Falta la " + p.letra.upper + ": " + p.acento + " (" + p.tr + ").", recordar: p.nota }, base, { grupo: p.id }));
     }
     /* ordenar letras (palabras de 3 a 7 letras) */
@@ -332,17 +329,6 @@ function ejerciciosUnidad1() {
       out.push(Object.assign({ id: "U1-ord-" + p.id, tipo: "ordenar", forma: "ordenar", dificultad: 1 + dif,
         pide: "Ordená las letras: «" + p.es + "».", audio: p.ru, fichas, esperada: p.ru,
         explicacion: "Es " + p.acento + " (" + p.tr + ")." }, base));
-    }
-    /* encontrar el error: lectura con falsas amigas */
-    const ff = p.ru.split("").filter(ch => U1_FALSA[ch]);
-    if (ff.length) {
-      const malo = p.ru.split("").map(ch => U1_FALSA[ch] || U1_LIT[ch] || ch).join("");
-      const correcto = p.tr;   /* cómo se lee de verdad (pronunciación figurada) */
-      out.push(Object.assign({ id: "U1-err-" + p.id, tipo: "falsas-amigas", forma: "elegir", dificultad: 2,
-        pide: "¿Cómo se lee?", grande: p.acento, opciones: baraja([correcto, malo], i + 29), correcta: correcto,
-        explicacion: "Se lee «" + correcto + "». La otra opción lee " + (lista => lista.length > 1 ? lista.slice(0, -1).join(", ") + " y " + lista[lista.length - 1] : lista[0])(
-          ff.map(ch => ch.toUpperCase()).filter((x, k, a) => a.indexOf(x) === k).map(ch => ch + " como si fuera la " + U1_FALSA[ch.toLowerCase()] + " latina")) + ".",
-        recordar: "Falsas amigas: В = v, Н = n, Р = r, С = s, У = u, Х = j." }, base));
     }
   });
 
@@ -362,8 +348,8 @@ function ejerciciosUnidad1() {
 }
 
 /* Mezcla de la sesión: fuerte presencia de escritura */
-const U1_MEZCLA = { dictado: 3, "sonido-letra": 2, "escuchar-letra": 1, completar: 2, transliterar: 2, "es-ru": 1, ordenar: 2,
-  "letra-sonido": 1, significado: 1, pares: 1, vf: 1, "falsas-amigas": 1, emparejar: 1 };
+const U1_MEZCLA = { dictado: 3, "escuchar-letra": 2, completar: 2, "es-ru": 2, ordenar: 2,
+  "audio-letra": 1, significado: 1, pares: 1, vf: 1, unir: 1 };
 
 window.ejerciciosUnidad1 = ejerciciosUnidad1;
 window.U1_MEZCLA = U1_MEZCLA;
