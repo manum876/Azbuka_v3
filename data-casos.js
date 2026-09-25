@@ -9,6 +9,9 @@
    con el léxico.
    Actualizado el 24/09/2026 (módulo Diálogos): меню́ (CMR-05476),
    indeclinable según OpenRussian y pymorphy3.
+   Campo nuevo "conteo" (24/09/2026): forma de conteo, la que va después
+   de 2, 3 y 4 cuando es distinta del genitivo singular (час: два часа́,
+   pero ча́са). Hoy solo en час.
 
    QUÉ HAY ACÁ Y QUÉ NO
    Este archivo guarda SOLO las formas declinadas. Todo lo demás
@@ -397,7 +400,7 @@ const CASOS = {
    n:["хоро́шее", "хоро́шего", "хоро́шему", "хоро́шее", "хоро́шим", "хоро́шем"],
    pl:["хоро́шие", "хоро́ших", "хоро́шим", ["хоро́шие","хоро́ших"], "хоро́шими", "хоро́ших"],
    corta:{ m:"хоро́ш", f:"хороша́", n:"хорошо́", pl:"хороши́" } },
- "CMR-00200": { ru:"час", tipo:"sustantivo",
+ "CMR-00200": { ru:"час", tipo:"sustantivo", conteo:"часа́",
    sg:["час", "ча́са", "ча́су", "час", "ча́сом", "ча́се"],
    pl:["часы́", "часо́в", "часа́м", "часы́", "часа́ми", "часа́х"] },
  "CMR-00203": { ru:"пра́во", tipo:"sustantivo",

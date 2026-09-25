@@ -13,7 +13,7 @@
    QUÉ EXPONE
      GRAMATICA_CASOS        los 6 casos (clave = id del caso)
      GRAMATICA_CASOS_ORDEN  orden tradicional ruso de los casos
-     GRAMATICA_FORMAS       locativo, partitivo, forma corta,
+     GRAMATICA_FORMAS       locativo, partitivo, forma de conteo, forma corta,
                             acusativo y animacidad, numerales,
                             pronombres con н-, indeclinables
      GRAMATICA_RECCION      grupos de rección de los verbos
@@ -184,6 +184,15 @@ const GRAMATICA_FORMAS = {
    ["ча́шка {ча́ю}","una taza de té","чай → ча́ю: partitivo coloquial, «un poco de té». También se puede decir ча́шка ча́я."],
    ["Доба́вь {са́хару}.","Agregá un poco de azúcar.","са́хар → са́хару: partitivo, «un poco de azúcar». El genitivo normal también sirve: доба́вь са́хара."],
    ["из {до́му}","de casa (expresión fija)","дом → до́му: expresión fija. Hoy es más común из до́ма."]
+  ]
+ },
+ conteo: {
+  titulo: "Forma de conteo (два часа́)",
+  texto: "Después de 2, 3 y 4 (y de los números que terminan en ellos, como 22 o 34) el sustantivo va en genitivo singular. Unas pocas palabras masculinas usan ahí una forma especial, con el acento en la terminación, distinta del genitivo normal. La más importante es час: два часа́, pero о́коло ча́са.",
+  ejemplos: [
+   ["Сейча́с два {часа́}.","Son las dos.","Después de 2, 3 y 4, час usa la forma de conteo часа́, con el acento al final."],
+   ["Мы шли три {часа́}.","Caminamos tres horas.","Три + forma de conteo: три часа́."],
+   ["Я ждал о́коло {ча́са}.","Esperé cerca de una hora.","Sin un número delante se usa el genitivo normal: ча́са."]
   ]
  },
  formaCorta: {

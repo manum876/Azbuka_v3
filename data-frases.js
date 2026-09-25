@@ -15,7 +15,7 @@
 
 const FRASES = [
   {"id":"FRS-001","funcion":"saludar","ru":"Приве́т!","tr":"Priviét!","es":"¡Hola!","registro":"ты","nivel":"A1","uso":"El saludo de confianza: amigos, familia, gente de tu edad.","cul":"CUL-001","lex":["CMR-02527"]},
-  {"id":"FRS-002","funcion":"saludar","ru":"Здра́вствуйте!","tr":"Zdrástvuiti!","es":"¡Hola! (formal)","registro":"вы","nivel":"A1","uso":"El saludo formal. Sirve a cualquier hora, con quien tratás de вы o con varias personas. En el habla rápida suena «zdrásti».","cul":"CUL-001","lex":["CMR-02369"]},
+  {"id":"FRS-002","funcion":"saludar","ru":"Здра́вствуйте!","tr":"Zdrástvuiti!","es":"¡Hola! (formal)","registro":"вы","nivel":"A1","uso":"El saludo formal. Sirve a cualquier hora, con quien tratás de вы o con varias personas. En el habla rápida suena «zdrásti».","cul":"CUL-001","lex":["CMR-05479"]},
   {"id":"FRS-003","funcion":"saludar","ru":"До́брое у́тро!","tr":"Dóbrayi útra!","es":"¡Buen día!","registro":"","nivel":"A1","uso":"Hasta el mediodía, más o menos.","lex":["CMR-00662","CMR-00336"]},
   {"id":"FRS-004","funcion":"saludar","ru":"До́брый день!","tr":"Dóbryi dien!","es":"¡Buenas tardes!","registro":"","nivel":"A1","uso":"Durante el día. Es un saludo neutro, muy común en negocios y oficinas.","lex":["CMR-00662","CMR-00071"]},
   {"id":"FRS-005","funcion":"saludar","ru":"До́брый ве́чер!","tr":"Dóbryi viéchir!","es":"¡Buenas noches! (al llegar)","registro":"","nivel":"A1","uso":"Para saludar a la tarde-noche. Para despedirse a la noche se usa споко́йной но́чи.","lex":["CMR-00662","CMR-00295"]},

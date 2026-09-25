@@ -1,7 +1,7 @@
 /* ============================================================
    DATA-VERBOS.JS — Conjugaciones de los verbos del léxico AZBUKA
    ------------------------------------------------------------
-   Total: 1656 verbos (todos los posNormalized:"verbo" de
+   Total: 1658 verbos (todos los posNormalized:"verbo" de
    data-lexicon.js). Generado el 23/09/2026.
    Actualizado el 23/09/2026: 6 verbos nuevos (CMR-05419–05421 y los
    homógrafos separados CMR-05466–05468), 2 entradas huérfanas quitadas
@@ -13,7 +13,8 @@
    biaspectuales; вида́ть suma su presente (вида́ю…), que Zalizniak
    registra como coloquial.
    Actualizado el 24/09/2026 (módulo Diálogos): дое́хать (CMR-05472) y
-   потеря́ться (CMR-05473). Formas de OpenRussian, cruzadas con pymorphy3.
+   потеря́ться (CMR-05473), y sus parejas доезжа́ть (CMR-05477) y теря́ться
+   (CMR-05478). Formas de OpenRussian, cruzadas con pymorphy3.
 
    QUÉ HAY ACÁ Y QUÉ NO
    Este archivo guarda SOLO las formas conjugadas. Todo lo demás
@@ -6728,7 +6729,15 @@ const VERBOS = {
  "CMR-05473": { ru:"потеря́ться",
    futuro:["потеря́юсь","потеря́ешься","потеря́ется","потеря́емся","потеря́етесь","потеря́ются"],
    pasado:{ m:"потеря́лся", f:"потеря́лась", n:"потеря́лось", pl:"потеря́лись" },
-   imperativo:{ ty:"потеря́йся", vy:"потеря́йтесь" } }
+   imperativo:{ ty:"потеря́йся", vy:"потеря́йтесь" } },
+ "CMR-05477": { ru:"доезжа́ть",
+   presente:["доезжа́ю","доезжа́ешь","доезжа́ет","доезжа́ем","доезжа́ете","доезжа́ют"],
+   pasado:{ m:"доезжа́л", f:"доезжа́ла", n:"доезжа́ло", pl:"доезжа́ли" },
+   imperativo:{ ty:"доезжа́й", vy:"доезжа́йте" } },
+ "CMR-05478": { ru:"теря́ться",
+   presente:["теря́юсь","теря́ешься","теря́ется","теря́емся","теря́етесь","теря́ются"],
+   pasado:{ m:"теря́лся", f:"теря́лась", n:"теря́лось", pl:"теря́лись" },
+   imperativo:{ ty:"теря́йся", vy:"теря́йтесь" } }
 };
 
 /* Devuelve la conjugación de un verbo por ID, o null. */

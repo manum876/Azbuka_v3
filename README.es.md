@@ -66,7 +66,7 @@ El enfoque es **orientado a la producción**: además de reconocer respuestas, s
 
 ### 📚 Diccionario
 
-Es la base de toda la app: **5.403 palabras** (Comer 5000 más vocabulario propio). Cada una tiene:
+Es la base de toda la app: **5.406 palabras** (Comer 5000 más vocabulario propio). Cada una tiene:
 
 - la palabra con su **acento marcado**;
 - la **IPA** y una **pronunciación figurada en español** (jarashó, spasíba);
@@ -78,7 +78,7 @@ Cada palabra tiene su ficha, con audio.
 
 ### 🗣️ Verbos
 
-Las conjugaciones de los **1.656 verbos** del diccionario:
+Las conjugaciones de los **1.658 verbos** del diccionario:
 
 - presente, futuro, pasado e imperativo, con audio en cada forma;
 - comparación en paralelo con la **pareja aspectual** (imperfectivo / perfectivo);
@@ -115,8 +115,8 @@ Una guía de conversación: **30 diálogos** de situaciones cotidianas, muchos c
 ## Características
 
 - 🎓 Curso de 12 unidades, A1 → B1
-- 📚 Diccionario central de 5.403 palabras, con acento, IPA y pronunciación figurada
-- 🗣️ 1.656 verbos conjugados, con pareja aspectual y rección
+- 📚 Diccionario central de 5.406 palabras, con acento, IPA y pronunciación figurada
+- 🗣️ 1.658 verbos conjugados, con pareja aspectual y rección
 - 📖 3.230 palabras declinadas en los 6 casos
 - 🔤 Alfabeto cirílico completo
 - 💬 30 diálogos, 52 frases útiles y 9 notas culturales

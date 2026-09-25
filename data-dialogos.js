@@ -93,8 +93,8 @@ const DLG_FUNCIONES = [["saludar","Saludar"],["despedirse","Despedirse"],["prese
 const DIALOGOS = [
 { "id":"DLG-001","titulo":"Saludo básico","tituloRu":"Как дела́?","situacion":"conocer","funcion":"saludar","nivel":"A1","personajes":["masha","lucas"],"vy":{"masha":"olga"},
   "lineas": [
-    {"p":"masha","ru":"Приве́т, Лу́кас!","tr":"Priviét, Lúkas!","es":"¡Hola, Lucas!","lex":["CMR-02527","PROPIO"],"f":["FRS-001"],"cul":"CUL-001","vy":{"ru":"Здра́вствуйте, Лу́кас!","tr":"Zdrástvuiti, Lúkas!","es":"¡Hola, Lucas!","lex":["CMR-02369","PROPIO"],"f":["FRS-002"],"obs":"Здра́вствуйте es el saludo formal: se usa con вы."}},
-    {"p":"lucas","ru":"Приве́т! Как дела́?","tr":"Priviét! Kak dilá?","es":"¡Hola! ¿Cómo andás?","lex":["CMR-02527","CMR-00019","CMR-00065"],"f":["FRS-001","FRS-006"],"cul":"CUL-002","vy":{"ru":"Здра́вствуйте, О́льга Петро́вна! Как у вас дела́?","tr":"Zdrástvuiti, Ólga Pitróvna! Kak u vas dilá?","es":"¡Hola, Olga Petrovna! ¿Cómo le va?","lex":["CMR-02369","PROPIO","PROPIO","CMR-00019","CMR-00021","CMR-00038","CMR-00065"],"f":["FRS-002","FRS-007"],"cul":"CUL-003"}},
+    {"p":"masha","ru":"Приве́т, Лу́кас!","tr":"Priviét, Lúkas!","es":"¡Hola, Lucas!","lex":["CMR-02527","PROPIO"],"f":["FRS-001"],"cul":"CUL-001","vy":{"ru":"Здра́вствуйте, Лу́кас!","tr":"Zdrástvuiti, Lúkas!","es":"¡Hola, Lucas!","lex":["CMR-05479","PROPIO"],"f":["FRS-002"],"obs":"Здра́вствуйте es el saludo formal: se usa con вы."}},
+    {"p":"lucas","ru":"Приве́т! Как дела́?","tr":"Priviét! Kak dilá?","es":"¡Hola! ¿Cómo andás?","lex":["CMR-02527","CMR-00019","CMR-00065"],"f":["FRS-001","FRS-006"],"cul":"CUL-002","vy":{"ru":"Здра́вствуйте, О́льга Петро́вна! Как у вас дела́?","tr":"Zdrástvuiti, Ólga Pitróvna! Kak u vas dilá?","es":"¡Hola, Olga Petrovna! ¿Cómo le va?","lex":["CMR-05479","PROPIO","PROPIO","CMR-00019","CMR-00021","CMR-00038","CMR-00065"],"f":["FRS-002","FRS-007"],"cul":"CUL-003"}},
     {"p":"masha","ru":"Хорошо́, спаси́бо. А у тебя́?","tr":"Jarashó, spasíba. A u tibiá?","es":"Bien, gracias. ¿Y vos?","lex":["CMR-00190","CMR-02213","CMR-00010","CMR-00021","CMR-00033"],"f":["FRS-024"],"vy":{"ru":"Хорошо́, спаси́бо. А у вас?","tr":"Jarashó, spasíba. A u vas?","es":"Bien, gracias. ¿Y usted?","lex":["CMR-00190","CMR-02213","CMR-00010","CMR-00021","CMR-00038"],"f":["FRS-024"]}},
     {"p":"lucas","ru":"Норма́льно.","tr":"Narmálna.","es":"Bien, sin novedades.","lex":["CMR-03966"],"f":["FRS-008"],"obs":"Норма́льно no es «normal»: es la respuesta neutra, «bien»."}
   ] },
@@ -108,7 +108,7 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-003","titulo":"¿Cómo te llamás?","tituloRu":"Как тебя́ зову́т?","situacion":"conocer","funcion":"presentarse","nivel":"A1","personajes":["lucas","masha"],"vy":{"masha":"olga"},
   "lineas": [
-    {"p":"lucas","ru":"Приве́т! Как тебя́ зову́т?","tr":"Priviét! Kak tibiá zavút?","es":"¡Hola! ¿Cómo te llamás?","lex":["CMR-02527","CMR-00019","CMR-00033","CMR-00912"],"f":["FRS-001","FRS-015"],"obs":"Literalmente «¿cómo te llaman?»: тебя́ es acusativo de ты.","vy":{"ru":"Здра́вствуйте! Как вас зову́т?","tr":"Zdrástvuiti! Kak vas zavút?","es":"¡Hola! ¿Cómo se llama?","lex":["CMR-02369","CMR-00019","CMR-00038","CMR-00912"],"f":["FRS-002","FRS-016"],"obs":"Literalmente «¿cómo lo llaman?»: вас es acusativo de вы."}},
+    {"p":"lucas","ru":"Приве́т! Как тебя́ зову́т?","tr":"Priviét! Kak tibiá zavút?","es":"¡Hola! ¿Cómo te llamás?","lex":["CMR-02527","CMR-00019","CMR-00033","CMR-00912"],"f":["FRS-001","FRS-015"],"obs":"Literalmente «¿cómo te llaman?»: тебя́ es acusativo de ты.","vy":{"ru":"Здра́вствуйте! Как вас зову́т?","tr":"Zdrástvuiti! Kak vas zavút?","es":"¡Hola! ¿Cómo se llama?","lex":["CMR-05479","CMR-00019","CMR-00038","CMR-00912"],"f":["FRS-002","FRS-016"],"obs":"Literalmente «¿cómo lo llaman?»: вас es acusativo de вы."}},
     {"p":"masha","ru":"Меня́ зову́т Ма́ша. А тебя́?","tr":"Miniá zavút Másha. A tibiá?","es":"Me llamo Masha. ¿Y vos?","lex":["CMR-00005","CMR-00912","PROPIO","CMR-00010","CMR-00033"],"f":["FRS-017"],"vy":{"ru":"Меня́ зову́т О́льга Петро́вна. А вас?","tr":"Miniá zavút Ólga Pitróvna. A vas?","es":"Me llamo Olga Petrovna. ¿Y usted?","lex":["CMR-00005","CMR-00912","PROPIO","PROPIO","CMR-00010","CMR-00038"],"f":["FRS-017"],"cul":"CUL-003"}},
     {"p":"lucas","ru":"Лу́кас.","tr":"Lúkas.","es":"Lucas.","lex":["PROPIO"]},
     {"p":"masha","ru":"О́чень прия́тно!","tr":"Óchin priyátna!","es":"¡Mucho gusto!","lex":["CMR-00069","CMR-02314"],"f":["FRS-018"]},
@@ -143,7 +143,7 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-008","titulo":"En el café","tituloRu":"В кафе́","situacion":"comer","funcion":"pedir","nivel":"A1","personajes":["mozo","lucas"],
   "lineas": [
-    {"p":"mozo","ru":"Здра́вствуйте! Что бу́дете?","tr":"Zdrástvuiti! Shto búditi?","es":"¡Buenas! ¿Qué va a tomar?","lex":["CMR-02369","CMR-00009","CMR-00006"],"f":["FRS-002"],"cul":"CUL-005"},
+    {"p":"mozo","ru":"Здра́вствуйте! Что бу́дете?","tr":"Zdrástvuiti! Shto búditi?","es":"¡Buenas! ¿Qué va a tomar?","lex":["CMR-05479","CMR-00009","CMR-00006"],"f":["FRS-002"],"cul":"CUL-005"},
     {"p":"lucas","ru":"Ко́фе, пожа́луйста.","tr":"Kófi, pazháluista.","es":"Un café, por favor.","lex":["CMR-01952","CMR-01243"],"f":["FRS-025"],"obs":"Ко́фе es masculino aunque termine en -е.","cul":"CUL-004"},
     {"p":"mozo","ru":"С молоко́м?","tr":"S malakóm?","es":"¿Con leche?","lex":["CMR-00008","CMR-02072"],"obs":"С + instrumental: молоко́ → с молоко́м."},
     {"p":"lucas","ru":"Да, спаси́бо.","tr":"Da, spasíba.","es":"Sí, gracias.","lex":["CMR-00116","CMR-02213"],"f":["FRS-024"]}
@@ -293,7 +293,7 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-029","titulo":"En el hotel","tituloRu":"В гости́нице","situacion":"viajes","funcion":"pedir","nivel":"A1","personajes":["lucas","recepcion"],
   "lineas": [
-    {"p":"lucas","ru":"Здра́вствуйте! У вас есть свобо́дные номера́?","tr":"Zdrástvuiti! U vas yest svabódnyyi namirá?","es":"¡Buenas! ¿Tienen habitaciones libres?","lex":["CMR-02369","CMR-00021","CMR-00038","CMR-00006","CMR-00786","CMR-00548"],"f":["FRS-002"],"obs":"Но́мер en un hotel es la habitación. Plural: номера́."},
+    {"p":"lucas","ru":"Здра́вствуйте! У вас есть свобо́дные номера́?","tr":"Zdrástvuiti! U vas yest svabódnyyi namirá?","es":"¡Buenas! ¿Tienen habitaciones libres?","lex":["CMR-05479","CMR-00021","CMR-00038","CMR-00006","CMR-00786","CMR-00548"],"f":["FRS-002"],"obs":"Но́мер en un hotel es la habitación. Plural: номера́."},
     {"p":"recepcion","ru":"Да. На ско́лько ноче́й?","tr":"Da. Na skólka nachéi?","es":"Sí. ¿Para cuántas noches?","lex":["CMR-00116","CMR-00004","CMR-00384","CMR-00236"],"obs":"Ско́лько + genitivo plural: ночь → ноче́й."},
     {"p":"lucas","ru":"На три но́чи.","tr":"Na tri nóchi.","es":"Para tres noches.","lex":["CMR-00004","CMR-00150","CMR-00236"]},
     {"p":"recepcion","ru":"Хорошо́. Ваш па́спорт, пожа́луйста.","tr":"Jarashó. Vash páspart, pazháluista.","es":"Bien. Su pasaporte, por favor.","lex":["CMR-00190","CMR-00166","CMR-02355","CMR-01243"],"f":["FRS-025"]},

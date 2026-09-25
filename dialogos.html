@@ -254,7 +254,10 @@ function Desglose({ texto }) {
     const esLema = azFormaClave(lema) === azFormaClave(t);
     let etiq = [];
     if (!esLema && typeof azFormasDe === "function") {
-      etiq = [...new Set(azFormasDe(id).filter(f => azFormaClave(f[0]) === azFormaClave(t)).map(f => f[1]))];
+      /* primero las formas con el mismo acento (часа́ ≠ ча́са); si no hay, sin acento */
+      const todas = azFormasDe(id);
+      const exactas = todas.filter(f => f[0].toLowerCase() === t.toLowerCase());
+      etiq = [...new Set((exactas.length ? exactas : todas.filter(f => azFormaClave(f[0]) === azFormaClave(t))).map(f => f[1]))];
     }
     const enModulo = typeof CASOS !== "undefined" && CASOS[id] ? "casos.html" : (typeof VERBOS !== "undefined" && VERBOS[id] ? "verbos.html" : null);
     const href = !esLema && enModulo && etiq.length ? enModulo + "?id=" + id + "&f=" + encodeURIComponent(t) : "ficha.html?id=" + id;

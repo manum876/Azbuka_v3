@@ -1,6 +1,6 @@
 /* ============================================================
    DATA-LEXICON.JS — Léxico central AZBUKA (Comer + FreeDict + enriquecimiento aspectual)
-   Total de entradas: 5403. Ordenado por ID.
+   Total de entradas: 5406. Ordenado por ID.
 
    NUEVO: campo opcional "aspectualPartnerTypes" (objeto {id: tipo}),
    solo en las entradas donde una pareja no es una pareja aspectual
@@ -43,8 +43,11 @@
    - Correcciones de tildes, eñes y definiciones (bloque CMR-00001–00420).
    - 24/09/2026: 6 entradas nuevas para el módulo Diálogos (CMR-05471 a
      CMR-05476): напра́во, дое́хать, потеря́ться, со́лнечно, по-англи́йски y
-     меню́. Marca en sourceRefs: "dialogosEnrichment". Las parejas de
-     дое́хать (доезжа́ть) y потеря́ться (теря́ться) no están en el léxico.
+     меню́. Marca en sourceRefs: "dialogosEnrichment".
+   - 24/09/2026: CMR-05477 доезжа́ть y CMR-05478 теря́ться (parejas de
+     дое́хать y потеря́ться) y CMR-05479 здра́вствуйте (saludo, interjección).
+     пока́ separa sus acepciones («mientras; por ahora» / «¡chau!») y его́
+     queda solo como posesivo (el pronombre es forma de он).
 
    Fuentes:
    - Comer, K. (Comer 5000). Portland State University, PDXScholar.
@@ -55,7 +58,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 5403
+  totalEntries: 5406
 };
 const LEXICON_COMER = [
  {
@@ -2691,10 +2694,10 @@ const LEXICON_COMER = [
   "posNormalized": "determinante",
   "translit": "yivó",
   "ipa": "jɪvˈo",
-  "senses": [
+    "senses": [
    {
-    "es": "su, de él, lo",
-    "definitionEs": "Pronombre posesivo (de él) o forma de acusativo/genitivo de 'он' (lo, a él).",
+    "es": "su, de él",
+    "definitionEs": "Posesivo de tercera persona masculina o neutra: его́ брат, «su hermano (de él)». No cambia con el género ni el caso. Cuando es pronombre («lo, a él, de él»), es una forma de он (CMR-00007): его́ зову́т Ди́ма, «se llama Dima».",
     "source": "redactado"
    }
   ],
@@ -16532,10 +16535,15 @@ const LEXICON_COMER = [
   "posNormalized": "conjunción",
   "translit": "paká",
   "ipa": "pʌkˈɑ",
-  "senses": [
+    "senses": [
    {
-    "es": "mientras, por ahora, chau",
-    "definitionEs": "Como conjunción indica simultaneidad ('пока я работаю' = mientras trabajo). Como interjección es una despedida informal.",
+    "es": "mientras; por ahora",
+    "definitionEs": "Como conjunción indica que dos cosas pasan al mismo tiempo: пока́ я рабо́таю, «mientras trabajo». También significa «por ahora, de momento»: пока́ всё хорошо́, «por ahora todo bien».",
+    "source": "redactado"
+   },
+   {
+    "es": "¡chau!",
+    "definitionEs": "Despedida informal, con amigos y gente de confianza. La formal es до свида́ния.",
     "source": "redactado"
    }
   ],
@@ -328239,7 +328247,7 @@ const LEXICON_COMER = [
     "definitionEs": "Llegar hasta un lugar viajando en auto, colectivo, tren u otro transporte. Se usa con до + genitivo: дое́хать до це́нтра, «llegar al centro».",
     "source": "redactado",
     "aspectualPartner": [
-     "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
+     "CMR-05477"
     ]
    }
   ],
@@ -328288,7 +328296,7 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
+   "CMR-05477"
   ]
  },
  {
@@ -328304,7 +328312,7 @@ const LEXICON_COMER = [
     "definitionEs": "No saber dónde uno está o no encontrar el camino; también, extraviarse algo: потеря́лись ключи́, «se perdieron las llaves».",
     "source": "redactado",
     "aspectualPartner": [
-     "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
+     "CMR-05478"
     ]
    }
   ],
@@ -328353,7 +328361,7 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
+   "CMR-05478"
   ]
  },
  {
@@ -328532,6 +328540,199 @@ const LEXICON_COMER = [
   "gender": "n",
   "animate": "no",
   "numberClass": "singulariaTantum"
+ },
+ {
+  "id": "CMR-05477",
+  "ru": "доезжать",
+  "acento": "доезжа́ть",
+  "posNormalized": "verbo",
+  "translit": "dayizhzhát",
+  "ipa": "dʌjɪʒʒˈɑtʲ",
+  "senses": [
+   {
+    "es": "llegar (en un vehículo)",
+    "definitionEs": "Llegar hasta un lugar viajando en un vehículo, sobre todo cuando se repite o se describe el trayecto: я доезжа́ю до рабо́ты за час, «llego al trabajo en una hora». Se usa con до + genitivo.",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05472"
+    ]
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "доезжать",
+    "POS": "v",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "до",
+    "Prefix2": "",
+    "Root": "ед",
+    "Suffix1": "ать",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "163",
+    "Notes": "Agregada por necesidad de aspectualPartner — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "до кого? до чего?",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "aspectualPartnerEnrichment": true
+  },
+  "aspect": "imperfectivo",
+  "aspectualPartner": [
+   "CMR-05472"
+  ]
+ },
+ {
+  "id": "CMR-05478",
+  "ru": "теряться",
+  "acento": "теря́ться",
+  "posNormalized": "verbo",
+  "translit": "tiriátsa",
+  "ipa": "tʲɪrʲˈɑtsʌ",
+  "senses": [
+   {
+    "es": "perderse",
+    "definitionEs": "Extraviarse algo o alguien, o no encontrar el camino: в э́том го́роде легко́ теря́ться, «en esta ciudad es fácil perderse».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05473"
+    ]
+   },
+   {
+    "es": "confundirse, no saber qué hacer",
+    "definitionEs": "Quedarse sin reacción por la sorpresa o los nervios: он всегда́ теря́ется на экза́менах, «siempre se traba en los exámenes».",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "теряться",
+    "POS": "v",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "тер",
+    "Suffix1": "ять",
+    "Suffix2": "ся",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "582",
+    "Notes": "Agregada por necesidad de aspectualPartner — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "где?",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "aspectualPartnerEnrichment": true
+  },
+  "aspect": "imperfectivo",
+  "aspectualPartner": [
+   "CMR-05473"
+  ]
+ },
+ {
+  "id": "CMR-05479",
+  "ru": "здравствуйте",
+  "acento": "здра́вствуйте",
+  "posNormalized": "interjección",
+  "translit": "zdrástvuiti",
+  "ipa": "zdrˈɑstvujtʲɪ",
+  "senses": [
+   {
+    "es": "hola (formal); buenos días",
+    "definitionEs": "El saludo formal: sirve a cualquier hora, con quien se trata de вы o con varias personas. Con ты se dice здра́вствуй. Viene del verbo здра́вствовать, «estar sano».",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "здравствуйте",
+    "POS": "intj",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "12",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "здрав",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "здравствовать",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para el módulo Diálogos — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "dialogosEnrichment": true
+  }
  }
 ];
 

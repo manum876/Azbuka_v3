@@ -66,7 +66,7 @@ The approach is **production-oriented**: learners write, translate, listen and b
 
 ### 📚 Dictionary
 
-The foundation of the app: **5,403 words** (Comer 5000 plus additional vocabulary). Each word has:
+The foundation of the app: **5,406 words** (Comer 5000 plus additional vocabulary). Each word has:
 
 - its **stress** marked;
 - **IPA** and a **Spanish-style pronunciation guide** (jarashó, spasíba);
@@ -78,7 +78,7 @@ Every word has its own entry page, with audio.
 
 ### 🗣️ Verbs
 
-Conjugations for all **1,656 verbs** in the dictionary:
+Conjugations for all **1,658 verbs** in the dictionary:
 
 - present, future, past and imperative, with audio for every form;
 - side-by-side comparison with the **aspectual partner** (imperfective / perfective);
@@ -115,8 +115,8 @@ A conversation guide: **30 dialogues** for everyday situations, many with an inf
 ## Features
 
 - 🎓 12-unit course, A1 → B1
-- 📚 Central dictionary of 5,403 words, with stress, IPA and a pronunciation guide
-- 🗣️ 1,656 conjugated verbs, with aspectual partners and government
+- 📚 Central dictionary of 5,406 words, with stress, IPA and a pronunciation guide
+- 🗣️ 1,658 conjugated verbs, with aspectual partners and government
 - 📖 3,230 words declined in all 6 cases
 - 🔤 Complete Cyrillic alphabet reference
 - 💬 30 dialogues, 52 useful phrases and 9 cultural notes

@@ -152,6 +152,7 @@ function azFormasDe(id) {
     if (d.corta) ["m", "f", "n", "pl"].forEach(g => add(d.corta[g], "forma corta " + AZ_GEN_ETIQ[g]));
     if (d.loc2) out.push([d.loc2, "locativo"], [d.loc2.split(" ").pop(), "locativo"]);
     if (d.partitivo) out.push([d.partitivo, "partitivo"]);
+    if (d.conteo) out.push([d.conteo, "forma de conteo (con 2, 3 y 4)"]);
   }
   const v = typeof VERBOS !== "undefined" ? VERBOS[id] : null;
   if (v) {

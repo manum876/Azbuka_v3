@@ -29,7 +29,7 @@
        arriba, datos del léxico central (palabra, transliteración,
        IPA, categoría, género, animacidad, acepciones);
        abajo, las tablas de data-casos.js.
-   · Cada caso y cada forma especial (locativo, partitivo, forma
+   · Cada caso y cada forma especial (locativo, partitivo, conteo, forma
      corta, acusativo animado, н-, numerales) abre una ficha a
      pantalla completa con la explicación de data-gramatica.js.
    Esta página NO guarda datos de palabras ni explicaciones:
@@ -179,6 +179,14 @@ function CasosStyles({ c }) {
    acusativos [inanimado, animado], muestra los dos. */
 /* Forma buscada (?f=): se resalta en la tabla. */
 const FORMA_BUSCADA = azFormaClave(new URLSearchParams(window.location.search).get("f") || "");
+/* Si la forma buscada trae acento (часа́), se distingue de otra que solo
+   cambia en el acento (ча́са). Sin acento, vale cualquiera de las dos. */
+const FORMA_EXACTA = (new URLSearchParams(window.location.search).get("f") || "").toLowerCase();
+function esFormaBuscada(t) {
+  if (!FORMA_BUSCADA || !t) return false;
+  if (FORMA_EXACTA.indexOf("\u0301") >= 0) return t.toLowerCase() === FORMA_EXACTA;
+  return azFormaClave(t) === FORMA_BUSCADA;
+}
 function Forma({ text, extra }) {
   if (Array.isArray(text)) {
     return h("div", null,
@@ -194,7 +202,7 @@ function Forma({ text, extra }) {
 }
 function FormaLinea({ text, tag }) {
   if (!text) return h("span", { className: "f-none" }, "—");
-  const hit = FORMA_BUSCADA && azFormaClave(text) === FORMA_BUSCADA;
+  const hit = esFormaBuscada(text);
   return h("div", { className: "f-cell" + (hit ? " f-hit" : ""), onClick: () => speakRu(text) },
     h("span", { className: "f-ru" }, text),
     tag && h("span", { className: "f-tag" }, tag),
@@ -336,6 +344,7 @@ function formasEnCaso(d, r) {
     if (d.sg) push(d.sg[r], d.pl ? "sg." : "");
     if (d.pl) push(d.pl[r], d.sg ? "pl." : "");
     if (r === 1 && d.partitivo) push(d.partitivo, "partitivo");
+    if (r === 1 && d.conteo) push(d.conteo, "con 2, 3 y 4");
     if (r === 5 && d.loc2) push(d.loc2, "locativo");
   }
   else if (d.tipo === "adjetivo") GENEROS.forEach(g => d[g[0]] && push(d[g[0]][r], g[2].toLowerCase()));
@@ -362,7 +371,7 @@ function FichaCasos({ id, c }) {
   }
 
   /* Si se llegó buscando una forma (?f=), se explica de dónde viene */
-  const bf = FORMA_BUSCADA ? azFormasDe(id).filter(x => azFormaClave(x[0]) === FORMA_BUSCADA) : [];
+  const bf = FORMA_BUSCADA ? azFormasDe(id).filter(x => esFormaBuscada(x[0])) : [];
   const buscada = bf.length ? { forma: bf[0][0], etiquetas: [...new Set(bf.map(x => x[1]))] } : null;
   const pos = lex.posNormalized;
   const badge = [POS_LABEL[pos] || pos];
@@ -382,6 +391,7 @@ function FichaCasos({ id, c }) {
   if (tieneParAc) ayudas.push(["acusativoAnimado", "Acusativo animado"]);
   if (d.loc2) ayudas.push(["locativo", "Locativo"]);
   if (d.partitivo) ayudas.push(["partitivo", "Partitivo"]);
+  if (d.conteo) ayudas.push(["conteo", "Forma de conteo"]);
   if (d.tipo === "personal" && d.n) ayudas.push(["pronombreN", "Formas con н-"]);
   if (pos === "numeral") ayudas.push(["numerales", "Números y casos"]);
   if (d.tipo === "indeclinable") ayudas.push(["indeclinable", "Palabras que no se declinan"]);
@@ -398,7 +408,7 @@ function FichaCasos({ id, c }) {
       /* partitivo junto al genitivo; locativo junto al preposicional */
       extra: (col, r) => {
         if (col.k !== "sg") return null;
-        if (r === 1 && d.partitivo) return [[d.partitivo, "coloq."]];
+        if (r === 1 && (d.partitivo || d.conteo)) return [].concat(d.partitivo ? [[d.partitivo, "coloq."]] : [], d.conteo ? [[d.conteo, "con 2–4"]] : []);
         if (r === 5 && d.loc2) return [[d.loc2, "lugar"]];
         return null;
       }
@@ -487,6 +497,7 @@ function FichaCasos({ id, c }) {
         ayudas.length > 0 && h("div", null,
           h("div", { className: "section-lbl" }, "Formas especiales"),
           d.loc2 && h("div", { className: "tnote", style: { marginTop: 0 } }, "Para decir dónde: ", h("b", { style: { color: c.text } }, d.loc2), ". Para hablar de algo se usa el preposicional normal."),
+          d.conteo && h("div", { className: "tnote", style: { marginTop: 0 } }, "Después de 2, 3 y 4: ", h("b", { style: { color: c.text } }, "два " + d.conteo), ", no ", h("b", { style: { color: c.text } }, d.sg ? d.sg[1] : ""), ". El genitivo normal se usa en los demás casos."),
           d.partitivo && h("div", { className: "tnote" }, "Partitivo coloquial: ", h("b", { style: { color: c.text } }, d.partitivo), " («un poco de»). El genitivo normal siempre es correcto."),
           h("div", { className: "help-row" }, ayudas.map(a => h(Ayuda, { key: a[0], fid: a[0], texto: a[1], onForma: setForma })))
         ),
