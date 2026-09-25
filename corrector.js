@@ -24,7 +24,9 @@
      azCorregir(respuesta, esperadas, { idioma: "ru" | "es" | "translit" })
        esperadas: un texto o una lista de textos válidos. Entre
        paréntesis van las palabras optativas: "(Я) чита́ю кни́гу."
-     → { resultado, esperada, palabras: [...], notas: [...], resumen }
+     → { resultado, esperada, tuya, correcta, palabras: [...], notas: [...], resumen }
+       tuya: lo escrito, palabra por palabra, con su estado
+       correcta: la esperada en tramos [{ t, marca }]; marca = palabra corregida
        palabras: { escrito, esperado, estado: "ok"|"casi"|"mal"|
                    "falta"|"sobra", motivo, letras }
        letras: diferencia letra a letra [{ t: "=", s }, { t: "-", s }, { t: "+", s }]
@@ -129,7 +131,7 @@ function azEtiq(a) {
 function azParseEsperada(s) {
   const out = [];
   (s || "").replace(/\(([^)]*)\)|([^()]+)/g, function (_, opc, fijo) {
-    azTokens(opc != null ? opc : fijo).forEach(function (t) { out.push({ t: t, opc: opc != null }); });
+    azTokens(opc != null ? opc : fijo).forEach(function (t) { out.push({ t: t, opc: opc != null, i: out.length }); });
     return "";
   });
   return out;
@@ -231,7 +233,16 @@ function azCorregir(respuesta, esperadas, opts) {
   const limpiar = function (toks) {
     return modo === "es" ? toks.filter(function (t) { return !AZ_ARTICULOS_ES.has(azClaveEs(t.t || t)); }) : toks;
   };
-  const U = limpiar(azTokens(respuesta));
+  /* «санкт петербург» → «санкт-петербург» si la esperada lleva guion */
+  const clave0 = modo === "ru" ? azClaveRu : azClaveEs;
+  const conGuion = {};
+  lista.forEach(function (x) { azParseEsperada(x).forEach(function (t) { if (t.t.indexOf("-") > 0) conGuion[clave0(t.t.split("-")[0])] = true; }); });
+  const crudos = azTokens(respuesta).reduce(function (acc, t) {
+    const prev = acc[acc.length - 1];
+    if (prev && prev.indexOf("-") < 0 && conGuion[clave0(prev)]) acc[acc.length - 1] = prev + "-" + t; else acc.push(t);
+    return acc;
+  }, []);
+  const U = limpiar(crudos);
   const out = { resultado: AZ_R_MAL, esperada: lista[0] || "", palabras: [], notas: [], resumen: "" };
   if (!U.length) { out.resumen = "No escribiste nada."; return out; }
 
@@ -249,14 +260,15 @@ function azCorregir(respuesta, esperadas, opts) {
   mejor.al.ops.forEach(function (o) {
     if (o.e && o.u) {
       const c = azClasificar(o.u, o.e.t, modo);
+      c.i = o.e.i;
       if (c.nota) out.notas.push(c.nota);
       if (c.estado === "casi") bajar(AZ_R_CASI);
       if (c.estado === "mal") bajar(AZ_R_MAL);
       out.palabras.push(c);
     } else if (o.e) {
       if (o.e.opc) return;
-      const menor = modo === "ru" && AZ_POS_MENOR.has(azPosDe(o.e.t));
-      out.palabras.push({ escrito: "", esperado: o.e.t, estado: "falta", grave: !menor, motivo: "Falta «" + o.e.t + "»." });
+      const menor = modo === "ru" ? AZ_POS_MENOR.has(azPosDe(o.e.t)) : azClaveEs(o.e.t).length <= 2;
+      out.palabras.push({ i: o.e.i, escrito: "", esperado: o.e.t, estado: "falta", grave: !menor, motivo: "Falta «" + o.e.t + "»." });
       bajar(menor ? AZ_R_CASI : AZ_R_MAL);
     } else {
       out.palabras.push({ escrito: o.u, esperado: "", estado: "sobra", motivo: "Sobra «" + o.u + "»." });
@@ -279,6 +291,30 @@ function azCorregir(respuesta, esperadas, opts) {
   }
 
   out.resultado = peor;
+
+  /* Tu respuesta tal como la escribiste, con el estado de cada palabra */
+  const cola = out.palabras.filter(function (p) { return p.estado !== "falta"; });
+  let q = 0;
+  out.tuya = crudos.map(function (t) {
+    const p = cola[q];
+    if (p && p.escrito === t) { q++; return { t: t, estado: p.estado }; }
+    return { t: t, estado: "ok" };
+  });
+
+  /* Respuesta correcta en tramos, con las palabras corregidas marcadas */
+  const marcar = {};
+  out.palabras.forEach(function (p) { if (p.i != null && p.estado !== "ok") marcar[p.i] = true; });
+  const txt = (mejor.s || "").normalize("NFC").replace(/\u0300/g, "").replace(/[()]/g, "");
+  out.correcta = [];
+  let pos = 0;
+  azParseEsperada(mejor.s).forEach(function (t) {
+    const k = txt.indexOf(t.t, pos);
+    if (k < 0) return;
+    if (k > pos) out.correcta.push({ t: txt.slice(pos, k) });
+    out.correcta.push({ t: t.t, marca: !!marcar[t.i] });
+    pos = k + t.t.length;
+  });
+  if (pos < txt.length) out.correcta.push({ t: txt.slice(pos) });
   const n = out.palabras.filter(function (p) { return p.estado !== "ok"; }).length;
   out.resumen = peor === AZ_R_BIEN ? "Todo correcto." :
     out.orden ? "Revisá el orden de las palabras." :
@@ -294,9 +330,10 @@ window.azDiff = azDiff;
 
 /* ── Vista de la corrección (si la página usa Preact) ──────────
    AzCorreccion({ r, dark })  r = resultado de azCorregir
-   Muestra: resultado, tu respuesta con las letras marcadas
-   (tachado rojo lo que sobra, verde lo que faltaba), la respuesta
-   correcta y la explicación de cada error. */
+   Muestra: resultado; tu respuesta tal como la escribiste, con las
+   palabras equivocadas subrayadas (rojo = Mal o sobra, naranja =
+   Casi); la respuesta correcta con las palabras corregidas o que
+   faltaban en verde; y la explicación de cada error. */
 (function () {
   if (typeof React === "undefined") return;
   const h = React.createElement;
@@ -314,22 +351,16 @@ window.azDiff = azDiff;
       .az-cr-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:12px 0 5px;}
       .az-cr-linea{font-size:17px;font-weight:600;color:${c.text};line-height:1.6;word-break:break-word;}
       .az-cr-w{display:inline-block;margin-right:6px;}
-      .az-cr-w.casi{border-bottom:2px solid #E2884A;}
-      .az-cr-w.mal,.az-cr-w.sobra{border-bottom:2px solid #B5605C;}
-      .az-cr-del{color:#B5605C;text-decoration:line-through;}
-      .az-cr-ins{color:#4CAF82;font-weight:800;}
-      .az-cr-falta{color:#4CAF82;font-weight:700;border:1px dashed #4CAF82;border-radius:6px;padding:0 5px;}
-      .az-cr-ok{font-size:17px;font-weight:700;color:${c.gold};}
+      .az-cr-w.casi{text-decoration:underline 2px #E2884A;text-underline-offset:4px;}
+      .az-cr-w.mal,.az-cr-w.sobra{text-decoration:underline 2px #B5605C;text-underline-offset:4px;}
+      .az-cr-ok{font-size:17px;font-weight:700;color:${c.gold};line-height:1.5;}
+      .az-cr-fix{color:#4CAF82;}
       .az-cr-exp{font-size:13.5px;line-height:1.5;color:${c.textSub};margin-top:6px;padding-left:10px;border-left:2px solid ${c.border};}
     `);
   }
 
   function Palabra({ p }) {
-    if (p.estado === "falta") return h("span", { className: "az-cr-w" }, h("span", { className: "az-cr-falta" }, p.esperado));
-    if (p.estado === "ok" || !p.letras) return h("span", { className: "az-cr-w " + p.estado }, p.escrito);
-    return h("span", { className: "az-cr-w " + p.estado }, p.letras.map(function (l, i) {
-      return h("span", { key: i, className: l.t === "-" ? "az-cr-del" : l.t === "+" ? "az-cr-ins" : "" }, l.s);
-    }));
+    return h("span", { className: "az-cr-w " + p.estado }, p.escrito);
   }
 
   function AzCorreccion({ r, dark }) {
@@ -341,12 +372,14 @@ window.azDiff = azDiff;
       h("div", { className: "az-cr-top" },
         h("span", { className: "az-cr-res", style: { color: COL[r.resultado], background: COL[r.resultado] + "22", border: "1px solid " + COL[r.resultado] } }, TXT[r.resultado]),
         h("span", { className: "az-cr-sum" }, r.resumen)),
-      r.resultado < 2 && r.palabras.length > 0 && h(React.Fragment, null,
+      r.resultado < 2 && (r.tuya || []).length > 0 && h(React.Fragment, null,
         h("div", { className: "az-cr-lbl" }, "Tu respuesta"),
-        h("div", { className: "az-cr-linea", lang: "ru" }, r.palabras.map(function (p, i) { return h(Palabra, { key: i, p: p }); }))),
+        h("div", { className: "az-cr-linea" }, (r.tuya || []).map(function (p, i) { return h(Palabra, { key: i, p: { escrito: p.t, estado: p.estado } }); }))),
       r.resultado < 2 && h(React.Fragment, null,
         h("div", { className: "az-cr-lbl" }, "Respuesta correcta"),
-        h("div", { className: "az-cr-ok", lang: "ru" }, r.esperada.replace(/[()]/g, ""))),
+        h("div", { className: "az-cr-ok" }, (r.correcta || [{ t: r.esperada.replace(/[()]/g, "") }]).map(function (s, i) {
+          return s.marca ? h("span", { key: i, className: "az-cr-fix" }, s.t) : s.t;
+        }))),
       errores.map(function (p, i) { return h("div", { key: i, className: "az-cr-exp" }, p.motivo); }),
       r.notas.map(function (n, i) { return h("div", { key: "n" + i, className: "az-cr-exp" }, n); }));
   }
