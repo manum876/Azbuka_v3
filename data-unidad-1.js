@@ -12,6 +12,7 @@
      tipo "letras" → letras (mayúsculas, en orden de estudio), intro y,
                     opcionales, secciones de texto y pares de vocales
                     [dura, blanda, sílaba dura, sílaba blanda]
+     tipo "reglas" → igual que pronunciación, con truco y comparación opcionales
      tipo "pronunciacion" → bloques { titulo, texto, destacado?, pares?, ejemplos? }
                             (pares: { letras, a, b } con IDs del léxico)
      tipo "lectura" → palabras de data-alphabet.js para leer en voz alta
@@ -113,9 +114,45 @@ const UNIDAD_1 = {
     {
       id: "u1m7", n: 7, tipo: "letras",
       titulo: "Los signos",
-      resumen: "Ъ y Ь no suenan, pero cambian la pronunciación.",
+      resumen: "Ь y Ъ: no suenan, pero cambian la palabra. Cuándo va cada uno, y el Ь de los verbos.",
       letras: ["Ь", "Ъ"],
-      intro: "Estas dos letras no tienen sonido propio. El signo blando Ь ablanda la consonante anterior (брат «hermano», брать «tomar»). El signo duro Ъ separa la consonante de la vocal que sigue y es poco frecuente."
+      intro: "Estas dos letras no tienen sonido propio, pero cambian cómo suena lo que las rodea. Son de las que más dudas generan al escribir, así que acá va la guía completa.",
+      secciones: [
+        {
+          titulo: "La regla de oro",
+          texto: "Ь puede ir al final o en el medio de la palabra. Ъ va solo en el medio, y casi siempre en el mismo lugar: entre un prefijo que termina en consonante y una raíz que empieza con е, ё, ю o я.",
+          destacado: "Al final de la palabra va siempre Ь, nunca Ъ."
+        },
+        {
+          titulo: "Ь, trabajo 1: ablandar",
+          texto: "Ь ablanda la consonante que tiene adelante, igual que las vocales blandas del módulo anterior. Pasa al final de la palabra (мать, день) y antes de otra consonante (письмо́, то́лько, пальто́). Cambia el significado: брат es «hermano» y брать, «tomar».",
+          ejemplos: ["CMR-00301", "CMR-00071", "CMR-00333", "CMR-00043", "CMR-02411"]
+        },
+        {
+          titulo: "Ь, trabajo 2: separar",
+          texto: "Dentro de una palabra sin prefijo, Ь separa la consonante de la vocal blanda que sigue: la vocal suena con una y adelante. семья́ se dice «simyá», no «simiá».",
+          ejemplos: ["CMR-00378", "CMR-00244", "CMR-01451", "CMR-01863", "CMR-02873"]
+        },
+        {
+          titulo: "Ъ: el separador después del prefijo",
+          texto: "Ъ hace el mismo trabajo de separar, pero solo después de un prefijo terminado en consonante (под-, об-, от-, с-, в-…) y antes de е, ё, ю, я: под + е́зд = подъе́зд. Si el prefijo termina en vocal, no hace falta nada: по + е́сть = пое́сть.",
+          truco: "Para separar: sin prefijo, Ь (семья́); con prefijo, Ъ (съесть).",
+          ejemplos: ["CMR-02121", "CMR-03635", "CMR-03286", "CMR-02269", "CMR-00705"]
+        },
+        {
+          titulo: "Ь, trabajo 3: después de Ж, Ш, Ч, Щ",
+          texto: "Estas cuatro letras suenan siempre igual, con o sin Ь, así que acá el Ь es pura gramática. Un adelanto de lo que vas a ver más adelante: los sustantivos femeninos lo llevan (ночь, дочь, мышь) y los masculinos no (врач, нож, мяч).",
+          truco: "Después de ж, ш, ч, щ: con Ь es femenino; sin Ь, masculino.",
+          ejemplos: ["CMR-00236", "CMR-00834", "CMR-02994", "CMR-00653", "CMR-01807", "CMR-04007"]
+        },
+        {
+          titulo: "Ь en los verbos",
+          texto: "La forma de diccionario de un verbo (el infinitivo, como «leer» o «hablar») termina siempre de una de estas tres maneras: en -ть, que es la gran mayoría (чита́ть, говори́ть); en -ти, un grupo chico (идти́, нести́); o en -чь, apenas unos pocos (мочь, помо́чь). De los 1.658 verbos del diccionario de Azbuka, 1.579 terminan en -ть, 65 en -ти y 14 en -чь. Así que el Ь final de -ть y -чь es obligatorio.",
+          destacado: "El infinitivo termina en -ть (casi todos), -ти (идти́) o -чь (мочь). Nunca termina en т o ч sola: «читат» o «моч» no existen.",
+          truco: "Si termina en ч: verbo con Ь (мочь), sustantivo masculino sin Ь (врач).",
+          ejemplos: ["CMR-00332", "CMR-00058", "CMR-00095", "CMR-00988", "CMR-00037", "CMR-00497"]
+        }
+      ]
     },
     {
       id: "u1m8", n: 8, tipo: "pronunciacion",
@@ -174,23 +211,75 @@ const UNIDAD_1 = {
       ]
     },
     {
-      id: "u1m9", n: 9, tipo: "lectura",
+      id: "u1m11", n: 9, tipo: "reglas",
+      titulo: "Reglas de escritura",
+      resumen: "Reglas fijas para no dudar: жи–ши, ча–ща, Й o И, Э o Е…",
+      intro: "El ruso tiene pocas reglas de escritura, pero son fijas y sin excepciones en las palabras de todos los días. Como en español, donde antes de p y b siempre va m, acá hay letras que mandan sobre la que viene después.",
+      bloques: [
+        {
+          titulo: "La regla de las 7 letras",
+          texto: "Después de г, к, х, ж, ш, ч, щ se escribe и, nunca ы. Por eso el plural de кни́га es кни́ги y no «книгы», y se escribe жить aunque suene casi como «жыть». Además, después de ж, ш, ч, щ se escribe а y у, nunca я ni ю: час, чу́до, ча́шка.",
+          destacado: "Г К Х Ж Ш Ч Щ + и (nunca ы). Ж Ш Ч Щ + а, у (nunca я, ю).",
+          comparacion: "Es como el «antes de p y b se escribe m» del español: una regla de posición, que se cumple siempre.",
+          ejemplos: ["CMR-00126", "CMR-00066", "CMR-00187", "CMR-00173", "CMR-00200", "CMR-01447", "CMR-03298"]
+        },
+        {
+          titulo: "Letras que no cambian",
+          texto: "Ж, Ш y Ц son siempre duras: aunque después venga и, suena casi como ы (en жизнь y цирк la и suena cerca de «ы»). Ч y Щ son siempre blandas. Por eso con ellas la vocal que sigue no cambia el sonido, y la escritura la decide la regla, no el oído.",
+          truco: "Después de ц, en la raíz, se escribe и aunque suene «ы»: цирк, ци́фра.",
+          ejemplos: ["CMR-00066", "CMR-02928", "CMR-01938", "CMR-00984", "CMR-05411"]
+        },
+        {
+          titulo: "Ш o Щ",
+          texto: "Ш es dura y Щ es blanda, larga, como «sh» con la lengua más adelante. Una pista para escribir: los grupos сч, зч y жч suenan como Щ. Por eso сча́стье (con сч) y мужчи́на (con жч) se dicen con «щ» pero no se escriben con щ.",
+          truco: "Si suena Щ y dudás, puede ser сч (сча́стье, счёт) o жч (мужчи́на).",
+          ejemplos: ["CMR-02772", "CMR-01693", "CMR-00784", "CMR-00416", "CMR-00431", "CMR-01626"]
+        },
+        {
+          titulo: "Й o И",
+          texto: "И es vocal: forma sílaba sola (мир, и́ли). Й es consonante: siempre va pegada a una vocal y nunca forma sílaba (мой, чай, край). Aparece sobre todo después de vocal y al final de muchos adjetivos (но́вый, си́ний). Al principio casi solo en palabras extranjeras: йо́гурт.",
+          truco: "Si al separar en sílabas queda sola, es И; si se pega a la vocal de al lado, es Й.",
+          ejemplos: ["CMR-00128", "CMR-00044", "CMR-00060", "CMR-01136", "CMR-00073", "CMR-01498", "CMR-05410"]
+        },
+        {
+          titulo: "Ы o И",
+          texto: "Es el par del módulo 6: Ы va después de consonante dura (сын, ры́ба, ты́сяча) e И después de blanda (мир, си́ний). Ы nunca va al principio de una palabra rusa.",
+          truco: "Ы nunca empieza una palabra y nunca va después de г, к, х, ж, ш, ч, щ.",
+          ejemplos: ["CMR-00360", "CMR-01436", "CMR-00226", "CMR-00128"]
+        },
+        {
+          titulo: "Э o Е",
+          texto: "Э va casi siempre al principio de la palabra: э́то, э́хо, эта́ж. Después de consonante se escribe Е, incluso en palabras extranjeras donde suena «e» dura: кафе́, тест, поэ́т.",
+          truco: "Adentro de la palabra, después de consonante: Е.",
+          ejemplos: ["CMR-00012", "CMR-05414", "CMR-01181", "CMR-02986", "CMR-04144", "CMR-00747"]
+        },
+        {
+          titulo: "Escribir lo que no se oye: la palabra de prueba",
+          texto: "En el módulo 8 viste que al final la б suena п y que la о sin acento suena а. ¿Cómo saber qué se escribe? Buscá otra forma de la palabra donde después venga una vocal, o donde esa sílaba sea la tónica: зуб → зу́бы (va б), год → го́ды (va д), вода́ → во́ды (va о), окно́ → о́кна (va о).",
+          destacado: "Si no estás seguro, buscá la palabra de prueba: otra forma donde la letra se oiga clara.",
+          ejemplos: ["CMR-01032", "CMR-00028", "CMR-02429", "CMR-00106", "CMR-00191", "CMR-00370", "CMR-01040"]
+        }
+      ]
+    },
+    {
+      id: "u1m9", n: 10, tipo: "lectura",
       titulo: "Primeras lecturas",
       resumen: "Leer palabras en voz alta y los primeros diálogos.",
       intro: "Es hora de leer. Primero, palabras sueltas: leelas en voz alta y después comprobá cómo suenan. Después, cuatro diálogos muy cortos para saludar, agradecer y despedirte.",
       dialogos: ["DLG-001", "DLG-006", "DLG-005", "DLG-008"]
     },
     {
-      id: "u1m10", n: 10, tipo: "examen",
+      id: "u1m10", n: 11, tipo: "examen",
       titulo: "Evaluación",
-      resumen: "Letras, audio, lectura, dictado y escritura.",
-      intro: "Veinte ejercicios de toda la unidad, en cinco partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada. Si no llegás, te digo qué conviene reforzar antes de seguir.",
+      resumen: "Letras, audio, lectura, dictado, escritura y reglas.",
+      intro: "Veinticinco ejercicios de toda la unidad, en seis partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada. Si no llegás, te digo qué conviene reforzar antes de seguir.",
       partes: [
         { nombre: "Letras", tipos: ["audio-letra", "vf", "escuchar-letra"], n: 4 },
         { nombre: "Audio", tipos: ["pares"], n: 4 },
         { nombre: "Lectura", tipos: ["significado"], n: 4 },
         { nombre: "Dictado", tipos: ["dictado"], n: 4 },
-        { nombre: "Escritura", tipos: ["es-ru", "completar", "ordenar"], n: 4 }
+        { nombre: "Escritura", tipos: ["es-ru", "completar", "ordenar"], n: 4 },
+        { nombre: "Reglas", tipos: ["ortografia", "ortografia-completar"], n: 5 }
       ],
       aprobado: 0.8
     }
@@ -344,12 +433,73 @@ function ejerciciosUnidad1() {
     });
   }));
 
+  /* 14. Ortografía: dos ejercicios por palabra (mismo grupo) */
+  U1_ORTO.forEach(([w, mal, hueco, ops, regla, mod, prueba], i) => {
+    const limpio = w.replace(/\u0301/g, "");
+    const exp = limpio + ". " + U1_REGLAS[regla] + (prueba ? " Palabra de prueba: " + prueba + "." : "");
+    out.push({ id: "U1-or-" + limpio, tipo: "ortografia", forma: "elegir", dificultad: 2, modulo: mod, grupo: "or-" + limpio,
+      pide: "Escuchá: ¿cuál está bien escrita?", audio: w, opciones: baraja([limpio, mal], i + 31), correcta: limpio, oir: w,
+      explicacion: "Se escribe " + exp });
+    out.push({ id: "U1-oc-" + limpio, tipo: "ortografia-completar", forma: "elegir", dificultad: 2, modulo: mod, grupo: "or-" + limpio,
+      pide: "¿Qué va en el hueco?", grande: hueco, audio: w, opciones: baraja(ops.map(o => o === "—" ? "(nada)" : o), i + 37), correcta: ops[0] === "—" ? "(nada)" : ops[0], oir: w,
+      explicacion: "Se escribe " + exp });
+  });
+
   return out;
 }
 
+
+/* ── Ortografía: ¿cuál está bien escrita? / ¿qué letra va? ──
+   [palabra correcta con acento, versión mal escrita, hueco, opciones
+   (la correcta primero; "—" = no va nada), regla, módulo, prueba?] */
+const U1_REGLAS = {
+  "fin": "Al final de la palabra va siempre Ь, nunca Ъ.",
+  "suave": "Ь ablanda la consonante que tiene adelante.",
+  "sep": "Para separar dentro de una palabra sin prefijo va Ь.",
+  "pref": "Después de un prefijo terminado en consonante, antes de е, ё, ю, я, va Ъ.",
+  "fem": "Después de ж, ш, ч, щ: los femeninos llevan Ь (ночь) y los masculinos no (врач).",
+  "verbo": "El infinitivo de los verbos termina en -ть, -ти o -чь: el Ь de -ть y -чь no puede faltar.",
+  "siete": "Después de г, к, х, ж, ш, ч, щ se escribe и, nunca ы.",
+  "au": "Después de ж, ш, ч, щ se escribe а, у, nunca я, ю.",
+  "ц": "Después de ц, en la raíz, se escribe и aunque suene «ы».",
+  "сч": "Los grupos сч, зч y жч suenan como щ, pero se escriben así.",
+  "щ": "Щ es blanda y Ш es dura.",
+  "й": "Й va pegada a una vocal y nunca forma sílaba; и forma sílaba sola.",
+  "ы": "Ы va después de consonante dura, И después de blanda; Ы nunca empieza una palabra.",
+  "э": "Э va al principio de la palabra; después de consonante se escribe Е.",
+  "prueba": "Lo que no se oye claro se escribe como en la palabra de prueba."
+};
+const U1_ORTO = [
+  ["день", "денъ", "ден_", ["ь", "ъ"], "fin", 7], ["мать", "матъ", "мат_", ["ь", "ъ"], "fin", 7],
+  ["письмо́", "писмо", "пис_мо", ["ь", "—"], "suave", 7], ["то́лько", "толко", "тол_ко", ["ь", "—"], "suave", 7], ["пальто́", "палто", "пал_то", ["ь", "—"], "suave", 7],
+  ["семья́", "семъя", "сем_я", ["ь", "ъ"], "sep", 7], ["статья́", "статъя", "стат_я", ["ь", "ъ"], "sep", 7], ["судья́", "судъя", "суд_я", ["ь", "ъ"], "sep", 7],
+  ["пла́тье", "платъе", "плат_е", ["ь", "ъ"], "sep", 7], ["воскресе́нье", "воскресенъе", "воскресен_е", ["ь", "ъ"], "sep", 7],
+  ["подъе́зд", "подьезд", "под_езд", ["ъ", "ь"], "pref", 7], ["объявле́ние", "обьявление", "об_явление", ["ъ", "ь"], "pref", 7], ["отъе́зд", "отьезд", "от_езд", ["ъ", "ь"], "pref", 7],
+  ["съезд", "сьезд", "с_езд", ["ъ", "ь"], "pref", 7], ["объясни́ть", "обьяснить", "об_яснить", ["ъ", "ь"], "pref", 7],
+  ["ночь", "ноч", "ноч_", ["ь", "—"], "fem", 7], ["дочь", "доч", "доч_", ["ь", "—"], "fem", 7], ["мышь", "мыш", "мыш_", ["ь", "—"], "fem", 7],
+  ["чита́ть", "читат", "читат_", ["ь", "—"], "verbo", 7], ["говори́ть", "говорит", "говорит_", ["ь", "—"], "verbo", 7],
+  ["мочь", "моч", "моч_", ["ь", "—"], "verbo", 7], ["помо́чь", "помоч", "помоч_", ["ь", "—"], "verbo", 7],
+  ["врач", "врачь", "врач_", ["—", "ь"], "fem", 7], ["нож", "ножь", "нож_", ["—", "ь"], "fem", 7], ["мяч", "мячь", "мяч_", ["—", "ь"], "fem", 7],
+  ["жить", "жыть", "ж_ть", ["и", "ы"], "siete", 9], ["жизнь", "жызнь", "ж_знь", ["и", "ы"], "siete", 9], ["маши́на", "машына", "маш_на", ["и", "ы"], "siete", 9],
+  ["ру́сский", "русскый", "русск_й", ["и", "ы"], "siete", 9], ["ма́льчик", "мальчык", "мальч_к", ["и", "ы"], "siete", 9],
+  ["час", "чяс", "ч_с", ["а", "я"], "au", 9], ["чай", "чяй", "ч_й", ["а", "я"], "au", 9], ["ча́шка", "чяшка", "ч_шка", ["а", "я"], "au", 9], ["чу́до", "чюдо", "ч_до", ["у", "ю"], "au", 9],
+  ["щи", "щы", "щ_", ["и", "ы"], "siete", 9],
+  ["цирк", "цырк", "ц_рк", ["и", "ы"], "ц", 9], ["ци́фра", "цыфра", "ц_фра", ["и", "ы"], "ц", 9],
+  ["сча́стье", "щастье", "_астье", ["сч", "щ"], "сч", 9], ["мужчи́на", "мущина", "му_ина", ["жч", "щ"], "сч", 9], ["счёт", "щёт", "_ёт", ["сч", "щ"], "сч", 9],
+  ["щека́", "шека", "_ека", ["щ", "ш"], "щ", 9], ["я́щик", "яшик", "я_ик", ["щ", "ш"], "щ", 9], ["ша́пка", "щапка", "_апка", ["ш", "щ"], "щ", 9],
+  ["но́вый", "новыи", "нов_", ["ый", "ыи"], "й", 9], ["си́ний", "синии", "син_", ["ий", "ии"], "й", 9], ["йо́гурт", "иогурт", "_огурт", ["й", "и"], "й", 9],
+  ["край", "краи", "кра_", ["й", "и"], "й", 9], ["и́ли", "йли", "_ли", ["и", "й"], "й", 9],
+  ["сын", "син", "с_н", ["ы", "и"], "ы", 9], ["ры́ба", "риба", "р_ба", ["ы", "и"], "ы", 9], ["ты́сяча", "тисяча", "т_сяча", ["ы", "и"], "ы", 9], ["мир", "мыр", "м_р", ["и", "ы"], "ы", 9],
+  ["э́то", "ето", "_то", ["э", "е"], "э", 9], ["эта́ж", "етаж", "_таж", ["э", "е"], "э", 9], ["э́хо", "ехо", "_хо", ["э", "е"], "э", 9],
+  ["кафе́", "кафэ", "каф_", ["е", "э"], "э", 9], ["тест", "тэст", "т_ст", ["е", "э"], "э", 9],
+  ["зуб", "зуп", "зу_", ["б", "п"], "prueba", 9, "зу́бы"], ["хлеб", "хлеп", "хле_", ["б", "п"], "prueba", 9, "хле́бы"], ["год", "гот", "го_", ["д", "т"], "prueba", 9, "го́ды"],
+  ["сад", "сат", "са_", ["д", "т"], "prueba", 9, "сады́"], ["друг", "друк", "дру_", ["г", "к"], "prueba", 9, "дру́га"], ["моро́з", "морос", "моро_", ["з", "с"], "prueba", 9, "моро́зы"],
+  ["вода́", "вада", "в_да", ["о", "а"], "prueba", 9, "во́ды"], ["окно́", "акно", "_кно", ["о", "а"], "prueba", 9, "о́кна"], ["гора́", "гара", "г_ра", ["о", "а"], "prueba", 9, "го́ры"]
+];
+
 /* Mezcla de la sesión: fuerte presencia de escritura */
 const U1_MEZCLA = { dictado: 3, "escuchar-letra": 2, completar: 2, "es-ru": 2, ordenar: 2,
-  "audio-letra": 1, significado: 1, pares: 1, vf: 1, unir: 1 };
+  "audio-letra": 1, significado: 1, pares: 1, vf: 1, unir: 1, ortografia: 2, "ortografia-completar": 2 };
 
 window.ejerciciosUnidad1 = ejerciciosUnidad1;
 window.U1_MEZCLA = U1_MEZCLA;
