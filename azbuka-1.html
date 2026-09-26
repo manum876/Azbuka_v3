@@ -67,6 +67,8 @@ function Estilos({ c, green }) {
     .u-text{font-size:15px;line-height:1.6;color:${c.textSub};}
     .u-sec{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:24px 0 10px;}
     .u-dest{margin-top:12px;background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:10px;padding:12px 14px;font-size:14.5px;line-height:1.5;color:${c.text};font-weight:600;}
+    .u-truco{margin-top:10px;font-size:14px;line-height:1.5;color:${c.textSub};padding-left:10px;border-left:2px solid ${c.gold}66;}
+    .u-truco b{color:${c.gold};font-weight:700;}
     .u-card{background:${c.card};border:1px solid ${c.border};border-radius:14px;}
     .pbar-track{width:100%;height:6px;border-radius:3px;overflow:hidden;background:${c.bg3};margin-top:10px;}
     .pbar-fill{height:100%;border-radius:3px;background:${green};transition:width .3s ease;}
@@ -261,6 +263,8 @@ function VistaPronunciacion({ mod, c }) {
       h("div", { className: "u-sec" }, b.titulo),
       h("div", { className: "u-text" }, b.texto),
       b.destacado && h("div", { className: "u-dest" }, b.destacado),
+      b.comparacion && h("div", { className: "u-text", style: { marginTop: 10, fontSize: 14, fontStyle: "italic" } }, b.comparacion),
+      b.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), b.truco),
       b.pares && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 14px" } },
         b.pares.map((p, i) => h("div", { key: i, className: "par" },
           h("div", { className: "par-l", lang: "ru" }, p.letras),
@@ -314,6 +318,7 @@ function HojaDialogo({ d, c, onClose }) {
         h("button", { className: "pair-btn", onClick: () => setTr(v => !v), style: chip(tr) }, "Transliteración"),
         h("button", { className: "pair-btn", onClick: () => setEs(v => !v), style: chip(es) }, "Traducción")),
       h("div", { style: { fontSize: 13, color: c.textMuted, marginBottom: 12 } }, "Para practicar la lectura, apagá la transliteración y la traducción."),
+      h("div", { style: { fontSize: 12, color: c.textMuted, marginBottom: 12 } }, "Voces rusas del teléfono: " + (azVocesRu().join(", ") || "ninguna detectada todavía")),
       d.lineas.map((l, i) => {
         const p = (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[l.p]) || { ru: l.p };
         return h("div", { key: i, className: "u-card", style: { padding: "12px 14px", marginBottom: 8, display: "flex", gap: 10, alignItems: "flex-start" } },
@@ -439,7 +444,7 @@ function App() {
       h("div", { className: "u-text" }, s.texto),
       s.destacado && h("div", { className: "u-dest" }, s.destacado))),
     mod.tipo === "intro" && next && h("button", { className: "ubtn", onClick: () => abrirModulo(next.id) }, "Empezar con las letras"),
-    mod.tipo === "pronunciacion" && h(VistaPronunciacion, { mod, c }),
+    (mod.tipo === "pronunciacion" || mod.tipo === "reglas") && h(VistaPronunciacion, { mod, c }),
     mod.tipo === "lectura" && h(VistaLectura, { mod, c, abrirDialogo: setDialogo }),
     mod.tipo === "examen" && h(React.Fragment, null,
       h("p", { className: "u-text", style: { marginTop: 12 } }, mod.intro),
@@ -450,7 +455,8 @@ function App() {
         "Última vez: " + examenU1.pct + " % (" + examenU1.fecha.split("-").reverse().join("/") + ")" + (examenU1.aprobado ? " · aprobada" : "")),
       h("button", { className: "ubtn", onClick: () => rendirExamen(mod) }, examenU1 ? "Rendir de nuevo" : "Empezar la evaluación")),
     mod.tipo === "pronunciacion" && h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar los pares mínimos"),
-    (mod.tipo === "pronunciacion" || mod.tipo === "lectura") && next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo),
+    mod.tipo === "reglas" && h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar las reglas"),
+    (mod.tipo === "pronunciacion" || mod.tipo === "reglas" || mod.tipo === "lectura") && next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo),
     mod.tipo === "letras" && h(React.Fragment, null,
       h("p", { className: "u-text", style: { marginTop: 12 } }, mod.intro),
       mod.pares && h("table", { className: "ctable" },
@@ -463,7 +469,10 @@ function App() {
       (mod.secciones || []).map((x, k) => h("div", { key: k },
         h("div", { className: "u-sec" }, x.titulo),
         h("div", { className: "u-text" }, x.texto),
-        x.destacado && h("div", { className: "u-dest" }, x.destacado))),
+        x.destacado && h("div", { className: "u-dest" }, x.destacado),
+        x.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), x.truco),
+        x.ejemplos && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 16px" } },
+          x.ejemplos.map(id => h(Ejemplo, { key: id, id, c }))))),
       mod.secciones && h("div", { className: "u-sec" }, "Las letras"),
       h("div", { className: "toggle-row" },
         h("button", { className: "pair-btn", onClick: togglePron, style: chip(verPron) }, "Pronunciación en español"),
