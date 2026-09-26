@@ -47,10 +47,15 @@
     const u = new SpeechSynthesisUtterance(texto.replace(/\u0301/g, ""));
     u.lang = "ru-RU"; u.rate = 0.85;
     const v = vozPara(genero);
-    if (v) u.voice = v;
-    else if (genero === "m") u.pitch = 0.85;
-    else if (genero === "f") u.pitch = 1.1;
+    if (v) { u.voice = v; u.lang = v.lang; }
+    /* El tono se cambia siempre: si el teléfono ignora la voz elegida
+       (pasa en algunos iPhone), igual se nota quién habla. */
+    if (genero === "m") u.pitch = v ? 0.9 : 0.7;
+    else if (genero === "f") u.pitch = v ? 1.05 : 1.25;
     return u;
+  }
+  function azVocesRu() {
+    try { return window.speechSynthesis.getVoices().filter(v => /^ru/i.test(v.lang)).map(v => v.name); } catch (e) { return []; }
   }
   function azHablarRu(texto, genero) {
     try {
@@ -233,6 +238,7 @@
 
   window.azHablarRu = azHablarRu;
   window.azHablarSecuencia = azHablarSecuencia;
+  window.azVocesRu = azVocesRu;
   window.azAbrirBurbuja = abrir;
   window.AzBurbujaHost = AzBurbujaHost;
   window.AzPalabra = AzPalabra;
