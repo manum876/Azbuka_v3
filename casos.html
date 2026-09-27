@@ -29,7 +29,7 @@
        arriba, datos del léxico central (palabra, transliteración,
        IPA, categoría, género, animacidad, acepciones);
        abajo, las tablas de data-casos.js.
-   · Cada caso y cada forma especial (locativo, partitivo, conteo, forma
+   · Cada caso y cada forma especial (locativo, partitivo, forma
      corta, acusativo animado, н-, numerales) abre una ficha a
      pantalla completa con la explicación de data-gramatica.js.
    Esta página NO guarda datos de palabras ni explicaciones:
@@ -78,7 +78,9 @@ function useWide() {
   return wide;
 }
 
-function CasosStyles({ c }) {
+function CasosStyles({ c, dark }) {
+  /* Colores semánticos (ESTETICA §2.3): verde correcto, naranja incorrecto */
+  const OK = dark ? "#4CAF82" : "#2E7D55", MAL = dark ? "#E2884A" : "#C85A1A";
   return h("style", null, `
     .ficha{background:${c.card};border:1px solid ${c.border};border-radius:14px;overflow:hidden;}
     .hero{background:linear-gradient(135deg,${c.bg2},${c.bg3});padding:20px 20px 16px;border-bottom:1px solid ${c.border};}
@@ -169,8 +171,56 @@ function CasosStyles({ c }) {
     .search-hint{font-size:11.5px;color:${c.textMuted};margin:8px 2px 0;line-height:1.45;}
     .try-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px;}
     .try-lbl{font-size:11.5px;color:${c.textMuted};margin-right:2px;}
-    @media (max-height:720px){.intro{padding:14px 16px 10px;}.intro-desc{margin-top:10px;}.intro-id{display:none;}.intro-item{padding:7px 0;}}
+    @media (max-height:720px){.intro{padding:14px 16px 10px;}.intro-desc{margin-top:10px;line-height:1.45;}.intro-id{display:none;}.try-row{margin-top:8px;}.intro-item{padding:4px 0;}.guia-btn .guia-d{display:none;}.guia-btn{padding:7px 12px;margin-bottom:10px;}.guia-ic{width:28px;height:28px;font-size:15px;border-radius:8px;}}
     .try-chip{padding:6px 11px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;background:${c.bg2};border:1px solid ${c.border};color:${c.text};}
+    .guia-btn{display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;text-align:left;background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:14px;padding:9px 14px;margin-bottom:12px;cursor:pointer;font-family:inherit;animation:fadeIn .3s ease;}
+    .guia-ic{width:34px;height:34px;border-radius:10px;background:${c.gold};color:${c.bg};font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .guia-txt,.gcap-txt{flex:1;min-width:0;display:flex;flex-direction:column;}
+    .guia-t{font-size:14.5px;font-weight:700;color:${c.text};}
+    .guia-d{font-size:12px;color:${c.textMuted};margin-top:2px;line-height:1.35;}
+    .guia-ch{font-size:22px;color:${c.gold};font-weight:700;flex-shrink:0;line-height:1;}
+    .gcap{display:flex;align-items:center;gap:4px;width:100%;box-sizing:border-box;text-align:left;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;font-family:inherit;}
+    .gcap-t{font-size:15px;font-weight:700;color:${c.text};}
+    .gcap-d{font-size:12.5px;color:${c.textMuted};margin-top:2px;line-height:1.4;}
+    .gback{margin-bottom:16px;}
+    .g-p{margin-top:14px;font-size:15px;line-height:1.6;color:${c.textSub};}
+    .g-p:first-child{margin-top:18px;}
+    .flujo{margin-top:14px;}
+    .fl-paso{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:10px 14px;}
+    .fl-fin{background:${c.gold}14;border-color:${c.gold}66;}
+    .fl-k{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.textMuted};margin-bottom:3px;}
+    .fl-v{font-size:15.5px;font-weight:700;color:${c.text};line-height:1.35;}
+    .fl-arrow{text-align:center;color:${c.gold};font-size:16px;font-weight:700;line-height:1;padding:4px 0;}
+    .gtab{margin-top:14px;}
+    .gtab th{font-size:10.5px;color:${c.textMuted};text-transform:uppercase;letter-spacing:.5px;}
+    .gtab td{font-size:13.5px;line-height:1.4;color:${c.text};word-break:break-word;}
+    .gtab td:first-child{font-weight:700;}
+    .par{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-top:10px;}
+    .par-row{display:flex;align-items:flex-start;gap:10px;}
+    .par-mal{margin-top:10px;padding-top:10px;border-top:1px dashed ${c.border};}
+    .par-ic{font-size:15px;font-weight:800;width:16px;flex-shrink:0;margin-top:1px;}
+    .par-tacha{font-size:15px;font-weight:600;color:${c.textMuted};text-decoration:line-through;text-decoration-color:${MAL};}
+    .par-por{font-size:13px;line-height:1.5;color:${c.textSub};margin-top:4px;}
+    .pr-ok-t{color:${OK};}
+    .pr-mal-t{color:${MAL};}
+    .pr{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-top:10px;}
+    .pr-top{display:flex;align-items:flex-start;}
+    .pr-top .sense-num{flex-shrink:0;margin-top:1px;}
+    .pr-ru{font-size:16px;font-weight:700;color:${c.text};line-height:1.6;}
+    .pr-hueco{display:inline-block;min-width:54px;padding:0 8px;margin:0 2px;border:1.5px dashed ${c.gold}88;border-radius:7px;color:${c.textMuted};font-style:italic;font-weight:600;line-height:1.45;}
+    .pr-hueco.pr-ok{border:1.5px solid ${OK};color:${OK};font-style:normal;font-weight:700;background:${OK}1A;}
+    .pr-hueco.pr-mal{border:1.5px solid ${OK};color:${OK};font-style:normal;font-weight:700;}
+    .pr-ops{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;margin-left:28px;}
+    .pr-op{background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:14px;}
+    .pr-op.pr-ok{background:${OK}22;border-color:${OK};color:${OK};}
+    .pr-op.pr-mal{background:${MAL}22;border-color:${MAL};color:${MAL};}
+    .pr-op.pr-off{opacity:.45;}
+    .pr-op:disabled{cursor:default;}
+    .pr-why{display:flex;align-items:center;gap:12px;}
+    .pr-fin{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:14px;font-weight:700;color:${c.text};}
+    .gnav{display:flex;justify-content:space-between;gap:8px;margin-top:32px;}
+    .gnav-b{background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};max-width:48%;text-align:left;}
+    .gnav-sig{background:${c.gold}22;border-color:${c.gold};color:${c.gold};text-align:right;margin-left:auto;}
     @keyframes popIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
   `);
 }
@@ -179,14 +229,6 @@ function CasosStyles({ c }) {
    acusativos [inanimado, animado], muestra los dos. */
 /* Forma buscada (?f=): se resalta en la tabla. */
 const FORMA_BUSCADA = azFormaClave(new URLSearchParams(window.location.search).get("f") || "");
-/* Si la forma buscada trae acento (часа́), se distingue de otra que solo
-   cambia en el acento (ча́са). Sin acento, vale cualquiera de las dos. */
-const FORMA_EXACTA = (new URLSearchParams(window.location.search).get("f") || "").toLowerCase();
-function esFormaBuscada(t) {
-  if (!FORMA_BUSCADA || !t) return false;
-  if (FORMA_EXACTA.indexOf("\u0301") >= 0) return t.toLowerCase() === FORMA_EXACTA;
-  return azFormaClave(t) === FORMA_BUSCADA;
-}
 function Forma({ text, extra }) {
   if (Array.isArray(text)) {
     return h("div", null,
@@ -202,7 +244,7 @@ function Forma({ text, extra }) {
 }
 function FormaLinea({ text, tag }) {
   if (!text) return h("span", { className: "f-none" }, "—");
-  const hit = esFormaBuscada(text);
+  const hit = FORMA_BUSCADA && azFormaClave(text) === FORMA_BUSCADA;
   return h("div", { className: "f-cell" + (hit ? " f-hit" : ""), onClick: () => speakRu(text) },
     h("span", { className: "f-ru" }, text),
     tag && h("span", { className: "f-tag" }, tag),
@@ -276,7 +318,7 @@ function Ejemplo({ ru, es, titulo, por }) {
     por && h("div", { className: "ex-why" }, por)
   );
 }
-function CasoSheet({ cid, formas, base, onClose }) {
+function CasoSheet({ cid, formas, base, onClose, onGuia }) {
   useLockScroll();
   const g = gramaticaCaso(cid);
   if (!g) return null;
@@ -306,7 +348,13 @@ function CasoSheet({ cid, formas, base, onClose }) {
         h("div", { className: "prep-list" }, g.preposiciones.map((p, i) => h("div", { key: i, className: "prep" }, h("b", null, p[0]), p[1])))
       ),
       h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Ejemplos"),
-      g.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1], por: ej[2] }))
+      g.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1], por: ej[2] })),
+      /* Enlace a la guía larga de este caso */
+      onGuia && typeof gramaticaGuia === "function" && gramaticaGuia(cid) && h(GuiaBoton, {
+        titulo: "Explicación completa: " + g.nombre.toLowerCase(),
+        desc: "Cómo se dice en español, errores típicos y práctica",
+        onClick: () => onGuia(cid), style: { marginTop: 24, marginBottom: 0 }
+      })
     )
   );
 }
@@ -323,6 +371,166 @@ function FormaSheet({ fid, onClose }) {
       h("div", { className: "section-lbl", style: { marginTop: 24 } }, "Ejemplos"),
       g.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1], por: ej[2] }))
     )
+  );
+}
+
+/* ── Guía «Cómo funcionan los casos» ─────────────────────────
+   Contenido en data-gramatica.js (GRAMATICA_GUIA). Hoja a pantalla
+   completa con un índice y un capítulo a la vez. */
+function GuiaBoton({ titulo, desc, onClick, style }) {
+  return h("button", { className: "guia-btn", onClick, style },
+    h("span", { className: "guia-ic" }, "?"),
+    h("span", { className: "guia-txt" },
+      h("span", { className: "guia-t" }, titulo),
+      desc && h("span", { className: "guia-d" }, desc)
+    ),
+    h("span", { className: "guia-ch" }, "›")
+  );
+}
+function GuiaFlujo({ pasos }) {
+  return h("div", { className: "flujo" }, pasos.map((p, i) => h("div", { key: i },
+    i > 0 && h("div", { className: "fl-arrow" }, "↓"),
+    h("div", { className: "fl-paso" + (i === pasos.length - 1 ? " fl-fin" : "") },
+      h("div", { className: "fl-k" }, p[0]),
+      h("div", { className: "fl-v" }, h(RuMarcado, { text: p[1] }))
+    )
+  )));
+}
+function GuiaTabla({ cols, filas }) {
+  return h("table", { className: "ctable gtab" },
+    h("thead", null, h("tr", null, cols.map((t, i) => h("th", { key: i }, t)))),
+    h("tbody", null, filas.map((f, i) => h("tr", { key: i }, f.map((x, j) => h("td", { key: j }, h(RuMarcado, { text: x }))))))
+  );
+}
+function GuiaPar({ bien, mal }) {
+  return h("div", { className: "par" },
+    h("div", { className: "par-row" },
+      h("span", { className: "par-ic pr-ok-t" }, "✔"),
+      h("div", { style: { flex: 1, minWidth: 0 } },
+        h("div", { className: "ex-ru" }, h(RuMarcado, { text: bien[0] })),
+        h("div", { className: "ex-es" }, bien[1])
+      ),
+      h("button", { className: "play", onClick: () => speakRu(bien[0].replace(/[{}]/g, "")), "aria-label": "Escuchar" }, "▶")
+    ),
+    h("div", { className: "par-row par-mal" },
+      h("span", { className: "par-ic pr-mal-t" }, "✘"),
+      h("div", { style: { flex: 1, minWidth: 0 } },
+        h("div", { className: "par-tacha" }, mal[0]),
+        h("div", { className: "par-por" }, mal[1])
+      )
+    )
+  );
+}
+/* Práctica: elegir la forma que va en el hueco (___). */
+function GuiaPractica({ items }) {
+  const [resp, setResp] = useState({});
+  const hechas = Object.keys(resp).length;
+  const bien = items.filter((it, i) => resp[i] === it.ok).length;
+  return h("div", null,
+    items.map((it, i) => {
+      const r = resp[i];
+      const hecho = r != null;
+      const partes = it.ru.split("___");
+      const frase = partes[0] + it.ok + (partes[1] || "");
+      return h("div", { key: i, className: "pr" },
+        h("div", { className: "pr-top" },
+          h("span", { className: "sense-num" }, i + 1),
+          h("div", { className: "pr-ru" }, partes[0],
+            h("span", { className: "pr-hueco" + (hecho ? (r === it.ok ? " pr-ok" : " pr-mal") : "") }, hecho ? it.ok : it.base),
+            partes[1] || "")
+        ),
+        h("div", { className: "pr-ops" }, it.op.map(o => {
+          let cls = "pair-btn pr-op";
+          if (hecho) cls += o === it.ok ? " pr-ok" : (o === r ? " pr-mal" : " pr-off");
+          return h("button", { key: o, className: cls, disabled: hecho, onClick: () => setResp(Object.assign({}, resp, { [i]: o })) }, o);
+        })),
+        hecho && h("div", { className: "ex-why pr-why" },
+          h("div", { style: { flex: 1, minWidth: 0 } },
+            h("div", { className: r === it.ok ? "pr-ok-t" : "pr-mal-t", style: { fontWeight: 700 } }, r === it.ok ? "✔ ¡Bien!" : "✘ Era " + it.ok + "."),
+            h("div", { style: { marginTop: 3 } }, h("i", null, it.es), " ", it.por)
+          ),
+          h("button", { className: "play", onClick: () => speakRu(frase), "aria-label": "Escuchar" }, "▶")
+        )
+      );
+    }),
+    hechas > 0 && h("div", { className: "pr-fin" },
+      hechas === items.length && h("span", null, "Acertaste " + bien + " de " + items.length + "."),
+      h("button", { className: "help-chip", onClick: () => setResp({}) }, "Empezar de nuevo")
+    )
+  );
+}
+function GuiaBloque({ b }) {
+  switch (b.t) {
+    case "texto": return h("div", { className: "g-p" }, h(RuMarcado, { text: b.texto }));
+    case "lbl": return h("div", { className: "section-lbl", style: { marginTop: 28 } }, b.texto);
+    case "nota": return h("div", { className: "nota", style: { marginTop: 14 } }, h(RuMarcado, { text: b.texto }));
+    case "flujo": return h(GuiaFlujo, { pasos: b.pasos });
+    case "tabla": return h(GuiaTabla, { cols: b.cols, filas: b.filas });
+    case "par": return h(GuiaPar, { bien: b.bien, mal: b.mal });
+    case "ejemplos": return h("div", { style: { marginTop: 14 } }, b.items.map((e, i) => h(Ejemplo, { key: i, ru: e[0], es: e[1], por: e[2], titulo: e[3] })));
+    case "practica": return h(GuiaPractica, { items: b.items });
+    default: return null;
+  }
+}
+function GuiaSheet({ inicio, onClose }) {
+  useLockScroll();
+  const G = typeof GRAMATICA_GUIA !== "undefined" ? GRAMATICA_GUIA : null;
+  const [cap, setCap] = useState(inicio && G && gramaticaGuia(inicio) ? inicio : null);
+  const ref = useRef(null);
+  useEffect(() => { if (ref.current) ref.current.scrollTop = 0; }, [cap]);
+  if (!G) return null;
+  const caps = G.capitulos;
+  const i = cap ? caps.findIndex(x => x.id === cap) : -1;
+  const k = i >= 0 ? caps[i] : null;
+  let cuerpo;
+  if (!k) {
+    /* Índice, agrupado */
+    const grupos = [];
+    caps.forEach((x, n) => {
+      let g = grupos.find(y => y.t === x.grupo);
+      if (!g) { g = { t: x.grupo, caps: [] }; grupos.push(g); }
+      g.caps.push([x, n]);
+    });
+    cuerpo = [
+      h("div", { key: "k", className: "sheet-kicker" }, "Guía"),
+      h("div", { key: "t", className: "sheet-title" }, G.titulo),
+      h("div", { key: "i", className: "sheet-text" }, G.intro),
+      grupos.map(g => h("div", { key: g.t },
+        h("div", { className: "section-lbl", style: { marginTop: 26 } }, g.t),
+        g.caps.map(([x, n]) => h("button", { key: x.id, className: "gcap", onClick: () => setCap(x.id) },
+          h("span", { className: "sense-num" }, n + 1),
+          h("span", { className: "gcap-txt" },
+            h("span", { className: "gcap-t" }, x.titulo),
+            h("span", { className: "gcap-d" }, x.desc)
+          ),
+          h("span", { className: "guia-ch" }, "›")
+        ))
+      ))
+    ];
+  } else {
+    const gc = k.caso ? gramaticaCaso(k.caso) : null;
+    const ant = caps[i - 1], sig = caps[i + 1];
+    cuerpo = [
+      h("button", { key: "b", className: "help-chip gback", onClick: () => setCap(null) }, "‹ Índice"),
+      h("div", { key: "k", className: "sheet-kicker" }, "Guía · " + k.grupo),
+      h("div", { key: "t", className: "sheet-title" }, k.titulo),
+      h("div", { key: "s", className: "sheet-sub" }, gc ? gc.ru : k.sub),
+      gc && h("div", { key: "q", className: "sheet-q" }, h("span", { className: "sheet-q-k" }, "Responde a: "), gc.preguntas),
+      h("div", { key: "c" }, k.bloques.map((b, n) => h(GuiaBloque, { key: cap + n, b }))),
+      gc && gc.preposiciones && gc.preposiciones.length > 0 && h("div", { key: "p" },
+        h("div", { className: "section-lbl", style: { marginTop: 28 } }, "Preposiciones que lo piden"),
+        h("div", { className: "prep-list" }, gc.preposiciones.map((p, n) => h("div", { key: n, className: "prep" }, h("b", null, p[0]), p[1])))
+      ),
+      h("div", { key: "n", className: "gnav" },
+        ant ? h("button", { className: "pair-btn gnav-b", onClick: () => setCap(ant.id) }, "‹ " + ant.titulo) : h("span"),
+        sig ? h("button", { className: "pair-btn gnav-b gnav-sig", onClick: () => setCap(sig.id) }, sig.titulo + " ›")
+            : h("button", { className: "pair-btn gnav-b gnav-sig", onClick: () => setCap(null) }, "Volver al índice")
+      )
+    ];
+  }
+  return h("div", { className: "sheet", role: "dialog", "aria-modal": "true", ref },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" }, cuerpo)
   );
 }
 
@@ -344,7 +552,6 @@ function formasEnCaso(d, r) {
     if (d.sg) push(d.sg[r], d.pl ? "sg." : "");
     if (d.pl) push(d.pl[r], d.sg ? "pl." : "");
     if (r === 1 && d.partitivo) push(d.partitivo, "partitivo");
-    if (r === 1 && d.conteo) push(d.conteo, "con 2, 3 y 4");
     if (r === 5 && d.loc2) push(d.loc2, "locativo");
   }
   else if (d.tipo === "adjetivo") GENEROS.forEach(g => d[g[0]] && push(d[g[0]][r], g[2].toLowerCase()));
@@ -354,7 +561,7 @@ function formasEnCaso(d, r) {
   return out.filter(f => { const k = f[0] + "|" + f[1]; if (seen.has(k)) return false; seen.add(k); return true; });
 }
 
-function FichaCasos({ id, c }) {
+function FichaCasos({ id, c, onGuia }) {
   const lex = id ? lexComerById(id) : null;
   const d = id ? casosById(id) : null;
   const wide = useWide();
@@ -371,7 +578,7 @@ function FichaCasos({ id, c }) {
   }
 
   /* Si se llegó buscando una forma (?f=), se explica de dónde viene */
-  const bf = FORMA_BUSCADA ? azFormasDe(id).filter(x => esFormaBuscada(x[0])) : [];
+  const bf = FORMA_BUSCADA ? azFormasDe(id).filter(x => azFormaClave(x[0]) === FORMA_BUSCADA) : [];
   const buscada = bf.length ? { forma: bf[0][0], etiquetas: [...new Set(bf.map(x => x[1]))] } : null;
   const pos = lex.posNormalized;
   const badge = [POS_LABEL[pos] || pos];
@@ -391,7 +598,6 @@ function FichaCasos({ id, c }) {
   if (tieneParAc) ayudas.push(["acusativoAnimado", "Acusativo animado"]);
   if (d.loc2) ayudas.push(["locativo", "Locativo"]);
   if (d.partitivo) ayudas.push(["partitivo", "Partitivo"]);
-  if (d.conteo) ayudas.push(["conteo", "Forma de conteo"]);
   if (d.tipo === "personal" && d.n) ayudas.push(["pronombreN", "Formas con н-"]);
   if (pos === "numeral") ayudas.push(["numerales", "Números y casos"]);
   if (d.tipo === "indeclinable") ayudas.push(["indeclinable", "Palabras que no se declinan"]);
@@ -408,7 +614,7 @@ function FichaCasos({ id, c }) {
       /* partitivo junto al genitivo; locativo junto al preposicional */
       extra: (col, r) => {
         if (col.k !== "sg") return null;
-        if (r === 1 && (d.partitivo || d.conteo)) return [].concat(d.partitivo ? [[d.partitivo, "coloq."]] : [], d.conteo ? [[d.conteo, "con 2–4"]] : []);
+        if (r === 1 && d.partitivo) return [[d.partitivo, "coloq."]];
         if (r === 5 && d.loc2) return [[d.loc2, "lugar"]];
         return null;
       }
@@ -497,7 +703,6 @@ function FichaCasos({ id, c }) {
         ayudas.length > 0 && h("div", null,
           h("div", { className: "section-lbl" }, "Formas especiales"),
           d.loc2 && h("div", { className: "tnote", style: { marginTop: 0 } }, "Para decir dónde: ", h("b", { style: { color: c.text } }, d.loc2), ". Para hablar de algo se usa el preposicional normal."),
-          d.conteo && h("div", { className: "tnote", style: { marginTop: 0 } }, "Después de 2, 3 y 4: ", h("b", { style: { color: c.text } }, "два " + d.conteo), ", no ", h("b", { style: { color: c.text } }, d.sg ? d.sg[1] : ""), ". El genitivo normal se usa en los demás casos."),
           d.partitivo && h("div", { className: "tnote" }, "Partitivo coloquial: ", h("b", { style: { color: c.text } }, d.partitivo), " («un poco de»). El genitivo normal siempre es correcto."),
           h("div", { className: "help-row" }, ayudas.map(a => h(Ayuda, { key: a[0], fid: a[0], texto: a[1], onForma: setForma })))
         ),
@@ -508,7 +713,7 @@ function FichaCasos({ id, c }) {
         )
       )
     ),
-    caso && h(CasoSheet, { cid: caso, formas: formasEnCaso(d, GRAMATICA_CASOS_ORDEN.indexOf(caso)), base: formasEnCaso(d, 0), onClose: () => setCaso(null) }),
+    caso && h(CasoSheet, { cid: caso, formas: formasEnCaso(d, GRAMATICA_CASOS_ORDEN.indexOf(caso)), base: formasEnCaso(d, 0), onClose: () => setCaso(null), onGuia }),
     forma && h(FormaSheet, { fid: forma, onClose: () => setForma(null) })
   );
 }
@@ -521,6 +726,8 @@ function App() {
   const [headerH, setHeaderH] = useState(0);
   const [searchH, setSearchH] = useState(0);
   const [, setFormasListas] = useState(0);
+  /* Guía: null = cerrada, "" = índice, id = capítulo. casos.html?guia=dativo la abre. */
+  const [guia, setGuia] = useState(() => new URLSearchParams(location.search).get("guia"));
 
   /* Cuando terminan de cargarse las formas, se repite la búsqueda */
   useEffect(() => {
@@ -620,6 +827,11 @@ function App() {
         h("div", null, h("div", { className: "intro-it" }, it[0]), h("div", { className: "intro-id" }, it[1]))
       ))
     ),
+    !buscando && typeof GRAMATICA_GUIA !== "undefined" && h(GuiaBoton, {
+      titulo: "Cómo funcionan los casos",
+      desc: "Preguntas, rección, trampas y práctica",
+      onClick: () => setGuia("")
+    }),
     h("div", { style: { position: "relative" } }, ...campo),
     !buscando && h("div", { className: "search-hint" }, "Podés buscar en ruso o en español, o escribir una forma declinada: тебе́ te lleva a ты."),
     !buscando && h("div", { className: "try-row" },
@@ -631,10 +843,11 @@ function App() {
   );
 
   return h(AzShell, { darkMode, setDarkMode, moduleId: "casos", tabs: [] },
-    h(CasosStyles, { c }),
+    h(CasosStyles, { c, dark: darkMode }),
     searchBar,
     h("div", { style: { paddingTop: id ? (searchH ? searchH + 14 + "px" : "18px") : "16px" } },
-      id ? h(FichaCasos, { key: id, id, c }) : portada)
+      id ? h(FichaCasos, { key: id, id, c, onGuia: setGuia }) : portada),
+    guia != null && h(GuiaSheet, { inicio: guia, onClose: () => setGuia(null) })
   );
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));

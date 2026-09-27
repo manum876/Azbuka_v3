@@ -13,12 +13,16 @@
    QUÉ EXPONE
      GRAMATICA_CASOS        los 6 casos (clave = id del caso)
      GRAMATICA_CASOS_ORDEN  orden tradicional ruso de los casos
-     GRAMATICA_FORMAS       locativo, partitivo, forma de conteo, forma corta,
+     GRAMATICA_FORMAS       locativo, partitivo, forma corta,
                             acusativo y animacidad, numerales,
                             pronombres con н-, indeclinables
      GRAMATICA_RECCION      grupos de rección de los verbos
                             (antes VERBOS_GUIA_RECCION, en data-verbos.js)
+     GRAMATICA_GUIA         guía larga «Cómo funcionan los casos»:
+                            preguntas, rección, los 6 casos, trampas
+                            del español y práctica (casos.html?guia=)
      gramaticaCaso(id)      devuelve un caso o null
+     gramaticaGuia(id)      devuelve un capítulo de la guía o null
      gramaticaReccion(gov)  divide el campo Governance del léxico
                             ("кого? что? кому?") en grupos
                             (antes verbosReccion, en data-verbos.js)
@@ -65,7 +69,7 @@ const GRAMATICA_CASOS = {
  },
  genitivo: {
   id: "genitivo", nombre: "Genitivo", ru: "роди́тельный паде́ж", abrev: "Gen.",
-  preguntas: "кого? чего?",
+  preguntas: "кого́? чего́?",
   resumen: "Indica de quién o de qué es algo («de»), lo que falta o no hay, y las cantidades. Es el caso con más preposiciones.",
   usos: [
    ["Pertenencia: «de»","кни́га {бра́та}","el libro del hermano","брат → бра́та (masculino: se agrega -а). Dice de quién es el libro."],
@@ -84,7 +88,7 @@ const GRAMATICA_CASOS = {
  },
  dativo: {
   id: "dativo", nombre: "Dativo", ru: "да́тельный паде́ж", abrev: "Dat.",
-  preguntas: "кому? чему?",
+  preguntas: "кому́? чему́?",
   resumen: "Indica a quién va dirigida la acción: el destinatario («a» o «le» en español). También se usa para decir lo que alguien siente o necesita.",
   usos: [
    ["Destinatario: a quién se da, se dice o se escribe","Я пишу́ {ма́ме}.","Le escribo a mamá.","ма́ма → ма́ме (femenino: la -а pasa a -е). Es a quién le escribo."],
@@ -102,7 +106,7 @@ const GRAMATICA_CASOS = {
  },
  acusativo: {
   id: "acusativo", nombre: "Acusativo", ru: "вини́тельный паде́ж", abrev: "Ac.",
-  preguntas: "кого? что?",
+  preguntas: "кого́? что?",
   resumen: "Es el complemento directo: la cosa o la persona que recibe la acción. Con в y на indica hacia dónde se va.",
   usos: [
    ["Complemento directo","Я чита́ю {кни́гу}.","Leo un libro.","кни́га → кни́гу (femenino: la -а pasa a -у). Es lo que leo: el complemento directo."],
@@ -186,15 +190,6 @@ const GRAMATICA_FORMAS = {
    ["из {до́му}","de casa (expresión fija)","дом → до́му: expresión fija. Hoy es más común из до́ма."]
   ]
  },
- conteo: {
-  titulo: "Forma de conteo (два часа́)",
-  texto: "Después de 2, 3 y 4 (y de los números que terminan en ellos, como 22 o 34) el sustantivo va en genitivo singular. Unas pocas palabras masculinas usan ahí una forma especial, con el acento en la terminación, distinta del genitivo normal. La más importante es час: два часа́, pero о́коло ча́са.",
-  ejemplos: [
-   ["Сейча́с два {часа́}.","Son las dos.","Después de 2, 3 y 4, час usa la forma de conteo часа́, con el acento al final."],
-   ["Мы шли три {часа́}.","Caminamos tres horas.","Три + forma de conteo: три часа́."],
-   ["Я ждал о́коло {ча́са}.","Esperé cerca de una hora.","Sin un número delante se usa el genitivo normal: ча́са."]
-  ]
- },
  formaCorta: {
   titulo: "Forma corta de los adjetivos",
   texto: "Muchos adjetivos tienen una forma corta que va después del sujeto, como predicado, y no se declina: solo cambia por género y número. Algunas son muy comunes desde el principio, como гото́в (listo), рад (contento), до́лжен (tener que) o прав (tener razón).",
@@ -242,11 +237,11 @@ const GRAMATICA_FORMAS = {
    explicacion = qué verbos la piden (la explicación general del
    caso vive en GRAMATICA_CASOS, no se repite acá).                 */
 const GRAMATICA_RECCION = {
- acusativo: { titulo: "Acusativo", caso: "acusativo", prep: null, preguntas: "кого? что?", explicacion: "Es el complemento directo: la cosa o la persona que recibe la acción («¿qué?» o «¿a quién?»).",
+ acusativo: { titulo: "Acusativo", caso: "acusativo", prep: null, preguntas: "кого́? что?", explicacion: "Es el complemento directo: la cosa o la persona que recibe la acción («¿qué?» o «¿a quién?»).",
    ejemplos: [["Я чита́ю кни́гу.", "Leo un libro."], ["Я ви́жу ма́му.", "Veo a mamá."]] },
- genitivo: { titulo: "Genitivo", caso: "genitivo", prep: null, preguntas: "кого? чего?", explicacion: "Algunos verbos piden genitivo en vez de acusativo: sobre todo los de miedo, espera, búsqueda o falta.",
+ genitivo: { titulo: "Genitivo", caso: "genitivo", prep: null, preguntas: "кого́? чего́?", explicacion: "Algunos verbos piden genitivo en vez de acusativo: sobre todo los de miedo, espera, búsqueda o falta.",
    ejemplos: [["Я жду отве́та.", "Espero una respuesta."], ["Он бои́тся темноты́.", "Le tiene miedo a la oscuridad."]] },
- dativo: { titulo: "Dativo", caso: "dativo", prep: null, preguntas: "кому? чему?", explicacion: "Indica a quién va dirigida la acción: el destinatario (en español suele llevar «a» o «le»).",
+ dativo: { titulo: "Dativo", caso: "dativo", prep: null, preguntas: "кому́? чему́?", explicacion: "Indica a quién va dirigida la acción: el destinatario (en español suele llevar «a» o «le»).",
    ejemplos: [["Я звоню́ ма́ме.", "Llamo a mamá."], ["Он помога́ет дру́гу.", "Ayuda a su amigo."]] },
  instrumental: { titulo: "Instrumental", caso: "instrumental", prep: null, preguntas: "кем? чем?", explicacion: "Indica con qué se hace algo, o en qué se convierte o de qué trabaja alguien.",
    ejemplos: [["Я пишу́ ру́чкой.", "Escribo con birome."], ["Он рабо́тает врачо́м.", "Trabaja de médico."]] },
@@ -335,6 +330,408 @@ const GRAMATICA_RECCION_TOKENS = {
  "через что": "cherez_acc", "что": "acusativo"
 };
 
+/* ── GUÍA: CÓMO FUNCIONAN LOS CASOS ──────────────────────────
+   La explicación larga que se abre desde la portada de Casos
+   (botón «Cómo funcionan los casos») y desde cada hoja de caso
+   («Explicación completa»). Enlace directo: casos.html?guia=<id>.
+
+   capitulos: lista ordenada. Cada capítulo:
+     id       clave (para ?guia=<id>)
+     grupo    título del grupo en el índice
+     titulo   título del capítulo
+     sub      subtítulo (opcional; en los casos sale de GRAMATICA_CASOS)
+     desc     una línea para el índice
+     caso     (opcional) id de GRAMATICA_CASOS: la página toma de ahí
+              el nombre ruso, las preguntas y las preposiciones
+     bloques  contenido, en orden. Tipos:
+       { t:"texto", texto }                  párrafo
+       { t:"lbl", texto }                    título de sección
+       { t:"nota", texto }                   recuadro con borde dorado
+       { t:"flujo", pasos:[[etiqueta, valor]] }
+                                             diagrama de pasos con flechas
+       { t:"tabla", cols:[…], filas:[[…]] }  tabla simple
+       { t:"par", bien:[ru, es], mal:[ru, por] }
+                                             frase correcta ✔ y error típico ✘
+       { t:"ejemplos", items:[[ru, es, explicación, título?]] }
+       { t:"practica", items:[{ ru, base, op, ok, caso, es, por }] }
+              ru   frase con ___ en el hueco
+              base la palabra en nominativo (tiene que estar en CASOS)
+              op   opciones (formas reales de la palabra)
+              ok   la correcta (la forma de CASOS en ese caso)
+   En cualquier texto, el ruso entre llaves {…} se resalta en dorado.
+   Todas las formas están verificadas contra data-casos.js.          */
+const GRAMATICA_GUIA = {
+ titulo: "Cómo funcionan los casos",
+ intro: "Una guía para entender por qué las palabras rusas cambian, cómo saber qué caso usar y dónde el español te puede confundir. Cada parte tiene ejemplos traducidos y, al final, práctica.",
+ capitulos: [
+
+ /* ─── Lo básico ─── */
+ {
+  id: "preguntas", grupo: "Lo básico",
+  titulo: "Las preguntas de los casos", sub: "вопро́сы падеже́й",
+  desc: "Cada caso responde a una pregunta. Así sabés qué terminación usar.",
+  bloques: [
+   { t: "texto", texto: "En español, la función de una palabra se marca con el orden y con preposiciones: «a mamá», «de mamá», «con mamá». En ruso se marca con la terminación: {ма́ме}, {ма́мы}, {ма́мой}. Para elegir la terminación, los rusos se hacen una pregunta, y cada pregunta corresponde a un caso." },
+   { t: "tabla", cols: ["Caso", "Pregunta", "En español"], filas: [
+    ["Nominativo", "кто? что?", "¿quién? ¿qué? (el sujeto)"],
+    ["Genitivo", "кого́? чего́?", "¿de quién? ¿de qué?"],
+    ["Dativo", "кому́? чему́?", "¿a quién? (le)"],
+    ["Acusativo", "кого́? что?", "¿a quién? ¿qué? (lo, la)"],
+    ["Instrumental", "кем? чем?", "¿con quién? ¿con qué?"],
+    ["Preposicional", "о ком? о чём?", "¿de quién? ¿de qué? (hablar de…)"]
+   ] },
+   { t: "lbl", texto: "Por qué funcionan" },
+   { t: "texto", texto: "Las preguntas son las mismas palabras кто («quién») y что («qué») declinadas. Кто cambia así: кто → {кого́} → {кому́} → {кем} → о {ком}. Что cambia así: что → {чего́} → {чему́} → {чем} → о {чём}. Por eso sirven de modelo: la pregunta ya tiene el caso adentro." },
+   { t: "lbl", texto: "La regla de oro" },
+   { t: "nota", texto: "La respuesta va en el mismo caso que la pregunta. Si la pregunta es кому́? (dativo), la respuesta también va en dativo." },
+   { t: "ejemplos", items: [
+    ["{Кого́} ты ви́дишь? — Я ви́жу {ма́му}.", "¿A quién ves? — Veo a mamá.", "кого́? con что? es acusativo. La respuesta también: ма́ма → ма́му."],
+    ["{Кому́} ты пи́шешь? — {Бра́ту}.", "¿A quién le escribís? — A mi hermano.", "кому́? es dativo, y la respuesta también: брат → бра́ту."],
+    ["С {кем} ты идёшь? — С {подру́гой}.", "¿Con quién vas? — Con una amiga.", "с кем? es instrumental, y la respuesta también: подру́га → подру́гой."]
+   ] },
+   { t: "lbl", texto: "Ojo con кого́?" },
+   { t: "nota", texto: "кого́? aparece dos veces: en genitivo y en acusativo. Para saber cuál es, mirá con qué va: «кого́? чего́?» es genitivo y «кого́? что?» es acusativo. Así aparece en las fichas de Verbos." }
+  ]
+ },
+ {
+  id: "reccion", grupo: "Lo básico",
+  titulo: "Qué es la rección", sub: "управле́ние",
+  desc: "Los verbos y las preposiciones deciden el caso. Cómo usar esa información.",
+  bloques: [
+   { t: "texto", texto: "Rección (en ruso управле́ние, «gobierno») quiere decir que una palabra decide el caso de la que viene después. Los verbos y las preposiciones «rigen» un caso: no lo elegís vos, viene con el verbo." },
+   { t: "texto", texto: "En la ficha de cada verbo, en Verbos, aparece «Rige:» con su pregunta. Esa pregunta es la instrucción: te dice en qué caso va lo que sigue." },
+   { t: "lbl", texto: "Cómo se usa, paso a paso" },
+   { t: "flujo", pasos: [
+    ["1 · El verbo", "помога́ть (ayudar)"],
+    ["2 · Su pregunta, en Verbos", "кому́?"],
+    ["3 · El caso", "dativo"],
+    ["4 · La palabra, en Casos", "ма́ма → {ма́ме}"],
+    ["5 · La frase", "Я помога́ю {ма́ме}. (Ayudo a mamá.)"]
+   ] },
+   { t: "lbl", texto: "Las preposiciones también rigen" },
+   { t: "tabla", cols: ["Preposición", "Caso", "Ejemplo"], filas: [
+    ["без (sin)", "genitivo", "без {са́хара}"],
+    ["к (hacia)", "dativo", "к {врачу́}"],
+    ["в (adónde)", "acusativo", "в {шко́лу}"],
+    ["с (con)", "instrumental", "с {дру́гом}"],
+    ["в (dónde)", "preposicional", "в {шко́ле}"],
+    ["о (sobre)", "preposicional", "о {фи́льме}"]
+   ] },
+   { t: "texto", texto: "в y на rigen dos casos según el sentido: acusativo si hay movimiento (куда́? ¿adónde?) y preposicional si no lo hay (где? ¿dónde?)." },
+   { t: "ejemplos", items: [
+    ["Я иду́ в {шко́лу}.", "Voy a la escuela.", "Hay movimiento, куда́?: в + acusativo."],
+    ["Я в {шко́ле}.", "Estoy en la escuela.", "No hay movimiento, где?: в + preposicional."]
+   ] },
+   { t: "lbl", texto: "Por qué no alcanza con traducir" },
+   { t: "nota", texto: "En español, «veo a mamá» y «ayudo a mamá» tienen la misma forma. En ruso piden casos distintos: ви́жу {ма́му} (acusativo) y помога́ю {ма́ме} (dativo). La única forma segura es preguntarle al verbo, no al español." }
+  ]
+ },
+
+ /* ─── Los 6 casos ─── */
+ {
+  id: "nominativo", grupo: "Los 6 casos", caso: "nominativo",
+  titulo: "Nominativo", desc: "El sujeto: quién hace la acción. La forma de diccionario.",
+  bloques: [
+   { t: "texto", texto: "Es el sujeto: quien hace la acción o de quien se habla. Es la forma que aparece en el diccionario, así que no hay que cambiar nada." },
+   { t: "flujo", pasos: [
+    ["En español", "Mamá lee."],
+    ["Pregunta", "кто чита́ет? (¿quién lee?)"],
+    ["Caso", "nominativo, sin cambios"],
+    ["En ruso", "{Ма́ма} чита́ет."]
+   ] },
+   { t: "ejemplos", items: [
+    ["{Брат} рабо́тает.", "Mi hermano trabaja.", "брат es quien trabaja: el sujeto."],
+    ["Э́то мой {друг}.", "Este es mi amigo.", "Después de э́то se nombra lo que se presenta, en nominativo."],
+    ["Где {кни́га}?", "¿Dónde está el libro?", "кни́га es el sujeto de la pregunta."]
+   ] },
+   { t: "lbl", texto: "Donde el español confunde" },
+   { t: "par", bien: ["У меня́ есть {соба́ка}.", "Tengo un perro."], mal: ["У меня́ есть соба́ку.", "En español el perro es lo que tengo (complemento directo). En ruso se dice «en mí hay un perro»: el perro es el sujeto, en nominativo."] },
+   { t: "par", bien: ["Мне нра́вится {му́зыка}.", "Me gusta la música."], mal: ["Мне нра́вится му́зыку.", "Igual que en español, lo que gusta es el sujeto: «la música me gusta». Va en nominativo."] },
+   { t: "lbl", texto: "Probá vos" },
+   { t: "practica", items: [
+    { ru: "У меня́ есть ___.", base: "маши́на", op: ["маши́на", "маши́ну", "маши́ны"], ok: "маши́на", caso: "nominativo", es: "Tengo un auto.", por: "Lo que se tiene, con у меня́ есть, es el sujeto: nominativo." },
+    { ru: "Мне нра́вится ___.", base: "кни́га", op: ["кни́гу", "кни́га", "кни́ге"], ok: "кни́га", caso: "nominativo", es: "Me gusta el libro.", por: "Lo que gusta es el sujeto: nominativo." }
+   ] }
+  ]
+ },
+ {
+  id: "genitivo", grupo: "Los 6 casos", caso: "genitivo",
+  titulo: "Genitivo", desc: "«De»: de quién es algo, lo que no hay, las cantidades.",
+  bloques: [
+   { t: "texto", texto: "Casi siempre equivale a «de»: de quién es algo, de qué está lleno o hecho. También se usa para lo que no hay (con нет), después de cantidades y después de muchas preposiciones." },
+   { t: "flujo", pasos: [
+    ["En español", "el libro de mi hermano"],
+    ["Pregunta", "кни́га кого́? (¿de quién?)"],
+    ["Caso", "genitivo: брат → бра́та"],
+    ["En ruso", "кни́га {бра́та}"],
+    ["Palabra por palabra", "libro del-hermano (sin «de»: lo dice la terminación)"]
+   ] },
+   { t: "ejemplos", items: [
+    ["У меня́ нет {вре́мени}.", "No tengo tiempo.", "Lo que no hay va en genitivo después de нет."],
+    ["стака́н {воды́}", "un vaso de agua", "De qué está lleno: вода́ → воды́."],
+    ["мно́го {люде́й}", "mucha gente", "Después de мно́го va el genitivo plural: лю́ди → люде́й."],
+    ["Я пью чай без {са́хара}.", "Tomo té sin azúcar.", "без siempre pide genitivo."]
+   ] },
+   { t: "lbl", texto: "Donde el español confunde" },
+   { t: "par", bien: ["У меня́ нет {бра́та}.", "No tengo hermano."], mal: ["У меня́ нет брат.", "Con нет, lo que falta deja de ser sujeto y pasa a genitivo."] },
+   { t: "par", bien: ["два {бра́та}", "dos hermanos"], mal: ["два бра́тья", "Después de 2, 3 y 4 va el genitivo singular, aunque en español sea plural. Desde 5: genitivo plural (пять {бра́тьев})."] },
+   { t: "par", bien: ["Я бою́сь {соба́к}.", "Les tengo miedo a los perros."], mal: ["Я бою́сь соба́кам.", "En español decimos «a los perros», pero боя́ться no pide dativo: pide кого́? чего́?, genitivo."] },
+   { t: "lbl", texto: "Probá vos" },
+   { t: "practica", items: [
+    { ru: "У меня́ нет ___.", base: "маши́на", op: ["маши́на", "маши́ны", "маши́ну"], ok: "маши́ны", caso: "genitivo", es: "No tengo auto.", por: "Con нет, lo que no hay va en genitivo." },
+    { ru: "Я пью чай без ___.", base: "молоко́", op: ["молоко́", "молоку́", "молока́"], ok: "молока́", caso: "genitivo", es: "Tomo té sin leche.", por: "без siempre pide genitivo." },
+    { ru: "У меня́ три ___.", base: "брат", op: ["брат", "бра́та", "бра́ту"], ok: "бра́та", caso: "genitivo", es: "Tengo tres hermanos.", por: "Después de 2, 3 y 4 va el genitivo singular." }
+   ] }
+  ]
+ },
+ {
+  id: "dativo", grupo: "Los 6 casos", caso: "dativo",
+  titulo: "Dativo", desc: "«A» o «le»: a quién va dirigida la acción.",
+  bloques: [
+   { t: "texto", texto: "Es el destinatario: a quién le das, le decís, le escribís o le mostrás algo. En español es el complemento indirecto, el que se reemplaza por «le». También se usa para lo que alguien siente o necesita." },
+   { t: "flujo", pasos: [
+    ["En español", "Le escribo a mamá."],
+    ["Prueba", "«le escribo» → complemento indirecto"],
+    ["Pregunta", "кому́? (¿a quién?)"],
+    ["Caso", "dativo: ма́ма → ма́ме"],
+    ["En ruso", "Я пишу́ {ма́ме}."]
+   ] },
+   { t: "ejemplos", items: [
+    ["Я даю́ {бра́ту} кни́гу.", "Le doy el libro a mi hermano.", "A quién se lo doy: dativo. Lo que doy, кни́гу, va en acusativo."],
+    ["{Мне} два́дцать лет.", "Tengo veinte años.", "La persona que tiene la edad va en dativo: я → мне."],
+    ["{Мне} хо́лодно.", "Tengo frío.", "Quien siente algo va en dativo: literalmente, «a mí hace frío»."],
+    ["Мы идём к {врачу́}.", "Vamos al médico.", "к siempre pide dativo."]
+   ] },
+   { t: "lbl", texto: "Donde el español confunde" },
+   { t: "par", bien: ["Я помога́ю {ма́ме}.", "Ayudo a mamá. (La ayudo.)"], mal: ["Я помога́ю ма́му.", "En español es complemento directo («la ayudo»), pero помога́ть pide dativo: en ruso es «darle ayuda a alguien». Está explicado en «¿Acusativo o dativo?»."] },
+   { t: "par", bien: ["Я звоню́ {дру́гу}.", "Llamo a mi amigo. (Lo llamo.)"], mal: ["Я звоню́ дру́га.", "звони́ть pide кому́?: se piensa como «hacerle un llamado a alguien»."] },
+   { t: "lbl", texto: "Probá vos" },
+   { t: "practica", items: [
+    { ru: "Я помога́ю ___.", base: "сестра́", op: ["сестру́", "сестре́", "сестра́"], ok: "сестре́", caso: "dativo", es: "Ayudo a mi hermana.", por: "помога́ть pide кому́?: dativo." },
+    { ru: "Я звоню́ ___.", base: "па́па", op: ["па́пу", "па́па", "па́пе"], ok: "па́пе", caso: "dativo", es: "Llamo a papá.", por: "звони́ть pide кому́?: dativo." },
+    { ru: "___ хо́лодно.", base: "я", op: ["Я", "Меня́", "Мне"], ok: "Мне", caso: "dativo", es: "Tengo frío.", por: "Quien siente algo va en dativo: я → мне." }
+   ] }
+  ]
+ },
+ {
+  id: "acusativo", grupo: "Los 6 casos", caso: "acusativo",
+  titulo: "Acusativo", desc: "«Lo» o «la»: lo que recibe la acción. Y el «adónde».",
+  bloques: [
+   { t: "texto", texto: "Es el complemento directo: lo que recibe la acción. En español es lo que se reemplaza por «lo» o «la». Con в y на, además, indica adónde vas." },
+   { t: "flujo", pasos: [
+    ["En español", "Veo a mamá."],
+    ["Prueba", "«la veo» → complemento directo"],
+    ["Pregunta", "кого́? что?"],
+    ["Caso", "acusativo: ма́ма → ма́му"],
+    ["En ruso", "Я ви́жу {ма́му}."]
+   ] },
+   { t: "nota", texto: "La «a» de «veo a mamá» no la convierte en indirecto: en español las personas llevan «a» aunque sean complemento directo («la veo»). En ruso no hay preposición: va en acusativo y listo." },
+   { t: "lbl", texto: "Cuándo cambia y cuándo no" },
+   { t: "tabla", cols: ["Palabra", "Nominativo", "Acusativo"], filas: [
+    ["Femenina en -а/-я", "ма́ма", "{ма́му}"],
+    ["Masculina, cosa", "стол", "{стол} (igual)"],
+    ["Masculina, persona o animal", "брат", "{бра́та} (como el genitivo)"],
+    ["Neutra", "молоко́", "{молоко́} (igual)"]
+   ] },
+   { t: "ejemplos", items: [
+    ["Я чита́ю {кни́гу}.", "Leo un libro.", "Lo que leo: acusativo."],
+    ["Я люблю́ {бра́та}.", "Quiero a mi hermano.", "Masculino animado: el acusativo es igual al genitivo."],
+    ["Я иду́ в {шко́лу}.", "Voy a la escuela.", "в + acusativo: adónde voy."]
+   ] },
+   { t: "lbl", texto: "Donde el español confunde" },
+   { t: "par", bien: ["Я благодарю́ {дру́га}.", "Le agradezco a mi amigo."], mal: ["Я благодарю́ дру́гу.", "En español es «le» (indirecto), pero благодари́ть pide кого́?: acusativo."] },
+   { t: "par", bien: ["Я спра́шиваю {учи́теля}.", "Le pregunto al profesor."], mal: ["Я спра́шиваю учи́телю.", "спра́шивать también pide кого́?: a quien le preguntás va en acusativo."] },
+   { t: "lbl", texto: "Probá vos" },
+   { t: "practica", items: [
+    { ru: "Я ви́жу ___.", base: "ма́ма", op: ["ма́ма", "ма́ме", "ма́му"], ok: "ма́му", caso: "acusativo", es: "Veo a mamá.", por: "ви́деть pide кого́? что?: acusativo." },
+    { ru: "Я благодарю́ ___.", base: "друг", op: ["дру́гу", "дру́га", "друг"], ok: "дру́га", caso: "acusativo", es: "Le agradezco a mi amigo.", por: "благодари́ть pide кого́?: acusativo. Masculino animado: igual al genitivo." },
+    { ru: "Я иду́ в ___.", base: "шко́ла", op: ["шко́ле", "шко́лу", "шко́ла"], ok: "шко́лу", caso: "acusativo", es: "Voy a la escuela.", por: "Hay movimiento: в + acusativo." }
+   ] }
+  ]
+ },
+ {
+  id: "instrumental", grupo: "Los 6 casos", caso: "instrumental",
+  titulo: "Instrumental", desc: "«Con»: con qué y con quién. También la profesión.",
+  bloques: [
+   { t: "texto", texto: "Equivale a «con»: con qué hacés algo (sin preposición) y con quién (con с). También se usa para lo que alguien es o llega a ser: «trabaja de médico», «quiere ser médico»." },
+   { t: "flujo", pasos: [
+    ["En español", "Escribo con birome."],
+    ["Pregunta", "чем? (¿con qué?)"],
+    ["Caso", "instrumental: ру́чка → ру́чкой"],
+    ["En ruso", "Я пишу́ {ру́чкой}."],
+    ["Palabra por palabra", "escribo birome-con (sin preposición)"]
+   ] },
+   { t: "ejemplos", items: [
+    ["Я гуля́ю с {дру́гом}.", "Paseo con un amigo.", "Con quién: с + instrumental."],
+    ["Он рабо́тает {врачо́м}.", "Trabaja de médico.", "La profesión, con рабо́тать, va en instrumental."],
+    ["Я занима́юсь {спо́ртом}.", "Hago deporte.", "занима́ться pide чем?: instrumental."],
+    ["{Зимо́й} хо́лодно.", "En invierno hace frío.", "Las estaciones y los momentos del día van en instrumental, sin preposición."]
+   ] },
+   { t: "lbl", texto: "Donde el español confunde" },
+   { t: "par", bien: ["Я пишу́ {ру́чкой}.", "Escribo con birome."], mal: ["Я пишу́ с ру́чкой.", "с es para compañía: con quién. El instrumento va solo, sin preposición."] },
+   { t: "par", bien: ["Я занима́юсь {спо́ртом}.", "Hago deporte."], mal: ["Я занима́юсь спорт.", "En español el deporte es lo que hacés («lo hago»), pero занима́ться pide instrumental."] },
+   { t: "lbl", texto: "Probá vos" },
+   { t: "practica", items: [
+    { ru: "Я ем суп ___.", base: "ло́жка", op: ["ло́жку", "ло́жкой", "ло́жка"], ok: "ло́жкой", caso: "instrumental", es: "Tomo la sopa con cuchara.", por: "El instrumento va en instrumental, sin с." },
+    { ru: "Я гуля́ю с ___.", base: "подру́га", op: ["подру́гой", "подру́гу", "подру́ге"], ok: "подру́гой", caso: "instrumental", es: "Paseo con una amiga.", por: "с «con» pide instrumental." },
+    { ru: "Он хо́чет стать ___.", base: "врач", op: ["врач", "врача́", "врачо́м"], ok: "врачо́м", caso: "instrumental", es: "Quiere ser médico.", por: "стать pide кем?: instrumental." }
+   ] }
+  ]
+ },
+ {
+  id: "preposicional", grupo: "Los 6 casos", caso: "preposicional",
+  titulo: "Preposicional", desc: "Siempre con preposición: dónde está algo y de qué se habla.",
+  bloques: [
+   { t: "texto", texto: "Siempre va con una preposición. Con в o на dice dónde está algo (sin movimiento). Con о dice de qué o de quién se habla o se piensa." },
+   { t: "flujo", pasos: [
+    ["En español", "Vivo en la ciudad."],
+    ["Pregunta", "где? (¿dónde?)"],
+    ["Caso", "preposicional: го́род → го́роде"],
+    ["En ruso", "Я живу́ в {го́роде}."]
+   ] },
+   { t: "ejemplos", items: [
+    ["Кни́га лежи́т на {столе́}.", "El libro está sobre la mesa.", "Dónde está: на + preposicional."],
+    ["Мы говори́м о {фи́льме}.", "Hablamos de la película.", "De qué se habla: о + preposicional."],
+    ["Я е́ду на {авто́бусе}.", "Voy en colectivo.", "En qué medio de transporte: на + preposicional."]
+   ] },
+   { t: "lbl", texto: "Donde el español confunde" },
+   { t: "par", bien: ["Я ду́маю о {тебе́}.", "Pienso en vos."], mal: ["Я ду́маю в тебе́.", "En español se piensa «en» alguien; en ruso, «sobre» alguien: о + preposicional."] },
+   { t: "par", bien: ["Я живу́ в {го́роде}.", "Vivo en la ciudad."], mal: ["Я живу́ в го́род.", "Sin movimiento (где?) va el preposicional. в го́род (acusativo) sería «a la ciudad», con movimiento."] },
+   { t: "nota", texto: "Algunas palabras tienen una forma especial para decir dónde: в {лесу́} (en el bosque), на {полу́} (en el piso). En la tabla de la palabra aparece como «locativo»." },
+   { t: "lbl", texto: "Probá vos" },
+   { t: "practica", items: [
+    { ru: "Я живу́ в ___.", base: "го́род", op: ["го́род", "го́роде", "го́рода"], ok: "го́роде", caso: "preposicional", es: "Vivo en la ciudad.", por: "Dónde, sin movimiento: в + preposicional." },
+    { ru: "Мы говори́м о ___.", base: "фильм", op: ["фи́льме", "фильм", "фи́льма"], ok: "фи́льме", caso: "preposicional", es: "Hablamos de la película.", por: "о + preposicional: de qué se habla." },
+    { ru: "Кни́га лежи́т на ___.", base: "стол", op: ["стол", "столо́м", "столе́"], ok: "столе́", caso: "preposicional", es: "El libro está sobre la mesa.", por: "Dónde, sin movimiento: на + preposicional." }
+   ] }
+  ]
+ },
+
+ /* ─── Las trampas ─── */
+ {
+  id: "acusativo-dativo", grupo: "Las trampas",
+  titulo: "¿Acusativo o dativo?", sub: "La prueba de «lo» y «le»",
+  desc: "Directo e indirecto en español, y por qué помога́ть pide dativo.",
+  bloques: [
+   { t: "texto", texto: "En español hay dos complementos que se confunden: el directo, que se reemplaza por «lo» o «la» (lo que recibe la acción), y el indirecto, que se reemplaza por «le» (a quién va dirigida). En ruso, el directo es el acusativo y el indirecto es el dativo." },
+   { t: "tabla", cols: ["Español", "Prueba", "En ruso"], filas: [
+    ["Veo a mamá.", "la veo → directo", "Я ви́жу {ма́му}. (acusativo)"],
+    ["Le escribo a mamá.", "le escribo → indirecto", "Я пишу́ {ма́ме}. (dativo)"],
+    ["Le doy el libro a mamá.", "se lo doy → los dos", "Я даю́ {ма́ме} {кни́гу}."]
+   ] },
+   { t: "texto", texto: "Casi siempre funciona: «lo/la» → acusativo, «le» → dativo. Pero hay verbos en los que el español y el ruso ven la acción de otra manera. El más común es помога́ть, «ayudar»." },
+   { t: "lbl", texto: "El caso de помога́ть" },
+   { t: "par", bien: ["Я помога́ю {ма́ме}.", "Ayudo a mamá."], mal: ["Я помога́ю ма́му.", "Es el error más común de los hispanohablantes."] },
+   { t: "texto", texto: "En español decimos «la ayudo»: mamá es el complemento directo. En ruso, помога́ть se piensa como «dar ayuda a alguien»: la ayuda es lo que se da, y la persona es quien la recibe. Por eso va en dativo, igual que con дава́ть («dar»)." },
+   { t: "flujo", pasos: [
+    ["Español", "La ayudo."],
+    ["Cómo lo piensa el ruso", "Le doy ayuda."],
+    ["Pregunta", "кому́?"],
+    ["Caso", "dativo: она́ → ей"],
+    ["En ruso", "Я помога́ю {ей}."]
+   ] },
+   { t: "nota", texto: "En partes de España se dice «le ayudo». Esa forma se parece a la lógica rusa, pero en el Río de la Plata se dice «la ayudo». Por eso conviene memorizar el verbo con su pregunta: помога́ть кому́?" },
+   { t: "tabla", cols: ["Español", "Ruso"], filas: [
+    ["La ayudo (a ella).", "Я помога́ю {ей}."],
+    ["Lo ayudo (a él).", "Я помога́ю {ему́}."],
+    ["¿Me ayudás?", "Ты помога́ешь {мне}?"],
+    ["Te ayudo.", "Я помога́ю {тебе́}."],
+    ["Los ayudamos.", "Мы помога́ем {им}."],
+    ["Ayudo a mi hermano.", "Я помога́ю {бра́ту}."]
+   ] },
+   { t: "lbl", texto: "Lado a lado: ver y ayudar" },
+   { t: "tabla", cols: ["", "ви́деть (ver)", "помога́ть (ayudar)"], filas: [
+    ["En español", "la veo", "la ayudo"],
+    ["Pregunta", "кого́?", "кому́?"],
+    ["Caso", "acusativo", "dativo"],
+    ["ма́ма", "{ма́му}", "{ма́ме}"],
+    ["она́", "{её}", "{ей}"],
+    ["брат", "{бра́та}", "{бра́ту}"]
+   ] },
+   { t: "lbl", texto: "Probá vos" },
+   { t: "practica", items: [
+    { ru: "Я ви́жу ___.", base: "па́па", op: ["па́пе", "па́пу", "па́па"], ok: "па́пу", caso: "acusativo", es: "Veo a papá.", por: "ви́деть pide кого́?: acusativo." },
+    { ru: "Я помога́ю ___.", base: "па́па", op: ["па́пу", "па́па", "па́пе"], ok: "па́пе", caso: "dativo", es: "Ayudo a papá.", por: "помога́ть pide кому́?: dativo." },
+    { ru: "Я пишу́ ___.", base: "сестра́", op: ["сестре́", "сестру́", "сестры́"], ok: "сестре́", caso: "dativo", es: "Le escribo a mi hermana.", por: "A quién le escribo: dativo." },
+    { ru: "Я люблю́ ___.", base: "сестра́", op: ["сестре́", "сестра́", "сестру́"], ok: "сестру́", caso: "acusativo", es: "Quiero a mi hermana.", por: "люби́ть pide кого́?: acusativo." },
+    { ru: "Ты помога́ешь ___?", base: "я", op: ["меня́", "мне", "я"], ok: "мне", caso: "dativo", es: "¿Me ayudás?", por: "помога́ть pide кому́?: я → мне." }
+   ] }
+  ]
+ },
+ {
+  id: "verbos", grupo: "Las trampas",
+  titulo: "Verbos que engañan", sub: "Cuando el español te lleva al caso equivocado",
+  desc: "Los verbos que piden un caso distinto del que esperás.",
+  bloques: [
+   { t: "texto", texto: "La mayoría de los verbos piden el caso que esperás desde el español. Estos no. Aprendelos siempre con su pregunta: no «ayudar», sino помога́ть кому́?" },
+   { t: "lbl", texto: "En español «lo», en ruso dativo" },
+   { t: "ejemplos", items: [
+    ["Я помога́ю {ма́ме}.", "Ayudo a mamá. (La ayudo.)", "Se piensa como «darle ayuda a alguien».", "помога́ть · кому́?"],
+    ["Я звоню́ {дру́гу}.", "Llamo a mi amigo. (Lo llamo.)", "Se piensa como «hacerle un llamado a alguien».", "звони́ть · кому́?"],
+    ["Не меша́й {бра́ту}!", "¡No molestes a tu hermano! (No lo molestes.)", "Se piensa como «ponerle un obstáculo a alguien». Con что? меша́ть es otra cosa: «revolver» (меша́ть суп).", "меша́ть · кому́?"]
+   ] },
+   { t: "lbl", texto: "En español «le», en ruso acusativo" },
+   { t: "ejemplos", items: [
+    ["Я благодарю́ {дру́га}.", "Le agradezco a mi amigo.", "La persona es el objeto directo del agradecimiento. Lo que se agradece va con за + acusativo: благодарю́ за по́мощь.", "благодари́ть · кого́?"],
+    ["Я спра́шиваю {учи́теля}.", "Le pregunto al profesor.", "A quien le preguntás va en acusativo.", "спра́шивать · кого́?"],
+    ["Я прошу́ {ма́му} помо́чь.", "Le pido a mamá que me ayude.", "A quien le pedís va en acusativo.", "проси́ть · кого́?"]
+   ] },
+   { t: "lbl", texto: "Al revés que en español: учи́ть" },
+   { t: "ejemplos", items: [
+    ["Я учу́ {бра́та} {ру́сскому языку́}.", "Le enseño ruso a mi hermano.", "En español, la persona es indirecta («le enseño») y la materia es directa («lo enseño»). En ruso es al revés: la persona va en acusativo y la materia en dativo.", "учи́ть · кого́? чему́?"]
+   ] },
+   { t: "lbl", texto: "Con «a» en español, genitivo en ruso" },
+   { t: "ejemplos", items: [
+    ["Я бою́сь {соба́к}.", "Les tengo miedo a los perros.", "боя́ться pide кого́? чего́?: genitivo, no dativo.", "боя́ться · кого́? чего́?"]
+   ] },
+   { t: "lbl", texto: "Ojo con ждать" },
+   { t: "texto", texto: "ждать («esperar») acepta dos casos. Para personas y cosas concretas, acusativo. Para cosas abstractas (una respuesta, una ayuda), genitivo." },
+   { t: "ejemplos", items: [
+    ["Я жду {ма́му}.", "Espero a mamá.", "Persona: acusativo."],
+    ["Я жду {авто́бус}.", "Espero el colectivo.", "Cosa concreta: acusativo (masculino inanimado, igual al nominativo)."],
+    ["Я жду {отве́та}.", "Espero una respuesta.", "Algo abstracto: genitivo."]
+   ] },
+   { t: "lbl", texto: "Y los que coinciden con el español" },
+   { t: "tabla", cols: ["Verbo", "Pregunta", "Ejemplo"], filas: [
+    ["ви́деть (ver)", "кого́? что?", "ви́жу {ма́му} · la veo"],
+    ["люби́ть (querer)", "кого́? что?", "люблю́ {ма́му} · la quiero"],
+    ["писа́ть (escribir)", "кому́?", "пишу́ {ма́ме} · le escribo"],
+    ["дава́ть (dar)", "кому́? что?", "даю́ {ма́ме} {кни́гу} · se lo doy"],
+    ["ве́рить (creer)", "кому́?", "ве́рю {ма́ме} · le creo"]
+   ] },
+   { t: "nota", texto: "Cuando dudes, abrí el verbo en Verbos y mirá «Rige:». La pregunta que aparece ahí manda, no la traducción." }
+  ]
+ },
+
+ /* ─── Práctica ─── */
+ {
+  id: "practica", grupo: "Práctica",
+  titulo: "Probá vos", sub: "Todo mezclado",
+  desc: "Diez frases para elegir la forma correcta, con explicación.",
+  bloques: [
+   { t: "texto", texto: "Elegí la forma que va en el hueco. Pensá primero la pregunta del verbo o de la preposición: te dice el caso." },
+   { t: "practica", items: [
+    { ru: "Я помога́ю ___.", base: "друг", op: ["дру́га", "дру́гу", "друг"], ok: "дру́гу", caso: "dativo", es: "Ayudo a mi amigo.", por: "помога́ть pide кому́?: dativo." },
+    { ru: "Я благодарю́ ___.", base: "ма́ма", op: ["ма́ме", "ма́ма", "ма́му"], ok: "ма́му", caso: "acusativo", es: "Le agradezco a mamá.", por: "благодари́ть pide кого́?: acusativo." },
+    { ru: "У меня́ нет ___.", base: "брат", op: ["брат", "бра́та", "бра́ту"], ok: "бра́та", caso: "genitivo", es: "No tengo hermano.", por: "Con нет, lo que no hay va en genitivo." },
+    { ru: "Я живу́ в ___.", base: "го́род", op: ["го́роде", "го́род", "го́рода"], ok: "го́роде", caso: "preposicional", es: "Vivo en la ciudad.", por: "Dónde, sin movimiento: в + preposicional." },
+    { ru: "Я пишу́ ___.", base: "каранда́ш", op: ["каранда́ш", "карандаша́", "карандашо́м"], ok: "карандашо́м", caso: "instrumental", es: "Escribo con lápiz.", por: "Con qué: instrumental, sin с." },
+    { ru: "Я звоню́ ___.", base: "сестра́", op: ["сестре́", "сестру́", "сестры́"], ok: "сестре́", caso: "dativo", es: "Llamo a mi hermana.", por: "звони́ть pide кому́?: dativo." },
+    { ru: "Я бою́сь ___.", base: "соба́ка", op: ["соба́ку", "соба́ке", "соба́ки"], ok: "соба́ки", caso: "genitivo", es: "Le tengo miedo al perro.", por: "боя́ться pide кого́? чего́?: genitivo." },
+    { ru: "Я учу́ ___ ру́сскому языку́.", base: "брат", op: ["бра́ту", "бра́та", "брат"], ok: "бра́та", caso: "acusativo", es: "Le enseño ruso a mi hermano.", por: "учи́ть кого́? чему́?: la persona va en acusativo." },
+    { ru: "Мы идём к ___.", base: "врач", op: ["врачу́", "врача́", "врачо́м"], ok: "врачу́", caso: "dativo", es: "Vamos al médico.", por: "к siempre pide dativo." },
+    { ru: "Он рабо́тает ___.", base: "учи́тель", op: ["учи́теля", "учи́телем", "учи́тель"], ok: "учи́телем", caso: "instrumental", es: "Trabaja de profesor.", por: "La profesión, con рабо́тать, va en instrumental." }
+   ] }
+  ]
+ }
+ ]
+};
+
+/* Devuelve un capítulo de la guía por id, o null. */
+function gramaticaGuia(id) {
+  return GRAMATICA_GUIA.capitulos.find(function (c) { return c.id === id; }) || null;
+}
+
 /* Devuelve un caso por id ("genitivo"…), o null. */
 function gramaticaCaso(id) {
   return (id && GRAMATICA_CASOS[id]) || null;
@@ -362,4 +759,5 @@ function gramaticaReccion(gov) {
 if (typeof window !== "undefined") {
   window.gramaticaCaso = gramaticaCaso;
   window.gramaticaReccion = gramaticaReccion;
+  window.gramaticaGuia = gramaticaGuia;
 }
