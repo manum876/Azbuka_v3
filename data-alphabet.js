@@ -23,15 +23,15 @@ const ALPHABET=[
     "lower": "а",
     "name": "А",
     "translit": "a",
-    "pronunciation": "Como la 'a' española en 'casa'",
+    "pronunciation": "Como la **a** española en «casa»",
     "sounds": [
       "a"
     ],
     "details": {
-      "description": "Vocal abierta central, idéntica a la 'a' española.",
-      "similar": "Exactamente como la 'a' en 'casa', 'amor', 'agua'.",
-      "mistakes": "Los hispanohablantes no suelen tener problemas con esta letra. El error más común es pronunciarla demasiado breve en sílabas átonas, donde en ruso se relaja ligeramente.",
-      "tips": "En sílabas sin acento, la А se pronuncia un poco más cerrada, casi como una 'a' corta. En sílabas tónicas es siempre clara y abierta.",
+      "description": "Vocal abierta central, idéntica a la **a** española.",
+      "similar": "Exactamente como la **a** en «casa», «amor», «agua».",
+      "mistakes": "Los hispanohablantes no suelen tener problemas con esta letra. Solo hay que saber que, sin acento, la А se pronuncia más corta y relajada.",
+      "tips": "En sílabas tónicas la А es siempre clara y abierta; en las átonas, más breve.",
       "similar_letters": "No se confunde fácilmente. Visualmente puede parecerse a la A latina, que aquí tiene el mismo sonido."
     },
     "words": [
@@ -78,15 +78,15 @@ const ALPHABET=[
     "lower": "б",
     "name": "Бэ",
     "translit": "b",
-    "pronunciation": "Como la 'b' española en 'boca'",
+    "pronunciation": "Como la **b** española en «boca»",
     "sounds": [
       "b"
     ],
     "details": {
-      "description": "Consonante oclusiva bilabial sonora. Igual que la 'b' española cuando va al inicio de sílaba.",
-      "similar": "Como la 'b' de 'barco', 'bota', 'bueno'.",
-      "mistakes": "En ruso la Б se pronuncia siempre oclusiva (con cierre total de labios), nunca fricativa como la 'b' suave española entre vocales.",
-      "tips": "Pensá siempre en una 'b' fuerte de inicio de palabra. Al final de palabra o ante consonante sorda, se ensordece y suena como 'п' (p).",
+      "description": "Consonante oclusiva bilabial sonora. Igual que la **b** española cuando va al inicio de sílaba.",
+      "similar": "Como la **b** de «barco», «bota», «bueno».",
+      "mistakes": "En ruso la Б se pronuncia siempre oclusiva (con cierre total de labios), nunca fricativa como la **b** suave española entre vocales.",
+      "tips": "Pensá siempre en una **b** fuerte de inicio de palabra. Al final de palabra o ante consonante sorda, se ensordece y suena como **п** (p).",
       "similar_letters": "Б vs В: Б es labial (labios), В es labiodental (labio-diente)."
     },
     "words": [
@@ -115,14 +115,14 @@ const ALPHABET=[
         "cyrillic": "большой",
         "translit": "balshói",
         "meaning": "grande",
-        "note": "Б inicial seguida de vocal 'o'",
+        "note": "Б inicial seguida de vocal **o**",
         "lexId": "CMR-00096"
       },
       {
         "cyrillic": "зуб",
         "translit": "zup",
         "meaning": "diente",
-        "note": "Б al final se ensordece: suena 'zup'",
+        "note": "Б al final se ensordece: suena «zup»",
         "lexId": "CMR-01032"
       }
     ]
@@ -133,15 +133,15 @@ const ALPHABET=[
     "lower": "в",
     "name": "Вэ",
     "translit": "v",
-    "pronunciation": "Como la 'v' inglesa o la 'f' con voz",
+    "pronunciation": "Como la **v** inglesa o la **f** con voz",
     "sounds": [
       "v"
     ],
     "details": {
-      "description": "Consonante fricativa labiodental sonora. Se pronuncia igual que la 'v' del inglés o italiano.",
-      "similar": "El labio inferior toca los dientes superiores, como al decir 'v' en inglés 'very'.",
-      "mistakes": "El hispanohablante tiende a pronunciarla como 'b' española. Son sonidos distintos: la В es fricativa, no oclusiva.",
-      "tips": "Poné el labio inferior contra los dientes superiores y hacé vibrar las cuerdas vocales. Al final de palabra se ensordece: suena como 'ф' (f).",
+      "description": "Consonante fricativa labiodental sonora. Se pronuncia igual que la **v** del inglés o italiano.",
+      "similar": "El labio inferior toca los dientes superiores, como al decir **v** en inglés «very».",
+      "mistakes": "El hispanohablante tiende a pronunciarla como **b** española. Son sonidos distintos: la В es fricativa, no oclusiva.",
+      "tips": "Poné el labio inferior contra los dientes superiores y hacé vibrar las cuerdas vocales. Al final de palabra se ensordece: suena como **ф** (f).",
       "similar_letters": "В vs Б: В es labiodental fricativa, Б es bilabial oclusiva."
     },
     "words": [
@@ -156,28 +156,28 @@ const ALPHABET=[
         "cyrillic": "всё",
         "translit": "fsio",
         "meaning": "todo",
-        "note": "В ante consonante sorda: se ensordece y suena 'f' (fsio)",
+        "note": "В ante consonante sorda: se ensordece y suena **f** (fsio)",
         "lexId": "CMR-05455"
       },
       {
         "cyrillic": "вечер",
         "translit": "viéchir",
         "meaning": "tarde/noche",
-        "note": "В ante vocal frontal 'e'",
+        "note": "В ante vocal frontal **e**",
         "lexId": "CMR-00295"
       },
       {
         "cyrillic": "врач",
         "translit": "vrach",
         "meaning": "médico",
-        "note": "В ante 'р', grupo consonántico",
+        "note": "В ante **р**, grupo consonántico",
         "lexId": "CMR-00653"
       },
       {
         "cyrillic": "голова",
         "translit": "galavá",
         "meaning": "cabeza",
-        "note": "В entre vocales; las О átonas suenan 'a' (galavá)",
+        "note": "В entre vocales; las О átonas suenan **a** (galavá)",
         "lexId": "CMR-00132"
       }
     ]
@@ -188,15 +188,15 @@ const ALPHABET=[
     "lower": "г",
     "name": "Гэ",
     "translit": "g",
-    "pronunciation": "Como la 'g' española en 'gato'",
+    "pronunciation": "Como la **g** española en «gato»",
     "sounds": [
       "g"
     ],
     "details": {
-      "description": "Consonante oclusiva velar sonora. Igual que la 'g' española fuerte.",
-      "similar": "Como la 'g' de 'gato', 'grande'. Siempre oclusiva, nunca fricativa.",
-      "mistakes": "En español la 'g' ante 'e' o 'i' se suaviza mucho. En ruso, la Г es siempre oclusiva y fuerte, independientemente de la vocal que sigue.",
-      "tips": "La Г rusa es como la 'g' de 'gustar'. En la terminación -ого/-его se pronuncia como V (peculiaridad histórica).",
+      "description": "Consonante oclusiva velar sonora. Igual que la **g** española fuerte.",
+      "similar": "Como la **g** de «gato», «grande». Siempre oclusiva, nunca fricativa.",
+      "mistakes": "En español, la **g** ante **e** o **i** suena como jota («gente»). En ruso no: la Г suena siempre como la **g** de «gato», venga la vocal que venga.",
+      "tips": "La Г rusa es como la **g** de «gustar». En las terminaciones **-ого** y **-его** se pronuncia **v** (его́ suena «yivó»), y también en сего́дня.",
       "similar_letters": "Г vs К: Г es sonora, К es sorda. Mismo punto de articulación."
     },
     "words": [
@@ -211,14 +211,14 @@ const ALPHABET=[
         "cyrillic": "газета",
         "translit": "gazéta",
         "meaning": "periódico",
-        "note": "Г ante 'а', sonido claro",
+        "note": "Г ante **а**, sonido claro",
         "lexId": "CMR-00449"
       },
       {
         "cyrillic": "голос",
         "translit": "gólas",
         "meaning": "voz",
-        "note": "Г inicial, seguida de 'o'",
+        "note": "Г inicial, seguida de **o**",
         "lexId": "CMR-00221"
       },
       {
@@ -232,7 +232,7 @@ const ALPHABET=[
         "cyrillic": "сегодня",
         "translit": "sivódnia",
         "meaning": "hoy",
-        "note": "Excepción: acá la Г suena 'v' (sivódnia)",
+        "note": "Excepción: acá la Г suena **v** (sivódnia)",
         "lexId": "CMR-00202"
       }
     ]
@@ -243,15 +243,15 @@ const ALPHABET=[
     "lower": "д",
     "name": "Дэ",
     "translit": "d",
-    "pronunciation": "Como la 'd' española en 'dama'",
+    "pronunciation": "Como la **d** española en «dama»",
     "sounds": [
       "d"
     ],
     "details": {
-      "description": "Consonante oclusiva alveolar sonora. Similar a la 'd' española inicial.",
-      "similar": "Como la 'd' de 'dar', 'dedo'. Pero en ruso siempre es más tensa.",
-      "mistakes": "La 'd' española entre vocales se relaja mucho (casi como 'th' inglesa). La Д rusa es siempre oclusiva, incluso entre vocales.",
-      "tips": "Pronunciala siempre con cierre total de la lengua contra los alvéolos. Al final de palabra o ante sorda, se ensordece a 'т'.",
+      "description": "Consonante oclusiva dental sonora. Similar a la **d** española inicial.",
+      "similar": "Como la **d** de «dar», «dedo». Pero en ruso siempre es más tensa.",
+      "mistakes": "La **d** española entre vocales se relaja mucho (casi como **th** inglesa). La Д rusa es siempre oclusiva, incluso entre vocales.",
+      "tips": "Pronunciala siempre con cierre total de la lengua contra los alvéolos. Al final de palabra o ante sorda, se ensordece a **т**.",
       "similar_letters": "Д vs Т: mismo punto, Д es sonora, Т es sorda."
     },
     "words": [
@@ -266,28 +266,28 @@ const ALPHABET=[
         "cyrillic": "день",
         "translit": "dien",
         "meaning": "día",
-        "note": "Д palatalizada ante 'е'",
+        "note": "Д palatalizada ante **е**",
         "lexId": "CMR-00071"
       },
       {
         "cyrillic": "дорога",
         "translit": "daróga",
         "meaning": "camino",
-        "note": "Д inicial ante 'о'",
+        "note": "Д inicial ante **о**",
         "lexId": "CMR-00300"
       },
       {
         "cyrillic": "друг",
         "translit": "druk",
         "meaning": "amigo",
-        "note": "Д ante grupo consonántico 'р'",
+        "note": "Д ante grupo consonántico **р**",
         "lexId": "CMR-00106"
       },
       {
         "cyrillic": "год",
         "translit": "got",
         "meaning": "año",
-        "note": "Д al final se ensordece: suena 'got'",
+        "note": "Д al final se ensordece: suena «got»",
         "lexId": "CMR-00028"
       }
     ]
@@ -298,52 +298,52 @@ const ALPHABET=[
     "lower": "е",
     "name": "Е",
     "translit": "ye",
-    "pronunciation": "Como 'ye' en 'yerba' o 'e' después de consonante",
+    "pronunciation": "Como la «ie» de «pie» al principio de la palabra; después de consonante, una **e** que ablanda la consonante",
     "sounds": [
       "ye",
       "e"
     ],
     "details": {
-      "description": "Vocal que representa dos sonidos: 'йэ' al inicio de sílaba o después de vocal, y 'э' palataliza la consonante anterior cuando va después de consonante.",
-      "similar": "Al inicio: como 'ye' en 'yema'. Tras consonante: la consonante se palataliza y suena 'e'.",
-      "mistakes": "El error común es pronunciarla siempre como 'ye'. Tras consonante, la Е no añade una 'y' separada: palataliza la consonante y suena 'e'.",
-      "tips": "Regla práctica: ¿Va al inicio de palabra o tras vocal? → 'ye'. ¿Va tras consonante? → la consonante se suaviza y suena 'e'.",
-      "similar_letters": "Е vs Э: Е palataliza y puede sonar 'ye'; Э es siempre 'e' pura sin palatalización."
+      "description": "Vocal con dos lecturas: al principio de la palabra o después de vocal suena «ie» (й + э); después de consonante suena **e** y ablanda (palataliza) esa consonante.",
+      "similar": "Al principio: como la «ie» de «pie», «tiene». Después de consonante: la consonante se ablanda y la vocal suena **e**.",
+      "mistakes": "El error común es pronunciarla siempre «ie». Después de consonante no se agrega una **i** separada: se ablanda la consonante y suena **e**.",
+      "tips": "Regla práctica: ¿va al principio de la palabra o después de vocal? → «ie». ¿Va después de consonante? → la consonante se ablanda y suena **e**.",
+      "similar_letters": "Е vs Э: Е ablanda la consonante y puede sonar «ie»; Э es siempre una **e** pura, sin ablandar."
     },
     "words": [
       {
         "cyrillic": "если",
         "translit": "yésli",
         "meaning": "si (condicional)",
-        "note": "Е inicial → 'ye'",
+        "note": "Е inicial → «ie»",
         "lexId": "CMR-00053"
       },
       {
         "cyrillic": "лес",
         "translit": "lies",
         "meaning": "bosque",
-        "note": "Е palataliza la 'л' anterior",
+        "note": "Е palataliza la **л** anterior",
         "lexId": "CMR-00512"
       },
       {
         "cyrillic": "небо",
         "translit": "niéba",
         "meaning": "cielo",
-        "note": "Е tras 'н', la palataliza",
+        "note": "Е tras **н**, la palataliza",
         "lexId": "CMR-00600"
       },
       {
         "cyrillic": "есть",
         "translit": "yest",
         "meaning": "hay / comer",
-        "note": "Е inicial con sonido 'ye'",
+        "note": "Е inicial → «ie»",
         "lexId": "CMR-01290"
       },
       {
         "cyrillic": "уже",
         "translit": "uzhé",
         "meaning": "ya",
-        "note": "Е final tónica; tras Ж suena 'e' (uzhé)",
+        "note": "Е final tónica; tras Ж suena **e** (uzhé)",
         "lexId": "CMR-00050"
       }
     ]
@@ -354,16 +354,16 @@ const ALPHABET=[
     "lower": "ё",
     "name": "Ё",
     "translit": "yo",
-    "pronunciation": "Como 'yo' en 'yogur'",
+    "pronunciation": "Como la «io» de «radio», siempre tónica",
     "sounds": [
       "yo"
     ],
     "details": {
-      "description": "Vocal que suena 'йо'. Siempre va en sílaba tónica. En textos modernos a veces se escribe sin diéresis (igual que Е).",
-      "similar": "Exactamente como 'yo' en 'yodo', 'yogur'.",
-      "mistakes": "En textos sin diéresis puede confundirse con Е. Siempre es tónica y siempre suena 'yo'.",
+      "description": "Vocal que suena «io» (й + о). Siempre va en sílaba tónica. En textos comunes a veces se escribe sin los dos puntos, igual que Е.",
+      "similar": "Como la «io» de «radio» o «Julio», pero en un solo golpe.",
+      "mistakes": "En textos sin los dos puntos puede confundirse con Е. Siempre es tónica y siempre suena «io» (o **o** ablandando la consonante anterior).",
       "tips": "La Ё siempre lleva acento. Si ves la diéresis, sabés que esa sílaba es la tónica de la palabra.",
-      "similar_letters": "Ё vs Е: Ё es siempre 'yo' y siempre tónica; Е puede ser 'ye' o 'e' y su acento varía."
+      "similar_letters": "Ё vs Е: Ё es siempre «io» y siempre tónica; Е puede ser «ie» o **e** y su acento varía."
     },
     "words": [
       {
@@ -391,7 +391,7 @@ const ALPHABET=[
         "cyrillic": "мёд",
         "translit": "miot",
         "meaning": "miel",
-        "note": "Ё palataliza la 'м' anterior",
+        "note": "Ё palataliza la **м** anterior",
         "lexId": "CMR-05409"
       },
       {
@@ -409,15 +409,15 @@ const ALPHABET=[
     "lower": "ж",
     "name": "Жэ",
     "translit": "zh",
-    "pronunciation": "Como la 'y' argentina en '¡yo!' o la 'g' francesa",
+    "pronunciation": "Como una **sh** con vibración en la garganta, la **j** francesa de «je»",
     "sounds": [
       "zh"
     ],
     "details": {
-      "description": "Consonante fricativa postalveolar sonora. El sonido de la 'j' francesa o la 'y' rioplatense fuerte.",
-      "similar": "Como la 'g' de 'jambon' en francés, o la 'zh' en 'zhivago'. También como la 'y' argentina de '¡yo!' enfatizado.",
-      "mistakes": "Los hispanohablantes tienden a pronunciarla como la 'j' española (aspirada). La Ж es fricativa sonora, no aspirada.",
-      "tips": "Poné la lengua en la misma posición que para 'sh', pero hacé vibrar las cuerdas vocales. La Ж nunca se palataliza aunque le siga 'i' o 'e'.",
+      "description": "Consonante fricativa postalveolar sonora: la misma posición que Ш, pero con vibración de las cuerdas vocales. El sonido de la **j** francesa.",
+      "similar": "Como la **j** de «jambon» en francés o la **s** del inglés «vision».",
+      "mistakes": "Los hispanohablantes tienden a pronunciarla como la **j** española (aspirada). La Ж es fricativa sonora, no aspirada.",
+      "tips": "Poné la lengua en la misma posición que para **sh**, pero hacé vibrar las cuerdas vocales. La Ж nunca se palataliza aunque le siga **i** o **e**.",
       "similar_letters": "Ж vs Ш: Ж es sonora, Ш es sorda. Mismo punto de articulación."
     },
     "words": [
@@ -432,7 +432,7 @@ const ALPHABET=[
         "cyrillic": "жизнь",
         "translit": "zhizn",
         "meaning": "vida",
-        "note": "Ж siempre dura aunque le siga 'и'",
+        "note": "Ж siempre dura aunque le siga **и**",
         "lexId": "CMR-00066"
       },
       {
@@ -464,15 +464,15 @@ const ALPHABET=[
     "lower": "з",
     "name": "Зэ",
     "translit": "z",
-    "pronunciation": "Como la 'z' o 's' sonora en 'mismo'",
+    "pronunciation": "Como la **z** del inglés «zoo»: una **s** con vibración",
     "sounds": [
       "z"
     ],
     "details": {
-      "description": "Consonante fricativa alveolar sonora. Como la 's' sonora del inglés en 'zero' o la 'z' italiana.",
-      "similar": "Como la 's' en 'mismo' (donde la 's' vibra antes de 'm'), o la 'z' en 'zona' del italiano.",
-      "mistakes": "En español la 'z' es dental sorda. La З rusa es alveolar sonora, como la 's' sonora del inglés.",
-      "tips": "Imaginá el sonido de una abeja: 'zzz'. Al final de palabra se ensordece: suena como С (s).",
+      "description": "Consonante fricativa alveolar sonora. Como la **z** del inglés «zoo» o del francés «zéro».",
+      "similar": "Como la **s** de «mismo» cuando se pronuncia con vibración, o la **z** del inglés «zero».",
+      "mistakes": "En el Río de la Plata (y en casi toda Latinoamérica) la **z** suena **s**. La З rusa no: tiene vibración, como un zumbido.",
+      "tips": "Imaginá el sonido de una abeja: «zzz». Al final de palabra se ensordece: suena como С (s).",
       "similar_letters": "З vs С: З es sonora, С es sorda. Mismo punto de articulación."
     },
     "words": [
@@ -480,21 +480,21 @@ const ALPHABET=[
         "cyrillic": "земля",
         "translit": "zimliá",
         "meaning": "tierra",
-        "note": "З inicial sonora ante 'е'",
+        "note": "З inicial sonora ante **е**",
         "lexId": "CMR-00184"
       },
       {
         "cyrillic": "завтра",
         "translit": "záftra",
         "meaning": "mañana",
-        "note": "З inicial ante 'а'",
+        "note": "З inicial ante **а**",
         "lexId": "CMR-00865"
       },
       {
         "cyrillic": "зима",
         "translit": "zimá",
         "meaning": "invierno",
-        "note": "З inicial ante 'и'",
+        "note": "З inicial ante **и**",
         "lexId": "CMR-01147"
       },
       {
@@ -508,7 +508,7 @@ const ALPHABET=[
         "cyrillic": "глаз",
         "translit": "glas",
         "meaning": "ojo",
-        "note": "З al final se ensordece: suena 'glas'",
+        "note": "З al final se ensordece: suena «glas»",
         "lexId": "CMR-00110"
       }
     ]
@@ -519,16 +519,16 @@ const ALPHABET=[
     "lower": "и",
     "name": "И",
     "translit": "i",
-    "pronunciation": "Como la 'i' española en 'isla'",
+    "pronunciation": "Como la **i** española en «isla»",
     "sounds": [
       "i"
     ],
     "details": {
-      "description": "Vocal anterior cerrada. Idéntica a la 'i' española.",
-      "similar": "Como la 'i' de 'isla', 'libro', 'iglesia'.",
+      "description": "Vocal anterior cerrada. Idéntica a la **i** española.",
+      "similar": "Como la **i** de «isla», «libro», «iglesia».",
       "mistakes": "Pocos problemas para hispanohablantes. Tras Ж, Ш, Ц, la И se pronuncia ligeramente más central, casi como Ы.",
       "tips": "Tras las consonantes Ж, Ш y Ц ortográficamente se escribe И pero fonéticamente suena más como Ы. Regla práctica: pronunciá la И normal en todos los demás casos.",
-      "similar_letters": "И vs Й: И es vocal pura; Й es semivocal (como 'y' en 'yema'). И vs Ы: И es frontal y clara; Ы es central y más cerrada."
+      "similar_letters": "И vs Й: И es vocal y forma sílaba; Й es consonante, como la **i** de «aire». И vs Ы: И es frontal y clara; Ы es central y más oscura."
     },
     "words": [
       {
@@ -574,14 +574,14 @@ const ALPHABET=[
     "lower": "й",
     "name": "И краткое",
     "translit": "i",
-    "pronunciation": "Como la 'y' en 'yema' o la 'i' en 'aire'",
+    "pronunciation": "Como la **i** de «aire» o la **y** de «hoy»: una **i** breve que no forma sílaba",
     "sounds": [
       "i"
     ],
     "details": {
       "description": "Semivocal palatal. Sonido de deslizamiento, nunca forma sílaba sola.",
-      "similar": "Como la 'y' de 'yema', 'yerba'. O como la 'i' de 'aire', 'peine' (no silábica).",
-      "mistakes": "No es una vocal plena: no puede formar sílaba sola. No la pronuncies como una 'i' larga.",
+      "similar": "Como la **i** de «aire», «peine» o la **y** de «hoy», «rey»: nunca forma sílaba sola.",
+      "mistakes": "No es una vocal plena: no puede formar sílaba sola. No la pronuncies como una **i** larga.",
       "tips": "Se usa en diptongos y al inicio de palabras préstamo. Pensala como una i muy breve, que se desliza hacia la vocal de al lado.",
       "similar_letters": "Й vs И: И es vocal silábica; Й es semivocal, no forma sílaba. Й es el componente vocálico de sonidos como ай, ей, ой."
     },
@@ -590,21 +590,21 @@ const ALPHABET=[
         "cyrillic": "йогурт",
         "translit": "yógurt",
         "meaning": "yogur",
-        "note": "Й inicial semivocal ante 'о'",
+        "note": "Й inicial semivocal ante **о**",
         "lexId": "CMR-05410"
       },
       {
         "cyrillic": "чай",
         "translit": "chai",
         "meaning": "té",
-        "note": "Й final en diptongo 'ай'",
+        "note": "Й final en diptongo **ай**",
         "lexId": "CMR-01136"
       },
       {
         "cyrillic": "мой",
         "translit": "moi",
         "meaning": "mi (pron.)",
-        "note": "Й final en diptongo 'ой'",
+        "note": "Й final en diptongo **ой**",
         "lexId": "CMR-00060"
       },
       {
@@ -629,44 +629,44 @@ const ALPHABET=[
     "lower": "к",
     "name": "Ка",
     "translit": "k",
-    "pronunciation": "Como la 'c' española en 'casa' o la 'k' en 'kilo'",
+    "pronunciation": "Como la **c** española en «casa» o la **k** en «kilo»",
     "sounds": [
       "k"
     ],
     "details": {
-      "description": "Consonante oclusiva velar sorda. Igual que la 'k' o la 'c' fuerte española.",
-      "similar": "Como la 'c' de 'casa', 'color'. O la 'k' de 'kilómetro'.",
-      "mistakes": "En ruso ante 'е' e 'и', la К puede palatalizarse ligeramente: suena casi como 'ki', 'ke', pero con la lengua más adelantada.",
+      "description": "Consonante oclusiva velar sorda. Igual que la **k** o la **c** fuerte española.",
+      "similar": "Como la **c** de «casa», «color». O la **k** de «kilómetro».",
+      "mistakes": "En ruso ante **е** e **и**, la К puede palatalizarse ligeramente: suena casi como «ki», «ke», pero con la lengua más adelantada.",
       "tips": "La К es siempre sorda. Ante vocales palatales se adelanta el punto de articulación.",
-      "similar_letters": "К vs Г: К sorda, Г sonora. К vs X: К es oclusiva (cierre total), X es fricativa (fricción)."
+      "similar_letters": "К vs Г: К sorda, Г sonora. К vs Х: К es oclusiva (cierre total), Х es fricativa (fricción)."
     },
     "words": [
       {
         "cyrillic": "кот",
         "translit": "kot",
         "meaning": "gato",
-        "note": "К inicial ante 'о'",
+        "note": "К inicial ante **о**",
         "lexId": "CMR-02793"
       },
       {
         "cyrillic": "книга",
         "translit": "kníga",
         "meaning": "libro",
-        "note": "К en grupo consonántico 'кн'",
+        "note": "К en grupo consonántico **кн**",
         "lexId": "CMR-00230"
       },
       {
         "cyrillic": "когда",
         "translit": "kagdá",
         "meaning": "cuando",
-        "note": "К inicial ante 'о'",
+        "note": "К inicial ante **о**",
         "lexId": "CMR-00055"
       },
       {
         "cyrillic": "красный",
         "translit": "krásnyi",
         "meaning": "rojo",
-        "note": "К en grupo inicial 'кр'",
+        "note": "К en grupo inicial **кр**",
         "lexId": "CMR-00442"
       },
       {
@@ -684,15 +684,15 @@ const ALPHABET=[
     "lower": "л",
     "name": "Эл",
     "translit": "l",
-    "pronunciation": "Como la 'l' española, pero hay dos variantes: dura y suave",
+    "pronunciation": "Como la **l** española, pero con dos variantes: dura y blanda",
     "sounds": [
       "l",
       "ly"
     ],
     "details": {
-      "description": "Tiene dos variantes: Л dura (velarizada, como la 'l' final inglesa en 'full') y Л suave (palatalizada, como la 'll' española suave).",
-      "similar": "Л dura: similar a la 'l' de 'ball' en inglés. Л suave: similar a 'lli' en 'millón'.",
-      "mistakes": "El hispanohablante tiende a usar siempre la misma 'l'. En ruso, antes de vocales palatales (е, и, ё, я, ю) se palataliza.",
+      "description": "Tiene dos variantes: Л dura (velarizada, más oscura, como la **l** del inglés «full») y Л blanda (palatalizada, con la lengua pegada al paladar).",
+      "similar": "Л dura: parecida a la **l** de «ball» en inglés. Л blanda: como una **l** seguida de una **i** muy breve, la de «liana».",
+      "mistakes": "El hispanohablante tiende a usar siempre la misma **l**. En ruso, antes de vocales palatales (е, и, ё, я, ю) se palataliza.",
       "tips": "Ante Е, И, Ё, Я, Ю o signo blando (ь): Л suave. En los demás casos: Л dura. La diferencia es importante para el significado.",
       "similar_letters": "Л vs Р: л es lateral, р es vibrante. Л dura vs suave: cambio de significado en muchas palabras."
     },
@@ -701,14 +701,14 @@ const ALPHABET=[
         "cyrillic": "луна",
         "translit": "luná",
         "meaning": "luna",
-        "note": "Л dura ante 'у'",
+        "note": "Л dura ante **у**",
         "lexId": "CMR-02525"
       },
       {
         "cyrillic": "лес",
         "translit": "lies",
         "meaning": "bosque",
-        "note": "Л suave ante 'е'",
+        "note": "Л suave ante **е**",
         "lexId": "CMR-00512"
       },
       {
@@ -722,7 +722,7 @@ const ALPHABET=[
         "cyrillic": "любовь",
         "translit": "liubóf",
         "meaning": "amor",
-        "note": "Л suave ante 'ю'",
+        "note": "Л suave ante **ю**",
         "lexId": "CMR-00307"
       },
       {
@@ -740,13 +740,13 @@ const ALPHABET=[
     "lower": "м",
     "name": "Эм",
     "translit": "m",
-    "pronunciation": "Como la 'm' española en 'madre'",
+    "pronunciation": "Como la **m** española en «madre»",
     "sounds": [
       "m"
     ],
     "details": {
-      "description": "Consonante nasal bilabial. Idéntica a la 'm' española.",
-      "similar": "Como la 'm' de 'madre', 'mano', 'mundo'.",
+      "description": "Consonante nasal bilabial. Idéntica a la **m** española.",
+      "similar": "Como la **m** de «madre», «mano», «mundo».",
       "mistakes": "Sin dificultades para hispanohablantes. Tené en cuenta que ante vocales palatales se palataliza ligeramente.",
       "tips": "М ante Е, И, Ё, Я, Ю se pronuncia palatalizada (suavizada). Es un cambio sutil pero existe.",
       "similar_letters": "М vs Н: М es bilabial, Н es alveolar. Ambas son nasales."
@@ -763,28 +763,28 @@ const ALPHABET=[
         "cyrillic": "море",
         "translit": "móri",
         "meaning": "mar",
-        "note": "М inicial ante 'о'",
+        "note": "М inicial ante **о**",
         "lexId": "CMR-00720"
       },
       {
         "cyrillic": "метро",
         "translit": "mitró",
         "meaning": "metro",
-        "note": "М suave ante 'е'",
+        "note": "М suave ante **е**",
         "lexId": "CMR-02395"
       },
       {
         "cyrillic": "музыка",
         "translit": "múzyka",
         "meaning": "música",
-        "note": "М inicial ante 'у'",
+        "note": "М inicial ante **у**",
         "lexId": "CMR-00639"
       },
       {
         "cyrillic": "потом",
         "translit": "patóm",
         "meaning": "después, luego",
-        "note": "М al final; la primera О, átona, suena 'a' (patóm)",
+        "note": "М al final; la primera О, átona, suena **a** (patóm)",
         "lexId": "CMR-00090"
       }
     ]
@@ -795,15 +795,15 @@ const ALPHABET=[
     "lower": "н",
     "name": "Эн",
     "translit": "n",
-    "pronunciation": "Como la 'n' española en 'nada'",
+    "pronunciation": "Como la **n** española en «nada»",
     "sounds": [
       "n"
     ],
     "details": {
-      "description": "Consonante nasal alveolar. Idéntica a la 'n' española estándar.",
-      "similar": "Como la 'n' de 'nada', 'noche', 'nombre'.",
-      "mistakes": "Sin dificultades especiales. Ante vocales palatales se palataliza: Н suave suena como 'ñ' muy suave.",
-      "tips": "Н suave (ante Е, И, Ё, Я, Ю o signo blando) es similar a la 'ñ' española pero más sutil.",
+      "description": "Consonante nasal dental. Idéntica a la **n** española.",
+      "similar": "Como la **n** de «nada», «noche», «nombre».",
+      "mistakes": "Sin dificultades especiales. Ante vocales palatales se palataliza: Н suave suena como **ñ** muy suave.",
+      "tips": "Н suave (ante Е, И, Ё, Я, Ю o signo blando) es similar a la **ñ** española pero más sutil.",
       "similar_letters": "Н vs М: Н es alveolar, М es bilabial. Н vs Ñ española: parecidas pero Н suave es más sutil."
     },
     "words": [
@@ -811,14 +811,14 @@ const ALPHABET=[
         "cyrillic": "ночь",
         "translit": "noch",
         "meaning": "noche",
-        "note": "Н inicial ante 'о'",
+        "note": "Н inicial ante **о**",
         "lexId": "CMR-00236"
       },
       {
         "cyrillic": "небо",
         "translit": "niéba",
         "meaning": "cielo",
-        "note": "Н suave ante 'е'",
+        "note": "Н suave ante **е**",
         "lexId": "CMR-00600"
       },
       {
@@ -832,14 +832,14 @@ const ALPHABET=[
         "cyrillic": "новый",
         "translit": "nóvyi",
         "meaning": "nuevo",
-        "note": "Н inicial ante 'о'",
+        "note": "Н inicial ante **о**",
         "lexId": "CMR-00073"
       },
       {
         "cyrillic": "очень",
         "translit": "óchin",
         "meaning": "muy",
-        "note": "Н suave por la Ь: suena parecido a 'ñ'",
+        "note": "Н suave por la Ь: suena parecido a **ñ**",
         "lexId": "CMR-00069"
       }
     ]
@@ -850,24 +850,24 @@ const ALPHABET=[
     "lower": "о",
     "name": "О",
     "translit": "o",
-    "pronunciation": "Como la 'o' española, pero solo cuando es tónica",
+    "pronunciation": "Como la **o** española, pero solo cuando es tónica",
     "sounds": [
       "o",
       "a"
     ],
     "details": {
-      "description": "Vocal media posterior. En sílaba tónica suena como 'o' española. En sílaba átona se reduce a sonido cercano a 'a'.",
-      "similar": "Tónica: como la 'o' de 'sol'. Átona: como una 'a' corta o neutra.",
-      "mistakes": "El gran error: pronunciar siempre como 'o' aunque la sílaba no sea tónica. En ruso átona la О se 'akan' (suena como А).",
-      "tips": "Regla de 'аканье': О átona → se pronuncia А. Ejemplo: молоко (leche) → se pronuncia 'малако', no 'молоко'.",
-      "similar_letters": "О vs А: en posición átona ambas pueden sonar parecido. О vs Ё: Ё siempre es tónica y suena 'yo'."
+      "description": "Vocal media posterior. En sílaba tónica suena como **o** española. En sílaba átona se reduce a sonido cercano a **a**.",
+      "similar": "Tónica: como la **o** de «sol». Átona: como una **a** corta o neutra.",
+      "mistakes": "El gran error: pronunciar siempre **o** aunque la sílaba no sea tónica. En ruso, la О sin acento se debilita y suena como А.",
+      "tips": "Regla práctica: О átona → se pronuncia А. Ejemplo: молоко́ (leche) se dice «malakó».",
+      "similar_letters": "О vs А: en posición átona ambas pueden sonar parecido. О vs Ё: Ё siempre es tónica y suena «io»."
     },
     "words": [
       {
         "cyrillic": "окно",
         "translit": "aknó",
         "meaning": "ventana",
-        "note": "Primera О átona → suena 'а'",
+        "note": "Primera О átona → suena **а**",
         "lexId": "CMR-00370"
       },
       {
@@ -881,21 +881,21 @@ const ALPHABET=[
         "cyrillic": "отец",
         "translit": "atiéts",
         "meaning": "padre",
-        "note": "О inicial átona → 'а'",
+        "note": "О inicial átona → **а**",
         "lexId": "CMR-00192"
       },
       {
         "cyrillic": "город",
         "translit": "górat",
         "meaning": "ciudad",
-        "note": "Segunda О átona → 'а'",
+        "note": "Segunda О átona → **а**",
         "lexId": "CMR-00156"
       },
       {
         "cyrillic": "можно",
         "translit": "mózhna",
         "meaning": "se puede",
-        "note": "О tónica suena 'o'; la final, átona, suena 'a' (mózhna)",
+        "note": "О tónica suena **o**; la final, átona, suena **a** (mózhna)",
         "lexId": "CMR-00082"
       }
     ]
@@ -906,14 +906,14 @@ const ALPHABET=[
     "lower": "п",
     "name": "Пэ",
     "translit": "p",
-    "pronunciation": "Como la 'p' española en 'padre'",
+    "pronunciation": "Como la **p** española en «padre»",
     "sounds": [
       "p"
     ],
     "details": {
-      "description": "Consonante oclusiva bilabial sorda. Igual que la 'p' española pero sin aspiración.",
-      "similar": "Como la 'p' de 'padre', 'pan', 'pueblo'.",
-      "mistakes": "En inglés la 'p' inicial se aspira. En ruso, como en español, no hay aspiración.",
+      "description": "Consonante oclusiva bilabial sorda. Igual que la **p** española pero sin aspiración.",
+      "similar": "Como la **p** de «padre», «pan», «pueblo».",
+      "mistakes": "En inglés la **p** inicial se aspira. En ruso, como en español, no hay aspiración.",
       "tips": "П es la sorda equivalente de Б. Fácil para hispanohablantes.",
       "similar_letters": "П vs Б: П sorda, Б sonora. П vs Ф: П es oclusiva, Ф es fricativa."
     },
@@ -929,21 +929,21 @@ const ALPHABET=[
         "cyrillic": "письмо",
         "translit": "pismó",
         "meaning": "carta",
-        "note": "П suave ante 'и'",
+        "note": "П suave ante **и**",
         "lexId": "CMR-00333"
       },
       {
         "cyrillic": "помощь",
         "translit": "pómasch",
         "meaning": "ayuda",
-        "note": "П inicial ante 'о'",
+        "note": "П inicial ante **о**",
         "lexId": "CMR-00338"
       },
       {
         "cyrillic": "погода",
         "translit": "pagóda",
         "meaning": "clima, tiempo",
-        "note": "П inicial; la primera О, átona, suena 'a' (pagóda)",
+        "note": "П inicial; la primera О, átona, suena **a** (pagóda)",
         "lexId": "CMR-02268"
       },
       {
@@ -961,16 +961,16 @@ const ALPHABET=[
     "lower": "р",
     "name": "Эр",
     "translit": "r",
-    "pronunciation": "Como la 'rr' española en 'perro', vibrantísima",
+    "pronunciation": "Una **r** vibrante, más cerca de la **rr** de «perro» que de la **r** de «pero»",
     "sounds": [
       "r"
     ],
     "details": {
-      "description": "Consonante vibrante alveolar múltiple. Como la 'rr' española de 'perro', siempre vibrante.",
-      "similar": "Como la 'rr' de 'carro', 'perro'. Nunca como la 'r' suave de 'pero'.",
-      "mistakes": "Los hispanohablantes tienden a usar la 'r' suave a veces. En ruso, la Р siempre es vibrante, incluso en posición intervocálica.",
-      "tips": "Pensá siempre en la 'rr' de 'perro'. La Р rusa nunca se relaja.",
-      "similar_letters": "Р vs Л: Р es vibrante, Л es lateral. Confundidas por hablantes de otras lenguas pero no por hispanohablantes."
+      "description": "Consonante vibrante alveolar. Suena más cerca de la **rr** de «perro»; entre vocales puede ser una sola vibración, pero nunca tan suave como la **r** de «pero».",
+      "similar": "Como la **rr** de «carro», «perro».",
+      "mistakes": "Los hispanohablantes a veces la hacen demasiado suave. En ruso la Р siempre vibra con fuerza.",
+      "tips": "Pensá en la **rr** de «perro»: la Р rusa nunca se relaja.",
+      "similar_letters": "Р vs Л: Р es vibrante, Л es lateral."
     },
     "words": [
       {
@@ -984,14 +984,14 @@ const ALPHABET=[
         "cyrillic": "работа",
         "translit": "rabóta",
         "meaning": "trabajo",
-        "note": "Р inicial ante 'а'",
+        "note": "Р inicial ante **а**",
         "lexId": "CMR-00087"
       },
       {
         "cyrillic": "рука",
         "translit": "ruká",
         "meaning": "mano",
-        "note": "Р inicial ante 'у'",
+        "note": "Р inicial ante **у**",
         "lexId": "CMR-00074"
       },
       {
@@ -1016,15 +1016,15 @@ const ALPHABET=[
     "lower": "с",
     "name": "Эс",
     "translit": "s",
-    "pronunciation": "Como la 's' española en 'sol'",
+    "pronunciation": "Como la **s** española en «sol»",
     "sounds": [
       "s"
     ],
     "details": {
-      "description": "Consonante fricativa alveolar sorda. Igual que la 's' española.",
-      "similar": "Como la 's' de 'sol', 'casa', 'silla'.",
+      "description": "Consonante fricativa alveolar sorda. Igual que la **s** española.",
+      "similar": "Como la **s** de «sol», «casa», «silla».",
       "mistakes": "Sin dificultades. Ante vocal palatal se palataliza ligeramente.",
-      "tips": "С es la sorda equivalente de З. Siempre sorda, nunca se sonoriza sola, pero sí asimila a consonante sonora siguiente.",
+      "tips": "С es la pareja sorda de З. Delante de una consonante sonora se sonoriza y suena З (сде́лать suena «zdiélat»).",
       "similar_letters": "С vs З: С sorda, З sonora. С vs Ш: С es alveolar, Ш es postalveolar."
     },
     "words": [
@@ -1039,21 +1039,21 @@ const ALPHABET=[
         "cyrillic": "слово",
         "translit": "slóva",
         "meaning": "palabra",
-        "note": "С en grupo consonántico 'сл'",
+        "note": "С en grupo consonántico **сл**",
         "lexId": "CMR-00094"
       },
       {
         "cyrillic": "страна",
         "translit": "straná",
         "meaning": "país",
-        "note": "С en grupo 'стр'",
+        "note": "С en grupo **стр**",
         "lexId": "CMR-00125"
       },
       {
         "cyrillic": "сестра",
         "translit": "sistrá",
         "meaning": "hermana",
-        "note": "С suave ante 'е'",
+        "note": "С suave ante **е**",
         "lexId": "CMR-00982"
       },
       {
@@ -1071,14 +1071,14 @@ const ALPHABET=[
     "lower": "т",
     "name": "Тэ",
     "translit": "t",
-    "pronunciation": "Como la 't' española en 'toro'",
+    "pronunciation": "Como la **t** española en «toro»",
     "sounds": [
       "t"
     ],
     "details": {
-      "description": "Consonante oclusiva alveolar sorda. Igual que la 't' española pero sin aspiración.",
-      "similar": "Como la 't' de 'toro', 'tierra'. Dental, sin aspiración.",
-      "mistakes": "En inglés la 't' inicial se aspira. En ruso, como en español, no.",
+      "description": "Consonante oclusiva dental sorda. Igual que la **t** española, sin aspiración.",
+      "similar": "Como la **t** de «toro», «tierra». Dental, sin aspiración.",
+      "mistakes": "En inglés la **t** inicial se aspira. En ruso, como en español, no.",
       "tips": "Т es la sorda equivalente de Д. Fácil para hispanohablantes.",
       "similar_letters": "Т vs Д: Т sorda, Д sonora."
     },
@@ -1101,21 +1101,21 @@ const ALPHABET=[
         "cyrillic": "телефон",
         "translit": "tilifón",
         "meaning": "teléfono",
-        "note": "Т suave ante 'е'",
+        "note": "Т suave ante **е**",
         "lexId": "CMR-00676"
       },
       {
         "cyrillic": "три",
         "translit": "tri",
         "meaning": "tres",
-        "note": "Т en grupo 'тр'",
+        "note": "Т en grupo **тр**",
         "lexId": "CMR-00150"
       },
       {
         "cyrillic": "место",
         "translit": "miésta",
         "meaning": "lugar",
-        "note": "Т en el grupo 'ст', en medio de la palabra",
+        "note": "Т en el grupo **ст**, en medio de la palabra",
         "lexId": "CMR-00098"
       }
     ]
@@ -1126,15 +1126,15 @@ const ALPHABET=[
     "lower": "у",
     "name": "У",
     "translit": "u",
-    "pronunciation": "Como la 'u' española en 'luna'",
+    "pronunciation": "Como la **u** española en «luna»",
     "sounds": [
       "u"
     ],
     "details": {
-      "description": "Vocal posterior cerrada. Idéntica a la 'u' española.",
-      "similar": "Como la 'u' de 'luna', 'uva', 'único'.",
+      "description": "Vocal posterior cerrada. Idéntica a la **u** española.",
+      "similar": "Como la **u** de «luna», «uva», «único».",
       "mistakes": "Sin dificultades para hispanohablantes. La У nunca se reduce en posición átona (a diferencia de О).",
-      "tips": "La У siempre se pronuncia como 'u' clara, incluso sin acento. Esto la diferencia de О.",
+      "tips": "La У siempre se pronuncia como **u** clara, incluso sin acento. Esto la diferencia de О.",
       "similar_letters": "У vs О: У siempre clara; О se reduce en átona. У vs Ю: У dura, Ю palataliza la consonante anterior."
     },
     "words": [
@@ -1181,13 +1181,13 @@ const ALPHABET=[
     "lower": "ф",
     "name": "Эф",
     "translit": "f",
-    "pronunciation": "Como la 'f' española en 'foto'",
+    "pronunciation": "Como la **f** española en «foto»",
     "sounds": [
       "f"
     ],
     "details": {
-      "description": "Consonante fricativa labiodental sorda. Igual que la 'f' española.",
-      "similar": "Como la 'f' de 'foto', 'fácil', 'fuerte'.",
+      "description": "Consonante fricativa labiodental sorda. Igual que la **f** española.",
+      "similar": "Como la **f** de «foto», «fácil», «fuerte».",
       "mistakes": "Sin dificultades. Ф es la sorda equivalente de В.",
       "tips": "Ф aparece principalmente en palabras de origen extranjero. En palabras rusas nativas es poco frecuente.",
       "similar_letters": "Ф vs В: Ф sorda, В sonora. Ambas labiodentales fricativas."
@@ -1197,7 +1197,7 @@ const ALPHABET=[
         "cyrillic": "фото",
         "translit": "fóta",
         "meaning": "foto",
-        "note": "Ф inicial ante 'о'",
+        "note": "Ф inicial ante **о**",
         "lexId": "CMR-03400"
       },
       {
@@ -1211,7 +1211,7 @@ const ALPHABET=[
         "cyrillic": "форма",
         "translit": "fórma",
         "meaning": "forma",
-        "note": "Ф inicial ante 'о'",
+        "note": "Ф inicial ante **о**",
         "lexId": "CMR-00282"
       },
       {
@@ -1236,15 +1236,15 @@ const ALPHABET=[
     "lower": "х",
     "name": "Ха",
     "translit": "j",
-    "pronunciation": "Como la 'j' española en 'jardín'",
+    "pronunciation": "Como la **j** española en «jardín»",
     "sounds": [
       "j"
     ],
     "details": {
-      "description": "Consonante fricativa velar sorda. Muy similar a la 'j' española o a la 'ch' alemana en 'Bach'.",
-      "similar": "Como la 'j' de 'jardín', 'jamón'. O la 'g' de 'genio' en castellano estándar.",
+      "description": "Consonante fricativa velar sorda. Muy similar a la **j** española o a la **ch** alemana en «Bach».",
+      "similar": "Como la **j** de «jardín», «jamón». O la **g** de «genio» en castellano estándar.",
       "mistakes": "La pronunciación española es a menudo demasiado gutural. La Х rusa puede ser ligeramente más suave que la jota española.",
-      "tips": "Para hispanohablantes es uno de los sonidos más fáciles: es prácticamente nuestra 'j'. La Х suave (ante е, и) es más palatal, como la 'ch' alemana en 'ich'.",
+      "tips": "Para hispanohablantes es uno de los sonidos más fáciles: es prácticamente nuestra **j**. La Х suave (ante е, и) es más palatal, como la **ch** alemana en «ich».",
       "similar_letters": "Х vs К: Х es fricativa (fricción continua), К es oclusiva (cierre total). Х vs Г: Х sorda, Г sonora."
     },
     "words": [
@@ -1252,21 +1252,21 @@ const ALPHABET=[
         "cyrillic": "хлеб",
         "translit": "jliep",
         "meaning": "pan",
-        "note": "Х inicial, suena como 'j'",
+        "note": "Х inicial, suena como **j**",
         "lexId": "CMR-01130"
       },
       {
         "cyrillic": "холодно",
         "translit": "jóladna",
         "meaning": "hace frío",
-        "note": "Х inicial ante 'о'",
+        "note": "Х inicial ante **о**",
         "lexId": "CMR-03218"
       },
       {
         "cyrillic": "хорошо",
         "translit": "jarashó",
         "meaning": "bien / está bien",
-        "note": "Ш antes de la О final tónica",
+        "note": "Х inicial: suena como nuestra **j**",
         "lexId": "CMR-00190"
       },
       {
@@ -1280,7 +1280,7 @@ const ALPHABET=[
         "cyrillic": "воздух",
         "translit": "vózduj",
         "meaning": "aire",
-        "note": "Х al final: suena como la 'j' española",
+        "note": "Х al final: suena como la **j** española",
         "lexId": "CMR-00583"
       }
     ]
@@ -1291,15 +1291,15 @@ const ALPHABET=[
     "lower": "ц",
     "name": "Цэ",
     "translit": "ts",
-    "pronunciation": "Como 'ts' en 'tsar' o la 'z' italiana en 'pizza'",
+    "pronunciation": "Como **ts** en «tsar» o la **z** italiana en «pizza»",
     "sounds": [
       "ts"
     ],
     "details": {
-      "description": "Africada alveolar sorda. Combinación rápida de 't' y 's'.",
-      "similar": "Como 'ts' en 'tsunami', o la 'z' italiana de 'pizza', o la 'tz' alemana.",
-      "mistakes": "Los hispanohablantes tienden a separar la 't' y la 's'. Son un único sonido fusionado.",
-      "tips": "Empezá cerrando la boca como para 't' y termina con fricción de 's', todo en un impulso. La Ц nunca se palataliza.",
+      "description": "Africada alveolar sorda. Combinación rápida de **t** y **s**.",
+      "similar": "Como **ts** en «tsunami», o la **z** italiana de «pizza», o la **tz** alemana.",
+      "mistakes": "Los hispanohablantes tienden a separar la **t** y la **s**. Son un único sonido fusionado.",
+      "tips": "Empezá cerrando la boca como para **t** y terminá con el soplido de **s**, todo en un impulso. La Ц nunca se ablanda.",
       "similar_letters": "Ц vs Ч: Ц es alveolar sorda; Ч es postalveolar y siempre suave."
     },
     "words": [
@@ -1314,14 +1314,14 @@ const ALPHABET=[
         "cyrillic": "цена",
         "translit": "tsiná",
         "meaning": "precio",
-        "note": "Ц inicial ante 'е'",
+        "note": "Ц inicial ante **е**",
         "lexId": "CMR-00454"
       },
       {
         "cyrillic": "птица",
         "translit": "ptítsa",
         "meaning": "pájaro",
-        "note": "Ц interior ante 'а'",
+        "note": "Ц interior ante **а**",
         "lexId": "CMR-01294"
       },
       {
@@ -1346,13 +1346,13 @@ const ALPHABET=[
     "lower": "ч",
     "name": "Чэ",
     "translit": "ch",
-    "pronunciation": "Como 'ch' española en 'chocolate'",
+    "pronunciation": "Como **ch** española en «chocolate»",
     "sounds": [
       "ch"
     ],
     "details": {
-      "description": "Africada postalveolar sorda y siempre palatalizada. Igual que la 'ch' española.",
-      "similar": "Exactamente como la 'ch' de 'chocolate', 'muchacho', 'noche'.",
+      "description": "Africada postalveolar sorda y siempre palatalizada. Igual que la **ch** española.",
+      "similar": "Exactamente como la **ch** de «chocolate», «muchacho», «noche».",
       "mistakes": "Ninguno para hispanohablantes. La Ч siempre es suave (palatal), no se puede endurecer.",
       "tips": "Después de Ч se escribe а, у, и, е; nunca я, ю ni ы.",
       "similar_letters": "Ч vs Ц: Ч es postalveolar y siempre suave; Ц es alveolar y siempre dura."
@@ -1369,7 +1369,7 @@ const ALPHABET=[
         "cyrillic": "час",
         "translit": "chas",
         "meaning": "hora",
-        "note": "Ч inicial ante 'а'",
+        "note": "Ч inicial ante **а**",
         "lexId": "CMR-00200"
       },
       {
@@ -1390,7 +1390,7 @@ const ALPHABET=[
         "cyrillic": "ключ",
         "translit": "kliuch",
         "meaning": "llave",
-        "note": "Ч al final: suena 'ch'",
+        "note": "Ч al final: suena **ch**",
         "lexId": "CMR-01584"
       }
     ]
@@ -1401,15 +1401,15 @@ const ALPHABET=[
     "lower": "ш",
     "name": "Ша",
     "translit": "sh",
-    "pronunciation": "Como 'sh' en inglés 'show' o la 'll' argentina suave",
+    "pronunciation": "Como **sh** en inglés «show», o la **ll** de «lluvia» como la dicen muchos porteños («shuvia»)",
     "sounds": [
       "sh"
     ],
     "details": {
-      "description": "Consonante fricativa postalveolar sorda. Como la 'sh' inglesa o la 'ch' francesa.",
-      "similar": "Como 'sh' en 'show', 'she'. O la 'ch' de 'chocolat' en francés.",
-      "mistakes": "No existe en español estándar. Algunos confunden con 'ch' española. La Ш es fricativa (sin oclusión inicial), la Ч es africada.",
-      "tips": "Llevá la lengua hacia atrás más que para 's'. La Ш siempre es dura, nunca se palataliza.",
+      "description": "Consonante fricativa postalveolar sorda. Como la **sh** inglesa o la **ch** francesa.",
+      "similar": "Como **sh** en «show», «she». O la **ch** de «chocolat» en francés.",
+      "mistakes": "No existe en español estándar. Algunos confunden con **ch** española. La Ш es fricativa (sin oclusión inicial), la Ч es africada.",
+      "tips": "Llevá la lengua hacia atrás más que para **s**. La Ш siempre es dura, nunca se palataliza.",
       "similar_letters": "Ш vs Щ: Ш es dura; Щ es suave y prolongada. Ш vs Ж: Ш sorda, Ж sonora."
     },
     "words": [
@@ -1417,14 +1417,14 @@ const ALPHABET=[
         "cyrillic": "школа",
         "translit": "shkóla",
         "meaning": "escuela",
-        "note": "Ш en grupo 'шк'",
+        "note": "Ш en grupo **шк**",
         "lexId": "CMR-00315"
       },
       {
         "cyrillic": "шапка",
         "translit": "shápka",
         "meaning": "gorro",
-        "note": "Ш inicial ante 'а'",
+        "note": "Ш inicial ante **а**",
         "lexId": "CMR-02772"
       },
       {
@@ -1437,7 +1437,7 @@ const ALPHABET=[
       {
         "cyrillic": "машина",
         "translit": "mashína",
-        "meaning": "coche",
+        "meaning": "auto",
         "note": "Ш intervocálica",
         "lexId": "CMR-00187"
       },
@@ -1456,15 +1456,15 @@ const ALPHABET=[
     "lower": "щ",
     "name": "Ща",
     "translit": "sch",
-    "pronunciation": "Como una 'sh' larga y suave",
+    "pronunciation": "Como una **sh** larga y suave",
     "sounds": [
       "sch"
     ],
     "details": {
       "description": "Consonante fricativa palatal sorda prolongada. Suave y larga, sin equivalente directo en español.",
-      "similar": "Como una 'sh' suave y alargada, o 'sch' en alemán 'Schule' pero más palatal.",
-      "mistakes": "No tiene equivalente en español. Muchos la pronuncian igual que Ш. La diferencia: Щ es palatal y puede sonar como 'sh' + 'ch' fusionadas.",
-      "tips": "Pronunciá 'sh' y adelantá la lengua hacia el paladar. En la lengua moderna suena como una 'ш' larga y suavizada.",
+      "similar": "Como una **sh** suave y alargada, o **sch** en alemán «Schule» pero más palatal.",
+      "mistakes": "No tiene equivalente en español. Muchos la pronuncian igual que Ш. La diferencia: Щ es palatal y puede sonar como **sh** + **ch** fusionadas.",
+      "tips": "Pronunciá **sh** y adelantá la lengua hacia el paladar. En la lengua moderna suena como una **ш** larga y suavizada.",
       "similar_letters": "Щ vs Ш: Щ es siempre suave y palatal; Ш es siempre dura. Son completamente distintas."
     },
     "words": [
@@ -1479,7 +1479,7 @@ const ALPHABET=[
         "cyrillic": "щека",
         "translit": "schiká",
         "meaning": "mejilla",
-        "note": "Щ inicial ante 'е'",
+        "note": "Щ inicial ante **е**",
         "lexId": "CMR-01693"
       },
       {
@@ -1515,9 +1515,9 @@ const ALPHABET=[
     "sounds": [],
     "details": {
       "description": "El signo duro (твёрдый знак) no tiene sonido propio. Indica que la consonante anterior es dura y no se palataliza antes de la vocal siguiente (е, ё, ю, я).",
-      "similar": "No hay equivalente en español. Actúa como separador de sílabas: la vocal siguiente empieza con su 'й' inicial.",
+      "similar": "No hay equivalente en español. Actúa como separador de sílabas: la vocal siguiente empieza con su **й** inicial.",
       "mistakes": "Pronunciarlo como vocal o consonante. Es invisible fonéticamente: solo afecta a las consonantes adyacentes.",
-      "tips": "Ante Ъ, la vocal siguiente (е→йэ, ё→йо, ю→йу, я→йа) mantiene su 'й' inicial porque no va pegada a la consonante.",
+      "tips": "Ante Ъ, la vocal siguiente (е→йэ, ё→йо, ю→йу, я→йа) mantiene su **й** inicial porque no va pegada a la consonante.",
       "similar_letters": "Ъ vs Ь: ambos son signos sin sonido. Ъ endurece (evita palatalización); Ь suaviza (palataliza la consonante anterior)."
     },
     "words": [
@@ -1525,14 +1525,14 @@ const ALPHABET=[
         "cyrillic": "съезд",
         "translit": "syest",
         "meaning": "congreso",
-        "note": "Ъ entre 'с' y 'е': la 'с' no se palataliza",
+        "note": "Ъ entre **с** y **е**: la **с** no se palataliza",
         "lexId": "CMR-02269"
       },
       {
         "cyrillic": "объект",
         "translit": "abyékt",
         "meaning": "objeto",
-        "note": "Ъ mantiene 'б' dura ante 'е'",
+        "note": "Ъ mantiene **б** dura ante **е**",
         "lexId": "CMR-00528"
       },
       {
@@ -1546,14 +1546,14 @@ const ALPHABET=[
         "cyrillic": "объём",
         "translit": "abyóm",
         "meaning": "volumen",
-        "note": "Ъ antes de 'ё'",
+        "note": "Ъ antes de **ё**",
         "lexId": "CMR-00687"
       },
       {
         "cyrillic": "съесть",
         "translit": "syest",
         "meaning": "comer(se)",
-        "note": "Ъ separa el prefijo: la Е suena 'ye' (syest)",
+        "note": "Ъ separa el prefijo: la Е suena «ye» (syest)",
         "lexId": "CMR-02632"
       }
     ]
@@ -1570,9 +1570,9 @@ const ALPHABET=[
     ],
     "details": {
       "description": "Vocal central cerrada. No existe en español. Es uno de los sonidos más difíciles para hispanohablantes.",
-      "similar": "Intentá decir 'i' pero con la lengua retraída hacia la garganta, como si tuvieras la boca a medio abrir. A veces descrito como el sonido al recibir un golpe en el estómago.",
-      "mistakes": "Pronunciarla como 'i'. Son muy distintas: И es frontal y clara; Ы es central/posterior y oscura.",
-      "tips": "Truco: decí 'u' y, sin mover los labios, intentá decir 'i'. El resultado se acercará a Ы. O decí 'bi' y mantené los labios relajados (sin redondear ni estirar): eso es Ы.",
+      "similar": "Intentá decir **i** pero con la lengua retraída hacia la garganta, como si tuvieras la boca a medio abrir. A veces descrito como el sonido al recibir un golpe en el estómago.",
+      "mistakes": "Pronunciarla como **i**. Son muy distintas: И es frontal y clara; Ы es central/posterior y oscura.",
+      "tips": "Truco: decí **u** y, sin mover los labios, intentá decir **i**. El resultado se acercará a Ы. O decí «bi» y mantené los labios relajados (sin redondear ni estirar): eso es Ы.",
       "similar_letters": "Ы vs И: ambas son cerradas, pero Ы es central-posterior e И es frontal. La diferencia cambia el significado: быть vs бить."
     },
     "words": [
@@ -1601,7 +1601,7 @@ const ALPHABET=[
         "cyrillic": "мыло",
         "translit": "mýla",
         "meaning": "jabón",
-        "note": "Ы tónica, bien diferenciada de 'и'",
+        "note": "Ы tónica, bien diferenciada de **и**",
         "lexId": "CMR-05413"
       },
       {
@@ -1623,8 +1623,8 @@ const ALPHABET=[
     "sounds": [],
     "details": {
       "description": "El signo blando (мягкий знак) no tiene sonido propio. Indica que la consonante anterior se palataliza: la lengua se arquea hacia el paladar al pronunciarla.",
-      "similar": "No hay equivalente directo. El efecto se parece a agregar una 'y' muy breve después de la consonante: ть suena como una 't' con una 'y' brevísima.",
-      "mistakes": "Ignorarlo completamente. La palatalización cambia el significado: брат es 'hermano' y брать es 'tomar'.",
+      "similar": "No hay equivalente directo. El efecto se parece a agregar una **i** muy breve después de la consonante: ть suena como una **t** con una **i** brevísima.",
+      "mistakes": "Ignorarlo completamente. La palatalización cambia el significado: брат es «hermano» y брать es «tomar».",
       "tips": "Cuando veas Ь, palatalizá la consonante anterior: arqueá la lengua hacia el paladar. Al final de palabra es especialmente importante.",
       "similar_letters": "Ь vs Ъ: Ь suaviza (palataliza), Ъ endurece (bloquea palatalización)."
     },
@@ -1633,35 +1633,35 @@ const ALPHABET=[
         "cyrillic": "мать",
         "translit": "mat",
         "meaning": "madre",
-        "note": "Ь final palataliza la 'т'",
+        "note": "Ь final palataliza la **т**",
         "lexId": "CMR-00301"
       },
       {
         "cyrillic": "день",
         "translit": "dien",
         "meaning": "día",
-        "note": "Ь palataliza la 'н'",
+        "note": "Ь palataliza la **н**",
         "lexId": "CMR-00071"
       },
       {
         "cyrillic": "письмо",
         "translit": "pismó",
         "meaning": "carta",
-        "note": "Ь interior palataliza 'с'",
+        "note": "Ь interior palataliza **с**",
         "lexId": "CMR-00333"
       },
       {
         "cyrillic": "учитель",
         "translit": "uchítil",
         "meaning": "profesor",
-        "note": "Ь final palataliza 'л'",
+        "note": "Ь final palataliza **л**",
         "lexId": "CMR-01060"
       },
       {
         "cyrillic": "семья",
         "translit": "simyá",
         "meaning": "familia",
-        "note": "Ь antes de vocal: separa y la Я suena 'ya' (simyá)",
+        "note": "Ь antes de vocal: separa y la Я suena «ya» (simyá)",
         "lexId": "CMR-00378"
       }
     ]
@@ -1672,13 +1672,13 @@ const ALPHABET=[
     "lower": "э",
     "name": "Э",
     "translit": "e",
-    "pronunciation": "Como la 'e' española pura en 'mesa'",
+    "pronunciation": "Como la **e** española pura en «mesa»",
     "sounds": [
       "e"
     ],
     "details": {
-      "description": "Vocal anterior media. Como la 'e' española pura, pero indica que la consonante anterior es DURA (no palatalizada).",
-      "similar": "Exactamente como la 'e' de 'mesa', 'tema', 'verde'.",
+      "description": "Vocal anterior media. Como la **e** española pura, pero indica que la consonante anterior es DURA (no palatalizada).",
+      "similar": "Exactamente como la **e** de «mesa», «tema», «verde».",
       "mistakes": "Confundirla con Е. La diferencia es que Э mantiene la consonante anterior dura; Е la palataliza.",
       "tips": "Э aparece principalmente en palabras de origen extranjero y al inicio de algunas palabras.",
       "similar_letters": "Э vs Е: Э mantiene consonante dura; Е palataliza. Э es menos frecuente."
@@ -1695,7 +1695,7 @@ const ALPHABET=[
         "cyrillic": "этаж",
         "translit": "itásh",
         "meaning": "piso (de edificio)",
-        "note": "Э inicial ante 'т' dura",
+        "note": "Э inicial ante **т** dura",
         "lexId": "CMR-01181"
       },
       {
@@ -1709,7 +1709,7 @@ const ALPHABET=[
         "cyrillic": "поэт",
         "translit": "paét",
         "meaning": "poeta",
-        "note": "Э interior, consonante anterior dura",
+        "note": "Э después de vocal",
         "lexId": "CMR-00747"
       },
       {
@@ -1727,16 +1727,16 @@ const ALPHABET=[
     "lower": "ю",
     "name": "Ю",
     "translit": "yu",
-    "pronunciation": "Como 'yu' en 'yudo' o la 'u' después de consonante suavizada",
+    "pronunciation": "Como la «iu» de «ciudad»; después de consonante, una **u** que ablanda la consonante",
     "sounds": [
       "yu",
       "u"
     ],
     "details": {
-      "description": "Al inicio de sílaba o tras vocal: suena 'йу'. Tras consonante: la palataliza y suena 'у'.",
-      "similar": "Como 'yu' en 'yudo'. O como cuando en español decimos 'túu' muy suavemente.",
-      "mistakes": "Como Е, la Ю tiene dos lecturas. Tras consonante no añade 'й' separado: palataliza.",
-      "tips": "Regla paralela a Е/Я: inicio/tras vocal → 'йу'; tras consonante → palataliza + 'у'.",
+      "description": "Al principio de la palabra o después de vocal suena «iu» (й + у). Después de consonante suena **u** y ablanda esa consonante.",
+      "similar": "Como la «iu» de «ciudad» o «viuda».",
+      "mistakes": "Como la Е, la Ю tiene dos lecturas. Después de consonante no se agrega una **i** separada: se ablanda la consonante.",
+      "tips": "Misma regla que Е y Я: al principio o después de vocal → «iu»; después de consonante → la consonante se ablanda y suena **u**.",
       "similar_letters": "Ю vs У: Ю palataliza la consonante anterior; У la mantiene dura. Ю vs Е: misma lógica de palatalización pero con u/e."
     },
     "words": [
@@ -1744,21 +1744,21 @@ const ALPHABET=[
         "cyrillic": "юг",
         "translit": "yuk",
         "meaning": "sur",
-        "note": "Ю inicial → 'йу'",
+        "note": "Ю inicial → «iu»",
         "lexId": "CMR-02849"
       },
       {
         "cyrillic": "люди",
         "translit": "liúdi",
         "meaning": "gente / personas",
-        "note": "Ю palataliza la 'л'",
+        "note": "Ю palataliza la **л**",
         "lexId": "CMR-05415"
       },
       {
         "cyrillic": "любовь",
         "translit": "liubóf",
         "meaning": "amor",
-        "note": "Ю palataliza 'л'",
+        "note": "Ю palataliza **л**",
         "lexId": "CMR-00307"
       },
       {
@@ -1783,16 +1783,16 @@ const ALPHABET=[
     "lower": "я",
     "name": "Я",
     "translit": "ya",
-    "pronunciation": "Como 'ya' en 'yate' o la 'a' después de consonante suavizada",
+    "pronunciation": "Como la «ia» de «piano»; después de consonante, una **a** que ablanda la consonante",
     "sounds": [
       "ya",
       "a"
     ],
     "details": {
-      "description": "Al inicio o tras vocal: suena 'йа'. Tras consonante: palataliza y suena 'а'.",
-      "similar": "Como 'ya' en 'yate', 'yarda'. O como la 'ia' de 'piano' muy rápido.",
-      "mistakes": "Siempre pronunciarla como 'ya'. Tras consonante no hay 'й' separado: la consonante se palataliza.",
-      "tips": "Я también significa 'yo' en ruso. Es la última letra del alfabeto y una palabra clave.",
+      "description": "Al principio de la palabra o después de vocal suena «ia» (й + а). Después de consonante suena **a** y ablanda esa consonante.",
+      "similar": "Como la «ia» de «piano», «Asia», en un solo golpe.",
+      "mistakes": "Pronunciarla siempre «ia». Después de consonante no se agrega una **i** separada: se ablanda la consonante.",
+      "tips": "Я también significa «yo» en ruso. Es la última letra del alfabeto y una palabra clave.",
       "similar_letters": "Я vs А: Я palataliza; А mantiene consonante dura. Я vs Е/Ю: misma lógica palatalizadora."
     },
     "words": [
@@ -1800,14 +1800,14 @@ const ALPHABET=[
         "cyrillic": "я",
         "translit": "ya",
         "meaning": "yo",
-        "note": "Я sola = 'yo'",
+        "note": "Я sola = «yo»",
         "lexId": "CMR-00005"
       },
       {
         "cyrillic": "яблоко",
         "translit": "yáblaka",
         "meaning": "manzana",
-        "note": "Я inicial → 'йа'",
+        "note": "Я inicial → «ia»",
         "lexId": "CMR-02230"
       },
       {
@@ -1821,7 +1821,7 @@ const ALPHABET=[
         "cyrillic": "земля",
         "translit": "zimliá",
         "meaning": "tierra",
-        "note": "Я palataliza 'л' final",
+        "note": "Я palataliza **л** final",
         "lexId": "CMR-00184"
       },
       {
@@ -1867,7 +1867,7 @@ function generateQuizQuestion(letter, allLetters) {
       hint: "Elegí la pronunciación correcta",
       options: options.map(l => ({
         id: l.id,
-        text: l.pronunciation,
+        text: l.pronunciation.replace(/\*\*/g, ""),
         isCorrect: l.id === letter.id
       }))
     };

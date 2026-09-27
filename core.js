@@ -253,3 +253,33 @@ async function azSet(key, value) {
     localStorage.setItem(key, JSON.stringify(value));
   } catch {}
 }
+
+/* ── LETRAS EN NEGRITA (25/09/2026) ──────────────────────────
+   En los textos explicativos, cuando se nombra una letra (latina o
+   cirílica) va en negrita, así no se confunde con una palabra de una
+   letra. azFmt(texto) devuelve lo que se pasa a React:
+     · **x** en el texto → <b>x</b> (letras latinas, grupos como «сч»
+       o terminaciones como «-ть»);
+     · además, toda letra cirílica suelta (Б, я, «в-») va en negrita
+       sola, sin marcarla.
+   Usar solo en texto explicativo en español, nunca en texto ruso
+   (frases, diálogos), donde и, в, я son palabras. */
+function azFmt(texto) {
+  if (texto == null) return texto;
+  const h = window.React && React.createElement;
+  const partes = String(texto).split(/(\*\*[^*]+\*\*)/g);
+  const out = [];
+  partes.forEach((p, i) => {
+    if (!p) return;
+    if (/^\*\*[^*]+\*\*$/.test(p)) { out.push(h ? h("b", { key: "b" + i }, p.slice(2, -2)) : p.slice(2, -2)); return; }
+    const trozos = p.split(/((?<![A-Za-zА-Яа-яЁё\u0301])[А-Яа-яЁё]\u0301?(?![A-Za-zА-Яа-яЁё\u0301]))/g);
+    trozos.forEach((t, k) => {
+      if (!t) return;
+      if (k % 2 === 1) out.push(h ? h("b", { key: "c" + i + "-" + k }, t) : t);
+      else out.push(t);
+    });
+  });
+  return out;
+}
+/* El mismo texto sin las marcas (para búsquedas o atributos) */
+function azSinMarcas(texto) { return String(texto == null ? "" : texto).replace(/\*\*/g, ""); }

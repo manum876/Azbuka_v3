@@ -41,7 +41,7 @@ const YELLOW = "#C9B369";
 /* Vocabulario objetivo de la unidad: lo que en el léxico tiene introducedIn 1.
    Solo esas palabras se enlazan en los diálogos (el resto es incidental). */
 const EJ_U1 = ejerciciosUnidad1();
-const AVISO_ACENTOS = "Los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas.";
+const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas.";
 const OBJETIVO_U1 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(1) >= 0).map(e => e.id);
 
 function hablar(t) { azHablarRu(t); }
@@ -142,7 +142,7 @@ function HojaLetra({ l, c, nivel, setNivel, onClose, green }) {
           h("div", { style: { fontSize: 20, fontWeight: 800, color: c.text }, lang: "ru" }, l.name),
           h("div", { style: { fontSize: 14, color: c.textSub, marginTop: 4 } }, "Suena: /" + l.translit + "/"),
           h("button", { className: "play", style: { marginTop: 10 }, onClick: () => sonidoLetra(l), "aria-label": "Escuchar" }, "▶"))),
-      h("div", { className: "u-text", style: { marginTop: 14 } }, l.pronunciation),
+      h("div", { className: "u-text", style: { marginTop: 14 } }, azFmt(l.pronunciation)),
       h("div", { className: "status-row" },
         [0, 1, 2].map(v => {
           const on = nivel === v;
@@ -152,13 +152,13 @@ function HojaLetra({ l, c, nivel, setNivel, onClose, green }) {
         })),
       h("div", { className: "u-card info" },
         h("div", { className: "info-t" }, "Cómo suena"),
-        h("div", { className: "info-x" }, l.details.description + " " + l.details.similar)),
+        h("div", { className: "info-x" }, azFmt(l.details.description + " " + l.details.similar))),
       h("div", { className: "u-card info" },
         h("div", { className: "info-t" }, "Errores comunes"),
-        h("div", { className: "info-x" }, l.details.mistakes)),
+        h("div", { className: "info-x" }, azFmt(l.details.mistakes))),
       h("div", { className: "u-card info" },
         h("div", { className: "info-t" }, "Consejo"),
-        h("div", { className: "info-x" }, l.details.tips + (l.details.similar_letters ? " " + l.details.similar_letters : ""))),
+        h("div", { className: "info-x" }, azFmt(l.details.tips + (l.details.similar_letters ? " " + l.details.similar_letters : "")))),
       h("div", { className: "u-sec" }, "Palabras para practicar"),
       h("div", { className: "u-card", style: { padding: "4px 16px" } },
         l.words.map((w, i) => {
@@ -168,7 +168,7 @@ function HojaLetra({ l, c, nivel, setNivel, onClose, green }) {
               h(PalabraLetra, { w, letra: l, c }),
               h("div", { style: { fontSize: 12.5, color: c.textSub, fontStyle: "italic", marginTop: 2 } }, w.translit),
               h("div", { style: { fontSize: 14, color: c.text, marginTop: 3 } }, w.meaning),
-              w.note && h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 3, lineHeight: 1.4 } }, w.note)),
+              w.note && h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 3, lineHeight: 1.4 } }, azFmt(w.note))),
             h("button", { className: "play", onClick: () => hablar(e ? e.ru : w.cyrillic), "aria-label": "Escuchar" }, "▶"));
         }))));
 }
@@ -221,7 +221,7 @@ function Tarjetas({ letras, titulo, c, niveles, setNivel, onClose, green, cursiv
               h("div", { className: "fc-nombre" },
                 h("span", { style: { fontSize: 24, fontWeight: 800, color: c.text }, lang: "ru" }, l.name),
                 h("span", { style: { fontSize: 15, color: c.gold, fontWeight: 700 } }, "/" + l.translit + "/")),
-              h("div", { className: "u-text", style: { marginTop: 8, fontSize: 15 } }, l.pronunciation),
+              h("div", { className: "u-text", style: { marginTop: 8, fontSize: 15 } }, azFmt(l.pronunciation)),
               h("div", { className: "fc-word" },
                 h("div", { style: { minWidth: 0 } },
                   h(PalabraLetra, { w, letra: l, c, size: 22 }),
@@ -258,13 +258,13 @@ function Ejemplo({ id, c }) {
 }
 function VistaPronunciacion({ mod, c }) {
   return h(React.Fragment, null,
-    h("p", { className: "u-text", style: { marginTop: 12 } }, mod.intro),
+    h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
     mod.bloques.map((b, k) => h("div", { key: k },
       h("div", { className: "u-sec" }, b.titulo),
-      h("div", { className: "u-text" }, b.texto),
-      b.destacado && h("div", { className: "u-dest" }, b.destacado),
-      b.comparacion && h("div", { className: "u-text", style: { marginTop: 10, fontSize: 14, fontStyle: "italic" } }, b.comparacion),
-      b.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), b.truco),
+      h("div", { className: "u-text" }, azFmt(b.texto)),
+      b.destacado && h("div", { className: "u-dest" }, azFmt(b.destacado)),
+      b.comparacion && h("div", { className: "u-text", style: { marginTop: 10, fontSize: 14, fontStyle: "italic" } }, azFmt(b.comparacion)),
+      b.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), azFmt(b.truco)),
       b.pares && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 14px" } },
         b.pares.map((p, i) => h("div", { key: i, className: "par" },
           h("div", { className: "par-l", lang: "ru" }, p.letras),
@@ -334,7 +334,7 @@ function HojaDialogo({ d, c, onClose }) {
 }
 function VistaLectura({ mod, c, abrirDialogo }) {
   return h(React.Fragment, null,
-    h("p", { className: "u-text", style: { marginTop: 12 } }, mod.intro),
+    h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
     h("div", { className: "u-sec" }, "Leé en voz alta"),
     h(LeerEnVoz, { c }),
     h("div", { className: "u-sec" }, "Primeros diálogos"),
@@ -429,7 +429,7 @@ function App() {
         h("div", { className: "mod-n" }, String(m.n).padStart(2, "0")),
         h("div", { style: { flex: 1, minWidth: 0 } },
           h("div", { className: "mod-t" }, m.titulo, off && h("span", { className: "tag-pronto" }, "Pronto")),
-          h("div", { className: "mod-d" }, m.resumen),
+          h("div", { className: "mod-d" }, azFmt(m.resumen)),
           m.tipo === "examen" && examenU1 && h("div", { style: { fontSize: 12.5, fontWeight: 700, marginTop: 6, color: examenU1.aprobado ? green : "#E2884A" } }, "Última: " + examenU1.pct + " %" + (examenU1.aprobado ? " · aprobada" : "")),
           m.letras && h("div", { className: "mod-l" }, m.letras.map(x => h("span", { key: x, lang: "ru",
             style: niveles[x] === 2 ? { color: green, borderColor: green + "88" } : niveles[x] === 1 ? { color: YELLOW, borderColor: YELLOW + "88" } : null }, x)))));
@@ -441,13 +441,13 @@ function App() {
     h("h1", { className: "u-title" }, mod.titulo),
     mod.tipo === "intro" && mod.secciones.map((s, i) => h("div", { key: i },
       h("div", { className: "u-sec" }, s.titulo),
-      h("div", { className: "u-text" }, s.texto),
-      s.destacado && h("div", { className: "u-dest" }, s.destacado))),
+      h("div", { className: "u-text" }, azFmt(s.texto)),
+      s.destacado && h("div", { className: "u-dest" }, azFmt(s.destacado)))),
     mod.tipo === "intro" && next && h("button", { className: "ubtn", onClick: () => abrirModulo(next.id) }, "Empezar con las letras"),
     (mod.tipo === "pronunciacion" || mod.tipo === "reglas") && h(VistaPronunciacion, { mod, c }),
     mod.tipo === "lectura" && h(VistaLectura, { mod, c, abrirDialogo: setDialogo }),
     mod.tipo === "examen" && h(React.Fragment, null,
-      h("p", { className: "u-text", style: { marginTop: 12 } }, mod.intro),
+      h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
       h("div", { className: "u-card", style: { padding: "6px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
         h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 14.5 } },
           h("span", { style: { fontWeight: 600 } }, p.nombre), h("span", { style: { color: c.textMuted } }, p.n + " ejercicios")))),
@@ -458,7 +458,7 @@ function App() {
     mod.tipo === "reglas" && h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar las reglas"),
     (mod.tipo === "pronunciacion" || mod.tipo === "reglas" || mod.tipo === "lectura") && next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo),
     mod.tipo === "letras" && h(React.Fragment, null,
-      h("p", { className: "u-text", style: { marginTop: 12 } }, mod.intro),
+      h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
       mod.pares && h("table", { className: "ctable" },
         h("tbody", null,
           h("tr", null, h("th", null, "Dura"), h("th", null, "Blanda"), h("th", null, "Con н")),
@@ -468,9 +468,9 @@ function App() {
             h("td", null, h("button", { className: "f-ru", lang: "ru", onClick: () => { hablar(p[2]); setTimeout(() => hablar(p[3]), 700); } }, p[2] + " · " + p[3], h("span", { className: "pl" }, "▶"))))))),
       (mod.secciones || []).map((x, k) => h("div", { key: k },
         h("div", { className: "u-sec" }, x.titulo),
-        h("div", { className: "u-text" }, x.texto),
-        x.destacado && h("div", { className: "u-dest" }, x.destacado),
-        x.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), x.truco),
+        h("div", { className: "u-text" }, azFmt(x.texto)),
+        x.destacado && h("div", { className: "u-dest" }, azFmt(x.destacado)),
+        x.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), azFmt(x.truco)),
         x.ejemplos && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 16px" } },
           x.ejemplos.map(id => h(Ejemplo, { key: id, id, c }))))),
       mod.secciones && h("div", { className: "u-sec" }, "Las letras"),

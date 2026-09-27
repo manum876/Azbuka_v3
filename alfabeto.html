@@ -143,7 +143,7 @@ function App() {
   const q = search.trim().toLowerCase();
   const filtered = !q ? ALPHABET : ALPHABET.filter(l =>
     l.upper.toLowerCase().includes(q) || l.lower.includes(q) ||
-    l.name.toLowerCase().includes(q) || l.pronunciation.toLowerCase().includes(q)
+    l.name.toLowerCase().includes(q) || azSinMarcas(l.pronunciation).toLowerCase().includes(q)
   );
 
   const tabs = page === "detail" ? [
@@ -238,7 +238,7 @@ function App() {
           React.createElement("div", { style: { flex: 1, minWidth: 180 } },
             React.createElement("div", { className: "det-name", style: { color: c.text } }, selected.name),
             React.createElement("div", { className: "det-translit", style: { color: c.textSub } }, "Transliteración: /" + selected.translit + "/"),
-            React.createElement("div", { className: "det-pron", style: { color: c.textMuted } }, selected.pronunciation),
+            React.createElement("div", { className: "det-pron", style: { color: c.textMuted } }, azFmt(selected.pronunciation)),
             React.createElement("button", {
               className: "btn", onClick: () => speakRu(selected.lower),
               style: { background: c.gold, color: "#0F0F14", fontWeight: 700, fontSize: 12.5, padding: "9px 16px", borderRadius: 10 }
@@ -261,21 +261,21 @@ function App() {
       React.createElement("div", { className: "info-grid" },
         React.createElement("div", { className: "info-card", style: { background: c.card, border: `1px solid ${c.border}` } },
           React.createElement("div", { className: "info-title", style: { color: c.gold } }, "Cómo pronunciarlo"),
-          React.createElement("div", { className: "info-text", style: { color: c.text } }, selected.details.description),
+          React.createElement("div", { className: "info-text", style: { color: c.text } }, azFmt(selected.details.description)),
           React.createElement("div", { className: "info-sub", style: { color: c.textSub } }, "Parecido en español"),
-          React.createElement("div", { className: "info-text", style: { color: c.textMuted, marginBottom: 0 } }, selected.details.similar)
+          React.createElement("div", { className: "info-text", style: { color: c.textMuted, marginBottom: 0 } }, azFmt(selected.details.similar))
         ),
         React.createElement("div", { className: "info-card", style: { background: c.card, border: `1px solid ${c.border}` } },
           React.createElement("div", { className: "info-title", style: { color: c.gold } }, "Errores comunes"),
-          React.createElement("div", { className: "info-text", style: { color: c.text } }, selected.details.mistakes),
+          React.createElement("div", { className: "info-text", style: { color: c.text } }, azFmt(selected.details.mistakes)),
           React.createElement("div", { className: "info-sub", style: { color: c.textSub } }, "Consejo"),
-          React.createElement("div", { className: "info-text", style: { color: c.textMuted, marginBottom: 0 } }, selected.details.tips)
+          React.createElement("div", { className: "info-text", style: { color: c.textMuted, marginBottom: 0 } }, azFmt(selected.details.tips))
         )
       ),
 
       React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
         React.createElement("div", { className: "info-title", style: { color: c.gold } }, "Letras similares"),
-        React.createElement("div", { className: "info-text", style: { color: c.text, marginBottom: 0 } }, selected.details.similar_letters)
+        React.createElement("div", { className: "info-text", style: { color: c.text, marginBottom: 0 } }, azFmt(selected.details.similar_letters))
       ),
 
       React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
@@ -287,7 +287,7 @@ function App() {
               showTranslit && React.createElement("div", { className: "word-translit", style: { color: c.textSub } }, w.translit),
               React.createElement("div", { className: "word-cursive", style: { color: c.gold } }, w.cyrillic),
               React.createElement("div", { className: "word-es", style: { color: c.textMuted } }, w.meaning),
-              React.createElement("div", { className: "word-note", style: { color: c.textSub } }, w.note)
+              React.createElement("div", { className: "word-note", style: { color: c.textSub } }, azFmt(w.note))
             ),
             React.createElement("div", { className: "word-btns" },
               React.createElement("button", {

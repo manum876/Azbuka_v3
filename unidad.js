@@ -100,8 +100,8 @@
     const txt = r === AZ_BIEN ? "✓ Bien" : r === AZ_CASI ? "≈ Casi" : "✗ Mal";
     return h("div", null,
       h("span", { className: "pr-res", style: { color: col, background: col + "22", border: "1px solid " + col } }, txt),
-      ej.explicacion && h("div", { className: "pr-exp" }, ej.explicacion),
-      r !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, "Para recordarlo: " + ej.recordar));
+      ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
+      r !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt("Para recordarlo: " + ej.recordar)));
   }
 
   /* ── Formas ── */
@@ -111,7 +111,7 @@
     const larga = ops.some(o => o.length > 14);
     const tocar = o => { if (elegida) return; setElegida(o); onRes(o === ej.correcta ? AZ_BIEN : AZ_MAL); };
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, ej.pide),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.grande && h("div", { className: "pr-grande", lang: "ru" }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande }),
       h("div", { className: "pr-ops" + (larga ? " una" : "") }, ops.map(o => {
@@ -134,7 +134,7 @@
     };
     const reintentar = () => { setTxt(""); setR(null); if (ref.current) ref.current.focus(); };
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, ej.pide),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.grande && h("div", { className: "pr-grande", lang: "ru" }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.pista && h("div", { className: "pr-pista" }, ej.pista),
@@ -148,8 +148,8 @@
         }),
         h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || (r && r.resultado === AZ_BIEN) }, "Comprobar")),
       r && h(AzCorreccion, { r, dark }),
-      hecho != null && r && h("div", { className: "pr-exp" }, ej.explicacion),
-      hecho != null && r && r.resultado !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, "Para recordarlo: " + ej.recordar),
+      hecho != null && r && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
+      hecho != null && r && r.resultado !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt("Para recordarlo: " + ej.recordar)),
       r && r.resultado !== AZ_BIEN && !examen && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: reintentar }, "Intentar de nuevo"));
   }
 
@@ -164,7 +164,7 @@
       onRes(ok ? AZ_BIEN : AZ_MAL);
     };
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, ej.pide),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.audio && h(Oir, { texto: ej.audio, auto: false }),
       h("div", { className: "pr-armado", lang: "ru" }, armado.map((i, k) =>
         h("button", { key: k, className: "pr-ficha", disabled: r != null, onClick: () => setArmado(a => a.filter(x => x !== i)) }, ej.fichas[i]))),
@@ -203,7 +203,7 @@
       } else { setFallos(f => f + 1); setMalo(d); setTimeout(() => setMalo(null), 500); }
     };
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, ej.pide),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       h("div", { className: "pr-em" },
         h("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, ej.pares.map((p, i) =>
           h("button", { key: i, lang: "ru", className: "pr-op" + (listos.indexOf(i) >= 0 ? " ok hecho" : sel === i ? " sel" : ""),
@@ -324,7 +324,7 @@
               h("div", { className: "pr-exp", style: { marginTop: 6 } }, "Estos vuelven en las próximas sesiones hasta que te salgan bien."),
               h("div", { className: "pr-lista" }, costaron.map(e => h("div", { key: e.id },
                 h("div", { style: { fontWeight: 700 } }, e.pide || e.afirmacion, e.grande ? " " + e.grande : ""),
-                h("div", { style: { color: c.textSub } }, e.explicacion)))))
+                h("div", { style: { color: c.textSub } }, azFmt(e.explicacion))))))
           : h("div", { className: "pr-exp", style: { marginTop: 18, fontSize: 15 } }, "Todo bien en esta sesión."),
         h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 10 } },
           h("button", { className: "pr-btn", onClick: empezar }, "Otra sesión"),
