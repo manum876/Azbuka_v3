@@ -74,7 +74,10 @@ function HojaLetra({ l, c, nivel, setNivel, onClose, green }) {
         h("div", { style: { flex: 1, minWidth: 0 } },
           h("div", { style: { fontSize: 20, fontWeight: 800, color: c.text }, lang: "ru" }, l.name),
           h("div", { style: { fontSize: 14, color: c.textSub, marginTop: 4 } }, "Suena: /" + l.translit + "/"),
-          h("button", { className: "play", style: { marginTop: 10 }, onClick: () => sonidoLetra(l), "aria-label": "Escuchar" }, "▶"))),
+          h("div", { style: { display: "flex", gap: 8, marginTop: 10, alignItems: "center" } },
+            h("button", { className: "play", onClick: () => sonidoLetra(l), "aria-label": "Escuchar" }, "▶"),
+            h("a", { href: "alfabeto.html?mano=" + encodeURIComponent(l.upper), onClick: e => azNavigate(e, "alfabeto.html?mano=" + encodeURIComponent(l.upper)),
+              style: { fontSize: 13, fontWeight: 700, color: c.gold, textDecoration: "none", padding: "8px 10px", border: `1px solid ${c.gold}66`, borderRadius: 10 } }, "✍️ Escribirla a mano")))),
       h("div", { className: "u-text", style: { marginTop: 14 } }, azFmt(l.pronunciation)),
       h("div", { className: "status-row" },
         [0, 1, 2].map(v => {

@@ -74,6 +74,7 @@
 <script src="progress.js"></script>
 <script src="data-alphabet.js"></script>
 <script src="shell.js"></script>
+<script src="mano.js"></script>
 <script>
 const { useState, useEffect } = htmPreact;
 
@@ -88,7 +89,9 @@ function highlightWord(word, letter) {
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [page, setPage] = useState("grid"); // grid | detail
+  const MANO0 = new URLSearchParams(location.search).get("mano");
+  const [page, setPage] = useState(MANO0 ? "mano" : "grid"); // grid | detail | mano
+  const [manoLetra, setManoLetra] = useState(MANO0 || "А");
   const [selectedId, setSelectedId] = useState(null);
   const [search, setSearch] = useState("");
   const [showPronun, setShowPronun] = useState(true);
@@ -137,7 +140,9 @@ function App() {
     l.name.toLowerCase().includes(q) || azSinMarcas(l.pronunciation).toLowerCase().includes(q)
   );
 
-  const tabs = page === "detail" ? [
+  const tabs = page === "mano" ? [
+    { id: "back", icon: "⊞", label: "Alfabeto", action: () => setPage("grid") }
+  ] : page === "detail" ? [
     { id: "back", icon: "⊞", label: "Alfabeto", action: () => setPage("grid") },
     { id: "prev", icon: "‹", label: "Anterior", action: goPrev },
     { id: "count", icon: "", label: `${idx + 1}/${ALPHABET.length}` },
@@ -147,6 +152,13 @@ function App() {
   return React.createElement(AzShell, {
     darkMode, setDarkMode, moduleId: "alfabeto", tabs
   },
+
+    page === "mano" && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
+      React.createElement("h1", { style: { fontSize: 24, fontWeight: 800, color: c.text, margin: "4px 0 6px" } }, "Escribir a mano"),
+      React.createElement("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6, marginBottom: 12 } },
+        "Así escriben los rusos a mano. Dibujá la letra con el dedo: primero calcándola y después sola."),
+      React.createElement(AzEscrituraMano, { key: manoLetra, letras: ALPHABET, inicial: manoLetra, c })
+    ),
 
     page === "grid" && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
 
@@ -174,6 +186,11 @@ function App() {
       React.createElement("div", { className: "pbar-track", style: { background: c.bg3 } },
         React.createElement("div", { className: "pbar-fill", style: { width: pct + "%", background: green } })
       ),
+
+      React.createElement("button", {
+        className: "btn", onClick: () => { setManoLetra("А"); setPage("mano"); window.scrollTo(0, 0); },
+        style: { width: "100%", marginTop: 14, padding: "12px 16px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 14, fontWeight: 700 }
+      }, "✍️ Escribir a mano"),
 
       React.createElement("div", { className: "toggle-row" },
         React.createElement("div", {
@@ -233,7 +250,11 @@ function App() {
             React.createElement("button", {
               className: "btn", onClick: () => speakRu(selected.lower),
               style: { background: c.gold, color: "#0F0F14", fontWeight: 700, fontSize: 12.5, padding: "9px 16px", borderRadius: 10 }
-            }, "▶ Escuchar letra")
+            }, "▶ Escuchar letra"),
+            React.createElement("button", {
+              className: "btn", onClick: () => { setManoLetra(selected.upper); setPage("mano"); window.scrollTo(0, 0); },
+              style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontWeight: 700, fontSize: 12.5, padding: "9px 16px", borderRadius: 10, marginLeft: 8 }
+            }, "✍️ Escribirla")
           )
         ),
         React.createElement("div", { className: "status-row", style: { borderColor: c.border } },
