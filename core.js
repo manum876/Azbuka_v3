@@ -262,7 +262,8 @@ async function azSet(key, value) {
      · **x** en el texto → <b>x</b> (letras latinas, grupos como «сч»
        o terminaciones como «-ть»);
      · además, toda letra cirílica suelta (Б, я, «в-») va en negrita
-       sola, sin marcarla.
+       sola, sin marcarla, salvo que esté dentro de una frase rusa
+       (al lado de otra palabra rusa: «я из…», «а у тебя́»).
    Usar solo en texto explicativo en español, nunca en texto ruso
    (frases, diálogos), donde и, в, я son palabras. */
 function azFmt(texto) {
@@ -270,15 +271,34 @@ function azFmt(texto) {
   const h = window.React && React.createElement;
   const partes = String(texto).split(/(\*\*[^*]+\*\*)/g);
   const out = [];
+  /* ¿La letra suelta está dentro de una frase rusa? (al lado de una palabra
+     rusa de 2 letras o más: «я из…», «а у тебя́») → es una palabra, no una letra */
+  const W = /[А-Яа-яЁё\u0301]/;
+  const vecina = (t, i, paso) => {
+    let j = i;
+    for (let vuelta = 0; vuelta < 4; vuelta++) {
+      while (j >= 0 && j < t.length && /[\s,.;:!?«»"()—–…]/.test(t[j])) j += paso;
+      let n = 0;
+      while (j >= 0 && j < t.length && (W.test(t[j]) || t[j] === "-")) { if (W.test(t[j]) && t[j] !== "\u0301") n++; j += paso; }
+      if (n >= 2) return true;      /* palabra rusa al lado: es una frase */
+      if (n === 0) return false;    /* al lado no hay nada ruso */
+      /* n === 1: otra letra o palabra de una letra; seguir mirando */
+    }
+    return false;
+  };
   partes.forEach((p, i) => {
     if (!p) return;
     if (/^\*\*[^*]+\*\*$/.test(p)) { out.push(h ? h("b", { key: "b" + i }, p.slice(2, -2)) : p.slice(2, -2)); return; }
-    const trozos = p.split(/((?<![A-Za-zА-Яа-яЁё\u0301])[А-Яа-яЁё]\u0301?(?![A-Za-zА-Яа-яЁё\u0301]))/g);
-    trozos.forEach((t, k) => {
-      if (!t) return;
-      if (k % 2 === 1) out.push(h ? h("b", { key: "c" + i + "-" + k }, t) : t);
-      else out.push(t);
-    });
+    const rx = /(?<![A-Za-zА-Яа-яЁё\u0301])[А-Яа-яЁё]\u0301?(?![A-Za-zА-Яа-яЁё\u0301])/g;
+    let ult = 0, m;
+    while ((m = rx.exec(p))) {
+      const ini = m.index, fin = m.index + m[0].length;
+      if (vecina(p, ini - 1, -1) || vecina(p, fin, 1)) continue;
+      if (ini > ult) out.push(p.slice(ult, ini));
+      out.push(h ? h("b", { key: "c" + i + "-" + ini }, m[0]) : m[0]);
+      ult = fin;
+    }
+    if (ult < p.length) out.push(p.slice(ult));
   });
   return out;
 }

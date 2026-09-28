@@ -2,6 +2,9 @@
    DATA-DIALOGOS.JS — Diálogos del módulo Diálogos (dialogos.html)
    ------------------------------------------------------------
    Versión v3 (24/09/2026). Reemplaza al data-dialogos.js del repo viejo.
+   Actualizado el 26/09/2026 (Unidad 2): DLG-031 a DLG-036 (campo unidad: 2),
+   y los nombres de personajes que eran PROPIO ahora apuntan a su entrada
+   del léxico (Ма́ша, Лу́кас, Ди́ма…).
    Actualizado el 25/09/2026: la preposición до, átona, se translitera
    como suena («Da svidániya», «da záftra»).
 
@@ -95,8 +98,8 @@ const DLG_FUNCIONES = [["saludar","Saludar"],["despedirse","Despedirse"],["prese
 const DIALOGOS = [
 { "id":"DLG-001","titulo":"Saludo básico","tituloRu":"Как дела́?","situacion":"conocer","funcion":"saludar","nivel":"A1","personajes":["masha","lucas"],"vy":{"masha":"olga"},
   "lineas": [
-    {"p":"masha","ru":"Приве́т, Лу́кас!","tr":"Priviét, Lúkas!","es":"¡Hola, Lucas!","lex":["CMR-02527","PROPIO"],"f":["FRS-001"],"cul":"CUL-001","vy":{"ru":"Здра́вствуйте, Лу́кас!","tr":"Zdrástvuiti, Lúkas!","es":"¡Hola, Lucas!","lex":["CMR-05479","PROPIO"],"f":["FRS-002"],"obs":"Здра́вствуйте es el saludo formal: se usa con вы."}},
-    {"p":"lucas","ru":"Приве́т! Как дела́?","tr":"Priviét! Kak dilá?","es":"¡Hola! ¿Cómo andás?","lex":["CMR-02527","CMR-00019","CMR-00065"],"f":["FRS-001","FRS-006"],"cul":"CUL-002","vy":{"ru":"Здра́вствуйте, О́льга Петро́вна! Как у вас дела́?","tr":"Zdrástvuiti, Ólga Pitróvna! Kak u vas dilá?","es":"¡Hola, Olga Petrovna! ¿Cómo le va?","lex":["CMR-05479","PROPIO","PROPIO","CMR-00019","CMR-00021","CMR-00038","CMR-00065"],"f":["FRS-002","FRS-007"],"cul":"CUL-003"}},
+    {"p":"masha","ru":"Приве́т, Лу́кас!","tr":"Priviét, Lúkas!","es":"¡Hola, Lucas!","lex":["CMR-02527","CMR-05557"],"f":["FRS-001"],"cul":"CUL-001","vy":{"ru":"Здра́вствуйте, Лу́кас!","tr":"Zdrástvuiti, Lúkas!","es":"¡Hola, Lucas!","lex":["CMR-05479","CMR-05557"],"f":["FRS-002"],"obs":"Здра́вствуйте es el saludo formal: se usa con вы."}},
+    {"p":"lucas","ru":"Приве́т! Как дела́?","tr":"Priviét! Kak dilá?","es":"¡Hola! ¿Cómo andás?","lex":["CMR-02527","CMR-00019","CMR-00065"],"f":["FRS-001","FRS-006"],"cul":"CUL-002","vy":{"ru":"Здра́вствуйте, О́льга Петро́вна! Как у вас дела́?","tr":"Zdrástvuiti, Ólga Pitróvna! Kak u vas dilá?","es":"¡Hola, Olga Petrovna! ¿Cómo le va?","lex":["CMR-05479","CMR-05558","PROPIO","CMR-00019","CMR-00021","CMR-00038","CMR-00065"],"f":["FRS-002","FRS-007"],"cul":"CUL-003"}},
     {"p":"masha","ru":"Хорошо́, спаси́бо. А у тебя́?","tr":"Jarashó, spasíba. A u tibiá?","es":"Bien, gracias. ¿Y vos?","lex":["CMR-00190","CMR-02213","CMR-00010","CMR-00021","CMR-00033"],"f":["FRS-024"],"vy":{"ru":"Хорошо́, спаси́бо. А у вас?","tr":"Jarashó, spasíba. A u vas?","es":"Bien, gracias. ¿Y usted?","lex":["CMR-00190","CMR-02213","CMR-00010","CMR-00021","CMR-00038"],"f":["FRS-024"]}},
     {"p":"lucas","ru":"Норма́льно.","tr":"Narmálna.","es":"Bien, sin novedades.","lex":["CMR-03966"],"f":["FRS-008"],"obs":"Норма́льно no es «normal»: es la respuesta neutra, «bien»."}
   ] },
@@ -111,14 +114,14 @@ const DIALOGOS = [
 { "id":"DLG-003","titulo":"¿Cómo te llamás?","tituloRu":"Как тебя́ зову́т?","situacion":"conocer","funcion":"presentarse","nivel":"A1","personajes":["lucas","masha"],"vy":{"masha":"olga"},
   "lineas": [
     {"p":"lucas","ru":"Приве́т! Как тебя́ зову́т?","tr":"Priviét! Kak tibiá zavút?","es":"¡Hola! ¿Cómo te llamás?","lex":["CMR-02527","CMR-00019","CMR-00033","CMR-00912"],"f":["FRS-001","FRS-015"],"obs":"Literalmente «¿cómo te llaman?»: тебя́ es acusativo de ты.","vy":{"ru":"Здра́вствуйте! Как вас зову́т?","tr":"Zdrástvuiti! Kak vas zavút?","es":"¡Hola! ¿Cómo se llama?","lex":["CMR-05479","CMR-00019","CMR-00038","CMR-00912"],"f":["FRS-002","FRS-016"],"obs":"Literalmente «¿cómo lo llaman?»: вас es acusativo de вы."}},
-    {"p":"masha","ru":"Меня́ зову́т Ма́ша. А тебя́?","tr":"Miniá zavút Másha. A tibiá?","es":"Me llamo Masha. ¿Y vos?","lex":["CMR-00005","CMR-00912","PROPIO","CMR-00010","CMR-00033"],"f":["FRS-017"],"vy":{"ru":"Меня́ зову́т О́льга Петро́вна. А вас?","tr":"Miniá zavút Ólga Pitróvna. A vas?","es":"Me llamo Olga Petrovna. ¿Y usted?","lex":["CMR-00005","CMR-00912","PROPIO","PROPIO","CMR-00010","CMR-00038"],"f":["FRS-017"],"cul":"CUL-003"}},
-    {"p":"lucas","ru":"Лу́кас.","tr":"Lúkas.","es":"Lucas.","lex":["PROPIO"]},
+    {"p":"masha","ru":"Меня́ зову́т Ма́ша. А тебя́?","tr":"Miniá zavút Másha. A tibiá?","es":"Me llamo Masha. ¿Y vos?","lex":["CMR-00005","CMR-00912","CMR-05555","CMR-00010","CMR-00033"],"f":["FRS-017"],"vy":{"ru":"Меня́ зову́т О́льга Петро́вна. А вас?","tr":"Miniá zavút Ólga Pitróvna. A vas?","es":"Me llamo Olga Petrovna. ¿Y usted?","lex":["CMR-00005","CMR-00912","CMR-05558","PROPIO","CMR-00010","CMR-00038"],"f":["FRS-017"],"cul":"CUL-003"}},
+    {"p":"lucas","ru":"Лу́кас.","tr":"Lúkas.","es":"Lucas.","lex":["CMR-05557"]},
     {"p":"masha","ru":"О́чень прия́тно!","tr":"Óchin priyátna!","es":"¡Mucho gusto!","lex":["CMR-00069","CMR-02314"],"f":["FRS-018"]},
     {"p":"lucas","ru":"Мне то́же!","tr":"Mnie tózhi!","es":"¡Igualmente!","lex":["CMR-00005","CMR-00111"],"f":["FRS-019"]}
   ] },
 { "id":"DLG-004","titulo":"¿De dónde sos?","tituloRu":"Отку́да ты?","situacion":"conocer","funcion":"hablar-de-uno","nivel":"A1","personajes":["masha","lucas"],"vy":{"masha":"olga"},
   "lineas": [
-    {"p":"masha","ru":"Лу́кас, отку́да ты?","tr":"Lúkas, atkúda ty?","es":"Lucas, ¿de dónde sos?","lex":["PROPIO","CMR-00761","CMR-00033"],"f":["FRS-021"],"cul":"CUL-001","vy":{"ru":"Лу́кас, отку́да вы?","tr":"Lúkas, atkúda vy?","es":"Lucas, ¿de dónde es usted?","lex":["PROPIO","CMR-00761","CMR-00038"],"f":["FRS-022"]}},
+    {"p":"masha","ru":"Лу́кас, отку́да ты?","tr":"Lúkas, atkúda ty?","es":"Lucas, ¿de dónde sos?","lex":["CMR-05557","CMR-00761","CMR-00033"],"f":["FRS-021"],"cul":"CUL-001","vy":{"ru":"Лу́кас, отку́да вы?","tr":"Lúkas, atkúda vy?","es":"Lucas, ¿de dónde es usted?","lex":["CMR-05557","CMR-00761","CMR-00038"],"f":["FRS-022"]}},
     {"p":"lucas","ru":"Я из Аргенти́ны. А ты?","tr":"Ya is Arguintíny. A ty?","es":"Soy de Argentina. ¿Y vos?","lex":["CMR-00005","CMR-00020","PROPIO","CMR-00010","CMR-00033"],"f":["FRS-023"],"obs":"Из + genitivo: Аргенти́на → из Аргенти́ны.","vy":{"ru":"Я из Аргенти́ны. А вы?","tr":"Ya is Arguintíny. A vy?","es":"Soy de Argentina. ¿Y usted?","lex":["CMR-00005","CMR-00020","PROPIO","CMR-00010","CMR-00038"],"f":["FRS-023"],"obs":"Из + genitivo: Аргенти́на → из Аргенти́ны."}},
     {"p":"masha","ru":"А я из Москвы́.","tr":"A ya is Maskvý.","es":"Y yo, de Moscú.","lex":["CMR-00010","CMR-00005","CMR-00020","PROPIO"],"f":["FRS-023"]},
     {"p":"lucas","ru":"Интере́сно!","tr":"Intiriésna!","es":"¡Qué interesante!","lex":["CMR-01266"]}
@@ -167,14 +170,14 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-011","titulo":"La familia","tituloRu":"Семья́","situacion":"casa","funcion":"hablar-de-uno","nivel":"A1","personajes":["lucas","masha"],
   "lineas": [
-    {"p":"lucas","ru":"Ма́ша, у тебя́ есть брат?","tr":"Másha, u tibiá yest brat?","es":"Masha, ¿tenés hermano?","lex":["PROPIO","CMR-00021","CMR-00033","CMR-00006","CMR-00542"],"obs":"У тебя́ есть: «tenés». Literalmente, «junto a vos hay»."},
-    {"p":"masha","ru":"Да, есть. Его́ зову́т Ди́ма.","tr":"Da, yest. Yivó zavút Díma.","es":"Sí. Se llama Dima.","lex":["CMR-00116","CMR-00006","CMR-00007","CMR-00912","PROPIO"],"cul":"CUL-003"},
+    {"p":"lucas","ru":"Ма́ша, у тебя́ есть брат?","tr":"Másha, u tibiá yest brat?","es":"Masha, ¿tenés hermano?","lex":["CMR-05555","CMR-00021","CMR-00033","CMR-00006","CMR-00542"],"obs":"У тебя́ есть: «tenés». Literalmente, «junto a vos hay»."},
+    {"p":"masha","ru":"Да, есть. Его́ зову́т Ди́ма.","tr":"Da, yest. Yivó zavút Díma.","es":"Sí. Se llama Dima.","lex":["CMR-00116","CMR-00006","CMR-00007","CMR-00912","CMR-05556"],"cul":"CUL-003"},
     {"p":"lucas","ru":"А сестра́?","tr":"A sistrá?","es":"¿Y hermana?","lex":["CMR-00010","CMR-00982"]},
     {"p":"masha","ru":"Нет, сестры́ нет.","tr":"Niet, sistrý niet.","es":"No, hermana no tengo.","lex":["CMR-00107","CMR-00982","CMR-00107"],"obs":"Нет + genitivo: сестра́ → сестры́."}
   ] },
 { "id":"DLG-012","titulo":"¿Qué hora es?","tituloRu":"Кото́рый час?","situacion":"dia","funcion":"datos","nivel":"A1","personajes":["lucas","dima"],
   "lineas": [
-    {"p":"lucas","ru":"Ди́ма, кото́рый час?","tr":"Díma, katóryi chas?","es":"Dima, ¿qué hora es?","lex":["PROPIO","CMR-00022","CMR-00200"],"f":["FRS-043"]},
+    {"p":"lucas","ru":"Ди́ма, кото́рый час?","tr":"Díma, katóryi chas?","es":"Dima, ¿qué hora es?","lex":["CMR-05556","CMR-00022","CMR-00200"],"f":["FRS-043"]},
     {"p":"dima","ru":"Три часа́. А что?","tr":"Tri chisá. A shto?","es":"Las tres. ¿Por?","lex":["CMR-00150","CMR-00200","CMR-00010","CMR-00009"],"obs":"Два, три y четы́re van con genitivo singular: час → три часа́."},
     {"p":"lucas","ru":"Я опа́здываю!","tr":"Ya apázdyvayu!","es":"¡Llego tarde!","lex":["CMR-00005","CMR-05146"]},
     {"p":"dima","ru":"Тогда́ беги́!","tr":"Tagdá biguí!","es":"¡Entonces corré!","lex":["CMR-00112","CMR-00824"],"obs":"Беги́ es imperativo de бежа́ть («correr»), con ты."}
@@ -195,7 +198,7 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-015","titulo":"En casa","tituloRu":"До́ма","situacion":"casa","funcion":"datos","nivel":"A1","personajes":["dima","masha"],
   "lineas": [
-    {"p":"dima","ru":"Ма́ша, ты до́ма?","tr":"Másha, ty dóma?","es":"Masha, ¿estás en casa?","lex":["PROPIO","CMR-00033","CMR-00832"]},
+    {"p":"dima","ru":"Ма́ша, ты до́ма?","tr":"Másha, ty dóma?","es":"Masha, ¿estás en casa?","lex":["CMR-05555","CMR-00033","CMR-00832"]},
     {"p":"masha","ru":"Да, я до́ма.","tr":"Da, ya dóma.","es":"Sí, estoy en casa.","lex":["CMR-00116","CMR-00005","CMR-00832"],"obs":"En presente no se dice «estoy»: я до́ма, «yo en casa»."},
     {"p":"dima","ru":"А где ма́ма?","tr":"A gdie máma?","es":"¿Y mamá dónde está?","lex":["CMR-00010","CMR-00079","CMR-00309"],"f":["FRS-036"]},
     {"p":"masha","ru":"Она́ на ку́хне.","tr":"Aná na kújni.","es":"Está en la cocina.","lex":["CMR-00013","CMR-00004","CMR-00997"],"obs":"На + preposicional para decir dónde: ку́хня → на ку́хне."}
@@ -230,7 +233,7 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-020","titulo":"Presentar a un amigo","tituloRu":"Познако́мься!","situacion":"conocer","funcion":"presentarse","nivel":"A1","personajes":["masha","dima","lucas"],
   "lineas": [
-    {"p":"masha","ru":"Ди́ма, познако́мься, э́то мой друг Лу́кас.","tr":"Díma, paznakómsia, éta moi druk Lúkas.","es":"Dima, te presento a mi amigo Lucas.","lex":["PROPIO","CMR-01793","CMR-00012","CMR-00060","CMR-00106","PROPIO"],"f":["FRS-020"],"obs":"Познако́мься, con ты. A varios o con вы: познако́мьтесь."},
+    {"p":"masha","ru":"Ди́ма, познако́мься, э́то мой друг Лу́кас.","tr":"Díma, paznakómsia, éta moi druk Lúkas.","es":"Dima, te presento a mi amigo Lucas.","lex":["CMR-05556","CMR-01793","CMR-00012","CMR-00060","CMR-00106","CMR-05557"],"f":["FRS-020"],"obs":"Познако́мься, con ты. A varios o con вы: познако́мьтесь."},
     {"p":"dima","ru":"Приве́т, Лу́кас!","tr":"Priviét, Lúkas!","es":"¡Hola, Lucas!","lex":["CMR-02527","PROPIO"],"f":["FRS-001"]},
     {"p":"lucas","ru":"Приве́т! О́чень прия́тно.","tr":"Priviét! Óchin priyátna.","es":"¡Hola! Mucho gusto.","lex":["CMR-02527","CMR-00069","CMR-02314"],"f":["FRS-001","FRS-018"]},
     {"p":"dima","ru":"Отку́да ты?","tr":"Atkúda ty?","es":"¿De dónde sos?","lex":["CMR-00761","CMR-00033"],"f":["FRS-021"]},
@@ -244,7 +247,7 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-022","titulo":"Me siento mal","tituloRu":"Мне пло́хо","situacion":"salud","funcion":"salud","nivel":"A1","personajes":["masha","lucas"],"vy":{"masha":"olga"},
   "lineas": [
-    {"p":"masha","ru":"Лу́кас, как ты себя́ чу́вствуешь?","tr":"Lúkas, kak ty sibiá chústvuyish?","es":"Lucas, ¿cómo te sentís?","lex":["PROPIO","CMR-00019","CMR-00033","CMR-00047","CMR-00428"],"f":["FRS-045"],"cul":"CUL-001","vy":{"ru":"Лу́кас, как вы себя́ чу́вствуете?","tr":"Lúkas, kak vy sibiá chústvuyiti?","es":"Lucas, ¿cómo se siente?","lex":["PROPIO","CMR-00019","CMR-00038","CMR-00047","CMR-00428"]}},
+    {"p":"masha","ru":"Лу́кас, как ты себя́ чу́вствуешь?","tr":"Lúkas, kak ty sibiá chústvuyish?","es":"Lucas, ¿cómo te sentís?","lex":["CMR-05557","CMR-00019","CMR-00033","CMR-00047","CMR-00428"],"f":["FRS-045"],"cul":"CUL-001","vy":{"ru":"Лу́кас, как вы себя́ чу́вствуете?","tr":"Lúkas, kak vy sibiá chústvuyiti?","es":"Lucas, ¿cómo se siente?","lex":["CMR-05557","CMR-00019","CMR-00038","CMR-00047","CMR-00428"]}},
     {"p":"lucas","ru":"Пло́хо. У меня́ боли́т голова́.","tr":"Plója. U miniá balít galavá.","es":"Mal. Me duele la cabeza.","lex":["CMR-00947","CMR-00021","CMR-00005","CMR-05466","CMR-00132"],"f":["FRS-046"],"obs":"У меня́ боли́т + lo que duele, en nominativo."},
     {"p":"masha","ru":"Тебе́ ну́жен врач?","tr":"Tibié núzhin vrach?","es":"¿Necesitás un médico?","lex":["CMR-00033","CMR-00279","CMR-00653"],"obs":"Ну́жен concuerda con врач (masculino).","vy":{"ru":"Вам ну́жен врач?","tr":"Vam núzhin vrach?","es":"¿Necesita un médico?","lex":["CMR-00038","CMR-00279","CMR-00653"],"obs":"Ну́жен concuerda con врач (masculino)."}},
     {"p":"lucas","ru":"Нет, я про́сто уста́л.","tr":"Niet, ya prósta ustál.","es":"No, estoy cansado, nada más.","lex":["CMR-00107","CMR-00005","CMR-00138","CMR-02037"],"obs":"Уста́л: pasado de уста́ть, «me cansé». Una mujer dice уста́ла."}
@@ -288,7 +291,7 @@ const DIALOGOS = [
   ] },
 { "id":"DLG-028","titulo":"Cumpleaños","tituloRu":"День рожде́ния","situacion":"ocio","funcion":"felicitar","nivel":"A2","personajes":["lucas","masha"],
   "lineas": [
-    {"p":"lucas","ru":"Ма́ша, когда́ у тебя́ день рожде́ния?","tr":"Másha, kagdá u tibiá dien razhdiéniya?","es":"Masha, ¿cuándo es tu cumpleaños?","lex":["PROPIO","CMR-00055","CMR-00021","CMR-00033","CMR-00071","CMR-01230"]},
+    {"p":"lucas","ru":"Ма́ша, когда́ у тебя́ день рожде́ния?","tr":"Másha, kagdá u tibiá dien razhdiéniya?","es":"Masha, ¿cuándo es tu cumpleaños?","lex":["CMR-05555","CMR-00055","CMR-00021","CMR-00033","CMR-00071","CMR-01230"]},
     {"p":"masha","ru":"За́втра!","tr":"Záftra!","es":"¡Mañana!","lex":["CMR-00865"]},
     {"p":"lucas","ru":"Пра́вда? Тогда́ с днём рожде́ния!","tr":"Právda? Tagdá s dniom razhdiéniya!","es":"¿En serio? ¡Entonces feliz cumpleaños!","lex":["CMR-00418","CMR-00112","CMR-00008","CMR-00071","CMR-01230"],"f":["FRS-051"],"obs":"С днём рожде́ния: с + instrumental, fórmula fija."},
     {"p":"masha","ru":"Нет, нет, ещё ра́но! Поздра́вишь за́втра.","tr":"Niet, niet, yischó rána! Pazdrávish záftra.","es":"¡No, no, todavía es temprano! Me saludás mañana.","lex":["CMR-00107","CMR-00107","CMR-00045","CMR-00817","CMR-05117","CMR-00865"],"cul":"CUL-006"}
@@ -307,6 +310,61 @@ const DIALOGOS = [
     {"p":"transeunta","ru":"Что случи́лось?","tr":"Shto sluchílas?","es":"¿Qué pasó?","lex":["CMR-00009","CMR-00638"],"f":["FRS-041"]},
     {"p":"lucas","ru":"Челове́ку пло́хо! Вы́зовите ско́рую!","tr":"Chilaviéku plója! Výzaviti skóruyu!","es":"¡Alguien se siente mal! ¡Llame a una ambulancia!","lex":["CMR-00039","CMR-00947","CMR-00750","CMR-00492"],"f":["FRS-042"],"obs":"Ско́рая (по́мощь) es la ambulancia; se declina como adjetivo: вы́звать ско́рую.","cul":"CUL-008"},
     {"p":"transeunta","ru":"Уже́ звоню́!","tr":"Uzhé zvaniú!","es":"¡Ya llamo!","lex":["CMR-00050","CMR-01043"]}
+  ] },
+{ "id":"DLG-031","titulo":"Nos conocemos","tituloRu":"Как тебя́ зову́т?","situacion":"conocer","funcion":"presentarse","nivel":"A1","unidad":2,"personajes":["lucas","masha"],
+  "lineas": [
+    {"p":"lucas","ru":"Приве́т!","tr":"Priviét!","es":"¡Hola!","lex":["CMR-02527"],"f":["FRS-001"]},
+    {"p":"masha","ru":"Приве́т!","tr":"Priviét!","es":"¡Hola!","lex":["CMR-02527"],"f":["FRS-001"]},
+    {"p":"lucas","ru":"Как тебя́ зову́т?","tr":"Kak tibiá zavút?","es":"¿Cómo te llamás?","lex":["CMR-00019","CMR-00033","CMR-00912"],"f":["FRS-015"]},
+    {"p":"masha","ru":"Меня́ зову́т Ма́ша. А тебя́?","tr":"Miniá zavút Másha. A tibiá?","es":"Me llamo Masha. ¿Y vos?","lex":["CMR-00005","CMR-00912","CMR-05555","CMR-00010","CMR-00033"],"f":["FRS-017"]},
+    {"p":"lucas","ru":"Меня́ зову́т Лу́кас.","tr":"Miniá zavút Lúkas.","es":"Me llamo Lucas.","lex":["CMR-00005","CMR-00912","CMR-05557"],"f":["FRS-017"]},
+    {"p":"masha","ru":"О́чень прия́тно!","tr":"Óchin priyátna!","es":"¡Mucho gusto!","lex":["CMR-00069","CMR-02314"],"f":["FRS-018"]},
+    {"p":"lucas","ru":"Мне то́же.","tr":"Mnie tózhi.","es":"Igualmente.","lex":["CMR-00005","CMR-00111"],"f":["FRS-019"]}
+  ] },
+{ "id":"DLG-032","titulo":"¿De dónde sos?","tituloRu":"Отку́да ты?","situacion":"conocer","funcion":"hablar-de-uno","nivel":"A1","unidad":2,"personajes":["masha","lucas"],
+  "lineas": [
+    {"p":"masha","ru":"Лу́кас, отку́да ты?","tr":"Lúkas, atkúda ty?","es":"Lucas, ¿de dónde sos?","lex":["CMR-05557","CMR-00761","CMR-00033"],"f":["FRS-021"]},
+    {"p":"lucas","ru":"Я из Аргенти́ны, из Буэ́нос-А́йреса. А ты?","tr":"Ya is Arguintíny, is Buénasáirisa. A ty?","es":"Soy de Argentina, de Buenos Aires. ¿Y vos?","lex":["CMR-00005","CMR-00020","CMR-05503","CMR-00020","CMR-05517","CMR-00010","CMR-00033"],"f":["FRS-023"]},
+    {"p":"masha","ru":"Я из Москвы́.","tr":"Ya is Maskvý.","es":"Soy de Moscú.","lex":["CMR-00005","CMR-00020","CMR-05513"],"f":["FRS-023"]},
+    {"p":"lucas","ru":"Ты говори́шь по-испа́нски?","tr":"Ty gavarísh paispánski?","es":"¿Hablás español?","lex":["CMR-00033","CMR-00058","CMR-05547"]},
+    {"p":"masha","ru":"Нет, я говорю́ по-ру́сски и по-англи́йски.","tr":"Niet, ya gavariú parússki i paanglíiski.","es":"No, hablo ruso e inglés.","lex":["CMR-00107","CMR-00005","CMR-00058","CMR-03512","CMR-00001","CMR-05475"]},
+    {"p":"lucas","ru":"А я учу́ ру́сский!","tr":"A ya uchú rússkii!","es":"¡Y yo estudio ruso!","lex":["CMR-00010","CMR-00005","CMR-01602","CMR-00173"],"f":["FRS-060"]}
+  ] },
+{ "id":"DLG-033","titulo":"Primera clase","tituloRu":"Как вас зову́т?","situacion":"conocer","funcion":"presentarse","nivel":"A1","unidad":2,"personajes":["olga","lucas"],
+  "lineas": [
+    {"p":"olga","ru":"Здра́вствуйте! Как вас зову́т?","tr":"Zdrástvuiti! Kak vas zavút?","es":"¡Buenos días! ¿Cómo se llama?","lex":["CMR-05479","CMR-00019","CMR-00038","CMR-00912"],"f":["FRS-002","FRS-016"]},
+    {"p":"lucas","ru":"Здра́вствуйте! Меня́ зову́т Лу́кас.","tr":"Zdrástvuiti! Miniá zavút Lúkas.","es":"¡Buenos días! Me llamo Lucas.","lex":["CMR-05479","CMR-00005","CMR-00912","CMR-05557"],"f":["FRS-002","FRS-017"]},
+    {"p":"olga","ru":"Отку́да вы?","tr":"Atkúda vy?","es":"¿De dónde es usted?","lex":["CMR-00761","CMR-00038"],"f":["FRS-022"]},
+    {"p":"lucas","ru":"Я из Аргенти́ны.","tr":"Ya is Arguintíny.","es":"Soy de Argentina.","lex":["CMR-00005","CMR-00020","CMR-05503"],"f":["FRS-023"]},
+    {"p":"olga","ru":"Вы говори́те по-ру́сски?","tr":"Vy gavaríti parússki?","es":"¿Habla ruso?","lex":["CMR-00038","CMR-00058","CMR-03512"]},
+    {"p":"lucas","ru":"Да, немно́го. Я учу́ ру́сский.","tr":"Da, nimnóga. Ya uchú rússkii.","es":"Sí, un poco. Estudio ruso.","lex":["CMR-00116","CMR-00770","CMR-00005","CMR-01602","CMR-00173"],"f":["FRS-060"]},
+    {"p":"olga","ru":"Отли́чно!","tr":"Atlíchna!","es":"¡Excelente!","lex":["CMR-02554"]}
+  ] },
+{ "id":"DLG-034","titulo":"Te presento a Dima","tituloRu":"Познако́мься, э́то Ди́ма","situacion":"conocer","funcion":"presentarse","nivel":"A1","unidad":2,"personajes":["masha","lucas","dima"],
+  "lineas": [
+    {"p":"masha","ru":"Лу́кас, познако́мься, э́то Ди́ма.","tr":"Lúkas, paznakómsia, éta Díma.","es":"Lucas, te presento a Dima.","lex":["CMR-05557","CMR-01793","CMR-00012","CMR-05556"],"f":["FRS-020"]},
+    {"p":"lucas","ru":"Приве́т, Ди́ма!","tr":"Priviét, Díma!","es":"¡Hola, Dima!","lex":["CMR-02527","CMR-05556"],"f":["FRS-001"]},
+    {"p":"dima","ru":"Приве́т! Рад познако́миться.","tr":"Priviét! Rat paznakómitsa.","es":"¡Hola! Encantado.","lex":["CMR-02527","CMR-01976","CMR-01793"],"f":["FRS-001","FRS-053"]},
+    {"p":"lucas","ru":"Я то́же. Ты ру́сский?","tr":"Ya tózhi. Ty rússkii?","es":"Yo también. ¿Sos ruso?","lex":["CMR-00005","CMR-00111","CMR-00033","CMR-00173"]},
+    {"p":"dima","ru":"Да. А ты?","tr":"Da. A ty?","es":"Sí. ¿Y vos?","lex":["CMR-00116","CMR-00010","CMR-00033"]},
+    {"p":"lucas","ru":"Я аргенти́нец.","tr":"Ya arguintínits.","es":"Soy argentino.","lex":["CMR-00005","CMR-05523"]}
+  ] },
+{ "id":"DLG-035","titulo":"No entiendo","tituloRu":"Я не понима́ю","situacion":"cortesia","funcion":"entender","nivel":"A1","unidad":2,"personajes":["dima","lucas"],
+  "lineas": [
+    {"p":"dima","ru":"Приве́т! Как дела́?","tr":"Priviét! Kak dilá?","es":"¡Hola! ¿Cómo andás?","lex":["CMR-02527","CMR-00019","CMR-00065"],"f":["FRS-001","FRS-006"]},
+    {"p":"lucas","ru":"Извини́, я не понима́ю. Повтори́, пожа́луйста.","tr":"Izviní, ya nie panimáyu. Paftarí, pazháluista.","es":"Perdón, no entiendo. Repetí, por favor.","lex":["CMR-01992","CMR-00005","CMR-00003","CMR-00160","CMR-01531","CMR-01243"],"f":["FRS-025","FRS-030"]},
+    {"p":"dima","ru":"Как дела́?","tr":"Kak dilá?","es":"¿Cómo andás?","lex":["CMR-00019","CMR-00065"],"f":["FRS-006"]},
+    {"p":"lucas","ru":"А! Хорошо́, спаси́бо. А у тебя́?","tr":"A! Jarashó, spasíba. A u tibiá?","es":"¡Ah! Bien, gracias. ¿Y vos?","lex":["CMR-00010","CMR-00190","CMR-02213","CMR-00010","CMR-00021","CMR-00033"],"f":["FRS-024","FRS-056"]},
+    {"p":"dima","ru":"Так себе́.","tr":"Tak sibié.","es":"Más o menos.","lex":["CMR-00030","CMR-03476"],"f":["FRS-061"]}
+  ] },
+{ "id":"DLG-036","titulo":"¿Qué es esto?","tituloRu":"Что э́то?","situacion":"cortesia","funcion":"entender","nivel":"A1","unidad":2,"personajes":["lucas","olga"],
+  "lineas": [
+    {"p":"lucas","ru":"Извини́те, что э́то?","tr":"Izviníti, shto éta?","es":"Disculpe, ¿qué es esto?","lex":["CMR-01992","CMR-00009","CMR-00012"],"f":["FRS-027","FRS-055"]},
+    {"p":"olga","ru":"Э́то слова́рь.","tr":"Éta slavár.","es":"Es un diccionario.","lex":["CMR-00012","CMR-04324"]},
+    {"p":"lucas","ru":"Что зна́чит «слова́рь»?","tr":"Shto znáchit «slavár»?","es":"¿Qué significa «slavár»?","lex":["CMR-00009","CMR-00382","CMR-04324"],"f":["FRS-059"]},
+    {"p":"olga","ru":"«Diccionario». Вы понима́ете?","tr":"«Diccionario». Vy panimáyiti?","es":"«Diccionario». ¿Entiende?","lex":["CMR-00038","CMR-00160"]},
+    {"p":"lucas","ru":"Да, спаси́бо!","tr":"Da, spasíba!","es":"¡Sí, gracias!","lex":["CMR-00116","CMR-02213"],"f":["FRS-024"]},
+    {"p":"olga","ru":"Пожа́луйста!","tr":"Pazháluista!","es":"¡De nada!","lex":["CMR-01243"],"f":["FRS-025"]}
   ] }
 ];
 

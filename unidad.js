@@ -84,6 +84,19 @@
       .pr-ficha{min-width:44px;height:48px;padding:0 10px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:22px;font-weight:700;cursor:pointer;font-family:inherit;}
       .pr-armado{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:56px;padding:4px;border-bottom:2px solid ${c.gold}66;margin-top:14px;}
       .pr-armado .pr-ficha{background:${c.gold}22;border-color:${c.gold};}
+      .pr-fichas.bloques,.pr-armado.bloques{flex-direction:column;align-items:stretch;}
+      .pr-ficha.bloque{height:auto;min-height:44px;padding:9px 12px;font-size:15px;font-weight:600;text-align:left;line-height:1.35;}
+      .pr-ctx{margin-bottom:14px;display:flex;flex-direction:column;gap:6px;}
+      .pr-ctx-l{display:flex;gap:8px;align-items:baseline;font-size:15px;line-height:1.4;padding:8px 10px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};}
+      .pr-ctx-q{border-style:dashed;color:${c.textMuted};}
+      .pr-ctx-p{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.gold};flex-shrink:0;}
+      .pr-mapa{width:100%;display:block;margin:12px 0 4px;border-radius:12px;background:${c.bg2};border:1px solid ${c.border};}
+      .pr-voz{margin-top:10px;font-size:13px;line-height:1.5;color:${c.textSub};background:${c.gold}14;border:1px solid ${c.gold}55;border-radius:10px;padding:9px 12px;}
+      .pr-chat{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
+      .pr-msg{max-width:85%;padding:9px 12px;border-radius:14px;font-size:16px;line-height:1.4;}
+      .pr-msg.bot{align-self:flex-start;background:${c.bg2};border:1px solid ${c.border};border-bottom-left-radius:4px;}
+      .pr-msg.yo{align-self:flex-end;background:${c.gold}22;border:1px solid ${c.gold}66;border-bottom-right-radius:4px;}
+      .pr-msg-es{font-size:12px;color:${c.textMuted};margin-top:3px;}
       .pr-em{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;}
       .pr-em .pr-op.sel{border-color:${c.gold};background:${c.gold}22;color:${c.gold};}
       .pr-em .pr-op.hecho{opacity:.35;}
@@ -117,6 +130,7 @@
     const larga = ops.some(o => o.length > 14);
     const tocar = o => { if (elegida) return; setElegida(o); onRes(o === ej.correcta ? AZ_BIEN : AZ_MAL); };
     return h(React.Fragment, null,
+      h(Contexto, { ej }),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.grande && h("div", { className: "pr-grande", lang: "ru" }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande }),
@@ -140,10 +154,13 @@
     };
     const reintentar = () => { setTxt(""); setR(null); if (ref.current) ref.current.focus(); };
     return h(React.Fragment, null,
+      h(Contexto, { ej }),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
+      ej.mapa && h(MapaEj, { mapa: ej.mapa, c }),
       ej.grande && h("div", { className: "pr-grande", lang: "ru" }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.pista && h("div", { className: "pr-pista" }, ej.pista),
+      ej.voz && h("div", { className: "pr-voz" }, "🎤 Tocá el micrófono del teclado ruso y decilo. El teléfono lo escribe por vos."),
       h("div", { className: "pr-in-row" },
         h("input", {
           ref, className: "pr-input", value: txt, lang: ru ? "ru" : "es",
@@ -153,6 +170,7 @@
           onKeyDown: e => { if (e.key === "Enter") comprobar(); }
         }),
         h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || (r && r.resultado === AZ_BIEN) }, "Comprobar")),
+      r && ej.voz && h("div", { className: "pr-exp", lang: "ru" }, "El teléfono entendió: «" + txt + "»"),
       r && h(AzCorreccion, { r, dark }),
       hecho != null && r && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
       hecho != null && r && r.resultado !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt("Para recordarlo: " + ej.recordar)),
@@ -162,22 +180,101 @@
   function Ordenar({ ej, onRes, hecho }) {
     const [armado, setArmado] = useState([]);          /* índices de fichas usadas */
     const [r, setR] = useState(null);
+    const sep = ej.sep != null ? ej.sep : "";
     const libres = ej.fichas.map((f, i) => i).filter(i => armado.indexOf(i) < 0);
-    const palabra = armado.map(i => ej.fichas[i]).join("");
+    const palabra = armado.map(i => ej.fichas[i]).join(sep);
+    const norm = t => String(t).replace(/\u0301/g, "").replace(/[.,!?¿¡«»…]/g, "").replace(/ё/g, "е").replace(/\s+/g, " ").trim().toLowerCase();
     const comprobar = () => {
-      const ok = palabra.toLowerCase() === ej.esperada.toLowerCase();
+      const ok = norm(palabra) === norm(ej.esperada);
       setR(ok ? AZ_BIEN : AZ_MAL);
       onRes(ok ? AZ_BIEN : AZ_MAL);
     };
+    const cls = "pr-ficha" + (ej.bloques ? " bloque" : "");
     return h(React.Fragment, null,
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.audio && h(Oir, { texto: ej.audio, auto: false }),
-      h("div", { className: "pr-armado", lang: "ru" }, armado.map((i, k) =>
-        h("button", { key: k, className: "pr-ficha", disabled: r != null, onClick: () => setArmado(a => a.filter(x => x !== i)) }, ej.fichas[i]))),
-      h("div", { className: "pr-fichas", lang: "ru" }, libres.map(i =>
-        h("button", { key: i, className: "pr-ficha", disabled: r != null, onClick: () => setArmado(a => a.concat(i)) }, ej.fichas[i]))),
+      h("div", { className: "pr-armado" + (ej.bloques ? " bloques" : ""), lang: "ru" }, armado.map((i, k) =>
+        h("button", { key: k, className: cls, disabled: r != null, onClick: () => setArmado(a => a.filter(x => x !== i)) }, ej.fichas[i]))),
+      h("div", { className: "pr-fichas" + (ej.bloques ? " bloques" : ""), lang: "ru" }, libres.map(i =>
+        h("button", { key: i, className: cls, disabled: r != null, onClick: () => setArmado(a => a.concat(i)) }, ej.fichas[i]))),
       r == null && h("button", { className: "pr-btn", style: { width: "100%", marginTop: 16 }, disabled: libres.length > 0, onClick: comprobar }, "Comprobar"),
-      r != null && r !== AZ_BIEN && h("div", { className: "pr-exp" }, "Armaste «" + palabra + "»."),
+      r != null && r !== AZ_BIEN && h("div", { className: "pr-exp" }, ej.bloques ? "El orden correcto:" : "Armaste «" + palabra + "»."),
+      r != null && r !== AZ_BIEN && ej.bloques && h("div", { className: "pr-exp", lang: "ru", style: { whiteSpace: "pre-line" } }, ej.esperada),
+      r != null && r !== AZ_BIEN && !ej.bloques && h("div", { className: "pr-exp", lang: "ru" }, "Correcto: «" + ej.esperada + "»."),
+      hecho != null && h(Explicacion, { ej, r: hecho }));
+  }
+
+  /* Líneas de diálogo previas (para completar conversaciones) */
+  function Contexto({ ej }) {
+    if (!ej.contexto || !ej.contexto.length) return null;
+    return h("div", { className: "pr-ctx" }, ej.contexto.map((l, i) =>
+      h("div", { key: i, className: "pr-ctx-l" }, h("span", { className: "pr-ctx-p", lang: "ru" }, l.p), h("span", { lang: "ru" }, l.ru))),
+      ej.quien && h("div", { className: "pr-ctx-l pr-ctx-q" }, h("span", { className: "pr-ctx-p", lang: "ru" }, ej.quien), h("span", null, "…")));
+  }
+
+  /* Mapa con un país resaltado (data-mapa.js) */
+  function MapaEj({ mapa, c }) {
+    if (typeof MAPA === "undefined") return null;
+    const v = MAPA.vistas[mapa.vista] || MAPA.vistas.mundo;
+    return h("svg", { viewBox: v.vb, className: "pr-mapa", role: "img", "aria-label": "Mapa" },
+      h("path", { d: MAPA.fondo, fill: c.bg3, stroke: c.bg2, "stroke-width": 2 }),
+      Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: k === mapa.iso ? c.gold : c.border, stroke: c.bg2, "stroke-width": 2 })));
+  }
+
+  /* Chat guiado: el personaje escribe, vos contestás. {nombre} y {lugar}
+     aceptan cualquier palabra. Resultado: el peor de los pasos. */
+  function aceptaChat(txt, modelos) {
+    const n = t => String(t).replace(/\u0301/g, "").replace(/ё/g, "е").replace(/[.,!?¿¡«»…]/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+    const u = n(txt);
+    return modelos.some(m => {
+      const rx = new RegExp("^" + n(m).split(" ").map(w => w === "{nombre}" ? "[^ ]+( [^ ]+)?" : w === "{lugar}" ? "[^ ]+( [^ ]+)?" : w.replace(/[-]/g, "\\-")).join(" ") + "$");
+      return rx.test(u);
+    });
+  }
+  function Chat({ ej, onRes, hecho, dark, c }) {
+    const ch = ej.chat;
+    const quien = (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[ch.p]) ? DLG_PERSONAJES[ch.p] : { ru: ch.p, genero: "f" };
+    const [paso, setPaso] = useState(0);
+    const [resp, setResp] = useState([]);           /* lo que contestaste en cada paso */
+    const [txt, setTxt] = useState("");
+    const [r, setR] = useState(null);
+    const [peor, setPeor] = useState(AZ_BIEN);
+    const fin = paso >= ch.pasos.length;
+    useEffect(() => { if (!fin) setTimeout(() => azHablarRu(ch.pasos[paso].bot, quien.genero), 300); }, [paso]);
+    const enviar = () => {
+      if (!txt.trim() || fin) return;
+      const st = ch.pasos[paso];
+      let res;
+      if (aceptaChat(txt, st.ok)) res = { resultado: AZ_BIEN };
+      else {
+        const modelos = st.ok.map(m => m.replace("{nombre}", "Ману").replace("{lugar}", "Аргенти́ны"));
+        res = azCorregir(txt, modelos, { idioma: "ru" });
+        if (res.resultado === AZ_BIEN) res.resultado = AZ_CASI;
+      }
+      const np = Math.min(peor, res.resultado);
+      setPeor(np); setR(res);
+      const yo = txt;
+      setTxt("");
+      if (res.resultado === AZ_MAL) return;          /* se queda en el paso para reintentar */
+      setResp(rs => { const n = rs.slice(); n[paso] = yo; return n; });
+      setTimeout(() => { setR(null); setPaso(p => { const n = p + 1; if (n >= ch.pasos.length && hecho == null) onRes(np); return n; }); }, 700);
+    };
+    const saltar = () => { setResp(rs => { const n = rs.slice(); n[paso] = ch.pasos[paso].ok[0].replace("{nombre}", "Ману").replace("{lugar}", "Аргенти́ны"); return n; }); setR(null); setPaso(p => { const n = p + 1; if (n >= ch.pasos.length && hecho == null) onRes(Math.min(peor, AZ_MAL)); return n; }); setPeor(AZ_MAL); };
+    return h(React.Fragment, null,
+      h("div", { className: "pr-pide" }, "Chat: " + ch.titulo),
+      h("div", { className: "pr-chat" },
+        ch.pasos.slice(0, Math.min(paso + 1, ch.pasos.length)).map((st, i) => h(React.Fragment, { key: i },
+          h("div", { className: "pr-msg bot" }, h("div", { className: "pr-ctx-p", lang: "ru" }, quien.ru), h("div", { lang: "ru" }, st.bot),
+            h("div", { className: "pr-msg-es" }, st.es)),
+          i < paso && h("div", { className: "pr-msg yo", lang: "ru" }, resp[i] || "…")))),
+      !fin && h("div", { className: "pr-in-row" },
+        h("input", { className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
+          placeholder: "Escribí en ruso…", onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
+        h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, "Enviar")),
+      r && r.resultado !== AZ_BIEN && r.palabras && h(AzCorreccion, { r, dark }),
+      r && r.resultado === AZ_MAL && !fin && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, "Ver la respuesta y seguir"),
+      r && r.resultado === AZ_MAL && !fin && h("div", { className: "pr-exp", lang: "ru" }, "Por ejemplo: " + ch.pasos[paso].ok[0].replace("{nombre}", "Ману").replace("{lugar}", "Аргенти́ны")),
+      fin && h("div", { className: "pr-exp" }, "Conversación terminada."),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
@@ -243,7 +340,7 @@
       fila("Volvieron a «Aprendiendo»", baja, NARANJA));
   }
 
-  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar };
+  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar, chat: Chat };
 
   /* ── Sesión ── */
   function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar }) {
