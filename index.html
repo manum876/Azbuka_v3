@@ -30,12 +30,14 @@
   .cont-s{font-size:12px;margin-top:2px;}
   .pbar{height:5px;border-radius:3px;overflow:hidden;margin-top:8px;}
 
-  .hero-card{width:100%;box-sizing:border-box;text-align:center;padding:30px 20px 22px;border-radius:20px;margin-bottom:16px;}
-  .hero-icon{width:92px;height:92px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:#fff;background:#B5605C;margin:0 auto 18px;letter-spacing:-1px;}
-  .hero-title{font-size:24px;font-weight:800;margin-bottom:10px;}
-  .hero-desc{font-size:13.5px;max-width:360px;margin:0 auto;line-height:1.6;}
-
-  .level-row{display:flex;gap:8px;margin-top:20px;}
+  /* Tarjeta Azbuka: mismo formato que las de módulos (ícono a la
+     izquierda, título y texto a la derecha), con los niveles debajo. */
+  .hero-card{width:100%;box-sizing:border-box;padding:18px 16px;border-radius:16px;margin-bottom:16px;}
+  .hero-top{display:flex;align-items:flex-start;gap:14px;}
+  .hero-icon{width:64px;height:64px;border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:#B5605C;letter-spacing:-1px;flex-shrink:0;}
+  .hero-title{font-size:24px;font-weight:800;line-height:1.1;margin-bottom:6px;}
+  .hero-desc{font-size:13.5px;line-height:1.55;}
+  .level-row{display:flex;gap:8px;margin-top:16px;}
   .level-btn{flex:1;text-align:center;padding:9px 6px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none;box-sizing:border-box;transition:.18s;}
   .level-btn.active:active{transform:scale(.96);}
 
@@ -117,11 +119,14 @@ function App() {
         className: "hero-card",
         style: { background: c.card, border: `1px solid ${c.border}` }
       },
-        React.createElement("div", { className: "hero-icon" }, "Аз"),
-        React.createElement("div", { className: "hero-title", style: { color: c.gold } }, "Азбука"),
+        React.createElement("div", { className: "hero-top" },
+          React.createElement("div", { className: "hero-icon" }, "Аз"),
+          React.createElement("div", { style: { flex: 1, minWidth: 0 } },
+            React.createElement("div", { className: "hero-title", style: { color: c.gold } }, "Азбука"),
         React.createElement("div", { className: "hero-desc", style: { color: c.textMuted } },
-          "Un curso completo para aprender ruso desde cero, pensado para hispanohablantes. Combina teoría clara, ejercicios prácticos y ejemplos reales para que avances con confianza, de principiante a avanzado."),
-
+          "Un curso completo para aprender ruso desde cero, pensado para hispanohablantes. Combina teoría clara, ejercicios prácticos y ejemplos reales para que avances con confianza, de principiante a avanzado.")
+          )
+        ),
         React.createElement("div", { className: "level-row" },
           React.createElement("a", {
             className: "level-btn active", href: "azbuka-index-1.html",

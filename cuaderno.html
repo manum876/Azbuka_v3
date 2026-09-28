@@ -75,7 +75,7 @@ function Editor({ c, nota, seccionId, secciones, onGuardar, onBorrar, onCerrar }
   return h("div", { className: "sheet", role: "dialog" },
     h("button", { className: "sheet-x", onClick: onCerrar, "aria-label": "Cerrar" }, "✕"),
     h("div", { className: "sheet-in" },
-      h("div", { className: "cu-lbl", style: { marginTop: 0 } }, nota ? "Editar nota" : "Nota nueva"),
+      h("div", { style: { fontSize: 24, fontWeight: 800, paddingRight: 48, marginBottom: 20 } }, nota ? "Editar nota" : "Nota nueva"),
       h("textarea", { ref, className: "cu-area", value: texto, placeholder: "Escribí tu nota…", onInput: e => setTexto(e.target.value) }),
       nota && nota.fuente && h("div", { className: "cu-meta", style: { marginTop: 10 } }, "Guardada desde: ",
         h("a", { className: "cu-fuente", href: nota.fuente.href, onClick: e => azNavigate(e, nota.fuente.href) }, nota.fuente.titulo)),
@@ -119,6 +119,8 @@ function secDeExport(cu, cual) {
   return cu.secciones.filter(s => s.notas.length && (cual === "todo" || s.id === cual));
 }
 function fechaLarga(iso) { return fecha(iso); }
+/* Dirección completa de una pantalla de la app (para los links del PDF y el Word) */
+function urlApp(href) { try { return new URL(href, location.href).href; } catch (e) { return href; } }
 
 async function exportarPDF(cu, cual) {
   await cargarScript("jspdf.umd.min.js");
@@ -145,8 +147,19 @@ async function exportarPDF(cu, cual) {
     s.notas.forEach(n => {
       y += 6;
       texto(n.texto, 11.5, "normal", [30, 30, 36], 1.45);
-      const meta = [n.fuente ? n.fuente.titulo : null, fechaLarga(n.editada || n.creada)].filter(Boolean).join(" · ");
-      texto(meta, 8.5, "normal", [130, 130, 140], 1.5);
+      /* Origen como link directo a esa pantalla de la app */
+      doc.setFontSize(8.5); salto(8.5 * 1.5);
+      let x = M;
+      if (n.fuente) {
+        doc.setFont("NotoSans", "bold"); doc.setTextColor(138, 109, 31);
+        doc.textWithLink(n.fuente.titulo, x, y + 8.5, { url: urlApp(n.fuente.href) });
+        x += doc.getTextWidth(n.fuente.titulo);
+        doc.setFont("NotoSans", "normal"); doc.setTextColor(130, 130, 140);
+        doc.text(" · ", x, y + 8.5); x += doc.getTextWidth(" · ");
+      }
+      doc.setFont("NotoSans", "normal"); doc.setTextColor(130, 130, 140);
+      doc.text(fechaLarga(n.editada || n.creada), x, y + 8.5);
+      y += 8.5 * 1.5;
     });
   });
   const total = doc.getNumberOfPages();
@@ -162,19 +175,28 @@ async function exportarDOCX(cu, cual) {
   await cargarScript("fflate.min.js");
   const p = (txt, estilo, extra) => '<w:p>' + (estilo ? '<w:pPr><w:pStyle w:val="' + estilo + '"/></w:pPr>' : '') +
     String(txt).split("\n").map((l, i) => '<w:r>' + (extra || '') + (i ? '<w:br/>' : '') + '<w:t xml:space="preserve">' + xml(l) + '</w:t></w:r>').join('') + '</w:p>';
+  const links = [];
+  const meta = n => {
+    const f = xml(fechaLarga(n.editada || n.creada));
+    if (!n.fuente) return '<w:p><w:pPr><w:pStyle w:val="Meta"/></w:pPr><w:r><w:t>' + f + '</w:t></w:r></w:p>';
+    links.push(urlApp(n.fuente.href));
+    const rid = "rIdL" + links.length;
+    return '<w:p><w:pPr><w:pStyle w:val="Meta"/></w:pPr><w:hyperlink r:id="' + rid + '"><w:r><w:rPr><w:b/><w:color w:val="8A6D1F"/><w:u w:val="single"/></w:rPr><w:t xml:space="preserve">' + xml(n.fuente.titulo) + '</w:t></w:r></w:hyperlink><w:r><w:t xml:space="preserve"> · ' + f + '</w:t></w:r></w:p>';
+  };
   let cuerpo = p("Cuaderno de Azbuka", "Title") + p(new Date().toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" }), "Meta");
   secDeExport(cu, cual).forEach(s => {
     cuerpo += p(s.titulo, "Heading1");
     s.notas.forEach(n => {
       cuerpo += p(n.texto);
-      cuerpo += p([n.fuente ? n.fuente.titulo : null, fechaLarga(n.editada || n.creada)].filter(Boolean).join(" · "), "Meta");
+      cuerpo += meta(n);
     });
   });
-  const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
+  const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"';
   const archivos = {
     "[Content_Types].xml": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>',
     "_rels/.rels": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>',
-    "word/_rels/document.xml.rels": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>',
+    "word/_rels/document.xml.rels": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>' +
+      links.map((u, i) => '<Relationship Id="rIdL' + (i + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" Target="' + xml(u) + '" TargetMode="External"/>').join("") + '</Relationships>',
     "word/styles.xml": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles ' + W + '>' +
       '<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial" w:eastAsia="Arial"/><w:sz w:val="23"/><w:lang w:val="es-AR"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="80" w:line="300" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>' +
       '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>' +

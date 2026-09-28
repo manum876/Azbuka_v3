@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Ajustes</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="core.js"></script>
+<script src="progress.js"></script>
+<script src="shell.js"></script>
+<script>
+/* ============================================================
+   AJUSTES.HTML — Ajustes de la app (26/09/2026)
+   Se abre desde el ⚙️ del pie del menú. Por ahora solo tiene la
+   copia de seguridad de notas y progreso (AzCopiaSeguridad, en
+   core.js); más adelante se suman otras opciones.
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  useEffect(() => { (async () => setDarkMode((await azGet('az_theme', 'dark')) !== 'light'))(); }, []);
+  const c = azColors(darkMode);
+  return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
+    h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+      h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, "Ajustes"),
+      h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "24px 0 10px" } }, "Copia de seguridad"),
+      h("div", { style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 16, padding: 16 } }, h(AzCopiaSeguridad, { c }))));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

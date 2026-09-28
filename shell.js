@@ -273,13 +273,19 @@ function AzShell(props) {
       ),
 
       /* Pie fijo del drawer — nunca se tapa al scrollear el índice.
-         Toggle de tema + botón a la pantalla principal, uno al lado
-         del otro. */
+         Toggle de tema, ajustes y botón a la pantalla principal, uno
+         al lado del otro. */
       React.createElement("div", { style: { padding: "12px 16px", borderTop: `1px solid ${c.border}`, display: "flex", gap: 10, flexShrink: 0 } },
         React.createElement("button", {
           onClick: () => { setDarkMode(!dark); azSet('az_theme', dark ? 'light' : 'dark'); },
           style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, cursor: "pointer", padding: 0, flexShrink: 0 }
         }, dark ? "🌙" : "☀️"),
+        /* Ajustes (26/09/2026, a pedido de Manu): por ahora, la copia de seguridad */
+        React.createElement("a", {
+          href: "ajustes.html", "aria-label": "Ajustes",
+          onClick: (e) => azNavigate(e, "ajustes.html"),
+          style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, textDecoration: "none", flexShrink: 0 }
+        }, "⚙️"),
         React.createElement("a", {
           href: "index.html",
           onClick: (e) => azNavigate(e, "index.html"),
