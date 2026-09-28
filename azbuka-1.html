@@ -20,6 +20,7 @@
 <script src="shell.js"></script>
 <script src="corrector.js"></script>
 <script src="burbuja.js"></script>
+<script src="unidad-ui.js"></script>
 <script src="unidad.js"></script>
 <script>
 /* ============================================================
@@ -57,74 +58,6 @@ function PalabraLetra({ w, letra, c, size }) {
     onKeyDown: ev => { if (ev.key === "Enter") abrir(ev); }, style: { fontSize: size || 17, fontWeight: 700 } },
     partes.map((p, i) => (p[0] === letra.upper || p[0] === letra.lower)
       ? h("span", { key: i, style: { color: c.gold, fontWeight: 800 } }, p) : p));
-}
-
-function Estilos({ c, green }) {
-  return h("style", null, `
-    .u-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-bottom:6px;}
-    .u-title{font-size:26px;font-weight:800;color:${c.text};line-height:1.15;}
-    .u-ru{font-size:15px;color:${c.textSub};font-style:italic;margin-top:4px;}
-    .u-text{font-size:15px;line-height:1.6;color:${c.textSub};}
-    .u-sec{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:24px 0 10px;}
-    .u-dest{margin-top:12px;background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:10px;padding:12px 14px;font-size:14.5px;line-height:1.5;color:${c.text};font-weight:600;}
-    .u-truco{margin-top:10px;font-size:14px;line-height:1.5;color:${c.textSub};padding-left:10px;border-left:2px solid ${c.gold}66;}
-    .u-truco b{color:${c.gold};font-weight:700;}
-    .u-card{background:${c.card};border:1px solid ${c.border};border-radius:14px;}
-    .pbar-track{width:100%;height:6px;border-radius:3px;overflow:hidden;background:${c.bg3};margin-top:10px;}
-    .pbar-fill{height:100%;border-radius:3px;background:${green};transition:width .3s ease;}
-    .mod{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;margin-bottom:10px;cursor:pointer;text-decoration:none;color:${c.text};}
-    .mod.off{opacity:.45;cursor:default;}
-    .mod-n{font-size:22px;font-weight:800;color:${c.border};min-width:30px;line-height:1.1;}
-    .mod-t{font-size:16px;font-weight:700;}
-    .mod-d{font-size:13px;color:${c.textMuted};margin-top:2px;}
-    .mod-l{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
-    .mod-l span{font-size:13px;font-weight:700;min-width:24px;text-align:center;padding:2px 5px;border-radius:6px;background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};}
-    .tag-pronto{font-size:11px;font-weight:600;color:${c.textMuted};background:${c.bg2};border:1px solid ${c.border};border-radius:8px;padding:2px 8px;margin-left:8px;vertical-align:middle;}
-    .lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-    @media (min-width:600px){.lgrid{grid-template-columns:repeat(5,1fr);}}
-    .lcard{position:relative;border-radius:14px;padding:14px 6px;text-align:center;cursor:pointer;background:${c.card};}
-    .lcard:active{transform:scale(.97);}
-    .toggle-row{display:flex;gap:8px;margin:16px 0 12px;}
-    .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
-    .ubtn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:13px 16px;border-radius:10px;border:1px solid ${c.gold};background:${c.gold};color:${c.bg};font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:18px;}
-    .ubtn.sec{background:${c.bg3};border-color:${c.border};color:${c.text};}
-    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:fadeIn .25s ease;}
-    .sheet-in{max-width:960px;margin:0 auto;padding:6vh 3vw 4vh;}
-    .sheet-x{position:fixed;top:6vh;right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
-    .glyph{font-size:64px;font-weight:800;color:${c.gold};line-height:1;}
-    .cursiva{font-family:'CyrCursive',cursive;font-size:44px;color:${c.gold};opacity:.7;margin-top:6px;}
-    .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
-    .status-row{display:flex;gap:8px;margin-top:16px;}
-    .status-btn{flex:1;text-align:center;padding:10px 4px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:.18s;}
-    .info{padding:16px;margin-top:12px;}
-    .info-t{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:${c.gold};margin-bottom:6px;}
-    .info-x{font-size:14px;line-height:1.55;color:${c.textSub};}
-    .wrow{display:flex;align-items:center;gap:12px;padding:12px 0;}
-    .wrow + .wrow{border-top:1px solid ${c.border};}
-    .ctable{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;overflow:hidden;margin-top:14px;}
-    .ctable th{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.textMuted};text-align:left;padding:10px 12px;border-bottom:1px solid ${c.border};}
-    .ctable td{padding:9px 12px;border-top:1px solid ${c.border};}
-    .ctable tr:nth-child(2) td{border-top:none;}
-    .f-ru{font-size:17px;font-weight:700;color:${c.text};cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:6px;background:none;border:none;padding:0;width:100%;font-family:inherit;text-align:left;}
-    .f-ru .pl{font-size:10px;color:${c.gold};}
-    .f-ru.blanda{color:${c.gold};}
-    .fc{min-height:46vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 18px;cursor:pointer;border-radius:18px;background:${c.card};border:1px solid ${c.border};user-select:none;-webkit-user-select:none;}
-    .par{display:flex;align-items:center;gap:10px;padding:10px 0;}
-    .par + .par{border-top:1px solid ${c.border};}
-    .par-l{width:52px;flex-shrink:0;font-size:13px;font-weight:800;color:${c.gold};}
-    .par-w{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:8px 10px;cursor:pointer;font-family:inherit;text-align:left;color:${c.text};}
-    .par-ru{font-size:18px;font-weight:700;}
-    .par-ru .pl{font-size:10px;color:${c.gold};}
-    .par-es{font-size:12px;color:${c.textMuted};}
-    .fc.dorso{align-items:stretch;justify-content:flex-start;text-align:left;padding:22px 20px;}
-    .fc-glyph{font-size:clamp(60px,19vw,96px);font-weight:800;color:${c.gold};line-height:1;white-space:nowrap;}
-    .fc-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
-    .fc-cur{font-family:'CyrCursive',cursive;font-size:clamp(60px,19vw,96px);color:${c.gold};opacity:.7;line-height:1;white-space:nowrap;}
-    .fc-nombre{display:flex;align-items:baseline;gap:10px;margin-top:22px;}
-    .fc-word{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid ${c.border};}
-    .fc-ctl{display:flex;gap:8px;margin-top:12px;}
-    .fc-ctl button{flex:1;padding:11px 6px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;}
-  `);
 }
 
 /* ── Ficha de una letra (hoja a pantalla completa) ── */
@@ -301,38 +234,6 @@ function LeerEnVoz({ c }) {
       h("button", { className: "ubtn" + (ver ? "" : " sec"), style: { marginTop: 0 }, onClick: otra }, "Otra palabra")),
     n > 0 && h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 10 } }, "Leíste " + n + (n === 1 ? " palabra" : " palabras")));
 }
-function HojaDialogo({ d, c, onClose }) {
-  const [tr, setTr] = useState(true);
-  const [es, setEs] = useState(true);
-  const chip = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
-  const genero = l => ((typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[l.p]) || {}).genero;
-  const todo = () => azHablarSecuencia(d.lineas.map(l => ({ texto: l.ru, genero: genero(l) })));
-  const href = "dialogos.html?id=" + d.id;
-  return h("div", { className: "sheet", role: "dialog" },
-    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
-    h("div", { className: "sheet-in" },
-      h("div", { className: "u-kicker" }, "Diálogo"),
-      h("div", { style: { fontSize: 26, fontWeight: 800, paddingRight: 48 } }, d.titulo),
-      d.tituloRu && h("div", { className: "u-ru", lang: "ru" }, d.tituloRu),
-      h("div", { className: "toggle-row" },
-        h("button", { className: "pair-btn", onClick: () => setTr(v => !v), style: chip(tr) }, "Transliteración"),
-        h("button", { className: "pair-btn", onClick: () => setEs(v => !v), style: chip(es) }, "Traducción")),
-      h("div", { style: { fontSize: 13, color: c.textMuted, marginBottom: 12 } }, "Para practicar la lectura, apagá la transliteración y la traducción."),
-      d.lineas.map((l, i) => {
-        const p = (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[l.p]) || { ru: l.p };
-        return h("div", { key: i, className: "u-card", style: { padding: "12px 14px", marginBottom: 8, display: "flex", gap: 10, alignItems: "flex-start" } },
-          h("div", { style: { flex: 1, minWidth: 0 } },
-            h("div", { lang: "ru", style: { fontSize: 11, fontWeight: 700, letterSpacing: 1, color: c.gold, textTransform: "uppercase", marginBottom: 4 } }, p.ru),
-            h("div", { style: { fontSize: 17, fontWeight: 700, lineHeight: 1.5 } }, h(AzTexto, { ru: l.ru, lex: l.lex, objetivo: OBJETIVO_U1 })),
-            tr && h("div", { style: { fontSize: 13.5, color: c.textSub, fontStyle: "italic", marginTop: 2 } }, l.tr),
-            es && h("div", { style: { fontSize: 14, color: c.text, marginTop: 4 } }, l.es)),
-          h("div", { style: { display: "flex", flexDirection: "column", gap: 6 } },
-            h("button", { className: "play", onClick: () => azHablarRu(l.ru, genero(l)), "aria-label": "Escuchar" }, "▶"),
-            h("button", { className: "play", onClick: () => azGuardarEnCuaderno(l.ru + "\n" + l.es, { titulo: "Diálogos · " + d.titulo, href: "dialogos.html?id=" + d.id }), "aria-label": "Guardar en el cuaderno" }, "＋")));
-      }),
-      h("button", { className: "ubtn", onClick: todo }, "▶ Escuchar el diálogo"),
-      h("a", { className: "ubtn sec", style: { marginTop: 10, textDecoration: "none" }, href, onClick: ev => azNavigate(ev, href) }, "Ver en Diálogos")));
-}
 function VistaLectura({ mod, c, abrirDialogo }) {
   return h(React.Fragment, null,
     h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
@@ -415,37 +316,10 @@ function App() {
   ] : [];
 
   /* ── Portada de la unidad ── */
-  const portada = h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
-    h("div", { className: "u-kicker" }, "Unidad 1"),
-    h("h1", { className: "u-title" }, U.titulo),
-    h("div", { className: "u-ru", lang: "ru" }, U.tituloRu),
-    h("p", { className: "u-text", style: { marginTop: 12, fontSize: 14 } }, U.objetivo),
-    h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 6 } }, "Tiempo estimado: " + U.tiempo),
-    h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 18 } },
-      h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } },
-        h("span", { style: { fontSize: 14, fontWeight: 700, color: c.text } }, "Letras dominadas"),
-        h("span", { style: { fontSize: 14, fontWeight: 800, color: green } }, dominadas + " de " + ALPHABET.length)),
-      h("div", { className: "pbar-track" }, h("div", { className: "pbar-fill", style: { width: (dominadas / ALPHABET.length * 100) + "%" } })),
-      h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 14 } },
-        h("span", { style: { fontSize: 14, fontWeight: 700, color: c.text } }, "Palabras dominadas"),
-        h("span", { style: { fontSize: 14, fontWeight: 800, color: green } }, palabrasDom + " de " + OBJETIVO_U1.length)),
-      h("div", { className: "pbar-track" }, h("div", { className: "pbar-fill", style: { width: (palabrasDom / OBJETIVO_U1.length * 100) + "%" } })),
-      h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 10, lineHeight: 1.5 } }, "Se marcan solas cuando las acertás en ejercicios distintos, en días distintos. También podés marcar las letras a mano.")),
-    h("button", { className: "ubtn", onClick: practicarUnidad }, "Practicar la unidad"),
-    h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 6, textAlign: "center" } }, "Ejercicios de todo lo que viste hasta el módulo " + Math.max(visto, 2) + "."),
-    h("div", { className: "u-sec" }, "Módulos"),
-    U.modulos.map(m => {
-      const off = m.tipo === "pronto";
-      return h("div", { key: m.id, className: "u-card mod" + (off ? " off" : ""), role: off ? null : "button", tabIndex: off ? -1 : 0,
-        onClick: () => !off && abrirModulo(m.id), onKeyDown: e => { if (!off && e.key === "Enter") abrirModulo(m.id); } },
-        h("div", { className: "mod-n" }, String(m.n).padStart(2, "0")),
-        h("div", { style: { flex: 1, minWidth: 0 } },
-          h("div", { className: "mod-t" }, m.titulo, off && h("span", { className: "tag-pronto" }, "Pronto")),
-          h("div", { className: "mod-d" }, azFmt(m.resumen)),
-          m.tipo === "examen" && examenU1 && h("div", { style: { fontSize: 12.5, fontWeight: 700, marginTop: 6, color: examenU1.aprobado ? green : "#E2884A" } }, "Última: " + examenU1.pct + " %" + (examenU1.aprobado ? " · aprobada" : "")),
-          m.letras && h("div", { className: "mod-l" }, m.letras.map(x => h("span", { key: x, lang: "ru",
-            style: niveles[x] === 2 ? { color: green, borderColor: green + "88" } : niveles[x] === 1 ? { color: YELLOW, borderColor: YELLOW + "88" } : null }, x)))));
-    }));
+  const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 2), examen: examenU1, onPracticar: practicarUnidad, onAbrir: abrirModulo,
+    progreso: [{ label: "Letras dominadas", valor: dominadas, total: ALPHABET.length }, { label: "Palabras dominadas", valor: palabrasDom, total: OBJETIVO_U1.length }],
+    extraModulo: m => m.letras ? h("div", { className: "mod-l" }, m.letras.map(x => h("span", { key: x, lang: "ru",
+      style: niveles[x] === 2 ? { color: green, borderColor: green + "88" } : niveles[x] === 1 ? { color: YELLOW, borderColor: YELLOW + "88" } : null }, x))) : null });
 
   /* ── Módulo ── */
   const vistaModulo = mod && h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
@@ -508,12 +382,12 @@ function App() {
       next && h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo)));
 
   return h(React.Fragment, null,
-    h(Estilos, { c, green }),
+    h(AzEstilosUnidad, { c, green }),
     h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vistaModulo : portada),
     hoja && h(HojaLetra, { l: LETRA[hoja], c, green, nivel: niveles[hoja] || 0, setNivel, onClose: () => setHoja(null) }),
     practica && h(AzPractica, { key: practica.titulo, unidad: 1, titulo: practica.titulo, pool: practica.pool, mezcla: U1_MEZCLA, n: Math.min(12, practica.pool.length), dark: darkMode, aviso: AVISO_ACENTOS,
       examen: practica.examen, onReforzar: reforzar, onSalir: () => { setPractica(null); refrescarNiveles(); } }),
-    dialogo && h(HojaDialogo, { d: DIALOGOS.find(x => x.id === dialogo), c, onClose: () => setDialogo(null) }),
+    dialogo && h(AzHojaDialogo, { d: DIALOGOS.find(x => x.id === dialogo), c, objetivo: OBJETIVO_U1, onClose: () => setDialogo(null) }),
     tarjetas && mod && h(Tarjetas, { letras: mod.letras, titulo: mod.titulo, c, green, niveles, setNivel, onClose: () => setTarjetas(false) }),
     h(AzBurbujaHost, { dark: darkMode }));
 }
