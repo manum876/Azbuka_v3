@@ -14,17 +14,17 @@
    cuando corresponda construirlo. */
 const AZ_UNITS = [
   { id: 1, title: "Alfabeto y pronunciación", desc: "Las 33 letras, sonidos y primeras palabras.", href: "azbuka-1.html" },
-  { id: 2, title: "Presentaciones básicas", desc: "Saludos, nombres, primeras frases.", href: "azbuka-2.html" },
-  { id: 3, title: "Sustantivos y género", desc: "Masculino, femenino, neutro.", href: "azbuka-3.html" },
-  { id: 4, title: "Casos básicos", desc: "Nominativo y acusativo.", href: "azbuka-4.html" },
-  { id: 5, title: "Verbos en presente", desc: "Conjugación y uso cotidiano.", href: "azbuka-5.html" },
-  { id: 6, title: "Movimiento y ubicación", desc: "Verbos de movimiento, preposiciones.", href: "azbuka-6.html" },
-  { id: 7, title: "Tiempo y rutina diaria", desc: "Horas, días, rutinas.", href: "azbuka-7.html" },
-  { id: 8, title: "Pasado", desc: "Aspecto verbal y pasado.", href: "azbuka-8.html" },
-  { id: 9, title: "Futuro", desc: "Formas y uso del futuro.", href: "azbuka-9.html" },
-  { id: 10, title: "Casos restantes", desc: "Genitivo, dativo, instrumental.", href: "azbuka-10.html" },
-  { id: 11, title: "Conversaciones cotidianas", desc: "Diálogos extendidos, situaciones reales.", href: "azbuka-11.html" },
-  { id: 12, title: "Consolidación B1", desc: "Repaso integral del curso.", href: "azbuka-12.html" },
+  { id: 2, title: "Presentaciones y conversaciones básicas", desc: "Saludar, presentarte, nacionalidades y primeras preguntas.", href: "azbuka-2.html" },
+  { id: 3, title: "Sustantivos, género y números", desc: "Género, plural, números y objetos de todos los días.", href: "azbuka-3.html" },
+  { id: 4, title: "Casos I: Nominativo y Acusativo", desc: "Quién hace qué: el sujeto y el objeto directo.", href: "azbuka-4.html" },
+  { id: 5, title: "Verbos en presente y acciones cotidianas", desc: "Las conjugaciones del presente y la rutina.", href: "azbuka-5.html" },
+  { id: 6, title: "Ubicación, movimiento y caso prepositivo", desc: "Dónde estás y adónde vas.", href: "azbuka-6.html" },
+  { id: 7, title: "Tiempo, fechas y rutina diaria", desc: "Horas, días, meses y tu día a día.", href: "azbuka-7.html" },
+  { id: 8, title: "Pasado y experiencias personales", desc: "El pasado y el aspecto verbal.", href: "azbuka-8.html" },
+  { id: 9, title: "Futuro y planes", desc: "Hablar del futuro y hacer planes.", href: "azbuka-9.html" },
+  { id: 10, title: "Casos II: Genitivo, Dativo e Instrumental", desc: "Los tres casos que faltan.", href: "azbuka-10.html" },
+  { id: 11, title: "Comunicación cotidiana y ruso del mundo real", desc: "Situaciones reales: compras, trámites, viajes.", href: "azbuka-11.html" },
+  { id: 12, title: "Consolidación B1 y comunicación", desc: "Repaso integral y comunicación con soltura.", href: "azbuka-12.html" },
   { id: 13, title: "Examen final", desc: "Evaluación integradora de las 12 unidades.", href: "azbuka-13.html" },
 ];
 
@@ -37,8 +37,9 @@ const AZ_UNITS = [
 const AZ_MODULES = [
   { id: "alfabeto", title: "Alfabeto", desc: "Letras, sonidos y caligrafía — consulta libre", href: "alfabeto.html", icon: "orange", glyph: "Я" },
   { id: "dialogos", title: "Diálogos", desc: "Conversaciones, frases útiles y notas culturales", href: "dialogos.html", icon: "yellow", glyph: "Ди" },
-  { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "blue", glyph: "Вб" },
-  { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "purple", glyph: "Пд" },
+  { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "green", glyph: "Вб" },
+  { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "blue", glyph: "Пд" },
+  { id: "cuaderno", title: "Cuaderno", desc: "Tus notas y lo que guardás desde la app", href: "cuaderno.html", icon: "purple", glyph: "Тд" },
 ];
 
 /* ── LÉXICO ──────────────────────────────────────────────────
@@ -333,3 +334,108 @@ function azHablarSecuencia(items, alEmpezarLinea, alTerminar) {
   } catch (e) {}
 }
 function azCallar() { try { window.speechSynthesis.cancel(); } catch (e) {} }
+
+/* ── CUADERNO (26/09/2026) ────────────────────────────────────
+   Notas personales, guardadas en az_cuaderno:
+     { v: 1, secciones: [{ id, titulo, fija?, notas: [
+         { id, texto, fuente: { titulo, href } | null, creada, editada } ] }] }
+   La sección "bandeja" («Sin ordenar») siempre existe y no se borra:
+   ahí cae todo lo que se manda desde otras pantallas.
+     azCuadernoLeer() → el cuaderno (lo crea si no existe)
+     azCuadernoGuardar(cuaderno)
+     azCuadernoAgregar(texto, fuente?) → agrega una nota a «Sin ordenar» */
+function azCuadernoNuevo() {
+  return { v: 1, secciones: [{ id: "bandeja", titulo: "Sin ordenar", fija: true, notas: [] }] };
+}
+async function azCuadernoLeer() {
+  const c = await azGet("az_cuaderno", null);
+  if (!c || !Array.isArray(c.secciones)) return azCuadernoNuevo();
+  if (!c.secciones.some(s => s.id === "bandeja")) c.secciones.unshift({ id: "bandeja", titulo: "Sin ordenar", fija: true, notas: [] });
+  return c;
+}
+async function azCuadernoGuardar(c) {
+  await azSet("az_cuaderno", c);
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+}
+function azId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+async function azCuadernoAgregar(texto, fuente) {
+  const c = await azCuadernoLeer();
+  const hoy = new Date().toISOString();
+  c.secciones.find(s => s.id === "bandeja").notas.unshift({ id: azId(), texto: String(texto || "").trim(), fuente: fuente || null, creada: hoy, editada: hoy });
+  await azCuadernoGuardar(c);
+  return c;
+}
+
+/* ── DÓNDE QUEDASTE (26/09/2026) ──────────────────────────────
+   Cada unidad guarda el último módulo abierto en az_ultimo, y el
+   inicio lo muestra en la tarjeta «Seguir estudiando».
+     { unidad, n, total, titulo, href, fecha } */
+async function azGuardarUltimo(u) { await azSet("az_ultimo", Object.assign({ fecha: new Date().toISOString() }, u)); }
+async function azLeerUltimo() { return await azGet("az_ultimo", null); }
+
+/* ── COPIA DE SEGURIDAD DE TODO (26/09/2026) ──────────────────
+   Un solo archivo con todo lo que la app guarda en el teléfono
+   (todas las claves az_…): progreso de unidades, letras y palabras,
+   ejercicios hechos, cuaderno, dónde quedaste y preferencias.
+     azCopiaDatos() → { app: "azbuka", tipo: "copia", v: 1, fecha, datos: { clave: valor } }
+     azRestaurarDatos(copia) → reemplaza todo lo guardado por la copia.
+       También acepta las copias viejas del cuaderno solo ({ secciones }).
+   AzCopiaSeguridad({ c }) → los dos botones, listos para cualquier página. */
+function azCopiaDatos() {
+  const datos = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    if (k && k.indexOf("az_") === 0) datos[k] = localStorage.getItem(k);
+  }
+  return { app: "azbuka", tipo: "copia", v: 1, fecha: new Date().toISOString(), datos };
+}
+function azRestaurarDatos(copia) {
+  if (copia && Array.isArray(copia.secciones)) { localStorage.setItem("az_cuaderno", JSON.stringify(copia)); return "cuaderno"; }
+  if (!copia || copia.app !== "azbuka" || !copia.datos) throw new Error("formato");
+  const viejas = [];
+  for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.indexOf("az_") === 0) viejas.push(k); }
+  viejas.forEach(k => localStorage.removeItem(k));
+  Object.keys(copia.datos).forEach(k => { if (k.indexOf("az_") === 0) localStorage.setItem(k, copia.datos[k]); });
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+  return "todo";
+}
+async function azGuardarCopia() {
+  const nombre = "azbuka-copia-" + new Date().toISOString().slice(0, 10) + ".json";
+  const blob = new Blob([JSON.stringify(azCopiaDatos())], { type: "application/json" });
+  try {
+    const file = new File([blob], nombre, { type: "application/json" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: "Copia de Azbuka" }); return; }
+  } catch (e) { if (e && e.name === "AbortError") return; }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = nombre;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function AzCopiaSeguridad({ c }) {
+  const h = React.createElement;
+  const ref = htmPreact.useRef(null);
+  const restaurar = e => {
+    const f = e.target.files && e.target.files[0]; e.target.value = "";
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => {
+      let copia;
+      try { copia = JSON.parse(r.result); } catch (err) { alert("Ese archivo no es una copia de Azbuka."); return; }
+      const esVieja = copia && Array.isArray(copia.secciones);
+      if (!esVieja && (!copia || copia.app !== "azbuka")) { alert("Ese archivo no es una copia de Azbuka."); return; }
+      const cuando = copia.fecha ? " del " + new Date(copia.fecha).toLocaleDateString("es-AR") : "";
+      const msg = esVieja
+        ? "Esta es una copia solo del cuaderno. ¿Reemplazar tu cuaderno actual? El progreso no se toca."
+        : "¿Restaurar la copia" + cuando + "? Se reemplazan tus notas y todo tu progreso por los de la copia.";
+      if (!confirm(msg)) return;
+      try { azRestaurarDatos(copia); location.reload(); } catch (err) { alert("No se pudo restaurar la copia."); }
+    };
+    r.readAsText(f);
+  };
+  const btn = { flex: 1, padding: "11px 14px", borderRadius: 10, border: `1px solid ${c.border}`, background: c.bg3, color: c.text, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" };
+  return h("div", null,
+    h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
+      "Todo lo que hacés en Azbuka (tus notas y tu progreso en unidades, letras y ejercicios) se guarda en este teléfono. Guardá una copia de vez en cuando, en Archivos o mandándotela por mail: si se borran los datos del navegador o cambiás de teléfono, la restaurás y seguís donde estabas."),
+    h("div", { style: { display: "flex", gap: 8, marginTop: 12 } },
+      h("button", { style: btn, onClick: azGuardarCopia }, "Guardar copia"),
+      h("button", { style: btn, onClick: () => ref.current && ref.current.click() }, "Restaurar copia")),
+    h("input", { ref, type: "file", accept: "application/json,.json", style: { display: "none" }, onChange: restaurar }));
+}
