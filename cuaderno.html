@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Cuaderno</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="core.js"></script>
+<script src="progress.js"></script>
+<script src="shell.js"></script>
+<script>
+/* ============================================================
+   CUADERNO.HTML — Notas personales
+   ------------------------------------------------------------
+   Paso 1 (26/09/2026): secciones, notas, buscar, reordenar,
+   mover entre secciones y copia de seguridad (de toda la app:
+   AzCopiaSeguridad en core.js). Los datos viven en
+   az_cuaderno (ver core.js: azCuadernoLeer / azCuadernoAgregar).
+   «Sin ordenar» es la bandeja fija: ahí cae lo que se manda desde
+   otras pantallas (paso 3). Paso 2: exportar a PDF y Word
+   (jspdf.umd.min.js, fflate.min.js y noto-sans-pdf-*.ttf).
+   ============================================================ */
+const { useState, useEffect, useRef } = htmPreact;
+const h = React.createElement;
+
+function fecha(iso) {
+  try { const d = new Date(iso); return d.toLocaleDateString("es-AR", { day: "numeric", month: "short", year: "numeric" }); } catch (e) { return ""; }
+}
+function normal(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ё/g, "е"); }
+
+function Estilos({ c }) {
+  return h("style", null, `
+    .cu-sub{font-size:13.5px;color:${c.textMuted};line-height:1.6;margin-top:6px;}
+    .cu-bar{display:flex;gap:8px;margin-top:16px;}
+    .cu-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 14px;border-radius:10px;border:1px solid ${c.gold};background:${c.gold};color:${c.bg};font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;}
+    .cu-btn.sec{background:${c.bg3};border-color:${c.border};color:${c.text};}
+    .cu-btn.peligro{background:transparent;border-color:#B5605C;color:#D9776F;}
+    .cu-btn:disabled{opacity:.4;cursor:default;}
+    .cu-chip{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+    .cu-sec{background:${c.card};border:1px solid ${c.border};border-radius:14px;margin-top:12px;overflow:hidden;}
+    .cu-sec-h{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;}
+    .cu-sec-t{flex:1;min-width:0;font-size:16px;font-weight:700;color:${c.text};}
+    .cu-count{font-size:12px;color:${c.textMuted};font-weight:600;}
+    .cu-chev{color:${c.textMuted};font-size:13px;transition:transform .2s;}
+    .cu-nota{padding:12px 16px;border-top:1px solid ${c.border};cursor:pointer;}
+    .cu-nota:active{background:${c.bg2};}
+    .cu-nota-x{font-size:15px;line-height:1.5;color:${c.text};white-space:pre-wrap;word-break:break-word;}
+    .cu-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px;font-size:11.5px;color:${c.textMuted};}
+    .cu-fuente{color:${c.gold};font-weight:600;text-decoration:none;}
+    .cu-ico{width:34px;height:34px;border-radius:9px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
+    .cu-ico:disabled{opacity:.3;cursor:default;}
+    .cu-vacio{padding:14px 16px;border-top:1px solid ${c.border};font-size:13px;color:${c.textMuted};}
+    .cu-input{width:100%;box-sizing:border-box;background:${c.bg3};border:1px solid ${c.border};border-radius:9px;padding:10px 12px;color:${c.text};font-size:16px;font-family:inherit;}
+    .cu-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:26px 0 8px;}
+    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:fadeIn .25s ease;}
+    .sheet-in{max-width:760px;margin:0 auto;padding:6vh 3vw 4vh;}
+    .sheet-x{position:fixed;top:6vh;right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
+    .cu-area{width:100%;box-sizing:border-box;min-height:38vh;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:14px;color:${c.text};font-size:16px;line-height:1.55;font-family:inherit;resize:vertical;}
+    .cu-select{width:100%;box-sizing:border-box;background:${c.bg3};border:1px solid ${c.border};border-radius:9px;padding:10px 12px;color:${c.text};font-size:16px;font-family:inherit;}
+  `);
+}
+
+/* ── Hoja para escribir o editar una nota ── */
+function Editor({ c, nota, seccionId, secciones, onGuardar, onBorrar, onCerrar }) {
+  const [texto, setTexto] = useState(nota ? nota.texto : "");
+  const [sec, setSec] = useState(seccionId || "bandeja");
+  const ref = useRef(null);
+  useEffect(() => { if (!nota && ref.current) ref.current.focus(); }, []);
+  return h("div", { className: "sheet", role: "dialog" },
+    h("button", { className: "sheet-x", onClick: onCerrar, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "cu-lbl", style: { marginTop: 0 } }, nota ? "Editar nota" : "Nota nueva"),
+      h("textarea", { ref, className: "cu-area", value: texto, placeholder: "Escribí tu nota…", onInput: e => setTexto(e.target.value) }),
+      nota && nota.fuente && h("div", { className: "cu-meta", style: { marginTop: 10 } }, "Guardada desde: ",
+        h("a", { className: "cu-fuente", href: nota.fuente.href, onClick: e => azNavigate(e, nota.fuente.href) }, nota.fuente.titulo)),
+      h("div", { className: "cu-lbl" }, "Sección"),
+      h("select", { className: "cu-select", value: sec, onChange: e => setSec(e.target.value) },
+        secciones.map(s => h("option", { key: s.id, value: s.id }, s.titulo))),
+      h("div", { style: { display: "flex", flexDirection: "column", gap: 10, marginTop: 22 } },
+        h("button", { className: "cu-btn", disabled: !texto.trim(), onClick: () => onGuardar(texto.trim(), sec) }, "Guardar"),
+        nota && h("button", { className: "cu-btn peligro", onClick: onBorrar }, "Borrar nota"))));
+}
+
+
+/* ── Exportar (paso 2, 26/09/2026) ───────────────────────────
+   PDF con jsPDF y Word (.docx) armado a mano y comprimido con
+   fflate. Las librerías y la fuente se cargan recién al exportar.
+   El archivo se manda al menú Compartir del teléfono (WhatsApp,
+   Mail, Archivos…); si no se puede, se descarga. */
+function cargarScript(src) {
+  return new Promise((ok, mal) => {
+    if (document.querySelector('script[data-src="' + src + '"]')) return ok();
+    const t = document.createElement("script"); t.src = src; t.dataset.src = src;
+    t.onload = () => ok(); t.onerror = () => mal(new Error("No se pudo cargar " + src));
+    document.head.appendChild(t);
+  });
+}
+async function fuenteBase64(url) {
+  const buf = await (await fetch(url)).arrayBuffer();
+  let bin = ""; const b = new Uint8Array(buf);
+  for (let i = 0; i < b.length; i += 0x8000) bin += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
+async function compartir(blob, nombre, tipo) {
+  try {
+    const file = new File([blob], nombre, { type: tipo });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: nombre }); return; }
+  } catch (e) { if (e && e.name === "AbortError") return; }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = nombre;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function secDeExport(cu, cual) {
+  return cu.secciones.filter(s => s.notas.length && (cual === "todo" || s.id === cual));
+}
+function fechaLarga(iso) { return fecha(iso); }
+
+async function exportarPDF(cu, cual) {
+  await cargarScript("jspdf.umd.min.js");
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  doc.addFileToVFS("NotoSans-400.ttf", await fuenteBase64("noto-sans-pdf-400.ttf"));
+  doc.addFont("NotoSans-400.ttf", "NotoSans", "normal");
+  doc.addFileToVFS("NotoSans-700.ttf", await fuenteBase64("noto-sans-pdf-700.ttf"));
+  doc.addFont("NotoSans-700.ttf", "NotoSans", "bold");
+  const W = doc.internal.pageSize.getWidth(), H = doc.internal.pageSize.getHeight(), M = 56, ancho = W - 2 * M;
+  let y = M;
+  const salto = alto => { if (y + alto > H - M) { doc.addPage(); y = M; } };
+  const texto = (t, tam, estilo, color, interlinea) => {
+    doc.setFont("NotoSans", estilo); doc.setFontSize(tam); doc.setTextColor.apply(doc, color);
+    doc.splitTextToSize(t, ancho).forEach(l => { salto(tam * interlinea); doc.text(l, M, y + tam); y += tam * interlinea; });
+  };
+  texto("Cuaderno de Azbuka", 22, "bold", [26, 26, 32], 1.3);
+  texto(new Date().toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" }), 10, "normal", [120, 120, 130], 1.4);
+  y += 10;
+  secDeExport(cu, cual).forEach(s => {
+    y += 14; salto(40);
+    texto(s.titulo, 15, "bold", [138, 109, 31], 1.3);
+    doc.setDrawColor(210, 190, 140); doc.line(M, y + 2, W - M, y + 2); y += 10;
+    s.notas.forEach(n => {
+      y += 6;
+      texto(n.texto, 11.5, "normal", [30, 30, 36], 1.45);
+      const meta = [n.fuente ? n.fuente.titulo : null, fechaLarga(n.editada || n.creada)].filter(Boolean).join(" · ");
+      texto(meta, 8.5, "normal", [130, 130, 140], 1.5);
+    });
+  });
+  const total = doc.getNumberOfPages();
+  for (let i = 1; i <= total; i++) {
+    doc.setPage(i); doc.setFont("NotoSans", "normal"); doc.setFontSize(8.5); doc.setTextColor(150, 150, 160);
+    doc.text("Азбука · " + i + " / " + total, W - M, H - 28, { align: "right" });
+  }
+  return doc.output("blob");
+}
+
+function xml(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+async function exportarDOCX(cu, cual) {
+  await cargarScript("fflate.min.js");
+  const p = (txt, estilo, extra) => '<w:p>' + (estilo ? '<w:pPr><w:pStyle w:val="' + estilo + '"/></w:pPr>' : '') +
+    String(txt).split("\n").map((l, i) => '<w:r>' + (extra || '') + (i ? '<w:br/>' : '') + '<w:t xml:space="preserve">' + xml(l) + '</w:t></w:r>').join('') + '</w:p>';
+  let cuerpo = p("Cuaderno de Azbuka", "Title") + p(new Date().toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" }), "Meta");
+  secDeExport(cu, cual).forEach(s => {
+    cuerpo += p(s.titulo, "Heading1");
+    s.notas.forEach(n => {
+      cuerpo += p(n.texto);
+      cuerpo += p([n.fuente ? n.fuente.titulo : null, fechaLarga(n.editada || n.creada)].filter(Boolean).join(" · "), "Meta");
+    });
+  });
+  const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
+  const archivos = {
+    "[Content_Types].xml": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>',
+    "_rels/.rels": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>',
+    "word/_rels/document.xml.rels": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>',
+    "word/styles.xml": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles ' + W + '>' +
+      '<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial" w:eastAsia="Arial"/><w:sz w:val="23"/><w:lang w:val="es-AR"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="80" w:line="300" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>' +
+      '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:after="60"/></w:pPr><w:rPr><w:b/><w:sz w:val="44"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="360" w:after="120"/><w:pBdr><w:bottom w:val="single" w:sz="6" w:space="2" w:color="D2BE8C"/></w:pBdr><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:color w:val="8A6D1F"/><w:sz w:val="30"/></w:rPr></w:style>' +
+      '<w:style w:type="paragraph" w:styleId="Meta"><w:name w:val="Meta"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:after="200"/></w:pPr><w:rPr><w:color w:val="82828C"/><w:sz w:val="17"/></w:rPr></w:style>' +
+      '</w:styles>',
+    "word/document.xml": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document ' + W + '><w:body>' + cuerpo +
+      '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>'
+  };
+  const enc = new TextEncoder(), datos = {};
+  Object.keys(archivos).forEach(k => { datos[k] = enc.encode(archivos[k]); });
+  const zip = fflate.zipSync(datos, { level: 6 });
+  return new Blob([zip], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+}
+
+function HojaExportar({ c, cu, onCerrar }) {
+  const conNotas = cu.secciones.filter(s => s.notas.length);
+  const [cual, setCual] = useState("todo");
+  const [estado, setEstado] = useState("");
+  const nombre = ext => "azbuka-cuaderno" + (cual === "todo" ? "" : "-" + (cu.secciones.find(s => s.id === cual) || {}).titulo.toLowerCase().normalize("NFD").replace(/[^a-z0-9а-яё]+/gi, "-").replace(/^-|-$/g, "")) + "-" + new Date().toISOString().slice(0, 10) + "." + ext;
+  const hacer = async tipo => {
+    try {
+      setEstado("Preparando el archivo…");
+      const blob = tipo === "pdf" ? await exportarPDF(cu, cual) : await exportarDOCX(cu, cual);
+      setEstado("");
+      await compartir(blob, nombre(tipo), blob.type);
+    } catch (e) { setEstado("No se pudo generar el archivo. Revisá la conexión la primera vez que exportás."); }
+  };
+  return h("div", { className: "sheet", role: "dialog" },
+    h("button", { className: "sheet-x", onClick: onCerrar, "aria-label": "Cerrar" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "cu-lbl", style: { marginTop: 0 } }, "Exportar"),
+      h("div", { style: { fontSize: 24, fontWeight: 800, paddingRight: 48 } }, "Compartir el cuaderno"),
+      h("div", { className: "cu-sub" }, "Se genera un archivo y se abre el menú Compartir del teléfono: WhatsApp, Mail, Archivos…"),
+      h("div", { className: "cu-lbl" }, "Qué exportar"),
+      h("select", { className: "cu-select", value: cual, onChange: e => setCual(e.target.value) },
+        h("option", { value: "todo" }, "Todo el cuaderno"),
+        conNotas.map(s => h("option", { key: s.id, value: s.id }, s.titulo + " (" + s.notas.length + ")"))),
+      h("div", { className: "cu-lbl" }, "Formato"),
+      h("div", { style: { display: "flex", flexDirection: "column", gap: 10 } },
+        h("button", { className: "cu-btn", disabled: !!estado && estado.startsWith("Prep"), onClick: () => hacer("pdf") }, "PDF · para leer o imprimir"),
+        h("button", { className: "cu-btn sec", disabled: !!estado && estado.startsWith("Prep"), onClick: () => hacer("docx") }, "Word (.docx) · para seguir editando")),
+      estado && h("div", { className: "cu-sub", style: { marginTop: 14 } }, estado)));
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [cu, setCu] = useState(null);
+  const [q, setQ] = useState("");
+  const [ordenar, setOrdenar] = useState(false);
+  const [cerradas, setCerradas] = useState({});
+  const [editor, setEditor] = useState(null);        /* { nota?, seccionId } */
+  const [aviso, setAviso] = useState("");
+  const [exportar, setExportar] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      setCu(await azCuadernoLeer());
+      setCerradas(await azGet('az_cuaderno_cerradas', {}));
+    })();
+  }, []);
+
+  const c = azColors(darkMode);
+  const guardar = nuevo => { setCu(nuevo); azCuadernoGuardar(nuevo); };
+  const copia = () => JSON.parse(JSON.stringify(cu));
+  const avisar = t => { setAviso(t); setTimeout(() => setAviso(""), 2500); };
+  const toggle = id => { const n = Object.assign({}, cerradas, { [id]: !cerradas[id] }); setCerradas(n); azSet('az_cuaderno_cerradas', n); };
+
+  if (!cu) return h(AzShell, { darkMode, setDarkMode, moduleId: "cuaderno", tabs: [] }, null);
+
+  /* ── Acciones ── */
+  const guardarNota = (texto, secId) => {
+    const n = copia(), ahora = new Date().toISOString();
+    let nota;
+    if (editor.nota) {
+      n.secciones.forEach(s => { const i = s.notas.findIndex(x => x.id === editor.nota.id); if (i >= 0) nota = s.notas.splice(i, 1)[0]; });
+      nota.texto = texto; nota.editada = ahora;
+    } else nota = { id: azId(), texto, fuente: null, creada: ahora, editada: ahora };
+    const destino = n.secciones.find(s => s.id === secId) || n.secciones[0];
+    if (editor.nota && editor.seccionId === secId) {
+      const orig = cu.secciones.find(s => s.id === secId).notas.findIndex(x => x.id === nota.id);
+      destino.notas.splice(Math.max(0, orig), 0, nota);
+    } else destino.notas.unshift(nota);
+    guardar(n); setEditor(null);
+  };
+  const borrarNota = () => {
+    if (!confirm("¿Borrar esta nota?")) return;
+    const n = copia();
+    n.secciones.forEach(s => { s.notas = s.notas.filter(x => x.id !== editor.nota.id); });
+    guardar(n); setEditor(null);
+  };
+  const nuevaSeccion = () => {
+    const t = prompt("Nombre de la sección nueva:");
+    if (!t || !t.trim()) return;
+    const n = copia(); n.secciones.push({ id: azId(), titulo: t.trim(), notas: [] }); guardar(n);
+  };
+  const renombrar = s => {
+    const t = prompt("Nuevo nombre de la sección:", s.titulo);
+    if (!t || !t.trim()) return;
+    const n = copia(); n.secciones.find(x => x.id === s.id).titulo = t.trim(); guardar(n);
+  };
+  const borrarSeccion = s => {
+    if (!confirm("¿Borrar la sección «" + s.titulo + "»?" + (s.notas.length ? " Sus notas pasan a «Sin ordenar»." : ""))) return;
+    const n = copia(); const i = n.secciones.findIndex(x => x.id === s.id);
+    const [quitada] = n.secciones.splice(i, 1);
+    n.secciones.find(x => x.id === "bandeja").notas.push(...quitada.notas); guardar(n);
+  };
+  const moverSeccion = (s, d) => {
+    const n = copia(); const i = n.secciones.findIndex(x => x.id === s.id), j = i + d;
+    if (j < 1 || j >= n.secciones.length) return;   /* «Sin ordenar» queda siempre primera */
+    [n.secciones[i], n.secciones[j]] = [n.secciones[j], n.secciones[i]]; guardar(n);
+  };
+  const moverNota = (s, nota, d) => {
+    const n = copia(); const sec = n.secciones.find(x => x.id === s.id);
+    const i = sec.notas.findIndex(x => x.id === nota.id), j = i + d;
+    if (j < 0 || j >= sec.notas.length) return;
+    [sec.notas[i], sec.notas[j]] = [sec.notas[j], sec.notas[i]]; guardar(n);
+  };
+
+  /* ── Vista ── */
+  const buscando = q.trim().length > 0;
+  const nq = normal(q.trim());
+  const total = cu.secciones.reduce((a, s) => a + s.notas.length, 0);
+  const chip = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
+
+  const Nota = ({ s, nota, i }) => h("div", { className: "cu-nota", role: "button", tabIndex: 0,
+      onClick: () => !ordenar && setEditor({ nota, seccionId: s.id }),
+      onKeyDown: e => { if (e.key === "Enter" && !ordenar) setEditor({ nota, seccionId: s.id }); },
+      style: ordenar ? { display: "flex", gap: 10, alignItems: "center", cursor: "default" } : null },
+    h("div", { style: { flex: 1, minWidth: 0 } },
+      h("div", { className: "cu-nota-x" }, nota.texto),
+      h("div", { className: "cu-meta" },
+        nota.fuente && h("a", { className: "cu-fuente", href: nota.fuente.href, onClick: e => { e.stopPropagation(); azNavigate(e, nota.fuente.href); } }, nota.fuente.titulo),
+        h("span", null, fecha(nota.editada || nota.creada)),
+        buscando && h("span", null, "· " + s.titulo))),
+    ordenar && h("div", { style: { display: "flex", gap: 6 } },
+      h("button", { className: "cu-ico", disabled: i === 0, onClick: () => moverNota(s, nota, -1), "aria-label": "Subir nota" }, "↑"),
+      h("button", { className: "cu-ico", disabled: i === s.notas.length - 1, onClick: () => moverNota(s, nota, 1), "aria-label": "Bajar nota" }, "↓")));
+
+  let cuerpo;
+  if (buscando) {
+    const hits = [];
+    cu.secciones.forEach(s => s.notas.forEach(n => { if (normal(n.texto).includes(nq) || normal(s.titulo).includes(nq)) hits.push({ s, n }); }));
+    cuerpo = h("div", { className: "cu-sec" },
+      h("div", { className: "cu-sec-h", style: { cursor: "default" } }, h("div", { className: "cu-sec-t" }, "Resultados"), h("span", { className: "cu-count" }, hits.length)),
+      hits.length ? hits.map(x => h(Nota, { key: x.n.id, s: x.s, nota: x.n, i: -1 })) : h("div", { className: "cu-vacio" }, "No hay notas con «" + q.trim() + "»."));
+  } else {
+    cuerpo = cu.secciones.map((s, k) => {
+      const cerrada = !!cerradas[s.id] && !ordenar;
+      return h("div", { key: s.id, className: "cu-sec" },
+        h("div", { className: "cu-sec-h", onClick: () => !ordenar && toggle(s.id) },
+          h("div", { className: "cu-sec-t" }, s.titulo),
+          h("span", { className: "cu-count" }, s.notas.length),
+          ordenar && !s.fija && h("div", { style: { display: "flex", gap: 6 } },
+            h("button", { className: "cu-ico", disabled: k <= 1, onClick: e => { e.stopPropagation(); moverSeccion(s, -1); }, "aria-label": "Subir sección" }, "↑"),
+            h("button", { className: "cu-ico", disabled: k === cu.secciones.length - 1, onClick: e => { e.stopPropagation(); moverSeccion(s, 1); }, "aria-label": "Bajar sección" }, "↓"),
+            h("button", { className: "cu-ico", onClick: e => { e.stopPropagation(); renombrar(s); }, "aria-label": "Renombrar" }, "✎"),
+            h("button", { className: "cu-ico", onClick: e => { e.stopPropagation(); borrarSeccion(s); }, "aria-label": "Borrar sección", style: { color: "#D9776F" } }, "✕")),
+          !ordenar && h("span", { className: "cu-chev", style: { transform: cerrada ? "rotate(-90deg)" : "none" } }, "▾")),
+        !cerrada && (s.notas.length
+          ? s.notas.map((n, i) => h(Nota, { key: n.id, s, nota: n, i }))
+          : h("div", { className: "cu-vacio" }, s.fija ? "Acá cae lo que guardes desde otras pantallas de la app." : "Sección vacía.")));
+    });
+  }
+
+  return h(React.Fragment, null,
+    h(Estilos, { c }),
+    h(AzShell, { darkMode, setDarkMode, moduleId: "cuaderno", tabs: [] },
+      h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+        h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, "Cuaderno"),
+        h("div", { className: "cu-sub" }, total ? total + (total === 1 ? " nota" : " notas") + " en " + cu.secciones.length + (cu.secciones.length === 1 ? " sección." : " secciones.") : "Tus notas: lo que escribís vos y lo que guardás desde la app."),
+        h("div", { className: "cu-bar" },
+          h("button", { className: "cu-btn", style: { flex: 1 }, onClick: () => setEditor({ seccionId: "bandeja" }) }, "+ Nota"),
+          h("button", { className: "cu-btn sec", style: { flex: 1 }, onClick: nuevaSeccion }, "+ Sección")),
+        h("div", { style: { position: "relative", marginTop: 12 } },
+          h("input", { className: "cu-input", value: q, placeholder: "Buscar en el cuaderno…", onInput: e => setQ(e.target.value), style: { paddingRight: 34 } }),
+          q && h("button", { onClick: () => setQ(""), "aria-label": "Borrar búsqueda", style: { position: "absolute", right: 6, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: c.textMuted, fontSize: 15, cursor: "pointer", padding: 6 } }, "✕")),
+        !buscando && h("div", { style: { display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 12 } },
+          total > 0 && !ordenar && h("button", { className: "cu-chip", style: chip(false), onClick: () => setExportar(true) }, "Exportar"),
+          h("button", { className: "cu-chip", style: chip(ordenar), onClick: () => setOrdenar(!ordenar) }, ordenar ? "Listo" : "Ordenar")),
+        cuerpo,
+        h("div", { className: "cu-lbl" }, "Copia de seguridad"),
+        h(AzCopiaSeguridad, { c }),
+        aviso && h("div", { style: { marginTop: 10, fontSize: 13, color: "#4CAF82", fontWeight: 600 } }, aviso))),
+    exportar && h(HojaExportar, { c, cu, onCerrar: () => setExportar(false) }),
+    editor && h(Editor, { c, nota: editor.nota, seccionId: editor.seccionId, secciones: cu.secciones, onGuardar: guardarNota, onBorrar: borrarNota, onCerrar: () => setEditor(null) }));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

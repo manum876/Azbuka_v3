@@ -19,8 +19,8 @@
          objetivo: IDs que se enlazan (sin objetivo, se enlazan todos)
      AzPalabra({ texto, id, sentido }) → una palabra suelta
      AzFrase({ id, texto })       → una frase de data-frases.js
-   Funciones: azAbrirBurbuja(tipo, datos, elemento), azHablarRu(texto, genero?),
-              azHablarSecuencia([{ texto, genero }])
+   Función: azAbrirBurbuja(tipo, datos, elemento). La voz (azHablarRu)
+   está en core.js.
    ============================================================ */
 (function () {
   const h = React.createElement;
@@ -28,50 +28,6 @@
   const RX_PALABRA = /[А-Яа-яЁё\u0301]+(?:-[А-Яа-яЁё\u0301]+)*/g;
   const POS_CORTO = { sustantivo: "sustantivo", verbo: "verbo", adjetivo: "adjetivo", pronombre: "pronombre", determinante: "determinante", numeral: "numeral", adverbio: "adverbio", "preposición": "preposición", "conjunción": "conjunción", "partícula": "partícula", "interjección": "interjección" };
   const GEN = { m: "masculino", f: "femenino", n: "neutro" };
-
-  /* Voz: ru-RU a 0,85, sin la marca de acento. Con género ("m" / "f"),
-     usa una voz rusa de hombre o de mujer si el teléfono la tiene; si
-     no, cambia apenas el tono. Mismo criterio que Diálogos. */
-  const VOZ_F = /milena|katya|katerina|anna|irina|alena|elena|tatyana|female|женск/i;
-  const VOZ_M = /yuri|maxim|pavel|dmitr|male|мужск/i;
-  try { if ("speechSynthesis" in window) { window.speechSynthesis.getVoices(); window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices(); } } catch (e) {}
-  function vozPara(genero) {
-    try {
-      const ru = window.speechSynthesis.getVoices().filter(v => /^ru/i.test(v.lang));
-      if (genero === "f") return ru.find(v => VOZ_F.test(v.name)) || null;
-      if (genero === "m") return ru.find(v => VOZ_M.test(v.name) && !VOZ_F.test(v.name)) || null;
-    } catch (e) {}
-    return null;
-  }
-  function frase(texto, genero) {
-    const u = new SpeechSynthesisUtterance(texto.replace(/\u0301/g, ""));
-    u.lang = "ru-RU"; u.rate = 0.85;
-    const v = vozPara(genero);
-    if (v) { u.voice = v; u.lang = v.lang; }
-    /* El tono se cambia siempre: si el teléfono ignora la voz elegida
-       (pasa en algunos iPhone), igual se nota quién habla. */
-    if (genero === "m") u.pitch = v ? 0.9 : 0.7;
-    else if (genero === "f") u.pitch = v ? 1.05 : 1.25;
-    return u;
-  }
-  function azVocesRu() {
-    try { return window.speechSynthesis.getVoices().filter(v => /^ru/i.test(v.lang)).map(v => v.name); } catch (e) { return []; }
-  }
-  function azHablarRu(texto, genero) {
-    try {
-      if (!texto || !("speechSynthesis" in window)) return;
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(frase(texto, genero));
-    } catch (e) {}
-  }
-  /* Varias líneas seguidas, cada una con su voz: [{ texto, genero }] */
-  function azHablarSecuencia(items) {
-    try {
-      if (!("speechSynthesis" in window)) return;
-      window.speechSynthesis.cancel();
-      items.forEach(it => window.speechSynthesis.speak(frase(it.texto, it.genero)));
-    } catch (e) {}
-  }
 
   function abrir(tipo, datos, el) {
     const r = el && el.getBoundingClientRect ? el.getBoundingClientRect() : null;
@@ -236,9 +192,6 @@
     return h("span", { lang: "ru" }, partes);
   }
 
-  window.azHablarRu = azHablarRu;
-  window.azHablarSecuencia = azHablarSecuencia;
-  window.azVocesRu = azVocesRu;
   window.azAbrirBurbuja = abrir;
   window.AzBurbujaHost = AzBurbujaHost;
   window.AzPalabra = AzPalabra;

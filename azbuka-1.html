@@ -318,7 +318,6 @@ function HojaDialogo({ d, c, onClose }) {
         h("button", { className: "pair-btn", onClick: () => setTr(v => !v), style: chip(tr) }, "Transliteración"),
         h("button", { className: "pair-btn", onClick: () => setEs(v => !v), style: chip(es) }, "Traducción")),
       h("div", { style: { fontSize: 13, color: c.textMuted, marginBottom: 12 } }, "Para practicar la lectura, apagá la transliteración y la traducción."),
-      h("div", { style: { fontSize: 12, color: c.textMuted, marginBottom: 12 } }, "Voces rusas del teléfono: " + (azVocesRu().join(", ") || "ninguna detectada todavía")),
       d.lineas.map((l, i) => {
         const p = (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[l.p]) || { ru: l.p };
         return h("div", { key: i, className: "u-card", style: { padding: "12px 14px", marginBottom: 8, display: "flex", gap: 10, alignItems: "flex-start" } },
@@ -378,6 +377,7 @@ function App() {
   useEffect(() => {
     const m = modId ? unidad1Modulo(modId) : null;
     if (m && m.n > visto) { setVisto(m.n); azSet('az_u1_visto', m.n); }
+    if (m) azGuardarUltimo({ unidad: 1, n: m.n, total: U.modulos.length, titulo: "Unidad 1 · " + m.titulo, href: "azbuka-1.html?m=" + m.id });
   }, [modId]);
   const practicarUnidad = () => setPractica({ titulo: "Unidad 1", pool: EJ_U1.filter(e => e.modulo <= Math.max(visto, 2)) });
   const rendirExamen = m => setPractica({ titulo: "Evaluación de la Unidad 1", pool: EJ_U1, examen: Object.assign({ intro: m.intro }, { partes: m.partes, aprobado: m.aprobado }) });

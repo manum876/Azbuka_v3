@@ -283,3 +283,53 @@ function azFmt(texto) {
 }
 /* El mismo texto sin las marcas (para búsquedas o atributos) */
 function azSinMarcas(texto) { return String(texto == null ? "" : texto).replace(/\*\*/g, ""); }
+
+/* ── VOZ (compartida por toda la app, 26/09/2026) ─────────────
+   ru-RU a 0,85, sin la marca de acento (algunas voces la leen mal).
+   genero ("m" / "f"): si el teléfono le deja a la web una voz rusa de
+   hombre y otra de mujer, cada personaje usa la suya; además se cambia
+   siempre el tono, porque el iPhone solo expone la voz predeterminada
+   de cada idioma (hombre 0,7 / mujer 1,25; con voz propia, 0,9 / 1,05).
+     azHablarRu(texto, genero?)
+     azHablarSecuencia([{ texto, genero }], alEmpezarLinea?, alTerminar?)
+     azCallar() */
+const AZ_VOZ_F = /milena|katya|katerina|anna|irina|alena|elena|tatyana|female|женск/i;
+const AZ_VOZ_M = /yuri|maxim|pavel|dmitr|male|мужск/i;
+try { if ("speechSynthesis" in window) { window.speechSynthesis.getVoices(); window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices(); } } catch (e) {}
+function azVozPara(genero) {
+  try {
+    const ru = window.speechSynthesis.getVoices().filter(v => /^ru/i.test(v.lang));
+    if (genero === "f") return ru.find(v => AZ_VOZ_F.test(v.name)) || null;
+    if (genero === "m") return ru.find(v => AZ_VOZ_M.test(v.name) && !AZ_VOZ_F.test(v.name)) || null;
+  } catch (e) {}
+  return null;
+}
+function azFraseVoz(texto, genero) {
+  const u = new SpeechSynthesisUtterance(String(texto).replace(/\u0301/g, ""));
+  u.lang = "ru-RU"; u.rate = 0.85;
+  const v = azVozPara(genero);
+  if (v) { u.voice = v; u.lang = v.lang; }
+  if (genero === "m") u.pitch = v ? 0.9 : 0.7;
+  else if (genero === "f") u.pitch = v ? 1.05 : 1.25;
+  return u;
+}
+function azHablarRu(texto, genero) {
+  try {
+    if (!texto || !("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(azFraseVoz(texto, genero));
+  } catch (e) {}
+}
+function azHablarSecuencia(items, alEmpezarLinea, alTerminar) {
+  try {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    items.forEach((it, i) => {
+      const u = azFraseVoz(it.texto, it.genero);
+      if (alEmpezarLinea) u.onstart = () => alEmpezarLinea(i);
+      if (i === items.length - 1 && alTerminar) u.onend = () => alTerminar();
+      window.speechSynthesis.speak(u);
+    });
+  } catch (e) {}
+}
+function azCallar() { try { window.speechSynthesis.cancel(); } catch (e) {} }

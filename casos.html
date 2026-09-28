@@ -54,16 +54,7 @@ function getWordId() {
 
 /* Voz: se envía sin el acento gráfico (U+0301), que algunas voces
    leen mal. */
-function speakRu(text) {
-  try {
-    if (!text || !("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text.replace(/\u0301/g, ""));
-    u.lang = "ru-RU";
-    u.rate = 0.85;
-    window.speechSynthesis.speak(u);
-  } catch (err) {}
-}
+function speakRu(text) { azHablarRu(text); }   /* voz compartida: core.js */
 
 /* Pantalla ancha: las 4 columnas de género entran juntas. */
 function useWide() {

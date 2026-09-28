@@ -90,15 +90,7 @@ function getWordId() {
   return new URLSearchParams(window.location.search).get("id");
 }
 
-function azSpeak(ru) {
-  try {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(ru);
-    u.lang = "ru-RU";
-    window.speechSynthesis.speak(u);
-  } catch (err) {}
-}
+function azSpeak(ru) { azHablarRu(ru); }   /* voz compartida: core.js */
 
 /* Estilos de la ficha — mismas clases y mismos valores que
    preview-fichas-ejemplo.html, con --bg/--gold/etc. tomados de
