@@ -58,7 +58,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 5407
+  totalEntries: 5487
 };
 const LEXICON_COMER = [
  {
@@ -192,7 +192,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -311,7 +313,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "5",
@@ -432,7 +434,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -548,7 +552,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -676,7 +682,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -830,7 +838,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "12",
@@ -922,7 +930,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -1156,7 +1166,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -1214,7 +1226,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -1272,7 +1286,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -1423,7 +1439,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -1967,7 +1985,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "30",
@@ -2178,7 +2196,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "33",
@@ -2541,7 +2559,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -2602,7 +2622,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "39",
@@ -3147,7 +3167,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -3820,7 +3842,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "58",
@@ -4000,7 +4022,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4275,7 +4299,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4399,7 +4425,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4518,7 +4546,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "69",
@@ -4636,7 +4664,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "71",
@@ -5184,7 +5212,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -6144,7 +6174,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "94",
@@ -6271,7 +6301,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "96",
@@ -6809,7 +6839,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "106",
@@ -6872,7 +6902,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "107",
@@ -7180,7 +7210,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -7477,7 +7509,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -10183,7 +10217,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -10813,7 +10849,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -10939,7 +10977,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "173",
@@ -12009,7 +12047,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "190",
@@ -14800,7 +14838,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "236",
@@ -14984,7 +15022,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "239",
@@ -15344,7 +15382,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -16668,7 +16708,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -18458,7 +18500,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "295",
@@ -19132,7 +19174,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "306",
@@ -20978,7 +21020,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "336",
@@ -25814,7 +25856,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -40578,7 +40622,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -46590,7 +46636,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -53011,7 +53059,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "865",
@@ -54974,7 +55022,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -55792,7 +55842,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -57985,7 +58037,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "947",
@@ -58891,7 +58943,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -59132,7 +59186,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -61901,7 +61957,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -63830,7 +63888,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -64805,7 +64865,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "1060",
@@ -68405,7 +68465,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -70236,7 +70298,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -72543,7 +72607,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -75749,7 +75815,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -90224,7 +90292,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -92701,7 +92771,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -94224,7 +94296,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -95331,7 +95405,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -96931,7 +97007,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -108197,7 +108275,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -119192,7 +119272,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [2],
   "comer": [
    {
     "ID1": "1976",
@@ -120193,7 +120273,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -123283,7 +123365,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -125777,7 +125861,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -133563,7 +133649,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -139537,7 +139625,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -152469,7 +152559,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -154104,7 +154196,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -165598,7 +165692,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -177529,7 +177625,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -190750,7 +190848,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -195281,7 +195381,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -201165,7 +201267,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -211183,7 +211287,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -216546,7 +216652,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -238274,7 +238382,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -262825,7 +262935,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -285318,7 +285430,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -290644,7 +290758,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -327120,7 +327236,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -328777,7 +328895,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -329033,7 +329153,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -329148,6 +329270,5062 @@ const LEXICON_COMER = [
   "gender": "m",
   "animate": "no",
   "numberClass": "singulariaTantum"
+ },
+ {
+  "id": "CMR-05481",
+  "ru": "Россия",
+  "acento": "Росси́я",
+  "posNormalized": "sustantivo",
+  "translit": "rassíya",
+  "ipa": "rʌssʲˈijʌ",
+  "senses": [
+   {
+    "es": "Rusia",
+    "definitionEs": "País de Europa del Este y del norte de Asia; el más extenso del mundo. Su capital es Moscú.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Россия",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05482",
+  "ru": "Украина",
+  "acento": "Украи́на",
+  "posNormalized": "sustantivo",
+  "translit": "ukraína",
+  "ipa": "ukrʌˈinʌ",
+  "senses": [
+   {
+    "es": "Ucrania",
+    "definitionEs": "País de Europa del Este. Su capital es Kiev.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Украина",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05483",
+  "ru": "Беларусь",
+  "acento": "Белару́сь",
+  "posNormalized": "sustantivo",
+  "translit": "bilarús",
+  "ipa": "bʲɪɭʌrˈusʲ",
+  "senses": [
+   {
+    "es": "Bielorrusia",
+    "definitionEs": "País de Europa del Este, entre Rusia y Polonia. Su capital es Minsk.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Беларусь",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05484",
+  "ru": "Казахстан",
+  "acento": "Казахста́н",
+  "posNormalized": "sustantivo",
+  "translit": "kazajstán",
+  "ipa": "kʌzʌxstˈɑn",
+  "senses": [
+   {
+    "es": "Kazajistán",
+    "definitionEs": "País de Asia Central. Su capital es Astaná.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Казахстан",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05485",
+  "ru": "Грузия",
+  "acento": "Гру́зия",
+  "posNormalized": "sustantivo",
+  "translit": "grúziya",
+  "ipa": "ɡrˈuʑija",
+  "senses": [
+   {
+    "es": "Georgia (país)",
+    "definitionEs": "País del Cáucaso, a orillas del mar Negro. Su capital es Tiflis.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Грузия",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05486",
+  "ru": "Армения",
+  "acento": "Арме́ния",
+  "posNormalized": "sustantivo",
+  "translit": "armiéniya",
+  "ipa": "ʌrmʲˈenʲija",
+  "senses": [
+   {
+    "es": "Armenia",
+    "definitionEs": "País del Cáucaso. Su capital es Ereván.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Армения",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05487",
+  "ru": "Испания",
+  "acento": "Испа́ния",
+  "posNormalized": "sustantivo",
+  "translit": "ispániya",
+  "ipa": "ɪspˈɑnʲija",
+  "senses": [
+   {
+    "es": "España",
+    "definitionEs": "País del suroeste de Europa. Su capital es Madrid.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Испания",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05488",
+  "ru": "Португалия",
+  "acento": "Португа́лия",
+  "posNormalized": "sustantivo",
+  "translit": "partugáliya",
+  "ipa": "pʌrtuɡˈɑɭʲija",
+  "senses": [
+   {
+    "es": "Portugal",
+    "definitionEs": "País del suroeste de Europa, en la península ibérica. Su capital es Lisboa.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Португалия",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05489",
+  "ru": "Франция",
+  "acento": "Фра́нция",
+  "posNormalized": "sustantivo",
+  "translit": "frántsiya",
+  "ipa": "frˈɑntsyja",
+  "senses": [
+   {
+    "es": "Francia",
+    "definitionEs": "País de Europa occidental. Su capital es París.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Франция",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05490",
+  "ru": "Италия",
+  "acento": "Ита́лия",
+  "posNormalized": "sustantivo",
+  "translit": "itáliya",
+  "ipa": "ɪtˈɑɭʲija",
+  "senses": [
+   {
+    "es": "Italia",
+    "definitionEs": "País del sur de Europa. Su capital es Roma.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Италия",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05491",
+  "ru": "Германия",
+  "acento": "Герма́ния",
+  "posNormalized": "sustantivo",
+  "translit": "guirmániya",
+  "ipa": "ɡʲɪrmˈɑnʲija",
+  "senses": [
+   {
+    "es": "Alemania",
+    "definitionEs": "País de Europa central. Su capital es Berlín.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Германия",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05492",
+  "ru": "Польша",
+  "acento": "По́льша",
+  "posNormalized": "sustantivo",
+  "translit": "pólsha",
+  "ipa": "pˈoɭʲʃʌ",
+  "senses": [
+   {
+    "es": "Polonia",
+    "definitionEs": "País de Europa central. Su capital es Varsovia.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Польша",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05493",
+  "ru": "Англия",
+  "acento": "А́нглия",
+  "posNormalized": "sustantivo",
+  "translit": "ángliya",
+  "ipa": "ˈɑnɡɭʲija",
+  "senses": [
+   {
+    "es": "Inglaterra",
+    "definitionEs": "Nación del Reino Unido, en la isla de Gran Bretaña. Su capital es Londres. En ruso se usa a menudo para todo el país.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Англия",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05494",
+  "ru": "Греция",
+  "acento": "Гре́ция",
+  "posNormalized": "sustantivo",
+  "translit": "griétsiya",
+  "ipa": "ɡrʲˈetsyja",
+  "senses": [
+   {
+    "es": "Grecia",
+    "definitionEs": "País del sureste de Europa. Su capital es Atenas.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Греция",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05495",
+  "ru": "Швеция",
+  "acento": "Шве́ция",
+  "posNormalized": "sustantivo",
+  "translit": "shviétsiya",
+  "ipa": "ʃvʲˈetsyja",
+  "senses": [
+   {
+    "es": "Suecia",
+    "definitionEs": "País del norte de Europa. Su capital es Estocolmo.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Швеция",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05496",
+  "ru": "Турция",
+  "acento": "Ту́рция",
+  "posNormalized": "sustantivo",
+  "translit": "túrtsiya",
+  "ipa": "tˈurtsyja",
+  "senses": [
+   {
+    "es": "Turquía",
+    "definitionEs": "País entre Europa y Asia. Su capital es Ankara.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Турция",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05497",
+  "ru": "Канада",
+  "acento": "Кана́да",
+  "posNormalized": "sustantivo",
+  "translit": "kanáda",
+  "ipa": "kʌnˈɑdʌ",
+  "senses": [
+   {
+    "es": "Canadá",
+    "definitionEs": "País de América del Norte. Su capital es Ottawa.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Канада",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05498",
+  "ru": "Мексика",
+  "acento": "Ме́ксика",
+  "posNormalized": "sustantivo",
+  "translit": "miéksika",
+  "ipa": "mʲˈeksʲɪkʌ",
+  "senses": [
+   {
+    "es": "México",
+    "definitionEs": "País de América del Norte. Su capital es Ciudad de México.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Мексика",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05499",
+  "ru": "Куба",
+  "acento": "Ку́ба",
+  "posNormalized": "sustantivo",
+  "translit": "kúba",
+  "ipa": "kˈubʌ",
+  "senses": [
+   {
+    "es": "Cuba",
+    "definitionEs": "País insular del Caribe. Su capital es La Habana.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Куба",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05500",
+  "ru": "Колумбия",
+  "acento": "Колу́мбия",
+  "posNormalized": "sustantivo",
+  "translit": "kalúmbiya",
+  "ipa": "kʌɭˈumbʲija",
+  "senses": [
+   {
+    "es": "Colombia",
+    "definitionEs": "País del norte de América del Sur. Su capital es Bogotá.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Колумбия",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05501",
+  "ru": "Венесуэла",
+  "acento": "Венесуэ́ла",
+  "posNormalized": "sustantivo",
+  "translit": "vinisuéla",
+  "ipa": "vʲɪnʲɪsuˈɛɭʌ",
+  "senses": [
+   {
+    "es": "Venezuela",
+    "definitionEs": "País del norte de América del Sur. Su capital es Caracas.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Венесуэла",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05502",
+  "ru": "Бразилия",
+  "acento": "Брази́лия",
+  "posNormalized": "sustantivo",
+  "translit": "brazíliya",
+  "ipa": "brʌʑˈiɭʲija",
+  "senses": [
+   {
+    "es": "Brasil",
+    "definitionEs": "País de América del Sur, el más grande del continente. Su capital es Brasilia.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Бразилия",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05503",
+  "ru": "Аргентина",
+  "acento": "Аргенти́на",
+  "posNormalized": "sustantivo",
+  "translit": "arguintína",
+  "ipa": "ʌrɡʲɪntʲˈinʌ",
+  "senses": [
+   {
+    "es": "Argentina",
+    "definitionEs": "País del sur de América del Sur. Su capital es Buenos Aires.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Аргентина",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05504",
+  "ru": "Уругвай",
+  "acento": "Уругва́й",
+  "posNormalized": "sustantivo",
+  "translit": "urugvái",
+  "ipa": "uruɡvˈɑj",
+  "senses": [
+   {
+    "es": "Uruguay",
+    "definitionEs": "País de América del Sur, en el Río de la Plata. Su capital es Montevideo.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Уругвай",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05505",
+  "ru": "Израиль",
+  "acento": "Изра́иль",
+  "posNormalized": "sustantivo",
+  "translit": "izráil",
+  "ipa": "ɪzrˈɑɪɭʲ",
+  "senses": [
+   {
+    "es": "Israel",
+    "definitionEs": "País de Medio Oriente. Su capital es Jerusalén.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Израиль",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05506",
+  "ru": "Китай",
+  "acento": "Кита́й",
+  "posNormalized": "sustantivo",
+  "translit": "kitái",
+  "ipa": "kʲɪtˈɑj",
+  "senses": [
+   {
+    "es": "China",
+    "definitionEs": "País de Asia oriental, el más poblado del mundo junto con la India. Su capital es Pekín.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Китай",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05507",
+  "ru": "Япония",
+  "acento": "Япо́ния",
+  "posNormalized": "sustantivo",
+  "translit": "yipóniya",
+  "ipa": "jɪpˈonʲija",
+  "senses": [
+   {
+    "es": "Japón",
+    "definitionEs": "País insular de Asia oriental. Su capital es Tokio.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Япония",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05508",
+  "ru": "Индия",
+  "acento": "И́ндия",
+  "posNormalized": "sustantivo",
+  "translit": "índiya",
+  "ipa": "ˈindʲija",
+  "senses": [
+   {
+    "es": "India",
+    "definitionEs": "País del sur de Asia. Su capital es Nueva Delhi.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Индия",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05509",
+  "ru": "Каталония",
+  "acento": "Катало́ния",
+  "posNormalized": "sustantivo",
+  "translit": "katalóniya",
+  "ipa": "kʌtʌɭˈonʲija",
+  "senses": [
+   {
+    "es": "Cataluña",
+    "definitionEs": "Comunidad autónoma del noreste de España. Su capital es Barcelona.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Каталония",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05510",
+  "ru": "США",
+  "acento": "США",
+  "posNormalized": "sustantivo",
+  "translit": "es-sha-á",
+  "ipa": "ɛsʃʌˈɑ",
+  "senses": [
+   {
+    "es": "Estados Unidos, EE. UU.",
+    "definitionEs": "Sigla de Соединённые Шта́ты Аме́рики: país de América del Norte. Su capital es Washington. No se declina.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "США",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "3",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": null,
+  "animate": "no",
+  "numberClass": "pluraliaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05511",
+  "ru": "Перу",
+  "acento": "Перу́",
+  "posNormalized": "sustantivo",
+  "translit": "pirú",
+  "ipa": "pʲɪrˈu",
+  "senses": [
+   {
+    "es": "Perú",
+    "definitionEs": "País del oeste de América del Sur. Su capital es Lima. No se declina.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Перу",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "n",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05512",
+  "ru": "Чили",
+  "acento": "Чи́ли",
+  "posNormalized": "sustantivo",
+  "translit": "chíli",
+  "ipa": "tʃʲˈiɭʲɪ",
+  "senses": [
+   {
+    "es": "Chile",
+    "definitionEs": "País del suroeste de América del Sur. Su capital es Santiago. No se declina.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Чили",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "n",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05513",
+  "ru": "Москва",
+  "acento": "Москва́",
+  "posNormalized": "sustantivo",
+  "translit": "maskvá",
+  "ipa": "mʌskvˈɑ",
+  "senses": [
+   {
+    "es": "Moscú",
+    "definitionEs": "Capital de Rusia y su ciudad más grande.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Москва",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05514",
+  "ru": "Санкт-Петербург",
+  "acento": "Санкт-Петербу́рг",
+  "posNormalized": "sustantivo",
+  "translit": "sanktpitirbúrk",
+  "ipa": "sʌnktpʲɪtʲɪrbˈurk",
+  "senses": [
+   {
+    "es": "San Petersburgo",
+    "definitionEs": "Segunda ciudad de Rusia, a orillas del mar Báltico.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Санкт-Петербург",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "15",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05515",
+  "ru": "Барселона",
+  "acento": "Барсело́на",
+  "posNormalized": "sustantivo",
+  "translit": "barsilóna",
+  "ipa": "bʌrsʲɪɭˈonʌ",
+  "senses": [
+   {
+    "es": "Barcelona",
+    "definitionEs": "Ciudad de España, capital de Cataluña.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Барселона",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05516",
+  "ru": "Мадрид",
+  "acento": "Мадри́д",
+  "posNormalized": "sustantivo",
+  "translit": "madrít",
+  "ipa": "mʌdrʲˈit",
+  "senses": [
+   {
+    "es": "Madrid",
+    "definitionEs": "Capital de España.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Мадрид",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05517",
+  "ru": "Буэнос-Айрес",
+  "acento": "Буэ́нос-А́йрес",
+  "posNormalized": "sustantivo",
+  "translit": "buénasáiris",
+  "ipa": "buˈɛnʌsˈɑjrʲɪs",
+  "senses": [
+   {
+    "es": "Buenos Aires",
+    "definitionEs": "Capital de la Argentina.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Буэнос-Айрес",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "12",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05518",
+  "ru": "Киев",
+  "acento": "Ки́ев",
+  "posNormalized": "sustantivo",
+  "translit": "kíyif",
+  "ipa": "kʲˈijɪf",
+  "senses": [
+   {
+    "es": "Kiev",
+    "definitionEs": "Capital de Ucrania.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Киев",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05519",
+  "ru": "Минск",
+  "acento": "Минск",
+  "posNormalized": "sustantivo",
+  "translit": "minsk",
+  "ipa": "mʲˈinsk",
+  "senses": [
+   {
+    "es": "Minsk",
+    "definitionEs": "Capital de Bielorrusia.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Минск",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05520",
+  "ru": "Париж",
+  "acento": "Пари́ж",
+  "posNormalized": "sustantivo",
+  "translit": "parísh",
+  "ipa": "pʌrʲˈiʃ",
+  "senses": [
+   {
+    "es": "París",
+    "definitionEs": "Capital de Francia.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Париж",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05521",
+  "ru": "испанец",
+  "acento": "испа́нец",
+  "posNormalized": "sustantivo",
+  "translit": "ispánits",
+  "ipa": "ɪspˈɑnʲɪts",
+  "senses": [
+   {
+    "es": "español (hombre)",
+    "definitionEs": "Hombre de España, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "испанец",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05522",
+  "ru": "испанка",
+  "acento": "испа́нка",
+  "posNormalized": "sustantivo",
+  "translit": "ispánka",
+  "ipa": "ɪspˈɑnkʌ",
+  "senses": [
+   {
+    "es": "española",
+    "definitionEs": "Mujer de España, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "испанка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05523",
+  "ru": "аргентинец",
+  "acento": "аргенти́нец",
+  "posNormalized": "sustantivo",
+  "translit": "arguintínits",
+  "ipa": "ʌrɡʲɪntʲˈinʲɪts",
+  "senses": [
+   {
+    "es": "argentino (hombre)",
+    "definitionEs": "Hombre de la Argentina, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "аргентинец",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05524",
+  "ru": "аргентинка",
+  "acento": "аргенти́нка",
+  "posNormalized": "sustantivo",
+  "translit": "arguintínka",
+  "ipa": "ʌrɡʲɪntʲˈinkʌ",
+  "senses": [
+   {
+    "es": "argentina (mujer)",
+    "definitionEs": "Mujer de la Argentina, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "аргентинка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05525",
+  "ru": "украинец",
+  "acento": "украи́нец",
+  "posNormalized": "sustantivo",
+  "translit": "ukraínits",
+  "ipa": "ukrʌˈinʲɪts",
+  "senses": [
+   {
+    "es": "ucraniano (hombre)",
+    "definitionEs": "Hombre de Ucrania, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "украинец",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05526",
+  "ru": "украинка",
+  "acento": "украи́нка",
+  "posNormalized": "sustantivo",
+  "translit": "ukraínka",
+  "ipa": "ukrʌˈinkʌ",
+  "senses": [
+   {
+    "es": "ucraniana",
+    "definitionEs": "Mujer de Ucrania, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "украинка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05527",
+  "ru": "белорус",
+  "acento": "белору́с",
+  "posNormalized": "sustantivo",
+  "translit": "bilarús",
+  "ipa": "bʲɪɭʌrˈus",
+  "senses": [
+   {
+    "es": "bielorruso (hombre)",
+    "definitionEs": "Hombre de Bielorrusia, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "белорус",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05528",
+  "ru": "белоруска",
+  "acento": "белору́ска",
+  "posNormalized": "sustantivo",
+  "translit": "bilarúska",
+  "ipa": "bʲɪɭʌrˈuskʌ",
+  "senses": [
+   {
+    "es": "bielorrusa",
+    "definitionEs": "Mujer de Bielorrusia, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "белоруска",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05529",
+  "ru": "француженка",
+  "acento": "францу́женка",
+  "posNormalized": "sustantivo",
+  "translit": "frantsúzhinka",
+  "ipa": "frʌntsˈuʒynkʌ",
+  "senses": [
+   {
+    "es": "francesa",
+    "definitionEs": "Mujer de Francia, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "француженка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "11",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05530",
+  "ru": "итальянец",
+  "acento": "италья́нец",
+  "posNormalized": "sustantivo",
+  "translit": "italyánits",
+  "ipa": "ɪtʌɭʲˈjɑnʲɪts",
+  "senses": [
+   {
+    "es": "italiano (hombre)",
+    "definitionEs": "Hombre de Italia, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "итальянец",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05531",
+  "ru": "итальянка",
+  "acento": "италья́нка",
+  "posNormalized": "sustantivo",
+  "translit": "italyánka",
+  "ipa": "ɪtʌɭʲˈjɑnkʌ",
+  "senses": [
+   {
+    "es": "italiana",
+    "definitionEs": "Mujer de Italia, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "итальянка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05532",
+  "ru": "немка",
+  "acento": "не́мка",
+  "posNormalized": "sustantivo",
+  "translit": "niémka",
+  "ipa": "nʲˈemkʌ",
+  "senses": [
+   {
+    "es": "alemana",
+    "definitionEs": "Mujer de Alemania, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "немка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05533",
+  "ru": "поляк",
+  "acento": "поля́к",
+  "posNormalized": "sustantivo",
+  "translit": "paliák",
+  "ipa": "pʌɭʲˈɑk",
+  "senses": [
+   {
+    "es": "polaco (hombre)",
+    "definitionEs": "Hombre de Polonia, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "поляк",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05534",
+  "ru": "полька",
+  "acento": "по́лька",
+  "posNormalized": "sustantivo",
+  "translit": "pólka",
+  "ipa": "pˈoɭʲkʌ",
+  "senses": [
+   {
+    "es": "polaca",
+    "definitionEs": "Mujer de Polonia, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "полька",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05535",
+  "ru": "американка",
+  "acento": "америка́нка",
+  "posNormalized": "sustantivo",
+  "translit": "amirikánka",
+  "ipa": "ʌmʲɪrʲɪkˈɑnkʌ",
+  "senses": [
+   {
+    "es": "estadounidense (mujer)",
+    "definitionEs": "Mujer de los Estados Unidos, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "американка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05536",
+  "ru": "англичанка",
+  "acento": "англича́нка",
+  "posNormalized": "sustantivo",
+  "translit": "anglichánka",
+  "ipa": "ʌnɡɭʲɪtʃʲˈɑnkʌ",
+  "senses": [
+   {
+    "es": "inglesa",
+    "definitionEs": "Mujer de Inglaterra, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "англичанка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05537",
+  "ru": "китаянка",
+  "acento": "китая́нка",
+  "posNormalized": "sustantivo",
+  "translit": "kitayánka",
+  "ipa": "kʲɪtʌˈjɑnkʌ",
+  "senses": [
+   {
+    "es": "china (mujer)",
+    "definitionEs": "Mujer de China, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "китаянка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05538",
+  "ru": "японка",
+  "acento": "япо́нка",
+  "posNormalized": "sustantivo",
+  "translit": "yipónka",
+  "ipa": "jɪpˈonkʌ",
+  "senses": [
+   {
+    "es": "japonesa",
+    "definitionEs": "Mujer de Japón, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "японка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05539",
+  "ru": "бразилец",
+  "acento": "брази́лец",
+  "posNormalized": "sustantivo",
+  "translit": "brazílits",
+  "ipa": "brʌʑˈiɭʲɪts",
+  "senses": [
+   {
+    "es": "brasileño (hombre)",
+    "definitionEs": "Hombre de Brasil, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "бразилец",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05540",
+  "ru": "бразильянка",
+  "acento": "бразилья́нка",
+  "posNormalized": "sustantivo",
+  "translit": "brazilyánka",
+  "ipa": "brʌʑɪɭʲˈjɑnkʌ",
+  "senses": [
+   {
+    "es": "brasileña",
+    "definitionEs": "Mujer de Brasil, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "бразильянка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "11",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05541",
+  "ru": "мексиканец",
+  "acento": "мексика́нец",
+  "posNormalized": "sustantivo",
+  "translit": "miksikánits",
+  "ipa": "mʲɪksʲɪkˈɑnʲɪts",
+  "senses": [
+   {
+    "es": "mexicano (hombre)",
+    "definitionEs": "Hombre de México, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "мексиканец",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05542",
+  "ru": "мексиканка",
+  "acento": "мексика́нка",
+  "posNormalized": "sustantivo",
+  "translit": "miksikánka",
+  "ipa": "mʲɪksʲɪkˈɑnkʌ",
+  "senses": [
+   {
+    "es": "mexicana",
+    "definitionEs": "Mujer de México, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "мексиканка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05543",
+  "ru": "каталонец",
+  "acento": "катало́нец",
+  "posNormalized": "sustantivo",
+  "translit": "katalónits",
+  "ipa": "kʌtʌɭˈonʲɪts",
+  "senses": [
+   {
+    "es": "catalán (hombre)",
+    "definitionEs": "Hombre de Cataluña, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "каталонец",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05544",
+  "ru": "каталонка",
+  "acento": "катало́нка",
+  "posNormalized": "sustantivo",
+  "translit": "katalónka",
+  "ipa": "kʌtʌɭˈonkʌ",
+  "senses": [
+   {
+    "es": "catalana",
+    "definitionEs": "Mujer de Cataluña, o de esa nacionalidad.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "каталонка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05545",
+  "ru": "каталанский",
+  "acento": "катала́нский",
+  "posNormalized": "adjetivo",
+  "translit": "katalánskii",
+  "ipa": "kʌtʌɭˈɑnskʲɪj",
+  "senses": [
+   {
+    "es": "catalán (idioma, de Cataluña)",
+    "definitionEs": "Relativo a Cataluña o a su lengua. катала́нский язы́к: el catalán.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "каталанский",
+    "POS": "a",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "11",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05546",
+  "ru": "португальский",
+  "acento": "португа́льский",
+  "posNormalized": "adjetivo",
+  "translit": "partugálskii",
+  "ipa": "pʌrtuɡˈɑɭʲskʲɪj",
+  "senses": [
+   {
+    "es": "portugués",
+    "definitionEs": "Relativo a Portugal o a su lengua. португа́льский язы́к: el portugués.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "португальский",
+    "POS": "a",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "13",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05547",
+  "ru": "по-испански",
+  "acento": "по-испа́нски",
+  "posNormalized": "adverbio",
+  "translit": "paispánski",
+  "ipa": "pʌɪspˈɑnskʲɪ",
+  "senses": [
+   {
+    "es": "en español",
+    "definitionEs": "En esa lengua. Va con говори́ть, писа́ть, понима́ть: Я говорю́ по-испа́нски.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "по-испански",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "11",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05548",
+  "ru": "по-французски",
+  "acento": "по-францу́зски",
+  "posNormalized": "adverbio",
+  "translit": "pafrantsússki",
+  "ipa": "pʌfrʌntsˈusskʲɪ",
+  "senses": [
+   {
+    "es": "en francés",
+    "definitionEs": "En esa lengua. Va con говори́ть, писа́ть, понима́ть: Я говорю́ по-францу́зски.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "по-французски",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "13",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05549",
+  "ru": "по-немецки",
+  "acento": "по-неме́цки",
+  "posNormalized": "adverbio",
+  "translit": "panimiétski",
+  "ipa": "pʌnʲɪmʲˈetskʲɪ",
+  "senses": [
+   {
+    "es": "en alemán",
+    "definitionEs": "En esa lengua. Va con говори́ть, писа́ть, понима́ть: Я говорю́ по-неме́цки.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "по-немецки",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05550",
+  "ru": "по-итальянски",
+  "acento": "по-италья́нски",
+  "posNormalized": "adverbio",
+  "translit": "paitalyánski",
+  "ipa": "pʌɪtʌɭʲˈjɑnskʲɪ",
+  "senses": [
+   {
+    "es": "en italiano",
+    "definitionEs": "En esa lengua. Va con говори́ть, писа́ть, понима́ть: Я говорю́ по-италья́нски.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "по-итальянски",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "13",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05551",
+  "ru": "по-каталански",
+  "acento": "по-катала́нски",
+  "posNormalized": "adverbio",
+  "translit": "pakatalánski",
+  "ipa": "pʌkʌtʌɭˈɑnskʲɪ",
+  "senses": [
+   {
+    "es": "en catalán",
+    "definitionEs": "En esa lengua. Va con говори́ть, писа́ть, понима́ть: Я говорю́ по-катала́нски.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "по-каталански",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "13",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05552",
+  "ru": "по-португальски",
+  "acento": "по-португа́льски",
+  "posNormalized": "adverbio",
+  "translit": "papartugálski",
+  "ipa": "pʌpʌrtuɡˈɑɭʲskʲɪ",
+  "senses": [
+   {
+    "es": "en portugués",
+    "definitionEs": "En esa lengua. Va con говори́ть, писа́ть, понима́ть: Я говорю́ по-португа́льски.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "по-португальски",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "15",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05553",
+  "ru": "по-китайски",
+  "acento": "по-кита́йски",
+  "posNormalized": "adverbio",
+  "translit": "pakitáiski",
+  "ipa": "pʌkʲɪtˈɑjskʲɪ",
+  "senses": [
+   {
+    "es": "en chino",
+    "definitionEs": "En esa lengua. Va con говори́ть, писа́ть, понима́ть: Я говорю́ по-кита́йски.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "по-китайски",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "11",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05554",
+  "ru": "по-украински",
+  "acento": "по-украи́нски",
+  "posNormalized": "adverbio",
+  "translit": "paukraínski",
+  "ipa": "pʌukrʌˈinskʲɪ",
+  "senses": [
+   {
+    "es": "en ucraniano",
+    "definitionEs": "En esa lengua. Va con говори́ть, писа́ть, понима́ть: Я говорю́ по-украи́нски.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "по-украински",
+    "POS": "adv",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "12",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05555",
+  "ru": "Маша",
+  "acento": "Ма́ша",
+  "posNormalized": "sustantivo",
+  "translit": "másha",
+  "ipa": "mˈɑʃʌ",
+  "senses": [
+   {
+    "es": "Masha",
+    "definitionEs": "Nombre de mujer: forma familiar de Мари́я (María).",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Маша",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05556",
+  "ru": "Дима",
+  "acento": "Ди́ма",
+  "posNormalized": "sustantivo",
+  "translit": "díma",
+  "ipa": "dʲˈimʌ",
+  "senses": [
+   {
+    "es": "Dima",
+    "definitionEs": "Nombre de hombre: forma familiar de Дми́трий (Dmitri). Se declina como una palabra en -а.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Дима",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05557",
+  "ru": "Лукас",
+  "acento": "Лу́кас",
+  "posNormalized": "sustantivo",
+  "translit": "lúkas",
+  "ipa": "ɭˈukʌs",
+  "senses": [
+   {
+    "es": "Lucas",
+    "definitionEs": "Nombre de hombre.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Лукас",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05558",
+  "ru": "Ольга",
+  "acento": "О́льга",
+  "posNormalized": "sustantivo",
+  "translit": "ólga",
+  "ipa": "ˈoɭʲɡʌ",
+  "senses": [
+   {
+    "es": "Olga",
+    "definitionEs": "Nombre de mujer.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Ольга",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05559",
+  "ru": "Иван",
+  "acento": "Ива́н",
+  "posNormalized": "sustantivo",
+  "translit": "iván",
+  "ipa": "ɪvˈɑn",
+  "senses": [
+   {
+    "es": "Iván",
+    "definitionEs": "Nombre de hombre, uno de los más comunes en Rusia.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Иван",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "singulariaTantum",
+  "propio": true
+ },
+ {
+  "id": "CMR-05560",
+  "ru": "Анна",
+  "acento": "А́нна",
+  "posNormalized": "sustantivo",
+  "translit": "ánna",
+  "ipa": "ˈɑnnʌ",
+  "senses": [
+   {
+    "es": "Ana",
+    "definitionEs": "Nombre de mujer.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "Анна",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 2 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad2Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "singulariaTantum",
+  "propio": true
  }
 ];
 

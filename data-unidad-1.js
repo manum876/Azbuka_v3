@@ -138,12 +138,6 @@ const UNIDAD_1 = {
           ejemplos: ["CMR-00378", "CMR-00244", "CMR-01451", "CMR-01863", "CMR-02873"]
         },
         {
-          titulo: "Ъ: el separador después del prefijo",
-          texto: "Ъ hace el mismo trabajo de separar, pero solo después de un prefijo terminado en consonante (**под-**, **об-**, **от-**, **с-**, **в-**…) y antes de е, ё, ю, я: под + е́зд = подъе́зд. Si el prefijo termina en vocal, no hace falta nada: по + е́сть = пое́сть.",
-          truco: "Para separar: sin prefijo, Ь (семья́); con prefijo, Ъ (съесть).",
-          ejemplos: ["CMR-02121", "CMR-03635", "CMR-03286", "CMR-02269", "CMR-00705"]
-        },
-        {
           titulo: "Ь, trabajo 3: después de Ж, Ш, Ч, Щ",
           texto: "Estas cuatro letras suenan siempre igual, con o sin Ь, así que acá el Ь es pura gramática. Un adelanto de lo que vas a ver más adelante: los sustantivos femeninos lo llevan (ночь, дочь, мышь) y los masculinos no (врач, нож, мяч).",
           truco: "En los sustantivos que terminan en ж, ш, ч, щ: con Ь es femenino; sin Ь, masculino.",
@@ -155,6 +149,12 @@ const UNIDAD_1 = {
           destacado: "El infinitivo termina en **-ть** (casi todos), **-ти** (идти́) o **-чь** (мочь). Nunca termina en т o ч sola: «читат» o «моч» no existen.",
           truco: "Si termina en ч sin Ь, es un sustantivo masculino (врач); con Ь, un verbo (мочь) o un sustantivo femenino (ночь).",
           ejemplos: ["CMR-00332", "CMR-00058", "CMR-00095", "CMR-00988", "CMR-00037", "CMR-00497"]
+        },
+        {
+          titulo: "Ъ: el separador después del prefijo",
+          texto: "Ъ hace el mismo trabajo de separar, pero solo después de un prefijo terminado en consonante (**под-**, **об-**, **от-**, **с-**, **в-**…) y antes de е, ё, ю, я: под + е́зд = подъе́зд. Si el prefijo termina en vocal, no hace falta nada: по + е́сть = пое́сть.",
+          truco: "Para separar: sin prefijo, Ь (семья́); con prefijo, Ъ (съесть).",
+          ejemplos: ["CMR-02121", "CMR-03635", "CMR-03286", "CMR-02269", "CMR-00705"]
         }
       ]
     },

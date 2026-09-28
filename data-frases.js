@@ -2,6 +2,9 @@
    DATA-FRASES.JS — Frases útiles (fórmulas comunicativas)
    ------------------------------------------------------------
    Versión v3 (24/09/2026). Una frase es una expresión que se aprende
+   Actualizado el 26/09/2026 (Unidad 2): FRS-053 a FRS-062 (рад
+   познако́миться, кто э́то?, что э́то?, а у тебя́?, а у вас?, повтори́те,
+   что зна́чит…?, я учу́ ру́сский, так себе́, большо́е спаси́бо).
    Actualizado el 25/09/2026: la preposición до, átona, se translitera
    como suena («Da svidániya», «da záftra»).
    entera: Здра́вствуйте, Как дела́?, Не за что… Muchas no son una
@@ -67,7 +70,17 @@ const FRASES = [
   {"id":"FRS-049","funcion":"invitar","ru":"Дава́й!","tr":"Davái!","es":"¡Dale!","registro":"ты","nivel":"A1","uso":"Para aceptar una propuesta con confianza.","lex":["CMR-01204"]},
   {"id":"FRS-050","funcion":"invitar","ru":"Договори́лись!","tr":"Dagavarílis!","es":"¡Listo, quedamos!","registro":"","nivel":"A1","uso":"Para cerrar un acuerdo o un plan.","lex":["CMR-02168"]},
   {"id":"FRS-051","funcion":"felicitar","ru":"С днём рожде́ния!","tr":"S dniom razhdiéniya!","es":"¡Feliz cumpleaños!","registro":"","nivel":"A1","uso":"Solo el día del cumpleaños o después, nunca antes.","cul":"CUL-006","lex":["CMR-00008","CMR-00071","CMR-01230"]},
-  {"id":"FRS-052","funcion":"felicitar","ru":"Молоде́ц!","tr":"Maladiéts!","es":"¡Bien hecho!","registro":"","nivel":"A1","uso":"Elogio para un hombre o una mujer.","lex":["CMR-02877"]}
+  {"id":"FRS-052","funcion":"felicitar","ru":"Молоде́ц!","tr":"Maladiéts!","es":"¡Bien hecho!","registro":"","nivel":"A1","uso":"Elogio para un hombre o una mujer.","lex":["CMR-02877"]},
+  {"id":"FRS-053","funcion":"presentarse","ru":"Рад познако́миться!","tr":"Rat paznakómitsa!","es":"¡Encantado!","registro":"","nivel":"A1","uso":"Lo dice un hombre. Una mujer dice ра́да познако́миться.","lex":["CMR-01976","CMR-01793"]},
+  {"id":"FRS-054","funcion":"presentarse","ru":"Кто э́то?","tr":"Kto éta?","es":"¿Quién es?","registro":"","nivel":"A1","uso":"Para preguntar por una persona. Se contesta э́то… y el nombre.","lex":["CMR-00067","CMR-00012"]},
+  {"id":"FRS-055","funcion":"entender","ru":"Что э́то?","tr":"Shto éta?","es":"¿Qué es esto?","registro":"","nivel":"A1","uso":"Para preguntar por una cosa. Se contesta э́то… y la palabra.","lex":["CMR-00009","CMR-00012"]},
+  {"id":"FRS-056","funcion":"saludar","ru":"А у тебя́?","tr":"A u tibiá?","es":"¿Y vos?","registro":"ты","nivel":"A1","uso":"Para devolver la pregunta después de contestar как дела́. Con вы: а у вас?","lex":["CMR-00010","CMR-00021","CMR-00033"]},
+  {"id":"FRS-057","funcion":"saludar","ru":"А у вас?","tr":"A u vas?","es":"¿Y usted?","registro":"вы","nivel":"A1","uso":"La versión con вы de а у тебя́.","lex":["CMR-00010","CMR-00021","CMR-00038"]},
+  {"id":"FRS-058","funcion":"entender","ru":"Повтори́те, пожа́луйста.","tr":"Paftaríti, pazháluista.","es":"¿Puede repetir, por favor?","registro":"вы","nivel":"A1","uso":"Con ты: повтори́, пожа́луйста.","lex":["CMR-01531","CMR-01243"]},
+  {"id":"FRS-059","funcion":"entender","ru":"Что зна́чит…?","tr":"Shto znáchit…?","es":"¿Qué significa…?","registro":"","nivel":"A1","uso":"Para preguntar por una palabra: что зна́чит «спаси́бо»?","lex":["CMR-00009","CMR-00899"]},
+  {"id":"FRS-060","funcion":"hablar-de-uno","ru":"Я учу́ ру́сский.","tr":"Ya uchú rússkii.","es":"Estudio ruso.","registro":"","nivel":"A1","uso":"También я изуча́ю ру́сский язы́к, un poco más formal. Para decir que lo hablás: я говорю́ по-ру́сски.","lex":["CMR-00005","CMR-01602","CMR-00173"]},
+  {"id":"FRS-061","funcion":"saludar","ru":"Так себе́.","tr":"Tak sibié.","es":"Más o menos.","registro":"","nivel":"A1","uso":"Respuesta a как дела́ cuando las cosas no van del todo bien.","lex":["CMR-00030","CMR-00047"]},
+  {"id":"FRS-062","funcion":"agradecer","ru":"Большо́е спаси́бо!","tr":"Balshóyi spasíba!","es":"¡Muchas gracias!","registro":"","nivel":"A1","uso":"Más enfático que спаси́бо. También se dice спаси́бо большо́е.","lex":["CMR-00096","CMR-02213"]}
 ];
 
 function fraseById(id) { return FRASES.find(f => f.id === id) || null; }
