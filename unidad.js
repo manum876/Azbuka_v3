@@ -76,6 +76,7 @@
       .pr-exp{margin-top:14px;font-size:14px;line-height:1.55;color:${c.textSub};}
       .pr-exp b{color:${c.text};}
       .pr-rec{margin-top:8px;font-size:13.5px;line-height:1.5;color:${c.textSub};padding-left:10px;border-left:2px solid ${c.gold}66;}
+      .pr-cu{display:block;margin-top:12px;background:none;border:none;padding:4px 0;color:${c.gold};font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
       .pr-res{display:inline-block;font-size:13px;font-weight:800;border-radius:8px;padding:3px 10px;margin-top:14px;}
       .pr-pie{margin-top:auto;padding-top:18px;}
       .pr-fichas{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;min-height:48px;}
@@ -101,7 +102,11 @@
     return h("div", null,
       h("span", { className: "pr-res", style: { color: col, background: col + "22", border: "1px solid " + col } }, txt),
       ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
-      r !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt("Para recordarlo: " + ej.recordar)));
+      r !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt("Para recordarlo: " + ej.recordar)),
+      r !== AZ_BIEN && typeof azGuardarEnCuaderno === "function" && h("button", {
+        className: "pr-cu",
+        onClick: () => azGuardarEnCuaderno(((ej.pide || ej.afirmacion || "") + (ej.grande ? " " + ej.grande : "")).trim() + "\n" + azSinMarcas(ej.explicacion || "") + (ej.recordar ? "\nPara recordarlo: " + azSinMarcas(ej.recordar) : ""))
+      }, "＋ Guardar en el cuaderno"));
   }
 
   /* ── Formas ── */

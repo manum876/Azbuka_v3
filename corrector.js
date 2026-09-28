@@ -365,6 +365,7 @@ window.azDiff = azDiff;
       .az-cr-w.mal,.az-cr-w.sobra{color:#D9776F;text-decoration:underline 2px #B5605C;text-underline-offset:4px;}
       .az-cr-ok{font-size:17px;font-weight:700;color:${c.gold};line-height:1.5;}
       .az-cr-fix{color:#4CAF82;}
+      .az-cr-cu{margin-top:12px;background:none;border:none;padding:4px 0;color:${c.gold};font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
       .az-cr-exp{font-size:13.5px;line-height:1.5;color:${c.textSub};margin-top:6px;padding-left:10px;border-left:2px solid ${c.border};}
     `);
   }
@@ -391,7 +392,13 @@ window.azDiff = azDiff;
           return s.marca ? h("span", { key: i, className: "az-cr-fix" }, s.t) : s.t;
         }))),
       errores.map(function (p, i) { return h("div", { key: i, className: "az-cr-exp" }, p.motivo); }),
-      r.notas.map(function (n, i) { return h("div", { key: "n" + i, className: "az-cr-exp" }, n); }));
+      r.notas.map(function (n, i) { return h("div", { key: "n" + i, className: "az-cr-exp" }, n); }),
+      r.resultado < 2 && typeof azGuardarEnCuaderno === "function" && h("button", { className: "az-cr-cu", onClick: function () {
+        const tuya = (r.tuya || []).map(function (p) { return p.t; }).join(" ");
+        const bien = r.esperada.replace(/[()]/g, "");
+        const porque = errores.map(function (p) { return p.motivo; }).concat(r.notas).join(" ").replace(/\*\*/g, "");
+        azGuardarEnCuaderno("Escribí: " + tuya + "\nCorrecto: " + bien + (porque ? "\n" + porque : ""));
+      } }, "＋ Guardar este error en el cuaderno"));
   }
   window.AzCorreccion = AzCorreccion;
 })();

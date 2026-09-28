@@ -439,3 +439,22 @@ function AzCopiaSeguridad({ c }) {
       h("button", { style: btn, onClick: () => ref.current && ref.current.click() }, "Restaurar copia")),
     h("input", { ref, type: "file", accept: "application/json,.json", style: { display: "none" }, onChange: restaurar }));
 }
+
+/* ── GUARDAR EN EL CUADERNO DESDE CUALQUIER PANTALLA (26/09/2026) ──
+   azGuardarEnCuaderno(texto, fuente?) agrega una nota a «Sin ordenar»
+   y avisa con el cartel «Guardado en el cuaderno» (lo muestra el shell).
+   Sin fuente, usa la pantalla actual: window.azFuenteActual() si la
+   página la define (las unidades dicen en qué módulo estás), o el título. */
+function azFuentePagina() {
+  let titulo = "";
+  try { if (typeof window.azFuenteActual === "function") titulo = window.azFuenteActual(); } catch (e) {}
+  if (!titulo) titulo = document.title.replace(/^Азбука\s*[—-]\s*/, "");
+  const href = (location.pathname.split("/").pop() || "index.html") + location.search;
+  return { titulo, href };
+}
+async function azGuardarEnCuaderno(texto, fuente) {
+  const t = String(texto || "").trim();
+  if (!t) return;
+  await azCuadernoAgregar(t, fuente || azFuentePagina());
+  window.dispatchEvent(new CustomEvent("az-cuaderno-guardado"));
+}

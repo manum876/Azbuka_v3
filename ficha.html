@@ -379,7 +379,10 @@ function App() {
             }, "📐 Ver en Casos"),
             React.createElement("button", {
               className: "btn", onClick: () => azSpeak(entry.ru)
-            }, "▶ Pronunciación")
+            }, "▶ Pronunciación"),
+            typeof azGuardarEnCuaderno === "function" && React.createElement("button", {
+              className: "btn", onClick: () => azGuardarEnCuaderno((entry.acento || entry.ru) + " — " + (entry.senses || []).map(x => x.es).join("; "), { titulo: "Ficha · " + (entry.acento || entry.ru), href: "ficha.html?id=" + entry.id })
+            }, "＋ Cuaderno")
           )
         )
       )

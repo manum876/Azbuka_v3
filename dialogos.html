@@ -256,7 +256,8 @@ function FraseSheet({ fid, onClose, onCultura, favs, toggleFav }) {
       h("div", { className: "sheet-kicker" }, "Frase · " + (FUN[f.funcion] || "")),
       h("div", { className: "sheet-title-row" },
         h("div", { className: "sheet-title" }, f.ru),
-        h("button", { className: "play", onClick: () => speakRu(f.ru), "aria-label": "Escuchar" }, "▶")
+        h("button", { className: "play", onClick: () => speakRu(f.ru), "aria-label": "Escuchar" }, "▶"),
+        h("button", { className: "play", onClick: () => azGuardarEnCuaderno(f.ru + "\n" + f.es, { titulo: "Frase · " + f.ru, href: "dialogos.html?frase=" + f.id }), "aria-label": "Guardar en el cuaderno" }, "＋")
       ),
       h("div", { className: "sheet-sub" }, f.tr),
       h("div", { className: "sheet-q" }, f.es),
@@ -370,7 +371,9 @@ function Linea({ d, l, idx, registro, showTr, showEs, oculta, onRevelar, abierta
         showTr && h("div", { className: "ln-tr" }, t.tr),
         showEs && h("div", { className: "ex-es" }, t.es)
       ),
-      h("button", { className: "play", onClick: () => speakRu(t.ru, p.genero), "aria-label": "Escuchar" }, "▶")
+      h("div", { style: { display: "flex", flexDirection: "column", gap: 6 } },
+        h("button", { className: "play", onClick: () => speakRu(t.ru, p.genero), "aria-label": "Escuchar" }, "▶"),
+        h("button", { className: "play", onClick: () => azGuardarEnCuaderno(String(t.ru).replace(/[{}]/g, "") + "\n" + t.es, { titulo: "Diálogos · " + d.titulo, href: "dialogos.html?id=" + d.id }), "aria-label": "Guardar en el cuaderno" }, "＋"))
     ),
     (t.obs || cul) && h("div", { className: "ex-why" },
       t.obs,

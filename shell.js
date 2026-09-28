@@ -103,6 +103,50 @@ function azInterceptLinks() {
      entran en el ancho de pantalla, esa zona scrollea horizontal
    - view, setView: estado de tab activo, manejado por la página
    - children: contenido central de la pantalla */
+/* ── CAPTURA AL CUADERNO (26/09/2026, único cambio autorizado) ──
+   Cuando seleccionás un texto en cualquier pantalla aparece abajo el
+   botón «＋ Guardar en el cuaderno». El menú de copiar/pegar de iOS no
+   se puede ampliar desde una web, por eso va aparte. También muestra el
+   cartel «Guardado en el cuaderno» cuando se guarda algo desde otro
+   botón (evento az-cuaderno-guardado). No aparece dentro del cuaderno
+   ni al seleccionar texto en campos de escritura. */
+function AzCaptura({ c }) {
+  const [sel, setSel] = useState("");
+  const [cartel, setCartel] = useState(false);
+  useEffect(() => {
+    if (typeof azGuardarEnCuaderno !== "function") return;
+    let t = null;
+    const revisar = () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        const s = window.getSelection && window.getSelection();
+        const txt = s && !s.isCollapsed ? String(s).trim() : "";
+        const nodo = s && s.anchorNode ? (s.anchorNode.nodeType === 1 ? s.anchorNode : s.anchorNode.parentElement) : null;
+        const enCampo = nodo && nodo.closest && nodo.closest("input, textarea, [contenteditable]");
+        setSel(txt.length >= 2 && !enCampo && !/cuaderno\.html/.test(location.pathname) ? txt : "");
+      }, 180);
+    };
+    const avisar = () => { setCartel(true); setTimeout(() => setCartel(false), 2200); };
+    document.addEventListener("selectionchange", revisar);
+    window.addEventListener("az-cuaderno-guardado", avisar);
+    return () => { document.removeEventListener("selectionchange", revisar); window.removeEventListener("az-cuaderno-guardado", avisar); };
+  }, []);
+  const guardar = async () => {
+    const txt = sel;
+    setSel("");
+    try { window.getSelection().removeAllRanges(); } catch (e) {}
+    await azGuardarEnCuaderno(txt);
+  };
+  const base = { position: "fixed", left: "50%", transform: "translateX(-50%)", bottom: "calc(env(safe-area-inset-bottom, 0px) + 86px)", zIndex: 450,
+    borderRadius: 22, padding: "11px 18px", fontSize: 14, fontWeight: 700, fontFamily: "inherit", boxShadow: "0 8px 24px rgba(0,0,0,.35)", whiteSpace: "nowrap" };
+  if (cartel) return React.createElement("div", { role: "status", style: Object.assign({}, base, { background: c.card, color: "#4CAF82", border: "1px solid #4CAF82" }) }, "✓ Guardado en el cuaderno");
+  if (!sel) return null;
+  return React.createElement("button", {
+    onMouseDown: e => e.preventDefault(), onClick: guardar,
+    style: Object.assign({}, base, { background: c.gold, color: c.bg, border: "none", cursor: "pointer" })
+  }, "＋ Guardar en el cuaderno");
+}
+
 function AzShell(props) {
   const {
     darkMode, setDarkMode, moduleId,
@@ -143,6 +187,7 @@ function AzShell(props) {
   },
     /* Fondo de html/body/#root sigue el tema — esto sí es dinámico */
     React.createElement("style", null, `html, body, #root { background: ${c.bg}; }`),
+    React.createElement(AzCaptura, { c }),
 
     /* ── OVERLAY (el contenido central queda detrás, sin ajustarse) ── */
     drawerOpen && React.createElement("div", {

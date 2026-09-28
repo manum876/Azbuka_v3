@@ -92,7 +92,10 @@
       pos && h("div", { className: "az-bb-pos" }, pos),
       h("div", { className: "az-bb-es" }, es),
       h("div", { className: "az-bb-pie" },
-        onVolver ? h("button", { className: "az-bb-a", onClick: onVolver }, "‹ Frase") : h("span"),
+        onVolver ? h("button", { className: "az-bb-a", onClick: onVolver }, "‹ Frase")
+          : h("button", { className: "az-bb-a", onClick: function () {
+              azGuardarEnCuaderno((e.acento || e.ru) + " — " + es + (f ? "\n" + f.forma + " es " + f.etiquetas + "." : ""), { titulo: "Ficha · " + (e.acento || e.ru), href: href });
+            } }, "＋ Cuaderno"),
         h("a", { className: "az-bb-a", href: href, onClick: function (ev) { azNavigate(ev, href); } }, "Ver ficha")));
   }
 
@@ -113,7 +116,11 @@
         return h("button", { key: i, className: "az-bb-pal", lang: "ru", onClick: function () { onPalabra({ id: id, forma: p }); } }, p);
       })),
       h("div", { className: "az-bb-pie" },
-        f.registro ? h("span", { className: "az-bb-reg" }, "Con " + f.registro) : h("span"),
+        h("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
+          f.registro && h("span", { className: "az-bb-reg" }, "Con " + f.registro),
+          h("button", { className: "az-bb-a", onClick: function () {
+            azGuardarEnCuaderno(f.ru + "\n" + f.es, { titulo: "Frase · " + f.ru, href: href });
+          } }, "＋ Cuaderno")),
         h("a", { className: "az-bb-a", href: href, onClick: function (ev) { azNavigate(ev, href); } }, "Ver en Diálogos")));
   }
 

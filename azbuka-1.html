@@ -326,7 +326,9 @@ function HojaDialogo({ d, c, onClose }) {
             h("div", { style: { fontSize: 17, fontWeight: 700, lineHeight: 1.5 } }, h(AzTexto, { ru: l.ru, lex: l.lex, objetivo: OBJETIVO_U1 })),
             tr && h("div", { style: { fontSize: 13.5, color: c.textSub, fontStyle: "italic", marginTop: 2 } }, l.tr),
             es && h("div", { style: { fontSize: 14, color: c.text, marginTop: 4 } }, l.es)),
-          h("button", { className: "play", onClick: () => azHablarRu(l.ru, genero(l)), "aria-label": "Escuchar" }, "▶"));
+          h("div", { style: { display: "flex", flexDirection: "column", gap: 6 } },
+            h("button", { className: "play", onClick: () => azHablarRu(l.ru, genero(l)), "aria-label": "Escuchar" }, "▶"),
+            h("button", { className: "play", onClick: () => azGuardarEnCuaderno(l.ru + "\n" + l.es, { titulo: "Diálogos · " + d.titulo, href: "dialogos.html?id=" + d.id }), "aria-label": "Guardar en el cuaderno" }, "＋")));
       }),
       h("button", { className: "ubtn", onClick: todo }, "▶ Escuchar el diálogo"),
       h("a", { className: "ubtn sec", style: { marginTop: 10, textDecoration: "none" }, href, onClick: ev => azNavigate(ev, href) }, "Ver en Diálogos")));
@@ -376,6 +378,7 @@ function App() {
 
   useEffect(() => {
     const m = modId ? unidad1Modulo(modId) : null;
+    window.azFuenteActual = () => m ? "Unidad 1 · " + m.titulo : "Unidad 1";
     if (m && m.n > visto) { setVisto(m.n); azSet('az_u1_visto', m.n); }
     if (m) azGuardarUltimo({ unidad: 1, n: m.n, total: U.modulos.length, titulo: "Unidad 1 · " + m.titulo, href: "azbuka-1.html?m=" + m.id });
   }, [modId]);
