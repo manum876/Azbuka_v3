@@ -33,7 +33,8 @@
      ordenar   { pide, audio?, fichas, esperada }
      vf        { afirmacion, verdadero }
      emparejar { pide, pares: [[izq, der], …], audioIzq? }  (audioIzq: la izquierda es audio)
-   Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir? }
+   Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir?, items? }
+     items: letras o palabras que practica («alfabeto:Б», «lex:CMR-…») para el semáforo
      audio: botón ▶ (suena solo al aparecer salvo que haya «grande» o audioManual)
      oir: lo que suena al responder (la respuesta correcta)
    Criterios (Manu, 25/09/2026): audio en casi todo; nada de practicar
@@ -222,6 +223,26 @@
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
+  /* Nombre visible de una letra o palabra del semáforo */
+  function etiqueta(key) {
+    if (key.indexOf("alfabeto:") === 0) return key.slice(9);
+    if (key.indexOf("lex:") === 0 && typeof lexComerById === "function") { const e = lexComerById(key.slice(4)); if (e) return e.acento || e.ru; }
+    return key;
+  }
+  function Semaforo({ cambios, c }) {
+    const ultimo = {};
+    cambios.forEach(x => { ultimo[x.key] = Object.assign({}, ultimo[x.key] || { antes: x.antes }, { despues: x.despues }); });
+    const sube = Object.keys(ultimo).filter(k => ultimo[k].despues === 2 && ultimo[k].antes !== 2);
+    const baja = Object.keys(ultimo).filter(k => ultimo[k].despues === 1 && ultimo[k].antes === 2);
+    if (!sube.length && !baja.length) return null;
+    const fila = (t, lista, col) => lista.length > 0 && h("div", { style: { marginTop: 10 } },
+      h("div", { style: { fontSize: 13, fontWeight: 700, color: col } }, t),
+      h("div", { lang: "ru", style: { fontSize: 16, fontWeight: 700, marginTop: 4, lineHeight: 1.6 } }, lista.map(etiqueta).join(" · ")));
+    return h("div", { className: "pr-card", style: { marginTop: 16, padding: "12px 16px" } },
+      fila("Ahora dominadas", sube, VERDE),
+      fila("Volvieron a «Aprendiendo»", baja, NARANJA));
+  }
+
   const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar };
 
   /* ── Sesión ── */
@@ -231,6 +252,7 @@
     const [lista, setLista] = useState([]);
     const [i, setI] = useState(0);
     const [res, setRes] = useState({});             /* id → resultado */
+    const [cambios, setCambios] = useState([]);     /* semáforo: niveles que cambiaron */
 
     const empezar = () => {
       if (examen) {
@@ -240,19 +262,20 @@
           const pp = pool.filter(e => p.tipos.indexOf(e.tipo) >= 0 && !sel.some(x => x.grupo && x.grupo === e.grupo));
           azPickExercises(pp, { n: p.n, repaso: 0 }).forEach(e => sel.push(Object.assign({}, e, { parte: p.nombre })));
         });
-        setLista(sel); setI(0); setRes({}); setFase("ej");
+        setLista(sel); setI(0); setRes({}); setCambios([]); setFase("ej");
         return;
       }
       const dif = azTargetDifficulty(unidad, 1);
       const cerca = pool.filter(e => e.dificultad <= dif + 2);   /* nunca más de dos escalones arriba */
       const base = cerca.length >= (n || 12) * 2 ? cerca : pool;
       setLista(azPickExercises(base, { n: n || 12, mezcla: mezcla || {}, dificultad: dif }));
-      setI(0); setRes({}); setFase("ej");
+      setI(0); setRes({}); setCambios([]); setFase("ej");
     };
     const ej = lista[i];
     const anotar = r => {
       if (res[ej.id] != null) return;
-      azRecordExercise(ej.id, r, unidad);
+      const reg = azRecordExercise(ej.id, r, unidad, ej.items);
+      if (reg.cambios && reg.cambios.length) setCambios(x => x.concat(reg.cambios));
       const sol = ej.oir || (ej.forma !== "emparejar" && ej.audio);
       if (sol) setTimeout(() => hablar(sol), 450);   /* escuchar la respuesta siempre refuerza */
       setRes(x => Object.assign({}, x, { [ej.id]: r }));
@@ -305,6 +328,7 @@
           h("div", { key: x.p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: x === partes[0] ? "none" : `1px solid ${c.border}` } },
             h("span", { style: { fontWeight: 600 } }, x.p.nombre),
             h("span", { style: { fontWeight: 800, color: x.pct >= examen.aprobado ? VERDE : x.pct >= .5 ? NARANJA : ROJO } }, Math.round(x.pct * 100) + " %")))),
+        h(Semaforo, { cambios, c }),
         flojas.length > 0 && h(React.Fragment, null,
           h("div", { className: "pr-kick", style: { marginTop: 22 } }, "Para reforzar"),
           flojas.map(x => h("button", { key: x.p.nombre, className: "pr-btn sec", style: { width: "100%", marginTop: 8 }, onClick: () => onReforzar && onReforzar(x.p) }, "Practicar " + x.p.nombre.toLowerCase()))),
@@ -331,6 +355,7 @@
                 h("div", { style: { fontWeight: 700 } }, e.pide || e.afirmacion, e.grande ? " " + e.grande : ""),
                 h("div", { style: { color: c.textSub } }, azFmt(e.explicacion))))))
           : h("div", { className: "pr-exp", style: { marginTop: 18, fontSize: 15 } }, "Todo bien en esta sesión."),
+        h(Semaforo, { cambios, c }),
         h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 10 } },
           h("button", { className: "pr-btn", onClick: empezar }, "Otra sesión"),
           h("button", { className: "pr-btn sec", onClick: onSalir }, "Volver a la unidad")));

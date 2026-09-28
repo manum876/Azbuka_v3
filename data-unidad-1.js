@@ -449,6 +449,19 @@ function ejerciciosUnidad1() {
       explicacion: "Se escribe " + exp });
   });
 
+
+  /* Semáforo: qué letra o palabra practica cada ejercicio */
+  const porRu = {};
+  if (typeof LEXICON_COMER !== "undefined") LEXICON_COMER.forEach(e => { (porRu[e.ru] = porRu[e.ru] || []).push(e.id); });
+  out.forEach(ex => {
+    if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id);
+    else if (ex.tipo === "unir") ex.items = ex.pares.map(p => "alfabeto:" + p[1].charAt(0));
+    else if (/^[А-ЯЁ]$/.test(ex.grupo || "")) ex.items = ["alfabeto:" + ex.grupo];
+    else if (ex.tipo === "ortografia" || ex.tipo === "ortografia-completar") {
+      const ids = porRu[ex.correcta && ex.tipo === "ortografia" ? ex.correcta : (ex.oir || "").replace(/\u0301/g, "")] || [];
+      if (ids.length === 1) ex.items = ["lex:" + ids[0]];
+    }
+  });
   return out;
 }
 

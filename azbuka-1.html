@@ -209,7 +209,7 @@ function Tarjetas({ letras, titulo, c, niveles, setNivel, onClose, green, cursiv
       h("div", { className: "u-kicker" }, "Tarjetas · " + titulo),
       h("div", { style: { fontSize: 14, color: c.textMuted, marginBottom: 14 } },
         (i + 1) + " de " + orden.length + (nv ? " · " + (nv === 2 ? "dominada" : "aprendiendo") : "")),
-      h("div", { className: "fc" + (vuelta ? " dorso" : ""), onClick: () => setVuelta(v => !v), role: "button", tabIndex: 0, "aria-label": "Dar vuelta la tarjeta" },
+      h("div", { className: "fc" + (vuelta ? " dorso" : ""), onClick: () => { if (!vuelta && !(niveles[l.upper] > 0)) setNivel(l, 1, true); setVuelta(v => !v); }, role: "button", tabIndex: 0, "aria-label": "Dar vuelta la tarjeta" },
         !vuelta
           ? h(React.Fragment, null,
               h("div", { className: "fc-glyph", lang: "ru" }, l.upper + " " + l.lower),
@@ -366,9 +366,7 @@ function App() {
       setVerPron((await azGet('az_u1_pron', true)) !== false);
       setVisto(await azGet('az_u1_visto', 2));
       await azLoadProgress();
-      const lv = {};
-      ALPHABET.forEach(l => { lv[l.upper] = azItem('alfabeto:' + l.upper).level; });
-      setNiveles(lv);
+      refrescarNiveles();
       azSaveUnitProgress(1, {});
     })();
     const pop = () => { setModId(new URLSearchParams(location.search).get("m")); setHoja(null); setTarjetas(false); setDialogo(null); setPractica(null); };
@@ -388,11 +386,16 @@ function App() {
   const [examenU1, setExamenU1] = useState(null);
   useEffect(() => { if (!practica) setExamenU1((AZ_PROGRESS.units["1"] || {}).examen || null); }, [practica, niveles]);
   const practicarModulo = m => setPractica({ titulo: m.titulo, pool: m.n === 8 ? EJ_U1.filter(e => e.tipo === "pares") : EJ_U1.filter(e => e.modulo === m.n) });
+  function refrescarNiveles() {
+    const lv = {};
+    ALPHABET.forEach(l => { lv[l.upper] = azItem('alfabeto:' + l.upper).level; });
+    setNiveles(lv);
+  }
   const abrirModulo = id => {
     history.pushState(null, "", id ? "?m=" + id : location.pathname);
     setModId(id); window.scrollTo(0, 0);
   };
-  const setNivel = (l, v) => { azSetItemLevel('alfabeto:' + l.upper, v); setNiveles(p => Object.assign({}, p, { [l.upper]: v })); };
+  const setNivel = (l, v, auto) => { azSetItemLevel('alfabeto:' + l.upper, v, auto); setNiveles(p => Object.assign({}, p, { [l.upper]: v })); };
   const togglePron = () => { const v = !verPron; setVerPron(v); azSet('az_u1_pron', v); };
   const chip = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
 
@@ -400,6 +403,7 @@ function App() {
   const green = darkMode ? "#4CAF82" : "#2E7D55";
   const mod = modId ? unidad1Modulo(modId) : null;
   const dominadas = ALPHABET.filter(l => niveles[l.upper] === 2).length;
+  const palabrasDom = OBJETIVO_U1.filter(id => azItem("lex:" + id).level === 2).length;
   const idx = mod ? U.modulos.indexOf(mod) : -1;
   const vecino = d => { for (let k = idx + d; k >= 0 && k < U.modulos.length; k += d) if (U.modulos[k].tipo !== "pronto") return U.modulos[k]; return null; };
   const prev = mod && vecino(-1), next = mod && vecino(1);
@@ -421,7 +425,12 @@ function App() {
       h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } },
         h("span", { style: { fontSize: 14, fontWeight: 700, color: c.text } }, "Letras dominadas"),
         h("span", { style: { fontSize: 14, fontWeight: 800, color: green } }, dominadas + " de " + ALPHABET.length)),
-      h("div", { className: "pbar-track" }, h("div", { className: "pbar-fill", style: { width: (dominadas / ALPHABET.length * 100) + "%" } }))),
+      h("div", { className: "pbar-track" }, h("div", { className: "pbar-fill", style: { width: (dominadas / ALPHABET.length * 100) + "%" } })),
+      h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 14 } },
+        h("span", { style: { fontSize: 14, fontWeight: 700, color: c.text } }, "Palabras dominadas"),
+        h("span", { style: { fontSize: 14, fontWeight: 800, color: green } }, palabrasDom + " de " + OBJETIVO_U1.length)),
+      h("div", { className: "pbar-track" }, h("div", { className: "pbar-fill", style: { width: (palabrasDom / OBJETIVO_U1.length * 100) + "%" } })),
+      h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 10, lineHeight: 1.5 } }, "Se marcan solas cuando las acertás en ejercicios distintos, en días distintos. También podés marcar las letras a mano.")),
     h("button", { className: "ubtn", onClick: practicarUnidad }, "Practicar la unidad"),
     h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 6, textAlign: "center" } }, "Ejercicios de todo lo que viste hasta el módulo " + Math.max(visto, 2) + "."),
     h("div", { className: "u-sec" }, "Módulos"),
@@ -503,7 +512,7 @@ function App() {
     h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vistaModulo : portada),
     hoja && h(HojaLetra, { l: LETRA[hoja], c, green, nivel: niveles[hoja] || 0, setNivel, onClose: () => setHoja(null) }),
     practica && h(AzPractica, { key: practica.titulo, unidad: 1, titulo: practica.titulo, pool: practica.pool, mezcla: U1_MEZCLA, n: Math.min(12, practica.pool.length), dark: darkMode, aviso: AVISO_ACENTOS,
-      examen: practica.examen, onReforzar: reforzar, onSalir: () => setPractica(null) }),
+      examen: practica.examen, onReforzar: reforzar, onSalir: () => { setPractica(null); refrescarNiveles(); } }),
     dialogo && h(HojaDialogo, { d: DIALOGOS.find(x => x.id === dialogo), c, onClose: () => setDialogo(null) }),
     tarjetas && mod && h(Tarjetas, { letras: mod.letras, titulo: mod.titulo, c, green, niveles, setNivel, onClose: () => setTarjetas(false) }),
     h(AzBurbujaHost, { dark: darkMode }));

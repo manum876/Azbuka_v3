@@ -71,9 +71,44 @@ function azTouchStudied() {
 function azItem(key) {
   return AZ_PROGRESS.items[key] || { level: 0, lastSeen: null };
 }
-function azSetItemLevel(key, level) {
-  AZ_PROGRESS.items[key] = { level: level, lastSeen: new Date().toISOString().slice(0, 10) };
+/* Marcar un nivel. Por defecto es una marca a mano (man: true), que la
+   app respeta; con auto = true la pone el semáforo. */
+function azSetItemLevel(key, level, auto) {
+  const prev = AZ_PROGRESS.items[key] || {};
+  AZ_PROGRESS.items[key] = Object.assign({}, prev, { level: level, lastSeen: new Date().toISOString().slice(0, 10), man: !auto });
   azTouchStudied();
+}
+
+/* ── SEMÁFORO AUTOMÁTICO (26/09/2026) ─────────────────────────
+   Cada resultado de un ejercicio cuenta para las letras o palabras
+   que practica (ej.items: "alfabeto:Б", "lex:CMR-00230").
+     · No estudiada → Aprendiendo: la primera vez que se practica.
+     · Aprendiendo → Dominada: al menos AZ_SEMAFORO.aciertos puntos en
+       ejercicios distintos (Bien = 1, Casi = ½), en al menos
+       AZ_SEMAFORO.dias días distintos, y el último intento Bien.
+     · Dominada → Aprendiendo: AZ_SEMAFORO.fallos Mal en los últimos
+       AZ_SEMAFORO.ventana intentos (también si la marcaste a mano).
+   Una marca a mano se respeta: el semáforo solo la baja con fallos.
+   items[key].ev guarda los últimos 12 intentos { d, r, e }. */
+const AZ_SEMAFORO = { aciertos: 3, dias: 2, ventana: 3, fallos: 2 };
+function azRegistrarItem(key, result, exId) {
+  const hoy = azHoy();
+  const it = Object.assign({ level: 0 }, AZ_PROGRESS.items[key]);
+  let ev = (it.ev || []).concat([{ d: hoy, r: result, e: exId }]).slice(-12);
+  const antes = it.level || 0;
+  let nivel = antes === 0 ? 1 : antes;
+  if (nivel === 1) {
+    const mejor = {};
+    ev.forEach(x => { const pts = x.r === AZ_BIEN ? 1 : x.r === AZ_CASI ? 0.5 : 0; mejor[x.e] = Math.max(mejor[x.e] || 0, pts); });
+    const puntos = Object.keys(mejor).reduce((a, k) => a + mejor[k], 0);
+    const dias = new Set(ev.filter(x => x.r !== AZ_MAL).map(x => x.d)).size;
+    if (puntos >= AZ_SEMAFORO.aciertos && dias >= AZ_SEMAFORO.dias && result === AZ_BIEN) nivel = 2;
+  } else if (nivel === 2) {
+    const ult = ev.slice(-AZ_SEMAFORO.ventana);
+    if (ult.filter(x => x.r === AZ_MAL).length >= AZ_SEMAFORO.fallos) { nivel = 1; ev = ult; }
+  }
+  AZ_PROGRESS.items[key] = Object.assign({}, it, { level: nivel, lastSeen: hoy, ev: ev, man: nivel === antes ? !!it.man : false });
+  return nivel !== antes ? { key: key, antes: antes, despues: nivel } : null;
 }
 function azItemsByPrefix(prefix) {
   const out = {};
@@ -123,7 +158,7 @@ function azExercise(id) {
 
 /* Registra un resultado (AZ_BIEN / AZ_CASI / AZ_MAL).
    unitId (opcional) alimenta el ajuste de dificultad de esa unidad. */
-function azRecordExercise(id, result, unitId) {
+function azRecordExercise(id, result, unitId, items) {
   const e = Object.assign({}, azExercise(id));
   e.v += 1;
   if (result === AZ_BIEN) e.b += 1; else if (result === AZ_CASI) e.c += 1; else e.m += 1;
@@ -139,7 +174,9 @@ function azRecordExercise(id, result, unitId) {
     u.exDone = (u.exDone || 0) + 1;
     u.lastStudied = e.f;
   }
+  const cambios = (items || []).map(k => azRegistrarItem(k, result, id)).filter(Boolean);
   azTouchStudied();
+  e.cambios = cambios;   /* cambios de nivel del semáforo (antes / despues) */
   return e;
 }
 
@@ -167,7 +204,7 @@ function azShuffle(a) {
 }
 
 /* Elige una sesión de ejercicios.
-   pool: [{ id, tipo, dificultad, grupo? }]  (grupo = frase o palabra de origen)
+   pool: [{ id, tipo, dificultad, grupo?, items? }]  (grupo = frase o palabra de origen)
    opts: {
      n: 12,                      // tamaño de la sesión
      mezcla: { tipo: peso },     // proporción por tipo (vacío = sin preferencia)
@@ -184,9 +221,15 @@ function azPickExercises(pool, opts) {
   const usados = {}, grupos = {}, out = [];
   const libre = function (ex) { return !usados[ex.id] && !(ex.grupo && grupos[ex.grupo]); };
   const tomar = function (ex) { usados[ex.id] = 1; if (ex.grupo) grupos[ex.grupo] = 1; out.push(ex); };
+  /* Lo dominado aparece menos: si todo lo que practica un ejercicio ya
+     está Dominado, cuenta como si se hubiera hecho una vez más. */
+  const peso = function (ex) {
+    const dom = ex.items && ex.items.length && ex.items.every(function (k) { return azItem(k).level === 2; });
+    return azExercise(ex.id).v + (dom ? 1 : 0);
+  };
   const orden = function (lista) {
     return azShuffle(lista.slice()).sort(function (a, b) {
-      return (azExercise(a.id).v - azExercise(b.id).v) ||
+      return (peso(a) - peso(b)) ||
              (Math.abs((a.dificultad || 1) - target) - Math.abs((b.dificultad || 1) - target));
     });
   };
@@ -241,3 +284,5 @@ window.azRecordExercise = azRecordExercise;
 window.azInRepaso = azInRepaso;
 window.azTargetDifficulty = azTargetDifficulty;
 window.azPickExercises = azPickExercises;
+window.azRegistrarItem = azRegistrarItem;
+window.AZ_SEMAFORO = AZ_SEMAFORO;
