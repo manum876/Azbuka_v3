@@ -112,6 +112,16 @@
     .grab button.rec{border-color:#B5605C;color:#D9776F;}
     .req{display:flex;gap:8px;align-items:center;font-size:14px;padding:6px 0;}
     .proy{width:100%;box-sizing:border-box;min-height:36vh;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:14px;color:${c.text};font-size:16px;line-height:1.55;font-family:inherit;margin-top:12px;}
+  
+    .grp-wrap{overflow-x:auto;margin-top:12px;}
+    .grp{width:100%;border-collapse:separate;border-spacing:0;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;overflow:hidden;}
+    .grp th{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.textMuted};text-align:left;padding:9px 10px;border-bottom:1px solid ${c.border};}
+    .grp td{padding:8px 10px;border-top:1px solid ${c.border};vertical-align:top;}
+    .grp tr:first-child td{border-top:none;}
+    .grp-w{background:none;border:none;padding:0;color:${c.text};font-family:inherit;cursor:pointer;text-align:left;}
+    .grp-ru{font-size:15px;font-weight:700;}
+    .grp-w .pl{font-size:9px;color:${c.gold};}
+    .grp-es{font-size:11.5px;color:${c.textMuted};margin-top:1px;}
   `);
   }
 
@@ -154,7 +164,7 @@
     }));
   }
 
-  function AzGrabadora({ texto }) {
+  function AzGrabadora({ texto, onGrabado }) {
     const [estado, setEstado] = useState("listo");
     const [url, setUrl] = useState(null);
     const rec = useRef(null);
@@ -163,7 +173,7 @@
         const st = await navigator.mediaDevices.getUserMedia({ audio: true });
         const mr = new MediaRecorder(st); const partes = [];
         mr.ondataavailable = e => partes.push(e.data);
-        mr.onstop = () => { st.getTracks().forEach(t => t.stop()); setUrl(URL.createObjectURL(new Blob(partes, { type: mr.mimeType }))); setEstado("grabado"); };
+        mr.onstop = () => { st.getTracks().forEach(t => t.stop()); const u = URL.createObjectURL(new Blob(partes, { type: mr.mimeType })); setUrl(u); setEstado("grabado"); if (onGrabado) onGrabado(u); };
         mr.start(); rec.current = mr; setEstado("grabando");
       } catch (e) { setEstado("sin-mic"); }
     };
@@ -178,8 +188,20 @@
   function AzHojaDialogo({ d, c, onClose, grabar, objetivo }) {
     const [tr, setTr] = useState(true);
     const [es, setEs] = useState(true);
+    const [mias, setMias] = useState({});            /* línea → grabación */
     const gen = l => personaje(l.p).genero;
     const href = "dialogos.html?id=" + d.id;
+    /* Todas mis grabaciones en orden; si falta una línea, suena el modelo */
+    const escucharMias = () => {
+      let i = 0;
+      const sig = () => {
+        if (i >= d.lineas.length) return;
+        const k = i++, u = mias[k];
+        if (u) { const a = new Audio(u); a.onended = () => setTimeout(sig, 200); a.play(); }
+        else azHablarSecuencia([{ texto: d.lineas[k].ru, genero: gen(d.lineas[k]) }], null, () => setTimeout(sig, 100));
+      };
+      sig();
+    };
     return h("div", { className: "sheet", role: "dialog" },
       h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
       h("div", { className: "sheet-in" },
@@ -201,13 +223,15 @@
             h("div", { style: { display: "flex", flexDirection: "column", gap: 6 } },
               h("button", { className: "play", onClick: () => azHablarRu(l.ru, gen(l)), "aria-label": "Escuchar" }, "▶"),
               h("button", { className: "play", onClick: () => azGuardarEnCuaderno(l.ru + "\n" + l.es, { titulo: "Diálogos · " + d.titulo, href }), "aria-label": "Guardar en el cuaderno" }, "＋"))),
-          grabar && h(AzGrabadora, { texto: l.ru }))),
+          grabar && h(AzGrabadora, { texto: l.ru, onGrabado: u => setMias(m => Object.assign({}, m, { [i]: u })) }))),
         h("button", { className: "ubtn", onClick: () => azHablarSecuencia(d.lineas.map(l => ({ texto: l.ru, genero: gen(l) }))) }, "▶ Escuchar el diálogo"),
+        grabar && Object.keys(mias).length > 0 && h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: escucharMias }, "▶ Escuchar mis grabaciones"),
         h("a", { className: "ubtn sec", style: { marginTop: 10, textDecoration: "none" }, href, onClick: ev => azNavigate(ev, href) }, "Ver en Diálogos")));
   }
 
   function AzTarjetasPalabras({ ids, titulo, c, green, onClose }) {
-    const [orden, setOrden] = useState(ids);
+    /* Los nombres propios (países, ciudades, personas) no van en las tarjetas */
+    const [orden, setOrden] = useState(() => ids.filter(id => { const e = lexComerById(id); return e && !e.propio; }));
     const [i, setI] = useState(0);
     const [vuelta, setVuelta] = useState(false);
     const [, refrescar] = useState(0);
@@ -261,16 +285,24 @@
 
   function AzProyecto({ mod, c, green, clave, fuente, aviso }) {
     const [txt, setTxt] = useState("");
+    const [rev, setRev] = useState(null);
     useEffect(() => { (async () => setTxt(await azGet(clave, "")))(); }, []);
     const n = t => t.replace(/\u0301/g, "").replace(/ё/g, "е").toLowerCase();
     const ok = mod.requisitos.map(r => new RegExp(r.rx).test(n(txt)));
-    const cambiar = v => { setTxt(v); azSet(clave, v); };
+    const cambiar = v => { setTxt(v); setRev(null); azSet(clave, v); };
     return h("div", null,
       h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 14 } }, mod.requisitos.map((r, i) =>
         h("div", { key: i, className: "req" }, h("span", { style: { color: ok[i] ? green : c.textMuted, fontWeight: 800 } }, ok[i] ? "✓" : "○"), h("span", { style: { color: ok[i] ? c.text : c.textSub } }, r.txt)))),
       aviso && h("div", { className: "u-dest" }, aviso),
       h("textarea", { className: "proy", lang: "ru", value: txt, placeholder: "Escribí en ruso…", onInput: e => cambiar(e.target.value) }),
       ok.every(Boolean) && h("div", { style: { marginTop: 10, color: green, fontWeight: 700, fontSize: 14 } }, "¡Están todos los puntos! Leelo en voz alta y guardalo en el cuaderno."),
+      h("button", { className: "ubtn", disabled: !txt.trim(), onClick: () => setRev(azRevisarTexto(txt, mod.requisitos, mod.consejos)) }, "Revisar mi texto"),
+      rev && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
+        !rev.dudas.length && !rev.faltan.length && !rev.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: 14 } }, "✓ No encontré errores y están todos los puntos."),
+        rev.dudas.map((d, i) => h("div", { key: "d" + i, className: "u-truco", lang: "ru" }, "«" + d.t + "» no la encuentro en el diccionario" + (d.sugerencia ? ". ¿Quisiste decir «" + d.sugerencia + "»?" : ": revisá cómo se escribe."))),
+        rev.tips.map((t, i) => h("div", { key: "t" + i, className: "u-truco" }, azFmt(t))),
+        rev.faltan.length > 0 && h("div", { className: "u-truco" }, "Falta: " + rev.faltan.join(", ").toLowerCase() + "."),
+        h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, "La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática.")),
       h("div", { style: { display: "flex", gap: 8, marginTop: 12 } },
         h("button", { className: "ubtn sec", style: { marginTop: 0 }, disabled: !txt.trim(), onClick: () => azHablarRu(txt) }, "▶ Escucharlo"),
         h("button", { className: "ubtn", style: { marginTop: 0 }, disabled: !txt.trim(), onClick: () => azGuardarEnCuaderno(txt, fuente) }, "＋ Cuaderno")));
@@ -308,6 +340,65 @@
       }));
   }
 
+  /* Barra de abajo en la portada de una unidad: ‹ Unidad N › */
+  function azTabsUnidad(n) {
+    const lista = (typeof AZ_UNITS !== "undefined" ? AZ_UNITS : []).filter(u => u.lista);
+    const k = lista.findIndex(u => u.id === n);
+    const ir = u => () => { if (u) location.href = u.href; };
+    const prev = lista[k - 1], next = lista[k + 1];
+    return [
+      { id: "uprev", icon: "‹", label: prev ? "Unidad " + prev.id : "", action: ir(prev) },
+      { id: "uact", icon: "", label: "Unidad " + n },
+      { id: "unext", icon: "›", label: next ? "Unidad " + next.id : "", action: ir(next) }
+    ];
+  }
+
+  /* Tabla de grupos de palabras relacionadas (país · hombre · mujer; idioma · por-…) */
+  function AzTablaGrupos({ encabezados, filas, c }) {
+    const celda = (id, k) => {
+      if (!id) return h("td", { key: k }, "—");
+      const e = lexComerById(id); if (!e) return h("td", { key: k }, "—");
+      return h("td", { key: k },
+        h("button", { className: "grp-w", onClick: () => azHablarRu(e.ru), lang: "ru" }, h("span", { className: "grp-ru" }, e.acento || e.ru), h("span", { className: "pl" }, " ▶")),
+        h("div", { className: "grp-es" }, (e.senses[0] || {}).es));
+    };
+    return h("div", { className: "grp-wrap" }, h("table", { className: "grp" },
+      h("thead", null, h("tr", null, encabezados.map((t, k) => h("th", { key: k }, t)))),
+      h("tbody", null, filas.map((f, i) => h("tr", { key: i }, f.map(celda))))));
+  }
+
+  /* Revisión de un texto libre: palabras que no existen (con sugerencia),
+     consejos de la unidad y requisitos que faltan. Todo local. */
+  function azRevisarTexto(txt, requisitos, consejos) {
+    const norm = t => t.replace(/\u0301/g, "").replace(/ё/g, "е").toLowerCase();
+    const idx = typeof azIndiceFormas === "function" ? azIndiceFormas() : new Map();
+    const conocidas = new Set(idx.keys());
+    if (typeof LEXICON_COMER !== "undefined") LEXICON_COMER.forEach(e => conocidas.add(norm(e.ru)));
+    /* Los nombres propios en mitad de la frase (Ману, Ле́на) no se revisan */
+    const tokens = [];
+    const rx = /[А-Яа-яЁё\u0301]+(?:-[А-Яа-яЁё\u0301]+)*/g; let m;
+    while ((m = rx.exec(txt))) {
+      const antes = txt.slice(0, m.index).replace(/\s+$/, "");
+      const inicio = !antes || /[.!?—–-]$/.test(antes);
+      if (/^[А-ЯЁ]/.test(m[0]) && !inicio) continue;
+      const k = norm(m[0]); if (tokens.indexOf(k) < 0) tokens.push(k);
+    }
+    const dudas = [];
+    tokens.forEach(t => {
+      if (conocidas.has(t)) return;
+      let mejor = null, dist = 3;
+      conocidas.forEach(k => {
+        if (Math.abs(k.length - t.length) > 1 || k[0] !== t[0]) return;
+        const d = azDiff(t, k).dist; if (d < dist) { dist = d; mejor = k; }
+      });
+      dudas.push({ t, sugerencia: mejor });
+    });
+    const n = norm(txt);
+    const faltan = (requisitos || []).filter(r => !new RegExp(r.rx).test(n)).map(r => r.txt);
+    const tips = (consejos || []).filter(k => new RegExp(k.rx).test(n)).map(k => k.msg);
+    return { dudas, faltan, tips };
+  }
+
   Object.assign(window, { AzEstilosUnidad, AzSecciones, AzVocabulario, AzFrasesLista, AzListaDialogos, AzGrabadora, AzHojaDialogo,
-    AzTarjetasPalabras, AzMapaExplorar, AzProyecto, AzPortadaUnidad });
+    AzTarjetasPalabras, AzMapaExplorar, AzProyecto, AzPortadaUnidad, AzTablaGrupos, azTabsUnidad, azRevisarTexto });
 })();

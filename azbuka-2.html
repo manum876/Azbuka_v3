@@ -44,6 +44,13 @@ const EJ_U2 = ejerciciosUnidad2();
 const OBJETIVO_U2 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(2) >= 0 || (e.appearsIn || []).indexOf(2) >= 0).map(e => e.id);
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas.";
 const personaje = p => (DLG_PERSONAJES[p] || { ru: p });   /* para los chats */
+const PORAC = {}; LEXICON_COMER.forEach(e => { PORAC[e.acento || e.ru] = e.id; });
+/* Tablas de los módulos 4 y 5: palabras relacionadas una al lado de la otra */
+const TABLAS = {
+  naciones: U2_NACIONES.map(([p, m, f]) => [PORAC[p], PORAC[m], PORAC[f]]),
+  idiomas: [["ру́сский", "по-ру́сски"], ["испа́нский", "по-испа́нски"], ["англи́йский", "по-англи́йски"], ["францу́зский", "по-францу́зски"], ["неме́цкий", "по-неме́цки"],
+    ["италья́нский", "по-италья́нски"], ["катала́нский", "по-катала́нски"], ["португа́льский", "по-португа́льски"], ["кита́йский", "по-кита́йски"], ["украи́нский", "по-украи́нски"]].map(f => f.map(x => PORAC[x]))
+};
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -92,7 +99,7 @@ function App() {
     { id: "u", icon: "⊞", label: "Unidad", action: () => abrirModulo(null) },
     { id: "p", icon: "‹", label: "Anterior", action: () => prev && abrirModulo(prev.id) },
     { id: "s", icon: "›", label: "Siguiente", action: () => next && abrirModulo(next.id) }
-  ] : [];
+  ] : azTabsUnidad(2);
 
   const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 1), examen: examenU2, onPracticar: practicarUnidad, onAbrir: abrirModulo,
     progreso: [{ label: "Palabras dominadas", valor: palabrasDom, total: OBJETIVO_U2.length }] });
@@ -111,7 +118,13 @@ function App() {
         secciones,
         mod.mapa && h(React.Fragment, null, h("div", { className: "u-sec" }, "Mapa"), h(AzMapaExplorar, { c })),
         mod.frases && mod.frases.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Frases"), h(AzFrasesLista, { ids: mod.frases, c })),
-        mod.vocab && mod.vocab.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Vocabulario (" + mod.vocab.length + ")"), h(AzVocabulario, { ids: mod.vocab, c })),
+        mod.tabla && h(React.Fragment, null, h("div", { className: "u-sec" }, mod.tabla.titulo),
+          h(AzTablaGrupos, { encabezados: mod.tabla.encabezados, filas: TABLAS[mod.tabla.filas], c })),
+        mod.vocab && mod.vocab.length > 0 && (() => {
+          const enTabla = mod.tabla ? new Set([].concat(...TABLAS[mod.tabla.filas])) : new Set();
+          const resto = mod.vocab.filter(id => !enTabla.has(id));
+          return resto.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, (mod.tabla ? "Más vocabulario (" : "Vocabulario (") + resto.length + ")"), h(AzVocabulario, { ids: resto, c }));
+        })(),
         mod.dialogos && mod.dialogos.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Diálogos"),
           h(AzListaDialogos, { ids: mod.dialogos, onAbrir: id => setDialogo({ id }) })),
         mod.vocab && mod.vocab.length > 0 && h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: mod.vocab, titulo: mod.titulo }) }, "Tarjetas (" + mod.vocab.length + ")"),

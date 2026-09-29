@@ -12,23 +12,23 @@
   .page-gap{margin-top:16px;}
 
   /* ── Vista grid ── */
-  .abc-hero{width:100%;box-sizing:border-box;text-align:center;padding:30px 20px;border-radius:20px;margin-bottom:18px;}
+  .abc-hero{width:100%;box-sizing:border-box;text-align:center;padding:26px 20px;border-radius:20px;margin-bottom:14px;}
   .abc-hero-letters{font-size:30px;font-weight:800;letter-spacing:6px;margin-bottom:10px;}
   .abc-hero-title{font-size:20px;font-weight:800;margin-bottom:6px;}
   .abc-hero-tag{font-size:12.5px;}
 
-  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
   .stat-card{border-radius:14px;padding:12px 8px;text-align:center;}
   .stat-num{font-size:20px;font-weight:800;line-height:1;}
   .stat-lbl{font-size:9.5px;margin-top:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
 
-  .pbar-track{width:100%;height:6px;border-radius:3px;overflow:hidden;margin-bottom:16px;}
+  .pbar-track{width:100%;height:6px;border-radius:3px;overflow:hidden;margin-bottom:14px;}
   .pbar-fill{height:100%;border-radius:3px;transition:width .3s ease;}
 
-  .toggle-row{display:flex;gap:8px;margin-bottom:14px;}
+  .toggle-row{display:flex;gap:8px;margin-bottom:16px;}
   .toggle-btn{flex:1;text-align:center;padding:8px 6px;border-radius:10px;font-size:11.5px;font-weight:600;cursor:pointer;transition:.18s;}
 
-  .abc-search{width:100%;box-sizing:border-box;border-radius:10px;padding:10px 14px;font-size:13.5px;margin-bottom:16px;}
+  .abc-search{width:100%;box-sizing:border-box;border-radius:10px;padding:11px 14px;font-size:16px;margin-bottom:14px;}
 
   .lgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
   @media (max-width:600px){.lgrid{grid-template-columns:repeat(3,1fr);}}
@@ -162,6 +162,12 @@ function App() {
 
     page === "grid" && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
 
+      React.createElement("input", {
+        className: "abc-search", value: search, onInput: (e) => setSearch(e.target.value),
+        placeholder: "Buscar letra…",
+        style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text }
+      }),
+
       React.createElement("div", { className: "abc-hero", style: { background: c.card, border: `1px solid ${c.border}` } },
         React.createElement("div", { className: "abc-hero-letters", style: { color: c.gold } }, "А Б В Г"),
         React.createElement("div", { className: "abc-hero-title", style: { color: c.text } }, "El Alfabeto Cirílico Ruso"),
@@ -189,7 +195,7 @@ function App() {
 
       React.createElement("button", {
         className: "btn", onClick: () => { setManoLetra("А"); setPage("mano"); window.scrollTo(0, 0); },
-        style: { width: "100%", marginTop: 14, padding: "12px 16px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 14, fontWeight: 700 }
+        style: { width: "100%", marginBottom: 14, padding: "12px 16px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 14, fontWeight: 700 }
       }, "✍️ Escribir a mano"),
 
       React.createElement("div", { className: "toggle-row" },
@@ -202,12 +208,6 @@ function App() {
           style: { background: showNames ? c.gold : c.bg3, color: showNames ? "#0F0F14" : c.textMuted, border: `1px solid ${showNames ? c.gold : c.border}` }
         }, "Nombres")
       ),
-
-      React.createElement("input", {
-        className: "abc-search", value: search, onInput: (e) => setSearch(e.target.value),
-        placeholder: "Buscar letra…",
-        style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text }
-      }),
 
       React.createElement("div", { className: "lgrid" },
         filtered.map(letter => {

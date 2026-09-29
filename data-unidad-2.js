@@ -23,7 +23,7 @@ const UNIDAD_2 = {
   modulos: [
     {
       id: "u2m1", n: 1, tipo: "leccion", titulo: "Saludos", resumen: "Hola, chau, gracias: formal e informal.",
-      intro: "En ruso hay un saludo para la confianza y otro para el respeto, y conviene no mezclarlos. En este módulo aprendés a saludar, despedirte y agradecer según a quién le hablás y a qué hora.",
+      intro: "En ruso hay un saludo para la confianza y otro para el respeto, y conviene no mezclarlos. En este módulo vas a aprender a saludar, despedirte y agradecer según a quién le hablás y a qué hora.",
       secciones: [
         { titulo: "Formal e informal", texto: "Приве́т y пока́ son de confianza: amigos, familia, gente joven de tu edad. Здра́вствуйте y до свида́ния son formales: un profesor, alguien mayor, un desconocido, un negocio, o cuando le hablás a varias personas. Es la misma diferencia que entre ты y вы, que vas a ver en el módulo 3.", destacado: "Con dudas, usá la forma formal: nunca queda mal." },
         { titulo: "Según la hora", texto: "До́брое у́тро va a la mañana, до́брый день durante el día y до́брый ве́чер a la tarde-noche, siempre para saludar al llegar. Споко́йной но́чи no es un saludo: se dice solo al irse a dormir, como «que descanses»." },
@@ -38,9 +38,9 @@ const UNIDAD_2 = {
       intro: "Para decir tu nombre hay dos formas, y para presentar a alguien alcanza con э́то. En este módulo aparece además una sorpresa del ruso: en presente no se dice el verbo «ser».",
       secciones: [
         { titulo: "Меня́ зову́т…", texto: "Literalmente, «me llaman…»: меня́ зову́т Ива́н. Es la forma más común de decir tu nombre. El nombre va tal cual, sin cambios." },
-        { titulo: "Sin verbo «ser»", texto: "En presente, el ruso no usa «soy», «es», «somos»: я Лу́кас es «(yo) soy Lucas», э́то Ди́ма es «este es Dima», я студе́нт es «soy estudiante». Donde en español va el verbo, en ruso no va nada.", destacado: "Я Лу́кас = Soy Lucas. Э́то А́нна = Esta es Ana." },
+        { titulo: "Sin verbo «ser»", texto: "En presente, el ruso no usa «soy», «es», «somos»: я Лу́кас es «yo (soy) Lucas», э́то Ди́ма es «este (es) Dima», я студе́нт es «yo (soy) estudiante». Donde en español va el verbo, en ruso no va nada.", destacado: "Я Лу́кас = Yo (soy) Lucas. Э́то А́нна = Esta (es) Ana." },
         { titulo: "Меня́ зову́т Ива́н o я Ива́н", texto: "Las dos están bien. Меня́ зову́т Ива́н es la presentación completa; я Ива́н es más corta, como «soy Iván», y se usa mucho al contestar o al presentarse rápido." },
-        { titulo: "Рад o ра́да: el género", texto: "Algunas palabras cambian según quien habla: un hombre dice рад познако́миться, una mujer dice ра́да познако́миться. Pasa lo mismo con студе́нт (hombre) y студе́нтка (mujer), друг y подру́га. Es el género, que en ruso se ve mucho más que en español; por ahora alcanza con notarlo." },
+        { titulo: "Рад o ра́да: el género", texto: "Algunas palabras cambian según quien habla: un hombre dice рад познако́миться («encantado»), una mujer dice ра́да познако́миться («encantada»). Pasa lo mismo con студе́нт (hombre) y студе́нтка (mujer), друг y подру́га. Es el género, que en ruso se ve mucho más que en español; por ahora alcanza con notarlo." },
         { titulo: "Contestar", texto: "A о́чень прия́тно («mucho gusto») se contesta мне то́же («igualmente»). Para presentar a alguien: познако́мься, э́то Ди́ма («te presento a Dima»)." }
       ],
       vocab: U2_VOCAB[2], frases: ["FRS-017", "FRS-018", "FRS-019", "FRS-053", "FRS-020"], dialogos: ["DLG-031", "DLG-034"]
@@ -49,7 +49,7 @@ const UNIDAD_2 = {
       id: "u2m3", n: 3, tipo: "leccion", titulo: "Preguntar nombres", resumen: "¿Cómo te llamás? ¿Quién es?",
       intro: "Para preguntar el nombre, el ruso usa la misma construcción que para decirlo. Y acá aparece la diferencia más importante del trato: ты o вы.",
       secciones: [
-        { titulo: "Как тебя́ зову́т? / Как вас зову́т?", texto: "Как тебя́ зову́т? es «¿cómo te llamás?», con confianza. Как вас зову́т? es «¿cómo se llama?», con respeto. Se contesta меня́ зову́т… o я…" },
+        { titulo: "Как тебя́ зову́т? / Как вас зову́т?", texto: "Как тебя́ зову́т? es «¿cómo te llamás?», con confianza. Как вас зову́т? es «¿cómo se llama?», con respeto. Se contesta меня́ зову́т Ива́н o я Ива́н." },
         { titulo: "Ты o вы", texto: "Ты es «vos»: familia, amigos, chicos, gente joven en un ambiente informal. Вы es «usted» y también «ustedes»: desconocidos, gente mayor, profesores, cualquier situación formal, y cualquier grupo de personas. Pasar de вы a ты lo propone la otra persona, igual que el tuteo en español.", destacado: "Ты = vos. Вы = usted y ustedes." },
         { titulo: "Кто э́то? Что э́то?", texto: "Кто э́то? pregunta por una persona («¿quién es?») y что э́то?, por una cosa («¿qué es esto?»). Se contesta igual: э́то Ма́ша, э́то слова́рь." },
         { titulo: "Él y ella", texto: "Para preguntar por otra persona: как его́ зову́т? («¿cómo se llama él?») y как её зову́т? («¿cómo se llama ella?»). La respuesta repite la forma: его́ зову́т Ди́ма, её зову́т О́льга. En его́ la **г** suena **v**: «yivó»." }
@@ -58,14 +58,15 @@ const UNIDAD_2 = {
     },
     {
       id: "u2m4", n: 4, tipo: "leccion", titulo: "Países y nacionalidades", resumen: "Отку́да ты? Я из…", mapa: true,
-      intro: "En este módulo aprendés los nombres de más de treinta países y a decir de dónde sos. Hay una sola estructura nueva, я из…, que conviene aprender como un bloque.",
+      intro: "En este módulo vas a aprender los nombres de más de treinta países y a decir de dónde sos. Hay una sola estructura nueva, я из…, que conviene aprender como un bloque.",
       secciones: [
         { titulo: "Я из…", texto: "Para decir de dónde sos: я из + el país o la ciudad. Después de из la palabra cambia un poco la terminación: Росси́я → из Росси́и, Аргенти́на → из Аргенти́ны, Кита́й → из Кита́я, Москва́ → из Москвы́. Es un caso (el genitivo), que vas a estudiar más adelante; por ahora, aprendelo de memoria junto con cada país.", destacado: "Отку́да ты? — Я из Аргенти́ны." },
         { titulo: "Países que no cambian", texto: "США, Перу́ y Чи́ли no cambian nunca: я из США, я из Перу́, я из Чи́ли." },
         { titulo: "Nacionalidades", texto: "Cada nacionalidad tiene forma de hombre y de mujer: испа́нец / испа́нка, аргенти́нец / аргенти́нка, италья́нец / италья́нка. La de mujer casi siempre termina en **-ка**. Ру́сский / ру́сская es distinta: es un adjetivo, igual que «ruso / rusa».", truco: "Ты ру́сский? — Нет, я аргенти́нец. (Sin verbo «ser», como en el módulo 2.)" },
         { titulo: "El mapa", texto: "Abajo tenés el mapa: tocá un país para escuchar su nombre y ver de dónde sale cada uno." }
       ],
-      vocab: U2_VOCAB[4], frases: ["FRS-021", "FRS-022", "FRS-023"], dialogos: ["DLG-032"]
+      vocab: U2_VOCAB[4], frases: ["FRS-021", "FRS-022", "FRS-023"], dialogos: ["DLG-032"],
+      tabla: { titulo: "País, hombre y mujer", encabezados: ["País", "Él", "Ella"], filas: "naciones" }
     },
     {
       id: "u2m5", n: 5, tipo: "leccion", titulo: "Idiomas", resumen: "Я говорю́ по-ру́сски. Я учу́ ру́сский.",
@@ -76,7 +77,8 @@ const UNIDAD_2 = {
         { titulo: "Las dos formas de cada idioma", texto: "ру́сский → по-ру́сски, испа́нский → по-испа́нски, англи́йский → по-англи́йски, францу́зский → по-францу́зски, неме́цкий → по-неме́цки. El adjetivo sirve para «estudiar»; la forma con **по-**, para «hablar» y «entender»." },
         { titulo: "Cuánto", texto: "Немно́го es «un poco»: я немно́го говорю́ по-ру́сски. Хорошо́ y пло́хо sirven para decir cómo: я пло́хо говорю́ по-ру́сски («hablo mal ruso»)." }
       ],
-      vocab: U2_VOCAB[5], frases: ["FRS-028", "FRS-029", "FRS-060"], dialogos: ["DLG-032", "DLG-033"]
+      vocab: U2_VOCAB[5], frases: ["FRS-028", "FRS-029", "FRS-060"], dialogos: ["DLG-032", "DLG-033"],
+      tabla: { titulo: "Estudiar y hablar", encabezados: ["Estudiar (учу́…)", "Hablar (говорю́…)"], filas: "idiomas" }
     },
     {
       id: "u2m6", n: 6, tipo: "leccion", titulo: "¿Cómo estás?", resumen: "Как дела́? Хорошо́, а у тебя́?",
@@ -103,7 +105,7 @@ const UNIDAD_2 = {
       id: "u2m8", n: 8, tipo: "leccion", titulo: "Frases útiles", resumen: "No entiendo, repita, más despacio.",
       intro: "Estas frases te salvan desde el primer día: sirven para pedir que te repitan, que hablen más despacio o para preguntar qué significa una palabra.",
       secciones: [
-        { titulo: "Cuando no entendés", texto: "Я не понима́ю («no entiendo»). Повтори́те, пожа́луйста («¿puede repetir?»); con ты, повтори́, пожа́луйста. Говори́те ме́дленнее, пожа́луйста («hable más despacio»)." },
+        { titulo: "Cuando no entendés", texto: "Я не понима́ю («no entiendo»). Повтори́те, пожа́луйста («¿puede repetir, por favor?»); con ты, повтори́, пожа́луйста («repetí, por favor»). Говори́те ме́дленнее, пожа́луйста («hable más despacio, por favor»)." },
         { titulo: "Preguntar palabras", texto: "Что э́то? («¿qué es esto?») y что зна́чит…? («¿qué significa…?»): что зна́чит «слова́рь»?" },
         { titulo: "Contar que aprendés", texto: "Я учу́ ру́сский («estudio ruso») avisa a la otra persona que tenga paciencia, y casi siempre la gente habla más despacio." , destacado: "Извини́те, я не понима́ю. Повтори́те, пожа́луйста." }
       ],
@@ -121,9 +123,16 @@ const UNIDAD_2 = {
         { txt: "Un saludo", rx: "(привет|здравствуйте|доброе утро|добрый день|добрый вечер)" },
         { txt: "Presentarte", rx: "(меня зовут|я [а-яё]+)" },
         { txt: "Preguntar el nombre", rx: "(как тебя зовут|как вас зовут)" },
-        { txt: "Decir de dónde sos", rx: "я из [а-яё-]+" },
+        { txt: "Decir de dónde sos", rx: "(я из [а-яе-]+|я (русский|русская|испанец|испанка|аргентинец|аргентинка|украинец|украинка|белорус|белоруска|француз|француженка|итальянец|итальянка|немец|немка|поляк|полька|американец|американка|англичанин|англичанка|китаец|китаянка|японец|японка|бразилец|бразильянка|мексиканец|мексиканка|каталонец|каталонка))" },
         { txt: "Decir qué idiomas hablás", rx: "(говорю по-[а-я]+|учу [а-я]+|изучаю [а-я]+)" },
         { txt: "Despedirte", rx: "(пока|до свидания|до завтра)" }
+      ],
+      consejos: [
+        { rx: "говор[а-я]* (русский|испанский|английский|французский|немецкий|итальянский|китайский|украинский|каталанский|португальский)", msg: "Con говори́ть el idioma va con **по-**: говорю́ по-ру́сски, no «говорю русский» (módulo 5)." },
+        { rx: "я есть ", msg: "En presente no se dice «есть» para «soy»: я студе́нт, no «я есть студент» (módulo 2)." },
+        { rx: "меня зовут меня", msg: "Sobra una palabra: меня́ зову́т + tu nombre." },
+        { rx: "как ты зовут", msg: "Se dice как тебя́ зову́т?, con тебя́ (módulo 3)." },
+        { rx: "я из (россия|испания|аргентина|украина|франция|италия|германия|англия|бразилия|мексика|москва|барселона)", msg: "Después de из el país cambia: из Росси́и, из Испа́нии, из Аргенти́ны (módulo 4)." }
       ]
     },
     {
@@ -144,22 +153,25 @@ const UNIDAD_2 = {
 };
 function unidad2Modulo(id) { return UNIDAD_2.modulos.find(m => m.id === id) || null; }
 
+const U2_NAC_LISTA = ["ру́сский", "ру́сская", "испа́нец", "испа́нка", "аргенти́нец", "аргенти́нка", "украи́нец", "украи́нка", "белору́с", "белору́ска", "францу́з", "францу́женка", "италья́нец", "италья́нка", "не́мец", "не́мка", "поля́к", "по́лька", "америка́нец", "америка́нка", "англича́нин", "англича́нка", "кита́ец", "китая́нка", "япо́нец", "япо́нка", "брази́лец", "бразилья́нка", "мексика́нец", "мексика́нка", "катало́нец", "катало́нка"];
+
 /* ── Chats guiados (mini roleplay, sin IA) ──
    Cada paso: lo que dice el personaje y las respuestas válidas.
-   {nombre} = cualquier nombre; {lugar} = cualquier lugar (1 o 2 palabras). */
+   {nombre} = cualquier nombre; {lugar} = cualquier lugar (1 o 2 palabras);
+   "{nac}" = «Я» + cualquier nacionalidad de la unidad (я аргенти́нец, я испа́нка…). */
 const U2_CHATS = [
   { id: "chat-masha", titulo: "Conocé a Masha", p: "masha", pasos: [
-    { bot: "Приве́т!", es: "¡Hola!", ok: ["Приве́т!", "Здра́вствуйте!"] },
-    { bot: "Как тебя́ зову́т?", es: "¿Cómo te llamás?", ok: ["Меня́ зову́т {nombre}.", "Я {nombre}."] },
+    { bot: "Приве́т!", es: "¡Hola!", ok: ["Приве́т!", "Здра́вствуйте!", "Приве́т, Ма́ша!", "До́брый день!", "До́брое у́тро!", "До́брый ве́чер!"] },
+    { bot: "Как тебя́ зову́т?", es: "¿Cómo te llamás?", ok: ["Меня́ зову́т {nombre}.", "Я {nombre}.", "Меня́ зову́т {nombre}. А тебя́?", "{nombre}.", "Меня́ зову́т {nombre}, а тебя́?"] },
     { bot: "О́чень прия́тно!", es: "¡Mucho gusto!", ok: ["Мне то́же.", "О́чень прия́тно!", "Мне то́же о́чень прия́тно."] },
-    { bot: "Отку́да ты?", es: "¿De dónde sos?", ok: ["Я из {lugar}."] },
+    { bot: "Отку́да ты?", es: "¿De dónde sos?", ok: ["Я из {lugar}.", "Из {lugar}.", "Я из {lugar}. А ты?", "Я из {lugar}, из {lugar}.", "{nac}"] },
     { bot: "Ты говори́шь по-ру́сски?", es: "¿Hablás ruso?", ok: ["Да.", "Да, немно́го.", "Немно́го.", "Да, я учу́ ру́сский.", "Я учу́ ру́сский.", "Нет.", "Нет, я учу́ ру́сский."] },
     { bot: "Отли́чно! Пока́!", es: "¡Bárbaro! ¡Chau!", ok: ["Пока́!", "До свида́ния!", "До за́втра!", "Пока́, Ма́ша!"] }
   ] },
   { id: "chat-olga", titulo: "Primera clase con Olga Petrovna", p: "olga", pasos: [
     { bot: "Здра́вствуйте!", es: "¡Buenos días!", ok: ["Здра́вствуйте!", "До́брый день!", "До́брое у́тро!"] },
-    { bot: "Как вас зову́т?", es: "¿Cómo se llama?", ok: ["Меня́ зову́т {nombre}.", "Я {nombre}."] },
-    { bot: "Отку́да вы?", es: "¿De dónde es usted?", ok: ["Я из {lugar}."] },
+    { bot: "Как вас зову́т?", es: "¿Cómo se llama?", ok: ["Меня́ зову́т {nombre}.", "Я {nombre}.", "{nombre}."] },
+    { bot: "Отку́да вы?", es: "¿De dónde es usted?", ok: ["Я из {lugar}.", "Из {lugar}.", "Я из {lugar}, из {lugar}.", "{nac}"] },
     { bot: "Вы говори́те по-ру́сски?", es: "¿Habla ruso?", ok: ["Да, немно́го.", "Немно́го.", "Да.", "Я учу́ ру́сский.", "Да, я учу́ ру́сский.", "Нет."] },
     { bot: "Хорошо́. До свида́ния!", es: "Muy bien. ¡Hasta luego!", ok: ["До свида́ния!", "Спаси́бо, до свида́ния!"] }
   ] },
@@ -302,6 +314,10 @@ function ejerciciosUnidad2() {
   });
 
   /* 7. Chats */
+  U2_CHATS.forEach(ch => ch.pasos.forEach(st => {
+    const k = st.ok.indexOf("{nac}");
+    if (k >= 0) st.ok.splice(k, 1, ...U2_NAC_LISTA.map(n => "Я " + n + "."), ...U2_NAC_LISTA.map(n => "Я " + n + ", я из {lugar}."));
+  }));
   U2_CHATS.forEach(ch => out.push({ id: "U2-chat-" + ch.id, tipo: "chat", forma: "chat", dificultad: 3, modulo: 9, grupo: ch.id, items: [], chat: ch,
     pide: ch.titulo, explicacion: "Conversación completa con " + personaje(ch.p) + "." }));
 

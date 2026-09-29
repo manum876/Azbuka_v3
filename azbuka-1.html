@@ -316,7 +316,7 @@ function App() {
     { id: "u", icon: "⊞", label: "Unidad", action: () => abrirModulo(null) },
     { id: "p", icon: "‹", label: "Anterior", action: () => prev && abrirModulo(prev.id) },
     { id: "s", icon: "›", label: "Siguiente", action: () => next && abrirModulo(next.id) }
-  ] : [];
+  ] : azTabsUnidad(1);
 
   /* ── Portada de la unidad ── */
   const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 2), examen: examenU1, onPracticar: practicarUnidad, onAbrir: abrirModulo,

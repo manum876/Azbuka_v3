@@ -13,8 +13,8 @@
    ya existe como entrada — el archivo azbuka-13.html se crea
    cuando corresponda construirlo. */
 const AZ_UNITS = [
-  { id: 1, title: "Alfabeto y pronunciación", desc: "Las 33 letras, sonidos y primeras palabras.", href: "azbuka-1.html" },
-  { id: 2, title: "Presentaciones y conversaciones básicas", desc: "Saludar, presentarte, nacionalidades y primeras preguntas.", href: "azbuka-2.html" },
+  { id: 1, title: "Alfabeto y pronunciación", desc: "Las 33 letras, sonidos y primeras palabras.", href: "azbuka-1.html", lista: true },
+  { id: 2, title: "Presentaciones y conversaciones básicas", desc: "Saludar, presentarte, nacionalidades y primeras preguntas.", href: "azbuka-2.html", lista: true },
   { id: 3, title: "Sustantivos, género y números", desc: "Género, plural, números y objetos de todos los días.", href: "azbuka-3.html" },
   { id: 4, title: "Casos I: Nominativo y Acusativo", desc: "Quién hace qué: el sujeto y el objeto directo.", href: "azbuka-4.html" },
   { id: 5, title: "Verbos en presente y acciones cotidianas", desc: "Las conjugaciones del presente y la rutina.", href: "azbuka-5.html" },
@@ -342,15 +342,22 @@ function azHablarRu(texto, genero) {
   } catch (e) {}
 }
 function azHablarSecuencia(items, alEmpezarLinea, alTerminar) {
+  /* Encadenadas: cada línea empieza cuando termina la anterior. En iPhone,
+     encolar varias de golpe hace que solo suene la primera. */
   try {
     if (!("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel();
-    items.forEach((it, i) => {
-      const u = azFraseVoz(it.texto, it.genero);
-      if (alEmpezarLinea) u.onstart = () => alEmpezarLinea(i);
-      if (i === items.length - 1 && alTerminar) u.onend = () => alTerminar();
+    let i = 0;
+    const siguiente = () => {
+      if (i >= items.length) { if (alTerminar) alTerminar(); return; }
+      const k = i++;
+      const u = azFraseVoz(items[k].texto, items[k].genero);
+      u.onstart = () => { if (alEmpezarLinea) alEmpezarLinea(k); };
+      u.onend = () => setTimeout(siguiente, 250);
+      u.onerror = () => setTimeout(siguiente, 250);
       window.speechSynthesis.speak(u);
-    });
+    };
+    setTimeout(siguiente, 60);
   } catch (e) {}
 }
 function azCallar() { try { window.speechSynthesis.cancel(); } catch (e) {} }
