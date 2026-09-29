@@ -58,7 +58,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 5487
+  totalEntries: 5508
 };
 const LEXICON_COMER = [
  {
@@ -2622,7 +2622,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [2, 3],
   "comer": [
    {
     "ID1": "39",
@@ -3438,7 +3438,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -4787,7 +4789,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "73",
@@ -6174,7 +6176,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [2, 3],
   "comer": [
    {
     "ID1": "94",
@@ -6301,7 +6303,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [2, 3],
   "comer": [
    {
     "ID1": "96",
@@ -6419,7 +6421,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "98",
@@ -6839,7 +6841,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [2, 3],
   "comer": [
    {
     "ID1": "106",
@@ -7665,7 +7667,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "118",
@@ -8792,7 +8794,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "137",
@@ -9979,7 +9981,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "156",
@@ -10852,7 +10854,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    2
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "171",
@@ -11255,7 +11257,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -11833,7 +11837,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "187",
@@ -12265,7 +12269,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -12663,7 +12669,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -13279,7 +13287,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -14414,7 +14424,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -14475,7 +14487,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "230",
@@ -14901,7 +14913,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "237",
@@ -15143,7 +15155,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -15980,7 +15994,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "255",
@@ -16527,7 +16541,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "264",
@@ -18198,7 +18212,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -18317,7 +18333,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "292",
@@ -18377,7 +18393,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -19361,7 +19379,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "309",
@@ -19725,7 +19743,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "315",
@@ -20454,7 +20472,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -20640,7 +20660,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "330",
@@ -20841,7 +20861,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "333",
@@ -21874,7 +21894,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -22480,7 +22502,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "360",
@@ -22778,7 +22800,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -23083,7 +23107,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "370",
@@ -23601,7 +23625,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "378",
@@ -24772,7 +24796,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "397",
@@ -24951,7 +24975,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -25859,7 +25885,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    2
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "416",
@@ -27470,7 +27496,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "442",
@@ -27899,7 +27925,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "449",
@@ -29406,7 +29432,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -30196,7 +30224,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -31337,7 +31367,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -33437,7 +33469,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "542",
@@ -33616,7 +33648,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -34768,7 +34802,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -36771,7 +36807,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -36957,7 +36995,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "600",
@@ -37136,7 +37174,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -37319,7 +37359,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -37621,7 +37663,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -37920,7 +37964,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -37981,7 +38027,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -38097,7 +38145,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -38580,7 +38630,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -38641,7 +38693,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -38818,7 +38872,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -39304,7 +39360,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -40075,7 +40133,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "653",
@@ -40501,7 +40559,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -40917,7 +40977,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -41392,7 +41454,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "676",
@@ -42237,7 +42299,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -42664,7 +42728,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -42786,7 +42852,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "699",
@@ -43513,7 +43579,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -44124,7 +44192,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "720",
@@ -44303,7 +44371,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -45386,7 +45456,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -48728,7 +48800,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -49275,7 +49349,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -49580,7 +49656,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -50683,7 +50761,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "826",
@@ -51163,7 +51241,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -52075,7 +52155,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -54119,7 +54201,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -55659,7 +55743,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -56093,7 +56179,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "916",
@@ -56797,7 +56883,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -58701,7 +58789,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -60150,7 +60240,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "982",
@@ -60984,7 +61074,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -62629,7 +62721,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -64559,7 +64653,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -64865,7 +64961,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [2, 3],
   "comer": [
    {
     "ID1": "1060",
@@ -68889,7 +68985,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -71998,7 +72096,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "1181",
@@ -72235,7 +72333,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -74356,7 +74456,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -75999,7 +76101,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -76547,7 +76651,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -76608,7 +76714,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -77037,7 +77145,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -77520,7 +77630,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -78919,7 +79031,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "1294",
@@ -79888,7 +80000,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -80106,7 +80220,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -82637,7 +82753,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -84330,7 +84448,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -84569,7 +84689,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -85588,7 +85710,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -86311,7 +86435,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -87279,7 +87405,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "1436",
@@ -90533,7 +90659,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -90895,7 +91023,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -92710,7 +92840,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -94299,7 +94431,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    2
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "1556",
@@ -94663,7 +94795,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -95837,7 +95971,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -95956,7 +96092,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "1584",
@@ -98203,7 +98339,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -98326,7 +98464,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -100740,7 +100880,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -100924,7 +101066,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -101047,7 +101191,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -101474,7 +101620,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -102141,7 +102289,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -102318,7 +102468,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -103279,7 +103431,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -104987,7 +105141,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -105895,7 +106051,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -108519,7 +108677,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -109128,7 +109288,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -110097,7 +110259,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -111005,7 +111169,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -112395,7 +112561,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -112456,7 +112624,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -112814,7 +112984,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -113179,7 +113351,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -115233,7 +115407,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -115410,7 +115586,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -117819,7 +117997,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "1952",
@@ -120154,7 +120332,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -120212,7 +120392,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -123483,7 +123665,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -124143,7 +124327,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -124327,7 +124513,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "2059",
@@ -124823,7 +125009,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -125133,7 +125321,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "2072",
@@ -127082,7 +127270,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -128499,7 +128689,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -129575,7 +129767,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -134738,7 +134932,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "2230",
@@ -138251,7 +138445,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -139928,7 +140124,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -140047,7 +140245,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -142095,7 +142295,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -143261,7 +143463,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -144104,7 +144308,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -144591,7 +144797,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "2395",
@@ -144713,7 +144919,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -145585,7 +145793,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -146245,7 +146455,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "2422",
@@ -150155,7 +150365,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "2487",
@@ -154432,7 +154642,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -162959,7 +163171,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -164787,7 +165001,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -167330,7 +167546,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -167570,7 +167788,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -168418,7 +168638,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "2793",
@@ -168478,7 +168698,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -169259,7 +169481,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -179162,7 +179386,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -179403,7 +179629,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -180009,7 +180237,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -180493,7 +180723,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -180914,7 +181146,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -183713,7 +183947,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -188628,7 +188864,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -193351,7 +193589,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -193882,7 +194122,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -197648,7 +197890,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -197940,7 +198184,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -198481,7 +198727,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -198789,7 +199037,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -199994,7 +200244,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -202959,7 +203211,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -211584,7 +211838,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -213919,7 +214175,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -220026,7 +220284,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -223296,7 +223556,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -225156,7 +225418,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -227073,7 +227337,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -227846,7 +228112,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -228438,7 +228706,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -229759,7 +230029,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -241169,7 +241441,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -242244,7 +242518,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -245732,7 +246008,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -247646,7 +247924,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -256916,7 +257196,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -259701,7 +259983,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -260478,7 +260762,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -262874,7 +263160,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -266521,7 +266809,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -269383,7 +269673,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -280286,7 +280578,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -288428,7 +288722,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -289025,7 +289321,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -290697,7 +290995,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -324510,7 +324810,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "",
@@ -325203,7 +325503,7 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [3],
   "comer": [
    {
     "ID1": "",
@@ -326016,7 +326316,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -326077,7 +326379,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -326565,7 +326869,9 @@ const LEXICON_COMER = [
    }
   ],
   "learningStatus": null,
-  "introducedIn": [],
+  "introducedIn": [
+   3
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -334326,6 +334632,1323 @@ const LEXICON_COMER = [
   "animate": "sí",
   "numberClass": "singulariaTantum",
   "propio": true
+ },
+ {
+  "id": "CMR-05561",
+  "ru": "ноутбук",
+  "acento": "ноутбу́к",
+  "posNormalized": "sustantivo",
+  "translit": "naudbúk",
+  "ipa": "nʌudbˈuk",
+  "senses": [
+   {
+    "es": "notebook, computadora portátil",
+    "definitionEs": "Computadora portátil, que se puede llevar a cualquier lado.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "ноутбук",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05562",
+  "ru": "кошелёк",
+  "acento": "кошелёк",
+  "posNormalized": "sustantivo",
+  "translit": "kashiliók",
+  "ipa": "kʌʃyɭʲˈɵk",
+  "senses": [
+   {
+    "es": "billetera",
+    "definitionEs": "Objeto chico para llevar la plata y las tarjetas.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "кошелёк",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05563",
+  "ru": "зонт",
+  "acento": "зонт",
+  "posNormalized": "sustantivo",
+  "translit": "zont",
+  "ipa": "zˈont",
+  "senses": [
+   {
+    "es": "paraguas",
+    "definitionEs": "Objeto que se abre para protegerse de la lluvia.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "зонт",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05564",
+  "ru": "вилка",
+  "acento": "ви́лка",
+  "posNormalized": "sustantivo",
+  "translit": "vílka",
+  "ipa": "vʲˈiɭkʌ",
+  "senses": [
+   {
+    "es": "tenedor",
+    "definitionEs": "Cubierto con dientes para pinchar la comida.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "вилка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05565",
+  "ru": "лиса",
+  "acento": "лиса́",
+  "posNormalized": "sustantivo",
+  "translit": "lisá",
+  "ipa": "ɭʲɪsˈɑ",
+  "senses": [
+   {
+    "es": "zorro",
+    "definitionEs": "Animal salvaje de pelo rojizo y cola larga.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "лиса",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05566",
+  "ru": "обезьяна",
+  "acento": "обезья́на",
+  "posNormalized": "sustantivo",
+  "translit": "abizyána",
+  "ipa": "ʌbʲɪʑˈjɑnʌ",
+  "senses": [
+   {
+    "es": "mono",
+    "definitionEs": "Animal parecido al ser humano, que vive en los árboles.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "обезьяна",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "8",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05567",
+  "ru": "утка",
+  "acento": "у́тка",
+  "posNormalized": "sustantivo",
+  "translit": "útka",
+  "ipa": "ˈutkʌ",
+  "senses": [
+   {
+    "es": "pato",
+    "definitionEs": "Ave de pico ancho que nada en el agua.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "утка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05568",
+  "ru": "медсестра",
+  "acento": "медсестра́",
+  "posNormalized": "sustantivo",
+  "translit": "mitsistrá",
+  "ipa": "mʲɪtsʲɪstrˈɑ",
+  "senses": [
+   {
+    "es": "enfermera",
+    "definitionEs": "Mujer que cuida a los pacientes en un hospital o consultorio.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "медсестра",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05569",
+  "ru": "программист",
+  "acento": "программи́ст",
+  "posNormalized": "sustantivo",
+  "translit": "pragrammíst",
+  "ipa": "prʌɡrʌmmʲˈist",
+  "senses": [
+   {
+    "es": "programador",
+    "definitionEs": "Persona que escribe programas de computadora.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "программист",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "11",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05570",
+  "ru": "официантка",
+  "acento": "официа́нтка",
+  "posNormalized": "sustantivo",
+  "translit": "afitsiántka",
+  "ipa": "ʌfʲɪtsyˈɑntkʌ",
+  "senses": [
+   {
+    "es": "moza",
+    "definitionEs": "Mujer que atiende las mesas en un bar o restaurante.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "официантка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05571",
+  "ru": "продавщица",
+  "acento": "продавщи́ца",
+  "posNormalized": "sustantivo",
+  "translit": "pradafschítsa",
+  "ipa": "prʌdʌfɕˈitsʌ",
+  "senses": [
+   {
+    "es": "vendedora",
+    "definitionEs": "Mujer que atiende en un negocio.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "продавщица",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05572",
+  "ru": "полицейский",
+  "acento": "полице́йский",
+  "posNormalized": "sustantivo",
+  "translit": "palitséiskii",
+  "ipa": "pʌɭʲɪtsˈɛjskʲɪj",
+  "senses": [
+   {
+    "es": "policía (agente)",
+    "definitionEs": "Persona que trabaja en la policía. Se declina como un adjetivo.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "полицейский",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "11",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05573",
+  "ru": "оранжевый",
+  "acento": "ора́нжевый",
+  "posNormalized": "adjetivo",
+  "translit": "aránzhivyi",
+  "ipa": "ʌrˈɑnʒyvyj",
+  "senses": [
+   {
+    "es": "naranja (color)",
+    "definitionEs": "Del color de la naranja.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "оранжевый",
+    "POS": "a",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05574",
+  "ru": "фиолетовый",
+  "acento": "фиоле́товый",
+  "posNormalized": "adjetivo",
+  "translit": "fialiétavyi",
+  "ipa": "fʲɪʌɭʲˈetʌvyj",
+  "senses": [
+   {
+    "es": "violeta (color)",
+    "definitionEs": "Del color de la violeta, entre azul y rojo.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "фиолетовый",
+    "POS": "a",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "10",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  }
+ },
+ {
+  "id": "CMR-05575",
+  "ru": "мел",
+  "acento": "мел",
+  "posNormalized": "sustantivo",
+  "translit": "miel",
+  "ipa": "mʲˈeɭ",
+  "senses": [
+   {
+    "es": "tiza",
+    "definitionEs": "Barrita blanca para escribir en el pizarrón.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "мел",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "3",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum"
+ },
+ {
+  "id": "CMR-05576",
+  "ru": "ластик",
+  "acento": "ла́стик",
+  "posNormalized": "sustantivo",
+  "translit": "lástik",
+  "ipa": "ɭˈɑstʲɪk",
+  "senses": [
+   {
+    "es": "goma de borrar",
+    "definitionEs": "Goma para borrar lo escrito con lápiz.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "ластик",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05577",
+  "ru": "линейка",
+  "acento": "лине́йка",
+  "posNormalized": "sustantivo",
+  "translit": "liniéika",
+  "ipa": "ɭʲɪnʲˈejkʌ",
+  "senses": [
+   {
+    "es": "regla",
+    "definitionEs": "Instrumento recto para medir y trazar líneas.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "линейка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05578",
+  "ru": "ножницы",
+  "acento": "но́жницы",
+  "posNormalized": "sustantivo",
+  "translit": "nózhnitsi",
+  "ipa": "nˈoʒnʲɪtsy",
+  "senses": [
+   {
+    "es": "tijera",
+    "definitionEs": "Instrumento de dos hojas para cortar papel o tela. Se usa solo en plural.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "ножницы",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "7",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": null,
+  "animate": "no",
+  "numberClass": "pluraliaTantum"
+ },
+ {
+  "id": "CMR-05579",
+  "ru": "клей",
+  "acento": "клей",
+  "posNormalized": "sustantivo",
+  "translit": "kliei",
+  "ipa": "kɭʲˈej",
+  "senses": [
+   {
+    "es": "pegamento, plasticola",
+    "definitionEs": "Sustancia para pegar papel u otros materiales.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "клей",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05580",
+  "ru": "пенал",
+  "acento": "пена́л",
+  "posNormalized": "sustantivo",
+  "translit": "pinál",
+  "ipa": "pʲɪnˈɑɭ",
+  "senses": [
+   {
+    "es": "cartuchera",
+    "definitionEs": "Estuche para llevar lápices, lapiceras y goma.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "пенал",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "regular"
+ },
+ {
+  "id": "CMR-05581",
+  "ru": "парта",
+  "acento": "па́рта",
+  "posNormalized": "sustantivo",
+  "translit": "párta",
+  "ipa": "pˈɑrtʌ",
+  "senses": [
+   {
+    "es": "pupitre, banco (de la escuela)",
+    "definitionEs": "Mesa de la escuela donde se sientan los alumnos.",
+    "source": "redactado"
+   }
+  ],
+  "learningStatus": null,
+  "introducedIn": [
+   3
+  ],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "парта",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la Unidad 3 — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "unidad3Enrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "regular"
  }
 ];
 

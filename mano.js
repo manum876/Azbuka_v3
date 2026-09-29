@@ -8,20 +8,16 @@
    Dos modos:
      · Calcar: la letra aparece en gris claro y se repasa.
      · Libre: se escucha la letra y se dibuja sin ayuda.
-   Corrección: el dibujo y la letra se centran y escalan a la misma
-   caja en una grilla de 64×64 (se compara la forma, no la posición) y
-   se compara la proporción. Se miden:
+   Corrección: el dibujo y la letra se pasan a una grilla de 64×64 (al
+   calcar, en el mismo lugar; en libre, centrados y escalados a la misma
+   caja, y además se compara la proporción) y se miden dos cosas, con un
+   margen de 2 casilleros:
      · cuánto de tu trazo cae cerca de la letra (precisión);
      · cuánto de la letra cubriste (cobertura).
-   Además:
-     · si queda sin cubrir un pedazo conectado de la letra (por ejemplo
-       la colita de la Щ), cuenta como una parte que falta;
-     · si hay mucha más tinta que en la letra (garabatear encima), baja;
-     · si la proporción (ancho/alto) es muy distinta, baja.
-   Tres niveles de exigencia (Suave, Normal, Estricta; se guarda en
-   az_mano_nivel): cambian el margen, los mínimos y el tamaño mínimo de
-   una parte que falta. «Bien» pide precisión y cobertura altas por
-   separado, la proporción parecida y ninguna parte faltante.
+   La nota sale de un solo número, el promedio armónico de las dos
+   («coincidencia»): Bien ≥ 75 %, Casi ≥ 55 %. (27/09/2026: se volvió a
+   esta versión, con margen 2 en lugar de 3; se sacaron los niveles de
+   exigencia, las partes faltantes en rojo y las penalizaciones extra.)
    No puede saber el orden ni la dirección de los trazos: solo compara
    la forma final. Es una guía, no cuenta para el semáforo.
 
@@ -66,62 +62,19 @@
     }
     return o;
   }
-  /* Niveles de exigencia: margen (casilleros) al calcar y en libre,
-     mínimo de precisión y de cobertura para «Bien», nota para «Casi»
-     y tamaño mínimo de una parte sin cubrir para contar como «falta». */
-  const NIVELES = {
-    suave:    { nombre: "Suave",    tolCalcar: 3, tolLibre: 3, bien: 0.70, casi: 0.50, parte: 0.06 },
-    normal:   { nombre: "Normal",   tolCalcar: 3, tolLibre: 3, bien: 0.75, casi: 0.58, parte: 0.03 },
-    estricta: { nombre: "Estricta", tolCalcar: 2, tolLibre: 2, bien: 0.82, casi: 0.66, parte: 0.02 }
-  };
-  const ZONAS = [["arriba a la izquierda", "arriba", "arriba a la derecha"], ["a la izquierda", "en el medio", "a la derecha"], ["abajo a la izquierda", "abajo", "abajo a la derecha"]];
-
-  function puntaje(u, t, nv) {
-    nv = nv || NIVELES.normal;
-    const tol = nv.tol != null ? nv.tol : 3;
-    const td = dilatar(t, tol), ud = dilatar(u, tol);
+  /* Margen: un casillero de tu trazo cuenta como «cerca» de la letra si
+     está a 2 casilleros o menos (y al revés para la cobertura). */
+  const MARGEN = 2;
+  function puntaje(u, t) {
+    const td = dilatar(t, MARGEN), ud = dilatar(u, MARGEN);
     let nu = 0, nt = 0, uOk = 0, tOk = 0;
-    const falta = new Uint8Array(N * N);       /* partes de la letra sin cubrir */
-    let x0 = N, y0 = N, x1 = -1, y1 = -1;
     for (let i = 0; i < N * N; i++) {
       if (u[i]) { nu++; if (td[i]) uOk++; }
-      if (t[i]) {
-        nt++; if (ud[i]) tOk++; else falta[i] = 1;
-        const x = i % N, y = (i / N) | 0;
-        if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y;
-      }
+      if (t[i]) { nt++; if (ud[i]) tOk++; }
     }
     const prec = nu ? uOk / nu : 0, cob = nt ? tOk / nt : 0;
-    let f = prec + cob ? 2 * prec * cob / (prec + cob) : 0;
-    /* Partes que faltan: grupos de casilleros de la letra sin cubrir,
-       conectados entre sí. Un grupo grande (≥ nv.parte de la tinta de la
-       letra) es una parte que no dibujaste, como la colita de la Щ. */
-    const faltan = [];
-    const ancho = Math.max(1, x1 - x0 + 1), alto = Math.max(1, y1 - y0 + 1);
-    const visto = new Uint8Array(N * N);
-    for (let i = 0; i < N * N; i++) {
-      if (!falta[i] || visto[i]) continue;
-      const pila = [i]; visto[i] = 1; let n = 0, sx = 0, sy = 0;
-      while (pila.length) {
-        const k = pila.pop(), x = k % N, y = (k / N) | 0; n++; sx += x; sy += y;
-        for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
-          const X = x + dx, Y = y + dy, q = Y * N + X;
-          if (X >= 0 && Y >= 0 && X < N && Y < N && falta[q] && !visto[q]) { visto[q] = 1; pila.push(q); }
-        }
-      }
-      if (n >= Math.max(4, nt * nv.parte)) {
-        const zx = Math.min(2, Math.floor((sx / n - x0) / ancho * 3)), zy = Math.min(2, Math.floor((sy / n - y0) / alto * 3));
-        const nombre = ZONAS[zy][zx];
-        if (faltan.indexOf(nombre) < 0) faltan.push(nombre);
-      }
-    }
-    f *= Math.max(0, 1 - 0.2 * faltan.length);
-    /* Demasiada tinta (rellenar o garabatear encima) también baja la nota */
-    const tinta = nt ? nu / nt : 0;
-    if (tinta > 1.8) f *= 1.8 / tinta;
-    let r = f >= nv.casi ? 1 : 0;
-    if (prec >= nv.bien && cob >= nv.bien && f >= nv.bien && !faltan.length) r = 2;
-    return { prec, cob, f, r, faltan, falta, tinta };
+    const f = prec + cob ? 2 * prec * cob / (prec + cob) : 0;
+    return { prec, cob, f };
   }
 
   function AzEscrituraMano({ letras, inicial, c }) {
@@ -130,9 +83,6 @@
     const [modo, setModo] = useState("calcar");
     const [res, setRes] = useState(null);
     const [listo, setListo] = useState(false);
-    const [nivel, setNivelSt] = useState("normal");
-    useEffect(() => { (async () => { const n = await azGet("az_mano_nivel", "normal"); if (NIVELES[n]) setNivelSt(n); })(); }, []);
-    const setNivel = n => { setNivelSt(n); setRes(null); azSet("az_mano_nivel", n); };
     const lienzo = useRef(null), guia = useRef(null), dibujando = useRef(false), ult = useRef(null);
     const l = letras[i];
     const glifo = may ? l.upper : l.lower;
@@ -183,31 +133,23 @@
     const arriba = () => { dibujando.current = false; };
 
     const comprobar = () => {
-      /* Siempre se compara la forma: dibujo y letra se centran y escalan a
-         la misma caja. Así un trazo un poco corrido o más chico no se castiga,
-         pero si falta una parte (o sobra) la caja cambia y la forma no coincide. */
+      /* Calcar: se compara en el mismo lugar. Libre: dibujo y letra se
+         centran y escalan a la misma caja, y además se compara la proporción. */
       const libre = modo === "libre";
-      const u = mascara(lienzo.current, true);
+      const u = mascara(lienzo.current, libre);
       if (!u) { setRes({ vacio: true }); return; }
       const off = document.createElement("canvas"); off.width = off.height = tam();
       dibujarGlifo(off.getContext("2d"), "#000");
-      const t = mascara(off, true);
-      const base = NIVELES[nivel];
-      const p = puntaje(u, t, Object.assign({}, base, { tol: libre ? base.tolLibre : base.tolCalcar }));
-      const r = Math.min(u.aspecto, t.aspecto) / Math.max(u.aspecto, t.aspecto);   /* proporción */
-      p.f *= Math.min(1, 0.4 + 0.6 * r);
-      if (r < 0.8 && p.r === 2) p.r = 1;
-      if (p.f < base.casi) p.r = 0;
-      setRes(p);
-      /* Letra de referencia en verde y, encima, en rojo lo que no cubriste */
-      const g = guia.current.getContext("2d");
-      dibujarGlifo(g, "#4CAF8266");
-      const S = tam(), celda = t.lado / N;
-      g.fillStyle = "#D9776FAA";
-      for (let k = 0; k < N * N; k++) if (p.falta[k]) {
-        const x = k % N, y = (k / N) | 0;
-        g.fillRect(t.ox + x * celda, t.oy + y * celda, Math.ceil(celda), Math.ceil(celda));
+      const t = mascara(off, libre);
+      const p = puntaje(u, t);
+      if (libre) {
+        const r = Math.min(u.aspecto, t.aspecto) / Math.max(u.aspecto, t.aspecto);
+        p.f *= Math.min(1, 0.5 + 0.5 * r);
       }
+      /* La nota sale de un solo número: el promedio armónico de las dos medidas */
+      p.r = p.f >= 0.75 ? 2 : p.f >= 0.55 ? 1 : 0;
+      setRes(p);
+      dibujarGlifo(guia.current.getContext("2d"), "#4CAF8266");   /* la letra de referencia, en verde */
     };
 
     const ir = d => { setI(x => (x + d + letras.length) % letras.length); };
@@ -244,12 +186,7 @@
         res.vacio ? "Primero dibujá la letra." : h(React.Fragment, null,
           h("span", { style: { display: "inline-block", fontSize: 13, fontWeight: 800, borderRadius: 8, padding: "3px 10px", color: col, background: col + "22", border: "1px solid " + col, marginRight: 8 } },
             res.r === 2 ? "✓ Bien" : res.r === 1 ? "≈ Casi" : "✗ Mal"),
-          "Cubriste el " + Math.round(res.cob * 100) + " % de la letra y el " + Math.round(res.prec * 100) + " % de tu trazo cae sobre ella. ",
-          res.faltan.length ? "Te faltó una parte " + res.faltan.join(" y ") + ". " : "",
-          "En verde, la forma de referencia; en rojo, lo que no cubriste.")),
-      h("div", { style: { display: "flex", gap: 6, alignItems: "center", justifyContent: "center", marginTop: 18 } },
-        h("span", { style: { fontSize: 12, color: c.textMuted, marginRight: 2 } }, "Exigencia:"),
-        Object.keys(NIVELES).map(k => h("button", { key: k, style: chip(nivel === k), onClick: () => setNivel(k) }, NIVELES[k].nombre))),
+          "Coincidencia: " + Math.round(res.f * 100) + " %. Cubriste el " + Math.round(res.cob * 100) + " % de la letra y el " + Math.round(res.prec * 100) + " % de tu trazo cae sobre ella. En verde, la forma de referencia.")),
       h("div", { style: { maxWidth: 340, margin: "14px auto 0", fontSize: 12, color: c.textMuted, lineHeight: 1.5 } },
         "La app compara la forma final, no el orden ni la dirección de los trazos. Es una guía para practicar: cada persona escribe un poco distinto."));
   }
