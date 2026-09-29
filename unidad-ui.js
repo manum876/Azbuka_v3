@@ -347,24 +347,26 @@
     const ir = u => () => { if (u) location.href = u.href; };
     const prev = lista[k - 1], next = lista[k + 1];
     return [
-      { id: "uprev", icon: "‹", label: prev ? "Unidad " + prev.id : "", action: ir(prev) },
-      { id: "uact", icon: "", label: "Unidad " + n },
-      { id: "unext", icon: "›", label: next ? "Unidad " + next.id : "", action: ir(next) }
+      { id: "uprev", icon: "‹", aria: prev ? "Unidad " + prev.id : "Anterior", disabled: !prev, action: ir(prev) },
+      { id: "uact", texto: "Unidad " + n },
+      { id: "unext", icon: "›", aria: next ? "Unidad " + next.id : "Siguiente", disabled: !next, action: ir(next) }
     ];
   }
 
-  /* Tabla de grupos de palabras relacionadas (país · hombre · mujer; idioma · por-…) */
+  /* Tabla de grupos de palabras relacionadas (país · él · ella; estudiar · hablar).
+     Celdas { id?, ru, es }: se tocan para escucharlas; sin ▶, con una nota arriba. */
   function AzTablaGrupos({ encabezados, filas, c }) {
-    const celda = (id, k) => {
-      if (!id) return h("td", { key: k }, "—");
-      const e = lexComerById(id); if (!e) return h("td", { key: k }, "—");
+    const celda = (x, k) => {
+      if (!x || !x.ru) return h("td", { key: k }, "—");
       return h("td", { key: k },
-        h("button", { className: "grp-w", onClick: () => azHablarRu(e.ru), lang: "ru" }, h("span", { className: "grp-ru" }, e.acento || e.ru), h("span", { className: "pl" }, " ▶")),
-        h("div", { className: "grp-es" }, (e.senses[0] || {}).es));
+        h("button", { className: "grp-w", onClick: () => azHablarRu(x.ru), lang: "ru" }, h("span", { className: "grp-ru" }, x.ru)),
+        x.es && h("div", { className: "grp-es" }, x.es));
     };
-    return h("div", { className: "grp-wrap" }, h("table", { className: "grp" },
-      h("thead", null, h("tr", null, encabezados.map((t, k) => h("th", { key: k }, t)))),
-      h("tbody", null, filas.map((f, i) => h("tr", { key: i }, f.map(celda))))));
+    return h(React.Fragment, null,
+      h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una palabra para escuchar cómo suena."),
+      h("div", { className: "grp-wrap", style: { marginTop: 8 } }, h("table", { className: "grp" },
+        h("thead", null, h("tr", null, encabezados.map((t, k) => h("th", { key: k }, t)))),
+        h("tbody", null, filas.map((f, i) => h("tr", { key: i }, f.map(celda)))))));
   }
 
   /* Revisión de un texto libre: palabras que no existen (con sugerencia),

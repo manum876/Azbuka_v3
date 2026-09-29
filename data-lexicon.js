@@ -33642,9 +33642,19 @@ const LEXICON_COMER = [
   "ipa": "ɭʲˈɵxkʲɪj",
   "senses": [
    {
-    "es": "fácil, liviano",
-    "definitionEs": "Que requiere poco esfuerzo, o que pesa poco.",
+    "es": "ligero, liviano",
+    "definitionEs": "Que pesa poco.",
+    "source": "redactado (separado con Manu, 27/09/2026)"
+   },
+   {
+    "es": "fácil",
+    "definitionEs": "Que requiere poco esfuerzo.",
     "source": "redactado (basado en FreeDict)"
+   },
+   {
+    "es": "suave",
+    "definitionEs": "Poco intenso: una brisa, una lluvia o un sabor suave.",
+    "source": "redactado (separado con Manu, 27/09/2026)"
    }
   ],
   "learningStatus": null,
@@ -59027,7 +59037,7 @@ const LEXICON_COMER = [
   "ipa": "nʲˈemʲɪts",
   "senses": [
    {
-    "es": "alemán (persona)",
+    "es": "alemán (hombre)",
     "definitionEs": "Persona nacida o de nacionalidad alemana.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -95533,7 +95543,7 @@ const LEXICON_COMER = [
   "ipa": "ʌmʲɪrʲɪkˈɑnʲɪts",
   "senses": [
    {
-    "es": "americano, estadounidense (persona)",
+    "es": "estadounidense (hombre)",
     "definitionEs": "Persona originaria de Estados Unidos, o del continente americano según el contexto.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -108671,9 +108681,14 @@ const LEXICON_COMER = [
   "ipa": "dʌskˈɑ",
   "senses": [
    {
-    "es": "tabla, pizarrón",
+    "es": "tabla",
     "definitionEs": "Pieza plana y rígida de madera u otro material.",
     "source": "redactado (basado en FreeDict)"
+   },
+   {
+    "es": "pizarra, pizarrón",
+    "definitionEs": "Superficie del aula donde se escribe con tiza o con marcador.",
+    "source": "redactado (separado con Manu, 27/09/2026)"
    }
   ],
   "learningStatus": null,
@@ -179375,13 +179390,13 @@ const LEXICON_COMER = [
   "ipa": "pɭʲɪtˈɑ",
   "senses": [
    {
-    "es": "losa",
-    "definitionEs": "Piedra plana y ancha.",
-    "source": "redactado"
+    "es": "cocina (el artefacto), anafe",
+    "definitionEs": "Aparato para cocinar, con hornallas y a veces horno.",
+    "source": "redactado (corregido con Manu, 27/09/2026)"
    },
    {
-    "es": "cocina (electrodoméstico)",
-    "definitionEs": "Aparato usado para cocinar alimentos.",
+    "es": "losa, placa",
+    "definitionEs": "Pieza plana y ancha de piedra, cemento u otro material.",
     "source": "redactado"
    }
   ],
@@ -201513,7 +201528,7 @@ const LEXICON_COMER = [
   "ipa": "frʌntsˈus",
   "senses": [
    {
-    "es": "francés (persona)",
+    "es": "francés (hombre)",
     "definitionEs": "Persona nacida o de nacionalidad francesa.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -216904,7 +216919,7 @@ const LEXICON_COMER = [
   "ipa": "ʌnɡɭʲɪtʃʲˈɑnʲɪn",
   "senses": [
    {
-    "es": "inglés (persona)",
+    "es": "inglés (hombre)",
     "definitionEs": "Persona nacida o de nacionalidad inglesa.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -263217,7 +263232,7 @@ const LEXICON_COMER = [
   "ipa": "jɪpˈonʲɪts",
   "senses": [
    {
-    "es": "japonés (persona)",
+    "es": "japonés (hombre)",
     "definitionEs": "Persona nacida o de nacionalidad japonesa.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -291052,7 +291067,7 @@ const LEXICON_COMER = [
   "ipa": "kʲɪtˈɑjɪts",
   "senses": [
    {
-    "es": "chino (persona)",
+    "es": "chino (hombre)",
     "definitionEs": "Persona originaria de China.",
     "source": "redactado"
    }
@@ -332209,7 +332224,7 @@ const LEXICON_COMER = [
   "ipa": "ɪspˈɑnkʌ",
   "senses": [
    {
-    "es": "española",
+    "es": "española (mujer)",
     "definitionEs": "Mujer de España, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -332461,7 +332476,7 @@ const LEXICON_COMER = [
   "ipa": "ukrʌˈinkʌ",
   "senses": [
    {
-    "es": "ucraniana",
+    "es": "ucraniana (mujer)",
     "definitionEs": "Mujer de Ucrania, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -332587,7 +332602,7 @@ const LEXICON_COMER = [
   "ipa": "bʲɪɭʌrˈuskʌ",
   "senses": [
    {
-    "es": "bielorrusa",
+    "es": "bielorrusa (mujer)",
     "definitionEs": "Mujer de Bielorrusia, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -332650,7 +332665,7 @@ const LEXICON_COMER = [
   "ipa": "frʌntsˈuʒynkʌ",
   "senses": [
    {
-    "es": "francesa",
+    "es": "francesa (mujer)",
     "definitionEs": "Mujer de Francia, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -332776,7 +332791,7 @@ const LEXICON_COMER = [
   "ipa": "ɪtʌɭʲˈjɑnkʌ",
   "senses": [
    {
-    "es": "italiana",
+    "es": "italiana (mujer)",
     "definitionEs": "Mujer de Italia, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -332839,7 +332854,7 @@ const LEXICON_COMER = [
   "ipa": "nʲˈemkʌ",
   "senses": [
    {
-    "es": "alemana",
+    "es": "alemana (mujer)",
     "definitionEs": "Mujer de Alemania, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -332965,7 +332980,7 @@ const LEXICON_COMER = [
   "ipa": "pˈoɭʲkʌ",
   "senses": [
    {
-    "es": "polaca",
+    "es": "polaca (mujer)",
     "definitionEs": "Mujer de Polonia, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -333091,7 +333106,7 @@ const LEXICON_COMER = [
   "ipa": "ʌnɡɭʲɪtʃʲˈɑnkʌ",
   "senses": [
    {
-    "es": "inglesa",
+    "es": "inglesa (mujer)",
     "definitionEs": "Mujer de Inglaterra, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -333217,7 +333232,7 @@ const LEXICON_COMER = [
   "ipa": "jɪpˈonkʌ",
   "senses": [
    {
-    "es": "japonesa",
+    "es": "japonesa (mujer)",
     "definitionEs": "Mujer de Japón, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -333343,7 +333358,7 @@ const LEXICON_COMER = [
   "ipa": "brʌʑɪɭʲˈjɑnkʌ",
   "senses": [
    {
-    "es": "brasileña",
+    "es": "brasileña (mujer)",
     "definitionEs": "Mujer de Brasil, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -333469,7 +333484,7 @@ const LEXICON_COMER = [
   "ipa": "mʲɪksʲɪkˈɑnkʌ",
   "senses": [
    {
-    "es": "mexicana",
+    "es": "mexicana (mujer)",
     "definitionEs": "Mujer de México, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -333595,7 +333610,7 @@ const LEXICON_COMER = [
   "ipa": "kʌtʌɭˈonkʌ",
   "senses": [
    {
-    "es": "catalana",
+    "es": "catalana (mujer)",
     "definitionEs": "Mujer de Cataluña, o de esa nacionalidad.",
     "source": "redactado"
    }
@@ -335209,7 +335224,7 @@ const LEXICON_COMER = [
   "ipa": "ʌfʲɪtsyˈɑntkʌ",
   "senses": [
    {
-    "es": "moza",
+    "es": "camarera, moza",
     "definitionEs": "Mujer que atiende las mesas en un bar o restaurante.",
     "source": "redactado"
    }

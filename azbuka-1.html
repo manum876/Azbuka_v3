@@ -313,9 +313,10 @@ function App() {
   const prev = mod && vecino(-1), next = mod && vecino(1);
 
   const tabs = mod ? [
-    { id: "u", icon: "⊞", label: "Unidad", action: () => abrirModulo(null) },
-    { id: "p", icon: "‹", label: "Anterior", action: () => prev && abrirModulo(prev.id) },
-    { id: "s", icon: "›", label: "Siguiente", action: () => next && abrirModulo(next.id) }
+    { id: "u", icon: "⊞", aria: "Unidad", action: () => abrirModulo(null) },
+    { id: "p", icon: "‹", aria: "Módulo anterior", disabled: !prev, action: () => prev && abrirModulo(prev.id) },
+    { id: "m", texto: "Módulo " + mod.n },
+    { id: "s", icon: "›", aria: "Módulo siguiente", disabled: !next, action: () => next && abrirModulo(next.id) }
   ] : azTabsUnidad(1);
 
   /* ── Portada de la unidad ── */

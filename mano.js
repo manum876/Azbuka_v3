@@ -8,10 +8,10 @@
    Dos modos:
      · Calcar: la letra aparece en gris claro y se repasa.
      · Libre: se escucha la letra y se dibuja sin ayuda.
-   Corrección: el dibujo y la letra se pasan a una grilla de 64×64 (al
-   calcar, en el mismo lugar; en libre, centrados y escalados a la misma
-   caja, y además se compara la proporción) y se miden dos cosas, con un
-   margen de 2 casilleros:
+   Corrección (igual en los dos modos desde el 27/09/2026): el dibujo y
+   la letra se centran y escalan a la misma caja en una grilla de 64×64,
+   se compara la proporción y se miden dos cosas, con un margen de 2
+   casilleros:
      · cuánto de tu trazo cae cerca de la letra (precisión);
      · cuánto de la letra cubriste (cobertura).
    La nota sale de un solo número, el promedio armónico de las dos
@@ -133,19 +133,16 @@
     const arriba = () => { dibujando.current = false; };
 
     const comprobar = () => {
-      /* Calcar: se compara en el mismo lugar. Libre: dibujo y letra se
-         centran y escalan a la misma caja, y además se compara la proporción. */
-      const libre = modo === "libre";
-      const u = mascara(lienzo.current, libre);
+      /* Los dos modos se corrigen igual: dibujo y letra se centran y escalan
+         a la misma caja (se compara la forma) y además se compara la proporción. */
+      const u = mascara(lienzo.current, true);
       if (!u) { setRes({ vacio: true }); return; }
       const off = document.createElement("canvas"); off.width = off.height = tam();
       dibujarGlifo(off.getContext("2d"), "#000");
-      const t = mascara(off, libre);
+      const t = mascara(off, true);
       const p = puntaje(u, t);
-      if (libre) {
-        const r = Math.min(u.aspecto, t.aspecto) / Math.max(u.aspecto, t.aspecto);
-        p.f *= Math.min(1, 0.5 + 0.5 * r);
-      }
+      const r = Math.min(u.aspecto, t.aspecto) / Math.max(u.aspecto, t.aspecto);
+      p.f *= Math.min(1, 0.5 + 0.5 * r);
       /* La nota sale de un solo número: el promedio armónico de las dos medidas */
       p.r = p.f >= 0.75 ? 2 : p.f >= 0.55 ? 1 : 0;
       setRes(p);

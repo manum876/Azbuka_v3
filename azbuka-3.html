@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Unidad 3: Sustantivos, género y número</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
+<script src="data-casos.js"></script>
+<script src="data-verbos.js"></script>
+<script src="data-frases.js"></script>
+<script src="data-dialogos.js"></script>
+<script src="data-unidad-3.js"></script>
+<script src="core.js"></script>
+<script src="progress.js"></script>
+<script src="shell.js"></script>
+<script src="corrector.js"></script>
+<script src="burbuja.js"></script>
+<script src="unidad-ui.js"></script>
+<script src="unidad.js"></script>
+<script>
+/* ============================================================
+   AZBUKA-3.HTML — Unidad 3: Sustantivos, género y número
+   ------------------------------------------------------------
+   27/09/2026. Piezas de pantalla de unidad-ui.js, práctica y
+   evaluación de unidad.js. Propio de esta unidad: ejemplos por
+   género (módulos 2 a 5), tabla de adjetivos (módulo 7), vocabulario
+   por tema (módulo 8) y la «palabra del día» en la portada.
+   URL: azbuka-3.html · azbuka-3.html?m=u3m6
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+const U = UNIDAD_3;
+const EJ_U3 = ejerciciosUnidad3();
+const D3 = u3Datos();
+const OBJETIVO_U3 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(3) >= 0 || (e.appearsIn || []).indexOf(3) >= 0).map(e => e.id);
+const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas.";
+const EXCEP = ["папа", "дядя", "мужчина", "дедушка", "кофе"];
+
+/* Ejemplos de un género: chips con emoji, se tocan para escuchar */
+function Ejemplos({ lista, c }) {
+  return h(React.Fragment, null,
+    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una palabra para escuchar cómo suena."),
+    h("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 10 } }, lista.map(s =>
+      h("button", { key: s.id, onClick: () => azHablarRu(s.ru), lang: "ru",
+        style: { display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 15, fontWeight: 700, fontFamily: "inherit", cursor: "pointer" } },
+        s.emoji && h("span", { style: { fontSize: 18 } }, s.emoji), s.ac, h("span", { style: { fontSize: 11.5, color: c.textMuted, fontWeight: 500 } }, s.es)))));
+}
+
+/* Palabra del día: palabra, ejemplo y escribir una frase propia */
+function PalabraDelDia({ c, green }) {
+  const p = u3PalabraDelDia();
+  const [txt, setTxt] = useState("");
+  const [rev, setRev] = useState(null);
+  const revisar = () => {
+    const idx = azIndiceFormas();
+    const norm = t => t.replace(/\u0301/g, "").replace(/ё/g, "е").toLowerCase();
+    const usa = (txt.match(/[А-Яа-яЁё\u0301]+/g) || []).some(w => { const k = norm(w); if (k === norm(p.ru)) return true; const r = idx.get(k); return r && r.some(x => x[0] === p.id); });
+    setRev(Object.assign({ usa }, azRevisarTexto(txt, [], [])));
+  };
+  return h("div", { className: "u-card", style: { padding: "16px", marginTop: 14 } },
+    h("div", { className: "u-kicker", style: { marginBottom: 8 } }, "Palabra del día"),
+    h("div", { style: { display: "flex", alignItems: "center", gap: 14 } },
+      h("div", { style: { fontSize: 44 } }, p.emoji),
+      h("div", { style: { flex: 1, minWidth: 0 } },
+        h("div", { lang: "ru", style: { fontSize: 24, fontWeight: 800, color: c.gold } }, h(AzPalabra, { texto: p.ac, id: p.id })),
+        h("div", { style: { fontSize: 13.5, color: c.textSub } }, p.es + " · " + ({ m: "masculino", f: "femenino", n: "neutro" }[p.g] || "") + (p.pl ? " · plural: " : "")),
+        p.pl && h("div", { lang: "ru", style: { fontSize: 13.5, color: c.text, fontWeight: 600 } }, p.pl)),
+      h("button", { className: "play", onClick: () => azHablarRu(p.ru), "aria-label": "Escuchar" }, "▶")),
+    h("div", { style: { display: "flex", alignItems: "center", gap: 10, marginTop: 12, padding: "10px 12px", borderRadius: 10, background: c.bg2, border: `1px solid ${c.border}` } },
+      h("div", { lang: "ru", style: { flex: 1, fontSize: 15.5, fontWeight: 700 } }, p.ejemplo),
+      h("button", { className: "play", onClick: () => azHablarRu(p.ejemplo), "aria-label": "Escuchar el ejemplo" }, "▶")),
+    h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 12 } }, "Escribí una frase propia con esta palabra:"),
+    h("input", { className: "pr-input", lang: "ru", value: txt, placeholder: "Escribí en ruso…", onInput: e => { setTxt(e.target.value); setRev(null); },
+      autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
+      style: { width: "100%", boxSizing: "border-box", marginTop: 8, background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 10, padding: "11px 12px", color: c.text, fontSize: 16, fontFamily: "inherit" } }),
+    h("button", { className: "ubtn", style: { marginTop: 10 }, disabled: !txt.trim(), onClick: revisar }, "Revisar"),
+    rev && h("div", { style: { marginTop: 10, fontSize: 14, lineHeight: 1.5 } },
+      h("div", { style: { color: rev.usa ? green : "#E2884A", fontWeight: 700 } }, rev.usa ? "✓ Usaste " + p.ac + "." : "No encuentro " + p.ac + " en tu frase."),
+      rev.dudas.map((d, i) => h("div", { key: i, className: "u-truco", lang: "ru" }, "«" + d.t + "» no la encuentro en el diccionario" + (d.sugerencia ? ". ¿Quisiste decir «" + d.sugerencia + "»?" : "."))),
+      rev.usa && !rev.dudas.length && h("div", { style: { color: c.textSub, marginTop: 4 } }, "Si querés, guardala en el cuaderno."),
+      rev.usa && h("button", { className: "ubtn sec", style: { marginTop: 8 }, onClick: () => azGuardarEnCuaderno(txt, { titulo: "Unidad 3 · Palabra del día: " + p.ac, href: "azbuka-3.html" }) }, "＋ Cuaderno")));
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [modId, setModId] = useState(() => new URLSearchParams(location.search).get("m"));
+  const [tarjetas, setTarjetas] = useState(null);
+  const [practica, setPractica] = useState(null);
+  const [visto, setVisto] = useState(1);
+  const [examen, setExamen] = useState(null);
+  const [tema, setTema] = useState(U3_TEMAS[0].id);
+  const [, refrescar] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      setVisto(await azGet('az_u3_visto', 1));
+      await azLoadProgress();
+      azSaveUnitProgress(3, {});
+      refrescar(x => x + 1);
+    })();
+    const pop = () => { setModId(new URLSearchParams(location.search).get("m")); setTarjetas(null); setPractica(null); };
+    window.addEventListener("popstate", pop);
+    return () => window.removeEventListener("popstate", pop);
+  }, []);
+  useEffect(() => {
+    const m = modId ? unidad3Modulo(modId) : null;
+    window.azFuenteActual = () => m ? "Unidad 3 · " + m.titulo : "Unidad 3";
+    if (m && m.n > visto) { setVisto(m.n); azSet('az_u3_visto', m.n); }
+    if (m) azGuardarUltimo({ unidad: 3, n: m.n, total: U.modulos.length, titulo: "Unidad 3 · " + m.titulo, href: "azbuka-3.html?m=" + m.id });
+  }, [modId]);
+  useEffect(() => { if (!practica && AZ_PROGRESS.units) setExamen((AZ_PROGRESS.units["3"] || {}).examen || null); }, [practica]);
+
+  const abrirModulo = id => { history.pushState(null, "", id ? "?m=" + id : location.pathname); setModId(id); window.scrollTo(0, 0); };
+  const practicarUnidad = () => setPractica({ titulo: "Unidad 3", pool: EJ_U3.filter(e => e.modulo <= Math.max(visto, 1)) });
+  const practicarModulo = m => setPractica({ titulo: m.titulo, pool: EJ_U3.filter(e => e.modulo === m.n) });
+  const rendirExamen = m => setPractica({ titulo: "Evaluación de la Unidad 3", pool: EJ_U3, examen: { intro: m.intro, partes: m.partes, aprobado: m.aprobado } });
+  const reforzar = parte => setPractica({ titulo: "Reforzar: " + parte.nombre, pool: EJ_U3.filter(e => parte.tipos.indexOf(e.tipo) >= 0) });
+
+  const c = azColors(darkMode);
+  const green = darkMode ? "#4CAF82" : "#2E7D55";
+  const mod = modId ? unidad3Modulo(modId) : null;
+  const idx = mod ? U.modulos.indexOf(mod) : -1;
+  const prev = mod && U.modulos[idx - 1], next = mod && U.modulos[idx + 1];
+  const palabrasDom = OBJETIVO_U3.filter(id => azItem("lex:" + id).level === 2).length;
+  const chip = on => ({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit",
+    background: on ? c.gold + "22" : c.bg2, border: `1px solid ${on ? c.gold : c.border}`, color: on ? c.gold : c.textMuted });
+  const tabs = mod ? [
+    { id: "u", icon: "⊞", aria: "Unidad", action: () => abrirModulo(null) },
+    { id: "p", icon: "‹", aria: "Módulo anterior", disabled: !prev, action: () => prev && abrirModulo(prev.id) },
+    { id: "m", texto: "Módulo " + mod.n },
+    { id: "s", icon: "›", aria: "Módulo siguiente", disabled: !next, action: () => next && abrirModulo(next.id) }
+  ] : azTabsUnidad(3);
+
+  const portada = h(React.Fragment, null,
+    h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 1), examen, onPracticar: practicarUnidad, onAbrir: abrirModulo,
+      progreso: [{ label: "Palabras dominadas", valor: palabrasDom, total: OBJETIVO_U3.length }] }));
+  const conPalabraDelDia = h(React.Fragment, null, portada, null);
+
+  let vista = null;
+  if (mod) {
+    const ej = g => D3.sust.filter(s => s.g === g && !s.soloPl && EXCEP.indexOf(s.ru.replace(/ё/g, "е")) < 0).sort((a, b) => (b.emoji ? 1 : 0) - (a.emoji ? 1 : 0)).slice(0, 16);
+    const temaAct = U3_TEMAS.find(t => t.id === tema);
+    const idsTema = D3.sust.filter(s => s.tema === tema).map(s => s.id);
+    const adjTabla = ["но́вый", "большо́й", "ма́ленький", "хоро́ший", "си́ний", "краси́вый"].map(ac => D3.adj.find(a => a.ac === ac)).filter(Boolean);
+    vista = h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+      h("div", { className: "u-kicker" }, "Unidad 3 · Módulo " + mod.n),
+      h("h1", { className: "u-title" }, mod.titulo),
+      h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
+      mod.tipo === "leccion" && h(React.Fragment, null,
+        h(AzSecciones, { secciones: mod.secciones }),
+        mod.genero && h(React.Fragment, null, h("div", { className: "u-sec" }, "Ejemplos"), h(Ejemplos, { lista: ej(mod.genero), c })),
+        mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Masculinos que terminan en -а, -я o -е"),
+          h(Ejemplos, { lista: D3.sust.filter(s => EXCEP.indexOf(s.ru.replace(/ё/g, "е")) >= 0), c })),
+        mod.n === 6 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Singular y plural"),
+          h(AzTablaGrupos, { encabezados: ["Singular", "Plural"], c, filas: ["стол", "кни́га", "ку́хня", "музе́й", "дверь", "окно́", "мо́ре", "челове́к", "ребёнок", "друг", "дом"].map(ac => {
+            const s = D3.sust.find(x => x.ac === ac); return s ? [{ id: s.id, ru: s.ac, es: s.es }, { id: s.id, ru: s.pl, es: "" }] : [null, null]; }) })),
+        mod.tablaAdj && h(React.Fragment, null, h("div", { className: "u-sec" }, "Las cuatro formas"),
+          h(AzTablaGrupos, { encabezados: ["Él (m)", "Ella (f)", "Neutro (n)", "Plural"], c,
+            filas: adjTabla.map(a => [{ ru: a.m, es: a.esM }, { ru: a.f, es: a.esF }, { ru: a.n, es: "" }, { ru: a.pl, es: "" }]) })),
+        h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo")),
+      mod.tipo === "vocabulario" && h(React.Fragment, null,
+        h("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 } }, U3_TEMAS.map(t => h("button", { key: t.id, style: chip(tema === t.id), onClick: () => setTema(t.id) }, t.titulo))),
+        h("div", { className: "u-sec" }, temaAct.titulo + " (" + idsTema.length + ")"),
+        h(AzVocabulario, { ids: idsTema, c }),
+        h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: idsTema, titulo: temaAct.titulo }) }, "Tarjetas: " + temaAct.titulo),
+        h("button", { className: "ubtn", style: { marginTop: 10 }, onClick: () => setPractica({ titulo: temaAct.titulo, pool: EJ_U3.filter(e => e.modulo === 8 && idsTema.indexOf(e.grupo) >= 0) }) }, "Practicar: " + temaAct.titulo)),
+      mod.tipo === "proyecto" && h(AzProyecto, { mod, c, green, clave: "az_u3_proyecto", fuente: { titulo: "Unidad 3 · Proyecto final", href: "azbuka-3.html?m=u3m10" }, aviso: AVISO_ACENTOS }),
+      mod.tipo === "examen" && h(React.Fragment, null,
+        h("div", { className: "u-card", style: { padding: "6px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
+          h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 14.5 } },
+            h("span", { style: { fontWeight: 600 } }, p.nombre), h("span", { style: { color: c.textMuted } }, p.n + " ejercicios")))),
+        examen && h("div", { style: { marginTop: 14, fontSize: 14, color: examen.aprobado ? green : "#E2884A", fontWeight: 700 } },
+          "Última vez: " + examen.pct + " % (" + examen.fecha.split("-").reverse().join("/") + ")" + (examen.aprobado ? " · aprobada" : "")),
+        h("button", { className: "ubtn", onClick: () => rendirExamen(mod) }, examen ? "Rendir de nuevo" : "Empezar la evaluación")),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo));
+  }
+
+  return h(React.Fragment, null,
+    h(AzEstilosUnidad, { c, green }),
+    h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vista : h(React.Fragment, null, portada, h(PalabraDelDia, { c, green }))),
+    practica && h(AzPractica, { key: practica.titulo + (practica.pool[0] || {}).id, unidad: 3, titulo: practica.titulo, pool: practica.pool, mezcla: U3_MEZCLA,
+      n: Math.min(12, practica.pool.length), dark: darkMode, aviso: AVISO_ACENTOS, examen: practica.examen, onReforzar: reforzar,
+      onSalir: () => { setPractica(null); refrescar(x => x + 1); } }),
+    tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, onClose: () => { setTarjetas(null); refrescar(x => x + 1); } }),
+    h(AzBurbujaHost, { dark: darkMode }));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

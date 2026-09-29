@@ -143,10 +143,10 @@ function App() {
   const tabs = page === "mano" ? [
     { id: "back", icon: "⊞", label: "Alfabeto", action: () => setPage("grid") }
   ] : page === "detail" ? [
-    { id: "back", icon: "⊞", label: "Alfabeto", action: () => setPage("grid") },
-    { id: "prev", icon: "‹", label: "Anterior", action: goPrev },
-    { id: "count", icon: "", label: `${idx + 1}/${ALPHABET.length}` },
-    { id: "next", icon: "›", label: "Siguiente", action: goNext }
+    { id: "back", icon: "⊞", aria: "Alfabeto", action: () => setPage("grid") },
+    { id: "prev", icon: "‹", aria: "Letra anterior", action: goPrev },
+    { id: "count", texto: `${idx + 1} / ${ALPHABET.length}` },
+    { id: "next", icon: "›", aria: "Letra siguiente", action: goNext }
   ] : [];
 
   return React.createElement(AzShell, {
