@@ -42,6 +42,13 @@ const D3 = u3Datos();
 const OBJETIVO_U3 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(3) >= 0 || (e.appearsIn || []).indexOf(3) >= 0).map(e => e.id);
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas.";
 const EXCEP = ["папа", "дядя", "мужчина", "дедушка", "кофе"];
+/* Dorso de las tarjetas: el género y, en las terminadas en -ь, con un adjetivo */
+const BOLSHOI = { m: "большо́й", f: "больша́я", n: "большо́е" };
+function detalleTarjeta(e) {
+  if (e.posNormalized !== "sustantivo" || !e.gender) return null;
+  const g = { m: "masculino", f: "femenino", n: "neutro" }[e.gender];
+  return /ь$/.test(e.ru) ? g + " · " + BOLSHOI[e.gender] + " " + (e.acento || e.ru) : g;
+}
 
 /* Ejemplos de un género: chips con emoji, se tocan para escuchar */
 function Ejemplos({ lista, c }) {
@@ -120,7 +127,9 @@ function App() {
 
   const abrirModulo = id => { history.pushState(null, "", id ? "?m=" + id : location.pathname); setModId(id); window.scrollTo(0, 0); };
   const practicarUnidad = () => setPractica({ titulo: "Unidad 3", pool: EJ_U3.filter(e => e.modulo <= Math.max(visto, 1)) });
-  const practicarModulo = m => setPractica({ titulo: m.titulo, pool: EJ_U3.filter(e => e.modulo === m.n) });
+  /* Módulos 2 a 5: la práctica suma el género de las palabras vistas en los módulos anteriores, para mezclar */
+  const practicarModulo = m => setPractica({ titulo: m.titulo, n: m.nPractica,
+    pool: EJ_U3.filter(e => e.modulo === m.n || (m.n >= 2 && m.n <= 5 && e.acumula && e.modulo >= 2 && e.modulo < m.n)) });
   const rendirExamen = m => setPractica({ titulo: "Evaluación de la Unidad 3", pool: EJ_U3, examen: { intro: m.intro, partes: m.partes, aprobado: m.aprobado } });
   const reforzar = parte => setPractica({ titulo: "Reforzar: " + parte.nombre, pool: EJ_U3.filter(e => parte.tipos.indexOf(e.tipo) >= 0) });
 
@@ -146,25 +155,23 @@ function App() {
 
   let vista = null;
   if (mod) {
-    const ej = g => D3.sust.filter(s => s.g === g && !s.soloPl && EXCEP.indexOf(s.ru.replace(/ё/g, "е")) < 0).sort((a, b) => (b.emoji ? 1 : 0) - (a.emoji ? 1 : 0)).slice(0, 16);
+    const sinE = x => x.replace(/ё/g, "е");
+    const lista = n => (U3_VISTAS[n] || "").split(" ").map(ru => D3.sust.find(s => sinE(s.ru) === sinE(ru))).filter(Boolean);
     const temaAct = U3_TEMAS.find(t => t.id === tema);
     const idsTema = D3.sust.filter(s => s.tema === tema).map(s => s.id);
-    const adjTabla = ["но́вый", "большо́й", "ма́ленький", "хоро́ший", "си́ний", "краси́вый"].map(ac => D3.adj.find(a => a.ac === ac)).filter(Boolean);
     vista = h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
       h("div", { className: "u-kicker" }, "Unidad 3 · Módulo " + mod.n),
       h("h1", { className: "u-title" }, mod.titulo),
       h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
       mod.tipo === "leccion" && h(React.Fragment, null,
         h(AzSecciones, { secciones: mod.secciones }),
-        mod.genero && h(React.Fragment, null, h("div", { className: "u-sec" }, "Ejemplos"), h(Ejemplos, { lista: ej(mod.genero), c })),
-        mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Masculinos que terminan en -а, -я o -е"),
-          h(Ejemplos, { lista: D3.sust.filter(s => EXCEP.indexOf(s.ru.replace(/ё/g, "е")) >= 0), c })),
+        mod.genero && h(React.Fragment, null, h("div", { className: "u-sec" }, "Ejemplos"), h(Ejemplos, { lista: lista(mod.n), c })),
+        mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Masculinos que terminan en -а, -я o -е"), h(Ejemplos, { lista: lista(5), c })),
         mod.n === 6 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Singular y plural"),
-          h(AzTablaGrupos, { encabezados: ["Singular", "Plural"], c, filas: ["стол", "кни́га", "ку́хня", "музе́й", "дверь", "окно́", "мо́ре", "челове́к", "ребёнок", "друг", "дом"].map(ac => {
-            const s = D3.sust.find(x => x.ac === ac); return s ? [{ id: s.id, ru: s.ac, es: s.es }, { id: s.id, ru: s.pl, es: "" }] : [null, null]; }) })),
-        mod.tablaAdj && h(React.Fragment, null, h("div", { className: "u-sec" }, "Las cuatro formas"),
-          h(AzTablaGrupos, { encabezados: ["Él (m)", "Ella (f)", "Neutro (n)", "Plural"], c,
-            filas: adjTabla.map(a => [{ ru: a.m, es: a.esM }, { ru: a.f, es: a.esF }, { ru: a.n, es: "" }, { ru: a.pl, es: "" }]) })),
+          h(AzTablaGrupos, { encabezados: ["Singular", "Plural"], c, filas: lista(6).filter(s => s.pl).map(s => [{ id: s.id, ru: s.ac, es: s.es }, { id: s.id, ru: s.pl, es: "" }]) })),
+        mod.tablaAdj && h(React.Fragment, null, h("div", { className: "u-sec" }, mod.tablaAdj === "m7" ? "Los primeros adjetivos, en sus cuatro formas" : "Más adjetivos para describir"),
+          h(AzTablaGrupos, { encabezados: ["Masculino", "Femenino", "Neutro", "Plural"], c,
+            filas: D3.adj.filter(a => a.desde === (mod.tablaAdj === "m7" ? 7 : 9)).map(a => [{ ru: a.m, es: a.esM }, { ru: a.f, es: a.esF }, { ru: a.n, es: "" }, { ru: a.pl, es: "" }]) })),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo")),
       mod.tipo === "vocabulario" && h(React.Fragment, null,
         h("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 14 } }, U3_TEMAS.map(t => h("button", { key: t.id, style: chip(tema === t.id), onClick: () => setTema(t.id) }, t.titulo))),
@@ -187,9 +194,9 @@ function App() {
     h(AzEstilosUnidad, { c, green }),
     h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vista : h(React.Fragment, null, portada, h(PalabraDelDia, { c, green }))),
     practica && h(AzPractica, { key: practica.titulo + (practica.pool[0] || {}).id, unidad: 3, titulo: practica.titulo, pool: practica.pool, mezcla: U3_MEZCLA,
-      n: Math.min(12, practica.pool.length), dark: darkMode, aviso: AVISO_ACENTOS, examen: practica.examen, onReforzar: reforzar,
+      n: azNPractica(practica.pool, practica.n), dark: darkMode, aviso: AVISO_ACENTOS, examen: practica.examen, onReforzar: reforzar,
       onSalir: () => { setPractica(null); refrescar(x => x + 1); } }),
-    tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, onClose: () => { setTarjetas(null); refrescar(x => x + 1); } }),
+    tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, detalle: detalleTarjeta, onClose: () => { setTarjetas(null); refrescar(x => x + 1); } }),
     h(AzBurbujaHost, { dark: darkMode }));
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));

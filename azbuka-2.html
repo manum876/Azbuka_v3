@@ -154,7 +154,7 @@ function App() {
     h(AzEstilosUnidad, { c, green }),
     h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vista : portada),
     practica && h(AzPractica, { key: practica.titulo + (practica.pool[0] || {}).id, unidad: 2, titulo: practica.titulo, pool: practica.pool, mezcla: U2_MEZCLA,
-      n: practica.n || Math.min(12, practica.pool.length), dark: darkMode, aviso: AVISO_ACENTOS, examen: practica.examen, onReforzar: reforzar,
+      n: azNPractica(practica.pool, practica.n), dark: darkMode, aviso: AVISO_ACENTOS, examen: practica.examen, onReforzar: reforzar,
       onSalir: () => { setPractica(null); refrescar(x => x + 1); } }),
     dialogo && h(AzHojaDialogo, { d: dialogoById(dialogo.id), c, grabar: dialogo.grabar, objetivo: OBJETIVO_U2, onClose: () => setDialogo(null) }),
     tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, onClose: () => { setTarjetas(null); refrescar(x => x + 1); } }),

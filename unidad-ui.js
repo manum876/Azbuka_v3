@@ -19,7 +19,7 @@
      AzListaDialogos({ ids, onAbrir })       tarjetas de diálogos
      AzHojaDialogo({ d, c, onClose, grabar, objetivo })
      AzGrabadora({ texto })                  grabarse y comparar con el modelo
-     AzTarjetasPalabras({ ids, titulo, c, green, onClose })
+     AzTarjetasPalabras({ ids, titulo, c, green, onClose, detalle? })   detalle(e): texto extra al dorso
      AzMapaExplorar({ c })                   mapa de data-mapa.js
      AzProyecto({ mod, c, green, clave, fuente })   escribir con requisitos
      AzPortadaUnidad({ u, c, green, progreso, visto, onPracticar, onAbrir, examen })
@@ -122,6 +122,10 @@
     .grp-ru{font-size:15px;font-weight:700;}
     .grp-w .pl{font-size:9px;color:${c.gold};}
     .grp-es{font-size:11.5px;color:${c.textMuted};margin-top:1px;}
+    .grp.compacta th{padding:8px 4px;font-size:9px;letter-spacing:.3px;}
+    .grp.compacta td{padding:7px 4px;}
+    .grp.compacta .grp-ru{font-size:12.5px;}
+    .grp.compacta .grp-es{font-size:10.5px;}
   `);
   }
 
@@ -229,7 +233,7 @@
         h("a", { className: "ubtn sec", style: { marginTop: 10, textDecoration: "none" }, href, onClick: ev => azNavigate(ev, href) }, "Ver en Diálogos")));
   }
 
-  function AzTarjetasPalabras({ ids, titulo, c, green, onClose }) {
+  function AzTarjetasPalabras({ ids, titulo, c, green, onClose, detalle }) {
     /* Los nombres propios (países, ciudades, personas) no van en las tarjetas */
     const [orden, setOrden] = useState(() => ids.filter(id => { const e = lexComerById(id); return e && !e.propio; }));
     const [i, setI] = useState(0);
@@ -250,6 +254,7 @@
             : h(React.Fragment, null,
                 h("div", { style: { fontSize: 15, color: c.textSub, fontStyle: "italic", marginTop: 8 } }, e.translit),
                 h("div", { style: { fontSize: 20, fontWeight: 700, color: c.text, marginTop: 12 } }, e.senses.slice(0, 2).map(x => x.es).join("; ")),
+                detalle && detalle(e) && h("div", { lang: "ru", style: { fontSize: 14.5, color: c.textSub, marginTop: 8 } }, detalle(e)),
                 h("button", { className: "play", style: { marginTop: 14 }, onClick: ev => { ev.stopPropagation(); azHablarRu(e.ru); }, "aria-label": "Escuchar" }, "▶"))),
         h("div", { className: "fc-ctl" },
           h("button", { onClick: () => ir(-1) }, "‹ Anterior"),
@@ -340,6 +345,13 @@
       }));
   }
 
+  /* Cuántos ejercicios tiene una práctica: como no se repite un mismo grupo
+     (la misma palabra o frase) en una sesión, nunca más que los grupos distintos. */
+  function azNPractica(pool, n) {
+    const grupos = new Set(pool.map(e => e.grupo || e.id)).size;
+    return Math.min(n || 12, grupos, pool.length);
+  }
+
   /* Barra de abajo en la portada de una unidad: ‹ Unidad N › */
   function azTabsUnidad(n) {
     const lista = (typeof AZ_UNITS !== "undefined" ? AZ_UNITS : []).filter(u => u.lista);
@@ -364,7 +376,7 @@
     };
     return h(React.Fragment, null,
       h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una palabra para escuchar cómo suena."),
-      h("div", { className: "grp-wrap", style: { marginTop: 8 } }, h("table", { className: "grp" },
+      h("div", { className: "grp-wrap", style: { marginTop: 8 } }, h("table", { className: "grp" + (encabezados.length >= 4 ? " compacta" : "") },
         h("thead", null, h("tr", null, encabezados.map((t, k) => h("th", { key: k }, t)))),
         h("tbody", null, filas.map((f, i) => h("tr", { key: i }, f.map(celda)))))));
   }
@@ -402,5 +414,5 @@
   }
 
   Object.assign(window, { AzEstilosUnidad, AzSecciones, AzVocabulario, AzFrasesLista, AzListaDialogos, AzGrabadora, AzHojaDialogo,
-    AzTarjetasPalabras, AzMapaExplorar, AzProyecto, AzPortadaUnidad, AzTablaGrupos, azTabsUnidad, azRevisarTexto });
+    AzTarjetasPalabras, AzMapaExplorar, AzProyecto, AzPortadaUnidad, AzTablaGrupos, azTabsUnidad, azRevisarTexto, azNPractica });
 })();

@@ -334,12 +334,25 @@ function AzShell(props) {
 
         tabs.length > 0 && React.createElement("div", { style: { width: 1, height: 32, background: c.border, margin: "0 8px", flexShrink: 0 } }),
 
-        React.createElement("div", { className: "bnav-scroll", style: { display: "flex", overflowX: "auto", flex: 1 } },
-          tabs.map(tab => React.createElement("button", {
-            key: tab.id, className: "btn",
-            onClick: () => { if (tab.action) tab.action(); else setView(tab.id); },
-            style: { flexShrink: 0, background: "none", padding: "6px 16px", borderRadius: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: 3, color: view === tab.id ? c.gold : c.textMuted }
-          }, React.createElement("span", { style: { fontSize: 20 } }, tab.icon), React.createElement("span", { style: { fontSize: 11, fontWeight: 600 } }, tab.label)))
+        /* Tabs (27/09/2026, a pedido de Manu): chips como los botones del pie
+           del menú (fondo bg3, borde, radio 10). Sin label: solo el ícono
+           centrado (‹ › ⊞). Con label: ícono arriba y texto chico abajo.
+           tab.texto: texto en negrita, sin borde, centrado (p. ej. «Unidad 2»).
+           tab.disabled: el chip queda tenue y no hace nada. */
+        React.createElement("div", { className: "bnav-scroll", style: { display: "flex", alignItems: "center", gap: 8, overflowX: "auto", flex: 1, justifyContent: tabs.some(t => t.texto) ? "space-between" : "flex-start" } },
+          tabs.map(tab => {
+            if (tab.texto) return React.createElement("div", { key: tab.id,
+              style: { flex: 1, minWidth: 0, textAlign: "center", fontSize: 14, fontWeight: 800, color: c.text, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", padding: "0 4px" } }, tab.texto);
+            const activo = view === tab.id;
+            return React.createElement("button", {
+              key: tab.id, className: "btn", disabled: !!tab.disabled, "aria-label": tab.label || tab.aria || tab.id,
+              onClick: () => { if (tab.disabled) return; if (tab.action) tab.action(); else setView(tab.id); },
+              style: { flexShrink: 0, minWidth: 44, height: tab.label ? 48 : 40, padding: tab.label ? "4px 12px" : "0 12px", borderRadius: 10,
+                background: activo ? c.gold + "22" : c.bg3, border: `1px solid ${activo ? c.gold : c.border}`, color: activo ? c.gold : c.text,
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 2, opacity: tab.disabled ? 0.35 : 1, cursor: tab.disabled ? "default" : "pointer", fontFamily: "inherit" }
+            }, React.createElement("span", { style: { fontSize: tab.label ? 16 : 18, lineHeight: 1 } }, tab.icon),
+               tab.label && React.createElement("span", { style: { fontSize: 10.5, fontWeight: 600, lineHeight: 1.1 } }, tab.label));
+          })
         )
       )
     ),
