@@ -293,7 +293,8 @@
     const [rev, setRev] = useState(null);
     useEffect(() => { (async () => setTxt(await azGet(clave, "")))(); }, []);
     const n = t => t.replace(/\u0301/g, "").replace(/ё/g, "е").toLowerCase();
-    const ok = mod.requisitos.map(r => new RegExp(r.rx).test(n(txt)));
+    /* Requisito: rx (expresión regular sobre el texto sin acentos) o fn(texto) → true / false (02/10/2026) */
+    const ok = mod.requisitos.map(r => r.fn ? !!r.fn(txt) : new RegExp(r.rx).test(n(txt)));
     const cambiar = v => { setTxt(v); setRev(null); azSet(clave, v); };
     return h("div", null,
       h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 14 } }, mod.requisitos.map((r, i) =>
@@ -408,8 +409,9 @@
       dudas.push({ t, sugerencia: mejor });
     });
     const n = norm(txt);
-    const faltan = (requisitos || []).filter(r => !new RegExp(r.rx).test(n)).map(r => r.txt);
-    const tips = (consejos || []).filter(k => new RegExp(k.rx).test(n)).map(k => k.msg);
+    const faltan = (requisitos || []).filter(r => !(r.fn ? r.fn(txt) : new RegExp(r.rx).test(n))).map(r => r.txt);
+    /* Consejo: rx + msg, o fn(texto) → lista de mensajes (02/10/2026) */
+    const tips = [].concat(...(consejos || []).map(k => k.fn ? (k.fn(txt) || []) : new RegExp(k.rx).test(n) ? [k.msg] : []));
     return { dudas, faltan, tips };
   }
 

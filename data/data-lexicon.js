@@ -110,7 +110,9 @@
      учи́тельница, сосе́д, сосе́дка, ба́бушка, ко́шка) y 56 de repaso
      (appearsIn con 4, entre ellas los nombres А́нна, Ива́н, Ма́ша, Ди́ма,
      О́льга y Лу́кас). Ampliación opcional: 24 (19 nuevas y 5 de repaso:
-     дя́дя, ма́льчик, де́вочка, студе́нт, студе́нтка).
+     дя́дя, ма́льчик, де́вочка, студе́нт, студе́нтка). Los pronombres я, он,
+     она́, мы y они́ también suman la Unidad 4 en appearsIn (se enseñan
+     en la tabla de verbos).
 
    Fuentes:
    - Comer, K. (Comer 5000). Portland State University, PDXScholar.
@@ -402,7 +404,10 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [
+   2,
+   4
+  ],
   "comer": [
    {
     "ID1": "5",
@@ -524,7 +529,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    2
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   4
+  ],
   "comer": [
    {
     "ID1": "7",
@@ -1016,7 +1023,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    2
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   4
+  ],
   "comer": [
    {
     "ID1": "13",
@@ -1248,7 +1257,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    2
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   4
+  ],
   "comer": [
    {
     "ID1": "17",
@@ -1307,7 +1318,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    2
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   4
+  ],
   "comer": [
    {
     "ID1": "18",

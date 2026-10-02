@@ -16,7 +16,7 @@ const AZ_UNITS = [
   { id: 1, title: "Alfabeto y pronunciación", desc: "Las 33 letras, sonidos y primeras palabras.", href: "azbuka-1.html", lista: true },
   { id: 2, title: "Presentaciones y conversaciones básicas", desc: "Saludar, presentarte, nacionalidades y primeras preguntas.", href: "azbuka-2.html", lista: true },
   { id: 3, title: "Sustantivos, género y números", desc: "Género, plural, números y objetos de todos los días.", href: "azbuka-3.html", lista: true },
-  { id: 4, title: "Casos I: Nominativo y Acusativo", desc: "Quién hace qué: el sujeto y el objeto directo.", href: "azbuka-4.html" },
+  { id: 4, title: "Casos I: Nominativo y Acusativo", desc: "Quién hace qué: el sujeto y el objeto directo.", href: "azbuka-4.html", lista: true },
   { id: 5, title: "Verbos en presente y acciones cotidianas", desc: "Las conjugaciones del presente y la rutina.", href: "azbuka-5.html" },
   { id: 6, title: "Ubicación, movimiento y caso prepositivo", desc: "Dónde estás y adónde vas.", href: "azbuka-6.html" },
   { id: 7, title: "Tiempo, fechas y rutina diaria", desc: "Horas, días, meses y tu día a día.", href: "azbuka-7.html" },

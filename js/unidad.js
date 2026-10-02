@@ -33,6 +33,7 @@
      ordenar   { pide, audio?, fichas, esperada }
      vf        { afirmacion, verdadero }
      emparejar { pide, pares: [[izq, der], …], audioIzq? }  (audioIzq: la izquierda es audio)
+     tocar     { pide, palabras: [..], correcta: índice, audio? }  (02/10/2026: tocá la palabra de la frase)
    Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir?, items? }
      items: letras o palabras que practica («alfabeto:Б», «lex:CMR-…») para el semáforo
      audio: botón ▶ (suena solo al aparecer salvo que haya «grande» o audioManual)
@@ -60,6 +61,7 @@
       .pr-card{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:20px 18px;}
       .pr-pide{font-size:17px;font-weight:700;line-height:1.4;}
       .pr-grande{font-size:clamp(34px,11vw,48px);font-weight:800;color:${c.gold};text-align:center;margin:18px 0 6px;line-height:1.15;word-break:break-word;letter-spacing:.5px;}
+      .pr-grande.frase{font-size:clamp(22px,7vw,30px);letter-spacing:0;}   /* frases (02/10/2026): no se cortan en renglones sueltos */
       .pr-oir{display:flex;justify-content:center;margin:16px 0 4px;}
       .pr-oir button{width:64px;height:64px;border-radius:32px;background:${c.gold}22;border:1px solid ${c.gold};color:${c.gold};font-size:22px;cursor:pointer;font-family:inherit;}
       .pr-pista{font-size:13px;color:${c.textMuted};text-align:center;margin-top:6px;}
@@ -101,6 +103,11 @@
       .pr-em .pr-op.sel{border-color:${c.gold};background:${c.gold}22;color:${c.gold};}
       .pr-em .pr-op.hecho{opacity:.35;}
       .pr-lista{margin-top:10px;}
+      .pr-frase{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px;}
+      .pr-tw{min-height:50px;padding:8px 14px;border-radius:12px;background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:21px;font-weight:700;cursor:pointer;font-family:inherit;}
+      .pr-tw.ok{background:${VERDE}22;border-color:${VERDE};color:${VERDE};}
+      .pr-tw.mal{background:${ROJO}22;border-color:${ROJO};color:#D9776F;}
+      .pr-tw:disabled{cursor:default;}
       .pr-lista > div{padding:10px 0;border-top:1px solid ${c.border};font-size:14px;line-height:1.45;}
     `);
   }
@@ -132,7 +139,7 @@
     return h(React.Fragment, null,
       h(Contexto, { ej }),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
-      ej.grande && h("div", { className: "pr-grande", lang: "ru" }, ej.grande),
+      ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: "ru" }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande }),
       h("div", { className: "pr-ops" + (larga ? " una" : "") }, ops.map(o => {
         const cls = !elegida ? "" : o === ej.correcta ? " ok" : o === elegida ? " mal" : "";
@@ -157,7 +164,7 @@
       h(Contexto, { ej }),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.mapa && h(MapaEj, { mapa: ej.mapa, c }),
-      ej.grande && h("div", { className: "pr-grande", lang: "ru" }, ej.grande),
+      ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: "ru" }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.pista && h("div", { className: "pr-pista" }, ej.pista),
       ej.voz && h("div", { className: "pr-voz" }, "🎤 Tocá el micrófono del teclado ruso y decilo. El teléfono lo escribe por vos."),
@@ -340,7 +347,22 @@
       fila("Volvieron a «Aprendiendo»", baja, NARANJA));
   }
 
-  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar, chat: Chat };
+  /* Tocá la palabra (02/10/2026): una frase en fichas; se toca la que se pide
+     (quién hace la acción, qué la recibe). */
+  function Tocar({ ej, onRes, hecho }) {
+    const [elegida, setElegida] = useState(null);
+    const tocar = i => { if (elegida != null) return; setElegida(i); onRes(i === ej.correcta ? AZ_BIEN : AZ_MAL); };
+    return h(React.Fragment, null,
+      h("div", { className: "pr-pide" }, azFmt(ej.pide)),
+      ej.audio && h(Oir, { texto: ej.audio, auto: true }),
+      h("div", { className: "pr-frase", lang: "ru" }, ej.palabras.map((w, i) => {
+        const cls = elegida == null ? "" : i === ej.correcta ? " ok" : i === elegida ? " mal" : "";
+        return h("button", { key: i, className: "pr-tw" + cls, disabled: elegida != null, onClick: () => tocar(i) }, w);
+      })),
+      hecho != null && h(Explicacion, { ej, r: hecho }));
+  }
+
+  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar, chat: Chat, tocar: Tocar };
 
   /* ── Sesión ── */
   function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar }) {
@@ -449,7 +471,7 @@
               h("div", { className: "pr-kick", style: { marginTop: 22 } }, "Para repasar"),
               h("div", { className: "pr-exp", style: { marginTop: 6 } }, "Estos vuelven en las próximas sesiones hasta que te salgan bien."),
               h("div", { className: "pr-lista" }, costaron.map(e => h("div", { key: e.id },
-                h("div", { style: { fontWeight: 700 } }, e.pide || e.afirmacion, e.grande ? " " + e.grande : ""),
+                h("div", { style: { fontWeight: 700 } }, e.pide || e.afirmacion, e.grande ? " " + e.grande : "", e.forma === "tocar" ? " " + e.palabras.join(" ") : ""),
                 h("div", { style: { color: c.textSub } }, azFmt(e.explicacion))))))
           : h("div", { className: "pr-exp", style: { marginTop: 18, fontSize: 15 } }, "Todo bien en esta sesión."),
         h(Semaforo, { cambios, c }),
