@@ -9,15 +9,15 @@
 <meta name="apple-mobile-web-app-title" content="Азбука">
 <meta name="theme-color" content="#0F0F14">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="core.css">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/core.css">
 </head>
 <body>
 <div id="root"></div>
-<script src="preact.js"></script>
-<script src="core.js"></script>
-<script src="progress.js"></script>
-<script src="shell.js"></script>
+<script src="assets/preact.js"></script>
+<script src="js/core.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/shell.js"></script>
 <script>
 /* ============================================================
    CUADERNO.HTML — Notas personales
@@ -127,12 +127,12 @@ function fechaLarga(iso) { return fecha(iso); }
 function urlApp(href) { try { return new URL(href, location.href).href; } catch (e) { return href; } }
 
 async function exportarPDF(cu, cual) {
-  await cargarScript("jspdf.umd.min.js");
+  await cargarScript("assets/jspdf.umd.min.js");
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ unit: "pt", format: "a4" });
-  doc.addFileToVFS("NotoSans-400.ttf", await fuenteBase64("noto-sans-pdf-400.ttf"));
+  doc.addFileToVFS("NotoSans-400.ttf", await fuenteBase64("assets/noto-sans-pdf-400.ttf"));
   doc.addFont("NotoSans-400.ttf", "NotoSans", "normal");
-  doc.addFileToVFS("NotoSans-700.ttf", await fuenteBase64("noto-sans-pdf-700.ttf"));
+  doc.addFileToVFS("NotoSans-700.ttf", await fuenteBase64("assets/noto-sans-pdf-700.ttf"));
   doc.addFont("NotoSans-700.ttf", "NotoSans", "bold");
   const W = doc.internal.pageSize.getWidth(), H = doc.internal.pageSize.getHeight(), M = 56, ancho = W - 2 * M;
   let y = M;
@@ -176,7 +176,7 @@ async function exportarPDF(cu, cual) {
 
 function xml(t) { return String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 async function exportarDOCX(cu, cual) {
-  await cargarScript("fflate.min.js");
+  await cargarScript("assets/fflate.min.js");
   const p = (txt, estilo, extra) => '<w:p>' + (estilo ? '<w:pPr><w:pStyle w:val="' + estilo + '"/></w:pPr>' : '') +
     String(txt).split("\n").map((l, i) => '<w:r>' + (extra || '') + (i ? '<w:br/>' : '') + '<w:t xml:space="preserve">' + xml(l) + '</w:t></w:r>').join('') + '</w:p>';
   const links = [];

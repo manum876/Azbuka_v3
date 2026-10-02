@@ -28,7 +28,7 @@ No hay **rachas, XP, vidas, rankings ni obligación de estudiar todos los días*
 
 ## Cómo está organizado
 
-<img src="azbuka-structure.svg" alt="Estructura de Azbuka: curso A1-B1 conectado con las herramientas de consulta" width="900">
+<img src="assets/azbuka-structure.svg" alt="Estructura de Azbuka: curso A1-B1 conectado con las herramientas de consulta" width="900">
 
 - **Curso:** 12 unidades progresivas, de A1 a B1, más un examen final.
 - **Herramientas:** módulos de consulta y práctica que no dependen del orden del curso.
@@ -132,7 +132,7 @@ Conversaciones para situaciones cotidianas, con traducción y vocabulario. *Se e
 ## Tecnología
 
 - HTML, CSS y JavaScript, **sin proceso de build**.
-- [Preact](https://preactjs.com/) + htm, incluidos en el repositorio (`preact.js`).
+- [Preact](https://preactjs.com/) + htm, incluidos en el repositorio (`assets/preact.js`).
 - `localStorage` para el progreso y el tema.
 - Web Speech API del navegador para el audio en ruso.
 - Publicado con **GitHub Pages**.
@@ -166,25 +166,26 @@ Después abrí `http://localhost:8000` en el navegador. Hace falta un servidor l
 Azbuka_v3/
 ├── index.html            ← inicio
 ├── azbuka-index-1.html   ← índice del curso A1 → B1
-├── ficha.html            ← ficha de palabra (diccionario)
-├── alfabeto.html
-├── verbos.html
-├── casos.html
-├── core.css              ← estilos compartidos
-├── core.js               ← catálogo, búsqueda, almacenamiento
-├── shell.js              ← menú lateral, encabezado y barra inferior
-├── progress.js           ← progreso
-├── preact.js             ← Preact + htm
-├── data-lexicon.js       ← diccionario central
-├── data-verbos.js        ← conjugaciones
-├── data-casos.js         ← declinaciones
-├── data-gramatica.js     ← explicaciones de gramática
-├── data-alphabet.js      ← alfabeto
-├── azbuka-structure.svg
-├── README.md
-├── README.es.md
-├── LICENSE
-└── LICENSE-CONTENT
+├── azbuka-1.html …       ← unidades
+├── ficha.html            ← diccionario y ficha de palabra
+├── alfabeto.html, dialogos.html, verbos.html, casos.html, cuaderno.html
+├── ajustes.html
+├── manifest.webmanifest  ← datos de la app instalada
+├── sw.js                 ← funcionamiento sin conexión
+├── js/                   ← código compartido
+│   ├── core.js           ← catálogo, búsqueda, almacenamiento
+│   ├── shell.js          ← menú lateral, encabezado y barra inferior
+│   ├── progress.js       ← progreso
+│   └── …                 ← unidades, corrector, burbuja, avisos
+├── data/                 ← datos
+│   ├── data-lexicon.js   ← diccionario central
+│   ├── data-verbos.js    ← conjugaciones
+│   ├── data-casos.js     ← declinaciones
+│   └── …                 ← gramática, alfabeto, diálogos, unidades
+├── assets/               ← estilos, fuentes, íconos y librerías (Preact, jsPDF, fflate)
+├── herramientas/         ← generador de IPA y transliteración
+├── README.md, README.es.md
+└── LICENSE, LICENSE-CONTENT
 ```
 
 ---
@@ -211,7 +212,7 @@ Azbuka usa **dos licencias**, porque el software y el contenido educativo tienen
 
 - **Código:** Licencia MIT. Ver [`LICENSE`](LICENSE).
 - **Contenido educativo** (material del curso, ejercicios, definiciones, explicaciones): **CC BY-NC-ND 4.0**. Ver [`LICENSE-CONTENT`](LICENSE-CONTENT).
-- **Excepción:** las tablas de conjugación (`data-verbos.js`) y de declinación (`data-casos.js`) derivan de datos de OpenRussian.org y se distribuyen bajo **CC BY-SA 4.0**, como pide su licencia original.
+- **Excepción:** las tablas de conjugación (`data/data-verbos.js`) y de declinación (`data/data-casos.js`) derivan de datos de OpenRussian.org y se distribuyen bajo **CC BY-SA 4.0**, como pide su licencia original.
 
 ---
 

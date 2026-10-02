@@ -195,8 +195,8 @@ function azIndiceFormas() {
 function azCargarFormas() {
   if (AZ_FORMAS_CARGANDO) return;
   const faltan = [];
-  if (typeof CASOS === "undefined") faltan.push("data-casos.js");
-  if (typeof VERBOS === "undefined") faltan.push("data-verbos.js");
+  if (typeof CASOS === "undefined") faltan.push("data/data-casos.js");
+  if (typeof VERBOS === "undefined") faltan.push("data/data-verbos.js");
   if (!faltan.length) return;
   AZ_FORMAS_CARGANDO = true;
   let pendientes = faltan.length;

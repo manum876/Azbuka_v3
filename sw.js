@@ -15,24 +15,29 @@
    · Las páginas con parámetros (ficha.html?id=…) se guardan una sola
      vez, sin el parámetro.
 
+   Carpetas (desde el 02/10/2026): las páginas en la raíz, el código
+   compartido en js/, los datos en data/ y fuentes, íconos y librerías
+   en assets/.
+
    AL AGREGAR UN ARCHIVO A LA APP (una unidad nueva, un data-…js):
-   sumarlo a AZ_PRECACHE. Si no está, igual se guarda la primera vez
+   sumarlo a AZ_PRECACHE con su carpeta. Si no está, igual se guarda la primera vez
    que el alumno lo abre con internet.
    ============================================================ */
-const AZ_CACHE = "azbuka-v1";
+const AZ_CACHE = "azbuka-v2";
 const AZ_ESPERA = 4000;
 const AZ_PRECACHE = [
-  "./", "index.html", "azbuka-index-1.html",
-  "azbuka-1.html", "azbuka-2.html", "azbuka-3.html",
-  "ficha.html", "alfabeto.html", "dialogos.html", "verbos.html", "casos.html", "cuaderno.html", "ajustes.html",
-  "core.css", "core.js", "shell.js", "progress.js", "preact.js", "corrector.js", "burbuja.js", "mano.js",
-  "unidad.js", "unidad-ui.js", "avisos.js",
-  "data-lexicon.js", "data-casos.js", "data-verbos.js", "data-gramatica.js", "data-alphabet.js",
-  "data-dialogos.js", "data-frases.js", "data-cultura.js", "data-mapa.js",
-  "data-unidad-1.js", "data-unidad-2.js", "data-unidad-3.js",
-  "jspdf.umd.min.js", "fflate.min.js",
-  "noto-sans-azbuka.woff2", "marck-script.woff2", "noto-sans-pdf-400.ttf", "noto-sans-pdf-700.ttf",
-  "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "apple-touch-icon.png"
+  "./", "ajustes.html", "alfabeto.html", "azbuka-1.html", "azbuka-2.html", "azbuka-3.html",
+  "azbuka-index-1.html", "casos.html", "cuaderno.html", "dialogos.html", "ficha.html",
+  "index.html", "verbos.html", "manifest.webmanifest", "js/avisos.js", "js/burbuja.js",
+  "js/core.js", "js/corrector.js", "js/mano.js", "js/progress.js", "js/shell.js",
+  "js/unidad-ui.js", "js/unidad.js", "data/data-alphabet.js", "data/data-casos.js",
+  "data/data-cultura.js", "data/data-dialogos.js", "data/data-frases.js", "data/data-gramatica.js",
+  "data/data-lexicon.js", "data/data-mapa.js", "data/data-unidad-1.js", "data/data-unidad-2.js",
+  "data/data-unidad-3.js", "data/data-verbos.js", "assets/apple-touch-icon.png", "assets/core.css",
+  "assets/fflate.min.js", "assets/icon-192.png", "assets/icon-512.png",
+  "assets/icon-maskable-512.png", "assets/jspdf.umd.min.js", "assets/marck-script.woff2",
+  "assets/noto-sans-azbuka.woff2", "assets/noto-sans-pdf-400.ttf", "assets/noto-sans-pdf-700.ttf",
+  "assets/preact.js"
 ];
 
 self.addEventListener("install", e => {
