@@ -69,3 +69,7 @@ input:focus { outline: none; border-color: #C9A84C !important; }
 @media (max-width: 600px) {
   .letter-card { padding: 12px 6px !important; }
 }
+
+/* Transliteración oculta desde Ajustes (02/10/2026): core.js pone la
+   clase az-sin-tl en <html>; todo lo marcado az-tl desaparece. */
+.az-sin-tl .az-tl { display: none !important; }

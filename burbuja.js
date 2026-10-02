@@ -87,7 +87,7 @@
         h("div", { className: "az-bb-ru", lang: "ru" }, e.acento || e.ru),
         h("button", { className: "az-bb-play", "aria-label": "Escuchar", onClick: function () { azHablarRu(e.ru); } }, "▶")),
       f && h("div", { className: "az-bb-forma" }, h("b", { lang: "ru" }, f.forma), " es " + f.etiquetas),
-      e.translit && h("div", { className: "az-bb-tr" }, e.translit),
+      e.translit && h("div", { className: "az-bb-tr az-tl" }, e.translit),
       e.ipa && h("div", { className: "az-bb-ipa" }, "IPA: /" + e.ipa.replace(/^\/|\/$/g, "") + "/"),
       pos && h("div", { className: "az-bb-pos" }, pos),
       h("div", { className: "az-bb-es" }, es),
@@ -108,7 +108,7 @@
       h("div", { className: "az-bb-top" },
         h("div", { className: "az-bb-ru", lang: "ru" }, f.ru),
         h("button", { className: "az-bb-play", "aria-label": "Escuchar", onClick: function () { azHablarRu(f.ru); } }, "▶")),
-      f.tr && h("div", { className: "az-bb-tr" }, f.tr),
+      f.tr && h("div", { className: "az-bb-tr az-tl" }, f.tr),
       h("div", { className: "az-bb-es" }, f.es),
       pals.length > 1 && h("div", { className: "az-bb-pals" }, pals.map(function (p, i) {
         const id = (f.lex || [])[i];

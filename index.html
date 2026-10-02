@@ -7,6 +7,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Азбука">
 <title>Азбука · Ruso</title>
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="core.css">
 <style>
   /* Específico de esta página. Los colores fijos de ícono (rojo del logo,
@@ -64,6 +67,7 @@
 <script src="preact.js"></script>
 <script src="data-lexicon.js"></script>
 <script src="core.js"></script>
+<script src="avisos.js"></script>
 <script src="shell.js"></script>
 <script>
 const { useState, useEffect } = htmPreact;
@@ -190,7 +194,11 @@ function App() {
           )
         )
       )
-    )
+    ),
+
+    /* Avisos de instalar y de copia de seguridad (avisos.js, §6.17).
+       Fuera del bloque animado: su transform rompería el position:fixed. */
+    React.createElement(AzAvisos, { c })
   );
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));

@@ -6,6 +6,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Азбука — Ficha de palabra</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="core.css">
 </head>
 <body>
@@ -14,6 +18,7 @@
 <script src="data-lexicon.js"></script>
 <script src="data-cultura.js"></script>
 <script src="core.js"></script>
+<script src="progress.js"></script>
 <script src="shell.js"></script>
 <script>
 /* ============================================================
@@ -50,10 +55,12 @@ const GENDER_LABEL = { m: "masculino", f: "femenino", n: "neutro" };
 const ANIMATE_LABEL = { "sí": "Animado", yes: "Animado", no: "Inanimado" };
 const NUMBER_CLASS_LABEL = { pluraliaTantum: "Solo se usa en plural", singulariaTantum: "Solo se usa en singular" };
 const ASPECT_LABEL = { imperfectivo: "imperfectivo", perfectivo: "perfectivo", biaspectual: "biaspectual" };
-/* learningStatus todavía no tiene valores reales cargados en la base
-   (hoy es null en las 4.931 entradas) — este mapa es una previsión
-   para cuando se empiece a poblar; lo no mapeado se muestra tal cual. */
-const LEARNING_STATUS_LABEL = { taught: "Enseñada", seen: "Vista", review: "En repaso", new: "Nueva" };
+/* Tu progreso (02/10/2026): el semáforo de la palabra para este alumno
+   (az_progress, lex:CMR-…), con los mismos colores y chips que la
+   ficha de letra de Alfabeto. Se marca solo con los ejercicios y se
+   puede corregir a mano tocando un chip (azSetItemLevel). Reemplaza
+   al viejo campo learningStatus del léxico, que se sacó. */
+const NIVEL_LABEL = ["No estudiada", "Aprendiendo", "Dominada"];
 
 /* Traducción de las marcas SIN_PAREJA del léxico a texto de interfaz.
    Mismo diccionario que usa verbos.html — mantenerlos iguales si se edita. */
@@ -123,6 +130,9 @@ function FichaStyles({ c }) {
     .buttons{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px;}
     .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit;white-space:nowrap;}
     .btn.pr{background:${c.gold};border-color:${c.gold};color:${c.bg};font-weight:700;}
+    .nivel-row{display:flex;gap:8px;}
+    .nivel-btn{flex:1;text-align:center;padding:9px 4px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;transition:.18s;font-family:inherit;}
+    .nivel-nota{margin-top:8px;font-size:12px;color:${c.textMuted};line-height:1.5;}
     .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12.5px;}
     .meta-item{background:${c.bg2};border-radius:8px;padding:8px 10px;}
     .meta-k{color:${c.textMuted};font-size:10px;text-transform:uppercase;letter-spacing:.5px;}
@@ -256,8 +266,13 @@ function App() {
     return () => window.removeEventListener("az-formas", f);
   }, []);
 
+  const [nivel, setNivel] = useState(0);
   useEffect(() => {
-    (async () => { setDarkMode((await azGet('az_theme', 'dark')) !== 'light'); })();
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      await azLoadProgress();
+      if (getWordId()) setNivel(azItem("lex:" + getWordId()).level || 0);
+    })();
   }, []);
 
   const id = getWordId();
@@ -353,9 +368,8 @@ function App() {
       .filter(Boolean)
       .map(u => "Unidad " + u.id + " — " + u.title);
 
-    const learningStatusText = entry.learningStatus
-      ? (LEARNING_STATUS_LABEL[entry.learningStatus] || entry.learningStatus)
-      : null;
+    const colNivel = [darkMode ? "#E2884A" : "#C85A1A", "#C9B369", darkMode ? "#4CAF82" : "#2E7D55"];
+    const marcarNivel = n => { azSetItemLevel("lex:" + entry.id, n); setNivel(n); };
 
     entryContent = React.createElement("div", { style: { animation: "fadeIn 0.3s ease" } },
       React.createElement(FichaStyles, { c }),
@@ -364,7 +378,7 @@ function App() {
         /* ── HERO: título, transliteración, traducción y categoría ── */
         React.createElement("div", { className: "hero" },
           React.createElement("div", { className: "ru" }, entry.acento || entry.ru),
-          entry.translit && React.createElement("div", { className: "translit" }, entry.translit),
+          entry.translit && React.createElement("div", { className: "translit az-tl" }, entry.translit),
           entry.ipa && React.createElement("div", { className: "ipa" }, "IPA: /" + entry.ipa + "/"),
           React.createElement("span", { className: "pos-badge" }, posBadgeText),
 
@@ -429,13 +443,19 @@ function App() {
           })(),
 
           /* ── CLASIFICACIÓN PEDAGÓGICA (traducida y filtrada) ── */
+          /* ── TU PROGRESO: semáforo de la palabra ── */
+          React.createElement("div", { className: "section-lbl" }, "Tu progreso"),
+          React.createElement("div", { className: "nivel-row" },
+            [0, 1, 2].map(n => React.createElement("button", {
+              key: n, className: "nivel-btn", onClick: () => marcarNivel(n),
+              style: nivel === n
+                ? { background: colNivel[n] + "22", border: `1px solid ${colNivel[n]}`, color: colNivel[n] }
+                : { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
+            }, NIVEL_LABEL[n]))),
+          React.createElement("div", { className: "nivel-nota" }, "Se marca solo con los ejercicios. Si no coincide con lo que sabés, tocá para corregirlo."),
+
           React.createElement("div", { className: "section-lbl" }, "Clasificación pedagógica"),
           React.createElement("div", { className: "meta-grid" },
-            React.createElement("div", { className: "meta-item" },
-              React.createElement("div", { className: "meta-k" }, "Estado de aprendizaje"),
-              React.createElement("div", { className: "meta-v" + (learningStatusText ? "" : " empty") },
-                learningStatusText || "Sin asignar")
-            ),
             React.createElement("div", { className: "meta-item" },
               React.createElement("div", { className: "meta-k" }, "Se enseña en"),
               React.createElement("div", { className: "meta-v" + (unitTitles.length ? "" : " empty") },

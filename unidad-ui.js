@@ -143,7 +143,7 @@
       const e = lexComerById(id); if (!e) return null;
       return h("div", { key: id, className: "voc" },
         h("div", { style: { flex: 1, minWidth: 0 } },
-          h("span", { className: "voc-ru" }, h(AzPalabra, { texto: e.acento || e.ru, id })), h("span", { className: "voc-tr" }, e.translit),
+          h("span", { className: "voc-ru" }, h(AzPalabra, { texto: e.acento || e.ru, id })), h("span", { className: "voc-tr az-tl" }, e.translit),
           h("div", { className: "voc-es" }, e.senses.slice(0, 2).map(x => x.es).join("; "))),
         h("button", { className: "play", onClick: () => azHablarRu(e.ru), "aria-label": "Escuchar" }, "▶"));
     }));
@@ -190,7 +190,7 @@
   }
 
   function AzHojaDialogo({ d, c, onClose, grabar, objetivo }) {
-    const [tr, setTr] = useState(true);
+    const [tr, setTr] = useState(azTranslitVisible());
     const [es, setEs] = useState(true);
     const [mias, setMias] = useState({});            /* línea → grabación */
     const gen = l => personaje(l.p).genero;
@@ -252,7 +252,7 @@
           h("div", { lang: "ru", style: { fontSize: 38, fontWeight: 800, color: c.gold, lineHeight: 1.2, wordBreak: "break-word" } }, e.acento || e.ru),
           !vuelta ? h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, "Tocá para ver qué significa")
             : h(React.Fragment, null,
-                h("div", { style: { fontSize: 15, color: c.textSub, fontStyle: "italic", marginTop: 8 } }, e.translit),
+                h("div", { className: "az-tl", style: { fontSize: 15, color: c.textSub, fontStyle: "italic", marginTop: 8 } }, e.translit),
                 h("div", { style: { fontSize: 20, fontWeight: 700, color: c.text, marginTop: 12 } }, e.senses.slice(0, 2).map(x => x.es).join("; ")),
                 detalle && detalle(e) && h("div", { lang: "ru", style: { fontSize: 14.5, color: c.textSub, marginTop: 8 } }, detalle(e)),
                 h("button", { className: "play", style: { marginTop: 14 }, onClick: ev => { ev.stopPropagation(); azHablarRu(e.ru); }, "aria-label": "Escuchar" }, "▶"))),

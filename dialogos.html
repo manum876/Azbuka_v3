@@ -7,6 +7,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Азбука">
 <title>Азбука · Diálogos</title>
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="core.css">
 </head>
 <body>
@@ -258,7 +261,7 @@ function FraseSheet({ fid, onClose, onCultura, favs, toggleFav }) {
         h("button", { className: "play", onClick: () => speakRu(f.ru), "aria-label": "Escuchar" }, "▶"),
         h("button", { className: "play", onClick: () => azGuardarEnCuaderno(f.ru + "\n" + f.es, { titulo: "Frase · " + f.ru, href: "dialogos.html?frase=" + f.id }), "aria-label": "Guardar en el cuaderno" }, "＋")
       ),
-      h("div", { className: "sheet-sub" }, f.tr),
+      h("div", { className: "sheet-sub az-tl" }, f.tr),
       h("div", { className: "sheet-q" }, f.es),
       h("div", { className: "tags" },
         h("span", { className: "tag" }, f.registro === "ты" ? "Informal (ты)" : f.registro === "вы" ? "Formal (вы)" : "Informal y formal"),
@@ -387,7 +390,7 @@ function Linea({ d, l, idx, registro, showTr, showEs, oculta, onRevelar, abierta
 function FichaDialogo({ id, c, onFrase, onCultura }) {
   const d = dialogoById(id);
   const [registro, setRegistro] = useState("ты");
-  const [showTr, setShowTr] = useState(true);
+  const [showTr, setShowTr] = useState(azTranslitVisible());
   const [showEs, setShowEs] = useState(true);
   const [practica, setPractica] = useState(null);
   const [reveladas, setReveladas] = useState({});

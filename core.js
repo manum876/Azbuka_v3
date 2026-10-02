@@ -437,15 +437,35 @@ function azRestaurarDatos(copia) {
   try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
   return "todo";
 }
+/* Devuelve true si la copia salió (compartida o descargada) y false si
+   se canceló. Si salió, anota en az_copia la fecha y la firma del
+   progreso (02/10/2026), para el recordatorio de copia (avisos.js). */
 async function azGuardarCopia() {
   const nombre = "azbuka-copia-" + new Date().toISOString().slice(0, 10) + ".json";
   const blob = new Blob([JSON.stringify(azCopiaDatos())], { type: "application/json" });
+  let ok = false;
   try {
     const file = new File([blob], nombre, { type: "application/json" });
-    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: "Copia de Azbuka" }); return; }
-  } catch (e) { if (e && e.name === "AbortError") return; }
-  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = nombre;
-  document.body.appendChild(a); a.click(); a.remove();
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: "Copia de Azbuka" }); ok = true; }
+  } catch (e) { if (e && e.name === "AbortError") return false; }
+  if (!ok) {
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = nombre;
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+  await azSet("az_copia", { fecha: new Date().toISOString(), firma: azFirmaProgreso() });
+  return true;
+}
+
+/* Firma del progreso (02/10/2026): cambia solo si cambió lo que vale la
+   pena guardar (ejercicios, letras y palabras, unidades, favoritos y
+   cuaderno), no por abrir un módulo. */
+function azFirmaProgreso() {
+  let p = {};
+  try { p = JSON.parse(localStorage.getItem("az_progress") || "{}") || {}; } catch (e) {}
+  const s = JSON.stringify([p.items || {}, p.ejercicios || {}, p.units || {}, p.favorites || []]) + (localStorage.getItem("az_cuaderno") || "");
+  let x = 5381;
+  for (let i = 0; i < s.length; i++) x = ((x << 5) + x + s.charCodeAt(i)) | 0;
+  return (x >>> 0).toString(36) + "-" + s.length;
 }
 function AzCopiaSeguridad({ c }) {
   const h = React.createElement;
@@ -496,3 +516,27 @@ async function azGuardarEnCuaderno(texto, fuente) {
   await azCuadernoAgregar(t, fuente || azFuentePagina());
   window.dispatchEvent(new CustomEvent("az-cuaderno-guardado"));
 }
+
+/* ── BLINDAJE (02/10/2026) ───────────────────────────────────
+   1. Service worker (sw.js): la app funciona sin internet y los datos
+      se bajan una sola vez. Se registra desde todas las páginas.
+   2. Transliteración (Ajustes): az_translit = "si" | "no". Con "no",
+      <html> lleva la clase az-sin-tl y core.css oculta todo lo que
+      tiene la clase az-tl. Una página que siempre la muestra declara
+      <html data-tl="siempre"> (Unidad 1 y Alfabeto: ahí la
+      pronunciación es lo que se aprende). Los interruptores propios
+      (Transliteración en los diálogos) arrancan apagados con "no". */
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
+}
+function azTranslitVisible() {
+  if (document.documentElement.getAttribute("data-tl") === "siempre") return true;
+  try { return JSON.parse(localStorage.getItem("az_translit") || '"si"') !== "no"; } catch (e) { return true; }
+}
+function azAplicarTranslit() {
+  document.documentElement.classList.toggle("az-sin-tl", !azTranslitVisible());
+}
+azAplicarTranslit();
+window.azTranslitVisible = azTranslitVisible;
+window.azAplicarTranslit = azAplicarTranslit;
+window.azFirmaProgreso = azFirmaProgreso;

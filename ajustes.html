@@ -6,6 +6,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Азбука — Ajustes</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="core.css">
 </head>
 <body>
@@ -17,21 +21,35 @@
 <script>
 /* ============================================================
    AJUSTES.HTML — Ajustes de la app (26/09/2026)
-   Se abre desde el ⚙️ del pie del menú. Por ahora solo tiene la
-   copia de seguridad de notas y progreso (AzCopiaSeguridad, en
-   core.js); más adelante se suman otras opciones.
+   Se abre desde el ⚙️ del pie del menú. Secciones: Transliteración
+   (02/10/2026, az_translit: "si" | "no", ver core.js) y Copia de
+   seguridad (AzCopiaSeguridad, en core.js).
    ============================================================ */
 const { useState, useEffect } = htmPreact;
 const h = React.createElement;
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [translit, setTranslit] = useState(azTranslitVisible() ? "si" : "no");
   useEffect(() => { (async () => setDarkMode((await azGet('az_theme', 'dark')) !== 'light'))(); }, []);
   const c = azColors(darkMode);
+  const elegir = async v => { setTranslit(v); await azSet("az_translit", v); azAplicarTranslit(); };
+  const lbl = t => h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "24px 0 10px" } }, t);
+  const caja = (...hijos) => h("div", { style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 16, padding: 16 } }, ...hijos);
+  const chip = (v, texto) => h("button", {
+    className: "btn", onClick: () => elegir(v),
+    style: Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
+      translit === v ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted })
+  }, texto);
   return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
     h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
       h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, "Ajustes"),
-      h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "24px 0 10px" } }, "Copia de seguridad"),
-      h("div", { style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 16, padding: 16 } }, h(AzCopiaSeguridad, { c }))));
+      lbl("Transliteración"),
+      caja(
+        h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
+          "La transliteración (", h("i", null, "jarashó"), ") ayuda a leer al principio. Cuando ya leés el cirílico, ocultarla te obliga a leer en ruso. Se sigue viendo en Alfabeto y en la Unidad 1, donde la pronunciación es lo que se aprende, y en los diálogos la podés volver a prender cuando quieras."),
+        h("div", { style: { display: "flex", gap: 8, marginTop: 12 } }, chip("si", "Mostrar"), chip("no", "Ocultar"))),
+      lbl("Copia de seguridad"),
+      caja(h(AzCopiaSeguridad, { c }))));
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
 </script>

@@ -7,6 +7,9 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Азбука">
 <title>Азбука · Verbos</title>
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="core.css">
 </head>
 <body>
@@ -301,7 +304,7 @@ function FichaVerbo({ id, c }) {
         h("div", { className: "hero-top" },
           h("div", { style: { minWidth: 0 } },
             h("div", { className: "ru" }, v.ru),
-            lex.translit && h("div", { className: "translit" }, lex.translit),
+            lex.translit && h("div", { className: "translit az-tl" }, lex.translit),
             lex.ipa && h("div", { className: "ipa" }, "IPA: /" + lex.ipa + "/")
           ),
           h("button", { className: "play", onClick: () => speakRu(v.ru), "aria-label": "Escuchar" }, "▶")
