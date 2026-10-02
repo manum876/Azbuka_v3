@@ -798,7 +798,6 @@ function App() {
      pantalla de iPhone. Al escribir, la presentación se esconde y
      quedan el buscador y los resultados. */
   const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "casos") || {};
-  const ICON_COLOR = { red: "#B5605C", orange: "#C48254", yellow: "#C9B369", green: "#5C9B78", blue: "#5D7DA6", purple: "#8871A8" };
   const total = typeof CASOS !== "undefined" ? Object.keys(CASOS).length.toLocaleString("es-AR") : "";
   const INTRO_ITEMS = [["Tablas completas", "Los 6 casos de cada palabra, en singular y plural o por género."], ["Qué es cada caso", "Tocá un caso para ver para qué sirve, con ejemplos explicados."], ["Formas especiales", "Locativo, partitivo, forma corta y acusativo animado, cuando la palabra los tiene."]];
   const EJEMPLOS = [["CMR-00230", "кни́га"], ["CMR-00096", "большо́й"], ["CMR-00007", "он"]];
@@ -806,7 +805,7 @@ function App() {
   const portada = h("div", null,
     !buscando && h("div", { className: "intro" },
       h("div", { className: "intro-top" },
-        h("div", { className: "intro-icon", style: { background: ICON_COLOR[modulo.icon] || c.gold } }, modulo.glyph || ""),
+        h("div", { className: "intro-icon", style: { background: azModuloColor(modulo).bg, color: azModuloColor(modulo).fg } }, modulo.glyph || ""),
         h("div", null,
           h("div", { className: "intro-title" }, modulo.title || ""),
           total && h("div", { className: "intro-kicker" }, total + " palabras · 6 casos")

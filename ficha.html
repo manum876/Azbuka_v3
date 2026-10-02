@@ -30,6 +30,9 @@
    para respetar el toggle de tema, y el contenido sale de campos
    reales de LEXICON_COMER en vez de datos de prueba.
 
+   Sin ?id, la página es el módulo Diccionario (01/10/2026): ver el
+   componente Diccionario más abajo.
+
    La base de datos (data-lexicon.js) es de SOLO LECTURA: esta
    página nunca la modifica, solo la lee y la muestra.
    ============================================================ */
@@ -128,6 +131,103 @@ function FichaStyles({ c }) {
     .meta-v.meta-link{color:${c.gold};text-decoration:none;font-weight:600;cursor:pointer;}
     .meta-v.meta-link:hover{text-decoration:underline;}
   `);
+}
+
+/* ── DICCIONARIO (01/10/2026) ─────────────────────────────────
+   ficha.html sin ?id es la portada del módulo Diccionario: buscador,
+   chips de categoría y de tema, y la grilla de temas. Con un filtro
+   o una búsqueda, la lista alfabética de palabras (cada una lleva a
+   su ficha). Los filtros viven en la URL (?tema=…&pos=…&q=…), así que
+   «‹» desde una ficha vuelve a la misma lista. Las palabras sin tema
+   solo aparecen con «Todos». */
+const h = React.createElement;
+const DIC_POS = [["todo", "Todo"], ["sustantivo", "Sustantivos"], ["verbo", "Verbos"], ["adjetivo", "Adjetivos"], ["adverbio", "Adverbios"], ["otro", "Otras"]];
+const DIC_ABR = { sustantivo: "sust.", verbo: "verbo", adjetivo: "adj.", adverbio: "adv." };
+const dicSinAc = s => (s || "").replace(/\u0301/g, "").replace(/ё/g, "е").toLowerCase();
+function Diccionario({ c }) {
+  const P = new URLSearchParams(location.search);
+  const [tema, setTema] = useState(P.get("tema"));
+  const [pos, setPos] = useState(P.get("pos") || "todo");
+  const [q, setQ] = useState(P.get("q") || "");
+  const [max, setMax] = useState(150);
+  useEffect(() => {
+    const u = new URLSearchParams();
+    if (tema) u.set("tema", tema); if (pos !== "todo") u.set("pos", pos); if (q) u.set("q", q);
+    const s = u.toString(); history.replaceState(history.state, "", location.pathname + (s ? "?" + s : ""));
+    setMax(150);
+  }, [tema, pos, q]);
+  const temas = typeof LEXICON_TEMAS !== "undefined" ? LEXICON_TEMAS : {};
+  const cuenta = {}; LEXICON_COMER.forEach(e => (e.temas || []).forEach(t => cuenta[t] = (cuenta[t] || 0) + 1));
+  const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "diccionario") || { glyph: "Сл", icon: "orange" };
+  const col = typeof azModuloColor === "function" ? azModuloColor(modulo) : { bg: c.gold, fg: "#fff" };
+  const chip = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
+  const filtrando = !!tema || pos !== "todo" || !!q.trim();
+  let lista = [];
+  if (filtrando) {
+    lista = LEXICON_COMER.filter(e => (!tema || (e.temas || []).indexOf(tema) >= 0) &&
+      (pos === "todo" || (pos === "otro" ? !DIC_ABR[e.posNormalized] : e.posNormalized === pos)));
+    const t = q.trim();
+    if (t) { const n = dicSinAc(t), es = t.toLowerCase(); lista = lista.filter(e => dicSinAc(e.ru).startsWith(n) || (e.senses || []).some(s => (s.es || "").toLowerCase().indexOf(es) >= 0)); }
+    lista.sort((a, b) => a.ru.localeCompare(b.ru, "ru"));
+  }
+  const grupos = []; lista.slice(0, max).forEach(e => { const L = e.ru[0].toUpperCase(); const g = grupos[grupos.length - 1]; if (!g || g.L !== L) grupos.push({ L, items: [e] }); else g.items.push(e); });
+  const total = String(LEXICON_COMER.length).replace(/\B(?=(\d{3})+$)/g, ".");
+  const css = `
+    .dic{padding-top:14px;padding-bottom:110px}
+    .dic .intro{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:18px 18px 14px;margin-bottom:14px}
+    .dic .intro-top{display:flex;align-items:center;gap:14px}
+    .dic .intro-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;flex-shrink:0}
+    .dic .intro-title{font-size:24px;font-weight:800;color:${c.text};line-height:1.1}
+    .dic .intro-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-top:4px}
+    .dic .intro-desc{font-size:13.5px;line-height:1.55;color:${c.textSub};margin-top:12px}
+    .dic .srch{display:flex;align-items:center;gap:8px;background:${c.bg3};border:1px solid ${c.border};border-radius:9px;padding:0 10px}
+    .dic .srch input{flex:1;min-width:0;background:none;border:0;outline:0;color:${c.text};font-size:16px;padding:11px 0;font-family:inherit}
+    .dic .x{width:24px;height:24px;border-radius:50%;background:${c.border};border:0;color:${c.text};font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+    .dic .lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.textMuted};margin:16px 2px 8px}
+    .dic .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -3vw;padding:0 3vw}
+    .dic .chips::-webkit-scrollbar{display:none}
+    .dic .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;white-space:nowrap;font-family:inherit;flex-shrink:0;cursor:pointer;transition:.18s}
+    .dic .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .dic .tcard{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 12px 10px;text-align:left;font-family:inherit;cursor:pointer}
+    .dic .tcard b{display:block;font-size:13.5px;color:${c.text};line-height:1.25}
+    .dic .tcard span{font-size:11.5px;color:${c.gold};font-weight:700}
+    .dic .sum{font-size:12.5px;color:${c.textMuted};margin:14px 2px 8px}
+    .dic .sum b{color:${c.text}}
+    .dic .list{background:${c.card};border:1px solid ${c.border};border-radius:12px;overflow:hidden}
+    .dic .let{font-size:11px;font-weight:800;color:${c.gold};background:${c.bg2};padding:5px 14px;border-top:1px solid ${c.border}}
+    .dic .grp:first-child .let{border-top:0}
+    .dic .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:11px 14px;border-top:1px solid ${c.border};text-decoration:none}
+    .dic .let+.res-row{border-top:0}
+    .dic .res-ru{color:${c.text};font-weight:600;font-size:14.5px}
+    .dic .res-asp{color:${c.textMuted};font-size:11px;margin-left:6px;font-weight:500}
+    .dic .res-es{color:${c.textMuted};font-size:12.5px;text-align:right}
+    .dic .mas{width:100%;margin-top:10px;padding:11px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};font-family:inherit;font-size:13px;cursor:pointer}
+  `;
+  const buscador = h("div", { className: "srch" }, h("span", { style: { color: c.textMuted } }, "⌕"),
+    h("input", { value: q, placeholder: tema ? "Buscar dentro de " + temas[tema] + "…" : "Buscar en ruso o en español…", "aria-label": "Buscar en el diccionario", onInput: e => setQ(e.target.value) }),
+    q && h("button", { className: "x", onClick: () => setQ(""), "aria-label": "Limpiar búsqueda" }, "✕"));
+  const chipsPos = h("div", { className: "chips" }, DIC_POS.map(([k, t]) => h("button", { key: k, className: "pair-btn", style: chip(pos === k), onClick: () => setPos(k) }, t)));
+  const orden = Object.keys(temas).sort((a, b) => (b === tema) - (a === tema));
+  const chipsTema = h("div", { className: "chips" }, [h("button", { key: "all", className: "pair-btn", style: chip(!tema), onClick: () => setTema(null) }, "Todos")]
+    .concat(orden.map(k => h("button", { key: k, className: "pair-btn", style: chip(tema === k), onClick: () => setTema(k) }, temas[k]))));
+  const fila = e => h("a", { key: e.id, className: "res-row", href: "ficha.html?id=" + e.id, onClick: ev => azNavigate(ev, "ficha.html?id=" + e.id) },
+    h("div", null, h("span", { className: "res-ru" }, e.acento || e.ru), h("span", { className: "res-asp" }, DIC_ABR[e.posNormalized] || "")),
+    h("div", { className: "res-es" }, ((e.senses || [])[0] || {}).es || ""));
+  return h("div", { className: "dic" }, h("style", null, css),
+    !filtrando && h("div", { className: "intro" },
+      h("div", { className: "intro-top" }, h("div", { className: "intro-icon", style: { background: col.bg, color: col.fg } }, modulo.glyph),
+        h("div", null, h("div", { className: "intro-title" }, "Diccionario"), h("div", { className: "intro-kicker" }, total + " PALABRAS · " + Object.keys(temas).length + " TEMAS"))),
+      h("div", { className: "intro-desc" }, "Buscá una palabra o recorré el léxico por tema y por categoría. Tocá cualquier palabra para abrir su ficha.")),
+    buscador,
+    h("div", { className: "lbl" }, "Categoría"), chipsPos,
+    !filtrando && h(React.Fragment, null, h("div", { className: "lbl" }, "Temas"),
+      h("div", { className: "grid" }, Object.keys(temas).map(k => h("button", { key: k, className: "tcard", onClick: () => setTema(k) }, h("b", null, temas[k]), h("span", null, (cuenta[k] || 0) + " palabras"))))),
+    filtrando && h(React.Fragment, null, h("div", { className: "lbl" }, "Tema"), chipsTema,
+      h("div", { className: "sum" }, h("b", null, lista.length + (lista.length === 1 ? " palabra" : " palabras")),
+        (tema ? " · " + temas[tema] : "") + (pos !== "todo" ? " · " + DIC_POS.find(p => p[0] === pos)[1] : "") + (q.trim() ? " · «" + q.trim() + "»" : "")),
+      lista.length ? h("div", { className: "list" }, grupos.map(g => h("div", { key: g.L, className: "grp" }, h("div", { className: "let" }, g.L), g.items.map(fila))))
+        : h("div", { style: { fontSize: 13, color: c.textMuted, padding: "6px 2px" } }, "Sin resultados con estos filtros."),
+      lista.length > max && h("button", { className: "mas", onClick: () => setMax(m => m + 150) }, "Mostrar más (" + (lista.length - max) + ")")));
 }
 
 function App() {
@@ -389,6 +489,9 @@ function App() {
     );
   }
 
+  /* Sin ?id: portada del Diccionario */
+  if (!getWordId()) return React.createElement(AzShell, { darkMode, setDarkMode, moduleId: "diccionario", tabs: [] },
+    React.createElement(Diccionario, { c: azColors(darkMode) }));
   return React.createElement(AzShell, {
     darkMode, setDarkMode,
     moduleId: null,

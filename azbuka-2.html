@@ -34,14 +34,20 @@
    la lógica de navegación de la unidad. Módulos de tipo «leccion»
    (teoría, vocabulario, frases, diálogos, tarjetas), «conversaciones»
    (diálogos para grabarse y chats), «proyecto» (escribir una
-   conversación) y «examen».
+   conversación) y «examen». Un módulo puede tener «ampliacion»
+   (01/10/2026): vocabulario opcional en una tarjeta aparte, con su
+   práctica; no cuenta para el objetivo, la práctica general ni la
+   evaluación.
    URL: azbuka-2.html · azbuka-2.html?m=u2m4
    ============================================================ */
 const { useState, useEffect, useRef } = htmPreact;
 const h = React.createElement;
 const U = UNIDAD_2;
 const EJ_U2 = ejerciciosUnidad2();
-const OBJETIVO_U2 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(2) >= 0 || (e.appearsIn || []).indexOf(2) >= 0).map(e => e.id);
+/* La ampliación (U2_AMPLIACION) es opcional: no cuenta para el objetivo, la práctica general ni la evaluación. */
+const AMP_U2 = new Set([].concat(...Object.values(typeof U2_AMPLIACION !== "undefined" ? U2_AMPLIACION : {})));
+const OBJETIVO_U2 = LEXICON_COMER.filter(e => ((e.introducedIn || []).indexOf(2) >= 0 || (e.appearsIn || []).indexOf(2) >= 0) && !AMP_U2.has(e.id)).map(e => e.id);
+const EJ_U2_BASE = EJ_U2.filter(e => !e.ampliacion);
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas.";
 const personaje = p => (DLG_PERSONAJES[p] || { ru: p });   /* para los chats */
 const PORAC = {}; LEXICON_COMER.forEach(e => { PORAC[e.acento || e.ru] = e.id; });
@@ -50,6 +56,7 @@ const PORAC = {}; LEXICON_COMER.forEach(e => { PORAC[e.acento || e.ru] = e.id; }
 const celda = (ru, es) => ({ id: PORAC[ru] || null, ru, es });
 const TABLAS = {
   naciones: U2_NACIONES.map(([p, m, f, em, ef]) => { const ep = lexComerById(PORAC[p]); return [celda(p, ep ? ep.senses[0].es : ""), celda(m, em), celda(f, ef)]; }),
+  nacionesAmp: (typeof U2_NACIONES_AMP !== "undefined" ? U2_NACIONES_AMP : []).map(([p, m, f, em, ef]) => { const ep = lexComerById(PORAC[p]); return [celda(p, ep ? ep.senses[0].es : ""), celda(m, em), celda(f, ef)]; }),
   idiomas: U2_IDIOMAS.map(([a, b, es]) => [celda(a, es), celda(b, "en " + es)])
 };
 
@@ -84,10 +91,11 @@ function App() {
   useEffect(() => { if (!practica && AZ_PROGRESS.units) setExamenU2((AZ_PROGRESS.units["2"] || {}).examen || null); }, [practica]);
 
   const abrirModulo = id => { history.pushState(null, "", id ? "?m=" + id : location.pathname); setModId(id); window.scrollTo(0, 0); };
-  const practicarUnidad = () => setPractica({ titulo: "Unidad 2", pool: EJ_U2.filter(e => e.modulo <= Math.max(visto, 1)) });
-  const practicarModulo = m => setPractica({ titulo: m.titulo, pool: EJ_U2.filter(e => e.modulo === m.n) });
-  const rendirExamen = m => setPractica({ titulo: "Evaluación de la Unidad 2", pool: EJ_U2, examen: { intro: m.intro, partes: m.partes, aprobado: m.aprobado } });
-  const reforzar = parte => setPractica({ titulo: "Reforzar: " + parte.nombre, pool: EJ_U2.filter(e => parte.tipos.indexOf(e.tipo) >= 0) });
+  const practicarUnidad = () => setPractica({ titulo: "Unidad 2", pool: EJ_U2_BASE.filter(e => e.modulo <= Math.max(visto, 1)) });
+  const practicarModulo = m => setPractica({ titulo: m.titulo, pool: EJ_U2_BASE.filter(e => e.modulo === m.n) });
+  const practicarAmpliacion = m => setPractica({ titulo: m.ampliacion.titulo, pool: EJ_U2.filter(e => e.ampliacion && e.modulo === m.n) });
+  const rendirExamen = m => setPractica({ titulo: "Evaluación de la Unidad 2", pool: EJ_U2_BASE, examen: { intro: m.intro, partes: m.partes, aprobado: m.aprobado } });
+  const reforzar = parte => setPractica({ titulo: "Reforzar: " + parte.nombre, pool: EJ_U2_BASE.filter(e => parte.tipos.indexOf(e.tipo) >= 0) });
   const chat = id => setPractica({ titulo: "Chat", pool: EJ_U2.filter(e => e.id === "U2-chat-" + id), n: 1 });
 
   const c = azColors(darkMode);
@@ -130,7 +138,18 @@ function App() {
         mod.dialogos && mod.dialogos.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Diálogos"),
           h(AzListaDialogos, { ids: mod.dialogos, onAbrir: id => setDialogo({ id }) })),
         mod.vocab && mod.vocab.length > 0 && h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: mod.vocab, titulo: mod.titulo }) }, "Tarjetas (" + mod.vocab.length + ")"),
-        h("button", { className: "ubtn", style: { marginTop: 10 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo")),
+        h("button", { className: "ubtn", style: { marginTop: 10 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
+        mod.ampliacion && h("div", { style: { marginTop: 28, paddingTop: 6, borderTop: `1px solid ${c.border}` } },
+          h("div", { className: "u-sec" }, mod.ampliacion.titulo + " · opcional"),
+          h("p", { className: "u-text", style: { fontSize: 14.5 } }, azFmt(mod.ampliacion.intro)),
+          mod.ampliacion.tabla && h(AzTablaGrupos, { encabezados: mod.ampliacion.tabla.encabezados, filas: TABLAS[mod.ampliacion.tabla.filas], c }),
+          (() => {
+            const enTabla = mod.ampliacion.tabla ? new Set([].concat(...TABLAS[mod.ampliacion.tabla.filas]).map(x => x.id)) : new Set();
+            const resto = mod.ampliacion.vocab.filter(id => !enTabla.has(id));
+            return resto.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Más vocabulario (" + resto.length + ")"), h(AzVocabulario, { ids: resto, c }));
+          })(),
+          h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: mod.ampliacion.vocab, titulo: mod.ampliacion.titulo }) }, "Tarjetas (" + mod.ampliacion.vocab.length + ")"),
+          h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => practicarAmpliacion(mod) }, "Practicar la ampliación"))),
       mod.tipo === "conversaciones" && h(React.Fragment, null,
         h("div", { className: "u-sec" }, "Diálogos para escuchar y grabarte"),
         h(AzListaDialogos, { ids: mod.dialogos, onAbrir: id => setDialogo({ id, grabar: true }) }),

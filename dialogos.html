@@ -40,7 +40,6 @@ const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
 const h = React.createElement;
 
 const PARAMS = new URLSearchParams(window.location.search);
-const ICON_COLOR = { red: "#B5605C", orange: "#C48254", yellow: "#C9B369", green: "#5C9B78", blue: "#5D7DA6", purple: "#8871A8" };
 const POS_SHORT = { sustantivo: "sust.", verbo: "verbo", adjetivo: "adj.", pronombre: "pron.", determinante: "det.", numeral: "num.", adverbio: "adv.", "preposición": "prep.", "conjunción": "conj.", "partícula": "part.", "interjección": "interj." };
 const RX_PALABRA = /[А-Яа-яЁё́]+(?:-[А-Яа-яЁё́]+)*/g;
 const SIT = Object.fromEntries(DLG_SITUACIONES);
@@ -606,7 +605,7 @@ function App() {
   const portada = h("div", null,
     !buscando && h("div", { className: "intro" },
       h("div", { className: "intro-top" },
-        h("div", { className: "intro-icon", style: { background: ICON_COLOR[modulo.icon] || c.gold, color: modulo.icon === "yellow" ? "#1A1812" : "#fff" } }, modulo.glyph || ""),
+        h("div", { className: "intro-icon", style: { background: azModuloColor(modulo).bg, color: azModuloColor(modulo).fg } }, modulo.glyph || ""),
         h("div", null,
           h("div", { className: "intro-title" }, modulo.title || "Diálogos"),
           h("div", { className: "intro-kicker" }, kicker)

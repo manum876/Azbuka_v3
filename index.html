@@ -51,6 +51,7 @@
   .mod-icon.orange{background:#C48254;}
   .mod-icon.yellow{background:#C9B369;color:#1a1a1a;}
   .mod-icon.green{background:#5C9B78;}
+  .mod-icon.cyan{background:#5FA3B8;}
   .mod-icon.blue{background:#5D7DA6;}
   .mod-icon.purple{background:#8871A8;}
   .mod-text{display:flex;flex-direction:column;gap:2px;text-align:left;min-width:0;}
@@ -88,30 +89,6 @@ function App() {
     tabs: []
   },
     React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
-
-      /* ── BUSCADOR GENERAL ── */
-      React.createElement("div", { className: "srch" },
-        React.createElement("span", { className: "lupa", style: { color: c.textMuted } }, "⌕"),
-        React.createElement("input", {
-          value: q, onInput: (e) => setQ(e.target.value),
-          placeholder: "Buscar en ruso o en español…", "aria-label": "Buscar una palabra",
-          style: { background: c.card, border: `1px solid ${c.gold}66`, color: c.text }
-        }),
-        q && React.createElement("button", { className: "limpiar", onClick: () => setQ(""), "aria-label": "Limpiar búsqueda", style: { background: c.border, color: c.text } }, "✕")
-      ),
-      q.trim() && React.createElement("div", { className: "res", style: { background: c.card, border: `1px solid ${c.border}` } },
-        (() => {
-          const r = typeof azSearchLexicon === "function" ? azSearchLexicon(q.trim()) : [];
-          if (!r.length) return React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados");
-          return r.map((x, i) => React.createElement("a", {
-            key: x.id, href: x.href, onClick: (e) => azNavigate(e, x.href),
-            style: { borderTop: i ? `1px solid ${c.border}` : "none" }
-          },
-            React.createElement("span", { style: { color: c.text, fontWeight: 700, fontSize: 15 } }, x.ru),
-            React.createElement("span", { style: { color: c.textMuted, fontSize: 13, textAlign: "right" } }, x.es)
-          ));
-        })()
-      ),
 
       /* ── HERO: tarjeta (no es link), ícono/título/descripción centrados,
          y debajo los 3 botones de nivel ── */
@@ -171,6 +148,30 @@ function App() {
         );
       })(),
 
+      /* ── BUSCADOR GENERAL ── */
+      React.createElement("div", { className: "srch" },
+        React.createElement("span", { className: "lupa", style: { color: c.textMuted } }, "⌕"),
+        React.createElement("input", {
+          value: q, onInput: (e) => setQ(e.target.value),
+          placeholder: "Buscar en ruso o en español…", "aria-label": "Buscar una palabra",
+          style: { background: c.card, border: `1px solid ${c.gold}66`, color: c.text }
+        }),
+        q && React.createElement("button", { className: "limpiar", onClick: () => setQ(""), "aria-label": "Limpiar búsqueda", style: { background: c.border, color: c.text } }, "✕")
+      ),
+      q.trim() && React.createElement("div", { className: "res", style: { background: c.card, border: `1px solid ${c.border}` } },
+        (() => {
+          const r = typeof azSearchLexicon === "function" ? azSearchLexicon(q.trim()) : [];
+          if (!r.length) return React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados");
+          return r.map((x, i) => React.createElement("a", {
+            key: x.id, href: x.href, onClick: (e) => azNavigate(e, x.href),
+            style: { borderTop: i ? `1px solid ${c.border}` : "none" }
+          },
+            React.createElement("span", { style: { color: c.text, fontWeight: 700, fontSize: 15 } }, x.ru),
+            React.createElement("span", { style: { color: c.textMuted, fontSize: 13, textAlign: "right" } }, x.es)
+          ));
+        })()
+      ),
+
       /* ── MÓDULOS DE APOYO (antes "Herramientas") — filas horizontales ── */
       React.createElement("div", { className: "section-lbl", style: { color: c.textMuted } }, "Módulos de apoyo"),
       React.createElement("div", { className: "mod-list" },
@@ -184,7 +185,8 @@ function App() {
             React.createElement("div", { className: "mod-text" },
               React.createElement("div", { className: "mod-title", style: { color: c.text } }, m.title),
               React.createElement("div", { className: "mod-desc", style: { color: c.textMuted } }, m.desc)
-            )
+            ),
+            React.createElement("span", { style: { color: c.gold, fontSize: 18, flexShrink: 0, marginLeft: "auto", paddingLeft: 8 } }, "›")
           )
         )
       )

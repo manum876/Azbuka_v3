@@ -35,12 +35,23 @@ const AZ_UNITS = [
    los lea de una única fuente. icon es el nombre de color fijo
    (no cambia con el tema, ver ESTETICA_AZBUKA.md §2). */
 const AZ_MODULES = [
-  { id: "alfabeto", title: "Alfabeto", desc: "Letras, sonidos y caligrafía — consulta libre", href: "alfabeto.html", icon: "orange", glyph: "Я" },
-  { id: "dialogos", title: "Diálogos", desc: "Conversaciones, frases útiles y notas culturales", href: "dialogos.html", icon: "yellow", glyph: "Ди" },
-  { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "green", glyph: "Вб" },
+  { id: "diccionario", title: "Diccionario", desc: "Todo el léxico, por tema y por categoría", href: "ficha.html", icon: "orange", glyph: "Сл" },
+  { id: "alfabeto", title: "Alfabeto", desc: "Letras, sonidos y caligrafía — consulta libre", href: "alfabeto.html", icon: "yellow", glyph: "Аа" },
+  { id: "dialogos", title: "Diálogos", desc: "Conversaciones, frases útiles y notas culturales", href: "dialogos.html", icon: "green", glyph: "Ди" },
+  { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "cyan", glyph: "Вб" },
   { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "blue", glyph: "Пд" },
   { id: "cuaderno", title: "Cuaderno", desc: "Tus notas y lo que guardás desde la app", href: "cuaderno.html", icon: "purple", glyph: "Тд" },
 ];
+
+/* Colores de los íconos, en el orden del arcoíris (01/10/2026): Azbuka
+   rojo, Diccionario naranja, Alfabeto amarillo, Diálogos verde, Verbos
+   celeste, Casos azul, Cuaderno violeta. Sobre el amarillo, el texto va
+   oscuro. Todas las páginas los toman de acá con azModuloColor. */
+const AZ_ICON_COLORS = { red: "#B5605C", orange: "#C48254", yellow: "#C9B369", green: "#5C9B78", cyan: "#5FA3B8", blue: "#5D7DA6", purple: "#8871A8" };
+function azModuloColor(m) {
+  const k = m && m.icon;
+  return { bg: AZ_ICON_COLORS[k] || "#C9A84C", fg: k === "yellow" ? "#1A1812" : "#fff" };
+}
 
 /* ── LÉXICO ──────────────────────────────────────────────────
    Base real: data-lexicon.js expone LEXICON_COMER — un ARRAY de

@@ -261,15 +261,22 @@ function AzShell(props) {
         }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, String(u.id).padStart(2, "0")), u.title)),
 
         React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "16px 10px 6px" } }, "Módulos de apoyo"),
-        (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).map(m => React.createElement("a", {
-          key: m.id, href: m.href,
-          onClick: (e) => azNavigate(e, m.href),
-          style: {
-            display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10,
-            color: m.id === moduleId ? c.gold : c.textSub, fontWeight: m.id === moduleId ? 600 : 400,
-            background: m.id === moduleId ? c.bg3 : "transparent", fontSize: 13.5, textDecoration: "none"
-          }
-        }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, m.glyph), m.title))
+        /* Módulos de apoyo como tarjetas (01/10/2026): ícono de color,
+           título, descripción y «›». El activo, con borde dorado. */
+        (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).map(m => {
+          const col = typeof azModuloColor === "function" ? azModuloColor(m) : { bg: c.gold, fg: "#fff" };
+          const act = m.id === moduleId;
+          return React.createElement("a", {
+            key: m.id, href: m.href,
+            onClick: (e) => azNavigate(e, m.href),
+            style: { display: "flex", alignItems: "center", gap: 10, margin: "0 2px 6px", padding: "9px 12px", borderRadius: 10, background: act ? c.bg3 : c.card, border: `1px solid ${act ? c.gold : c.border}`, textDecoration: "none" }
+          },
+            React.createElement("span", { style: { width: 26, height: 26, borderRadius: 7, background: col.bg, color: col.fg, fontSize: 11, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, m.glyph),
+            React.createElement("span", { style: { flex: 1, minWidth: 0 } },
+              React.createElement("span", { style: { display: "block", color: act ? c.gold : c.text, fontSize: 13.5, fontWeight: 600 } }, m.title),
+              React.createElement("span", { style: { display: "block", color: c.textMuted, fontSize: 11.5, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } }, m.desc)),
+            React.createElement("span", { style: { color: c.gold, fontSize: 15 } }, "›"));
+        })
       ),
 
       /* Pie fijo del drawer — nunca se tapa al scrollear el índice.
