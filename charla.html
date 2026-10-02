@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<title>Азбука — Charla</title>
+<link rel="stylesheet" href="core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="preact.js"></script>
+<script src="data-lexicon.js"></script>
+<script src="data-dialogos.js"></script>
+<script src="data-unidad-2.js"></script>
+<script src="data-charla.js"></script>
+<script src="core.js"></script>
+<script src="progress.js"></script>
+<script src="shell.js"></script>
+<script>
+/* ============================================================
+   CHARLA.HTML — Charla con Masha (MAQUETA, 01/10/2026)
+   Conversación escrita y ramificada con un personaje del elenco de
+   Diálogos. Todo local, sin IA: el guion vive en data-charla.js y
+   esta página solo lo recorre.
+   Cómo responde Masha a cada mensaje, en este orden:
+     1. si escribiste en letras latinas, te pide que escribas en ruso;
+     2. la primera rama del paso actual que coincide (claves o captura);
+     3. frases que sirven siempre (gracias, пока́, no entiendo…);
+     4. si es una pregunta: «¿y vos?» → aTi; si no, su historia
+        (CHARLA.preguntas), y después vuelve a su pregunta;
+     5. la rama comodín del paso, si la tiene;
+     6. si nada coincide: «no entendí» y vuelve a preguntar.
+   Recuerda tu nombre, país, ciudad y género (por уста́л / уста́ла,
+   студе́нт / студе́нтка o la nacionalidad).
+   Vistas: Charla y Guion (el recorrido completo, armado desde los datos).
+   ============================================================ */
+const { useState, useEffect, useRef } = htmPreact;
+const h = React.createElement;
+const C = window.CHARLA;
+const NODOS = {}; C.nodos.forEach(n => { NODOS[n.id] = n; });
+const PJ = (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[C.personaje]) || { ru: "Ма́ша", es: "Masha", genero: "f", desc: "" };
+const AMARILLO = "#C9B369";
+
+/* ── Texto: normalizar y reconocer ── */
+function norm(s) {
+  return azNormRu(String(s || "")).toLowerCase().replace(/[.,!?;:«»"()…—–¿¡]/g, " ").replace(/\s+-\s+/g, " ").replace(/\s+/g, " ").trim();
+}
+/* «по-испа́нски» cuenta también como «по» + «испански». */
+function toks(s) { return norm(s).split(" ").filter(Boolean).flatMap(t => t.includes("-") ? [t].concat(t.split("-").filter(Boolean)) : [t]); }
+function lev(a, b) {
+  const d = []; for (let i = 0; i <= a.length; i++) { d[i] = [i]; }
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
+    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[a.length][b.length];
+}
+/* «=x»: palabra exacta. Si no, comienzo de palabra; en raíces de 5+ letras
+   se tolera una letra mal, siempre que las dos últimas coincidan (así
+   «работаю» no confunde «работаешь»). */
+function raizOk(T, r) {
+  if (r[0] === "=") return T.includes(r.slice(1));
+  return T.some(t => t.startsWith(r) ||
+    (r.length >= 5 && t.length >= r.length && t.slice(r.length - 2, r.length) === r.slice(-2) && lev(t.slice(0, r.length), r) <= 1));
+}
+function patronOk(T, p) { return p.split(" ").every(r => raizOk(T, r)); }
+function clavesOk(T, cl) { return (cl || []).some(p => patronOk(T, p)); }
+
+const PREG = new Set(["как", "где", "что", "кто", "сколько", "откуда", "почему", "зачем", "когда", "какой", "какая", "какое", "какие", "кем", "куда", "чем", "расскажи", "ты", "у", "твой", "твоя", "твои", "тебе", "тебя"]);
+function esPregunta(raw, T) { return /\?/.test(raw) || PREG.has(T[0]) || (T[0] === "а" && PREG.has(T[1])); }
+function tieneATi(T) { return /(^| )а (у )?(тебя|ты|вас|вы)( |$)/.test(T.join(" ")); }
+function soloATi(T) { const r = T.filter(t => !["а", "у", "и", "как"].includes(t)); return r.length > 0 && r.every(t => ["ты", "тебя", "вы", "вас"].includes(t)); }
+
+const NAC = typeof U2_NACIONES !== "undefined" ? U2_NACIONES : [];
+const NAC_SET = new Set(NAC.flatMap(r => [norm(r[1]), norm(r[2])]));
+const STOP = new Set(["привет", "пока", "да", "нет", "не", "ну", "а", "и", "я", "ты", "вы", "мы", "он", "она", "меня", "тебя", "зовут", "спасибо", "хорошо",
+  "из", "в", "во", "на", "это", "так", "как", "что", "кто", "где", "очень", "приятно", "тоже", "мне", "здравствуйте", "здравствуй", "ок", "работаю", "учусь",
+  "живу", "говорю", "студент", "студентка", "люблю", "сейчас", "здесь", "тут", "конечно", "понимаю", "знаю", "извини", "извините", "добрый", "доброе", "день", "утро"]);
+
+function partes(raw) {
+  const R = String(raw).replace(/[.,!?;:«»"()…¿¡]/g, " ").split(/\s+/).filter(Boolean);
+  return { R, lo: R.map(norm) };
+}
+function mayus(s) { return s ? s[0].toUpperCase() + s.slice(1) : s; }
+function capNombre(raw) {
+  const { R, lo } = partes(raw);
+  if (lo.some(w => ["как", "кто", "где", "что", "откуда", "сколько"].includes(w))) return null;
+  let i, c = null;
+  if ((i = lo.indexOf("зовут")) >= 0) c = R[i + 1];
+  else if ((i = lo.indexOf("имя")) >= 0) c = R.slice(i + 1).find(w => !/^[-—–]$/.test(w));
+  else if ((i = lo.indexOf("я")) >= 0) c = R[i + 1];
+  else if (R.length === 1) c = R[0];
+  else if (R.length === 2 && ["привет", "ну", "ок", "это"].includes(lo[0])) c = R[1];
+  if (!c) return null;
+  const n = norm(c);
+  if (STOP.has(n) || NAC_SET.has(n) || /\d/.test(c) || c.length > 20) return null;
+  return mayus(c);
+}
+function capPais(T) {
+  for (const r of NAC) {
+    if (T.includes(norm(r[1]))) return { pais: r[0], genero: "m" };
+    if (T.includes(norm(r[2]))) return { pais: r[0], genero: "f" };
+  }
+  for (const r of NAC) {
+    const cn = norm(r[0]);
+    const raiz = /ия$/.test(cn) ? cn.slice(0, -1) : /[аяьй]$/.test(cn) ? cn.slice(0, -1) : cn;
+    if (raiz.length >= 3 && T.some(t => t.startsWith(raiz))) return { pais: r[0] };
+    if (cn === "сша" && T.some(t => t.startsWith("америк"))) return { pais: r[0] };
+  }
+  return null;
+}
+function capEco(raw, tras) {
+  const { R, lo } = partes(raw);
+  for (let i = 0; i < R.length - 1; i++) {
+    if (!tras.includes(lo[i]) || tras.includes(lo[i + 1]) || STOP.has(lo[i + 1])) continue;
+    let c = R[i + 1];
+    if (R[i + 2] && /^[А-ЯЁA-Z]/.test(R[i + 2])) c += " " + R[i + 2];
+    return mayus(c);
+  }
+  return null;
+}
+
+/* Transliteración aproximada para lo que escribís vos (nombres, lugares).
+   Las líneas de Masha traen la suya, generada con la convención. */
+function trCrudo(s) {
+  const M = { б: "b", в: "v", г: "g", д: "d", ж: "zh", з: "z", й: "i", к: "k", л: "l", м: "m", н: "n", п: "p", р: "r", с: "s", т: "t", ф: "f", х: "j", ц: "ts", ч: "ch", ш: "sh", щ: "sch", ъ: "", ь: "",
+    а: "a", о: "o", у: "u", ы: "y", э: "e", и: "i" };
+  const IOT = { е: "e", ё: "o", ю: "u", я: "a" };
+  const TIL = { a: "á", e: "é", i: "í", o: "ó", u: "ú", y: "ý" };
+  let out = "", prevVoc = true;
+  for (const ch of String(s)) {
+    const lc = ch.toLowerCase();
+    if (ch === "́") { out = out.replace(/[aeiouy](?=[^aeiouy]*$)/, v => TIL[v]); continue; }
+    let t;
+    if (lc in IOT) t = (prevVoc ? "y" : "i") + IOT[lc];
+    else if (lc in M) t = M[lc];
+    else { out += ch; prevVoc = true; continue; }
+    prevVoc = "аоуыэиеёюя".includes(lc);
+    out += ch !== lc && t ? t[0].toUpperCase() + t.slice(1) : t;
+  }
+  return out;
+}
+function llenar(L, S) {
+  const rep = (s, enTr) => String(s || "")
+    .replace(/,?\s?\{nombre\}/g, m => S.nombre ? m.replace("{nombre}", enTr ? trCrudo(S.nombre) : S.nombre) : "")
+    .replace(/\{pais\}/g, S.pais ? (enTr ? trCrudo(S.pais) : S.pais) : "")
+    .replace(/\{x\}/g, S.x ? (enTr ? trCrudo(S.x) : S.x) : "");
+  return { ru: rep(L.ru), tr: rep(L.tr, true), es: rep(L.es) };
+}
+
+/* ── Motor: recibe el estado y tu mensaje, devuelve lo que dice Masha ── */
+function estadoNuevo() { return { nodo: null, S: {}, preg: [], datos: {}, fallos: {}, nPreg: 0, fin: false, ultima: null }; }
+function preguntaDe(T) {
+  for (const p of C.preguntas) {
+    if (!clavesOk(T, p.claves)) continue;
+    const v = (p.variantes || []).find(v => clavesOk(T, v.claves));
+    return { p, resp: v ? v.resp : p.resp };
+  }
+  return null;
+}
+function entrar(st, id, decir) {
+  if (!id || id === "FIN") { st.fin = true; st.nodo = "FIN"; return; }
+  const n = NODOS[id];
+  if (n.saltarSi && st.S[n.saltarSi]) { if (!st.S.presentada) (n.alSaltar || []).forEach(decir); return entrar(st, n.sig, decir); }
+  st.nodo = id;
+  let lineas = n.bot;
+  if (n.botSi) for (const k in n.botSi) if (st.preg.includes(k)) { lineas = n.botSi[k]; break; }
+  lineas.forEach(decir);
+  st.ultima = lineas[lineas.length - 1];
+}
+function procesar(st0, raw, delegado) {
+  const st = JSON.parse(JSON.stringify(st0));
+  const out = [], notas = [];
+  const decir = (L, extra) => out.push(Object.assign(llenar(L, st.S), extra || {}));
+  const n = NODOS[st.nodo];
+  const T = toks(raw);
+  const retomar = () => { if (n.abierto) return; decir(n.retomar || st.ultima); };
+  const lat = (raw.match(/[a-zñáéíóú]/gi) || []).length, cyr = (raw.match(/[а-яё]/gi) || []).length;
+  if (lat > cyr) {
+    decir(/^\s*[¡!]?\s*h?ola\b/i.test(raw) ? C.comodines.hola : C.comodines.latin);
+    notas.push("Escribí con el teclado ruso del teléfono.");
+    return { st, out, notas };
+  }
+  if (!T.length) return { st, out, notas };
+  /* Si en cualquier momento decís «меня зовут…», Masha se acuerda. */
+  if (!st.S.nombre && st.nodo !== "nombre" && T.includes("зовут") && !esPregunta(raw, T)) {
+    const nm = capNombre(raw);
+    if (nm) { st.S.nombre = nm; st.datos["Nombre"] = nm; st.S.presentada = true; (NODOS.nombre && NODOS.nombre.alSaltar || []).forEach(L => decir(L)); }
+  }
+  /* «А ты?» no repite lo que Masha ya contó. */
+  const aTiOk = () => n.aTi && !(n.aTiTema && st.preg.includes(n.aTiTema));
+  const decirATi = () => { if (!aTiOk()) return false; decir(n.aTi); if (n.aTiTema) st.preg.push(n.aTiTema); return true; };
+  const pregunta = esPregunta(raw, T);
+
+  /* 2. Ramas del paso */
+  for (const r of n.ramas || []) {
+    if (r.comodin) continue;
+    let resp = r.resp, ir = r.ir, valor = r.datoValor;
+    if (r.captura === "nombre") {
+      const nm = capNombre(raw); if (!nm) continue;
+      st.S.nombre = nm; valor = nm;
+      const k = Object.keys(r.porNombre).find(k => k !== "*" && k.split("|").includes(norm(nm)));
+      resp = r.porNombre[k || "*"];
+    } else if (r.captura === "pais") {
+      const p = capPais(T); if (!p) continue;
+      st.S.pais = p.pais; if (p.genero) st.S.genero = p.genero; valor = p.pais;
+      const o = r.porPais[p.pais] || r.porPais["*"]; resp = o.resp; ir = o.ir;
+    } else if (r.captura === "eco") {
+      const x = capEco(raw, r.tras); if (!x) continue;
+      st.S.x = x; valor = x;
+    } else if (!clavesOk(T, r.claves)) continue;
+    if (r.fijaPais) st.S.pais = r.fijaPais;
+    if (r.genero) T.forEach(t => { if (r.genero[t]) st.S.genero = r.genero[t]; });
+    if (r.dato) st.datos[r.dato] = valor || "";
+    if (r.delega && !delegado) {
+      st.nodo = r.delega;
+      const sub = procesar(st, raw, true);
+      return { st: sub.st, out: out.concat(sub.out), notas: notas.concat(sub.notas) };
+    }
+    resp.forEach(L => decir(L));
+    if (tieneATi(T) && n.aTi) decirATi();
+    else if (pregunta) { const g = preguntaDe(T); if (g && !st.preg.includes(g.p.id)) { st.preg.push(g.p.id); g.resp.forEach(L => decir(L)); } }
+    if (ir === null) return { st, out, notas };
+    entrar(st, ir, decir);
+    return { st, out, notas };
+  }
+  /* 3. Frases que sirven siempre */
+  for (const u of C.utiles) {
+    if (!clavesOk(T, u.claves)) continue;
+    u.resp.forEach(L => decir(L));
+    if (u.accion === "fin") { st.fin = true; st.nodo = "FIN"; }
+    else if (u.accion === "repetir") decir(st.ultima, { lento: true, verEs: true });
+    else retomar();
+    return { st, out, notas };
+  }
+  /* 4. Preguntas: «¿y vos?» o la historia de Masha */
+  if (pregunta || tieneATi(T) || n.abierto) {
+    if (soloATi(T) && n.aTi) { if (!decirATi()) decir(C.comodines.yaDije); retomar(); return { st, out, notas }; }
+    const g = preguntaDe(T);
+    if (g) {
+      if (!st.preg.includes(g.p.id)) st.preg.push(g.p.id);
+      g.resp.forEach(L => decir(L));
+      if (n.abierto) { st.nPreg++; if (st.nPreg % 3 === 0) decir(C.comodines.masPreguntas); }
+      else if (n.trasPregunta) entrar(st, n.trasPregunta, decir);
+      else retomar();
+      return { st, out, notas };
+    }
+    if (n.aTi && tieneATi(T)) { decirATi(); retomar(); return { st, out, notas }; }
+    if (pregunta || tieneATi(T)) { decir(C.comodines.noSe); retomar(); return { st, out, notas }; }
+  }
+  /* 5. Comodín del paso */
+  const com = (n.ramas || []).find(r => r.comodin);
+  if (com) { com.resp.forEach(L => decir(L)); entrar(st, com.ir, decir); return { st, out, notas }; }
+  /* 6. No entendió */
+  st.fallos[st.nodo] = (st.fallos[st.nodo] || 0) + 1;
+  decir(C.comodines.noEntendi); retomar();
+  if (st.fallos[st.nodo] >= 2) notas.push("Masha no te entendió. Probá con una de las ideas de abajo.");
+  return { st, out, notas };
+}
+window.charlaProcesar = procesar; /* para pruebas */
+
+/* ── Voz ── */
+function sinEmoji(s) { return String(s || "").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}♀♂]/gu, "").trim(); }
+function hablar(lineas) {
+  const items = lineas.map(l => ({ texto: sinEmoji(l.ru), lento: l.lento })).filter(i => /[а-яё]/i.test(i.texto));
+  if (!items.length) return;
+  if (!items.some(i => i.lento)) { azHablarSecuencia(items.map(i => ({ texto: i.texto, genero: PJ.genero }))); return; }
+  /* Repetición lenta: misma cadena que azHablarSecuencia, a 0,6. */
+  try {
+    window.speechSynthesis.cancel();
+    let k = 0;
+    const sig = () => {
+      if (k >= items.length) return;
+      const it = items[k++]; const u = azFraseVoz(it.texto, PJ.genero);
+      if (it.lento) u.rate = 0.6;
+      u.onend = () => setTimeout(sig, 250); u.onerror = () => setTimeout(sig, 250);
+      window.speechSynthesis.speak(u);
+    };
+    setTimeout(sig, 60);
+  } catch (e) {}
+}
+
+/* ── Estilos ── */
+function estilos(c) {
+  return `
+  .ch-hero{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:16px;display:flex;gap:14px;align-items:center;}
+  .ch-av{width:46px;height:46px;border-radius:12px;background:${AMARILLO};color:#1A1812;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;flex-shrink:0;}
+  .ch-kick{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};}
+  .ch-nom{font-size:24px;font-weight:800;color:${c.gold};line-height:1.15;}
+  .ch-sub{font-size:13px;color:${c.textMuted};line-height:1.4;margin-top:2px;}
+  .ch-chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px;}
+  .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
+  .ch-txt{font-size:15px;line-height:1.6;color:${c.textSub};margin:14px 0;}
+  .ch-dest{background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:10px;padding:10px 12px;font-size:14.5px;font-weight:600;color:${c.text};line-height:1.45;margin:12px 0;}
+  .ch-btn{width:100%;border:none;border-radius:10px;padding:13px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:.18s;}
+  .ch-btn:active{transform:scale(.97);}
+  .ch-btn.pri{background:${c.gold};color:${c.bg};}
+  .ch-btn.sec{background:${c.bg3};color:${c.text};border:1px solid ${c.border};}
+  .ch-chat{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+  .ch-msg{max-width:86%;padding:9px 12px;border-radius:14px;font-size:16px;line-height:1.4;animation:fadeIn .25s ease both;}
+  .ch-msg.m{align-self:flex-start;background:${c.bg2};border:1px solid ${c.border};border-bottom-left-radius:4px;display:flex;gap:10px;align-items:flex-start;cursor:pointer;}
+  .ch-msg.y{align-self:flex-end;background:${c.gold}22;border:1px solid ${c.gold}66;border-bottom-right-radius:4px;color:${c.text};}
+  .ch-quien{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.gold};margin-bottom:2px;}
+  .ch-ru{color:${c.text};}
+  .ch-tr{font-size:13px;font-style:italic;color:${c.textSub};margin-top:3px;}
+  .ch-es{font-size:12.5px;color:${c.textMuted};margin-top:3px;}
+  .ch-play{width:30px;height:30px;border-radius:9px;background:${c.bg3};border:1px solid ${c.border};color:${c.gold};font-size:12px;flex-shrink:0;cursor:pointer;font-family:inherit;}
+  .ch-nota{align-self:center;font-size:12.5px;color:${c.textMuted};font-style:italic;text-align:center;padding:2px 8px;max-width:90%;}
+  .ch-esc{align-self:flex-start;background:${c.bg2};border:1px solid ${c.border};border-radius:14px;border-bottom-left-radius:4px;padding:12px 14px;display:flex;gap:4px;}
+  .ch-esc span{width:7px;height:7px;border-radius:50%;background:${c.textMuted};animation:chPunto 1s infinite ease-in-out;}
+  .ch-esc span:nth-child(2){animation-delay:.15s;} .ch-esc span:nth-child(3){animation-delay:.3s;}
+  @keyframes chPunto{0%,80%,100%{opacity:.25;transform:translateY(0);}40%{opacity:1;transform:translateY(-3px);}}
+  .ch-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:18px 0 8px;}
+  .ch-ideas{display:flex;flex-wrap:wrap;gap:6px;}
+  .ch-idea{background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:7px 11px;text-align:left;cursor:pointer;font-family:inherit;color:${c.text};transition:.18s;}
+  .ch-idea:active{transform:scale(.97);}
+  .ch-idea b{display:block;font-size:14.5px;font-weight:600;}
+  .ch-idea i{display:block;font-size:11px;font-style:normal;color:${c.textMuted};margin-top:1px;}
+  .ch-in{display:flex;gap:8px;margin-top:12px;}
+  .ch-input{flex:1;min-width:0;height:46px;background:${c.bg3};border:1px solid ${c.border};border-radius:10px;padding:0 12px;font-size:16px;color:${c.text};}
+  .ch-env{height:46px;padding:0 16px;border:none;border-radius:10px;background:${c.gold};color:${c.bg};font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;}
+  .ch-env:disabled{opacity:.4;cursor:default;}
+  .ch-tip{font-size:11.5px;color:${c.textMuted};line-height:1.45;margin-top:8px;}
+  .ch-reset{display:block;margin:18px auto 0;background:none;border:none;color:${c.textMuted};font-size:12.5px;font-family:inherit;cursor:pointer;text-decoration:underline;}
+  .ch-card{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:16px;margin-top:16px;}
+  .ch-row{padding:9px 0;border-top:1px solid ${c.border};font-size:14px;line-height:1.45;color:${c.textSub};}
+  .ch-row:first-of-type{border-top:none;}
+  .ch-row b{color:${c.text};font-weight:700;}
+  .g-title{font-size:24px;font-weight:800;color:${c.text};}
+  .g-nodo{background:${c.card};border:1px solid ${c.border};border-radius:14px;padding:14px;margin-bottom:12px;}
+  .g-n{font-size:16px;font-weight:800;color:${c.text};}
+  .g-n small{font-size:11px;font-weight:600;color:${c.textMuted};margin-left:6px;}
+  .g-ru{font-size:15px;font-weight:700;color:${c.text};line-height:1.4;}
+  .g-es{font-size:12.5px;color:${c.textMuted};line-height:1.4;}
+  .g-bot{background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:9px 11px;margin-top:8px;}
+  .g-rama{border-left:2px solid ${c.gold}66;padding:6px 0 6px 10px;margin-top:8px;}
+  .g-et{font-size:13px;font-weight:700;color:${c.gold};}
+  .g-ir{font-size:12px;color:${c.textSub};margin-top:3px;}
+  .g-sub{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.textMuted};margin-top:12px;}
+  .g-li{display:flex;gap:10px;font-size:14px;line-height:1.5;color:${c.textSub};margin-bottom:8px;}
+  .g-li:before{content:"";width:6px;height:6px;border-radius:50%;background:${c.gold};flex-shrink:0;margin-top:8px;}
+  `;
+}
+
+/* ── Piezas de pantalla ── */
+function BurbujaMasha({ m, tr, es }) {
+  const [ver, setVer] = useState(false);
+  const soloEmoji = !/[а-яё]/i.test(m.ru);
+  return h("div", { className: "ch-msg m", onClick: () => setVer(v => !v) },
+    h("div", { style: { flex: 1, minWidth: 0 } },
+      h("div", { className: "ch-quien", lang: "ru" }, PJ.ru),
+      h("div", { className: "ch-ru", lang: "ru" }, m.ru),
+      tr && m.tr && h("div", { className: "ch-tr" }, m.tr),
+      (es || ver || m.verEs) && m.es && h("div", { className: "ch-es" }, m.es)),
+    !soloEmoji && h("button", { className: "ch-play", "aria-label": "Escuchar", onClick: e => { e.stopPropagation(); hablar([m]); } }, "▶"));
+}
+
+function Guion({ c }) {
+  const orden = {}; C.nodos.forEach((n, i) => { orden[n.id] = i + 1; });
+  const destino = id => id === "FIN" ? "Fin de la charla" : id == null ? "Se queda en este paso" : orden[id] + " · " + NODOS[id].titulo;
+  const linea = (L, k) => h("div", { key: k, style: { marginTop: 4 } }, h("div", { className: "g-ru", lang: "ru" }, L.ru), L.es && h("div", { className: "g-es" }, L.es));
+  return h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+    h("div", { className: "g-title" }, "Guion"),
+    h("div", { className: "ch-txt", style: { marginTop: 6 } }, "El recorrido completo de la charla con Masha: lo que pregunta, cómo reacciona según lo que contestes y todo lo que sabe contar de su vida."),
+    h("div", { className: "ch-lbl" }, "Cómo entiende Masha"),
+    ["No busca frases exactas: reconoce raíces de palabras clave (хорош…, плох…, из…) y tolera una letra mal.",
+     "Cada paso tiene varias ramas: la primera que coincide decide su reacción y a qué paso sigue la charla.",
+     "Si le preguntás algo, contesta con su historia y después vuelve a su pregunta. Si le devolvés la pregunta («А ты?»), te dice lo suyo.",
+     "Se acuerda de tu nombre, de dónde sos, dónde vivís y si sos hombre o mujer (por уста́л / уста́ла, студе́нт / студе́нтка o la nacionalidad).",
+     "Si no entiende, te lo dice y vuelve a preguntar; a la segunda, te sugiere usar las ideas."].map((t, i) => h("div", { key: i, className: "g-li" }, t)),
+    h("div", { className: "ch-lbl" }, "Recorrido"),
+    C.nodos.map(n => h("div", { key: n.id, className: "g-nodo" },
+      h("div", { className: "g-n" }, orden[n.id] + " · " + n.titulo, n.soloSi && h("small", null, "(" + n.soloSi + ")"), n.abierto && h("small", null, "(abierto: preguntás vos)")),
+      h("div", { className: "g-bot" }, h("div", { className: "ch-quien", lang: "ru" }, PJ.ru), n.bot.map(linea),
+        n.botSi && Object.keys(n.botSi).map(k => h("div", { key: k, className: "g-es", style: { marginTop: 6 } }, "Si ya le preguntaste eso: ", h("span", { lang: "ru", style: { color: c.text } }, n.botSi[k][0].ru)))),
+      n.saltarSi && h("div", { className: "g-ir", style: { marginTop: 6 } }, "Si ya le dijiste tu nombre, lo saltea: ", h("span", { lang: "ru" }, n.alSaltar[0].ru)),
+      h("div", { className: "g-sub" }, "Ideas que se sugieren"),
+      h("div", { className: "g-es", lang: "ru", style: { color: c.textSub, marginTop: 4 } }, n.ideas.map(i => i.ru).join(" · ")),
+      (n.ramas || []).length > 0 && h("div", { className: "g-sub" }, "Si respondés…"),
+      (n.ramas || []).map((r, k) => {
+        if (r.porPais) return h("div", { key: k, className: "g-rama" }, h("div", { className: "g-et" }, r.etiqueta),
+          Object.keys(r.porPais).map(p => h("div", { key: p, style: { marginTop: 6 } },
+            h("div", { className: "g-es" }, p === "*" ? "Otro país" : p), r.porPais[p].resp.map(linea), h("div", { className: "g-ir" }, "→ " + destino(r.porPais[p].ir)))));
+        if (r.porNombre) return h("div", { key: k, className: "g-rama" }, h("div", { className: "g-et" }, r.etiqueta),
+          Object.keys(r.porNombre).map(p => h("div", { key: p, style: { marginTop: 6 } },
+            h("div", { className: "g-es" }, p === "*" ? "Cualquier nombre" : "Si te llamás " + p.split("|").join(", ")), r.porNombre[p].map(linea))),
+          h("div", { className: "g-ir" }, "→ " + destino(r.ir)));
+        return h("div", { key: k, className: "g-rama" }, h("div", { className: "g-et" }, r.etiqueta), r.resp.map(linea), h("div", { className: "g-ir" }, "→ " + destino(r.ir)));
+      }),
+      n.aTi && h(React.Fragment, null, h("div", { className: "g-sub" }, "Si le devolvés la pregunta («А ты?»)"), linea(n.aTi, "a")),
+      n.retomar && h(React.Fragment, null, h("div", { className: "g-sub" }, "Para volver al tema"), linea(n.retomar, "r")))),
+    h("div", { className: "ch-lbl" }, "Lo que Masha sabe de su vida"),
+    h("div", { className: "ch-txt", style: { marginTop: 0 } }, "Se lo podés preguntar en cualquier momento de la charla."),
+    C.preguntas.map(p => h("div", { key: p.id, className: "g-nodo" },
+      h("div", { className: "ch-kick" }, p.tema),
+      h("div", { className: "g-es", style: { marginTop: 4 } }, "Por ejemplo: ", h("span", { lang: "ru", style: { color: c.textSub } }, p.idea.ru)),
+      h("div", { className: "g-bot" }, p.resp.map(linea)),
+      (p.variantes || []).map((v, k) => h("div", { key: k, className: "g-rama" }, h("div", { className: "g-et" }, "Si la pregunta menciona: " + v.claves.map(x => x.replace("=", "")).join(", ")), v.resp.map(linea))))),
+    h("div", { className: "ch-lbl" }, "Frases que entiende siempre"),
+    C.utiles.map(u => h("div", { key: u.id, className: "g-rama" }, h("div", { className: "g-et" }, u.etiqueta), u.resp.map(linea),
+      h("div", { className: "g-ir" }, u.accion === "fin" ? "→ Fin de la charla" : u.accion === "repetir" ? "→ Repite su última pregunta, despacio y con la traducción" : "→ Vuelve a su pregunta"))),
+    h("div", { className: "ch-lbl" }, "Si no entiende"),
+    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "No reconoce la respuesta"), linea(C.comodines.noEntendi, 1)),
+    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "Le preguntás algo que no sabe"), linea(C.comodines.noSe, 2)),
+    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "Escribís en letras latinas"), linea(C.comodines.latin, 3)),
+    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "Escribís «hola»"), linea(C.comodines.hola, 4)));
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [view, setView] = useState("charla");
+  const [st, setSt] = useState(estadoNuevo());
+  const [msgs, setMsgs] = useState([]);
+  const [escribiendo, setEscribiendo] = useState(false);
+  const [txt, setTxt] = useState("");
+  const [verTr, setVerTr] = useState(false);
+  const [verEs, setVerEs] = useState(false);
+  const [voz, setVoz] = useState(true);
+  const [ideas, setIdeas] = useState(true);
+  const inRef = useRef(null);
+  const timers = useRef([]);
+  useEffect(() => { (async () => setDarkMode((await azGet('az_theme', 'dark')) !== 'light'))(); }, []);
+  useEffect(() => { if (msgs.length) setTimeout(() => window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" }), 30); }, [msgs.length, escribiendo]);
+  const c = azColors(darkMode);
+  const chipSt = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
+
+  const mostrar = (lineas, notas) => {
+    if (!lineas.length && !notas.length) return;
+    setEscribiendo(true);
+    if (voz) hablar(lineas);
+    lineas.forEach((l, i) => timers.current.push(setTimeout(() => {
+      setMsgs(ms => ms.concat([Object.assign({ id: azId(), de: "m" }, l)]));
+      if (i === lineas.length - 1) setEscribiendo(false);
+    }, 650 + i * 750)));
+    const fin = 650 + Math.max(0, lineas.length - 1) * 750 + 100;
+    timers.current.push(setTimeout(() => { if (!lineas.length) setEscribiendo(false); if (notas.length) setMsgs(ms => ms.concat(notas.map(t => ({ id: azId(), de: "n", ru: t })))); }, fin));
+  };
+  const empezar = () => {
+    timers.current.forEach(clearTimeout); timers.current = [];
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    const s = estadoNuevo(); const out = [];
+    entrar(s, C.inicio, L => out.push(llenar(L, s.S)));
+    setSt(s); setMsgs([]); setTxt(""); setView("charla");
+    mostrar(out, []);
+  };
+  const enviar = () => {
+    const t = txt.trim();
+    if (!t || escribiendo || st.fin || !st.nodo) return;
+    setMsgs(ms => ms.concat([{ id: azId(), de: "y", ru: t }]));
+    setTxt("");
+    const r = procesar(st, t);
+    setSt(r.st);
+    mostrar(r.out, r.notas);
+  };
+  const usarIdea = ru => { setTxt(ru.replace(/\s*…\s*$/, "").trim() + (/…$/.test(ru) ? " " : "")); setTimeout(() => inRef.current && inRef.current.focus(), 30); };
+
+  const nodo = st.nodo && st.nodo !== "FIN" ? NODOS[st.nodo] : null;
+  const listaIdeas = !nodo ? [] : nodo.abierto
+    ? C.preguntas.filter(p => !st.preg.includes(p.id)).slice(0, 4).map(p => p.idea).concat(nodo.ideas)
+    : nodo.ideas;
+  const empezo = st.nodo !== null;
+  const terminado = st.fin && !escribiendo;
+  const datos = Object.keys(st.datos).filter(k => st.datos[k]);
+  const sabidas = C.preguntas.filter(p => st.preg.includes(p.id));
+  const faltan = C.preguntas.filter(p => !st.preg.includes(p.id)).slice(0, 6);
+
+  const charla = h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+    h("div", { className: "ch-hero" },
+      h("div", { className: "ch-av", lang: "ru" }, "Ма"),
+      h("div", { style: { minWidth: 0 } },
+        h("div", { className: "ch-kick" }, "Maqueta · Charla"),
+        h("div", { className: "ch-nom", lang: "ru" }, PJ.ru),
+        h("div", { className: "ch-sub" }, PJ.desc || C.presentacion))),
+    h("div", { className: "ch-chips" },
+      h("button", { className: "pair-btn", style: chipSt(verEs), onClick: () => setVerEs(v => !v) }, "Traducción"),
+      h("button", { className: "pair-btn", style: chipSt(verTr), onClick: () => setVerTr(v => !v) }, "Transliteración"),
+      h("button", { className: "pair-btn", style: chipSt(voz), onClick: () => { setVoz(v => !v); azCallar(); } }, "Voz"),
+      h("button", { className: "pair-btn", style: chipSt(ideas), onClick: () => setIdeas(v => !v) }, "Ideas")),
+    !empezo && h(React.Fragment, null,
+      h("div", { className: "ch-txt" }, C.presentacion),
+      h("div", { className: "ch-txt", style: { marginTop: -6 } }, "Tocá un mensaje de Masha para ver la traducción, o ▶ para escucharlo de nuevo. Si no entendés, escribile «Не понима́ю»."),
+      h("div", { className: "ch-dest" }, "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas."),
+      h("button", { className: "ch-btn pri", onClick: empezar }, "Empezar la charla")),
+    empezo && h("div", { className: "ch-chat" },
+      msgs.map(m => m.de === "m" ? h(BurbujaMasha, { key: m.id, m, tr: verTr, es: verEs })
+        : m.de === "y" ? h("div", { key: m.id, className: "ch-msg y", lang: "ru" }, m.ru)
+        : h("div", { key: m.id, className: "ch-nota" }, m.ru)),
+      escribiendo && h("div", { className: "ch-esc", "aria-label": "Masha está escribiendo" }, h("span"), h("span"), h("span"))),
+    empezo && !st.fin && h(React.Fragment, null,
+      ideas && listaIdeas.length > 0 && h(React.Fragment, null,
+        h("div", { className: "ch-lbl" }, nodo && nodo.abierto ? "Ideas para preguntarle" : "Ideas para responder"),
+        h("div", { className: "ch-ideas" }, listaIdeas.map((i, k) => h("button", { key: k, className: "ch-idea", onClick: () => usarIdea(i.ru) },
+          h("b", { lang: "ru" }, i.ru), h("i", null, i.es))))),
+      h("div", { className: "ch-in" },
+        h("input", { ref: inRef, className: "ch-input", value: txt, lang: "ru", autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
+          placeholder: "Escribí en ruso…", onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
+        h("button", { className: "ch-env", onClick: enviar, disabled: !txt.trim() || escribiendo }, "Enviar")),
+      h("div", { className: "ch-tip" }, "Usá el teclado ruso del teléfono. También podés dictar: tocá el 🎤 del teclado ruso y hablá."),
+      h("button", { className: "ch-reset", onClick: empezar }, "↺ Empezar de nuevo")),
+    terminado && h("div", { className: "ch-card" },
+      h("div", { className: "ch-kick" }, "Fin de la charla"),
+      datos.length > 0 && h(React.Fragment, null,
+        h("div", { className: "ch-lbl", style: { marginTop: 12 } }, "Lo que Masha sabe de vos"),
+        datos.map(k => h("div", { key: k, className: "ch-row" }, h("b", null, k + ": "), h("span", { lang: "ru" }, st.datos[k])))),
+      h("div", { className: "ch-lbl" }, "Lo que sabés de Masha"),
+      sabidas.length ? sabidas.map(p => h("div", { key: p.id, className: "ch-row" }, h("b", null, p.tema + ": "), p.resp[0].es))
+        : h("div", { className: "ch-row" }, "Todavía no le preguntaste nada sobre su vida."),
+      faltan.length > 0 && h(React.Fragment, null,
+        h("div", { className: "ch-lbl" }, "La próxima, preguntale"),
+        h("div", { className: "ch-row", lang: "ru" }, faltan.map(p => p.idea.ru).join(" · "))),
+      h("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginTop: 16 } },
+        h("button", { className: "ch-btn pri", onClick: empezar }, "Charlar de nuevo"),
+        h("button", { className: "ch-btn sec", onClick: () => { setView("guion"); window.scrollTo(0, 0); } }, "Ver el guion"))));
+
+  return h(AzShell, {
+      darkMode, setDarkMode, moduleId: "dialogos", view, setView: v => { setView(v); window.scrollTo(0, 0); },
+      tabs: [{ id: "charla", icon: "💬", label: "Charla" }, { id: "guion", icon: "📜", label: "Guion" }]
+    },
+    h("style", null, estilos(c)),
+    view === "guion" ? h(Guion, { c }) : charla);
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>
