@@ -17,7 +17,7 @@ const AZ_UNITS = [
   { id: 2, title: "Presentaciones y conversaciones básicas", desc: "Saludar, presentarte, nacionalidades y primeras preguntas.", href: "azbuka-2.html", lista: true },
   { id: 3, title: "Sustantivos, género y números", desc: "Género, plural, números y objetos de todos los días.", href: "azbuka-3.html", lista: true },
   { id: 4, title: "Casos I: Nominativo y Acusativo", desc: "Quién hace qué: el sujeto y el objeto directo.", href: "azbuka-4.html", lista: true },
-  { id: 5, title: "Verbos en presente y acciones cotidianas", desc: "Las conjugaciones del presente y la rutina.", href: "azbuka-5.html" },
+  { id: 5, title: "Verbos en presente y acciones cotidianas", desc: "Las conjugaciones del presente y la rutina.", href: "azbuka-5.html", lista: true },
   { id: 6, title: "Ubicación, movimiento y caso prepositivo", desc: "Dónde estás y adónde vas.", href: "azbuka-6.html" },
   { id: 7, title: "Tiempo, fechas y rutina diaria", desc: "Horas, días, meses y tu día a día.", href: "azbuka-7.html" },
   { id: 8, title: "Pasado y experiencias personales", desc: "El pasado y el aspecto verbal.", href: "azbuka-8.html" },
@@ -300,7 +300,7 @@ function azFmt(texto) {
   };
   partes.forEach((p, i) => {
     if (!p) return;
-    if (/^\*\*[^*]+\*\*$/.test(p)) { out.push(h ? h("b", { key: "b" + i }, p.slice(2, -2)) : p.slice(2, -2)); return; }
+    if (/^\*\*[^*]+\*\*$/.test(p)) { const x = p.slice(2, -2).replace(/\{([А-Яа-яЁё\u0301]{1,3})\}/g, "$1"); out.push(h ? h("b", { key: "b" + i }, x) : x); return; }
     if (/^\{[А-Яа-яЁё\u0301]{1,3}\}$/.test(p)) { out.push(p.slice(1, -1)); return; }
     const rx = /(?<![A-Za-zА-Яа-яЁё\u0301])[А-Яа-яЁё]\u0301?(?![A-Za-zА-Яа-яЁё\u0301])/g;
     let ult = 0, m;
