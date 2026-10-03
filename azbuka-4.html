@@ -94,7 +94,8 @@ function Lectura({ L, c }) {
   return h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 12 } },
     h("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
       h("div", { lang: "ru", style: { flex: 1, fontSize: 18, fontWeight: 800, color: c.gold } }, L.titulo),
-      h("button", { className: "play", onClick: () => azHablarSecuencia(L.lineas.map(l => ({ texto: l[0] }))), "aria-label": "Escuchar el texto" }, "▶")),
+      h("button", { className: "play", onClick: () => azHablarSecuencia(L.lineas.map(l => ({ texto: l[0] }))), "aria-label": "Escuchar el texto" }, "▶"),
+      h("button", { className: "play", onClick: azCallar, "aria-label": "Detener el audio" }, "■")),
     L.lineas.map((l, k) => h("div", { key: k, style: { marginTop: 8, fontSize: 16.5, lineHeight: 1.5 } },
       h(AzTexto, { ru: l[0], lex: lexDe(l[0]), objetivo: OBJETIVO_U4 }),
       es && h("div", { style: { fontSize: 13, color: c.textMuted } }, l[1]))),
@@ -202,7 +203,8 @@ function App() {
       h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
       mod.tipo === "leccion" && h(React.Fragment, null,
         h(AzSecciones, { secciones: mod.secciones }),
-        mod.n === 1 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Palabras de este módulo"), h(Chips, { c, lista: chipsSust(1).concat(["чита́ть", "пить"].map(verb4).filter(Boolean).map(v => ({ ru: v.ac, es: v.es }))) })),
+        mod.n === 1 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Doce palabras en nominativo y acusativo"),
+          tablaAcc(vistas(1).map(sust4).filter(Boolean))),
         mod.n === 2 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Personas y cosas"), h(Chips, { c, lista: chipsSust(2) })),
         mod.n === 3 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los verbos de la unidad"),
           h(TablaVerbos, { c })),
@@ -212,10 +214,7 @@ function App() {
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
         mod.grupo && ampIds(mod.n).length > 0 && h("div", { style: { marginTop: 28, paddingTop: 6, borderTop: `1px solid ${c.border}` } },
           h("div", { className: "u-sec" }, "Ampliación · opcional"),
-          h("p", { className: "u-text", style: { fontSize: 14.5 } }, mod.n === 4
-            ? "Más palabras con la misma regla. Una novedad: дочь (hija) termina en **-ь** y es femenina; esas no cambian en acusativo: я жду дочь."
-            : mod.n === 5 ? "Más cosas, que no cambian, y más personas, que suman **-а**. Дя́дя termina en **-я**: como па́па, sigue la terminación: дя́дю."
-            : "Пальто́ viene de otro idioma, como ко́фе y кино́: no cambia nunca."),
+          h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Más palabras que siguen las mismas reglas, para quien quiera sumar vocabulario. Es opcional: no entra en la práctica de la unidad ni en la evaluación."),
           tablaAcc(delModulo(mod.n, true)),
           h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: ampIds(mod.n), titulo: "Ampliación: " + mod.titulo.toLowerCase() }) }, "Tarjetas (" + ampIds(mod.n).length + ")"),
           h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => practicarAmpliacion(mod) }, "Practicar la ampliación"))),

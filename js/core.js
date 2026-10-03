@@ -280,7 +280,8 @@ async function azSet(key, value) {
 function azFmt(texto) {
   if (texto == null) return texto;
   const h = window.React && React.createElement;
-  const partes = String(texto).split(/(\*\*[^*]+\*\*)/g);
+  /* {я}: palabra rusa de una letra que NO va en negrita (02/10/2026): я, и, в, с, у… cuando son palabras */
+  const partes = String(texto).split(/(\*\*[^*]+\*\*|\{[А-Яа-яЁё\u0301]{1,3}\})/g);
   const out = [];
   /* ¿La letra suelta está dentro de una frase rusa? (al lado de una palabra
      rusa de 2 letras o más: «я из…», «а у тебя́») → es una palabra, no una letra */
@@ -300,6 +301,7 @@ function azFmt(texto) {
   partes.forEach((p, i) => {
     if (!p) return;
     if (/^\*\*[^*]+\*\*$/.test(p)) { out.push(h ? h("b", { key: "b" + i }, p.slice(2, -2)) : p.slice(2, -2)); return; }
+    if (/^\{[А-Яа-яЁё\u0301]{1,3}\}$/.test(p)) { out.push(p.slice(1, -1)); return; }
     const rx = /(?<![A-Za-zА-Яа-яЁё\u0301])[А-Яа-яЁё]\u0301?(?![A-Za-zА-Яа-яЁё\u0301])/g;
     let ult = 0, m;
     while ((m = rx.exec(p))) {

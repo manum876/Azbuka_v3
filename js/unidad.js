@@ -34,6 +34,8 @@
      vf        { afirmacion, verdadero }
      emparejar { pide, pares: [[izq, der], …], audioIzq? }  (audioIzq: la izquierda es audio)
      tocar     { pide, palabras: [..], correcta: índice, audio? }  (02/10/2026: tocá la palabra de la frase)
+   elegir y vf aceptan texto: [renglones] (02/10/2026): un texto de lectura en un solo
+   recuadro; con textoOculto: true queda detrás de «Mostrar el texto» (ejercicios de audio).
    Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir?, items? }
      items: letras o palabras que practica («alfabeto:Б», «lex:CMR-…») para el semáforo
      audio: botón ▶ (suena solo al aparecer salvo que haya «grande» o audioManual)
@@ -62,7 +64,8 @@
       .pr-pide{font-size:17px;font-weight:700;line-height:1.4;}
       .pr-grande{font-size:clamp(34px,11vw,48px);font-weight:800;color:${c.gold};text-align:center;margin:18px 0 6px;line-height:1.15;word-break:break-word;letter-spacing:.5px;}
       .pr-grande.frase{font-size:clamp(22px,7vw,30px);letter-spacing:0;}   /* frases (02/10/2026): no se cortan en renglones sueltos */
-      .pr-oir{display:flex;justify-content:center;margin:16px 0 4px;}
+      .pr-oir{display:flex;justify-content:center;gap:12px;margin:16px 0 4px;}
+      .pr-texto{margin-bottom:14px;padding:12px 14px;border-radius:12px;background:${c.bg2};border:1px solid ${c.border};font-size:16px;line-height:1.6;}
       .pr-oir button{width:64px;height:64px;border-radius:32px;background:${c.gold}22;border:1px solid ${c.gold};color:${c.gold};font-size:22px;cursor:pointer;font-family:inherit;}
       .pr-pista{font-size:13px;color:${c.textMuted};text-align:center;margin-top:6px;}
       .pr-ops{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px;}
@@ -114,7 +117,17 @@
 
   function Oir({ texto, auto }) {
     useEffect(() => { if (auto && texto) { const t = setTimeout(() => hablar(texto), 250); return () => clearTimeout(t); } }, [texto]);
-    return h("div", { className: "pr-oir" }, h("button", { onClick: () => hablar(texto), "aria-label": "Escuchar" }, "▶"));
+    /* Textos largos (más de 40 caracteres): también ■ para detener el audio */
+    return h("div", { className: "pr-oir" }, h("button", { onClick: () => hablar(texto), "aria-label": "Escuchar" }, "▶"),
+      texto && texto.length > 40 && typeof azCallar === "function" && h("button", { onClick: azCallar, "aria-label": "Detener el audio" }, "■"));
+  }
+
+  /* Texto de lectura: un solo recuadro; con textoOculto, detrás de un botón */
+  function Texto({ ej }) {
+    const [ver, setVer] = useState(!ej.textoOculto);
+    if (!ej.texto || !ej.texto.length) return null;
+    if (!ver) return h("button", { className: "pr-cu", style: { margin: "4px auto 0" }, onClick: () => setVer(true) }, "Mostrar el texto");
+    return h("div", { className: "pr-texto", lang: "ru", style: ej.textoOculto ? { marginTop: 12, marginBottom: 0 } : null }, ej.texto.map((l, i) => h("div", { key: i }, l)));
   }
 
   function Explicacion({ ej, r }) {
@@ -138,9 +151,11 @@
     const tocar = o => { if (elegida) return; setElegida(o); onRes(o === ej.correcta ? AZ_BIEN : AZ_MAL); };
     return h(React.Fragment, null,
       h(Contexto, { ej }),
+      !ej.textoOculto && h(Texto, { ej }),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: "ru" }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande }),
+      ej.textoOculto && h(Texto, { ej }),
       h("div", { className: "pr-ops" + (larga ? " una" : "") }, ops.map(o => {
         const cls = !elegida ? "" : o === ej.correcta ? " ok" : o === elegida ? " mal" : "";
         return h("button", { key: o, className: "pr-op" + cls, disabled: !!elegida, onClick: () => tocar(o), lang: "ru" }, o);
@@ -292,6 +307,7 @@
     return h(React.Fragment, null,
       h("div", { className: "pr-pide" }, ej.audio ? "Escuchá. ¿Verdadero o falso?" : "¿Verdadero o falso?"),
       ej.audio && h(Oir, { texto: ej.audio, auto: true }),
+      h(Texto, { ej }),
       h("div", { className: "pr-grande", style: { fontSize: 24, color: "inherit", fontWeight: 700 }, lang: "ru" }, ej.afirmacion),
       h("div", { className: "pr-ops" },
         h("button", { className: "pr-op" + cls(true), disabled: elegida != null, onClick: () => tocar(true) }, "Verdadero"),
@@ -323,7 +339,7 @@
           const usada = listos.some(i => ej.pares[i][1] === d);
           return h("button", { key: d, className: "pr-op" + (usada ? " ok hecho" : malo === d ? " mal" : ""), disabled: usada, onClick: () => tocarDer(d) }, d);
         }))),
-      hecho == null && h("div", { className: "pr-pista", style: { marginTop: 12 } }, ej.audioIzq ? "Tocá ▶ para escuchar y después la letra que corresponde." : "Tocá uno de la izquierda y después su pareja."),
+      hecho == null && h("div", { className: "pr-pista", style: { marginTop: 12 } }, ej.pista || (ej.audioIzq ? "Tocá ▶ para escuchar y después la letra que corresponde." : "Tocá uno de la izquierda y después su pareja.")),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 

@@ -132,7 +132,7 @@
   function AzSecciones({ secciones }) {
     return h(React.Fragment, null, (secciones || []).map((x, k) => h("div", { key: k },
       h("div", { className: "u-sec" }, x.titulo),
-      h("div", { className: "u-text" }, azFmt(x.texto)),
+      h("div", { className: "u-text", style: { whiteSpace: "pre-line" } }, azFmt(x.texto)),   /* \n = renglón nuevo (pasos numerados) */
       x.destacado && h("div", { className: "u-dest" }, azFmt(x.destacado)),
       x.comparacion && h("div", { className: "u-text", style: { marginTop: 10, fontSize: 14, fontStyle: "italic" } }, azFmt(x.comparacion)),
       x.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), azFmt(x.truco)))));
