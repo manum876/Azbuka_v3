@@ -156,7 +156,7 @@ const UNIDAD_5 = {
       intro: "La mayoría de los verbos rusos siguen uno de dos modelos. El más común es el de чита́ть.",
       secciones: [
         { titulo: "Las terminaciones", texto: "Fijate en el final: {я} рабо́таю, ты рабо́таешь, он рабо́тает, мы рабо́таем, вы рабо́таете, они́ рабо́тают. Se le saca -ть al infinitivo y se agrega la terminación.", destacado: "-ю · -ешь · -ет · -ем · -ете · -ют" },
-        { titulo: "Con ё", texto: "Cuando el acento cae en la terminación, la е se vuelve ё: жить → живу́, живёшь, живёт; пить → пью, пьёшь; ждать → жду, ждёшь; встава́ть → встаю́, встаёшь. Fijate que algunos cambian también la raíz (живу́, пью): se aprenden con la tabla." },
+        { titulo: "Con ё", texto: "Cuando el acento cae en la terminación, la е se vuelve ё: жить → живу́, живёшь, живёт; пить → пью, пьёшь; ждать → жду, ждёшь; встава́ть → встаю́, встаёшь. Además, algunos cambian la raíz, es decir, la parte que va antes de la terminación. En жить → живу́ aparece una в que el infinitivo no tiene (жи-в-у́). En пить → пью, la и se vuelve ь (пь-ю). En ждать → жду, desaparece la а (жд-у). Las terminaciones son las de siempre; lo que cambia es la raíz, y por eso conviene mirar cada uno en la tabla." },
         { titulo: "Los que cambian un poco", texto: "Писа́ть → пишу́, пи́шешь; иска́ть → ищу́, и́щешь; испо́льзовать → испо́льзую, испо́льзуешь. Las terminaciones son las mismas; cambia la raíz.", truco: "Si sabés la forma de {я} y la de ты, sacás todas las demás." }
       ] },
     { id: "u5m4", n: 4, tipo: "leccion", grupo: 2, titulo: "Segunda conjugación", resumen: "-ю, -ишь, -ит, -им, -ите, -ят.",
@@ -172,7 +172,7 @@ const UNIDAD_5 = {
         { titulo: "Comunicación", texto: "говори́ть (hablar), понима́ть (entender), знать (saber, conocer), чита́ть (leer), писа́ть (escribir), слу́шать (escuchar), смотре́ть (mirar)." },
         { titulo: "Actividades", texto: "рабо́тать (trabajar), изуча́ть (estudiar una materia), де́лать (hacer), отдыха́ть (descansar), гуля́ть (pasear), ду́мать (pensar), жить (vivir)." },
         { titulo: "Comida y casa", texto: "за́втракать (desayunar), обе́дать (almorzar), у́жинать (cenar), гото́вить (cocinar), пить (tomar), спать (dormir), встава́ть (levantarse). Y lo que se cocina: за́втрак, обе́д, у́жин." },
-        { titulo: "Cada cuánto", texto: "всегда́ (siempre), ча́сто (seguido), иногда́ (a veces), сейча́с (ahora). Van antes del verbo: Я всегда́ за́втракаю. Мы ча́сто гуля́ем.", destacado: "Я всегда́ за́втракаю. Мы ча́сто гуля́ем." }
+        { titulo: "Cada cuánto", texto: "всегда́ (siempre), ча́сто (seguido), иногда́ (a veces), сейча́с (ahora). Van antes del verbo: Я всегда́ за́втракаю («siempre desayuno»). Мы ча́сто гуля́ем («paseamos seguido»).", destacado: "Я всегда́ за́втракаю. Мы ча́сто гуля́ем." }
       ] },
     { id: "u5m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Construir frases", resumen: "Verbo + acusativo: Мы смо́трим фильм.",
       intro: "Ahora se junta todo: quién hace la acción, el verbo en su forma y lo que recibe la acción en acusativo, como en la Unidad 4.",
@@ -193,13 +193,14 @@ const UNIDAD_5 = {
       secciones: [
         { titulo: "Con la entonación", texto: "Ты рабо́таешь. es «trabajás». Ты рабо́таешь? es «¿trabajás?»: las palabras son las mismas, cambia la voz, que sube en la palabra que se pregunta. Escuchá el audio de cada ejemplo." },
         { titulo: "Con palabras para preguntar", texto: "что (qué), кто (quién), где (dónde), как (cómo), почему́ (por qué), когда́ (cuándo). Van al principio: Что ты де́лаешь? Где ты живёшь? Как ты?", destacado: "Что ты де́лаешь? = ¿Qué hacés?" },
-        { titulo: "Respuestas cortas", texto: "— Ты рабо́таешь? — Да, рабо́таю. — Ты чита́ешь? — Нет, не чита́ю. En la respuesta corta se repite el verbo sin el pronombre." }
+        { titulo: "Respuestas cortas", texto: "— Ты рабо́таешь? — Да, рабо́таю.\n— Ты чита́ешь? — Нет, не чита́ю.\nEn la respuesta corta se repite el verbo sin el pronombre." }
       ] },
     { id: "u5m9", n: 9, tipo: "leccion", grupo: "e", titulo: "Verbos especiales", resumen: "Быть, хоте́ть, мочь, есть y los verbos con -ся.",
       intro: "Unos pocos verbos muy usados no siguen los modelos. No hace falta la teoría: alcanza con aprenderlos de a uno.",
       secciones: [
-        { titulo: "Быть: el verbo que no se dice", texto: "Быть es «ser» y «estar», pero en presente no se dice: Я до́ма («estoy en casa»), Она́ врач («ella es médica»), Он ру́сский («él es ruso»). Por eso en la Unidad 2 decías Я Ману, sin verbo.", destacado: "Я до́ма. = Estoy en casa." },
-        { titulo: "Хоте́ть y мочь", texto: "Хоте́ть (querer): хочу́, хо́чешь, хо́чет, хоти́м, хоти́те, хотя́т; mezcla los dos modelos. Мочь (poder): могу́, мо́жешь, мо́жет, мо́жем, мо́жете, мо́гут. Los dos van seguidos de un infinitivo: Я хочу́ чита́ть. Ты мо́жешь говори́ть по-ру́сски?" },
+        { titulo: "Быть: el verbo que no se dice", texto: "Быть es «ser» y «estar», pero en presente no se dice: Я до́ма («estoy en casa»), Она́ врач («ella es médica»), Он ру́сский («él es ruso»). Por eso, para presentarse, Ма́ша dice Я Ма́ша y Лу́кас dice Я Лу́кас: «soy Masha», «soy Lucas», sin verbo.", destacado: "Я до́ма. = Estoy en casa." },
+        { titulo: "Хоте́ть y мочь", texto: "Хоте́ть (querer) y мочь (poder) son dos verbos muy usados que no siguen los modelos. Хоте́ть mezcla los dos: las formas del singular son del primero (хо́чешь) y las del plural, del segundo (хоти́м). En мочь, la г de могу́ se vuelve ж en el medio (мо́жешь) y vuelve en мо́гут. Miralos uno al lado del otro en la tabla.", tabla: "hm" },
+        { titulo: "Qué va después", texto: "Después de хоте́ть puede ir lo que querés, en acusativo (Я хочу́ пи́ццу: «quiero pizza»), o lo que querés hacer, con un infinitivo (Я хочу́ чита́ть: «quiero leer»). Мочь va casi siempre con un infinitivo: Ты мо́жешь говори́ть по-ру́сски? («¿podés hablar ruso?»)." },
         { titulo: "Есть", texto: "Есть (comer) es irregular: ем, ешь, ест, еди́м, еди́те, едя́т. Con objeto: Я ем суп." },
         { titulo: "Los verbos con -ся", texto: "Algunos verbos terminan en **-ся**, como los verbos con «se» en español: учи́ться (estudiar, cursar), просыпа́ться (despertarse), возвраща́ться (volver). Se conjugan normal y después se agrega -сь después de vocal o -ся después de consonante: учу́сь, у́чишься, у́чится, у́чимся, у́читесь, у́чатся.", truco: "Después de vocal, -сь; después de consonante, -ся." }
       ] },

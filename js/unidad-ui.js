@@ -368,10 +368,13 @@
 
   /* Tabla de grupos de palabras relacionadas (país · él · ella; estudiar · hablar).
      Celdas { id?, ru, es }: se tocan para escucharlas; sin ▶, con una nota arriba. */
+  /* Celdas unidas (03/10/2026): { ru, es, filas: 2 } ocupa dos filas; en la fila
+     de abajo, esa columna va como false (no se dibuja). */
   function AzTablaGrupos({ encabezados, filas, c }) {
     const celda = (x, k) => {
+      if (x === false) return null;
       if (!x || !x.ru) return h("td", { key: k }, "—");
-      return h("td", { key: k },
+      return h("td", { key: k, rowSpan: x.filas || 1, style: x.filas ? { verticalAlign: "middle" } : null },
         h("button", { className: "grp-w", onClick: () => azHablarRu(x.ru), lang: "ru" }, h("span", { className: "grp-ru" }, x.ru)),
         x.es && h("div", { className: "grp-es" }, x.es));
     };

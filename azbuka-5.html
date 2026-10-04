@@ -73,6 +73,14 @@ function TablaVerbos({ c, lista }) {
         forma("я", v.f[0]), forma("мы", v.f[3]), forma("ты", v.f[1]), forma("вы", v.f[4]), forma("он / она́", v.f[2]), forma("они́", v.f[5])))));
 }
 
+/* Хоте́ть y мочь lado a lado (módulo 9): una fila por persona */
+function TablaLado({ c, tipo }) {
+  const a = D5.verb[D5.sin("хоте́ть")], b = D5.verb[D5.sin("мочь")];
+  if (tipo !== "hm" || !a || !b) return null;
+  return h(AzTablaGrupos, { encabezados: ["", "хоте́ть (querer)", "мочь (poder)"], c,
+    filas: PERS6.map((p, i) => [{ ru: p, es: "" }, { ru: a.f[i], es: a.esF[[0, 1, 2, 3, 4, 4][i]] }, { ru: b.f[i], es: b.esF[[0, 1, 2, 3, 4, 4][i]] }]) });
+}
+
 /* Lecturas del módulo 10: texto tocable, audio (con ■) y traducción a pedido */
 function Lectura({ L, c }) {
   const [es, setEs] = useState(false);
@@ -183,12 +191,18 @@ function App() {
       h("h1", { className: "u-title" }, mod.titulo),
       h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
       mod.tipo === "leccion" && h(React.Fragment, null,
-        h(AzSecciones, { secciones: mod.secciones }),
+        /* Si una sección pide una tabla (tabla: "hm"), va justo debajo de esa sección */
+        (() => {
+          const partes = []; let desde = 0;
+          mod.secciones.forEach((s, k) => { if (s.tabla) { partes.push(h(AzSecciones, { key: "s" + k, secciones: mod.secciones.slice(desde, k + 1) }), h(TablaLado, { key: "t" + k, c, tipo: s.tabla })); desde = k + 1; } });
+          if (desde < mod.secciones.length) partes.push(h(AzSecciones, { key: "fin", secciones: mod.secciones.slice(desde) }));
+          return partes;
+        })(),
         mod.n === 1 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Чита́ть, en sus seis formas"), h(TablaVerbos, { c, lista: [D5.verb[D5.sin("чита́ть")]] })),
         mod.n === 2 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los pronombres"),
           h(AzTablaGrupos, { encabezados: ["Singular", "Plural"], c, filas: [
             [{ ru: "я", es: "yo" }, { ru: "мы", es: "nosotros" }], [{ ru: "ты", es: "vos" }, { ru: "вы", es: "ustedes / usted" }],
-            [{ ru: "он", es: "él" }, { ru: "они́", es: "ellos / ellas" }], [{ ru: "она́", es: "ella" }, null]] })),
+            [{ ru: "он", es: "él" }, { ru: "они́", es: "ellos / ellas", filas: 2 }], [{ ru: "она́", es: "ella" }, false]] })),
         mod.grupo === 1 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los verbos de la primera conjugación"), h(TablaVerbos, { c, lista: verbosDe(1) })),
         mod.grupo === 2 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los verbos de la segunda conjugación"), h(TablaVerbos, { c, lista: verbosDe(2) })),
         mod.grupo === "e" && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los verbos especiales"), h(TablaVerbos, { c, lista: verbosDe("e") })),

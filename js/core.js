@@ -347,10 +347,15 @@ function azFraseVoz(texto, genero) {
   else if (genero === "f") u.pitch = v ? 1.05 : 1.25;
   return u;
 }
+/* azVozTurno (03/10/2026): cada audio nuevo o cada ■ cambia el turno; una
+   secuencia que quedó de un turno anterior ya no sigue con la línea siguiente. */
+let azVozTurno = 0;
 function azHablarRu(texto, genero) {
   try {
     if (!texto || !("speechSynthesis" in window)) return;
+    azVozTurno++;
     window.speechSynthesis.cancel();
+    window.speechSynthesis.resume();
     window.speechSynthesis.speak(azFraseVoz(texto, genero));
   } catch (e) {}
 }
@@ -359,9 +364,12 @@ function azHablarSecuencia(items, alEmpezarLinea, alTerminar) {
      encolar varias de golpe hace que solo suene la primera. */
   try {
     if (!("speechSynthesis" in window)) return;
+    const turno = ++azVozTurno;
     window.speechSynthesis.cancel();
+    window.speechSynthesis.resume();
     let i = 0;
     const siguiente = () => {
+      if (turno !== azVozTurno) return;        /* se tocó ■ u otro audio: no seguir */
       if (i >= items.length) { if (alTerminar) alTerminar(); return; }
       const k = i++;
       const u = azFraseVoz(items[k].texto, items[k].genero);
@@ -373,7 +381,16 @@ function azHablarSecuencia(items, alEmpezarLinea, alTerminar) {
     setTimeout(siguiente, 60);
   } catch (e) {}
 }
-function azCallar() { try { window.speechSynthesis.cancel(); } catch (e) {} }
+/* ■ Detener (03/10/2026): corta la secuencia (turno nuevo) y, como el iPhone a
+   veces no corta con cancel() solo, primero pausa; después deja la voz lista. */
+function azCallar() {
+  azVozTurno++;
+  try {
+    const s = window.speechSynthesis;
+    s.pause(); s.cancel();
+    setTimeout(() => { try { s.cancel(); s.resume(); } catch (e) {} }, 60);
+  } catch (e) {}
+}
 
 /* ── CUADERNO (26/09/2026) ────────────────────────────────────
    Notas personales, guardadas en az_cuaderno:
