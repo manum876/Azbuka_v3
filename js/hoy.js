@@ -14,6 +14,7 @@
      U6 lugar del día (dónde está alguien o algo: в / на + prepositivo)
      U7 ¿qué hora es? (reloj dibujado)
      U8 verbo del día en pasado (qué hiciste ayer)
+     U9 plan del día (qué vas a hacer mañana: бу́ду + infinitivo)
    Reglas (Manu, 05/10/2026): nada de la respuesta a la vista; la
    ayuda va detrás de «💡 Pista»; la corrección dice Bien, Casi o Mal
    según la consigna y habla de la forma que escribió el alumno.
@@ -30,7 +31,8 @@ const AZ_HOY_DEPS = {
   5: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-5.js"],
   6: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-mapa.js", "data/data-unidad-6.js"],
   7: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-7.js"],
-  8: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-8.js"]
+  8: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-8.js"],
+  9: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-9.js"]
 };
 const AZ_HOY_CARGADOS = {};
 function azHoyCargar(n) {
@@ -45,7 +47,7 @@ function azHoyCargar(n) {
 function azHoyFecha() { return new Date().toISOString().slice(0, 10); }
 function azHoyNumero() { const d = new Date(); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); }
 /* La unidad del desafío: la del último módulo abierto (hasta la 8) */
-async function azHoyUnidad() { const u = await azGet("az_ultimo", null); return u && u.unidad ? Math.min(8, Math.max(1, u.unidad)) : null; }
+async function azHoyUnidad() { const u = await azGet("az_ultimo", null); return u && u.unidad ? Math.min(9, Math.max(1, u.unidad)) : null; }
 
 /* ── Ayudas para revisar ─────────────────────────────────────── */
 const azHoyPal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
@@ -179,6 +181,23 @@ function azHoyDesafio(n) {
           return { nivel: "bien", msg: "**" + w[i] + "**: pasado, " + LBL[g] + "." }; }
         if (v.pres && w.some(x => v.pres.some(f => azHoyK(f) === azHoyK(x)))) return { nivel: "mal", msg: "Eso es presente; para ayer va el pasado: " + v.p.m + ", " + v.p.f + "…" };
         return { nivel: "mal", msg: "No encuentro " + v.ac + " en pasado en tu frase." }; } };
+  }
+  if (n === 9 && typeof u9Datos === "function") {
+    const D = u9Datos(), lista = Object.keys(U9_VERBOS).map(k => D.verb[D.sin(k)]).filter(v => v && D.sin(v.ac) !== "жить"), v = lista[num % lista.length];
+    const PR = { "я": 0, "ты": 1, "он": 2, "она": 2, "мы": 3, "вы": 4, "они": 5 }, BU = D.budu.map(azHoyK);
+    return { titulo: "Plan del día", grande: v.ac, id: v.id, sub: v.es, audio: v.ac, consigna: "Escribí qué vas a hacer mañana con este verbo.",
+      pista: "За́втра я бу́ду " + v.ac + "…",
+      tips: UNIDAD_9.modulos.find(m => m.id === "u9m12").consejos,
+      revisar: txt => { const w = azHoyPal(txt), k = w.map(azHoyK);
+        const i = k.findIndex(x => BU.indexOf(x) >= 0);
+        if (i < 0) return { nivel: "mal", msg: "Para el futuro: **бу́ду " + v.ac + "**." };
+        const sig = k[i + 1] === "не" ? k[i + 2] : k[i + 1];
+        if (sig !== azHoyK(v.ac)) { const conj = v.presente && v.presente.some(f => azHoyK(f) === sig);
+          return { nivel: conj ? "casi" : "mal", msg: conj ? "Después de " + w[i] + " va el infinitivo: **" + v.ac + "**." : "No encuentro «" + w[i] + " " + v.ac + "» en tu frase." }; }
+        let j = i - 1; if (j >= 0 && k[j] === "не") j--;
+        const p = j >= 0 ? PR[k[j]] : undefined;
+        if (p != null && BU[p] !== k[i]) return { nivel: "casi", msg: "Con " + w[j] + " va **" + D.budu[p] + "**, no «" + w[i] + "»." };
+        return { nivel: "bien", msg: "**" + w[i] + " " + v.ac + "**: futuro." }; } };
   }
   return null;
 }
