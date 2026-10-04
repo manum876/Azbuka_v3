@@ -265,7 +265,49 @@
           h("button", { className: "status-btn", onClick: () => marcar(2), style: { background: nv === 2 ? green + "22" : c.bg3, border: `1px solid ${nv === 2 ? green : c.border}`, color: nv === 2 ? green : c.text } }, "Ya la sé"))));
   }
 
-  function AzMapaExplorar({ c }) {
+  /* modo "ciudades" (04/10/2026, Unidad 6): los países de fondo, sin tocar, y
+     las ciudades como puntos. Al tocar una: su nombre y el prepositivo
+     («в Барсело́не», «Я живу́ в Барсело́не»). onTocar(clave, info) avisa a la
+     página (para actividades). Sin modo: los países, como en la Unidad 2. */
+  function AzMapaExplorar({ c, modo, onTocar }) {
+    if (modo === "ciudades") return h(AzMapaCiudades, { c, onTocar });
+    return h(AzMapaPaises, { c });
+  }
+  function AzMapaCiudades({ c, onTocar }) {
+    const [vista, setVista] = useState("europa-oeste");
+    const [sel, setSel] = useState(null);
+    if (typeof MAPA === "undefined" || !MAPA.ciudades) return null;
+    const vb = MAPA.vistas[vista].vb.split(" ").map(Number), w = vb[2];
+    const info = k => {
+      const e = lexComerById(MAPA.ciudades[k].lex);
+      const cz = e && typeof casosById === "function" ? casosById(e.id) : null;
+      const prep = !cz ? e.acento : cz.tipo === "indeclinable" ? e.acento : cz.sg ? cz.sg[5] : cz.pl[5];
+      return { e, prep, frase: "Я живу́ в " + prep + "." };
+    };
+    const tocar = k => { const i = info(k); setSel(k); azHablarRu(i.e.ru); if (onTocar) onTocar(k, i); };
+    const s = sel ? info(sel) : null;
+    return h("div", null,
+      h("div", { className: "toggle-row", style: { flexWrap: "wrap" } }, ["europa-oeste", "europa-este", "america-ciudades", "asia-este"].map(k =>
+        h("button", { key: k, className: "pair-btn", style: chipSt(c, vista === k), onClick: () => setVista(k) }, MAPA.vistas[k].titulo))),
+      h("svg", { viewBox: MAPA.vistas[vista].vb, className: "mapa-v", role: "img", "aria-label": "Mapa de ciudades" },
+        h("path", { d: MAPA.fondo, fill: c.bg3, stroke: c.bg2, "stroke-width": w / 400 }),
+        Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: c.gold + "22", stroke: c.bg2, "stroke-width": w / 400, style: { pointerEvents: "none" } })),
+        (MAPA.vistas[vista].ciudades || Object.keys(MAPA.ciudades)).map(k => {
+          const p = MAPA.ciudades[k], on = k === sel, e = lexComerById(p.lex);
+          return h("g", { key: k, onClick: () => tocar(k), style: { cursor: "pointer" } },
+            h("circle", { cx: p.x, cy: p.y, r: w * 0.045, fill: "transparent" }),   /* zona de toque grande */
+            h("circle", { cx: p.x, cy: p.y, r: w * (on ? 0.018 : 0.013), fill: on ? c.gold : c.gold + "cc", stroke: c.bg, "stroke-width": w / 300 }),
+            h("text", { x: p.x, y: p.y + w * 0.05, "text-anchor": "middle", "font-size": w * 0.036, "font-weight": on ? 800 : 600, fill: on ? c.gold : c.text, lang: "ru", style: { pointerEvents: "none" } },
+              (e.acento || e.ru).replace(/\u0301/g, "")));
+        })),
+      s ? h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 10, display: "flex", alignItems: "center", gap: 12 } },
+            h("div", { style: { flex: 1 } },
+              h("div", { lang: "ru", style: { fontSize: 20, fontWeight: 800 } }, h(AzPalabra, { texto: s.e.acento, id: s.e.id })),
+              h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 2 } }, s.e.senses[0].es + " · ", h("span", { lang: "ru", style: { color: c.text, fontWeight: 700 } }, s.frase))),
+            h("button", { className: "play", onClick: () => azHablarRu(s.frase), "aria-label": "Escuchar" }, "▶"))
+        : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Tocá una ciudad."));
+  }
+  function AzMapaPaises({ c }) {
     const [vista, setVista] = useState("europa");
     const [sel, setSel] = useState(null);
     if (typeof MAPA === "undefined") return null;

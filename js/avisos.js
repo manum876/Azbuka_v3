@@ -4,14 +4,15 @@
    Dos avisos centrados, con el estilo de la burbuja (§6.17 del
    Contexto). Solo los muestra index.html, así nunca interrumpen
    un ejercicio. Como mucho, uno por día; si coinciden, va primero
-   el de instalar.
+   el de instalar. Si está abierto el desafío del día (hoy.js), el
+   aviso espera a que se cierre (05/10/2026).
 
    1. INSTALAR. Solo en teléfonos y si la app no está instalada.
       · iPhone: instrucciones en tres pasos (Apple no deja instalar
         con un botón).
       · Android: botón «Instalar» de un toque (beforeinstallprompt).
         Si el navegador no lo ofrece, no se muestra.
-      · Desde la segunda visita. «Ahora no» o ✕: vuelve en 3 días.
+      · Desde la primera visita (05/10/2026). «Ahora no» o ✕: vuelve en 3 días.
         «No mostrar más»: no vuelve.
    2. COPIA DE SEGURIDAD. Con el botón para guardarla ahí mismo.
       · Si nunca se guardó: a partir del 3.er día de uso, si hay
@@ -36,7 +37,7 @@
   window.addEventListener("appinstalled", () => { window.azPromptInstalar = null; });
 })();
 
-const AZ_AVISOS = { visitasInstalar: 2, instalarPausa: 3, copiaPrimera: 3, copiaCada: 7, copiaPausa: 2 };
+const AZ_AVISOS = { visitasInstalar: 1, instalarPausa: 3, copiaPrimera: 3, copiaCada: 7, copiaPausa: 2 };
 
 function azAvHoy() { return new Date().toISOString().slice(0, 10); }
 function azAvMasDias(n) { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); }
@@ -104,7 +105,8 @@ const AZ_AV_ICONOS = {
   puntos: '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>'
 };
 
-function AzAvisos({ c }) {
+/* pausado: mientras está abierto el desafío del día (hoy.js), el aviso espera */
+function AzAvisos({ c, pausado }) {
   const h = React.createElement;
   const { useState, useEffect } = htmPreact;
   const [aviso, setAviso] = useState(null);
@@ -119,7 +121,7 @@ function AzAvisos({ c }) {
     return () => { vivo = false; clearTimeout(t); };
   }, []);
 
-  if (!aviso) return null;
+  if (!aviso || pausado) return null;
   const cerrar = () => setAviso(null);
   const esInstalar = aviso.tipo === "ios" || aviso.tipo === "android";
   const ahoraNo = () => {

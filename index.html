@@ -68,6 +68,7 @@
 <script src="data/data-lexicon.js"></script>
 <script src="js/core.js"></script>
 <script src="js/avisos.js"></script>
+<script src="js/hoy.js"></script>
 <script src="js/shell.js"></script>
 <script>
 const { useState, useEffect } = htmPreact;
@@ -76,11 +77,23 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [q, setQ] = useState("");
   const [ultimo, setUltimo] = useState(null);
+  /* Desafío del día (hoy.js): unidad del alumno, si ya lo hizo hoy y si está abierto */
+  const [hoyUnidad, setHoyUnidad] = useState(null);
+  const [hoyHecho, setHoyHecho] = useState(false);
+  const [hoyAbierto, setHoyAbierto] = useState(false);
+  const leerHoy = async () => { const hs = await azGet("az_hoy", {}); setHoyHecho(hs.fecha === azHoyFecha() && !!hs.hecho); return hs; };
 
   useEffect(() => {
     (async () => {
       setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
       setUltimo(await azLeerUltimo());
+      const u = await azHoyUnidad(); setHoyUnidad(u);
+      const hs = await leerHoy();
+      /* Una vez por día, al abrir el inicio, si ya empezó alguna unidad */
+      if (u && hs.mostrado !== azHoyFecha()) {
+        await azSet("az_hoy", Object.assign({}, hs, { mostrado: azHoyFecha() }));
+        setTimeout(() => setHoyAbierto(true), 700);
+      }
     })();
   }, []);
 
@@ -131,14 +144,16 @@ function App() {
         )
       ),
 
-      /* ── SEGUIR ESTUDIANDO: el último módulo abierto (az_ultimo) ── */
+      /* ── SEGUIR ESTUDIANDO (el último módulo abierto, az_ultimo) y, a la
+         derecha, la tarjeta «Hoy» (desafío del día, hoy.js) ── */
+      React.createElement("div", { style: { display: "flex", gap: 10, alignItems: "stretch", marginBottom: 26 } },
       (() => {
         const u = ultimo;
         const href = u ? u.href : "azbuka-1.html";
         const pct = u && u.total ? Math.round(u.n / u.total * 100) : 0;
         return React.createElement("a", {
           className: "cont", href, onClick: (e) => azNavigate(e, href),
-          style: { background: c.card, border: `1px solid ${c.gold}66` }
+          style: { background: c.card, border: `1px solid ${c.gold}66`, flex: 1, minWidth: 0, marginBottom: 0 }
         },
           React.createElement("div", { className: "cont-n" }, u ? u.unidad : "1"),
           React.createElement("div", { style: { flex: 1, minWidth: 0 } },
@@ -151,6 +166,8 @@ function App() {
           React.createElement("span", { style: { color: c.textMuted, fontSize: 20 } }, "›")
         );
       })(),
+      hoyUnidad && React.createElement(AzHoyTarjeta, { c, hecho: hoyHecho, alto: 92, onAbrir: () => setHoyAbierto(true) })
+      ),
 
       /* ── BUSCADOR GENERAL ── */
       React.createElement("div", { className: "srch" },
@@ -198,7 +215,8 @@ function App() {
 
     /* Avisos de instalar y de copia de seguridad (avisos.js, §6.17).
        Fuera del bloque animado: su transform rompería el position:fixed. */
-    React.createElement(AzAvisos, { c })
+    React.createElement(AzAvisos, { c, pausado: hoyAbierto }),
+    hoyAbierto && hoyUnidad && React.createElement(AzHoy, { c, unidad: hoyUnidad, onCerrar: () => { setHoyAbierto(false); leerHoy(); } })
   );
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
