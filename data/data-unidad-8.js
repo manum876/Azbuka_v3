@@ -112,7 +112,7 @@ const UNIDAD_8 = {
       intro: "Se toma el infinitivo, se le saca -ть y se agrega la terminación según quién hace la acción.",
       secciones: [
         { titulo: "Cuatro terminaciones", texto: "чита́ть → чита́-:\nон чита́л (masculino)\nона́ чита́ла (femenino)\nоно́ чита́ло (neutro)\nони́ чита́ли (plural)", destacado: "-л · -ла · -ло · -ли" },
-        { titulo: "Igual con casi todos", texto: "рабо́тать → рабо́тал, рабо́тала, рабо́тали; жить → жил, жила́, жи́ли; говори́ть → говори́л, говори́ла, говори́ли." },
+        { titulo: "Igual con casi todos", texto: "рабо́тать → рабо́тал, рабо́тала, рабо́тали\nжить → жил, жила́, жи́ли\nговори́ть → говори́л, говори́ла, говори́ли" },
         { titulo: "Algunos especiales", texto: "есть → ел, е́ла, е́ли. Los verbos con -ся agregan -ся o -сь al final: учи́ться → учи́лся (él), учи́лась (ella), учи́лись (ellos). Están todos en las tarjetas.", truco: "Infinitivo sin -ть + л / ла / ло / ли." }
       ] },
     { id: "u8m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Género y pasado", resumen: "Ива́н рабо́тал. А́нна рабо́тала.",
@@ -188,7 +188,8 @@ const U8_PROYECTO2 = { id: "u8p2", titulo: "Ра́ньше и сейча́с",
   intro: "Ahora compará: qué hacías antes y qué hacés ahora. Por ejemplo: Ра́ньше я жил в Буэ́нос-А́йресе, а тепе́рь я живу́ в Барсело́не. Ра́ньше я не говори́л по-ру́сски. Сейча́с я изуча́ю ру́сский.",
   requisitos: [], consejos: [] };
 
-function u8Palabras(t) { return String(t).replace(/(^|[^\-А-Яа-яЁё\u0301{])([вВаАиИсСуУкКоОяЯ])(?=$|[^А-Яа-яЁё\u0301}])/g, "$1{$2}"); }
+/* Además, la terminación -л va sin negrita, igual que -ла, -ло, -ли (Manu, 05/10/2026) */
+function u8Palabras(t) { return String(t).replace(/(^|[^А-Яа-яЁё\u0301{])-л(?![А-Яа-яЁё\u0301}])/g, "$1-{л}").replace(/(\+ )л( \/)/g, "$1{л}$2").replace(/(^|[^\-А-Яа-яЁё\u0301{])([вВаАиИсСуУкКоОяЯ])(?=$|[^А-Яа-яЁё\u0301}])/g, "$1{$2}"); }
 UNIDAD_8.modulos.concat([U8_PROYECTO2]).forEach(m => {
   if (m.intro) m.intro = u8Palabras(m.intro);
   (m.secciones || []).forEach(s => ["texto", "destacado", "truco"].forEach(k => { if (s[k]) s[k] = u8Palabras(s[k]); }));

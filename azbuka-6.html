@@ -79,9 +79,10 @@ function ActividadMapa({ c, green }) {
   const revisar = () => setRes(esperadas.some(x => norm(x) === norm(txt)));
   const otra = () => { setQ(nueva()); setTocada(null); setTxt(""); setRes(null); };
   return h("div", { className: "u-card", style: { padding: 16, marginTop: 14 } },
+    /* Orden (Manu, 05/10/2026): título, vistas, mapa, la ciudad tocada, la consigna y después la respuesta */
     h("div", { className: "u-kicker", style: { marginBottom: 6 } }, "¿Dónde vive?"),
-    h("div", { style: { fontSize: 15, lineHeight: 1.5 } }, q.p[1] + " vive en " + U6_CIUDADES[e.acento] + ". Buscala en el mapa y tocala."),
-    h("div", { style: { marginTop: 10 } }, h(AzMapaExplorar, { c, modo: "ciudades", onTocar: k => setTocada(k) })),
+    h(AzMapaExplorar, { c, modo: "ciudades", onTocar: k => setTocada(k) }),
+    h("div", { style: { fontSize: 15, lineHeight: 1.5, marginTop: 12, fontWeight: 600 } }, q.p[1] + " vive en " + U6_CIUDADES[e.acento] + ". Tocá esa ciudad en el mapa."),
     tocada && h("div", { style: { marginTop: 10, fontWeight: 700, color: tocada === q.k ? green : "#E2884A" } }, tocada === q.k ? "✓ ¡Esa es!" : "Esa no es. Buscá " + U6_CIUDADES[e.acento] + "."),
     tocada === q.k && h(React.Fragment, null,
       h("div", { lang: "ru", style: { marginTop: 10, fontSize: 16, fontWeight: 700 } }, "Где живёт " + q.p[0] + "?"),

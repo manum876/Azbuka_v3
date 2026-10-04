@@ -64,6 +64,24 @@ function azHoyFormasDe(txt, id) {
   return out;
 }
 
+/* Pronombre + verbo que no coinciden («Я покупа́ет»): mensaje o null (05/10/2026) */
+function azHoyConcordancia(txt) {
+  const PR = { "я": 0, "ты": 1, "он": 2, "она": 2, "мы": 3, "вы": 4, "они": 5 }, PL = ["я", "ты", "он / она́", "мы", "вы", "они́"];
+  const w = azHoyPal(txt), idx = azIndiceFormas();
+  for (let i = 0; i < w.length; i++) {
+    const p = PR[azHoyK(w[i])]; if (p == null) continue;
+    let j = i + 1; if (w[j] && azHoyK(w[j]) === "не") j++;
+    if (!w[j]) continue;
+    for (const x of idx.get(azHoyK(w[j])) || []) {
+      const v = typeof verboById === "function" ? verboById(x[0]) : null; if (!v || !v.presente) continue;
+      const k = v.presente.findIndex(f => azHoyK(f) === azHoyK(w[j]));
+      if (k >= 0 && k !== p && !(p === 2 && k === 2)) return "Pero ojo con el verbo: con " + w[i] + " va **" + v.presente[p] + "**, no «" + w[j] + "».";
+      if (k >= 0) break;
+    }
+  }
+  return null;
+}
+
 /* ── Los desafíos ────────────────────────────────────────────── */
 function azHoyDesafio(n) {
   const num = azHoyNumero();
@@ -101,7 +119,7 @@ function azHoyDesafio(n) {
     const p = u4PalabraDelDia();
     return { titulo: "Palabra del día", emoji: p.emoji, grande: p.ac, id: p.id, sub: p.es, audio: p.nom,
       consigna: "Escribí una frase donde " + p.ac + " reciba la acción.", pista: "En acusativo: " + p.acc + ".",
-      tips: UNIDAD_4.modulos.find(m => m.id === "u4m10").consejos,
+      tips: UNIDAD_4.modulos.find(m => m.id === "u4m10").consejos, concordancia: true,
       revisar: txt => { const usa = azHoyFormasDe(txt, p.id);
         if (!usa.length) return { nivel: "mal", msg: "No encuentro " + p.ac + " en tu frase." };
         const bien = usa.find(u => azHoyK(u.w) === azHoyK(p.acc));
@@ -127,7 +145,7 @@ function azHoyDesafio(n) {
     const lista = Object.values(u6Datos().lug).filter(s => !s.amp && s.tipo === "lugar"), s = lista[num % lista.length];
     return { titulo: "Lugar del día", emoji: s.emoji, grande: s.ac, id: s.id, sub: s.es, audio: s.nom, consigna: "Escribí dónde está alguien o algo, con este lugar.",
       pista: "¿Dónde? " + s.pr + " " + s.prep + (s.pr === "на" ? " (va con на, de memoria)" : ""),
-      tips: UNIDAD_6.modulos.find(m => m.id === "u6m11").consejos,
+      tips: UNIDAD_6.modulos.find(m => m.id === "u6m11").consejos, concordancia: true,
       revisar: txt => { const w = azHoyPal(txt);
         for (let i = 1; i < w.length; i++) { const u = azHoyFormasDe(w[i], s.id); if (!u.length) continue;
           const pr = azHoyK(w[i - 1]), k = azHoyK(w[i]);
@@ -168,15 +186,18 @@ function azHoyDesafio(n) {
 /* ── La tarjeta flotante ─────────────────────────────────────── */
 function AzHoy({ c, unidad, onCerrar }) {
   const h = React.createElement;
-  const { useState, useEffect } = htmPreact;
+  const { useState, useEffect, useRef } = htmPreact;
   const [d, setD] = useState(null);
+  const capa = useRef(null);   /* fondo sin scroll y ajuste al teclado (core.js) */
   const [txt, setTxt] = useState("");
   const [pista, setPista] = useState(false);
   const [res, setRes] = useState(null);
   const VERDE = "#4CAF82";
   useEffect(() => { let vivo = true; azHoyCargar(unidad).then(() => { if (vivo) setD(azHoyDesafio(unidad) || false); }); return () => { vivo = false; }; }, [unidad]);
   const revisar = async () => {
-    const r = d.revisar(txt);
+    let r = d.revisar(txt);
+    /* Si la consigna está bien pero el verbo no coincide con el pronombre: Casi */
+    if (d.concordancia && r.nivel === "bien") { const m = azHoyConcordancia(txt); if (m) r = { nivel: "casi", msg: r.msg + " " + m }; }
     /* Consejos del proyecto de la unidad (funciones propias, sin depender de unidad-ui.js) */
     let tips = d.tips ? [...new Set([].concat(...d.tips.map(k => k.fn ? (k.fn(txt) || []) : [])))] : [];
     /* Sin repetir lo que ya dice la corrección (misma forma en negrita) */
@@ -196,7 +217,7 @@ function AzHoy({ c, unidad, onCerrar }) {
       h("circle", { cx, cy: cx, r: 5, fill: c.gold }));
   };
   const colRes = res ? { bien: VERDE, casi: "#C9B369", mal: "#D9776F" }[res.nivel] : null;
-  return h("div", { className: "az-hoy-velo", onClick: e => { if (e.target === e.currentTarget) onCerrar(); } },
+  return h("div", { className: "az-hoy-velo", ref: azRefCapa(capa), onClick: e => { if (e.target === e.currentTarget) onCerrar(); } },
     h("style", null, `
       .az-hoy-velo{position:fixed;inset:0;z-index:520;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:6vh 16px 4vh;animation:azHoyIn .2s ease both;}
       .az-hoy{width:100%;max-width:360px;max-height:100%;overflow-y:auto;background:${c.card};border:1px solid ${c.border};border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,.4);padding:16px;color:${c.text};font-family:'Noto Sans',sans-serif;}

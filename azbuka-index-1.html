@@ -15,12 +15,12 @@
   .page-gap{margin-top:16px;}
 
   .ugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
-  .uc{display:block;text-decoration:none;padding:16px;border-radius:16px;cursor:pointer;position:relative;overflow:hidden;transition:.18s;box-sizing:border-box;}
+  .uc{display:flex;flex-direction:column;text-decoration:none;padding:16px;border-radius:16px;cursor:pointer;position:relative;overflow:hidden;transition:.18s;box-sizing:border-box;}
   .uc:active{transform:scale(.97);}
   .un{font-size:32px;font-weight:800;position:absolute;right:10px;top:2px;line-height:1;user-select:none;}
   .ut{font-weight:700;font-size:14px;margin:22px 0 4px;max-width:82%;}
   .ud{font-size:11.5px;margin-bottom:10px;min-height:28px;line-height:1.4;}
-  .goLbl{font-size:11.5px;font-weight:700;}
+  .goLbl{font-size:11.5px;font-weight:700;margin-top:auto;}   /* «Empezar →» siempre al pie de la tarjeta */
   .uc-exam{grid-column:1 / -1;}
 </style>
 </head>

@@ -53,11 +53,11 @@ const U7_VISTAS = {
   3: "понеде́льник вто́рник среда́ четве́рг пя́тница суббо́та воскресе́нье како́й",
   4: "неде́ля янва́рь февра́ль март апре́ль май ию́нь ию́ль а́вгуст сентя́брь октя́брь ноя́брь дека́брь о́тпуск",
   5: "обы́чно ре́дко",
-  6: "принима́ть душ начина́ть зака́нчивать ложи́ться домо́й",
+  6: "принима́ть душ начина́ть зака́нчивать ложи́ться домо́й ра́но по́здно",
   7: "ско́лько",
   8: "план встре́ча пра́здник выходно́й"
 };
-const U7_AMPLIACION_RU = "ра́но по́здно";
+const U7_AMPLIACION_RU = "";   /* ра́но y по́здно pasaron a la base (Manu, 05/10/2026) */
 
 const U7_LECTURAS = [
   { id: "dia", titulo: "Мой день", lineas: [
@@ -84,7 +84,7 @@ const UNIDAD_7 = {
       intro: "Para decir la hora alcanza con los números del 1 al 12 y una palabra: час (hora), que cambia según el número.",
       secciones: [
         { titulo: "Preguntar la hora", texto: "Кото́рый час? («¿qué hora es?») — Сейча́с семь часо́в («son las siete»). No hace falta сейча́с: Семь часо́в también está bien.", destacado: "Кото́рый час? — Семь часо́в." },
-        { titulo: "Час, часа́, часо́в", texto: "La palabra час cambia según el número:\n1 → час (la una: Сейча́с час)\n2, 3, 4 → часа́ (два часа́)\n5 a 12 → часо́в (пять часо́в, двена́дцать часо́в)", truco: "1 → час · 2-4 → часа́ · 5-12 → часо́в" },
+        { titulo: "Час, часа́, часо́в", texto: "La palabra час cambia según el número:\n1 → час (la una: Сейча́с час)\n2, 3, 4 → часа́ (два часа́)\n5 a 12 → часо́в (пять часо́в, двена́дцать часо́в)" },
         { titulo: "Por ahora, en punto", texto: "En esta unidad, las horas van en punto. Las medias horas («y media») llevan otra construcción, que llega más adelante." }
       ] },
     { id: "u7m2", n: 2, tipo: "leccion", nPractica: 10, titulo: "Partes del día", resumen: "у́тро, день, ве́чер, ночь.",
@@ -98,7 +98,7 @@ const UNIDAD_7 = {
       intro: "Los días de la semana, para decir qué día es hoy y qué hacés cada día.",
       secciones: [
         { titulo: "Los siete días", texto: "понеде́льник (lunes), вто́рник (martes), среда́ (miércoles), четве́рг (jueves), пя́тница (viernes), суббо́та (sábado), воскресе́нье (domingo). En ruso se escriben con minúscula." },
-        { titulo: "Qué día es", texto: "Како́й сего́дня день? («¿qué día es hoy?») — Сего́дня понеде́льник. За́втра вто́рник («mañana es martes»). Así, sin cambiar la palabra." },
+        { titulo: "Qué día es", texto: "Како́й сего́дня день? («¿qué día es hoy?») — Сего́дня понеде́льник («hoy es lunes»). За́втра вто́рник («mañana es martes»). Así, sin cambiar la palabra." },
         { titulo: "«El lunes»: в + acusativo", texto: "Para decir cuándo hacés algo, в + el día en acusativo, como en la Unidad 4: в понеде́льник, в четве́рг, в воскресе́нье (no cambian), в сре́ду, в пя́тницу, в суббо́ту (-а → -у). Con вто́рник es **во** вто́рник, porque «в вт» es difícil de decir.", destacado: "в сре́ду · в пя́тницу · во вто́рник" }
       ] },
     { id: "u7m4", n: 4, tipo: "leccion", nPractica: 10, titulo: "Semanas y meses", resumen: "в январе́, в ма́е…",
@@ -117,7 +117,8 @@ const UNIDAD_7 = {
     { id: "u7m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Mi rutina", resumen: "Я просыпа́юсь в семь часо́в.",
       intro: "Los verbos de todos los días, para contar tu rutina de la mañana a la noche.",
       secciones: [
-        { titulo: "Los verbos nuevos", texto: "принима́ть душ (ducharse): принима́ю душ\nначина́ть рабо́тать (empezar a trabajar): начина́ю\nзака́нчивать рабо́тать (terminar de trabajar): зака́нчиваю\nложи́ться спать (acostarse): ложу́сь, ложи́шься\nвозвраща́ться домо́й (volver a casa): возвраща́юсь" },
+        { titulo: "Los verbos nuevos", texto: "принима́ть душ (ducharse)\nначина́ть рабо́тать (empezar a trabajar)\nзака́нчивать рабо́тать (terminar de trabajar)\nложи́ться спать (acostarse)\nвозвраща́ться домо́й (volver a casa)" },
+        { titulo: "Temprano y tarde", texto: "ра́но (temprano) y по́здно (tarde): Я встаю́ ра́но («me levanto temprano»). Я ложу́сь спать по́здно («me acuesto tarde»)." },
         { titulo: "Agregar información", texto: "Una frase puede crecer sin cambiar lo que ya sabés:\nЯ просыпа́юсь.\nЯ просыпа́юсь в семь часо́в.\nЯ обы́чно просыпа́юсь в семь часо́в.\nЯ обы́чно просыпа́юсь в семь часо́в и за́втракаю до́ма.", truco: "¿Cuándo? ¿Dónde? ¿Cada cuánto? Cada respuesta es una pieza más." }
       ] },
     { id: "u7m7", n: 7, tipo: "leccion", nPractica: 10, titulo: "Horarios", resumen: "Во ско́лько ты обе́даешь? — В час.",
@@ -350,7 +351,7 @@ function ejerciciosUnidad7() {
   });
   /* Ampliación: ра́но y по́здно */
   [["Я встаю́ ра́но.", "Me levanto temprano."], ["Я ложу́сь спать по́здно.", "Me acuesto tarde."], ["Он рабо́тает по́здно.", "Él trabaja hasta tarde."], ["Мы за́втракаем ра́но.", "Desayunamos temprano."]].forEach(([ru, es], j) =>
-    out.push({ id: "U7-amp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 6, ampliacion: true, grupo: "AM-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U7-amp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 6, grupo: "AM-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: ru + " — ра́но = temprano · по́здно = tarde" }));
 
   /* ── Módulo 7: horarios ── */

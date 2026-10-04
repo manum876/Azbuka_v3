@@ -140,20 +140,20 @@ const UNIDAD_6 = {
     { id: "u6m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Trabajo y lugares", resumen: "А́нна рабо́тает в о́фисе.",
       intro: "Los lugares de todos los días, para decir dónde estás y dónde trabajás.",
       secciones: [
-        { titulo: "Los lugares", texto: "о́фис, рабо́та, магази́н, рестора́н, кафе́, банк, университе́т, шко́ла, метро́, ста́нция, парк, у́лица, го́род, центр." },
+        { titulo: "Los lugares", texto: "о́фис (oficina), рабо́та (trabajo), магази́н (negocio), рестора́н (restaurante), кафе́ (café), банк (banco), университе́т (universidad), шко́ла (escuela), метро́ (subte), ста́нция (estación), парк (parque), у́лица (calle), го́род (ciudad), центр (centro)." },
         { titulo: "Con los verbos de la Unidad 5", texto: "Я рабо́таю в о́фисе («trabajo en una oficina»). Она́ у́чится в университе́те. Мы обе́даем в рестора́не. Они́ гуля́ют в па́рке. Ты живёшь в це́нтре?", destacado: "Я рабо́таю в о́фисе." }
       ] },
     { id: "u6m7", n: 7, tipo: "leccion", nPractica: 10, titulo: "¿Dónde estás?", resumen: "— Где ты? — Я до́ма.",
       intro: "Conversaciones cortas para preguntar y decir dónde está alguien. Escuchalas y practicalas.",
       secciones: [
-        { titulo: "Cerca y lejos", texto: "ря́дом (cerca, al lado) y далеко́ (lejos): Банк ря́дом («el banco está cerca»). Метро́ далеко́ («el subte está lejos»). Y здесь (acá), там (allá)." },
-        { titulo: "Preguntar por otro", texto: "Где ты? — Я в рестора́не. А где А́нна? — Она́ до́ма. Con а («y», «¿y…?») se pregunta por otra persona: А ма́ма? («¿y mamá?»)." }
+        { titulo: "Cerca y lejos", texto: "ря́дом (cerca, al lado) y далеко́ (lejos): Банк ря́дом («el banco está cerca»). Метро́ далеко́ («el subte está lejos»). Y здесь o тут (acá: son lo mismo), там (allá)." },
+        { titulo: "Preguntar por otro", texto: "Где ты? — Я в рестора́не. А где А́нна? — Она́ до́ма. Con **а** («y», «¿y…?») se pregunta por otra persona: А ма́ма? («¿y mamá?»). Es la misma **а** de А у тебя́? («¿y vos?»), la que usaste para presentarte en la Unidad 2." }
       ] },
-    { id: "u6m8", n: 8, tipo: "leccion", nPractica: 12, titulo: "Ubicación o movimiento", resumen: "в рестора́не (estar) · в рестора́н (ir).",
+    { id: "u6m8", n: 8, tipo: "leccion", nPractica: 12, titulo: "Ubicación o movimiento", resumen: "в шко́ле (estar) · в шко́лу (ir).",
       intro: "Este es el punto más importante de la unidad: la misma preposición, con dos casos distintos.",
       secciones: [
-        { titulo: "Dónde estás: prepositivo", texto: "Я в рестора́не («estoy en el restaurante»). Я на рабо́те («estoy en el trabajo»). Se pregunta con где." },
-        { titulo: "Adónde vas: acusativo", texto: "Я иду́ в рестора́н («voy al restaurante»). Я иду́ на рабо́ту («voy al trabajo»). Se pregunta con куда́ («¿adónde?»). Es el acusativo de la Unidad 4: рабо́та → рабо́ту; рестора́н queda igual.", destacado: "Где? → в рестора́не · Куда́? → в рестора́н" },
+        { titulo: "Dónde estás: prepositivo", texto: "Я в шко́ле («estoy en la escuela»). Я на рабо́те («estoy en el trabajo»). Se pregunta con где." },
+        { titulo: "Adónde vas: acusativo", texto: "Я иду́ в шко́лу («voy a la escuela»). Я иду́ на рабо́ту («voy al trabajo»). Se pregunta con куда́ («¿adónde?»). Es el acusativo de la Unidad 4: шко́ла → шко́лу, рабо́та → рабо́ту.", destacado: "Где? → в шко́ле · Куда́? → в шко́лу" },
         { titulo: "La preposición no cambia", texto: "Lo que va con на, va con на también en movimiento: на рабо́те → на рабо́ту, на у́лице → на у́лицу.", truco: "¿Estás? → -е. ¿Vas? → acusativo." }
       ] },
     { id: "u6m9", n: 9, tipo: "leccion", nPractica: 12, titulo: "Ir: a pie o en vehículo", resumen: "идти́ / е́хать · ходи́ть / е́здить.",
@@ -161,7 +161,6 @@ const UNIDAD_6 = {
       secciones: [
         { titulo: "A pie o en vehículo", texto: "идти́ es ir a pie: Я иду́ в магази́н («voy al negocio»). е́хать es ir en auto, colectivo, tren o avión: Я е́ду в Мадри́д («voy a Madrid»)." },
         { titulo: "Ahora o seguido", texto: "Para algo que pasa ahora o en un viaje concreto: идти́ / е́хать. Para lo habitual, con ча́сто, всегда́ o иногда́: ходи́ть / е́здить. Я ча́сто хожу́ в кафе́ («voy seguido al café»). Она́ всегда́ е́здит на рабо́ту («siempre va al trabajo»).", destacado: "сейча́с → иду́ / е́ду · ча́сто → хожу́ / е́зжу" },
-        { titulo: "¿De dónde?", texto: "Отку́да ты? («¿de dónde sos?») — Я из Аргенти́ны. Ya lo usaste en la Unidad 2; lo de después de из lo ves más adelante." }
       ] },
     { id: "u6m10", n: 10, tipo: "lectura", titulo: "Mi ciudad", resumen: "Dónde viven, trabajan y adónde van.",
       intro: "Tres textos cortos con todo lo de la unidad. Leelos, escuchalos y después contestá." },
@@ -481,6 +480,8 @@ function ejerciciosUnidad6() {
     out.push(Object.assign({ id: "U6-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
       pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.length + " letras.", esperadas: [e.acento], idioma: "ru", explicacion: e.acento + " — " + es }, base));
   });
+  /* тут = здесь (acá): se acepta en todas las respuestas (Manu, 05/10/2026) */
+  out.forEach(e => { if (e.esperadas) e.esperadas = e.esperadas.concat(e.esperadas.filter(x => /здесь/.test(x)).map(x => x.replace(/Здесь/g, "Тут").replace(/здесь/g, "тут"))); });
   out.forEach(e => { if (e.explicacion) e.explicacion = u6Palabras(e.explicacion); if (e.pide) e.pide = u6Palabras(e.pide); });
   return out;
 }

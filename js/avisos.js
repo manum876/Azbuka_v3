@@ -108,8 +108,9 @@ const AZ_AV_ICONOS = {
 /* pausado: mientras está abierto el desafío del día (hoy.js), el aviso espera */
 function AzAvisos({ c, pausado }) {
   const h = React.createElement;
-  const { useState, useEffect } = htmPreact;
+  const { useState, useEffect, useRef } = htmPreact;
   const [aviso, setAviso] = useState(null);
+  const capa = useRef(null);   /* fondo sin scroll y ajuste al teclado (core.js) */
   const [listo, setListo] = useState(false);
 
   useEffect(() => {
@@ -190,7 +191,7 @@ function AzAvisos({ c, pausado }) {
         h("button", { className: "az-av-a", onClick: ahoraNo }, "Recordámelo después"))];
   }
 
-  return h("div", { className: "az-av-velo", onClick: e => { if (e.target === e.currentTarget) ahoraNo(); } },
+  return h("div", { className: "az-av-velo", ref: azRefCapa(capa), onClick: e => { if (e.target === e.currentTarget) ahoraNo(); } },
     h("style", null, `
       .az-av-velo{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;padding:6vh 20px 4vh;animation:azAvVelo .2s ease both;}
       .az-av{width:100%;max-width:340px;max-height:100%;overflow-y:auto;background:${c.card};border:1px solid ${c.border};border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.4);padding:16px 16px 12px;color:${c.text};font-family:'Noto Sans',sans-serif;animation:azBbIn .16s ease both;}

@@ -382,6 +382,7 @@
 
   /* ── Sesión ── */
   function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar }) {
+    const capa = useRef(null);   /* fondo sin scroll y ajuste al teclado (core.js, 05/10/2026) */
     const c = azColors(dark !== false);
     const [fase, setFase] = useState("inicio");     /* inicio · ej · fin */
     const [lista, setLista] = useState([]);
@@ -496,7 +497,7 @@
           h("button", { className: "pr-btn sec", onClick: onSalir }, "Volver a la unidad")));
     }
 
-    return h("div", { className: "pr", role: "dialog" },
+    return h("div", { className: "pr", role: "dialog", ref: azRefCapa(capa) },
       h(Estilos, { c }),
       h("button", { className: "pr-x", onClick: onSalir, "aria-label": "Salir de la práctica" }, "✕"),
       h("div", { className: "pr-in" }, cuerpo));

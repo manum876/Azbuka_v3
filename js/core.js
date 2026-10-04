@@ -559,3 +559,41 @@ azAplicarTranslit();
 window.azTranslitVisible = azTranslitVisible;
 window.azAplicarTranslit = azAplicarTranslit;
 window.azFirmaProgreso = azFirmaProgreso;
+
+/* ── CAPA FIJA (05/10/2026) ───────────────────────────────────
+   Para todo lo que se abre encima de la página (avisos, desafío del
+   día, prácticas): bloquea el scroll del fondo (en iPhone hace falta
+   fijar el body, no alcanza con overflow:hidden) y ajusta la capa al
+   área que de verdad se ve (visualViewport), así cuando se abre el
+   teclado la capa queda entre el teclado y el borde de arriba, sin
+   recortarse. Devuelve la función para soltarla.
+   Uso con un ref de callback:
+     const capa = useRef(null);
+     ref: el => { if (el) { if (!capa.current) capa.current = azCapaFija(el); } else if (capa.current) { capa.current(); capa.current = null; } } */
+let AZ_CAPAS = 0, AZ_CAPAS_Y = 0;
+function azCapaFija(el) {
+  const html = document.documentElement, body = document.body;
+  if (AZ_CAPAS++ === 0) {
+    AZ_CAPAS_Y = window.scrollY || 0;
+    Object.assign(body.style, { position: "fixed", top: -AZ_CAPAS_Y + "px", left: "0", right: "0", width: "100%" });
+    html.style.overflow = "hidden";
+  }
+  const vv = window.visualViewport;
+  const ajustar = () => { if (!el || !vv) return; el.style.top = vv.offsetTop + "px"; el.style.height = vv.height + "px"; el.style.bottom = "auto"; };
+  ajustar();
+  if (vv) { vv.addEventListener("resize", ajustar); vv.addEventListener("scroll", ajustar); }
+  return () => {
+    if (vv) { vv.removeEventListener("resize", ajustar); vv.removeEventListener("scroll", ajustar); }
+    if (--AZ_CAPAS === 0) {
+      Object.assign(body.style, { position: "", top: "", left: "", right: "", width: "" });
+      html.style.overflow = "";
+      window.scrollTo(0, AZ_CAPAS_Y);
+    }
+  };
+}
+/* El ref de callback, ya armado: h("div", { ref: azRefCapa(capa) }) con capa = useRef(null) */
+function azRefCapa(capa) {
+  return el => { if (el) { if (!capa.current) capa.current = azCapaFija(el); } else if (capa.current) { capa.current(); capa.current = null; } };
+}
+window.azCapaFija = azCapaFija;
+window.azRefCapa = azRefCapa;

@@ -278,6 +278,7 @@
     const [sel, setSel] = useState(null);
     if (typeof MAPA === "undefined" || !MAPA.ciudades) return null;
     const vb = MAPA.vistas[vista].vb.split(" ").map(Number), w = vb[2];
+    const conCiudad = new Set(Object.values(MAPA.ciudades).map(x => x.pais));
     const info = k => {
       const e = lexComerById(MAPA.ciudades[k].lex);
       const cz = e && typeof casosById === "function" ? casosById(e.id) : null;
@@ -291,7 +292,8 @@
         h("button", { key: k, className: "pair-btn", style: chipSt(c, vista === k), onClick: () => setVista(k) }, MAPA.vistas[k].titulo))),
       h("svg", { viewBox: MAPA.vistas[vista].vb, className: "mapa-v", role: "img", "aria-label": "Mapa de ciudades" },
         h("path", { d: MAPA.fondo, fill: c.bg3, stroke: c.bg2, "stroke-width": w / 400 }),
-        Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: c.gold + "22", stroke: c.bg2, "stroke-width": w / 400, style: { pointerEvents: "none" } })),
+        /* Solo se marcan los países que tienen una ciudad (05/10/2026); los demás, como el fondo */
+        Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: conCiudad.has(k) ? c.gold + "33" : c.bg3, stroke: c.bg2, "stroke-width": w / 400, style: { pointerEvents: "none" } })),
         (MAPA.vistas[vista].ciudades || Object.keys(MAPA.ciudades)).map(k => {
           const p = MAPA.ciudades[k], on = k === sel, e = lexComerById(p.lex);
           return h("g", { key: k, onClick: () => tocar(k), style: { cursor: "pointer" } },
@@ -305,7 +307,7 @@
               h("div", { lang: "ru", style: { fontSize: 20, fontWeight: 800 } }, h(AzPalabra, { texto: s.e.acento, id: s.e.id })),
               h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 2 } }, s.e.senses[0].es + " · ", h("span", { lang: "ru", style: { color: c.text, fontWeight: 700 } }, s.frase))),
             h("button", { className: "play", onClick: () => azHablarRu(s.frase), "aria-label": "Escuchar" }, "▶"))
-        : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Tocá una ciudad."));
+        : onTocar ? null : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Tocá una ciudad."));   /* en una actividad, la consigna la da la página */
   }
   function AzMapaPaises({ c }) {
     const [vista, setVista] = useState("europa");

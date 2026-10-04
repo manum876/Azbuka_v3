@@ -6827,7 +6827,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   6
+  ],
   "comer": [
    {
     "ID1": "103",

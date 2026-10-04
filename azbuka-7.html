@@ -112,16 +112,44 @@ function AgendaPropia({ c }) {
         style: { flex: 1, minWidth: 0, boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "9px 10px", color: c.text, fontSize: 16, fontFamily: "inherit" } }))));
 }
 
-/* El día en emoji (módulo 6): una tarjeta por actividad, con la hora */
+/* El día en emoji (módulo 6, Manu 05/10/2026): una tarjeta por actividad, a todo el ancho.
+   Arriba: emoji, reloj y la palabra con su traducción; debajo, la frase que dice el audio
+   y su traducción. Un interruptor arriba muestra u oculta las traducciones. */
 function DiaEmoji({ c }) {
-  return h("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginTop: 10 } }, Object.keys(U7_ACT).map(k => {
-    const a = U7_ACT[k], v = D7.verb[D7.sin(a[0])]; if (!v) return null;
-    const ru = v.f[0] + (a[1] ? " " + a[1] : "");
-    return h("button", { key: k, onClick: () => azHablarRu("Я " + ru + " " + u7Ru(a[4], a[5])), style: { textAlign: "left", padding: "10px", borderRadius: 12, background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", cursor: "pointer" } },
-      h("div", { style: { fontSize: 22 } }, a[3] + " " + u7Reloj(a[4])),
-      h("div", { lang: "ru", style: { fontSize: 14.5, fontWeight: 700, marginTop: 4 } }, ru),
-      h("div", { style: { fontSize: 11.5, color: c.textMuted } }, a[2][0]));
-  }));
+  const [tr, setTr] = useState(true);
+  const chip = on => ({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit",
+    background: on ? c.gold + "22" : c.bg2, border: `1px solid ${on ? c.gold : c.border}`, color: on ? c.gold : c.textMuted });
+  return h(React.Fragment, null,
+    h("div", { style: { display: "flex", gap: 8, marginTop: 8 } }, h("button", { style: chip(tr), onClick: () => setTr(!tr) }, "Traducción")),
+    Object.keys(U7_ACT).map(k => {
+      const a = U7_ACT[k], v = D7.verb[D7.sin(a[0])]; if (!v) return null;
+      const ru = v.f[0] + (a[1] ? " " + a[1] : "");
+      const frase = "Я " + ru + " " + u7Ru(a[4], a[5]) + ".", fraseEs = cap7(a[2][0] + " " + u7Es(a[4], a[5])) + ".";
+      return h("div", { key: k, className: "u-card", style: { padding: "12px 14px", marginTop: 10, display: "flex", alignItems: "center", gap: 12 } },
+        h("div", { style: { flex: 1, minWidth: 0 } },
+          h("div", { style: { display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" } },
+            h("span", { style: { fontSize: 20 } }, a[3] + " " + u7Reloj(a[4])),
+            h("span", { lang: "ru", style: { fontSize: 16, fontWeight: 800, color: c.gold } }, ru),
+            tr && h("span", { style: { fontSize: 12.5, color: c.textMuted } }, a[2][0])),
+          h("div", { lang: "ru", style: { fontSize: 15, fontWeight: 600, marginTop: 6 } }, frase),
+          tr && h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 2 } }, fraseEs)),
+        h("button", { className: "play", onClick: () => azHablarRu(frase), "aria-label": "Escuchar" }, "▶"));
+    }));
+}
+
+/* Tarjetas de verbos (módulo 7): cada verbo con sus seis formas (2 × 3), como en la Unidad 5 */
+function TablaVerbos({ c, lista }) {
+  const forma = (pr, f) => h("button", { key: pr, onClick: () => azHablarRu(f), lang: "ru",
+    style: { textAlign: "left", padding: "7px 10px", borderRadius: 9, background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", cursor: "pointer", minWidth: 0 } },
+    h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: .5, color: c.textMuted } }, pr), h("div", { style: { fontSize: 15.5, fontWeight: 700 } }, f));
+  return h(React.Fragment, null,
+    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una forma para escuchar cómo suena."),
+    lista.filter(Boolean).map(v => h("div", { key: v.id, className: "u-card", style: { padding: "12px 14px", marginTop: 10 } },
+      h("div", { style: { display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" } },
+        h("span", { lang: "ru", style: { fontSize: 18, fontWeight: 800, color: c.gold } }, v.ac),
+        h("span", { style: { fontSize: 13, color: c.textMuted } }, v.es)),
+      h("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginTop: 8 } },
+        forma("я", v.f[0]), forma("мы", v.f[3]), forma("ты", v.f[1]), forma("вы", v.f[4]), forma("он / она́", v.f[2]), forma("они́", v.f[5])))));
 }
 
 function Lectura({ L, c }) {
@@ -210,6 +238,8 @@ function App() {
           h(AzTablaGrupos, { encabezados: ["Mes", "¿En qué mes?"], c, filas: D7.meses.map(m => [{ id: m.id, ru: m.nom, es: m.es }, { id: m.id, ru: "в " + m.prep, es: "en " + m.es }]) })),
         mod.n === 6 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Un día, de la mañana a la noche"), h(DiaEmoji, { c })),
         mod.n === 9 && h(React.Fragment, null, h("div", { className: "u-sec" }, "La agenda de Ana"), h(AgendaAna, { c })),
+        mod.n === 7 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Empezar y terminar"),
+          h(TablaVerbos, { c, lista: [["начина́ть", "empezar"], ["зака́нчивать", "terminar"]].map(([ru, es]) => { const v = D7.verb[D7.sin(ru)]; return v && Object.assign({ es }, v); }) })),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
         mod.n === 6 && ampIds.length > 0 && h("div", { style: { marginTop: 28, paddingTop: 6, borderTop: `1px solid ${c.border}` } },
           h("div", { className: "u-sec" }, "Ampliación · opcional"),
