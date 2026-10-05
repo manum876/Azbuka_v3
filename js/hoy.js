@@ -15,6 +15,7 @@
      U7 ¿qué hora es? (reloj dibujado)
      U8 verbo del día en pasado (qué hiciste ayer)
      U9 plan del día (qué vas a hacer mañana: бу́ду + infinitivo)
+     U10 lo que no tenés (у меня́ нет + genitivo)
    Reglas (Manu, 05/10/2026): nada de la respuesta a la vista; la
    ayuda va detrás de «💡 Pista»; la corrección dice Bien, Casi o Mal
    según la consigna y habla de la forma que escribió el alumno.
@@ -32,7 +33,8 @@ const AZ_HOY_DEPS = {
   6: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-mapa.js", "data/data-unidad-6.js"],
   7: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-7.js"],
   8: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-8.js"],
-  9: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-9.js"]
+  9: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-9.js"],
+  10: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-10.js"]
 };
 const AZ_HOY_CARGADOS = {};
 function azHoyCargar(n) {
@@ -47,7 +49,7 @@ function azHoyCargar(n) {
 function azHoyFecha() { return new Date().toISOString().slice(0, 10); }
 function azHoyNumero() { const d = new Date(); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); }
 /* La unidad del desafío: la del último módulo abierto (hasta la 8) */
-async function azHoyUnidad() { const u = await azGet("az_ultimo", null); return u && u.unidad ? Math.min(9, Math.max(1, u.unidad)) : null; }
+async function azHoyUnidad() { const u = await azGet("az_ultimo", null); return u && u.unidad ? Math.min(10, Math.max(1, u.unidad)) : null; }
 
 /* ── Ayudas para revisar ─────────────────────────────────────── */
 const azHoyPal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
@@ -198,6 +200,20 @@ function azHoyDesafio(n) {
         const p = j >= 0 ? PR[k[j]] : undefined;
         if (p != null && BU[p] !== k[i]) return { nivel: "casi", msg: "Con " + w[j] + " va **" + D.budu[p] + "**, no «" + w[i] + "»." };
         return { nivel: "bien", msg: "**" + w[i] + " " + v.ac + "**: futuro." }; } };
+  }
+  if (n === 10 && typeof u10Datos === "function") {
+    const D = u10Datos(), lista = Object.keys(U10_COSAS).filter(k => !/рабо́та|вре́мя/.test(k)).map(k => Object.assign(D.sust(k) || {}, { emoji: U10_COSAS[k][2], bare: U10_COSAS[k][1] })).filter(x => x.id);
+    const s = lista[num % lista.length];
+    return { titulo: "Palabra del día", emoji: s.emoji, grande: s.ac, id: s.id, sub: s.bare, audio: s.nom, consigna: "Escribí que no tenés esto (con нет).",
+      pista: "У меня́ нет + genitivo: " + s.gen + ".",
+      tips: UNIDAD_10.modulos.find(m => m.id === "u10m12").consejos,
+      revisar: txt => { const w = azHoyPal(txt), k = w.map(azHoyK);
+        const i = k.indexOf("нет");
+        const usa = azHoyFormasDe(txt, s.id);
+        if (!usa.length) return { nivel: "mal", msg: "No encuentro " + s.ac + " en tu frase." };
+        if (i < 0) return { nivel: "mal", msg: "La consigna es decir que no lo tenés: **У меня́ нет " + s.gen + "**." };
+        if (usa.some(u => azHoyK(u.w) === azHoyK(s.gen))) return { nivel: "bien", msg: "**нет " + s.gen + "**: después de нет, genitivo." };
+        return { nivel: "mal", msg: "Usaste «" + usa[0].w + "», pero después de нет va el genitivo: **" + s.gen + "**." }; } };
   }
   return null;
 }
