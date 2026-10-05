@@ -95,10 +95,10 @@ const UNIDAD_10 = {
       intro: "En ruso no hay un verbo «tener» de uso diario: se dice «junto a mí hay».",
       secciones: [
         { titulo: "Tener: у + genitivo + есть", texto: "У меня́ есть кни́га. («tengo un libro»)\nУ А́нны есть маши́на. («Ana tiene un auto»)\nУ Ива́на есть брат. («Iván tiene un hermano»)\nLo que se tiene va en nominativo: es lo que «hay».", destacado: "у + quién (genitivo) + есть + qué (nominativo)" },
-        { titulo: "Los pronombres", texto: "у меня́ (yo tengo), у тебя́ (vos tenés), у него́ (él tiene), у неё (ella tiene), у нас (tenemos), у вас (ustedes tienen), у них (ellos tienen). Es la misma fórmula que «А у тебя́?» de la Unidad 2." },
+        { titulo: "Los pronombres", texto: "у меня́ (yo tengo)\nу тебя́ (vos tenés)\nу него́ (él tiene)\nу неё (ella tiene)\nу нас (tenemos)\nу вас (ustedes tienen)\nу них (ellos tienen)" },
         { titulo: "Есть: dos palabras", texto: "Este есть significa «hay» y no cambia nunca. No tiene nada que ver con есть «comer» de la Unidad 5 (я ем, ты ешь…): se escriben igual, pero son palabras distintas." },
         { titulo: "De quién es", texto: "кни́га А́нны («el libro de Ana»), маши́на Ива́на («el auto de Iván»): el dueño va después, en genitivo." },
-        { titulo: "Las terminaciones del genitivo", texto: "-а → -ы: ма́ма → ма́мы, маши́на → маши́ны\nDespués de **г, к, х, ж, ш, ч, щ** se escribe **и**: кни́га → кни́ги, ко́шка → ко́шки\n-я → -и, -ь (femenino) → -и\nmasculino: se agrega -а: брат → бра́та, Ива́н → Ива́на; -ь / -й → -я: учи́тель → учи́теля\nneutro: -о → -а: молоко́ → молока́", truco: "Ojo: до́ма («en casa») no es el genitivo de дом, aunque se escriba igual." }
+        { titulo: "Las terminaciones del genitivo", texto: "femenino (y па́па, Ди́ма…): -а → -ы: ма́ма → ма́мы, маши́на → маши́ны\nDespués de **г, к, х, ж, ш, ч, щ** se escribe **и**: кни́га → кни́ги, ко́шка → ко́шки\nfemenino: -я → -и, -ь → -и\nmasculino: se agrega -а: брат → бра́та, Ива́н → Ива́на\nmasculino en -ь / -й → -я: учи́тель → учи́теля\nneutro: -о → -а: молоко́ → молока́", ojo: "до́ма («en casa») no es el genitivo de дом, aunque se escriba igual." }
       ] },
     { id: "u10m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Genitivo: lo que no hay", resumen: "У меня́ нет маши́ны.",
       intro: "Para decir que no tenés algo, есть se vuelve нет y lo que falta pasa a genitivo.",
@@ -115,14 +115,14 @@ const UNIDAD_10 = {
     { id: "u10m5", n: 5, tipo: "leccion", nPractica: 12, titulo: "Genitivo con preposiciones", resumen: "без молока́, для ма́мы, по́сле рабо́ты.",
       intro: "Algunas preposiciones van siempre con genitivo.",
       secciones: [
-        { titulo: "Las preposiciones", texto: "из (de, desde): Я из Испа́нии.\nбез (sin): ко́фе без молока́.\nдля (para): пода́рок для ма́мы.\nпо́сле (después de): по́сле рабо́ты.\nдо (antes de, hasta): до рабо́ты.\nо́коло y во́зле (cerca de): о́коло до́ма." },
+        { titulo: "Las preposiciones", texto: "из (de, desde): Я из Испа́нии.\nбез (sin): ко́фе без молока́.\nдля (para): пода́рок для ма́мы.\nпо́сле (después de): по́сле рабо́ты.\nдо (antes de, hasta): до рабо́ты.\nо́коло/во́зле (cerca de): о́коло до́ма." },
         { titulo: "Lo que ya sabías", texto: "Я из Аргенти́ны, de la Unidad 2, ya era genitivo: Аргенти́на → Аргенти́ны.", truco: "из, без, для, по́сле, до, о́коло → genitivo." }
       ] },
     { id: "u10m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Dativo: ¿a quién?", resumen: "Я даю́ кни́гу А́нне. Я звоню́ ма́ме.",
       intro: "El dativo es la persona a la que le das, le decís o le hacés algo. Se pregunta con кому́? («¿a quién?»).",
       secciones: [
-        { titulo: "Los verbos", texto: "дава́ть (dar): Я даю́ кни́гу А́нне.\nзвони́ть (llamar): Я звоню́ ма́ме.\nпомога́ть (ayudar): Я помога́ю дру́гу.\nпока́зывать (mostrar): Я пока́зываю дом бра́ту.\nписа́ть (escribir): Я пишу́ письмо́ Ива́ну.\nотвеча́ть (responder): Я отвеча́ю учи́телю.\nсове́товать (aconsejar)." },
-        { titulo: "Las terminaciones del dativo", texto: "-а / -я → -е: ма́ма → ма́ме, А́нна → А́нне\nmasculino: se agrega -у: брат → бра́ту, друг → дру́гу; -ь / -й → -ю: учи́тель → учи́телю\nneutro: -о → -у", destacado: "кому́? → ма́ме, бра́ту, учи́телю" },
+        { titulo: "Los verbos", texto: "дава́ть (dar): Я даю́ кни́гу А́нне.\nзвони́ть (llamar): Я звоню́ ма́ме.\nпомога́ть (ayudar): Я помога́ю дру́гу.\nпока́зывать (mostrar): Я пока́зываю дом бра́ту.\nписа́ть (escribir): Я пишу́ письмо́ Ива́ну.\nотвеча́ть (responder): Я отвеча́ю учи́телю.\nсове́товать (aconsejar): Врач сове́тует ма́ме отдыха́ть." },
+        { titulo: "Las terminaciones del dativo", texto: "femenino (y па́па, Ди́ма…): -а / -я → -е: ма́ма → ма́ме, А́нна → А́нне\nmasculino: se agrega -у: брат → бра́ту, друг → дру́гу\nmasculino en -ь / -й → -ю: учи́тель → учи́телю\nneutro: -о → -у", destacado: "кому́? → ма́ме, бра́ту, учи́телю" },
         { titulo: "Ojo con звони́ть y помога́ть", texto: "En español «llamo a mamá» parece acusativo, pero en ruso звони́ть y помога́ть van con dativo: Я звоню́ ма́ме, no «ма́му»." }
       ] },
     { id: "u10m7", n: 7, tipo: "leccion", nPractica: 12, titulo: "Dativo: me gusta, necesito", resumen: "Мне нра́вится му́зыка. Мне ну́жно рабо́тать.",
@@ -136,7 +136,7 @@ const UNIDAD_10 = {
       intro: "с + instrumental es «con alguien». Se pregunta с кем? («¿con quién?»).",
       secciones: [
         { titulo: "Con quién", texto: "Я гуля́ю с А́нной. Я живу́ с ба́бушкой. Он рабо́тает с колле́гой. Мы обе́даем с бра́том. И с друзья́ми («con amigos»), que va así, como fórmula.", destacado: "с кем? → с А́нной, с бра́том" },
-        { titulo: "Las terminaciones del instrumental", texto: "-а → -ой: ма́ма → ма́мой, А́нна → А́нной\n-я → -ей\nmasculino: se agrega -ом: брат → бра́том; -ь / -й → -ем: учи́тель → учи́телем\nneutro: -о → -ом" },
+        { titulo: "Las terminaciones del instrumental", texto: "femenino (y па́па, Ди́ма…): -а → -ой: ма́ма → ма́мой, А́нна → А́нной\nfemenino: -я → -ей\nmasculino: se agrega -ом: брат → бра́том\nmasculino en -ь / -й → -ем: учи́тель → учи́телем\nneutro: -о → -ом" },
         { titulo: "En los tres tiempos", texto: "Вчера́ я был с друзья́ми. Сейча́с я с А́нной. За́втра я бу́ду рабо́тать с колле́гой." }
       ] },
     { id: "u10m9", n: 9, tipo: "leccion", nPractica: 10, titulo: "Instrumental: ¿con qué?", resumen: "Я пишу́ ру́чкой.",
@@ -149,7 +149,7 @@ const UNIDAD_10 = {
       intro: "Para decir de qué trabajás, la profesión va en instrumental.",
       secciones: [
         { titulo: "De qué trabajás", texto: "Кем ты рабо́таешь? («¿de qué trabajás?») — Я рабо́таю врачо́м. Она́ рабо́тает медсестро́й. Он рабо́тает программи́стом. Я рабо́таю архите́ктором.", destacado: "рабо́тать + instrumental" },
-        { titulo: "Con быть en pasado y futuro", texto: "Ра́ньше я был студе́нтом («antes era estudiante»). За́втра я бу́ду рабо́тать учи́телем. En presente быть no se dice: Я врач." }
+        { titulo: "Con быть en pasado y futuro", texto: "Ра́ньше я был студе́нтом. («antes era estudiante»)\nСко́ро я бу́ду архите́ктором. («pronto voy a ser arquitecto»)\nEn presente быть no se dice: Я врач. («soy médico»)" }
       ] },
     { id: "u10m11", n: 11, tipo: "lectura", titulo: "Los seis casos juntos", resumen: "Pensar en la relación.",
       intro: "Tres textos con todos los casos. Al leer, preguntate qué relación expresa cada palabra; después contestá." },
@@ -174,7 +174,7 @@ const UNIDAD_10 = {
 function u10Palabras(t) { return String(t).replace(/(^|[^\-А-Яа-яЁё\u0301{])([вВаАиИсСуУкКоОяЯ])(?=$|[^А-Яа-яЁё\u0301}])/g, "$1{$2}"); }
 UNIDAD_10.modulos.forEach(m => {
   if (m.intro) m.intro = u10Palabras(m.intro);
-  (m.secciones || []).forEach(s => ["texto", "destacado", "truco"].forEach(k => { if (s[k]) s[k] = u10Palabras(s[k]); }));
+  (m.secciones || []).forEach(s => ["texto", "destacado", "truco", "ojo"].forEach(k => { if (s[k]) s[k] = u10Palabras(s[k]); }));
 });
 function unidad10Modulo(id) { return UNIDAD_10.modulos.find(m => m.id === id) || null; }
 

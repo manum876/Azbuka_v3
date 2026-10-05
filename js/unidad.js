@@ -1,7 +1,7 @@
 /* ============================================================
    UNIDAD.JS — Motor de práctica compartido por las unidades
    ------------------------------------------------------------
-   Versión 25/09/2026. Arma una sesión de ejercicios del banco de la
+   Versión 05/10/2026. Arma una sesión de ejercicios del banco de la
    unidad con el selector de progress.js (contador más bajo primero,
    errores que vuelven, mezcla de tipos, dificultad que se ajusta),
    la muestra a pantalla completa, corrige con corrector.js y guarda
@@ -22,18 +22,25 @@
        aviso: "…",                // recuadro destacado al empezar (opcional)
        examen: { intro, partes: [{ nombre, tipos, n }], aprobado: .8 },  // modo evaluación
        onReforzar: parte => …     // en el examen, «Practicar <parte>»
+       enOrden: true              // los ejercicios del pool, en su orden (05/10/2026)
      })
    Modo evaluación: n ejercicios por parte, sin «Intentar de nuevo»;
    Bien = 1 punto, Casi = ½; guarda { pct, aprobado, fecha } en
    az_progress.units[N].examen y el mejor puntaje en mejorExamen.
 
    Formas de ejercicio (campo forma):
-     elegir    { pide, grande?, audio?, opciones, correcta }
+     elegir    { pide, grande?, audio?, opciones, correcta, escena?, plano? }
      escribir  { pide, grande?, audio?, pista?, esperadas, idioma, mayus?, completa? }
      ordenar   { pide, audio?, fichas, esperada }
      vf        { afirmacion, verdadero }
      emparejar { pide, pares: [[izq, der], …], audioIzq? }  (audioIzq: la izquierda es audio)
      tocar     { pide, palabras: [..], correcta: índice, audio? }  (02/10/2026: tocá la palabra de la frase)
+     situacion { pide, escena?, contexto?, audio?, plano?, pista?, sit }  (05/10/2026, Unidad 11)
+               respuesta libre corregida por intención con azSituacion (corrector.js):
+               ✓ Bien · 💬 Se entiende (vale el punto entero, decisión de Manu) · ✗ No se entiende.
+               plano: { ruta: "S2 R S1 L S1", destino: "🏦" } dibuja un plano con el camino.
+     turnos    { turnos: { titulo, quien, genero, chat?, pasos: [{ bot, es, tarea, sit, pista?, quien?, genero? }] } }
+               diálogo o chat por turnos: cada respuesta se corrige con azSituacion.
    elegir y vf aceptan texto: [renglones] (02/10/2026): un texto de lectura en un solo
    recuadro; con textoOculto: true queda detrás de «Mostrar el texto» (ejercicios de audio).
    Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir?, items? }
@@ -111,6 +118,9 @@
       .pr-tw.ok{background:${VERDE}22;border-color:${VERDE};color:${VERDE};}
       .pr-tw.mal{background:${ROJO}22;border-color:${ROJO};color:#D9776F;}
       .pr-tw:disabled{cursor:default;}
+      .pr-area{width:100%;box-sizing:border-box;font-size:17px;line-height:1.4;padding:12px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-family:inherit;resize:none;margin-top:16px;display:block;}
+      .pr-escena{font-size:44px;text-align:center;margin:4px 0 8px;line-height:1.1;}
+      .pr-nota{font-size:12.5px;color:${c.gold};margin-top:4px;}
       .pr-lista > div{padding:10px 0;border-top:1px solid ${c.border};font-size:14px;line-height:1.45;}
     `);
   }
@@ -144,7 +154,7 @@
   }
 
   /* ── Formas ── */
-  function Elegir({ ej, onRes, hecho }) {
+  function Elegir({ ej, onRes, hecho, c }) {
     const [elegida, setElegida] = useState(null);
     const ops = ej.opciones;
     const larga = ops.some(o => o.length > 14);
@@ -152,9 +162,11 @@
     return h(React.Fragment, null,
       h(Contexto, { ej }),
       !ej.textoOculto && h(Texto, { ej }),
+      ej.escena && h("div", { className: "pr-escena", "aria-hidden": "true" }, ej.escena),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
+      ej.plano && h(Plano, { plano: ej.plano, c }),
       ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: "ru" }, ej.grande),
-      ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande }),
+      ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.textoOculto && h(Texto, { ej }),
       h("div", { className: "pr-ops" + (larga ? " una" : "") }, ops.map(o => {
         const cls = !elegida ? "" : o === ej.correcta ? " ok" : o === elegida ? " mal" : "";
@@ -378,10 +390,122 @@
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
-  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar, chat: Chat, tocar: Tocar };
+
+  /* ── Unidad 11: corrección por comunicación ── */
+  /* Plano de calles: el camino desde «Вы» hasta el destino.
+     ruta: "S2 R S1 L S1" (S = recto n cuadras, R = derecha, L = izquierda);
+     se sale desde abajo, mirando hacia arriba. */
+  function azRutaPuntos(ruta) {
+    let x = 2, y = 4, dx = 0, dy = -1;
+    const pts = [[x, y]];
+    ruta.split(" ").forEach(m => {
+      if (m === "R") { const t = dx; dx = -dy; dy = t; }
+      else if (m === "L") { const t = dx; dx = dy; dy = -t; }
+      else { x += dx * +m.slice(1); y += dy * +m.slice(1); pts.push([x, y]); }
+    });
+    return { pts, dx, dy };
+  }
+  function Plano({ plano, c }) {
+    const P = 56, M = 26, X = i => M + i * P, r = azRutaPuntos(plano.ruta);
+    const fin = r.pts[r.pts.length - 1];
+    const lineas = [];
+    for (let i = 0; i <= 4; i++) {
+      lineas.push(h("line", { key: "h" + i, x1: X(0), y1: X(i), x2: X(4), y2: X(i), stroke: c.bg3, "stroke-width": 14, "stroke-linecap": "round" }));
+      lineas.push(h("line", { key: "v" + i, x1: X(i), y1: X(0), x2: X(i), y2: X(4), stroke: c.bg3, "stroke-width": 14, "stroke-linecap": "round" }));
+    }
+    const cuadras = [];
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) cuadras.push(h("rect", { key: i + "-" + j, x: X(i) + 9, y: X(j) + 9, width: P - 18, height: P - 18, rx: 6, fill: c.bg2, stroke: c.border }));
+    return h("svg", { viewBox: "0 0 " + (2 * M + 4 * P) + " " + (2 * M + 4 * P + 10), className: "pr-mapa", role: "img", "aria-label": "Plano con el camino" },
+      lineas, cuadras,
+      h("polyline", { points: r.pts.map(p => X(p[0]) + "," + X(p[1])).join(" "), fill: "none", stroke: c.gold, "stroke-width": 4, "stroke-dasharray": "8 6", "stroke-linejoin": "round", "stroke-linecap": "round" }),
+      h("circle", { cx: X(2), cy: X(4), r: 9, fill: c.gold }),
+      h("text", { x: X(2), y: X(4) + 26, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: c.text }, "Вы"),
+      h("text", { x: X(fin[0]) + r.dx * 22, y: X(fin[1]) + r.dy * 22 + 9, "text-anchor": "middle", "font-size": 26 }, plano.destino));
+  }
+
+  function Pista({ texto }) {
+    const [ver, setVer] = useState(false);
+    if (!texto) return null;
+    return ver ? h("div", { className: "pr-pista", lang: "ru" }, azFmt(texto))
+      : h("button", { className: "pr-cu", style: { margin: "6px auto 0" }, onClick: () => setVer(true) }, "💡 Pista");
+  }
+
+  function Situacion({ ej, onRes, hecho, dark, c, examen }) {
+    const [txt, setTxt] = useState("");
+    const [r, setR] = useState(null);
+    const comprobar = () => {
+      if (!txt.trim()) return;
+      const res = azSituacion(txt, ej.sit);
+      setR(res);
+      if (hecho == null) onRes(res.resultado);
+    };
+    return h(React.Fragment, null,
+      h(Contexto, { ej }),
+      ej.escena && h("div", { className: "pr-escena", "aria-hidden": "true" }, ej.escena),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide)),
+      ej.plano && h(Plano, { plano: ej.plano, c }),
+      ej.audio && h(Oir, { texto: ej.audio, auto: !ej.audioManual }),
+      !r && h(Pista, { texto: ej.pista }),
+      h("textarea", { className: "pr-area", rows: 2, value: txt, lang: "ru", autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
+        placeholder: "Escribí en ruso lo que dirías…", onInput: e => { setTxt(e.target.value); if (r && r.nivel === 0) setR(null); } }),
+      h("button", { className: "pr-btn", style: { width: "100%", marginTop: 10 }, onClick: comprobar, disabled: !txt.trim() || (r && r.nivel > 0) }, "Comprobar"),
+      r && h(AzSituacionRes, { r, dark }),
+      hecho != null && r && ej.nota && h("div", { className: "pr-exp" }, azFmt(ej.nota)),   /* el modelo ya lo muestra AzSituacionRes */
+      r && r.nivel === 0 && !examen && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: () => { setTxt(""); setR(null); } }, "Intentar de nuevo"));
+  }
+
+  /* Diálogo o chat por turnos: el personaje habla, vos contestás; cada
+     respuesta se corrige por intención. Resultado: Bien si todo salió a la primera, Casi si hubo que
+     reintentar algún turno, Mal si se vio la respuesta de alguno. */
+  function Turnos({ ej, onRes, hecho, dark, c }) {
+    const T = ej.turnos;
+    const [paso, setPaso] = useState(0);
+    const [resp, setResp] = useState([]);           /* [{ t, nota }] */
+    const [txt, setTxt] = useState("");
+    const [r, setR] = useState(null);
+    const [salto, setSalto] = useState(false);
+    const [peor, setPeor] = useState(AZ_BIEN);      /* Bien a la primera · Casi si hubo que reintentar · Mal si se saltó */
+    const fin = paso >= T.pasos.length;
+    useEffect(() => { if (!fin) { const st = T.pasos[paso]; const k = setTimeout(() => azHablarRu(st.bot, st.genero || T.genero), 300); return () => clearTimeout(k); } }, [paso]);
+    const avanzar = (yo, nota, salte) => {
+      setResp(rs => { const n = rs.slice(); n[paso] = { t: yo, nota }; return n; });
+      setTxt(""); setR(null);
+      const n = paso + 1;
+      setPaso(n);
+      if (n >= T.pasos.length && hecho == null) onRes(salte || salto ? AZ_MAL : peor);
+    };
+    const enviar = () => {
+      if (!txt.trim() || fin) return;
+      const res = azSituacion(txt, T.pasos[paso].sit);
+      if (res.nivel === 0) { setR(res); setPeor(AZ_CASI); return; }
+      const formas = res.elementos.filter(e => e.estado === "forma").map(e => "«" + e.escrito + "» → mejor " + e.mejor);
+      avanzar(txt, formas.length ? "💬 Se entiende. " + formas.join("; ") : null);
+    };
+    const saltar = () => { setSalto(true); avanzar(T.pasos[paso].sit.modelos[0], null, true); };
+    return h(React.Fragment, null,
+      h("div", { className: "pr-pide" }, azFmt(ej.pide || T.titulo)),
+      h("div", { className: "pr-chat" },
+        T.pasos.slice(0, Math.min(paso + 1, T.pasos.length)).map((st, i) => h(React.Fragment, { key: i },
+          h("div", { className: "pr-msg bot" }, h("div", { className: "pr-ctx-p", lang: "ru" }, st.quien || T.quien), h("div", { lang: "ru" }, st.bot),
+            h("div", { className: "pr-msg-es" }, st.es)),
+          i < paso && h("div", { className: "pr-msg yo", lang: "ru" }, resp[i] ? resp[i].t : "…",
+            resp[i] && resp[i].nota && h("div", { className: "pr-nota", lang: "es" }, resp[i].nota))))),
+      !fin && h("div", { className: "pr-pista", style: { textAlign: "left", marginTop: 10 } }, azFmt("Tu turno: " + T.pasos[paso].tarea)),
+      !fin && !r && h(Pista, { texto: T.pasos[paso].pista }),
+      !fin && h("div", { className: "pr-in-row" },
+        h("input", { className: "pr-input", value: txt, lang: "ru", autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
+          placeholder: "Escribí en ruso…", onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
+        h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, T.chat ? "Enviar" : "Decir")),
+      r && h(AzSituacionRes, { r, dark, sinModelo: true }),
+      r && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, "Ver una respuesta y seguir"),
+      fin && h("div", { className: "pr-exp" }, salto ? "Conversación terminada. Algún turno lo viste resuelto: vuelve en otra sesión." : "Conversación terminada. ¡Bien!"),
+      hecho != null && ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)));
+  }
+
+  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar, chat: Chat, tocar: Tocar, situacion: Situacion, turnos: Turnos };
 
   /* ── Sesión ── */
-  function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar }) {
+  function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar, enOrden }) {
     const capa = useRef(null);   /* fondo sin scroll y ajuste al teclado (core.js, 05/10/2026) */
     const c = azColors(dark !== false);
     const [fase, setFase] = useState("inicio");     /* inicio · ej · fin */
@@ -401,6 +525,7 @@
         setLista(sel); setI(0); setRes({}); setCambios([]); setFase("ej");
         return;
       }
+      if (enOrden) { setLista(pool.slice(0, n || pool.length)); setI(0); setRes({}); setCambios([]); setFase("ej"); return; }   /* recorrido fijo (proyecto U11) */
       const dif = azTargetDifficulty(unidad, 1);
       const cerca = pool.filter(e => e.dificultad <= dif + 2);   /* nunca más de dos escalones arriba */
       const base = cerca.length >= (n || 12) * 2 ? cerca : pool;
@@ -504,4 +629,5 @@
   }
 
   window.AzPractica = AzPractica;
+  window.AzPlano = Plano;   /* el plano de calles, también para las lecciones */
 })();

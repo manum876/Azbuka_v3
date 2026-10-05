@@ -205,7 +205,7 @@ function App() {
     const ids = l => l.map(ru => (LEXICON_COMER.find(e => e.acento === ru) || {}).id).filter(Boolean);
     const seis = (titulo, es, f) => ({ titulo, es, f });
     const vI = ru => { const v = D9.verb[D9.sin(ru)]; return v && seis(v.ac, { "хоте́ть": "querer", "плани́ровать": "planear", "собира́ться": "tener pensado", "мечта́ть": "soñar con" }[ru], v.presente); };
-    const ampIds = ids(U9_AMPLIACION_RU.split(" "));
+    const ampIds = ids(U9_AMPLIACION_RU.split(" ").filter(Boolean));
     vista = h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
       h("div", { className: "u-kicker" }, "Unidad 9 · Módulo " + mod.n),
       h("h1", { className: "u-title" }, mod.titulo),
@@ -218,7 +218,7 @@ function App() {
         mod.n === 7 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Voy a ir"), h(TablaSeis, { c, lista: [seis("пойду́", "voy a ir (a pie)", D9.poidu), seis("пое́ду", "voy a ir (en vehículo)", D9.poedu)] })),
         mod.n === 8 && h(PreguntaAbierta, { c, green }),
         mod.n === 9 && h(React.Fragment, null, h("div", { className: "u-sec" }, "La semana de Ana"), h(AgendaAna, { c })),
-        mod.n === 10 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Palabras del viaje"), h(AzVocabulario, { c, ids: ids(["пое́здка", "путеше́ствие", "биле́т", "по́езд", "самолёт", "гости́ница", "страна́", "о́тпуск"]) })),
+        mod.n === 10 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Palabras del viaje"), h(AzVocabulario, { c, ids: ids(["пое́здка", "путеше́ствие", "биле́т", "по́езд", "самолёт", "гости́ница", "страна́", "о́тпуск", "посеща́ть"]) })),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
         mod.n === 10 && ampIds.length > 0 && h("div", { style: { marginTop: 28, paddingTop: 6, borderTop: `1px solid ${c.border}` } },
           h("div", { className: "u-sec" }, "Ampliación · opcional"),

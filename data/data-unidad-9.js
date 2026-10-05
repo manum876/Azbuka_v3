@@ -44,8 +44,8 @@ const U9_DESTINOS = [["рестора́н", "п", "al restaurante", "en el resta
 const U9_TRANSPORTE = [["по́езд", "en tren", "🚆"], ["самолёт", "en avión", "✈️"], ["маши́на", "en auto", "🚗"]];
 
 const U9_VISTAS = { 2: "путеше́ствовать", 5: "ско́ро сле́дующий че́рез послеза́втра", 6: "плани́ровать собира́ться мечта́ть", 7: "пойти́ пое́хать по́езд самолёт",
-  10: "пое́здка путеше́ствие биле́т" };
-const U9_AMPLIACION_RU = "посеща́ть";
+  10: "пое́здка путеше́ствие биле́т посеща́ть" };
+const U9_AMPLIACION_RU = "";   /* 05/10/2026: посеща́ть pasó a la base (Manu) */
 
 const U9_LECTURAS = [
   { id: "finde", titulo: "Пла́ны на выходны́е", lineas: [
@@ -87,8 +87,8 @@ const UNIDAD_9 = {
       intro: "El futuro ruso se arma como el «voy a» del español: una forma de быть y el verbo sin conjugar.",
       secciones: [
         { titulo: "Las formas de бу́ду", texto: "{я} бу́ду\nты бу́дешь\nон / она́ бу́дет\nмы бу́дем\nвы бу́дете\nони́ бу́дут", destacado: "бу́ду + infinitivo = voy a + infinitivo" },
-        { titulo: "Ejemplos", texto: "Я бу́ду рабо́тать («voy a trabajar»). Ты бу́дешь учи́ться. Он бу́дет чита́ть. Мы бу́дем отдыха́ть. Вы бу́дете смотре́ть фильм. Они́ бу́дут путеше́ствовать («van a viajar»)." },
-        { titulo: "El segundo verbo no cambia", texto: "Lo que cambia es бу́ду; el otro verbo queda siempre en infinitivo, como en español: voy a trabajar, vamos a trabajar.", truco: "Error típico: «Я бу́ду рабо́таю». Va «Я бу́ду рабо́тать»." }
+        { titulo: "Ejemplos", texto: "Я бу́ду рабо́тать. («voy a trabajar»)\nТы бу́дешь учи́ться. («vas a estudiar»)\nОн бу́дет чита́ть. («va a leer»)\nМы бу́дем отдыха́ть. («vamos a descansar»)\nВы бу́дете смотре́ть фильм. («van a ver una película»)\nОни́ бу́дут путеше́ствовать. («van a viajar»)" },
+        { titulo: "El segundo verbo no cambia", texto: "Lo que cambia es бу́ду; el otro verbo queda siempre en infinitivo, como en español: voy a trabajar, vamos a trabajar.", ojo: "no se dice «Я бу́ду рабо́таю». Va «Я бу́ду рабо́тать»." }
       ] },
     { id: "u9m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Verbos frecuentes en futuro", resumen: "За́втра я бу́ду рабо́тать.",
       intro: "Todos los verbos que ya conocés sirven para el futuro, sin aprender formas nuevas: alcanza con бу́ду y el infinitivo.",
@@ -100,7 +100,7 @@ const UNIDAD_9 = {
       intro: "Бу́ду solo, sin otro verbo, es «voy a estar».",
       secciones: [
         { titulo: "Dónde vas a estar", texto: "Я бу́ду до́ма («voy a estar en casa»). Ты бу́дешь на рабо́те. Она́ бу́дет в Москве́. Мы бу́дем в рестора́не. Они́ бу́дут в Барсело́не.", destacado: "Где ты бу́дешь за́втра? — Я бу́ду до́ма." },
-        { titulo: "Los tres tiempos de быть", texto: "Вчера́ я был до́ма. → Сейча́с я до́ма (en presente no se dice). → За́втра я бу́ду до́ма." }
+        { titulo: "Los tres tiempos de быть", texto: "Вчера́ я был до́ма. («ayer estuve en casa»)\nСейча́с я до́ма. («ahora estoy en casa»: en presente быть no se dice)\nЗа́втра я бу́ду до́ма. («mañana voy a estar en casa»)" }
       ] },
     { id: "u9m5", n: 5, tipo: "leccion", nPractica: 10, titulo: "Mañana y después", resumen: "за́втра, на сле́дующей неде́ле, че́рез час…",
       intro: "Las palabras para decir cuándo va a pasar algo.",
@@ -113,12 +113,12 @@ const UNIDAD_9 = {
       intro: "Además de decir qué va a pasar, podés decir qué querés o pensás hacer.",
       secciones: [
         { titulo: "Cuatro verbos + infinitivo", texto: "хоте́ть (querer): Я хочу́ путеше́ствовать.\nплани́ровать (planear): Я плани́рую рабо́тать до́ма.\nсобира́ться (tener pensado): Я собира́юсь изуча́ть ру́сский.\nмечта́ть (soñar con): Я мечта́ю жить в Москве́." },
-        { titulo: "No es lo mismo", texto: "Я бу́ду рабо́тать: «voy a trabajar» (va a pasar). Я хочу́ рабо́тать: «quiero trabajar». Я плани́рую рабо́тать: «planeo trabajar».", destacado: "бу́ду = va a pasar · хочу́ = lo deseo · плани́рую = lo planeo" }
+        { titulo: "No es lo mismo", texto: "Я бу́ду рабо́тать. («voy a trabajar»: va a pasar)\nЯ хочу́ рабо́тать. («quiero trabajar»)\nЯ плани́рую рабо́тать. («planeo trabajar»)", destacado: "бу́ду = va a pasar · хочу́ = lo deseo · плани́рую = lo planeo" }
       ] },
-    { id: "u9m7", n: 7, tipo: "leccion", nPractica: 12, titulo: "Adónde vas a ir", resumen: "Я пойду́ в рестора́н. Я пое́ду в Москву́.",
+    { id: "u9m7", n: 7, tipo: "leccion", nPractica: 12, titulo: "Adónde vas a ir", resumen: "Я пойду́ в шко́лу. Я пое́ду в Москву́.",
       intro: "Para «voy a ir» el ruso no usa бу́ду: tiene dos palabras propias.",
       secciones: [
-        { titulo: "Пойду́ y пое́ду", texto: "{я} пойду́ (voy a ir, a pie) y {я} пое́ду (voy a ir, en vehículo), con el destino en acusativo, como en la Unidad 6: Я пойду́ в рестора́н. Я пое́ду в Москву́. Мы пойдём на рабо́ту. No se dice «Я бу́ду идти́ в рестора́н».", destacado: "Я пойду́ в рестора́н. Я пое́ду в Москву́." },
+        { titulo: "Пойду́ y пое́ду", texto: "{я} пойду́ (voy a ir, a pie) y {я} пое́ду (voy a ir, en vehículo), con el destino en acusativo, como en la Unidad 6:\nЯ пойду́ в шко́лу. («voy a ir a la escuela»)\nЯ пое́ду в Москву́. («voy a ir a Moscú»)\nМы пойдём на рабо́ту. («vamos a ir al trabajo»)\nRecordá que algunas palabras no cambian en acusativo, como las masculinas que terminan en consonante: Я пойду́ в рестора́н.\nNo se dice «Я бу́ду идти́ в шко́лу».", destacado: "Я пойду́ в шко́лу. Я пое́ду в Москву́." },
         { titulo: "Dónde vas a estar y adónde vas a ir", texto: "Я бу́ду в Москве́ («voy a estar en Moscú»): dónde, prepositivo. Я пое́ду в Москву́ («voy a ir a Moscú»): adónde, acusativo." },
         { titulo: "En tren, en avión, en auto", texto: "на + prepositivo: на по́езде (en tren), на самолёте (en avión), на маши́не (en auto). Я пое́ду в Мадри́д на по́езде." }
       ] },
@@ -136,7 +136,7 @@ const UNIDAD_9 = {
     { id: "u9m10", n: 10, tipo: "leccion", nPractica: 10, titulo: "Viajes", resumen: "Я пое́ду в Испа́нию на самолёте.",
       intro: "Palabras para hablar de un viaje.",
       secciones: [
-        { titulo: "Las palabras del viaje", texto: "пое́здка (viaje, salida), путеше́ствие (viaje largo), биле́т (pasaje, boleto), по́езд (tren), самолёт (avión), гости́ница (hotel), страна́ (país), о́тпуск (vacaciones)." },
+        { titulo: "Las palabras del viaje", texto: "пое́здка (viaje, salida), путеше́ствие (viaje largo), биле́т (pasaje, boleto), по́езд (tren), самолёт (avión), гости́ница (hotel), страна́ (país), о́тпуск (vacaciones).\nпосеща́ть (visitar), con lo que se visita en acusativo: За́втра я бу́ду посеща́ть музе́й. Мы бу́дем посеща́ть Москву́." },
         { titulo: "Contar un viaje que viene", texto: "В о́тпуске я пое́ду в Испа́нию. Я пое́ду на самолёте. Я бу́ду жить в гости́нице. Я бу́ду отдыха́ть и гуля́ть." }
       ] },
     { id: "u9m11", n: 11, tipo: "lectura", titulo: "Los tres tiempos juntos", resumen: "Вчера́, сего́дня, за́втра.",
@@ -165,7 +165,7 @@ const U9_PROYECTO2 = { id: "u9p2", titulo: "Вчера́, сего́дня, за
 function u9Palabras(t) { return String(t).replace(/(^|[^\-А-Яа-яЁё\u0301{])([вВаАиИсСуУкКоОяЯ])(?=$|[^А-Яа-яЁё\u0301}])/g, "$1{$2}"); }
 UNIDAD_9.modulos.concat([U9_PROYECTO2]).forEach(m => {
   if (m.intro) m.intro = u9Palabras(m.intro);
-  (m.secciones || []).forEach(s => ["texto", "destacado", "truco"].forEach(k => { if (s[k]) s[k] = u9Palabras(s[k]); }));
+  (m.secciones || []).forEach(s => ["texto", "destacado", "truco", "ojo"].forEach(k => { if (s[k]) s[k] = u9Palabras(s[k]); }));
 });
 function unidad9Modulo(id) { return UNIDAD_9.modulos.find(m => m.id === id) || null; }
 
@@ -370,9 +370,9 @@ function ejerciciosUnidad9() {
     out.push({ id: "U9-via-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "VI-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
     out.push({ id: "U9-viad-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 10, grupo: "VId-" + j, items: [], pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
   });
-  /* Ampliación: посеща́ть */
+  /* посеща́ть (en la base desde el 05/10/2026) */
   [["За́втра я бу́ду посеща́ть музе́й.", "Mañana voy a visitar un museo."], ["Мы бу́дем посеща́ть Москву́.", "Vamos a visitar Moscú."]].forEach(([ru, es], j) =>
-    out.push({ id: "U9-amp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, ampliacion: true, grupo: "AM-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
+    out.push({ id: "U9-amp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "AM-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
       explicacion: ru + " посеща́ть (visitar) + acusativo." }));
 
   /* ── Módulo 11: los tres tiempos ── */

@@ -333,6 +333,103 @@ function azCorregir(respuesta, esperadas, opts) {
   return out;
 }
 
+/* ── Corrección por comunicación (Unidad 11, 05/10/2026) ──────
+   azSituacion(respuesta, sit) corrige por intención, no por una frase
+   exacta. sit = {
+     necesita: [{ es: "el agua", formas: ["во́ду", "стака́н воды́"], rx? }, …],
+       cada elemento es algo que tiene que aparecer (alcanza una de sus
+       formas; una forma puede tener varias palabras),
+     orden: true,          // los elementos tienen que ir en ese orden
+     (un elemento con consigna: "Hay que usar el pasado…" es un requisito de la
+     consigna, no de la comprensión: si es lo único que falta, el resultado es
+     «✗ Mal» con ese aviso, no «No se entiende» — Manu, 05/10/2026)
+     modelos: ["Я хочу́ ко́фе и во́ду."]   // una forma natural de decirlo
+   }
+   Tres resultados:
+     2 Bien          → aparece todo, en la forma correcta.
+     1 Se entiende   → aparece todo, pero alguna palabra está en otra forma
+                       (otro caso, otra persona) o tiene un error de tipeo:
+                       comunica; se muestra la forma correcta.
+     0 No se entiende → falta algo esencial (o el orden no coincide).
+   Decisión de Manu (05/10/2026): «Se entiende» vale el punto entero, así
+   que se guarda como Bien (r.resultado = 2) y se marca r.entiende = true. */
+function azSituacion(respuesta, sit) {
+  const crudos = azTokens(respuesta);
+  const K = crudos.map(azClaveRu);
+  const ids = function (t) { return azFormasDePalabra(t).map(function (x) { return x[0]; }).concat(
+    typeof LEXICON_COMER !== "undefined" ? LEXICON_COMER.filter(function (e) { return azClaveRu(e.ru) === azClaveRu(t); }).map(function (e) { return e.id; }) : []); };
+  const cerca = function (u, e) {
+    if (u === e) return true;
+    const a = ids(u), b = ids(e);
+    if (a.some(function (x) { return b.indexOf(x) >= 0; })) return true;
+    return e.length >= 4 && azDiff(u, e).dist <= (e.length >= 8 ? 2 : 1);
+  };
+  const usados = {};
+  const out = { elementos: [], modelo: (sit.modelos || [])[0] || "", tuya: [] };
+  (sit.necesita || []).forEach(function (el) {
+    let hallado = null;
+    /* 0. por patrón: rx sobre cada palabra (p. ej. cualquier verbo en pasado) */
+    if (el.rx) { const R = new RegExp(el.rx); for (let i = 0; i < K.length; i++) if (!usados[i] && R.test(K[i])) { hallado = { estado: "ok", pos: i, n: 1 }; break; } }
+    const todas = el.formas || [];
+    const plenas = todas.filter(function (f) { return f.charAt(0) !== "~"; });
+    const minimas = todas.filter(function (f) { return f.charAt(0) === "~"; }).map(function (f) { return f.slice(1); });
+    const exacta = function (lista) {
+      lista.some(function (f) {
+        const F = azTokens(f).map(azClaveRu);
+        for (let i = 0; i + F.length <= K.length; i++) {
+          if (F.every(function (w, j) { return K[i + j] === w && !usados[i + j]; })) { hallado = { estado: "ok", pos: i, n: F.length }; return true; }
+        }
+        return false;
+      });
+    };
+    /* otra forma de la misma palabra, o error de tipeo */
+    const parecida = function (lista) {
+      lista.some(function (f) {
+        const F = azTokens(f).map(azClaveRu);
+        for (let i = 0; i + F.length <= K.length; i++) {
+          if (F.every(function (w, j) { return !usados[i + j] && cerca(K[i + j], w); })) {
+            hallado = { estado: "forma", pos: i, n: F.length, escrito: crudos.slice(i, i + F.length).join(" "), mejor: f };
+            return true;
+          }
+        }
+        return false;
+      });
+    };
+    /* Primero las frases completas; las mínimas («~гости́ница») solo si no hay nada mejor */
+    if (!hallado) exacta(plenas);
+    if (!hallado) parecida(plenas);
+    if (!hallado) exacta(minimas);
+    if (!hallado) parecida(minimas);
+    if (hallado) for (let j = 0; j < hallado.n; j++) usados[hallado.pos + j] = hallado.estado;
+    out.elementos.push(Object.assign({ es: el.es, consigna: el.consigna, ver: ((el.formas || [])[0] || "").replace(/^~/, "") }, hallado || { estado: "falta" }));
+  });
+  let nivel = out.elementos.some(function (e) { return e.estado === "falta"; }) ? 0 :
+    out.elementos.some(function (e) { return e.estado === "forma"; }) ? 1 : 2;
+  if (nivel > 0 && sit.orden) {
+    const pos = out.elementos.map(function (e) { return e.pos; });
+    if (pos.some(function (p, i) { return i > 0 && p <= pos[i - 1]; })) { nivel = 0; out.desorden = true; }
+  }
+  if (!crudos.length) nivel = 0;
+  /* Lo que falta es un requisito de la consigna (p. ej. el pasado): se entiende, pero no responde → Mal */
+  const deConsigna = out.elementos.filter(function (e) { return e.estado === "falta" && e.consigna; });
+  /* …y solo si hay algo que se entiende: al menos un verbo (en otro tiempo) */
+  const conVerbo = crudos.some(function (w) { return azAnalizarPalabra(w).some(function (a) { return a.pos === "verbo"; }); });
+  out.consigna = nivel === 0 && conVerbo && !out.desorden && deConsigna.length > 0 && deConsigna.length === out.elementos.filter(function (e) { return e.estado === "falta"; }).length;
+  out.nivel = nivel;
+  out.entiende = nivel === 1;
+  out.resultado = nivel === 0 ? AZ_R_MAL : AZ_R_BIEN;
+  out.tuya = crudos.map(function (t, i) { return { t: t, estado: usados[i] === "forma" ? "forma" : "ok" }; });
+  const faltan = out.elementos.filter(function (e) { return e.estado === "falta"; });
+  out.resumen = nivel === 2 ? "Se entiende y está correcto." :
+    nivel === 1 ? "Se entiende. Hay un detalle para mejorar." :
+    !crudos.length ? "No escribiste nada." :
+    out.desorden ? "Está todo, pero en otro orden: así no se entiende el camino." :
+    out.consigna ? deConsigna.map(function (e) { return e.consigna; }).join(" ") :
+    "Falta " + faltan.map(function (e) { return e.es; }).join(", ") + ".";
+  return out;
+}
+window.azSituacion = azSituacion;
+
 window.azCorregir = azCorregir;
 window.azAnalizarPalabra = azAnalizarPalabra;
 window.azTokens = azTokens;
@@ -401,4 +498,32 @@ window.azDiff = azDiff;
       } }, "＋ Guardar este error en el cuaderno"));
   }
   window.AzCorreccion = AzCorreccion;
+
+  /* Resultado de azSituacion: ✓ Bien · 💬 Se entiende · ✗ No se entiende */
+  function AzSituacionRes({ r, dark, sinModelo }) {
+    if (!r) return null;
+    const c = azColors(dark !== false);
+    const col = r.nivel === 2 ? COL[2] : r.nivel === 1 ? c.gold : COL[0];
+    const txt = r.nivel === 2 ? "✓ Bien" : r.nivel === 1 ? "💬 Se entiende" : r.consigna ? "✗ Mal" : "✗ No se entiende";
+    const formas = r.elementos.filter(function (e) { return e.estado === "forma"; });
+    return h("div", { className: "az-cr", role: "status" },
+      h(Estilos, { c: c }),
+      h("div", { className: "az-cr-top" },
+        h("span", { className: "az-cr-res", style: { color: col, background: col + "22", border: "1px solid " + col } }, txt),
+        h("span", { className: "az-cr-sum" }, r.resumen)),
+      r.nivel === 1 && h(React.Fragment, null,
+        h("div", { className: "az-cr-lbl" }, "Tu respuesta"),
+        h("div", { className: "az-cr-linea", lang: "ru" }, r.tuya.map(function (p, i) {
+          return h("span", { key: i, className: "az-cr-w", style: p.estado === "forma" ? { color: c.gold, textDecoration: "underline 2px " + c.gold, textUnderlineOffset: 4 } : null }, p.t); })),
+        formas.map(function (e, i) { return h("div", { key: i, className: "az-cr-exp" }, azFmt("«" + e.escrito + "» → mejor **" + e.mejor + "**")); })),
+      !sinModelo && r.modelo && r.nivel < 2 && h(React.Fragment, null,
+        h("div", { className: "az-cr-lbl" }, r.nivel === 1 ? "Así queda perfecto" : "Una forma de decirlo"),
+        h("div", { className: "az-cr-ok", lang: "ru" }, r.modelo)),
+      !sinModelo && r.modelo && r.nivel === 2 && h("div", { className: "az-cr-exp", lang: "ru", style: { borderLeftColor: COL[2] } }, "Otra forma: " + r.modelo),
+      r.nivel < 2 && typeof azGuardarEnCuaderno === "function" && h("button", { className: "az-cr-cu", onClick: function () {
+        azGuardarEnCuaderno("Escribí: " + r.tuya.map(function (p) { return p.t; }).join(" ") + "\nMejor: " + r.modelo +
+          (formas.length ? "\n" + formas.map(function (e) { return e.escrito + " → " + e.mejor; }).join("; ") : ""));
+      } }, "＋ Guardar en el cuaderno"));
+  }
+  window.AzSituacionRes = AzSituacionRes;
 })();

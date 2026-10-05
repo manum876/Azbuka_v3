@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Unidad 11: Comunicación cotidiana</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/preact.js"></script>
+<script src="data/data-lexicon.js"></script>
+<script src="data/data-casos.js"></script>
+<script src="data/data-verbos.js"></script>
+<script src="data/data-frases.js"></script>
+<script src="data/data-dialogos.js"></script>
+<script src="data/data-unidad-11.js"></script>
+<script src="js/core.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/corrector.js"></script>
+<script src="js/burbuja.js"></script>
+<script src="js/unidad-ui.js"></script>
+<script src="js/unidad.js"></script>
+<script>
+/* ============================================================
+   AZBUKA-11.HTML — Unidad 11: Comunicación cotidiana
+   ------------------------------------------------------------
+   05/10/2026. Piezas de unidad-ui.js y unidad.js. Propio de esta
+   unidad: listas de fórmulas con audio, conversaciones modelo
+   (Conversacion), plano de calles (AzPlano, de unidad.js), tablas de
+   precios, pedidos, Где / Куда́ / Отку́да y adjetivos; el proyecto
+   «Мой день в Росси́и» en dos partes (siete situaciones + relato).
+   Los ejercicios de situación se corrigen por intención (azSituacion).
+   URL: azbuka-11.html · azbuka-11.html?m=u11m2
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+const U = UNIDAD_11;
+const EJ_U11 = ejerciciosUnidad11();
+const EJ_U11_BASE = EJ_U11.filter(e => e.tipo !== "dia");
+const D11 = u11Datos();
+const CONV = u11Conversaciones();
+const OBJETIVO_U11 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(11) >= 0 || (e.appearsIn || []).indexOf(11) >= 0).map(e => e.id);
+const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
+const AVISO_U11 = AVISO_ACENTOS + " En las situaciones no hay una sola respuesta: lo importante es que se entienda.";
+
+/* Lista de fórmulas: [ruso, español], cada una con ▶ */
+function Formulas({ filas, c }) {
+  const idx = azIndiceFormas();
+  const lexDe = ru => (ru.match(/[А-Яа-яЁё\u0301]+/g) || []).map(w => { const r = idx.get(azFormaClave(w)); return r && r[0] ? r[0][0] : null; });
+  return h("div", { className: "u-card", style: { padding: "2px 16px", marginTop: 12 } }, filas.map(([ru, es], k) =>
+    h("div", { key: k, className: "voc" },
+      h("div", { style: { flex: 1, minWidth: 0 } },
+        h("div", { className: "voc-ru", style: { fontSize: 17 } }, h(AzTexto, { ru, lex: lexDe(ru), objetivo: OBJETIVO_U11 })),
+        h("div", { className: "voc-es" }, es)),
+      h("button", { className: "play", onClick: () => azHablarRu(ru), "aria-label": "Escuchar" }, "▶"))));
+}
+
+/* Conversación modelo: el personaje y vos (las respuestas modelo), con audio y traducción */
+function Conversacion({ T, c }) {
+  const [es, setEs] = useState(false);
+  const idx = azIndiceFormas();
+  const lexDe = ru => (ru.match(/[А-Яа-яЁё\u0301]+/g) || []).map(w => { const r = idx.get(azFormaClave(w)); return r && r[0] ? r[0][0] : null; });
+  const lineas = [];
+  T.pasos.forEach(p => { lineas.push({ q: p.quien || T.quien, ru: p.bot, es: p.es, g: p.genero || T.genero }); lineas.push({ q: "Вы", ru: p.sit.modelos[0], es: p.tarea, yo: true }); });
+  return h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 12 } },
+    h("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
+      h("div", { style: { flex: 1, fontSize: 16, fontWeight: 800, color: c.gold } }, T.titulo),
+      h("button", { className: "play", onClick: () => azHablarSecuencia(lineas.map(l => ({ texto: l.ru, genero: l.g }))), "aria-label": "Escuchar la conversación" }, "▶"),
+      h("button", { className: "play", onClick: azCallar, "aria-label": "Detener el audio" }, "■")),
+    h("div", { style: { display: "flex", flexDirection: "column", gap: 6, marginTop: 10 } }, lineas.map((l, k) =>
+      h("div", { key: k, style: { alignSelf: l.yo ? "flex-end" : "flex-start", maxWidth: "88%", padding: "8px 12px", borderRadius: 14,
+        background: l.yo ? c.gold + "22" : c.bg2, border: `1px solid ${l.yo ? c.gold + "66" : c.border}` } },
+        h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: c.gold }, lang: "ru" }, l.q),
+        h("div", { style: { fontSize: 16, lineHeight: 1.45 } }, h(AzTexto, { ru: l.ru, lex: lexDe(l.ru), objetivo: OBJETIVO_U11 })),
+        es && h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 2 } }, l.yo ? "(" + l.es.replace(/\.$/, "") + ")" : l.es)))),
+    h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => setEs(!es) }, es ? "Ocultar la traducción" : "Ver la traducción"));
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [modId, setModId] = useState(() => new URLSearchParams(location.search).get("m"));
+  const [tarjetas, setTarjetas] = useState(null);
+  const [practica, setPractica] = useState(null);
+  const [visto, setVisto] = useState(1);
+  const [examen, setExamen] = useState(null);
+  const [, refrescar] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      setVisto(await azGet('az_u11_visto', 1));
+      await azLoadProgress();
+      azSaveUnitProgress(11, {});
+      refrescar(x => x + 1);
+    })();
+    const pop = () => { setModId(new URLSearchParams(location.search).get("m")); setTarjetas(null); setPractica(null); };
+    window.addEventListener("popstate", pop);
+    return () => window.removeEventListener("popstate", pop);
+  }, []);
+  useEffect(() => {
+    const m = modId ? unidad11Modulo(modId) : null;
+    window.azFuenteActual = () => m ? "Unidad 11 · " + m.titulo : "Unidad 11";
+    if (m && m.n > visto) { setVisto(m.n); azSet('az_u11_visto', m.n); }
+    if (m) azGuardarUltimo({ unidad: 11, n: m.n, total: U.modulos.length, titulo: "Unidad 11 · " + m.titulo, href: "azbuka-11.html?m=" + m.id });
+  }, [modId]);
+  useEffect(() => { if (!practica && AZ_PROGRESS.units) setExamen((AZ_PROGRESS.units["11"] || {}).examen || null); }, [practica]);
+
+  const abrirModulo = id => { history.pushState(null, "", id ? "?m=" + id : location.pathname); setModId(id); window.scrollTo(0, 0); };
+  const practicarUnidad = () => setPractica({ titulo: "Unidad 11", pool: EJ_U11_BASE.filter(e => e.modulo <= Math.max(visto, 1)) });
+  const practicarModulo = m => setPractica({ titulo: m.titulo, n: m.nPractica || 10, pool: EJ_U11_BASE.filter(e => e.modulo === m.n) });
+  const recorrerDia = () => setPractica({ titulo: "Un día en Rusia", n: 7, pool: EJ_U11.filter(e => e.tipo === "dia"), enOrden: true });
+  const rendirExamen = m => setPractica({ titulo: "Evaluación de la Unidad 11", pool: EJ_U11_BASE, examen: { intro: m.intro, partes: m.partes, aprobado: m.aprobado } });
+  const reforzar = parte => setPractica({ titulo: "Reforzar: " + parte.nombre, pool: EJ_U11_BASE.filter(e => parte.tipos.indexOf(e.tipo) >= 0) });
+
+  const c = azColors(darkMode);
+  const green = darkMode ? "#4CAF82" : "#2E7D55";
+  const mod = modId ? unidad11Modulo(modId) : null;
+  const idx = mod ? U.modulos.indexOf(mod) : -1;
+  const prev = mod && U.modulos[idx - 1], next = mod && U.modulos[idx + 1];
+  const palabrasDom = OBJETIVO_U11.filter(id => azItem("lex:" + id).level === 2).length;
+  const tabs = mod ? [
+    { id: "u", icon: "⊞", aria: "Unidad", action: () => abrirModulo(null) },
+    { id: "p", icon: "‹", aria: "Módulo anterior", disabled: !prev, action: () => prev && abrirModulo(prev.id) },
+    { id: "m", texto: "Módulo " + mod.n },
+    { id: "s", icon: "›", aria: "Módulo siguiente", disabled: !next, action: () => next && abrirModulo(next.id) }
+  ] : azTabsUnidad(11);
+
+  const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 1), examen, onPracticar: practicarUnidad, onAbrir: abrirModulo,
+    progreso: [{ label: "Palabras dominadas", valor: palabrasDom, total: OBJETIVO_U11.length }] });
+
+  let vista = null;
+  if (mod) {
+    const S = ru => D11.sust(ru) || { nom: ru, acc: ru, prep: ru, gen: ru };
+    const sec = t => h("div", { className: "u-sec" }, t);
+    const extra = {
+      1: h(React.Fragment, null, sec("Necesito…"),
+          h(AzTablaGrupos, { encabezados: ["Palabra", "Necesito…"], c, filas: [["биле́т", "un boleto"], ["ка́рта", "un mapa"], ["такси́", "un taxi"], ["врач", "un médico"], ["рабо́тать", "trabajar"]].map(([ru, es]) => {
+            const v = /ть$/.test(ru), s = v ? null : S(ru), f = v ? "ну́жно" : s.g === "f" ? "нужна́" : s.g === "m" ? "ну́жен" : "ну́жно";
+            return [{ ru, es }, { ru: "Мне " + f + " " + ru + ".", es: "" }]; }) }),
+          sec("Las fórmulas"), h(Formulas, { c, filas: U11_EXPR.map(x => [x[1], x[0]]) })),
+      2: h(React.Fragment, null, sec("Los precios"),
+          h(AzTablaGrupos, { encabezados: ["Número", "Precio"], c, filas: [1, 2, 3, 4, 5, 10, 12].map(n => [{ ru: U11_NUM[n], es: String(n) }, { ru: U11_NUM[n] + " " + (n === 1 ? "рубль" : n <= 4 ? "рубля́" : "рубле́й"), es: n + " ₽" }])
+            .concat([[{ ru: "сто", es: "100" }, { ru: "сто рубле́й", es: "100 ₽" }], [{ ru: "ты́сяча", es: "1000" }, { ru: "ты́сяча рубле́й", es: "1000 ₽" }]]) }),
+          sec("Una compra"), h(Conversacion, { T: CONV.tienda, c })),
+      3: h(React.Fragment, null, sec("Lo que pedís: acusativo"),
+          h(AzTablaGrupos, { encabezados: ["En la carta", "Я хочу́…"], c, filas: U11_COMIDA.map(([ru, es, em]) => [{ ru, es: em + " " + es.replace(/^(un|una) /, "") }, { ru: S(ru).acc, es: "" }]) }),
+          sec("En el café"), h(Conversacion, { T: CONV.cafe[0], c })),
+      4: h(React.Fragment, null, sec("Где, куда́, отку́да"),
+          h(AzTablaGrupos, { encabezados: ["¿Dónde?", "¿Adónde?", "¿De dónde?"], c, filas: [["аэропо́рт", "в"], ["центр", "в"], ["Москва́", "в"], ["вокза́л", "на"]].map(([ru, pr]) => { const s = S(ru);
+            return [{ ru: pr + " " + s.prep, es: "" }, { ru: pr + " " + s.acc, es: "" }, { ru: (pr === "в" ? "из " : "с ") + s.gen, es: "" }]; }) }),
+          sec("En la estación"), h(Conversacion, { T: CONV.estacion[0], c })),
+      5: h(React.Fragment, null, sec("Un camino en el plano"),
+          h("div", { className: "u-card", style: { padding: "10px 14px", marginTop: 12 } }, h(AzPlano, { plano: { ruta: "S1 R S1 L S1", destino: "🏦" }, c })),
+          h(Formulas, { c, filas: [["Иди́те пря́мо, пото́м поверни́те напра́во, пото́м поверни́те нале́во.", "Siga derecho, después doble a la derecha y después a la izquierda."]] }),
+          sec("Para escuchar"), h(Formulas, { c, filas: [["Банк ря́дом.", "El banco está cerca."], ["Музе́й далеко́.", "El museo está lejos."], ["Кафе́ напро́тив ста́нции.", "El café está enfrente de la estación."],
+            ["Банк ме́жду магази́ном и рестора́ном.", "El banco está entre la tienda y el restaurante."], ["Где нахо́дится апте́ка?", "¿Dónde queda la farmacia?"]] })),
+      6: h(React.Fragment, null, sec("Las fórmulas"), h(Formulas, { c, filas: U11_PROBLEMAS.map(x => [x[1], x[0]]) })),
+      7: h(React.Fragment, null, sec("Tres chats"), CONV.chats.slice(0, 3).map((T, k) => h(Conversacion, { key: k, T, c }))),
+      8: h(React.Fragment, null, sec("El adjetivo y el género"),
+          h(AzTablaGrupos, { encabezados: ["Masculino", "Femenino", "Neutro"], c, filas: ["интере́сный", "ску́чный", "краси́вый", "вку́сный", "удо́бный", "ва́жный"].map(a => { const x = D11.adj(a);
+            return x ? [{ ru: x.m, es: "" }, { ru: x.f, es: "" }, { ru: x.n, es: "" }] : null; }).filter(Boolean) }),
+          sec("Opinar"), h(Formulas, { c, filas: [["Я ду́маю, что э́то интере́сно.", "Creo que es interesante."], ["Я счита́ю, что э́то ва́жно.", "Considero que es importante."], ["По-мо́ему, э́то хорошо́.", "Para mí, está bien."],
+            ["Я предпочита́ю чай.", "Prefiero el té."], ["Мне нра́вится метро́, потому́ что э́то удо́бно.", "Me gusta el subte porque es cómodo."]] })),
+      9: h(React.Fragment, null, sec("Para escuchar"), h(Formulas, { c, filas: [["Чем ты занима́ешься?", "¿A qué te dedicás?"], ["Где ты рабо́таешь?", "¿Dónde trabajás?"], ["Отку́да ты?", "¿De dónde sos?"], ["Где ты живёшь?", "¿Dónde vivís?"],
+            ["Что ты лю́бишь де́лать?", "¿Qué te gusta hacer?"], ["Что ты де́лал на выходны́х?", "¿Qué hiciste el fin de semana?"], ["Каки́е у тебя́ пла́ны?", "¿Qué planes tenés?"], ["Тебе́ нра́вится Барсело́на?", "¿Te gusta Barcelona?"]] })),
+      11: h(React.Fragment, null, sec("Más natural"), h(Formulas, { c, filas: U11_NATURAL.slice(0, 6).map(x => [x[1], x[0]]) }))
+    };
+    vista = h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+      h("div", { className: "u-kicker" }, "Unidad 11 · Módulo " + mod.n),
+      h("h1", { className: "u-title" }, mod.titulo),
+      h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
+      mod.tipo === "leccion" && h(React.Fragment, null,
+        h(AzSecciones, { secciones: mod.secciones }),
+        extra[mod.n] || null,
+        h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo")),
+      mod.tipo === "conversaciones" && h(React.Fragment, null,
+        CONV.completas.map((T, k) => h(Conversacion, { key: k, T, c })),
+        h("button", { className: "ubtn", style: { marginTop: 18 }, onClick: () => practicarModulo(mod) }, "Practicar las conversaciones")),
+      mod.tipo === "proyecto" && h(React.Fragment, null,
+        sec("1. Las siete situaciones del día"),
+        h("p", { className: "u-text" }, "Transporte, llegada, tienda, restaurante, una charla, un plan y un problema. Resolvelas una por una, como en la práctica."),
+        h("button", { className: "ubtn", onClick: recorrerDia }, "Recorrer el día"),
+        sec("2. Мой день в Росси́и"),
+        h("p", { className: "u-text" }, azFmt("Contá tu día en Rusia en 20 a 25 frases: qué hiciste, qué pasa ahora y qué vas a hacer mañana. Por ejemplo: Сего́дня я в Санкт-Петербу́рге. У́тром я был на вокза́ле. Пото́м я обе́дал в рестора́не и говори́л с официа́нтом. По-мо́ему, го́род о́чень краси́вый. За́втра я пое́ду в Москву́…")),
+        h(AzProyecto, { mod, c, green, clave: "az_u11_proyecto", fuente: { titulo: "Unidad 11 · Мой день в Росси́и", href: "azbuka-11.html?m=u11m12" }, aviso: AVISO_ACENTOS })),
+      mod.tipo === "examen" && h(React.Fragment, null,
+        h("div", { className: "u-card", style: { padding: "6px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
+          h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 14.5 } },
+            h("span", { style: { fontWeight: 600 } }, p.nombre), h("span", { style: { color: c.textMuted } }, p.n + " ejercicios")))),
+        examen && h("div", { style: { marginTop: 14, fontSize: 14, color: examen.aprobado ? green : "#E2884A", fontWeight: 700 } },
+          "Última vez: " + examen.pct + " % (" + examen.fecha.split("-").reverse().join("/") + ")" + (examen.aprobado ? " · aprobada" : "")),
+        h("button", { className: "ubtn", onClick: () => rendirExamen(mod) }, examen ? "Rendir de nuevo" : "Empezar la evaluación")),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo));
+  }
+
+  return h(React.Fragment, null,
+    h(AzEstilosUnidad, { c, green }),
+    h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vista : portada),
+    practica && h(AzPractica, { key: practica.titulo + (practica.pool[0] || {}).id, unidad: 11, titulo: practica.titulo, pool: practica.pool, mezcla: U11_MEZCLA,
+      n: azNPractica(practica.pool, practica.n), dark: darkMode, aviso: AVISO_U11, examen: practica.examen, enOrden: practica.enOrden, onReforzar: reforzar, objetivo: OBJETIVO_U11,
+      onSalir: () => { setPractica(null); refrescar(x => x + 1); } }),
+    tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, onClose: () => { setTarjetas(null); refrescar(x => x + 1); } }),
+    h(AzBurbujaHost, { dark: darkMode }));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

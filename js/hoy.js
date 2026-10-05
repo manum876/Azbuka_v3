@@ -16,6 +16,8 @@
      U8 verbo del día en pasado (qué hiciste ayer)
      U9 plan del día (qué vas a hacer mañana: бу́ду + infinitivo)
      U10 lo que no tenés (у меня́ нет + genitivo)
+     U11 situación del día (qué decís; se corrige por intención, azSituacion:
+         ✓ Bien · 💬 Se entiende · ✗ No se entiende)
    Reglas (Manu, 05/10/2026): nada de la respuesta a la vista; la
    ayuda va detrás de «💡 Pista»; la corrección dice Bien, Casi o Mal
    según la consigna y habla de la forma que escribió el alumno.
@@ -34,7 +36,8 @@ const AZ_HOY_DEPS = {
   7: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-7.js"],
   8: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-8.js"],
   9: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-9.js"],
-  10: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-10.js"]
+  10: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-10.js"],
+  11: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "js/corrector.js", "data/data-unidad-11.js"]
 };
 const AZ_HOY_CARGADOS = {};
 function azHoyCargar(n) {
@@ -49,7 +52,7 @@ function azHoyCargar(n) {
 function azHoyFecha() { return new Date().toISOString().slice(0, 10); }
 function azHoyNumero() { const d = new Date(); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); }
 /* La unidad del desafío: la del último módulo abierto (hasta la 8) */
-async function azHoyUnidad() { const u = await azGet("az_ultimo", null); return u && u.unidad ? Math.min(10, Math.max(1, u.unidad)) : null; }
+async function azHoyUnidad() { const u = await azGet("az_ultimo", null); return u && u.unidad ? Math.min(11, Math.max(1, u.unidad)) : null; }
 
 /* ── Ayudas para revisar ─────────────────────────────────────── */
 const azHoyPal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
@@ -215,6 +218,18 @@ function azHoyDesafio(n) {
         if (usa.some(u => azHoyK(u.w) === azHoyK(s.gen))) return { nivel: "bien", msg: "**нет " + s.gen + "**: después de нет, genitivo." };
         return { nivel: "mal", msg: "Usaste «" + usa[0].w + "», pero después de нет va el genitivo: **" + s.gen + "**." }; } };
   }
+  if (n === 11 && typeof ejerciciosUnidad11 === "function" && typeof azSituacion === "function") {
+    const lista = ejerciciosUnidad11().filter(e => e.forma === "situacion" && (e.tipo === "situacion" || e.tipo === "mensaje") && !e.contexto);
+    const e = lista[num % lista.length];
+    const modelo = e.sit.modelos[0];
+    return { titulo: "Situación del día", emoji: e.escena || "💬", grande: null, sub: null, consigna: e.pide.replace(/\{(.)\}/g, "$1"),
+      pista: "Tiene que aparecer: " + e.sit.necesita.map(x => x.es).join(", ") + ". Empieza, por ejemplo, con «" + modelo.split(" ")[0].replace(/[,.!?]/g, "") + "».",
+      revisar: txt => { const r = azSituacion(txt, e.sit);
+        const formas = r.elementos.filter(x => x.estado === "forma").map(x => "«" + x.escrito + "» → mejor **" + x.mejor + "**");
+        if (r.nivel === 2) return { nivel: "bien", msg: "Se entiende y está correcto. Otra forma: **" + modelo + "**", oir: modelo };
+        if (r.nivel === 1) return { nivel: "casi", etiqueta: "💬 Se entiende", msg: formas.join(". ") + ". Así queda perfecto: **" + modelo + "**", oir: modelo };
+        return { nivel: "mal", etiqueta: r.consigna ? "✗ Mal" : "✗ No se entiende", msg: r.resumen + " Una forma de decirlo: **" + modelo + "**", oir: modelo }; } };
+  }
   return null;
 }
 
@@ -296,7 +311,7 @@ function AzHoy({ c, unidad, onCerrar }) {
           h("button", { className: "az-hoy-b", disabled: !txt.trim(), onClick: revisar }, "Revisar")),
         pista && h("div", { className: "az-hoy-p" }, azFmt(d.pista)),
         res && h("div", { className: "az-hoy-r" },
-          h("div", { style: { fontWeight: 800, color: colRes } }, { bien: "✓ Bien", casi: "≈ Casi", mal: "✗ Mal" }[res.nivel]),
+          h("div", { style: { fontWeight: 800, color: colRes } }, res.etiqueta || { bien: "✓ Bien", casi: "≈ Casi", mal: "✗ Mal" }[res.nivel]),
           h("div", { style: { display: "flex", alignItems: "center", gap: 10, marginTop: 4 } }, h("div", { style: { flex: 1 } }, azFmt(res.msg)),
             res.oir && h("button", { className: "play", onClick: () => azHablarRu(res.oir), "aria-label": "Escuchar" }, "▶")),
           res.tips && res.nivel !== "bien" && res.tips.map((t, i) => h("div", { key: i, style: { marginTop: 6, color: c.textSub } }, azFmt(t))),
