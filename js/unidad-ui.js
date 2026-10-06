@@ -1,7 +1,7 @@
 /* ============================================================
    UNIDAD-UI.JS — Piezas de pantalla compartidas por las unidades
    ------------------------------------------------------------
-   Versión 26/09/2026. Todo lo que se ve igual en cada azbuka-N.html:
+   Versión 06/10/2026 (teoría ampliada); antes, 26/09/2026. Todo lo que se ve igual en cada azbuka-N.html:
    estilos, secciones de teoría, vocabulario, frases, diálogos (con
    grabadora), tarjetas de palabras, mapa para explorar, proyecto de
    escritura y la portada de la unidad. Así cada unidad es casi solo
@@ -13,7 +13,10 @@
 
    Componentes (window.*):
      AzEstilosUnidad({ c, green })            estilos de todas las unidades
-     AzSecciones({ secciones })              teoría: título, texto, destacado, truco
+     AzSecciones({ secciones })              teoría: título, texto, destacado, truco, ojo y, desde el
+                                             06/10/2026, las piezas de la teoría ampliada (ver abajo)
+     azRegla(id) → { seccion, modulo, unidad }   busca una sección de teoría por su id en las unidades cargadas
+     AzHojaRegla({ id, c, onClose })         la sección en una hoja («Repasar la regla», desde la práctica)
      AzVocabulario({ ids, c })               palabras del léxico con ▶
      AzFrasesLista({ ids, c })               frases de data-frases.js con ▶
      AzListaDialogos({ ids, onAbrir })       tarjetas de diálogos
@@ -127,17 +130,174 @@
     .grp.compacta td{padding:7px 4px;}
     .grp.compacta .grp-ru{font-size:12.5px;}
     .grp.compacta .grp-es{font-size:10.5px;}
+    /* Teoría ampliada (06/10/2026, PLAN_PROFUNDIZACION §3) */
+    .u-ej{background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:10px 12px;margin-top:8px;}
+    .u-ej-top{display:flex;align-items:flex-start;gap:10px;}
+    .u-ej-ru{flex:1;min-width:0;font-size:17px;font-weight:700;color:${c.text};line-height:1.4;}
+    .u-ej-hi{color:${c.gold};}
+    .u-ej-es{font-size:13.5px;color:${c.textMuted};margin-top:2px;}
+    .u-ej-por{font-size:13.5px;line-height:1.5;color:${c.textSub};margin-top:6px;padding-left:8px;border-left:2px solid ${c.gold}66;}
+    .u-ej .play{width:32px;height:32px;border-radius:9px;font-size:12px;}
+    .u-des{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+    .u-des-p{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:8px 10px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-family:inherit;cursor:pointer;text-align:left;transition:.18s;}
+    .u-des-p.on{background:${c.gold}22;border-color:${c.gold};}
+    .u-des-ru{font-size:17px;font-weight:700;}
+    .u-des-rol{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:${c.textMuted};}
+    .u-des-p.on .u-des-rol{color:${c.gold};}
+    .u-err{margin-top:8px;font-size:15px;line-height:1.45;}
+    .u-err-f{display:flex;gap:8px;align-items:baseline;}
+    .u-err-mal{color:#D9776F;text-decoration:line-through;text-decoration-color:#B5605C;}
+    .u-err-bien{color:${green};font-weight:700;}
+    .u-err-por{font-size:13.5px;color:${c.textSub};margin:2px 0 0 22px;}
+    .u-chq{margin-top:14px;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;}
+    .u-chq-k{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};}
+    .u-chq-p{font-size:15px;font-weight:600;color:${c.text};margin-top:6px;line-height:1.45;}
+    .u-chq-ops{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+    .u-chq-op{padding:8px 12px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;background:${c.bg2};border:1px solid ${c.border};color:${c.text};transition:.18s;}
+    .u-chq-op.ok{background:${green}22;border-color:${green};color:${green};}
+    .u-chq-op.mal{background:#B5605C22;border-color:#B5605C;color:#D9776F;}
+    .u-chq-r{font-size:13.5px;line-height:1.5;color:${c.textSub};margin-top:8px;}
+    .u-mas-b{display:flex;align-items:center;gap:6px;margin-top:14px;padding:9px 12px;width:100%;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.gold};font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;text-align:left;}
+    .u-mas{margin-top:2px;padding:4px 0 2px 12px;border-left:2px solid ${c.border};}
   `);
   }
 
-  function AzSecciones({ secciones }) {
-    return h(React.Fragment, null, (secciones || []).map((x, k) => h("div", { key: k },
-      h("div", { className: "u-sec" }, x.titulo),
-      h("div", { className: "u-text", style: { whiteSpace: "pre-line" } }, azFmt(x.texto)),   /* \n = renglón nuevo (pasos numerados) */
+  /* ── Teoría ampliada (06/10/2026, PLAN_PROFUNDIZACION §3) ──
+     Una sección puede tener, además de titulo, texto, destacado, truco y ojo:
+       id           nombre de la regla (lo usan los ejercicios: campo regla)
+       antes        { pide, opciones, ok, por }       pregunta para descubrir la regla antes de leerla
+       desarmar     { ru, partes: [{ txt, rol, nota? }] }   frase con la función de cada palabra
+       ejemplos     [{ ru, es, por, lex? }]          ejemplos explicados; en ru, {…} marca lo que cambia
+       comparacion  "…"                              recuadro «En español» (solo para entender una idea)
+       errores      [{ mal, bien, por }]             error típico tachado y la forma correcta
+       chequeo      [{ pide, opciones, ok, por }]    1 a 3 preguntas al final; no cuentan para el progreso
+       mas          { texto?, ejemplos?, errores?, tabla? }   bloque plegable «Más a fondo»
+     Sin estos campos, una sección se ve igual que antes. */
+  const sinLlaves = t => String(t || "").replace(/[{}]/g, "");
+  const LEX_CACHE = {};
+  /* ID del léxico de una palabra escrita: forma de diccionario o, si no, una forma de Casos o Verbos.
+     Si hay más de una palabra posible, no se enlaza (mejor sin link que con el equivocado). */
+  function azLexDe(w) {
+    const k = azNormRu(String(w).toLowerCase());
+    if (k in LEX_CACHE) return LEX_CACHE[k];
+    let id = null;
+    if (typeof LEXICON_COMER !== "undefined") {
+      const exactas = LEXICON_COMER.filter(e => azNormRu(e.ru.toLowerCase()) === k);
+      const ens = exactas.filter(e => (e.introducedIn || []).length);
+      const lista = ens.length ? ens : exactas;
+      if (lista.length === 1) id = lista[0].id;
+      else if (!lista.length && typeof azBuscarForma === "function" && typeof CASOS !== "undefined") {
+        let ids = [...new Set(azBuscarForma(k).filter(r => r.exacta).map(r => r.id))];
+        if (ids.length > 1) ids = ids.filter(x => ((lexComerById(x) || {}).introducedIn || []).length);   /* la que se enseña en alguna unidad */
+        if (ids.length === 1) id = ids[0];
+      }
+    }
+    LEX_CACHE[k] = id;
+    return id;
+  }
+  /* Frase rusa con palabras tocables y lo marcado entre {…} en dorado */
+  function FraseEj({ ru, lex }) {
+    const out = []; let k = 0, ult = 0, m;
+    const rx = /[А-Яа-яЁё́{}]+(?:-[А-Яа-яЁё́{}]+)*/g;
+    while ((m = rx.exec(ru))) {
+      if (m.index > ult) out.push(ru.slice(ult, m.index));
+      const tok = m[0], plano = sinLlaves(tok);
+      const piezas = tok.split(/(\{[^}]*\})/).filter(Boolean).map((p, i) => /^\{/.test(p) ? h("span", { key: i, className: "u-ej-hi" }, p.slice(1, -1)) : p);
+      const id = lex ? lex[k] : azLexDe(plano);
+      out.push(id && typeof azAbrirBurbuja === "function"
+        ? h("span", { key: m.index, className: "az-link", role: "button", tabIndex: 0, onClick: ev => { ev.stopPropagation(); azAbrirBurbuja("palabra", { id, forma: plano }, ev.currentTarget); } }, piezas)
+        : h("span", { key: m.index }, piezas));
+      ult = m.index + tok.length; k++;
+    }
+    if (ult < ru.length) out.push(ru.slice(ult));
+    return h("span", { lang: "ru" }, out);
+  }
+  function Ejemplos({ lista }) {
+    return h(React.Fragment, null, lista.map((e, i) => h("div", { key: i, className: "u-ej" },
+      h("div", { className: "u-ej-top" },
+        h("div", { style: { flex: 1, minWidth: 0 } },
+          h("div", { className: "u-ej-ru" }, h(FraseEj, { ru: e.ru, lex: e.lex })),
+          e.es && h("div", { className: "u-ej-es" }, e.es)),
+        h("button", { className: "play", onClick: () => azHablarRu(sinLlaves(e.ru)), "aria-label": "Escuchar" }, "▶")),
+      e.por && h("div", { className: "u-ej-por" }, azFmt(e.por)))));
+  }
+  function Desarmar({ d }) {
+    const [sel, setSel] = useState(null);
+    const p = sel != null ? d.partes[sel] : null;
+    return h("div", null,
+      h("div", { className: "u-des" }, d.partes.map((x, i) => h("button", { key: i, className: "u-des-p" + (sel === i ? " on" : ""), onClick: () => { setSel(i); azHablarRu(sinLlaves(x.txt)); } },
+        h("span", { className: "u-des-ru", lang: "ru" }, sinLlaves(x.txt)), h("span", { className: "u-des-rol" }, x.rol)))),
+      h("div", { className: "u-ej-por", style: { marginTop: 8 } }, azFmt(p ? (p.nota || p.rol) : "Tocá cada parte para ver qué hace en la frase.")),
+      d.es && h("div", { className: "u-ej-es", style: { marginTop: 6 } }, "«" + d.es + "»"));
+  }
+  function Errores({ lista }) {
+    return h(React.Fragment, null, lista.map((e, i) => h("div", { key: i, className: "u-err" },
+      h("div", { className: "u-err-f" }, h("span", { style: { color: "#B5605C", fontWeight: 800 } }, "✗"), h("span", { className: "u-err-mal", lang: "ru" }, sinLlaves(e.mal))),
+      h("div", { className: "u-err-f" }, h("span", { className: "u-err-bien" }, "✓"), h("span", { className: "u-err-bien", lang: "ru" }, h(FraseEj, { ru: e.bien }))),
+      e.por && h("div", { className: "u-err-por" }, azFmt(e.por)))));
+  }
+  function Pregunta({ q, rotulo }) {
+    const [el, setEl] = useState(null);
+    return h("div", { className: "u-chq" },
+      h("div", { className: "u-chq-k" }, rotulo),
+      h("div", { className: "u-chq-p" }, azFmt(q.pide)),
+      h("div", { className: "u-chq-ops" }, q.opciones.map(o => {
+        const cls = el == null ? "" : o === q.ok ? " ok" : o === el ? " mal" : "";
+        return h("button", { key: o, className: "u-chq-op" + cls, disabled: el != null, lang: /[а-яё]/i.test(o) ? "ru" : "es", onClick: () => { setEl(o); if (/[а-яё]/i.test(o)) azHablarRu(sinLlaves(o)); } }, o);
+      })),
+      el != null && h("div", { className: "u-chq-r" }, h("b", { style: { color: el === q.ok ? "#4CAF82" : "#D9776F" } }, el === q.ok ? "✓ Bien. " : "✗ No: va " + String(q.ok).replace(/[.?!]$/, "") + ". "), azFmt(q.por || "")));
+  }
+  /* El cuerpo de una sección (también el de «Más a fondo») */
+  function Cuerpo({ x }) {
+    return h(React.Fragment, null,
+      x.texto && h("div", { className: "u-text", style: { whiteSpace: "pre-line" } }, azFmt(x.texto)),   /* \n = renglón nuevo (pasos numerados) */
+      x.desarmar && h(Desarmar, { d: x.desarmar }),
+      x.ejemplos && h(Ejemplos, { lista: x.ejemplos }),
       x.destacado && h("div", { className: "u-dest" }, azFmt(x.destacado)),
-      x.comparacion && h("div", { className: "u-text", style: { marginTop: 10, fontSize: 14, fontStyle: "italic" } }, azFmt(x.comparacion)),
+      x.comparacion && h("div", { className: "u-truco" }, h("b", null, "En español: "), azFmt(x.comparacion)),
+      x.errores && h(Errores, { lista: x.errores }),
       x.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), azFmt(x.truco)),
-      x.ojo && h("div", { className: "u-truco" }, h("b", null, "Ojo: "), azFmt(x.ojo)))));   /* advertencia (05/10/2026): mismo recuadro, rótulo «Ojo:» */
+      x.ojo && h("div", { className: "u-truco" }, h("b", null, "Ojo: "), azFmt(x.ojo)));   /* advertencia (05/10/2026): mismo recuadro, rótulo «Ojo:» */
+  }
+  function MasAFondo({ m }) {
+    const [ab, setAb] = useState(false);
+    return h(React.Fragment, null,
+      h("button", { className: "u-mas-b", onClick: () => setAb(!ab), "aria-expanded": ab }, (ab ? "▾ " : "▸ ") + (m.titulo || "Más a fondo")),
+      ab && h("div", { className: "u-mas", style: { animation: "fadeIn .3s ease" } }, h(Cuerpo, { x: m })));
+  }
+  function Seccion({ x }) {
+    return h("div", { id: x.id ? "regla-" + x.id : undefined },
+      x.titulo && h("div", { className: "u-sec" }, x.titulo),
+      x.antes && h(Pregunta, { q: x.antes, rotulo: "Antes de leer: ¿te animás?" }),
+      h(Cuerpo, { x }),
+      x.mas && h(MasAFondo, { m: x.mas }),
+      (x.chequeo || []).map((q, i) => h(Pregunta, { key: i, q, rotulo: "Chequeo rápido" })));
+  }
+  function AzSecciones({ secciones }) {
+    return h(React.Fragment, null, (secciones || []).map((x, k) => h(Seccion, { key: k, x })));
+  }
+  /* Busca una sección por su id en las unidades cargadas (UNIDAD_1 … UNIDAD_14) */
+  function azRegla(id) {
+    if (!id) return null;
+    for (let n = 1; n <= 14; n++) {
+      let U = null;
+      try { U = new Function("return typeof UNIDAD_" + n + " !== 'undefined' ? UNIDAD_" + n + " : null")(); } catch (e) {}
+      if (!U) continue;
+      for (const m of U.modulos || []) for (const s of m.secciones || []) if (s.id === id) return { seccion: s, modulo: m, unidad: n };
+    }
+    return null;
+  }
+  /* «Repasar la regla»: la sección en una hoja, por encima de la práctica */
+  function AzHojaRegla({ id, c, onClose }) {
+    const r = azRegla(id);
+    if (!r) return null;
+    return h("div", { className: "sheet", style: { zIndex: 320 }, role: "dialog" },
+      h("button", { className: "sheet-x", style: { zIndex: 321 }, onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+      h("div", { className: "sheet-in" },
+        h("div", { className: "u-kicker" }, "Unidad " + r.unidad + " · Módulo " + r.modulo.n),
+        h("div", { className: "u-title", style: { paddingRight: 48 } }, r.modulo.titulo),
+        h(Seccion, { x: r.seccion }),
+        h("button", { className: "ubtn", onClick: onClose }, "Volver al ejercicio")));
   }
 
   function AzVocabulario({ ids, c }) {
@@ -531,6 +691,6 @@
     return { dudas, faltan, tips };
   }
 
-  Object.assign(window, { AzEstilosUnidad, AzSecciones, AzVocabulario, AzFrasesLista, AzListaDialogos, AzGrabadora, AzHojaDialogo,
+  Object.assign(window, { AzEstilosUnidad, AzSecciones, azRegla, AzHojaRegla, AzVocabulario, AzFrasesLista, AzListaDialogos, AzGrabadora, AzHojaDialogo,
     AzTarjetasPalabras, AzMapaExplorar, AzProyecto, AzTaller, azContarPalabras, AzPortadaUnidad, AzTablaGrupos, azTabsUnidad, azRevisarTexto, azNPractica });
 })();

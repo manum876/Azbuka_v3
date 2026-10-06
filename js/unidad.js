@@ -1,7 +1,7 @@
 /* ============================================================
    UNIDAD.JS — Motor de práctica compartido por las unidades
    ------------------------------------------------------------
-   Versión 05/10/2026. Arma una sesión de ejercicios del banco de la
+   Versión 06/10/2026 (regla, cadena, diagnóstico, desarmar); antes, 05/10/2026. Arma una sesión de ejercicios del banco de la
    unidad con el selector de progress.js (contador más bajo primero,
    errores que vuelven, mezcla de tipos, dificultad que se ajusta),
    la muestra a pantalla completa, corrige con corrector.js y guarda
@@ -39,6 +39,13 @@
      tocar     { pide, palabras: [..], correcta: índice, audio? }  (02/10/2026: tocá la palabra de la frase)
      corregir  { pide?, palabras, correcta: índice, arreglo: "forma" | [formas], contexto? }  (06/10/2026, U13)
                tocá la palabra mal y escribila bien: otra palabra → Mal; la correcta mal arreglada → Casi.
+     cadena    { pide?, base, pasos: [{ pide, esperadas }] }  (06/10/2026) la frase pasa por varios cambios
+               seguidos; cada paso parte de la respuesta correcta del anterior. Todo Bien → Bien;
+               sin Mal, o un solo Mal en 3 pasos o más → Casi; si no, Mal.
+     diagnostico { pide?, grande, audio?, opciones, correcta, esperadas }  (06/10/2026) primero elegir
+               qué falla en la frase y después escribirla bien: los dos → Bien, uno → Casi, ninguno → Mal.
+     desarmar  { pide?, palabras, preguntas: [{ pide, correcta: índice }] }  (06/10/2026) la misma frase,
+               varias preguntas («¿quién?», «¿qué?»): sin errores → Bien, uno → Casi, más → Mal.
      situacion { pide, escena?, contexto?, audio?, plano?, pista?, sit }  (05/10/2026, Unidad 11)
                respuesta libre corregida por intención con azSituacion (corrector.js):
                ✓ Bien · 💬 Se entiende (vale el punto entero, decisión de Manu) · ✗ No se entiende.
@@ -47,7 +54,9 @@
                diálogo o chat por turnos: cada respuesta se corrige con azSituacion.
    elegir y vf aceptan texto: [renglones] (02/10/2026): un texto de lectura en un solo
    recuadro; con textoOculto: true queda detrás de «Mostrar el texto» (ejercicios de audio).
-   Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir?, items? }
+   Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir?, items?, regla? }
+     regla: id de la sección de teoría que practica (06/10/2026). Si sale Casi o Mal (fuera de
+            la evaluación), aparece «📖 Repasar la regla», que la abre en una hoja (AzHojaRegla).
      items: letras o palabras que practica («alfabeto:Б», «lex:CMR-…») para el semáforo
      audio: botón ▶ (suena solo al aparecer salvo que haya «grande» o audioManual); también un
             diálogo [{ texto, genero: "m"/"f", rate? }] con dos voces (06/10/2026, U13)
@@ -146,6 +155,12 @@
     return h("div", { className: "pr-texto", lang: "ru", style: ej.textoOculto ? { marginTop: 12, marginBottom: 0 } : null }, ej.texto.map((l, i) => h("div", { key: i }, l)));
   }
 
+  /* «Repasar la regla» (06/10/2026): la práctica escucha el evento y abre la hoja */
+  let REGLAS_ON = true;
+  function BotonRegla({ ej, r }) {
+    if (!REGLAS_ON || r === AZ_BIEN || r == null || !ej.regla || typeof azRegla !== "function" || !azRegla(ej.regla)) return null;
+    return h("button", { className: "pr-cu", onClick: () => window.dispatchEvent(new CustomEvent("az-ver-regla", { detail: ej.regla })) }, "📖 Repasar la regla");
+  }
   function Explicacion({ ej, r }) {
     const col = r === AZ_BIEN ? VERDE : r === AZ_CASI ? NARANJA : ROJO;
     const txt = r === AZ_BIEN ? "✓ Bien" : r === AZ_CASI ? "≈ Casi" : "✗ Mal";
@@ -153,6 +168,7 @@
       h("span", { className: "pr-res", style: { color: col, background: col + "22", border: "1px solid " + col } }, txt),
       ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
       r !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt("Para recordarlo: " + ej.recordar)),
+      h(BotonRegla, { ej, r }),
       r !== AZ_BIEN && typeof azGuardarEnCuaderno === "function" && h("button", {
         className: "pr-cu",
         onClick: () => azGuardarEnCuaderno(((ej.pide || ej.afirmacion || "") + (ej.grande ? " " + ej.grande : "")).trim() + "\n" + azSinMarcas(ej.explicacion || "") + (ej.recordar ? "\nPara recordarlo: " + azSinMarcas(ej.recordar) : ""))
@@ -214,6 +230,7 @@
       r && h(AzCorreccion, { r, dark }),
       hecho != null && r && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
       hecho != null && r && r.resultado !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt("Para recordarlo: " + ej.recordar)),
+      hecho != null && r && h(BotonRegla, { ej, r: hecho }),
       r && r.resultado !== AZ_BIEN && !examen && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: reintentar }, "Intentar de nuevo"));
   }
 
@@ -424,7 +441,101 @@
           h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() }, "Comprobar"))),
       r && h(AzCorreccion, { r, dark }),
       hecho != null && r && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
+      hecho != null && r && h(BotonRegla, { ej, r: hecho }),
       hecho != null && !r && h(Explicacion, { ej, r: hecho }));
+  }
+
+  /* ── Formas nuevas (06/10/2026, PLAN_PROFUNDIZACION §4) ── */
+  const peor = (rs) => { const mal = rs.filter(x => x === AZ_MAL).length, todo = rs.every(x => x === AZ_BIEN);
+    return todo ? AZ_BIEN : (mal === 0 || (mal === 1 && rs.length >= 3)) ? AZ_CASI : AZ_MAL; };
+
+  /* Transformación en cadena: cada paso parte de la respuesta correcta del anterior */
+  function Cadena({ ej, onRes, hecho, dark }) {
+    const [k, setK] = useState(0);
+    const [txt, setTxt] = useState("");
+    const [r, setR] = useState(null);
+    const [rs, setRs] = useState([]);
+    const ref = useRef(null);
+    const actual = k === 0 ? ej.base : [].concat(ej.pasos[k - 1].esperadas)[0];
+    const paso = ej.pasos[k];
+    const comprobar = () => {
+      if (!txt.trim() || r) return;
+      const res = azCorregir(txt, paso.esperadas, { idioma: "ru" });
+      setR(res); const nrs = rs.concat(res.resultado); setRs(nrs);
+      if (k + 1 >= ej.pasos.length && hecho == null) onRes(peor(nrs));
+    };
+    const seguir = () => { setK(k + 1); setTxt(""); setR(null); setTimeout(() => ref.current && ref.current.focus(), 50); };
+    const fin = rs.length === ej.pasos.length;
+    return h(React.Fragment, null,
+      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Cambiá la frase paso a paso.")),
+      h("div", { className: "pr-pista", style: { textAlign: "left" } }, "Paso " + Math.min(k + 1, ej.pasos.length) + " de " + ej.pasos.length),
+      h("div", { className: "pr-grande frase", lang: "ru" }, actual),
+      h(Oir, { texto: actual, auto: false }),
+      h("div", { className: "pr-pide", style: { marginTop: 12 } }, azFmt(paso.pide)),
+      h("div", { className: "pr-in-row" },
+        h("input", { ref, className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
+          placeholder: "Escribí en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
+        h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || !!r }, "Comprobar")),
+      r && h(AzCorreccion, { r, dark }),
+      r && !fin && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: seguir }, "Siguiente paso"),
+      fin && h("div", { className: "pr-pista", style: { textAlign: "left", marginTop: 12 } }, "Pasos: " + rs.map(x => x === AZ_BIEN ? "✓" : x === AZ_CASI ? "≈" : "✗").join(" · ")),
+      fin && hecho != null && h(Explicacion, { ej, r: hecho }));
+  }
+
+  /* Diagnosticar el error: qué falla y después la frase bien */
+  function Diagnostico({ ej, onRes, hecho, dark }) {
+    const [el, setEl] = useState(null);
+    const [txt, setTxt] = useState("");
+    const [r, setR] = useState(null);
+    const ref = useRef(null);
+    const elegir = o => { if (el) return; setEl(o); setTimeout(() => ref.current && ref.current.focus(), 50); };
+    const comprobar = () => {
+      if (!txt.trim() || r) return;
+      const res = azCorregir(txt, ej.esperadas, { idioma: "ru" }); setR(res);
+      const a = el === ej.correcta, b = res.resultado !== AZ_MAL;
+      if (hecho == null) onRes(a && res.resultado === AZ_BIEN ? AZ_BIEN : (a || b) ? AZ_CASI : AZ_MAL);
+    };
+    return h(React.Fragment, null,
+      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Esta frase tiene un error. ¿Qué falla?")),
+      h("div", { className: "pr-grande frase", lang: "ru" }, ej.grande),
+      ej.audio && h(Oir, { texto: ej.audio, auto: false }),
+      h("div", { className: "pr-ops una" }, ej.opciones.map(o => {
+        const cls = !el ? "" : o === ej.correcta ? " ok" : o === el ? " mal" : "";
+        return h("button", { key: o, className: "pr-op" + cls, disabled: !!el, onClick: () => elegir(o) }, o);
+      })),
+      el && h(React.Fragment, null,
+        h("div", { className: "pr-pide", style: { marginTop: 14 } }, "Ahora escribí la frase bien:"),
+        h("div", { className: "pr-in-row" },
+          h("input", { ref, className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
+            placeholder: "Escribí en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
+          h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || !!r }, "Comprobar"))),
+      r && h(AzCorreccion, { r, dark }),
+      hecho != null && h(Explicacion, { ej, r: hecho }));
+  }
+
+  /* Desarmar la frase: varias preguntas sobre la misma frase */
+  function DesarmarEj({ ej, onRes, hecho }) {
+    const [k, setK] = useState(0);
+    const [marcas, setMarcas] = useState([]);   /* [{ i, ok }] por pregunta */
+    const q = ej.preguntas[Math.min(k, ej.preguntas.length - 1)];
+    const fin = marcas.length === ej.preguntas.length;
+    const tocar = i => {
+      if (fin || marcas.length > k) return;
+      const nm = marcas.concat({ i, ok: i === q.correcta }); setMarcas(nm);
+      if (nm.length === ej.preguntas.length && hecho == null) { const err = nm.filter(x => !x.ok).length; onRes(err === 0 ? AZ_BIEN : err === 1 ? AZ_CASI : AZ_MAL); }
+    };
+    const m = marcas[k];
+    return h(React.Fragment, null,
+      ej.pide && h("div", { className: "pr-pide" }, azFmt(ej.pide)),
+      ej.audio && h(Oir, { texto: ej.audio, auto: true }),
+      h("div", { className: "pr-pista", style: { textAlign: "left" } }, "Pregunta " + Math.min(k + 1, ej.preguntas.length) + " de " + ej.preguntas.length),
+      h("div", { className: "pr-pide" }, azFmt(q.pide)),
+      h("div", { className: "pr-frase", lang: "ru" }, ej.palabras.map((w, i) => {
+        const cls = !m ? "" : i === q.correcta ? " ok" : i === m.i ? " mal" : "";
+        return h("button", { key: i, className: "pr-tw" + cls, disabled: !!m, onClick: () => tocar(i) }, w);
+      })),
+      m && !fin && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: () => setK(k + 1) }, "Siguiente pregunta"),
+      fin && hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
   /* ── Unidad 11: corrección por comunicación ── */
@@ -542,7 +653,8 @@
       hecho != null && ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)));
   }
 
-  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar, chat: Chat, tocar: Tocar, corregir: Corregir, situacion: Situacion, turnos: Turnos };
+  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar, chat: Chat, tocar: Tocar, corregir: Corregir, situacion: Situacion, turnos: Turnos,
+    cadena: Cadena, diagnostico: Diagnostico, desarmar: DesarmarEj };
 
   /* ── Sesión ── */
   function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar, enOrden, onFin, entiende }) {
@@ -554,6 +666,13 @@
     const [res, setRes] = useState({});             /* id → resultado */
     const [pts, setPts] = useState({});             /* id → puntos de 0 a 1, cuando el ejercicio los da (examen final, 06/10/2026) */
     const [cambios, setCambios] = useState([]);     /* semáforo: niveles que cambiaron */
+    const [regla, setRegla] = useState(null);       /* «Repasar la regla» abierta (06/10/2026) */
+    REGLAS_ON = !examen && !onFin;
+    useEffect(() => {
+      const on = e => setRegla(e.detail);
+      window.addEventListener("az-ver-regla", on);
+      return () => window.removeEventListener("az-ver-regla", on);
+    }, []);
 
     const empezar = () => {
       if (examen) {
@@ -668,7 +787,8 @@
     return h("div", { className: "pr", role: "dialog", ref: azRefCapa(capa) },
       h(Estilos, { c }),
       h("button", { className: "pr-x", onClick: onSalir, "aria-label": "Salir de la práctica" }, "✕"),
-      h("div", { className: "pr-in" }, cuerpo));
+      h("div", { className: "pr-in" }, cuerpo),
+      regla && typeof AzHojaRegla === "function" && h(AzHojaRegla, { id: regla, c, onClose: () => setRegla(null) }));
   }
 
   window.AzPractica = AzPractica;
