@@ -9,9 +9,9 @@
 
 /* ── CATÁLOGO GLOBAL ─────────────────────────────────────────
    Sacado directo de tu core.js real (títulos, desc y hrefs
-   tal cual están hoy en el repo). La Unidad 13 (Examen final)
-   ya existe como entrada — el archivo azbuka-13.html se crea
-   cuando corresponda construirlo. */
+   tal cual están hoy en el repo). Numeración desde el 06/10/2026
+   (Manu): 12 Gramática B1 · 13 Consolidación B1 · 14 Examen final
+   (examen: true lo separa en el índice). */
 const AZ_UNITS = [
   { id: 1, title: "Alfabeto y pronunciación", desc: "Las 33 letras, sonidos y primeras palabras.", href: "azbuka-1.html", lista: true },
   { id: 2, title: "Presentaciones y conversaciones básicas", desc: "Saludar, presentarte, nacionalidades y primeras preguntas.", href: "azbuka-2.html", lista: true },
@@ -24,8 +24,9 @@ const AZ_UNITS = [
   { id: 9, title: "Futuro y planes", desc: "Hablar del futuro y hacer planes.", href: "azbuka-9.html", lista: true },
   { id: 10, title: "Casos II: Genitivo, Dativo e Instrumental", desc: "Los tres casos que faltan.", href: "azbuka-10.html", lista: true },
   { id: 11, title: "Comunicación cotidiana y ruso del mundo real", desc: "Situaciones reales: compras, trámites, viajes.", href: "azbuka-11.html", lista: true },
-  { id: 12, title: "Consolidación B1 y comunicación", desc: "Repaso integral y comunicación con soltura.", href: "azbuka-12.html" },
-  { id: 13, title: "Examen final", desc: "Evaluación integradora de las 12 unidades.", href: "azbuka-13.html" },
+  { id: 12, title: "Gramática B1", desc: "Pronombres y plural en todos los casos, aspecto, imperativo y comparar.", href: "azbuka-12.html", lista: true },
+  { id: 13, title: "Consolidación B1 y comunicación", desc: "Contar, opinar, entender y escribir con autonomía.", href: "azbuka-13.html", lista: true },
+  { id: 14, title: "Examen final", desc: "Seis bloques que evalúan las 13 unidades.", href: "azbuka-14.html", lista: true, examen: true },
 ];
 
 /* Módulos de apoyo. Diccionario fue dado de baja (ya no existe
@@ -162,6 +163,7 @@ function azFormasDe(id) {
     if (d.alt) Object.keys(d.alt).forEach(k => add(d.alt[k], "instrumental"));
     if (d.altN) Object.keys(d.altN).forEach(k => add(d.altN[k], "instrumental tras preposición"));
     if (d.corta) ["m", "f", "n", "pl"].forEach(g => add(d.corta[g], "forma corta " + AZ_GEN_ETIQ[g]));
+    if (d.comp) out.push([d.comp, "comparativo"]);
     if (d.loc2) out.push([d.loc2, "locativo"], [d.loc2.split(" ").pop(), "locativo"]);
     if (d.partitivo) out.push([d.partitivo, "partitivo"]);
     if (d.conteo) out.push([d.conteo, "forma de conteo (con 2, 3 y 4)"]);
@@ -325,7 +327,8 @@ function azSinMarcas(texto) { return String(texto == null ? "" : texto).replace(
    siempre el tono, porque el iPhone solo expone la voz predeterminada
    de cada idioma (hombre 0,7 / mujer 1,25; con voz propia, 0,9 / 1,05).
      azHablarRu(texto, genero?)
-     azHablarSecuencia([{ texto, genero }], alEmpezarLinea?, alTerminar?)
+     azHablarSecuencia([{ texto, genero, rate? }], alEmpezarLinea?, alTerminar?)
+       rate (06/10/2026, U13): velocidad de esa línea (0,7 lento … 0,95); por defecto 0,85.
      azCallar() */
 const AZ_VOZ_F = /milena|katya|katerina|anna|irina|alena|elena|tatyana|female|женск/i;
 const AZ_VOZ_M = /yuri|maxim|pavel|dmitr|male|мужск/i;
@@ -338,9 +341,9 @@ function azVozPara(genero) {
   } catch (e) {}
   return null;
 }
-function azFraseVoz(texto, genero) {
+function azFraseVoz(texto, genero, rate) {
   const u = new SpeechSynthesisUtterance(String(texto).replace(/\u0301/g, ""));
-  u.lang = "ru-RU"; u.rate = 0.85;
+  u.lang = "ru-RU"; u.rate = rate || 0.85;
   const v = azVozPara(genero);
   if (v) { u.voice = v; u.lang = v.lang; }
   if (genero === "m") u.pitch = v ? 0.9 : 0.7;
@@ -372,7 +375,7 @@ function azHablarSecuencia(items, alEmpezarLinea, alTerminar) {
       if (turno !== azVozTurno) return;        /* se tocó ■ u otro audio: no seguir */
       if (i >= items.length) { if (alTerminar) alTerminar(); return; }
       const k = i++;
-      const u = azFraseVoz(items[k].texto, items[k].genero);
+      const u = azFraseVoz(items[k].texto, items[k].genero, items[k].rate);
       u.onstart = () => { if (alEmpezarLinea) alEmpezarLinea(k); };
       u.onend = () => setTimeout(siguiente, 250);
       u.onerror = () => setTimeout(siguiente, 250);

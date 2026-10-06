@@ -22,6 +22,8 @@
        aviso: "…",                // recuadro destacado al empezar (opcional)
        examen: { intro, partes: [{ nombre, tipos, n }], aprobado: .8 },  // modo evaluación
        onReforzar: parte => …     // en el examen, «Practicar <parte>»
+       onFin: lista => …          // al terminar: [{ id, tipo, parte, r, p }] con los puntos (0–1) de cada uno (06/10/2026)
+       entiende: "medio"          // «Se entiende» vale medio punto (examen final, Manu 06/10/2026)
        enOrden: true              // los ejercicios del pool, en su orden (05/10/2026)
      })
    Modo evaluación: n ejercicios por parte, sin «Intentar de nuevo»;
@@ -35,6 +37,8 @@
      vf        { afirmacion, verdadero }
      emparejar { pide, pares: [[izq, der], …], audioIzq? }  (audioIzq: la izquierda es audio)
      tocar     { pide, palabras: [..], correcta: índice, audio? }  (02/10/2026: tocá la palabra de la frase)
+     corregir  { pide?, palabras, correcta: índice, arreglo: "forma" | [formas], contexto? }  (06/10/2026, U13)
+               tocá la palabra mal y escribila bien: otra palabra → Mal; la correcta mal arreglada → Casi.
      situacion { pide, escena?, contexto?, audio?, plano?, pista?, sit }  (05/10/2026, Unidad 11)
                respuesta libre corregida por intención con azSituacion (corrector.js):
                ✓ Bien · 💬 Se entiende (vale el punto entero, decisión de Manu) · ✗ No se entiende.
@@ -45,7 +49,8 @@
    recuadro; con textoOculto: true queda detrás de «Mostrar el texto» (ejercicios de audio).
    Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir?, items? }
      items: letras o palabras que practica («alfabeto:Б», «lex:CMR-…») para el semáforo
-     audio: botón ▶ (suena solo al aparecer salvo que haya «grande» o audioManual)
+     audio: botón ▶ (suena solo al aparecer salvo que haya «grande» o audioManual); también un
+            diálogo [{ texto, genero: "m"/"f", rate? }] con dos voces (06/10/2026, U13)
      oir: lo que suena al responder (la respuesta correcta)
    Criterios (Manu, 25/09/2026): audio en casi todo; nada de practicar
    transliteración; desordenar lo mismo no es un ejercicio nuevo.
@@ -56,7 +61,8 @@
   const { useState, useEffect, useRef } = htmPreact;
   const VERDE = "#4CAF82", NARANJA = "#E2884A", ROJO = "#B5605C";
 
-  function hablar(t) { if (typeof azHablarRu === "function") azHablarRu(t); }
+  /* t puede ser un texto o un diálogo: [{ texto, genero, rate? }] (06/10/2026, U13: dos voces y velocidad) */
+  function hablar(t) { if (Array.isArray(t)) { if (typeof azHablarSecuencia === "function") azHablarSecuencia(t); } else if (typeof azHablarRu === "function") azHablarRu(t); }
   function mezclar(a) { return a.slice().sort(() => Math.random() - .5); }
 
   function Estilos({ c }) {
@@ -129,7 +135,7 @@
     useEffect(() => { if (auto && texto) { const t = setTimeout(() => hablar(texto), 250); return () => clearTimeout(t); } }, [texto]);
     /* Textos largos (más de 40 caracteres): también ■ para detener el audio */
     return h("div", { className: "pr-oir" }, h("button", { onClick: () => hablar(texto), "aria-label": "Escuchar" }, "▶"),
-      texto && texto.length > 40 && typeof azCallar === "function" && h("button", { onClick: azCallar, "aria-label": "Detener el audio" }, "■"));
+      texto && (Array.isArray(texto) || texto.length > 40) && typeof azCallar === "function" && h("button", { onClick: azCallar, "aria-label": "Detener el audio" }, "■"));
   }
 
   /* Texto de lectura: un solo recuadro; con textoOculto, detrás de un botón */
@@ -390,6 +396,36 @@
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
+  /* Autocorrección (06/10/2026, Unidad 13): tocá la palabra que está mal y
+     escribila bien. Palabra equivocada → Mal; la correcta pero mal
+     arreglada → Casi; encontrada y arreglada → Bien. */
+  function Corregir({ ej, onRes, hecho, dark, examen }) {
+    const [elegida, setElegida] = useState(null);
+    const [txt, setTxt] = useState("");
+    const [r, setR] = useState(null);
+    const ref = useRef(null);
+    const arreglos = [].concat(ej.arreglo);
+    const tocar = i => { if (elegida != null) return; setElegida(i); if (i !== ej.correcta) onRes(AZ_MAL); else setTimeout(() => ref.current && ref.current.focus(), 50); };
+    const comprobar = () => { if (!txt.trim()) return; const res = azCorregir(txt, arreglos, { idioma: "ru" }); setR(res); if (hecho == null) onRes(res.resultado === AZ_BIEN ? AZ_BIEN : AZ_CASI); };
+    const encontrada = elegida === ej.correcta;
+    return h(React.Fragment, null,
+      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Tocá la palabra que está mal y escribila bien.")),
+      ej.contexto && h("div", { className: "pr-pista" }, ej.contexto),
+      ej.audio && h(Oir, { texto: ej.audio, auto: false }),
+      h("div", { className: "pr-frase", lang: "ru" }, ej.palabras.map((w, i) => {
+        const cls = elegida == null ? "" : i === ej.correcta ? " ok" : i === elegida ? " mal" : "";
+        return h("button", { key: i, className: "pr-tw" + cls, disabled: elegida != null, onClick: () => tocar(i) }, w);
+      })),
+      encontrada && hecho == null && h(React.Fragment, null,
+        h("div", { className: "pr-pista", style: { marginTop: 14 } }, "¡Esa es! Ahora escribila bien:"),
+        h("div", { className: "pr-in-row" },
+          h("input", { ref, className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
+            placeholder: "La palabra corregida…", onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
+          h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() }, "Comprobar"))),
+      r && h(AzCorreccion, { r, dark }),
+      hecho != null && r && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
+      hecho != null && !r && h(Explicacion, { ej, r: hecho }));
+  }
 
   /* ── Unidad 11: corrección por comunicación ── */
   /* Plano de calles: el camino desde «Вы» hasta el destino.
@@ -430,14 +466,15 @@
       : h("button", { className: "pr-cu", style: { margin: "6px auto 0" }, onClick: () => setVer(true) }, "💡 Pista");
   }
 
-  function Situacion({ ej, onRes, hecho, dark, c, examen }) {
+  function Situacion({ ej, onRes, hecho, dark, c, examen, medio }) {
     const [txt, setTxt] = useState("");
     const [r, setR] = useState(null);
     const comprobar = () => {
       if (!txt.trim()) return;
       const res = azSituacion(txt, ej.sit);
       setR(res);
-      if (hecho == null) onRes(res.resultado);
+      /* medio (examen final, Manu 06/10/2026): «Se entiende» vale medio punto */
+      if (hecho == null) onRes(medio && res.nivel === 1 ? AZ_CASI : res.resultado);
     };
     return h(React.Fragment, null,
       h(Contexto, { ej }),
@@ -457,7 +494,9 @@
   /* Diálogo o chat por turnos: el personaje habla, vos contestás; cada
      respuesta se corrige por intención. Resultado: Bien si todo salió a la primera, Casi si hubo que
      reintentar algún turno, Mal si se vio la respuesta de alguno. */
-  function Turnos({ ej, onRes, hecho, dark, c }) {
+  function Turnos({ ej, onRes, hecho, dark, c, medio }) {
+    const puntos = useRef([]);                       /* puntos por turno: 1 · ½ si «Se entiende» con medio o si hubo que reintentar · 0 si se vio */
+    const reintento = useRef(false);
     const T = ej.turnos;
     const [paso, setPaso] = useState(0);
     const [resp, setResp] = useState([]);           /* [{ t, nota }] */
@@ -472,16 +511,17 @@
       setTxt(""); setR(null);
       const n = paso + 1;
       setPaso(n);
-      if (n >= T.pasos.length && hecho == null) onRes(salte || salto ? AZ_MAL : peor);
+      if (n >= T.pasos.length && hecho == null) onRes(salte || salto ? AZ_MAL : peor, puntos.current.reduce((a, b) => a + b, 0) / T.pasos.length);
     };
     const enviar = () => {
       if (!txt.trim() || fin) return;
       const res = azSituacion(txt, T.pasos[paso].sit);
-      if (res.nivel === 0) { setR(res); setPeor(AZ_CASI); return; }
+      if (res.nivel === 0) { setR(res); setPeor(AZ_CASI); reintento.current = true; return; }
+      puntos.current[paso] = reintento.current || (medio && res.nivel === 1) ? .5 : 1; reintento.current = false;
       const formas = res.elementos.filter(e => e.estado === "forma").map(e => "«" + e.escrito + "» → mejor " + e.mejor);
       avanzar(txt, formas.length ? "💬 Se entiende. " + formas.join("; ") : null);
     };
-    const saltar = () => { setSalto(true); avanzar(T.pasos[paso].sit.modelos[0], null, true); };
+    const saltar = () => { puntos.current[paso] = 0; reintento.current = false; setSalto(true); avanzar(T.pasos[paso].sit.modelos[0], null, true); };
     return h(React.Fragment, null,
       h("div", { className: "pr-pide" }, azFmt(ej.pide || T.titulo)),
       h("div", { className: "pr-chat" },
@@ -502,16 +542,17 @@
       hecho != null && ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)));
   }
 
-  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar, chat: Chat, tocar: Tocar, situacion: Situacion, turnos: Turnos };
+  const FORMAS = { elegir: Elegir, escribir: Escribir, ordenar: Ordenar, vf: VF, emparejar: Emparejar, chat: Chat, tocar: Tocar, corregir: Corregir, situacion: Situacion, turnos: Turnos };
 
   /* ── Sesión ── */
-  function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar, enOrden }) {
+  function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar, enOrden, onFin, entiende }) {
     const capa = useRef(null);   /* fondo sin scroll y ajuste al teclado (core.js, 05/10/2026) */
     const c = azColors(dark !== false);
     const [fase, setFase] = useState("inicio");     /* inicio · ej · fin */
     const [lista, setLista] = useState([]);
     const [i, setI] = useState(0);
     const [res, setRes] = useState({});             /* id → resultado */
+    const [pts, setPts] = useState({});             /* id → puntos de 0 a 1, cuando el ejercicio los da (examen final, 06/10/2026) */
     const [cambios, setCambios] = useState([]);     /* semáforo: niveles que cambiaron */
 
     const empezar = () => {
@@ -533,16 +574,18 @@
       setI(0); setRes({}); setCambios([]); setFase("ej");
     };
     const ej = lista[i];
-    const anotar = r => {
+    const anotar = (r, p) => {
       if (res[ej.id] != null) return;
+      if (p != null) setPts(x => Object.assign({}, x, { [ej.id]: p }));
       const reg = azRecordExercise(ej.id, r, unidad, ej.items);
       if (reg.cambios && reg.cambios.length) setCambios(x => x.concat(reg.cambios));
-      const sol = ej.oir || (ej.forma !== "emparejar" && ej.audio);
+      const sol = ej.oir || (ej.forma !== "emparejar" && !Array.isArray(ej.audio) && ej.audio);   /* un diálogo no se repite entero */
       if (sol) setTimeout(() => hablar(sol), 450);   /* escuchar la respuesta siempre refuerza */
       setRes(x => Object.assign({}, x, { [ej.id]: r }));
     };
     const siguiente = () => {
       if (i + 1 < lista.length) { setI(i + 1); window.scrollTo(0, 0); return; }
+      if (onFin) onFin(lista.map(e => ({ id: e.id, tipo: e.tipo, parte: e.parte, r: res[e.id], p: pts[e.id] != null ? pts[e.id] : res[e.id] === AZ_BIEN ? 1 : res[e.id] === AZ_CASI ? .5 : 0 })));
       if (examen) {
         const pts = e => res[e.id] === AZ_BIEN ? 1 : res[e.id] === AZ_CASI ? .5 : 0;
         const pct = Math.round(lista.reduce((a, e) => a + pts(e), 0) / Math.max(1, lista.length) * 100);
@@ -569,7 +612,7 @@
         h("div", { className: "pr-kick" }, titulo + " · " + (i + 1) + " de " + lista.length),
         h("div", { className: "pr-bar" }, h("div", { style: { width: ((i + (hecho != null ? 1 : 0)) / lista.length * 100) + "%" } })),
         examen && h("div", { className: "pr-pista", style: { textAlign: "left", margin: "-8px 0 10px" } }, "Parte: " + ej.parte),
-        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, examen: !!examen }) : "Ejercicio desconocido"),
+        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, examen: !!examen || !!onFin, medio: entiende === "medio" }) : "Ejercicio desconocido"),
         h("div", { className: "pr-pie" },
           h("button", { className: "pr-btn", style: { width: "100%" }, disabled: hecho == null, onClick: siguiente }, i + 1 < lista.length ? "Siguiente" : "Ver resultado")));
     } else if (examen) {
@@ -613,7 +656,7 @@
               h("div", { className: "pr-kick", style: { marginTop: 22 } }, "Para repasar"),
               h("div", { className: "pr-exp", style: { marginTop: 6 } }, "Estos vuelven en las próximas sesiones hasta que te salgan bien."),
               h("div", { className: "pr-lista" }, costaron.map(e => h("div", { key: e.id },
-                h("div", { style: { fontWeight: 700 } }, e.pide || e.afirmacion, e.grande ? " " + e.grande : "", e.forma === "tocar" ? " " + e.palabras.join(" ") : ""),
+                h("div", { style: { fontWeight: 700 } }, e.pide || e.afirmacion, e.grande ? " " + e.grande : "", (e.forma === "tocar" || e.forma === "corregir") ? " " + e.palabras.join(" ") : ""),
                 h("div", { style: { color: c.textSub } }, azFmt(e.explicacion))))))
           : h("div", { className: "pr-exp", style: { marginTop: 18, fontSize: 15 } }, "Todo bien en esta sesión."),
         h(Semaforo, { cambios, c }),

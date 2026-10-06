@@ -42,8 +42,8 @@ function App() {
 
   const c = azColors(darkMode);
   const allUnits = typeof AZ_UNITS !== "undefined" ? AZ_UNITS : [];
-  const units = allUnits.filter(u => u.id <= 12);
-  const exam = allUnits.find(u => u.id === 13);
+  const units = allUnits.filter(u => !u.examen);
+  const exam = allUnits.find(u => u.examen);
 
   function unitCard(u, extraClass) {
     return React.createElement("a", {
@@ -67,7 +67,7 @@ function App() {
       React.createElement("h1", { style: { fontSize: 26, fontWeight: 800, marginBottom: 8, color: c.text } }, "Твой курс русского"),
       React.createElement("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, marginBottom: 8 } }, "Nivel A1 → B1"),
       React.createElement("p", { style: { fontSize: 13.5, color: c.textMuted, marginBottom: 18, lineHeight: 1.6 } },
-        "12 unidades pensadas para un mes cada una."),
+        "13 unidades pensadas para un mes cada una, y un examen final."),
 
       React.createElement("div", { className: "ugrid" },
         units.map(u => unitCard(u)),

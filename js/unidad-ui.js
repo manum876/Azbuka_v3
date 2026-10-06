@@ -22,6 +22,7 @@
      AzTarjetasPalabras({ ids, titulo, c, green, onClose, detalle? })   detalle(e): texto extra al dorso
      AzMapaExplorar({ c })                   mapa de data-mapa.js
      AzProyecto({ mod, c, green, clave, fuente })   escribir con requisitos
+     AzTaller({ tarea, c, green, clave, fuente, aviso })   taller de escritura en 4 pasos (U13)
      AzPortadaUnidad({ u, c, green, progreso, visto, onPracticar, onAbrir, examen })
    ============================================================ */
 (function () {
@@ -359,6 +360,73 @@
         h("button", { className: "ubtn", style: { marginTop: 0 }, disabled: !txt.trim(), onClick: () => azGuardarEnCuaderno(txt, fuente) }, "＋ Cuaderno")));
   }
 
+  /* Taller de escritura (06/10/2026, Unidad 13): planificar → escribir →
+     revisar → reescribir. Guarda { paso, plan, v1, v2 } en «clave», así se
+     ven las dos versiones. tarea = { titulo, formato, palabras: [min, max],
+     ideas: [preguntas guía], requisitos: [{ txt, fn }], consejos } */
+  const AZ_TALLER_PASOS = ["Planificar", "Escribir", "Revisar", "Reescribir"];
+  const AZ_TALLER_CHEQUEO = ["¿Cada verbo va con su persona (я чита́ю, она́ чита́ет)?", "¿El pasado tiene el género correcto (он был, она́ была́)?",
+    "¿Después de cada preposición va el caso que pide (в Москве́, с дру́гом, у меня́)?", "¿Usaste conectores (снача́ла, пото́м, поэ́тому, потому́ что, но)?",
+    "¿El aspecto dice lo que querés: proceso o resultado?"];
+  function azContarPalabras(t) { return (t.match(/[А-Яа-яЁё\u0301-]+/g) || []).length; }
+  function AzTaller({ tarea, c, green, clave, fuente, aviso }) {
+    const [d, setD] = useState({ paso: 0, plan: "", v1: "", v2: "" });
+    const [rev, setRev] = useState(null);
+    useEffect(() => { (async () => { const g = await azGet(clave, null); if (g) setD(Object.assign({ paso: 0, plan: "", v1: "", v2: "" }, g)); })(); }, [clave]);
+    const guardar = cambio => { const nd = Object.assign({}, d, cambio); setD(nd); azSet(clave, nd); };
+    const req = tarea.requisitos || [];
+    const ok = t => req.map(r => !!r.fn(t));
+    const [min, max] = tarea.palabras;
+    const contador = t => { const n = azContarPalabras(t), bien = n >= min && n <= max;
+      return h("div", { style: { fontSize: 13.5, marginTop: 8, fontWeight: 700, color: bien ? green : c.textMuted } }, n + " palabras · meta: " + min + "–" + max); };
+    const lista = t => req.length > 0 && h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 12 } }, ok(t).map((b, i) =>
+      h("div", { key: i, className: "req" }, h("span", { style: { color: b ? green : c.textMuted, fontWeight: 800 } }, b ? "✓" : "○"), h("span", { style: { color: b ? c.text : c.textSub } }, req[i].txt))));
+    const ir = n => { setRev(null); guardar({ paso: n, v2: n === 3 && !d.v2 ? d.v1 : d.v2 }); window.scrollTo(0, 0); };
+    const paso = d.paso;
+    const puede = [true, !!d.v1.trim(), !!d.v1.trim(), !!d.v1.trim()];
+    const area = (k, lang, ph) => h("textarea", { className: "proy", lang, value: d[k], placeholder: ph, onInput: e => { setRev(null); guardar({ [k]: e.target.value }); } });
+    const revision = t => azRevisarTexto(t, req, tarea.consejos || []);
+    const cajaRev = r => r && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
+      !r.dudas.length && !r.faltan.length && !r.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: 14 } }, "✓ No encontré errores y están todos los puntos."),
+      r.dudas.map((x, i) => h("div", { key: "d" + i, className: "u-truco", lang: "ru" }, "«" + x.t + "» no la encuentro en el diccionario" + (x.sugerencia ? ". ¿Quisiste decir «" + x.sugerencia + "»?" : ": revisá cómo se escribe."))),
+      r.tips.map((x, i) => h("div", { key: "t" + i, className: "u-truco" }, azFmt(x))),
+      r.faltan.length > 0 && h("div", { className: "u-truco" }, "Falta: " + r.faltan.join(", ").toLowerCase() + "."),
+      h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, "La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática."));
+    const texto = (t, titulo) => h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
+      h("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: 1.2, color: c.gold, textTransform: "uppercase" } }, titulo),
+      h("div", { lang: "ru", style: { fontSize: 16, lineHeight: 1.55, marginTop: 6, whiteSpace: "pre-wrap", color: c.text } }, t));
+    return h("div", null,
+      h("div", { className: "u-card", style: { padding: "10px 14px", marginTop: 14, display: "flex", gap: 6, flexWrap: "wrap" } }, AZ_TALLER_PASOS.map((p, i) =>
+        h("button", { key: p, className: "ubtn" + (i === paso ? "" : " sec"), style: { marginTop: 0, flex: "1 1 40%", fontSize: 13.5, padding: "9px 6px" }, disabled: !puede[i], onClick: () => ir(i) }, (i + 1) + " · " + p))),
+      h("div", { className: "u-sec" }, "Paso " + (paso + 1) + " de 4 · " + AZ_TALLER_PASOS[paso]),
+      paso === 0 && h(React.Fragment, null,
+        h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Antes de escribir, anotá tus ideas: palabras sueltas, en ruso o en español. Estas preguntas te pueden guiar:"),
+        h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 8 } }, tarea.ideas.map((q, i) => h("div", { key: i, className: "req" }, h("span", { style: { color: c.gold, fontWeight: 800 } }, "·"), h("span", null, azFmt(q))))),
+        area("plan", "es", "Tus ideas…"),
+        h("button", { className: "ubtn", onClick: () => ir(1) }, "Escribir el texto")),
+      paso === 1 && h(React.Fragment, null,
+        aviso && h("div", { className: "u-dest" }, aviso),
+        d.plan.trim() && texto(d.plan, "Tus ideas"),
+        area("v1", "ru", "Escribí en ruso…"), contador(d.v1), lista(d.v1),
+        h("button", { className: "ubtn", disabled: !d.v1.trim(), onClick: () => ir(2) }, "Revisar")),
+      paso === 2 && h(React.Fragment, null,
+        texto(d.v1, "Tu primera versión"),
+        h("button", { className: "ubtn sec", onClick: () => setRev(revision(d.v1)) }, "Revisión automática"),
+        cajaRev(rev),
+        h("div", { className: "u-sec" }, "Revisalo vos"),
+        h("div", { className: "u-card", style: { padding: "8px 16px" } }, AZ_TALLER_CHEQUEO.map((q, i) => h("div", { key: i, className: "req" }, h("span", { style: { color: c.gold, fontWeight: 800 } }, "?"), h("span", null, q)))),
+        h("button", { className: "ubtn", onClick: () => ir(3) }, "Reescribir")),
+      paso === 3 && h(React.Fragment, null,
+        h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Corregí lo que encontraste y mejoralo: sumá un conector, una razón o un detalle. La primera versión queda guardada."),
+        area("v2", "ru", "Tu versión final…"), contador(d.v2), lista(d.v2),
+        h("button", { className: "ubtn sec", disabled: !d.v2.trim(), onClick: () => setRev(revision(d.v2)) }, "Revisar la versión final"),
+        cajaRev(rev),
+        d.v2.trim() && d.v2 !== d.v1 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Antes y después"), texto(d.v1, "Primera versión"), texto(d.v2, "Versión final")),
+        h("div", { style: { display: "flex", gap: 8, marginTop: 12 } },
+          h("button", { className: "ubtn sec", style: { marginTop: 0 }, disabled: !d.v2.trim(), onClick: () => azHablarRu(d.v2) }, "▶ Escucharlo"),
+          h("button", { className: "ubtn", style: { marginTop: 0 }, disabled: !d.v2.trim(), onClick: () => azGuardarEnCuaderno(d.v2, fuente) }, "＋ Cuaderno"))));
+  }
+
   /* Portada: kicker, título, objetivo, barras de progreso, «Practicar la unidad» y módulos */
   function AzPortadaUnidad({ u, c, green, progreso, visto, onPracticar, onAbrir, examen, extraModulo }) {
     return h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
@@ -464,5 +532,5 @@
   }
 
   Object.assign(window, { AzEstilosUnidad, AzSecciones, AzVocabulario, AzFrasesLista, AzListaDialogos, AzGrabadora, AzHojaDialogo,
-    AzTarjetasPalabras, AzMapaExplorar, AzProyecto, AzPortadaUnidad, AzTablaGrupos, azTabsUnidad, azRevisarTexto, azNPractica });
+    AzTarjetasPalabras, AzMapaExplorar, AzProyecto, AzTaller, azContarPalabras, AzPortadaUnidad, AzTablaGrupos, azTabsUnidad, azRevisarTexto, azNPractica });
 })();

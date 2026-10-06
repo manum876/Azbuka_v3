@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Unidad 13: Consolidación B1 y comunicación</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/preact.js"></script>
+<script src="data/data-lexicon.js"></script>
+<script src="data/data-casos.js"></script>
+<script src="data/data-verbos.js"></script>
+<script src="data/data-frases.js"></script>
+<script src="data/data-dialogos.js"></script>
+<script src="data/data-unidad-13.js"></script>
+<script src="js/core.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/corrector.js"></script>
+<script src="js/burbuja.js"></script>
+<script src="js/unidad-ui.js"></script>
+<script src="js/unidad.js"></script>
+<script>
+/* ============================================================
+   AZBUKA-13.HTML — Unidad 13: Consolidación B1 y comunicación
+   ------------------------------------------------------------
+   06/10/2026. Piezas de unidad-ui.js y unidad.js. Propio de esta
+   unidad: el taller de escritura (AzTaller), el audio a dos voces
+   y el proyecto en seis partes.
+   URL: azbuka-13.html · azbuka-13.html?m=u13m2
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+const U = UNIDAD_13;
+const EJ_U13 = ejerciciosUnidad13();
+const EJ_U13_BASE = EJ_U13.filter(e => !e.ampliacion);
+const OBJETIVO_U13 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(13) >= 0 || (e.appearsIn || []).indexOf(13) >= 0).map(e => e.id);
+const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
+const CASO_FILAS = [["Nominativo", "кто? что?"], ["Genitivo", "кого́? чего́?"], ["Dativo", "кому́? чему́?"], ["Acusativo", "кого́? что?"], ["Instrumental", "кем? чем?"], ["Prepositivo", "о ком? о чём?"]];
+
+
+function Lectura({ L, c }) {
+  const [es, setEs] = useState(false);
+  const idx = azIndiceFormas();
+  const lexDe = ru => (ru.match(/[А-Яа-яЁё\u0301]+/g) || []).map(w => { const r = idx.get(azFormaClave(w)); return r && r[0] ? r[0][0] : null; });
+  return h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 12 } },
+    h("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
+      h("div", { lang: "ru", style: { flex: 1, fontSize: 18, fontWeight: 800, color: c.gold } }, L.titulo),
+      h("button", { className: "play", onClick: () => azHablarSecuencia(L.lineas.map(l => ({ texto: l[0] }))), "aria-label": "Escuchar el texto" }, "▶"),
+      h("button", { className: "play", onClick: azCallar, "aria-label": "Detener el audio" }, "■")),
+    L.lineas.map((l, k) => h("div", { key: k, style: { marginTop: 8, fontSize: 16.5, lineHeight: 1.5 } },
+      h(AzTexto, { ru: l[0], lex: lexDe(l[0]), objetivo: OBJETIVO_U13 }),
+      es && h("div", { style: { fontSize: 13, color: c.textMuted } }, l[1]))),
+    h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => setEs(!es) }, es ? "Ocultar la traducción" : "Ver la traducción"));
+}
+
+/* Módulo 10: elegir uno de los cinco textos y hacerlo en el taller de 4 pasos */
+function Taller13({ c, green }) {
+  const [sel, setSel] = useState(null);
+  const T = U13_TALLER(), t = T.find(x => x.id === sel);
+  if (t) return h("div", null,
+    h("button", { className: "ubtn sec", style: { marginTop: 14 }, onClick: () => { setSel(null); window.scrollTo(0, 0); } }, "‹ Los cinco textos"),
+    h("div", { className: "u-sec" }, t.emoji + " " + t.titulo),
+    h("p", { className: "u-text", style: { fontSize: 14.5 } }, azFmt(t.consigna)),
+    h(AzTaller, { key: t.id, tarea: t, c, green, clave: "az_u13_taller_" + t.id, aviso: AVISO_ACENTOS, fuente: { titulo: "Unidad 13 · " + t.titulo, href: "azbuka-13.html?m=u13m10" } }));
+  return h("div", null, h("div", { className: "u-sec" }, "Elegí un texto"), T.map((x, i) =>
+    h("div", { key: x.id, className: "u-card mod", role: "button", tabIndex: 0, onClick: () => { setSel(x.id); window.scrollTo(0, 0); }, onKeyDown: e => { if (e.key === "Enter") setSel(x.id); } },
+      h("div", { className: "mod-n" }, x.emoji),
+      h("div", { style: { flex: 1, minWidth: 0 } }, h("div", { className: "mod-t" }, x.titulo), h("div", { className: "mod-d" }, x.formato + " · " + x.palabras[0] + "–" + x.palabras[1] + " palabras")))));
+}
+
+/* Módulo 11: proyecto en seis partes; la sexta es la conversación final */
+function Proyecto13({ c, green, onConversar }) {
+  const [sel, setSel] = useState(null);
+  const P = U13_PROYECTO(), p = P.find(x => x.id === sel);
+  if (p) return h("div", null,
+    h("button", { className: "ubtn sec", style: { marginTop: 14 }, onClick: () => { setSel(null); window.scrollTo(0, 0); } }, "‹ Las seis partes"),
+    h("div", { className: "u-sec" }, p.titulo + " · " + p.sub),
+    h("p", { className: "u-text", style: { fontSize: 14.5 } }, azFmt(p.intro)),
+    p.requisitos ? h(AzProyecto, { key: p.id, mod: { requisitos: p.requisitos, consejos: [] }, c, green, clave: "az_u13_proyecto_" + p.id, aviso: AVISO_ACENTOS, fuente: { titulo: "Unidad 13 · " + p.titulo, href: "azbuka-13.html?m=u13m11" } })
+      : h("button", { className: "ubtn", onClick: onConversar }, "Empezar la conversación"));
+  return h("div", null, h("div", { className: "u-sec" }, "Las seis partes"), P.map((x, i) =>
+    h("div", { key: x.id, className: "u-card mod", role: "button", tabIndex: 0, onClick: () => { setSel(x.id); window.scrollTo(0, 0); }, onKeyDown: e => { if (e.key === "Enter") setSel(x.id); } },
+      h("div", { className: "mod-n" }, String(i + 1).padStart(2, "0")),
+      h("div", { style: { flex: 1, minWidth: 0 } }, h("div", { className: "mod-t", lang: "ru" }, x.titulo), h("div", { className: "mod-d" }, x.sub)))));
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [modId, setModId] = useState(() => new URLSearchParams(location.search).get("m"));
+  const [tarjetas, setTarjetas] = useState(null);
+  const [practica, setPractica] = useState(null);
+  const [visto, setVisto] = useState(1);
+  const [examen, setExamen] = useState(null);
+  const [, refrescar] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      setVisto(await azGet('az_u13_visto', 1));
+      await azLoadProgress();
+      azSaveUnitProgress(13, {});
+      refrescar(x => x + 1);
+    })();
+    const pop = () => { setModId(new URLSearchParams(location.search).get("m")); setTarjetas(null); setPractica(null); };
+    window.addEventListener("popstate", pop);
+    return () => window.removeEventListener("popstate", pop);
+  }, []);
+  useEffect(() => {
+    const m = modId ? unidad13Modulo(modId) : null;
+    window.azFuenteActual = () => m ? "Unidad 13 · " + m.titulo : "Unidad 13";
+    if (m && m.n > visto) { setVisto(m.n); azSet('az_u13_visto', m.n); }
+    if (m) azGuardarUltimo({ unidad: 13, n: m.n, total: U.modulos.length, titulo: "Unidad 13 · " + m.titulo, href: "azbuka-13.html?m=" + m.id });
+  }, [modId]);
+  useEffect(() => { if (!practica && AZ_PROGRESS.units) setExamen((AZ_PROGRESS.units["13"] || {}).examen || null); }, [practica]);
+
+  const abrirModulo = id => { history.pushState(null, "", id ? "?m=" + id : location.pathname); setModId(id); window.scrollTo(0, 0); };
+  const practicarUnidad = () => setPractica({ titulo: "Unidad 13", pool: EJ_U13_BASE.filter(e => e.modulo <= Math.max(visto, 1)) });
+  const practicarModulo = m => setPractica({ titulo: m.titulo, n: m.nPractica, pool: EJ_U13_BASE.filter(e => e.modulo === m.n) });
+    const rendirExamen = m => setPractica({ titulo: "Evaluación de la Unidad 13", pool: EJ_U13_BASE, examen: { intro: m.intro, partes: m.partes, aprobado: m.aprobado } });
+  const reforzar = parte => setPractica({ titulo: "Reforzar: " + parte.nombre, pool: EJ_U13_BASE.filter(e => parte.tipos.indexOf(e.tipo) >= 0) });
+
+  const c = azColors(darkMode);
+  const green = darkMode ? "#4CAF82" : "#2E7D55";
+  const mod = modId ? unidad13Modulo(modId) : null;
+  const idx = mod ? U.modulos.indexOf(mod) : -1;
+  const prev = mod && U.modulos[idx - 1], next = mod && U.modulos[idx + 1];
+  const palabrasDom = OBJETIVO_U13.filter(id => azItem("lex:" + id).level === 2).length;
+  const tabs = mod ? [
+    { id: "u", icon: "⊞", aria: "Unidad", action: () => abrirModulo(null) },
+    { id: "p", icon: "‹", aria: "Módulo anterior", disabled: !prev, action: () => prev && abrirModulo(prev.id) },
+    { id: "m", texto: "Módulo " + mod.n },
+    { id: "s", icon: "›", aria: "Módulo siguiente", disabled: !next, action: () => next && abrirModulo(next.id) }
+  ] : azTabsUnidad(13);
+
+  const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 1), examen, onPracticar: practicarUnidad, onAbrir: abrirModulo,
+    progreso: [{ label: "Palabras dominadas", valor: palabrasDom, total: OBJETIVO_U13.length }] });
+
+  let vista = null;
+  if (mod) {
+    vista = h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+      h("div", { className: "u-kicker" }, "Unidad 13 · Módulo " + mod.n),
+      h("h1", { className: "u-title" }, mod.titulo),
+      h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
+      mod.tipo === "leccion" && h(React.Fragment, null,
+        h(AzSecciones, { secciones: mod.secciones }),
+        h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
+        ),
+      mod.tipo === "lectura" && h(React.Fragment, null,
+        (typeof U13_LECTURAS !== "undefined" ? U13_LECTURAS : []).map(L => h(Lectura, { key: L.id, L, c })),
+        h("button", { className: "ubtn", style: { marginTop: 18 }, onClick: () => practicarModulo(mod) }, "Practicar «" + mod.titulo + "»")),
+      mod.tipo === "taller" && h(Taller13, { c, green }),
+      mod.tipo === "proyecto6" && h(Proyecto13, { c, green, onConversar: () => setPractica({ titulo: "Conversación final", n: 1, pool: EJ_U13.filter(e => e.id === "U13-final") }) }),
+      mod.tipo === "proyecto" && h(AzProyecto, { mod, c, green, clave: "az_u13_proyecto", fuente: { titulo: "Unidad 13 · Proyecto", href: "azbuka-13.html?m=u13m11" }, aviso: AVISO_ACENTOS }),
+      mod.tipo === "examen" && h(React.Fragment, null,
+        h("div", { className: "u-card", style: { padding: "6px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
+          h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 14.5 } },
+            h("span", { style: { fontWeight: 600 } }, p.nombre), h("span", { style: { color: c.textMuted } }, p.n + " ejercicios")))),
+        examen && h("div", { style: { marginTop: 14, fontSize: 14, color: examen.aprobado ? green : "#E2884A", fontWeight: 700 } },
+          "Última vez: " + examen.pct + " % (" + examen.fecha.split("-").reverse().join("/") + ")" + (examen.aprobado ? " · aprobada" : "")),
+        h("button", { className: "ubtn", onClick: () => rendirExamen(mod) }, examen ? "Rendir de nuevo" : "Empezar la evaluación")),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo));
+  }
+
+  return h(React.Fragment, null,
+    h(AzEstilosUnidad, { c, green }),
+    h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vista : portada),
+    practica && h(AzPractica, { key: practica.titulo + (practica.pool[0] || {}).id, unidad: 13, titulo: practica.titulo, pool: practica.pool, mezcla: U13_MEZCLA,
+      n: azNPractica(practica.pool, practica.n), dark: darkMode, aviso: AVISO_ACENTOS, examen: practica.examen, onReforzar: reforzar, objetivo: OBJETIVO_U13,
+      onSalir: () => { setPractica(null); refrescar(x => x + 1); } }),
+    h(AzBurbujaHost, { dark: darkMode }));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

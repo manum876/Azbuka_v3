@@ -694,6 +694,17 @@ function FichaCasos({ id, c, onGuia }) {
           h("div", { className: "help-row" }, h(Ayuda, { fid: "formaCorta", texto: "Forma corta", onForma: setForma }))
         ),
 
+        /* ── COMPARATIVO (U12, 05/10/2026) ── */
+        d.comp && h("div", null,
+          h("div", { className: "section-lbl" }, "Comparativo"),
+          h("table", { className: "ctable" },
+            h("colgroup", null, h("col", { style: { width: "31%" } }), h("col", null)),
+            h("tbody", null, h("tr", null,
+              h("td", null, h("div", { className: "p-ru" }, "más …"), h("div", { className: "p-es" }, "comparativo")),
+              h("td", null, h(Forma, { text: d.comp }))))),
+          h("div", { className: "tnote" }, "No cambia por género, número ni caso. Se compara con ", h("b", { style: { color: c.text } }, "чем"), " («que») o con el genitivo.")
+        ),
+
         ayudas.length > 0 && h("div", null,
           h("div", { className: "section-lbl" }, "Formas especiales"),
           d.loc2 && h("div", { className: "tnote", style: { marginTop: 0 } }, "Para decir dónde: ", h("b", { style: { color: c.text } }, d.loc2), ". Para hablar de algo se usa el preposicional normal."),

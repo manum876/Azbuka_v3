@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Examen final</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/preact.js"></script>
+<script src="data/data-lexicon.js"></script>
+<script src="data/data-casos.js"></script>
+<script src="data/data-verbos.js"></script>
+<script src="data/data-frases.js"></script>
+<script src="data/data-dialogos.js"></script>
+<script src="data/data-unidad-13.js"></script>
+<script src="data/data-unidad-14.js"></script>
+<script src="js/core.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/corrector.js"></script>
+<script src="js/burbuja.js"></script>
+<script src="js/unidad-ui.js"></script>
+<script src="js/unidad.js"></script>
+<script>
+/* ============================================================
+   AZBUKA-14.HTML — Examen final (Unidad 14)
+   ------------------------------------------------------------
+   06/10/2026. Seis bloques (100 puntos) que se hacen por separado y
+   se guardan en az_examen_final; el puntaje final aparece cuando
+   están los seis. Se aprueba con 80 → pantalla «Ты говори́шь
+   по-ру́сски». En el examen, «Se entiende» vale medio punto.
+   URL: azbuka-14.html · azbuka-14.html?b=lectura
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+const B = ejerciciosExamenFinal();
+const ESC = U14_ESCRITURA();
+const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
+const CLAVE = "az_examen_final";
+const APROBADO = 80;
+
+function nivelDe(p) { return U14_NIVELES.find(n => p >= n[0]); }
+function puntosDe(est, b) { const x = (est.bloques || {})[b.id]; return x ? Math.round(x.pct * b.puntos / 100 * 10) / 10 : null; }
+
+/* Escritura: una tarea (elegir opción si hay, escribir, entregar) */
+function Tarea({ t, id, est, guardar, c, green }) {
+  const prev = (est.escritura || {})[id] || {};
+  const [op, setOp] = useState(prev.op || null);
+  const [txt, setTxt] = useState(prev.txt || "");
+  const [res, setRes] = useState(prev.pct != null ? u14PuntuarTexto(prev.txt, t) : null);
+  const n = azContarPalabras(txt), [a, b] = t.palabras;
+  const entregar = () => { const r = u14PuntuarTexto(txt, t); setRes(r); guardar(id, { op, txt, pct: r.pct }); };
+  return h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 14 } },
+    h("div", { style: { fontWeight: 800, fontSize: 16 } }, t.titulo + " · " + t.puntos + " puntos"),
+    t.consigna && h("p", { className: "u-text", style: { fontSize: 14.5, marginTop: 8 }, lang: "es" }, azFmt(t.consigna)),
+    t.opciones && h("div", { style: { marginTop: 8 } }, t.opciones.map(o => h("button", { key: o.id, className: "ubtn" + (op === o.id ? "" : " sec"), style: { marginTop: 8, textAlign: "left", fontSize: 14 }, onClick: () => setOp(o.id) }, o.txt))),
+    (!t.opciones || op) && h(React.Fragment, null,
+      h("textarea", { className: "proy", lang: "ru", value: txt, placeholder: "Escribí en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); } }),
+      h("div", { style: { fontSize: 13.5, marginTop: 8, fontWeight: 700, color: n >= a && n <= b ? green : c.textMuted } }, n + " palabras · meta: " + a + "–" + b),
+      h("div", { style: { marginTop: 8 } }, t.objetivos.map((o, i) => { const v = o.fn(txt), ok = v >= o.meta;
+        return h("div", { key: i, className: "req" }, h("span", { style: { color: ok ? green : c.textMuted, fontWeight: 800 } }, ok ? "✓" : "○"), h("span", { style: { color: ok ? c.text : c.textSub } }, o.txt)); })),
+      h("button", { className: "ubtn", disabled: !txt.trim(), onClick: entregar }, prev.pct != null ? "Entregar de nuevo" : "Entregar"),
+      res && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
+        h("div", { style: { fontWeight: 800, fontSize: 16, color: green } }, res.pct + " % · " + Math.round(res.pct * t.puntos / 10) / 10 + " de " + t.puntos + " puntos"),
+        h("div", { style: { fontSize: 13.5, marginTop: 6, color: c.textSub } }, "Cobertura de los objetivos: " + Math.round(res.cobertura * 100) + " %" + (res.descuento ? " · descuento por errores: " + Math.round(res.descuento * 100) + " %" : "")),
+        res.rev.dudas.map((x, i) => h("div", { key: "d" + i, className: "u-truco", lang: "ru" }, "«" + x.t + "» no la encuentro en el diccionario" + (x.sugerencia ? ". ¿Quisiste decir «" + x.sugerencia + "»?" : "."))),
+        res.rev.tips.map((x, i) => h("div", { key: "t" + i, className: "u-truco" }, azFmt(x))),
+        h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, "El puntaje es una aproximación: mide si el texto cumple los objetivos y descuenta palabras que no existen y errores típicos, pero no corrige toda la gramática."))));
+}
+
+/* Pantalla final al aprobar */
+function Final({ total, onCerrar, c }) {
+  return h("div", { style: { position: "fixed", inset: 0, zIndex: 300, background: c.bg, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "calc(env(safe-area-inset-top) + 24px) 28px calc(env(safe-area-inset-bottom) + 24px)", textAlign: "center", animation: "fadeIn 0.6s ease" } },
+    h("div", { style: { fontSize: 12, fontWeight: 700, letterSpacing: 2, color: c.gold, textTransform: "uppercase" } }, "Examen final · " + total + " puntos"),
+    h("div", { lang: "ru", style: { fontSize: 34, fontWeight: 800, color: c.gold, marginTop: 18, lineHeight: 1.2 } }, "Ты говори́шь по\u2011ру́сски."),   /* guion que no corta la línea */
+    h("div", { style: { fontSize: 16, color: c.textSub, marginTop: 8, fontStyle: "italic" } }, "Hablás ruso."),
+    h("div", { lang: "ru", style: { fontSize: 17, color: c.text, marginTop: 28, lineHeight: 1.6 } }, "Ты уме́ешь чита́ть, понима́ть, писа́ть и обща́ться по-ру́сски.", h("br"), "Ты мо́жешь говори́ть о себе́, своём про́шлом, настоя́щем и бу́дущем."),
+    h("div", { style: { fontSize: 14, color: c.textMuted, marginTop: 24, lineHeight: 1.55, maxWidth: 360 } }, "No terminaste el ruso: ahora tenés una base real para seguir construyendo."),
+    h("button", { className: "ubtn", style: { maxWidth: 320, marginTop: 32 }, onClick: () => azHablarRu("Ты говори́шь по-ру́сски.") }, "▶ Escucharlo"),
+    h("button", { className: "ubtn sec", style: { maxWidth: 320 }, onClick: onCerrar }, "Volver al examen"));
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [bId, setBId] = useState(() => new URLSearchParams(location.search).get("b"));
+  const [practica, setPractica] = useState(null);
+  const [est, setEst] = useState({ bloques: {}, escritura: {} });
+  const [final, setFinal] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      setEst(Object.assign({ bloques: {}, escritura: {} }, await azGet(CLAVE, {})));
+      await azLoadProgress();
+    })();
+    const pop = () => { setBId(new URLSearchParams(location.search).get("b")); setPractica(null); };
+    window.addEventListener("popstate", pop);
+    return () => window.removeEventListener("popstate", pop);
+  }, []);
+  useEffect(() => { window.azFuenteActual = () => "Examen final"; }, []);
+
+  const hechos = U14_BLOQUES.filter(b => est.bloques[b.id]);
+  const total = Math.round(hechos.reduce((a, b) => a + puntosDe(est, b), 0));
+  const completo = hechos.length === U14_BLOQUES.length;
+  const guardarEst = nuevo => {
+    setEst(nuevo); azSet(CLAVE, nuevo);
+    const todos = U14_BLOQUES.every(b => nuevo.bloques[b.id]);
+    if (todos) {
+      const tot = Math.round(U14_BLOQUES.reduce((a, b) => a + puntosDe(nuevo, b), 0));
+      const u = azUnitProgress(14); u.examen = { pct: tot, aprobado: tot >= APROBADO, fecha: new Date().toISOString().slice(0, 10) };
+      if (!u.mejorExamen || tot > u.mejorExamen) u.mejorExamen = tot; azSaveProgress();
+      if (tot >= APROBADO) setTimeout(() => setFinal(true), 400);
+    }
+  };
+  const guardarBloque = (id, pct) => guardarEst(Object.assign({}, est, { bloques: Object.assign({}, est.bloques, { [id]: { pct, fecha: new Date().toISOString().slice(0, 10) } }) }));
+  const guardarTarea = (tid, datos) => {
+    const esc = Object.assign({}, est.escritura, { [tid]: datos });
+    let nuevo = Object.assign({}, est, { escritura: esc });
+    if (esc.t1 && esc.t1.pct != null && esc.t2 && esc.t2.pct != null) {
+      const pct = Math.round((esc.t1.pct * ESC.t1.puntos + esc.t2.pct * ESC.t2.puntos) / (ESC.t1.puntos + ESC.t2.puntos));
+      nuevo = Object.assign({}, nuevo, { bloques: Object.assign({}, est.bloques, { escritura: { pct, fecha: new Date().toISOString().slice(0, 10) } }) });
+    }
+    guardarEst(nuevo);
+  };
+  const onFin = id => lista => {
+    const peso = e => (B[id].find(x => x.id === e.id) || {}).peso || 1;
+    const tot = lista.reduce((a, e) => a + peso(e), 0), sum = lista.reduce((a, e) => a + e.p * peso(e), 0);
+    guardarBloque(id, Math.round(sum / Math.max(1, tot) * 100));
+  };
+  const abrir = id => { history.pushState(null, "", id ? "?b=" + id : location.pathname); setBId(id); window.scrollTo(0, 0); };
+
+  const c = azColors(darkMode);
+  const green = darkMode ? "#4CAF82" : "#2E7D55";
+  const b = bId ? U14_BLOQUES.find(x => x.id === bId) : null;
+  const k = b ? U14_BLOQUES.indexOf(b) : -1;
+  const prev = b && U14_BLOQUES[k - 1], next = b && U14_BLOQUES[k + 1];
+  const tabs = b ? [
+    { id: "u", icon: "⊞", aria: "Examen", action: () => abrir(null) },
+    { id: "p", icon: "‹", aria: "Bloque anterior", disabled: !prev, action: () => prev && abrir(prev.id) },
+    { id: "m", texto: "Bloque " + (k + 1) },
+    { id: "s", icon: "›", aria: "Bloque siguiente", disabled: !next, action: () => next && abrir(next.id) }
+  ] : azTabsUnidad(14);
+
+  const nv = nivelDe(total);
+  const portada = h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+    h("div", { className: "u-kicker" }, "Unidad 14"),
+    h("h1", { className: "u-title" }, "Examen final"),
+    h("div", { className: "u-ru", lang: "ru" }, "Фина́льный экза́мен"),
+    h("p", { className: "u-text", style: { marginTop: 12, fontSize: 14 } }, "Seis bloques que evalúan todo lo que aprendiste: leer, escuchar, la gramática, el vocabulario, escribir y comunicarte. Hacelos en el orden que quieras y en varias sesiones: cada bloque queda guardado."),
+    h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 6 } }, "Tiempo estimado: 3–4 horas en total. Se aprueba con " + APROBADO + " puntos."),
+    h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 18 } },
+      h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } },
+        h("span", { style: { fontSize: 14, fontWeight: 700, color: c.text } }, completo ? "Puntaje final" : "Bloques hechos: " + hechos.length + " de 6"),
+        h("span", { style: { fontSize: 14, fontWeight: 800, color: green } }, total + " de 100")),
+      h("div", { className: "pbar-track" }, h("div", { className: "pbar-fill", style: { width: total + "%" } })),
+      completo && h("div", { style: { marginTop: 12 } },
+        h("div", { style: { fontWeight: 800, fontSize: 16, color: total >= APROBADO ? green : "#E2884A" } }, nv[1] + (total >= APROBADO ? " · aprobado" : "")),
+        h("div", { style: { fontSize: 14, color: c.textSub, marginTop: 4, lineHeight: 1.5 } }, nv[2]),
+        U14_BLOQUES.filter(x => est.bloques[x.id].pct < 70).length > 0 && h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 10, lineHeight: 1.55 } },
+          h("b", null, "Para repasar: "), U14_BLOQUES.filter(x => est.bloques[x.id].pct < 70).map(x => x.es + " → " + x.repaso).join(" · ")),
+        total >= APROBADO && h("button", { className: "ubtn", onClick: () => setFinal(true) }, "Ты говори́шь по-ру́сски"))),
+    h("div", { className: "u-sec" }, "Bloques"),
+    U14_BLOQUES.map((x, i) => { const p = puntosDe(est, x);
+      return h("div", { key: x.id, className: "u-card mod", role: "button", tabIndex: 0, onClick: () => abrir(x.id), onKeyDown: e => { if (e.key === "Enter") abrir(x.id); } },
+        h("div", { className: "mod-n" }, x.emoji),
+        h("div", { style: { flex: 1, minWidth: 0 } },
+          h("div", { className: "mod-t" }, h("span", { lang: "ru" }, x.ru), " · " + x.es),
+          h("div", { className: "mod-d" }, x.puntos + " puntos · " + x.min),
+          h("div", { style: { fontSize: 12.5, fontWeight: 700, marginTop: 6, color: p != null ? green : c.textMuted } }, p != null ? p + " de " + x.puntos + " puntos" : "Pendiente"))); }));
+
+  let vista = null;
+  if (b) {
+    const p = puntosDe(est, b);
+    vista = h("div", { key: b.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+      h("div", { className: "u-kicker" }, "Examen final · Bloque " + (k + 1)),
+      h("h1", { className: "u-title", lang: "ru" }, b.ru),
+      h("div", { className: "u-ru" }, b.es + " · " + b.puntos + " puntos"),
+      h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(b.intro)),
+      h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 6 } }, "Tiempo estimado: " + b.min),
+      p != null && h("div", { style: { marginTop: 12, fontSize: 14, fontWeight: 700, color: green } }, "Hecho: " + p + " de " + b.puntos + " puntos (" + est.bloques[b.id].fecha.split("-").reverse().join("/") + ")"),
+      b.id === "escritura"
+        ? h(React.Fragment, null, h("div", { className: "u-dest" }, AVISO_ACENTOS),
+            h(Tarea, { t: ESC.t1, id: "t1", est, guardar: guardarTarea, c, green }), h(Tarea, { t: ESC.t2, id: "t2", est, guardar: guardarTarea, c, green }))
+        : h("button", { className: "ubtn", onClick: () => setPractica({ id: b.id }) }, p != null ? "Hacerlo de nuevo" : "Empezar el bloque"),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrir(next.id) }, "Siguiente: " + next.ru + " · " + next.es));
+  }
+
+  return h(React.Fragment, null,
+    h(AzEstilosUnidad, { c, green }),
+    h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, b ? vista : portada),
+    practica && h(AzPractica, { key: practica.id, unidad: 14, titulo: U14_BLOQUES.find(x => x.id === practica.id).ru, pool: B[practica.id], enOrden: true, n: B[practica.id].length, dark: darkMode,
+      aviso: AVISO_ACENTOS + " Es el examen: cada respuesta cuenta una sola vez, sin «Intentar de nuevo».", entiende: "medio", onFin: onFin(practica.id), onSalir: () => setPractica(null) }),
+    final && h(Final, { total, c, onCerrar: () => setFinal(false) }),
+    h(AzBurbujaHost, { dark: darkMode }));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

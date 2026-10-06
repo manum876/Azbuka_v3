@@ -343,6 +343,9 @@ function azCorregir(respuesta, esperadas, opts) {
      (un elemento con consigna: "Hay que usar el pasado…" es un requisito de la
      consigna, no de la comprensión: si es lo único que falta, el resultado es
      «✗ Mal» con ese aviso, no «No se entiende» — Manu, 05/10/2026)
+     (un elemento con pregunta: true se cumple con un «?» en la respuesta o con
+     alguna de sus formas, p. ej. «а ты»: es la pregunta de vuelta de las
+     conversaciones B1 de la Unidad 13 — 06/10/2026)
      modelos: ["Я хочу́ ко́фе и во́ду."]   // una forma natural de decirlo
    }
    Tres resultados:
@@ -368,6 +371,8 @@ function azSituacion(respuesta, sit) {
   const out = { elementos: [], modelo: (sit.modelos || [])[0] || "", tuya: [] };
   (sit.necesita || []).forEach(function (el) {
     let hallado = null;
+    /* pregunta de vuelta (06/10/2026, U13): vale el «?» o alguna de sus fórmulas */
+    if (el.pregunta && /\?/.test(respuesta)) hallado = { estado: "ok", pos: Math.max(0, K.length - 1), n: 0 };
     /* 0. por patrón: rx sobre cada palabra (p. ej. cualquier verbo en pasado) */
     if (el.rx) { const R = new RegExp(el.rx); for (let i = 0; i < K.length; i++) if (!usados[i] && R.test(K[i])) { hallado = { estado: "ok", pos: i, n: 1 }; break; } }
     const todas = el.formas || [];

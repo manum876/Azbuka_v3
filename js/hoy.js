@@ -16,6 +16,10 @@
      U8 verbo del día en pasado (qué hiciste ayer)
      U9 plan del día (qué vas a hacer mañana: бу́ду + infinitivo)
      U10 lo que no tenés (у меня́ нет + genitivo)
+     U13 pregunta del día (una pregunta de las conversaciones B1, contestada
+         con respuesta libre y corregida por intención, como en la U11)
+     U12 pareja del día (aspecto: el resultado en pasado, o el futuro
+         perfectivo; «бу́ду + perfectivo» es Mal, el imperfectivo es Casi)
      U11 situación del día (qué decís; se corrige por intención, azSituacion:
          ✓ Bien · 💬 Se entiende · ✗ No se entiende)
    Reglas (Manu, 05/10/2026): nada de la respuesta a la vista; la
@@ -37,7 +41,9 @@ const AZ_HOY_DEPS = {
   8: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-8.js"],
   9: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-9.js"],
   10: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-10.js"],
-  11: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "js/corrector.js", "data/data-unidad-11.js"]
+  11: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "js/corrector.js", "data/data-unidad-11.js"],
+  12: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-unidad-12.js"],
+  13: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "js/corrector.js", "data/data-unidad-13.js"]
 };
 const AZ_HOY_CARGADOS = {};
 function azHoyCargar(n) {
@@ -229,6 +235,40 @@ function azHoyDesafio(n) {
         if (r.nivel === 2) return { nivel: "bien", msg: "Se entiende y está correcto. Otra forma: **" + modelo + "**", oir: modelo };
         if (r.nivel === 1) return { nivel: "casi", etiqueta: "💬 Se entiende", msg: formas.join(". ") + ". Así queda perfecto: **" + modelo + "**", oir: modelo };
         return { nivel: "mal", etiqueta: r.consigna ? "✗ Mal" : "✗ No se entiende", msg: r.resumen + " Una forma de decirlo: **" + modelo + "**", oir: modelo }; } };
+  }
+  if (n === 13 && typeof U13_CONVERS === "function" && typeof azSituacion === "function") {
+    const pasos = [].concat(...U13_CONVERS().map(T => T.pasos.map(p => Object.assign({ quien: T.quien, genero: T.genero }, p))), U13_CONV_FINAL().pasos.map(p => Object.assign({ quien: "А́нна", genero: "f" }, p)));
+    const p = pasos[num % pasos.length], modelo = p.sit.modelos[0];
+    return { titulo: "Pregunta del día", emoji: "💬", grande: p.bot, sub: p.es, audio: p.bot, consigna: p.tarea,
+      pista: "Tiene que aparecer: " + p.sit.necesita.map(x => x.es).join(", ") + ". Empieza, por ejemplo, con «" + modelo.split(" ")[0].replace(/[,.!?]/g, "") + "».",
+      revisar: txt => { const r = azSituacion(txt, p.sit);
+        const formas = r.elementos.filter(x => x.estado === "forma").map(x => "«" + x.escrito + "» → mejor **" + x.mejor + "**");
+        if (r.nivel === 2) return { nivel: "bien", msg: "Se entiende y está correcto. Otra forma: **" + modelo + "**", oir: modelo };
+        if (r.nivel === 1) return { nivel: "casi", etiqueta: "💬 Se entiende", msg: formas.join(". ") + ". Así queda perfecto: **" + modelo + "**", oir: modelo };
+        return { nivel: "mal", etiqueta: r.consigna ? "✗ Mal" : "✗ No se entiende", msg: r.resumen + " Una forma de decirlo: **" + modelo + "**", oir: modelo }; } };
+  }
+  if (n === 12 && typeof u12Datos === "function") {
+    const D = u12Datos(), a = U12_ASP[Math.floor(num / 2) % U12_ASP.length], vi = D.verbo(a[0]), vp = D.verbo(a[1]);
+    const fut = num % 2 === 1;   /* un día pasado, otro futuro */
+    const K = azHoyK, k2 = f => K(f);
+    const pasP = Object.values(vp.pasado).map(k2), pasI = Object.values(vi.pasado).map(k2), futP = vp.futuro.map(k2);
+    const BU = ["буду", "будешь", "будет", "будем", "будете", "будут"];
+    return { titulo: "Pareja del día", emoji: "⏳", grande: vi.ac + " / " + vp.ac, id: vp.id, sub: a[6], audio: vp.ac,
+      consigna: fut ? "Escribí qué vas a hacer mañana con este verbo, mirando el resultado (perfectivo)." : "Escribí qué terminaste ayer con este verbo (resultado: perfectivo).",
+      pista: fut ? "Futuro perfectivo: я " + vp.futuro[0] + ", ты " + vp.futuro[1] + "… (sin бу́ду)." : "Pasado perfectivo: " + vp.pasado.m + " / " + vp.pasado.f + ".",
+      revisar: txt => { const w = azHoyPal(txt), k = w.map(K);
+        const i = k.findIndex(x => pasP.indexOf(x) >= 0), j = k.findIndex(x => pasI.indexOf(x) >= 0), f = k.findIndex(x => futP.indexOf(x) >= 0), b = k.findIndex(x => BU.indexOf(x) >= 0);
+        if (fut) {
+          if (f >= 0 && b >= 0 && b === f - 1) return { nivel: "mal", msg: "Nunca бу́ду + perfectivo: sin бу́ду, **" + w[f] + "** ya es futuro." };
+          if (f >= 0) return { nivel: "bien", msg: "**" + w[f] + "**: futuro perfectivo, el resultado." };
+          if (b >= 0 && k[b + 1] === K(vi.ac)) return { nivel: "casi", msg: "«" + w[b] + " " + w[b + 1] + "» está bien, pero es proceso. Para el resultado: **" + vp.futuro[0] + "**." };
+          if (i >= 0) return { nivel: "casi", msg: "«" + w[i] + "» es pasado. La consigna pide futuro: **" + vp.futuro[0] + "**." };
+          return { nivel: "mal", msg: "No encuentro " + vp.ac + " en futuro en tu frase." };
+        }
+        if (i >= 0) return { nivel: "bien", msg: "**" + w[i] + "**: pasado perfectivo, la acción terminada." };
+        if (j >= 0) return { nivel: "casi", msg: "«" + w[j] + "» es imperfectivo (proceso). Para el resultado: **" + vp.pasado.m + "** / **" + vp.pasado.f + "**." };
+        if (f >= 0) return { nivel: "casi", msg: "«" + w[f] + "» es futuro. La consigna pide pasado: **" + vp.pasado.m + "** / **" + vp.pasado.f + "**." };
+        return { nivel: "mal", msg: "No encuentro " + vp.ac + " en pasado en tu frase." }; } };
   }
   return null;
 }
