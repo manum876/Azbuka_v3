@@ -150,6 +150,7 @@
     .u-err-bien{color:${green};font-weight:700;}
     .u-err-por{font-size:13.5px;color:${c.textSub};margin:2px 0 0 22px;}
     .u-chq{margin-top:14px;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;}
+    .u-chq-item + .u-chq-item{margin-top:14px;padding-top:12px;border-top:1px solid ${c.border};}
     .u-chq-k{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};}
     .u-chq-p{font-size:15px;font-weight:600;color:${c.text};margin-top:6px;line-height:1.45;}
     .u-chq-ops{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
@@ -178,11 +179,13 @@
   /* ID del léxico de una palabra escrita: forma de diccionario o, si no, una forma de Casos o Verbos.
      Si hay más de una palabra posible, no se enlaza (mejor sin link que con el equivocado). */
   function azLexDe(w) {
-    const k = azNormRu(String(w).toLowerCase());
-    if (k in LEX_CACHE) return LEX_CACHE[k];
+    const low = String(w).toLowerCase(), k = azNormRu(low);
+    if (low in LEX_CACHE) return LEX_CACHE[low];
     let id = null;
     if (typeof LEXICON_COMER !== "undefined") {
-      const exactas = LEXICON_COMER.filter(e => azNormRu(e.ru.toLowerCase()) === k);
+      /* Con marca de acento, solo la palabra con ese acento: дома́ (casas) no es до́ма (en casa) */
+      const conAc = /\u0301/.test(low);
+      const exactas = LEXICON_COMER.filter(e => azNormRu(e.ru.toLowerCase()) === k && (!conAc || (e.acento || e.ru).toLowerCase() === low));
       const ens = exactas.filter(e => (e.introducedIn || []).length);
       const lista = ens.length ? ens : exactas;
       if (lista.length === 1) id = lista[0].id;
@@ -192,11 +195,39 @@
         if (ids.length === 1) id = ids[0];
       }
     }
-    LEX_CACHE[k] = id;
+    LEX_CACHE[low] = id;
     return id;
+  }
+  /* Texto explicativo (azFmt) con las palabras rusas tocables (06/10/2026, Manu: en vez de
+     «(Unidad 2)», la palabra se toca y se ve qué significa). No se enlazan las letras ni las
+     terminaciones (van en negrita o con guion), las palabras de una letra ni las formas que no
+     existen (los errores que se muestran a propósito). */
+  function azFmtLink(texto) {
+    const nodos = azFmt(texto);
+    if (!Array.isArray(nodos) || typeof azAbrirBurbuja !== "function") return nodos;
+    const out = [];
+    nodos.forEach((n, j) => {
+      if (typeof n !== "string") { out.push(n); return; }
+      const rx = /[А-Яа-яЁё\u0301]+(?:-[А-Яа-яЁё\u0301]+)*/g;
+      let ult = 0, m;
+      while ((m = rx.exec(n))) {
+        const w = m[0], antes = n[m.index - 1];
+        if (w.replace(/\u0301/g, "").length < 2 || antes === "-") continue;
+        const id = azLexDe(w);
+        if (!id) continue;
+        if (m.index > ult) out.push(n.slice(ult, m.index));
+        out.push(h("span", { key: "l" + j + "-" + m.index, className: "az-link", role: "button", tabIndex: 0, lang: "ru",
+          onClick: ev => { ev.stopPropagation(); azAbrirBurbuja("palabra", { id, forma: w }, ev.currentTarget); } }, w));
+        ult = m.index + w.length;
+      }
+      if (ult < n.length) out.push(n.slice(ult));
+    });
+    return out;
   }
   /* Frase rusa con palabras tocables y lo marcado entre {…} en dorado */
   function FraseEj({ ru, lex }) {
+    /* {Как дела́} → {Как} {дела́}: el resaltado puede abarcar varias palabras (07/10/2026) */
+    ru = String(ru).replace(/\{([^}]*)\}/g, (x, s) => s.split(/(\s+)/).map(p => /[А-Яа-яЁё]/.test(p) ? "{" + p + "}" : p).join(""));
     const out = []; let k = 0, ult = 0, m;
     const rx = /[А-Яа-яЁё́{}]+(?:-[А-Яа-яЁё́{}]+)*/g;
     while ((m = rx.exec(ru))) {
@@ -219,7 +250,7 @@
           h("div", { className: "u-ej-ru" }, h(FraseEj, { ru: e.ru, lex: e.lex })),
           e.es && h("div", { className: "u-ej-es" }, e.es)),
         h("button", { className: "play", onClick: () => azHablarRu(sinLlaves(e.ru)), "aria-label": "Escuchar" }, "▶")),
-      e.por && h("div", { className: "u-ej-por" }, azFmt(e.por)))));
+      e.por && h("div", { className: "u-ej-por" }, azFmtLink(e.por)))));
   }
   function Desarmar({ d }) {
     const [sel, setSel] = useState(null);
@@ -227,19 +258,20 @@
     return h("div", null,
       h("div", { className: "u-des" }, d.partes.map((x, i) => h("button", { key: i, className: "u-des-p" + (sel === i ? " on" : ""), onClick: () => { setSel(i); azHablarRu(sinLlaves(x.txt)); } },
         h("span", { className: "u-des-ru", lang: "ru" }, sinLlaves(x.txt)), h("span", { className: "u-des-rol" }, x.rol)))),
-      h("div", { className: "u-ej-por", style: { marginTop: 8 } }, azFmt(p ? (p.nota || p.rol) : "Tocá cada parte para ver qué hace en la frase.")),
+      h("div", { className: "u-ej-por", style: { marginTop: 8 } }, azFmtLink(p ? (p.nota || p.rol) : "Tocá cada parte para ver qué hace en la frase.")),
       d.es && h("div", { className: "u-ej-es", style: { marginTop: 6 } }, "«" + d.es + "»"));
   }
   function Errores({ lista }) {
     return h(React.Fragment, null, lista.map((e, i) => h("div", { key: i, className: "u-err" },
       h("div", { className: "u-err-f" }, h("span", { style: { color: "#B5605C", fontWeight: 800 } }, "✗"), h("span", { className: "u-err-mal", lang: "ru" }, sinLlaves(e.mal))),
       h("div", { className: "u-err-f" }, h("span", { className: "u-err-bien" }, "✓"), h("span", { className: "u-err-bien", lang: "ru" }, h(FraseEj, { ru: e.bien }))),
-      e.por && h("div", { className: "u-err-por" }, azFmt(e.por)))));
+      e.por && h("div", { className: "u-err-por" }, azFmtLink(e.por)))));
   }
-  function Pregunta({ q, rotulo }) {
+  /* Una pregunta; con suelta = false va dentro de una tarjeta que agrupa varias (06/10/2026) */
+  function Pregunta({ q, rotulo, suelta }) {
     const [el, setEl] = useState(null);
-    return h("div", { className: "u-chq" },
-      h("div", { className: "u-chq-k" }, rotulo),
+    return h("div", { className: suelta === false ? "u-chq-item" : "u-chq" },
+      rotulo && h("div", { className: "u-chq-k" }, rotulo),
       h("div", { className: "u-chq-p" }, azFmt(q.pide)),
       h("div", { className: "u-chq-ops" }, q.opciones.map(o => {
         const cls = el == null ? "" : o === q.ok ? " ok" : o === el ? " mal" : "";
@@ -250,14 +282,14 @@
   /* El cuerpo de una sección (también el de «Más a fondo») */
   function Cuerpo({ x }) {
     return h(React.Fragment, null,
-      x.texto && h("div", { className: "u-text", style: { whiteSpace: "pre-line" } }, azFmt(x.texto)),   /* \n = renglón nuevo (pasos numerados) */
+      x.texto && h("div", { className: "u-text", style: { whiteSpace: "pre-line" } }, azFmtLink(x.texto)),   /* \n = renglón nuevo (pasos numerados) */
       x.desarmar && h(Desarmar, { d: x.desarmar }),
       x.ejemplos && h(Ejemplos, { lista: x.ejemplos }),
-      x.destacado && h("div", { className: "u-dest" }, azFmt(x.destacado)),
-      x.comparacion && h("div", { className: "u-truco" }, h("b", null, "En español: "), azFmt(x.comparacion)),
+      x.destacado && h("div", { className: "u-dest" }, azFmtLink(x.destacado)),
+      x.comparacion && h("div", { className: "u-truco" }, h("b", null, "En español: "), azFmtLink(x.comparacion)),
       x.errores && h(Errores, { lista: x.errores }),
-      x.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), azFmt(x.truco)),
-      x.ojo && h("div", { className: "u-truco" }, h("b", null, "Ojo: "), azFmt(x.ojo)));   /* advertencia (05/10/2026): mismo recuadro, rótulo «Ojo:» */
+      x.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), azFmtLink(x.truco)),
+      x.ojo && h("div", { className: "u-truco" }, h("b", null, "Ojo: "), azFmtLink(x.ojo)));   /* advertencia (05/10/2026): mismo recuadro, rótulo «Ojo:» */
   }
   function MasAFondo({ m }) {
     const [ab, setAb] = useState(false);
@@ -271,7 +303,10 @@
       x.antes && h(Pregunta, { q: x.antes, rotulo: "Antes de leer: ¿te animás?" }),
       h(Cuerpo, { x }),
       x.mas && h(MasAFondo, { m: x.mas }),
-      (x.chequeo || []).map((q, i) => h(Pregunta, { key: i, q, rotulo: "Chequeo rápido" })));
+      x.chequeo && x.chequeo.length === 1 && h(Pregunta, { q: x.chequeo[0], rotulo: "Chequeo rápido" }),
+      x.chequeo && x.chequeo.length > 1 && h("div", { className: "u-chq" },   /* varios: una sola tarjeta, un solo título */
+        h("div", { className: "u-chq-k" }, "Chequeo rápido"),
+        x.chequeo.map((q, i) => h(Pregunta, { key: i, q, suelta: false }))));
   }
   function AzSecciones({ secciones }) {
     return h(React.Fragment, null, (secciones || []).map((x, k) => h(Seccion, { key: k, x })));
@@ -528,6 +563,9 @@
   const AZ_TALLER_CHEQUEO = ["¿Cada verbo va con su persona (я чита́ю, она́ чита́ет)?", "¿El pasado tiene el género correcto (он был, она́ была́)?",
     "¿Después de cada preposición va el caso que pide (в Москве́, с дру́гом, у меня́)?", "¿Usaste conectores (снача́ла, пото́м, поэ́тому, потому́ что, но)?",
     "¿El aspecto dice lo que querés: proceso o resultado?"];
+  /* Frases de un texto del alumno (06/10/2026): termina una frase el punto, ! o ?, y también el
+     cambio de renglón (muchos escriben una frase por renglón sin punto) */
+  function azFrases(t) { return String(t || "").split(/(?<=[.!?…])\s*|\n+/).map(x => x.trim()).filter(x => /[А-Яа-яЁё]/.test(x)); }
   function azContarPalabras(t) { return (t.match(/[А-Яа-яЁё\u0301-]+/g) || []).length; }
   function AzTaller({ tarea, c, green, clave, fuente, aviso }) {
     const [d, setD] = useState({ paso: 0, plan: "", v1: "", v2: "" });
@@ -691,6 +729,6 @@
     return { dudas, faltan, tips };
   }
 
-  Object.assign(window, { AzEstilosUnidad, AzSecciones, azRegla, AzHojaRegla, AzVocabulario, AzFrasesLista, AzListaDialogos, AzGrabadora, AzHojaDialogo,
+  Object.assign(window, { AzEstilosUnidad, AzSecciones, azRegla, AzHojaRegla, azFmtLink, azFrases, AzVocabulario, AzFrasesLista, AzListaDialogos, AzGrabadora, AzHojaDialogo,
     AzTarjetasPalabras, AzMapaExplorar, AzProyecto, AzTaller, azContarPalabras, AzPortadaUnidad, AzTablaGrupos, azTabsUnidad, azRevisarTexto, azNPractica });
 })();

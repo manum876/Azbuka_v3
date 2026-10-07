@@ -1,7 +1,10 @@
 /* ============================================================
    DATA-UNIDAD-2.JS — Unidad 2: Presentaciones y conversaciones básicas
    ------------------------------------------------------------
-   Versión 26/09/2026. Contenido de la unidad (módulos, textos,
+   Versión 07/10/2026: teoría ampliada (ids de regla, ejemplos explicados,
+   frases desarmadas, errores típicos, chequeos, «Más a fondo») y ejercicios
+   para entender la regla (situaciones, ¿por qué?, ¿suena natural?, oído),
+   según PLAN_PROFUNDIZACION.md. Antes, 26/09/2026. Contenido de la unidad (módulos, textos,
    vocabulario por módulo) y banco de ejercicios. Las palabras viven
    en el léxico (introducedIn: [2]), las frases hechas en
    data-frases.js y los diálogos en data-dialogos.js (DLG-031 a 036,
@@ -22,16 +25,42 @@ const UNIDAD_2 = {
   titulo: "Presentaciones y conversaciones básicas",
   tituloRu: "Знако́мство и пе́рвые разгово́ры",
   objetivo: "Saludar y despedirte, presentarte, preguntar nombres, decir de dónde sos y qué idiomas hablás, y sostener una conversación de un minuto, todo en cirílico.",
-  tiempo: "25–35 horas",
+  tiempo: "2 a 3 semanas con práctica diaria (unas 12–15 horas)",
   modulos: [
     {
       id: "u2m1", n: 1, tipo: "leccion", titulo: "Saludos", resumen: "Hola, chau, gracias: formal e informal.",
       intro: "En ruso hay un saludo para la confianza y otro para el respeto, y conviene no mezclarlos. En este módulo vas a aprender a saludar, despedirte y agradecer según a quién le hablás y a qué hora.",
       secciones: [
-        { titulo: "Formal e informal", texto: "Приве́т y пока́ son de confianza: amigos, familia, gente joven de tu edad. Здра́вствуйте y до свида́ния son formales: un profesor, alguien mayor, un desconocido, un negocio, o cuando le hablás a varias personas. Es la misma diferencia que entre ты y вы, que vas a ver en el módulo 3.", destacado: "Con dudas, usá la forma formal: nunca queda mal." },
-        { titulo: "Según la hora", texto: "До́брое у́тро va a la mañana, до́брый день durante el día y до́брый ве́чер a la tarde-noche, siempre para saludar al llegar. Споко́йной но́чи no es un saludo: se dice solo al irse a dormir, como «que descanses»." },
-        { titulo: "Cortesía", texto: "Спаси́бо es «gracias» y большо́е спаси́бо, «muchas gracias». Пожа́луйста sirve para tres cosas: «por favor», «de nada» y «acá tiene» al alcanzar algo. Извини́те es «disculpe»: para pedir perdón o para llamar la atención de alguien antes de preguntar." },
-        { titulo: "Errores comunes", texto: "Saludar a un profesor con приве́т suena demasiado familiar. Decir споко́йной но́чи al llegar a una cena es raro: para eso está до́брый ве́чер. Y en здра́вствуйте la primera **в** no se pronuncia: suena «zdrástvuiti».", truco: "Приве́т ↔ пока́ (confianza). Здра́вствуйте ↔ до свида́ния (respeto)." }
+        { id: "u2-formal", titulo: "Formal e informal",
+          texto: "Приве́т y пока́ son de confianza: amigos, familia, gente joven de tu edad. Здра́вствуйте y до свида́ния son formales: un profesor, alguien mayor, un desconocido, un negocio, o cuando le hablás a varias personas.\nNo tiene que ver con la simpatía: alguien puede ser muy amable y aun así decirte здра́вствуйте, porque todavía no hay confianza.",
+          ejemplos: [
+            { ru: "{Приве́т}, Ма́ша!", es: "¡Hola, Masha!", por: "Ма́ша es una amiga: va el saludo de confianza." },
+            { ru: "{Здра́вствуйте}, А́нна!", es: "¡Buenos días, Ana!", por: "Si А́нна es tu profesora o alguien que conocés poco, va el saludo formal." },
+            { ru: "{Пока́}, Ди́ма!", es: "¡Chau, Dima!", por: "Con un amigo, la despedida de confianza." },
+            { ru: "{До свида́ния}!", es: "¡Hasta luego!", por: "Al irte de un negocio o de una clase: la despedida formal." }],
+          destacado: "Con dudas, usá la forma formal: nunca queda mal.",
+          truco: "Приве́т ↔ пока́ (confianza). Здра́вствуйте ↔ до свида́ния (respeto).",
+          ojo: "En здра́вствуйте la primera **в** no se pronuncia: suena «zdrástvuiti».",
+          mas: { texto: "¿Y si saludás a un grupo de amigos? Con varios amigos, lo natural sigue siendo приве́т. Pero si en el grupo hay alguien mayor o alguien que no conocés, здра́вствуйте es lo seguro.\nЗдра́вствуйте sirve a cualquier hora del día. Por eso es el saludo formal más útil: si no sabés cuál usar, usá ese. Y saludar a un profesor con приве́т suena demasiado familiar, aunque sea joven y simpático." },
+          chequeo: [
+            { pide: "Entrás a un negocio. ¿Qué decís?", opciones: ["Приве́т!", "Здра́вствуйте!"], ok: "Здра́вствуйте!", por: "Es un desconocido: va el saludo formal." },
+            { pide: "Te despedís de un amigo. ¿Qué decís?", opciones: ["Пока́!", "До свида́ния!"], ok: "Пока́!", por: "Con un amigo, la despedida de confianza. До свида́ния no está mal, pero suena distante." }] },
+        { id: "u2-hora", titulo: "Según la hora",
+          texto: "До́брое у́тро va a la mañana, до́брый день durante el día y до́брый ве́чер a la tarde-noche, siempre para saludar al llegar. Споко́йной но́чи no es un saludo: se dice solo al irse a dormir, como «que descanses».",
+          ejemplos: [
+            { ru: "{До́брое у́тро}!", es: "¡Buen día!", por: "A la mañana, más o menos hasta el mediodía." },
+            { ru: "{До́брый день}!", es: "¡Buenas tardes!", por: "Del mediodía a la tarde. Es un poco formal: queda bien en un negocio o en una oficina." },
+            { ru: "{До́брый ве́чер}!", es: "¡Buenas noches!", por: "Al llegar a la noche, por ejemplo a una cena." },
+            { ru: "{Споко́йной но́чи}!", es: "¡Que descanses!", por: "Solo cuando alguien se va a dormir, nunca al llegar." }],
+          mas: { texto: "До́брое у́тро, до́брый день y до́брый ве́чер son un poco formales, pero se usan con todos: a un amigo, a la mañana, до́брое у́тро le queda perfecto. Entre amigos, a cualquier hora, lo más común sigue siendo приве́т.\nPara despedirse a la noche no hay una fórmula especial: до свида́ния o пока́. Споко́йной но́чи queda solo para cuando alguien se va a dormir." },
+          chequeo: [{ pide: "Llegás a una cena a las nueve de la noche. ¿Qué decís?", opciones: ["До́брый ве́чер!", "Споко́йной но́чи!"], ok: "До́брый ве́чер!", por: "Споко́йной но́чи es para irse a dormir, no para llegar." }] },
+        { id: "u2-cortesia", titulo: "Cortesía",
+          texto: "Спаси́бо es «gracias» y большо́е спаси́бо, «muchas gracias». Пожа́луйста sirve para tres cosas: «por favor», «de nada» y «acá tiene» al alcanzar algo. Извини́те es «disculpe»: para pedir perdón o para llamar la atención de alguien antes de preguntar.",
+          ejemplos: [
+            { ru: "Спаси́бо! — {Пожа́луйста}!", es: "¡Gracias! —¡De nada!", por: "Пожа́луйста es la respuesta al спаси́бо." },
+            { ru: "{Большо́е} спаси́бо!", es: "¡Muchas gracias!", por: "Большо́е quiere decir «grande»: un «gran gracias»." },
+            { ru: "{Извини́те}!", es: "¡Disculpe!", por: "Para pedir perdón, o para llamar a alguien antes de preguntarle algo." }],
+          chequeo: [{ pide: "Te dicen спаси́бо. ¿Qué contestás?", opciones: ["Пожа́луйста!", "Извини́те!", "Пока́!"], ok: "Пожа́луйста!", por: "Пожа́луйста también es «de nada»." }] }
       ],
       vocab: U2_VOCAB[1], frases: ["FRS-001", "FRS-002", "FRS-003", "FRS-004", "FRS-005", "FRS-014", "FRS-009", "FRS-010", "FRS-011", "FRS-024", "FRS-062", "FRS-025", "FRS-026", "FRS-027"],
       dialogos: ["DLG-001", "DLG-005", "DLG-006"]
@@ -40,11 +69,46 @@ const UNIDAD_2 = {
       id: "u2m2", n: 2, tipo: "leccion", titulo: "Presentarse", resumen: "Меня́ зову́т…, я…, э́то…",
       intro: "Para decir tu nombre hay dos formas, y para presentar a alguien alcanza con э́то. En este módulo aparece además una sorpresa del ruso: en presente no se dice el verbo «ser».",
       secciones: [
-        { titulo: "Меня́ зову́т…", texto: "Literalmente, «me llaman…»: меня́ зову́т Ива́н. Es la forma más común de decir tu nombre. El nombre va tal cual, sin cambios." },
-        { titulo: "Sin verbo «ser»", texto: "En presente, el ruso no usa «soy», «es», «somos»: я Лу́кас es «yo (soy) Lucas», э́то Ди́ма es «este (es) Dima», я студе́нт es «yo (soy) estudiante». Donde en español va el verbo, en ruso no va nada.", destacado: "Я Лу́кас = Yo (soy) Lucas. Э́то А́нна = Esta (es) Ana." },
-        { titulo: "Меня́ зову́т Ива́н o я Ива́н", texto: "Las dos están bien. Меня́ зову́т Ива́н es la presentación completa; я Ива́н es más corta, como «soy Iván», y se usa mucho al contestar o al presentarse rápido." },
-        { titulo: "Рад o ра́да: el género", texto: "Algunas palabras cambian según quien habla: un hombre dice рад познако́миться («encantado»), una mujer dice ра́да познако́миться («encantada»). Pasa lo mismo con студе́нт (hombre) y студе́нтка (mujer), друг y подру́га. Es el género, que en ruso se ve mucho más que en español; por ahora alcanza con notarlo." },
-        { titulo: "Contestar", texto: "A о́чень прия́тно («mucho gusto») se contesta мне то́же («igualmente»). Para presentar a alguien: познако́мься, э́то Ди́ма («te presento a Dima»)." }
+        { id: "u2-me-llaman", titulo: "Меня́ зову́т…",
+          texto: "Es la forma más común de decir tu nombre. Literalmente dice «a mí me llaman…». El nombre va al final, tal cual, sin cambios.",
+          desarmar: { es: "Me llamo Iván.", partes: [
+            { txt: "Меня́", rol: "a mí", nota: "Меня́ es una forma de я: «a mí». Por eso no se dice «я зову́т»." },
+            { txt: "зову́т", rol: "me llaman", nota: "Зову́т = «llaman». No cambia: sirve para cualquier persona." },
+            { txt: "Ива́н", rol: "el nombre", nota: "El nombre, tal cual." }] },
+          ejemplos: [
+            { ru: "{Меня́ зову́т} А́нна.", es: "Me llamo Ana.", por: "Igual para un hombre que para una mujer: solo cambia el nombre." },
+            { ru: "{Меня́ зову́т} Лу́кас, я студе́нт.", es: "Me llamo Lucas, soy estudiante.", por: "Después del nombre se puede seguir con más datos." }],
+          errores: [{ mal: "Я зову́т Ива́н.", bien: "{Меня́} зову́т Ива́н.", por: "Зову́т va con меня́, «a mí»." }],
+          mas: { texto: "Зову́т no cambia nunca: sirve para «me llaman», «te llaman», «lo llaman». Lo que cambia es la palabra de adelante, que dice a quién. Por ahora conocés меня́, «a mí»; las demás aparecen cuando aprendas a preguntar el nombre.\nTambién vas a oír и́мя («nombre») y фами́лия («apellido»), sobre todo en formularios y en situaciones formales." },
+          chequeo: [{ pide: "¿Cuál está bien?", opciones: ["Меня́ зову́т Ма́ша.", "Я зову́т Ма́ша."], ok: "Меня́ зову́т Ма́ша.", por: "Зову́т va con меня́: «a mí me llaman»." }] },
+        { id: "u2-sin-ser", titulo: "Sin verbo «ser»",
+          texto: "En presente, el ruso no usa «soy», «es», «somos»: я Лу́кас es «yo (soy) Lucas», э́то Ди́ма es «este (es) Dima», я студе́нт es «yo (soy) estudiante». Para decir quién o qué es alguien, alcanza con poner las dos palabras juntas.",
+          ejemplos: [
+            { ru: "Я студе́нт.", es: "Soy estudiante.", por: "Я y lo que sos, uno al lado del otro." },
+            { ru: "Э́то Ди́ма.", es: "Este es Dima.", por: "Э́то presenta a alguien: «este (es)»." },
+            { ru: "Э́то моя́ подру́га А́нна.", es: "Esta es mi amiga Ana.", por: "Э́то, quién es y el nombre: ningún verbo." }],
+          destacado: "Я Лу́кас = Yo (soy) Lucas. Э́то А́нна = Esta (es) Ana.",
+          errores: [{ mal: "Я есть Ива́н.", bien: "Я Ива́н.", por: "En presente no se dice есть para «soy»." }],
+          chequeo: [{ pide: "¿Cuál suena natural?", opciones: ["Я студе́нт.", "Я есть студе́нт."], ok: "Я студе́нт.", por: "Sin verbo: я y lo que sos." }] },
+        { id: "u2-dos-formas", titulo: "Меня́ зову́т Ива́н o я Ива́н",
+          texto: "Las dos están bien. Меня́ зову́т Ива́н es la presentación completa; я Ива́н es más corta, como «soy Iván», y se usa mucho al contestar o al presentarse rápido.",
+          ejemplos: [
+            { ru: "Здра́вствуйте! {Меня́ зову́т} О́льга.", es: "¡Buenos días! Me llamo Olga.", por: "Presentación completa: en una clase, en una reunión." },
+            { ru: "Приве́т! {Я} Ди́ма.", es: "¡Hola! Soy Dima.", por: "Corta y rápida: entre gente joven." }] },
+        { id: "u2-genero-hablante", titulo: "Рад o ра́да: el género",
+          texto: "Algunas palabras cambian según quién habla. Un hombre dice рад познако́миться («encantado»); una mujer, ра́да познако́миться («encantada»). Pasa lo mismo con студе́нт y студе́нтка, друг y подру́га. Es el género, que en ruso se ve en muchas palabras; por ahora alcanza con notarlo.",
+          ejemplos: [
+            { ru: "{Рад} познако́миться!", es: "¡Encantado!", por: "Lo dice Лу́кас: habla un hombre." },
+            { ru: "{Ра́да} познако́миться!", es: "¡Encantada!", por: "Lo dice А́нна: la **-а** final muestra que habla una mujer." },
+            { ru: "Э́то мой {друг} Ива́н.", es: "Este es mi amigo Iván.", por: "Друг: un amigo." },
+            { ru: "Э́то {моя́ подру́га} А́нна.", es: "Esta es mi amiga Ana.", por: "Подру́га: una amiga. Fijate que también cambia мой → моя́." }],
+          errores: [{ mal: "Ма́ша — студе́нт.", bien: "Ма́ша — {студе́нтка}.", por: "Ма́ша es mujer: студе́нтка." }],
+          chequeo: [{ pide: "Habla А́нна. ¿Qué dice?", opciones: ["Рад познако́миться!", "Ра́да познако́миться!"], ok: "Ра́да познако́миться!", por: "Habla una mujer: ра́да." }] },
+        { id: "u2-contestar", titulo: "Contestar",
+          texto: "A о́чень прия́тно («mucho gusto») se contesta мне то́же («igualmente»). Para presentar a alguien: познако́мься, э́то Ди́ма («te presento a Dima»).",
+          ejemplos: [
+            { ru: "О́чень прия́тно! — {Мне то́же}.", es: "¡Mucho gusto! —Igualmente.", por: "Мне то́же = «a mí también»." },
+            { ru: "{Познако́мься}, э́то Ди́ма.", es: "Te presento a Dima.", por: "Познако́мься = «conocé a…»: para presentar a alguien con confianza." }] }
       ],
       vocab: U2_VOCAB[2], frases: ["FRS-017", "FRS-018", "FRS-019", "FRS-053", "FRS-020"], dialogos: ["DLG-031", "DLG-034"]
     },
@@ -52,10 +116,44 @@ const UNIDAD_2 = {
       id: "u2m3", n: 3, tipo: "leccion", titulo: "Preguntar nombres", resumen: "¿Cómo te llamás? ¿Quién es?",
       intro: "Para preguntar el nombre, el ruso usa la misma construcción que para decirlo. Y acá aparece la diferencia más importante del trato: ты o вы.",
       secciones: [
-        { titulo: "Как тебя́ зову́т? / Как вас зову́т?", texto: "Как тебя́ зову́т? es «¿cómo te llamás?», con confianza. Как вас зову́т? es «¿cómo se llama?», con respeto. Se contesta меня́ зову́т Ива́н o я Ива́н." },
-        { titulo: "Ты o вы", texto: "Ты es «vos»: familia, amigos, chicos, gente joven en un ambiente informal. Вы es «usted» y también «ustedes»: desconocidos, gente mayor, profesores, cualquier situación formal, y cualquier grupo de personas. Pasar de вы a ты lo propone la otra persona, igual que el tuteo en español.", destacado: "Ты = vos. Вы = usted y ustedes." },
-        { titulo: "Кто э́то? Что э́то?", texto: "Кто э́то? pregunta por una persona («¿quién es?») y что э́то?, por una cosa («¿qué es esto?»). Se contesta igual: э́то Ма́ша, э́то слова́рь." },
-        { titulo: "Él y ella", texto: "Para preguntar por otra persona: как его́ зову́т? («¿cómo se llama él?») y как её зову́т? («¿cómo se llama ella?»). La respuesta repite la forma: его́ зову́т Ди́ма, её зову́т О́льга. En его́ la **г** suena **v**: «yivó»." }
+        { id: "u2-preguntar-nombre", titulo: "Как тебя́ зову́т? / Как вас зову́т?",
+          texto: "Para preguntar el nombre se usa la misma estructura que para decirlo, con как («cómo») adelante. Как тебя́ зову́т? es «¿cómo te llamás?», con confianza. Как вас зову́т? es «¿cómo se llama?», con respeto. Se contesta меня́ зову́т Ива́н o я Ива́н.",
+          desarmar: { es: "¿Cómo te llamás?", partes: [
+            { txt: "Как", rol: "cómo", nota: "Как = «cómo»." },
+            { txt: "тебя́", rol: "a vos", nota: "Тебя́ es una forma de ты: «a vos». Con respeto va вас." },
+            { txt: "зову́т", rol: "llaman", nota: "El mismo зову́т de меня́ зову́т." }] },
+          ejemplos: [
+            { ru: "Как {тебя́} зову́т? — Меня́ зову́т Ма́ша.", es: "¿Cómo te llamás? —Me llamo Masha.", por: "Entre gente de la misma edad: con confianza." },
+            { ru: "Как {вас} зову́т? — Меня́ зову́т Ива́н.", es: "¿Cómo se llama? —Me llamo Iván.", por: "A un desconocido o a alguien mayor: con respeto." }],
+          errores: [
+            { mal: "Как ты зову́т?", bien: "Как {тебя́} зову́т?", por: "Igual que en меня́ зову́т: va тебя́, «a vos»." },
+            { mal: "Как вы зову́т?", bien: "Как {вас} зову́т?", por: "Con respeto, la forma es вас." }],
+          chequeo: [{ pide: "Как ___ зову́т? (con confianza)", opciones: ["ты", "тебя́", "вас"], ok: "тебя́", por: "Con зову́т va тебя́." }] },
+        { id: "u2-ty-vy", titulo: "Ты o вы",
+          texto: "Ты es para la confianza: familia, amigos, chicos, gente joven en un ambiente informal. Вы es para el respeto: desconocidos, gente mayor, profesores, cualquier situación formal. Y además вы es el plural: con dos personas o más va siempre вы, aunque sean amigos.",
+          ejemplos: [
+            { ru: "{Здра́вствуйте}! Как {вас} зову́т?", es: "¡Buenos días! ¿Cómo se llama?", por: "Primer día de clase, a la profesora: todo formal, el saludo y la pregunta." },
+            { ru: "{Приве́т}! Как {тебя́} зову́т?", es: "¡Hola! ¿Cómo te llamás?", por: "En una fiesta, a alguien de tu edad: todo de confianza." },
+            { ru: "Ма́ша, Ди́ма, {вы} студе́нты?", es: "Masha, Dima, ¿ustedes son estudiantes?", por: "Son amigos, pero son dos: вы." }],
+          destacado: "Ты = vos. Вы = usted y ustedes.",
+          mas: { titulo: "¿Cuándo se pasa de вы a ты?", texto: "Lo propone la persona mayor o la que tiene un cargo, como un profesor o un jefe. Mientras no lo proponga, seguí con вы. Entre gente joven, en cambio, se pasa a ты enseguida, a veces desde el primer приве́т.\nEn la familia se usa ты con todos, también con ма́ма, па́па y los abuelos. Y a un chico siempre se le habla de ты.\nLo importante es no mezclar: si usás вы, el saludo también es formal (здра́вствуйте, до свида́ния); si usás ты, va приве́т y пока́." },
+          chequeo: [
+            { pide: "Le preguntás el nombre a una señora mayor.", opciones: ["Как тебя́ зову́т?", "Как вас зову́т?"], ok: "Как вас зову́т?", por: "Es una persona mayor que no conocés: вас." },
+            { pide: "Le hablás a dos amigos a la vez. ¿Qué pronombre va?", opciones: ["ты", "вы"], ok: "вы", por: "Son dos personas: siempre вы." }] },
+        { id: "u2-kto-chto", titulo: "Кто э́то? Что э́то?",
+          texto: "Кто э́то? pregunta por una persona («¿quién es?») y что э́то?, por una cosa («¿qué es esto?»). Se contesta igual, con э́то: э́то Ма́ша, э́то кни́га.",
+          ejemplos: [
+            { ru: "{Кто} э́то? — Э́то Ма́ша.", es: "¿Quién es? —Es Masha.", por: "Una persona: кто." },
+            { ru: "{Что} э́то? — Э́то дом.", es: "¿Qué es esto? —Es una casa.", por: "Una cosa: что." }],
+          ojo: "Что se pronuncia «shto»: la **ч** suena **ш**.",
+          mas: { texto: "Para los animales también se usa кто, no что: Кто э́то? — Э́то кот. Para el ruso, un animal es un «quién»." },
+          chequeo: [{ pide: "Señalás un libro. ¿Qué preguntás?", opciones: ["Кто э́то?", "Что э́то?"], ok: "Что э́то?", por: "Es una cosa: что." }] },
+        { id: "u2-el-ella", titulo: "Él y ella",
+          texto: "Para preguntar por otra persona: как его́ зову́т? («¿cómo se llama él?») y как её зову́т? («¿cómo se llama ella?»). La respuesta repite la forma: его́ зову́т Ди́ма, её зову́т О́льга. En его́ la **г** suena **v**: «yivó».",
+          ejemplos: [
+            { ru: "Как {его́} зову́т? — {Его́} зову́т Ди́ма.", es: "¿Cómo se llama él? —Se llama Dima.", por: "Его́: «a él»." },
+            { ru: "Как {её} зову́т? — {Её} зову́т О́льга.", es: "¿Cómo se llama ella? —Se llama Olga.", por: "Её: «a ella»." }],
+          truco: "меня́ · тебя́ · вас · его́ · её + зову́т." }
       ],
       vocab: U2_VOCAB[3], frases: ["FRS-015", "FRS-016", "FRS-054", "FRS-055"], dialogos: ["DLG-031", "DLG-033"]
     },
@@ -63,9 +161,27 @@ const UNIDAD_2 = {
       id: "u2m4", n: 4, tipo: "leccion", titulo: "Países y nacionalidades", resumen: "Отку́да ты? Я из…", mapa: true,
       intro: "En este módulo vas a aprender los nombres de más de treinta países y a decir de dónde sos. Hay una sola estructura nueva, я из…, que conviene aprender como un bloque. Al final hay una ampliación opcional con más países.",
       secciones: [
-        { titulo: "Я из…", texto: "Para decir de dónde sos: я из + el país o la ciudad. Después de из la palabra cambia un poco la terminación: Росси́я → из Росси́и, Аргенти́на → из Аргенти́ны, Кита́й → из Кита́я, Москва́ → из Москвы́. Es un caso (el genitivo), que vas a estudiar más adelante; por ahora, aprendelo de memoria junto con cada país.", destacado: "Отку́да ты? — Я из Аргенти́ны." },
-        { titulo: "Países que no cambian", texto: "США, Перу́ y Чи́ли no cambian nunca: я из США, я из Перу́, я из Чи́ли." },
-        { titulo: "Nacionalidades", texto: "Cada nacionalidad tiene forma de hombre y de mujer: испа́нец / испа́нка, аргенти́нец / аргенти́нка, италья́нец / италья́нка. La de mujer casi siempre termina en **-ка**. Ру́сский / ру́сская es distinta: es un adjetivo, igual que «ruso / rusa».", truco: "Ты ру́сский? — Нет, я аргенти́нец. (Sin verbo «ser», como en el módulo 2.)" },
+        { id: "u2-ya-iz", titulo: "Я из…",
+          texto: "La pregunta es отку́да ты? u отку́да вы? («¿de dónde sos?», «¿de dónde es?»). Para contestar: я из + el país o la ciudad. Después de из la palabra cambia un poco la terminación: Росси́я → из Росси́и, Аргенти́на → из Аргенти́ны, Кита́й → из Кита́я, Москва́ → из Москвы́. Es un caso (el genitivo), que vas a estudiar más adelante; por ahora, aprendelo de memoria junto con cada país.",
+          ejemplos: [
+            { ru: "Я из {Аргенти́ны}.", es: "Soy de Argentina.", por: "Аргенти́на termina en **-а**: después de из, **-ы**." },
+            { ru: "Я из {Росси́и}.", es: "Soy de Rusia.", por: "Росси́я termina en **-я**: después de из, **-и**." },
+            { ru: "Я из {Кита́я}.", es: "Soy de China.", por: "Кита́й termina en **-й**: después de из, **-я**." },
+            { ru: "Ива́н из {Москвы́}.", es: "Iván es de Moscú.", por: "Москва́ → Москвы́: también se mueve la sílaba fuerte." }],
+          destacado: "Отку́да ты? — Я из Аргенти́ны.",
+          errores: [{ mal: "Я из Аргенти́на.", bien: "Я из {Аргенти́ны}.", por: "Después de из el país cambia la terminación." }],
+          truco: "Después de из: -а → -ы · -я → -и · -й → -я.",
+          chequeo: [{ pide: "Я из …", opciones: ["Испа́ния", "Испа́нии"], ok: "Испа́нии", por: "Después de из, Испа́ния pasa a Испа́нии." }] },
+        { id: "u2-no-cambian", titulo: "Países que no cambian",
+          texto: "США, Перу́ y Чи́ли no cambian nunca: я из США, я из Перу́, я из Чи́ли. Son palabras que terminan en **-у** o **-и**, o siglas, y en ruso quedan siempre iguales." },
+        { id: "u2-nacionalidades", titulo: "Nacionalidades",
+          texto: "Cada nacionalidad tiene forma de hombre y de mujer: испа́нец / испа́нка, аргенти́нец / аргенти́нка, италья́нец / италья́нка. La de mujer casi siempre termina en **-ка**. Ру́сский / ру́сская es distinta: es un adjetivo, y cambia igual que los adjetivos.",
+          ejemplos: [
+            { ru: "Он {италья́нец}.", es: "Él es italiano.", por: "Hombre: **-ец**." },
+            { ru: "Она́ {испа́нка}.", es: "Ella es española.", por: "Mujer: **-ка**." },
+            { ru: "Ты ру́сский? — Нет, я {аргенти́нец}.", es: "¿Sos ruso? —No, soy argentino.", por: "Sin verbo «ser»: я y la nacionalidad." }],
+          errores: [{ mal: "Ма́ша — ру́сский.", bien: "Ма́ша — {ру́сская}.", por: "Ма́ша es mujer: ру́сская." }],
+          chequeo: [{ pide: "А́нна es de España. А́нна — …", opciones: ["испа́нец", "испа́нка"], ok: "испа́нка", por: "Mujer: **-ка**." }] },
         { titulo: "El mapa", texto: "Abajo tenés el mapa: tocá un país para escuchar su nombre y ver de dónde sale cada uno." }
       ],
       vocab: U2_VOCAB[4], frases: ["FRS-021", "FRS-022", "FRS-023"], dialogos: ["DLG-032"],
@@ -78,10 +194,30 @@ const UNIDAD_2 = {
       id: "u2m5", n: 5, tipo: "leccion", titulo: "Idiomas", resumen: "Я говорю́ по-ру́сски. Я учу́ ру́сский.",
       intro: "Para hablar de idiomas hay dos construcciones distintas según el verbo. Es un error muy frecuente, así que vale la pena mirarlo con calma.",
       secciones: [
-        { titulo: "Говори́ть по-…", texto: "Con говори́ть («hablar») y понима́ть («entender»), el idioma va con **по-** y termina en **-ски**: я говорю́ по-ру́сски, я понима́ю по-испа́нски. Es una palabra que no cambia.", destacado: "Я говорю́ по-ру́сски (no «говорю русский»)." },
-        { titulo: "Учи́ть / изуча́ть… язы́к", texto: "Con учи́ть o изуча́ть («estudiar»), el idioma va como adjetivo: я учу́ ру́сский, я изуча́ю ру́сский язы́к. Учу́ ру́сский es lo más común; изуча́ю ру́сский язы́к suena un poco más formal." },
-        { titulo: "Las dos formas de cada idioma", texto: "ру́сский → по-ру́сски, испа́нский → по-испа́нски, англи́йский → по-англи́йски, францу́зский → по-францу́зски, неме́цкий → по-неме́цки. El adjetivo sirve para «estudiar»; la forma con **по-**, para «hablar» y «entender»." },
-        { titulo: "Cuánto", texto: "Немно́го es «un poco»: я немно́го говорю́ по-ру́сски. Хорошо́ y пло́хо sirven para decir cómo: я пло́хо говорю́ по-ру́сски («hablo mal ruso»)." }
+        { id: "u2-po-ski", titulo: "Говори́ть по-…",
+          texto: "Con говори́ть («hablar») y понима́ть («entender»), el idioma va con **по-** y termina en **-ски**: я говорю́ по-ру́сски, я понима́ю по-испа́нски. Es una palabra que no cambia nunca.",
+          ejemplos: [
+            { ru: "Я говорю́ {по-ру́сски}.", es: "Hablo ruso.", por: "Con говори́ть, la forma con **по-**." },
+            { ru: "Я понима́ю {по-испа́нски}.", es: "Entiendo español.", por: "Con понима́ть, también **по-**." },
+            { ru: "Ты говори́шь {по-англи́йски}?", es: "¿Hablás inglés?", por: "La forma con **по-** es siempre igual, la diga quien la diga." }],
+          destacado: "Я говорю́ по-ру́сски.",
+          errores: [{ mal: "Я говорю́ ру́сский.", bien: "Я говорю́ {по-ру́сски}.", por: "Con говори́ть, el idioma va con **по-**." }],
+          chequeo: [{ pide: "Я говорю́ …", opciones: ["испа́нский", "по-испа́нски"], ok: "по-испа́нски", por: "Con говори́ть, **по-**." }] },
+        { id: "u2-uchit", titulo: "Учи́ть / изуча́ть… язы́к",
+          texto: "Con учи́ть o изуча́ть («estudiar»), el idioma va como adjetivo: я учу́ ру́сский, я изуча́ю ру́сский язы́к. Учу́ ру́сский es lo más común; изуча́ю ру́сский язы́к suena un poco más formal.",
+          ejemplos: [
+            { ru: "Я учу́ {ру́сский}.", es: "Estudio ruso.", por: "Con учи́ть, el adjetivo, sin **по-**." },
+            { ru: "Он изуча́ет {италья́нский язы́к}.", es: "Él estudia italiano.", por: "Con изуча́ть se suele agregar язы́к." }],
+          errores: [{ mal: "Я учу́ по-ру́сски.", bien: "Я учу́ {ру́сский}.", por: "Para «estudiar», el adjetivo." }],
+          chequeo: [{ pide: "Я изуча́ю … язы́к.", opciones: ["по-англи́йски", "англи́йский"], ok: "англи́йский", por: "Con изуча́ть y язы́к, el adjetivo." }] },
+        { id: "u2-dos-formas-idioma", titulo: "Las dos formas de cada idioma",
+          texto: "ру́сский → по-ру́сски, испа́нский → по-испа́нски, англи́йский → по-англи́йски, францу́зский → по-францу́зски, неме́цкий → по-неме́цки. El adjetivo sirve para «estudiar»; la forma con **по-**, para «hablar» y «entender».",
+          truco: "¿Hablar o entender? по-…ски. ¿Estudiar? El adjetivo." },
+        { id: "u2-cuanto", titulo: "Cuánto",
+          texto: "Немно́го es «un poco»: я немно́го говорю́ по-ру́сски. Хорошо́ y пло́хо sirven para decir cómo: я пло́хо говорю́ по-ру́сски («hablo mal ruso»).",
+          ejemplos: [
+            { ru: "Я {немно́го} говорю́ по-ру́сски.", es: "Hablo un poco de ruso.", por: "Немно́го va antes del verbo." },
+            { ru: "Я понима́ю по-ру́сски, но {пло́хо} говорю́.", es: "Entiendo ruso, pero hablo mal.", por: "Пло́хо, «mal», también va antes del verbo." }] }
       ],
       vocab: U2_VOCAB[5], frases: ["FRS-028", "FRS-029", "FRS-060"], dialogos: ["DLG-032", "DLG-033"],
       tabla: { titulo: "Estudiar y hablar", encabezados: ["Estudiar (я учу́…)", "Hablar (я говорю́…)"], filas: "idiomas" }
@@ -90,9 +226,25 @@ const UNIDAD_2 = {
       id: "u2m6", n: 6, tipo: "leccion", titulo: "¿Cómo estás?", resumen: "Как дела́? Хорошо́, а у тебя́?",
       intro: "Как дела́? es una pregunta de verdad: los rusos esperan una respuesta sincera, no un «bien» automático. Estas son las respuestas, de mejor a peor.",
       secciones: [
-        { titulo: "La pregunta", texto: "Как дела́? («¿cómo andás?») es de confianza. Con вы: как у вас дела́? («¿cómo le va?»)." },
-        { titulo: "Las respuestas", texto: "Отли́чно (excelente) → о́чень хорошо́ (muy bien) → хорошо́ (bien) → норма́льно (bien, sin novedades) → так себе́ (más o menos) → пло́хо (mal). Норма́льно es la más común y no suena negativa.", destacado: "Норма́льно = «bien», no «normal» en sentido de aburrido." },
-        { titulo: "Devolver la pregunta", texto: "Después de contestar, se devuelve con а у тебя́? («¿y vos?») o а у вас? («¿y usted?»). Спаси́бо se suele agregar: хорошо́, спаси́бо. А у тебя́?" }
+        { id: "u2-kak-dela", titulo: "La pregunta",
+          texto: "Как дела́? («¿cómo andás?») es de confianza: se le pregunta a alguien que conocés. Con вы: как у вас дела́? («¿cómo le va?»).\nNo es un saludo automático: a un desconocido no se le pregunta, y quien pregunta espera una respuesta de verdad.",
+          ejemplos: [
+            { ru: "Приве́т, Ди́ма! {Как дела́}?", es: "¡Hola, Dima! ¿Cómo andás?", por: "A un amigo." },
+            { ru: "Здра́вствуйте! {Как у вас дела́}?", es: "¡Buenos días! ¿Cómo le va?", por: "A tu profesora: con вас." }],
+          chequeo: [{ pide: "Le preguntás a tu profesora cómo le va.", opciones: ["Как дела́?", "Как у вас дела́?"], ok: "Как у вас дела́?", por: "Con respeto: как у вас дела́?" }] },
+        { id: "u2-respuestas", titulo: "Las respuestas",
+          texto: "Отли́чно (excelente) → о́чень хорошо́ (muy bien) → хорошо́ (bien) → норма́льно (bien, sin novedades) → так себе́ (más o menos) → пло́хо (mal). Норма́льно es la más común y no suena negativa.",
+          ejemplos: [
+            { ru: "Как дела́? — {Норма́льно}.", es: "¿Cómo andás? —Bien.", por: "La respuesta de todos los días: todo en orden." },
+            { ru: "Как дела́? — {Так себе́}.", es: "¿Cómo andás? —Más o menos.", por: "Deja la puerta abierta: el otro seguramente pregunte qué pasa." }],
+          destacado: "Норма́льно = «bien», no «normal» en sentido de aburrido.",
+          mas: { titulo: "Qué transmite cada respuesta", texto: "Отли́чно y о́чень хорошо́ suenan entusiastas: decilas si de verdad estás muy bien. Хорошо́ y норма́льно son las de todos los días. Так себе́ y пло́хо invitan a preguntar qué pasó: con un amigo está bien; con alguien que conocés poco, mejor норма́льно.\nPor eso un ruso casi nunca contesta отли́чно por costumbre: si lo dice, es porque está muy bien." },
+          chequeo: [{ pide: "¿Cuál es la respuesta más común y neutra?", opciones: ["Отли́чно!", "Норма́льно.", "Пло́хо."], ok: "Норма́льно.", por: "Норма́льно: bien, sin novedades." }] },
+        { id: "u2-devolver", titulo: "Devolver la pregunta",
+          texto: "Después de contestar, se devuelve con а у тебя́? («¿y vos?») o а у вас? («¿y usted?»). Спаси́бо se suele agregar: хорошо́, спаси́бо. А у тебя́?",
+          ejemplos: [
+            { ru: "Хорошо́, спаси́бо. {А у тебя́}?", es: "Bien, gracias. ¿Y vos?", por: "Con confianza: тебя́." },
+            { ru: "Норма́льно. {А у вас}?", es: "Bien. ¿Y usted?", por: "Con respeto: вас, igual que en la pregunta." }] }
       ],
       vocab: U2_VOCAB[6], frases: ["FRS-006", "FRS-007", "FRS-008", "FRS-056", "FRS-057", "FRS-061"], dialogos: ["DLG-001", "DLG-035"]
     },
@@ -101,9 +253,25 @@ const UNIDAD_2 = {
       intro: "Los pronombres personales son la base de cualquier frase. Por ahora alcanza con reconocerlos y usarlos sin verbo: я Ива́н, она́ А́нна, они́ до́ма.",
       pronombres: [["я", "yo"], ["ты", "vos"], ["он", "él"], ["она́", "ella"], ["оно́", "ello (neutro)"], ["мы", "nosotros"], ["вы", "usted / ustedes"], ["они́", "ellos, ellas"]],
       secciones: [
-        { titulo: "Sin verbo", texto: "Como viste en el módulo 2, en presente no hace falta «ser» ni «estar»: он Лу́кас («él es Lucas»), мы студе́нты («somos estudiantes»), они́ до́ма («están en casa»)." },
-        { titulo: "Он, она́, оно́", texto: "Он y она́ son «él» y «ella». Оно́ es neutro: se usa para cosas de género neutro, que vas a ver en la unidad 3. Они́ sirve para hombres, mujeres y cosas." },
-        { titulo: "Вы, dos veces", texto: "Вы es a la vez «usted» (una persona, con respeto) y «ustedes» (varias personas). El contexto dice cuál." }
+        { id: "u2-sin-verbo-pron", titulo: "Sin verbo",
+          texto: "En presente no hace falta «ser» ni «estar»: он Лу́кас («él es Lucas»), мы студе́нты («somos estudiantes»), они́ до́ма («están en casa»). El pronombre y lo que sigue, uno al lado del otro.",
+          ejemplos: [
+            { ru: "{Мы} студе́нты.", es: "Somos estudiantes.", por: "Мы y lo que somos: sin verbo." },
+            { ru: "{Они́} до́ма.", es: "Están en casa.", por: "Tampoco hace falta «estar»." }],
+          errores: [{ mal: "Он есть Лу́кас.", bien: "Он Лу́кас.", por: "En presente, sin есть." }] },
+        { id: "u2-on-ona", titulo: "Он, она́, оно́",
+          texto: "Он y она́ son «él» y «ella». Оно́ es neutro: se usa para cosas de género neutro, como окно́ o мо́ре; el género de las palabras lo vas a ver más adelante. Они́ sirve para hombres, mujeres y cosas: no distingue.",
+          ejemplos: [
+            { ru: "Э́то Лу́кас. {Он} студе́нт.", es: "Este es Lucas. Él es estudiante.", por: "Лу́кас es hombre: он." },
+            { ru: "Э́то А́нна. {Она́} студе́нтка.", es: "Esta es Ana. Ella es estudiante.", por: "А́нна es mujer: она́." },
+            { ru: "Ма́ша и А́нна? {Они́} до́ма.", es: "¿Masha y Ana? Están en casa.", por: "Dos mujeres: они́, igual que para dos hombres." }],
+          ojo: "Ди́ма termina en **-а**, pero es un hombre: он. Con las personas manda quién es, no la terminación.",
+          chequeo: [{ pide: "Э́то Ди́ма. … студе́нт.", opciones: ["Он", "Она́", "Они́"], ok: "Он", por: "Ди́ма es un hombre: он." }] },
+        { id: "u2-vy", titulo: "Вы, dos veces",
+          texto: "Вы es a la vez «usted» (una persona, con respeto) y «ustedes» (varias personas). El contexto dice cuál.",
+          ejemplos: [
+            { ru: "{Вы} студе́нт?", es: "¿Usted es estudiante?", por: "Una persona, con respeto: студе́нт está en singular." },
+            { ru: "{Вы} студе́нты?", es: "¿Ustedes son estudiantes?", por: "Varias personas: lo muestra студе́нты." }] }
       ],
       vocab: U2_VOCAB[7], frases: [], dialogos: []
     },
@@ -111,9 +279,18 @@ const UNIDAD_2 = {
       id: "u2m8", n: 8, tipo: "leccion", titulo: "Frases útiles", resumen: "No entiendo, repita, más despacio.",
       intro: "Estas frases te salvan desde el primer día: sirven para pedir que te repitan, que hablen más despacio o para preguntar qué significa una palabra.",
       secciones: [
-        { titulo: "Cuando no entendés", texto: "Я не понима́ю («no entiendo»). Повтори́те, пожа́луйста («¿puede repetir, por favor?»); con ты, повтори́, пожа́луйста («repetí, por favor»). Говори́те ме́дленнее, пожа́луйста («hable más despacio, por favor»)." },
-        { titulo: "Preguntar palabras", texto: "Что э́то? («¿qué es esto?») y что зна́чит…? («¿qué significa…?»): что зна́чит «слова́рь»?" },
-        { titulo: "Contar que aprendés", texto: "Я учу́ ру́сский («estudio ruso») avisa a la otra persona que tenga paciencia, y casi siempre la gente habla más despacio." , destacado: "Извини́те, я не понима́ю. Повтори́те, пожа́луйста." }
+        { id: "u2-no-entiendo", titulo: "Cuando no entendés",
+          texto: "Я не понима́ю («no entiendo»). Повтори́те, пожа́луйста («¿puede repetir, por favor?»); con ты, повтори́, пожа́луйста («repetí, por favor»). Говори́те ме́дленнее, пожа́луйста («hable más despacio, por favor»).",
+          ejemplos: [
+            { ru: "{Повтори́те}, пожа́луйста.", es: "¿Puede repetir, por favor?", por: "Con вы: a un desconocido o a varias personas." },
+            { ru: "{Повтори́}, пожа́луйста.", es: "Repetí, por favor.", por: "Con ты: a un amigo." }],
+          mas: { texto: "Fijate en la **-те** del final: es la marca del вы. Aparece en todas las fórmulas de respeto: здра́вствуйте, извини́те, повтори́те, говори́те. Sin **-те**, son de confianza: извини́, повтори́." },
+          chequeo: [{ pide: "Tu amigo habla rápido. ¿Qué le decís?", opciones: ["Повтори́, пожа́луйста.", "Повтори́те, пожа́луйста."], ok: "Повтори́, пожа́луйста.", por: "Con confianza, sin **-те**." }] },
+        { id: "u2-palabras", titulo: "Preguntar palabras",
+          texto: "Что э́то? («¿qué es esto?») y что зна́чит…? («¿qué significa…?»): что зна́чит «окно́»?",
+          ejemplos: [{ ru: "{Что зна́чит} «спаси́бо»?", es: "¿Qué significa «спаси́бо»?", por: "Para preguntar por una palabra que no conocés." }] },
+        { id: "u2-aprendo", titulo: "Contar que aprendés",
+          texto: "Я учу́ ру́сский («estudio ruso») le avisa a la otra persona que tenga paciencia, y casi siempre la gente habla más despacio.", destacado: "Извини́те, я не понима́ю. Повтори́те, пожа́луйста." }
       ],
       vocab: U2_VOCAB[8], frases: ["FRS-030", "FRS-058", "FRS-031", "FRS-055", "FRS-059", "FRS-060"], dialogos: ["DLG-035", "DLG-036"]
     },
@@ -134,11 +311,11 @@ const UNIDAD_2 = {
         { txt: "Despedirte", rx: "(пока|до свидания|до завтра)" }
       ],
       consejos: [
-        { rx: "говор[а-я]* (русский|испанский|английский|французский|немецкий|итальянский|китайский|украинский|каталанский|португальский)", msg: "Con говори́ть el idioma va con **по-**: говорю́ по-ру́сски, no «говорю русский» (módulo 5)." },
-        { rx: "я есть ", msg: "En presente no se dice «есть» para «soy»: я студе́нт, no «я есть студент» (módulo 2)." },
+        { rx: "говор[а-я]* (русский|испанский|английский|французский|немецкий|итальянский|китайский|украинский|каталанский|португальский)", msg: "Con говори́ть el idioma va con **по-**: говорю́ по-ру́сски, no «говорю русский»." },
+        { rx: "я есть ", msg: "En presente no se dice «есть» para «soy»: я студе́нт, no «я есть студент»." },
         { rx: "меня зовут меня", msg: "Sobra una palabra: меня́ зову́т + tu nombre." },
-        { rx: "как ты зовут", msg: "Se dice как тебя́ зову́т?, con тебя́ (módulo 3)." },
-        { rx: "я из (россия|испания|аргентина|украина|франция|италия|германия|англия|бразилия|мексика|москва|барселона)", msg: "Después de из el país cambia: из Росси́и, из Испа́нии, из Аргенти́ны (módulo 4)." }
+        { rx: "как ты зовут", msg: "Se dice как тебя́ зову́т?, con тебя́." },
+        { rx: "я из (россия|испания|аргентина|украина|франция|италия|германия|англия|бразилия|мексика|москва|барселона)", msg: "Después de из el país cambia: из Росси́и, из Испа́нии, из Аргенти́ны." }
       ]
     },
     {
@@ -237,7 +414,9 @@ const U2_IDIOMAS = [["ру́сский", "по-ру́сски", "ruso"], ["ис�
 
 /* Mezcla: ~65 % de producción (escribir, ordenar, decir) */
 const U2_MEZCLA = { dictado: 3, "es-ru": 3, "ru-es": 2, completar: 2, ordenar: 2, voz: 1, "escuchar-elegir": 1, "elegir-traduccion": 1,
-  "palabra-es-ru": 2, significado: 1, mapa: 1, "soy-de": 2, nacionalidad: 2, "dialogo-elegir": 1, "dialogo-escribir": 2, "ordenar-dialogo": 1, chat: 1 };
+  "palabra-es-ru": 2, significado: 1, mapa: 1, "soy-de": 2, nacionalidad: 2, "dialogo-elegir": 1, "dialogo-escribir": 2, "ordenar-dialogo": 1, chat: 1,
+  /* Entender la regla (07/10/2026): ~15 % de la sesión */
+  porque: 2, natural: 2, oido: 1 };
 
 function ejerciciosUnidad2() {
   const out = [];
@@ -319,13 +498,13 @@ function ejerciciosUnidad2() {
     const id = MAPA.paises[iso].lex, e = lex(id), c = typeof CASOS !== "undefined" ? CASOS[id] : null; if (!e || !c) return;
     const gen = c.tipo === "indeclinable" ? e.acento : c.sg[1];
     out.push({ id: "U2-soyde-" + iso, tipo: "soy-de", forma: "escribir", dificultad: 3, modulo: 4, ampliacion: AMP.has(id), grupo: id, lex: [id], items: ["lex:" + id], oir: "Я из " + gen,
-      pide: "Decí que sos de " + e.senses[0].es + ".", pista: "Я из …", esperadas: ["Я из " + gen + "."], idioma: "ru",
+      pide: "Decí que sos de " + e.senses[0].es + ".", pista: "Я из …", esperadas: ["Я из " + gen + "."], idioma: "ru", regla: "u2-ya-iz",
       explicacion: "Я из " + gen + ". Después de из, " + e.acento + (c.tipo === "indeclinable" ? " no cambia." : " pasa a " + gen + ".") });
   });
   ["Москва́", "Барсело́на", "Буэ́нос-А́йрес", "Мадри́д", "Санкт-Петербу́рг"].forEach(ac => {
     const e = porAcento[ac], c = e && CASOS[e.id]; if (!c) return;
     out.push({ id: "U2-soyde-" + e.id, tipo: "soy-de", forma: "escribir", dificultad: 3, modulo: 4, grupo: e.id, lex: [e.id], items: ["lex:" + e.id], oir: "Я из " + c.sg[1],
-      pide: "Decí que sos de " + e.senses[0].es + ".", pista: "Я из …", esperadas: ["Я из " + c.sg[1] + "."], idioma: "ru", explicacion: "Я из " + c.sg[1] + "." });
+      pide: "Decí que sos de " + e.senses[0].es + ".", pista: "Я из …", esperadas: ["Я из " + c.sg[1] + "."], idioma: "ru", regla: "u2-ya-iz", explicacion: "Я из " + c.sg[1] + "." });
   });
 
   /* 5. Nacionalidad: «Él es de Italia: он …» */
@@ -335,7 +514,7 @@ function ejerciciosUnidad2() {
       const en = porAcento[nac];
       out.push({ id: "U2-nac-" + ep.id + "-" + g, tipo: "nacionalidad", forma: "escribir", dificultad: 3, modulo: 4, ampliacion: amp, grupo: "nac-" + ep.id, lex: [en ? en.id : ep.id],
         items: en ? ["lex:" + en.id] : [], oir: ru + " " + nac, pide: es + " es de " + ep.senses[0].es + ". ¿Cómo se dice su nacionalidad?", grande: ru + " _____.",
-        esperadas: [ru + " " + nac + ".", nac], idioma: "ru", explicacion: ru + " " + nac + ". " + (g === "m" ? "Hombre" : "Mujer") + ": " + nac + "." });
+        esperadas: [ru + " " + nac + ".", nac], idioma: "ru", regla: "u2-nacionalidades", explicacion: ru + " " + nac + ". " + (g === "m" ? "Hombre" : "Mujer") + ": " + nac + "." });
     });
   });
 
@@ -360,6 +539,84 @@ function ejerciciosUnidad2() {
       pide: "Ordená la conversación: " + d.titulo + (/[?!.]$/.test(d.titulo) ? "" : "."), fichas: orden.map(k => personaje(d.lineas[k].p) + ": " + d.lineas[k].ru),
       esperada: d.lineas.map(x => personaje(x.p) + ": " + x.ru).join("\n"), sep: "\n", explicacion: d.lineas.map(x => x.ru).join(" / ") });
   });
+
+  /* 8. Entender la regla (07/10/2026, PLAN_PROFUNDIZACION.md): ¿qué decís en esta situación?,
+     ¿por qué?, ¿cuál suena natural? y ¿qué oíste? Todo con frases de la unidad. */
+  const RZ = { resp: "Se le habla con respeto", grupo: "Son varias personas", conf: "Hay confianza",
+    dormir: "Se dice solo al irse a dormir", llegar: "Es un saludo para llegar", mujer: "Habla una mujer", hombre: "Habla un hombre" };
+  const SIT = [
+    { m: 1, r: "u2-formal", sit: "Llegás a clase y saludás a tu profesora.", ok: "Здра́вствуйте!", mal: "Приве́т!", rz: "resp" },
+    { m: 1, r: "u2-formal", sit: "Te encontrás con un amigo en la calle.", ok: "Приве́т!", mal: "Здра́вствуйте!", rz: "conf" },
+    { m: 1, r: "u2-formal", sit: "Te vas de un negocio.", ok: "До свида́ния!", mal: "Пока́!", rz: "resp" },
+    { m: 1, r: "u2-formal", sit: "Te despedís de tu hermano.", ok: "Пока́!", mal: "До свида́ния!", rz: "conf" },
+    { m: 1, r: "u2-formal", sit: "Saludás a un grupo de personas que no conocés.", ok: "Здра́вствуйте!", mal: "Приве́т!", rz: "resp" },
+    { m: 1, r: "u2-hora", sit: "Llegás a una cena a la noche.", ok: "До́брый ве́чер!", mal: "Споко́йной но́чи!", rz: "llegar" },
+    { m: 1, r: "u2-hora", sit: "Tu amiga se va a dormir.", ok: "Споко́йной но́чи!", mal: "До́брый ве́чер!", rz: "dormir" },
+    { m: 1, r: "u2-hora", sit: "Llegás a la oficina a las nueve de la mañana.", ok: "До́брое у́тро!", mal: "Споко́йной но́чи!", rz: "llegar" },
+    { m: 2, r: "u2-genero-hablante", sit: "Ana conoce a alguien nuevo.", ok: "Ра́да познако́миться!", mal: "Рад познако́миться!", rz: "mujer", ella: 1 },
+    { m: 2, r: "u2-genero-hablante", sit: "Lucas conoce a alguien nuevo.", ok: "Рад познако́миться!", mal: "Ра́да познако́миться!", rz: "hombre", ella: 1 },
+    { m: 2, r: "u2-genero-hablante", sit: "Masha cuenta que estudia.", ok: "Я студе́нтка.", mal: "Я студе́нт.", rz: "mujer", ella: 1 },
+    { m: 3, r: "u2-ty-vy", sit: "Le preguntás el nombre a un chico de tu edad en una fiesta.", ok: "Как тебя́ зову́т?", mal: "Как вас зову́т?", rz: "conf" },
+    { m: 3, r: "u2-ty-vy", sit: "Le preguntás el nombre a una señora mayor.", ok: "Как вас зову́т?", mal: "Как тебя́ зову́т?", rz: "resp" },
+    { m: 3, r: "u2-ty-vy", sit: "Le preguntás el nombre a tu profesor nuevo.", ok: "Как вас зову́т?", mal: "Как тебя́ зову́т?", rz: "resp" },
+    { m: 4, r: "u2-ty-vy", sit: "Le preguntás a tu profesor de dónde es.", ok: "Отку́да вы?", mal: "Отку́да ты?", rz: "resp" },
+    { m: 4, r: "u2-ty-vy", sit: "Le preguntás a una amiga de dónde es.", ok: "Отку́да ты?", mal: "Отку́да вы?", rz: "conf" },
+    { m: 4, r: "u2-ty-vy", sit: "Le preguntás a dos amigos de dónde son.", ok: "Отку́да вы?", mal: "Отку́да ты?", rz: "grupo" },
+    { m: 5, r: "u2-ty-vy", sit: "Le preguntás a un vendedor si habla inglés.", ok: "Вы говори́те по-англи́йски?", mal: "Ты говори́шь по-англи́йски?", rz: "resp" },
+    { m: 5, r: "u2-ty-vy", sit: "Le preguntás a tu amigo si habla inglés.", ok: "Ты говори́шь по-англи́йски?", mal: "Вы говори́те по-англи́йски?", rz: "conf" },
+    { m: 6, r: "u2-kak-dela", sit: "Le preguntás a un amigo cómo anda.", ok: "Как дела́?", mal: "Как у вас дела́?", rz: "conf" },
+    { m: 6, r: "u2-kak-dela", sit: "Le preguntás a tu profesora cómo le va.", ok: "Как у вас дела́?", mal: "Как дела́?", rz: "resp" },
+    { m: 6, r: "u2-devolver", sit: "Tu profesora te preguntó cómo estás. Contestás y le devolvés la pregunta.", ok: "Хорошо́, спаси́бо. А у вас?", mal: "Хорошо́, спаси́бо. А у тебя́?", rz: "resp" },
+    { m: 6, r: "u2-devolver", sit: "Dos amigos te preguntan cómo estás. Contestás y les devolvés la pregunta.", ok: "Норма́льно. А у вас?", mal: "Норма́льно. А у тебя́?", rz: "grupo" },
+    { m: 8, r: "u2-no-entiendo", sit: "Un desconocido habla rápido y no lo entendés.", ok: "Повтори́те, пожа́луйста.", mal: "Повтори́, пожа́луйста.", rz: "resp" },
+    { m: 8, r: "u2-no-entiendo", sit: "Tu amigo habla rápido.", ok: "Повтори́, пожа́луйста.", mal: "Повтори́те, пожа́луйста.", rz: "conf" },
+    { m: 8, r: "u2-no-entiendo", sit: "No entendés lo que dice tu profesora.", ok: "Извини́те, я не понима́ю.", mal: "Извини́, я не понима́ю.", rz: "resp" }
+  ];
+  SIT.forEach((s, i) => {
+    const base = { modulo: s.m, regla: s.r, grupo: "sit-" + i, items: [], oir: s.ok };
+    const otras = baraja(Object.keys(RZ).filter(k => k !== s.rz && (["mujer", "hombre"].includes(s.rz) === ["mujer", "hombre"].includes(k)) && (["dormir", "llegar"].includes(s.rz) === ["dormir", "llegar"].includes(k)) && (s.m >= 3 || k !== "grupo") && !(s.rz === "grupo" && k === "conf")), i + 41).slice(0, 2);
+    out.push(Object.assign({ id: "U2-sit-" + i, tipo: "porque", forma: "elegir", dificultad: 2, pide: s.sit + (s.ella ? " ¿Qué dice?" : " ¿Qué decís?"),
+      opciones: baraja([s.ok, s.mal], i + 43), correcta: s.ok, explicacion: s.ok + " " + RZ[s.rz] + "." }, base));
+    if (otras.length) out.push(Object.assign({ id: "U2-porq-" + i, tipo: "porque", forma: "elegir", dificultad: 2, pide: s.sit + (s.ella ? " Dice «" : " Decís «") + s.ok + (/[.!?]$/.test(s.ok) ? "» ¿Por qué?" : "». ¿Por qué?"),
+      opciones: baraja([RZ[s.rz]].concat(otras.map(k => RZ[k])), i + 45), correcta: RZ[s.rz], explicacion: RZ[s.rz] + ": " + s.ok }, base));
+  });
+
+  /* ¿Suena natural? Frases rusas, una con el error típico de quien empieza */
+  const NAT = [];
+  ["F2-021", "F2-022", "F2-032", "F2-052", "F2-056"].forEach(id => { const f = U2_FRASES.find(x => x.id === id); NAT.push({ m: f.m, r: "u2-sin-ser", ok: f.ru, mal: f.ru.replace(/([Яя]) /, "$1 есть "), por: "En presente no se dice есть: я y lo que sos.", lex: f.lex }); });
+  ["F2-087", "F2-088", "F2-089"].forEach(id => { const f = U2_FRASES.find(x => x.id === id); NAT.push({ m: 7, r: "u2-sin-verbo-pron", ok: f.ru, mal: f.ru.replace(/^(\S+) /, "$1 есть "), por: "En presente, sin есть.", lex: f.lex }); });
+  [["Меня́ зову́т Ива́н.", "Я зову́т Ива́н.", 2, "u2-me-llaman", "Зову́т va con меня́, «a mí»."],
+   ["Меня́ зову́т А́нна.", "Я зову́т А́нна.", 2, "u2-me-llaman", "Зову́т va con меня́, «a mí»."],
+   ["Как тебя́ зову́т?", "Как ты зову́т?", 3, "u2-preguntar-nombre", "Con зову́т va тебя́."],
+   ["Как вас зову́т?", "Как вы зову́т?", 3, "u2-preguntar-nombre", "Con зову́т va вас."],
+   ["Его́ зову́т Ди́ма.", "Он зову́т Ди́ма.", 7, "u2-el-ella", "Con зову́т va его́, «a él»."],
+   ["Её зову́т О́льга.", "Она́ зову́т О́льга.", 7, "u2-el-ella", "Con зову́т va её, «a ella»."]
+  ].forEach(([ok, mal, m, r, por]) => NAT.push({ m, r, ok, mal, por }));
+  U2_NACIONES.forEach(([pais]) => {
+    const e = porAcento[pais], c = e && typeof CASOS !== "undefined" ? CASOS[e.id] : null;
+    if (!c || c.tipo === "indeclinable" || !c.sg || sinAc(c.sg[1]) === sinAc(pais)) return;
+    NAT.push({ m: 4, r: "u2-ya-iz", ok: "Я из " + c.sg[1] + ".", mal: "Я из " + pais + ".", por: "Después de из, " + pais + " pasa a " + c.sg[1] + ".", lex: [e.id] });
+  });
+  U2_IDIOMAS.forEach(([adj, po], k) => {
+    NAT.push({ m: 5, r: "u2-po-ski", ok: "Я говорю́ " + po + ".", mal: "Я говорю́ " + adj + ".", por: "Con говори́ть, el idioma va con по-: " + po + "." });
+    if (k < 5) NAT.push({ m: 5, r: "u2-uchit", ok: "Я учу́ " + adj + ".", mal: "Я учу́ " + po + ".", por: "Con учи́ть, el adjetivo: " + adj + "." });
+  });
+  NAT.forEach((n, i) => out.push({ id: "U2-nat-" + i, tipo: "natural", forma: "elegir", dificultad: 2, modulo: n.m, regla: n.r, grupo: "nat-" + i,
+    lex: n.lex, items: n.lex ? items(n.lex) : [], oir: n.ok, pide: "¿Cuál suena natural?", opciones: baraja([n.ok, n.mal], i + 51), correcta: n.ok, explicacion: n.ok + " " + n.por }));
+
+  /* Oído: dos formas que se parecen, ¿cuál sonó? */
+  const OIDO = [
+    ["Рад познако́миться!", "Ра́да познако́миться!", 2, "u2-genero-hablante"], ["Я студе́нт.", "Я студе́нтка.", 2, "u2-genero-hablante"],
+    ["Э́то мой друг.", "Э́то моя́ подру́га.", 2, "u2-genero-hablante"],
+    ["Как тебя́ зову́т?", "Как вас зову́т?", 3, "u2-preguntar-nombre"], ["Как его́ зову́т?", "Как её зову́т?", 3, "u2-el-ella"],
+    ["Кто э́то?", "Что э́то?", 3, "u2-kto-chto"], ["Как дела́?", "Как у вас дела́?", 6, "u2-kak-dela"],
+    ["А у тебя́?", "А у вас?", 6, "u2-devolver"], ["Повтори́, пожа́луйста.", "Повтори́те, пожа́луйста.", 8, "u2-no-entiendo"],
+    ["Вы студе́нт?", "Вы студе́нты?", 7, "u2-vy"]
+  ];
+  U2_NACIONES.forEach(([pais, m, f]) => OIDO.push([m, f, 4, "u2-nacionalidades"]));
+  OIDO.forEach(([a, b, m, r], i) => { const suena = i % 2 ? b : a;
+    out.push({ id: "U2-oido-" + i, tipo: "oido", forma: "elegir", dificultad: 2, modulo: m, regla: r, grupo: "oido-" + i, items: [],
+      pide: "Escuchá: ¿qué oíste?", audio: suena, opciones: [a, b], correcta: suena, explicacion: a + " · " + b }); });
 
   /* 7. Chats */
   U2_CHATS.forEach(ch => ch.pasos.forEach(st => {
