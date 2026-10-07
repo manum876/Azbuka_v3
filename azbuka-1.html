@@ -196,21 +196,19 @@ function Ejemplo({ id, c }) {
       h("div", { style: { fontSize: 13, color: c.textSub, marginTop: 3 } }, (e.senses[0] || {}).es)),
     h("button", { className: "play", onClick: () => hablar(e.ru), "aria-label": "Escuchar" }, "▶"));
 }
+/* Lo propio de la Unidad 1 dentro de cada sección (07/10/2026): los pares mínimos y la lista de
+   palabras del léxico. El resto (texto, ejemplos explicados, chequeos, «Más a fondo») es AzSecciones. */
+const extraU1 = c => b => (b.pares || b.palabras) ? h(React.Fragment, null,
+  b.pares && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 14px" } },
+    b.pares.map((p, i) => h("div", { key: i, className: "par" },
+      h("div", { className: "par-l", lang: "ru" }, p.letras),
+      h(BotonPalabra, { id: p.a, c }), h(BotonPalabra, { id: p.b, c })))),
+  b.palabras && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 16px" } },
+    b.palabras.map(id => h(Ejemplo, { key: id, id, c })))) : null;
 function VistaPronunciacion({ mod, c }) {
   return h(React.Fragment, null,
     h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
-    mod.bloques.map((b, k) => h("div", { key: k },
-      h("div", { className: "u-sec" }, b.titulo),
-      h("div", { className: "u-text" }, azFmt(b.texto)),
-      b.destacado && h("div", { className: "u-dest" }, azFmt(b.destacado)),
-      b.comparacion && h("div", { className: "u-text", style: { marginTop: 10, fontSize: 14, fontStyle: "italic" } }, azFmt(b.comparacion)),
-      b.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), azFmt(b.truco)),
-      b.pares && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 14px" } },
-        b.pares.map((p, i) => h("div", { key: i, className: "par" },
-          h("div", { className: "par-l", lang: "ru" }, p.letras),
-          h(BotonPalabra, { id: p.a, c }), h(BotonPalabra, { id: p.b, c })))),
-      b.ejemplos && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 16px" } },
-        b.ejemplos.map(id => h(Ejemplo, { key: id, id, c }))))));
+    h(AzSecciones, { secciones: mod.bloques, extra: extraU1(c) }));
 }
 
 /* ── Primeras lecturas ── */
@@ -293,7 +291,7 @@ function App() {
   const reforzar = parte => setPractica({ titulo: "Reforzar: " + parte.nombre, pool: EJ_U1.filter(e => parte.tipos.indexOf(e.tipo) >= 0) });
   const [examenU1, setExamenU1] = useState(null);
   useEffect(() => { if (!practica) setExamenU1((AZ_PROGRESS.units["1"] || {}).examen || null); }, [practica, niveles]);
-  const practicarModulo = m => setPractica({ titulo: m.titulo, pool: m.n === 8 ? EJ_U1.filter(e => e.tipo === "pares") : EJ_U1.filter(e => e.modulo === m.n) });
+  const practicarModulo = m => setPractica({ titulo: m.titulo, pool: m.n === 8 ? EJ_U1.filter(e => ["pares", "oido", "porque"].indexOf(e.tipo) >= 0) : EJ_U1.filter(e => e.modulo === m.n) });
   function refrescarNiveles() {
     const lv = {};
     ALPHABET.forEach(l => { lv[l.upper] = azItem('alfabeto:' + l.upper).level; });
@@ -333,10 +331,7 @@ function App() {
   const vistaModulo = mod && h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
     h("div", { className: "u-kicker" }, "Unidad 1 · Módulo " + mod.n),
     h("h1", { className: "u-title" }, mod.titulo),
-    mod.tipo === "intro" && mod.secciones.map((s, i) => h("div", { key: i },
-      h("div", { className: "u-sec" }, s.titulo),
-      h("div", { className: "u-text" }, azFmt(s.texto)),
-      s.destacado && h("div", { className: "u-dest" }, azFmt(s.destacado)))),
+    mod.tipo === "intro" && h(AzSecciones, { secciones: mod.secciones }),
     mod.tipo === "intro" && next && h("button", { className: "ubtn", onClick: () => abrirModulo(next.id) }, "Empezar con las letras"),
     (mod.tipo === "pronunciacion" || mod.tipo === "reglas") && h(VistaPronunciacion, { mod, c }),
     mod.tipo === "lectura" && h(VistaLectura, { mod, c, abrirDialogo: setDialogo }),
@@ -348,7 +343,7 @@ function App() {
       examenU1 && h("div", { style: { marginTop: 14, fontSize: 14, color: examenU1.aprobado ? green : "#E2884A", fontWeight: 700 } },
         "Última vez: " + examenU1.pct + " % (" + examenU1.fecha.split("-").reverse().join("/") + ")" + (examenU1.aprobado ? " · aprobada" : "")),
       h("button", { className: "ubtn", onClick: () => rendirExamen(mod) }, examenU1 ? "Rendir de nuevo" : "Empezar la evaluación")),
-    mod.tipo === "pronunciacion" && h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar los pares mínimos"),
+    mod.tipo === "pronunciacion" && h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar la pronunciación"),
     mod.tipo === "reglas" && h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar las reglas"),
     (mod.tipo === "pronunciacion" || mod.tipo === "reglas" || mod.tipo === "lectura") && next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo),
     mod.tipo === "letras" && h(React.Fragment, null,
@@ -360,13 +355,7 @@ function App() {
             h("td", null, h("button", { className: "f-ru", lang: "ru", onClick: () => hablar(p[0].toLowerCase()) }, p[0] + " " + p[0].toLowerCase(), h("span", { className: "pl" }, "▶"))),
             h("td", null, h("button", { className: "f-ru blanda", lang: "ru", onClick: () => hablar(p[1].toLowerCase()) }, p[1] + " " + p[1].toLowerCase(), h("span", { className: "pl" }, "▶"))),
             h("td", null, h("button", { className: "f-ru", lang: "ru", onClick: () => { hablar(p[2]); setTimeout(() => hablar(p[3]), 700); } }, p[2] + " · " + p[3], h("span", { className: "pl" }, "▶"))))))),
-      (mod.secciones || []).map((x, k) => h("div", { key: k },
-        h("div", { className: "u-sec" }, x.titulo),
-        h("div", { className: "u-text" }, azFmt(x.texto)),
-        x.destacado && h("div", { className: "u-dest" }, azFmt(x.destacado)),
-        x.truco && h("div", { className: "u-truco" }, h("b", null, "Truco: "), azFmt(x.truco)),
-        x.ejemplos && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 16px" } },
-          x.ejemplos.map(id => h(Ejemplo, { key: id, id, c }))))),
+      h(AzSecciones, { secciones: mod.secciones, extra: extraU1(c) }),
       mod.secciones && h("div", { className: "u-sec" }, "Las letras"),
       h("div", { className: "toggle-row" },
         h("button", { className: "pair-btn", onClick: togglePron, style: chip(verPron) }, "Pronunciación en español"),

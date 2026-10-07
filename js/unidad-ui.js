@@ -297,19 +297,21 @@
       h("button", { className: "u-mas-b", onClick: () => setAb(!ab), "aria-expanded": ab }, (ab ? "▾ " : "▸ ") + (m.titulo || "Más a fondo")),
       ab && h("div", { className: "u-mas", style: { animation: "fadeIn .3s ease" } }, h(Cuerpo, { x: m })));
   }
-  function Seccion({ x }) {
+  /* extra(x): lo propio de una unidad, después del cuerpo y antes de «Más a fondo» (07/10/2026: los pares y las listas de palabras de la Unidad 1) */
+  function Seccion({ x, extra }) {
     return h("div", { id: x.id ? "regla-" + x.id : undefined },
       x.titulo && h("div", { className: "u-sec" }, x.titulo),
       x.antes && h(Pregunta, { q: x.antes, rotulo: "Antes de leer: ¿te animás?" }),
       h(Cuerpo, { x }),
+      extra && extra(x),
       x.mas && h(MasAFondo, { m: x.mas }),
       x.chequeo && x.chequeo.length === 1 && h(Pregunta, { q: x.chequeo[0], rotulo: "Chequeo rápido" }),
       x.chequeo && x.chequeo.length > 1 && h("div", { className: "u-chq" },   /* varios: una sola tarjeta, un solo título */
         h("div", { className: "u-chq-k" }, "Chequeo rápido"),
         x.chequeo.map((q, i) => h(Pregunta, { key: i, q, suelta: false }))));
   }
-  function AzSecciones({ secciones }) {
-    return h(React.Fragment, null, (secciones || []).map((x, k) => h(Seccion, { key: k, x })));
+  function AzSecciones({ secciones, extra }) {
+    return h(React.Fragment, null, (secciones || []).map((x, k) => h(Seccion, { key: k, x, extra })));
   }
   /* Busca una sección por su id en las unidades cargadas (UNIDAD_1 … UNIDAD_14) */
   function azRegla(id) {
@@ -318,7 +320,7 @@
       let U = null;
       try { U = new Function("return typeof UNIDAD_" + n + " !== 'undefined' ? UNIDAD_" + n + " : null")(); } catch (e) {}
       if (!U) continue;
-      for (const m of U.modulos || []) for (const s of m.secciones || []) if (s.id === id) return { seccion: s, modulo: m, unidad: n };
+      for (const m of U.modulos || []) for (const s of (m.secciones || []).concat(m.bloques || [])) if (s.id === id) return { seccion: s, modulo: m, unidad: n };
     }
     return null;
   }
@@ -515,7 +517,7 @@
     const gen = cz ? (cz.tipo === "indeclinable" ? e.acento : cz.sg[1]) : "";
     const tocar = iso => { setSel(iso); azHablarRu(lexComerById(MAPA.paises[iso].lex).ru); };
     return h("div", null,
-      h("div", { className: "toggle-row", style: { flexWrap: "wrap" } }, ["europa", "america", "asia", "mundo"].map(k =>
+      h("div", { className: "toggle-row", style: { flexWrap: "wrap" } }, ["europa", "america", "asia", "africa", "oceania", "mundo"].map(k =>
         h("button", { key: k, className: "pair-btn", style: chipSt(c, vista === k), onClick: () => setVista(k) }, MAPA.vistas[k].titulo))),
       h("svg", { viewBox: MAPA.vistas[vista].vb, className: "mapa-v", role: "img", "aria-label": "Mapa de países" },
         h("path", { d: MAPA.fondo, fill: c.bg3, stroke: c.bg2, "stroke-width": vista === "mundo" ? 4 : 2 }),
