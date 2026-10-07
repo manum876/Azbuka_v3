@@ -1,7 +1,12 @@
 /* ============================================================
    DATA-UNIDAD-4.JS — Unidad 4: Casos I · nominativo y acusativo
    ------------------------------------------------------------
-   Versión 02/10/2026. Contenido, vocabulario y banco de ejercicios.
+   Versión 07/10/2026 (teoría ampliada: ids de regla, ejemplos explicados,
+   frases desarmadas, errores típicos, chequeos y «Más a fondo»); antes,
+   02/10/2026. Contenido, vocabulario y banco de ejercicios.
+   Ejercicios nuevos (07/10/2026): porque, natural, par, oido, descubrir,
+   diagnostico, cadena y desarmar (~530, ~20 % de la mezcla), y «regla»
+   en todos los tipos donde es directo (u4ReglaId, u4ReglaVerbo).
    Decisiones (con Manu, 02/10/2026):
    · Base de unas 80 palabras, todas del léxico (26 nuevas para el
      alumno y el resto de repaso), más una ampliación opcional en los
@@ -145,67 +150,267 @@ const UNIDAD_4 = {
   titulo: "Casos I: nominativo y acusativo",
   tituloRu: "Падежи́ I: имени́тельный и вини́тельный",
   objetivo: "Distinguir quién hace la acción y qué la recibe, usar los primeros verbos de acción y poner en acusativo los sustantivos de los tres géneros.",
-  tiempo: "25–30 horas",
+  tiempo: "3 a 4 semanas con práctica diaria (unas 25–30 horas)",
   modulos: [
     { id: "u4m1", n: 1, tipo: "leccion", nPractica: 10, titulo: "¿Qué es un caso?", resumen: "Ма́ма чита́ет кни́гу: quién hace y qué recibe.",
       intro: "En ruso, una palabra cambia la terminación según el papel que cumple en la frase. Esos cambios se llaman **casos**. Suena difícil, pero la idea es simple y en esta unidad ves los dos primeros.",
       secciones: [
-        { titulo: "Quién hace y qué recibe", texto: "En Ма́ма чита́ет кни́гу («mamá lee un libro») hay alguien que hace la acción, ма́ма, y algo que la recibe: кни́гу. En español eso lo marca el orden de las palabras. En ruso lo marca la terminación.", destacado: "Ма́ма чита́ет кни́гу. ¿Quién lee? Ма́ма. ¿Qué lee? Кни́гу." },
-        { titulo: "Кни́га y кни́гу", texto: "Es la misma palabra con dos terminaciones. Кни́га es la forma del diccionario, la que ya conocés: se llama **nominativo**. Кни́гу es la forma de lo que recibe la acción: se llama **acusativo**. El ruso tiene seis casos; los otros cuatro llegan en las próximas unidades. En la tabla de abajo ves cómo cambian doce palabras comunes: algunas cambian y otras quedan igual. Las reglas, en los módulos 4, 5 y 6." },
-        { titulo: "Кто? Что?", texto: "Para encontrar cada parte, preguntá. ¿Quién hace la acción? Кто? (¿quién?). ¿Qué la recibe? Что? (¿qué?). Па́па пьёт ко́фе («papá toma café»): кто пьёт? («¿quién toma?») Па́па. Что он пьёт? («¿qué toma?») Ко́фе.", truco: "Primero buscá quién hace la acción; lo que queda es lo que la recibe." }
+        { id: "u4-caso", titulo: "Quién hace y qué recibe",
+          antes: { pide: "En Ма́ма чита́ет кни́гу, кни́га aparece como кни́гу. ¿Por qué te parece que cambió?", opciones: ["Porque recibe la acción", "Porque está al final", "Porque es plural"], ok: "Porque recibe la acción", por: "Кни́гу es lo que mamá lee. El cambio no depende del lugar: aunque la muevas, sigue siendo кни́гу." },
+          texto: "En Ма́ма чита́ет кни́гу («mamá lee un libro») hay alguien que hace la acción, ма́ма, y algo que la recibe, кни́гу. En español eso lo marca sobre todo el orden: el que hace va antes del verbo. En ruso lo marca la **terminación** de la palabra.\nCada forma que toma una palabra según su papel en la frase se llama **caso**.",
+          desarmar: { es: "Mamá lee un libro.", partes: [
+            { txt: "Ма́ма", rol: "quién hace", nota: "Nominativo: la forma del diccionario. Responde a кто? (¿quién?)." },
+            { txt: "чита́ет", rol: "la acción", nota: "Чита́ть en la forma de он / она́: «lee»." },
+            { txt: "кни́гу", rol: "qué recibe", nota: "Acusativo: кни́га cambia la **-а** por **-у**. Responde a что? (¿qué?)." }] },
+          destacado: "Ма́ма чита́ет кни́гу: ма́ма hace, кни́гу recibe.",
+          mas: { titulo: "Por qué el ruso puede cambiar el orden", texto: "Como la terminación ya dice quién hace y qué recibe, el ruso puede mover las palabras sin que cambie el sentido. En español, en cambio, el orden es justamente lo que avisa quién hace la acción, y por eso no se puede mover con tanta libertad.\nCambiar el orden no es un error, pero tampoco es lo más común: lo neutral es quién hace, la acción y qué recibe. Armá tus frases en ese orden; el orden cambiado lo vas a reconocer al leer.",
+            ejemplos: [{ ru: "{Кни́гу} чита́ет ма́ма.", es: "Mamá lee el libro.", por: "Кни́гу está primero, pero sigue siendo lo que se lee: la **-у** lo dice." }] } },
+        { id: "u4-nom-acu", titulo: "Кни́га y кни́гу",
+          texto: "Es la misma palabra con dos terminaciones. Кни́га es la forma del diccionario, la que ya conocés: se llama **nominativo**. Кни́гу es la forma de lo que recibe la acción: se llama **acusativo**.\nEn la tabla de abajo ves doce palabras en los dos casos: algunas cambian y otras quedan igual. Las reglas que deciden cuáles cambian llegan más adelante en esta unidad.",
+          destacado: "nominativo = quién hace · acusativo = qué recibe",
+          mas: { texto: "El ruso tiene seis casos. Cada uno responde a una pregunta distinta: ¿quién?, ¿qué?, ¿dónde?, ¿a quién?, ¿con quién?, ¿de quién? En esta unidad ves los dos primeros, y los otros cuatro llegan de a uno en las próximas unidades.\nNo hace falta aprenderlos de memoria ahora: cada caso aparece cuando lo necesitás para decir algo nuevo." } },
+        { id: "u4-kto-chto", titulo: "Кто? Что?",
+          texto: "Para encontrar cada parte, hacé dos preguntas. ¿Quién hace la acción? Кто? (¿quién?). ¿Qué recibe la acción? Что? (¿qué?). La respuesta a кто? va en nominativo; la respuesta a что?, en acusativo.",
+          ejemplos: [
+            { ru: "{Па́па} пьёт ко́фе.", es: "Papá toma café.", por: "Кто пьёт? Па́па: es quien hace la acción, en nominativo." },
+            { ru: "Брат лю́бит {пе́сню}.", es: "A mi hermano le encanta la canción.", por: "Что он лю́бит? Пе́сню: пе́сня recibe la acción y cambia la **-я** por **-ю**." },
+            { ru: "Кот пьёт {во́ду}.", es: "El gato toma agua.", por: "Что пьёт кот? Во́ду: вода́ recibe la acción y cambia la **-а** por **-у**." },
+            { ru: "Друг ви́дит {дом}.", es: "Mi amigo ve la casa.", por: "Что он ви́дит? Дом. Acá no cambia nada: algunas palabras quedan igual en acusativo." }],
+          truco: "Primero buscá quién hace la acción; lo que queda es lo que la recibe.",
+          mas: { texto: "Ко́фе no cambia nunca, porque viene de otro idioma. Por eso en Па́па пьёт ко́фе no se ve ninguna diferencia, y es la pregunta что? la que te dice que ко́фе recibe la acción.\nLo mismo pasa con muchas palabras masculinas, como дом o чай: la forma es la misma, pero el papel en la frase es otro.",
+            ejemplos: [{ ru: "Учи́тель пьёт {чай}.", es: "El maestro toma té.", por: "Чай queda igual, pero responde a что?: recibe la acción." }] },
+          chequeo: [
+            { pide: "Брат слу́шает пе́сню. ¿Quién hace la acción?", opciones: ["брат", "пе́сню"], ok: "брат", por: "Кто слу́шает? Брат, en nominativo." },
+            { pide: "Кот ви́дит ры́бу. ¿Qué recibe la acción?", opciones: ["кот", "ры́бу"], ok: "ры́бу", por: "Что ви́дит кот? Ры́бу: ры́ба pasa a **-у**." }] }
       ] },
     { id: "u4m2", n: 2, tipo: "leccion", nPractica: 10, titulo: "Nominativo", resumen: "La forma del diccionario: quién hace la acción.",
       intro: "El nominativo es la forma que ya usaste en las Unidades 2 y 3: la del diccionario.",
       secciones: [
-        { titulo: "El que hace la acción", texto: "Quien hace la acción va siempre en nominativo: А́нна чита́ет кни́гу («Ana lee un libro»), брат пьёт ко́фе («mi hermano toma café»), ба́бушка чита́ет («la abuela lee»).", destacado: "Quién hace la acción → nominativo." },
-        { titulo: "Después de э́то", texto: "Con э́то («esto es», «este es») la palabra también va en nominativo, como en la Unidad 3: Э́то дом. Э́то маши́на. Э́то мой брат." },
+        { id: "u4-nominativo", titulo: "El que hace la acción",
+          texto: "Quien hace la acción va siempre en nominativo. Es la forma que ya usaste para presentarte y para decir qué es cada cosa, así que no hay ninguna terminación nueva para aprender: solo hay que reconocer el papel.",
+          ejemplos: [
+            { ru: "{А́нна} чита́ет кни́гу.", es: "Ana lee un libro.", por: "А́нна hace la acción: queda como en el diccionario." },
+            { ru: "{Ба́бушка} слу́шает пе́сню.", es: "La abuela escucha una canción.", por: "Кто слу́шает? Ба́бушка, en nominativo." },
+            { ru: "{Ива́н} пьёт чай.", es: "Iván toma té.", por: "Ива́н es quien toma: nominativo." },
+            { ru: "{Соба́ка} ви́дит кота́.", es: "El perro ve al gato.", por: "Соба́ка hace la acción: nominativo. Кота́ es a quien ve." }],
+          destacado: "Quién hace la acción → nominativo.",
+          errores: [{ mal: "Ма́му чита́ет кни́гу.", bien: "{Ма́ма} чита́ет кни́гу.", por: "Ма́ма es la que lee: va en nominativo, la forma del diccionario." }],
+          mas: { texto: "¿Y si el que hace la acción no es una persona? Da igual: también va en nominativo. La regla no mira si la palabra nombra a alguien o a algo, sino qué papel cumple en la frase.\nPor eso una misma palabra puede aparecer con dos formas en dos frases distintas: ма́ма cuando lee, ма́му cuando alguien la espera.",
+            ejemplos: [{ ru: "{Кот} пьёт во́ду.", es: "El gato toma agua.", por: "Кот hace la acción: nominativo, aunque sea un animal." }] },
+          chequeo: [
+            { pide: "Ди́ма слу́шает пе́сню. ¿Quién hace la acción?", opciones: ["Ди́ма", "пе́сню"], ok: "Ди́ма", por: "Кто слу́шает? Ди́ма, en nominativo." },
+            { pide: "¿Cuál está bien?", opciones: ["Ма́ша чита́ет кни́гу.", "Ма́шу чита́ет кни́гу."], ok: "Ма́ша чита́ет кни́гу.", por: "Ма́ша es la que lee: nominativo." }] },
+        { id: "u4-eto", titulo: "Después de э́то",
+          texto: "Con э́то («esto es», «este es») la palabra también va en nominativo. Э́то no es una acción que alguien hace sobre algo: solo señala. Por eso lo que viene después queda en la forma del diccionario.",
+          ejemplos: [
+            { ru: "Э́то {кни́га}.", es: "Es un libro.", por: "Después de э́то, nominativo: кни́га, no кни́гу." },
+            { ru: "Э́то {мой брат}.", es: "Este es mi hermano.", por: "Мой y брат, los dos en nominativo." },
+            { ru: "Э́то {соба́ка}.", es: "Es un perro.", por: "Solo se señala: nadie recibe ninguna acción." }],
+          errores: [{ mal: "Э́то кни́гу.", bien: "Э́то {кни́га}.", por: "Э́то solo señala: no hay nada que reciba una acción." }],
+          mas: { texto: "Э́то también sirve para presentar a alguien: Э́то А́нна. La persona queda en nominativo, porque solo se la señala. Y lo mismo con la pregunta: Кто э́то? («¿quién es?»), Что э́то? («¿qué es?»); la respuesta, otra vez en nominativo.",
+            ejemplos: [{ ru: "Кто э́то? — Э́то {А́нна}.", es: "¿Quién es? — Es Ana.", por: "Se señala a una persona: nominativo." }] },
+          chequeo: [{ pide: "¿Cuál está bien?", opciones: ["Э́то маши́на.", "Э́то маши́ну."], ok: "Э́то маши́на.", por: "Después de э́то va el nominativo." }] },
         { titulo: "Personas que vas a usar", texto: "En esta unidad, las frases las protagonizan personas que ya conocés: А́нна, Ива́н, Ма́ша, Ди́ма, О́льга, Лу́кас y la familia (ма́ма, па́па, ба́бушка, де́душка, брат, сестра́). Tocá cada una abajo para escucharla." }
       ] },
     { id: "u4m3", n: 3, tipo: "leccion", nPractica: 10, titulo: "Verbos de acción", resumen: "Я чита́ю, он чита́ет, мы чита́ем, они́ чита́ют.",
       intro: "Para que algo reciba una acción, primero hace falta la acción: el verbo. En ruso, el verbo cambia según quién la hace.",
       secciones: [
         { titulo: "Cuatro formas por ahora", texto: "En esta unidad ves cuatro formas de cada verbo, una por pronombre: {я} (yo), он / она́ (él / ella, y también cualquier persona: ма́ма чита́ет), мы (nosotros) y они́ (ellos). Las formas de ты y вы llegan en la Unidad 5, junto con la conjugación completa." },
-        { titulo: "El modelo de чита́ть", texto: "Muchos verbos siguen el modelo de чита́ть: я чита́ю, он чита́ет, мы чита́ем, они́ чита́ют. Igual que él van понима́ть, изуча́ть, слу́шать, покупа́ть, де́лать, открыва́ть y закрыва́ть.", destacado: "{я} -ю · он / она́ -ет · мы -ем · они́ -ют" },
-        { titulo: "Los que cambian más", texto: "Otros cambian un poco más, y conviene aprenderlos de a uno con la tabla: пить → {я} пью, он пьёт; есть → {я} ем, он ест; ждать → {я} жду, он ждёт; писа́ть → {я} пишу́, он пи́шет; люби́ть → {я} люблю́, он лю́бит. En el módulo Verbos tenés la conjugación completa de cada uno.", truco: "Casi todas las formas de {я} terminan en -у o -ю (la excepción es {я} ем, de есть), y las de они́ en -ут, -ют, -ат o -ят." },
+        { id: "u4-verbos-chitat", titulo: "El modelo de чита́ть",
+          texto: "Muchos verbos siguen el modelo de чита́ть: se saca la **-ть** del infinitivo y se agrega la terminación de cada persona. Igual que él van понима́ть, изуча́ть, слу́шать, покупа́ть, де́лать, открыва́ть y закрыва́ть.",
+          ejemplos: [
+            { ru: "Я {чита́ю} кни́гу.", es: "Leo un libro.", por: "Con {я}, la terminación es **-ю**." },
+            { ru: "Ма́ма {слу́шает} пе́сню.", es: "Mamá escucha una canción.", por: "Ма́ма es una persona: forma de он / она́, **-ет**." },
+            { ru: "Мы {понима́ем} учи́теля.", es: "Entendemos al maestro.", por: "Con мы, **-ем**." },
+            { ru: "Они́ {покупа́ют} ры́бу.", es: "Ellos compran pescado.", por: "Con они́, **-ют**." }],
+          destacado: "{я} -ю · он / она́ -ет · мы -ем · они́ -ют",
+          errores: [
+            { mal: "Мы чита́ет.", bien: "Мы {чита́ем}.", por: "Con мы, la terminación es **-ем**." },
+            { mal: "Они́ чита́ет.", bien: "Они́ {чита́ют}.", por: "Con они́, **-ют**: cada persona tiene su terminación." }],
+          mas: { texto: "El verbo no cambia con el género: он чита́ет y она́ чита́ет son iguales. Lo que cambia es la persona, no si es hombre o mujer.\nY cualquier persona, animal o cosa que hace la acción usa la forma de он / она́: ма́ма чита́ет, кот пьёт, учи́тель слу́шает. Si son varios, la de они́.",
+            ejemplos: [{ ru: "Кот {пьёт} во́ду.", es: "El gato toma agua.", por: "Кот es uno solo: forma de он / она́." }] },
+          chequeo: [
+            { pide: "Мы ___ пе́сню. (слу́шать)", opciones: ["слу́шаю", "слу́шает", "слу́шаем", "слу́шают"], ok: "слу́шаем", por: "Con мы, **-ем**." },
+            { pide: "А́нна ___ кни́гу. (чита́ть)", opciones: ["чита́ю", "чита́ет", "чита́ют"], ok: "чита́ет", por: "А́нна es una persona: forma de он / она́." }] },
+        { id: "u4-verbos-otros", titulo: "Los que cambian más",
+          texto: "Otros verbos cambian un poco más. No hace falta buscarles una regla ahora: conviene aprenderlos de a uno con la tabla de abajo, que tiene las cuatro formas de cada verbo de la unidad.",
+          ejemplos: [
+            { ru: "Я {пью} чай.", es: "Tomo té.", por: "Пить pierde la **и**: {я} пью, он пьёт." },
+            { ru: "Кот {ест} ры́бу.", es: "El gato come pescado.", por: "Есть es irregular: {я} ем, он ест." },
+            { ru: "Мы {ждём} ма́му.", es: "Esperamos a mamá.", por: "Ждать: {я} жду, мы ждём. La **ё** siempre lleva el acento." },
+            { ru: "Она́ {пи́шет} письмо́.", es: "Ella escribe una carta.", por: "Писа́ть cambia la **с** por **ш**: {я} пишу́, она́ пи́шет." }],
+          truco: "Casi todas las formas de {я} terminan en **-у** o **-ю** (la excepción es {я} ем, de есть), y las de они́ en **-ут**, **-ют**, **-ат** o **-ят**.",
+          mas: { titulo: "La л de люблю́", texto: "En algunos verbos, la forma de {я} cambia la última consonante de la raíz: люби́ть → люблю́, ви́деть → ви́жу. Las otras personas vuelven a la raíz de siempre: он лю́бит, он ви́дит.\nEn la Unidad 5 vas a ver este cambio como un patrón; por ahora alcanza con reconocerlo.",
+            ejemplos: [
+              { ru: "Я {люблю́} ко́фе.", es: "Me encanta el café.", por: "Люби́ть suma una **л** solo con {я}: люблю́, pero он лю́бит." },
+              { ru: "Я {ви́жу} кота́.", es: "Veo al gato.", por: "Ви́деть: la **д** pasa a **ж** solo con {я}." }] } },
         { titulo: "La ё", texto: "Algunas formas llevan ё: пьёт, ждёт, пьём. En Azbuka podés escribir е en su lugar, como hacen los rusos en el día a día." }
       ] },
     { id: "u4m4", n: 4, tipo: "leccion", grupo: "f", titulo: "Acusativo femenino", resumen: "-а → -у, -я → -ю.",
       intro: "Las palabras que terminan en **-а** o **-я** son las únicas que cambian siempre en acusativo. Por suerte, la regla es corta.",
       secciones: [
-        { titulo: "-а → -у", texto: "Кни́га → кни́гу, му́зыка → му́зыку, ма́ма → ма́му: Я чита́ю кни́гу. Он лю́бит му́зыку. Мы ждём ма́му.", destacado: "кни́га → кни́гу" },
-        { titulo: "-я → -ю", texto: "Пе́сня → пе́сню, исто́рия → исто́рию: Она́ слу́шает пе́сню («ella escucha una canción»)." },
-        { titulo: "También los hombres en -а o -я", texto: "Па́па, де́душка, Ди́ма y дя́дя son masculinos, pero terminan en **-а** o **-я** (los viste en la Unidad 3). Siguen la regla de la terminación: па́па → па́пу, де́душка → де́душку, Ди́ма → Ди́му, дя́дя → дя́дю.", truco: "Mirá cómo termina la palabra: -а → -у, -я → -ю, sea hombre o mujer." },
-        { titulo: "Las femeninas en -ь no cambian", texto: "Las palabras femeninas que terminan en **-ь** quedan igual en acusativo: дочь → дочь (hija). Я жду дочь: «espero a mi hija»." },
-        { titulo: "El acento puede moverse", texto: "Вода́ → во́ду, сестра́ → сестру́, жена́ → жену́: en algunas palabras el acento cambia de lugar. Al escribir no hace falta marcarlo; al leer en voz alta, escuchá el audio." }
+        { id: "u4-acu-a", titulo: "-а → -у",
+          texto: "Las palabras que terminan en **-а** cambian esa **-а** por **-у** cuando reciben la acción. No importa qué nombran: una cosa, una persona o un animal.",
+          ejemplos: [
+            { ru: "Я чита́ю {кни́гу}.", es: "Leo un libro.", por: "кни́га → кни́гу: recibe la acción." },
+            { ru: "Он лю́бит {му́зыку}.", es: "Le encanta la música.", por: "му́зыка → му́зыку." },
+            { ru: "Мы ждём {ма́му}.", es: "Esperamos a mamá.", por: "ма́ма → ма́му: las personas también." },
+            { ru: "Они́ покупа́ют {газе́ту}.", es: "Compran el diario.", por: "газе́та → газе́ту." }],
+          destacado: "кни́га → кни́гу",
+          errores: [{ mal: "Я люблю́ А́нна.", bien: "Я люблю́ {А́нну}.", por: "А́нна recibe la acción: la **-а** pasa a **-у**." }],
+          mas: { texto: "Es la única regla del acusativo que cambia siempre: toda palabra en **-а** o **-я** cambia. Por eso es la primera que conviene dominar.\nOjo con no cambiar también al que hace la acción: en Ма́ма чита́ет кни́гу, ма́ма queda igual y solo cambia кни́га. La terminación depende del papel, no de la palabra.",
+            ejemplos: [{ ru: "Сестра́ покупа́ет {ча́шку}.", es: "Mi hermana compra una taza.", por: "Сестра́ hace la acción y queda igual; ча́шка la recibe y pasa a **-у**." }] },
+          chequeo: [{ pide: "Ива́н ждёт ___ (подру́га).", opciones: ["подру́га", "подру́гу"], ok: "подру́гу", por: "Подру́га recibe la acción: **-а** → **-у**." }] },
+        { id: "u4-acu-ya", titulo: "-я → -ю",
+          texto: "Las que terminan en **-я** hacen lo mismo con su vocal: la **-я** pasa a **-ю**. Es la misma regla, con la otra vocal.",
+          ejemplos: [
+            { ru: "Она́ слу́шает {пе́сню}.", es: "Ella escucha una canción.", por: "пе́сня → пе́сню." },
+            { ru: "Мы изуча́ем {исто́рию}.", es: "Estudiamos historia.", por: "исто́рия → исто́рию." }],
+          destacado: "пе́сня → пе́сню",
+          chequeo: [{ pide: "Я пишу́ ___ (пе́сня).", opciones: ["пе́сня", "пе́сню", "пе́сну"], ok: "пе́сню", por: "Termina en **-я**: pasa a **-ю**." }] },
+        { id: "u4-acu-hombres-a", titulo: "También los hombres en -а o -я",
+          antes: { pide: "ма́ма → ма́му, кни́га → кни́гу. ¿Cómo queda па́па?", opciones: ["па́па", "па́пу", "па́пы"], ok: "па́пу", por: "Termina en **-а**: pasa a **-у**, aunque sea un hombre." },
+          texto: "Па́па, де́душка y Ди́ма son masculinos, pero terminan en **-а**. En el acusativo lo que manda es la terminación, no el género: siguen la misma regla que ма́ма.",
+          ejemplos: [
+            { ru: "Я жду {па́пу}.", es: "Espero a papá.", por: "па́па → па́пу: termina en **-а**." },
+            { ru: "Ма́ма лю́бит {де́душку}.", es: "Mamá quiere al abuelo.", por: "де́душка → де́душку." },
+            { ru: "Ма́ша ви́дит {Ди́му}.", es: "Masha ve a Dima.", por: "Ди́ма → Ди́му." }],
+          truco: "Mirá cómo termina la palabra: **-а** → **-у**, **-я** → **-ю**, sea hombre o mujer.",
+          mas: { texto: "Con **-я** pasa lo mismo: дя́дя (tío) → дя́дю. Y lo que acompaña a estas palabras sigue siendo masculino: мой па́па. En el acusativo la palabra cambia como las femeninas, pero la persona sigue siendo un hombre.",
+            ejemplos: [{ ru: "Мы ждём {дя́дю}.", es: "Esperamos al tío.", por: "дя́дя → дя́дю: **-я** → **-ю**." }] } },
+        { id: "u4-acu-fem-soft", titulo: "Las femeninas en -ь no cambian",
+          texto: "Las palabras femeninas que terminan en **-ь** quedan igual en acusativo: дочь → дочь (hija).",
+          ejemplos: [{ ru: "Я жду {дочь}.", es: "Espero a mi hija.", por: "дочь → дочь: femenina en **-ь**, queda igual." }] },
+        { id: "u4-acento-movil", titulo: "El acento puede moverse",
+          texto: "En unas pocas palabras, el acento cambia de lugar en el acusativo. De las palabras de esta unidad, pasa con una sola: вода́ → во́ду. En casi todas, el acento se queda donde estaba: сестра́ → сестру́, жена́ → жену́, кни́га → кни́гу.",
+          ejemplos: [{ ru: "Я пью {во́ду}.", es: "Tomo agua.", por: "вода́ → во́ду: cambia la terminación y el acento pasa a la primera sílaba." }],
+          ojo: "Al escribir no hace falta marcar el acento. Si dudás de cómo suena una forma, tocá la palabra: la tabla de Casos muestra dónde va el acento en cada caso." }
       ] },
     { id: "u4m5", n: 5, tipo: "leccion", grupo: "m", titulo: "Acusativo masculino", resumen: "Cosas: igual. Personas y animales: +а.",
       intro: "En el masculino importa una pregunta: ¿la palabra nombra una cosa, o una persona o un animal?",
       secciones: [
-        { titulo: "Cosas: no cambian", texto: "Si es una cosa, el acusativo es igual al nominativo: Я ви́жу дом. Он покупа́ет телефо́н. Мы пьём чай.", destacado: "дом → дом · телефо́н → телефо́н" },
-        { titulo: "Personas y animales: +а", texto: "Si es una persona o un animal, se agrega **-а**: брат → бра́та, друг → дру́га, Ива́н → Ива́на, кот → кота́. Los que terminan en **-ь** cambian la **-ь** por **-я**: учи́тель → учи́теля.", destacado: "брат → бра́та · учи́тель → учи́теля" },
-        { titulo: "El orden no manda", texto: "Como la terminación dice quién hace la acción, el orden puede cambiar. Ма́ма ждёт бра́та y Бра́та ждёт ма́ма dicen lo mismo: mamá espera a mi hermano. En los dos casos, бра́та es a quien se espera.", truco: "Para saber quién hace qué, mirá las terminaciones, no el orden." }
+        { id: "u4-masc-cosa", titulo: "Cosas: no cambian",
+          texto: "Si la palabra masculina nombra una cosa, el acusativo es igual al nominativo. No hay que hacer nada: la forma del diccionario sirve también para lo que recibe la acción.",
+          ejemplos: [
+            { ru: "Я ви́жу {дом}.", es: "Veo la casa.", por: "Дом es una cosa: queda igual." },
+            { ru: "Он покупа́ет {телефо́н}.", es: "Él compra un teléfono.", por: "Телефо́н, una cosa: igual." },
+            { ru: "Мы пьём {чай}.", es: "Tomamos té.", por: "Чай queda igual: responde a что?, pero no cambia." }],
+          destacado: "дом → дом · телефо́н → телефо́н",
+          mas: { texto: "Si nada cambia, ¿cómo se sabe qué recibe la acción? Por la pregunta что? y por el orden neutral: quién hace, la acción y qué recibe. En Па́па покупа́ет хлеб no hay ninguna duda: el pan no compra a papá." } },
+        { id: "u4-animacidad", titulo: "Personas y animales: +а",
+          antes: { pide: "Я ви́жу дом, pero я ви́жу бра́та. ¿Qué tiene брат que no tenga дом?", opciones: ["Nombra a una persona", "Es femenino", "Es plural"], ok: "Nombra a una persona", por: "Брат es una persona: en acusativo suma **-а**. Дом es una cosa y queda igual." },
+          texto: "Si la palabra masculina nombra a una persona o a un animal, en acusativo se agrega **-а**. Las que terminan en **-ь** cambian la **-ь** por **-я**.\nA esta diferencia entre seres vivos y cosas se la llama **animacidad**.",
+          ejemplos: [
+            { ru: "Я ви́жу {бра́та}.", es: "Veo a mi hermano.", por: "брат → бра́та: es una persona, +**а**." },
+            { ru: "Мы ждём {дру́га}.", es: "Esperamos a nuestro amigo.", por: "друг → дру́га." },
+            { ru: "Ма́ша лю́бит {кота́}.", es: "Masha quiere al gato.", por: "кот → кота́: los animales también. Fijate que el acento pasa a la **-а**." },
+            { ru: "Они́ слу́шают {учи́теля}.", es: "Escuchan al maestro.", por: "учи́тель → учи́теля: la **-ь** pasa a **-я**." }],
+          destacado: "брат → бра́та · учи́тель → учи́теля",
+          comparacion: "también se distingue a las personas de las cosas: «veo la casa», pero «veo **a** Ana». Esa «a» es la misma idea que la **-а** del ruso: ви́жу дом, pero ви́жу бра́та.",
+          errores: [
+            { mal: "Я ви́жу брат.", bien: "Я ви́жу {бра́та}.", por: "Брат es una persona: en acusativo suma **-а**." },
+            { mal: "Я жду сосе́д.", bien: "Я жду {сосе́да}.", por: "Сосе́д es una persona: +**а**." }],
+          mas: { texto: "La regla mira lo que la palabra nombra, no cómo termina. Por eso стол y брат, que terminan los dos en consonante, se comportan distinto: стол queda igual y брат pasa a бра́та. Con los nombres de persona pasa lo mismo: Ива́н → Ива́на, Лу́кас → Лу́каса.\nEsto vale solo para el masculino. Las palabras en **-а** o **-я** cambian siempre por su terminación (ма́ма → ма́му, ко́шка → ко́шку), sean personas, animales o cosas.",
+            ejemplos: [{ ru: "Мы зна́ем {Ива́на}.", es: "Conocemos a Iván.", por: "Ива́н es una persona: +**а**." }] },
+          chequeo: [
+            { pide: "Ма́ма ждёт ___ (сын).", opciones: ["сын", "сы́на"], ok: "сы́на", por: "Сын es una persona: +**а**." },
+            { pide: "Па́па покупа́ет ___ (компью́тер).", opciones: ["компью́тер", "компью́тера"], ok: "компью́тер", por: "Es una cosa: queda igual." }] },
+        { id: "u4-orden-libre", titulo: "El orden no manda",
+          texto: "Como la terminación dice quién hace la acción, el orden puede cambiar. Ма́ма ждёт бра́та y Бра́та ждёт ма́ма dicen lo mismo: mamá espera a mi hermano.",
+          ejemplos: [
+            { ru: "Ма́ма ждёт {бра́та}.", es: "Mamá espera a mi hermano.", por: "El orden neutral: quién hace, la acción y a quién." },
+            { ru: "{Бра́та} ждёт ма́ма.", es: "A mi hermano lo espera mamá.", por: "Бра́та sigue siendo a quien se espera: lo dice la **-а**, no el lugar." }],
+          truco: "Para saber quién hace qué, mirá las terminaciones, no el orden.",
+          chequeo: [{ pide: "Дру́га ждёт Ива́н. ¿Quién espera?", opciones: ["Ива́н", "друг"], ok: "Ива́н", por: "Дру́га está en acusativo: es a quien se espera. El que espera es Ива́н, en nominativo." }] }
       ] },
     { id: "u4m6", n: 6, tipo: "leccion", grupo: "n", titulo: "Acusativo neutro", resumen: "Окно́, мо́ре, письмо́: no cambian.",
       intro: "El neutro es el más fácil: en acusativo no cambia.",
       secciones: [
-        { titulo: "No cambian", texto: "Окно́, мо́ре, сло́во, письмо́, молоко́, я́блоко: Он открыва́ет окно́. Я пью молоко́. Она́ пи́шет письмо́.", destacado: "окно́ → окно́" },
-        { titulo: "Las que vienen de otros idiomas", texto: "Ко́фе, кино́ y пальто́ (abrigo) no cambian nunca, en ningún caso: Я пью ко́фе. Мы лю́бим кино́. Она́ покупа́ет пальто́." },
-        { titulo: "Resumen del acusativo", texto: "Femenino en **-а** / **-я**: -у / -ю (y también los hombres en -а o -я). Femenino en **-ь**: igual. Masculino: igual si es una cosa; **+а** (o -ь → -я) si es una persona o un animal. Neutro: igual.", destacado: "кни́гу · пе́сню · дом · бра́та · учи́теля · окно́" }
+        { id: "u4-neutro", titulo: "No cambian",
+          texto: "Las palabras neutras, las que terminan en **-о** o **-е**, quedan igual en acusativo. Es la regla más cómoda de la unidad.",
+          ejemplos: [
+            { ru: "Он открыва́ет {окно́}.", es: "Él abre la ventana.", por: "окно́ → окно́: neutro, igual." },
+            { ru: "Я пью {молоко́}.", es: "Tomo leche.", por: "молоко́ queda igual." },
+            { ru: "Она́ пи́шет {письмо́}.", es: "Ella escribe una carta.", por: "письмо́, neutro: igual." },
+            { ru: "Мы ви́дим {мо́ре}.", es: "Vemos el mar.", por: "мо́ре termina en **-е**: neutro, igual." }],
+          destacado: "окно́ → окно́",
+          mas: { texto: "En el acusativo hay dos grupos que no cambian: el neutro y el masculino cuando nombra una cosa. Juntos son la mayoría de las palabras que nombran cosas. Por eso muchas frases con cosas no muestran el acusativo, y es la pregunta что? la que lo encuentra.",
+            ejemplos: [{ ru: "Я ем {я́блоко}.", es: "Como una manzana.", por: "я́блоко: neutro, queda igual." }] },
+          chequeo: [{ pide: "Мы чита́ем ___ (письмо́).", opciones: ["письмо́", "письму́"], ok: "письмо́", por: "Neutro: queda igual." }] },
+        { id: "u4-indeclinables", titulo: "Las que vienen de otros idiomas",
+          texto: "Ко́фе, кино́ y пальто́ (abrigo) vienen de otros idiomas y no cambian nunca, en ningún caso.",
+          ejemplos: [
+            { ru: "Я пью {ко́фе}.", es: "Tomo café.", por: "Ко́фе no cambia nunca." },
+            { ru: "Мы лю́бим {кино́}.", es: "Nos encanta el cine.", por: "Кино́: igual." },
+            { ru: "Она́ покупа́ет {пальто́}.", es: "Ella compra un abrigo.", por: "Пальто́: igual." }],
+          ojo: "Ко́фе es masculino, pero como no cambia nunca, en el acusativo también queda igual.",
+          mas: { texto: "Son pocas, pero muy usadas, y casi todas terminan en una vocal: **-о**, **-е**, **-и** o **-у**. Conviene aprenderlas como una lista corta. Las vas a reconocer porque en las tablas de Casos tienen la misma forma en todos los casos.",
+            ejemplos: [{ ru: "Ба́бушка лю́бит {кино́}.", es: "A la abuela le encanta el cine.", por: "Кино́ no cambia: viene de otro idioma." }] } },
+        { id: "u4-resumen", titulo: "Resumen del acusativo",
+          texto: "Femenino en **-а** / **-я**: **-у** / **-ю** (y también los hombres en **-а** o **-я**). Femenino en **-ь**: igual. Masculino: igual si es una cosa; **+а** (o **-ь** → **-я**) si es una persona o un animal. Neutro: igual.",
+          destacado: "кни́гу · пе́сню · дом · бра́та · учи́теля · окно́",
+          chequeo: [
+            { pide: "Я люблю́ ___ (ба́бушка).", opciones: ["ба́бушка", "ба́бушку"], ok: "ба́бушку", por: "Termina en **-а**: pasa a **-у**." },
+            { pide: "Мы ви́дим ___ (врач).", opciones: ["врач", "врача́"], ok: "врача́", por: "Masculino y persona: +**а**." },
+            { pide: "Она́ пьёт ___ (молоко́).", opciones: ["молоко́", "молоку́"], ok: "молоко́", por: "Neutro: queda igual." }] }
       ] },
     { id: "u4m7", n: 7, tipo: "leccion", nPractica: 10, titulo: "Construir frases", resumen: "Я + чита́ть + кни́га → Я чита́ю кни́гу.",
       intro: "Ya tenés todo para armar frases completas. Se hace en tres pasos.",
       secciones: [
-        { titulo: "Tres pasos", texto: "1. Quién hace la acción, en nominativo: **я**.\n2. El verbo, en la forma de esa persona: **чита́ю**.\n3. Lo que recibe la acción, en acusativo: **кни́гу**.", destacado: "{я} + чита́ть + кни́га → Я чита́ю кни́гу." },
-        { titulo: "Cuando el que hace es una persona", texto: "Ма́ма, А́нна o брат van con la forma de он / она́: Ма́ма чита́ет газе́ту. Брат и́щет телефо́н. El verbo no cambia con el género: он чита́ет, она́ чита́ет." },
-        { titulo: "Preguntas", texto: "Кто чита́ет кни́гу? («¿quién lee el libro?») — Ма́ма. Что чита́ет ма́ма? («¿qué lee mamá?») — Кни́гу. La pregunta va en el mismo caso que la respuesta.", truco: "Si la respuesta es quién hace la acción, va en nominativo; si es lo que la recibe, en acusativo." }
+        { id: "u4-tres-pasos", titulo: "Tres pasos",
+          texto: "1. Quién hace la acción, en nominativo.\n2. El verbo, en la forma de esa persona.\n3. Lo que recibe la acción, en acusativo.",
+          desarmar: { es: "Ana compra el diario.", partes: [
+            { txt: "А́нна", rol: "quién hace", nota: "Paso 1: nominativo, la forma del diccionario." },
+            { txt: "покупа́ет", rol: "la acción", nota: "Paso 2: А́нна es una persona, así que va la forma de он / она́." },
+            { txt: "газе́ту", rol: "qué recibe", nota: "Paso 3: газе́та → газе́ту, acusativo." }] },
+          ejemplos: [
+            { ru: "Мы покупа́ем {хлеб}.", es: "Compramos pan.", por: "Мы + покупа́ть → покупа́ем; хлеб es una cosa: queda igual." },
+            { ru: "Они́ ждут {Ива́на}.", es: "Esperan a Iván.", por: "Они́ + ждать → ждут; Ива́н es una persona: +**а**." },
+            { ru: "Брат и́щет {соба́ку}.", es: "Mi hermano busca al perro.", por: "Брат usa la forma de он; соба́ка → соба́ку." }],
+          destacado: "{я} + чита́ть + кни́га → Я чита́ю кни́гу.",
+          mas: { texto: "Cuando termines de escribir una frase, revisala de atrás para adelante. Primero: ¿lo que recibe la acción está en acusativo? Después: ¿el verbo coincide con quien hace la acción? Son los dos errores más comunes, y se encuentran rápido si los buscás a propósito.",
+            errores: [
+              { mal: "Па́па лю́бит му́зыка.", bien: "Па́па лю́бит {му́зыку}.", por: "Му́зыка recibe la acción: **-а** → **-у**." },
+              { mal: "Мы пьёт ко́фе.", bien: "Мы {пьём} ко́фе.", por: "Con мы, la forma es пьём." }] } },
+        { id: "u4-sujeto-persona", titulo: "Cuando el que hace es una persona",
+          texto: "Ма́ма, А́нна o брат van con la forma de он / она́. El verbo no cambia con el género: он чита́ет, она́ чита́ет.",
+          ejemplos: [
+            { ru: "Ма́ма {чита́ет} газе́ту.", es: "Mamá lee el diario.", por: "Ма́ма = она́: чита́ет." },
+            { ru: "Брат {и́щет} телефо́н.", es: "Mi hermano busca el teléfono.", por: "Брат = он: и́щет." }] },
+        { id: "u4-preguntas", titulo: "Preguntas",
+          texto: "Para preguntar quién hace la acción, se usa кто; para preguntar qué la recibe, что. La respuesta va en el caso de lo que reemplaza.",
+          ejemplos: [
+            { ru: "{Кто} чита́ет кни́гу? — {Ма́ма}.", es: "¿Quién lee el libro? — Mamá.", por: "Кто pregunta por quien hace: la respuesta va en nominativo." },
+            { ru: "{Что} чита́ет ма́ма? — {Кни́гу}.", es: "¿Qué lee mamá? — El libro.", por: "Что pregunta por lo que recibe: la respuesta va en acusativo." }],
+          truco: "Si la respuesta es quién hace la acción, va en nominativo; si es lo que la recibe, en acusativo.",
+          mas: { texto: "La respuesta puede ser una sola palabra: Кни́гу. Aunque esté sola, mantiene el acusativo, porque sigue siendo lo que se lee. Contestar Кни́га a esa pregunta suena raro en ruso, aunque se entienda." },
+          chequeo: [{ pide: "Что ви́дит Ма́ша? — ___ (маши́на).", opciones: ["маши́на", "маши́ну"], ok: "маши́ну", por: "Responde a что?: es lo que recibe la acción, en acusativo." }] }
       ] },
     { id: "u4m8", n: 8, tipo: "lectura", titulo: "Lectura", resumen: "Textos cortos: ¿quién hace qué?",
       intro: "Cuatro textos cortos con lo que aprendiste. Leelos, escuchalos y después contestá: la respuesta siempre está en el texto." },
     { id: "u4m9", n: 9, tipo: "leccion", nPractica: 10, titulo: "Escribir en ruso", resumen: "Traducir y entender por qué.",
       intro: "Ahora al revés: del español al ruso. Si algo no está en el caso que corresponde, la corrección te dice cuál y por qué.",
       secciones: [
-        { titulo: "Lo que no se traduce", texto: "El ruso no tiene artículos: «un libro», «el libro» y «libro» son todos кни́га (y, cuando reciben la acción, кни́гу). Tampoco hace falta traducir «mi» en «mi hermano»: брат alcanza. Y el «a» de «espero a mamá» no se traduce: lo dice la terminación, ма́му." },
-        { titulo: "«Me encanta»", texto: "«Me encanta la música» en ruso se dice con люби́ть: я люблю́ му́зыку. Lo que te encanta va en acusativo." }
+        { id: "u4-sin-articulos", titulo: "Lo que no se traduce",
+          texto: "El ruso no tiene artículos: «un libro», «el libro» y «libro» son todos кни́га (y, cuando reciben la acción, кни́гу). Tampoco hace falta traducir «mi» en «mi hermano» cuando se entiende: брат alcanza.",
+          ejemplos: [
+            { ru: "Я покупа́ю {кни́гу}.", es: "Compro un libro / Compro el libro.", por: "Sin artículo: la misma frase sirve para «un» y para «el»." },
+            { ru: "{Брат} пьёт чай.", es: "Mi hermano toma té.", por: "«Mi» no hace falta: se entiende por el contexto." }] },
+        { id: "u4-a-personal-escrita", titulo: "La «a» de las personas",
+          texto: "En «espero a mamá», la «a» no se escribe en ruso: la dice la terminación. Escribí la persona en acusativo y listo.",
+          ejemplos: [
+            { ru: "Я жду {ма́му}.", es: "Espero a mamá.", por: "Sin «a»: ма́му ya dice a quién se espera." },
+            { ru: "Мы ви́дим {Ива́на}.", es: "Vemos a Iván.", por: "Ива́н → Ива́на: la **-а** hace el trabajo de la «a»." }],
+          errores: [{ mal: "Я жду ма́ма.", bien: "Я жду {ма́му}.", por: "Ма́ма es a quien se espera: va en acusativo." }],
+          mas: { texto: "Con los animales pasa lo mismo: «busco al gato» es Я ищу́ кота́. Y con las cosas no hay «a» en ninguno de los dos idiomas: «veo la casa», Я ви́жу дом. Si en la frase en español hay una «a» delante de una persona o un animal, en ruso esa palabra va en acusativo.",
+            ejemplos: [{ ru: "Я ищу́ {кота́}.", es: "Busco al gato.", por: "Кот es un animal: +**а**, y la «a» no se escribe." }] } },
+        { id: "u4-lyubit", titulo: "«Me encanta»",
+          texto: "«Me encanta la música» en ruso se dice con люби́ть: Я люблю́ му́зыку. Lo que te encanta va en acusativo, porque es lo que recibe la acción de люби́ть.",
+          ejemplos: [
+            { ru: "Я люблю́ {пи́ццу}.", es: "Me encanta la pizza.", por: "пи́цца → пи́ццу: lo que encanta recibe la acción." },
+            { ru: "Ма́ма лю́бит {чай}.", es: "A mamá le encanta el té.", por: "Чай es una cosa: queda igual." },
+            { ru: "Они́ лю́бят {соба́ку}.", es: "Quieren al perro.", por: "соба́ка → соба́ку." }],
+          mas: { texto: "Люби́ть sirve para personas y para cosas. Con personas es «querer»: Я люблю́ ма́му. Con cosas es «encantar»: Я люблю́ кино́. La frase se arma siempre igual: quién quiere, en nominativo, y qué o a quién, en acusativo." } }
       ] },
     { id: "u4m10", n: 10, tipo: "proyecto", titulo: "Proyecto final", resumen: "Quién hace qué en tu familia, tu casa o tus amigos.",
       intro: "Escribí un texto sobre tu familia, tu casa o tus amigos: quién hace qué. Por ejemplo: Ма́ма чита́ет газе́ту. Мой брат лю́бит пи́ццу. Я пью ко́фе. No importa que sea simple: lo importante es que lo que recibe la acción esté en acusativo.",
@@ -227,7 +432,9 @@ function unidad4Modulo(id) { return UNIDAD_4.modulos.find(m => m.id === id) || n
 
 /* Mezcla: ~65 % de producción (escribir, construir, ordenar) */
 const U4_MEZCLA = { "tocar-caso": 2, "nom-elegir": 1, tocar: 2, "quien-a-quien": 1, conjugar: 1, "conjugar-escribir": 2, persona: 1, acusativo: 2, "acu-elegir": 1, completar: 2, cambia: 1,
-  construir: 2, corregir: 1, "es-ru": 2, dictado: 2, ordenar: 1, significado: 1, "palabra-es-ru": 1, emparejar: 1, lectura: 2, "lectura-vf": 1 };
+  construir: 2, corregir: 1, "es-ru": 2, dictado: 2, ordenar: 1, significado: 1, "palabra-es-ru": 1, emparejar: 1, lectura: 2, "lectura-vf": 1,
+  /* Tipos nuevos (07/10/2026): entender la regla, ~20 % de la sesión */
+  porque: 1, natural: 1, par: 1, oido: 1, descubrir: 1, diagnostico: 1, cadena: 1, desarmar: 1 };
 
 /* ── Datos armados una vez ─────────────────────────────────── */
 function u4Datos() {
@@ -292,6 +499,21 @@ function u4Regla(s) {
   let mueve = "";
   if (s.nom !== s.acc && pos(s.nom) > 0 && pos(s.acc) > 0 && vocal(s.nom, pos(s.nom)) !== vocal(s.acc, pos(s.acc))) mueve = " Fijate que el acento se mueve.";
   return "**" + s.nom + " → " + s.acc + "**: " + r + "." + mueve;
+}
+
+/* El id de la sección de teoría que explica el acusativo de una palabra (07/10/2026) */
+function u4ReglaId(s) {
+  const n = s.nom.replace(/\u0301/g, "").replace(/ё/g, "е");
+  if (s.indecl) return "u4-indeclinables";
+  if (n === "вода") return "u4-acento-movil";
+  if (/[ая]$/.test(n)) return s.g === "m" ? "u4-acu-hombres-a" : /я$/.test(n) ? "u4-acu-ya" : "u4-acu-a";
+  if (s.g === "f") return "u4-acu-fem-soft";
+  if (s.g === "n") return "u4-neutro";
+  return s.anim ? "u4-animacidad" : "u4-masc-cosa";
+}
+/* Verbos del modelo de чита́ть frente a los que cambian más */
+function u4ReglaVerbo(v) {
+  return /^(читать|понимать|изучать|слушать|покупать|делать|открывать|закрывать)$/.test(v.ac.replace(/\u0301/g, "")) ? "u4-verbos-chitat" : "u4-verbos-otros";
 }
 
 /* Minúscula al principio, salvo los nombres propios (А́нна, Ива́н…) */
@@ -523,6 +745,201 @@ function ejerciciosUnidad4() {
       grupo: "Q4-" + j, items: ["lex:" + A.id, "lex:" + B.id], pide: "¿Qué significa?", grande: ru, audio: ru, opciones: baraja([bien, mal], j + r), correcta: bien,
       explicacion: "**" + A.nom + "** está en nominativo: es quien hace la acción. **" + B.acc + "** está en acusativo (" + B.nom + " → " + B.acc + ")." + (r ? " El orden no importa: manda la terminación." : "") }));
   });
+
+  /* ── Tipos nuevos (07/10/2026): entender la regla, ~20 % de la sesión ──
+     porque · natural · par · oido · descubrir · diagnostico · cadena · desarmar.
+     Todos llevan «regla» (el id de la sección de teoría que practican). */
+  const sinAc = t => t.replace(/́/g, "");
+  const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+  const RAZON = {
+    "u4-nominativo": ["Es quien hace la acción", 2],
+    "u4-acu-a": ["Termina en -а: pasa a -у", 4], "u4-acu-ya": ["Termina en -я: pasa a -ю", 4],
+    "u4-acu-hombres-a": ["Termina en -а o -я, aunque sea un hombre", 4], "u4-acu-fem-soft": ["Es femenina en -ь: no cambia", 4],
+    "u4-masc-cosa": ["Es masculino y nombra una cosa: no cambia", 5], "u4-animacidad": ["Es masculino y nombra a una persona o un animal", 5],
+    "u4-neutro": ["Es neutro: no cambia", 6], "u4-indeclinables": ["Viene de otro idioma: no cambia nunca", 6]
+  };
+  /* Razones que también serían ciertas para una palabra de otra regla: nunca juntas */
+  const CHOCAN = { "u4-acu-hombres-a": ["u4-acu-a", "u4-acu-ya", "u4-animacidad"], "u4-acu-a": ["u4-acu-hombres-a"], "u4-acu-ya": ["u4-acu-hombres-a"],
+    "u4-indeclinables": ["u4-masc-cosa", "u4-neutro"], "u4-masc-cosa": ["u4-indeclinables"], "u4-neutro": ["u4-indeclinables"], "u4-animacidad": ["u4-acu-hombres-a"] };
+  const razonDe = r => r === "u4-acento-movil" ? "u4-acu-a" : r;
+  const opcionesPorque = (ok, mod, semilla) => {
+    const otras = Object.keys(RAZON).filter(k => k !== ok && RAZON[k][1] <= mod && (CHOCAN[ok] || []).indexOf(k) < 0);
+    return baraja([RAZON[ok][0]].concat(baraja(otras, semilla).slice(0, 2).map(k => RAZON[k][0])), semilla + 1);
+  };
+  /* Módulo: nunca antes de que se vean la palabra, el verbo y quien hace la acción */
+  const modF = (f, m) => Math.max(m, f.o.desde, f.v.desde, f.suj.s ? f.suj.s.desde : 0);
+  const base1 = frases.filter(f => f.r === 0 && !f.amp && f.o.desde <= 6);
+  const base2 = frases.filter(f => f.r === 1 && !f.amp && f.o.desde <= 6);
+
+  /* ¿Por qué? La forma de lo que recibe la acción (y, a veces, la de quien la hace) */
+  base1.forEach((f, i) => {
+    if (i % 4 === 3) return;
+    const o = f.o, rg = razonDe(u4ReglaId(o)), mod = modF(f, Math.max(o.mod, RAZON[rg][1]));
+    const igual = o.nom === o.acc;
+    out.push({ id: "U4-porq-" + f.id, tipo: "porque", forma: "elegir", dificultad: 2, modulo: mod, regla: u4ReglaId(o), grupo: "F4-" + f.id, items: ["lex:" + o.id], oir: f.ru,
+      pide: igual ? "¿Por qué " + o.acc + " queda igual?" : "¿Por qué " + o.acc + " y no " + o.nom + "?", grande: f.ru, audio: f.ru, audioManual: true,
+      opciones: opcionesPorque(rg, mod, i + 51), correcta: RAZON[rg][0], explicacion: u4Regla(o) + " " + f.ru + " — " + f.es });
+  });
+  base1.filter(f => f.suj.s && f.suj.s.nom !== f.suj.s.acc).forEach((f, i) => {
+    if (i % 2) return;
+    const S = f.suj.s, mod = modF(f, Math.max(4, S.mod, f.o.mod)), malas = baraja([razonDe(u4ReglaId(S)), "u4-masc-cosa", "u4-neutro"].filter(k => RAZON[k][1] <= mod && k !== "u4-nominativo"), i + 61).slice(0, 2);
+    out.push({ id: "U4-porqs-" + f.id, tipo: "porque", forma: "elegir", dificultad: 2, modulo: mod, regla: "u4-nominativo", grupo: "S4p-" + f.id, items: ["lex:" + S.id], oir: f.ru,
+      pide: "¿Por qué " + S.nom + " y no " + S.acc + "?", grande: f.ru, audio: f.ru, audioManual: true,
+      opciones: baraja([RAZON["u4-nominativo"][0]].concat(malas.map(k => RAZON[k][0])), i + 63), correcta: RAZON["u4-nominativo"][0],
+      explicacion: "**" + S.nom + "** hace la acción: va en nominativo, la forma del diccionario. " + f.ru + " — " + f.es });
+  });
+
+  /* ¿Suena natural? Tres errores típicos, siempre en ruso */
+  base2.forEach((f, i) => {
+    const o = f.o, S = f.suj.s, k = i % 3;
+    if (k === 0 && S && S.nom !== S.acc) {
+      /* Quien hace la acción en acusativo */
+      const mal = cap(S.acc) + " " + f.forma + " " + o.acc + ".", mod = modF(f, Math.max(4, S.mod, o.mod));
+      out.push({ id: "U4-nat-s-" + f.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: mod, regla: "u4-nominativo", grupo: "F4-" + f.id, items: ["lex:" + S.id], oir: f.ru,
+        pide: "¿Cuál suena natural?", opciones: baraja([f.ru, mal], i + 71), correcta: f.ru,
+        explicacion: f.ru + " " + cap(S.nom) + " hace la acción: va en nominativo. Con " + S.acc + " la frase no tiene a nadie que la haga." });
+    } else if (k === 1 && !S) {
+      /* La forma del verbo no coincide con quien hace la acción */
+      const p = f.suj.p, otra = f.v.f[p === 1 ? 2 : 1];
+      if (otra === f.forma) return;
+      const mal = f.suj.ru + " " + otra + " " + o.acc + ".";
+      out.push({ id: "U4-nat-v-" + f.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: modF(f, Math.max(3, o.mod)), regla: u4ReglaVerbo(f.v), grupo: "F4-" + f.id, items: ["lex:" + f.v.id], oir: f.ru,
+        pide: "¿Cuál suena natural?", opciones: baraja([f.ru, mal], i + 73), correcta: f.ru,
+        explicacion: f.ru + " Con " + u4Min(f.suj.ru).replace(/^я$/, "{я}") + ", la forma es " + f.forma + "." });
+    } else if (o.nom !== o.acc && (o.anim || o.persona || o.g === "m")) {
+      /* El error del español: la persona o el animal sin acusativo */
+      const mal = f.suj.ru + " " + f.forma + " " + o.nom + ".";
+      out.push({ id: "U4-nat-o-" + f.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: modF(f, o.mod), regla: u4ReglaId(o), grupo: "F4-" + f.id, items: ["lex:" + o.id], oir: f.ru,
+        pide: "¿Cuál suena natural?", opciones: baraja([f.ru, mal], i + 75), correcta: f.ru, explicacion: f.ru + " " + u4Regla(o) });
+    }
+  });
+  /* Э́то + nominativo */
+  Object.values(sust).filter(s => !s.amp && s.desde <= 6 && s.nom !== s.acc && !/ребенок/.test(sin(s.nom))).forEach((s, i) => {
+    const bien = "Э́то " + s.nom + ".", mal = "Э́то " + s.acc + ".";
+    out.push({ id: "U4-nat-eto-" + s.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: Math.max(4, s.mod, s.desde), regla: "u4-eto", grupo: "E4n-" + s.id, items: ["lex:" + s.id], oir: bien,
+      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], i + 77), correcta: bien, explicacion: bien + " Э́то solo señala: lo que sigue va en nominativo." });
+  });
+
+  /* Par mínimo y oído: dos personas, quién espera (ve, busca…) a quién */
+  const VERBOS_PAR = ["ждать", "ви́деть", "знать", "люби́ть", "слу́шать", "иска́ть"];
+  const nPar = { n: 0 };
+  VERBOS_PAR.forEach((vk, vi) => {
+    const v = verb[sin(vk)]; if (!v) return;
+    const pers = U4_COMBOS[vk].split(" ").map(x => sust[sin(x)]).filter(s => s && s.persona && !s.amp && s.nom !== s.acc && !/^(жена|муж|сын)$/.test(sin(s.nom)) && U4_SUJ_P.split(" ").map(sin).indexOf(sin(s.nom)) >= 0);
+    const l = baraja(pers, vi + 81), duplas = [];
+    for (let x = 0; x < l.length; x++) for (let y = x + 1; y < l.length; y++) duplas.push((x + y) % 2 ? [l[x], l[y]] : [l[y], l[x]]);
+    baraja(duplas, vi + 85).slice(0, 7).forEach(([A, B]) => {
+      const n = nPar.n++;
+      const vEs = sin(vk) === "любить" ? "quiere" : v.esF[1];
+      const ab = cap(A.nom) + " " + v.f[1] + " " + B.acc + ".", ba = cap(B.nom) + " " + v.f[1] + " " + A.acc + ".";
+      const esAB = A.suj + " " + vEs + " " + B.a + ".";
+      const mod = Math.max(A.mod === 5 || B.mod === 5 ? 5 : 4, A.desde, B.desde);
+      const items = ["lex:" + A.id, "lex:" + B.id];
+      const inv = n % 2 === 1;
+      /* par: ¿cuál dice…? (la mitad, con el orden cambiado: manda la terminación) */
+      const opAB = inv ? cap(B.acc) + " " + v.f[1] + " " + A.nom + "." : ab, opBA = inv ? cap(A.acc) + " " + v.f[1] + " " + B.nom + "." : ba;
+      out.push({ id: "U4-par-" + n, tipo: "par", forma: "elegir", dificultad: inv ? 3 : 2, modulo: inv ? 5 : mod, regla: inv ? "u4-orden-libre" : u4ReglaId(B), grupo: "P4-" + n, items, oir: opAB,
+        pide: "¿Cuál dice «" + esAB.replace(/\.$/, "") + "»?", opciones: baraja([opAB, opBA], n + 83), correcta: opAB,
+        explicacion: opAB + " **" + cap(A.nom) + "** está en nominativo: es quien hace la acción. **" + B.acc + "** está en acusativo (" + B.nom + " → " + B.acc + ")." + (inv ? " El orden no importa: manda la terminación." : "") });
+      /* oído: suena una de las dos frases; ¿qué forma de B sonó? */
+      const sonoAB = n % 3 !== 0, audio = sonoAB ? ab : ba, ok = sonoAB ? B.acc : B.nom;
+      out.push({ id: "U4-oido-" + n, tipo: "oido", forma: "elegir", dificultad: 2, modulo: mod, regla: u4ReglaId(B), grupo: "O4-" + n, items, oir: audio,
+        pide: "Escuchá: ¿qué forma de «" + B.nom + "» sonó?", audio, opciones: [B.nom, B.acc], correcta: ok,
+        explicacion: "Sonó: " + audio + " " + (sonoAB ? cap(B.acc) + " es acusativo: recibe la acción." : cap(B.nom) + " es nominativo: hace la acción.") });
+    });
+  });
+  /* Oído con cosas: suena la palabra sola o la frase; nominativo o acusativo */
+  base1.filter(f => f.o.nom !== f.o.acc && !f.o.persona).forEach((f, i) => {
+    if (i % 3) return;
+    const o = f.o, sola = i % 2 === 0, audio = sola ? "Э́то " + o.nom + "." : f.ru, ok = sola ? o.nom : o.acc;
+    out.push({ id: "U4-oidoc-" + f.id, tipo: "oido", forma: "elegir", dificultad: 2, modulo: modF(f, o.mod), regla: u4ReglaId(o), grupo: "F4-" + f.id, items: ["lex:" + o.id], oir: audio,
+      pide: "Escuchá: ¿qué forma sonó?", audio, opciones: [o.nom, o.acc], correcta: ok,
+      explicacion: "Sonó: " + audio + " " + u4Regla(o) });
+  });
+
+  /* Descubrir: dos pares de la misma clase y uno para completar */
+  const claseAcu = s => { const n = sin(s.nom); if (s.indecl || s.nom === s.acc) return null;
+    if (/а$/.test(n)) return s.g === "m" ? "ma" : "a"; if (/я$/.test(n)) return s.g === "m" ? "mya" : "ya"; if (/ь$/.test(n)) return "mь"; return "mc"; };
+  const porClase = {};
+  Object.values(sust).filter(s => !s.amp && s.desde <= 6 && !/ребенок|вода/.test(sin(s.nom))).forEach(s => { const c = claseAcu(s); if (c) (porClase[c] = porClase[c] || []).push(s); });
+  /* Los hombres en -а y en -я se descubren con las palabras femeninas de su misma letra */
+  const modelo = { ma: "a", mya: "ya" };
+  Object.keys(porClase).forEach(c => porClase[c].forEach((s, i) => {
+    const fuente = (porClase[modelo[c] || c] || []).filter(x => x !== s && x.desde <= Math.max(s.mod, s.desde));
+    const ej = baraja(fuente, i + 91).slice(0, 2);
+    if (ej.length < 2) return;
+    out.push({ id: "U4-desc-" + s.id, tipo: "descubrir", forma: "elegir", dificultad: 2, modulo: Math.max(s.mod, s.desde), regla: u4ReglaId(s), grupo: "D4-" + s.id, items: ["lex:" + s.id], oir: s.acc,
+      pide: ej.map(x => x.nom + " → " + x.acc).join(" · ") + ". ¿Y " + s.nom + "?", opciones: baraja([sinAc(s.acc), sinAc(s.nom)], i + 93), correcta: sinAc(s.acc),
+      explicacion: s.nom + " → " + s.acc + ": la misma regla que " + ej[0].nom + " → " + ej[0].acc + ". " + u4Regla(s) });
+  }));
+
+  /* Diagnosticar: qué falla y escribirla bien (módulo 7: armar frases) */
+  const FALLAS = ["El caso de lo que recibe la acción", "El caso de quien hace la acción", "La forma del verbo"];
+  base1.forEach((f, i) => {
+    if (i % 3 !== 1) return;
+    const o = f.o, S = f.suj.s, k = Math.floor(i / 3) % 3;
+    let mal, ok, regla;
+    if (k === 0 && o.nom !== o.acc) { mal = f.suj.ru + " " + f.forma + " " + o.nom + "."; ok = FALLAS[0]; regla = u4ReglaId(o); }
+    else if (k === 1 && S && S.nom !== S.acc) { mal = cap(S.acc) + " " + f.forma + " " + o.acc + "."; ok = FALLAS[1]; regla = "u4-nominativo"; }
+    else { const otra = f.v.f[f.suj.p === 1 ? 3 : 1]; if (otra === f.forma) return; mal = f.suj.ru + " " + otra + " " + o.acc + "."; ok = FALLAS[2]; regla = u4ReglaVerbo(f.v); }
+    out.push({ id: "U4-diag-" + f.id, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 7, regla, grupo: "F4-" + f.id, items: ["lex:" + o.id, "lex:" + f.v.id], oir: f.ru,
+      pide: "Esta frase tiene un error. ¿Qué falla?", grande: mal, opciones: FALLAS.slice(), correcta: ok, esperadas: f.esperadas,
+      explicacion: f.ru + " — " + f.es + " " + (ok === FALLAS[0] ? u4Regla(o) : ok === FALLAS[1] ? "**" + S.nom + "** hace la acción: nominativo." : "Con " + u4Min(f.suj.ru).replace(/^я$/, "{я}") + ", la forma es " + f.forma + ".") });
+  });
+
+  /* Cadena: cambiar quién lo hace, después lo que recibe, después otra persona */
+  const nCad = { n: 0 };
+  Object.keys(U4_COMBOS).forEach((vk, vi) => {
+    const v = verb[sin(vk)]; if (!v) return;
+    const objs = U4_COMBOS[vk].split(" ").map(x => sust[sin(x)]).filter(s => s && !s.amp && s.desde <= 6 && !/^(жена|муж|сын)$/.test(sin(s.nom)));
+    const cambian = objs.filter(s => s.nom !== s.acc), quedan = objs.filter(s => s.nom === s.acc);
+    const pers = U4_SUJ_P.split(" ").map(x => sust[sin(x)]).filter(s => s && s.desde <= 2);
+    for (let j = 0; j < 3 && j < cambian.length; j++) {
+      const o2 = cambian[(j * 2 + vi) % cambian.length], o1 = (quedan.length ? quedan : cambian.filter(x => x !== o2))[(j + vi) % Math.max(1, (quedan.length ? quedan : cambian.filter(x => x !== o2)).length)];
+      if (!o1 || o1 === o2) continue;
+      const P = pers.filter(x => x.id !== o2.id)[(vi * 5 + j * 3) % (pers.length - 1)];
+      const n = nCad.n++;
+      const s0 = "Я " + v.f[0] + " " + o1.acc + ".", s1 = "Мы " + v.f[2] + " " + o1.acc + ".", s2 = "Мы " + v.f[2] + " " + o2.acc + ".", s3 = cap(P.nom) + " " + v.f[1] + " " + o2.acc + ".";
+      const sinMy = t => cap(t.replace(/^Мы /, ""));
+      const conMi = /^Mi /.test(P.suj) ? [(P.g === "f" ? "Моя́ " : "Мой ") + P.nom + " " + v.f[1] + " " + o2.acc + "."] : [];
+      out.push({ id: "U4-cad-" + n, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 7, regla: u4ReglaId(o2), grupo: "C4c-" + n, items: ["lex:" + o2.id, "lex:" + v.id], oir: s3,
+        pide: "Cambiá la frase paso a paso.", base: s0,
+        pasos: [
+          { pide: "Ahora lo hacemos nosotros (мы).", esperadas: [s1, sinMy(s1)] },
+          { pide: "Ahora lo que recibe la acción es " + o2.nom + ".", esperadas: [s2, sinMy(s2)] },
+          { pide: "Ahora lo hace " + P.nom + ".", esperadas: [s3].concat(conMi) }],
+        explicacion: s0 + " → " + s1 + " → " + s2 + " → " + s3 + " " + u4Regla(o2) });
+    }
+  });
+
+  /* Desarmar: la misma frase, tres preguntas (la mitad con el orden cambiado) */
+  const PREG = ["¿Quién hace la acción?", "¿Cuál es la acción?", "¿Qué recibe la acción?"];
+  base1.filter(f => f.suj.s && f.o.nom !== f.o.acc).forEach((f, i) => {
+    const S = f.suj.s, o = f.o, inv = i % 2 === 1;
+    const palabras = inv ? [cap(o.acc), f.forma, S.nom] : [cap(S.nom), f.forma, o.acc];
+    const ru = palabras.join(" ") + ".";
+    const idx = inv ? [2, 1, 0] : [0, 1, 2];
+    out.push({ id: "U4-desarm-" + f.id, tipo: "desarmar", forma: "desarmar", dificultad: inv ? 3 : 2, modulo: modF(f, inv ? Math.max(5, o.mod) : Math.max(2, o.mod)), regla: inv ? "u4-orden-libre" : "u4-caso",
+      grupo: "F4-" + f.id, items: ["lex:" + S.id, "lex:" + o.id], oir: ru, audio: ru, audioManual: true,
+      pide: "Respondé tocando las palabras de la frase.", palabras, preguntas: PREG.map((p, k) => ({ pide: p, correcta: idx[k] })),
+      explicacion: ru + " — " + f.es + " **" + cap(S.nom) + "**: nominativo, hace la acción. **" + cap(o.acc) + "**: acusativo, la recibe." + (inv ? " El orden cambió, pero las terminaciones no." : "") });
+  });
+
+  /* «regla» en los tipos viejos donde es directo */
+  const RV = { "U4-acu-": "obj", "U4-camb-": "obj", "U4-acel-": "obj", "U4-comp-": "obj", "U4-corr-": "obj", "U4-toc-o-": "obj", "U4-cons-": "u4-tres-pasos", "U4-ord-": "u4-tres-pasos",
+    "U4-esru-": "u4-sin-articulos", "U4-caso-": "u4-nom-acu", "U4-casoa-": "u4-nom-acu", "U4-memaud-": "u4-nom-acu", "U4-toc1-": "u4-kto-chto", "U4-toc2-": "u4-nominativo",
+    "U4-nom2-": "u4-nominativo", "U4-eto-": "u4-eto", "U4-conj-": "verbo", "U4-conjw-": "verbo", "U4-pers-": "verbo" };
+  const porId = {}; Object.values(sust).forEach(s => { porId[s.id] = s; });
+  const verbId = {}; Object.values(verb).forEach(v => { verbId[v.id] = v; });
+  out.forEach(e => {
+    if (e.regla) return;
+    const pre = Object.keys(RV).find(p => e.id.indexOf(p) === 0); if (!pre) return;
+    const t = RV[pre];
+    if (t === "obj") { const s = (e.items || []).map(x => porId[String(x).slice(4)]).find(Boolean); if (s) e.regla = u4ReglaId(s); }
+    else if (t === "verbo") { const v = verbId[e.id.split("-").slice(2, 4).join("-")]; if (v) e.regla = u4ReglaVerbo(v); }
+    else e.regla = t;
+  });
+  out.filter(e => e.tipo === "quien-a-quien").forEach(e => { const B = porId[String(e.items[1]).slice(4)]; e.regla = /-1$/.test(e.id) || !B ? "u4-orden-libre" : u4ReglaId(B); });
 
   /* ── Lectura (módulo 8) ── */
   U4_LECTURAS.forEach((L, j) => {
