@@ -306,7 +306,8 @@ const U13_DET = (function () {
   const pal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
   const K = w => azFormaClave(w);
   const info = w => azIndiceFormas().get(K(w)) || [];
-  const frases = t => t.split(/(?<=[.!?])\s*/).map(x => x.trim()).filter(x => pal(x).length >= 1);
+  const frases = t => t.split(/(?<=[.!?])\s*|\n+/)   /* también el renglón nuevo (06/10/2026) */
+    .map(x => x.trim()).filter(x => pal(x).length >= 1);
   const igual = (lista, k) => (lista || []).some(f => K(f) === k);
   const verbo = (w, fn) => info(w).some(x => { const v = verboById(x[0]); return v && fn(v, K(w)); });
   const pasado = w => verbo(w, (v, k) => v.pasado && igual(Object.values(v.pasado), k));

@@ -699,7 +699,8 @@ function ejerciciosUnidad11() {
   const pal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
   const K = w => azFormaClave(w);
   const info = w => azIndiceFormas().get(K(w)) || [];
-  const frases = t => t.split(/(?<=[.!?])\s*/).map(x => x.trim()).filter(x => pal(x).length >= 1);
+  const frases = t => t.split(/(?<=[.!?])\s*|\n+/)   /* también el renglón nuevo (06/10/2026) */
+    .map(x => x.trim()).filter(x => pal(x).length >= 1);
   const etiq = w => info(w).map(x => x[2] || "");
   const CASOS = { gen: /genitivo/, dat: /dativo/, acc: /acusativo/, ins: /instrumental/, prep: /prepos/ };
   /* Un caso cuenta si la palabra solo puede ser ese caso (sin ambigüedad) */

@@ -142,7 +142,7 @@ function azParseEsperada(s) {
 }
 
 /* ── Clasificar una palabra escrita contra la esperada ── */
-function azClasificar(u, e, modo) {
+function azClasificar(u, e, modo, formaCasi) {
   const clave = modo === "ru" ? azClaveRu : modo === "translit" ? azClaveTr : azClaveEs;
   const ku = clave(u), ke = clave(e);
   const r = { escrito: u, esperado: e, estado: "ok", motivo: "", letras: null };
@@ -170,7 +170,9 @@ function azClasificar(u, e, modo) {
   const comun = au.filter(function (x) { return ae.some(function (y) { return y.id === x.id; }); })[0];
   if (comun) {
     const ye = ae.filter(function (y) { return y.id === comun.id; })[0];
-    r.estado = "mal";
+    /* formaCasi (06/10/2026, Manu): en las primeras unidades, otra forma de la palabra correcta
+       (мои por мой) es Casi: el alumno todavía no conoce bien las formas */
+    r.estado = formaCasi ? "casi" : "mal";
     r.motivo = "Escribiste «" + u + "» (" + azEtiq(comun) + " de " + comun.lema + "). Acá va «" + e + "» (" + azEtiq(ye) + ").";
     return r;
   }
@@ -269,7 +271,7 @@ function azCorregir(respuesta, esperadas, opts) {
   const bajar = function (r) { if (r < peor) peor = r; };
   mejor.al.ops.forEach(function (o) {
     if (o.e && o.u) {
-      const c = azClasificar(o.u, o.e.t, modo);
+      const c = azClasificar(o.u, o.e.t, modo, !!opts.formaCasi);
       c.i = o.e.i;
       if (c.nota) out.notas.push(c.nota);
       if (c.estado === "casi") bajar(AZ_R_CASI);

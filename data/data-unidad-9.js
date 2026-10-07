@@ -423,7 +423,8 @@ function ejerciciosUnidad9() {
   const pal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
   const K = w => azFormaClave(w);
   const info = w => azIndiceFormas().get(K(w)) || [];
-  const frases = t => t.split(/(?<=[.!?])\s*/).map(x => x.trim()).filter(x => pal(x).length >= 1);
+  const frases = t => t.split(/(?<=[.!?])\s*|\n+/)   /* también el renglón nuevo (06/10/2026) */
+    .map(x => x.trim()).filter(x => pal(x).length >= 1);
   const BUDU = ["буду", "будешь", "будет", "будем", "будете", "будут"];
   const MOV = ["пойду", "пойдешь", "пойдет", "пойдем", "пойдете", "пойдут", "поеду", "поедешь", "поедет", "поедем", "поедете", "поедут"];
   const esInf = w => info(w).some(x => (lexComerById(x[0]) || {}).posNormalized === "verbo" && K((lexComerById(x[0]) || {}).ru || "") === K(w));

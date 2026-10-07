@@ -583,7 +583,8 @@ function ejerciciosUnidad5() {
   const pal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
   const info = w => { const r = azIndiceFormas().get(azFormaClave(w)); return r || []; };
   const esVerbo = w => { const r = info(w); return r.length > 0 && r.every(x => (lexComerById(x[0]) || {}).posNormalized === "verbo" && !/imper/i.test(x[2] || "")); };
-  const frases = t => t.split(/(?<=[.!?])\s*/).map(x => x.trim()).filter(x => pal(x).length >= 1);
+  const frases = t => t.split(/(?<=[.!?])\s*|\n+/)   /* también el renglón nuevo (06/10/2026) */
+    .map(x => x.trim()).filter(x => pal(x).length >= 1);
   const verbos = t => new Set(pal(t).filter(esVerbo).map(w => info(w)[0][0])).size;
   const acusativos = t => {
     let n = 0;

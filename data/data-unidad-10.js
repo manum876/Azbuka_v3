@@ -435,7 +435,8 @@ function ejerciciosUnidad10() {
   const pal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
   const K = w => azFormaClave(w);
   const info = w => azIndiceFormas().get(K(w)) || [];
-  const frases = t => t.split(/(?<=[.!?])\s*/).map(x => x.trim()).filter(x => pal(x).length >= 1);
+  const frases = t => t.split(/(?<=[.!?])\s*|\n+/)   /* también el renglón nuevo (06/10/2026) */
+    .map(x => x.trim()).filter(x => pal(x).length >= 1);
   const forma = (w, i) => info(w).some(x => { const cz = casosById(x[0]); if (!cz) return false; const a = cz.sg || cz.pl; return a && K(a[i]) === K(w) && K(a[0]) !== K(w); });
   const GEN_P = ["у", "нет", "без", "для", "после", "до", "из", "около", "возле", "много", "мало", "немного", "стакан", "чашка"];
   const DAT_PR = ["мне", "тебе", "ему", "ей", "нам", "вам", "им"];

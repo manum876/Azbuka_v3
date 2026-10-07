@@ -544,7 +544,8 @@ function ejerciciosUnidad4() {
   const info = w => { const idx = azIndiceFormas(); const r = idx.get(azFormaClave(w)); return r || []; };
   /* Es verbo si todas sus lecturas son de un verbo y no es un imperativo (мой es «mi» y también «lavá»: no cuenta) */
   const esVerbo = w => { const r = info(w); return r.length > 0 && r.every(x => (lexComerById(x[0]) || {}).posNormalized === "verbo" && !/imper/i.test(x[2] || "")); };
-  const frases = t => t.split(/[.!?]+/).map(x => x.trim()).filter(x => pal(x).length >= 2);
+  const frases = t => t.split(/[.!?\n]+/)   /* también el renglón nuevo (06/10/2026) */
+    .map(x => x.trim()).filter(x => pal(x).length >= 2);
   const acusativos = t => {
     let n = 0;
     frases(t).forEach(f => { const w = pal(f); for (let i = 0; i + 1 < w.length; i++) if (esVerbo(w[i])) {

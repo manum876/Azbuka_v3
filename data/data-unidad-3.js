@@ -116,31 +116,31 @@ const UNIDAD_3 = {
       intro: "Un sustantivo es la palabra que nombra algo: una persona, un animal, un lugar, un objeto o una idea. En ruso, cada sustantivo tiene un género, y el género se ve en cómo termina la palabra.",
       secciones: [
         { id: "u3-sin-articulos", titulo: "Sin artículos",
-          texto: "El ruso no tiene «el», «la», «un» ni «una». Дом puede ser «casa», «una casa» o «la casa»: el contexto lo aclara. Y, como viste en la Unidad 2, en presente tampoco se dice el verbo «ser».",
+          texto: "El ruso no tiene «el», «la», «un» ni «una». Дом puede ser «casa», «una casa» o «la casa»: el contexto lo aclara. Y en presente tampoco se dice el verbo «ser».",
           desarmar: { es: "Es una casa / Esta es la casa.", partes: [
             { txt: "Э́то", rol: "esto", nota: "Э́то señala algo: «esto», «eso». No cambia nunca." },
             { txt: "дом", rol: "qué es", nota: "Дом = casa. Sin artículo: según el contexto, «una casa» o «la casa»." }] },
           ejemplos: [
             { ru: "Э́то {окно́}.", es: "Es una ventana / Esta es la ventana.", por: "La misma frase sirve para «una» y para «la»: el ruso no las distingue." },
             { ru: "Э́то {ма́ма}.", es: "Es mamá / Esta es mamá.", por: "Ni artículo ni verbo: э́то y la palabra alcanzan." },
-            { ru: "Где {кни́га}?", es: "¿Dónde está el libro?", por: "Где (Unidad 2) y la palabra. Tampoco hace falta «está»." }],
+            { ru: "Где {кни́га}?", es: "¿Dónde está el libro?", por: "Где y la palabra: tampoco hace falta «está»." }],
           destacado: "Дом = casa, una casa, la casa.",
           mas: { texto: "¿Cómo se sabe si es «una» o «la»? Por la situación. Si alguien señala una casa y dice Э́то дом, es «esta es la casa»; si responde a «¿qué es eso?», es «es una casa». Cuando hace falta precisar, el ruso usa otras palabras, como мой («mi»): мой дом, «mi casa».",
             ejemplos: [{ ru: "Э́то {мой} дом.", es: "Esta es mi casa.", por: "Мой ya dice de quién es: no hace falta nada más." }] },
           chequeo: [{ pide: "¿Cuál de las dos suena natural en ruso?", opciones: ["Э́то окно́.", "Э́то есть окно́."], ok: "Э́то окно́.", por: "En presente no se dice el verbo «ser»: э́то y la palabra." }] },
         { id: "u3-tres-generos", titulo: "Tres géneros",
-          texto: "En español hay dos géneros; en ruso hay tres: masculino, femenino y **neutro**. Y el género de una palabra rusa muchas veces no coincide con el español: дом es masculino, aunque «casa» sea femenina; окно́ es neutro, aunque «ventana» sea femenina. Por eso el género se aprende mirando la palabra rusa, no pensando en la española.\nUna forma fácil de verlo es con мой («mi»), que tiene una forma para cada género:",
+          texto: "En español hay dos géneros; en ruso hay tres: masculino, femenino y **neutro**. El género de cada palabra se aprende mirando la palabra rusa: muchas veces no coincide con el de su traducción.\nUna forma fácil de verlo es con мой («mi»), que tiene una forma para cada género:",
           ejemplos: [
-            { ru: "{Мой} дом.", es: "Mi casa.", por: "Мой: masculino. «Casa» es femenina en español, pero дом no." },
+            { ru: "{Мой} дом.", es: "Mi casa.", por: "Дом es masculino: va мой." },
             { ru: "{Моя́} ма́ма.", es: "Mi mamá.", por: "Моя́: femenino." },
-            { ru: "{Моё} окно́.", es: "Mi ventana.", por: "Моё: neutro. «Ventana» es femenina en español; окно́ es neutro." }],
+            { ru: "{Моё} окно́.", es: "Mi ventana.", por: "Окно́ es neutro: va моё." }],
           destacado: "мой дом · моя́ ма́ма · моё окно́: «mi» tiene una forma por género.",
-          mas: { texto: "El neutro no quiere decir «cosa». Стол (mesa) es masculino y кни́га (libro), femenino, aunque sean cosas. El género es gramatical: lo da la terminación de la palabra, no lo que nombra. La única excepción importante son las personas, que vas a ver en el módulo 5.\n¿Para qué sirve saberlo? Para que las palabras que acompañan al sustantivo concuerden con él: «mi», los adjetivos del módulo 7 y, más adelante, otras palabras." },
+          mas: { texto: "El neutro no quiere decir «cosa». Стол (mesa) es masculino y кни́га (libro), femenino, aunque sean cosas. El género es gramatical: lo da la terminación de la palabra, no lo que nombra. La única excepción importante son las personas, que vas a ver más adelante.\n¿Para qué sirve saberlo? Para que las palabras que acompañan al sustantivo concuerden con él: «mi», los adjetivos del módulo 7 y, más adelante, otras palabras." },
           chequeo: [{ pide: "¿Qué forma de «mi» va con окно́?", opciones: ["мой", "моя́", "моё"], ok: "моё", por: "Окно́ es neutro, así que va моё." }] },
         { id: "u3-terminacion", titulo: "La terminación manda",
-          texto: "Casi siempre, el género se reconoce por la última letra:\nconsonante → masculino (стол)\n**-а** o **-я** → femenino (ма́ма, ку́хня)\n**-о** o **-е** → neutro (окно́, мо́ре)\nLos módulos que siguen muestran cada caso con más ejemplos, y las pocas excepciones.",
+          texto: "Casi siempre, el género se reconoce por la última letra:\nconsonante → masculino (стол)\n**-а** o **-я** → femenino (ма́ма, ку́хня)\n**-о** o **-е** → neutro (окно́, мо́ре)\nA continuación vas a ver cada caso con más ejemplos, y las pocas excepciones.",
           truco: "Mirá siempre el final de la palabra: ahí está el género.",
-          mas: { texto: "Hay tres grupos que no siguen esta regla, y los vas a ver uno por uno: las que terminan en **-ь**, que pueden ser masculinas o femeninas (módulos 2 y 3); unas pocas en **-мя**, que son neutras (módulo 4), y los hombres que terminan en **-а**, como па́па (módulo 5). Son pocas, pero muy usadas." },
+          mas: { texto: "Hay tres grupos que no siguen esta regla, y los vas a ver uno por uno: las que terminan en **-ь**, que pueden ser masculinas o femeninas; unas pocas en **-мя**, que son neutras, y los hombres que terminan en **-а**, como па́па. Son pocas, pero muy usadas." },
           chequeo: [
             { pide: "Ры́ба: ¿qué género tiene?", opciones: ["masculino", "femenino", "neutro"], ok: "femenino", por: "Termina en **-а**." },
             { pide: "Хлеб: ¿qué género tiene?", opciones: ["masculino", "femenino", "neutro"], ok: "masculino", por: "Termina en consonante." },
@@ -153,11 +153,11 @@ const UNIDAD_3 = {
           texto: "Дом, стол, го́род, телефо́н, брат, кот: si la palabra termina en consonante, es masculina. Es la regla más segura del ruso: casi no tiene excepciones.",
           ejemplos: [
             { ru: "{Мой} брат.", es: "Mi hermano.", por: "Брат termina en **т**, una consonante: masculino. Por eso va мой." },
-            { ru: "Э́то {мой} телефо́н.", es: "Este es mi teléfono.", por: "Termina en **н**: masculino, igual que en español." },
-            { ru: "Где {мой} стол?", es: "¿Dónde está mi mesa?", por: "Стол termina en **л**: masculino. En español «mesa» es femenina: no te guíes por el español." },
-            { ru: "{Мой} го́род.", es: "Mi ciudad.", por: "Го́род termina en **д**: masculino, aunque «ciudad» sea femenina." }],
+            { ru: "Э́то {мой} телефо́н.", es: "Este es mi teléfono.", por: "Termina en **н**: masculino." },
+            { ru: "Где {мой} стол?", es: "¿Dónde está mi mesa?", por: "Стол termina en **л**: masculino." },
+            { ru: "{Мой} го́род.", es: "Mi ciudad.", por: "Го́род termina en **д**: masculino." }],
           destacado: "Consonante al final = masculino.",
-          errores: [{ mal: "Моя́ стол.", bien: "{Мой} стол.", por: "Стол termina en consonante: masculino, aunque «mesa» sea femenina." }],
+          errores: [{ mal: "Моя́ стол.", bien: "{Мой} стол.", por: "Стол termina en consonante: masculino." }],
           chequeo: [{ pide: "Кот termina en **т**. ¿Qué género tiene?", opciones: ["masculino", "femenino", "neutro"], ok: "masculino", por: "Consonante al final: masculino." }] },
         { id: "u3-masc-i", titulo: "Terminan en -й",
           texto: "Музе́й, трамва́й, чай: la **й** cuenta como consonante, así que también son masculinas. Fijate en la diferencia con **-я**: чай termina en **й** y es masculino; ку́хня termina en **я** y es femenino.",
@@ -166,25 +166,25 @@ const UNIDAD_3 = {
             { ru: "Э́то {музе́й}.", es: "Es un museo.", por: "Музе́й termina en **й**: masculino." }],
           chequeo: [{ pide: "¿Cuál es masculina?", opciones: ["чай", "ку́хня"], ok: "чай", por: "Чай termina en **й**. Ку́хня termina en **я**: es femenina." }] },
         { id: "u3-masc-blando", titulo: "Algunas terminan en -ь",
-          texto: "Algunas palabras masculinas terminan en **-ь**: слова́рь, учи́тель, день, медве́дь. Con **-ь** no hay una regla clara, porque también hay femeninas que terminan así (las ves en el módulo 3). Lo más práctico es aprenderlas junto con una palabra que muestre el género, como большо́й («grande») o мой.",
+          texto: "Algunas palabras masculinas terminan en **-ь**: слова́рь, учи́тель, день, медве́дь. Con **-ь** no hay una regla clara, porque también hay femeninas que terminan así. Lo más práctico es aprenderlas junto con una palabra que muestre el género, como большо́й («grande») o мой.",
           ejemplos: [
             { ru: "{Большо́й} слова́рь.", es: "Un diccionario grande.", por: "Por la terminación no se sabe: большо́й, que es masculino, lo muestra." },
             { ru: "{Мой} учи́тель.", es: "Mi profesor.", por: "Учи́тель termina en **-ь**. Мой muestra que es masculino." }],
           truco: "Las terminadas en -ь se aprenden con un adjetivo: большо́й слова́рь.",
-          mas: { texto: "Dos pistas que sí sirven. Las palabras que nombran a alguien por lo que hace y terminan en **-тель** son masculinas: учи́тель, преподава́тель (profesor de universidad). Y en la Unidad 1 viste otra: después de **ж**, **ш**, **ч**, **щ**, sin **ь** la palabra es masculina; con **ь**, femenina.",
+          mas: { texto: "Dos pistas que sí sirven. Las palabras que nombran a alguien por lo que hace y terminan en **-тель** son masculinas: учи́тель, преподава́тель (profesor de universidad). Y hay otra que ya conocés de las letras: después de **ж**, **ш**, **ч**, **щ**, sin **ь** la palabra es masculina; con **ь**, femenina.",
             ejemplos: [{ ru: "{Мой} врач.", es: "Mi médico.", por: "Врач termina en **ч** sin **ь**: masculino." }] } }
 ] },
     { id: "u3m3", n: 3, tipo: "leccion", titulo: "Género femenino", resumen: "-а, -я y algunas en -ь.", genero: "f",
       intro: "Las palabras femeninas terminan casi siempre en **-а** o en **-я**.",
       secciones: [
         { id: "u3-fem-a", titulo: "Terminan en -а",
-          texto: "Маши́на, кни́га, де́вушка, ма́ма, ко́мната: si termina en **-а**, casi siempre es femenina. Muchas no coinciden con el español: кни́га es femenina, aunque «libro» sea masculino.",
+          texto: "Маши́на, кни́га, де́вушка, ма́ма, ко́мната: si termina en **-а**, casi siempre es femenina.",
           ejemplos: [
             { ru: "{Моя́} кни́га.", es: "Mi libro.", por: "Кни́га termina en **-а**: femenino. Que «libro» sea masculino no importa." },
-            { ru: "{Моя́} маши́на.", es: "Mi auto.", por: "Termina en **-а**: femenino. Otra vez, distinto del español." },
+            { ru: "{Моя́} маши́на.", es: "Mi auto.", por: "Termina en **-а**: femenino." },
             { ru: "Где {моя́} ко́мната?", es: "¿Dónde está mi habitación?", por: "Ко́мната termina en **-а**: femenino, va моя́." }],
           destacado: "-а o -я al final = femenino (casi siempre).",
-          errores: [{ mal: "Мой кни́га.", bien: "{Моя́} кни́га.", por: "Кни́га termina en **-а**: femenina, aunque «libro» sea masculino." }],
+          errores: [{ mal: "Мой кни́га.", bien: "{Моя́} кни́га.", por: "Кни́га termina en **-а**: femenina." }],
           chequeo: [{ pide: "¿Qué forma de «mi» va con шко́ла?", opciones: ["мой", "моя́", "моё"], ok: "моя́", por: "Шко́ла termina en **-а**: femenina." }] },
         { id: "u3-fem-ia", titulo: "Terminan en -я",
           texto: "Ку́хня, семья́, фотогра́фия: **-я** también es femenino.",
@@ -192,27 +192,27 @@ const UNIDAD_3 = {
             { ru: "{Моя́} семья́.", es: "Mi familia.", por: "Семья́ termina en **-я**: femenino." },
             { ru: "Э́то {ку́хня}.", es: "Es la cocina.", por: "Ку́хня termina en **-я**: femenino. No la confundas con **-й**: чай es masculino." }] },
         { id: "u3-fem-blando", titulo: "Algunas terminan en -ь",
-          texto: "Algunas palabras femeninas también terminan en **-ь**: дверь, ночь, тетра́дь, крова́ть, пло́щадь. Como con las masculinas del módulo 2, no hay una regla: conviene aprenderlas con un adjetivo que las acompañe, porque el adjetivo muestra el género.",
+          texto: "Algunas palabras femeninas también terminan en **-ь**: дверь, ночь, тетра́дь, крова́ть, пло́щадь. Como con las masculinas en **-ь**, no hay una regla: conviene aprenderlas con un adjetivo que las acompañe, porque el adjetivo muestra el género.",
           ejemplos: [
             { ru: "{Больша́я} дверь.", es: "Una puerta grande.", por: "Дверь termina en **-ь**: больша́я, que es femenino, lo muestra." },
-            { ru: "{Моя́} тетра́дь.", es: "Mi cuaderno.", por: "Тетра́дь termina en **-ь** y es femenina, aunque «cuaderno» sea masculino." }],
+            { ru: "{Моя́} тетра́дь.", es: "Mi cuaderno.", por: "Тетра́дь termina en **-ь** y es femenina: lo muestra моя́." }],
           truco: "Las terminadas en -ь se aprenden con un adjetivo: больша́я дверь, большо́й слова́рь.",
-          mas: { texto: "Una pista de la Unidad 1: si antes de la **ь** hay **ж**, **ш**, **ч** o **щ**, la palabra es femenina. Ночь y вещь son femeninas; врач, sin **ь**, es masculino.",
+          mas: { texto: "Una pista que ya conocés de las letras: si antes de la **ь** hay **ж**, **ш**, **ч** o **щ**, la palabra es femenina. Ночь y вещь son femeninas; врач, sin **ь**, es masculino.",
             ejemplos: [{ ru: "Э́то {вещь}.", es: "Es una cosa.", por: "Termina en **щь**: femenina." }] },
-          chequeo: [{ pide: "Ночь termina en **чь**. ¿Masculino o femenino?", opciones: ["masculino", "femenino"], ok: "femenino", por: "**ч** con **ь** al final: femenino (Unidad 1)." }] }
+          chequeo: [{ pide: "Ночь termina en **чь**. ¿Masculino o femenino?", opciones: ["masculino", "femenino"], ok: "femenino", por: "**ч** con **ь** al final: femenino." }] }
 ] },
     { id: "u3m4", n: 4, tipo: "leccion", titulo: "Género neutro", resumen: "-о, -е y las pocas en -мя.", genero: "n",
       intro: "El neutro no existe en español para los sustantivos, pero en ruso es muy común y fácil de reconocer.",
       secciones: [
         { id: "u3-neutro", titulo: "Terminan en -о o -е",
-          texto: "Окно́, письмо́, сло́во, я́блоко, мо́ре, зда́ние, пла́тье: **-о** y **-е** al final son neutro. Como en español no hay sustantivos neutros, es el género que más hay que mirar: en ruso, «mi ventana» es моё окно́.",
+          texto: "Окно́, письмо́, сло́во, я́блоко, мо́ре, зда́ние, пла́тье: **-о** y **-е** al final son neutro. Es el género nuevo, así que conviene mirarlo con atención: моё окно́, моё письмо́.",
           ejemplos: [
             { ru: "{Моё} окно́.", es: "Mi ventana.", por: "Окно́ termina en **-о**: neutro, va моё." },
-            { ru: "{Моё} письмо́.", es: "Mi carta.", por: "Termina en **-о**: neutro. «Carta» es femenina en español." },
+            { ru: "{Моё} письмо́.", es: "Mi carta.", por: "Termina en **-о**: neutro." },
             { ru: "Где {моё} я́блоко?", es: "¿Dónde está mi manzana?", por: "Я́блоко termina en **-о**: neutro." },
             { ru: "Э́то {мо́ре}.", es: "Es el mar.", por: "Мо́ре termina en **-е**: neutro." }],
           destacado: "-о o -е al final = neutro.",
-          errores: [{ mal: "Моя́ окно́.", bien: "{Моё} окно́.", por: "Окно́ termina en **-о**: neutro. «Ventana» es femenina en español, pero en ruso no." }],
+          errores: [{ mal: "Моя́ окно́.", bien: "{Моё} окно́.", por: "Окно́ termina en **-о**: neutro." }],
           chequeo: [{ pide: "¿Qué forma de «mi» va con сло́во?", opciones: ["мой", "моя́", "моё"], ok: "моё", por: "Сло́во termina en **-о**: neutro." }] },
         { id: "u3-neutro-mia", titulo: "Las de -мя",
           texto: "Вре́мя y и́мя terminan en **-я**, pero son neutras. Son pocas y muy usadas: vale la pena recordarlas.",
@@ -222,7 +222,7 @@ const UNIDAD_3 = {
           texto: "Кафе́ y метро́ vienen de otros idiomas. Son neutras y no cambian nunca, ni en plural: «un subte» y «dos subtes» se dicen igual, метро́. Más adelante vas a ver otras palabras como estas, y todas funcionan así.",
           ejemplos: [
             { ru: "Где {метро́}?", es: "¿Dónde está el subte?", por: "Метро́ termina en **-о**: neutro, y nunca cambia." },
-            { ru: "Э́то {кафе́}.", es: "Es un café (el lugar).", por: "Кафе́ es la cafetería: neutro. La bebida es ко́фе, y la vas a ver en el módulo 5." }] }
+            { ru: "Э́то {кафе́}.", es: "Es un café (el lugar).", por: "Кафе́ es la cafetería: neutro. La bebida es otra palabra: ко́фе." }] }
 ] },
     { id: "u3m5", n: 5, tipo: "leccion", nPractica: 5, titulo: "Excepciones", resumen: "Па́па, дя́дя, мужчи́на: masculinos en -а.",
       intro: "Algunas palabras terminan en **-а** o **-я** pero son masculinas. La razón es simple: nombran a un hombre.",
@@ -240,7 +240,7 @@ const UNIDAD_3 = {
           mas: { texto: "Los rusos usan mucho los nombres cortos, y muchos de hombre terminan en **-а**, como Ди́ма. Todos son masculinos. Con estas palabras, lo que concuerda es masculino: мой, большо́й." },
           chequeo: [{ pide: "¿Qué forma va con де́душка?", opciones: ["мой", "моя́"], ok: "мой", por: "Де́душка nombra a un hombre: masculino." }] },
         { id: "u3-kofe", titulo: "Ко́фе",
-          texto: "Ко́фе termina en **-е** pero es masculino: мой ко́фе. En el habla informal también se oye como neutro, pero la forma correcta es masculina. No lo confundas con кафе́ (módulo 4): кафе́ es el lugar, y es neutro.",
+          texto: "Ко́фе termina en **-е** pero es masculino: мой ко́фе. En el habla informal también se oye como neutro, pero la forma correcta es masculina. No lo confundas con кафе́: кафе́ es el lugar, y es neutro.",
           ejemplos: [
             { ru: "Где {мой} ко́фе?", es: "¿Dónde está mi café?", por: "Ко́фе es masculino, aunque termine en **-е**." },
             { ru: "Э́то {кафе́}.", es: "Es una cafetería.", por: "Кафе́, el lugar: neutro." }] },
@@ -264,10 +264,10 @@ const UNIDAD_3 = {
             { ru: "Где {две́ри}?", es: "¿Dónde están las puertas?", por: "Дверь termina en **-ь**: la **ь** cambia por **и**." }],
           destacado: "-ы en general; -и después de -я, -й, -ь.",
           errores: [{ mal: "столи́", bien: "{столы́}", por: "Después de una consonante como **л** va **-ы**. La **-и** es para **-я**, **-й**, **-ь** y las 7 letras de la sección siguiente." }],
-          mas: { texto: "¿Por qué **-и** después de **-я**, **-й** y **-ь**? Porque esas palabras terminan en un sonido blando, y la **и** es la vocal blanda que corresponde a **ы** (lo viste en la Unidad 1: **ы** dura, **и** blanda). El plural respeta cómo suena la palabra." },
+          mas: { texto: "¿Por qué **-и** después de **-я**, **-й** y **-ь**? Porque esas palabras terminan en un sonido blando, y la **и** es la vocal blanda que corresponde a **ы** (**ы** dura, **и** blanda). El plural respeta cómo suena la palabra." },
           chequeo: [{ pide: "¿Plural de ку́хня?", opciones: ["ку́хни", "ку́хны"], ok: "ку́хни", por: "**-я** pasa a **-и**." }] },
         { id: "u3-plural-7-letras", titulo: "La regla de las 7 letras",
-          texto: "Después de г, к, х, ж, ш, ч, щ nunca va ы: va и. Por eso кни́га → кни́ги, ключ → ключи́, врач → врачи́. Es la misma regla de la Unidad 1.",
+          texto: "Después de г, к, х, ж, ш, ч, щ nunca va ы: va и. Por eso кни́га → кни́ги, ключ → ключи́, врач → врачи́. Es la misma regla de las 7 letras que ya conocés.",
           ejemplos: [
             { ru: "Где {кни́ги}?", es: "¿Dónde están los libros?", por: "Кни́га haría **-ы**, pero después de **г** no va **ы**: queda кни́ги." },
             { ru: "Э́то {ключи́}.", es: "Son las llaves.", por: "Ключ termina en **ч**: se agrega **-и**, no **-ы**." }],
@@ -301,7 +301,7 @@ const UNIDAD_3 = {
           texto: "Masculino **-ый** / **-ий** / **-ой** (но́вый, си́ний, большо́й), femenino **-ая** / **-яя** (но́вая, си́няя), neutro **-ое** / **-ее** (но́вое, си́нее) y plural **-ые** / **-ие** (но́вые, си́ние). Va antes del sustantivo: но́вый дом, но́вая маши́на, но́вое окно́, но́вые дома́.",
           ejemplos: [
             { ru: "{Но́вый} дом.", es: "Una casa nueva.", por: "Дом es masculino: но́вый, con **-ый**." },
-            { ru: "{Но́вая} маши́на.", es: "Un auto nuevo.", por: "Маши́на es femenino: но́вая, con **-ая**. «Auto» es masculino en español, pero manda el ruso." },
+            { ru: "{Но́вая} маши́на.", es: "Un auto nuevo.", por: "Маши́на es femenino: но́вая, con **-ая**." },
             { ru: "{Но́вое} окно́.", es: "Una ventana nueva.", por: "Окно́ es neutro: но́вое, con **-ое**." },
             { ru: "{Но́вые} дома́.", es: "Casas nuevas.", por: "En plural hay una sola forma para los tres géneros: **-ые**." }],
           destacado: "но́вый дом · но́вая маши́на · но́вое окно́ · но́вые дома́",
@@ -311,11 +311,11 @@ const UNIDAD_3 = {
             { pide: "¿Qué forma va con кни́га?", opciones: ["но́вый", "но́вая", "но́вое"], ok: "но́вая", por: "Кни́га es femenino." },
             { pide: "¿Y con окно́?", opciones: ["но́вый", "но́вая", "но́вое"], ok: "но́вое", por: "Окно́ es neutro." }] },
         { id: "u3-adj-genero", titulo: "Primero el género",
-          texto: "Para elegir la forma del adjetivo, primero hay que saber el género del sustantivo. Por eso los módulos anteriores son la base: con па́па va el masculino, aunque termine en **-а**, y con дверь va el femenino, aunque termine en **-ь**.",
+          texto: "Para elegir la forma del adjetivo, primero hay que saber el género del sustantivo. Por eso todo lo que viste sobre el género es la base: con па́па va el masculino, aunque termine en **-а**, y con дверь va el femenino, aunque termine en **-ь**.",
           ejemplos: [
             { ru: "{Хоро́ший} па́па.", es: "Un buen papá.", por: "Па́па termina en **-а**, pero es un hombre: masculino, хоро́ший." },
             { ru: "{Ста́рая} дверь.", es: "Una puerta vieja.", por: "Дверь es femenina: ста́рая." },
-            { ru: "{Хоро́ший} ко́фе.", es: "Un buen café.", por: "Ко́фе es masculino (módulo 5)." }],
+            { ru: "{Хоро́ший} ко́фе.", es: "Un buen café.", por: "Ко́фе es masculino, aunque termine en **-е**." }],
           errores: [{ mal: "хоро́шая па́па", bien: "{хоро́ший} па́па", por: "Па́па es un hombre: masculino." }],
           chequeo: [{ pide: "¿Cuál está bien?", opciones: ["ста́рый дверь", "ста́рая дверь"], ok: "ста́рая дверь", por: "Дверь es femenina." }] },
         { id: "u3-adj-7-letras", titulo: "Después de г, к, х, ж, ш, ч, щ",
@@ -332,7 +332,7 @@ const UNIDAD_3 = {
       intro: "Con lo que ya sabés alcanza para describir: qué es algo y cómo es.",
       secciones: [
         { id: "u3-eto-adj", titulo: "Э́то + adjetivo + sustantivo",
-          texto: "Э́то большо́й дом («es una casa grande»), э́то но́вая маши́на («es un auto nuevo»), э́то краси́вый парк («es un parque lindo»). Como en la Unidad 2, no hace falta el verbo «ser».",
+          texto: "Э́то большо́й дом («es una casa grande»), э́то но́вая маши́на («es un auto nuevo»), э́то краси́вый парк («es un parque lindo»). No hace falta el verbo «ser».",
           ejemplos: [
             { ru: "Э́то {краси́вый} парк.", es: "Es un parque lindo.", por: "Парк es masculino: краси́вый." },
             { ru: "Э́то {но́вая} ла́мпа.", es: "Es una lámpara nueva.", por: "Ла́мпа es femenino: но́вая." }] },
@@ -349,10 +349,10 @@ const UNIDAD_3 = {
         { id: "u3-pronombres", titulo: "Он, она́, оно́: no repetir la palabra",
           texto: "Para no repetir el sustantivo, se lo reemplaza por он, она́ u оно́, igual que en español decimos «él» o «ella». La diferencia es que en ruso esto vale también para las cosas, y manda el género de la palabra rusa: дом es masculino, entonces он большо́й («es grande»); ла́мпа es femenino, entonces она́ но́вая («es nueva»); окно́ es neutro, entonces оно́ ма́ленькое («es chica»). En plural, siempre они́: дома́ → они́ больши́е («son grandes»).",
           ejemplos: [
-            { ru: "Где стол? — {Он} там.", es: "¿Dónde está la mesa? — Está ahí.", por: "Стол es masculino: он, aunque «mesa» sea femenina." },
-            { ru: "Где кни́га? — {Она́} там.", es: "¿Dónde está el libro? — Está ahí.", por: "Кни́га es femenino: она́, aunque «libro» sea masculino." },
+            { ru: "Где стол? — {Он} там.", es: "¿Dónde está la mesa? — Está ahí.", por: "Стол es masculino: он." },
+            { ru: "Где кни́га? — {Она́} там.", es: "¿Dónde está el libro? — Está ahí.", por: "Кни́га es femenino: она́." },
             { ru: "Где окно́? — {Оно́} там.", es: "¿Dónde está la ventana? — Está ahí.", por: "Окно́ es neutro: оно́." }],
-          errores: [{ mal: "Где стол? — Она́ там.", bien: "Где стол? — {Он} там.", por: "Manda el género ruso: стол es masculino, aunque «mesa» sea femenina." }],
+          errores: [{ mal: "Где стол? — Она́ там.", bien: "Где стол? — {Он} там.", por: "Стол es masculino: se reemplaza por он." }],
           chequeo: [{ pide: "Дом… ¿он, она́ u оно́?", opciones: ["он", "она́", "оно́"], ok: "он", por: "Дом es masculino." }] }
 ] },
     { id: "u3m10", n: 10, tipo: "proyecto", titulo: "Proyecto final", resumen: "Describir tu casa.",
@@ -362,7 +362,7 @@ const UNIDAD_3 = {
         { txt: "Decir que algo hay (есть…)", rx: "есть [а-яе]+" },
         { txt: "Usar al menos dos adjetivos", rx: "([а-яе]+(ый|ий|ой|ая|яя|ое|ее|ые|ие)[ .,!]).*([а-яе]+(ый|ий|ой|ая|яя|ое|ее|ые|ие)[ .,!])" },
         { txt: "Usar un plural", rx: "(ы|и|а|я)[ .,!]" },
-        { txt: "Al menos cinco frases", rx: "([^.!?]+[.!?]\\s*){5,}" }
+        { txt: "Al menos cinco frases", fn: t => azFrases(t).length >= 5 }   /* punto o renglón nuevo (06/10/2026) */
       ],
       consejos: [
         { rx: "(большой|маленький|новый|старый|красивый) (кухня|комната|квартира|машина|дверь|кровать|лампа|полка)", msg: "Esa palabra es femenina: el adjetivo va en **-ая** (больша́я ку́хня, но́вая крова́ть)." },
@@ -452,9 +452,9 @@ function ejerciciosUnidad3() {
     const base = { grupo: s.id, lex: [s.id], items: ["lex:" + s.id], oir: s.ru };
     const mv = Math.max(2, s.desde);          /* módulo de vocabulario: donde se vio */
     /* Vocabulario */
-    out.push(Object.assign({ id: "U3-pal-" + s.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: mv, pide: "Escribí en ruso: «" + s.es + "»", audio: s.ru, audioManual: true,
+    out.push(Object.assign({ id: "U3-pal-" + s.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: mv, formaCasi: true, pide: "Escribí en ruso: «" + s.es + "»", audio: s.ru, audioManual: true,
       pista: "Empieza con " + s.ru[0].toUpperCase() + " y tiene " + s.ru.length + " letras.", esperadas: [s.ac], idioma: "ru", explicacion: s.ac + " — " + s.es }, base));
-    out.push(Object.assign({ id: "U3-dic-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: mv, pide: "Escuchá y escribí la palabra.", audio: s.ru, esperadas: [s.ac], idioma: "ru",
+    out.push(Object.assign({ id: "U3-dic-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: mv, formaCasi: true, pide: "Escuchá y escribí la palabra.", audio: s.ru, esperadas: [s.ac], idioma: "ru",
       explicacion: s.ac + " — " + s.es }, base));
     const dis = baraja(sust.filter(x => x.tema === s.tema && x.id !== s.id && x.es !== s.es), i + 3).slice(0, 3);
     if (dis.length >= 2) out.push(Object.assign({ id: "U3-sig-" + s.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: mv, pide: "¿Qué significa?", grande: s.ac, audio: s.ru,
@@ -666,7 +666,8 @@ function ejerciciosUnidad3() {
   /* Frases */
   const pal = t => (t.match(/[А-Яа-яЁё\u0301]+(?:-[А-Яа-яЁё\u0301]+)*/g) || []);
   U3_FRASES.forEach(([m, ru, es], i) => {
-    const b = { grupo: "F3-" + i, oir: ru, items: [] };
+    /* Hasta el módulo 6 (antes de los adjetivos), otra forma de una palabra es Casi: мои por мой (06/10/2026) */
+    const b = { grupo: "F3-" + i, oir: ru, items: [], formaCasi: m <= 6 };
     out.push(Object.assign({ id: "U3-fdic-" + i, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: m, pide: "Escuchá y escribí la frase.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es[0] }, b));
     out.push(Object.assign({ id: "U3-fesru-" + i, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: m, pide: "Escribí en ruso: «" + es[0] + "»", audio: ru, audioManual: true,
       esperadas: U3_FRASES.filter(x => x[2][0] === es[0]).map(x => x[1]), idioma: "ru", explicacion: ru }, b));

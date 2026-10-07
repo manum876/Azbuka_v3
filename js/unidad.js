@@ -54,7 +54,9 @@
                diálogo o chat por turnos: cada respuesta se corrige con azSituacion.
    elegir y vf aceptan texto: [renglones] (02/10/2026): un texto de lectura en un solo
    recuadro; con textoOculto: true queda detrás de «Mostrar el texto» (ejercicios de audio).
-   Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir?, items?, regla? }
+   Todos: { id, tipo, dificultad, explicacion, recordar?, audio?, audioManual?, oir?, items?, regla?, formaCasi? }
+     formaCasi (escribir): otra forma de la palabra correcta cuenta como Casi (06/10/2026). Por defecto,
+            sí en las Unidades 1 y 2 y no desde la 3; un ejercicio lo puede fijar.
      regla: id de la sección de teoría que practica (06/10/2026). Si sale Casi o Mal (fuera de
             la evaluación), aparece «📖 Repasar la regla», que la abre en una hoja (AzHojaRegla).
      items: letras o palabras que practica («alfabeto:Б», «lex:CMR-…») para el semáforo
@@ -197,14 +199,17 @@
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
-  function Escribir({ ej, onRes, hecho, dark, c, examen }) {
+  function Escribir({ ej, onRes, hecho, dark, c, examen, unidad }) {
     const [txt, setTxt] = useState("");
     const [r, setR] = useState(null);
     const ref = useRef(null);
     const ru = ej.idioma === "ru";
     const comprobar = () => {
       if (!txt.trim()) return;
-      const res = azCorregir(txt, ej.esperadas, { idioma: ej.idioma });
+      /* Otra forma de la palabra correcta: Casi en las Unidades 1 y 2, y en los ejercicios que lo
+         piden (formaCasi), porque ahí la forma no es lo que se evalúa (06/10/2026) */
+      const formaCasi = ej.formaCasi != null ? ej.formaCasi : unidad <= 2;
+      const res = azCorregir(txt, ej.esperadas, { idioma: ej.idioma, formaCasi });
       setR(res);
       if (hecho == null) onRes(res.resultado);
     };
@@ -731,7 +736,7 @@
         h("div", { className: "pr-kick" }, titulo + " · " + (i + 1) + " de " + lista.length),
         h("div", { className: "pr-bar" }, h("div", { style: { width: ((i + (hecho != null ? 1 : 0)) / lista.length * 100) + "%" } })),
         examen && h("div", { className: "pr-pista", style: { textAlign: "left", margin: "-8px 0 10px" } }, "Parte: " + ej.parte),
-        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, examen: !!examen || !!onFin, medio: entiende === "medio" }) : "Ejercicio desconocido"),
+        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, unidad, examen: !!examen || !!onFin, medio: entiende === "medio" }) : "Ejercicio desconocido"),
         h("div", { className: "pr-pie" },
           h("button", { className: "pr-btn", style: { width: "100%" }, disabled: hecho == null, onClick: siguiente }, i + 1 < lista.length ? "Siguiente" : "Ver resultado")));
     } else if (examen) {

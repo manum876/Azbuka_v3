@@ -452,7 +452,8 @@ function ejerciciosUnidad8() {
   const pal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
   const clave = w => azFormaClave(w);
   const info = w => azIndiceFormas().get(clave(w)) || [];
-  const frases = t => t.split(/(?<=[.!?])\s*/).map(x => x.trim()).filter(x => pal(x).length >= 1);
+  const frases = t => t.split(/(?<=[.!?])\s*|\n+/)   /* también el renglón nuevo (06/10/2026) */
+    .map(x => x.trim()).filter(x => pal(x).length >= 1);
   /* forma de pasado: m / f / n / pl de algún verbo */
   const pasado = w => { for (const x of info(w)) { const v = verboById(x[0]); if (v && v.pasado) for (const g of ["m", "f", "n", "pl"]) if (clave(v.pasado[g]) === clave(w)) return { id: x[0], g, v }; } return null; };
   const presente = w => info(w).some(x => { const v = verboById(x[0]); return v && v.presente && v.presente.some(f => clave(f) === clave(w)); });

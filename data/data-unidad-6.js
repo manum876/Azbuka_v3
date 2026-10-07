@@ -492,7 +492,8 @@ function ejerciciosUnidad6() {
   const pal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
   const clave = w => azFormaClave(w);
   const info = w => azIndiceFormas().get(clave(w)) || [];
-  const frases = t => t.split(/(?<=[.!?])\s*/).map(x => x.trim()).filter(x => pal(x).length >= 1);
+  const frases = t => t.split(/(?<=[.!?])\s*|\n+/)   /* también el renglón nuevo (06/10/2026) */
+    .map(x => x.trim()).filter(x => pal(x).length >= 1);
   const MOV = ["идти", "ехать", "ходить", "ездить"];
   const esMov = w => info(w).some(x => { const e = lexComerById(x[0]); return e && MOV.indexOf(clave(e.ru)) >= 0; });
   const formaDe = (w, i) => info(w).some(x => { const cz = casosById(x[0]); if (!cz) return false; if (cz.tipo === "indeclinable") return true;

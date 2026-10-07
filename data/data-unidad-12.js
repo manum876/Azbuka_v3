@@ -687,7 +687,8 @@ function ejerciciosUnidad12() {
   const pal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
   const K = w => azFormaClave(w);
   const info = w => azIndiceFormas().get(K(w)) || [];
-  const frases = t => t.split(/(?<=[.!?])\s*/).map(x => x.trim()).filter(x => pal(x).length >= 1);
+  const frases = t => t.split(/(?<=[.!?])\s*|\n+/)   /* también el renglón nuevo (06/10/2026) */
+    .map(x => x.trim()).filter(x => pal(x).length >= 1);
   const BUDU = ["буду", "будешь", "будет", "будем", "будете", "будут"];
   const verbo = (w, fn) => info(w).some(x => { const v = verboById(x[0]); return v && fn(v, K(w)); });
   const igual = (lista, k) => (lista || []).some(f => K(f) === k);
