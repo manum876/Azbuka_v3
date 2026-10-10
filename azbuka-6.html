@@ -33,8 +33,9 @@
 /* ============================================================
    AZBUKA-6.HTML — Unidad 6: Ubicación, movimiento y prepositivo
    ------------------------------------------------------------
-   04/10/2026. Piezas de unidad-ui.js y unidad.js. Propio de esta
-   unidad: tablas «nominativo → dónde» (módulos 3, 5 y 6), mapa de
+   04/10/2026; 08/10/2026 (vocabulario nuevo: una tabla por grupo en
+   los módulos 3 a 7 y 9). Piezas de unidad-ui.js y unidad.js. Propio de esta
+   unidad: tablas «nominativo → dónde» (módulos 3 a 7 y 9), mapa de
    ciudades con la actividad «¿Dónde vive?» (módulo 4), ampliación
    con las excepciones (módulos 5 y 6), lecturas (módulo 10) y el
    desafío del día, que pasó al inicio (js/hoy.js).
@@ -167,14 +168,17 @@ function App() {
   let vista = null;
   if (mod) {
     const base = Object.values(D6.lug).filter(s => !s.amp && s.tipo === "lugar");
-    const casa = CASA6.map(lugar);
-    const afuera = base.filter(s => CASA6.indexOf(s.ac) < 0);
+    /* Una tabla por grupo, en el módulo donde se presenta (08/10/2026) */
+    const deMod = n => base.filter(s => s.desde === n);
+    const casa = CASA6.map(lugar).concat(deMod(5));
+    const objetos = Object.values(D6.lug).filter(s => s.tipo === "sobre" && s.desde === 5).concat([lugar("стол")]);
+    const ciudad = base.filter(s => s.desde <= 3 && CASA6.indexOf(s.ac) < 0).concat(deMod(6));
     const amp = n => (U6_AMPLIACION_RU[n] || "").split(" ").map(lugar).filter(Boolean);
     const bloqueAmp = n => amp(n).length > 0 && h("div", { style: { marginTop: 28, paddingTop: 6, borderTop: `1px solid ${c.border}` } },
       h("div", { className: "u-sec" }, "Ampliación · opcional"),
       h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Más lugares para quien quiera sumar vocabulario. Es opcional: no entra en la práctica de la unidad ni en la evaluación."),
-      n === 5 && h("div", { className: "u-truco", style: { marginTop: 10 } }, azFmt("**Excepción:** ва́нная (baño) y гости́ная (living) se declinan como adjetivos: в ва́нной, в гости́ной. Se aprenden así, de memoria.")),
-      n === 6 && h("div", { className: "u-truco", style: { marginTop: 10 } }, azFmt("**Con на, de memoria:** на вокза́ле (en la estación de tren), на по́чте (en el correo), на пля́же (en la playa).")),
+      n === 5 && h("div", { className: "u-truco", style: { marginTop: 10 } }, azFmt("**Excepción:** ва́нная (cuarto de baño), гости́ная (living), столо́вая (comedor) y прихо́жая (recibidor) se declinan como adjetivos: в ва́нной, в гости́ной, в столо́вой, в прихо́жей. Se aprenden así, de memoria.")),
+      n === 6 && h("div", { className: "u-truco", style: { marginTop: 10 } }, azFmt("**Excepción:** бу́лочная (panadería) y парикма́херская (peluquería) también se declinan como adjetivos: в бу́лочной, в парикма́херской.")),
       h(TablaDonde, { c, lista: amp(n) }),
       h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: amp(n).map(s => s.id), titulo: "Ampliación: " + mod.titulo.toLowerCase() }) }, "Tarjetas (" + amp(n).length + ")"),
       h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => practicarAmpliacion(mod) }, "Practicar la ampliación"));
@@ -184,12 +188,16 @@ function App() {
       h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
       mod.tipo === "leccion" && h(React.Fragment, null,
         h(AzSecciones, { secciones: mod.secciones }),
-        mod.n === 3 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los lugares de la unidad"), h(TablaDonde, { c, lista: base })),
+        mod.n === 3 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los lugares que ya conocés"), h(TablaDonde, { c, lista: base.filter(s => s.desde <= 3) })),
         mod.n === 4 && h(React.Fragment, null,
           h("div", { className: "u-sec" }, "Países"), h(TablaDonde, { c, lista: Object.values(D6.geo).filter(s => s.tipo === "pais") }),
+          h("div", { className: "u-sec" }, "Naturaleza y territorio"), h(TablaDonde, { c, lista: deMod(4) }),
           h("div", { className: "u-sec" }, "El mapa"), h(ActividadMapa, { c, green })),
-        mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "La casa"), h(TablaDonde, { c, lista: casa.concat([lugar("стол")]) })),
-        mod.n === 6 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Lugares"), h(TablaDonde, { c, lista: afuera })),
+        mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "La casa"), h(TablaDonde, { c, lista: casa }),
+          h("div", { className: "u-sec" }, "Muebles y objetos"), h(TablaDonde, { c, lista: objetos })),
+        mod.n === 6 && h(React.Fragment, null, h("div", { className: "u-sec" }, "La ciudad, el trabajo y el estudio"), h(TablaDonde, { c, lista: ciudad })),
+        mod.n === 7 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Eventos y actividades"), h(TablaDonde, { c, lista: deMod(7) })),
+        mod.n === 9 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Viajes"), h(TablaDonde, { c, lista: deMod(9) })),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
         (mod.n === 5 || mod.n === 6) && bloqueAmp(mod.n)),
       mod.tipo === "lectura" && h(React.Fragment, null,

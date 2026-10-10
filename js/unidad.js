@@ -1,7 +1,7 @@
 /* ============================================================
    UNIDAD.JS — Motor de práctica compartido por las unidades
    ------------------------------------------------------------
-   Versión 06/10/2026 (regla, cadena, diagnóstico, desarmar); antes, 05/10/2026. Arma una sesión de ejercicios del banco de la
+   Versión 10/10/2026 (las opciones se muestran sin las llaves de {я}); antes, 06/10/2026 (regla, cadena, diagnóstico, desarmar). Arma una sesión de ejercicios del banco de la
    unidad con el selector de progress.js (contador más bajo primero,
    errores que vuelven, mezcla de tipos, dificultad que se ajusta),
    la muestra a pantalla completa, corrige con corrector.js y guarda
@@ -74,6 +74,8 @@
 
   /* t puede ser un texto o un diálogo: [{ texto, genero, rate? }] (06/10/2026, U13: dos voces y velocidad) */
   function hablar(t) { if (Array.isArray(t)) { if (typeof azHablarSecuencia === "function") azHablarSecuencia(t); } else if (typeof azHablarRu === "function") azHablarRu(t); }
+  /* Opciones con {я}, {в} (palabras de una letra marcadas en el texto en español): se muestran sin las llaves (10/10/2026) */
+  function sinLlavesOp(o) { return String(o).replace(/\{([^}]*)\}/g, "$1"); }
   function mezclar(a) { return a.slice().sort(() => Math.random() - .5); }
 
   function Estilos({ c }) {
@@ -194,7 +196,7 @@
       ej.textoOculto && h(Texto, { ej }),
       h("div", { className: "pr-ops" + (larga ? " una" : "") }, ops.map(o => {
         const cls = !elegida ? "" : o === ej.correcta ? " ok" : o === elegida ? " mal" : "";
-        return h("button", { key: o, className: "pr-op" + cls, disabled: !!elegida, onClick: () => tocar(o), lang: "ru" }, o);
+        return h("button", { key: o, className: "pr-op" + cls, disabled: !!elegida, onClick: () => tocar(o), lang: "ru" }, sinLlavesOp(o));
       })),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
@@ -506,7 +508,7 @@
       ej.audio && h(Oir, { texto: ej.audio, auto: false }),
       h("div", { className: "pr-ops una" }, ej.opciones.map(o => {
         const cls = !el ? "" : o === ej.correcta ? " ok" : o === el ? " mal" : "";
-        return h("button", { key: o, className: "pr-op" + cls, disabled: !!el, onClick: () => elegir(o) }, o);
+        return h("button", { key: o, className: "pr-op" + cls, disabled: !!el, onClick: () => elegir(o) }, sinLlavesOp(o));
       })),
       el && h(React.Fragment, null,
         h("div", { className: "pr-pide", style: { marginTop: 14 } }, "Ahora escribí la frase bien:"),

@@ -1,4 +1,9 @@
-/* ============================================================
+/* ACTUALIZACIÓN 07/10/2026 (Unidad 6, profundización, aprobado por Manu): 105 palabras
+   que ya estaban en el léxico pasan a introducedIn [6] (lugares de la ciudad, la casa,
+   naturaleza y geografía, eventos, transporte, лежа́ть, висе́ть y adverbios de lugar), y
+   лес, река́, шкаф, у́гол, подъе́зд, эта́ж y ло́дка suman appearsIn 6. Sin entradas nuevas.
+
+   ============================================================
    DATA-LEXICON.JS — Léxico central AZBUKA (Comer + FreeDict + enriquecimiento aspectual)
    Total de entradas: 6061. Ordenado por ID.
 
@@ -1022,7 +1027,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [
+   2
+  ],
   "comer": [
    {
     "ID1": "12",
@@ -2183,7 +2190,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [
+   2
+  ],
   "comer": [
    {
     "ID1": "30",
@@ -4778,7 +4787,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [
+   2
+  ],
   "comer": [
    {
     "ID1": "69",
@@ -5026,7 +5037,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [3],
+  "appearsIn": [
+   3
+  ],
   "comer": [
    {
     "ID1": "73",
@@ -12431,7 +12444,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [
+   2
+  ],
   "comer": [
    {
     "ID1": "190",
@@ -15477,7 +15492,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [
+   2
+  ],
   "comer": [
    {
     "ID1": "239",
@@ -15536,7 +15553,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -16984,7 +17003,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [3],
+  "appearsIn": [
+   3
+  ],
   "comer": [
    {
     "ID1": "264",
@@ -20047,7 +20068,9 @@ const LEXICON_COMER = [
     "source": "freedict-directo + redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -23337,7 +23360,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -25524,7 +25549,9 @@ const LEXICON_COMER = [
     "source": "freedict-directo + redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -30085,7 +30112,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -32146,7 +32175,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   6
+  ],
   "comer": [
    {
     "ID1": "512",
@@ -37543,7 +37574,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -37793,7 +37826,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -38590,7 +38625,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -38766,7 +38803,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -39250,7 +39289,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -41971,7 +42012,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   6
+  ],
   "comer": [
    {
     "ID1": "674",
@@ -42396,7 +42439,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -43083,7 +43128,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -43146,7 +43193,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -43209,7 +43258,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -43332,7 +43383,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -47507,7 +47560,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -49138,7 +49193,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -54922,7 +54979,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -56914,7 +56973,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   6
+  ],
   "comer": [
    {
     "ID1": "916",
@@ -58859,7 +58920,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [
+   2
+  ],
   "comer": [
    {
     "ID1": "947",
@@ -59285,7 +59348,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -61460,7 +61525,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -63902,7 +63969,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -66458,7 +66527,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -67543,7 +67614,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -68296,7 +68369,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -72460,7 +72535,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -72907,7 +72984,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   6
+  ],
   "comer": [
    {
     "ID1": "1181",
@@ -74389,7 +74468,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -78871,7 +78952,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -80215,7 +80298,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -80823,7 +80908,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -83671,7 +83758,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -83914,7 +84003,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -84469,7 +84560,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -84656,7 +84749,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -89430,7 +89525,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -91534,7 +91631,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -91833,7 +91932,9 @@ const LEXICON_COMER = [
     "source": "redactado + Lingea (contraste puntual)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -92925,7 +93026,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -96665,7 +96768,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -99483,7 +99588,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -101956,7 +102063,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -103855,7 +103964,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -104330,7 +104441,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -112047,7 +112160,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -115222,7 +115337,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -116905,7 +117022,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   6
+  ],
   "comer": [
    {
     "ID1": "1919",
@@ -120348,7 +120467,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [2],
+  "appearsIn": [
+   2
+  ],
   "comer": [
    {
     "ID1": "1976",
@@ -120927,7 +121048,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -121293,7 +121416,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -125118,7 +125243,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -125238,7 +125365,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -129261,7 +129390,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   6
+  ],
   "comer": [
    {
     "ID1": "2121",
@@ -132012,7 +132143,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -142555,7 +142688,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -145243,7 +145378,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -146522,7 +146659,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -147340,7 +147479,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -147406,7 +147547,9 @@ const LEXICON_COMER = [
   "introducedIn": [
    1
   ],
-  "appearsIn": [],
+  "appearsIn": [
+   6
+  ],
   "comer": [
    {
     "ID1": "2422",
@@ -149169,7 +149312,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -150471,7 +150616,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -152623,7 +152770,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -153778,7 +153927,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -154502,7 +154653,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -154565,7 +154718,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -159372,7 +159527,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -164119,7 +164276,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -170486,7 +170645,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -171098,7 +171259,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -173038,7 +173201,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -173762,7 +173927,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -180335,7 +180502,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -182981,7 +183150,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -183683,7 +183854,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -185988,7 +186161,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -189798,7 +189973,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -192793,7 +192970,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -196680,7 +196859,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -198038,7 +198219,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -198101,7 +198284,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -198523,7 +198708,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -199906,7 +200093,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -202510,7 +202699,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -204144,7 +204335,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -206525,7 +206718,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -206895,7 +207090,9 @@ const LEXICON_COMER = [
     "source": "redactado (diccionario de bolsillo)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -208575,7 +208772,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -216245,7 +216444,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -219382,7 +219583,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -221187,7 +221390,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -224438,7 +224643,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -229988,7 +230195,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -238050,7 +238259,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -238293,7 +238504,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -240463,7 +240676,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -243851,7 +244066,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -254276,7 +254493,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -261393,7 +261612,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -267690,7 +267911,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -278229,7 +278452,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -285400,7 +285625,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -286828,7 +287055,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -288199,7 +288428,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -326306,7 +326537,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -343999,7 +344232,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -347841,7 +348076,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -347904,7 +348141,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -348159,7 +348398,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -348223,7 +348464,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -348286,7 +348529,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -348416,7 +348661,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   6
+  ],
   "appearsIn": [],
   "comer": [
    {
