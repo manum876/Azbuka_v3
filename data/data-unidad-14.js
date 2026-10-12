@@ -13,6 +13,19 @@
    La escritura se puntúa por cobertura de objetivos (U13_R, de
    data-unidad-13.js), con descuento por palabras que no existen y
    errores típicos: es una aproximación, y la página lo dice.
+   Actualización 12/10/2026 (aprobada por Manu), al nivel de las unidades
+   profundizadas:
+   · Gramática: casos, plural y números, pronombres y свой, el aspecto
+     (elegir, ¿por qué?, pares), imperativo y comparar, tiempos y е́сли,
+     concordancia, preposiciones, ordenar, corregir, «¿Qué falla?»
+     (diagnóstico), «¿Suena natural?» y «¿Por qué?».
+   · Audio: «de oído» (quién habla, cuándo, qué forma oíste).
+   · Vocabulario: en contexto con palabras de las Unidades 6 a 13,
+     emparejar, «¿Qué significa?» y «Escribí en ruso» (U14_VOC).
+   · Sorteo: en Audio, Gramática y Vocabulario, cada intento saca sus
+     preguntas de un banco más grande (U14_LUGARES, u14Intento).
+   · Cada pregunta dice qué regla evalúa (`regla`, U14_REGLAS): al
+     terminar, «Qué repasar» abre esa sección (u14CargarRegla).
    ============================================================ */
 
 function u14E(es, formas, rx, consigna) { const e = { es, formas: formas ? formas.split("|") : [] }; if (rx) e.rx = rx; if (consigna) e.consigna = consigna; return e; }
@@ -67,34 +80,229 @@ const U14_AUDIO_RESP = [
     nec: [u14E("en pasado", "", U14_PASADO_RX, "Hay que contarlo en pasado."), u14E("otra cosa", "и|пото́м|ещё|~а")], modelo: "Ле́том я е́здил на мо́ре и мно́го чита́л." }
 ];
 
-/* ── Bloque 3: gramática ── */
+/* ── Bloque 3: gramática (12/10/2026: ampliada, con `regla` y sorteo por lugar) ──
+   Cada lugar tiene un banco y en cada intento salen `n` ítems de él (U14_LUGARES). Cada ítem dice
+   qué regla evalúa (la id de la sección de su unidad): al terminar, «Qué repasar» lista las falladas. */
 const U14_GRAM = {
-  casos: [["Я даю́ пода́рок _____.", "А́нне", ["А́нна", "А́нну", "А́нне"], "dativo: a quién"], ["Я ви́жу _____.", "А́нну", ["А́нна", "А́нну", "А́нне"], "acusativo: a quién veo"],
-    ["У _____ есть маши́на.", "А́нны", ["А́нна", "А́нны", "А́нне"], "у + genitivo"], ["Я гуля́ю с _____.", "А́нной", ["А́нной", "А́нне", "А́нну"], "с + instrumental"],
-    ["Мы говори́м об _____.", "А́нне", ["А́нне", "А́нну", "А́нной"], "о / об + prepositivo"], ["_____ живёт в Москве́.", "А́нна", ["А́нна", "А́нну", "А́нны"], "quién: nominativo"]],
-  tiempos: [["Вчера́ я рабо́тал.", "За́втра…", "За́втра я бу́ду рабо́тать."], ["Вчера́ я рабо́тал.", "Сего́дня…", "Сего́дня я рабо́таю."], ["Сейча́с мы гуля́ем в па́рке.", "Вчера́…", "Вчера́ мы гуля́ли в па́рке."]],
-  concord: [["А́нна вчера́ _____ до́ма.", "была́", ["был", "была́", "бы́ли"]], ["Мои́ друзья́ _____ в рестора́не.", "бы́ли", ["был", "была́", "бы́ли"]],
-    ["Мы _____ ру́сский язы́к.", "у́чим", ["учу́", "у́чим", "у́чат"]], ["Э́то _____ кни́га.", "моя́", ["мой", "моя́", "моё"]]],
-  prep: [["Я живу́ _____ Барсело́не.", "в"], ["Мы бы́ли _____ пля́же.", "на"], ["Я _____ Аргенти́ны.", "из"], ["Ко́фе _____ молока́, пожа́луйста.", "без"],
-    ["Э́то пода́рок _____ ма́мы.", "для"], ["_____ рабо́ты я иду́ домо́й.", "По́сле"], ["Я рабо́таю _____ шести́.", "до"], ["Я гуля́ю _____ соба́кой.", "с"]],
-  orden: [["Вчера́ я был в рестора́не с друзья́ми.", "Ayer estuve en el restaurante con mis amigos."], ["За́втра мы пое́дем на мо́ре.", "Mañana vamos a ir al mar."], ["Мне о́чень нра́вится э́тот го́род.", "Me gusta mucho esta ciudad."]],
-  corr: [["А́нна вчера́ рабо́тал.", "рабо́тал", "рабо́тала", "А́нна: **рабо́тала**."], ["У меня́ нет маши́на.", "маши́на", "маши́ны", "нет + genitivo: **маши́ны**."],
-    ["Я говорю́ с мои́м друг.", "друг", "дру́гом", "с + instrumental: **дру́гом**."], ["Мы живём в Москва́.", "Москва́", "Москве́", "в + prepositivo: **Москве́**."], ["За́втра я бу́ду прочита́ю кни́гу.", "бу́ду", "", "Sin бу́ду: **За́втра я прочита́ю кни́гу.**"]]
+  /* [frase, correcta, opciones, explicación, regla, pista] */
+  casos: [["Я даю́ пода́рок _____.", "А́нне", ["А́нна", "А́нну", "А́нне"], "dativo: a quién", "u10-dat-verbos"], ["Я ви́жу _____.", "А́нну", ["А́нна", "А́нну", "А́нне"], "acusativo: a quién veo", "u4-acu-a"],
+    ["У _____ есть маши́на.", "А́нны", ["А́нна", "А́нны", "А́нне"], "у + genitivo", "u10-tener"], ["Я гуля́ю с _____.", "А́нной", ["А́нной", "А́нне", "А́нну"], "с + instrumental", "u10-s-kem"],
+    ["Мы говори́м об _____.", "А́нне", ["А́нне", "А́нну", "А́нной"], "о / об + prepositivo", "u12-ob"], ["_____ живёт в Москве́.", "А́нна", ["А́нна", "А́нну", "А́нны"], "quién: nominativo", "u4-nominativo"],
+    ["Я звоню́ _____.", "мое́й сестре́", ["мое́й сестре́", "мою́ сестру́", "мое́й сестры́"], "звони́ть + dativo; el posesivo va en el mismo caso", "u12-pos-casos"],
+    ["Я рабо́таю _____.", "врачо́м", ["врачо́м", "врач", "врача́"], "de qué trabajás: instrumental", "u10-rabotat-kem"],
+    ["Мы е́дем в Москву́ _____.", "по́ездом", ["по́ездом", "по́езд", "по́езде"], "en qué vas: instrumental, sin preposición", "u10-transporte-ins"],
+    ["Ему́ три́дцать _____.", "лет", ["лет", "год", "го́да"], "con 5 o más (y con 30): лет", "u10-edad"],
+    ["Мы живём в _____ кварти́ре.", "но́вой", ["но́вой", "но́вую", "но́вая"], "в + prepositivo: el adjetivo también", "u13-casos-pregunta"],
+    ["Я иду́ к _____.", "врачу́", ["врачу́", "врача́", "врач"], "к + dativo", "u10-k-u"]],
+  plural: [["В го́роде мно́го _____.", "музе́ев", ["музе́ев", "музе́и", "музе́ях"], "мно́го + genitivo plural", "u12-gen-pl"],
+    ["У меня́ пять _____.", "друзе́й", ["друзе́й", "друзья́", "дру́га"], "5 o más + genitivo plural (irregular: друзе́й)", "u12-gen-pl-irreg"],
+    ["У меня́ два _____.", "бра́та", ["бра́та", "бра́тья", "бра́тьев"], "2, 3, 4 + genitivo singular", "u12-contar"],
+    ["Я купи́л пять _____.", "книг", ["книг", "кни́ги", "кни́гу"], "5 o más + genitivo plural", "u12-gen-pl"],
+    ["Я ду́маю о _____.", "свои́х друзья́х", ["свои́х друзья́х", "свои́ друзья́", "свои́м друзья́м"], "о + prepositivo plural: **-ах**", "u12-pl-dat-ins-prep"],
+    ["Мы гуля́ем с _____.", "друзья́ми", ["друзья́ми", "друзья́м", "друзе́й"], "с + instrumental plural: **-ами**", "u12-pl-dat-ins-prep"],
+    ["Я ви́жу _____.", "студе́нтов", ["студе́нтов", "студе́нты", "студе́нтам"], "acusativo plural de personas = genitivo", "u12-acc-pl"],
+    ["Э́то _____ кни́ги.", "мои́", ["мои́", "моя́", "мои́х"], "plural: мои́", "u12-pos-pl"],
+    ["В ко́мнате четы́ре _____.", "сту́ла", ["сту́ла", "сту́лья", "сту́льев"], "2, 3, 4 + genitivo singular", "u12-contar"]],
+  pron: [["Я ви́жу _____.", "его́", ["его́", "он", "ему́"], "acusativo de он: его́", "u12-pron-acc-gen", "él"],
+    ["Я иду́ к _____.", "нему́", ["нему́", "ему́", "его́"], "después de preposición, **н-**: к нему́", "u12-pron-n", "él"],
+    ["Мой брат живёт со _____.", "мной", ["мной", "меня́", "мне"], "со мной", "u12-pron-so", "yo"],
+    ["Я говорю́ с _____.", "ней", ["ней", "ей", "её"], "с + instrumental, con **н-**: с ней", "u12-pron-n", "ella"],
+    ["_____ не звони́л.", "Никто́", ["Никто́", "Ничего́", "Кто́-то"], "никто́ + не", "u12-nikto", "nadie"],
+    ["Я _____ не зна́ю.", "ничего́", ["ничего́", "никто́", "что́-то"], "ничего́ + не", "u12-nikto", "nada"],
+    ["Ива́н лю́бит _____ жену́.", "свою́", ["свою́", "его́", "свой"], "su propia mujer: свою́", "u12-svoy", "la suya"],
+    ["Ты зна́ешь _____ сестру́?", "её", ["её", "ей", "свою́"], "её («de ella») no cambia", "u12-ego-eyo", "de ella"],
+    ["Мы говори́м об _____ фи́льме.", "э́том", ["э́том", "э́тот", "э́тому"], "о + prepositivo: э́том", "u12-etot", "este"],
+    ["Хо́чешь _____ вы́пить?", "что́-нибудь", ["что́-нибудь", "что́-то", "ничего́"], "en una pregunta, «algo» cualquiera: что́-нибудь", "u12-to-nibud", "algo"]],
+  aspecto: [["Ра́ньше я ча́сто _____ газе́ту.", "чита́л", ["чита́л", "прочита́л"], "ча́сто: algo que se repetía, proceso", "u8-aspecto-pistas"],
+    ["Вчера́ я _____ кни́гу и пошёл спать.", "прочита́л", ["прочита́л", "чита́л"], "una cosa después de otra: resultado", "u8-orden-perf"],
+    ["За́втра я _____ тебе́.", "позвоню́", ["позвоню́", "бу́ду позвони́ть", "звоню́"], "una vez, en el futuro: el perfectivo conjugado", "u9-fut-resultado", "te voy a llamar, una vez"],
+    ["Я хочу́ _____ э́ту кни́гу.", "купи́ть", ["купи́ть", "покупа́ть"], "una compra concreta: perfectivo", "u12-hochu", "comprarlo, una vez"],
+    ["Я люблю́ _____ фи́льмы.", "смотре́ть", ["смотре́ть", "посмотре́ть"], "después de люби́ть: imperfectivo", "u12-inf-imperf"]],
+  aspectoPq: [["Вчера́ я весь день чита́л.", "чита́л", "весь день: duró, es proceso", ["Terminé el libro", "Pasó una sola vez y terminó"], "u8-aspecto-pistas"],
+    ["Я уже́ прочита́л э́ту кни́гу.", "прочита́л", "уже́: el resultado, ya está terminado", ["Pasaba seguido", "Duró mucho tiempo"], "u8-aspecto-pistas"],
+    ["За́втра я бу́ду рабо́тать весь день.", "бу́ду рабо́тать", "Proceso en el futuro: бу́ду + imperfectivo", ["Un resultado de una vez", "Es pasado"], "u9-fut-cual"]],
+  aspectoPar: [["¿Cuál dice que la cena quedó hecha?", "Я пригото́вил у́жин.", "Я гото́вил у́жин.", "El resultado: perfectivo.", "u8-aspecto-idea"],
+    ["¿Cuál dice que vas a escribir la carta y terminarla?", "За́втра я напишу́ письмо́.", "За́втра я бу́ду писа́ть письмо́.", "Resultado en el futuro: напишу́.", "u9-fut-cual"],
+    ["¿Cuál dice que tu hermano llamó mientras leías?", "Когда́ я чита́л, позвони́л брат.", "Когда́ я прочита́л, позвони́л брат.", "El fondo (чита́л) y lo que pasó (позвони́л).", "u12-fondo"],
+    ["¿Cuál dice que empezaste la carta pero no la terminaste?", "Я писа́л письмо́, но не написа́л.", "Я не писа́л письмо́.", "не + perfectivo: no lo terminé.", "u12-neg-imperf"]],
+  impComp: [["_____ мне, пожа́луйста!", "Помоги́", ["Помоги́", "Помога́й", "Помо́чь"], "imperativo irregular de помо́чь", "u12-imp-irreg", "ayudame, una vez"],
+    ["Не _____!", "опа́здывай", ["опа́здывай", "опозда́й"], "no + imperfectivo para prohibir", "u12-imp-ne", "no llegues tarde"],
+    ["_____, пожа́луйста, где метро́?", "Скажи́те", ["Скажи́те", "Говори́те", "Сказа́ть"], "un pedido concreto: perfectivo, con вы", "u12-imp-aspecto", "decime, a alguien de usted"],
+    ["Москва́ _____, чем Барсело́на.", "бо́льше", ["бо́льше", "большо́й", "са́мая больша́я"], "comparar: comparativo + , чем", "u12-comp"],
+    ["Сего́дня _____, чем вчера́.", "тепле́е", ["тепле́е", "тёплый", "тепло́"], "comparativo de тёплый: тепле́е", "u12-comp-forma"],
+    ["Мой брат ста́рше _____.", "меня́", ["меня́", "я", "мне"], "sin чем: genitivo", "u12-comp-gen"],
+    ["Э́то _____ интере́сная кни́га.", "са́мая", ["са́мая", "са́мый", "са́мое"], "са́мая concuerda con кни́га", "u12-samyj"]],
+  /* [frase, hacia, correcta, regla, otras aceptadas] */
+  tiempos: [["Вчера́ я рабо́тал.", "За́втра…", "За́втра я бу́ду рабо́тать.", "u9-tres-tiempos", ["Я бу́ду рабо́тать за́втра."]], ["Вчера́ я рабо́тал.", "Сего́дня…", "Сего́дня я рабо́таю.", "u13-tres-tiempos", ["Я рабо́таю сего́дня."]],
+    ["Сейча́с мы гуля́ем в па́рке.", "Вчера́…", "Вчера́ мы гуля́ли в па́рке.", "u8-plural", ["Мы гуля́ли в па́рке вчера́."]],
+    ["Сего́дня я чита́ю кни́гу.", "За́втра (una vez, hasta terminarlo)…", "За́втра я прочита́ю кни́гу.", "u9-fut-resultado", ["Я прочита́ю кни́гу за́втра."]],
+    ["Сейча́с она́ до́ма.", "Вчера́…", "Вчера́ она́ была́ до́ма.", "u9-byt-tres", ["Она́ была́ до́ма вчера́."]],
+    ["Сейча́с мы живём в Москве́.", "Ра́ньше…", "Ра́ньше мы жи́ли в Москве́.", "u13-antes-ahora", ["Мы ра́ньше жи́ли в Москве́."]]],
+  esli: [["Е́сли _____ тепло́, мы пойдём на пляж.", "бу́дет", ["бу́дет", "бы́ло", "есть"], "е́сли, hablando del futuro: futuro", "u13-esli"],
+    ["Когда́ я _____ рабо́ту, я тебе́ позвоню́.", "зако́нчу", ["зако́нчу", "зака́нчиваю", "зако́нчил"], "когда́, hablando del futuro: futuro", "u13-esli"]],
+  concord: [["А́нна вчера́ _____ до́ма.", "была́", ["был", "была́", "бы́ли"], "u8-genero-quien"], ["Мои́ друзья́ _____ в рестора́не.", "бы́ли", ["был", "была́", "бы́ли"], "u8-plural"],
+    ["Мы _____ ру́сский язы́к.", "у́чим", ["учу́", "у́чим", "у́чат"], "u5-una-forma"], ["Э́то _____ кни́га.", "моя́", ["мой", "моя́", "моё"], "u3-adj-genero"]],
+  prep: [["Я живу́ _____ Барсело́не.", "в", "u6-v"], ["Мы бы́ли _____ пля́же.", "на", "u6-na-lista"], ["Я _____ Аргенти́ны.", "из", "u10-iz-ot"], ["Ко́фе _____ молока́, пожа́луйста.", "без", "u10-prep-gen"],
+    ["Э́то пода́рок _____ ма́мы.", "для", "u10-prep-gen"], ["_____ рабо́ты я иду́ домо́й.", "По́сле", "u10-prep-gen"], ["Я рабо́таю _____ шести́.", "до", "u10-prep-gen"], ["Я гуля́ю _____ соба́кой.", "с", "u10-s-kem"],
+    ["Ве́чером я иду́ _____ дру́гу.", "к", "u10-k-u"]],
+  orden: [["Вчера́ я был в рестора́не с друзья́ми.", "Ayer estuve en el restaurante con mis amigos.", "u8-byl-acento"], ["За́втра мы пое́дем на мо́ре.", "Mañana vamos a ir al mar.", "u9-poidu"],
+    ["Мне о́чень нра́вится э́тот го́род.", "Me gusta mucho esta ciudad.", "u10-gustar"], ["Е́сли бу́дет тепло́, мы пойдём на пляж.", "Si hace calor, vamos a ir a la playa.", "u13-esli"]],
+  corr: [["А́нна вчера́ рабо́тал.", "рабо́тал", "рабо́тала", "А́нна: **рабо́тала**.", "u8-genero-quien"], ["У меня́ нет маши́на.", "маши́на", "маши́ны", "нет + genitivo: **маши́ны**.", "u10-net"],
+    ["Я говорю́ с мои́м друг.", "друг", "дру́гом", "с + instrumental: **дру́гом**.", "u10-ins-fin"], ["Мы живём в Москва́.", "Москва́", "Москве́", "в + prepositivo: **Москве́**.", "u6-prep-e"],
+    ["Мне нра́вится э́ти фи́льмы.", "нра́вится", "нра́вятся", "Lo que gusta es plural: **нра́вятся**.", "u11-nravyatsya"]],
+  /* «¿Qué falla?»: [frase mal, frase bien, falla (índice en FALLAS), regla] */
+  FALLAS: ["El género del pasado", "El caso después de la preposición", "El posesivo no está en el mismo caso", "бу́ду con el verbo de resultado", "два / две", "Falta la **н-** después de la preposición",
+    "Falta не", "Hablando del futuro, va futuro", "Después de мно́го va el genitivo plural"],
+  diag: [["Ма́ша чита́л кни́гу.", "Ма́ша чита́ла кни́гу.", 0, "u8-genero-quien"], ["Я живу́ в большо́й го́род.", "Я живу́ в большо́м го́роде.", 1, "u6-prep-e"],
+    ["Я звоню́ моя́ сестре́.", "Я звоню́ мое́й сестре́.", 2, "u12-pos-casos"], ["Я бу́ду прочита́ть кни́гу.", "Я прочита́ю кни́гу.", 3, "u9-fut-cual"], ["У меня́ два сестры́.", "У меня́ две сестры́.", 4, "u12-contar"],
+    ["Я гуля́ю с им.", "Я гуля́ю с ним.", 5, "u12-pron-n"], ["Я ничего́ зна́ю.", "Я ничего́ не зна́ю.", 6, "u12-nikto"], ["Когда́ я приезжа́ю в Москву́, я тебе́ позвоню́.", "Когда́ я прие́ду в Москву́, я тебе́ позвоню́.", 7, "u13-esli"],
+    ["В го́роде мно́го музе́и.", "В го́роде мно́го музе́ев.", 8, "u12-gen-pl"]],
+  /* «¿Suena natural?»: [bien, calco, explicación, regla] */
+  natural: [["Мне три́дцать лет.", "Я име́ю три́дцать лет.", "La edad, con dativo.", "u10-edad"], ["Мне нра́вится э́тот фильм.", "Я нра́влюсь э́тот фильм.", "Lo que gusta es el sujeto.", "u10-gustar"],
+    ["Я рабо́таю врачо́м.", "Я рабо́таю как врач.", "De qué trabajás: instrumental.", "u10-rabotat-kem"], ["Мне хо́лодно.", "Я хо́лодно.", "Cómo te sentís: dativo.", "u10-estados"],
+    ["У меня́ есть брат.", "Я име́ю бра́та.", "Tener: у меня́ есть.", "u10-tener"], ["Я до́ма.", "Я есть до́ма.", "En presente, sin быть.", "u5-byt"],
+    ["Я согла́сен с тобо́й.", "Я согла́сен с ты.", "с + instrumental: с тобо́й.", "u13-acuerdo"], ["Он говори́т по-ру́сски лу́чше, чем я.", "Он говори́т по-ру́сски бо́лее хорошо́, чем я.", "El comparativo de хорошо́ es лу́чше.", "u12-comp-verbo"]],
+  /* «¿Por qué?»: [frase, palabra, correcta, otras, regla] */
+  porque: [["Я живу́ в Барсело́не.", "Барсело́не", "Por la preposición в: prepositivo", ["Por el verbo: dativo", "Por la preposición с: instrumental"], "u6-donde-prep"],
+    ["Я гуля́ю с дру́гом.", "дру́гом", "Por la preposición с: instrumental", ["Por la preposición у: genitivo", "Por el verbo: acusativo"], "u10-s-kem"],
+    ["У бра́та есть маши́на.", "бра́та", "Por la preposición у: genitivo", ["Por el verbo: dativo", "Por la preposición в: prepositivo"], "u10-tener"],
+    ["Я звоню́ ма́ме.", "ма́ме", "Por el verbo: dativo", ["Por el verbo: acusativo", "Por la preposición у: genitivo"], "u10-dat-verbos"],
+    ["В го́роде мно́го музе́ев.", "музе́ев", "мно́го pide genitivo plural", ["Es el sujeto", "Por la preposición в: prepositivo"], "u12-gen-pl"],
+    ["Мне бы́ло ве́село.", "Мне", "Quien siente va en dativo", ["Es el sujeto", "Por la preposición с: instrumental"], "u13-sentir"]]
 };
 
-/* ── Bloque 4: vocabulario en contexto ── */
+/* ── Bloque 4: vocabulario en contexto (12/10/2026: de las Unidades 2 a 13) ── */
 const U14_LEX = [
   ["Я жду _____ на остано́вке.", "авто́бус", ["авто́бус", "по́езд", "самолёт"]], ["В _____ мы покупа́ем хлеб и молоко́.", "магази́не", ["магази́не", "музе́е", "теа́тре"]],
   ["Мой брат рабо́тает в больни́це. Он _____.", "врач", ["врач", "учи́тель", "архите́ктор"]], ["Мне хо́лодно. Закро́й, пожа́луйста, _____.", "окно́", ["окно́", "кни́гу", "дверь"]],
   ["Ты в рестора́не и хо́чешь заказа́ть ко́фе. Что ты говори́шь?", "Мо́жно ко́фе, пожа́луйста?", ["Мо́жно ко́фе, пожа́луйста?", "Где мой ко́фе?", "Я не пью ко́фе."]],
   ["В ию́ле в Барсело́не о́чень _____.", "тепло́", ["тепло́", "хо́лодно", "ра́но"]], ["Я не понима́ю. _____, пожа́луйста.", "Повтори́те", ["Повтори́те", "Да́йте", "Закро́йте"]],
   ["В свобо́дное вре́мя я _____ чита́ть.", "люблю́", ["люблю́", "рабо́таю", "звоню́"]], ["Биле́т на по́езд мо́жно купи́ть на _____.", "вокза́ле", ["вокза́ле", "пля́же", "ку́хне"]],
-  ["Э́то мой _____: он живёт в кварти́ре ря́дом.", "сосе́д", ["сосе́д", "колле́га", "врач"]], ["Она́ рабо́тает в шко́ле. Она́ _____.", "учи́тельница", ["учи́тельница", "врач", "архите́ктор"]]
+  ["Э́то мой _____: он живёт в кварти́ре ря́дом.", "сосе́д", ["сосе́д", "колле́га", "врач"]], ["Она́ рабо́тает в шко́ле. Она́ _____.", "учи́тельница", ["учи́тельница", "врач", "архите́ктор"]],
+  ["Мне о́чень понра́вилась пое́здка: у меня́ о́чень хоро́шее _____.", "впечатле́ние", ["впечатле́ние", "расписа́ние", "объявле́ние"]],
+  ["По́езд ухо́дит в во́семь. Я посмотре́л _____.", "расписа́ние", ["расписа́ние", "впечатле́ние", "увлече́ние"]],
+  ["Он всегда́ говори́т пра́вду: он о́чень _____ челове́к.", "че́стный", ["че́стный", "смешно́й", "гру́стный"]],
+  ["Ты сде́лал _____: на́до писа́ть «в Москве́».", "оши́бку", ["оши́бку", "привы́чку", "мечту́"]],
+  ["Я о́чень уста́л, _____ я ра́но лёг спать.", "поэ́тому", ["поэ́тому", "потому́ что", "хотя́"]],
+  ["_____ бы́ло хо́лодно, мы пошли́ гуля́ть.", "Хотя́", ["Хотя́", "Поэ́тому", "Потому́ что"]],
+  ["Мой телефо́н не рабо́тает: мне нужна́ _____.", "заря́дка", ["заря́дка", "ски́дка", "сда́ча"]],
+  ["Сего́дня в магази́не _____: всё деше́вле.", "ски́дка", ["ски́дка", "сда́ча", "заря́дка"]],
+  ["Спаси́бо за _____! Я обяза́тельно приду́ на твой день рожде́ния.", "приглаше́ние", ["приглаше́ние", "впечатле́ние", "расписа́ние"]],
+  ["Я встаю́ в семь: мой _____ звони́т в семь.", "буди́льник", ["буди́льник", "календа́рь", "чемода́н"]],
+  ["Мой друг — _____: он пи́шет кни́ги.", "писа́тель", ["писа́тель", "води́тель", "продаве́ц"]],
+  ["Я люблю́ гото́вить: э́то моё _____.", "увлече́ние", ["увлече́ние", "мне́ние", "расписа́ние"]],
+  ["Ты пойдёшь в кино́? — Не зна́ю, _____.", "мо́жет быть", ["мо́жет быть", "во-пе́рвых", "наприме́р"]],
+  ["Я забы́л его́ и́мя, но пото́м _____.", "вспо́мнил", ["вспо́мнил", "забы́л", "потеря́л"]]
 ];
 const U14_LEX_EMP = [
   [["расписа́ние", "¿A qué hora sale el tren?"], ["меню́", "¿Qué hay para comer?"], ["биле́т", "Para viajar en tren"], ["объявле́ние", "Se vende un departamento"]],
-  [["Приве́т!", "Te encontrás con un amigo"], ["До свида́ния!", "Te vas de una tienda"], ["Спаси́бо!", "Alguien te ayudó"], ["Извини́те!", "Le preguntás algo a un desconocido"]]
+  [["Приве́т!", "Te encontrás con un amigo"], ["До свида́ния!", "Te vas de una tienda"], ["Спаси́бо!", "Alguien te ayudó"], ["Извини́те!", "Le preguntás algo a un desconocido"]],
+  [["Во-пе́рвых…", "Das la primera razón"], ["Кста́ти…", "Cambiás de tema"], ["Ну…", "Necesitás pensar"], ["Я согла́сен.", "Pensás lo mismo"]],
+  [["Мне ве́село.", "Te estás divirtiendo"], ["Мне гру́стно.", "Estás triste"], ["Мне стра́шно.", "Tenés miedo"], ["Мне ску́чно.", "Te aburrís"]]
 ];
+/* Palabras de las Unidades 7 a 13 para «¿Qué significa?» y «Escribí en ruso» (traducción de U7_GLOSA … U13_GLOSA) */
+const U14_VOC = "буди́льник=despertador|полоте́нце=toalla|расчёска=peine|оде́жда=ropa|ча́йник=pava|расписа́ние=horario|переры́в=pausa|свобо́дный=libre|за́нятый=ocupado|прогу́лка=paseo|" +
+  "трениро́вка=entrenamiento|весна́=primavera|о́сень=otoño|Рождество́=Navidad|календа́рь=calendario|век=siglo|почти́=casi|позавчера́=anteayer|неда́вно=hace poco|вдруг=de repente|" +
+  "дождь=lluvia|снег=nieve|ве́тер=viento|ску́чно=aburrido|потеря́ть=perder|подари́ть=regalar|чемода́н=valija|гора́=montaña|де́тство=infancia|перее́хать=mudarse|роди́ться=nacer|" +
+  "самолёт=avión|по́езд=tren|обеща́ть=prometer|цель=objetivo|реше́ние=decisión|бага́ж=equipaje|па́спорт=pasaporte|рейс=vuelo|тума́н=niebla|пешко́м=a pie|оста́ться=quedarse|" +
+  "нож=cuchillo|буты́лка=botella|кусо́к=pedazo|са́хар=azúcar|соль=sal|рис=arroz|нача́льник=jefe|внук=nieto|юри́ст=abogado|перево́дчик=traductor|худо́жник=pintor|писа́тель=escritor|продаве́ц=vendedor|" +
+  "о́чередь=cola, fila|сда́ча=vuelto|ски́дка=descuento|паке́т=bolsa|футбо́лка=remera|ю́бка=pollera|шарф=bufanda|десе́рт=postre|моро́женое=helado|яйцо́=huevo|сла́дкий=dulce|о́стрый=picante|" +
+  "солёный=salado|переходи́ть=cruzar|паро́ль=contraseña|приглаше́ние=invitación|мне́ние=opinión|полови́на=mitad|большинство́=mayoría|стро́ить=construir|включа́ть=prender|выключа́ть=apagar|" +
+  "просто́й=simple|сло́жный=complicado|у́мный=inteligente|сла́бый=débil|далёкий=lejano|мла́дший=menor|о́пыт=experiencia|воспомина́ние=recuerdo|сча́стье=felicidad|страх=miedo|" +
+  "удивле́ние=sorpresa|счастли́вый=feliz|вопро́с=pregunta|отве́т=respuesta|рекла́ма=publicidad|статья́=artículo|экра́н=pantalla|че́стный=honesto|смешно́й=gracioso|тала́нтливый=talentoso|" +
+  "разгово́р=conversación|пра́вило=regla";
+
+/* ── Bloque 2, de oído (12/10/2026): [frase, pregunta, opciones (la primera es la correcta), explicación, regla] ── */
+const U14_OIDO = [
+  ["Я была́ в Москве́.", "Escuchá. ¿Quién habla?", ["Una mujer", "Un hombre"], "была́: femenino.", "u8-genero-quien"],
+  ["Я испуга́лся.", "Escuchá. ¿Quién habla?", ["Un hombre", "Una mujer"], "испуга́лся: masculino.", "u13-sentir"],
+  ["Я согла́сна.", "Escuchá. ¿Quién habla?", ["Una mujer", "Un hombre"], "согла́сна: femenino.", "u13-acuerdo"],
+  ["Я бу́ду в Москве́.", "Escuchá. ¿Cuándo?", ["En el futuro", "En el pasado", "Ahora"], "бу́ду: futuro.", "u9-byt-tres"],
+  ["Мы бы́ли в кино́.", "Escuchá. ¿Cuándo?", ["En el pasado", "En el futuro", "Ahora"], "бы́ли: pasado.", "u8-plural"],
+  ["Я прочита́ю кни́гу.", "Escuchá. ¿Cuándo?", ["En el futuro", "En el pasado", "Ahora"], "прочита́ю: perfectivo conjugado, futuro.", "u9-fut-resultado"],
+  ["Я ви́жу сестру́.", "Escuchá. ¿Qué forma oíste?", ["сестру́", "сестра́", "сестры́"], "ви́жу + acusativo: сестру́.", "u4-acu-a"],
+  ["Он рабо́тает врачо́м.", "Escuchá. ¿Qué forma oíste?", ["врачо́м", "врач", "врача́"], "De qué trabaja: instrumental.", "u10-ins-fin"],
+  ["У меня́ нет вре́мени.", "Escuchá. ¿Qué forma oíste?", ["вре́мени", "вре́мя", "вре́менем"], "нет + genitivo: вре́мени.", "u10-net"]
+];
+
+/* Las reglas que evalúa el examen: [unidad, módulo, título del módulo, título de la sección] (12/10/2026) */
+const U14_REGLAS = {
+  "u3-adj-genero": [3,7,"Primeros adjetivos","Primero el género"],
+  "u4-nominativo": [4,2,"Nominativo","El que hace la acción"],
+  "u4-acu-a": [4,4,"Acusativo femenino","-а → -у"],
+  "u5-una-forma": [5,1,"El verbo ruso","Una forma por persona"],
+  "u5-byt": [5,9,"Verbos especiales","Быть: el verbo que no se dice"],
+  "u6-v": [6,2,"В y на","В: adentro"],
+  "u6-na-lista": [6,2,"В y на","Los lugares que van con на"],
+  "u6-prep-e": [6,3,"El prepositivo","Casi siempre, -е"],
+  "u6-donde-prep": [6,8,"Ubicación o movimiento","Dónde estás: prepositivo"],
+  "u8-genero-quien": [8,3,"Quién lo hizo","Я y ты dependen de quién sos"],
+  "u8-plural": [8,3,"Quién lo hizo","Мы, вы, они́: siempre -ли"],
+  "u8-byl-acento": [8,6,"Был, была́, бы́ло, бы́ли","Dónde estuviste"],
+  "u8-aspecto-pistas": [8,7,"Proceso o resultado","Pistas para elegir"],
+  "u8-aspecto-idea": [8,7,"Proceso o resultado","Dos verbos para una acción"],
+  "u8-orden-perf": [8,8,"Contar en orden","Una cosa después de otra"],
+  "u9-tres-tiempos": [9,1,"Pasado, presente y futuro","La misma acción, tres veces"],
+  "u9-fut-resultado": [9,3,"Lo voy a terminar","El presente del verbo de resultado es futuro"],
+  "u9-fut-cual": [9,3,"Lo voy a terminar","¿Бу́ду чита́ть o прочита́ю?"],
+  "u9-byt-tres": [9,4,"Быть en futuro","Быть en los tres tiempos"],
+  "u9-poidu": [9,7,"Adónde vas a ir","Пойду́ y пое́ду"],
+  "u10-tener": [10,2,"Genitivo: tener y de quién","Tener: у + genitivo + есть"],
+  "u10-net": [10,3,"Genitivo: lo que no hay","Есть → нет"],
+  "u10-iz-ot": [10,5,"Genitivo con preposiciones","Из o от"],
+  "u10-prep-gen": [10,5,"Genitivo con preposiciones","Las preposiciones con genitivo"],
+  "u10-dat-verbos": [10,6,"Dativo: ¿a quién?","Los verbos con dativo"],
+  "u10-k-u": [10,6,"Dativo: ¿a quién?","Ir a ver a alguien: к + dativo"],
+  "u10-edad": [10,7,"Dativo: me gusta, necesito","Cuántos años tenés: мне … лет"],
+  "u10-gustar": [10,7,"Dativo: me gusta, necesito","Me gusta: мне нра́вится"],
+  "u10-estados": [10,7,"Dativo: me gusta, necesito","Tengo frío, me da pena"],
+  "u10-ins-fin": [10,8,"Instrumental: ¿con quién?","Las terminaciones del instrumental"],
+  "u10-s-kem": [10,8,"Instrumental: ¿con quién?","Con quién"],
+  "u10-transporte-ins": [10,9,"Instrumental: ¿con qué? ¿dónde?","En tren: по́ездом"],
+  "u10-rabotat-kem": [10,10,"Instrumental: profesión e intereses","De qué trabajás"],
+  "u11-nravyatsya": [11,8,"Gustos y opiniones","Мне нра́вится, мне нра́вятся"],
+  "u12-pron-acc-gen": [12,1,"Los pronombres en todos los casos","Acusativo y genitivo: la misma forma"],
+  "u12-pron-n": [12,1,"Los pronombres en todos los casos","La н- después de preposición"],
+  "u12-pron-so": [12,1,"Los pronombres en todos los casos","Con я: со мной y обо мне"],
+  "u12-nikto": [12,1,"Los pronombres en todos los casos","Nadie, nada: никто́ не…, ничего́ не…"],
+  "u12-to-nibud": [12,1,"Los pronombres en todos los casos","Alguien, algo: -то y -нибудь"],
+  "u12-ob": [12,2,"Posesivos, свой y э́тот","о → об"],
+  "u12-pos-casos": [12,2,"Posesivos, свой y э́тот","Los posesivos en los otros casos"],
+  "u12-svoy": [12,2,"Posesivos, свой y э́тот","свой: su propio"],
+  "u12-ego-eyo": [12,2,"Posesivos, свой y э́тот","его́, её, их no cambian nunca"],
+  "u12-etot": [12,2,"Posesivos, свой y э́тот","э́тот: este, esta"],
+  "u12-gen-pl": [12,3,"Plural I: cantidades y números","Genitivo plural: las terminaciones"],
+  "u12-gen-pl-irreg": [12,3,"Plural I: cantidades y números","Los irregulares"],
+  "u12-contar": [12,3,"Plural I: cantidades y números","Contar: 1, 2–4, 5 o más"],
+  "u12-acc-pl": [12,3,"Plural I: cantidades y números","Acusativo plural"],
+  "u12-pl-dat-ins-prep": [12,4,"Plural II: los otros casos","-ам, -ами, -ах"],
+  "u12-pos-pl": [12,4,"Plural II: los otros casos","Los posesivos en plural"],
+  "u12-hochu": [12,6,"Aspecto: negación y futuro","Después de хочу́, ну́жно, мо́жно (repaso)"],
+  "u12-inf-imperf": [12,6,"Aspecto: negación y futuro","Después de empezar, terminar, no hace falta"],
+  "u12-neg-imperf": [12,6,"Aspecto: negación y futuro","No lo hice / no lo terminé"],
+  "u12-fondo": [12,7,"Aspecto en el relato","El fondo y lo que pasó"],
+  "u12-imp-irreg": [12,8,"El imperativo","Los irregulares"],
+  "u12-imp-ne": [12,8,"El imperativo","No hagas: не + proceso"],
+  "u12-imp-aspecto": [12,8,"El imperativo","¿Qué aspecto?"],
+  "u12-comp": [12,9,"Comparar","Más … que …"],
+  "u12-comp-forma": [12,9,"Comparar","Cómo se forma"],
+  "u12-comp-gen": [12,9,"Comparar","Sin чем: con genitivo"],
+  "u12-samyj": [12,9,"Comparar","El más: са́мый"],
+  "u12-comp-verbo": [12,9,"Comparar","También con verbos"],
+  "u13-casos-pregunta": [13,2,"Los seis casos en contexto","La pregunta te dice el caso"],
+  "u13-tres-tiempos": [13,3,"Pasado, presente y futuro","Tres tiempos"],
+  "u13-antes-ahora": [13,3,"Pasado, presente y futuro","Antes, ahora, pronto"],
+  "u13-sentir": [13,4,"Contar una experiencia","Lo que sentiste"],
+  "u13-esli": [13,4,"Contar una experiencia","Si y cuando, hablando del futuro"],
+  "u13-acuerdo": [13,5,"Opinar y justificar","Estar de acuerdo, o no"]
+};
+
+/* Lugares con sorteo: cuántos salen en cada intento (12/10/2026) */
+const U14_LUGARES = {
+  audio: [["oido", 3]],
+  gramatica: [["casos", 4], ["plural", 3], ["pron", 3], ["aspecto", 5], ["impComp", 3], ["tiempos", 3], ["concord", 2], ["prep", 2], ["orden", 2], ["corr", 2], ["diag", 3], ["natural", 2], ["porque", 2]],
+  lexica: [["lex", 6], ["emp", 1], ["sig", 3], ["esru", 2]]
+};
 
 /* ── Bloque 6: comunicación ── */
 const U14_SITUACIONES = [
@@ -128,9 +336,9 @@ function U14_CONV() {
 /* ── Bloques y pesos ── */
 const U14_BLOQUES = [
   { id: "lectura", ru: "Чте́ние", es: "Comprensión lectora", puntos: 15, emoji: "📖", min: "30–40 min", intro: "Tres textos de dificultad creciente: un mensaje, una experiencia y una opinión. No hace falta traducir todo: buscá lo que te piden.", repaso: "Unidad 13, módulo 6 (Textos del mundo real)" },
-  { id: "audio", ru: "Ауди́рование", es: "Comprensión auditiva", puntos: 15, emoji: "🎧", min: "30–40 min", intro: "Un diálogo, una conversación y un relato, y al final dos audios para contestar por escrito en ruso. Escuchá todas las veces que quieras.", repaso: "Unidad 13, módulo 7 (Comprensión auditiva)" },
-  { id: "gramatica", ru: "Грамма́тика", es: "Gramática en contexto", puntos: 20, emoji: "🧩", min: "30–40 min", intro: "Casos, tiempos, concordancia, preposiciones, ordenar palabras y corregir errores.", repaso: "Unidades 10 y 12, y la 13 (módulos 2, 3 y 9)" },
-  { id: "lexica", ru: "Ле́ксика", es: "Vocabulario en contexto", puntos: 10, emoji: "🗂️", min: "20–30 min", intro: "Palabras en uso: elegí la que va según la situación.", repaso: "Unidad 11 y el Diccionario" },
+  { id: "audio", ru: "Ауди́рование", es: "Comprensión auditiva", puntos: 15, emoji: "🎧", min: "30–40 min", intro: "Un diálogo, una conversación y un relato, tres frases cortas para escuchar la terminación y al final dos audios para contestar por escrito en ruso. Escuchá todas las veces que quieras.", repaso: "Unidad 13, módulo 7 (Comprensión auditiva)" },
+  { id: "gramatica", ru: "Грамма́тика", es: "Gramática en contexto", puntos: 20, emoji: "🧩", min: "40–50 min", intro: "Casos, plural, pronombres, el aspecto, el imperativo, comparar, los tiempos, preposiciones, ordenar palabras, corregir y decir qué falla. Cada vez que lo hacés salen preguntas distintas.", repaso: "Unidades 8 a 13 (al terminar, «Qué repasar» te dice qué reglas)" },
+  { id: "lexica", ru: "Ле́ксика", es: "Vocabulario en contexto", puntos: 10, emoji: "🗂️", min: "20–30 min", intro: "Palabras en uso: elegí la que va según la situación, decí qué significan y escribilas en ruso. Cada vez que lo hacés salen palabras distintas.", repaso: "Unidades 6 a 13 y el Diccionario" },
   { id: "escritura", ru: "Письмо́", es: "Producción escrita", puntos: 20, emoji: "✍️", min: "40–50 min", intro: "Dos textos: un mensaje (80–100 palabras) y «Моя́ исто́рия» (200–250 palabras).", repaso: "Unidad 13, módulos 10 y 11 (taller y proyecto)" },
   { id: "comunicacion", ru: "Обще́ние", es: "Comunicación", puntos: 20, emoji: "💬", min: "20–30 min", intro: "Situaciones, preguntas para contestar libremente y una conversación de diez intervenciones. No hay una única respuesta correcta.", repaso: "Unidades 11 y 13 (módulo 8)" }
 ];
@@ -192,26 +400,63 @@ function ejerciciosExamenFinal() {
     A.vf.forEach(([af, v], k) => add("audio", { id: "EF-auv-" + A.id + "-" + k, tipo: "audio-vf", forma: "vf", grupo: "EFAV-" + A.id + "-" + k, afirmacion: af, verdadero: v, audio: dial, texto: lineas, textoOculto: true,
       explicacion: (v ? "Verdadero. " : "Falso. ") + lineas.join(" ") }));
   });
+
+  /* De oído (12/10/2026) */
+  U14_OIDO.forEach(([fr, q, ops, ex, regla], j) => add("audio", { id: "EF-oi-" + j, tipo: "oido", forma: "elegir", lugar: "oido", regla, grupo: "EFOI-" + j, audio: fr, oir: fr, pide: q,
+    opciones: baraja(ops, j + 5), correcta: ops[0], explicacion: fr + " " + ex }));
+
   U14_AUDIO_RESP.forEach((r, j) => add("audio", { id: "EF-aur-" + j, tipo: "audio-resp", forma: "situacion", grupo: "EFAR-" + j, audio: r.audio, audioManual: false, pide: r.pide,
     sit: { necesita: r.nec, modelos: [r.modelo] }, oir: r.modelo, explicacion: "Una forma de decirlo: **" + r.modelo + "**" }));
 
+  /* Gramática (12/10/2026): cada ítem con su lugar (sorteo) y su regla («Qué repasar») */
   const G = U14_GRAM;
-  G.casos.forEach(([fr, ok, ops, por], j) => add("gramatica", { id: "EF-gc-" + j, tipo: "caso", forma: "elegir", grupo: "EFGC-" + j, pide: "Completá.", grande: fr, opciones: ops, correcta: ok, oir: fr.replace("_____", ok), explicacion: "**" + ok + "**: " + por + "." }));
-  G.tiempos.forEach(([fr, a, ok], j) => add("gramatica", { id: "EF-gt-" + j, tipo: "tiempo", forma: "escribir", grupo: "EFGT-" + j, pide: "Transformá: " + fr + " → " + a, grande: a, esperadas: [ok], idioma: "ru", audio: ok, audioManual: true, explicacion: ok }));
-  G.concord.forEach(([fr, ok, ops], j) => add("gramatica", { id: "EF-gk-" + j, tipo: "concordancia", forma: "elegir", grupo: "EFGK-" + j, pide: "Completá.", grande: fr, opciones: ops, correcta: ok, oir: fr.replace("_____", ok), explicacion: fr.replace("_____", "**" + ok + "**") }));
-  const PREPS = ["в", "на", "из", "без", "для", "по́сле", "до", "с"];
-  G.prep.forEach(([fr, ok], j) => { const otras = baraja(PREPS.filter(p => sin(p) !== sin(ok)), j).slice(0, 3);
-    add("gramatica", { id: "EF-gp-" + j, tipo: "preposicion", forma: "elegir", grupo: "EFGP-" + j, pide: "Completá con la preposición.", grande: fr, opciones: baraja([ok].concat(/^[А-Я]/.test(ok) ? otras.map(x => x.charAt(0).toUpperCase() + x.slice(1)) : otras), j), correcta: ok,
-      oir: fr.replace("_____", ok), explicacion: fr.replace("_____", "**" + ok + "**") }); });
-  G.orden.forEach(([ru, es], j) => { const w = sinP(ru).split(" ");
-    add("gramatica", { id: "EF-go-" + j, tipo: "construir", forma: "ordenar", grupo: "EFGO-" + j, pide: "Ordená: «" + es + "»", audio: ru, fichas: baraja(w, j + 3), sep: " ", esperada: w.join(" "), explicacion: ru }); });
-  G.corr.forEach(([fr, mal, arr, expl], j) => { const pals = sinP(fr).split(" ");
-    if (arr) add("gramatica", { id: "EF-gx-" + j, tipo: "corregir", forma: "corregir", grupo: "EFGX-" + j, pide: "Tocá la palabra que está mal y escribila bien.", palabras: pals, correcta: pals.indexOf(mal), arreglo: arr, oir: fr.replace(mal, arr), explicacion: expl });
-    else add("gramatica", { id: "EF-gx-" + j, tipo: "corregir", forma: "tocar", grupo: "EFGX-" + j, pide: "Tocá la palabra que sobra.", palabras: pals, correcta: pals.indexOf(mal), explicacion: expl }); });
+  const gid = { n: 0 };
+  const elegir = (lugar, tipo, [fr, ok, ops, por, regla, pista]) => { const j = gid.n++;
+    add("gramatica", { id: "EF-g" + lugar + "-" + j, tipo, forma: "elegir", lugar, regla, grupo: "EFG-" + lugar + "-" + j, pide: pista ? "Completá (" + pista + ")." : "Completá.", grande: fr,
+      opciones: baraja(ops, j), correcta: ok, oir: fr.replace("_____", ok), explicacion: fr.replace("_____", "**" + ok + "**") + (por ? " " + (/^[a-záéíóú]/.test(por) ? por.charAt(0).toUpperCase() + por.slice(1) : por) + "." : "") }); };
+  G.casos.forEach(x => elegir("casos", "caso", x));
+  G.plural.forEach(x => elegir("plural", "caso", x));
+  G.pron.forEach(x => elegir("pron", "pronombre", x));
+  G.aspecto.forEach(x => elegir("aspecto", "aspecto", x));
+  G.aspectoPq.forEach(([fr, w, ok, otras, regla], j) => add("gramatica", { id: "EF-gapq-" + j, tipo: "porque", forma: "elegir", lugar: "aspecto", regla, grupo: "EFGAPQ-" + j, grande: fr, audio: fr, audioManual: true, oir: fr,
+    pide: "¿Por qué «" + w + "»?", opciones: baraja([ok].concat(otras), j + 2), correcta: ok, explicacion: fr + " " + ok + "." }));
+  G.aspectoPar.forEach(([q, ok, mal, ex, regla], j) => add("gramatica", { id: "EF-gapa-" + j, tipo: "par", forma: "elegir", lugar: "aspecto", regla, grupo: "EFGAPA-" + j, pide: q, oir: ok,
+    opciones: baraja([ok, mal], j + 1), correcta: ok, explicacion: ok + " " + ex }));
+  G.impComp.forEach(x => elegir("impComp", "imperativo", x));
+  G.tiempos.forEach(([fr, a, ok, regla, otras], j) => add("gramatica", { id: "EF-gt-" + j, tipo: "tiempo", forma: "escribir", lugar: "tiempos", regla, grupo: "EFGT-" + j, pide: "Transformá: " + fr + " → " + a, grande: a,
+    esperadas: [ok].concat(otras || []), idioma: "ru", audio: ok, audioManual: true, explicacion: ok }));
+  G.esli.forEach(x => elegir("tiempos", "tiempo", x));
+  G.concord.forEach(([fr, ok, ops, regla], j) => add("gramatica", { id: "EF-gk-" + j, tipo: "concordancia", forma: "elegir", lugar: "concord", regla, grupo: "EFGK-" + j, pide: "Completá.", grande: fr, opciones: ops, correcta: ok,
+    oir: fr.replace("_____", ok), explicacion: fr.replace("_____", "**" + ok + "**") }));
+  const PREPS = ["в", "на", "из", "без", "для", "по́сле", "до", "с", "к"];
+  G.prep.forEach(([fr, ok, regla], j) => { const otras = baraja(PREPS.filter(p => sin(p) !== sin(ok)), j).slice(0, 3);
+    add("gramatica", { id: "EF-gp-" + j, tipo: "preposicion", forma: "elegir", lugar: "prep", regla, grupo: "EFGP-" + j, pide: "Completá con la preposición.", grande: fr,
+      opciones: baraja([ok].concat(/^[А-Я]/.test(ok) ? otras.map(x => x.charAt(0).toUpperCase() + x.slice(1)) : otras), j), correcta: ok, oir: fr.replace("_____", ok), explicacion: fr.replace("_____", "**" + ok + "**") }); });
+  G.orden.forEach(([ru, es, regla], j) => { const w = sinP(ru).split(" ");
+    add("gramatica", { id: "EF-go-" + j, tipo: "construir", forma: "ordenar", lugar: "orden", regla, grupo: "EFGO-" + j, pide: "Ordená: «" + es + "»", audio: ru, fichas: baraja(w, j + 3), sep: " ", esperada: w.join(" "), explicacion: ru }); });
+  G.corr.forEach(([fr, mal, arr, expl, regla], j) => { const pals = sinP(fr).split(" ");
+    add("gramatica", { id: "EF-gx-" + j, tipo: "corregir", forma: "corregir", lugar: "corr", regla, grupo: "EFGX-" + j, pide: "Tocá la palabra que está mal y escribila bien.", palabras: pals, correcta: pals.indexOf(mal), arreglo: arr,
+      oir: fr.replace(mal, arr), explicacion: expl }); });
+  G.diag.forEach(([mal, ok, k, regla], j) => add("gramatica", { id: "EF-gd-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, lugar: "diag", regla, grupo: "EFGD-" + j, oir: ok,
+    pide: "La frase tiene un error. ¿Qué falla?", grande: mal, opciones: baraja([G.FALLAS[k]].concat(baraja(G.FALLAS.filter((x, i) => i !== k), j).slice(0, 2)), j + 4), correcta: G.FALLAS[k],
+    esperadas: [ok], explicacion: ok + " Revisá: " + G.FALLAS[k].charAt(0).toLowerCase() + G.FALLAS[k].slice(1) + "." }));
+  G.natural.forEach(([ok, mal, ex, regla], j) => add("gramatica", { id: "EF-gn-" + j, tipo: "natural", forma: "elegir", lugar: "natural", regla, grupo: "EFGN-" + j, oir: ok, pide: "¿Cuál suena natural?",
+    opciones: baraja([ok, mal], j + 2), correcta: ok, explicacion: ok + " " + ex }));
+  G.porque.forEach(([fr, w, ok, otras, regla], j) => add("gramatica", { id: "EF-gq-" + j, tipo: "porque", forma: "elegir", lugar: "porque", regla, grupo: "EFGQ-" + j, grande: fr, audio: fr, audioManual: true, oir: fr,
+    pide: "¿Por qué «" + w + "»?", opciones: baraja([ok].concat(otras), j + 1), correcta: ok, explicacion: fr + " " + ok + "." }));
 
-  U14_LEX.forEach(([fr, ok, ops], j) => add("lexica", { id: "EF-lx-" + j, tipo: "lexica", forma: "elegir", grupo: "EFX-" + j, pide: "Elegí lo que va.", grande: fr, opciones: baraja(ops, j), correcta: ok,
+  /* Vocabulario (12/10/2026): en contexto, emparejar, ¿qué significa? y escribir en ruso. `palabra`: para «Qué repasar» */
+  U14_LEX.forEach(([fr, ok, ops], j) => add("lexica", { id: "EF-lx-" + j, tipo: "lexica", forma: "elegir", lugar: "lex", palabra: ok.charAt(0).toLowerCase() + ok.slice(1), grupo: "EFX-" + j, pide: "Elegí lo que va.", grande: fr, opciones: baraja(ops, j), correcta: ok,
     oir: fr.indexOf("_____") >= 0 ? fr.replace("_____", ok) : ok, explicacion: fr.indexOf("_____") >= 0 ? fr.replace("_____", "**" + ok + "**") : "**" + ok + "**" }));
-  U14_LEX_EMP.forEach((pares, j) => add("lexica", { id: "EF-lxe-" + j, tipo: "lexica", forma: "emparejar", grupo: "EFXE-" + j, pide: "Uní cada palabra o expresión con su situación.", pares, explicacion: pares.map(p => p.join(" — ")).join(" · ") }));
+  U14_LEX_EMP.forEach((pares, j) => add("lexica", { id: "EF-lxe-" + j, tipo: "lexica", forma: "emparejar", lugar: "emp", grupo: "EFXE-" + j, pide: "Uní cada palabra o expresión con su situación.", pares, explicacion: pares.map(p => p.join(" — ")).join(" · ") }));
+  const VOC = U14_VOC.split("|").map(x => x.split("="));
+  VOC.forEach(([ru, es], j) => {
+    const dis = baraja(VOC.filter(v => v[0] !== ru), j + 7).slice(0, 3).map(v => v[1]), r = ru.replace(/́/g, "");
+    add("lexica", { id: "EF-ls-" + j, tipo: "significado", forma: "elegir", dificultad: 1, lugar: "sig", palabra: ru, grupo: "EFLS-" + j, pide: "¿Qué significa?", grande: ru, audio: r, oir: r,
+      opciones: baraja([es].concat(dis), j), correcta: es, explicacion: ru + " — " + es });
+    add("lexica", { id: "EF-le-" + j, tipo: "palabra-es-ru", forma: "escribir", lugar: "esru", palabra: ru, grupo: "EFLE-" + j, pide: "Escribí en ruso: «" + es + "»", audio: r, audioManual: true, oir: r,
+      pista: "Empieza con " + r[0].toUpperCase() + " y tiene " + r.length + " letras.", esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
+  });
 
   U14_SITUACIONES.forEach((x, j) => add("comunicacion", { id: "EF-cs-" + j, tipo: "situacion", forma: "situacion", dificultad: 3, grupo: "EFCS-" + j, escena: x.escena, pide: x.pide, sit: { necesita: x.nec, modelos: [x.modelo] }, oir: x.modelo,
     explicacion: "Una forma de decirlo: **" + x.modelo + "**" }));
@@ -222,7 +467,43 @@ function ejerciciosExamenFinal() {
   return (ejerciciosExamenFinal.cache = B);
 }
 
+/* Un intento de un bloque (12/10/2026): los ítems sin lugar van siempre; de cada lugar salen
+   los que dice U14_LUGARES, sorteados con la semilla del intento. Se respeta el orden del banco. */
+function u14Intento(bloque, semilla) {
+  const B = ejerciciosExamenFinal()[bloque] || [];
+  const L = U14_LUGARES[bloque];
+  if (!L) return B.slice();
+  let s = (semilla || 1) % 233280;
+  const azar = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+  const elegidos = new Set(), palabras = new Set();
+  L.forEach(([lugar, n]) => { const pool = B.filter(e => e.lugar === lugar).slice();
+    for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(azar() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+    let k = 0; pool.forEach(e => { if (k >= n || (e.palabra && palabras.has(e.palabra))) return; elegidos.add(e.id); if (e.palabra) palabras.add(e.palabra); k++; }); });
+  return B.filter(e => !e.lugar || elegidos.has(e.id));
+}
+
+/* «Qué repasar» (12/10/2026): carga la unidad de una regla si la página no la tiene, para abrir
+   la sección en una hoja (AzHojaRegla busca en UNIDAD_1 … UNIDAD_14). */
+function u14CargarRegla(id) {
+  const r = U14_REGLAS[id];
+  if (!r) return Promise.resolve(false);
+  if (typeof azRegla === "function" && azRegla(id)) return Promise.resolve(true);
+  const cache = u14CargarRegla.cache || (u14CargarRegla.cache = {});
+  if (!cache[r[0]]) cache[r[0]] = new Promise(ok => {
+    const s = document.createElement("script");
+    s.src = "data/data-unidad-" + r[0] + ".js";
+    s.onload = () => ok(true);
+    s.onerror = () => { delete cache[r[0]]; ok(false); };
+    document.head.appendChild(s);
+  });
+  return cache[r[0]].then(() => typeof azRegla === "function" && !!azRegla(id));
+}
+
 window.U14_BLOQUES = U14_BLOQUES;
+window.U14_REGLAS = U14_REGLAS;
+window.u14CargarRegla = u14CargarRegla;
+window.U14_LUGARES = U14_LUGARES;
+window.u14Intento = u14Intento;
 window.U14_NIVELES = U14_NIVELES;
 window.U14_ESCRITURA = U14_ESCRITURA;
 window.u14PuntuarTexto = u14PuntuarTexto;

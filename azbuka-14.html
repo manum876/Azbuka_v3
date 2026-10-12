@@ -37,6 +37,10 @@
    se guardan en az_examen_final; el puntaje final aparece cuando
    están los seis. Se aprueba con 80 → pantalla «Ты говори́шь
    по-ру́сски». En el examen, «Se entiende» vale medio punto.
+   12/10/2026: Gramática, Vocabulario y Audio sortean sus preguntas en
+   cada intento (u14Intento) y cada pregunta dice qué regla evalúa; al
+   terminar un bloque, «Qué repasar» lista las reglas falladas y las
+   abre en una hoja (carga la unidad con u14CargarRegla).
    URL: azbuka-14.html · azbuka-14.html?b=lectura
    ============================================================ */
 const { useState, useEffect } = htmPreact;
@@ -76,6 +80,34 @@ function Tarea({ t, id, est, guardar, c, green }) {
         h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, "El puntaje es una aproximación: mide si el texto cumple los objetivos y descuenta palabras que no existen y errores típicos, pero no corrige toda la gramática."))));
 }
 
+/* «Qué repasar» (12/10/2026): las reglas y palabras falladas, cada regla abre su sección */
+function QueRepasar({ fallos, c, onRegla, titulo }) {
+  const [todas, setTodas] = useState(false);
+  const orden = Object.keys(U14_REGLAS);
+  const reglas = (fallos.reglas || []).filter(id => U14_REGLAS[id]).sort((a, b) => orden.indexOf(a) - orden.indexOf(b)), pal = fallos.palabras || [];
+  if (!reglas.length && !pal.length) return null;
+  const MAX = 8, ver = todas ? reglas : reglas.slice(0, MAX);
+  return h(React.Fragment, null,
+    h("div", { className: "u-sec" }, titulo || "Qué repasar"),
+    reglas.length > 0 && h("div", { style: { fontSize: 13.5, color: c.textSub, margin: "-4px 0 10px", lineHeight: 1.5 } }, "Las reglas de las preguntas que no salieron bien, en el orden del curso. Tocá una para leerla."),
+    ver.map(id => { const r = U14_REGLAS[id];
+      return h("div", { key: id, className: "u-card mod", role: "button", tabIndex: 0, onClick: () => onRegla(id), onKeyDown: e => { if (e.key === "Enter") onRegla(id); } },
+        h("div", { className: "mod-n" }, "📖"),
+        h("div", { style: { flex: 1, minWidth: 0 } },
+          h("div", { className: "mod-t" }, azFmt(r[3])),
+          h("div", { className: "mod-d" }, "Unidad " + r[0] + " · ", azFmt(r[2])))); }),
+    reglas.length > MAX && h("button", { className: "ubtn sec", style: { marginTop: 0 }, onClick: () => setTodas(!todas) }, todas ? "Ver menos" : "Ver todas (" + reglas.length + ")"),
+    pal.length > 0 && h("div", { className: "u-card", style: { padding: "12px 16px" } },
+      h("div", { style: { fontSize: 13, fontWeight: 700, color: c.textMuted } }, "Palabras para repasar"),
+      h("div", { lang: "ru", style: { fontSize: 16, marginTop: 6, lineHeight: 1.6, color: c.text } }, pal.join(" · "))));
+}
+function juntarFallos(est) {
+  const reglas = [], palabras = [];
+  U14_BLOQUES.forEach(b => { const f = ((est.bloques || {})[b.id] || {}).fallos; if (!f) return;
+    (f.reglas || []).forEach(x => { if (reglas.indexOf(x) < 0) reglas.push(x); }); (f.palabras || []).forEach(x => { if (palabras.indexOf(x) < 0) palabras.push(x); }); });
+  return { reglas, palabras };
+}
+
 /* Pantalla final al aprobar */
 function Final({ total, onCerrar, c }) {
   return h("div", { style: { position: "fixed", inset: 0, zIndex: 300, background: c.bg, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "calc(env(safe-area-inset-top) + 24px) 28px calc(env(safe-area-inset-bottom) + 24px)", textAlign: "center", animation: "fadeIn 0.6s ease" } },
@@ -94,6 +126,8 @@ function App() {
   const [practica, setPractica] = useState(null);
   const [est, setEst] = useState({ bloques: {}, escritura: {} });
   const [final, setFinal] = useState(false);
+  const [hoja, setHoja] = useState(null);
+  const abrirRegla = id => u14CargarRegla(id).then(ok => { if (ok) setHoja(id); else { const r = U14_REGLAS[id]; location.href = "azbuka-" + r[0] + ".html?m=u" + r[0] + "m" + r[1]; } });
 
   useEffect(() => {
     (async () => {
@@ -120,7 +154,7 @@ function App() {
       if (tot >= APROBADO) setTimeout(() => setFinal(true), 400);
     }
   };
-  const guardarBloque = (id, pct) => guardarEst(Object.assign({}, est, { bloques: Object.assign({}, est.bloques, { [id]: { pct, fecha: new Date().toISOString().slice(0, 10) } }) }));
+  const guardarBloque = (id, pct, fallos) => guardarEst(Object.assign({}, est, { bloques: Object.assign({}, est.bloques, { [id]: Object.assign({ pct, fecha: new Date().toISOString().slice(0, 10) }, fallos ? { fallos } : {}) }) }));
   const guardarTarea = (tid, datos) => {
     const esc = Object.assign({}, est.escritura, { [tid]: datos });
     let nuevo = Object.assign({}, est, { escritura: esc });
@@ -130,10 +164,15 @@ function App() {
     }
     guardarEst(nuevo);
   };
-  const onFin = id => lista => {
-    const peso = e => (B[id].find(x => x.id === e.id) || {}).peso || 1;
+  const onFin = (id, pool) => lista => {
+    const ej = e => pool.find(x => x.id === e.id) || {};
+    const peso = e => ej(e).peso || 1;
     const tot = lista.reduce((a, e) => a + peso(e), 0), sum = lista.reduce((a, e) => a + e.p * peso(e), 0);
-    guardarBloque(id, Math.round(sum / Math.max(1, tot) * 100));
+    const fallos = { reglas: [], palabras: [] };
+    lista.filter(e => e.p < 1).forEach(e => { const x = ej(e);
+      if (x.regla && fallos.reglas.indexOf(x.regla) < 0) fallos.reglas.push(x.regla);
+      if (x.palabra && fallos.palabras.indexOf(x.palabra) < 0) fallos.palabras.push(x.palabra); });
+    guardarBloque(id, Math.round(sum / Math.max(1, tot) * 100), fallos);
   };
   const abrir = id => { history.pushState(null, "", id ? "?b=" + id : location.pathname); setBId(id); window.scrollTo(0, 0); };
 
@@ -167,6 +206,7 @@ function App() {
         U14_BLOQUES.filter(x => est.bloques[x.id].pct < 70).length > 0 && h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 10, lineHeight: 1.55 } },
           h("b", null, "Para repasar: "), U14_BLOQUES.filter(x => est.bloques[x.id].pct < 70).map(x => x.es + " → " + x.repaso).join(" · ")),
         total >= APROBADO && h("button", { className: "ubtn", onClick: () => setFinal(true) }, "Ты говори́шь по-ру́сски"))),
+    h(QueRepasar, { fallos: juntarFallos(est), c, onRegla: abrirRegla, titulo: "Qué repasar (de todos los bloques)" }),
     h("div", { className: "u-sec" }, "Bloques"),
     U14_BLOQUES.map((x, i) => { const p = puntosDe(est, x);
       return h("div", { key: x.id, className: "u-card mod", role: "button", tabIndex: 0, onClick: () => abrir(x.id), onKeyDown: e => { if (e.key === "Enter") abrir(x.id); } },
@@ -189,16 +229,18 @@ function App() {
       b.id === "escritura"
         ? h(React.Fragment, null, h("div", { className: "u-dest" }, AVISO_ACENTOS),
             h(Tarea, { t: ESC.t1, id: "t1", est, guardar: guardarTarea, c, green }), h(Tarea, { t: ESC.t2, id: "t2", est, guardar: guardarTarea, c, green }))
-        : h("button", { className: "ubtn", onClick: () => setPractica({ id: b.id }) }, p != null ? "Hacerlo de nuevo" : "Empezar el bloque"),
+        : h("button", { className: "ubtn", onClick: () => setPractica({ id: b.id, pool: u14Intento(b.id, Date.now() % 233279 + 1) }) }, p != null ? "Hacerlo de nuevo" : "Empezar el bloque"),
+      p != null && est.bloques[b.id].fallos && h(QueRepasar, { fallos: est.bloques[b.id].fallos, c, onRegla: abrirRegla }),
       next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrir(next.id) }, "Siguiente: " + next.ru + " · " + next.es));
   }
 
   return h(React.Fragment, null,
     h(AzEstilosUnidad, { c, green }),
     h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, b ? vista : portada),
-    practica && h(AzPractica, { key: practica.id, unidad: 14, titulo: U14_BLOQUES.find(x => x.id === practica.id).ru, pool: B[practica.id], enOrden: true, n: B[practica.id].length, dark: darkMode,
-      aviso: AVISO_ACENTOS + " Es el examen: cada respuesta cuenta una sola vez, sin «Intentar de nuevo».", entiende: "medio", onFin: onFin(practica.id), onSalir: () => setPractica(null) }),
+    practica && h(AzPractica, { key: practica.id, unidad: 14, titulo: U14_BLOQUES.find(x => x.id === practica.id).ru, pool: practica.pool, enOrden: true, n: practica.pool.length, dark: darkMode,
+      aviso: AVISO_ACENTOS + " Es el examen: cada respuesta cuenta una sola vez, sin «Intentar de nuevo».", entiende: "medio", onFin: onFin(practica.id, practica.pool), onSalir: () => setPractica(null) }),
     final && h(Final, { total, c, onCerrar: () => setFinal(false) }),
+    hoja && h(AzHojaRegla, { id: hoja, c, volver: "Volver al examen", onClose: () => setHoja(null) }),
     h(AzBurbujaHost, { dark: darkMode }));
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));

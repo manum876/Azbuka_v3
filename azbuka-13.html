@@ -35,6 +35,8 @@
    06/10/2026. Piezas de unidad-ui.js y unidad.js. Propio de esta
    unidad: el taller de escritura (AzTaller), el audio a dos voces
    y el proyecto en seis partes.
+   12/10/2026 (profundización): vocabulario nuevo por grupo en su módulo
+   (U13_GRUPOS, lista + «Tarjetas»), también en el módulo de lecturas.
    URL: azbuka-13.html · azbuka-13.html?m=u13m2
    ============================================================ */
 const { useState, useEffect } = htmPreact;
@@ -42,6 +44,18 @@ const h = React.createElement;
 const U = UNIDAD_13;
 const EJ_U13 = ejerciciosUnidad13();
 const EJ_U13_BASE = EJ_U13.filter(e => !e.ampliacion);
+const PERS6 = ["я", "ты", "он / она́", "мы", "вы", "они́"];
+/* Grupos de vocabulario de un módulo (U13_GRUPOS), con los IDs del léxico */
+const grupos = n => U13_GRUPOS.filter(g => g[0] === n).map(([m, titulo, pal]) => ({ titulo,
+  ids: pal.split(" ").map(ru => { const e = LEXICON_COMER.find(x => x.acento === ru); return e && e.id; }).filter(Boolean) }));
+function detalleTarjeta(e) {
+  const cz = casosById(e.id);
+  if (cz && cz.corta && cz.corta.m) return "forma corta: " + cz.corta.m + " · " + cz.corta.f;
+  if (cz && cz.sg) return "plural: " + (cz.pl ? cz.pl[0] : "—") + " · gen. " + cz.sg[1];
+  const v = verboById(e.id);
+  if (v && v.futuro) return "futuro: " + PERS6.map((p, i) => p + " " + v.futuro[i]).join(" · ");
+  return v && v.presente ? PERS6.map((p, i) => p + " " + v.presente[i]).join(" · ") : null;
+}
 const OBJETIVO_U13 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(13) >= 0 || (e.appearsIn || []).indexOf(13) >= 0).map(e => e.id);
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
 const CASO_FILAS = [["Nominativo", "кто? что?"], ["Genitivo", "кого́? чего́?"], ["Dativo", "кому́? чему́?"], ["Acusativo", "кого́? что?"], ["Instrumental", "кем? чем?"], ["Prepositivo", "о ком? о чём?"]];
@@ -146,16 +160,23 @@ function App() {
 
   let vista = null;
   if (mod) {
+    /* Vocabulario nuevo (12/10/2026): una lista por grupo, en el módulo donde se presenta */
+    const listas = grupos(mod.n).map(g => h(React.Fragment, { key: g.titulo },
+      h("div", { className: "u-sec" }, g.titulo),
+      h(AzVocabulario, { ids: g.ids, c }),
+      h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => setTarjetas({ ids: g.ids, titulo: g.titulo }) }, "Tarjetas (" + g.ids.length + ")")));
     vista = h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
       h("div", { className: "u-kicker" }, "Unidad 13 · Módulo " + mod.n),
       h("h1", { className: "u-title" }, mod.titulo),
       h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
       mod.tipo === "leccion" && h(React.Fragment, null,
         h(AzSecciones, { secciones: mod.secciones }),
+        listas,
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
         ),
       mod.tipo === "lectura" && h(React.Fragment, null,
         (typeof U13_LECTURAS !== "undefined" ? U13_LECTURAS : []).map(L => h(Lectura, { key: L.id, L, c })),
+        listas,
         h("button", { className: "ubtn", style: { marginTop: 18 }, onClick: () => practicarModulo(mod) }, "Practicar «" + mod.titulo + "»")),
       mod.tipo === "taller" && h(Taller13, { c, green }),
       mod.tipo === "proyecto6" && h(Proyecto13, { c, green, onConversar: () => setPractica({ titulo: "Conversación final", n: 1, pool: EJ_U13.filter(e => e.id === "U13-final") }) }),
@@ -176,6 +197,7 @@ function App() {
     practica && h(AzPractica, { key: practica.titulo + (practica.pool[0] || {}).id, unidad: 13, titulo: practica.titulo, pool: practica.pool, mezcla: U13_MEZCLA,
       n: azNPractica(practica.pool, practica.n), dark: darkMode, aviso: AVISO_ACENTOS, examen: practica.examen, onReforzar: reforzar, objetivo: OBJETIVO_U13,
       onSalir: () => { setPractica(null); refrescar(x => x + 1); } }),
+    tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, detalle: detalleTarjeta, onClose: () => { setTarjetas(null); refrescar(x => x + 1); } }),
     h(AzBurbujaHost, { dark: darkMode }));
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));

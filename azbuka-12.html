@@ -35,6 +35,10 @@
    05/10/2026. Piezas de unidad-ui.js y unidad.js. Propio de esta
    unidad: tablas de cada módulo con las formas de Casos (pronombres,
    posesivos y э́тот, plural, números) y de Verbos (aspecto, imperativo).
+   12/10/2026 (profundización): vocabulario nuevo por grupo en su módulo
+   (U12_GRUPOS, lista + «Tarjetas»), la tabla de свой (módulo 2), las
+   parejas nuevas por cómo se forman (módulo 5, U12_PARES_NUEVAS), más
+   verbos en el imperativo y más comparativos.
    URL: azbuka-12.html · azbuka-12.html?m=u12m2
    ============================================================ */
 const { useState, useEffect } = htmPreact;
@@ -46,6 +50,19 @@ const D12 = u12Datos();
 const OBJETIVO_U12 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(12) >= 0 || (e.appearsIn || []).indexOf(12) >= 0).map(e => e.id);
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
 const CASO_FILAS = [["Nominativo", "кто? что?"], ["Genitivo", "кого́? чего́?"], ["Dativo", "кому́? чему́?"], ["Acusativo", "кого́? что?"], ["Instrumental", "кем? чем?"], ["Prepositivo", "о ком? о чём?"]];
+
+const PERS6 = ["я", "ты", "он / она́", "мы", "вы", "они́"];
+/* Grupos de vocabulario de un módulo (U12_GRUPOS), con los IDs del léxico */
+const grupos = n => U12_GRUPOS.filter(g => g[0] === n).map(([m, titulo, pal]) => ({ titulo,
+  ids: pal.split(" ").map(ru => { const e = LEXICON_COMER.find(x => x.acento === ru); return e && e.id; }).filter(Boolean) }));
+function detalleTarjeta(e) {
+  const cz = casosById(e.id);
+  if (cz && cz.comp) return "más …: " + cz.comp;
+  const v = verboById(e.id);
+  if (v && v.futuro) return "futuro: " + PERS6.map((p, i) => p + " " + v.futuro[i]).join(" · ") + (v.imperativo ? " · ¡" + v.imperativo.ty + "!" : "");
+  return v && v.presente ? PERS6.map((p, i) => p + " " + v.presente[i]).join(" · ") : null;
+}
+const FORMA_PAR = { prefijo: "con un prefijo", final: "cambia el final", otra: "otra palabra" };
 
 /* Tabla de un adjetivo / posesivo: filas = casos, columnas = m, f, n, pl */
 function tablaAdj(a, c) {
@@ -136,6 +153,7 @@ function App() {
           h("div", { className: "tnote u-text", style: { fontSize: 13, marginTop: 8 } }, "Con preposición, он, она́ y они́ llevan н-: у него́, у неё, у них.")),
         mod.n === 2 && h(React.Fragment, null, h("div", { className: "u-sec" }, "мой en los seis casos"), tablaAdj(D12.adj("мой"), c),
           h("div", { className: "u-sec" }, "наш en los seis casos"), tablaAdj(D12.adj("наш"), c),
+          h("div", { className: "u-sec" }, "свой en los seis casos"), tablaAdj(D12.adj("свой"), c),
           h("div", { className: "u-sec" }, "э́тот en los seis casos"), tablaAdj(D12.adj("э́тот"), c)),
         mod.n === 3 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Plural y genitivo plural"),
           h(AzTablaGrupos, { encabezados: ["Singular", "Plural", "мно́го…"], c,
@@ -150,7 +168,10 @@ function App() {
           h("div", { className: "u-sec" }, "Adjetivos y posesivos en plural"),
           h(AzTablaGrupos, { encabezados: ["Caso", "но́вые", "хоро́шие", "мои́"], c,
             filas: CASO_FILAS.map((f, i) => [{ ru: f[1], es: f[0] }].concat(["но́вый", "хоро́ший", "мой"].map(r => { const a = D12.adj(r), x = a.pl[i]; return { id: a.id, ru: Array.isArray(x) ? x[0] + " / " + x[1] : x, es: "" }; }))) })),
-        mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Las parejas"),
+        mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Parejas nuevas"),
+          h(AzTablaGrupos, { encabezados: ["Proceso", "Resultado"], c,
+            filas: U12_PARES_NUEVAS.map(([i, p, es, f]) => { const a = D12.verbo(i), b = D12.verbo(p); return a && b && [{ id: a.id, ru: a.ac, es }, { id: b.id, ru: b.ac, es: FORMA_PAR[f] }]; }).filter(Boolean) }),
+          h("div", { className: "u-sec" }, "Las parejas que ya conocés"),
           h(AzTablaGrupos, { encabezados: ["Imperfectivo", "Perfectivo"], c,
             filas: U12_PARES.map(([i, p, es]) => { const a = D12.verbo(i), b = D12.verbo(p); return a && b && [{ id: a.id, ru: a.ac, es }, { id: b.id, ru: b.ac, es: "" }]; }).filter(Boolean) })),
         mod.n === 6 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Futuro perfectivo"),
@@ -165,13 +186,19 @@ function App() {
               .map(([a, ae, b, be]) => [{ ru: a, es: ae }, b ? { ru: b, es: be } : null]) })),
         mod.n === 8 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Imperativo"),
           h(AzTablaGrupos, { encabezados: ["Verbo", "ты", "вы"], c,
-            filas: ["чита́ть", "сде́лать", "позвони́ть", "написа́ть", "пригото́вить", "отве́тить", "закры́ть", "помо́чь", "дать", "взять", "пить", "есть"].map(r => { const v = D12.verbo(r);
+            filas: ["чита́ть", "сде́лать", "позвони́ть", "написа́ть", "пригото́вить", "отве́тить", "закры́ть", "помо́чь", "дать", "взять", "пить", "есть", "поста́вить", "положи́ть", "включи́ть", "вы́ключить", "прове́рить", "подожда́ть", "сади́ться"].map(r => { const v = D12.verbo(r);
               return [{ id: v.id, ru: v.ac, es: "" }, { id: v.id, ru: v.imperativo.ty, es: "" }, { id: v.id, ru: v.imperativo.vy, es: "" }]; }) })),
         mod.n === 9 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Comparativos"),
           h(AzTablaGrupos, { encabezados: ["Adjetivo", "Más …"], c,
-            filas: ["интере́сный", "краси́вый", "удо́бный", "бы́стрый", "тёплый", "холо́дный", "большо́й", "ма́ленький", "хоро́ший", "плохо́й", "дорого́й", "дешёвый"].map(r => { const a = D12.adj(r);
+            filas: ["интере́сный", "краси́вый", "удо́бный", "бы́стрый", "тёплый", "холо́дный", "большо́й", "ма́ленький", "хоро́ший", "плохо́й", "дорого́й", "дешёвый",
+              "лёгкий", "просто́й", "сло́жный", "ти́хий", "гро́мкий", "бли́зкий", "далёкий", "у́мный", "си́льный", "сла́бый", "тру́дный", "ва́жный", "высо́кий", "ни́зкий", "дли́нный", "коро́ткий", "ста́рый", "молодо́й"].map(r => { const a = D12.adj(r);
               return [{ id: a.id, ru: a.ac, es: "" }, { id: a.id, ru: a.comp, es: "" }]; }) }),
           h("div", { className: "u-sec" }, "са́мый"), tablaAdj(D12.adj("са́мый"), c)),
+        /* Vocabulario nuevo (12/10/2026): una lista por grupo, en el módulo donde se presenta */
+        grupos(mod.n).map(g => h(React.Fragment, { key: g.titulo },
+          h("div", { className: "u-sec" }, g.titulo),
+          h(AzVocabulario, { ids: g.ids, c }),
+          h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => setTarjetas({ ids: g.ids, titulo: g.titulo }) }, "Tarjetas (" + g.ids.length + ")"))),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
         ),
       mod.tipo === "lectura" && h(React.Fragment, null,
@@ -194,6 +221,7 @@ function App() {
     practica && h(AzPractica, { key: practica.titulo + (practica.pool[0] || {}).id, unidad: 12, titulo: practica.titulo, pool: practica.pool, mezcla: U12_MEZCLA,
       n: azNPractica(practica.pool, practica.n), dark: darkMode, aviso: AVISO_ACENTOS, examen: practica.examen, onReforzar: reforzar, objetivo: OBJETIVO_U12,
       onSalir: () => { setPractica(null); refrescar(x => x + 1); } }),
+    tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, detalle: detalleTarjeta, onClose: () => { setTarjetas(null); refrescar(x => x + 1); } }),
     h(AzBurbujaHost, { dark: darkMode }));
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));

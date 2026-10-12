@@ -1,7 +1,8 @@
 /* ============================================================
    DATA-UNIDAD-12.JS — Unidad 12: Gramática B1
    ------------------------------------------------------------
-   Versión 05/10/2026. Contenido, vocabulario y banco de ejercicios.
+   Versión 12/10/2026 (profundización; la primera, del 05/10/2026). Contenido,
+   vocabulario y banco de ejercicios.
    Decisiones (con Manu, 05/10/2026):
    · La Unidad 12 del esquema se divide en dos: esta (gramática B1,
      todo lo que se venía dejando como fórmula) y la 13 (consolidación
@@ -13,6 +14,22 @@
    · 23 parejas de aspecto (прочита́ть, no проче́сть ni почита́ть;
      вы́учить, no научи́ть) y 12 comparativos (Casos, campo comp).
    Todas las formas salen de Casos y de Verbos.
+   Profundización (12/10/2026, aprobada por Manu):
+   · Teoría con ids de regla (u12-…), ejemplos explicados, errores
+     típicos, chequeos y «Más a fondo». Nuevo: никто́ / ничего́ + не,
+     -то / -нибудь, свой, не́сколько, cómo se forman las parejas (y las
+     que no lo son: почита́ть, заговори́ть), не + proceso / resultado,
+     después de нача́ть y не на́до, el fondo y el golpe en el relato,
+     прийти́ / уйти́ / прие́хать / уе́хать, el imperativo de invitación
+     (Сади́тесь) y más comparativos (Casos, campo comp).
+   · El aspecto ya se enseña desde la Unidad 8: acá se profundiza.
+   · Vocabulario nuevo: 55 palabras del léxico, en grupos por módulo
+     (U12_GRUPOS), con su traducción corta (U12_GLOSA); parejas nuevas
+     en U12_PARES_NUEVAS.
+   · Banco: unos 1.020 ejercicios. Los tipos que practican la regla
+     (porque, natural, oido, par, descubrir, cadena, diagnostico,
+     desarmar) son ~20 % de la sesión. Todos llevan `regla`; los viejos
+     la toman de REGLA_ID (los pronombres, según la forma: reglaPron).
    ============================================================ */
 
 /* Pronombres: índice de caso → [nom, gen, dat, acc, ins, prep] */
@@ -155,95 +172,410 @@ const U12_LECTURAS = [
 ];
 
 /* Palabras que la unidad presenta en cada módulo (verificador de palabras vistas) */
-const U12_VISTAS = { 1: "о обо со", 2: "твой наш ваш об", 5: "сде́лать прочита́ть написа́ть позвони́ть посмотре́ть пригото́вить вы́пить вы́учить отве́тить взять нача́ть зако́нчить откры́ть закры́ть поня́ть пообе́дать поу́жинать отдохну́ть", 7: "ка́ждый до́лго", 9: "удо́бнее интере́снее краси́вее тепле́е холодне́е быстре́е бо́льше ме́ньше лу́чше ху́же доро́же деше́вле са́мый чем тёплый бы́стрый" };
+const U12_VISTAS = { 1: "о обо со сам никто́ ничто́ кто́-то кто́-нибудь где́-нибудь", 2: "твой наш ваш об свой", 3: "не́сколько полови́на большинство́",
+  5: "сде́лать прочита́ть написа́ть позвони́ть посмотре́ть пригото́вить вы́пить вы́учить отве́тить взять нача́ть зако́нчить откры́ть закры́ть поня́ть пообе́дать поу́жинать отдохну́ть получа́ть реша́ть забыва́ть убра́ть постира́ть помы́ть нарисова́ть спеть стро́ить постро́ить класть положи́ть проверя́ть прове́рить почита́ть порабо́тать заговори́ть",
+  6: "подожда́ть встреча́ть", 7: "ка́ждый до́лго прийти́ уйти́ приезжа́ть прие́хать уезжа́ть уе́хать",
+  8: "ста́вить поста́вить включа́ть включи́ть выключа́ть вы́ключить позва́ть гро́мко ти́хо",
+  9: "удо́бнее интере́снее краси́вее тепле́е холодне́е быстре́е бо́льше ме́ньше лу́чше ху́же доро́же деше́вле са́мый чем тёплый бы́стрый лёгкий просто́й сло́жный ти́хий гро́мкий бли́зкий далёкий у́мный си́льный сла́бый тру́дный лу́чший ста́рший мла́дший" };
+/* Vocabulario nuevo (12/10/2026, aprobado por Manu): un grupo por módulo, con su lista en la página */
+const U12_GRUPOS = [
+  [1, "Nadie, alguien, uno mismo", "никто́ ничто́ кто́-то кто́-нибудь где́-нибудь сам"],
+  [2, "Su propio", "свой"],
+  [3, "Cantidades", "не́сколько полови́на большинство́"],
+  [5, "Verbos nuevos", "получа́ть реша́ть забыва́ть убра́ть постира́ть помы́ть нарисова́ть спеть стро́ить постро́ить класть положи́ть проверя́ть прове́рить"],
+  [6, "Esperar y recibir", "подожда́ть встреча́ть"],
+  [7, "Llegar e irse", "прийти́ уйти́ приезжа́ть прие́хать уезжа́ть уе́хать"],
+  [8, "Para pedir", "ста́вить поста́вить включа́ть включи́ть выключа́ть вы́ключить позва́ть гро́мко ти́хо"],
+  [9, "Para comparar", "лёгкий просто́й сло́жный ти́хий гро́мкий бли́зкий далёкий у́мный си́льный сла́бый тру́дный лу́чший ста́рший мла́дший"]
+];
+/* Traducción corta de las palabras nuevas para los ejercicios de vocabulario */
+const U12_GLOSA = {
+  "никто́": "nadie", "ничто́": "nada", "кто́-то": "alguien", "кто́-нибудь": "alguien (quien sea)", "где́-нибудь": "en algún lugar", "сам": "uno mismo",
+  "свой": "su (propio)", "не́сколько": "varios", "полови́на": "mitad", "большинство́": "mayoría",
+  "получа́ть": "recibir", "реша́ть": "decidir", "забыва́ть": "olvidar", "убра́ть": "ordenar (una vez)", "постира́ть": "lavar la ropa (una vez)", "помы́ть": "lavar (una vez)",
+  "нарисова́ть": "dibujar (una vez)", "спеть": "cantar (una vez)", "стро́ить": "construir", "постро́ить": "construir (una vez)", "класть": "poner (acostado)",
+  "положи́ть": "poner (acostado, una vez)", "проверя́ть": "revisar", "прове́рить": "revisar (una vez)", "подожда́ть": "esperar (un momento)", "встреча́ть": "ir a buscar, recibir",
+  "прийти́": "llegar (a pie)", "уйти́": "irse (a pie)", "приезжа́ть": "llegar (en vehículo)", "прие́хать": "llegar (en vehículo, una vez)", "уезжа́ть": "irse (en vehículo)",
+  "уе́хать": "irse (en vehículo, una vez)", "ста́вить": "poner (parado)", "поста́вить": "poner (parado, una vez)", "включа́ть": "prender", "включи́ть": "prender (una vez)",
+  "выключа́ть": "apagar", "вы́ключить": "apagar (una vez)", "позва́ть": "llamar (a alguien)", "гро́мко": "fuerte (en voz alta)", "ти́хо": "bajo, en voz baja",
+  "лёгкий": "fácil, liviano", "просто́й": "simple", "сло́жный": "complicado", "ти́хий": "tranquilo", "гро́мкий": "ruidoso, fuerte", "бли́зкий": "cercano", "далёкий": "lejano",
+  "у́мный": "inteligente", "си́льный": "fuerte", "сла́бый": "débil", "тру́дный": "difícil", "лу́чший": "el mejor", "ста́рший": "mayor", "мла́дший": "menor"
+};
+/* Parejas nuevas de esta unidad (tabla del módulo 5): [proceso, resultado, español, cómo se forma] */
+const U12_PARES_NUEVAS = [["рисова́ть", "нарисова́ть", "dibujar", "prefijo"], ["петь", "спеть", "cantar", "prefijo"], ["стро́ить", "постро́ить", "construir", "prefijo"],
+  ["стира́ть", "постира́ть", "lavar la ropa", "prefijo"], ["мыть", "помы́ть", "lavar", "prefijo"], ["убира́ть", "убра́ть", "ordenar", "final"],
+  ["получа́ть", "получи́ть", "recibir", "final"], ["реша́ть", "реши́ть", "decidir", "final"], ["забыва́ть", "забы́ть", "olvidar", "final"], ["проверя́ть", "прове́рить", "revisar", "final"],
+  ["включа́ть", "включи́ть", "prender", "final"], ["выключа́ть", "вы́ключить", "apagar", "final"], ["встреча́ть", "встре́тить", "ir a buscar, encontrarse", "final"],
+  ["ста́вить", "поста́вить", "poner (parado)", "prefijo"], ["класть", "положи́ть", "poner (acostado)", "otra"], ["приходи́ть", "прийти́", "llegar (a pie)", "final"],
+  ["уходи́ть", "уйти́", "irse (a pie)", "final"], ["приезжа́ть", "прие́хать", "llegar (en vehículo)", "final"], ["уезжа́ть", "уе́хать", "irse (en vehículo)", "final"], ["ждать", "подожда́ть", "esperar", "prefijo"]];
 
 const UNIDAD_12 = {
   id: 12,
   titulo: "Gramática B1",
   tituloRu: "Грамма́тика B1",
   objetivo: "Usar los pronombres y los posesivos en todos los casos, el plural en los seis casos, el aspecto de los verbos, el imperativo y las comparaciones.",
-  tiempo: "40–50 horas",
+  tiempo: "4 a 5 semanas con práctica diaria (unas 45–55 horas)",
   modulos: [
-    { id: "u12m1", n: 1, tipo: "leccion", nPractica: 12, titulo: "Los pronombres en todos los casos", resumen: "меня́, мне, со мной, обо мне.",
-      intro: "Ya usaste muchos pronombres sueltos: меня́ зову́т, у меня́, мне нра́вится. Acá van todos juntos, en los seis casos.",
+    { id: "u12m1", n: 1, tipo: "leccion", nPractica: 12, titulo: "Los pronombres en todos los casos", resumen: "меня́, мне, со мной, обо мне. Никто́ не…",
+      intro: "Ya usaste muchos pronombres sueltos: меня́ зову́т, у меня́, мне нра́вится, со мной. Acá van todos juntos, en los seis casos, más dos piezas que faltaban: «nadie, nada» y «alguien, algo».",
       secciones: [
-        { titulo: "Ya los conocés", texto: "Меня́ зову́т Ману. («me llamo Manu»: acusativo)\nУ меня́ есть брат. («tengo un hermano»: genitivo)\nМне нра́вится му́зыка. («me gusta la música»: dativo)\nА́нна гуля́ет со мной. («Ana pasea conmigo»: instrumental)\nА́нна ду́мает обо мне. («Ana piensa en mí»: prepositivo)", destacado: "Cada pronombre tiene una forma para cada caso." },
-        { titulo: "Acusativo y genitivo: la misma forma", texto: "меня́, тебя́, его́, её, нас, вас, их\nМа́ма зна́ет тебя́. («mamá te conoce»)\nУ тебя́ есть вре́мя? («¿tenés tiempo?»)" },
-        { titulo: "Dativo e instrumental", texto: "dativo: мне, тебе́, ему́, ей, нам, вам, им\nА́нна звони́т нам. («Ana nos llama»)\ninstrumental: мной, тобо́й, им, ей, на́ми, ва́ми, и́ми\nА́нна гуля́ет с на́ми. («Ana pasea con nosotros»)", ojo: "ей es dativo e instrumental: А́нна звони́т ей. / А́нна гуля́ет с ней." },
-        { titulo: "La н- después de preposición", texto: "Con он, она́ y они́, después de una preposición se agrega н-:\nу него́ («él tiene»)\nс ней («con ella»)\nо них («de ellos»)\nSin preposición, no: Ма́ма зна́ет его́. («mamá lo conoce»)", destacado: "preposición + него́, ней, них…" },
-        { titulo: "Con я: со мной y обо мне", texto: "Para que se pueda pronunciar, la preposición suma una о:\nс → со мной («conmigo»)\nо → обо мне («de mí, en mí»)\nCon los demás no cambia: с тобо́й, о тебе́." }
+        { titulo: "Ya los conocés", texto: "Cada pronombre tiene una forma para cada caso, y ya usaste casi todas:",
+          ejemplos: [
+            { ru: "{Меня́} зову́т А́нна.", es: "Me llamo Ana.", por: "Acusativo: «a mí me llaman»." },
+            { ru: "У {меня́} есть брат.", es: "Tengo un hermano.", por: "Genitivo: у + quién tiene." },
+            { ru: "{Мне} нра́вится му́зыка.", es: "Me gusta la música.", por: "Dativo: a quién le gusta." },
+            { ru: "А́нна гуля́ет со {мной}.", es: "Ana pasea conmigo.", por: "Instrumental: con quién." },
+            { ru: "А́нна ду́мает обо {мне}.", es: "Ana piensa en mí.", por: "Prepositivo: en quién." }] },
+        { id: "u12-pron-acc-gen", titulo: "Acusativo y genitivo: la misma forma",
+          texto: "En los pronombres, acusativo y genitivo son iguales: меня́, тебя́, его́, её, нас, вас, их. Así que una sola forma sirve para «me ve» y para «junto a mí».",
+          ejemplos: [
+            { ru: "Ма́ма зна́ет {тебя́}.", es: "Mamá te conoce.", por: "Acusativo: a quién conoce." },
+            { ru: "У {тебя́} есть вре́мя?", es: "¿Tenés tiempo?", por: "Genitivo: у + quién." },
+            { ru: "Я ви́жу {их}.", es: "Los veo.", por: "Acusativo de они́." }],
+          chequeo: [{ pide: "Ма́ма ждёт ___ (a nosotros).", opciones: ["нас", "нам", "на́ми"], ok: "нас", por: "Acusativo: нас." }] },
+        { id: "u12-pron-dat-ins", titulo: "Dativo e instrumental",
+          texto: "dativo: мне, тебе́, ему́, ей, нам, вам, им\ninstrumental: мной, тобо́й, им, ей, на́ми, ва́ми, и́ми\nDos formas se repiten: им (dativo de они́ e instrumental de он) y ей (dativo e instrumental de она́). El verbo o la preposición dicen cuál es.",
+          ejemplos: [
+            { ru: "А́нна звони́т {нам}.", es: "Ana nos llama.", por: "звони́ть + dativo." },
+            { ru: "А́нна гуля́ет с {на́ми}.", es: "Ana pasea con nosotros.", por: "с + instrumental." },
+            { ru: "Я звоню́ {ей}.", es: "La llamo.", por: "Dativo de она́." }],
+          errores: [{ mal: "Я помога́ю её.", bien: "Я помога́ю {ей}.", por: "помога́ть pide dativo: ей." }],
+          chequeo: [{ pide: "Я пишу́ ___ (a él).", opciones: ["ему́", "его́"], ok: "ему́", por: "A quién se escribe: dativo." }] },
+        { id: "u12-pron-n", titulo: "La н- después de preposición",
+          texto: "Con он, она́ y они́, después de una preposición se agrega **н-**. Sin preposición, no.",
+          ejemplos: [
+            { ru: "У {него́} есть маши́на.", es: "Él tiene un auto.", por: "у + него́." },
+            { ru: "Я гуля́ю с {ней}.", es: "Paseo con ella.", por: "с + ней." },
+            { ru: "Мы говори́м о {них}.", es: "Hablamos de ellos.", por: "о + них." },
+            { ru: "Ма́ма зна́ет {его́}.", es: "Mamá lo conoce.", por: "Sin preposición: sin н-." }],
+          destacado: "preposición + него́, неё, ней, них…",
+          errores: [{ mal: "Я гуля́ю с ей.", bien: "Я гуля́ю с {ней}.", por: "Después de una preposición, **н-**." }],
+          chequeo: [{ pide: "У ___ есть соба́ка (ella).", opciones: ["неё", "её"], ok: "неё", por: "Después de у: **н-**." }] },
+        { id: "u12-pron-so", titulo: "Con я: со мной y обо мне",
+          texto: "Para que se pueda pronunciar, la preposición suma una о: с → со мной («conmigo»), о → обо мне («de mí, en mí»). Con los demás no cambia: с тобо́й, о тебе́.",
+          ejemplos: [
+            { ru: "Пойдём {со мной}!", es: "¡Vamos conmigo!", por: "со мной, no «с мной»." },
+            { ru: "Ты ду́маешь {обо мне}?", es: "¿Pensás en mí?", por: "обо мне." }] },
+        { id: "u12-nikto", titulo: "Nadie, nada: никто́ не…, ничего́ не…",
+          antes: { pide: "Я никогда́ не чита́ю газе́ты. ¿Y «nadie llama»?", opciones: ["Никто́ не звони́т.", "Никто́ звони́т."], ok: "Никто́ не звони́т.", por: "Como con никогда́: la frase lleva también не." },
+          texto: "никто́ («nadie») y ничего́ («nada») funcionan como никогда́: el verbo lleva не. Y cambian de caso como кто y что: никого́ («a nadie»), никому́, ни с кем.\nPara «nada» se usa casi siempre ничего́ (la forma de genitivo).",
+          ejemplos: [
+            { ru: "{Никто́ не} звони́т.", es: "Nadie llama.", por: "никто́ + не + verbo." },
+            { ru: "Я {ничего́ не} зна́ю.", es: "No sé nada.", por: "ничего́ + не." },
+            { ru: "Я {никого́ не} ви́жу.", es: "No veo a nadie.", por: "Acusativo: никого́." },
+            { ru: "Она́ {никому́ не} звони́ла.", es: "No llamó a nadie.", por: "звони́ть + dativo: никому́." }],
+          comparacion: "Como en español: «no veo a nadie», «no sé nada». El ruso también dice el «no».",
+          errores: [{ mal: "Никто́ звони́т.", bien: "Никто́ {не} звони́т.", por: "Falta не." },
+            { mal: "Я не зна́ю ничто́.", bien: "Я ничего́ не зна́ю.", por: "«Nada» con un verbo negado: ничего́." }],
+          mas: { texto: "Con preposición, la preposición se mete en el medio: ни с кем («con nadie»), ни о чём («de nada»). Я ни с кем не говори́л: «no hablé con nadie»." },
+          chequeo: [{ pide: "«No entiendo nada»", opciones: ["Я ничего́ не понима́ю.", "Я ничего́ понима́ю."], ok: "Я ничего́ не понима́ю.", por: "ничего́ + не." }] },
+        { id: "u12-to-nibud", titulo: "Alguien, algo: -то y -нибудь",
+          texto: "**-то**: кто́-то es «alguien» que existe pero no sabés quién: Кто́-то звони́т («alguien llama»). **-нибудь**: кто́-нибудь es «alguien, quien sea»: va en preguntas, pedidos y planes. Lo mismo con что́-то / что́-нибудь.",
+          ejemplos: [
+            { ru: "{Кто́-то} звони́т.", es: "Alguien llama.", por: "Hay alguien, no sabés quién: **-то**." },
+            { ru: "{Кто́-нибудь} зна́ет?", es: "¿Alguien sabe?", por: "Pregunta, quien sea: **-нибудь**." },
+            { ru: "Ты {кому́-нибудь} звони́л?", es: "¿Llamaste a alguien?", por: "Pregunta: **-нибудь**, en dativo." }],
+          mas: { texto: "La pista: si la cosa ya pasó o está pasando, **-то** (Я что́-то ви́жу, «veo algo»). Si es una pregunta, un pedido o el futuro, **-нибудь** (Ты что́-нибудь хо́чешь?)." },
+          chequeo: [{ pide: "«¿Querés algo?»", opciones: ["Ты что́-нибудь хо́чешь?", "Ты что́-то хо́чешь?"], ok: "Ты что́-нибудь хо́чешь?", por: "Pregunta: **-нибудь**." }] }
       ] },
-    { id: "u12m2", n: 2, tipo: "leccion", nPractica: 12, titulo: "Posesivos y э́тот", resumen: "моему́ бра́ту, с мое́й сестро́й, в э́том до́ме.",
-      intro: "мой, твой, наш, ваш y э́тот cambian como los adjetivos: van en el mismo género, número y caso que la palabra que acompañan.",
+    { id: "u12m2", n: 2, tipo: "leccion", nPractica: 12, titulo: "Posesivos, свой y э́тот", resumen: "моему́ бра́ту, свою́ ма́му, в э́том до́ме.",
+      intro: "мой, твой, наш, ваш y э́тот cambian como los adjetivos: van en el mismo género, número y caso que la palabra que acompañan. Y aparece свой, «su propio», que el español no tiene.",
       secciones: [
-        { titulo: "En nominativo ya los conocés", texto: "мой брат\nмоя́ ма́ма\nмоё письмо́\nмои́ друзья́" },
-        { titulo: "En los otros casos", texto: "Я звоню́ моему́ бра́ту. («llamo a mi hermano»)\nЯ гуля́ю с мое́й сестро́й. («paseo con mi hermana»)\nУ моего́ дру́га есть соба́ка. («mi amigo tiene un perro»)\nЯ ду́маю о на́шей ма́ме. («pienso en nuestra mamá»)\nЯ люблю́ ва́шего па́пу. («quiero a su papá —de ustedes—»)", destacado: "El posesivo va en el mismo caso que la palabra.", ojo: "па́па es masculino, aunque termine en -а: моему́ па́пе, с мои́м па́пой." },
-        { titulo: "Los cuatro cambian igual", texto: "твой cambia como мой: твоему́, твое́й, твои́м…\nваш cambia como наш: ва́шему, ва́шей, ва́шим…" },
-        { titulo: "его́, её, их no cambian nunca", texto: "Я звоню́ его́ ма́ме. («llamo a la mamá de él»)\nУ её бра́та есть соба́ка. («el hermano de ella tiene un perro»)\nЯ гуля́ю с их соба́кой. («paseo con el perro de ellos»)", ojo: "Como «su», его́, её e их no llevan н- aunque vayan después de una preposición: у его́ бра́та, no «у него́ бра́та»." },
-        { titulo: "э́тот: este, esta", texto: "э́тот дом\nэ́та кни́га\nэ́то письмо́\nэ́ти лю́ди\nЯ живу́ в э́том до́ме. («vivo en esta casa»)\nЯ хочу́ купи́ть э́ту руба́шку. («quiero comprar esta camisa»)", ojo: "En «Э́то мой брат» («este es mi hermano»), э́то no cambia: presenta algo. э́тот acompaña a una palabra y cambia con ella." },
-        { titulo: "о → об", texto: "Antes de una vocal, о se vuelve об:\nМы говори́м об э́том фи́льме. («hablamos de esta película»)" }
+        { id: "u12-pos-casos", titulo: "Los posesivos en los otros casos",
+          texto: "En nominativo ya los conocés: мой брат, моя́ ма́ма, моё письмо́, мои́ друзья́. En los demás casos, el posesivo va en el mismo caso que la palabra: si брат va en dativo, мой también.\nтвой cambia como мой: твоему́, твое́й. ваш cambia como наш: ва́шему, ва́шей.",
+          ejemplos: [
+            { ru: "Я звоню́ {моему́} бра́ту.", es: "Llamo a mi hermano.", por: "Dativo: моему́ бра́ту." },
+            { ru: "Я гуля́ю с {мое́й} сестро́й.", es: "Paseo con mi hermana.", por: "Instrumental: мое́й сестро́й." },
+            { ru: "У {моего́} дру́га есть соба́ка.", es: "Mi amigo tiene un perro.", por: "Genitivo: моего́ дру́га." },
+            { ru: "Я ду́маю о {на́шей} ма́ме.", es: "Pienso en nuestra mamá.", por: "Prepositivo: на́шей ма́ме." }],
+          destacado: "El posesivo va en el mismo caso que la palabra.",
+          ojo: "па́па es masculino aunque termine en -а: моему́ па́пе, с мои́м па́пой.",
+          errores: [{ mal: "Я звоню́ мой брат.", bien: "Я звоню́ {моему́ бра́ту}.", por: "Las dos palabras en dativo." }],
+          chequeo: [{ pide: "Я гуля́ю с ___ подру́гой.", opciones: ["мое́й", "моя́"], ok: "мое́й", por: "Instrumental." }] },
+        { id: "u12-ego-eyo", titulo: "его́, её, их no cambian nunca",
+          texto: "Como posesivos («de él», «de ella», «de ellos»), его́, её e их quedan igual en todos los casos. Y no llevan **н-** aunque vayan después de una preposición.",
+          ejemplos: [
+            { ru: "Я звоню́ {его́} ма́ме.", es: "Llamo a la mamá de él.", por: "его́ no cambia." },
+            { ru: "У {её} бра́та есть соба́ка.", es: "El hermano de ella tiene un perro.", por: "у её бра́та: sin **н-**, porque es «de ella»." },
+            { ru: "Я гуля́ю с {их} соба́кой.", es: "Paseo con el perro de ellos.", por: "их no cambia." }],
+          errores: [{ mal: "у него́ бра́та", bien: "у {его́} бра́та", por: "«Del hermano de él»: его́ es posesivo, sin **н-**." }] },
+        { id: "u12-svoy", titulo: "свой: su propio",
+          antes: { pide: "«Iván ama a su esposa» (la de él mismo). ¿Cuál?", opciones: ["Ива́н лю́бит свою́ жену́.", "Ива́н лю́бит его́ жену́."], ok: "Ива́н лю́бит свою́ жену́.", por: "Si es la de quien hace la acción: свой. Его́ жену́ sería la de otro hombre." },
+          texto: "Cuando lo que se tiene es de quien hace la acción, el ruso usa свой («su propio»), que cambia como мой. Con я y ты también se puede decir мой / твой; con он, она́ y они́ hace falta свой, porque его́ sería de otra persona.",
+          ejemplos: [
+            { ru: "Ива́н лю́бит {свою́} жену́.", es: "Iván ama a su esposa (la suya).", por: "Es de Iván: свою́, en acusativo." },
+            { ru: "Ива́н лю́бит {его́} жену́.", es: "Iván ama a la esposa de él (de otro).", por: "его́: la de otro hombre." },
+            { ru: "Она́ звони́т {свое́й} ма́ме.", es: "Ella llama a su mamá.", por: "Dativo: свое́й ма́ме." },
+            { ru: "Они́ живу́т в {свое́й} кварти́ре.", es: "Viven en su departamento.", por: "Prepositivo: в свое́й кварти́ре." }],
+          comparacion: "En español «su» sirve para todo: «Iván ama a su esposa» no dice de quién. El ruso lo distingue: свою́ (la suya) o его́ (la de otro).",
+          errores: [{ mal: "Ма́ша звони́т её ма́ме.", bien: "Ма́ша звони́т {свое́й} ма́ме.", por: "Si es la mamá de Masha, свое́й. её ма́ме sería la mamá de otra." }],
+          mas: { texto: "свой no va en el sujeto: «su hermano trabaja» es Его́ брат рабо́тает, nunca «Свой брат». свой mira hacia atrás, a quien hace la acción, y por eso no puede ser el que la hace." },
+          chequeo: [{ pide: "«Ana busca su teléfono» (el suyo)", opciones: ["А́нна и́щет свой телефо́н.", "А́нна и́щет её телефо́н."], ok: "А́нна и́щет свой телефо́н.", por: "Es de Ana: свой." }] },
+        { id: "u12-etot", titulo: "э́тот: este, esta",
+          texto: "э́тот, э́та, э́то, э́ти acompañan a una palabra y cambian con ella. En cambio, en «Э́то мой брат» («este es mi hermano»), э́то presenta algo y no cambia.",
+          ejemplos: [
+            { ru: "Я живу́ в {э́том} до́ме.", es: "Vivo en esta casa.", por: "Prepositivo: в э́том до́ме." },
+            { ru: "Я хочу́ купи́ть {э́ту} руба́шку.", es: "Quiero comprar esta camisa.", por: "Acusativo: э́ту руба́шку." },
+            { ru: "{Э́то} моя́ сестра́.", es: "Esta es mi hermana.", por: "Presenta: no cambia." }],
+          chequeo: [{ pide: "Я говорю́ с ___ челове́ком.", opciones: ["э́тим", "э́тот"], ok: "э́тим", por: "Instrumental." }] },
+        { id: "u12-ob", titulo: "о → об",
+          texto: "Antes de una vocal, о se vuelve об, para que se pueda pronunciar.",
+          ejemplos: [{ ru: "Мы говори́м {об} э́том фи́льме.", es: "Hablamos de esta película.", por: "э́том empieza con vocal: об." }] }
       ] },
-    { id: "u12m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Plural I: cantidades y números", resumen: "мно́го книг, пять бра́тьев, две кни́ги.",
+    { id: "u12m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Plural I: cantidades y números", resumen: "мно́го книг, пять бра́тьев, не́сколько дней.",
       intro: "Hasta ahora casi todo fue en singular. Primero, el plural que ya viste; después, el genitivo plural, que es el que se usa para contar.",
       secciones: [
-        { titulo: "Nominativo plural (repaso)", texto: "masculino y femenino en -а: -ы: студе́нт → студе́нты, маши́на → маши́ны\nDespués de **г, к, х, ж, ш, ч, щ**, y en -ь, -й, -я: -и: кни́га → кни́ги, музе́й → музе́и\nneutro: -о → -а: сло́во → слова́\nIrregulares: друг → друзья́, брат → бра́тья, ребёнок → де́ти, челове́к → лю́ди" },
-        { titulo: "Genitivo plural: las terminaciones", texto: "masculino: -ов: студе́нт → студе́нтов, биле́т → биле́тов\nmasculino en -й: -ев: музе́й → музе́ев\nmasculino en -ь, -ж, -ш, -ч, -щ: -ей: учи́тель → учителе́й, врач → враче́й\nfemenino en -а y neutro en -о: se saca la vocal: кни́га → книг, сло́во → слов\nA veces aparece una vocal para poder pronunciarlo: ру́чка → ру́чек, письмо́ → пи́сем", destacado: "-ов · -ев · -ей · sin terminación" },
-        { titulo: "Los irregulares", texto: "друг → друзе́й\nбрат → бра́тьев\nребёнок → дете́й\nчелове́к → люде́й\nгод → лет", ojo: "No hace falta memorizarlos todos: tocá una palabra en Casos y vas a ver su plural." },
-        { titulo: "Cuándo se usa", texto: "мно́го книг («muchos libros»)\nма́ло друзе́й («pocos amigos»)\nУ меня́ нет биле́тов. («no tengo pasajes»)\nСко́лько у тебя́ бра́тьев? («¿cuántos hermanos tenés?»)" },
-        { titulo: "Con números", texto: "1: nominativo singular: оди́н брат, одна́ кни́га\n2, 3, 4: genitivo singular: два бра́та, три кни́ги\n5 o más: genitivo plural: пять бра́тьев, шесть книг\nEs la misma regla que ya usaste con час y рубль: два часа́, пять часо́в; два рубля́, пять рубле́й.", destacado: "1 → nominativo · 2-4 → genitivo singular · 5+ → genitivo plural", ojo: "Con palabras femeninas, два se vuelve две: две кни́ги, две сестры́." },
-        { titulo: "Acusativo plural", texto: "Cosas: igual que el nominativo: Я покупа́ю кни́ги.\nPersonas y animales: igual que el genitivo: Я ви́жу студе́нтов. Я люблю́ соба́к." }
+        { id: "u12-pl-nom", titulo: "Nominativo plural (repaso)",
+          texto: "masculino y femenino en **-а**: **-ы**: студе́нт → студе́нты, маши́на → маши́ны\nDespués de **г, к, х, ж, ш, ч, щ**, y en **-ь**, **-й**, **-я**: **-и**: кни́га → кни́ги, музе́й → музе́и\nneutro: **-о** → **-а**: сло́во → слова́\nIrregulares: друг → друзья́, брат → бра́тья, ребёнок → де́ти, челове́к → лю́ди" },
+        { id: "u12-gen-pl", titulo: "Genitivo plural: las terminaciones",
+          antes: { pide: "студе́нт → студе́нтов · биле́т → биле́тов. ¿Y магази́н?", opciones: ["магази́нов", "магази́н"], ok: "магази́нов", por: "Masculino terminado en consonante: **-ов**." },
+          texto: "masculino: **-ов**: студе́нт → студе́нтов\nmasculino en **-й**: **-ев**: музе́й → музе́ев\nmasculino en **-ь, -ж, -ш, -ч, -щ**: **-ей**: учи́тель → учителе́й, врач → враче́й\nfemenino en **-а** y neutro en **-о**: se saca la vocal: кни́га → книг, сло́во → слов\nA veces aparece una vocal para poder pronunciarlo: ру́чка → ру́чек, письмо́ → пи́сем",
+          ejemplos: [
+            { ru: "мно́го {студе́нтов}", es: "muchos estudiantes", por: "Masculino: **-ов**." },
+            { ru: "пять {враче́й}", es: "cinco médicos", por: "Después de **ч**: -ей." },
+            { ru: "мно́го {книг}", es: "muchos libros", por: "Femenino: sin terminación." },
+            { ru: "не́сколько {пи́сем}", es: "varias cartas", por: "Sin terminación, y aparece una **е**." }],
+          destacado: "**-ов** · **-ев** · **-ей** · sin terminación",
+          errores: [{ mal: "пять кни́ги", bien: "пять {книг}", por: "De 5 en adelante, genitivo plural." }],
+          chequeo: [{ pide: "мно́го ___ (музе́й)", opciones: ["музе́ев", "музе́ов"], ok: "музе́ев", por: "En **-й**: **-ев**." }] },
+        { id: "u12-gen-pl-irreg", titulo: "Los irregulares",
+          texto: "Algunos de los más usados son irregulares: друг → друзе́й, брат → бра́тьев, ребёнок → дете́й, челове́к → люде́й, год → лет.",
+          ejemplos: [
+            { ru: "У меня́ мно́го {друзе́й}.", es: "Tengo muchos amigos.", por: "друг → друзе́й." },
+            { ru: "Мне два́дцать {лет}.", es: "Tengo veinte años.", por: "год → лет." }],
+          ojo: "No hace falta memorizarlos todos: tocá la palabra y vas a ver su plural." },
+        { id: "u12-contar", titulo: "Contar: 1, 2–4, 5 o más",
+          texto: "Es la misma cuenta de час y рубль: 1 → nominativo singular; 2, 3, 4 → genitivo singular; 5 o más → genitivo plural. Lo mismo con мно́го, ма́ло, ско́лько y не́сколько («varios»): genitivo plural.",
+          ejemplos: [
+            { ru: "{оди́н} брат · {два} бра́та · {пять} бра́тьев", es: "un hermano · dos hermanos · cinco hermanos", por: "1 · 2–4 · 5 o más." },
+            { ru: "{две} кни́ги", es: "dos libros", por: "Con palabras femeninas, два se vuelve две." },
+            { ru: "{не́сколько} дней", es: "varios días", por: "не́сколько + genitivo plural." },
+            { ru: "{Ско́лько} у тебя́ бра́тьев?", es: "¿Cuántos hermanos tenés?", por: "ско́лько + genitivo plural." }],
+          destacado: "1 → nominativo · 2-4 → genitivo singular · 5+ → genitivo plural",
+          errores: [{ mal: "две бра́та", bien: "{два} бра́та", por: "брат es masculino: два." }],
+          chequeo: [{ pide: "три ___ (сестра́)", opciones: ["сестры́", "сестёр"], ok: "сестры́", por: "2, 3, 4: genitivo singular." }] },
+        { id: "u12-acc-pl", titulo: "Acusativo plural",
+          texto: "Cosas: igual que el nominativo: Я покупа́ю кни́ги. Personas y animales: igual que el genitivo: Я ви́жу студе́нтов. Es la misma idea del acusativo animado del singular.",
+          ejemplos: [
+            { ru: "Я покупа́ю {кни́ги}.", es: "Compro libros.", por: "Cosas: como el nominativo." },
+            { ru: "Я ви́жу {студе́нтов}.", es: "Veo a los estudiantes.", por: "Personas: como el genitivo." },
+            { ru: "Я люблю́ {соба́к}.", es: "Me encantan los perros.", por: "Animales: como el genitivo." }],
+          chequeo: [{ pide: "Я жду ___ (друзья́).", opciones: ["друзе́й", "друзья́"], ok: "друзе́й", por: "Personas: como el genitivo." }] }
       ] },
     { id: "u12m4", n: 4, tipo: "leccion", nPractica: 12, titulo: "Plural II: los otros casos", resumen: "с друзья́ми, о де́тях, в больши́х города́х.",
       intro: "En dativo, instrumental y prepositivo, el plural casi no tiene excepciones: las mismas terminaciones para todas las palabras.",
       secciones: [
-        { titulo: "Las terminaciones", texto: "dativo: -ам / -ям: студе́нтам, друзья́м\ninstrumental: -ами / -ями: со студе́нтами, с друзья́ми\nprepositivo: -ах / -ях: в города́х, о друзья́х", destacado: "-ам · -ами · -ах", ojo: "лю́ди y де́ти: с людьми́, с детьми́." },
-        { titulo: "En frases", texto: "Я помога́ю друзья́м. («ayudo a los amigos»)\nМы гуля́ем с детьми́. («paseamos con los chicos»)\nОн ду́мает о де́тях. («piensa en los chicos»)" },
-        { titulo: "Los adjetivos en plural", texto: "En plural hay una sola forma para los tres géneros:\nnominativo: -ые / -ие: но́вые кни́ги, ру́сские друзья́\ngenitivo y prepositivo: -ых / -их: мно́го но́вых книг, в больши́х города́х\ndativo: -ым / -им: но́вым студе́нтам\ninstrumental: -ыми / -ими: с хоро́шими друзья́ми\nacusativo: como el nominativo (cosas) o como el genitivo (personas y animales)" },
-        { titulo: "Los posesivos en plural", texto: "мои́ друзья́\nу мои́х друзе́й\nмои́м друзья́м\nс мои́ми друзья́ми\nо мои́х друзья́х\nна́ши, ва́ши y э́ти cambian igual: с на́шими детьми́, в э́тих города́х." }
+        { id: "u12-pl-dat-ins-prep", titulo: "-ам, -ами, -ах",
+          texto: "dativo: **-ам** / **-ям**: студе́нтам, друзья́м\ninstrumental: **-ами** / **-ями**: со студе́нтами, с друзья́ми\nprepositivo: **-ах** / **-ях**: в города́х, о друзья́х\nCon **-я** cuando la palabra es blanda (друзья́, учителя́).",
+          ejemplos: [
+            { ru: "Я помога́ю {друзья́м}.", es: "Ayudo a los amigos.", por: "Dativo: **-ям**." },
+            { ru: "Мы гуля́ем с {детьми́}.", es: "Paseamos con los chicos.", por: "Instrumental: де́ти → детьми́ (especial)." },
+            { ru: "Он ду́мает о {де́тях}.", es: "Piensa en los chicos.", por: "Prepositivo: **-ях**." },
+            { ru: "в больши́х {города́х}", es: "en las ciudades grandes", por: "Prepositivo: **-ах**." }],
+          destacado: "**-ам** · **-ами** · **-ах**",
+          ojo: "лю́ди y де́ти: с людьми́, с детьми́.",
+          chequeo: [{ pide: "Я звоню́ ___ (los estudiantes).", opciones: ["студе́нтам", "студе́нтами"], ok: "студе́нтам", por: "звони́ть + dativo: **-ам**." }] },
+        { id: "u12-adj-pl", titulo: "Los adjetivos en plural",
+          texto: "En plural hay una sola forma para los tres géneros:\nnominativo: **-ые** / **-ие**: но́вые кни́ги\ngenitivo y prepositivo: **-ых** / **-их**: мно́го но́вых книг\ndativo: **-ым** / **-им**: но́вым студе́нтам\ninstrumental: **-ыми** / **-ими**: с хоро́шими друзья́ми",
+          ejemplos: [
+            { ru: "мно́го {но́вых} книг", es: "muchos libros nuevos", por: "Genitivo plural: **-ых**." },
+            { ru: "с {хоро́шими} друзья́ми", es: "con buenos amigos", por: "Instrumental plural: **-ими**." }],
+          errores: [{ mal: "с хоро́шие друзья́ми", bien: "с {хоро́шими} друзья́ми", por: "El adjetivo, en el mismo caso." }] },
+        { id: "u12-pos-pl", titulo: "Los posesivos en plural",
+          texto: "мои́ друзья́ · у мои́х друзе́й · мои́м друзья́м · с мои́ми друзья́ми · о мои́х друзья́х\nна́ши, ва́ши, свои́ y э́ти cambian igual.",
+          ejemplos: [{ ru: "Я гуля́ю с {мои́ми} друзья́ми.", es: "Paseo con mis amigos.", por: "Instrumental plural." },
+            { ru: "в {э́тих} города́х", es: "en estas ciudades", por: "Prepositivo plural." }] }
       ] },
-    { id: "u12m5", n: 5, tipo: "leccion", nPractica: 12, titulo: "Aspecto I: proceso o resultado", resumen: "чита́л / прочита́л.",
-      intro: "Casi todos los verbos rusos vienen de a dos: uno **imperfectivo** y uno **perfectivo**. Significan lo mismo, pero miran la acción de otra manera.",
+    { id: "u12m5", n: 5, tipo: "leccion", nPractica: 12, titulo: "Aspecto: cómo se forman las parejas", resumen: "нарисова́ть, получи́ть, положи́ть.",
+      intro: "Ya sabés para qué sirve cada verbo de la pareja: proceso o algo que se repite; resultado, una vez. Acá, cómo se reconocen las parejas, y cuáles no lo son.",
       secciones: [
-        { titulo: "Proceso o resultado", texto: "El imperfectivo mira la acción como proceso, o como algo que se repite:\nВчера́ я чита́л кни́гу. («ayer estuve leyendo un libro»)\nEl perfectivo mira el resultado: la acción terminada.\nВчера́ я прочита́л кни́гу. («ayer leí el libro»: lo terminé)", destacado: "imperfectivo = proceso · perfectivo = resultado" },
-        { titulo: "Lo que ya conocés", texto: "Casi todos los verbos que aprendiste hasta ahora son imperfectivos: чита́ть, писа́ть, де́лать… En las Unidades 9 y 11 ya usaste algunos perfectivos como fórmulas: пойду́, куплю́, скажи́те." },
-        { titulo: "Cómo se forman las parejas", texto: "Con un prefijo: де́лать → сде́лать, чита́ть → прочита́ть, писа́ть → написа́ть, смотре́ть → посмотре́ть\nCambiando el final: отвеча́ть → отве́тить, начина́ть → нача́ть, открыва́ть → откры́ть\nCon otra palabra: говори́ть → сказа́ть, брать → взять", ojo: "No hay una regla para saber qué prefijo lleva cada verbo: se aprenden de a dos, como pareja. Casi siempre el imperfectivo es el más largo: покупа́ть / купи́ть." },
-        { titulo: "En pasado", texto: "Я писа́л письмо́ два часа́. («estuve escribiendo la carta dos horas»)\nЯ написа́л письмо́. («escribí la carta»: ya está)\nОна́ ча́сто звони́ла ма́ме. («llamaba seguido a mamá»)\nОна́ позвони́ла ма́ме. («llamó a mamá»: una vez)", truco: "¿Cuánto tiempo? ¿Cuántas veces? → imperfectivo. ¿Lo terminaste? → perfectivo." },
-        { titulo: "учи́ть y вы́учить", texto: "Я учи́л слова́. («estuve estudiando las palabras»)\nЯ вы́учил слова́. («aprendí las palabras»: ya las sé)" }
+        { id: "u12-asp-repaso", titulo: "Proceso o resultado, en una tabla",
+          texto: "pasado: чита́л (proceso, «leía, estuve leyendo») · прочита́л (resultado, «lo leí»)\nfuturo: бу́ду чита́ть · прочита́ю\ndespués de хочу́, ну́жно: чита́ть (en general) · прочита́ть (una vez)\nEn presente, solo el de proceso: el de resultado conjugado ya es futuro.",
+          ejemplos: [
+            { ru: "Вчера́ я {чита́л} кни́гу.", es: "Ayer estuve leyendo un libro.", por: "Proceso." },
+            { ru: "Вчера́ я {прочита́л} кни́гу.", es: "Ayer leí el libro (lo terminé).", por: "Resultado." }],
+          destacado: "proceso · resultado" },
+        { id: "u12-asp-prefijo", titulo: "Con un prefijo",
+          texto: "La forma más común: al de proceso se le agrega un prefijo. No hay regla para saber cuál: **по-**, **на-**, **с-**, **про-**, **при-**, **вы-**… Se aprenden de a dos.",
+          ejemplos: [
+            { ru: "рисова́ть → {на}рисова́ть", es: "dibujar", por: "**на-**." },
+            { ru: "петь → {с}петь", es: "cantar", por: "**с-**." },
+            { ru: "стро́ить → {по}стро́ить", es: "construir", por: "**по-**." },
+            { ru: "стира́ть → {по}стира́ть", es: "lavar la ropa", por: "**по-**." }],
+          chequeo: [{ pide: "мыть → ?", opciones: ["помы́ть", "мыва́ть"], ok: "помы́ть", por: "Con prefijo: **по-**." }] },
+        { id: "u12-asp-sufijo", titulo: "Cambiando el final",
+          texto: "Otras parejas cambian el final: el de proceso suele ser más largo (**-ать** / **-ять** / **-ывать**) y el de resultado, más corto (**-ить**).",
+          ejemplos: [
+            { ru: "получ{а́ть} → получ{и́ть}", es: "recibir", por: "**-ать** → **-ить**." },
+            { ru: "реш{а́ть} → реш{и́ть}", es: "decidir", por: "**-ать** → **-ить**." },
+            { ru: "забыв{а́ть} → заб{ы́ть}", es: "olvidar", por: "El de proceso, más largo." },
+            { ru: "провер{я́ть} → прове́р{ить}", es: "revisar", por: "**-ять** → **-ить**." }],
+          truco: "Si los dos verbos se parecen, casi siempre el más largo es el de proceso: покупа́ть / купи́ть." },
+        { id: "u12-asp-otra", titulo: "Con otra palabra",
+          texto: "Unas pocas parejas son dos palabras distintas. Son de las más usadas, así que ya conocés casi todas.",
+          ejemplos: [
+            { ru: "{говори́ть} → {сказа́ть}", es: "decir", por: "Otra palabra." },
+            { ru: "{брать} → {взять}", es: "tomar, agarrar", por: "Otra palabra." },
+            { ru: "{класть} → {положи́ть}", es: "poner (acostado)", por: "Otra palabra." }] },
+        { id: "u12-no-pareja", titulo: "Lo que no es una pareja",
+          texto: "Algunos verbos con **по-** o **за-** no son el resultado de otro: le agregan un matiz.\n**по-** = «un rato»: почита́ть («leer un rato»), порабо́тать («trabajar un rato»)\n**за-** = «empezar a»: заговори́ть («ponerse a hablar»)\nLa pareja de чита́ть es прочита́ть (terminar de leer), no почита́ть.",
+          ejemplos: [
+            { ru: "Я {почита́л} и пошёл спать.", es: "Leí un rato y me fui a dormir.", por: "почита́ть: un rato, no terminé el libro." },
+            { ru: "Я {прочита́л} кни́гу.", es: "Leí el libro (entero).", por: "прочита́ть: resultado." },
+            { ru: "Он {заговори́л} по-ру́сски.", es: "Se puso a hablar en ruso.", por: "**за-**: empezar a." }],
+          mas: { texto: "En la ficha de cada verbo, la pareja aparece con una etiqueta cuando no es de resultado: «un rato», «empezar a» o «ir y volver»." },
+          chequeo: [{ pide: "«Terminé el libro»", opciones: ["Я прочита́л кни́гу.", "Я почита́л кни́гу."], ok: "Я прочита́л кни́гу.", por: "Terminar: прочита́ть." }] }
       ] },
-    { id: "u12m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Aspecto II: futuro e infinitivo", resumen: "бу́ду чита́ть / прочита́ю. Хочу́ купи́ть.",
-      intro: "El perfectivo no tiene presente: si lo conjugás, ya es futuro.",
+    { id: "u12m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Aspecto: negación y futuro", resumen: "Я не чита́л / не прочита́л. Не на́до звони́ть.",
+      intro: "Dos lugares donde el aspecto cambia el sentido de verdad: cuando negás, y después de algunos verbos.",
       secciones: [
-        { titulo: "Dos futuros", texto: "Imperfectivo: бу́ду + infinitivo, como en la Unidad 9.\nЗа́втра я бу́ду чита́ть. («mañana voy a estar leyendo»)\nPerfectivo: se conjuga como un presente, pero es futuro.\nЗа́втра я прочита́ю кни́гу. («mañana voy a leer el libro»: lo termino)", destacado: "perfectivo conjugado = futuro" },
-        { titulo: "Las formas", texto: "Son las mismas terminaciones del presente:\nя прочита́ю\nты прочита́ешь\nон прочита́ет\nмы прочита́ем\nвы прочита́ете\nони́ прочита́ют", ojo: "Nunca бу́ду + perfectivo: «бу́ду прочита́ть» y «бу́ду прочита́ю» están mal." },
-        { titulo: "Lo que ya usabas", texto: "Я пойду́ в шко́лу. (Unidad 9)\nЯ куплю́ хлеб.\nЯ позвоню́ тебе́.\nЯ опозда́ю. (Unidad 11)\nYa eran futuros perfectivos." },
-        { titulo: "Después de хочу́, ну́жно, мо́жно", texto: "Para una acción concreta, que se hace una vez, va el perfectivo:\nЯ хочу́ купи́ть телефо́н. («quiero comprar un teléfono»)\nМне ну́жно позвони́ть ма́ме. («tengo que llamar a mamá»)\nPara hablar en general, el imperfectivo:\nЯ люблю́ чита́ть. («me gusta leer»)\nМне нра́вится гото́вить. («me gusta cocinar»)", ojo: "Después de люби́ть, нра́виться, начина́ть y зака́нчивать va siempre el imperfectivo: Я начина́ю рабо́тать." }
+        { id: "u12-neg-imperf", titulo: "No lo hice / no lo terminé",
+          texto: "Con не, el de proceso dice que la acción no pasó para nada; el de resultado, que empezó pero no llegó al final.",
+          ejemplos: [
+            { ru: "Я не {чита́л} э́ту кни́гу.", es: "No leí ese libro (nunca lo empecé).", por: "не + proceso: no pasó." },
+            { ru: "Я не {прочита́л} кни́гу.", es: "No terminé el libro.", por: "не + resultado: no llegó al final." },
+            { ru: "Ты {звони́л} ма́ме? — Нет, не звони́л.", es: "¿Llamaste a mamá? — No, no llamé.", por: "La respuesta negativa, con el de proceso." }],
+          destacado: "не + proceso = no pasó · не + resultado = no se terminó",
+          chequeo: [{ pide: "Empezaste la tarea pero no la terminaste.", opciones: ["Я не сде́лал зада́ние.", "Я не де́лал зада́ние."], ok: "Я не сде́лал зада́ние.", por: "No llegó al final: resultado." }] },
+        { id: "u12-dos-futuros", titulo: "Los dos futuros (repaso)",
+          texto: "бу́ду + infinitivo del de proceso: lo que vas a estar haciendo o vas a hacer seguido. El de resultado conjugado: lo que vas a terminar, una vez. Nunca бу́ду + resultado.",
+          ejemplos: [
+            { ru: "За́втра я {бу́ду чита́ть}.", es: "Mañana voy a estar leyendo.", por: "Proceso." },
+            { ru: "За́втра я {прочита́ю} кни́гу.", es: "Mañana voy a leer el libro (entero).", por: "Resultado." },
+            { ru: "Я тебя́ {подожду́}.", es: "Te espero.", por: "Una vez: подожда́ть." }],
+          errores: [{ mal: "Я бу́ду прочита́ть.", bien: "Я {прочита́ю}.", por: "Nunca бу́ду + resultado." }],
+          chequeo: [{ pide: "«Mañana voy a terminar la carta»", opciones: ["За́втра я напишу́ письмо́.", "За́втра я бу́ду написа́ть письмо́."], ok: "За́втра я напишу́ письмо́.", por: "Resultado conjugado." }] },
+        { id: "u12-hochu", titulo: "Después de хочу́, ну́жно, мо́жно (repaso)",
+          texto: "Para una acción concreta, que se hace una vez, va el de resultado: хочу́ купи́ть, ну́жно позвони́ть. Para algo en general o que se repite, el de proceso: люблю́ чита́ть, мо́жно плати́ть ка́ртой (en general).",
+          ejemplos: [
+            { ru: "Я хочу́ {сде́лать} зада́ние.", es: "Quiero hacer la tarea.", por: "Una vez: сде́лать." },
+            { ru: "Мне ну́жно {позвони́ть} ма́ме.", es: "Tengo que llamar a mamá.", por: "Una vez: позвони́ть." },
+            { ru: "Я люблю́ {чита́ть}.", es: "Me gusta leer.", por: "En general: чита́ть." }],
+          chequeo: [{ pide: "«Quiero comprar este libro»", opciones: ["Я хочу́ купи́ть э́ту кни́гу.", "Я хочу́ покупа́ть э́ту кни́гу."], ok: "Я хочу́ купи́ть э́ту кни́гу.", por: "Una compra concreta: купи́ть." }] },
+        { id: "u12-inf-imperf", titulo: "Después de empezar, terminar, no hace falta",
+          texto: "Después de начина́ть / нача́ть, зака́нчивать / зако́нчить, люби́ть y нра́виться va siempre el de proceso: lo que empieza o termina es un proceso. Y para «no hace falta» o «no se puede» (не на́до, нельзя́), también el de proceso.",
+          ejemplos: [
+            { ru: "Я на́чал {чита́ть}.", es: "Empecé a leer.", por: "Después de нача́ть: proceso." },
+            { ru: "Мы зако́нчили {рабо́тать}.", es: "Terminamos de trabajar.", por: "Después de зако́нчить: proceso." },
+            { ru: "Не на́до {звони́ть}.", es: "No hace falta llamar.", por: "Después de не на́до: proceso." }],
+          errores: [{ mal: "Я на́чал прочита́ть.", bien: "Я на́чал {чита́ть}.", por: "Después de нача́ть, el de proceso." }],
+          chequeo: [{ pide: "Он зако́нчил ___.", opciones: ["писа́ть", "написа́ть"], ok: "писа́ть", por: "Después de зако́нчить: proceso." }] }
       ] },
-    { id: "u12m7", n: 7, tipo: "leccion", nPractica: 12, titulo: "Aspecto III: en la práctica", resumen: "Ка́ждый день я чита́л. Я уже́ прочита́л.",
-      intro: "Algunas palabras te dicen qué aspecto usar. Y en un relato, el aspecto ordena las acciones.",
+    { id: "u12m7", n: 7, tipo: "leccion", nPractica: 12, titulo: "Aspecto en el relato", resumen: "Я пришёл, поу́жинал и лёг спать.",
+      intro: "En un relato, el aspecto ordena las acciones: qué pasaba de fondo, qué pasó una vez, qué vino después.",
       secciones: [
-        { titulo: "Palabras que piden imperfectivo", texto: "ка́ждый день (todos los días)\nча́сто (seguido)\nвсегда́ (siempre)\nобы́чно (normalmente)\nиногда́ (a veces)\nдо́лго (mucho tiempo)\nдва часа́ (dos horas: cuánto tiempo)\nКа́ждый день я чита́л газе́ту. («todos los días leía el diario»)" },
-        { titulo: "Palabras que piden perfectivo", texto: "уже́ (ya)\nнаконе́ц (por fin)\nЯ уже́ сде́лал зада́ние. («ya hice la tarea»)\nНаконе́ц я вы́учил слова́. («por fin aprendí las palabras»)" },
-        { titulo: "Una acción después de la otra", texto: "Perfectivos en fila: cada acción termina y empieza la siguiente.\nЯ пообе́дал, позвони́л ма́ме и отдохну́л.\nImperfectivos juntos: pasaban al mismo tiempo.\nЯ обе́дал и смотре́л телеви́зор. («almorzaba mientras miraba la tele»)", destacado: "perfectivos = en fila · imperfectivos = al mismo tiempo" },
-        { titulo: "Preguntas", texto: "¿Qué hiciste? (en general) → imperfectivo:\nЧто ты де́лал вчера́? («¿qué hiciste ayer?»)\n¿Lo terminaste? → perfectivo:\nТы сде́лал зада́ние? («¿hiciste la tarea?»)" },
-        { titulo: "En un relato", texto: "Вчера́ я до́лго спал.\nПото́м я пригото́вил за́втрак и позвони́л ма́ме.\nВе́чером я смотре́л фильм с дру́гом, и мы говори́ли о рабо́те.\n(«Ayer dormí mucho. Después preparé el desayuno y llamé a mamá. A la noche vi una película con un amigo y hablamos del trabajo.»)\nдо́лго спал, смотре́л y говори́ли son procesos; пригото́вил y позвони́л, acciones terminadas, una después de la otra." }
+        { id: "u12-marcadores", titulo: "Palabras que orientan",
+          texto: "Piden el de proceso: ка́ждый день, ча́сто, всегда́, обы́чно, иногда́, до́лго, два часа́ (cuánto duró).\nPiden el de resultado: уже́, наконе́ц, сра́зу, una vez concreta.",
+          ejemplos: [
+            { ru: "{Ка́ждый день} я чита́л газе́ту.", es: "Todos los días leía el diario.", por: "Se repite: proceso." },
+            { ru: "Я {уже́} сде́лал зада́ние.", es: "Ya hice la tarea.", por: "уже́: resultado." },
+            { ru: "{Наконе́ц} я вы́учил слова́.", es: "Por fin aprendí las palabras.", por: "наконе́ц: resultado." }],
+          errores: [{ mal: "Ка́ждый день я прочита́л газе́ту.", bien: "Ка́ждый день я {чита́л} газе́ту.", por: "Lo que se repite: proceso." }] },
+        { id: "u12-en-fila", titulo: "Acciones en fila, acciones a la vez",
+          texto: "Resultados en fila: cada acción termina y empieza la siguiente. Procesos juntos: pasaban al mismo tiempo.",
+          ejemplos: [
+            { ru: "Я {пообе́дал}, {позвони́л} ма́ме и {отдохну́л}.", es: "Almorcé, llamé a mamá y descansé.", por: "Uno después del otro: resultados." },
+            { ru: "Я {обе́дал} и {смотре́л} телеви́зор.", es: "Almorzaba mientras miraba la tele.", por: "A la vez: procesos." }],
+          destacado: "resultados = en fila · procesos = al mismo tiempo" },
+        { id: "u12-fondo", titulo: "El fondo y lo que pasó",
+          texto: "El de proceso pinta el fondo (lo que estaba pasando); el de resultado cuenta lo que pasó en ese momento.",
+          ejemplos: [
+            { ru: "Я {смотре́л} фильм, когда́ {позвони́л} брат.", es: "Estaba viendo una película cuando llamó mi hermano.", por: "Fondo: смотре́л. Lo que pasó: позвони́л." },
+            { ru: "Мы {гуля́ли}, и вдруг {пошёл} дождь.", es: "Estábamos paseando y de repente empezó a llover.", por: "Fondo y golpe." }],
+          comparacion: "Se parece al imperfecto y al pretérito del español («estaba viendo… cuando llamó»), pero no coinciden siempre: «leí dos horas» es pretérito en español y proceso en ruso (Я чита́л два часа́), porque no dice que terminaste.",
+          chequeo: [{ pide: "«Cuando llegué, ella estaba cocinando»", opciones: ["Когда́ я пришёл, она́ гото́вила.", "Когда́ я пришёл, она́ пригото́вила."], ok: "Когда́ я пришёл, она́ гото́вила.", por: "Fondo: proceso." }] },
+        { id: "u12-ir-llegar", titulo: "Llegar e irse",
+          texto: "Con **при-** se llega; con **у-**, uno se va. A pie, con идти́ (прийти́, уйти́); en vehículo, con е́хать (прие́хать, уе́хать). Los de proceso son приходи́ть, уходи́ть, приезжа́ть, уезжа́ть.",
+          ejemplos: [
+            { ru: "Я {пришёл} домо́й в семь.", es: "Llegué a casa a las siete.", por: "Llegar a pie, una vez: прийти́." },
+            { ru: "Она́ {ушла́} на рабо́ту.", es: "Se fue al trabajo.", por: "Irse a pie: уйти́." },
+            { ru: "За́втра {прие́дет} ба́бушка.", es: "Mañana llega la abuela.", por: "Llegar en vehículo, futuro: прие́хать." },
+            { ru: "Они́ {уе́хали} в Москву́.", es: "Se fueron a Moscú.", por: "Irse en vehículo: уе́хать." }],
+          errores: [{ mal: "Я пришёл в Москву́ на по́езде.", bien: "Я {прие́хал} в Москву́ на по́езде.", por: "En vehículo: прие́хать." }],
+          chequeo: [{ pide: "«Llegó en tren»", opciones: ["Он прие́хал на по́езде.", "Он пришёл на по́езде."], ok: "Он прие́хал на по́езде.", por: "En vehículo: прие́хать." }] },
+        { id: "u12-relato", titulo: "Un relato completo",
+          texto: "Así se ve todo junto en un día contado:",
+          ejemplos: [
+            { ru: "Вчера́ я {до́лго спал}.", es: "Ayer dormí mucho.", por: "Duró: proceso." },
+            { ru: "Пото́м я {пригото́вил} за́втрак и {позвони́л} ма́ме.", es: "Después preparé el desayuno y llamé a mamá.", por: "En fila: resultados." },
+            { ru: "Ве́чером я {смотре́л} фильм с дру́гом, и мы {говори́ли} о рабо́те.", es: "A la noche vi una película con un amigo y hablamos del trabajo.", por: "Fondo de la noche: procesos." },
+            { ru: "Пото́м друг {ушёл}, и я {лёг} спать.", es: "Después mi amigo se fue y me acosté.", por: "En fila: resultados." }] }
       ] },
-    { id: "u12m8", n: 8, tipo: "leccion", nPractica: 12, titulo: "El imperativo", resumen: "Позвони́ мне. Не звони́ ему́.",
-      intro: "El imperativo sirve para pedir, aconsejar o dar instrucciones. Ya usaste varios como fórmulas: Помоги́те! Повтори́те, пожа́луйста. Да́йте…",
+    { id: "u12m8", n: 8, tipo: "leccion", nPractica: 12, titulo: "El imperativo", resumen: "Позвони́ мне. Не звони́ ему́. Сади́тесь!",
+      intro: "El imperativo sirve para pedir, aconsejar o dar instrucciones. Ya usaste varios como fórmulas: Помоги́те! Повтори́те, пожа́луйста. Поверни́те напра́во. Acá, cómo se forman.",
       secciones: [
-        { titulo: "Cómo se forma (ты)", texto: "Se toma el presente (o el futuro, si es perfectivo) y se cambia el final:\nSi termina en vocal + ю: -й: чита́ю → чита́й, сде́лаю → сде́лай\nSi el acento va al final: -и: говорю́ → говори́, пишу́ → пиши́, позвоню́ → позвони́\nSi el acento no va al final: -ь: гото́влю → гото́вь, отве́чу → отве́ть", destacado: "-й · -и · -ь" },
-        { titulo: "ты y вы", texto: "Para вы (ustedes, o usted) se agrega -те:\nчита́й → чита́йте\nскажи́ → скажи́те\nгото́вь → гото́вьте" },
-        { titulo: "Los irregulares", texto: "дать → дай, да́йте\nесть → ешь, е́шьте\nпить → пей, пе́йте\nвзять → возьми́, возьми́те\nпомо́чь → помоги́, помоги́те", ojo: "No hace falta deducirlos: en Verbos cada verbo tiene su imperativo." },
-        { titulo: "¿Qué aspecto?", texto: "Para pedir algo concreto, una vez: perfectivo.\nПозвони́ мне за́втра. («llamame mañana»)\nЗакро́й окно́, пожа́луйста. («cerrá la ventana, por favor»)\nPara algo que se repite: imperfectivo.\nЗвони́ мне ча́сто. («llamame seguido»)" },
-        { titulo: "No hagas: не + imperfectivo", texto: "Не звони́ ему́! («no lo llames»)\nНе открыва́й окно́. («no abras la ventana»)", destacado: "не + imperfectivo", ojo: "«Не позвони́» o «не откро́й» no se usan para prohibir." }
+        { id: "u12-imp-forma", titulo: "Cómo se forma (ты)",
+          antes: { pide: "чита́ю → чита́й · де́лаю → де́лай. ¿Y слу́шаю?", opciones: ["слу́шай", "слу́ши"], ok: "слу́шай", por: "Vocal + **ю**: **-й**." },
+          texto: "Se toma la forma de я (del presente o, si es de resultado, del futuro) y se cambia el final:\nvocal + **ю** → **-й**: чита́ю → чита́й, сде́лаю → сде́лай\nacento al final → **-и**: говорю́ → говори́, позвоню́ → позвони́\nacento antes → **-ь**: гото́влю → гото́вь, отве́чу → отве́ть",
+          ejemplos: [
+            { ru: "{Чита́й}!", es: "¡Leé!", por: "чита́ю → чита́й." },
+            { ru: "{Позвони́} мне.", es: "Llamame.", por: "позвоню́ → позвони́." },
+            { ru: "{Поста́вь} чай.", es: "Poné el té.", por: "поста́влю, acento antes: **-ь**." }],
+          destacado: "**-й** · **-и** · **-ь**",
+          chequeo: [{ pide: "включу́ → ?", opciones: ["включи́", "включь"], ok: "включи́", por: "Acento al final: **-и**." }] },
+        { id: "u12-imp-vy", titulo: "ты y вы",
+          texto: "Para вы (ustedes, o usted) se agrega **-те**. Así se arman todas las fórmulas que ya usabas: Повтори́те, Скажи́те, Поверни́те, Перейди́те.",
+          ejemplos: [
+            { ru: "{Скажи́те}, пожа́луйста…", es: "Dígame, por favor…", por: "скажи́ + **-те**." },
+            { ru: "{Прове́рьте}, пожа́луйста.", es: "Revise, por favor.", por: "прове́рь + **-те**." },
+            { ru: "{Подожди́те} мину́ту!", es: "¡Espere un minuto!", por: "подожди́ + **-те**." }] },
+        { id: "u12-imp-irreg", titulo: "Los irregulares",
+          texto: "дать → дай, да́йте · есть → ешь, е́шьте · пить → пей, пе́йте · взять → возьми́, возьми́те · помо́чь → помоги́, помоги́те",
+          ojo: "No hace falta deducirlos: en Verbos cada verbo tiene su imperativo." },
+        { id: "u12-imp-aspecto", titulo: "¿Qué aspecto?",
+          texto: "Para pedir algo concreto, una vez: el de resultado (Закро́й окно́). Para algo que se repite o en general: el de proceso (Звони́ мне ча́сто). Y para invitar a alguien que ya está por hacerlo, el de proceso suena más amable: Сади́тесь! Проходи́те!",
+          ejemplos: [
+            { ru: "{Закро́й} окно́, пожа́луйста.", es: "Cerrá la ventana, por favor.", por: "Una vez: закры́ть." },
+            { ru: "{Звони́} мне ча́сто.", es: "Llamame seguido.", por: "Se repite: звони́ть." },
+            { ru: "{Сади́тесь}, пожа́луйста!", es: "¡Siéntese, por favor!", por: "Invitación: el de proceso." }] },
+        { id: "u12-imp-ne", titulo: "No hagas: не + proceso",
+          texto: "Para prohibir o pedir que no se haga algo, siempre не + el de proceso.",
+          ejemplos: [
+            { ru: "Не {звони́} ему́!", es: "¡No lo llames!", por: "не + proceso." },
+            { ru: "Не {открыва́й} окно́.", es: "No abras la ventana.", por: "не + proceso." },
+            { ru: "Не {забыва́й}!", es: "¡No te olvides!", por: "не + proceso: забыва́ть." }],
+          destacado: "не + proceso",
+          errores: [{ mal: "Не позвони́ ему́!", bien: "Не {звони́} ему́!", por: "Para prohibir, el de proceso." }],
+          chequeo: [{ pide: "«No apagues la tele»", opciones: ["Не выключа́й телеви́зор.", "Не вы́ключи телеви́зор."], ok: "Не выключа́й телеви́зор.", por: "не + proceso." }] }
       ] },
-    { id: "u12m9", n: 9, tipo: "leccion", nPractica: 12, titulo: "Comparar", resumen: "Метро́ быстре́е, чем авто́бус. Са́мый большо́й.",
+    { id: "u12m9", n: 9, tipo: "leccion", nPractica: 12, titulo: "Comparar", resumen: "Метро́ быстре́е, чем авто́бус. Са́мый лу́чший.",
       intro: "Para comparar se usa el comparativo («más …»): una sola forma que no cambia nunca.",
       secciones: [
-        { titulo: "Más … que …", texto: "Москва́ бо́льше, чем Барсело́на. («Moscú es más grande que Barcelona»)\nМетро́ быстре́е, чем авто́бус. («el metro es más rápido que el colectivo»)", destacado: "X + comparativo + , чем + Y", ojo: "Antes de чем va coma." },
-        { titulo: "Cómo se forma", texto: "A la mayoría se le agrega -ее:\nинтере́сный → интере́снее\nкраси́вый → краси́вее\nудо́бный → удо́бнее\nбы́стрый → быстре́е\nтёплый → тепле́е\nхоло́дный → холодне́е\nAlgunos son irregulares:\nбольшо́й → бо́льше\nма́ленький → ме́ньше\nхоро́ший → лу́чше\nплохо́й → ху́же\nдорого́й → доро́же\nдешёвый → деше́вле" },
-        { titulo: "Sin чем: con genitivo", texto: "Y va en genitivo, sin coma y sin чем. Dice exactamente lo mismo:\nМетро́ быстре́е авто́буса.\nМосква́ бо́льше Барсело́ны." },
-        { titulo: "También con verbos", texto: "Он говори́т быстре́е. («habla más rápido»)\nСего́дня тепле́е, чем вчера́. («hoy hace más calor que ayer»)\nЯ говорю́ по-испа́нски лу́чше, чем по-ру́сски.\nМне бо́льше нра́вится чай. («me gusta más el té»)" },
-        { titulo: "El más: са́мый", texto: "са́мый + adjetivo, y cambia como un adjetivo:\nса́мый большо́й го́род\nса́мая краси́вая у́лица\nса́мое удо́бное ме́сто\nМосква́ — са́мый большо́й го́род Росси́и." }
+        { id: "u12-comp", titulo: "Más … que …",
+          texto: "X + comparativo + , чем + Y. El comparativo no cambia: sirve para masculino, femenino y plural.",
+          ejemplos: [
+            { ru: "Москва́ {бо́льше}, чем Барсело́на.", es: "Moscú es más grande que Barcelona.", por: "большо́й → бо́льше." },
+            { ru: "Метро́ {быстре́е}, чем авто́бус.", es: "El subte es más rápido que el colectivo.", por: "бы́стрый → быстре́е." },
+            { ru: "Э́та зада́ча {сложне́е}.", es: "Este problema es más difícil.", por: "сло́жный → сложне́е." }],
+          destacado: "X + comparativo + , чем + Y",
+          ojo: "Antes de чем va coma." },
+        { id: "u12-comp-forma", titulo: "Cómo se forma",
+          antes: { pide: "интере́сный → интере́снее · краси́вый → краси́вее. ¿Y у́мный?", opciones: ["умне́е", "у́мный"], ok: "умне́е", por: "Se agrega **-ее**." },
+          texto: "A la mayoría se le agrega **-ее**: интере́снее, краси́вее, сильне́е.\nLos terminados en **-кий**, **-гий**, **-хий** y algunos más cambian la consonante y terminan en **-е**: лёгкий → ле́гче, ти́хий → ти́ше, гро́мкий → гро́мче, бли́зкий → бли́же, коро́ткий → коро́че, высо́кий → вы́ше, ни́зкий → ни́же, просто́й → про́ще, дорого́й → доро́же, молодо́й → моло́же.\nIrregulares: большо́й → бо́льше, ма́ленький → ме́ньше, хоро́ший → лу́чше, плохо́й → ху́же, далёкий → да́льше, ста́рый → ста́рше.",
+          ejemplos: [
+            { ru: "Мой брат {ста́рше} меня́.", es: "Mi hermano es mayor que yo.", por: "ста́рый → ста́рше (la edad)." },
+            { ru: "Ру́сский язы́к {трудне́е}?", es: "¿El ruso es más difícil?", por: "тру́дный → трудне́е." },
+            { ru: "Здесь {ти́ше}.", es: "Acá está más tranquilo.", por: "ти́хий → ти́ше." }],
+          ojo: "Cada adjetivo muestra su comparativo en Casos." },
+        { id: "u12-comp-gen", titulo: "Sin чем: con genitivo",
+          texto: "También se puede decir sin чем: lo que se compara va en genitivo, sin coma. Dice exactamente lo mismo.",
+          ejemplos: [
+            { ru: "Метро́ быстре́е {авто́буса}.", es: "El subte es más rápido que el colectivo.", por: "авто́бус → авто́буса." },
+            { ru: "Брат ста́рше {меня́}.", es: "Mi hermano es mayor que yo.", por: "Genitivo de я." }] },
+        { id: "u12-comp-verbo", titulo: "También con verbos",
+          texto: "El comparativo sirve también para «más rápido», «más fuerte», «mejor» con un verbo, y para cómo está el tiempo.",
+          ejemplos: [
+            { ru: "Говори́те {гро́мче}, пожа́луйста.", es: "Hable más fuerte, por favor.", por: "гро́мкий → гро́мче." },
+            { ru: "Сего́дня {тепле́е}, чем вчера́.", es: "Hoy hace más calor que ayer.", por: "тёплый → тепле́е." },
+            { ru: "Мне {бо́льше} нра́вится чай.", es: "Me gusta más el té.", por: "бо́льше = más." }] },
+        { id: "u12-samyj", titulo: "El más: са́мый",
+          texto: "са́мый + adjetivo, y cambia como un adjetivo: са́мый большо́й го́род, са́мая краси́вая у́лица, са́мое удо́бное ме́сто. Para «el mejor» también está лу́чший (Э́то лу́чший рестора́н).",
+          ejemplos: [
+            { ru: "Москва́ — {са́мый большо́й} го́род Росси́и.", es: "Moscú es la ciudad más grande de Rusia.", por: "са́мый + adjetivo, masculino." },
+            { ru: "Э́то {лу́чший} фильм.", es: "Es la mejor película.", por: "лу́чший = el mejor." },
+            { ru: "Мой {ста́рший} брат.", es: "Mi hermano mayor.", por: "ста́рший / мла́дший: mayor / menor entre hermanos." }],
+          errores: [{ mal: "са́мый бо́льше го́род", bien: "{са́мый большо́й} го́род", por: "Con са́мый va el adjetivo, no el comparativo." }],
+          chequeo: [{ pide: "«la calle más linda»", opciones: ["са́мая краси́вая у́лица", "са́мый краси́вее у́лица"], ok: "са́мая краси́вая у́лица", por: "са́мая + adjetivo femenino." }] }
       ] },
     { id: "u12m10", n: 10, tipo: "lectura", titulo: "Todo junto", resumen: "Leer con toda la gramática de la unidad.",
       intro: "Tres textos con todo lo de la unidad: pronombres, posesivos, plural, aspecto, imperativo y comparaciones. Leé, escuchá y después contestá." },
@@ -268,11 +600,20 @@ const UNIDAD_12 = {
 function u12Palabras(t) { return String(t).replace(/(^|[^\-А-Яа-яЁё\u0301{])([вВаАиИсСуУкКоОяЯ])(?=$|[^А-Яа-яЁё\u0301}])/g, "$1{$2}"); }
 UNIDAD_12.modulos.forEach(m => {
   if (m.intro) m.intro = u12Palabras(m.intro);
-  (m.secciones || []).forEach(s => ["texto", "destacado", "truco", "ojo"].forEach(k => { if (s[k]) s[k] = u12Palabras(s[k]); }));
+  (m.secciones || []).forEach(s => {
+    /* Todo el texto en español de la teoría (12/10/2026): también por, «Más a fondo», errores y preguntas */
+    ["texto", "destacado", "truco", "comparacion", "ojo"].forEach(k => { if (s[k]) s[k] = u12Palabras(s[k]); });
+    const por = o => { if (o && o.por) o.por = u12Palabras(o.por); if (o && o.pide) o.pide = u12Palabras(o.pide); };
+    (s.ejemplos || []).forEach(por); (s.errores || []).forEach(por); (s.chequeo || []).forEach(por); por(s.antes);
+    if (s.desarmar) s.desarmar.partes.forEach(p => { if (p.nota) p.nota = u12Palabras(p.nota); });
+    if (s.mas) { if (s.mas.texto) s.mas.texto = u12Palabras(s.mas.texto); (s.mas.ejemplos || []).forEach(por); (s.mas.errores || []).forEach(por); }
+  });
 });
 function unidad12Modulo(id) { return UNIDAD_12.modulos.find(m => m.id === id) || null; }
 
-const U12_MEZCLA = { lectura: 2, "lectura-vf": 1, imperativo: 2, "no-imp": 1, comparar: 2, samyj: 1, aspecto: 3, pareja: 1, "futuro-pf": 2, infinitivo: 1, marcador: 2, pronombre: 2, posesivo: 2, este: 1, plural: 2, numero: 2, "plural-caso": 2, "adj-plural": 2, detectar: 1, emparejar: 1, "es-ru": 3, dictado: 2 };
+const U12_MEZCLA = { lectura: 2, "lectura-vf": 1, imperativo: 2, "no-imp": 1, comparar: 2, samyj: 1, aspecto: 3, pareja: 1, "futuro-pf": 2, infinitivo: 1, marcador: 2, pronombre: 2, posesivo: 2, este: 1, plural: 2, numero: 2, "plural-caso": 2, "adj-plural": 2, detectar: 1, emparejar: 1, "es-ru": 3, dictado: 2, construir: 1,
+  /* Profundización (12/10/2026): ~20 % de la sesión */
+  porque: 2, natural: 2, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1, significado: 1, "palabra-es-ru": 1 };
 
 /* ── Datos ─────────────────────────────────────────────────── */
 function u12Datos() {
@@ -677,6 +1018,230 @@ function ejerciciosUnidad12() {
       afirmacion: af, verdadero: v, audio: todo, texto: lineas, textoOculto: true, explicacion: (v ? "Verdadero. " : "Falso. ") + todo }));
   });
 
+
+  /* ══ Profundización (12/10/2026): tipos que practican la regla, con `regla` ══════════════════
+     porque · natural · oido · par · descubrir · cadena · diagnostico · desarmar (~20 % de la sesión). */
+  const D2 = u12Datos(), V = D2.verbo, A = adj;
+  const push = o => out.push(o);
+  const mez = (a, k) => baraja(a, k + 7);
+  const nat = (id, modulo, regla, ok, mal, expl, o) => push(Object.assign({ id: "U12-nat-" + id, tipo: "natural", forma: "elegir", dificultad: 2, modulo, regla, grupo: "NA-" + id, items: [],
+    oir: ok, pide: "¿Cuál suena natural?", opciones: mez([ok, mal], id.length), correcta: ok, explicacion: ok + " " + expl }, o || {}));
+  const pq = (id, modulo, regla, frase, w, ok, otras, expl) => push({ id: "U12-pq-" + id, tipo: "porque", forma: "elegir", dificultad: 2, modulo, regla, grupo: "PQ-" + id, items: [],
+    oir: frase, grande: frase, audio: frase, audioManual: true, pide: "¿Por qué «" + w + "»?", opciones: mez([ok].concat(otras), id.length + 3), correcta: ok, explicacion: frase + " " + expl });
+  const par = (id, modulo, regla, pide, ok, mal, expl) => push({ id: "U12-par-" + id, tipo: "par", forma: "elegir", dificultad: 2, modulo, regla, grupo: "PA-" + id, items: [],
+    oir: ok, pide, opciones: mez([ok, mal], id.length), correcta: ok, explicacion: ok + " " + expl });
+  const oido = (id, modulo, regla, frase, pide, opciones, ok, expl) => push({ id: "U12-oido-" + id, tipo: "oido", forma: "elegir", dificultad: 2, modulo, regla, grupo: "OI-" + id, items: [],
+    oir: frase, audio: frase, pide, opciones, correcta: ok, explicacion: frase + " " + expl });
+  const desc = (id, modulo, regla, ejemplos, preg, ok, mal, expl) => push({ id: "U12-desc-" + id, tipo: "descubrir", forma: "elegir", dificultad: 2, modulo, regla, grupo: "DE-" + id, items: [],
+    oir: ok, pide: ejemplos.join(" · ") + ". ¿Y " + preg + "?", opciones: mez([ok, mal], id.length), correcta: ok, explicacion: expl });
+  const diag = (id, modulo, regla, mal, ok, falla, otras, expl) => push({ id: "U12-diag-" + id, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo, regla, grupo: "DI-" + id, items: [],
+    oir: ok, pide: "La frase tiene un error. ¿Qué falla?", grande: mal, opciones: mez([falla].concat(otras), id.length), correcta: falla, esperadas: [ok], explicacion: ok + " " + expl });
+  const cad = (id, modulo, regla, base, pasos, expl) => push({ id: "U12-cad-" + id, tipo: "cadena", forma: "cadena", dificultad: 3, modulo, regla, grupo: "CA-" + id, items: [],
+    oir: pasos[pasos.length - 1][1][0], pide: "Cambiá la frase paso a paso.", base, pasos: pasos.map(([p, e]) => ({ pide: p, esperadas: e })), explicacion: [base].concat(pasos.map(p => p[1][0])).join(" → ") + " " + expl });
+  const desarm = (id, modulo, regla, pal, preguntas, expl) => push({ id: "U12-desarm-" + id, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo, regla, grupo: "DS-" + id, items: [],
+    oir: pal.join(" "), audio: pal.join(" "), audioManual: true, pide: "Respondé tocando las palabras de la frase.", palabras: pal, preguntas: preguntas.map(([p, c]) => ({ pide: p, correcta: c })), explicacion: pal.join(" ") + " " + expl });
+
+  /* ── Módulo 1: pronombres, никто́, -то / -нибудь ── */
+  const PR = { "он": pron("он"), "она́": pron("она́"), "они́": pron("они́") };
+  [["у", 1, "У ", " есть маши́на."], ["с", 4, "Я гуля́ю ", "."], ["о", 5, "Мы говори́м ", "."]].forEach(([pr, caso, a, b], k) => {
+    Object.keys(PR).forEach((ru, j) => { const p = PR[ru]; if (!p || !p.n) return;
+      const ok = a.replace(/^У $/, "") + (k === 0 ? "У " : "") + u12PronForma(p, caso, pr).replace(/^у /, k === 0 ? "" : "у ") + b;
+      const okF = (k === 0 ? "У " + p.n[caso] : a + pr + " " + p.n[caso]) + b, malF = (k === 0 ? "У " + p.f[caso] : a + pr + " " + p.f[caso]) + b;
+      if (p.n[caso] !== p.f[caso]) nat("pn-" + k + j, 1, "u12-pron-n", okF, malF, "Después de una preposición, **н-**: " + p.n[caso] + ".");
+    }); });
+  [["Я помога́ю ", "она́", 2, 3, "помога́ть + dativo."], ["Я звоню́ ", "он", 2, 3, "звони́ть + dativo."], ["Я пишу́ ", "они́", 2, 3, "A quién se escribe: dativo."], ["Ма́ма ждёт ", "мы", 3, 2, "ждать + acusativo."], ["Я ви́жу ", "они́", 3, 2, "ви́деть + acusativo."]].forEach(([a, ru, c, m, ex], j) => {
+    const p = pron(ru); if (!p || p.f[c] === p.f[m]) return; nat("pd-" + j, 1, c === 2 ? "u12-pron-dat-ins" : "u12-pron-acc-gen", a + p.f[c] + ".", a + p.f[m] + ".", ex);
+  });
+  pq("pn-0", 1, "u12-pron-n", "Я гуля́ю с ней.", "ней", "Después de una preposición: н-", ["Es dativo", "Es posesivo"], "с + instrumental de она́, con **н-**.");
+  pq("pn-1", 1, "u12-pron-n", "У него́ есть брат.", "него́", "Después de una preposición: н-", ["Es posesivo: «de él»", "Es acusativo"], "у + genitivo de он, con **н-**.");
+  pq("pn-2", 1, "u12-pron-n", "Ма́ма зна́ет его́.", "его́", "No hay preposición: sin н-", ["Después de una preposición: н-", "Es dativo"], "Sin preposición: его́.");
+  [["Никто́ не звони́т.", "Никто́ звони́т.", "Falta не: никто́ + не."], ["Я ничего́ не зна́ю.", "Я ничего́ зна́ю.", "ничего́ + не."], ["Я никого́ не ви́жу.", "Я никого́ ви́жу.", "никого́ + не."],
+   ["Она́ никому́ не звони́ла.", "Она́ никого́ не звони́ла.", "звони́ть + dativo: никому́."], ["Я ничего́ не понима́ю.", "Я не понима́ю ничто́.", "«Nada» con un verbo negado: ничего́."], ["Никто́ не зна́ет.", "Никто́ зна́ет.", "Falta не."]].forEach(([ok, mal, ex], j) =>
+    nat("nk-" + j, 1, "u12-nikto", ok, mal, ex));
+  pq("nk-0", 1, "u12-nikto", "Я никого́ не ви́жу.", "не", "Con никто́, el verbo lleva не", ["Es una pregunta", "Va con никогда́"], "Como con никогда́: никого́ + не.");
+  diag("nk-0", 1, "u12-nikto", "Никто́ звони́т.", "Никто́ не звони́т.", "Falta не", ["El caso de никто́", "La forma del verbo"], "никто́ + не + verbo.");
+  diag("nk-1", 1, "u12-nikto", "Я не зна́ю ничто́.", "Я ничего́ не зна́ю.", "«Nada» con un verbo negado: ничего́", ["Falta не", "La forma del verbo"], "ничего́ + не.");
+  cad("nk-0", 1, "u12-nikto", "Я зна́ю.", [["Negalo: no sabés nada.", ["Я ничего́ не зна́ю.", "Я не зна́ю ничего́."]], ["Ahora: nadie sabe.", ["Никто́ не зна́ет."]]], "ничего́ / никто́ + не.");
+  desarm("nk-0", 1, "u12-nikto", ["Я", "никого́", "не", "ви́жу."], [["¿A quién? (nadie, en acusativo)", 1], ["¿Qué palabra niega el verbo?", 2]], "никого́ + не + verbo.");
+  par("to-0", 1, "u12-to-nibud", "¿Cuál dice que alguien está llamando y no sabés quién?", "Кто́-то звони́т.", "Кто́-нибудь звони́т?", "Hay alguien: **-то**.");
+  par("to-1", 1, "u12-to-nibud", "¿Cuál pregunta si alguien (quien sea) sabe?", "Кто́-нибудь зна́ет?", "Кто́-то зна́ет.", "Pregunta: **-нибудь**.");
+  nat("to-0", 1, "u12-to-nibud", "Ты что́-нибудь хо́чешь?", "Ты что́-то хо́чешь?", "En una pregunta: **-нибудь**.");
+  nat("to-1", 1, "u12-to-nibud", "Ты кому́-нибудь звони́л?", "Ты кому́-то звони́л?", "En una pregunta: **-нибудь**.");
+
+  /* ── Módulo 2: posesivos, свой, э́тот ── */
+  const MOI2 = A("мой"), SVOI2 = A("свой"), ETOT2 = A("э́тот");
+  [["брат", 2, "Я звоню́ ", "звони́ть + dativo"], ["сестра́", 4, "Я гуля́ю с ", "с + instrumental"], ["друг", 1, "У ", "у + genitivo"], ["ма́ма", 5, "Я ду́маю о ", "о + prepositivo"], ["подру́га", 2, "Я помога́ю ", "помога́ть + dativo"], ["па́па", 4, "Я гуля́ю с ", "с + instrumental"]].forEach(([ru, c, a, ex], j) => {
+    const s = S(ru); if (!s || !MOI2) return; const f = D2.concuerda(MOI2, s, c), ok = a + f + " " + s.sg[c] + (c === 1 ? " есть соба́ка." : "."), mal = a + f + " " + s.sg[0] + (c === 1 ? " есть соба́ка." : ".");
+    if (s.sg[c] !== s.sg[0]) nat("ps-" + j, 2, "u12-pos-casos", ok, mal, ex + ": las dos palabras en el mismo caso.");
+    if (j < 4) { const mal2 = a + MOI2.m[0] + " " + s.sg[c] + (c === 1 ? " есть соба́ка." : "."); if (f !== MOI2.m[0]) nat("ps2-" + j, 2, "u12-pos-casos", ok, mal2, "El posesivo también cambia: " + f + "."); }
+  });
+  desc("ps-0", 2, "u12-pos-casos", ["моя́ сестра́ → с мое́й сестро́й", "моя́ ма́ма → с мое́й ма́мой"], "моя́ подру́га", "с мое́й подру́гой", "с моя́ подру́гой", "Femenino, instrumental: мое́й.");
+  [["Ива́н", "жена́", 3, "Ива́н лю́бит ", "его́", "Iván ama a su esposa (la de él mismo)."], ["А́нна", "брат", 2, "А́нна звони́т ", "её", "Ana llama a su hermano (el de ella)."],
+   ["Ма́ша", "сестра́", 4, "Ма́ша гуля́ет с ", "её", "Masha pasea con su hermana (la de ella)."], ["Ди́ма", "ма́ма", 5, "Ди́ма ду́мает о ", "его́", "Dima piensa en su mamá (la de él)."],
+   ["Он", "телефо́н", 3, "Он и́щет ", "его́", "Él busca su teléfono (el de él)."], ["Она́", "кни́га", 3, "Она́ чита́ет ", "её", "Ella lee su libro (el de ella)."]].forEach(([q, ru, c, a, otro, es], j) => {
+    const s = S(ru); if (!s || !SVOI2) return; const f = D2.concuerda(SVOI2, s, c), ok = a + (c === 4 && f.startsWith("св") ? "" : "") + f + " " + s.sg[c] + ".", mal = a + otro + " " + s.sg[c] + ".";
+    const okF = ok.replace(/ с свое́й/, " со свое́й").replace(/ с своим/, " со свои́м"), malF = mal;
+    nat("sv-" + j, 2, "u12-svoy", okF, malF, "Es de quien hace la acción: свой (" + f + ").", { pide: "«" + es + "» ¿Cuál suena natural?" });
+    if (j < 3) pq("sv-" + j, 2, "u12-svoy", okF, f, "Es de quien hace la acción", ["Es de otra persona", "Es el sujeto de la frase"], "свой: de quien hace la acción.");
+  });
+  par("sv-0", 2, "u12-svoy", "¿Cuál dice que Iván ama a la esposa de otro hombre?", "Ива́н лю́бит его́ жену́.", "Ива́н лю́бит свою́ жену́.", "его́: de otro hombre. свою́ sería la de Iván.");
+  par("sv-1", 2, "u12-svoy", "¿Cuál dice que Ana llama a su propia mamá?", "А́нна звони́т свое́й ма́ме.", "А́нна звони́т её ма́ме.", "La de Ana: свое́й.");
+  diag("sv-0", 2, "u12-svoy", "Ма́ша звони́т её ма́ме.", "Ма́ша звони́т свое́й ма́ме.", "Es la de Masha: va свой", ["El caso de ма́ма", "La forma del verbo"], "Si es la mamá de Masha, свое́й.");
+  desarm("sv-0", 2, "u12-svoy", ["Ива́н", "лю́бит", "свою́", "жену́."], [["¿Quién hace la acción?", 0], ["¿Qué palabra dice «su propia»?", 2]], "свою́ mira a Ива́н: es su esposa.");
+  [["Я живу́ в ", "дом", 5], ["Я хочу́ купи́ть ", "руба́шка", 3], ["Я говорю́ с ", "челове́к", 4], ["Мы говори́м об ", "фильм", 5]].forEach(([a, ru, c], j) => {
+    const s = S(ru); if (!s || !ETOT2) return; const f = D2.concuerda(ETOT2, s, c); const ok = a + f + " " + s.sg[c] + ".", mal = a + (s.g === "f" ? ETOT2.f[0] : ETOT2.m[0]) + " " + s.sg[c] + ".";
+    if (f !== ETOT2.m[0] && f !== ETOT2.f[0]) nat("et-" + j, 2, "u12-etot", ok, mal, "э́тот cambia con la palabra: " + f + ".");
+  });
+  nat("ego-0", 2, "u12-ego-eyo", "У его́ бра́та есть соба́ка.", "У него́ бра́та есть соба́ка.", "его́ como posesivo («de él») no lleva **н-**.");
+
+  /* ── Módulo 3: genitivo plural y contar ── */
+  const CU = ["брат", "сестра́", "кни́га", "биле́т", "студе́нт", "друг", "ру́чка", "музе́й", "маши́на", "челове́к"];
+  const UNO = s => s.g === "f" ? "одна́ " : s.g === "n" ? "одно́ " : "оди́н ", DOS = s => s.g === "f" ? "две " : "два ";
+  const cnt = (n, s) => n === 1 ? UNO(s) + s.sg[0] : n <= 4 ? (n === 2 ? DOS(s) : ["", "", "", "три ", "четы́ре "][n]) + (s.conteo || s.sg[1]) : ["", "", "", "", "", "пять ", "шесть ", "семь ", "во́семь ", "де́вять ", "де́сять "][n] + s.pl[1];
+  CU.forEach((ru, j) => { const s = S(ru); if (!s) return; const n = [2, 5, 3, 6, 4, 10, 5, 2, 7, 5][j];
+    const ok = "У меня́ " + cnt(n, s) + ".", malF = n <= 4 ? (n === 2 ? DOS(s) : ["", "", "", "три ", "четы́ре "][n]) + s.pl[1] : ["", "", "", "", "", "пять ", "шесть ", "семь ", "во́семь ", "де́вять ", "де́сять "][n] + (s.conteo || s.sg[1]);
+    if (ru === "челове́к") return;
+    nat("ct-" + j, 3, "u12-contar", ok, "У меня́ " + malF + ".", n <= 4 ? "Después de 2, 3 o 4: genitivo singular." : "De 5 en adelante: genitivo plural.");
+    if (j < 8) pq("ct-" + j, 3, "u12-contar", ok, (n <= 4 ? (s.conteo || s.sg[1]) : s.pl[1]), n <= 4 ? "Después de 2, 3 o 4: genitivo singular" : "Después de 5 o más: genitivo plural",
+      [n <= 4 ? "Después de 5 o más: genitivo plural" : "Después de 2, 3 o 4: genitivo singular", "Después de 1: nominativo"], "1 · 2–4 · 5 o más.");
+  });
+  nat("dos-0", 3, "u12-contar", "две сестры́", "два сестры́", "Con palabras femeninas: две.");
+  nat("dos-1", 3, "u12-contar", "две кни́ги", "два кни́ги", "Con palabras femeninas: две.");
+  nat("dos-2", 3, "u12-contar", "два бра́та", "две бра́та", "брат es masculino: два.");
+  [["мно́го", "друг"], ["ма́ло", "биле́т"], ["не́сколько", "кни́га"], ["Ско́лько у тебя́", "брат"]].forEach(([q, ru], j) => { const s = S(ru);
+    nat("mn-" + j, 3, "u12-contar", q + " " + s.pl[1] + (q.startsWith("Ско́лько") ? "?" : ""), q + " " + s.pl[0] + (q.startsWith("Ско́лько") ? "?" : ""), q.split(" ")[0] + " + genitivo plural."); });
+  desc("gp-0", 3, "u12-gen-pl", ["студе́нт → мно́го студе́нтов", "биле́т → мно́го биле́тов"], "магази́н", "мно́го магази́нов", "мно́го магази́н", "Masculino en consonante: **-ов**.");
+  desc("gp-1", 3, "u12-gen-pl", ["кни́га → мно́го книг", "маши́на → мно́го маши́н"], "газе́та", "мно́го газе́т", "мно́го газе́тов", "Femenino en **-а**: se saca la vocal.");
+  desc("gp-2", 3, "u12-gen-pl", ["учи́тель → мно́го учителе́й", "врач → мно́го враче́й"], "слова́рь", "мно́го словаре́й", "мно́го словаро́в", "En **-ь** o después de **ч**: **-ей**.");
+  desc("gp-3", 3, "u12-gen-pl", ["музе́й → мно́го музе́ев", "трамва́й → мно́го трамва́ев"], "чай", "мно́го ча́ев", "мно́го ча́ов", "En **-й**: **-ев**.");
+  oido("ct-0", 3, "u12-contar", "У меня́ два бра́та.", "Escuchá. ¿Cuántos hermanos?", ["2", "5", "1"], "2", "два бра́та: 2.");
+  oido("ct-1", 3, "u12-contar", "У меня́ пять бра́тьев.", "Escuchá. ¿Cuántos hermanos?", ["5", "2", "1"], "5", "пять бра́тьев: 5.");
+  [["Я ви́жу студе́нтов.", "Я ви́жу студе́нты.", "Personas: como el genitivo."], ["Я жду друзе́й.", "Я жду друзья́.", "Personas: como el genitivo."], ["Я покупа́ю кни́ги.", "Я покупа́ю книг.", "Cosas: como el nominativo."], ["Я люблю́ соба́к.", "Я люблю́ соба́ки.", "Animales: como el genitivo."]].forEach(([ok, mal, ex], j) =>
+    nat("ap-" + j, 3, "u12-acc-pl", ok, mal, ex));
+  cad("ct-0", 3, "u12-contar", "У меня́ оди́н брат.", [["Ahora: dos hermanos.", ["У меня́ два бра́та."]], ["Ahora: cinco hermanos.", ["У меня́ пять бра́тьев."]]], "1 · 2–4 · 5 o más.");
+  cad("ct-1", 3, "u12-contar", "У меня́ одна́ кни́га.", [["Ahora: dos libros.", ["У меня́ две кни́ги."]], ["Ahora: muchos libros (мно́го).", ["У меня́ мно́го книг."]]], "две + genitivo singular; мно́го + genitivo plural.");
+  diag("ct-0", 3, "u12-contar", "У меня́ пять кни́ги.", "У меня́ пять книг.", "La forma después del número", ["El número", "Falta есть"], "De 5 en adelante: genitivo plural.");
+
+  /* ── Módulo 4: el plural en los otros casos ── */
+  [["друг", "Я помога́ю ", 2, "dativo"], ["студе́нт", "Я звоню́ ", 2, "dativo"], ["ребёнок", "Мы гуля́ем с ", 4, "instrumental"], ["друг", "Я живу́ с ", 4, "instrumental"], ["ребёнок", "Он ду́мает о ", 5, "prepositivo"], ["брат", "Мы говори́м о ", 5, "prepositivo"]].forEach(([ru, a, c, cn], j) => {
+    const s = S(ru); if (!s) return; const otro = c === 2 ? 4 : c === 4 ? 2 : 2;
+    nat("p2-" + j, 4, "u12-pl-dat-ins-prep", a + s.pl[c] + ".", a + s.pl[otro] + ".", cn + " plural: " + s.pl[c] + ".");
+    if (j % 2 === 0) pq("p2-" + j, 4, "u12-pl-dat-ins-prep", a + s.pl[c] + ".", s.pl[c], c === 2 ? "Dativo plural: -ам / -ям" : c === 4 ? "Instrumental plural: -ами / -ями" : "Prepositivo plural: -ах / -ях",
+      ["Dativo plural: -ам / -ям", "Instrumental plural: -ами / -ями", "Prepositivo plural: -ах / -ях"].filter(x => !x.startsWith(c === 2 ? "Dativo" : c === 4 ? "Instrumental" : "Prepositivo")), "Las mismas terminaciones para todas las palabras.");
+  });
+  nat("ap4-0", 4, "u12-adj-pl", "Я гуля́ю с хоро́шими друзья́ми.", "Я гуля́ю с хоро́шие друзья́ми.", "El adjetivo, en el mismo caso: **-ими**.");
+  nat("ap4-1", 4, "u12-adj-pl", "У меня́ мно́го но́вых книг.", "У меня́ мно́го но́вые книг.", "Genitivo plural: **-ых**.");
+  nat("ap4-2", 4, "u12-pos-pl", "Я звоню́ мои́м друзья́м.", "Я звоню́ мои́ друзья́м.", "Dativo plural: мои́м.");
+  desc("p2-0", 4, "u12-pl-dat-ins-prep", ["студе́нты → студе́нтам", "врачи́ → врача́м"], "бра́тья", "бра́тьям", "бра́тьями", "Dativo plural: -ам / -ям.");
+  cad("p2-0", 4, "u12-pl-dat-ins-prep", "Я гуля́ю с дру́гом.", [["Ahora: con amigos (plural).", ["Я гуля́ю с друзья́ми."]], ["Ahora: les escribo a mis amigos (Я пишу́…).", ["Я пишу́ друзья́м.", "Я пишу́ мои́м друзья́м."]]], "Instrumental plural -ями; dativo plural -ям.");
+
+  /* ── Módulo 5: cómo se forman las parejas ── */
+  const FORMA = { prefijo: "Con un prefijo", final: "Cambiando el final", otra: "Con otra palabra" };
+  const modPar = i => ["приходи́ть", "уходи́ть", "приезжа́ть", "уезжа́ть"].indexOf(i) >= 0 ? 7 : i === "ждать" || i === "встреча́ть" ? 6 : ["ста́вить", "включа́ть", "выключа́ть"].indexOf(i) >= 0 ? 8 : 5;
+  U12_PARES_NUEVAS.forEach(([i, r, es, f], j) => {
+    const vi = V(i), vr = V(r); if (!vi || !vr || !vr.futuro) return;
+    const m = modPar(i);
+    const otras = uniq(baraja(U12_PARES_NUEVAS.filter(x => x[1] !== r && modPar(x[0]) <= m).map(x => x[1]), j + 1)).slice(0, 2);
+    push({ id: "U12-parj-n-" + j, tipo: "pareja", forma: "elegir", dificultad: 1, modulo: m, regla: f === "prefijo" ? "u12-asp-prefijo" : f === "final" ? "u12-asp-sufijo" : "u12-asp-otra", grupo: "PJN-" + j, items: ["lex:" + vr.id], oir: vr.ac,
+      pide: "¿Cuál es la pareja de resultado de «" + vi.ac + "» (" + es + ")?", opciones: mez([vr.ac].concat(otras), j), correcta: vr.ac, explicacion: vi.ac + " → " + vr.ac + ": я " + vr.futuro[0] + "." });
+    if (j < 12) pq("frm-" + j, m, f === "prefijo" ? "u12-asp-prefijo" : f === "final" ? "u12-asp-sufijo" : "u12-asp-otra", vi.ac + " → " + vr.ac, vr.ac, FORMA[f], Object.values(FORMA).filter(x => x !== FORMA[f]), FORMA[f].toLowerCase() + ".");
+  });
+  pq("frm-ot", 5, "u12-asp-otra", "говори́ть → сказа́ть", "сказа́ть", FORMA.otra, [FORMA.prefijo, FORMA.final], "Son dos palabras distintas.");
+  par("np-0", 5, "u12-no-pareja", "¿Cuál dice que terminaste el libro?", "Я прочита́л кни́гу.", "Я почита́л кни́гу.", "Terminar: прочита́ть. почита́ть es «leer un rato».");
+  par("np-1", 5, "u12-no-pareja", "¿Cuál dice que leíste un rato antes de dormir?", "Я почита́л и пошёл спать.", "Я прочита́л и пошёл спать.", "Un rato: почита́ть.");
+  pq("np-0", 5, "u12-no-pareja", "Он заговори́л по-ру́сски.", "заговори́л", "Empezó a hablar", ["Terminó de hablar", "Habló un rato"], "**за-**: empezar a.");
+
+  /* ── Módulo 6: negación, futuro, después de нача́ть ── */
+  [["чита́ть", "прочита́ть", "кни́гу", "el libro"], ["де́лать", "сде́лать", "зада́ние", "la tarea"], ["писа́ть", "написа́ть", "письмо́", "la carta"], ["смотре́ть", "посмотре́ть", "фильм", "la película"]].forEach(([i, r, o, es], j) => {
+    const vi = V(i), vr = V(r); if (!vi || !vr) return; const a = "Я не " + vi.pasado.m + " " + o + ".", b = "Я не " + vr.pasado.m + " " + o + ".";
+    par("ng-" + j, 6, "u12-neg-imperf", "Sos hombre. ¿Cuál dice que ni empezaste " + es + "?", a, b, "не + proceso: no pasó.");
+    par("ng2-" + j, 6, "u12-neg-imperf", "Sos hombre. ¿Cuál dice que empezaste " + es + " pero no " + (o === "кни́гу" ? "lo" : "la") + " terminaste?", b, a, "не + resultado: no llegó al final.");
+  });
+  pq("ng-0", 6, "u12-neg-imperf", "Я не прочита́л кни́гу.", "прочита́л", "Empezó, pero no llegó al final", ["No pasó para nada", "Lo hace siempre"], "не + resultado: no se terminó.");
+  [["прочита́ть", "кни́гу"], ["написа́ть", "письмо́"], ["сде́лать", "зада́ние"], ["позвони́ть", "ма́ме"], ["купи́ть", "хлеб"], ["пригото́вить", "у́жин"]].forEach(([r, o], j) => {
+    const vr = V(r); if (!vr) return; nat("fu-" + j, 6, "u12-dos-futuros", "За́втра я " + vr.futuro[0] + " " + o + ".", "За́втра я бу́ду " + vr.ac + " " + o + ".", "Nunca бу́ду + resultado: " + vr.futuro[0] + ".");
+  });
+  diag("fu-0", 6, "u12-dos-futuros", "За́втра я бу́ду прочита́ть кни́гу.", "За́втра я прочита́ю кни́гу.", "Nunca бу́ду + el de resultado", ["El caso de кни́га", "Falta за́втра"], "El de resultado conjugado ya es futuro.");
+  oido("fu-0", 6, "u12-dos-futuros", "За́втра я прочита́ю кни́гу.", "Escuchá. ¿Lo va a terminar?", ["Sí: lo va a terminar", "No se sabe: va a estar leyendo"], "Sí: lo va a terminar", "прочита́ю: resultado.");
+  oido("fu-1", 6, "u12-dos-futuros", "За́втра я бу́ду чита́ть кни́гу.", "Escuchá. ¿Lo va a terminar?", ["No se sabe: va a estar leyendo", "Sí: lo va a terminar"], "No se sabe: va a estar leyendo", "бу́ду чита́ть: proceso.");
+  [["Я на́чал чита́ть.", "Я на́чал прочита́ть.", "Después de нача́ть: proceso."], ["Мы зако́нчили рабо́тать.", "Мы зако́нчили порабо́тать.", "Después de зако́нчить: proceso."], ["Не на́до звони́ть.", "Не на́до позвони́ть.", "Después de не на́до: proceso."], ["Он зако́нчил писа́ть.", "Он зако́нчил написа́ть.", "Después de зако́нчить: proceso."]].forEach(([ok, mal, ex], j) =>
+    nat("in-" + j, 6, "u12-inf-imperf", ok, mal, ex));
+  [["Я хочу́ сде́лать зада́ние.", "Я хочу́ де́лать зада́ние.", "Una vez: сде́лать."], ["Мне ну́жно позвони́ть ма́ме.", "Мне ну́жно звони́ть ма́ме.", "Una vez: позвони́ть."]].forEach(([ok, mal, ex], j) => nat("ho-" + j, 6, "u12-hochu", ok, mal, ex));
+  cad("ng-0", 6, "u12-dos-futuros", "Я чита́ю кни́гу.", [["Ahora: mañana la vas a terminar (за́втра).", ["За́втра я прочита́ю кни́гу.", "Я прочита́ю кни́гу за́втра."]], ["Ahora: ayer no la terminaste (sos hombre, вчера́).", ["Вчера́ я не прочита́л кни́гу.", "Я не прочита́л кни́гу вчера́."]]], "Futuro de resultado; не + resultado: no se terminó.");
+
+  /* ── Módulo 7: el relato ── */
+  [["Ка́ждый день я чита́л газе́ту.", "Ка́ждый день я прочита́л газе́ту.", "Se repite: proceso."], ["Я ча́сто звони́л ма́ме.", "Я ча́сто позвони́л ма́ме.", "ча́сто: proceso."],
+   ["Я до́лго писа́л письмо́.", "Я до́лго написа́л письмо́.", "до́лго: proceso."], ["Наконе́ц я вы́учил слова́.", "Наконе́ц я учи́л слова́.", "наконе́ц: resultado."], ["Обы́чно я гото́вил у́жин.", "Обы́чно я пригото́вил у́жин.", "обы́чно: proceso."]].forEach(([ok, mal, ex], j) =>
+    nat("mk-" + j, 7, "u12-marcadores", ok, mal, ex, { pide: "Sos hombre. ¿Cuál suena natural?" }));
+  pq("mk-0", 7, "u12-marcadores", "Ка́ждый день я чита́л газе́ту.", "чита́л", "Se repite (ка́ждый день): proceso", ["Una vez, terminado: resultado", "Es futuro"], "ка́ждый день pide proceso.");
+  par("fi-0", 7, "u12-en-fila", "¿Cuál dice que las acciones fueron una después de la otra?", "Я пообе́дал и отдохну́л.", "Я обе́дал и отдыха́л.", "Resultados en fila.");
+  par("fo-0", 7, "u12-fondo", "¿Cuál dice que estabas viendo una película cuando llamó tu hermano?", "Я смотре́л фильм, когда́ позвони́л брат.", "Я посмотре́л фильм, когда́ позвони́л брат.", "Fondo: смотре́л.");
+  par("fo-1", 7, "u12-fondo", "¿Cuál dice que ella estaba cocinando cuando llegaste?", "Когда́ я пришёл, она́ гото́вила.", "Когда́ я пришёл, она́ пригото́вила.", "Fondo: гото́вила.");
+  desarm("fo-0", 7, "u12-fondo", ["Я", "смотре́л", "фильм,", "когда́", "позвони́л", "брат."], [["¿Qué estaba pasando? (el fondo)", 1], ["¿Qué pasó de golpe?", 4]], "смотре́л: fondo, proceso. позвони́л: lo que pasó.");
+  [["Я прие́хал в Москву́ на по́езде.", "Я пришёл в Москву́ на по́езде.", "En vehículo: прие́хать."], ["Она́ уе́хала в Москву́ на по́езде.", "Она́ ушла́ в Москву́ на по́езде.", "En vehículo: уе́хать."], ["Я пришёл домо́й пешко́м.", "Я прие́хал домо́й пешко́м.", "A pie: прийти́."]].forEach(([ok, mal, ex], j) =>
+    nat("il-" + j, 7, "u12-ir-llegar", ok, mal, ex));
+  oido("il-0", 7, "u12-ir-llegar", "Брат пришёл.", "Escuchá. ¿Llegó o se fue?", ["Llegó", "Se fue"], "Llegó", "**при-**: llegar.");
+  oido("il-1", 7, "u12-ir-llegar", "Брат ушёл.", "Escuchá. ¿Llegó o se fue?", ["Se fue", "Llegó"], "Se fue", "**у-**: irse.");
+  cad("il-0", 7, "u12-ir-llegar", "Я прихожу́ домо́й в семь.", [["Ahora: ayer, una vez (sos hombre, вчера́).", ["Вчера́ я пришёл домо́й в семь.", "Я пришёл домо́й в семь вчера́."]], ["Ahora: mañana (за́втра).", ["За́втра я приду́ домо́й в семь.", "Я приду́ домо́й в семь за́втра."]]], "приходи́ть → прийти́: пришёл, приду́.");
+  diag("mk-0", 7, "u12-marcadores", "Ка́ждый день я прочита́л газе́ту.", "Ка́ждый день я чита́л газе́ту.", "Lo que se repite va con el de proceso", ["El caso de газе́та", "Falta уже́"], "ка́ждый день: proceso.");
+
+  /* ── Módulo 8: imperativo ── */
+  const RZ = { "й": "Vocal + ю: -й", "и": "Acento al final: -и", "ь": "Acento antes: -ь" };
+  ["чита́ть", "де́лать", "слу́шать", "говори́ть", "позвони́ть", "писа́ть", "гото́вить", "отве́тить", "поста́вить", "положи́ть", "включи́ть", "прове́рить", "подожда́ть", "закры́ть"].forEach((ru, j) => {
+    const v = V(ru); if (!v || !v.imperativo) return; const ty = v.imperativo.ty, fin = ty.replace(/́/g, "").slice(-1); if (!RZ[fin]) return;
+    pq("im-" + j, 8, "u12-imp-forma", cap(ty) + "!", ty, RZ[fin], Object.values(RZ).filter(x => x !== RZ[fin]), "я " + (v.presente || v.futuro)[0] + " → " + ty + ".");
+  });
+  [["Не звони́ ему́!", "Не позвони́ ему́!"], ["Не открыва́й окно́.", "Не откро́й окно́."], ["Не выключа́й телеви́зор.", "Не вы́ключи телеви́зор."], ["Не включа́й телеви́зор.", "Не включи́ телеви́зор."]].forEach(([ok, mal], j) =>
+    nat("ne-" + j, 8, "u12-imp-ne", ok, mal, "Para pedir que no se haga: не + proceso."));
+  diag("ne-0", 8, "u12-imp-ne", "Не позвони́ ему́!", "Не звони́ ему́!", "Para prohibir va el de proceso", ["Falta -те", "El caso de ему́"], "не + proceso.");
+  [["Подожди́те, пожа́луйста.", "Подожди́, пожа́луйста."], ["Прове́рьте, пожа́луйста.", "Прове́рь, пожа́луйста."], ["Сади́тесь, пожа́луйста!", "Сади́сь, пожа́луйста!"]].forEach(([vy, ty], j) =>
+    par("tv-" + j, 8, "u12-imp-vy", "Le hablás a un desconocido. ¿Cuál decís?", vy, ty, "Con вы: **-те**."));
+  oido("tv-0", 8, "u12-imp-vy", "Позвони́те мне за́втра.", "Escuchá. ¿A quién le habla?", ["A varios o de usted (вы)", "A un amigo (ты)"], "A varios o de usted (вы)", "**-те**: вы.");
+  nat("ia-0", 8, "u12-imp-aspecto", "Закро́й окно́, пожа́луйста.", "Закрыва́й окно́, пожа́луйста.", "Un pedido concreto, una vez: закры́ть.");
+  nat("ia-1", 8, "u12-imp-aspecto", "Звони́ мне ча́сто!", "Позвони́ мне ча́сто!", "Algo que se repite: звони́ть.");
+  cad("im-0", 8, "u12-imp-aspecto", "Ты чита́ешь кни́гу.", [["Pedíselo: leela (una vez).", ["Прочита́й кни́гу.", "Прочита́й кни́гу!"]], ["Ahora a varias personas (вы).", ["Прочита́йте кни́гу.", "Прочита́йте кни́гу!"]]], "Una vez: прочита́й; con вы, **-те**.");
+  cad("im-1", 8, "u12-imp-ne", "Позвони́ ма́ме.", [["Ahora prohibilo: no la llames.", ["Не звони́ ма́ме.", "Не звони́ ма́ме!"]], ["Ahora a varias personas (вы).", ["Не звони́те ма́ме.", "Не звони́те ма́ме!"]]], "не + proceso.");
+
+  /* ── Módulo 9: comparar ── */
+  [["Метро́ быстре́е авто́буса.", "Метро́ быстре́е авто́бус.", "Sin чем: lo que se compara, en genitivo."], ["Мой брат ста́рше меня́.", "Мой брат ста́рше я.", "Sin чем: genitivo, меня́."], ["Москва́ бо́льше, чем Барсело́на.", "Москва́ бо́льше, чем Барсело́ну.", "Con чем: las dos en nominativo."],
+   ["Э́тот рестора́н лу́чше, чем кафе́.", "Э́тот рестора́н хоро́ший, чем кафе́.", "Para comparar, el comparativo: хоро́ший → лу́чше."]].forEach(([ok, mal, ex], j) => nat("cp-" + j, 9, j < 2 ? "u12-comp-gen" : "u12-comp", ok, mal, ex));
+  [["са́мый большо́й го́род", "са́мый бо́льше го́род"], ["са́мая краси́вая у́лица", "са́мый краси́вая у́лица"], ["са́мое удо́бное ме́сто", "са́мое удо́бнее ме́сто"]].forEach(([ok, mal], j) =>
+    nat("sm-" + j, 9, "u12-samyj", ok, mal, "са́мый + el adjetivo, en el mismo género."));
+  oido("cp-0", 9, "u12-comp-verbo", "Сего́дня тепле́е, чем вчера́.", "Escuchá. ¿Hoy hace más calor o más frío que ayer?", ["Más calor", "Más frío"], "Más calor", "тепле́е: más calor.");
+  oido("cp-1", 9, "u12-comp-verbo", "Сего́дня холодне́е, чем вчера́.", "Escuchá. ¿Hoy hace más calor o más frío que ayer?", ["Más frío", "Más calor"], "Más frío", "холодне́е: más frío.");
+  par("cp-0", 9, "u12-comp", "¿Cuál dice que tu hermano es mayor que vos?", "Брат ста́рше меня́.", "Брат моло́же меня́.", "ста́рше: mayor.");
+  par("cp-1", 9, "u12-comp-verbo", "¿Cuál le pide a alguien que hable más fuerte?", "Говори́те гро́мче!", "Говори́те ти́ше!", "гро́мче: más fuerte.");
+  pq("cp-0", 9, "u12-comp-gen", "Метро́ быстре́е авто́буса.", "авто́буса", "Sin чем: genitivo", ["Es plural", "Después de un número"], "Comparativo sin чем + genitivo.");
+  cad("cp-0", 9, "u12-comp-gen", "Москва́ больша́я.", [["Comparala con Barcelona, con чем.", ["Москва́ бо́льше, чем Барсело́на."]], ["Ahora sin чем.", ["Москва́ бо́льше Барсело́ны."]]], "Con чем, nominativo; sin чем, genitivo.");
+  diag("cp-0", 9, "u12-comp-gen", "Мой брат ста́рше я.", "Мой брат ста́рше меня́.", "Sin чем va genitivo", ["Falta са́мый", "La forma de ста́рше"], "ста́рше + genitivo: меня́.");
+  desc("cf-0", 9, "u12-comp-forma", ["интере́сный → интере́снее", "краси́вый → краси́вее"], "у́мный", "умне́е", "у́мнше", "Se agrega **-ее**.");
+  desc("cf-1", 9, "u12-comp-forma", ["гро́мкий → гро́мче", "коро́ткий → коро́че"], "лёгкий", "ле́гче", "лёгкее", "En **-кий**, la **к** cambia y termina en **-е**.");
+
+  /* ── Vocabulario nuevo (12/10/2026): significado y palabra-es-ru, en el módulo donde se presenta ── */
+  const modDe = {};
+  U12_GRUPOS.forEach(([m, t, pal]) => pal.split(" ").forEach(ru => { if (U12_GLOSA[ru] && !modDe[ru]) modDe[ru] = m; }));
+  const nuevas = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(12) >= 0 && U12_GLOSA[e.acento] && modDe[e.acento]);
+  nuevas.forEach((e, i) => {
+    const es = U12_GLOSA[e.acento], m = modDe[e.acento];
+    const dis = baraja(nuevas.filter(x => x.id !== e.id && U12_GLOSA[x.acento] !== es && Math.abs(modDe[x.acento] - m) <= 2).map(x => U12_GLOSA[x.acento]), i + 3).slice(0, 3);
+    const base = { grupo: e.id, items: ["lex:" + e.id], oir: e.ru };
+    if (dis.length >= 2) out.push(Object.assign({ id: "U12-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Qué significa?", grande: e.acento, audio: e.ru,
+      opciones: baraja([es].concat(dis), i), correcta: es, explicacion: e.acento + " — " + es }, base));
+    out.push(Object.assign({ id: "U12-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
+      pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.replace(/-/g, "").length + " letras.", esperadas: [e.acento], idioma: "ru", explicacion: e.acento + " — " + es }, base));
+  });
+
+  /* Cada ejercicio viejo apunta a su regla (para «Repasar la regla») */
+  const REGLA_ID = [[/^U12-(ps|psw|posemp)-/, "u12-pos-casos"], [/^U12-(su|suw|sudet)-/, "u12-ego-eyo"], [/^U12-(este|estew)-/, "u12-etot"],
+    [/^U12-npl-/, "u12-pl-nom"], [/^U12-gpl-/, "u12-gen-pl"], [/^U12-(num|pldet|plt)-/, "u12-contar"], [/^U12-(accp|acci)-/, "u12-acc-pl"],
+    [/^U12-(p2|p2w|p2emp|p2t|p2d|p2det)-/, "u12-pl-dat-ins-prep"], [/^U12-(adp|adpw)-/, "u12-adj-pl"],
+    [/^U12-(asemp|aspf|ascual|as|asw|ast|asd)-/, "u12-asp-repaso"], [/^U12-(fut|fu2|fudet)-/, "u12-dos-futuros"], [/^U12-inf-/, "u12-hochu"], [/^U12-infg-/, "u12-inf-imperf"],
+    [/^U12-(mk|mkdet|mkt|mko)-/, "u12-marcadores"], [/^U12-seq-/, "u12-en-fila"],
+    [/^U12-(imf|imemp|imd)-/, "u12-imp-forma"], [/^U12-(pide|pidew|imdet)-/, "u12-imp-aspecto"], [/^U12-pidevy-/, "u12-imp-vy"], [/^U12-(no|now)-/, "u12-imp-ne"],
+    [/^U12-(cmf|cmemp)-/, "u12-comp-forma"], [/^U12-(cm|cmw|cmt|cmd)-/, "u12-comp"], [/^U12-cmg-/, "u12-comp-gen"], [/^U12-sam-/, "u12-samyj"]];
+  const reglaPron = e => { const t = String(e.correcta || (e.esperadas || [""])[0] || "") + " " + String(e.grande || ""); if (/(^|\s)(у|с|со|о|обо|к) н?[её]?/.test(t) && /н(его́|её|ей|им|ими|ём|их|ему́)/.test(t)) return "u12-pron-n";
+    if (/(мне|тебе́|ему́|ей|нам|вам|им|мной|тобо́й|на́ми|ва́ми|и́ми)\b/.test(t)) return "u12-pron-dat-ins"; return "u12-pron-acc-gen"; };
+  out.forEach(e => { if (e.regla) return; if (/^U12-(pr|prw|premp|prdet)-/.test(e.id)) { e.regla = reglaPron(e); return; } const r = REGLA_ID.find(([rx]) => rx.test(e.id)); if (r) e.regla = r[1]; });
   out.forEach(e => { if (e.explicacion) e.explicacion = u12Palabras(e.explicacion); if (e.pide) e.pide = u12Palabras(e.pide); });
   return out;
 }

@@ -38,6 +38,9 @@
    precios, pedidos, Где / Куда́ / Отку́да y adjetivos; el proyecto
    «Мой день в Росси́и» en dos partes (siete situaciones + relato).
    Los ejercicios de situación se corrigen por intención (azSituacion).
+   12/10/2026 (profundización): vocabulario nuevo por grupo en su módulo
+   (U11_GRUPOS, lista + «Tarjetas»), la tabla «Las parejas» en el módulo 2
+   (U11_PARES) y el futuro o el presente en el dorso de las tarjetas.
    URL: azbuka-11.html · azbuka-11.html?m=u11m2
    ============================================================ */
 const { useState, useEffect } = htmPreact;
@@ -50,6 +53,22 @@ const CONV = u11Conversaciones();
 const OBJETIVO_U11 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(11) >= 0 || (e.appearsIn || []).indexOf(11) >= 0).map(e => e.id);
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
 const AVISO_U11 = AVISO_ACENTOS + " En las situaciones no hay una sola respuesta: lo importante es que se entienda.";
+
+const PERS6 = ["я", "ты", "он / она́", "мы", "вы", "они́"];
+/* Grupos de vocabulario de un módulo (U11_GRUPOS), con los IDs del léxico */
+const grupos = n => U11_GRUPOS.filter(g => g[0] === n).map(([m, titulo, pal]) => ({ titulo,
+  ids: pal.split(" ").map(ru => { const e = LEXICON_COMER.find(x => x.acento === ru); return e && e.id; }).filter(Boolean) }));
+const lexVerbo = ru => LEXICON_COMER.find(e => e.acento === ru && e.posNormalized === "verbo") || {};
+/* Parejas: proceso (presente de yo) · resultado (futuro de yo) */
+const filasPares = () => U11_PARES.map(([i, r, es]) => { const vi = verboById(lexVerbo(i).id) || {}, vr = verboById(lexVerbo(r).id) || {};
+  return [{ id: lexVerbo(i).id, ru: i, es: ((vi.presente || [""])[0]) + " · " + es }, { id: lexVerbo(r).id, ru: r, es: (vr.futuro || [""])[0] }]; });
+function detalleTarjeta(e) {
+  const cz = casosById(e.id);
+  if (cz && cz.sg && cz.sg[0]) return "gen. " + cz.sg[1] + " · acus. " + cz.sg[3] + " · instr. " + cz.sg[4];
+  const v = verboById(e.id);
+  if (v && v.futuro) return "futuro: " + PERS6.map((p, i) => p + " " + v.futuro[i]).join(" · ");
+  return v && v.presente ? PERS6.map((p, i) => p + " " + v.presente[i]).join(" · ") : null;
+}
 
 /* Lista de fórmulas: [ruso, español], cada una con ▶ */
 function Formulas({ filas, c }) {
@@ -149,9 +168,11 @@ function App() {
       2: h(React.Fragment, null, sec("Los precios"),
           h(AzTablaGrupos, { encabezados: ["Número", "Precio"], c, filas: [1, 2, 3, 4, 5, 10, 12].map(n => [{ ru: U11_NUM[n], es: String(n) }, { ru: U11_NUM[n] + " " + (n === 1 ? "рубль" : n <= 4 ? "рубля́" : "рубле́й"), es: n + " ₽" }])
             .concat([[{ ru: "сто", es: "100" }, { ru: "сто рубле́й", es: "100 ₽" }], [{ ru: "ты́сяча", es: "1000" }, { ru: "ты́сяча рубле́й", es: "1000 ₽" }]]) }),
+          sec("Las parejas"), h("p", { className: "u-text", style: { fontSize: 14.5 } }, azFmt("A la izquierda, el verbo de proceso (lo general, lo que se repite); a la derecha, el de resultado (una vez), con su futuro de {я}.")),
+          h(AzTablaGrupos, { encabezados: ["Proceso", "Resultado"], c, filas: filasPares() }),
           sec("Una compra"), h(Conversacion, { T: CONV.tienda, c })),
       3: h(React.Fragment, null, sec("Lo que pedís: acusativo"),
-          h(AzTablaGrupos, { encabezados: ["En la carta", "Я хочу́…"], c, filas: U11_COMIDA.map(([ru, es, em]) => [{ ru, es: em + " " + es.replace(/^(un|una) /, "") }, { ru: S(ru).acc, es: "" }]) }),
+          h(AzTablaGrupos, { encabezados: ["En la carta", "Я бу́ду…"], c, filas: U11_COMIDA.map(([ru, es, em]) => [{ ru, es: em + " " + es.replace(/^(un|una) /, "") }, { ru: S(ru).acc, es: "" }]) }),
           sec("En el café"), h(Conversacion, { T: CONV.cafe[0], c })),
       4: h(React.Fragment, null, sec("Где, куда́, отку́да"),
           h(AzTablaGrupos, { encabezados: ["¿Dónde?", "¿Adónde?", "¿De dónde?"], c, filas: [["аэропо́рт", "в"], ["центр", "в"], ["Москва́", "в"], ["вокза́л", "на"]].map(([ru, pr]) => { const s = S(ru);
@@ -180,6 +201,11 @@ function App() {
       mod.tipo === "leccion" && h(React.Fragment, null,
         h(AzSecciones, { secciones: mod.secciones }),
         extra[mod.n] || null,
+        /* Vocabulario nuevo (12/10/2026): una lista por grupo, en el módulo donde se presenta */
+        grupos(mod.n).map(g => h(React.Fragment, { key: g.titulo },
+          h("div", { className: "u-sec" }, g.titulo),
+          h(AzVocabulario, { ids: g.ids, c }),
+          h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => setTarjetas({ ids: g.ids, titulo: g.titulo }) }, "Tarjetas (" + g.ids.length + ")"))),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo")),
       mod.tipo === "conversaciones" && h(React.Fragment, null,
         CONV.completas.map((T, k) => h(Conversacion, { key: k, T, c })),
@@ -207,7 +233,7 @@ function App() {
     practica && h(AzPractica, { key: practica.titulo + (practica.pool[0] || {}).id, unidad: 11, titulo: practica.titulo, pool: practica.pool, mezcla: U11_MEZCLA,
       n: azNPractica(practica.pool, practica.n), dark: darkMode, aviso: AVISO_U11, examen: practica.examen, enOrden: practica.enOrden, onReforzar: reforzar, objetivo: OBJETIVO_U11,
       onSalir: () => { setPractica(null); refrescar(x => x + 1); } }),
-    tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, onClose: () => { setTarjetas(null); refrescar(x => x + 1); } }),
+    tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, detalle: detalleTarjeta, onClose: () => { setTarjetas(null); refrescar(x => x + 1); } }),
     h(AzBurbujaHost, { dark: darkMode }));
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));

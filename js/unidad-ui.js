@@ -16,7 +16,8 @@
      AzSecciones({ secciones })              teoría: título, texto, destacado, truco, ojo y, desde el
                                              06/10/2026, las piezas de la teoría ampliada (ver abajo)
      azRegla(id) → { seccion, modulo, unidad }   busca una sección de teoría por su id en las unidades cargadas
-     AzHojaRegla({ id, c, onClose })         la sección en una hoja («Repasar la regla», desde la práctica)
+     AzHojaRegla({ id, c, onClose, volver }) la sección en una hoja («Repasar la regla», desde la práctica
+                                             o desde «Qué repasar» del examen; `volver`: texto del botón)
      AzVocabulario({ ids, c })               palabras del léxico con ▶
      AzFrasesLista({ ids, c })               frases de data-frases.js con ▶
      AzListaDialogos({ ids, onAbrir })       tarjetas de diálogos
@@ -325,7 +326,7 @@
     return null;
   }
   /* «Repasar la regla»: la sección en una hoja, por encima de la práctica */
-  function AzHojaRegla({ id, c, onClose }) {
+  function AzHojaRegla({ id, c, onClose, volver }) {
     const r = azRegla(id);
     if (!r) return null;
     return h("div", { className: "sheet", style: { zIndex: 320 }, role: "dialog" },
@@ -334,7 +335,7 @@
         h("div", { className: "u-kicker" }, "Unidad " + r.unidad + " · Módulo " + r.modulo.n),
         h("div", { className: "u-title", style: { paddingRight: 48 } }, r.modulo.titulo),
         h(Seccion, { x: r.seccion }),
-        h("button", { className: "ubtn", onClick: onClose }, "Volver al ejercicio")));
+        h("button", { className: "ubtn", onClick: onClose }, volver || "Volver al ejercicio")));
   }
 
   function AzVocabulario({ ids, c }) {
