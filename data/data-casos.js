@@ -1,6 +1,9 @@
 /* ============================================================
    DATA-CASOS.JS — Declinaciones de las palabras del léxico AZBUKA
    ------------------------------------------------------------
+   Actualizado el 11/10/2026 (Unidad 8): у́тро, genitivo y dativo del
+   singular corregidos a утра́ y утру́ (до утра́, в семь часо́в утра́),
+   según Zalizniak.
    Total: 3776 palabras (todas las entradas de data-lexicon.js con
    categoría sustantivo, adjetivo, pronombre, determinante o numeral).
    Generado el 23/09/2026. Ordenado por ID.
@@ -781,7 +784,7 @@ const CASOS = {
    n:["сле́дующее", "сле́дующего", "сле́дующему", "сле́дующее", "сле́дующим", "сле́дующем"],
    pl:["сле́дующие", "сле́дующих", "сле́дующим", ["сле́дующие","сле́дующих"], "сле́дующими", "сле́дующих"] },
  "CMR-00336": { ru:"у́тро", tipo:"sustantivo",
-   sg:["у́тро", "у́тра", "у́тру", "у́тро", "у́тром", "у́тре"],
+   sg:["у́тро", "утра́", "утру́", "у́тро", "у́тром", "у́тре"],
    pl:["у́тра", "утр", "у́трам", "у́тра", "у́трами", "у́трах"] },
  "CMR-00338": { ru:"по́мощь", tipo:"sustantivo",
    sg:["по́мощь", "по́мощи", "по́мощи", "по́мощь", "по́мощью", "по́мощи"],

@@ -36,6 +36,9 @@
    unidad: tarjetas de verbos con sus cuatro formas del pasado
    (módulo 2), tablas de tiempo y conectores, lecturas (módulo 11),
    el proyecto en dos partes. El desafío del día está en el inicio (js/hoy.js).
+   11/10/2026 (profundización): vocabulario nuevo por grupo en su módulo
+   (U8_GRUPOS, con «Tarjetas»), tabla de las parejas de aspecto (módulo 7,
+   U8_PARES; módulo 8, U8_PARES_MAS) y la tabla «Cuándo pasó» ampliada.
    URL: azbuka-8.html · azbuka-8.html?m=u8m2
    ============================================================ */
 const { useState, useEffect } = htmPreact;
@@ -47,10 +50,19 @@ const D8 = u8Datos();
 const OBJETIVO_U8 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(8) >= 0 || (e.appearsIn || []).indexOf(8) >= 0).map(e => e.id);
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
 const PAS = [["он", "m"], ["она́", "f"], ["оно́", "n"], ["они́", "pl"]];
+/* Grupos de vocabulario de un módulo (U8_GRUPOS), con los IDs del léxico */
+const grupos = n => U8_GRUPOS.filter(g => g[0] === n).map(([m, titulo, pal]) => ({ titulo,
+  ids: pal.split(" ").map(ru => { const e = LEXICON_COMER.find(x => x.acento === ru); return e && e.id; }).filter(Boolean) }));
+const lexId = ru => (LEXICON_COMER.find(e => e.acento === ru && e.posNormalized === "verbo") || {}).id;
+const pasadoM = ru => { const v = verboById(lexId(ru)); return v && v.pasado ? v.pasado.m : ""; };
+/* Parejas de aspecto: proceso · resultado, con el pasado de cada uno */
+const filasPares = lista => lista.map(([i, p, es]) => [{ id: lexId(i), ru: i, es: pasadoM(i) + " · " + es }, { id: lexId(p), ru: p, es: pasadoM(p) }]);
 
 function detalleTarjeta(e) {
   const v = D8.verb[D8.sin(e.acento || e.ru)];
-  return v ? "pasado: " + v.p.m + " · " + v.p.f + " · " + v.p.n + " · " + v.p.pl : null;
+  if (v) return "pasado: " + v.p.m + " · " + v.p.f + " · " + v.p.n + " · " + v.p.pl;
+  const w = e.posNormalized === "verbo" && verboById(e.id);
+  return w && w.pasado ? "pasado: " + w.pasado.m + " · " + w.pasado.f + " · " + w.pasado.n + " · " + w.pasado.pl : null;
 }
 
 /* Tarjetas: cada verbo con sus cuatro formas del pasado (2 × 2) */
@@ -143,10 +155,17 @@ function App() {
       mod.tipo === "leccion" && h(React.Fragment, null,
         h(AzSecciones, { secciones: mod.secciones }),
         mod.n === 2 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los verbos en pasado"), h(TablaPasado, { c, lista: Object.values(D8.verb).filter(v => v.tipo !== "m") })),
-        mod.n === 4 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Cuándo pasó"), tabla(["En ruso"], U8_TIEMPO.map(([r, e]) => [{ ru: r, es: e }]))),
-        mod.n === 8 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Para unir frases"), tabla(["En ruso"], Object.keys(U8_CONECT).map(k => [{ ru: k, es: U8_CONECT[k] }]))),
-        mod.n === 10 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los verbos de un momento, con ра́ньше"), h(TablaPasado, { c, lista: Object.values(D8.verb).filter(v => v.tipo === "m") }),
+        mod.n === 4 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Cuándo pasó"), tabla(["En ruso"], U8_TIEMPO_TABLA.map(([r, e]) => [{ ru: r, es: e }]))),
+        mod.n === 7 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Las doce parejas"), tabla(["Proceso", "Resultado"], filasPares(U8_PARES))),
+        mod.n === 8 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Más parejas para tu día"), tabla(["Proceso", "Resultado"], filasPares(U8_PARES_MAS)),
+          h("div", { className: "u-sec" }, "Para unir frases"), tabla(["En ruso"], Object.keys(U8_CONECT).map(k => [{ ru: k, es: U8_CONECT[k] }]))),
+        mod.n === 10 && h(React.Fragment, null, h("div", { className: "u-sec" }, "La rutina de antes, con ра́ньше"), h(TablaPasado, { c, lista: Object.values(D8.verb).filter(v => v.tipo === "m") }),
           h("div", { className: "u-sec" }, "Antes y ahora"), h(AzVocabulario, { c, ids: ["ра́ньше", "тогда́", "сейча́с", "тепе́рь"].map(ru => (LEXICON_COMER.find(e => e.acento === ru) || {}).id).filter(Boolean) })),
+        /* Vocabulario nuevo (11/10/2026): una lista por grupo, en el módulo donde se presenta */
+        grupos(mod.n).map(g => h(React.Fragment, { key: g.titulo },
+          h("div", { className: "u-sec" }, g.titulo),
+          h(AzVocabulario, { ids: g.ids, c }),
+          h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => setTarjetas({ ids: g.ids, titulo: g.titulo }) }, "Tarjetas (" + g.ids.length + ")"))),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo")),
       mod.tipo === "lectura" && h(React.Fragment, null,
         U8_LECTURAS.map(L => h(Lectura, { key: L.id, L, c })),

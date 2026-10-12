@@ -32,7 +32,8 @@
 /* ============================================================
    AZBUKA-7.HTML — Unidad 7: Tiempo, fechas y rutina diaria
    ------------------------------------------------------------
-   04/10/2026. Piezas de unidad-ui.js y unidad.js. Propio de esta
+   04/10/2026; 10/10/2026 (vocabulario nuevo: una lista por grupo en los
+   módulos 1, 2 y 4 a 8, con sus tarjetas). Piezas de unidad-ui.js y unidad.js. Propio de esta
    unidad: reloj dibujado para practicar la hora (módulo 1 y
    portada), tablas de horas, días y meses, el día en emoji
    (módulo 6), la agenda de Ana (módulo 9), lecturas (módulo 10) y
@@ -48,11 +49,14 @@ const D7 = u7Datos();
 const OBJETIVO_U7 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(7) >= 0 || (e.appearsIn || []).indexOf(7) >= 0).map(e => e.id);
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
 const cap7 = t => t.charAt(0).toUpperCase() + t.slice(1);
+/* Grupos de vocabulario de un módulo (U7_GRUPOS), con los IDs del léxico */
+const grupos = n => U7_GRUPOS.filter(g => g[0] === n).map(([m, titulo, pal]) => ({ titulo,
+  ids: pal.split(" ").map(ru => { const e = LEXICON_COMER.find(x => x.acento === ru); return e && e.id; }).filter(Boolean) }));
 
 function detalleTarjeta(e) {
   const d = D7.dias.find(x => x.id === e.id); if (d) return "¿cuándo? " + d.pr + " " + d.acc;
   const m = D7.meses.find(x => x.id === e.id); if (m) return "¿en qué mes? в " + m.prep;
-  const v = D7.verb[D7.sin(e.acento || e.ru)];
+  const v = D7.verb[D7.sin(e.acento || e.ru)] || (e.posNormalized === "verbo" && verboById(e.id) && verboById(e.id).presente ? { f: verboById(e.id).presente } : null);
   return v ? ["я", "ты", "он / она́", "мы", "вы", "они́"].map((p, i) => p + " " + v.f[i]).join(" · ") : null;
 }
 
@@ -240,6 +244,11 @@ function App() {
         mod.n === 9 && h(React.Fragment, null, h("div", { className: "u-sec" }, "La agenda de Ana"), h(AgendaAna, { c })),
         mod.n === 7 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Empezar y terminar"),
           h(TablaVerbos, { c, lista: [["начина́ть", "empezar"], ["зака́нчивать", "terminar"]].map(([ru, es]) => { const v = D7.verb[D7.sin(ru)]; return v && Object.assign({ es }, v); }) })),
+        /* Vocabulario nuevo (10/10/2026): una lista por grupo, en el módulo donde se presenta */
+        grupos(mod.n).map(g => h(React.Fragment, { key: g.titulo },
+          h("div", { className: "u-sec" }, g.titulo),
+          h(AzVocabulario, { ids: g.ids, c }),
+          h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => setTarjetas({ ids: g.ids, titulo: g.titulo }) }, "Tarjetas (" + g.ids.length + ")"))),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
         mod.n === 6 && ampIds.length > 0 && h("div", { style: { marginTop: 28, paddingTop: 6, borderTop: `1px solid ${c.border}` } },
           h("div", { className: "u-sec" }, "Ampliación · opcional"),

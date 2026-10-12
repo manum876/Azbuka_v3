@@ -37,6 +37,9 @@
    los de intención), tabla de tiempo, la pregunta abierta corregida
    (módulo 8), la agenda de Ana (módulo 9), lecturas (módulo 11) y el
    proyecto en dos partes con agenda.
+   11/10/2026 (profundización): vocabulario nuevo por grupo en su módulo
+   (U9_GRUPOS, con «Tarjetas») y la tabla de los dos futuros (módulo 3,
+   U9_PARES: бу́ду + infinitivo / futuro del verbo de resultado).
    URL: azbuka-9.html · azbuka-9.html?m=u9m2
    ============================================================ */
 const { useState, useEffect } = htmPreact;
@@ -49,6 +52,14 @@ const OBJETIVO_U9 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(9) 
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
 const PERS6 = ["я", "ты", "он / она́", "мы", "вы", "они́"];
 const cap9 = t => t.charAt(0).toUpperCase() + t.slice(1);
+
+/* Grupos de vocabulario de un módulo (U9_GRUPOS), con los IDs del léxico */
+const grupos = n => U9_GRUPOS.filter(g => g[0] === n).map(([m, titulo, pal]) => ({ titulo,
+  ids: pal.split(" ").map(ru => { const e = LEXICON_COMER.find(x => x.acento === ru); return e && e.id; }).filter(Boolean) }));
+const lexVerbo = ru => LEXICON_COMER.find(e => e.acento === ru && e.posNormalized === "verbo") || {};
+/* Los dos futuros: бу́ду + infinitivo (proceso) · futuro del verbo de resultado (yo) */
+const filasFuturo = () => U9_PARES.map(([i, r, es]) => { const v = verboById(lexVerbo(r).id) || {};
+  return [{ id: lexVerbo(i).id, ru: "бу́ду " + i, es }, { id: lexVerbo(r).id, ru: (v.futuro || [""])[0], es: r }]; });
 
 function detalleTarjeta(e) {
   const v = verboById(e.id);
@@ -213,12 +224,17 @@ function App() {
       mod.tipo === "leccion" && h(React.Fragment, null,
         h(AzSecciones, { secciones: mod.secciones }),
         mod.n === 2 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Las formas"), h(TablaSeis, { c, lista: [seis("бу́ду", "voy a…", D9.budu)] })),
+        mod.n === 3 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los dos futuros"), h(AzTablaGrupos, { encabezados: ["Proceso", "Resultado"], c, filas: filasFuturo() })),
         mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Cuándo"), h(AzTablaGrupos, { encabezados: ["En ruso"], c, filas: U9_TIEMPO.map(([r, e]) => [{ ru: r, es: e }]) })),
         mod.n === 6 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los verbos de intención"), h(TablaSeis, { c, lista: ["хоте́ть", "плани́ровать", "собира́ться", "мечта́ть"].map(vI) })),
         mod.n === 7 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Voy a ir"), h(TablaSeis, { c, lista: [seis("пойду́", "voy a ir (a pie)", D9.poidu), seis("пое́ду", "voy a ir (en vehículo)", D9.poedu)] })),
         mod.n === 8 && h(PreguntaAbierta, { c, green }),
         mod.n === 9 && h(React.Fragment, null, h("div", { className: "u-sec" }, "La semana de Ana"), h(AgendaAna, { c })),
-        mod.n === 10 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Palabras del viaje"), h(AzVocabulario, { c, ids: ids(["пое́здка", "путеше́ствие", "биле́т", "по́езд", "самолёт", "гости́ница", "страна́", "о́тпуск", "посеща́ть"]) })),
+        /* Vocabulario nuevo (11/10/2026): una lista por grupo, en el módulo donde se presenta (reemplaza «Palabras del viaje») */
+        grupos(mod.n).map(g => h(React.Fragment, { key: g.titulo },
+          h("div", { className: "u-sec" }, g.titulo),
+          h(AzVocabulario, { ids: g.ids, c }),
+          h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => setTarjetas({ ids: g.ids, titulo: g.titulo }) }, "Tarjetas (" + g.ids.length + ")"))),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
         mod.n === 10 && ampIds.length > 0 && h("div", { style: { marginTop: 28, paddingTop: 6, borderTop: `1px solid ${c.border}` } },
           h("div", { className: "u-sec" }, "Ampliación · opcional"),
