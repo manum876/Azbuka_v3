@@ -22,7 +22,7 @@ const AZ_UNITS = [
   { id: 7, title: "Tiempo, fechas y rutina diaria", desc: "Horas, días, meses y tu día a día.", href: "azbuka-7.html", lista: true },
   { id: 8, title: "Pasado y experiencias personales", desc: "Contar lo que pasó, terminado o en proceso: ayer, antes y ahora.", href: "azbuka-8.html", lista: true },
   { id: 9, title: "Futuro y planes", desc: "Hablar del futuro y hacer planes: lo que vas a hacer y lo que vas a terminar.", href: "azbuka-9.html", lista: true },
-  { id: 10, title: "Casos II: Genitivo, Dativo e Instrumental", desc: "Los tres casos que faltan.", href: "azbuka-10.html", lista: true },
+  { id: 10, title: "Casos II: Genitivo, Dativo e Instrumental", desc: "Los tres casos que faltan: tener, cantidades, a quién, con quién y con qué.", href: "azbuka-10.html", lista: true },
   { id: 11, title: "Comunicación cotidiana y ruso del mundo real", desc: "Situaciones reales: compras, trámites, viajes.", href: "azbuka-11.html", lista: true },
   { id: 12, title: "Gramática B1", desc: "Pronombres y plural en todos los casos, aspecto, imperativo y comparar.", href: "azbuka-12.html", lista: true },
   { id: 13, title: "Consolidación B1 y comunicación", desc: "Contar, opinar, entender y escribir con autonomía.", href: "azbuka-13.html", lista: true },

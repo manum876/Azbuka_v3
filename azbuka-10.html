@@ -36,6 +36,9 @@
    unidad: tablas «palabra → caso» en cada módulo (formas de Casos),
    pronombres, tarjetas de verbos con dativo, ampliación (со мной…),
    lecturas (módulo 11) y el proyecto «Моя жизнь».
+   12/10/2026 (profundización): vocabulario nuevo por grupo en su módulo
+   (U10_GRUPOS, con «Tarjetas») y las parejas con dativo (módulo 6,
+   U10_PARES, con el futuro de resultado).
    URL: azbuka-10.html · azbuka-10.html?m=u10m2
    ============================================================ */
 const { useState, useEffect } = htmPreact;
@@ -49,10 +52,19 @@ const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer:
 const PERS6 = ["я", "ты", "он / она́", "мы", "вы", "они́"];
 const cap10 = t => t.charAt(0).toUpperCase() + t.slice(1);
 
+/* Grupos de vocabulario de un módulo (U10_GRUPOS), con los IDs del léxico */
+const grupos = n => U10_GRUPOS.filter(g => g[0] === n).map(([m, titulo, pal]) => ({ titulo,
+  ids: pal.split(" ").map(ru => { const e = LEXICON_COMER.find(x => x.acento === ru); return e && e.id; }).filter(Boolean) }));
+const lexVerbo = ru => LEXICON_COMER.find(e => e.acento === ru && e.posNormalized === "verbo") || {};
+/* Parejas con dativo: proceso (presente de yo) · resultado (futuro de yo) */
+const filasPares = () => U10_PARES.map(([i, r, es]) => { const vi = verboById(lexVerbo(i).id) || {}, vr = verboById(lexVerbo(r).id) || {};
+  return [{ id: lexVerbo(i).id, ru: i, es: ((vi.presente || [""])[0]) + " · " + es }, { id: lexVerbo(r).id, ru: r, es: (vr.futuro || [""])[0] }]; });
+
 function detalleTarjeta(e) {
   const cz = casosById(e.id);
   if (cz && cz.sg) return "gen. " + cz.sg[1] + " · dat. " + cz.sg[2] + " · instr. " + cz.sg[4];
   const v = verboById(e.id);
+  if (v && v.futuro) return "futuro: " + PERS6.map((p, i) => p + " " + v.futuro[i]).join(" · ");
   return v && v.presente ? PERS6.map((p, i) => p + " " + v.presente[i]).join(" · ") : null;
 }
 
@@ -156,8 +168,8 @@ function App() {
       mod.tipo === "leccion" && h(React.Fragment, null,
         h(AzSecciones, { secciones: mod.secciones }),
         mod.n === 1 && anna && h(React.Fragment, null, h("div", { className: "u-sec" }, "А́нна en los seis casos"),
-          h(AzTablaGrupos, { encabezados: ["Caso", "Forma"], c, filas: [["nom", "Nominativo: hace"], ["acc", "Acusativo: recibe"], ["prep", "Prepositivo: dónde / de qué"], ["gen", "Genitivo: tiene, de quién"], ["dat", "Dativo: a quién"], ["ins", "Instrumental: con quién"]]
-            .map(([k, es]) => [{ ru: { nom: "кто?", acc: "кого́?", prep: "о ком?", gen: "у кого́?", dat: "кому́?", ins: "с кем?" }[k], es }, { id: anna.id, ru: anna[k], es: "" }]) })),
+          h(AzTablaGrupos, { encabezados: ["Caso", "Forma"], c, filas: [["nom", "Nominativo: hace"], ["acc", "Acusativo: recibe"], ["prep", "Prepositivo: dónde"], ["gen", "Genitivo: tiene, de quién"], ["dat", "Dativo: a quién"], ["ins", "Instrumental: con quién"]]
+            .map(([k, es]) => [{ ru: { nom: "кто?", acc: "кого́?", prep: "где?", gen: "у кого́?", dat: "кому́?", ins: "с кем?" }[k], es }, { id: anna.id, ru: anna[k], es: "" }]) })),
         mod.n === 2 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Tener"), tablaPron(U10_PRON.gen.map(x => x + " есть"), "Tiene"),
           h("div", { className: "u-sec" }, "Genitivo"), tablaCaso(PERS.concat(["кни́га", "маши́на", "молоко́"]), "gen", "Genitivo")),
         mod.n === 3 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Lo que no hay"), tablaCaso(["маши́на", "кни́га", "телефо́н", "компью́тер", "соба́ка", "рабо́та", "вре́мя"], "gen", "No hay", "нет ")),
@@ -165,11 +177,17 @@ function App() {
         mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Con preposiciones"),
           h(AzTablaGrupos, { encabezados: ["Preposición", "Ejemplo"], c, filas: U10_PREP.filter((x, k) => k % 2 === 0).map(([pr, ru, es]) => { const s = D10.sust(ru); return [{ ru: pr, es: "" }, { id: s && s.id, ru: pr + " " + (s ? s.gen : ru), es }]; }) })),
         mod.n === 6 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Dativo"), tablaCaso(PERS, "dat", "¿A quién?"),
-          h("div", { className: "u-sec" }, "Los verbos"), h(TablaSeis, { c, lista: ["дава́ть", "звони́ть", "помога́ть"].map(ru => { const v = D10.verbo(ru); return v && { titulo: v.ac, es: { "дава́ть": "dar", "звони́ть": "llamar", "помога́ть": "ayudar" }[ru], f: v.presente }; }) })),
+          h("div", { className: "u-sec" }, "Los verbos"), h(TablaSeis, { c, lista: ["дава́ть", "звони́ть", "помога́ть"].map(ru => { const v = D10.verbo(ru); return v && { titulo: v.ac, es: { "дава́ть": "dar", "звони́ть": "llamar", "помога́ть": "ayudar" }[ru], f: v.presente }; }) }),
+          h("div", { className: "u-sec" }, "Las parejas"), h(AzTablaGrupos, { encabezados: ["Proceso", "Resultado"], c, filas: filasPares() })),
         mod.n === 7 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los pronombres en dativo"), tablaPron(U10_PRON.dat, "A…")),
         mod.n === 8 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Instrumental"), tablaCaso(PERS, "ins", "¿Con quién?", "с ")),
         mod.n === 9 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Con qué"), tablaCaso(["ру́чка", "каранда́ш", "ло́жка", "ви́лка", "нож"], "ins", "Con qué")),
         mod.n === 10 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Profesiones"), tablaCaso(Object.keys(U10_PROFES), "ins", "Trabajo de…", "рабо́таю ")),
+        /* Vocabulario nuevo (12/10/2026): una lista por grupo, en el módulo donde se presenta */
+        grupos(mod.n).map(g => h(React.Fragment, { key: g.titulo },
+          h("div", { className: "u-sec" }, g.titulo),
+          h(AzVocabulario, { ids: g.ids, c }),
+          h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => setTarjetas({ ids: g.ids, titulo: g.titulo }) }, "Tarjetas (" + g.ids.length + ")"))),
         h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo"),
         mod.n === 8 && h("div", { style: { marginTop: 28, paddingTop: 6, borderTop: `1px solid ${c.border}` } },
           h("div", { className: "u-sec" }, "Ampliación · opcional"),

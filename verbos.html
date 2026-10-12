@@ -88,7 +88,7 @@ function formasDe(id) {
    mismo verbo, cambia el aspecto) o "resultado" (verbo distinto que
    describe el desenlace exitoso del primero, ej. искать → найти).
    Solo las excepciones llevan aspectualPartnerTypes en el léxico. */
-const PAIR_TYPE_LABEL = { aspectual: null, resultado: "resultado" }; // null = no se muestra, es el caso normal
+const PAIR_TYPE_LABEL = { aspectual: null, resultado: "resultado", delimitativo: "un rato", incoativo: "empezar a", idavuelta: "ir y volver" }; // null = no se muestra, es el caso normal (12/10/2026: tres tipos de matiz)
 
 /* Parejas reales (IDs con conjugación cargada), con la acepción a la
    que corresponde cada una cuando el léxico la registra por sentido,

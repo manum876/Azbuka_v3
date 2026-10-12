@@ -1,3 +1,20 @@
+/* ACTUALIZACIÓN 12/10/2026 (Unidad 10, profundización, aprobado por Manu): 52 palabras que
+   ya estaban pasan a introducedIn [10]: parejas con dativo (дать, сказа́ть, помо́чь, отве́тить,
+   посове́товать, объясня́ть / объясни́ть, меша́ть), cantidades y alimentos, preposiciones (к, от,
+   кро́ме, вме́сто, напро́тив, над, под, пе́ред, за), estados con dativo, verbos con instrumental,
+   familia y trabajo, profesiones. Sin entradas nuevas. Las que se enseñaban en una unidad
+   posterior conservan esa unidad en appearsIn. */
+
+/* ACTUALIZACIÓN 12/10/2026 (parejas de aspecto, revisión de los verbos de las Unidades 1 a 10,
+   aprobado por Manu; detalle en claude/PAREJAS_ASPECTO_REVISION.md): aspectualPartnerTypes suma
+   tres tipos además de "resultado": "delimitativo" (versión «un rato»: порабо́тать, поспа́ть,
+   погуля́ть…), "incoativo" (versión «empezar a»: заговори́ть, полюби́ть) e "idavuelta" (versión
+   «ir y volver»: съе́здить, сходи́ть). Se marcan en las dos entradas de la relación. Nuevos vínculos:
+   говори́ть ↔ поговори́ть (delimitativo) y ходи́ть ↔ сходи́ть (ida y vuelta; reemplaza
+   SIN_PAREJA:INDETERMINADO). по́мнить ↔ запо́мнить pasa a "resultado". Traducciones corregidas de
+   parejas reales que decían «(durante un rato)»: поспеши́ть, поторопи́ться, помы́ть, поре́зать,
+   поби́ть; y послу́шать, поду́мать, полете́ть, съе́здить; definición de уда́рить. */
+
 /* ACTUALIZACIÓN 11/10/2026 (Unidad 9, profundización, aprobado por Manu): 1 entrada nueva,
    CMR-06152 (о́блачно «está nublado», tema «naturaleza», marca unidad9Enrichment). 69 palabras
    que ya estaban pasan a introducedIn [9]: parejas de aspecto para el futuro (нача́ть,
@@ -1269,7 +1286,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -1913,7 +1932,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -2155,7 +2176,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -3043,9 +3066,10 @@ const LEXICON_COMER = [
    }
   ],
   "introducedIn": [
-   11
+   10
   ],
   "appearsIn": [
+   11,
    12
   ],
   "comer": [
@@ -4087,7 +4111,8 @@ const LEXICON_COMER = [
     "definitionEs": "Comunicarse verbalmente, expresar el pensamiento con palabras en general.",
     "source": "freedict-directo+inverso (redactado)",
     "aspectualPartner": [
-     "CMR-02068"
+     "CMR-02068",
+     "CMR-01489"
     ]
    },
    {
@@ -4153,8 +4178,13 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-00042",
-   "CMR-02068"
-  ]
+   "CMR-02068",
+   "CMR-01489"
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01489": "delimitativo",
+   "CMR-02068": "incoativo"
+  }
  },
  {
   "id": "CMR-00059",
@@ -4356,7 +4386,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -5651,7 +5683,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -9599,7 +9633,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -9983,7 +10019,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05003"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05003": "delimitativo"
+  }
  },
  {
   "id": "CMR-00149",
@@ -10442,9 +10481,10 @@ const LEXICON_COMER = [
    }
   ],
   "introducedIn": [
-   11
+   10
   ],
   "appearsIn": [
+   11,
    12
   ],
   "comer": [
@@ -11185,7 +11225,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-03190"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03190": "delimitativo"
+  }
  },
  {
   "id": "CMR-00170",
@@ -11201,7 +11244,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -11912,7 +11957,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-03608"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03608": "incoativo"
+  }
  },
  {
   "id": "CMR-00182",
@@ -14632,7 +14680,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-03180"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03180": "delimitativo"
+  }
  },
  {
   "id": "CMR-00225",
@@ -16997,9 +17048,11 @@ const LEXICON_COMER = [
    }
   ],
   "introducedIn": [
+   10
+  ],
+  "appearsIn": [
    12
   ],
-  "appearsIn": [],
   "comer": [
    {
     "ID1": "263",
@@ -17448,7 +17501,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-02376"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02376": "resultado"
+  }
  },
  {
   "id": "CMR-00270",
@@ -17653,7 +17709,9 @@ const LEXICON_COMER = [
     "source": "redactado + Lingea (contraste puntual)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -18513,7 +18571,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -20387,8 +20447,8 @@ const LEXICON_COMER = [
   "ipa": "pʌdˈumʌtʲ",
   "senses": [
    {
-    "es": "pensar (un momento)",
-    "definitionEs": "Dedicar un momento a reflexionar sobre algo (aspecto perfectivo de 'думать').",
+    "es": "pensar",
+    "definitionEs": "Pensar o reflexionar, a menudo un momento (aspecto perfectivo de 'думать'): Я поду́маю («lo voy a pensar»).",
     "source": "redactado"
    }
   ],
@@ -21447,7 +21507,10 @@ const LEXICON_COMER = [
    "CMR-01667",
    "CMR-01762",
    "CMR-03920"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03920": "delimitativo"
+  }
  },
  {
   "id": "CMR-00333",
@@ -22068,8 +22131,11 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:INDETERMINADO"
-  ]
+   "CMR-05467"
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05467": "idavuelta"
+  }
  },
  {
   "id": "CMR-00343",
@@ -25821,7 +25887,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -28062,9 +28130,11 @@ const LEXICON_COMER = [
    }
   ],
   "introducedIn": [
+   10
+  ],
+  "appearsIn": [
    11
   ],
-  "appearsIn": [],
   "comer": [
    {
     "ID1": "440",
@@ -30937,7 +31007,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05375"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05375": "delimitativo"
+  }
  },
  {
   "id": "CMR-00487",
@@ -31493,9 +31566,10 @@ const LEXICON_COMER = [
    }
   ],
   "introducedIn": [
-   11
+   10
   ],
   "appearsIn": [
+   11,
    12
   ],
   "comer": [
@@ -35129,7 +35203,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -42813,7 +42889,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -44140,7 +44218,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -46400,7 +46480,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -48007,7 +48089,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -52524,7 +52608,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -63709,7 +63795,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -74549,7 +74637,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -77818,7 +77908,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -81105,7 +81197,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05043"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05043": "idavuelta"
+  }
  },
  {
   "id": "CMR-01310",
@@ -81534,9 +81629,11 @@ const LEXICON_COMER = [
    }
   ],
   "introducedIn": [
+   10
+  ],
+  "appearsIn": [
    13
   ],
-  "appearsIn": [],
   "comer": [
    {
     "ID1": "1316",
@@ -82460,7 +82557,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -86414,7 +86513,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -87566,7 +87667,9 @@ const LEXICON_COMER = [
     "source": "redactado + Lingea (contraste puntual)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -91724,8 +91827,11 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:YA_CUBIERTO_POR_OTRO_PAR"
-  ]
+   "CMR-00058"
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00058": "delimitativo"
+  }
  },
  {
   "id": "CMR-01490",
@@ -93922,7 +94028,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -98171,7 +98279,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -101993,7 +102103,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -102662,7 +102774,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05047"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05047": "delimitativo"
+  }
  },
  {
   "id": "CMR-01674",
@@ -111508,7 +111623,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -116544,7 +116661,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "golpear",
-    "definitionEs": "Dar un golpe (aspecto perfectivo de 'бить').",
+    "definitionEs": "Dar un golpe, una vez (aspecto perfectivo de 'ударять').",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -121507,7 +121624,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -122601,7 +122720,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05053"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05053": "delimitativo"
+  }
  },
  {
   "id": "CMR-02006",
@@ -123263,7 +123385,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05054"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05054": "delimitativo"
+  }
  },
  {
   "id": "CMR-02017",
@@ -126447,7 +126572,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00058"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00058": "incoativo"
+  }
  },
  {
   "id": "CMR-02069",
@@ -132284,9 +132412,11 @@ const LEXICON_COMER = [
    }
   ],
   "introducedIn": [
+   10
+  ],
+  "appearsIn": [
    11
   ],
-  "appearsIn": [],
   "comer": [
    {
     "ID1": "2164",
@@ -138225,7 +138355,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -145062,7 +145194,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00269"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00269": "resultado"
+  }
  },
  {
   "id": "CMR-02377",
@@ -145622,7 +145757,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -145925,8 +146062,8 @@ const LEXICON_COMER = [
   "ipa": "pʌsɭˈuʃʌtʲ",
   "senses": [
    {
-    "es": "escuchar (un rato)",
-    "definitionEs": "Prestar atención a un sonido durante un tiempo (aspecto perfectivo de 'слушать').",
+    "es": "escuchar",
+    "definitionEs": "Escuchar algo de principio a fin o durante un rato (aspecto perfectivo de 'слушать'): Послу́шай! («¡escuchá!»).",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -165185,7 +165322,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05010"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05010": "delimitativo"
+  }
  },
  {
   "id": "CMR-02711",
@@ -167643,7 +167783,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -170913,7 +171055,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -173836,7 +173980,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -176060,7 +176206,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -178048,7 +178196,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -182611,9 +182761,11 @@ const LEXICON_COMER = [
    }
   ],
   "introducedIn": [
+   10
+  ],
+  "appearsIn": [
    11
   ],
-  "appearsIn": [],
   "comer": [
    {
     "ID1": "3001",
@@ -184135,7 +184287,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -193173,7 +193327,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00224"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00224": "delimitativo"
+  }
  },
  {
   "id": "CMR-03181",
@@ -193788,7 +193945,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00169"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00169": "delimitativo"
+  }
  },
  {
   "id": "CMR-03191",
@@ -195713,7 +195873,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -200737,7 +200899,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05018"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05018": "delimitativo"
+  }
  },
  {
   "id": "CMR-03307",
@@ -218839,7 +219004,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00181"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00181": "incoativo"
+  }
  },
  {
   "id": "CMR-03609",
@@ -223491,8 +223659,8 @@ const LEXICON_COMER = [
   "ipa": "pʌɭʲɪtʲˈetʲ",
   "senses": [
    {
-    "es": "echar a volar",
-    "definitionEs": "Empezar a volar (aspecto perfectivo de 'лететь').",
+    "es": "volar (ir en avión), salir volando",
+    "definitionEs": "Volar hacia un lugar o echarse a volar (aspecto perfectivo de 'лететь', como пойти́ de идти́): Я полечу́ в Москву́.",
     "source": "redactado"
    }
   ],
@@ -237349,7 +237517,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00332"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00332": "delimitativo"
+  }
  },
  {
   "id": "CMR-03921",
@@ -244939,7 +245110,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -245793,7 +245966,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -266019,7 +266194,9 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -290101,7 +290278,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -301420,7 +301599,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00148"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00148": "delimitativo"
+  }
  },
  {
   "id": "CMR-05004",
@@ -301431,8 +301613,8 @@ const LEXICON_COMER = [
   "ipa": "pʌspʲɪʃˈytʲ",
   "senses": [
    {
-    "es": "apurarse, apresurarse (durante un rato)",
-    "definitionEs": "Realizar la acción de \"apurarse, apresurarse\" durante un tiempo limitado, generalmente breve.",
+    "es": "apurarse, apresurarse",
+    "definitionEs": "Apurarse para hacer algo a tiempo (aspecto perfectivo de 'спешить'): Поспеши́! («¡apurate!»).",
     "source": "manual"
    }
   ],
@@ -301847,7 +302029,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02710"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02710": "delimitativo"
+  }
  },
  {
   "id": "CMR-05011",
@@ -302340,7 +302525,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03306"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03306": "delimitativo"
+  }
  },
  {
   "id": "CMR-05019",
@@ -302717,8 +302905,8 @@ const LEXICON_COMER = [
   "ipa": "pʌmˈytʲ",
   "senses": [
    {
-    "es": "lavar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"lavar\" durante un tiempo limitado, generalmente breve.",
+    "es": "lavar",
+    "definitionEs": "Lavar algo hasta dejarlo limpio (aspecto perfectivo de 'мыть'): помы́ть посу́ду («lavar los platos»).",
     "source": "manual"
    }
   ],
@@ -303022,8 +303210,8 @@ const LEXICON_COMER = [
   "ipa": "pʌrʲˈezʌtʲ",
   "senses": [
    {
-    "es": "cortar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"cortar\" durante un tiempo limitado, generalmente breve.",
+    "es": "cortar (en pedazos)",
+    "definitionEs": "Cortar algo en pedazos (aspecto perfectivo de 'резать'): поре́зать хлеб («cortar el pan»).",
     "source": "manual"
    }
   ],
@@ -303754,8 +303942,8 @@ const LEXICON_COMER = [
   "ipa": "sˈjezdʲɪtʲ",
   "senses": [
    {
-    "es": "ir, viajar (en vehículo) (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"ir, viajar (en vehículo)\": indica que la acción se completó o se realizó como un evento único.",
+    "es": "ir y volver (en vehículo)",
+    "definitionEs": "Hacer un viaje de ida y vuelta, una vez: съе́здить в Москву́ («ir a Moscú y volver»). No es la pareja aspectual de 'ездить'.",
     "source": "manual"
    }
   ],
@@ -303804,7 +303992,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-01309"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01309": "idavuelta"
+  }
  },
  {
   "id": "CMR-05044",
@@ -304048,7 +304239,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-01673"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01673": "delimitativo"
+  }
  },
  {
   "id": "CMR-05048",
@@ -304414,7 +304608,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02005"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02005": "delimitativo"
+  }
  },
  {
   "id": "CMR-05054",
@@ -304475,7 +304672,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02016"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02016": "delimitativo"
+  }
  },
  {
   "id": "CMR-05055",
@@ -304915,8 +305115,8 @@ const LEXICON_COMER = [
   "ipa": "pʌtʌrʌpʲˈitsʌ",
   "senses": [
    {
-    "es": "apurarse, apresurarse (durante un rato)",
-    "definitionEs": "Realizar la acción de \"apurarse, apresurarse\" durante un tiempo limitado, generalmente breve.",
+    "es": "apurarse, apresurarse",
+    "definitionEs": "Darse prisa (aspecto perfectivo de 'торопиться'): Поторопи́сь! («¡apurate!»).",
     "source": "manual"
    }
   ],
@@ -324066,7 +324266,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00486"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00486": "delimitativo"
+  }
  },
  {
   "id": "CMR-05377",
@@ -324199,8 +324402,8 @@ const LEXICON_COMER = [
   "ipa": "pʌbʲˈitʲ",
   "senses": [
    {
-    "es": "golpear, pegar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"golpear, pegar\" durante un tiempo limitado, generalmente breve.",
+    "es": "dar una paliza; vencer",
+    "definitionEs": "Pegarle a alguien hasta lastimarlo, o vencer en una competencia (aspecto perfectivo de 'бить' en ese sentido). Para un solo golpe: уда́рить.",
     "source": "manual"
    }
   ],
@@ -327216,7 +327419,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -329763,8 +329968,11 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:IDIOMATICO"
-  ]
+   "CMR-00342"
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00342": "idavuelta"
+  }
  },
  {
   "id": "CMR-05468",
@@ -338890,7 +339098,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -343273,7 +343483,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {
@@ -345001,7 +345213,9 @@ const LEXICON_COMER = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   10
+  ],
   "appearsIn": [],
   "comer": [
    {

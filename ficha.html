@@ -80,7 +80,9 @@ const SIN_PAREJA_LABEL = {
    describe el desenlace exitoso del primero, ej. искать → найти).
    Solo las excepciones llevan aspectualPartnerTypes en el léxico —
    si no está marcado, se asume "aspectual". */
-const PAIR_TYPE_LABEL = { aspectual: "Pareja aspectual", resultado: "Resultado de la acción" };
+const PAIR_TYPE_LABEL = { aspectual: "Pareja aspectual", resultado: "Resultado de la acción",
+  /* 12/10/2026: versiones con un matiz, que no son la pareja aspectual del verbo */
+  delimitativo: "Versión «un rato» (no es su pareja aspectual)", incoativo: "Versión «empezar a» (no es su pareja aspectual)", idavuelta: "Versión «ir y volver» (no es su pareja aspectual)" };
 
 /* Arma la lista de parejas a mostrar para UN sentido puntual (o para
    toda la palabra, si no tiene más de un sentido). ids puede traer
@@ -411,7 +413,7 @@ function App() {
               info && info.parejas && info.parejas.length > 0 &&
                 React.createElement("div", { className: "sense-pair" },
                   info.parejas.map((p, j) => React.createElement("div", { key: p.id },
-                    (p.tipo === "resultado" ? "→ " : "↔ ") + PAIR_TYPE_LABEL[p.tipo] + ": ",
+                    (p.tipo !== "aspectual" ? "→ " : "↔ ") + (PAIR_TYPE_LABEL[p.tipo] || PAIR_TYPE_LABEL.aspectual) + ": ",
                     React.createElement("a", {
                       href: "ficha.html?id=" + p.id,
                       onClick: (e) => azNavigate(e, "ficha.html?id=" + p.id)
