@@ -186,7 +186,10 @@ function AzShell(props) {
     style: { background: c.bg, color: c.text, minHeight: "100vh", fontFamily: "'Noto Sans',sans-serif", transition: "background .3s, color .3s" }
   },
     /* Fondo de html/body/#root sigue el tema — esto sí es dinámico */
-    React.createElement("style", null, `html, body, #root { background: ${c.bg}; }`),
+    /* --az-top: zona segura superior compartida (cabecera, drawer y
+       hojas a pantalla completa). Nunca menos de 6vh, y siempre por
+       debajo de la franja del sistema + el fade de iOS 26 en iPhone. */
+    React.createElement("style", null, `:root { --az-top: max(6vh, calc(env(safe-area-inset-top, 0px) + 12px)); } html, body, #root { background: ${c.bg}; }`),
     React.createElement(AzCaptura, { c }),
 
     /* ── OVERLAY (el contenido central queda detrás, sin ajustarse) ── */
@@ -207,7 +210,7 @@ function AzShell(props) {
     },
       /* Buscador — va DIRECTO a LEXICON_COMER (las ~4.931 palabras),
          no a módulos. Cada resultado lleva a su ficha. */
-      React.createElement("div", { style: { padding: "6vh 16px 8px", flexShrink: 0 } },
+      React.createElement("div", { style: { padding: "var(--az-top) 16px 8px", flexShrink: 0 } },
         React.createElement("div", { style: { position: "relative" } },
           React.createElement("input", {
             ref: searchRef,
@@ -302,30 +305,30 @@ function AzShell(props) {
     ),
 
     /* ── HEADER: fixed (NO sticky) — clavado al viewport, inmune
-       al rebote elástico de iOS al scrollear. Respeta 6% de zona
-       segura superior. Азбука fijo en todas las pantallas + bajada
-       fija + botón atrás (historial de navegación, no jerarquía). ── */
+       al rebote elástico de iOS al scrollear. Arranca en --az-top
+       (zona segura compartida). Una sola fila alineada abajo: botón
+       atrás (historial, no jerarquía) + Азбука + bajada al lado. ── */
     React.createElement("header", {
       ref: headerRef,
-      style: { position: "fixed", top: 0, left: 0, right: 0, padding: "6vh 3vw 14px", borderBottom: `1px solid ${c.border}`, background: c.bg, backdropFilter: "blur(12px)", zIndex: 100 }
+      style: { position: "fixed", top: 0, left: 0, right: 0, padding: "var(--az-top) 3vw 12px", borderBottom: `1px solid ${c.border}`, background: c.bg, backdropFilter: "blur(12px)", zIndex: 100 }
     },
-      React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "flex-start", gap: 10 } },
+      React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "center", gap: 10 } },
         React.createElement("button", {
           onClick: azGoBack, "aria-label": "Atrás",
           style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: c.text, cursor: "pointer", padding: 0, flexShrink: 0, marginTop: 0 }
         }, "<"),
-        React.createElement("div", { style: { display: "flex", flexDirection: "column" } },
-          React.createElement("span", { style: { fontSize: 24, color: c.gold, fontWeight: 900, letterSpacing: -1 } }, "Азбука"),
-          React.createElement("span", { style: { marginTop: 3, fontSize: 12.5, color: c.textMuted, fontWeight: 500 } }, "Aprende ruso desde cero")
+        React.createElement("div", { style: { display: "flex", alignItems: "baseline", gap: 8, minWidth: 0 } },
+          React.createElement("span", { style: { fontSize: 24, lineHeight: 1, color: c.gold, fontWeight: 900, letterSpacing: -1, flexShrink: 0 } }, "Азбука"),
+          React.createElement("span", { style: { fontSize: 12.5, color: c.textMuted, fontWeight: 500, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0 } }, "Aprende ruso desde cero")
         )
       )
     ),
 
     /* ── CONTENIDO — el padding-top compensa el header fixed (si
-       headerH todavía no se midió, 6vh es el mínimo razonable para
+       headerH todavía no se midió, --az-top es el mínimo para
        no mostrar un salto). Sigue quedando detrás del drawer/overlay
        cuando está abierto, nunca se ajusta ni reacomoda. ── */
-    React.createElement("main", { style: { maxWidth: 960, margin: "0 auto", padding: `${headerH ? headerH + "px" : "6vh"} 3vw 3vh` } }, children),
+    React.createElement("main", { style: { maxWidth: 960, margin: "0 auto", padding: `${headerH ? headerH + "px" : "var(--az-top)"} 3vw 3vh` } }, children),
 
     /* ── BOTTOM NAV: de lado a lado. Burger fijo a la izquierda
        (nunca se oculta), divisor, y a la derecha las tabs propias

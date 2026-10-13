@@ -66,8 +66,8 @@
     .ubtn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:13px 16px;border-radius:10px;border:1px solid ${c.gold};background:${c.gold};color:${c.bg};font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:18px;}
     .ubtn.sec{background:${c.bg3};border-color:${c.border};color:${c.text};}
     .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:fadeIn .25s ease;}
-    .sheet-in{max-width:960px;margin:0 auto;padding:6vh 3vw 4vh;}
-    .sheet-x{position:fixed;top:6vh;right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
+    .sheet-in{max-width:960px;margin:0 auto;padding:var(--az-top,6vh) 3vw 4vh;}
+    .sheet-x{position:fixed;top:var(--az-top,6vh);right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
     .glyph{font-size:64px;font-weight:800;color:${c.gold};line-height:1;}
     .cursiva{font-family:'CyrCursive',cursive;font-size:44px;color:${c.gold};opacity:.7;margin-top:6px;}
     .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
