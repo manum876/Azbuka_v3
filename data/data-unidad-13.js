@@ -34,8 +34,8 @@ const U13_PASADO = "Hay que contarlo en pasado (рабо́тал, гуля́ла
 
 /* Módulo 1: lo que ya podés decir — [función, ruso, español] */
 const U13_MAPA = [
-  ["Quién soy", "Меня́ зову́т А́нна.", "Me llamo Ana."], ["Qué hago", "Я архите́ктор.", "Soy arquitecta."], ["Dónde vivo", "Я живу́ в Барсело́не.", "Vivo en Barcelona."],
-  ["Qué hago ahora", "Сейча́с я рабо́таю в о́фисе.", "Ahora trabajo en la oficina."], ["Qué hice", "Вчера́ я рабо́тала до́ма.", "Ayer trabajé en casa."],
+  ["Quién soy", "Меня́ зову́т Ива́н.", "Me llamo Iván."], ["Qué hago", "Я архите́ктор.", "Soy arquitecto."], ["Dónde vivo", "Я живу́ в Барсело́не.", "Vivo en Barcelona."],
+  ["Qué hago ahora", "Сейча́с я рабо́таю в о́фисе.", "Ahora trabajo en la oficina."], ["Qué hice", "Вчера́ я рабо́тал до́ма.", "Ayer trabajé en casa."],
   ["Qué voy a hacer", "За́втра я бу́ду отдыха́ть.", "Mañana voy a descansar."], ["Qué voy a hacer (una vez)", "За́втра я позвоню́ ма́ме.", "Mañana voy a llamar a mamá."],
   ["Qué tengo", "У меня́ есть маши́на.", "Tengo auto."], ["Qué no tengo", "У меня́ нет вре́мени.", "No tengo tiempo."],
   ["Con quién", "Я гуля́ю с друзья́ми.", "Paseo con mis amigos."], ["A quién", "Я даю́ кни́гу А́нне.", "Le doy el libro a Ana."], ["De qué hablo", "Мы говори́м о рабо́те.", "Hablamos del trabajo."],
@@ -237,9 +237,9 @@ const UNIDAD_13 = {
         { id: "u13-mapa", titulo: "Lo que ya sabés decir",
           texto: "Cada frase de abajo usa una pieza distinta del curso. Si alguna te cuesta, tocá las palabras y repasala.",
           ejemplos: [
-            { ru: "{Меня́ зову́т} А́нна. Я архите́ктор.", es: "Me llamo Ana. Soy arquitecta.", por: "Presentarse: sin «ser» en presente." },
+            { ru: "{Меня́ зову́т} Ива́н. Я архите́ктор.", es: "Me llamo Iván. Soy arquitecto.", por: "Presentarse: sin «ser» en presente." },
             { ru: "Я живу́ {в Барсело́не}.", es: "Vivo en Barcelona.", por: "Dónde: в + prepositivo." },
-            { ru: "{Вчера́} я рабо́тала до́ма, а {за́втра} я позвоню́ ма́ме.", es: "Ayer trabajé en casa y mañana voy a llamar a mamá.", por: "Pasado y futuro de resultado." },
+            { ru: "{Вчера́} я рабо́тал до́ма, а {за́втра} я позвоню́ ма́ме.", es: "Ayer trabajé en casa y mañana voy a llamar a mamá.", por: "Pasado y futuro de resultado." },
             { ru: "{У меня́ нет} вре́мени.", es: "No tengo tiempo.", por: "нет + genitivo." },
             { ru: "Я гуля́ю {с друзья́ми} и даю́ кни́гу {А́нне}.", es: "Paseo con mis amigos y le doy el libro a Ana.", por: "Instrumental y dativo." },
             { ru: "{По-мо́ему}, метро́ {быстре́е}, чем авто́бус.", es: "Para mí, el subte es más rápido que el colectivo.", por: "Opinar y comparar." },
@@ -412,7 +412,7 @@ const UNIDAD_13 = {
           mas: { texto: "да́же también es «incluso»: Он да́же не позвони́л («ni siquiera llamó»). Y un разгово́р es una charla: У нас был интере́сный разгово́р." } }
       ] },
     { id: "u13m9", n: 9, tipo: "leccion", nPractica: 12, titulo: "Corrección y autonomía", resumen: "Encontrar el error. ¿Suena natural?",
-      intro: "Ahora la que corrige sos vos: encontrá el error y arreglalo. Y además, preguntate: ¿así lo diría un ruso?",
+      intro: "Ahora corregís vos: encontrá el error y arreglalo. Y además, preguntate: ¿así lo diría un ruso?",
       secciones: [
         { id: "u13-errores", titulo: "Los errores más comunes",
           texto: "Antes de dar por terminado un texto, revisá estas seis cosas, una por una. Cada una tiene su regla:",
@@ -629,7 +629,7 @@ function ejerciciosUnidad13() {
       pares: sel.map(x => [x[1], x[0]]), explicacion: sel.map(x => x[1] + " — " + x[0]).join(" · ") });
   }
   U13_MAPA.forEach(([f, ru, es], j) => {
-    if (j % 2 === 0) trad("mp-" + j, 1, es + (/рабо́тала|архите́ктор/.test(ru) ? " (sos mujer)" : ""), ru, j % 4 === 0);
+    if (j % 2 === 0) trad("mp-" + j, 1, es + (/рабо́тал /.test(ru) ? " (sos hombre)" : ""), ru, j % 4 === 0);
     else { const otras = baraja(U13_MAPA.filter(x => x[0] !== f), j).slice(0, 2).map(x => x[0]);
       out.push({ id: "U13-mpf-" + j, tipo: "funcion", forma: "elegir", dificultad: 1, modulo: 1, grupo: "MPF-" + j, items: [], audio: ru, audioManual: true, oir: ru, pide: "¿Para qué sirve esta frase?", grande: ru,
         opciones: baraja([f].concat(otras), j), correcta: f, explicacion: ru + " — " + es }); }

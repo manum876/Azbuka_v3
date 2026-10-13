@@ -320,6 +320,29 @@ function azFmt(texto) {
 /* El mismo texto sin las marcas (para búsquedas o atributos) */
 function azSinMarcas(texto) { return String(texto == null ? "" : texto).replace(/\*\*/g, ""); }
 
+/* Respuestas en los dos géneros (13/10/2026): devuelve la lista de respuestas esperadas más su versión
+   en el otro género, en las frases con я o ты (был ↔ была́, встал ↔ вста́ла, просну́лся ↔ просну́лась, рад ↔ ра́да),
+   con las formas de Verbos. La usa la práctica (azEsperadasGenero, unidad.js) en toda respuesta escrita que no fija el género. */
+function azAmbosGeneros(lista) {
+  lista = [].concat(lista || []);
+  if (typeof VERBOS === "undefined") return lista;
+  const clave = w => String(w).replace(/\u0301/g, "").toLowerCase().replace(/ё/g, "е");
+  if (!azAmbosGeneros.mapa) {
+    const m = {};
+    const par = (a, b) => { if (!m[clave(a)]) m[clave(a)] = b; if (!m[clave(b)]) m[clave(b)] = a; };
+    Object.keys(VERBOS).forEach(id => { const p = VERBOS[id].pasado; if (p && p.m && p.f) par(p.m, p.f); });
+    [["рад", "ра́да"], ["согла́сен", "согла́сна"], ["за́нят", "занята́"], ["до́лжен", "должна́"], ["гото́в", "гото́ва"], ["уве́рен", "уве́рена"]].forEach(([a, b]) => par(a, b));
+    azAmbosGeneros.mapa = m;
+  }
+  const M = azAmbosGeneros.mapa, out = lista.slice();
+  lista.forEach(fr => {
+    if (!/(^|[^А-Яа-яЁё])([Яя]|[Тт]ы)([^А-Яа-яЁё\u0301]|$)/.test(String(fr))) return;   /* solo frases con я o ты */
+    const f = String(fr).replace(/[А-Яа-яЁё\u0301]+/g, w => { const r = M[clave(w)]; if (!r) return w; return w.charAt(0) !== w.charAt(0).toLowerCase() ? r.charAt(0).toUpperCase() + r.slice(1) : r; });
+    if (f !== fr && out.indexOf(f) < 0) out.push(f);
+  });
+  return out;
+}
+
 /* ── VOZ (compartida por toda la app, 26/09/2026) ─────────────
    ru-RU a 0,85, sin la marca de acento (algunas voces la leen mal).
    genero ("m" / "f"): si el teléfono le deja a la web una voz rusa de

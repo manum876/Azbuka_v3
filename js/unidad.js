@@ -159,6 +159,17 @@
     return h("div", { className: "pr-texto", lang: "ru", style: ej.textoOculto ? { marginTop: 12, marginBottom: 0 } : null }, ej.texto.map((l, i) => h("div", { key: i }, l)));
   }
 
+  /* Los dos géneros (13/10/2026, decisión de Manu): en ruso el género de quien habla (я был / я была́) o de
+     a quién le hablás (ты был / ты была́) solo se marca en el verbo, y una pregunta «al aire» va en masculino.
+     Si la consigna no fija el género (hombre, mujer, señor, chica, amigo…), se aceptan las dos formas.
+     No en los dictados: ahí se escribe lo que se oye. Un ejercicio puede pedir lo contrario con generoFijo: true. */
+  const AZ_GENERO_PIDE = /hombre|mujer|señor|señora|chic[oa]s?\b|amig[oa]\b|varón/i;
+  function azEsperadasGenero(ej, lista, pideExtra) {
+    if (!lista || ej.generoFijo || typeof azAmbosGeneros !== "function") return lista;
+    if (ej.tipo === "dictado" || /^Escuchá y escribí/.test(ej.pide || "")) return lista;
+    if (AZ_GENERO_PIDE.test((ej.pide || "") + " " + (pideExtra || ""))) return lista;
+    return azAmbosGeneros(lista);
+  }
   /* «Repasar la regla» (06/10/2026): la práctica escucha el evento y abre la hoja */
   let REGLAS_ON = true;
   function BotonRegla({ ej, r }) {
@@ -211,7 +222,7 @@
       /* Otra forma de la palabra correcta: Casi en las Unidades 1 y 2, y en los ejercicios que lo
          piden (formaCasi), porque ahí la forma no es lo que se evalúa (06/10/2026) */
       const formaCasi = ej.formaCasi != null ? ej.formaCasi : unidad <= 2;
-      const res = azCorregir(txt, ej.esperadas, { idioma: ej.idioma, formaCasi });
+      const res = azCorregir(txt, ru ? azEsperadasGenero(ej, ej.esperadas) : ej.esperadas, { idioma: ej.idioma, formaCasi });
       setR(res);
       if (hecho == null) onRes(res.resultado);
     };
@@ -467,7 +478,7 @@
     const paso = ej.pasos[k];
     const comprobar = () => {
       if (!txt.trim() || r) return;
-      const res = azCorregir(txt, paso.esperadas, { idioma: "ru" });
+      const res = azCorregir(txt, azEsperadasGenero(ej, paso.esperadas, paso.pide), { idioma: "ru" });
       setR(res); const nrs = rs.concat(res.resultado); setRs(nrs);
       if (k + 1 >= ej.pasos.length && hecho == null) onRes(peor(nrs));
     };
@@ -498,7 +509,7 @@
     const elegir = o => { if (el) return; setEl(o); setTimeout(() => ref.current && ref.current.focus(), 50); };
     const comprobar = () => {
       if (!txt.trim() || r) return;
-      const res = azCorregir(txt, ej.esperadas, { idioma: "ru" }); setR(res);
+      const res = azCorregir(txt, azEsperadasGenero(ej, ej.esperadas), { idioma: "ru" }); setR(res);
       const a = el === ej.correcta, b = res.resultado !== AZ_MAL;
       if (hecho == null) onRes(a && res.resultado === AZ_BIEN ? AZ_BIEN : (a || b) ? AZ_CASI : AZ_MAL);
     };

@@ -743,7 +743,7 @@ function ejerciciosUnidad8() {
     const s = U8_SUJ[si], v = V("быть"), f = frase(s, "быть", comp, k % 3 === 0 ? U8_TIEMPO[0] : null);
     const pres = s[0] + " " + comp[0] + ".";
     const base = { grupo: "B-" + c + "-" + k, items: ["lex:" + v.id], oir: f.ru };
-    out.push(Object.assign({ id: "U8-byl-" + c + "-" + k, tipo: "byl", forma: "elegir", dificultad: 1, modulo: 6, pide: "Completá: «" + f.es + "»", grande: f.ru.replace(" " + f.f + " ", " _____ "),
+    out.push(Object.assign({ id: "U8-byl-" + c + "-" + k, tipo: "byl", forma: "elegir", dificultad: 1, modulo: 6, pide: "Completá: «" + f.es + "»" + pista(s), grande: f.ru.replace(" " + f.f + " ", " _____ "),
       opciones: ["был", "была́", "бы́ло", "бы́ли"], correcta: f.f, explicacion: u8Regla(v, f.g) + " " + f.ru }, base));
     out.push(Object.assign({ id: "U8-bytr-" + c + "-" + k, tipo: "transformar", forma: "escribir", dificultad: 2, modulo: 6, pide: "Pasala al pasado" + pista(s) + ".", grande: pres, audio: f.ru, audioManual: true,
       esperadas: f.esperadas.map(x => x.replace(/^Вчера́ [а-яё́]+ /i, m => m)).concat(f.esperadas.map(x => x.replace(/^Вчера́ /, "").replace(/^([а-яё])/, m => m.toUpperCase()))), idioma: "ru",
@@ -1036,10 +1036,10 @@ function ejerciciosUnidad8() {
 
   /* ── Módulo 6: был ── */
   [["m", "Я", "до́ма"], ["f", "Она́", "на рабо́те"], ["pl", "Мы", "в Москве́"], ["f", "Я", "в кино́"], ["m", "Брат", "в Мадри́де"], ["pl", "Они́", "в па́рке"]].forEach(([g, s, l], j) => {
-    const b = V("быть"), ok = "Вчера́ " + (s === "Я" || s === "Она́" || s === "Мы" || s === "Они́" ? s.toLowerCase() : s) + " " + b.p[g] + " " + l + ".";
+    const b = V("быть"), ok = "Вчера́ " + s.toLowerCase() + " " + b.p[g] + " " + l + ".";
     push({ id: "U8-oido-byl-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 6, regla: "u8-byl-acento", grupo: "BYo-" + j, items: [], oir: ok, pide: "Escuchá: ¿qué forma sonó?", audio: ok,
       opciones: g === "pl" ? ["бы́ли", "была́"] : ["был", "была́"], correcta: b.p[g], explicacion: ok + " " + (g === "f" ? "была́, con el acento al final." : g === "pl" ? "бы́ли, con el acento en la raíz." : "был: un hombre.") });
-    const pres = s + " " + l + ".", sinB = "Вчера́ " + (s === "Я" || s === "Она́" || s === "Мы" || s === "Они́" ? s.toLowerCase() : s) + " " + l + ".";
+    const pres = s + " " + l + ".", sinB = "Вчера́ " + s.toLowerCase() + " " + l + ".";
     push({ id: "U8-diag-byl-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 6, regla: "u8-byl-acento", grupo: "BYd-" + j, items: [], oir: ok, pide: "La frase tiene un error. ¿Qué falla?", grande: sinB,
       opciones: ["Falta был", "La terminación del verbo", "El lugar"], correcta: "Falta был", esperadas: [ok], explicacion: ok + " En pasado, быть aparece: " + b.p[g] + "." });
   });
