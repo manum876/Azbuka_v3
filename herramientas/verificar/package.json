@@ -1,0 +1,7 @@
+{
+  "name": "azbuka-verificar",
+  "private": true,
+  "description": "Verificadores de AZBUKA (no son parte de la app). Ver LEEME.md.",
+  "scripts": { "todo": "bash correr-todo.sh" },
+  "dependencies": { "playwright": "^1.47.0" }
+}
