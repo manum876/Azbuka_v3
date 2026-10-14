@@ -473,7 +473,7 @@ function azCopiaDatos() {
   const datos = {};
   for (let i = 0; i < localStorage.length; i++) {
     const k = localStorage.key(i);
-    if (k && k.indexOf("az_") === 0) datos[k] = localStorage.getItem(k);
+    if (k && k.indexOf("az_") === 0 && k.indexOf("az_cuenta_") !== 0) datos[k] = localStorage.getItem(k);   /* az_cuenta_…: de la cuenta, no viaja */
   }
   return { app: "azbuka", tipo: "copia", v: 1, fecha: new Date().toISOString(), datos };
 }
@@ -481,9 +481,10 @@ function azRestaurarDatos(copia) {
   if (copia && Array.isArray(copia.secciones)) { localStorage.setItem("az_cuaderno", JSON.stringify(copia)); return "cuaderno"; }
   if (!copia || copia.app !== "azbuka" || !copia.datos) throw new Error("formato");
   const viejas = [];
-  for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.indexOf("az_") === 0) viejas.push(k); }
+  const deCuenta = k => k.indexOf("az_cuenta_") === 0;   /* la sincronización de la cuenta (cuenta.js) se conserva */
+  for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.indexOf("az_") === 0 && !deCuenta(k)) viejas.push(k); }
   viejas.forEach(k => localStorage.removeItem(k));
-  Object.keys(copia.datos).forEach(k => { if (k.indexOf("az_") === 0) localStorage.setItem(k, copia.datos[k]); });
+  Object.keys(copia.datos).forEach(k => { if (k.indexOf("az_") === 0 && !deCuenta(k)) localStorage.setItem(k, copia.datos[k]); });
   try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
   return "todo";
 }

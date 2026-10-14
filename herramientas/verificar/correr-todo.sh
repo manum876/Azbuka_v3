@@ -4,9 +4,9 @@
 cd "$(dirname "$0")"
 [ -d node_modules/playwright ] || npm install --silent >/dev/null 2>&1 || echo "Aviso: no se pudo instalar Playwright (¿hay uno global?)"
 declare -A R
-for v in integridad recorrido practicas examen sin-conexion pantallas; do
+for v in integridad recorrido practicas examen sin-conexion pantallas cuentas; do
   echo; echo "════════ $v ════════"
   if node "$v.js"; then R[$v]="✓"; else R[$v]="✗"; fi
 done
 echo; echo "════════ Resumen ════════"
-for v in integridad recorrido practicas examen sin-conexion pantallas; do echo "  ${R[$v]}  $v"; done
+for v in integridad recorrido practicas examen sin-conexion pantallas cuentas; do echo "  ${R[$v]}  $v"; done

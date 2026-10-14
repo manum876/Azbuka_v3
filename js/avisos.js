@@ -24,6 +24,7 @@
    Guarda su estado en az_avisos:
      { visitas, primerUso, ultimoAviso, instalarHasta, instalarNunca, copiaHasta }
    y lee az_copia ({ fecha, firma }), que escribe azGuardarCopia.
+   Con las cuentas activadas (js/cuenta.js) no se pide la copia: el progreso va a la nube.
    ============================================================ */
 (function () {
   /* Android avisa que se puede instalar apenas carga la página: hay
@@ -81,6 +82,8 @@ async function azAvDecidir() {
   }
 
   if (av.copiaHasta > hoy) return null;
+  /* 14/10/2026: con cuenta, el progreso ya se guarda en la nube; no hace falta pedir la copia */
+  if (window.AzCuenta && AzCuenta.activa) return null;
   const st = azAvStats();
   if (!st.ej && !st.notas) return null;
   const copia = await azGet("az_copia", null);

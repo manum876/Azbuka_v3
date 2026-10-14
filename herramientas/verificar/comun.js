@@ -15,6 +15,9 @@ function servir() {
       const ruta = path.join(RAIZ, f);
       if (!ruta.startsWith(RAIZ) || !fs.existsSync(ruta) || fs.statSync(ruta).isDirectory()) { res.writeHead(404); return res.end('404'); }
       res.writeHead(200, { 'Content-Type': TIPOS[path.extname(ruta)] || 'application/octet-stream' });
+      // Las pruebas corren con las cuentas apagadas (sin pantalla de entrada ni Supabase real):
+      // js/cuenta.js se sirve con url y clave vacías. cuentas.js las prueba con un Supabase falso.
+      if (f === '/js/cuenta.js') return res.end(fs.readFileSync(ruta, 'utf8').replace(/url: "[^"]*",/, 'url: "",').replace(/clave: "[^"]*",/, 'clave: "",'));
       fs.createReadStream(ruta).pipe(res);
     }).listen(PUERTO, () => ok(srv));
   });

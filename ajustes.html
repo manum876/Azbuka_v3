@@ -17,6 +17,8 @@
 <div id="root"></div>
 <script src="assets/preact.js"></script>
 <script src="js/core.js"></script>
+<script src="assets/supabase.js"></script>
+<script src="js/cuenta.js"></script>
 <script src="js/progress.js"></script>
 <script src="js/shell.js"></script>
 <script>
@@ -25,13 +27,91 @@
    Se abre desde el ⚙️ del pie del menú. Secciones: Transliteración
    (02/10/2026, az_translit: "si" | "no", ver core.js) y Copia de
    seguridad (AzCopiaSeguridad, en core.js).
+   14/10/2026: Cuenta (mail, progreso en la nube, cerrar sesión y
+   eliminar la cuenta con todos los datos) y, solo para el admin,
+   Accesos (habilitar y quitar mails). Todo lo hace js/cuenta.js.
    ============================================================ */
 const { useState, useEffect } = htmPreact;
 const h = React.createElement;
+/* ── Cuenta (14/10/2026) ── */
+const ROJO = "#B5605C", ROJO_TXT = "#D9776F";
+const fechaCorta = iso => { if (!iso) return "—"; const d = new Date(iso), hoy = new Date();
+  const hh = d.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+  return d.toDateString() === hoy.toDateString() ? "hoy " + hh : d.toLocaleDateString("es-AR", { day: "numeric", month: "short" }) + " " + hh; };
+function boton(c, texto, onClick, tipo, extra) {
+  const st = tipo === "peligro" ? { background: ROJO, border: `1px solid ${ROJO}`, color: "#fff" }
+    : tipo === "sec" ? { background: c.bg3, border: `1px solid ${c.border}`, color: c.text } : { background: c.gold, border: `1px solid ${c.gold}`, color: c.bg };
+  return h("button", Object.assign({ className: "btn", onClick, style: Object.assign({ width: "100%", padding: "13px 16px", borderRadius: 10, fontSize: 14.5, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", marginTop: 10 }, st) }, extra || {}), texto);
+}
+function SeccionCuenta({ c }) {
+  const A = window.AzCuenta;
+  const [nube, setNube] = useState(A ? A.estadoNube() : null);
+  const [paso, setPaso] = useState(null);      /* null | "salir-sin-red" | "borrar" | "borrando" */
+  const [error, setError] = useState("");
+  useEffect(() => { if (!A || !A.activa) return; A.listo().then(() => setNube(A.estadoNube())); return A.alCambiar(() => setNube(A.estadoNube())); }, []);
+  if (!A || !A.activa) return h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, "Las cuentas todavía no están activadas en esta versión de la app. El progreso se guarda solo en este teléfono.");
+  const t = { "al-dia": "Tu progreso está guardado en la nube.", subiendo: "Guardando en la nube…", pendiente: navigator.onLine ? "Hay cambios por guardar en la nube." : "Sin conexión: lo nuevo se guarda en la nube cuando vuelva internet.", apagada: "" }[nube && nube.estado] || "";
+  const ultima = nube && nube.meta && nube.meta.subido ? "Último guardado: " + fechaCorta(new Date(nube.meta.subido).toISOString()) + "." : "";
+  const salir = async () => { setError(""); const ok = await A.cerrarSesion(false); if (!ok) setPaso("salir-sin-red"); };
+  const borrar = async () => { setPaso("borrando"); setError("");
+    try { await A.borrarCuenta(); } catch (e) { setPaso("borrar"); setError(navigator.onLine ? "No se pudo eliminar. Probá de nuevo en un momento." : "Para eliminar la cuenta necesitás conexión."); } };
+  return h(React.Fragment, null,
+    h("div", { style: { fontSize: 12, color: c.textMuted } }, "Entraste como"),
+    h("div", { style: { fontSize: 16, fontWeight: 700, color: c.text, marginTop: 2, wordBreak: "break-all" } }, A.email() || "…"),
+    h("div", { style: { fontSize: 13.5, color: c.textSub, lineHeight: 1.6, marginTop: 10 } }, t, ultima ? " " + ultima : ""),
+    paso === "salir-sin-red"
+      ? h("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: ROJO_TXT, background: ROJO + "22", borderRadius: 10, padding: "10px 12px", marginTop: 12 } },
+          "No hay conexión y hay cambios que todavía no se guardaron en la nube. Si cerrás la sesión ahora, se pierden.",
+          boton(c, "Cerrar sesión igual", () => A.cerrarSesion(true), "peligro"), boton(c, "Esperar", () => setPaso(null), "sec"))
+      : boton(c, "Cerrar sesión", salir, "sec"),
+    h("div", { style: { height: 1, background: c.border, margin: "18px 0 6px" } }),
+    paso === "borrar" || paso === "borrando"
+      ? h("div", { style: { fontSize: 13.5, lineHeight: 1.55, color: c.text, background: ROJO + "22", border: `1px solid ${ROJO}`, borderRadius: 10, padding: "12px", marginTop: 10 } },
+          h("b", null, "¿Eliminar todo?"), " Se borran tu cuenta, tu progreso en la nube y todo lo guardado en este teléfono (progreso, cuaderno y notas). No se puede deshacer. Si querés conservar algo, antes guardá una copia de seguridad.",
+          error && h("div", { style: { color: ROJO_TXT, marginTop: 8 } }, error),
+          boton(c, paso === "borrando" ? "Eliminando…" : "Sí, eliminar todo", borrar, "peligro", { disabled: paso === "borrando" }),
+          boton(c, "Cancelar", () => { setPaso(null); setError(""); }, "sec"))
+      : h("button", { className: "btn", onClick: () => setPaso("borrar"), style: { background: "none", border: "none", color: ROJO_TXT, fontSize: 13.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", padding: "10px 0 0" } }, "Eliminar mi cuenta y mis datos"));
+}
+function SeccionAccesos({ c }) {
+  const A = window.AzCuenta;
+  const [lista, setLista] = useState(null);
+  const [mail, setMail] = useState(""), [nota, setNota] = useState("");
+  const [msg, setMsg] = useState(null), [quitando, setQuitando] = useState(null);
+  const cargar = async () => { try { setLista(await A.accesos()); } catch (e) { setMsg({ err: true, t: "No se pudo cargar la lista. Revisá la conexión." }); } };
+  useEffect(() => { cargar(); }, []);
+  const agregar = async () => { setMsg(null);
+    try { await A.habilitar(mail, nota.trim()); setMsg({ t: mail.trim().toLowerCase() + " ya puede entrar." }); setMail(""); setNota(""); cargar(); }
+    catch (e) { const t = String(e && e.message || e);
+      setMsg({ err: true, t: t === "mail" ? "Revisá el mail: parece incompleto." : /duplicate|unique/i.test(t) ? "Ese mail ya estaba habilitado." : "No se pudo habilitar. Probá de nuevo." }); } };
+  const quitar = async email => { setMsg(null);
+    try { await A.quitar(email); setQuitando(null); setMsg({ t: email + " ya no puede entrar. Se borraron su cuenta y su progreso." }); cargar(); }
+    catch (e) { setMsg({ err: true, t: "No se pudo quitar. Probá de nuevo." }); } };
+  const inp = { width: "100%", boxSizing: "border-box", fontSize: 16, padding: "12px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", marginTop: 8, outline: "none" };
+  return h(React.Fragment, null,
+    h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, "Solo entran los mails de esta lista. Para que alguien entre, agregá su mail y avisale: entra con el código que le llega por mail."),
+    h("input", { type: "email", inputMode: "email", autoCapitalize: "off", autoCorrect: "off", spellCheck: false, placeholder: "mail@ejemplo.com", value: mail, onInput: e => setMail(e.target.value), style: Object.assign({}, inp, { marginTop: 12 }) }),
+    h("input", { type: "text", placeholder: "Nota (opcional): quién es", value: nota, onInput: e => setNota(e.target.value), style: inp }),
+    boton(c, "Habilitar", agregar, null, { disabled: !mail.trim() }),
+    msg && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, borderRadius: 10, padding: "10px 12px", marginTop: 12, color: msg.err ? ROJO_TXT : c.textSub, background: msg.err ? ROJO + "22" : c.gold + "18" } }, msg.t),
+    h("div", { style: { marginTop: 14 } },
+      lista == null ? h("div", { style: { fontSize: 13.5, color: c.textMuted } }, "Cargando…")
+      : lista.map(p => h("div", { key: p.email, style: { borderTop: `1px solid ${c.border}`, padding: "12px 0" } },
+          h("div", { style: { display: "flex", alignItems: "center", gap: 8 } },
+            h("div", { style: { flex: 1, minWidth: 0 } },
+              h("div", { style: { fontSize: 14.5, fontWeight: 700, color: c.text, wordBreak: "break-all" } }, p.email, p.admin ? h("span", { style: { fontSize: 10.5, fontWeight: 700, color: c.gold, marginLeft: 8, letterSpacing: 1, textTransform: "uppercase" } }, "Admin") : null),
+              h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 2 } }, (p.nota ? p.nota + " · " : "") + (p.tiene_cuenta ? (p.ultimo ? "Última actividad: " + fechaCorta(p.ultimo) : "Entró, sin progreso todavía") : "Todavía no entró"))),
+            !p.admin && quitando !== p.email && h("button", { className: "btn", onClick: () => setQuitando(p.email), style: { background: c.bg3, border: `1px solid ${c.border}`, color: ROJO_TXT, fontSize: 12.5, fontWeight: 600, padding: "8px 12px", borderRadius: 10, cursor: "pointer", fontFamily: "inherit", flexShrink: 0 } }, "Quitar")),
+          quitando === p.email && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: c.text, background: ROJO + "22", border: `1px solid ${ROJO}`, borderRadius: 10, padding: 12, marginTop: 10 } },
+            "Deja de poder entrar y se borran su cuenta y su progreso en la nube.",
+            boton(c, "Sí, quitar", () => quitar(p.email), "peligro"), boton(c, "Cancelar", () => setQuitando(null), "sec"))))));
+}
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [translit, setTranslit] = useState(azTranslitVisible() ? "si" : "no");
   useEffect(() => { (async () => setDarkMode((await azGet('az_theme', 'dark')) !== 'light'))(); }, []);
+  const [esAdmin, setEsAdmin] = useState(false);
+  useEffect(() => { if (window.AzCuenta && AzCuenta.activa) AzCuenta.comprobarAdmin().then(setEsAdmin); }, []);
   const c = azColors(darkMode);
   const elegir = async v => { setTranslit(v); await azSet("az_translit", v); azAplicarTranslit(); };
   const lbl = t => h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "24px 0 10px" } }, t);
@@ -44,6 +124,10 @@ function App() {
   return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
     h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
       h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, "Ajustes"),
+      lbl("Cuenta"),
+      caja(h(SeccionCuenta, { c })),
+      esAdmin && lbl("Accesos"),
+      esAdmin && caja(h(SeccionAccesos, { c })),
       lbl("Transliteración"),
       caja(
         h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
