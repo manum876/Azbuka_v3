@@ -277,7 +277,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 6077
+  totalEntries: 6078
 };
 /* Temas del léxico (campo opcional "temas" de cada entrada, desde el
    30/09/2026). Lista cerrada; una palabra lleva como máximo 2 temas y
@@ -374292,6 +374292,79 @@ const LEXICON_COMER = [
   },
   "temas": [
    "naturaleza"
+  ]
+ },
+ {
+  "id": "CMR-06153",
+  "ru": "азбука",
+  "acento": "а́збука",
+  "posNormalized": "sustantivo",
+  "translit": "ázbuka",
+  "ipa": "ˈɑzbukʌ",
+  "senses": [
+   {
+    "es": "alfabeto, abecedario",
+    "definitionEs": "Conjunto ordenado de las letras de un idioma, en especial el cirílico: ру́сская а́збука, «el alfabeto ruso». Viene de los nombres antiguos de las dos primeras letras, аз (А) y бу́ки (Б).",
+    "source": "redactado"
+   },
+   {
+    "es": "cartilla",
+    "definitionEs": "Libro con el que los chicos aprenden a leer y escribir.",
+    "source": "redactado"
+   },
+   {
+    "es": "abecé, lo básico",
+    "definitionEs": "Los conocimientos elementales de una materia: а́збука вожде́ния, «lo básico de manejar».",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "азбука",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "азбук",
+    "Suffix1": "а",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada el 14/10/2026 (es el nombre de la app) — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "nombreAppEnrichment": true
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "regular",
+  "temas": [
+   "estudios"
   ]
  }
 ];

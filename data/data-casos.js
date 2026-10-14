@@ -1,6 +1,8 @@
 /* ============================================================
    DATA-CASOS.JS — Declinaciones de las palabras del léxico AZBUKA
    ------------------------------------------------------------
+   Actualizado el 14/10/2026: а́збука (CMR-06153), regular como кни́га,
+   acento fijo en la raíz (Zalizniak 1a).
    Actualizado el 12/10/2026 (Unidad 12): comparativo (comp) de 18 adjetivos más
    (ле́гче, про́ще, сложне́е, ти́ше, гро́мче, бли́же, да́льше, умне́е, сильне́е, слабе́е,
    трудне́е, важне́е, вы́ше, ни́же, длинне́е, коро́че, ста́рше, моло́же), según pymorphy3 y
@@ -8,7 +10,7 @@
    Actualizado el 11/10/2026 (Unidad 8): у́тро, genitivo y dativo del
    singular corregidos a утра́ y утру́ (до утра́, в семь часо́в утра́),
    según Zalizniak.
-   Total: 3776 palabras (todas las entradas de data-lexicon.js con
+   Total: 3777 palabras (todas las entradas de data-lexicon.js con
    categoría sustantivo, adjetivo, pronombre, determinante o numeral).
    Generado el 23/09/2026. Ordenado por ID.
    Actualizado el 24/09/2026: лист y ко́рпус separados en dos entradas
@@ -13688,7 +13690,10 @@ const CASOS = {
    f:["нея́сная", "нея́сной", "нея́сной", "нея́сную", "нея́сной", "нея́сной"],
    n:["нея́сное", "нея́сного", "нея́сному", "нея́сное", "нея́сным", "нея́сном"],
    pl:["нея́сные", "нея́сных", "нея́сным", ["нея́сные","нея́сных"], "нея́сными", "нея́сных"],
-   corta:{ m:"нея́сен", f:"неясна́", n:"нея́сно", pl:"нея́сны" } }
+   corta:{ m:"нея́сен", f:"неясна́", n:"нея́сно", pl:"нея́сны" } },
+ "CMR-06153": { ru:"а́збука", tipo:"sustantivo",
+   sg:["а́збука", "а́збуки", "а́збуке", "а́збуку", "а́збукой", "а́збуке"],
+   pl:["а́збуки", "а́збук", "а́збукам", "а́збуки", "а́збуками", "а́збуках"] }
 };
 
 /* Devuelve la declinación de una palabra por ID, o null. */
