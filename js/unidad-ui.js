@@ -65,8 +65,8 @@
     .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
     .ubtn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:13px 16px;border-radius:10px;border:1px solid ${c.gold};background:${c.gold};color:${c.bg};font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:18px;}
     .ubtn.sec{background:${c.bg3};border-color:${c.border};color:${c.text};}
-    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:fadeIn .25s ease;}
-    .sheet-in{max-width:960px;margin:0 auto;padding:var(--az-top,6vh) 3vw 4vh;}
+    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};box-shadow:0 0 0 100vmax ${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:fadeIn .25s ease;}
+    .sheet-in{max-width:960px;margin:0 auto;padding:var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px));}
     .sheet-x{position:fixed;top:var(--az-top,6vh);right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
     .glyph{font-size:64px;font-weight:800;color:${c.gold};line-height:1;}
     .cursiva{font-family:'CyrCursive',cursive;font-size:44px;color:${c.gold};opacity:.7;margin-top:6px;}
@@ -494,6 +494,8 @@
         h("path", { d: MAPA.fondo, fill: c.bg3, stroke: c.bg2, "stroke-width": w / 400 }),
         /* Solo se marcan los países que tienen una ciudad (05/10/2026); los demás, como el fondo */
         Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: conCiudad.has(k) ? c.gold + "33" : c.bg3, stroke: c.bg2, "stroke-width": w / 400, style: { pointerEvents: "none" } })),
+        /* Países que no se enseñan pero tienen una ciudad, como Chequia (14/10/2026) */
+        Object.keys(MAPA.contornos || {}).filter(k => conCiudad.has(k)).map(k => h("path", { key: "c-" + k, d: MAPA.contornos[k].d, fill: c.gold + "33", stroke: c.bg2, "stroke-width": w / 400, style: { pointerEvents: "none" } })),
         (MAPA.vistas[vista].ciudades || Object.keys(MAPA.ciudades)).map(k => {
           const p = MAPA.ciudades[k], on = k === sel, e = lexComerById(p.lex);
           return h("g", { key: k, onClick: () => tocar(k), style: { cursor: "pointer" } },

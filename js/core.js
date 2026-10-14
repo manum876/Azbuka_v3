@@ -348,7 +348,8 @@ function azAmbosGeneros(lista) {
    genero ("m" / "f"): si el teléfono le deja a la web una voz rusa de
    hombre y otra de mujer, cada personaje usa la suya; además se cambia
    siempre el tono, porque el iPhone solo expone la voz predeterminada
-   de cada idioma (hombre 0,7 / mujer 1,25; con voz propia, 0,9 / 1,05).
+   de cada idioma (con voz propia, 0,9 / 1,05; sin voz de hombre, desde el
+   14/10/2026: hombre 0,5 y más lento, mujer 1,35 o 1,05 y un poco más rápida).
      azHablarRu(texto, genero?)
      azHablarSecuencia([{ texto, genero, rate? }], alEmpezarLinea?, alTerminar?)
        rate (06/10/2026, U13): velocidad de esa línea (0,7 lento … 0,95); por defecto 0,85.
@@ -369,8 +370,12 @@ function azFraseVoz(texto, genero, rate) {
   u.lang = "ru-RU"; u.rate = rate || 0.85;
   const v = azVozPara(genero);
   if (v) { u.voice = v; u.lang = v.lang; }
-  if (genero === "m") u.pitch = v ? 0.9 : 0.7;
-  else if (genero === "f") u.pitch = v ? 1.05 : 1.25;
+  /* 14/10/2026 (prueba de Manu: en el iPhone las dos voces no se distinguían):
+     sin voz propia de hombre, además del tono más marcado cambia la velocidad,
+     que el iPhone respeta siempre (hombre más lento, mujer un poco más rápida). */
+  const propia = v && (genero !== "m" || AZ_VOZ_M.test(v.name));
+  if (genero === "m") { u.pitch = propia ? 0.9 : 0.5; if (!propia) u.rate = u.rate * 0.88; }
+  else if (genero === "f") { u.pitch = propia ? 1.05 : 1.35; if (!azVozPara("m")) u.rate = Math.min(1, u.rate * 1.06); }
   return u;
 }
 /* azVozTurno (03/10/2026): cada audio nuevo o cada ■ cambia el turno; una

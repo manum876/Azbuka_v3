@@ -251,14 +251,16 @@ function App() {
             React.createElement("div", { className: "det-name", style: { color: c.text } }, selected.name),
             React.createElement("div", { className: "det-translit", style: { color: c.textSub } }, "Transliteración: /" + selected.translit + "/"),
             React.createElement("div", { className: "det-pron", style: { color: c.textMuted } }, azFmt(selected.pronunciation)),
+            /* Botones en una fila con espacio (14/10/2026): si no entran, bajan alineados */
+            React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } },
             React.createElement("button", {
               className: "btn", onClick: () => speakRu(selected.lower),
               style: { background: c.gold, color: "#0F0F14", fontWeight: 700, fontSize: 12.5, padding: "9px 16px", borderRadius: 10 }
             }, "▶ Escuchar letra"),
             React.createElement("button", {
               className: "btn", onClick: () => { setManoLetra(selected.upper); setPage("mano"); window.scrollTo(0, 0); },
-              style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontWeight: 700, fontSize: 12.5, padding: "9px 16px", borderRadius: 10, marginLeft: 8 }
-            }, "✍️ Escribirla")
+              style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontWeight: 700, fontSize: 12.5, padding: "9px 16px", borderRadius: 10 }
+            }, "✍️ Escribirla"))
           )
         ),
         React.createElement("div", { className: "status-row", style: { borderColor: c.border } },

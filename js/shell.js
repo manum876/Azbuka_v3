@@ -188,8 +188,15 @@ function AzShell(props) {
     /* Fondo de html/body/#root sigue el tema — esto sí es dinámico */
     /* --az-top: zona segura superior compartida (cabecera, drawer y
        hojas a pantalla completa). Nunca menos de 6vh, y siempre por
-       debajo de la franja del sistema + el fade de iOS 26 en iPhone. */
-    React.createElement("style", null, `:root { --az-top: max(6vh, calc(env(safe-area-inset-top, 0px) + 12px)); } html, body, #root { background: ${c.bg}; }`),
+       debajo de la franja del sistema + el fade de iOS 26 en iPhone.
+       14/10/2026 (prueba de Manu en el iPhone): en Safari de iOS 26 la
+       zona segura puede valer 0 aunque la barra de estado (liquid glass)
+       tape la página; en pantallas táctiles el mínimo es 68px.
+       --az-bottom: margen inferior para que el último botón de una hoja
+       quede por encima de la barra de Safari y del indicador de inicio. */
+    React.createElement("style", null, `:root { --az-top: max(6vh, calc(env(safe-area-inset-top, 0px) + 12px)); --az-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); }
+      @media (pointer: coarse) { :root { --az-top: max(6vh, calc(env(safe-area-inset-top, 0px) + 12px), 68px); --az-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 24px), 88px); } }
+      html, body, #root { background: ${c.bg}; }`),
     React.createElement(AzCaptura, { c }),
 
     /* ── OVERLAY (el contenido central queda detrás, sin ajustarse) ── */
