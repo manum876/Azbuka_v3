@@ -286,5 +286,63 @@
    "v5_5_ru",
    "v5_5_ru"
   ]
+ ],
+ "formatos": [
+  {
+   "id": "f-kniga",
+   "voz": "baya",
+   "ru": "кни́га",
+   "es": "libro",
+   "donde": "Diccionario"
+  },
+  {
+   "id": "f-zamok",
+   "voz": "baya",
+   "ru": "замо́к",
+   "es": "cerradura",
+   "donde": "Diccionario"
+  },
+  {
+   "id": "f-knige",
+   "voz": "baya",
+   "ru": "о кни́ге",
+   "es": "sobre el libro",
+   "donde": "Casos"
+  },
+  {
+   "id": "f-chitaesh",
+   "voz": "baya",
+   "ru": "ты чита́ешь",
+   "es": "tú lees",
+   "donde": "Verbos"
+  },
+  {
+   "id": "f-frase",
+   "voz": "baya",
+   "ru": "Где мой телефо́н? Он на столе́.",
+   "es": "¿Dónde está mi teléfono? Está en la mesa.",
+   "donde": "Unidades"
+  },
+  {
+   "id": "f-olga",
+   "voz": "xenia",
+   "ru": "Здра́вствуйте! Как вас зову́т?",
+   "es": "¡Hola! ¿Cómo se llama?",
+   "donde": "Olga Petrovna"
+  },
+  {
+   "id": "f-dima",
+   "voz": "aidar",
+   "ru": "Приве́т! Рад познако́миться.",
+   "es": "¡Hola! Encantado.",
+   "donde": "Dima"
+  },
+  {
+   "id": "f-lucas",
+   "voz": "eugene",
+   "ru": "Да, немно́го. Я учу́ ру́сский.",
+   "es": "Sí, un poco. Estudio ruso.",
+   "donde": "Lucas"
+  }
  ]
 }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Prueba de formatos de audio</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="stylesheet" href="assets/core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/preact.js"></script>
+<script src="js/core.js"></script>
+<script src="assets/supabase.js"></script>
+<script src="js/cuenta.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/unidad-ui.js"></script>
+<script>
+/* ============================================================
+   VOCES-FORMATOS.HTML — Prueba a ciegas de formatos de audio (15/10/2026)
+   Las mismas frases (Silero v5_5_ru, las voces elegidas) en cuatro formatos,
+   con letras A–D para no saber cuál es cuál hasta tocar «Revelar».
+   Audios: audio/prueba/formatos/<formato>/<id>.<ext> (GitHub Actions, «Voces de prueba»).
+   No está en el menú ni en AZ_PRECACHE: se abre con el enlace.
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+const VER = "4";
+/* Orden a ciegas (fijo): la letra no dice el formato */
+const LETRAS = [["A", "aac-48", ".m4a", "AAC 48 kbps"], ["B", "mp3-96", ".mp3", "MP3 96 kbps (el actual)"], ["C", "aac-64", ".m4a", "AAC 64 kbps"], ["D", "mp3-64", ".mp3", "MP3 64 kbps"]];
+const NOTAS = [["igual", "Suena bien"], ["peor", "Se nota peor"]];
+const blobs = {}, pesos = {};
+const reproductor = new Audio();
+reproductor.preload = "auto";
+function url(fmt, ext, id) { return "audio/prueba/formatos/" + fmt + "/" + id + ext + "?v=" + VER; }
+function precargar(items) {
+  items.forEach(it => LETRAS.forEach(([L, fmt, ext]) => {
+    const k = fmt + "/" + it.id;
+    if (blobs[k]) return;
+    blobs[k] = fetch(url(fmt, ext, it.id)).then(r => r.ok ? r.blob() : null)
+      .then(b => { if (!b) return null; pesos[k] = b.size; return URL.createObjectURL(b); }).catch(() => null);
+  }));
+}
+function puede(tipo) { try { const r = reproductor.canPlayType(tipo); return r === "probably" || r === "maybe"; } catch (e) { return false; } }
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [datos, setDatos] = useState(null);
+  const [sonando, setSonando] = useState(null);
+  const [falta, setFalta] = useState(false);
+  const [revelar, setRevelar] = useState(false);
+  const [notas, setNotas] = useState(() => { try { return JSON.parse(localStorage.getItem("az_voces_formatos") || "{}"); } catch (e) { return {}; } });
+  const [, refrescar] = useState(0);
+  const [copiado, setCopiado] = useState(false);
+  useEffect(() => { (async () => setDarkMode((await azGet("az_theme", "dark")) !== "light"))(); }, []);
+  useEffect(() => { fetch("herramientas/voces/prueba.json?v=" + VER).then(r => r.json()).then(d => { setDatos(d); precargar(d.formatos || []); setTimeout(() => refrescar(x => x + 1), 2500); }).catch(() => setDatos({ error: true })); }, []);
+  const c = azColors(darkMode);
+  const S = (t) => h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] }, h("div", { className: "u-text", style: { paddingTop: 18 } }, t));
+  if (!datos) return S("Cargando…");
+  if (datos.error || !datos.formatos) return S("No se pudo cargar la lista de la prueba.");
+
+  const tocar = async (it, L, fmt) => {
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    try { reproductor.pause(); } catch (e) {}
+    const k = fmt + "/" + it.id;
+    if (!blobs[k]) precargar([it]);
+    const src = await blobs[k];
+    if (!src) { setFalta(true); return; }
+    setSonando(k); reproductor.onended = () => setSonando(s => s === k ? null : s);
+    reproductor.src = src;
+    reproductor.play().catch(() => setFalta(true));
+    refrescar(x => x + 1);
+  };
+  const marcar = (L, n) => { const x = Object.assign({}, notas, { [L]: notas[L] === n ? null : n }); setNotas(x); try { localStorage.setItem("az_voces_formatos", JSON.stringify(x)); } catch (e) {} };
+  const chip = (on, txt, fn, key) => h("button", { key, className: "btn", onClick: fn, style: Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
+    on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, txt);
+  const lbl = t => h("div", { className: "u-sec" }, t);
+  const kb = (fmt) => { const l = datos.formatos.map(it => pesos[fmt + "/" + it.id]).filter(Boolean); return l.length ? Math.round(l.reduce((a, b) => a + b, 0) / 1024) + " KB" : "—"; };
+  const nombre = L => revelar ? L + " · " + LETRAS.find(x => x[0] === L)[3] : L;
+  const resumen = "Formatos: " + LETRAS.map(([L]) => nombre(L) + " → " + (notas[L] ? NOTAS.find(n => n[0] === notas[L])[1].toLowerCase() : "sin marcar")).join(" · ")
+    + " · Teléfono: MP3 " + (puede("audio/mpeg") ? "sí" : "no") + ", AAC " + (puede("audio/mp4") ? "sí" : "no");
+
+  return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
+    h(AzEstilosUnidad, { c }),
+    h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18, paddingBottom: 24 } },
+      h("div", { className: "u-kicker" }, "Maqueta"),
+      h("h1", { className: "u-title" }, "Prueba de formatos"),
+      h("div", { className: "u-text", style: { marginTop: 8 } }, "Cada frase está en cuatro versiones, A, B, C y D: la misma voz con distinto formato y calidad. Escúchalas con auriculares y también con el altavoz, y marca cómo suena cada letra. Recién al final toca «Revelar»."),
+      h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12, fontSize: 13.5, lineHeight: 1.5, color: c.textSub } },
+        "Este teléfono puede reproducir: MP3 ", h("b", null, puede("audio/mpeg") ? "✓" : "✗"), " · AAC ", h("b", null, puede("audio/mp4") ? "✓" : "✗"),
+        ". Si tienes un Android a mano, abre esta página también ahí."),
+      falta && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12, fontSize: 13.5, lineHeight: 1.5, color: c.textSub, borderColor: c.gold } },
+        "Todavía no están los audios. En GitHub: Actions → «Voces de prueba» → Run workflow, y espera unos minutos."),
+
+      lbl("1 · Escucha"),
+      datos.formatos.map(it => h("div", { key: it.id, className: "u-card", style: { padding: "12px 16px", marginTop: 8 } },
+        h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold } }, it.donde),
+        h("div", { lang: "ru", style: { fontSize: 17, fontWeight: 700, color: c.text, marginTop: 2 } }, it.ru),
+        h("div", { style: { fontSize: 13.5, color: c.textMuted, marginTop: 2, marginBottom: 10 } }, it.es),
+        h("div", { style: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8 } },
+          LETRAS.map(([L, fmt]) => { const on = sonando === fmt + "/" + it.id;
+            return h("button", { key: L, className: "btn", onClick: () => tocar(it, L, fmt), "aria-label": "Escuchar la versión " + L,
+              style: { minHeight: 44, borderRadius: 12, fontSize: 15, fontWeight: 800, cursor: "pointer", fontFamily: "inherit",
+                background: on ? c.gold + "22" : c.bg2, border: `1px solid ${on ? c.gold : c.border}`, color: on ? c.gold : c.text } }, "▶ " + L); })))),
+
+      lbl("2 · ¿Cómo suena cada letra?"),
+      LETRAS.map(([L]) => h("div", { key: L, style: { display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 10 } },
+        h("div", { style: { width: 28, fontSize: 16, fontWeight: 800, color: c.text } }, L),
+        NOTAS.map(([n, t]) => chip(notas[L] === n, t, () => marcar(L, n), n)))),
+
+      lbl("3 · Revelar"),
+      h("button", { className: "ubtn sec", onClick: () => { setRevelar(r => !r); refrescar(x => x + 1); } }, revelar ? "Ocultar los formatos" : "Revelar qué es cada letra"),
+      revelar && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 10 } },
+        LETRAS.map(([L, fmt, ext, txt]) => h("div", { key: L, style: { display: "flex", gap: 10, padding: "5px 0", fontSize: 14, color: c.text } },
+          h("div", { style: { width: 28, fontWeight: 800 } }, L), h("div", { style: { flex: 1 } }, txt), h("div", { style: { color: c.textMuted } }, kb(fmt)))),
+        h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 6, lineHeight: 1.5 } }, "El peso es el total de las ocho frases en cada formato.")),
+
+      lbl("Tu resultado"),
+      h("div", { className: "u-card", style: { padding: "12px 16px" } },
+        h("div", { style: { fontSize: 14, lineHeight: 1.6, color: c.text } }, resumen),
+        h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => { try { navigator.clipboard.writeText(resumen); setCopiado(true); setTimeout(() => setCopiado(false), 2000); } catch (e) {} } }, copiado ? "✓ Copiado" : "Copiar para pasárselo a Claude")),
+      h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 14, lineHeight: 1.5 } }, "Voces: Silero TTS (silero-models, CC BY-NC 4.0), uso no comercial.")));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById("root"));
+</script>
+</body>
+</html>
