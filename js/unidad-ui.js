@@ -393,7 +393,7 @@
     const [tr, setTr] = useState(azTranslitVisible());
     const [es, setEs] = useState(true);
     const [mias, setMias] = useState({});            /* línea → grabación */
-    const gen = l => personaje(l.p).genero;
+    const gen = l => l.p;   /* quién habla: la clave del personaje (core.js elige su voz, 15/10/2026) */
     const href = "dialogos.html?id=" + d.id;
     /* Todas mis grabaciones en orden; si falta una línea, suena el modelo */
     const escucharMias = () => {

@@ -15,6 +15,10 @@
    · Las páginas con parámetros (ficha.html?id=…) se guardan una sola
      vez, sin el parámetro.
 
+   · Las voces generadas (…/Azbuka_voces/, 15/10/2026) no pasan por acá:
+     core.js las baja y las guarda en la caché «az-voces», que no se borra al
+     cambiar AZ_CACHE.
+
    Carpetas (desde el 02/10/2026): las páginas en la raíz, el código
    compartido en js/, los datos en data/ y fuentes, íconos y librerías
    en assets/.
@@ -63,6 +67,8 @@ self.addEventListener("fetch", e => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
+  /* Las voces generadas (repo Azbuka_voces) las guarda core.js en su propia caché, «az-voces» (15/10/2026) */
+  if (url.pathname.indexOf("/Azbuka_voces/") >= 0) return;
   e.respondWith((async () => {
     const cache = await caches.open(AZ_CACHE);
     const clave = azClave(req);

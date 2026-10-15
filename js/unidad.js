@@ -315,7 +315,7 @@
     const [r, setR] = useState(null);
     const [peor, setPeor] = useState(AZ_BIEN);
     const fin = paso >= ch.pasos.length;
-    useEffect(() => { if (!fin) setTimeout(() => azHablarRu(ch.pasos[paso].bot, quien.genero), 300); }, [paso]);
+    useEffect(() => { if (!fin) setTimeout(() => azHablarRu(ch.pasos[paso].bot, (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[ch.p]) ? ch.p : quien.genero), 300); }, [paso]);
     const enviar = () => {
       if (!txt.trim() || fin) return;
       const st = ch.pasos[paso];

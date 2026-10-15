@@ -272,20 +272,9 @@ function sinEmoji(s) { return String(s || "").replace(/[\u{1F000}-\u{1FAFF}\u{26
 function hablar(lineas) {
   const items = lineas.map(l => ({ texto: sinEmoji(l.ru), lento: l.lento })).filter(i => /[а-яё]/i.test(i.texto));
   if (!items.length) return;
-  if (!items.some(i => i.lento)) { azHablarSecuencia(items.map(i => ({ texto: i.texto, genero: PJ.genero }))); return; }
-  /* Repetición lenta: misma cadena que azHablarSecuencia, a 0,6. */
-  try {
-    window.speechSynthesis.cancel();
-    let k = 0;
-    const sig = () => {
-      if (k >= items.length) return;
-      const it = items[k++]; const u = azFraseVoz(it.texto, PJ.genero);
-      if (it.lento) u.rate = 0.6;
-      u.onend = () => setTimeout(sig, 250); u.onerror = () => setTimeout(sig, 250);
-      window.speechSynthesis.speak(u);
-    };
-    setTimeout(sig, 60);
-  } catch (e) {}
+  /* 15/10/2026: con la voz generada de Masha (o la del teléfono si falta); la repetición lenta, a 0,6 */
+  const quien = (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[C.personaje]) ? C.personaje : "masha";
+  azHablarSecuencia(items.map(i => ({ texto: i.texto, genero: quien, rate: i.lento ? 0.6 : undefined })));
 }
 
 /* ── Estilos ── */

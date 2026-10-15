@@ -378,36 +378,150 @@ function azFraseVoz(texto, genero, rate) {
   else if (genero === "f") { u.pitch = propia ? 1.05 : 1.35; if (!azVozPara("m")) u.rate = Math.min(1, u.rate * 1.06); }
   return u;
 }
+/* ── VOCES GENERADAS (Silero, 15/10/2026) ──────────────────────
+   Los textos rusos tienen un audio hecho de antemano (Silero v5_5_ru, licencia
+   CC BY-NC 4.0: uso no comercial) en el repo aparte Azbuka_voces, publicado en
+   la misma dirección: …/Azbuka_voces/v1/<voz>/<clave>.<ext>.
+   · v1/indice.json dice qué audios existen ({ v, ext, voces: { baya: "clave clave …" } }).
+     Si un texto no tiene audio (o no hay índice), suena la voz del teléfono, como antes.
+   · La clave es azVozClave(texto): el texto sin llaves { }, con espacios normales,
+     pasado por cyrb53. La usa igual herramientas/voces/inventario.js: no cambiarla
+     sin regenerar todo.
+   · Quién habla: el segundo argumento de azHablarRu / el «genero» de cada línea de
+     azHablarSecuencia puede ser la clave de un personaje (masha, olga…), "m" / "f"
+     (alguien sin voz propia) o nada (la narración de las unidades).
+     AZ_VOCES_PERSONAJE lo traduce a una voz de Silero; inventario.js lee esta misma tabla.
+   · Cada audio se baja la primera vez y queda en la caché «az-voces» (sin conexión).
+     Al abrir una página, cuando ya cargó todo, se bajan en segundo plano los audios de
+     esa página (v1/paginas/<página>.json), de a uno y con prioridad baja; se corta al salir.
+   Decidido por Manu (15/10/2026): narración baya, Masha baya, Olga xenia, Lucas eugene,
+   Dima aidar; formato AAC 48 kbps. Los personajes secundarios: mujeres kseniya, hombres aidar. */
+const AZ_VOCES_PERSONAJE = { "narra": "baya", "masha": "baya", "olga": "xenia", "lucas": "eugene", "dima": "aidar", "f": "kseniya", "m": "aidar" };
+const AZ_VOCES_BASE = (() => { try { return new URL("../Azbuka_voces/v1/", location.href).href; } catch (e) { return "../Azbuka_voces/v1/"; } })();
+const AZ_VOCES_CACHE = "az-voces";
+function azVozTexto(t) { return String(t == null ? "" : t).replace(/[{}]/g, "").normalize("NFC").replace(/\s+/g, " ").trim(); }
+function azVozClave(t) {
+  const s = azVozTexto(t);
+  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+  for (let i = 0; i < s.length; i++) { const ch = s.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+}
+/* quien → { voz (Silero), genero (para la voz del teléfono) } */
+function azVozDe(quien) {
+  const pj = (typeof DLG_PERSONAJES !== "undefined" && quien && DLG_PERSONAJES[quien]) || null;
+  const genero = quien === "m" || quien === "f" ? quien : (pj ? pj.genero : undefined);
+  const voz = AZ_VOCES_PERSONAJE[quien || "narra"] || (genero ? AZ_VOCES_PERSONAJE[genero] : AZ_VOCES_PERSONAJE.narra);
+  return { voz, genero };
+}
+let azVocesIndice = null;            /* { ext, voces: { baya: Set } } cuando cargó */
+const azVocesListo = (async () => {
+  try {
+    const url = AZ_VOCES_BASE + "indice.json";
+    let r = null;
+    try { r = await fetch(url, { cache: "no-cache" }); if (r && r.ok && typeof caches !== "undefined") { const c = await caches.open(AZ_VOCES_CACHE); c.put(url, r.clone()); } } catch (e) { r = null; }
+    if ((!r || !r.ok) && typeof caches !== "undefined") { const c = await caches.open(AZ_VOCES_CACHE); r = await c.match(url); }
+    if (!r || !r.ok) return null;
+    const d = await r.json(), voces = {};
+    Object.keys(d.voces || {}).forEach(v => { voces[v] = new Set(String(d.voces[v]).split(" ").filter(Boolean)); });
+    azVocesIndice = { ext: d.ext || ".m4a", voces };
+    return azVocesIndice;
+  } catch (e) { return null; }
+})();
+/* URL del audio de este texto con esta voz, o null si no hay */
+function azVozUrl(texto, quien) {
+  if (!azVocesIndice) return null;
+  const { voz } = azVozDe(quien), k = azVozClave(texto), s = azVocesIndice.voces[voz];
+  return s && s.has(k) ? AZ_VOCES_BASE + voz + "/" + k + azVocesIndice.ext : null;
+}
+/* El audio: de la caché si ya se bajó; si no, de la red (y queda guardado). Devuelve un blob: URL. */
+const azVozBlobs = new Map();
+function azVozBlob(url) {
+  if (azVozBlobs.has(url)) return azVozBlobs.get(url);
+  const p = (async () => {
+    let r = null, c = null;
+    try { if (typeof caches !== "undefined") { c = await caches.open(AZ_VOCES_CACHE); r = await c.match(url); } } catch (e) {}
+    if (!r) { r = await fetch(url); if (!r.ok) throw new Error("audio " + r.status); if (c) { try { await c.put(url, r.clone()); } catch (e) {} } }
+    return URL.createObjectURL(await r.blob());
+  })();
+  p.catch(() => azVozBlobs.delete(url));
+  azVozBlobs.set(url, p);
+  if (azVozBlobs.size > 80) { const k0 = azVozBlobs.keys().next().value; const v0 = azVozBlobs.get(k0); azVozBlobs.delete(k0); v0.then(u => URL.revokeObjectURL(u)).catch(() => {}); }
+  return p;
+}
+/* Un solo reproductor para toda la página. El iPhone solo deja sonar audio que empezó con un toque:
+   el primer toque en la página lo «despierta» con un silencio, y después ya suena siempre. */
+const azVozAudio = typeof Audio !== "undefined" ? new Audio() : null;
+if (azVozAudio) {
+  azVozAudio.preload = "auto";
+  const despertar = () => {
+    document.removeEventListener("touchend", despertar, true); document.removeEventListener("click", despertar, true);
+    if (azVozAudio.src) return;
+    try { azVozAudio.src = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA="; const p = azVozAudio.play(); if (p) p.catch(() => {}); } catch (e) {}
+  };
+  document.addEventListener("touchend", despertar, true); document.addEventListener("click", despertar, true);
+}
+/* Toca un texto: el audio generado si hay; si no (o si falla), la voz del teléfono.
+   alEmpezar / alTerminar opcionales. Devuelve nada; respeta el turno (■ u otro audio lo cortan). */
+function azVozDecir(turno, texto, quien, rate, alEmpezar, alTerminar) {
+  const { genero } = azVozDe(quien);
+  const telefono = () => {
+    if (turno !== azVozTurno) return;
+    try {
+      if (!("speechSynthesis" in window)) { if (alTerminar) alTerminar(); return; }
+      const u = azFraseVoz(texto, genero, rate);
+      u.onstart = () => { if (alEmpezar) alEmpezar(); };
+      u.onend = () => { if (alTerminar) alTerminar(); };
+      u.onerror = () => { if (alTerminar) alTerminar(); };
+      window.speechSynthesis.speak(u);
+    } catch (e) { if (alTerminar) alTerminar(); }
+  };
+  const url = azVozUrl(texto, quien);
+  if (!url || !azVozAudio) { telefono(); return; }
+  azVozBlob(url).then(src => {
+    if (turno !== azVozTurno) return;
+    const a = azVozAudio;
+    a.onended = () => { if (turno === azVozTurno && alTerminar) alTerminar(); };
+    a.onerror = null;
+    a.src = src;
+    /* velocidad: la voz del teléfono va a 0,85 como «normal»; el audio generado, a 1 */
+    a.playbackRate = Math.max(0.5, Math.min(1.5, (rate || 0.85) / 0.85));
+    a.preservesPitch = true; a.webkitPreservesPitch = true;
+    const p = a.play();
+    if (alEmpezar) alEmpezar();
+    if (p) p.catch(() => telefono());
+  }).catch(() => telefono());
+}
+function azVozParar() { try { if (azVozAudio) { azVozAudio.onended = null; azVozAudio.pause(); } } catch (e) {} }
+
 /* azVozTurno (03/10/2026): cada audio nuevo o cada ■ cambia el turno; una
    secuencia que quedó de un turno anterior ya no sigue con la línea siguiente. */
 let azVozTurno = 0;
 function azHablarRu(texto, genero) {
   try {
-    if (!texto || !("speechSynthesis" in window)) return;
-    azVozTurno++;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.resume();
-    window.speechSynthesis.speak(azFraseVoz(texto, genero));
+    if (!texto) return;
+    const turno = ++azVozTurno;
+    azVozParar();
+    if ("speechSynthesis" in window) { window.speechSynthesis.cancel(); window.speechSynthesis.resume(); }
+    azVozDecir(turno, texto, genero);
   } catch (e) {}
 }
 function azHablarSecuencia(items, alEmpezarLinea, alTerminar) {
   /* Encadenadas: cada línea empieza cuando termina la anterior. En iPhone,
      encolar varias de golpe hace que solo suene la primera. */
   try {
-    if (!("speechSynthesis" in window)) return;
     const turno = ++azVozTurno;
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.resume();
+    azVozParar();
+    if ("speechSynthesis" in window) { window.speechSynthesis.cancel(); window.speechSynthesis.resume(); }
     let i = 0;
     const siguiente = () => {
       if (turno !== azVozTurno) return;        /* se tocó ■ u otro audio: no seguir */
       if (i >= items.length) { if (alTerminar) alTerminar(); return; }
       const k = i++;
-      const u = azFraseVoz(items[k].texto, items[k].genero, items[k].rate);
-      u.onstart = () => { if (alEmpezarLinea) alEmpezarLinea(k); };
-      u.onend = () => setTimeout(siguiente, 250);
-      u.onerror = () => setTimeout(siguiente, 250);
-      window.speechSynthesis.speak(u);
+      azVozDecir(turno, items[k].texto, items[k].genero, items[k].rate,
+        () => { if (alEmpezarLinea) alEmpezarLinea(k); },
+        () => setTimeout(siguiente, 250));
     };
     setTimeout(siguiente, 60);
   } catch (e) {}
@@ -416,12 +530,38 @@ function azHablarSecuencia(items, alEmpezarLinea, alTerminar) {
    veces no corta con cancel() solo, primero pausa; después deja la voz lista. */
 function azCallar() {
   azVozTurno++;
+  azVozParar();
   try {
     const s = window.speechSynthesis;
     s.pause(); s.cancel();
     setTimeout(() => { try { s.cancel(); s.resume(); } catch (e) {} }, 60);
   } catch (e) {}
 }
+/* Segundo plano: cuando la página terminó de cargar, se bajan sus audios (de a uno). */
+(function azVocesSegundoPlano() {
+  if (typeof window === "undefined" || typeof caches === "undefined") return;
+  let corte = false;
+  window.addEventListener("pagehide", () => { corte = true; });
+  const empezar = async () => {
+    try {
+      if (navigator.connection && navigator.connection.saveData) return;
+      const ind = await azVocesListo; if (!ind || corte) return;
+      const pag = (location.pathname.split("/").pop() || "index.html").replace(/\.html$/, "") || "index";
+      const r = await fetch(AZ_VOCES_BASE + "paginas/" + pag + ".json").catch(() => null);
+      if (!r || !r.ok) return;
+      const lista = await r.json();
+      const c = await caches.open(AZ_VOCES_CACHE);
+      for (const vk of lista) {
+        if (corte) return;
+        const url = AZ_VOCES_BASE + vk + ind.ext;
+        if (await c.match(url)) continue;
+        try { const x = await fetch(url, { priority: "low" }); if (x.ok) await c.put(url, x); } catch (e) { return; }
+      }
+    } catch (e) {}
+  };
+  const luego = () => setTimeout(() => (window.requestIdleCallback ? requestIdleCallback(empezar, { timeout: 4000 }) : empezar()), 3000);
+  if (document.readyState === "complete") luego(); else window.addEventListener("load", luego);
+})();
 
 /* ── CUADERNO (26/09/2026) ────────────────────────────────────
    Notas personales, guardadas en az_cuaderno:

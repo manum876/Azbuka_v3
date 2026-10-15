@@ -377,7 +377,7 @@ function Linea({ d, l, idx, registro, showTr, showEs, oculta, onRevelar, abierta
         showEs && h("div", { className: "ex-es" }, t.es)
       ),
       h("div", { style: { display: "flex", flexDirection: "column", gap: 6 } },
-        h("button", { className: "play", onClick: () => speakRu(t.ru, p.genero), "aria-label": "Escuchar" }, "▶"),
+        h("button", { className: "play", onClick: () => speakRu(t.ru, p.clave), "aria-label": "Escuchar" }, "▶"),
         h("button", { className: "play", onClick: () => azGuardarEnCuaderno(String(t.ru).replace(/[{}]/g, "") + "\n" + t.es, { titulo: "Diálogos · " + d.titulo, href: "dialogos.html?id=" + d.id }), "aria-label": "Guardar en el cuaderno" }, "＋"))
     ),
     (t.obs || cul) && h("div", { className: "ex-why" },
@@ -426,7 +426,7 @@ function FichaDialogo({ id, c, onFrase, onCultura }) {
   const tituloRu = d.tituloRu;
   const todas = () => {
     if (sonando !== null) { stopSpeech(); setSonando(null); return; }
-    const items = d.lineas.map(l => ({ text: lineaEn(l, reg).ru, genero: personajeDe(d, l.p, reg).genero }));
+    const items = d.lineas.map(l => ({ text: lineaEn(l, reg).ru, genero: personajeDe(d, l.p, reg).clave }));
     setSonando(0);
     speakSeq(items, i => setSonando(i), () => setSonando(null));
   };

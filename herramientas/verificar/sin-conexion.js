@@ -10,7 +10,7 @@ const { RAIZ, BASE, servir, navegador } = require('./comun');
   for (const f of pre) if (f !== './' && !fs.existsSync(path.join(RAIZ, f))) problemas.push('AZ_PRECACHE nombra un archivo que no existe: ' + f);
   const refs = new Set();
   for (const h of fs.readdirSync(RAIZ).filter(f => f.endsWith('.html'))) {
-    if (h === 'charla.html') continue; // maqueta, fuera de la app
+    if (h === 'charla.html' || /^voces-/.test(h)) continue; // maquetas y pruebas de voces, fuera de la app
     const s = fs.readFileSync(path.join(RAIZ, h), 'utf8');
     for (const m of s.matchAll(/(?:src|href)="([^"#?:]+\.(?:js|css|png|woff2|ttf|webmanifest))"/g)) refs.add(m[1]);
     refs.add(h);
