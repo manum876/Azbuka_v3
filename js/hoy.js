@@ -307,6 +307,7 @@ function AzHoy({ c, unidad, onCerrar }) {
       h("circle", { cx, cy: cx, r: 5, fill: c.gold }));
   };
   const colRes = res ? { bien: VERDE, casi: "#C9B369", mal: "#D9776F" }[res.nivel] : null;
+  const soloEmoji = !!(d && d.emoji && !d.grande && !d.sub && !d.audio && !d.reloj);
   return h("div", { className: "az-hoy-velo", ref: azRefCapa(capa), onClick: e => { if (e.target === e.currentTarget) onCerrar(); } },
     h("style", null, `
       .az-hoy-velo{position:fixed;inset:0;z-index:520;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:6vh 16px 4vh;animation:azHoyIn .2s ease both;}
@@ -337,13 +338,18 @@ function AzHoy({ c, unidad, onCerrar }) {
       d === null && h("div", { className: "az-hoy-c", style: { color: c.textMuted } }, "Cargando…"),
       d === false && h("div", { className: "az-hoy-c" }, "Todavía no hay desafío para esta unidad."),
       d && h(React.Fragment, null,
-        h("div", { className: "az-hoy-pres" },
+        /* Si solo hay emoji (situación del día), no hay recuadro: el emoji va al lado de la consigna */
+        !soloEmoji && h("div", { className: "az-hoy-pres" },
           d.reloj ? reloj(d.reloj) : d.emoji ? h("div", { style: { fontSize: 40 } }, d.emoji) : null,
           h("div", { style: { flex: 1, minWidth: 0 } },
             d.grande && h("div", { className: "az-hoy-g", lang: d.titulo === "Frase del día" ? "es" : "ru" }, d.id && typeof AzPalabra === "function" ? h(AzPalabra, { texto: d.grande, id: d.id }) : d.grande),
             d.sub && h("div", { className: "az-hoy-s" }, d.sub)),
           d.audio && h("button", { className: "play", onClick: () => azHablarRu(d.audio), "aria-label": "Escuchar" }, "▶")),
-        h("div", { className: "az-hoy-c" }, azFmt(d.consigna)),
+        soloEmoji
+          ? h("div", { className: "az-hoy-c", style: { display: "flex", alignItems: "center", gap: 12 } },
+              h("div", { style: { fontSize: 32, lineHeight: 1, flexShrink: 0 }, "aria-hidden": "true" }, d.emoji),
+              h("div", { style: { flex: 1, minWidth: 0 } }, azFmt(d.consigna)))
+          : h("div", { className: "az-hoy-c" }, azFmt(d.consigna)),
         h("input", { className: "az-hoy-in", lang: "ru", value: txt, placeholder: "Escribe en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); },
           autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off" }),
         h("div", { className: "az-hoy-row" },
