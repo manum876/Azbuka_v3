@@ -39,7 +39,8 @@ const h = React.createElement;
 let P = null;
 const VOZ_ES = { aidar: "Aidar · hombre", eugene: "Eugene · hombre", baya: "Baya · mujer", kseniya: "Kseniya · mujer", xenia: "Xenia · mujer" };
 const ROLES = [["narra", "Unidades (narración)", null], ["masha", "Masha", "f"], ["olga", "Olga Petrovna", "f"], ["lucas", "Lucas", "m"], ["dima", "Dima", "m"]];
-const DEF = { narra: "xenia", masha: "baya", olga: "kseniya", lucas: "aidar", dima: "eugene" };
+const DEF = { narra: "baya", masha: "baya", olga: "kseniya", lucas: "eugene", dima: "aidar", modelo: "v5_5_ru" };
+const MODELOS = [["", "Modelo v4"], ["v5_5_ru", "Modelo v5.5 (nuevo)"]];
 function leerEleccion() { try { return Object.assign({}, DEF, JSON.parse(localStorage.getItem("az_voces_prueba") || "{}")); } catch (e) { return Object.assign({}, DEF); } }
 
 /* Reproductor (15/10/2026, v2):
@@ -47,16 +48,17 @@ function leerEleccion() { try { return Object.assign({}, DEF, JSON.parse(localSt
    · Un solo elemento <audio> reutilizado: el iPhone tarda menos y no pelea con la voz del teléfono.
    · parar() corta solo el audio; la voz del teléfono se corta aparte (callarTelefono), y nunca justo antes
      de hablar, porque azCallar deja programado un cancel que cortaba la palabra al empezar. */
-const VER = "2";
+const VER = "3";
+let MOD = "v5_5_ru";
 const blobs = {};
 const reproductor = new Audio();
 reproductor.preload = "auto";
 let secuencia = 0, alTerminar = null;
 reproductor.onended = () => { const f = alTerminar; alTerminar = null; f && f(true); };
-function url(id, voz) { return "audio/prueba/" + voz + "/" + id + ".mp3?v=" + VER; }
+function url(id, voz) { return "audio/prueba/" + (MOD ? MOD + "/" : "") + voz + "/" + id + ".mp3?v=" + VER; }
 function precargar(lista) {
   lista.forEach(([id, voz]) => {
-    const k = voz + "/" + id;
+    const k = MOD + "/" + voz + "/" + id;
     if (blobs[k]) return;
     blobs[k] = fetch(url(id, voz)).then(r => r.ok ? r.blob() : null).then(b => b ? URL.createObjectURL(b) : null).catch(() => null);
   });
@@ -66,7 +68,7 @@ function callarTelefono() { try { window.speechSynthesis.cancel(); } catch (e) {
 function tocarAudio(id, voz, ru, vel, alFaltar) {
   parar(); callarTelefono();
   return new Promise(async res => {
-    const k = voz + "/" + id;
+    const k = MOD + "/" + voz + "/" + id;
     if (!blobs[k]) precargar([[id, voz]]);
     const src = await blobs[k];
     if (!src) { alFaltar && alFaltar(); azHablarRu(ru); setTimeout(() => res(false), 1500); return; }
@@ -80,6 +82,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [datos, setDatos] = useState(null);
   const [voz, setVoz] = useState(leerEleccion());
+  MOD = voz.modelo == null ? "v5_5_ru" : voz.modelo;
   const [vel, setVel] = useState(1);
   const [falta, setFalta] = useState(false);
   const [sonando, setSonando] = useState(null);
@@ -105,7 +108,7 @@ function App() {
   const palabra = id => { const x = T(id);
     return h("button", { key: id, onClick: () => play(id, voz.narra, x.ru), lang: "ru",
       style: { background: "none", border: "none", padding: 0, font: "inherit", color: c.text, fontWeight: 700, borderBottom: `2px dotted ${c.gold}`, cursor: "pointer" } }, x.ru); };
-  const resumen = ROLES.map(([k, n]) => n + ": " + voz[k]).join(" · ") + (vel !== 1 ? " · velocidad " + vel : "");
+  const resumen = (MOD ? "Modelo v5.5" : "Modelo v4") + " · " + ROLES.map(([k, n]) => n + ": " + voz[k]).join(" · ") + (vel !== 1 ? " · velocidad " + vel : "");
 
   return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
     h(AzEstilosUnidad, { c }),
@@ -116,6 +119,9 @@ function App() {
       falta && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12, fontSize: 13.5, lineHeight: 1.5, color: c.textSub, borderColor: c.gold } },
         "Todavía no están los audios generados, así que sonó la voz del teléfono. En GitHub: Actions → «Voces de prueba» → Run workflow, y espera unos minutos."),
 
+      lbl("Modelo de voz"),
+      h("div", { style: { display: "flex", gap: 8, flexWrap: "wrap" } }, MODELOS.map(([m, t]) => chip(MOD === m, t, () => { parar(); elegir("modelo", m); }, m || "v4"))),
+      h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Las mismas cinco voces, generadas con el modelo anterior y con el nuevo. Cambia y escucha la misma frase."),
       lbl("Velocidad"),
       h("div", { style: { display: "flex", gap: 8, flexWrap: "wrap" } }, [[1, "Normal"], [0.85, "Un poco más lenta"], [0.7, "Lenta"]].map(([v, t]) => chip(vel === v, t, () => setVel(v), v))),
 
