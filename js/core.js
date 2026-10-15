@@ -41,7 +41,7 @@ const AZ_MODULES = [
   { id: "dialogos", title: "Diálogos", desc: "Conversaciones, frases útiles y notas culturales", href: "dialogos.html", icon: "green", glyph: "Ди" },
   { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "cyan", glyph: "Вб" },
   { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "blue", glyph: "Пд" },
-  { id: "cuaderno", title: "Cuaderno", desc: "Tus notas y lo que guardás desde la app", href: "cuaderno.html", icon: "purple", glyph: "Тд" },
+  { id: "cuaderno", title: "Cuaderno", desc: "Tus notas y lo que guardas desde la app", href: "cuaderno.html", icon: "purple", glyph: "Тд" },
 ];
 
 /* Colores de los íconos, en el orden del arcoíris (01/10/2026): Azbuka
@@ -542,7 +542,7 @@ function AzCopiaSeguridad({ c }) {
   const btn = { flex: 1, padding: "11px 14px", borderRadius: 10, border: `1px solid ${c.border}`, background: c.bg3, color: c.text, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" };
   return h("div", null,
     h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
-      "Todo lo que hacés en Azbuka (tus notas y tu progreso en unidades, letras y ejercicios) se guarda en este teléfono. Guardá una copia de vez en cuando, en Archivos o mandándotela por mail: si se borran los datos del navegador o cambiás de teléfono, la restaurás y seguís donde estabas."),
+      "Todo lo que haces en Azbuka (tus notas y tu progreso en unidades, letras y ejercicios) se guarda en este teléfono. Guarda una copia de vez en cuando, en Archivos o mandándotela por mail: si se borran los datos del navegador o cambias de teléfono, la restauras y sigues donde estabas."),
     h("div", { style: { display: "flex", gap: 8, marginTop: 12 } },
       h("button", { style: btn, onClick: azGuardarCopia }, "Guardar copia"),
       h("button", { style: btn, onClick: () => ref.current && ref.current.click() }, "Restaurar copia")),

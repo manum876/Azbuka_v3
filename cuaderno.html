@@ -83,7 +83,7 @@ function Editor({ c, nota, seccionId, secciones, onGuardar, onBorrar, onCerrar }
     h("button", { className: "sheet-x", onClick: onCerrar, "aria-label": "Cerrar" }, "✕"),
     h("div", { className: "sheet-in" },
       h("div", { style: { fontSize: 24, fontWeight: 800, paddingRight: 48, marginBottom: 20 } }, nota ? "Editar nota" : "Nota nueva"),
-      h("textarea", { ref, className: "cu-area", value: texto, placeholder: "Escribí tu nota…", onInput: e => setTexto(e.target.value) }),
+      h("textarea", { ref, className: "cu-area", value: texto, placeholder: "Escribe tu nota…", onInput: e => setTexto(e.target.value) }),
       nota && nota.fuente && h("div", { className: "cu-meta", style: { marginTop: 10 } }, "Guardada desde: ",
         h("a", { className: "cu-fuente", href: nota.fuente.href, onClick: e => azNavigate(e, nota.fuente.href) }, nota.fuente.titulo)),
       h("div", { className: "cu-lbl" }, "Sección"),
@@ -231,7 +231,7 @@ function HojaExportar({ c, cu, onCerrar }) {
       const blob = tipo === "pdf" ? await exportarPDF(cu, cual) : await exportarDOCX(cu, cual);
       setEstado("");
       await compartir(blob, nombre(tipo), blob.type);
-    } catch (e) { setEstado("No se pudo generar el archivo. Revisá la conexión la primera vez que exportás."); }
+    } catch (e) { setEstado("No se pudo generar el archivo. Revisa la conexión la primera vez que exportas."); }
   };
   return h("div", { className: "sheet", role: "dialog" },
     h("button", { className: "sheet-x", onClick: onCerrar, "aria-label": "Cerrar" }, "✕"),
@@ -367,7 +367,7 @@ function App() {
           !ordenar && h("span", { className: "cu-chev", style: { transform: cerrada ? "rotate(-90deg)" : "none" } }, "▾")),
         !cerrada && (s.notas.length
           ? s.notas.map((n, i) => h(Nota, { key: n.id, s, nota: n, i }))
-          : h("div", { className: "cu-vacio" }, s.fija ? "Acá cae lo que guardes desde otras pantallas de la app." : "Sección vacía.")));
+          : h("div", { className: "cu-vacio" }, s.fija ? "Aquí cae lo que guardes desde otras pantallas de la app." : "Sección vacía.")));
     });
   }
 
@@ -376,7 +376,7 @@ function App() {
     h(AzShell, { darkMode, setDarkMode, moduleId: "cuaderno", tabs: [] },
       h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
         h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, "Cuaderno"),
-        h("div", { className: "cu-sub" }, total ? total + (total === 1 ? " nota" : " notas") + " en " + cu.secciones.length + (cu.secciones.length === 1 ? " sección." : " secciones.") : "Tus notas: lo que escribís vos y lo que guardás desde la app."),
+        h("div", { className: "cu-sub" }, total ? total + (total === 1 ? " nota" : " notas") + " en " + cu.secciones.length + (cu.secciones.length === 1 ? " sección." : " secciones.") : "Tus notas: lo que escribes tú y lo que guardas desde la app."),
         h("div", { className: "cu-bar" },
           h("button", { className: "cu-btn", style: { flex: 1 }, onClick: () => setEditor({ seccionId: "bandeja" }) }, "+ Nota"),
           h("button", { className: "cu-btn sec", style: { flex: 1 }, onClick: nuevaSeccion }, "+ Sección")),

@@ -6,7 +6,7 @@
    Decisiones (con Manu):
    · Es la Unidad 12 del esquema, menos «Comparar» (pasó a la 12).
    · Sin gramática nueva: integrar todo y comunicarse con autonomía;
-     cada vez menos pistas («Decí lo que quieras decir»).
+     cada vez menos pistas («Di lo que quieras decir»).
    · 35 palabras nuevas (todas ya en el léxico), aprobadas el 06/10/2026.
    · Motor nuevo: autocorrección (forma corregir), taller de escritura
      en 4 pasos (AzTaller), audio a dos voces con velocidad, y la
@@ -32,15 +32,15 @@ function u13E(es, formas, rx, consigna) { const e = { es, formas: formas ? forma
 const U13_PASADO_RX = "(л|ла|ло|ли)$";
 const U13_PASADO = "Hay que contarlo en pasado (рабо́тал, гуля́ла…).";
 
-/* Módulo 1: lo que ya podés decir — [función, ruso, español] */
+/* Módulo 1: lo que ya puedes decir — [función, ruso, español] */
 const U13_MAPA = [
   ["Quién soy", "Меня́ зову́т Ива́н.", "Me llamo Iván."], ["Qué hago", "Я архите́ктор.", "Soy arquitecto."], ["Dónde vivo", "Я живу́ в Барсело́не.", "Vivo en Barcelona."],
   ["Qué hago ahora", "Сейча́с я рабо́таю в о́фисе.", "Ahora trabajo en la oficina."], ["Qué hice", "Вчера́ я рабо́тал до́ма.", "Ayer trabajé en casa."],
   ["Qué voy a hacer", "За́втра я бу́ду отдыха́ть.", "Mañana voy a descansar."], ["Qué voy a hacer (una vez)", "За́втра я позвоню́ ма́ме.", "Mañana voy a llamar a mamá."],
-  ["Qué tengo", "У меня́ есть маши́на.", "Tengo auto."], ["Qué no tengo", "У меня́ нет вре́мени.", "No tengo tiempo."],
+  ["Qué tengo", "У меня́ есть маши́на.", "Tengo coche."], ["Qué no tengo", "У меня́ нет вре́мени.", "No tengo tiempo."],
   ["Con quién", "Я гуля́ю с друзья́ми.", "Paseo con mis amigos."], ["A quién", "Я даю́ кни́гу А́нне.", "Le doy el libro a Ana."], ["De qué hablo", "Мы говори́м о рабо́те.", "Hablamos del trabajo."],
-  ["Qué me gusta", "Мне нра́вится му́зыка.", "Me gusta la música."], ["Comparar", "Метро́ быстре́е, чем авто́бус.", "El metro es más rápido que el colectivo."],
-  ["Opinar", "По-мо́ему, э́то хоро́шая иде́я.", "Para mí, es una buena idea."], ["Pedir", "Позвони́ мне, пожа́луйста.", "Llamame, por favor."]
+  ["Qué me gusta", "Мне нра́вится му́зыка.", "Me gusta la música."], ["Comparar", "Метро́ быстре́е, чем авто́бус.", "El metro es más rápido que el autobús."],
+  ["Opinar", "По-мо́ему, э́то хоро́шая иде́я.", "Para mí, es una buena idea."], ["Pedir", "Позвони́ мне, пожа́луйста.", "Llámame, por favor."]
 ];
 /* Módulo 2: tocar la palabra en un caso — [frase, palabra, caso, motivo] */
 const U13_MOTIVO = {
@@ -60,9 +60,9 @@ const U13_CASOS_TXT = [
 const U13_CASO_NOM = { prep: "prepositivo", gen: "genitivo", dat: "dativo", ins: "instrumental", acc: "acusativo" };
 /* Completar la forma: [plantilla ({} = palabra), palabra, caso (índice de Casos), plural?, español] */
 const U13_FORMAS = [
-  ["Я живу́ в {}.", "Москва́", 5, false, "Vivo en Moscú."], ["У {} есть кварти́ра.", "брат", 1, false, "Mi hermano tiene un departamento."],
+  ["Я живу́ в {}.", "Москва́", 5, false, "Vivo en Moscú."], ["У {} есть кварти́ра.", "брат", 1, false, "Mi hermano tiene un apartamento."],
   ["Я звоню́ {}.", "сестра́", 2, false, "Llamo a mi hermana."], ["Я гуля́ю с {}.", "соба́ка", 4, false, "Paseo con el perro."],
-  ["Мы говори́м о {}.", "рабо́та", 5, false, "Hablamos del trabajo."], ["Я жду {}.", "авто́бус", 3, false, "Espero el colectivo."],
+  ["Мы говори́м о {}.", "рабо́та", 5, false, "Hablamos del trabajo."], ["Я жду {}.", "авто́бус", 3, false, "Espero el autobús."],
   ["Я помога́ю {}.", "друг", 2, true, "Ayudo a los amigos."], ["В Москве́ мно́го {}.", "музе́й", 1, true, "En Moscú hay muchos museos."],
   ["Мы ду́маем о {}.", "де́ти", 5, true, "Pensamos en los chicos."], ["Она́ рабо́тает с {}.", "студе́нт", 4, true, "Ella trabaja con estudiantes."]
 ];
@@ -79,14 +79,14 @@ const U13_TIEMPOS = [
   ["Она́ чита́ет кни́гу.", "Она́ чита́ла кни́гу.", "Она́ бу́дет чита́ть кни́гу.", "Ella lee un libro.", ""],
   ["Я до́ма.", "Я была́ до́ма.", "Я бу́ду до́ма.", "Estoy en casa.", "f"],
   ["Они́ смо́трят фильм.", "Они́ смотре́ли фильм.", "Они́ бу́дут смотре́ть фильм.", "Ellos miran una película.", ""],
-  ["Ты гото́вишь у́жин.", "Ты гото́вил у́жин.", "Ты бу́дешь гото́вить у́жин.", "Cocinás la cena.", "m"],
+  ["Ты гото́вишь у́жин.", "Ты гото́вил у́жин.", "Ты бу́дешь гото́вить у́жин.", "Cocinas la cena.", "m"],
   ["Я учу́ ру́сский язы́к.", "Я учи́ла ру́сский язы́к.", "Я бу́ду учи́ть ру́сский язы́к.", "Estudio ruso.", "f"],
   ["Он живёт в Мадри́де.", "Он жил в Мадри́де.", "Он бу́дет жить в Мадри́де.", "Él vive en Madrid.", ""]
 ];
 const U13_CORR_TIEMPOS = [
-  ["Вчера́ я рабо́таю до́ма.", "рабо́таю", "рабо́тал", "вчера́ → pasado: **рабо́тал**. (sos hombre)"],
+  ["Вчера́ я рабо́таю до́ма.", "рабо́таю", "рабо́тал", "вчера́ → pasado: **рабо́тал**. (eres hombre)"],
   ["Сейча́с она́ чита́ла кни́гу.", "чита́ла", "чита́ет", "сейча́с → presente: **чита́ет**."],
-  ["Ра́ньше я живу́ в Мадри́де.", "живу́", "жил", "ра́ньше → pasado: **жил**. (sos hombre)"],
+  ["Ра́ньше я живу́ в Мадри́де.", "живу́", "жил", "ра́ньше → pasado: **жил**. (eres hombre)"],
   ["За́втра мы гуля́ли в па́рке.", "гуля́ли", "гуля́ть", "за́втра → futuro: мы бу́дем **гуля́ть**… Falta бу́дем: За́втра мы бу́дем гуля́ть в па́рке."]
 ];
 /* Módulo 4: conectores — [frase con ___, conector, opciones, español] */
@@ -111,7 +111,7 @@ const U13_RELATO = { id: "more", titulo: "Пое́здка на мо́ре", lin
 /* Módulo 5: opinión — [frase con ___, palabra, opciones, español] */
 const U13_OPINA = [
   ["Мне нра́вится э́тот фильм, _____ он интере́сный.", "потому́ что", ["потому́ что", "поэ́тому", "хотя́"], "Me gusta esta película porque es interesante."],
-  ["Э́та кварти́ра сли́шком дорога́я, _____ я её не куплю́.", "поэ́тому", ["поэ́тому", "потому́ что", "е́сли"], "Este departamento es demasiado caro, por eso no lo voy a comprar."],
+  ["Э́та кварти́ра сли́шком дорога́я, _____ я её не куплю́.", "поэ́тому", ["поэ́тому", "потому́ что", "е́сли"], "Este apartamento es demasiado caro, por eso no lo voy a comprar."],
   ["Я _____, что э́то хоро́шая иде́я.", "ду́маю", ["ду́маю", "ка́жется", "по-мо́ему"], "Creo que es una buena idea."],
   ["Мне _____, что э́то удо́бно.", "ка́жется", ["ка́жется", "ду́маю", "счита́ю"], "Me parece que es cómodo."],
   ["_____, э́то сли́шком до́рого.", "По-мо́ему", ["По-мо́ему", "Я ду́маю", "Мне ка́жется что"], "Para mí, es demasiado caro."],
@@ -129,11 +129,11 @@ const U13_CORR_OPINA = [
 const U13_LECTURAS = [
   { id: "msj", titulo: "Mensaje", lineas: [
       ["Приве́т! Сего́дня я рабо́таю до шести́.", "¡Hola! Hoy trabajo hasta las seis."], ["Дава́й пойдём в кафе́ в семь часо́в?", "¿Vamos al bar a las siete?"],
-      ["Кафе́ нахо́дится ря́дом с метро́.", "El bar queda al lado del metro."], ["Напиши́ мне, пожа́луйста! Ма́ша", "¡Escribime, por favor! Masha"]],
+      ["Кафе́ нахо́дится ря́дом с метро́.", "El bar queda al lado del metro."], ["Напиши́ мне, пожа́луйста! Ма́ша", "¡Escríbeme, por favor! Masha"]],
     preguntas: [["¿Hasta qué hora trabaja Masha hoy?", "до шести́", ["до семи́", "до пяти́"]], ["¿A qué hora propone ir al bar?", "в семь часо́в", ["в шесть часо́в", "в пять часо́в"]], ["¿Dónde queda el bar?", "ря́дом с метро́", ["в це́нтре", "до́ма"]]],
     vf: [["Ма́ша хо́чет пойти́ в кафе́.", true], ["Ма́ша сего́дня не рабо́тает.", false]] },
   { id: "anuncio", titulo: "Объявле́ние", lineas: [
-      ["Кварти́ра нахо́дится ря́дом с метро́.", "El departamento queda al lado del metro."], ["В кварти́ре две ко́мнаты и больша́я ку́хня.", "Tiene dos habitaciones y una cocina grande."],
+      ["Кварти́ра нахо́дится ря́дом с метро́.", "El apartamento queda al lado del metro."], ["В кварти́ре две ко́мнаты и больша́я ку́хня.", "Tiene dos habitaciones y una cocina grande."],
       ["Ря́дом есть парк и магази́ны.", "Cerca hay un parque y negocios."], ["Цена́: сто ты́сяч рубле́й в ме́сяц.", "Precio: cien mil rublos por mes."], ["Звони́те ве́чером.", "Llamen a la tarde-noche."]],
     preguntas: [["¿Cuántas habitaciones tiene?", "две ко́мнаты", ["три ко́мнаты", "одна́ ко́мната"]], ["¿Qué hay cerca?", "парк и магази́ны", ["мо́ре и пляж", "музе́й и теа́тр"]], ["¿Cuándo hay que llamar?", "ве́чером", ["у́тром", "днём"]]],
     vf: [["Ку́хня ма́ленькая.", false], ["Кварти́ра ря́дом с метро́.", true]] },
@@ -144,8 +144,8 @@ const U13_LECTURAS = [
     vf: [["В понеде́льник музе́й рабо́тает.", false], ["Для студе́нтов биле́т деше́вле.", true]] },
   { id: "resena", titulo: "Отзы́в о рестора́не", lineas: [
       ["Мне о́чень понра́вился э́тот рестора́н.", "Me gustó mucho este restaurante."], ["Еда́ вку́сная, но сли́шком дорога́я.", "La comida es rica, pero demasiado cara."],
-      ["Официа́нты бы́ли о́чень хоро́шие.", "Los mozos fueron muy buenos."], ["Я сове́тую э́тот рестора́н, хотя́ он не дешёвый.", "Recomiendo este restaurante, aunque no es barato."]],
-    preguntas: [["¿Qué no le gustó?", "сли́шком дорога́я", ["не вку́сная", "холо́дная"]], ["¿Cómo fueron los mozos?", "о́чень хоро́шие", ["плохи́е", "ру́сские"]], ["¿Recomienda el restaurante?", "Я сове́тую", ["Я не сове́тую", "Мне не понра́вился"]]],
+      ["Официа́нты бы́ли о́чень хоро́шие.", "Los camareros fueron muy buenos."], ["Я сове́тую э́тот рестора́н, хотя́ он не дешёвый.", "Recomiendo este restaurante, aunque no es barato."]],
+    preguntas: [["¿Qué no le gustó?", "сли́шком дорога́я", ["не вку́сная", "холо́дная"]], ["¿Cómo fueron los camareros?", "о́чень хоро́шие", ["плохи́е", "ру́сские"]], ["¿Recomienda el restaurante?", "Я сове́тую", ["Я не сове́тую", "Мне не понра́вился"]]],
     vf: [["Рестора́н дешёвый.", false], ["Еда́ вку́сная.", true]] },
   { id: "perfil", titulo: "Анке́та", lineas: [
       ["Меня́ зову́т Ива́н.", "Me llamo Iván."], ["Я инжене́р, рабо́таю в большо́м о́фисе.", "Soy ingeniero, trabajo en una oficina grande."],
@@ -187,7 +187,7 @@ const U13_NATURAL = [
   ["Я из Аргенти́ны.", "Я есть из Аргенти́ны.", "Soy de la Argentina."], ["Я рабо́таю архите́ктором.", "Я рабо́таю как архите́ктор.", "Trabajo de arquitecto."],
   ["Ему́ пять лет.", "У него́ пять лет.", "Tiene cinco años."], ["Мне нра́вится э́тот фильм.", "Я нра́влюсь э́тот фильм.", "Me gusta esta película."],
   ["Я ду́маю, что э́то хоро́шая иде́я.", "Я ду́маю, что э́то есть хоро́шая иде́я.", "Creo que es una buena idea."], ["Я опозда́ю на пять мину́т.", "Я бу́ду по́здно пять мину́т.", "Voy a llegar cinco minutos tarde."],
-  ["Я до́ма.", "Я есть до́ма.", "Estoy en casa."], ["Я живу́ здесь два го́да.", "Я живу́ здесь с два го́да.", "Vivo acá hace dos años."]
+  ["Я до́ма.", "Я есть до́ма.", "Estoy en casa."], ["Я живу́ здесь два го́да.", "Я живу́ здесь с два го́да.", "Vivo aquí hace dos años."]
 ];
 
 /* Palabras que la unidad presenta en cada módulo (verificador de palabras vistas) */
@@ -220,7 +220,7 @@ const U13_GLOSA = {
   "ми́нус": "contra, desventaja", "пра́вильно": "correcto", "ве́рно": "cierto", "согла́сный": "de acuerdo", "во-пе́рвых": "en primer lugar", "во-вторы́х": "en segundo lugar",
   "рекла́ма": "publicidad", "сайт": "sitio web", "страни́ца": "página", "статья́": "artículo", "экра́н": "pantalla", "конта́кт": "contacto", "оце́нка": "puntuación, nota",
   "текст": "texto", "хара́ктер": "carácter", "серьёзный": "serio", "че́стный": "honesto", "смешно́й": "gracioso", "тала́нтливый": "talentoso",
-  "разгово́р": "conversación", "ну": "bueno… (para pensar)", "да́же": "incluso", "кста́ти": "por cierto", "ла́дно": "dale, está bien",
+  "разгово́р": "conversación", "ну": "bueno… (para pensar)", "да́же": "incluso", "кста́ти": "por cierto", "ла́дно": "de acuerdo, está bien",
   "пра́вило": "regla", "предложе́ние": "oración; propuesta", "исправля́ть": "corregir", "испра́вить": "corregir (una vez)"
 };
 
@@ -231,24 +231,24 @@ const UNIDAD_13 = {
   objetivo: "Integrar todo lo aprendido: contar experiencias, explicar planes, opinar con razones, entender textos y conversaciones, escribir textos conectados y corregir tus propios errores.",
   tiempo: "4 a 5 semanas con práctica diaria (unas 40–50 horas)",
   modulos: [
-    { id: "u13m1", n: 1, tipo: "leccion", nPractica: 12, titulo: "El mapa completo del ruso", resumen: "Todo lo que ya podés decir.",
-      intro: "Llegaste hasta acá con todo el curso. Antes de seguir, mirá lo que ya podés decir en ruso: con esto ya podés hablar de vos, de tu pasado, tu presente y tu futuro.",
+    { id: "u13m1", n: 1, tipo: "leccion", nPractica: 12, titulo: "El mapa completo del ruso", resumen: "Todo lo que ya puedes decir.",
+      intro: "Llegaste hasta aquí con todo el curso. Antes de seguir, mira lo que ya puedes decir en ruso: con esto ya puedes hablar de ti, de tu pasado, tu presente y tu futuro.",
       secciones: [
-        { id: "u13-mapa", titulo: "Lo que ya sabés decir",
-          texto: "Cada frase de abajo usa una pieza distinta del curso. Si alguna te cuesta, tocá las palabras y repasala.",
+        { id: "u13-mapa", titulo: "Lo que ya sabes decir",
+          texto: "Cada frase de abajo usa una pieza distinta del curso. Si alguna te cuesta, toca las palabras y repásala.",
           ejemplos: [
             { ru: "{Меня́ зову́т} Ива́н. Я архите́ктор.", es: "Me llamo Iván. Soy arquitecto.", por: "Presentarse: sin «ser» en presente." },
             { ru: "Я живу́ {в Барсело́не}.", es: "Vivo en Barcelona.", por: "Dónde: в + prepositivo." },
             { ru: "{Вчера́} я рабо́тал до́ма, а {за́втра} я позвоню́ ма́ме.", es: "Ayer trabajé en casa y mañana voy a llamar a mamá.", por: "Pasado y futuro de resultado." },
             { ru: "{У меня́ нет} вре́мени.", es: "No tengo tiempo.", por: "нет + genitivo." },
             { ru: "Я гуля́ю {с друзья́ми} и даю́ кни́гу {А́нне}.", es: "Paseo con mis amigos y le doy el libro a Ana.", por: "Instrumental y dativo." },
-            { ru: "{По-мо́ему}, метро́ {быстре́е}, чем авто́бус.", es: "Para mí, el subte es más rápido que el colectivo.", por: "Opinar y comparar." },
-            { ru: "{Позвони́} мне, пожа́луйста. — {Договори́лись}!", es: "Llamame, por favor. — ¡Quedamos así!", por: "Pedir y reaccionar." }],
+            { ru: "{По-мо́ему}, метро́ {быстре́е}, чем авто́бус.", es: "Para mí, el metro es más rápido que el autobús.", por: "Opinar y comparar." },
+            { ru: "{Позвони́} мне, пожа́луйста. — {Договори́лись}!", es: "Llámame, por favor. — ¡Quedamos así!", por: "Pedir y reaccionar." }],
           destacado: "quién soy · dónde · cuándo · con quién · qué pienso · qué pido",
-          chequeo: [{ pide: "«No tengo auto»", opciones: ["У меня́ нет маши́ны.", "У меня́ нет маши́на."], ok: "У меня́ нет маши́ны.", por: "нет + genitivo." }] }
+          chequeo: [{ pide: "«No tengo coche»", opciones: ["У меня́ нет маши́ны.", "У меня́ нет маши́на."], ok: "У меня́ нет маши́ны.", por: "нет + genitivo." }] }
       ] },
     { id: "u13m2", n: 2, tipo: "leccion", nPractica: 12, titulo: "Los seis casos en contexto", resumen: "Por qué aparece cada caso.",
-      intro: "Nada nuevo: ahora los casos trabajan juntos. En cada frase, preguntate por qué la palabra tiene esa forma.",
+      intro: "Nada nuevo: ahora los casos trabajan juntos. En cada frase, pregúntate por qué la palabra tiene esa forma.",
       secciones: [
         { id: "u13-casos-texto", titulo: "Un texto, seis casos",
           texto: "En un texto común aparecen casi todos los casos. Cada forma tiene un motivo: una preposición o un verbo.",
@@ -258,7 +258,7 @@ const UNIDAD_13 = {
             { txt: "в Барсело́не", rol: "Dónde", nota: "в + prepositivo: Барсело́на → Барсело́не." },
             { txt: "с мои́м дру́гом", rol: "Con quién", nota: "с + instrumental: мой друг → мои́м дру́гом." }] },
           ejemplos: [
-            { ru: "У {моего́ дру́га} есть маши́на.", es: "Mi amigo tiene auto.", por: "у + genitivo." },
+            { ru: "У {моего́ дру́га} есть маши́на.", es: "Mi amigo tiene coche.", por: "у + genitivo." },
             { ru: "По́сле рабо́ты я звоню́ {ему́}.", es: "Después del trabajo lo llamo.", por: "звони́ть + dativo." },
             { ru: "Я о́чень люблю́ {э́тот го́род}.", es: "Quiero mucho esta ciudad.", por: "Acusativo: masculino de cosa, no cambia." }],
           chequeo: [{ pide: "Я ду́маю о ___ (la ciudad).", opciones: ["го́роде", "го́род", "го́рода"], ok: "го́роде", por: "о + prepositivo." }] },
@@ -274,7 +274,7 @@ const UNIDAD_13 = {
             { ru: "Я помога́ю {студе́нтам}.", es: "Ayudo a los estudiantes.", por: "Dativo plural." },
             { ru: "Мы гуля́ем с {детьми́}.", es: "Paseamos con los chicos.", por: "Instrumental plural." },
             { ru: "В го́роде мно́го {музе́ев}.", es: "En la ciudad hay muchos museos.", por: "мно́го + genitivo plural." }],
-          ojo: "Si dudás de una forma, tocá la palabra: Casos tiene la tabla completa." }
+          ojo: "Si dudas de una forma, toca la palabra: Casos tiene la tabla completa." }
       ] },
     { id: "u13m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Pasado, presente y futuro", resumen: "Вчера́, сейча́с, за́втра. Ра́ньше, сейча́с, ско́ро.",
       intro: "Los tres tiempos juntos, con el aspecto. Lo que importa ahora es elegir bien y combinarlos en un mismo texto.",
@@ -304,7 +304,7 @@ const UNIDAD_13 = {
           chequeo: [{ pide: "А́нна ___ в Москве́.", opciones: ["была́", "был"], ok: "была́", por: "Mujer: была́." }] }
       ] },
     { id: "u13m4", n: 4, tipo: "leccion", nPractica: 12, titulo: "Contar una experiencia", resumen: "Снача́ла, пото́м, поэ́тому, хотя́, е́сли…",
-      intro: "Para contar algo que te pasó, sin que nadie te dé cada frase, necesitás conectar las ideas y decir qué sentiste.",
+      intro: "Para contar algo que te pasó, sin que nadie te dé cada frase, necesitas conectar las ideas y decir qué sentiste.",
       secciones: [
         { id: "u13-ordenar", titulo: "Para ordenar",
           texto: "снача́ла (primero) · пото́м (después) · по́сле э́того (después de eso) · наконе́ц (por fin, al final). Con verbos de resultado, cada acción termina y viene la siguiente.",
@@ -331,12 +331,12 @@ const UNIDAD_13 = {
           texto: "Para decir cómo te sentiste hay tres caminos:\nмне бы́ло + la forma en -о: мне бы́ло ве́село, гру́стно, стра́шно (dativo, como мне хо́лодно)\nun verbo de resultado: я обра́довался («me alegré»), удиви́лся («me sorprendí»), испуга́лся («me asusté»)\nun sustantivo: с ра́достью, с удово́льствием («con gusto»)",
           ejemplos: [
             { ru: "{Нам бы́ло ве́село}.", es: "Nos divertimos.", por: "dativo + бы́ло + **-о**." },
-            { ru: "Я {обра́довалась}, когда́ уви́дела мо́ре.", es: "Me alegré cuando vi el mar. (sos mujer)", por: "Verbo de resultado, en femenino." },
+            { ru: "Я {обра́довалась}, когда́ уви́дела мо́ре.", es: "Me alegré cuando vi el mar. (eres mujer)", por: "Verbo de resultado, en femenino." },
             { ru: "Он о́чень {удиви́лся}.", es: "Se sorprendió mucho.", por: "удиви́ться: resultado." },
             { ru: "Я {с удово́льствием} пойду́!", es: "¡Voy con gusto!", por: "с + instrumental." }],
           errores: [{ mal: "Мне бы́ло весёлый.", bien: "Мне бы́ло {ве́село}.", por: "Con мне бы́ло, la forma en **-о**." }],
-          mas: { texto: "Para hablar de una experiencia en general: У меня́ мно́го о́пыта («tengo mucha experiencia»), Э́то бы́ло интере́сное собы́тие, У меня́ хоро́шие воспомина́ния о мо́ре («tengo lindos recuerdos del mar»). Y para recordar algo seguido: Я ча́сто вспомина́ю э́ту пое́здку." },
-          chequeo: [{ pide: "«Me asusté» (sos hombre)", opciones: ["Я испуга́лся.", "Я испуга́лась."], ok: "Я испуга́лся.", por: "Hombre: -лся." }] },
+          mas: { texto: "Para hablar de una experiencia en general: У меня́ мно́го о́пыта («tengo mucha experiencia»), Э́то бы́ло интере́сное собы́тие, У меня́ хоро́шие воспомина́ния о мо́ре («tengo bonitos recuerdos del mar»). Y para recordar algo seguido: Я ча́сто вспомина́ю э́ту пое́здку." },
+          chequeo: [{ pide: "«Me asusté» (eres hombre)", opciones: ["Я испуга́лся.", "Я испуга́лась."], ok: "Я испуга́лся.", por: "Hombre: -лся." }] },
         { id: "u13-relato", titulo: "Un relato",
           texto: "Así se ve todo junto:",
           ejemplos: [
@@ -359,33 +359,33 @@ const UNIDAD_13 = {
           texto: "Una opinión con su razón: потому́ что + la razón, o поэ́тому + la consecuencia.",
           ejemplos: [
             { ru: "Мне нра́вится э́тот фильм, {потому́ что} он интере́сный.", es: "Me gusta esta película porque es interesante.", por: "Opinión + razón." },
-            { ru: "Э́та кварти́ра сли́шком дорога́я, {поэ́тому} я её не куплю́.", es: "Este departamento es demasiado caro, por eso no lo voy a comprar.", por: "Razón + consecuencia." }] },
+            { ru: "Э́та кварти́ра сли́шком дорога́я, {поэ́тому} я её не куплю́.", es: "Este apartamento es demasiado caro, por eso no lo voy a comprar.", por: "Razón + consecuencia." }] },
         { id: "u13-razones", titulo: "Dos razones: во-пе́рвых, во-вторы́х",
           texto: "Para ordenar varias razones: во-пе́рвых («en primer lugar»), во-вторы́х («en segundo lugar»). Y para comparar: X лу́чше, чем Y.",
           ejemplos: [
-            { ru: "{Во-пе́рвых}, здесь тепло́. {Во-вторы́х}, здесь мо́ре.", es: "En primer lugar, acá hace calor. En segundo lugar, acá está el mar.", por: "Dos razones en orden." },
-            { ru: "По-мо́ему, метро́ лу́чше, чем такси́: оно́ {быстре́е} и {деше́вле}.", es: "Para mí, el subte es mejor que el taxi: es más rápido y más barato.", por: "Comparar para justificar." }] },
+            { ru: "{Во-пе́рвых}, здесь тепло́. {Во-вторы́х}, здесь мо́ре.", es: "En primer lugar, aquí hace calor. En segundo lugar, aquí está el mar.", por: "Dos razones en orden." },
+            { ru: "По-мо́ему, метро́ лу́чше, чем такси́: оно́ {быстре́е} и {деше́вле}.", es: "Para mí, el metro es mejor que el taxi: es más rápido y más barato.", por: "Comparar para justificar." }] },
         { id: "u13-matizar", titulo: "Matizar y preguntar",
           texto: "наве́рное («seguramente»), мо́жет быть («quizás»). Y para que la charla siga: А что ты ду́маешь? Как ты счита́ешь?",
-          ejemplos: [{ ru: "{Наве́рное}, э́то пра́вда. {А что ты ду́маешь}?", es: "Seguramente es verdad. ¿Y vos qué pensás?", por: "Matizar y devolver la pregunta." }] },
+          ejemplos: [{ ru: "{Наве́рное}, э́то пра́вда. {А что ты ду́маешь}?", es: "Seguramente es verdad. ¿Y tú qué piensas?", por: "Matizar y devolver la pregunta." }] },
         { id: "u13-acuerdo", titulo: "Estar de acuerdo, o no",
           antes: { pide: "Una mujer dice «estoy de acuerdo». ¿Cuál?", opciones: ["Я согла́сна.", "Я согла́сен."], ok: "Я согла́сна.", por: "согла́сен cambia con quien habla, como за́нят / занята́." },
           texto: "«Estoy de acuerdo» es la forma corta de согла́сный: я согла́сен (hombre), я согла́сна (mujer), мы согла́сны. Para estar de acuerdo con alguien: с + instrumental. Para no estarlo: Я не согла́сен. Y para darle la razón al otro: Ве́рно! Пра́вильно!",
           ejemplos: [
-            { ru: "Я {согла́сен} с тобо́й.", es: "Estoy de acuerdo con vos. (sos hombre)", por: "согла́сен + с + instrumental." },
-            { ru: "Я не {согла́сна}. У меня́ друго́е мне́ние.", es: "No estoy de acuerdo. Tengo otra opinión. (sos mujer)", por: "Femenino: согла́сна." },
+            { ru: "Я {согла́сен} с тобо́й.", es: "Estoy de acuerdo contigo. (eres hombre)", por: "согла́сен + с + instrumental." },
+            { ru: "Я не {согла́сна}. У меня́ друго́е мне́ние.", es: "No estoy de acuerdo. Tengo otra opinión. (eres mujer)", por: "Femenino: согла́сна." },
             { ru: "{Ве́рно}! Э́то пра́вильно.", es: "¡Cierto! Es correcto.", por: "Dar la razón." }],
           errores: [{ mal: "Я согла́сный.", bien: "Я {согла́сен}.", por: "«Estoy de acuerdo»: la forma corta." }],
           chequeo: [{ pide: "«Estamos de acuerdo»", opciones: ["Мы согла́сны.", "Мы согла́сен."], ok: "Мы согла́сны.", por: "Plural: согла́сны." }] }
       ] },
     { id: "u13m6", n: 6, tipo: "lectura", titulo: "Textos del mundo real", resumen: "Mensaje, anuncio, horario, reseña, perfil.",
-      intro: "Textos como los que vas a encontrar: un mensaje, un anuncio, un horario, una reseña y un perfil. No hace falta entender cada palabra: buscá la información que te piden." },
+      intro: "Textos como los que vas a encontrar: un mensaje, un anuncio, un horario, una reseña y un perfil. No hace falta entender cada palabra: busca la información que te piden." },
     { id: "u13m7", n: 7, tipo: "leccion", nPractica: 12, titulo: "Comprensión auditiva", resumen: "Cuatro niveles, dos voces.",
-      intro: "Cuatro niveles: del audio lento con una voz a la conversación natural con dos voces. Escuchá todas las veces que quieras; el texto queda detrás de «Mostrar el texto».",
+      intro: "Cuatro niveles: del audio lento con una voz a la conversación natural con dos voces. Escucha todas las veces que quieras; el texto queda detrás de «Mostrar el texto».",
       secciones: [
         { titulo: "Los cuatro niveles", texto: "Nivel 1: lento, una voz, frases cortas.\nNivel 2: una conversación cotidiana.\nNivel 3: alguien cuenta algo que le pasó.\nNivel 4: hay que entender lo que no se dice del todo." },
         { id: "u13-escuchar", titulo: "Cómo escuchar",
-          texto: "Primero escuchá todo, sin parar, y quedate con la idea general.\nDespués leé la pregunta y volvé a escuchar buscando ese dato.\nRecién al final, si hace falta, mirá el texto.\nPrestá atención a las terminaciones: dicen quién habla (был / была́), cuándo (бу́ду / был) y a quién (ему́ / ей).",
+          texto: "Primero escucha todo, sin parar, y quedate con la idea general.\nDespués lee la pregunta y vuelve a escuchar buscando ese dato.\nRecién al final, si hace falta, mira el texto.\nPrestá atención a las terminaciones: dicen quién habla (был / была́), cuándo (бу́ду / был) y a quién (ему́ / ей).",
           destacado: "Idea general → dato → texto",
           ejemplos: [
             { ru: "Я {была́} в Москве́.", es: "Estuve en Moscú.", por: "была́: habla una mujer." },
@@ -398,24 +398,24 @@ const UNIDAD_13 = {
         { id: "u13-devolver", titulo: "Contestar, agregar y devolver",
           texto: "Una buena respuesta tiene tres partes: lo que te preguntaron, un dato o una razón, y la pregunta de vuelta. La pregunta de vuelta va en el mismo caso que la pregunta: Мне нра́вится… А тебе́? / У меня́ есть… А у тебя́?",
           ejemplos: [
-            { ru: "— Где ты живёшь? — Я живу́ в Барсело́не. {А ты}?", es: "—¿Dónde vivís? —Vivo en Barcelona. ¿Y vos?", por: "Pregunta con ты: А ты?" },
-            { ru: "— Тебе́ нра́вится твой го́род? — Да, о́чень, потому́ что здесь мо́ре. {А тебе́}?", es: "—¿Te gusta tu ciudad? —Sí, mucho, porque acá está el mar. ¿Y a vos?", por: "Pregunta con тебе́: А тебе́?" },
-            { ru: "— Что ты ду́маешь? — Мне ка́жется, что э́то хорошо́. {А что ты ду́маешь}?", es: "—¿Qué pensás? —Me parece que está bien. ¿Y vos qué pensás?", por: "Devolver la opinión." }],
+            { ru: "— Где ты живёшь? — Я живу́ в Барсело́не. {А ты}?", es: "—¿Dónde vives? —Vivo en Barcelona. ¿Y tú?", por: "Pregunta con ты: А ты?" },
+            { ru: "— Тебе́ нра́вится твой го́род? — Да, о́чень, потому́ что здесь мо́ре. {А тебе́}?", es: "—¿Te gusta tu ciudad? —Sí, mucho, porque aquí está el mar. ¿Y a ti?", por: "Pregunta con тебе́: А тебе́?" },
+            { ru: "— Что ты ду́маешь? — Мне ка́жется, что э́то хорошо́. {А что ты ду́маешь}?", es: "—¿Qué piensas? —Me parece que está bien. ¿Y tú qué piensas?", por: "Devolver la opinión." }],
           destacado: "respuesta + razón + А ты?",
-          chequeo: [{ pide: "Te preguntaron «У тебя́ есть соба́ка?». Devolvé la pregunta.", opciones: ["А у тебя́?", "А тебе́?"], ok: "А у тебя́?", por: "Mismo caso: у тебя́." }] },
+          chequeo: [{ pide: "Te preguntaron «У тебя́ есть соба́ка?». Devuelve la pregunta.", opciones: ["А у тебя́?", "А тебе́?"], ok: "А у тебя́?", por: "Mismo caso: у тебя́." }] },
         { id: "u13-ganar-tiempo", titulo: "Para ganar tiempo y seguir la charla",
-          texto: "En una charla real se piensa en voz alta. Estas palabras te dan tiempo y suenan naturales:\nНу… («bueno…»)\nДа́же не зна́ю. («no sé, la verdad»)\nХоро́ший вопро́с! («¡buena pregunta!»)\nКста́ти, … («por cierto, …»): para cambiar de tema\nЛа́дно. («bueno, dale»): para aceptar o cerrar",
+          texto: "En una charla real se piensa en voz alta. Estas palabras te dan tiempo y suenan naturales:\nНу… («bueno…»)\nДа́же не зна́ю. («no sé, la verdad»)\nХоро́ший вопро́с! («¡buena pregunta!»)\nКста́ти, … («por cierto, …»): para cambiar de tema\nЛа́дно. («bueno, de acuerdo»): para aceptar o cerrar",
           ejemplos: [
             { ru: "{Ну}… {да́же не зна́ю}. Наве́рное, да.", es: "Bueno… no sé, la verdad. Seguramente sí.", por: "Pensar en voz alta." },
             { ru: "{Кста́ти}, ты был в Москве́?", es: "Por cierto, ¿estuviste en Moscú?", por: "Cambiar de tema." },
-            { ru: "— Пойдём в кино́? — {Ла́дно}!", es: "—¿Vamos al cine? —¡Dale!", por: "Aceptar." }],
+            { ru: "— Пойдём в кино́? — {Ла́дно}!", es: "—¿Vamos al cine? —¡De acuerdo!", por: "Aceptar." }],
           mas: { texto: "да́же también es «incluso»: Он да́же не позвони́л («ni siquiera llamó»). Y un разгово́р es una charla: У нас был интере́сный разгово́р." } }
       ] },
     { id: "u13m9", n: 9, tipo: "leccion", nPractica: 12, titulo: "Corrección y autonomía", resumen: "Encontrar el error. ¿Suena natural?",
-      intro: "Ahora corregís vos: encontrá el error y arreglalo. Y además, preguntate: ¿así lo diría un ruso?",
+      intro: "Ahora corriges tú: encuentra el error y arréglalo. Y además, pregúntate: ¿así lo diría un ruso?",
       secciones: [
         { id: "u13-errores", titulo: "Los errores más comunes",
-          texto: "Antes de dar por terminado un texto, revisá estas seis cosas, una por una. Cada una tiene su regla:",
+          texto: "Antes de dar por terminado un texto, revisa estas seis cosas, una por una. Cada una tiene su regla:",
           errores: [
             { mal: "А́нна рабо́тал.", bien: "А́нна {рабо́тала}.", por: "El pasado cambia con el género." },
             { mal: "в большо́й го́род", bien: "в {большо́м го́роде}", por: "Después de la preposición, las dos palabras en el mismo caso." },
@@ -423,13 +423,13 @@ const UNIDAD_13 = {
             { mal: "Я бу́ду прочита́ть.", bien: "Я {прочита́ю}.", por: "бу́ду solo con el de proceso." },
             { mal: "два сестры́", bien: "{две} сестры́", por: "Con femeninos: две." },
             { mal: "Я гуля́ю с им.", bien: "Я гуля́ю {с ним}.", por: "Después de preposición: **н-**." }],
-          truco: "Leé tu texto una vez por cada error de la lista, no todo junto: así no se te escapa ninguno.",
+          truco: "Lee tu texto una vez por cada error de la lista, no todo junto: así no se te escapa ninguno.",
           mas: { texto: "Para corregirse se usa испра́вить: Я испра́вил оши́бку («corregí el error»). Y para revisar un texto, проверя́ть: Я всегда́ проверя́ю текст. Un предложе́ние es una oración; un пра́вило, una regla." },
           chequeo: [{ pide: "¿Qué falla en «Ма́ша чита́л кни́гу»?", opciones: ["El género del pasado", "El caso de кни́га"], ok: "El género del pasado", por: "Ма́ша: чита́ла." }] },
         { id: "u13-calcos", titulo: "¿Suena natural?",
           texto: "Algunas frases son correctas palabra por palabra, pero un ruso no las diría: son calcos del español.",
           errores: [
-            { mal: "Я рабо́таю как архите́ктор.", bien: "Я рабо́таю {архите́ктором}.", por: "De qué trabajás: instrumental." },
+            { mal: "Я рабо́таю как архите́ктор.", bien: "Я рабо́таю {архите́ктором}.", por: "De qué trabajas: instrumental." },
             { mal: "У него́ пять лет.", bien: "{Ему́} пять лет.", por: "La edad, con dativo." },
             { mal: "Я есть до́ма.", bien: "Я до́ма.", por: "En presente, sin есть." },
             { mal: "Я нра́влюсь э́тот фильм.", bien: "{Мне нра́вится} э́тот фильм.", por: "Lo que gusta es el sujeto." }],
@@ -437,9 +437,9 @@ const UNIDAD_13 = {
           chequeo: [{ pide: "«Tengo veinte años»", opciones: ["Мне два́дцать лет.", "У меня́ два́дцать лет."], ok: "Мне два́дцать лет.", por: "La edad, con dativo." }] }
       ] },
     { id: "u13m10", n: 10, tipo: "taller", titulo: "Taller de escritura", resumen: "Cinco textos, en cuatro pasos.",
-      intro: "Escribir bien es un proceso: planificar, escribir, revisar y reescribir. Elegí un texto y seguí los cuatro pasos. Las dos versiones quedan guardadas, así ves cuánto mejoró." },
+      intro: "Escribir bien es un proceso: planificar, escribir, revisar y reescribir. Elige un texto y sigue los cuatro pasos. Las dos versiones quedan guardadas, así ves cuánto mejoró." },
     { id: "u13m11", n: 11, tipo: "proyecto6", titulo: "Proyecto: Моя́ жизнь на ру́сском", resumen: "Tu portfolio en ruso, en seis partes.",
-      intro: "Un retrato tuyo en ruso, en seis partes: quién sos, tu vida, tu pasado, tu futuro, tu opinión y una conversación final sin respuestas fijas. Podés hacerlas en el orden que quieras y volver cuando quieras: todo queda guardado." },
+      intro: "Un retrato tuyo en ruso, en seis partes: quién eres, tu vida, tu pasado, tu futuro, tu opinión y una conversación final sin respuestas fijas. Puedes hacerlas en el orden que quieras y volver cuando quieras: todo queda guardado." },
     { id: "u13m12", n: 12, tipo: "examen", titulo: "Evaluación", resumen: "Casos, tiempos, conectores, lectura, audio, corrección y respuesta libre.",
       intro: "Treinta y cinco ejercicios en ocho partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
       partes: [
@@ -464,18 +464,18 @@ function U13_CONVERS() {
   const T = (quien, genero, titulo, chat, pasos) => ({ quien, genero, titulo, chat, pasos: pasos.map(p => ({ bot: p[0], es: p[1], tarea: p[2], sit: { necesita: p[3], modelos: [p[4]] }, pista: p[5] || "" })) });
   return (U13_CONVERS.cache = [
     T("Ма́ша", "f", "Charla con Masha: la ciudad", false, [
-      ["Приве́т! Где ты живёшь?", "¡Hola! ¿Dónde vivís?", "Respondé y devolvele la pregunta.", [E("dónde vivís", "живу́ в|~живу́"), U13_PREG], "Я живу́ в Барсело́не. А ты?", "Я живу́ в… А ты?"],
-      ["Я живу́ в Москве́. Тебе́ нра́вится твой го́род?", "Vivo en Moscú. ¿Te gusta tu ciudad?", "Respondé con una razón.", [E("sí o no", "да|нет|нра́вится|о́чень"), E("una razón", "потому́ что|поэ́тому|здесь")], "Да, о́чень, потому́ что здесь мо́ре.", "Да, … потому́ что…"],
-      ["А где ты жил ра́ньше?", "¿Y dónde vivías antes?", "Contestá en pasado y devolvele la pregunta.", [E("antes", "", U13_PASADO_RX, U13_PASADO), U13_PREG], "Ра́ньше я жил в Мадри́де. А ты?", "Ра́ньше я жил(а) в…"],
-      ["Я всегда́ жила́ в Москве́. Что тебе́ бо́льше нра́вится: Мадри́д и́ли Барсело́на?", "Siempre viví en Moscú. ¿Qué te gusta más: Madrid o Barcelona?", "Compará y explicá por qué.", [E("tu preferencia", "бо́льше|лу́чше|~нра́вится"), E("una razón", "потому́ что|чем|поэ́тому")], "Мне бо́льше нра́вится Барсело́на, потому́ что здесь мо́ре.", "Мне бо́льше нра́вится…"]]),
+      ["Приве́т! Где ты живёшь?", "¡Hola! ¿Dónde vives?", "Responde y devuélvele la pregunta.", [E("dónde vives", "живу́ в|~живу́"), U13_PREG], "Я живу́ в Барсело́не. А ты?", "Я живу́ в… А ты?"],
+      ["Я живу́ в Москве́. Тебе́ нра́вится твой го́род?", "Vivo en Moscú. ¿Te gusta tu ciudad?", "Responde con una razón.", [E("sí o no", "да|нет|нра́вится|о́чень"), E("una razón", "потому́ что|поэ́тому|здесь")], "Да, о́чень, потому́ что здесь мо́ре.", "Да, … потому́ что…"],
+      ["А где ты жил ра́ньше?", "¿Y dónde vivías antes?", "Contesta en pasado y devuélvele la pregunta.", [E("antes", "", U13_PASADO_RX, U13_PASADO), U13_PREG], "Ра́ньше я жил в Мадри́де. А ты?", "Ра́ньше я жил(а) в…"],
+      ["Я всегда́ жила́ в Москве́. Что тебе́ бо́льше нра́вится: Мадри́д и́ли Барсело́на?", "Siempre viví en Moscú. ¿Qué te gusta más: Madrid o Barcelona?", "Compara y explica por qué.", [E("tu preferencia", "бо́льше|лу́чше|~нра́вится"), E("una razón", "потому́ что|чем|поэ́тому")], "Мне бо́льше нра́вится Барсело́на, потому́ что здесь мо́ре.", "Мне бо́льше нра́вится…"]]),
     T("Ива́н", "m", "Charla con Iván: el sábado", false, [
-      ["Что ты де́лал в суббо́ту?", "¿Qué hiciste el sábado?", "Contá dos cosas, en orden.", [E("primero / después", "снача́ла|пото́м"), E("en pasado", "", U13_PASADO_RX, U13_PASADO)], "Снача́ла я до́лго спал, пото́м гуля́л с друзья́ми.", "Снача́ла… пото́м…"],
-      ["А где вы гуля́ли?", "¿Y dónde pasearon?", "Decí dónde y preguntale qué hizo él.", [E("dónde", "в па́рке|в це́нтре|на пля́же|~в|~на"), U13_PREG], "В па́рке. А ты что де́лал?", "В… А ты?"],
-      ["Я был до́ма и смотре́л фильм. Ты лю́бишь кино́?", "Estuve en casa y vi una película. ¿Te gusta el cine?", "Respondé y explicá por qué.", [E("tu respuesta", "да|нет|люблю́|не люблю́"), E("una razón", "потому́ что|поэ́тому|хотя́")], "Да, люблю́, потому́ что э́то интере́сно.", "Да, … потому́ что…"]]),
+      ["Что ты де́лал в суббо́ту?", "¿Qué hiciste el sábado?", "Cuenta dos cosas, en orden.", [E("primero / después", "снача́ла|пото́м"), E("en pasado", "", U13_PASADO_RX, U13_PASADO)], "Снача́ла я до́лго спал, пото́м гуля́л с друзья́ми.", "Снача́ла… пото́м…"],
+      ["А где вы гуля́ли?", "¿Y dónde pasearon?", "Di dónde y pregúntale qué hizo él.", [E("dónde", "в па́рке|в це́нтре|на пля́же|~в|~на"), U13_PREG], "В па́рке. А ты что де́лал?", "В… А ты?"],
+      ["Я был до́ма и смотре́л фильм. Ты лю́бишь кино́?", "Estuve en casa y vi una película. ¿Te gusta el cine?", "Responde y explica por qué.", [E("tu respuesta", "да|нет|люблю́|не люблю́"), E("una razón", "потому́ что|поэ́тому|хотя́")], "Да, люблю́, потому́ что э́то интере́сно.", "Да, … потому́ что…"]]),
     T("А́нна", "f", "Chat con Ana: planes", true, [
-      ["Каки́е у тебя́ пла́ны на ле́то?", "¿Qué planes tenés para el verano?", "Contá un plan y devolvele la pregunta.", [E("un plan", "бу́ду|пое́ду|пойду́|хочу́"), U13_PREG], "Ле́том я пое́ду на мо́ре. А у тебя́?", "Ле́том я… А у тебя́?"],
-      ["Я хочу́ пое́хать в го́ры. Как ты ду́маешь, э́то хоро́шая иде́я?", "Quiero ir a la montaña. ¿Qué te parece, es una buena idea?", "Opiná con una razón.", [E("tu opinión", OPIN + "|да|коне́чно"), E("una razón", "потому́ что|поэ́тому|хотя́")], "Я ду́маю, что э́то хоро́шая иде́я, потому́ что там краси́вая приро́да.", "Я ду́маю, что… потому́ что…"],
-      ["Хо́чешь пое́хать со мной?", "¿Querés venir conmigo?", "Aceptá y proponé cuándo.", [E("aceptar", "да|коне́чно|дава́й|хорошо́|с удово́льствием"), E("cuándo", "в ию́ле|в а́вгусте|ле́том|в суббо́ту|за́втра|~в")], "Коне́чно! Дава́й в ию́ле.", "Коне́чно! Дава́й в…"]])
+      ["Каки́е у тебя́ пла́ны на ле́то?", "¿Qué planes tienes para el verano?", "Cuenta un plan y devuélvele la pregunta.", [E("un plan", "бу́ду|пое́ду|пойду́|хочу́"), U13_PREG], "Ле́том я пое́ду на мо́ре. А у тебя́?", "Ле́том я… А у тебя́?"],
+      ["Я хочу́ пое́хать в го́ры. Как ты ду́маешь, э́то хоро́шая иде́я?", "Quiero ir a la montaña. ¿Qué te parece, es una buena idea?", "Opina con una razón.", [E("tu opinión", OPIN + "|да|коне́чно"), E("una razón", "потому́ что|поэ́тому|хотя́")], "Я ду́маю, что э́то хоро́шая иде́я, потому́ что там краси́вая приро́да.", "Я ду́маю, что… потому́ что…"],
+      ["Хо́чешь пое́хать со мной?", "¿Quieres venir conmigo?", "Acepta y propón cuándo.", [E("aceptar", "да|коне́чно|дава́й|хорошо́|с удово́льствием"), E("cuándo", "в ию́ле|в а́вгусте|ле́том|в суббо́ту|за́втра|~в")], "Коне́чно! Дава́й в ию́ле.", "Коне́чно! Дава́й в…"]])
   ]);
 }
 
@@ -523,24 +523,24 @@ function U13_TALLER() {
   const R = U13_R;
   return (U13_TALLER.cache = [
     { id: "mensaje", emoji: "💬", titulo: "Mensaje a un amigo", formato: "Mensaje informal", palabras: [80, 100],
-      consigna: "Escribile a un amigo: proponé un plan para el fin de semana, decí cuándo y dónde, y preguntale qué le parece.",
-      ideas: ["¿Qué plan proponés? (кино́, кафе́, парк, мо́ре…)", "¿Cuándo y dónde se encuentran?", "¿Por qué es una buena idea?", "¿Cómo saludás y cómo te despedís? (Приве́т! … Пока́!)"],
+      consigna: "Escríbele a un amigo: propón un plan para el fin de semana, di cuándo y dónde, y pregúntale qué le parece.",
+      ideas: ["¿Qué plan propones? (кино́, кафе́, парк, мо́ре…)", "¿Cuándo y dónde se encuentran?", "¿Por qué es una buena idea?", "¿Cómo saludas y cómo te despides? (Приве́т! … Пока́!)"],
       requisitos: [R.palabras(80, 100), R.palabra("Un saludo y una despedida (приве́т… пока́ / до встре́чи)", ["пока", "до встречи", "до субботы", "до завтра", "целую", "обнимаю"]), R.palabra("Una propuesta (дава́й, хо́чешь…?, мо́жет быть…)", ["давай", "хочешь", "может быть", "пойдем", "поедем"]), R.razones(1), R.pregunta()] },
     { id: "relato", emoji: "📖", titulo: "Relato: un fin de semana", formato: "Relato", palabras: [100, 120],
-      consigna: "Contá un fin de semana que recuerdes: qué hiciste, en qué orden, con quién y cómo te fue.",
+      consigna: "Cuenta un fin de semana que recuerdes: qué hiciste, en qué orden, con quién y cómo te fue.",
       ideas: ["¿Dónde estuviste y con quién?", "¿Qué hiciste primero, después y al final?", "¿Pasó algo inesperado?", "¿Te gustó? ¿Por qué? (мне понра́вилось…)"],
       requisitos: [R.palabras(100, 120), R.pasado(6), R.conect(3), R.palabra("Cómo te fue (мне понра́вилось, бы́ло ве́село…)", ["понравилось", "понравился", "понравилась", "было весело", "было интересно", "было хорошо", "было скучно"])] },
     { id: "descripcion", emoji: "🏙️", titulo: "Descripción: mi ciudad", formato: "Descripción", palabras: [100, 120],
-      consigna: "Describí tu ciudad (o tu barrio): cómo es, qué hay, cómo es la gente y el clima, y qué te gusta más.",
+      consigna: "Describe tu ciudad (o tu barrio): cómo es, qué hay, cómo es la gente y el clima, y qué te gusta más.",
       ideas: ["¿Es grande o chica? ¿Antigua o moderna?", "¿Qué hay? (музе́и, па́рки, мо́ре, рестора́ны…)", "¿Cómo es el clima en verano y en invierno? (ле́том, зимо́й)", "¿Qué te gusta más? ¿Qué no?"],
       requisitos: [R.palabras(100, 120), R.adjetivos(5), R.comparacion(), R.palabra("Una estación (ле́том, зимо́й, весно́й, о́сенью)", ["летом", "зимой", "весной", "осенью"])] },
     { id: "opinion", emoji: "💭", titulo: "Opinión: ¿ciudad grande o pueblo?", formato: "Opinión", palabras: [120, 150],
-      consigna: "¿Es mejor vivir en una ciudad grande o en un lugar chico? Dá tu opinión, con al menos dos razones, y reconocé algo del otro lado (хотя́…).",
-      ideas: ["¿Qué pensás? (я ду́маю, что… / по-мо́ему…)", "Primera razón (потому́ что…)", "Segunda razón (ещё / та́кже…)", "¿Qué tiene de bueno el otro lado? (хотя́…)", "Conclusión (поэ́тому…)"],
+      consigna: "¿Es mejor vivir en una ciudad grande o en un lugar chico? Da tu opinión, con al menos dos razones, y reconoce algo del otro lado (хотя́…).",
+      ideas: ["¿Qué piensas? (я ду́маю, что… / по-мо́ему…)", "Primera razón (потому́ что…)", "Segunda razón (ещё / та́кже…)", "¿Qué tiene de bueno el otro lado? (хотя́…)", "Conclusión (поэ́тому…)"],
       requisitos: [R.palabras(120, 150), R.opinion(), R.razones(2), R.comparacion()] },
     { id: "experiencia", emoji: "✈️", titulo: "Experiencia: un viaje", formato: "Experiencia personal", palabras: [120, 150],
-      consigna: "Contá un viaje: adónde fuiste, qué hiciste, qué te gustó, y adónde querés ir la próxima vez.",
-      ideas: ["¿Adónde fuiste, cuándo y con quién?", "¿Qué hiciste? (en orden)", "¿Qué te gustó más? ¿Qué no?", "¿Qué impresión te dejó? (впечатле́ние)", "¿Adónde querés ir la próxima vez? (бу́ду…, хочу́…)"],
+      consigna: "Cuenta un viaje: adónde fuiste, qué hiciste, qué te gustó, y adónde quieres ir la próxima vez.",
+      ideas: ["¿Adónde fuiste, cuándo y con quién?", "¿Qué hiciste? (en orden)", "¿Qué te gustó más? ¿Qué no?", "¿Qué impresión te dejó? (впечатле́ние)", "¿Adónde quieres ir la próxima vez? (бу́ду…, хочу́…)"],
       requisitos: [R.palabras(120, 150), R.pasado(6), R.futuro(1), R.conect(3), R.palabra("Una impresión (мне понра́вилось, впечатле́ние…)", ["понравилось", "понравился", "понравилась", "понравились", "впечатление", "впечатления"])] }
   ]);
 }
@@ -549,30 +549,30 @@ function U13_PROYECTO() {
   if (U13_PROYECTO.cache) return U13_PROYECTO.cache;
   const R = U13_R;
   return (U13_PROYECTO.cache = [
-    { id: "kto", titulo: "Кто я?", sub: "Quién soy", intro: "Presentate: nombre, de dónde sos, dónde vivís, de qué trabajás o qué estudiás, cómo sos.",
-      requisitos: [R.frases(10, 15), R.palabra("Tu nombre (меня́ зову́т…)", ["меня зовут"]), R.palabra("Dónde vivís (я живу́ в…)", ["живу"]), R.adjetivos(2)] },
-    { id: "zhizn", titulo: "Моя́ жизнь", sub: "Mi vida", intro: "Tu vida ahora: dónde vivís, qué hacés, las personas importantes, tus gustos y tus rutinas.",
+    { id: "kto", titulo: "Кто я?", sub: "Quién soy", intro: "Preséntate: nombre, de dónde eres, dónde vives, de qué trabajas o qué estudias, cómo eres.",
+      requisitos: [R.frases(10, 15), R.palabra("Tu nombre (меня́ зову́т…)", ["меня зовут"]), R.palabra("Dónde vives (я живу́ в…)", ["живу"]), R.adjetivos(2)] },
+    { id: "zhizn", titulo: "Моя́ жизнь", sub: "Mi vida", intro: "Tu vida ahora: dónde vives, qué haces, las personas importantes, tus gustos y tus rutinas.",
       requisitos: [R.frases(15, 20), R.presente(5), R.palabra("Una rutina (ка́ждый день, обы́чно, ча́сто…)", ["каждый день", "обычно", "часто", "всегда", "иногда"]), R.palabra("Un gusto (мне нра́вится, я люблю́…)", ["нравится", "нравятся", "люблю"])] },
     { id: "proshloe", titulo: "Моё про́шлое", sub: "Mi pasado", intro: "Una experiencia o un recuerdo: qué pasó, en qué orden y qué sentiste.",
       requisitos: [R.frases(15, 20), R.pasado(8), R.conect(3)] },
     { id: "budushchee", titulo: "Моё бу́дущее", sub: "Mi futuro", intro: "Tus planes, deseos y proyectos: para el año que viene, y tu sueño (моя́ мечта́…).",
       requisitos: [R.frases(15, 20), R.futuro(4), R.palabra("Un deseo o un sueño (хочу́…, мечта́…)", ["хочу", "мечта", "мечтаю"])] },
-    { id: "mnenie", titulo: "Моё мне́ние", sub: "Mi opinión", intro: "Elegí un tema (vivir en una ciudad, viajar, trabajar, aprender idiomas, la tecnología, la comida o el tiempo libre) y dá tu opinión con al menos dos razones.",
+    { id: "mnenie", titulo: "Моё мне́ние", sub: "Mi opinión", intro: "Elige un tema (vivir en una ciudad, viajar, trabajar, aprender idiomas, la tecnología, la comida o el tiempo libre) y da tu opinión con al menos dos razones.",
       requisitos: [R.palabras(120, 150), R.opinion(), R.razones(2)] },
-    { id: "razgovor", titulo: "Разгово́р", sub: "Conversación final", intro: "Siete preguntas sin una respuesta fija: contestá como quieras, con lo que sabés." }
+    { id: "razgovor", titulo: "Разгово́р", sub: "Conversación final", intro: "Siete preguntas sin una respuesta fija: contesta como quieras, con lo que sabes." }
   ]);
 }
 /* La conversación final: cada respuesta se corrige por intención */
 function U13_CONV_FINAL() {
   const E = u13E;
   return { quien: "А́нна", genero: "f", titulo: "Conversación final", chat: false, pasos: [
-    ["Где ты живёшь?", "¿Dónde vivís?", "Contestá.", [E("dónde vivís", "живу́ в|~живу́")], "Я живу́ в Барсело́не."],
-    ["Чем ты занима́ешься?", "¿A qué te dedicás?", "Contá de qué trabajás o qué estudiás.", [E("qué hacés", "рабо́таю|учу́сь|учу́|~я")], "Я рабо́таю архите́ктором."],
-    ["Что ты де́лал в суббо́ту?", "¿Qué hiciste el sábado?", "Contá algo en pasado.", [E("en pasado", "", U13_PASADO_RX, U13_PASADO)], "В суббо́ту я гуля́л с друзья́ми."],
-    ["Каки́е у тебя́ пла́ны на ле́то?", "¿Qué planes tenés para el verano?", "Contá un plan.", [E("un plan", "бу́ду|пое́ду|пойду́|хочу́|~ле́том")], "Ле́том я пое́ду на мо́ре."],
-    ["Что тебе́ нра́вится де́лать в свобо́дное вре́мя?", "¿Qué te gusta hacer en tu tiempo libre?", "Contestá.", [E("lo que te gusta", "мне нра́вится|я люблю́|люблю́|нра́вится")], "Мне нра́вится чита́ть и гуля́ть."],
-    ["С кем ты обы́чно прово́дишь свобо́дное вре́мя?", "¿Con quién pasás normalmente tu tiempo libre?", "Contestá: с + instrumental.", [E("con quién", "с друзья́ми|с семьёй|с бра́том|с сестро́й|с подру́гой|с дру́гом|~с")], "Обы́чно с друзья́ми и с семьёй."],
-    ["Как ты ду́маешь, учи́ть языки́ ва́жно?", "¿Qué pensás, es importante aprender idiomas?", "Opiná con una razón.", [E("tu opinión", "я ду́маю|я счита́ю|мне ка́жется|по-мо́ему|да|коне́чно"), E("una razón", "потому́ что|поэ́тому")], "Я ду́маю, что э́то ва́жно, потому́ что мо́жно говори́ть с людьми́."]
+    ["Где ты живёшь?", "¿Dónde vives?", "Contesta.", [E("dónde vives", "живу́ в|~живу́")], "Я живу́ в Барсело́не."],
+    ["Чем ты занима́ешься?", "¿A qué te dedicas?", "Cuenta de qué trabajas o qué estudias.", [E("qué haces", "рабо́таю|учу́сь|учу́|~я")], "Я рабо́таю архите́ктором."],
+    ["Что ты де́лал в суббо́ту?", "¿Qué hiciste el sábado?", "Cuenta algo en pasado.", [E("en pasado", "", U13_PASADO_RX, U13_PASADO)], "В суббо́ту я гуля́л с друзья́ми."],
+    ["Каки́е у тебя́ пла́ны на ле́то?", "¿Qué planes tienes para el verano?", "Cuenta un plan.", [E("un plan", "бу́ду|пое́ду|пойду́|хочу́|~ле́том")], "Ле́том я пое́ду на мо́ре."],
+    ["Что тебе́ нра́вится де́лать в свобо́дное вре́мя?", "¿Qué te gusta hacer en tu tiempo libre?", "Contesta.", [E("lo que te gusta", "мне нра́вится|я люблю́|люблю́|нра́вится")], "Мне нра́вится чита́ть и гуля́ть."],
+    ["С кем ты обы́чно прово́дишь свобо́дное вре́мя?", "¿Con quién pasas normalmente tu tiempo libre?", "Contesta: с + instrumental.", [E("con quién", "с друзья́ми|с семьёй|с бра́том|с сестро́й|с подру́гой|с дру́гом|~с")], "Обы́чно с друзья́ми и с семьёй."],
+    ["Как ты ду́маешь, учи́ть языки́ ва́жно?", "¿Qué piensas, es importante aprender idiomas?", "Opina con una razón.", [E("tu opinión", "я ду́маю|я счита́ю|мне ка́жется|по-мо́ему|да|коне́чно"), E("una razón", "потому́ что|поэ́тому")], "Я ду́маю, что э́то ва́жно, потому́ что мо́жно говори́ть с людьми́."]
   ].map(p => ({ bot: p[0], es: p[1], tarea: p[2], sit: { necesita: p[3], modelos: [p[4]] }, pista: "" })) };
 }
 
@@ -612,37 +612,37 @@ function ejerciciosUnidad13() {
   const uniq = a => [...new Set(a.filter(Boolean))];
   const sinP = t => t.replace(/[.,!?«»:—]/g, "").replace(/\s+/g, " ").trim();
   const trad = (id, modulo, es, ru, dict) => { const l = [].concat(ru);
-    out.push({ id: "U13-tr-" + id, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo, grupo: "TR-" + id, items: [], oir: l[0], pide: "Escribí en ruso: «" + es + "»", audio: l[0], audioManual: true, esperadas: l, idioma: "ru", explicacion: l[0] });
-    if (dict) out.push({ id: "U13-dc-" + id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo, grupo: "DC-" + id, items: [], pide: "Escuchá y escribí.", audio: l[0], esperadas: [l[0]], idioma: "ru", explicacion: l[0] + " — " + es }); };
+    out.push({ id: "U13-tr-" + id, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo, grupo: "TR-" + id, items: [], oir: l[0], pide: "Escribe en ruso: «" + es + "»", audio: l[0], audioManual: true, esperadas: l, idioma: "ru", explicacion: l[0] });
+    if (dict) out.push({ id: "U13-dc-" + id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo, grupo: "DC-" + id, items: [], pide: "Escucha y escribe.", audio: l[0], esperadas: [l[0]], idioma: "ru", explicacion: l[0] + " — " + es }); };
   const situ = (id, modulo, o) => out.push({ id: "U13-s-" + id, tipo: o.tipo || "situacion", forma: "situacion", dificultad: o.dif || 3, modulo, grupo: "S-" + id, items: [],
     pide: o.pide, escena: o.escena, contexto: o.contexto, pista: o.pista, audio: o.audio, audioManual: true,
     sit: { necesita: o.nec, modelos: [o.modelo], orden: !!o.orden }, oir: o.modelo, explicacion: "Una forma de decirlo: **" + o.modelo + "**" });
   const corr = (id, modulo, [frase, mal, arreglo, expl]) => { const pals = sinP(frase).split(" ");
-    out.push({ id: "U13-co-" + id, tipo: "corregir", forma: "corregir", dificultad: 3, modulo, grupo: "CO-" + id, items: [], pide: "Tocá la palabra que está mal y escribila bien.",
+    out.push({ id: "U13-co-" + id, tipo: "corregir", forma: "corregir", dificultad: 3, modulo, grupo: "CO-" + id, items: [], pide: "Toca la palabra que está mal y escríbela bien.",
       palabras: pals, correcta: pals.indexOf(mal), arreglo, oir: frase.replace(mal, arreglo), explicacion: expl }); };
   const E = u13E;
 
   /* ── Módulo 1: el mapa ── */
   for (let g = 0; g < 4; g++) {
     const sel = U13_MAPA.slice(g * 4, g * 4 + 4);
-    out.push({ id: "U13-mp-" + g, tipo: "funcion", forma: "emparejar", dificultad: 1, modulo: 1, grupo: "MP-" + g, items: [], pide: "Uní cada frase con lo que dice.",
+    out.push({ id: "U13-mp-" + g, tipo: "funcion", forma: "emparejar", dificultad: 1, modulo: 1, grupo: "MP-" + g, items: [], pide: "Une cada frase con lo que dice.",
       pares: sel.map(x => [x[1], x[0]]), explicacion: sel.map(x => x[1] + " — " + x[0]).join(" · ") });
   }
   U13_MAPA.forEach(([f, ru, es], j) => {
-    if (j % 2 === 0) trad("mp-" + j, 1, es + (/рабо́тал /.test(ru) ? " (sos hombre)" : ""), ru, j % 4 === 0);
+    if (j % 2 === 0) trad("mp-" + j, 1, es + (/рабо́тал /.test(ru) ? " (eres hombre)" : ""), ru, j % 4 === 0);
     else { const otras = baraja(U13_MAPA.filter(x => x[0] !== f), j).slice(0, 2).map(x => x[0]);
       out.push({ id: "U13-mpf-" + j, tipo: "funcion", forma: "elegir", dificultad: 1, modulo: 1, grupo: "MPF-" + j, items: [], audio: ru, audioManual: true, oir: ru, pide: "¿Para qué sirve esta frase?", grande: ru,
         opciones: baraja([f].concat(otras), j), correcta: f, explicacion: ru + " — " + es }); }
   });
-  situ("pres", 1, { pide: "Presentate: cómo te llamás, dónde vivís y de qué trabajás.", escena: "🙋", nec: [E("cómo te llamás", "меня́ зову́т|~я"), E("dónde vivís", "живу́ в|~живу́"), E("de qué trabajás", "рабо́таю|~я")],
+  situ("pres", 1, { pide: "Preséntate: cómo te llamas, dónde vives y de qué trabajas.", escena: "🙋", nec: [E("cómo te llamas", "меня́ зову́т|~я"), E("dónde vives", "живу́ в|~живу́"), E("de qué trabajas", "рабо́таю|~я")],
     modelo: "Меня́ зову́т А́нна. Я живу́ в Барсело́не. Я рабо́таю архите́ктором." });
-  situ("ayer", 1, { pide: "Contá qué hiciste ayer y qué vas a hacer mañana.", escena: "📅", nec: [E("ayer", "вчера́"), E("qué hiciste", "", U13_PASADO_RX, U13_PASADO), E("mañana", "за́втра")],
+  situ("ayer", 1, { pide: "Cuenta qué hiciste ayer y qué vas a hacer mañana.", escena: "📅", nec: [E("ayer", "вчера́"), E("qué hiciste", "", U13_PASADO_RX, U13_PASADO), E("mañana", "за́втра")],
     modelo: "Вчера́ я рабо́тал. За́втра я бу́ду отдыха́ть." });
 
   /* ── Módulo 2: casos en contexto ── */
   U13_CASOS_TXT.forEach(([frase, w, k], j) => {
     const pals = sinP(frase).split(" ");
-    out.push({ id: "U13-cs-" + j, tipo: "caso", forma: "tocar", dificultad: 2, modulo: 2, grupo: "CS-" + j, items: [], oir: frase, pide: "Tocá la palabra en " + U13_CASO_NOM[k] + ".",
+    out.push({ id: "U13-cs-" + j, tipo: "caso", forma: "tocar", dificultad: 2, modulo: 2, grupo: "CS-" + j, items: [], oir: frase, pide: "Toca la palabra en " + U13_CASO_NOM[k] + ".",
       palabras: pals, correcta: pals.indexOf(w), explicacion: "**" + w + "**: " + U13_CASO_NOM[k] + ". " + U13_MOTIVO[k] + "." });
     const otras = baraja(Object.keys(U13_MOTIVO).filter(x => x !== k), j).slice(0, 3);
     out.push({ id: "U13-mo-" + j, tipo: "motivo", forma: "elegir", dificultad: 2, modulo: 2, grupo: "MO-" + j, items: [], oir: frase, pide: "¿Por qué «" + w + "» tiene esa forma?", grande: frase,
@@ -652,65 +652,65 @@ function ejerciciosUnidad13() {
     const s = sust(ru); if (!s) return;
     const f = (pl ? s.pl : s.sg)[caso], fr = tpl.replace("{}", f);
     out.push({ id: "U13-fo-" + j, tipo: "forma", forma: j % 3 === 2 ? "escribir" : "elegir", dificultad: 2, modulo: 2, grupo: "FO-" + j, items: ["lex:" + s.id], oir: fr,
-      pide: "Completá: «" + es + "»", grande: tpl.replace("{}", "_____") + "  (" + s.ac + ")", explicacion: fr,
+      pide: "Completa: «" + es + "»", grande: tpl.replace("{}", "_____") + "  (" + s.ac + ")", explicacion: fr,
       ...(j % 3 === 2 ? { audio: fr, audioManual: true, esperadas: [fr], idioma: "ru" } : { opciones: baraja(uniq([f].concat(pl ? [s.pl[0], s.pl[1], s.pl[2], s.pl[4], s.pl[5]] : [s.sg[0], s.sg[1], s.sg[2], s.sg[4], s.sg[5]])).slice(0, 4), j), correcta: f }) });
   });
   U13_CORR_CASOS.forEach((c, j) => corr("cs-" + j, 2, c));
   [["Я гуля́ю с дру́гом.", "Я гуля́ю с друзья́ми.", "Paseo con mis amigos."], ["Я помога́ю студе́нту.", "Я помога́ю студе́нтам.", "Ayudo a los estudiantes."], ["Мы ду́маем о ребёнке.", "Мы ду́маем о де́тях.", "Pensamos en los chicos."]].forEach(([a, b, es], j) =>
-    out.push({ id: "U13-pl-" + j, tipo: "forma", forma: "escribir", dificultad: 3, modulo: 2, grupo: "PL-" + j, items: [], oir: b, pide: "Pasalo al plural: «" + es + "»", grande: a, audio: b, audioManual: true, esperadas: [b], idioma: "ru", explicacion: b }));
-  trad("cs-a", 2, "Mi amigo tiene auto.", ["У моего́ дру́га есть маши́на.", "У дру́га есть маши́на."], true);
+    out.push({ id: "U13-pl-" + j, tipo: "forma", forma: "escribir", dificultad: 3, modulo: 2, grupo: "PL-" + j, items: [], oir: b, pide: "Pásalo al plural: «" + es + "»", grande: a, audio: b, audioManual: true, esperadas: [b], idioma: "ru", explicacion: b }));
+  trad("cs-a", 2, "Mi amigo tiene coche.", ["У моего́ дру́га есть маши́на.", "У дру́га есть маши́на."], true);
   trad("cs-b", 2, "Después del trabajo lo llamo.", "По́сле рабо́ты я звоню́ ему́.", false);
 
   /* ── Módulo 3: tiempos ── */
   const MARC = ["Вчера́", "Сейча́с", "За́втра"];
   U13_TIEMPOS.forEach(([pres, pas, fut, es, g], j) => {
-    const quien = g === "m" ? " (sos hombre)" : g === "f" ? " (sos mujer)" : "";
+    const quien = g === "m" ? " (eres hombre)" : g === "f" ? " (eres mujer)" : "";
     const aPas = j % 2 === 0, obj = aPas ? pas : fut;
     out.push({ id: "U13-ti-" + j, tipo: "tiempo", forma: "escribir", dificultad: 2, modulo: 3, grupo: "TI-" + j, items: [], oir: obj,
-      pide: "Pasalo al " + (aPas ? "pasado" : "futuro") + (aPas ? quien : "") + ".", grande: pres, audio: obj, audioManual: true, esperadas: [obj], idioma: "ru", explicacion: obj });
+      pide: "Pásalo al " + (aPas ? "pasado" : "futuro") + (aPas ? quien : "") + ".", grande: pres, audio: obj, audioManual: true, esperadas: [obj], idioma: "ru", explicacion: obj });
     const k = j % 3, fr = [pas, pres, fut][k], base = fr.replace(/\.$/, "");
     out.push({ id: "U13-tm-" + j, tipo: "tiempo", forma: "elegir", dificultad: 1, modulo: 3, grupo: "TM-" + j, items: [], oir: MARC[k] + " " + base.charAt(0).toLowerCase() + base.slice(1) + ".",
       pide: "¿Qué palabra va?", grande: "_____ " + base.charAt(0).toLowerCase() + base.slice(1) + ".", opciones: MARC.slice(), correcta: MARC[k],
       explicacion: ["pasado → вчера́", "presente → сейча́с", "futuro → за́втра"][k] + "." });
   });
   U13_CORR_TIEMPOS.slice(0, 3).forEach((c, j) => corr("ti-" + j, 3, c));
-  trad("ti-a", 3, "Antes vivía en Madrid y ahora vivo en Barcelona. (sos hombre)", ["Ра́ньше я жил в Мадри́де, а сейча́с я живу́ в Барсело́не.", "Ра́ньше я жил в Мадри́де, а сейча́с живу́ в Барсело́не.", "Ра́ньше я жил в Мадри́де и сейча́с я живу́ в Барсело́не."], true);
-  trad("ti-b", 3, "Ayer estuve en casa. (sos mujer)", "Вчера́ я была́ до́ма.", true);
+  trad("ti-a", 3, "Antes vivía en Madrid y ahora vivo en Barcelona. (eres hombre)", ["Ра́ньше я жил в Мадри́де, а сейча́с я живу́ в Барсело́не.", "Ра́ньше я жил в Мадри́де, а сейча́с живу́ в Барсело́не.", "Ра́ньше я жил в Мадри́де и сейча́с я живу́ в Барсело́не."], true);
+  trad("ti-b", 3, "Ayer estuve en casa. (eres mujer)", "Вчера́ я была́ до́ма.", true);
   trad("ti-c", 3, "Mañana voy a terminar el libro.", "За́втра я прочита́ю кни́гу.", false);
   trad("ti-d", 3, "Pronto voy a ir a Moscú.", "Ско́ро я пое́ду в Москву́.", true);
-  situ("vida", 3, { pide: "Contá dónde vivías antes, dónde vivís ahora y qué vas a hacer pronto.", escena: "🧭", nec: [E("antes", "ра́ньше"), E("vivías", "", U13_PASADO_RX, U13_PASADO), E("ahora", "сейча́с"), E("pronto", "ско́ро|за́втра|бу́ду|бу́дем")],
+  situ("vida", 3, { pide: "Cuenta dónde vivías antes, dónde vives ahora y qué vas a hacer pronto.", escena: "🧭", nec: [E("antes", "ра́ньше"), E("vivías", "", U13_PASADO_RX, U13_PASADO), E("ahora", "сейча́с"), E("pronto", "ско́ро|за́втра|бу́ду|бу́дем")],
     modelo: "Ра́ньше я жил в Мадри́де. Сейча́с я живу́ в Барсело́не. Ско́ро я пое́ду в Москву́." });
 
   /* ── Módulo 4: contar ── */
   U13_CONECT.forEach(([fr, ok, ops, es], j) => {
     const ru = fr.replace("_____", ok);
-    out.push({ id: "U13-cn-" + j, tipo: "conector", forma: "elegir", dificultad: 2, modulo: 4, grupo: "CN-" + j, items: [], oir: ru, pide: "Completá: «" + es + "»", grande: fr, opciones: baraja(ops, j), correcta: ok, explicacion: ru });
-    if (j % 3 === 0) trad("cn-" + j, 4, es + (/позвони́л|жил|пригото́вил|пообе́дал/.test(ru) ? " (sos hombre)" : ""), ru, j % 2 === 0);
+    out.push({ id: "U13-cn-" + j, tipo: "conector", forma: "elegir", dificultad: 2, modulo: 4, grupo: "CN-" + j, items: [], oir: ru, pide: "Completa: «" + es + "»", grande: fr, opciones: baraja(ops, j), correcta: ok, explicacion: ru });
+    if (j % 3 === 0) trad("cn-" + j, 4, es + (/позвони́л|жил|пригото́вил|пообе́дал/.test(ru) ? " (eres hombre)" : ""), ru, j % 2 === 0);
   });
   const L = U13_RELATO, lineas = L.lineas.map(l => l[0]), todo = lineas.join(" ");
   L.preguntas.forEach(([q, ok, malas], k) => out.push({ id: "U13-rl-" + k, tipo: "lectura", forma: "elegir", dificultad: 2, modulo: 4, grupo: "RL-" + k, items: [], texto: lineas, pide: q,
     opciones: baraja([ok].concat(malas), k), correcta: ok, oir: todo, explicacion: (L.lineas.find(l => sin(l[0]).indexOf(sin(ok)) >= 0) || L.lineas[0]).join(" — ") }));
   L.vf.forEach(([af, v], k) => out.push({ id: "U13-rlv-" + k, tipo: "lectura-vf", forma: "vf", dificultad: 2, modulo: 4, grupo: "RLV-" + k, items: [], afirmacion: af, verdadero: v, audio: todo, texto: lineas, textoOculto: true,
     explicacion: (v ? "Verdadero. " : "Falso. ") + todo }));
-  situ("finde", 4, { pide: "Contá tu fin de semana en tres frases: снача́ла…, пото́м…, по́сле э́того (o наконе́ц)…", escena: "🗓️", orden: true,
+  situ("finde", 4, { pide: "Cuenta tu fin de semana en tres frases: снача́ла…, пото́м…, по́сле э́того (o наконе́ц)…", escena: "🗓️", orden: true,
     nec: [E("primero", "снача́ла"), E("después", "пото́м"), E("después de eso / al final", "по́сле э́того|наконе́ц"), E("en pasado", "", U13_PASADO_RX, U13_PASADO)],
     modelo: "Снача́ла я до́лго спал. Пото́м я пригото́вил за́втрак. По́сле э́того я гуля́л с дру́гом." });
-  situ("por", 4, { pide: "Decí que no fuiste a trabajar y explicá por qué (con потому́ что o поэ́тому).", escena: "🏠",
+  situ("por", 4, { pide: "Di que no fuiste a trabajar y explica por qué (con потому́ что o поэ́тому).", escena: "🏠",
     nec: [E("no trabajaste", "не рабо́тал|не рабо́тала|не был|не была́|~не"), E("la razón", "потому́ что|поэ́тому")], modelo: "Вчера́ я не рабо́тал, потому́ что был пра́здник." });
 
   /* ── Módulo 5: opinar ── */
   U13_OPINA.forEach(([fr, ok, ops, es], j) => {
     const ru = fr.replace("_____", ok);
-    out.push({ id: "U13-op-" + j, tipo: "opinion", forma: "elegir", dificultad: 2, modulo: 5, grupo: "OP-" + j, items: [], oir: ru, pide: "Completá: «" + es + "»", grande: fr, opciones: baraja(ops, j), correcta: ok, explicacion: ru });
+    out.push({ id: "U13-op-" + j, tipo: "opinion", forma: "elegir", dificultad: 2, modulo: 5, grupo: "OP-" + j, items: [], oir: ru, pide: "Completa: «" + es + "»", grande: fr, opciones: baraja(ops, j), correcta: ok, explicacion: ru });
     if (j % 2 === 1) trad("op-" + j, 5, es, ru, j % 4 === 1);
   });
   U13_CORR_OPINA.forEach((c, j) => corr("op-" + j, 5, c));
   const OPIN = "я ду́маю|я счита́ю|мне ка́жется|по-мо́ему|мне нра́вится|мне не нра́вится|я люблю́";
-  situ("ciudad", 5, { pide: "¿Te gusta vivir en tu ciudad? Dá tu opinión y una razón.", escena: "🏙️", nec: [E("tu opinión", OPIN), E("una razón", "потому́ что|поэ́тому")],
+  situ("ciudad", 5, { pide: "¿Te gusta vivir en tu ciudad? Da tu opinión y una razón.", escena: "🏙️", nec: [E("tu opinión", OPIN), E("una razón", "потому́ что|поэ́тому")],
     modelo: "Мне нра́вится жить в Барсело́не, потому́ что здесь тепло́ и есть мо́ре." });
-  situ("viajar", 5, { pide: "¿Es importante viajar? Opiná con я счита́ю, что… y una razón.", escena: "✈️", nec: [E("tu opinión", "я счита́ю|я ду́маю|мне ка́жется|по-мо́ему"), E("una razón", "потому́ что|поэ́тому")],
+  situ("viajar", 5, { pide: "¿Es importante viajar? Opina con я счита́ю, что… y una razón.", escena: "✈️", nec: [E("tu opinión", "я счита́ю|я ду́маю|мне ка́жется|по-мо́ему"), E("una razón", "потому́ что|поэ́тому")],
     modelo: "Я счита́ю, что путеше́ствовать ва́жно, потому́ что э́то интере́сно." });
-  situ("transp", 5, { pide: "¿Qué es mejor, el metro o el taxi? Opiná con una comparación.", escena: "🚇", nec: [E("tu opinión", OPIN + "|лу́чше"), E("una comparación", "чем|быстре́е|деше́вле|доро́же|удо́бнее|лу́чше")],
+  situ("transp", 5, { pide: "¿Qué es mejor, el metro o el taxi? Opina con una comparación.", escena: "🚇", nec: [E("tu opinión", OPIN + "|лу́чше"), E("una comparación", "чем|быстре́е|деше́вле|доро́же|удо́бнее|лу́чше")],
     modelo: "По-мо́ему, метро́ лу́чше, чем такси́: оно́ быстре́е и деше́вле." });
 
   /* ── Módulo 6: textos del mundo real ── */
@@ -728,7 +728,7 @@ function ejerciciosUnidad13() {
     const dial = A.lineas.map(([g, t]) => ({ texto: t, genero: g, rate: A.rate })), lineas = A.lineas.map(l => l[1]);
     const nota = "Nivel " + A.nivel + ". ";
     A.preguntas.forEach(([q, ok, malas], k) => out.push({ id: "U13-au-" + j + "-" + k, tipo: "audio", forma: "elegir", dificultad: 1 + Math.ceil(A.nivel / 2), modulo: 7, grupo: "AU-" + j + "-" + k, items: [],
-      audio: dial, audioManual: k > 0, texto: lineas, textoOculto: true, pide: nota + "Escuchá. " + q, opciones: baraja([ok].concat(malas), j + k), correcta: ok, explicacion: lineas.join(" ") }));
+      audio: dial, audioManual: k > 0, texto: lineas, textoOculto: true, pide: nota + "Escucha. " + q, opciones: baraja([ok].concat(malas), j + k), correcta: ok, explicacion: lineas.join(" ") }));
     A.vf.forEach(([af, v], k) => out.push({ id: "U13-auv-" + j + "-" + k, tipo: "audio-vf", forma: "vf", dificultad: 1 + Math.ceil(A.nivel / 2), modulo: 7, grupo: "AUV-" + j + "-" + k, items: [],
       afirmacion: af, verdadero: v, audio: dial, texto: lineas, textoOculto: true, explicacion: (v ? "Verdadero. " : "Falso. ") + lineas.join(" ") }));
   });
@@ -767,9 +767,9 @@ function ejerciciosUnidad13() {
   const diag = (id, modulo, regla, mal, ok, falla, otras, expl) => push({ id: "U13-diag-" + id, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo, regla, grupo: "DI-" + id, items: [],
     oir: ok, pide: "La frase tiene un error. ¿Qué falla?", grande: mal, opciones: mez([falla].concat(otras), id.length), correcta: falla, esperadas: [ok], explicacion: ok + " " + expl });
   const cad = (id, modulo, regla, base, pasos, expl) => push({ id: "U13-cad-" + id, tipo: "cadena", forma: "cadena", dificultad: 3, modulo, regla, grupo: "CA-" + id, items: [],
-    oir: pasos[pasos.length - 1][1][0], pide: "Cambiá la frase paso a paso.", base, pasos: pasos.map(([p, e]) => ({ pide: p, esperadas: e })), explicacion: [base].concat(pasos.map(p => p[1][0])).join(" → ") + " " + expl });
+    oir: pasos[pasos.length - 1][1][0], pide: "Cambia la frase paso a paso.", base, pasos: pasos.map(([p, e]) => ({ pide: p, esperadas: e })), explicacion: [base].concat(pasos.map(p => p[1][0])).join(" → ") + " " + expl });
   const desarm = (id, modulo, regla, pal, preguntas, expl) => push({ id: "U13-desarm-" + id, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo, regla, grupo: "DS-" + id, items: [],
-    oir: pal.join(" "), audio: pal.join(" "), audioManual: true, pide: "Respondé tocando las palabras de la frase.", palabras: pal, preguntas: preguntas.map(([p, c]) => ({ pide: p, correcta: c })), explicacion: pal.join(" ") + " " + expl });
+    oir: pal.join(" "), audio: pal.join(" "), audioManual: true, pide: "Responde tocando las palabras de la frase.", palabras: pal, preguntas: preguntas.map(([p, c]) => ({ pide: p, correcta: c })), explicacion: pal.join(" ") + " " + expl });
   const CASO_R = ["Por la preposición в: prepositivo", "Por la preposición с: instrumental", "Por la preposición у: genitivo", "Por el verbo: dativo", "Por el verbo: acusativo"];
 
   /* ── Módulo 1: el mapa ── */
@@ -777,7 +777,7 @@ function ejerciciosUnidad13() {
   nat("mp-1", 1, "u13-mapa", "У меня́ нет вре́мени.", "У меня́ нет вре́мя.", "нет + genitivo.");
 
   /* ── Módulo 2: los casos en contexto ── */
-  [["Я помога́ю бра́ту.", "Я помога́ю бра́та.", "помога́ть + dativo."], ["Я рабо́таю врачо́м.", "Я рабо́таю как врач.", "De qué trabajás: instrumental."], ["У мое́й сестры́ есть соба́ка.", "У моя́ сестра́ есть соба́ка.", "у + genitivo, las dos palabras."],
+  [["Я помога́ю бра́ту.", "Я помога́ю бра́та.", "помога́ть + dativo."], ["Я рабо́таю врачо́м.", "Я рабо́таю как врач.", "De qué trabajas: instrumental."], ["У мое́й сестры́ есть соба́ка.", "У моя́ сестра́ есть соба́ка.", "у + genitivo, las dos palabras."],
    ["Мы говори́м о рабо́те.", "Мы говори́м о рабо́та.", "о + prepositivo."], ["Я гуля́ю с подру́гой.", "Я гуля́ю с подру́га.", "с + instrumental."], ["В го́роде мно́го музе́ев.", "В го́роде мно́го музе́и.", "мно́го + genitivo plural."]].forEach(([ok, mal, ex], j) =>
     nat("cs-" + j, 2, j === 5 ? "u13-casos-plural" : "u13-casos-pregunta", ok, mal, ex));
   [["Я живу́ в Барсело́не.", "Барсело́не", 0], ["Я гуля́ю с дру́гом.", "дру́гом", 1], ["У бра́та есть маши́на.", "бра́та", 2], ["Я звоню́ ма́ме.", "ма́ме", 3], ["Я люблю́ му́зыку.", "му́зыку", 4]].forEach(([fr, w, k], j) =>
@@ -791,9 +791,9 @@ function ejerciciosUnidad13() {
    ["Я до́ма.", "Я есть до́ма.", "En presente, sin быть."], ["За́втра я прочита́ю кни́гу.", "За́втра я бу́ду прочита́ть кни́гу.", "Nunca бу́ду + resultado."], ["Ра́ньше я жил в Буэ́нос-А́йресе.", "Ра́ньше я живу́ в Буэ́нос-А́йресе.", "ра́ньше: pasado."]].forEach(([ok, mal, ex], j) =>
     nat("ti-" + j, 3, j === 2 || j === 3 ? "u13-byt" : j === 4 ? "u13-aspecto-tiempos" : j === 5 ? "u13-antes-ahora" : "u13-tres-tiempos", ok, mal, ex));
   pq("ti-0", 3, "u13-tres-tiempos", "За́втра я бу́ду рабо́тать.", "бу́ду рабо́тать", "за́втра pide futuro", ["вчера́ pide pasado", "Es presente"], "Futuro de proceso.");
-  oido("ti-0", 3, "u13-byt", "Я была́ в Москве́.", "Escuchá. ¿Quién habla?", ["Una mujer", "Un hombre"], "Una mujer", "была́: femenino.");
-  oido("ti-1", 3, "u13-tres-tiempos", "Я бу́ду в Москве́.", "Escuchá. ¿Cuándo?", ["En el futuro", "En el pasado"], "En el futuro", "бу́ду: futuro.");
-  cad("ti-0", 3, "u13-tres-tiempos", "Сего́дня я рабо́таю до́ма.", [["Ahora: ayer (sos hombre, вчера́).", ["Вчера́ я рабо́тал до́ма.", "Я рабо́тал до́ма вчера́."]], ["Ahora: mañana (за́втра).", ["За́втра я бу́ду рабо́тать до́ма.", "Я бу́ду рабо́тать до́ма за́втра."]]], "Los tres tiempos.");
+  oido("ti-0", 3, "u13-byt", "Я была́ в Москве́.", "Escucha. ¿Quién habla?", ["Una mujer", "Un hombre"], "Una mujer", "была́: femenino.");
+  oido("ti-1", 3, "u13-tres-tiempos", "Я бу́ду в Москве́.", "Escucha. ¿Cuándo?", ["En el futuro", "En el pasado"], "En el futuro", "бу́ду: futuro.");
+  cad("ti-0", 3, "u13-tres-tiempos", "Сего́дня я рабо́таю до́ма.", [["Ahora: ayer (eres hombre, вчера́).", ["Вчера́ я рабо́тал до́ма.", "Я рабо́тал до́ма вчера́."]], ["Ahora: mañana (за́втра).", ["За́втра я бу́ду рабо́тать до́ма.", "Я бу́ду рабо́тать до́ма за́втра."]]], "Los tres tiempos.");
 
   /* ── Módulo 4: contar una experiencia ── */
   [["Е́сли бу́дет тепло́, мы пойдём на пляж.", "Е́сли тепло́, мы пойдём на пляж."], ["Когда́ я прие́ду в Москву́, я тебе́ позвоню́.", "Когда́ я приезжа́ю в Москву́, я тебе́ позвоню́."],
@@ -801,18 +801,18 @@ function ejerciciosUnidad13() {
     nat("es-" + j, 4, "u13-esli", ok, mal, "Hablando del futuro, futuro en las dos partes."));
   pq("es-0", 4, "u13-esli", "Е́сли бу́дет тепло́, мы пойдём на пляж.", "бу́дет", "Habla del futuro: futuro en las dos partes", ["Es pasado", "Es una pregunta"], "е́сли + futuro.");
   diag("es-0", 4, "u13-esli", "Когда́ я приезжа́ю в Москву́, я тебе́ позвоню́.", "Когда́ я прие́ду в Москву́, я тебе́ позвоню́.", "El tiempo: hablando del futuro, va futuro", ["El caso de Москва́", "Falta е́сли"], "когда́ + futuro.");
-  cad("es-0", 4, "u13-esli", "Мы идём на пляж.", [["Ahora: mañana, una vez (за́втра).", ["За́втра мы пойдём на пляж.", "Мы пойдём на пляж за́втра."]], ["Agregá al principio: si hace calor (е́сли бу́дет тепло́).", ["Е́сли бу́дет тепло́, за́втра мы пойдём на пляж.", "Е́сли за́втра бу́дет тепло́, мы пойдём на пляж."]]], "е́сли + futuro.");
+  cad("es-0", 4, "u13-esli", "Мы идём на пляж.", [["Ahora: mañana, una vez (за́втра).", ["За́втра мы пойдём на пляж.", "Мы пойдём на пляж за́втра."]], ["Agrega al principio: si hace calor (е́сли бу́дет тепло́).", ["Е́сли бу́дет тепло́, за́втра мы пойдём на пляж.", "Е́сли за́втра бу́дет тепло́, мы пойдём на пляж."]]], "е́сли + futuro.");
   par("cn-0", 4, "u13-explicar", "¿Cuál dice que te acostaste porque estabas cansado?", "Я уста́л, поэ́тому лёг спать.", "Я уста́л, потому́ что лёг спать.", "La consecuencia, con поэ́тому.");
   par("cn-1", 4, "u13-explicar", "¿Cuál dice que no llamaste porque no tenías tiempo?", "Я не позвони́л, потому́ что у меня́ не́ было вре́мени.", "Я не позвони́л, поэ́тому у меня́ не́ было вре́мени.", "La causa, con потому́ что.");
   pq("cn-0", 4, "u13-explicar", "У меня́ не́ было вре́мени, поэ́тому я не позвони́л.", "поэ́тому", "Va antes de la consecuencia", ["Va antes de la causa", "Quiere decir «aunque»"], "поэ́тому = por eso.");
   [["Нам бы́ло ве́село.", "Мы бы́ли ве́село.", "Cómo nos sentimos: dativo + бы́ло + **-о**."], ["Мне бы́ло гру́стно.", "Я был гру́стно.", "dativo + бы́ло + **-о**."], ["Мне бы́ло стра́шно.", "Мне бы́ло стра́шный.", "Con мне бы́ло, la forma en **-о**."]].forEach(([ok, mal, ex], j) =>
     nat("se-" + j, 4, "u13-sentir", ok, mal, ex));
-  oido("se-0", 4, "u13-sentir", "Я обра́довалась.", "Escuchá. ¿Quién habla?", ["Una mujer", "Un hombre"], "Una mujer", "обра́довалась: femenino.");
-  oido("se-1", 4, "u13-sentir", "Я испуга́лся.", "Escuchá. ¿Quién habla?", ["Un hombre", "Una mujer"], "Un hombre", "испуга́лся: masculino.");
+  oido("se-0", 4, "u13-sentir", "Я обра́довалась.", "Escucha. ¿Quién habla?", ["Una mujer", "Un hombre"], "Una mujer", "обра́довалась: femenino.");
+  oido("se-1", 4, "u13-sentir", "Я испуга́лся.", "Escucha. ¿Quién habla?", ["Un hombre", "Una mujer"], "Un hombre", "испуга́лся: masculino.");
   pq("se-0", 4, "u13-sentir", "Нам бы́ло ве́село.", "Нам", "Quien siente va en dativo", ["Es el sujeto", "Es el caso de с"], "Como мне хо́лодно: dativo.");
 
   /* ── Módulo 5: opinar ── */
-  nat("ac-0", 5, "u13-acuerdo", "Я согла́сна.", "Я согла́сный.", "«Estoy de acuerdo»: la forma corta, en femenino.", { pide: "Sos mujer. ¿Cuál suena natural?" });
+  nat("ac-0", 5, "u13-acuerdo", "Я согла́сна.", "Я согла́сный.", "«Estoy de acuerdo»: la forma corta, en femenino.", { pide: "Eres mujer. ¿Cuál suena natural?" });
   nat("ac-1", 5, "u13-acuerdo", "Мы согла́сны.", "Мы согла́сен.", "Plural: согла́сны.");
   nat("ac-2", 5, "u13-acuerdo", "Я согла́сен с тобо́й.", "Я согла́сен с ты.", "с + instrumental: с тобо́й.");
   nat("op-0", 5, "u13-opinion", "Мне ка́жется, что э́то хорошо́.", "Я ка́жется, что э́то хорошо́.", "ка́жется va con dativo.");
@@ -822,16 +822,16 @@ function ejerciciosUnidad13() {
   diag("op-0", 5, "u13-opinion", "Я ка́жется, что э́то удо́бно.", "Мне ка́жется, что э́то удо́бно.", "ка́жется va con dativo", ["Falta что", "La forma de удо́бно"], "мне ка́жется.");
 
   /* ── Módulo 8: la charla ── */
-  par("dv-0", 8, "u13-devolver", "Te preguntaron «У тебя́ есть соба́ка?». ¿Cómo devolvés la pregunta?", "А у тебя́?", "А тебе́?", "Mismo caso que la pregunta: у тебя́.");
-  par("dv-1", 8, "u13-devolver", "Te preguntaron «Тебе́ нра́вится мо́ре?». ¿Cómo devolvés la pregunta?", "А тебе́?", "А ты?", "Mismo caso que la pregunta: тебе́.");
-  par("gt-0", 8, "u13-ganar-tiempo", "Querés cambiar de tema en la charla. ¿Cómo empezás?", "Кста́ти, ты был в Москве́?", "Ла́дно, ты был в Москве́?", "кста́ти: por cierto.");
-  par("gt-1", 8, "u13-ganar-tiempo", "Te preguntan algo difícil y necesitás pensar. ¿Qué decís?", "Ну… да́же не зна́ю.", "Договори́лись!", "Ну… да́же не зна́ю: pensar en voz alta.");
+  par("dv-0", 8, "u13-devolver", "Te preguntaron «У тебя́ есть соба́ка?». ¿Cómo devuelves la pregunta?", "А у тебя́?", "А тебе́?", "Mismo caso que la pregunta: у тебя́.");
+  par("dv-1", 8, "u13-devolver", "Te preguntaron «Тебе́ нра́вится мо́ре?». ¿Cómo devuelves la pregunta?", "А тебе́?", "А ты?", "Mismo caso que la pregunta: тебе́.");
+  par("gt-0", 8, "u13-ganar-tiempo", "Quieres cambiar de tema en la charla. ¿Cómo empiezas?", "Кста́ти, ты был в Москве́?", "Ла́дно, ты был в Москве́?", "кста́ти: por cierto.");
+  par("gt-1", 8, "u13-ganar-tiempo", "Te preguntan algo difícil y necesitas pensar. ¿Qué dices?", "Ну… да́же не зна́ю.", "Договори́лись!", "Ну… да́же не зна́ю: pensar en voz alta.");
 
   /* ── Módulo 9: autocorrección ── */
   const FALLAS = ["El género del pasado", "El caso después de la preposición", "El posesivo no está en el mismo caso", "бу́ду con el de resultado", "два / две", "Falta la н- después de la preposición"];
   [["Ма́ша чита́л кни́гу.", "Ма́ша чита́ла кни́гу.", 0], ["Я живу́ в большо́й го́род.", "Я живу́ в большо́м го́роде.", 1], ["Я звоню́ моя́ сестре́.", "Я звоню́ мое́й сестре́.", 2],
    ["Я бу́ду прочита́ть кни́гу.", "Я прочита́ю кни́гу.", 3], ["У меня́ два сестры́.", "У меня́ две сестры́.", 4], ["Я гуля́ю с им.", "Я гуля́ю с ним.", 5]].forEach(([mal, ok, k], j) =>
-    diag("er-" + j, 9, "u13-errores", mal, ok, FALLAS[k], mez(FALLAS.filter((x, i) => i !== k), j).slice(0, 2), "Revisá: " + FALLAS[k].toLowerCase() + "."));
+    diag("er-" + j, 9, "u13-errores", mal, ok, FALLAS[k], mez(FALLAS.filter((x, i) => i !== k), j).slice(0, 2), "Revisa: " + FALLAS[k].toLowerCase() + "."));
   [["Ему́ пять лет.", "У него́ пять лет.", "La edad, con dativo."], ["Мне нра́вится э́тот фильм.", "Я нра́влюсь э́тот фильм.", "Lo que gusta es el sujeto."]].forEach(([ok, mal, ex], j) => nat("ca-" + j, 9, "u13-calcos", ok, mal, ex));
 
   /* ── Vocabulario nuevo (12/10/2026): significado y palabra-es-ru, en el módulo donde se presenta ── */
@@ -844,7 +844,7 @@ function ejerciciosUnidad13() {
     const base = { grupo: e.id, items: ["lex:" + e.id], oir: e.ru };
     if (dis.length >= 2) out.push(Object.assign({ id: "U13-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Qué significa?", grande: e.acento, audio: e.ru,
       opciones: baraja([es].concat(dis), i), correcta: es, explicacion: e.acento + " — " + es }, base));
-    out.push(Object.assign({ id: "U13-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
+    out.push(Object.assign({ id: "U13-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribe en ruso: «" + es + "»", audio: e.ru, audioManual: true,
       pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.replace(/-/g, "").length + " letras.", esperadas: [e.acento], idioma: "ru", explicacion: e.acento + " — " + es }, base));
   });
 

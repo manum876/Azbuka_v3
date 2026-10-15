@@ -1,7 +1,7 @@
 {
   "name": "Азбука · Ruso",
   "short_name": "Азбука",
-  "description": "Aprendé ruso desde cero, pensado para hispanohablantes.",
+  "description": "Aprende ruso desde cero, pensado para hispanohablantes.",
   "lang": "es",
   "dir": "ltr",
   "start_url": "./index.html",

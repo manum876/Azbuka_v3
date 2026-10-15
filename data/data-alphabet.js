@@ -4,7 +4,7 @@
    (módulo independiente). Cargar ANTES del script propio de cada
    archivo: <script src="data-alphabet.js"></script>
    Expone: ALPHABET (33 letras) y generateQuizQuestion(letter, allLetters)
-   Si corregís una nota de pronunciación o agregás una palabra de
+   Si corriges una nota de pronunciación o agregas una palabra de
    ejemplo, se edita UNA sola vez acá y se refleja en ambos módulos.
    Transliteración (24/09/2026): sigue la Parte B de CONVENCION_IPA.md,
    la pronunciación figurada en español (х = j, щ = sch, й = i). La de
@@ -12,7 +12,7 @@
    lexId): si cambia allá, hay que copiarla acá.
    Actualizado el 25/09/2026 (Unidad 1): 5 palabras por letra (165);
    se quitaron журна́л de Ю y рабо́та de П, que no tenían esa letra;
-   textos en español rioplatense (voseo) y corrección de notas con
+   textos en español neutro (tú) y corrección de notas con
    errores (ensordecimiento de муж y всё, acento de идти́, etc.).
    ============================================================ */
 
@@ -86,7 +86,7 @@ const ALPHABET=[
       "description": "Consonante oclusiva bilabial sonora. Igual que la **b** española cuando va al inicio de sílaba.",
       "similar": "Como la **b** de «barco», «bota», «bueno».",
       "mistakes": "En ruso la Б se pronuncia siempre oclusiva (con cierre total de labios), nunca fricativa como la **b** suave española entre vocales.",
-      "tips": "Pensá siempre en una **b** fuerte de inicio de palabra. Al final de palabra o ante consonante sorda, se ensordece y suena como **п** (p).",
+      "tips": "Piensa siempre en una **b** fuerte de inicio de palabra. Al final de palabra o ante consonante sorda, se ensordece y suena como **п** (p).",
       "similar_letters": "Б vs В: Б es labial (labios), В es labiodental (labio-diente)."
     },
     "words": [
@@ -141,7 +141,7 @@ const ALPHABET=[
       "description": "Consonante fricativa labiodental sonora. Se pronuncia igual que la **v** del inglés o italiano.",
       "similar": "El labio inferior toca los dientes superiores, como al decir **v** en inglés «very».",
       "mistakes": "El hispanohablante tiende a pronunciarla como **b** española. Son sonidos distintos: la В es fricativa, no oclusiva.",
-      "tips": "Poné el labio inferior contra los dientes superiores y hacé vibrar las cuerdas vocales. Al final de palabra se ensordece: suena como **ф** (f).",
+      "tips": "Pon el labio inferior contra los dientes superiores y haz vibrar las cuerdas vocales. Al final de palabra se ensordece: suena como **ф** (f).",
       "similar_letters": "В vs Б: В es labiodental fricativa, Б es bilabial oclusiva."
     },
     "words": [
@@ -232,7 +232,7 @@ const ALPHABET=[
         "cyrillic": "сегодня",
         "translit": "sivódnia",
         "meaning": "hoy",
-        "note": "Excepción: acá la Г suena **v** (sivódnia)",
+        "note": "Excepción: aquí la Г suena **v** (sivódnia)",
         "lexId": "CMR-00202"
       }
     ]
@@ -251,7 +251,7 @@ const ALPHABET=[
       "description": "Consonante oclusiva dental sonora. Similar a la **d** española inicial.",
       "similar": "Como la **d** de «dar», «dedo». Pero en ruso siempre es más tensa.",
       "mistakes": "La **d** española entre vocales se relaja mucho (casi como **th** inglesa). La Д rusa es siempre oclusiva, incluso entre vocales.",
-      "tips": "Pronunciala siempre con cierre total de la lengua contra los alvéolos. Al final de palabra o ante sorda, se ensordece a **т**.",
+      "tips": "Pronúnciala siempre con cierre total de la lengua contra los alvéolos. Al final de palabra o ante sorda, se ensordece a **т**.",
       "similar_letters": "Д vs Т: mismo punto, Д es sonora, Т es sorda."
     },
     "words": [
@@ -362,7 +362,7 @@ const ALPHABET=[
       "description": "Vocal que suena «io» (й + о). Siempre va en sílaba tónica. En textos comunes a veces se escribe sin los dos puntos, igual que Е.",
       "similar": "Como la «io» de «radio» o «Julio», pero en un solo golpe.",
       "mistakes": "En textos sin los dos puntos puede confundirse con Е. Siempre es tónica y siempre suena «io» (o **o** ablandando la consonante anterior).",
-      "tips": "La Ё siempre lleva acento. Si ves la diéresis, sabés que esa sílaba es la tónica de la palabra.",
+      "tips": "La Ё siempre lleva acento. Si ves la diéresis, sabes que esa sílaba es la tónica de la palabra.",
       "similar_letters": "Ё vs Е: Ё es siempre «io» y siempre tónica; Е puede ser «ie» o **e** y su acento varía."
     },
     "words": [
@@ -417,7 +417,7 @@ const ALPHABET=[
       "description": "Consonante fricativa postalveolar sonora: la misma posición que Ш, pero con vibración de las cuerdas vocales. El sonido de la **j** francesa.",
       "similar": "Como la **j** de «jambon» en francés o la **s** del inglés «vision».",
       "mistakes": "Los hispanohablantes tienden a pronunciarla como la **j** española (aspirada). La Ж es fricativa sonora, no aspirada.",
-      "tips": "Poné la lengua en la misma posición que para **sh**, pero hacé vibrar las cuerdas vocales. La Ж nunca se palataliza aunque le siga **i** o **e**.",
+      "tips": "Pon la lengua en la misma posición que para **sh**, pero haz vibrar las cuerdas vocales. La Ж nunca se palataliza aunque le siga **i** o **e**.",
       "similar_letters": "Ж vs Ш: Ж es sonora, Ш es sorda. Mismo punto de articulación."
     },
     "words": [
@@ -471,8 +471,8 @@ const ALPHABET=[
     "details": {
       "description": "Consonante fricativa alveolar sonora. Como la **z** del inglés «zoo» o del francés «zéro».",
       "similar": "Como la **s** de «mismo» cuando se pronuncia con vibración, o la **z** del inglés «zero».",
-      "mistakes": "En el Río de la Plata (y en casi toda Latinoamérica) la **z** suena **s**. La З rusa no: tiene vibración, como un zumbido.",
-      "tips": "Imaginá el sonido de una abeja: «zzz». Al final de palabra se ensordece: suena como С (s).",
+      "mistakes": "En casi toda Latinoamérica y en partes de España la **z** suena **s**; en el resto de España, como la «th» inglesa. La З rusa no: es una **s** con vibración, como un zumbido.",
+      "tips": "Imagina el sonido de una abeja: «zzz». Al final de palabra se ensordece: suena como С (s).",
       "similar_letters": "З vs С: З es sonora, С es sorda. Mismo punto de articulación."
     },
     "words": [
@@ -527,7 +527,7 @@ const ALPHABET=[
       "description": "Vocal anterior cerrada. Idéntica a la **i** española.",
       "similar": "Como la **i** de «isla», «libro», «iglesia».",
       "mistakes": "Pocos problemas para hispanohablantes. Tras Ж, Ш, Ц, la И se pronuncia ligeramente más central, casi como Ы.",
-      "tips": "Tras las consonantes Ж, Ш y Ц ortográficamente se escribe И pero fonéticamente suena más como Ы. Regla práctica: pronunciá la И normal en todos los demás casos.",
+      "tips": "Tras las consonantes Ж, Ш y Ц ortográficamente se escribe И pero fonéticamente suena más como Ы. Regla práctica: pronuncia la И normal en todos los demás casos.",
       "similar_letters": "И vs Й: И es vocal y forma sílaba; Й es consonante, como la **i** de «aire». И vs Ы: И es frontal y clara; Ы es central y más oscura."
     },
     "words": [
@@ -582,7 +582,7 @@ const ALPHABET=[
       "description": "Semivocal palatal. Sonido de deslizamiento, nunca forma sílaba sola.",
       "similar": "Como la **i** de «aire», «peine» o la **y** de «hoy», «rey»: nunca forma sílaba sola.",
       "mistakes": "No es una vocal plena: no puede formar sílaba sola. No la pronuncies como una **i** larga.",
-      "tips": "Se usa en diptongos y al inicio de palabras préstamo. Pensala como una i muy breve, que se desliza hacia la vocal de al lado.",
+      "tips": "Se usa en diptongos y al inicio de palabras préstamo. Piénsala como una i muy breve, que se desliza hacia la vocal de al lado.",
       "similar_letters": "Й vs И: И es vocal silábica; Й es semivocal, no forma sílaba. Й es el componente vocálico de sonidos como ай, ей, ой."
     },
     "words": [
@@ -747,7 +747,7 @@ const ALPHABET=[
     "details": {
       "description": "Consonante nasal bilabial. Idéntica a la **m** española.",
       "similar": "Como la **m** de «madre», «mano», «mundo».",
-      "mistakes": "Sin dificultades para hispanohablantes. Tené en cuenta que ante vocales palatales se palataliza ligeramente.",
+      "mistakes": "Sin dificultades para hispanohablantes. Ten en cuenta que ante vocales palatales se palataliza ligeramente.",
       "tips": "М ante Е, И, Ё, Я, Ю se pronuncia palatalizada (suavizada). Es un cambio sutil pero existe.",
       "similar_letters": "М vs Н: М es bilabial, Н es alveolar. Ambas son nasales."
     },
@@ -969,7 +969,7 @@ const ALPHABET=[
       "description": "Consonante vibrante alveolar. Suena más cerca de la **rr** de «perro»; entre vocales puede ser una sola vibración, pero nunca tan suave como la **r** de «pero».",
       "similar": "Como la **rr** de «carro», «perro».",
       "mistakes": "Los hispanohablantes a veces la hacen demasiado suave. En ruso la Р siempre vibra con fuerza.",
-      "tips": "Pensá en la **rr** de «perro»: la Р rusa nunca se relaja.",
+      "tips": "Piensa en la **rr** de «perro»: la Р rusa nunca se relaja.",
       "similar_letters": "Р vs Л: Р es vibrante, Л es lateral."
     },
     "words": [
@@ -1299,7 +1299,7 @@ const ALPHABET=[
       "description": "Africada alveolar sorda. Combinación rápida de **t** y **s**.",
       "similar": "Como **ts** en «tsunami», o la **z** italiana de «pizza», o la **tz** alemana.",
       "mistakes": "Los hispanohablantes tienden a separar la **t** y la **s**. Son un único sonido fusionado.",
-      "tips": "Empezá cerrando la boca como para **t** y terminá con el soplido de **s**, todo en un impulso. La Ц nunca se ablanda.",
+      "tips": "Empieza cerrando la boca como para **t** y termina con el soplido de **s**, todo en un impulso. La Ц nunca se ablanda.",
       "similar_letters": "Ц vs Ч: Ц es alveolar sorda; Ч es postalveolar y siempre suave."
     },
     "words": [
@@ -1401,7 +1401,7 @@ const ALPHABET=[
     "lower": "ш",
     "name": "Ша",
     "translit": "sh",
-    "pronunciation": "Como **sh** en inglés «show», o la **ll** de «lluvia» como la dicen muchos porteños («shuvia»)",
+    "pronunciation": "Como **sh** en inglés «show»",
     "sounds": [
       "sh"
     ],
@@ -1409,7 +1409,7 @@ const ALPHABET=[
       "description": "Consonante fricativa postalveolar sorda. Como la **sh** inglesa o la **ch** francesa.",
       "similar": "Como **sh** en «show», «she». O la **ch** de «chocolat» en francés.",
       "mistakes": "No existe en español estándar. Algunos confunden con **ch** española. La Ш es fricativa (sin oclusión inicial), la Ч es africada.",
-      "tips": "Llevá la lengua hacia atrás más que para **s**. La Ш siempre es dura, nunca se palataliza.",
+      "tips": "Lleva la lengua hacia atrás más que para **s**. La Ш siempre es dura, nunca se palataliza.",
       "similar_letters": "Ш vs Щ: Ш es dura; Щ es suave y prolongada. Ш vs Ж: Ш sorda, Ж sonora."
     },
     "words": [
@@ -1437,7 +1437,7 @@ const ALPHABET=[
       {
         "cyrillic": "машина",
         "translit": "mashína",
-        "meaning": "auto",
+        "meaning": "coche",
         "note": "Ш intervocálica",
         "lexId": "CMR-00187"
       },
@@ -1464,7 +1464,7 @@ const ALPHABET=[
       "description": "Consonante fricativa palatal sorda prolongada. Suave y larga, sin equivalente directo en español.",
       "similar": "Como una **sh** suave y alargada, o **sch** en alemán «Schule» pero más palatal.",
       "mistakes": "No tiene equivalente en español. Muchos la pronuncian igual que Ш. La diferencia: Щ es palatal y puede sonar como **sh** + **ch** fusionadas.",
-      "tips": "Pronunciá **sh** y adelantá la lengua hacia el paladar. En la lengua moderna suena como una **ш** larga y suavizada.",
+      "tips": "Pronuncia **sh** y adelanta la lengua hacia el paladar. En la lengua moderna suena como una **ш** larga y suavizada.",
       "similar_letters": "Щ vs Ш: Щ es siempre suave y palatal; Ш es siempre dura. Son completamente distintas."
     },
     "words": [
@@ -1570,9 +1570,9 @@ const ALPHABET=[
     ],
     "details": {
       "description": "Vocal central cerrada. No existe en español. Es uno de los sonidos más difíciles para hispanohablantes.",
-      "similar": "Intentá decir **i** pero con la lengua retraída hacia la garganta, como si tuvieras la boca a medio abrir. A veces descrito como el sonido al recibir un golpe en el estómago.",
+      "similar": "Intenta decir **i** pero con la lengua retraída hacia la garganta, como si tuvieras la boca a medio abrir. A veces descrito como el sonido al recibir un golpe en el estómago.",
       "mistakes": "Pronunciarla como **i**. Son muy distintas: И es frontal y clara; Ы es central/posterior y oscura.",
-      "tips": "Truco: decí **u** y, sin mover los labios, intentá decir **i**. El resultado se acercará a Ы. O decí «bi» y mantené los labios relajados (sin redondear ni estirar): eso es Ы.",
+      "tips": "Truco: di **u** y, sin mover los labios, intenta decir **i**. El resultado se acercará a Ы. O di «bi» y mantén los labios relajados (sin redondear ni estirar): eso es Ы.",
       "similar_letters": "Ы vs И: ambas son cerradas, pero Ы es central-posterior e И es frontal. La diferencia cambia el significado: быть vs бить."
     },
     "words": [
@@ -1625,7 +1625,7 @@ const ALPHABET=[
       "description": "El signo blando (мягкий знак) no tiene sonido propio. Indica que la consonante anterior se palataliza: la lengua se arquea hacia el paladar al pronunciarla.",
       "similar": "No hay equivalente directo. El efecto se parece a agregar una **i** muy breve después de la consonante: ть suena como una **t** con una **i** brevísima.",
       "mistakes": "Ignorarlo completamente. La palatalización cambia el significado: брат es «hermano» y брать es «tomar».",
-      "tips": "Cuando veas Ь, palatalizá la consonante anterior: arqueá la lengua hacia el paladar. Al final de palabra es especialmente importante.",
+      "tips": "Cuando veas Ь, palataliza la consonante anterior: arquea la lengua hacia el paladar. Al final de palabra es especialmente importante.",
       "similar_letters": "Ь vs Ъ: Ь suaviza (palataliza), Ъ endurece (bloquea palatalización)."
     },
     "words": [
@@ -1864,7 +1864,7 @@ function generateQuizQuestion(letter, allLetters) {
     return {
       type: "sound",
       question: `¿Cómo se pronuncia la letra ${letter.upper}?`,
-      hint: "Elegí la pronunciación correcta",
+      hint: "Elige la pronunciación correcta",
       options: options.map(l => ({
         id: l.id,
         text: l.pronunciation.replace(/\*\*/g, ""),
@@ -1878,7 +1878,7 @@ function generateQuizQuestion(letter, allLetters) {
     return {
       type: "letter",
       question: `¿Qué letra representa el sonido "${letter.translit}"?`,
-      hint: "Elegí la letra correcta",
+      hint: "Elige la letra correcta",
       options: options.map(l => ({
         id: l.id,
         text: l.upper,

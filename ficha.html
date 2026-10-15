@@ -232,7 +232,7 @@ function Diccionario({ c }) {
     !filtrando && h("div", { className: "intro" },
       h("div", { className: "intro-top" }, h("div", { className: "intro-icon", style: { background: col.bg, color: col.fg } }, modulo.glyph),
         h("div", null, h("div", { className: "intro-title" }, "Diccionario"), h("div", { className: "intro-kicker" }, total + " PALABRAS · " + Object.keys(temas).length + " TEMAS"))),
-      h("div", { className: "intro-desc" }, "Buscá una palabra o recorré el léxico por tema y por categoría. Tocá cualquier palabra para abrir su ficha.")),
+      h("div", { className: "intro-desc" }, "Busca una palabra o recorre el léxico por tema y por categoría. Toca cualquier palabra para abrir su ficha.")),
     buscador,
     h("div", { className: "lbl" }, "Categoría"), chipsPos,
     !filtrando && h(React.Fragment, null, h("div", { className: "lbl" }, "Temas"),
@@ -457,7 +457,7 @@ function App() {
                 ? { background: colNivel[n] + "22", border: `1px solid ${colNivel[n]}`, color: colNivel[n] }
                 : { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
             }, NIVEL_LABEL[n]))),
-          React.createElement("div", { className: "nivel-nota" }, "Se marca solo con los ejercicios. Si no coincide con lo que sabés, tocá para corregirlo."),
+          React.createElement("div", { className: "nivel-nota" }, "Se marca solo con los ejercicios. Si no coincide con lo que sabes, toca para corregirlo."),
 
           React.createElement("div", { className: "section-lbl" }, "Clasificación pedagógica"),
           React.createElement("div", { className: "meta-grid" },

@@ -58,9 +58,9 @@ const SIN_PAREJA_LABEL = {
   "BAJA_FRECUENCIA_EN_LEXICO": "Su pareja no está en el léxico."
 };
 
-const PERSONAS = [["я", "yo"], ["ты", "vos"], ["он / она", "él / ella"], ["мы", "nosotros"], ["вы", "ustedes"], ["они", "ellos"]];
+const PERSONAS = [["я", "yo"], ["ты", "tú"], ["он / она", "él / ella"], ["мы", "nosotros"], ["вы", "ustedes"], ["они", "ellos"]];
 const PASADO_FILAS = [["m", "он", "masculino"], ["f", "она", "femenino"], ["n", "оно", "neutro"], ["pl", "они", "plural"]];
-const IMPER_FILAS = [["ty", "ты", "vos"], ["vy", "вы", "ustedes"]];
+const IMPER_FILAS = [["ty", "ты", "tú"], ["vy", "вы", "ustedes"]];
 
 function getVerbId() {
   return new URLSearchParams(window.location.search).get("id");
@@ -493,16 +493,16 @@ function App() {
           total && h("div", { className: "intro-kicker" }, total + " verbos")
         )
       ),
-      h("div", { className: "intro-desc" }, "Acá encontrás cómo se conjuga cada verbo del diccionario, junto con su pareja aspectual y el caso que pide."),
+      h("div", { className: "intro-desc" }, "Aquí encuentras cómo se conjuga cada verbo del diccionario, junto con su pareja aspectual y el caso que pide."),
       INTRO_ITEMS.map((it, i) => h("div", { key: i, className: "intro-item" },
         h("span", { className: "intro-dot" }),
         h("div", null, h("div", { className: "intro-it" }, it[0]), h("div", { className: "intro-id" }, it[1]))
       ))
     ),
     h("div", { style: { position: "relative" } }, ...campo),
-    !buscando && h("div", { className: "search-hint" }, "Podés buscar en ruso o en español, o escribir una forma conjugada: говорю́ te lleva a говори́ть."),
+    !buscando && h("div", { className: "search-hint" }, "Puedes buscar en ruso o en español, o escribir una forma conjugada: говорю́ te lleva a говори́ть."),
     !buscando && h("div", { className: "try-row" },
-      h("span", { className: "try-lbl" }, "Probá con:"),
+      h("span", { className: "try-lbl" }, "Prueba con:"),
       EJEMPLOS.map(e => h("a", { key: e[0], className: "try-chip", href: "verbos.html?id=" + e[0], onClick: (ev) => azNavigate(ev, "verbos.html?id=" + e[0]) }, e[1]))
     ),
     buscando && h("div", { style: { marginTop: 10, background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, overflow: "hidden", animation: "fadeIn 0.3s ease" } },

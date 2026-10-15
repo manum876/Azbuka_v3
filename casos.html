@@ -683,7 +683,7 @@ function FichaCasos({ id, c, onGuia }) {
           buscada && h("div", { className: "busco" }, h("b", null, buscada.forma), " es " + buscada.etiquetas.join(" / ") + " de ", h("b", null, d.ru), ". Está resaltada en la tabla."),
           selector,
           tabla,
-          h("div", { className: "tnote" }, "Tocá un caso para ver para qué se usa, o una forma para escucharla.")
+          h("div", { className: "tnote" }, "Toca un caso para ver para qué se usa, o una forma para escucharla.")
         ),
         d.tipo === "indeclinable" && h("div", null,
           h("div", { className: "section-lbl" }, "Declinación"),
@@ -816,7 +816,7 @@ function App() {
      quedan el buscador y los resultados. */
   const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "casos") || {};
   const total = typeof CASOS !== "undefined" ? Object.keys(CASOS).length.toLocaleString("es-AR") : "";
-  const INTRO_ITEMS = [["Tablas completas", "Los 6 casos de cada palabra, en singular y plural o por género."], ["Qué es cada caso", "Tocá un caso para ver para qué sirve, con ejemplos explicados."], ["Formas especiales", "Locativo, partitivo, forma corta y acusativo animado, cuando la palabra los tiene."]];
+  const INTRO_ITEMS = [["Tablas completas", "Los 6 casos de cada palabra, en singular y plural o por género."], ["Qué es cada caso", "Toca un caso para ver para qué sirve, con ejemplos explicados."], ["Formas especiales", "Locativo, partitivo, forma corta y acusativo animado, cuando la palabra los tiene."]];
   const EJEMPLOS = [["CMR-00230", "кни́га"], ["CMR-00096", "большо́й"], ["CMR-00007", "он"]];
   const buscando = !!q.trim();
   const portada = h("div", null,
@@ -828,7 +828,7 @@ function App() {
           total && h("div", { className: "intro-kicker" }, total + " palabras · 6 casos")
         )
       ),
-      h("div", { className: "intro-desc" }, "En ruso, las palabras cambian de terminación según su función en la oración. Acá encontrás cómo se declina cada sustantivo, adjetivo, pronombre y número del diccionario."),
+      h("div", { className: "intro-desc" }, "En ruso, las palabras cambian de terminación según su función en la oración. Aquí encuentras cómo se declina cada sustantivo, adjetivo, pronombre y número del diccionario."),
       INTRO_ITEMS.map((it, i) => h("div", { key: i, className: "intro-item" },
         h("span", { className: "intro-dot" }),
         h("div", null, h("div", { className: "intro-it" }, it[0]), h("div", { className: "intro-id" }, it[1]))
@@ -840,9 +840,9 @@ function App() {
       onClick: () => setGuia("")
     }),
     h("div", { style: { position: "relative" } }, ...campo),
-    !buscando && h("div", { className: "search-hint" }, "Podés buscar en ruso o en español, o escribir una forma declinada: тебе́ te lleva a ты."),
+    !buscando && h("div", { className: "search-hint" }, "Puedes buscar en ruso o en español, o escribir una forma declinada: тебе́ te lleva a ты."),
     !buscando && h("div", { className: "try-row" },
-      h("span", { className: "try-lbl" }, "Probá con:"),
+      h("span", { className: "try-lbl" }, "Prueba con:"),
       EJEMPLOS.map(e => h("a", { key: e[0], className: "try-chip", href: "casos.html?id=" + e[0], onClick: (ev) => azNavigate(ev, "casos.html?id=" + e[0]) }, e[1]))
     ),
     buscando && h("div", { style: { marginTop: 10, background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, overflow: "hidden", animation: "fadeIn 0.3s ease" } },

@@ -84,12 +84,12 @@ function ActividadReloj({ c, green }) {
   return h("div", { className: "u-card", style: { padding: 16, marginTop: 14 } },
     h("div", { className: "u-kicker", style: { marginBottom: 6 } }, "Кото́рый час?"),
     h("div", { style: { display: "flex", justifyContent: "center", margin: "6px 0 10px" } }, h(Reloj, { n, c })),
-    h("input", { className: "pr-input", lang: "ru", value: txt, placeholder: "Escribí la hora en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); },
+    h("input", { className: "pr-input", lang: "ru", value: txt, placeholder: "Escribe la hora en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); },
       autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
       style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 10, padding: "11px 12px", color: c.text, fontSize: 16, fontFamily: "inherit" } }),
     h("button", { className: "ubtn", style: { marginTop: 10 }, disabled: !txt.trim(), onClick: revisar }, "Revisar"),
     res != null && h("div", { style: { marginTop: 10, fontSize: 14.5, lineHeight: 1.5 } },
-      h("div", { style: { fontWeight: 700, color: res ? green : "#E2884A" } }, res ? "✓ Bien" : "Casi: revisalo"),
+      h("div", { style: { fontWeight: 700, color: res ? green : "#E2884A" } }, res ? "✓ Bien" : "Casi: revísalo"),
       h("div", { lang: "ru", style: { display: "flex", alignItems: "center", gap: 10, marginTop: 4 } }, h("b", { style: { flex: 1 } }, ok), h("button", { className: "play", onClick: () => azHablarRu(ok), "aria-label": "Escuchar" }, "▶")),
       h("div", { style: { color: c.textMuted, fontSize: 13, marginTop: 4 } }, azFmt(u7ReglaHora(n)))),
     h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: otra }, "Otra hora"));
@@ -112,7 +112,7 @@ function AgendaPropia({ c }) {
   useEffect(() => { (async () => setAg(await azGet("az_u7_agenda", {})))(); }, []);
   const cambiar = (id, v) => { const x = Object.assign({}, ag, { [id]: v }); setAg(x); azSet("az_u7_agenda", x); };
   return h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 14 } },
-    h("div", { className: "u-text", style: { fontSize: 13, margin: "6px 0 8px" } }, "Escribí en ruso qué hacés cada día (una palabra o una frase corta)."),
+    h("div", { className: "u-text", style: { fontSize: 13, margin: "6px 0 8px" } }, "Escribe en ruso qué haces cada día (una palabra o una frase corta)."),
     D7.dias.map((d, j) => h("div", { key: d.id, style: { display: "flex", alignItems: "center", gap: 10, padding: "6px 0", borderTop: j ? `1px solid ${c.border}` : "none" } },
       h("div", { lang: "ru", style: { width: 104, flexShrink: 0, fontWeight: 800, color: c.gold, fontSize: 14 } }, d.nom),
       h("input", { lang: "ru", value: ag[d.id] || "", placeholder: "…", onInput: e => cambiar(d.id, e.target.value), autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
@@ -150,7 +150,7 @@ function TablaVerbos({ c, lista }) {
     style: { textAlign: "left", padding: "7px 10px", borderRadius: 9, background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", cursor: "pointer", minWidth: 0 } },
     h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: .5, color: c.textMuted } }, pr), h("div", { style: { fontSize: 15.5, fontWeight: 700 } }, f));
   return h(React.Fragment, null,
-    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una forma para escuchar cómo suena."),
+    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Toca una forma para escuchar cómo suena."),
     lista.filter(Boolean).map(v => h("div", { key: v.id, className: "u-card", style: { padding: "12px 14px", marginTop: 10 } },
       h("div", { style: { display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" } },
         h("span", { lang: "ru", style: { fontSize: 18, fontWeight: 800, color: c.gold } }, v.ac),
@@ -238,7 +238,7 @@ function App() {
         mod.n === 1 && h(React.Fragment, null,
           h("div", { className: "u-sec" }, "Las horas"),
           h(AzTablaGrupos, { encabezados: ["De 1 a 6", "De 7 a 12"], c, filas: [...Array(6)].map((_, k) => [k + 1, k + 7].map(n => ({ ru: cap7(D7.hora(n)), es: u7Reloj(n) + " " + (n < 10 ? "0" : "") + n + ":00" }))) }),
-          h("div", { className: "u-sec" }, "Practicá con el reloj"), h(ActividadReloj, { c, green })),
+          h("div", { className: "u-sec" }, "Practica con el reloj"), h(ActividadReloj, { c, green })),
         mod.n === 3 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los días"),
           h(AzTablaGrupos, { encabezados: ["Día", "¿Cuándo?"], c, filas: D7.dias.map(d => [{ id: d.id, ru: d.nom, es: d.es }, { id: d.id, ru: d.pr + " " + d.acc, es: "el " + d.es }]) })),
         mod.n === 4 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los meses"),

@@ -15,12 +15,12 @@
      U7 ¿qué hora es? (reloj dibujado)
      U8 verbo del día en pasado (qué hiciste ayer)
      U9 plan del día (qué vas a hacer mañana: бу́ду + infinitivo)
-     U10 lo que no tenés (у меня́ нет + genitivo)
+     U10 lo que no tienes (у меня́ нет + genitivo)
      U13 pregunta del día (una pregunta de las conversaciones B1, contestada
          con respuesta libre y corregida por intención, como en la U11)
      U12 pareja del día (aspecto: el resultado en pasado, o el futuro
          perfectivo; «бу́ду + perfectivo» es Mal, el imperfectivo es Casi)
-     U11 situación del día (qué decís; se corrige por intención, azSituacion:
+     U11 situación del día (qué dices; se corrige por intención, azSituacion:
          ✓ Bien · 💬 Se entiende · ✗ No se entiende)
    Reglas (Manu, 05/10/2026): nada de la respuesta a la vista; la
    ayuda va detrás de «💡 Pista»; la corrección dice Bien, Casi o Mal
@@ -104,16 +104,16 @@ function azHoyDesafio(n) {
     const letras = ALPHABET.filter(a => a.words && a.words.length);
     const L = letras[num % letras.length], w = L.words[num % L.words.length];
     return { titulo: "Letra del día", grande: L.upper + " " + L.lower, sub: L.name + " · " + (L.pronunciation || "").replace(/\*\*/g, ""),
-      audio: w.cyrillic, consigna: "Escuchá la palabra (▶) y escribila en ruso.", pista: "Empieza con " + L.upper + ", tiene " + w.cyrillic.length + " letras y significa «" + w.meaning + "».",
+      audio: w.cyrillic, consigna: "Escucha la palabra (▶) y escríbela en ruso.", pista: "Empieza con " + L.upper + ", tiene " + w.cyrillic.length + " letras y significa «" + w.meaning + "».",
       revisar: txt => { const a = azHoyK(txt.trim()), b = azHoyK(w.cyrillic);
         if (a === b) return { nivel: "bien", msg: "**" + w.cyrillic + "** (" + w.meaning + ")." };
         if (azHoyDist(a, b) <= 1) return { nivel: "casi", msg: "Casi: es **" + w.cyrillic + "** (" + w.meaning + ")." };
-        return { nivel: "mal", msg: "Era **" + w.cyrillic + "** (" + w.meaning + "). Escuchala de nuevo." }; } };
+        return { nivel: "mal", msg: "Era **" + w.cyrillic + "** (" + w.meaning + "). Escúchala de nuevo." }; } };
   }
   if (n === 2 && typeof U2_FRASES !== "undefined") {
     const fr = U2_FRASES.filter(f => f.ru && f.es && f.ru.split(" ").length >= 2);
     const F = fr[num % fr.length];
-    return { titulo: "Frase del día", grande: "«" + F.es[0] + "»", sub: "Escribila en ruso", audio: null, consigna: "Escribí esta frase en ruso.",
+    return { titulo: "Frase del día", grande: "«" + F.es[0] + "»", sub: "Escríbela en ruso", audio: null, consigna: "Escribe esta frase en ruso.",
       pista: "Empieza con «" + F.ru.split(" ")[0].replace(/[!?.,]/g, "") + "» y tiene " + F.ru.split(" ").length + " palabras.",
       revisar: txt => { const a = azHoyFrase(txt), b = azHoyFrase(F.ru);
         if (a === b) return { nivel: "bien", msg: "**" + F.ru + "**", oir: F.ru };
@@ -123,7 +123,7 @@ function azHoyDesafio(n) {
   if (n === 3 && typeof u3PalabraDelDia === "function") {
     const p = u3PalabraDelDia();
     return { titulo: "Palabra del día", emoji: p.emoji, grande: p.ac, id: p.id, sub: p.es + " · " + ({ m: "masculino", f: "femenino", n: "neutro" }[p.g] || ""), audio: p.ru,
-      consigna: "Escribí una frase propia con esta palabra.", pista: "Podés empezar con э́то: «Э́то " + p.ac + "…»",
+      consigna: "Escribe una frase propia con esta palabra.", pista: "Puedes empezar con э́то: «Э́то " + p.ac + "…»",
       revisar: txt => { const usa = azHoyFormasDe(txt, p.id);
         if (usa.length) return { nivel: "bien", msg: "Usaste **" + usa[0].w + "**." };
         return { nivel: "mal", msg: "No encuentro " + p.ac + " en tu frase." }; } };
@@ -131,7 +131,7 @@ function azHoyDesafio(n) {
   if (n === 4 && typeof u4PalabraDelDia === "function") {
     const p = u4PalabraDelDia();
     return { titulo: "Palabra del día", emoji: p.emoji, grande: p.ac, id: p.id, sub: p.es, audio: p.nom,
-      consigna: "Escribí una frase donde " + p.ac + " reciba la acción.", pista: "En acusativo: " + p.acc + ".",
+      consigna: "Escribe una frase donde " + p.ac + " reciba la acción.", pista: "En acusativo: " + p.acc + ".",
       tips: UNIDAD_4.modulos.find(m => m.id === "u4m10").consejos, concordancia: true,
       revisar: txt => { const usa = azHoyFormasDe(txt, p.id);
         if (!usa.length) return { nivel: "mal", msg: "No encuentro " + p.ac + " en tu frase." };
@@ -142,7 +142,7 @@ function azHoyDesafio(n) {
   if (n === 5 && typeof u5Datos === "function") {
     const lista = Object.values(u5Datos().verb).filter(v => !v.amp && v.grupo !== "e"), v = lista[num % lista.length];
     const PL = ["я", "ты", "он / она́", "мы", "вы", "они́"], PR = { "я": 0, "ты": 1, "он": 2, "она": 2, "мы": 3, "вы": 4, "они": 5 };
-    return { titulo: "Verbo del día", grande: v.ac, id: v.id, sub: v.es, audio: v.ac, consigna: "Escribí una frase en presente con este verbo.",
+    return { titulo: "Verbo del día", grande: v.ac, id: v.id, sub: v.es, audio: v.ac, consigna: "Escribe una frase en presente con este verbo.",
       pista: "{я} " + v.f[0] + " · ты " + v.f[1] + " · он / она́ " + v.f[2],
       revisar: txt => { const w = azHoyPal(txt);
         for (let i = 0; i < w.length; i++) { const k = v.f.findIndex(f => azHoyK(f) === azHoyK(w[i]));
@@ -156,7 +156,7 @@ function azHoyDesafio(n) {
   }
   if (n === 6 && typeof u6Datos === "function") {
     const lista = Object.values(u6Datos().lug).filter(s => !s.amp && s.tipo === "lugar"), s = lista[num % lista.length];
-    return { titulo: "Lugar del día", emoji: s.emoji, grande: s.ac, id: s.id, sub: s.es, audio: s.nom, consigna: "Escribí dónde está alguien o algo, con este lugar.",
+    return { titulo: "Lugar del día", emoji: s.emoji, grande: s.ac, id: s.id, sub: s.es, audio: s.nom, consigna: "Escribe dónde está alguien o algo, con este lugar.",
       pista: "¿Dónde? " + s.pr + " " + s.prep + (s.pr === "на" ? " (va con на, de memoria)" : ""),
       tips: UNIDAD_6.modulos.find(m => m.id === "u6m11").consejos, concordancia: true,
       revisar: txt => { const w = azHoyPal(txt);
@@ -170,7 +170,7 @@ function azHoyDesafio(n) {
   }
   if (n === 7 && typeof u7Datos === "function") {
     const h = 1 + (num % 12), { hora } = u7Datos(), ok = cap(hora(h));
-    return { titulo: "¿Qué hora es?", reloj: h, sub: "Кото́рый час?", audio: null, consigna: "Mirá el reloj y escribí la hora en ruso.",
+    return { titulo: "¿Qué hora es?", reloj: h, sub: "Кото́рый час?", audio: null, consigna: "Mira el reloj y escribe la hora en ruso.",
       pista: "1 → час · 2, 3, 4 → часа́ · de 5 a 12 → часо́в",
       revisar: txt => { const a = azHoyFrase(txt).replace(/^сейчас /, ""), b = azHoyFrase(ok);
         if (a === b || (h === 1 && a === "один час")) return { nivel: "bien", msg: "**" + ok + "**", oir: ok };
@@ -180,7 +180,7 @@ function azHoyDesafio(n) {
   if (n === 8 && typeof u8Datos === "function") {
     const lista = Object.values(u8Datos().verb).filter(v => v.tipo === "a" && v.ac !== "жить"), v = lista[num % lista.length];
     const G = { "он": "m", "она": "f", "мы": "pl", "вы": "pl", "они": "pl" }, LBL = { m: "masculino", f: "femenino", n: "neutro", pl: "plural" };
-    return { titulo: "Verbo del día, en pasado", grande: v.ac, id: v.id, sub: v.es, audio: v.ac, consigna: "Escribí qué hiciste ayer con este verbo.",
+    return { titulo: "Verbo del día, en pasado", grande: v.ac, id: v.id, sub: v.es, audio: v.ac, consigna: "Escribe qué hiciste ayer con este verbo.",
       pista: v.p.m + " · " + v.p.f + " · " + v.p.pl,
       tips: UNIDAD_8.modulos.find(m => m.id === "u8m12").consejos,
       revisar: txt => { const w = azHoyPal(txt);
@@ -196,7 +196,7 @@ function azHoyDesafio(n) {
   if (n === 9 && typeof u9Datos === "function") {
     const D = u9Datos(), lista = Object.keys(U9_VERBOS).map(k => D.verb[D.sin(k)]).filter(v => v && D.sin(v.ac) !== "жить"), v = lista[num % lista.length];
     const PR = { "я": 0, "ты": 1, "он": 2, "она": 2, "мы": 3, "вы": 4, "они": 5 }, BU = D.budu.map(azHoyK);
-    return { titulo: "Plan del día", grande: v.ac, id: v.id, sub: v.es, audio: v.ac, consigna: "Escribí qué vas a hacer mañana con este verbo.",
+    return { titulo: "Plan del día", grande: v.ac, id: v.id, sub: v.es, audio: v.ac, consigna: "Escribe qué vas a hacer mañana con este verbo.",
       pista: "За́втра я бу́ду " + v.ac + "…",
       tips: UNIDAD_9.modulos.find(m => m.id === "u9m12").consejos,
       revisar: txt => { const w = azHoyPal(txt), k = w.map(azHoyK);
@@ -213,14 +213,14 @@ function azHoyDesafio(n) {
   if (n === 10 && typeof u10Datos === "function") {
     const D = u10Datos(), lista = Object.keys(U10_COSAS).filter(k => !/рабо́та|вре́мя/.test(k)).map(k => Object.assign(D.sust(k) || {}, { emoji: U10_COSAS[k][2], bare: U10_COSAS[k][1] })).filter(x => x.id);
     const s = lista[num % lista.length];
-    return { titulo: "Palabra del día", emoji: s.emoji, grande: s.ac, id: s.id, sub: s.bare, audio: s.nom, consigna: "Escribí que no tenés esto (con нет).",
+    return { titulo: "Palabra del día", emoji: s.emoji, grande: s.ac, id: s.id, sub: s.bare, audio: s.nom, consigna: "Escribe que no tienes esto (con нет).",
       pista: "У меня́ нет + genitivo: " + s.gen + ".",
       tips: UNIDAD_10.modulos.find(m => m.id === "u10m12").consejos,
       revisar: txt => { const w = azHoyPal(txt), k = w.map(azHoyK);
         const i = k.indexOf("нет");
         const usa = azHoyFormasDe(txt, s.id);
         if (!usa.length) return { nivel: "mal", msg: "No encuentro " + s.ac + " en tu frase." };
-        if (i < 0) return { nivel: "mal", msg: "La consigna es decir que no lo tenés: **У меня́ нет " + s.gen + "**." };
+        if (i < 0) return { nivel: "mal", msg: "La consigna es decir que no lo tienes: **У меня́ нет " + s.gen + "**." };
         if (usa.some(u => azHoyK(u.w) === azHoyK(s.gen))) return { nivel: "bien", msg: "**нет " + s.gen + "**: después de нет, genitivo." };
         return { nivel: "mal", msg: "Usaste «" + usa[0].w + "», pero después de нет va el genitivo: **" + s.gen + "**." }; } };
   }
@@ -254,7 +254,7 @@ function azHoyDesafio(n) {
     const pasP = Object.values(vp.pasado).map(k2), pasI = Object.values(vi.pasado).map(k2), futP = vp.futuro.map(k2);
     const BU = ["буду", "будешь", "будет", "будем", "будете", "будут"];
     return { titulo: "Pareja del día", emoji: "⏳", grande: vi.ac + " / " + vp.ac, id: vp.id, sub: a[6], audio: vp.ac,
-      consigna: fut ? "Escribí qué vas a hacer mañana con este verbo, mirando el resultado (perfectivo)." : "Escribí qué terminaste ayer con este verbo (resultado: perfectivo).",
+      consigna: fut ? "Escribe qué vas a hacer mañana con este verbo, mirando el resultado (perfectivo)." : "Escribe qué terminaste ayer con este verbo (resultado: perfectivo).",
       pista: fut ? "Futuro perfectivo: я " + vp.futuro[0] + ", ты " + vp.futuro[1] + "… (sin бу́ду)." : "Pasado perfectivo: " + vp.pasado.m + " / " + vp.pasado.f + ".",
       revisar: txt => { const w = azHoyPal(txt), k = w.map(K);
         const i = k.findIndex(x => pasP.indexOf(x) >= 0), j = k.findIndex(x => pasI.indexOf(x) >= 0), f = k.findIndex(x => futP.indexOf(x) >= 0), b = k.findIndex(x => BU.indexOf(x) >= 0);
@@ -344,7 +344,7 @@ function AzHoy({ c, unidad, onCerrar }) {
             d.sub && h("div", { className: "az-hoy-s" }, d.sub)),
           d.audio && h("button", { className: "play", onClick: () => azHablarRu(d.audio), "aria-label": "Escuchar" }, "▶")),
         h("div", { className: "az-hoy-c" }, azFmt(d.consigna)),
-        h("input", { className: "az-hoy-in", lang: "ru", value: txt, placeholder: "Escribí en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); },
+        h("input", { className: "az-hoy-in", lang: "ru", value: txt, placeholder: "Escribe en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); },
           autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off" }),
         h("div", { className: "az-hoy-row" },
           h("button", { className: "az-hoy-b2", onClick: () => setPista(!pista) }, "💡 Pista"),

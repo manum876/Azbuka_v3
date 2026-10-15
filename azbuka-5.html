@@ -67,7 +67,7 @@ function TablaVerbos({ c, lista }) {
     style: { textAlign: "left", padding: "7px 10px", borderRadius: 9, background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", cursor: "pointer", minWidth: 0 } },
     h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: .5, color: c.textMuted } }, pr), h("div", { style: { fontSize: 15.5, fontWeight: 700 } }, f));
   return h(React.Fragment, null,
-    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una forma para escuchar cómo suena."),
+    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Toca una forma para escuchar cómo suena."),
     lista.map(v => h("div", { key: v.id, className: "u-card", style: { padding: "12px 14px", marginTop: 10 } },
       h("div", { style: { display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" } },
         h("span", { lang: "ru", style: { fontSize: 18, fontWeight: 800, color: c.gold } }, h(AzPalabra, { texto: v.ac, id: v.id })),
@@ -171,7 +171,7 @@ function App() {
         mod.n === 1 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Чита́ть, en sus seis formas"), h(TablaVerbos, { c, lista: [D5.verb[D5.sin("чита́ть")]] })),
         mod.n === 2 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los pronombres"),
           h(AzTablaGrupos, { encabezados: ["Singular", "Plural"], c, filas: [
-            [{ ru: "я", es: "yo" }, { ru: "мы", es: "nosotros" }], [{ ru: "ты", es: "vos" }, { ru: "вы", es: "ustedes / usted" }],
+            [{ ru: "я", es: "yo" }, { ru: "мы", es: "nosotros" }], [{ ru: "ты", es: "tú" }, { ru: "вы", es: "ustedes / usted" }],
             [{ ru: "он", es: "él" }, { ru: "они́", es: "ellos / ellas", filas: 2 }], [{ ru: "она́", es: "ella" }, false]] })),
         mod.grupo === 1 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los verbos de la primera conjugación"), h(TablaVerbos, { c, lista: verbosDe(1) })),
         mod.grupo === 2 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Los verbos de la segunda conjugación"), h(TablaVerbos, { c, lista: verbosDe(2) })),

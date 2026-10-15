@@ -20,41 +20,41 @@
    descubrir, par) y «regla» en casi todo el banco.
    ============================================================ */
 
-/* Personas: ruso, español (vos para ты, rioplatense), índice en el presente de Verbos */
+/* Personas: ruso, español (tú para ты), índice en el presente de Verbos */
 const U5_PERS = [
-  { ru: "я", es: "yo", i: 0 }, { ru: "ты", es: "vos", i: 1 }, { ru: "он", es: "él", i: 2 }, { ru: "она́", es: "ella", i: 2 },
+  { ru: "я", es: "yo", i: 0 }, { ru: "ты", es: "tú", i: 1 }, { ru: "он", es: "él", i: 2 }, { ru: "она́", es: "ella", i: 2 },
   { ru: "мы", es: "nosotros", i: 3 }, { ru: "вы", es: "ustedes", i: 4 }, { ru: "они́", es: "ellos", i: 5 }
 ];
 const U5_PERS_LABEL = ["я", "ты", "он / она́", "мы", "вы", "они́"];
 
-/* Verbos: "ruso": [español, yo, vos, él / ella, nosotros, ellos / ustedes, grupo]
+/* Verbos: "ruso": [español, yo, tú, él / ella, nosotros, ellos / ustedes, grupo]
    grupo: 1 (1.ª conjugación, -ешь), 2 (2.ª, -ишь), "e" (especial), "a" (ampliación) */
 const U5_VERBOS = {
-  "чита́ть": ["leer", "leo", "leés", "lee", "leemos", "leen", 1], "рабо́тать": ["trabajar", "trabajo", "trabajás", "trabaja", "trabajamos", "trabajan", 1],
-  "де́лать": ["hacer", "hago", "hacés", "hace", "hacemos", "hacen", 1], "понима́ть": ["entender", "entiendo", "entendés", "entiende", "entendemos", "entienden", 1],
-  "слу́шать": ["escuchar", "escucho", "escuchás", "escucha", "escuchamos", "escuchan", 1], "изуча́ть": ["estudiar (una materia)", "estudio", "estudiás", "estudia", "estudiamos", "estudian", 1],
-  "гуля́ть": ["pasear", "paseo", "paseás", "pasea", "paseamos", "pasean", 1], "отдыха́ть": ["descansar", "descanso", "descansás", "descansa", "descansamos", "descansan", 1],
-  "за́втракать": ["desayunar", "desayuno", "desayunás", "desayuna", "desayunamos", "desayunan", 1], "обе́дать": ["almorzar", "almuerzo", "almorzás", "almuerza", "almorzamos", "almuerzan", 1],
-  "у́жинать": ["cenar", "ceno", "cenás", "cena", "cenamos", "cenan", 1], "ду́мать": ["pensar", "pienso", "pensás", "piensa", "pensamos", "piensan", 1],
-  "знать": ["saber, conocer", "conozco", "conocés", "conoce", "conocemos", "conocen", 1], "покупа́ть": ["comprar", "compro", "comprás", "compra", "compramos", "compran", 1],
-  "открыва́ть": ["abrir", "abro", "abrís", "abre", "abrimos", "abren", 1], "закрыва́ть": ["cerrar", "cierro", "cerrás", "cierra", "cerramos", "cierran", 1],
-  "жить": ["vivir", "vivo", "vivís", "vive", "vivimos", "viven", 1], "пить": ["tomar (beber)", "tomo", "tomás", "toma", "tomamos", "toman", 1],
-  "ждать": ["esperar", "espero", "esperás", "espera", "esperamos", "esperan", 1], "встава́ть": ["levantarse", "me levanto", "te levantás", "se levanta", "nos levantamos", "se levantan", 1],
-  "писа́ть": ["escribir", "escribo", "escribís", "escribe", "escribimos", "escriben", 1], "иска́ть": ["buscar", "busco", "buscás", "busca", "buscamos", "buscan", 1],
-  "испо́льзовать": ["usar", "uso", "usás", "usa", "usamos", "usan", 1],
-  "говори́ть": ["hablar", "hablo", "hablás", "habla", "hablamos", "hablan", 2], "смотре́ть": ["mirar", "miro", "mirás", "mira", "miramos", "miran", 2],
-  "люби́ть": ["querer, encantar", "quiero", "querés", "quiere", "queremos", "quieren", 2], "ви́деть": ["ver", "veo", "ves", "ve", "vemos", "ven", 2],
-  "гото́вить": ["cocinar", "cocino", "cocinás", "cocina", "cocinamos", "cocinan", 2], "спать": ["dormir", "duermo", "dormís", "duerme", "dormimos", "duermen", 2],
-  "находи́ть": ["encontrar", "encuentro", "encontrás", "encuentra", "encontramos", "encuentran", 2],
-  "хоте́ть": ["querer", "quiero", "querés", "quiere", "queremos", "quieren", "e"], "мочь": ["poder", "puedo", "podés", "puede", "podemos", "pueden", "e"],
-  "есть": ["comer", "como", "comés", "come", "comemos", "comen", "e"], "учи́ться": ["estudiar (cursar)", "estudio", "estudiás", "estudia", "estudiamos", "estudian", "e"],
-  "просыпа́ться": ["despertarse", "me despierto", "te despertás", "se despierta", "nos despertamos", "se despiertan", "e"],
-  "возвраща́ться": ["volver", "vuelvo", "volvés", "vuelve", "volvemos", "vuelven", "e"],
+  "чита́ть": ["leer", "leo", "lees", "lee", "leemos", "leen", 1], "рабо́тать": ["trabajar", "trabajo", "trabajas", "trabaja", "trabajamos", "trabajan", 1],
+  "де́лать": ["hacer", "hago", "haces", "hace", "hacemos", "hacen", 1], "понима́ть": ["entender", "entiendo", "entiendes", "entiende", "entendemos", "entienden", 1],
+  "слу́шать": ["escuchar", "escucho", "escuchas", "escucha", "escuchamos", "escuchan", 1], "изуча́ть": ["estudiar (una materia)", "estudio", "estudias", "estudia", "estudiamos", "estudian", 1],
+  "гуля́ть": ["pasear", "paseo", "paseas", "pasea", "paseamos", "pasean", 1], "отдыха́ть": ["descansar", "descanso", "descansas", "descansa", "descansamos", "descansan", 1],
+  "за́втракать": ["desayunar", "desayuno", "desayunas", "desayuna", "desayunamos", "desayunan", 1], "обе́дать": ["almorzar", "almuerzo", "almuerzas", "almuerza", "almorzamos", "almuerzan", 1],
+  "у́жинать": ["cenar", "ceno", "cenas", "cena", "cenamos", "cenan", 1], "ду́мать": ["pensar", "pienso", "piensas", "piensa", "pensamos", "piensan", 1],
+  "знать": ["saber, conocer", "conozco", "conoces", "conoce", "conocemos", "conocen", 1], "покупа́ть": ["comprar", "compro", "compras", "compra", "compramos", "compran", 1],
+  "открыва́ть": ["abrir", "abro", "abres", "abre", "abrimos", "abren", 1], "закрыва́ть": ["cerrar", "cierro", "cierras", "cierra", "cerramos", "cierran", 1],
+  "жить": ["vivir", "vivo", "vives", "vive", "vivimos", "viven", 1], "пить": ["tomar (beber)", "tomo", "tomas", "toma", "tomamos", "toman", 1],
+  "ждать": ["esperar", "espero", "esperas", "espera", "esperamos", "esperan", 1], "встава́ть": ["levantarse", "me levanto", "te levantas", "se levanta", "nos levantamos", "se levantan", 1],
+  "писа́ть": ["escribir", "escribo", "escribes", "escribe", "escribimos", "escriben", 1], "иска́ть": ["buscar", "busco", "buscas", "busca", "buscamos", "buscan", 1],
+  "испо́льзовать": ["usar", "uso", "usas", "usa", "usamos", "usan", 1],
+  "говори́ть": ["hablar", "hablo", "hablas", "habla", "hablamos", "hablan", 2], "смотре́ть": ["mirar", "miro", "miras", "mira", "miramos", "miran", 2],
+  "люби́ть": ["querer, encantar", "quiero", "quieres", "quiere", "queremos", "quieren", 2], "ви́деть": ["ver", "veo", "ves", "ve", "vemos", "ven", 2],
+  "гото́вить": ["cocinar", "cocino", "cocinas", "cocina", "cocinamos", "cocinan", 2], "спать": ["dormir", "duermo", "duermes", "duerme", "dormimos", "duermen", 2],
+  "находи́ть": ["encontrar", "encuentro", "encuentras", "encuentra", "encontramos", "encuentran", 2],
+  "хоте́ть": ["querer", "quiero", "quieres", "quiere", "queremos", "quieren", "e"], "мочь": ["poder", "puedo", "puedes", "puede", "podemos", "pueden", "e"],
+  "есть": ["comer", "como", "comes", "come", "comemos", "comen", "e"], "учи́ться": ["estudiar (cursar)", "estudio", "estudias", "estudia", "estudiamos", "estudian", "e"],
+  "просыпа́ться": ["despertarse", "me despierto", "te despiertas", "se despierta", "nos despertamos", "se despiertan", "e"],
+  "возвраща́ться": ["volver", "vuelvo", "vuelves", "vuelve", "volvemos", "vuelven", "e"],
   "стоя́ть": ["estar parado", "estoy parado", "estás parado", "está parado", "estamos parados", "están parados", "a"],
   "сиде́ть": ["estar sentado", "estoy sentado", "estás sentado", "está sentado", "estamos sentados", "están sentados", "a"],
-  "петь": ["cantar", "canto", "cantás", "canta", "cantamos", "cantan", "a"], "танцева́ть": ["bailar", "bailo", "bailás", "baila", "bailamos", "bailan", "a"],
-  "рисова́ть": ["dibujar", "dibujo", "dibujás", "dibuja", "dibujamos", "dibujan", "a"], "пла́вать": ["nadar", "nado", "nadás", "nada", "nadamos", "nadan", "a"],
-  "бе́гать": ["correr", "corro", "corrés", "corre", "corremos", "corren", "a"], "спра́шивать": ["preguntar", "pregunto", "preguntás", "pregunta", "preguntamos", "preguntan", "a"]
+  "петь": ["cantar", "canto", "cantas", "canta", "cantamos", "cantan", "a"], "танцева́ть": ["bailar", "bailo", "bailas", "baila", "bailamos", "bailan", "a"],
+  "рисова́ть": ["dibujar", "dibujo", "dibujas", "dibuja", "dibujamos", "dibujan", "a"], "пла́вать": ["nadar", "nado", "nadas", "nada", "nadamos", "nadan", "a"],
+  "бе́гать": ["correr", "corro", "corres", "corre", "corremos", "corren", "a"], "спра́шивать": ["preguntar", "pregunto", "preguntas", "pregunta", "preguntamos", "preguntan", "a"]
 };
 /* «Me encanta» para las cosas con люби́ть */
 const U5_ENCANTA = ["me encanta", "te encanta", "le encanta", "nos encanta", "les encanta"];
@@ -64,10 +64,10 @@ const U5_COSAS = {
   "кни́га": ["libro", "un libro", "el libro"], "газе́та": ["diario", "el diario", "el diario"], "журна́л": ["revista", "una revista", "la revista"],
   "письмо́": ["carta", "una carta", "la carta"], "пе́сня": ["canción", "una canción", "la canción"], "му́зыка": ["música", "música", "la música"],
   "фильм": ["película", "una película", "la película"], "ко́фе": ["café", "café", "el café"], "чай": ["té", "té", "el té"], "вода́": ["agua", "agua", "el agua"],
-  "сок": ["jugo", "jugo", "el jugo"], "хлеб": ["pan", "pan", "el pan"], "суп": ["sopa", "sopa", "la sopa"], "пи́цца": ["pizza", "pizza", "la pizza"],
+  "сок": ["zumo", "zumo", "el zumo"], "хлеб": ["pan", "pan", "el pan"], "суп": ["sopa", "sopa", "la sopa"], "пи́цца": ["pizza", "pizza", "la pizza"],
   "ры́ба": ["pescado", "pescado", "el pescado"], "я́блоко": ["manzana", "una manzana", "la manzana"], "молоко́": ["leche", "leche", "la leche"],
-  "маши́на": ["auto", "un auto", "el auto"], "кварти́ра": ["departamento", "un departamento", "el departamento"], "дом": ["casa", "una casa", "la casa"],
-  "телефо́н": ["teléfono", "un teléfono", "el teléfono"], "компью́тер": ["computadora", "una computadora", "la computadora"], "слова́рь": ["diccionario", "un diccionario", "el diccionario"],
+  "маши́на": ["coche", "un coche", "el coche"], "кварти́ра": ["apartamento", "un apartamento", "el apartamento"], "дом": ["casa", "una casa", "la casa"],
+  "телефо́н": ["teléfono", "un teléfono", "el teléfono"], "компью́тер": ["ordenador", "un ordenador", "el ordenador"], "слова́рь": ["diccionario", "un diccionario", "el diccionario"],
   "спорт": ["deporte", "deporte", "el deporte"], "футбо́л": ["fútbol", "fútbol", "el fútbol"], "телеви́зор": ["televisor", "televisión", "la televisión"],
   "за́втрак": ["desayuno", "el desayuno", "el desayuno"], "обе́д": ["almuerzo", "el almuerzo", "el almuerzo"], "у́жин": ["cena", "la cena", "la cena"],
   "ру́сский": ["ruso (idioma)", "ruso", "el ruso"]
@@ -132,34 +132,34 @@ const U5_LECTURAS = [
 ];
 
 /* ¿ты o вы? Situaciones (módulo 2) */
-const U5_TYVY = [["Le hablás a tu amigo.", "ты"], ["Le hablás a tu profesora.", "вы"], ["Les hablás a dos amigos.", "вы"], ["Le hablás a tu mamá.", "ты"],
-  ["Le hablás a un médico que no conocés.", "вы"], ["Le hablás a tu hermano.", "ты"], ["Le hablás a una vendedora en un negocio.", "вы"], ["Le hablás a un chico de tu edad en una fiesta.", "ты"]];
+const U5_TYVY = [["Le hablas a tu amigo.", "ты"], ["Le hablas a tu profesora.", "вы"], ["Les hablas a dos amigos.", "вы"], ["Le hablas a tu mamá.", "ты"],
+  ["Le hablas a un médico que no conoces.", "вы"], ["Le hablas a tu hermano.", "ты"], ["Le hablas a una vendedora en un negocio.", "вы"], ["Le hablas a un chico de tu edad en una fiesta.", "ты"]];
 
 const UNIDAD_5 = {
   id: 5,
   titulo: "Verbos en presente y acciones cotidianas",
   tituloRu: "Глаго́лы в настоя́щем вре́мени",
-  objetivo: "Conjugar en presente con las seis personas, negar, preguntar y contar qué hacés en un día, usando el acusativo de la Unidad 4.",
+  objetivo: "Conjugar en presente con las seis personas, negar, preguntar y contar qué haces en un día, usando el acusativo de la Unidad 4.",
   tiempo: "3 a 4 semanas con práctica diaria (unas 30–40 horas)",
   modulos: [
     { id: "u5m1", n: 1, tipo: "leccion", nPractica: 10, titulo: "El verbo ruso", resumen: "Я чита́ю, ты чита́ешь, он чита́ет…",
-      intro: "En la Unidad 4 viste cuatro formas de cada verbo. Ahora se completan las seis, una por persona, como en español: leo, leés, lee…",
+      intro: "En la Unidad 4 viste cuatro formas de cada verbo. Ahora se completan las seis, una por persona, como en español: leo, lees, lee…",
       secciones: [
         { id: "u5-una-forma", titulo: "Una forma por persona",
           antes: { pide: "Я ___ кни́гу. ¿Cuál va?", opciones: ["чита́ю", "чита́ешь", "чита́ют"], ok: "чита́ю", por: "La terminación tiene que coincidir con quién hace la acción: con {я}, **-ю**." },
-          texto: "Cada persona tiene su terminación, y la terminación tiene que coincidir con quién hace la acción, igual que en español no decís «yo leés». Ya conocías cuatro formas; las nuevas son las de ты y вы.",
+          texto: "Cada persona tiene su terminación, y la terminación tiene que coincidir con quién hace la acción, igual que en español no dices «yo lees». Ya conocías cuatro formas; las nuevas son las de ты y вы.",
           ejemplos: [
             { ru: "Я {чита́ю} кни́гу.", es: "Leo un libro.", por: "{я} → **-ю**." },
-            { ru: "Ты {чита́ешь} кни́гу.", es: "Leés un libro.", por: "ты → **-ешь**: es una de las formas nuevas." },
+            { ru: "Ты {чита́ешь} кни́гу.", es: "Lees un libro.", por: "ты → **-ешь**: es una de las formas nuevas." },
             { ru: "Ма́ма {чита́ет} кни́гу.", es: "Mamá lee un libro.", por: "Ма́ма = она́ → **-ет**." },
             { ru: "Мы {чита́ем} кни́гу.", es: "Leemos un libro.", por: "мы → **-ем**." },
             { ru: "Вы {чита́ете} кни́гу.", es: "Ustedes leen un libro.", por: "вы → **-ете**: la otra forma nueva." },
             { ru: "Они́ {чита́ют} кни́гу.", es: "Leen un libro.", por: "они́ → **-ют**." }],
           destacado: "чита́ю · чита́ешь · чита́ет · чита́ем · чита́ете · чита́ют",
           errores: [{ mal: "Ты чита́ет.", bien: "Ты {чита́ешь}.", por: "Con ты, la terminación es **-ешь**." }],
-          truco: "Mirá la terminación: dice quién hace la acción, aunque falte el pronombre.",
+          truco: "Mira la terminación: dice quién hace la acción, aunque falte el pronombre.",
           mas: { texto: "Como cada forma es distinta, a veces el pronombre se puede omitir: Чита́ешь? se entiende solo, porque **-ешь** ya dice que es ты. Pero en ruso lo normal es decirlo: Ты чита́ешь? Por eso en los ejercicios se aceptan las dos formas.",
-            ejemplos: [{ ru: "{Рабо́таешь}?", es: "¿Trabajás?", por: "**-ешь** ya dice que la pregunta es para ты." }] },
+            ejemplos: [{ ru: "{Рабо́таешь}?", es: "¿Trabajas?", por: "**-ешь** ya dice que la pregunta es para ты." }] },
           chequeo: [
             { pide: "Вы ___ по-ру́сски? (говори́ть)", opciones: ["говори́шь", "говори́те", "говоря́т"], ok: "говори́те", por: "Con вы, la forma termina en **-те**." },
             { pide: "¿Quién hace la acción en рабо́таешь?", opciones: ["я", "ты", "он"], ok: "ты", por: "**-ешь** es la terminación de ты." }] },
@@ -167,26 +167,26 @@ const UNIDAD_5 = {
           texto: "El ruso tiene un solo presente. Я чита́ю es «leo» y también «estoy leyendo». No hay una forma aparte para lo que está pasando ahora: lo aclara la situación.",
           ejemplos: [
             { ru: "Я {слу́шаю} му́зыку.", es: "Escucho música / Estoy escuchando música.", por: "Una sola forma para las dos ideas." },
-            { ru: "Что ты {де́лаешь}?", es: "¿Qué hacés? / ¿Qué estás haciendo?", por: "La misma pregunta sirve para «ahora» y para «en general»." }],
+            { ru: "Что ты {де́лаешь}?", es: "¿Qué haces? / ¿Qué estás haciendo?", por: "La misma pregunta sirve para «ahora» y para «en general»." }],
           mas: { texto: "Si hace falta aclarar, el ruso agrega una palabra de tiempo en lugar de cambiar el verbo: «ahora», «siempre», «a veces». Las vas a ver en esta misma unidad. Mientras tanto, cuando traduzcas, cualquiera de las dos versiones en español está bien." } }
       ] },
     { id: "u5m2", n: 2, tipo: "leccion", nPractica: 10, titulo: "Los pronombres", resumen: "Я, ты, он, она́, мы, вы, они́.",
-      intro: "Los pronombres ya los conocés de la Unidad 2. Acá se repasan, con una novedad importante: вы.",
+      intro: "Los pronombres ya los conoces de la Unidad 2. Aquí se repasan, con una novedad importante: вы.",
       secciones: [
-        { id: "u5-pronombres", titulo: "Los siete pronombres", texto: "{я} (yo), ты (vos), он (él), она́ (ella), мы (nosotros), вы (ustedes o usted), они́ (ellos o ellas). Cada uno va con su forma del verbo.",
+        { id: "u5-pronombres", titulo: "Los siete pronombres", texto: "{я} (yo), ты (tú), он (él), она́ (ella), мы (nosotros), вы (ustedes o usted), они́ (ellos o ellas). Cada uno va con su forma del verbo.",
           ejemplos: [
             { ru: "{Он} рабо́тает, {она́} рабо́тает.", es: "Él trabaja, ella trabaja.", por: "Он y она́ usan la misma forma: el verbo no cambia con el género." },
             { ru: "{Мы} рабо́таем.", es: "Trabajamos.", por: "мы → **-ем**." }] },
         { id: "u5-ty-vy", titulo: "Ты y вы",
-          texto: "Ты es «vos»: para un amigo, la familia o alguien de tu edad. Вы sirve para dos cosas: hablarle a más de una persona («ustedes») y hablarle con respeto a una sola («usted»), como a un profesor o a alguien que no conocés.",
+          texto: "Ты es «tú»: para un amigo, la familia o alguien de tu edad. Вы sirve para dos cosas: hablarle a más de una persona («ustedes») y hablarle con respeto a una sola («usted»), como a un profesor o a alguien que no conoces.",
           ejemplos: [
-            { ru: "Ма́ша, {ты} рабо́таешь?", es: "Masha, ¿trabajás?", por: "Una amiga: ты." },
+            { ru: "Ма́ша, {ты} рабо́таешь?", es: "Masha, ¿trabajas?", por: "Una amiga: ты." },
             { ru: "О́льга, {вы} рабо́таете?", es: "Olga, ¿usted trabaja?", por: "La profesora: вы, por respeto." },
             { ru: "Ма́ша, Ди́ма, {вы} рабо́таете?", es: "Masha, Dima, ¿ustedes trabajan?", por: "Dos personas: вы, aunque sean amigos." }],
-          destacado: "ты = vos · вы = ustedes / usted",
-          mas: { texto: "Con una sola persona, вы lleva igual el verbo en plural: Вы рабо́таете, nunca «Вы рабо́тает». Por eso «usted trabaja» y «ustedes trabajan» se dicen igual, y lo que aclara cuál es la situación.\nCuándo se pasa de вы a ты lo decide la persona con la que hablás, o se acuerda entre los dos. Ante la duda, вы: nunca suena mal.",
+          destacado: "ты = tú · вы = ustedes / usted",
+          mas: { texto: "Con una sola persona, вы lleva igual el verbo en plural: Вы рабо́таете, nunca «Вы рабо́тает». Por eso «usted trabaja» y «ustedes trabajan» se dicen igual, y lo que aclara cuál es la situación.\nCuándo se pasa de вы a ты lo decide la persona con la que hablas, o se acuerda entre los dos. Ante la duda, вы: nunca suena mal.",
             errores: [{ mal: "Вы рабо́тает?", bien: "Вы {рабо́таете}?", por: "Con вы, siempre **-ете**, aunque sea una sola persona." }] },
-          chequeo: [{ pide: "Le preguntás al médico si entiende. ¿Qué decís?", opciones: ["Ты понима́ешь?", "Вы понима́ете?"], ok: "Вы понима́ете?", por: "A alguien que no conocés, con respeto: вы." }] },
+          chequeo: [{ pide: "Le preguntas al médico si entiende. ¿Qué dices?", opciones: ["Ты понима́ешь?", "Вы понима́ете?"], ok: "Вы понима́ете?", por: "A alguien que no conoces, con respeto: вы." }] },
         { id: "u5-oni", titulo: "Ellos y ellas", texto: "Они́ vale para «ellos» y para «ellas»: el ruso no distingue el género en plural.",
           ejemplos: [{ ru: "Ма́ма и ба́бушка? {Они́} рабо́тают.", es: "¿Mamá y la abuela? Trabajan.", por: "Dos mujeres: igual они́." }] }
       ] },
@@ -196,32 +196,32 @@ const UNIDAD_5 = {
         { id: "u5-primera", titulo: "Las terminaciones",
           texto: "Se le saca **-ть** al infinitivo y se agrega la terminación de cada persona. La vocal que se repite es la **е**: -ешь, -ет, -ем, -ете.",
           ejemplos: [
-            { ru: "Ты {рабо́таешь}.", es: "Trabajás.", por: "**рабо́та-** + **-ешь**." },
+            { ru: "Ты {рабо́таешь}.", es: "Trabajas.", por: "**рабо́та-** + **-ешь**." },
             { ru: "Мы {гуля́ем}.", es: "Paseamos.", por: "**гуля́-** + **-ем**." },
             { ru: "Вы {за́втракаете}?", es: "¿Ustedes desayunan?", por: "**за́втрака-** + **-ете**." }],
           destacado: "-ю · -ешь · -ет · -ем · -ете · -ют",
-          mas: { texto: "A este grupo se lo llama **primera conjugación**. Casi todos los verbos que terminan en **-ать** y **-ять** son de este grupo, y son muchísimos: рабо́тать, понима́ть, слу́шать, гуля́ть, де́лать, ду́мать. Si aprendés bien este modelo, ya podés conjugar una gran parte de los verbos del ruso.",
+          mas: { texto: "A este grupo se lo llama **primera conjugación**. Casi todos los verbos que terminan en **-ать** y **-ять** son de este grupo, y son muchísimos: рабо́тать, понима́ть, слу́шать, гуля́ть, де́лать, ду́мать. Si aprendes bien este modelo, ya puedes conjugar una gran parte de los verbos del ruso.",
             ejemplos: [{ ru: "Они́ {ду́мают}.", es: "Piensan.", por: "**ду́ма-** + **-ют**." }] },
           chequeo: [{ pide: "Ты ___ кни́гу? (понима́ть)", opciones: ["понима́ешь", "понима́ет", "понима́ете"], ok: "понима́ешь", por: "Con ты, **-ешь**." }] },
         { id: "u5-primera-yo", titulo: "Con ё",
           texto: "Cuando el acento cae en la terminación, la **е** se vuelve **ё**. Las terminaciones son las mismas, solo que se escriben y se pronuncian con ё.",
           ejemplos: [
-            { ru: "Где ты {живёшь}?", es: "¿Dónde vivís?", por: "El acento cae en la terminación: -ёшь." },
+            { ru: "Где ты {живёшь}?", es: "¿Dónde vives?", por: "El acento cae en la terminación: -ёшь." },
             { ru: "Он {пьёт} чай.", es: "Él toma té.", por: "-ёт en lugar de -ет." },
             { ru: "Мы {ждём} ма́му.", es: "Esperamos a mamá.", por: "-ём." }],
-          ojo: "En Azbuka podés escribir е en lugar de ё: se acepta igual." },
+          ojo: "En Azbuka puedes escribir е en lugar de ё: se acepta igual." },
         { id: "u5-primera-raiz", titulo: "Los que cambian la raíz",
           texto: "Algunos verbos cambian la **raíz**, la parte que va antes de la terminación. Las terminaciones siguen siendo las del modelo; lo que cambia es lo de adelante, y por eso conviene mirar cada uno en la tabla.",
           ejemplos: [
             { ru: "Я {живу́}.", es: "Vivo.", por: "жить → живу́: aparece una **в** que el infinitivo no tiene." },
             { ru: "Я {пью} во́ду.", es: "Tomo agua.", por: "пить → пью: la **и** se vuelve **ь**." },
-            { ru: "Ты {пи́шешь} письмо́.", es: "Escribís una carta.", por: "писа́ть → пи́шешь: la **с** pasa a **ш** en todas las formas." },
+            { ru: "Ты {пи́шешь} письмо́.", es: "Escribes una carta.", por: "писа́ть → пи́шешь: la **с** pasa a **ш** en todas las formas." },
             { ru: "Он {и́щет} телефо́н.", es: "Él busca el teléfono.", por: "иска́ть → и́щет: **ск** pasa a **щ**." }],
-          truco: "Si sabés la forma de {я} y la de ты, sacás todas las demás.",
+          truco: "Si sabes la forma de {я} y la de ты, sacas todas las demás.",
           mas: { texto: "Hay una familia más con un cambio regular: los verbos en **-овать** pierden esa parte y toman **-у-**: испо́льзовать → испо́льзую, испо́льзуешь. Y los que terminan en **-авать** pierden la **ва**: встава́ть → встаю́, встаёшь. Son patrones que se repiten en muchos verbos.",
             ejemplos: [
               { ru: "Мы {испо́льзуем} слова́рь.", es: "Usamos el diccionario.", por: "-овать → **-у-**: **испо́льзу-** + **-ем**." },
-              { ru: "Ты {встаёшь}?", es: "¿Te levantás?", por: "встава́ть pierde la **ва**: **вста-** + **-ёшь**." }] } }
+              { ru: "Ты {встаёшь}?", es: "¿Te levantas?", por: "встава́ть pierde la **ва**: **вста-** + **-ёшь**." }] } }
       ] },
     { id: "u5m4", n: 4, tipo: "leccion", grupo: 2, titulo: "Segunda conjugación", resumen: "-ю, -ишь, -ит, -им, -ите, -ят.",
       intro: "El segundo modelo es el de говори́ть. Cambia la vocal: donde el primero tiene е, este tiene и.",
@@ -230,7 +230,7 @@ const UNIDAD_5 = {
           texto: "Se saca la vocal y la **-ть** del infinitivo (говори́ть → **говор-**) y se agregan terminaciones con **и**. En la forma de они́, **-ят** (o **-ат**).",
           ejemplos: [
             { ru: "Я {говорю́} по-ру́сски.", es: "Hablo ruso.", por: "**говор-** + **-ю**." },
-            { ru: "Ты {смо́тришь} фильм.", es: "Mirás una película.", por: "смотре́ть → **смотр-** + **-ишь**." },
+            { ru: "Ты {смо́тришь} фильм.", es: "Miras una película.", por: "смотре́ть → **смотр-** + **-ишь**." },
             { ru: "Они́ {говоря́т}.", es: "Hablan.", por: "**-ят** en lugar del **-ют** del primer modelo." }],
           destacado: "-ю · -ишь · -ит · -им · -ите · -ят",
           errores: [{ mal: "Ты говоре́шь.", bien: "Ты {говори́шь}.", por: "Говори́ть es del segundo modelo: **-ишь**." }],
@@ -251,16 +251,16 @@ const UNIDAD_5 = {
           antes: { pide: "говори́ть → ты говори́шь, люби́ть → ты лю́бишь. ¿Y гото́вить?", opciones: ["гото́вишь", "гото́вешь"], ok: "гото́вишь", por: "Termina en **-ить**, como говори́ть: segundo modelo." },
           texto: "Hay una pista práctica en el infinitivo: casi todos los verbos en **-ить** son del segundo modelo (говори́ть, люби́ть, гото́вить, находи́ть). Las excepciones más usadas son dos verbos cortos: жить y пить, que son del primero. Los que terminan en **-ать** y **-ять** suelen ser del primero, pero no siempre: спать es del segundo. Y algunos en **-еть** también (смотре́ть, ви́деть).",
           ejemplos: [
-            { ru: "Ты {гото́вишь} ры́бу.", es: "Cocinás pescado.", por: "-ить → segundo modelo: **-ишь**." },
-            { ru: "Где ты {живёшь}?", es: "¿Dónde vivís?", por: "Жить termina en -ить, pero es corto y es del primero: **-ёшь**." },
-            { ru: "Ты {спишь}.", es: "Dormís.", por: "Спать termina en -ать, pero es del segundo: **-ишь**." }],
+            { ru: "Ты {гото́вишь} ры́бу.", es: "Cocinas pescado.", por: "-ить → segundo modelo: **-ишь**." },
+            { ru: "Где ты {живёшь}?", es: "¿Dónde vives?", por: "Жить termina en -ить, pero es corto y es del primero: **-ёшь**." },
+            { ru: "Ты {спишь}.", es: "Duermes.", por: "Спать termina en -ать, pero es del segundo: **-ишь**." }],
           truco: "**-ешь** → primer modelo; **-ишь** → segundo modelo. Ante la duda, la forma de ты lo confirma.",
           mas: { texto: "Por eso conviene aprender cada verbo nuevo con dos formas: la de {я} y la de ты (люблю́, лю́бишь; живу́, живёшь). La de {я} muestra si hay un cambio de consonante o de raíz; la de ты dice el modelo. Con esas dos, salen todas las demás. Con los dos modelos se conjuga la gran mayoría de los verbos; los pocos que no los siguen aparecen más adelante en esta unidad.",
-            ejemplos: [{ ru: "Я {нахожу́}, ты {нахо́дишь}.", es: "Encuentro, encontrás.", por: "La de {я} muestra el cambio **д** → **ж**; la de ты, el segundo modelo." }] },
+            ejemplos: [{ ru: "Я {нахожу́}, ты {нахо́дишь}.", es: "Encuentro, encuentras.", por: "La de {я} muestra el cambio **д** → **ж**; la de ты, el segundo modelo." }] },
           chequeo: [{ pide: "¿Qué forma de ты va con находи́ть?", opciones: ["нахо́дишь", "нахо́дешь"], ok: "нахо́дишь", por: "Termina en **-ить**: segundo modelo, **-ишь**." }] }
       ] },
     { id: "u5m5", n: 5, tipo: "leccion", nPractica: 10, titulo: "Verbos esenciales", resumen: "Comunicación, actividades, comida… y frecuencia.",
-      intro: "Los verbos de la unidad, agrupados por tema, y cuatro palabras para decir cada cuánto hacés algo.",
+      intro: "Los verbos de la unidad, agrupados por tema, y cuatro palabras para decir cada cuánto haces algo.",
       secciones: [
         { titulo: "Comunicación", texto: "говори́ть (hablar), понима́ть (entender), знать (saber, conocer), чита́ть (leer), писа́ть (escribir), слу́шать (escuchar), смотре́ть (mirar)." },
         { titulo: "Actividades", texto: "рабо́тать (trabajar), изуча́ть (estudiar una materia), де́лать (hacer), отдыха́ть (descansar), гуля́ть (pasear), ду́мать (pensar), жить (vivir)." },
@@ -270,7 +270,7 @@ const UNIDAD_5 = {
           ejemplos: [
             { ru: "Я {всегда́} за́втракаю.", es: "Siempre desayuno.", por: "Всегда́ va antes del verbo." },
             { ru: "Мы {ча́сто} гуля́ем.", es: "Paseamos seguido.", por: "Quién, cada cuánto, el verbo." },
-            { ru: "Ты {иногда́} смо́тришь футбо́л?", es: "¿A veces mirás fútbol?", por: "También en las preguntas va antes del verbo." },
+            { ru: "Ты {иногда́} смо́тришь футбо́л?", es: "¿A veces miras fútbol?", por: "También en las preguntas va antes del verbo." },
             { ru: "{Сейча́с} я обе́даю.", es: "Ahora estoy almorzando.", por: "Сейча́с suele ir al principio, y aclara que es «ahora»." }],
           destacado: "Я всегда́ за́втракаю. Мы ча́сто гуля́ем.",
           mas: { texto: "Сейча́с es la palabra que resuelve la duda del presente: Сейча́с я чита́ю es claramente «estoy leyendo». Всегда́, ча́сто e иногда́ hacen lo contrario: muestran que es algo habitual («leo seguido»). El verbo es el mismo en los dos casos.",
@@ -282,27 +282,27 @@ const UNIDAD_5 = {
       secciones: [
         { id: "u5-tres-piezas", titulo: "Tres piezas",
           texto: "Cada pieza tiene su forma: el pronombre, el verbo según la persona y el objeto en acusativo.",
-          desarmar: { es: "Escuchás música.", partes: [
+          desarmar: { es: "Escuchas música.", partes: [
             { txt: "Ты", rol: "quién hace", nota: "El pronombre decide la forma del verbo." },
             { txt: "слу́шаешь", rol: "la acción", nota: "Слу́шать, forma de ты: **-ешь**." },
             { txt: "му́зыку", rol: "qué recibe", nota: "Му́зыка en acusativo: **-а** → **-у**." }] },
           ejemplos: [
             { ru: "Мы {смо́трим} {фильм}.", es: "Miramos una película.", por: "смотре́ть, мы: смо́трим; фильм es una cosa: queda igual." },
-            { ru: "Они́ {покупа́ют} {маши́ну}.", es: "Compran un auto.", por: "покупа́ть, они́: покупа́ют; маши́на → маши́ну." },
+            { ru: "Они́ {покупа́ют} {маши́ну}.", es: "Compran un coche.", por: "покупа́ть, они́: покупа́ют; маши́на → маши́ну." },
             { ru: "Вы {лю́бите} {футбо́л}?", es: "¿Les gusta el fútbol?", por: "люби́ть, вы: лю́бите; футбо́л queda igual." }],
           destacado: "ты + слу́шать + му́зыка → Ты слу́шаешь му́зыку." },
         { id: "u5-cambiar-persona", titulo: "Cambiar la persona",
           texto: "Si cambia quién hace la acción, cambia solo el verbo. Lo que recibe la acción queda igual.",
           ejemplos: [
             { ru: "Я {чита́ю} кни́гу → Они́ {чита́ют} кни́гу.", es: "Leo un libro → Ellos leen un libro.", por: "Cambia la terminación del verbo; кни́гу no se toca." },
-            { ru: "Ты {гото́вишь} обе́д → Мы {гото́вим} обе́д.", es: "Cocinás el almuerzo → Cocinamos el almuerzo.", por: "Segundo modelo: -ишь → -им." }],
+            { ru: "Ты {гото́вишь} обе́д → Мы {гото́вим} обе́д.", es: "Cocinas el almuerzo → Cocinamos el almuerzo.", por: "Segundo modelo: -ишь → -им." }],
           mas: { texto: "Es un error común cambiar también el objeto, como si concordara con la persona. No: el acusativo depende solo de que la palabra reciba la acción. Кни́гу es кни́гу con {я}, con ты y con они́." } },
         { id: "u5-donde-error", titulo: "Dónde está el error",
           texto: "Cuando algo no está bien, el error suele estar en una de las tres piezas: el verbo no coincide con quién hace la acción, o lo que recibe la acción no está en acusativo. La corrección te dice cuál.",
           errores: [
             { mal: "Мы чита́ет кни́гу.", bien: "Мы {чита́ем} кни́гу.", por: "Con мы, **-ем**." },
             { mal: "Я чита́ю кни́га.", bien: "Я чита́ю {кни́гу}.", por: "Кни́га recibe la acción: acusativo." }],
-          truco: "Revisá de a una pieza: ¿quién?, ¿qué forma del verbo?, ¿acusativo?",
+          truco: "Revisa de a una pieza: ¿quién?, ¿qué forma del verbo?, ¿acusativo?",
           chequeo: [{ pide: "Ты слу́шаешь му́зыка. ¿Dónde está el error?", opciones: ["En el verbo", "En lo que recibe la acción"], ok: "En lo que recibe la acción", por: "Му́зыка tiene que ir en acusativo: му́зыку." }] }
       ] },
     { id: "u5m7", n: 7, tipo: "leccion", nPractica: 10, titulo: "Negación", resumen: "Я не чита́ю.",
@@ -319,7 +319,7 @@ const UNIDAD_5 = {
         { id: "u5-net-ne", titulo: "Нет y не",
           texto: "Нет es la respuesta «no». Не niega un verbo. En una respuesta completa van los dos.",
           ejemplos: [
-            { ru: "— Ты рабо́таешь? — {Нет}.", es: "—¿Trabajás? —No.", por: "Нет contesta la pregunta." },
+            { ru: "— Ты рабо́таешь? — {Нет}.", es: "—¿Trabajas? —No.", por: "Нет contesta la pregunta." },
             { ru: "{Нет}, я {не} рабо́таю.", es: "No, no trabajo.", por: "Нет contesta; не niega el verbo." }],
           errores: [{ mal: "Я нет рабо́таю.", bien: "Я {не} рабо́таю.", por: "Para negar un verbo, не." }] },
         { id: "u5-nikogda", titulo: "Никогда́ también lleva не",
@@ -341,26 +341,26 @@ const UNIDAD_5 = {
       intro: "Hacer preguntas en ruso es más simple que en español: muchas veces alcanza con cambiar la entonación.",
       secciones: [
         { id: "u5-entonacion", titulo: "Con la entonación",
-          texto: "Las palabras son las mismas que en la afirmación; cambia la voz, que sube en la palabra que se pregunta. No se cambia el orden ni se agrega nada. Escuchá el audio de cada ejemplo.",
+          texto: "Las palabras son las mismas que en la afirmación; cambia la voz, que sube en la palabra que se pregunta. No se cambia el orden ni se agrega nada. Escucha el audio de cada ejemplo.",
           ejemplos: [
-            { ru: "Ты рабо́таешь.", es: "Trabajás.", por: "Afirmación: la voz baja al final." },
-            { ru: "Ты {рабо́таешь}?", es: "¿Trabajás?", por: "Pregunta: la voz sube en рабо́таешь." },
-            { ru: "{Ты} рабо́таешь?", es: "¿Vos trabajás?", por: "Si la voz sube en ты, se pregunta por la persona: ¿vos, o alguien más?" }],
+            { ru: "Ты рабо́таешь.", es: "Trabajas.", por: "Afirmación: la voz baja al final." },
+            { ru: "Ты {рабо́таешь}?", es: "¿Trabajas?", por: "Pregunta: la voz sube en рабо́таешь." },
+            { ru: "{Ты} рабо́таешь?", es: "¿Tú trabajas?", por: "Si la voz sube en ты, se pregunta por la persona: ¿tú, o alguien más?" }],
           mas: { texto: "La voz sube justo en la sílaba acentuada de la palabra que se pregunta y baja enseguida. Es la manera más común de preguntar en ruso cuando la respuesta es «sí» o «no». Al escribir, alcanza con el signo de pregunta final: en ruso no hay signo de apertura «¿»." } },
         { id: "u5-palabras-pregunta", titulo: "Con palabras para preguntar",
           texto: "что (qué), кто (quién), где (dónde), как (cómo), почему́ (por qué), когда́ (cuándo). Van al principio, y después viene la frase en su orden normal.",
           ejemplos: [
-            { ru: "{Что} ты де́лаешь?", es: "¿Qué hacés?", por: "Что al principio; después ты y el verbo." },
-            { ru: "{Где} ты живёшь?", es: "¿Dónde vivís?", por: "Где pregunta por el lugar." },
+            { ru: "{Что} ты де́лаешь?", es: "¿Qué haces?", por: "Что al principio; después ты y el verbo." },
+            { ru: "{Где} ты живёшь?", es: "¿Dónde vives?", por: "Где pregunta por el lugar." },
             { ru: "{Когда́} вы обе́даете?", es: "¿Cuándo almuerzan?", por: "Когда́ pregunta por el momento." }],
-          destacado: "Что ты де́лаешь? = ¿Qué hacés?" },
+          destacado: "Что ты де́лаешь? = ¿Qué haces?" },
         { id: "u5-respuestas-cortas", titulo: "Respuestas cortas",
           texto: "En la respuesta corta se repite el verbo sin el pronombre.",
           ejemplos: [
-            { ru: "— Ты рабо́таешь? — Да, {рабо́таю}.", es: "—¿Trabajás? —Sí, trabajo.", por: "El verbo pasa a la forma de {я}, sin pronombre." },
-            { ru: "— Ты чита́ешь? — Нет, {не чита́ю}.", es: "—¿Leés? —No, no leo.", por: "Нет + не + el verbo." }],
-          errores: [{ mal: "— Ты рабо́таешь? — Да, рабо́таешь.", bien: "— Ты рабо́таешь? — Да, {рабо́таю}.", por: "Contestás vos: la forma de {я}." }],
-          chequeo: [{ pide: "— Вы понима́ете? — Да, ___.", opciones: ["понима́ете", "понима́ем"], ok: "понима́ем", por: "Si te preguntan a vos y a otros, contestás con мы." }] }
+            { ru: "— Ты рабо́таешь? — Да, {рабо́таю}.", es: "—¿Trabajas? —Sí, trabajo.", por: "El verbo pasa a la forma de {я}, sin pronombre." },
+            { ru: "— Ты чита́ешь? — Нет, {не чита́ю}.", es: "—¿Lees? —No, no leo.", por: "Нет + не + el verbo." }],
+          errores: [{ mal: "— Ты рабо́таешь? — Да, рабо́таешь.", bien: "— Ты рабо́таешь? — Да, {рабо́таю}.", por: "Contestas tú: la forma de {я}." }],
+          chequeo: [{ pide: "— Вы понима́ете? — Да, ___.", opciones: ["понима́ете", "понима́ем"], ok: "понима́ем", por: "Si te preguntan a ti y a otros, contestas con мы." }] }
       ] },
     { id: "u5m9", n: 9, tipo: "leccion", grupo: "e", titulo: "Verbos especiales", resumen: "Быть, хоте́ть, мочь, есть y los verbos con -ся.",
       intro: "Unos pocos verbos muy usados no siguen los modelos. No hace falta la teoría: alcanza con aprenderlos de a uno.",
@@ -374,17 +374,17 @@ const UNIDAD_5 = {
           destacado: "Я до́ма. = Estoy en casa.",
           errores: [{ mal: "Я есть до́ма.", bien: "Я {до́ма}.", por: "En presente, быть no se dice." }] },
         { id: "u5-hotet-moch", titulo: "Хоте́ть y мочь", tabla: "hm",
-          texto: "Хоте́ть (querer) y мочь (poder) son dos verbos muy usados que no siguen los modelos. Хоте́ть mezcla los dos: las formas del singular son del primero (хо́чешь) y las del plural, del segundo (хоти́м). En мочь, la **г** de могу́ se vuelve **ж** en el medio (мо́жешь) y vuelve en мо́гут. Miralos uno al lado del otro en la tabla.",
+          texto: "Хоте́ть (querer) y мочь (poder) son dos verbos muy usados que no siguen los modelos. Хоте́ть mezcla los dos: las formas del singular son del primero (хо́чешь) y las del plural, del segundo (хоти́м). En мочь, la **г** de могу́ se vuelve **ж** en el medio (мо́жешь) y vuelve en мо́гут. Míralos uno al lado del otro en la tabla.",
           ejemplos: [
-            { ru: "Ты {хо́чешь} ко́фе?", es: "¿Querés café?", por: "Singular: como el primer modelo (-ешь)." },
+            { ru: "Ты {хо́чешь} ко́фе?", es: "¿Quieres café?", por: "Singular: como el primer modelo (-ешь)." },
             { ru: "Мы {хоти́м} пи́ццу.", es: "Queremos pizza.", por: "Plural: como el segundo (-им)." },
-            { ru: "Я {могу́}, ты {мо́жешь}.", es: "Puedo, podés.", por: "**г** con {я} y они́; **ж** en el medio." }] },
+            { ru: "Я {могу́}, ты {мо́жешь}.", es: "Puedo, puedes.", por: "**г** con {я} y они́; **ж** en el medio." }] },
         { id: "u5-despues-hotet", titulo: "Qué va después",
-          texto: "Después de хоте́ть puede ir lo que querés, en acusativo, o lo que querés hacer, con un infinitivo. Мочь va casi siempre con un infinitivo.",
+          texto: "Después de хоте́ть puede ir lo que quieres, en acusativo, o lo que quieres hacer, con un infinitivo. Мочь va casi siempre con un infinitivo.",
           ejemplos: [
-            { ru: "Я хочу́ {пи́ццу}.", es: "Quiero pizza.", por: "Lo que querés: acusativo." },
-            { ru: "Я хочу́ {чита́ть}.", es: "Quiero leer.", por: "Lo que querés hacer: infinitivo." },
-            { ru: "Ты мо́жешь {говори́ть} по-ру́сски?", es: "¿Podés hablar ruso?", por: "Мочь + infinitivo." }],
+            { ru: "Я хочу́ {пи́ццу}.", es: "Quiero pizza.", por: "Lo que quieres: acusativo." },
+            { ru: "Я хочу́ {чита́ть}.", es: "Quiero leer.", por: "Lo que quieres hacer: infinitivo." },
+            { ru: "Ты мо́жешь {говори́ть} по-ру́сски?", es: "¿Puedes hablar ruso?", por: "Мочь + infinitivo." }],
           errores: [{ mal: "Я хочу́ чита́ю.", bien: "Я хочу́ {чита́ть}.", por: "Después de хоте́ть, el segundo verbo va en infinitivo." }],
           chequeo: [{ pide: "Мы хоти́м ___ фильм. (смотре́ть)", opciones: ["смотре́ть", "смо́трим"], ok: "смотре́ть", por: "Después de хоте́ть, infinitivo." }] },
         { id: "u5-est", titulo: "Есть",
@@ -401,12 +401,12 @@ const UNIDAD_5 = {
             { ru: "Вы {возвраща́етесь}?", es: "¿Ustedes vuelven?", por: "Sin la partícula, la forma termina en **-е**, una vocal: **-сь**." }],
           truco: "Después de vocal, **-сь**; después de consonante, **-ся**.",
           errores: [{ mal: "Я учу́ся.", bien: "Я {учу́сь}.", por: "Después de vocal va **-сь**." }],
-          mas: { texto: "Las seis formas de учи́ться: учу́сь, у́чишься, у́чится, у́чимся, у́читесь, у́чатся. Fijate que en у́чишься la terminación -шь termina en **ь**, que no es vocal: por eso va **-ся**. Es el único caso que suele confundir." } }
+          mas: { texto: "Las seis formas de учи́ться: учу́сь, у́чишься, у́чится, у́чимся, у́читесь, у́чатся. Fíjate que en у́чишься la terminación -шь termina en **ь**, que no es vocal: por eso va **-ся**. Es el único caso que suele confundir." } }
       ] },
     { id: "u5m10", n: 10, tipo: "lectura", titulo: "Mi día", resumen: "У́тром, днём, ве́чером, но́чью.",
-      intro: "Para contar tu día hacen falta cuatro palabras: у́тром (a la mañana), днём (a la tarde), ве́чером (a la noche) y но́чью (de noche), más пото́м (después). Van al principio de la frase: У́тром я пью ко́фе. Leé los tres textos, escuchalos y después contestá." },
+      intro: "Para contar tu día hacen falta cuatro palabras: у́тром (a la mañana), днём (a la tarde), ве́чером (a la noche) y но́чью (de noche), más пото́м (después). Van al principio de la frase: У́тром я пью ко́фе. Lee los tres textos, escúchalos y después contesta." },
     { id: "u5m11", n: 11, tipo: "proyecto", titulo: "Proyecto: Мой день", resumen: "Tu día, en ruso.",
-      intro: "Escribí tu día en ruso, como un diario: qué hacés a la mañana, a la tarde y a la noche, qué no hacés y alguna pregunta con su respuesta. Por ejemplo: У́тром я встаю́ и пью ко́фе. Днём я рабо́таю. Я не смотрю́ телеви́зор. Ты рабо́таешь? Да, рабо́таю.",
+      intro: "Escribe tu día en ruso, como un diario: qué haces a la mañana, a la tarde y a la noche, qué no haces y alguna pregunta con su respuesta. Por ejemplo: У́тром я встаю́ и пью ко́фе. Днём я рабо́таю. Я не смотрю́ телеви́зор. Ты рабо́таешь? Да, рабо́таю.",
       requisitos: [], consejos: [] },
     { id: "u5m12", n: 12, tipo: "examen", titulo: "Evaluación", resumen: "Conjugación, negación, preguntas, traducción y audio.",
       intro: "Treinta y cinco ejercicios en siete partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
@@ -466,7 +466,7 @@ function u5Datos() {
   return (u5Datos.cache = { sin, verb, sust, lex });
 }
 
-/* «чита́ть → ты чита́ешь (leés)»: el cambio, para las explicaciones */
+/* «чита́ть → ты чита́ешь (lees)»: el cambio, para las explicaciones */
 function u5Cambio(v, i) {
   return "**" + v.ac + " → " + U5_PERS_LABEL[i] + " " + v.f[i] + "**";   /* dentro de la negrita, я no lleva llaves */
 }
@@ -486,20 +486,20 @@ function u5Frase(vk, ok, p, quien) {
   const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
   let sujRu, sujEs, i;
   if (quien) { const s = sust[sin(quien)]; sujRu = cap(s.nom); sujEs = s.suj; i = 2; }
-  else { const P = U5_PERS[p]; sujRu = cap(P.ru); sujEs = { 0: "", 1: "Vos", 2: "Él", 3: "Ella", 4: "", 5: "Ustedes", 6: "Ellos" }[p]; i = P.i; }
+  else { const P = U5_PERS[p]; sujRu = cap(P.ru); sujEs = { 0: "", 1: "Tú", 2: "Él", 3: "Ella", 4: "", 5: "Ustedes", 6: "Ellos" }[p]; i = P.i; }
   const forma = v.f[i];
   const ru = sujRu + " " + forma + (o ? " " + o.acc : "") + ".";
   let es, partes = null;
   const art = ok ? (U5_COMBOS[vk] || ["un"])[0] : null;
   if (sin(vk) === "любить" && o && !o.persona) {
-    const dat = quien ? "A " + (/^(La|El|Mi) /.test(sujEs) ? sujEs.charAt(0).toLowerCase() + sujEs.slice(1) : sujEs).replace(/^A el /, "Al ") : { 0: "", 1: "A vos", 2: "A él", 3: "A ella", 4: "", 5: "A ustedes", 6: "A ellos" }[p];
+    const dat = quien ? "A " + (/^(La|El|Mi) /.test(sujEs) ? sujEs.charAt(0).toLowerCase() + sujEs.slice(1) : sujEs).replace(/^A el /, "Al ") : { 0: "", 1: "A ti", 2: "A él", 3: "A ella", 4: "", 5: "A ustedes", 6: "A ellos" }[p];
     es = ((dat ? dat + " " : "") + U5_ENCANTA[[0, 1, 2, 3, 4, 4][i]] + " " + o.el).trim();
     es = cap(es.replace(/^A Al /, "Al ")) + ".";
   } else {
     let obj = !o ? "" : o.persona ? o.a : art === "el" ? o.el : art === "0" ? o.es.replace(/ \(.*\)$/, "") : o.un;
     if (o && o.persona && i === 3) obj = obj.replace(/^a mi /, o.g === "f" ? "a nuestra " : "a nuestro ");
     if (o && o.persona && i === 4) obj = obj.replace(/^a mi /, o.g === "f" ? "a su " : "a su ");
-    const vEs = sin(vk) === "знать" && !(o && o.persona) ? ["sé", "sabés", "sabe", "sabemos", "saben"][[0, 1, 2, 3, 4, 4][i]] : u5EsVerbo(v, i);
+    const vEs = sin(vk) === "знать" && !(o && o.persona) ? ["sé", "sabes", "sabe", "sabemos", "saben"][[0, 1, 2, 3, 4, 4][i]] : u5EsVerbo(v, i);
     es = cap(((sujEs ? sujEs + " " : "") + vEs + (obj ? " " + obj : "")).trim()) + ".";
     partes = { sujEs, vEs, obj };
   }
@@ -529,21 +529,21 @@ function ejerciciosUnidad5() {
     const base = { grupo: v.id, items: ["lex:" + v.id], ampliacion: v.amp || undefined };
     v.f.forEach((f, i) => {
       base.grupo = v.id + "-" + i;   /* cada persona, su grupo: más variedad en una sesión */
-      out.push(Object.assign({ id: "U5-conj-" + v.id + "-" + i, tipo: "conjugar", forma: "elegir", dificultad: 1, modulo: m, pide: "Elegí la forma de «" + v.ac + "» (" + v.es + ").",
+      out.push(Object.assign({ id: "U5-conj-" + v.id + "-" + i, tipo: "conjugar", forma: "elegir", dificultad: 1, modulo: m, pide: "Elige la forma de «" + v.ac + "» (" + v.es + ").",
         grande: pRu(i) + " _____", opciones: baraja([f].concat(baraja(uniq(v.f).filter(x => x !== f), vi + i).slice(0, 3)), vi * 3 + i),
         correcta: f, oir: pRu(i) + " " + f, explicacion: u5Cambio(v, i) + " (" + u5EsVerbo(v, i) + ")." }, base));
-      out.push(Object.assign({ id: "U5-conjw-" + v.id + "-" + i, tipo: "conjugar-escribir", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí la forma del verbo.",
+      out.push(Object.assign({ id: "U5-conjw-" + v.id + "-" + i, tipo: "conjugar-escribir", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribe la forma del verbo.",
         grande: PL[i] + " + " + v.ac, audio: pRu(i) + " " + f, audioManual: true, esperadas: [f, pRu(i) + " " + f], idioma: "ru", explicacion: u5Cambio(v, i) + " (" + u5EsVerbo(v, i) + ")." }, base));
       out.push(Object.assign({ id: "U5-pers-" + v.id + "-" + i, tipo: "persona", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Quién lo hace?", grande: f, audio: f,
         opciones: PL.slice(), correcta: PL[i], explicacion: "**" + f + "** es la forma de " + plF(i) + " (" + u5EsVerbo(v, i) + ")." }, base));
     });
     base.grupo = v.id;
-    out.push(Object.assign({ id: "U5-emp-" + v.id, tipo: "emparejar", forma: "emparejar", dificultad: 2, modulo: m, pide: "Uní cada persona con su forma de «" + v.ac + "».",
+    out.push(Object.assign({ id: "U5-emp-" + v.id, tipo: "emparejar", forma: "emparejar", dificultad: 2, modulo: m, pide: "Une cada persona con su forma de «" + v.ac + "».",
       pares: [["я", v.f[0]], ["ты", v.f[1]], ["он / она́", v.f[2]], ["мы", v.f[3]], ["вы", v.f[4]], ["они́", v.f[5]]].filter((x, k) => k !== (vi % 6)).slice(0, 4),
       explicacion: v.ac + ": я " + v.f[0] + " · ты " + v.f[1] + " · он / она́ " + v.f[2] + " · мы " + v.f[3] + " · вы " + v.f[4] + " · они́ " + v.f[5] + "." }, base));
     /* Dictado corto: una persona por verbo */
     const i = (vi * 5 + 1) % 6, ru = pRu(i) + " " + v.f[i] + ".";
-    out.push(Object.assign({ id: "U5-dicv-" + v.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: m, pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru",
+    out.push(Object.assign({ id: "U5-dicv-" + v.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: m, pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru",
       explicacion: ru + " " + u5Cambio(v, i) + " (" + u5EsVerbo(v, i) + ")." }, base));
   });
 
@@ -557,29 +557,29 @@ function ejerciciosUnidad5() {
         pide: "¿Cuál va?", grande: pRu(i) + " _____" + obj + ".", opciones: baraja([f].concat(otras), j + i), correcta: f, oir: pRu(i) + " " + f + obj + ".",
         explicacion: u5Cambio(v, i) + ": la terminación coincide con quién hace la acción (" + u5EsVerbo(v, i) + ")." });
       out.push({ id: "U5-quien1-" + v.id + "-" + i, tipo: "persona", forma: "elegir", dificultad: 1, modulo: 1, grupo: "M1q-" + v.id + "-" + i, items: ["lex:" + v.id],
-        pide: "Escuchá: ¿quién lo hace?", audio: v.f[i], opciones: PL.slice(), correcta: PL[i], explicacion: "Sonó **" + v.f[i] + "**: la forma de " + plF(i) + "." });
+        pide: "Escucha: ¿quién lo hace?", audio: v.f[i], opciones: PL.slice(), correcta: PL[i], explicacion: "Sonó **" + v.f[i] + "**: la forma de " + plF(i) + "." });
     });
   });
 
   /* ── Módulo 2: pronombres ── */
-  const pronEs = [["я", "yo"], ["ты", "vos"], ["он", "él"], ["она́", "ella"], ["мы", "nosotros"], ["вы", "ustedes / usted"], ["они́", "ellos / ellas"]];
+  const pronEs = [["я", "yo"], ["ты", "tú"], ["он", "él"], ["она́", "ella"], ["мы", "nosotros"], ["вы", "ustedes / usted"], ["они́", "ellos / ellas"]];
   [[0, 1, 2, 3], [3, 4, 5, 6], [0, 2, 4, 6], [1, 3, 5, 0]].forEach((g, j) => out.push({ id: "U5-pempar-" + j, tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 2, grupo: "P2-" + j, items: [],
-    pide: "Uní cada pronombre con su significado.", pares: g.map(k => pronEs[k]), explicacion: g.map(k => (pronEs[k][0] === "я" ? "{я}" : pronEs[k][0]) + " = " + pronEs[k][1]).join(" · ") }));
+    pide: "Une cada pronombre con su significado.", pares: g.map(k => pronEs[k]), explicacion: g.map(k => (pronEs[k][0] === "я" ? "{я}" : pronEs[k][0]) + " = " + pronEs[k][1]).join(" · ") }));
   pronEs.forEach(([ru, es], j) => {
-    out.push({ id: "U5-paud-" + j, tipo: "pronombre", forma: "elegir", dificultad: 1, modulo: 2, grupo: "P2a-" + j, items: [], pide: "Escuchá: ¿qué pronombre es?", audio: ru,
+    out.push({ id: "U5-paud-" + j, tipo: "pronombre", forma: "elegir", dificultad: 1, modulo: 2, grupo: "P2a-" + j, items: [], pide: "Escucha: ¿qué pronombre es?", audio: ru,
       opciones: baraja([es].concat(baraja(pronEs.map(x => x[1]).filter(x => x !== es), j).slice(0, 2)), j + 1), correcta: es, explicacion: (ru === "я" ? "{я}" : ru) + " = " + es + "." });
-    out.push({ id: "U5-pesc-" + j, tipo: "pronombre", forma: "escribir", dificultad: 2, modulo: 2, grupo: "P2e-" + j, items: [], pide: "Escribí el pronombre en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U5-pesc-" + j, tipo: "pronombre", forma: "escribir", dificultad: 2, modulo: 2, grupo: "P2e-" + j, items: [], pide: "Escribe el pronombre en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: "«" + es + "» = " + (ru === "я" ? "{я}" : ru) + "." });
   });
   U5_TYVY.forEach(([sit, ok], j) => out.push({ id: "U5-tyvy-" + j, tipo: "ty-vy", forma: "elegir", dificultad: 1, modulo: 2, grupo: "TV-" + j, items: [], pide: sit + " ¿Ты o вы?",
-    opciones: ["ты", "вы"], correcta: ok, explicacion: ok === "ты" ? "**ты**: es alguien de confianza." : sit.indexOf("dos") >= 0 ? "**вы**: le hablás a más de una persona («ustedes»)." : "**вы**: trato de respeto («usted»)." }));
+    opciones: ["ты", "вы"], correcta: ok, explicacion: ok === "ты" ? "**ты**: es alguien de confianza." : sit.indexOf("dos") >= 0 ? "**вы**: le hablas a más de una persona («ustedes»)." : "**вы**: trato de respeto («usted»)." }));
   /* El pronombre que falta, según la terminación */
   ["чита́ть", "рабо́тать", "говори́ть"].forEach((vk, j) => {
     const v = V(vk);
     v.f.forEach((f, i) => {
       const esp = i === 2 ? ["он", "она́"] : [["я"], ["ты"], null, ["мы"], ["вы"], ["они́"]][i];
       out.push({ id: "U5-cpron-" + v.id + "-" + i, tipo: "completar-pron", forma: "escribir", dificultad: 2, modulo: 2, grupo: "CP-" + v.id + "-" + i, items: ["lex:" + v.id],
-        pide: "Escribí el pronombre que va.", grande: "_____ " + f + ".", audio: (esp[0] === "я" ? "Я" : cap(esp[0])) + " " + f + ".", audioManual: true, esperadas: esp, idioma: "ru",
+        pide: "Escribe el pronombre que va.", grande: "_____ " + f + ".", audio: (esp[0] === "я" ? "Я" : cap(esp[0])) + " " + f + ".", audioManual: true, esperadas: esp, idioma: "ru",
         explicacion: "**" + f + "** termina como la forma de " + plF(i) + ": " + (esp.map(x => x === "я" ? "{я}" : x).join(" u ")) + "." });
     });
   });
@@ -598,7 +598,7 @@ function ejerciciosUnidad5() {
     const dis = baraja(uniq(misma.filter(x => x !== es)), i + 3).slice(0, 3);
     if (dis.length >= 2) out.push(Object.assign({ id: "U5-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: mod, pide: "¿Qué significa?", grande: e.acento, audio: e.ru,
       opciones: baraja([es].concat(dis), i + 5), correcta: es, explicacion: e.acento + " — " + es }, base));
-    out.push(Object.assign({ id: "U5-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: mod, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
+    out.push(Object.assign({ id: "U5-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: mod, pide: "Escribe en ruso: «" + es + "»", audio: e.ru, audioManual: true,
       pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.length + " letras.", esperadas: [e.acento], idioma: "ru", explicacion: e.acento + " — " + es }, base));
   });
   /* Frecuencia: Я всегда́ за́втракаю. */
@@ -611,18 +611,18 @@ function ejerciciosUnidad5() {
     const f = u5Frase(vk, null, p); if (!f) return;
     const P = U5_PERS[p];
     const ru = cap(P.ru) + " " + adv + " " + f.forma + ".";
-    const sujEs = { 0: "", 1: "Vos", 2: "Él", 3: "Ella", 4: "", 5: "Ustedes", 6: "Ellos" }[p];
+    const sujEs = { 0: "", 1: "Tú", 2: "Él", 3: "Ella", 4: "", 5: "Ustedes", 6: "Ellos" }[p];
     const es = cap(((sujEs ? sujEs + " " : "") + U5_FREC[adv] + " " + u5EsVerbo(f.v, f.i)).trim()) + ".";
     const base = { grupo: "FR-" + adv + "-" + j, items: ["lex:" + f.v.id], oir: ru };
-    out.push(Object.assign({ id: "U5-frdic-" + a + "-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 5, pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
-    out.push(Object.assign({ id: "U5-fresru-" + a + "-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push(Object.assign({ id: "U5-frdic-" + a + "-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 5, pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
+    out.push(Object.assign({ id: "U5-fresru-" + a + "-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru].concat(p === 0 || p === 1 || p === 4 ? [cap(adv) + " " + f.forma + "."] : []), idioma: "ru", explicacion: ru + " " + u5Cambio(f.v, f.i) + "." }, base));
   }));
   /* Ampliación: frases simples */
   U5_AMPLIACION_RU.split(" ").forEach((vk, j) => {
     const v = V(vk); if (!v) return;
     const p = j % 7, i = U5_PERS[p].i, ru = cap(U5_PERS[p].ru) + " " + v.f[i] + ".";
-    out.push({ id: "U5-adic-" + v.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 5, ampliacion: true, grupo: "A-" + v.id, items: ["lex:" + v.id], oir: ru, pide: "Escuchá y escribí.", audio: ru,
+    out.push({ id: "U5-adic-" + v.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 5, ampliacion: true, grupo: "A-" + v.id, items: ["lex:" + v.id], oir: ru, pide: "Escucha y escribe.", audio: ru,
       esperadas: [ru], idioma: "ru", explicacion: ru + " " + u5Cambio(v, i) + " (" + u5EsVerbo(v, i) + ")." });
   });
 
@@ -643,35 +643,35 @@ function ejerciciosUnidad5() {
     const exp = u5Cambio(v, f.i) + ". " + (o.nom !== o.acc ? u5Acc(o) + ". " : "") + f.ru + " — " + f.es;
     const sujL = f.quien ? f.sujRu : f.sujRu.toLowerCase().replace(/^я$/, "я");
     /* Completar el verbo */
-    out.push(Object.assign({ id: "U5-cverb-" + n, tipo: "completar-verbo", forma: "escribir", dificultad: 2, modulo: 6, pide: "Completá con «" + v.ac + "».", grande: f.sujRu + " _____ " + o.acc + ".",
+    out.push(Object.assign({ id: "U5-cverb-" + n, tipo: "completar-verbo", forma: "escribir", dificultad: 2, modulo: 6, pide: "Completa con «" + v.ac + "».", grande: f.sujRu + " _____ " + o.acc + ".",
       pista: f.es, audio: f.ru, audioManual: true, esperadas: [f.forma], idioma: "ru", explicacion: exp }, base));
     /* Construir */
-    out.push(Object.assign({ id: "U5-cons-" + n, tipo: "construir", forma: "escribir", dificultad: 3, modulo: 6, pide: "Armá la frase con estas palabras.",
+    out.push(Object.assign({ id: "U5-cons-" + n, tipo: "construir", forma: "escribir", dificultad: 3, modulo: 6, pide: "Arma la frase con estas palabras.",
       grande: sujL + " · " + v.ac + " · " + o.nom, pista: f.es, audio: f.ru, audioManual: true, esperadas: f.esperadas, idioma: "ru", explicacion: exp.replace(/^\*\*/, "**") }, base));
-    /* Cambiá la persona */
+    /* Cambia la persona */
     if (!f.quien) {
       const p2 = (f.p + 3) % 7, f2 = u5Frase(Object.keys(U5_VERBOS).find(x => sin(x) === sin(v.ac)), o.ac, p2);
-      if (f2 && f2.forma !== f.forma) out.push(Object.assign({ id: "U5-camb-" + n, tipo: "cambiar-persona", forma: "escribir", dificultad: 3, modulo: 6, pide: "Cambiá la persona: " + (U5_PERS[p2].ru === "я" ? "{я}" : U5_PERS[p2].ru) + ".",
+      if (f2 && f2.forma !== f.forma) out.push(Object.assign({ id: "U5-camb-" + n, tipo: "cambiar-persona", forma: "escribir", dificultad: 3, modulo: 6, pide: "Cambia la persona: " + (U5_PERS[p2].ru === "я" ? "{я}" : U5_PERS[p2].ru) + ".",
         grande: f.ru, audio: f2.ru, audioManual: true, esperadas: f2.esperadas, idioma: "ru",
         explicacion: "Cambia solo el verbo: " + u5Cambio(v, f2.i) + ". " + f2.ru + " — " + f2.es }, base));
     }
-    /* Detectá el error: el verbo (persona equivocada) o el objeto (nominativo) */
+    /* Detecta el error: el verbo (persona equivocada) o el objeto (nominativo) */
     const pals = sinP(f.ru).split(" ");
     if (n % 2 === 0) {
       const mal = v.f[(f.i + 2) % 6];
       if (mal !== f.forma) { const p2 = pals.slice(); p2[1] = mal;
-        out.push(Object.assign({ id: "U5-det-v-" + n, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 6, pide: "Tocá la palabra que está mal.", palabras: p2, correcta: 1,
+        out.push(Object.assign({ id: "U5-det-v-" + n, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 6, pide: "Toca la palabra que está mal.", palabras: p2, correcta: 1,
           explicacion: "**" + mal + "** no va con " + (f.quien ? f.sujRu : f.sujRu.toLowerCase() === "я" ? "{я}" : f.sujRu.toLowerCase()) + ": va **" + f.forma + "**. " + f.ru + " — " + f.es }, base)); }
     } else if (o.nom !== o.acc) {
       const p2 = pals.slice(); p2[p2.length - 1] = o.nom;
-      out.push(Object.assign({ id: "U5-det-o-" + n, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 6, pide: "Tocá la palabra que está mal.", palabras: p2, correcta: p2.length - 1,
+      out.push(Object.assign({ id: "U5-det-o-" + n, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 6, pide: "Toca la palabra que está mal.", palabras: p2, correcta: p2.length - 1,
         explicacion: "**" + o.nom + "** está en nominativo; lo que recibe la acción va en acusativo: " + u5Acc(o) + ". " + f.ru }, base));
     }
     /* Ordenar, dictado y traducción */
     if (n % 3 === 0) { let fi = baraja(pals, n + 7); if (fi.join(" ") === pals.join(" ")) fi = fi.slice(1).concat(fi[0]);
-      out.push(Object.assign({ id: "U5-ord-" + n, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 6, pide: "Ordená: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: pals.join(" "), explicacion: exp }, base)); }
-    out.push(Object.assign({ id: "U5-dic-" + n, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 6, pide: "Escuchá y escribí la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: exp }, base));
-    if (n % 2) out.push(Object.assign({ id: "U5-esru-" + n, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 6, pide: "Escribí en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
+      out.push(Object.assign({ id: "U5-ord-" + n, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 6, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: pals.join(" "), explicacion: exp }, base)); }
+    out.push(Object.assign({ id: "U5-dic-" + n, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 6, pide: "Escucha y escribe la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: exp }, base));
+    if (n % 2) out.push(Object.assign({ id: "U5-esru-" + n, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 6, pide: "Escribe en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
       esperadas: f.esperadas, idioma: "ru", explicacion: exp }, base));
   });
 
@@ -683,11 +683,11 @@ function ejerciciosUnidad5() {
     const negEsOk = f.esNo;
     const base = { grupo: "N-" + j, items: ["lex:" + f.v.id], oir: neg };
     const exp = "**не** va justo antes del verbo. " + neg + " — " + negEsOk;
-    out.push(Object.assign({ id: "U5-neg-" + j, tipo: "negar", forma: "escribir", dificultad: 2, modulo: 7, pide: "Negá la frase.", grande: f.ru, audio: neg, audioManual: true,
+    out.push(Object.assign({ id: "U5-neg-" + j, tipo: "negar", forma: "escribir", dificultad: 2, modulo: 7, pide: "Niega la frase.", grande: f.ru, audio: neg, audioManual: true,
       esperadas: [neg], idioma: "ru", explicacion: exp }, base));
-    out.push(Object.assign({ id: "U5-negesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 7, pide: "Escribí en ruso: «" + negEsOk + "»", audio: neg, audioManual: true,
+    out.push(Object.assign({ id: "U5-negesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 7, pide: "Escribe en ruso: «" + negEsOk + "»", audio: neg, audioManual: true,
       esperadas: [neg].concat(f.esperadas.slice(1).map(x => x.replace(" " + f.forma, " не " + f.forma).replace(new RegExp("^" + cap(f.forma)), "Не " + f.forma))), idioma: "ru", explicacion: exp }, base));
-    if (j % 2 === 0) out.push(Object.assign({ id: "U5-negdic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 7, pide: "Escuchá y escribí.", audio: neg, esperadas: [neg], idioma: "ru", explicacion: exp }, base));
+    if (j % 2 === 0) out.push(Object.assign({ id: "U5-negdic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 7, pide: "Escucha y escribe.", audio: neg, esperadas: [neg], idioma: "ru", explicacion: exp }, base));
   });
   /* Никогда́ + не */
   habitos.concat(["смотре́ть"]).forEach((vk, j) => {
@@ -699,20 +699,20 @@ function ejerciciosUnidad5() {
   });
 
   /* ── Módulo 8: preguntas ── */
-  const qs = [["Что ты де́лаешь?", "¿Qué hacés?", "что"], ["Где ты живёшь?", "¿Dónde vivís?", "где"], ["Как ты?", "¿Cómo estás?", "как"], ["Почему́ ты не рабо́таешь?", "¿Por qué no trabajás?", "почему́"],
-    ["Когда́ ты за́втракаешь?", "¿Cuándo desayunás?", "когда́"], ["Кто чита́ет кни́гу?", "¿Quién lee el libro?", "кто"], ["Что вы чита́ете?", "¿Qué leen ustedes?", "что"], ["Где вы рабо́таете?", "¿Dónde trabajan ustedes?", "где"],
+  const qs = [["Что ты де́лаешь?", "¿Qué haces?", "что"], ["Где ты живёшь?", "¿Dónde vives?", "где"], ["Как ты?", "¿Cómo estás?", "как"], ["Почему́ ты не рабо́таешь?", "¿Por qué no trabajas?", "почему́"],
+    ["Когда́ ты за́втракаешь?", "¿Cuándo desayunas?", "когда́"], ["Кто чита́ет кни́гу?", "¿Quién lee el libro?", "кто"], ["Что вы чита́ете?", "¿Qué leen ustedes?", "что"], ["Где вы рабо́таете?", "¿Dónde trabajan ustedes?", "где"],
     ["Когда́ они́ у́жинают?", "¿Cuándo cenan ellos?", "когда́"], ["Что он гото́вит?", "¿Qué cocina él?", "что"], ["Кто говори́т по-ру́сски?", "¿Quién habla ruso?", "кто"], ["Почему́ вы не спи́те?", "¿Por qué no duermen ustedes?", "почему́"]];
   const palQ = ["что", "кто", "где", "как", "почему́", "когда́"];
   qs.forEach(([ru, es, w], j) => {
     const base = { grupo: "Q-" + j, items: [], oir: ru };
-    out.push(Object.assign({ id: "U5-qpal-" + j, tipo: "pregunta-palabra", forma: "elegir", dificultad: 1, modulo: 8, pide: "Completá: «" + es + "»", grande: ru.replace(new RegExp("^" + cap(w)), "_____"),
+    out.push(Object.assign({ id: "U5-qpal-" + j, tipo: "pregunta-palabra", forma: "elegir", dificultad: 1, modulo: 8, pide: "Completa: «" + es + "»", grande: ru.replace(new RegExp("^" + cap(w)), "_____"),
       opciones: baraja([w].concat(baraja(palQ.filter(x => x !== w), j).slice(0, 2)), j + 2), correcta: w, explicacion: "**" + w + "** = " + { "что": "qué", "кто": "quién", "где": "dónde", "как": "cómo", "почему́": "por qué", "когда́": "cuándo" }[w] + ". " + ru + " — " + es }, base));
-    out.push(Object.assign({ id: "U5-qesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
-    out.push(Object.assign({ id: "U5-qdic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 8, pide: "Escuchá y escribí la pregunta.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
+    out.push(Object.assign({ id: "U5-qesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
+    out.push(Object.assign({ id: "U5-qdic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 8, pide: "Escucha y escribe la pregunta.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
   });
-  out.push({ id: "U5-qemp", tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 8, grupo: "QE", items: [], pide: "Uní cada palabra con su significado.",
+  out.push({ id: "U5-qemp", tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 8, grupo: "QE", items: [], pide: "Une cada palabra con su significado.",
     pares: [["что", "qué"], ["где", "dónde"], ["когда́", "cuándo"], ["почему́", "por qué"]], explicacion: "что = qué · где = dónde · когда́ = cuándo · почему́ = por qué" });
-  out.push({ id: "U5-qemp2", tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 8, grupo: "QE2", items: [], pide: "Uní cada palabra con su significado.",
+  out.push({ id: "U5-qemp2", tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 8, grupo: "QE2", items: [], pide: "Une cada palabra con su significado.",
     pares: [["кто", "quién"], ["как", "cómo"], ["что", "qué"], ["где", "dónde"]], explicacion: "кто = quién · как = cómo · что = qué · где = dónde" });
   /* Respuestas cortas: — Ты рабо́таешь? — Да, рабо́таю. / Нет, не рабо́таю. */
   solos.concat(["чита́ть", "говори́ть", "понима́ть", "знать"]).forEach((vk, j) => {
@@ -720,7 +720,7 @@ function ejerciciosUnidad5() {
     const q = "Ты " + v.f[1] + "?", si = j % 2 === 0;   /* solo con ты: con вы, la respuesta podría ser «мы» */
     const r = (si ? "Да, " : "Нет, не ") + v.f[0] + ".";
     out.push({ id: "U5-resp-" + j, tipo: "respuesta-corta", forma: "escribir", dificultad: 2, modulo: 8, grupo: "R-" + v.id, items: ["lex:" + v.id], oir: r,
-      contexto: [{ p: "—", ru: q }], pide: (si ? "Contestá que sí" : "Contestá que no") + ", con una respuesta corta.", audio: q, audioManual: true, esperadas: [r, r.replace(/^Да, /, "Да, я ").replace(/^Нет, не /, "Нет, я не ")], idioma: "ru",
+      contexto: [{ p: "—", ru: q }], pide: (si ? "Contesta que sí" : "Contesta que no") + ", con una respuesta corta.", audio: q, audioManual: true, esperadas: [r, r.replace(/^Да, /, "Да, я ").replace(/^Нет, не /, "Нет, я не ")], idioma: "ru",
       explicacion: "— " + q + " — " + r + " La respuesta corta repite el verbo en la forma de {я}: " + u5Cambio(v, 0) + "." });
   });
 
@@ -728,21 +728,21 @@ function ejerciciosUnidad5() {
   [["Я до́ма.", "Я есть до́ма.", "Estoy en casa."], ["Она́ до́ма.", "Она́ есть до́ма.", "Ella está en casa."], ["Мы до́ма.", "Мы есть до́ма.", "Estamos en casa."], ["Он ру́сский.", "Он есть ру́сский.", "Él es ruso."]]
     .forEach(([bien, mal, es], j) => out.push({ id: "U5-cop-" + j, tipo: "copula", forma: "elegir", dificultad: 1, modulo: 9, grupo: "CO-" + j, items: [], oir: bien, pide: "«" + es + "» ¿Cuál está bien?",
       opciones: baraja([bien, mal], j), correcta: bien, explicacion: "En presente, быть no se dice: " + bien }));
-  const quiero = [["хоте́ть", "чита́ть", 0, "Quiero leer."], ["хоте́ть", "спать", 1, "Vos querés dormir."], ["хоте́ть", "гуля́ть", 4, "Queremos pasear."], ["хоте́ть", "рабо́тать", 2, "Él quiere trabajar."],
-    ["мочь", "говори́ть", 0, "Puedo hablar."], ["мочь", "чита́ть", 1, "Vos podés leer."], ["мочь", "гото́вить", 3, "Ella puede cocinar."], ["мочь", "отдыха́ть", 6, "Ellos pueden descansar."]];
+  const quiero = [["хоте́ть", "чита́ть", 0, "Quiero leer."], ["хоте́ть", "спать", 1, "Tú quieres dormir."], ["хоте́ть", "гуля́ть", 4, "Queremos pasear."], ["хоте́ть", "рабо́тать", 2, "Él quiere trabajar."],
+    ["мочь", "говори́ть", 0, "Puedo hablar."], ["мочь", "чита́ть", 1, "Tú puedes leer."], ["мочь", "гото́вить", 3, "Ella puede cocinar."], ["мочь", "отдыха́ть", 6, "Ellos pueden descansar."]];
   quiero.forEach(([vk, inf, p, es], j) => {
     const v = V(vk), w = V(inf), P = U5_PERS[p], ru = cap(P.ru) + " " + v.f[P.i] + " " + w.ac + ".";
     const base = { grupo: "QI-" + j, items: ["lex:" + v.id, "lex:" + w.id], oir: ru };
-    out.push(Object.assign({ id: "U5-inf-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push(Object.assign({ id: "U5-inf-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru].concat(p === 0 || p === 1 || p === 4 ? [cap(v.f[P.i]) + " " + w.ac + "."] : []), idioma: "ru", explicacion: u5Cambio(v, P.i) + " + infinitivo (" + w.ac + "). " + ru }, base));
-    out.push(Object.assign({ id: "U5-infd-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 9, pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
+    out.push(Object.assign({ id: "U5-infd-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 9, pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
   });
   ["хоте́ть", "есть"].forEach((vk, vj) => U5_COMBOS[vk][1].split(" ").forEach((ok, j) => {
     const f = u5Frase(vk, ok, (j * 3 + vj) % 7); if (!f) return;
     const base = { grupo: "SP-" + vk + j, items: ["lex:" + f.v.id, "lex:" + f.o.id], oir: f.ru };
-    out.push(Object.assign({ id: "U5-spesru-" + vj + "-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribí en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
+    out.push(Object.assign({ id: "U5-spesru-" + vj + "-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribe en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
       esperadas: f.esperadas, idioma: "ru", explicacion: u5Cambio(f.v, f.i) + ". " + (f.o.nom !== f.o.acc ? u5Acc(f.o) + ". " : "") + f.ru }, base));
-    out.push(Object.assign({ id: "U5-spcv-" + vj + "-" + j, tipo: "completar-verbo", forma: "escribir", dificultad: 2, modulo: 9, pide: "Completá con «" + f.v.ac + "».", grande: f.sujRu + " _____ " + f.o.acc + ".",
+    out.push(Object.assign({ id: "U5-spcv-" + vj + "-" + j, tipo: "completar-verbo", forma: "escribir", dificultad: 2, modulo: 9, pide: "Completa con «" + f.v.ac + "».", grande: f.sujRu + " _____ " + f.o.acc + ".",
       pista: f.es, audio: f.ru, audioManual: true, esperadas: [f.forma], idioma: "ru", explicacion: u5Cambio(f.v, f.i) + ". " + f.ru }, base));
   }));
 
@@ -755,15 +755,15 @@ function ejerciciosUnidad5() {
     const base = { grupo: "D-" + j, items: ["lex:" + f.v.id], oir: ru };
     const alt = [ru, cap(P.ru) + " " + adv + " " + f.forma + (f.o ? " " + f.o.acc : "") + "."];
     if (p === 0 || p === 1) alt.push(cap(adv) + " " + f.forma + (f.o ? " " + f.o.acc : "") + ".");
-    out.push(Object.assign({ id: "U5-dia-esru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: alt, idioma: "ru",
+    out.push(Object.assign({ id: "U5-dia-esru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: alt, idioma: "ru",
       explicacion: ru + " " + u5Cambio(f.v, f.i) + "." }, base));
-    out.push(Object.assign({ id: "U5-dia-dic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 10, pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
+    out.push(Object.assign({ id: "U5-dia-dic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 10, pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
   });
   Object.keys(U5_DIA).forEach((adv, j) => {
     const e = LEXICON_COMER.find(x => x.acento === adv); if (!e) return;
     out.push({ id: "U5-diasig-" + j, tipo: "significado", forma: "elegir", dificultad: 1, modulo: 10, grupo: "DS-" + j, items: ["lex:" + e.id], oir: adv, pide: "¿Qué significa?", grande: adv, audio: adv,
       opciones: baraja(Object.values(U5_DIA), j), correcta: U5_DIA[adv], explicacion: adv + " — " + U5_DIA[adv] });
-    out.push({ id: "U5-diapal-" + j, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: 10, grupo: "DP-" + j, items: ["lex:" + e.id], oir: adv, pide: "Escribí en ruso: «" + U5_DIA[adv] + "»", audio: adv, audioManual: true,
+    out.push({ id: "U5-diapal-" + j, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: 10, grupo: "DP-" + j, items: ["lex:" + e.id], oir: adv, pide: "Escribe en ruso: «" + U5_DIA[adv] + "»", audio: adv, audioManual: true,
       esperadas: [adv], idioma: "ru", explicacion: adv + " — " + U5_DIA[adv] });
   });
   /* Comprensión */
@@ -875,11 +875,11 @@ function ejerciciosUnidad5() {
     const t = TRIOS[(vi + k * 2) % 5], i = t[0], ops = uniq(t.map(x => sinAc(v.f[x])));
     if (ops.length < 3) return;
     out.push({ id: "U5-oido-" + v.id + "-" + k, tipo: "oido", forma: "elegir", dificultad: 2, modulo: Math.max(3, v.desde), regla: modelo(v) === 2 ? "u5-segunda" : "u5-primera",
-      grupo: v.id + "-" + i, items: ["lex:" + v.id], oir: v.f[i], pide: "Escuchá: ¿qué forma sonó?", audio: v.f[i], opciones: baraja(ops, vi + k), correcta: sinAc(v.f[i]),
+      grupo: v.id + "-" + i, items: ["lex:" + v.id], oir: v.f[i], pide: "Escucha: ¿qué forma sonó?", audio: v.f[i], opciones: baraja(ops, vi + k), correcta: sinAc(v.f[i]),
       explicacion: "Sonó **" + v.f[i] + "**, la forma de " + PERS_TXT[i] + ". Las otras: " + t.slice(1).map(x => v.f[x] + " (" + PERS_TXT[x] + ")").join(", ") + "." });
   }));
 
-  /* Cadena: я → ты → negala → preguntale a la profesora (вы) */
+  /* Cadena: я → ты → niégala → pregúntale a la profesora (вы) */
   const cadBase = solos.map(vk => [vk, null]).concat(frases.filter(f => !f.quien && f.o && f.o.nom === f.o.acc && !f.o.persona).map(f => [f.v.ac, f.o.ac]));
   const vistosCad = new Set();
   cadBase.forEach(([vk, ok], j) => {
@@ -888,11 +888,11 @@ function ejerciciosUnidad5() {
     const o = ok ? sust[sin(ok)] : null, obj = o ? " " + o.acc : "";
     const s0 = "Я " + v.f[0] + obj + ".", s1 = "Ты " + v.f[1] + obj + ".", s2 = "Ты не " + v.f[1] + obj + ".", s3 = "Вы не " + v.f[4] + obj + "?";
     out.push({ id: "U5-cad-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: Math.max(8, v.desde), regla: "u5-cambiar-persona", grupo: "C5-" + j, items: ["lex:" + v.id], oir: s3,
-      pide: "Cambiá la frase paso a paso.", base: s0,
+      pide: "Cambia la frase paso a paso.", base: s0,
       pasos: [
         { pide: "Ahora lo hace ты.", esperadas: [s1, cap(v.f[1]) + obj + "."] },
-        { pide: "Negala.", esperadas: [s2, "Не " + v.f[1] + obj + "."] },
-        { pide: "Ahora preguntáselo a la profesora (вы).", esperadas: [s3, "Не " + v.f[4] + obj + "?"] }],
+        { pide: "Niégala.", esperadas: [s2, "Не " + v.f[1] + obj + "."] },
+        { pide: "Ahora pregúntaselo a la profesora (вы).", esperadas: [s3, "Не " + v.f[4] + obj + "?"] }],
       explicacion: s0 + " → " + s1 + " → " + s2 + " → " + s3 + " Cambia solo el verbo; не va justo antes; con вы, " + v.f[4] + "." });
   });
 
@@ -941,7 +941,7 @@ function ejerciciosUnidad5() {
     const ty = s[1] + ", ты " + v.f[1] + "?", vy = s[1] + ", вы " + v.f[4] + "?", ok = s[2] === 1 ? ty : vy;
     const mod = Math.max(2, v.desde);
     out.push({ id: "U5-par-" + v.id + "-" + r, tipo: "par", forma: "elegir", dificultad: 2, modulo: mod, regla: "u5-ty-vy", grupo: "PV-" + v.id + "-" + r, items: ["lex:" + v.id], oir: ok,
-      pide: "Le preguntás " + s[0] + " si " + v.esF[s[3]] + ". ¿Cuál decís?", opciones: baraja([s[1] + ", ты " + v.f[1] + "?", s[1] + ", вы " + v.f[4] + "?"], j + r), correcta: ok,
+      pide: "Le preguntas " + s[0] + " si " + v.esF[s[3]] + ". ¿Cuál dices?", opciones: baraja([s[1] + ", ты " + v.f[1] + "?", s[1] + ", вы " + v.f[4] + "?"], j + r), correcta: ok,
       explicacion: ok + " " + (s[2] === 1 ? "Una amiga: ты." : s[3] === 2 ? "La profesora: вы, por respeto, con el verbo en plural." : "Dos personas: вы, aunque sean amigos.") });
   }));
 

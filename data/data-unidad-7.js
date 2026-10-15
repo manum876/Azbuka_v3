@@ -34,23 +34,23 @@ const U7_MESES = [["янва́рь", "enero"], ["февра́ль", "febrero"], 
 const U7_PARTES = [["у́тро", "mañana", "у́тром", "a la mañana"], ["день", "día, tarde", "днём", "a la tarde"], ["ве́чер", "tarde, noche", "ве́чером", "a la noche"], ["ночь", "noche", "но́чью", "de noche"]];
 const U7_FREC = { "всегда́": "siempre", "обы́чно": "normalmente", "ча́сто": "seguido", "иногда́": "a veces", "ре́дко": "pocas veces", "никогда́": "nunca" };
 
-/* Actividades del día: [verbo, complemento, español (yo, vos, él/ella, nosotros, ellos/ustedes), emoji, hora típica, утра́ / ве́чера] */
+/* Actividades del día: [verbo, complemento, español (yo, tú, él/ella, nosotros, ellos/ustedes), emoji, hora típica, утра́ / ве́чера] */
 const U7_ACT = {
-  desp: ["просыпа́ться", "", ["me despierto", "te despertás", "se despierta", "nos despertamos", "se despiertan"], "🌅", 7, "у"],
-  lev: ["встава́ть", "", ["me levanto", "te levantás", "se levanta", "nos levantamos", "se levantan"], "🛏️", 7, "у"],
-  lava: ["умыва́ться", "", ["me lavo la cara", "te lavás la cara", "se lava la cara", "nos lavamos la cara", "se lavan la cara"], "🧼", 7, "у"],
-  vest: ["одева́ться", "", ["me visto", "te vestís", "se viste", "nos vestimos", "se visten"], "👕", 8, "у"],
-  ducha: ["принима́ть", "душ", ["me ducho", "te duchás", "se ducha", "nos duchamos", "se duchan"], "🚿", 8, "у"],
-  des: ["за́втракать", "", ["desayuno", "desayunás", "desayuna", "desayunamos", "desayunan"], "☕", 8, "у"],
-  ini: ["начина́ть", "рабо́тать", ["empiezo a trabajar", "empezás a trabajar", "empieza a trabajar", "empezamos a trabajar", "empiezan a trabajar"], "💼", 9, "у"],
-  trab: ["рабо́тать", "", ["trabajo", "trabajás", "trabaja", "trabajamos", "trabajan"], "💻", 10, "у"],
-  alm: ["обе́дать", "", ["almuerzo", "almorzás", "almuerza", "almorzamos", "almuerzan"], "🍽️", 1, ""],
-  fin: ["зака́нчивать", "рабо́тать", ["termino de trabajar", "terminás de trabajar", "termina de trabajar", "terminamos de trabajar", "terminan de trabajar"], "🏁", 6, "в"],
-  volv: ["возвраща́ться", "домо́й", ["vuelvo a casa", "volvés a casa", "vuelve a casa", "volvemos a casa", "vuelven a casa"], "🏠", 7, "в"],
-  est: ["изуча́ть", "ру́сский", ["estudio ruso", "estudiás ruso", "estudia ruso", "estudiamos ruso", "estudian ruso"], "📖", 8, "в"],
-  cen: ["у́жинать", "", ["ceno", "cenás", "cena", "cenamos", "cenan"], "🍲", 8, "в"],
-  peli: ["смотре́ть", "фильм", ["miro una película", "mirás una película", "mira una película", "miramos una película", "miran una película"], "🎬", 9, "в"],
-  acost: ["ложи́ться", "спать", ["me acuesto", "te acostás", "se acuesta", "nos acostamos", "se acuestan"], "😴", 11, "в"]
+  desp: ["просыпа́ться", "", ["me despierto", "te despiertas", "se despierta", "nos despertamos", "se despiertan"], "🌅", 7, "у"],
+  lev: ["встава́ть", "", ["me levanto", "te levantas", "se levanta", "nos levantamos", "se levantan"], "🛏️", 7, "у"],
+  lava: ["умыва́ться", "", ["me lavo la cara", "te lavas la cara", "se lava la cara", "nos lavamos la cara", "se lavan la cara"], "🧼", 7, "у"],
+  vest: ["одева́ться", "", ["me visto", "te vistes", "se viste", "nos vestimos", "se visten"], "👕", 8, "у"],
+  ducha: ["принима́ть", "душ", ["me ducho", "te duchas", "se ducha", "nos duchamos", "se duchan"], "🚿", 8, "у"],
+  des: ["за́втракать", "", ["desayuno", "desayunas", "desayuna", "desayunamos", "desayunan"], "☕", 8, "у"],
+  ini: ["начина́ть", "рабо́тать", ["empiezo a trabajar", "empiezas a trabajar", "empieza a trabajar", "empezamos a trabajar", "empiezan a trabajar"], "💼", 9, "у"],
+  trab: ["рабо́тать", "", ["trabajo", "trabajas", "trabaja", "trabajamos", "trabajan"], "💻", 10, "у"],
+  alm: ["обе́дать", "", ["almuerzo", "almuerzas", "almuerza", "almorzamos", "almuerzan"], "🍽️", 1, ""],
+  fin: ["зака́нчивать", "рабо́тать", ["termino de trabajar", "terminas de trabajar", "termina de trabajar", "terminamos de trabajar", "terminan de trabajar"], "🏁", 6, "в"],
+  volv: ["возвраща́ться", "домо́й", ["vuelvo a casa", "vuelves a casa", "vuelve a casa", "volvemos a casa", "vuelven a casa"], "🏠", 7, "в"],
+  est: ["изуча́ть", "ру́сский", ["estudio ruso", "estudias ruso", "estudia ruso", "estudiamos ruso", "estudian ruso"], "📖", 8, "в"],
+  cen: ["у́жинать", "", ["ceno", "cenas", "cena", "cenamos", "cenan"], "🍲", 8, "в"],
+  peli: ["смотре́ть", "фильм", ["miro una película", "miras una película", "mira una película", "miramos una película", "miran una película"], "🎬", 9, "в"],
+  acost: ["ложи́ться", "спать", ["me acuesto", "te acuestas", "se acuesta", "nos acostamos", "se acuestan"], "😴", 11, "в"]
 };
 const U7_ORDEN_DIA = ["desp", "des", "ini", "alm", "fin", "volv", "cen", "acost"];
 /* Para la semana: qué se hace cada día (frases que el alumno ya puede decir) */
@@ -79,7 +79,7 @@ const U7_GLOSA = {
   "ка́ждый": "cada", "раз": "vez", "два́жды": "dos veces", "ежедне́вно": "a diario", "постоя́нно": "todo el tiempo", "почти́": "casi", "сно́ва": "otra vez", "обы́чный": "normal, habitual",
   "умыва́ться": "lavarse la cara", "чи́стить": "limpiar, cepillar", "бри́ться": "afeitarse", "одева́ться": "vestirse", "мыть": "lavar", "стира́ть": "lavar la ropa", "убира́ть": "ordenar, limpiar",
   "засыпа́ть": "dormirse", "устава́ть": "cansarse", "уста́лый": "cansado", "щётка": "cepillo", "расчёска": "peine", "полоте́нце": "toalla", "посте́ль": "cama", "оде́жда": "ropa",
-  "посу́да": "platos, vajilla", "ча́йник": "pava", "кру́жка": "taza, jarro", "снача́ла": "primero", "зате́м": "luego", "сра́зу": "enseguida", "бы́стро": "rápido",
+  "посу́да": "platos, vajilla", "ча́йник": "hervidor", "кру́жка": "taza, jarro", "снача́ла": "primero", "зате́м": "luego", "сра́зу": "enseguida", "бы́стро": "rápido",
   "спеши́ть": "apurarse", "торопи́ться": "apurarse, estar apurado", "опа́здывать": "llegar tarde", "успева́ть": "llegar a tiempo",
   "расписа́ние": "horario", "переры́в": "pausa", "заня́тие": "clase (de un curso)", "начина́ться": "empezar (una cosa)", "конча́ться": "terminar (una cosa)", "открыва́ться": "abrir (un negocio)",
   "рабо́чий": "de trabajo", "за́нятый": "ocupado", "свобо́дный": "libre", "приходи́ть": "llegar", "уходи́ть": "irse",
@@ -121,7 +121,7 @@ const UNIDAD_7 = {
   id: 7,
   titulo: "Tiempo, fechas y rutina diaria",
   tituloRu: "Вре́мя, дни и ме́сяцы",
-  objetivo: "Decir la hora, hablar de días, meses y momentos del día, decir con qué frecuencia hacés algo y contar tu rutina y tu semana.",
+  objetivo: "Decir la hora, hablar de días, meses y momentos del día, decir con qué frecuencia haces algo y contar tu rutina y tu semana.",
   tiempo: "3 a 4 semanas con práctica diaria (unas 35–45 horas)",
   modulos: [
     { id: "u7m1", n: 1, tipo: "leccion", nPractica: 12, titulo: "¿Qué hora es?", resumen: "Кото́рый час? — Семь часо́в.",
@@ -171,14 +171,14 @@ const UNIDAD_7 = {
               { ru: "Я гуля́ю {полчаса́}.", es: "Paseo media hora.", por: "Полчаса́ = media hora." }] },
           chequeo: [{ pide: "«Ceno a las nueve».", opciones: ["Я у́жинаю в де́вять часо́в.", "Я у́жинаю де́вять часо́в."], ok: "Я у́жинаю в де́вять часо́в.", por: "«A las…» lleva в." }] },
         { id: "u7-duracion", titulo: "Minutos y la hora con minutos",
-          texto: "Мину́та (minuto) se cuenta igual que час: три мину́ты, пять мину́т, два́дцать мину́т. Con los números del 13 al 50 también podés decir la hora con minutos, como en un reloj digital: primero la hora, después los minutos, sin «y» y sin часо́в.",
+          texto: "Мину́та (minuto) se cuenta igual que час: три мину́ты, пять мину́т, два́дцать мину́т. Con los números del 13 al 50 también puedes decir la hora con minutos, como en un reloj digital: primero la hora, después los minutos, sin «y» y sin часо́в.",
           ejemplos: [
             { ru: "Сейча́с {семь пятна́дцать}.", es: "Son las siete y quince.", por: "La hora y los minutos, uno detrás del otro." },
             { ru: "Я за́втракаю {в во́семь три́дцать}.", es: "Desayuno a las ocho y media.", por: "Con в, igual que la hora en punto." },
             { ru: "Я чита́ю {два́дцать мину́т}.", es: "Leo veinte minutos.", por: "Cuánto dura: con 20, мину́т, como часо́в." },
             { ru: "{Ро́вно} семь часо́в.", es: "Son las siete en punto.", por: "Ро́вно = justo, en punto." }],
           destacado: "три мину́ты · пять мину́т · семь пятна́дцать",
-          mas: { texto: "Мину́та cambia como час: con 3 y 4, мину́ты; de 5 en adelante, мину́т, sin terminación. Con 1 y 2, las palabras femeninas como мину́та tienen formas especiales, que llegan más adelante: por ahora, contá minutos desde 3.\nПриме́рно es «más o menos» y то́чно, «exactamente». Часы́ es el reloj: se escribe igual que el plural de час, y se entiende por la frase. Y para que suene, буди́льник (el despertador).",
+          mas: { texto: "Мину́та cambia como час: con 3 y 4, мину́ты; de 5 en adelante, мину́т, sin terminación. Con 1 y 2, las palabras femeninas como мину́та tienen formas especiales, que llegan más adelante: por ahora, cuenta minutos desde 3.\nПриме́рно es «más o menos» y то́чно, «exactamente». Часы́ es el reloj: se escribe igual que el plural de час, y se entiende por la frase. Y para que suene, буди́льник (el despertador).",
             ejemplos: [
               { ru: "{Приме́рно} семь часо́в.", es: "Son más o menos las siete.", por: "Приме́рно va delante de la hora." },
               { ru: "Сейча́с {то́чно} де́вять со́рок.", es: "Son exactamente las nueve y cuarenta.", por: "То́чно: sin margen." }] },
@@ -187,7 +187,7 @@ const UNIDAD_7 = {
             { pide: "«Son las nueve y cuarenta».", opciones: ["Сейча́с де́вять со́рок.", "Сейча́с со́рок де́вять."], ok: "Сейча́с де́вять со́рок.", por: "Primero la hora, después los minutos." }] }
       ] },
     { id: "u7m2", n: 2, tipo: "leccion", nPractica: 10, titulo: "Partes del día", resumen: "у́тро, день, ве́чер, ночь · в семь часо́в утра́.",
-      intro: "у́тром, днём, ве́чером y но́чью ya los conocés. Ahora se suman los sustantivos, cómo decir «de la mañana» con la hora y algunas palabras más del día.",
+      intro: "у́тром, днём, ве́чером y но́чью ya los conoces. Ahora se suman los sustantivos, cómo decir «de la mañana» con la hora y algunas palabras más del día.",
       secciones: [
         { id: "u7-momento-sin-prep", titulo: "A la mañana: sin preposición",
           texto: "Para decir en qué momento del día pasa algo, el ruso no usa preposición: cada momento tiene su palabra.\nу́тро (la mañana) → у́тром (a la mañana)\nдень (el día, la tarde) → днём (a la tarde, de día)\nве́чер (la tarde, la noche) → ве́чером (a la noche)\nночь (la noche) → но́чью (de noche)",
@@ -223,7 +223,7 @@ const UNIDAD_7 = {
           chequeo: [{ pide: "«al mediodía»", opciones: ["в по́лдень", "по́лдень"], ok: "в по́лдень", por: "Como una hora: в по́лдень." }] }
       ] },
     { id: "u7m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Días de la semana", resumen: "в понеде́льник, во вто́рник, в сре́ду…",
-      intro: "Los días de la semana, para decir qué día es hoy, qué hacés cada día y qué hacés todos los días.",
+      intro: "Los días de la semana, para decir qué día es hoy, qué haces cada día y qué haces todos los días.",
       secciones: [
         { titulo: "Los siete días",
           texto: "понеде́льник (lunes), вто́рник (martes), среда́ (miércoles), четве́рг (jueves), пя́тница (viernes), суббо́та (sábado), воскресе́нье (domingo). En ruso se escriben con minúscula. Cada uno tiene su género: среда́, пя́тница y суббо́та son femeninos, воскресе́нье es neutro y los otros tres, masculinos.",
@@ -248,7 +248,7 @@ const UNIDAD_7 = {
           errores: [
             { mal: "в понеде́льнике", bien: "{в понеде́льник}", por: "Los días van en acusativo: понеде́льник queda igual." },
             { mal: "в среда́", bien: "{в сре́ду}", por: "Después de в, el día cambia: **-а** → **-у**." }],
-          mas: { texto: "¿Por qué acusativo y no prepositivo, como en в Москве́? Porque acá в no dice «adentro de»: marca un punto en el tiempo, igual que en в семь часо́в. Un día se piensa como un punto en la semana.\nВо aparece cuando la palabra siguiente empieza con **в** o **ф** más otra consonante: во вто́рник. Es la misma в, con una vocal para poder pronunciarla.",
+          mas: { texto: "¿Por qué acusativo y no prepositivo, como en в Москве́? Porque aquí в no dice «adentro de»: marca un punto en el tiempo, igual que en в семь часо́в. Un día se piensa como un punto en la semana.\nВо aparece cuando la palabra siguiente empieza con **в** o **ф** más otra consonante: во вто́рник. Es la misma в, con una vocal para poder pronunciarla.",
             ejemplos: [{ ru: "{В суббо́ту} в во́семь часо́в я за́втракаю.", es: "El sábado a las ocho desayuno.", por: "Dos «cuándo» con в, los dos en acusativo." }] },
           chequeo: [{ pide: "«el sábado»", opciones: ["в суббо́ту", "в суббо́те", "в суббо́та"], ok: "в суббо́ту", por: "в + acusativo: **-а** → **-у**." }] },
         { id: "u7-cada", titulo: "Todos los días: ка́ждый",
@@ -318,7 +318,7 @@ const UNIDAD_7 = {
           chequeo: [{ pide: "«Mi cumpleaños es en julio».", opciones: ["Мой день рожде́ния в ию́ле.", "Мой день рожде́ния в ию́ль."], ok: "Мой день рожде́ния в ию́ле.", por: "El mes, en prepositivo." }] }
       ] },
     { id: "u7m5", n: 5, tipo: "leccion", nPractica: 10, titulo: "Frecuencia", resumen: "всегда́, обы́чно, ча́сто, иногда́, ре́дко, никогда́ · три ра́за в неде́лю.",
-      intro: "Palabras para decir cada cuánto hacés algo, de siempre a nunca, y cómo contar las veces.",
+      intro: "Palabras para decir cada cuánto haces algo, de siempre a nunca, y cómo contar las veces.",
       secciones: [
         { id: "u7-frec-escala", titulo: "De más a menos",
           texto: "всегда́ (siempre)\nобы́чно (normalmente)\nча́сто (seguido)\nиногда́ (a veces)\nре́дко (pocas veces)\nникогда́ (nunca)\nПочти́ («casi») suaviza las de los extremos: почти́ всегда́, почти́ никогда́.",
@@ -353,7 +353,7 @@ const UNIDAD_7 = {
           ejemplos: [
             { ru: "Я пью ко́фе {три ра́за} в день.", es: "Tomo café tres veces por día.", por: "3: ра́за." },
             { ru: "Я гуля́ю {раз в неде́лю}.", es: "Paseo una vez por semana.", por: "Para «una vez», alcanza con раз; неде́ля → неде́лю." },
-            { ru: "Я хожу́ в бассе́йн {два ра́за} в неде́лю.", es: "Voy a la pileta dos veces por semana.", por: "2: ра́за." }],
+            { ru: "Я хожу́ в бассе́йн {два ра́за} в неде́лю.", es: "Voy a la piscina dos veces por semana.", por: "2: ра́за." }],
           destacado: "раз · два ра́за · пять раз",
           errores: [{ mal: "пять ра́за", bien: "пять {раз}", por: "De 5 en adelante: раз, sin terminación." }],
           mas: { texto: "Ya son tres palabras con el mismo reparto: час, мину́та y раз. Siempre tres grupos: 1, de 2 a 4 y de 5 en adelante. Cuando aprendas una palabra nueva que se cuenta, vas a poder armar las tres formas.\nВ неде́лю y в день son el acusativo de «cuándo»: «por cada semana». Два́жды es «dos veces» en una sola palabra; suena más escrito.",
@@ -364,8 +364,8 @@ const UNIDAD_7 = {
       intro: "Los verbos de todos los días, para contar tu rutina de la mañana a la noche, en orden y con apuro.",
       secciones: [
         { titulo: "Los verbos del día",
-          texto: "умыва́ться (lavarse la cara)\nчи́стить зу́бы (lavarse los dientes)\nбри́ться (afeitarse)\nпринима́ть душ (ducharse)\nодева́ться (vestirse)\nначина́ть рабо́тать (empezar a trabajar)\nзака́нчивать рабо́тать (terminar de trabajar)\nвозвраща́ться домо́й (volver a casa)\nмыть посу́ду (lavar los platos)\nстира́ть оде́жду (lavar la ropa)\nубира́ть кварти́ру (limpiar el departamento)\nложи́ться спать (acostarse)\nзасыпа́ть (dormirse)" },
-        { id: "u7-rutina-sya", titulo: "Lo que te hacés a vos",
+          texto: "умыва́ться (lavarse la cara)\nчи́стить зу́бы (lavarse los dientes)\nбри́ться (afeitarse)\nпринима́ть душ (ducharse)\nодева́ться (vestirse)\nначина́ть рабо́тать (empezar a trabajar)\nзака́нчивать рабо́тать (terminar de trabajar)\nвозвраща́ться домо́й (volver a casa)\nмыть посу́ду (lavar los platos)\nстира́ть оде́жду (lavar la ropa)\nубира́ть кварти́ру (limpiar el apartamento)\nложи́ться спать (acostarse)\nзасыпа́ть (dormirse)" },
+        { id: "u7-rutina-sya", titulo: "Lo que te haces a ti",
           texto: "Muchos verbos de la rutina terminan en **-ся**: умыва́ться, одева́ться, бри́ться. Ese **-ся** es «me», «te», «se»: la acción vuelve a quien la hace. Se conjuga el verbo y al final va **-сь** después de vocal y **-ся** después de consonante.",
           ejemplos: [
             { ru: "Я {умыва́юсь}.", es: "Me lavo la cara.", por: "Después de vocal (**ю**): **-сь**." },
@@ -405,18 +405,18 @@ const UNIDAD_7 = {
           chequeo: [{ pide: "«Llego tarde a clase».", opciones: ["Я опа́здываю на уро́к.", "Я опа́здываю на уро́ке."], ok: "Я опа́здываю на уро́к.", por: "Adónde: на + acusativo." }] }
       ] },
     { id: "u7m7", n: 7, tipo: "leccion", nPractica: 10, titulo: "Horarios", resumen: "Во ско́лько? · Уро́к начина́ется в де́вять.",
-      intro: "Para preguntar a qué hora pasa algo, cuándo empieza y termina, y cuándo llegás o te vas.",
+      intro: "Para preguntar a qué hora pasa algo, cuándo empieza y termina, y cuándo llegas o te vas.",
       secciones: [
         { id: "u7-a-que-hora", titulo: "¿A qué hora? Во ско́лько?",
           texto: "Во ско́лько? es «¿a qué hora?». La respuesta, в + la hora: Во ско́лько ты обе́даешь? — В час.",
           ejemplos: [
-            { ru: "— {Во ско́лько} ты обе́даешь? — В час.", es: "—¿A qué hora almorzás? —A la una.", por: "Se contesta con в + la hora." },
-            { ru: "— {Во ско́лько} ты рабо́таешь? — В де́вять часо́в.", es: "—¿A qué hora trabajás? —A las nueve.", por: "La misma pregunta para cualquier acción." }],
+            { ru: "— {Во ско́лько} ты обе́даешь? — В час.", es: "—¿A qué hora almuerzas? —A la una.", por: "Se contesta con в + la hora." },
+            { ru: "— {Во ско́лько} ты рабо́таешь? — В де́вять часо́в.", es: "—¿A qué hora trabajas? —A las nueve.", por: "La misma pregunta para cualquier acción." }],
           destacado: "Во ско́лько? — В де́вять часо́в.",
           errores: [{ mal: "В ско́лько ты обе́даешь?", bien: "{Во} ско́лько ты обе́даешь?", por: "Se dice во ско́лько: con la **о**, como во вто́рник." }],
           mas: { texto: "Ско́лько es «cuánto». Во ско́лько es, literalmente, «¿en cuánto?»: en qué número del reloj. Para contestar, alcanza con la hora: В семь. La frase entera también vale: Я обе́даю в час.",
-            ejemplos: [{ ru: "— Во ско́лько ты встаёшь? — {В семь}.", es: "—¿A qué hora te levantás? —A las siete.", por: "La respuesta corta, sin часо́в, es muy común." }] },
-          chequeo: [{ pide: "«¿A qué hora cenás?»", opciones: ["Во ско́лько ты у́жинаешь?", "Ско́лько ты у́жинаешь?"], ok: "Во ско́лько ты у́жинаешь?", por: "«A qué hora»: во ско́лько." }] },
+            ejemplos: [{ ru: "— Во ско́лько ты встаёшь? — {В семь}.", es: "—¿A qué hora te levantas? —A las siete.", por: "La respuesta corta, sin часо́в, es muy común." }] },
+          chequeo: [{ pide: "«¿A qué hora cenas?»", opciones: ["Во ско́лько ты у́жинаешь?", "Ско́лько ты у́жинаешь?"], ok: "Во ско́лько ты у́жинаешь?", por: "«A qué hora»: во ско́лько." }] },
         { id: "u7-empezar", titulo: "Empezar y terminar: quién o qué",
           texto: "Начина́ть y зака́нчивать llevan a alguien que empieza algo: Я начина́ю рабо́тать в де́вять часо́в. Cuando lo que empieza es una cosa (la clase, la película, el trabajo), el verbo lleva **-ся**: Уро́к начина́ется в де́вять часо́в. Para las cosas, «terminar» es конча́ться, y «abrir», открыва́ться.",
           ejemplos: [
@@ -447,7 +447,7 @@ const UNIDAD_7 = {
           chequeo: [{ pide: "Una mujer dice: «Hoy estoy ocupada».", opciones: ["Сего́дня я занята́.", "Сего́дня я за́нят."], ok: "Сего́дня я занята́.", por: "Mujer: занята́." }] }
       ] },
     { id: "u7m8", n: 8, tipo: "leccion", nPractica: 10, titulo: "Planes y tiempo libre", resumen: "За́втра я рабо́таю · Я игра́ю в те́ннис.",
-      intro: "Para hablar de planes cercanos no hace falta el futuro: alcanza con el presente y un día, como en español («mañana trabajo»). Y lo que hacés en tu tiempo libre.",
+      intro: "Para hablar de planes cercanos no hace falta el futuro: alcanza con el presente y un día, como en español («mañana trabajo»). Y lo que haces en tu tiempo libre.",
       secciones: [
         { id: "u7-presente-planes", titulo: "Presente para planes",
           texto: "Con за́втра, ве́чером o un día de la semana, el presente ya habla de un plan cercano: За́втра я рабо́таю («mañana trabajo»).",
@@ -467,7 +467,7 @@ const UNIDAD_7 = {
           errores: [
             { mal: "Я игра́ю футбо́л.", bien: "Я игра́ю {в футбо́л}.", por: "Un deporte va con в." },
             { mal: "Я игра́ю в гита́ру.", bien: "Я игра́ю {на гита́ре}.", por: "Un instrumento va con на + prepositivo." }],
-          mas: { texto: "Una imagen para recordarlo: el juego es un espacio donde entrás (в + acusativo, adónde); el instrumento, algo sobre lo que tocás (на + prepositivo, dónde). Ша́хматы existe solo en plural, como кани́кулы.",
+          mas: { texto: "Una imagen para recordarlo: el juego es un espacio donde entras (в + acusativo, adónde); el instrumento, algo sobre lo que tocas (на + prepositivo, dónde). Ша́хматы existe solo en plural, como кани́кулы.",
             ejemplos: [{ ru: "Ле́том я игра́ю {в футбо́л}, а зимо́й {на гита́ре}.", es: "En verano juego al fútbol y en invierno toco la guitarra.", por: "Las dos construcciones en una frase." }] },
           chequeo: [{ pide: "«Toco el piano».", opciones: ["Я игра́ю на пиани́но.", "Я игра́ю в пиани́но."], ok: "Я игра́ю на пиани́но.", por: "Instrumento: на." }] },
         { titulo: "Más para el tiempo libre",
@@ -478,7 +478,7 @@ const UNIDAD_7 = {
             { ru: "Я слу́шаю {ра́дио}.", es: "Escucho la radio.", por: "ра́дио no cambia." }] }
       ] },
     { id: "u7m9", n: 9, tipo: "leccion", nPractica: 10, titulo: "Mi semana", resumen: "В понеде́льник я рабо́таю…",
-      intro: "Una semana entera, día por día. Primero mirá la agenda de Ana y después armá la tuya en el proyecto.",
+      intro: "Una semana entera, día por día. Primero mira la agenda de Ana y después arma la tuya en el proyecto.",
       secciones: [
         { id: "u7-agenda", titulo: "De la agenda a la frase",
           texto: "En una agenda alcanza con el día y una palabra. Para contarlo, el día pasa a в + acusativo y la palabra se vuelve una acción.",
@@ -486,7 +486,7 @@ const UNIDAD_7 = {
             { ru: "Понеде́льник — рабо́та → {В понеде́льник} я рабо́таю.", es: "Lunes — trabajo → El lunes trabajo.", por: "понеде́льник no cambia." },
             { ru: "Вто́рник — ру́сский → {Во вто́рник} я изуча́ю ру́сский.", es: "Martes — ruso → El martes estudio ruso.", por: "во вто́рник." },
             { ru: "Среда́ — парк → {В сре́ду} я хожу́ в парк.", es: "Miércoles — parque → El miércoles voy al parque.", por: "среда́ → сре́ду; хожу́, porque es habitual." }],
-          mas: { texto: "Para que la semana suene más tuya, sumá frecuencia y horas: Ка́ждую суббо́ту я игра́ю в те́ннис. В воскресе́нье я обы́чно до́ма. Las piezas de toda la unidad entran en la misma frase.",
+          mas: { texto: "Para que la semana suene más tuya, suma frecuencia y horas: Ка́ждую суббо́ту я игра́ю в те́ннис. В воскресе́нье я обы́чно до́ма. Las piezas de toda la unidad entran en la misma frase.",
             ejemplos: [{ ru: "{Ка́ждую суббо́ту} в де́сять часо́в я игра́ю в те́ннис.", es: "Todos los sábados a las diez juego al tenis.", por: "Cada cuánto, a qué hora y qué." }] },
           chequeo: [{ pide: "Пя́тница — кино́ →", opciones: ["В пя́тницу я иду́ в кино́.", "Пя́тница я иду́ в кино́."], ok: "В пя́тницу я иду́ в кино́.", por: "Para contarlo: в + acusativo." }] },
         { titulo: "Antes de seguir: los verbos tienen pareja",
@@ -494,9 +494,9 @@ const UNIDAD_7 = {
           destacado: "Presente: una sola forma. Pasado y futuro: un verbo y su pareja." }
       ] },
     { id: "u7m10", n: 10, tipo: "lectura", titulo: "Un día completo", resumen: "De la mañana a la noche.",
-      intro: "Dos textos con todo lo de la unidad: un día y una semana. Leelos, escuchalos y contestá." },
+      intro: "Dos textos con todo lo de la unidad: un día y una semana. Léelos, escúchalos y contesta." },
     { id: "u7m11", n: 11, tipo: "proyecto", titulo: "Proyecto: Моя неде́ля", resumen: "Tu semana: agenda y texto.",
-      intro: "Primero completá tu agenda: qué hacés cada día. Después escribí un texto sobre tu semana, con días, horarios y cada cuánto hacés las cosas. Por ejemplo: В понеде́льник я рабо́таю. Я начина́ю рабо́тать в де́вять часо́в. Во вто́рник я изуча́ю ру́сский. В суббо́ту я обы́чно отдыха́ю. Я никогда́ не рабо́таю в воскресе́нье.",
+      intro: "Primero completa tu agenda: qué haces cada día. Después escribe un texto sobre tu semana, con días, horarios y cada cuánto haces las cosas. Por ejemplo: В понеде́льник я рабо́таю. Я начина́ю рабо́тать в де́вять часо́в. Во вто́рник я изуча́ю ру́сский. В суббо́ту я обы́чно отдыха́ю. Я никогда́ не рабо́таю в воскресе́нье.",
       requisitos: [], consejos: [] },
     { id: "u7m12", n: 12, tipo: "examen", titulo: "Evaluación", resumen: "Hora, calendario, frecuencia, rutina, traducción y audio.",
       intro: "Treinta y cinco ejercicios en siete partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
@@ -569,7 +569,7 @@ function ejerciciosUnidad7() {
   const baraja = (arr, semilla) => { const a = arr.slice(); let s = semilla; for (let i = a.length - 1; i > 0; i--) { s = (s * 9301 + 49297) % 233280; const j = Math.floor(s / 233280 * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
   const sinP = t => t.replace(/[.,!?]/g, "");
-  const SUJ = [["Я", "", 0], ["Ты", "Vos", 1], ["Он", "Él", 2], ["Она́", "Ella", 2], ["Мы", "", 3], ["Они́", "Ellos", 5]];
+  const SUJ = [["Я", "", 0], ["Ты", "Tú", 1], ["Он", "Él", 2], ["Она́", "Ella", 2], ["Мы", "", 3], ["Они́", "Ellos", 5]];
   const esP = i => [0, 1, 2, 3, 4, 4][i];
   const actRu = (k, i) => { const a = U7_ACT[k], v = verb[sin(a[0])]; return v.f[i] + (a[1] ? " " + a[1] : ""); };
 
@@ -577,37 +577,37 @@ function ejerciciosUnidad7() {
   for (let n = 1; n <= 12; n++) {
     const ru = cap(hora(n)) + ".", dig = (n < 10 ? "0" : "") + n + ":00", es = n === 1 ? "Es la una." : "Son las " + U7_NUM_ES[n] + ".";
     const base = { grupo: "H-" + n, items: [], oir: ru };
-    out.push(Object.assign({ id: "U7-hw-" + n, tipo: "hora-escribir", forma: "escribir", dificultad: 2, modulo: 1, pide: "Кото́рый час? Escribí la hora en ruso.", grande: u7Reloj(n) + "  " + dig,
+    out.push(Object.assign({ id: "U7-hw-" + n, tipo: "hora-escribir", forma: "escribir", dificultad: 2, modulo: 1, pide: "Кото́рый час? Escribe la hora en ruso.", grande: u7Reloj(n) + "  " + dig,
       audio: ru, audioManual: true, esperadas: [ru, "Сейча́с " + hora(n) + "."].concat(n === 1 ? ["Оди́н час.", "Сейча́с оди́н час."] : []), idioma: "ru", explicacion: u7ReglaHora(n) + " " + es }, base));
-    out.push(Object.assign({ id: "U7-ha-" + n, tipo: "hora-elegir", forma: "elegir", dificultad: 1, modulo: 1, pide: "Escuchá: ¿qué hora es?", audio: ru,
+    out.push(Object.assign({ id: "U7-ha-" + n, tipo: "hora-elegir", forma: "elegir", dificultad: 1, modulo: 1, pide: "Escucha: ¿qué hora es?", audio: ru,
       opciones: baraja([dig].concat(baraja([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].filter(x => x !== n), n).slice(0, 3).map(x => (x < 10 ? "0" : "") + x + ":00")), n), correcta: dig, explicacion: ru + " = " + dig }, base));
-    if (n !== 1 && n !== 3) out.push(Object.assign({ id: "U7-hf-" + n, tipo: "hora-forma", forma: "elegir", dificultad: 2, modulo: 1, pide: "Completá la hora.", grande: U7_NUM[n] + " _____",
+    if (n !== 1 && n !== 3) out.push(Object.assign({ id: "U7-hf-" + n, tipo: "hora-forma", forma: "elegir", dificultad: 2, modulo: 1, pide: "Completa la hora.", grande: U7_NUM[n] + " _____",
       opciones: ["час", "часа́", "часо́в"], correcta: n <= 4 ? "часа́" : "часо́в", explicacion: u7ReglaHora(n) }, base));
-    out.push(Object.assign({ id: "U7-hesru-" + n, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 1, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push(Object.assign({ id: "U7-hesru-" + n, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 1, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru, "Сейча́с " + hora(n) + "."], idioma: "ru", explicacion: u7ReglaHora(n) }, base));
     if (n !== 3) {
       const e = lex(U7_NUM[n]);
-      out.push({ id: "U7-num-" + n, tipo: "numero", forma: "escribir", dificultad: 2, modulo: 1, grupo: "N-" + n, items: e ? ["lex:" + e.id] : [], pide: "Escribí el número en ruso: " + n, audio: U7_NUM[n], audioManual: true,
+      out.push({ id: "U7-num-" + n, tipo: "numero", forma: "escribir", dificultad: 2, modulo: 1, grupo: "N-" + n, items: e ? ["lex:" + e.id] : [], pide: "Escribe el número en ruso: " + n, audio: U7_NUM[n], audioManual: true,
         esperadas: [U7_NUM[n]], idioma: "ru", explicacion: n + " = " + U7_NUM[n] });
     }
   }
   [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]].forEach((g, j) => out.push({ id: "U7-numemp-" + j, tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 1, grupo: "NE-" + j, items: [],
-    audioIzq: true, pista: "Tocá ▶ para escuchar y después el número.", pide: "Escuchá cada número y uní con su cifra.", pares: g.map(n => [U7_NUM[n], String(n)]), explicacion: g.map(n => n + " = " + U7_NUM[n]).join(" · ") }));
+    audioIzq: true, pista: "Toca ▶ para escuchar y después el número.", pide: "Escucha cada número y une con su cifra.", pares: g.map(n => [U7_NUM[n], String(n)]), explicacion: g.map(n => n + " = " + U7_NUM[n]).join(" · ") }));
 
   /* ── Módulo 2: partes del día, утра́ / ве́чера ── */
   U7_PARTES.forEach(([nom, es, adv, esAdv], j) => {
     const e = lex(nom, "sustantivo"), base = { grupo: "P-" + j, items: e ? ["lex:" + e.id] : [], oir: adv };
     out.push(Object.assign({ id: "U7-pmo-" + j, tipo: "momento", forma: "elegir", dificultad: 1, modulo: 2, pide: "¿Cómo se dice «" + esAdv + "»?", opciones: baraja(U7_PARTES.map(x => x[2]), j), correcta: adv,
       explicacion: nom + " (" + es + ") → **" + adv + "** (" + esAdv + ")" }, base));
-    out.push(Object.assign({ id: "U7-pmw-" + j, tipo: "momento", forma: "escribir", dificultad: 2, modulo: 2, pide: "Escribí en ruso: «" + esAdv + "»", audio: adv, audioManual: true, esperadas: [adv], idioma: "ru",
+    out.push(Object.assign({ id: "U7-pmw-" + j, tipo: "momento", forma: "escribir", dificultad: 2, modulo: 2, pide: "Escribe en ruso: «" + esAdv + "»", audio: adv, audioManual: true, esperadas: [adv], idioma: "ru",
       explicacion: nom + " → " + adv }, base));
   });
   [[7, "у"], [8, "у"], [9, "у"], [11, "у"], [6, "в"], [7, "в"], [8, "в"], [10, "в"]].forEach(([n, p], j) => {
     const ru = cap(u7Ru(n, p)) + ".", es = cap(u7Es(n, p)) + ".";
     const base = { grupo: "UV-" + j, items: [], oir: ru };
-    out.push(Object.assign({ id: "U7-uv-" + j, tipo: "hora-escribir", forma: "escribir", dificultad: 3, modulo: 2, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
+    out.push(Object.assign({ id: "U7-uv-" + j, tipo: "hora-escribir", forma: "escribir", dificultad: 3, modulo: 2, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
       explicacion: "**" + (p === "у" ? "утра́" : "ве́чера") + "** va así, como fórmula: " + ru }, base));
-    out.push(Object.assign({ id: "U7-uve-" + j, tipo: "momento", forma: "elegir", dificultad: 2, modulo: 2, pide: "Completá: «" + es + "»", grande: "в " + hora(n) + " _____",
+    out.push(Object.assign({ id: "U7-uve-" + j, tipo: "momento", forma: "elegir", dificultad: 2, modulo: 2, pide: "Completa: «" + es + "»", grande: "в " + hora(n) + " _____",
       opciones: p === "у" ? ["утра́", "у́тром"] : ["ве́чера", "ве́чером"], correcta: p === "у" ? "утра́" : "ве́чера",
       explicacion: "Con la hora va **" + (p === "у" ? "утра́" : "ве́чера") + "**; " + (p === "у" ? "у́тром" : "ве́чером") + " es «" + (p === "у" ? "a la mañana" : "a la noche") + "», sin hora." }, base));
   });
@@ -615,7 +615,7 @@ function ejerciciosUnidad7() {
   ["trab", "des", "est", "cen", "peli"].filter(k => U7_ACT[k] && verb[sin(U7_ACT[k][0])]).forEach((k, j) => {
     const [a, b] = j % 2 ? ["у́тром", "ве́чером"] : ["ве́чером", "днём"];
     const ru1 = "Я " + actRu(k, 0) + " " + a + ".", ru2 = "Я " + actRu(k, 0) + " " + b + ".";
-    out.push({ id: "U7-mom-" + j, tipo: "momento", forma: "escribir", dificultad: 2, modulo: 6, grupo: "MO-" + j, items: [], oir: ru2, pide: "Cambiá el momento: " + b + ".", grande: ru1, audio: ru2, audioManual: true,
+    out.push({ id: "U7-mom-" + j, tipo: "momento", forma: "escribir", dificultad: 2, modulo: 6, grupo: "MO-" + j, items: [], oir: ru2, pide: "Cambia el momento: " + b + ".", grande: ru1, audio: ru2, audioManual: true,
       esperadas: [ru2, "Я " + b + " " + actRu(k, 0) + ".", cap(b) + " я " + actRu(k, 0) + "."], idioma: "ru", explicacion: "Cambia solo la palabra del momento: " + ru2 });
   });
 
@@ -625,13 +625,13 @@ function ejerciciosUnidad7() {
     const sig = dias[(j + 1) % 7];
     out.push(Object.assign({ id: "U7-dsig-" + d.id, tipo: "dia", forma: "elegir", dificultad: 1, modulo: 3, pide: "¿Qué día es?", grande: d.nom, audio: d.nom,
       opciones: baraja([d.es].concat(baraja(dias.filter(x => x !== d).map(x => x.es), j).slice(0, 3)), j), correcta: d.es, explicacion: d.nom + " — " + d.es }, base));
-    out.push(Object.assign({ id: "U7-dw-" + d.id, tipo: "dia-escribir", forma: "escribir", dificultad: 2, modulo: 3, pide: "Escribí en ruso: «el " + d.es + "» (cuándo).", audio: d.pr + " " + d.acc, audioManual: true,
+    out.push(Object.assign({ id: "U7-dw-" + d.id, tipo: "dia-escribir", forma: "escribir", dificultad: 2, modulo: 3, pide: "Escribe en ruso: «el " + d.es + "» (cuándo).", audio: d.pr + " " + d.acc, audioManual: true,
       esperadas: [d.pr + " " + d.acc], idioma: "ru", explicacion: "**" + d.nom + " → " + d.pr + " " + d.acc + "**: " + (d.nom === d.acc ? "en acusativo queda igual." : "en acusativo -а → -у.") + (d.pr === "во" ? " Con вто́рник va во." : "") }, base));
     out.push(Object.assign({ id: "U7-dsg-" + d.id, tipo: "dia", forma: "elegir", dificultad: 2, modulo: 3, pide: "Сего́дня " + d.nom + ". ¿Qué día es mañana?", audio: "Сего́дня " + d.nom + ".",
       opciones: baraja([sig.nom].concat(baraja(dias.filter(x => x !== sig && x !== d).map(x => x.nom), j + 1).slice(0, 2)), j + 2), correcta: sig.nom, explicacion: "Сего́дня " + d.nom + ", за́втра " + sig.nom + "." }, base));
-    out.push(Object.assign({ id: "U7-dpr-" + d.id, tipo: "dia", forma: "elegir", dificultad: 2, modulo: 3, pide: "Completá: «el " + d.es + "»", grande: "_____ " + d.acc,
+    out.push(Object.assign({ id: "U7-dpr-" + d.id, tipo: "dia", forma: "elegir", dificultad: 2, modulo: 3, pide: "Completa: «el " + d.es + "»", grande: "_____ " + d.acc,
       opciones: ["в", "во"], correcta: d.pr, explicacion: d.pr === "во" ? "**во** вто́рник: «в **вт**» es difícil de decir." : "**в** " + d.acc + "." }, base));
-    out.push(Object.assign({ id: "U7-ddic-" + d.id, tipo: "dictado", forma: "escribir", dificultad: 1, modulo: 3, pide: "Escuchá y escribí.", audio: "Сего́дня " + d.nom + ".", esperadas: ["Сего́дня " + d.nom + "."], idioma: "ru",
+    out.push(Object.assign({ id: "U7-ddic-" + d.id, tipo: "dictado", forma: "escribir", dificultad: 1, modulo: 3, pide: "Escucha y escribe.", audio: "Сего́дня " + d.nom + ".", esperadas: ["Сего́дня " + d.nom + "."], idioma: "ru",
       explicacion: "Сего́дня " + d.nom + ". — Hoy es " + d.es + "." }, base));
   });
 
@@ -640,21 +640,21 @@ function ejerciciosUnidad7() {
     const base = { grupo: "M-" + m.id, items: ["lex:" + m.id], oir: "в " + m.prep };
     out.push(Object.assign({ id: "U7-msig-" + m.id, tipo: "dia", forma: "elegir", dificultad: 1, modulo: 4, pide: "¿Qué mes es?", grande: m.nom, audio: m.nom,
       opciones: baraja([m.es].concat(baraja(meses.filter(x => x !== m).map(x => x.es), j).slice(0, 3)), j), correcta: m.es, explicacion: m.nom + " — " + m.es }, base));
-    out.push(Object.assign({ id: "U7-mw-" + m.id, tipo: "mes-escribir", forma: "escribir", dificultad: 2, modulo: 4, pide: "Escribí en ruso: «en " + m.es + "».", audio: "в " + m.prep, audioManual: true,
+    out.push(Object.assign({ id: "U7-mw-" + m.id, tipo: "mes-escribir", forma: "escribir", dificultad: 2, modulo: 4, pide: "Escribe en ruso: «en " + m.es + "».", audio: "в " + m.prep, audioManual: true,
       esperadas: ["в " + m.prep], idioma: "ru", explicacion: "**" + m.nom + " → в " + m.prep + "**: los meses van en prepositivo." }, base));
   });
   [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11]].forEach((g, j) => out.push({ id: "U7-memp-" + j, tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 4, grupo: "ME-" + j, items: g.map(k => "lex:" + meses[k].id),
-    pide: "Uní cada mes con su nombre en español.", pares: g.map(k => [meses[k].nom, meses[k].es]), explicacion: g.map(k => meses[k].nom + " = " + meses[k].es).join(" · ") }));
+    pide: "Une cada mes con su nombre en español.", pares: g.map(k => [meses[k].nom, meses[k].es]), explicacion: g.map(k => meses[k].nom + " = " + meses[k].es).join(" · ") }));
   [[7, "Мой о́тпуск в а́вгусте.", "Mis vacaciones son en agosto."], [0, "Мой о́тпуск в январе́.", "Mis vacaciones son en enero."], [4, "Мой пра́здник в ма́е.", null]].forEach(([k, ru, es], j) => {
     if (!es) return;
-    out.push({ id: "U7-otp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 4, grupo: "OT-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U7-otp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 4, grupo: "OT-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: ru + " **" + meses[k].nom + " → в " + meses[k].prep + "**." });
   });
 
   /* ── Módulo 5: frecuencia ── */
-  const habitos = [["пить", "ко́фе", ["tomo café", "tomás café", "toma café", "tomamos café", "toman café"]], ["гото́вить", "", ["cocino", "cocinás", "cocina", "cocinamos", "cocinan"]],
-    ["гуля́ть", "", ["paseo", "paseás", "pasea", "paseamos", "pasean"]], ["чита́ть", "", ["leo", "leés", "lee", "leemos", "leen"]], ["за́втракать", "", ["desayuno", "desayunás", "desayuna", "desayunamos", "desayunan"]],
-    ["рабо́тать", "у́тром", ["trabajo a la mañana", "trabajás a la mañana", "trabaja a la mañana", "trabajamos a la mañana", "trabajan a la mañana"]]];
+  const habitos = [["пить", "ко́фе", ["tomo café", "tomas café", "toma café", "tomamos café", "toman café"]], ["гото́вить", "", ["cocino", "cocinas", "cocina", "cocinamos", "cocinan"]],
+    ["гуля́ть", "", ["paseo", "paseas", "pasea", "paseamos", "pasean"]], ["чита́ть", "", ["leo", "lees", "lee", "leemos", "leen"]], ["за́втракать", "", ["desayuno", "desayunas", "desayuna", "desayunamos", "desayunan"]],
+    ["рабо́тать", "у́тром", ["trabajo a la mañana", "trabajas a la mañana", "trabaja a la mañana", "trabajamos a la mañana", "trabajan a la mañana"]]];
   Object.keys(U7_FREC).forEach((adv, a) => habitos.forEach(([vk, extra, es], j) => {
     if ((a + j) % 2) return;
     const v = verb[sin(vk)]; if (!v) return;
@@ -662,10 +662,10 @@ function ejerciciosUnidad7() {
     const ru = s[0] + " " + adv + " " + neg + v.f[i] + (extra ? " " + extra : "") + ".";
     const esF = cap(((s[1] ? s[1] + " " : "") + U7_FREC[adv] + " " + es[esP(i)]).trim()) + ".";
     const base = { grupo: "F-" + a + "-" + j, items: ["lex:" + v.id], oir: ru };
-    out.push(Object.assign({ id: "U7-fesru-" + a + "-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, pide: "Escribí en ruso: «" + esF + "»", audio: ru, audioManual: true,
+    out.push(Object.assign({ id: "U7-fesru-" + a + "-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, pide: "Escribe en ruso: «" + esF + "»", audio: ru, audioManual: true,
       esperadas: [ru].concat(i === 0 || i === 1 ? [cap(adv) + " " + neg + v.f[i] + (extra ? " " + extra : "") + "."] : []), idioma: "ru",
       explicacion: "**" + adv + "** = " + U7_FREC[adv] + ", antes del verbo" + (neg ? ", y con никогда́ va не" : "") + ". " + ru }, base));
-    out.push(Object.assign({ id: "U7-fel-" + a + "-" + j, tipo: "frec", forma: "elegir", dificultad: 1, modulo: 5, pide: "Completá: «" + esF + "»", grande: s[0] + " _____ " + neg + v.f[i] + (extra ? " " + extra : "") + ".",
+    out.push(Object.assign({ id: "U7-fel-" + a + "-" + j, tipo: "frec", forma: "elegir", dificultad: 1, modulo: 5, pide: "Completa: «" + esF + "»", grande: s[0] + " _____ " + neg + v.f[i] + (extra ? " " + extra : "") + ".",
       opciones: baraja([adv].concat(baraja(Object.keys(U7_FREC).filter(x => x !== adv && x !== "никогда́"), a + j).slice(0, 2)), a + j), correcta: adv, explicacion: "**" + adv + "** = " + U7_FREC[adv] + ". " + ru }, base));
   }));
   habitos.slice(0, 5).forEach(([vk, extra, es], j) => {
@@ -680,18 +680,18 @@ function ejerciciosUnidad7() {
     const a = U7_ACT[k], v = verb[sin(a[0])]; if (!v) return;
     const PL = ["я", "ты", "он / она́", "мы", "вы", "они́"], pR = ["Я", "Ты", "Он", "Мы", "Вы", "Они́"];
     v.f.forEach((f, i) => out.push({ id: "U7-conjw-" + v.id + "-" + i, tipo: "conjugar-escribir", forma: "escribir", dificultad: 2, modulo: 6, grupo: v.id + "-" + i, items: ["lex:" + v.id],
-      pide: "Escribí la forma del verbo.", grande: PL[i] + " + " + v.ac, audio: pR[i] + " " + f, audioManual: true, esperadas: [f, pR[i] + " " + f], idioma: "ru", explicacion: "**" + v.ac + " → " + PL[i] + " " + f + "**" }));
+      pide: "Escribe la forma del verbo.", grande: PL[i] + " + " + v.ac, audio: pR[i] + " " + f, audioManual: true, esperadas: [f, pR[i] + " " + f], idioma: "ru", explicacion: "**" + v.ac + " → " + PL[i] + " " + f + "**" }));
   });
   Object.keys(U7_ACT).forEach((k, j) => {
     const a = U7_ACT[k], v = verb[sin(a[0])]; if (!v) return;
     const s = SUJ[j % SUJ.length], i = s[2];
     const ru = s[0] + " " + actRu(k, i) + " " + u7Ru(a[4], a[5]) + ".", es = cap(((s[1] ? s[1] + " " : "") + a[2][esP(i)] + " " + u7Es(a[4], a[5])).trim()) + ".";
     const base = { grupo: "R-" + k, items: ["lex:" + v.id], oir: ru };
-    out.push(Object.assign({ id: "U7-resru-" + k, tipo: "rutina", forma: "escribir", dificultad: 3, modulo: 6, pide: a[3] + " Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push(Object.assign({ id: "U7-resru-" + k, tipo: "rutina", forma: "escribir", dificultad: 3, modulo: 6, pide: a[3] + " Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru, s[0] + " " + actRu(k, i) + " " + u7Ru(a[4], "") + "."].concat(i <= 1 ? [cap(actRu(k, i)) + " " + u7Ru(a[4], a[5]) + "."] : []), idioma: "ru", explicacion: ru + " " + u7ReglaHora(a[4]) }, base));
-    out.push(Object.assign({ id: "U7-rcomp-" + k, tipo: "rutina", forma: "escribir", dificultad: 2, modulo: 6, pide: "Completá con «" + v.ac + "».", grande: s[0] + " _____" + (a[1] ? " " + a[1] : "") + " " + u7Ru(a[4], a[5]) + ".",
+    out.push(Object.assign({ id: "U7-rcomp-" + k, tipo: "rutina", forma: "escribir", dificultad: 2, modulo: 6, pide: "Completa con «" + v.ac + "».", grande: s[0] + " _____" + (a[1] ? " " + a[1] : "") + " " + u7Ru(a[4], a[5]) + ".",
       pista: es, audio: ru, audioManual: true, esperadas: [v.f[i]], idioma: "ru", explicacion: "**" + v.ac + " → " + ["я", "ты", "он / она́", "мы", "вы", "они́"][i] + " " + v.f[i] + "**. " + ru }, base));
-    out.push(Object.assign({ id: "U7-rdic-" + k, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 6, pide: "Escuchá y escribí la frase.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
+    out.push(Object.assign({ id: "U7-rdic-" + k, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 6, pide: "Escucha y escribe la frase.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
   });
   /* Construcción progresiva */
   [["desp", ["Я просыпа́юсь.", "Я просыпа́юсь в семь часо́в.", "Я обы́чно просыпа́юсь в семь часо́в.", "Я обы́чно просыпа́юсь в семь часо́в и за́втракаю до́ма."]],
@@ -702,7 +702,7 @@ function ejerciciosUnidad7() {
       const tok = s => sinP(s).split(" "), antes = tok(pasos[p - 1]);
       const nuevo = tok(pasos[p]).filter(w => antes.indexOf(w) < 0).join(" ");
       out.push({ id: "U7-prog-" + j + "-" + p, tipo: "progresiva", forma: "escribir", dificultad: 2 + (p > 2 ? 1 : 0), modulo: 6, grupo: "PG-" + j + "-" + p, items: [], oir: pasos[p],
-        pide: "Agregá «" + nuevo.replace(/\.$/, "") + "» a la frase.", grande: pasos[p - 1], audio: pasos[p], audioManual: true, esperadas: [pasos[p]], idioma: "ru",
+        pide: "Agrega «" + nuevo.replace(/\.$/, "") + "» a la frase.", grande: pasos[p - 1], audio: pasos[p], audioManual: true, esperadas: [pasos[p]], idioma: "ru",
         explicacion: "La frase crece sin cambiar lo demás: " + pasos[p] });
     }
   });
@@ -710,12 +710,12 @@ function ejerciciosUnidad7() {
   [U7_ORDEN_DIA.slice(0, 5), U7_ORDEN_DIA.slice(3)].forEach((ks, j) => {
     const fichas = ks.map(k => actRu(k, 0));
     let fi = baraja(fichas, j + 9); if (fi.join(" · ") === fichas.join(" · ")) fi = fi.slice(1).concat(fi[0]);
-    out.push({ id: "U7-linea-" + j, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 6, grupo: "LI-" + j, items: [], pide: "Ordená tu día, de la mañana a la noche.", fichas: fi, sep: " · ",
+    out.push({ id: "U7-linea-" + j, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 6, grupo: "LI-" + j, items: [], pide: "Ordena tu día, de la mañana a la noche.", fichas: fi, sep: " · ",
       esperada: fichas.join(" · "), audio: fichas.join(", "), explicacion: ks.map(k => U7_ACT[k][3] + " " + actRu(k, 0)).join(" → ") });
   });
   /* Ampliación: ра́но y по́здно */
   [["Я встаю́ ра́но.", "Me levanto temprano."], ["Я ложу́сь спать по́здно.", "Me acuesto tarde."], ["Он рабо́тает по́здно.", "Él trabaja hasta tarde."], ["Мы за́втракаем ра́но.", "Desayunamos temprano."]].forEach(([ru, es], j) =>
-    out.push({ id: "U7-amp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 6, grupo: "AM-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U7-amp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 6, grupo: "AM-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: ru + " — ра́но = temprano · по́здно = tarde" }));
 
   /* ── Módulo 7: horarios ── */
@@ -723,9 +723,9 @@ function ejerciciosUnidad7() {
     const a = U7_ACT[k], v = verb[sin(a[0])]; if (!v) return;
     const q = "Во ско́лько ты " + actRu(k, 1) + "?", r = cap(u7Ru(a[4], "")) + ".";
     const base = { grupo: "HO-" + k, items: ["lex:" + v.id], oir: r };
-    out.push(Object.assign({ id: "U7-hor-" + k, tipo: "horario", forma: "escribir", dificultad: 2, modulo: 7, contexto: [{ p: "—", ru: q }], pide: a[3] + " " + u7Reloj(a[4]) + " Contestá con la hora.", audio: q, audioManual: true,
+    out.push(Object.assign({ id: "U7-hor-" + k, tipo: "horario", forma: "escribir", dificultad: 2, modulo: 7, contexto: [{ p: "—", ru: q }], pide: a[3] + " " + u7Reloj(a[4]) + " Contesta con la hora.", audio: q, audioManual: true,
       esperadas: [r, "Я " + actRu(k, 0) + " " + u7Ru(a[4], "") + ".", cap(u7Ru(a[4], a[5])) + "."], idioma: "ru", explicacion: "— " + q + " — " + r + " " + u7ReglaHora(a[4]) }, base));
-    out.push(Object.assign({ id: "U7-horq-" + k, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 7, pide: "Escribí en ruso: «¿A qué hora " + a[2][1] + "?»", audio: q, audioManual: true, esperadas: [q], idioma: "ru",
+    out.push(Object.assign({ id: "U7-horq-" + k, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 7, pide: "Escribe en ruso: «¿A qué hora " + a[2][1] + "?»", audio: q, audioManual: true, esperadas: [q], idioma: "ru",
       explicacion: q + " Во ско́лько = ¿a qué hora?" }, base));
     const ru3 = "Он " + actRu(k, 2) + " " + u7Ru(a[4], a[5]) + ".";
     out.push(Object.assign({ id: "U7-hort-" + k, tipo: "hora-elegir", forma: "elegir", dificultad: 2, modulo: 7, contexto: [{ p: "", ru: ru3 }], pide: "¿A qué hora?", audio: ru3,
@@ -739,8 +739,8 @@ function ejerciciosUnidad7() {
    ["Како́й у тебя́ план?", null]].forEach(([ru, es], j) => {
     if (!es) return;
     const base = { grupo: "PL-" + j, items: [], oir: ru };
-    out.push(Object.assign({ id: "U7-plesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }, base));
-    out.push(Object.assign({ id: "U7-pldic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 8, pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
+    out.push(Object.assign({ id: "U7-plesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }, base));
+    out.push(Object.assign({ id: "U7-pldic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 8, pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }, base));
   });
 
   /* ── Módulo 9: mi semana (la agenda de Ana) ── */
@@ -751,9 +751,9 @@ function ejerciciosUnidad7() {
   const textoAg = agenda.map(x => x.d.nom.charAt(0).toUpperCase() + x.d.nom.slice(1) + " — " + x.act);
   agenda.forEach((x, j) => {
     const base = { grupo: "AG-" + j, items: ["lex:" + x.d.id, "lex:" + x.vid], oir: x.ru3 };
-    out.push(Object.assign({ id: "U7-ag-" + j, tipo: "agenda", forma: "elegir", dificultad: 2, modulo: 9, texto: textoAg, pide: "Mirá la agenda de Ana. ¿Qué hace el " + x.d.es + "?",
+    out.push(Object.assign({ id: "U7-ag-" + j, tipo: "agenda", forma: "elegir", dificultad: 2, modulo: 9, texto: textoAg, pide: "Mira la agenda de Ana. ¿Qué hace el " + x.d.es + "?",
       opciones: baraja([x.act].concat(baraja(agenda.filter(y => y.act !== x.act).map(y => y.act), j).slice(0, 2)), j), correcta: x.act, explicacion: x.ru3 }, base));
-    out.push(Object.assign({ id: "U7-agw-" + j, grupo: "AGW-" + j, tipo: "agenda", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribí la frase completa, en primera persona.", grande: x.d.nom + " — " + x.es,
+    out.push(Object.assign({ id: "U7-agw-" + j, grupo: "AGW-" + j, tipo: "agenda", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribe la frase completa, en primera persona.", grande: x.d.nom + " — " + x.es,
       audio: x.ru1, audioManual: true, esperadas: [x.ru1, cap(x.d.pr) + " " + x.d.acc + " " + x.ru1.split(" я ")[1]], idioma: "ru", explicacion: "**" + x.d.nom + " → " + x.d.pr + " " + x.d.acc + "**. " + x.ru1 }, base, { grupo: "AGW-" + j }));
   });
 
@@ -768,7 +768,7 @@ function ejerciciosUnidad7() {
   });
   [["Я рабо́таю у́тром.", "Trabajo a la mañana."], ["Я рабо́таю в де́вять часо́в.", "Trabajo a las nueve."], ["Я рабо́таю в о́фисе в де́вять часо́в.", "Trabajo en la oficina a las nueve."],
    ["Я обы́чно рабо́таю в о́фисе у́тром.", "Normalmente trabajo en la oficina a la mañana."]].forEach(([ru, es], j) =>
-    out.push({ id: "U7-niv-" + j, tipo: "dictado", forma: "escribir", dificultad: j < 2 ? 1 : j < 3 ? 2 : 3, modulo: 10, grupo: "NV-" + j, items: [], oir: ru, pide: "Escuchá y escribí (nivel " + (j + 1) + ").",
+    out.push({ id: "U7-niv-" + j, tipo: "dictado", forma: "escribir", dificultad: j < 2 ? 1 : j < 3 ? 2 : 3, modulo: 10, grupo: "NV-" + j, items: [], oir: ru, pide: "Escucha y escribe (nivel " + (j + 1) + ").",
       audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }));
 
   /* ── Vocabulario de las palabras nuevas (salvo números, días y meses, que tienen sus ejercicios) ── */
@@ -786,7 +786,7 @@ function ejerciciosUnidad7() {
     const base = { grupo: e.id, items: ["lex:" + e.id], oir: e.ru, ampliacion: amp || undefined };
     if (dis.length >= 2) out.push(Object.assign({ id: "U7-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Qué significa?", grande: e.acento, audio: e.ru,
       opciones: baraja([es].concat(dis), i), correcta: es, explicacion: e.acento + " — " + es }, base));
-    out.push(Object.assign({ id: "U7-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
+    out.push(Object.assign({ id: "U7-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribe en ruso: «" + es + "»", audio: e.ru, audioManual: true,
       pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.length + " letras.", esperadas: [e.acento], idioma: "ru", explicacion: e.acento + " — " + es }, base));
   });
 
@@ -815,7 +815,7 @@ function ejerciciosUnidad7() {
     push({ id: "U7-nat-eto-" + n, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 1, regla: "u7-hora-pregunta", grupo: "HE-" + n, items: [], oir: cap(hora(n)) + ".",
       pide: "— Кото́рый час? ¿Cuál suena natural?", opciones: baraja([cap(hora(n)) + ".", "Э́то " + hora(n) + "."], n + 3), correcta: cap(hora(n)) + ".", explicacion: cap(hora(n)) + ". Para la hora no va э́то." });
     push({ id: "U7-oido-v-" + n, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 1, regla: "u7-hora-a-las", grupo: "HV-" + n, items: [], oir: (n % 2 ? "в " : "") + hora(n),
-      pide: "Escuchá: ¿qué sonó?", audio: (n % 2 ? "в " : "") + hora(n), opciones: ["в " + hora(n), hora(n)], correcta: (n % 2 ? "в " : "") + hora(n),
+      pide: "Escucha: ¿qué sonó?", audio: (n % 2 ? "в " : "") + hora(n), opciones: ["в " + hora(n), hora(n)], correcta: (n % 2 ? "в " : "") + hora(n),
       explicacion: "Sonó **" + (n % 2 ? "{в} " : "") + hora(n) + "**: " + (n % 2 ? "«a las…», cuándo pasa algo." : "la hora o cuánto dura, sin {в}.") });
     if (n >= 2 && n !== 3) push({ id: "U7-desc-h-" + n, tipo: "descubrir", forma: "elegir", dificultad: 2, modulo: 1, regla: "u7-hora-conteo", grupo: "H-" + n, items: [], oir: hora(n),
       pide: (n <= 4 ? [2, 3, 4] : [5, 6, 7]).filter(x => x !== n).slice(0, 2).map(hora).join(" · ") + ". ¿Y " + U7_NUM[n] + "?", opciones: baraja([U7_NUM[n] + " часа́", U7_NUM[n] + " часо́в"], n), correcta: hora(n),
@@ -828,7 +828,7 @@ function ejerciciosUnidad7() {
       const dura = (j + k) % 2 === 0, ru1 = "Я " + v.f[0] + " в " + hora(n) + ".", ru2 = "Я " + v.f[0] + " " + hora(n) + ".";
       if (vk === "спать" && !dura) return;
       push({ id: "U7-par-v-" + j + "-" + n, tipo: "par", forma: "elegir", dificultad: 2, modulo: 1, regla: "u7-hora-a-las", grupo: "PV-" + j + "-" + n, items: ["lex:" + v.id], oir: dura ? ru2 : ru1,
-        pide: "«" + Es + " " + (dura ? U7_NUM_ES[n] + " horas" : u7Es(n)) + "». ¿Cuál decís?", opciones: baraja([ru1, ru2], j + n), correcta: dura ? ru2 : ru1,
+        pide: "«" + Es + " " + (dura ? U7_NUM_ES[n] + " horas" : u7Es(n)) + "». ¿Cuál dices?", opciones: baraja([ru1, ru2], j + n), correcta: dura ? ru2 : ru1,
         explicacion: (dura ? ru2 + " Cuánto dura: sin {в}." : ru1 + " «A las…»: {в} + la hora.") });
     });
   });
@@ -846,7 +846,7 @@ function ejerciciosUnidad7() {
     const NUM2 = { 13: "трина́дцать", 14: "четы́рнадцать", 15: "пятна́дцать", 30: "три́дцать", 40: "со́рок", 50: "пятьдеся́т" };
     const ru = U7_NUM[h] + " " + NUM2[m], dig = x => (h < 10 ? "0" : "") + h + ":" + x;
     push({ id: "U7-oido-dig-" + j, tipo: "oido", forma: "elegir", dificultad: 3, modulo: 1, regla: "u7-duracion", grupo: "DG-" + j, items: [], oir: "Сейча́с " + ru + ".",
-      pide: "Escuchá: ¿qué hora es?", audio: "Сейча́с " + ru + ".", opciones: baraja([dig(m), dig(otro)], j), correcta: dig(m), explicacion: "Сейча́с " + ru + ". = " + dig(m) + ". Primero la hora y después los minutos." });
+      pide: "Escucha: ¿qué hora es?", audio: "Сейча́с " + ru + ".", opciones: baraja([dig(m), dig(otro)], j), correcta: dig(m), explicacion: "Сейча́с " + ru + ". = " + dig(m) + ". Primero la hora y después los minutos." });
   });
   /* Diagnóstico de la hora */
   [[5, "часа́", "La forma de час"], [3, "часо́в", "La forma de час"], [9, "часа́", "La forma de час"], [4, "часо́в", "La forma de час"]].forEach(([n, mal, ok], j) => {
@@ -855,7 +855,7 @@ function ejerciciosUnidad7() {
       pide: "La frase tiene un error. ¿Qué falla?", grande: "Я " + v.f[0] + " в " + U7_NUM[n] + " " + mal + ".", opciones: [ok, "Falta {в}", "El verbo"], correcta: ok, esperadas: [bien], explicacion: bien + " " + u7ReglaHora(n) });
     const sinV = "Я " + v.f[0] + " " + hora(n + 2) + ".", bien2 = "Я " + v.f[0] + " в " + hora(n + 2) + ".";
     push({ id: "U7-diag-v-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 1, regla: "u7-hora-a-las", grupo: "DV-" + j, items: ["lex:" + v.id], oir: bien2,
-      pide: "Querés decir a qué hora lo hacés, y la frase tiene un error. ¿Qué falla?", grande: sinV, opciones: ["La forma de час", "Falta {в}", "El verbo"], correcta: "Falta {в}", esperadas: [bien2], explicacion: bien2 + " «A las…» lleva {в}." });
+      pide: "Quieres decir a qué hora lo haces, y la frase tiene un error. ¿Qué falla?", grande: sinV, opciones: ["La forma de час", "Falta {в}", "El verbo"], correcta: "Falta {в}", esperadas: [bien2], explicacion: bien2 + " «A las…» lleva {в}." });
   });
 
   /* ── Módulo 2: у́тром / утра́ ── */
@@ -868,7 +868,7 @@ function ejerciciosUnidad7() {
       pide: "¿Cuál suena natural?", opciones: baraja(["Я " + (p === "у" ? "встаю́" : "у́жинаю") + " " + conH + ".", "Я " + (p === "у" ? "встаю́" : "у́жинаю") + " в " + hora(n) + " " + adv + "."], j), correcta: "Я " + (p === "у" ? "встаю́" : "у́жинаю") + " " + conH + ".",
       explicacion: "Después de la hora: **" + gen + "**, nunca " + adv + "." });
     if (j < 4) push({ id: "U7-oido-uv-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 2, regla: "u7-utra-vechera", grupo: "UVO-" + j, items: [], oir: "в " + hora(n) + (j % 2 ? " ве́чера" : " утра́"),
-      pide: "Escuchá: ¿de la mañana o de la noche?", audio: "в " + hora(n) + (j % 2 ? " ве́чера" : " утра́"), opciones: [u7Es(n, "у"), u7Es(n, "в")], correcta: u7Es(n, j % 2 ? "в" : "у"),
+      pide: "Escucha: ¿de la mañana o de la noche?", audio: "в " + hora(n) + (j % 2 ? " ве́чера" : " утра́"), opciones: [u7Es(n, "у"), u7Es(n, "в")], correcta: u7Es(n, j % 2 ? "в" : "у"),
       explicacion: "Sonó **" + (j % 2 ? "ве́чера" : "утра́") + "**." });
   });
   [["рабо́тать", "у́тро", "у́тром"], ["чита́ть", "ве́чер", "ве́чером"], ["спать", "ночь", "но́чью"], ["гуля́ть", "день", "днём"], ["отдыха́ть", "ве́чер", "ве́чером"], ["за́втракать", "у́тро", "у́тром"]].forEach(([vk, nom, adv], j) => {
@@ -895,7 +895,7 @@ function ejerciciosUnidad7() {
     if (fem) push(Object.assign({ id: "U7-nat-dn-" + d.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-dia-acus", oir: cap(d.pr) + " " + d.acc + " я рабо́таю.", pide: "¿Cuál suena natural?",
       opciones: baraja([cap(d.pr) + " " + d.acc + " я рабо́таю.", cap(d.pr) + " " + d.nom + " я рабо́таю."], j + 1), correcta: cap(d.pr) + " " + d.acc + " я рабо́таю.",
       explicacion: "Después de {в}, el día cambia: **" + d.nom + " → " + d.acc + "**." }, base, { grupo: "DNN-" + d.id }));
-    push(Object.assign({ id: "U7-par-d-" + d.id, tipo: "par", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-dia-hoy", oir: "Сего́дня " + d.nom + ".", pide: "«Hoy es " + d.es + "». ¿Cuál decís?",
+    push(Object.assign({ id: "U7-par-d-" + d.id, tipo: "par", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-dia-hoy", oir: "Сего́дня " + d.nom + ".", pide: "«Hoy es " + d.es + "». ¿Cuál dices?",
       opciones: baraja(["Сего́дня " + d.nom + ".", "Сего́дня " + d.pr + " " + d.acc + "."], j), correcta: "Сего́дня " + d.nom + ".", explicacion: "Qué día es: el día tal cual, sin {в}." }, base, { grupo: "DH-" + d.id }));
     const otros = dias.filter(x => x !== d && (x.nom !== x.acc) === fem && x.pr === "в").slice(0, 2);
     if (otros.length === 2 && prep !== d.acc) push(Object.assign({ id: "U7-desc-d-" + d.id, tipo: "descubrir", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-dia-acus", oir: d.pr + " " + d.acc,
@@ -916,18 +916,18 @@ function ejerciciosUnidad7() {
     push(Object.assign({ id: "U7-pq-k-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-cada", oir: tiempo, pide: "¿Por qué " + kw + "?", grande: tiempo, audio: tiempo, audioManual: true,
       opciones: ["Concuerda con " + nom + " (" + gen + "), en acusativo", "Va después de {в}", "Es plural"], correcta: "Concuerda con " + nom + " (" + gen + "), en acusativo",
       explicacion: "**" + tiempo + "**: ка́ждый concuerda con " + nom + " y está en acusativo, el que dice «cuándo»." }, base, { grupo: "KP-" + j }));
-    if (j < 4) push(Object.assign({ id: "U7-cad-k-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 3, regla: "u7-cada", oir: cap(tiempo) + " А́нна " + fr(2) + ".", pide: "Cambiá la frase paso a paso.", base: "Я " + fr(0) + ".",
-      pasos: [{ pide: "Decí que lo hacés siempre: con ка́ждый y " + nom + ".", esperadas: [ok, "Я " + fr(0) + " " + tiempo + ".", "Я " + tiempo + " " + fr(0) + "."] },
-              { pide: "Ahora decilo de Ana (А́нна).", esperadas: [cap(tiempo) + " А́нна " + fr(2) + ".", "А́нна " + fr(2) + " " + tiempo + ".", "А́нна " + tiempo + " " + fr(2) + "."] }],
+    if (j < 4) push(Object.assign({ id: "U7-cad-k-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 3, regla: "u7-cada", oir: cap(tiempo) + " А́нна " + fr(2) + ".", pide: "Cambia la frase paso a paso.", base: "Я " + fr(0) + ".",
+      pasos: [{ pide: "Di que lo haces siempre: con ка́ждый y " + nom + ".", esperadas: [ok, "Я " + fr(0) + " " + tiempo + ".", "Я " + tiempo + " " + fr(0) + "."] },
+              { pide: "Ahora dilo de Ana (А́нна).", esperadas: [cap(tiempo) + " А́нна " + fr(2) + ".", "А́нна " + fr(2) + " " + tiempo + ".", "А́нна " + tiempo + " " + fr(2) + "."] }],
       explicacion: ok + " → " + cap(tiempo) + " А́нна " + fr(2) + ". Con ка́ждый, sin {в}." }, base, { grupo: "KC-" + j }));
   });
   /* Desarmar: qué día, qué momento, quién, qué hace */
   U7_SEMANA.forEach(([vk, extra, es], j) => {
     const v = vf(vk), d = dias[j]; if (!v) return;
     const mom = ["у́тром", "ве́чером", "днём"][j % 3], pal = [cap(d.pr), d.acc, mom, "я", v.f[0]].concat(extra ? extra.split(" ") : []);
-    const preg = [{ pide: "¿Qué día? (tocá el día)", correcta: 1 }, { pide: "¿En qué momento del día?", correcta: 2 }, { pide: "¿Qué hace?", correcta: 4 }];
+    const preg = [{ pide: "¿Qué día? (toca el día)", correcta: 1 }, { pide: "¿En qué momento del día?", correcta: 2 }, { pide: "¿Qué hace?", correcta: 4 }];
     push({ id: "U7-desarm-" + j, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo: 3, regla: "u7-dia-acus", grupo: "DS-" + j, items: ["lex:" + d.id, "lex:" + v.id],
-      oir: pal.join(" ") + ".", audio: pal.join(" ") + ".", audioManual: true, pide: "Respondé tocando las palabras de la frase.", palabras: pal, preguntas: preg,
+      oir: pal.join(" ") + ".", audio: pal.join(" ") + ".", audioManual: true, pide: "Responde tocando las palabras de la frase.", palabras: pal, preguntas: preg,
       explicacion: pal.join(" ") + ". El día con {в} + acusativo; el momento, sin preposición." });
   });
 
@@ -948,7 +948,7 @@ function ejerciciosUnidad7() {
   });
   [["ию́нь", "ию́ль"], ["ию́ль", "ию́нь"], ["март", "май"], ["май", "март"]].forEach(([a, b], j) => {
     const m = meses.find(x => x.nom === a), o = meses.find(x => x.nom === b);
-    push({ id: "U7-oido-m-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 4, regla: "u7-mes-prep", grupo: "MO-" + j, items: ["lex:" + m.id], oir: "в " + m.prep, pide: "Escuchá: ¿qué mes?", audio: "в " + m.prep,
+    push({ id: "U7-oido-m-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 4, regla: "u7-mes-prep", grupo: "MO-" + j, items: ["lex:" + m.id], oir: "в " + m.prep, pide: "Escucha: ¿qué mes?", audio: "в " + m.prep,
       opciones: ["en " + m.es, "en " + o.es], correcta: "en " + m.es, explicacion: "Sonó **в " + m.prep + "** (en " + m.es + ")." });
   });
   const EST = [["зима́", "зимо́й", "invierno"], ["весна́", "весно́й", "primavera"], ["ле́то", "ле́том", "verano"], ["о́сень", "о́сенью", "otoño"]];
@@ -961,15 +961,15 @@ function ejerciciosUnidad7() {
     });
     push(Object.assign({ id: "U7-pq-e-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 4, regla: "u7-estaciones", oir: adv, pide: "¿Por qué " + adv + " no lleva {в}?", grande: adv, audio: adv, audioManual: true,
       opciones: ["Es una estación: tiene su propia palabra", "Es un mes: {в} + prepositivo"], correcta: "Es una estación: tiene su propia palabra", explicacion: nom + " → **" + adv + "**, como у́тро → у́тром." }, base));
-    push(Object.assign({ id: "U7-est-" + j, tipo: "momento", forma: "escribir", dificultad: 2, modulo: 4, regla: "u7-estaciones", oir: adv, pide: "Escribí en ruso: «en " + es + "»", audio: adv, audioManual: true, esperadas: [adv], idioma: "ru",
+    push(Object.assign({ id: "U7-est-" + j, tipo: "momento", forma: "escribir", dificultad: 2, modulo: 4, regla: "u7-estaciones", oir: adv, pide: "Escribe en ruso: «en " + es + "»", audio: adv, audioManual: true, esperadas: [adv], idioma: "ru",
       explicacion: nom + " → **" + adv + "**, sin preposición." }, base, { grupo: "EW-" + j }));
   });
   /* Cadena: cuándo, de tres maneras */
   [["Мой о́тпуск", 7, 6, "ле́том"], ["Мой о́тпуск", 0, 1, "зимо́й"], ["Мой день рожде́ния", 4, 3, "весно́й"], ["Мой день рожде́ния", 9, 10, "о́сенью"]].forEach(([fr, a, b, est], j) => {
     const A = meses[a], B = meses[b];
     push({ id: "U7-cad-m-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 4, regla: "u7-cuando-tabla", grupo: "MC-" + j, items: ["lex:" + A.id, "lex:" + B.id], oir: fr + " " + est + ".",
-      pide: "Cambiá la frase paso a paso.", base: fr + " в " + A.prep + ".",
-      pasos: [{ pide: "Ahora: en " + B.es + ".", esperadas: [fr + " в " + B.prep + "."] }, { pide: "Ahora decí solo la estación: en " + EST.find(x => x[1] === est)[2] + ".", esperadas: [fr + " " + est + ".", cap(est) + " " + fr.charAt(0).toLowerCase() + fr.slice(1) + "."] }],
+      pide: "Cambia la frase paso a paso.", base: fr + " в " + A.prep + ".",
+      pasos: [{ pide: "Ahora: en " + B.es + ".", esperadas: [fr + " в " + B.prep + "."] }, { pide: "Ahora di solo la estación: en " + EST.find(x => x[1] === est)[2] + ".", esperadas: [fr + " " + est + ".", cap(est) + " " + fr.charAt(0).toLowerCase() + fr.slice(1) + "."] }],
       explicacion: fr + " в " + A.prep + ". → " + fr + " в " + B.prep + ". → " + fr + " " + est + ". El mes con {в} + prepositivo; la estación, sin {в}." });
   });
 
@@ -989,10 +989,10 @@ function ejerciciosUnidad7() {
     const s = SUJ[(j + 2) % SUJ.length], f = v.f[s[2]] + (extra ? " " + extra : ""), ok = s[0] + " никогда́ не " + f + ".", mal = s[0] + " никогда́ " + f + ".";
     push({ id: "U7-nat-n-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u7-nunca-ne", grupo: "NN-" + j, items: ["lex:" + v.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Con никогда́ va también не." });
-    push({ id: "U7-cad-f-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 5, regla: "u7-nunca-ne", grupo: "FC-" + j, items: ["lex:" + v.id], oir: ok, pide: "Cambiá la frase paso a paso.", base: "Я " + v.f[0] + (extra ? " " + extra : "") + ".",
-      pasos: [{ pide: "Agregá «normalmente» (обы́чно).", esperadas: ["Я обы́чно " + v.f[0] + (extra ? " " + extra : "") + ".", "Обы́чно я " + v.f[0] + (extra ? " " + extra : "") + "."] },
-              { pide: "Ahora decí que nunca lo hacés.", esperadas: ["Я никогда́ не " + v.f[0] + (extra ? " " + extra : "") + "."] },
-              { pide: "Ahora decilo de " + (s[1] || "nosotros").toLowerCase() + " (" + s[0].toLowerCase() + ").", esperadas: [ok] }],
+    push({ id: "U7-cad-f-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 5, regla: "u7-nunca-ne", grupo: "FC-" + j, items: ["lex:" + v.id], oir: ok, pide: "Cambia la frase paso a paso.", base: "Я " + v.f[0] + (extra ? " " + extra : "") + ".",
+      pasos: [{ pide: "Agrega «normalmente» (обы́чно).", esperadas: ["Я обы́чно " + v.f[0] + (extra ? " " + extra : "") + ".", "Обы́чно я " + v.f[0] + (extra ? " " + extra : "") + "."] },
+              { pide: "Ahora di que nunca lo haces.", esperadas: ["Я никогда́ не " + v.f[0] + (extra ? " " + extra : "") + "."] },
+              { pide: "Ahora dilo de " + (s[1] || "nosotros").toLowerCase() + " (" + s[0].toLowerCase() + ").", esperadas: [ok] }],
       explicacion: "Я обы́чно " + v.f[0] + (extra ? " " + extra : "") + ". → Я никогда́ не " + v.f[0] + (extra ? " " + extra : "") + ". → " + ok + " La frecuencia va antes del verbo; con никогда́, también не." });
     push({ id: "U7-diag-n-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 5, regla: "u7-nunca-ne", grupo: "NG-" + j, items: ["lex:" + v.id], oir: ok, pide: "La frase tiene un error. ¿Qué falla?", grande: mal,
       opciones: ["Falta не", "La forma del verbo", "Sobra никогда́"], correcta: "Falta не", esperadas: [ok], explicacion: ok + " Con никогда́ va también не." });
@@ -1013,7 +1013,7 @@ function ejerciciosUnidad7() {
     push({ id: "U7-nat-sy-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u7-rutina-sya", grupo: "SYN-" + j, items: ["lex:" + v.id], oir: "Я " + v.f[0] + ".", pide: "¿Cuál suena natural?",
       opciones: baraja(["Я " + v.f[0] + ".", "Я " + sinSy + "ся."], j), correcta: "Я " + v.f[0] + ".", explicacion: "Я " + v.f[0] + ". Después de vocal va **-сь**, no **-ся**." });
     push({ id: "U7-oido-sy-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 6, regla: "u7-rutina-sya", grupo: "SYO-" + j, items: ["lex:" + v.id], oir: (j % 2 ? "Они́ " + v.f[5] : "Он " + v.f[2]),
-      pide: "Escuchá: ¿qué forma sonó?", audio: (j % 2 ? "Они́ " + v.f[5] : "Он " + v.f[2]), opciones: op1([v.f[2], v.f[5]]), correcta: op1([j % 2 ? v.f[5] : v.f[2]])[0],
+      pide: "Escucha: ¿qué forma sonó?", audio: (j % 2 ? "Они́ " + v.f[5] : "Он " + v.f[2]), opciones: op1([v.f[2], v.f[5]]), correcta: op1([j % 2 ? v.f[5] : v.f[2]])[0],
       explicacion: "Sonó **" + (j % 2 ? v.f[5] : v.f[2]) + "** (" + (j % 2 ? "ellos" : "él") + ")." });
     const hor = u7Ru(7 + (j % 3), "у");
     push({ id: "U7-diag-sy-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 6, regla: "u7-rutina-sya", grupo: "SYD-" + j, items: ["lex:" + v.id], oir: "Я " + v.f[0] + " " + hor + ".",
@@ -1023,15 +1023,15 @@ function ejerciciosUnidad7() {
   Object.keys(U7_ACT).forEach((k, j) => {
     const a = U7_ACT[k], v = verb[sin(a[0])] || vf(a[0]); if (!v) return;
     const f = i => v.f[i] + (a[1] ? " " + a[1] : ""), h = u7Ru(a[4], ""), ana = "А́нна";
-    const pasos = [{ pide: "Agregá la hora: " + u7Es(a[4]) + ".", esperadas: ["Я " + f(0) + " " + h + ".", cap(h) + " я " + f(0) + "."] },
-      { pide: "Ahora decilo de Ana (А́нна).", esperadas: [ana + " " + f(2) + " " + h + ".", cap(h) + " " + ana.toLowerCase() + " " + f(2) + "."] },
-      { pide: "Agregá «normalmente» (обы́чно).", esperadas: [ana + " обы́чно " + f(2) + " " + h + ".", "Обы́чно " + ana + " " + f(2) + " " + h + "."] }];
+    const pasos = [{ pide: "Agrega la hora: " + u7Es(a[4]) + ".", esperadas: ["Я " + f(0) + " " + h + ".", cap(h) + " я " + f(0) + "."] },
+      { pide: "Ahora dilo de Ana (А́нна).", esperadas: [ana + " " + f(2) + " " + h + ".", cap(h) + " " + ana.toLowerCase() + " " + f(2) + "."] },
+      { pide: "Agrega «normalmente» (обы́чно).", esperadas: [ana + " обы́чно " + f(2) + " " + h + ".", "Обы́чно " + ana + " " + f(2) + " " + h + "."] }];
     push({ id: "U7-cad-r-" + k, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 6, regla: "u7-frase-crece", grupo: "RC-" + k, items: ["lex:" + v.id], oir: ana + " обы́чно " + f(2) + " " + h + ".",
-      pide: "Cambiá la frase paso a paso.", base: "Я " + f(0) + ".", pasos, explicacion: "Я " + f(0) + ". → Я " + f(0) + " " + h + ". → " + ana + " " + f(2) + " " + h + ". → " + ana + " обы́чно " + f(2) + " " + h + "." });
+      pide: "Cambia la frase paso a paso.", base: "Я " + f(0) + ".", pasos, explicacion: "Я " + f(0) + ". → Я " + f(0) + " " + h + ". → " + ana + " " + f(2) + " " + h + ". → " + ana + " обы́чно " + f(2) + " " + h + "." });
     const frec = ["Ка́ждое у́тро", "Обы́чно", "Ка́ждый день"][j % 3], pal = frec.split(" ").concat(["я", v.f[0]]).concat(a[1] ? a[1].split(" ") : []).concat(h.split(" "));
     const iV = frec.split(" ").length + 1, iH = pal.length - h.split(" ").length;
     push({ id: "U7-desarm-r-" + k, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo: 6, regla: "u7-frase-crece", grupo: "RD-" + k, items: ["lex:" + v.id], oir: pal.join(" ") + ".", audio: pal.join(" ") + ".", audioManual: true,
-      pide: "Respondé tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Quién?", correcta: iV - 1 }, { pide: "¿Qué hace? (el verbo)", correcta: iV }, { pide: "¿A qué hora? (tocá la hora)", correcta: iH + 1 }],
+      pide: "Responde tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Quién?", correcta: iV - 1 }, { pide: "¿Qué hace? (el verbo)", correcta: iV }, { pide: "¿A qué hora? (toca la hora)", correcta: iH + 1 }],
       explicacion: pal.join(" ") + ". ¿Cada cuánto?, ¿quién?, ¿qué hace? y ¿a qué hora?: cada pieza en su lugar." });
   });
   [["опа́здывать", "на рабо́ту", "na"], ["торопи́ться", "на уро́к", "na"], ["спеши́ть", "на рабо́ту", "na"]].forEach(([vk, lugar], j) => {
@@ -1066,16 +1066,16 @@ function ejerciciosUnidad7() {
     push({ id: "U7-nat-vo-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-a-que-hora", grupo: "VO-" + j, items: ["lex:" + v.id], oir: ok, pide: "¿Cuál suena natural?",
       opciones: baraja([ok, "В ско́лько ты " + v.f[1] + "?"], j), correcta: ok, explicacion: ok + " Se dice во ско́лько, con la **о**." });
   });
-  [["приходи́ть", "уходи́ть", "домо́й", "Llegás a casa", 7], ["уходи́ть", "приходи́ть", "на рабо́ту", "Te vas al trabajo", 8], ["приходи́ть", "уходи́ть", "на рабо́ту", "Llegás al trabajo", 9], ["уходи́ть", "приходи́ть", "домо́й", "Te vas a casa", 6]].forEach(([a, b, l, es, n], j) => {
+  [["приходи́ть", "уходи́ть", "домо́й", "Llegas a casa", 7], ["уходи́ть", "приходи́ть", "на рабо́ту", "Te vas al trabajo", 8], ["приходи́ть", "уходи́ть", "на рабо́ту", "Llegas al trabajo", 9], ["уходи́ть", "приходи́ть", "домо́й", "Te vas a casa", 6]].forEach(([a, b, l, es, n], j) => {
     const va = vf(a), vb = vf(b), ok = "Я " + va.f[0] + " " + l + " в " + hora(n) + ".";
-    push({ id: "U7-par-pu-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-horario", grupo: "PU-" + j, items: ["lex:" + va.id], oir: ok, pide: es + " a las " + U7_NUM_ES[n] + ". ¿Cuál decís?",
+    push({ id: "U7-par-pu-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-horario", grupo: "PU-" + j, items: ["lex:" + va.id], oir: ok, pide: es + " a las " + U7_NUM_ES[n] + ". ¿Cuál dices?",
       opciones: baraja([ok, "Я " + vb.f[0] + " " + l + " в " + hora(n) + "."], j), correcta: ok, explicacion: ok + " " + (a === "приходи́ть" ? "Llegar: приходи́ть." : "Irse: уходи́ть.") });
   });
   [["за́нятый", "f", "Сего́дня"], ["за́нятый", "m", "За́втра"], ["свобо́дный", "f", "В суббо́ту"], ["свобо́дный", "m", "Ве́чером"]].forEach(([adj, g, cuando], j) => {
     const c = kz(adj).corta, ok = cuando + " я " + c[g] + ".", mal = cuando + " я " + c[g === "f" ? "m" : "f"] + ".";
     push({ id: "U7-nat-zn-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-libre", grupo: "ZN-" + j, items: ["lex:" + lex(adj).id], oir: ok,
       pide: "Habla " + (g === "f" ? "una mujer" : "un hombre") + ". ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " " + (g === "f" ? "Mujer" : "Hombre") + ": **" + c[g] + "**." });
-    push({ id: "U7-oido-zn-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-libre", grupo: "ZO-" + j, items: ["lex:" + lex(adj).id], oir: ok, pide: "Escuchá: ¿quién habla?", audio: ok,
+    push({ id: "U7-oido-zn-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-libre", grupo: "ZO-" + j, items: ["lex:" + lex(adj).id], oir: ok, pide: "Escucha: ¿quién habla?", audio: ok,
       opciones: ["Un hombre", "Una mujer"], correcta: g === "f" ? "Una mujer" : "Un hombre", explicacion: "Sonó **" + c[g] + "**: " + (g === "f" ? "forma de mujer, con **-а**." : "forma de hombre.") });
   });
 
@@ -1092,7 +1092,7 @@ function ejerciciosUnidad7() {
         opciones: ["Es un juego o un deporte", "Es un instrumento"], correcta: pr === "в" ? "Es un juego o un deporte" : "Es un instrumento", explicacion: pr === "в" ? "Juego o deporte: {в} + acusativo." : "Instrumento: на + prepositivo." }, base, { grupo: "IGP-" + j }));
     });
     push({ id: "U7-cad-ig-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 8, regla: "u7-jugar", grupo: "IGC-" + j, items: ["lex:" + e.id], oir: "За́втра я игра́ю " + pr + " " + forma + ".",
-      pide: "Cambiá la frase paso a paso.", base: "Я игра́ю " + pr + " " + forma + ".",
+      pide: "Cambia la frase paso a paso.", base: "Я игра́ю " + pr + " " + forma + ".",
       pasos: [{ pide: "Ahora: todos los sábados (ка́ждую суббо́ту).", esperadas: ["Ка́ждую суббо́ту я игра́ю " + pr + " " + forma + ".", "Я игра́ю " + pr + " " + forma + " ка́ждую суббо́ту.", "Я ка́ждую суббо́ту игра́ю " + pr + " " + forma + "."] },
               { pide: "Ahora es un plan: mañana (за́втра).", esperadas: ["За́втра я игра́ю " + pr + " " + forma + ".", "Я за́втра игра́ю " + pr + " " + forma + "."] }],
       explicacion: "Ка́ждую суббо́ту я игра́ю " + pr + " " + forma + ". → За́втра я игра́ю " + pr + " " + forma + ". El presente sirve para lo habitual y para un plan cercano." });

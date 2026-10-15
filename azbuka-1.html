@@ -156,7 +156,7 @@ function Tarjetas({ letras, titulo, c, niveles, setNivel, onClose, green, cursiv
         !vuelta
           ? h(React.Fragment, null,
               h("div", { className: "fc-glyph", lang: "ru" }, l.upper + " " + l.lower),
-              h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, "Tocá para ver cómo suena"))
+              h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, "Toca para ver cómo suena"))
           : h(React.Fragment, null,
               h("div", { className: "fc-top" },
                 h("div", { className: "fc-glyph", lang: "ru" }, l.upper + " " + l.lower),
@@ -236,7 +236,7 @@ function LeerEnVoz({ c }) {
           h("div", { style: { fontSize: 18, color: c.gold, fontStyle: "italic", fontWeight: 700 } }, "«" + e.translit + "»"),
           h("div", { style: { fontSize: 14, color: c.textSub, marginTop: 4 } }, w.meaning),
           h("button", { className: "play", style: { margin: "12px auto 0" }, onClick: () => hablar(e.ru), "aria-label": "Escuchar" }, "▶"))
-      : h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 10 } }, "Leela en voz alta y después comprobá."),
+      : h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 10 } }, "Léela en voz alta y después comprueba."),
     h("div", { style: { display: "flex", gap: 8, marginTop: 18 } },
       !ver && h("button", { className: "ubtn", style: { marginTop: 0 }, onClick: mostrar }, "¿Cómo se lee?"),
       h("button", { className: "ubtn" + (ver ? "" : " sec"), style: { marginTop: 0 }, onClick: otra }, "Otra palabra")),
@@ -245,7 +245,7 @@ function LeerEnVoz({ c }) {
 function VistaLectura({ mod, c, abrirDialogo }) {
   return h(React.Fragment, null,
     h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
-    h("div", { className: "u-sec" }, "Leé en voz alta"),
+    h("div", { className: "u-sec" }, "Lee en voz alta"),
     h(LeerEnVoz, { c }),
     h("div", { className: "u-sec" }, "Primeros diálogos"),
     mod.dialogos.map(id => {

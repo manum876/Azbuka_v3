@@ -303,7 +303,7 @@ function CulturaSheet({ cid, onClose, onFrase }) {
       h("div", { className: "sheet-title" }, n.titulo),
       h("div", { className: "sheet-text" }, n.texto),
       n.rio && h("div", null,
-        h("div", { className: "section-lbl" }, "En el Río de la Plata"),
+        h("div", { className: "section-lbl" }, "En España"),
         h("div", { className: "nota" }, n.rio)
       ),
       n.ejemplos && n.ejemplos.length > 0 && h("div", null,
@@ -365,7 +365,7 @@ function Linea({ d, l, idx, registro, showTr, showEs, oculta, onRevelar, abierta
     return h("div", { className: "ex ex-col ln" },
       cab,
       h("div", { className: "ex-es", style: { marginTop: 0 } }, "«" + t.es + "»"),
-      h("div", { className: "ln-turno", onClick: onRevelar }, "Tu turno: decilo en ruso y tocá para ver ›")
+      h("div", { className: "ln-turno", onClick: onRevelar }, "Tu turno: dilo en ruso y toca para ver ›")
     );
   }
   return h("div", { className: "ex ex-col ln" + (sonando ? " ln-on" : "") },
@@ -482,8 +482,8 @@ function FichaDialogo({ id, c, onFrase, onCultura }) {
           sonando: sonando === i, onCultura
         })),
         h("div", { className: "tnote" }, practica
-          ? "Leé la traducción, decí la línea en ruso en voz alta y tocá para comprobar."
-          : "Tocá una línea en ruso para ver cada palabra. ▶ escucha una línea; el de arriba, todo el diálogo."),
+          ? "Lee la traducción, di la línea en ruso en voz alta y toca para comprobar."
+          : "Toca una línea en ruso para ver cada palabra. ▶ escucha una línea; el de arriba, todo el diálogo."),
 
         frIds.length > 0 && h("div", null,
           h("div", { className: "section-lbl" }, "Frases de este diálogo"),
@@ -603,7 +603,7 @@ function App() {
   const kicker = DIALOGOS.length + " diálogos · " + FRASES.length + " frases · " + CULTURA.length + " notas";
   const INTRO_ITEMS = [
     ["Diálogos por situación", "Del saludo a una emergencia, muchos con versión informal (ты) y formal (вы)."],
-    ["Palabra por palabra", "Tocá una línea para ver cada palabra, de qué forma viene y su ficha."],
+    ["Palabra por palabra", "Toca una línea para ver cada palabra, de qué forma viene y su ficha."],
     ["Frases y cultura", "Las fórmulas que conviene saber enteras y las costumbres que hay detrás."]
   ];
   const EJEMPLOS = ["DLG-001", "DLG-008", "DLG-028"].map(dialogoById).filter(Boolean);
@@ -624,9 +624,9 @@ function App() {
       ))
     ),
     h("div", { style: { position: "relative" } }, ...campo),
-    !buscando && h("div", { className: "search-hint" }, "Podés buscar en ruso o en español: «gracias», «кафе́», «cumpleaños»."),
+    !buscando && h("div", { className: "search-hint" }, "Puedes buscar en ruso o en español: «gracias», «кафе́», «cumpleaños»."),
     !buscando && h("div", { className: "try-row" },
-      h("span", { className: "try-lbl" }, "Probá con:"),
+      h("span", { className: "try-lbl" }, "Prueba con:"),
       EJEMPLOS.map(d => { const href = "dialogos.html?id=" + d.id; return h("a", { key: d.id, className: "try-chip", href, onClick: (ev) => azNavigate(ev, href) }, d.titulo); })
     ),
     buscando && h("div", { className: "list", style: { marginTop: 10, animation: "fadeIn 0.3s ease" } }, results.length ? resultRows : noResults)
@@ -647,7 +647,7 @@ function App() {
   const favFrases = favs.map(k => fraseById(k.slice(7))).filter(Boolean);
   const vistaFrases = h("div", { style: { animation: "fadeIn 0.3s ease" } },
     h("div", { className: "page-title" }, "Frases"),
-    h("div", { className: "page-desc" }, "Expresiones que conviene aprender enteras, ordenadas por lo que querés hacer. Tocá una para ver cuándo se usa."),
+    h("div", { className: "page-desc" }, "Expresiones que conviene aprender enteras, ordenadas por lo que quieres hacer. Toca una para ver cuándo se usa."),
     favFrases.length > 0 && h("div", null,
       h("div", { className: "section-lbl" }, "Mis frases"),
       h("div", { className: "list" }, favFrases.map(f => h(FilaFrase, { key: f.id, f, onClick: () => abrirFrase(f.id) })))
@@ -662,7 +662,7 @@ function App() {
   );
   const vistaCultura = h("div", { style: { animation: "fadeIn 0.3s ease" } },
     h("div", { className: "page-title" }, "Cultura"),
-    h("div", { className: "page-desc" }, "Cómo se usa el idioma en la vida real, comparado con lo que hacemos en el Río de la Plata."),
+    h("div", { className: "page-desc" }, "Cómo se usa el idioma en la vida real, comparado con lo que se hace en España."),
     TIPOS_CUL.map(t => {
       const lista = CULTURA.filter(n => n.tipo === t);
       return lista.length > 0 && h("div", { key: t },

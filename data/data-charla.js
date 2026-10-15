@@ -2,7 +2,7 @@
    DATA-CHARLA.JS — Charla con Masha (MAQUETA, 01/10/2026)
    Conversación escrita con ramificaciones. Todo local: Masha no es
    una IA; reconoce raíces de palabras clave (claves) en lo que
-   escribís y sigue el recorrido.
+   escribes y sigue el recorrido.
 
    CHARLA.nodos: el recorrido, en orden. Cada nodo:
      bot      líneas de Masha al llegar ({ ru, tr, es })
@@ -19,7 +19,7 @@
        genero   palabra exacta → género del alumno (уста́л / уста́ла…)
        resp     respuesta de Masha; ir: nodo siguiente ("FIN" termina)
        comodin  cualquier otra respuesta (va última)
-     aTi      respuesta si le devolvés la pregunta («А ты?»); aTiTema: la
+     aTi      respuesta si le devuelves la pregunta («А ты?»); aTiTema: la
               pregunta de su historia que equivale (no la repite)
      delega   la rama pasa tu respuesta a otro paso (p. ej. «я врач»)
      retomar  cómo vuelve a su pregunta después de un desvío
@@ -32,7 +32,7 @@
 const CHARLA = {
  "personaje": "masha",
  "inicio": "saludo",
- "presentacion": "Masha es estudiante y vive en Moscú. Charlá con ella por escrito, en ruso: te va a hacer preguntas y vos también le podés preguntar cosas de su vida.",
+ "presentacion": "Masha es estudiante y vive en Moscú. Charla con ella por escrito, en ruso: te va a hacer preguntas y tú también le puedes preguntar cosas de su vida.",
  "nodos": [
   {
    "id": "saludo",
@@ -116,7 +116,7 @@ const CHARLA = {
     },
     {
      "ru": "Коне́чно, мо́жно.",
-     "es": "Claro, dale."
+     "es": "Claro, de acuerdo."
     },
     {
      "ru": "Нет, лу́чше на «вы».",
@@ -174,12 +174,12 @@ const CHARLA = {
   },
   {
    "id": "como_estas",
-   "titulo": "¿Cómo andás?",
+   "titulo": "¿Cómo andas?",
    "bot": [
     {
      "ru": "Как дела́?",
      "tr": "Kak dilá?",
-     "es": "¿Cómo andás?"
+     "es": "¿Cómo andas?"
     }
    ],
    "botSi": {
@@ -187,18 +187,18 @@ const CHARLA = {
      {
       "ru": "А у тебя́ как дела́?",
       "tr": "A u tibiá kak dilá?",
-      "es": "¿Y a vos cómo te va?"
+      "es": "¿Y a ti cómo te va?"
      }
     ]
    },
    "ideas": [
     {
      "ru": "Хорошо́, спаси́бо. А у тебя́?",
-     "es": "Bien, gracias. ¿Y vos?"
+     "es": "Bien, gracias. ¿Y tú?"
     },
     {
      "ru": "Отли́чно!",
-     "es": "¡Bárbaro!"
+     "es": "¡Genial!"
     },
     {
      "ru": "Так себе́.",
@@ -285,7 +285,7 @@ const CHARLA = {
    "retomar": {
     "ru": "Так как дела́? 🙂",
     "tr": "Tak kak dilá?",
-    "es": "Entonces, ¿cómo andás?"
+    "es": "Entonces, ¿cómo andas?"
    }
   },
   {
@@ -331,7 +331,7 @@ const CHARLA = {
       {
        "ru": "Понима́ю. Тебе́ ну́жен ко́фе! ☕",
        "tr": "Panimáyu. Tibié núzhin kófi!",
-       "es": "Te entiendo. ¡Necesitás un café!"
+       "es": "Te entiendo. ¡Necesitas un café!"
       }
      ],
      "ir": "nombre"
@@ -385,7 +385,7 @@ const CHARLA = {
     {
      "ru": "Кста́ти, я Ма́ша. А как тебя́ зову́т?",
      "tr": "Kstáti, ya Másha. A kak tibiá zavút?",
-     "es": "Por cierto, soy Masha. ¿Y vos cómo te llamás?"
+     "es": "Por cierto, soy Masha. ¿Y tú cómo te llamas?"
     }
    ],
    "botSi": {
@@ -393,7 +393,7 @@ const CHARLA = {
      {
       "ru": "А тебя́ как зову́т?",
       "tr": "A tibiá kak zavút?",
-      "es": "¿Y a vos cómo te llaman?"
+      "es": "¿Y a ti cómo te llaman?"
      }
     ]
    },
@@ -455,17 +455,17 @@ const CHARLA = {
    "retomar": {
     "ru": "Так как тебя́ зову́т?",
     "tr": "Tak kak tibiá zavút?",
-    "es": "Entonces, ¿cómo te llamás?"
+    "es": "Entonces, ¿cómo te llamas?"
    }
   },
   {
    "id": "origen",
-   "titulo": "¿De dónde sos?",
+   "titulo": "¿De dónde eres?",
    "bot": [
     {
      "ru": "Отку́да ты?",
      "tr": "Atkúda ty?",
-     "es": "¿De dónde sos?"
+     "es": "¿De dónde eres?"
     }
    ],
    "ideas": [
@@ -622,18 +622,18 @@ const CHARLA = {
    "retomar": {
     "ru": "Так отку́да ты? 🙂",
     "tr": "Tak atkúda ty?",
-    "es": "Entonces, ¿de dónde sos?"
+    "es": "Entonces, ¿de dónde eres?"
    }
   },
   {
    "id": "bsas",
    "titulo": "¿De Buenos Aires?",
-   "soloSi": "si sos de Argentina",
+   "soloSi": "si eres de Argentina",
    "bot": [
     {
      "ru": "А ты то́же из Буэ́нос-А́йреса?",
      "tr": "A ty tózhi is Buénasáirisa?",
-     "es": "¿Y vos también sos de Buenos Aires?"
+     "es": "¿Y tú también eres de Buenos Aires?"
     }
    ],
    "ideas": [
@@ -679,7 +679,7 @@ const CHARLA = {
       {
        "ru": "Из {x}? Я не зна́ю э́тот го́род, но звучи́т краси́во!",
        "tr": "Is {x}? Ya nie znáyu état górat, no zvuchít krasíva!",
-       "es": "No conozco esa ciudad, ¡pero suena lindo!"
+       "es": "No conozco esa ciudad, ¡pero suena bonito!"
       }
      ],
      "ir": "vivir"
@@ -721,17 +721,17 @@ const CHARLA = {
    "retomar": {
     "ru": "Ты из Буэ́нос-А́йреса?",
     "tr": "Ty is Buénasáirisa?",
-    "es": "¿Sos de Buenos Aires?"
+    "es": "¿Eres de Buenos Aires?"
    }
   },
   {
    "id": "vivir",
-   "titulo": "¿Dónde vivís?",
+   "titulo": "¿Dónde vives?",
    "bot": [
     {
      "ru": "А где ты живёшь сейча́с?",
      "tr": "A gdie ty zhiviósh siichás?",
-     "es": "¿Y dónde vivís ahora?"
+     "es": "¿Y dónde vives ahora?"
     }
    ],
    "ideas": [
@@ -837,7 +837,7 @@ const CHARLA = {
    "retomar": {
     "ru": "А где ты живёшь?",
     "tr": "A gdie ty zhiviósh?",
-    "es": "¿Y dónde vivís?"
+    "es": "¿Y dónde vives?"
    }
   },
   {
@@ -847,7 +847,7 @@ const CHARLA = {
     {
      "ru": "Ты говори́шь по-англи́йски?",
      "tr": "Ty gavarísh paanglíiski?",
-     "es": "¿Hablás inglés?"
+     "es": "¿Hablas inglés?"
     }
    ],
    "ideas": [
@@ -921,7 +921,7 @@ const CHARLA = {
       {
        "ru": "Отли́чно! Я то́же. Но дава́й говори́ть по-ру́сски! 😉",
        "tr": "Atlíchna! Ya tózhi. No davái gavarít parússki!",
-       "es": "¡Bárbaro! Yo también. ¡Pero hablemos en ruso!"
+       "es": "¡Genial! Yo también. ¡Pero hablemos en ruso!"
       }
      ],
      "ir": "ocupacion"
@@ -948,17 +948,17 @@ const CHARLA = {
    "retomar": {
     "ru": "Так ты говори́шь по-англи́йски?",
     "tr": "Tak ty gavarísh paanglíiski?",
-    "es": "Entonces, ¿hablás inglés?"
+    "es": "Entonces, ¿hablas inglés?"
    }
   },
   {
    "id": "ocupacion",
-   "titulo": "¿Estudiás o trabajás?",
+   "titulo": "¿Estudias o trabajas?",
    "bot": [
     {
      "ru": "Ты у́чишься и́ли рабо́таешь?",
      "tr": "Ty úchishsia íli rabótayish?",
-     "es": "¿Estudiás o trabajás?"
+     "es": "¿Estudias o trabajas?"
     }
    ],
    "ideas": [
@@ -995,7 +995,7 @@ const CHARLA = {
       {
        "ru": "И у́чишься, и рабо́таешь? Молоде́ц! 💪",
        "tr": "I úchishsia, i rabótayish? Maladiéts!",
-       "es": "¿Estudiás y trabajás? ¡Bien ahí!"
+       "es": "¿Estudias y trabajas? ¡Bien ahí!"
       }
      ],
      "ir": "gustos"
@@ -1049,7 +1049,7 @@ const CHARLA = {
      "ir": "trabajo"
     },
     {
-     "etiqueta": "Dice directamente su profesión (я врач…): se responde como en «¿De qué trabajás?»",
+     "etiqueta": "Dice directamente su profesión (я врач…): se responde como en «¿De qué trabajas?»",
      "captura": "eco",
      "tras": [
       "я"
@@ -1082,18 +1082,18 @@ const CHARLA = {
    "retomar": {
     "ru": "Так ты у́чишься и́ли рабо́таешь?",
     "tr": "Tak ty úchishsia íli rabótayish?",
-    "es": "Entonces, ¿estudiás o trabajás?"
+    "es": "Entonces, ¿estudias o trabajas?"
    }
   },
   {
    "id": "trabajo",
-   "titulo": "¿De qué trabajás?",
-   "soloSi": "si trabajás",
+   "titulo": "¿De qué trabajas?",
+   "soloSi": "si trabajas",
    "bot": [
     {
      "ru": "А кем ты рабо́таешь?",
      "tr": "A kem ty rabótayish?",
-     "es": "¿Y de qué trabajás?"
+     "es": "¿Y de qué trabajas?"
     }
    ],
    "ideas": [
@@ -1203,7 +1203,7 @@ const CHARLA = {
    "retomar": {
     "ru": "Так кем ты рабо́таешь?",
     "tr": "Tak kem ty rabótayish?",
-    "es": "Entonces, ¿de qué trabajás?"
+    "es": "Entonces, ¿de qué trabajas?"
    }
   },
   {
@@ -1249,7 +1249,7 @@ const CHARLA = {
        "es": "¿En serio? ¡A mí también me gusta nadar!"
       }
      ],
-     "ir": "preguntame"
+     "ir": "pregúntame"
     },
     {
      "etiqueta": "Música (му́зыка)",
@@ -1265,7 +1265,7 @@ const CHARLA = {
        "es": "¡A mí también! Escucho música todo el tiempo."
       }
      ],
-     "ir": "preguntame"
+     "ir": "pregúntame"
     },
     {
      "etiqueta": "Leer (чита́ть, кни́ги)",
@@ -1283,7 +1283,7 @@ const CHARLA = {
        "es": "¡Leer está buenísimo! A mi amigo Lucas también le gusta leer."
       }
      ],
-     "ir": "preguntame"
+     "ir": "pregúntame"
     },
     {
      "etiqueta": "Fútbol (футбо́л)",
@@ -1299,7 +1299,7 @@ const CHARLA = {
        "es": "¿Fútbol? ¡A mi hermano Dima también le gusta el fútbol!"
       }
      ],
-     "ir": "preguntame"
+     "ir": "pregúntame"
     },
     {
      "etiqueta": "Viajar (путеше́ствовать)",
@@ -1315,7 +1315,7 @@ const CHARLA = {
        "es": "¡Viajar es mi sueño!"
       }
      ],
-     "ir": "preguntame"
+     "ir": "pregúntame"
     },
     {
      "etiqueta": "Cocinar (гото́вить)",
@@ -1331,7 +1331,7 @@ const CHARLA = {
        "es": "¿Te gusta cocinar? ¡A mí me gusta comer!"
       }
      ],
-     "ir": "preguntame"
+     "ir": "pregúntame"
     },
     {
      "etiqueta": "Cine (кино́, фи́льмы)",
@@ -1348,7 +1348,7 @@ const CHARLA = {
        "es": "¡El cine está buenísimo!"
       }
      ],
-     "ir": "preguntame"
+     "ir": "pregúntame"
     },
     {
      "etiqueta": "Cualquier otra cosa",
@@ -1360,7 +1360,7 @@ const CHARLA = {
        "es": "¡Qué bueno!"
       }
      ],
-     "ir": "preguntame"
+     "ir": "pregúntame"
     }
    ],
    "aTi": {
@@ -1376,14 +1376,14 @@ const CHARLA = {
    }
   },
   {
-   "id": "preguntame",
-   "titulo": "Tu turno: preguntale",
+   "id": "pregúntame",
+   "titulo": "Tu turno: pregúntale",
    "abierto": true,
    "bot": [
     {
      "ru": "Слу́шай, а ты хо́чешь меня́ что́-нибудь спроси́ть?",
      "tr": "Slúshai, a ty jóchish miniá shtónibut sprasít?",
-     "es": "Che, ¿y vos querés preguntarme algo?"
+     "es": "¿Y tú quieres preguntarme algo?"
     }
    ],
    "ideas": [
@@ -1413,7 +1413,7 @@ const CHARLA = {
       {
        "ru": "Дава́й, спра́шивай! 🙂",
        "tr": "Davái, spráshivai!",
-       "es": "¡Dale, preguntá!"
+       "es": "¡De acuerdo, pregunta!"
       }
      ],
      "ir": null
@@ -1422,7 +1422,7 @@ const CHARLA = {
    "retomar": {
     "ru": "Спроси́ меня́ что́-нибудь! 🙂",
     "tr": "Sprasí miniá shtónibut!",
-    "es": "¡Preguntame algo!"
+    "es": "¡Pregúntame algo!"
    }
   },
   {
@@ -1438,11 +1438,11 @@ const CHARLA = {
    "ideas": [
     {
      "ru": "Пока́!",
-     "es": "¡Chau!"
+     "es": "¡Adiós!"
     },
     {
      "ru": "Мне то́же. Пока́, Ма́ша!",
-     "es": "Igualmente. ¡Chau, Masha!"
+     "es": "Igualmente. ¡Adiós, Masha!"
     },
     {
      "ru": "До свида́ния!",
@@ -1480,7 +1480,7 @@ const CHARLA = {
       {
        "ru": "Пока́! До встре́чи! 👋",
        "tr": "Paká! Da fstriéchi!",
-       "es": "¡Chau! ¡Nos vemos!"
+       "es": "¡Adiós! ¡Nos vemos!"
       }
      ],
      "ir": "FIN"
@@ -1492,7 +1492,7 @@ const CHARLA = {
       {
        "ru": "Пока́! 👋",
        "tr": "Paká!",
-       "es": "¡Chau!"
+       "es": "¡Adiós!"
       }
      ],
      "ir": "FIN"
@@ -1510,7 +1510,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "Ско́лько тебе́ лет?",
-    "es": "¿Cuántos años tenés?"
+    "es": "¿Cuántos años tienes?"
    },
    "resp": [
     {
@@ -1549,7 +1549,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "Как дела́?",
-    "es": "¿Cómo andás?"
+    "es": "¿Cómo andas?"
    },
    "resp": [
     {
@@ -1567,7 +1567,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "Отку́да ты?",
-    "es": "¿De dónde sos?"
+    "es": "¿De dónde eres?"
    },
    "resp": [
     {
@@ -1585,7 +1585,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "Где ты живёшь?",
-    "es": "¿Dónde vivís?"
+    "es": "¿Dónde vives?"
    },
    "resp": [
     {
@@ -1607,7 +1607,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "Что ты изуча́ешь?",
-    "es": "¿Qué estudiás?"
+    "es": "¿Qué estudias?"
    },
    "resp": [
     {
@@ -1626,7 +1626,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "Ты рабо́таешь?",
-    "es": "¿Trabajás?"
+    "es": "¿Trabajas?"
    },
    "resp": [
     {
@@ -1646,7 +1646,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "Ты говори́шь по-испа́нски?",
-    "es": "¿Hablás español?"
+    "es": "¿Hablas español?"
    },
    "variantes": [
     {
@@ -1703,7 +1703,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "У тебя́ есть брат?",
-    "es": "¿Tenés hermanos?"
+    "es": "¿Tienes hermanos?"
    },
    "variantes": [
     {
@@ -1744,7 +1744,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "Расскажи́ о семье́.",
-    "es": "Contame de tu familia."
+    "es": "Cuéntame de tu familia."
    },
    "variantes": [
     {
@@ -1786,7 +1786,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "У тебя́ есть кот?",
-    "es": "¿Tenés un gato?"
+    "es": "¿Tienes un gato?"
    },
    "variantes": [
     {
@@ -1879,7 +1879,7 @@ const CHARLA = {
     {
      "ru": "Москва́ — мой го́род. Она́ больша́я и краси́вая!",
      "tr": "Maskvá — moi górat. Aná balsháya i krasívaya!",
-     "es": "Moscú es mi ciudad. ¡Es grande y linda!"
+     "es": "Moscú es mi ciudad. ¡Es grande y bonita!"
     }
    ]
   },
@@ -1892,7 +1892,7 @@ const CHARLA = {
    ],
    "idea": {
     "ru": "Ты занима́ешься спо́ртом?",
-    "es": "¿Hacés deporte?"
+    "es": "¿Haces deporte?"
    },
    "resp": [
     {
@@ -1920,7 +1920,7 @@ const CHARLA = {
     {
      "ru": "Мой друг Лу́кас — аргенти́нец, из Буэ́нос-А́йреса. Он у́чит ру́сский здесь, в Москве́.",
      "tr": "Moi druk Lúkas — arguintínits, is Buénasáirisa. On úchit rússkii zdies, v Maskvié.",
-     "es": "Mi amigo Lucas es argentino, de Buenos Aires. Estudia ruso acá, en Moscú."
+     "es": "Mi amigo Lucas es argentino, de Buenos Aires. Estudia ruso aquí, en Moscú."
     }
    ]
   },
@@ -1982,7 +1982,7 @@ const CHARLA = {
     {
      "ru": "Уже́ ухо́дишь? Ну ла́дно. Пока́, {nombre}! 👋",
      "tr": "Uzhé ujódish? Nu ládna. Paká, {nombre}!",
-     "es": "¿Ya te vas? Bueno. ¡Chau, {nombre}!"
+     "es": "¿Ya te vas? Bueno. ¡Adiós, {nombre}!"
     }
    ]
   },
@@ -2065,12 +2065,12 @@ const CHARLA = {
   "noSe": {
    "ru": "Хм… Не зна́ю, что сказа́ть 😅 Спроси́ что́-нибудь друго́е!",
    "tr": "Jm… Nie znáyu, shto skazát Sprasí shtónibut drugóyi!",
-   "es": "Mmm… No sé qué decirte. ¡Preguntame otra cosa!"
+   "es": "Mmm… No sé qué decirte. ¡Pregúntame otra cosa!"
   },
   "latin": {
    "ru": "Ой, я не понима́ю по-испа́нски! 😅 Напиши́ по-ру́сски.",
    "tr": "Oi, ya nie panimáyu paispánski! Napishí parússki.",
-   "es": "¡Uy, no entiendo español! Escribime en ruso."
+   "es": "¡Uy, no entiendo español! Escríbeme en ruso."
   },
   "hola": {
    "ru": "«¡Hola!» — э́то я зна́ю! 😄 Но дава́й по-ру́сски.",

@@ -54,20 +54,20 @@ function SeccionCuenta({ c }) {
   const ultima = nube && nube.meta && nube.meta.subido ? "Último guardado: " + fechaCorta(new Date(nube.meta.subido).toISOString()) + "." : "";
   const salir = async () => { setError(""); const ok = await A.cerrarSesion(false); if (!ok) setPaso("salir-sin-red"); };
   const borrar = async () => { setPaso("borrando"); setError("");
-    try { await A.borrarCuenta(); } catch (e) { setPaso("borrar"); setError(navigator.onLine ? "No se pudo eliminar. Probá de nuevo en un momento." : "Para eliminar la cuenta necesitás conexión."); } };
+    try { await A.borrarCuenta(); } catch (e) { setPaso("borrar"); setError(navigator.onLine ? "No se pudo eliminar. Prueba de nuevo en un momento." : "Para eliminar la cuenta necesitas conexión."); } };
   return h(React.Fragment, null,
     h("div", { style: { fontSize: 12, color: c.textMuted } }, "Entraste como"),
     h("div", { style: { fontSize: 16, fontWeight: 700, color: c.text, marginTop: 2, wordBreak: "break-all" } }, A.email() || "…"),
     h("div", { style: { fontSize: 13.5, color: c.textSub, lineHeight: 1.6, marginTop: 10 } }, t, ultima ? " " + ultima : ""),
     paso === "salir-sin-red"
       ? h("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: ROJO_TXT, background: ROJO + "22", borderRadius: 10, padding: "10px 12px", marginTop: 12 } },
-          "No hay conexión y hay cambios que todavía no se guardaron en la nube. Si cerrás la sesión ahora, se pierden.",
+          "No hay conexión y hay cambios que todavía no se guardaron en la nube. Si cierras la sesión ahora, se pierden.",
           boton(c, "Cerrar sesión igual", () => A.cerrarSesion(true), "peligro"), boton(c, "Esperar", () => setPaso(null), "sec"))
       : boton(c, "Cerrar sesión", salir, "sec"),
     h("div", { style: { height: 1, background: c.border, margin: "18px 0 6px" } }),
     paso === "borrar" || paso === "borrando"
       ? h("div", { style: { fontSize: 13.5, lineHeight: 1.55, color: c.text, background: ROJO + "22", border: `1px solid ${ROJO}`, borderRadius: 10, padding: "12px", marginTop: 10 } },
-          h("b", null, "¿Eliminar todo?"), " Se borran tu cuenta, tu progreso en la nube y todo lo guardado en este teléfono (progreso, cuaderno y notas). No se puede deshacer. Si querés conservar algo, antes guardá una copia de seguridad.",
+          h("b", null, "¿Eliminar todo?"), " Se borran tu cuenta, tu progreso en la nube y todo lo guardado en este teléfono (progreso, cuaderno y notas). No se puede deshacer. Si quieres conservar algo, antes guarda una copia de seguridad.",
           error && h("div", { style: { color: ROJO_TXT, marginTop: 8 } }, error),
           boton(c, paso === "borrando" ? "Eliminando…" : "Sí, eliminar todo", borrar, "peligro", { disabled: paso === "borrando" }),
           boton(c, "Cancelar", () => { setPaso(null); setError(""); }, "sec"))
@@ -78,18 +78,18 @@ function SeccionAccesos({ c }) {
   const [lista, setLista] = useState(null);
   const [mail, setMail] = useState(""), [nota, setNota] = useState("");
   const [msg, setMsg] = useState(null), [quitando, setQuitando] = useState(null);
-  const cargar = async () => { try { setLista(await A.accesos()); } catch (e) { setMsg({ err: true, t: "No se pudo cargar la lista. Revisá la conexión." }); } };
+  const cargar = async () => { try { setLista(await A.accesos()); } catch (e) { setMsg({ err: true, t: "No se pudo cargar la lista. Revisa la conexión." }); } };
   useEffect(() => { cargar(); }, []);
   const agregar = async () => { setMsg(null);
     try { await A.habilitar(mail, nota.trim()); setMsg({ t: mail.trim().toLowerCase() + " ya puede entrar." }); setMail(""); setNota(""); cargar(); }
     catch (e) { const t = String(e && e.message || e);
-      setMsg({ err: true, t: t === "mail" ? "Revisá el mail: parece incompleto." : /duplicate|unique/i.test(t) ? "Ese mail ya estaba habilitado." : "No se pudo habilitar. Probá de nuevo." }); } };
+      setMsg({ err: true, t: t === "mail" ? "Revisa el mail: parece incompleto." : /duplicate|unique/i.test(t) ? "Ese mail ya estaba habilitado." : "No se pudo habilitar. Prueba de nuevo." }); } };
   const quitar = async email => { setMsg(null);
     try { await A.quitar(email); setQuitando(null); setMsg({ t: email + " ya no puede entrar. Se borraron su cuenta y su progreso." }); cargar(); }
-    catch (e) { setMsg({ err: true, t: "No se pudo quitar. Probá de nuevo." }); } };
+    catch (e) { setMsg({ err: true, t: "No se pudo quitar. Prueba de nuevo." }); } };
   const inp = { width: "100%", boxSizing: "border-box", fontSize: 16, padding: "12px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", marginTop: 8, outline: "none" };
   return h(React.Fragment, null,
-    h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, "Solo entran los mails de esta lista. Para que alguien entre, agregá su mail y avisale: entra con el código que le llega por mail."),
+    h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, "Solo entran los mails de esta lista. Para que alguien entre, agrega su mail y avísale: entra con el código que le llega por mail."),
     h("input", { type: "email", inputMode: "email", autoCapitalize: "off", autoCorrect: "off", spellCheck: false, placeholder: "mail@ejemplo.com", value: mail, onInput: e => setMail(e.target.value), style: Object.assign({}, inp, { marginTop: 12 }) }),
     h("input", { type: "text", placeholder: "Nota (opcional): quién es", value: nota, onInput: e => setNota(e.target.value), style: inp }),
     boton(c, "Habilitar", agregar, null, { disabled: !mail.trim() }),
@@ -131,7 +131,7 @@ function App() {
       lbl("Transliteración"),
       caja(
         h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
-          "La transliteración (", h("i", null, "jarashó"), ") ayuda a leer al principio. Cuando ya leés el cirílico, ocultarla te obliga a leer en ruso. Se sigue viendo en Alfabeto y en la Unidad 1, donde la pronunciación es lo que se aprende, y en los diálogos la podés volver a prender cuando quieras."),
+          "La transliteración (", h("i", null, "jarashó"), ") ayuda a leer al principio. Cuando ya lees el cirílico, ocultarla te obliga a leer en ruso. Se sigue viendo en Alfabeto y en la Unidad 1, donde la pronunciación es lo que se aprende, y en los diálogos la puedes volver a prender cuando quieras."),
         h("div", { style: { display: "flex", gap: 8, marginTop: 12 } }, chip("si", "Mostrar"), chip("no", "Ocultar"))),
       lbl("Copia de seguridad"),
       caja(h(AzCopiaSeguridad, { c }))));

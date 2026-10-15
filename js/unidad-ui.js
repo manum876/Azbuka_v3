@@ -259,7 +259,7 @@
     return h("div", null,
       h("div", { className: "u-des" }, d.partes.map((x, i) => h("button", { key: i, className: "u-des-p" + (sel === i ? " on" : ""), onClick: () => { setSel(i); azHablarRu(sinLlaves(x.txt)); } },
         h("span", { className: "u-des-ru", lang: "ru" }, sinLlaves(x.txt)), h("span", { className: "u-des-rol" }, x.rol)))),
-      h("div", { className: "u-ej-por", style: { marginTop: 8 } }, azFmtLink(p ? (p.nota || p.rol) : "Tocá cada parte para ver qué hace en la frase.")),
+      h("div", { className: "u-ej-por", style: { marginTop: 8 } }, azFmtLink(p ? (p.nota || p.rol) : "Toca cada parte para ver qué hace en la frase.")),
       d.es && h("div", { className: "u-ej-es", style: { marginTop: 6 } }, "«" + d.es + "»"));
   }
   function Errores({ lista }) {
@@ -302,7 +302,7 @@
   function Seccion({ x, extra }) {
     return h("div", { id: x.id ? "regla-" + x.id : undefined },
       x.titulo && h("div", { className: "u-sec" }, x.titulo),
-      x.antes && h(Pregunta, { q: x.antes, rotulo: "Antes de leer: ¿te animás?" }),
+      x.antes && h(Pregunta, { q: x.antes, rotulo: "Antes de leer: ¿te animas?" }),
       h(Cuerpo, { x }),
       extra && extra(x),
       x.mas && h(MasAFondo, { m: x.mas }),
@@ -416,7 +416,7 @@
           h("button", { className: "pair-btn", onClick: () => setTr(v => !v), style: chipSt(c, tr) }, "Transliteración"),
           h("button", { className: "pair-btn", onClick: () => setEs(v => !v), style: chipSt(c, es) }, "Traducción")),
         h("div", { className: "u-text", style: { fontSize: 13, marginBottom: 12 } },
-          grabar ? "Escuchá cada línea, grabate diciéndola y compará." : "Para practicar la lectura, apagá la transliteración y la traducción."),
+          grabar ? "Escucha cada línea, grábate diciéndola y compara." : "Para practicar la lectura, apaga la transliteración y la traducción."),
         d.lineas.map((l, i) => h("div", { key: i, className: "u-card", style: { padding: "12px 14px", marginBottom: 8 } },
           h("div", { style: { display: "flex", gap: 10, alignItems: "flex-start" } },
             h("div", { style: { flex: 1, minWidth: 0 } },
@@ -450,7 +450,7 @@
         h("div", { style: { fontSize: 14, color: c.textMuted, marginBottom: 14 } }, (i + 1) + " de " + orden.length + (nv ? " · " + (nv === 2 ? "dominada" : "aprendiendo") : "")),
         h("div", { className: "fc", role: "button", tabIndex: 0, onClick: () => { if (!vuelta && !nv) azSetItemLevel("lex:" + e.id, 1, true); if (!vuelta) azHablarRu(e.ru); setVuelta(v => !v); } },
           h("div", { lang: "ru", style: { fontSize: 38, fontWeight: 800, color: c.gold, lineHeight: 1.2, wordBreak: "break-word" } }, e.acento || e.ru),
-          !vuelta ? h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, "Tocá para ver qué significa")
+          !vuelta ? h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, "Toca para ver qué significa")
             : h(React.Fragment, null,
                 h("div", { className: "az-tl", style: { fontSize: 15, color: c.textSub, fontStyle: "italic", marginTop: 8 } }, e.translit),
                 h("div", { style: { fontSize: 20, fontWeight: 700, color: c.text, marginTop: 12 } }, e.senses.slice(0, 2).map(x => x.es).join("; ")),
@@ -509,7 +509,7 @@
               h("div", { lang: "ru", style: { fontSize: 20, fontWeight: 800 } }, h(AzPalabra, { texto: s.e.acento, id: s.e.id })),
               h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 2 } }, s.e.senses[0].es + " · ", h("span", { lang: "ru", style: { color: c.text, fontWeight: 700 } }, s.frase))),
             h("button", { className: "play", onClick: () => azHablarRu(s.frase), "aria-label": "Escuchar" }, "▶"))
-        : onTocar ? null : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Tocá una ciudad."));   /* en una actividad, la consigna la da la página */
+        : onTocar ? null : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Toca una ciudad."));   /* en una actividad, la consigna la da la página */
   }
   function AzMapaPaises({ c }) {
     const [vista, setVista] = useState("europa");
@@ -531,7 +531,7 @@
               h("div", { lang: "ru", style: { fontSize: 20, fontWeight: 800 } }, h(AzPalabra, { texto: e.acento, id: e.id })),
               h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 2 } }, e.senses[0].es + " · ", h("span", { lang: "ru", style: { color: c.text, fontWeight: 700 } }, "я из " + gen))),
             h("button", { className: "play", onClick: () => azHablarRu("Я из " + gen), "aria-label": "Escuchar" }, "▶"))
-        : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Tocá un país dorado."));
+        : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Toca un país dorado."));
   }
 
   function AzProyecto({ mod, c, green, clave, fuente, aviso }) {
@@ -546,12 +546,12 @@
       h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 14 } }, mod.requisitos.map((r, i) =>
         h("div", { key: i, className: "req" }, h("span", { style: { color: ok[i] ? green : c.textMuted, fontWeight: 800 } }, ok[i] ? "✓" : "○"), h("span", { style: { color: ok[i] ? c.text : c.textSub } }, r.txt)))),
       aviso && h("div", { className: "u-dest" }, aviso),
-      h("textarea", { className: "proy", lang: "ru", value: txt, placeholder: "Escribí en ruso…", onInput: e => cambiar(e.target.value) }),
-      ok.every(Boolean) && h("div", { style: { marginTop: 10, color: green, fontWeight: 700, fontSize: 14 } }, "¡Están todos los puntos! Leelo en voz alta y guardalo en el cuaderno."),
+      h("textarea", { className: "proy", lang: "ru", value: txt, placeholder: "Escribe en ruso…", onInput: e => cambiar(e.target.value) }),
+      ok.every(Boolean) && h("div", { style: { marginTop: 10, color: green, fontWeight: 700, fontSize: 14 } }, "¡Están todos los puntos! Léelo en voz alta y guárdalo en el cuaderno."),
       h("button", { className: "ubtn", disabled: !txt.trim(), onClick: () => setRev(azRevisarTexto(txt, mod.requisitos, mod.consejos)) }, "Revisar mi texto"),
       rev && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
         !rev.dudas.length && !rev.faltan.length && !rev.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: 14 } }, "✓ No encontré errores y están todos los puntos."),
-        rev.dudas.map((d, i) => h("div", { key: "d" + i, className: "u-truco", lang: "ru" }, "«" + d.t + "» no la encuentro en el diccionario" + (d.sugerencia ? ". ¿Quisiste decir «" + d.sugerencia + "»?" : ": revisá cómo se escribe."))),
+        rev.dudas.map((d, i) => h("div", { key: "d" + i, className: "u-truco", lang: "ru" }, "«" + d.t + "» no la encuentro en el diccionario" + (d.sugerencia ? ". ¿Quisiste decir «" + d.sugerencia + "»?" : ": revisa cómo se escribe."))),
         rev.tips.map((t, i) => h("div", { key: "t" + i, className: "u-truco" }, azFmt(t))),
         rev.faltan.length > 0 && h("div", { className: "u-truco" }, "Falta: " + rev.faltan.join(", ").toLowerCase() + "."),
         h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, "La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática.")),
@@ -567,7 +567,7 @@
   const AZ_TALLER_PASOS = ["Planificar", "Escribir", "Revisar", "Reescribir"];
   const AZ_TALLER_CHEQUEO = ["¿Cada verbo va con su persona (я чита́ю, она́ чита́ет)?", "¿El pasado tiene el género correcto (он был, она́ была́)?",
     "¿Después de cada preposición va el caso que pide (в Москве́, с дру́гом, у меня́)?", "¿Usaste conectores (снача́ла, пото́м, поэ́тому, потому́ что, но)?",
-    "¿El aspecto dice lo que querés: proceso o resultado?"];
+    "¿El aspecto dice lo que quieres: proceso o resultado?"];
   /* Frases de un texto del alumno (06/10/2026): termina una frase el punto, ! o ?, y también el
      cambio de renglón (muchos escriben una frase por renglón sin punto) */
   function azFrases(t) { return String(t || "").split(/(?<=[.!?…])\s*|\n+/).map(x => x.trim()).filter(x => /[А-Яа-яЁё]/.test(x)); }
@@ -591,7 +591,7 @@
     const revision = t => azRevisarTexto(t, req, tarea.consejos || []);
     const cajaRev = r => r && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
       !r.dudas.length && !r.faltan.length && !r.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: 14 } }, "✓ No encontré errores y están todos los puntos."),
-      r.dudas.map((x, i) => h("div", { key: "d" + i, className: "u-truco", lang: "ru" }, "«" + x.t + "» no la encuentro en el diccionario" + (x.sugerencia ? ". ¿Quisiste decir «" + x.sugerencia + "»?" : ": revisá cómo se escribe."))),
+      r.dudas.map((x, i) => h("div", { key: "d" + i, className: "u-truco", lang: "ru" }, "«" + x.t + "» no la encuentro en el diccionario" + (x.sugerencia ? ". ¿Quisiste decir «" + x.sugerencia + "»?" : ": revisa cómo se escribe."))),
       r.tips.map((x, i) => h("div", { key: "t" + i, className: "u-truco" }, azFmt(x))),
       r.faltan.length > 0 && h("div", { className: "u-truco" }, "Falta: " + r.faltan.join(", ").toLowerCase() + "."),
       h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, "La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática."));
@@ -603,24 +603,24 @@
         h("button", { key: p, className: "ubtn" + (i === paso ? "" : " sec"), style: { marginTop: 0, flex: "1 1 40%", fontSize: 13.5, padding: "9px 6px" }, disabled: !puede[i], onClick: () => ir(i) }, (i + 1) + " · " + p))),
       h("div", { className: "u-sec" }, "Paso " + (paso + 1) + " de 4 · " + AZ_TALLER_PASOS[paso]),
       paso === 0 && h(React.Fragment, null,
-        h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Antes de escribir, anotá tus ideas: palabras sueltas, en ruso o en español. Estas preguntas te pueden guiar:"),
+        h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Antes de escribir, anota tus ideas: palabras sueltas, en ruso o en español. Estas preguntas te pueden guiar:"),
         h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 8 } }, tarea.ideas.map((q, i) => h("div", { key: i, className: "req" }, h("span", { style: { color: c.gold, fontWeight: 800 } }, "·"), h("span", null, azFmt(q))))),
         area("plan", "es", "Tus ideas…"),
         h("button", { className: "ubtn", onClick: () => ir(1) }, "Escribir el texto")),
       paso === 1 && h(React.Fragment, null,
         aviso && h("div", { className: "u-dest" }, aviso),
         d.plan.trim() && texto(d.plan, "Tus ideas"),
-        area("v1", "ru", "Escribí en ruso…"), contador(d.v1), lista(d.v1),
+        area("v1", "ru", "Escribe en ruso…"), contador(d.v1), lista(d.v1),
         h("button", { className: "ubtn", disabled: !d.v1.trim(), onClick: () => ir(2) }, "Revisar")),
       paso === 2 && h(React.Fragment, null,
         texto(d.v1, "Tu primera versión"),
         h("button", { className: "ubtn sec", onClick: () => setRev(revision(d.v1)) }, "Revisión automática"),
         cajaRev(rev),
-        h("div", { className: "u-sec" }, "Revisalo vos"),
+        h("div", { className: "u-sec" }, "Revísalo tú"),
         h("div", { className: "u-card", style: { padding: "8px 16px" } }, AZ_TALLER_CHEQUEO.map((q, i) => h("div", { key: i, className: "req" }, h("span", { style: { color: c.gold, fontWeight: 800 } }, "?"), h("span", null, q)))),
         h("button", { className: "ubtn", onClick: () => ir(3) }, "Reescribir")),
       paso === 3 && h(React.Fragment, null,
-        h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Corregí lo que encontraste y mejoralo: sumá un conector, una razón o un detalle. La primera versión queda guardada."),
+        h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Corrige lo que encontraste y mejóralo: suma un conector, una razón o un detalle. La primera versión queda guardada."),
         area("v2", "ru", "Tu versión final…"), contador(d.v2), lista(d.v2),
         h("button", { className: "ubtn sec", disabled: !d.v2.trim(), onClick: () => setRev(revision(d.v2)) }, "Revisar la versión final"),
         cajaRev(rev),
@@ -644,7 +644,7 @@
             h("span", { style: { fontSize: 14, fontWeight: 700, color: c.text } }, p.label),
             h("span", { style: { fontSize: 14, fontWeight: 800, color: green } }, p.valor + " de " + p.total)),
           h("div", { className: "pbar-track" }, h("div", { className: "pbar-fill", style: { width: (p.valor / Math.max(1, p.total) * 100) + "%" } })))),
-        h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 10, lineHeight: 1.5 } }, "Se marcan solas cuando las acertás en ejercicios distintos, en días distintos. También podés marcarlas a mano en las tarjetas.")),
+        h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 10, lineHeight: 1.5 } }, "Se marcan solas cuando las aciertas en ejercicios distintos, en días distintos. También puedes marcarlas a mano en las tarjetas.")),
       h("button", { className: "ubtn", onClick: onPracticar }, "Practicar la unidad"),
       h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 6, textAlign: "center" } }, "Ejercicios de todo lo que viste hasta el módulo " + visto + "."),
       h("div", { className: "u-sec" }, "Módulos"),
@@ -695,7 +695,7 @@
         x.es && h("div", { className: "grp-es" }, x.es));
     };
     return h(React.Fragment, null,
-      h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una palabra para escuchar cómo suena."),
+      h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Toca una palabra para escuchar cómo suena."),
       h("div", { className: "grp-wrap", style: { marginTop: 8 } }, h("table", { className: "grp" + (encabezados.length >= 4 ? " compacta" : "") },
         h("thead", null, h("tr", null, encabezados.map((t, k) => h("th", { key: k }, t)))),
         h("tbody", null, filas.map((f, i) => h("tr", { key: i }, f.map(celda)))))));

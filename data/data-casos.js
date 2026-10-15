@@ -110,7 +110,7 @@
                     El acusativo puede ser un par [inanimado, animado]
                     (три / трёх).
      "indeclinable" no cambia (кафе́, метро́, его́ como posesivo).
-     nota   (opcional) aclaración de uso en español rioplatense.
+     nota   (opcional) aclaración de uso en español.
 
    null en una posición = esa forma no existe o no se usa. La página la
    muestra como "—".

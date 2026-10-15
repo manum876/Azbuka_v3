@@ -161,7 +161,7 @@ function App() {
         h("div", { className: "u-sec" }, "Diálogos para escuchar y grabarte"),
         h(AzListaDialogos, { ids: mod.dialogos, onAbrir: id => setDialogo({ id, grabar: true }) }),
         h("div", { className: "u-sec" }, "Chats"),
-        h("div", { className: "u-text", style: { fontSize: 14 } }, "Un personaje te escribe y vos contestás en ruso. Hay varias respuestas válidas: contestá como quieras, con tu nombre y tu país."),
+        h("div", { className: "u-text", style: { fontSize: 14 } }, "Un personaje te escribe y tú contestas en ruso. Hay varias respuestas válidas: contesta como quieras, con tu nombre y tu país."),
         U2_CHATS.map(ch => h("div", { key: ch.id, className: "u-card mod", role: "button", tabIndex: 0, onClick: () => chat(ch.id) },
           h("div", { style: { flex: 1, minWidth: 0 } }, h("div", { className: "mod-t" }, ch.titulo), h("div", { className: "mod-d", lang: "ru" }, personaje(ch.p).ru + ": " + ch.pasos[0].bot)))),
         h("button", { className: "ubtn", style: { marginTop: 18 }, onClick: () => practicarModulo(mod) }, "Practicar conversaciones")),

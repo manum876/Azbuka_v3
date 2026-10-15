@@ -2630,7 +2630,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "todos, todas",
-    "definitionEs": "Todas las personas o cosas mencionadas, en plural: все здесь = están todos acá.",
+    "definitionEs": "Todas las personas o cosas mencionadas, en plural: все здесь = están todos aquí.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -3808,7 +3808,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "si",
-    "definitionEs": "Conjunción condicional. Introduce una condición: 'если ты хочешь' = si querés.",
+    "definitionEs": "Conjunción condicional. Introduce una condición: 'если ты хочешь' = si quieres.",
     "source": "redactado"
    }
   ],
@@ -11576,7 +11576,7 @@ const LEXICON_COMER = [
   "ipa": "vʑˈɑtʲ",
   "senses": [
    {
-    "es": "tomar, agarrar, coger, asir",
+    "es": "tomar, coger (España), agarrar (América), asir",
     "definitionEs": "Tomar algo con la mano o hacerse cargo de algo (aspecto perfectivo).",
     "source": "freedict-directo + redactado"
    }
@@ -11765,7 +11765,7 @@ const LEXICON_COMER = [
   "ipa": "dʲˈenʲɡʲɪ",
   "senses": [
    {
-    "es": "dinero, pasta, plata",
+    "es": "dinero, pasta (España), plata (América)",
     "definitionEs": "Medio que se usa para pagar bienes y servicios.",
     "source": "freedict-directo+inverso"
    }
@@ -12358,7 +12358,7 @@ const LEXICON_COMER = [
   "ipa": "mʌʃˈynʌ",
   "senses": [
    {
-    "es": "auto, máquina",
+    "es": "coche, auto (América), máquina",
     "definitionEs": "Automóvil; también, aparato formado por varias piezas que realiza un trabajo.",
     "source": "freedict-directo+inverso"
    }
@@ -17349,7 +17349,7 @@ const LEXICON_COMER = [
     "source": "redactado"
    },
    {
-    "es": "¡chau!",
+    "es": "¡adiós!, ¡hasta luego!, ¡chau! (América)",
     "definitionEs": "Despedida informal, con amigos y gente de confianza. La formal es до свида́ния.",
     "source": "redactado"
    }
@@ -20316,7 +20316,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "es imposible, no se puede",
-    "definitionEs": "Indica que algo no está permitido o no es posible: здесь нельзя́ кури́ть = acá no se puede fumar.",
+    "definitionEs": "Indica que algo no está permitido o no es posible: здесь нельзя́ кури́ть = aquí no se puede fumar.",
     "source": "freedict-directo+inverso"
    }
   ],
@@ -22646,7 +22646,7 @@ const LEXICON_COMER = [
   "ipa": "kvʌrtʲˈirʌ",
   "senses": [
    {
-    "es": "departamento, piso, apartamento",
+    "es": "apartamento, piso (España), departamento (América)",
     "definitionEs": "Vivienda dentro de un edificio.",
     "source": "freedict-directo+inverso"
    }
@@ -30490,8 +30490,8 @@ const LEXICON_COMER = [
   "ipa": "brˈɑtʲ",
   "senses": [
    {
-    "es": "tomar, agarrar, coger",
-    "definitionEs": "Agarrar algo con la mano (aspecto imperfectivo de 'взять').",
+    "es": "tomar, coger (España), agarrar (América)",
+    "definitionEs": "Tomar algo con la mano (aspecto imperfectivo de 'взять').",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -34746,7 +34746,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "número",
-    "definitionEs": "Número que identifica algo o que se le asigna: de teléfono, de una casa, de un colectivo.",
+    "definitionEs": "Número que identifica algo o que se le asigna: de teléfono, de una casa, de un autobús.",
     "source": "redactado (basado en FreeDict)"
    },
    {
@@ -39859,7 +39859,7 @@ const LEXICON_COMER = [
   "ipa": "krʌsʲˈivyj",
   "senses": [
    {
-    "es": "bello, hermoso, lindo",
+    "es": "bonito, bello, hermoso, lindo (América)",
     "definitionEs": "Que produce placer estético a la vista.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -50783,7 +50783,7 @@ const LEXICON_COMER = [
    },
    {
     "es": "superficie, área",
-    "definitionEs": "La medida de una superficie: пло́щадь кварти́ры, «la superficie del departamento».",
+    "definitionEs": "La medida de una superficie: пло́щадь кварти́ры, «la superficie del apartamento».",
     "source": "redactado (diccionario de bolsillo)"
    }
   ],
@@ -69734,7 +69734,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pequeño, fino",
-    "definitionEs": "De tamaño reducido o de granos chicos: ме́лкие де́ньги, «plata chica»; ме́лкий дождь, «llovizna».",
+    "definitionEs": "De tamaño reducido o de granos chicos: ме́лкие де́ньги, «dinero suelto»; ме́лкий дождь, «llovizna».",
     "source": "redactado (basado en FreeDict)"
    },
    {
@@ -74881,7 +74881,7 @@ const LEXICON_COMER = [
   "ipa": "dʌvˈɑj",
   "senses": [
    {
-    "es": "dale, vamos (a...)",
+    "es": "vamos (a...), de acuerdo, dale (Río de la Plata)",
     "definitionEs": "Se usa para proponer hacer algo juntos: 'давай пойдём' = vamos.",
     "source": "redactado"
    }
@@ -99903,7 +99903,7 @@ const LEXICON_COMER = [
   "ipa": "bʲɪɭʲˈet",
   "senses": [
    {
-    "es": "boleto, entrada, billete",
+    "es": "billete, entrada, boleto (América)",
     "definitionEs": "Papel o documento que permite el acceso a un lugar o transporte.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -102338,7 +102338,7 @@ const LEXICON_COMER = [
   "ipa": "mˈɑsɭʌ",
   "senses": [
    {
-    "es": "aceite, manteca",
+    "es": "aceite, mantequilla, manteca (Río de la Plata)",
     "definitionEs": "Sustancia grasa, líquida o sólida, usada para cocinar o como lubricante.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -114179,7 +114179,7 @@ const LEXICON_COMER = [
   "ipa": "ʌftˈobus",
   "senses": [
    {
-    "es": "autobús, colectivo",
+    "es": "autobús, colectivo (Argentina)",
     "definitionEs": "Vehículo grande para el transporte de muchos pasajeros.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -117048,7 +117048,7 @@ const LEXICON_COMER = [
   "ipa": "kʌmpʲˈjutɛr",
   "senses": [
    {
-    "es": "computadora, ordenador",
+    "es": "ordenador, computadora (América)",
     "definitionEs": "Máquina electrónica que procesa información.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -120454,7 +120454,7 @@ const LEXICON_COMER = [
   "ipa": "dʌvˈɑjtʲɪ",
   "senses": [
    {
-    "es": "dale, vamos (formal/plural)",
+    "es": "vamos (formal/plural), de acuerdo, dale (Río de la Plata)",
     "definitionEs": "Forma plural o formal de 'давай', para proponer hacer algo juntos.",
     "source": "redactado"
    }
@@ -126729,7 +126729,7 @@ const LEXICON_COMER = [
   "ipa": "rˈutʃʲkʌ",
   "senses": [
    {
-    "es": "lapicera, bolígrafo",
+    "es": "bolígrafo, lapicera (Río de la Plata)",
     "definitionEs": "Instrumento para escribir con tinta.",
     "source": "redactado (basado en FreeDict)"
    },
@@ -128644,7 +128644,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "esperar (un momento, una vez)",
-    "definitionEs": "Esperar un rato o hasta que pase algo, en una ocasión concreta: Подожди́! («¡esperá!»), Я тебя́ подожду́ («te espero»). Es la forma de ждать para una vez y para el futuro.",
+    "definitionEs": "Esperar un rato o hasta que pase algo, en una ocasión concreta: Подожди́! («¡espera!»), Я тебя́ подожду́ («te espero»). Es la forma de ждать para una vez y para el futuro.",
     "source": "redactado",
     "aspectualPartner": [
      "CMR-00271"
@@ -130464,7 +130464,7 @@ const LEXICON_COMER = [
   "ipa": "ʌtʃʲkʲˈi",
   "senses": [
    {
-    "es": "anteojos, lentes, gafas",
+    "es": "gafas, anteojos (América), lentes (América)",
     "definitionEs": "Objeto con dos lentes que se coloca sobre la nariz y las orejas para ver mejor.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -131539,7 +131539,7 @@ const LEXICON_COMER = [
   "ipa": "sˈumkʌ",
   "senses": [
    {
-    "es": "bolso, cartera, bolsa",
+    "es": "bolso, bolsa, cartera (América)",
     "definitionEs": "Objeto con asas usado para llevar cosas.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -146364,7 +146364,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "escuchar",
-    "definitionEs": "Escuchar algo de principio a fin o durante un rato (aspecto perfectivo de 'слушать'): Послу́шай! («¡escuchá!»).",
+    "definitionEs": "Escuchar algo de principio a fin o durante un rato (aspecto perfectivo de 'слушать'): Послу́шай! («¡escucha!»).",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -146597,7 +146597,7 @@ const LEXICON_COMER = [
   "ipa": "mʲɪtrˈo",
   "senses": [
    {
-    "es": "metro, subte",
+    "es": "metro, subte (Buenos Aires)",
     "definitionEs": "Tren eléctrico urbano que circula generalmente bajo tierra.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -162297,7 +162297,7 @@ const LEXICON_COMER = [
   "ipa": "tʃʲɪmʌdˈɑn",
   "senses": [
    {
-    "es": "valija, maleta",
+    "es": "maleta, valija (Río de la Plata)",
     "definitionEs": "Recipiente con asa usado para llevar ropa y objetos personales al viajar.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -167364,7 +167364,7 @@ const LEXICON_COMER = [
   "ipa": "kˈurtkʌ",
   "senses": [
    {
-    "es": "campera, chaqueta",
+    "es": "chaqueta, campera (Río de la Plata)",
     "definitionEs": "Prenda de abrigo corta que se usa sobre la ropa.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -171987,7 +171987,7 @@ const LEXICON_COMER = [
   "ipa": "kʌrtˈoʃkʌ",
   "senses": [
    {
-    "es": "papa, patata",
+    "es": "patata, papa (América)",
     "definitionEs": "Tubérculo comestible, base de muchos platos, cultivado bajo tierra.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -172722,7 +172722,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pata, garra",
-    "definitionEs": "Extremidad de un animal usada para caminar o agarrar.",
+    "definitionEs": "Extremidad de un animal usada para caminar o sujetar.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -182670,7 +182670,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ratón",
-    "definitionEs": "Pequeño roedor de cola larga. También el dispositivo periférico de una computadora.",
+    "definitionEs": "Pequeño roedor de cola larga. También el dispositivo periférico de un ordenador.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -187174,7 +187174,7 @@ const LEXICON_COMER = [
   "ipa": "sˈok",
   "senses": [
    {
-    "es": "jugo",
+    "es": "zumo, jugo (América)",
     "definitionEs": "Líquido que se extrae de una fruta o verdura.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -199005,7 +199005,7 @@ const LEXICON_COMER = [
   "ipa": "kʌmpʲˈjutɛrnyj",
   "senses": [
    {
-    "es": "informático, de computadora",
+    "es": "informático, de ordenador, de computadora (América)",
     "definitionEs": "Relativo a las computadoras.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -208139,7 +208139,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ratoncito; mouse (informal)",
-    "definitionEs": "Diminutivo de ratón. También se usa para el dispositivo periférico de una computadora.",
+    "definitionEs": "Diminutivo de ratón. También se usa para el dispositivo periférico de un ordenador.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -225535,7 +225535,7 @@ const LEXICON_COMER = [
   "ipa": "xʌɭʌdʲˈiɭʲnʲɪk",
   "senses": [
    {
-    "es": "heladera, refrigerador",
+    "es": "nevera, frigorífico, heladera (Río de la Plata), refrigerador (América)",
     "definitionEs": "Electrodoméstico que mantiene fríos los alimentos.",
     "source": "redactado"
    }
@@ -229120,7 +229120,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "portezuela, puerta pequeña",
-    "definitionEs": "Puerta pequeña, como la de un auto o un mueble.",
+    "definitionEs": "Puerta pequeña, como la de un coche o un mueble.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -244359,7 +244359,7 @@ const LEXICON_COMER = [
   "ipa": "ˈjupkʌ",
   "senses": [
    {
-    "es": "pollera",
+    "es": "falda, pollera (Río de la Plata)",
     "definitionEs": "Prenda femenina que cubre desde la cintura hacia abajo (en España, «falda»).",
     "source": "redactado (basado en FreeDict)"
    }
@@ -259472,7 +259472,7 @@ const LEXICON_COMER = [
   "ipa": "ɡʌstʲˈinʌjʌ",
   "senses": [
    {
-    "es": "sala, living",
+    "es": "salón, sala, living (Río de la Plata)",
     "definitionEs": "Habitación de la casa destinada a recibir visitas.",
     "source": "redactado"
    }
@@ -260752,8 +260752,8 @@ const LEXICON_COMER = [
   "ipa": "mʌbʲˈiɭʲnyj",
   "senses": [
    {
-    "es": "móvil; celular (teléfono)",
-    "definitionEs": "Que se puede mover, o relativo al teléfono celular.",
+    "es": "móvil; teléfono móvil, celular (América)",
+    "definitionEs": "Que se puede mover, o relativo al teléfono móvil.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -266372,7 +266372,7 @@ const LEXICON_COMER = [
   "ipa": "krˈɑn",
   "senses": [
    {
-    "es": "grifo, canilla",
+    "es": "grifo, canilla (Río de la Plata)",
     "definitionEs": "Dispositivo que controla la salida de un líquido, especialmente agua.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -268781,7 +268781,7 @@ const LEXICON_COMER = [
   "ipa": "svʲɪnʲˈjɑ",
   "senses": [
    {
-    "es": "cerdo, chancho",
+    "es": "cerdo, chancho (América)",
     "definitionEs": "Mamífero doméstico criado por su carne.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -268844,7 +268844,7 @@ const LEXICON_COMER = [
   "ipa": "trʌtuˈɑr",
   "senses": [
    {
-    "es": "vereda, acera",
+    "es": "acera, vereda (América)",
     "definitionEs": "Parte de la calle destinada a los peatones.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -279330,7 +279330,7 @@ const LEXICON_COMER = [
   "ipa": "bʲɪnʑˈin",
   "senses": [
    {
-    "es": "gasolina, nafta",
+    "es": "gasolina, nafta (Río de la Plata)",
     "definitionEs": "Combustible líquido derivado del petróleo, usado en motores.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -284759,7 +284759,7 @@ const LEXICON_COMER = [
   "ipa": "tʃʲˈɑjnʲɪk",
   "senses": [
    {
-    "es": "tetera, pava (para agua)",
+    "es": "hervidor, tetera, pava (Río de la Plata)",
     "definitionEs": "Recipiente usado para hervir agua o preparar té.",
     "source": "redactado"
    }
@@ -291241,7 +291241,7 @@ const LEXICON_COMER = [
   "ipa": "ʌfʲɪtsyˈɑnt",
   "senses": [
    {
-    "es": "camarero, mozo",
+    "es": "camarero, mozo (Río de la Plata)",
     "definitionEs": "Persona que atiende a los clientes en un restaurante o bar.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -298826,7 +298826,7 @@ const LEXICON_COMER = [
   "ipa": "zdˈɑtʃʲʌ",
   "senses": [
    {
-    "es": "vuelto, cambio (dinero)",
+    "es": "cambio (dinero), vuelto (América)",
     "definitionEs": "Dinero que se devuelve cuando se paga más de lo debido.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -299963,7 +299963,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "verduras",
-    "definitionEs": "Plantas comestibles usadas en la alimentación, como la zanahoria o la papa.",
+    "definitionEs": "Plantas comestibles usadas en la alimentación, como la zanahoria o la patata.",
     "source": "redactado"
    }
   ],
@@ -301992,7 +301992,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "apurarse, apresurarse",
-    "definitionEs": "Apurarse para hacer algo a tiempo (aspecto perfectivo de 'спешить'): Поспеши́! («¡apurate!»).",
+    "definitionEs": "Apurarse para hacer algo a tiempo (aspecto perfectivo de 'спешить'): Поспеши́! («¡apúrate!»).",
     "source": "manual"
    }
   ],
@@ -305498,7 +305498,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "apurarse, apresurarse",
-    "definitionEs": "Darse prisa (aspecto perfectivo de 'торопиться'): Поторопи́сь! («¡apurate!»).",
+    "definitionEs": "Darse prisa (aspecto perfectivo de 'торопиться'): Поторопи́сь! («¡apúrate!»).",
     "source": "manual"
    }
   ],
@@ -328753,7 +328753,7 @@ const LEXICON_COMER = [
   "ipa": "kʌrtˈofʲɪɭʲ",
   "senses": [
    {
-    "es": "papa",
+    "es": "patata, papa (América)",
     "definitionEs": "Tubérculo comestible. Es la palabra formal: en el habla cotidiana se dice картошка.",
     "source": "redactado"
    }
@@ -330613,7 +330613,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llegar (en un vehículo)",
-    "definitionEs": "Llegar hasta un lugar viajando en auto, colectivo, tren u otro transporte. Se usa con до + genitivo: дое́хать до це́нтра, «llegar al centro».",
+    "definitionEs": "Llegar hasta un lugar viajando en coche, autobús, tren u otro transporte. Se usa con до + genitivo: дое́хать до це́нтра, «llegar al centro».",
     "source": "redactado",
     "aspectualPartner": [
      "CMR-05477"
@@ -330863,7 +330863,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "carta, menú",
-    "definitionEs": "Lista de las comidas y bebidas que ofrece un restaurante o un café; también, el menú de un programa o de un celular. No se declina.",
+    "definitionEs": "Lista de las comidas y bebidas que ofrece un restaurante o un café; también, el menú de un programa o de un móvil. No se declina.",
     "source": "redactado"
    }
   ],
@@ -336355,8 +336355,8 @@ const LEXICON_COMER = [
   "ipa": "nʌudbˈuk",
   "senses": [
    {
-    "es": "notebook, computadora portátil",
-    "definitionEs": "Computadora portátil, que se puede llevar a cualquier lado.",
+    "es": "portátil, ordenador portátil, notebook (América), computadora portátil (América)",
+    "definitionEs": "Ordenador portátil, que se puede llevar a cualquier lado.",
     "source": "redactado"
    }
   ],
@@ -336420,8 +336420,8 @@ const LEXICON_COMER = [
   "ipa": "kʌʃyɭʲˈɵk",
   "senses": [
    {
-    "es": "billetera",
-    "definitionEs": "Objeto chico para llevar la plata y las tarjetas.",
+    "es": "cartera, monedero, billetera (América)",
+    "definitionEs": "Objeto chico para llevar el dinero y las tarjetas.",
     "source": "redactado"
    }
   ],
@@ -336880,7 +336880,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "programador",
-    "definitionEs": "Persona que escribe programas de computadora.",
+    "definitionEs": "Persona que escribe programas de ordenador.",
     "source": "redactado"
    }
   ],
@@ -336946,7 +336946,7 @@ const LEXICON_COMER = [
   "ipa": "ʌfʲɪtsyˈɑntkʌ",
   "senses": [
    {
-    "es": "camarera, moza",
+    "es": "camarera, moza (Río de la Plata)",
     "definitionEs": "Mujer que atiende las mesas en un bar o restaurante.",
     "source": "redactado"
    }
@@ -337722,7 +337722,7 @@ const LEXICON_COMER = [
   "ipa": "zdrˈɑstvuj",
   "senses": [
    {
-    "es": "hola (a una persona que tratás de ты)",
+    "es": "hola (a una persona que tratas de ты)",
     "definitionEs": "El saludo para alguien a quien se trata de ты. Con вы, o con varias personas, se dice здра́вствуйте.",
     "source": "redactado"
    }
@@ -339863,8 +339863,8 @@ const LEXICON_COMER = [
   "ipa": "dʒˈynsy",
   "senses": [
    {
-    "es": "jean, vaquero (pantalón)",
-    "definitionEs": "Pantalón de tela de jean. En ruso va siempre en plural: мои́ джи́нсы, «mi jean».",
+    "es": "vaqueros, jeans, jean (Río de la Plata)",
+    "definitionEs": "Pantalón de tela vaquera. En ruso va siempre en plural, como «vaqueros»: мои́ джи́нсы, «mis vaqueros».",
     "source": "redactado"
    }
   ],
@@ -340054,7 +340054,7 @@ const LEXICON_COMER = [
   "ipa": "fudbˈoɭkʌ",
   "senses": [
    {
-    "es": "remera",
+    "es": "camiseta, remera (Río de la Plata)",
     "definitionEs": "Prenda de manga corta y sin cuello para la parte de arriba.",
     "source": "redactado"
    }
@@ -340245,7 +340245,7 @@ const LEXICON_COMER = [
   "ipa": "svʲˈitɛr",
   "senses": [
    {
-    "es": "pulóver, suéter",
+    "es": "jersey, suéter (América), pulóver (Río de la Plata)",
     "definitionEs": "Prenda tejida de manga larga que se pone por la cabeza.",
     "source": "redactado"
    }
@@ -340374,7 +340374,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "musculosa; camiseta",
-    "definitionEs": "Remera sin mangas, de breteles. En el habla se usa también para cualquier remera.",
+    "definitionEs": "Camiseta sin mangas, de tirantes. En el habla se usa también para cualquier camiseta.",
     "source": "redactado"
    }
   ],
@@ -340818,7 +340818,7 @@ const LEXICON_COMER = [
   "ipa": "sˈumʌtʃʲkʌ",
   "senses": [
    {
-    "es": "cartera (de mujer)",
+    "es": "bolso (de mujer), cartera (América)",
     "definitionEs": "Bolso chico que se lleva en la mano o colgado. Es el diminutivo de су́мка.",
     "source": "redactado"
    }
@@ -341205,7 +341205,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "adorno",
-    "definitionEs": "Lo que se pone para que algo se vea más lindo: ёлочные украше́ния, «adornos del árbol de Navidad».",
+    "definitionEs": "Lo que se pone para que algo se vea más bonito: ёлочные украше́ния, «adornos del árbol de Navidad».",
     "source": "redactado"
    },
    {
@@ -341781,7 +341781,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "salchicha (tipo viena)",
-    "definitionEs": "Salchicha fina que se hierve o se calienta: соси́ски с карто́шкой, «salchichas con papas».",
+    "definitionEs": "Salchicha fina que se hierve o se calienta: соси́ски с карто́шкой, «salchichas con patatas».",
     "source": "redactado"
    }
   ],
@@ -342733,7 +342733,7 @@ const LEXICON_COMER = [
     "source": "redactado"
    },
    {
-    "es": "morrón, ají",
+    "es": "pimiento, morrón (Río de la Plata), ají (América)",
     "definitionEs": "La hortaliza: сла́дкий пе́рец, «morrón»; о́стрый пе́рец, «ají picante».",
     "source": "redactado"
    }
@@ -342796,7 +342796,7 @@ const LEXICON_COMER = [
   "ipa": "kukurˈuzʌ",
   "senses": [
    {
-    "es": "choclo, maíz",
+    "es": "maíz, choclo (América)",
     "definitionEs": "La planta y sus granos: варёная кукуру́за, «choclo hervido».",
     "source": "redactado"
    }
@@ -343120,7 +343120,7 @@ const LEXICON_COMER = [
   "ipa": "pʲˈersʲɪk",
   "senses": [
    {
-    "es": "durazno",
+    "es": "melocotón, durazno (América)",
     "definitionEs": "La fruta de piel aterciopelada, y el árbol que la da.",
     "source": "redactado"
    }
@@ -343183,7 +343183,7 @@ const LEXICON_COMER = [
   "ipa": "ʌbrʲɪkˈos",
   "senses": [
    {
-    "es": "damasco",
+    "es": "albaricoque, damasco (Río de la Plata)",
     "definitionEs": "Fruta chica, anaranjada, de carozo, y el árbol que la da.",
     "source": "redactado"
    }
@@ -343372,7 +343372,7 @@ const LEXICON_COMER = [
   "ipa": "kɭubnʲˈikʌ",
   "senses": [
    {
-    "es": "frutilla(s)",
+    "es": "fresa(s), frutilla(s) (América)",
     "definitionEs": "Las frutillas, como conjunto: варе́нье из клубни́ки, «dulce de frutilla».",
     "source": "redactado"
    }
@@ -343561,7 +343561,7 @@ const LEXICON_COMER = [
   "ipa": "ʌvʌkˈɑdʌ",
   "senses": [
    {
-    "es": "palta",
+    "es": "aguacate, palta (Sudamérica)",
     "definitionEs": "Fruta de pulpa verde y cremosa. No se declina.",
     "source": "redactado"
    }
@@ -343624,7 +343624,7 @@ const LEXICON_COMER = [
   "ipa": "ʌnʌnˈɑs",
   "senses": [
    {
-    "es": "ananá",
+    "es": "piña, ananá (Río de la Plata)",
     "definitionEs": "Fruta tropical grande, de cáscara áspera y pulpa amarilla.",
     "source": "redactado"
    }
@@ -344002,7 +344002,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "galletitas",
-    "definitionEs": "Galletitas dulces, como conjunto: Хо́чешь пече́нья?, «¿Querés galletitas?».",
+    "definitionEs": "Galletitas dulces, como conjunto: Хо́чешь пече́нья?, «¿Quieres galletitas?».",
     "source": "redactado"
    }
   ],
@@ -344447,7 +344447,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sándwich (abierto)",
-    "definitionEs": "Rebanada de pan con algo encima: manteca, queso o fiambre.",
+    "definitionEs": "Rebanada de pan con algo encima: mantequilla, queso o embutido.",
     "source": "redactado"
    }
   ],
@@ -345553,7 +345553,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "frito; asado, dorado",
-    "definitionEs": "Cocinado en la sartén o al horno con aceite o grasa: жа́реная карто́шка, «papas fritas».",
+    "definitionEs": "Cocinado en la sartén o al horno con aceite o grasa: жа́реная карто́шка, «patatas fritas».",
     "source": "redactado"
    }
   ],
@@ -347386,7 +347386,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cumplido, halago",
-    "definitionEs": "Algo lindo que se dice de otra persona: сде́лать комплиме́нт, «hacer un cumplido».",
+    "definitionEs": "Algo bonito que se dice de otra persona: сде́лать комплиме́нт, «hacer un cumplido».",
     "source": "redactado"
    }
   ],
@@ -349804,7 +349804,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "peligroso, es peligroso",
-    "definitionEs": "Con peligro: Здесь опа́сно, «Acá es peligroso»; опа́сно для жи́зни, «peligro de muerte».",
+    "definitionEs": "Con peligro: Здесь опа́сно, «Aquí es peligroso»; опа́сно для жи́зни, «peligro de muerte».",
     "source": "redactado"
    }
   ],
@@ -350059,7 +350059,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sacar fotos, fotografiar",
-    "definitionEs": "Sacar fotos de algo o de alguien: Здесь нельзя́ фотографи́ровать, «Acá no se pueden sacar fotos».",
+    "definitionEs": "Sacar fotos de algo o de alguien: Здесь нельзя́ фотографи́ровать, «Aquí no se pueden sacar fotos».",
     "source": "redactado"
    }
   ],
@@ -350123,7 +350123,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sacar una foto, fotografiar",
-    "definitionEs": "Sacar una foto en un momento concreto (aspecto perfectivo de фотографи́ровать): Сфотографи́руй меня́!, «¡Sacame una foto!».",
+    "definitionEs": "Sacar una foto en un momento concreto (aspecto perfectivo de фотографи́ровать): Сфотографи́руй меня́!, «¡Sácame una foto!».",
     "source": "redactado"
    }
   ],
@@ -350711,7 +350711,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ahorrar, economizar",
-    "definitionEs": "Gastar menos: эконо́мить де́ньги, «ahorrar plata»; эконо́мить вре́мя, «ahorrar tiempo».",
+    "definitionEs": "Gastar menos: эконо́мить де́ньги, «ahorrar dinero»; эконо́мить вре́мя, «ahorrar tiempo».",
     "source": "redactado"
    }
   ],
@@ -351285,7 +351285,7 @@ const LEXICON_COMER = [
    },
    {
     "es": "pelar",
-    "definitionEs": "Sacarle la cáscara a una fruta o verdura: чи́стить карто́шку, «pelar papas».",
+    "definitionEs": "Sacarle la cáscara a una fruta o verdura: чи́стить карто́шку, «pelar patatas».",
     "source": "redactado"
    }
   ],
@@ -351856,7 +351856,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "impresora",
-    "definitionEs": "Aparato que imprime en papel lo que está en la computadora.",
+    "definitionEs": "Aparato que imprime en papel lo que está en el ordenador.",
     "source": "redactado"
    }
   ],
@@ -352364,7 +352364,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "apagar",
-    "definitionEs": "Cortar la corriente de un aparato o de la luz (aspecto perfectivo de выключа́ть): Вы́ключи свет!, «¡Apagá la luz!».",
+    "definitionEs": "Cortar la corriente de un aparato o de la luz (aspecto perfectivo de выключа́ть): Вы́ключи свет!, «¡Apaga la luz!».",
     "source": "redactado"
    }
   ],
@@ -352498,7 +352498,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "teclado",
-    "definitionEs": "El conjunto de teclas de una computadora o de un piano.",
+    "definitionEs": "El conjunto de teclas de un ordenador o de un piano.",
     "source": "redactado"
    }
   ],
@@ -352561,7 +352561,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "monitor, pantalla",
-    "definitionEs": "La pantalla de una computadora.",
+    "definitionEs": "La pantalla de un ordenador.",
     "source": "redactado"
    }
   ],
@@ -352623,8 +352623,8 @@ const LEXICON_COMER = [
   "ipa": "fˈɑjɭ",
   "senses": [
    {
-    "es": "archivo (de computadora)",
-    "definitionEs": "Documento guardado en una computadora o en el teléfono.",
+    "es": "archivo (de ordenador)",
+    "definitionEs": "Documento guardado en un ordenador o en el teléfono.",
     "source": "redactado"
    }
   ],
@@ -353845,7 +353845,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "arreglar, reparar; refaccionar",
-    "definitionEs": "Arreglar algo roto o hacer obras en una casa: ремонти́ровать маши́ну, «arreglar el auto».",
+    "definitionEs": "Arreglar algo roto o hacer obras en una casa: ремонти́ровать маши́ну, «arreglar el coche».",
     "source": "redactado"
    }
   ],
@@ -357274,8 +357274,8 @@ const LEXICON_COMER = [
   "ipa": "ʌvʲɪʌbʲɪɭʲˈet",
   "senses": [
    {
-    "es": "pasaje de avión",
-    "definitionEs": "Boleto para viajar en avión.",
+    "es": "billete de avión, pasaje de avión (América)",
+    "definitionEs": "Billete para viajar en avión.",
     "source": "redactado"
    }
   ],
@@ -357597,7 +357597,7 @@ const LEXICON_COMER = [
   "ipa": "kupˈɑtsʌ",
   "senses": [
    {
-    "es": "bañarse (en el mar, la pileta)",
+    "es": "bañarse (en el mar, la piscina)",
     "definitionEs": "Meterse al agua para nadar o refrescarse: купа́ться в мо́ре, «bañarse en el mar».",
     "source": "redactado"
    }
@@ -359652,8 +359652,8 @@ const LEXICON_COMER = [
   "ipa": "bʌɡˈɑʒnʲɪk",
   "senses": [
    {
-    "es": "baúl (del auto)",
-    "definitionEs": "El lugar del auto donde se lleva el equipaje.",
+    "es": "maletero (del coche), baúl (América)",
+    "definitionEs": "El lugar del coche donde se lleva el equipaje.",
     "source": "redactado"
    }
   ],
@@ -360290,7 +360290,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "túnel",
-    "definitionEs": "Paso subterráneo para trenes, autos o personas. También se escribe тунне́ль.",
+    "definitionEs": "Paso subterráneo para trenes, coches o personas. También se escribe тунне́ль.",
     "source": "redactado"
    }
   ],
@@ -371896,7 +371896,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "bien, más o menos bien",
-    "definitionEs": "Respuesta a «¿Cómo andás?»: Как дела́? — Ничего́, «Bien, tirando».",
+    "definitionEs": "Respuesta a «¿Cómo andas?»: Как дела́? — Ничего́, «Bien, tirando».",
     "source": "redactado"
    },
    {
@@ -372416,7 +372416,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "arreglar, reparar",
-    "definitionEs": "Arreglar algo que está roto: чини́ть маши́ну, «arreglar el auto».",
+    "definitionEs": "Arreglar algo que está roto: чини́ть маши́ну, «arreglar el coche».",
     "source": "redactado"
    }
   ],
@@ -372545,7 +372545,7 @@ const LEXICON_COMER = [
   "ipa": "strʲˈitʃʲ",
   "senses": [
    {
-    "es": "cortar (el pelo, las uñas, el pasto)",
+    "es": "cortar (el pelo, las uñas, el césped)",
     "definitionEs": "Cortar con tijera o máquina: стричь во́лосы, «cortar el pelo». «Cortarse el pelo» (en la peluquería) es стри́чься.",
     "source": "redactado"
    }
@@ -372930,7 +372930,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pesar (tener un peso)",
-    "definitionEs": "Tener un peso: Чемода́н ве́сит два́дцать килогра́ммов, «La valija pesa veinte kilos». «Pesar algo» (en la balanza) es взве́шивать.",
+    "definitionEs": "Tener un peso: Чемода́н ве́сит два́дцать килогра́ммов, «La maleta pesa veinte kilos». «Pesar algo» (en la balanza) es взве́шивать.",
     "source": "redactado"
    }
   ],

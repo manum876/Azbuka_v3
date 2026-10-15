@@ -70,7 +70,7 @@ function Tarea({ t, id, est, guardar, c, green }) {
     t.consigna && h("p", { className: "u-text", style: { fontSize: 14.5, marginTop: 8 }, lang: "es" }, azFmt(t.consigna)),
     t.opciones && h("div", { style: { marginTop: 8 } }, t.opciones.map(o => h("button", { key: o.id, className: "ubtn" + (op === o.id ? "" : " sec"), style: { marginTop: 8, textAlign: "left", fontSize: 14 }, onClick: () => setOp(o.id) }, o.txt))),
     (!t.opciones || op) && h(React.Fragment, null,
-      h("textarea", { className: "proy", lang: "ru", value: txt, placeholder: "Escribí en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); } }),
+      h("textarea", { className: "proy", lang: "ru", value: txt, placeholder: "Escribe en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); } }),
       h("div", { style: { fontSize: 13.5, marginTop: 8, fontWeight: 700, color: n >= a && n <= b ? green : c.textMuted } }, n + " palabras · meta: " + a + "–" + b),
       h("div", { style: { marginTop: 8 } }, t.objetivos.map((o, i) => { const v = o.fn(txt), ok = v >= o.meta;
         return h("div", { key: i, className: "req" }, h("span", { style: { color: ok ? green : c.textMuted, fontWeight: 800 } }, ok ? "✓" : "○"), h("span", { style: { color: ok ? c.text : c.textSub } }, o.txt)); })),
@@ -92,7 +92,7 @@ function QueRepasar({ fallos, c, onRegla, titulo }) {
   const MAX = 8, ver = todas ? reglas : reglas.slice(0, MAX);
   return h(React.Fragment, null,
     h("div", { className: "u-sec" }, titulo || "Qué repasar"),
-    reglas.length > 0 && h("div", { style: { fontSize: 13.5, color: c.textSub, margin: "-4px 0 10px", lineHeight: 1.5 } }, "Las reglas de las preguntas que no salieron bien, en el orden del curso. Tocá una para leerla."),
+    reglas.length > 0 && h("div", { style: { fontSize: 13.5, color: c.textSub, margin: "-4px 0 10px", lineHeight: 1.5 } }, "Las reglas de las preguntas que no salieron bien, en el orden del curso. Toca una para leerla."),
     ver.map(id => { const r = U14_REGLAS[id];
       return h("div", { key: id, className: "u-card mod", role: "button", tabIndex: 0, onClick: () => onRegla(id), onKeyDown: e => { if (e.key === "Enter") onRegla(id); } },
         h("div", { className: "mod-n" }, "📖"),
@@ -116,9 +116,9 @@ function Final({ total, onCerrar, c }) {
   return h("div", { style: { position: "fixed", inset: 0, zIndex: 300, background: c.bg, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "calc(env(safe-area-inset-top) + 24px) 28px calc(env(safe-area-inset-bottom) + 24px)", textAlign: "center", animation: "fadeIn 0.6s ease" } },
     h("div", { style: { fontSize: 12, fontWeight: 700, letterSpacing: 2, color: c.gold, textTransform: "uppercase" } }, "Examen final · " + total + " puntos"),
     h("div", { lang: "ru", style: { fontSize: 34, fontWeight: 800, color: c.gold, marginTop: 18, lineHeight: 1.2 } }, "Ты говори́шь по\u2011ру́сски."),   /* guion que no corta la línea */
-    h("div", { style: { fontSize: 16, color: c.textSub, marginTop: 8, fontStyle: "italic" } }, "Hablás ruso."),
+    h("div", { style: { fontSize: 16, color: c.textSub, marginTop: 8, fontStyle: "italic" } }, "Hablas ruso."),
     h("div", { lang: "ru", style: { fontSize: 17, color: c.text, marginTop: 28, lineHeight: 1.6 } }, "Ты уме́ешь чита́ть, понима́ть, писа́ть и обща́ться по-ру́сски.", h("br"), "Ты мо́жешь говори́ть о себе́, своём про́шлом, настоя́щем и бу́дущем."),
-    h("div", { style: { fontSize: 14, color: c.textMuted, marginTop: 24, lineHeight: 1.55, maxWidth: 360 } }, "No terminaste el ruso: ahora tenés una base real para seguir construyendo."),
+    h("div", { style: { fontSize: 14, color: c.textMuted, marginTop: 24, lineHeight: 1.55, maxWidth: 360 } }, "No terminaste el ruso: ahora tienes una base real para seguir construyendo."),
     h("button", { className: "ubtn", style: { maxWidth: 320, marginTop: 32 }, onClick: () => azHablarRu("Ты говори́шь по-ру́сски.") }, "▶ Escucharlo"),
     h("button", { className: "ubtn sec", style: { maxWidth: 320 }, onClick: onCerrar }, "Volver al examen"));
 }
@@ -196,7 +196,7 @@ function App() {
     h("div", { className: "u-kicker" }, "Unidad 14"),
     h("h1", { className: "u-title" }, "Examen final"),
     h("div", { className: "u-ru", lang: "ru" }, "Фина́льный экза́мен"),
-    h("p", { className: "u-text", style: { marginTop: 12, fontSize: 14 } }, "Seis bloques que evalúan todo lo que aprendiste: leer, escuchar, la gramática, el vocabulario, escribir y comunicarte. Hacelos en el orden que quieras y en varias sesiones: cada bloque queda guardado."),
+    h("p", { className: "u-text", style: { marginTop: 12, fontSize: 14 } }, "Seis bloques que evalúan todo lo que aprendiste: leer, escuchar, la gramática, el vocabulario, escribir y comunicarte. Hazlos en el orden que quieras y en varias sesiones: cada bloque queda guardado."),
     h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 6 } }, "Tiempo estimado: 3–4 horas en total. Se aprueba con " + APROBADO + " puntos."),
     h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 18 } },
       h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } },

@@ -43,7 +43,7 @@ const UNIDAD_1 = {
         },
         {
           titulo: "Qué cambia respecto del alfabeto latino",
-          texto: "Hay letras que se ven y suenan igual que en español (А, К, М, О, Т), letras que se ven igual pero suenan distinto (la Р es una **r**, la Н es una **n**) y letras completamente nuevas (Ж, Ш, Щ, Ы). La buena noticia: el ruso se lee casi como se escribe. Una vez que conocés las letras y sabés dónde va el acento, podés leer en voz alta cualquier palabra, aunque no sepas qué significa."
+          texto: "Hay letras que se ven y suenan igual que en español (А, К, М, О, Т), letras que se ven igual pero suenan distinto (la Р es una **r**, la Н es una **n**) y letras completamente nuevas (Ж, Ш, Щ, Ы). La buena noticia: el ruso se lee casi como se escribe. Una vez que conoces las letras y sabes dónde va el acento, puedes leer en voz alta cualquier palabra, aunque no sepas qué significa."
         },
         {
           id: "u1-acento", titulo: "La sílaba tónica y el acento",
@@ -53,11 +53,11 @@ const UNIDAD_1 = {
         },
         {
           titulo: "Cómo aprender las letras",
-          texto: "Vas a ir por grupos, de lo más fácil a lo más nuevo: primero las letras que ya conocés, después las «falsas amigas» y al final los sonidos que no existen en español. En cada grupo leé las letras, escuchalas, y practicá con las tarjetas hasta reconocerlas sin pensar. Leer palabras en voz alta ayuda más que memorizar la lista."
+          texto: "Vas a ir por grupos, de lo más fácil a lo más nuevo: primero las letras que ya conoces, después las «falsas amigas» y al final los sonidos que no existen en español. En cada grupo lee las letras, escúchalas, y practica con las tarjetas hasta reconocerlas sin pensar. Leer palabras en voz alta ayuda más que memorizar la lista."
         },
         {
           titulo: "La transliteración",
-          texto: "Al lado de muchas palabras vas a ver cómo se leen con letras latinas: вода́ «vadá». Es solo una ayuda. Ojo con la **y**: en esa escritura se lee siempre como una **i** breve, nunca como la **y** rioplatense. «ya» se dice «ia», como en «piano»; «yo», como en «radio»."
+          texto: "Al lado de muchas palabras vas a ver cómo se leen con letras latinas: вода́ «vadá». Es solo una ayuda. Ojo con la **y**: en esa escritura se lee siempre como una **i** breve, nunca como la **y** consonante de «yate». «ya» se dice «ia», como en «piano»; «yo», como en «radio»."
         },
         {
           titulo: "Tiempo estimado",
@@ -70,35 +70,35 @@ const UNIDAD_1 = {
       titulo: "Letras amigas",
       resumen: "Se ven y suenan como en español.",
       letras: ["А", "К", "М", "О", "Т"],
-      intro: "Estas cinco letras se ven y suenan casi igual que en español. Con ellas ya podés leer palabras como ма́ма, кот o там. Ojo con la О: suena **o** solo cuando es tónica."
+      intro: "Estas cinco letras se ven y suenan casi igual que en español. Con ellas ya puedes leer palabras como ма́ма, кот o там. Ojo con la О: suena **o** solo cuando es tónica."
     },
     {
       id: "u1m3", n: 3, tipo: "letras",
       titulo: "Falsas amigas",
       resumen: "Parecen latinas, pero suenan distinto.",
       letras: ["В", "Е", "Н", "Р", "С", "У", "Х"],
-      intro: "Son las letras más traicioneras: te parecen conocidas y tu cabeza las lee en español. В es **v**, Е es **ie**, Н es **n**, Р es **r**, С es **s**, У es **u** y Х es **j**. Leé despacio: рестора́н no es «pectopah», es «ristarán»."
+      intro: "Son las letras más traicioneras: te parecen conocidas y tu cabeza las lee en español. В es **v**, Е es **ie**, Н es **n**, Р es **r**, С es **s**, У es **u** y Х es **j**. Lee despacio: рестора́н no es «pectopah», es «ristarán»."
     },
     {
       id: "u1m4", n: 4, tipo: "letras",
       titulo: "Letras nuevas",
-      resumen: "Formas nuevas, sonidos que ya tenés.",
+      resumen: "Formas nuevas, sonidos que ya tienes.",
       letras: ["Б", "Г", "Д", "З", "И", "Й", "Л", "П", "Ф", "Э"],
-      intro: "Estas letras tienen formas nuevas, pero sus sonidos existen en español. Solo hay que asociar cada forma con su sonido. Cuidado con la И, que es una **i**, y con la З, que es una **z** como la del inglés «zoo»: una **s** con vibración (en el Río de la Plata la **z** suena **s**; la З no). En la transliteración la escribimos **z**."
+      intro: "Estas letras tienen formas nuevas, pero sus sonidos existen en español. Solo hay que asociar cada forma con su sonido. Cuidado con la И, que es una **i**, y con la З, que es una **z** como la del inglés «zoo»: una **s** con vibración (no como la **z** del español, que según la zona suena **s** o como la «th» inglesa). En la transliteración la escribimos **z**."
     },
     {
       id: "u1m5", n: 5, tipo: "letras",
       titulo: "Sonidos nuevos",
       resumen: "Sonidos que el español no tiene.",
       letras: ["Ж", "Ц", "Ч", "Ш", "Щ", "Ы"],
-      intro: "Acá están los sonidos que el español no tiene o tiene distintos, aunque varios se parecen a cosas que ya decís: la Ш suena como la **sh** de «show», la Ж es esa misma **sh** pero con vibración en la garganta, como la **j** del francés «je», y la Ч es casi nuestra **ch**, un poco más suave. La Ы es la más difícil: escuchala muchas veces."
+      intro: "Aquí están los sonidos que el español no tiene o tiene distintos, aunque varios se parecen a cosas que ya dices: la Ш suena como la **sh** de «show», la Ж es esa misma **sh** pero con vibración en la garganta, como la **j** del francés «je», y la Ч es casi nuestra **ch**, un poco más suave. La Ы es la más difícil: escúchala muchas veces."
     },
     {
       id: "u1m6", n: 6, tipo: "letras",
       titulo: "Vocales duras y blandas",
       resumen: "Я, Ё, Ю y los cinco pares de vocales.",
       letras: ["Я", "Ё", "Ю"],
-      intro: "Con Я, Ё y Ю ya conocés las diez vocales del ruso. No son diez sonidos sueltos: son cinco pares, y entender los pares te ahorra muchísimo esfuerzo.",
+      intro: "Con Я, Ё y Ю ya conoces las diez vocales del ruso. No son diez sonidos sueltos: son cinco pares, y entender los pares te ahorra muchísimo esfuerzo.",
       pares: [["А", "Я", "на", "ня"], ["Э", "Е", "нэ", "не"], ["Ы", "И", "ны", "ни"], ["О", "Ё", "но", "нё"], ["У", "Ю", "ну", "ню"]],
       secciones: [
         {
@@ -107,7 +107,7 @@ const UNIDAD_1 = {
         },
         {
           id: "u1-n-enie", titulo: "Como la n y la ñ",
-          texto: "En español ya hacés esta diferencia sin darte cuenta: la **ñ** es una **n** blanda. «Cana» y «caña» se distinguen solo por eso. En ruso pasa lo mismo, pero con casi todas las consonantes: **на** suena «na» y **ня** suena «ña»; **ма** y **мя**, **ло** y **лё**, **ту** y **тю** se diferencian igual. Tocá los pares de la tabla y escuchá la diferencia.",
+          texto: "En español ya haces esta diferencia sin darte cuenta: la **ñ** es una **n** blanda. «Cana» y «caña» se distinguen solo por eso. En ruso pasa lo mismo, pero con casi todas las consonantes: **на** suena «na» y **ня** suena «ña»; **ма** y **мя**, **ло** y **лё**, **ту** y **тю** se diferencian igual. Toca los pares de la tabla y escucha la diferencia.",
           destacado: "La vocal blanda ablanda la consonante que tiene adelante, como la **ñ** es una **n** blanda.",
           ejemplos: [
             { ru: "{ма́ма}", es: "mamá", por: "**ма**: la **а** es dura, la **м** suena normal." },
@@ -118,7 +118,7 @@ const UNIDAD_1 = {
         },
         {
           id: "u1-inicio", titulo: "Al principio de la palabra",
-          texto: "Cuando no hay consonante delante (al principio de la palabra o después de otra vocal), las vocales blandas suenan con una **i** breve adelante: я como la «ia» de «piano», ё como la «io» de «radio», ю como la «iu» de «ciudad» y е como la «ie» de «pie». Por eso я́блоко se dice «yáblaka» y моя́ se dice «mayá» (acordate: esa **y** se lee **i**).",
+          texto: "Cuando no hay consonante delante (al principio de la palabra o después de otra vocal), las vocales blandas suenan con una **i** breve adelante: я como la «ia» de «piano», ё como la «io» de «radio», ю como la «iu» de «ciudad» y е como la «ie» de «pie». Por eso я́блоко se dice «yáblaka» y моя́ se dice «mayá» (acuérdate: esa **y** se lee **i**).",
           chequeo: [{ pide: "¿Cómo empieza a sonar я́блоко?", opciones: ["con «a»", "con «ia»"], ok: "con «ia»", por: "Al principio de la palabra, la **я** suena con una **i** breve adelante." }]
         },
         {
@@ -132,7 +132,7 @@ const UNIDAD_1 = {
       titulo: "Los signos",
       resumen: "Ь y Ъ: no suenan, pero cambian la palabra. Cuándo va cada uno, y el Ь de los verbos.",
       letras: ["Ь", "Ъ"],
-      intro: "Estas dos letras no tienen sonido propio, pero cambian cómo suena lo que las rodea. Son de las que más dudas generan al escribir, así que acá va la guía completa.",
+      intro: "Estas dos letras no tienen sonido propio, pero cambian cómo suena lo que las rodea. Son de las que más dudas generan al escribir, así que aquí va la guía completa.",
       secciones: [
         {
           id: "u1-signos", titulo: "La regla de oro",
@@ -152,7 +152,7 @@ const UNIDAD_1 = {
         },
         {
           id: "u1-b-sibilantes", titulo: "Ь, trabajo 3: después de Ж, Ш, Ч, Щ",
-          texto: "Estas cuatro letras suenan siempre igual, con o sin Ь, así que acá el Ь es pura gramática. Un adelanto de lo que vas a ver más adelante: los sustantivos femeninos lo llevan (ночь, дочь, мышь) y los masculinos no (врач, нож, мяч).",
+          texto: "Estas cuatro letras suenan siempre igual, con o sin Ь, así que aquí el Ь es pura gramática. Un adelanto de lo que vas a ver más adelante: los sustantivos femeninos lo llevan (ночь, дочь, мышь) y los masculinos no (врач, нож, мяч).",
           truco: "En los sustantivos que terminan en ж, ш, ч, щ: con Ь es femenino; sin Ь, masculino.",
           palabras: ["CMR-00236", "CMR-00834", "CMR-02994", "CMR-00653", "CMR-01807", "CMR-04007"]
         },
@@ -179,11 +179,11 @@ const UNIDAD_1 = {
       id: "u1m8", n: 8, tipo: "pronunciacion",
       titulo: "Pronunciación",
       resumen: "Pares de sonidos, vocales que cambian y consonantes finales.",
-      intro: "Ya conocés las 33 letras. Ahora, lo que hace que el ruso suene a ruso: sonidos parecidos que cambian el significado, vocales que se debilitan cuando no son tónicas y consonantes que cambian al final de la palabra.",
+      intro: "Ya conoces las 33 letras. Ahora, lo que hace que el ruso suene a ruso: sonidos parecidos que cambian el significado, vocales que se debilitan cuando no son tónicas y consonantes que cambian al final de la palabra.",
       bloques: [
         {
           id: "u1-pares-minimos", titulo: "Pares mínimos",
-          texto: "Un par mínimo son dos palabras que solo se diferencian en un sonido. Sirven para entrenar el oído: tocá cada palabra y escuchá la diferencia.",
+          texto: "Un par mínimo son dos palabras que solo se diferencian en un sonido. Sirven para entrenar el oído: toca cada palabra y escucha la diferencia.",
           pares: [
             { letras: "Б / П", a: "CMR-04055", b: "CMR-04037" },
             { letras: "В / Ф", a: "CMR-01856", b: "CMR-01785" },
@@ -199,7 +199,7 @@ const UNIDAD_1 = {
         },
         {
           id: "u1-blando-final", titulo: "Con y sin signo blando",
-          texto: "La Ь al final ablanda la consonante: la lengua termina apoyada en el paladar. La transliteración no lo muestra (брат y брать se escriben igual, «brat»), así que escuchalas bien.",
+          texto: "La Ь al final ablanda la consonante: la lengua termina apoyada en el paladar. La transliteración no lo muestra (брат y брать se escriben igual, «brat»), así que escúchalas bien.",
           pares: [
             { letras: "т / ть", a: "CMR-00542", b: "CMR-00477" },
             { letras: "с / сь", a: "CMR-02105", b: "CMR-00027" },
@@ -238,7 +238,7 @@ const UNIDAD_1 = {
             { ru: "{друг}", es: "amigo · «druk»", por: "La **г** final suena **к**." },
             { ru: "{глаз}", es: "ojo · «glas»", por: "La **з** final suena **с**." }],
           mas: { texto: "Las sonoras son las que hacen vibrar la garganta (б, в, г, д, ж, з) y cada una tiene su pareja sorda, que se dice igual pero sin vibrar (п, ф, к, т, ш, с). Al final de la palabra, el ruso no hace vibrar la garganta: por eso la sonora se convierte en su pareja.\nEn cuanto se agrega una vocal, la letra vuelve a sonar como se escribe: хлеб suena «jliep», pero хле́бы suena «jliéby»." },
-          chequeo: [{ pide: "Escuchá зуб (diente) y суп (sopa). ¿Cómo terminan?", opciones: ["Igual", "Distinto"], ok: "Igual", por: "La **б** final de зуб suena **п**: «zup», «sup»." }],
+          chequeo: [{ pide: "Escucha зуб (diente) y суп (sopa). ¿Cómo terminan?", opciones: ["Igual", "Distinto"], ok: "Igual", por: "La **б** final de зуб suena **п**: «zup», «sup»." }],
           palabras: ["CMR-01032", "CMR-00028", "CMR-00110", "CMR-00397", "CMR-01130", "CMR-00106"]
         },
         {
@@ -260,7 +260,7 @@ const UNIDAD_1 = {
       id: "u1m11", n: 9, tipo: "reglas",
       titulo: "Reglas de escritura",
       resumen: "Reglas fijas para no dudar: **жи–ши**, **ча–ща**, Й o И, Э o Е…",
-      intro: "El ruso tiene pocas reglas de escritura, pero son fijas y sin excepciones en las palabras de todos los días. Como en español, donde antes de **p** y **b** siempre va **m**, acá hay letras que mandan sobre la que viene después.",
+      intro: "El ruso tiene pocas reglas de escritura, pero son fijas y sin excepciones en las palabras de todos los días. Como en español, donde antes de **p** y **b** siempre va **m**, aquí hay letras que mandan sobre la que viene después.",
       bloques: [
         {
           id: "u1-siete", titulo: "La regla de las 7 letras",
@@ -281,7 +281,7 @@ const UNIDAD_1 = {
         {
           id: "u1-sh-sch", titulo: "Ш o Щ",
           texto: "Ш es dura y Щ es blanda, larga, como una **sh** con la lengua más adelante. Una pista para escribir: los grupos **сч**, **зч** y **жч** suenan como Щ. Por eso сча́стье (con **сч**) y мужчи́на (con **жч**) se dicen con Щ pero no se escriben con Щ.",
-          truco: "Si suena Щ y dudás, puede ser **сч** (сча́стье, счёт) o **жч** (мужчи́на).",
+          truco: "Si suena Щ y dudas, puede ser **сч** (сча́стье, счёт) o **жч** (мужчи́на).",
           palabras: ["CMR-02772", "CMR-01693", "CMR-00784", "CMR-00416", "CMR-00431", "CMR-01626"]
         },
         {
@@ -304,8 +304,8 @@ const UNIDAD_1 = {
         },
         {
           id: "u1-prueba", titulo: "Escribir lo que no se oye: la palabra de prueba",
-          texto: "Ya viste que al final la б suena п y que la о sin acento suena а. ¿Cómo saber qué se escribe? Buscá otra forma de la palabra donde después venga una vocal, o donde esa sílaba sea la tónica: зуб → зу́бы (va б), год → го́ды (va д), вода́ → во́ды (va о), окно́ → о́кна (va о).",
-          destacado: "Si no estás seguro, buscá la palabra de prueba: otra forma donde la letra se oiga clara.",
+          texto: "Ya viste que al final la б suena п y que la о sin acento suena а. ¿Cómo saber qué se escribe? Busca otra forma de la palabra donde después venga una vocal, o donde esa sílaba sea la tónica: зуб → зу́бы (va б), год → го́ды (va д), вода́ → во́ды (va о), окно́ → о́кна (va о).",
+          destacado: "Si no estás seguro, busca la palabra de prueba: otra forma donde la letra se oiga clara.",
           palabras: ["CMR-01032", "CMR-00028", "CMR-02429", "CMR-00106", "CMR-00191", "CMR-00370", "CMR-01040"],
           chequeo: [{ pide: "Suena «sat» (jardín). ¿Se escribe сад o сат?", opciones: ["сад", "сат"], ok: "сад", por: "La palabra de prueba es сады́: ahí la **д** se oye clara." }]
         }
@@ -315,14 +315,14 @@ const UNIDAD_1 = {
       id: "u1m9", n: 10, tipo: "lectura",
       titulo: "Primeras lecturas",
       resumen: "Leer palabras en voz alta y los primeros diálogos.",
-      intro: "Es hora de leer. Primero, palabras sueltas: leelas en voz alta y después comprobá cómo suenan. Después, cuatro diálogos muy cortos para saludar, agradecer y despedirte.",
+      intro: "Es hora de leer. Primero, palabras sueltas: léelas en voz alta y después comprueba cómo suenan. Después, cuatro diálogos muy cortos para saludar, agradecer y despedirte.",
       dialogos: ["DLG-001", "DLG-006", "DLG-005", "DLG-008"]
     },
     {
       id: "u1m10", n: 11, tipo: "examen",
       titulo: "Evaluación",
       resumen: "Letras, audio, lectura, dictado, escritura y reglas.",
-      intro: "Veinticinco ejercicios de toda la unidad, en seis partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada. Si no llegás, te digo qué conviene reforzar antes de seguir.",
+      intro: "Veinticinco ejercicios de toda la unidad, en seis partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada. Si no llegas, te digo qué conviene reforzar antes de seguir.",
       partes: [
         { nombre: "Letras", tipos: ["audio-letra", "vf", "escuchar-letra"], n: 4 },
         { nombre: "Audio", tipos: ["pares"], n: 4 },
@@ -392,14 +392,14 @@ function ejerciciosUnidad1() {
     const vistas = conSonido.filter(x => modDe[x.upper] <= Math.max(modDe[l.upper], 3));
     const mal = otros(vistas, [l], 3, i + 7).map(x => x.upper + " " + x.lower);
     out.push({ id: "U1-ae-" + l.upper, tipo: "audio-letra", forma: "elegir", dificultad: 1, modulo: modDe[l.upper], grupo: l.upper,
-      pide: "Escuchá: ¿qué letra es?", audio: l.lower, opciones: baraja([l.upper + " " + l.lower].concat(mal), i + 3), correcta: l.upper + " " + l.lower,
+      pide: "Escucha: ¿qué letra es?", audio: l.lower, opciones: baraja([l.upper + " " + l.lower].concat(mal), i + 3), correcta: l.upper + " " + l.lower,
       explicacion: "Sonó la " + l.upper + " (" + l.name + "). " + l.pronunciation + ".", recordar: l.details.tips });
   });
 
   /* 2. Escuchar la letra y escribirla */
   conSonido.forEach(l => {
     out.push({ id: "U1-el-" + l.upper, tipo: "escuchar-letra", forma: "escribir", dificultad: 2, modulo: modDe[l.upper], grupo: l.upper,
-      pide: "Escuchá y escribí la letra.", audio: l.lower, esperadas: [l.lower], idioma: "ru", mayus: true,
+      pide: "Escucha y escribe la letra.", audio: l.lower, esperadas: [l.lower], idioma: "ru", mayus: true,
       explicacion: "Sonó la " + l.upper + ", que se llama " + l.name + ".", recordar: l.details.tips });
   });
 
@@ -431,7 +431,7 @@ function ejerciciosUnidad1() {
       usadosEm.add(clave);
       const ls = set.map(x => L.find(l => l.upper === x));
       out.push({ id: "U1-em-" + clave, tipo: "unir", forma: "emparejar", dificultad: 1, modulo: m.n, grupo: "unir",
-        pide: "Escuchá cada sonido y unilo con su letra.", audioIzq: true, pares: ls.map(l => [l.lower, l.upper + " " + l.lower]),
+        pide: "Escucha cada sonido y únelo con su letra.", audioIzq: true, pares: ls.map(l => [l.lower, l.upper + " " + l.lower]),
         explicacion: ls.map(l => l.upper + " (" + l.name + ")").join(" · ") });
     }
   });
@@ -442,7 +442,7 @@ function ejerciciosUnidad1() {
     const base = { modulo: p.modulo, grupo: p.id, lex: [p.id], oir: p.ru };   /* oir: suena al responder */
     /* dictado */
     out.push(Object.assign({ id: "U1-dic-" + p.id, tipo: "dictado", forma: "escribir", dificultad: 2 + dif,
-      pide: "Escuchá y escribí la palabra.", audio: p.ru, esperadas: [p.acento], idioma: "ru",
+      pide: "Escucha y escribe la palabra.", audio: p.ru, esperadas: [p.acento], idioma: "ru",
       explicacion: p.acento + " (" + p.tr + "): " + p.es + ".", recordar: p.nota }, base));
     /* cirílico → español (elegir) */
     const dis = otros(palabras, [p], 3, i + 17).map(x => x.es);
@@ -451,13 +451,13 @@ function ejerciciosUnidad1() {
       explicacion: p.acento + " (" + p.tr + ") significa «" + p.es + "»." }, base));
     /* español → cirílico (escribir) */
     out.push(Object.assign({ id: "U1-esru-" + p.id, tipo: "es-ru", forma: "escribir", dificultad: 3 + dif,
-      pide: "Escribí en ruso: «" + p.es + "».", audio: p.ru, audioManual: true, pista: "Empieza con " + p.ru[0].toUpperCase() + " y tiene " + p.ru.length + " letras.", esperadas: [p.acento], idioma: "ru",
+      pide: "Escribe en ruso: «" + p.es + "».", audio: p.ru, audioManual: true, pista: "Empieza con " + p.ru[0].toUpperCase() + " y tiene " + p.ru.length + " letras.", esperadas: [p.acento], idioma: "ru",
       explicacion: "Es " + p.acento + " (" + p.tr + ")." }, base));
     /* completar la letra que falta (la letra de la ficha) */
     const pos = p.ru.toLowerCase().indexOf(p.letra.lower);
     if (pos >= 0 && p.ru.length > 1) {
       out.push(Object.assign({ id: "U1-comp-" + p.id + "-" + p.letra.upper, tipo: "completar", forma: "escribir", dificultad: 2,
-        pide: "Completá la letra que falta (o escribí la palabra entera).", grande: p.ru.slice(0, pos) + "_" + p.ru.slice(pos + 1), audio: p.ru, pista: p.es,
+        pide: "Completa la letra que falta (o escribe la palabra entera).", grande: p.ru.slice(0, pos) + "_" + p.ru.slice(pos + 1), audio: p.ru, pista: p.es,
         esperadas: [p.letra.lower, p.acento], idioma: "ru", completa: p.acento,
         explicacion: "Falta la " + p.letra.upper + ": " + p.acento + " (" + p.tr + ").", recordar: p.nota }, base, { grupo: p.id }));
     }
@@ -466,7 +466,7 @@ function ejerciciosUnidad1() {
       let fichas = baraja(p.ru.split(""), i + 23);
       if (fichas.join("") === p.ru) fichas = fichas.slice(1).concat(fichas[0]);
       out.push(Object.assign({ id: "U1-ord-" + p.id, tipo: "ordenar", forma: "ordenar", dificultad: 1 + dif,
-        pide: "Ordená las letras: «" + p.es + "».", audio: p.ru, fichas, esperada: p.ru,
+        pide: "Ordena las letras: «" + p.es + "».", audio: p.ru, fichas, esperada: p.ru,
         explicacion: "Es " + p.acento + " (" + p.tr + ")." }, base));
     }
   });
@@ -478,7 +478,7 @@ function ejerciciosUnidad1() {
       const e = lexComerById(id), o = lexComerById(k ? par.a : par.b);
       if (!e || !o) return;
       out.push({ id: "U1-pm-" + id + "-" + (k ? par.a : par.b), tipo: "pares", forma: "elegir", dificultad: 2, modulo: 8, regla: b.id, grupo: "pm" + par.a, lex: [par.a, par.b],
-        pide: "Escuchá: ¿qué palabra es?", audio: e.ru, opciones: [e.acento || e.ru, o.acento || o.ru].sort(), correcta: e.acento || e.ru,
+        pide: "Escucha: ¿qué palabra es?", audio: e.ru, opciones: [e.acento || e.ru, o.acento || o.ru].sort(), correcta: e.acento || e.ru,
         explicacion: "Sonó " + (e.acento || e.ru) + " (" + e.senses[0].es + "). La otra, " + (o.acento || o.ru) + ", es «" + o.senses[0].es + "». Cambia " + par.letras + "." });
     });
   }));
@@ -508,7 +508,7 @@ function ejerciciosUnidad1() {
     if (activos.length === 1 && !/^(сегодня|его)$/.test(p.ru.toLowerCase())) {   /* ahí manda la Г que suena v */
       const k = activos[0], otras = baraja(Object.keys(RZ1).filter(x => x !== k), i + 61).slice(0, 2);
       out.push(Object.assign({ id: "U1-porq-" + p.id, tipo: "porque", forma: "elegir", dificultad: 2, regla: RZ1[k][1],
-        pide: "Escuchá " + p.acento + ". ¿Por qué no suena exactamente como se escribe?", grande: p.acento, audio: p.ru,
+        pide: "Escucha " + p.acento + ". ¿Por qué no suena exactamente como se escribe?", grande: p.acento, audio: p.ru,
         opciones: baraja([RZ1[k][0]].concat(otras.map(x => RZ1[x][0])), i + 63), correcta: RZ1[k][0],
         explicacion: RZ1[k][0] + ": " + p.acento + " (" + p.es + ")." }, base));
     }
@@ -516,7 +516,7 @@ function ejerciciosUnidad1() {
     if (r.fin) {
       const esc = p.ru.slice(-1).toLowerCase(), suena = SON[esc];
       out.push(Object.assign({ id: "U1-oidof-" + p.id, tipo: "oido", forma: "elegir", dificultad: 2, regla: "u1-finales",
-        pide: "Escuchá " + p.acento + ". ¿Qué suena al final?", grande: p.acento, audio: p.ru, opciones: [suena, esc], correcta: suena,
+        pide: "Escucha " + p.acento + ". ¿Qué suena al final?", grande: p.acento, audio: p.ru, opciones: [suena, esc], correcta: suena,
         explicacion: "Se escribe **" + esc + "**, pero al final suena **" + suena + "**: " + p.acento + " (" + p.es + ")." }, base));
     }
     /* Oído: ¿cuántas О suenan o? */
@@ -524,7 +524,7 @@ function ejerciciosUnidad1() {
     if (r.o && nO >= 1 && nO <= 3) {
       const ok = tonica(p.acento) === "о" ? "Una" : "Ninguna";
       out.push(Object.assign({ id: "U1-oidoo-" + p.id, tipo: "oido", forma: "elegir", dificultad: 2, regla: "u1-o-atona",
-        pide: "Escuchá " + p.acento + ". ¿Cuántas О suenan **o**?", grande: p.acento, audio: p.ru, opciones: ["Ninguna", "Una"], correcta: ok,
+        pide: "Escucha " + p.acento + ". ¿Cuántas О suenan **o**?", grande: p.acento, audio: p.ru, opciones: ["Ninguna", "Una"], correcta: ok,
         explicacion: (ok === "Una" ? "Solo la О con acento suena **o**; " : "Ninguna О tiene acento: ") + (ok === "Una" ? "las demás suenan casi **a**." : "todas suenan casi **a**.") + " " + p.acento + " (" + p.es + ")." }, base));
     }
   });
@@ -534,7 +534,7 @@ function ejerciciosUnidad1() {
     const limpio = w.replace(/\u0301/g, "");
     const exp = limpio + ". " + U1_REGLAS[regla] + (prueba ? " Palabra de prueba: " + prueba + "." : "");
     out.push({ id: "U1-or-" + limpio, tipo: "ortografia", forma: "elegir", dificultad: 2, modulo: mod, grupo: "or-" + limpio, regla: U1_REGLA_ID[regla],
-      pide: "Escuchá: ¿cuál está bien escrita?", audio: w, opciones: baraja([limpio, mal], i + 31), correcta: limpio, oir: w,
+      pide: "Escucha: ¿cuál está bien escrita?", audio: w, opciones: baraja([limpio, mal], i + 31), correcta: limpio, oir: w,
       explicacion: "Se escribe " + exp });
     out.push({ id: "U1-oc-" + limpio, tipo: "ortografia-completar", forma: "elegir", dificultad: 2, modulo: mod, grupo: "or-" + limpio, regla: U1_REGLA_ID[regla],
       pide: "¿Qué va en el hueco?", grande: hueco, audio: w, opciones: baraja(ops.map(o => o === "—" ? "(nada)" : o), i + 37), correcta: ops[0] === "—" ? "(nada)" : ops[0], oir: w,

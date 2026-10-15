@@ -165,22 +165,22 @@ function AzAvisos({ c, pausado }) {
 
   let cuerpo;
   if (aviso.tipo === "ios") {
-    cuerpo = [top(icoApp, "Instalá Azbuka en tu iPhone"), porQue,
+    cuerpo = [top(icoApp, "Instala Azbuka en tu iPhone"), porQue,
       h("div", { className: "az-av-pasos" },
-        paso(1, "En Safari, tocá ", chip(ico(AZ_AV_ICONOS.compartir), " Compartir"),
+        paso(1, "En Safari, toca ", chip(ico(AZ_AV_ICONOS.compartir), " Compartir"),
           h("div", { className: "az-av-sub" }, "Si no lo ves, está adentro de ", chip(ico(AZ_AV_ICONOS.puntos)))),
-        paso(2, "Bajá y elegí ", chip(ico(AZ_AV_ICONOS.mas), " Agregar a inicio")),
-        paso(3, "Tocá ", h("b", null, "Agregar"), ". Desde ahora, abrí Azbuka con su ícono.")),
+        paso(2, "Baja y elige ", chip(ico(AZ_AV_ICONOS.mas), " Agregar a inicio")),
+        paso(3, "Toca ", h("b", null, "Agregar"), ". Desde ahora, abre Azbuka con su ícono.")),
       pieInstalar];
   } else if (aviso.tipo === "android") {
-    cuerpo = [top(icoApp, "Instalá Azbuka en tu teléfono"), porQue,
+    cuerpo = [top(icoApp, "Instala Azbuka en tu teléfono"), porQue,
       h("button", { className: "az-av-btn", onClick: instalar }, "📲 Instalar"), pieInstalar];
   } else {
     const st = aviso.st;
-    cuerpo = [top(h("div", { className: "az-av-ico n" }, "💾"), "Guardá una copia de tu progreso"),
+    cuerpo = [top(h("div", { className: "az-av-ico n" }, "💾"), "Guarda una copia de tu progreso"),
       h("div", { className: "az-av-txt" },
-        aviso.dias == null ? "Todavía no guardaste ninguna copia." : h(React.Fragment, null, "Hace ", h("b", null, aviso.dias + " días"), " que no guardás una copia."),
-        " Tu progreso vive solo en este teléfono: si se borran los datos o cambiás de teléfono, se pierde."),
+        aviso.dias == null ? "Todavía no guardaste ninguna copia." : h(React.Fragment, null, "Hace ", h("b", null, aviso.dias + " días"), " que no guardas una copia."),
+        " Tu progreso vive solo en este teléfono: si se borran los datos o cambias de teléfono, se pierde."),
       h("div", { className: "az-av-stats" },
         h("div", { className: "az-av-stat" }, h("b", null, st.ej), h("span", null, "ejercicios hechos")),
         h("div", { className: "az-av-stat" }, h("b", null, st.pal), h("span", null, "palabras dominadas")),
@@ -188,10 +188,10 @@ function AzAvisos({ c, pausado }) {
       listo
         ? h("div", { className: "az-av-btn ok" }, "✓ Copia guardada")
         : h("button", { className: "az-av-btn", onClick: guardar }, "Guardar copia ahora"),
-      h("div", { className: "az-av-nota" }, "Elegí ", h("b", null, "Guardar en Archivos"), ", o mandátela por mail o WhatsApp. Para recuperarla: Ajustes → Restaurar copia."),
+      h("div", { className: "az-av-nota" }, "Elige ", h("b", null, "Guardar en Archivos"), ", o mandátela por mail o WhatsApp. Para recuperarla: Ajustes → Restaurar copia."),
       h("div", { className: "az-av-pie" },
         h("div", { className: "az-av-b" }, "Cada " + AZ_AVISOS.copiaCada + " días"),
-        h("button", { className: "az-av-a", onClick: ahoraNo }, "Recordámelo después"))];
+        h("button", { className: "az-av-a", onClick: ahoraNo }, "Recuérdamelo después"))];
   }
 
   return h("div", { className: "az-av-velo", ref: azRefCapa(capa), onClick: e => { if (e.target === e.currentTarget) ahoraNo(); } },

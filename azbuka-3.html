@@ -60,7 +60,7 @@ function detalleTarjeta(e) {
 /* Ejemplos de un género: chips con emoji, se tocan para escuchar */
 function Ejemplos({ lista, c }) {
   return h(React.Fragment, null,
-    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una palabra para escuchar cómo suena."),
+    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Toca una palabra para escuchar cómo suena."),
     h("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 10 } }, lista.map(s =>
       h("button", { key: s.id, onClick: () => azHablarRu(s.ru), lang: "ru",
         style: { display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 15, fontWeight: 700, fontFamily: "inherit", cursor: "pointer" } },

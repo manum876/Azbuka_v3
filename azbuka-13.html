@@ -88,7 +88,7 @@ function Taller13({ c, green }) {
     h("div", { className: "u-sec" }, t.emoji + " " + t.titulo),
     h("p", { className: "u-text", style: { fontSize: 14.5 } }, azFmt(t.consigna)),
     h(AzTaller, { key: t.id, tarea: t, c, green, clave: "az_u13_taller_" + t.id, aviso: AVISO_ACENTOS, fuente: { titulo: "Unidad 13 · " + t.titulo, href: "azbuka-13.html?m=u13m10" } }));
-  return h("div", null, h("div", { className: "u-sec" }, "Elegí un texto"), T.map((x, i) =>
+  return h("div", null, h("div", { className: "u-sec" }, "Elige un texto"), T.map((x, i) =>
     h("div", { key: x.id, className: "u-card mod", role: "button", tabIndex: 0, onClick: () => { setSel(x.id); window.scrollTo(0, 0); }, onKeyDown: e => { if (e.key === "Enter") setSel(x.id); } },
       h("div", { className: "mod-n" }, x.emoji),
       h("div", { style: { flex: 1, minWidth: 0 } }, h("div", { className: "mod-t" }, x.titulo), h("div", { className: "mod-d" }, x.formato + " · " + x.palabras[0] + "–" + x.palabras[1] + " palabras")))));

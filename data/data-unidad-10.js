@@ -37,12 +37,12 @@ const U10_PERS = {
 };
 /* Cosas: "ruso": [indefinido, sin artículo (para «no tengo»), emoji] */
 const U10_COSAS = {
-  "маши́на": ["un auto", "auto", "🚗"], "кни́га": ["un libro", "libro", "📕"], "телефо́н": ["un teléfono", "teléfono", "📱"], "компью́тер": ["una computadora", "computadora", "💻"],
-  "кварти́ра": ["un departamento", "departamento", "🏢"], "соба́ка": ["un perro", "perro", "🐕"], "ко́шка": ["una gata", "gata", "🐈"], "слова́рь": ["un diccionario", "diccionario", "📙"],
-  "ру́чка": ["una lapicera", "lapicera", "🖊️"], "су́мка": ["una cartera", "cartera", "👜"], "рабо́та": ["trabajo", "trabajo", "💼"], "вре́мя": ["tiempo", "tiempo", "⏰"]
+  "маши́на": ["un coche", "coche", "🚗"], "кни́га": ["un libro", "libro", "📕"], "телефо́н": ["un teléfono", "teléfono", "📱"], "компью́тер": ["un ordenador", "ordenador", "💻"],
+  "кварти́ра": ["un apartamento", "apartamento", "🏢"], "соба́ка": ["un perro", "perro", "🐕"], "ко́шка": ["una gata", "gata", "🐈"], "слова́рь": ["un diccionario", "diccionario", "📙"],
+  "ру́чка": ["un bolígrafo", "bolígrafo", "🖊️"], "су́мка": ["un bolso", "bolso", "👜"], "рабо́та": ["trabajo", "trabajo", "💼"], "вре́мя": ["tiempo", "tiempo", "⏰"]
 };
 /* Cantidades: "ruso": español */
-const U10_CANT = { "вода́": "agua", "чай": "té", "хлеб": "pan", "молоко́": "leche", "суп": "sopa", "сок": "jugo", "вре́мя": "tiempo" };
+const U10_CANT = { "вода́": "agua", "чай": "té", "хлеб": "pan", "молоко́": "leche", "суп": "sopa", "сок": "zumo", "вре́мя": "tiempo" };
 const U10_POCO = { "мно́го": "mucho/a", "ма́ло": "poco/a", "немно́го": "un poco de" };
 /* Verbos con dativo: "ruso": [español (yo, él/ella), complemento ruso, complemento español] */
 const U10_VDAT = {
@@ -54,7 +54,7 @@ const U10_ESTADOS = [["нра́вится му́зыка", "me gusta la música"
   ["интере́сно", "me interesa", "le interesa", "nos interesa"], ["тру́дно", "me cuesta", "le cuesta", "nos cuesta"], ["легко́", "me resulta fácil", "le resulta fácil", "nos resulta fácil"],
   ["ну́жно рабо́тать", "tengo que trabajar", "tiene que trabajar", "tenemos que trabajar"], ["нельзя́ кури́ть", null, null, null], ["нра́вится Москва́", "me gusta Moscú", "le gusta Moscú", "nos gusta Moscú"]];
 /* Instrumental: con qué. [verbo ruso (yo), objeto ruso o "", herramienta, español] */
-const U10_CON_QUE = [["пишу́", "", "ру́чка", "Escribo con lapicera."], ["пишу́", "", "каранда́ш", "Escribo con lápiz."], ["ем суп", "", "ло́жка", "Tomo la sopa con cuchara."],
+const U10_CON_QUE = [["пишу́", "", "ру́чка", "Escribo con bolígrafo."], ["пишу́", "", "каранда́ш", "Escribo con lápiz."], ["ем суп", "", "ло́жка", "Tomo la sopa con cuchara."],
   ["ем пи́ццу", "", "ви́лка", "Como pizza con tenedor."], ["ре́жу хлеб", "", "нож", "Corto el pan con un cuchillo."]];
 const U10_PROFES = { "врач": ["médico", "médica"], "учи́тель": ["maestro", null], "учи́тельница": [null, "maestra"], "инжене́р": ["ingeniero", "ingeniera"],
   "программи́ст": ["programador", "programadora"], "медсестра́": [null, "enfermera"], "архите́ктор": ["arquitecto", "arquitecta"], "студе́нт": ["estudiante", null] };
@@ -63,7 +63,7 @@ const U10_PREP = [["из", "Испа́ния", "de España"], ["из", "Арге
   ["для", "ма́ма", "para mamá"], ["для", "брат", "para mi hermano"], ["для", "А́нна", "para Ana"], ["по́сле", "рабо́та", "después del trabajo"], ["по́сле", "обе́д", "después del almuerzo"],
   ["до", "рабо́та", "antes del trabajo"], ["до", "обе́д", "antes del almuerzo"], ["о́коло", "дом", "cerca de la casa"], ["о́коло", "парк", "cerca del parque"], ["о́коло", "банк", "cerca del banco"]];
 const U10_PRON = { gen: ["у меня́", "у тебя́", "у него́", "у неё", "у нас", "у вас", "у них"], dat: ["мне", "тебе́", "ему́", "ей", "нам", "вам", "им"],
-  ins: ["со мной", "с тобо́й", "с ним", "с ней", "с на́ми", "с ва́ми", "с ни́ми"], es: ["yo", "vos", "él", "ella", "nosotros", "ustedes", "ellos"] };
+  ins: ["со мной", "с тобо́й", "с ним", "с ней", "с на́ми", "с ва́ми", "с ни́ми"], es: ["yo", "tú", "él", "ella", "nosotros", "ustedes", "ellos"] };
 
 const U10_VISTAS = { 1: "звони́ть с для дава́ть", 2: "есть колле́га без", 3: "де́ньги", 4: "мно́го ма́ло немно́го стака́н лю́ди буты́лка кусо́к килогра́мм литр па́чка па́ра ба́нка са́хар соль ма́сло рис шокола́д вино́ пи́во",
   5: "о́коло во́зле по́сле от кро́ме вме́сто напро́тив", 6: "помога́ть пока́зывать отвеча́ть сове́товать к дать сказа́ть помо́чь отве́тить посове́товать объясня́ть объясни́ть меша́ть",
@@ -74,11 +74,11 @@ const U10_PARES = [["дава́ть", "дать", "dar"], ["говори́ть",
   ["сове́товать", "посове́товать", "aconsejar"], ["объясня́ть", "объясни́ть", "explicar"], ["пока́зывать", "показа́ть", "mostrar"], ["звони́ть", "позвони́ть", "llamar"]];
 /* Traducción corta de las palabras nuevas para los ejercicios de vocabulario */
 const U10_GLOSA = {
-  "с": "con", "для": "para", "без": "sin", "о́коло": "cerca de", "во́зле": "cerca de, junto a", "по́сле": "después de", "колле́га": "colega", "де́ньги": "plata, dinero",
+  "с": "con", "для": "para", "без": "sin", "о́коло": "cerca de", "во́зле": "cerca de, junto a", "по́сле": "después de", "колле́га": "colega", "де́ньги": "dinero",
   "мно́го": "mucho", "ма́ло": "poco", "немно́го": "un poco", "стака́н": "vaso", "дава́ть": "dar", "помога́ть": "ayudar", "пока́зывать": "mostrar", "отвеча́ть": "responder",
   "сове́товать": "aconsejar", "нра́виться": "gustar", "ну́жно": "hace falta, hay que", "нельзя́": "no se puede", "нож": "cuchillo", "ре́зать": "cortar", "архите́ктор": "arquitecto",
   "буты́лка": "botella", "кусо́к": "pedazo", "килогра́мм": "kilo", "литр": "litro", "па́чка": "paquete", "па́ра": "par", "ба́нка": "lata, frasco", "са́хар": "azúcar", "соль": "sal",
-  "ма́сло": "aceite, manteca", "рис": "arroz", "шокола́д": "chocolate", "вино́": "vino", "пи́во": "cerveza", "от": "de (parte de)", "кро́ме": "excepto, además de",
+  "ма́сло": "aceite, mantequilla", "рис": "arroz", "шокола́д": "chocolate", "вино́": "vino", "пи́во": "cerveza", "от": "de (parte de)", "кро́ме": "excepto, además de",
   "вме́сто": "en lugar de", "напро́тив": "enfrente de", "к": "a (lo de alguien)", "дать": "dar (una vez)", "сказа́ть": "decir (una vez)", "помо́чь": "ayudar (una vez)",
   "отве́тить": "responder (una vez)", "посове́товать": "aconsejar (una vez)", "объясня́ть": "explicar", "объясни́ть": "explicar (una vez)", "меша́ть": "molestar",
   "гру́стно": "da tristeza", "жаль": "es una lástima", "стра́шно": "da miedo", "пора́": "es hora de", "понра́виться": "gustar (una vez)", "внук": "nieto", "вну́чка": "nieta",
@@ -102,7 +102,7 @@ const U10_GRUPOS = [
 const U10_LECTURAS = [
   { id: "familia", titulo: "Семья́ А́нны", lineas: [
       ["У А́нны есть брат и сестра́.", "Ana tiene un hermano y una hermana."], ["Брат рабо́тает врачо́м.", "El hermano trabaja de médico."],
-      ["У А́нны нет маши́ны.", "Ana no tiene auto."], ["Она́ ча́сто звони́т ма́ме.", "Llama seguido a su mamá."], ["В суббо́ту она́ гуля́ет с бра́том.", "El sábado pasea con su hermano."]],
+      ["У А́нны нет маши́ны.", "Ana no tiene coche."], ["Она́ ча́сто звони́т ма́ме.", "Llama seguido a su mamá."], ["В суббо́ту она́ гуля́ет с бра́том.", "El sábado pasea con su hermano."]],
     preguntas: [["¿De qué trabaja el hermano?", "врачо́м", ["учи́телем", "инжене́ром"]], ["¿A quién llama Ana seguido?", "ма́ме", ["ма́му", "ма́ма"]], ["¿Con quién pasea el sábado?", "с бра́том", ["с сестро́й", "с ма́мой"]]],
     vf: [["У А́нны есть маши́на.", false], ["У А́нны есть сестра́.", true], ["Она́ ча́сто звони́т ма́ме.", true]] },
   { id: "cafe", titulo: "В кафе́", lineas: [
@@ -121,11 +121,11 @@ const UNIDAD_10 = {
   id: 10,
   titulo: "Casos II: genitivo, dativo e instrumental",
   tituloRu: "Роди́тельный, да́тельный и твори́тельный падежи́",
-  objetivo: "Decir qué tenés y qué no, cantidades, a quién le das o decís algo, qué te gusta o necesitás, con quién y con qué hacés las cosas y de qué trabajás.",
+  objetivo: "Decir qué tienes y qué no, cantidades, a quién le das o dices algo, qué te gusta o necesitas, con quién y con qué haces las cosas y de qué trabajas.",
   tiempo: "4 a 5 semanas con práctica diaria (unas 40–50 horas)",
   modulos: [
     { id: "u10m1", n: 1, tipo: "leccion", nPractica: 10, titulo: "¿Por qué más casos?", resumen: "А́нна, А́нну, А́нне, с А́нной, у А́нны.",
-      intro: "Ya conocés tres casos: nominativo (quién hace), acusativo (qué recibe) y prepositivo (dónde). En esta unidad se suman los otros tres, y con ellos podés decir casi todo.",
+      intro: "Ya conoces tres casos: nominativo (quién hace), acusativo (qué recibe) y prepositivo (dónde). En esta unidad se suman los otros tres, y con ellos puedes decir casi todo.",
       secciones: [
         { id: "u10-seis-casos", titulo: "Una persona, seis formas",
           texto: "La misma palabra cambia la terminación según el papel que cumple en la frase. Cada caso responde una pregunta:\nnominativo: ¿quién? (кто?)\nacusativo: ¿a quién? ¿qué? (кого́? что?), lo que recibe la acción\nprepositivo: ¿dónde? (где?)\ngenitivo: ¿de quién? ¿quién no está? (кого́? чего́?)\ndativo: ¿a quién se le da o se le dice? (кому́?)\ninstrumental: ¿con quién? ¿con qué? (с кем? чем?)",
@@ -138,7 +138,7 @@ const UNIDAD_10 = {
           destacado: "La palabra cambia porque cambia su relación con las demás.",
           chequeo: [{ pide: "«Paseo con Ana» va en…", opciones: ["instrumental", "dativo", "genitivo"], ok: "instrumental", por: "Con quién: instrumental." }] },
         { id: "u10-relacion", titulo: "Primero la relación, después la terminación",
-          texto: "No hace falta memorizar todas las formas de una vez: en cada módulo tenés la tabla, y el módulo Casos tiene todas. Lo que sí hace falta es preguntarse, antes de escribir, qué relación querés expresar. Esa pregunta elige el caso; la tabla te da la terminación.",
+          texto: "No hace falta memorizar todas las formas de una vez: en cada módulo tienes la tabla, y el módulo Casos tiene todas. Lo que sí hace falta es preguntarse, antes de escribir, qué relación quieres expresar. Esa pregunta elige el caso; la tabla te da la terminación.",
           ejemplos: [
             { ru: "Э́то пода́рок для {ма́мы}.", es: "Es un regalo para mamá.", por: "для siempre pide genitivo: ма́мы." },
             { ru: "Я даю́ пода́рок {ма́ме}.", es: "Le doy un regalo a mamá.", por: "A quién se le da: dativo, ма́ме." }],
@@ -151,7 +151,7 @@ const UNIDAD_10 = {
       secciones: [
         { id: "u10-tener", titulo: "Tener: у + genitivo + есть",
           texto: "Para «tengo» se dice «junto a mí hay»: у + quién (en genitivo) + есть + qué (en nominativo). Lo que se tiene es el sujeto, lo que «hay».\nу меня́ · у тебя́ · у него́ · у неё · у нас · у вас · у них",
-          desarmar: { es: "Ana tiene un auto.", partes: [
+          desarmar: { es: "Ana tiene un coche.", partes: [
             { txt: "У А́нны", rol: "Quién tiene", nota: "у + genitivo: А́нна → А́нны. Literal: «junto a Ana»." },
             { txt: "есть", rol: "Hay", nota: "есть «hay» no cambia nunca." },
             { txt: "маши́на", rol: "Qué", nota: "Lo que hay va en nominativo: es el sujeto." }] },
@@ -161,13 +161,13 @@ const UNIDAD_10 = {
             { ru: "{У неё} есть соба́ка.", es: "Ella tiene un perro.", por: "у неё: genitivo de она́." }],
           destacado: "у + quién (genitivo) + есть + qué (nominativo)",
           errores: [{ mal: "Я есть маши́на.", bien: "{У меня́} есть маши́на.", por: "есть no es «tengo»: es «hay». Hace falta у меня́." }],
-          mas: { texto: "Este есть significa «hay» y no cambia nunca. No tiene nada que ver con есть «comer» (я ем, ты ешь): se escriben igual, pero son palabras distintas. Cuando lo importante no es si hay algo, sino cómo es, есть se omite: У меня́ больша́я кварти́ра («tengo un departamento grande»)." },
-          chequeo: [{ pide: "«Tenés un auto?»", opciones: ["У тебя́ есть маши́на?", "Ты есть маши́на?"], ok: "У тебя́ есть маши́на?", por: "у тебя́ + есть." }] },
+          mas: { texto: "Este есть significa «hay» y no cambia nunca. No tiene nada que ver con есть «comer» (я ем, ты ешь): se escriben igual, pero son palabras distintas. Cuando lo importante no es si hay algo, sino cómo es, есть se omite: У меня́ больша́я кварти́ра («tengo un apartamento grande»)." },
+          chequeo: [{ pide: "«Tienes un coche?»", opciones: ["У тебя́ есть маши́на?", "Ты есть маши́на?"], ok: "У тебя́ есть маши́на?", por: "у тебя́ + есть." }] },
         { id: "u10-de-quien", titulo: "De quién es",
-          texto: "El dueño va después de la cosa, en genitivo: кни́га А́нны («el libro de Ana»), маши́на Ива́на («el auto de Iván»). Es el «de» del español, sin preposición.",
+          texto: "El dueño va después de la cosa, en genitivo: кни́га А́нны («el libro de Ana»), маши́на Ива́на («el coche de Iván»). Es el «de» del español, sin preposición.",
           ejemplos: [
             { ru: "Э́то кни́га {А́нны}.", es: "Es el libro de Ana.", por: "А́нна → А́нны." },
-            { ru: "Где маши́на {бра́та}?", es: "¿Dónde está el auto de mi hermano?", por: "брат → бра́та." },
+            { ru: "Где маши́на {бра́та}?", es: "¿Dónde está el coche de mi hermano?", por: "брат → бра́та." },
             { ru: "Э́то дом {ба́бушки}.", es: "Es la casa de la abuela.", por: "ба́бушка → ба́бушки: después de **к**, **и**." }],
           errores: [{ mal: "Э́то кни́га из А́нны.", bien: "Э́то кни́га {А́нны}.", por: "Para «de quién», sin preposición." }],
           chequeo: [{ pide: "«El teléfono de mamá»", opciones: ["телефо́н ма́мы", "телефо́н ма́ма"], ok: "телефо́н ма́мы", por: "ма́ма → ма́мы." }] },
@@ -189,13 +189,13 @@ const UNIDAD_10 = {
           chequeo: [{ pide: "«Estoy en lo de mi hermano»", opciones: ["Я у бра́та.", "Я в бра́те."], ok: "Я у бра́та.", por: "En lo de alguien: у + genitivo." }] }
       ] },
     { id: "u10m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Genitivo: lo que no hay", resumen: "У меня́ нет маши́ны.",
-      intro: "Para decir que no tenés algo, есть se vuelve нет y lo que falta pasa a genitivo.",
+      intro: "Para decir que no tienes algo, есть se vuelve нет y lo que falta pasa a genitivo.",
       secciones: [
         { id: "u10-net", titulo: "Есть → нет",
-          antes: { pide: "У меня́ есть маши́на. ¿Cómo será «no tengo auto»?", opciones: ["У меня́ нет маши́ны.", "У меня́ нет маши́на."], ok: "У меня́ нет маши́ны.", por: "Lo que falta pasa a genitivo: маши́ны." },
+          antes: { pide: "У меня́ есть маши́на. ¿Cómo será «no tengo coche»?", opciones: ["У меня́ нет маши́ны.", "У меня́ нет маши́на."], ok: "У меня́ нет маши́ны.", por: "Lo que falta pasa a genitivo: маши́ны." },
           texto: "есть → нет, y lo que no hay va en genitivo. Vale para «no tengo» y para «no hay» en general. También para personas: Ива́на нет до́ма («Iván no está en casa»).",
           ejemplos: [
-            { ru: "У меня́ {нет маши́ны}.", es: "No tengo auto.", por: "маши́на → маши́ны." },
+            { ru: "У меня́ {нет маши́ны}.", es: "No tengo coche.", por: "маши́на → маши́ны." },
             { ru: "У А́нны {нет бра́та}.", es: "Ana no tiene hermano.", por: "брат → бра́та." },
             { ru: "{Ива́на нет} до́ма.", es: "Iván no está en casa.", por: "Quien no está, en genitivo." },
             { ru: "У нас {нет вре́мени}.", es: "No tenemos tiempo.", por: "вре́мя → вре́мени: irregular." }],
@@ -203,7 +203,7 @@ const UNIDAD_10 = {
           errores: [
             { mal: "У меня́ есть не маши́на.", bien: "У меня́ {нет маши́ны}.", por: "Para «no tengo» va нет, y el genitivo." },
             { mal: "У меня́ нет маши́на.", bien: "У меня́ нет {маши́ны}.", por: "Después de нет, genitivo." }],
-          mas: { texto: "Algunas van como fórmulas: нет вре́мени (no hay tiempo), нет де́нег (no hay plata), нет рабо́ты (no hay trabajo). вре́мя es irregular (вре́мени) y де́ньги está siempre en plural (де́нег)." },
+          mas: { texto: "Algunas van como fórmulas: нет вре́мени (no hay tiempo), нет де́нег (no hay dinero), нет рабо́ты (no hay trabajo). вре́мя es irregular (вре́мени) y де́ньги está siempre en plural (де́нег)." },
           chequeo: [{ pide: "У меня́ нет ___ (кни́га).", opciones: ["кни́ги", "кни́га", "кни́гу"], ok: "кни́ги", por: "Después de нет, genitivo; después de **г**, **и**." }] },
         { id: "u10-net-tiempos", titulo: "No había, no va a haber",
           texto: "En pasado y en futuro, нет se dice con быть, que queda siempre en neutro: не́ было (no había) y не бу́дет (no va a haber). Lo que falta sigue en genitivo.",
@@ -216,10 +216,10 @@ const UNIDAD_10 = {
           chequeo: [{ pide: "«Ayer no había leche».", opciones: ["Вчера́ не́ было молока́.", "Вчера́ не́ было молоко́."], ok: "Вчера́ не́ было молока́.", por: "не́ было + genitivo." }] }
       ] },
     { id: "u10m4", n: 4, tipo: "leccion", nPractica: 10, titulo: "Genitivo: cantidad", resumen: "мно́го вре́мени, буты́лка воды́.",
-      intro: "Después de una palabra de cantidad, lo que se cuenta o se mide va en genitivo. Y acá se aclara algo que venías usando desde la hora.",
+      intro: "Después de una palabra de cantidad, lo que se cuenta o se mide va en genitivo. Y aquí se aclara algo que venías usando desde la hora.",
       secciones: [
         { id: "u10-cantidad", titulo: "Mucho, poco, un poco",
-          texto: "мно́го (mucho), ма́ло (poco), немно́го (un poco) + genitivo:\nмно́го вре́мени (mucho tiempo)\nма́ло воды́ (poca agua)\nнемно́го молока́ (un poco de leche)\nмно́го люде́й (mucha gente) y мно́го де́нег (mucha plata) van así, como fórmulas.",
+          texto: "мно́го (mucho), ма́ло (poco), немно́го (un poco) + genitivo:\nмно́го вре́мени (mucho tiempo)\nма́ло воды́ (poca agua)\nнемно́го молока́ (un poco de leche)\nмно́го люде́й (mucha gente) y мно́го де́нег (mucho dinero) van así, como fórmulas.",
           ejemplos: [
             { ru: "У меня́ {мно́го рабо́ты}.", es: "Tengo mucho trabajo.", por: "рабо́та → рабо́ты." },
             { ru: "В стака́не {ма́ло воды́}.", es: "En el vaso hay poca agua.", por: "вода́ → воды́." },
@@ -235,7 +235,7 @@ const UNIDAD_10 = {
           errores: [{ mal: "Буты́лка вода́.", bien: "Буты́лка {воды́}.", por: "Lo que contiene va en genitivo." }],
           chequeo: [{ pide: "«Un litro de leche»", opciones: ["литр молока́", "литр молоко́"], ok: "литр молока́", por: "Lo que se mide, en genitivo." }] },
         { id: "u10-por-que-chasa", titulo: "Por qué два часа́",
-          texto: "Desde la hora venís usando un patrón: час, два часа́, пять часо́в. Ahora se entiende: después de 2, 3 y 4 va el **genitivo singular**, el mismo de este módulo. Por eso два стака́на, три килогра́мма, четы́ре ли́тра.\nDesde 5, va otra forma del genitivo, la del plural: пять часо́в, пять лет, пять дней. Esa forma la vas a ver con más palabras más adelante; por ahora, con las que ya conocés.",
+          texto: "Desde la hora vienes usando un patrón: час, два часа́, пять часо́в. Ahora se entiende: después de 2, 3 y 4 va el **genitivo singular**, el mismo de este módulo. Por eso два стака́на, три килогра́мма, четы́ре ли́тра.\nDesde 5, va otra forma del genitivo, la del plural: пять часо́в, пять лет, пять дней. Esa forma la vas a ver con más palabras más adelante; por ahora, con las que ya conoces.",
           ejemplos: [
             { ru: "два {стака́на}", es: "dos vasos", por: "стака́н → стака́на: genitivo singular, como ча́са." },
             { ru: "три {килогра́мма}", es: "tres kilos", por: "Igual: **-а**." },
@@ -256,7 +256,7 @@ const UNIDAD_10 = {
             { ru: "Банк {напро́тив па́рка}.", es: "El banco está enfrente del parque.", por: "напро́тив + genitivo." },
             { ru: "Я пью чай {вме́сто ко́фе}.", es: "Tomo té en lugar de café.", por: "вме́сто + genitivo; ко́фе no cambia." }],
           destacado: "из, от, без, для, по́сле, до, о́коло, напро́тив, кро́ме, вме́сто → genitivo",
-          mas: { texto: "Я из Аргенти́ны, que usás desde el principio, ya era genitivo: Аргенти́на → Аргенти́ны. La frase venía armada; ahora sabés por qué termina así." },
+          mas: { texto: "Я из Аргенти́ны, que usas desde el principio, ya era genitivo: Аргенти́на → Аргенти́ны. La frase venía armada; ahora sabes por qué termina así." },
           chequeo: [{ pide: "ко́фе без ___ (са́хар)", opciones: ["са́хара", "са́хар", "са́харом"], ok: "са́хара", por: "без + genitivo." }] },
         { id: "u10-iz-ot", titulo: "Из o от",
           texto: "Las dos son «de», pero no se cruzan:\nиз: de un lugar (de adentro de algo): из Москвы́, из магази́на.\nот: de una persona: письмо́ от бра́та («una carta de mi hermano»), пода́рок от ма́мы.",
@@ -268,7 +268,7 @@ const UNIDAD_10 = {
           chequeo: [{ pide: "«Un mensaje de mamá»: письмо́ ___ ма́мы", opciones: ["от", "из"], ok: "от", por: "De una persona: от." }] }
       ] },
     { id: "u10m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Dativo: ¿a quién?", resumen: "Я даю́ кни́гу А́нне. Я иду́ к врачу́.",
-      intro: "El dativo es la persona a la que le das, le decís o le hacés algo. Se pregunta con кому́? («¿a quién?»).",
+      intro: "El dativo es la persona a la que le das, le dices o le haces algo. Se pregunta con кому́? («¿a quién?»).",
       secciones: [
         { id: "u10-dat-verbos", titulo: "Los verbos con dativo",
           texto: "Van con dativo los verbos de dar y decir, y algunos más:\nдава́ть (dar): Я даю́ кни́гу А́нне.\nпока́зывать (mostrar): Я пока́зываю фо́то бра́ту.\nписа́ть (escribir): Я пишу́ письмо́ Ива́ну.\nотвеча́ть (responder): Я отвеча́ю учи́телю.\nобъясня́ть (explicar): Учи́тель объясня́ет уро́к студе́нту.\nсове́товать (aconsejar): Врач сове́тует ма́ме отдыха́ть.\nзвони́ть (llamar) y помога́ть (ayudar): Я звоню́ ма́ме. Я помога́ю дру́гу.",
@@ -315,12 +315,12 @@ const UNIDAD_10 = {
       intro: "Muchas cosas que en español dicen «me…» en ruso se dicen con el dativo: gustos, estados, necesidades y hasta la edad.",
       secciones: [
         { id: "u10-gustar", titulo: "Me gusta: мне нра́вится",
-          texto: "мне (a mí), тебе́ (a vos), ему́ (a él), ей (a ella), нам (a nosotros), вам (a ustedes), им (a ellos).\nМне нра́вится му́зыка funciona igual que «me gusta la música»: lo que gusta es el sujeto (en nominativo) y a quién le gusta va en dativo. Si lo que gusta es plural, el verbo va en plural: Мне нра́вятся фи́льмы.",
+          texto: "мне (a mí), тебе́ (a ti), ему́ (a él), ей (a ella), нам (a nosotros), вам (a ustedes), им (a ellos).\nМне нра́вится му́зыка funciona igual que «me gusta la música»: lo que gusta es el sujeto (en nominativo) y a quién le gusta va en dativo. Si lo que gusta es plural, el verbo va en plural: Мне нра́вятся фи́льмы.",
           ejemplos: [
             { ru: "{Мне} нра́вится {му́зыка}.", es: "Me gusta la música.", por: "A quién: dativo. Qué: nominativo, el sujeto." },
             { ru: "{А́нне} нра́вится Москва́.", es: "A Ana le gusta Moscú.", por: "А́нна → А́нне." },
             { ru: "{Ему́} нра́вятся фи́льмы.", es: "A él le gustan las películas.", por: "Varias cosas: нра́вятся." }],
-          comparacion: "Acá el español ayuda: «me gusta» y Мне нра́вится tienen la misma forma. Lo que gusta es el sujeto en los dos idiomas.",
+          comparacion: "Aquí el español ayuda: «me gusta» y Мне нра́вится tienen la misma forma. Lo que gusta es el sujeto en los dos idiomas.",
           errores: [{ mal: "Я нра́влюсь ко́фе.", bien: "{Мне} нра́вится {ко́фе}.", por: "Я нра́влюсь quiere decir «yo le gusto (a alguien)»." }],
           mas: { texto: "En pasado, para algo que te gustó una vez (una película, un viaje), va понра́виться, que concuerda con lo que gustó: Мне понра́вился фильм, Мне понра́вилась Москва́, Мне понра́вилось («me gustó», sin sujeto).",
             ejemplos: [
@@ -336,12 +336,12 @@ const UNIDAD_10 = {
             { ru: "Вчера́ {мне} бы́ло ве́село.", es: "Ayer me divertí.", por: "En pasado, бы́ло." }],
           errores: [{ mal: "Я хо́лодно.", bien: "{Мне} хо́лодно.", por: "El estado va con dativo." }],
           chequeo: [{ pide: "«Tengo miedo»", opciones: ["Мне стра́шно.", "Я стра́шно."], ok: "Мне стра́шно.", por: "Dativo + **-о**." }] },
-        { id: "u10-edad", titulo: "Cuántos años tenés: мне … лет",
-          texto: "La edad se dice con dativo y la cuenta de siempre: Мне два́дцать лет («tengo veinte años»). Ско́лько тебе́ лет? («¿cuántos años tenés?»). Con 1, год; con 2, 3 y 4, го́да; desde 5, лет.",
+        { id: "u10-edad", titulo: "Cuántos años tienes: мне … лет",
+          texto: "La edad se dice con dativo y la cuenta de siempre: Мне два́дцать лет («tengo veinte años»). Ско́лько тебе́ лет? («¿cuántos años tienes?»). Con 1, год; con 2, 3 y 4, го́да; desde 5, лет.",
           ejemplos: [
             { ru: "{Мне} три́дцать {лет}.", es: "Tengo treinta años.", por: "Desde 5: лет." },
             { ru: "{Ему́} четы́ре {го́да}.", es: "Él tiene cuatro años.", por: "2, 3 y 4: го́да." },
-            { ru: "— Ско́лько {тебе́} лет? — Со́рок.", es: "—¿Cuántos años tenés? —Cuarenta.", por: "La pregunta, con dativo." }],
+            { ru: "— Ско́лько {тебе́} лет? — Со́рок.", es: "—¿Cuántos años tienes? —Cuarenta.", por: "La pregunta, con dativo." }],
           destacado: "Мне два́дцать лет. · Ско́лько тебе́ лет?",
           errores: [{ mal: "У меня́ два́дцать лет.", bien: "{Мне} два́дцать лет.", por: "La edad no se «tiene»: va con dativo." }],
           mas: { texto: "Con los números compuestos manda la última palabra: два́дцать оди́н год, два́дцать два го́да, два́дцать пять лет." },
@@ -352,9 +352,9 @@ const UNIDAD_10 = {
             { ru: "{Мне ну́жно} рабо́тать.", es: "Tengo que trabajar.", por: "Una actividad: proceso." },
             { ru: "{Ему́ ну́жно} позвони́ть ма́ме.", es: "Él tiene que llamar a mamá.", por: "Una llamada: resultado." },
             { ru: "{Мо́жно} взять кни́гу?", es: "¿Puedo llevarme el libro?", por: "Una vez: resultado." },
-            { ru: "Здесь {нельзя́} спать.", es: "Acá no se puede dormir.", por: "Una prohibición general: proceso." }],
+            { ru: "Здесь {нельзя́} спать.", es: "Aquí no se puede dormir.", por: "Una prohibición general: proceso." }],
           destacado: "ну́жно купи́ть (una vez) · ну́жно покупа́ть (siempre)",
-          mas: { texto: "на́до dice lo mismo que ну́жно, y se usa tanto como él: Мне на́до рабо́тать. Con нельзя́ va casi siempre el de proceso: Здесь нельзя́ спать («acá no se puede dormir»)." },
+          mas: { texto: "на́до dice lo mismo que ну́жно, y se usa tanto como él: Мне на́до рабо́тать. Con нельзя́ va casi siempre el de proceso: Здесь нельзя́ спать («aquí no se puede dormir»)." },
           chequeo: [{ pide: "«Tengo que comprar pan» (hoy)", opciones: ["Мне ну́жно купи́ть хлеб.", "Мне ну́жно покупа́ть хлеб."], ok: "Мне ну́жно купи́ть хлеб.", por: "Una compra concreta: resultado." }] }
       ] },
     { id: "u10m8", n: 8, tipo: "leccion", nPractica: 12, titulo: "Instrumental: ¿con quién?", resumen: "Я гуля́ю с А́нной.",
@@ -391,9 +391,9 @@ const UNIDAD_10 = {
       intro: "Sin preposición, el instrumental es la herramienta. Con algunas preposiciones, dice dónde está algo.",
       secciones: [
         { id: "u10-con-que", titulo: "La herramienta, sin с",
-          texto: "Para «con qué» (la herramienta), el instrumental va solo, sin preposición: Я пишу́ ру́чкой («escribo con lapicera»). с es para «con quién» o «junto con».",
+          texto: "Para «con qué» (la herramienta), el instrumental va solo, sin preposición: Я пишу́ ру́чкой («escribo con bolígrafo»). с es para «con quién» o «junto con».",
           ejemplos: [
-            { ru: "Я пишу́ {ру́чкой}.", es: "Escribo con lapicera.", por: "Herramienta: sin с." },
+            { ru: "Я пишу́ {ру́чкой}.", es: "Escribo con bolígrafo.", por: "Herramienta: sin с." },
             { ru: "Я ем суп {ло́жкой}.", es: "Tomo la sopa con cuchara.", por: "ло́жка → ло́жкой." },
             { ru: "Она́ ре́жет хлеб {ножо́м}.", es: "Corta el pan con un cuchillo.", por: "нож → ножо́м." }],
           destacado: "con qué → instrumental, sin с",
@@ -404,7 +404,7 @@ const UNIDAD_10 = {
           ejemplos: [
             { ru: "Ко́шка {под столо́м}.", es: "La gata está debajo de la mesa.", por: "под + instrumental." },
             { ru: "Ла́мпа {над столо́м}.", es: "La lámpara está sobre la mesa (colgada arriba).", por: "над: arriba, sin tocar." },
-            { ru: "Маши́на {пе́ред до́мом}.", es: "El auto está delante de la casa.", por: "дом → до́мом." },
+            { ru: "Маши́на {пе́ред до́мом}.", es: "El coche está delante de la casa.", por: "дом → до́мом." },
             { ru: "Парк {за до́мом}.", es: "El parque está detrás de la casa.", por: "за + instrumental: detrás." }],
           comparacion: "на столе́ es «sobre la mesa», apoyado; над столо́м es «arriba de la mesa», sin tocarla.",
           chequeo: [{ pide: "«Debajo de la cama»", opciones: ["под посте́лью", "под посте́ль"], ok: "под посте́лью", por: "под + instrumental." }] },
@@ -416,10 +416,10 @@ const UNIDAD_10 = {
           chequeo: [{ pide: "«Voy a ir en tren» (las dos formas)", opciones: ["по́ездом / на по́езде", "с по́ездом / в по́езд"], ok: "по́ездом / на по́езде", por: "Instrumental solo o на + prepositivo." }] }
       ] },
     { id: "u10m10", n: 10, tipo: "leccion", nPractica: 10, titulo: "Instrumental: profesión e intereses", resumen: "Я рабо́таю врачо́м.",
-      intro: "Para decir de qué trabajás, qué querés ser o qué hacés en tu tiempo libre, va el instrumental.",
+      intro: "Para decir de qué trabajas, qué quieres ser o qué haces en tu tiempo libre, va el instrumental.",
       secciones: [
-        { id: "u10-rabotat-kem", titulo: "De qué trabajás",
-          texto: "рабо́тать + la profesión en instrumental: Я рабо́таю врачо́м («trabajo de médico»). La pregunta es Кем ты рабо́таешь? («¿de qué trabajás?»).",
+        { id: "u10-rabotat-kem", titulo: "De qué trabajas",
+          texto: "рабо́тать + la profesión en instrumental: Я рабо́таю врачо́м («trabajo de médico»). La pregunta es Кем ты рабо́таешь? («¿de qué trabajas?»).",
           ejemplos: [
             { ru: "Я рабо́таю {врачо́м}.", es: "Trabajo de médico.", por: "врач → врачо́м." },
             { ru: "Она́ рабо́тает {журнали́стом}.", es: "Ella trabaja de periodista.", por: "журнали́ст → журнали́стом." },
@@ -440,14 +440,14 @@ const UNIDAD_10 = {
           ejemplos: [
             { ru: "Я {занима́юсь} {спо́ртом}.", es: "Hago deporte.", por: "спорт → спо́ртом." },
             { ru: "Он {интересу́ется} {исто́рией}.", es: "Le interesa la historia.", por: "исто́рия → исто́рией." },
-            { ru: "Чем ты {занима́ешься}?", es: "¿A qué te dedicás?", por: "чем: instrumental de что." }],
+            { ru: "Чем ты {занима́ешься}?", es: "¿A qué te dedicas?", por: "чем: instrumental de что." }],
           errores: [{ mal: "Я занима́юсь спорт.", bien: "Я занима́юсь {спо́ртом}.", por: "занима́ться pide instrumental." }],
           chequeo: [{ pide: "«Me interesa la música»", opciones: ["Я интересу́юсь му́зыкой.", "Я интересу́юсь му́зыку."], ok: "Я интересу́юсь му́зыкой.", por: "интересова́ться + instrumental." }] }
       ] },
     { id: "u10m11", n: 11, tipo: "lectura", titulo: "Los seis casos juntos", resumen: "Pensar en la relación.",
-      intro: "Tres textos con todos los casos. Al leer, preguntate qué relación expresa cada palabra; después contestá." },
+      intro: "Tres textos con todos los casos. Al leer, pregúntate qué relación expresa cada palabra; después contesta." },
     { id: "u10m12", n: 12, tipo: "proyecto", titulo: "Proyecto: Моя жизнь", resumen: "Tu vida, con todos los casos.",
-      intro: "Escribí sobre tu vida: qué tenés y qué no, quiénes son importantes, con quién hacés las cosas, a quién llamás, de qué trabajás, qué te gusta, qué hiciste y qué vas a hacer. Por ejemplo: У меня́ есть брат. У меня́ нет маши́ны. Я рабо́таю архите́ктором. По́сле рабо́ты я звоню́ ма́ме. Мне нра́вится му́зыка. Вчера́ я был в рестора́не с бра́том. За́втра я бу́ду рабо́тать с колле́гой.",
+      intro: "Escribe sobre tu vida: qué tienes y qué no, quiénes son importantes, con quién haces las cosas, a quién llamas, de qué trabajas, qué te gusta, qué hiciste y qué vas a hacer. Por ejemplo: У меня́ есть брат. У меня́ нет маши́ны. Я рабо́таю архите́ктором. По́сле рабо́ты я звоню́ ма́ме. Мне нра́вится му́зыка. Вчера́ я был в рестора́не с бра́том. За́втра я бу́ду рабо́тать с колле́гой.",
       requisitos: [], consejos: [] },
     { id: "u10m13", n: 13, tipo: "examen", titulo: "Evaluación", resumen: "Relación, caso y por qué, есть / нет, a quién, con quién, traducción y audio.",
       intro: "Cuarenta ejercicios en ocho partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
@@ -535,46 +535,46 @@ function ejerciciosUnidad10() {
     const c = C[j % C.length]; if (!c) return;
     const ru = "У " + p.gen + " есть " + c.nom + ".", esF = p.esS + " tiene " + c.un + ".";
     const base = { grupo: "TN-" + j, items: ["lex:" + p.id, "lex:" + estaId], oir: ru };
-    out.push(Object.assign({ id: "U10-ten-" + j, tipo: "tener", forma: "escribir", dificultad: 3, modulo: 2, pide: "Escribí en ruso: «" + esF + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
+    out.push(Object.assign({ id: "U10-ten-" + j, tipo: "tener", forma: "escribir", dificultad: 3, modulo: 2, pide: "Escribe en ruso: «" + esF + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
       explicacion: "у + genitivo: " + u10Cambio(p, "gen") + " " + ru }, base));
-    out.push(Object.assign({ id: "U10-tenf-" + j, tipo: "forma", forma: "elegir", dificultad: 1, modulo: 2, pide: "Completá: «" + esF + "»", grande: "У _____ есть " + c.nom + ".",
+    out.push(Object.assign({ id: "U10-tenf-" + j, tipo: "forma", forma: "elegir", dificultad: 1, modulo: 2, pide: "Completa: «" + esF + "»", grande: "У _____ есть " + c.nom + ".",
       opciones: baraja(uniq([p.gen, p.nom, p.dat, p.acc].filter(Boolean)).slice(0, 4), j), correcta: p.gen, explicacion: u10Cambio(p, "gen") + " " + ru }, base, { grupo: "TNf-" + j }));
-    out.push(Object.assign({ id: "U10-genw-" + j, tipo: "forma", forma: "escribir", dificultad: 2, modulo: 2, pide: "Escribí el genitivo: «de " + p.esS.toLowerCase().replace(/^(el|la|mi) /, "") + "».", grande: p.nom,
+    out.push(Object.assign({ id: "U10-genw-" + j, tipo: "forma", forma: "escribir", dificultad: 2, modulo: 2, pide: "Escribe el genitivo: «de " + p.esS.toLowerCase().replace(/^(el|la|mi) /, "") + "».", grande: p.nom,
       audio: p.gen, audioManual: true, esperadas: [p.gen], idioma: "ru", explicacion: u10Cambio(p, "gen") }, base, { grupo: "TNg-" + j }));
     const ruDe = cap(c.nom) + " " + p.gen + ".";
-    if (j % 2 === 0 && /^(un|una) /.test(c.un)) out.push(Object.assign({ id: "U10-de-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 2, pide: "Escribí en ruso: «" + cap(c.un.replace(/^(un|una) /, (m, a) => a === "un" ? "el " : "la ")) + " " + p.esDe + "»",
+    if (j % 2 === 0 && /^(un|una) /.test(c.un)) out.push(Object.assign({ id: "U10-de-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 2, pide: "Escribe en ruso: «" + cap(c.un.replace(/^(un|una) /, (m, a) => a === "un" ? "el " : "la ")) + " " + p.esDe + "»",
       audio: ruDe, audioManual: true, esperadas: [ruDe.replace(/\.$/, ""), ruDe], idioma: "ru", explicacion: "El dueño va después, en genitivo: " + u10Cambio(p, "gen") }, base, { grupo: "TNd-" + j }));
   });
   U10_PRON.gen.forEach((g, i) => {
     const c = C[(i * 3) % C.length], ru = cap(g) + " есть " + c.nom + ".";
-    const es = ["Tengo", "Vos tenés", "Él tiene", "Ella tiene", "Tenemos", "Ustedes tienen", "Ellos tienen"][i] + " " + c.un + ".";
-    out.push({ id: "U10-tenp-" + i, tipo: "tener", forma: "escribir", dificultad: 2, modulo: 2, grupo: "TP-" + i, items: ["lex:" + estaId], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    const es = ["Tengo", "Tú tienes", "Él tiene", "Ella tiene", "Tenemos", "Ustedes tienen", "Ellos tienen"][i] + " " + c.un + ".";
+    out.push({ id: "U10-tenp-" + i, tipo: "tener", forma: "escribir", dificultad: 2, modulo: 2, grupo: "TP-" + i, items: ["lex:" + estaId], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: "**" + g + "** = " + U10_PRON.es[i] + " (tener). " + ru });
   });
   /* ¿Quién tiene qué? (escena) */
   P.slice(0, 6).forEach((p, j) => {
     const c = C[(j + 2) % C.length], q = "У кого́ есть " + c.nom + "?", r = "У " + p.gen + " есть " + c.nom + ".";
     out.push({ id: "U10-quien-" + j, tipo: "tener", forma: "escribir", dificultad: 2, modulo: 2, grupo: "QT-" + j, items: ["lex:" + p.id], oir: r, contexto: [{ p: "—", ru: q }],
-      pide: c.emoji + " → " + p.esS + ". Contestá en ruso.", audio: q, audioManual: true, esperadas: [r, "У " + p.gen + "."], idioma: "ru", explicacion: "— " + q + " — " + r });
+      pide: c.emoji + " → " + p.esS + ". Contesta en ruso.", audio: q, audioManual: true, esperadas: [r, "У " + p.gen + "."], idioma: "ru", explicacion: "— " + q + " — " + r });
   });
 
   /* ── Módulo 3: lo que no hay ── */
   C.forEach((c, j) => {
     const yes = "У меня́ есть " + c.nom + ".", no = "У меня́ нет " + c.gen + ".";
     const base = { grupo: "NO-" + j, items: ["lex:" + c.id], oir: no };
-    out.push(Object.assign({ id: "U10-no-" + j, tipo: "no-tener", forma: "escribir", dificultad: 2, modulo: 3, pide: "Pasala a negativo.", grande: yes, audio: no, audioManual: true, esperadas: [no], idioma: "ru",
+    out.push(Object.assign({ id: "U10-no-" + j, tipo: "no-tener", forma: "escribir", dificultad: 2, modulo: 3, pide: "Pásala a negativo.", grande: yes, audio: no, audioManual: true, esperadas: [no], idioma: "ru",
       explicacion: "нет + genitivo: " + u10Cambio(c, "gen") + " " + no }, base));
-    out.push(Object.assign({ id: "U10-noel-" + j, tipo: "no-tener", forma: "elegir", dificultad: 1, modulo: 3, pide: "Completá: «No tengo " + c.bare + ".»", grande: "У меня́ нет _____.",
+    out.push(Object.assign({ id: "U10-noel-" + j, tipo: "no-tener", forma: "elegir", dificultad: 1, modulo: 3, pide: "Completa: «No tengo " + c.bare + ".»", grande: "У меня́ нет _____.",
       opciones: baraja(uniq([c.gen, c.nom, c.dat || c.nom]), j), correcta: c.gen, explicacion: u10Cambio(c, "gen") }, base, { grupo: "NOe-" + j }));
     const p = P[j % P.length], ru = "У " + p.gen + " нет " + c.gen + ".", es = p.esS + " no tiene " + c.bare + ".";
-    out.push(Object.assign({ id: "U10-noesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 3, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
+    out.push(Object.assign({ id: "U10-noesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 3, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
       explicacion: "у " + p.gen + " (quién) + нет + " + c.gen + " (genitivo). " + ru }, base, { grupo: "NOr-" + j }));
     if (j % 2 === 0) { const pals = sinP(no).split(" "); pals[pals.length - 1] = c.nom;
-      if (c.nom !== c.gen) out.push(Object.assign({ id: "U10-nodet-" + j, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 3, pide: "Tocá la palabra que está mal.", palabras: pals, correcta: pals.length - 1,
+      if (c.nom !== c.gen) out.push(Object.assign({ id: "U10-nodet-" + j, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 3, pide: "Toca la palabra que está mal.", palabras: pals, correcta: pals.length - 1,
         explicacion: "Después de нет va el genitivo: " + u10Cambio(c, "gen") }, base, { grupo: "NOd-" + j })); }
   });
-  [["У меня́ нет вре́мени.", "No tengo tiempo."], ["У меня́ нет де́нег.", "No tengo plata."], ["У него́ нет рабо́ты.", "Él no tiene trabajo."]].forEach(([ru, es], j) =>
-    out.push({ id: "U10-nofor-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 3, grupo: "NF-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
+  [["У меня́ нет вре́мени.", "No tengo tiempo."], ["У меня́ нет де́нег.", "No tengo dinero."], ["У него́ нет рабо́ты.", "Él no tiene trabajo."]].forEach(([ru, es], j) =>
+    out.push({ id: "U10-nofor-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 3, grupo: "NF-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
 
   /* ── Módulo 4: cantidad ── */
   Object.keys(U10_CANT).forEach((ru, j) => {
@@ -582,28 +582,28 @@ function ejerciciosUnidad10() {
     Object.keys(U10_POCO).forEach((q, k) => {
       if ((j + k) % 2) return;
       const fr = q + " " + s.gen, es = U10_POCO[q].replace("mucho/a", /^(agua|leche|sopa)$/.test(U10_CANT[ru]) ? "mucha" : "mucho").replace("poco/a", /^(agua|leche|sopa)$/.test(U10_CANT[ru]) ? "poca" : "poco") + " " + U10_CANT[ru];
-      out.push({ id: "U10-cant-" + j + "-" + k, tipo: "cantidad", forma: "escribir", dificultad: 2, modulo: 4, grupo: "CA-" + j + "-" + k, items: ["lex:" + s.id], oir: fr, pide: "Escribí en ruso: «" + es + "»", audio: fr, audioManual: true,
+      out.push({ id: "U10-cant-" + j + "-" + k, tipo: "cantidad", forma: "escribir", dificultad: 2, modulo: 4, grupo: "CA-" + j + "-" + k, items: ["lex:" + s.id], oir: fr, pide: "Escribe en ruso: «" + es + "»", audio: fr, audioManual: true,
         esperadas: [fr], idioma: "ru", explicacion: q + " + genitivo: " + u10Cambio(s, "gen") });
     });
-    out.push({ id: "U10-cantel-" + j, tipo: "cantidad", forma: "elegir", dificultad: 1, modulo: 4, grupo: "CAe-" + j, items: ["lex:" + s.id], pide: "Completá: «un poco de " + U10_CANT[ru] + "»", grande: "немно́го _____",
+    out.push({ id: "U10-cantel-" + j, tipo: "cantidad", forma: "elegir", dificultad: 1, modulo: 4, grupo: "CAe-" + j, items: ["lex:" + s.id], pide: "Completa: «un poco de " + U10_CANT[ru] + "»", grande: "немно́го _____",
       opciones: baraja(uniq([s.gen, s.nom, s.dat]), j), correcta: s.gen, explicacion: u10Cambio(s, "gen") });
   });
-  [["стака́н воды́", "un vaso de agua"], ["стака́н со́ка", "un vaso de jugo"], ["ча́шка ча́я", "una taza de té"], ["ча́шка ко́фе", "una taza de café"], ["мно́го люде́й", "mucha gente"], ["мно́го де́нег", "mucha plata"]].forEach(([ru, es], j) =>
-    out.push({ id: "U10-cantf-" + j, tipo: "cantidad", forma: "escribir", dificultad: 2, modulo: 4, grupo: "CF-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
+  [["стака́н воды́", "un vaso de agua"], ["стака́н со́ка", "un vaso de zumo"], ["ча́шка ча́я", "una taza de té"], ["ча́шка ко́фе", "una taza de café"], ["мно́го люде́й", "mucha gente"], ["мно́го де́нег", "mucho dinero"]].forEach(([ru, es], j) =>
+    out.push({ id: "U10-cantf-" + j, tipo: "cantidad", forma: "escribir", dificultad: 2, modulo: 4, grupo: "CF-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
 
   /* ── Módulo 5: preposiciones ── */
   U10_PREP.forEach(([pr, ru, es], j) => {
     const s = sust(ru); if (!s) return;
     const fr = pr + " " + s.gen;
-    out.push({ id: "U10-prep-" + j, tipo: "prep", forma: "escribir", dificultad: 2, modulo: 5, grupo: "PP-" + j, items: ["lex:" + s.id], oir: fr, pide: "Escribí en ruso: «" + es + "»", audio: fr, audioManual: true,
+    out.push({ id: "U10-prep-" + j, tipo: "prep", forma: "escribir", dificultad: 2, modulo: 5, grupo: "PP-" + j, items: ["lex:" + s.id], oir: fr, pide: "Escribe en ruso: «" + es + "»", audio: fr, audioManual: true,
       esperadas: [fr], idioma: "ru", explicacion: "**" + pr + "** + genitivo: " + u10Cambio(s, "gen") });
-    if (j % 2 === 0) out.push({ id: "U10-prepel-" + j, tipo: "prep", forma: "elegir", dificultad: 1, modulo: 5, grupo: "PPe-" + j, items: ["lex:" + s.id], pide: "Completá: «" + es + "»", grande: pr + " _____",
+    if (j % 2 === 0) out.push({ id: "U10-prepel-" + j, tipo: "prep", forma: "elegir", dificultad: 1, modulo: 5, grupo: "PPe-" + j, items: ["lex:" + s.id], pide: "Completa: «" + es + "»", grande: pr + " _____",
       opciones: baraja(uniq([s.gen, s.nom, s.dat, s.prep || s.nom]).slice(0, 3), j), correcta: s.gen, explicacion: u10Cambio(s, "gen") });
   });
   [["Я пью ко́фе без молока́.", "Tomo café sin leche."], ["Э́то пода́рок для ма́мы.", "Es un regalo para mamá."], ["По́сле рабо́ты я иду́ в парк.", "Después del trabajo voy al parque."],
    ["До обе́да я рабо́таю.", "Antes del almuerzo trabajo."], ["Банк о́коло до́ма.", "El banco está cerca de la casa."]].forEach(([ru, es], j) => {
-    out.push({ id: "U10-prepf-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, grupo: "PF-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
-    out.push({ id: "U10-prepd-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 5, grupo: "PD-" + j, items: [], pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
+    out.push({ id: "U10-prepf-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, grupo: "PF-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
+    out.push({ id: "U10-prepd-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 5, grupo: "PD-" + j, items: [], pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
   });
 
   /* ── Módulo 6: a quién ── */
@@ -614,9 +614,9 @@ function ejerciciosUnidad10() {
       if ((a + j) % 3) return;
       const ru = "Я " + v.presente[0] + (cRu ? " " + cRu : "") + " " + p.dat + ".", es = cap(esV[0] + (cEs ? " " + cEs : "") + " " + p.esA) + ".";
       const base = { grupo: "AQ-" + a + "-" + j, items: ["lex:" + v.id, "lex:" + p.id], oir: ru };
-      out.push(Object.assign({ id: "U10-aq-" + a + "-" + j, tipo: "a-quien", forma: "escribir", dificultad: 3, modulo: 6, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+      out.push(Object.assign({ id: "U10-aq-" + a + "-" + j, tipo: "a-quien", forma: "escribir", dificultad: 3, modulo: 6, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
         esperadas: [ru, ru.replace(/^Я /, "").replace(/^(.)/, m => m.toUpperCase())], idioma: "ru", explicacion: "кому́? → dativo: " + u10Cambio(p, "dat") + " " + ru }, base));
-      out.push(Object.assign({ id: "U10-aqel-" + a + "-" + j, tipo: "completar-rel", forma: "elegir", dificultad: 2, modulo: 6, pide: "Completá: «" + es + "»", grande: "Я " + v.presente[0] + (cRu ? " " + cRu : "") + " _____.",
+      out.push(Object.assign({ id: "U10-aqel-" + a + "-" + j, tipo: "completar-rel", forma: "elegir", dificultad: 2, modulo: 6, pide: "Completa: «" + es + "»", grande: "Я " + v.presente[0] + (cRu ? " " + cRu : "") + " _____.",
         opciones: baraja(uniq([p.dat, p.acc, p.nom]), a + j), correcta: p.dat, explicacion: u10Cambio(p, "dat") + (vk === "звони́ть" || vk === "помога́ть" ? " Con " + v.ac + " va dativo, aunque en español diga «a…»." : "") }, base, { grupo: "AQe-" + a + "-" + j }));
     });
   });
@@ -624,10 +624,10 @@ function ejerciciosUnidad10() {
   [["пода́рок", "ма́ма", "Le doy un regalo a mamá."], ["кни́гу", "брат", "Le doy el libro a mi hermano."], ["письмо́", "А́нна", "Le escribo una carta a Ana."]].forEach(([obj, pr, es], j) => {
     const p = sust(pr), v = verbo(j === 2 ? "писа́ть" : "дава́ть"), o = sust(obj.replace("кни́гу", "кни́га")) || { nom: obj, acc: obj };
     const ru = "Я " + v.presente[0] + " " + (o.acc || obj) + " " + p.dat + ".";
-    out.push({ id: "U10-cons-" + j, tipo: "construir", forma: "escribir", dificultad: 3, modulo: 6, grupo: "CS-" + j, items: [], oir: ru, pide: "🎁 Armá la frase con estas palabras.", grande: "я · " + (o.nom || obj) + " · " + p.nom + " · " + v.ac,
+    out.push({ id: "U10-cons-" + j, tipo: "construir", forma: "escribir", dificultad: 3, modulo: 6, grupo: "CS-" + j, items: [], oir: ru, pide: "🎁 Arma la frase con estas palabras.", grande: "я · " + (o.nom || obj) + " · " + p.nom + " · " + v.ac,
       pista: es, audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: "Lo que se da: acusativo. A quién: dativo (" + u10Cambio(p, "dat") + ") " + ru });
   });
-  P.slice(0, 8).forEach((p, j) => out.push({ id: "U10-datw-" + j, tipo: "forma", forma: "escribir", dificultad: 2, modulo: 6, grupo: "DW-" + j, items: ["lex:" + p.id], pide: "Escribí el dativo (¿a quién?).", grande: p.nom,
+  P.slice(0, 8).forEach((p, j) => out.push({ id: "U10-datw-" + j, tipo: "forma", forma: "escribir", dificultad: 2, modulo: 6, grupo: "DW-" + j, items: ["lex:" + p.id], pide: "Escribe el dativo (¿a quién?).", grande: p.nom,
     audio: p.dat, audioManual: true, esperadas: [p.dat], idioma: "ru", explicacion: u10Cambio(p, "dat") }));
 
   /* ── Módulo 7: me gusta, necesito ── */
@@ -637,14 +637,14 @@ function ejerciciosUnidad10() {
       const fr = cap(pr) + " " + ru + ".";
       const esF = (k === 1 ? (/^le /.test(es) ? "A él " + es : "Él " + es) : cap(es)) + ".";
       out.push({ id: "U10-est-" + j + "-" + k, tipo: "estado", forma: "escribir", dificultad: 2 + (k ? 1 : 0), modulo: 7, grupo: "ES-" + j + "-" + k, items: [], oir: fr,
-        pide: "Escribí en ruso: «" + esF + "»", audio: fr, audioManual: true, esperadas: [fr], idioma: "ru", explicacion: "**" + pr + "** (dativo) + " + ru + ". " + fr });
+        pide: "Escribe en ruso: «" + esF + "»", audio: fr, audioManual: true, esperadas: [fr], idioma: "ru", explicacion: "**" + pr + "** (dativo) + " + ru + ". " + fr });
     });
   });
   U10_PRON.dat.forEach((d, i) => out.push({ id: "U10-datp-" + i, tipo: "estado", forma: "elegir", dificultad: 1, modulo: 7, grupo: "DP-" + i, items: [], pide: "¿Cómo se dice «a " + U10_PRON.es[i].replace("yo", "mí") + "»?",
     opciones: baraja([d].concat(baraja(U10_PRON.dat.filter(x => x !== d), i).slice(0, 2)), i), correcta: d, explicacion: "a " + U10_PRON.es[i].replace("yo", "mí") + " = " + d }));
   P.slice(0, 6).forEach((p, j) => {
     const fr = cap(p.dat) + " нра́вится му́зыка.", es = "A " + p.esS.charAt(0).toLowerCase() + p.esS.slice(1) + " le gusta la música.";
-    out.push({ id: "U10-gus-" + j, tipo: "estado", forma: "escribir", dificultad: 3, modulo: 7, grupo: "GU-" + j, items: ["lex:" + p.id], oir: fr, pide: "Escribí en ruso: «" + es.replace(/^A Ana|^A Iván|^A Masha|^A Dima/, m => m) + "»",
+    out.push({ id: "U10-gus-" + j, tipo: "estado", forma: "escribir", dificultad: 3, modulo: 7, grupo: "GU-" + j, items: ["lex:" + p.id], oir: fr, pide: "Escribe en ruso: «" + es.replace(/^A Ana|^A Iván|^A Masha|^A Dima/, m => m) + "»",
       audio: fr, audioManual: true, esperadas: [fr], idioma: "ru", explicacion: "A quién le gusta: dativo (" + u10Cambio(p, "dat") + ") " + fr });
   });
 
@@ -654,27 +654,27 @@ function ejerciciosUnidad10() {
       if ((a + j) % 3) return;
       const ru = ruV + " с " + p.ins + ".", es = cap(esV + " " + p.esCon) + ".";
       const base = { grupo: "CQ-" + a + "-" + j, items: ["lex:" + p.id], oir: ru };
-      out.push(Object.assign({ id: "U10-cq-" + a + "-" + j, tipo: "con-quien", forma: "escribir", dificultad: 3, modulo: 8, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+      out.push(Object.assign({ id: "U10-cq-" + a + "-" + j, tipo: "con-quien", forma: "escribir", dificultad: 3, modulo: 8, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
         esperadas: [ru, ru.replace(/^Я /, "").replace(/^(.)/, m => m.toUpperCase())], idioma: "ru", explicacion: "с + instrumental: " + u10Cambio(p, "ins") + " " + ru }, base));
-      out.push(Object.assign({ id: "U10-cqel-" + a + "-" + j, tipo: "completar-rel", forma: "elegir", dificultad: 2, modulo: 8, pide: "Completá: «" + es + "»", grande: ruV + " с _____.",
+      out.push(Object.assign({ id: "U10-cqel-" + a + "-" + j, tipo: "completar-rel", forma: "elegir", dificultad: 2, modulo: 8, pide: "Completa: «" + es + "»", grande: ruV + " с _____.",
         opciones: baraja(uniq([p.ins, p.nom, p.dat, p.gen]).slice(0, 3).concat([p.ins]).filter((x, i, a) => a.indexOf(x) === i), a + j), correcta: p.ins, explicacion: u10Cambio(p, "ins") }, base, { grupo: "CQe-" + a + "-" + j }));
     }));
   P.slice(0, 6).forEach((p, j) => {
     const q = "С кем А́нна?", r = "А́нна с " + p.ins + ".";
     if (p.nom === "А́нна") return;
-    out.push({ id: "U10-cqesc-" + j, tipo: "con-quien", forma: "escribir", dificultad: 2, modulo: 8, grupo: "CE-" + j, items: ["lex:" + p.id], oir: r, contexto: [{ p: "—", ru: q }], pide: "👩 + " + p.esS + ". Contestá en ruso.",
+    out.push({ id: "U10-cqesc-" + j, tipo: "con-quien", forma: "escribir", dificultad: 2, modulo: 8, grupo: "CE-" + j, items: ["lex:" + p.id], oir: r, contexto: [{ p: "—", ru: q }], pide: "👩 + " + p.esS + ". Contesta en ruso.",
       audio: q, audioManual: true, esperadas: [r, "С " + p.ins + "."], idioma: "ru", explicacion: "— " + q + " — " + r });
   });
-  [["Вчера́ я был с друзья́ми.", "Ayer estuve con amigos. (sos hombre)"], ["За́втра я бу́ду рабо́тать с колле́гой.", "Mañana voy a trabajar con un colega."], ["Мы живём с ба́бушкой.", "Vivimos con la abuela."]].forEach(([ru, es], j) =>
-    out.push({ id: "U10-cqt-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, grupo: "CT-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
+  [["Вчера́ я был с друзья́ми.", "Ayer estuve con amigos. (eres hombre)"], ["За́втра я бу́ду рабо́тать с колле́гой.", "Mañana voy a trabajar con un colega."], ["Мы живём с ба́бушкой.", "Vivimos con la abuela."]].forEach(([ru, es], j) =>
+    out.push({ id: "U10-cqt-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, grupo: "CT-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
 
   /* ── Módulo 9: con qué ── */
   U10_CON_QUE.forEach(([vb, _o, t, es], j) => {
     const s = sust(t); if (!s) return;
     const ru = "Я " + vb + " " + s.ins + ".";
-    out.push({ id: "U10-cqu-" + j, tipo: "con-que", forma: "escribir", dificultad: 3, modulo: 9, grupo: "QU-" + j, items: ["lex:" + s.id], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U10-cqu-" + j, tipo: "con-que", forma: "escribir", dificultad: 3, modulo: 9, grupo: "QU-" + j, items: ["lex:" + s.id], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: "Con qué: instrumental, sin с. " + u10Cambio(s, "ins") + " " + ru });
-    out.push({ id: "U10-cquel-" + j, tipo: "con-que", forma: "elegir", dificultad: 2, modulo: 9, grupo: "QUe-" + j, items: ["lex:" + s.id], pide: "Completá: «" + es + "»", grande: "Я " + vb + " _____.",
+    out.push({ id: "U10-cquel-" + j, tipo: "con-que", forma: "elegir", dificultad: 2, modulo: 9, grupo: "QUe-" + j, items: ["lex:" + s.id], pide: "Completa: «" + es + "»", grande: "Я " + vb + " _____.",
       opciones: baraja(uniq(["с " + s.ins, s.ins, s.nom]), j), correcta: s.ins, explicacion: "La herramienta va en instrumental **sin** с (с es «junto con alguien»). " + ru });
   });
 
@@ -682,17 +682,17 @@ function ejerciciosUnidad10() {
   Object.keys(U10_PROFES).forEach((ru, j) => {
     const s = sust(ru); if (!s) return;
     const [m, f] = U10_PROFES[ru];
-    [[m, "Я рабо́таю", "Trabajo de ", "(sos hombre)"], [f, "Я рабо́таю", "Trabajo de ", "(sos mujer)"]].forEach(([es, ruV, esV, quien], k) => {
+    [[m, "Я рабо́таю", "Trabajo de ", "(eres hombre)"], [f, "Я рабо́таю", "Trabajo de ", "(eres mujer)"]].forEach(([es, ruV, esV, quien], k) => {
       if (!es) return;
       const r = ruV + " " + s.ins + ".";
       out.push({ id: "U10-pro-" + j + "-" + k, tipo: "profesion", forma: "escribir", dificultad: 2, modulo: 10, grupo: "PR-" + j + "-" + k, items: ["lex:" + s.id], oir: r, contexto: [{ p: "—", ru: "Кем ты рабо́таешь?" }],
-        pide: "Contestá: «" + esV + es + "».", audio: r, audioManual: true, esperadas: [r, r.replace(/^Я /, "").replace(/^(.)/, x => x.toUpperCase())], idioma: "ru", explicacion: "рабо́тать + instrumental: " + u10Cambio(s, "ins") + " " + r });
+        pide: "Contesta: «" + esV + es + "».", audio: r, audioManual: true, esperadas: [r, r.replace(/^Я /, "").replace(/^(.)/, x => x.toUpperCase())], idioma: "ru", explicacion: "рабо́тать + instrumental: " + u10Cambio(s, "ins") + " " + r });
     });
-    out.push({ id: "U10-proel-" + j, tipo: "profesion", forma: "elegir", dificultad: 1, modulo: 10, grupo: "PRe-" + j, items: ["lex:" + s.id], pide: "Completá la frase.", grande: "Она́ рабо́тает _____.",
+    out.push({ id: "U10-proel-" + j, tipo: "profesion", forma: "elegir", dificultad: 1, modulo: 10, grupo: "PRe-" + j, items: ["lex:" + s.id], pide: "Completa la frase.", grande: "Она́ рабо́тает _____.",
       opciones: baraja(uniq([s.ins, s.nom, s.dat]), j), correcta: s.ins, explicacion: u10Cambio(s, "ins") });
   });
-  [["Ра́ньше я был студе́нтом.", "Antes era estudiante. (sos hombre)"], ["За́втра я бу́ду рабо́тать учи́телем.", "Mañana voy a trabajar de maestro."], ["Кем ты рабо́таешь?", "¿De qué trabajás?"]].forEach(([ru, es], j) =>
-    out.push({ id: "U10-prot-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "PT-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
+  [["Ра́ньше я был студе́нтом.", "Antes era estudiante. (eres hombre)"], ["За́втра я бу́ду рабо́тать учи́телем.", "Mañana voy a trabajar de maestro."], ["Кем ты рабо́таешь?", "¿De qué trabajas?"]].forEach(([ru, es], j) =>
+    out.push({ id: "U10-prot-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "PT-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
 
   /* ── Módulo 11: los seis casos juntos ── */
   const CASOS6 = ["Nominativo", "Acusativo", "Prepositivo", "Genitivo", "Dativo", "Instrumental"];
@@ -701,10 +701,10 @@ function ejerciciosUnidad10() {
    ["Мне нра́вится му́зыка.", "му́зыка", 0], ["Я даю́ кни́гу дру́гу.", "дру́гу", 4]].forEach(([ru, w, k], j) =>
     out.push({ id: "U10-cid-" + j, tipo: "caso-id", forma: "elegir", dificultad: 2, modulo: 11, grupo: "CI-" + j, items: [], oir: ru, pide: "¿En qué caso está «" + w + "»?", grande: ru, audio: ru,
       opciones: CASOS6.slice(), correcta: CASOS6[k], explicacion: "**" + w + "**: " + CASOS6[k].toLowerCase() + "." }));
-  [["Le doy un regalo a mi hermana.", "Я даю́ пода́рок сестре́."], ["Ayer estuve en el restaurante con mi hermano. (sos hombre)", "Вчера́ я был в рестора́не с бра́том."], ["Ana no tiene auto.", "У А́нны нет маши́ны."],
+  [["Le doy un regalo a mi hermana.", "Я даю́ пода́рок сестре́."], ["Ayer estuve en el restaurante con mi hermano. (eres hombre)", "Вчера́ я был в рестора́не с бра́том."], ["Ana no tiene coche.", "У А́нны нет маши́ны."],
    ["Después del trabajo llamo a Iván.", "По́сле рабо́ты я звоню́ Ива́ну."], ["Compro un regalo para mamá.", "Я покупа́ю пода́рок для ма́мы."], ["Me gusta Moscú.", "Мне нра́вится Москва́."]].forEach(([es, ru], j) => {
-    out.push({ id: "U10-mix-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 11, grupo: "MX-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
-    out.push({ id: "U10-mixd-" + j, tipo: "dictado", forma: "escribir", dificultad: 3, modulo: 11, grupo: "MXd-" + j, items: [], pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
+    out.push({ id: "U10-mix-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 11, grupo: "MX-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
+    out.push({ id: "U10-mixd-" + j, tipo: "dictado", forma: "escribir", dificultad: 3, modulo: 11, grupo: "MXd-" + j, items: [], pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
   });
   U10_LECTURAS.forEach((L, j) => {
     const lineas = L.lineas.map(l => l[0]), todo = lineas.join(" ");
@@ -725,12 +725,12 @@ function ejerciciosUnidad10() {
     const base = { grupo: e.id, items: ["lex:" + e.id], oir: e.ru };
     if (dis.length >= 2) out.push(Object.assign({ id: "U10-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Qué significa?", grande: e.acento, audio: e.ru,
       opciones: baraja([es].concat(dis), i), correcta: es, explicacion: e.acento + " — " + es }, base));
-    out.push(Object.assign({ id: "U10-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
+    out.push(Object.assign({ id: "U10-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribe en ruso: «" + es + "»", audio: e.ru, audioManual: true,
       pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.length + (e.ru.length === 1 ? " letra." : " letras."), esperadas: [e.acento], idioma: "ru", explicacion: e.acento + " — " + es }, base));
   });
   /* Ampliación: со мной… */
   U10_PRON.ins.forEach((x, i) => out.push({ id: "U10-amp-" + i, tipo: "con-quien", forma: "escribir", dificultad: 2, modulo: 8, ampliacion: true, grupo: "AM-" + i, items: [], oir: x,
-    pide: "Escribí en ruso: «" + ["conmigo", "con vos", "con él", "con ella", "con nosotros", "con ustedes", "con ellos"][i] + "»", audio: x, audioManual: true,
+    pide: "Escribe en ruso: «" + ["conmigo", "contigo", "con él", "con ella", "con nosotros", "con ustedes", "con ellos"][i] + "»", audio: x, audioManual: true,
     esperadas: [x], idioma: "ru", explicacion: x }));
 
   /* ══ Profundización (12/10/2026): tipos que practican la regla, con `regla` ══════════════════
@@ -783,7 +783,7 @@ function ejerciciosUnidad10() {
   [["А́нна", "маши́на"], ["Ива́н", "соба́ка"]].forEach(([w, c], j) => {
     const s = S(w), pal = ["У", s.gen, "есть", S(c).nom];
     push({ id: "U10-desarm-t-" + j, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo: 2, regla: "u10-tener", grupo: "DT-" + j, items: [], oir: pal.join(" ") + ".", audio: pal.join(" ") + ".", audioManual: true,
-      pide: "Respondé tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Quién tiene? (en genitivo)", correcta: 1 }, { pide: "¿Qué hay? (el sujeto)", correcta: 3 }, { pide: "¿Qué palabra es «hay»?", correcta: 2 }],
+      pide: "Responde tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Quién tiene? (en genitivo)", correcta: 1 }, { pide: "¿Qué hay? (el sujeto)", correcta: 3 }, { pide: "¿Qué palabra es «hay»?", correcta: 2 }],
       explicacion: pal.join(" ") + ". у + genitivo + есть + nominativo." });
   });
 
@@ -793,11 +793,11 @@ function ejerciciosUnidad10() {
     const ok = "У меня́ нет " + c.gen + ".", mal = "У меня́ нет " + c.nom + ".";
     push({ id: "U10-nat-n-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 3, regla: "u10-net", grupo: "NN-" + j, items: ["lex:" + c.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Después de нет, genitivo: " + u10Cambio(c, "gen") });
-    if (j % 2 === 0) push({ id: "U10-diag-n-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 3, regla: "u10-net", grupo: "DN-" + j, items: ["lex:" + c.id], oir: ok, pide: "Querés decir que no tenés. ¿Qué falla?",
+    if (j % 2 === 0) push({ id: "U10-diag-n-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 3, regla: "u10-net", grupo: "DN-" + j, items: ["lex:" + c.id], oir: ok, pide: "Quieres decir que no tienes. ¿Qué falla?",
       grande: "У меня́ есть не " + c.nom + ".", opciones: ["Para «no tengo»: нет + genitivo", "Falta у меня́", "El orden"], correcta: "Para «no tengo»: нет + genitivo", esperadas: [ok], explicacion: ok });
     if (j < 6) push({ id: "U10-cad-n-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 3, regla: "u10-net-tiempos", grupo: "CN-" + j, items: ["lex:" + c.id], oir: "Вчера́ у меня́ не́ было " + c.gen + ".",
-      pide: "Cambiá la frase paso a paso.", base: "У меня́ есть " + c.nom + ".",
-      pasos: [{ pide: "Decí que no tenés.", esperadas: [ok] }, { pide: "Ahora: ayer no tenías (вчера́).", esperadas: ["Вчера́ у меня́ не́ было " + c.gen + ".", "У меня́ не́ было " + c.gen + " вчера́."] }],
+      pide: "Cambia la frase paso a paso.", base: "У меня́ есть " + c.nom + ".",
+      pasos: [{ pide: "Di que no tienes.", esperadas: [ok] }, { pide: "Ahora: ayer no tenías (вчера́).", esperadas: ["Вчера́ у меня́ не́ было " + c.gen + ".", "У меня́ не́ было " + c.gen + " вчера́."] }],
       explicacion: "У меня́ есть " + c.nom + ". → " + ok + " → Вчера́ у меня́ не́ было " + c.gen + ". En pasado, siempre не́ было + genitivo." });
   });
   ["маши́на", "соба́ка", "кни́га", "кварти́ра"].forEach((w, j) => {
@@ -809,7 +809,7 @@ function ejerciciosUnidad10() {
   });
   PP.slice(0, 6).forEach((p, j) => {
     const est = j % 2 === 0, ru = est ? cap(p.nom) + " до́ма." : cap(p.gen) + " нет до́ма.";
-    push({ id: "U10-oido-n-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 3, regla: "u10-net", grupo: "ON-" + j, items: ["lex:" + p.id], oir: ru, pide: "Escuchá: ¿está o no está?", audio: ru,
+    push({ id: "U10-oido-n-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 3, regla: "u10-net", grupo: "ON-" + j, items: ["lex:" + p.id], oir: ru, pide: "Escucha: ¿está o no está?", audio: ru,
       opciones: ["Está en casa", "No está en casa"], correcta: est ? "Está en casa" : "No está en casa", explicacion: ru + (est ? "" : " Quien no está, en genitivo: " + p.gen + ".") });
   });
 
@@ -846,7 +846,7 @@ function ejerciciosUnidad10() {
   });
   [["брат", "от", "Una carta de mi hermano", "Письмо́"], ["ма́ма", "от", "Un regalo de mamá", "Пода́рок"], ["Москва́", "из", "Soy de Moscú", "Я"], ["магази́н", "из", "Vuelvo del negocio", "Я иду́"]].forEach(([w, pr, es, a0], j) => {
     const X = S(w), otro = pr === "от" ? "из" : "от", ok = a0 + " " + pr + " " + X.gen + ".", mal = a0 + " " + otro + " " + X.gen + ".";
-    push({ id: "U10-par-io-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 5, regla: "u10-iz-ot", grupo: "IO-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál decís?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-par-io-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 5, regla: "u10-iz-ot", grupo: "IO-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál dices?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + (pr === "от" ? "De una persona: от." : "De un lugar: из.") });
   });
   push({ id: "U10-diag-io-0", tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 5, regla: "u10-iz-ot", grupo: "DIO-0", items: [], oir: "Письмо́ от бра́та.", pide: "La frase tiene un error. ¿Qué falla?", grande: "Письмо́ из бра́та.",
@@ -870,7 +870,7 @@ function ejerciciosUnidad10() {
   });
   [["врач", "Vas al médico", "Estás en el médico"], ["ма́ма", "Vas a lo de mamá", "Estás en lo de mamá"], ["брат", "Vas a lo de tu hermano", "Estás en lo de tu hermano"], ["ба́бушка", "Vas a lo de la abuela", "Estás en lo de la abuela"]].forEach(([w, ir, estar], j) => {
     const s = S(w), a = "Я иду́ к " + s.dat + ".", b = "Я у " + s.gen + ".", vamos = j % 2 === 0;
-    push({ id: "U10-par-ku-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-k-u", grupo: "KU-" + j, items: ["lex:" + s.id], oir: vamos ? a : b, pide: "«" + (vamos ? ir : estar) + "». ¿Cuál decís?", opciones: baraja([a, b], j), correcta: vamos ? a : b,
+    push({ id: "U10-par-ku-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-k-u", grupo: "KU-" + j, items: ["lex:" + s.id], oir: vamos ? a : b, pide: "«" + (vamos ? ir : estar) + "». ¿Cuál dices?", opciones: baraja([a, b], j), correcta: vamos ? a : b,
       explicacion: vamos ? a + " Adónde, a una persona: к + dativo." : b + " Dónde, con una persona: у + genitivo." });
     push({ id: "U10-nat-k-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-k-u", grupo: "NK-" + j, items: ["lex:" + s.id], oir: a, pide: "¿Cuál suena natural?", opciones: baraja([a, "Я иду́ в " + s.acc + "."], j + 1), correcta: a,
       explicacion: a + " A una persona se va con к + dativo." });
@@ -886,12 +886,12 @@ function ejerciciosUnidad10() {
     const OBJ = OBJ2[x.r.ac];
     const ob = OBJ ? " " + OBJ[0] : "", okA = "За́втра я " + x.r.futuro[0] + " " + p.dat + ob + ".";
     if (j < 5) push({ id: "U10-asp-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 6, regla: "u10-pares-dat", grupo: "AS-" + j, items: ["lex:" + x.r.id], oir: okA,
-      pide: "Escribí en ruso: «Mañana " + (OBJ ? "le voy a " + x.es + " " + OBJ[1] + " " : "voy a " + x.es + " ") + p.esA + "» (una vez).", audio: okA, audioManual: true,
+      pide: "Escribe en ruso: «Mañana " + (OBJ ? "le voy a " + x.es + " " + OBJ[1] + " " : "voy a " + x.es + " ") + p.esA + "» (una vez).", audio: okA, audioManual: true,
       esperadas: [okA, "Я " + x.r.futuro[0] + " " + p.dat + ob + " за́втра.", "За́втра " + x.r.futuro[0] + " " + p.dat + ob + "."].concat(ob ? ["За́втра я " + x.r.futuro[0] + ob + " " + p.dat + "."] : []), idioma: "ru", explicacion: okA });
   });
   PP.slice(0, 5).forEach((p, j) => {
     const q = PP[(j + 3) % PP.length], b0 = "Я звоню́ " + p.dat + ".";
-    push({ id: "U10-cad-d-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 6, regla: "u10-dat-verbos", grupo: "CD-" + j, items: ["lex:" + p.id, "lex:" + q.id], oir: "За́втра я позвоню́ " + q.dat + ".", pide: "Cambiá la frase paso a paso.", base: b0,
+    push({ id: "U10-cad-d-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 6, regla: "u10-dat-verbos", grupo: "CD-" + j, items: ["lex:" + p.id, "lex:" + q.id], oir: "За́втра я позвоню́ " + q.dat + ".", pide: "Cambia la frase paso a paso.", base: b0,
       pasos: [{ pide: "Ahora a otra persona: " + q.nom + ".", esperadas: ["Я звоню́ " + q.dat + "."] }, { pide: "Ahora: mañana, una vez (за́втра).", esperadas: ["За́втра я позвоню́ " + q.dat + ".", "Я позвоню́ " + q.dat + " за́втра."] }],
       explicacion: b0 + " → Я звоню́ " + q.dat + ". → За́втра я позвоню́ " + q.dat + ". " + u10Cambio(q, "dat") });
   });
@@ -924,9 +924,9 @@ function ejerciciosUnidad10() {
   });
   [["купи́ть", "покупа́ть", "хлеб", "comprar pan"], ["позвони́ть", "звони́ть", "ма́ме", "llamar a mamá"], ["сде́лать", "де́лать", "рабо́ту", "hacer el trabajo"]].forEach(([r, i, o, es], j) => {
     const una = "Мне ну́жно " + r + " " + o + ".", siempre = "Мне ну́жно ка́ждый день " + i + " " + o + ".";
-    push({ id: "U10-par-nz-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-nuzhno", grupo: "NZ-" + j, items: [], oir: una, pide: "«Tengo que " + es + "» (hoy, una vez). ¿Cuál decís?",
+    push({ id: "U10-par-nz-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-nuzhno", grupo: "NZ-" + j, items: [], oir: una, pide: "«Tengo que " + es + "» (hoy, una vez). ¿Cuál dices?",
       opciones: baraja([una, "Мне ну́жно " + i + " " + o + "."], j), correcta: una, explicacion: una + " Una acción concreta: resultado." });
-    push({ id: "U10-par-nzs-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-nuzhno", grupo: "NZs-" + j, items: [], oir: siempre, pide: "«Tengo que " + es + " todos los días». ¿Cuál decís?",
+    push({ id: "U10-par-nzs-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-nuzhno", grupo: "NZs-" + j, items: [], oir: siempre, pide: "«Tengo que " + es + " todos los días». ¿Cuál dices?",
       opciones: baraja([siempre, "Мне ну́жно ка́ждый день " + r + " " + o + "."], j + 1), correcta: siempre, explicacion: siempre + " Se repite: proceso." });
   });
 
@@ -945,8 +945,8 @@ function ejerciciosUnidad10() {
     const s = S(w), ok = "Мы с " + s.ins + " " + pl + ".", mal = "Мы с " + s.ins + " " + sg + ".";
     push({ id: "U10-nat-ms-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u10-my-s", grupo: "MS-" + j, items: ["lex:" + s.id], oir: ok, pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " мы с…: son dos, el verbo va en plural." });
-    push({ id: "U10-cad-ms-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 8, regla: "u10-my-s", grupo: "CMS-" + j, items: ["lex:" + s.id], oir: ok, pide: "Cambiá la frase paso a paso.", base: "Я " + sg + ".",
-      pasos: [{ pide: "Agregá con quién: " + s.nom + ".", esperadas: ["Я " + sg + " с " + s.ins + ".", "Я с " + s.ins + " " + sg + "."] }, { pide: "Ahora decí «" + (s.nom === "ма́ма" ? "mamá" : s.nom === "брат" ? "mi hermano" : "Ana") + " y yo» (мы с…).", esperadas: [ok] }],
+    push({ id: "U10-cad-ms-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 8, regla: "u10-my-s", grupo: "CMS-" + j, items: ["lex:" + s.id], oir: ok, pide: "Cambia la frase paso a paso.", base: "Я " + sg + ".",
+      pasos: [{ pide: "Agrega con quién: " + s.nom + ".", esperadas: ["Я " + sg + " с " + s.ins + ".", "Я с " + s.ins + " " + sg + "."] }, { pide: "Ahora di «" + (s.nom === "ма́ма" ? "mamá" : s.nom === "брат" ? "mi hermano" : "Ana") + " y yo» (мы с…).", esperadas: [ok] }],
       explicacion: "Я " + sg + ". → Я " + sg + " с " + s.ins + ". → " + ok });
   });
 
@@ -966,7 +966,7 @@ function ejerciciosUnidad10() {
     push({ id: "U10-nat-pn-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u10-pod-nad", grupo: "NPN-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + pr + " + instrumental: dónde." });
   });
-  push({ id: "U10-par-nad-0", tipo: "par", forma: "elegir", dificultad: 2, modulo: 9, regla: "u10-pod-nad", grupo: "PNA-0", items: [], oir: "Ла́мпа над столо́м.", pide: "La lámpara cuelga arriba de la mesa, sin tocarla. ¿Cuál decís?",
+  push({ id: "U10-par-nad-0", tipo: "par", forma: "elegir", dificultad: 2, modulo: 9, regla: "u10-pod-nad", grupo: "PNA-0", items: [], oir: "Ла́мпа над столо́м.", pide: "La lámpara cuelga arriba de la mesa, sin tocarla. ¿Cuál dices?",
     opciones: baraja(["Ла́мпа над столо́м.", "Ла́мпа на столе́."], 1), correcta: "Ла́мпа над столо́м.", explicacion: "над: arriba, sin tocar. на столе́: apoyada." });
 
   /* ── Módulo 10: profesión e intereses ── */
@@ -983,7 +983,7 @@ function ejerciciosUnidad10() {
     push({ id: "U10-nat-bi-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 10, regla: "u10-byt-ins", grupo: "NBI-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Con был, бу́ду y стать, instrumental." });
   });
-  push({ id: "U10-par-bi-0", tipo: "par", forma: "elegir", dificultad: 2, modulo: 10, regla: "u10-byt-ins", grupo: "PBI-0", items: [], oir: "Сейча́с я врач.", pide: "«Ahora soy médico». ¿Cuál decís?",
+  push({ id: "U10-par-bi-0", tipo: "par", forma: "elegir", dificultad: 2, modulo: 10, regla: "u10-byt-ins", grupo: "PBI-0", items: [], oir: "Сейча́с я врач.", pide: "«Ahora soy médico». ¿Cuál dices?",
     opciones: baraja(["Сейча́с я врач.", "Сейча́с я врачо́м."], 0), correcta: "Сейча́с я врач.", explicacion: "En presente, sin быть: nominativo." });
   [["занима́юсь", "спорт"], ["интересу́юсь", "му́зыка"], ["занима́юсь", "ру́сский"], ["интересу́юсь", "исто́рия"]].forEach(([v, w], j) => {
     const X = S(w); if (!X || !X.ins) return;

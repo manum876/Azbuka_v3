@@ -66,8 +66,8 @@
                  explícito (буду…), porque no se puede armar con буду.
      pasado      por género/número, no por persona:
                  m (masc. sing.) · f (fem. sing.) · n (neutro sing.) · pl
-     imperativo  ty (tú/vos) · vy (ustedes / usted), o null si no se usa
-     nota        (opcional) aclaración de uso en español rioplatense
+     imperativo  ty (tú/tú) · vy (ustedes / usted), o null si no se usa
+     nota        (opcional) aclaración de uso en español
 
    null en una posición = esa forma no existe o no se usa (verbos
    impersonales, pasivos, defectivos). La página la muestra como "—".
@@ -144,7 +144,7 @@ const VERBOS = {
    presente:["ви́жу","ви́дишь","ви́дит","ви́дим","ви́дите","ви́дят"],
    pasado:{ m:"ви́дел", f:"ви́дела", n:"ви́дело", pl:"ви́дели" },
    imperativo:null,
-   nota:"El imperativo casi no se usa; para «¡mirá!» se dice смотри́." },
+   nota:"El imperativo casi no se usa; para «¡mira!» se dice смотри́." },
  "CMR-00123": { ru:"ду́мать",
    presente:["ду́маю","ду́маешь","ду́мает","ду́маем","ду́маете","ду́мают"],
    pasado:{ m:"ду́мал", f:"ду́мала", n:"ду́мало", pl:"ду́мали" },
@@ -391,7 +391,7 @@ const VERBOS = {
    presente:["слы́шу","слы́шишь","слы́шит","слы́шим","слы́шите","слы́шат"],
    pasado:{ m:"слы́шал", f:"слы́шала", n:"слы́шало", pl:"слы́шали" },
    imperativo:null,
-   nota:"El imperativo casi no se usa; para «¡escuchá!» se dice слу́шай." },
+   nota:"El imperativo casi no se usa; para «¡escucha!» se dice слу́шай." },
  "CMR-00413": { ru:"смочь",
    futuro:["смогу́","смо́жешь","смо́жет","смо́жем","смо́жете","смо́гут"],
    pasado:{ m:"смог", f:"смогла́", n:"смогло́", pl:"смогли́" },
@@ -6745,7 +6745,7 @@ const VERBOS = {
    futuro:["схожу́","схо́дишь","схо́дит","схо́дим","схо́дите","схо́дят"],
    pasado:{ m:"сходи́л", f:"сходи́ла", n:"сходи́ло", pl:"сходи́ли" },
    imperativo:{ ty:"сходи́", vy:"сходи́те" },
-   nota:"Perfectivo: ir a un lugar cercano y volver. Сходи́ в магази́н = andá (y volvé) al negocio." },
+   nota:"Perfectivo: ir a un lugar cercano y volver. Сходи́ в магази́н = ve (y vuelve) al negocio." },
  "CMR-05468": { ru:"пожа́ть",
    futuro:["пожну́","пожнёшь","пожнёт","пожнём","пожнёте","пожну́т"],
    pasado:{ m:"пожа́л", f:"пожа́ла", n:"пожа́ло", pl:"пожа́ли" },

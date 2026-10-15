@@ -24,13 +24,13 @@
    y su forma de sujeto. */
 const U4_COSAS = {
   "кни́га": ["libro", "un libro", "el libro", "📕"], "газе́та": ["diario", "el diario", "el diario", "📰"], "му́зыка": ["música", "música", "la música", "🎵"],
-  "маши́на": ["auto", "un auto", "el auto", "🚗"], "вода́": ["agua", "agua", "el agua", "💧"], "ры́ба": ["pescado", "pescado", "el pescado", "🐟"],
-  "пи́цца": ["pizza", "pizza", "la pizza", "🍕"], "су́мка": ["cartera", "una cartera", "la cartera", "👜"], "карти́на": ["cuadro", "un cuadro", "el cuadro", "🖼️"],
-  "кварти́ра": ["departamento", "un departamento", "el departamento", "🏢"], "ко́мната": ["habitación", "una habitación", "la habitación", ""], "ча́шка": ["taza", "una taza", "la taza", "☕"],
-  "ру́чка": ["lapicera", "una lapicera", "la lapicera", "🖊️"], "пе́сня": ["canción", "una canción", "la canción", "🎶"], "исто́рия": ["historia", "una historia", "la historia", "📖"],
+  "маши́на": ["coche", "un coche", "el coche", "🚗"], "вода́": ["agua", "agua", "el agua", "💧"], "ры́ба": ["pescado", "pescado", "el pescado", "🐟"],
+  "пи́цца": ["pizza", "pizza", "la pizza", "🍕"], "су́мка": ["bolso", "un bolso", "el bolso", "👜"], "карти́на": ["cuadro", "un cuadro", "el cuadro", "🖼️"],
+  "кварти́ра": ["apartamento", "un apartamento", "el apartamento", "🏢"], "ко́мната": ["habitación", "una habitación", "la habitación", ""], "ча́шка": ["taza", "una taza", "la taza", "☕"],
+  "ру́чка": ["bolígrafo", "un bolígrafo", "el bolígrafo", "🖊️"], "пе́сня": ["canción", "una canción", "la canción", "🎶"], "исто́рия": ["historia", "una historia", "la historia", "📖"],
   "дом": ["casa", "una casa", "la casa", "🏠"], "парк": ["parque", "un parque", "el parque", "🏞️"], "журна́л": ["revista", "una revista", "la revista", ""],
-  "фильм": ["película", "una película", "la película", "🎬"], "телефо́н": ["teléfono", "un teléfono", "el teléfono", "📱"], "компью́тер": ["computadora", "una computadora", "la computadora", "💻"],
-  "стол": ["mesa", "una mesa", "la mesa", ""], "хлеб": ["pan", "pan", "el pan", "🍞"], "сок": ["jugo", "jugo", "el jugo", "🧃"], "суп": ["sopa", "sopa", "la sopa", "🍲"],
+  "фильм": ["película", "una película", "la película", "🎬"], "телефо́н": ["teléfono", "un teléfono", "el teléfono", "📱"], "компью́тер": ["ordenador", "un ordenador", "el ordenador", "💻"],
+  "стол": ["mesa", "una mesa", "la mesa", ""], "хлеб": ["pan", "pan", "el pan", "🍞"], "сок": ["zumo", "zumo", "el zumo", "🧃"], "суп": ["sopa", "sopa", "la sopa", "🍲"],
   "чай": ["té", "té", "el té", "🫖"], "слова́рь": ["diccionario", "un diccionario", "el diccionario", "📙"],
   "окно́": ["ventana", "una ventana", "la ventana", "🪟"], "мо́ре": ["mar", "el mar", "el mar", "🌊"], "сло́во": ["palabra", "una palabra", "la palabra", ""],
   "письмо́": ["carta", "una carta", "la carta", "✉️"], "молоко́": ["leche", "leche", "la leche", "🥛"], "я́блоко": ["manzana", "una manzana", "la manzana", "🍎"],
@@ -38,8 +38,8 @@ const U4_COSAS = {
   /* Animales: [español, indefinido, definido, emoji, «a…»] */
   "соба́ка": ["perro", "un perro", "el perro", "🐕", "al perro"], "ко́шка": ["gata", "una gata", "la gata", "🐈", "a la gata"], "кот": ["gato", "un gato", "el gato", "🐈‍⬛", "al gato"],
   /* Ampliación */
-  "ло́жка": ["cuchara", "una cuchara", "la cuchara", "🥄"], "таре́лка": ["plato", "un plato", "el plato", ""], "колбаса́": ["fiambre", "fiambre", "el fiambre", ""],
-  "ку́ртка": ["campera", "una campera", "la campera", ""], "гита́ра": ["guitarra", "una guitarra", "la guitarra", "🎸"],
+  "ло́жка": ["cuchara", "una cuchara", "la cuchara", "🥄"], "таре́лка": ["plato", "un plato", "el plato", ""], "колбаса́": ["embutido", "embutido", "el embutido", ""],
+  "ку́ртка": ["chaqueta", "una chaqueta", "la chaqueta", ""], "гита́ра": ["guitarra", "una guitarra", "la guitarra", "🎸"],
   "сыр": ["queso", "queso", "el queso", "🧀"], "торт": ["torta", "una torta", "la torta", "🎂"], "сала́т": ["ensalada", "una ensalada", "la ensalada", "🥗"],
   "бутербро́д": ["sándwich", "un sándwich", "el sándwich", "🥪"], "мяч": ["pelota", "una pelota", "la pelota", "⚽"], "пода́рок": ["regalo", "un regalo", "el regalo", "🎁"],
   "велосипе́д": ["bicicleta", "una bicicleta", "la bicicleta", "🚲"], "рюкза́к": ["mochila", "una mochila", "la mochila", "🎒"], "пальто́": ["abrigo", "un abrigo", "el abrigo", "🧥"]
@@ -56,7 +56,7 @@ const U4_PERSONAS = {
   /* Ampliación */
   "тётя": ["tía", "a la tía", "La tía"], "дя́дя": ["tío", "al tío", "El tío"], "ня́ня": ["niñera", "a la niñera", "La niñera"], "дочь": ["hija", "a mi hija", "Mi hija"],
   "актёр": ["actor", "al actor", "El actor"], "актри́са": ["actriz", "a la actriz", "La actriz"], "ма́льчик": ["chico", "al chico", "El chico"],
-  "де́вочка": ["nena", "a la nena", "La nena"], "студе́нт": ["estudiante (hombre)", "al estudiante", "El estudiante"], "студе́нтка": ["estudiante (mujer)", "a la estudiante", "La estudiante"]
+  "де́вочка": ["niña", "a la niña", "La niña"], "студе́нт": ["estudiante (hombre)", "al estudiante", "El estudiante"], "студе́нтка": ["estudiante (mujer)", "a la estudiante", "La estudiante"]
 };
 
 /* Verbos: "ruso": [infinitivo en español, yo, él / ella, nosotros, ellos, artículo del objeto]
@@ -134,7 +134,7 @@ const U4_LECTURAS = [
     preguntas: [["¿Qué lee la abuela?", "газе́ту", ["газе́та", "кни́гу"]], ["¿Qué toma la gata?", "молоко́", ["чай", "во́ду"]], ["¿A quién espera la abuela?", "сы́на", ["сын", "ко́шку"]]],
     vf: [["Ба́бушка ждёт сы́на.", true], ["Сын ждёт ба́бушку.", false], ["Ко́шка пьёт чай.", false]] },
   { id: "compras", titulo: "Мы покупа́ем хлеб", lineas: [
-      ["Мы покупа́ем хлеб и молоко́.", "Compramos pan y leche."], ["Ма́ма и́щет су́мку.", "Mamá busca la cartera."],
+      ["Мы покупа́ем хлеб и молоко́.", "Compramos pan y leche."], ["Ма́ма и́щет су́мку.", "Mamá busca el bolso."],
       ["Па́па покупа́ет газе́ту.", "Papá compra el diario."], ["Брат ест я́блоко.", "Mi hermano come una manzana."], ["Мы лю́бим пи́ццу.", "Nos encanta la pizza."]],
     preguntas: [["¿Qué busca mamá?", "су́мку", ["су́мка", "ру́чку"]], ["¿Qué compra papá?", "газе́ту", ["газе́та", "журна́л"]], ["¿Qué come el hermano?", "я́блоко", ["хлеб", "пи́ццу"]]],
     vf: [["Ма́ма и́щет су́мку.", true], ["Па́па ест я́блоко.", false], ["Мы лю́бим пи́ццу.", true]] },
@@ -163,20 +163,20 @@ const UNIDAD_4 = {
             { txt: "чита́ет", rol: "la acción", nota: "Чита́ть en la forma de он / она́: «lee»." },
             { txt: "кни́гу", rol: "qué recibe", nota: "Acusativo: кни́га cambia la **-а** por **-у**. Responde a что? (¿qué?)." }] },
           destacado: "Ма́ма чита́ет кни́гу: ма́ма hace, кни́гу recibe.",
-          mas: { titulo: "Por qué el ruso puede cambiar el orden", texto: "Como la terminación ya dice quién hace y qué recibe, el ruso puede mover las palabras sin que cambie el sentido. En español, en cambio, el orden es justamente lo que avisa quién hace la acción, y por eso no se puede mover con tanta libertad.\nCambiar el orden no es un error, pero tampoco es lo más común: lo neutral es quién hace, la acción y qué recibe. Armá tus frases en ese orden; el orden cambiado lo vas a reconocer al leer.",
+          mas: { titulo: "Por qué el ruso puede cambiar el orden", texto: "Como la terminación ya dice quién hace y qué recibe, el ruso puede mover las palabras sin que cambie el sentido. En español, en cambio, el orden es justamente lo que avisa quién hace la acción, y por eso no se puede mover con tanta libertad.\nCambiar el orden no es un error, pero tampoco es lo más común: lo neutral es quién hace, la acción y qué recibe. Arma tus frases en ese orden; el orden cambiado lo vas a reconocer al leer.",
             ejemplos: [{ ru: "{Кни́гу} чита́ет ма́ма.", es: "Mamá lee el libro.", por: "Кни́гу está primero, pero sigue siendo lo que se lee: la **-у** lo dice." }] } },
         { id: "u4-nom-acu", titulo: "Кни́га y кни́гу",
-          texto: "Es la misma palabra con dos terminaciones. Кни́га es la forma del diccionario, la que ya conocés: se llama **nominativo**. Кни́гу es la forma de lo que recibe la acción: se llama **acusativo**.\nEn la tabla de abajo ves doce palabras en los dos casos: algunas cambian y otras quedan igual. Las reglas que deciden cuáles cambian llegan más adelante en esta unidad.",
+          texto: "Es la misma palabra con dos terminaciones. Кни́га es la forma del diccionario, la que ya conoces: se llama **nominativo**. Кни́гу es la forma de lo que recibe la acción: se llama **acusativo**.\nEn la tabla de abajo ves doce palabras en los dos casos: algunas cambian y otras quedan igual. Las reglas que deciden cuáles cambian llegan más adelante en esta unidad.",
           destacado: "nominativo = quién hace · acusativo = qué recibe",
-          mas: { texto: "El ruso tiene seis casos. Cada uno responde a una pregunta distinta: ¿quién?, ¿qué?, ¿dónde?, ¿a quién?, ¿con quién?, ¿de quién? En esta unidad ves los dos primeros, y los otros cuatro llegan de a uno en las próximas unidades.\nNo hace falta aprenderlos de memoria ahora: cada caso aparece cuando lo necesitás para decir algo nuevo." } },
+          mas: { texto: "El ruso tiene seis casos. Cada uno responde a una pregunta distinta: ¿quién?, ¿qué?, ¿dónde?, ¿a quién?, ¿con quién?, ¿de quién? En esta unidad ves los dos primeros, y los otros cuatro llegan de a uno en las próximas unidades.\nNo hace falta aprenderlos de memoria ahora: cada caso aparece cuando lo necesitas para decir algo nuevo." } },
         { id: "u4-kto-chto", titulo: "Кто? Что?",
-          texto: "Para encontrar cada parte, hacé dos preguntas. ¿Quién hace la acción? Кто? (¿quién?). ¿Qué recibe la acción? Что? (¿qué?). La respuesta a кто? va en nominativo; la respuesta a что?, en acusativo.",
+          texto: "Para encontrar cada parte, haz dos preguntas. ¿Quién hace la acción? Кто? (¿quién?). ¿Qué recibe la acción? Что? (¿qué?). La respuesta a кто? va en nominativo; la respuesta a что?, en acusativo.",
           ejemplos: [
             { ru: "{Па́па} пьёт ко́фе.", es: "Papá toma café.", por: "Кто пьёт? Па́па: es quien hace la acción, en nominativo." },
             { ru: "Брат лю́бит {пе́сню}.", es: "A mi hermano le encanta la canción.", por: "Что он лю́бит? Пе́сню: пе́сня recibe la acción y cambia la **-я** por **-ю**." },
             { ru: "Кот пьёт {во́ду}.", es: "El gato toma agua.", por: "Что пьёт кот? Во́ду: вода́ recibe la acción y cambia la **-а** por **-у**." },
-            { ru: "Друг ви́дит {дом}.", es: "Mi amigo ve la casa.", por: "Что он ви́дит? Дом. Acá no cambia nada: algunas palabras quedan igual en acusativo." }],
-          truco: "Primero buscá quién hace la acción; lo que queda es lo que la recibe.",
+            { ru: "Друг ви́дит {дом}.", es: "Mi amigo ve la casa.", por: "Что он ви́дит? Дом. Aquí no cambia nada: algunas palabras quedan igual en acusativo." }],
+          truco: "Primero busca quién hace la acción; lo que queda es lo que la recibe.",
           mas: { texto: "Ко́фе no cambia nunca, porque viene de otro idioma. Por eso en Па́па пьёт ко́фе no se ve ninguna diferencia, y es la pregunta что? la que te dice que ко́фе recibe la acción.\nLo mismo pasa con muchas palabras masculinas, como дом o чай: la forma es la misma, pero el papel en la frase es otro.",
             ejemplos: [{ ru: "Учи́тель пьёт {чай}.", es: "El maestro toma té.", por: "Чай queda igual, pero responde a что?: recibe la acción." }] },
           chequeo: [
@@ -210,7 +210,7 @@ const UNIDAD_4 = {
           mas: { texto: "Э́то también sirve para presentar a alguien: Э́то А́нна. La persona queda en nominativo, porque solo se la señala. Y lo mismo con la pregunta: Кто э́то? («¿quién es?»), Что э́то? («¿qué es?»); la respuesta, otra vez en nominativo.",
             ejemplos: [{ ru: "Кто э́то? — Э́то {А́нна}.", es: "¿Quién es? — Es Ana.", por: "Se señala a una persona: nominativo." }] },
           chequeo: [{ pide: "¿Cuál está bien?", opciones: ["Э́то маши́на.", "Э́то маши́ну."], ok: "Э́то маши́на.", por: "Después de э́то va el nominativo." }] },
-        { titulo: "Personas que vas a usar", texto: "En esta unidad, las frases las protagonizan personas que ya conocés: А́нна, Ива́н, Ма́ша, Ди́ма, О́льга, Лу́кас y la familia (ма́ма, па́па, ба́бушка, де́душка, брат, сестра́). Tocá cada una abajo para escucharla." }
+        { titulo: "Personas que vas a usar", texto: "En esta unidad, las frases las protagonizan personas que ya conoces: А́нна, Ива́н, Ма́ша, Ди́ма, О́льга, Лу́кас y la familia (ма́ма, па́па, ба́бушка, де́душка, брат, сестра́). Toca cada una abajo para escucharla." }
       ] },
     { id: "u4m3", n: 3, tipo: "leccion", nPractica: 10, titulo: "Verbos de acción", resumen: "Я чита́ю, он чита́ет, мы чита́ем, они́ чита́ют.",
       intro: "Para que algo reciba una acción, primero hace falta la acción: el verbo. En ruso, el verbo cambia según quién la hace.",
@@ -244,7 +244,7 @@ const UNIDAD_4 = {
             ejemplos: [
               { ru: "Я {люблю́} ко́фе.", es: "Me encanta el café.", por: "Люби́ть suma una **л** solo con {я}: люблю́, pero он лю́бит." },
               { ru: "Я {ви́жу} кота́.", es: "Veo al gato.", por: "Ви́деть: la **д** pasa a **ж** solo con {я}." }] } },
-        { titulo: "La ё", texto: "Algunas formas llevan ё: пьёт, ждёт, пьём. En Azbuka podés escribir е en su lugar, como hacen los rusos en el día a día." }
+        { titulo: "La ё", texto: "Algunas formas llevan ё: пьёт, ждёт, пьём. En Azbuka puedes escribir е en su lugar, como hacen los rusos en el día a día." }
       ] },
     { id: "u4m4", n: 4, tipo: "leccion", grupo: "f", titulo: "Acusativo femenino", resumen: "-а → -у, -я → -ю.",
       intro: "Las palabras que terminan en **-а** o **-я** son las únicas que cambian siempre en acusativo. Por suerte, la regla es corta.",
@@ -275,7 +275,7 @@ const UNIDAD_4 = {
             { ru: "Я жду {па́пу}.", es: "Espero a papá.", por: "па́па → па́пу: termina en **-а**." },
             { ru: "Ма́ма лю́бит {де́душку}.", es: "Mamá quiere al abuelo.", por: "де́душка → де́душку." },
             { ru: "Ма́ша ви́дит {Ди́му}.", es: "Masha ve a Dima.", por: "Ди́ма → Ди́му." }],
-          truco: "Mirá cómo termina la palabra: **-а** → **-у**, **-я** → **-ю**, sea hombre o mujer.",
+          truco: "Mira cómo termina la palabra: **-а** → **-у**, **-я** → **-ю**, sea hombre o mujer.",
           mas: { texto: "Con **-я** pasa lo mismo: дя́дя (tío) → дя́дю. Y lo que acompaña a estas palabras sigue siendo masculino: мой па́па. En el acusativo la palabra cambia como las femeninas, pero la persona sigue siendo un hombre.",
             ejemplos: [{ ru: "Мы ждём {дя́дю}.", es: "Esperamos al tío.", por: "дя́дя → дя́дю: **-я** → **-ю**." }] } },
         { id: "u4-acu-fem-soft", titulo: "Las femeninas en -ь no cambian",
@@ -284,7 +284,7 @@ const UNIDAD_4 = {
         { id: "u4-acento-movil", titulo: "El acento puede moverse",
           texto: "En unas pocas palabras, el acento cambia de lugar en el acusativo. De las palabras de esta unidad, pasa con una sola: вода́ → во́ду. En casi todas, el acento se queda donde estaba: сестра́ → сестру́, жена́ → жену́, кни́га → кни́гу.",
           ejemplos: [{ ru: "Я пью {во́ду}.", es: "Tomo agua.", por: "вода́ → во́ду: cambia la terminación y el acento pasa a la primera sílaba." }],
-          ojo: "Al escribir no hace falta marcar el acento. Si dudás de cómo suena una forma, tocá la palabra: la tabla de Casos muestra dónde va el acento en cada caso." }
+          ojo: "Al escribir no hace falta marcar el acento. Si dudas de cómo suena una forma, toca la palabra: la tabla de Casos muestra dónde va el acento en cada caso." }
       ] },
     { id: "u4m5", n: 5, tipo: "leccion", grupo: "m", titulo: "Acusativo masculino", resumen: "Cosas: igual. Personas y animales: +а.",
       intro: "En el masculino importa una pregunta: ¿la palabra nombra una cosa, o una persona o un animal?",
@@ -303,7 +303,7 @@ const UNIDAD_4 = {
           ejemplos: [
             { ru: "Я ви́жу {бра́та}.", es: "Veo a mi hermano.", por: "брат → бра́та: es una persona, +**а**." },
             { ru: "Мы ждём {дру́га}.", es: "Esperamos a nuestro amigo.", por: "друг → дру́га." },
-            { ru: "Ма́ша лю́бит {кота́}.", es: "Masha quiere al gato.", por: "кот → кота́: los animales también. Fijate que el acento pasa a la **-а**." },
+            { ru: "Ма́ша лю́бит {кота́}.", es: "Masha quiere al gato.", por: "кот → кота́: los animales también. Fíjate que el acento pasa a la **-а**." },
             { ru: "Они́ слу́шают {учи́теля}.", es: "Escuchan al maestro.", por: "учи́тель → учи́теля: la **-ь** pasa a **-я**." }],
           destacado: "брат → бра́та · учи́тель → учи́теля",
           comparacion: "también se distingue a las personas de las cosas: «veo la casa», pero «veo **a** Ana». Esa «a» es la misma idea que la **-а** del ruso: ви́жу дом, pero ви́жу бра́та.",
@@ -320,7 +320,7 @@ const UNIDAD_4 = {
           ejemplos: [
             { ru: "Ма́ма ждёт {бра́та}.", es: "Mamá espera a mi hermano.", por: "El orden neutral: quién hace, la acción y a quién." },
             { ru: "{Бра́та} ждёт ма́ма.", es: "A mi hermano lo espera mamá.", por: "Бра́та sigue siendo a quien se espera: lo dice la **-а**, no el lugar." }],
-          truco: "Para saber quién hace qué, mirá las terminaciones, no el orden.",
+          truco: "Para saber quién hace qué, mira las terminaciones, no el orden.",
           chequeo: [{ pide: "Дру́га ждёт Ива́н. ¿Quién espera?", opciones: ["Ива́н", "друг"], ok: "Ива́н", por: "Дру́га está en acusativo: es a quien se espera. El que espera es Ива́н, en nominativo." }] }
       ] },
     { id: "u4m6", n: 6, tipo: "leccion", grupo: "n", titulo: "Acusativo neutro", resumen: "Окно́, мо́ре, письмо́: no cambian.",
@@ -355,7 +355,7 @@ const UNIDAD_4 = {
             { pide: "Она́ пьёт ___ (молоко́).", opciones: ["молоко́", "молоку́"], ok: "молоко́", por: "Neutro: queda igual." }] }
       ] },
     { id: "u4m7", n: 7, tipo: "leccion", nPractica: 10, titulo: "Construir frases", resumen: "Я + чита́ть + кни́га → Я чита́ю кни́гу.",
-      intro: "Ya tenés todo para armar frases completas. Se hace en tres pasos.",
+      intro: "Ya tienes todo para armar frases completas. Se hace en tres pasos.",
       secciones: [
         { id: "u4-tres-pasos", titulo: "Tres pasos",
           texto: "1. Quién hace la acción, en nominativo.\n2. El verbo, en la forma de esa persona.\n3. Lo que recibe la acción, en acusativo.",
@@ -368,7 +368,7 @@ const UNIDAD_4 = {
             { ru: "Они́ ждут {Ива́на}.", es: "Esperan a Iván.", por: "Они́ + ждать → ждут; Ива́н es una persona: +**а**." },
             { ru: "Брат и́щет {соба́ку}.", es: "Mi hermano busca al perro.", por: "Брат usa la forma de он; соба́ка → соба́ку." }],
           destacado: "{я} + чита́ть + кни́га → Я чита́ю кни́гу.",
-          mas: { texto: "Cuando termines de escribir una frase, revisala de atrás para adelante. Primero: ¿lo que recibe la acción está en acusativo? Después: ¿el verbo coincide con quien hace la acción? Son los dos errores más comunes, y se encuentran rápido si los buscás a propósito.",
+          mas: { texto: "Cuando termines de escribir una frase, revísala de atrás para adelante. Primero: ¿lo que recibe la acción está en acusativo? Después: ¿el verbo coincide con quien hace la acción? Son los dos errores más comunes, y se encuentran rápido si los buscas a propósito.",
             errores: [
               { mal: "Па́па лю́бит му́зыка.", bien: "Па́па лю́бит {му́зыку}.", por: "Му́зыка recibe la acción: **-а** → **-у**." },
               { mal: "Мы пьёт ко́фе.", bien: "Мы {пьём} ко́фе.", por: "Con мы, la forma es пьём." }] } },
@@ -387,7 +387,7 @@ const UNIDAD_4 = {
           chequeo: [{ pide: "Что ви́дит Ма́ша? — ___ (маши́на).", opciones: ["маши́на", "маши́ну"], ok: "маши́ну", por: "Responde a что?: es lo que recibe la acción, en acusativo." }] }
       ] },
     { id: "u4m8", n: 8, tipo: "lectura", titulo: "Lectura", resumen: "Textos cortos: ¿quién hace qué?",
-      intro: "Cuatro textos cortos con lo que aprendiste. Leelos, escuchalos y después contestá: la respuesta siempre está en el texto." },
+      intro: "Cuatro textos cortos con lo que aprendiste. Léelos, escúchalos y después contesta: la respuesta siempre está en el texto." },
     { id: "u4m9", n: 9, tipo: "leccion", nPractica: 10, titulo: "Escribir en ruso", resumen: "Traducir y entender por qué.",
       intro: "Ahora al revés: del español al ruso. Si algo no está en el caso que corresponde, la corrección te dice cuál y por qué.",
       secciones: [
@@ -397,7 +397,7 @@ const UNIDAD_4 = {
             { ru: "Я покупа́ю {кни́гу}.", es: "Compro un libro / Compro el libro.", por: "Sin artículo: la misma frase sirve para «un» y para «el»." },
             { ru: "{Брат} пьёт чай.", es: "Mi hermano toma té.", por: "«Mi» no hace falta: se entiende por el contexto." }] },
         { id: "u4-a-personal-escrita", titulo: "La «a» de las personas",
-          texto: "En «espero a mamá», la «a» no se escribe en ruso: la dice la terminación. Escribí la persona en acusativo y listo.",
+          texto: "En «espero a mamá», la «a» no se escribe en ruso: la dice la terminación. Escribe la persona en acusativo y listo.",
           ejemplos: [
             { ru: "Я жду {ма́му}.", es: "Espero a mamá.", por: "Sin «a»: ма́му ya dice a quién se espera." },
             { ru: "Мы ви́дим {Ива́на}.", es: "Vemos a Iván.", por: "Ива́н → Ива́на: la **-а** hace el trabajo de la «a»." }],
@@ -413,7 +413,7 @@ const UNIDAD_4 = {
           mas: { texto: "Люби́ть sirve para personas y para cosas. Con personas es «querer»: Я люблю́ ма́му. Con cosas es «encantar»: Я люблю́ кино́. La frase se arma siempre igual: quién quiere, en nominativo, y qué o a quién, en acusativo." } }
       ] },
     { id: "u4m10", n: 10, tipo: "proyecto", titulo: "Proyecto final", resumen: "Quién hace qué en tu familia, tu casa o tus amigos.",
-      intro: "Escribí un texto sobre tu familia, tu casa o tus amigos: quién hace qué. Por ejemplo: Ма́ма чита́ет газе́ту. Мой брат лю́бит пи́ццу. Я пью ко́фе. No importa que sea simple: lo importante es que lo que recibe la acción esté en acusativo.",
+      intro: "Escribe un texto sobre tu familia, tu casa o tus amigos: quién hace qué. Por ejemplo: Ма́ма чита́ет газе́ту. Мой брат лю́бит пи́ццу. Я пью ко́фе. No importa que sea simple: lo importante es que lo que recibe la acción esté en acusativo.",
       requisitos: [], consejos: [] },
     { id: "u4m11", n: 11, tipo: "examen", titulo: "Evaluación", resumen: "Casos, verbos, frases y traducción.",
       intro: "Veinticinco ejercicios en seis partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
@@ -497,7 +497,7 @@ function u4Regla(s) {
   const pos = w => { const i = w.indexOf("\u0301"); return i < 0 ? (w.indexOf("ё") >= 0 ? w.indexOf("ё") + 1 : -1) : i; };
   const vocal = (w, i) => (w.slice(0, i).match(/[аеёиоуыэюя]/gi) || []).length;
   let mueve = "";
-  if (s.nom !== s.acc && pos(s.nom) > 0 && pos(s.acc) > 0 && vocal(s.nom, pos(s.nom)) !== vocal(s.acc, pos(s.acc))) mueve = " Fijate que el acento se mueve.";
+  if (s.nom !== s.acc && pos(s.nom) > 0 && pos(s.acc) > 0 && vocal(s.nom, pos(s.nom)) !== vocal(s.acc, pos(s.acc))) mueve = " Fíjate que el acento se mueve.";
   return "**" + s.nom + " → " + s.acc + "**: " + r + "." + mueve;
 }
 
@@ -586,7 +586,7 @@ function ejerciciosUnidad4() {
     const dis = baraja(misma, i + 3).slice(0, 3).map(x => x.es);
     if (dis.length >= 2) out.push(Object.assign({ id: "U4-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: mod, pide: "¿Qué significa?", grande: e.acento || e.ru, audio: e.ru,
       opciones: baraja([es].concat(dis), i + 5), correcta: es, explicacion: (e.acento || e.ru) + " — " + es }, base));
-    out.push(Object.assign({ id: "U4-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: mod, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
+    out.push(Object.assign({ id: "U4-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: mod, pide: "Escribe en ruso: «" + es + "»", audio: e.ru, audioManual: true,
       pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.length + " letras.", esperadas: [e.acento || e.ru], idioma: "ru", explicacion: (e.acento || e.ru) + " — " + es }, base));
   });
 
@@ -595,17 +595,17 @@ function ejerciciosUnidad4() {
     const base = { grupo: v.id, items: ["lex:" + v.id] };
     v.f.forEach((f, p) => {
       const pr = ["Я", "Он", "Мы", "Они́"][p];
-      out.push(Object.assign({ id: "U4-conj-" + v.id + "-" + p, tipo: "conjugar", forma: "elegir", dificultad: 1, modulo: 3, pide: "Elegí la forma de «" + v.ac + "» (" + v.es + ").",
+      out.push(Object.assign({ id: "U4-conj-" + v.id + "-" + p, tipo: "conjugar", forma: "elegir", dificultad: 1, modulo: 3, pide: "Elige la forma de «" + v.ac + "» (" + v.es + ").",
         grande: pr + " _____", opciones: baraja(uniq(v.f), i + p), correcta: f, oir: pr + " " + f,
         explicacion: "**" + v.ac + " → " + PERS[p] + " " + f + "** (" + ["yo", "él / ella", "nosotros", "ellos"][p] + " " + v.esF[p] + ")." }, base));
-      out.push(Object.assign({ id: "U4-conjw-" + v.id + "-" + p, tipo: "conjugar-escribir", forma: "escribir", dificultad: 2, modulo: 3, pide: "Escribí la forma del verbo.",
+      out.push(Object.assign({ id: "U4-conjw-" + v.id + "-" + p, tipo: "conjugar-escribir", forma: "escribir", dificultad: 2, modulo: 3, pide: "Escribe la forma del verbo.",
         grande: PERS[p] + " + " + v.ac, audio: pr + " " + f, audioManual: true, esperadas: [f, pr + " " + f], idioma: "ru",
         explicacion: "**" + v.ac + " → " + PERS[p] + " " + f + "** (" + v.esF[p] + ")." }, base));
       out.push(Object.assign({ id: "U4-pers-" + v.id + "-" + p, tipo: "persona", forma: "elegir", dificultad: 1, modulo: 3, pide: "¿Quién lo hace?", grande: f, audio: f,
         opciones: p === 1 ? ["я", "он / она́", "мы", "они́"] : ["я", "он / она́", "мы", "они́"], correcta: PERS[p],
         explicacion: "**" + f + "** es la forma de " + PERS[p].replace(/^я$/, "{я}") + " (" + v.esF[p] + ")." }, base));
     });
-    out.push(Object.assign({ id: "U4-emp-v-" + v.id, tipo: "emparejar", forma: "emparejar", dificultad: 2, modulo: 3, pide: "Uní cada persona con su forma de «" + v.ac + "».",
+    out.push(Object.assign({ id: "U4-emp-v-" + v.id, tipo: "emparejar", forma: "emparejar", dificultad: 2, modulo: 3, pide: "Une cada persona con su forma de «" + v.ac + "».",
       pares: [["я", v.f[0]], ["он / она́", v.f[1]], ["мы", v.f[2]], ["они́", v.f[3]]], explicacion: v.ac + ": я " + v.f[0] + " · он / она́ " + v.f[1] + " · мы " + v.f[2] + " · они́ " + v.f[3] + "." }, base));
   });
 
@@ -614,7 +614,7 @@ function ejerciciosUnidad4() {
   objetos.forEach((s, i) => {
     const base = { grupo: s.id, items: ["lex:" + s.id], oir: s.acc, ampliacion: s.amp ? true : undefined };
     const m = s.mod;
-    out.push(Object.assign({ id: "U4-acu-" + s.id, tipo: "acusativo", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí el acusativo (lo que recibe la acción).", grande: s.nom, audio: s.nom, audioManual: true,
+    out.push(Object.assign({ id: "U4-acu-" + s.id, tipo: "acusativo", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribe el acusativo (lo que recibe la acción).", grande: s.nom, audio: s.nom, audioManual: true,
       esperadas: [s.acc], idioma: "ru", explicacion: u4Regla(s) + " (" + s.es + ")" }, base));
     out.push(Object.assign({ id: "U4-camb-" + s.id, tipo: "cambia", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Cambia en acusativo?", grande: s.nom, audio: s.nom,
       opciones: ["Sí, cambia", "No, queda igual"], correcta: s.nom === s.acc ? "No, queda igual" : "Sí, cambia", explicacion: u4Regla(s) }, base));
@@ -626,7 +626,7 @@ function ejerciciosUnidad4() {
       for (let j = 0; j + 4 <= l.length; j += 4) {
         const g = l.slice(j, j + 4);
         out.push({ id: "U4-mem-" + m + (amp ? "a" : "") + "-" + j, tipo: "emparejar", forma: "emparejar", dificultad: 2, modulo: m, grupo: "mem-" + m + "-" + j + (amp ? "a" : ""), ampliacion: amp || undefined,
-          pide: "Uní cada palabra con su acusativo.", pares: g.map(s => [s.nom, s.acc]), items: g.map(s => "lex:" + s.id), explicacion: g.map(s => s.nom + " → " + s.acc).join(" · ") });
+          pide: "Une cada palabra con su acusativo.", pares: g.map(s => [s.nom, s.acc]), items: g.map(s => "lex:" + s.id), explicacion: g.map(s => s.nom + " → " + s.acc).join(" · ") });
       }
     });
   });
@@ -648,33 +648,33 @@ function ejerciciosUnidad4() {
     if (f.r === 0) {
       /* Elegir la forma del objeto */
       const ops = uniq([o.acc, o.nom, o.dat]);
-      if (ops.length >= 2) out.push(Object.assign({ id: "U4-acel-" + f.id, tipo: "acu-elegir", forma: "elegir", dificultad: 1, modulo: m, pide: "Completá: «" + f.es + "»", grande: conHueco,
+      if (ops.length >= 2) out.push(Object.assign({ id: "U4-acel-" + f.id, tipo: "acu-elegir", forma: "elegir", dificultad: 1, modulo: m, pide: "Completa: «" + f.es + "»", grande: conHueco,
         opciones: baraja(ops, i), correcta: o.acc, explicacion: exp }, base));
       /* Completar escribiendo */
-      out.push(Object.assign({ id: "U4-comp-" + f.id, tipo: "completar", forma: "escribir", dificultad: 2, modulo: m, pide: "Completá con «" + o.nom + "» en el caso que corresponde.", grande: conHueco, pista: f.es,
+      out.push(Object.assign({ id: "U4-comp-" + f.id, tipo: "completar", forma: "escribir", dificultad: 2, modulo: m, pide: "Completa con «" + o.nom + "» en el caso que corresponde.", grande: conHueco, pista: f.es,
         audio: f.ru, audioManual: true, esperadas: [o.acc], idioma: "ru", explicacion: exp }, base));
       /* ¿Cuál está bien? (solo si el acusativo cambia) */
       if (o.nom !== o.acc) out.push(Object.assign({ id: "U4-corr-" + f.id, tipo: "corregir", forma: "elegir", dificultad: 2, modulo: m, pide: "¿Cuál está bien?",
         opciones: baraja([f.ru, verbo + " " + o.nom + "."], i + 1), correcta: f.ru, explicacion: exp }, base));
-      /* Tocá lo que recibe la acción */
+      /* Toca lo que recibe la acción */
       const pals = sinP(f.ru).split(" ");
-      out.push(Object.assign({ id: "U4-toc-o-" + f.id, tipo: "tocar", forma: "tocar", dificultad: 1, modulo: m, pide: "Tocá lo que recibe la acción.", palabras: pals, correcta: pals.length - 1, audio: f.ru,
+      out.push(Object.assign({ id: "U4-toc-o-" + f.id, tipo: "tocar", forma: "tocar", dificultad: 1, modulo: m, pide: "Toca lo que recibe la acción.", palabras: pals, correcta: pals.length - 1, audio: f.ru,
         explicacion: "**" + o.acc + "** recibe la acción: está en acusativo (" + (o.nom === o.acc ? "queda igual que " + o.nom : o.nom + " → " + o.acc) + "). " + f.ru + " — " + f.es }, base));
       /* Armar la frase (módulo 7) */
-      out.push(Object.assign({ id: "U4-cons-" + f.id, tipo: "construir", forma: "escribir", dificultad: 3, modulo: f.amp ? m : 7, pide: "Armá la frase con estas palabras.",
+      out.push(Object.assign({ id: "U4-cons-" + f.id, tipo: "construir", forma: "escribir", dificultad: 3, modulo: f.amp ? m : 7, pide: "Arma la frase con estas palabras.",
         grande: u4Min(f.suj.ru) + " · " + f.v.ac + " · " + o.nom, pista: f.es, audio: f.ru, audioManual: true, esperadas: f.esperadas, idioma: "ru",
         explicacion: f.suj.ru.replace(/^Я$/, "{Я}") + " → " + f.forma + " → " + o.acc + ". " + u4Regla(o) }, base));
     } else {
       /* Traducir al ruso (módulo 9) */
-      out.push(Object.assign({ id: "U4-esru-" + f.id, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: f.amp ? m : 9, pide: "Escribí en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
+      out.push(Object.assign({ id: "U4-esru-" + f.id, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: f.amp ? m : 9, pide: "Escribe en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
         esperadas: f.esperadas, idioma: "ru", explicacion: f.ru + " " + u4Regla(o) }, base));
       /* Dictado */
-      out.push(Object.assign({ id: "U4-dic-" + f.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: m, pide: "Escuchá y escribí la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru",
+      out.push(Object.assign({ id: "U4-dic-" + f.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: m, pide: "Escucha y escribe la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru",
         explicacion: f.ru + " — " + f.es + " " + u4Regla(o) }, base));
       /* Ordenar (módulo 7) */
       const w = sinP(f.ru).split(" ");
       let fi = baraja(w, i + 7); if (fi.join(" ") === w.join(" ")) fi = fi.slice(1).concat(fi[0]);
-      out.push(Object.assign({ id: "U4-ord-" + f.id, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: f.amp ? m : 7, pide: "Ordená: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "),
+      out.push(Object.assign({ id: "U4-ord-" + f.id, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: f.amp ? m : 7, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "),
         explicacion: f.ru + " " + u4Regla(o) }, base));
     }
   });
@@ -687,25 +687,25 @@ function ejerciciosUnidad4() {
       const base = { grupo: "C4-" + s.id, items: ["lex:" + s.id] };
       out.push(Object.assign({ id: "U4-caso-" + s.id + "-" + r, tipo: "tocar-caso", forma: "elegir", dificultad: 1, modulo: 1, pide: "¿Qué forma es?", grande: w, audio: w,
         opciones: ["Nominativo", "Acusativo"], correcta: cs, explicacion: "**" + w + "** es " + cs.toLowerCase() + ": " + por + ". Significa «" + s.es + "»." }, base));
-      out.push(Object.assign({ id: "U4-casoa-" + s.id + "-" + r, tipo: "tocar-caso", forma: "elegir", dificultad: 2, modulo: 1, pide: "Escuchá: ¿nominativo o acusativo?", audio: w,
+      out.push(Object.assign({ id: "U4-casoa-" + s.id + "-" + r, tipo: "tocar-caso", forma: "elegir", dificultad: 2, modulo: 1, pide: "Escucha: ¿nominativo o acusativo?", audio: w,
         opciones: ["Nominativo", "Acusativo"], correcta: cs, explicacion: "Sonó **" + w + "**: " + cs.toLowerCase() + " (" + s.nom + " → " + s.acc + ")." }, base));
     });
   });
-  /* Uní el audio con su acusativo: ▶ suena la palabra en nominativo; a la derecha, los acusativos */
+  /* Une el audio con su acusativo: ▶ suena la palabra en nominativo; a la derecha, los acusativos */
   for (let j = 0; j + 4 <= tabla1.length; j += 4) {
     const g = baraja(tabla1, 41).slice(j, j + 4);
     out.push({ id: "U4-memaud-" + j, tipo: "emparejar", forma: "emparejar", dificultad: 2, modulo: 1, grupo: "MA4-" + j, audioIzq: true,
-      pide: "Tocá ▶, escuchá la palabra y uníla con su acusativo.", pista: "Tocá ▶ para escuchar y después su acusativo.", pares: g.map(s => [s.nom, s.acc]), items: g.map(s => "lex:" + s.id),
+      pide: "Toca ▶, escucha la palabra y uníla con su acusativo.", pista: "Toca ▶ para escuchar y después su acusativo.", pares: g.map(s => [s.nom, s.acc]), items: g.map(s => "lex:" + s.id),
       explicacion: g.map(s => s.nom + " → " + s.acc).join(" · ") });
   }
-  /* Tocá lo que recibe la acción, en frases con las palabras de la tabla */
+  /* Toca lo que recibe la acción, en frases con las palabras de la tabla */
   const frases1 = [["чита́ть", "кни́га"], ["чита́ть", "письмо́"], ["пить", "вода́"], ["пить", "чай"], ["люби́ть", "ры́ба"], ["люби́ть", "кот"], ["люби́ть", "брат"],
     ["ви́деть", "дом"], ["ви́деть", "окно́"], ["ви́деть", "друг"], ["ви́деть", "учи́тель"], ["слу́шать", "пе́сня"]];
   frases1.forEach(([vk, ok], j) => {
     const f = u4Frase(vk, ok, j, "pron"); if (!f) return;
     const pals = sinP(f.ru).split(" ");
     out.push({ id: "U4-toc1-" + j, tipo: "tocar", forma: "tocar", dificultad: 1, modulo: 1, grupo: "T4-" + f.o.id, items: ["lex:" + f.o.id], oir: f.ru,
-      pide: "Tocá lo que recibe la acción.", palabras: pals, correcta: pals.length - 1, audio: f.ru,
+      pide: "Toca lo que recibe la acción.", palabras: pals, correcta: pals.length - 1, audio: f.ru,
       explicacion: "**" + f.o.acc + "** recibe la acción: está en acusativo (" + (f.o.nom === f.o.acc ? "queda igual que " + f.o.nom : f.o.nom + " → " + f.o.acc) + "). " + f.ru + " — " + f.es });
   });
 
@@ -716,19 +716,19 @@ function ejerciciosUnidad4() {
     const f = u4Frase(vk, ok, j * 3 + 1, "pers", 2); if (!f || !f.suj.s) return;
     const S = f.suj.s, pals = sinP(f.ru).split(" ");
     const base = { grupo: "S4-" + S.id + "-" + j, items: ["lex:" + S.id], oir: f.ru };
-    out.push(Object.assign({ id: "U4-toc2-" + j, tipo: "tocar", forma: "tocar", dificultad: 1, modulo: 2, pide: "Tocá quién hace la acción.", palabras: pals, correcta: 0, audio: f.ru,
+    out.push(Object.assign({ id: "U4-toc2-" + j, tipo: "tocar", forma: "tocar", dificultad: 1, modulo: 2, pide: "Toca quién hace la acción.", palabras: pals, correcta: 0, audio: f.ru,
       explicacion: "**" + S.nom + "** hace la acción: está en nominativo. " + f.ru + " — " + f.es }, base));
     /* Elegir la forma de quien hace la acción: nominativo, no acusativo */
     if (S.nom !== S.acc) {
       const cap = w => w.charAt(0).toUpperCase() + w.slice(1);
-      out.push(Object.assign({ id: "U4-nom2-" + j, tipo: "nom-elegir", forma: "elegir", dificultad: 2, modulo: 2, pide: "Completá: «" + f.es + "»", grande: "_____ " + pals.slice(1).join(" ") + ".",
+      out.push(Object.assign({ id: "U4-nom2-" + j, tipo: "nom-elegir", forma: "elegir", dificultad: 2, modulo: 2, pide: "Completa: «" + f.es + "»", grande: "_____ " + pals.slice(1).join(" ") + ".",
         opciones: baraja([cap(S.nom), cap(S.acc)], j), correcta: cap(S.nom), explicacion: "**" + S.nom + "** hace la acción: va en nominativo, la forma del diccionario (" + S.acc + " es el acusativo). " + f.ru }, base));
     }
   });
   /* Э́то + nominativo (módulo 2) */
   Object.values(sust).filter(s => s.desde <= 2 && !s.amp && s.persona).forEach((s, j) => {
     const ru = "Э́то " + s.nom + ".";
-    out.push({ id: "U4-eto-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 1, modulo: 2, grupo: "E4-" + s.id, items: ["lex:" + s.id], oir: ru, pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru",
+    out.push({ id: "U4-eto-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 1, modulo: 2, grupo: "E4-" + s.id, items: ["lex:" + s.id], oir: ru, pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru",
       explicacion: ru + " — Es " + u4MinEs(s.suj) + ". Después de э́то, nominativo." });
   });
 
@@ -844,7 +844,7 @@ function ejerciciosUnidad4() {
       /* oído: suena una de las dos frases; ¿qué forma de B sonó? */
       const sonoAB = n % 3 !== 0, audio = sonoAB ? ab : ba, ok = sonoAB ? B.acc : B.nom;
       out.push({ id: "U4-oido-" + n, tipo: "oido", forma: "elegir", dificultad: 2, modulo: mod, regla: u4ReglaId(B), grupo: "O4-" + n, items, oir: audio,
-        pide: "Escuchá: ¿qué forma de «" + B.nom + "» sonó?", audio, opciones: [B.nom, B.acc], correcta: ok,
+        pide: "Escucha: ¿qué forma de «" + B.nom + "» sonó?", audio, opciones: [B.nom, B.acc], correcta: ok,
         explicacion: "Sonó: " + audio + " " + (sonoAB ? cap(B.acc) + " es acusativo: recibe la acción." : cap(B.nom) + " es nominativo: hace la acción.") });
     });
   });
@@ -853,7 +853,7 @@ function ejerciciosUnidad4() {
     if (i % 3) return;
     const o = f.o, sola = i % 2 === 0, audio = sola ? "Э́то " + o.nom + "." : f.ru, ok = sola ? o.nom : o.acc;
     out.push({ id: "U4-oidoc-" + f.id, tipo: "oido", forma: "elegir", dificultad: 2, modulo: modF(f, o.mod), regla: u4ReglaId(o), grupo: "F4-" + f.id, items: ["lex:" + o.id], oir: audio,
-      pide: "Escuchá: ¿qué forma sonó?", audio, opciones: [o.nom, o.acc], correcta: ok,
+      pide: "Escucha: ¿qué forma sonó?", audio, opciones: [o.nom, o.acc], correcta: ok,
       explicacion: "Sonó: " + audio + " " + u4Regla(o) });
   });
 
@@ -903,7 +903,7 @@ function ejerciciosUnidad4() {
       const sinMy = t => cap(t.replace(/^Мы /, ""));
       const conMi = /^Mi /.test(P.suj) ? [(P.g === "f" ? "Моя́ " : "Мой ") + P.nom + " " + v.f[1] + " " + o2.acc + "."] : [];
       out.push({ id: "U4-cad-" + n, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 7, regla: u4ReglaId(o2), grupo: "C4c-" + n, items: ["lex:" + o2.id, "lex:" + v.id], oir: s3,
-        pide: "Cambiá la frase paso a paso.", base: s0,
+        pide: "Cambia la frase paso a paso.", base: s0,
         pasos: [
           { pide: "Ahora lo hacemos nosotros (мы).", esperadas: [s1, sinMy(s1)] },
           { pide: "Ahora lo que recibe la acción es " + o2.nom + ".", esperadas: [s2, sinMy(s2)] },
@@ -921,7 +921,7 @@ function ejerciciosUnidad4() {
     const idx = inv ? [2, 1, 0] : [0, 1, 2];
     out.push({ id: "U4-desarm-" + f.id, tipo: "desarmar", forma: "desarmar", dificultad: inv ? 3 : 2, modulo: modF(f, inv ? Math.max(5, o.mod) : Math.max(2, o.mod)), regla: inv ? "u4-orden-libre" : "u4-caso",
       grupo: "F4-" + f.id, items: ["lex:" + S.id, "lex:" + o.id], oir: ru, audio: ru, audioManual: true,
-      pide: "Respondé tocando las palabras de la frase.", palabras, preguntas: PREG.map((p, k) => ({ pide: p, correcta: idx[k] })),
+      pide: "Responde tocando las palabras de la frase.", palabras, preguntas: PREG.map((p, k) => ({ pide: p, correcta: idx[k] })),
       explicacion: ru + " — " + f.es + " **" + cap(S.nom) + "**: nominativo, hace la acción. **" + cap(o.acc) + "**: acusativo, la recibe." + (inv ? " El orden cambió, pero las terminaciones no." : "") });
   });
 
@@ -959,7 +959,7 @@ function ejerciciosUnidad4() {
   const m = UNIDAD_4.modulos.find(x => x.id === "u4m10");
   const pal = t => t.match(/[А-Яа-яЁё\u0301]+/g) || [];
   const info = w => { const idx = azIndiceFormas(); const r = idx.get(azFormaClave(w)); return r || []; };
-  /* Es verbo si todas sus lecturas son de un verbo y no es un imperativo (мой es «mi» y también «lavá»: no cuenta) */
+  /* Es verbo si todas sus lecturas son de un verbo y no es un imperativo (мой es «mi» y también «lava»: no cuenta) */
   const esVerbo = w => { const r = info(w); return r.length > 0 && r.every(x => (lexComerById(x[0]) || {}).posNormalized === "verbo" && !/imper/i.test(x[2] || "")); };
   const frases = t => t.split(/[.!?\n]+/)   /* también el renglón nuevo (06/10/2026) */
     .map(x => x.trim()).filter(x => pal(x).length >= 2);

@@ -56,10 +56,26 @@ function azClaveRu(t) {
 }
 /* Transliteración: además, y = i y sin apóstrofos ('ya' = 'ia', «syest» = «s'yest») */
 function azClaveTr(t) {
-  return azClaveEs(t).replace(/y/g, "i").replace(/['"`’ʼ]/g, "");
+  return azClaveEsBase(t).replace(/y/g, "i").replace(/['"`’ʼ]/g, "");
+}
+/* Voseo (14/10/2026, español neutro): la app habla de tú, pero si el alumno
+   escribe en español con voseo («podés», «sos», «vos»), no es un error. Solo
+   presentes: los imperativos (poné, hacé, salí) chocan con otras formas. */
+const AZ_VOSEO_ES = { abris: "abres", aburris: "aburres", acertas: "aciertas", acordas: "acuerdas", acostas: "acuestas", almorzas: "almuerzas", cerras: "cierras", contas: "cuentas", corregis: "corriges", decidis: "decides", decis: "dices", desenvolves: "desenvuelves", despedis: "despides", despertas: "despiertas", devolves: "devuelves", dormis: "duermes", elegis: "eliges", empezas: "empiezas", encontras: "encuentras", entendes: "entiendes", escribis: "escribes", mostras: "muestras", negas: "niegas", pedis: "pides", pensas: "piensas", podes: "puedes", preferis: "prefieres", queres: "quieres", salis: "sales", seguis: "sigues", sentis: "sientes", sonas: "suenas", sos: "eres", tenes: "tienes", traducis: "traduces", venis: "vienes", vestis: "vistes", vivis: "vives", volves: "vuelves", vos: "tu" };
+/* Palabras regionales (15/10/2026): la app usa las neutras («coche», «metro»), pero si el
+   alumno escribe la rioplatense o la americana, no es un error. */
+const AZ_REGION_ES = { auto: "coche", carro: "coche", subte: "metro", colectivo: "autobus", omnibus: "autobus", mozo: "camarero", moza: "camarera",
+  departamento: "apartamento", piso: "apartamento", boleto: "billete", pasaje: "billete", plata: "dinero", vuelto: "cambio", computadora: "ordenador",
+  celular: "movil", lapicera: "boligrafo", birome: "boligrafo", campera: "chaqueta", remera: "camiseta", pollera: "falda", valija: "maleta",
+  pileta: "piscina", heladera: "nevera", living: "salon", vereda: "acera", jugo: "zumo", papa: "patata", papas: "patatas", manteca: "mantequilla",
+  lindo: "bonito", linda: "bonita", lindos: "bonitos", lindas: "bonitas", nena: "nina", nene: "nino", chau: "adios", aca: "aqui", alla: "alli",
+  jean: "vaqueros", pulover: "jersey", fiambre: "embutido", billetera: "cartera", autos: "coches", subtes: "metros", mozos: "camareros" };
+function azClaveEsBase(t) {
+  return azSinAcento(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").normalize("NFC");
 }
 function azClaveEs(t) {
-  return azSinAcento(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").normalize("NFC");
+  const k = azClaveEsBase(t);
+  return AZ_VOSEO_ES[k] || AZ_REGION_ES[k] || k;
 }
 
 /* Distancia de edición con las operaciones, para mostrar la diferencia */
@@ -156,16 +172,16 @@ function azClasificar(u, e, modo, formaCasi) {
 
   if (modo !== "ru") {
     if (dif.dist <= tope && ke.length > 3) { r.estado = "casi"; r.motivo = "Error de tipeo: es «" + e + "»."; }
-    else { r.estado = "mal"; r.motivo = "Acá va «" + e + "»."; }
+    else { r.estado = "mal"; r.motivo = "Aquí va «" + e + "»."; }
     return r;
   }
 
   if (/[a-z]/i.test(u) && !/[а-яё]/i.test(u)) {
     r.estado = "mal";
-    r.motivo = "«" + u + "» está escrito con letras latinas. Usá el teclado ruso del teléfono.";
+    r.motivo = "«" + u + "» está escrito con letras latinas. Usa el teclado ruso del teléfono.";
     return r;
   }
-  if (ke.length === 1) { r.estado = "mal"; r.motivo = "Acá va la letra «" + e + "»."; return r; }
+  if (ke.length === 1) { r.estado = "mal"; r.motivo = "Aquí va la letra «" + e + "»."; return r; }
   const au = azAnalizarPalabra(u), ae = azAnalizarPalabra(e);
   const comun = au.filter(function (x) { return ae.some(function (y) { return y.id === x.id; }); })[0];
   if (comun) {
@@ -173,7 +189,7 @@ function azClasificar(u, e, modo, formaCasi) {
     /* formaCasi (06/10/2026, Manu): en las primeras unidades, otra forma de la palabra correcta
        (мои por мой) es Casi: el alumno todavía no conoce bien las formas */
     r.estado = formaCasi ? "casi" : "mal";
-    r.motivo = "Escribiste «" + u + "» (" + azEtiq(comun) + " de " + comun.lema + "). Acá va «" + e + "» (" + azEtiq(ye) + ").";
+    r.motivo = "Escribiste «" + u + "» (" + azEtiq(comun) + " de " + comun.lema + "). Aquí va «" + e + "» (" + azEtiq(ye) + ").";
     return r;
   }
   /* ¿La diferencia cae en la raíz o en la terminación? */
@@ -188,12 +204,12 @@ function azClasificar(u, e, modo, formaCasi) {
   }
   r.estado = "mal";
   if (au.length && au[0].lema && azClaveRu(azSinAcento(au[0].lema)) !== azClaveRu(azSinAcento(ae.length ? ae[0].lema : e))) {
-    r.motivo = "«" + u + "» es otra palabra" + (au[0].es ? " (" + au[0].es + ")" : "") + ". Acá va «" + e + "»" + (ae[0] && ae[0].es ? " (" + ae[0].es + ")" : "") + ".";
+    r.motivo = "«" + u + "» es otra palabra" + (au[0].es ? " (" + au[0].es + ")" : "") + ". Aquí va «" + e + "»" + (ae[0] && ae[0].es ? " (" + ae[0].es + ")" : "") + ".";
   } else if (pre >= Math.max(1, raiz) && dif.dist <= 3) {
     const tu = u.slice(pre), te = azSinAcento(e).slice(pre);
     r.motivo = "La terminación: va «-" + te + "»" + (tu ? ", no «-" + tu + "»" : "") + (ae[0] ? " (" + azEtiq(ae[0]) + ")" : "") + ".";
   } else {
-    r.motivo = "Acá va «" + e + "».";
+    r.motivo = "Aquí va «" + e + "».";
   }
   return r;
 }
@@ -329,8 +345,8 @@ function azCorregir(respuesta, esperadas, opts) {
   if (pos < txt.length) out.correcta.push({ t: txt.slice(pos) });
   const n = out.palabras.filter(function (p) { return p.estado !== "ok"; }).length;
   out.resumen = peor === AZ_R_BIEN ? "Todo correcto." :
-    out.orden ? "Revisá el orden de las palabras." :
-    peor === AZ_R_CASI ? "Revisá " + (n === 1 ? "1 detalle." : n + " detalles.") :
+    out.orden ? "Revisa el orden de las palabras." :
+    peor === AZ_R_CASI ? "Revisa " + (n === 1 ? "1 detalle." : n + " detalles.") :
     (n === 1 ? "Hay 1 error." : "Hay " + n + " errores.");
   return out;
 }
@@ -501,7 +517,7 @@ window.azDiff = azDiff;
         const tuya = (r.tuya || []).map(function (p) { return p.t; }).join(" ");
         const bien = r.esperada.replace(/[()]/g, "");
         const porque = errores.map(function (p) { return p.motivo; }).concat(r.notas).join(" ").replace(/\*\*/g, "");
-        azGuardarEnCuaderno("Escribí: " + tuya + "\nCorrecto: " + bien + (porque ? "\n" + porque : ""));
+        azGuardarEnCuaderno("Escribe: " + tuya + "\nCorrecto: " + bien + (porque ? "\n" + porque : ""));
       } }, "＋ Guardar este error en el cuaderno"));
   }
   window.AzCorreccion = AzCorreccion;
@@ -528,7 +544,7 @@ window.azDiff = azDiff;
         h("div", { className: "az-cr-ok", lang: "ru" }, r.modelo)),
       !sinModelo && r.modelo && r.nivel === 2 && h("div", { className: "az-cr-exp", lang: "ru", style: { borderLeftColor: COL[2] } }, "Otra forma: " + r.modelo),
       r.nivel < 2 && typeof azGuardarEnCuaderno === "function" && h("button", { className: "az-cr-cu", onClick: function () {
-        azGuardarEnCuaderno("Escribí: " + r.tuya.map(function (p) { return p.t; }).join(" ") + "\nMejor: " + r.modelo +
+        azGuardarEnCuaderno("Escribe: " + r.tuya.map(function (p) { return p.t; }).join(" ") + "\nMejor: " + r.modelo +
           (formas.length ? "\n" + formas.map(function (e) { return e.escrito + " → " + e.mejor; }).join("; ") : ""));
       } }, "＋ Guardar en el cuaderno"));
   }

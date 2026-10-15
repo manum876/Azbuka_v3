@@ -36,9 +36,9 @@
      ordenar   { pide, audio?, fichas, esperada }
      vf        { afirmacion, verdadero }
      emparejar { pide, pares: [[izq, der], …], audioIzq? }  (audioIzq: la izquierda es audio)
-     tocar     { pide, palabras: [..], correcta: índice, audio? }  (02/10/2026: tocá la palabra de la frase)
+     tocar     { pide, palabras: [..], correcta: índice, audio? }  (02/10/2026: toca la palabra de la frase)
      corregir  { pide?, palabras, correcta: índice, arreglo: "forma" | [formas], contexto? }  (06/10/2026, U13)
-               tocá la palabra mal y escribila bien: otra palabra → Mal; la correcta mal arreglada → Casi.
+               toca la palabra mal y escríbela bien: otra palabra → Mal; la correcta mal arreglada → Casi.
      cadena    { pide?, base, pasos: [{ pide, esperadas }] }  (06/10/2026) la frase pasa por varios cambios
                seguidos; cada paso parte de la respuesta correcta del anterior. Todo Bien → Bien;
                sin Mal, o un solo Mal en 3 pasos o más → Casi; si no, Mal.
@@ -160,13 +160,13 @@
   }
 
   /* Los dos géneros (13/10/2026, decisión de Manu): en ruso el género de quien habla (я был / я была́) o de
-     a quién le hablás (ты был / ты была́) solo se marca en el verbo, y una pregunta «al aire» va en masculino.
+     a quién le hablas (ты был / ты была́) solo se marca en el verbo, y una pregunta «al aire» va en masculino.
      Si la consigna no fija el género (hombre, mujer, señor, chica, amigo…), se aceptan las dos formas.
      No en los dictados: ahí se escribe lo que se oye. Un ejercicio puede pedir lo contrario con generoFijo: true. */
   const AZ_GENERO_PIDE = /hombre|mujer|señor|señora|chic[oa]s?\b|amig[oa]\b|varón/i;
   function azEsperadasGenero(ej, lista, pideExtra) {
     if (!lista || ej.generoFijo || typeof azAmbosGeneros !== "function") return lista;
-    if (ej.tipo === "dictado" || /^Escuchá y escribí/.test(ej.pide || "")) return lista;
+    if (ej.tipo === "dictado" || /^Escuch[aá] y escrib[eí]/.test(ej.pide || "")) return lista;
     if (AZ_GENERO_PIDE.test((ej.pide || "") + " " + (pideExtra || ""))) return lista;
     return azAmbosGeneros(lista);
   }
@@ -234,12 +234,12 @@
       ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: "ru" }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.pista && h("div", { className: "pr-pista" }, ej.pista),
-      ej.voz && h("div", { className: "pr-voz" }, "🎤 Tocá el micrófono del teclado ruso y decilo. El teléfono lo escribe por vos."),
+      ej.voz && h("div", { className: "pr-voz" }, "🎤 Toca el micrófono del teclado ruso y dilo. El teléfono lo escribe por ti."),
       h("div", { className: "pr-in-row" },
         h("input", {
           ref, className: "pr-input", value: txt, lang: ru ? "ru" : "es",
           autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-          placeholder: ru ? "Escribí en ruso…" : ej.idioma === "es" ? "Escribí en español…" : "Escribí con letras latinas…",
+          placeholder: ru ? "Escribe en ruso…" : ej.idioma === "es" ? "Escribe en español…" : "Escribe con letras latinas…",
           onInput: e => { setTxt(e.target.value); setR(null); },
           onKeyDown: e => { if (e.key === "Enter") comprobar(); }
         }),
@@ -296,7 +296,7 @@
       Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: k === mapa.iso ? c.gold : c.border, stroke: c.bg2, "stroke-width": 2 })));
   }
 
-  /* Chat guiado: el personaje escribe, vos contestás. {nombre} y {lugar}
+  /* Chat guiado: el personaje escribe, tú contestas. {nombre} y {lugar}
      aceptan cualquier palabra. Resultado: el peor de los pasos. */
   function aceptaChat(txt, modelos) {
     const n = t => String(t).replace(/\u0301/g, "").replace(/ё/g, "е").replace(/[.,!?¿¡«»…]/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
@@ -344,7 +344,7 @@
           i < paso && h("div", { className: "pr-msg yo", lang: "ru" }, resp[i] || "…")))),
       !fin && h("div", { className: "pr-in-row" },
         h("input", { className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-          placeholder: "Escribí en ruso…", onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
+          placeholder: "Escribe en ruso…", onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
         h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, "Enviar")),
       r && r.resultado !== AZ_BIEN && r.palabras && h(AzCorreccion, { r, dark }),
       r && r.resultado === AZ_MAL && !fin && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, "Ver la respuesta y seguir"),
@@ -358,7 +358,7 @@
     const tocar = v => { if (elegida != null) return; setElegida(v); onRes(v === ej.verdadero ? AZ_BIEN : AZ_MAL); };
     const cls = v => elegida == null ? "" : v === ej.verdadero ? " ok" : v === elegida ? " mal" : "";
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, ej.audio ? "Escuchá. ¿Verdadero o falso?" : "¿Verdadero o falso?"),
+      h("div", { className: "pr-pide" }, ej.audio ? "Escucha. ¿Verdadero o falso?" : "¿Verdadero o falso?"),
       ej.audio && h(Oir, { texto: ej.audio, auto: true }),
       h(Texto, { ej }),
       h("div", { className: "pr-grande", style: { fontSize: 24, color: "inherit", fontWeight: 700 }, lang: "ru" }, ej.afirmacion),
@@ -392,7 +392,7 @@
           const usada = listos.some(i => ej.pares[i][1] === d);
           return h("button", { key: d, className: "pr-op" + (usada ? " ok hecho" : malo === d ? " mal" : ""), disabled: usada, onClick: () => tocarDer(d) }, d);
         }))),
-      hecho == null && h("div", { className: "pr-pista", style: { marginTop: 12 } }, ej.pista || (ej.audioIzq ? "Tocá ▶ para escuchar y después la letra que corresponde." : "Tocá uno de la izquierda y después su pareja.")),
+      hecho == null && h("div", { className: "pr-pista", style: { marginTop: 12 } }, ej.pista || (ej.audioIzq ? "Toca ▶ para escuchar y después la letra que corresponde." : "Toca uno de la izquierda y después su pareja.")),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
@@ -416,7 +416,7 @@
       fila("Volvieron a «Aprendiendo»", baja, NARANJA));
   }
 
-  /* Tocá la palabra (02/10/2026): una frase en fichas; se toca la que se pide
+  /* Toca la palabra (02/10/2026): una frase en fichas; se toca la que se pide
      (quién hace la acción, qué la recibe). */
   function Tocar({ ej, onRes, hecho }) {
     const [elegida, setElegida] = useState(null);
@@ -431,8 +431,8 @@
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
-  /* Autocorrección (06/10/2026, Unidad 13): tocá la palabra que está mal y
-     escribila bien. Palabra equivocada → Mal; la correcta pero mal
+  /* Autocorrección (06/10/2026, Unidad 13): toca la palabra que está mal y
+     escríbela bien. Palabra equivocada → Mal; la correcta pero mal
      arreglada → Casi; encontrada y arreglada → Bien. */
   function Corregir({ ej, onRes, hecho, dark, examen }) {
     const [elegida, setElegida] = useState(null);
@@ -444,7 +444,7 @@
     const comprobar = () => { if (!txt.trim()) return; const res = azCorregir(txt, arreglos, { idioma: "ru" }); setR(res); if (hecho == null) onRes(res.resultado === AZ_BIEN ? AZ_BIEN : AZ_CASI); };
     const encontrada = elegida === ej.correcta;
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Tocá la palabra que está mal y escribila bien.")),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Toca la palabra que está mal y escríbela bien.")),
       ej.contexto && h("div", { className: "pr-pista" }, ej.contexto),
       ej.audio && h(Oir, { texto: ej.audio, auto: false }),
       h("div", { className: "pr-frase", lang: "ru" }, ej.palabras.map((w, i) => {
@@ -452,7 +452,7 @@
         return h("button", { key: i, className: "pr-tw" + cls, disabled: elegida != null, onClick: () => tocar(i) }, w);
       })),
       encontrada && hecho == null && h(React.Fragment, null,
-        h("div", { className: "pr-pista", style: { marginTop: 14 } }, "¡Esa es! Ahora escribila bien:"),
+        h("div", { className: "pr-pista", style: { marginTop: 14 } }, "¡Esa es! Ahora escríbela bien:"),
         h("div", { className: "pr-in-row" },
           h("input", { ref, className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
             placeholder: "La palabra corregida…", onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
@@ -485,14 +485,14 @@
     const seguir = () => { setK(k + 1); setTxt(""); setR(null); setTimeout(() => ref.current && ref.current.focus(), 50); };
     const fin = rs.length === ej.pasos.length;
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Cambiá la frase paso a paso.")),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Cambia la frase paso a paso.")),
       h("div", { className: "pr-pista", style: { textAlign: "left" } }, "Paso " + Math.min(k + 1, ej.pasos.length) + " de " + ej.pasos.length),
       h("div", { className: "pr-grande frase", lang: "ru" }, actual),
       h(Oir, { texto: actual, auto: false }),
       h("div", { className: "pr-pide", style: { marginTop: 12 } }, azFmt(paso.pide)),
       h("div", { className: "pr-in-row" },
         h("input", { ref, className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-          placeholder: "Escribí en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
+          placeholder: "Escribe en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
         h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || !!r }, "Comprobar")),
       r && h(AzCorreccion, { r, dark }),
       r && !fin && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: seguir }, "Siguiente paso"),
@@ -522,10 +522,10 @@
         return h("button", { key: o, className: "pr-op" + cls, disabled: !!el, onClick: () => elegir(o) }, sinLlavesOp(o));
       })),
       el && h(React.Fragment, null,
-        h("div", { className: "pr-pide", style: { marginTop: 14 } }, "Ahora escribí la frase bien:"),
+        h("div", { className: "pr-pide", style: { marginTop: 14 } }, "Ahora escribe la frase bien:"),
         h("div", { className: "pr-in-row" },
           h("input", { ref, className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-            placeholder: "Escribí en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
+            placeholder: "Escribe en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
           h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || !!r }, "Comprobar"))),
       r && h(AzCorreccion, { r, dark }),
       hecho != null && h(Explicacion, { ej, r: hecho }));
@@ -613,14 +613,14 @@
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.audioManual }),
       !r && h(Pista, { texto: ej.pista }),
       h("textarea", { className: "pr-area", rows: 2, value: txt, lang: "ru", autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
-        placeholder: "Escribí en ruso lo que dirías…", onInput: e => { setTxt(e.target.value); if (r && r.nivel === 0) setR(null); } }),
+        placeholder: "Escribe en ruso lo que dirías…", onInput: e => { setTxt(e.target.value); if (r && r.nivel === 0) setR(null); } }),
       h("button", { className: "pr-btn", style: { width: "100%", marginTop: 10 }, onClick: comprobar, disabled: !txt.trim() || (r && r.nivel > 0) }, "Comprobar"),
       r && h(AzSituacionRes, { r, dark }),
       hecho != null && r && ej.nota && h("div", { className: "pr-exp" }, azFmt(ej.nota)),   /* el modelo ya lo muestra AzSituacionRes */
       r && r.nivel === 0 && !examen && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: () => { setTxt(""); setR(null); } }, "Intentar de nuevo"));
   }
 
-  /* Diálogo o chat por turnos: el personaje habla, vos contestás; cada
+  /* Diálogo o chat por turnos: el personaje habla, tú contestas; cada
      respuesta se corrige por intención. Resultado: Bien si todo salió a la primera, Casi si hubo que
      reintentar algún turno, Mal si se vio la respuesta de alguno. */
   function Turnos({ ej, onRes, hecho, dark, c, medio }) {
@@ -663,7 +663,7 @@
       !fin && !r && h(Pista, { texto: T.pasos[paso].pista }),
       !fin && h("div", { className: "pr-in-row" },
         h("input", { className: "pr-input", value: txt, lang: "ru", autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
-          placeholder: "Escribí en ruso…", onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
+          placeholder: "Escribe en ruso…", onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
         h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, T.chat ? "Enviar" : "Decir")),
       r && h(AzSituacionRes, { r, dark, sinModelo: true }),
       r && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, "Ver una respuesta y seguir"),

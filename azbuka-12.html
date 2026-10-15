@@ -174,7 +174,7 @@ function App() {
         mod.n === 5 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Parejas nuevas"),
           h(AzTablaGrupos, { encabezados: ["Proceso", "Resultado"], c,
             filas: U12_PARES_NUEVAS.map(([i, p, es, f]) => { const a = D12.verbo(i), b = D12.verbo(p); return a && b && [{ id: a.id, ru: a.ac, es }, { id: b.id, ru: b.ac, es: FORMA_PAR[f] }]; }).filter(Boolean) }),
-          h("div", { className: "u-sec" }, "Las parejas que ya conocés"),
+          h("div", { className: "u-sec" }, "Las parejas que ya conoces"),
           h(AzTablaGrupos, { encabezados: ["Imperfectivo", "Perfectivo"], c,
             filas: U12_PARES.map(([i, p, es]) => { const a = D12.verbo(i), b = D12.verbo(p); return a && b && [{ id: a.id, ru: a.ac, es }, { id: b.id, ru: b.ac, es: "" }]; }).filter(Boolean) })),
         mod.n === 6 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Futuro perfectivo"),

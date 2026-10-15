@@ -20,13 +20,13 @@
 
 /* Lugares: "ruso": [español, «en …», «a …», preposición, emoji, cómo se va (идти́ / е́хать)] */
 const U6_LUGARES = {
-  "кварти́ра": ["departamento", "en el departamento", "al departamento", "в", "🏢", "идти́"], "ко́мната": ["habitación", "en la habitación", "a la habitación", "в", "🚪", "идти́"],
+  "кварти́ра": ["apartamento", "en el apartamento", "al apartamento", "в", "🏢", "идти́"], "ко́мната": ["habitación", "en la habitación", "a la habitación", "в", "🚪", "идти́"],
   "ку́хня": ["cocina", "en la cocina", "a la cocina", "на", "🍳", "идти́"], "спа́льня": ["dormitorio", "en el dormitorio", "al dormitorio", "в", "🛏️", "идти́"],
   "балко́н": ["balcón", "en el balcón", "al balcón", "на", "🌇", "идти́"], "о́фис": ["oficina", "en la oficina", "a la oficina", "в", "💼", "е́хать"],
   "рабо́та": ["trabajo", "en el trabajo", "al trabajo", "на", "🧑‍💻", "е́хать"], "магази́н": ["negocio", "en el negocio", "al negocio", "в", "🛒", "идти́"],
   "рестора́н": ["restaurante", "en el restaurante", "al restaurante", "в", "🍽️", "идти́"], "кафе́": ["café", "en el café", "al café", "в", "☕", "идти́"],
   "банк": ["banco", "en el banco", "al banco", "в", "🏦", "идти́"], "университе́т": ["universidad", "en la universidad", "a la universidad", "в", "🎓", "е́хать"],
-  "шко́ла": ["escuela", "en la escuela", "a la escuela", "в", "🏫", "идти́"], "метро́": ["subte", "en el subte", "al subte", "в", "🚇", "идти́"],
+  "шко́ла": ["escuela", "en la escuela", "a la escuela", "в", "🏫", "идти́"], "метро́": ["metro", "en el metro", "al metro", "в", "🚇", "идти́"],
   "ста́нция": ["estación", "en la estación", "a la estación", "на", "🚉", "идти́"], "парк": ["parque", "en el parque", "al parque", "в", "🌳", "идти́"],
   "у́лица": ["calle", "en la calle", "a la calle", "на", "🛣️", "идти́"], "го́род": ["ciudad", "en la ciudad", "a la ciudad", "в", "🏙️", "е́хать"],
   "центр": ["centro", "en el centro", "al centro", "в", "📍", "е́хать"],
@@ -57,14 +57,14 @@ const U6_LUGARES = {
   "по́лка": ["estante", "en el estante", "", "на", "📚", "", "o5"], "стена́": ["pared", "en la pared", "", "на", "🧱", "", "o5"],
   "пол": ["piso", "en el piso", "", "на", "⬇️", "", "o5"], "потоло́к": ["techo (por dentro)", "en el techo", "", "на", "⬆️", "", "o5"],
   "ковёр": ["alfombra", "en la alfombra", "", "на", "🟥", "", "o5"], "плита́": ["cocina (el artefacto)", "en la cocina", "", "на", "🔥", "", "o5"],
-  "холоди́льник": ["heladera", "en la heladera", "", "в", "🧊", "", "o5"], "ва́нна": ["bañadera", "en la bañadera", "", "в", "🛁", "", "o5"],
+  "холоди́льник": ["nevera", "en la nevera", "", "в", "🧊", "", "o5"], "ва́нна": ["bañadera", "en la bañadera", "", "в", "🛁", "", "o5"],
   "карма́н": ["bolsillo", "en el bolsillo", "", "в", "👖", "", "o5"], "я́щик": ["cajón", "en el cajón", "", "в", "🗃️", "", "o5"],
   "коро́бка": ["caja", "en la caja", "", "в", "📦", "", "o5"], "шкаф": ["armario", "en el armario", "", "в", "🚪", "", "o5"],
   "у́гол": ["rincón", "en el rincón", "", "в", "📐", "", "o5"],
   /* Módulo 6: la ciudad, el trabajo y el estudio */
   "ры́нок": ["mercado", "en el mercado", "al mercado", "на", "🧺", "идти́", 6], "суперма́ркет": ["supermercado", "en el supermercado", "al supermercado", "в", "🏪", "идти́", 6],
   "кофе́йня": ["café (el local)", "en el café", "al café", "в", "🧁", "идти́", 6], "стадио́н": ["estadio", "en el estadio", "al estadio", "на", "🏟️", "е́хать", 6],
-  "бассе́йн": ["pileta", "en la pileta", "a la pileta", "в", "🏊", "идти́", 6], "зоопа́рк": ["zoológico", "en el zoológico", "al zoológico", "в", "🦁", "е́хать", 6],
+  "бассе́йн": ["piscina", "en la piscina", "a la piscina", "в", "🏊", "идти́", 6], "зоопа́рк": ["zoológico", "en el zoológico", "al zoológico", "в", "🦁", "е́хать", 6],
   "клуб": ["club", "en el club", "al club", "в", "🕺", "идти́", 6], "це́рковь": ["iglesia", "en la iglesia", "a la iglesia", "в", "⛪", "идти́", 6],
   "собо́р": ["catedral", "en la catedral", "a la catedral", "в", "⛪", "идти́", 6], "храм": ["templo", "en el templo", "al templo", "в", "🛕", "идти́", 6],
   "дворе́ц": ["palacio", "en el palacio", "al palacio", "во", "🏰", "е́хать", 6], "мост": ["puente", "en el puente", "al puente", "на", "🌉", "идти́", 6],
@@ -97,7 +97,7 @@ const U6_LUGARES = {
   "пляж": ["playa", "en la playa", "a la playa", "на", "🏖️", "идти́", 4],
   /* Ampliación: se declinan como adjetivos (excepción) */
   "ва́нная": ["cuarto de baño", "en el cuarto de baño", "al cuarto de baño", "в", "🛁", "идти́"],
-  "гости́ная": ["living", "en el living", "al living", "в", "🛋️", "идти́"],
+  "гости́ная": ["salón", "en el salón", "al salón", "в", "🛋️", "идти́"],
   "столо́вая": ["comedor", "en el comedor", "al comedor", "в", "🍽️", "идти́"], "прихо́жая": ["recibidor", "en el recibidor", "al recibidor", "в", "🧥", "идти́"],
   "бу́лочная": ["panadería", "en la panadería", "a la panadería", "в", "🥖", "идти́"], "парикма́херская": ["peluquería", "en la peluquería", "a la peluquería", "в", "💇", "идти́"]
 };
@@ -108,16 +108,16 @@ const U6_CIUDADES = { "Москва́": "Moscú", "Санкт-Петербу́р
   "Ло́ндон": "Londres", "Нью-Йо́рк": "Nueva York", "Пеки́н": "Pekín", "Пра́га": "Praga", "Рим": "Roma", "Стамбу́л": "Estambul", "То́кио": "Tokio" };
 const U6_PAISES = { "Аргенти́на": "Argentina", "Испа́ния": "España", "Росси́я": "Rusia", "Фра́нция": "Francia", "Ита́лия": "Italia" };
 /* Cosas que se pierden por la casa (Unidad 4) */
-const U6_COSAS = { "телефо́н": ["teléfono", "📱"], "кни́га": ["libro", "📕"], "ко́шка": ["gata", "🐈"], "кот": ["gato", "🐈‍⬛"], "су́мка": ["cartera", "👜"],
-  "компью́тер": ["computadora", "💻"], "ру́чка": ["lapicera", "🖊️"], "слова́рь": ["diccionario", "📙"] };
+const U6_COSAS = { "телефо́н": ["teléfono", "📱"], "кни́га": ["libro", "📕"], "ко́шка": ["gata", "🐈"], "кот": ["gato", "🐈‍⬛"], "су́мка": ["bolso", "👜"],
+  "компью́тер": ["ordenador", "💻"], "ру́чка": ["bolígrafo", "🖊️"], "слова́рь": ["diccionario", "📙"] };
 /* Personas */
-const U6_SUJ = [["Я", "", 0], ["Ты", "Vos", 1], ["Он", "Él", 2], ["Она́", "Ella", 2], ["Мы", "", 3], ["Вы", "Ustedes", 4], ["Они́", "Ellos", 5],
+const U6_SUJ = [["Я", "", 0], ["Ты", "Tú", 1], ["Он", "Él", 2], ["Она́", "Ella", 2], ["Мы", "", 3], ["Вы", "Ustedes", 4], ["Они́", "Ellos", 5],
   ["А́нна", "Ana", 2], ["Ива́н", "Iván", 2], ["Ма́ша", "Masha", 2], ["Ди́ма", "Dima", 2], ["Ма́ма", "Mamá", 2], ["Па́па", "Papá", 2], ["Брат", "Mi hermano", 2], ["Сестра́", "Mi hermana", 2]];
 const U6_ESTAR = ["Estoy", "Estás", "Está", "Estamos", "Están", "Están"];
 const U6_ESTAR_MIN = ["estoy", "estás", "está", "estamos", "están", "están"];
 const U6_IR = ["voy", "vas", "va", "vamos", "van", "van"];
-const U6_VIVIR = ["vivo", "vivís", "vive", "vivimos", "viven", "viven"];
-const U6_TRABAJAR = ["trabajo", "trabajás", "trabaja", "trabajamos", "trabajan", "trabajan"];
+const U6_VIVIR = ["vivo", "vives", "vive", "vivimos", "viven", "viven"];
+const U6_TRABAJAR = ["trabajo", "trabajas", "trabaja", "trabajamos", "trabajan", "trabajan"];
 
 const U6_VISTAS = {
   1: "где до́ма здесь там стол рабо́та в на",
@@ -135,14 +135,14 @@ const U6_DIALOGOS = [
   [["Где ты?", "¿Dónde estás?"], ["Я до́ма.", "Estoy en casa."]],
   [["Где ты?", "¿Dónde estás?"], ["Я в рестора́не.", "Estoy en el restaurante."], ["Где А́нна?", "¿Dónde está Ana?"], ["Она́ до́ма.", "Está en casa."]],
   [["Где вы?", "¿Dónde están?"], ["Мы в Барсело́не.", "Estamos en Barcelona."]],
-  [["Где банк?", "¿Dónde está el banco?"], ["Банк ря́дом.", "El banco está cerca."], ["А метро́?", "¿Y el subte?"], ["Метро́ далеко́.", "El subte está lejos."]],
-  [["Где ты рабо́таешь?", "¿Dónde trabajás?"], ["Я рабо́таю в о́фисе в це́нтре.", "Trabajo en una oficina en el centro."]],
-  [["Где па́па?", "¿Dónde está papá?"], ["Он на рабо́те.", "Está en el trabajo."], ["А ма́ма?", "¿Y mamá?"], ["Она́ здесь, на ку́хне.", "Está acá, en la cocina."]]
+  [["Где банк?", "¿Dónde está el banco?"], ["Банк ря́дом.", "El banco está cerca."], ["А метро́?", "¿Y el metro?"], ["Метро́ далеко́.", "El metro está lejos."]],
+  [["Где ты рабо́таешь?", "¿Dónde trabajas?"], ["Я рабо́таю в о́фисе в це́нтре.", "Trabajo en una oficina en el centro."]],
+  [["Где па́па?", "¿Dónde está papá?"], ["Он на рабо́те.", "Está en el trabajo."], ["А ма́ма?", "¿Y mamá?"], ["Она́ здесь, на ку́хне.", "Está aquí, en la cocina."]]
 ];
 /* Lecturas (módulo 10) */
 const U6_LECTURAS = [
   { id: "lucas", titulo: "Лу́кас в Барсело́не", lineas: [
-      ["Лу́кас живёт в Барсело́не.", "Lucas vive en Barcelona."], ["Он живёт в кварти́ре в це́нтре.", "Vive en un departamento en el centro."],
+      ["Лу́кас живёт в Барсело́не.", "Lucas vive en Barcelona."], ["Он живёт в кварти́ре в це́нтре.", "Vive en un apartamento en el centro."],
       ["Он рабо́тает в о́фисе.", "Trabaja en una oficina."], ["Ря́дом парк.", "Cerca hay un parque."], ["Ве́чером он ча́сто хо́дит в кафе́.", "A la noche va seguido al café."]],
     preguntas: [["¿Dónde vive Lucas?", "в Барсело́не", ["в Мадри́де", "в Барсело́ну"]], ["¿Dónde trabaja?", "в о́фисе", ["в ба́нке", "в шко́ле"]], ["¿Adónde va seguido a la noche?", "в кафе́", ["в парк", "в рестора́н"]]],
     vf: [["Лу́кас живёт в Мадри́де.", false], ["Ря́дом парк.", true], ["Он рабо́тает в о́фисе.", true]] },
@@ -153,7 +153,7 @@ const U6_LECTURAS = [
     vf: [["Университе́т ря́дом.", false], ["А́нна живёт в Москве́.", true], ["Сейча́с она́ в университе́те.", false]] },
   { id: "casa", titulo: "В кварти́ре", lineas: [
       ["Ма́ма на ку́хне.", "Mamá está en la cocina."], ["Па́па на балко́не.", "Papá está en el balcón."], ["Брат в ко́мнате.", "Mi hermano está en la habitación."],
-      ["Сестра́ идёт в магази́н.", "Mi hermana va al negocio."], ["А я здесь, в спа́льне.", "Y yo estoy acá, en el dormitorio."]],
+      ["Сестра́ идёт в магази́н.", "Mi hermana va al negocio."], ["А я здесь, в спа́льне.", "Y yo estoy aquí, en el dormitorio."]],
     preguntas: [["¿Dónde está papá?", "на балко́не", ["на ку́хне", "в ко́мнате"]], ["¿Adónde va la hermana?", "в магази́н", ["в магази́не", "в ко́мнату"]], ["¿Dónde está mamá?", "на ку́хне", ["в ку́хне", "на балко́не"]]],
     vf: [["Ма́ма на балко́не.", false], ["Брат в ко́мнате.", true], ["Сестра́ в магази́не.", false]] }
 ];
@@ -166,35 +166,35 @@ const UNIDAD_6 = {
   tiempo: "3 a 4 semanas con práctica diaria (unas 35–45 horas)",
   modulos: [
     { id: "u6m1", n: 1, tipo: "leccion", nPractica: 8, titulo: "¿Dónde?", resumen: "Где кни́га? — Кни́га на столе́.",
-      intro: "Para preguntar dónde está algo o alguien, se usa где. Antes de ver la regla, mirá cómo suenan las respuestas.",
+      intro: "Para preguntar dónde está algo o alguien, se usa где. Antes de ver la regla, mira cómo suenan las respuestas.",
       secciones: [
         { id: "u6-donde", titulo: "Где?",
-          antes: { pide: "Где кни́га? Elegí la respuesta.", opciones: ["Кни́га на столе́.", "Кни́га стол."], ok: "Кни́га на столе́.", por: "Para decir dónde, va una preposición (на) y la palabra cambia: стол → столе́." },
+          antes: { pide: "Где кни́га? Elige la respuesta.", opciones: ["Кни́га на столе́.", "Кни́га стол."], ok: "Кни́га на столе́.", por: "Para decir dónde, va una preposición (на) y la palabra cambia: стол → столе́." },
           texto: "Где significa «¿dónde?». La respuesta nombra el lugar y no lleva verbo «estar»: en presente, el ruso no lo dice. Кни́га на столе́ es, palabra por palabra, «libro sobre mesa».",
           ejemplos: [
             { ru: "Где кни́га? — Кни́га {на столе́}.", es: "¿Dónde está el libro? — El libro está en la mesa.", por: "Sin verbo: el lugar va directo después de кни́га." },
             { ru: "Где ма́ма? — Ма́ма {на рабо́те}.", es: "¿Dónde está mamá? — Mamá está en el trabajo.", por: "Lo mismo con una persona." },
             { ru: "Где телефо́н? — Телефо́н {на столе́}.", es: "¿Dónde está el teléfono? — El teléfono está en la mesa.", por: "La pregunta no cambia: где sirve para cosas y para personas." }],
           destacado: "Где кни́га? — Кни́га на столе́.",
-          mas: { texto: "Где también sirve para preguntar dónde hace algo alguien: Где ты рабо́таешь? («¿dónde trabajás?»). La respuesta es la misma: un lugar con su preposición.\nEn una charla, para contestar alcanza con el lugar solo, sin repetir quién: Где ма́ма? — На рабо́те. Es la respuesta más natural; la frase completa también está bien, pero suena más a ejercicio.",
+          mas: { texto: "Где también sirve para preguntar dónde hace algo alguien: Где ты рабо́таешь? («¿dónde trabajas?»). La respuesta es la misma: un lugar con su preposición.\nEn una charla, para contestar alcanza con el lugar solo, sin repetir quién: Где ма́ма? — На рабо́те. Es la respuesta más natural; la frase completa también está bien, pero suena más a ejercicio.",
             ejemplos: [{ ru: "— Где ты? — {На рабо́те}.", es: "—¿Dónde estás? —En el trabajo.", por: "Se contesta con el lugar solo." }] },
-          chequeo: [{ pide: "¿Cómo preguntás dónde está mamá?", opciones: ["Где ма́ма?", "Что ма́ма?", "Кто ма́ма?"], ok: "Где ма́ма?", por: "Где es «¿dónde?»." }] },
+          chequeo: [{ pide: "¿Cómo preguntas dónde está mamá?", opciones: ["Где ма́ма?", "Что ма́ма?", "Кто ма́ма?"], ok: "Где ма́ма?", por: "Где es «¿dónde?»." }] },
         { id: "u6-sin-prep", titulo: "Respuestas sin preposición",
-          texto: "Algunas respuestas son una sola palabra, sin в ni на y sin cambiar nada: до́ма (en casa), здесь (acá), там (allá). Van tal cual.",
+          texto: "Algunas respuestas son una sola palabra, sin в ni на y sin cambiar nada: до́ма (en casa), здесь (aquí), там (allí). Van tal cual.",
           ejemplos: [
             { ru: "Я {до́ма}.", es: "Estoy en casa.", por: "До́ма ya quiere decir «en casa»." },
-            { ru: "Кни́га {здесь}.", es: "El libro está acá.", por: "Здесь: donde está el que habla." },
-            { ru: "Ма́ма {там}.", es: "Mamá está allá.", por: "Там: en otro lugar." }],
+            { ru: "Кни́га {здесь}.", es: "El libro está aquí.", por: "Здесь: donde está el que habla." },
+            { ru: "Ма́ма {там}.", es: "Mamá está allí.", por: "Там: en otro lugar." }],
           errores: [{ mal: "Я в до́ма.", bien: "Я {до́ма}.", por: "До́ма ya incluye el «en»: no lleva preposición." }],
-          mas: { texto: "До́ма viene de дом («casa»), pero es una palabra aparte: quiere decir «en casa», la tuya o la de quien habla. Para hablar de la casa como edificio se usa дом con preposición: в до́ме («adentro de la casa»). Para «estoy en casa», siempre Я до́ма.\nЗдесь y там funcionan como «acá» y «allá»: здесь es donde está el que habla; там, cualquier otro lugar.",
+          mas: { texto: "До́ма viene de дом («casa»), pero es una palabra aparte: quiere decir «en casa», la tuya o la de quien habla. Para hablar de la casa como edificio se usa дом con preposición: в до́ме («adentro de la casa»). Para «estoy en casa», siempre Я до́ма.\nЗдесь y там funcionan como «aquí» y «allí»: здесь es donde está el que habla; там, cualquier otro lugar.",
             ejemplos: [{ ru: "Ма́ма {до́ма}, а па́па {на рабо́те}.", es: "Mamá está en casa y papá, en el trabajo.", por: "Una respuesta sin preposición y otra con на." }] } },
         { id: "u6-cambia", titulo: "La palabra cambia",
-          texto: "Fijate en на столе́: стол cambió, le apareció una **-е** al final. Después de в o на, cuando la frase dice dónde está algo, la palabra cambia la terminación. Esa forma es un caso nuevo, el **prepositivo**: se llama así porque siempre va con una preposición.",
+          texto: "Fíjate en на столе́: стол cambió, le apareció una **-е** al final. Después de в o на, cuando la frase dice dónde está algo, la palabra cambia la terminación. Esa forma es un caso nuevo, el **prepositivo**: se llama así porque siempre va con una preposición.",
           ejemplos: [
             { ru: "Кни́га на стол{е́}.", es: "El libro está en la mesa.", por: "стол → столе́." },
             { ru: "Ма́ма на рабо́т{е}.", es: "Mamá está en el trabajo.", por: "рабо́та → рабо́те: la **-а** pasa a **-е**." }],
           destacado: "стол → на столе́ · рабо́та → на рабо́те",
-          mas: { texto: "Ya conocés dos casos: el nominativo, la forma del diccionario, y el acusativo, la de lo que recibe la acción. El prepositivo es el tercero. A diferencia de los otros dos, nunca aparece solo: siempre va detrás de una preposición. Por eso, cuando veas в o на seguidos de una palabra que termina en **-е**, ya sabés qué caso es.\nLa buena noticia es que su regla es de las más parejas del ruso: casi todas las palabras terminan en **-е**." },
+          mas: { texto: "Ya conoces dos casos: el nominativo, la forma del diccionario, y el acusativo, la de lo que recibe la acción. El prepositivo es el tercero. A diferencia de los otros dos, nunca aparece solo: siempre va detrás de una preposición. Por eso, cuando veas в o на seguidos de una palabra que termina en **-е**, ya sabes qué caso es.\nLa buena noticia es que su regla es de las más parejas del ruso: casi todas las palabras terminan en **-е**." },
           chequeo: [{ pide: "Кни́га на ___.", opciones: ["стол", "столе́"], ok: "столе́", por: "Después de на, para decir dónde: prepositivo." }] }
       ] },
     { id: "u6m2", n: 2, tipo: "leccion", nPractica: 10, titulo: "В y на", resumen: "в = adentro · на = encima, y algunas de memoria.",
@@ -208,33 +208,33 @@ const UNIDAD_6 = {
             { ru: "Я {в магази́не}.", es: "Estoy en el negocio.", por: "Adentro del negocio." },
             { ru: "Они́ {в па́рке}.", es: "Están en el parque.", por: "El parque tiene límites: se está «adentro»." }],
           destacado: "в ко́мнате · в магази́не · в па́рке",
-          mas: { texto: "«Adentro» en sentido amplio: una ciudad, un barrio o un parque también son lugares con límites, aunque no tengan techo. Por eso в Барсело́не, в це́нтре, в па́рке. Lo que importa no es si hay paredes, sino si te imaginás el lugar como un espacio que te rodea.",
+          mas: { texto: "«Adentro» en sentido amplio: una ciudad, un barrio o un parque también son lugares con límites, aunque no tengan techo. Por eso в Барсело́не, в це́нтре, в па́рке. Lo que importa no es si hay paredes, sino si te imaginas el lugar como un espacio que te rodea.",
             ejemplos: [{ ru: "Он живёт {в це́нтре}.", es: "Vive en el centro.", por: "El centro de la ciudad es una zona: в." }] } },
         { id: "u6-na", titulo: "На: encima",
           texto: "на es «sobre, encima de», y también «contra» una superficie: lo que está apoyado en algo.",
           ejemplos: [
             { ru: "Телефо́н {на столе́}.", es: "El teléfono está en la mesa.", por: "Apoyado encima: на." },
-            { ru: "Кни́га {на столе́}, а телефо́н {в су́мке}.", es: "El libro está en la mesa y el teléfono, en la cartera.", por: "Encima: на. Adentro: в." }],
+            { ru: "Кни́га {на столе́}, а телефо́н {в су́мке}.", es: "El libro está en la mesa y el teléfono, en el bolso.", por: "Encima: на. Adentro: в." }],
           errores: [{ mal: "Телефо́н в столе́.", bien: "Телефо́н {на столе́}.", por: "El teléfono está encima de la mesa, no adentro: на." }],
-          chequeo: [{ pide: "Кни́га ___ су́мке.", opciones: ["в", "на"], ok: "в", por: "Adentro de la cartera: в." }] },
+          chequeo: [{ pide: "Кни́га ___ су́мке.", opciones: ["в", "на"], ok: "в", por: "Dentro del bolso: в." }] },
         { id: "u6-na-lista", titulo: "Los lugares que van con на",
           texto: "Algunos lugares van con на aunque uno esté adentro. No hay que buscarle la lógica a cada uno: se aprenden con la preposición puesta, como un bloque.\nна рабо́те (en el trabajo)\nна у́лице (en la calle)\nна ста́нции (en la estación)\nна ку́хне (en la cocina)\nна балко́не (en el balcón)",
           ejemplos: [
             { ru: "Па́па {на ку́хне}.", es: "Papá está en la cocina.", por: "Ку́хня va con на: se aprende así." },
             { ru: "Мы {на у́лице}.", es: "Estamos en la calle.", por: "У́лица, con на." }],
-          truco: "Aprendé cada lugar con su preposición: no «ку́хня», sino «на ку́хне».",
+          truco: "Aprende cada lugar con su preposición: no «ку́хня», sino «на ку́хне».",
           mas: { titulo: "Hay tendencias", texto: "Aunque se aprenden de memoria, hay dos tendencias que ayudan. Los lugares abiertos, sin techo, suelen ir con на: на у́лице, на пло́щади (en la plaza), на балко́не. Y las actividades, lo que uno está haciendo más que el lugar donde está, también van con на: на рабо́те, на свида́нии (en una cita). Más adelante en la unidad vas a ver muchos más de los dos tipos.\nSon tendencias, no reglas: парк es abierto y va con в. Ante la duda, в; y cada lugar con на, aprendido con su на.",
             ejemplos: [{ ru: "Они́ {на свида́нии}.", es: "Están en una cita.", por: "Una cita es algo que se hace, no un lugar: на." }] },
           chequeo: [{ pide: "Я ___ рабо́те.", opciones: ["в", "на"], ok: "на", por: "Рабо́та va con на: se aprende así." }] }
       ] },
     { id: "u6m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "El prepositivo", resumen: "дом → в до́ме · кварти́ра → в кварти́ре.",
-      intro: "Después de в o на, cuando decís dónde está algo, la palabra cambia la terminación: es el **prepositivo**. La regla es de las más parejas del ruso.",
+      intro: "Después de в o на, cuando dices dónde está algo, la palabra cambia la terminación: es el **prepositivo**. La regla es de las más parejas del ruso.",
       secciones: [
         { id: "u6-prep-e", titulo: "Casi siempre, -е",
           antes: { pide: "шко́ла → в ___", opciones: ["шко́ле", "шко́лу", "шко́ла"], ok: "шко́ле", por: "Para decir dónde: **-а** → **-е**." },
           texto: "Si la palabra termina en **-а**, **-я**, **-о** o **-й**, esa letra se cambia por **-е**. Si termina en consonante, se le agrega **-е**.",
           ejemplos: [
-            { ru: "в кварти́р{е}", es: "en el departamento", por: "кварти́ра: **-а** → **-е**." },
+            { ru: "в кварти́р{е}", es: "en el apartamento", por: "кварти́ра: **-а** → **-е**." },
             { ru: "на ку́хн{е}", es: "en la cocina", por: "ку́хня: **-я** → **-е**." },
             { ru: "в письм{е́}", es: "en la carta", por: "письмо́: **-о** → **-е**." },
             { ru: "в рестора́н{е}", es: "en el restaurante", por: "Termina en consonante: se agrega **-е**." }],
@@ -251,7 +251,7 @@ const UNIDAD_6 = {
             { ru: "на крова́т{и}", es: "en la cama", por: "крова́ть es femenina: **-ь** → **-и**." }],
           destacado: "-ия, -ие → -ии · femenina en -ь → -и",
           errores: [{ mal: "в Росси́е", bien: "в {Росси́и}", por: "Con **-ия**, el prepositivo es **-ии**, nunca **-ие**." }],
-          mas: { titulo: "¿Y las masculinas en -ь?", texto: "Las masculinas que terminan en **-ь** siguen la regla general: la **-ь** pasa a **-е**. Слова́рь → в словаре́ (en el diccionario). Por eso, con una palabra en **-ь**, primero hay que saber si es femenina o masculina. No se ve en la palabra: tocala y la burbuja te lo dice.",
+          mas: { titulo: "¿Y las masculinas en -ь?", texto: "Las masculinas que terminan en **-ь** siguen la regla general: la **-ь** pasa a **-е**. Слова́рь → в словаре́ (en el diccionario). Por eso, con una palabra en **-ь**, primero hay que saber si es femenina o masculina. No se ve en la palabra: tócala y la burbuja te lo dice.",
             ejemplos: [
               { ru: "в тетра́д{и}", es: "en el cuaderno", por: "тетра́дь es femenina: **-и**." },
               { ru: "в словар{е́}", es: "en el diccionario", por: "слова́рь es masculina: **-е**." }] },
@@ -260,10 +260,10 @@ const UNIDAD_6 = {
           texto: "Algunas palabras vienen de otros idiomas y terminan en **-о**, **-е**, **-и** o **-у**: esas no cambian nunca, en ningún caso.",
           ejemplos: [
             { ru: "в кафе́", es: "en el café", por: "кафе́ no cambia." },
-            { ru: "в метро́", es: "en el subte", por: "метро́ tampoco." },
+            { ru: "в метро́", es: "en el metro", por: "метро́ tampoco." },
             { ru: "в То́кио", es: "en Tokio", por: "То́кио queda igual." }],
           ojo: "Кафе́ y метро́ terminan en **-е** y **-о**, como письмо́, pero no cambian. La diferencia es que vienen de otros idiomas: con la práctica se reconocen enseguida.",
-          mas: { texto: "Es el mismo grupo que ya conocés del acusativo: ко́фе, кино́, пальто́ y фо́то tampoco cambiaban. Una palabra que no cambia en un caso no cambia en ninguno.",
+          mas: { texto: "Es el mismo grupo que ya conoces del acusativo: ко́фе, кино́, пальто́ y фо́то tampoco cambiaban. Una palabra que no cambia en un caso no cambia en ninguno.",
             ejemplos: [{ ru: "Мы {в кино́}.", es: "Estamos en el cine.", por: "кино́ no cambia nunca." }] } },
         { id: "u6-prep-acento", titulo: "El acento puede moverse",
           texto: "En algunas palabras, el acento pasa a la terminación: стол → на столе́. La letra que se agrega es la misma **-е**; lo que cambia es dónde suena fuerte.",
@@ -271,8 +271,8 @@ const UNIDAD_6 = {
             { ru: "на стол{е́}", es: "en la mesa", por: "стол → столе́." },
             { ru: "в словар{е́}", es: "en el diccionario", por: "слова́рь → словаре́." },
             { ru: "на этаж{е́}", es: "en el piso", por: "эта́ж → этаже́." }],
-          truco: "Al escribir no hace falta marcar el acento; al leer, escuchá el audio.",
-          mas: { texto: "Pasa sobre todo en palabras cortas, de una sílaba, y en algunas que terminan en **-ь** o **-ж**. No hay una regla fija para saber cuáles: se aprenden de oído. Si dudás, tocá la palabra y escuchala." } },
+          truco: "Al escribir no hace falta marcar el acento; al leer, escucha el audio.",
+          mas: { texto: "Pasa sobre todo en palabras cortas, de una sílaba, y en algunas que terminan en **-ь** o **-ж**. No hay una regla fija para saber cuáles: se aprenden de oído. Si dudas, toca la palabra y escúchala." } },
         { id: "u6-prep-u", titulo: "Algunas hacen -у́",
           texto: "Unas pocas palabras masculinas, cuando dicen dónde, no terminan en **-е** sino en **-у́**, con el acento ahí. Son pocas y muy usadas: conviene aprenderlas de memoria.",
           ejemplos: [
@@ -284,7 +284,7 @@ const UNIDAD_6 = {
           chequeo: [{ pide: "Где ко́шка? — Ко́шка в ___.", opciones: ["шкафу́", "шка́фе"], ok: "шкафу́", por: "Шкаф es de las que hacen **-у́**." }] }
       ] },
     { id: "u6m4", n: 4, tipo: "leccion", nPractica: 10, titulo: "Ciudades, países y naturaleza", resumen: "Я живу́ в Барсело́не.",
-      intro: "Las ciudades, los países y los lugares de la naturaleza siguen las mismas reglas. Abajo tenés el mapa: tocá una ciudad para escuchar dónde vive alguien ahí.",
+      intro: "Las ciudades, los países y los lugares de la naturaleza siguen las mismas reglas. Abajo tienes el mapa: toca una ciudad para escuchar dónde vive alguien ahí.",
       secciones: [
         { id: "u6-ciudades", titulo: "Ciudades",
           texto: "Las ciudades van siempre con в y siguen la regla de la **-е**.",
@@ -307,10 +307,10 @@ const UNIDAD_6 = {
               { ru: "Мы живём {на се́вере}.", es: "Vivimos en el norte.", por: "Los puntos cardinales van con на." },
               { ru: "Она́ живёт {в о́бласти}.", es: "Vive en la región.", por: "о́бласть es femenina en **-ь**: **-и**." }] },
           chequeo: [{ pide: "Фра́нция → в ___", opciones: ["Фра́нции", "Фра́нцие"], ok: "Фра́нции", por: "**-ия** → **-ии**." }] },
-        { id: "u6-vivir", titulo: "¿Dónde vivís?",
+        { id: "u6-vivir", titulo: "¿Dónde vives?",
           texto: "Con жить («vivir») se dice dónde vive alguien. El lugar va en prepositivo, como siempre.",
           ejemplos: [
-            { ru: "Где ты живёшь? — Я живу́ {в Барсело́не}.", es: "¿Dónde vivís? — Vivo en Barcelona.", por: "Барсело́на → Барсело́не." },
+            { ru: "Где ты живёшь? — Я живу́ {в Барсело́не}.", es: "¿Dónde vives? — Vivo en Barcelona.", por: "Барсело́на → Барсело́не." },
             { ru: "Она́ живёт {в дере́вне}.", es: "Vive en un pueblo.", por: "дере́вня: **-я** → **-е**." },
             { ru: "Они́ живу́т {на о́строве}.", es: "Viven en una isla.", por: "о́стров va con на: se está sobre la isla." }],
           destacado: "Я живу́ в Барсело́не.",
@@ -320,7 +320,7 @@ const UNIDAD_6 = {
               { ru: "Дом {в лесу́}.", es: "La casa está en el bosque.", por: "лес → в лесу́." }] } }
       ] },
     { id: "u6m5", n: 5, tipo: "leccion", nPractica: 10, titulo: "La casa", resumen: "Ма́ма на ку́хне. Кни́га на по́лке.",
-      intro: "Con las partes de la casa y los muebles ya podés decir dónde está cada persona y cada cosa.",
+      intro: "Con las partes de la casa y los muebles ya puedes decir dónde está cada persona y cada cosa.",
       secciones: [
         { id: "u6-casa", titulo: "Las partes de la casa",
           texto: "Las partes de la casa siguen la regla de siempre. La mayoría va con в; con на van la cocina, el balcón, la escalera, el techo, la entrada, la casa de campo y la huerta.",
@@ -337,7 +337,7 @@ const UNIDAD_6 = {
           texto: "Para los muebles y los objetos vale la idea de base: adentro, в; encima o contra una superficie, на. Lo que cuelga de la pared o del techo también va con на.",
           ejemplos: [
             { ru: "Кни́га {на по́лке}.", es: "El libro está en el estante.", por: "Encima: на." },
-            { ru: "Молоко́ {в холоди́льнике}.", es: "La leche está en la heladera.", por: "Adentro: в." },
+            { ru: "Молоко́ {в холоди́льнике}.", es: "La leche está en la nevera.", por: "Adentro: в." },
             { ru: "Ко́шка {на полу́}.", es: "La gata está en el piso.", por: "пол → на полу́, del grupo de **-у́**." },
             { ru: "Ла́мпа {на потолке́}.", es: "La lámpara está en el techo.", por: "Colgada de una superficie: на. Se cae la **о**." }],
           errores: [{ mal: "Кни́га в по́лке.", bien: "Кни́га {на по́лке}.", por: "El libro está apoyado encima del estante: на." }],
@@ -348,7 +348,7 @@ const UNIDAD_6 = {
           chequeo: [{ pide: "Зе́ркало ___ на стене́.", opciones: ["лежи́т", "виси́т"], ok: "виси́т", por: "Está colgado: висе́ть." }] }
       ] },
     { id: "u6m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Ciudad, trabajo y estudio", resumen: "А́нна рабо́тает в о́фисе.",
-      intro: "Los lugares de todos los días, para decir dónde estás, dónde trabajás y dónde estudiás.",
+      intro: "Los lugares de todos los días, para decir dónde estás, dónde trabajas y dónde estudias.",
       secciones: [
         { id: "u6-lugares", titulo: "Los lugares de la ciudad",
           texto: "Los lugares de la ciudad siguen las mismas reglas, y casi todos van con в. Con на van algunos abiertos y otros de memoria: на ры́нке (en el mercado), на стадио́не, на проспе́кте, на тротуа́ре, на мосту́, на по́чте.",
@@ -358,9 +358,9 @@ const UNIDAD_6 = {
             { ru: "Они́ {на мосту́}.", es: "Están en el puente.", por: "Мост es del grupo de **-у́**." },
             { ru: "Он {на ры́нке}.", es: "Está en el mercado.", por: "Un mercado es abierto: на." }],
           destacado: "в музе́е · в це́ркви · на ры́нке · на мосту́",
-          mas: { titulo: "La vocal que se cae", texto: "Algunas palabras pierden la última **о** o **е** al cambiar la terminación: ры́нок → на ры́нке, переу́лок → в переу́лке, дворе́ц → во дворце́. Pasa sobre todo en las que terminan en **-ок** y **-ец**. Al leer no causa problemas; al escribir, fijate en la forma de la palabra.",
+          mas: { titulo: "La vocal que se cae", texto: "Algunas palabras pierden la última **о** o **е** al cambiar la terminación: ры́нок → на ры́нке, переу́лок → в переу́лке, дворе́ц → во дворце́. Pasa sobre todo en las que terminan en **-ок** y **-ец**. Al leer no causa problemas; al escribir, fíjate en la forma de la palabra.",
             ejemplos: [{ ru: "Кафе́ {в переу́лке}.", es: "El café está en el callejón.", por: "переу́лок → в переу́лке: se cae la **о**." }] } },
-        { id: "u6-con-verbos", titulo: "Con los verbos que ya conocés",
+        { id: "u6-con-verbos", titulo: "Con los verbos que ya conoces",
           texto: "Con рабо́тать, жить, учи́ться, обе́дать o гуля́ть, el lugar va en prepositivo: el verbo no cambia nada.",
           ejemplos: [
             { ru: "Я рабо́таю {в о́фисе}.", es: "Trabajo en una oficina.", por: "о́фис: + **-е**." },
@@ -373,15 +373,15 @@ const UNIDAD_6 = {
           chequeo: [{ pide: "Он рабо́тает ___ фи́рме.", opciones: ["в", "на"], ok: "в", por: "Фи́рма va con в, como casi todos." }] }
       ] },
     { id: "u6m7", n: 7, tipo: "leccion", nPractica: 10, titulo: "¿Dónde estás?", resumen: "— Где ты? — Я до́ма.",
-      intro: "Conversaciones cortas para preguntar y decir dónde está alguien. Escuchalas y practicalas.",
+      intro: "Conversaciones cortas para preguntar y decir dónde está alguien. Escúchalas y practícalas.",
       secciones: [
         { id: "u6-cerca-lejos", titulo: "Cerca y lejos",
           texto: "ря́дом (al lado), бли́зко (cerca) y далеко́ (lejos) dicen dónde está algo sin nombrar el lugar. Van solas, como до́ма.",
           ejemplos: [
             { ru: "Банк {ря́дом}.", es: "El banco está al lado.", por: "Va solo, sin preposición." },
             { ru: "Шко́ла {бли́зко}.", es: "La escuela está cerca.", por: "Бли́зко: a poca distancia." },
-            { ru: "Метро́ {далеко́}.", es: "El subte está lejos.", por: "Далеко́: lejos." }],
-          mas: { texto: "Ря́дом y бли́зко se parecen: ря́дом es «al lado, pegado»; бли́зко, «cerca, a poca distancia». Здесь y тут son lo mismo: «acá».\nCon везде́ («en todas partes») y нигде́ («en ninguna parte») se habla de todos los lugares a la vez. Нигде́ siempre va con не delante del verbo: Я нигде́ не рабо́таю («no trabajo en ningún lado»).",
+            { ru: "Метро́ {далеко́}.", es: "El metro está lejos.", por: "Далеко́: lejos." }],
+          mas: { texto: "Ря́дом y бли́зко se parecen: ря́дом es «al lado, pegado»; бли́зко, «cerca, a poca distancia». Здесь y тут son lo mismo: «aquí».\nCon везде́ («en todas partes») y нигде́ («en ninguna parte») se habla de todos los lugares a la vez. Нигде́ siempre va con не delante del verbo: Я нигде́ не рабо́таю («no trabajo en ningún lado»).",
             ejemplos: [
               { ru: "Он {нигде́ не} рабо́тает.", es: "No trabaja en ningún lado.", por: "Нигде́ + не: las dos negaciones van juntas." },
               { ru: "Ко́шка {везде́}!", es: "¡La gata está en todas partes!", por: "Везде́ va solo, sin preposición." }] } },
@@ -389,7 +389,7 @@ const UNIDAD_6 = {
           texto: "Con а («y», «¿y…?») se pregunta por otra persona o cosa: Где ты? — Я в рестора́не. А где А́нна? — Она́ до́ма.",
           ejemplos: [
             { ru: "{А} ма́ма?", es: "¿Y mamá?", por: "А + la persona: se pregunta lo mismo por otro." },
-            { ru: "Я на рабо́те. {А} ты?", es: "Estoy en el trabajo. ¿Y vos?", por: "Es la misma а de cuando te presentás." }],
+            { ru: "Я на рабо́те. {А} ты?", es: "Estoy en el trabajo. ¿Y tú?", por: "Es la misma а de cuando te presentas." }],
           mas: { titulo: "Los eventos, con на", texto: "Cuando alguien está en un evento o en una actividad, se usa на: на конце́рте (en el concierto), на вы́ставке (en la exposición), на ма́тче (en el partido), на уро́ке (en clase), на ле́кции, на экза́мене, на собра́нии (en la reunión). Es la tendencia de на рабо́те: importa lo que se hace ahí, no el edificio.\nPor eso Я в теа́тре («estoy en el teatro», el edificio), pero Я на спекта́кле («estoy en la función»).",
             ejemplos: [
               { ru: "— Где па́па? — {На конце́рте}.", es: "—¿Dónde está papá? —En el concierto.", por: "Un evento: на." },
@@ -433,11 +433,11 @@ const UNIDAD_6 = {
       intro: "El ruso tiene varios verbos para «ir». Por ahora, alcanza con dos preguntas: ¿a pie o en vehículo? ¿ahora o seguido?",
       secciones: [
         { id: "u6-pie-vehiculo", titulo: "A pie o en vehículo",
-          texto: "идти́ es ir a pie; е́хать es ir en un vehículo: auto, colectivo, tren, barco o avión.",
+          texto: "идти́ es ir a pie; е́хать es ir en un vehículo: auto, autobús, tren, barco o avión.",
           ejemplos: [
             { ru: "Я {иду́} в магази́н.", es: "Voy al negocio.", por: "A pie: идти́." },
             { ru: "Мы {е́дем} в Мадри́д.", es: "Vamos a Madrid.", por: "A otra ciudad, en vehículo: е́хать." },
-            { ru: "Они́ {е́дут} в аэропо́рт.", es: "Van al aeropuerto.", por: "En auto o en colectivo: е́хать." }],
+            { ru: "Они́ {е́дут} в аэропо́рт.", es: "Van al aeropuerto.", por: "En coche o en autobús: е́хать." }],
           mas: { titulo: "Los lugares del viaje", texto: "Si la distancia es larga, otra ciudad u otro país, es casi seguro е́хать. Dentro del barrio, lo normal es идти́.\nLos lugares del viaje siguen las mismas reglas: на вокза́ле (en la estación de tren), на платфо́рме (en el andén), в ваго́не, в ка́ссе (en la boletería), на корабле́ (en el barco) pero в ло́дке (en el bote). Аэропо́рт y порт son del grupo de **-у́**: в аэропорту́, в порту́.",
             ejemplos: [{ ru: "Мы {в аэропорту́}.", es: "Estamos en el aeropuerto.", por: "аэропо́рт → в аэропорту́, con **-у́**." }] } },
         { id: "u6-ahora-seguido", titulo: "Ahora o seguido",
@@ -448,14 +448,14 @@ const UNIDAD_6 = {
             { ru: "Она́ всегда́ {е́здит} на рабо́ту.", es: "Siempre va al trabajo (en vehículo).", por: "Habitual y en vehículo: е́здить." }],
           destacado: "сейча́с → иду́ / е́ду · ча́сто → хожу́ / е́зжу",
           errores: [{ mal: "Сейча́с я хожу́ в кафе́.", bien: "Сейча́с я {иду́} в кафе́.", por: "Сейча́с habla de ahora: идти́." }],
-          mas: { texto: "Fijate en las formas de {я}: хожу́ (con **ж**) y е́зжу (con **зж**). Las demás personas no tienen ese cambio: ты хо́дишь, он хо́дит; ты е́здишь, он е́здит.\nХоди́ть y е́здить también se usan para lo que se hace como costumbre, aunque no se diga cada cuánto: Я хожу́ в бассе́йн quiere decir «voy a la pileta», de manera habitual.",
-            ejemplos: [{ ru: "Ты ча́сто {хо́дишь} в бассе́йн?", es: "¿Vas seguido a la pileta?", por: "ты → хо́дишь, sin **ж**." }] },
+          mas: { texto: "Fíjate en las formas de {я}: хожу́ (con **ж**) y е́зжу (con **зж**). Las demás personas no tienen ese cambio: ты хо́дишь, он хо́дит; ты е́здишь, он е́здит.\nХоди́ть y е́здить también se usan para lo que se hace como costumbre, aunque no se diga cada cuánto: Я хожу́ в бассе́йн quiere decir «voy a la piscina», de manera habitual.",
+            ejemplos: [{ ru: "Ты ча́сто {хо́дишь} в бассе́йн?", es: "¿Vas seguido a la piscina?", por: "ты → хо́дишь, sin **ж**." }] },
           chequeo: [{ pide: "Я ча́сто ___ в теа́тр.", opciones: ["иду́", "хожу́"], ok: "хожу́", por: "Ча́сто: habitual, ходи́ть." }] }
       ] },
     { id: "u6m10", n: 10, tipo: "lectura", titulo: "Mi ciudad", resumen: "Dónde viven, trabajan y adónde van.",
-      intro: "Tres textos cortos con todo lo de la unidad. Leelos, escuchalos y después contestá." },
+      intro: "Tres textos cortos con todo lo de la unidad. Léelos, escúchalos y después contesta." },
     { id: "u6m11", n: 11, tipo: "proyecto", titulo: "Proyecto: Мой го́род", resumen: "Tu ciudad, en ruso.",
-      intro: "Escribí sobre la ciudad donde vivís. Te pueden guiar estas preguntas: Где ты живёшь? Где ты рабо́таешь? Где ты обе́даешь? Куда́ ты хо́дишь? Por ejemplo: Я живу́ в Барсело́не. Я живу́ в кварти́ре в це́нтре. Я рабо́таю в о́фисе. Я ча́сто хожу́ в кафе́. Ве́чером я до́ма.",
+      intro: "Escribe sobre la ciudad donde vives. Te pueden guiar estas preguntas: Где ты живёшь? Где ты рабо́таешь? Где ты обе́даешь? Куда́ ты хо́дишь? Por ejemplo: Я живу́ в Барсело́не. Я живу́ в кварти́ре в це́нтре. Я рабо́таю в о́фисе. Я ча́сто хожу́ в кафе́. Ве́чером я до́ма.",
       requisitos: [], consejos: [] },
     { id: "u6m12", n: 12, tipo: "examen", titulo: "Evaluación", resumen: "в / на, terminaciones, dónde o adónde, traducción y audio.",
       intro: "Treinta y cinco ejercicios en seis partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
@@ -555,12 +555,12 @@ function u6Regla(s) {
   else r = "termina en consonante: se agrega -е";
   const por = s.tipo === "sobre" ? (s.pr === "на" ? " Va con на porque está «sobre» o «contra» eso." : " Va con в porque está adentro.") : s.pr === "на" ? " Va con на: es de las que se aprenden con на." : s.pr === "во" ? " Delante de **дв-** la в se dice во." : "";
   const pos = w => { const i = w.indexOf("\u0301"); return i < 0 ? -1 : (w.slice(0, i).match(/[аеёиоуыэюя]/gi) || []).length; };
-  const mueve = s.nom !== s.prep && pos(s.nom) >= 0 && pos(s.prep) >= 0 && pos(s.nom) !== pos(s.prep) ? " Fijate que el acento se mueve." : "";
+  const mueve = s.nom !== s.prep && pos(s.nom) >= 0 && pos(s.prep) >= 0 && pos(s.nom) !== pos(s.prep) ? " Fíjate que el acento se mueve." : "";
   return "**" + s.nom + " → " + s.pr + " " + s.prep + "**: " + r + "." + por + mueve;
 }
 /* Movimiento: «**рабо́та → на рабо́ту**: …» */
 function u6ReglaMov(s) {
-  return "**" + s.nom + " → " + s.pr + " " + s.acc + "**: con movimiento (куда́?) va el acusativo" + (s.nom === s.acc ? ", que acá queda igual." : ".");
+  return "**" + s.nom + " → " + s.pr + " " + s.acc + "**: con movimiento (куда́?) va el acusativo" + (s.nom === s.acc ? ", que aquí queda igual." : ".");
 }
 
 function ejerciciosUnidad6() {
@@ -578,26 +578,26 @@ function ejerciciosUnidad6() {
 
   /* ── Módulo 1: dónde ── */
   [["Где кни́га?", "Кни́га на столе́.", "El libro está en la mesa."], ["Где ма́ма?", "Ма́ма на рабо́те.", "Mamá está en el trabajo."], ["Где ты?", "Я до́ма.", "Estoy en casa."],
-   ["Где па́па?", "Па́па там.", "Papá está allá."], ["Где кни́га?", "Кни́га здесь.", "El libro está acá."], ["Где брат?", "Брат до́ма.", "Mi hermano está en casa."],
+   ["Где па́па?", "Па́па там.", "Papá está allí."], ["Где кни́га?", "Кни́га здесь.", "El libro está aquí."], ["Где брат?", "Брат до́ма.", "Mi hermano está en casa."],
    ["Где А́нна?", "А́нна на рабо́те.", "Ana está en el trabajo."], ["Где телефо́н?", "Телефо́н на столе́.", "El teléfono está en la mesa."]].forEach(([q, a, es], j) => {
     const base = { grupo: "D1-" + j, items: [], oir: a };
-    out.push(Object.assign({ id: "U6-d1-" + j, tipo: "donde", forma: "elegir", dificultad: 1, modulo: 1, contexto: [{ p: "—", ru: q }], pide: "Escuchá la respuesta: ¿qué significa?", audio: a,
-      opciones: baraja([es, "Está en la cocina.", "Va al trabajo.", "No está acá."].filter((x, k) => k === 0 || x !== es).slice(0, 3), j), correcta: es, explicacion: "— " + q + " — " + a + " (" + es + ")" }, base));
-    out.push(Object.assign({ id: "U6-d1d-" + j, tipo: "dictado", forma: "escribir", dificultad: 1, modulo: 1, pide: "Escuchá y escribí la respuesta.", audio: a, esperadas: [a], idioma: "ru", explicacion: a + " — " + es }, base));
-    out.push(Object.assign({ id: "U6-d1e-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 1, pide: "Escribí en ruso: «" + es + "»", audio: a, audioManual: true, esperadas: [a], idioma: "ru", explicacion: a }, base));
+    out.push(Object.assign({ id: "U6-d1-" + j, tipo: "donde", forma: "elegir", dificultad: 1, modulo: 1, contexto: [{ p: "—", ru: q }], pide: "Escucha la respuesta: ¿qué significa?", audio: a,
+      opciones: baraja([es, "Está en la cocina.", "Va al trabajo.", "No está aquí."].filter((x, k) => k === 0 || x !== es).slice(0, 3), j), correcta: es, explicacion: "— " + q + " — " + a + " (" + es + ")" }, base));
+    out.push(Object.assign({ id: "U6-d1d-" + j, tipo: "dictado", forma: "escribir", dificultad: 1, modulo: 1, pide: "Escucha y escribe la respuesta.", audio: a, esperadas: [a], idioma: "ru", explicacion: a + " — " + es }, base));
+    out.push(Object.assign({ id: "U6-d1e-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 1, pide: "Escribe en ruso: «" + es + "»", audio: a, audioManual: true, esperadas: [a], idioma: "ru", explicacion: a }, base));
   });
 
   /* ── Módulo 2: в o на ── */
   lugares.concat([lug["стол"]], objetos).filter(Boolean).forEach((s, j) => {
     if (s.amp) return;
     out.push({ id: "U6-pr-" + s.id, tipo: "prepo", forma: "elegir", dificultad: 1, modulo: 2, grupo: "PR-" + s.id, items: ["lex:" + s.id], oir: s.pr + " " + s.prep,
-      pide: "Completá: «" + s.en + "»", grande: "_____ " + s.prep, opciones: [s.pr === "во" ? "во" : "в", "на"], correcta: s.pr,
+      pide: "Completa: «" + s.en + "»", grande: "_____ " + s.prep, opciones: [s.pr === "во" ? "во" : "в", "на"], correcta: s.pr,
       explicacion: "**" + s.pr + " " + s.prep + "**: " + (s.tipo === "sobre" ? (s.pr === "на" ? "на, porque está encima o contra la superficie." : "в, porque está adentro.") : s.desde === 7 ? "на: es un evento o una actividad." : s.pr === "на" ? "va con на: es de los lugares que se aprenden con на." : s.pr === "во" ? "во: delante de **дв-**, la в se dice во." : "в: un lugar con límites, que te rodea.") });
     const exp = "**" + s.pr + " " + s.prep + "** = " + s.en + (s.pr === "на" && s.tipo !== "sobre" ? ". Va con на, de memoria." : ".");
     if (j % 2 === 0) out.push({ id: "U6-pres-" + s.id, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 2, grupo: "PR-" + s.id, items: ["lex:" + s.id], oir: s.pr + " " + s.prep,
-      pide: "Escribí en ruso: «" + s.en + "»", audio: s.pr + " " + s.prep, audioManual: true, esperadas: [s.pr + " " + s.prep], idioma: "ru", explicacion: exp });
+      pide: "Escribe en ruso: «" + s.en + "»", audio: s.pr + " " + s.prep, audioManual: true, esperadas: [s.pr + " " + s.prep], idioma: "ru", explicacion: exp });
     else out.push({ id: "U6-prdic-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 1, modulo: 2, grupo: "PR-" + s.id, items: ["lex:" + s.id], oir: s.pr + " " + s.prep,
-      pide: "Escuchá y escribí.", audio: s.pr + " " + s.prep, esperadas: [s.pr + " " + s.prep], idioma: "ru", explicacion: exp });
+      pide: "Escucha y escribe.", audio: s.pr + " " + s.prep, esperadas: [s.pr + " " + s.prep], idioma: "ru", explicacion: exp });
   });
 
   /* ── Módulo 3 (lugares), 4 (ciudades y países), 5 (casa) y 6 (lugares): el prepositivo ── */
@@ -606,19 +606,19 @@ function ejerciciosUnidad6() {
   lugares.concat(geos, objetos).forEach((s, j) => {
     const m = conMod(s);
     const base = { grupo: "T-" + s.id, items: ["lex:" + s.id], oir: s.pr + " " + s.prep, ampliacion: s.amp ? true : undefined };
-    out.push(Object.assign({ id: "U6-term-" + s.id, tipo: "term", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí cómo queda: «" + s.en + "».", grande: s.pr + " + " + s.nom,
+    out.push(Object.assign({ id: "U6-term-" + s.id, tipo: "term", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribe cómo queda: «" + s.en + "».", grande: s.pr + " + " + s.nom,
       audio: s.pr + " " + s.prep, audioManual: true, esperadas: [s.pr + " " + s.prep, s.prep], idioma: "ru", explicacion: u6Regla(s) }, base));
     const ops = uniq([s.prep, s.nom, s.acc]);
-    if (ops.length >= 2) out.push(Object.assign({ id: "U6-tel-" + s.id, tipo: "term-elegir", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Dónde? Elegí la forma: «" + s.en + "»", grande: s.pr + " _____",
+    if (ops.length >= 2) out.push(Object.assign({ id: "U6-tel-" + s.id, tipo: "term-elegir", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Dónde? Elige la forma: «" + s.en + "»", grande: s.pr + " _____",
       opciones: baraja(ops, j), correcta: s.prep, explicacion: u6Regla(s) }, base));
     if (s.indecl || j % 4 === 0) out.push(Object.assign({ id: "U6-camb-" + s.id, tipo: "cambia", forma: "elegir", dificultad: 1, modulo: m, pide: "Después de " + s.pr + ", ¿cambia?", grande: s.nom,
       opciones: ["Sí, cambia", "No, queda igual"], correcta: s.indecl ? "No, queda igual" : "Sí, cambia", explicacion: u6Regla(s) }, base));
   });
-  /* Uní la palabra con su prepositivo */
+  /* Une la palabra con su prepositivo */
   [[3, lugares.filter(s => !s.amp && !s.indecl && s.desde <= 3)], [4, geos.filter(s => !s.indecl)]].concat([4, 5, 6, 7, 9].map(m => [m, lugares.concat(objetos).filter(s => !s.amp && !s.indecl && s.desde === m), "n"])).forEach(([m, l, nv]) => {
     for (let j = 0; j + 4 <= l.length; j += 4) { const g = l.slice(j, j + 4);
       out.push({ id: "U6-emp-" + m + (nv || "") + "-" + j, tipo: "emparejar", forma: "emparejar", dificultad: 2, modulo: m, grupo: "E-" + m + "-" + j, items: g.map(s => "lex:" + s.id),
-        pide: "Uní cada palabra con su forma para «dónde».", pares: g.map(s => [s.nom, s.pr + " " + s.prep]), explicacion: g.map(s => s.nom + " → " + s.pr + " " + s.prep).join(" · ") }); }
+        pide: "Une cada palabra con su forma para «dónde».", pares: g.map(s => [s.nom, s.pr + " " + s.prep]), explicacion: g.map(s => s.nom + " → " + s.pr + " " + s.prep).join(" · ") }); }
   });
 
   /* Frases «X está en Y» y «X vive / trabaja en Y» */
@@ -641,18 +641,18 @@ function ejerciciosUnidad6() {
     const base = { grupo: "F" + m + "-" + s.id + (verbo || ""), items: ["lex:" + s.id], oir: f.ru, ampliacion: s.amp ? true : undefined };
     const mm = s.amp ? s.amp : m;
     const exp = u6Regla(s) + " " + f.ru + " — " + f.es;
-    out.push(Object.assign({ id: "U6-esru-" + mm + "-" + s.id + (verbo || ""), tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: mm, pide: "Escribí en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
+    out.push(Object.assign({ id: "U6-esru-" + mm + "-" + s.id + (verbo || ""), tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: mm, pide: "Escribe en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
       esperadas: f.esperadas, idioma: "ru", explicacion: exp }, base));
-    out.push(Object.assign({ id: "U6-dic-" + mm + "-" + s.id + (verbo || ""), tipo: "dictado", forma: "escribir", dificultad: 2, modulo: mm, pide: "Escuchá y escribí la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: exp }, base));
-    out.push(Object.assign({ id: "U6-comp-" + mm + "-" + s.id + (verbo || ""), tipo: "completar", forma: "escribir", dificultad: 2, modulo: mm, pide: "Completá con «" + s.nom + "».",
+    out.push(Object.assign({ id: "U6-dic-" + mm + "-" + s.id + (verbo || ""), tipo: "dictado", forma: "escribir", dificultad: 2, modulo: mm, pide: "Escucha y escribe la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: exp }, base));
+    out.push(Object.assign({ id: "U6-comp-" + mm + "-" + s.id + (verbo || ""), tipo: "completar", forma: "escribir", dificultad: 2, modulo: mm, pide: "Completa con «" + s.nom + "».",
       grande: f.ru.replace(new RegExp(" " + s.prep.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\.$"), " _____."), pista: f.es, audio: f.ru, audioManual: true, esperadas: [s.prep], idioma: "ru", explicacion: exp }, base));
     if (!s.indecl && s.nom !== s.prep && j % 2 === 0) {
       const pals = sinP(f.ru).split(" "); const malas = pals.slice(); malas[malas.length - 1] = s.nom;
-      out.push(Object.assign({ id: "U6-det-" + mm + "-" + s.id + (verbo || ""), tipo: "detectar", forma: "tocar", dificultad: 2, modulo: mm, pide: "Tocá la palabra que está mal.", palabras: malas, correcta: malas.length - 1,
+      out.push(Object.assign({ id: "U6-det-" + mm + "-" + s.id + (verbo || ""), tipo: "detectar", forma: "tocar", dificultad: 2, modulo: mm, pide: "Toca la palabra que está mal.", palabras: malas, correcta: malas.length - 1,
         explicacion: "Después de " + s.pr + ", para decir dónde, va el prepositivo: " + exp }, base));
     }
     if (j % 3 === 1) { const pals = sinP(f.ru).split(" "); let fi = baraja(pals, j + 5); if (fi.join(" ") === pals.join(" ")) fi = fi.slice(1).concat(fi[0]);
-      out.push(Object.assign({ id: "U6-ord-" + mm + "-" + s.id + (verbo || ""), tipo: "construir", forma: "ordenar", dificultad: 2, modulo: mm, pide: "Ordená: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: pals.join(" "), explicacion: exp }, base)); }
+      out.push(Object.assign({ id: "U6-ord-" + mm + "-" + s.id + (verbo || ""), tipo: "construir", forma: "ordenar", dificultad: 2, modulo: mm, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: pals.join(" "), explicacion: exp }, base)); }
   });
   conFrases(lugares.filter(s => !s.amp && s.tipo === "lugar" && casa.indexOf(sin(s.nom)) < 0 && s.desde <= 3), 3, null, 0);
   /* Vocabulario nuevo (07/10/2026): cada lugar, en su módulo; en los de trabajo, «trabajo en…» */
@@ -671,7 +671,7 @@ function ejerciciosUnidad6() {
   Object.values(cosas).forEach((o, j) => {
     const s = habit[j % habit.length], ru = cap(o.ac) + " " + s.pr + " " + s.prep + ".", q = "Где " + o.ac + "?";
     out.push({ id: "U6-esc-" + o.id, tipo: "escena", forma: "escribir", dificultad: 2, modulo: 5, grupo: "SC-" + o.id, items: ["lex:" + o.id, "lex:" + s.id], oir: ru,
-      contexto: [{ p: "—", ru: q }], pide: "Mirá el dibujo y contestá en ruso.", grande: o.emoji + "  →  " + s.emoji, audio: q, audioManual: true,
+      contexto: [{ p: "—", ru: q }], pide: "Mira el dibujo y contesta en ruso.", grande: o.emoji + "  →  " + s.emoji, audio: q, audioManual: true,
       esperadas: [ru, cap(s.pr) + " " + s.prep + "."], idioma: "ru", explicacion: "— " + q + " — " + ru + " " + u6Regla(s) });
   });
   /* Muebles y objetos (07/10/2026): Телефо́н на дива́не. */
@@ -683,9 +683,9 @@ function ejerciciosUnidad6() {
     const o = cosas[sin(COSA_EN[s.ac])], ru = cap(o.ac) + " " + s.pr + " " + s.prep + ".", q = "Где " + o.ac + "?";
     const es = cap((/^(gata|cartera|lapicera|computadora)$/.test(o.es) ? "la " : "el ") + o.es) + " está " + s.en + ".";   /* el género del español, no el del ruso (кни́га → el libro) */
     const base = { grupo: "SO-" + s.id, items: ["lex:" + o.id, "lex:" + s.id], oir: ru };
-    out.push(Object.assign({ id: "U6-esco-" + s.id, tipo: "escena", forma: "escribir", dificultad: 2, modulo: Math.max(5, s.desde), contexto: [{ p: "—", ru: q }], pide: "Mirá el dibujo y contestá en ruso.",
+    out.push(Object.assign({ id: "U6-esco-" + s.id, tipo: "escena", forma: "escribir", dificultad: 2, modulo: Math.max(5, s.desde), contexto: [{ p: "—", ru: q }], pide: "Mira el dibujo y contesta en ruso.",
       grande: o.emoji + "  →  " + s.emoji + "  " + s.es, audio: q, audioManual: true, esperadas: [ru, cap(s.pr) + " " + s.prep + "."], idioma: "ru", explicacion: "— " + q + " — " + ru + " " + u6Regla(s) }, base));
-    out.push(Object.assign({ id: "U6-escod-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: Math.max(5, s.desde), pide: "Escuchá y escribí la frase.", audio: ru, esperadas: [ru], idioma: "ru",
+    out.push(Object.assign({ id: "U6-escod-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: Math.max(5, s.desde), pide: "Escucha y escribe la frase.", audio: ru, esperadas: [ru], idioma: "ru",
       explicacion: ru + " — " + es + " " + u6Regla(s) }, base));
   });
 
@@ -696,7 +696,7 @@ function ejerciciosUnidad6() {
     const ru = pro + " " + s.pr + " " + s.prep + ".";
     out.push({ id: "U6-esl-" + s.id, tipo: "escena", forma: "escribir", dificultad: 2, modulo: 6, grupo: "SL-" + s.id, items: ["lex:" + s.id], oir: ru,
       contexto: [{ p: "—", ru: "Где " + (sj[0] === "Брат" || sj[0] === "Сестра́" || sj[0] === "Ма́ма" || sj[0] === "Па́па" ? sj[0].toLowerCase() : sj[0]) + "?" }],
-      pide: "Mirá el dibujo y contestá en ruso.", grande: s.emoji, audio: "Где " + sj[0] + "?", audioManual: true,
+      pide: "Mira el dibujo y contesta en ruso.", grande: s.emoji, audio: "Где " + sj[0] + "?", audioManual: true,
       esperadas: [ru, cap(s.pr) + " " + s.prep + ".", sj[0] + " " + s.pr + " " + s.prep + "."], idioma: "ru", explicacion: ru + " " + u6Regla(s) });
   });
 
@@ -706,17 +706,17 @@ function ejerciciosUnidad6() {
       const q = d[k - 1], a = d[k];
       const base = { grupo: "DL-" + j + "-" + k, items: [], oir: a[0] };
       out.push(Object.assign({ id: "U6-dlg-" + j + "-" + k, tipo: "dialogo", forma: "escribir", dificultad: 2, modulo: 7, contexto: [{ p: "—", ru: q[0] }],
-        pide: "Contestá: «" + a[1] + "»", audio: a[0], audioManual: true, esperadas: [a[0]], idioma: "ru", explicacion: "— " + q[0] + " — " + a[0] + " (" + a[1] + ")" }, base));
-      out.push(Object.assign({ id: "U6-dlgd-" + j + "-" + k, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 7, pide: "Escuchá y escribí la respuesta.", audio: a[0], esperadas: [a[0]], idioma: "ru",
+        pide: "Contesta: «" + a[1] + "»", audio: a[0], audioManual: true, esperadas: [a[0]], idioma: "ru", explicacion: "— " + q[0] + " — " + a[0] + " (" + a[1] + ")" }, base));
+      out.push(Object.assign({ id: "U6-dlgd-" + j + "-" + k, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 7, pide: "Escucha y escribe la respuesta.", audio: a[0], esperadas: [a[0]], idioma: "ru",
         explicacion: "— " + q[0] + " — " + a[0] + " (" + a[1] + ")" }, base));
     }
-    if (d.length >= 4) out.push({ id: "U6-dlgo-" + j, tipo: "dialogo", forma: "ordenar", dificultad: 2, modulo: 7, grupo: "DO-" + j, items: [], pide: "Ordená la conversación.",
+    if (d.length >= 4) out.push({ id: "U6-dlgo-" + j, tipo: "dialogo", forma: "ordenar", dificultad: 2, modulo: 7, grupo: "DO-" + j, items: [], pide: "Ordena la conversación.",
       fichas: baraja(d.map(x => x[0]), j + 3).sort((a, b) => a === d[0][0] ? 1 : 0), sep: "\n", esperada: d.map(x => x[0]).join("\n"), audio: d.map(x => x[0]).join(" "),
       explicacion: d.map(x => "— " + x[0] + " (" + x[1] + ")").join(" ") });
   });
-  [["Банк ря́дом.", "El banco está cerca."], ["Метро́ далеко́.", "El subte está lejos."], ["Шко́ла ря́дом.", "La escuela está cerca."], ["Университе́т далеко́.", "La universidad está lejos."],
+  [["Банк ря́дом.", "El banco está cerca."], ["Метро́ далеко́.", "El metro está lejos."], ["Шко́ла ря́дом.", "La escuela está cerca."], ["Университе́т далеко́.", "La universidad está lejos."],
    ["Парк ря́дом.", "El parque está cerca."], ["Ста́нция далеко́.", "La estación está lejos."]].forEach(([ru, es], j) => {
-    out.push({ id: "U6-cerca-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 7, grupo: "CE-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U6-cerca-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 7, grupo: "CE-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: ru + " Sin verbo, como en presente." });
   });
 
@@ -735,14 +735,14 @@ function ejerciciosUnidad6() {
     out.push(Object.assign({ id: "U6-clas-m-" + s.id, tipo: "clasificar", forma: "elegir", dificultad: 1, modulo: 8, pide: "¿Ubicación o movimiento?", grande: voy, audio: voy,
       opciones: ["📍 Ubicación", "🚶 Movimiento"], correcta: "🚶 Movimiento", explicacion: voy + " — " + esV + " " + u6ReglaMov(s) }, base));
     if (s.prep !== s.acc) {
-      out.push(Object.assign({ id: "U6-um-v-" + s.id, tipo: "ubic-mov", forma: "elegir", dificultad: 2, modulo: 8, pide: "Completá: «" + esV + "»", grande: sj[0] + " " + v.f[p] + " " + s.pr + " _____.",
+      out.push(Object.assign({ id: "U6-um-v-" + s.id, tipo: "ubic-mov", forma: "elegir", dificultad: 2, modulo: 8, pide: "Completa: «" + esV + "»", grande: sj[0] + " " + v.f[p] + " " + s.pr + " _____.",
         opciones: baraja([s.acc, s.prep], j), correcta: s.acc, explicacion: u6ReglaMov(s) }, base));
-      out.push(Object.assign({ id: "U6-um-e-" + s.id, tipo: "ubic-mov", forma: "elegir", dificultad: 2, modulo: 8, pide: "Completá: «" + esE + "»", grande: sj[0] + " " + s.pr + " _____.",
+      out.push(Object.assign({ id: "U6-um-e-" + s.id, tipo: "ubic-mov", forma: "elegir", dificultad: 2, modulo: 8, pide: "Completa: «" + esE + "»", grande: sj[0] + " " + s.pr + " _____.",
         opciones: baraja([s.acc, s.prep], j + 1), correcta: s.prep, explicacion: u6Regla(s) }, base));
     }
-    out.push(Object.assign({ id: "U6-um-esru-" + s.id, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, pide: "Escribí en ruso: «" + esV + "»", audio: voy, audioManual: true,
+    out.push(Object.assign({ id: "U6-um-esru-" + s.id, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, pide: "Escribe en ruso: «" + esV + "»", audio: voy, audioManual: true,
       esperadas: [voy].concat(p === 0 || p === 1 || p === 3 ? [cap(v.f[p]) + " " + s.pr + " " + s.acc + "."] : []), idioma: "ru", explicacion: u6ReglaMov(s) + " " + voy }, base));
-    out.push(Object.assign({ id: "U6-um-dic-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 8, pide: "Escuchá y escribí la frase.", audio: voy, esperadas: [voy], idioma: "ru", explicacion: voy + " — " + esV }, base));
+    out.push(Object.assign({ id: "U6-um-dic-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 8, pide: "Escucha y escribe la frase.", audio: voy, esperadas: [voy], idioma: "ru", explicacion: voy + " — " + esV }, base));
     /* Где o куда́ */
     const qd = j % 2 ? ["_____ ты?", "Где", s.pr + " " + s.prep] : ["_____ ты " + verb[sin(vk)].f[1] + "?", "Куда́", s.pr + " " + s.acc];
     out.push(Object.assign({ id: "U6-dq-" + s.id, tipo: "donde-adonde", forma: "elegir", dificultad: 2, modulo: 8, pide: "¿Где o куда́? La respuesta es: «" + cap(qd[2]) + "».", grande: qd[0],
@@ -754,9 +754,9 @@ function ejerciciosUnidad6() {
     const v = verb[sin(vk)]; if (!v) return;
     const PL = ["я", "ты", "он / она́", "мы", "вы", "они́"], pR = ["Я", "Ты", "Он", "Мы", "Вы", "Они́"];
     v.f.forEach((f, i) => {
-      out.push({ id: "U6-conjw-" + v.id + "-" + i, tipo: "conjugar-escribir", forma: "escribir", dificultad: 2, modulo: 9, grupo: v.id + "-" + i, items: ["lex:" + v.id], pide: "Escribí la forma del verbo.",
+      out.push({ id: "U6-conjw-" + v.id + "-" + i, tipo: "conjugar-escribir", forma: "escribir", dificultad: 2, modulo: 9, grupo: v.id + "-" + i, items: ["lex:" + v.id], pide: "Escribe la forma del verbo.",
         grande: PL[i] + " + " + v.ac, audio: pR[i] + " " + f, audioManual: true, esperadas: [f, pR[i] + " " + f], idioma: "ru", explicacion: "**" + v.ac + " → " + PL[i] + " " + f + "**" });
-      if (i % 2 === 0) out.push({ id: "U6-conj-" + v.id + "-" + i, tipo: "conjugar", forma: "elegir", dificultad: 1, modulo: 9, grupo: v.id + "-c" + i, items: ["lex:" + v.id], pide: "Elegí la forma de «" + v.ac + "».",
+      if (i % 2 === 0) out.push({ id: "U6-conj-" + v.id + "-" + i, tipo: "conjugar", forma: "elegir", dificultad: 1, modulo: 9, grupo: v.id + "-c" + i, items: ["lex:" + v.id], pide: "Elige la forma de «" + v.ac + "».",
         grande: pR[i] + " _____", opciones: baraja(uniq(v.f).filter(x => x !== f).slice(0, 3).concat(f), vi + i), correcta: f, explicacion: "**" + v.ac + " → " + PL[i] + " " + f + "**" });
     });
   });
@@ -788,10 +788,10 @@ function ejerciciosUnidad6() {
     const ru = sj[0] + " " + adv + " " + v.f[p] + " " + s.pr + " " + s.acc + ".";
     const esAdv = { "ча́сто": "seguido", "всегда́": "siempre", "иногда́": "a veces", "сейча́с": "ahora" }[adv];
     const es = cap((sj[1] ? sj[1] + " " : "") + esAdv + " " + U6_IR[p] + " " + s.a) + ". " + (base === "идти́" ? "🚶" : "🚗");   /* a pie o en vehículo */
-    out.push({ id: "U6-hab-" + j, tipo: "habitual", forma: "elegir", dificultad: 2, modulo: 9, grupo: "HB-" + j, items: ["lex:" + v.id], oir: ru, pide: "Completá: «" + es + "»",
+    out.push({ id: "U6-hab-" + j, tipo: "habitual", forma: "elegir", dificultad: 2, modulo: 9, grupo: "HB-" + j, items: ["lex:" + v.id], oir: ru, pide: "Completa: «" + es + "»",
       grande: sj[0] + " " + adv + " _____ " + s.pr + " " + s.acc + ".", opciones: baraja([v.f[p], w.f[p]], j), correcta: v.f[p],
       explicacion: (habitual ? "**" + adv + "** = algo habitual → " + v.ac + "." : "**сейча́с** = ahora → " + v.ac + ".") + " " + ru });
-    out.push({ id: "U6-habesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 9, grupo: "HB-" + j, items: ["lex:" + v.id], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U6-habesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 9, grupo: "HB-" + j, items: ["lex:" + v.id], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: (habitual ? "Habitual → " + v.ac : "Ahora → " + v.ac) + ". " + u6ReglaMov(s) + " " + ru });
   });
 
@@ -805,14 +805,14 @@ function ejerciciosUnidad6() {
       afirmacion: af, verdadero: v, audio: todo, texto: lineas, textoOculto: true, explicacion: (v ? "Verdadero. " : "Falso. ") + todo }));
   });
   /* Dictados de cinco niveles (esquema) */
-  [["Я до́ма.", "Estoy en casa."], ["Я в кварти́ре.", "Estoy en el departamento."], ["Я рабо́таю в о́фисе.", "Trabajo en una oficina."],
+  [["Я до́ма.", "Estoy en casa."], ["Я в кварти́ре.", "Estoy en el apartamento."], ["Я рабо́таю в о́фисе.", "Trabajo en una oficina."],
    ["Я рабо́таю в о́фисе в Барсело́не.", "Trabajo en una oficina en Barcelona."], ["Ве́чером я ча́сто хожу́ в рестора́н.", "A la noche voy seguido al restaurante."]].forEach(([ru, es], j) =>
-    out.push({ id: "U6-niv-" + j, tipo: "dictado", forma: "escribir", dificultad: j < 2 ? 1 : j < 4 ? 2 : 3, modulo: 10, grupo: "NV-" + j, items: [], oir: ru, pide: "Escuchá y escribí (nivel " + (j + 1) + ").",
+    out.push({ id: "U6-niv-" + j, tipo: "dictado", forma: "escribir", dificultad: j < 2 ? 1 : j < 4 ? 2 : 3, modulo: 10, grupo: "NV-" + j, items: [], oir: ru, pide: "Escucha y escribe (nivel " + (j + 1) + ").",
       audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }));
 
   /* ── Vocabulario de las palabras nuevas ── */
   const nuevas = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(6) >= 0);
-  const dicEs = { "куда́": "adónde", "здесь": "acá", "ря́дом": "cerca, al lado", "далеко́": "lejos", "е́хать": "ir (en vehículo)", "ходи́ть": "ir a pie (seguido)", "е́здить": "ir en vehículo (seguido)",
+  const dicEs = { "куда́": "adónde", "здесь": "aquí", "ря́дом": "cerca, al lado", "далеко́": "lejos", "е́хать": "ir (en vehículo)", "ходи́ть": "ir a pie (seguido)", "е́здить": "ir en vehículo (seguido)",
     "па́мятник": "monumento", "ба́шня": "torre", "светофо́р": "semáforo", "зе́ркало": "espejo", "пруд": "estanque", "лежа́ть": "estar acostado, estar (apoyado)", "висе́ть": "estar colgado",
     "сле́ва": "a la izquierda", "спра́ва": "a la derecha", "наверху́": "arriba", "внизу́": "abajo", "везде́": "en todas partes", "нигде́": "en ningún lado", "бли́зко": "cerca" };
   const modDe = e => { const s = lug[sin(e.acento)]; if (s) return s.amp || (s.desde > 2 ? s.desde : casa.indexOf(sin(s.nom)) >= 0 ? 5 : 6);
@@ -824,7 +824,7 @@ function ejerciciosUnidad6() {
     const base = { grupo: e.id, items: ["lex:" + e.id], oir: e.ru, ampliacion: amp ? true : undefined };
     if (dis.length >= 2) out.push(Object.assign({ id: "U6-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Qué significa?", grande: e.acento, audio: e.ru,
       opciones: baraja([es].concat(dis), i), correcta: es, explicacion: e.acento + " — " + es }, base));
-    out.push(Object.assign({ id: "U6-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
+    out.push(Object.assign({ id: "U6-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribe en ruso: «" + es + "»", audio: e.ru, audioManual: true,
       pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.length + " letras.", esperadas: [e.acento], idioma: "ru", explicacion: e.acento + " — " + es }, base));
   });
   /* ── Tipos nuevos (10/10/2026): entender la regla, ~20 % de la sesión ──
@@ -929,28 +929,28 @@ function ejerciciosUnidad6() {
   mov.filter(s => s.prep !== s.acc).forEach((s, j) => {
     const loc = j % 2 === 0, ok = s.pr + " " + (loc ? s.prep : s.acc);
     out.push({ id: "U6-oido-" + s.id, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 8, regla: loc ? "u6-donde-prep" : "u6-adonde-acc", grupo: "M-" + s.id, items: ["lex:" + s.id], oir: ok,
-      pide: "Escuchá: ¿qué forma sonó?", audio: ok, opciones: baraja([s.pr + " " + s.prep, s.pr + " " + s.acc], j), correcta: ok,
+      pide: "Escucha: ¿qué forma sonó?", audio: ok, opciones: baraja([s.pr + " " + s.prep, s.pr + " " + s.acc], j), correcta: ok,
       explicacion: "Sonó **" + ok + "**: " + (loc ? "dónde está, prepositivo (" + s.en + ")." : "adónde va, acusativo (" + s.a + ").") });
   });
   /* Oído: ¿иду́ o е́ду, хожу́ o е́зжу? */
   [["идти́", "е́хать"], ["ходи́ть", "е́здить"]].forEach(([a, b], k) => [0, 1, 2, 3, 5].forEach((p, j) => {
     const va = verb[sin(a)], vb = verb[sin(b)], esA = (j + k) % 2 === 0, v = esA ? va : vb, ok = v.f[p];
     out.push({ id: "U6-oidov-" + k + "-" + p, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 9, regla: k ? "u6-ahora-seguido" : "u6-pie-vehiculo", grupo: v.id + "-" + p, items: ["lex:" + v.id], oir: ok,
-      pide: "Escuchá: ¿qué forma sonó?", audio: ok, opciones: baraja([va.f[p], vb.f[p]], j + k), correcta: ok,
+      pide: "Escucha: ¿qué forma sonó?", audio: ok, opciones: baraja([va.f[p], vb.f[p]], j + k), correcta: ok,
       explicacion: "Sonó **" + ok + "**, de " + v.ac + ": " + { "идти́": "ir a pie", "е́хать": "ir en vehículo", "ходи́ть": "ir a pie, seguido", "е́здить": "ir en vehículo, seguido" }[v.ac] + "." });
   }));
 
-  /* Cadena: estoy ahí → voy → voy seguido → y vos? */
+  /* Cadena: estoy ahí → voy → voy seguido → y tú? */
   mov.forEach((s, j) => {
     if (j % 2) return;
     const vi = verb[sin("идти́")], vh = verb[sin("ходи́ть")];
     const s0 = "Я " + s.pr + " " + s.prep + ".", s1 = "Я " + vi.f[0] + " " + s.pr + " " + s.acc + ".", s2 = "Я ча́сто " + vh.f[0] + " " + s.pr + " " + s.acc + ".", s3 = "Ты ча́сто " + vh.f[1] + " " + s.pr + " " + s.acc + "?";
     out.push({ id: "U6-cad-" + s.id, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 9, regla: "u6-adonde-acc", grupo: "C6-" + s.id, items: ["lex:" + s.id, "lex:" + vh.id], oir: s3,
-      pide: "Cambiá la frase paso a paso.", base: s0,
+      pide: "Cambia la frase paso a paso.", base: s0,
       pasos: [
-        { pide: "Ahora decí que vas ahí, a pie.", esperadas: [s1, cap(vi.f[0]) + " " + s.pr + " " + s.acc + "."] },
+        { pide: "Ahora di que vas ahí, a pie.", esperadas: [s1, cap(vi.f[0]) + " " + s.pr + " " + s.acc + "."] },
         { pide: "Ahora vas seguido (ча́сто).", esperadas: [s2, "Ча́сто " + vh.f[0] + " " + s.pr + " " + s.acc + "."] },
-        { pide: "Ahora preguntale a un amigo si él va seguido.", esperadas: [s3, "Ты ча́сто " + vh.f[1] + " " + s.pr + " " + s.acc + ".", "Ча́сто " + vh.f[1] + " " + s.pr + " " + s.acc + "?"] }],
+        { pide: "Ahora pregúntale a un amigo si él va seguido.", esperadas: [s3, "Ты ча́сто " + vh.f[1] + " " + s.pr + " " + s.acc + ".", "Ча́сто " + vh.f[1] + " " + s.pr + " " + s.acc + "?"] }],
       explicacion: s0 + " → " + s1 + " → " + s2 + " → " + s3 + " Con movimiento, acusativo (" + s.acc + "); lo habitual, con ходи́ть." });
   });
   /* Cadena: estoy ahí → trabajo ahí → y ella? */
@@ -958,11 +958,11 @@ function ejerciciosUnidad6() {
     const v = verb[sin("рабо́тать")];
     const s0 = "Я " + s.pr + " " + s.prep + ".", s1 = "Я " + v.f[0] + " " + s.pr + " " + s.prep + ".", s2 = "Ты " + v.f[1] + " " + s.pr + " " + s.prep + "?", s3 = "Она́ " + v.f[2] + " " + s.pr + " " + s.prep + ".";
     out.push({ id: "U6-cadt-" + s.id, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: Math.max(6, s.desde), regla: "u6-con-verbos", grupo: "CT-" + s.id, items: ["lex:" + s.id, "lex:" + v.id], oir: s3,
-      pide: "Cambiá la frase paso a paso.", base: s0,
+      pide: "Cambia la frase paso a paso.", base: s0,
       pasos: [
-        { pide: "Ahora decí que trabajás ahí.", esperadas: [s1, cap(v.f[0]) + " " + s.pr + " " + s.prep + "."] },
-        { pide: "Preguntale a un amigo si trabaja ahí.", esperadas: [s2, cap(v.f[1]) + " " + s.pr + " " + s.prep + "?", "Ты " + v.f[1] + " " + s.pr + " " + s.prep + "."] },
-        { pide: "Ahora contá que ella trabaja ahí.", esperadas: [s3] }],
+        { pide: "Ahora di que trabajas ahí.", esperadas: [s1, cap(v.f[0]) + " " + s.pr + " " + s.prep + "."] },
+        { pide: "Pregúntale a un amigo si trabaja ahí.", esperadas: [s2, cap(v.f[1]) + " " + s.pr + " " + s.prep + "?", "Ты " + v.f[1] + " " + s.pr + " " + s.prep + "."] },
+        { pide: "Ahora cuenta que ella trabaja ahí.", esperadas: [s3] }],
       explicacion: s0 + " → " + s1 + " → " + s2 + " → " + s3 + " Cambia el verbo; el lugar queda igual: " + s.pr + " " + s.prep + "." });
   });
 
@@ -1014,24 +1014,24 @@ function ejerciciosUnidad6() {
     const otra = cap(o.ac) + (enc ? " в " + s.prep : " на " + prepNa) + ".";
     const art = /^(gata|cartera|lapicera|computadora)$/.test(o.es) ? "La " : "El ", lugEs = s.es;
     out.push({ id: "U6-par-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 5, regla: enc ? "u6-na" : "u6-v", grupo: "PV-" + s.id + "-" + j, items: ["lex:" + o.id, "lex:" + s.id], oir: ok,
-      pide: art + o.es + " está " + (enc ? "encima " : "adentro ") + (/^(caja|heladera)$/.test(lugEs) ? "de la " : "del ") + lugEs + ". ¿Cuál decís?", opciones: baraja([ok, otra], j), correcta: ok,
+      pide: art + o.es + " está " + (enc ? "encima " : "adentro ") + (/^(caja|nevera)$/.test(lugEs) ? "de la " : "del ") + lugEs + ". ¿Cuál dices?", opciones: baraja([ok, otra], j), correcta: ok,
       explicacion: ok + " " + (enc ? "Encima: на." : "Adentro: в.") });
   });
 
-  /* Desarmar: tocá las palabras que responden cada pregunta */
+  /* Desarmar: toca las palabras que responden cada pregunta */
   mov.forEach((s, j) => {
     if (j % 2 === 0) return;
     const sj = U6_SUJ[[0, 2, 3, 6][j % 4]], v = verb[sin("идти́")], p = sj[2];
     const palabras = [sj[0], v.f[p], s.pr, s.acc], ru = palabras.join(" ") + ".";
     out.push({ id: "U6-desarm-" + s.id, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo: 8, regla: "u6-adonde-acc", grupo: "M-" + s.id, items: ["lex:" + s.id, "lex:" + v.id], oir: ru, audio: ru, audioManual: true,
-      pide: "Respondé tocando las palabras de la frase.", palabras, preguntas: [{ pide: "¿Quién va?", correcta: 0 }, { pide: "¿Qué palabra dice que va a pie?", correcta: 1 }, { pide: "¿Qué palabra dice adónde va?", correcta: 3 }],
+      pide: "Responde tocando las palabras de la frase.", palabras, preguntas: [{ pide: "¿Quién va?", correcta: 0 }, { pide: "¿Qué palabra dice que va a pie?", correcta: 1 }, { pide: "¿Qué palabra dice adónde va?", correcta: 3 }],
       explicacion: ru + " " + u6ReglaMov(s) });
   });
   baseLug.filter(s => s.desde === 6 && TRABAJO6.indexOf(sin(s.nom)) >= 0).forEach((s, j) => {
     const sj = U6_SUJ[[2, 3, 6, 0][j % 4]], v = verb[sin("рабо́тать")], p = sj[2];
     const palabras = [sj[0], v.f[p], s.pr, s.prep], ru = palabras.join(" ") + ".";
     out.push({ id: "U6-desarmt-" + s.id, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo: 6, regla: "u6-con-verbos", grupo: "DT-" + s.id, items: ["lex:" + s.id, "lex:" + v.id], oir: ru, audio: ru, audioManual: true,
-      pide: "Respondé tocando las palabras de la frase.", palabras, preguntas: [{ pide: "¿Quién?", correcta: 0 }, { pide: "¿Qué hace?", correcta: 1 }, { pide: "¿Qué palabra dice dónde?", correcta: 3 }],
+      pide: "Responde tocando las palabras de la frase.", palabras, preguntas: [{ pide: "¿Quién?", correcta: 0 }, { pide: "¿Qué hace?", correcta: 1 }, { pide: "¿Qué palabra dice dónde?", correcta: 3 }],
       explicacion: ru + " " + u6Regla(s) });
   });
 

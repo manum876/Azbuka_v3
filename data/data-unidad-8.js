@@ -16,7 +16,7 @@
    Formas del pasado de Verbos, nunca a mano.
    ============================================================ */
 
-/* Verbos: "ruso": [español (infinitivo), pretérito (yo, vos, él/ella, nosotros, ellos/ustedes), imperfecto o null, tipo]
+/* Verbos: "ruso": [español (infinitivo), pretérito (yo, tú, él/ella, nosotros, ellos/ustedes), imperfecto o null, tipo]
    tipo: "a" (actividad: sirve para «ayer») · "m" (de un momento: solo con ра́ньше) · "x" (movimiento) · "b" (быть) */
 const U8_VERBOS = {
   "рабо́тать": ["trabajar", ["trabajé", "trabajaste", "trabajó", "trabajamos", "trabajaron"], ["trabajaba", "trabajabas", "trabajaba", "trabajábamos", "trabajaban"], "a"],
@@ -49,7 +49,7 @@ const U8_VERBOS = {
   "ложи́ться": ["acostarse", null, ["me acostaba", "te acostabas", "se acostaba", "nos acostábamos", "se acostaban"], "m"]
 };
 /* Quién: [ruso, español, género del pasado (m / f / pl), índice del español (0 yo … 4 ellos)] */
-const U8_SUJ = [["Я", "", "m", 0, "hombre"], ["Я", "", "f", 0, "mujer"], ["Ты", "Vos", "m", 1, "a un hombre"], ["Ты", "Vos", "f", 1, "a una mujer"], ["Он", "Él", "m", 2], ["Она́", "Ella", "f", 2],
+const U8_SUJ = [["Я", "", "m", 0, "hombre"], ["Я", "", "f", 0, "mujer"], ["Ты", "Tú", "m", 1, "a un hombre"], ["Ты", "Tú", "f", 1, "a una mujer"], ["Он", "Él", "m", 2], ["Она́", "Ella", "f", 2],
   ["Мы", "", "pl", 3], ["Вы", "Ustedes", "pl", 4], ["Они́", "Ellos", "pl", 4], ["Ива́н", "Iván", "m", 2], ["А́нна", "Ana", "f", 2], ["Ма́ша", "Masha", "f", 2], ["Ди́ма", "Dima", "m", 2],
   ["Ма́ма", "Mamá", "f", 2], ["Па́па", "Papá", "m", 2], ["Брат", "Mi hermano", "m", 2], ["Сестра́", "Mi hermana", "f", 2], ["Де́ти", "Los chicos", "pl", 4]];
 /* Complementos para «ayer»: verbo → [ruso, español] */
@@ -91,7 +91,7 @@ const U8_VISTAS = {
 const U8_GLOSA = {
   "ра́ньше": "antes", "тогда́": "en ese entonces", "неда́вно": "hace poco", "про́шлый": "pasado (anterior)", "интере́сно": "interesante (es interesante)", "наконе́ц": "por fin", "но": "pero",
   "позавчера́": "anteayer", "давно́": "hace mucho", "когда́-то": "en otro tiempo", "наза́д": "hace (tiempo)", "до́лго": "mucho tiempo", "недо́лго": "poco tiempo", "це́лый": "entero",
-  "дождь": "lluvia", "снег": "nieve", "ве́тер": "viento", "жа́рко": "hace calor", "прекра́сно": "genial, muy bien", "ужа́сно": "horrible", "краси́во": "lindo", "тру́дно": "difícil", "легко́": "fácil",
+  "дождь": "lluvia", "снег": "nieve", "ве́тер": "viento", "жа́рко": "hace calor", "прекра́сно": "genial, muy bien", "ужа́сно": "horrible", "краси́во": "bonito", "тру́дно": "difícil", "легко́": "fácil",
   "ве́село": "divertido", "ску́чно": "aburrido",
   "встать": "levantarse (una vez)", "просну́ться": "despertarse (una vez)", "поза́втракать": "desayunar (y terminar)", "пообе́дать": "almorzar (y terminar)", "поу́жинать": "cenar (y terminar)",
   "пригото́вить": "preparar (y terminar)", "прочита́ть": "leer (hasta el final)", "сде́лать": "hacer (y terminar)", "написа́ть": "escribir (y terminar)", "посмотре́ть": "mirar (hasta el final)",
@@ -100,7 +100,7 @@ const U8_GLOSA = {
   "одна́жды": "una vez, cierto día", "вдруг": "de repente", "случи́ться": "pasar, ocurrir", "слу́чай": "caso, suceso", "уви́деть": "ver (de pronto)", "услы́шать": "oír", "узна́ть": "enterarse",
   "рассказа́ть": "contar (todo)", "расска́зывать": "contar", "реши́ть": "decidir", "забы́ть": "olvidarse", "потеря́ть": "perder", "получи́ть": "recibir", "подари́ть": "regalar", "показа́ть": "mostrar",
   "встре́тить": "encontrarse con", "уста́ть": "cansarse", "заболе́ть": "enfermarse", "сфотографи́ровать": "sacar una foto",
-  "впервы́е": "por primera vez", "экску́рсия": "excursión, visita guiada", "сувени́р": "recuerdo (souvenir)", "чемода́н": "valija", "гора́": "montaña",
+  "впервы́е": "por primera vez", "экску́рсия": "excursión, visita guiada", "сувени́р": "recuerdo (souvenir)", "чемода́н": "maleta", "гора́": "montaña",
   "роди́ться": "nacer", "вы́расти": "crecer", "де́тство": "infancia", "мо́лодость": "juventud", "перее́хать": "mudarse", "око́нчить": "terminar (los estudios)", "жени́ться": "casarse (un hombre)",
   "вы́йти": "salir", "за́муж": "(casarse) una mujer", "по́мнить": "recordar, acordarse", "вспо́мнить": "acordarse (de golpe)"
 };
@@ -129,7 +129,7 @@ const U8_LECTURAS = [
     preguntas: [["¿Qué hicieron primero?", "гуля́ли в па́рке", ["обе́дали в рестора́не", "ходи́ли в кино́"]], ["¿Dónde almorzaron?", "в рестора́не", ["в кафе́", "до́ма"]], ["¿Cómo fue?", "интере́сно", ["хо́лодно", "пло́хо"]]],
     vf: [["Они́ бы́ли в це́нтре.", true], ["Снача́ла они́ ходи́ли в кино́.", false], ["Ве́чером они́ ходи́ли в кино́.", true]] },
   { id: "viaje", titulo: "В Москве́", lineas: [
-      ["В про́шлом ме́сяце Ма́ша е́здила в Москву́.", "El mes pasado Masha fue a Moscú."], ["Она́ была́ там неде́лю.", "Estuvo allá una semana."],
+      ["В про́шлом ме́сяце Ма́ша е́здила в Москву́.", "El mes pasado Masha fue a Moscú."], ["Она́ была́ там неде́лю.", "Estuvo allí una semana."],
       ["Она́ гуля́ла в це́нтре и говори́ла по-ру́сски.", "Paseó por el centro y habló en ruso."], ["Бы́ло хо́лодно, но интере́сно.", "Hacía frío, pero fue interesante."]],
     preguntas: [["¿Adónde fue Masha?", "в Москву́", ["в Москве́", "в Пари́ж"]], ["¿Cuándo?", "в про́шлом ме́сяце", ["вчера́", "в про́шлом году́"]], ["¿Cómo estaba el tiempo?", "хо́лодно", ["интере́сно", "пло́хо"]]],
     vf: [["Ма́ша говори́ла по-ру́сски.", true], ["Бы́ло пло́хо.", false], ["Она́ была́ там неде́лю.", true]] },
@@ -148,17 +148,17 @@ const UNIDAD_8 = {
   tiempo: "4 a 5 semanas con práctica diaria (unas 40–50 horas)",
   modulos: [
     { id: "u8m1", n: 1, tipo: "leccion", nPractica: 10, titulo: "Un pasado para todo", resumen: "Я рабо́таю → Я рабо́тал.",
-      intro: "Hasta acá todo era presente. Ahora empezás a contar lo que pasó, y la noticia es buena: el ruso tiene una sola forma de pasado para lo que en español se dice de tres maneras.",
+      intro: "Hasta aquí todo era presente. Ahora empiezas a contar lo que pasó, y la noticia es buena: el ruso tiene una sola forma de pasado para lo que en español se dice de tres maneras.",
       secciones: [
         { id: "u8-un-pasado", titulo: "Trabajé, trabajaba, estuve trabajando",
-          texto: "En español elegís entre «trabajé», «trabajaba» y «estuve trabajando». En ruso, por ahora, las tres son рабо́тал. El verbo pierde **-ть**, suma **-л** y listo: no hay un tiempo para cada matiz.\nPara pasar una frase al pasado, cambiás solo el verbo. Todo lo demás queda igual.",
+          texto: "En español eliges entre «trabajé», «trabajaba» y «estuve trabajando». En ruso, por ahora, las tres son рабо́тал. El verbo pierde **-ть**, suma **-л** y listo: no hay un tiempo para cada matiz.\nPara pasar una frase al pasado, cambias solo el verbo. Todo lo demás queda igual.",
           ejemplos: [
             { ru: "Я {рабо́тал} до́ма.", es: "Trabajé (trabajaba) en casa.", por: "рабо́тать → **рабо́та-** + **-л**." },
             { ru: "Я {жил} в Барсело́не.", es: "Viví (vivía) en Barcelona.", por: "жить → **жи-** + **-л**." },
             { ru: "Я {чита́л} кни́гу.", es: "Leí (estuve leyendo) un libro.", por: "чита́ть → **чита́-** + **-л**." },
             { ru: "Я {смотре́л} фильм.", es: "Miré (estuve mirando) una película.", por: "смотре́ть → **смотре́-** + **-л**. El presente смотрю́ no cuenta: el pasado sale del infinitivo." }],
           destacado: "Я рабо́таю → Я рабо́тал.",
-          comparacion: "Lo que en español separás entre «trabajé» y «trabajaba», el ruso lo deja al contexto. Más adelante en esta unidad vas a ver que el ruso marca otra cosa: si la acción llegó a su fin.",
+          comparacion: "Lo que en español separas entre «trabajé» y «trabajaba», el ruso lo deja al contexto. Más adelante en esta unidad vas a ver que el ruso marca otra cosa: si la acción llegó a su fin.",
           errores: [{ mal: "Я был рабо́тал.", bien: "Я {рабо́тал}.", por: "No hace falta ningún verbo de ayuda: el pasado es una sola palabra." }],
           mas: { texto: "¿Por qué el pasado sale del infinitivo y no del presente? Porque en ruso son dos raíces que a veces se parecen y a veces no: живу́ / жить, смотрю́ / смотре́ть. El pasado se arma siempre sobre la del infinitivo, así que con saber el infinitivo alcanza.",
             ejemplos: [
@@ -166,22 +166,22 @@ const UNIDAD_8 = {
               { ru: "Я пишу́ → Я {писа́л}.", es: "Escribo → escribí.", por: "пишу́ y писа́ть: el pasado toma **писа́-**." }] },
           chequeo: [{ pide: "«Ayer leí» se dice…", opciones: ["Вчера́ я чита́л.", "Вчера́ я был чита́л."], ok: "Вчера́ я чита́л.", por: "Una sola palabra: чита́л." }] },
         { id: "u8-pistas", titulo: "El contexto decide",
-          texto: "Como рабо́тал sirve para «trabajé» y para «trabajaba», lo que define cómo lo traducís son las palabras de alrededor:\nвчера́ (ayer) → casi siempre «trabajé»\nра́ньше (antes) → «trabajaba», lo de siempre\nча́сто, обы́чно, всегда́ → «trabajaba», lo que se repetía\nдва часа́, весь день → «estuve trabajando», cuánto duró",
+          texto: "Como рабо́тал sirve para «trabajé» y para «trabajaba», lo que define cómo lo traduces son las palabras de alrededor:\nвчера́ (ayer) → casi siempre «trabajé»\nра́ньше (antes) → «trabajaba», lo de siempre\nча́сто, обы́чно, всегда́ → «trabajaba», lo que se repetía\nдва часа́, весь день → «estuve trabajando», cuánto duró",
           ejemplos: [
             { ru: "{Вчера́} я рабо́тал.", es: "Ayer trabajé.", por: "вчера́ marca un día concreto." },
             { ru: "{Ра́ньше} я рабо́тал в ба́нке.", es: "Antes trabajaba en un banco.", por: "ра́ньше: lo que hacías en otra época." },
             { ru: "Я {ча́сто} гуля́л в па́рке.", es: "Paseaba seguido por el parque.", por: "ча́сто: algo que se repetía." },
             { ru: "Я рабо́тал {два часа́}.", es: "Estuve trabajando dos horas.", por: "Cuánto duró: «estuve trabajando»." }],
           destacado: "вчера́ → trabajé · ра́ньше, ча́сто → trabajaba",
-          truco: "Cuando traduzcas al español, mirá primero la palabra de tiempo: casi siempre te dice cuál de los pasados va.",
-          chequeo: [{ pide: "Ра́ньше я жил в Мадри́де. ¿Cómo lo decís en español?", opciones: ["Antes vivía en Madrid.", "Antes viví en Madrid."], ok: "Antes vivía en Madrid.", por: "ра́ньше habla de lo de otra época: «vivía»." }] }
+          truco: "Cuando traduzcas al español, mira primero la palabra de tiempo: casi siempre te dice cuál de los pasados va.",
+          chequeo: [{ pide: "Ра́ньше я жил в Мадри́де. ¿Cómo lo dices en español?", opciones: ["Antes vivía en Madrid.", "Antes viví en Madrid."], ok: "Antes vivía en Madrid.", por: "ра́ньше habla de lo de otra época: «vivía»." }] }
       ] },
     { id: "u8m2", n: 2, tipo: "leccion", nPractica: 12, titulo: "Cómo se forma el pasado", resumen: "-л, -ла, -ло, -ли.",
       intro: "Al infinitivo se le saca **-ть** y se agrega una de cuatro terminaciones. Cuál va depende de quién hace la acción.",
       secciones: [
         { id: "u8-forma-l", titulo: "Cuatro terminaciones",
           antes: { pide: "Он чита́л. ¿Y ella?", opciones: ["Она́ чита́ла.", "Она́ чита́л."], ok: "Она́ чита́ла.", por: "Para una mujer se suma -а: чита́ла." },
-          texto: "чита́ть → **чита́-** y después:\n**-л** para un hombre (он, Ива́н, брат)\n**-ла** para una mujer (она́, А́нна, ма́ма)\n**-ло** para lo neutro (оно́, э́то)\n**-ли** para varios (мы, вы, они́)\nNo cambia según «yo, vos, él»: cambia según hombre, mujer o varios.",
+          texto: "чита́ть → **чита́-** y después:\n**-л** para un hombre (он, Ива́н, брат)\n**-ла** para una mujer (она́, А́нна, ма́ма)\n**-ло** para lo neutro (оно́, э́то)\n**-ли** para varios (мы, вы, они́)\nNo cambia según «yo, tú, él»: cambia según hombre, mujer o varios.",
           ejemplos: [
             { ru: "Брат {чита́л}.", es: "Mi hermano leyó.", por: "Un hombre: **-л**." },
             { ru: "Ма́ма {чита́ла}.", es: "Mamá leyó.", por: "Una mujer: **-ла**." },
@@ -196,7 +196,7 @@ const UNIDAD_8 = {
             { pide: "Они́ ___ (гуля́ть).", opciones: ["гуля́ли", "гуля́ла", "гуля́л"], ok: "гуля́ли", por: "Varios: **-ли**." },
             { pide: "А́нна ___ (рабо́тать).", opciones: ["рабо́тала", "рабо́тал", "рабо́тали"], ok: "рабо́тала", por: "Una mujer: **-ла**." }] },
         { id: "u8-forma-sya", titulo: "Los verbos con -ся",
-          texto: "Los verbos que terminan en **-ся** arman el pasado igual y después le pegan la partícula: **-ся** si la palabra termina en consonante, **-сь** si termina en vocal. Es la misma regla que ya usás en presente (умыва́юсь, умыва́ется).\nучи́ться → учи́л**ся** (él), учи́ла**сь** (ella), учи́ли**сь** (varios).",
+          texto: "Los verbos que terminan en **-ся** arman el pasado igual y después le pegan la partícula: **-ся** si la palabra termina en consonante, **-сь** si termina en vocal. Es la misma regla que ya usas en presente (умыва́юсь, умыва́ется).\nучи́ться → учи́л**ся** (él), учи́ла**сь** (ella), учи́ли**сь** (varios).",
           ejemplos: [
             { ru: "Брат {учи́лся} в Москве́.", es: "Mi hermano estudiaba en Moscú.", por: "учи́л termina en consonante (**л**): va **-ся**." },
             { ru: "Сестра́ {учи́лась} в Мадри́де.", es: "Mi hermana estudiaba en Madrid.", por: "учи́ла termina en vocal: va **-сь**." },
@@ -208,7 +208,7 @@ const UNIDAD_8 = {
             { mal: "Он учи́лсь.", bien: "Он {учи́лся}.", por: "Después de consonante, **-ся**." }],
           chequeo: [{ pide: "Ма́ма ___ (возвраща́ться) в семь часо́в.", opciones: ["возвраща́лась", "возвраща́лся", "возвраща́ласья"], ok: "возвраща́лась", por: "**возвраща́ла** termina en vocal: **-сь**." }] },
         { id: "u8-especiales", titulo: "Los especiales",
-          texto: "Casi todos los verbos siguen la regla. Los pocos que no, de los que ya conocés, son estos, y conviene aprenderlos de memoria:",
+          texto: "Casi todos los verbos siguen la regla. Los pocos que no, de los que ya conoces, son estos, y conviene aprenderlos de memoria:",
           ejemplos: [
             { ru: "есть → {ел}, {е́ла}, {е́ли}", es: "comer → comí, comió…", por: "Se pierde la **-с-** de есть." },
             { ru: "идти́ → {шёл}, {шла}, {шли}", es: "ir (a pie, en camino)", por: "Otra raíz: шёл. Es «iba», en camino: Я шёл домо́й («iba para casa»)." },
@@ -222,14 +222,14 @@ const UNIDAD_8 = {
           chequeo: [{ pide: "А́нна ___ пи́ццу (есть).", opciones: ["е́ла", "есла", "е́ли"], ok: "е́ла", por: "есть es especial: ел, е́ла, е́ли." }] }
       ] },
     { id: "u8m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Quién lo hizo", resumen: "Ива́н рабо́тал. А́нна рабо́тала.",
-      intro: "El pasado no mira la persona sino quién es: un hombre, una mujer o varios. Eso cambia cómo hablás vos y cómo te hablan.",
+      intro: "El pasado no mira la persona sino quién es: un hombre, una mujer o varios. Eso cambia cómo hablas tú y cómo te hablan.",
       secciones: [
-        { id: "u8-genero-quien", titulo: "Я y ты dependen de quién sos",
-          texto: "Я y ты pueden ser un hombre o una mujer, así que el verbo lo muestra: un hombre dice Я рабо́тал; una mujer, Я рабо́тала. Igual con ты: a un amigo, Ты рабо́тал?; a una amiga, Ты рабо́тала?\nCon un nombre o un sustantivo, mirás quién es: Ива́н, брат, па́па van con **-л**; А́нна, сестра́, ма́ма, con **-ла**.",
+        { id: "u8-genero-quien", titulo: "Я y ты dependen de quién eres",
+          texto: "Я y ты pueden ser un hombre o una mujer, así que el verbo lo muestra: un hombre dice Я рабо́тал; una mujer, Я рабо́тала. Igual con ты: a un amigo, Ты рабо́тал?; a una amiga, Ты рабо́тала?\nCon un nombre o un sustantivo, miras quién es: Ива́н, брат, па́па van con **-л**; А́нна, сестра́, ма́ма, con **-ла**.",
           ejemplos: [
             { ru: "Я {рабо́тал} вчера́.", es: "Ayer trabajé.", por: "Lo dice un hombre: **-л**." },
             { ru: "Я {рабо́тала} вчера́.", es: "Ayer trabajé.", por: "Lo dice una mujer: **-ла**." },
-            { ru: "Ты {была́} до́ма?", es: "¿Estuviste en casa?", por: "Le preguntás a una mujer: **-ла**." },
+            { ru: "Ты {была́} до́ма?", es: "¿Estuviste en casa?", por: "Le preguntas a una mujer: **-ла**." },
             { ru: "Па́па {гото́вил} у́жин.", es: "Papá preparó la cena.", por: "Па́па termina en -а, pero es un hombre: **-л**." }],
           destacado: "Él: Я рабо́тал · Ella: Я рабо́тала",
           errores: [
@@ -260,7 +260,7 @@ const UNIDAD_8 = {
           chequeo: [{ pide: "Э́то ___ вчера́.", opciones: ["бы́ло", "был", "бы́ли"], ok: "бы́ло", por: "э́то: **-ло**." }] }
       ] },
     { id: "u8m4", n: 4, tipo: "leccion", nPractica: 10, titulo: "Cuándo pasó", resumen: "вчера́, неда́вно, два дня наза́д…",
-      intro: "Las palabras para decir cuándo pasó algo. Algunas son sueltas; otras se arman con la forma de contar que ya conocés.",
+      intro: "Las palabras para decir cuándo pasó algo. Algunas son sueltas; otras se arman con la forma de contar que ya conoces.",
       secciones: [
         { id: "u8-cuando", titulo: "Ayer, hace poco, hace mucho",
           texto: "вчера́ (ayer) · позавчера́ (anteayer)\nвчера́ у́тром, вчера́ ве́чером (ayer a la mañana, ayer a la noche)\nнеда́вно (hace poco) · давно́ (hace mucho)\nкогда́-то (en otro tiempo, alguna vez)\nVan al principio o al final de la frase, sin preposición.",
@@ -272,12 +272,12 @@ const UNIDAD_8 = {
           errores: [{ mal: "Вчера́ я есть до́ма.", bien: "Вчера́ я {был} до́ма.", por: "Con вчера́ va el pasado de быть: был." }],
           chequeo: [{ pide: "«Hace poco» es…", opciones: ["неда́вно", "давно́"], ok: "неда́вно", por: "не- + давно́: no hace mucho." }] },
         { id: "u8-nazad", titulo: "Hace dos días: наза́д",
-          texto: "Para «hace dos días», «hace un año», va primero cuánto tiempo y después наза́д. El número y la palabra se cuentan como ya sabés: 1, 2–4, 5 o más.\nдень → день, два дня, пять дней\nгод → год, два го́да, пять лет\nме́сяц → ме́сяц, два ме́сяца, пять ме́сяцев\nCon неде́ля, para «hace una semana»: неде́лю наза́д.",
+          texto: "Para «hace dos días», «hace un año», va primero cuánto tiempo y después наза́д. El número y la palabra se cuentan como ya sabes: 1, 2–4, 5 o más.\nдень → день, два дня, пять дней\nгод → год, два го́да, пять лет\nме́сяц → ме́сяц, два ме́сяца, пять ме́сяцев\nCon неде́ля, para «hace una semana»: неде́лю наза́д.",
           ejemplos: [
             { ru: "Я был в Москве́ {два дня наза́д}.", es: "Estuve en Moscú hace dos días.", por: "2 → дня, como два часа́." },
             { ru: "Она́ жила́ в Пари́же {пять лет наза́д}.", es: "Ella vivía en París hace cinco años.", por: "Para 5 o más años, лет." },
-            { ru: "Мы гуля́ли там {неде́лю наза́д}.", es: "Paseamos por allá hace una semana.", por: "неде́лю, como en рабо́тал неде́лю (cuánto)." },
-            { ru: "Он был тут {час наза́д}.", es: "Estuvo acá hace una hora.", por: "Para una, la palabra sola: час." }],
+            { ru: "Мы гуля́ли там {неде́лю наза́д}.", es: "Paseamos por allí hace una semana.", por: "неде́лю, como en рабо́тал неде́лю (cuánto)." },
+            { ru: "Он был тут {час наза́д}.", es: "Estuvo aquí hace una hora.", por: "Para una, la palabra sola: час." }],
           destacado: "два дня наза́д · пять лет наза́д",
           errores: [{ mal: "Наза́д два дня.", bien: "{Два дня наза́д}.", por: "наза́д va después: primero cuánto, después наза́д." }],
           mas: { texto: "лет no se parece a год: es otra palabra que el ruso usa para contar años de 5 en adelante (пять лет, два́дцать лет). Con 2, 3 y 4 sí va го́да: три го́да наза́д.",
@@ -307,7 +307,7 @@ const UNIDAD_8 = {
       intro: "Preguntar y contar qué hiciste, y una diferencia importante: «fui» en ruso tiene dos verbos.",
       secciones: [
         { id: "u8-preguntas", titulo: "Las preguntas",
-          texto: "Las preguntas son las de siempre, con el verbo en pasado. Como el pasado muestra el género, la pregunta cambia según a quién le hablás:\nЧто ты де́лал вчера́? (a un hombre) · Что ты де́лала вчера́? (a una mujer)\nГде ты был? / Где ты была́? (¿dónde estuviste?)\nЧто вы де́лали? (a varios o con respeto)\nКогда́ э́то бы́ло? (¿cuándo fue?)",
+          texto: "Las preguntas son las de siempre, con el verbo en pasado. Como el pasado muestra el género, la pregunta cambia según a quién le hablas:\nЧто ты де́лал вчера́? (a un hombre) · Что ты де́лала вчера́? (a una mujer)\nГде ты был? / Где ты была́? (¿dónde estuviste?)\nЧто вы де́лали? (a varios o con respeto)\nКогда́ э́то бы́ло? (¿cuándo fue?)",
           ejemplos: [
             { ru: "— Что ты {де́лал} вчера́? — Я {рабо́тал}.", es: "—¿Qué hiciste ayer? —Trabajé.", por: "A un hombre: де́лал; contesta un hombre: рабо́тал." },
             { ru: "— Где ты {была́}? — Я {была́} в кино́.", es: "—¿Dónde estuviste? —Estuve en el cine.", por: "Entre mujeres: была́ en la pregunta y en la respuesta." },
@@ -315,16 +315,16 @@ const UNIDAD_8 = {
           destacado: "Что ты де́лал вчера́?",
           mas: { texto: "Para contestar no hace falta repetir el sujeto en cada frase: Вчера́ я рабо́тал, пото́м гуля́л, а ве́чером смотре́л фильм. El я del principio vale para toda la serie, como en español.",
             ejemplos: [{ ru: "Вчера́ я {рабо́тал}, пото́м {гуля́л}.", es: "Ayer trabajé, después paseé.", por: "Un solo я para los dos verbos." }] },
-          chequeo: [{ pide: "Le preguntás a una amiga qué hizo ayer:", opciones: ["Что ты де́лала вчера́?", "Что ты де́лал вчера́?"], ok: "Что ты де́лала вчера́?", por: "A una mujer: де́лала." }] },
+          chequeo: [{ pide: "Le preguntas a una amiga qué hizo ayer:", opciones: ["Что ты де́лала вчера́?", "Что ты де́лал вчера́?"], ok: "Что ты де́лала вчера́?", por: "A una mujer: де́лала." }] },
         { id: "u8-dia", titulo: "Tu día de ayer",
-          texto: "Con los verbos que ya conocés contás un día entero. Cada verbo con su terminación y, si querés, cuándo:",
+          texto: "Con los verbos que ya conoces cuentas un día entero. Cada verbo con su terminación y, si quieres, cuándo:",
           ejemplos: [
             { ru: "У́тром я {за́втракал} до́ма.", es: "A la mañana desayuné en casa.", por: "за́втракать → за́втракал." },
             { ru: "Днём я {рабо́тал} в о́фисе.", es: "A la tarde trabajé en la oficina.", por: "рабо́тать → рабо́тал." },
             { ru: "Ве́чером я {гото́вил} у́жин.", es: "A la noche preparé la cena.", por: "гото́вить → гото́вил: la -и- queda." },
             { ru: "Пото́м я {смотре́л} телеви́зор.", es: "Después miré televisión.", por: "смотре́ть → смотре́л." }],
-          truco: "Escribí tu día de ayer en cuatro frases: mañana, tarde, noche y algo que hiciste después.",
-          chequeo: [{ pide: "«A la noche preparé la cena» (sos mujer).", opciones: ["Ве́чером я гото́вила у́жин.", "Ве́чером я гото́вил у́жин."], ok: "Ве́чером я гото́вила у́жин.", por: "Sos mujer: **-ла**." }] },
+          truco: "Escribe tu día de ayer en cuatro frases: mañana, tarde, noche y algo que hiciste después.",
+          chequeo: [{ pide: "«A la noche preparé la cena» (eres mujer).", opciones: ["Ве́чером я гото́вила у́жин.", "Ве́чером я гото́вил у́жин."], ok: "Ве́чером я гото́вила у́жин.", por: "Eres mujer: **-ла**." }] },
         { id: "u8-hodil", titulo: "«Fui»: ходи́л y е́здил",
           texto: "Para «fui al cine» el ruso usa ходи́л (a pie) o е́здил (en un vehículo). Los dos quieren decir «fui y volví»: el viaje ya terminó. Después va adónde, con в o на + acusativo, como con идти́.\nА́нна ходи́ла в кино́ («Ana fue al cine»: ya volvió).",
           ejemplos: [
@@ -341,7 +341,7 @@ const UNIDAD_8 = {
       intro: "En presente, быть no se dice (Я до́ма). En pasado sí: Я был до́ма. Y con él se cuenta dónde estuviste, cómo fue algo y qué tenías.",
       secciones: [
         { id: "u8-byl-acento", titulo: "Dónde estuviste",
-          texto: "был, была́, бы́ло, бы́ли + dónde (в o на + prepositivo, o до́ма). Fijate en el acento: en femenino va al final (была́); en las otras tres formas, en la raíz.",
+          texto: "был, была́, бы́ло, бы́ли + dónde (в o на + prepositivo, o до́ма). Fíjate en el acento: en femenino va al final (была́); en las otras tres formas, en la raíz.",
           ejemplos: [
             { ru: "Я {был} в Барсело́не.", es: "Estuve en Barcelona.", por: "Un hombre: был." },
             { ru: "Она́ {была́} на рабо́те.", es: "Ella estuvo en el trabajo.", por: "Una mujer: была́, acento al final." },
@@ -354,9 +354,9 @@ const UNIDAD_8 = {
           ejemplos: [
             { ru: "Я {не́ был} в Москве́.", es: "No estuve en Moscú.", por: "El acento pasa a не́." },
             { ru: "Она́ {не была́} до́ма.", es: "Ella no estuvo en casa.", por: "En femenino el acento sigue al final." },
-            { ru: "Мы {не́ были} там.", es: "No estuvimos allá.", por: "не́ были: acento en не́." }],
+            { ru: "Мы {не́ были} там.", es: "No estuvimos allí.", por: "не́ были: acento en не́." }],
           mas: { texto: "Pasa lo mismo con otros verbos cortos de la lista de los especiales: не́ жил, не жила́, не́ жили. No es obligatorio decirlo así para que te entiendan, pero es como lo dicen los rusos.",
-            ejemplos: [{ ru: "Я {не́ жил} там.", es: "No viví allá.", por: "Como не́ был." }] },
+            ejemplos: [{ ru: "Я {не́ жил} там.", es: "No viví allí.", por: "Como не́ был." }] },
           chequeo: [{ pide: "¿Dónde va el acento en «no estuvimos»?", opciones: ["не́ были", "не бы́ли"], ok: "не́ были", por: "En plural, el acento va a не́." }] },
         { id: "u8-bylo", titulo: "Cómo fue: бы́ло",
           texto: "Para decir cómo fue algo o cómo estuvo el tiempo, бы́ло + una palabra como интере́сно, хо́лодно, жа́рко, ве́село, ску́чно, тру́дно, легко́. Sin sujeto, igual que en presente sin быть (Хо́лодно = hace frío).\nPara la lluvia y la nieve, el ruso dice que «iban»: шёл дождь (llovía), шёл снег (nevaba).",
@@ -373,7 +373,7 @@ const UNIDAD_8 = {
               { ru: "{Был} ве́тер.", es: "Había viento.", por: "ве́тер es masculino: был." }] },
           chequeo: [{ pide: "«Fue aburrido».", opciones: ["Бы́ло ску́чно.", "Был ску́чно."], ok: "Бы́ло ску́чно.", por: "Sin sujeto: бы́ло." }] },
         { id: "u8-u-menya-byl", titulo: "Tenía: у меня́ был",
-          texto: "у меня́ есть («tengo») en pasado se dice con быть, y быть concuerda con lo que tenías, no con vos:\nу меня́ был брат (un hombre: был)\nу меня́ была́ ко́шка (femenino: была́)\nу меня́ бы́ло письмо́ (neutro: бы́ло)\nу меня́ бы́ли кни́ги (varios: бы́ли)",
+          texto: "у меня́ есть («tengo») en pasado se dice con быть, y быть concuerda con lo que tenías, no contigo:\nу меня́ был брат (un hombre: был)\nу меня́ была́ ко́шка (femenino: была́)\nу меня́ бы́ло письмо́ (neutro: бы́ло)\nу меня́ бы́ли кни́ги (varios: бы́ли)",
           ejemplos: [
             { ru: "У меня́ {была́} соба́ка.", es: "Tenía un perro.", por: "соба́ка es femenino: была́." },
             { ru: "У меня́ {был} о́тпуск.", es: "Tuve vacaciones.", por: "о́тпуск es masculino: был." },
@@ -382,11 +382,11 @@ const UNIDAD_8 = {
           chequeo: [{ pide: "У меня́ ___ маши́на.", opciones: ["была́", "был", "бы́ло"], ok: "была́", por: "маши́на es femenino: была́." }] }
       ] },
     { id: "u8m7", n: 7, tipo: "leccion", nPractica: 12, titulo: "Proceso o resultado", resumen: "чита́л / прочита́л.",
-      intro: "Hasta acá usaste un verbo para todo. Pero casi todos los verbos rusos tienen una pareja: uno cuenta la acción mientras pasaba, el otro, la acción terminada. Este es el corazón de la unidad.",
+      intro: "Hasta aquí usaste un verbo para todo. Pero casi todos los verbos rusos tienen una pareja: uno cuenta la acción mientras pasaba, el otro, la acción terminada. Este es el corazón de la unidad.",
       secciones: [
         { id: "u8-aspecto-idea", titulo: "Dos verbos para una acción",
           antes: { pide: "Я чита́л кни́гу. Я прочита́л кни́гу. ¿Cuál dice «terminé el libro»?", opciones: ["Я прочита́л кни́гу.", "Я чита́л кни́гу."], ok: "Я прочита́л кни́гу.", por: "прочита́л: lo leí hasta el final." },
-          texto: "чита́ть y прочита́ть quieren decir «leer». La diferencia es cómo mirás la acción:\nчита́л: la acción en sí, mientras duraba o como actividad. «Estuve leyendo», «leía», «leí» (sin decir si terminé).\nпрочита́л: la acción terminada, con su resultado. «Lo leí entero», «terminé de leerlo».\nAl primero lo llamamos de **proceso**; al segundo, de **resultado**.",
+          texto: "чита́ть y прочита́ть quieren decir «leer». La diferencia es cómo miras la acción:\nчита́л: la acción en sí, mientras duraba o como actividad. «Estuve leyendo», «leía», «leí» (sin decir si terminé).\nпрочита́л: la acción terminada, con su resultado. «Lo leí entero», «terminé de leerlo».\nAl primero lo llamamos de **proceso**; al segundo, de **resultado**.",
           ejemplos: [
             { ru: "Вчера́ я {чита́л} кни́гу.", es: "Ayer estuve leyendo un libro.", por: "Proceso: qué hice, no si terminé." },
             { ru: "Вчера́ я {прочита́л} кни́гу.", es: "Ayer leí (terminé) el libro.", por: "Resultado: el libro está leído." },
@@ -415,18 +415,18 @@ const UNIDAD_8 = {
           destacado: "**про-** · **на-** · **с-** · **по-** · **при-** · otra palabra",
           ojo: "El de resultado, por ahora, solo en pasado. Su presente (прочита́ю) no es presente sino futuro; lo ves más adelante.",
           errores: [{ mal: "Сейча́с я прочита́ю кни́гу (por «ahora leo»).", bien: "Сейча́с я {чита́ю} кни́гу.", por: "Lo que pasa ahora va siempre con el de proceso." }],
-          mas: { texto: "El prefijo no es un adorno: **на-**, **про-**, **по-** son las mismas piezas que ves en otras palabras, pero acá solo agregan «hasta el final». Por eso no hay una regla para saber cuál le toca a cada verbo: se aprenden juntos, como una pareja. La tabla de abajo tiene las doce de esta unidad.",
+          mas: { texto: "El prefijo no es un adorno: **на-**, **про-**, **по-** son las mismas piezas que ves en otras palabras, pero aquí solo agregan «hasta el final». Por eso no hay una regla para saber cuál le toca a cada verbo: se aprenden juntos, como una pareja. La tabla de abajo tiene las doce de esta unidad.",
             ejemplos: [
               { ru: "{Встал} в семь часо́в.", es: "Me levanté a las siete.", por: "встава́ть → встать: встал, вста́ла, вста́ли." },
               { ru: "Она́ {просну́лась} ра́но.", es: "Se despertó temprano.", por: "просну́ться → просну́лась." }] },
           chequeo: [{ pide: "¿Cuál es la pareja de resultado de писа́ть?", opciones: ["написа́ть", "прописа́ть", "списа́ть"], ok: "написа́ть", por: "писа́ть → написа́ть." }] },
         { id: "u8-aspecto-pistas", titulo: "Pistas para elegir",
-          texto: "Algunas palabras casi deciden por vos:\nCon до́лго, весь день, це́лый день, два часа́ (cuánto duró) → proceso.\nCon ча́сто, обы́чно, ка́ждый день, всегда́, ра́ньше (se repetía) → proceso.\nCon уже́ («ya»), наконе́ц («por fin») y cuando hay un resultado a la vista → resultado.\nEn la pregunta «¿qué hiciste?» → proceso.",
+          texto: "Algunas palabras casi deciden por ti:\nCon до́лго, весь день, це́лый день, два часа́ (cuánto duró) → proceso.\nCon ча́сто, обы́чно, ка́ждый день, всегда́, ра́ньше (se repetía) → proceso.\nCon уже́ («ya»), наконе́ц («por fin») y cuando hay un resultado a la vista → resultado.\nEn la pregunta «¿qué hiciste?» → proceso.",
           ejemplos: [
             { ru: "Я {до́лго} {чита́л}.", es: "Leí mucho tiempo.", por: "до́лго: proceso." },
             { ru: "Я {ча́сто} {смотре́л} фи́льмы.", es: "Miraba películas seguido.", por: "ча́сто: se repetía, proceso." },
             { ru: "Я {уже́} {поза́втракал}.", es: "Ya desayuné.", por: "уже́: resultado, está hecho." },
-            { ru: "{Наконе́ц} мы {купи́ли} маши́ну.", es: "Por fin compramos el auto.", por: "наконе́ц: llegamos al resultado." }],
+            { ru: "{Наконе́ц} мы {купи́ли} маши́ну.", es: "Por fin compramos el coche.", por: "наконе́ц: llegamos al resultado." }],
           destacado: "до́лго, ча́сто → proceso · уже́, наконе́ц → resultado",
           errores: [
             { mal: "Я до́лго прочита́л.", bien: "Я до́лго {чита́л}.", por: "до́лго habla de la duración: proceso." },
@@ -436,10 +436,10 @@ const UNIDAD_8 = {
             { pide: "Я ___ кни́гу два часа́.", opciones: ["чита́л", "прочита́л"], ok: "чита́л", por: "весь день: proceso." }] }
       ] },
     { id: "u8m8", n: 8, tipo: "leccion", nPractica: 12, titulo: "Contar en orden", resumen: "Встал, поза́втракал, пото́м…",
-      intro: "Con las parejas ya podés contar una historia: lo que pasó una cosa después de la otra, lo que pasaba mientras tanto y lo que pasó de repente.",
+      intro: "Con las parejas ya puedes contar una historia: lo que pasó una cosa después de la otra, lo que pasaba mientras tanto y lo que pasó de repente.",
       secciones: [
         { id: "u8-orden-perf", titulo: "Una cosa después de otra",
-          texto: "Cuando contás una serie de cosas que pasaron una tras otra, cada una terminó antes de que empezara la siguiente: van con el de resultado. Para ordenarlas, снача́ла (primero), пото́м (después), зате́м (luego), наконе́ц (por fin).",
+          texto: "Cuando cuentas una serie de cosas que pasaron una tras otra, cada una terminó antes de que empezara la siguiente: van con el de resultado. Para ordenarlas, снача́ла (primero), пото́м (después), зате́м (luego), наконе́ц (por fin).",
           ejemplos: [
             { ru: "{Снача́ла} я {встал}, {пото́м} {поза́втракал}.", es: "Primero me levanté, después desayuné.", por: "Dos acciones terminadas, en orden." },
             { ru: "Она́ {пригото́вила} у́жин и {посмотре́ла} фильм.", es: "Preparó la cena y miró una película.", por: "Primero una, después la otra." },
@@ -481,7 +481,7 @@ const UNIDAD_8 = {
           chequeo: [{ pide: "— Почему́ ты был до́ма? — ___ я заболе́л.", opciones: ["Потому́ что", "Но"], ok: "Потому́ что", por: "Responde a почему́." }] }
       ] },
     { id: "u8m9", n: 9, tipo: "leccion", nPractica: 10, titulo: "Experiencias y tu historia", resumen: "Я был в Пари́же. Я роди́лся в…",
-      intro: "Más allá de ayer: viajes, lugares donde estuviste, cosas que hiciste por primera vez y tu propia historia.",
+      intro: "Más allí de ayer: viajes, lugares donde estuviste, cosas que hiciste por primera vez y tu propia historia.",
       secciones: [
         { id: "u8-byl-vs-ezdil", titulo: "Estuve en París o fui a París",
           texto: "Para un viaje hay dos formas, con el caso que corresponde:\nЯ был в Пари́же: dónde estuviste (в + prepositivo).\nЯ е́здил в Пари́ж: adónde fuiste y volviste (в + acusativo).\nLas dos cuentan la misma experiencia; cambia el caso.",
@@ -508,7 +508,7 @@ const UNIDAD_8 = {
               { ru: "Я {сфотографи́ровал} го́ру.", es: "Le saqué una foto a la montaña.", por: "сфотографи́ровать: de resultado." }] },
           chequeo: [{ pide: "«Nunca estuve en Londres».", opciones: ["Я никогда́ не́ был в Ло́ндоне.", "Я никогда́ был в Ло́ндоне."], ok: "Я никогда́ не́ был в Ло́ндоне.", por: "никогда́ + не." }] },
         { id: "u8-biografia", titulo: "Tu historia",
-          texto: "Con unos pocos verbos contás tu vida:\nроди́ться (nacer): роди́лся, родила́сь\nвы́расти (crecer): вы́рос, вы́росла\nжить (vivir): жил, жила́\nучи́ться (estudiar): учи́лся, учи́лась\nоко́нчить (terminar los estudios): око́нчил шко́лу, университе́т\nперее́хать (mudarse): перее́хал в + adónde\nв де́тстве (en la infancia), в мо́лодости (en la juventud).",
+          texto: "Con unos pocos verbos cuentas tu vida:\nроди́ться (nacer): роди́лся, родила́сь\nвы́расти (crecer): вы́рос, вы́росла\nжить (vivir): жил, жила́\nучи́ться (estudiar): учи́лся, учи́лась\nоко́нчить (terminar los estudios): око́нчил шко́лу, университе́т\nперее́хать (mudarse): перее́хал в + adónde\nв де́тстве (en la infancia), в мо́лодости (en la juventud).",
           ejemplos: [
             { ru: "Я {роди́лся} в Буэ́нос-А́йресе.", es: "Nací en Buenos Aires.", por: "Dónde: prepositivo. Una mujer dice родила́сь." },
             { ru: "{В де́тстве} я жил в Мадри́де.", es: "De chico vivía en Madrid.", por: "в де́тстве: prepositivo de де́тство." },
@@ -523,7 +523,7 @@ const UNIDAD_8 = {
           chequeo: [{ pide: "Una mujer dice «nací en Madrid»:", opciones: ["Я родила́сь в Мадри́де.", "Я роди́лся в Мадри́де."], ok: "Я родила́сь в Мадри́де.", por: "Mujer: родила́сь." }] }
       ] },
     { id: "u8m10", n: 10, tipo: "leccion", nPractica: 10, titulo: "Antes y ahora", resumen: "Ра́ньше я жил…, а тепе́рь я живу́…",
-      intro: "Comparar lo que hacías antes con lo que hacés ahora, y distinguir lo que se repetía de lo que pasó una vez.",
+      intro: "Comparar lo que hacías antes con lo que haces ahora, y distinguir lo que se repetía de lo que pasó una vez.",
       secciones: [
         { id: "u8-ranshe", titulo: "Lo que solías hacer",
           texto: "ра́ньше (antes) y тогда́ (en ese entonces) van con el pasado de proceso: cuentan lo que hacías siempre, una costumbre de otra época. En español, «vivía», «me levantaba».",
@@ -556,9 +556,9 @@ const UNIDAD_8 = {
           chequeo: [{ pide: "«Antes escribía cartas seguido».", opciones: ["Ра́ньше я ча́сто писа́л пи́сьма.", "Ра́ньше я ча́сто написа́л пи́сьма."], ok: "Ра́ньше я ча́сто писа́л пи́сьма.", por: "Se repetía: proceso." }] }
       ] },
     { id: "u8m11", n: 11, tipo: "lectura", titulo: "Lectura", resumen: "Un día, un fin de semana, un viaje, antes y ahora.",
-      intro: "Cuatro textos cortos con todo lo de la unidad. Leelos, escuchalos y después contestá." },
+      intro: "Cuatro textos cortos con todo lo de la unidad. Léelos, escúchalos y después contesta." },
     { id: "u8m12", n: 12, tipo: "proyecto", titulo: "Proyecto: Мой про́шлый день", resumen: "Tu día de ayer, y antes y ahora.",
-      intro: "Escribí cómo fue tu día de ayer, en orden: dónde estuviste, qué hiciste, cómo fue. Por ejemplo: Вчера́ я рабо́тал. Снача́ла я за́втракал до́ма. Пото́м я был на рабо́те. Ве́чером мы ходи́ли в кино́. Э́то бы́ло интере́сно.",
+      intro: "Escribe cómo fue tu día de ayer, en orden: dónde estuviste, qué hiciste, cómo fue. Por ejemplo: Вчера́ я рабо́тал. Снача́ла я за́втракал до́ма. Пото́м я был на рабо́те. Ве́чером мы ходи́ли в кино́. Э́то бы́ло интере́сно.",
       requisitos: [], consejos: [] },
     { id: "u8m13", n: 13, tipo: "examen", titulo: "Evaluación", resumen: "Formar el pasado, género, был, proceso o resultado, traducción y audio.",
       intro: "Cuarenta ejercicios en ocho partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
@@ -577,7 +577,7 @@ const UNIDAD_8 = {
 };
 /* Segunda parte del proyecto (página: debajo de la primera) */
 const U8_PROYECTO2 = { id: "u8p2", titulo: "Ра́ньше и сейча́с",
-  intro: "Ahora compará: qué hacías antes y qué hacés ahora. Por ejemplo: Ра́ньше я жил в Буэ́нос-А́йресе, а тепе́рь я живу́ в Барсело́не. Ра́ньше я не говори́л по-ру́сски. Сейча́с я изуча́ю ру́сский.",
+  intro: "Ahora compara: qué hacías antes y qué haces ahora. Por ejemplo: Ра́ньше я жил в Буэ́нос-А́йресе, а тепе́рь я живу́ в Барсело́не. Ра́ньше я не говори́л по-ру́сски. Сейча́с я изуча́ю ру́сский.",
   requisitos: [], consejos: [] };
 
 /* Además, la terminación -л va sin negrita, igual que -ла, -ло, -ли (Manu, 05/10/2026) */
@@ -652,7 +652,7 @@ function ejerciciosUnidad8() {
     if (r && comp && comp[0] && !/^(в|на|до́ма)( |$)/.test(comp[0])) esperadas.slice().forEach(x => { for (const k of ["m", "f", "pl"]) if (x.indexOf(" " + v.p[k] + " ") >= 0) esperadas.push(x.replace(" " + v.p[k] + " ", " " + r.p[k] + " ")); });
     return { ru, es, esperadas, v, g, f };
   };
-  const pista = s => s[4] ? " (" + (s[0] === "Я" ? "sos " + s[4] : "le hablás " + s[4]) + ")" : "";
+  const pista = s => s[4] ? " (" + (s[0] === "Я" ? "eres " + s[4] : "le hablas " + s[4]) + ")" : "";
 
   /* ── Módulo 1: ahora o antes ── */
   ["рабо́тать", "изуча́ть", "чита́ть", "смотре́ть", "гуля́ть", "гото́вить", "слу́шать", "говори́ть"].forEach((vk, j) => {
@@ -665,7 +665,7 @@ function ejerciciosUnidad8() {
       opciones: ["Ahora", "Antes (pasado)"], correcta: "Antes (pasado)", explicacion: "**" + pas.f + "** termina en " + { m: "-л", f: "-ла", pl: "-ли" }[pas.g] + ": es pasado. " + pas.ru + " — " + pas.es }, base));
     out.push(Object.assign({ id: "U8-aa-n-" + j, tipo: "ahora-antes", forma: "elegir", dificultad: 1, modulo: 1, pide: "¿Ahora o antes?", grande: pres, audio: pres,
       opciones: ["Ahora", "Antes (pasado)"], correcta: "Ahora", explicacion: "**" + v.pres[iPres] + "** es presente: " + pres }, base));
-    out.push(Object.assign({ id: "U8-tr1-" + j, tipo: "transformar", forma: "escribir", dificultad: 2, modulo: 1, pide: "Pasala al pasado" + pista(s) + ".", grande: pres, audio: pas.ru, audioManual: true,
+    out.push(Object.assign({ id: "U8-tr1-" + j, tipo: "transformar", forma: "escribir", dificultad: 2, modulo: 1, pide: "Pásala al pasado" + pista(s) + ".", grande: pres, audio: pas.ru, audioManual: true,
       esperadas: pas.esperadas, idioma: "ru", explicacion: u8Regla(v, pas.g) + " " + pas.ru + " — " + pas.es }, base));
   });
 
@@ -674,12 +674,12 @@ function ejerciciosUnidad8() {
     const v = V(vk); if (!v) return;
     const base = { items: ["lex:" + v.id] };
     [["он", "m"], ["она́", "f"], ["они́", "pl"]].forEach(([pr, g], k) => {
-      out.push(Object.assign({ id: "U8-pas-" + v.id + "-" + g, grupo: v.id + "-" + g, tipo: "pasado", forma: "escribir", dificultad: 2, modulo: 2, pide: "Escribí el pasado.", grande: pr + " + " + v.ac,
+      out.push(Object.assign({ id: "U8-pas-" + v.id + "-" + g, grupo: v.id + "-" + g, tipo: "pasado", forma: "escribir", dificultad: 2, modulo: 2, pide: "Escribe el pasado.", grande: pr + " + " + v.ac,
         audio: cap(pr) + " " + v.p[g], audioManual: true, esperadas: [v.p[g], cap(pr) + " " + v.p[g]], idioma: "ru", explicacion: u8Regla(v, g) }, base));
     });
-    out.push(Object.assign({ id: "U8-pel-" + v.id, grupo: v.id + "-e", tipo: "pasado-elegir", forma: "elegir", dificultad: 1, modulo: 2, pide: "Elegí el pasado de «" + v.ac + "» para она́.", grande: "Она́ _____",
+    out.push(Object.assign({ id: "U8-pel-" + v.id, grupo: v.id + "-e", tipo: "pasado-elegir", forma: "elegir", dificultad: 1, modulo: 2, pide: "Elige el pasado de «" + v.ac + "» para она́.", grande: "Она́ _____",
       opciones: baraja(uniq([v.p.f, v.p.m, v.p.pl, v.pres ? v.pres[2] : v.p.n]), j), correcta: v.p.f, explicacion: u8Regla(v, "f") }, base));
-    if (j % 3 === 0) out.push(Object.assign({ id: "U8-pemp-" + v.id, grupo: v.id + "-p", tipo: "emparejar", forma: "emparejar", dificultad: 2, modulo: 2, pide: "Uní cada persona con su forma de «" + v.ac + "».",
+    if (j % 3 === 0) out.push(Object.assign({ id: "U8-pemp-" + v.id, grupo: v.id + "-p", tipo: "emparejar", forma: "emparejar", dificultad: 2, modulo: 2, pide: "Une cada persona con su forma de «" + v.ac + "».",
       pares: [["он", v.p.m], ["она́", v.p.f], ["оно́", v.p.n], ["они́", v.p.pl]], explicacion: v.ac + ": " + v.p.m + " · " + v.p.f + " · " + v.p.n + " · " + v.p.pl }, base));
   });
 
@@ -689,21 +689,21 @@ function ejerciciosUnidad8() {
     const s = U8_SUJ[[9, 10, 11, 12, 13, 14, 15, 16, 17, 6, 8][j % 11]], f = frase(s, vk, comp, j % 2 ? U8_TIEMPO[0] : null);
     const base = { grupo: "G-" + j, items: ["lex:" + v.id], oir: f.ru };
     const hueco = f.ru.replace(" " + f.f + (comp[0] ? " " : "."), " _____" + (comp[0] ? " " : "."));
-    out.push(Object.assign({ id: "U8-gen-" + j, tipo: "genero", forma: "elegir", dificultad: 1, modulo: 3, pide: "Completá: «" + f.es + "»", grande: hueco,
+    out.push(Object.assign({ id: "U8-gen-" + j, tipo: "genero", forma: "elegir", dificultad: 1, modulo: 3, pide: "Completa: «" + f.es + "»", grande: hueco,
       opciones: baraja(uniq([v.p.m, v.p.f, v.p.pl]), j), correcta: f.f, explicacion: u8Regla(v, f.g) + " " + f.ru }, base));
-    out.push(Object.assign({ id: "U8-genw-" + j, tipo: "genero-escribir", forma: "escribir", dificultad: 2, modulo: 3, pide: "Completá con «" + v.ac + "» en pasado.", grande: hueco, pista: f.es,
+    out.push(Object.assign({ id: "U8-genw-" + j, tipo: "genero-escribir", forma: "escribir", dificultad: 2, modulo: 3, pide: "Completa con «" + v.ac + "» en pasado.", grande: hueco, pista: f.es,
       audio: f.ru, audioManual: true, esperadas: [f.f], idioma: "ru", explicacion: u8Regla(v, f.g) + " " + f.ru }, base));
-    /* Detectá el error: el género que no va */
+    /* Detecta el error: el género que no va */
     const malG = f.g === "f" ? "m" : "f", malF = v.p[malG];
     if (j % 2 === 0) { const pals = sinP(f.ru).split(" "), k = pals.indexOf(f.f); if (k >= 0) { pals[k] = malF;
-      out.push(Object.assign({ id: "U8-det-" + j, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 3, pide: "Tocá la palabra que está mal.", palabras: pals, correcta: k,
+      out.push(Object.assign({ id: "U8-det-" + j, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 3, pide: "Toca la palabra que está mal.", palabras: pals, correcta: k,
         explicacion: "**" + malF + "** no va con " + s[0] + ": " + u8Regla(v, f.g) + " " + f.ru }, base)); } }
   });
   /* Ива́н рабо́тал → А́нна ___ */
   [["Ива́н", "А́нна", "рабо́тать"], ["Брат", "Сестра́", "чита́ть"], ["Па́па", "Ма́ма", "гото́вить"], ["Ди́ма", "Ма́ша", "гуля́ть"], ["А́нна", "Мы", "отдыха́ть"], ["Сестра́", "Де́ти", "игра́ть"]].forEach(([a, b, vk], j) => {
     const v = V(vk), A = U8_SUJ.find(x => x[0] === a), B = U8_SUJ.find(x => x[0] === b);
     const ru = b + " " + v.p[B[2]] + ".";
-    out.push({ id: "U8-gtr-" + j, tipo: "genero-escribir", forma: "escribir", dificultad: 2, modulo: 3, grupo: "GT-" + j, items: ["lex:" + v.id], oir: ru, pide: "Cambiá quién lo hace: " + b + ".",
+    out.push({ id: "U8-gtr-" + j, tipo: "genero-escribir", forma: "escribir", dificultad: 2, modulo: 3, grupo: "GT-" + j, items: ["lex:" + v.id], oir: ru, pide: "Cambia quién lo hace: " + b + ".",
       grande: a + " " + v.p[A[2]] + ".", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: u8Regla(v, B[2]) + " " + ru });
   });
 
@@ -711,15 +711,15 @@ function ejerciciosUnidad8() {
   U8_TIEMPO.forEach(([ru, es], j) => {
     out.push({ id: "U8-tsig-" + j, tipo: "cuando", forma: "elegir", dificultad: 1, modulo: 4, grupo: "T-" + j, items: [], oir: ru, pide: "¿Cómo se dice «" + es + "»?",
       opciones: baraja([ru].concat(baraja(U8_TIEMPO.filter(x => x[0] !== ru).map(x => x[0]), j).slice(0, 2)), j), correcta: ru, explicacion: ru + " — " + es });
-    out.push({ id: "U8-tw-" + j, tipo: "cuando", forma: "escribir", dificultad: 2, modulo: 4, grupo: "TW-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U8-tw-" + j, tipo: "cuando", forma: "escribir", dificultad: 2, modulo: 4, grupo: "TW-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
   });
   ["рабо́тать", "смотре́ть", "чита́ть", "гуля́ть", "гото́вить", "у́жинать", "покупа́ть", "слу́шать"].forEach((vk, j) => {
     const v = V(vk), comp = (U8_COMP[vk] || [["", ""]])[0], s = U8_SUJ[[0, 1, 4, 5, 6, 9, 10, 8][j % 8]], t = U8_TIEMPO[(j + 1) % U8_TIEMPO.length];
     const f = frase(s, vk, comp, t), base = { grupo: "C-" + j, items: ["lex:" + v.id], oir: f.ru };
-    out.push(Object.assign({ id: "U8-cesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 4, pide: "Escribí en ruso: «" + f.es + "»" + pista(s), audio: f.ru, audioManual: true,
+    out.push(Object.assign({ id: "U8-cesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 4, pide: "Escribe en ruso: «" + f.es + "»" + pista(s), audio: f.ru, audioManual: true,
       esperadas: f.esperadas, idioma: "ru", explicacion: u8Regla(v, f.g) + " " + f.ru }, base));
-    out.push(Object.assign({ id: "U8-cdic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 4, pide: "Escuchá y escribí la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: f.ru + " — " + f.es }, base));
+    out.push(Object.assign({ id: "U8-cdic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 4, pide: "Escucha y escribe la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: f.ru + " — " + f.es }, base));
   });
 
   /* ── Módulo 5: verbos de todos los días (frases) y ходи́л / е́здил ── */
@@ -729,11 +729,11 @@ function ejerciciosUnidad8() {
       const s = U8_SUJ[(j * 3 + c * 5) % 9], f = frase(s, vk, comp, c % 2 ? null : U8_TIEMPO[0]);
       const base = { grupo: "V-" + j + "-" + c, items: ["lex:" + v.id], oir: f.ru };
       const exp = u8Regla(v, f.g) + (v.tipo === "x" ? " En pasado, «fui» es ходи́л / е́здил: fui y volví." : "") + " " + f.ru + " — " + f.es;
-      out.push(Object.assign({ id: "U8-vesru-" + j + "-" + c, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, pide: "Escribí en ruso: «" + f.es + "»" + pista(s), audio: f.ru, audioManual: true,
+      out.push(Object.assign({ id: "U8-vesru-" + j + "-" + c, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, pide: "Escribe en ruso: «" + f.es + "»" + pista(s), audio: f.ru, audioManual: true,
         esperadas: f.esperadas, idioma: "ru", explicacion: exp }, base));
-      if (c === 0) out.push(Object.assign({ id: "U8-vdic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 5, pide: "Escuchá y escribí la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: exp }, base));
+      if (c === 0) out.push(Object.assign({ id: "U8-vdic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 5, pide: "Escucha y escribe la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: exp }, base));
       if (c === 0 && j % 2 === 0) { const w = sinP(f.ru).split(" "); let fi = baraja(w, j + 3); if (fi.join(" ") === w.join(" ")) fi = fi.slice(1).concat(fi[0]);
-        out.push(Object.assign({ id: "U8-vord-" + j, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 5, pide: "Ordená: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "), explicacion: exp }, base)); }
+        out.push(Object.assign({ id: "U8-vord-" + j, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 5, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "), explicacion: exp }, base)); }
     });
   });
 
@@ -743,38 +743,38 @@ function ejerciciosUnidad8() {
     const s = U8_SUJ[si], v = V("быть"), f = frase(s, "быть", comp, k % 3 === 0 ? U8_TIEMPO[0] : null);
     const pres = s[0] + " " + comp[0] + ".";
     const base = { grupo: "B-" + c + "-" + k, items: ["lex:" + v.id], oir: f.ru };
-    out.push(Object.assign({ id: "U8-byl-" + c + "-" + k, tipo: "byl", forma: "elegir", dificultad: 1, modulo: 6, pide: "Completá: «" + f.es + "»" + pista(s), grande: f.ru.replace(" " + f.f + " ", " _____ "),
+    out.push(Object.assign({ id: "U8-byl-" + c + "-" + k, tipo: "byl", forma: "elegir", dificultad: 1, modulo: 6, pide: "Completa: «" + f.es + "»" + pista(s), grande: f.ru.replace(" " + f.f + " ", " _____ "),
       opciones: ["был", "была́", "бы́ло", "бы́ли"], correcta: f.f, explicacion: u8Regla(v, f.g) + " " + f.ru }, base));
-    out.push(Object.assign({ id: "U8-bytr-" + c + "-" + k, tipo: "transformar", forma: "escribir", dificultad: 2, modulo: 6, pide: "Pasala al pasado" + pista(s) + ".", grande: pres, audio: f.ru, audioManual: true,
+    out.push(Object.assign({ id: "U8-bytr-" + c + "-" + k, tipo: "transformar", forma: "escribir", dificultad: 2, modulo: 6, pide: "Pásala al pasado" + pista(s) + ".", grande: pres, audio: f.ru, audioManual: true,
       esperadas: f.esperadas.map(x => x.replace(/^Вчера́ [а-яё́]+ /i, m => m)).concat(f.esperadas.map(x => x.replace(/^Вчера́ /, "").replace(/^([а-яё])/, m => m.toUpperCase()))), idioma: "ru",
       explicacion: "En presente быть no se dice; en pasado sí: " + f.ru }, base));
   }));
   [["Э́то бы́ло интере́сно.", "Fue interesante."], ["Вчера́ бы́ло хо́лодно.", "Ayer hizo frío."], ["Бы́ло хо́лодно, но интере́сно.", null], ["Э́то бы́ло вчера́.", "Fue ayer."]].forEach(([ru, es], j) => {
     if (!es) return;
-    out.push({ id: "U8-bylo-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 6, grupo: "BO-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U8-bylo-" + j, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 6, grupo: "BO-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: ru + " Para decir cómo fue algo, **бы́ло**." });
   });
   /* ¿Dónde estuviste? con emoji */
   [["🏦", "в ба́нке"], ["🍽️", "в рестора́не"], ["🏠", "до́ма"], ["💼", "на рабо́те"], ["🌳", "в па́рке"], ["🎬", "в кино́"]].forEach(([em, lugar], j) => {
     const q = j % 2 ? "Где ты была́ вчера́?" : "Где ты был вчера́?", f = j % 2 ? "была́" : "был";
     const ru = "Я " + f + " " + lugar + ".";
-    out.push({ id: "U8-bsc-" + j, tipo: "byl", forma: "escribir", dificultad: 2, modulo: 6, grupo: "BS-" + j, items: [], oir: ru, contexto: [{ p: "—", ru: q }], pide: "Mirá el dibujo y contestá.", grande: em,
+    out.push({ id: "U8-bsc-" + j, tipo: "byl", forma: "escribir", dificultad: 2, modulo: 6, grupo: "BS-" + j, items: [], oir: ru, contexto: [{ p: "—", ru: q }], pide: "Mira el dibujo y contesta.", grande: em,
       audio: q, audioManual: true, esperadas: [ru, "Вчера́ я " + f + " " + lugar + ".", cap(lugar) + "."], idioma: "ru", explicacion: "— " + q + " — " + ru + (j % 2 ? " (la pregunta es a una mujer: была́)." : "") });
   });
 
   /* ── Módulo 5: preguntas y respuestas (estaban en el 7 hasta el 11/10/2026) ── */
   [["Что ты де́лал вчера́?", "¿Qué hiciste ayer? (a un hombre)"], ["Что ты де́лала вчера́?", "¿Qué hiciste ayer? (a una mujer)"], ["Где ты был?", "¿Dónde estuviste? (a un hombre)"],
    ["Где ты была́?", "¿Dónde estuviste? (a una mujer)"], ["Что вы де́лали?", "¿Qué hicieron ustedes?"], ["Когда́ э́то бы́ло?", "¿Cuándo fue?"], ["Где вы бы́ли вчера́?", "¿Dónde estuvieron ayer?"]].forEach(([ru, es], j) => {
-    out.push({ id: "U8-preg-" + j, tipo: "pregunta", forma: "escribir", dificultad: 3, modulo: 5, grupo: "PQ-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true,
+    out.push({ id: "U8-preg-" + j, tipo: "pregunta", forma: "escribir", dificultad: 3, modulo: 5, grupo: "PQ-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true,
       esperadas: [ru], idioma: "ru", explicacion: ru });
   });
   [["🎬", "смотре́ть", "фильм"], ["💻", "рабо́тать", ""], ["📖", "чита́ть", "кни́гу"], ["🍳", "гото́вить", "у́жин"], ["🌳", "гуля́ть", "в па́рке"], ["😴", "спать", ""]].forEach(([em, vk, comp], j) => {
     const v = V(vk), fem = j % 2 === 1, q = "Что ты " + (fem ? "де́лала" : "де́лал") + " вчера́?", f = fem ? v.p.f : v.p.m;
     const ru = "Я " + f + (comp ? " " + comp : "") + ".";
     out.push({ id: "U8-resp-" + j, tipo: "respuesta", forma: "escribir", dificultad: 2, modulo: 5, grupo: "RS-" + j, items: ["lex:" + v.id], oir: ru, contexto: [{ p: "—", ru: q }],
-      pide: em + " Contestá en ruso.", audio: q, audioManual: true, esperadas: [ru, "Вчера́ я " + f + (comp ? " " + comp : "") + "."], idioma: "ru",
+      pide: em + " Contesta en ruso.", audio: q, audioManual: true, esperadas: [ru, "Вчера́ я " + f + (comp ? " " + comp : "") + "."], idioma: "ru",
       explicacion: "— " + q + " — " + ru + (fem ? " La pregunta es a una mujer: la respuesta va en femenino." : "") });
-    out.push({ id: "U8-pgen-" + j, tipo: "pregunta", forma: "elegir", dificultad: 1, modulo: 5, grupo: "PG-" + j, items: [], oir: q, pide: "Le preguntás " + (fem ? "a una amiga" : "a un amigo") + ": «¿Qué hiciste ayer?»",
+    out.push({ id: "U8-pgen-" + j, tipo: "pregunta", forma: "elegir", dificultad: 1, modulo: 5, grupo: "PG-" + j, items: [], oir: q, pide: "Le preguntas " + (fem ? "a una amiga" : "a un amigo") + ": «¿Qué hiciste ayer?»",
       opciones: ["Что ты де́лал вчера́?", "Что ты де́лала вчера́?"], correcta: q, explicacion: q + (fem ? " A una mujer: де́лала." : " A un hombre: де́лал.") });
   });
 
@@ -785,16 +785,16 @@ function ejerciciosUnidad8() {
   });
   [["Снача́ла я просну́лся.", "Пото́м я встал.", "Зате́м я поза́втракал.", "Наконе́ц я прочита́л газе́ту."], ["Снача́ла мы купи́ли хлеб.", "Пото́м мы пригото́вили у́жин.", "Зате́м мы поу́жинали.", "Наконе́ц мы посмотре́ли фильм."]].forEach((L, j) => {
     let fi = baraja(L, j + 4); if (fi.join("|") === L.join("|")) fi = fi.slice(1).concat(fi[0]);
-    out.push({ id: "U8-seq-" + j, tipo: "conector", forma: "ordenar", dificultad: 2, modulo: 8, grupo: "SQ-" + j, items: [], pide: "Ordená el relato.", fichas: fi, sep: "\n", esperada: L.join("\n"), audio: L.join(" "),
+    out.push({ id: "U8-seq-" + j, tipo: "conector", forma: "ordenar", dificultad: 2, modulo: 8, grupo: "SQ-" + j, items: [], pide: "Ordena el relato.", fichas: fi, sep: "\n", esperada: L.join("\n"), audio: L.join(" "),
       explicacion: "снача́ла → пото́м → зате́м → наконе́ц; una cosa después de otra, cada una terminada: verbos de resultado. " + L.join(" "), regla: "u8-orden-perf" });
   });
   [["Почему́ ты был до́ма?", "Потому́ что бы́ло хо́лодно.", "Porque hizo frío."], ["Почему́ ты не рабо́тал?", "Потому́ что я был в Москве́.", "Porque estuve en Moscú."],
    ["Почему́ вы бы́ли в це́нтре?", "Потому́ что мы ходи́ли в кино́.", "Porque fuimos al cine."], ["Почему́ ты не спал?", "Потому́ что я чита́л кни́гу.", "Porque leí un libro."]].forEach(([q, r, es], j) => {
-    out.push({ id: "U8-pq-" + j, tipo: "potomu", forma: "escribir", dificultad: 3, modulo: 8, grupo: "PQR-" + j, items: [], oir: r, contexto: [{ p: "—", ru: q }], pide: "Contestá: «" + es + "»", audio: q, audioManual: true,
+    out.push({ id: "U8-pq-" + j, tipo: "potomu", forma: "escribir", dificultad: 3, modulo: 8, grupo: "PQR-" + j, items: [], oir: r, contexto: [{ p: "—", ru: q }], pide: "Contesta: «" + es + "»", audio: q, audioManual: true,
       esperadas: [r], idioma: "ru", explicacion: "— " + q + " — " + r + " Почему́? → Потому́ что…" });
   });
   [["Бы́ло хо́лодно, но интере́сно.", "Hizo frío, pero fue interesante."], ["Я рабо́тал, но ве́чером гуля́л.", "Trabajé, pero a la noche paseé."], ["Снача́ла я прочита́л газе́ту, пото́м посмотре́л фильм.", "Primero leí el diario, después miré una película."]].forEach(([ru, es], j) => {
-    out.push({ id: "U8-coesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, grupo: "CE-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "» (sos hombre)", audio: ru, audioManual: true,
+    out.push({ id: "U8-coesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, grupo: "CE-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "» (eres hombre)", audio: ru, audioManual: true,
       esperadas: [ru, ru.replace(/(рабо́тал|гуля́л|прочита́л|посмотре́л)/g, "$1а")], idioma: "ru", explicacion: ru });
   });
 
@@ -804,11 +804,11 @@ function ejerciciosUnidad8() {
     const ru1 = s[0] + " " + vb.p[s[2]] + " " + prep + ".", ru2 = s[0] + " " + ve.p[s[2]] + " " + acc + ".";
     const es1 = cap(((s[1] ? s[1] + " " : "") + vb.pret[s[3]] + " en " + es).trim()) + ".", es2 = cap(((s[1] ? s[1] + " " : "") + ve.pret[s[3]] + " a " + es).trim()) + ".";
     const base = { grupo: "EX-" + j, items: [], oir: ru1 };
-    out.push(Object.assign({ id: "U8-ex1-" + j, tipo: "experiencia", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribí en ruso: «" + es1 + "»" + pista(s), audio: ru1, audioManual: true,
+    out.push(Object.assign({ id: "U8-ex1-" + j, tipo: "experiencia", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribe en ruso: «" + es1 + "»" + pista(s), audio: ru1, audioManual: true,
       esperadas: [ru1].concat(s[0] === "Я" ? [ru1.replace(" " + vb.p[s[2]] + " ", " " + vb.p[s[2] === "m" ? "f" : "m"] + " ")] : []), idioma: "ru", explicacion: "Dónde estuviste: prepositivo. " + ru1 }, base, { grupo: "EX1-" + j }));
-    out.push(Object.assign({ id: "U8-ex2-" + j, tipo: "experiencia", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribí en ruso: «" + es2 + "»" + pista(s), audio: ru2, audioManual: true,
+    out.push(Object.assign({ id: "U8-ex2-" + j, tipo: "experiencia", forma: "escribir", dificultad: 3, modulo: 9, pide: "Escribe en ruso: «" + es2 + "»" + pista(s), audio: ru2, audioManual: true,
       esperadas: [ru2].concat(s[0] === "Я" ? [ru2.replace(" " + ve.p[s[2]] + " ", " " + ve.p[s[2] === "m" ? "f" : "m"] + " ")] : []), idioma: "ru", explicacion: "Adónde fuiste: acusativo, con е́здил. " + ru2 }, base, { grupo: "EX2-" + j }));
-    out.push(Object.assign({ id: "U8-ex3-" + j, tipo: "experiencia", forma: "elegir", dificultad: 2, modulo: 9, pide: "Completá: «" + es2 + "»", grande: s[0] + " " + ve.p[s[2]] + " _____.",
+    out.push(Object.assign({ id: "U8-ex3-" + j, tipo: "experiencia", forma: "elegir", dificultad: 2, modulo: 9, pide: "Completa: «" + es2 + "»", grande: s[0] + " " + ve.p[s[2]] + " _____.",
       opciones: baraja([acc, prep], j), correcta: acc, explicacion: "Con е́здил (adónde) va el acusativo: " + ru2 }, base));
   });
 
@@ -823,15 +823,15 @@ function ejerciciosUnidad8() {
     const esAf = "Antes " + v.imp[0] + " " + (vk === "ложи́ться" ? esA : esA) + ".";
     const esHf = "Ahora " + ({ "жить": "vivo", "рабо́тать": "trabajo", "встава́ть": "me levanto", "ложи́ться": "me acuesto", "чита́ть": "leo" }[vk]) + " " + esH + ".";
     const base = { grupo: "AH-" + j, items: ["lex:" + v.id], oir: ruA };
-    out.push(Object.assign({ id: "U8-ah1-" + j, tipo: "antes-ahora", forma: "escribir", dificultad: 3, modulo: 10, pide: "Escribí en ruso: «" + esAf + "»" + pista(s), audio: ruA, audioManual: true,
+    out.push(Object.assign({ id: "U8-ah1-" + j, tipo: "antes-ahora", forma: "escribir", dificultad: 3, modulo: 10, pide: "Escribe en ruso: «" + esAf + "»" + pista(s), audio: ruA, audioManual: true,
       esperadas: [ruA, ruA.replace(" " + v.p[g] + " ", " " + v.p[g === "m" ? "f" : "m"] + " ")], idioma: "ru", explicacion: "ра́ньше → pasado: " + u8Regla(v, g) + " " + ruA }, base));
-    out.push(Object.assign({ id: "U8-ah2-" + j, tipo: "antes-ahora", forma: "escribir", dificultad: 3, modulo: 10, pide: "Escribí en ruso: «" + esHf + "»", audio: ruH, audioManual: true,
+    out.push(Object.assign({ id: "U8-ah2-" + j, tipo: "antes-ahora", forma: "escribir", dificultad: 3, modulo: 10, pide: "Escribe en ruso: «" + esHf + "»", audio: ruH, audioManual: true,
       esperadas: [ruH, ruH.replace("Тепе́рь", "Сейча́с")], idioma: "ru", explicacion: "тепе́рь / сейча́с → presente: " + ruH }, base));
-    out.push(Object.assign({ id: "U8-ah3-" + j, tipo: "antes-ahora", forma: "elegir", dificultad: 2, modulo: 10, pide: "Completá: «" + esAf + "»", grande: "Ра́ньше я _____ " + antes + ".",
+    out.push(Object.assign({ id: "U8-ah3-" + j, tipo: "antes-ahora", forma: "elegir", dificultad: 2, modulo: 10, pide: "Completa: «" + esAf + "»", grande: "Ра́ньше я _____ " + antes + ".",
       opciones: baraja([v.p[g], pres], j), correcta: v.p[g], explicacion: "Con ра́ньше va el pasado: " + ruA }, base));
   });
-  [["Ра́ньше я не говори́л по-ру́сски.", "Antes no hablaba ruso. (sos hombre)"], ["Тогда́ я жила́ в Москве́.", "En ese entonces vivía en Moscú. (sos mujer)"], ["Ра́ньше мы рабо́тали в о́фисе.", "Antes trabajábamos en una oficina."]].forEach(([ru, es], j) =>
-    out.push({ id: "U8-ah4-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "AH4-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
+  [["Ра́ньше я не говори́л по-ру́сски.", "Antes no hablaba ruso. (eres hombre)"], ["Тогда́ я жила́ в Москве́.", "En ese entonces vivía en Moscú. (eres mujer)"], ["Ра́ньше мы рабо́тали в о́фисе.", "Antes trabajábamos en una oficina."]].forEach(([ru, es], j) =>
+    out.push({ id: "U8-ah4-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "AH4-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru }));
 
   /* ── Módulo 11: lecturas ── */
   U8_LECTURAS.forEach((L, j) => {
@@ -853,7 +853,7 @@ function ejerciciosUnidad8() {
     const base = { grupo: e.id, items: ["lex:" + e.id], oir: e.ru };
     if (dis.length >= 2) out.push(Object.assign({ id: "U8-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Qué significa?", grande: e.acento, audio: e.ru,
       opciones: baraja([es].concat(dis), i), correcta: es, explicacion: e.acento + " — " + es }, base));
-    out.push(Object.assign({ id: "U8-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
+    out.push(Object.assign({ id: "U8-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribe en ruso: «" + es + "»", audio: e.ru, audioManual: true,
       pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.length + " letras.", esperadas: [e.acento], idioma: "ru", explicacion: e.acento + " — " + es }, base));
   });
 
@@ -878,9 +878,9 @@ function ejerciciosUnidad8() {
    ["вчера́", "Ayer", "смотре́ть", "фильм", "miré una película"], ["ра́ньше", "Antes", "изуча́ть", "англи́йский", "estudiaba inglés"], ["вчера́", "Ayer", "гуля́ть", "в па́рке", "paseé por el parque"]].forEach(([t, T, vk, comp, es], j) => {
     const v = V(vk), ok = cap(t) + " я " + v.p.m + " " + comp + ".", mal = cap(t) + " я " + v.pres[0] + " " + comp + ".";
     push({ id: "U8-par-pis-" + j, tipo: "par", forma: "elegir", dificultad: 1, modulo: 1, regla: "u8-pistas", grupo: "PP-" + j, items: ["lex:" + v.id], oir: ok,
-      pide: "«" + T + " " + es + "» (sos hombre). ¿Cuál decís?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " Con " + t + " va el pasado, para «" + es.split(" ")[0] + "» y para cualquier otro pasado." });
+      pide: "«" + T + " " + es + "» (eres hombre). ¿Cuál dices?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " Con " + t + " va el pasado, para «" + es.split(" ")[0] + "» y para cualquier otro pasado." });
     if (t === "ра́ньше") push({ id: "U8-pq-pis-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 1, regla: "u8-pistas", grupo: "PP-" + j, items: ["lex:" + v.id], oir: ok,
-      pide: "¿Cómo sabés que se entiende «" + es.split(" ")[0] + "» y no un pretérito?", grande: ok, audio: ok, audioManual: true,
+      pide: "¿Cómo sabes que se entiende «" + es.split(" ")[0] + "» y no un pretérito?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Por ра́ньше: habla de lo de otra época", "Por la terminación **-л**"].map(x => x.replace(/\*\*/g, "")), correcta: "Por ра́ньше: habla de lo de otra época",
       explicacion: ok + " La terminación es la misma para los dos pasados; lo que decide es ра́ньше." });
   });
@@ -929,7 +929,7 @@ function ejerciciosUnidad8() {
     const v = V(vk), base = (iP === 3 ? "Мы " : "Я ") + v.pres[iP] + " " + comp + ".", p1 = iP === 3 ? ["Мы " + v.p.pl + " " + comp + "."] : ["Я " + v.p.m + " " + comp + ".", "Я " + v.p.f + " " + comp + "."];
     const s2 = j % 2 ? ["А́нна", "f"] : ["Ива́н", "m"], p2 = s2[0] + " " + v.p[s2[1]] + " " + comp + ".";
     push({ id: "U8-cad-pas-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 2, regla: /ся$/.test(vk) ? "u8-forma-sya" : "u8-forma-l", grupo: "CP-" + j, items: ["lex:" + v.id], oir: p2,
-      pide: "Cambiá la frase paso a paso.", base, pasos: [{ pide: "Pasala al pasado.", esperadas: p1 }, { pide: "Ahora decilo de " + (s2[1] === "f" ? "Ana" : "Iván") + " (" + s2[0] + ").", esperadas: [p2] }],
+      pide: "Cambia la frase paso a paso.", base, pasos: [{ pide: "Pásala al pasado.", esperadas: p1 }, { pide: "Ahora dilo de " + (s2[1] === "f" ? "Ana" : "Iván") + " (" + s2[0] + ").", esperadas: [p2] }],
       explicacion: base + " → " + p1[0] + " → " + p2 + " " + fin[s2[1]] + " para " + (s2[1] === "f" ? "una mujer." : "un hombre.") });
   });
 
@@ -939,11 +939,11 @@ function ejerciciosUnidad8() {
     push({ id: "U8-nat-yo-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 3, regla: "u8-genero-quien", grupo: "YO-" + j, items: ["lex:" + v.id], oir: ok,
       pide: "Habla " + (g === "f" ? "una mujer" : "un hombre") + ". ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " " + (g === "f" ? "Una mujer: " : "Un hombre: ") + fin[g] + "." });
     push({ id: "U8-oido-yo-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 3, regla: "u8-genero-quien", grupo: "YOo-" + j, items: ["lex:" + v.id], oir: "Я " + v.p[j % 3 ? "f" : "m"] + " вчера́.",
-      pide: "Escuchá: ¿quién habla?", audio: "Я " + v.p[j % 3 ? "f" : "m"] + " вчера́.", opciones: ["Un hombre", "Una mujer"], correcta: j % 3 ? "Una mujer" : "Un hombre",
+      pide: "Escucha: ¿quién habla?", audio: "Я " + v.p[j % 3 ? "f" : "m"] + " вчера́.", opciones: ["Un hombre", "Una mujer"], correcta: j % 3 ? "Una mujer" : "Un hombre",
       explicacion: "Sonó **" + v.p[j % 3 ? "f" : "m"] + "**: " + (j % 3 ? "con **-ла**, habla una mujer." : "con **-л**, habla un hombre.") });
     const t = j % 2 ? ["Ты", "a una amiga", "f"] : ["Ты", "a un amigo", "m"], q = "Ты " + v.p[t[2]] + " вчера́?";
     push({ id: "U8-nat-ty-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u8-genero-quien", grupo: "TY-" + j, items: ["lex:" + v.id], oir: q,
-      pide: "Le preguntás " + t[1] + ". ¿Cuál suena natural?", opciones: baraja([q, "Ты " + v.p[t[2] === "f" ? "m" : "f"] + " вчера́?"], j + 1), correcta: q, explicacion: q + " " + (t[2] === "f" ? "A una mujer: " : "A un hombre: ") + fin[t[2]] + "." });
+      pide: "Le preguntas " + t[1] + ". ¿Cuál suena natural?", opciones: baraja([q, "Ты " + v.p[t[2] === "f" ? "m" : "f"] + " вчера́?"], j + 1), correcta: q, explicacion: q + " " + (t[2] === "f" ? "A una mujer: " : "A un hombre: ") + fin[t[2]] + "." });
   });
   [["Па́па", "m", "гото́вить", "у́жин"], ["Ма́ма", "f", "рабо́тать", "до́ма"], ["Ди́ма", "m", "чита́ть", "кни́гу"], ["Ма́ша", "f", "гуля́ть", "в па́рке"], ["Брат", "m", "смотре́ть", "фильм"], ["Сестра́", "f", "слу́шать", "му́зыку"],
    ["Де́ти", "pl", "игра́ть", "в па́рке"], ["Мы", "pl", "отдыха́ть", "до́ма"], ["Вы", "pl", "рабо́тать", "вчера́"], ["Они́", "pl", "чита́ть", "газе́ту"]].forEach(([s, g, vk, comp], j) => {
@@ -958,7 +958,7 @@ function ejerciciosUnidad8() {
   });
   ["рабо́тать", "чита́ть", "гуля́ть", "гото́вить", "отдыха́ть", "слу́шать"].forEach((vk, j) => {
     const v = V(vk), pl = j % 2 === 0, ru = (pl ? "Они́ " + v.p.pl : "Он " + v.p.m) + ".";
-    push({ id: "U8-oido-pl-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 3, regla: "u8-plural", grupo: "PLo-" + j, items: ["lex:" + v.id], oir: ru, pide: "Escuchá: ¿uno o varios?", audio: ru,
+    push({ id: "U8-oido-pl-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 3, regla: "u8-plural", grupo: "PLo-" + j, items: ["lex:" + v.id], oir: ru, pide: "Escucha: ¿uno o varios?", audio: ru,
       opciones: ["Uno", "Varios"], correcta: pl ? "Varios" : "Uno", explicacion: "Sonó **" + (pl ? v.p.pl : v.p.m) + "**: " + (pl ? "con **-ли**, varios." : "con **-л**, uno.") });
   });
   [["Э́то", "бы́ло", "интере́сно"], ["Вчера́", "бы́ло", "хо́лодно"], ["Письмо́", "бы́ло", "на столе́"]].forEach(([a, f, b], j) => {
@@ -969,7 +969,7 @@ function ejerciciosUnidad8() {
   /* Desarmar */
   [["Вчера́", "А́нна", "чита́ла", "кни́гу"], ["Ве́чером", "па́па", "гото́вил", "у́жин"], ["Вчера́", "мы", "смотре́ли", "фильм"], ["У́тром", "сестра́", "слу́шала", "му́зыку"]].forEach((pal, j) => {
     push({ id: "U8-desarm-q-" + j, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo: 3, regla: "u8-genero-quien", grupo: "DQ-" + j, items: [], oir: pal.join(" ") + ".", audio: pal.join(" ") + ".", audioManual: true,
-      pide: "Respondé tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Quién lo hizo?", correcta: 1 }, { pide: "¿Qué hizo? (el verbo)", correcta: 2 }, { pide: "¿Cuándo?", correcta: 0 }],
+      pide: "Responde tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Quién lo hizo?", correcta: 1 }, { pide: "¿Qué hizo? (el verbo)", correcta: 2 }, { pide: "¿Cuándo?", correcta: 0 }],
       explicacion: pal.join(" ") + ". El verbo concuerda con quién: " + pal[1] + " → " + pal[2] + "." });
   });
 
@@ -1006,7 +1006,7 @@ function ejerciciosUnidad8() {
   });
   [["неда́вно", "давно́", "Hace poco"], ["давно́", "неда́вно", "Hace mucho"], ["позавчера́", "вчера́", "Anteayer"], ["вчера́", "позавчера́", "Ayer"]].forEach(([ok, otro, es], j) => {
     push({ id: "U8-par-cu-" + j, tipo: "par", forma: "elegir", dificultad: 1, modulo: 4, regla: "u8-cuando", grupo: "CU-" + j, items: ["lex:" + lex(ok).id], oir: cap(ok) + " я был в Москве́.",
-      pide: "«" + es + " estuve en Moscú». ¿Cuál decís?", opciones: baraja([cap(ok) + " я был в Москве́.", cap(otro) + " я был в Москве́."], j), correcta: cap(ok) + " я был в Москве́.", explicacion: ok + " — " + es.toLowerCase() + "." });
+      pide: "«" + es + " estuve en Moscú». ¿Cuál dices?", opciones: baraja([cap(ok) + " я был в Москве́.", cap(otro) + " я был в Москве́."], j), correcta: cap(ok) + " я был в Москве́.", explicacion: ok + " — " + es.toLowerCase() + "." });
   });
 
   /* ── Módulo 5: ¿qué hiciste? y ходи́л / е́здил ── */
@@ -1026,18 +1026,18 @@ function ejerciciosUnidad8() {
     const v = V(vk), ip = j % 2 ? 3 : 0, base = (ip ? "Мы " : "Я ") + v.pres[ip] + " " + comp + ".", p1 = ip ? ["Вчера́ мы " + v.p.pl + " " + comp + ".", "Мы " + v.p.pl + " " + comp + " вчера́."] : ["Вчера́ я " + v.p.m + " " + comp + ".", "Вчера́ я " + v.p.f + " " + comp + ".", "Я " + v.p.m + " " + comp + " вчера́.", "Я " + v.p.f + " " + comp + " вчера́."];
     const q = ip ? "Что вы де́лали вчера́?" : "Что ты де́лал вчера́?";
     push({ id: "U8-cad-dia-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 5, regla: "u8-dia", grupo: "CD-" + j, items: ["lex:" + v.id], oir: q,
-      pide: "Cambiá la frase paso a paso.", base, pasos: [{ pide: "Pasala a ayer (вчера́).", esperadas: p1 }, { pide: "Ahora preguntá qué " + (ip ? "hicieron ustedes" : "hizo tu amigo") + " ayer.", esperadas: [q] }],
+      pide: "Cambia la frase paso a paso.", base, pasos: [{ pide: "Pásala a ayer (вчера́).", esperadas: p1 }, { pide: "Ahora pregunta qué " + (ip ? "hicieron ustedes" : "hizo tu amigo") + " ayer.", esperadas: [q] }],
       explicacion: base + " → " + p1[0] + " → " + q });
   });
   [["Что ты де́лала вчера́?", "Что ты де́лал вчера́?", "a una amiga"], ["Где ты был?", "Где ты была́?", "a un amigo"], ["Где ты была́ вчера́?", "Где ты был вчера́?", "a una amiga"], ["Что вы де́лали?", "Что вы де́лал?", "a varios amigos"]].forEach(([ok, mal, a], j) => {
-    push({ id: "U8-nat-pg-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 5, regla: "u8-preguntas", grupo: "PGn-" + j, items: [], oir: ok, pide: "Le preguntás " + a + ". ¿Cuál suena natural?",
-      opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " La pregunta concuerda con la persona a la que le hablás." });
+    push({ id: "U8-nat-pg-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 5, regla: "u8-preguntas", grupo: "PGn-" + j, items: [], oir: ok, pide: "Le preguntas " + a + ". ¿Cuál suena natural?",
+      opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " La pregunta concuerda con la persona a la que le hablas." });
   });
 
   /* ── Módulo 6: был ── */
   [["m", "Я", "до́ма"], ["f", "Она́", "на рабо́те"], ["pl", "Мы", "в Москве́"], ["f", "Я", "в кино́"], ["m", "Брат", "в Мадри́де"], ["pl", "Они́", "в па́рке"]].forEach(([g, s, l], j) => {
     const b = V("быть"), ok = "Вчера́ " + s.toLowerCase() + " " + b.p[g] + " " + l + ".";
-    push({ id: "U8-oido-byl-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 6, regla: "u8-byl-acento", grupo: "BYo-" + j, items: [], oir: ok, pide: "Escuchá: ¿qué forma sonó?", audio: ok,
+    push({ id: "U8-oido-byl-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 6, regla: "u8-byl-acento", grupo: "BYo-" + j, items: [], oir: ok, pide: "Escucha: ¿qué forma sonó?", audio: ok,
       opciones: g === "pl" ? ["бы́ли", "была́"] : ["был", "была́"], correcta: b.p[g], explicacion: ok + " " + (g === "f" ? "была́, con el acento al final." : g === "pl" ? "бы́ли, con el acento en la raíz." : "был: un hombre.") });
     const pres = s + " " + l + ".", sinB = "Вчера́ " + s.toLowerCase() + " " + l + ".";
     push({ id: "U8-diag-byl-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 6, regla: "u8-byl-acento", grupo: "BYd-" + j, items: [], oir: ok, pide: "La frase tiene un error. ¿Qué falla?", grande: sinB,
@@ -1065,7 +1065,7 @@ function ejerciciosUnidad8() {
   });
   [["Я", "в Москве́"], ["Мы", "там"], ["Он", "до́ма"], ["Они́", "в па́рке"]].forEach(([s, l], j) => {
     const ok = s + " не́ " + (s === "Мы" || s === "Они́" ? "были" : "был") + " " + l + ".";
-    push({ id: "U8-oido-nb-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 6, regla: "u8-ne-byl", grupo: "NB-" + j, items: [], oir: ok, pide: "Escuchá: ¿estuvo o no estuvo?", audio: ok,
+    push({ id: "U8-oido-nb-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 6, regla: "u8-ne-byl", grupo: "NB-" + j, items: [], oir: ok, pide: "Escucha: ¿estuvo o no estuvo?", audio: ok,
       opciones: ["Estuvo", "No estuvo"], correcta: "No estuvo", explicacion: ok + " Con не, el acento pasa a не́: suena como una sola palabra." });
   });
 
@@ -1097,13 +1097,13 @@ function ejerciciosUnidad8() {
   };
   const conVchera = arr => arr.concat(arr.filter(x => /^Вчера́ я /.test(x)).map(x => "Я " + x.slice(9, -1) + " вчера́."));
   ASP.forEach((a, j) => {
-    const g = j % 3 === 1 ? "f" : "m", F = frasesAsp(a, g), yo = g === "f" ? " (sos mujer)" : "";
+    const g = j % 3 === 1 ? "f" : "m", F = frasesAsp(a, g), yo = g === "f" ? " (eres mujer)" : "";
     const base = { items: ["lex:" + F.I.id, "lex:" + F.P.id] };
     /* par: resultado / proceso */
-    push(Object.assign({ id: "U8-par-asp-r-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: "u8-aspecto-idea", grupo: "AS-" + j, oir: F.res, pide: "«" + cap(a[3]) + "»" + yo + ". ¿Cuál decís?",
+    push(Object.assign({ id: "U8-par-asp-r-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: "u8-aspecto-idea", grupo: "AS-" + j, oir: F.res, pide: "«" + cap(a[3]) + "»" + yo + ". ¿Cuál dices?",
       opciones: baraja([F.res, F.resMal], j), correcta: F.res, explicacion: F.res + " " + (F.momento ? "Pasó una vez: resultado." : F.comida ? "уже́: está hecho, resultado." : "Está terminado: resultado.") }, base));
     push(Object.assign({ id: "U8-par-asp-p-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: F.momento || a[5] === "ча́сто" || a[5] === "ка́ждый день" || a[5] === "всегда́" ? "u8-aspecto-pistas" : "u8-aspecto-idea", grupo: "AP-" + j, oir: F.pro,
-      pide: "«" + cap(a[4]) + "»" + yo + ". ¿Cuál decís?", opciones: baraja([F.pro, F.proMal], j + 1), correcta: F.pro,
+      pide: "«" + cap(a[4]) + "»" + yo + ". ¿Cuál dices?", opciones: baraja([F.pro, F.proMal], j + 1), correcta: F.pro,
       explicacion: F.pro + " " + (F.momento ? "ра́ньше: se repetía, proceso." : a[5] === "ча́сто" || a[5] === "ка́ждый день" || a[5] === "всегда́" ? a[5] + ": se repetía, proceso." : a[5] + ": cuánto duró, proceso.") }, base));
     /* natural con la pista */
     push(Object.assign({ id: "U8-nat-asp-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u8-aspecto-pistas", grupo: "AN-" + j, oir: F.pro, pide: "¿Cuál suena natural?",
@@ -1119,12 +1119,12 @@ function ejerciciosUnidad8() {
     const otrosR = baraja(ASP.filter(x => x !== a).map(x => x[1]), j).slice(0, 2);
     push(Object.assign({ id: "U8-parj-e-" + j, tipo: "pareja", forma: "elegir", dificultad: 1, modulo: 7, regla: "u8-aspecto-pares", grupo: "PJ-" + j, oir: a[1], pide: "¿Cuál es la pareja de resultado de «" + a[0] + "»?",
       opciones: baraja([a[1]].concat(otrosR), j), correcta: a[1], explicacion: a[0] + " → " + a[1] + "." }, base));
-    push(Object.assign({ id: "U8-parj-w-" + j, tipo: "pareja", forma: "escribir", dificultad: 2, modulo: 7, regla: "u8-aspecto-pares", grupo: "PJw-" + j, oir: a[1], pide: "Escribí la pareja de resultado de «" + a[0] + "».",
+    push(Object.assign({ id: "U8-parj-w-" + j, tipo: "pareja", forma: "escribir", dificultad: 2, modulo: 7, regla: "u8-aspecto-pares", grupo: "PJw-" + j, oir: a[1], pide: "Escribe la pareja de resultado de «" + a[0] + "».",
       audio: a[1], audioManual: true, esperadas: [a[1]], idioma: "ru", explicacion: a[0] + " → " + a[1] + "." }, base));
     /* escribir con el verbo que va */
-    push(Object.assign({ id: "U8-asp-w-r-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 7, regla: "u8-aspecto-idea", grupo: "AW-" + j, oir: F.res, pide: "Escribí en ruso: «" + cap(a[3]) + "»" + yo + ".",
+    push(Object.assign({ id: "U8-asp-w-r-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 7, regla: "u8-aspecto-idea", grupo: "AW-" + j, oir: F.res, pide: "Escribe en ruso: «" + cap(a[3]) + "»" + yo + ".",
       audio: F.res, audioManual: true, esperadas: conVchera([F.res].concat(g === "m" ? [F.res.replace(" " + F.P.p.m, " " + F.P.p.f)] : [F.res.replace(" " + F.P.p.f, " " + F.P.p.m)])), idioma: "ru", explicacion: F.res }, base));
-    if (j % 2 === 0) push(Object.assign({ id: "U8-asp-w-p-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 7, regla: "u8-aspecto-pistas", grupo: "AWp-" + j, oir: F.pro, pide: "Escribí en ruso: «" + cap(a[4]) + "»" + yo + ".",
+    if (j % 2 === 0) push(Object.assign({ id: "U8-asp-w-p-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 7, regla: "u8-aspecto-pistas", grupo: "AWp-" + j, oir: F.pro, pide: "Escribe en ruso: «" + cap(a[4]) + "»" + yo + ".",
       audio: F.pro, audioManual: true, esperadas: [F.pro].concat(g === "m" ? [F.pro.replace(" " + F.I.p.m, " " + F.I.p.f)] : [F.pro.replace(" " + F.I.p.f, " " + F.I.p.m)]), idioma: "ru", explicacion: F.pro + " " + a[5] + ": proceso." }, base));
     /* diagnóstico */
     if (!F.momento) push(Object.assign({ id: "U8-diag-asp-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 7, regla: "u8-aspecto-pistas", grupo: "AD-" + j, oir: F.pro, pide: "La frase tiene un error. ¿Qué falla?",
@@ -1132,7 +1132,7 @@ function ejerciciosUnidad8() {
     /* oído: ¿terminó? */
     if (!F.comida && !F.momento) {
       const tr = j % 2 === 0, ru = "Он " + (tr ? F.P.p.m : F.I.p.m) + (a[2] ? " " + a[2] : "") + ".";
-      push(Object.assign({ id: "U8-oido-asp-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 7, regla: "u8-aspecto-idea", grupo: "AO-" + j, oir: ru, pide: "Escuchá: ¿qué dice?", audio: ru,
+      push(Object.assign({ id: "U8-oido-asp-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 7, regla: "u8-aspecto-idea", grupo: "AO-" + j, oir: ru, pide: "Escucha: ¿qué dice?", audio: ru,
         opciones: ["Que lo terminó", "Qué estuvo haciendo, sin decir si terminó"], correcta: tr ? "Que lo terminó" : "Qué estuvo haciendo, sin decir si terminó", explicacion: "Sonó **" + (tr ? F.P.p.m : F.I.p.m) + "**: " + (tr ? "resultado." : "proceso.") }, base));
     }
   });
@@ -1140,15 +1140,15 @@ function ejerciciosUnidad8() {
   ASP.slice(0, 6).forEach((a, j) => {
     const F = frasesAsp(a, "m"), o = a[2] ? " " + a[2] : "", base0 = "Я " + F.I.pres[0] + o + ".";
     push({ id: "U8-cad-asp-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 7, regla: "u8-aspecto-idea", grupo: "AC-" + j, items: ["lex:" + F.I.id, "lex:" + F.P.id], oir: "Вчера́ я " + F.P.p.m + o + ".",
-      pide: "Cambiá la frase paso a paso.", base: base0,
-      pasos: [{ pide: "Pasala al pasado: ayer, como actividad (вчера́).", esperadas: ["Вчера́ я " + F.I.p.m + o + ".", "Вчера́ я " + F.I.p.f + o + ".", "Я " + F.I.p.m + o + " вчера́.", "Я " + F.I.p.f + o + " вчера́."] },
-              { pide: "Ahora decí que lo terminaste.", esperadas: ["Вчера́ я " + F.P.p.m + o + ".", "Вчера́ я " + F.P.p.f + o + ".", "Я " + F.P.p.m + o + " вчера́.", "Я " + F.P.p.f + o + " вчера́."] }],
+      pide: "Cambia la frase paso a paso.", base: base0,
+      pasos: [{ pide: "Pásala al pasado: ayer, como actividad (вчера́).", esperadas: ["Вчера́ я " + F.I.p.m + o + ".", "Вчера́ я " + F.I.p.f + o + ".", "Я " + F.I.p.m + o + " вчера́.", "Я " + F.I.p.f + o + " вчера́."] },
+              { pide: "Ahora di que lo terminaste.", esperadas: ["Вчера́ я " + F.P.p.m + o + ".", "Вчера́ я " + F.P.p.f + o + ".", "Я " + F.P.p.m + o + " вчера́.", "Я " + F.P.p.f + o + " вчера́."] }],
       explicacion: base0 + " → Вчера́ я " + F.I.p.m + o + ". → Вчера́ я " + F.P.p.m + o + ". " + a[0] + " → " + a[1] + ": del proceso al resultado." });
   });
   /* Desarmar */
   [["Вчера́", "я", "прочита́л", "кни́гу"], ["Вчера́", "она́", "написа́ла", "письмо́"], ["Ве́чером", "мы", "посмотре́ли", "фильм"], ["Вчера́", "па́па", "пригото́вил", "у́жин"]].forEach((pal, j) => {
     push({ id: "U8-desarm-asp-" + j, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo: 7, regla: "u8-aspecto-idea", grupo: "DA-" + j, items: [], oir: pal.join(" ") + ".", audio: pal.join(" ") + ".", audioManual: true,
-      pide: "Respondé tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Qué palabra dice que la acción terminó?", correcta: 2 }, { pide: "¿Qué terminó? (el objeto)", correcta: 3 }, { pide: "¿Cuándo?", correcta: 0 }],
+      pide: "Responde tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Qué palabra dice que la acción terminó?", correcta: 2 }, { pide: "¿Qué terminó? (el objeto)", correcta: 3 }, { pide: "¿Cuándo?", correcta: 0 }],
       explicacion: pal.join(" ") + ". " + pal[2] + " es de resultado: la acción llegó al final." });
   });
 
@@ -1160,11 +1160,11 @@ function ejerciciosUnidad8() {
     const obj = { "пригото́вить": " у́жин", "купи́ть": " хлеб", "прочита́ть": " газе́ту", "написа́ть": " письмо́", "посмотре́ть": " фильм", "верну́ться": " домо́й" };
     const ok = "Снача́ла я " + A.p[g] + (obj[r1] || "") + ", пото́м " + B.p[g] + (obj[r2] || "") + ".", mal = "Снача́ла я " + Ai.p[g] + (obj[r1] || "") + ", пото́м " + Bi.p[g] + (obj[r2] || "") + ".";
     const base = { grupo: "OR-" + j, items: ["lex:" + A.id, "lex:" + B.id], oir: ok };
-    push(Object.assign({ id: "U8-nat-or-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u8-orden-perf", pide: "Contás un día concreto, en orden. ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push(Object.assign({ id: "U8-nat-or-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u8-orden-perf", pide: "Cuentas un día concreto, en orden. ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Una cosa terminada después de otra: verbos de resultado." }, base));
-    if (j < 6) push(Object.assign({ id: "U8-cad-or-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 8, regla: "u8-orden-perf", pide: "Cambiá la frase paso a paso.", base: "Я " + A.p.m + (obj[r1] || "") + ".",
-      pasos: [{ pide: "Agregá qué hiciste después (пото́м + " + r2 + ").", esperadas: ["Я " + A.p.m + (obj[r1] || "") + ", пото́м " + B.p.m + (obj[r2] || "") + ".", "Я " + A.p.m + (obj[r1] || "") + ", пото́м я " + B.p.m + (obj[r2] || "") + ".", "Я " + A.p.m + (obj[r1] || "") + " и пото́м " + B.p.m + (obj[r2] || "") + "."] },
-              { pide: "Ahora contalo de Ana (А́нна).", esperadas: ["А́нна " + A.p.f + (obj[r1] || "") + ", пото́м " + B.p.f + (obj[r2] || "") + ".", "А́нна " + A.p.f + (obj[r1] || "") + ", пото́м она́ " + B.p.f + (obj[r2] || "") + ".", "А́нна " + A.p.f + (obj[r1] || "") + " и пото́м " + B.p.f + (obj[r2] || "") + "."] }],
+    if (j < 6) push(Object.assign({ id: "U8-cad-or-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 8, regla: "u8-orden-perf", pide: "Cambia la frase paso a paso.", base: "Я " + A.p.m + (obj[r1] || "") + ".",
+      pasos: [{ pide: "Agrega qué hiciste después (пото́м + " + r2 + ").", esperadas: ["Я " + A.p.m + (obj[r1] || "") + ", пото́м " + B.p.m + (obj[r2] || "") + ".", "Я " + A.p.m + (obj[r1] || "") + ", пото́м я " + B.p.m + (obj[r2] || "") + ".", "Я " + A.p.m + (obj[r1] || "") + " и пото́м " + B.p.m + (obj[r2] || "") + "."] },
+              { pide: "Ahora cuéntalo de Ana (А́нна).", esperadas: ["А́нна " + A.p.f + (obj[r1] || "") + ", пото́м " + B.p.f + (obj[r2] || "") + ".", "А́нна " + A.p.f + (obj[r1] || "") + ", пото́м она́ " + B.p.f + (obj[r2] || "") + ".", "А́нна " + A.p.f + (obj[r1] || "") + " и пото́м " + B.p.f + (obj[r2] || "") + "."] }],
       explicacion: "Я " + A.p.m + (obj[r1] || "") + ", пото́м " + B.p.m + (obj[r2] || "") + ". → А́нна " + A.p.f + (obj[r1] || "") + ", пото́м " + B.p.f + (obj[r2] || "") + "." }, base, { grupo: "ORc-" + j }));
   });
   [["гуля́ть", "в па́рке", "уви́деть", "Ива́на"], ["чита́ть", "", "услы́шать", "му́зыку"], ["рабо́тать", "до́ма", "узна́ть", "но́вость"], ["смотре́ть", "телеви́зор", "услы́шать", "но́вость"],
@@ -1182,22 +1182,22 @@ function ejerciciosUnidad8() {
   });
   [["опозда́ть", "f", "на рабо́ту"], ["уста́ть", "m", ""], ["заболе́ть", "f", ""], ["верну́ться", "m", "домо́й"], ["оде́ться", "f", ""], ["отдохну́ть", "m", ""]].forEach(([vk, g, c], j) => {
     const v = PV(vk), ru = "Я " + v.p[g] + (c ? " " + c : "") + ".";
-    push({ id: "U8-oido-q8-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 8, regla: "u8-orden-perf", grupo: "Q8-" + j, items: ["lex:" + v.id], oir: ru, pide: "Escuchá: ¿quién habla?", audio: ru,
+    push({ id: "U8-oido-q8-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 8, regla: "u8-orden-perf", grupo: "Q8-" + j, items: ["lex:" + v.id], oir: ru, pide: "Escucha: ¿quién habla?", audio: ru,
       opciones: ["Un hombre", "Una mujer"], correcta: g === "f" ? "Una mujer" : "Un hombre", explicacion: "Sonó **" + v.p[g] + "**: " + (g === "f" ? "habla una mujer." : "habla un hombre.") });
   });
   [["Бы́ло хо́лодно, но интере́сно."], ["Я до́ма, потому́ что я заболе́л."]].forEach(([ok], j) => {
     const mal = j === 0 ? "Бы́ло хо́лодно, потому́ что интере́сно." : "Я до́ма, но я заболе́л.";
     push({ id: "U8-par-con-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 8, regla: "u8-conectores", grupo: "CN-" + j, items: [], oir: ok,
-      pide: j === 0 ? "«Hizo frío, pero fue interesante». ¿Cuál decís?" : "«Estoy en casa porque me enfermé». ¿Cuál decís?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " " + (j === 0 ? "но: contraste." : "потому́ что: la razón.") });
+      pide: j === 0 ? "«Hizo frío, pero fue interesante». ¿Cuál dices?" : "«Estoy en casa porque me enfermé». ¿Cuál dices?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " " + (j === 0 ? "но: contraste." : "потому́ что: la razón.") });
   });
 
   /* ── Módulo 9: experiencias y tu historia ── */
   [["Пари́ж", "Пари́же", "París"], ["Москва́", "Москве́", "Moscú"], ["Мадри́д", "Мадри́де", "Madrid"], ["Рим", "Ри́ме", "Roma"], ["Ло́ндон", "Ло́ндоне", "Londres"], ["Барсело́на", "Барсело́не", "Barcelona"]].forEach(([c, prep, es], j) => {
     const acc = casosById(lex(c).id).sg[3], b = V("быть"), e = V("е́здить"), g = j % 2 ? "f" : "m";
-    const r1 = "Я " + b.p[g] + " в " + prep + ".", r2 = "Я " + e.p[g] + " в " + acc + ".", yo = g === "f" ? " (sos mujer)" : "";
+    const r1 = "Я " + b.p[g] + " в " + prep + ".", r2 = "Я " + e.p[g] + " в " + acc + ".", yo = g === "f" ? " (eres mujer)" : "";
     const base = { items: [] };
     push(Object.assign({ id: "U8-par-be-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 9, regla: "u8-byl-vs-ezdil", grupo: "BE-" + j, oir: j % 2 ? r1 : r2,
-      pide: (j % 2 ? "«Estuve en " + es + "»" : "«Fui a " + es + "»") + yo + ". ¿Cuál decís?", opciones: baraja([r1, r2], j), correcta: j % 2 ? r1 : r2,
+      pide: (j % 2 ? "«Estuve en " + es + "»" : "«Fui a " + es + "»") + yo + ". ¿Cuál dices?", opciones: baraja([r1, r2], j), correcta: j % 2 ? r1 : r2,
       explicacion: (j % 2 ? r1 + " Dónde estuviste: был + prepositivo." : r2 + " Adónde fuiste: е́здил + acusativo.") }, base));
     push(Object.assign({ id: "U8-nat-be1-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u8-byl-vs-ezdil", grupo: "BEn-" + j, oir: r1, pide: "¿Cuál suena natural?",
       opciones: baraja([r1, "Я " + b.p[g] + " в " + acc + "."], j + 1), correcta: r1, explicacion: r1 + " Con был, dónde: prepositivo." }, base));
@@ -1219,22 +1219,22 @@ function ejerciciosUnidad8() {
     const base = { grupo: "BI-" + j, items: ["lex:" + v.id], oir: ok };
     push(Object.assign({ id: "U8-nat-bi-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u8-biografia", pide: "Habla " + (g === "f" ? "una mujer" : "un hombre") + ". ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + v.ac + ": " + v.p.m + ", " + v.p.f + "." }, base));
-    push(Object.assign({ id: "U8-oido-bi-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 9, regla: "u8-biografia", pide: "Escuchá: ¿quién habla?", audio: ok, opciones: ["Un hombre", "Una mujer"], correcta: g === "f" ? "Una mujer" : "Un hombre",
+    push(Object.assign({ id: "U8-oido-bi-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 9, regla: "u8-biografia", pide: "Escucha: ¿quién habla?", audio: ok, opciones: ["Un hombre", "Una mujer"], correcta: g === "f" ? "Una mujer" : "Un hombre",
       explicacion: "Sonó **" + v.p[g] + "**: " + (g === "f" ? "una mujer." : "un hombre.") }, base, { grupo: "BIo-" + j }));
   });
   [["Буэ́нос-А́йрес", "Мадри́д", "Барсело́на"], ["Москва́", "Рим", "Мадри́д"]].forEach(([n0, c1, c2], j) => {
     const P = c => casosById(lex(c).id).sg[5], A = c => casosById(lex(c).id).sg[3];
     const r = PV("роди́ться"), pe = PV("перее́хать"), base0 = "Я живу́ в " + P(c2) + ".";
     push({ id: "U8-cad-bi-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 9, regla: "u8-biografia", grupo: "BIc-" + j, items: ["lex:" + r.id, "lex:" + pe.id], oir: "Я перее́хал в " + A(c2) + ".",
-      pide: "Contá tu historia paso a paso.", base: base0,
-      pasos: [{ pide: "Ahora decí que naciste en " + ({ "Буэ́нос-А́йрес": "Buenos Aires", "Москва́": "Moscú" })[n0] + ".", esperadas: ["Я " + r.p.m + " в " + P(n0) + ".", "Я " + r.p.f + " в " + P(n0) + "."] },
+      pide: "Cuenta tu historia paso a paso.", base: base0,
+      pasos: [{ pide: "Ahora di que naciste en " + ({ "Буэ́нос-А́йрес": "Buenos Aires", "Москва́": "Moscú" })[n0] + ".", esperadas: ["Я " + r.p.m + " в " + P(n0) + ".", "Я " + r.p.f + " в " + P(n0) + "."] },
               { pide: "Y que te mudaste a " + ({ "Барсело́на": "Barcelona", "Мадри́д": "Madrid" })[c2] + ".", esperadas: ["Я " + pe.p.m + " в " + A(c2) + ".", "Я " + pe.p.f + " в " + A(c2) + ".", "Пото́м я " + pe.p.m + " в " + A(c2) + ".", "Пото́м я " + pe.p.f + " в " + A(c2) + "."] }],
       explicacion: base0 + " → Я " + r.p.m + " в " + P(n0) + ". → Я " + pe.p.m + " в " + A(c2) + ". Dónde naciste: prepositivo; adónde te mudaste: acusativo." });
   });
   [["Я", "роди́лся", "в", "Барсело́не"], ["В", "де́тстве", "я", "жил", "в", "Мадри́де"]].forEach((pal, j) => {
-    const pq = j === 0 ? [{ pide: "¿Qué pasó? (el verbo)", correcta: 1 }, { pide: "¿Dónde? (la ciudad)", correcta: 3 }] : [{ pide: "¿Cuándo? (tocá la palabra que cambia)", correcta: 1 }, { pide: "¿Qué hacía? (el verbo)", correcta: 3 }, { pide: "¿Dónde? (la ciudad)", correcta: 5 }];
+    const pq = j === 0 ? [{ pide: "¿Qué pasó? (el verbo)", correcta: 1 }, { pide: "¿Dónde? (la ciudad)", correcta: 3 }] : [{ pide: "¿Cuándo? (toca la palabra que cambia)", correcta: 1 }, { pide: "¿Qué hacía? (el verbo)", correcta: 3 }, { pide: "¿Dónde? (la ciudad)", correcta: 5 }];
     push({ id: "U8-desarm-bi-" + j, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo: 9, regla: "u8-biografia", grupo: "DB-" + j, items: [], oir: pal.join(" ") + ".", audio: pal.join(" ") + ".", audioManual: true,
-      pide: "Respondé tocando las palabras de la frase.", palabras: pal, preguntas: pq, explicacion: pal.join(" ") + "." });
+      pide: "Responde tocando las palabras de la frase.", palabras: pal, preguntas: pq, explicacion: pal.join(" ") + "." });
   });
 
   /* ── Módulo 10: antes y ahora ── */
@@ -1259,13 +1259,13 @@ function ejerciciosUnidad8() {
       explicacion: ok + " тепе́рь: presente." });
     const b0 = "Ра́ньше я " + v.p.m + " " + ant + ".";
     push({ id: "U8-cad-te-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 10, regla: "u8-teper", grupo: "TEc-" + j, items: ["lex:" + v.id], oir: b0 + " А тепе́рь я " + v.pres[0] + " " + aho + ".",
-      pide: "Cambiá la frase paso a paso.", base: "Я " + v.pres[0] + " " + ant + ".",
-      pasos: [{ pide: "Decí que eso era antes (ра́ньше).", esperadas: [b0, "Ра́ньше я " + v.p.f + " " + ant + "."] },
-              { pide: "Agregá qué hacés ahora: " + aho + " (а тепе́рь).", esperadas: [b0.slice(0, -1) + ", а тепе́рь я " + v.pres[0] + " " + aho + ".", "Ра́ньше я " + v.p.f + " " + ant + ", а тепе́рь я " + v.pres[0] + " " + aho + "."] }],
+      pide: "Cambia la frase paso a paso.", base: "Я " + v.pres[0] + " " + ant + ".",
+      pasos: [{ pide: "Di que eso era antes (ра́ньше).", esperadas: [b0, "Ра́ньше я " + v.p.f + " " + ant + "."] },
+              { pide: "Agrega qué haces ahora: " + aho + " (а тепе́рь).", esperadas: [b0.slice(0, -1) + ", а тепе́рь я " + v.pres[0] + " " + aho + ".", "Ра́ньше я " + v.p.f + " " + ant + ", а тепе́рь я " + v.pres[0] + " " + aho + "."] }],
       explicacion: b0 + " → " + b0.slice(0, -1) + ", а тепе́рь я " + v.pres[0] + " " + aho + ". ра́ньше: pasado; тепе́рь: presente." });
   });
-  [["Я по́мню де́тство.", "Я вспо́мнил де́тство.", "Te acordás de tu infancia (la tenés en la memoria)."]].forEach(([ok, mal, es], j) => {
-    push({ id: "U8-par-me-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 10, regla: "u8-vez-siempre", grupo: "ME-" + j, items: [], oir: ok, pide: es + " ¿Cuál decís?", opciones: baraja([ok, mal], j), correcta: ok,
+  [["Я по́мню де́тство.", "Я вспо́мнил де́тство.", "Te acuerdas de tu infancia (la tienes en la memoria)."]].forEach(([ok, mal, es], j) => {
+    push({ id: "U8-par-me-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 10, regla: "u8-vez-siempre", grupo: "ME-" + j, items: [], oir: ok, pide: es + " ¿Cuál dices?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + (j === 0 ? "по́мнить: está en la memoria." : "забы́л y вспо́мнил: pasaron una vez.") });
   });
 

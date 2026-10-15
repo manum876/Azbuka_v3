@@ -104,7 +104,7 @@ function azInterceptLinks() {
    - view, setView: estado de tab activo, manejado por la página
    - children: contenido central de la pantalla */
 /* ── CAPTURA AL CUADERNO (26/09/2026, único cambio autorizado) ──
-   Cuando seleccionás un texto en cualquier pantalla aparece abajo el
+   Cuando seleccionas un texto en cualquier pantalla aparece abajo el
    botón «＋ Guardar en el cuaderno». El menú de copiar/pegar de iOS no
    se puede ampliar desde una web, por eso va aparte. También muestra el
    cartel «Guardado en el cuaderno» cuando se guarda algo desde otro

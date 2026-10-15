@@ -65,7 +65,7 @@ function detalleTarjeta(e) {
 /* Chips de ejemplo: se tocan para escuchar */
 function Chips({ lista, c, conAcc }) {
   return h(React.Fragment, null,
-    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una palabra para escuchar cómo suena."),
+    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Toca una palabra para escuchar cómo suena."),
     h("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 10 } }, lista.map((x, i) =>
       h("button", { key: i, onClick: () => azHablarRu(x.ru), lang: "ru",
         style: { display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 15, fontWeight: 700, fontFamily: "inherit", cursor: "pointer" } },
@@ -79,7 +79,7 @@ function TablaVerbos({ c }) {
     style: { textAlign: "left", padding: "7px 10px", borderRadius: 9, background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", cursor: "pointer", minWidth: 0 } },
     h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: .5, color: c.textMuted } }, pr), h("div", { style: { fontSize: 15.5, fontWeight: 700 } }, f));
   return h(React.Fragment, null,
-    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una forma para escuchar cómo suena."),
+    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Toca una forma para escuchar cómo suena."),
     Object.values(D4.verb).map(v => h("div", { key: v.id, className: "u-card", style: { padding: "12px 14px", marginTop: 10 } },
       h("div", { style: { display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" } },
         h("span", { lang: "ru", style: { fontSize: 18, fontWeight: 800, color: c.gold } }, h(AzPalabra, { texto: v.ac, id: v.id })),

@@ -59,7 +59,7 @@ const U3_TEMAS = [
 const U3_ADJ = {
   "большо́й": ["grande", "grande", "AHLMOVEN"], "ма́ленький": ["chico", "chica", "AHLMOVEN"],
   "но́вый": ["nuevo", "nueva", "HLMOVE"], "ста́рый": ["viejo", "vieja", "PAHLMOVE"], "молодо́й": ["joven", "joven", "PA"],
-  "хоро́ший": ["bueno", "buena", "PAHLMOVE"], "плохо́й": ["malo", "mala", "LMV"], "краси́вый": ["lindo", "linda", "PAHLMOVN"],
+  "хоро́ший": ["bueno", "buena", "PAHLMOVE"], "плохо́й": ["malo", "mala", "LMV"], "краси́вый": ["bonito", "bonita", "PAHLMOVN"],
   "интере́сный": ["interesante", "interesante", "PLE"], "ску́чный": ["aburrido", "aburrida", "PLE"],
   "дорого́й": ["caro", "cara", "HMOV"], "дешёвый": ["barato", "barata", "HMOV"], "чи́стый": ["limpio", "limpia", "HMOV"], "гря́зный": ["sucio", "sucia", "HMOV"],
   "удо́бный": ["cómodo", "cómoda", "M"], "тяжёлый": ["pesado", "pesada", "MO"], "све́тлый": ["luminoso", "luminosa", "H"], "тёмный": ["oscuro", "oscura", "H"],
@@ -91,16 +91,16 @@ const U3_FRASES = [
   [1, "Э́то дом.", ["Es una casa.", "Esto es una casa."]], [1, "Э́то кни́га.", ["Es un libro.", "Esto es un libro."]], [1, "Э́то окно́.", ["Es una ventana.", "Esto es una ventana."]],
   [1, "Что э́то? Э́то стол.", ["¿Qué es esto? Es una mesa."]], [1, "Кто э́то? Э́то врач.", ["¿Quién es? Es un médico.", "¿Quién es? Es una médica."]],
   [2, "Э́то мой брат.", ["Es mi hermano.", "Este es mi hermano."]], [2, "Э́то музе́й.", ["Es un museo."]], [2, "Э́то слова́рь.", ["Es un diccionario."]],
-  [3, "Э́то моя́ ма́ма.", ["Es mi mamá.", "Esta es mi mamá."]], [3, "Э́то моя́ кварти́ра.", ["Es mi departamento.", "Este es mi departamento."]], [3, "Э́то ку́хня.", ["Es la cocina.", "Es una cocina."]],
+  [3, "Э́то моя́ ма́ма.", ["Es mi mamá.", "Esta es mi mamá."]], [3, "Э́то моя́ кварти́ра.", ["Es mi apartamento.", "Este es mi apartamento."]], [3, "Э́то ку́хня.", ["Es la cocina.", "Es una cocina."]],
   [4, "Э́то моё окно́.", ["Es mi ventana.", "Esta es mi ventana."]], [4, "Э́то мо́ре.", ["Es el mar."]], [4, "Э́то ме́сто.", ["Es un lugar.", "Es el lugar."]],
   [5, "Э́то мой па́па.", ["Es mi papá.", "Este es mi papá."]], [5, "Э́то мой де́душка.", ["Es mi abuelo.", "Este es mi abuelo."]], [5, "Мой дя́дя — врач.", ["Mi tío es médico."]],
   [6, "Э́то столы́.", ["Son mesas.", "Estas son mesas."]], [6, "Э́то кни́ги.", ["Son libros.", "Estos son libros."]], [6, "Э́то о́кна.", ["Son ventanas.", "Estas son ventanas."]],
-  [6, "Э́то мои́ друзья́.", ["Son mis amigos.", "Estos son mis amigos."]], [6, "Там лю́ди.", ["Ahí hay gente.", "Allá hay gente."]], [6, "Э́то де́ти.", ["Son chicos.", "Son niños."]],
-  [7, "Э́то большо́й дом.", ["Es una casa grande."]], [7, "Э́то но́вая маши́на.", ["Es un auto nuevo."]], [7, "Э́то ма́ленькое окно́.", ["Es una ventana chica.", "Es una ventana pequeña."]],
-  [7, "Э́то краси́вые дома́.", ["Son casas lindas."]], [7, "Э́то ста́рый го́род.", ["Es una ciudad vieja.", "Es una ciudad antigua."]],
-  [9, "Дом большо́й.", ["La casa es grande."]], [9, "Маши́на но́вая.", ["El auto es nuevo."]], [9, "Окно́ ма́ленькое.", ["La ventana es chica.", "La ventana es pequeña."]],
+  [6, "Э́то мои́ друзья́.", ["Son mis amigos.", "Estos son mis amigos."]], [6, "Там лю́ди.", ["Ahí hay gente.", "Allí hay gente."]], [6, "Э́то де́ти.", ["Son chicos.", "Son niños."]],
+  [7, "Э́то большо́й дом.", ["Es una casa grande."]], [7, "Э́то но́вая маши́на.", ["Es un coche nuevo."]], [7, "Э́то ма́ленькое окно́.", ["Es una ventana chica.", "Es una ventana pequeña."]],
+  [7, "Э́то краси́вые дома́.", ["Son casas bonitas."]], [7, "Э́то ста́рый го́род.", ["Es una ciudad vieja.", "Es una ciudad antigua."]],
+  [9, "Дом большо́й.", ["La casa es grande."]], [9, "Маши́на но́вая.", ["El coche es nuevo."]], [9, "Окно́ ма́ленькое.", ["La ventana es chica.", "La ventana es pequeña."]],
   [9, "Он большо́й.", ["Es grande."]], [9, "Она́ но́вая.", ["Es nueva.", "Es nuevo."]], [9, "Оно́ ма́ленькое.", ["Es chico.", "Es chica.", "Es pequeño."]],
-  [9, "Э́то краси́вый парк.", ["Es un parque lindo.", "Es un lindo parque."]], [9, "Ко́мната све́тлая.", ["La habitación es luminosa.", "El cuarto es luminoso."]],
+  [9, "Э́то краси́вый парк.", ["Es un parque bonito.", "Es un bonito parque."]], [9, "Ко́мната све́тлая.", ["La habitación es luminosa.", "El cuarto es luminoso."]],
   [9, "Моя́ ку́хня ма́ленькая.", ["Mi cocina es chica.", "Mi cocina es pequeña."]], [9, "Кни́га интере́сная.", ["El libro es interesante."]],
   [10, "Есть ку́хня.", ["Hay una cocina.", "Hay cocina."]], [10, "Есть окно́.", ["Hay una ventana."]], [10, "Есть стол и стул.", ["Hay una mesa y una silla."]]
 ];
@@ -139,7 +139,7 @@ const UNIDAD_3 = {
           chequeo: [{ pide: "¿Qué forma de «mi» va con окно́?", opciones: ["мой", "моя́", "моё"], ok: "моё", por: "Окно́ es neutro, así que va моё." }] },
         { id: "u3-terminacion", titulo: "La terminación manda",
           texto: "Casi siempre, el género se reconoce por la última letra:\nconsonante → masculino (стол)\n**-а** o **-я** → femenino (ма́ма, ку́хня)\n**-о** o **-е** → neutro (окно́, мо́ре)\nA continuación vas a ver cada caso con más ejemplos, y las pocas excepciones.",
-          truco: "Mirá siempre el final de la palabra: ahí está el género.",
+          truco: "Mira siempre el final de la palabra: ahí está el género.",
           mas: { texto: "Hay tres grupos que no siguen esta regla, y los vas a ver uno por uno: las que terminan en **-ь**, que pueden ser masculinas o femeninas; unas pocas en **-мя**, que son neutras, y los hombres que terminan en **-а**, como па́па. Son pocas, pero muy usadas." },
           chequeo: [
             { pide: "Ры́ба: ¿qué género tiene?", opciones: ["masculino", "femenino", "neutro"], ok: "femenino", por: "Termina en **-а**." },
@@ -160,7 +160,7 @@ const UNIDAD_3 = {
           errores: [{ mal: "Моя́ стол.", bien: "{Мой} стол.", por: "Стол termina en consonante: masculino." }],
           chequeo: [{ pide: "Кот termina en **т**. ¿Qué género tiene?", opciones: ["masculino", "femenino", "neutro"], ok: "masculino", por: "Consonante al final: masculino." }] },
         { id: "u3-masc-i", titulo: "Terminan en -й",
-          texto: "Музе́й, трамва́й, чай: la **й** cuenta como consonante, así que también son masculinas. Fijate en la diferencia con **-я**: чай termina en **й** y es masculino; ку́хня termina en **я** y es femenino.",
+          texto: "Музе́й, трамва́й, чай: la **й** cuenta como consonante, así que también son masculinas. Fíjate en la diferencia con **-я**: чай termina en **й** y es masculino; ку́хня termina en **я** y es femenino.",
           ejemplos: [
             { ru: "{Мой} чай.", es: "Mi té.", por: "Чай termina en **й**: cuenta como consonante, masculino." },
             { ru: "Э́то {музе́й}.", es: "Es un museo.", por: "Музе́й termina en **й**: masculino." }],
@@ -171,7 +171,7 @@ const UNIDAD_3 = {
             { ru: "{Большо́й} слова́рь.", es: "Un diccionario grande.", por: "Por la terminación no se sabe: большо́й, que es masculino, lo muestra." },
             { ru: "{Мой} учи́тель.", es: "Mi profesor.", por: "Учи́тель termina en **-ь**. Мой muestra que es masculino." }],
           truco: "Las terminadas en -ь se aprenden con un adjetivo: большо́й слова́рь.",
-          mas: { texto: "Dos pistas que sí sirven. Las palabras que nombran a alguien por lo que hace y terminan en **-тель** son masculinas: учи́тель, преподава́тель (profesor de universidad). Y hay otra que ya conocés de las letras: después de **ж**, **ш**, **ч**, **щ**, sin **ь** la palabra es masculina; con **ь**, femenina.",
+          mas: { texto: "Dos pistas que sí sirven. Las palabras que nombran a alguien por lo que hace y terminan en **-тель** son masculinas: учи́тель, преподава́тель (profesor de universidad). Y hay otra que ya conoces de las letras: después de **ж**, **ш**, **ч**, **щ**, sin **ь** la palabra es masculina; con **ь**, femenina.",
             ejemplos: [{ ru: "{Мой} врач.", es: "Mi médico.", por: "Врач termina en **ч** sin **ь**: masculino." }] } }
 ] },
     { id: "u3m3", n: 3, tipo: "leccion", titulo: "Género femenino", resumen: "-а, -я y algunas en -ь.", genero: "f",
@@ -181,7 +181,7 @@ const UNIDAD_3 = {
           texto: "Маши́на, кни́га, де́вушка, ма́ма, ко́мната: si termina en **-а**, casi siempre es femenina.",
           ejemplos: [
             { ru: "{Моя́} кни́га.", es: "Mi libro.", por: "Кни́га termina en **-а**: femenino. Que «libro» sea masculino no importa." },
-            { ru: "{Моя́} маши́на.", es: "Mi auto.", por: "Termina en **-а**: femenino." },
+            { ru: "{Моя́} маши́на.", es: "Mi coche.", por: "Termina en **-а**: femenino." },
             { ru: "Где {моя́} ко́мната?", es: "¿Dónde está mi habitación?", por: "Ко́мната termina en **-а**: femenino, va моя́." }],
           destacado: "-а o -я al final = femenino (casi siempre).",
           errores: [{ mal: "Мой кни́га.", bien: "{Моя́} кни́га.", por: "Кни́га termina en **-а**: femenina." }],
@@ -197,7 +197,7 @@ const UNIDAD_3 = {
             { ru: "{Больша́я} дверь.", es: "Una puerta grande.", por: "Дверь termina en **-ь**: больша́я, que es femenino, lo muestra." },
             { ru: "{Моя́} тетра́дь.", es: "Mi cuaderno.", por: "Тетра́дь termina en **-ь** y es femenina: lo muestra моя́." }],
           truco: "Las terminadas en -ь se aprenden con un adjetivo: больша́я дверь, большо́й слова́рь.",
-          mas: { texto: "Una pista que ya conocés de las letras: si antes de la **ь** hay **ж**, **ш**, **ч** o **щ**, la palabra es femenina. Ночь y вещь son femeninas; врач, sin **ь**, es masculino.",
+          mas: { texto: "Una pista que ya conoces de las letras: si antes de la **ь** hay **ж**, **ш**, **ч** o **щ**, la palabra es femenina. Ночь y вещь son femeninas; врач, sin **ь**, es masculino.",
             ejemplos: [{ ru: "Э́то {вещь}.", es: "Es una cosa.", por: "Termina en **щь**: femenina." }] },
           chequeo: [{ pide: "Ночь termina en **чь**. ¿Masculino o femenino?", opciones: ["masculino", "femenino"], ok: "femenino", por: "**ч** con **ь** al final: femenino." }] }
 ] },
@@ -219,9 +219,9 @@ const UNIDAD_3 = {
           ejemplos: [{ ru: "{Моё} и́мя.", es: "Mi nombre.", por: "Termina en **-я**, pero es de las de **-мя**: neutro, va моё." }],
           mas: { texto: "Son palabras muy antiguas que conservaron una terminación propia. Por eso no siguen la regla de **-я**. En el nivel de este curso, alcanza con recordar dos: вре́мя (tiempo) e и́мя (nombre)." } },
         { id: "u3-indeclinables", titulo: "Palabras que vienen de otros idiomas",
-          texto: "Кафе́ y метро́ vienen de otros idiomas. Son neutras y no cambian nunca, ni en plural: «un subte» y «dos subtes» se dicen igual, метро́. Más adelante vas a ver otras palabras como estas, y todas funcionan así.",
+          texto: "Кафе́ y метро́ vienen de otros idiomas. Son neutras y no cambian nunca, ni en plural: «un metro» y «dos metros» se dicen igual, метро́. Más adelante vas a ver otras palabras como estas, y todas funcionan así.",
           ejemplos: [
-            { ru: "Где {метро́}?", es: "¿Dónde está el subte?", por: "Метро́ termina en **-о**: neutro, y nunca cambia." },
+            { ru: "Где {метро́}?", es: "¿Dónde está el metro?", por: "Метро́ termina en **-о**: neutro, y nunca cambia." },
             { ru: "Э́то {кафе́}.", es: "Es un café (el lugar).", por: "Кафе́ es la cafetería: neutro. La bebida es otra palabra: ко́фе." }] }
 ] },
     { id: "u3m5", n: 5, tipo: "leccion", nPractica: 5, titulo: "Excepciones", resumen: "Па́па, дя́дя, мужчи́на: masculinos en -а.",
@@ -259,7 +259,7 @@ const UNIDAD_3 = {
           texto: "Masculino en consonante: se agrega **-ы** (стол → столы́). Femenino en **-а**: la **-а** pasa a **-ы** (маши́на → маши́ны). Las terminadas en **-я**, **-й** o **-ь** llevan **-и**: ку́хня → ку́хни, музе́й → музе́и, дверь → две́ри.",
           ejemplos: [
             { ru: "Э́то {столы́}.", es: "Son mesas.", por: "Стол termina en consonante: se agrega **-ы**." },
-            { ru: "Где {маши́ны}?", es: "¿Dónde están los autos?", por: "Маши́на: la **-а** pasa a **-ы**." },
+            { ru: "Где {маши́ны}?", es: "¿Dónde están los coches?", por: "Маши́на: la **-а** pasa a **-ы**." },
             { ru: "Э́то {музе́и}.", es: "Son museos.", por: "Музе́й: la **й** cambia por **и**." },
             { ru: "Где {две́ри}?", es: "¿Dónde están las puertas?", por: "Дверь termina en **-ь**: la **ь** cambia por **и**." }],
           destacado: "-ы en general; -и después de -я, -й, -ь.",
@@ -267,7 +267,7 @@ const UNIDAD_3 = {
           mas: { texto: "¿Por qué **-и** después de **-я**, **-й** y **-ь**? Porque esas palabras terminan en un sonido blando, y la **и** es la vocal blanda que corresponde a **ы** (**ы** dura, **и** blanda). El plural respeta cómo suena la palabra." },
           chequeo: [{ pide: "¿Plural de ку́хня?", opciones: ["ку́хни", "ку́хны"], ok: "ку́хни", por: "**-я** pasa a **-и**." }] },
         { id: "u3-plural-7-letras", titulo: "La regla de las 7 letras",
-          texto: "Después de г, к, х, ж, ш, ч, щ nunca va ы: va и. Por eso кни́га → кни́ги, ключ → ключи́, врач → врачи́. Es la misma regla de las 7 letras que ya conocés.",
+          texto: "Después de г, к, х, ж, ш, ч, щ nunca va ы: va и. Por eso кни́га → кни́ги, ключ → ключи́, врач → врачи́. Es la misma regla de las 7 letras que ya conoces.",
           ejemplos: [
             { ru: "Где {кни́ги}?", es: "¿Dónde están los libros?", por: "Кни́га haría **-ы**, pero después de **г** no va **ы**: queda кни́ги." },
             { ru: "Э́то {ключи́}.", es: "Son las llaves.", por: "Ключ termina en **ч**: se agrega **-и**, no **-ы**." }],
@@ -275,13 +275,13 @@ const UNIDAD_3 = {
           errores: [{ mal: "кни́гы", bien: "{кни́ги}", por: "Después de **г** nunca va **ы**." }],
           chequeo: [{ pide: "¿Plural de врач?", opciones: ["врачи́", "врачы́"], ok: "врачи́", por: "Termina en **ч**, una de las 7 letras: va **-и**." }] },
         { id: "u3-plural-neutro", titulo: "Neutro: -а o -я",
-          texto: "Окно́ → о́кна, сло́во → слова́, мо́ре → моря́, зда́ние → зда́ния. **-о** pasa a **-а**, y **-е** pasa a **-я**. Fijate que muchas veces el acento cambia de lugar: окно́ → о́кна, сло́во → слова́.",
+          texto: "Окно́ → о́кна, сло́во → слова́, мо́ре → моря́, зда́ние → зда́ния. **-о** pasa a **-а**, y **-е** pasa a **-я**. Fíjate que muchas veces el acento cambia de lugar: окно́ → о́кна, сло́во → слова́.",
           ejemplos: [
             { ru: "Э́то {о́кна}.", es: "Son ventanas.", por: "**-о** pasa a **-а**, y el acento se mueve: окно́ → о́кна." },
             { ru: "Где {пи́сьма}?", es: "¿Dónde están las cartas?", por: "Письмо́ → пи́сьма: **-о** → **-а**, y el acento salta a la primera sílaba." },
             { ru: "Э́то {моря́}.", es: "Son mares.", por: "Мо́ре → моря́: **-е** pasa a **-я**." }],
           errores: [{ mal: "окны́", bien: "{о́кна}", por: "El neutro hace el plural en **-а**, no en **-ы**." }],
-          mas: { texto: "¿Por qué se mueve el acento? En ruso, muchas palabras cortas cambian el acento entre el singular y el plural. No hay una regla simple: los rusos lo aprenden escuchando. Para vos, la ayuda es la marca de acento, que en Azbuka está siempre: leela y repetí con el audio. La tabla de abajo muestra el plural de cada palabra con su acento." },
+          mas: { texto: "¿Por qué se mueve el acento? En ruso, muchas palabras cortas cambian el acento entre el singular y el plural. No hay una regla simple: los rusos lo aprenden escuchando. Para ti, la ayuda es la marca de acento, que en Azbuka está siempre: léela y repite con el audio. La tabla de abajo muestra el plural de cada palabra con su acento." },
           chequeo: [{ pide: "¿Plural de сло́во?", opciones: ["слова́", "сло́вы"], ok: "слова́", por: "Neutro en **-о**: el plural termina en **-а**." }] },
         { id: "u3-plural-especiales", titulo: "Plurales especiales",
           texto: "Algunos plurales hay que aprenderlos de memoria: челове́к → лю́ди, ребёнок → де́ти, друг → друзья́, брат → бра́тья, дом → дома́, го́род → города́. Son pocos y muy usados. Y hay palabras que solo existen en plural, como брю́ки (pantalón).",
@@ -289,19 +289,19 @@ const UNIDAD_3 = {
             { ru: "Где {де́ти}?", es: "¿Dónde están los chicos?", por: "Ребёнок → де́ти: en plural se usa otra palabra." },
             { ru: "Э́то мои́ {друзья́}.", es: "Son mis amigos.", por: "Друг → друзья́: un plural especial, en **-ья**." },
             { ru: "{Дома́} и {города́}.", es: "Casas y ciudades.", por: "Algunos masculinos hacen el plural en **-а**, con el acento al final." }],
-          comparacion: "también hay palabras que se usan en plural, como «las tijeras» o «los anteojos». El ruso tiene las suyas, y no siempre coinciden: брю́ки es plural, aunque digamos «el pantalón».",
+          comparacion: "también hay palabras que se usan en plural, como «las tijeras» o «las gafas». El ruso tiene las suyas, y no siempre coinciden: брю́ки es plural, aunque digamos «el pantalón».",
           mas: { texto: "Лю́ди y де́ти no salen de челове́к y ребёнок: son palabras distintas que el ruso usa como plural. En español pasa algo parecido con «persona» y «gente»: la idea es la misma, la palabra cambia." },
           chequeo: [{ pide: "¿Plural de челове́к?", opciones: ["лю́ди", "челове́ки"], ok: "лю́ди", por: "Es un plural especial: se usa otra palabra." }] }
 ] },
     { id: "u3m7", n: 7, tipo: "leccion", titulo: "Primeros adjetivos", resumen: "Большо́й дом, больша́я маши́на.",
-      intro: "El adjetivo copia el género y el número del sustantivo, igual que en español («casa blanca», «auto blanco»). La diferencia: en ruso hay una forma más, la del neutro.",
+      intro: "El adjetivo copia el género y el número del sustantivo, igual que en español («casa blanca», «coche blanco»). La diferencia: en ruso hay una forma más, la del neutro.",
       tablaAdj: "m7",
       secciones: [
         { id: "u3-adj-formas", titulo: "Las cuatro formas",
           texto: "Masculino **-ый** / **-ий** / **-ой** (но́вый, си́ний, большо́й), femenino **-ая** / **-яя** (но́вая, си́няя), neutro **-ое** / **-ее** (но́вое, си́нее) y plural **-ые** / **-ие** (но́вые, си́ние). Va antes del sustantivo: но́вый дом, но́вая маши́на, но́вое окно́, но́вые дома́.",
           ejemplos: [
             { ru: "{Но́вый} дом.", es: "Una casa nueva.", por: "Дом es masculino: но́вый, con **-ый**." },
-            { ru: "{Но́вая} маши́на.", es: "Un auto nuevo.", por: "Маши́на es femenino: но́вая, con **-ая**." },
+            { ru: "{Но́вая} маши́на.", es: "Un coche nuevo.", por: "Маши́на es femenino: но́вая, con **-ая**." },
             { ru: "{Но́вое} окно́.", es: "Una ventana nueva.", por: "Окно́ es neutro: но́вое, con **-ое**." },
             { ru: "{Но́вые} дома́.", es: "Casas nuevas.", por: "En plural hay una sola forma para los tres géneros: **-ые**." }],
           destacado: "но́вый дом · но́вая маши́на · но́вое окно́ · но́вые дома́",
@@ -327,17 +327,17 @@ const UNIDAD_3 = {
           mas: { texto: "Una más, para leer bien: después de **ж**, **ш**, **ч**, **щ**, cuando la terminación no lleva el acento, la **о** se escribe **е**. Por eso el neutro de хоро́ший es хоро́шее: хоро́шее окно́." } }
 ] },
     { id: "u3m8", n: 8, tipo: "vocabulario", titulo: "Vocabulario temático", resumen: "Personas, casa, ciudad, objetos, animales…",
-      intro: "Unas diez palabras por tema, las más útiles para empezar. Tocá cada una para escucharla y ver su ficha; con las tarjetas las repasás de a una." },
+      intro: "Unas diez palabras por tema, las más útiles para empezar. Toca cada una para escucharla y ver su ficha; con las tarjetas las repasas de a una." },
     { id: "u3m9", n: 9, tipo: "leccion", tablaAdj: "m9", titulo: "Describir objetos", resumen: "Э́то большо́й дом. Дом большо́й.",
-      intro: "Con lo que ya sabés alcanza para describir: qué es algo y cómo es.",
+      intro: "Con lo que ya sabes alcanza para describir: qué es algo y cómo es.",
       secciones: [
         { id: "u3-eto-adj", titulo: "Э́то + adjetivo + sustantivo",
-          texto: "Э́то большо́й дом («es una casa grande»), э́то но́вая маши́на («es un auto nuevo»), э́то краси́вый парк («es un parque lindo»). No hace falta el verbo «ser».",
+          texto: "Э́то большо́й дом («es una casa grande»), э́то но́вая маши́на («es un coche nuevo»), э́то краси́вый парк («es un parque bonito»). No hace falta el verbo «ser».",
           ejemplos: [
-            { ru: "Э́то {краси́вый} парк.", es: "Es un parque lindo.", por: "Парк es masculino: краси́вый." },
+            { ru: "Э́то {краси́вый} парк.", es: "Es un parque bonito.", por: "Парк es masculino: краси́вый." },
             { ru: "Э́то {но́вая} ла́мпа.", es: "Es una lámpara nueva.", por: "Ла́мпа es femenino: но́вая." }] },
         { id: "u3-sust-adj", titulo: "Sustantivo + adjetivo",
-          texto: "Para decir cómo es algo, el adjetivo va después: дом большо́й («la casa es grande»), маши́на но́вая («el auto es nuevo»). El adjetivo sigue concordando en género.",
+          texto: "Para decir cómo es algo, el adjetivo va después: дом большо́й («la casa es grande»), маши́на но́вая («el coche es nuevo»). El adjetivo sigue concordando en género.",
           desarmar: { es: "La casa es grande.", partes: [
             { txt: "Дом", rol: "de qué hablo", nota: "Дом: la cosa de la que hablamos." },
             { txt: "большо́й", rol: "cómo es", nota: "Después del sustantivo, el adjetivo dice cómo es. No hace falta «es»." }] },
@@ -345,7 +345,7 @@ const UNIDAD_3 = {
             { ru: "Э́то {большо́й} дом.", es: "Es una casa grande.", por: "Antes del sustantivo: nombra la cosa («una casa grande»)." },
             { ru: "Дом {большо́й}.", es: "La casa es grande.", por: "Después: dice cómo es. Las mismas palabras, otra idea." }],
           destacado: "Э́то большо́й дом = es una casa grande. Дом большо́й = la casa es grande.",
-          chequeo: [{ pide: "¿Cuál dice «el auto es nuevo»?", opciones: ["Маши́на но́вая.", "Э́то но́вая маши́на."], ok: "Маши́на но́вая.", por: "El adjetivo después del sustantivo dice cómo es." }] },
+          chequeo: [{ pide: "¿Cuál dice «el coche es nuevo»?", opciones: ["Маши́на но́вая.", "Э́то но́вая маши́на."], ok: "Маши́на но́вая.", por: "El adjetivo después del sustantivo dice cómo es." }] },
         { id: "u3-pronombres", titulo: "Он, она́, оно́: no repetir la palabra",
           texto: "Para no repetir el sustantivo, se lo reemplaza por он, она́ u оно́, igual que en español decimos «él» o «ella». La diferencia es que en ruso esto vale también para las cosas, y manda el género de la palabra rusa: дом es masculino, entonces он большо́й («es grande»); ла́мпа es femenino, entonces она́ но́вая («es nueva»); окно́ es neutro, entonces оно́ ма́ленькое («es chica»). En plural, siempre они́: дома́ → они́ больши́е («son grandes»).",
           ejemplos: [
@@ -356,7 +356,7 @@ const UNIDAD_3 = {
           chequeo: [{ pide: "Дом… ¿он, она́ u оно́?", opciones: ["он", "она́", "оно́"], ok: "он", por: "Дом es masculino." }] }
 ] },
     { id: "u3m10", n: 10, tipo: "proyecto", titulo: "Proyecto final", resumen: "Describir tu casa.",
-      intro: "Describí tu casa o tu departamento en ruso: qué hay y cómo es. No importa que sea simple: la idea es escribir. Usá есть para decir que algo hay: есть ку́хня («hay una cocina»).",
+      intro: "Describe tu casa o tu apartamento en ruso: qué hay y cómo es. No importa que sea simple: la idea es escribir. Usa есть para decir que algo hay: есть ку́хня («hay una cocina»).",
       requisitos: [
         { txt: "Decir qué es (э́то…)", rx: "это [а-яе]+" },
         { txt: "Decir que algo hay (есть…)", rx: "есть [а-яе]+" },
@@ -452,9 +452,9 @@ function ejerciciosUnidad3() {
     const base = { grupo: s.id, lex: [s.id], items: ["lex:" + s.id], oir: s.ru };
     const mv = Math.max(2, s.desde);          /* módulo de vocabulario: donde se vio */
     /* Vocabulario */
-    out.push(Object.assign({ id: "U3-pal-" + s.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: mv, formaCasi: true, pide: "Escribí en ruso: «" + s.es + "»", audio: s.ru, audioManual: true,
+    out.push(Object.assign({ id: "U3-pal-" + s.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: mv, formaCasi: true, pide: "Escribe en ruso: «" + s.es + "»", audio: s.ru, audioManual: true,
       pista: "Empieza con " + s.ru[0].toUpperCase() + " y tiene " + s.ru.length + " letras.", esperadas: [s.ac], idioma: "ru", explicacion: s.ac + " — " + s.es }, base));
-    out.push(Object.assign({ id: "U3-dic-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: mv, formaCasi: true, pide: "Escuchá y escribí la palabra.", audio: s.ru, esperadas: [s.ac], idioma: "ru",
+    out.push(Object.assign({ id: "U3-dic-" + s.id, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: mv, formaCasi: true, pide: "Escucha y escribe la palabra.", audio: s.ru, esperadas: [s.ac], idioma: "ru",
       explicacion: s.ac + " — " + s.es }, base));
     const dis = baraja(sust.filter(x => x.tema === s.tema && x.id !== s.id && x.es !== s.es), i + 3).slice(0, 3);
     if (dis.length >= 2) out.push(Object.assign({ id: "U3-sig-" + s.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: mv, pide: "¿Qué significa?", grande: s.ac, audio: s.ru,
@@ -474,13 +474,13 @@ function ejerciciosUnidad3() {
       out.push(Object.assign({ id: "U3-gen-" + s.id, tipo: "genero", forma: "elegir", dificultad: sin(s.ru).slice(-1) === "ь" || m === 5 ? 3 : 1, modulo: m,
         acumula: m <= 5, pide: "¿De qué género es?", grande: s.ac, audio: s.ru, opciones: ["Masculino", "Femenino", "Neutro"], correcta: G[s.g], explicacion: porque(s) + " Significa «" + s.es + "»." }, base));
       out.push(Object.assign({ id: "U3-pron-" + s.id, tipo: "pronombre", forma: "elegir", dificultad: 2, modulo: 9,
-        pide: "¿Con qué pronombre la reemplazás?", grande: s.ac, audio: s.ru, opciones: ["он", "она́", "оно́"], correcta: PRON[s.g], explicacion: s.ac + " («" + s.es + "») es " + G[s.g].toLowerCase() + ": " + PRON[s.g] + "." }, base));
+        pide: "¿Con qué pronombre la reemplazas?", grande: s.ac, audio: s.ru, opciones: ["он", "она́", "оно́"], correcta: PRON[s.g], explicacion: s.ac + " («" + s.es + "») es " + G[s.g].toLowerCase() + ": " + PRON[s.g] + "." }, base));
     }
     /* Plural */
     if (s.pl && !s.indecl && s.pl !== s.ac) {
-      out.push(Object.assign({ id: "U3-plu-" + s.id, tipo: "plural", forma: "escribir", dificultad: 2, modulo: s.desde <= 6 ? 6 : 8, pide: "Escribí el plural.", grande: s.ac, audio: s.ru, audioManual: true, oir: s.pl,
+      out.push(Object.assign({ id: "U3-plu-" + s.id, tipo: "plural", forma: "escribir", dificultad: 2, modulo: s.desde <= 6 ? 6 : 8, pide: "Escribe el plural.", grande: s.ac, audio: s.ru, audioManual: true, oir: s.pl,
         esperadas: [s.pl], idioma: "ru", explicacion: s.ac + " → " + s.pl + "." }, base));
-      out.push(Object.assign({ id: "U3-sgl-" + s.id, tipo: "singular", forma: "escribir", dificultad: 2, modulo: s.desde <= 6 ? 6 : 8, pide: "Escuchá el plural y escribí el singular.", grande: s.pl, audio: s.pl,
+      out.push(Object.assign({ id: "U3-sgl-" + s.id, tipo: "singular", forma: "escribir", dificultad: 2, modulo: s.desde <= 6 ? 6 : 8, pide: "Escucha el plural y escribe el singular.", grande: s.pl, audio: s.pl,
         esperadas: [s.ac], idioma: "ru", explicacion: s.pl + " → " + s.ac + "." }, base));
       /* Plural equivocado verosímil: la otra vocal (-ы/-и) o la terminación «regular» */
       const r = sin(s.ru), p = sin(s.pl);
@@ -513,14 +513,14 @@ function ejerciciosUnidad3() {
         pide: "¿Cuál está bien?", opciones: baraja([frase, "Э́то " + mal + " " + nombre + "."], i + k + 2), correcta: frase, explicacion: frase + " — " + razon }, b2));
       if (mod === 7) {
         out.push(Object.assign({ id: "U3-conc-" + s.id + "-" + a.id, tipo: "concordancia", forma: "elegir", dificultad: 2, modulo: 7,
-          pide: "Elegí el adjetivo: «" + esAdj(a) + "».", grande: "_____ " + nombre, audio: frase, audioManual: true,
+          pide: "Elige el adjetivo: «" + esAdj(a) + "».", grande: "_____ " + nombre, audio: frase, audioManual: true,
           opciones: baraja([...new Set(todas)], i + k), correcta: f, explicacion: razon + " Por eso " + f + "." }, b2));
       } else if (s.emoji) {
         out.push(Object.assign({ id: "U3-desc-" + s.id + "-" + a.id, tipo: "describir", forma: "escribir", dificultad: 3, modulo: 9,
-          pide: "Describí la imagen con «" + esAdj(a) + "»: Э́то…", grande: s.emoji, esperadas: [frase, f + " " + s.ac + ".", s.ac + " " + f + "."], idioma: "ru", explicacion: frase }, b2));
+          pide: "Describe la imagen con «" + esAdj(a) + "»: Э́то…", grande: s.emoji, esperadas: [frase, f + " " + s.ac + ".", s.ac + " " + f + "."], idioma: "ru", explicacion: frase }, b2));
       } else {
         out.push(Object.assign({ id: "U3-adjw-" + s.id + "-" + a.id, tipo: "adj-escribir", forma: "escribir", dificultad: 3, modulo: 9,
-          pide: "Escribí en ruso, con el adjetivo delante: «" + s.es + "» + «" + esAdj(a) + "».", pista: s.ac + " + " + a.ac, esperadas: [f + " " + s.ac, frase], idioma: "ru",
+          pide: "Escribe en ruso, con el adjetivo delante: «" + s.es + "» + «" + esAdj(a) + "».", pista: s.ac + " + " + a.ac, esperadas: [f + " " + s.ac, frase], idioma: "ru",
           explicacion: f + " " + s.ac + ". " + (s.soloPl ? "" : porque(s)) }, b2));
       }
     });
@@ -614,7 +614,7 @@ function ejerciciosUnidad3() {
     const base = { grupo: s.id, lex: [s.id], items: ["lex:" + s.id] };
     const m = s.desde <= 6 ? 6 : 8, uno = i % 2 === 0;
     out.push(Object.assign({ id: "U3-oido-" + s.id, tipo: "oido", forma: "elegir", dificultad: 2, modulo: m, regla: reglaPl(s),
-      pide: "Escuchá: ¿qué palabra oíste?", audio: uno ? s.ru : s.pl, opciones: [s.ac, s.pl], correcta: uno ? s.ac : s.pl,
+      pide: "Escucha: ¿qué palabra oíste?", audio: uno ? s.ru : s.pl, opciones: [s.ac, s.pl], correcta: uno ? s.ac : s.pl,
       explicacion: s.ac + " (singular) · " + s.pl + " (plural)." }, base));
     if (/^(persona|animal|objeto|casa|mueble|escuela|vehículo)$/.test(s.tag) || true) {
       const sg = "Где " + s.ac + "?", pl = "Где " + s.pl + "?";
@@ -655,11 +655,11 @@ function ejerciciosUnidad3() {
       grande: "Э́то " + mal + " " + s.ac + ".", opciones: ["El género del adjetivo", "El pronombre", "La terminación del plural"], correcta: "El género del adjetivo", esperadas: [bien],
       explicacion: bien + " " + porque(s)[0].toUpperCase() + porque(s).slice(1) }, b2));
     out.push(Object.assign({ id: "U3-cad-" + s.id, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 9, regla: reglaAdj(s, a), oir: s.pl[0].toUpperCase() + s.pl.slice(1) + " " + a.pl + ".",
-      pide: "Cambiá la frase paso a paso.", base: "Э́то " + s.ac + ".",
+      pide: "Cambia la frase paso a paso.", base: "Э́то " + s.ac + ".",
       pasos: [
-        { pide: "Agregá el adjetivo «" + a.esM + "» (" + a.ac + ").", esperadas: [bien] },
-        { pide: "Pasá todo al plural.", esperadas: ["Э́то " + a.pl + " " + s.pl + "."] },
-        { pide: "Ahora poné el adjetivo después, para decir cómo son.", esperadas: [s.pl[0].toUpperCase() + s.pl.slice(1) + " " + a.pl + "."] }],
+        { pide: "Agrega el adjetivo «" + a.esM + "» (" + a.ac + ").", esperadas: [bien] },
+        { pide: "Pasa todo al plural.", esperadas: ["Э́то " + a.pl + " " + s.pl + "."] },
+        { pide: "Ahora pon el adjetivo después, para decir cómo son.", esperadas: [s.pl[0].toUpperCase() + s.pl.slice(1) + " " + a.pl + "."] }],
       explicacion: bien + " → Э́то " + a.pl + " " + s.pl + ". → " + s.pl[0].toUpperCase() + s.pl.slice(1) + " " + a.pl + ". En plural, una sola forma del adjetivo; después del sustantivo, dice cómo son." }, b2));
   });
 
@@ -668,18 +668,18 @@ function ejerciciosUnidad3() {
   U3_FRASES.forEach(([m, ru, es], i) => {
     /* Hasta el módulo 6 (antes de los adjetivos), otra forma de una palabra es Casi: мои por мой (06/10/2026) */
     const b = { grupo: "F3-" + i, oir: ru, items: [], formaCasi: m <= 6 };
-    out.push(Object.assign({ id: "U3-fdic-" + i, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: m, pide: "Escuchá y escribí la frase.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es[0] }, b));
-    out.push(Object.assign({ id: "U3-fesru-" + i, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: m, pide: "Escribí en ruso: «" + es[0] + "»", audio: ru, audioManual: true,
+    out.push(Object.assign({ id: "U3-fdic-" + i, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: m, pide: "Escucha y escribe la frase.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es[0] }, b));
+    out.push(Object.assign({ id: "U3-fesru-" + i, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: m, pide: "Escribe en ruso: «" + es[0] + "»", audio: ru, audioManual: true,
       esperadas: U3_FRASES.filter(x => x[2][0] === es[0]).map(x => x[1]), idioma: "ru", explicacion: ru }, b));
     out.push(Object.assign({ id: "U3-frues-" + i, tipo: "ru-es", forma: "escribir", dificultad: 2, modulo: m, pide: "¿Qué significa?", grande: ru, audio: ru, esperadas: es, idioma: "es", explicacion: ru + " — " + es.join(" / ") }, b));
     const otras = baraja(U3_FRASES.filter(x => x[1] !== ru), i + 3).slice(0, 2).map(x => x[1]);
-    out.push(Object.assign({ id: "U3-fee-" + i, tipo: "escuchar-elegir", forma: "elegir", dificultad: 1, modulo: m, pide: "Escuchá: ¿qué frase es?", audio: ru,
+    out.push(Object.assign({ id: "U3-fee-" + i, tipo: "escuchar-elegir", forma: "elegir", dificultad: 1, modulo: m, pide: "Escucha: ¿qué frase es?", audio: ru,
       opciones: baraja([ru].concat(otras), i + 5), correcta: ru, explicacion: ru + " — " + es[0] }, b));
     const w = pal(ru);
     if (w.length >= 3) { let fi = baraja(w, i + 7); if (fi.join(" ") === w.join(" ")) fi = fi.slice(1).concat(fi[0]);
-      out.push(Object.assign({ id: "U3-ford-" + i, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: m, pide: "Ordená las palabras: «" + es[0] + "»", audio: ru, fichas: fi, sep: " ", esperada: w.join(" "), explicacion: ru }, b)); }
+      out.push(Object.assign({ id: "U3-ford-" + i, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: m, pide: "Ordena las palabras: «" + es[0] + "»", audio: ru, fichas: fi, sep: " ", esperada: w.join(" "), explicacion: ru }, b)); }
     const ult = w[w.length - 1];
-    if (w.length >= 2 && ult) out.push(Object.assign({ id: "U3-fcomp-" + i, tipo: "completar", forma: "escribir", dificultad: 2, modulo: m, pide: "Completá la frase.", grande: ru.replace(ult, "_____"), pista: es[0],
+    if (w.length >= 2 && ult) out.push(Object.assign({ id: "U3-fcomp-" + i, tipo: "completar", forma: "escribir", dificultad: 2, modulo: m, pide: "Completa la frase.", grande: ru.replace(ult, "_____"), pista: es[0],
       audio: ru, audioManual: true, esperadas: [ult], idioma: "ru", explicacion: ru + " — " + es[0] }, b));
   });
   return out;

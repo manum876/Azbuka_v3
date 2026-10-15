@@ -35,7 +35,7 @@
      1. si escribiste en letras latinas, te pide que escribas en ruso;
      2. la primera rama del paso actual que coincide (claves o captura);
      3. frases que sirven siempre (gracias, пока́, no entiendo…);
-     4. si es una pregunta: «¿y vos?» → aTi; si no, su historia
+     4. si es una pregunta: «¿y tú?» → aTi; si no, su historia
         (CHARLA.preguntas), y después vuelve a su pregunta;
      5. la rama comodín del paso, si la tiene;
      6. si nada coincide: «no entendí» y vuelve a preguntar.
@@ -128,7 +128,7 @@ function capEco(raw, tras) {
   return null;
 }
 
-/* Transliteración aproximada para lo que escribís vos (nombres, lugares).
+/* Transliteración aproximada para lo que escribes tú (nombres, lugares).
    Las líneas de Masha traen la suya, generada con la convención. */
 function trCrudo(s) {
   const M = { б: "b", в: "v", г: "g", д: "d", ж: "zh", з: "z", й: "i", к: "k", л: "l", м: "m", н: "n", п: "p", р: "r", с: "s", т: "t", ф: "f", х: "j", ц: "ts", ч: "ch", ш: "sh", щ: "sch", ъ: "", ь: "",
@@ -186,11 +186,11 @@ function procesar(st0, raw, delegado) {
   const lat = (raw.match(/[a-zñáéíóú]/gi) || []).length, cyr = (raw.match(/[а-яё]/gi) || []).length;
   if (lat > cyr) {
     decir(/^\s*[¡!]?\s*h?ola\b/i.test(raw) ? C.comodines.hola : C.comodines.latin);
-    notas.push("Escribí con el teclado ruso del teléfono.");
+    notas.push("Escribe con el teclado ruso del teléfono.");
     return { st, out, notas };
   }
   if (!T.length) return { st, out, notas };
-  /* Si en cualquier momento decís «меня зовут…», Masha se acuerda. */
+  /* Si en cualquier momento dices «меня зовут…», Masha se acuerda. */
   if (!st.S.nombre && st.nodo !== "nombre" && T.includes("зовут") && !esPregunta(raw, T)) {
     const nm = capNombre(raw);
     if (nm) { st.S.nombre = nm; st.datos["Nombre"] = nm; st.S.presentada = true; (NODOS.nombre && NODOS.nombre.alSaltar || []).forEach(L => decir(L)); }
@@ -241,7 +241,7 @@ function procesar(st0, raw, delegado) {
     else retomar();
     return { st, out, notas };
   }
-  /* 4. Preguntas: «¿y vos?» o la historia de Masha */
+  /* 4. Preguntas: «¿y tú?» o la historia de Masha */
   if (pregunta || tieneATi(T) || n.abierto) {
     if (soloATi(T) && n.aTi) { if (!decirATi()) decir(C.comodines.yaDije); retomar(); return { st, out, notas }; }
     const g = preguntaDe(T);
@@ -262,7 +262,7 @@ function procesar(st0, raw, delegado) {
   /* 6. No entendió */
   st.fallos[st.nodo] = (st.fallos[st.nodo] || 0) + 1;
   decir(C.comodines.noEntendi); retomar();
-  if (st.fallos[st.nodo] >= 2) notas.push("Masha no te entendió. Probá con una de las ideas de abajo.");
+  if (st.fallos[st.nodo] >= 2) notas.push("Masha no te entendió. Prueba con una de las ideas de abajo.");
   return { st, out, notas };
 }
 window.charlaProcesar = procesar; /* para pruebas */
@@ -373,32 +373,32 @@ function Guion({ c }) {
     h("div", { className: "ch-lbl" }, "Cómo entiende Masha"),
     ["No busca frases exactas: reconoce raíces de palabras clave (хорош…, плох…, из…) y tolera una letra mal.",
      "Cada paso tiene varias ramas: la primera que coincide decide su reacción y a qué paso sigue la charla.",
-     "Si le preguntás algo, contesta con su historia y después vuelve a su pregunta. Si le devolvés la pregunta («А ты?»), te dice lo suyo.",
-     "Se acuerda de tu nombre, de dónde sos, dónde vivís y si sos hombre o mujer (por уста́л / уста́ла, студе́нт / студе́нтка o la nacionalidad).",
+     "Si le preguntas algo, contesta con su historia y después vuelve a su pregunta. Si le devuelves la pregunta («А ты?»), te dice lo suyo.",
+     "Se acuerda de tu nombre, de dónde eres, dónde vives y si eres hombre o mujer (por уста́л / уста́ла, студе́нт / студе́нтка o la nacionalidad).",
      "Si no entiende, te lo dice y vuelve a preguntar; a la segunda, te sugiere usar las ideas."].map((t, i) => h("div", { key: i, className: "g-li" }, t)),
     h("div", { className: "ch-lbl" }, "Recorrido"),
     C.nodos.map(n => h("div", { key: n.id, className: "g-nodo" },
-      h("div", { className: "g-n" }, orden[n.id] + " · " + n.titulo, n.soloSi && h("small", null, "(" + n.soloSi + ")"), n.abierto && h("small", null, "(abierto: preguntás vos)")),
+      h("div", { className: "g-n" }, orden[n.id] + " · " + n.titulo, n.soloSi && h("small", null, "(" + n.soloSi + ")"), n.abierto && h("small", null, "(abierto: preguntas tú)")),
       h("div", { className: "g-bot" }, h("div", { className: "ch-quien", lang: "ru" }, PJ.ru), n.bot.map(linea),
         n.botSi && Object.keys(n.botSi).map(k => h("div", { key: k, className: "g-es", style: { marginTop: 6 } }, "Si ya le preguntaste eso: ", h("span", { lang: "ru", style: { color: c.text } }, n.botSi[k][0].ru)))),
       n.saltarSi && h("div", { className: "g-ir", style: { marginTop: 6 } }, "Si ya le dijiste tu nombre, lo saltea: ", h("span", { lang: "ru" }, n.alSaltar[0].ru)),
       h("div", { className: "g-sub" }, "Ideas que se sugieren"),
       h("div", { className: "g-es", lang: "ru", style: { color: c.textSub, marginTop: 4 } }, n.ideas.map(i => i.ru).join(" · ")),
-      (n.ramas || []).length > 0 && h("div", { className: "g-sub" }, "Si respondés…"),
+      (n.ramas || []).length > 0 && h("div", { className: "g-sub" }, "Si respondes…"),
       (n.ramas || []).map((r, k) => {
         if (r.porPais) return h("div", { key: k, className: "g-rama" }, h("div", { className: "g-et" }, r.etiqueta),
           Object.keys(r.porPais).map(p => h("div", { key: p, style: { marginTop: 6 } },
             h("div", { className: "g-es" }, p === "*" ? "Otro país" : p), r.porPais[p].resp.map(linea), h("div", { className: "g-ir" }, "→ " + destino(r.porPais[p].ir)))));
         if (r.porNombre) return h("div", { key: k, className: "g-rama" }, h("div", { className: "g-et" }, r.etiqueta),
           Object.keys(r.porNombre).map(p => h("div", { key: p, style: { marginTop: 6 } },
-            h("div", { className: "g-es" }, p === "*" ? "Cualquier nombre" : "Si te llamás " + p.split("|").join(", ")), r.porNombre[p].map(linea))),
+            h("div", { className: "g-es" }, p === "*" ? "Cualquier nombre" : "Si te llamas " + p.split("|").join(", ")), r.porNombre[p].map(linea))),
           h("div", { className: "g-ir" }, "→ " + destino(r.ir)));
         return h("div", { key: k, className: "g-rama" }, h("div", { className: "g-et" }, r.etiqueta), r.resp.map(linea), h("div", { className: "g-ir" }, "→ " + destino(r.ir)));
       }),
-      n.aTi && h(React.Fragment, null, h("div", { className: "g-sub" }, "Si le devolvés la pregunta («А ты?»)"), linea(n.aTi, "a")),
+      n.aTi && h(React.Fragment, null, h("div", { className: "g-sub" }, "Si le devuelves la pregunta («А ты?»)"), linea(n.aTi, "a")),
       n.retomar && h(React.Fragment, null, h("div", { className: "g-sub" }, "Para volver al tema"), linea(n.retomar, "r")))),
     h("div", { className: "ch-lbl" }, "Lo que Masha sabe de su vida"),
-    h("div", { className: "ch-txt", style: { marginTop: 0 } }, "Se lo podés preguntar en cualquier momento de la charla."),
+    h("div", { className: "ch-txt", style: { marginTop: 0 } }, "Se lo puedes preguntar en cualquier momento de la charla."),
     C.preguntas.map(p => h("div", { key: p.id, className: "g-nodo" },
       h("div", { className: "ch-kick" }, p.tema),
       h("div", { className: "g-es", style: { marginTop: 4 } }, "Por ejemplo: ", h("span", { lang: "ru", style: { color: c.textSub } }, p.idea.ru)),
@@ -409,9 +409,9 @@ function Guion({ c }) {
       h("div", { className: "g-ir" }, u.accion === "fin" ? "→ Fin de la charla" : u.accion === "repetir" ? "→ Repite su última pregunta, despacio y con la traducción" : "→ Vuelve a su pregunta"))),
     h("div", { className: "ch-lbl" }, "Si no entiende"),
     h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "No reconoce la respuesta"), linea(C.comodines.noEntendi, 1)),
-    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "Le preguntás algo que no sabe"), linea(C.comodines.noSe, 2)),
-    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "Escribís en letras latinas"), linea(C.comodines.latin, 3)),
-    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "Escribís «hola»"), linea(C.comodines.hola, 4)));
+    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "Le preguntas algo que no sabe"), linea(C.comodines.noSe, 2)),
+    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "Escribes en letras latinas"), linea(C.comodines.latin, 3)),
+    h("div", { className: "g-rama" }, h("div", { className: "g-et" }, "Escribes «hola»"), linea(C.comodines.hola, 4)));
 }
 
 function App() {
@@ -486,7 +486,7 @@ function App() {
       h("button", { className: "pair-btn", style: chipSt(ideas), onClick: () => setIdeas(v => !v) }, "Ideas")),
     !empezo && h(React.Fragment, null,
       h("div", { className: "ch-txt" }, C.presentacion),
-      h("div", { className: "ch-txt", style: { marginTop: -6 } }, "Tocá un mensaje de Masha para ver la traducción, o ▶ para escucharlo de nuevo. Si no entendés, escribile «Не понима́ю»."),
+      h("div", { className: "ch-txt", style: { marginTop: -6 } }, "Toca un mensaje de Masha para ver la traducción, o ▶ para escucharlo de nuevo. Si no entiendes, escríbele «Не понима́ю»."),
       h("div", { className: "ch-dest" }, "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas."),
       h("button", { className: "ch-btn pri", onClick: empezar }, "Empezar la charla")),
     empezo && h("div", { className: "ch-chat" },
@@ -501,20 +501,20 @@ function App() {
           h("b", { lang: "ru" }, i.ru), h("i", null, i.es))))),
       h("div", { className: "ch-in" },
         h("input", { ref: inRef, className: "ch-input", value: txt, lang: "ru", autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
-          placeholder: "Escribí en ruso…", onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
+          placeholder: "Escribe en ruso…", onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
         h("button", { className: "ch-env", onClick: enviar, disabled: !txt.trim() || escribiendo }, "Enviar")),
-      h("div", { className: "ch-tip" }, "Usá el teclado ruso del teléfono. También podés dictar: tocá el 🎤 del teclado ruso y hablá."),
+      h("div", { className: "ch-tip" }, "Usa el teclado ruso del teléfono. También puedes dictar: toca el 🎤 del teclado ruso y habla."),
       h("button", { className: "ch-reset", onClick: empezar }, "↺ Empezar de nuevo")),
     terminado && h("div", { className: "ch-card" },
       h("div", { className: "ch-kick" }, "Fin de la charla"),
       datos.length > 0 && h(React.Fragment, null,
-        h("div", { className: "ch-lbl", style: { marginTop: 12 } }, "Lo que Masha sabe de vos"),
+        h("div", { className: "ch-lbl", style: { marginTop: 12 } }, "Lo que Masha sabe de ti"),
         datos.map(k => h("div", { key: k, className: "ch-row" }, h("b", null, k + ": "), h("span", { lang: "ru" }, st.datos[k])))),
-      h("div", { className: "ch-lbl" }, "Lo que sabés de Masha"),
+      h("div", { className: "ch-lbl" }, "Lo que sabes de Masha"),
       sabidas.length ? sabidas.map(p => h("div", { key: p.id, className: "ch-row" }, h("b", null, p.tema + ": "), p.resp[0].es))
         : h("div", { className: "ch-row" }, "Todavía no le preguntaste nada sobre su vida."),
       faltan.length > 0 && h(React.Fragment, null,
-        h("div", { className: "ch-lbl" }, "La próxima, preguntale"),
+        h("div", { className: "ch-lbl" }, "La próxima, pregúntale"),
         h("div", { className: "ch-row", lang: "ru" }, faltan.map(p => p.idea.ru).join(" · "))),
       h("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginTop: 16 } },
         h("button", { className: "ch-btn pri", onClick: empezar }, "Charlar de nuevo"),

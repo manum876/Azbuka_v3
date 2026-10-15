@@ -76,7 +76,7 @@ function TablaSeis({ c, lista }) {
     style: { textAlign: "left", padding: "7px 10px", borderRadius: 9, background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", cursor: "pointer", minWidth: 0 } },
     h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: .5, color: c.textMuted } }, pr), h("div", { style: { fontSize: 15.5, fontWeight: 700 } }, f));
   return h(React.Fragment, null,
-    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Tocá una forma para escuchar cómo suena."),
+    h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, "Toca una forma para escuchar cómo suena."),
     lista.filter(Boolean).map(v => h("div", { key: v.titulo, className: "u-card", style: { padding: "12px 14px", marginTop: 10 } },
       h("div", { style: { display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" } },
         h("span", { lang: "ru", style: { fontSize: 18, fontWeight: 800, color: c.gold } }, v.titulo),
@@ -98,17 +98,17 @@ function PreguntaAbierta({ c, green }) {
     const BUDU = ["буду", "будешь", "будет", "будем", "будете", "будут"], MOV1 = ["пойду", "поеду"];
     const fut = w.find(x => BUDU.indexOf(x) >= 0 || /^(пойд|поед)/.test(x));
     const tips = [].concat(...U.modulos.find(m => m.id === "u9m12").consejos.map(x => x.fn(txt)));
-    if (!fut) return setRes({ nivel: "mal", msg: "Contestá en futuro: бу́ду + infinitivo, o пойду́ / пое́ду.", tips });
-    if (fut !== "буду" && MOV1.indexOf(fut) < 0) return setRes({ nivel: "casi", msg: "Hablás de vos: va **бу́ду** (o пойду́ / пое́ду), no «" + fut + "».", tips });
-    setRes({ nivel: tips.length ? "casi" : "bien", msg: tips.length ? "Casi: mirá el detalle de abajo." : "Bien: es futuro.", tips });
+    if (!fut) return setRes({ nivel: "mal", msg: "Contesta en futuro: бу́ду + infinitivo, o пойду́ / пое́ду.", tips });
+    if (fut !== "буду" && MOV1.indexOf(fut) < 0) return setRes({ nivel: "casi", msg: "Hablas de ti: va **бу́ду** (o пойду́ / пое́ду), no «" + fut + "».", tips });
+    setRes({ nivel: tips.length ? "casi" : "bien", msg: tips.length ? "Casi: mira el detalle de abajo." : "Bien: es futuro.", tips });
   };
   return h("div", { className: "u-card", style: { padding: 16, marginTop: 14 } },
-    h("div", { className: "u-kicker", style: { marginBottom: 6 } }, "Contestá con tus palabras"),
+    h("div", { className: "u-kicker", style: { marginBottom: 6 } }, "Contesta con tus palabras"),
     h("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
       h("div", { lang: "ru", style: { flex: 1, fontSize: 17, fontWeight: 700 } }, "— " + q[0]),
       h("button", { className: "play", onClick: () => azHablarRu(q[0]), "aria-label": "Escuchar" }, "▶")),
     h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 2 } }, q[1]),
-    h("input", { className: "pr-input", lang: "ru", value: txt, placeholder: "Contestá en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); },
+    h("input", { className: "pr-input", lang: "ru", value: txt, placeholder: "Contesta en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); },
       autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
       style: { width: "100%", boxSizing: "border-box", marginTop: 10, background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 10, padding: "11px 12px", color: c.text, fontSize: 16, fontFamily: "inherit" } }),
     h("button", { className: "ubtn", style: { marginTop: 10 }, disabled: !txt.trim(), onClick: revisar }, "Revisar"),
@@ -140,7 +140,7 @@ function AgendaPropia({ c }) {
   useEffect(() => { (async () => setAg(await azGet("az_u9_agenda", {})))(); }, []);
   const cambiar = (d, v) => { const x = Object.assign({}, ag, { [d]: v }); setAg(x); azSet("az_u9_agenda", x); };
   return h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 14 } },
-    h("div", { className: "u-text", style: { fontSize: 13, margin: "6px 0 8px" } }, "Escribí en ruso qué vas a hacer cada día de la semana que viene."),
+    h("div", { className: "u-text", style: { fontSize: 13, margin: "6px 0 8px" } }, "Escribe en ruso qué vas a hacer cada día de la semana que viene."),
     DIAS.map((d, j) => h("div", { key: d, style: { display: "flex", alignItems: "center", gap: 10, padding: "6px 0", borderTop: j ? `1px solid ${c.border}` : "none" } },
       h("div", { lang: "ru", style: { width: 104, flexShrink: 0, fontWeight: 800, color: c.gold, fontSize: 14 } }, d),
       h("input", { lang: "ru", value: ag[d] || "", placeholder: "…", onInput: e => cambiar(d, e.target.value), autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",

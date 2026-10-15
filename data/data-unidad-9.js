@@ -28,18 +28,18 @@ const U9_VERBOS = {
   "жить": ["vivir", [["в Барсело́не", "en Barcelona"], ["в Москве́", "en Moscú"]]]
 };
 /* Quién: [ruso, español del sujeto, índice de persona 0-5] */
-const U9_SUJ = [["Я", "", 0], ["Ты", "Vos", 1], ["Он", "Él", 2], ["Она́", "Ella", 2], ["Мы", "", 3], ["Вы", "Ustedes", 4], ["Они́", "Ellos", 5],
+const U9_SUJ = [["Я", "", 0], ["Ты", "Tú", 1], ["Он", "Él", 2], ["Она́", "Ella", 2], ["Мы", "", 3], ["Вы", "Ustedes", 4], ["Они́", "Ellos", 5],
   ["А́нна", "Ana", 2], ["Ива́н", "Iván", 2], ["Ма́ша", "Masha", 2], ["Брат", "Mi hermano", 2]];
 const U9_IR = ["voy a", "vas a", "va a", "vamos a", "van a", "van a"];
 const U9_TIEMPO = [["за́втра", "mañana"], ["послеза́втра", "pasado mañana"], ["ско́ро", "pronto"], ["на э́той неде́ле", "esta semana"], ["на сле́дующей неде́ле", "la semana que viene"],
   ["в сле́дующем ме́сяце", "el mes que viene"], ["в сле́дующем году́", "el año que viene"], ["на выходны́х", "el fin de semana"], ["че́рез час", "dentro de una hora"], ["че́рез неде́лю", "dentro de una semana"]];
-const U9_INTENCION = { "хоте́ть": ["quiero", "querés", "quiere", "queremos", "quieren", "quieren"], "плани́ровать": ["planeo", "planeás", "planea", "planeamos", "planean", "planean"],
-  "собира́ться": ["tengo pensado", "tenés pensado", "tiene pensado", "tenemos pensado", "tienen pensado", "tienen pensado"], "мечта́ть": ["sueño con", "soñás con", "sueña con", "soñamos con", "sueñan con", "sueñan con"] };
+const U9_INTENCION = { "хоте́ть": ["quiero", "quieres", "quiere", "queremos", "quieren", "quieren"], "плани́ровать": ["planeo", "planeas", "planea", "planeamos", "planean", "planean"],
+  "собира́ться": ["tengo pensado", "tienes pensado", "tiene pensado", "tenemos pensado", "tienen pensado", "tienen pensado"], "мечта́ть": ["sueño con", "sueñas con", "sueña con", "soñamos con", "sueñan con", "sueñan con"] };
 /* Destinos: [ruso del lugar, a pie (пойду́) o en vehículo (пое́ду), español «a…», «en…»] */
 const U9_DESTINOS = [["рестора́н", "п", "al restaurante", "en el restaurante"], ["магази́н", "п", "al negocio", "en el negocio"], ["парк", "п", "al parque", "en el parque"],
   ["кино́", "п", "al cine", "en el cine"], ["рабо́та", "е", "al trabajo", "en el trabajo"], ["Москва́", "е", "a Moscú", "en Moscú"], ["Мадри́д", "е", "a Madrid", "en Madrid"],
   ["Испа́ния", "е", "a España", "en España"], ["Росси́я", "е", "a Rusia", "en Rusia"], ["Пари́ж", "е", "a París", "en París"]];
-const U9_TRANSPORTE = [["по́езд", "en tren", "🚆"], ["самолёт", "en avión", "✈️"], ["маши́на", "en auto", "🚗"]];
+const U9_TRANSPORTE = [["по́езд", "en tren", "🚆"], ["самолёт", "en avión", "✈️"], ["маши́на", "en coche", "🚗"]];
 
 /* Parejas de aspecto para el futuro (11/10/2026): [proceso, resultado, español]; las 12 de la Unidad 8 y 4 nuevas */
 const U9_PARES = [["чита́ть", "прочита́ть", "leer"], ["писа́ть", "написа́ть", "escribir"], ["де́лать", "сде́лать", "hacer"], ["смотре́ть", "посмотре́ть", "mirar"],
@@ -61,7 +61,7 @@ const U9_VISTAS = {
 const U9_GLOSA = {
   "путеше́ствовать": "viajar", "ско́ро": "pronto", "сле́дующий": "siguiente, que viene", "че́рез": "dentro de", "послеза́втра": "pasado mañana",
   "плани́ровать": "planear", "собира́ться": "tener pensado", "мечта́ть": "soñar con", "пойти́": "ir (una vez, a pie)", "пое́хать": "ir (una vez, en vehículo)",
-  "по́езд": "tren", "самолёт": "avión", "пое́здка": "viaje, salida", "путеше́ствие": "viaje (largo)", "биле́т": "pasaje, boleto", "посеща́ть": "visitar",
+  "по́езд": "tren", "самолёт": "avión", "пое́здка": "viaje, salida", "путеше́ствие": "viaje (largo)", "биле́т": "billete", "посеща́ть": "visitar",
   "нача́ть": "empezar (una vez)", "зако́нчить": "terminar (una vez)", "звони́ть": "llamar por teléfono", "позвони́ть": "llamar (una vez)", "взять": "tomar, llevar (una vez)",
   "ещё": "todavía", "обяза́тельно": "sin falta", "прогно́з": "pronóstico", "со́лнечно": "hay sol", "о́блачно": "está nublado", "гра́дус": "grado", "тума́н": "niebla",
   "жара́": "calor fuerte", "моро́з": "helada", "о́блако": "nube", "наве́рное": "seguramente", "бу́дущий": "próximo, que viene", "бу́дущее": "el futuro", "когда́-нибудь": "algún día",
@@ -69,7 +69,7 @@ const U9_GLOSA = {
   "реше́ние": "decisión", "пригласи́ть": "invitar (una vez)", "приглаша́ть": "invitar", "поступи́ть": "entrar (a la universidad)", "профе́ссия": "profesión", "карье́ра": "carrera profesional",
   "сдать": "aprobar (un examen)", "вы́учить": "aprender (de memoria)", "научи́ться": "aprender a", "попро́бовать": "probar", "вы́играть": "ganar",
   "пешко́м": "a pie", "мотоци́кл": "moto", "такси́": "taxi", "лете́ть": "volar (ahora, hacia un lugar)", "лета́ть": "volar (en general)", "тра́нспорт": "transporte", "маршру́т": "recorrido",
-  "спи́сок": "lista", "зада́ча": "tarea", "успе́ть": "llegar a tiempo", "бага́ж": "equipaje", "ви́за": "visa", "па́спорт": "pasaporte", "авиабиле́т": "pasaje de avión",
+  "спи́сок": "lista", "зада́ча": "tarea", "успе́ть": "llegar a tiempo", "бага́ж": "equipaje", "ви́за": "visa", "па́спорт": "pasaporte", "авиабиле́т": "billete de avión",
   "рейс": "vuelo", "вы́лет": "salida (del vuelo)", "прилёт": "llegada (del vuelo)", "путеше́ственник": "viajero", "тури́зм": "turismo", "тури́ст": "turista", "гид": "guía",
   "фотоаппара́т": "cámara de fotos", "заброни́ровать": "reservar (una vez)", "брони́ровать": "reservar", "собра́ть": "juntar, armar (una vez)", "собира́ть": "juntar, armar",
   "купа́ться": "bañarse (en el mar)", "загора́ть": "tomar sol", "посети́ть": "visitar (una vez)", "оста́ться": "quedarse", "провести́": "pasar (el tiempo)",
@@ -86,7 +86,7 @@ const U9_GRUPOS = [
   [7, "Cómo vas a ir", "пойти́ пое́хать по́езд самолёт мотоци́кл такси́ пешко́м лете́ть лета́ть тра́нспорт маршру́т"],
   [9, "Para organizarte", "спи́сок зада́ча успе́ть"],
   [10, "Preparar el viaje", "биле́т авиабиле́т заброни́ровать брони́ровать собра́ть собира́ть па́спорт ви́за бага́ж рейс вы́лет прилёт"],
-  [10, "Allá", "пое́здка путеше́ствие тури́ст тури́зм путеше́ственник гид фотоаппара́т купа́ться загора́ть посеща́ть посети́ть оста́ться провести́ отъе́зд прие́зд возвраще́ние"]
+  [10, "Allí", "пое́здка путеше́ствие тури́ст тури́зм путеше́ственник гид фотоаппара́т купа́ться загора́ть посеща́ть посети́ть оста́ться провести́ отъе́зд прие́зд возвраще́ние"]
 ];
 const U9_AMPLIACION_RU = "";   /* 05/10/2026: посеща́ть pasó a la base (Manu) */
 
@@ -98,7 +98,7 @@ const U9_LECTURAS = [
     vf: [["В суббо́ту я бу́ду на рабо́те.", false], ["Ве́чером я пойду́ в кино́.", true], ["В воскресе́нье я бу́ду отдыха́ть.", true]] },
   { id: "viaje", titulo: "Пое́здка в Москву́", lineas: [
       ["В сле́дующем ме́сяце Ма́ша пое́дет в Москву́.", "El mes que viene Masha va a ir a Moscú."], ["Она́ пое́дет на по́езде.", "Va a ir en tren."],
-      ["Она́ бу́дет жить в гости́нице в це́нтре.", "Va a vivir en un hotel en el centro."], ["Там она́ бу́дет гуля́ть и говори́ть по-ру́сски.", "Allá va a pasear y hablar en ruso."]],
+      ["Она́ бу́дет жить в гости́нице в це́нтре.", "Va a vivir en un hotel en el centro."], ["Там она́ бу́дет гуля́ть и говори́ть по-ру́сски.", "Allí va a pasear y hablar en ruso."]],
     preguntas: [["¿Adónde va a ir Masha?", "в Москву́", ["в Москве́", "в Мадри́д"]], ["¿Cómo va a ir?", "на по́езде", ["на самолёте", "на маши́не"]], ["¿Dónde va a vivir?", "в гости́нице", ["до́ма", "в кварти́ре"]]],
     vf: [["Ма́ша пое́дет на самолёте.", false], ["Она́ бу́дет говори́ть по-ру́сски.", true], ["Ма́ша пое́дет в Москву́ на сле́дующей неде́ле.", false]] },
   { id: "tres", titulo: "Вчера́, сего́дня, за́втра", lineas: [
@@ -109,8 +109,8 @@ const U9_LECTURAS = [
     vf: [["Вчера́ Ива́н рабо́тал в о́фисе.", false], ["Сейча́с он живёт в Барсело́не.", true], ["В сле́дующем году́ он бу́дет путеше́ствовать.", true]] }
 ];
 const U9_PREGUNTAS = [["Что ты бу́дешь де́лать за́втра?", "¿Qué vas a hacer mañana?"], ["Что ты бу́дешь де́лать ве́чером?", "¿Qué vas a hacer a la noche?"],
-  ["Что ты бу́дешь де́лать на выходны́х?", "¿Qué vas a hacer el fin de semana?"], ["Каки́е у тебя́ пла́ны?", "¿Qué planes tenés?"], ["Куда́ ты пое́дешь?", "¿Adónde vas a ir?"],
-  ["Где ты бу́дешь за́втра?", "¿Dónde vas a estar mañana?"], ["Когда́ ты бу́дешь там?", "¿Cuándo vas a estar allá?"], ["Ты бу́дешь рабо́тать за́втра?", "¿Vas a trabajar mañana?"]];
+  ["Что ты бу́дешь де́лать на выходны́х?", "¿Qué vas a hacer el fin de semana?"], ["Каки́е у тебя́ пла́ны?", "¿Qué planes tienes?"], ["Куда́ ты пое́дешь?", "¿Adónde vas a ir?"],
+  ["Где ты бу́дешь за́втра?", "¿Dónde vas a estar mañana?"], ["Когда́ ты бу́дешь там?", "¿Cuándo vas a estar allí?"], ["Ты бу́дешь рабо́тать за́втра?", "¿Vas a trabajar mañana?"]];
 
 const UNIDAD_9 = {
   id: 9,
@@ -120,7 +120,7 @@ const UNIDAD_9 = {
   tiempo: "3 a 4 semanas con práctica diaria (unas 35–45 horas)",
   modulos: [
     { id: "u9m1", n: 1, tipo: "leccion", nPractica: 10, titulo: "Pasado, presente y futuro", resumen: "Вчера́ рабо́тал · сего́дня рабо́таю · за́втра бу́ду рабо́тать.",
-      intro: "Ya sabés contar lo que pasó y lo que pasa. Ahora, lo que va a pasar. Como en el pasado, el ruso tiene menos formas que el español, y la pareja de verbos que ya conocés vuelve a decidir.",
+      intro: "Ya sabes contar lo que pasó y lo que pasa. Ahora, lo que va a pasar. Como en el pasado, el ruso tiene menos formas que el español, y la pareja de verbos que ya conoces vuelve a decidir.",
       secciones: [
         { id: "u9-tres-tiempos", titulo: "La misma acción, tres veces",
           texto: "Con la misma acción en los tres tiempos se ve qué cambia: en pasado, la terminación **-л**; en presente, la persona; en futuro, бу́ду adelante y el verbo en infinitivo.",
@@ -145,7 +145,7 @@ const UNIDAD_9 = {
       intro: "El futuro de proceso se arma con бу́ду, que es el futuro de быть, más el infinitivo del verbo. Como el «voy a» del español.",
       secciones: [
         { id: "u9-budu-formas", titulo: "Las formas de бу́ду",
-          texto: "бу́ду cambia según la persona, con las terminaciones del presente que ya conocés:\n{я} бу́ду · ты бу́дешь · он / она́ бу́дет\nмы бу́дем · вы бу́дете · они́ бу́дут",
+          texto: "бу́ду cambia según la persona, con las terminaciones del presente que ya conoces:\n{я} бу́ду · ты бу́дешь · он / она́ бу́дет\nмы бу́дем · вы бу́дете · они́ бу́дут",
           ejemplos: [
             { ru: "Я {бу́ду} рабо́тать.", es: "Voy a trabajar.", por: "Con я, бу́ду." },
             { ru: "Ты {бу́дешь} учи́ться.", es: "Vas a estudiar.", por: "Con ты, бу́дешь." },
@@ -177,7 +177,7 @@ const UNIDAD_9 = {
             { ru: "Мы {ку́пим} хлеб.", es: "Vamos a comprar pan.", por: "купи́ть → ку́пим." },
             { ru: "Я {сде́лаю} э́то за́втра.", es: "Lo hago mañana.", por: "Sin бу́ду: сде́лаю ya es futuro." }],
           destacado: "прочита́ю = voy a leerlo (entero) · бу́ду чита́ть = voy a estar leyendo",
-          desarmar: { es: "Mañana voy a comprar el pasaje.", partes: [
+          desarmar: { es: "Mañana voy a comprar el billete.", partes: [
             { txt: "За́втра", rol: "Cuándo", nota: "Un momento del futuro." },
             { txt: "я", rol: "Quién", nota: "La terminación del verbo es la de yo." },
             { txt: "куплю́", rol: "Verbo de resultado", nota: "Conjugado como presente: dice futuro. Sin бу́ду." },
@@ -185,7 +185,7 @@ const UNIDAD_9 = {
           errores: [{ mal: "Сейча́с я прочита́ю газе́ту (por «ahora leo»).", bien: "Сейча́с я {чита́ю} газе́ту.", por: "Lo que pasa ahora va con el de proceso." }],
           chequeo: [{ pide: "Я напишу́ письмо́. ¿Cuándo?", opciones: ["En el futuro", "Ahora"], ok: "En el futuro", por: "напишу́ es de resultado: su presente es futuro." }] },
         { id: "u9-fut-cual", titulo: "¿Бу́ду чита́ть o прочита́ю?",
-          texto: "Las mismas pistas que en el pasado:\nCuánto va a durar (весь день, два часа́, до́лго) o lo que se va a repetir (ка́ждый день, ча́сто) → proceso: бу́ду + infinitivo.\nUna acción que vas a terminar, con un resultado → resultado: прочита́ю, куплю́.\nSi solo decís qué vas a hacer, sin pensar en el resultado, va el de proceso: Что ты бу́дешь де́лать? — Я бу́ду чита́ть.",
+          texto: "Las mismas pistas que en el pasado:\nCuánto va a durar (весь день, два часа́, до́лго) o lo que se va a repetir (ка́ждый день, ча́сто) → proceso: бу́ду + infinitivo.\nUna acción que vas a terminar, con un resultado → resultado: прочита́ю, куплю́.\nSi solo dices qué vas a hacer, sin pensar en el resultado, va el de proceso: Что ты бу́дешь де́лать? — Я бу́ду чита́ть.",
           ejemplos: [
             { ru: "За́втра я {бу́ду чита́ть} весь день.", es: "Mañana voy a leer todo el día.", por: "весь день: proceso." },
             { ru: "За́втра я {прочита́ю} э́ту кни́гу.", es: "Mañana voy a terminar este libro.", por: "Un resultado: resultado." },
@@ -207,7 +207,7 @@ const UNIDAD_9 = {
           mas: { texto: "Igual que en el presente, en la forma de yo a veces cambia una consonante: купи́ть → куплю́ (aparece **л**), пригото́вить → пригото́влю, написа́ть → напишу́ (**с** → **ш**). Son las mismas alternancias que ya viste en люблю́ o пишу́." },
           chequeo: [{ pide: "За́втра я ___ (купи́ть) биле́т.", opciones: ["куплю́", "купи́ю", "бу́ду купи́ть"], ok: "куплю́", por: "купи́ть → куплю́, sin бу́ду." }] },
         { id: "u9-pares-nuevos", titulo: "Parejas nuevas",
-          texto: "Cuatro parejas más, muy útiles para hablar de planes:\nначина́ть → нача́ть (empezar): начну́, начнёшь\nзака́нчивать → зако́нчить (terminar): зако́нчу, зако́нчишь\nзвони́ть → позвони́ть (llamar por teléfono): позвоню́, позвони́шь\nбрать → взять (tomar, agarrar): возьму́, возьмёшь",
+          texto: "Cuatro parejas más, muy útiles para hablar de planes:\nначина́ть → нача́ть (empezar): начну́, начнёшь\nзака́нчивать → зако́нчить (terminar): зако́нчу, зако́нчишь\nзвони́ть → позвони́ть (llamar por teléfono): позвоню́, позвони́шь\nбрать → взять (tomar): возьму́, возьмёшь",
           ejemplos: [
             { ru: "За́втра я {начну́} рабо́тать в де́вять.", es: "Mañana voy a empezar a trabajar a las nueve.", por: "нача́ть → начну́." },
             { ru: "Я {зако́нчу} и {позвоню́}.", es: "Termino y te llamo.", por: "Dos acciones, una tras otra: resultado." },
@@ -293,7 +293,7 @@ const UNIDAD_9 = {
           chequeo: [{ pide: "«Dentro de una semana» es…", opciones: ["че́рез неде́лю", "неде́лю че́рез"], ok: "че́рез неде́лю", por: "че́рез va adelante." }] }
       ] },
     { id: "u9m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Planes e intenciones", resumen: "Я хочу́ / плани́рую / наде́юсь…",
-      intro: "No todo lo que viene es seguro. Para decir lo que querés, lo que planeás o lo que esperás hacer, hay verbos que van con un infinitivo.",
+      intro: "No todo lo que viene es seguro. Para decir lo que quieres, lo que planeas o lo que esperas hacer, hay verbos que van con un infinitivo.",
       secciones: [
         { id: "u9-intencion", titulo: "Querer, planear, esperar",
           texto: "Estos verbos van con otro verbo en infinitivo:\nхоте́ть (querer): Я хочу́ путеше́ствовать.\nплани́ровать (planear): Я плани́рую рабо́тать до́ма.\nсобира́ться (tener pensado): Я собира́юсь изуча́ть ру́сский.\nмечта́ть (soñar con): Я мечта́ю жить в Москве́.\nнаде́яться (tener esperanza): Я наде́юсь отдыха́ть ле́том.\nобеща́ть (prometer): Я обеща́ю звони́ть ча́сто.",
@@ -305,11 +305,11 @@ const UNIDAD_9 = {
           destacado: "хочу́ / плани́рую / собира́юсь / мечта́ю / наде́юсь + infinitivo",
           mas: { texto: "Después de estos verbos, el infinitivo puede ser de proceso o de resultado, con la misma lógica de siempre: para una acción concreta, que va a terminar, el de resultado (Я хочу́ купи́ть маши́ну, «quiero comprar un auto»); para una actividad o algo que se repite, el de proceso (Я хочу́ путеше́ствовать, «quiero viajar»).",
             ejemplos: [
-              { ru: "Я хочу́ {купи́ть} биле́т.", es: "Quiero comprar el pasaje.", por: "Una compra concreta: resultado." },
+              { ru: "Я хочу́ {купи́ть} биле́т.", es: "Quiero comprar el billete.", por: "Una compra concreta: resultado." },
               { ru: "Я хочу́ {рабо́тать} до́ма.", es: "Quiero trabajar en casa.", por: "Una actividad: proceso." }] },
           chequeo: [{ pide: "«Espero descansar».", opciones: ["Я наде́юсь отдыха́ть.", "Я наде́юсь отдыха́ю."], ok: "Я наде́юсь отдыха́ть.", por: "Después de наде́юсь, infinitivo." }] },
         { id: "u9-budu-vs-hochu", titulo: "Va a pasar o lo quiero",
-          texto: "бу́ду dice que algo va a pasar. Los otros verbos dicen qué pensás de eso: si lo querés, lo planeás o lo esperás.",
+          texto: "бу́ду dice que algo va a pasar. Los otros verbos dicen qué piensas de eso: si lo quieres, lo planeas o lo esperas.",
           ejemplos: [
             { ru: "Я {бу́ду} рабо́тать.", es: "Voy a trabajar.", por: "Va a pasar." },
             { ru: "Я {хочу́} рабо́тать.", es: "Quiero trabajar.", por: "Un deseo." },
@@ -346,20 +346,20 @@ const UNIDAD_9 = {
           errores: [{ mal: "Я пое́ду в Москве́.", bien: "Я пое́ду {в Москву́}.", por: "Con пое́ду, adónde: acusativo." }],
           chequeo: [{ pide: "Мы бу́дем ___.", opciones: ["в Пари́же", "в Пари́ж"], ok: "в Пари́же", por: "Con бу́дем, dónde: prepositivo." }] },
         { id: "u9-transporte", titulo: "En qué vas a ir",
-          texto: "на + prepositivo: на по́езде (en tren), на самолёте (en avión), на маши́не (en auto), на мотоци́кле (en moto). Las palabras que no cambian quedan igual: на метро́, на такси́. A pie es пешко́м, sin preposición.\nPara volar está лете́ть: За́втра я лечу́ в Москву́ («mañana vuelo a Moscú»), en presente, como los planes cercanos.",
+          texto: "на + prepositivo: на по́езде (en tren), на самолёте (en avión), на маши́не (en coche), на мотоци́кле (en moto). Las palabras que no cambian quedan igual: на метро́, на такси́. A pie es пешко́м, sin preposición.\nPara volar está лете́ть: За́втра я лечу́ в Москву́ («mañana vuelo a Moscú»), en presente, como los planes cercanos.",
           ejemplos: [
             { ru: "Я пое́ду в Мадри́д {на по́езде}.", es: "Voy a ir a Madrid en tren.", por: "на + prepositivo." },
             { ru: "Мы пое́дем {на такси́}.", es: "Vamos a ir en taxi.", por: "такси́ no cambia." },
             { ru: "Я пойду́ {пешко́м}.", es: "Voy a ir a pie.", por: "пешко́м, sin preposición." },
             { ru: "В суббо́ту мы {лети́м} в Рим.", es: "El sábado volamos a Roma.", por: "лете́ть en presente, para un plan cercano." }],
-          mas: { texto: "лете́ть y лета́ть son como идти́ y ходи́ть: лете́ть es un vuelo concreto («volar ahora, para allá»), лета́ть, volar en general o ida y vuelta: Я ча́сто лета́ю в Москву́ («vuelo seguido a Moscú»). тра́нспорт es el transporte en general; маршру́т, el recorrido." },
+          mas: { texto: "лете́ть y лета́ть son como идти́ y ходи́ть: лете́ть es un vuelo concreto («volar ahora, para allí»), лета́ть, volar en general o ida y vuelta: Я ча́сто лета́ю в Москву́ («vuelo seguido a Moscú»). тра́нспорт es el transporte en general; маршру́т, el recorrido." },
           chequeo: [{ pide: "«En avión» es…", opciones: ["на самолёте", "в самолёт"], ok: "на самолёте", por: "на + prepositivo." }] }
       ] },
     { id: "u9m8", n: 8, tipo: "leccion", nPractica: 10, titulo: "Preguntar por los planes", resumen: "Что ты бу́дешь де́лать за́втра?",
-      intro: "Las preguntas sobre el futuro, y cómo contestarlas. Abajo podés practicar respondiendo con tus propias palabras.",
+      intro: "Las preguntas sobre el futuro, y cómo contestarlas. Abajo puedes practicar respondiendo con tus propias palabras.",
       secciones: [
         { id: "u9-preguntas", titulo: "Las preguntas",
-          texto: "Что ты бу́дешь де́лать за́втра? («¿qué vas a hacer mañana?»): pregunta por la actividad, con el de proceso.\nКуда́ ты пое́дешь? Где ты бу́дешь? Когда́ ты позвони́шь?\nКаки́е у тебя́ пла́ны? («¿qué planes tenés?»): va así, como fórmula.",
+          texto: "Что ты бу́дешь де́лать за́втра? («¿qué vas a hacer mañana?»): pregunta por la actividad, con el de proceso.\nКуда́ ты пое́дешь? Где ты бу́дешь? Когда́ ты позвони́шь?\nКаки́е у тебя́ пла́ны? («¿qué planes tienes?»): va así, como fórmula.",
           ejemplos: [
             { ru: "— Что ты {бу́дешь де́лать} за́втра? — Я {бу́ду рабо́тать}.", es: "—¿Qué vas a hacer mañana? —Voy a trabajar.", por: "La actividad: бу́ду + infinitivo." },
             { ru: "— Куда́ ты {пое́дешь}? — В Мадри́д.", es: "—¿Adónde vas a ir? —A Madrid.", por: "Adónde: acusativo." },
@@ -377,14 +377,14 @@ const UNIDAD_9 = {
           chequeo: [{ pide: "«Cuando vuelva, voy a cocinar».", opciones: ["Когда́ я верну́сь, я бу́ду гото́вить.", "Когда́ я возвраща́юсь, я бу́ду гото́вить."], ok: "Когда́ я верну́сь, я бу́ду гото́вить.", por: "Todavía no pasó: futuro, верну́сь." }] }
       ] },
     { id: "u9m9", n: 9, tipo: "leccion", nPractica: 10, titulo: "Planificar una semana", resumen: "В понеде́льник я бу́ду рабо́тать.",
-      intro: "Con todo lo de la unidad armás una agenda: qué vas a hacer cada día y en qué orden.",
+      intro: "Con todo lo de la unidad armas una agenda: qué vas a hacer cada día y en qué orden.",
       secciones: [
         { id: "u9-agenda", titulo: "De la agenda a la frase",
           texto: "Una línea de la agenda se vuelve una frase con el día y el verbo en futuro. Para una actividad, бу́ду + infinitivo; para algo que vas a hacer una vez y terminar, el de resultado.",
           ejemplos: [
             { ru: "{В понеде́льник} я {бу́ду рабо́тать}.", es: "El lunes voy a trabajar.", por: "Понеде́льник — рабо́та: una actividad." },
             { ru: "{Во вто́рник} я {бу́ду изуча́ть} ру́сский.", es: "El martes voy a estudiar ruso.", por: "во вто́рник: con **о**." },
-            { ru: "{В сре́ду} я {куплю́} биле́т.", es: "El miércoles voy a comprar el pasaje.", por: "Una compra: resultado." },
+            { ru: "{В сре́ду} я {куплю́} биле́т.", es: "El miércoles voy a comprar el billete.", por: "Una compra: resultado." },
             { ru: "{В суббо́ту} я {пойду́} в кино́.", es: "El sábado voy a ir al cine.", por: "Una salida: пойду́." }],
           chequeo: [{ pide: "Суббо́та — о́тдых →", opciones: ["В суббо́ту я бу́ду отдыха́ть.", "В суббо́ту я отдохну́ весь день."], ok: "В суббо́ту я бу́ду отдыха́ть.", por: "Una actividad: бу́ду + infinitivo." }] },
         { id: "u9-orden-fut", titulo: "Un plan en orden",
@@ -393,19 +393,19 @@ const UNIDAD_9 = {
             { ru: "{Снача́ла} я {зако́нчу} рабо́ту, {пото́м} {пойду́} в магази́н.", es: "Primero voy a terminar el trabajo, después voy a ir al negocio.", por: "Una tras otra: resultado." },
             { ru: "Ве́чером я {напишу́} спи́сок.", es: "A la noche voy a escribir la lista.", por: "Una tarea con un resultado: напишу́." },
             { ru: "{Наконе́ц} я {отдохну́}.", es: "Por fin voy a descansar.", por: "отдохну́ть → отдохну́." }],
-          mas: { texto: "успе́ть es «llegar a tiempo», «alcanzar a hacer algo»: Я успе́ю («voy a llegar»), Я не успе́ю («no voy a llegar»). Va con el infinitivo de resultado: Я успе́ю купи́ть биле́т? («¿voy a llegar a comprar el pasaje?»).",
+          mas: { texto: "успе́ть es «llegar a tiempo», «alcanzar a hacer algo»: Я успе́ю («voy a llegar»), Я не успе́ю («no voy a llegar»). Va con el infinitivo de resultado: Я успе́ю купи́ть биле́т? («¿voy a llegar a comprar el billete?»).",
             ejemplos: [{ ru: "Я не {успе́ю} пообе́дать.", es: "No voy a llegar a almorzar.", por: "успе́ть + infinitivo de resultado." }] },
           chequeo: [{ pide: "«Primero voy a desayunar, después voy a ir al trabajo».", opciones: ["Снача́ла я поза́втракаю, пото́м пойду́ на рабо́ту.", "Снача́ла я бу́ду за́втракать, пото́м бу́ду идти́ на рабо́ту."], ok: "Снача́ла я поза́втракаю, пото́м пойду́ на рабо́ту.", por: "Un plan en orden: resultado." }] }
       ] },
     { id: "u9m10", n: 10, tipo: "leccion", nPractica: 10, titulo: "Viajes", resumen: "Я пое́ду в Испа́нию на самолёте.",
-      intro: "Un viaje es el mejor lugar para usar los dos futuros: lo que vas a preparar, de a una cosa, y lo que vas a hacer allá.",
+      intro: "Un viaje es el mejor lugar para usar los dos futuros: lo que vas a preparar, de a una cosa, y lo que vas a hacer allí.",
       secciones: [
         { id: "u9-viaje-prep", titulo: "Preparar el viaje",
-          texto: "Antes de viajar hay cosas que vas a hacer una vez y terminar: van con el de resultado.\nзаброни́рую гости́ницу (voy a reservar el hotel)\nкуплю́ авиабиле́т (voy a comprar el pasaje de avión)\nсоберу́ чемода́н (voy a armar la valija)\nвозьму́ па́спорт (voy a llevar el pasaporte)",
+          texto: "Antes de viajar hay cosas que vas a hacer una vez y terminar: van con el de resultado.\nзаброни́рую гости́ницу (voy a reservar el hotel)\nкуплю́ авиабиле́т (voy a comprar el billete de avión)\nсоберу́ чемода́н (voy a armar la maleta)\nвозьму́ па́спорт (voy a llevar el pasaporte)",
           ejemplos: [
             { ru: "Я {заброни́рую} гости́ницу.", es: "Voy a reservar el hotel.", por: "заброни́ровать → заброни́рую: resultado." },
-            { ru: "Мы {ку́пим} авиабиле́ты.", es: "Vamos a comprar los pasajes de avión.", por: "Una compra: resultado." },
-            { ru: "Ве́чером я {соберу́} чемода́н.", es: "A la noche voy a armar la valija.", por: "собра́ть → соберу́." },
+            { ru: "Мы {ку́пим} авиабиле́ты.", es: "Vamos a comprar los billetes de avión.", por: "Una compra: resultado." },
+            { ru: "Ве́чером я {соберу́} чемода́н.", es: "A la noche voy a armar la maleta.", por: "собра́ть → соберу́." },
             { ru: "Я {возьму́} па́спорт.", es: "Voy a llevar el pasaporte.", por: "взять → возьму́." }],
           destacado: "заброни́рую · куплю́ · соберу́ · возьму́",
           mas: { texto: "Las palabras del aeropuerto: рейс (el vuelo), вы́лет (la salida), прилёт (la llegada), бага́ж (el equipaje), ви́за (la visa), па́спорт (el pasaporte). Y del viaje: тури́ст, путеше́ственник (viajero), гид (guía), тури́зм, отъе́зд (la partida), прие́зд (la llegada), возвраще́ние (la vuelta).",
@@ -413,8 +413,8 @@ const UNIDAD_9 = {
               { ru: "Мой {рейс} в во́семь часо́в.", es: "Mi vuelo es a las ocho.", por: "Sin verbo, como la hora." },
               { ru: "{Вы́лет} в пять, а {прилёт} в семь.", es: "La salida es a las cinco y la llegada a las siete.", por: "Como el horario de un tren." }] },
           chequeo: [{ pide: "«Voy a reservar el hotel».", opciones: ["Я заброни́рую гости́ницу.", "Я бу́ду заброни́ровать гости́ницу."], ok: "Я заброни́рую гости́ницу.", por: "El de resultado, sin бу́ду." }] },
-        { id: "u9-viaje-alla", titulo: "Allá",
-          texto: "Allá vas a hacer cosas que duran (proceso) y cosas de una vez (resultado):\nбу́ду купа́ться, загора́ть, гуля́ть (actividades)\nпосещу́ музе́й, сфотографи́рую го́ры, оста́нусь в гости́нице, проведу́ неде́лю (de una vez o con un resultado)",
+        { id: "u9-viaje-alla", titulo: "Allí",
+          texto: "Allí vas a hacer cosas que duran (proceso) y cosas de una vez (resultado):\nбу́ду купа́ться, загора́ть, гуля́ть (actividades)\nпосещу́ музе́й, сфотографи́рую го́ры, оста́нусь в гости́нице, проведу́ неде́лю (de una vez o con un resultado)",
           ejemplos: [
             { ru: "Ка́ждый день я {бу́ду купа́ться} в мо́ре.", es: "Todos los días me voy a bañar en el mar.", por: "Se repite: proceso." },
             { ru: "Я {посещу́} музе́й.", es: "Voy a visitar el museo.", por: "Una visita: посети́ть → посещу́." },
@@ -424,9 +424,9 @@ const UNIDAD_9 = {
           chequeo: [{ pide: "«Voy a tomar sol todos los días».", opciones: ["Я бу́ду загора́ть ка́ждый день.", "Я загора́л ка́ждый день."], ok: "Я бу́ду загора́ть ка́ждый день.", por: "Se repite: proceso." }] }
       ] },
     { id: "u9m11", n: 11, tipo: "lectura", titulo: "Los tres tiempos juntos", resumen: "Вчера́, сего́дня, за́втра.",
-      intro: "Tres textos: un fin de semana, un viaje y una historia con pasado, presente y futuro. Leelos, escuchalos y contestá." },
+      intro: "Tres textos: un fin de semana, un viaje y una historia con pasado, presente y futuro. Léelos, escúchalos y contesta." },
     { id: "u9m12", n: 12, tipo: "proyecto", titulo: "Proyecto: Мои пла́ны", resumen: "Tu semana que viene, y ayer, hoy y mañana.",
-      intro: "Primero completá tu agenda de la semana que viene. Después escribí tus planes: qué vas a hacer, dónde vas a estar, adónde vas a ir y qué querés hacer. Por ejemplo: В понеде́льник я бу́ду рабо́тать. Ве́чером я пойду́ в кино́. На выходны́х я пое́ду в Мадри́д на по́езде. Я хочу́ отдыха́ть.",
+      intro: "Primero completa tu agenda de la semana que viene. Después escribe tus planes: qué vas a hacer, dónde vas a estar, adónde vas a ir y qué quieres hacer. Por ejemplo: В понеде́льник я бу́ду рабо́тать. Ве́чером я пойду́ в кино́. На выходны́х я пое́ду в Мадри́д на по́езде. Я хочу́ отдыха́ть.",
       requisitos: [], consejos: [] },
     { id: "u9m13", n: 13, tipo: "examen", titulo: "Evaluación", resumen: "Futuro, быть, movimiento, proceso o resultado, tres tiempos, traducción y audio.",
       intro: "Cuarenta ejercicios en ocho partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
@@ -444,7 +444,7 @@ const UNIDAD_9 = {
   ]
 };
 const U9_PROYECTO2 = { id: "u9p2", titulo: "Вчера́, сего́дня, за́втра",
-  intro: "Ahora una historia en los tres tiempos: qué hiciste, qué hacés y qué vas a hacer. Por ejemplo: Вчера́ я рабо́тал до́ма. Сего́дня я рабо́таю в о́фисе. За́втра я бу́ду отдыха́ть.",
+  intro: "Ahora una historia en los tres tiempos: qué hiciste, qué haces y qué vas a hacer. Por ejemplo: Вчера́ я рабо́тал до́ма. Сего́дня я рабо́таю в о́фисе. За́втра я бу́ду отдыха́ть.",
   requisitos: [], consejos: [] };
 
 function u9Palabras(t) { return String(t).replace(/(^|[^\-А-Яа-яЁё\u0301{])([вВаАиИсСуУкКоОяЯ])(?=$|[^А-Яа-яЁё\u0301}])/g, "$1{$2}"); }
@@ -522,32 +522,32 @@ function ejerciciosUnidad9() {
     [[pas, "Pasado (ayer)"], [pre, "Presente (hoy)"], [fu, "Futuro (mañana)"]].forEach(([fr, ok], k) =>
       out.push(Object.assign({ id: "U9-clas-" + j + "-" + k, tipo: "clasificar", forma: "elegir", dificultad: 1, modulo: 1, pide: "¿Ayer, hoy o mañana?", grande: fr, audio: fr,
         opciones: ["Pasado (ayer)", "Presente (hoy)", "Futuro (mañana)"], correcta: ok, explicacion: fr + (k === 2 ? " **" + budu[2] + " " + v.ac + "**: futuro." : k === 0 ? " **" + v.pasado[quien[1]] + "**: pasado." : " **" + v.presente[2] + "**: presente.") }, base, { grupo: "T1-" + j + "-" + k })));
-    out.push(Object.assign({ id: "U9-maq-" + j, tipo: "maquina", forma: "escribir", dificultad: 3, modulo: 1, pide: "Máquina del tiempo: pasala a mañana (за́втра).", grande: pre, audio: fu, audioManual: true,
+    out.push(Object.assign({ id: "U9-maq-" + j, tipo: "maquina", forma: "escribir", dificultad: 3, modulo: 1, pide: "Máquina del tiempo: pásala a mañana (за́втра).", grande: pre, audio: fu, audioManual: true,
       esperadas: [fu], idioma: "ru", explicacion: pas + " → " + pre + " → " + fu }, base));
   });
 
   /* ── Módulo 2: бу́ду + infinitivo ── */
   PL.forEach((p, i) => {
     const pr = ["Я", "Ты", "Он", "Мы", "Вы", "Они́"][i];
-    out.push({ id: "U9-budu-" + i, tipo: "budu", forma: "elegir", dificultad: 1, modulo: 2, grupo: "B-" + i, items: ["lex:" + buduId], pide: "Completá con la forma de бу́ду.", grande: pr + " _____ рабо́тать.",
+    out.push({ id: "U9-budu-" + i, tipo: "budu", forma: "elegir", dificultad: 1, modulo: 2, grupo: "B-" + i, items: ["lex:" + buduId], pide: "Completa con la forma de бу́ду.", grande: pr + " _____ рабо́тать.",
       opciones: baraja(uniq(budu).filter(x => x !== budu[i]).slice(0, 3).concat(budu[i]), i), correcta: budu[i], oir: pr + " " + budu[i] + " рабо́тать.", explicacion: "**" + p + " " + budu[i] + "**" });
-    out.push({ id: "U9-buduw-" + i, tipo: "budu", forma: "escribir", dificultad: 2, modulo: 2, grupo: "BW-" + i, items: ["lex:" + buduId], pide: "Escribí la forma de бу́ду.", grande: p + " + бу́ду",
+    out.push({ id: "U9-buduw-" + i, tipo: "budu", forma: "escribir", dificultad: 2, modulo: 2, grupo: "BW-" + i, items: ["lex:" + buduId], pide: "Escribe la forma de бу́ду.", grande: p + " + бу́ду",
       audio: pr + " " + budu[i], audioManual: true, esperadas: [budu[i], pr + " " + budu[i]], idioma: "ru", explicacion: "**" + p + " " + budu[i] + "**" });
   });
-  out.push({ id: "U9-buemp", tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 2, grupo: "BE", items: [], pide: "Uní cada persona con su forma.", pares: [["я", budu[0]], ["ты", budu[1]], ["мы", budu[3]], ["они́", budu[5]]],
+  out.push({ id: "U9-buemp", tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 2, grupo: "BE", items: [], pide: "Une cada persona con su forma.", pares: [["я", budu[0]], ["ты", budu[1]], ["мы", budu[3]], ["они́", budu[5]]],
     explicacion: PL.map((p, i) => p + " " + budu[i]).join(" · ") });
   verbos.forEach((v, j) => {
     const s = U9_SUJ[j % 7], i = s[2], comp = v.comps[0];
     const f = fut(s, v, comp), base = { grupo: "F2-" + j, items: ["lex:" + v.id], oir: f.ru };
     const pres = s[0] + " " + v.presente[i] + (comp[0] ? " " + comp[0] : "") + ".";
-    out.push(Object.assign({ id: "U9-inf-" + j, tipo: "inf-fut", forma: "escribir", dificultad: 2, modulo: 2, pide: "Pasala al futuro.", grande: pres, audio: f.ru, audioManual: true,
+    out.push(Object.assign({ id: "U9-inf-" + j, tipo: "inf-fut", forma: "escribir", dificultad: 2, modulo: 2, pide: "Pásala al futuro.", grande: pres, audio: f.ru, audioManual: true,
       esperadas: f.esperadas, idioma: "ru", explicacion: regla(i, v) + " " + f.ru + " — " + f.es }, base));
     const s2 = U9_SUJ[(j + 3) % 7], f2 = fut(s2, v, comp);
-    if (s2[2] !== i) out.push(Object.assign({ id: "U9-camb-" + j, tipo: "cambiar-persona", forma: "escribir", dificultad: 2, modulo: 2, pide: "Cambiá la persona: " + (s2[0] === "Я" ? "{я}" : s2[0].toLowerCase()) + ".",
+    if (s2[2] !== i) out.push(Object.assign({ id: "U9-camb-" + j, tipo: "cambiar-persona", forma: "escribir", dificultad: 2, modulo: 2, pide: "Cambia la persona: " + (s2[0] === "Я" ? "{я}" : s2[0].toLowerCase()) + ".",
       grande: f.ru, audio: f2.ru, audioManual: true, esperadas: f2.esperadas, idioma: "ru", explicacion: "Cambia solo бу́ду: " + regla(s2[2], v) + " " + f2.ru }, base, { grupo: "F2c-" + j }));
     const pals = sinP(f.ru).split(" "), k = pals.indexOf(budu[i]);
     if (k >= 0 && j % 2 === 0) { const mal = pals.slice(); mal[k + 1] = v.presente[i];
-      out.push(Object.assign({ id: "U9-det2-" + j, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 2, pide: "Tocá la palabra que está mal.", palabras: mal, correcta: k + 1,
+      out.push(Object.assign({ id: "U9-det2-" + j, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 2, pide: "Toca la palabra que está mal.", palabras: mal, correcta: k + 1,
         explicacion: "Después de бу́ду va el infinitivo: **" + v.ac + "**, no «" + v.presente[i] + "». " + f.ru }, base, { grupo: "F2d-" + j })); }
   });
 
@@ -555,11 +555,11 @@ function ejerciciosUnidad9() {
   verbos.forEach((v, j) => v.comps.forEach((comp, c) => {
     const s = U9_SUJ[(j * 2 + c) % U9_SUJ.length], t = [["за́втра", "mañana"], ["в суббо́ту", "el sábado"], ["ве́чером", "a la noche"], ["в воскресе́нье", "el domingo"]][(j + c) % 4];
     const f = fut(s, v, comp, t), base = { grupo: "F3-" + j + "-" + c, items: ["lex:" + v.id], oir: f.ru };
-    out.push(Object.assign({ id: "U9-esru3-" + j + "-" + c, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 3, pide: "Escribí en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
+    out.push(Object.assign({ id: "U9-esru3-" + j + "-" + c, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 3, pide: "Escribe en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
       esperadas: f.esperadas, idioma: "ru", explicacion: regla(s[2], v) + " " + f.ru }, base));
-    if (c === 0) out.push(Object.assign({ id: "U9-dic3-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 3, pide: "Escuchá y escribí la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: f.ru + " — " + f.es }, base));
+    if (c === 0) out.push(Object.assign({ id: "U9-dic3-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 3, pide: "Escucha y escribe la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: f.ru + " — " + f.es }, base));
     if (c === 0 && j % 2 === 0) { const w = sinP(f.ru).split(" "); let fi = baraja(w, j + 3); if (fi.join(" ") === w.join(" ")) fi = fi.slice(1).concat(fi[0]);
-      out.push(Object.assign({ id: "U9-ord3-" + j, tipo: "construir", forma: "ordenar", dificultad: 2, modulo: 3, pide: "Ordená: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "), explicacion: f.ru }, base, { grupo: "F3o-" + j })); }
+      out.push(Object.assign({ id: "U9-ord3-" + j, tipo: "construir", forma: "ordenar", dificultad: 2, modulo: 3, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "), explicacion: f.ru }, base, { grupo: "F3o-" + j })); }
   }));
 
   /* ── Módulo 4: быть en futuro ── */
@@ -567,22 +567,22 @@ function ejerciciosUnidad9() {
     const s = U9_SUJ[j % 7], i = s[2];
     const ru = s[0] + " " + budu[i] + " " + lug + ".", esF = cap(((s[1] ? s[1] + " " : "") + U9_IR[i] + " estar " + es).trim()) + ".";
     const base = { grupo: "BY-" + j, items: ["lex:" + buduId], oir: ru };
-    out.push(Object.assign({ id: "U9-byt-" + j, tipo: "byt-fut", forma: "escribir", dificultad: 3, modulo: 4, pide: "Escribí en ruso: «" + esF + "»", audio: ru, audioManual: true,
+    out.push(Object.assign({ id: "U9-byt-" + j, tipo: "byt-fut", forma: "escribir", dificultad: 3, modulo: 4, pide: "Escribe en ruso: «" + esF + "»", audio: ru, audioManual: true,
       esperadas: [ru].concat(i === 0 || i === 1 || i === 3 ? [cap(budu[i]) + " " + lug + "."] : []), idioma: "ru", explicacion: "**" + budu[i] + " " + lug + "**: бу́ду solo es «voy a estar». " + ru }, base));
-    out.push(Object.assign({ id: "U9-bytel-" + j, tipo: "byt-fut", forma: "elegir", dificultad: 1, modulo: 4, pide: "Completá: «" + esF + "»", grande: s[0] + " _____ " + lug + ".",
+    out.push(Object.assign({ id: "U9-bytel-" + j, tipo: "byt-fut", forma: "elegir", dificultad: 1, modulo: 4, pide: "Completa: «" + esF + "»", grande: s[0] + " _____ " + lug + ".",
       opciones: baraja(uniq([budu[i], budu[(i + 2) % 6], budu[(i + 3) % 6]]), j), correcta: budu[i], explicacion: "**" + PL[i] + " " + budu[i] + "**. " + ru }, base, { grupo: "BYe-" + j }));
   });
   [["Где ты бу́дешь за́втра?", "🏠", "Я бу́ду до́ма."], ["Где ты бу́дешь в понеде́льник?", "💼", "Я бу́ду на рабо́те."], ["Где вы бу́дете ве́чером?", "🍽️", "Мы бу́дем в рестора́не."], ["Где ты бу́дешь в суббо́ту?", "🌳", "Я бу́ду в па́рке."]].forEach(([q, em, r], j) =>
-    out.push({ id: "U9-bytq-" + j, tipo: "byt-fut", forma: "escribir", dificultad: 2, modulo: 4, grupo: "BYq-" + j, items: [], oir: r, contexto: [{ p: "—", ru: q }], pide: "Mirá el dibujo y contestá.", grande: em,
+    out.push({ id: "U9-bytq-" + j, tipo: "byt-fut", forma: "escribir", dificultad: 2, modulo: 4, grupo: "BYq-" + j, items: [], oir: r, contexto: [{ p: "—", ru: q }], pide: "Mira el dibujo y contesta.", grande: em,
       audio: q, audioManual: true, esperadas: [r, r.replace(/^(Я|Мы) /, "").replace(/^б/, "Б")], idioma: "ru", explicacion: "— " + q + " — " + r }));
 
   /* ── Módulo 5: cuándo ── */
   U9_TIEMPO.forEach(([ru, es], j) => {
     out.push({ id: "U9-tsig-" + j, tipo: "cuando", forma: "elegir", dificultad: 1, modulo: 5, grupo: "TI-" + j, items: [], oir: ru, pide: "¿Cómo se dice «" + es + "»?",
       opciones: baraja([ru].concat(baraja(U9_TIEMPO.filter(x => x[0] !== ru).map(x => x[0]), j).slice(0, 2)), j), correcta: ru, explicacion: ru + " — " + es });
-    out.push({ id: "U9-tw-" + j, tipo: "cuando", forma: "escribir", dificultad: 2, modulo: 5, grupo: "TW-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
+    out.push({ id: "U9-tw-" + j, tipo: "cuando", forma: "escribir", dificultad: 2, modulo: 5, grupo: "TW-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
     const v = verbosSinVivir[j % verbosSinVivir.length], s = U9_SUJ[j % 7], f = fut(s, v, v.comps[0], [ru, es]);
-    out.push({ id: "U9-tesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, grupo: "TE-" + j, items: ["lex:" + v.id], oir: f.ru, pide: "Escribí en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
+    out.push({ id: "U9-tesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 5, grupo: "TE-" + j, items: ["lex:" + v.id], oir: f.ru, pide: "Escribe en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
       esperadas: f.esperadas, idioma: "ru", explicacion: f.ru });
   });
 
@@ -594,7 +594,7 @@ function ejerciciosUnidad9() {
       const s = U9_SUJ[(a + j) % 7], i = s[2];
       const ru = s[0] + " " + iv.presente[i] + " " + inf + ".", esF = cap(((s[1] ? s[1] + " " : "") + iv.esF[i] + " " + es).trim()) + ".";
       const base = { grupo: "IN-" + a + "-" + j, items: ["lex:" + iv.id], oir: ru };
-      out.push(Object.assign({ id: "U9-int-" + a + "-" + j, tipo: "intencion", forma: "escribir", dificultad: 3, modulo: 6, pide: "Escribí en ruso: «" + esF + "»", audio: ru, audioManual: true,
+      out.push(Object.assign({ id: "U9-int-" + a + "-" + j, tipo: "intencion", forma: "escribir", dificultad: 3, modulo: 6, pide: "Escribe en ruso: «" + esF + "»", audio: ru, audioManual: true,
         esperadas: [ru].concat(i <= 1 || i === 3 ? [cap(iv.presente[i]) + " " + inf + "."] : []), idioma: "ru", explicacion: "**" + iv.ac + " → " + PL[i] + " " + iv.presente[i] + "** + infinitivo. " + ru }, base));
     });
     out.push({ id: "U9-intel-" + a, tipo: "intencion", forma: "elegir", dificultad: 2, modulo: 6, grupo: "INe-" + a, items: ["lex:" + iv.id], pide: "¿Qué significa «" + iv.ac + "»?",
@@ -613,19 +613,19 @@ function ejerciciosUnidad9() {
     const ru1 = s[0] + " " + forms[i] + " " + pr + " " + L.acc + ".", es1 = cap(((s[1] ? s[1] + " " : "") + U9_IR[i] + " ir " + esA).trim()) + ".";
     const ru2 = s[0] + " " + budu[i] + " " + pr + " " + L.prep + ".", es2 = cap(((s[1] ? s[1] + " " : "") + U9_IR[i] + " estar " + esEn).trim()) + ".";
     const base = { grupo: "MV-" + j, items: ["lex:" + vid, "lex:" + L.id], oir: ru1 };
-    out.push(Object.assign({ id: "U9-mov-" + j, tipo: "mov-fut", forma: "escribir", dificultad: 3, modulo: 7, pide: "Escribí en ruso: «" + es1 + "» " + (modo === "п" ? "🚶" : "🚗"), audio: ru1, audioManual: true,
+    out.push(Object.assign({ id: "U9-mov-" + j, tipo: "mov-fut", forma: "escribir", dificultad: 3, modulo: 7, pide: "Escribe en ruso: «" + es1 + "» " + (modo === "п" ? "🚶" : "🚗"), audio: ru1, audioManual: true,
       esperadas: [ru1].concat(i <= 1 || i === 3 ? [cap(forms[i]) + " " + pr + " " + L.acc + "."] : []), idioma: "ru",
       explicacion: "**" + forms[i] + "** (" + (modo === "п" ? "a pie" : "en vehículo") + ") + adónde, en acusativo: " + ru1 }, base));
-    out.push(Object.assign({ id: "U9-movel-" + j, tipo: "mov-fut", forma: "elegir", dificultad: 2, modulo: 7, pide: "Completá: «" + es1 + "»", grande: s[0] + " _____ " + pr + " " + L.acc + ".",
+    out.push(Object.assign({ id: "U9-movel-" + j, tipo: "mov-fut", forma: "elegir", dificultad: 2, modulo: 7, pide: "Completa: «" + es1 + "»", grande: s[0] + " _____ " + pr + " " + L.acc + ".",
       opciones: baraja([forms[i], budu[i]], j), correcta: forms[i], explicacion: "Para «voy a ir» va **" + forms[i] + "**, no бу́ду. " + ru1 }, base, { grupo: "MVe-" + j }));
-    if (L.acc !== L.prep) out.push(Object.assign({ id: "U9-moved-" + j, tipo: "mov-fut", forma: "elegir", dificultad: 2, modulo: 7, pide: "Completá: «" + es2 + "»", grande: s[0] + " " + budu[i] + " " + pr + " _____.",
+    if (L.acc !== L.prep) out.push(Object.assign({ id: "U9-moved-" + j, tipo: "mov-fut", forma: "elegir", dificultad: 2, modulo: 7, pide: "Completa: «" + es2 + "»", grande: s[0] + " " + budu[i] + " " + pr + " _____.",
       opciones: baraja([L.prep, L.acc], j + 1), correcta: L.prep, explicacion: "Dónde vas a estar: prepositivo. " + ru2 }, base, { grupo: "MVd-" + j }));
   });
   U9_TRANSPORTE.forEach(([ru, es, em], j) => {
     const L = lugar(ru); if (!L) return;
     const dest = [["Москва́", "a Moscú"], ["Мадри́д", "a Madrid"], ["Пари́ж", "a París"]][j], D = lugar(dest[0]);
     const r = "Я пое́ду в " + D.acc + " на " + L.prep + ".", es1 = "Voy a ir " + dest[1] + " " + es + ".";
-    out.push({ id: "U9-tr-" + j, tipo: "transporte", forma: "escribir", dificultad: 3, modulo: 7, grupo: "TR-" + j, items: ["lex:" + L.id], oir: r, pide: em + " Escribí en ruso: «" + es1 + "»", audio: r, audioManual: true,
+    out.push({ id: "U9-tr-" + j, tipo: "transporte", forma: "escribir", dificultad: 3, modulo: 7, grupo: "TR-" + j, items: ["lex:" + L.id], oir: r, pide: em + " Escribe en ruso: «" + es1 + "»", audio: r, audioManual: true,
       esperadas: [r, r.replace(/^Я /, "").replace(/^п/, "П")], idioma: "ru", explicacion: "**на " + L.prep + "**: на + prepositivo. " + r });
     out.push({ id: "U9-trel-" + j, tipo: "transporte", forma: "elegir", dificultad: 1, modulo: 7, grupo: "TRe-" + j, items: ["lex:" + L.id], pide: "¿Cómo se dice «" + es + "»?",
       opciones: baraja(["на " + L.prep, "в " + L.prep, "на " + L.nom], j), correcta: "на " + L.prep, explicacion: "**на " + L.prep + "** = " + es });
@@ -633,12 +633,12 @@ function ejerciciosUnidad9() {
 
   /* ── Módulo 8: preguntas ── */
   U9_PREGUNTAS.forEach(([ru, es], j) => {
-    out.push({ id: "U9-preg-" + j, tipo: "pregunta", forma: "escribir", dificultad: 3, modulo: 8, grupo: "PQ-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
-    out.push({ id: "U9-pregd-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 8, grupo: "PQd-" + j, items: [], pide: "Escuchá y escribí la pregunta.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
+    out.push({ id: "U9-preg-" + j, tipo: "pregunta", forma: "escribir", dificultad: 3, modulo: 8, grupo: "PQ-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
+    out.push({ id: "U9-pregd-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 8, grupo: "PQd-" + j, items: [], pide: "Escucha y escribe la pregunta.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
   });
   [["Что ты бу́дешь де́лать за́втра?", "💻", "За́втра я бу́ду рабо́тать."], ["Что ты бу́дешь де́лать ве́чером?", "🎬", "Ве́чером я бу́ду смотре́ть фильм."], ["Куда́ ты пое́дешь?", "🇪🇸", "Я пое́ду в Испа́нию."],
    ["Что ты бу́дешь де́лать на выходны́х?", "🛋️", "На выходны́х я бу́ду отдыха́ть."], ["Ты бу́дешь рабо́тать за́втра?", "❌", "Нет, я не бу́ду рабо́тать."]].forEach(([q, em, r], j) =>
-    out.push({ id: "U9-resp-" + j, tipo: "pregunta", forma: "escribir", dificultad: 2, modulo: 8, grupo: "RS-" + j, items: [], oir: r, contexto: [{ p: "—", ru: q }], pide: em + " Contestá en ruso.", audio: q, audioManual: true,
+    out.push({ id: "U9-resp-" + j, tipo: "pregunta", forma: "escribir", dificultad: 2, modulo: 8, grupo: "RS-" + j, items: [], oir: r, contexto: [{ p: "—", ru: q }], pide: em + " Contesta en ruso.", audio: q, audioManual: true,
       esperadas: [r, r.replace(/^(За́втра|Ве́чером|На выходны́х) я /, "Я ")], idioma: "ru", explicacion: "— " + q + " — " + r }));
 
   /* ── Módulo 9: la semana de Ana (agenda) ── */
@@ -648,30 +648,30 @@ function ejerciciosUnidad9() {
   DIAS.forEach((d, k) => {
     const a = ACT[k], ruA = a[0] === "пойти́" ? cap(d[0]) + " А́нна " + poidu[2] + " " + a[1] + "." : cap(d[0]) + " А́нна " + budu[2] + " " + a[0] + (a[1] ? " " + a[1] : "") + ".";
     const ru1 = a[0] === "пойти́" ? cap(d[0]) + " я " + poidu[0] + " " + a[1] + "." : cap(d[0]) + " я " + budu[0] + " " + a[0] + (a[1] ? " " + a[1] : "") + ".";
-    out.push({ id: "U9-ag-" + k, tipo: "agenda", forma: "elegir", dificultad: 2, modulo: 9, grupo: "AG-" + k, items: [], oir: ruA, texto: agTxt, pide: "Mirá la agenda de Ana. ¿Qué va a hacer " + d[1] + "?",
+    out.push({ id: "U9-ag-" + k, tipo: "agenda", forma: "elegir", dificultad: 2, modulo: 9, grupo: "AG-" + k, items: [], oir: ruA, texto: agTxt, pide: "Mira la agenda de Ana. ¿Qué va a hacer " + d[1] + "?",
       opciones: baraja([a[2]].concat(baraja(ACT.filter(x => x[2] !== a[2]).map(x => x[2]), k).slice(0, 2)), k), correcta: a[2], explicacion: ruA });
-    out.push({ id: "U9-agw-" + k, tipo: "agenda", forma: "escribir", dificultad: 3, modulo: 9, grupo: "AGW-" + k, items: [], oir: ru1, pide: "Escribí la frase en futuro, en primera persona.", grande: d[2] + " — " + a[2],
+    out.push({ id: "U9-agw-" + k, tipo: "agenda", forma: "escribir", dificultad: 3, modulo: 9, grupo: "AGW-" + k, items: [], oir: ru1, pide: "Escribe la frase en futuro, en primera persona.", grande: d[2] + " — " + a[2],
       audio: ru1, audioManual: true, esperadas: [ru1, ru1.replace(" я ", " ")], idioma: "ru", explicacion: ru1 });
   });
   /* Constructor de planes: día + hora + lugar + acción */
   [["в суббо́ту", "в де́вять часо́в", "в па́рке", "гуля́ть", "El sábado a las nueve voy a pasear por el parque."], ["в понеде́льник", "в во́семь часо́в", "в о́фисе", "рабо́тать", "El lunes a las ocho voy a trabajar en la oficina."],
    ["в воскресе́нье", "в час", "в рестора́не", "обе́дать", "El domingo a la una voy a almorzar en el restaurante."], ["в пя́тницу", "в семь часо́в", "до́ма", "гото́вить у́жин", "El viernes a las siete voy a cocinar la cena en casa."]].forEach(([d, h, l, a, es], j) => {
     const ok = cap(d) + " " + h + " я бу́ду " + a + " " + l + ".";
-    out.push({ id: "U9-cons-" + j, tipo: "construir", forma: "escribir", dificultad: 3, modulo: 9, grupo: "CS-" + j, items: [], oir: ok, pide: "Armá el plan con estas piezas.", grande: d + " · " + h + " · " + l + " · " + a, pista: es,
+    out.push({ id: "U9-cons-" + j, tipo: "construir", forma: "escribir", dificultad: 3, modulo: 9, grupo: "CS-" + j, items: [], oir: ok, pide: "Arma el plan con estas piezas.", grande: d + " · " + h + " · " + l + " · " + a, pista: es,
       audio: ok, audioManual: true, esperadas: [ok, cap(d) + " " + h + " я бу́ду " + l + " " + a + ".", cap(d) + " я бу́ду " + a + " " + l + " " + h + "."], idioma: "ru", explicacion: ok });
   });
 
   /* ── Módulo 10: viajes ── */
   [["В о́тпуске я пое́ду в Испа́нию.", "En las vacaciones voy a ir a España."], ["Я пое́ду на самолёте.", "Voy a ir en avión."], ["Я бу́ду жить в гости́нице.", "Voy a vivir en un hotel."],
-   ["Я куплю́ биле́т.", null], ["Мы бу́дем путеше́ствовать по Росси́и.", null], ["За́втра я куплю́ биле́т.", "Mañana voy a comprar el pasaje."], ["На сле́дующей неде́ле у меня́ пое́здка.", null],
+   ["Я куплю́ биле́т.", null], ["Мы бу́дем путеше́ствовать по Росси́и.", null], ["За́втра я куплю́ биле́т.", "Mañana voy a comprar el billete."], ["На сле́дующей неде́ле у меня́ пое́здка.", null],
    ["Э́то бу́дет интере́сное путеше́ствие.", null], ["Я пое́ду в Росси́ю на по́езде.", "Voy a ir a Rusia en tren."]].forEach(([ru, es], j) => {
     if (!es) return;
-    out.push({ id: "U9-via-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "VI-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
-    out.push({ id: "U9-viad-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 10, grupo: "VId-" + j, items: [], pide: "Escuchá y escribí.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
+    out.push({ id: "U9-via-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "VI-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
+    out.push({ id: "U9-viad-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 10, grupo: "VId-" + j, items: [], pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
   });
   /* посети́ть: una visita va con el de resultado (11/10/2026; antes decía «бу́ду посеща́ть») */
   [["За́втра я посещу́ музе́й.", "Mañana voy a visitar el museo."], ["Мы посети́м Москву́.", "Vamos a visitar Moscú."]].forEach(([ru, es], j) =>
-    out.push({ id: "U9-amp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "AM-" + j, items: [], oir: ru, pide: "Escribí en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
+    out.push({ id: "U9-amp-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 10, grupo: "AM-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru",
       explicacion: ru + " Una visita: посети́ть (de resultado) + acusativo." }));
 
   /* ── Módulo 11: los tres tiempos ── */
@@ -682,17 +682,17 @@ function ejerciciosUnidad9() {
       const ru = t + " " + cuerpo + (comp[0] ? " " + comp[0] : "") + ".";
       if ((j + k) % 3) return;
       out.push({ id: "U9-tres-" + j + "-" + k, tipo: "tres", forma: "escribir", dificultad: 3, modulo: 11, grupo: "TT-" + j + "-" + k, items: ["lex:" + v.id], oir: ru,
-        pide: em + " " + t + ": escribí la frase con «" + v.ac + "»" + (comp[0] ? " y «" + comp[0] + "»" : "") + ", para " + quien[0] + ".", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
+        pide: em + " " + t + ": escribe la frase con «" + v.ac + "»" + (comp[0] ? " y «" + comp[0] + "»" : "") + ", para " + quien[0] + ".", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
     });
-    /* Detectá el error de tiempo: «Вчера́ … бу́дет» */
+    /* Detecta el error de tiempo: «Вчера́ … бу́дет» */
     const malo = ["Вчера́", quien[0], budu[2], v.ac].concat(comp[0] ? comp[0].split(" ") : []);
-    out.push({ id: "U9-det11-" + j, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 11, grupo: "TD-" + j, items: ["lex:" + v.id], pide: "Tocá la palabra que no va con el tiempo.", palabras: malo, correcta: 0,
+    out.push({ id: "U9-det11-" + j, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 11, grupo: "TD-" + j, items: ["lex:" + v.id], pide: "Toca la palabra que no va con el tiempo.", palabras: malo, correcta: 0,
       explicacion: "**Вчера́** es pasado, pero la frase está en futuro: va **за́втра**. O, en pasado: «Вчера́ " + quien[0] + " " + v.pasado[quien[1]] + (comp[0] ? " " + comp[0] : "") + "»." });
   });
   /* Plan o realidad */
-  [["Я бу́ду рабо́тать до́ма.", "Я рабо́тал в о́фисе.", "Trabajé en la oficina. (sos hombre)"], ["Мы бу́дем гуля́ть в па́рке.", "Мы бы́ли до́ма.", "Estuvimos en casa."],
+  [["Я бу́ду рабо́тать до́ма.", "Я рабо́тал в о́фисе.", "Trabajé en la oficina. (eres hombre)"], ["Мы бу́дем гуля́ть в па́рке.", "Мы бы́ли до́ма.", "Estuvimos en casa."],
    ["Она́ бу́дет гото́вить у́жин.", "Она́ у́жинала в рестора́не.", "Cenó en el restaurante."]].forEach(([plan, real, es], j) => {
-    out.push({ id: "U9-plan-" + j, tipo: "plan-real", forma: "escribir", dificultad: 3, modulo: 11, grupo: "PR-" + j, items: [], oir: real, contexto: [{ p: "Plan:", ru: plan }], pide: "Pero la realidad fue otra. Escribí en ruso: «" + es + "»",
+    out.push({ id: "U9-plan-" + j, tipo: "plan-real", forma: "escribir", dificultad: 3, modulo: 11, grupo: "PR-" + j, items: [], oir: real, contexto: [{ p: "Plan:", ru: plan }], pide: "Pero la realidad fue otra. Escribe en ruso: «" + es + "»",
       audio: real, audioManual: true, esperadas: [real, real.replace("рабо́тал", "рабо́тала")], idioma: "ru", explicacion: "Plan (futuro): " + plan + " Realidad (pasado): " + real });
   });
 
@@ -716,7 +716,7 @@ function ejerciciosUnidad9() {
     const base = { grupo: e.id, items: ["lex:" + e.id], oir: e.ru };
     if (dis.length >= 2) out.push(Object.assign({ id: "U9-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: m, pide: "¿Qué significa?", grande: e.acento, audio: e.ru,
       opciones: baraja([es].concat(dis), i), correcta: es, explicacion: e.acento + " — " + es }, base));
-    out.push(Object.assign({ id: "U9-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribí en ruso: «" + es + "»", audio: e.ru, audioManual: true,
+    out.push(Object.assign({ id: "U9-pal-" + e.id, tipo: "palabra-es-ru", forma: "escribir", dificultad: 2, modulo: m, pide: "Escribe en ruso: «" + es + "»", audio: e.ru, audioManual: true,
       pista: "Empieza con " + e.ru[0].toUpperCase() + " y tiene " + e.ru.length + " letras.", esperadas: [e.acento], idioma: "ru", explicacion: e.acento + " — " + es }, base));
   });
 
@@ -735,9 +735,9 @@ function ejerciciosUnidad9() {
     push({ id: "U9-nat-t-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 1, regla: "u9-tres-tiempos", grupo: "NT-" + j, items: ["lex:" + v.id], oir: fu, pide: "¿Cuál suena natural?",
       opciones: baraja([fu, "За́втра " + low(p[0]) + " " + v.pas[g] + c + "."], j), correcta: fu, explicacion: fu + " Con за́втра va el futuro: бу́ду + infinitivo." });
     const k = j % 3, fr = [pa, pr, fu][k];
-    push({ id: "U9-oido-t-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 1, regla: "u9-tres-tiempos", grupo: "OT-" + j, items: ["lex:" + v.id], oir: fr, pide: "Escuchá: ¿pasado, presente o futuro?", audio: fr,
+    push({ id: "U9-oido-t-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 1, regla: "u9-tres-tiempos", grupo: "OT-" + j, items: ["lex:" + v.id], oir: fr, pide: "Escucha: ¿pasado, presente o futuro?", audio: fr,
       opciones: ["Pasado", "Presente", "Futuro"], correcta: ["Pasado", "Presente", "Futuro"][k], explicacion: fr + " " + ["El pasado: **-л**.", "El presente.", "El futuro: бу́ду + infinitivo."][k] });
-    push({ id: "U9-cad-t-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 1, regla: "u9-tres-tiempos", grupo: "CT-" + j, items: ["lex:" + v.id], oir: fu, pide: "Cambiá la frase paso a paso.", base: pa,
+    push({ id: "U9-cad-t-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 1, regla: "u9-tres-tiempos", grupo: "CT-" + j, items: ["lex:" + v.id], oir: fu, pide: "Cambia la frase paso a paso.", base: pa,
       pasos: [{ pide: "Ahora: hoy (сего́дня).", esperadas: [pr, p[0] + " " + v.pres[p[1]] + c + " сего́дня."] }, { pide: "Ahora: mañana (за́втра).", esperadas: [fu, p[0] + " " + budu[p[1]] + " " + v.ac + c + " за́втра."] }],
       explicacion: pa + " → " + pr + " → " + fu });
   });
@@ -787,9 +787,9 @@ function ejerciciosUnidad9() {
     const pro = "Я бу́ду " + I.ac + po + " " + marca + ".", proMal = "Я " + R.fut[0] + po + " " + marca + ".";
     const base = { items: ["lex:" + I.id, "lex:" + R.id] };
     const dudoso = ik === "отдыха́ть";   /* «В суббо́ту я бу́ду отдыха́ть» también suena natural */
-    if (!dudoso) push(Object.assign({ id: "U9-par-fr-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-cual", grupo: "FR-" + j, oir: res, pide: "«" + esR + "». ¿Cuál decís?", opciones: baraja([res, resI], j), correcta: res,
+    if (!dudoso) push(Object.assign({ id: "U9-par-fr-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-cual", grupo: "FR-" + j, oir: res, pide: "«" + esR + "». ¿Cuál dices?", opciones: baraja([res, resI], j), correcta: res,
       explicacion: res + " Una acción que va a terminar: " + R.fut[0] + ", sin бу́ду." }, base));
-    push(Object.assign({ id: "U9-par-fp-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-cual", grupo: "FP-" + j, oir: pro, pide: "«" + esP + "». ¿Cuál decís?", opciones: baraja([pro, proMal], j + 1), correcta: pro,
+    push(Object.assign({ id: "U9-par-fp-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-cual", grupo: "FP-" + j, oir: pro, pide: "«" + esP + "». ¿Cuál dices?", opciones: baraja([pro, proMal], j + 1), correcta: pro,
       explicacion: pro + " " + marca + ": " + (/ка́ждый/.test(marca) ? "se repite" : "cuánto dura") + ", proceso." }, base));
     push(Object.assign({ id: "U9-nat-fb-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-resultado", grupo: "FB-" + j, oir: res, pide: "¿Cuál suena natural?", opciones: baraja([res, resB], j + 2), correcta: res,
       explicacion: res + " El de resultado no va con бу́ду: su presente ya es futuro." }, base));
@@ -803,9 +803,9 @@ function ejerciciosUnidad9() {
     const malF = R.fut[0].replace(/(у́|ю́|у|ю)(сь)?$/, "") + "ю";
     push(Object.assign({ id: "U9-parj-" + j, tipo: "pareja", forma: "elegir", dificultad: 1, modulo: 3, regla: "u9-fut-formas", grupo: "PJ-" + j, oir: R.fut[0], pide: "¿Cómo es «voy a…» con " + R.ac + " (я)?",
       opciones: baraja(uniq([R.fut[0], "бу́ду " + R.ac, I.pres[0]]), j), correcta: R.fut[0], explicacion: R.ac + " → я " + R.fut[0] + ", sin бу́ду. (" + I.pres[0] + " es el presente de " + I.ac + ".)" }, base));
-    push(Object.assign({ id: "U9-asp-w-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 3, regla: "u9-fut-cual", grupo: "AW-" + j, oir: res, pide: "Escribí en ruso: «" + esR + "».", audio: res, audioManual: true,
+    push(Object.assign({ id: "U9-asp-w-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 3, regla: "u9-fut-cual", grupo: "AW-" + j, oir: res, pide: "Escribe en ruso: «" + esR + "».", audio: res, audioManual: true,
       esperadas: [res, "Я " + R.fut[0] + ro + " " + low(t) + "."], idioma: "ru", explicacion: res }, base));
-    if (j % 2 === 0) push(Object.assign({ id: "U9-asp-wp-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 3, regla: "u9-fut-cual", grupo: "AWp-" + j, oir: pro, pide: "Escribí en ruso: «" + esP + "».", audio: pro, audioManual: true,
+    if (j % 2 === 0) push(Object.assign({ id: "U9-asp-wp-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 3, regla: "u9-fut-cual", grupo: "AWp-" + j, oir: pro, pide: "Escribe en ruso: «" + esP + "».", audio: pro, audioManual: true,
       esperadas: [pro, cap(marca) + " я бу́ду " + I.ac + po + "."], idioma: "ru", explicacion: pro + " " + marca + ": proceso." }, base));
     if (j < 8) push(Object.assign({ id: "U9-diag-fm-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 3, regla: "u9-fut-cual", grupo: "FD-" + j, oir: pro, pide: "La frase tiene un error. ¿Qué falla?", grande: proMal,
       opciones: ["El verbo: tiene que ser бу́ду + infinitivo", "Falta не", "El lugar o el objeto"], correcta: "El verbo: tiene que ser бу́ду + infinitivo", esperadas: [pro], explicacion: pro + " Con " + marca + " va el de proceso." }, base));
@@ -815,7 +815,7 @@ function ejerciciosUnidad9() {
   /* Oído: ¿ahora o en el futuro? */
   [["чита́ть", "прочита́ть", " кни́гу"], ["писа́ть", "написа́ть", " письмо́"], ["де́лать", "сде́лать", " рабо́ту"], ["гото́вить", "пригото́вить", " у́жин"], ["покупа́ть", "купи́ть", " хлеб"], ["смотре́ть", "посмотре́ть", " фильм"]].forEach(([ik, rk, o], j) => {
     const I = VF(ik), R = VF(rk), fut = j % 2 === 0, ru = "Я " + (fut ? R.fut[0] : I.pres[0]) + o + ".";
-    push({ id: "U9-oido-fr-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-resultado", grupo: "OF-" + j, items: ["lex:" + R.id], oir: ru, pide: "Escuchá: ¿ahora o en el futuro?", audio: ru,
+    push({ id: "U9-oido-fr-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-resultado", grupo: "OF-" + j, items: ["lex:" + R.id], oir: ru, pide: "Escucha: ¿ahora o en el futuro?", audio: ru,
       opciones: ["Ahora", "En el futuro"], correcta: fut ? "En el futuro" : "Ahora", explicacion: "Sonó **" + (fut ? R.fut[0] : I.pres[0]) + "**: " + (fut ? "de resultado, su presente es futuro." : "presente de " + I.ac + ".") });
   });
   /* Descubrir: de un presente al futuro de resultado */
@@ -830,13 +830,13 @@ function ejerciciosUnidad9() {
   ASP.slice(0, 6).forEach((a, j) => {
     const [ik, rk, ro, t] = a, I = VF(ik), R = VF(rk), b0 = "Я " + I.pres[0] + ro + ".";
     push({ id: "U9-cad-fr-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 3, regla: "u9-fut-resultado", grupo: "CF-" + j, items: ["lex:" + I.id, "lex:" + R.id], oir: t + " я " + R.fut[0] + ro + ".",
-      pide: "Cambiá la frase paso a paso.", base: b0,
-      pasos: [{ pide: "Pasala al futuro, como actividad (бу́ду).", esperadas: ["Я бу́ду " + I.ac + ro + "."] }, { pide: "Ahora decí que lo vas a terminar " + low(t === "За́втра" ? "mañana (за́втра)" : "a la noche (ве́чером)") + ".", esperadas: [t + " я " + R.fut[0] + ro + ".", "Я " + R.fut[0] + ro + " " + low(t) + "."] }],
+      pide: "Cambia la frase paso a paso.", base: b0,
+      pasos: [{ pide: "Pásala al futuro, como actividad (бу́ду).", esperadas: ["Я бу́ду " + I.ac + ro + "."] }, { pide: "Ahora di que lo vas a terminar " + low(t === "За́втра" ? "mañana (за́втра)" : "a la noche (ве́чером)") + ".", esperadas: [t + " я " + R.fut[0] + ro + ".", "Я " + R.fut[0] + ro + " " + low(t) + "."] }],
       explicacion: b0 + " → Я бу́ду " + I.ac + ro + ". → " + t + " я " + R.fut[0] + ro + ". " + ik + " → " + rk + ": del proceso al resultado." });
   });
   [["За́втра", "я", "куплю́", "биле́т"], ["Ве́чером", "она́", "напи́шет", "письмо́"], ["За́втра", "мы", "сде́лаем", "рабо́ту"], ["Ве́чером", "он", "пригото́вит", "у́жин"]].forEach((pal, j) => {
     push({ id: "U9-desarm-fr-" + j, tipo: "desarmar", forma: "desarmar", dificultad: 2, modulo: 3, regla: "u9-fut-resultado", grupo: "DR-" + j, items: [], oir: pal.join(" ") + ".", audio: pal.join(" ") + ".", audioManual: true,
-      pide: "Respondé tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Qué palabra dice que es futuro? (el verbo)", correcta: 2 }, { pide: "¿Qué se va a terminar? (el objeto)", correcta: 3 }, { pide: "¿Cuándo?", correcta: 0 }],
+      pide: "Responde tocando las palabras de la frase.", palabras: pal, preguntas: [{ pide: "¿Qué palabra dice que es futuro? (el verbo)", correcta: 2 }, { pide: "¿Qué se va a terminar? (el objeto)", correcta: 3 }, { pide: "¿Cuándo?", correcta: 0 }],
       explicacion: pal.join(" ") + ". " + pal[2] + " es de resultado: su presente es futuro, sin бу́ду." });
   });
   [["нача́ть", "рабо́тать", "изуча́ть", "Мы"], ["зако́нчить", "чита́ть", "рабо́тать", "Я"]].forEach(([rk, inf, inf2, s], j) => {
@@ -852,9 +852,9 @@ function ejerciciosUnidad9() {
       explicacion: ok + " бу́ду ya es «voy a estar»: no se agrega быть." });
     const g = i === 0 ? "m" : i === 2 ? "f" : "pl", pa = "Вчера́ " + low(s) + " " + VF("быть").pas[i === 1 ? "m" : g] + " " + l + ".";
     const fut = j % 2 === 0;
-    push({ id: "U9-oido-by-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-byt-fut", grupo: "OY-" + j, items: [], oir: fut ? ok : pa, pide: "Escuchá: ¿estuvo o va a estar?", audio: fut ? ok : pa,
+    push({ id: "U9-oido-by-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-byt-fut", grupo: "OY-" + j, items: [], oir: fut ? ok : pa, pide: "Escucha: ¿estuvo o va a estar?", audio: fut ? ok : pa,
       opciones: ["Estuvo", "Va a estar"], correcta: fut ? "Va a estar" : "Estuvo", explicacion: (fut ? ok + " бу́ду: futuro." : pa + " был / была́: pasado.") });
-    if (j < 4) push({ id: "U9-cad-by-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 4, regla: "u9-byt-tres", grupo: "CY-" + j, items: [], oir: ok, pide: "Cambiá la frase paso a paso.", base: pa,
+    if (j < 4) push({ id: "U9-cad-by-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 4, regla: "u9-byt-tres", grupo: "CY-" + j, items: [], oir: ok, pide: "Cambia la frase paso a paso.", base: pa,
       pasos: [{ pide: "Ahora (сейча́с).", esperadas: ["Сейча́с " + low(s) + " " + l + ".", s + " " + l + "."] }, { pide: "Mañana (за́втра).", esperadas: [ok, s + " " + budu[i] + " " + l + " за́втра."] }],
       explicacion: pa + " → Сейча́с " + low(s) + " " + l + ". → " + ok + " En presente, быть no se dice." });
   });
@@ -891,7 +891,7 @@ function ejerciciosUnidad9() {
       opciones: baraja([fr, j % 2 ? "Я бу́ду до́ма " + NUMS[n] + " " + f + " че́рез." : "Я бу́ду до́ма че́рез " + NUMS[n] + " " + otra + "."], j), correcta: fr,
       explicacion: fr + " " + (j % 2 ? "че́рез va adelante." : (n <= 4 ? "Con 2, 3 y 4: " : "De 5 en adelante: ") + f + ".") });
     if (j % 2 === 0) push({ id: "U9-par-ch-" + j, tipo: "par", forma: "elegir", dificultad: 1, modulo: 5, regla: "u9-cherez", grupo: "CHp-" + j, items: [], oir: ok,
-      pide: "«Dentro de " + { 2: "dos", 3: "tres", 4: "cuatro", 6: "seis", 5: "cinco", 7: "siete" }[n] + " " + { "день": "días", "год": "años", "ме́сяц": "meses", "час": "horas" }[w] + "». ¿Cuál decís?",
+      pide: "«Dentro de " + { 2: "dos", 3: "tres", 4: "cuatro", 6: "seis", 5: "cinco", 7: "siete" }[n] + " " + { "день": "días", "год": "años", "ме́сяц": "meses", "час": "horas" }[w] + "». ¿Cuál dices?",
       opciones: baraja([ok, NUMS[n] + " " + f + " наза́д"], j), correcta: ok, explicacion: ok + " = dentro de… · " + NUMS[n] + " " + f + " наза́д = hace…" });
   });
   [["день", 3, [2, 4]], ["год", 6, [5, 7]], ["ме́сяц", 4, [2, 3]], ["день", 10, [5, 6]]].forEach(([w, n, ej], j) => {
@@ -907,7 +907,7 @@ function ejerciciosUnidad9() {
   });
   [["когда́-нибудь", "когда́-то", "Algún día voy a vivir en Moscú", "Когда́-нибудь я бу́ду жить в Москве́."], ["когда́-то", "когда́-нибудь", "En otro tiempo viví en Moscú", "Когда́-то я жил в Москве́."]].forEach(([ok, otro, es, fr], j) => {
     const mal = fr.replace(cap(ok), cap(otro));
-    push({ id: "U9-par-kn-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 5, regla: "u9-cuando-fut", grupo: "KN-" + j, items: [], oir: fr, pide: "«" + es + "» (sos hombre). ¿Cuál decís?", opciones: baraja([fr, mal], j), correcta: fr,
+    push({ id: "U9-par-kn-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 5, regla: "u9-cuando-fut", grupo: "KN-" + j, items: [], oir: fr, pide: "«" + es + "» (eres hombre). ¿Cuál dices?", opciones: baraja([fr, mal], j), correcta: fr,
       explicacion: fr + " " + (j === 0 ? "**-нибудь**: el futuro." : "**-то**: el pasado.") });
   });
 
@@ -924,8 +924,8 @@ function ejerciciosUnidad9() {
   });
   [["хочу́", "Quiero trabajar", "Voy a trabajar"], ["плани́рую", "Planeo trabajar", "Voy a trabajar"], ["бу́ду", "Voy a trabajar", "Quiero trabajar"], ["обеща́ю", "Prometo trabajar", "Voy a trabajar"], ["наде́юсь", "Espero trabajar", "Planeo trabajar"]].forEach(([w, es, otroEs], j) => {
     const ok = "Я " + w + " рабо́тать.", otroW = { "Voy a trabajar": "бу́ду", "Quiero trabajar": "хочу́", "Planeo trabajar": "плани́рую" }[otroEs], mal = "Я " + otroW + " рабо́тать.";
-    push({ id: "U9-par-in-" + j, tipo: "par", forma: "elegir", dificultad: 1, modulo: 6, regla: "u9-budu-vs-hochu", grupo: "INr-" + j, items: [], oir: ok, pide: "«" + es + "». ¿Cuál decís?", opciones: baraja([ok, mal], j), correcta: ok,
-      explicacion: ok + " " + (w === "бу́ду" ? "Va a pasar." : "Lo que pensás de eso: " + es.toLowerCase() + ".") });
+    push({ id: "U9-par-in-" + j, tipo: "par", forma: "elegir", dificultad: 1, modulo: 6, regla: "u9-budu-vs-hochu", grupo: "INr-" + j, items: [], oir: ok, pide: "«" + es + "». ¿Cuál dices?", opciones: baraja([ok, mal], j), correcta: ok,
+      explicacion: ok + " " + (w === "бу́ду" ? "Va a pasar." : "Lo que piensas de eso: " + es.toLowerCase() + ".") });
   });
 
   /* ── Módulo 7: пойду́ / пое́ду, dónde y adónde, transporte ── */
@@ -968,8 +968,8 @@ function ejerciciosUnidad9() {
     push({ id: "U9-pq-kg-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 8, regla: "u9-kogda-fut", grupo: "KGp-" + j, items: ["lex:" + R.id], oir: ok, pide: "¿Por qué " + R.fut[0] + " después de когда́?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Todavía no pasó: futuro", "Pasa ahora: presente"], correcta: "Todavía no pasó: futuro", explicacion: ok + " Donde el español dice «cuando termine», el ruso usa el futuro." });
   });
-  [["Что ты бу́дешь де́лать за́втра?", "Что ты сде́лаешь за́втра?", "Le preguntás a un amigo qué actividad va a hacer mañana"], ["Ты сде́лаешь э́то за́втра?", "Ты бу́дешь сде́лать э́то за́втра?", "Le preguntás si mañana lo va a tener hecho"]].forEach(([ok, mal, es], j) => {
-    push({ id: "U9-par-pq-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 8, regla: "u9-preguntas", grupo: "PQr-" + j, items: [], oir: ok, pide: es + ". ¿Cuál decís?", opciones: baraja([ok, mal], j), correcta: ok,
+  [["Что ты бу́дешь де́лать за́втра?", "Что ты сде́лаешь за́втра?", "Le preguntas a un amigo qué actividad va a hacer mañana"], ["Ты сде́лаешь э́то за́втра?", "Ты бу́дешь сде́лать э́то за́втра?", "Le preguntas si mañana lo va a tener hecho"]].forEach(([ok, mal, es], j) => {
+    push({ id: "U9-par-pq-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 8, regla: "u9-preguntas", grupo: "PQr-" + j, items: [], oir: ok, pide: es + ". ¿Cuál dices?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + (j === 0 ? "Por la actividad: бу́дешь де́лать." : "Por el resultado: сде́лаешь, sin бу́ду.") });
   });
 
@@ -982,9 +982,9 @@ function ejerciciosUnidad9() {
     const base = { grupo: "OR-" + j, items: ["lex:" + A.id, "lex:" + B.id], oir: ok };
     push(Object.assign({ id: "U9-nat-or-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u9-orden-fut", pide: "Un plan en orden. ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Una cosa después de otra, cada una terminada: futuro de resultado." }, base));
-    if (j < 4) push(Object.assign({ id: "U9-cad-or-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 9, regla: "u9-orden-fut", pide: "Cambiá la frase paso a paso.", base: "Я " + A.fut[0] + oa + ".",
-      pasos: [{ pide: "Agregá qué vas a hacer después (пото́м + " + b + ").", esperadas: [ "Я " + A.fut[0] + oa + ", пото́м " + B.fut[0] + ob + ".", "Я " + A.fut[0] + oa + ", а пото́м " + B.fut[0] + ob + ".", "Я " + A.fut[0] + oa + " и пото́м " + B.fut[0] + ob + ".", "Я " + A.fut[0] + oa + ", пото́м я " + B.fut[0] + ob + "."] },
-              { pide: "Ahora contalo de мы.", esperadas: ["Мы " + A.fut[3] + oa + ", пото́м " + B.fut[3] + ob + ".", "Мы " + A.fut[3] + oa + ", а пото́м " + B.fut[3] + ob + ".", "Мы " + A.fut[3] + oa + " и пото́м " + B.fut[3] + ob + ".", "Мы " + A.fut[3] + oa + ", пото́м мы " + B.fut[3] + ob + "."] }],
+    if (j < 4) push(Object.assign({ id: "U9-cad-or-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 9, regla: "u9-orden-fut", pide: "Cambia la frase paso a paso.", base: "Я " + A.fut[0] + oa + ".",
+      pasos: [{ pide: "Agrega qué vas a hacer después (пото́м + " + b + ").", esperadas: [ "Я " + A.fut[0] + oa + ", пото́м " + B.fut[0] + ob + ".", "Я " + A.fut[0] + oa + ", а пото́м " + B.fut[0] + ob + ".", "Я " + A.fut[0] + oa + " и пото́м " + B.fut[0] + ob + ".", "Я " + A.fut[0] + oa + ", пото́м я " + B.fut[0] + ob + "."] },
+              { pide: "Ahora cuéntalo de мы.", esperadas: ["Мы " + A.fut[3] + oa + ", пото́м " + B.fut[3] + ob + ".", "Мы " + A.fut[3] + oa + ", а пото́м " + B.fut[3] + ob + ".", "Мы " + A.fut[3] + oa + " и пото́м " + B.fut[3] + ob + ".", "Мы " + A.fut[3] + oa + ", пото́м мы " + B.fut[3] + ob + "."] }],
       explicacion: "Я " + A.fut[0] + oa + ", пото́м " + B.fut[0] + ob + ". → Мы " + A.fut[3] + oa + ", пото́м " + B.fut[3] + ob + "." }, base, { grupo: "ORc-" + j }));
   });
   [["Я успе́ю.", "Me va a dar el tiempo."], ["Я не успе́ю.", "No voy a llegar."]].forEach(([ru, es], j) => {
@@ -994,19 +994,19 @@ function ejerciciosUnidad9() {
   });
 
   /* ── Módulo 10: el viaje ── */
-  [["заброни́ровать", " гости́ницу", "брони́ровать", "Voy a reservar el hotel"], ["купи́ть", " авиабиле́т", "покупа́ть", "Voy a comprar el pasaje de avión"], ["собра́ть", " чемода́н", "собира́ть", "Voy a armar la valija"],
+  [["заброни́ровать", " гости́ницу", "брони́ровать", "Voy a reservar el hotel"], ["купи́ть", " авиабиле́т", "покупа́ть", "Voy a comprar el billete de avión"], ["собра́ть", " чемода́н", "собира́ть", "Voy a armar la maleta"],
    ["взять", " па́спорт", "брать", "Voy a llevar el pasaporte"], ["посети́ть", " музе́й", "посеща́ть", "Voy a visitar el museo"], ["сфотографи́ровать", " го́ры", "фотографи́ровать", "Le voy a sacar una foto a las montañas"]].forEach(([rk, o, ik, es], j) => {
     const R = VF(rk), ok = "Я " + R.fut[0] + o + ".", mal = "Я бу́ду " + R.ac + o + ".";
     const base = { grupo: "VP-" + j, items: ["lex:" + R.id], oir: ok };
     push(Object.assign({ id: "U9-nat-vp-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 10, regla: "u9-viaje-prep", pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " El de resultado, sin бу́ду: " + R.fut[0] + "." }, base));
-    push(Object.assign({ id: "U9-asp-vp-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 10, regla: "u9-viaje-prep", pide: "Escribí en ruso: «" + es + "».", audio: ok, audioManual: true, esperadas: [ok], idioma: "ru", explicacion: ok }, base, { grupo: "VPw-" + j }));
+    push(Object.assign({ id: "U9-asp-vp-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 10, regla: "u9-viaje-prep", pide: "Escribe en ruso: «" + es + "».", audio: ok, audioManual: true, esperadas: [ok], idioma: "ru", explicacion: ok }, base, { grupo: "VPw-" + j }));
     if (j % 2 === 0) push(Object.assign({ id: "U9-diag-vp-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 10, regla: "u9-viaje-prep", pide: "La frase tiene un error. ¿Qué falla?", grande: mal,
       opciones: ["El de resultado no va con бу́ду", "El caso del objeto", "Falta не"], correcta: "El de resultado no va con бу́ду", esperadas: [ok], explicacion: ok }, base, { grupo: "VPd-" + j }));
   });
   [["купа́ться", " в мо́ре", "Me voy a bañar en el mar todos los días"], ["загора́ть", " на пля́же", "Voy a tomar sol en la playa todos los días"], ["гуля́ть", " в це́нтре", "Voy a pasear por el centro todos los días"]].forEach(([ik, o, es], j) => {
     const I = VF(ik), ok = "Я бу́ду " + I.ac + o + " ка́ждый день.", mal = "Я " + I.pres[0] + o + " ка́ждый день.";
-    push({ id: "U9-par-va-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 10, regla: "u9-viaje-alla", grupo: "VA-" + j, items: ["lex:" + I.id], oir: ok, pide: "Estás planeando el viaje: «" + es + "». ¿Cuál decís?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U9-par-va-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 10, regla: "u9-viaje-alla", grupo: "VA-" + j, items: ["lex:" + I.id], oir: ok, pide: "Estás planeando el viaje: «" + es + "». ¿Cuál dices?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " En el viaje que viene, algo que se va a repetir: бу́ду + infinitivo." });
     push({ id: "U9-pq-va-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 10, regla: "u9-viaje-alla", grupo: "VAp-" + j, items: ["lex:" + I.id], oir: ok, pide: "¿Por qué бу́ду " + I.ac + "?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Se va a repetir: proceso", "Una vez y terminado: resultado"], correcta: "Se va a repetir: proceso", explicacion: ok + " ка́ждый день: proceso." });

@@ -110,19 +110,20 @@ const AZ_CUENTA_CONFIG = {
   }
   function msgError(e) {
     const t = String((e && (e.message || e.error_description || e.msg)) || e || "");
-    if (/AZ_NO_PERMITIDO|Database error saving new user|not allowed|Signups not allowed/i.test(t)) return "Este mail no tiene acceso a Azbuka. Pedile a Manu que lo habilite.";
-    if (/rate|too many|security purposes|seconds/i.test(t)) return "Pediste muchos códigos seguidos. Esperá un minuto y probá de nuevo.";
-    if (/expired|invalid|token/i.test(t)) return "El código no es correcto o ya venció. Revisalo o pedí uno nuevo.";
-    if (/fetch|network|Failed/i.test(t)) return "No hay conexión. Para entrar la primera vez necesitás internet.";
-    return "No se pudo completar. Probá de nuevo en un momento.";
+    if (/sending|smtp|mail.*(fail|error)/i.test(t)) return "No se pudo mandar el mail con el código. Es un problema del envío de mails, no de tu mail: avísale a Manu. (Detalle: " + t.slice(0, 120) + ")";
+    if (/AZ_NO_PERMITIDO|Database error saving new user|not allowed|Signups not allowed/i.test(t)) return "Este mail no tiene acceso a Azbuka. Pídele a Manu que lo habilite.";
+    if (/rate|too many|security purposes|seconds/i.test(t)) return "Pediste muchos códigos seguidos. Espera un minuto y prueba de nuevo.";
+    if (/expired|invalid|token/i.test(t)) return "El código no es correcto o ya venció. Revísalo o pide uno nuevo.";
+    if (/fetch|network|Failed/i.test(t)) return "No hay conexión. Para entrar la primera vez necesitas internet.";
+    return "No se pudo completar. Prueba de nuevo en un momento." + (t ? " (Detalle: " + t.slice(0, 120) + ")" : "");
   }
-  const PRIV = `<div class="priv">Tu mail se usa solo para entrar y para guardar tu progreso. Podés eliminar tu cuenta y todos tus datos cuando quieras, desde Ajustes.</div>`;
+  const PRIV = `<div class="priv">Tu mail se usa solo para entrar y para guardar tu progreso. Puedes eliminar tu cuenta y todos tus datos cuando quieras, desde Ajustes.</div>`;
 
   function verMail(error, aviso) {
     paso = "mail";
     const el = pantalla(`
       <div class="tit">Entrar</div>
-      <div class="txt">Escribí tu mail y te mandamos un código para entrar. No hace falta contraseña.</div>
+      <div class="txt">Escribe tu mail y te mandamos un código para entrar. No hace falta contraseña.</div>
       <input id="azc-mail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="tu@mail.com" value="${esc(mailIngresado)}">
       ${error ? `<div class="err">${esc(error)}</div>` : ""}${aviso ? `<div class="ok">${esc(aviso)}</div>` : ""}
       <button class="b" id="azc-enviar">Enviarme el código</button>
@@ -131,7 +132,7 @@ const AZ_CUENTA_CONFIG = {
     const inp = el.querySelector("#azc-mail"), btn = el.querySelector("#azc-enviar");
     const enviar = async () => {
       const m = inp.value.trim().toLowerCase();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { verMail("Revisá el mail: parece incompleto."); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { verMail("Revisa el mail: parece incompleto."); return; }
       mailIngresado = m; btn.disabled = true; btn.textContent = "Enviando…";
       try {
         const { error } = await cliente.auth.signInWithOtp({ email: m, options: { shouldCreateUser: true } });
@@ -153,8 +154,8 @@ const AZ_CUENTA_CONFIG = {
   function verCodigo(error) {
     paso = "codigo";
     const el = pantalla(`
-      <div class="tit">Revisá tu mail</div>
-      <div class="txt">Te mandamos un código a <b style="color:${C.text}">${esc(mailIngresado)}</b>. Escribilo acá. Si no llega en un minuto, mirá en «Spam» o «Promociones».</div>
+      <div class="tit">Revisa tu mail</div>
+      <div class="txt">Te mandamos un código a <b style="color:${C.text}">${esc(mailIngresado)}</b>. Escríbelo aquí. Si no llega en un minuto, mira en «Spam» o «Promociones».</div>
       <input id="azc-cod" class="cod" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="${CFG.digitos}" placeholder="${"•".repeat(CFG.digitos)}">
       ${error ? `<div class="err">${esc(error)}</div>` : ""}
       <button class="b" id="azc-ok">Entrar</button>
@@ -190,7 +191,7 @@ const AZ_CUENTA_CONFIG = {
   function verSinAcceso() {
     pantalla(`
       <div class="tit">Sin acceso</div>
-      <div class="txt">Este mail ya no tiene acceso a Azbuka. Si creés que es un error, escribile a Manu.</div>
+      <div class="txt">Este mail ya no tiene acceso a Azbuka. Si crees que es un error, escríbele a Manu.</div>
       <button class="b sec" id="azc-otro">Entrar con otro mail</button>`).querySelector("#azc-otro").onclick = () => verMail();
   }
   function verEntrando() { pantalla(`<div class="tit">Entrando…</div><div class="txt">Un momento.</div>`); }
