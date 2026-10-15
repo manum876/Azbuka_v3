@@ -25,7 +25,7 @@
 <script>
 /* ============================================================
    VOCES-PRUEBA.HTML — Prueba de voces generadas (15/10/2026)
-   Maqueta para elegir las voces de Silero antes de sumarlas a la app.
+   Maqueta para elegir las voces de Silero antes de sumarlas a la app (v2, 15/10/2026: audios a 96 kbps, precarga y sin cortar la voz del teléfono).
    No está en el menú ni en AZ_PRECACHE: se abre con el enlace.
    · Teoría y palabras de una unidad → la voz de narración elegida
      (audio/prueba/<voz>/<id>.mp3, generado por GitHub Actions).
@@ -42,18 +42,37 @@ const ROLES = [["narra", "Unidades (narración)", null], ["masha", "Masha", "f"]
 const DEF = { narra: "xenia", masha: "baya", olga: "kseniya", lucas: "aidar", dima: "eugene" };
 function leerEleccion() { try { return Object.assign({}, DEF, JSON.parse(localStorage.getItem("az_voces_prueba") || "{}")); } catch (e) { return Object.assign({}, DEF); } }
 
-/* Reproductor: el MP3 generado; si todavía no existe, la voz del teléfono y un aviso */
-let actual = null, turno = 0, secuencia = 0;
-function parar() { turno++; if (actual) { try { actual.pause(); } catch (e) {} actual = null; } if (typeof azCallar === "function") azCallar(); }
+/* Reproductor (15/10/2026, v2):
+   · Todos los audios de la página se bajan al abrirla y quedan en memoria (blob), así ▶ suena al instante.
+   · Un solo elemento <audio> reutilizado: el iPhone tarda menos y no pelea con la voz del teléfono.
+   · parar() corta solo el audio; la voz del teléfono se corta aparte (callarTelefono), y nunca justo antes
+     de hablar, porque azCallar deja programado un cancel que cortaba la palabra al empezar. */
+const VER = "2";
+const blobs = {};
+const reproductor = new Audio();
+reproductor.preload = "auto";
+let secuencia = 0, alTerminar = null;
+reproductor.onended = () => { const f = alTerminar; alTerminar = null; f && f(true); };
+function url(id, voz) { return "audio/prueba/" + voz + "/" + id + ".mp3?v=" + VER; }
+function precargar(lista) {
+  lista.forEach(([id, voz]) => {
+    const k = voz + "/" + id;
+    if (blobs[k]) return;
+    blobs[k] = fetch(url(id, voz)).then(r => r.ok ? r.blob() : null).then(b => b ? URL.createObjectURL(b) : null).catch(() => null);
+  });
+}
+function parar() { try { reproductor.pause(); } catch (e) {} const f = alTerminar; alTerminar = null; f && f(false); }
+function callarTelefono() { try { window.speechSynthesis.cancel(); } catch (e) {} }
 function tocarAudio(id, voz, ru, vel, alFaltar) {
-  return new Promise(res => {
-    parar(); const t = turno;
-    const a = new Audio("audio/prueba/" + voz + "/" + id + ".mp3");
-    a.playbackRate = vel; a.preservesPitch = true; a.webkitPreservesPitch = true;
-    actual = a;
-    a.onended = () => res(true);
-    a.onerror = () => { if (t !== turno) return res(false); alFaltar && alFaltar(); azHablarRu(ru); setTimeout(() => res(false), 1500); };
-    a.play().catch(() => a.onerror());
+  parar(); callarTelefono();
+  return new Promise(async res => {
+    const k = voz + "/" + id;
+    if (!blobs[k]) precargar([[id, voz]]);
+    const src = await blobs[k];
+    if (!src) { alFaltar && alFaltar(); azHablarRu(ru); setTimeout(() => res(false), 1500); return; }
+    alTerminar = res;
+    reproductor.src = src; reproductor.playbackRate = vel; reproductor.preservesPitch = true; reproductor.webkitPreservesPitch = true;
+    reproductor.play().catch(() => { alTerminar = null; alFaltar && alFaltar(); azHablarRu(ru); res(false); });
   });
 }
 
@@ -67,6 +86,10 @@ function App() {
   const [copiado, setCopiado] = useState(false);
   useEffect(() => { (async () => setDarkMode((await azGet("az_theme", "dark")) !== "light"))(); }, []);
   useEffect(() => { fetch("herramientas/voces/prueba.json").then(r => r.json()).then(d => { P = d; setDatos(d); }).catch(() => setDatos({ error: true })); }, []);
+  useEffect(() => { if (!datos || datos.error) return;
+    const l = datos.teoria.map(t => [t.id, voz.narra]);
+    datos.dialogos.forEach(d => d.lineas.forEach(x => l.push([x.id, voz[x.p]])));
+    precargar(l); }, [datos, voz]);
   const c = azColors(darkMode);
   const elegir = (rol, v) => { const n = Object.assign({}, voz, { [rol]: v }); setVoz(n); try { localStorage.setItem("az_voces_prueba", JSON.stringify(n)); } catch (e) {} };
   const chip = (on, txt, fn, key) => h("button", { key, className: "btn", onClick: fn, style: Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },

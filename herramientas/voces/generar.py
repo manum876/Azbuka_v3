@@ -38,8 +38,8 @@ for it in items:
         pcm = (audio.clamp(-1, 1) * 32767).to(torch.int16).numpy().tobytes()
         with wave.open(wav, "wb") as w:
             w.setnchannels(1); w.setsampwidth(2); w.setframerate(48000); w.writeframes(pcm)
-        # MP3 mono 24 kHz a 48 kbps: suena bien para la voz y pesa poco (~6 KB por segundo)
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav, "-ac", "1", "-ar", "24000", "-b:a", "48k", destino], check=True)
+        # MP3 mono 24 kHz a 96 kbps (15/10/2026: a 48 kbps sonaba «bajo el agua»): ~12 KB por segundo
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav, "-ac", "1", "-ar", "24000", "-c:a", "libmp3lame", "-b:a", "96k", destino], check=True)
         os.remove(wav)
         hechos += 1
         print("✓", voz, it["id"], texto)
