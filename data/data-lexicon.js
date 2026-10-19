@@ -1,3 +1,24 @@
+/* ACTUALIZACIÓN 19/10/2026, segunda parte (aprobada por Manu): las 257 definiciones de
+   plantilla que quedaban de la tanda CMR-05003 a CMR-05420 («Versión imperfectiva de "X": indica que la
+   acción es habitual…», «Realizar la acción de "X" durante un tiempo…») pasan a ser definiciones propias,
+   tomadas de la de su pareja (ya revisada) o redactadas a mano. Detalle en PAREJAS_ASPECTO_REVISION.md §9.10. */
+
+/* ACTUALIZACIÓN 19/10/2026 (revisión completa de parejas de aspecto, aprobada por Manu;
+   detalle en PAREJAS_ASPECTO_REVISION.md, sección 9). Sobre los 1.752 verbos:
+   · 17 relaciones pasan a «un rato» (delimitativo): помолча́ть, подыша́ть, пообща́ться, поболта́ть,
+     побесе́довать, поторгова́ть, поруга́ть, поразмышля́ть, покрути́ть, посвети́ть, поброди́ть, поката́ться,
+     подержа́ть, поборо́ться, потруди́ться, поколеба́ться, побыва́ть.
+   · 22 relaciones pasan a «empezar a» (incoativo): засмея́ться, рассмея́ться (vínculo nuevo), запла́кать,
+     закрича́ть, задрожа́ть, засия́ть, заора́ть, захохота́ть, заблесте́ть, засвети́ться, закури́ть, замолча́ть,
+     поте́чь, подружи́ться, заболе́ть (×2), захоте́ть, захоте́ться, усомни́ться, заподо́зрить, разволнова́ться,
+     обеспоко́иться.
+   · Parejas corregidas: гляде́ть ↔ погляде́ть (y гля́нуть); погля́дывать y доверя́ть sin pareja;
+     ворова́ть ↔ укра́сть recíproco; контроли́ровать pasa a imperfectivo.
+   · Parejas por acepción: явля́ться, находи́ться, утвержда́ть, звать, меня́ться, учи́ться, рва́ться,
+     прожива́ть, рассчи́тывать, называ́ться, продава́ться; заболе́ть y прояви́ть suman acepción.
+   · Marcas nuevas SIN_PAREJA:SOLO_PERFECTIVO y SIN_PAREJA:ACTIVIDAD.
+   · Unas 130 traducciones y definiciones corregidas («(durante un rato)» y «(versión perfectiva)»). */
+
 /* ACTUALIZACIÓN 12/10/2026 (Unidad 13, profundización, aprobado por Manu): 50 palabras que
    ya estaban pasan a introducedIn [13]: experiencias y sentimientos (о́пыт, собы́тие, воспомина́ние,
    чу́вство, сча́стье, ра́дость, страх, настрое́ние, удово́льствие, удивле́ние, счастли́вый, гру́стный,
@@ -6435,7 +6456,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-01713"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01713": "incoativo"
+  }
  },
  {
   "id": "CMR-00093",
@@ -11704,9 +11728,20 @@ const LEXICON_COMER = [
   "ipa": "jɪvɭʲˈɑtsʌ",
   "senses": [
    {
-    "es": "resultar",
-    "definitionEs": "Ser o constituir algo, en un registro formal ('являться причиной' = ser la causa).",
-    "source": "freedict-directo + redactado"
+    "es": "ser (formal)",
+    "definitionEs": "Ser, constituir algo, en un registro formal: Москва́ явля́ется столи́цей Росси́и, «Moscú es la capital de Rusia».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:ESTATIVO"
+    ]
+   },
+   {
+    "es": "presentarse, aparecer",
+    "definitionEs": "Presentarse en un lugar, sobre todo cuando se lo espera o se lo cita.",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-01548"
+    ]
    }
   ],
   "introducedIn": [],
@@ -14609,7 +14644,6 @@ const LEXICON_COMER = [
    "CMR-00523"
   ],
   "aspectualPartnerTypes": {
-   "CMR-01365": "aspectual",
    "CMR-00523": "resultado"
   }
  },
@@ -18683,8 +18717,19 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "encontrarse, estar (ubicado)",
-    "definitionEs": "Estar en un lugar determinado.",
-    "source": "redactado"
+    "definitionEs": "Estar en un lugar determinado: Где нахо́дится вокза́л? «¿Dónde está la estación?».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:ESTATIVO"
+    ]
+   },
+   {
+    "es": "aparecer, ser encontrado (lo perdido)",
+    "definitionEs": "Aparecer algo que se había perdido o que se buscaba.",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-02028"
+    ]
    }
   ],
   "introducedIn": [
@@ -22131,7 +22176,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-02669"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02669": "delimitativo"
+  }
  },
  {
   "id": "CMR-00342",
@@ -23246,7 +23294,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-03137"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03137": "incoativo"
+  }
  },
  {
   "id": "CMR-00360",
@@ -35188,7 +35239,8 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "CMR-02991"
+   "CMR-02991",
+   "CMR-02820"
   ]
  },
  {
@@ -36352,7 +36404,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05040"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05040": "delimitativo"
+  }
  },
  {
   "id": "CMR-00574",
@@ -49808,7 +49863,10 @@ const LEXICON_COMER = [
   "aspectualPartner": [
    "CMR-01593",
    "CMR-01851"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01851": "incoativo"
+  }
  },
  {
   "id": "CMR-00793",
@@ -51088,18 +51146,11 @@ const LEXICON_COMER = [
   "ipa": "mʌɭtʃʲˈɑtʲ",
   "senses": [
    {
-    "es": "callarse",
-    "definitionEs": "Dejar de hablar.",
+    "es": "estar callado, guardar silencio",
+    "definitionEs": "No hablar, permanecer en silencio: Почему́ ты молчи́шь? «¿Por qué no dices nada?».",
     "source": "redactado",
     "aspectualPartner": [
-     "CMR-03391"
-    ]
-   },
-   {
-    "es": "guardar silencio (un rato)",
-    "definitionEs": "Permanecer sin hablar durante un tiempo.",
-    "source": "redactado",
-    "aspectualPartner": [
+     "CMR-03391",
      "CMR-03169"
     ]
    }
@@ -51150,7 +51201,11 @@ const LEXICON_COMER = [
   "aspectualPartner": [
    "CMR-03391",
    "CMR-03169"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03169": "delimitativo",
+   "CMR-03391": "incoativo"
+  }
  },
  {
   "id": "CMR-00814",
@@ -55562,8 +55617,19 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llamarse",
-    "definitionEs": "Tener determinado nombre.",
-    "source": "redactado (basado en FreeDict)"
+    "definitionEs": "Tener determinado nombre (cosas, lugares): Как называ́ется э́та у́лица? «¿Cómo se llama esta calle?».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:ESTATIVO"
+    ]
+   },
+   {
+    "es": "presentarse (como), dar su nombre",
+    "definitionEs": "Decir uno su nombre o presentarse como algo.",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05377"
+    ]
    }
   ],
   "introducedIn": [],
@@ -57132,9 +57198,20 @@ const LEXICON_COMER = [
   "ipa": "zvˈɑtʲ",
   "senses": [
    {
-    "es": "llamar (por nombre)",
-    "definitionEs": "Decir el nombre de alguien para dirigirse a él, o pedirle que se acerque.",
-    "source": "redactado (basado en FreeDict)"
+    "es": "llamar (de nombre)",
+    "definitionEs": "Tener por nombre, en la construcción Меня́ зову́т…, «me llamo…».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:ESTATIVO"
+    ]
+   },
+   {
+    "es": "llamar (a alguien para que venga)",
+    "definitionEs": "Pedirle a alguien que se acerque o que venga: звать на по́мощь, «pedir ayuda».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-02360"
+    ]
    }
   ],
   "introducedIn": [
@@ -59268,9 +59345,20 @@ const LEXICON_COMER = [
   "ipa": "utʃʲˈitsʌ",
   "senses": [
    {
-    "es": "estudiar, aprender",
-    "definitionEs": "Adquirir conocimientos, generalmente en una institución educativa.",
-    "source": "redactado (basado en FreeDict)"
+    "es": "estudiar (ser estudiante)",
+    "definitionEs": "Cursar estudios: Я учу́сь в университе́те, «estudio en la universidad».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:ACTIVIDAD"
+    ]
+   },
+   {
+    "es": "aprender (a hacer algo)",
+    "definitionEs": "Adquirir una habilidad: учи́ться пла́вать, «aprender a nadar».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-01940"
+    ]
    }
   ],
   "introducedIn": [
@@ -63463,8 +63551,13 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "CMR-02024"
-  ]
+   "CMR-02024",
+   "CMR-03866"
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02024": "incoativo",
+   "CMR-03866": "incoativo"
+  }
  },
  {
   "id": "CMR-01017",
@@ -64202,7 +64295,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -72495,7 +72588,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-03529"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03529": "incoativo"
+  }
  },
  {
   "id": "CMR-01166",
@@ -72915,7 +73011,7 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:SOLO_PERFECTIVO"
   ]
  },
  {
@@ -77845,7 +77941,18 @@ const LEXICON_COMER = [
    {
     "es": "afirmar, sostener",
     "definitionEs": "Decir algo con seguridad y firmeza, presentándolo como cierto.",
-    "source": "redactado (basado en FreeDict)"
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:ACTIVIDAD"
+    ]
+   },
+   {
+    "es": "aprobar, ratificar",
+    "definitionEs": "Dar por válido un plan, una ley o un nombramiento.",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-02442"
+    ]
    }
   ],
   "introducedIn": [],
@@ -79799,7 +79906,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -105166,9 +105273,9 @@ const LEXICON_COMER = [
   "ipa": "zʌxʌtʲˈetʲ",
   "senses": [
    {
-    "es": "querer, desear",
-    "definitionEs": "Sentir el deseo de algo (aspecto perfectivo de 'хотеть').",
-    "source": "redactado (basado en FreeDict)"
+    "es": "darle ganas a uno, querer",
+    "definitionEs": "Empezar a querer algo, sentir de pronto el deseo: Он захоте́л пить, «le dieron ganas de beber».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -105216,7 +105323,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00092"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00092": "incoativo"
+  }
  },
  {
   "id": "CMR-01714",
@@ -105397,7 +105507,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05391"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05391": "delimitativo"
+  }
  },
  {
   "id": "CMR-01717",
@@ -107553,8 +107666,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "preparar",
-    "definitionEs": "Disponer algo con anticipación (aspecto perfectivo de 'готовить').",
-    "source": "redactado + Lingea (contraste puntual)"
+    "definitionEs": "Disponer algo con anticipación: подгото́вить докла́д, «preparar un informe».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -108396,7 +108509,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-03241"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03241": "incoativo"
+  }
  },
  {
   "id": "CMR-01766",
@@ -111633,9 +111749,20 @@ const LEXICON_COMER = [
   "ipa": "mʲɪnʲˈɑtsʌ",
   "senses": [
    {
-    "es": "cambiar",
-    "definitionEs": "Volverse diferente, o intercambiar algo con alguien.",
-    "source": "redactado (basado en FreeDict)"
+    "es": "cambiar, volverse distinto",
+    "definitionEs": "Volverse diferente con el tiempo: Пого́да меня́ется, «el tiempo está cambiando». Para el resultado se usa измени́ться.",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:YA_CUBIERTO_POR_OTRO_PAR"
+    ]
+   },
+   {
+    "es": "intercambiar(se)",
+    "definitionEs": "Darse algo mutuamente: меня́ться места́ми, «cambiarse de lugar».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05050"
+    ]
    }
   ],
   "introducedIn": [],
@@ -112592,7 +112719,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-03983"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03983": "incoativo"
+  }
  },
  {
   "id": "CMR-01835",
@@ -113570,8 +113700,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ponerse a gritar",
-    "definitionEs": "Empezar a gritar de forma repentina (aspecto perfectivo de 'кричать').",
-    "source": "redactado + Lingea (contraste puntual)",
+    "definitionEs": "Empezar a gritar de forma repentina.",
+    "source": "redactado",
     "aspectualPartner": [
      "CMR-00792"
     ]
@@ -113622,7 +113752,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00792"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00792": "incoativo"
+  }
  },
  {
   "id": "CMR-01852",
@@ -114788,7 +114921,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05005"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05005": "delimitativo"
+  }
  },
  {
   "id": "CMR-01872",
@@ -124111,8 +124247,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "echarse a reír",
-    "definitionEs": "Empezar a reír de forma repentina (aspecto perfectivo de 'смеяться').",
-    "source": "redactado (basado en FreeDict)"
+    "definitionEs": "Empezar a reír de forma repentina.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -124160,7 +124296,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-01016"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01016": "incoativo"
+  }
  },
  {
   "id": "CMR-02025",
@@ -125673,9 +125812,20 @@ const LEXICON_COMER = [
   "ipa": "rʌsɕˈityvʌtʲ",
   "senses": [
    {
-    "es": "contar con, calcular",
-    "definitionEs": "Esperar algo con confianza, o hacer un cálculo.",
-    "source": "redactado"
+    "es": "calcular",
+    "definitionEs": "Hacer un cálculo: рассчи́тывать сто́имость, «calcular el costo».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-02924"
+    ]
+   },
+   {
+    "es": "contar con",
+    "definitionEs": "Esperar algo con confianza: Я рассчи́тываю на тебя́, «cuento contigo».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:ESTATIVO"
+    ]
    }
   ],
   "introducedIn": [],
@@ -132620,7 +132770,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05058"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05058": "incoativo"
+  }
  },
  {
   "id": "CMR-02163",
@@ -141899,7 +142052,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05066"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05066": "incoativo"
+  }
  },
  {
   "id": "CMR-02319",
@@ -142870,7 +143026,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05067"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05067": "incoativo"
+  }
  },
  {
   "id": "CMR-02335",
@@ -145446,8 +145605,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "memorizar, retener",
-    "definitionEs": "Fijar algo en la memoria (aspecto perfectivo de 'запоминать').",
-    "source": "redactado (basado en FreeDict)"
+    "definitionEs": "Fijar algo en la memoria: запо́мнить но́мер, «memorizar el número».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -153046,8 +153205,8 @@ const LEXICON_COMER = [
   "ipa": "pʌvʲɪstʲˈi",
   "senses": [
    {
-    "es": "llevar, conducir (un rato)",
-    "definitionEs": "Guiar a alguien hacia un lugar, iniciando la acción (aspecto perfectivo de 'вести').",
+    "es": "llevar, conducir (ponerse en camino con alguien)",
+    "definitionEs": "Empezar a llevar a alguien hacia un lugar: повести́ дете́й в парк, «llevar a los niños al parque».",
     "source": "redactado"
    }
   ],
@@ -153106,7 +153265,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "subrayar, enfatizar",
-    "definitionEs": "Destacar algo, dándole importancia especial (aspecto perfectivo de 'подчеркивать').",
+    "definitionEs": "Destacar algo, dándole importancia especial, o trazar una línea debajo.",
     "source": "redactado"
    }
   ],
@@ -156138,12 +156297,18 @@ const LEXICON_COMER = [
    {
     "es": "poner (la base)",
     "definitionEs": "Colocar algo como fundamento.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05211"
+    ]
    },
    {
     "es": "empeñar",
     "definitionEs": "Dejar un bien en garantía de un préstamo.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05211"
+    ]
    }
   ],
   "introducedIn": [],
@@ -157200,7 +157365,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05075"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05075": "delimitativo"
+  }
  },
  {
   "id": "CMR-02570",
@@ -157738,7 +157906,7 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -160634,7 +160802,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05216"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05216": "incoativo"
+  }
  },
  {
   "id": "CMR-02629",
@@ -163088,9 +163259,9 @@ const LEXICON_COMER = [
   "ipa": "pʌbyvˈɑtʲ",
   "senses": [
    {
-    "es": "estar, visitar (una vez)",
-    "definitionEs": "Haber estado en un lugar en algún momento (aspecto perfectivo).",
-    "source": "redactado (basado en FreeDict)"
+    "es": "estar (un tiempo) en un lugar, visitar",
+    "definitionEs": "Estar en un lugar durante un tiempo, visitarlo: Я побыва́л в Москве́, «estuve en Moscú».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -163138,7 +163309,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00341"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00341": "delimitativo"
+  }
  },
  {
   "id": "CMR-02670",
@@ -166258,17 +166432,26 @@ const LEXICON_COMER = [
    {
     "es": "llevar (a un lugar)",
     "definitionEs": "Conducir a alguien hacia un sitio.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05219"
+    ]
    },
    {
     "es": "poner en marcha",
     "definitionEs": "Arrancar un motor o mecanismo.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05219"
+    ]
    },
    {
     "es": "adquirir (una mascota)",
     "definitionEs": "Empezar a tener un animal doméstico.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05219"
+    ]
    }
   ],
   "introducedIn": [],
@@ -169155,7 +169338,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-04496"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-04496": "incoativo"
+  }
  },
  {
   "id": "CMR-02770",
@@ -169168,17 +169354,26 @@ const LEXICON_COMER = [
    {
     "es": "llevar (a un lado)",
     "definitionEs": "Conducir a alguien a un lugar apartado.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05223"
+    ]
    },
    {
     "es": "asignar",
     "definitionEs": "Destinar algo para un fin específico.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05223"
+    ]
    },
    {
     "es": "rechazar (una propuesta)",
     "definitionEs": "Desestimar una moción o iniciativa.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05223"
+    ]
    }
   ],
   "introducedIn": [],
@@ -171915,7 +172110,7 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:IDIOMATICO"
+   "SIN_PAREJA:SOLO_PERFECTIVO"
   ]
  },
  {
@@ -172174,8 +172369,8 @@ const LEXICON_COMER = [
   "ipa": "pʌɡɭʲɪdʲˈetʲ",
   "senses": [
    {
-    "es": "mirar (un rato)",
-    "definitionEs": "Dirigir la vista hacia algo durante un tiempo (aspecto perfectivo de 'глядеть').",
+    "es": "mirar, echar una mirada",
+    "definitionEs": "Dirigir la vista hacia algo: Погляди́ в окно́! «¡Mira por la ventana!».",
     "source": "redactado"
    }
   ],
@@ -172223,7 +172418,7 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "CMR-03988"
+   "CMR-00554"
   ]
  },
  {
@@ -172474,8 +172669,8 @@ const LEXICON_COMER = [
   "ipa": "pʌɪntʲɪrʲɪsʌvˈɑtsʌ",
   "senses": [
    {
-    "es": "interesarse (por), preguntar por",
-    "definitionEs": "Mostrar interés por algo, generalmente preguntando (aspecto perfectivo de 'интересоваться').",
+    "es": "preguntar por, interesarse por (una vez)",
+    "definitionEs": "Preguntar por algo mostrando interés: поинтересова́ться здоро́вьем, «preguntar por la salud».",
     "source": "redactado"
    }
   ],
@@ -173637,8 +173832,19 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "manifestar, mostrar",
-    "definitionEs": "Hacer visible o evidente una cualidad o un sentimiento (aspecto perfectivo de 'проявлять').",
-    "source": "redactado (basado en FreeDict)"
+    "definitionEs": "Hacer visible o evidente una cualidad o un sentimiento: прояви́ть терпе́ние, «mostrar paciencia».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-03157"
+    ]
+   },
+   {
+    "es": "revelar (fotos)",
+    "definitionEs": "Pasar a papel un rollo de fotos: прояви́ть плёнку, «revelar un rollo».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-03157"
+    ]
    }
   ],
   "introducedIn": [],
@@ -175736,7 +175942,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -177947,7 +178153,7 @@ const LEXICON_COMER = [
   "sourceRefs": {
    "freedictRuEs": "контролировать"
   },
-  "aspect": "biaspectual",
+  "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05419"
   ]
@@ -178134,7 +178340,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -182487,8 +182693,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "echar un vistazo, mirar",
-    "definitionEs": "Dirigir la vista hacia algo brevemente (coloquial, aspecto perfectivo).",
-    "source": "redactado (basado en FreeDict)"
+    "definitionEs": "Mirar brevemente, una vez (coloquial): гля́нуть на часы́, «echar un vistazo al reloj».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -188993,7 +189199,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05094"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05094": "incoativo"
+  }
  },
  {
   "id": "CMR-03103",
@@ -189368,8 +189577,19 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "residir, vivir (en un lugar)",
-    "definitionEs": "Tener la residencia habitual en un lugar.",
-    "source": "redactado"
+    "definitionEs": "Tener la residencia habitual en un lugar (registro formal).",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:ESTATIVO"
+    ]
+   },
+   {
+    "es": "vivir (un tiempo); gastar",
+    "definitionEs": "Pasar un período viviendo, o gastar dinero en vivir: прожива́ть сбереже́ния, «gastarse los ahorros».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-01879"
+    ]
    }
   ],
   "introducedIn": [],
@@ -189963,12 +190183,18 @@ const LEXICON_COMER = [
    {
     "es": "decepcionar, fallarle a alguien",
     "definitionEs": "No cumplir con lo esperado por alguien.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05236"
+    ]
    },
    {
     "es": "llevar hacia",
     "definitionEs": "Conducir algo o a alguien hacia un punto.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05236"
+    ]
    }
   ],
   "introducedIn": [],
@@ -191047,7 +191273,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "entrar ganas (de algo)",
-    "definitionEs": "Surgir el deseo de algo, en construcción impersonal (aspecto perfectivo de 'хотеться').",
+    "definitionEs": "Surgir de pronto el deseo de algo, en construcción impersonal: Мне захоте́лось спать, «me dio sueño».",
     "source": "redactado"
    }
   ],
@@ -191096,7 +191322,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00359"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00359": "incoativo"
+  }
  },
  {
   "id": "CMR-03138",
@@ -192237,12 +192466,18 @@ const LEXICON_COMER = [
    {
     "es": "manifestar, mostrar",
     "definitionEs": "Hacer visible una cualidad o un sentimiento (aspecto imperfectivo de 'проявить').",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-02844"
+    ]
    },
    {
     "es": "revelar (fotos)",
     "definitionEs": "Pasar a papel un rollo de fotos: проявля́ть плёнку, «revelar un rollo».",
-    "source": "redactado (diccionario de bolsillo)"
+    "source": "redactado (diccionario de bolsillo)",
+    "aspectualPartner": [
+     "CMR-02844"
+    ]
    }
   ],
   "introducedIn": [],
@@ -192954,9 +193189,9 @@ const LEXICON_COMER = [
   "ipa": "pʌmʌɭtʃʲˈɑtʲ",
   "senses": [
    {
-    "es": "callarse (un rato)",
-    "definitionEs": "Guardar silencio durante un tiempo (aspecto perfectivo de 'молчать').",
-    "source": "redactado (basado en FreeDict)",
+    "es": "quedarse callado un rato",
+    "definitionEs": "Guardar silencio durante un tiempo.",
+    "source": "redactado",
     "aspectualPartner": [
      "CMR-00813"
     ]
@@ -193007,7 +193242,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00813"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00813": "delimitativo"
+  }
  },
  {
   "id": "CMR-03170",
@@ -195229,7 +195467,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05239"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05239": "delimitativo"
+  }
  },
  {
   "id": "CMR-03207",
@@ -197210,7 +197451,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05097"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05097": "delimitativo"
+  }
  },
  {
   "id": "CMR-03240",
@@ -197279,8 +197523,19 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "enfermarse",
-    "definitionEs": "Empezar a padecer una enfermedad (aspecto perfectivo de 'заболевать').",
-    "source": "redactado (basado en FreeDict)"
+    "definitionEs": "Empezar a estar enfermo: Я заболе́л, «me enfermé».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-01765"
+    ]
+   },
+   {
+    "es": "empezar a doler",
+    "definitionEs": "Empezar a sentir dolor en una parte del cuerpo; solo en 3.ª persona: У меня́ заболе́ла голова́, «me empezó a doler la cabeza».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05466"
+    ]
    }
   ],
   "introducedIn": [
@@ -197329,8 +197584,13 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "CMR-01765"
-  ]
+   "CMR-01765",
+   "CMR-05466"
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01765": "incoativo",
+   "CMR-05466": "incoativo"
+  }
  },
  {
   "id": "CMR-03242",
@@ -197987,7 +198247,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "CMR-05098"
+   "SIN_PAREJA:ESTATIVO"
   ]
  },
  {
@@ -198303,8 +198563,8 @@ const LEXICON_COMER = [
   "ipa": "pʌkʌtʃʲˈɑtʲ",
   "senses": [
    {
-    "es": "mecer, balancear (un rato)",
-    "definitionEs": "Mover algo suavemente de un lado a otro (aspecto perfectivo de 'качать').",
+    "es": "mecer, balancear; sacudir (la cabeza)",
+    "definitionEs": "Mover algo de un lado a otro: покача́ть голово́й, «sacudir la cabeza».",
     "source": "redactado"
    }
   ],
@@ -198470,7 +198730,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05382"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05382": "incoativo"
+  }
  },
  {
   "id": "CMR-03261",
@@ -199663,7 +199926,7 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -200451,7 +200714,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sentarse (un momento); agacharse",
-    "definitionEs": "Tomar asiento brevemente, o doblar las piernas hacia abajo (aspecto perfectivo de 'приседать').",
+    "definitionEs": "Tomar asiento brevemente: Прися́дь! «¡Siéntate un momento!»; también agacharse doblando las piernas.",
     "source": "redactado"
    }
   ],
@@ -204467,12 +204730,18 @@ const LEXICON_COMER = [
    {
     "es": "agarrar al vuelo",
     "definitionEs": "Tomar algo rápidamente antes de que caiga.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05252"
+    ]
    },
    {
     "es": "contagiarse de",
     "definitionEs": "Contraer una enfermedad.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05252"
+    ]
    }
   ],
   "introducedIn": [],
@@ -204530,7 +204799,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "conmocionar, sacudir",
-    "definitionEs": "Causar una fuerte impresión emocional, o mover algo con fuerza (aspecto perfectivo de 'трясти').",
+    "definitionEs": "Causar una fuerte impresión emocional: Э́та но́вость меня́ потрясла́, «la noticia me conmocionó».",
     "source": "redactado"
    }
   ],
@@ -206343,9 +206612,9 @@ const LEXICON_COMER = [
   "ipa": "zʌmʌɭtʃʲˈɑtʲ",
   "senses": [
    {
-    "es": "callarse",
-    "definitionEs": "Dejar de hablar (aspecto perfectivo de 'замолкать').",
-    "source": "redactado (basado en FreeDict)",
+    "es": "callarse, quedarse callado",
+    "definitionEs": "Dejar de hablar: Он вдруг замолча́л, «de repente se calló».",
+    "source": "redactado",
     "aspectualPartner": [
      "CMR-00813"
     ]
@@ -206396,7 +206665,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00813"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00813": "incoativo"
+  }
  },
  {
   "id": "CMR-03392",
@@ -210592,7 +210864,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "desplegar, desenvolver; girar",
-    "definitionEs": "Extender algo que estaba plegado, o hacer girar completamente (aspecto perfectivo de 'развёртывать').",
+    "definitionEs": "Extender algo que estaba plegado o envuelto, o hacerlo girar del todo: разверну́ть пода́рок, «abrir el regalo».",
     "source": "redactado"
    }
   ],
@@ -212897,7 +213169,7 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -213081,7 +213353,8 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "CMR-05022"
+   "CMR-05022",
+   "CMR-05935"
   ]
  },
  {
@@ -214537,7 +214810,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "echarse a llorar",
-    "definitionEs": "Empezar a llorar de forma repentina (aspecto perfectivo de 'плакать').",
+    "definitionEs": "Empezar a llorar de forma repentina.",
     "source": "redactado"
    }
   ],
@@ -214586,7 +214859,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-01165"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01165": "incoativo"
+  }
  },
  {
   "id": "CMR-03530",
@@ -215132,7 +215408,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05263"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05263": "delimitativo"
+  }
  },
  {
   "id": "CMR-03539",
@@ -227526,12 +227805,18 @@ const LEXICON_COMER = [
    {
     "es": "quitar (por la fuerza)",
     "definitionEs": "Arrebatarle algo a alguien.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05280"
+    ]
    },
    {
     "es": "seleccionar",
     "definitionEs": "Elegir entre varias opciones.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05280"
+    ]
    }
   ],
   "introducedIn": [],
@@ -227751,7 +228036,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05281"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05281": "incoativo"
+  }
  },
  {
   "id": "CMR-03751",
@@ -229938,7 +230226,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05284"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05284": "delimitativo"
+  }
  },
  {
   "id": "CMR-03789",
@@ -231276,12 +231567,18 @@ const LEXICON_COMER = [
    {
     "es": "romperse, rasgarse",
     "definitionEs": "Separarse por la fuerza.",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05285"
+    ]
    },
    {
     "es": "anhelar",
     "definitionEs": "Desear algo con mucha intensidad (ej. 'рваться в бой').",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:ESTATIVO"
+    ]
    }
   ],
   "introducedIn": [],
@@ -231758,7 +232055,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05116"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05116": "incoativo"
+  }
  },
  {
   "id": "CMR-03819",
@@ -232684,8 +232984,7 @@ const LEXICON_COMER = [
     "definitionEs": "Separar algo en partes.",
     "source": "redactado",
     "aspectualPartner": [
-     "CMR-02728",
-     "CMR-04539"
+     "CMR-02728"
     ]
    },
    {
@@ -233402,7 +233701,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05118"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05118": "incoativo"
+  }
  },
  {
   "id": "CMR-03846",
@@ -234615,8 +234917,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "echarse a reír",
-    "definitionEs": "Empezar a reír de forma repentina (aspecto perfectivo).",
-    "source": "redactado (basado en FreeDict)"
+    "definitionEs": "Empezar a reír, soltar una risa.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -234663,8 +234965,11 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:YA_CUBIERTO_POR_OTRO_PAR"
-  ]
+   "CMR-01016"
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01016": "incoativo"
+  }
  },
  {
   "id": "CMR-03867",
@@ -238619,7 +238924,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:INDETERMINADO"
+   "SIN_PAREJA:ESTATIVO"
   ]
  },
  {
@@ -238858,7 +239163,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05122"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05122": "delimitativo"
+  }
  },
  {
   "id": "CMR-03937",
@@ -240562,7 +240870,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05294"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05294": "delimitativo"
+  }
  },
  {
   "id": "CMR-03965",
@@ -241098,7 +241409,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05296"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05296": "incoativo"
+  }
  },
  {
   "id": "CMR-03974",
@@ -241649,7 +241963,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "encender un cigarrillo, ponerse a fumar",
-    "definitionEs": "Empezar a fumar (aspecto perfectivo de 'курить').",
+    "definitionEs": "Encender un cigarrillo y empezar a fumar.",
     "source": "redactado"
    }
   ],
@@ -241698,7 +242012,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-01834"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01834": "incoativo"
+  }
  },
  {
   "id": "CMR-03984",
@@ -241997,7 +242314,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "CMR-02820"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -247814,8 +248131,19 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "venderse, estar a la venta",
-    "definitionEs": "Estar disponible para su compra.",
-    "source": "redactado"
+    "definitionEs": "Estar disponible para su compra: Где продаю́тся биле́ты? «¿Dónde se venden las entradas?».",
+    "source": "redactado",
+    "aspectualPartner": [
+     "SIN_PAREJA:PASIVO_IMPERSONAL"
+    ]
+   },
+   {
+    "es": "venderse (por dinero)",
+    "definitionEs": "Traicionar las propias ideas a cambio de dinero.",
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05185"
+    ]
    }
   ],
   "introducedIn": [],
@@ -249552,7 +249880,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "adjuntar; aplicar (esfuerzo)",
-    "definitionEs": "Añadir algo a un documento, o poner esfuerzo en algo (aspecto perfectivo de 'прилагать').",
+    "definitionEs": "Añadir algo a un documento, o poner algo en contacto: приложи́ть фо́то, «adjuntar una foto».",
     "source": "redactado"
    }
   ],
@@ -251165,7 +251493,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05308"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05308": "incoativo"
+  }
  },
  {
   "id": "CMR-04142",
@@ -253995,7 +254326,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -259102,7 +259433,7 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:IDIOMATICO"
+   "SIN_PAREJA:SOLO_PERFECTIVO"
   ]
  },
  {
@@ -262173,7 +262504,7 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -265596,7 +265927,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ]
  },
  {
@@ -267746,7 +268077,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05142"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05142": "delimitativo"
+  }
  },
  {
   "id": "CMR-04425",
@@ -268536,7 +268870,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05029"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05029": "delimitativo"
+  }
  },
  {
   "id": "CMR-04438",
@@ -272018,7 +272355,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ponerse a gritar",
-    "definitionEs": "Empezar a gritar fuerte, de forma repentina (aspecto perfectivo de 'орать').",
+    "definitionEs": "Empezar a gritar fuerte, de forma repentina.",
     "source": "redactado"
    }
   ],
@@ -272067,7 +272404,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02769"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02769": "incoativo"
+  }
  },
  {
   "id": "CMR-04497",
@@ -273196,7 +273536,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05032"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05032": "delimitativo"
+  }
  },
  {
   "id": "CMR-04517",
@@ -275915,8 +276258,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llegar, comenzar (un momento)",
-    "definitionEs": "Empezar un período de tiempo o un momento determinado (aspecto perfectivo de 'наставать').",
-    "source": "redactado (basado en FreeDict)",
+    "definitionEs": "Empezar un período o un momento: Наста́ла весна́, «llegó la primavera».",
+    "source": "redactado",
     "aspectualPartner": [
      "CMR-02585"
     ]
@@ -283800,8 +284143,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "quemar (por completo)",
-    "definitionEs": "Destruir algo con fuego (aspecto perfectivo de 'жечь').",
-    "source": "redactado (basado en FreeDict)"
+    "definitionEs": "Destruir algo con fuego: сжечь письмо́, «quemar la carta».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -288174,7 +288517,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05352"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05352": "delimitativo"
+  }
  },
  {
   "id": "CMR-04769",
@@ -290228,7 +290574,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-05398"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-05398": "delimitativo"
+  }
  },
  {
   "id": "CMR-04804",
@@ -291357,7 +291706,7 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:IDIOMATICO"
+   "SIN_PAREJA:SOLO_PERFECTIVO"
   ]
  },
  {
@@ -293371,7 +293720,7 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:IDIOMATICO"
+   "SIN_PAREJA:SOLO_PERFECTIVO"
   ]
  },
  {
@@ -297446,7 +297795,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "abandonar, descuidar; arrojar (lejos)",
-    "definitionEs": "Dejar de atender algo, o lanzar algo lejos (aspecto perfectivo de 'забрасывать').",
+    "definitionEs": "Dejar de atender algo, o lanzar algo lejos: забро́сить учёбу, «abandonar los estudios».",
     "source": "redactado",
     "aspectualPartner": [
      "CMR-02110"
@@ -299366,7 +299715,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "recortar, tallar",
-    "definitionEs": "Cortar algo siguiendo una forma, o esculpir en un material (aspecto perfectivo de 'вырезать/вырезывать').",
+    "definitionEs": "Cortar algo siguiendo una forma, o tallar un material: вы́резать фигу́ру из бума́ги, «recortar una figura de papel».",
     "source": "redactado"
    }
   ],
@@ -301270,7 +301619,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ser útil, servir (para algo)",
-    "definitionEs": "Resultar de utilidad en el futuro (aspecto perfectivo de 'пригождаться').",
+    "definitionEs": "Resultar útil cuando hace falta: Э́то ещё пригоди́тся, «esto todavía va a servir».",
     "source": "redactado"
    }
   ],
@@ -301915,7 +302264,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:HOMOGRAFO_PENDIENTE"
+   "SIN_PAREJA:ESTATIVO"
   ]
  },
  {
@@ -301927,9 +302276,9 @@ const LEXICON_COMER = [
   "ipa": "pʌrʌbˈotʌtʲ",
   "senses": [
    {
-    "es": "trabajar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"trabajar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "trabajar un rato",
+    "definitionEs": "Trabajar durante un tiempo, sin la idea de terminar algo: Я немно́го порабо́тал, «trabajé un rato».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302052,9 +302401,9 @@ const LEXICON_COMER = [
   "ipa": "pʌdyʃˈɑtʲ",
   "senses": [
    {
-    "es": "respirar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"respirar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "respirar un rato, tomar aire",
+    "definitionEs": "Respirar durante un tiempo, sobre todo para tomar aire fresco: подыша́ть све́жим во́здухом.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302102,7 +302451,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-01871"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01871": "delimitativo"
+  }
  },
  {
   "id": "CMR-05006",
@@ -302114,8 +302466,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "golpear",
-    "definitionEs": "Versión imperfectiva de \"golpear\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar golpes, golpear (una o varias veces, o de forma habitual).",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302174,9 +302526,9 @@ const LEXICON_COMER = [
   "ipa": "pʌtʲɪrpʲˈetʲ",
   "senses": [
    {
-    "es": "aguantar, soportar, tolerar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"aguantar, soportar, tolerar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "aguantar, tener paciencia; sufrir (una derrota)",
+    "definitionEs": "Soportar algo un tiempo: Потерпи́ немно́го! «¡Aguanta un poco!»; también sufrir: потерпе́ть пораже́ние, «sufrir una derrota».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302236,8 +302588,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "aumentar",
-    "definitionEs": "Versión imperfectiva de \"aumentar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo sea más grande.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302296,9 +302648,9 @@ const LEXICON_COMER = [
   "ipa": "pʌpɭˈytʲ",
   "senses": [
    {
-    "es": "nadar, navegar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"nadar, navegar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "echar a nadar, zarpar",
+    "definitionEs": "Ponerse en movimiento por el agua, nadando o navegando.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302357,9 +302709,9 @@ const LEXICON_COMER = [
   "ipa": "pʌtʌntsyvˈɑtʲ",
   "senses": [
    {
-    "es": "bailar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"bailar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "bailar un rato",
+    "definitionEs": "Bailar durante un tiempo: Дава́й потанцу́ем! «¡Bailemos un rato!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302422,8 +302774,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "aburrir, fastidiar, cansar",
-    "definitionEs": "Versión imperfectiva de \"aburrir, fastidiar, cansar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Causar hartazgo o molestia por repetición o exceso.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302482,9 +302834,9 @@ const LEXICON_COMER = [
   "ipa": "pʌvɭʲɪˈjɑtʲ",
   "senses": [
    {
-    "es": "influir (durante un rato)",
-    "definitionEs": "Realizar la acción de \"influir\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "influir",
+    "definitionEs": "Ejercer influencia sobre algo o alguien y producir un efecto: повлия́ть на реше́ние, «influir en la decisión».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302543,9 +302895,9 @@ const LEXICON_COMER = [
   "ipa": "pʌʃutʲˈitʲ",
   "senses": [
    {
-    "es": "bromear (durante un rato)",
-    "definitionEs": "Realizar la acción de \"bromear\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "bromear, hacer una broma",
+    "definitionEs": "Decir algo en broma: Я пошути́л, «era una broma».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302604,9 +302956,9 @@ const LEXICON_COMER = [
   "ipa": "pʌmʌɭʲˈitsʌ",
   "senses": [
    {
-    "es": "rezar, orar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"rezar, orar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "rezar, orar",
+    "definitionEs": "Dirigir una oración.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302665,9 +303017,9 @@ const LEXICON_COMER = [
   "ipa": "nʌstʌˈjɑtʲ",
   "senses": [
    {
-    "es": "insistir (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"insistir\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "insistir (y lograrlo), salirse con la suya",
+    "definitionEs": "Insistir hasta conseguir lo que se pide: настоя́ть на своём, «salirse con la suya».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302726,9 +303078,9 @@ const LEXICON_COMER = [
   "ipa": "prʲɪɡrʌʑˈitʲ",
   "senses": [
    {
-    "es": "amenazar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"amenazar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual",
+    "es": "amenazar",
+    "definitionEs": "Hacer una amenaza: пригрози́ть па́льцем, «amenazar con el dedo».",
+    "source": "redactado",
     "aspectualPartner": [
      "CMR-03146",
      "CMR-04538"
@@ -302792,9 +303144,9 @@ const LEXICON_COMER = [
   "ipa": "pʌɡnˈɑtʲ",
   "senses": [
    {
-    "es": "arrear, perseguir, echar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"arrear, perseguir, echar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "echar a correr detrás, arrear",
+    "definitionEs": "Ponerse a perseguir o a arrear: погна́ть коро́в, «arrear las vacas».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302853,9 +303205,9 @@ const LEXICON_COMER = [
   "ipa": "pʌpɭˈɑvʌtʲ",
   "senses": [
    {
-    "es": "nadar, flotar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"nadar, flotar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "nadar un rato",
+    "definitionEs": "Nadar durante un tiempo, por placer o ejercicio.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302918,8 +303270,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "hallar, adquirir",
-    "definitionEs": "Versión imperfectiva de \"hallar, adquirir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llegar a tener algo que antes no se tenía, especialmente algo valioso.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -302978,9 +303330,9 @@ const LEXICON_COMER = [
   "ipa": "pʌbɭʌɡʌdʌrʲˈitʲ",
   "senses": [
    {
-    "es": "agradecer (durante un rato)",
-    "definitionEs": "Realizar la acción de \"agradecer\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "agradecer, dar las gracias",
+    "definitionEs": "Expresar agradecimiento: поблагодари́ть дру́га за по́мощь, «agradecerle la ayuda a un amigo».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303040,8 +303392,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "registrar",
-    "definitionEs": "Versión imperfectiva de \"registrar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Inscribir algo o a alguien en un registro oficial.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303101,8 +303453,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "robar",
-    "definitionEs": "Versión imperfectiva de \"robar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Tomar algo ajeno sin permiso.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [
@@ -303163,9 +303515,9 @@ const LEXICON_COMER = [
   "ipa": "prʌdɭʲˈitsʌ",
   "senses": [
    {
-    "es": "durar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"durar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "durar",
+    "definitionEs": "Tener una duración determinada: Встре́ча продли́лась час, «la reunión duró una hora».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303224,9 +303576,9 @@ const LEXICON_COMER = [
   "ipa": "rʲɪsknˈutʲ",
   "senses": [
    {
-    "es": "arriesgarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"arriesgarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "arriesgarse, atreverse",
+    "definitionEs": "Decidirse a hacer algo arriesgado: Я рискну́! «¡Me arriesgo!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303348,9 +303700,9 @@ const LEXICON_COMER = [
   "ipa": "pʌzʌbˈotʲɪtsʌ",
   "senses": [
    {
-    "es": "cuidar, preocuparse por (durante un rato)",
-    "definitionEs": "Realizar la acción de \"cuidar, preocuparse por\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "cuidar, ocuparse de",
+    "definitionEs": "Ocuparse de algo o de alguien: позабо́титься о де́тях, «ocuparse de los niños».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303409,9 +303761,9 @@ const LEXICON_COMER = [
   "ipa": "pʌsmʲˈetʲ",
   "senses": [
    {
-    "es": "atreverse, osar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"atreverse, osar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "atreverse",
+    "definitionEs": "Tener el valor de hacer algo: Как ты посме́л? «¿Cómo te atreviste?».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303471,8 +303823,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "justificar, absolver",
-    "definitionEs": "Versión imperfectiva de \"justificar, absolver\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar razones válidas para algo, o declarar inocente a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303531,9 +303883,9 @@ const LEXICON_COMER = [
   "ipa": "pʌkʌtˈɑtsʌ",
   "senses": [
    {
-    "es": "pasear (en vehículo), rodar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"pasear (en vehículo), rodar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "dar una vuelta (en bici, patines, coche)",
+    "definitionEs": "Pasear durante un tiempo en un vehículo o sobre ruedas: поката́ться на велосипе́де, «dar una vuelta en bici».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303581,7 +303933,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-04437"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-04437": "delimitativo"
+  }
  },
  {
   "id": "CMR-05030",
@@ -303653,9 +304008,9 @@ const LEXICON_COMER = [
   "ipa": "prʌɡʌɭʌsʌvˈɑtʲ",
   "senses": [
    {
-    "es": "votar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"votar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "votar",
+    "definitionEs": "Emitir el voto: проголосова́ть за кандида́та, «votar por un candidato».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303714,9 +304069,9 @@ const LEXICON_COMER = [
   "ipa": "pʌbʌɭtˈɑtʲ",
   "senses": [
    {
-    "es": "charlar, parlotear (durante un rato)",
-    "definitionEs": "Realizar la acción de \"charlar, parlotear\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "charlar un rato",
+    "definitionEs": "Conversar de cosas sin importancia durante un tiempo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303764,7 +304119,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-04516"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-04516": "delimitativo"
+  }
  },
  {
   "id": "CMR-05034",
@@ -303775,9 +304133,9 @@ const LEXICON_COMER = [
   "ipa": "ʌbvʲɪnʲˈitʲ",
   "senses": [
    {
-    "es": "acusar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"acusar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "acusar",
+    "definitionEs": "Atribuir a alguien una culpa o un delito.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303837,8 +304195,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "arruinar, echar a perder, dañar",
-    "definitionEs": "Versión imperfectiva de \"arruinar, echar a perder, dañar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo deje de funcionar o de estar en buen estado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303897,9 +304255,9 @@ const LEXICON_COMER = [
   "ipa": "pʌrvˈɑtʲ",
   "senses": [
    {
-    "es": "romper, rasgar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"romper, rasgar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "romper, rasgar; romper (con alguien)",
+    "definitionEs": "Romper algo tirando: порва́ть руба́шку, «romper la camisa»; también cortar una relación: порва́ть с ним, «romper con él».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -303958,9 +304316,9 @@ const LEXICON_COMER = [
   "ipa": "prʌʌnʌɭʲɪʑˈirʌvʌtʲ",
   "senses": [
    {
-    "es": "analizar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"analizar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "analizar",
+    "definitionEs": "Examinar algo en detalle hasta sacar conclusiones.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304019,9 +304377,9 @@ const LEXICON_COMER = [
   "ipa": "vʌspʲɪtˈɑtʲ",
   "senses": [
    {
-    "es": "criar, educar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"criar, educar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "criar, educar",
+    "definitionEs": "Formar a un niño hasta que crece: Её воспита́ла ба́бушка, «la crió su abuela».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304081,8 +304439,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "acumular, ahorrar",
-    "definitionEs": "Versión imperfectiva de \"acumular, ahorrar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Reunir progresivamente una cantidad de algo, especialmente dinero.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304141,9 +304499,9 @@ const LEXICON_COMER = [
   "ipa": "pʌdʲɪrʒˈɑtʲ",
   "senses": [
    {
-    "es": "sostener, mantener (durante un rato)",
-    "definitionEs": "Realizar la acción de \"sostener, mantener\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "sostener un momento",
+    "definitionEs": "Tener algo en las manos durante un tiempo: Подержи́ су́мку! «¡Sostenme el bolso un momento!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304191,7 +304549,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-00573"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-00573": "delimitativo"
+  }
  },
  {
   "id": "CMR-05041",
@@ -304203,8 +304564,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "inventar, idear",
-    "definitionEs": "Versión imperfectiva de \"inventar, idear\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Crear algo con la imaginación.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304264,8 +304625,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "morir, perecer",
-    "definitionEs": "Versión imperfectiva de \"morir, perecer\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar de vivir, generalmente de forma violenta o repentina.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304389,8 +304750,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cambiar",
-    "definitionEs": "Versión imperfectiva de \"cambiar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Volverse diferente de como era.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304450,8 +304811,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "traer (en vehículo)",
-    "definitionEs": "Versión imperfectiva de \"traer (en vehículo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llevar algo hacia un lugar usando un medio de transporte.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304510,9 +304871,9 @@ const LEXICON_COMER = [
   "ipa": "prʌsɭʲɪdʲˈitʲ",
   "senses": [
    {
-    "es": "vigilar, observar, seguir (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"vigilar, observar, seguir\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "vigilar, asegurarse de que",
+    "definitionEs": "Controlar que algo se haga: Проследи́, что́бы он пое́л, «asegúrate de que coma».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304571,9 +304932,9 @@ const LEXICON_COMER = [
   "ipa": "pʌmʲɪtʃʲtˈɑtʲ",
   "senses": [
    {
-    "es": "soñar (despierto), anhelar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"soñar (despierto), anhelar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "soñar despierto un rato",
+    "definitionEs": "Dejarse llevar un rato por la imaginación, soñando despierto.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304636,8 +304997,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "firmar",
-    "definitionEs": "Versión imperfectiva de \"firmar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Escribir el propio nombre en un documento para autenticarlo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304697,8 +305058,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "girarse, darse vuelta",
-    "definitionEs": "Versión imperfectiva de \"girarse, darse vuelta\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cambiar de orientación el cuerpo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304757,9 +305118,9 @@ const LEXICON_COMER = [
   "ipa": "pʌmʲɪnʲˈɑtsʌ",
   "senses": [
    {
-    "es": "cambiar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"cambiar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "intercambiar, cambiar (algo con alguien)",
+    "definitionEs": "Darse algo mutuamente: поменя́ться места́ми, «cambiarse de lugar».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304818,9 +305179,9 @@ const LEXICON_COMER = [
   "ipa": "vˈystrʲɪɭʲɪtʲ",
   "senses": [
    {
-    "es": "disparar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"disparar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "disparar (un tiro)",
+    "definitionEs": "Disparar una vez con un arma.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304880,8 +305241,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "disculpar, perdonar",
-    "definitionEs": "Versión imperfectiva de \"disculpar, perdonar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "No tomar en cuenta una falta cometida por alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -304940,9 +305301,9 @@ const LEXICON_COMER = [
   "ipa": "pʌɡuɭʲˈɑtʲ",
   "senses": [
    {
-    "es": "pasear, dar una vuelta (durante un rato)",
-    "definitionEs": "Realizar la acción de \"pasear, dar una vuelta\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "pasear un rato, dar una vuelta",
+    "definitionEs": "Pasear durante un tiempo: погуля́ть в па́рке, «dar una vuelta por el parque».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305004,9 +305365,9 @@ const LEXICON_COMER = [
   "ipa": "pʌbʲˈeɡʌtʲ",
   "senses": [
    {
-    "es": "correr (de forma habitual) (durante un rato)",
-    "definitionEs": "Realizar la acción de \"correr (de forma habitual)\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "correr un rato",
+    "definitionEs": "Correr durante un tiempo, de un lado a otro o para hacer ejercicio.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305069,8 +305430,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ordenar, mandar",
-    "definitionEs": "Versión imperfectiva de \"ordenar, mandar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar una orden que debe cumplirse.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305130,8 +305491,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cansarse",
-    "definitionEs": "Versión imperfectiva de \"cansarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Perder energía o fuerza tras un esfuerzo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [
@@ -305193,8 +305554,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "prohibir",
-    "definitionEs": "Versión imperfectiva de \"prohibir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "No permitir que algo se haga.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305253,9 +305614,9 @@ const LEXICON_COMER = [
   "ipa": "usʌmnʲˈitsʌ",
   "senses": [
    {
-    "es": "dudar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"dudar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "llegar a dudar",
+    "definitionEs": "Empezar a dudar de algo o de alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305303,7 +305664,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02162"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02162": "incoativo"
+  }
  },
  {
   "id": "CMR-05059",
@@ -305315,8 +305679,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sonreír con ironía",
-    "definitionEs": "Versión imperfectiva de \"sonreír con ironía\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer una sonrisa breve, a menudo con burla o ironía.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305376,8 +305740,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "acordar, ponerse de acuerdo",
-    "definitionEs": "Versión imperfectiva de \"acordar, ponerse de acuerdo\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llegar a un acuerdo con alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305437,8 +305801,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "vencer, ganar",
-    "definitionEs": "Versión imperfectiva de \"vencer, ganar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Obtener la victoria en una competencia o conflicto.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305558,9 +305922,9 @@ const LEXICON_COMER = [
   "ipa": "pʌkʌrmʲˈitʲ",
   "senses": [
    {
-    "es": "alimentar, dar de comer (durante un rato)",
-    "definitionEs": "Realizar la acción de \"alimentar, dar de comer\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "dar de comer",
+    "definitionEs": "Dar comida a alguien: покорми́ть ко́шку, «darle de comer a la gata».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305620,8 +305984,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "estrechar (la mano)",
-    "definitionEs": "Versión imperfectiva de \"estrechar (la mano)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Apretar la mano de alguien al saludar: пожима́ть ру́ку, «estrechar la mano».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305681,8 +306045,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "exclamar",
-    "definitionEs": "Versión imperfectiva de \"exclamar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Decir algo en voz alta y con emoción, de forma repentina.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305742,8 +306106,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ponerse a temblar",
-    "definitionEs": "Empezar a realizar la acción de \"temblar\".",
-    "source": "manual"
+    "definitionEs": "Empezar a temblar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305791,7 +306155,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02318"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02318": "incoativo"
+  }
  },
  {
   "id": "CMR-05067",
@@ -305802,9 +306169,9 @@ const LEXICON_COMER = [
   "ipa": "rʌzvʌɭnʌvˈɑtsʌ",
   "senses": [
    {
-    "es": "preocuparse, ponerse nervioso (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"preocuparse, ponerse nervioso\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "ponerse nervioso, alterarse",
+    "definitionEs": "Empezar a estar nervioso o preocupado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305852,7 +306219,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02334"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02334": "incoativo"
+  }
  },
  {
   "id": "CMR-05068",
@@ -305864,8 +306234,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llegar (con esfuerzo)",
-    "definitionEs": "Versión imperfectiva de \"llegar (con esfuerzo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Alcanzar un destino, especialmente tras un trayecto difícil.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305925,8 +306295,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "asegurarse, cerciorarse",
-    "definitionEs": "Versión imperfectiva de \"asegurarse, cerciorarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Confirmar que algo es cierto.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -305986,8 +306356,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "reemplazar, sustituir",
-    "definitionEs": "Versión imperfectiva de \"reemplazar, sustituir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner algo en lugar de otra cosa.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306046,9 +306416,9 @@ const LEXICON_COMER = [
   "ipa": "prʲɪtpʌtʃʲˈestʲ",
   "senses": [
    {
-    "es": "preferir (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"preferir\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "preferir",
+    "definitionEs": "Elegir una cosa antes que otra: предпоче́сть чай ко́фе, «preferir el té al café».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306108,8 +306478,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "enviar, mandar",
-    "definitionEs": "Versión imperfectiva de \"enviar, mandar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer llegar algo a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306168,9 +306538,9 @@ const LEXICON_COMER = [
   "ipa": "pʌʒˈɑɭʌvʌtsʌ",
   "senses": [
    {
-    "es": "quejarse (durante un rato)",
-    "definitionEs": "Realizar la acción de \"quejarse\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "quejarse",
+    "definitionEs": "Expresar una queja: пожа́ловаться врачу́, «quejarse con el médico».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306230,8 +306600,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "calmarse, tranquilizarse",
-    "definitionEs": "Versión imperfectiva de \"calmarse, tranquilizarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar de estar agitado o nervioso.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306290,9 +306660,9 @@ const LEXICON_COMER = [
   "ipa": "pʌʌpɕˈɑtsʌ",
   "senses": [
    {
-    "es": "comunicarse, relacionarse (durante un rato)",
-    "definitionEs": "Realizar la acción de \"comunicarse, relacionarse\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "charlar un rato, pasar un rato juntos",
+    "definitionEs": "Comunicarse con alguien durante un tiempo: Дава́й пообща́емся! «¡Charlemos un rato!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306340,7 +306710,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02569"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02569": "delimitativo"
+  }
  },
  {
   "id": "CMR-05076",
@@ -306352,8 +306725,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "girar, doblar",
-    "definitionEs": "Versión imperfectiva de \"girar, doblar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cambiar de dirección.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306413,8 +306786,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "dar a luz, parir",
-    "definitionEs": "Versión imperfectiva de \"dar a luz, parir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Tener un hijo (proceso del parto).",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306474,8 +306847,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "destruir, aniquilar",
-    "definitionEs": "Versión imperfectiva de \"destruir, aniquilar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo deje de existir.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306535,8 +306908,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cesar, suspender",
-    "definitionEs": "Versión imperfectiva de \"cesar, suspender\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar de hacer algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306596,8 +306969,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "arreglárselas, lograr manejar",
-    "definitionEs": "Versión imperfectiva de \"arreglárselas, lograr manejar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poder resolver una tarea o dificultad.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306657,8 +307030,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "mencionar",
-    "definitionEs": "Versión imperfectiva de \"mencionar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Nombrar algo o a alguien, sin extenderse.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306717,9 +307090,9 @@ const LEXICON_COMER = [
   "ipa": "sʌvrˈɑtʲ",
   "senses": [
    {
-    "es": "mentir (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"mentir\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "mentir",
+    "definitionEs": "Decir una mentira: Ты мне совра́л! «¡Me mentiste!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306779,8 +307152,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "elegir (por votación)",
-    "definitionEs": "Versión imperfectiva de \"elegir (por votación)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Escoger a alguien mediante un voto, generalmente para un cargo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306840,8 +307213,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "meter, introducir",
-    "definitionEs": "Versión imperfectiva de \"meter, introducir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner algo dentro de un espacio, generalmente con rapidez.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306901,8 +307274,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sumar",
-    "definitionEs": "Versión imperfectiva de \"sumar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Juntar varias cosas en una sola cantidad, o doblar algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -306962,8 +307335,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "expresar, manifestar",
-    "definitionEs": "Versión imperfectiva de \"expresar, manifestar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Decir una opinión o un pensamiento.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307022,9 +307395,9 @@ const LEXICON_COMER = [
   "ipa": "prˈyɡnutʲ",
   "senses": [
    {
-    "es": "saltar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"saltar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "saltar, dar un salto",
+    "definitionEs": "Saltar una vez: пры́гнуть в во́ду, «saltar al agua».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307083,9 +307456,9 @@ const LEXICON_COMER = [
   "ipa": "pʌstrˈoɪtsʌ",
   "senses": [
    {
-    "es": "construirse (durante un rato)",
-    "definitionEs": "Realizar la acción de \"construirse\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "construirse; formarse (en fila)",
+    "definitionEs": "Terminar de construirse; también ponerse en formación: постро́иться в ряд, «formar en fila».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307145,8 +307518,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sacar, extraer",
-    "definitionEs": "Versión imperfectiva de \"sacar, extraer\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Retirar algo de donde estaba contenido.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307269,8 +307642,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "quedarse inmóvil, paralizarse",
-    "definitionEs": "Versión imperfectiva de \"quedarse inmóvil, paralizarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Detenerse por completo, sin moverse.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307330,8 +307703,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "romper, quebrar",
-    "definitionEs": "Versión imperfectiva de \"romper, quebrar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer pedazos algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307390,9 +307763,9 @@ const LEXICON_COMER = [
   "ipa": "pʌstutʃʲˈɑtʲ",
   "senses": [
    {
-    "es": "golpear, tocar (la puerta) (durante un rato)",
-    "definitionEs": "Realizar la acción de \"golpear, tocar (la puerta)\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "golpear, tocar (la puerta)",
+    "definitionEs": "Dar golpes en algo: постуча́ть в дверь, «tocar la puerta».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307451,9 +307824,9 @@ const LEXICON_COMER = [
   "ipa": "zʌsʲɪˈjɑtʲ",
   "senses": [
    {
-    "es": "ponerse a brillar, resplandecer",
-    "definitionEs": "Empezar a realizar la acción de \"brillar, resplandecer\".",
-    "source": "manual"
+    "es": "ponerse a brillar",
+    "definitionEs": "Empezar a brillar: Её глаза́ засия́ли, «se le iluminaron los ojos».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307501,7 +307874,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03102"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03102": "incoativo"
+  }
  },
  {
   "id": "CMR-05095",
@@ -307513,8 +307889,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "difundir, extender",
-    "definitionEs": "Versión imperfectiva de \"difundir, extender\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo llegue a un ámbito más amplio.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307573,9 +307949,9 @@ const LEXICON_COMER = [
   "ipa": "ʌpʲɪrʲˈetsʌ",
   "senses": [
    {
-    "es": "apoyarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"apoyarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "apoyarse",
+    "definitionEs": "Apoyar el peso del cuerpo en algo: опере́ться на стол, «apoyarse en la mesa».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307634,9 +308010,9 @@ const LEXICON_COMER = [
   "ipa": "pʌbʲɪsʲˈedʌvʌtʲ",
   "senses": [
    {
-    "es": "conversar, charlar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"conversar, charlar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "conversar un rato",
+    "definitionEs": "Mantener una conversación durante un tiempo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307684,7 +308060,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03239"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03239": "delimitativo"
+  }
  },
  {
   "id": "CMR-05098",
@@ -307695,9 +308074,9 @@ const LEXICON_COMER = [
   "ipa": "dʌvʲˈerʲɪtsʌ",
   "senses": [
    {
-    "es": "confiar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"confiar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "confiarse (a alguien)",
+    "definitionEs": "Ponerse en manos de alguien, contarle algo con confianza: дове́риться дру́гу, «confiarse a un amigo». Su imperfectivo, доверя́ться, no está en el léxico.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307744,7 +308123,7 @@ const LEXICON_COMER = [
   },
   "aspect": "perfectivo",
   "aspectualPartner": [
-   "CMR-03252"
+   "SIN_PAREJA:BAJA_FRECUENCIA_EN_LEXICO"
   ]
  },
  {
@@ -307757,8 +308136,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sorprender",
-    "definitionEs": "Versión imperfectiva de \"sorprender\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Causar asombro en alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307818,8 +308197,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "obligar",
-    "definitionEs": "Versión imperfectiva de \"obligar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Imponer a alguien la necesidad de hacer algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307879,8 +308258,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "concluir, finalizar",
-    "definitionEs": "Versión imperfectiva de \"concluir, finalizar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llevar algo a su fin.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -307939,9 +308318,9 @@ const LEXICON_COMER = [
   "ipa": "ɪspuɡˈɑtʲ",
   "senses": [
    {
-    "es": "asustar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"asustar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "asustar",
+    "definitionEs": "Causar miedo a alguien: Ты меня́ испуга́л! «¡Me asustaste!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308001,8 +308380,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "publicar",
-    "definitionEs": "Versión imperfectiva de \"publicar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que un libro u otro texto salga a la venta, o producir un sonido.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308061,9 +308440,9 @@ const LEXICON_COMER = [
   "ipa": "pʌtʌɕˈitʲ",
   "senses": [
    {
-    "es": "arrastrar, tirar de (durante un rato)",
-    "definitionEs": "Realizar la acción de \"arrastrar, tirar de\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "llevar a rastras",
+    "definitionEs": "Ponerse a arrastrar algo pesado hacia un lugar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308122,9 +308501,9 @@ const LEXICON_COMER = [
   "ipa": "sʌfpˈɑstʲ",
   "senses": [
    {
-    "es": "coincidir (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"coincidir\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "coincidir",
+    "definitionEs": "Ocurrir al mismo tiempo o ser igual: На́ши мне́ния совпа́ли, «nuestras opiniones coincidieron».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308184,8 +308563,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "engañar",
-    "definitionEs": "Versión imperfectiva de \"engañar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer creer a alguien algo falso.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308245,8 +308624,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "separar, diluir",
-    "definitionEs": "Versión imperfectiva de \"separar, diluir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Separar dos cosas, mezclar algo con un líquido para diluirlo, o disolver un matrimonio.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308306,8 +308685,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "curar, tratar (hasta el final / por completo)",
-    "definitionEs": "Realizar la acción de \"curar, tratar\" de manera completa o hasta terminarla.",
-    "source": "manual"
+    "definitionEs": "Curar del todo una enfermedad o a una persona: вы́лечить просту́ду, «curarse el resfriado».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308366,9 +308745,9 @@ const LEXICON_COMER = [
   "ipa": "vˈydʲɪɭʲɪtsʌ",
   "senses": [
    {
-    "es": "destacarse, distinguirse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"destacarse, distinguirse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "destacarse",
+    "definitionEs": "Distinguirse de los demás.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308428,8 +308807,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "iluminar",
-    "definitionEs": "Versión imperfectiva de \"iluminar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar luz a un lugar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308489,8 +308868,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "exponer, presentar",
-    "definitionEs": "Versión imperfectiva de \"exponer, presentar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Explicar algo de manera ordenada, oralmente o por escrito.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308549,9 +308928,9 @@ const LEXICON_COMER = [
   "ipa": "ʌtrʲɪʌɡʲˈirʌvʌtʲ",
   "senses": [
    {
-    "es": "reaccionar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"reaccionar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "reaccionar",
+    "definitionEs": "Responder a algo con una reacción.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308611,8 +308990,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "caer (nieve, granizo)",
-    "definitionEs": "Versión imperfectiva de \"caer (nieve, granizo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Caer algo desde arriba, como la nieve, o corresponderle algo a alguien por azar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308672,8 +309051,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "lanzarse, precipitarse",
-    "definitionEs": "Versión imperfectiva de \"lanzarse, precipitarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Moverse hacia algo o alguien de forma rápida y repentina.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308732,9 +309111,9 @@ const LEXICON_COMER = [
   "ipa": "sprʲˈɑtʌtsʌ",
   "senses": [
    {
-    "es": "esconderse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"esconderse\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "esconderse",
+    "definitionEs": "Ocultarse para que no lo encuentren: спря́таться под крова́тью, «esconderse debajo de la cama».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308793,9 +309172,9 @@ const LEXICON_COMER = [
   "ipa": "ʌbʲɪspʌkˈoɪtsʌ",
   "senses": [
    {
-    "es": "preocuparse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"preocuparse\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "empezar a preocuparse, inquietarse",
+    "definitionEs": "Empezar a sentir preocupación por algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308843,7 +309222,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03818"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03818": "incoativo"
+  }
  },
  {
   "id": "CMR-05117",
@@ -308854,9 +309236,9 @@ const LEXICON_COMER = [
   "ipa": "pʌzdrˈɑvʲɪtʲ",
   "senses": [
    {
-    "es": "felicitar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"felicitar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "felicitar",
+    "definitionEs": "Expresar buenos deseos: поздра́вить с днём рожде́ния, «felicitar por el cumpleaños».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308916,8 +309298,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ponerse a brillar",
-    "definitionEs": "Empezar a realizar la acción de \"brillar\".",
-    "source": "manual"
+    "definitionEs": "Empezar a brillar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -308965,7 +309347,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03845"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03845": "incoativo"
+  }
  },
  {
   "id": "CMR-05119",
@@ -308976,9 +309361,9 @@ const LEXICON_COMER = [
   "ipa": "sʌtvʌrʲˈitʲ",
   "senses": [
    {
-    "es": "crear (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"crear\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "crear",
+    "definitionEs": "Hacer existir algo nuevo (registro elevado): сотвори́ть чу́до, «hacer un milagro».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309038,8 +309423,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "arrancar, separar (tirando)",
-    "definitionEs": "Versión imperfectiva de \"arrancar, separar (tirando)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Separar algo de donde estaba unido, tirando con fuerza.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309098,9 +309483,9 @@ const LEXICON_COMER = [
   "ipa": "prʲɪsɭˈuʃʌtsʌ",
   "senses": [
    {
-    "es": "prestar atención, escuchar con atención (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"prestar atención, escuchar con atención\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "prestar atención, hacer caso",
+    "definitionEs": "Escuchar con atención, o tener en cuenta un consejo: прислу́шаться к сове́ту, «hacer caso de un consejo».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309159,9 +309544,9 @@ const LEXICON_COMER = [
   "ipa": "pʌtʌrɡʌvˈɑtʲ",
   "senses": [
    {
-    "es": "comerciar, vender (durante un rato)",
-    "definitionEs": "Realizar la acción de \"comerciar, vender\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "comerciar un tiempo",
+    "definitionEs": "Dedicarse al comercio durante un tiempo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309209,7 +309594,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03936"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03936": "delimitativo"
+  }
  },
  {
   "id": "CMR-05123",
@@ -309221,8 +309609,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "librarse, deshacerse de",
-    "definitionEs": "Versión imperfectiva de \"librarse, deshacerse de\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar de tener algo molesto o dañino.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309282,8 +309670,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "limitar, restringir",
-    "definitionEs": "Versión imperfectiva de \"limitar, restringir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner un límite a algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309343,8 +309731,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "separarse, despedirse",
-    "definitionEs": "Versión imperfectiva de \"separarse, despedirse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar de estar juntos dos personas.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309403,9 +309791,9 @@ const LEXICON_COMER = [
   "ipa": "prʲɪsnʲˈitsʌ",
   "senses": [
    {
-    "es": "soñar (con algo/alguien) (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"soñar (con algo/alguien)\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "soñar (con algo o alguien)",
+    "definitionEs": "Aparecer en un sueño: Мне присни́лся ты, «soñé contigo».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309464,9 +309852,9 @@ const LEXICON_COMER = [
   "ipa": "zʌmˈutʃʲɪtʲ",
   "senses": [
    {
-    "es": "ponerse a atormentar, torturar",
-    "definitionEs": "Empezar a realizar la acción de \"atormentar, torturar\".",
-    "source": "manual"
+    "es": "atormentar (hasta agotar)",
+    "definitionEs": "Atormentar a alguien hasta dejarlo agotado: Ты меня́ заму́чил вопро́сами! «¡Me agotaste con tus preguntas!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309525,9 +309913,9 @@ const LEXICON_COMER = [
   "ipa": "uvʲˈerʲɪtʲ",
   "senses": [
    {
-    "es": "asegurar, afirmar con certeza (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"asegurar, afirmar con certeza\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "asegurar, convencer",
+    "definitionEs": "Hacer que alguien esté seguro de algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309587,8 +309975,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "posponer, aplazar",
-    "definitionEs": "Versión imperfectiva de \"posponer, aplazar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar algo para más adelante.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309648,8 +310036,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "despertar (a alguien)",
-    "definitionEs": "Versión imperfectiva de \"despertar (a alguien)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que alguien deje de dormir.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309708,9 +310096,9 @@ const LEXICON_COMER = [
   "ipa": "rʌsprʌstrʌnʲˈitsʌ",
   "senses": [
    {
-    "es": "extenderse, propagarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"extenderse, propagarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "extenderse, propagarse",
+    "definitionEs": "Difundirse en un espacio o entre personas.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309770,8 +310158,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cerrar con llave",
-    "definitionEs": "Versión imperfectiva de \"cerrar con llave\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cerrar algo de forma que no se pueda abrir sin llave.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309831,8 +310219,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "inundar, verter",
-    "definitionEs": "Versión imperfectiva de \"inundar, verter\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cubrir algo con un líquido derramado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309892,8 +310280,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "encontrar, sorprender (en el acto)",
-    "definitionEs": "Versión imperfectiva de \"encontrar, sorprender (en el acto)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llegar a un lugar y encontrar a alguien haciendo algo, o hallar una situación.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -309953,8 +310341,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "quitar, arrebatar",
-    "definitionEs": "Versión imperfectiva de \"quitar, arrebatar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Tomar algo de alguien contra su voluntad.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310014,8 +310402,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "salir (trepando o con esfuerzo)",
-    "definitionEs": "Versión imperfectiva de \"salir (trepando o con esfuerzo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Salir de un lugar, generalmente estrecho, usando manos y pies.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310075,8 +310463,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "estremecerse, sobresaltarse",
-    "definitionEs": "Versión imperfectiva de \"estremecerse, sobresaltarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Tener un movimiento brusco e involuntario del cuerpo, por sorpresa o miedo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310135,9 +310523,9 @@ const LEXICON_COMER = [
   "ipa": "pʲɪrʲɪnʌtʃʲɪvˈɑtʲ",
   "senses": [
    {
-    "es": "pasar la noche, pernoctar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"pasar la noche, pernoctar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "pasar la noche",
+    "definitionEs": "Quedarse a dormir una noche en un lugar: переночева́ть в гости́нице, «pasar la noche en un hotel».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310197,8 +310585,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sugerir, dar una pista, soplar (la respuesta)",
-    "definitionEs": "Versión imperfectiva de \"sugerir, dar una pista, soplar (la respuesta)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Decir a alguien discretamente lo que debe responder o hacer.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310258,8 +310646,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "entregar (formalmente)",
-    "definitionEs": "Versión imperfectiva de \"entregar (formalmente)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar algo a alguien en persona, generalmente de forma oficial.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310319,8 +310707,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "despegar, salir volando",
-    "definitionEs": "Versión imperfectiva de \"despegar, salir volando\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Salir volando de un lugar, o partir un avión.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310379,9 +310767,9 @@ const LEXICON_COMER = [
   "ipa": "pʌruɡˈɑtʲ",
   "senses": [
    {
-    "es": "regañar, reñir (durante un rato)",
-    "definitionEs": "Realizar la acción de \"regañar, reñir\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "regañar un poco",
+    "definitionEs": "Reprender a alguien brevemente, sin mucha dureza.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310429,7 +310817,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-04424"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-04424": "delimitativo"
+  }
  },
  {
   "id": "CMR-05143",
@@ -310441,8 +310832,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "fabricar, elaborar",
-    "definitionEs": "Versión imperfectiva de \"fabricar, elaborar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Producir algo, generalmente de forma artesanal o industrial.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310502,8 +310893,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "atar",
-    "definitionEs": "Versión imperfectiva de \"atar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Sujetar algo con una cuerda u otro material.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310563,8 +310954,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "echar, expulsar",
-    "definitionEs": "Versión imperfectiva de \"echar, expulsar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que alguien salga de un lugar por la fuerza.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310624,8 +311015,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llegar tarde",
-    "definitionEs": "Versión imperfectiva de \"llegar tarde\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "No llegar a tiempo a un lugar o cita.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [
@@ -310686,9 +311077,9 @@ const LEXICON_COMER = [
   "ipa": "pʌtʃʲˈustvʌvʌtsʌ",
   "senses": [
    {
-    "es": "sentirse, percibirse (durante un rato)",
-    "definitionEs": "Realizar la acción de \"sentirse, percibirse\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "sentirse, notarse",
+    "definitionEs": "Hacerse perceptible: почу́вствовался за́пах, «se sintió un olor».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310747,9 +311138,9 @@ const LEXICON_COMER = [
   "ipa": "sʌbɭʲustʲˈi",
   "senses": [
    {
-    "es": "cumplir, respetar (una norma) (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"cumplir, respetar (una norma)\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "cumplir, respetar (una norma)",
+    "definitionEs": "Cumplir una regla, una ley o un plazo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310808,9 +311199,9 @@ const LEXICON_COMER = [
   "ipa": "rʌssʲɪrdʲˈitsʌ",
   "senses": [
    {
-    "es": "enojarse, enfadarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"enojarse, enfadarse\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "enojarse, enfadarse",
+    "definitionEs": "Ponerse de mal humor por algo: Он рассерди́лся, «se enojó».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310869,9 +311260,9 @@ const LEXICON_COMER = [
   "ipa": "ʌbʲɪspʌkˈoɪtʲ",
   "senses": [
    {
-    "es": "preocupar, molestar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"preocupar, molestar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "preocupar, inquietar; molestar",
+    "definitionEs": "Causar preocupación, o molestar a alguien: Извини́те, что обеспоко́ил, «disculpe la molestia».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310930,9 +311321,9 @@ const LEXICON_COMER = [
   "ipa": "pʌzʌvʲˈidʌvʌtʲ",
   "senses": [
    {
-    "es": "envidiar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"envidiar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "envidiar, sentir envidia",
+    "definitionEs": "Sentir envidia de alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -310992,8 +311383,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "quemar (por completo)",
-    "definitionEs": "Versión imperfectiva de \"quemar (por completo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Destruir algo con fuego por completo: сжига́ть му́сор, «quemar la basura».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311052,9 +311443,9 @@ const LEXICON_COMER = [
   "ipa": "sʌtʃʲɪnʲˈitʲ",
   "senses": [
    {
-    "es": "componer, inventar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"componer, inventar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "componer, inventar",
+    "definitionEs": "Crear una obra o inventar una historia: сочини́ть пе́сню, «componer una canción».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311114,8 +311505,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "liberarse",
-    "definitionEs": "Versión imperfectiva de \"liberarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Quedar libre de algo que ataba u oprimía.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311175,8 +311566,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "inclinarse, agacharse",
-    "definitionEs": "Versión imperfectiva de \"inclinarse, agacharse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Doblar el cuerpo hacia adelante o hacia un lado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311236,8 +311627,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "arreglar, poner en orden",
-    "definitionEs": "Versión imperfectiva de \"arreglar, poner en orden\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo funcione correctamente, o mejorar una relación.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311296,9 +311687,9 @@ const LEXICON_COMER = [
   "ipa": "pʌmtʃʲˈɑtsʌ",
   "senses": [
    {
-    "es": "correr a toda velocidad, volar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"correr a toda velocidad, volar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "salir disparado",
+    "definitionEs": "Ponerse a correr a toda velocidad.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311358,8 +311749,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "castigar",
-    "definitionEs": "Versión imperfectiva de \"castigar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Imponer una sanción a alguien por una falta.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311419,8 +311810,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "traicionar",
-    "definitionEs": "Versión imperfectiva de \"traicionar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Actuar en contra de la confianza depositada por alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311480,8 +311871,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cumplirse",
-    "definitionEs": "Versión imperfectiva de \"cumplirse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacerse realidad algo esperado, o alcanzar una determinada edad.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311540,9 +311931,9 @@ const LEXICON_COMER = [
   "ipa": "ʌdʲˈetsʌ",
   "senses": [
    {
-    "es": "vestirse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"vestirse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "vestirse",
+    "definitionEs": "Ponerse la ropa: Оде́нься тепло́! «¡Abrígate!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [
@@ -311604,8 +311995,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "empujar",
-    "definitionEs": "Versión imperfectiva de \"empujar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ejercer fuerza sobre algo para moverlo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311665,8 +312056,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "premiar, recompensar",
-    "definitionEs": "Versión imperfectiva de \"premiar, recompensar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar un premio o reconocimiento a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311725,9 +312116,9 @@ const LEXICON_COMER = [
   "ipa": "ʌbrˈɑdʌvʌtʲ",
   "senses": [
    {
-    "es": "alegrar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"alegrar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "alegrar",
+    "definitionEs": "Causar alegría a alguien: Ты меня́ обра́довал! «¡Me alegraste!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311786,9 +312177,9 @@ const LEXICON_COMER = [
   "ipa": "pʌdɡʌtˈovʲɪtsʌ",
   "senses": [
    {
-    "es": "prepararse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"prepararse\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "prepararse",
+    "definitionEs": "Prepararse para algo: подгото́виться к экза́мену, «prepararse para el examen».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [
@@ -311849,9 +312240,9 @@ const LEXICON_COMER = [
   "ipa": "prʌdˈoɭʒytsʌ",
   "senses": [
    {
-    "es": "continuar, seguir (sucediendo) (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"continuar, seguir (sucediendo)\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "continuar, seguir (sucediendo)",
+    "definitionEs": "Seguir ocurriendo después de una pausa.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311910,9 +312301,9 @@ const LEXICON_COMER = [
   "ipa": "ʌsuɕɪstvʲˈitsʌ",
   "senses": [
    {
-    "es": "realizarse, llevarse a cabo (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"realizarse, llevarse a cabo\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "realizarse, cumplirse",
+    "definitionEs": "Hacerse realidad: Мечта́ осуществи́лась, «el sueño se cumplió».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -311971,9 +312362,9 @@ const LEXICON_COMER = [
   "ipa": "ʌprʲɪdʲɪɭʲˈitsʌ",
   "senses": [
    {
-    "es": "definirse, decidirse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"definirse, decidirse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "definirse, decidirse",
+    "definitionEs": "Tomar una decisión o aclararse: определи́ться с вы́бором, «decidirse».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312033,8 +312424,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "concluir, deducir",
-    "definitionEs": "Versión imperfectiva de \"concluir, deducir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llegar a una conclusión, o cerrar formalmente un acuerdo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312094,8 +312485,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "asustarse",
-    "definitionEs": "Versión imperfectiva de \"asustarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Sentir miedo repentino.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312155,8 +312546,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llevar (a un lugar)",
-    "definitionEs": "Versión imperfectiva de \"llevar (a un lugar)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Trasladar algo a un lugar, o considerar que algo pertenece a una categoría.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312216,8 +312607,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "tocarle a alguien, corresponderle",
-    "definitionEs": "Versión imperfectiva de \"tocarle a alguien, corresponderle\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llegar a ser de alguien por azar o reparto.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312276,9 +312667,9 @@ const LEXICON_COMER = [
   "ipa": "rʌspʌɭʌʒˈytsʌ",
   "senses": [
    {
-    "es": "ubicarse, situarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"ubicarse, situarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "ubicarse, instalarse",
+    "definitionEs": "Ocupar un lugar y acomodarse en él.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312338,8 +312729,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "transformar, convertir",
-    "definitionEs": "Versión imperfectiva de \"transformar, convertir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo cambie por completo en otra cosa.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312398,9 +312789,9 @@ const LEXICON_COMER = [
   "ipa": "prʌjɪvʲˈitsʌ",
   "senses": [
    {
-    "es": "manifestarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"manifestarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "manifestarse",
+    "definitionEs": "Hacerse visible o evidente.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312459,9 +312850,9 @@ const LEXICON_COMER = [
   "ipa": "ʌbjɪsnʲˈitsʌ",
   "senses": [
    {
-    "es": "explicarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"explicarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "explicarse; aclarar las cosas (con alguien)",
+    "definitionEs": "Dar explicaciones, o hablar con alguien para aclarar una situación.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312521,8 +312912,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "rechazar, negar (algo a alguien)",
-    "definitionEs": "Versión imperfectiva de \"rechazar, negar (algo a alguien)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "No conceder algo que se pidió.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312582,8 +312973,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ofender",
-    "definitionEs": "Versión imperfectiva de \"ofender\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Herir los sentimientos de alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312643,8 +313034,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "rodear, dar la vuelta a",
-    "definitionEs": "Versión imperfectiva de \"rodear, dar la vuelta a\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ir alrededor de algo, o visitar varios lugares uno tras otro.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312703,9 +313094,9 @@ const LEXICON_COMER = [
   "ipa": "dˈɑtsʌ",
   "senses": [
    {
-    "es": "dársele (algo a alguien), resultar fácil/difícil (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"dársele (algo a alguien), resultar fácil/difícil\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "dársele (bien o mal algo a alguien)",
+    "definitionEs": "Resultar fácil o difícil para alguien: Ру́сский язы́к мне легко́ да́лся, «el ruso se me dio fácil».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312765,8 +313156,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "instalarse, acomodarse",
-    "definitionEs": "Versión imperfectiva de \"instalarse, acomodarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ponerse cómodo en un lugar, o conseguir un empleo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312825,9 +313216,9 @@ const LEXICON_COMER = [
   "ipa": "sfʌrmʲɪrʌvˈɑtsʌ",
   "senses": [
    {
-    "es": "formarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"formarse\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "formarse",
+    "definitionEs": "Tomar forma definitiva.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312886,9 +313277,9 @@ const LEXICON_COMER = [
   "ipa": "ʌtmʲˈetʲɪtsʌ",
   "senses": [
    {
-    "es": "registrarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"registrarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "registrarse, marcar presencia",
+    "definitionEs": "Dejar constancia de que uno estuvo o llegó.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -312948,8 +313339,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "mantenerse, resistir",
-    "definitionEs": "Versión imperfectiva de \"mantenerse, resistir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Lograr sostenerse en una posición, o contenerse de hacer algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313008,9 +313399,9 @@ const LEXICON_COMER = [
   "ipa": "prʌdˈɑtsʌ",
   "senses": [
    {
-    "es": "venderse, estar a la venta (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"venderse, estar a la venta\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "venderse (por dinero)",
+    "definitionEs": "Traicionar las propias ideas a cambio de dinero o de un favor.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313069,9 +313460,9 @@ const LEXICON_COMER = [
   "ipa": "pʌprʌɕˈɑtsʌ",
   "senses": [
    {
-    "es": "despedirse (durante un rato)",
-    "definitionEs": "Realizar la acción de \"despedirse\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "despedirse",
+    "definitionEs": "Decir adiós: попроща́ться с друзья́ми, «despedirse de los amigos».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313130,9 +313521,9 @@ const LEXICON_COMER = [
   "ipa": "ustʌnʌvʲˈitsʌ",
   "senses": [
    {
-    "es": "establecerse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"establecerse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "establecerse",
+    "definitionEs": "Quedar establecido: Установи́лась хоро́шая пого́да, «se instaló el buen tiempo».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313192,8 +313583,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "planear, idear",
-    "definitionEs": "Versión imperfectiva de \"planear, idear\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Concebir un plan o una idea.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313252,9 +313643,9 @@ const LEXICON_COMER = [
   "ipa": "pʌftʌrʲˈitsʌ",
   "senses": [
    {
-    "es": "repetirse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"repetirse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "repetirse",
+    "definitionEs": "Volver a ocurrir: Э́то не повтори́тся, «esto no se repetirá».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313313,9 +313704,9 @@ const LEXICON_COMER = [
   "ipa": "pʲɪrʲɪdˈɑtsʌ",
   "senses": [
    {
-    "es": "transmitirse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"transmitirse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "transmitirse",
+    "definitionEs": "Pasar de una persona a otra.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313375,8 +313766,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "acostumbrarse",
-    "definitionEs": "Versión imperfectiva de \"acostumbrarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ir acostumbrándose a algo nuevo: привыка́ть к но́вой рабо́те, «acostumbrarse al trabajo nuevo».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313436,8 +313827,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "dedicar, consagrar",
-    "definitionEs": "Versión imperfectiva de \"dedicar, consagrar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Destinar algo, especialmente tiempo o esfuerzo, a un fin.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313497,8 +313888,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "nombrar, designar",
-    "definitionEs": "Versión imperfectiva de \"nombrar, designar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Asignar a alguien un cargo, o establecer el momento de algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313558,8 +313949,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "extender, alargar (la mano)",
-    "definitionEs": "Versión imperfectiva de \"extender, alargar (la mano)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Estirar algo hacia adelante.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313619,8 +314010,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "preparar",
-    "definitionEs": "Versión imperfectiva de \"preparar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Disponer algo con anticipación: подгота́вливать докла́д, «preparar un informe».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313680,8 +314071,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "conocerse (por primera vez)",
-    "definitionEs": "Versión imperfectiva de \"conocerse (por primera vez)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Conocer a alguien por primera vez, presentarse: Дава́йте знако́миться! «¡Conozcámonos!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313741,8 +314132,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "soportar, aguantar",
-    "definitionEs": "Versión imperfectiva de \"soportar, aguantar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Resistir algo difícil sin ceder.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313802,8 +314193,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "bajar, descender (algo)",
-    "definitionEs": "Versión imperfectiva de \"bajar, descender (algo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Mover algo hacia abajo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313863,8 +314254,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "publicar",
-    "definitionEs": "Versión imperfectiva de \"publicar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer público un texto u otro contenido.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313924,8 +314315,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "resultar (que), aclararse",
-    "definitionEs": "Versión imperfectiva de \"resultar (que), aclararse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llegar a saberse algo que antes no se sabía.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -313984,9 +314375,9 @@ const LEXICON_COMER = [
   "ipa": "rʌzvʲˈitsʌ",
   "senses": [
    {
-    "es": "desarrollarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"desarrollarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "desarrollarse",
+    "definitionEs": "Llegar a un estado más avanzado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314046,8 +314437,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llegar (formal)",
-    "definitionEs": "Versión imperfectiva de \"llegar (formal)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Arribar a un destino, en un registro formal.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314106,9 +314497,9 @@ const LEXICON_COMER = [
   "ipa": "pʌspˈorʲɪtʲ",
   "senses": [
    {
-    "es": "discutir, debatir (durante un rato)",
-    "definitionEs": "Realizar la acción de \"discutir, debatir\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "discutir; apostar",
+    "definitionEs": "Tener una discusión; también hacer una apuesta: Дава́й поспо́рим! «¡Apostemos!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314168,8 +314559,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sacar, extraer (con esfuerzo)",
-    "definitionEs": "Versión imperfectiva de \"sacar, extraer (con esfuerzo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Retirar algo de donde estaba, tirando de ello.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314229,8 +314620,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ganar",
-    "definitionEs": "Versión imperfectiva de \"ganar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Obtener la victoria en una competencia.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314290,8 +314681,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "fundar",
-    "definitionEs": "Versión imperfectiva de \"fundar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Crear una institución u organización.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314351,8 +314742,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "privar de, despojar",
-    "definitionEs": "Versión imperfectiva de \"privar de, despojar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Quitarle algo a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314411,9 +314802,9 @@ const LEXICON_COMER = [
   "ipa": "prʲɪvˈysʲɪtʲ",
   "senses": [
    {
-    "es": "superar, exceder (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"superar, exceder\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "superar, exceder",
+    "definitionEs": "Pasar un límite: превы́сить ско́рость, «exceder la velocidad».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314473,8 +314864,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cubrir",
-    "definitionEs": "Versión imperfectiva de \"cubrir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner algo sobre una superficie de modo que la tape.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314534,8 +314925,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "unir, conectar",
-    "definitionEs": "Versión imperfectiva de \"unir, conectar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Juntar dos o más elementos.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314595,8 +314986,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "poner (la base)",
-    "definitionEs": "Versión imperfectiva de \"poner (la base)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Colocar algo como fundamento.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314656,8 +315047,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "averiguar, aclarar",
-    "definitionEs": "Versión imperfectiva de \"averiguar, aclarar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llegar a saber algo con certeza.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314717,8 +315108,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "revelar, detectar",
-    "definitionEs": "Versión imperfectiva de \"revelar, detectar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Descubrir algo que estaba oculto.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314778,8 +315169,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "destinar",
-    "definitionEs": "Versión imperfectiva de \"destinar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Asignar algo para un fin específico.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314839,8 +315230,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "liberar",
-    "definitionEs": "Versión imperfectiva de \"liberar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar libre a alguien o algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314899,9 +315290,9 @@ const LEXICON_COMER = [
   "ipa": "zʌpʌdˈozrʲɪtʲ",
   "senses": [
    {
-    "es": "sospechar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"sospechar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "llegar a sospechar",
+    "definitionEs": "Empezar a sospechar de algo o de alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -314949,7 +315340,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-02628"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-02628": "incoativo"
+  }
  },
  {
   "id": "CMR-05217",
@@ -314960,9 +315354,9 @@ const LEXICON_COMER = [
   "ipa": "sʌzdˈɑtsʌ",
   "senses": [
    {
-    "es": "crearse, formarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"crearse, formarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "crearse, formarse",
+    "definitionEs": "Surgir, quedar formado: Создало́сь впечатле́ние, «quedó la impresión».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315022,8 +315416,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "salir de golpe, saltar afuera",
-    "definitionEs": "Versión imperfectiva de \"salir de golpe, saltar afuera\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Salir rápida e inesperadamente de un lugar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315083,8 +315477,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llevar (a un lugar)",
-    "definitionEs": "Versión imperfectiva de \"llevar (a un lugar)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Conducir a alguien hacia un sitio.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315144,8 +315538,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "capturar, apoderarse de",
-    "definitionEs": "Versión imperfectiva de \"capturar, apoderarse de\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Tomar posesión de algo por la fuerza.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315204,9 +315598,9 @@ const LEXICON_COMER = [
   "ipa": "ʌtrʌʑˈitʲ",
   "senses": [
    {
-    "es": "reflejar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"reflejar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "reflejar",
+    "definitionEs": "Devolver una imagen, o expresar algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315266,8 +315660,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "revelar, descubrir",
-    "definitionEs": "Versión imperfectiva de \"revelar, descubrir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar a conocer algo oculto, o abrir completamente.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315327,8 +315721,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llevar (a un lado)",
-    "definitionEs": "Versión imperfectiva de \"llevar (a un lado)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Conducir a alguien a un lugar apartado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315387,9 +315781,9 @@ const LEXICON_COMER = [
   "ipa": "pʌɭʌʒˈytsʌ",
   "senses": [
    {
-    "es": "confiar en, contar con (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"confiar en, contar con\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "confiar en, contar con",
+    "definitionEs": "Depositar la confianza en alguien: На него́ мо́жно положи́ться, «se puede contar con él».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315449,8 +315843,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "levantarse de un salto",
-    "definitionEs": "Versión imperfectiva de \"levantarse de un salto\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ponerse de pie bruscamente y con rapidez.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315510,8 +315904,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llevar hasta",
-    "definitionEs": "Versión imperfectiva de \"llevar hasta\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Acompañar a alguien hasta un lugar, o hacer que algo llegue a un estado extremo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315571,8 +315965,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "obligar, forzar",
-    "definitionEs": "Versión imperfectiva de \"obligar, forzar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que alguien haga algo mediante presión de las circunstancias.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315632,8 +316026,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "aclarar, explicar",
-    "definitionEs": "Versión imperfectiva de \"aclarar, explicar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar una explicación que hace más claro algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315693,8 +316087,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "restaurar, restablecer",
-    "definitionEs": "Versión imperfectiva de \"restaurar, restablecer\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Volver a poner algo en su estado anterior.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315753,9 +316147,9 @@ const LEXICON_COMER = [
   "ipa": "spɭʌnʲˈirʌvʌtʲ",
   "senses": [
    {
-    "es": "planificar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"planificar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "planificar",
+    "definitionEs": "Hacer un plan completo de algo: сплани́ровать пое́здку, «planificar el viaje».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315815,8 +316209,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "responder, dar una opinión sobre",
-    "definitionEs": "Versión imperfectiva de \"responder, dar una opinión sobre\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Reaccionar ante algo, opinar sobre alguien, o tener un efecto posterior.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315876,8 +316270,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "separarse, dispersarse",
-    "definitionEs": "Versión imperfectiva de \"separarse, dispersarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Irse cada quien por su lado tras haber estado juntos.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315937,8 +316331,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "terminar, graduarse de",
-    "definitionEs": "Versión imperfectiva de \"terminar, graduarse de\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Concluir algo, especialmente unos estudios.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -315998,8 +316392,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "exponer, exhibir",
-    "definitionEs": "Versión imperfectiva de \"exponer, exhibir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Mostrar algo públicamente, o poner algo hacia afuera.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316059,8 +316453,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cubrir (parcialmente), tapar",
-    "definitionEs": "Versión imperfectiva de \"cubrir (parcialmente), tapar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner algo sobre otra cosa para protegerla u ocultarla parcialmente.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316120,8 +316514,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "decepcionar, fallarle a alguien",
-    "definitionEs": "Versión imperfectiva de \"decepcionar, fallarle a alguien\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "No cumplir con lo esperado por alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316181,8 +316575,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "perder (formal)",
-    "definitionEs": "Versión imperfectiva de \"perder (formal)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar de tener algo, en un registro formal.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316242,8 +316636,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "recoger",
-    "definitionEs": "Versión imperfectiva de \"recoger\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Levantar algo del suelo, o seleccionar algo apropiado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316302,9 +316696,9 @@ const LEXICON_COMER = [
   "ipa": "pʌbrʌdʲˈitʲ",
   "senses": [
    {
-    "es": "vagar, deambular (durante un rato)",
-    "definitionEs": "Realizar la acción de \"vagar, deambular\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "vagar un rato",
+    "definitionEs": "Caminar sin rumbo fijo durante un tiempo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316352,7 +316746,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03206"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03206": "delimitativo"
+  }
  },
  {
   "id": "CMR-05240",
@@ -316364,8 +316761,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "detener, retrasar",
-    "definitionEs": "Versión imperfectiva de \"detener, retrasar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo o alguien se demore, o privar de libertad a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316425,8 +316822,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "vestir (a alguien)",
-    "definitionEs": "Versión imperfectiva de \"vestir (a alguien)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner ropa a otra persona.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316486,8 +316883,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "verter, servir (un líquido)",
-    "definitionEs": "Versión imperfectiva de \"verter, servir (un líquido)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Echar un líquido en un recipiente.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316546,9 +316943,9 @@ const LEXICON_COMER = [
   "ipa": "kʌtʃʲˈɑtʲ",
   "senses": [
    {
-    "es": "mecer, balancear (un rato)",
-    "definitionEs": "Versión imperfectiva de \"mecer, balancear (un rato)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "es": "mecer, balancear",
+    "definitionEs": "Mover algo de un lado a otro, de forma repetida: кача́ть ребёнка, «mecer al bebé».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316608,8 +317005,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "condicionar, determinar",
-    "definitionEs": "Versión imperfectiva de \"condicionar, determinar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ser la causa o condición de algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316669,8 +317066,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sentarse (un momento)",
-    "definitionEs": "Versión imperfectiva de \"sentarse (un momento)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Tomar asiento un momento: Приса́живайтесь! «¡Siéntese!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316730,8 +317127,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "destruir",
-    "definitionEs": "Versión imperfectiva de \"destruir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo deje de existir con su estructura original.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316790,9 +317187,9 @@ const LEXICON_COMER = [
   "ipa": "vzvʌɭnʌvˈɑtʲ",
   "senses": [
    {
-    "es": "inquietar, preocupar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"inquietar, preocupar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "inquietar, conmover",
+    "definitionEs": "Causar inquietud o emoción a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316851,9 +317248,9 @@ const LEXICON_COMER = [
   "ipa": "rʌzvʲˈitʲ",
   "senses": [
    {
-    "es": "desarrollar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"desarrollar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "desarrollar",
+    "definitionEs": "Hacer que algo crezca o avance: разви́ть на́выки, «desarrollar habilidades».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316912,9 +317309,9 @@ const LEXICON_COMER = [
   "ipa": "uvʲˈidʲɪtsʌ",
   "senses": [
    {
-    "es": "verse (con alguien) (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"verse (con alguien)\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "verse (con alguien)",
+    "definitionEs": "Encontrarse con alguien: Уви́димся за́втра! «¡Nos vemos mañana!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -316974,8 +317371,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "encargar, pedir",
-    "definitionEs": "Versión imperfectiva de \"encargar, pedir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Solicitar un producto o servicio.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [
@@ -317037,8 +317434,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cancelar, anular",
-    "definitionEs": "Versión imperfectiva de \"cancelar, anular\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar sin efecto algo planeado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317098,8 +317495,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "agarrar al vuelo",
-    "definitionEs": "Versión imperfectiva de \"agarrar al vuelo\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Tomar algo rápidamente antes de que caiga.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317159,8 +317556,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "conmocionar, sacudir",
-    "definitionEs": "Versión imperfectiva de \"conmocionar, sacudir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Causar una fuerte impresión emocional, o sacudir algo con fuerza.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317220,8 +317617,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "tirar, desechar",
-    "definitionEs": "Versión imperfectiva de \"tirar, desechar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Deshacerse de algo, arrojándolo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317281,8 +317678,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "colgar",
-    "definitionEs": "Versión imperfectiva de \"colgar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Sujetar algo de un punto alto, dejándolo suspendido.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317342,8 +317739,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "escaparse, liberarse (con esfuerzo)",
-    "definitionEs": "Versión imperfectiva de \"escaparse, liberarse (con esfuerzo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Lograr salir de un lugar o de una sujeción, con esfuerzo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317403,8 +317800,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "desplegar, desenvolver",
-    "definitionEs": "Versión imperfectiva de \"desplegar, desenvolver\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Extender algo que estaba plegado o envuelto: развора́чивать пода́рок, «abrir el regalo».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317464,8 +317861,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cambiar, reemplazar",
-    "definitionEs": "Versión imperfectiva de \"cambiar, reemplazar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Sustituir algo por otra cosa.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317525,8 +317922,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "encargar, encomendar",
-    "definitionEs": "Versión imperfectiva de \"encargar, encomendar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar a alguien la responsabilidad de hacer algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317586,8 +317983,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llenar",
-    "definitionEs": "Versión imperfectiva de \"llenar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ocupar por completo un espacio, o escribir los datos requeridos en un documento.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317647,8 +318044,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "bajar, descender",
-    "definitionEs": "Versión imperfectiva de \"bajar, descender\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ir hacia abajo, o caer en un estado inferior moral o social.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317708,8 +318105,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "superar, vencer (una dificultad)",
-    "definitionEs": "Versión imperfectiva de \"superar, vencer (una dificultad)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Lograr vencer un obstáculo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317768,9 +318165,9 @@ const LEXICON_COMER = [
   "ipa": "pʌtrudʲˈitsʌ",
   "senses": [
    {
-    "es": "trabajar (con esfuerzo) (durante un rato)",
-    "definitionEs": "Realizar la acción de \"trabajar (con esfuerzo)\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "trabajar un rato; tomarse la molestia",
+    "definitionEs": "Trabajar durante un tiempo; también, en tono formal, «tomarse la molestia»: Потруди́тесь объясни́ть, «tómese la molestia de explicar».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317818,7 +318215,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03538"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03538": "delimitativo"
+  }
  },
  {
   "id": "CMR-05264",
@@ -317830,8 +318230,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "estirar, extender (tirando)",
-    "definitionEs": "Versión imperfectiva de \"estirar, extender (tirando)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Alargar algo tirando de sus extremos.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317891,8 +318291,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "darse vuelta, apartar la mirada",
-    "definitionEs": "Versión imperfectiva de \"darse vuelta, apartar la mirada\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Girar la cabeza o el cuerpo para no mirar algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -317952,8 +318352,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "derrumbarse, desplomarse",
-    "definitionEs": "Versión imperfectiva de \"derrumbarse, desplomarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Caer bruscamente por completo, física o figuradamente.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318013,8 +318413,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "doblar, girar",
-    "definitionEs": "Versión imperfectiva de \"doblar, girar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cambiar de dirección, o enrollar algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318073,9 +318473,9 @@ const LEXICON_COMER = [
   "ipa": "pʌstʲɪsnʲˈɑtsʌ",
   "senses": [
    {
-    "es": "avergonzarse, dar vergüenza (a uno) (durante un rato)",
-    "definitionEs": "Realizar la acción de \"avergonzarse, dar vergüenza (a uno)\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "darle vergüenza a uno (hacer algo)",
+    "definitionEs": "Sentir vergüenza y no hacer algo por eso: Не постесня́йся спроси́ть! «¡No te dé vergüenza preguntar!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318135,8 +318535,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "dar comienzo a, emprender",
-    "definitionEs": "Versión imperfectiva de \"dar comienzo a, emprender\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Empezar formalmente una tarea.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318196,8 +318596,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "señalar, marcar",
-    "definitionEs": "Versión imperfectiva de \"señalar, marcar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Indicar algo con una marca o un nombre.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318257,8 +318657,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "perder (un juego/competencia)",
-    "definitionEs": "Versión imperfectiva de \"perder (un juego/competencia)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "No ganar en una competencia.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318318,8 +318718,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "abrir de par en par",
-    "definitionEs": "Versión imperfectiva de \"abrir de par en par\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Abrir completamente algo, como una puerta.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318379,8 +318779,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "derribar, atropellar",
-    "definitionEs": "Versión imperfectiva de \"derribar, atropellar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer caer algo con un golpe, o hacer perder el hilo a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318440,8 +318840,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "interrumpir",
-    "definitionEs": "Versión imperfectiva de \"interrumpir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cortar la continuidad de algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318500,9 +318900,9 @@ const LEXICON_COMER = [
   "ipa": "svʌrʲˈitʲ",
   "senses": [
    {
-    "es": "hervir, cocinar (en agua) (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"hervir, cocinar (en agua)\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "hervir, cocinar (en agua)",
+    "definitionEs": "Preparar algo hirviéndolo: свари́ть суп, «hacer una sopa».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318562,8 +318962,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "salir (con esfuerzo), escaparse",
-    "definitionEs": "Versión imperfectiva de \"salir (con esfuerzo), escaparse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Lograr salir de un lugar difícil.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318623,8 +319023,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "fusilar",
-    "definitionEs": "Versión imperfectiva de \"fusilar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ejecutar a alguien con disparos de arma de fuego.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318684,8 +319084,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "calmar, tranquilizar",
-    "definitionEs": "Versión imperfectiva de \"calmar, tranquilizar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que alguien deje de estar agitado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318744,9 +319144,9 @@ const LEXICON_COMER = [
   "ipa": "skʌmˈɑndʌvʌtʲ",
   "senses": [
    {
-    "es": "comandar, dar órdenes (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"comandar, dar órdenes\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "dar una orden",
+    "definitionEs": "Dar una orden en voz alta.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318806,8 +319206,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "quitar (por la fuerza)",
-    "definitionEs": "Versión imperfectiva de \"quitar (por la fuerza)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Arrebatarle algo a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318866,9 +319266,9 @@ const LEXICON_COMER = [
   "ipa": "zʌxʌxʌtˈɑtʲ",
   "senses": [
    {
-    "es": "ponerse a reír a carcajadas",
-    "definitionEs": "Empezar a realizar la acción de \"reír a carcajadas\".",
-    "source": "manual"
+    "es": "echarse a reír a carcajadas",
+    "definitionEs": "Empezar a reír a carcajadas.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318916,7 +319316,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03750"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03750": "incoativo"
+  }
  },
  {
   "id": "CMR-05282",
@@ -318928,8 +319331,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "sobrevivir",
-    "definitionEs": "Versión imperfectiva de \"sobrevivir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Seguir con vida tras una situación de peligro.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -318989,8 +319392,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "interrumpir (al hablar)",
-    "definitionEs": "Versión imperfectiva de \"interrumpir (al hablar)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cortar el habla de otra persona, o romper algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319049,9 +319452,9 @@ const LEXICON_COMER = [
   "ipa": "pʌrʌzmyʃɭʲˈɑtʲ",
   "senses": [
    {
-    "es": "reflexionar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"reflexionar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "reflexionar un rato",
+    "definitionEs": "Pensar sobre algo durante un tiempo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319099,7 +319502,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03788"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03788": "delimitativo"
+  }
  },
  {
   "id": "CMR-05285",
@@ -319110,9 +319516,9 @@ const LEXICON_COMER = [
   "ipa": "pʌrvˈɑtsʌ",
   "senses": [
    {
-    "es": "romperse, rasgarse (durante un rato)",
-    "definitionEs": "Realizar la acción de \"romperse, rasgarse\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "romperse, rasgarse",
+    "definitionEs": "Romperse algo tirando: Порвала́сь су́мка, «se rompió el bolso».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319172,8 +319578,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "tramitar, formalizar",
-    "definitionEs": "Versión imperfectiva de \"tramitar, formalizar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Completar los papeles o formalidades necesarias para algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319233,8 +319639,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "formular",
-    "definitionEs": "Versión imperfectiva de \"formular\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Expresar una idea de manera precisa y ordenada.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319294,8 +319700,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llenar",
-    "definitionEs": "Versión imperfectiva de \"llenar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ocupar por completo un espacio con algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319355,8 +319761,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "invertir",
-    "definitionEs": "Versión imperfectiva de \"invertir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner dinero en un proyecto con fines de ganancia, o introducir algo dentro de otra cosa.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319416,8 +319822,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "escaparse (corriendo)",
-    "definitionEs": "Versión imperfectiva de \"escaparse (corriendo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Huir de un lugar corriendo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319477,8 +319883,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "escuchar (hasta el final)",
-    "definitionEs": "Versión imperfectiva de \"escuchar (hasta el final)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Prestar atención a alguien hasta que termine de hablar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319538,8 +319944,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "apretar, presionar (contra algo)",
-    "definitionEs": "Versión imperfectiva de \"apretar, presionar (contra algo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ejercer presión sobre algo, acercándolo con fuerza.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319599,8 +320005,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "presentar, mostrar (un documento)",
-    "definitionEs": "Versión imperfectiva de \"presentar, mostrar (un documento)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Exhibir algo formalmente, como prueba o identificación.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319659,9 +320065,9 @@ const LEXICON_COMER = [
   "ipa": "pʌkrutʲˈitʲ",
   "senses": [
    {
-    "es": "girar, hacer girar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"girar, hacer girar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "girar un poco, darle unas vueltas",
+    "definitionEs": "Hacer girar algo durante un momento: покрути́ть ру́чку, «darle unas vueltas a la manija».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319709,7 +320115,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03964"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03964": "delimitativo"
+  }
  },
  {
   "id": "CMR-05295",
@@ -319721,8 +320130,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "desarmar",
-    "definitionEs": "Versión imperfectiva de \"desarmar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Separar algo en sus partes, o lograr comprender algo poco claro.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319781,9 +320190,9 @@ const LEXICON_COMER = [
   "ipa": "pʌdruʒˈytsʌ",
   "senses": [
    {
-    "es": "ser amigos (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"ser amigos\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "hacerse amigos",
+    "definitionEs": "Empezar una amistad con alguien: Мы подружи́лись в шко́ле, «nos hicimos amigos en la escuela».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319831,7 +320240,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03973"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03973": "incoativo"
+  }
  },
  {
   "id": "CMR-05297",
@@ -319843,8 +320255,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "tirar, arrojar (desde arriba)",
-    "definitionEs": "Versión imperfectiva de \"tirar, arrojar (desde arriba)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar caer algo desde una altura, o quitarse una prenda.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319904,8 +320316,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "mudarse",
-    "definitionEs": "Versión imperfectiva de \"mudarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cambiar de vivienda o lugar de residencia, o pasar un vehículo por encima de algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -319965,8 +320377,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ampliar, expandir",
-    "definitionEs": "Versión imperfectiva de \"ampliar, expandir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer más grande algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320026,8 +320438,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "precisar, aclarar",
-    "definitionEs": "Versión imperfectiva de \"precisar, aclarar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar más detalle o exactitud a algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320086,9 +320498,9 @@ const LEXICON_COMER = [
   "ipa": "snʲˈɑtsʌ",
   "senses": [
    {
-    "es": "filmarse, actuar (en una película) (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"filmarse, actuar (en una película)\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "filmarse, salir (en una película o foto)",
+    "definitionEs": "Aparecer en una película o en una foto: сня́ться в фи́льме, «actuar en una película».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320148,8 +320560,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "reducir, acortar",
-    "definitionEs": "Versión imperfectiva de \"reducir, acortar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer más corto o pequeño algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320209,8 +320621,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "arrancar",
-    "definitionEs": "Versión imperfectiva de \"arrancar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Quitar algo tirando con fuerza, o hacer fracasar algo planeado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320270,8 +320682,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "planear, trazar (un plan)",
-    "definitionEs": "Versión imperfectiva de \"planear, trazar (un plan)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Establecer un plan general para algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320331,8 +320743,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "adjuntar",
-    "definitionEs": "Versión imperfectiva de \"adjuntar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Añadir algo a un documento, o poner algo en contacto con otra cosa: прикла́дывать лёд, «ponerse hielo».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320392,8 +320804,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "salir (en vehículo)",
-    "definitionEs": "Versión imperfectiva de \"salir (en vehículo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Partir de un lugar en un vehículo, o dejar una vivienda.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320453,8 +320865,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "aprobar",
-    "definitionEs": "Versión imperfectiva de \"aprobar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar el visto bueno a algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320513,9 +320925,9 @@ const LEXICON_COMER = [
   "ipa": "zʌsvʲɪtʲˈitsʌ",
   "senses": [
    {
-    "es": "ponerse a brillar, resplandecer",
-    "definitionEs": "Empezar a realizar la acción de \"brillar, resplandecer\".",
-    "source": "manual"
+    "es": "empezar a brillar, iluminarse",
+    "definitionEs": "Empezar a brillar o a emitir luz.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320563,7 +320975,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-04141"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-04141": "incoativo"
+  }
  },
  {
   "id": "CMR-05309",
@@ -320575,8 +320990,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "corregir, arreglar (un poco)",
-    "definitionEs": "Versión imperfectiva de \"corregir, arreglar (un poco)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer un pequeño ajuste para mejorar algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320636,8 +321051,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "colocar, ubicar",
-    "definitionEs": "Versión imperfectiva de \"colocar, ubicar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner algo en un lugar, o incluir un texto en una publicación.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320697,8 +321112,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "lanzar, poner en marcha",
-    "definitionEs": "Versión imperfectiva de \"lanzar, poner en marcha\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Iniciar el funcionamiento de algo, o lanzar un proyectil.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320758,8 +321173,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "darse vuelta",
-    "definitionEs": "Versión imperfectiva de \"darse vuelta\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Girar por completo, o desarrollarse ampliamente algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320818,9 +321233,9 @@ const LEXICON_COMER = [
   "ipa": "pʌttʃʲɪnʲˈitsʌ",
   "senses": [
    {
-    "es": "obedecer, someterse a (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"obedecer, someterse a\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "obedecer, someterse",
+    "definitionEs": "Aceptar una orden o una autoridad.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320880,8 +321295,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "fijar, afianzar",
-    "definitionEs": "Versión imperfectiva de \"fijar, afianzar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Sujetar algo firmemente, o consolidar un logro.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -320940,9 +321355,9 @@ const LEXICON_COMER = [
   "ipa": "svʲɪrknˈutʲ",
   "senses": [
    {
-    "es": "brillar, resplandecer (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"brillar, resplandecer\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "destellar (una vez)",
+    "definitionEs": "Brillar de golpe, una vez: Сверкну́ла мо́лния, «brilló un relámpago».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321002,8 +321417,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "reducir, disminuir",
-    "definitionEs": "Versión imperfectiva de \"reducir, disminuir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo baje de nivel o cantidad.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321063,8 +321478,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llegar volando, llegar en avión",
-    "definitionEs": "Versión imperfectiva de \"llegar volando, llegar en avión\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Arribar por vía aérea.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321124,8 +321539,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "acostar, colocar (con orden)",
-    "definitionEs": "Versión imperfectiva de \"acostar, colocar (con orden)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner a alguien en la cama, o disponer algo de forma ordenada.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321185,8 +321600,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cubrir, tapar",
-    "definitionEs": "Versión imperfectiva de \"cubrir, tapar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner algo sobre otra cosa para taparla.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321246,8 +321661,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "encontrar (tras buscar)",
-    "definitionEs": "Versión imperfectiva de \"encontrar (tras buscar)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dar con algo tras una búsqueda.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321307,8 +321722,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "proponer, postular",
-    "definitionEs": "Versión imperfectiva de \"proponer, postular\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Presentar una candidatura o propuesta, o mover algo hacia afuera.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321368,8 +321783,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "presionar, apretar",
-    "definitionEs": "Versión imperfectiva de \"presionar, apretar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ejercer presión sobre algo, como un botón.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321429,8 +321844,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "emprender, tomar (medidas)",
-    "definitionEs": "Versión imperfectiva de \"emprender, tomar (medidas)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Iniciar una acción, especialmente para resolver algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321490,8 +321905,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "decorar, adornar",
-    "definitionEs": "Versión imperfectiva de \"decorar, adornar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer más bello algo añadiéndole adornos.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321550,9 +321965,9 @@ const LEXICON_COMER = [
   "ipa": "zbʲɪrʲˈetʃʲ",
   "senses": [
    {
-    "es": "cuidar, preservar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"cuidar, preservar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "cuidar, preservar; ahorrar",
+    "definitionEs": "Conservar algo para que no se pierda o se dañe; también ahorrar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321611,9 +322026,9 @@ const LEXICON_COMER = [
   "ipa": "pʌvɭʲˈetʃʲ",
   "senses": [
    {
-    "es": "atraer (durante un rato)",
-    "definitionEs": "Realizar la acción de \"atraer\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "acarrear, traer consigo (consecuencias)",
+    "definitionEs": "Tener algo como consecuencia: повле́чь за собо́й пробле́мы, «traer problemas».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321673,8 +322088,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "quedarse helado/inmóvil",
-    "definitionEs": "Versión imperfectiva de \"quedarse helado/inmóvil\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Detenerse por completo, o endurecerse un líquido al enfriarse.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321734,8 +322149,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pasar (en vehículo), recorrer",
-    "definitionEs": "Versión imperfectiva de \"pasar (en vehículo), recorrer\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Atravesar un trayecto usando un medio de transporte.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321795,8 +322210,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "enterrar, sepultar",
-    "definitionEs": "Versión imperfectiva de \"enterrar, sepultar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner el cuerpo de una persona muerta en una tumba.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321856,8 +322271,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "adivinar",
-    "definitionEs": "Versión imperfectiva de \"adivinar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Acertar algo sin tener certeza previa.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321917,8 +322332,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "meterse, desaparecer (¿adónde fue?)",
-    "definitionEs": "Versión imperfectiva de \"meterse, desaparecer (¿adónde fue?)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ir a parar a algún lado; se usa sobre todo en preguntas y negaciones: Не́куда дева́ться, «no hay adónde ir».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -321978,8 +322393,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "excitar, provocar (una reacción)",
-    "definitionEs": "Versión imperfectiva de \"excitar, provocar (una reacción)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Causar una reacción intensa, física o emocional.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322039,8 +322454,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "desprenderse, caerse",
-    "definitionEs": "Versión imperfectiva de \"desprenderse, caerse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Soltarse algo de donde estaba sujeto, o perder el dominio de sí mismo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322100,8 +322515,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "satisfacer",
-    "definitionEs": "Versión imperfectiva de \"satisfacer\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cumplir con lo que alguien necesita o desea.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322161,8 +322576,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "dejar escapar, perder (una oportunidad)",
-    "definitionEs": "Versión imperfectiva de \"dejar escapar, perder (una oportunidad)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "No aprovechar algo por descuido.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322222,8 +322637,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "encenderse de golpe",
-    "definitionEs": "Versión imperfectiva de \"encenderse de golpe\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Prender fuego repentinamente, o surgir con fuerza una emoción o un conflicto.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322283,8 +322698,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "rellenar, atiborrar",
-    "definitionEs": "Versión imperfectiva de \"rellenar, atiborrar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llenar algo por completo, presionando el contenido.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322344,8 +322759,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "escaparse, huir",
-    "definitionEs": "Versión imperfectiva de \"escaparse, huir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Irse de un lugar sin permiso, huyendo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322404,9 +322819,9 @@ const LEXICON_COMER = [
   "ipa": "pʌruɡˈɑtsʌ",
   "senses": [
    {
-    "es": "pelearse (verbalmente), maldecir (durante un rato)",
-    "definitionEs": "Realizar la acción de \"pelearse (verbalmente), maldecir\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "pelearse (discutir con alguien)",
+    "definitionEs": "Discutir con alguien y quedar enojados: поруга́ться с сосе́дом, «pelearse con el vecino».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322466,8 +322881,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "extraer, sacar",
-    "definitionEs": "Versión imperfectiva de \"extraer, sacar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Sacar algo de donde estaba contenido.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322526,9 +322941,9 @@ const LEXICON_COMER = [
   "ipa": "upʌtrʲɪbʲˈitʲ",
   "senses": [
    {
-    "es": "usar, consumir (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"usar, consumir\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "usar, emplear",
+    "definitionEs": "Utilizar algo, sobre todo una palabra o una sustancia.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322588,8 +323003,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "examinar, revisar",
-    "definitionEs": "Versión imperfectiva de \"examinar, revisar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Mirar algo con detenimiento para evaluarlo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322648,9 +323063,9 @@ const LEXICON_COMER = [
   "ipa": "pʌdrˈɑtsʌ",
   "senses": [
    {
-    "es": "pelearse (físicamente) (durante un rato)",
-    "definitionEs": "Realizar la acción de \"pelearse (físicamente)\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "pelearse (a golpes)",
+    "definitionEs": "Pelearse físicamente con alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322709,9 +323124,9 @@ const LEXICON_COMER = [
   "ipa": "uɡʌvʌrʲˈitʲ",
   "senses": [
    {
-    "es": "persuadir, convencer (insistiendo) (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"persuadir, convencer (insistiendo)\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "persuadir, convencer",
+    "definitionEs": "Lograr convencer a alguien insistiendo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322771,8 +323186,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "penetrar, infiltrarse",
-    "definitionEs": "Versión imperfectiva de \"penetrar, infiltrarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Entrar en un lugar, superando una barrera u obstáculo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322831,9 +323246,9 @@ const LEXICON_COMER = [
   "ipa": "dʌnʲɪstʲˈisʲ",
   "senses": [
    {
-    "es": "llegar (un sonido/olor) (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"llegar (un sonido/olor)\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "llegar (un sonido, un olor)",
+    "definitionEs": "Llegar hasta alguien desde lejos: Донёсся крик, «llegó un grito».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322893,8 +323308,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "condenar",
-    "definitionEs": "Versión imperfectiva de \"condenar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Desaprobar fuertemente algo, o declarar culpable en un juicio.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -322954,8 +323369,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "desprenderse",
-    "definitionEs": "Versión imperfectiva de \"desprenderse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Separarse algo de donde estaba unido, o alejarse de una actividad.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323015,8 +323430,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "enumerar",
-    "definitionEs": "Versión imperfectiva de \"enumerar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Nombrar uno por uno los elementos de una lista, o transferir fondos.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323076,8 +323491,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "caerse (de golpe)",
-    "definitionEs": "Versión imperfectiva de \"caerse (de golpe)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Caer bruscamente al suelo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323137,8 +323552,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "quedar grabado en la memoria",
-    "definitionEs": "Versión imperfectiva de \"quedar grabado en la memoria\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ser recordado algo por haber causado impresión.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323197,9 +323612,9 @@ const LEXICON_COMER = [
   "ipa": "pʌsvʲɪtʲˈitʲ",
   "senses": [
    {
-    "es": "brillar, alumbrar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"brillar, alumbrar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "alumbrar un momento",
+    "definitionEs": "Iluminar algo durante un tiempo breve: Посвети́ мне фонарём! «¡Alúmbrame con la linterna!».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323247,7 +323662,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-04768"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-04768": "delimitativo"
+  }
  },
  {
   "id": "CMR-05353",
@@ -323259,8 +323677,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llevarse (en vehículo)",
-    "definitionEs": "Versión imperfectiva de \"llevarse (en vehículo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Transportar algo o a alguien fuera de un lugar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323319,9 +323737,9 @@ const LEXICON_COMER = [
   "ipa": "ʌtrʲɪɡuɭʲˈirʌvʌtʲ",
   "senses": [
    {
-    "es": "regular (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"regular\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "regular, ajustar",
+    "definitionEs": "Dejar algo bien ajustado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323381,8 +323799,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "alcanzar (a alguien que va delante)",
-    "definitionEs": "Versión imperfectiva de \"alcanzar (a alguien que va delante)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llegar a la altura de alguien que iba adelante, corriendo o persiguiendo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323441,9 +323859,9 @@ const LEXICON_COMER = [
   "ipa": "pʌddˈɑtsʌ",
   "senses": [
    {
-    "es": "ceder, dejarse llevar por (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"ceder, dejarse llevar por\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "ceder, dejarse llevar",
+    "definitionEs": "Dejar de resistir: подда́ться собла́зну, «caer en la tentación».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323503,8 +323921,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "fijar, registrar",
-    "definitionEs": "Versión imperfectiva de \"fijar, registrar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Dejar constancia de algo, o sujetar firmemente.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323564,8 +323982,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "acercarse (en vehículo)",
-    "definitionEs": "Versión imperfectiva de \"acercarse (en vehículo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Llegar cerca de un lugar en un vehículo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323625,8 +324043,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "fracasar",
-    "definitionEs": "Versión imperfectiva de \"fracasar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "No tener éxito en algo, o caer dentro de un hueco.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323686,8 +324104,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "despedir (del trabajo)",
-    "definitionEs": "Versión imperfectiva de \"despedir (del trabajo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Terminar la relación laboral con un empleado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323747,8 +324165,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "indignarse",
-    "definitionEs": "Versión imperfectiva de \"indignarse\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Sentir enojo por una injusticia.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323808,8 +324226,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "afinar, ajustar",
-    "definitionEs": "Versión imperfectiva de \"afinar, ajustar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner algo en las condiciones correctas, o influir en el estado de ánimo de alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323869,8 +324287,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "añadir, sumar",
-    "definitionEs": "Versión imperfectiva de \"añadir, sumar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Agregar algo a lo que ya hay.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323929,9 +324347,9 @@ const LEXICON_COMER = [
   "ipa": "vˈytʲɪtʃʲ",
   "senses": [
    {
-    "es": "fluir hacia afuera (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"fluir hacia afuera\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "salirse, derramarse (un líquido)",
+    "definitionEs": "Salir un líquido de un recipiente.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -323991,8 +324409,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "limpiar, purificar",
-    "definitionEs": "Versión imperfectiva de \"limpiar, purificar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Quitar la suciedad o impurezas de algo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324052,8 +324470,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llevarse (algo consigo)",
-    "definitionEs": "Versión imperfectiva de \"llevarse (algo consigo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Sacar algo de un lugar, llevándolo consigo.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324112,9 +324530,9 @@ const LEXICON_COMER = [
   "ipa": "zdʲɪrʒˈɑtʲ",
   "senses": [
    {
-    "es": "contener, reprimir (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"contener, reprimir\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "contener; cumplir (una promesa)",
+    "definitionEs": "Contener algo, o cumplir lo prometido: сдержа́ть сло́во, «cumplir la palabra».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324173,9 +324591,9 @@ const LEXICON_COMER = [
   "ipa": "mʲɪtnˈutsʌ",
   "senses": [
    {
-    "es": "agitarse, moverse de un lado a otro (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"agitarse, moverse de un lado a otro\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "lanzarse (de golpe)",
+    "definitionEs": "Moverse de golpe hacia un lado.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324235,8 +324653,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "apretar, comprimir",
-    "definitionEs": "Versión imperfectiva de \"apretar, comprimir\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Ejercer presión sobre algo para reducir su tamaño.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324296,8 +324714,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "recortar, tallar",
-    "definitionEs": "Versión imperfectiva de \"recortar, tallar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Cortar algo siguiendo una forma, o tallar un material.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324357,8 +324775,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "obtener, extraer (con esfuerzo)",
-    "definitionEs": "Versión imperfectiva de \"obtener, extraer (con esfuerzo)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Conseguir algo, especialmente tras un esfuerzo, o extraer un recurso natural.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324418,8 +324836,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llevar (en vehículo, a un destino)",
-    "definitionEs": "Versión imperfectiva de \"llevar (en vehículo, a un destino)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Transportar algo o a alguien hasta un lugar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324479,8 +324897,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "colocar, disponer (varias cosas)",
-    "definitionEs": "Versión imperfectiva de \"colocar, disponer (varias cosas)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner varias cosas en su lugar, con cierto orden.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324540,8 +324958,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "quedarse atrás",
-    "definitionEs": "Versión imperfectiva de \"quedarse atrás\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "No seguir el ritmo de los demás, o dejar de molestar a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324600,9 +325018,9 @@ const LEXICON_COMER = [
   "ipa": "pʌspˈɑtʲ",
   "senses": [
    {
-    "es": "dormir (durante un rato)",
-    "definitionEs": "Realizar la acción de \"dormir\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "dormir un rato, echarse una siesta",
+    "definitionEs": "Dormir durante un tiempo breve: Мне на́до поспа́ть, «necesito dormir un rato».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324664,9 +325082,9 @@ const LEXICON_COMER = [
   "ipa": "nʌzvˈɑtsʌ",
   "senses": [
    {
-    "es": "llamarse (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"llamarse\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "presentarse (como), dar su nombre",
+    "definitionEs": "Decir uno su nombre o presentarse como algo: Он назва́лся врачо́м, «se presentó como médico».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324726,8 +325144,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "descubrir, hallar",
-    "definitionEs": "Versión imperfectiva de \"descubrir, hallar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Encontrar algo que estaba oculto o desconocido.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324911,8 +325329,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "detener, parar",
-    "definitionEs": "Versión imperfectiva de \"detener, parar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Hacer que algo o alguien deje de moverse o de actuar.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -324971,9 +325389,9 @@ const LEXICON_COMER = [
   "ipa": "pʌtʲˈetʃʲ",
   "senses": [
    {
-    "es": "fluir, gotear (durante un rato)",
-    "definitionEs": "Realizar la acción de \"fluir, gotear\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "empezar a correr (un líquido), empezar a gotear",
+    "definitionEs": "Empezar a fluir: Из кра́на потекла́ вода́, «empezó a salir agua del grifo».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325021,7 +325439,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-03260"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03260": "incoativo"
+  }
  },
  {
   "id": "CMR-05383",
@@ -325032,9 +325453,9 @@ const LEXICON_COMER = [
   "ipa": "rʌzdrʌʒˈytʲ",
   "senses": [
    {
-    "es": "irritar, molestar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"irritar, molestar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "irritar, molestar",
+    "definitionEs": "Causar irritación a alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325093,9 +325514,9 @@ const LEXICON_COMER = [
   "ipa": "ʌxʌrʌktʲɪrʲɪzʌvˈɑtʲ",
   "senses": [
    {
-    "es": "caracterizar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"caracterizar\": indica que la acción se completó o se realizó como un evento único.",
-    "source": "manual"
+    "es": "caracterizar, describir",
+    "definitionEs": "Describir los rasgos de algo o de alguien.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325154,9 +325575,9 @@ const LEXICON_COMER = [
   "ipa": "pʌnʲɪstʲˈisʲ",
   "senses": [
    {
-    "es": "correr velozmente (durante un rato)",
-    "definitionEs": "Realizar la acción de \"correr velozmente\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "salir a toda velocidad",
+    "definitionEs": "Ponerse en movimiento muy rápido.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325216,8 +325637,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "insertar, meter",
-    "definitionEs": "Versión imperfectiva de \"insertar, meter\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner algo dentro de otra cosa.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325276,9 +325697,9 @@ const LEXICON_COMER = [
   "ipa": "pʌpʌɭstʲˈi",
   "senses": [
    {
-    "es": "arrastrarse, reptar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"arrastrarse, reptar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "echar a reptar, empezar a arrastrarse",
+    "definitionEs": "Ponerse en movimiento arrastrándose.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325338,8 +325759,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "colocar, ubicar",
-    "definitionEs": "Versión imperfectiva de \"colocar, ubicar\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Poner algo en un lugar, o proporcionar alojamiento.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325399,8 +325820,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "arrancar (con fuerza)",
-    "definitionEs": "Versión imperfectiva de \"arrancar (con fuerza)\": indica que la acción es habitual, está en proceso o se repite (a diferencia de la versión perfectiva, que la presenta como completa).",
-    "source": "manual"
+    "definitionEs": "Sacar algo de raíz con un tirón fuerte, o expulsar el contenido del estómago.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325520,9 +325941,9 @@ const LEXICON_COMER = [
   "ipa": "pʌbʌrˈotsʌ",
   "senses": [
    {
-    "es": "luchar (durante un rato)",
-    "definitionEs": "Realizar la acción de \"luchar\" durante un tiempo limitado, generalmente breve.",
-    "source": "manual"
+    "es": "luchar un poco; intentar pelear",
+    "definitionEs": "Luchar durante un tiempo, o intentar luchar por algo: поборо́ться за побе́ду, «pelear por la victoria».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325570,7 +325991,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-01716"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-01716": "delimitativo"
+  }
  },
  {
   "id": "CMR-05392",
@@ -325582,8 +326006,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "echar un vistazo, mirar",
-    "definitionEs": "Versión imperfectiva de \"echar un vistazo, mirar\": indica que la acción es habitual, está en proceso o se repite.",
-    "source": "manual"
+    "definitionEs": "Dirigir la vista hacia algo brevemente.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325642,9 +326066,9 @@ const LEXICON_COMER = [
   "ipa": "pʌdʲˈejstvʌvʌtʲ",
   "senses": [
    {
-    "es": "actuar (versión perfectiva)",
-    "definitionEs": "Realizar la acción de \"actuar\" — versión perfectiva, la acción vista como completa.",
-    "source": "manual"
+    "es": "surtir efecto; influir",
+    "definitionEs": "Producir un efecto: Лека́рство поде́йствовало, «el remedio hizo efecto».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325704,8 +326128,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "formarse, constituirse",
-    "definitionEs": "Versión imperfectiva de \"formarse, constituirse\": indica que la acción es habitual, está en proceso o se repite.",
-    "source": "manual"
+    "definitionEs": "Llegar a existir algo, generalmente de forma gradual.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325764,9 +326188,9 @@ const LEXICON_COMER = [
   "ipa": "pʌdʌvʲˈitʲ",
   "senses": [
    {
-    "es": "reprimir, sofocar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"reprimir, sofocar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "reprimir, sofocar",
+    "definitionEs": "Contener o detener algo por la fuerza.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325825,9 +326249,9 @@ const LEXICON_COMER = [
   "ipa": "ʌxrʌnʲˈitʲ",
   "senses": [
    {
-    "es": "proteger, custodiar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"proteger, custodiar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "proteger, custodiar",
+    "definitionEs": "Proteger algo o a alguien de un peligro.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325886,9 +326310,9 @@ const LEXICON_COMER = [
   "ipa": "sʌprʌvʌdʲˈitʲ",
   "senses": [
    {
-    "es": "acompañar (versión perfectiva)",
-    "definitionEs": "Versión perfectiva de \"acompañar\": la acción vista como completa, no como proceso.",
-    "source": "manual"
+    "es": "acompañar",
+    "definitionEs": "Ir con alguien o con algo: сопроводи́ть письмо́ фотогра́фией, «acompañar la carta con una foto».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325947,9 +326371,9 @@ const LEXICON_COMER = [
   "ipa": "pʌkʌɭʲɪbˈɑtsʌ",
   "senses": [
    {
-    "es": "vacilar, dudar; oscilar (versión perfectiva)",
-    "definitionEs": "Realizar la acción de \"vacilar, dudar; oscilar\" — versión perfectiva, la acción vista como completa.",
-    "source": "manual"
+    "es": "vacilar un momento",
+    "definitionEs": "Dudar durante un tiempo breve antes de decidir.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -325997,7 +326421,10 @@ const LEXICON_COMER = [
   "aspect": "perfectivo",
   "aspectualPartner": [
    "CMR-04802"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-04802": "delimitativo"
+  }
  },
  {
   "id": "CMR-05399",
@@ -326008,9 +326435,9 @@ const LEXICON_COMER = [
   "ipa": "ʃyvʲɪɭʲnˈutsʌ",
   "senses": [
    {
-    "es": "moverse (ligeramente) (de golpe, una vez)",
-    "definitionEs": "Realizar la acción de \"moverse (ligeramente)\" una sola vez, de forma breve y puntual.",
-    "source": "manual"
+    "es": "moverse un poco (una vez)",
+    "definitionEs": "Hacer un movimiento pequeño, una vez: Он не шевельну́лся, «no se movió».",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -326070,8 +326497,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "desconcertarse, quedarse confundido",
-    "definitionEs": "Versión imperfectiva de \"desconcertarse, quedarse confundido\": indica que la acción es habitual, está en proceso o se repite.",
-    "source": "manual"
+    "definitionEs": "Perder la capacidad de reaccionar por sorpresa o confusión.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -326131,8 +326558,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "acomodarse, sentarse (cómodamente)",
-    "definitionEs": "Versión imperfectiva de \"acomodarse, sentarse (cómodamente)\": indica que la acción es habitual, está en proceso o se repite.",
-    "source": "manual"
+    "definitionEs": "Sentarse de forma definitiva, buscando comodidad.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -326192,8 +326619,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "quedarse mirando fijamente",
-    "definitionEs": "Versión imperfectiva de \"quedarse mirando fijamente\": indica que la acción es habitual, está en proceso o se repite.",
-    "source": "manual"
+    "definitionEs": "Quedarse mirando fijamente algo o a alguien (coloquial).",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -327097,8 +327524,8 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "meter (un gol); clavar",
-    "definitionEs": "Versión imperfectiva de \"meter un gol; clavar\": indica que la acción es habitual, está en proceso o se repite.",
-    "source": "manual"
+    "definitionEs": "Anotar un tanto en un deporte, o introducir algo con golpes.",
+    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -327289,9 +327716,9 @@ const LEXICON_COMER = [
   "ipa": "prʌkʌntrʌɭʲˈirʌvʌtʲ",
   "senses": [
    {
-    "es": "controlar, supervisar (versión perfectiva)",
-    "definitionEs": "Supervisar o verificar algo de principio a fin — pareja perfectiva de \"контролировать\", que en general se usa como biaspectual pero admite esta forma perfectiva de uso común.",
-    "source": "manual",
+    "es": "controlar, supervisar",
+    "definitionEs": "Verificar que algo se haga bien.",
+    "source": "redactado",
     "aspectualPartner": [
      "CMR-02915"
     ]
@@ -327353,9 +327780,9 @@ const LEXICON_COMER = [
   "ipa": "rʲɪʌɭʲɪzˈovyvʌtʲ",
   "senses": [
    {
-    "es": "realizar, llevar a cabo (versión imperfectiva)",
-    "definitionEs": "Llevar a cabo o poner en práctica algo, como proceso — pareja imperfectiva de \"реализовать\", que en general se usa como biaspectual pero admite esta forma imperfectiva en registro técnico/empresarial.",
-    "source": "manual",
+    "es": "realizar, llevar a cabo",
+    "definitionEs": "Llevar a la práctica un plan o un proyecto (en proceso o de forma habitual).",
+    "source": "redactado",
     "aspectualPartner": [
      "CMR-02562"
     ]
@@ -330291,7 +330718,10 @@ const LEXICON_COMER = [
   "aspect": "imperfectivo",
   "aspectualPartner": [
    "CMR-03241"
-  ]
+  ],
+  "aspectualPartnerTypes": {
+   "CMR-03241": "incoativo"
+  }
  },
  {
   "id": "CMR-05467",
@@ -330306,7 +330736,7 @@ const LEXICON_COMER = [
     "definitionEs": "Ir a un lugar cercano y regresar: сходи́ть в магази́н = ir al negocio (y volver).",
     "source": "redactado",
     "aspectualPartner": [
-     "SIN_PAREJA:IDIOMATICO"
+     "CMR-00342"
     ]
    }
   ],
@@ -351281,12 +351711,18 @@ const LEXICON_COMER = [
    {
     "es": "limpiar",
     "definitionEs": "Sacar la suciedad de algo: чи́стить зу́бы, «lavarse los dientes»; чи́стить о́бувь, «lustrar los zapatos».",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05796"
+    ]
    },
    {
     "es": "pelar",
     "definitionEs": "Sacarle la cáscara a una fruta o verdura: чи́стить карто́шку, «pelar patatas».",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05796"
+    ]
    }
   ],
   "introducedIn": [
@@ -353328,12 +353764,18 @@ const LEXICON_COMER = [
    {
     "es": "suscribirse",
     "definitionEs": "Anotarse para recibir algo: подписа́ться на кана́л, «suscribirse a un canal».",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05828"
+    ]
    },
    {
     "es": "firmar (con el nombre)",
     "definitionEs": "Poner la firma (aspecto perfectivo de подпи́сываться).",
-    "source": "redactado"
+    "source": "redactado",
+    "aspectualPartner": [
+     "CMR-05828"
+    ]
    }
   ],
   "introducedIn": [],
@@ -354151,7 +354593,7 @@ const LEXICON_COMER = [
   },
   "aspect": "imperfectivo",
   "aspectualPartner": [
-   "SIN_PAREJA:ESTATIVO"
+   "SIN_PAREJA:ACTIVIDAD"
   ],
   "temas": [
    "trabajo"
