@@ -39,9 +39,18 @@ def trozos(t, largo=180):
 def audios(lista, v1, salida, parte, de):
     import torch
     torch.set_num_threads(max(1, os.cpu_count() or 1))
-    modelo, _ = torch.hub.load(repo_or_dir="snakers4/silero-models", model="silero_tts", language="ru", speaker="v5_5_ru", trust_repo=True)
+    # 19/10/2026: con 16 partes a la vez, GitHub cortaba por exceso de pedidos («rate limit exceeded») la
+    # comprobación que hace torch.hub antes de bajar el modelo. skip_validation la saltea; además se reintenta.
+    for vez in range(5):
+        try:
+            modelo, _ = torch.hub.load(repo_or_dir="snakers4/silero-models", model="silero_tts", language="ru", speaker="v5_5_ru", trust_repo=True, skip_validation=True)
+            break
+        except Exception as e:
+            print("  (no se pudo bajar el modelo, reintento)", type(e).__name__, e)
+            time.sleep(30 * (vez + 1))
+    else:
+        raise SystemExit("✗ No se pudo bajar el modelo de Silero")
     modelo.to(torch.device("cpu"))
-    textos = [x for i, x in enumerate(lista["textos"]) if i % de == parte]
     # 17/10/2026: lo que ya está publicado se lee del índice (así cada parte no baja el repo entero)
     hay = set()
     try:
@@ -49,9 +58,16 @@ def audios(lista, v1, salida, parte, de):
         hay = {(v, k) for v, ks in ind.get("voces", {}).items() for k in ks.split()}
     except Exception:
         pass
+    # 19/10/2026: las partes se reparten solo lo que falta, así una nueva corrida va pareja
+    pendientes = [x for x in lista["textos"] if (x["v"], x["k"]) not in hay]
+    textos = [x for i, x in enumerate(pendientes) if i % de == parte]
+    print("Faltan", len(pendientes), "audios; esta parte hace", len(textos))
     hechos = fallas = 0
     inicio = time.time()
     for x in textos:
+      destino = ""
+      # 19/10/2026: un texto que falla (audio vacío, ffmpeg…) se salta y se anota; nunca corta la parte entera
+      try:
         if (x["v"], x["k"]) in hay or os.path.exists(os.path.join(v1, x["v"], x["k"] + EXT)):
             continue
         destino = os.path.join(salida, x["v"], x["k"] + EXT)
@@ -73,6 +89,8 @@ def audios(lista, v1, salida, parte, de):
         if not pedazos:
             fallas += 1; print("✗", x["v"], x["t"]); continue
         audio = torch.cat(pedazos[:-1])
+        if audio.numel() < 2400:
+            raise ValueError("audio vacío")
         wav = destino[:-len(EXT)] + ".wav"
         pcm = (audio.clamp(-1, 1) * 32767).to(torch.int16).numpy().tobytes()
         with wave.open(wav, "wb") as w:
@@ -83,6 +101,11 @@ def audios(lista, v1, salida, parte, de):
         hechos += 1
         if hechos % 200 == 0:
             print("…", hechos, "audios en", int(time.time() - inicio), "s")
+      except Exception as e:
+        fallas += 1; print("✗", x["v"], x["t"], "·", type(e).__name__, e)
+        for f in (destino, destino[:-len(EXT)] + ".wav"):
+            try: os.remove(f)
+            except Exception: pass
     print("Parte", parte, "de", de, "· audios nuevos:", hechos, "· no se pudieron:", fallas)
 
 def indice(lista, v1):
