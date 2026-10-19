@@ -26,6 +26,14 @@
        u = último resultado (2 Bien · 1 Casi · 0 Mal) · f = fecha
      repaso[id] = fecha → ejercicios con Mal o Casi pendientes
      Resultado: AZ_BIEN = 2 · AZ_CASI = 1 · AZ_MAL = 0
+
+   Repaso espaciado (19/10/2026, Contexto §2):
+     srs[clave] = { c, p, u?, m? }
+       clave: "ej:<id de ejercicio>", "lex:CMR-…", "alfabeto:Б", "regla:<id de sección>"
+       c = caja 1–4 (vuelve a 1, 3, 7 o 14 días) · 5 = aprendido, sale de la rotación
+       p = fecha en que toca (null si aprendido) · u = unidad · m = fechas de los últimos Mal
+     Bien el día que toca (o después) → caja siguiente; Bien antes de tiempo no cuenta.
+     Casi → misma caja, vuelve a su plazo. Mal → caja 1, mañana (aunque estuviera aprendido).
    ============================================================ */
 
 const AZ_BIEN = 2, AZ_CASI = 1, AZ_MAL = 0;
@@ -38,6 +46,7 @@ function azDefaultProgress() {
     favorites: [],  // itemKeys marcados como favoritos, cross-módulo
     ejercicios: {}, // exId -> { v, b, c, m, u, f }
     repaso: {},     // exId -> fecha en que entró a la cola (Mal o Casi)
+    srs: {},        // repaso espaciado (19/10/2026): clave -> { c, p, u?, m? }
     lastStudied: null
   };
 }
@@ -53,8 +62,10 @@ async function azLoadProgress() {
     favorites: loaded.favorites || [],
     ejercicios: loaded.ejercicios || {},
     repaso: loaded.repaso || {},
+    srs: loaded.srs || null,
     lastStudied: loaded.lastStudied || null
   };
+  if (!AZ_PROGRESS.srs) { azRepasoSembrar(); azSaveProgress(); }
   return AZ_PROGRESS;
 }
 
@@ -158,7 +169,7 @@ function azExercise(id) {
 
 /* Registra un resultado (AZ_BIEN / AZ_CASI / AZ_MAL).
    unitId (opcional) alimenta el ajuste de dificultad de esa unidad. */
-function azRecordExercise(id, result, unitId, items) {
+function azRecordExercise(id, result, unitId, items, regla) {
   const e = Object.assign({}, azExercise(id));
   e.v += 1;
   if (result === AZ_BIEN) e.b += 1; else if (result === AZ_CASI) e.c += 1; else e.m += 1;
@@ -175,12 +186,75 @@ function azRecordExercise(id, result, unitId, items) {
     u.lastStudied = e.f;
   }
   const cambios = (items || []).map(k => azRegistrarItem(k, result, id)).filter(Boolean);
+  /* Repaso espaciado: el ejercicio, lo que practica y su regla (el examen final no entra) */
+  if (unitId !== 14 && !/^EF-/.test(id)) {
+    azRepasoAnotar("ej:" + id, result, unitId);
+    (items || []).forEach(k => azRepasoAnotar(k, result, unitId));
+    if (regla) azRepasoAnotar("regla:" + regla, result, unitId);
+  }
   azTouchStudied();
   e.cambios = cambios;   /* cambios de nivel del semáforo (antes / despues) */
   return e;
 }
 
 function azInRepaso(id) { return !!AZ_PROGRESS.repaso[id]; }
+
+/* ── REPASO ESPACIADO (19/10/2026) ───────────────────────────
+   Cajas de Manu (06/10/2026): 1, 3, 7 y 14 días; después de la de 14,
+   aprendido. Ver la cabecera. */
+const AZ_REPASO_DIAS = [1, 3, 7, 14];
+const AZ_REGLA_FLOJA = { fallos: 2, dias: 7 };   /* una regla está floja con 2 Mal o más en los últimos 7 días */
+function azSumarDias(fecha, n) {
+  const d = new Date(fecha + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() + n);
+  return d.toISOString().slice(0, 10);
+}
+function azRepasoAnotar(clave, result, unitId) {
+  if (!AZ_PROGRESS.srs) AZ_PROGRESS.srs = {};
+  const hoy = azHoy();
+  const s = Object.assign({}, AZ_PROGRESS.srs[clave] || {});
+  if (unitId != null) s.u = unitId;
+  if (result === AZ_MAL) {
+    s.c = 1; s.p = azSumarDias(hoy, 1);
+    s.m = (s.m || []).concat([hoy]).slice(-5);
+  } else if (!s.c) {
+    s.c = 1; s.p = azSumarDias(hoy, 1);
+  } else if (s.c < 5 && s.p && s.p <= hoy) {
+    if (result === AZ_BIEN) s.c += 1;
+    if (s.c > AZ_REPASO_DIAS.length) { s.c = 5; s.p = null; }
+    else s.p = azSumarDias(hoy, AZ_REPASO_DIAS[s.c - 1]);
+  }
+  AZ_PROGRESS.srs[clave] = s;
+  return s;
+}
+/* Lo que toca hoy (o está atrasado): [{ clave, c, p, u, m }], lo más atrasado primero */
+function azRepasoPendiente(prefijo) {
+  const hoy = azHoy(), srs = AZ_PROGRESS.srs || {};
+  return Object.keys(srs).filter(k => (!prefijo || k.indexOf(prefijo) === 0) && srs[k].p && srs[k].p <= hoy)
+    .map(k => Object.assign({ clave: k }, srs[k])).sort((a, b) => a.p < b.p ? -1 : a.p > b.p ? 1 : 0);
+}
+/* Reglas flojas: con AZ_REGLA_FLOJA.fallos Mal o más en los últimos días; las más falladas primero */
+function azReglasFlojas() {
+  const desde = azSumarDias(azHoy(), -AZ_REGLA_FLOJA.dias), srs = AZ_PROGRESS.srs || {};
+  return Object.keys(srs).filter(k => k.indexOf("regla:") === 0)
+    .map(k => ({ id: k.slice(6), u: srs[k].u, fallos: (srs[k].m || []).filter(d => d >= desde).length }))
+    .filter(x => x.fallos >= AZ_REGLA_FLOJA.fallos).sort((a, b) => b.fallos - a.fallos);
+}
+/* Primera vez con repaso espaciado: se arma con lo que ya había. Los ejercicios hechos
+   entran en la caja 1 (los que salieron mal, para hoy); las palabras y letras, según el
+   semáforo (Dominada → caja 3). */
+function azRepasoSembrar() {
+  const srs = {}, hoy = azHoy();
+  Object.keys(AZ_PROGRESS.ejercicios || {}).forEach(id => {
+    const e = AZ_PROGRESS.ejercicios[id]; if (!e.f || /^EF-/.test(id)) return;
+    const u = (id.match(/^U(\d+)-/) || [])[1];
+    srs["ej:" + id] = { c: 1, p: e.u === AZ_BIEN ? azSumarDias(e.f, 1) : hoy, u: u ? Number(u) : undefined };
+  });
+  Object.keys(AZ_PROGRESS.items || {}).forEach(k => {
+    const it = AZ_PROGRESS.items[k]; if (!it.lastSeen || !it.level) return;
+    srs[k] = it.level === 2 ? { c: 3, p: azSumarDias(it.lastSeen, 7) } : { c: 1, p: azSumarDias(it.lastSeen, 1) };
+  });
+  AZ_PROGRESS.srs = srs;
+}
 
 /* Dificultad objetivo (1–5) de una unidad según las últimas 30 respuestas.
    Casi cuenta como medio acierto. Sube con > 85 %, baja con < 70 %. */
@@ -286,3 +360,9 @@ window.azTargetDifficulty = azTargetDifficulty;
 window.azPickExercises = azPickExercises;
 window.azRegistrarItem = azRegistrarItem;
 window.AZ_SEMAFORO = AZ_SEMAFORO;
+window.AZ_REPASO_DIAS = AZ_REPASO_DIAS;
+window.AZ_REGLA_FLOJA = AZ_REGLA_FLOJA;
+window.azRepasoAnotar = azRepasoAnotar;
+window.azRepasoPendiente = azRepasoPendiente;
+window.azReglasFlojas = azReglasFlojas;
+window.azSumarDias = azSumarDias;

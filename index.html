@@ -84,12 +84,16 @@ function App() {
   const [hoyUnidad, setHoyUnidad] = useState(null);
   const [hoyHecho, setHoyHecho] = useState(false);
   const [hoyAbierto, setHoyAbierto] = useState(false);
+  /* Repaso de hoy (19/10/2026): cuántas cosas tocan hoy (az_progress.srs) */
+  const [repasoN, setRepasoN] = useState(null);
   const leerHoy = async () => { const hs = await azGet("az_hoy", {}); setHoyHecho(hs.fecha === azHoyFecha() && !!hs.hecho); return hs; };
 
   useEffect(() => {
     (async () => {
       setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
       setUltimo(await azLeerUltimo());
+      { const pr = await azGet("az_progress", {}), srs = pr.srs || {}, hoy = new Date().toISOString().slice(0, 10);
+        setRepasoN(Object.keys(srs).filter(k => srs[k].p && srs[k].p <= hoy && k.indexOf("ej:") === 0).length); }
       const u = await azHoyUnidad(); setHoyUnidad(u);
       const hs = await leerHoy();
       /* Una vez por día, al abrir el inicio, si ya empezó alguna unidad */
@@ -149,7 +153,7 @@ function App() {
 
       /* ── SEGUIR ESTUDIANDO (el último módulo abierto, az_ultimo) y, a la
          derecha, la tarjeta «Hoy» (desafío del día, hoy.js) ── */
-      React.createElement("div", { style: { display: "flex", gap: 10, alignItems: "stretch", marginBottom: 26 } },
+      React.createElement("div", { style: { display: "flex", gap: 10, alignItems: "stretch", marginBottom: ultimo ? 10 : 26 } },
       (() => {
         const u = ultimo;
         const href = u ? u.href : "azbuka-1.html";
@@ -170,6 +174,19 @@ function App() {
         );
       })(),
       hoyUnidad && React.createElement(AzHoyTarjeta, { c, hecho: hoyHecho, alto: 92, onAbrir: () => setHoyAbierto(true) })
+      ),
+
+      /* ── REPASO DE HOY (19/10/2026, repaso.html): solo si ya empezó alguna unidad ── */
+      ultimo && React.createElement("a", {
+        className: "cont", href: "repaso.html", onClick: (e) => azNavigate(e, "repaso.html"),
+        style: { background: c.card, border: `1px solid ${repasoN ? c.gold + "66" : c.border}` }
+      },
+        React.createElement("div", { className: "cont-n", style: { background: repasoN ? c.gold : c.bg3, color: repasoN ? "#0F0F14" : c.textMuted } }, repasoN ? (repasoN > 99 ? "99+" : repasoN) : "✓"),
+        React.createElement("div", { style: { flex: 1, minWidth: 0 } },
+          React.createElement("div", { className: "cont-k", style: { color: c.gold } }, "Repaso de hoy"),
+          React.createElement("div", { className: "cont-t", style: { color: c.text } }, repasoN ? "Lo que estás por olvidar" : "Estás al día"),
+          React.createElement("div", { className: "cont-s", style: { color: c.textMuted } }, repasoN ? repasoN + " por repasar · sesiones de unos 10 minutos" : "Igual puedes practicar un poco de tu unidad")),
+        React.createElement("span", { style: { color: c.textMuted, fontSize: 20 } }, "›")
       ),
 
       /* ── BUSCADOR GENERAL ── */

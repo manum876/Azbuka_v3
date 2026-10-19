@@ -25,6 +25,7 @@
        onFin: lista => …          // al terminar: [{ id, tipo, parte, r, p }] con los puntos (0–1) de cada uno (06/10/2026)
        entiende: "medio"          // «Se entiende» vale medio punto (examen final, Manu 06/10/2026)
        enOrden: true              // los ejercicios del pool, en su orden (05/10/2026)
+       intro, salir, sinOtra      // «Repaso de hoy» (19/10/2026): texto de inicio, texto del botón de salir y sin «Otra sesión»
      })
    Modo evaluación: n ejercicios por parte, sin «Intentar de nuevo»;
    Bien = 1 punto, Casi = ½; guarda { pct, aprobado, fecha } en
@@ -675,7 +676,7 @@
     cadena: Cadena, diagnostico: Diagnostico, desarmar: DesarmarEj };
 
   /* ── Sesión ── */
-  function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar, enOrden, onFin, entiende }) {
+  function AzPractica({ unidad, titulo, pool, mezcla, n, dark, onSalir, aviso, examen, onReforzar, enOrden, onFin, entiende, intro, salir, sinOtra }) {
     const capa = useRef(null);   /* fondo sin scroll y ajuste al teclado (core.js, 05/10/2026) */
     const c = azColors(dark !== false);
     const [fase, setFase] = useState("inicio");     /* inicio · ej · fin */
@@ -714,7 +715,7 @@
     const anotar = (r, p) => {
       if (res[ej.id] != null) return;
       if (p != null) setPts(x => Object.assign({}, x, { [ej.id]: p }));
-      const reg = azRecordExercise(ej.id, r, unidad, ej.items);
+      const reg = azRecordExercise(ej.id, r, ej.unidad || unidad, ej.items, ej.regla);   /* ej.unidad: en «Repaso de hoy» cada ejercicio trae la suya (19/10/2026) */
       if (reg.cambios && reg.cambios.length) setCambios(x => x.concat(reg.cambios));
       const sol = ej.oir || (ej.forma !== "emparejar" && !Array.isArray(ej.audio) && ej.audio);   /* un diálogo no se repite entero */
       if (sol) setTimeout(() => hablar(sol), 450);   /* escuchar la respuesta siempre refuerza */
@@ -739,7 +740,7 @@
       cuerpo = h(React.Fragment, null,
         h("div", { className: "pr-kick" }, examen ? "Evaluación" : "Práctica"),
         h("div", { style: { fontSize: 26, fontWeight: 800, marginTop: 6, paddingRight: 48 } }, titulo),
-        h("div", { className: "pr-exp", style: { fontSize: 15 } }, examen ? examen.intro : (n || 12) + " ejercicios elegidos entre " + pool.length + ". Primero salen los que menos practicaste, y los que te costaron vuelven."),
+        h("div", { className: "pr-exp", style: { fontSize: 15 } }, examen ? examen.intro : intro || (n || 12) + " ejercicios elegidos entre " + pool.length + ". Primero salen los que menos practicaste, y los que te costaron vuelven."),
         aviso && h("div", { style: { marginTop: 14, background: c.gold + "14", border: `1px solid ${c.gold}66`, borderRadius: 10, padding: "12px 14px", fontSize: 14.5, lineHeight: 1.5, fontWeight: 600 } }, aviso),
         h("div", { className: "pr-pie" }, h("button", { className: "pr-btn", style: { width: "100%" }, onClick: empezar }, "Empezar")));
     } else if (fase === "ej" && ej) {
@@ -798,8 +799,8 @@
           : h("div", { className: "pr-exp", style: { marginTop: 18, fontSize: 15 } }, "Todo bien en esta sesión."),
         h(Semaforo, { cambios, c }),
         h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 10 } },
-          h("button", { className: "pr-btn", onClick: empezar }, "Otra sesión"),
-          h("button", { className: "pr-btn sec", onClick: onSalir }, "Volver a la unidad")));
+          !sinOtra && h("button", { className: "pr-btn", onClick: empezar }, "Otra sesión"),
+          h("button", { className: "pr-btn" + (sinOtra ? "" : " sec"), onClick: onSalir }, salir || "Volver a la unidad")));
     }
 
     return h("div", { className: "pr", role: "dialog", ref: azRefCapa(capa) },

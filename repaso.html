@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Азбука — Repaso de hoy</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="assets/icon-192.png">
+<link rel="stylesheet" href="assets/core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/preact.js"></script>
+<script src="data/data-lexicon.js"></script>
+<script src="js/core.js"></script>
+<script src="assets/supabase.js"></script>
+<script src="js/cuenta.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/corrector.js"></script>
+<script src="js/burbuja.js"></script>
+<script src="js/unidad-ui.js"></script>
+<script src="js/unidad.js"></script>
+<script src="js/hoy.js"></script>
+<script>
+/* ============================================================
+   REPASO.HTML — Repaso de hoy (19/10/2026, Contexto §6.22)
+   ------------------------------------------------------------
+   La sesión diaria con repaso espaciado (progress.js: srs, cajas de
+   1, 3, 7 y 14 días). Arma sola unos 12 ejercicios (~10 minutos):
+     · la regla del día: la regla más floja (2 Mal o más en 7 días) o,
+       si no hay, la regla que toca; su resumen y 2 ejercicios;
+     · lo que toca repasar (ejercicios y palabras de cualquier unidad
+       ya vista), hasta el 60 % de la sesión;
+     · el resto, de la unidad actual (la de az_ultimo), hasta el
+       módulo al que llegó.
+   Los datos de cada unidad se cargan al abrir la página (azHoyCargar,
+   hoy.js). El desafío del día sigue aparte, en el inicio.
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+const AZ_REPASO_N = 12, AZ_REPASO_PARTE = 0.6;
+const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
+
+/* El banco de una unidad, sin ampliaciones ni recorridos fijos; cada ejercicio con su unidad */
+function bancoDe(n) {
+  try {
+    const fn = window["ejerciciosUnidad" + n];
+    if (typeof fn !== "function") return [];
+    return fn().filter(e => !e.ampliacion && e.tipo !== "dia" && e.tipo !== "final").map(e => Object.assign({}, e, { unidad: n }));
+  } catch (e) { return []; }
+}
+const unidadDe = clave => { const m = /^ej:U(\d+)-/.exec(clave); return m ? Number(m[1]) : null; };
+
+/* Arma la sesión. Devuelve { lista, regla, cuentas } */
+async function armarSesion(ultimo) {
+  await azLoadProgress();
+  const actual = ultimo && ultimo.unidad && ultimo.unidad <= 13 ? ultimo.unidad : null;
+  const pend = azRepasoPendiente();
+  const flojas = azReglasFlojas();
+  const reglasPend = pend.filter(x => x.clave.indexOf("regla:") === 0);
+  const reglaId = flojas.length ? flojas[0].id : reglasPend.length ? reglasPend[0].clave.slice(6) : null;
+  const reglaU = flojas.length ? flojas[0].u : reglasPend.length ? reglasPend[0].u : null;
+  /* Unidades que hay que cargar */
+  const unidades = new Set();
+  if (actual) unidades.add(actual);
+  if (reglaU && reglaU <= 13) unidades.add(reglaU);
+  pend.slice(0, 60).forEach(x => { const u = x.u || unidadDe(x.clave); if (u && u <= 13) unidades.add(u); });
+  const bancos = {};
+  for (const n of [...unidades].sort((a, b) => a - b)) { await azHoyCargar(n); bancos[n] = bancoDe(n); }
+  const todos = [].concat(...Object.values(bancos));
+  const porId = new Map(todos.map(e => [e.id, e]));
+  const lista = [], usados = new Set(), grupos = new Set();
+  const libre = e => e && !usados.has(e.id) && !(e.grupo && grupos.has(e.unidad + ":" + e.grupo));
+  const tomar = (e, motivo) => { usados.add(e.id); if (e.grupo) grupos.add(e.unidad + ":" + e.grupo); lista.push(Object.assign({}, e, { motivo })); };
+  const cupoRepaso = Math.round(AZ_REPASO_N * AZ_REPASO_PARTE);
+  /* 1. La regla del día: 2 ejercicios de esa regla */
+  if (reglaId) azPickExercises(todos.filter(e => e.regla === reglaId), { n: 2, repaso: 0 }).forEach(e => libre(e) && tomar(e, "regla"));
+  /* 2. Los ejercicios que toca repasar, lo más atrasado primero */
+  pend.filter(x => x.clave.indexOf("ej:") === 0).forEach(x => {
+    const e = porId.get(x.clave.slice(3));
+    if (lista.length < cupoRepaso && libre(e)) tomar(e, "repaso");
+  });
+  /* 3. Las palabras y letras que tocan: un ejercicio que las practique */
+  pend.filter(x => /^(lex|alfabeto):/.test(x.clave)).forEach(x => {
+    if (lista.length >= cupoRepaso) return;
+    const e = azShuffle(todos.filter(y => (y.items || []).indexOf(x.clave) >= 0 && libre(y)))[0];
+    if (e) tomar(e, "repaso");
+  });
+  /* 4. La unidad actual, hasta el módulo al que llegó */
+  if (actual && bancos[actual]) {
+    const hasta = ultimo.n || 99;
+    const base = bancos[actual].filter(e => (e.modulo || 1) <= hasta && libre(e));
+    azPickExercises(base, { n: AZ_REPASO_N - lista.length, mezcla: window["U" + actual + "_MEZCLA"] || {}, dificultad: azTargetDifficulty(actual, 1), repaso: 0 })
+      .forEach(e => { if (lista.length < AZ_REPASO_N && libre(e)) tomar(e, "unidad"); });
+  }
+  /* El orden: la regla primero, después repaso y unidad mezclados */
+  const primero = lista.filter(e => e.motivo === "regla"), resto = azShuffle(lista.filter(e => e.motivo !== "regla"));
+  const manana = azSumarDias(azHoy(), 1);
+  const srs = AZ_PROGRESS.srs || {};
+  const cuentas = {
+    repaso: lista.filter(e => e.motivo === "repaso").length,
+    unidad: lista.filter(e => e.motivo === "unidad").length,
+    pendientes: pend.length,
+    manana: Object.keys(srs).filter(k => srs[k].p === manana).length,
+    aprendidos: Object.keys(srs).filter(k => srs[k].c === 5).length
+  };
+  return { lista: primero.concat(resto), regla: reglaId ? { id: reglaId, floja: flojas.length ? flojas[0].fallos : 0 } : null, cuentas, actual };
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [ultimo, setUltimo] = useState(undefined);
+  const [ses, setSes] = useState(null);
+  const [practica, setPractica] = useState(false);
+  const [verRegla, setVerRegla] = useState(false);
+  const [vuelta, setVuelta] = useState(0);
+  useEffect(() => { (async () => {
+    setDarkMode((await azGet("az_theme", "dark")) !== "light");
+    setUltimo(await azLeerUltimo());
+  })(); }, []);
+  useEffect(() => { if (ultimo === undefined) return; setSes(null); armarSesion(ultimo).then(setSes).catch(() => setSes({ error: true })); }, [ultimo, vuelta]);
+  const c = azColors(darkMode);
+  const green = darkMode ? "#4CAF82" : "#2E7D55";
+  const ir = href => e => azNavigate(e, href);
+
+  let cuerpo;
+  if (!ses) cuerpo = h("div", { className: "u-text", style: { marginTop: 18 } }, "Armando tu repaso…");
+  else if (ses.error) cuerpo = h("div", { className: "u-text", style: { marginTop: 18 } }, "No se pudo armar el repaso. Vuelve a intentarlo con conexión.");
+  else if (!ses.lista.length) cuerpo = h(React.Fragment, null,
+    h("div", { className: "u-card", style: { padding: "16px 18px", marginTop: 16 } },
+      h("div", { style: { fontSize: 17, fontWeight: 800 } }, ultimo ? "Hoy no hay nada para repasar." : "Todavía no hay nada para repasar."),
+      h("div", { className: "u-text", style: { fontSize: 14.5, marginTop: 6 } }, ultimo
+        ? "Lo que practicaste vuelve cuando toca: al día siguiente, a los 3 días, a los 7 y a los 14."
+        : "El repaso se arma con lo que vas practicando en las unidades. Empieza por la primera.")),
+    h("a", { className: "ubtn", href: ultimo ? ultimo.href : "azbuka-1.html", onClick: ir(ultimo ? ultimo.href : "azbuka-1.html"), style: { display: "block", textAlign: "center", textDecoration: "none", boxSizing: "border-box" } }, ultimo ? "Seguir con la unidad" : "Empezar la Unidad 1"));
+  else {
+    const r = ses.regla && typeof azRegla === "function" ? azRegla(ses.regla.id) : null;
+    const s = r && r.seccion;
+    const ej = s && s.ejemplos && s.ejemplos[0];
+    cuerpo = h(React.Fragment, null,
+      h("div", { className: "u-card", style: { padding: "14px 18px", marginTop: 16 } },
+        [["Para repasar", ses.cuentas.repaso + ses.lista.filter(e => e.motivo === "regla").length],
+         [ses.actual ? "De la Unidad " + ses.actual : "Nuevos", ses.cuentas.unidad]].map(([t, v], k) =>
+          h("div", { key: t, style: { display: "flex", justifyContent: "space-between", padding: "8px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 15 } },
+            h("span", { style: { fontWeight: 600 } }, t), h("span", { style: { fontWeight: 800, color: c.gold } }, v))),
+        h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 6, lineHeight: 1.5 } },
+          ses.lista.length + " ejercicios, unos 10 minutos." + (ses.cuentas.manana ? " Mañana vuelven " + ses.cuentas.manana + "." : "") + (ses.cuentas.aprendidos ? " Ya aprendiste " + ses.cuentas.aprendidos + "." : ""))),
+      s && h(React.Fragment, null,
+        h("div", { className: "u-sec" }, "La regla del día"),
+        h("div", { className: "u-card", style: { padding: "14px 18px" } },
+          h("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: 1.2, textTransform: "uppercase", color: c.textMuted } }, "Unidad " + r.unidad + " · " + r.modulo.titulo),
+          h("div", { style: { fontSize: 17, fontWeight: 800, marginTop: 4 } }, s.titulo),
+          ses.regla.floja > 0 && h("div", { style: { fontSize: 13, color: "#E2884A", fontWeight: 700, marginTop: 4 } }, "Te costó " + ses.regla.floja + " veces esta semana."),
+          s.destacado && h("div", { className: "u-dest", style: { marginTop: 10 } }, azFmt(s.destacado)),
+          ej && h("div", { style: { marginTop: 10, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: 10, padding: "10px 12px" } },
+            h("div", { lang: "ru", style: { fontSize: 16, fontWeight: 700 } }, String(ej.ru).replace(/[{}]/g, "")),
+            h("div", { style: { fontSize: 13.5, color: c.textMuted, marginTop: 2 } }, ej.es)),
+          h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => setVerRegla(true) }, "Ver la regla completa"))),
+      h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => setPractica(true) }, "Empezar"));
+  }
+
+  return h(React.Fragment, null,
+    h(AzEstilosUnidad, { c, green }),
+    h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
+      h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18, paddingBottom: 24 } },
+        h("div", { className: "u-kicker" }, "Hoy"),
+        h("h1", { className: "u-title" }, "Repaso de hoy"),
+        h("div", { className: "u-text", style: { marginTop: 8 } }, "Lo que estás por olvidar, de cualquier unidad, y un poco de la unidad en la que estás. Lo que sale bien vuelve más adelante; lo que sale mal, mañana."),
+        cuerpo)),
+    practica && ses && ses.lista && h(AzPractica, { key: "repaso-" + vuelta, unidad: ses.actual || 1, titulo: "Repaso de hoy", pool: ses.lista, enOrden: true, n: ses.lista.length,
+      dark: darkMode, aviso: AVISO_ACENTOS, sinOtra: true, salir: "Volver al repaso",
+      intro: ses.lista.length + " ejercicios: " + (ses.regla ? "primero la regla del día, después " : "") + "lo que toca repasar y un poco de la unidad actual. Lo que sale bien vuelve más adelante; lo que sale mal, mañana.",
+      onSalir: () => { setPractica(false); setVuelta(x => x + 1); } }),
+    verRegla && ses && ses.regla && h(AzHojaRegla, { id: ses.regla.id, c, onClose: () => setVerRegla(false), volver: "Volver al repaso" }),
+    h(AzBurbujaHost, { dark: darkMode }));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById("root"));
+</script>
+</body>
+</html>
