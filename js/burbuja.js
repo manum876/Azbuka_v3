@@ -85,7 +85,7 @@
     return h(React.Fragment, null,
       h("div", { className: "az-bb-top" },
         h("div", { className: "az-bb-ru", lang: "ru" }, e.acento || e.ru),
-        h("button", { className: "az-bb-play", "aria-label": "Escuchar", onClick: function () { azHablarRu(e.ru); } }, "▶")),
+        h("button", { className: "az-bb-play", "aria-label": "Escuchar", onClick: function () { azHablarRu(e.acento || e.ru); } }, "▶")),
       f && h("div", { className: "az-bb-forma" }, h("b", { lang: "ru" }, f.forma), " es " + f.etiquetas),
       e.translit && h("div", { className: "az-bb-tr az-tl" }, e.translit),
       e.ipa && h("div", { className: "az-bb-ipa" }, "IPA: /" + e.ipa.replace(/^\/|\/$/g, "") + "/"),

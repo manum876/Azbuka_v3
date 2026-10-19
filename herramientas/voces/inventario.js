@@ -105,7 +105,7 @@ if (GRUPO === "unidades" || GRUPO === "todo") {
     if (typeof fn === "function") { try { recorrer(fn(), pag, null, vistos); } catch (e) { console.log("  (aviso) ejercicios U" + n, e.message); } }
     literales(f, pag);
     if (fs.existsSync(path.join(APP, pag + ".html"))) literales(pag + ".html", pag);
-    (LEXICON_COMER || []).forEach(e => { if ((e.introducedIn || []).indexOf(n) >= 0) sumar(e.ru, null, pag); });
+    (LEXICON_COMER || []).forEach(e => { if ((e.introducedIn || []).indexOf(n) >= 0) sumar(e.acento || e.ru, null, pag); });
   }
   /* 3. Lo demás que se oye fuera de las unidades */
   [["data/data-frases.js", "dialogos"], ["data/data-cultura.js", "dialogos"], ["dialogos.html", "dialogos"],
@@ -114,6 +114,30 @@ if (GRUPO === "unidades" || GRUPO === "todo") {
     .forEach(([f, pag]) => { if (fs.existsSync(path.join(APP, f))) literales(f, pag); });
   // la charla la dice Masha
   if (ctx.CHARLA) recorrer(ctx.CHARLA, "charla", "masha", new Set());
+}
+
+/* Tanda 2 (17/10/2026): el Diccionario, cada entrada con su acento (la ficha, la burbuja y
+   las listas de vocabulario dicen e.acento). Sin página: no se bajan en segundo plano en bloque,
+   sino las de la ficha que se abre (azVozQuiero en core.js). */
+if (GRUPO === "diccionario" || GRUPO === "todo") {
+  (LEXICON_COMER || []).forEach(e => sumar(e.acento || e.ru, null, null));
+}
+
+/* Tanda 3 (17/10/2026): todas las formas de Casos y Verbos, como las muestran sus tablas,
+   el futuro compuesto (бу́ду + infinitivo, como lo arma verbos.html) y los ejemplos de gramática. */
+if (GRUPO === "formas" || GRUPO === "todo") {
+  const vistos = new Set();
+  if (ctx.CASOS) recorrer(ctx.CASOS, null, null, vistos);
+  if (ctx.VERBOS) recorrer(ctx.VERBOS, null, null, vistos);
+  const V = ctx.VERBOS || {};
+  const budu = (V["CMR-00006"] || {}).futuro || [];
+  const porId = new Map((LEXICON_COMER || []).map(e => [e.id, e]));
+  Object.keys(V).forEach(id => {
+    const v = V[id], lex = porId.get(id) || {};
+    if (!v.futuro && v.presente && lex.aspect !== "perfectivo") v.presente.forEach((pr, i) => { if (pr && budu[i]) sumar(budu[i] + " " + v.ru, null, null); });
+  });
+  ["data/data-gramatica.js", "casos.html", "verbos.html", "ficha.html"].forEach(f => { if (fs.existsSync(path.join(APP, f))) literales(f, null); });
+  if (fs.existsSync(path.join(APP, "data/data-gramatica.js"))) { cargar("data/data-gramatica.js", constantes("data/data-gramatica.js")); constantes("data/data-gramatica.js").forEach(c => { if (typeof ctx[c] !== "function") recorrer(ctx[c], null, null, vistos); }); }
 }
 
 const lista = [...textos.values()].map(x => ({ t: x.t, v: x.v, k: x.k, p: [...x.p] }));

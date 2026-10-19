@@ -242,6 +242,7 @@ function Forma({ text, extra }) {
 function FormaLinea({ text, tag }) {
   if (!text) return h("span", { className: "f-none" }, "—");
   const hit = FORMA_BUSCADA && azFormaClave(text) === FORMA_BUSCADA;
+  if (typeof azVozQuiero === "function") azVozQuiero(text);   /* su audio se baja en segundo plano (17/10/2026) */
   return h("div", { className: "f-cell" + (hit ? " f-hit" : ""), onClick: () => speakRu(text) },
     h("span", { className: "f-ru" }, text),
     tag && h("span", { className: "f-tag" }, tag),

@@ -537,6 +537,37 @@ function azCallar() {
     setTimeout(() => { try { s.cancel(); s.resume(); } catch (e) {} }, 60);
   } catch (e) {}
 }
+/* azVozQuiero(texto, quien?) (17/10/2026): «esto está en pantalla, puede que suene». Lo usan las tablas
+   de Casos y Verbos y la ficha del Diccionario: sus audios se bajan en segundo plano, de a uno, un
+   momento después de que se dibujó la pantalla (así no compiten con la carga). */
+const azVozCola = [], azVozEnCola = new Set();
+let azVozColaReloj = null, azVozColaCorriendo = false;
+function azVozQuiero(texto, quien) {
+  try {
+    if (!texto || typeof caches === "undefined") return;
+    const k = (quien || "") + "|" + texto;
+    if (azVozEnCola.has(k)) return;
+    azVozEnCola.add(k); azVozCola.push([texto, quien]);
+    clearTimeout(azVozColaReloj);
+    azVozColaReloj = setTimeout(azVozColaSeguir, 1500);
+  } catch (e) {}
+}
+async function azVozColaSeguir() {
+  if (azVozColaCorriendo) return;
+  azVozColaCorriendo = true;
+  try {
+    if (navigator.connection && navigator.connection.saveData) return;
+    await azVocesListo;
+    const c = await caches.open(AZ_VOCES_CACHE);
+    while (azVozCola.length) {
+      const [texto, quien] = azVozCola.shift();
+      const url = azVozUrl(texto, quien);
+      if (!url || await c.match(url)) continue;
+      try { const x = await fetch(url, { priority: "low" }); if (x.ok) await c.put(url, x); } catch (e) { break; }
+    }
+  } catch (e) {} finally { azVozColaCorriendo = false; }
+}
+
 /* Segundo plano: cuando la página terminó de cargar, se bajan sus audios (de a uno). */
 (function azVocesSegundoPlano() {
   if (typeof window === "undefined" || typeof caches === "undefined") return;

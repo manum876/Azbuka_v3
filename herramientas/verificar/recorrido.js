@@ -14,7 +14,7 @@ const PAGINAS = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?
   async function visitar(url, extra) {
     const p = await ctx.newPage(); const errs = [];
     p.on('pageerror', e => errs.push('JS: ' + e.message.slice(0, 200)));
-    p.on('response', r => { if (r.status() >= 400 && !r.url().endsWith('favicon.ico')) errs.push('Falta ' + r.url().replace(BASE, '')); });
+    p.on('response', r => { if (r.status() >= 400 && !r.url().endsWith('favicon.ico') && r.url().indexOf('/Azbuka_voces/') < 0 /* las voces viven en otro repo (Contexto §6.4) */) errs.push('Falta ' + r.url().replace(BASE, '')); });
     await p.goto(BASE + url, { waitUntil: 'networkidle', timeout: 60000 }).catch(e => errs.push('No abre: ' + e.message.slice(0, 80)));
     await p.waitForTimeout(400);
     const sw = await p.evaluate(() => document.documentElement.scrollWidth).catch(() => -1);

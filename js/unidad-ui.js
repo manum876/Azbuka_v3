@@ -345,7 +345,7 @@
         h("div", { style: { flex: 1, minWidth: 0 } },
           h("span", { className: "voc-ru" }, h(AzPalabra, { texto: e.acento || e.ru, id })), h("span", { className: "voc-tr az-tl" }, e.translit),
           h("div", { className: "voc-es" }, e.senses.slice(0, 2).map(x => x.es).join("; "))),
-        h("button", { className: "play", onClick: () => azHablarRu(e.ru), "aria-label": "Escuchar" }, "▶"));
+        h("button", { className: "play", onClick: () => azHablarRu(e.acento || e.ru), "aria-label": "Escuchar" }, "▶"));
     }));
   }
 
@@ -448,14 +448,14 @@
       h("div", { className: "sheet-in" },
         h("div", { className: "u-kicker" }, "Tarjetas · " + titulo),
         h("div", { style: { fontSize: 14, color: c.textMuted, marginBottom: 14 } }, (i + 1) + " de " + orden.length + (nv ? " · " + (nv === 2 ? "dominada" : "aprendiendo") : "")),
-        h("div", { className: "fc", role: "button", tabIndex: 0, onClick: () => { if (!vuelta && !nv) azSetItemLevel("lex:" + e.id, 1, true); if (!vuelta) azHablarRu(e.ru); setVuelta(v => !v); } },
+        h("div", { className: "fc", role: "button", tabIndex: 0, onClick: () => { if (!vuelta && !nv) azSetItemLevel("lex:" + e.id, 1, true); if (!vuelta) azHablarRu(e.acento || e.ru); setVuelta(v => !v); } },
           h("div", { lang: "ru", style: { fontSize: 38, fontWeight: 800, color: c.gold, lineHeight: 1.2, wordBreak: "break-word" } }, e.acento || e.ru),
           !vuelta ? h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, "Toca para ver qué significa")
             : h(React.Fragment, null,
                 h("div", { className: "az-tl", style: { fontSize: 15, color: c.textSub, fontStyle: "italic", marginTop: 8 } }, e.translit),
                 h("div", { style: { fontSize: 20, fontWeight: 700, color: c.text, marginTop: 12 } }, e.senses.slice(0, 2).map(x => x.es).join("; ")),
                 detalle && detalle(e) && h("div", { lang: "ru", style: { fontSize: 14.5, color: c.textSub, marginTop: 8 } }, detalle(e)),
-                h("button", { className: "play", style: { marginTop: 14 }, onClick: ev => { ev.stopPropagation(); azHablarRu(e.ru); }, "aria-label": "Escuchar" }, "▶"))),
+                h("button", { className: "play", style: { marginTop: 14 }, onClick: ev => { ev.stopPropagation(); azHablarRu(e.acento || e.ru); }, "aria-label": "Escuchar" }, "▶"))),
         h("div", { className: "fc-ctl" },
           h("button", { onClick: () => ir(-1) }, "‹ Anterior"),
           h("button", { onClick: () => { setOrden(orden.slice().sort(() => Math.random() - .5)); setI(0); setVuelta(false); } }, "Mezclar"),
@@ -485,7 +485,7 @@
       const prep = !cz ? e.acento : cz.tipo === "indeclinable" ? e.acento : cz.sg ? cz.sg[5] : cz.pl[5];
       return { e, prep, frase: "Я живу́ в " + prep + "." };
     };
-    const tocar = k => { const i = info(k); setSel(k); azHablarRu(i.e.ru); if (onTocar) onTocar(k, i); };
+    const tocar = k => { const i = info(k); setSel(k); azHablarRu(i.e.acento || i.e.ru); if (onTocar) onTocar(k, i); };
     const s = sel ? info(sel) : null;
     return h("div", null,
       h("div", { className: "toggle-row", style: { flexWrap: "wrap" } }, ["europa-oeste", "europa-este", "america-ciudades", "asia-este"].map(k =>
@@ -518,7 +518,7 @@
     const e = sel ? lexComerById(MAPA.paises[sel].lex) : null;
     const cz = e && typeof CASOS !== "undefined" && CASOS[e.id];
     const gen = cz ? (cz.tipo === "indeclinable" ? e.acento : cz.sg[1]) : "";
-    const tocar = iso => { setSel(iso); azHablarRu(lexComerById(MAPA.paises[iso].lex).ru); };
+    const tocar = iso => { setSel(iso); const ep = lexComerById(MAPA.paises[iso].lex); azHablarRu(ep.acento || ep.ru); };
     return h("div", null,
       h("div", { className: "toggle-row", style: { flexWrap: "wrap" } }, ["europa", "america", "asia", "africa", "oceania", "mundo"].map(k =>
         h("button", { key: k, className: "pair-btn", style: chipSt(c, vista === k), onClick: () => setVista(k) }, MAPA.vistas[k].titulo))),

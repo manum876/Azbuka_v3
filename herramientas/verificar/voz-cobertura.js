@@ -33,6 +33,10 @@ const { RAIZ, BASE, servir, navegador } = require("./comun.js");
   }
   for (const id of ["DLG-001", "DLG-010", "DLG-033", "DLG-034"]) await visitar("dialogos.html?id=" + id);
   await visitar("alfabeto.html");
+  for (const u of ["ficha.html?id=CMR-00230", "casos.html?id=CMR-00230", "verbos.html?id=CMR-00332", "casos.html?id=CMR-00058", "verbos.html?id=CMR-00006"]) await visitar(u);
+  // la cola de segundo plano de Casos y Verbos (azVozQuiero): cuántas formas en pantalla tienen audio
+  await p.goto(BASE + "verbos.html?id=CMR-00332"); await p.waitForTimeout(1200);
+  console.log("Cola de Verbos:", await p.evaluate(() => azVozEnCola.size + " formas en pantalla, " + [...azVozEnCola].filter(k => azVozUrl(k.split("|")[1], k.split("|")[0] || undefined)).length + " con audio"));
   console.log("Textos dichos:", total, "· sin audio:", faltan.size);
   [...faltan].slice(0, 40).forEach(([k, u]) => console.log("  ", k, "←", u));
   await b.close(); srv.close();

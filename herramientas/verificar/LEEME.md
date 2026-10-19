@@ -24,7 +24,7 @@ La primera vez, `correr-todo.sh` instala Playwright en esta carpeta (`npm instal
 | `sin-conexion.js` | Compara `AZ_PRECACHE` (`sw.js`) con los archivos del repo y con lo que piden las páginas; instala el service worker, corta la red y abre las pantallas principales. | ~1 min |
 | `pantallas.js` | Abre todas las pantallas a 375 × 667 (iPhone SE) en tema claro y busca contenido cortado o scroll horizontal. | ~5 min |
 | `cuentas.js` | Con un Supabase **falso** (`supabase-falso.js`, no toca el real): pantalla de entrada, mail no habilitado, código malo y bueno, subida del progreso, otro teléfono que lo baja, sin servidor con la sesión guardada, Ajustes → Accesos (habilitar y quitar), alguien que queda afuera y «Eliminar mi cuenta». | ~1 min |
-| `voz-cobertura.js` | Voces generadas (15/10/2026; aparte, no está en `correr-todo.sh`): arma la lista de `herramientas/voces/inventario.js`, abre cada módulo de cada unidad, toca todos los ▶ y lista lo que la app dice y no tiene audio (sonaría con la voz del teléfono). Hoy faltan, a propósito, las formas de las tablas de Casos y Verbos (tanda 3) y las horas de la U7. | ~3 min |
+| `voz-cobertura.js` | Voces generadas (15/10/2026; aparte, no está en `correr-todo.sh`): arma la lista de `herramientas/voces/inventario.js`, abre cada módulo de cada unidad, toca todos los ▶ y lista lo que la app dice y no tiene audio (sonaría con la voz del teléfono). Visita también una ficha, Casos y Verbos, y cuenta cuántas formas en pantalla tienen audio. Faltan, a propósito, lo que las páginas arman en el momento (horas de la U7, combinaciones de la U10 y la U11). | ~3 min |
 
 ## Qué no revisa (hay que mirarlo en el iPhone)
 

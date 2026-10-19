@@ -19,6 +19,7 @@ def para_silero(t):
     t = re.sub("([%s])́" % VOCALES, r"+\1", t).replace("́", "")
     t = re.sub(r"[«»\"„“”]", "", t)
     t = re.sub(r"\s*[→—–/]\s*", ", ", t)
+    t = re.sub(r"(?<![а-яё])[Ёё](?![а-яё+])", "йо", t, flags=re.I)   # la letra ё sola (Silero no la lee)
     return re.sub(r"\s+", " ", t).strip(" ,")
 
 def trozos(t, largo=180):
@@ -41,10 +42,17 @@ def audios(lista, v1, salida, parte, de):
     modelo, _ = torch.hub.load(repo_or_dir="snakers4/silero-models", model="silero_tts", language="ru", speaker="v5_5_ru", trust_repo=True)
     modelo.to(torch.device("cpu"))
     textos = [x for i, x in enumerate(lista["textos"]) if i % de == parte]
+    # 17/10/2026: lo que ya está publicado se lee del índice (así cada parte no baja el repo entero)
+    hay = set()
+    try:
+        ind = json.load(open(os.path.join(v1, "indice.json"), encoding="utf-8"))
+        hay = {(v, k) for v, ks in ind.get("voces", {}).items() for k in ks.split()}
+    except Exception:
+        pass
     hechos = fallas = 0
     inicio = time.time()
     for x in textos:
-        if os.path.exists(os.path.join(v1, x["v"], x["k"] + EXT)):
+        if (x["v"], x["k"]) in hay or os.path.exists(os.path.join(v1, x["v"], x["k"] + EXT)):
             continue
         destino = os.path.join(salida, x["v"], x["k"] + EXT)
         if os.path.exists(destino):
