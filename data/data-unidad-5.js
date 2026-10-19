@@ -278,7 +278,7 @@ const UNIDAD_5 = {
           chequeo: [{ pide: "¿Cuál suena natural?", opciones: ["Я всегда́ за́втракаю.", "Я за́втракаю всегда́ всегда́."], ok: "Я всегда́ за́втракаю.", por: "Всегда́ antes del verbo." }] }
       ] },
     { id: "u5m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Construir frases", resumen: "Verbo + acusativo: Мы смо́трим фильм.",
-      intro: "Ahora se junta todo: quién hace la acción, el verbo en su forma y lo que recibe la acción en acusativo, como en la Unidad 4.",
+      intro: "Ahora se junta todo: quién hace la acción, el verbo en su forma y lo que recibe la acción en acusativo.",
       secciones: [
         { id: "u5-tres-piezas", titulo: "Tres piezas",
           texto: "Cada pieza tiene su forma: el pronombre, el verbo según la persona y el objeto en acusativo.",

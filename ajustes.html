@@ -25,7 +25,7 @@
 /* ============================================================
    AJUSTES.HTML — Ajustes de la app (26/09/2026)
    Se abre desde el ⚙️ del pie del menú. Secciones: Transliteración
-   (02/10/2026, az_translit: "si" | "no", ver core.js) y Copia de
+   (02/10/2026, az_translit: "auto" | "si" | "no", ver core.js; "auto" desde el 19/10/2026) y Copia de
    seguridad (AzCopiaSeguridad, en core.js).
    14/10/2026: Cuenta (mail, progreso en la nube, cerrar sesión y
    eliminar la cuenta con todos los datos) y, solo para el admin,
@@ -108,7 +108,7 @@ function SeccionAccesos({ c }) {
 }
 function App() {
   const [darkMode, setDarkMode] = useState(true);
-  const [translit, setTranslit] = useState(azTranslitVisible() ? "si" : "no");
+  const [translit, setTranslit] = useState(azTranslitModo());
   useEffect(() => { (async () => setDarkMode((await azGet('az_theme', 'dark')) !== 'light'))(); }, []);
   const [esAdmin, setEsAdmin] = useState(false);
   useEffect(() => { if (window.AzCuenta && AzCuenta.activa) AzCuenta.comprobarAdmin().then(setEsAdmin); }, []);
@@ -131,8 +131,9 @@ function App() {
       lbl("Transliteración"),
       caja(
         h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
-          "La transliteración (", h("i", null, "jarashó"), ") ayuda a leer al principio. Cuando ya lees el cirílico, ocultarla te obliga a leer en ruso. Se sigue viendo en Alfabeto y en la Unidad 1, donde la pronunciación es lo que se aprende, y en los diálogos la puedes volver a prender cuando quieras."),
-        h("div", { style: { display: "flex", gap: 8, marginTop: 12 } }, chip("si", "Mostrar"), chip("no", "Ocultar"))),
+          "La transliteración (", h("i", null, "jarashó"), ") ayuda a leer al principio. Cuando ya lees el cirílico, ocultarla te obliga a leer en ruso. ",
+          h("b", { style: { color: c.text } }, "Automática:"), " se ve en las Unidades 1 a 3 y se oculta desde la 4 (en el Diccionario, Verbos, Casos y Diálogos, según la unidad en la que estás). Siempre se ve en Alfabeto y en la Unidad 1, donde la pronunciación es lo que se aprende, y en los diálogos la puedes volver a prender cuando quieras."),
+        h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("auto", "Automática"), chip("si", "Mostrar"), chip("no", "Ocultar"))),
       lbl("Copia de seguridad"),
       caja(h(AzCopiaSeguridad, { c }))));
 }

@@ -742,7 +742,9 @@ async function azGuardarEnCuaderno(texto, fuente) {
 /* ── BLINDAJE (02/10/2026) ───────────────────────────────────
    1. Service worker (sw.js): la app funciona sin internet y los datos
       se bajan una sola vez. Se registra desde todas las páginas.
-   2. Transliteración (Ajustes): az_translit = "si" | "no". Con "no",
+   2. Transliteración (Ajustes): az_translit = "auto" | "si" | "no" (sin valor = "auto",
+      19/10/2026: se muestra en las Unidades 1 a 3 y se oculta desde la 4; en los módulos
+      de apoyo, según la unidad en la que está el alumno, az_ultimo). Cuando no se ve,
       <html> lleva la clase az-sin-tl y core.css oculta todo lo que
       tiene la clase az-tl. Una página que siempre la muestra declara
       <html data-tl="siempre"> (Unidad 1 y Alfabeto: ahí la
@@ -751,15 +753,25 @@ async function azGuardarEnCuaderno(texto, fuente) {
 if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
   window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
 }
+const AZ_TRANSLIT_HASTA = 3;   /* modo automático: visible hasta la Unidad 3 (19/10/2026) */
+function azTranslitModo() {
+  try { const v = JSON.parse(localStorage.getItem("az_translit") || '"auto"'); return v === "si" || v === "no" ? v : "auto"; } catch (e) { return "auto"; }
+}
 function azTranslitVisible() {
   if (document.documentElement.getAttribute("data-tl") === "siempre") return true;
-  try { return JSON.parse(localStorage.getItem("az_translit") || '"si"') !== "no"; } catch (e) { return true; }
+  const modo = azTranslitModo();
+  if (modo !== "auto") return modo === "si";
+  const pag = /azbuka-(\d+)\.html/.exec(location.pathname);
+  let n = pag ? Number(pag[1]) : null;
+  if (n == null) { try { const u = JSON.parse(localStorage.getItem("az_ultimo") || "null"); n = u && u.unidad ? u.unidad : null; } catch (e) {} }
+  return n == null || n <= AZ_TRANSLIT_HASTA;
 }
 function azAplicarTranslit() {
   document.documentElement.classList.toggle("az-sin-tl", !azTranslitVisible());
 }
 azAplicarTranslit();
 window.azTranslitVisible = azTranslitVisible;
+window.azTranslitModo = azTranslitModo;
 window.azAplicarTranslit = azAplicarTranslit;
 window.azFirmaProgreso = azFirmaProgreso;
 

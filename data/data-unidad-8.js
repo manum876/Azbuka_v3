@@ -219,7 +219,7 @@ const UNIDAD_8 = {
               { ru: "жил → {жила́} → жи́ли", es: "vivió (él) → vivió (ella) → vivieron", por: "El acento va al final solo en femenino." },
               { ru: "спал → {спала́} → спа́ли", es: "durmió → durmió (ella) → durmieron", por: "Igual que жила́." },
               { ru: "пил → {пила́} → пи́ли", es: "tomó → tomó (ella) → tomaron", por: "Igual: пила́." }] },
-          chequeo: [{ pide: "А́нна ___ пи́ццу (есть).", opciones: ["е́ла", "есла", "е́ли"], ok: "е́ла", por: "есть es especial: ел, е́ла, е́ли." }] }
+          chequeo: [{ pide: "А́нна ___ пи́ццу (есть).", opciones: ["е́ла", "е́сла", "е́ли"], ok: "е́ла", por: "есть es especial: ел, е́ла, е́ли." }] }
       ] },
     { id: "u8m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Quién lo hizo", resumen: "Ива́н рабо́тал. А́нна рабо́тала.",
       intro: "El pasado no mira la persona sino quién es: un hombre, una mujer o varios. Eso cambia cómo hablas tú y cómo te hablan.",

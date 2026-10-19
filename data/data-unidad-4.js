@@ -215,7 +215,7 @@ const UNIDAD_4 = {
     { id: "u4m3", n: 3, tipo: "leccion", nPractica: 10, titulo: "Verbos de acción", resumen: "Я чита́ю, он чита́ет, мы чита́ем, они́ чита́ют.",
       intro: "Para que algo reciba una acción, primero hace falta la acción: el verbo. En ruso, el verbo cambia según quién la hace.",
       secciones: [
-        { titulo: "Cuatro formas por ahora", texto: "En esta unidad ves cuatro formas de cada verbo, una por pronombre: {я} (yo), он / она́ (él / ella, y también cualquier persona: ма́ма чита́ет), мы (nosotros) y они́ (ellos). Las formas de ты y вы llegan en la Unidad 5, junto con la conjugación completa." },
+        { titulo: "Cuatro formas por ahora", texto: "En esta unidad ves cuatro formas de cada verbo, una por pronombre: {я} (yo), он / она́ (él / ella, y también cualquier persona: ма́ма чита́ет), мы (nosotros) y они́ (ellos). Las formas de ты y вы llegan más adelante, junto con la conjugación completa." },
         { id: "u4-verbos-chitat", titulo: "El modelo de чита́ть",
           texto: "Muchos verbos siguen el modelo de чита́ть: se saca la **-ть** del infinitivo y se agrega la terminación de cada persona. Igual que él van понима́ть, изуча́ть, слу́шать, покупа́ть, де́лать, открыва́ть y закрыва́ть.",
           ejemplos: [
