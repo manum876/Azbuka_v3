@@ -110,7 +110,7 @@ if (GRUPO === "unidades" || GRUPO === "todo") {
   /* 3. Lo demás que se oye fuera de las unidades */
   [["data/data-frases.js", "dialogos"], ["data/data-cultura.js", "dialogos"], ["dialogos.html", "dialogos"],
    ["data/data-charla.js", "charla"], ["charla.html", "charla"], ["js/hoy.js", "index"], ["index.html", "index"],
-   ["data/data-alphabet.js", "alfabeto"], ["alfabeto.html", "alfabeto"], ["js/unidad-ui.js", null], ["js/unidad.js", null], ["js/mano.js", null]]
+   ["data/data-alphabet.js", "alfabeto"], ["data/data-lecturas.js", "lecturas"], ["alfabeto.html", "alfabeto"], ["js/unidad-ui.js", null], ["js/unidad.js", null], ["js/mano.js", null]]
     .forEach(([f, pag]) => { if (fs.existsSync(path.join(APP, f))) literales(f, pag); });
   // la charla la dice Masha
   if (ctx.CHARLA) recorrer(ctx.CHARLA, "charla", "masha", new Set());

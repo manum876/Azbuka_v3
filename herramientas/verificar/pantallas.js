@@ -28,7 +28,7 @@ const { BASE, servir, navegador } = require('./comun');
     });
     if (r.length || errs.length) problemas.push([url, r.concat(errs.map(x => 'JS: ' + x))]);
   }
-  const fijas = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?id=CMR-00058', 'verbos.html?id=CMR-00058', 'casos.html?id=CMR-00230', 'alfabeto.html', 'dialogos.html?id=DLG-001', 'cuaderno.html', 'ajustes.html'];
+  const fijas = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?id=CMR-00058', 'verbos.html?id=CMR-00058', 'casos.html?id=CMR-00230', 'alfabeto.html', 'dialogos.html?id=DLG-001', 'lecturas.html', 'lecturas.html?id=LEC-zima', 'cuaderno.html', 'ajustes.html'];
   for (const u of fijas) await revisar(u);
   for (let u = 1; u <= 14; u++) {
     await revisar('azbuka-' + u + '.html');
