@@ -22,7 +22,7 @@
   .ut{font-weight:700;font-size:14px;margin:22px 0 4px;max-width:82%;}
   .ud{font-size:11.5px;margin-bottom:10px;min-height:28px;line-height:1.4;}
   .goLbl{font-size:11.5px;font-weight:700;margin-top:auto;}   /* «Empezar →» siempre al pie de la tarjeta */
-  .uc-exam{grid-column:1 / -1;}
+  /* 20/10/2026 (Manu): el examen final va en una tarjeta igual a las demás, al lado de la U13 (antes ocupaba toda la fila) */
 </style>
 </head>
 <body>
@@ -74,7 +74,7 @@ function App() {
 
       React.createElement("div", { className: "ugrid" },
         units.map(u => unitCard(u)),
-        exam && unitCard(exam, "uc-exam")
+        exam && unitCard(exam)
       )
     )
   );
