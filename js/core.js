@@ -38,22 +38,25 @@ const AZ_UNITS = [
 const AZ_MODULES = [
   { id: "diccionario", title: "Diccionario", desc: "Todo el léxico, por tema y por categoría", href: "ficha.html", icon: "orange", glyph: "Сл" },
   { id: "alfabeto", title: "Alfabeto", desc: "Letras, sonidos y caligrafía — consulta libre", href: "alfabeto.html", icon: "yellow", glyph: "Аа" },
-  { id: "dialogos", title: "Diálogos", desc: "Conversaciones, frases útiles y notas culturales", href: "dialogos.html", icon: "green", glyph: "Ди" },
-  { id: "lecturas", title: "Lecturas", desc: "Textos para leer y entender, con preguntas", href: "lecturas.html", icon: "pink", glyph: "Чт" },
-  { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "cyan", glyph: "Вб" },
-  { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "blue", glyph: "Пд" },
-  { id: "cuaderno", title: "Cuaderno", desc: "Tus notas y lo que guardas desde la app", href: "cuaderno.html", icon: "purple", glyph: "Тд" },
+  { id: "dialogos", title: "Diálogos", desc: "Conversaciones, frases útiles y notas culturales", href: "dialogos.html", icon: "lime", glyph: "Ди" },
+  { id: "lecturas", title: "Lecturas", desc: "Textos para leer y entender, con preguntas", href: "lecturas.html", icon: "green", glyph: "Чт" },
+  { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "blue", glyph: "Вб" },
+  { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "purple", glyph: "Пд" },
+  { id: "cuaderno", title: "Cuaderno", desc: "Tus notas y lo que guardas desde la app", href: "cuaderno.html", icon: "pink", glyph: "Тд" },
 ];
 
 /* Colores de los íconos, en el orden del arcoíris (01/10/2026): Azbuka
    rojo, Diccionario naranja, Alfabeto amarillo, Diálogos verde, Verbos
    celeste, Casos azul, Cuaderno violeta. Sobre el amarillo, el texto va
    oscuro. Todas las páginas los toman de acá con azModuloColor.
-   19/10/2026: Lecturas, rosa (pink), el único color libre, entre Diálogos y Verbos. */
-const AZ_ICON_COLORS = { red: "#B5605C", orange: "#C48254", yellow: "#C9B369", green: "#5C9B78", cyan: "#5FA3B8", blue: "#5D7DA6", purple: "#8871A8", pink: "#B0688E" };
+   20/10/2026 (Manu): con Lecturas, el arcoíris se corre para que el rosa quede al
+   final. Orden y colores: Azbuka rojo · Diccionario naranja · Alfabeto amarillo ·
+   Diálogos lima · Lecturas verde · [Masha, módulo futuro: celeste, reservado] ·
+   Verbos azul · Casos violeta · Cuaderno rosa. Sobre el amarillo y el lima, el texto va oscuro. */
+const AZ_ICON_COLORS = { red: "#B5605C", orange: "#C48254", yellow: "#C9B369", lime: "#9BAA5C", green: "#5C9B78", cyan: "#5FA3B8", blue: "#5D7DA6", purple: "#8871A8", pink: "#B0688E" };
 function azModuloColor(m) {
   const k = m && m.icon;
-  return { bg: AZ_ICON_COLORS[k] || "#C9A84C", fg: k === "yellow" ? "#1A1812" : "#fff" };
+  return { bg: AZ_ICON_COLORS[k] || "#C9A84C", fg: k === "yellow" || k === "lime" ? "#1A1812" : "#fff" };
 }
 
 /* ── LÉXICO ──────────────────────────────────────────────────
@@ -476,6 +479,7 @@ function azVozDecir(turno, texto, quien, rate, alEmpezar, alTerminar) {
       u.onstart = () => { if (alEmpezar) alEmpezar(); };
       u.onend = () => { if (alTerminar) alTerminar(); };
       u.onerror = () => { if (alTerminar) alTerminar(); };
+      window.azVozFrase = u;   /* 20/10/2026: que no se pierda antes de terminar (Safari) */
       window.speechSynthesis.speak(u);
     } catch (e) { if (alTerminar) alTerminar(); }
   };

@@ -16,8 +16,1146 @@
    Decisión de Manu (19/10/2026): sin palabras nuevas en el
    diccionario; donde hacía falta, se reemplazaron por palabras vistas.
    Meta: 4 o 5 textos por unidad.
+   20/10/2026: 12 textos para las U2–U4 (preguntas en español: en
+   esas unidades todavía no se lee una pregunta en ruso). La U1 no
+   tiene lecturas (Manu). Largo (Manu): unas 20 palabras más por
+   unidad: U2 ~40, U3 ~60, U4 ~80, U5 ~100, U9 ~180, U13 ~250.
    ============================================================ */
 const LECTURAS = [
+ {
+  "id": "LEC-perfil",
+  "nivel": "A1",
+  "desde": 2,
+  "tema": "Presentarse",
+  "titulo": "Профи́ль Ма́ши",
+  "tituloEs": "El perfil de Masha",
+  "parrafos": [
+   {
+    "ru": "Приве́т! Меня́ зову́т Ма́ша. Я из Москвы́. Я студе́нтка.",
+    "es": "¡Hola! Me llamo Masha. Soy de Moscú y estudio en la universidad."
+   },
+   {
+    "ru": "Я говорю́ по-ру́сски и по-англи́йски. Я учу́ испа́нский. Испа́нский — краси́вый язы́к, но тру́дный.",
+    "es": "Hablo ruso e inglés. Estoy aprendiendo español: es un idioma bonito, pero difícil."
+   },
+   {
+    "ru": "Мой друг Лу́кас из Аргенти́ны. Он студе́нт. Он говори́т по-испа́нски и немно́го по-ру́сски. А мой брат Ди́ма говори́т то́лько по-ру́сски.",
+    "es": "Mi amigo Lucas es argentino. También es estudiante. Habla español y un poco de ruso. Mi hermano Dima, en cambio, solo habla ruso."
+   },
+   {
+    "ru": "А ты? Как тебя́ зову́т? Отку́да ты?",
+    "es": "¿Y tú? ¿Cómo te llamas? ¿De dónde eres?"
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-perfil-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿De dónde es Masha?",
+    "opciones": [
+     "Из Москвы́.",
+     "Из Аргенти́ны.",
+     "Из Испа́нии."
+    ],
+    "correcta": "Из Москвы́.",
+    "explicacion": "«Я из Москвы́»."
+   },
+   {
+    "id": "LEC-perfil-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué idioma estudia Masha?",
+    "opciones": [
+     "Испа́нский.",
+     "Англи́йский.",
+     "Ру́сский."
+    ],
+    "correcta": "Испа́нский.",
+    "explicacion": "«Я учу́ испа́нский»."
+   },
+   {
+    "id": "LEC-perfil-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo habla ruso Lucas?",
+    "opciones": [
+     "Un poco",
+     "Muy bien",
+     "Nada"
+    ],
+    "correcta": "Un poco",
+    "explicacion": "«Он говори́т… немно́го по-ру́сски»: un poco."
+   },
+   {
+    "id": "LEC-perfil-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Ди́ма говори́т по-англи́йски.",
+    "verdadero": false,
+    "explicacion": "«Ди́ма говори́т то́лько по-ру́сски»: solo ruso."
+   },
+   {
+    "id": "LEC-perfil-5",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "situacion",
+    "pide": "Contesta las preguntas de Masha: ¿cómo te llamas y de dónde eres?",
+    "sit": {
+     "necesita": [
+      {
+       "es": "cómo te llamas (Меня́ зову́т…)",
+       "formas": [
+        "меня́ зову́т",
+        "я"
+       ]
+      },
+      {
+       "es": "de dónde eres (Я из…)",
+       "formas": [
+        "из"
+       ]
+      }
+     ],
+     "modelos": [
+      "Меня́ зову́т Ана. Я из Испа́нии."
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "LEC-grupo",
+  "nivel": "A1",
+  "desde": 2,
+  "tema": "Presentarse",
+  "titulo": "Но́вая гру́ппа",
+  "tituloEs": "Grupo nuevo",
+  "parrafos": [
+   {
+    "ru": "— Здра́вствуйте! Меня́ зову́т О́льга Петро́вна. Я учи́тельница. А как вас зову́т?",
+    "es": "—¡Buenos días! Me llamo Olga Petrovna y soy la profesora. ¿Y ustedes cómo se llaman?"
+   },
+   {
+    "ru": "— Меня́ зову́т Лу́кас. Я из Аргенти́ны.",
+    "es": "—Yo soy Lucas, de Argentina."
+   },
+   {
+    "ru": "— О́чень прия́тно, Лу́кас. А вы?",
+    "es": "—Encantada, Lucas. ¿Y usted?"
+   },
+   {
+    "ru": "— Я А́нна. Я из Испа́нии, из Барсело́ны. Я говорю́ по-испа́нски и по-катала́нски.",
+    "es": "—Soy Anna. Vengo de España, de Barcelona. Hablo español y catalán."
+   },
+   {
+    "ru": "— Прекра́сно. А вы говори́те по-ру́сски?",
+    "es": "—Estupendo. ¿Y saben ruso?"
+   },
+   {
+    "ru": "— Да, немно́го. Мы у́чим ру́сский.",
+    "es": "—Sí, algo. Lo estamos aprendiendo."
+   },
+   {
+    "ru": "— Молодцы́!",
+    "es": "—¡Muy bien!"
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-grupo-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Quién es Olga Petrovna?",
+    "opciones": [
+     "La profesora",
+     "Una estudiante",
+     "La mamá de Anna"
+    ],
+    "correcta": "La profesora",
+    "explicacion": "«Я учи́тельница»."
+   },
+   {
+    "id": "LEC-grupo-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué idiomas habla Anna?",
+    "opciones": [
+     "Испа́нский и катала́нский",
+     "Англи́йский",
+     "То́лько ру́сский"
+    ],
+    "correcta": "Испа́нский и катала́нский",
+    "explicacion": "«Я говорю́ по-испа́нски и по-катала́нски»."
+   },
+   {
+    "id": "LEC-grupo-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "О́льга Петро́вна говори́т «ты».",
+    "verdadero": false,
+    "explicacion": "Les habla de «вы»: «А как вас зову́т?», «А вы говори́те по-ру́сски?»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-kafe",
+  "nivel": "A1",
+  "desde": 2,
+  "tema": "Saludar",
+  "titulo": "В кафе́",
+  "tituloEs": "En el café",
+  "parrafos": [
+   {
+    "ru": "— Приве́т, Ма́ша! Как дела́?",
+    "es": "—¡Hola, Masha! ¿Qué tal?"
+   },
+   {
+    "ru": "— Приве́т! Хорошо́, спаси́бо. А у тебя́?",
+    "es": "—¡Hola! Bien, gracias. ¿Y tú?"
+   },
+   {
+    "ru": "— То́же хорошо́. Э́то мой брат.",
+    "es": "—Bien también. Te presento a mi hermano."
+   },
+   {
+    "ru": "— О́чень прия́тно! Как тебя́ зову́т?",
+    "es": "—¡Mucho gusto! ¿Cómo te llamas?"
+   },
+   {
+    "ru": "— Меня́ зову́т Ди́ма. А тебя́?",
+    "es": "—Dima. ¿Y tú?"
+   },
+   {
+    "ru": "— Меня́ зову́т Лу́кас. Я из Аргенти́ны.",
+    "es": "—Yo me llamo Lucas. Soy argentino."
+   },
+   {
+    "ru": "— Ты говори́шь по-ру́сски?",
+    "es": "—¿Sabes ruso?"
+   },
+   {
+    "ru": "— Да, немно́го. Я учу́ ру́сский.",
+    "es": "—Sí, un poco. Lo estoy estudiando."
+   },
+   {
+    "ru": "— Молоде́ц!",
+    "es": "—¡Bravo!"
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-kafe-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Quién es Dima?",
+    "opciones": [
+     "El hermano de Masha",
+     "Un profesor",
+     "Un amigo de Argentina"
+    ],
+    "correcta": "El hermano de Masha",
+    "explicacion": "Masha dice «Э́то мой брат»."
+   },
+   {
+    "id": "LEC-kafe-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo está Masha?",
+    "opciones": [
+     "Хорошо́.",
+     "Пло́хо.",
+     "Так себе."
+    ],
+    "correcta": "Хорошо́.",
+    "explicacion": "«Хорошо́, спаси́бо»."
+   },
+   {
+    "id": "LEC-kafe-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Лу́кас из Москвы́.",
+    "verdadero": false,
+    "explicacion": "«Я из Аргенти́ны»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-carta",
+  "nivel": "A1",
+  "desde": 2,
+  "tema": "Presentarse",
+  "titulo": "Письмо́",
+  "tituloEs": "Una carta",
+  "parrafos": [
+   {
+    "ru": "Здра́вствуйте!",
+    "es": "¡Hola!"
+   },
+   {
+    "ru": "Меня́ зову́т А́нна. Я из Барсело́ны. Я говорю́ по-испа́нски, по-катала́нски и по-англи́йски.",
+    "es": "Me llamo Anna y soy de Barcelona. Hablo español, catalán e inglés."
+   },
+   {
+    "ru": "По-ру́сски я говорю́ пло́хо, но я учу́ ру́сский. Ру́сский язы́к — о́чень интере́сный. Мой друг Лу́кас то́же у́чит ру́сский. Он из Аргенти́ны.",
+    "es": "Mi ruso todavía es malo, pero lo estoy aprendiendo: es una lengua muy interesante. Mi amigo Lucas, que es argentino, también lo estudia."
+   },
+   {
+    "ru": "А как вас зову́т? Отку́да вы?",
+    "es": "¿Y tú cómo te llamas? ¿De dónde eres?"
+   },
+   {
+    "ru": "До свида́ния!",
+    "es": "¡Hasta pronto!"
+   },
+   {
+    "ru": "А́нна",
+    "es": "Anna"
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-carta-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué idiomas habla Anna?",
+    "opciones": [
+     "Испа́нский, катала́нский и англи́йский",
+     "То́лько ру́сский",
+     "Ру́сский и англи́йский"
+    ],
+    "correcta": "Испа́нский, катала́нский и англи́йский",
+    "explicacion": "«Я говорю́ по-испа́нски, по-катала́нски и по-англи́йски»."
+   },
+   {
+    "id": "LEC-carta-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "А́нна хорошо́ говори́т по-ру́сски.",
+    "verdadero": false,
+    "explicacion": "«По-ру́сски я говорю́ пло́хо»."
+   },
+   {
+    "id": "LEC-carta-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Quién más estudia ruso?",
+    "opciones": [
+     "Lucas",
+     "Masha",
+     "Olga"
+    ],
+    "correcta": "Lucas",
+    "explicacion": "«Мой друг Лу́кас то́же у́чит ру́сский»."
+   },
+   {
+    "id": "LEC-carta-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "situacion",
+    "pide": "Contesta la carta de Anna: dile cómo te llamas y de dónde eres.",
+    "sit": {
+     "necesita": [
+      {
+       "es": "tu nombre (Меня́ зову́т…)",
+       "formas": [
+        "меня́ зову́т",
+        "я"
+       ]
+      },
+      {
+       "es": "de dónde eres (Я из…)",
+       "formas": [
+        "из"
+       ]
+      }
+     ],
+     "modelos": [
+      "Меня́ зову́т Ма́рта. Я из Испа́нии."
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "LEC-piso",
+  "nivel": "A1",
+  "desde": 3,
+  "tema": "La casa",
+  "titulo": "Моя́ кварти́ра",
+  "tituloEs": "Mi apartamento",
+  "parrafos": [
+   {
+    "ru": "Вот моя́ кварти́ра. Она́ ма́ленькая, но краси́вая и о́чень све́тлая.",
+    "es": "Este es mi apartamento. Es pequeño, pero bonito y con mucha luz."
+   },
+   {
+    "ru": "Вот ко́мната. Тут стол, стул, крова́ть и шкаф. Стол но́вый, а стул ста́рый. Окно́ большо́е, а ла́мпа ма́ленькая и бе́лая.",
+    "es": "Aquí está la habitación, con una mesa, una silla, una cama y un armario. La mesa es nueva; la silla, vieja. La ventana es grande, y la lámpara, pequeña y blanca."
+   },
+   {
+    "ru": "Вот ку́хня. Она́ бе́лая и о́чень ую́тная. Тут холоди́льник и плита́. Холоди́льник ста́рый, но хоро́ший.",
+    "es": "Esta es la cocina: blanca y muy acogedora. Tiene nevera y cocina. La nevera ya tiene años, pero funciona bien."
+   },
+   {
+    "ru": "А э́то мой кот. Он чёрный и уже́ ста́рый. Его́ зову́т Ба́рсик.",
+    "es": "Y este es mi gato. Es negro y ya es mayor. Se llama Bársik."
+   },
+   {
+    "ru": "Ря́дом парк и магази́н.",
+    "es": "Cerca hay un parque y una tienda."
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-piso-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo es el piso?",
+    "opciones": [
+     "Ма́ленькая, но краси́вая",
+     "Больша́я и ста́рая",
+     "Но́вая и тёмная"
+    ],
+    "correcta": "Ма́ленькая, но краси́вая",
+    "explicacion": "«Она́ ма́ленькая, но краси́вая и о́чень све́тлая»."
+   },
+   {
+    "id": "LEC-piso-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Стул но́вый.",
+    "verdadero": false,
+    "explicacion": "«Стол но́вый, а стул ста́рый»."
+   },
+   {
+    "id": "LEC-piso-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué es viejo en la cocina?",
+    "opciones": [
+     "Холоди́льник",
+     "Плита́",
+     "Ла́мпа"
+    ],
+    "correcta": "Холоди́льник",
+    "explicacion": "«Холоди́льник ста́рый, но хоро́ший»."
+   },
+   {
+    "id": "LEC-piso-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo se llama el gato?",
+    "opciones": [
+     "Ба́рсик",
+     "Рекс",
+     "Му́рка"
+    ],
+    "correcta": "Ба́рсик",
+    "explicacion": "«Его́ зову́т Ба́рсик»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-anuncio",
+  "nivel": "A1",
+  "desde": 3,
+  "tema": "La casa",
+  "titulo": "Объявле́ние",
+  "tituloEs": "Un anuncio",
+  "parrafos": [
+   {
+    "ru": "Хоро́шая кварти́ра!",
+    "es": "¡Un buen apartamento!"
+   },
+   {
+    "ru": "Кварти́ра больша́я и све́тлая. Ко́мнаты больши́е и тёплые. Ку́хня но́вая и удо́бная. Холоди́льник и плита́ то́же но́вые. Ва́нная ма́ленькая, но краси́вая. О́кна больши́е, балко́н то́же большо́й.",
+    "es": "Es grande y luminoso. Las habitaciones son amplias y cálidas. La cocina, nueva y práctica, y también la nevera y los fogones están a estrenar. El baño es pequeño, pero bonito. Tiene ventanales y un balcón grande."
+   },
+   {
+    "ru": "Ме́бель но́вая: дива́н, кре́сло, стол и сту́лья. Дива́н большо́й и мя́гкий.",
+    "es": "Los muebles son nuevos: sofá, sillón, mesa y sillas. El sofá es amplio y blando."
+   },
+   {
+    "ru": "Дом но́вый. Тут лифт и гара́ж. Сосе́ди хоро́шие.",
+    "es": "El edificio es nuevo, con ascensor y garaje. Los vecinos son amables."
+   },
+   {
+    "ru": "Ря́дом метро́, парк, шко́ла и магази́н. Райо́н ти́хий и зелёный.",
+    "es": "Al lado hay metro, un parque, un colegio y una tienda. El barrio es tranquilo y verde."
+   },
+   {
+    "ru": "Цена́ ни́зкая.",
+    "es": "Y el precio, bajo."
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-anuncio-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Ва́нная больша́я.",
+    "verdadero": false,
+    "explicacion": "«Ва́нная ма́ленькая, но краси́вая»."
+   },
+   {
+    "id": "LEC-anuncio-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo es el barrio?",
+    "opciones": [
+     "Ти́хий и зелёный",
+     "Шу́мный",
+     "Ста́рый"
+    ],
+    "correcta": "Ти́хий и зелёный",
+    "explicacion": "«Райо́н ти́хий и зелёный»."
+   },
+   {
+    "id": "LEC-anuncio-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué hay en el edificio?",
+    "opciones": [
+     "Лифт и гара́ж",
+     "Парк и шко́ла",
+     "Метро́"
+    ],
+    "correcta": "Лифт и гара́ж",
+    "explicacion": "«Тут лифт и гара́ж». El metro y el parque están al lado."
+   },
+   {
+    "id": "LEC-anuncio-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo es el sofá?",
+    "opciones": [
+     "Большо́й и мя́гкий",
+     "Ма́ленький и ста́рый",
+     "Бе́лый"
+    ],
+    "correcta": "Большо́й и мя́гкий",
+    "explicacion": "«Дива́н большо́й и мя́гкий»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-mochila",
+  "nivel": "A1",
+  "desde": 3,
+  "tema": "Objetos",
+  "titulo": "Мой рюкза́к",
+  "tituloEs": "Mi mochila",
+  "parrafos": [
+   {
+    "ru": "Вот мой рюкза́к. Он си́ний и о́чень большо́й.",
+    "es": "Esta es mi mochila. Es azul y enorme."
+   },
+   {
+    "ru": "Тут кни́ги, тетра́ди, ру́чки и карандаши́. Кни́ги тяжёлые, а тетра́ди лёгкие. Ру́чки си́ние и чёрные. Вот слова́рь. Он большо́й и тяжёлый.",
+    "es": "Dentro llevo libros, cuadernos, bolígrafos y lápices. Los libros pesan; los cuadernos, no. Los bolígrafos son azules y negros. Y aquí está el diccionario: grande y pesado."
+   },
+   {
+    "ru": "Вот мой телефо́н. Он но́вый и дорого́й. А э́то мои́ очки́. Они́ ста́рые, но хоро́шие.",
+    "es": "Este es mi teléfono, nuevo y caro. Y estas, mis gafas: viejas, pero buenas."
+   },
+   {
+    "ru": "Ещё тут ключи́, кошелёк и зонт. Кошелёк кра́сный, а зонт чёрный.",
+    "es": "También llevo las llaves, la cartera y el paraguas. La cartera es roja, y el paraguas, negro."
+   },
+   {
+    "ru": "И ещё я́блоко. Оно́ кра́сное и вку́сное.",
+    "es": "Y una manzana roja y rica."
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-mochila-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿De qué color es la mochila?",
+    "opciones": [
+     "Си́ний",
+     "Чёрный",
+     "Кра́сный"
+    ],
+    "correcta": "Си́ний",
+    "explicacion": "«Он си́ний и о́чень большо́й». Lo rojo es la cartera y la manzana."
+   },
+   {
+    "id": "LEC-mochila-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Кни́ги лёгкие.",
+    "verdadero": false,
+    "explicacion": "«Кни́ги тяжёлые, а тетра́ди лёгкие»."
+   },
+   {
+    "id": "LEC-mochila-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo son las gafas?",
+    "opciones": [
+     "Ста́рые, но хоро́шие",
+     "Но́вые и дороги́е",
+     "Чёрные"
+    ],
+    "correcta": "Ста́рые, но хоро́шие",
+    "explicacion": "«Они́ ста́рые, но хоро́шие»."
+   },
+   {
+    "id": "LEC-mochila-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué es negro?",
+    "opciones": [
+     "Зонт",
+     "Кошелёк",
+     "Я́блоко"
+    ],
+    "correcta": "Зонт",
+    "explicacion": "«Кошелёк кра́сный, а зонт чёрный»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-suvenir",
+  "nivel": "A1",
+  "desde": 3,
+  "tema": "Objetos",
+  "titulo": "Сувени́ры",
+  "tituloEs": "Recuerdos",
+  "parrafos": [
+   {
+    "ru": "Вот ку́клы. Они́ краси́вые и ра́зные: больши́е и ма́ленькие.",
+    "es": "Aquí están las muñecas: bonitas y de todos los tamaños."
+   },
+   {
+    "ru": "Вот ча́йник. Он ста́рый и о́чень дорого́й.",
+    "es": "Esta tetera es antigua y carísima."
+   },
+   {
+    "ru": "А э́то ша́пка. Она́ тёплая и мя́гкая. Ша́пка бе́лая, а шарф кра́сный.",
+    "es": "Este gorro es abrigado y suave. El gorro es blanco, y la bufanda, roja."
+   },
+   {
+    "ru": "Вот ча́шки. Они́ бе́лые и си́ние. А э́то ло́жки. Они́ ма́ленькие и о́чень краси́вые.",
+    "es": "Aquí hay tazas, blancas y azules, y cucharas, pequeñas y preciosas."
+   },
+   {
+    "ru": "Тут ещё кни́га и календа́рь. Кни́га ру́сская, а календа́рь но́вый. Вот откры́тки. Они́ ста́рые, но о́чень интере́сные.",
+    "es": "También hay un libro ruso y un calendario nuevo. Y unas postales antiguas, muy curiosas."
+   },
+   {
+    "ru": "Э́то хоро́шие пода́рки!",
+    "es": "¡Son buenos regalos!"
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-suvenir-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo es la tetera?",
+    "opciones": [
+     "Ста́рый и дорого́й",
+     "Но́вый и дешёвый",
+     "Ма́ленький и бе́лый"
+    ],
+    "correcta": "Ста́рый и дорого́й",
+    "explicacion": "«Он ста́рый и о́чень дорого́й»."
+   },
+   {
+    "id": "LEC-suvenir-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Шарф бе́лый.",
+    "verdadero": false,
+    "explicacion": "«Ша́пка бе́лая, а шарф кра́сный»."
+   },
+   {
+    "id": "LEC-suvenir-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo son las cucharas?",
+    "opciones": [
+     "Ма́ленькие и краси́вые",
+     "Больши́е",
+     "Си́ние"
+    ],
+    "correcta": "Ма́ленькие и краси́вые",
+    "explicacion": "«Они́ ма́ленькие и о́чень краси́вые»."
+   },
+   {
+    "id": "LEC-suvenir-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo son las postales?",
+    "opciones": [
+     "Ста́рые и интере́сные",
+     "Но́вые",
+     "Ру́сские"
+    ],
+    "correcta": "Ста́рые и интере́сные",
+    "explicacion": "«Они́ ста́рые, но о́чень интере́сные»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-tarde",
+  "nivel": "A1",
+  "desde": 4,
+  "tema": "La familia",
+  "titulo": "Ве́чер до́ма",
+  "tituloEs": "Una tarde en casa",
+  "parrafos": [
+   {
+    "ru": "Ве́чер. Вся семья́ до́ма.",
+    "es": "Es de noche y toda la familia está en casa."
+   },
+   {
+    "ru": "Па́па чита́ет газе́ту. Ма́ма слу́шает му́зыку и пьёт чай.",
+    "es": "Papá lee el diario. Mamá escucha música con un té."
+   },
+   {
+    "ru": "Ма́ша чита́ет кни́гу. Она́ лю́бит рома́ны. Ди́ма смо́трит футбо́л. Он о́чень лю́бит спорт.",
+    "es": "Masha lee un libro: le encantan las novelas. Dima mira el fútbol, porque le apasiona el deporte."
+   },
+   {
+    "ru": "А ба́бушка пи́шет письмо́. Она́ лю́бит пи́сьма и не лю́бит телефо́н.",
+    "es": "La abuela escribe una carta. Le gustan las cartas y no soporta el teléfono."
+   },
+   {
+    "ru": "Де́душка гото́вит у́жин: суп и ры́бу. Ма́ма и Ма́ша лю́бят ры́бу, а Ди́ма не лю́бит.",
+    "es": "El abuelo prepara la cena: sopa y pescado. A mamá y a Masha les gusta el pescado; a Dima, no."
+   },
+   {
+    "ru": "Пото́м ма́ма и па́па смо́трят фильм. Ма́ша пьёт молоко́, а Ди́ма ест торт. Де́душка чита́ет журна́л.",
+    "es": "Después, mamá y papá ven una película. Masha toma leche y Dima come tarta. El abuelo hojea una revista."
+   },
+   {
+    "ru": "А ко́шка спит. Она́ лю́бит ве́чер и дива́н.",
+    "es": "Y la gata duerme. Le gustan la noche y el sofá."
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-tarde-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué lee papá?",
+    "opciones": [
+     "Газе́ту",
+     "Кни́гу",
+     "Журна́л"
+    ],
+    "correcta": "Газе́ту",
+    "explicacion": "«Па́па чита́ет газе́ту»: газе́та → газе́ту."
+   },
+   {
+    "id": "LEC-tarde-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Quién prepara la cena?",
+    "opciones": [
+     "Де́душка",
+     "Ма́ма",
+     "Ба́бушка"
+    ],
+    "correcta": "Де́душка",
+    "explicacion": "«Де́душка гото́вит у́жин»."
+   },
+   {
+    "id": "LEC-tarde-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Ди́ма лю́бит ры́бу.",
+    "verdadero": false,
+    "explicacion": "«Ма́ма и Ма́ша лю́бят ры́бу, а Ди́ма не лю́бит»."
+   },
+   {
+    "id": "LEC-tarde-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué no le gusta a la abuela?",
+    "opciones": [
+     "Телефо́н",
+     "Пи́сьма",
+     "Му́зыка"
+    ],
+    "correcta": "Телефо́н",
+    "explicacion": "«Она́ лю́бит пи́сьма и не лю́бит телефо́н»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-compra",
+  "nivel": "A1",
+  "desde": 4,
+  "tema": "Comida",
+  "titulo": "Поку́пки",
+  "tituloEs": "La compra",
+  "parrafos": [
+   {
+    "ru": "Сего́дня суббо́та. Лу́кас покупа́ет еду́. Он берёт хлеб, сыр, ры́бу и мя́со.",
+    "es": "Es sábado y Lucas hace la compra: pan, queso, pescado y carne."
+   },
+   {
+    "ru": "Ещё он покупа́ет во́ду, молоко́ и сок. Он о́чень лю́бит сок.",
+    "es": "Además se lleva agua, leche y zumo, que le encanta."
+   },
+   {
+    "ru": "Он не пьёт ко́фе, но покупа́ет ко́фе. Почему́? Его́ друг Ди́ма лю́бит ко́фе. Ди́ма пьёт ко́фе у́тром и ве́чером.",
+    "es": "No toma café, pero compra un paquete. ¿Por qué? Porque a su amigo Dima le gusta mucho: lo toma por la mañana y por la noche."
+   },
+   {
+    "ru": "В магази́не он ви́дит Ма́шу. Ма́ша покупа́ет хлеб и я́блоки. Лу́кас берёт ещё сыр: Ма́ша лю́бит сыр.",
+    "es": "En la tienda se encuentra con Masha, que compra pan y manzanas. Lucas compra más queso: a Masha le encanta."
+   },
+   {
+    "ru": "Лу́кас ещё берёт торт. Ве́чером он ждёт Ма́шу и Ди́му. Они́ то́же лю́бят торт.",
+    "es": "También compra una tarta. Esta noche espera a Masha y a Dima, y a ellos también les gusta."
+   },
+   {
+    "ru": "А Ма́ша и Ди́ма покупа́ют цветы́ и вино́.",
+    "es": "Masha y Dima, por su parte, compran flores y vino."
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-compra-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué no toma Lucas?",
+    "opciones": [
+     "Ко́фе",
+     "Сок",
+     "Молоко́"
+    ],
+    "correcta": "Ко́фе",
+    "explicacion": "«Он не пьёт ко́фе»."
+   },
+   {
+    "id": "LEC-compra-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Para quién es el café?",
+    "opciones": [
+     "Para Dima",
+     "Para Masha",
+     "Para Lucas"
+    ],
+    "correcta": "Para Dima",
+    "explicacion": "«Его́ друг Ди́ма лю́бит ко́фе»."
+   },
+   {
+    "id": "LEC-compra-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿A quién ve Lucas en la tienda?",
+    "opciones": [
+     "Ма́шу",
+     "Ди́му",
+     "Ма́му"
+    ],
+    "correcta": "Ма́шу",
+    "explicacion": "«Он ви́дит Ма́шу»: Ма́ша → Ма́шу."
+   },
+   {
+    "id": "LEC-compra-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Ма́ша и Ди́ма покупа́ют торт.",
+    "verdadero": false,
+    "explicacion": "La tarta la compra Lucas; ellos compran «цветы́ и вино́»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-mascotas",
+  "nivel": "A1",
+  "desde": 4,
+  "tema": "Animales",
+  "titulo": "Соба́ка и ко́шка",
+  "tituloEs": "El perro y la gata",
+  "parrafos": [
+   {
+    "ru": "Ди́ма лю́бит соба́ку, а Ма́ша лю́бит ко́шку. Соба́ку зову́т Рекс, а ко́шку — Му́рка.",
+    "es": "Dima adora al perro, y Masha, a la gata. El perro se llama Rex, y la gata, Murka."
+   },
+   {
+    "ru": "Рекс большо́й и весёлый. Он лю́бит парк и мяч. Му́рка ма́ленькая и ти́хая. Она́ лю́бит дива́н и спит весь день.",
+    "es": "Rex es grande y alegre; le encantan el parque y la pelota. Murka es pequeña y tranquila: le gusta el sofá y se pasa el día durmiendo."
+   },
+   {
+    "ru": "Соба́ка лю́бит мя́со. Ко́шка лю́бит молоко́ и ры́бу. Ма́ма покупа́ет мя́со и ры́бу.",
+    "es": "El perro prefiere la carne; a la gata, la leche y el pescado. Mamá compra carne y pescado."
+   },
+   {
+    "ru": "Ди́ма и Рекс гуля́ют ка́ждый день. Рекс лю́бит Ди́му, а Му́рка лю́бит Ма́шу и ма́му. Па́па не лю́бит ко́шку, но ко́шка лю́бит па́пу!",
+    "es": "Dima y Rex salen a pasear todos los días. Rex quiere a Dima, y Murka, a Masha y a mamá. Papá no soporta a la gata, ¡pero ella lo adora!"
+   },
+   {
+    "ru": "Ве́чером соба́ка ждёт па́пу. А ко́шка смо́трит в окно́ и ждёт ма́му.",
+    "es": "Por la tarde, el perro espera a papá. Y la gata mira por la ventana esperando a mamá."
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-mascotas-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo es Rex?",
+    "opciones": [
+     "Большо́й и весёлый",
+     "Ма́ленький и ти́хий",
+     "Ста́рый"
+    ],
+    "correcta": "Большо́й и весёлый",
+    "explicacion": "«Рекс большо́й и весёлый»."
+   },
+   {
+    "id": "LEC-mascotas-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿A quién espera la gata?",
+    "opciones": [
+     "Ма́му",
+     "Па́пу",
+     "Ди́му"
+    ],
+    "correcta": "Ма́му",
+    "explicacion": "«Ко́шка… ждёт ма́му»: ма́ма → ма́му."
+   },
+   {
+    "id": "LEC-mascotas-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Па́па лю́бит ко́шку.",
+    "verdadero": false,
+    "explicacion": "«Па́па не лю́бит ко́шку, но ко́шка лю́бит па́пу»."
+   },
+   {
+    "id": "LEC-mascotas-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué hace Murka todo el día?",
+    "opciones": [
+     "Спит",
+     "Гуля́ет",
+     "Игра́ет"
+    ],
+    "correcta": "Спит",
+    "explicacion": "«Она́… спит весь день»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-regalos",
+  "nivel": "A1",
+  "desde": 4,
+  "tema": "Fiestas",
+  "titulo": "Пода́рки",
+  "tituloEs": "Regalos",
+  "parrafos": [
+   {
+    "ru": "Ско́ро пра́здник. Ма́ма покупа́ет пода́рки.",
+    "es": "Se acerca una fiesta y mamá sale a comprar regalos."
+   },
+   {
+    "ru": "Ба́бушка лю́бит цветы́, и ма́ма покупа́ет цветы́. Па́па лю́бит му́зыку: ма́ма покупа́ет пласти́нку. Ди́ма лю́бит футбо́л: ма́ма покупа́ет мяч. Ма́ша лю́бит кни́ги: ма́ма покупа́ет кни́гу. Де́душка лю́бит чай: ма́ма покупа́ет ча́шку и чай.",
+    "es": "A la abuela le encantan las flores, así que le compra un ramo. Papá es aficionado a la música: para él, un disco. Dima es futbolero: para él, una pelota. A Masha le gustan los libros: le toca uno. Y al abuelo, que adora el té, le compra una taza y té."
+   },
+   {
+    "ru": "А что покупа́ет па́па? Он покупа́ет духи́. Ма́ма о́чень лю́бит духи́.",
+    "es": "¿Y papá qué compra? Un perfume, porque a mamá le encanta."
+   },
+   {
+    "ru": "Ма́ша и Ди́ма де́лают торт. Они́ зна́ют: ба́бушка о́чень лю́бит торт.",
+    "es": "Masha y Dima preparan una tarta. Saben que es la favorita de la abuela."
+   },
+   {
+    "ru": "Что ещё? Ма́ша пи́шет откры́тку.",
+    "es": "¿Algo más? Masha escribe una postal."
+   },
+   {
+    "ru": "Ве́чером вся семья́ ждёт ба́бушку. Ба́бушка ви́дит торт и цветы́. Она́ о́чень ра́да!",
+    "es": "Por la tarde, toda la familia espera a la abuela. Ve la tarta y las flores, y se pone muy contenta."
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-regalos-1",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué compra mamá para Dima?",
+    "opciones": [
+     "Мяч",
+     "Кни́гу",
+     "Пласти́нку"
+    ],
+    "correcta": "Мяч",
+    "explicacion": "«Ди́ма лю́бит футбо́л: ма́ма покупа́ет мяч»."
+   },
+   {
+    "id": "LEC-regalos-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Qué hacen Masha y Dima?",
+    "opciones": [
+     "Торт",
+     "Пода́рок",
+     "У́жин"
+    ],
+    "correcta": "Торт",
+    "explicacion": "«Ма́ша и Ди́ма де́лают торт»."
+   },
+   {
+    "id": "LEC-regalos-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "Па́па покупа́ет цветы́.",
+    "verdadero": false,
+    "explicacion": "Papá compra «духи́»; las flores las compra mamá."
+   },
+   {
+    "id": "LEC-regalos-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "¿Cómo está la abuela al final?",
+    "opciones": [
+     "Ра́да",
+     "Уста́лая",
+     "Гру́стная"
+    ],
+    "correcta": "Ра́да",
+    "explicacion": "«Она́ о́чень ра́да!»."
+   }
+  ]
+ },
+ {
+  "id": "LEC-rynok",
+  "nivel": "A1",
+  "desde": 7,
+  "tema": "La vida diaria",
+  "titulo": "Суббо́та на ры́нке",
+  "tituloEs": "Sábado en el mercado",
+  "parrafos": [
+   {
+    "ru": "В суббо́ту у́тром Ма́ша и Ди́ма иду́т на ры́нок. Он бли́зко.",
+    "es": "El sábado por la mañana, Masha y Dima van al mercado. Les queda cerca."
+   },
+   {
+    "ru": "На ры́нке ве́село и интере́сно. Тут о́вощи, мя́со, ры́ба, сыр и хлеб. Ма́ша покупа́ет я́блоки и молоко́. А Ди́ма берёт сыр: он его́ о́чень лю́бит.",
+    "es": "En el mercado hay buen ambiente y mucho para ver: verdura, carne, pescado, queso y pan. Masha compra manzanas y leche. Dima, en cambio, se lleva queso, que le encanta."
+   },
+   {
+    "ru": "Пото́м они́ пьют чай в кафе́ ря́дом. Ма́ша говори́т: «Я люблю́ э́тот день. Мы не спеши́м, гуля́ем и отдыха́ем».",
+    "es": "Después toman un té en un café de al lado. Masha dice: «Me encanta este día. No vamos con prisa: paseamos y descansamos»."
+   },
+   {
+    "ru": "До́ма она́ гото́вит обе́д: суп и сала́т, а брат де́лает чай. Ма́ма и па́па прихо́дят в два часа́.",
+    "es": "En casa, ella prepara la comida —sopa y ensalada— y su hermano hace el té. Mamá y papá llegan a las dos."
+   },
+   {
+    "ru": "— Спаси́бо! Как хорошо́! — Па́па о́чень рад.",
+    "es": "—¡Gracias! ¡Qué bien! —Papá está muy contento."
+   }
+  ],
+  "preguntas": [
+   {
+    "id": "LEC-rynok-1",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "Куда́ иду́т Ма́ша и Ди́ма?",
+    "opciones": [
+     "На ры́нок.",
+     "В шко́лу.",
+     "В парк."
+    ],
+    "correcta": "На ры́нок.",
+    "explicacion": "«Ма́ша и Ди́ма иду́т на ры́нок»."
+   },
+   {
+    "id": "LEC-rynok-2",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "Что берёт Ди́ма?",
+    "opciones": [
+     "Сыр.",
+     "Я́блоки.",
+     "Молоко́."
+    ],
+    "correcta": "Сыр.",
+    "explicacion": "«Ди́ма берёт сыр: он его́ о́чень лю́бит». Las manzanas y la leche las compra Masha."
+   },
+   {
+    "id": "LEC-rynok-3",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Ма́ша и Ди́ма спеша́т.",
+    "verdadero": false,
+    "explicacion": "Masha dice «Мы не спеши́м»: no tienen prisa."
+   },
+   {
+    "id": "LEC-rynok-4",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Ма́ма и па́па прихо́дят в два часа́.",
+    "verdadero": true,
+    "explicacion": "«Ма́ма и па́па прихо́дят в два часа́»."
+   }
+  ]
+ },
  {
   "id": "LEC-barcelona",
   "nivel": "A1",
@@ -100,84 +1238,6 @@ const LECTURAS = [
       "Ле́том я люблю́ пла́вать в мо́ре."
      ]
     }
-   }
-  ]
- },
- {
-  "id": "LEC-rynok",
-  "nivel": "A1",
-  "desde": 7,
-  "tema": "La vida diaria",
-  "titulo": "Суббо́та на ры́нке",
-  "tituloEs": "Sábado en el mercado",
-  "parrafos": [
-   {
-    "ru": "В суббо́ту у́тром Ма́ша и Ди́ма иду́т на ры́нок. Он бли́зко.",
-    "es": "El sábado por la mañana, Masha y Dima van al mercado. Les queda cerca."
-   },
-   {
-    "ru": "На ры́нке ве́село и интере́сно. Тут о́вощи, мя́со, ры́ба, сыр и хлеб. Ма́ша покупа́ет я́блоки и молоко́. А Ди́ма берёт сыр: он его́ о́чень лю́бит.",
-    "es": "En el mercado hay buen ambiente y mucho para ver: verdura, carne, pescado, queso y pan. Masha compra manzanas y leche. Dima, en cambio, se lleva queso, que le encanta."
-   },
-   {
-    "ru": "Пото́м они́ пьют чай в кафе́ ря́дом. Ма́ша говори́т: «Я люблю́ э́тот день. Мы не спеши́м, гуля́ем и отдыха́ем».",
-    "es": "Después toman un té en un café de al lado. Masha dice: «Me encanta este día. No vamos con prisa: paseamos y descansamos»."
-   },
-   {
-    "ru": "До́ма она́ гото́вит обе́д: суп и сала́т, а брат де́лает чай. Ма́ма и па́па прихо́дят в два часа́.",
-    "es": "En casa, ella prepara la comida —sopa y ensalada— y su hermano hace el té. Mamá y papá llegan a las dos."
-   },
-   {
-    "ru": "— Спаси́бо! Как хорошо́! — Па́па о́чень рад.",
-    "es": "—¡Gracias! ¡Qué bien! —Papá está muy contento."
-   }
-  ],
-  "preguntas": [
-   {
-    "id": "LEC-rynok-1",
-    "tipo": "lectura",
-    "dificultad": 2,
-    "forma": "elegir",
-    "pide": "Куда́ иду́т Ма́ша и Ди́ма?",
-    "opciones": [
-     "На ры́нок.",
-     "В шко́лу.",
-     "В парк."
-    ],
-    "correcta": "На ры́нок.",
-    "explicacion": "«Ма́ша и Ди́ма иду́т на ры́нок»."
-   },
-   {
-    "id": "LEC-rynok-2",
-    "tipo": "lectura",
-    "dificultad": 2,
-    "forma": "elegir",
-    "pide": "Что берёт Ди́ма?",
-    "opciones": [
-     "Сыр.",
-     "Я́блоки.",
-     "Молоко́."
-    ],
-    "correcta": "Сыр.",
-    "explicacion": "«Ди́ма берёт сыр: он его́ о́чень лю́бит». Las manzanas y la leche las compra Masha."
-   },
-   {
-    "id": "LEC-rynok-3",
-    "tipo": "lectura",
-    "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Ма́ша и Ди́ма спеша́т.",
-    "verdadero": false,
-    "explicacion": "Masha dice «Мы не спеши́м»: no tienen prisa."
-   },
-   {
-    "id": "LEC-rynok-4",
-    "tipo": "lectura",
-    "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Ма́ма и па́па прихо́дят в два часа́.",
-    "verdadero": true,
-    "explicacion": "«Ма́ма и па́па прихо́дят в два часа́»."
    }
   ]
  },
