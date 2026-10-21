@@ -20,11 +20,16 @@
       auth,
       rpc: (fn, args) => call('rpc', {fn, args, uid: uid(), email: mail()}),
       from: (t) => {
-        const b = { _t:t, _sel:null, _eq:null,
-          select(s){ this._sel=s; return this; }, eq(k,v){ this._eq=v; return this; },
-          maybeSingle(){ return call('select',{t, sel:this._sel, uid:this._eq, me: uid()}); },
+        const b = { _t:t, _sel:null, _eq:null, _op:null, _row:null,
+          select(s){ this._sel=s; if(!this._op) this._op='lista'; return this; }, eq(k,v){ this._eq=v; return this; },
+          order(){ return this; }, limit(){ return this; },
+          maybeSingle(){ this._op=null; return call('select',{t, sel:this._sel, uid:this._eq, me: uid()}); },
           upsert(row){ return call('upsert',{t, row, me: uid()}); },
-          insert(row){ return call('insert',{t, row, me: uid(), email: mail()}); } };
+          insert(row){ return call('insert',{t, row, me: uid(), email: mail()}); },
+          update(row){ this._op='update'; this._row=row; return this; },
+          delete(){ this._op='delete'; return this; },
+          /* select(...).order().limit(), update().eq() y delete().eq() se ejecutan al esperarlos */
+          then(ok, mal){ return call(this._op,{t, sel:this._sel, id:this._eq, row:this._row, me: uid()}).then(ok, mal); } };
         return b; }
     };
   }

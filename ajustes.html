@@ -30,6 +30,8 @@
    14/10/2026: Cuenta (mail, progreso en la nube, cerrar sesión y
    eliminar la cuenta con todos los datos) y, solo para el admin,
    Accesos (habilitar y quitar mails). Todo lo hace js/cuenta.js.
+   21/10/2026: Reportes (solo admin): los errores que mandan los
+   alumnos con el botón 🐞 del menú, con «Pendientes» / «Resueltos».
    ============================================================ */
 const { useState, useEffect } = htmPreact;
 const h = React.createElement;
@@ -106,6 +108,56 @@ function SeccionAccesos({ c }) {
             "Deja de poder entrar y se borran su cuenta y su progreso en la nube.",
             boton(c, "Sí, quitar", () => quitar(p.email), "peligro"), boton(c, "Cancelar", () => setQuitando(null), "sec"))))));
 }
+/* ── Reportes de errores (21/10/2026, solo admin) ── */
+function SeccionReportes({ c }) {
+  const A = window.AzCuenta;
+  const [lista, setLista] = useState(null), [error, setError] = useState("");
+  const [ver, setVer] = useState("pend");             /* "pend" | "res" */
+  const [abierto, setAbierto] = useState(null), [borrando, setBorrando] = useState(null);
+  const cargar = async () => { setError(""); try { setLista(await A.reportes()); } catch (e) { setError("No se pudo cargar la lista. Revisa la conexión."); } };
+  useEffect(() => { cargar(); }, []);
+  const marcar = async (r, v) => { try { await A.marcarReporte(r.id, v); setLista(l => l.map(x => x.id === r.id ? Object.assign({}, x, { resuelto: v }) : x)); } catch (e) { setError("No se pudo guardar. Prueba de nuevo."); } };
+  const borrar = async r => { try { await A.borrarReporte(r.id); setBorrando(null); setLista(l => l.filter(x => x.id !== r.id)); } catch (e) { setError("No se pudo borrar. Prueba de nuevo."); } };
+  const chip = (v, t) => h("button", { className: "btn", onClick: () => setVer(v),
+    style: Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
+      ver === v ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
+  const pend = (lista || []).filter(r => !r.resuelto), res = (lista || []).filter(r => r.resuelto);
+  const mostrar = ver === "pend" ? pend : res;
+  const peq = (t, extra) => h("div", { style: Object.assign({ fontSize: 12.5, color: c.textMuted, lineHeight: 1.5 }, extra || {}) }, t);
+  const btnChico = (t, fn, col) => h("button", { className: "btn", onClick: fn,
+    style: { background: c.bg3, border: `1px solid ${c.border}`, color: col || c.text, fontSize: 12.5, fontWeight: 600, padding: "8px 12px", borderRadius: 10, cursor: "pointer", fontFamily: "inherit" } }, t);
+  return h(React.Fragment, null,
+    h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, "Los errores que mandan los alumnos con el botón 🐞 del menú. También te llega un mail por cada uno."),
+    h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap", alignItems: "center" } },
+      chip("pend", "Pendientes" + (lista ? " (" + pend.length + ")" : "")), chip("res", "Resueltos" + (lista ? " (" + res.length + ")" : "")),
+      h("button", { className: "btn", onClick: cargar, "aria-label": "Actualizar", style: { marginLeft: "auto", background: "none", border: "none", color: c.gold, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" } }, "↻ Actualizar")),
+    error && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, borderRadius: 10, padding: "10px 12px", marginTop: 12, color: ROJO_TXT, background: ROJO + "22" } }, error),
+    h("div", { style: { marginTop: 10 } },
+      lista == null ? !error && peq("Cargando…")
+      : mostrar.length === 0 ? peq(ver === "pend" ? "No hay reportes pendientes." : "Todavía no hay reportes resueltos.", { padding: "8px 0" })
+      : mostrar.map(r => { const ab = abierto === r.id, ctx = r.contexto || {};
+          return h("div", { key: r.id, style: { borderTop: `1px solid ${c.border}`, padding: "12px 0" } },
+            h("div", { onClick: () => setAbierto(ab ? null : r.id), style: { cursor: "pointer" } },
+              peq(fechaCorta(r.creado) + " · " + (r.email || "?")),
+              h("div", { style: { fontSize: 14.5, fontWeight: 600, color: c.text, marginTop: 3, lineHeight: 1.45, whiteSpace: "pre-wrap", wordBreak: "break-word" } },
+                ab || r.texto.length <= 140 ? r.texto : r.texto.slice(0, 140) + "…"),
+              peq((r.pantalla || "?") + (ab ? "" : "  ·  ver más"), { marginTop: 3, color: ab ? c.textMuted : c.gold })),
+            ab && h("div", { style: { fontSize: 13, lineHeight: 1.55, color: c.textSub, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: 10, padding: "10px 12px", marginTop: 8, wordBreak: "break-word" } },
+              r.esperado && h("div", { style: { marginBottom: 8 } }, h("b", { style: { color: c.text } }, "Qué esperaba: "), r.esperado),
+              r.url && h("div", null, h("b", { style: { color: c.text } }, "Dirección: "), h("a", { href: r.url, style: { color: c.gold } }, r.url)),
+              ctx.dispositivo && h("div", null, h("b", { style: { color: c.text } }, "Teléfono: "), ctx.dispositivo),
+              ctx.ultimo && ctx.ultimo.titulo && h("div", null, h("b", { style: { color: c.text } }, "Estudiaba: "), ctx.ultimo.titulo),
+              ctx.errores && h("div", { style: { marginTop: 6 } }, h("b", { style: { color: c.text } }, "Errores de la página:"),
+                h("div", { style: { fontFamily: "ui-monospace, Menlo, monospace", fontSize: 11.5, whiteSpace: "pre-wrap", marginTop: 4, color: c.textMuted } }, ctx.errores))),
+            h("div", { style: { display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" } },
+              r.resuelto ? btnChico("Volver a pendientes", () => marcar(r, false)) : btnChico("✓ Resuelto", () => marcar(r, true), "#4CAF82"),
+              r.email && h("a", { href: "mailto:" + r.email + "?subject=" + encodeURIComponent("Azbuka: tu reporte"), style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 12.5, fontWeight: 600, padding: "8px 12px", borderRadius: 10, textDecoration: "none" } }, "Responder"),
+              borrando !== r.id && btnChico("Borrar", () => setBorrando(r.id), ROJO_TXT)),
+            borrando === r.id && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: c.text, background: ROJO + "22", border: `1px solid ${ROJO}`, borderRadius: 10, padding: 12, marginTop: 10 } },
+              "Se borra este reporte para siempre.",
+              boton(c, "Sí, borrar", () => borrar(r), "peligro"), boton(c, "Cancelar", () => setBorrando(null), "sec")));
+        })));
+}
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [translit, setTranslit] = useState(azTranslitModo());
@@ -128,6 +180,8 @@ function App() {
       caja(h(SeccionCuenta, { c })),
       esAdmin && lbl("Accesos"),
       esAdmin && caja(h(SeccionAccesos, { c })),
+      esAdmin && lbl("Reportes"),
+      esAdmin && caja(h(SeccionReportes, { c })),
       lbl("Transliteración"),
       caja(
         h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },

@@ -4,7 +4,7 @@
 const fs=require('fs'), os=require('os');
 const { BASE, servir, navegador } = require('./comun');
 const FAKE=fs.readFileSync(__dirname+'/supabase-falso.js','utf8'); const OUT=os.tmpdir();
-const srv={ permitidos:{'manuelmunoz87@gmail.com':{admin:true,nota:'Manu'}}, users:{}, progreso:{}, log:[] };
+const srv={ permitidos:{'manuelmunoz87@gmail.com':{admin:true,nota:'Manu'}}, users:{}, progreso:{}, reportes:[], log:[] };
 function server(op,a){ srv.log.push(op+(a.fn?':'+a.fn:''));
   const ok=d=>({data:d,error:null}), err=m=>({data:null,error:{message:m}});
   if(srv.offline) return err('Failed to fetch');
@@ -17,6 +17,12 @@ function server(op,a){ srv.log.push(op+(a.fn?':'+a.fn:''));
     if(a.fn==='admin_quitar'){ const e=a.args.p_email; const u=Object.values(srv.users).find(u=>u.email===e); if(u){delete srv.users[u.id]; delete srv.progreso[u.id];} delete srv.permitidos[e]; return ok(null); } }
   if(op==='select'){ const r=srv.progreso[a.uid]; if(!r) return ok(null); return ok(a.sel.includes('datos')?r:{actualizado:r.actualizado}); }
   if(op==='upsert'){ srv.progreso[a.row.user_id]={datos:a.row.datos, actualizado:a.row.actualizado}; return ok(null); }
+  if(a.t==='reportes'){ const me=srv.users[a.me]; const perm=me&&srv.permitidos[me.email];
+    if(op==='insert'){ if(!perm||a.row.user_id!==a.me) return err('row-level security'); srv.reportes.push(Object.assign({id:srv.reportes.length+1, creado:new Date().toISOString(), resuelto:false}, a.row)); return ok(null); }
+    if(!(perm&&perm.admin)) return err('solo admin');
+    if(op==='lista') return ok(srv.reportes.slice().reverse());
+    if(op==='update'){ const r=srv.reportes.find(x=>x.id===a.id); if(r) Object.assign(r,a.row); return ok(null); }
+    if(op==='delete'){ srv.reportes=srv.reportes.filter(x=>x.id!==a.id); return ok(null); } }
   if(op==='insert'){ if(srv.permitidos[a.row.email]) return err('duplicate key value violates unique constraint'); srv.permitidos[a.row.email]={admin:false,nota:a.row.nota}; return ok(null); }
   return err('?'); }
 const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) problemas.push(m); };
@@ -65,6 +71,22 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  await p.fill('input[placeholder="mail@ejemplo.com"]','Ana@X.com'); await p.fill('input[placeholder^="Nota"]','Ana'); await p.click('button:has-text("Habilitar")'); await p.waitForTimeout(500);
  chk(!!srv.permitidos['ana@x.com'], 'habilitar un mail (queda en minúsculas)');
  await p.screenshot({path:OUT+'/ajustes.png', fullPage:true});
+ // Reportar un error (21/10/2026): el 🐞 del menú, y Ajustes → Reportes
+ await p.goto(BASE+'azbuka-3.html',{waitUntil:'networkidle'}); await p.waitForTimeout(600);
+ await p.evaluate(()=>{ setTimeout(()=>{ throw new Error('error de prueba'); },0); }); await p.waitForTimeout(200);
+ await p.click('text=Menú'); await p.waitForTimeout(300); await p.click('[aria-label="Reportar un error"]'); await p.waitForTimeout(400);
+ chk(await p.locator('text=Reportar un error').first().isVisible(), 'el 🐞 del menú abre «Reportar un error»');
+ await p.screenshot({path:OUT+'/reportar.png'});
+ await p.locator('[role=dialog] textarea').first().fill('La palabra no suena'); await p.click('[role=dialog] button:has-text("Enviar")'); await p.waitForTimeout(600);
+ chk(await p.locator('text=Enviado').count()>0, 'el reporte se envía y avisa');
+ const rep=srv.reportes[0]||{};
+ chk(rep.texto==='La palabra no suena' && /Unidad 3|Sustantivos/.test(rep.pantalla||'') && rep.email==='manuelmunoz87@gmail.com', 'el reporte lleva el texto, la pantalla y el mail');
+ chk(!!(rep.contexto&&rep.contexto.dispositivo) && /error de prueba/.test((rep.contexto||{}).errores||''), 'adjunta el teléfono y los errores de la página');
+ await p.goto(BASE+'ajustes.html',{waitUntil:'networkidle'}); await p.waitForTimeout(800);
+ chk(await p.locator('text=La palabra no suena').count()>0, 'el admin ve el reporte en Ajustes → Reportes');
+ await p.click('button:has-text("✓ Resuelto")'); await p.waitForTimeout(400);
+ chk(srv.reportes[0] && srv.reportes[0].resuelto===true, 'marcar un reporte como resuelto');
+ await p.screenshot({path:OUT+'/reportes.png', fullPage:true});
  // B · teléfono 2: Ana
  const d2=await dispositivo();
  await d2.p.goto(BASE+'index.html',{waitUntil:'networkidle'}); await d2.p.fill('#azc-mail','ana@x.com'); await d2.p.click('#azc-enviar'); await d2.p.waitForTimeout(200); await d2.p.fill('#azc-cod','123456'); await d2.p.waitForTimeout(800);

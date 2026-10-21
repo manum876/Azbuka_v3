@@ -11,6 +11,8 @@
 --     en permitidos (ni con código por mail ni con Google).
 --   · Funciones para borrar la cuenta propia y para que el admin vea,
 --     habilite y quite accesos.
+--   · reportes (21/10/2026): los errores que mandan los alumnos con el
+--     botón 🐞, con un mail al admin por cada uno (al final del archivo).
 -- ============================================================
 
 create table if not exists public.permitidos (
@@ -123,3 +125,95 @@ grant execute on function public.admin_quitar(text) to authenticated;
 insert into public.permitidos (email, admin, nota)
 values ('manuelmunoz87@gmail.com', true, 'Manu')
 on conflict (email) do update set admin = true;
+
+-- ============================================================
+-- REPORTES DE ERRORES (21/10/2026)
+-- El botón 🐞 del pie del menú manda un reporte: el texto del
+-- alumno y, solos, la pantalla, el teléfono y los últimos errores
+-- de la página. El admin los ve en Ajustes → Reportes y le llega
+-- un mail por cada uno (si está guardada la clave de Brevo, abajo).
+-- ============================================================
+create table if not exists public.reportes (
+  id        bigint generated always as identity primary key,
+  user_id   uuid references auth.users(id) on delete cascade,
+  email     text,
+  texto     text not null check (length(texto) between 3 and 4000),
+  esperado  text check (esperado is null or length(esperado) <= 2000),
+  pantalla  text,
+  url       text,
+  contexto  jsonb not null default '{}'::jsonb,
+  creado    timestamptz not null default now(),
+  resuelto  boolean not null default false
+);
+alter table public.reportes enable row level security;
+
+drop policy if exists "alumno reporta" on public.reportes;
+drop policy if exists "admin lee reportes" on public.reportes;
+drop policy if exists "admin cambia reportes" on public.reportes;
+drop policy if exists "admin borra reportes" on public.reportes;
+create policy "alumno reporta" on public.reportes for insert
+  with check (user_id = auth.uid() and email = public.mi_email() and public.es_permitido() and resuelto = false);
+create policy "admin lee reportes"    on public.reportes for select using (public.es_admin());
+create policy "admin cambia reportes" on public.reportes for update using (public.es_admin());
+create policy "admin borra reportes"  on public.reportes for delete using (public.es_admin());
+
+grant select, insert, update, delete on public.reportes to authenticated;
+revoke all on public.reportes from anon;
+
+-- Freno: como mucho 20 reportes por persona por día
+create or replace function public.reportes_limite() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if (select count(*) from public.reportes where user_id = new.user_id and creado > now() - interval '1 day') >= 20 then
+    raise exception 'AZ_MUCHOS_REPORTES';
+  end if;
+  return new;
+end $$;
+drop trigger if exists az_reportes_limite on public.reportes;
+create trigger az_reportes_limite before insert on public.reportes
+  for each row execute function public.reportes_limite();
+
+-- Mail al admin por cada reporte, con la API de Brevo.
+-- Necesita la clave de API de Brevo guardada UNA vez en la bóveda de Supabase
+-- (ver herramientas/cuentas/GUIA.md, «Reportes de errores»):
+--   select vault.create_secret('xkeysib-…', 'brevo_api_key');
+-- Sin la clave, los reportes se guardan igual: solo no llega el mail.
+create extension if not exists pg_net;
+create or replace function public.reportes_mail() returns trigger
+language plpgsql security definer set search_path = public as $$
+declare
+  clave text;
+  destinos jsonb;
+  ctx text;
+begin
+  select decrypted_secret into clave from vault.decrypted_secrets where name = 'brevo_api_key' limit 1;
+  if clave is null then return new; end if;
+  select coalesce(jsonb_agg(jsonb_build_object('email', email)), '[]'::jsonb) into destinos from public.permitidos where admin;
+  if jsonb_array_length(destinos) = 0 then return new; end if;
+  ctx := coalesce(new.contexto ->> 'dispositivo', '') ||
+         case when new.contexto ? 'errores' then E'\nErrores de la página:\n' || (new.contexto ->> 'errores') else '' end;
+  perform net.http_post(
+    url := 'https://api.brevo.com/v3/smtp/email',
+    headers := jsonb_build_object('api-key', clave, 'Content-Type', 'application/json', 'accept', 'application/json'),
+    body := jsonb_build_object(
+      'sender', jsonb_build_object('name', 'Azbuka', 'email', 'azbuka.aprenderuso@gmail.com'),
+      'to', destinos,
+      'replyTo', jsonb_build_object('email', coalesce(new.email, 'azbuka.aprenderuso@gmail.com')),
+      'subject', '🐞 Azbuka: ' || left(regexp_replace(new.texto, '\s+', ' ', 'g'), 70),
+      'textContent',
+        'De: ' || coalesce(new.email, '?') || E'\n' ||
+        'Pantalla: ' || coalesce(new.pantalla, '?') || E'\n' ||
+        'Dirección: ' || coalesce(new.url, '?') || E'\n\n' ||
+        'Qué pasó:' || E'\n' || new.texto || E'\n\n' ||
+        case when new.esperado is not null and new.esperado <> '' then 'Qué esperaba:' || E'\n' || new.esperado || E'\n\n' else '' end ||
+        ctx || E'\n\n' ||
+        'Para verlo y marcarlo como resuelto: Azbuka → Ajustes → Reportes.'
+    )
+  );
+  return new;
+exception when others then
+  return new;   -- si falla el mail, el reporte se guarda igual
+end $$;
+drop trigger if exists az_reportes_mail on public.reportes;
+create trigger az_reportes_mail after insert on public.reportes
+  for each row execute function public.reportes_mail();

@@ -147,12 +147,71 @@ function AzCaptura({ c }) {
   }, "＋ Guardar en el cuaderno");
 }
 
+/* ── REPORTAR UN ERROR (21/10/2026, a pedido de Manu) ──
+   El botón 🐞 del pie del menú abre esta hoja a pantalla completa
+   (patrón de hoja, Contexto §6.3, con la capa fija §6.20). Lo manda
+   AzCuenta.reportar (js/cuenta.js), que adjunta solo la pantalla, el
+   teléfono y los últimos errores de la página. Llega a Ajustes →
+   Reportes (admin) y por mail. */
+function AzReportar({ c, onClose }) {
+  const capa = useRef(null);
+  const [texto, setTexto] = useState(""), [esperado, setEsperado] = useState("");
+  const [estado, setEstado] = useState(null);   /* null | "enviando" | "enviado" | "pendiente" | "mail" | {err} */
+  const pantalla = (() => { try { if (typeof window.azFuenteActual === "function") return window.azFuenteActual(); } catch (e) {}
+    return String(document.title || "").replace(/^Азбука\s*[—-]\s*/, "") || "Inicio"; })();
+  const enviar = async () => {
+    if (texto.trim().length < 3) { setEstado({ err: "Cuenta un poco más qué pasó." }); return; }
+    setEstado("enviando");
+    try {
+      const A = window.AzCuenta;
+      if (!A || !A.reportar) throw new Error("sin");
+      setEstado(await A.reportar({ texto, esperado }));
+    } catch (e) {
+      const m = String(e && e.message || e);
+      setEstado({ err: m === "limite" ? "Mandaste muchos reportes hoy. Prueba de nuevo mañana." : "No se pudo enviar. Prueba de nuevo en un momento." });
+    }
+  };
+  const lbl = t => React.createElement("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "20px 0 8px" } }, t);
+  const area = (v, set, filas, ph) => React.createElement("textarea", { value: v, rows: filas, placeholder: ph, maxLength: 4000, onInput: e => set(e.target.value),
+    style: { width: "100%", boxSizing: "border-box", fontSize: 16, lineHeight: 1.5, padding: 12, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", resize: "vertical", outline: "none" } });
+  const boton = (t, fn, sec, dis) => React.createElement("button", { className: "btn", onClick: fn, disabled: !!dis,
+    style: { width: "100%", padding: "13px 16px", borderRadius: 10, fontSize: 14.5, fontWeight: 700, cursor: dis ? "default" : "pointer", fontFamily: "inherit", marginTop: 10, opacity: dis ? 0.6 : 1,
+      background: sec ? c.bg3 : c.gold, border: `1px solid ${sec ? c.border : c.gold}`, color: sec ? c.text : c.bg } }, t);
+  const listo = estado === "enviado" || estado === "pendiente" || estado === "mail";
+  const aviso = { enviado: "✓ Enviado. ¡Gracias! Lo vamos a revisar.", pendiente: "No hay conexión: el reporte quedó guardado y se manda solo cuando vuelva internet.", mail: "Se abrió tu app de correo con el reporte escrito: solo falta enviarlo." }[estado];
+  return React.createElement("div", { ref: azRefCapa(capa), role: "dialog", "aria-label": "Reportar un error",
+      style: { position: "fixed", inset: 0, zIndex: 300, background: c.bg, boxShadow: `0 0 0 100vmax ${c.bg}`, color: c.text, fontFamily: "'Noto Sans',sans-serif", overflowY: "auto", WebkitOverflowScrolling: "touch", animation: "fadeIn .25s ease" } },
+    React.createElement("button", { onClick: onClose, "aria-label": "Cerrar",
+      style: { position: "fixed", top: "var(--az-top,6vh)", right: "3vw", width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 16, cursor: "pointer", zIndex: 2 } }, "✕"),
+    React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", padding: "var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px))" } },
+      React.createElement("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, paddingRight: 48, lineHeight: "36px" } }, "Ayuda"),
+      React.createElement("div", { style: { fontSize: 26, fontWeight: 800, marginTop: 4 } }, "Reportar un error"),
+      React.createElement("div", { style: { fontSize: 15, lineHeight: 1.6, color: c.textSub, marginTop: 8 } },
+        "¿Algo no funciona, se ve mal o una respuesta está equivocada? Cuéntalo con tus palabras."),
+      listo
+        ? React.createElement(React.Fragment, null,
+            React.createElement("div", { role: "status", style: { fontSize: 15, lineHeight: 1.55, marginTop: 20, padding: "12px 14px", borderRadius: 10,
+              color: estado === "enviado" ? "#4CAF82" : c.text, background: estado === "enviado" ? "#4CAF8222" : c.gold + "18", border: `1px solid ${estado === "enviado" ? "#4CAF82" : c.gold + "66"}` } }, aviso),
+            boton("Cerrar", onClose))
+        : React.createElement(React.Fragment, null,
+            lbl("Qué pasó"),
+            area(texto, setTexto, 5, "Por ejemplo: escribo «кни́гу» y me lo marca mal…"),
+            lbl("Qué esperabas (opcional)"),
+            area(esperado, setEsperado, 3, "Por ejemplo: que estuviera bien."),
+            React.createElement("div", { style: { fontSize: 12.5, lineHeight: 1.55, color: c.textMuted, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: 10, padding: "10px 12px", marginTop: 14 } },
+              "Se envía también, para encontrar el error: esta pantalla (", React.createElement("b", { style: { color: c.textSub } }, pantalla), "), el tipo de teléfono y tu mail."),
+            estado && estado.err && React.createElement("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: "#D9776F", background: "#B5605C22", borderRadius: 10, padding: "10px 12px", marginTop: 12 } }, estado.err),
+            boton(estado === "enviando" ? "Enviando…" : "Enviar", enviar, false, estado === "enviando"),
+            boton("Cancelar", onClose, true))));
+}
+
 function AzShell(props) {
   const {
     darkMode, setDarkMode, moduleId,
     tabs = [], view, setView, children
   } = props;
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [reportando, setReportando] = useState(false);
   const [lexQuery, setLexQuery] = useState("");
   const searchRef = useRef(null);
   const listRef = useRef(null);
@@ -198,6 +257,7 @@ function AzShell(props) {
       @media (pointer: coarse) { :root { --az-top: max(6vh, calc(env(safe-area-inset-top, 0px) + 12px), 68px); --az-bottom: max(calc(env(safe-area-inset-bottom, 0px) + 24px), 88px); } }
       html, body, #root { background: ${c.bg}; }`),
     React.createElement(AzCaptura, { c }),
+    reportando && React.createElement(AzReportar, { c, onClose: () => setReportando(false) }),
 
     /* ── OVERLAY (el contenido central queda detrás, sin ajustarse) ── */
     drawerOpen && React.createElement("div", {
@@ -290,8 +350,8 @@ function AzShell(props) {
       ),
 
       /* Pie fijo del drawer — nunca se tapa al scrollear el índice.
-         Toggle de tema, ajustes y botón a la pantalla principal, uno
-         al lado del otro. */
+         Toggle de tema, ajustes, reportar un error (🐞) y botón a la
+         pantalla principal, uno al lado del otro. */
       React.createElement("div", { style: { padding: "12px 16px", borderTop: `1px solid ${c.border}`, display: "flex", gap: 10, flexShrink: 0 } },
         React.createElement("button", {
           onClick: () => { setDarkMode(!dark); azSet('az_theme', dark ? 'light' : 'dark'); },
@@ -303,6 +363,11 @@ function AzShell(props) {
           onClick: (e) => azNavigate(e, "ajustes.html"),
           style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, textDecoration: "none", flexShrink: 0 }
         }, "⚙️"),
+        /* Reportar un error (21/10/2026, a pedido de Manu) */
+        React.createElement("button", {
+          onClick: () => { setDrawerOpen(false); setReportando(true); }, "aria-label": "Reportar un error", title: "Reportar un error",
+          style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, cursor: "pointer", padding: 0, flexShrink: 0 }
+        }, "🐞"),
         React.createElement("a", {
           href: "index.html",
           onClick: (e) => azNavigate(e, "index.html"),

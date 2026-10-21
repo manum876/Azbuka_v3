@@ -87,6 +87,37 @@ Te devuelvo `js/cuenta.js` con las claves. Cuando lo subas, la app empieza a ped
 - **Otro teléfono:** entrás con el mismo mail y se baja tu progreso.
 - **Eliminar la cuenta:** cada uno lo hace desde **Ajustes → Eliminar mi cuenta y mis datos**. Se borra todo: la cuenta, el progreso en la nube y lo guardado en el teléfono.
 
+## Reportes de errores (21/10/2026)
+
+Los alumnos mandan errores con el botón 🐞 del pie del menú. Vos los ves en **Ajustes → Reportes** y, si hacés el paso 2, te llega además un mail por cada uno. Son unos 5 minutos.
+
+### 1. La tabla de reportes
+
+1. Supabase → **SQL Editor** → **New query**.
+2. Pegá **todo** `herramientas/cuentas/supabase.sql` (la versión nueva) y tocá **Run**. Tiene que decir *Success*. Se puede correr aunque ya lo hayas corrido antes: no borra nada.
+
+Con esto ya funciona: los reportes se guardan y los ves en Ajustes.
+
+### 2. El mail por cada reporte
+
+Para mandar el mail, Supabase usa Brevo, pero con una **clave de API**, que no es la clave SMTP del paso 3 de arriba.
+
+1. En Brevo: **SMTP & API** → pestaña **API Keys** → **Generate a new API key**. Nombre: `azbuka-reportes`. Copiala: empieza con `xkeysib-` y se ve una sola vez.
+2. En Supabase: **SQL Editor** → **New query**. Pegá esto, cambiando el texto entre comillas por tu clave, y tocá **Run**:
+
+   ```sql
+   select vault.create_secret('xkeysib-PEGÁ-ACÁ-TU-CLAVE', 'brevo_api_key');
+   ```
+
+   La clave queda guardada en la bóveda de Supabase, no en la app: nadie más la ve. **No me la mandes por el chat.**
+3. Probá: en la app, 🐞 → escribí «prueba» → *Enviar*. En un minuto te llega un mail «🐞 Azbuka: prueba» a tu mail de admin. Tocando *Responder* en el mail le contestás directo al alumno.
+
+> Si el mail no llega: revisá Spam. Si tampoco está, el reporte igual aparece en Ajustes → Reportes; mandame una captura y lo vemos. Si alguna vez cambiás la clave de Brevo, se reemplaza así: `select vault.update_secret((select id from vault.secrets where name = 'brevo_api_key'), 'xkeysib-NUEVA');`
+
+### Qué llega en cada reporte
+
+Lo que escribió el alumno y, solo: la pantalla donde estaba (unidad y módulo), la dirección, el teléfono y el navegador, si la app está instalada, el tema, su mail y los últimos errores técnicos de esa página, si hubo. Cada alumno puede mandar hasta 20 por día. Si borra su cuenta, se borran también sus reportes.
+
 ## Google (opcional, más adelante)
 
 Se puede sumar *Entrar con Google*. Hace falta crear una credencial en Google Cloud (unos 20 minutos más) y prenderla en **Authentication → Sign In / Providers → Google**.

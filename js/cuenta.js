@@ -31,6 +31,15 @@
      subirAhora() · cerrarSesion() · borrarCuenta()
      accesos() · habilitar(email, nota) · quitar(email)
      alCambiar(fn)  → avisa cuando cambia el estado de la nube
+     reportar({ texto, esperado }) → "enviado" | "pendiente" (21/10/2026)
+     reportes() · marcarReporte(id, resuelto) · borrarReporte(id)  (solo admin)
+
+   Reportes de errores (21/10/2026): el botón 🐞 del pie del menú
+   (js/shell.js) llama a reportar(). Se adjuntan solos la pantalla, la
+   dirección, el teléfono y los últimos errores de JavaScript de la
+   página (window.azErroresRecientes). Sin conexión, el reporte queda
+   en az_cuenta_reportes (no viaja con el progreso) y se manda solo al
+   volver la red. En Supabase: tabla «reportes» y un mail al admin.
    ============================================================ */
 const AZ_CUENTA_CONFIG = {
   url: "https://kezvjeeewhdvyorqlzpp.supabase.co",   /* Project URL de Supabase */
@@ -54,9 +63,43 @@ const AZ_CUENTA_CONFIG = {
   const claveSesion = () => { try { return "sb-" + new URL(CFG.url).hostname.split(".")[0] + "-auth-token"; } catch (e) { return ""; } };
   const haySesionGuardada = () => { try { return !!ls.getItem(claveSesion()); } catch (e) { return false; } };
 
+  /* ── Errores recientes de la página (para los reportes, 21/10/2026) ── */
+  const ERRS = window.azErroresRecientes = window.azErroresRecientes || [];
+  const anotarError = t => { ERRS.push(new Date().toTimeString().slice(0, 8) + " " + String(t).slice(0, 240)); if (ERRS.length > 5) ERRS.shift(); };
+  window.addEventListener("error", e => anotarError((e.message || "error") + (e.filename ? " (" + String(e.filename).split("/").pop() + ":" + e.lineno + ")" : "")));
+  window.addEventListener("unhandledrejection", e => anotarError("promesa: " + ((e.reason && (e.reason.message || e.reason)) || "")));
+
+  /* Lo que se adjunta solo a cada reporte */
+  function contextoReporte() {
+    const ua = navigator.userAgent || "";
+    const so = /iPhone|iPad|iPod/.test(ua) ? "iOS " + ((ua.match(/OS (\d+[_\d]*)/) || [])[1] || "").replace(/_/g, ".")
+      : /Android/.test(ua) ? "Android " + ((ua.match(/Android ([\d.]+)/) || [])[1] || "") : /Mac OS X/.test(ua) ? "Mac" : /Windows/.test(ua) ? "Windows" : "otro";
+    const nav = /CriOS|Chrome/.test(ua) ? "Chrome" : /FxiOS|Firefox/.test(ua) ? "Firefox" : /Safari/.test(ua) ? "Safari" : "otro";
+    const instalada = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+    let tema = "oscuro"; try { tema = JSON.parse(localStorage.getItem("az_theme") || '"dark"') === "light" ? "claro" : "oscuro"; } catch (e) {}
+    let ultimo = null; try { ultimo = JSON.parse(localStorage.getItem("az_ultimo") || "null"); } catch (e) {}
+    const pantalla = (typeof window.azFuenteActual === "function" && (() => { try { return window.azFuenteActual(); } catch (e) { return ""; } })())
+      || String(document.title || "").replace(/^Азбука\s*[—-]\s*/, "") || location.pathname.split("/").pop();
+    const dispositivo = so + " · " + nav + (instalada ? " · app instalada" : " · navegador") + " · " + innerWidth + "×" + innerHeight + " · tema " + tema + (navigator.onLine ? "" : " · sin conexión");
+    const ctx = { dispositivo, ua, ultimo };
+    if (ERRS.length) ctx.errores = ERRS.join("\n");
+    return { pantalla: String(pantalla).slice(0, 200), url: (location.pathname.split("/").pop() || "index.html") + location.search, contexto: ctx };
+  }
+  const COLA = "az_cuenta_reportes";
+  const leerCola = () => { try { return JSON.parse(localStorage.getItem(COLA) || "[]") || []; } catch (e) { return []; } };
+  const guardarCola = q => { try { if (q.length) localStorage.setItem(COLA, JSON.stringify(q)); else localStorage.removeItem(COLA); } catch (e) {} };
+
   window.AzCuenta = { activa, sesion: () => usuario, email: () => (usuario && usuario.email) || "", esAdmin: () => admin,
     estadoNube: () => ({ estado, meta: leerMeta() }), alCambiar: f => { oyentes.push(f); return () => { oyentes = oyentes.filter(x => x !== f); }; } };
-  if (!activa) return;
+  if (!activa) {
+    window.AzCuenta.reportar = async ({ texto, esperado }) => {
+      const r = contextoReporte();
+      const cuerpo = "Qué pasó:\n" + texto + (esperado ? "\n\nQué esperaba:\n" + esperado : "") + "\n\nPantalla: " + r.pantalla + "\nDirección: " + r.url + "\n" + r.contexto.dispositivo + (r.contexto.errores ? "\nErrores:\n" + r.contexto.errores : "");
+      location.href = "mailto:azbuka.aprenderuso@gmail.com?subject=" + encodeURIComponent("🐞 Azbuka: " + texto.slice(0, 60)) + "&body=" + encodeURIComponent(cuerpo);
+      return "mail";
+    };
+    return;
+  }
 
   cliente = window.supabase.createClient(CFG.url, CFG.clave, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: "pkce" } });
 
@@ -222,6 +265,7 @@ const AZ_CUENTA_CONFIG = {
     if (location.search.indexOf("code=") >= 0 || location.hash.indexOf("access_token") >= 0) history.replaceState(null, "", location.pathname);
     quitarPantalla();
     avisarListo(usuario);
+    setTimeout(enviarCola, 3000);
     await sincronizarAlEntrar();
   }
 
@@ -330,12 +374,48 @@ const AZ_CUENTA_CONFIG = {
       const { error } = await cliente.from("permitidos").insert({ email: m, nota: nota || null });
       if (error) throw error;
     },
-    quitar: async (email) => { const { error } = await cliente.rpc("admin_quitar", { p_email: email }); if (error) throw error; }
+    quitar: async (email) => { const { error } = await cliente.rpc("admin_quitar", { p_email: email }); if (error) throw error; },
+    /* Reportes de errores (21/10/2026) */
+    reportar: async ({ texto, esperado }) => {
+      const t = String(texto || "").trim(), es = String(esperado || "").trim();
+      if (t.length < 3) throw new Error("corto");
+      const fila = Object.assign({ texto: t.slice(0, 4000), esperado: es ? es.slice(0, 2000) : null }, contextoReporte());
+      const ok = await enviarReporte(fila);
+      if (ok === true) { enviarCola(); return "enviado"; }
+      if (ok === "limite") throw new Error("limite");
+      const q = leerCola(); q.push(fila); guardarCola(q.slice(-10));
+      return "pendiente";
+    },
+    reportes: async () => {
+      const { data, error } = await cliente.from("reportes").select("id, email, texto, esperado, pantalla, url, contexto, creado, resuelto").order("creado", { ascending: false }).limit(200);
+      if (error) throw error; return data || [];
+    },
+    marcarReporte: async (id, resuelto) => { const { error } = await cliente.from("reportes").update({ resuelto: !!resuelto }).eq("id", id); if (error) throw error; },
+    borrarReporte: async (id) => { const { error } = await cliente.from("reportes").delete().eq("id", id); if (error) throw error; }
   });
+  async function enviarReporte(fila) {
+    if (!navigator.onLine) return false;
+    try { await listo; } catch (e) {}
+    if (!usuario) return false;
+    try {
+      const { error } = await cliente.from("reportes").insert(Object.assign({ user_id: usuario.id, email: (usuario.email || "").toLowerCase() }, fila));
+      if (error) { if (/AZ_MUCHOS_REPORTES/.test(error.message || "")) return "limite"; throw error; }
+      return true;
+    } catch (e) { return false; }
+  }
+  let enviandoCola = false;
+  async function enviarCola() {
+    if (enviandoCola || !usuario || !navigator.onLine) return;
+    const q = leerCola(); if (!q.length) return;
+    enviandoCola = true;
+    const quedan = [];
+    for (const f of q) { const ok = await enviarReporte(f); if (ok !== true && ok !== "limite") quedan.push(f); }
+    guardarCola(quedan); enviandoCola = false;
+  }
 
   /* ── Arranque ── */
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") subir(); });
-  window.addEventListener("online", () => { if (usuario) subir(); });
+  window.addEventListener("online", () => { if (usuario) { subir(); enviarCola(); } });
 
   function arrancar() {
     const sinCuenta = document.documentElement.classList.contains("az-sin-cuenta");
