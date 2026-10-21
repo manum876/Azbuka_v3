@@ -173,7 +173,7 @@ drop trigger if exists az_reportes_limite on public.reportes;
 create trigger az_reportes_limite before insert on public.reportes
   for each row execute function public.reportes_limite();
 
--- Mail al admin por cada reporte, con la API de Brevo.
+-- Mail a azbuka.aprenderuso@gmail.com por cada reporte, con la API de Brevo.
 -- Necesita la clave de API de Brevo guardada UNA vez en la bóveda de Supabase
 -- (ver herramientas/cuentas/GUIA.md, «Reportes de errores»):
 --   select vault.create_secret('xkeysib-…', 'brevo_api_key');
@@ -188,8 +188,8 @@ declare
 begin
   select decrypted_secret into clave from vault.decrypted_secrets where name = 'brevo_api_key' limit 1;
   if clave is null then return new; end if;
-  select coalesce(jsonb_agg(jsonb_build_object('email', email)), '[]'::jsonb) into destinos from public.permitidos where admin;
-  if jsonb_array_length(destinos) = 0 then return new; end if;
+  -- Destino: el mail de Azbuka (21/10/2026, Manu). No depende de quién es admin.
+  destinos := jsonb_build_array(jsonb_build_object('email', 'azbuka.aprenderuso@gmail.com'));
   ctx := coalesce(new.contexto ->> 'dispositivo', '') ||
          case when new.contexto ? 'errores' then E'\nErrores de la página:\n' || (new.contexto ->> 'errores') else '' end;
   perform net.http_post(

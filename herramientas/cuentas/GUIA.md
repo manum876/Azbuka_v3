@@ -89,7 +89,7 @@ Te devuelvo `js/cuenta.js` con las claves. Cuando lo subas, la app empieza a ped
 
 ## Reportes de errores (21/10/2026)
 
-Los alumnos mandan errores con el botón 🐞 del pie del menú. Vos los ves en **Ajustes → Reportes** y, si hacés el paso 2, te llega además un mail por cada uno. Son unos 5 minutos.
+Los alumnos mandan errores con el botón 🐞 del pie del menú. Vos los ves en **Ajustes → Reportes** y, si hacés el paso 2, llega además un mail por cada uno a **azbuka.aprenderuso@gmail.com**. Son unos 5 minutos.
 
 ### 1. La tabla de reportes
 
@@ -110,7 +110,7 @@ Para mandar el mail, Supabase usa Brevo, pero con una **clave de API**, que no e
    ```
 
    La clave queda guardada en la bóveda de Supabase, no en la app: nadie más la ve. **No me la mandes por el chat.**
-3. Probá: en la app, 🐞 → escribí «prueba» → *Enviar*. En un minuto te llega un mail «🐞 Azbuka: prueba» a tu mail de admin. Tocando *Responder* en el mail le contestás directo al alumno.
+3. Probá: en la app, 🐞 → escribí «prueba» → *Enviar*. En un minuto llega un mail «🐞 Azbuka: prueba» a azbuka.aprenderuso@gmail.com. Tocando *Responder* en el mail le contestás directo al alumno.
 
 > Si el mail no llega: revisá Spam. Si tampoco está, el reporte igual aparece en Ajustes → Reportes; mandame una captura y lo vemos. Si alguna vez cambiás la clave de Brevo, se reemplaza así: `select vault.update_secret((select id from vault.secrets where name = 'brevo_api_key'), 'xkeysib-NUEVA');`
 
