@@ -1,0 +1,22 @@
+/* ============================================================
+   DATA-MASHA.JS — Charla con Masha (módulo, 21/10/2026)
+   ARCHIVO GENERADO: no se edita a mano. La fuente es
+   herramientas/masha/fuente-masha.js; después de cambiarla se corre
+   «node herramientas/masha/armar.js», que transliteración incluida
+   arma este archivo y verifica el vocabulario de cada tema.
+
+   MASHA.temas: temas de charla (6 por unidad), cada uno con
+     desde      la unidad desde la que se entiende (vocabulario y
+                gramática hasta esa unidad; U2–U4 estricto, desde la
+                U5 cualquier palabra del léxico, como Lecturas)
+     inicio     el primer paso; nodos: los pasos (bot, ideas, ramas…,
+                mismo formato que la maqueta charla.html)
+     preguntas  lo que Masha sabe contar en ese tema
+   MASHA.vida: la historia de Masha, que se le puede preguntar en
+     cualquier tema; cada respuesta tiene versiones por unidad (v: [{ d, l }])
+     y se elige la más alta que el alumno ya puede entender.
+   MASHA.apertura, comodines, utiles: lo que sirve en todos los temas.
+   MASHA.naciones: países de la Unidad 2 [país, él, ella, genitivo, él (es), ella (es)].
+   Plantillas: {nombre}, {pais}, {pais_gen}, {nac}, {x} y {él/ella}
+   (según el género del alumno).
+   ============================================================ */

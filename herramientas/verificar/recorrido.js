@@ -5,7 +5,7 @@
 const { BASE, servir, navegador } = require('./comun');
 const PAGINAS = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?id=CMR-00058', 'ficha.html?tema=comida',
   'alfabeto.html', 'alfabeto.html?mano=Б', 'dialogos.html', 'dialogos.html?id=DLG-001', 'dialogos.html?v=frases',
-  'dialogos.html?frase=FRS-001', 'lecturas.html', 'lecturas.html?id=LEC-barcelona', 'lecturas.html?id=LEC-transsib', 'dialogos.html?cul=CUL-001', 'verbos.html', 'verbos.html?id=CMR-00058',
+  'dialogos.html?frase=FRS-001', 'lecturas.html', 'lecturas.html?id=LEC-barcelona', 'lecturas.html?id=LEC-transsib', 'masha.html', 'dialogos.html?cul=CUL-001', 'verbos.html', 'verbos.html?id=CMR-00058',
   'casos.html', 'casos.html?id=CMR-00230', 'casos.html?guia=genitivo', 'cuaderno.html', 'ajustes.html'];
 (async () => {
   const srv = await servir(); const b = await navegador();

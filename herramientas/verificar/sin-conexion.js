@@ -10,7 +10,7 @@ const { RAIZ, BASE, servir, navegador } = require('./comun');
   for (const f of pre) if (f !== './' && !fs.existsSync(path.join(RAIZ, f))) problemas.push('AZ_PRECACHE nombra un archivo que no existe: ' + f);
   const refs = new Set();
   for (const h of fs.readdirSync(RAIZ).filter(f => f.endsWith('.html'))) {
-    if (h === 'charla.html' || /^voces-/.test(h)) continue; // maquetas y pruebas de voces, fuera de la app
+    if (/^voces-/.test(h)) continue; // pruebas de voces, fuera de la app
     const s = fs.readFileSync(path.join(RAIZ, h), 'utf8');
     for (const m of s.matchAll(/(?:src|href)="([^"#?:]+\.(?:js|css|png|woff2|ttf|webmanifest))"/g)) refs.add(m[1]);
     refs.add(h);
@@ -30,7 +30,7 @@ const { RAIZ, BASE, servir, navegador } = require('./comun');
   console.log('Guardados en el teléfono (simulado): ' + guardados);
   if (guardados < pre.size) problemas.push('El service worker guardó ' + guardados + ' de ' + pre.size);
   await ctx.setOffline(true);
-  for (const u of ['index.html', 'azbuka-index-1.html', 'azbuka-1.html', 'azbuka-8.html?m=u8m7', 'azbuka-13.html', 'azbuka-14.html', 'ficha.html?id=CMR-00058', 'verbos.html?id=CMR-00058', 'casos.html?id=CMR-00230', 'dialogos.html?id=DLG-001', 'cuaderno.html', 'alfabeto.html', 'ajustes.html']) {
+  for (const u of ['index.html', 'azbuka-index-1.html', 'azbuka-1.html', 'azbuka-8.html?m=u8m7', 'azbuka-13.html', 'azbuka-14.html', 'ficha.html?id=CMR-00058', 'verbos.html?id=CMR-00058', 'casos.html?id=CMR-00230', 'dialogos.html?id=DLG-001', 'cuaderno.html', 'alfabeto.html', 'masha.html', 'ajustes.html']) {
     const q = await ctx.newPage(); const errs = []; q.on('pageerror', e => errs.push(e.message.slice(0, 100)));
     try { await q.goto(BASE + u, { waitUntil: 'load', timeout: 20000 }); await q.waitForTimeout(1200); } catch (e) { errs.push('no abre'); }
     const largo = await q.evaluate(() => (document.querySelector('main') || document.body).innerText.length).catch(() => 0);

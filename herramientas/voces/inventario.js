@@ -7,7 +7,7 @@
 //
 // Grupos (tandas); «todo» (el que usa GitHub Actions) junta todas las que ya están hechas:
 //   unidades  → las 14 unidades (textos, ejercicios, chats y conversaciones), diálogos,
-//               frases, cultura, charla con Masha, Hoy y Alfabeto. Las palabras de cada
+//               frases, cultura, módulo Masha, Hoy y Alfabeto. Las palabras de cada
 //               unidad (introducedIn) van con la voz de narración.
 // Salida: { grupo, textos: [{ t: texto, v: voz, k: clave, p: [páginas] }] }
 //
@@ -38,7 +38,7 @@ function cargar(f, exportar) {
 }
 const constantes = f => [...leer(f).matchAll(/^(?:const|let|var|function)\s+([A-Za-z_$][\w$]*)/gm)].map(m => m[1]);
 ["data/data-lexicon.js", "data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js",
- "data/data-cultura.js", "data/data-charla.js", "data/data-alphabet.js", "data/data-mapa.js", "js/core.js"]
+ "data/data-cultura.js", "data/data-alphabet.js", "data/data-mapa.js", "js/core.js"]
   .forEach(f => { if (fs.existsSync(path.join(APP, f))) cargar(f, constantes(f)); });
 const { azVozClave, azVozTexto, azVozDe, DLG_PERSONAJES, DIALOGOS, LEXICON_COMER } = ctx;
 if (!azVozClave) { console.log("✗ js/core.js no tiene azVozClave"); process.exit(1); }
@@ -109,11 +109,26 @@ if (GRUPO === "unidades" || GRUPO === "todo") {
   }
   /* 3. Lo demás que se oye fuera de las unidades */
   [["data/data-frases.js", "dialogos"], ["data/data-cultura.js", "dialogos"], ["dialogos.html", "dialogos"],
-   ["data/data-charla.js", "charla"], ["charla.html", "charla"], ["js/hoy.js", "index"], ["index.html", "index"],
+   ["js/hoy.js", "index"], ["index.html", "index"],
    ["data/data-alphabet.js", "alfabeto"], ["data/data-lecturas.js", "lecturas"], ["alfabeto.html", "alfabeto"], ["js/unidad-ui.js", null], ["js/unidad.js", null], ["js/mano.js", null]]
     .forEach(([f, pag]) => { if (fs.existsSync(path.join(APP, f))) literales(f, pag); });
-  // la charla la dice Masha
-  if (ctx.CHARLA) recorrer(ctx.CHARLA, "charla", "masha", new Set());
+  /* Módulo Masha (21/10/2026): cada línea como la dice masha.html (sin emoji ni palabras en
+     español entre «»), con las dos formas de {él/ella}. Las líneas con el nombre, el país o
+     una palabra capturada se arman en el momento: suenan con la voz del teléfono. */
+  if (fs.existsSync(path.join(APP, "data/data-masha.js"))) {
+    cargar("data/data-masha.js", ["MASHA"]);
+    const mashaVoz = s => String(s || "").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}♀♂]/gu, "").replace(/«[^»]*[a-zñ][^»]*»/gi, "").trim();
+    const linea = (o, vistos) => {
+      if (!o || typeof o !== "object" || vistos.has(o)) return; vistos.add(o);
+      if (Array.isArray(o)) return o.forEach(x => linea(x, vistos));
+      if (typeof o.ru === "string" && typeof o.es === "string" && !/\{(nombre|pais|pais_gen|nac|nac_es|x|ru|es)\}/.test(o.ru)) {
+        const alt = [o.ru.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$1"), o.ru.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$2")];
+        new Set(alt).forEach(t => { const v = mashaVoz(t); if (/[а-яё]/i.test(v)) sumar(v, "masha", "masha"); });
+      }
+      Object.keys(o).forEach(k => { if (k !== "ideas" && k !== "idea") linea(o[k], vistos); });
+    };
+    if (ctx.MASHA) linea(ctx.MASHA, new Set());
+  }
 }
 
 /* Tanda 2 (17/10/2026): el Diccionario, cada entrada con su acento (la ficha, la burbuja y
