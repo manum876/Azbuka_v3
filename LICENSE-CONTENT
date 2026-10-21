@@ -83,3 +83,31 @@ data format.
 The usage notes ("nota") in data-casos.js, and the grammar explanations in
 data-gramatica.js, are original content under CC BY-NC-ND 4.0, like the
 rest of this repository.
+
+THIRD-PARTY COMPONENTS
+----------------------
+
+The following components are not authored by Juan Manuel Muñoz and are not
+covered by this content license. Each keeps its own license:
+
+- Preact (MIT) and htm (Apache License 2.0), bundled in assets/preact.js.
+  License texts: assets/preact-LICENSE.txt.
+- supabase-js (MIT), bundled in assets/supabase.js.
+  License text: assets/supabase-LICENSE.txt.
+- jsPDF (MIT) and fflate (MIT), in assets/. License texts:
+  assets/jspdf-LICENSE.txt and assets/fflate-LICENSE.txt.
+- Noto Sans and Marck Script fonts (SIL Open Font License 1.1), in assets/.
+  License texts: assets/noto-sans-OFL.txt and assets/marck-script-OFL.txt.
+- Map data from Natural Earth (public domain), in data/data-mapa.js.
+- Vocabulary sources: Comer, K. "Comer 5000" (Portland State University) and
+  the FreeDict Russian–Spanish dictionaries (CC BY-SA 3.0). Translations and
+  definitions in data-lexicon.js were rewritten for AZBUKA.
+
+GENERATED VOICES
+----------------
+
+The Russian audio played by the app is generated with the Silero text-to-
+speech models (https://github.com/snakers4/silero-models, model v5_5_ru),
+licensed under CC BY-NC 4.0. The audio files are published in a separate
+repository (manum876/Azbuka_voces) and may be used for non-commercial
+purposes only, crediting Silero.

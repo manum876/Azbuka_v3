@@ -10,7 +10,7 @@
                 gramática hasta esa unidad; U2–U4 estricto, desde la
                 U5 cualquier palabra del léxico, como Lecturas)
      inicio     el primer paso; nodos: los pasos (bot, ideas, ramas…,
-                mismo formato que la maqueta charla.html)
+                ver Contexto §6.24)
      preguntas  lo que Masha sabe contar en ese tema
    MASHA.vida: la historia de Masha, que se le puede preguntar en
      cualquier tema; cada respuesta tiene versiones por unidad (v: [{ d, l }])
