@@ -1,3 +1,12 @@
+/* ACTUALIZACIÓN 21/10/2026 (Manu): немно́го pasa a introducedIn [2] (la U2 la enseña en el módulo 5,
+   «Я немно́го говорю́ по-ру́сски»); la U10 queda en appearsIn. */
+
+/* ACTUALIZACIÓN 21/10/2026 (charla con Masha, aprobada por Manu): 3 palabras nuevas, marca
+   mashaEnrichment: москви́чка «moscovita (mujer)» (CMR-06154; con москви́ч, que ya estaba y suma el
+   tema «paises», como los demás gentilicios), блин «blini, crepe ruso» (CMR-06155; Masha dice блины́)
+   y преподава́ть «enseñar, dar clases» (CMR-06156, imperfectivo, SIN_PAREJA:ACTIVIDAD: преподать
+   es otro uso, «dar una lección»). Formas en data-casos.js y data-verbos.js. */
+
 /* ACTUALIZACIÓN 19/10/2026, segunda parte (aprobada por Manu): las 257 definiciones de
    plantilla que quedaban de la tanda CMR-05003 a CMR-05420 («Versión imperfectiva de "X": indica que la
    acción es habitual…», «Realizar la acción de "X" durante un tiempo…») pasan a ser definiciones propias,
@@ -298,7 +307,7 @@ const LEXICON_COMER_META = {
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
     "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
   ],
-  totalEntries: 6078
+  totalEntries: 6081
 };
 /* Temas del léxico (campo opcional "temas" de cada entrada, desde el
    30/09/2026). Lista cerrada; una palabra lleva como máximo 2 temas y
@@ -48418,9 +48427,11 @@ const LEXICON_COMER = [
    }
   ],
   "introducedIn": [
+   2
+  ],
+  "appearsIn": [
    10
   ],
-  "appearsIn": [],
   "comer": [
    {
     "ID1": "770",
@@ -137217,7 +137228,10 @@ const LEXICON_COMER = [
   "sourceRefs": {},
   "gender": "m",
   "animate": "sí",
-  "numberClass": "regular"
+  "numberClass": "regular",
+  "temas": [
+   "paises"
+  ]
  },
  {
   "id": "CMR-02237",
@@ -374805,6 +374819,196 @@ const LEXICON_COMER = [
   "gender": "f",
   "animate": "no",
   "numberClass": "regular",
+  "temas": [
+   "estudios"
+  ]
+ },
+ {
+  "id": "CMR-06154",
+  "ru": "москвичка",
+  "acento": "москви́чка",
+  "posNormalized": "sustantivo",
+  "translit": "maskvíchka",
+  "ipa": "mʌskvʲˈitʃʲkʌ",
+  "senses": [
+   {
+    "es": "moscovita (mujer)",
+    "definitionEs": "Mujer nacida o residente en Moscú.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "москвичка",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "9",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la charla con Masha (21/10/2026, aprobada por Manu) — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "mashaEnrichment": true
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular",
+  "temas": [
+   "paises"
+  ]
+ },
+ {
+  "id": "CMR-06155",
+  "ru": "блин",
+  "acento": "блин",
+  "posNormalized": "sustantivo",
+  "translit": "blin",
+  "ipa": "bɭʲˈin",
+  "senses": [
+   {
+    "es": "blini, crepe ruso",
+    "definitionEs": "Torta fina de masa hecha en la sartén, típica de la cocina rusa; se come con miel, mermelada o crema agria. Casi siempre en plural: блины́.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "блин",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la charla con Masha (21/10/2026, aprobada por Manu) — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "mashaEnrichment": true
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "regular",
+  "temas": [
+   "comida"
+  ]
+ },
+ {
+  "id": "CMR-06156",
+  "ru": "преподавать",
+  "acento": "преподава́ть",
+  "posNormalized": "verbo",
+  "translit": "pripadavát",
+  "ipa": "prʲɪpʌdʌvˈɑtʲ",
+  "senses": [
+   {
+    "es": "enseñar, dar clases",
+    "definitionEs": "Enseñar una materia como profesor: преподава́ть ру́сский язы́к, «dar clases de ruso».",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "преподавать",
+    "POS": "v",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "11",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada para la charla con Masha (21/10/2026, aprobada por Manu) — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "кому? что?",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "mashaEnrichment": true
+  },
+  "aspect": "imperfectivo",
+  "aspectualPartner": [
+   "SIN_PAREJA:ACTIVIDAD"
+  ],
   "temas": [
    "estudios"
   ]

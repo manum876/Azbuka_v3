@@ -1,8 +1,10 @@
 /* ============================================================
    DATA-VERBOS.JS — Conjugaciones de los verbos del léxico AZBUKA
    ------------------------------------------------------------
-   Total: 1751 verbos (todos los posNormalized:"verbo" de
+   Total: 1753 verbos (todos los posNormalized:"verbo" de
    data-lexicon.js). Generado el 23/09/2026.
+   Actualizado el 21/10/2026 (charla con Masha): преподава́ть (CMR-06156),
+   como дава́ть (преподаю́, преподаёшь), según Zalizniak y pymorphy3.
    Actualizado el 23/09/2026: 6 verbos nuevos (CMR-05419–05421 y los
    homógrafos separados CMR-05466–05468), 2 entradas huérfanas quitadas
    (CMR-05033 y CMR-05376, duplicados eliminados del léxico) y el acento
@@ -7143,7 +7145,11 @@ const VERBOS = {
   /* 05/10/2026: agregado para la Unidad 9 (no viene de OpenRussian) */
   "CMR-06142": { ru:"путеше́ствовать", presente:["путеше́ствую","путеше́ствуешь","путеше́ствует","путеше́ствуем","путеше́ствуете","путеше́ствуют"],
    pasado:{ m:"путеше́ствовал", f:"путеше́ствовала", n:"путеше́ствовало", pl:"путеше́ствовали" },
-   imperativo:{ ty:"путеше́ствуй", vy:"путеше́ствуйте" } }
+   imperativo:{ ty:"путеше́ствуй", vy:"путеше́ствуйте" } },
+ "CMR-06156": { ru:"преподава́ть",
+   presente:["преподаю́","преподаёшь","преподаёт","преподаём","преподаёте","преподаю́т"],
+   pasado:{ m:"преподава́л", f:"преподава́ла", n:"преподава́ло", pl:"преподава́ли" },
+   imperativo:{ ty:"преподава́й", vy:"преподава́йте" } }
 };
 
 /* Devuelve la conjugación de un verbo por ID, o null. */
