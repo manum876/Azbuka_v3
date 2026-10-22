@@ -1,5 +1,5 @@
 /* ============================================================
-   SHELL.JS — Drawer + header (Азбука fijo + atrás) + bottom nav,
+   SHELL.JS — Drawer + header (marca + atrás) + bottom nav,
    como un único componente reusable.
 
    Orden de carga en el <head>/<body> de cada página:
@@ -7,13 +7,13 @@
      ...
      <div id="root"></div>
      <script src="preact.js"></script>   ← bundle htm+preact
-     <script src="core.js"></script>     ← AZ_UNITS, AZ_MODULES, AZ_LEXICO, azGet/azSet
+     <script src="data/data-catalogo.js"></script> ← AZ_CATALOGO
+     <script src="core.js"></script>     ← AZ_DIRECCION, azTexto, AZ_UNITS, AZ_MODULES, azGet/azSet
      <script src="shell.js"></script>    ← este archivo
      <script> ... App propia de la página, ver ejemplo abajo ... </script>
 
-   Uso típico dentro de la página (el título y la bajada ya NO se
-   pasan por props: son siempre "Азбука" / "Aprende ruso desde cero"
-   en todas las pantallas):
+   Uso típico dentro de la página (el título y la bajada no se pasan
+   por props: salen del catálogo de la dirección, data/data-catalogo.js):
      const React = window.React;
      function App(){
        const [darkMode, setDarkMode] = useState(true);
@@ -34,6 +34,15 @@
 const { useState, useRef, useEffect, useLayoutEffect } = htmPreact;
 window.React = window.React || { createElement: htmPreact.h, Fragment: function (p) { return p.children; } };
 const React = window.React;
+
+/* ── ESQUELETO (22/10/2026, a pedido de Manu) ──
+   El shell no tiene contenido propio: la marca, el lema, las unidades, los
+   módulos, el índice, el buscador y todos los textos salen del catálogo de
+   la dirección activa (data/data-catalogo.js, vía AZ_DIRECCION y azTexto de
+   core.js). Para cambiar algo de eso se toca el catálogo, no este archivo.
+   Tamaños, colores y distribución quedan como estaban. */
+const T = k => (typeof azTexto === "function" ? azTexto(k) : k);
+const DIR = () => (typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION) || { marca: {} };
 
 /* Paleta de colores según tema — la única parte del shell que
    sigue siendo JS en vez de CSS, porque cambia en caliente. */
@@ -139,12 +148,12 @@ function AzCaptura({ c }) {
   };
   const base = { position: "fixed", left: "50%", transform: "translateX(-50%)", bottom: "calc(env(safe-area-inset-bottom, 0px) + 86px)", zIndex: 450,
     borderRadius: 22, padding: "11px 18px", fontSize: 14, fontWeight: 700, fontFamily: "inherit", boxShadow: "0 8px 24px rgba(0,0,0,.35)", whiteSpace: "nowrap" };
-  if (cartel) return React.createElement("div", { role: "status", style: Object.assign({}, base, { background: c.card, color: "#4CAF82", border: "1px solid #4CAF82" }) }, "✓ Guardado en el cuaderno");
+  if (cartel) return React.createElement("div", { role: "status", style: Object.assign({}, base, { background: c.card, color: "#4CAF82", border: "1px solid #4CAF82" }) }, T("guardadoCuaderno"));
   if (!sel) return null;
   return React.createElement("button", {
     onMouseDown: e => e.preventDefault(), onClick: guardar,
     style: Object.assign({}, base, { background: c.gold, color: c.bg, border: "none", cursor: "pointer" })
-  }, "＋ Guardar en el cuaderno");
+  }, T("guardarCuaderno"));
 }
 
 /* ── REPORTAR UN ERROR (21/10/2026, a pedido de Manu) ──
@@ -158,9 +167,10 @@ function AzReportar({ c, onClose }) {
   const [texto, setTexto] = useState(""), [esperado, setEsperado] = useState("");
   const [estado, setEstado] = useState(null);   /* null | "enviando" | "enviado" | "pendiente" | "mail" | {err} */
   const pantalla = (() => { try { if (typeof window.azFuenteActual === "function") return window.azFuenteActual(); } catch (e) {}
-    return String(document.title || "").replace(/^Азбука\s*[—-]\s*/, "") || "Inicio"; })();
+    const n = String(DIR().marca.nombre || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return String(document.title || "").replace(new RegExp("^" + n + "\\s*[—-]\\s*"), "") || T("pantallaInicio"); })();
   const enviar = async () => {
-    if (texto.trim().length < 3) { setEstado({ err: "Cuenta un poco más qué pasó." }); return; }
+    if (texto.trim().length < 3) { setEstado({ err: T("reporteCorto") }); return; }
     setEstado("enviando");
     try {
       const A = window.AzCuenta;
@@ -168,7 +178,7 @@ function AzReportar({ c, onClose }) {
       setEstado(await A.reportar({ texto, esperado }));
     } catch (e) {
       const m = String(e && e.message || e);
-      setEstado({ err: m === "limite" ? "Mandaste muchos reportes hoy. Prueba de nuevo mañana." : "No se pudo enviar. Prueba de nuevo en un momento." });
+      setEstado({ err: m === "limite" ? T("reporteLimite") : T("reporteFallo") });
     }
   };
   const lbl = t => React.createElement("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "20px 0 8px" } }, t);
@@ -178,31 +188,31 @@ function AzReportar({ c, onClose }) {
     style: { width: "100%", padding: "13px 16px", borderRadius: 10, fontSize: 14.5, fontWeight: 700, cursor: dis ? "default" : "pointer", fontFamily: "inherit", marginTop: 10, opacity: dis ? 0.6 : 1,
       background: sec ? c.bg3 : c.gold, border: `1px solid ${sec ? c.border : c.gold}`, color: sec ? c.text : c.bg } }, t);
   const listo = estado === "enviado" || estado === "pendiente" || estado === "mail";
-  const aviso = { enviado: "✓ Enviado. ¡Gracias! Lo vamos a revisar.", pendiente: "No hay conexión: el reporte quedó guardado y se manda solo cuando vuelva internet.", mail: "Se abrió tu app de correo con el reporte escrito: solo falta enviarlo." }[estado];
-  return React.createElement("div", { ref: azRefCapa(capa), role: "dialog", "aria-label": "Reportar un error",
+  const aviso = { enviado: T("reporteEnviado"), pendiente: T("reportePendiente"), mail: T("reporteMail") }[estado];
+  return React.createElement("div", { ref: azRefCapa(capa), role: "dialog", "aria-label": T("reportar"),
       style: { position: "fixed", inset: 0, zIndex: 300, background: c.bg, boxShadow: `0 0 0 100vmax ${c.bg}`, color: c.text, fontFamily: "'Noto Sans',sans-serif", overflowY: "auto", WebkitOverflowScrolling: "touch", animation: "fadeIn .25s ease" } },
-    React.createElement("button", { onClick: onClose, "aria-label": "Cerrar",
+    React.createElement("button", { onClick: onClose, "aria-label": T("reporteCerrar"),
       style: { position: "fixed", top: "var(--az-top,6vh)", right: "3vw", width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 16, cursor: "pointer", zIndex: 2 } }, "✕"),
     React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", padding: "var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px))" } },
-      React.createElement("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, paddingRight: 48, lineHeight: "36px" } }, "Ayuda"),
-      React.createElement("div", { style: { fontSize: 26, fontWeight: 800, marginTop: 4 } }, "Reportar un error"),
+      React.createElement("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, paddingRight: 48, lineHeight: "36px" } }, T("reporteAyuda")),
+      React.createElement("div", { style: { fontSize: 26, fontWeight: 800, marginTop: 4 } }, T("reportar")),
       React.createElement("div", { style: { fontSize: 15, lineHeight: 1.6, color: c.textSub, marginTop: 8 } },
-        "¿Algo no funciona, se ve mal o una respuesta está equivocada? Cuéntalo con tus palabras."),
+        T("reporteIntro")),
       listo
         ? React.createElement(React.Fragment, null,
             React.createElement("div", { role: "status", style: { fontSize: 15, lineHeight: 1.55, marginTop: 20, padding: "12px 14px", borderRadius: 10,
               color: estado === "enviado" ? "#4CAF82" : c.text, background: estado === "enviado" ? "#4CAF8222" : c.gold + "18", border: `1px solid ${estado === "enviado" ? "#4CAF82" : c.gold + "66"}` } }, aviso),
-            boton("Cerrar", onClose))
+            boton(T("reporteCerrar"), onClose))
         : React.createElement(React.Fragment, null,
-            lbl("Qué pasó"),
-            area(texto, setTexto, 5, "Por ejemplo: escribo «кни́гу» y me lo marca mal…"),
-            lbl("Qué esperabas (opcional)"),
-            area(esperado, setEsperado, 3, "Por ejemplo: que estuviera bien."),
+            lbl(T("reporteQuePaso")),
+            area(texto, setTexto, 5, T("reporteQuePasoEj")),
+            lbl(T("reporteEsperabas")),
+            area(esperado, setEsperado, 3, T("reporteEsperabasEj")),
             React.createElement("div", { style: { fontSize: 12.5, lineHeight: 1.55, color: c.textMuted, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: 10, padding: "10px 12px", marginTop: 14 } },
-              "Se envía también, para encontrar el error: esta pantalla (", React.createElement("b", { style: { color: c.textSub } }, pantalla), "), el tipo de teléfono y tu mail."),
+              T("reporteAdjunto1"), React.createElement("b", { style: { color: c.textSub } }, pantalla), T("reporteAdjunto2")),
             estado && estado.err && React.createElement("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: "#D9776F", background: "#B5605C22", borderRadius: 10, padding: "10px 12px", marginTop: 12 } }, estado.err),
-            boton(estado === "enviando" ? "Enviando…" : "Enviar", enviar, false, estado === "enviando"),
-            boton("Cancelar", onClose, true))));
+            boton(estado === "enviando" ? T("reporteEnviando") : T("reporteEnviar"), enviar, false, estado === "enviando"),
+            boton(T("reporteCancelar"), onClose, true))));
 }
 
 function AzShell(props) {
@@ -221,7 +231,8 @@ function AzShell(props) {
   const c = azColors(dark);
 
   const q = lexQuery.trim();
-  const results = q && typeof azSearchLexicon === "function" ? azSearchLexicon(q) : [];
+  const buscar = window[DIR().buscador || "azSearchLexicon"];
+  const results = q && typeof buscar === "function" ? buscar(q) : [];
 
   useEffect(() => { azInterceptLinks(); }, []);
 
@@ -275,8 +286,8 @@ function AzShell(props) {
         transition: "transform .28s cubic-bezier(.4,0,.2,1)"
       }
     },
-      /* Buscador — va DIRECTO a LEXICON_COMER (las ~4.931 palabras),
-         no a módulos. Cada resultado lleva a su ficha. */
+      /* Buscador — va directo al léxico de la dirección (catálogo:
+         buscador), no a módulos. Cada resultado lleva a su ficha. */
       React.createElement("div", { style: { padding: "var(--az-top) 16px 8px", flexShrink: 0 } },
         React.createElement("div", { style: { position: "relative" } },
           React.createElement("input", {
@@ -284,12 +295,12 @@ function AzShell(props) {
             value: lexQuery,
             onInput: (e) => setLexQuery(e.target.value),
             onFocus: () => { if (listRef.current) listRef.current.scrollTop = 0; },
-            placeholder: "Buscar en el léxico…",
+            placeholder: T("buscar"),
             style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "9px 32px 9px 12px", color: c.text, fontSize: 13.5 }
           }),
           lexQuery && React.createElement("button", {
             onClick: () => { setLexQuery(""); if (searchRef.current) searchRef.current.focus(); },
-            "aria-label": "Limpiar búsqueda",
+            "aria-label": T("limpiarBusqueda"),
             style: { position: "absolute", right: 6, top: "50%", transform: "translateY(-50%)", width: 22, height: 22, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 12, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
           }, "✕")
         )
@@ -313,24 +324,24 @@ function AzShell(props) {
       ),
       q && results.length === 0 && React.createElement("div", {
         style: { margin: "0 16px 8px", fontSize: 12, color: c.textMuted, flexShrink: 0 }
-      }, "Sin resultados"),
+      }, T("sinResultados")),
 
       /* Índice + listado de unidades, y por separado los módulos de
          apoyo — esta es la única zona que scrollea dentro del drawer. */
       React.createElement("div", { ref: listRef, style: { flex: 1, overflowY: "auto", padding: "6px 8px" } },
-        React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "10px 10px 6px" } }, "Azbuka"),
+        React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "10px 10px 6px" } }, T("curso")),
         React.createElement("a", {
-          href: "azbuka-index-1.html",
-          onClick: (e) => azNavigate(e, "azbuka-index-1.html"),
+          href: DIR().indice,
+          onClick: (e) => azNavigate(e, DIR().indice),
           style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: 13.5, textDecoration: "none" }
-        }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, "00"), "Índice"),
+        }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, "00"), T("indice")),
         (typeof AZ_UNITS !== "undefined" ? AZ_UNITS : []).map(u => React.createElement("a", {
           key: u.id, href: u.href,
           onClick: (e) => azNavigate(e, u.href),
           style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: 13.5, textDecoration: "none" }
         }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, String(u.id).padStart(2, "0")), u.title)),
 
-        React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "16px 10px 6px" } }, "Módulos de apoyo"),
+        React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "16px 10px 6px" } }, T("modulos")),
         /* Módulos de apoyo como tarjetas (01/10/2026): ícono de color,
            título, descripción y «›». El activo, con borde dorado. */
         (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).map(m => {
@@ -359,39 +370,39 @@ function AzShell(props) {
         }, dark ? "🌙" : "☀️"),
         /* Ajustes (26/09/2026, a pedido de Manu): por ahora, la copia de seguridad */
         React.createElement("a", {
-          href: "ajustes.html", "aria-label": "Ajustes",
+          href: "ajustes.html", "aria-label": T("ajustes"),
           onClick: (e) => azNavigate(e, "ajustes.html"),
           style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, textDecoration: "none", flexShrink: 0 }
         }, "⚙️"),
         /* Reportar un error (21/10/2026, a pedido de Manu) */
         React.createElement("button", {
-          onClick: () => { setDrawerOpen(false); setReportando(true); }, "aria-label": "Reportar un error", title: "Reportar un error",
+          onClick: () => { setDrawerOpen(false); setReportando(true); }, "aria-label": T("reportar"), title: T("reportar"),
           style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, cursor: "pointer", padding: 0, flexShrink: 0 }
         }, "🐞"),
         React.createElement("a", {
           href: "index.html",
           onClick: (e) => azNavigate(e, "index.html"),
           style: { flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 10, color: c.text, fontSize: 13.5, textDecoration: "none" }
-        }, "🏠 Inicio")
+        }, T("inicio"))
       )
     ),
 
     /* ── HEADER: fixed (NO sticky) — clavado al viewport, inmune
        al rebote elástico de iOS al scrollear. Arranca en --az-top
        (zona segura compartida). Una sola fila alineada abajo: botón
-       atrás (historial, no jerarquía) + Азбука + bajada al lado. ── */
+       atrás (historial, no jerarquía) + marca + lema al lado. ── */
     React.createElement("header", {
       ref: headerRef,
       style: { position: "fixed", top: 0, left: 0, right: 0, padding: "var(--az-top) 3vw 12px", borderBottom: `1px solid ${c.border}`, background: c.bg, backdropFilter: "blur(12px)", zIndex: 100 }
     },
       React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "center", gap: 10 } },
         React.createElement("button", {
-          onClick: azGoBack, "aria-label": "Atrás",
+          onClick: azGoBack, "aria-label": T("atras"),
           style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: c.text, cursor: "pointer", padding: 0, flexShrink: 0, marginTop: 0 }
         }, "<"),
         React.createElement("div", { style: { display: "flex", alignItems: "baseline", gap: 8, minWidth: 0 } },
-          React.createElement("span", { style: { fontSize: 24, lineHeight: 1, color: c.gold, fontWeight: 900, letterSpacing: -1, flexShrink: 0 } }, "Азбука"),
-          React.createElement("span", { style: { fontSize: 12.5, color: c.textMuted, fontWeight: 500, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0 } }, "Aprende ruso desde cero")
+          React.createElement("span", { style: { fontSize: 24, lineHeight: 1, color: c.gold, fontWeight: 900, letterSpacing: -1, flexShrink: 0 } }, DIR().marca.nombre),
+          React.createElement("span", { style: { fontSize: 12.5, color: c.textMuted, fontWeight: 500, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0 } }, DIR().marca.lema)
         )
       )
     ),
@@ -412,7 +423,7 @@ function AzShell(props) {
         React.createElement("button", {
           onClick: () => setDrawerOpen(true),
           style: { flexShrink: 0, background: "none", border: "none", padding: "6px 14px 6px 0", display: "flex", flexDirection: "column", alignItems: "center", gap: 3, color: c.textMuted, cursor: "pointer", fontFamily: "inherit" }
-        }, React.createElement("span", { style: { fontSize: 20 } }, "☰"), React.createElement("span", { style: { fontSize: 11, fontWeight: 600 } }, "Menú")),
+        }, React.createElement("span", { style: { fontSize: 20 } }, "☰"), React.createElement("span", { style: { fontSize: 11, fontWeight: 600 } }, T("menu"))),
 
         tabs.length > 0 && React.createElement("div", { style: { width: 1, height: 32, background: c.border, margin: "0 8px", flexShrink: 0 } }),
 

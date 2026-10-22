@@ -38,7 +38,7 @@ function cargar(f, exportar) {
 }
 const constantes = f => [...leer(f).matchAll(/^(?:const|let|var|function)\s+([A-Za-z_$][\w$]*)/gm)].map(m => m[1]);
 ["data/data-lexicon.js", "data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js",
- "data/data-cultura.js", "data/data-alphabet.js", "data/data-mapa.js", "js/core.js"]
+ "data/data-cultura.js", "data/data-alphabet.js", "data/data-mapa.js", "data/data-catalogo.js", "js/core.js"]
   .forEach(f => { if (fs.existsSync(path.join(APP, f))) cargar(f, constantes(f)); });
 const { azVozClave, azVozTexto, azVozDe, DLG_PERSONAJES, DIALOGOS, LEXICON_COMER } = ctx;
 if (!azVozClave) { console.log("✗ js/core.js no tiene azVozClave"); process.exit(1); }

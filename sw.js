@@ -36,7 +36,7 @@ const AZ_PRECACHE = [
   "lecturas.html", "data/data-lecturas.js", "masha.html", "data/data-masha.js",
   "repaso.html", "verbos.html", "manifest.webmanifest", "js/avisos.js", "js/hoy.js", "js/burbuja.js",
   "js/core.js", "js/corrector.js", "js/cuenta.js", "js/mano.js", "js/progress.js", "js/shell.js",
-  "js/unidad-ui.js", "js/unidad.js", "data/data-alphabet.js", "data/data-casos.js",
+  "js/unidad-ui.js", "js/unidad.js", "data/data-alphabet.js", "data/data-casos.js", "data/data-catalogo.js",
   "data/data-cultura.js", "data/data-dialogos.js", "data/data-frases.js", "data/data-gramatica.js",
   "data/data-lexicon.js", "data/data-mapa.js", "data/data-unidad-1.js", "data/data-unidad-2.js",
   "data/data-unidad-3.js", "data/data-unidad-4.js", "data/data-unidad-5.js", "data/data-unidad-6.js", "data/data-unidad-7.js", "data/data-unidad-8.js", "data/data-unidad-9.js", "data/data-unidad-10.js", "data/data-unidad-11.js", "data/data-unidad-12.js", "data/data-unidad-13.js", "data/data-unidad-14.js", "data/data-verbos.js", "assets/apple-touch-icon.png", "assets/core.css",

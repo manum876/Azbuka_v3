@@ -8,43 +8,38 @@
    ============================================================ */
 
 /* ── CATÁLOGO GLOBAL ─────────────────────────────────────────
-   Sacado directo de tu core.js real (títulos, desc y hrefs
-   tal cual están hoy en el repo). Numeración desde el 06/10/2026
-   (Manu): 12 Gramática B1 · 13 Consolidación B1 · 14 Examen final
-   (examen: true lo separa en el índice). */
-const AZ_UNITS = [
-  { id: 1, title: "Alfabeto y pronunciación", desc: "Las 33 letras, sonidos y primeras palabras.", href: "azbuka-1.html", lista: true },
-  { id: 2, title: "Presentaciones y conversaciones básicas", desc: "Saludar, presentarte, nacionalidades y primeras preguntas.", href: "azbuka-2.html", lista: true },
-  { id: 3, title: "Sustantivos, género y números", desc: "Género, plural, números y objetos de todos los días.", href: "azbuka-3.html", lista: true },
-  { id: 4, title: "Casos I: Nominativo y Acusativo", desc: "Quién hace qué: el sujeto y el objeto directo.", href: "azbuka-4.html", lista: true },
-  { id: 5, title: "Verbos en presente y acciones cotidianas", desc: "Las conjugaciones del presente y la rutina.", href: "azbuka-5.html", lista: true },
-  { id: 6, title: "Ubicación, movimiento y caso prepositivo", desc: "Dónde estás y adónde vas.", href: "azbuka-6.html", lista: true },
-  { id: 7, title: "Tiempo, fechas y rutina diaria", desc: "Horas, días, meses y tu día a día.", href: "azbuka-7.html", lista: true },
-  { id: 8, title: "Pasado y experiencias personales", desc: "Contar lo que pasó, terminado o en proceso: ayer, antes y ahora.", href: "azbuka-8.html", lista: true },
-  { id: 9, title: "Futuro y planes", desc: "Hablar del futuro y hacer planes: lo que vas a hacer y lo que vas a terminar.", href: "azbuka-9.html", lista: true },
-  { id: 10, title: "Casos II: Genitivo, Dativo e Instrumental", desc: "Los tres casos que faltan: tener, cantidades, a quién, con quién y con qué.", href: "azbuka-10.html", lista: true },
-  { id: 11, title: "Comunicación cotidiana y ruso del mundo real", desc: "Situaciones reales: comprar, pedir, moverte por la ciudad, resolver problemas y charlar.", href: "azbuka-11.html", lista: true },
-  { id: 12, title: "Gramática B1", desc: "Pronombres, свой y plural en todos los casos; cómo funcionan las parejas de verbos, el imperativo y comparar.", href: "azbuka-12.html", lista: true },
-  { id: 13, title: "Consolidación B1 y comunicación", desc: "Contar, opinar, entender y escribir con autonomía.", href: "azbuka-13.html", lista: true },
-  { id: 14, title: "Examen final", desc: "Seis bloques que evalúan las 13 unidades.", href: "azbuka-14.html", lista: true, examen: true },
-];
-
-/* Módulos de apoyo. Diccionario fue dado de baja (ya no existe
-   como módulo independiente) — solo quedan estos 4. desc/icon
-   se agregan acá (antes solo vivían en el index.html viejo) para
-   que cualquier página que liste los módulos (home, drawer, etc.)
-   los lea de una única fuente. icon es el nombre de color fijo
-   (no cambia con el tema, ver ESTETICA_AZBUKA.md §2). */
-const AZ_MODULES = [
-  { id: "diccionario", title: "Diccionario", desc: "Todo el léxico, por tema y por categoría", href: "ficha.html", icon: "orange", glyph: "Сл" },
-  { id: "alfabeto", title: "Alfabeto", desc: "Letras, sonidos y caligrafía — consulta libre", href: "alfabeto.html", icon: "yellow", glyph: "Аа" },
-  { id: "dialogos", title: "Diálogos", desc: "Conversaciones, frases útiles y notas culturales", href: "dialogos.html", icon: "lime", glyph: "Ди" },
-  { id: "lecturas", title: "Lecturas", desc: "Textos para leer y entender, con preguntas", href: "lecturas.html", icon: "green", glyph: "Чт" },
-  { id: "masha", title: "Masha", desc: "Charla por escrito con Masha, en ruso", href: "masha.html", icon: "cyan", glyph: "Ма" },
-  { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "blue", glyph: "Вб" },
-  { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "purple", glyph: "Пд" },
-  { id: "cuaderno", title: "Cuaderno", desc: "Tus notas y lo que guardas desde la app", href: "cuaderno.html", icon: "pink", glyph: "Тд" },
-];
+   22/10/2026: el catálogo (unidades, módulos, marca, textos del menú) vive
+   en data/data-catalogo.js (AZ_CATALOGO), una entrada por dirección. Acá
+   solo se elige la dirección activa y se exponen AZ_UNITS y AZ_MODULES
+   como siempre, así ninguna página cambia.
+   Respaldo: si una página vieja (guardada sin conexión) no cargó el
+   catálogo, se lee acá mismo de forma síncrona (lo sirve el service worker). */
+if (typeof AZ_CATALOGO === "undefined") {
+  try {
+    const x = new XMLHttpRequest();
+    x.open("GET", "data/data-catalogo.js", false); x.send(null);
+    if (x.status === 200 || x.status === 0) (0, eval)(x.responseText);
+  } catch (e) {}
+}
+/* Dirección activa. Abecé está bloqueada (abierta: false) hasta que esté
+   terminada: hasta entonces solo se ve con az_direccion = "abece" y
+   az_prueba = "si" en el teléfono (los prende el admin al probar). */
+function azDireccion() {
+  const cat = typeof AZ_CATALOGO !== "undefined" ? AZ_CATALOGO : null;
+  if (!cat) return { id: "azbuka", marca: {}, unidades: [], modulos: [], textos: {} };
+  let id = "azbuka", prueba = false;
+  try { id = JSON.parse(localStorage.getItem("az_direccion") || '"azbuka"'); prueba = JSON.parse(localStorage.getItem("az_prueba") || '""') === "si"; } catch (e) {}
+  const d = cat[id];
+  return d && (d.abierta || prueba) ? d : cat.azbuka;
+}
+const AZ_DIRECCION = azDireccion();
+/* Un texto del shell en el idioma de la dirección; si falta, el de azbuka. */
+function azTexto(k) {
+  const t = AZ_DIRECCION.textos || {}, base = (typeof AZ_CATALOGO !== "undefined" && AZ_CATALOGO.azbuka.textos) || {};
+  return t[k] != null ? t[k] : base[k] != null ? base[k] : k;
+}
+const AZ_UNITS = AZ_DIRECCION.unidades || [];
+const AZ_MODULES = AZ_DIRECCION.modulos || [];
 
 /* Colores de los íconos, en el orden del arcoíris (01/10/2026): Azbuka
    rojo, Diccionario naranja, Alfabeto amarillo, Diálogos verde, Verbos
