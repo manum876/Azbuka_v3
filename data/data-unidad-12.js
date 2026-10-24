@@ -154,19 +154,19 @@ const U12_LECTURAS = [
   { id: "brat", titulo: "Мой брат и его́ друзья́", lineas: [
       ["У меня́ два бра́та.", "Tengo dos hermanos."], ["Мой брат Ива́н живёт в Москве́.", "Mi hermano Iván vive en Moscú."], ["У него́ мно́го друзе́й.", "Él tiene muchos amigos."],
       ["Его́ друзья́ — студе́нты.", "Sus amigos son estudiantes."], ["В суббо́ту он гуля́ет с друзья́ми.", "Los sábados pasea con sus amigos."], ["Он помога́ет студе́нтам.", "Ayuda a los estudiantes."],
-      ["Я ча́сто ду́маю о нём и звоню́ ему́.", "Pienso seguido en él y lo llamo."]],
+      ["Я ча́сто ду́маю о нём и звоню́ ему́.", "Pienso a menudo en él y lo llamo."]],
     preguntas: [["¿Cuántos hermanos tiene quien escribe?", "два бра́та", ["пять бра́тьев", "оди́н брат"]], ["¿Con quién pasea Iván los sábados?", "с друзья́ми", ["с бра́том", "с ма́мой"]], ["¿A quién ayuda Iván?", "студе́нтам", ["друзья́м", "бра́ту"]]],
     vf: [["У Ива́на ма́ло друзе́й.", false], ["Ива́н живёт в Москве́.", true], ["Его́ друзья́ — студе́нты.", true]] },
   { id: "kniga", titulo: "Вчера́ и за́втра", lineas: [
-      ["Вчера́ я до́лго рабо́тал.", "Ayer trabajé mucho tiempo."], ["Ве́чером я пригото́вил у́жин и позвони́л ма́ме.", "A la noche preparé la cena y llamé a mamá."],
+      ["Вчера́ я до́лго рабо́тал.", "Ayer trabajé mucho tiempo."], ["Ве́чером я пригото́вил у́жин и позвони́л ма́ме.", "Por la noche preparé la cena y llamé a mamá."],
       ["Пото́м я чита́л кни́гу два часа́.", "Después estuve leyendo un libro dos horas."], ["Но я ещё не прочита́л её.", "Pero todavía no lo terminé."],
       ["За́втра я прочита́ю э́ту кни́гу.", "Mañana voy a terminar este libro."], ["И весь день я бу́ду отдыха́ть.", "Y todo el día voy a descansar."]],
-    preguntas: [["¿Qué hizo a la noche, antes de leer?", "пригото́вил у́жин", ["чита́л газе́ту", "смотре́л фильм"]], ["¿Cuánto tiempo leyó?", "два часа́", ["весь день", "пять часо́в"]], ["¿Qué va a hacer mañana todo el día?", "бу́ду отдыха́ть", ["бу́ду рабо́тать", "бу́ду гото́вить"]]],
+    preguntas: [["¿Qué hizo por la noche, antes de leer?", "пригото́вил у́жин", ["чита́л газе́ту", "смотре́л фильм"]], ["¿Cuánto tiempo leyó?", "два часа́", ["весь день", "пять часо́в"]], ["¿Qué va a hacer mañana todo el día?", "бу́ду отдыха́ть", ["бу́ду рабо́тать", "бу́ду гото́вить"]]],
     vf: [["Он уже́ прочита́л кни́гу.", false], ["Ве́чером он позвони́л ма́ме.", true], ["За́втра он бу́дет рабо́тать весь день.", false]] },
   { id: "goroda", titulo: "Москва́ и Барсело́на", lineas: [
       ["Моя́ подру́га живёт в Барсело́не, а я в Москве́.", "Mi amiga vive en Barcelona, y yo en Moscú."], ["Москва́ бо́льше, чем Барсело́на.", "Moscú es más grande que Barcelona."],
       ["Но в Барсело́не тепле́е.", "Pero en Barcelona hace más calor."], ["По-мо́ему, метро́ в Москве́ са́мое краси́вое.", "Para mí, el metro de Moscú es el más bonito."],
-      ["Подру́га пи́шет мне: «Позвони́ мне за́втра!»", "Mi amiga me escribe: «¡Llámame mañana!»"], ["А я отвеча́ю: «Не звони́ мне у́тром, я рабо́таю».", "Y yo le respondo: «No me llames a la mañana, trabajo»."]],
+      ["Подру́га пи́шет мне: «Позвони́ мне за́втра!»", "Mi amiga me escribe: «¡Llámame mañana!»"], ["А я отвеча́ю: «Не звони́ мне у́тром, я рабо́таю».", "Y yo le respondo: «No me llames por la mañana, trabajo»."]],
     preguntas: [["¿Dónde vive la amiga?", "в Барсело́не", ["в Москве́", "в Испа́нии"]], ["¿Qué ciudad es más grande?", "Москва́", ["Барсело́на", "Испа́ния"]], ["¿Qué le pide la amiga?", "Позвони́ мне за́втра", ["Не звони́ мне", "Напиши́ мне"]]],
     vf: [["В Москве́ тепле́е, чем в Барсело́не.", false], ["Москва́ бо́льше, чем Барсело́на.", true], ["Подру́га живёт в Москве́.", false]] }
 ];
@@ -232,7 +232,7 @@ const UNIDAD_12 = {
             { ru: "Ма́ма зна́ет {тебя́}.", es: "Mamá te conoce.", por: "Acusativo: a quién conoce." },
             { ru: "У {тебя́} есть вре́мя?", es: "¿Tienes tiempo?", por: "Genitivo: у + quién." },
             { ru: "Я ви́жу {их}.", es: "Los veo.", por: "Acusativo de они́." }],
-          chequeo: [{ pide: "Ма́ма ждёт ___ (a nosotros).", opciones: ["нас", "нам", "на́ми"], ok: "нас", por: "Acusativo: нас." }] },
+          chequeo: [{ pide: "Ма́ма ждёт ___ (a nosotros).", opciones: ["нас", "нам", "на́ми"], ok: "нас", por: "ждать pide acusativo (a quién se espera): нас. Нам es dativo y на́ми, instrumental." }] },
         { id: "u12-pron-dat-ins", titulo: "Dativo e instrumental",
           texto: "dativo: мне, тебе́, ему́, ей, нам, вам, им\ninstrumental: мной, тобо́й, им, ей, на́ми, ва́ми, и́ми\nDos formas se repiten: им (dativo de они́ e instrumental de он) y ей (dativo e instrumental de она́). El verbo o la preposición dicen cuál es.",
           ejemplos: [
@@ -438,7 +438,7 @@ const UNIDAD_12 = {
           destacado: "не + proceso = no pasó · не + resultado = no se terminó",
           chequeo: [{ pide: "Empezaste la tarea pero no la terminaste.", opciones: ["Я не сде́лал зада́ние.", "Я не де́лал зада́ние."], ok: "Я не сде́лал зада́ние.", por: "No llegó al final: resultado." }] },
         { id: "u12-dos-futuros", titulo: "Los dos futuros (repaso)",
-          texto: "бу́ду + infinitivo del de proceso: lo que vas a estar haciendo o vas a hacer seguido. El de resultado conjugado: lo que vas a terminar, una vez. Nunca бу́ду + resultado.",
+          texto: "бу́ду + infinitivo del de proceso: lo que vas a estar haciendo o vas a hacer a menudo. El de resultado conjugado: lo que vas a terminar, una vez. Nunca бу́ду + resultado.",
           ejemplos: [
             { ru: "За́втра я {бу́ду чита́ть}.", es: "Mañana voy a estar leyendo.", por: "Proceso." },
             { ru: "За́втра я {прочита́ю} кни́гу.", es: "Mañana voy a leer el libro (entero).", por: "Resultado." },
@@ -498,7 +498,7 @@ const UNIDAD_12 = {
           ejemplos: [
             { ru: "Вчера́ я {до́лго спал}.", es: "Ayer dormí mucho.", por: "Duró: proceso." },
             { ru: "Пото́м я {пригото́вил} за́втрак и {позвони́л} ма́ме.", es: "Después preparé el desayuno y llamé a mamá.", por: "En fila: resultados." },
-            { ru: "Ве́чером я {смотре́л} фильм с дру́гом, и мы {говори́ли} о рабо́те.", es: "A la noche vi una película con un amigo y hablamos del trabajo.", por: "Fondo de la noche: procesos." },
+            { ru: "Ве́чером я {смотре́л} фильм с дру́гом, и мы {говори́ли} о рабо́те.", es: "Por la noche vi una película con un amigo y hablamos del trabajo.", por: "Fondo de la noche: procesos." },
             { ru: "Пото́м друг {ушёл}, и я {лёг} спать.", es: "Después mi amigo se fue y me acosté.", por: "En fila: resultados." }] }
       ] },
     { id: "u12m8", n: 8, tipo: "leccion", nPractica: 12, titulo: "El imperativo", resumen: "Позвони́ мне. Не звони́ ему́. Сади́тесь!",
@@ -526,7 +526,7 @@ const UNIDAD_12 = {
           texto: "Para pedir algo concreto, una vez: el de resultado (Закро́й окно́). Para algo que se repite o en general: el de proceso (Звони́ мне ча́сто). Y para invitar a alguien que ya está por hacerlo, el de proceso suena más amable: Сади́тесь! Проходи́те!",
           ejemplos: [
             { ru: "{Закро́й} окно́, пожа́луйста.", es: "Cierra la ventana, por favor.", por: "Una vez: закры́ть." },
-            { ru: "{Звони́} мне ча́сто.", es: "Llámame seguido.", por: "Se repite: звони́ть." },
+            { ru: "{Звони́} мне ча́сто.", es: "Llámame a menudo.", por: "Se repite: звони́ть." },
             { ru: "{Сади́тесь}, пожа́луйста!", es: "¡Siéntese, por favor!", por: "Invitación: el de proceso." }] },
         { id: "u12-imp-ne", titulo: "No hagas: не + proceso",
           texto: "Para prohibir o pedir que no se haga algo, siempre не + el de proceso.",
@@ -580,7 +580,7 @@ const UNIDAD_12 = {
     { id: "u12m10", n: 10, tipo: "lectura", titulo: "Todo junto", resumen: "Leer con toda la gramática de la unidad.",
       intro: "Tres textos con todo lo de la unidad: pronombres, posesivos, plural, aspecto, imperativo y comparaciones. Lee, escucha y después contesta." },
     { id: "u12m11", n: 11, tipo: "proyecto", titulo: "Proyecto: Моя́ неде́ля", resumen: "Tu semana, con toda la gramática B1.",
-      intro: "Cuenta tu semana: qué hiciste (lo que terminaste y lo que hacías seguido), qué vas a hacer, con quién, y compara algo. Suma un pedido o un consejo. Por ejemplo: В понеде́льник я до́лго рабо́тал. Ве́чером я пригото́вил у́жин и позвони́л ма́ме. Ка́ждый день я чита́л кни́гу. В суббо́ту я гуля́л с мои́ми друзья́ми. Мой брат помога́ет студе́нтам. За́втра я посмотрю́ фильм. Фильм интере́снее, чем кни́га. Позвони́ мне!",
+      intro: "Cuenta tu semana: qué hiciste (lo que terminaste y lo que hacías a menudo), qué vas a hacer, con quién, y compara algo. Suma un pedido o un consejo. Por ejemplo: В понеде́льник я до́лго рабо́тал. Ве́чером я пригото́вил у́жин и позвони́л ма́ме. Ка́ждый день я чита́л кни́гу. В суббо́ту я гуля́л с мои́ми друзья́ми. Мой брат помога́ет студе́нтам. За́втра я посмотрю́ фильм. Фильм интере́снее, чем кни́га. Позвони́ мне!",
       requisitos: [], consejos: [] },
     { id: "u12m12", n: 12, tipo: "examen", titulo: "Evaluación", resumen: "Pronombres, plural, aspecto, imperativo, comparar, traducción y lectura.",
       intro: "Treinta y cinco ejercicios en siete partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
@@ -817,7 +817,7 @@ function ejerciciosUnidad12() {
     out.push({ id: "U12-p2emp-" + k, tipo: "emparejar", forma: "emparejar", dificultad: 1, modulo: 4, grupo: "P2E-" + k, items: [], pide: "Une cada palabra con su " + U12_CASO[caso] + " plural (" + t + ").",
       pares: sel.map(s => [s.sg[0], s.pl[caso]]), explicacion: sel.map(s => s.sg[0] + " → " + s.pl[caso]).join(" · ") });
   });
-  [["Мы гуля́ем с детьми́.", "Paseamos con los chicos."], ["Я ча́сто ду́маю о друзья́х.", "Pienso seguido en los amigos."], ["Учи́тель помога́ет студе́нтам.", "El maestro ayuda a los estudiantes."], ["Я живу́ с мои́ми бра́тьями.", "Vivo con mis hermanos."]].forEach(([ru, es], j) => {
+  [["Мы гуля́ем с детьми́.", "Paseamos con los chicos."], ["Я ча́сто ду́маю о друзья́х.", "Pienso a menudo en los amigos."], ["Учи́тель помога́ет студе́нтам.", "El maestro ayuda a los estudiantes."], ["Я живу́ с мои́ми бра́тьями.", "Vivo con mis hermanos."]].forEach(([ru, es], j) => {
     out.push({ id: "U12-p2t-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 4, grupo: "P2T-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
     out.push({ id: "U12-p2d-" + j, tipo: "dictado", forma: "escribir", dificultad: 3, modulo: 4, grupo: "P2Dc-" + j, items: [], pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es });
   });
@@ -895,7 +895,7 @@ function ejerciciosUnidad12() {
 
   /* ── Módulo 7: aspecto III ── */
   const DUR = ["чита́ть", "писа́ть", "смотре́ть", "гото́вить", "учи́ть", "де́лать", "отдыха́ть", "обе́дать"];
-  const MARC = [["Ка́ждый день я {}.", "Todos los días {impf}.", "i", "ка́ждый день"], ["Я ча́сто {}.", "Seguido {impf}.", "i", "ча́сто"], ["Я {} два часа́.", "Estuve {ger} dos horas.", "i", "два часа́"],
+  const MARC = [["Ка́ждый день я {}.", "Todos los días {impf}.", "i", "ка́ждый день"], ["Я ча́сто {}.", "A menudo {impf}.", "i", "ча́сто"], ["Я {} два часа́.", "Estuve {ger} dos horas.", "i", "два часа́"],
     ["Я уже́ {}.", "Ya {pret}.", "p", "уже́"], ["Наконе́ц я {}.", "Por fin {pret}.", "p", "наконе́ц"]];
   ASP.forEach((a, j) => {
     let mk = MARC[j % 5]; if (mk[3] === "два часа́" && DUR.indexOf(a.i.ac) < 0) mk = MARC[1];
@@ -920,10 +920,11 @@ function ejerciciosUnidad12() {
     out.push({ id: "U12-mkdet-" + j, tipo: "detectar", forma: "tocar", dificultad: 2, modulo: 7, grupo: "MKD-" + j, items: [], oir: ok, pide: "Toca la palabra que está mal.", palabras: pals, correcta: pals.indexOf(w),
       explicacion: "**" + mk + "** pide imperfectivo: " + ok });
   });
-  [["¿Qué hiciste ayer? (a un amigo)", "Что ты де́лал вчера́?"], ["¿Hiciste la tarea? (a un amigo)", "Ты сде́лал зада́ние?"], ["Ya almorcé. (eres mujer)", "Я уже́ пообе́дала."], ["Todos los días leo el diario.", "Ка́ждый день я чита́ю газе́ту."], ["Por fin aprendí las palabras. (eres hombre)", "Наконе́ц я вы́учил слова́."]].forEach(([es, ru], j) => {
-    out.push({ id: "U12-mkt-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 7, grupo: "MKT-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru], idioma: "ru", explicacion: ru });
+  /* La tercera columna: otros órdenes que también valen (24/10/2026: el cuándo puede moverse) */
+  [["¿Qué hiciste ayer? (a un amigo)", "Что ты де́лал вчера́?", ["Что ты вчера́ де́лал?"]], ["¿Hiciste la tarea? (a un amigo)", "Ты сде́лал зада́ние?", []], ["Ya almorcé. (eres mujer)", "Я уже́ пообе́дала.", []], ["Todos los días leo el diario.", "Ка́ждый день я чита́ю газе́ту.", ["Я ка́ждый день чита́ю газе́ту.", "Я чита́ю газе́ту ка́ждый день."]], ["Por fin aprendí las palabras. (eres hombre)", "Наконе́ц я вы́учил слова́.", ["Я наконе́ц вы́учил слова́."]]].forEach(([es, ru, otras], j) => {
+    out.push({ id: "U12-mkt-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 7, grupo: "MKT-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "»", audio: ru, audioManual: true, esperadas: [ru].concat(otras), idioma: "ru", explicacion: ru });
     const w = ru.replace(/[.?!]$/, "").split(" ");
-    out.push({ id: "U12-mko-" + j, tipo: "construir", forma: "ordenar", dificultad: 2, modulo: 7, grupo: "MKO-" + j, items: [], pide: "Ordena: «" + es + "»", audio: ru, fichas: baraja(w, j + 2), sep: " ", esperada: w.join(" "), explicacion: ru });
+    out.push({ id: "U12-mko-" + j, tipo: "construir", forma: "ordenar", dificultad: 2, modulo: 7, grupo: "MKO-" + j, items: [], pide: "Ordena: «" + es + "»", audio: ru, fichas: baraja(w, j + 2), sep: " ", esperada: w.join(" "), esperadas: [ru].concat(otras).map(x => x.replace(/[.?!]$/, "")), explicacion: ru });
   });
 
   /* ── Módulo 8: imperativo ── */
@@ -959,7 +960,7 @@ function ejerciciosUnidad12() {
     out.push({ id: "U12-imemp-" + k, tipo: "imperativo", forma: "emparejar", dificultad: 1, modulo: 8, grupo: "IME-" + k, items: [], pide: "Une cada verbo con su imperativo (" + pr + ").",
       pares: L.map(v => [v.ac, pr === "ты" ? v.imperativo.ty : v.imperativo.vy]), explicacion: L.map(v => v.ac + " → " + (pr === "ты" ? v.imperativo.ty : v.imperativo.vy)).join(" · ") });
   });
-  [["Repita, por favor.", "Повтори́те, пожа́луйста."], ["No lo llames.", "Не звони́ ему́."], ["Llámame seguido.", "Звони́ мне ча́сто."]].forEach(([es, ru], j) =>
+  [["Repita, por favor.", "Повтори́те, пожа́луйста."], ["No lo llames.", "Не звони́ ему́."], ["Llámame a menudo.", "Звони́ мне ча́сто."]].forEach(([es, ru], j) =>
     out.push({ id: "U12-imd-" + j, tipo: "dictado", forma: "escribir", dificultad: 3, modulo: 8, grupo: "IMD-" + j, items: [], pide: "Escucha y escribe.", audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }));
   [["Не откро́й окно́.", "откро́й", "Не открыва́й окно́."], ["Не позвони́ ему́.", "позвони́", "Не звони́ ему́."]].forEach(([mal, w, ok], j) => {
     const pals = sinP(mal).split(" ");

@@ -115,9 +115,11 @@ function azHoyDesafio(n) {
     const F = fr[num % fr.length];
     return { titulo: "Frase del día", grande: "«" + F.es[0] + "»", sub: "Escríbela en ruso", audio: null, consigna: "Escribe esta frase en ruso.",
       pista: "Empieza con «" + F.ru.split(" ")[0].replace(/[!?.,]/g, "") + "» y tiene " + F.ru.split(" ").length + " palabras.",
-      revisar: txt => { const a = azHoyFrase(txt), b = azHoyFrase(F.ru);
-        if (a === b) return { nivel: "bien", msg: "**" + F.ru + "**", oir: F.ru };
-        if (azHoyDist(a, b) <= 2) return { nivel: "casi", msg: "Casi: **" + F.ru + "**", oir: F.ru };
+      revisar: txt => { const a = azHoyFrase(txt);
+        /* Valen todas las formas rusas de esa traducción (u2Equivalentes, 22/10/2026): «¡Hola, Ana!» → Здра́вствуйте o Приве́т */
+        const vale = (typeof u2Equivalentes === "function" ? u2Equivalentes(F) : [F.ru]).map(ru => ({ ru, d: azHoyDist(a, azHoyFrase(ru)) })).sort((x, y) => x.d - y.d)[0];
+        if (vale.d === 0) return { nivel: "bien", msg: "**" + vale.ru + "**", oir: vale.ru };
+        if (vale.d <= 2) return { nivel: "casi", msg: "Casi: **" + vale.ru + "**", oir: vale.ru };
         return { nivel: "mal", msg: "Se dice **" + F.ru + "**", oir: F.ru }; } };
   }
   if (n === 3 && typeof u3PalabraDelDia === "function") {

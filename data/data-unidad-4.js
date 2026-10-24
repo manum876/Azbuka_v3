@@ -561,7 +561,12 @@ function u4Frase(vk, ok, k, modo, maxDesde) {
   const esperadas = [ru];
   if (suj.p === 0 || suj.p === 2) esperadas.push(cap(forma) + " " + o.acc + ".");
   if (suj.s && /^Mi /.test(suj.es)) esperadas.push((suj.s.g === "f" ? "Моя́ " : "Мой ") + suj.s.nom + " " + forma + " " + o.acc + ".");
-  return { id: sin(vk) + "-" + sin(ok) + "-" + k, ru, es, esperadas, v, o, suj, forma, ids: [suj.s ? suj.s.id : null, v.id, o.id].filter(Boolean) };
+  /* Orden invertido (24/10/2026): la teoría enseña que el orden puede cambiar porque manda la
+     terminación (Сала́т покупа́ет па́па). Vale siempre que la frase no sea ambigua: si quien hace
+     y lo que recibe tienen las dos el acusativo igual al nominativo, solo vale el orden neutral. */
+  const ovs = suj.s && suj.s.nom === suj.s.acc && o.nom === o.acc ? null : cap(o.acc) + " " + forma + " " + u4Min(suj.ru) + ".";
+  if (ovs) esperadas.push(ovs);
+  return { id: sin(vk) + "-" + sin(ok) + "-" + k, ru, es, esperadas, ovs, v, o, suj, forma, ids: [suj.s ? suj.s.id : null, v.id, o.id].filter(Boolean) };
 }
 
 function ejerciciosUnidad4() {
@@ -675,7 +680,8 @@ function ejerciciosUnidad4() {
       const w = sinP(f.ru).split(" ");
       let fi = baraja(w, i + 7); if (fi.join(" ") === w.join(" ")) fi = fi.slice(1).concat(fi[0]);
       out.push(Object.assign({ id: "U4-ord-" + f.id, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: f.amp ? m : 7, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "),
-        explicacion: f.ru + " " + u4Regla(o) }, base));
+        esperadas: [w.join(" ")].concat(f.ovs ? [sinP(f.ovs)] : []),
+        explicacion: f.ru + " " + u4Regla(o) + (f.ovs ? " También vale «" + f.ovs.replace(/\.$/, "") + "»: el orden puede cambiar sin que cambie el sentido." : "") }, base));
     }
   });
 

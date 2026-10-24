@@ -70,6 +70,14 @@ const AZ_REGION_ES = { auto: "coche", carro: "coche", subte: "metro", colectivo:
   pileta: "piscina", heladera: "nevera", living: "salon", vereda: "acera", jugo: "zumo", papa: "patata", papas: "patatas", manteca: "mantequilla",
   lindo: "bonito", linda: "bonita", lindos: "bonitos", lindas: "bonitas", nena: "nina", nene: "nino", chau: "adios", aca: "aqui", alla: "alli",
   jean: "vaqueros", pulover: "jersey", fiambre: "embutido", billetera: "cartera", autos: "coches", subtes: "metros", mozos: "camareros" };
+/* Expresiones regionales de varias palabras (24/10/2026): «a la noche» → «por la noche»,
+   «seguido» → «a menudo». Se cambian en la respuesta del alumno solo si la esperada usa la neutra. */
+const AZ_REGION_ES_FRASES = [[/(^|[^a-záéíóúüñ])a la (mañana|tarde|noche)(?![a-záéíóúüñ])/gi, "$1por la $2", /\bpor la (mañana|tarde|noche)\b/i],
+  [/(^|[^a-záéíóúüñ])seguido(?![a-záéíóúüñ])/gi, "$1a menudo", /\ba menudo\b/i]];
+function azRegionFrasesEs(respuesta, lista) {
+  const esp = lista.join(" | ");
+  return AZ_REGION_ES_FRASES.reduce(function (r, f) { return f[2].test(esp) ? r.replace(f[0], f[1]) : r; }, respuesta || "");
+}
 function azClaveEsBase(t) {
   return azSinAcento(t).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").normalize("NFC");
 }
@@ -258,6 +266,7 @@ function azCorregir(respuesta, esperadas, opts) {
   opts = opts || {};
   const modo = opts.idioma || "ru";
   const lista = (Array.isArray(esperadas) ? esperadas : [esperadas]).filter(Boolean);
+  if (modo === "es") respuesta = azRegionFrasesEs(respuesta, lista);
   const limpiar = function (toks) {
     return modo === "es" ? toks.filter(function (t) { return !AZ_ARTICULOS_ES.has(azClaveEs(t.t || t)); }) : toks;
   };

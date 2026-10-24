@@ -143,12 +143,12 @@ const U6_DIALOGOS = [
 const U6_LECTURAS = [
   { id: "lucas", titulo: "Лу́кас в Барсело́не", lineas: [
       ["Лу́кас живёт в Барсело́не.", "Lucas vive en Barcelona."], ["Он живёт в кварти́ре в це́нтре.", "Vive en un apartamento en el centro."],
-      ["Он рабо́тает в о́фисе.", "Trabaja en una oficina."], ["Ря́дом парк.", "Cerca hay un parque."], ["Ве́чером он ча́сто хо́дит в кафе́.", "A la noche va seguido al café."]],
-    preguntas: [["¿Dónde vive Lucas?", "в Барсело́не", ["в Мадри́де", "в Барсело́ну"]], ["¿Dónde trabaja?", "в о́фисе", ["в ба́нке", "в шко́ле"]], ["¿Adónde va seguido a la noche?", "в кафе́", ["в парк", "в рестора́н"]]],
+      ["Он рабо́тает в о́фисе.", "Trabaja en una oficina."], ["Ря́дом парк.", "Cerca hay un parque."], ["Ве́чером он ча́сто хо́дит в кафе́.", "Por la noche va a menudo al café."]],
+    preguntas: [["¿Dónde vive Lucas?", "в Барсело́не", ["в Мадри́де", "в Барсело́ну"]], ["¿Dónde trabaja?", "в о́фисе", ["в ба́нке", "в шко́ле"]], ["¿Adónde va a menudo por la noche?", "в кафе́", ["в парк", "в рестора́н"]]],
     vf: [["Лу́кас живёт в Мадри́де.", false], ["Ря́дом парк.", true], ["Он рабо́тает в о́фисе.", true]] },
   { id: "anna", titulo: "А́нна в Москве́", lineas: [
       ["А́нна живёт в Москве́.", "Ana vive en Moscú."], ["Она́ у́чится в университе́те.", "Estudia en la universidad."],
-      ["Университе́т далеко́.", "La universidad está lejos."], ["Она́ е́здит в университе́т у́тром.", "Va a la universidad a la mañana."], ["Сейча́с она́ до́ма.", "Ahora está en casa."]],
+      ["Университе́т далеко́.", "La universidad está lejos."], ["Она́ е́здит в университе́т у́тром.", "Va a la universidad por la mañana."], ["Сейча́с она́ до́ма.", "Ahora está en casa."]],
     preguntas: [["¿Dónde estudia Ana?", "в университе́те", ["в шко́ле", "в университе́т"]], ["¿Dónde está ahora?", "до́ма", ["в университе́те", "на рабо́те"]], ["¿Cómo está la universidad?", "далеко́", ["ря́дом", "здесь"]]],
     vf: [["Университе́т ря́дом.", false], ["А́нна живёт в Москве́.", true], ["Сейча́с она́ в университе́те.", false]] },
   { id: "casa", titulo: "В кварти́ре", lineas: [
@@ -430,7 +430,7 @@ const UNIDAD_6 = {
           chequeo: [{ pide: "Я иду́ ___ у́лицу.", opciones: ["в", "на"], ok: "на", por: "У́лица va con на, también en movimiento." }] }
       ] },
     { id: "u6m9", n: 9, tipo: "leccion", nPractica: 12, titulo: "Ir: a pie o en vehículo", resumen: "идти́ / е́хать · ходи́ть / е́здить.",
-      intro: "El ruso tiene varios verbos para «ir». Por ahora, alcanza con dos preguntas: ¿a pie o en vehículo? ¿ahora o seguido?",
+      intro: "El ruso tiene varios verbos para «ir». Por ahora, alcanza con dos preguntas: ¿a pie o en vehículo? ¿ahora o a menudo?",
       secciones: [
         { id: "u6-pie-vehiculo", titulo: "A pie o en vehículo",
           texto: "идти́ es ir a pie; е́хать es ir en un vehículo: auto, autobús, tren, barco o avión.",
@@ -440,16 +440,16 @@ const UNIDAD_6 = {
             { ru: "Они́ {е́дут} в аэропо́рт.", es: "Van al aeropuerto.", por: "En coche o en autobús: е́хать." }],
           mas: { titulo: "Los lugares del viaje", texto: "Si la distancia es larga, otra ciudad u otro país, es casi seguro е́хать. Dentro del barrio, lo normal es идти́.\nLos lugares del viaje siguen las mismas reglas: на вокза́ле (en la estación de tren), на платфо́рме (en el andén), в ваго́не, в ка́ссе (en la boletería), на корабле́ (en el barco) pero в ло́дке (en el bote). Аэропо́рт y порт son del grupo de **-у́**: в аэропорту́, в порту́.",
             ejemplos: [{ ru: "Мы {в аэропорту́}.", es: "Estamos en el aeropuerto.", por: "аэропо́рт → в аэропорту́, con **-у́**." }] } },
-        { id: "u6-ahora-seguido", titulo: "Ahora o seguido",
-          texto: "Para algo que pasa ahora, o un viaje concreto: идти́ / е́хать. Para lo habitual, lo que se hace seguido: ходи́ть / е́здить. Palabras como ча́сто, всегда́ o иногда́ avisan que es habitual.",
+        { id: "u6-ahora-seguido", titulo: "Ahora o a menudo",
+          texto: "Para algo que pasa ahora, o un viaje concreto: идти́ / е́хать. Para lo habitual, lo que se hace a menudo: ходи́ть / е́здить. Palabras como ча́сто, всегда́ o иногда́ avisan que es habitual.",
           ejemplos: [
             { ru: "Сейча́с я {иду́} в кафе́.", es: "Ahora voy al café.", por: "Ahora: идти́." },
-            { ru: "Я ча́сто {хожу́} в кафе́.", es: "Voy seguido al café.", por: "Habitual: ходи́ть." },
+            { ru: "Я ча́сто {хожу́} в кафе́.", es: "Voy a menudo al café.", por: "Habitual: ходи́ть." },
             { ru: "Она́ всегда́ {е́здит} на рабо́ту.", es: "Siempre va al trabajo (en vehículo).", por: "Habitual y en vehículo: е́здить." }],
           destacado: "сейча́с → иду́ / е́ду · ча́сто → хожу́ / е́зжу",
           errores: [{ mal: "Сейча́с я хожу́ в кафе́.", bien: "Сейча́с я {иду́} в кафе́.", por: "Сейча́с habla de ahora: идти́." }],
           mas: { texto: "Fíjate en las formas de {я}: хожу́ (con **ж**) y е́зжу (con **зж**). Las demás personas no tienen ese cambio: ты хо́дишь, он хо́дит; ты е́здишь, он е́здит.\nХоди́ть y е́здить también se usan para lo que se hace como costumbre, aunque no se diga cada cuánto: Я хожу́ в бассе́йн quiere decir «voy a la piscina», de manera habitual.",
-            ejemplos: [{ ru: "Ты ча́сто {хо́дишь} в бассе́йн?", es: "¿Vas seguido a la piscina?", por: "ты → хо́дишь, sin **ж**." }] },
+            ejemplos: [{ ru: "Ты ча́сто {хо́дишь} в бассе́йн?", es: "¿Vas a menudo a la piscina?", por: "ты → хо́дишь, sin **ж**." }] },
           chequeo: [{ pide: "Я ча́сто ___ в теа́тр.", opciones: ["иду́", "хожу́"], ok: "хожу́", por: "Ча́сто: habitual, ходи́ть." }] }
       ] },
     { id: "u6m10", n: 10, tipo: "lectura", titulo: "Mi ciudad", resumen: "Dónde viven, trabajan y adónde van.",
@@ -749,7 +749,7 @@ function ejerciciosUnidad6() {
       opciones: ["Где", "Куда́"], correcta: qd[1], explicacion: qd[1] === "Где" ? "**Где** pregunta dónde estás: la respuesta va en prepositivo (" + qd[2] + ")." : "**Куда́** pregunta adónde vas: la respuesta va en acusativo (" + qd[2] + ")." }, base));
   });
 
-  /* ── Módulo 9: a pie o en vehículo, ahora o seguido ── */
+  /* ── Módulo 9: a pie o en vehículo, ahora o a menudo ── */
   ["е́хать", "ходи́ть", "е́здить"].forEach((vk, vi) => {
     const v = verb[sin(vk)]; if (!v) return;
     const PL = ["я", "ты", "он / она́", "мы", "вы", "они́"], pR = ["Я", "Ты", "Он", "Мы", "Вы", "Они́"];
@@ -786,7 +786,7 @@ function ejerciciosUnidad6() {
     const habitual = adv !== "сейча́с", vk = habitual ? (base === "идти́" ? "ходи́ть" : "е́здить") : base, otro = habitual ? base : (base === "идти́" ? "ходи́ть" : "е́здить");
     const sj = U6_SUJ[[0, 2, 3, 6][j % 4]], p = sj[2], v = verb[sin(vk)], w = verb[sin(otro)];
     const ru = sj[0] + " " + adv + " " + v.f[p] + " " + s.pr + " " + s.acc + ".";
-    const esAdv = { "ча́сто": "seguido", "всегда́": "siempre", "иногда́": "a veces", "сейча́с": "ahora" }[adv];
+    const esAdv = { "ча́сто": "a menudo", "всегда́": "siempre", "иногда́": "a veces", "сейча́с": "ahora" }[adv];
     const es = cap((sj[1] ? sj[1] + " " : "") + esAdv + " " + U6_IR[p] + " " + s.a) + ". " + (base === "идти́" ? "🚶" : "🚗");   /* a pie o en vehículo */
     out.push({ id: "U6-hab-" + j, tipo: "habitual", forma: "elegir", dificultad: 2, modulo: 9, grupo: "HB-" + j, items: ["lex:" + v.id], oir: ru, pide: "Completa: «" + es + "»",
       grande: sj[0] + " " + adv + " _____ " + s.pr + " " + s.acc + ".", opciones: baraja([v.f[p], w.f[p]], j), correcta: v.f[p],
@@ -806,13 +806,13 @@ function ejerciciosUnidad6() {
   });
   /* Dictados de cinco niveles (esquema) */
   [["Я до́ма.", "Estoy en casa."], ["Я в кварти́ре.", "Estoy en el apartamento."], ["Я рабо́таю в о́фисе.", "Trabajo en una oficina."],
-   ["Я рабо́таю в о́фисе в Барсело́не.", "Trabajo en una oficina en Barcelona."], ["Ве́чером я ча́сто хожу́ в рестора́н.", "A la noche voy seguido al restaurante."]].forEach(([ru, es], j) =>
+   ["Я рабо́таю в о́фисе в Барсело́не.", "Trabajo en una oficina en Barcelona."], ["Ве́чером я ча́сто хожу́ в рестора́н.", "Por la noche voy a menudo al restaurante."]].forEach(([ru, es], j) =>
     out.push({ id: "U6-niv-" + j, tipo: "dictado", forma: "escribir", dificultad: j < 2 ? 1 : j < 4 ? 2 : 3, modulo: 10, grupo: "NV-" + j, items: [], oir: ru, pide: "Escucha y escribe (nivel " + (j + 1) + ").",
       audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }));
 
   /* ── Vocabulario de las palabras nuevas ── */
   const nuevas = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(6) >= 0);
-  const dicEs = { "куда́": "adónde", "здесь": "aquí", "ря́дом": "cerca, al lado", "далеко́": "lejos", "е́хать": "ir (en vehículo)", "ходи́ть": "ir a pie (seguido)", "е́здить": "ir en vehículo (seguido)",
+  const dicEs = { "куда́": "adónde", "здесь": "aquí", "ря́дом": "cerca, al lado", "далеко́": "lejos", "е́хать": "ir (en vehículo)", "ходи́ть": "ir a pie (a menudo)", "е́здить": "ir en vehículo (a menudo)",
     "па́мятник": "monumento", "ба́шня": "torre", "светофо́р": "semáforo", "зе́ркало": "espejo", "пруд": "estanque", "лежа́ть": "estar acostado, estar (apoyado)", "висе́ть": "estar colgado",
     "сле́ва": "a la izquierda", "спра́ва": "a la derecha", "наверху́": "arriba", "внизу́": "abajo", "везде́": "en todas partes", "нигде́": "en ningún lado", "бли́зко": "cerca" };
   const modDe = e => { const s = lug[sin(e.acento)]; if (s) return s.amp || (s.desde > 2 ? s.desde : casa.indexOf(sin(s.nom)) >= 0 ? 5 : 6);
@@ -937,10 +937,10 @@ function ejerciciosUnidad6() {
     const va = verb[sin(a)], vb = verb[sin(b)], esA = (j + k) % 2 === 0, v = esA ? va : vb, ok = v.f[p];
     out.push({ id: "U6-oidov-" + k + "-" + p, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 9, regla: k ? "u6-ahora-seguido" : "u6-pie-vehiculo", grupo: v.id + "-" + p, items: ["lex:" + v.id], oir: ok,
       pide: "Escucha: ¿qué forma sonó?", audio: ok, opciones: baraja([va.f[p], vb.f[p]], j + k), correcta: ok,
-      explicacion: "Sonó **" + ok + "**, de " + v.ac + ": " + { "идти́": "ir a pie", "е́хать": "ir en vehículo", "ходи́ть": "ir a pie, seguido", "е́здить": "ir en vehículo, seguido" }[v.ac] + "." });
+      explicacion: "Sonó **" + ok + "**, de " + v.ac + ": " + { "идти́": "ir a pie", "е́хать": "ir en vehículo", "ходи́ть": "ir a pie, a menudo", "е́здить": "ir en vehículo, a menudo" }[v.ac] + "." });
   }));
 
-  /* Cadena: estoy ahí → voy → voy seguido → y tú? */
+  /* Cadena: estoy ahí → voy → voy a menudo → y tú? */
   mov.forEach((s, j) => {
     if (j % 2) return;
     const vi = verb[sin("идти́")], vh = verb[sin("ходи́ть")];
@@ -949,8 +949,8 @@ function ejerciciosUnidad6() {
       pide: "Cambia la frase paso a paso.", base: s0,
       pasos: [
         { pide: "Ahora di que vas ahí, a pie.", esperadas: [s1, cap(vi.f[0]) + " " + s.pr + " " + s.acc + "."] },
-        { pide: "Ahora vas seguido (ча́сто).", esperadas: [s2, "Ча́сто " + vh.f[0] + " " + s.pr + " " + s.acc + "."] },
-        { pide: "Ahora pregúntale a un amigo si él va seguido.", esperadas: [s3, "Ты ча́сто " + vh.f[1] + " " + s.pr + " " + s.acc + ".", "Ча́сто " + vh.f[1] + " " + s.pr + " " + s.acc + "?"] }],
+        { pide: "Ahora vas a menudo (ча́сто).", esperadas: [s2, "Ча́сто " + vh.f[0] + " " + s.pr + " " + s.acc + "."] },
+        { pide: "Ahora pregúntale a un amigo si él va a menudo.", esperadas: [s3, "Ты ча́сто " + vh.f[1] + " " + s.pr + " " + s.acc + ".", "Ча́сто " + vh.f[1] + " " + s.pr + " " + s.acc + "?"] }],
       explicacion: s0 + " → " + s1 + " → " + s2 + " → " + s3 + " Con movimiento, acusativo (" + s.acc + "); lo habitual, con ходи́ть." });
   });
   /* Cadena: estoy ahí → trabajo ahí → y ella? */

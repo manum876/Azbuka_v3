@@ -31,8 +31,8 @@ const U7_NUM_ES = ["", "una", "dos", "tres", "cuatro", "cinco", "seis", "siete",
 const U7_DIAS = [["понеде́льник", "lunes"], ["вто́рник", "martes"], ["CMR-00836", "miércoles"], ["четве́рг", "jueves"], ["пя́тница", "viernes"], ["суббо́та", "sábado"], ["воскресе́нье", "domingo"]];
 const U7_MESES = [["янва́рь", "enero"], ["февра́ль", "febrero"], ["март", "marzo"], ["апре́ль", "abril"], ["май", "mayo"], ["ию́нь", "junio"], ["ию́ль", "julio"],
   ["а́вгуст", "agosto"], ["сентя́брь", "septiembre"], ["октя́брь", "octubre"], ["ноя́брь", "noviembre"], ["дека́брь", "diciembre"]];
-const U7_PARTES = [["у́тро", "mañana", "у́тром", "a la mañana"], ["день", "día, tarde", "днём", "a la tarde"], ["ве́чер", "tarde, noche", "ве́чером", "a la noche"], ["ночь", "noche", "но́чью", "de noche"]];
-const U7_FREC = { "всегда́": "siempre", "обы́чно": "normalmente", "ча́сто": "seguido", "иногда́": "a veces", "ре́дко": "pocas veces", "никогда́": "nunca" };
+const U7_PARTES = [["у́тро", "mañana", "у́тром", "por la mañana"], ["день", "día, tarde", "днём", "por la tarde"], ["ве́чер", "tarde, noche", "ве́чером", "por la noche"], ["ночь", "noche", "но́чью", "de noche"]];
+const U7_FREC = { "всегда́": "siempre", "обы́чно": "normalmente", "ча́сто": "a menudo", "иногда́": "a veces", "ре́дко": "pocas veces", "никогда́": "nunca" };
 
 /* Actividades del día: [verbo, complemento, español (yo, tú, él/ella, nosotros, ellos/ustedes), emoji, hora típica, утра́ / ве́чера] */
 const U7_ACT = {
@@ -106,7 +106,7 @@ const U7_AMPLIACION_RU = "";   /* ра́но y по́здно pasaron a la base 
 const U7_LECTURAS = [
   { id: "dia", titulo: "Мой день", lineas: [
       ["Я просыпа́юсь в семь часо́в.", "Me despierto a las siete."], ["Я за́втракаю до́ма.", "Desayuno en casa."], ["Пото́м я иду́ на рабо́ту.", "Después voy al trabajo."],
-      ["Я начина́ю рабо́тать в де́вять часо́в.", "Empiezo a trabajar a las nueve."], ["Я обе́даю в час.", "Almuerzo a la una."], ["Ве́чером я возвраща́юсь домо́й.", "A la noche vuelvo a casa."],
+      ["Я начина́ю рабо́тать в де́вять часо́в.", "Empiezo a trabajar a las nueve."], ["Я обе́даю в час.", "Almuerzo a la una."], ["Ве́чером я возвраща́юсь домо́й.", "Por la noche vuelvo a casa."],
       ["Я изуча́ю ру́сский.", "Estudio ruso."], ["Пото́м я смотрю́ фильм.", "Después miro una película."], ["Я ложу́сь спать в оди́ннадцать часо́в.", "Me acuesto a las once."]],
     preguntas: [["¿A qué hora se despierta?", "в семь часо́в", ["в во́семь часо́в", "в оди́ннадцать часо́в"]], ["¿Dónde desayuna?", "до́ма", ["на рабо́те", "в кафе́"]], ["¿A qué hora almuerza?", "в час", ["в два часа́", "в де́вять часо́в"]]],
     vf: [["Я ложу́сь спать в де́сять часо́в.", false], ["Ве́чером я изуча́ю ру́сский.", true], ["Я начина́ю рабо́тать в де́вять часо́в.", true]] },
@@ -189,22 +189,22 @@ const UNIDAD_7 = {
     { id: "u7m2", n: 2, tipo: "leccion", nPractica: 10, titulo: "Partes del día", resumen: "у́тро, день, ве́чер, ночь · в семь часо́в утра́.",
       intro: "у́тром, днём, ве́чером y но́чью ya los conoces. Ahora se suman los sustantivos, cómo decir «de la mañana» con la hora y algunas palabras más del día.",
       secciones: [
-        { id: "u7-momento-sin-prep", titulo: "A la mañana: sin preposición",
-          texto: "Para decir en qué momento del día pasa algo, el ruso no usa preposición: cada momento tiene su palabra.\nу́тро (la mañana) → у́тром (a la mañana)\nдень (el día, la tarde) → днём (a la tarde, de día)\nве́чер (la tarde, la noche) → ве́чером (a la noche)\nночь (la noche) → но́чью (de noche)",
+        { id: "u7-momento-sin-prep", titulo: "Por la mañana: sin preposición",
+          texto: "Para decir en qué momento del día pasa algo, el ruso no usa preposición: cada momento tiene su palabra.\nу́тро (la mañana) → у́тром (por la mañana)\nдень (el día, la tarde) → днём (por la tarde, de día)\nве́чер (la tarde, la noche) → ве́чером (por la noche)\nночь (la noche) → но́чью (de noche)",
           ejemplos: [
-            { ru: "Я рабо́таю {у́тром}.", es: "Trabajo a la mañana.", por: "Una sola palabra, sin в." },
-            { ru: "{Ве́чером} я до́ма.", es: "A la noche estoy en casa.", por: "Puede abrir la frase." },
+            { ru: "Я рабо́таю {у́тром}.", es: "Trabajo por la mañana.", por: "Una sola palabra, sin в." },
+            { ru: "{Ве́чером} я до́ма.", es: "Por la noche estoy en casa.", por: "Puede abrir la frase." },
             { ru: "{Но́чью} я сплю.", es: "De noche duermo.", por: "ночь → но́чью." }],
           errores: [{ mal: "Я рабо́таю в у́тро.", bien: "Я рабо́таю {у́тром}.", por: "El momento del día va sin в: у́тром." }],
-          mas: { texto: "у́тром, днём, ве́чером y но́чью son, en el fondo, formas de у́тро, день, ве́чер y ночь en otro caso, el instrumental, que llega más adelante. Por eso terminan en **-ом**, **-ём** y **-ью**. Hoy funcionan como palabras propias y se aprenden así.\nДень nombra el día entero y también la parte con luz: днём sirve para «a la tarde» y para «de día». Ве́чер es el final de la tarde y el comienzo de la noche; ночь, la noche cerrada.",
-            ejemplos: [{ ru: "{Днём} я рабо́таю, а {ве́чером} отдыха́ю.", es: "A la tarde trabajo y a la noche descanso.", por: "Dos momentos en una frase, los dos sin в." }] },
-          chequeo: [{ pide: "«A la noche miro una película».", opciones: ["Ве́чером я смотрю́ фильм.", "В ве́чер я смотрю́ фильм."], ok: "Ве́чером я смотрю́ фильм.", por: "Sin preposición: ве́чером." }] },
+          mas: { texto: "у́тром, днём, ве́чером y но́чью son, en el fondo, formas de у́тро, день, ве́чер y ночь en otro caso, el instrumental, que llega más adelante. Por eso terminan en **-ом**, **-ём** y **-ью**. Hoy funcionan como palabras propias y se aprenden así.\nДень nombra el día entero y también la parte con luz: днём sirve para «por la tarde» y para «de día». Ве́чер es el final de la tarde y el comienzo de la noche; ночь, la noche cerrada.",
+            ejemplos: [{ ru: "{Днём} я рабо́таю, а {ве́чером} отдыха́ю.", es: "Por la tarde trabajo y por la noche descanso.", por: "Dos momentos en una frase, los dos sin в." }] },
+          chequeo: [{ pide: "«Por la noche miro una película».", opciones: ["Ве́чером я смотрю́ фильм.", "В ве́чер я смотрю́ фильм."], ok: "Ве́чером я смотрю́ фильм.", por: "Sin preposición: ве́чером." }] },
         { id: "u7-utra-vechera", titulo: "Con la hora: утра́ y ве́чера",
           texto: "Para aclarar si las siete son de la mañana o de la noche, después de la hora va утра́ o ве́чера: в семь часо́в утра́ («a las siete de la mañana»), в во́семь часо́в ве́чера («a las ocho de la noche»). Son formas fijas: con la hora, nunca у́тром ni ве́чером.",
           ejemplos: [
             { ru: "Я встаю́ в семь часо́в {утра́}.", es: "Me levanto a las siete de la mañana.", por: "Con la hora: утра́." },
             { ru: "Я у́жинаю в де́вять часо́в {ве́чера}.", es: "Ceno a las nueve de la noche.", por: "Con la hora: ве́чера." },
-            { ru: "Я встаю́ {у́тром}.", es: "Me levanto a la mañana.", por: "Sin hora: у́тром." }],
+            { ru: "Я встаю́ {у́тром}.", es: "Me levanto por la mañana.", por: "Sin hora: у́тром." }],
           destacado: "в семь часо́в утра́ · в во́семь часо́в ве́чера",
           errores: [{ mal: "в семь часо́в у́тром", bien: "в семь часо́в {утра́}", por: "Después de la hora va утра́, no у́тром." }],
           mas: { texto: "Para la madrugada se usa но́чи: para un ruso, las dos de la mañana todavía son de noche. Para la tarde temprana, de las doce a las cinco más o menos, дня. Утра́, дня, ве́чера y но́чи son del mismo caso, el que significa «de»: «las siete de la mañana».",
@@ -294,7 +294,7 @@ const UNIDAD_7 = {
           chequeo: [{ pide: "«en otoño»", opciones: ["о́сенью", "в о́сени", "в о́сень"], ok: "о́сенью", por: "Sin preposición: о́сенью." }] },
         { id: "u7-cuando-tabla", titulo: "¿Cuándo? Todo junto",
           texto: "Cuatro maneras de decir cuándo:\nla hora → в + la hora: в семь часо́в\nlos días → в + acusativo: в сре́ду\nlos meses → в + prepositivo: в ма́е\nlos momentos del día y las estaciones → sin preposición: у́тром, ле́том",
-          desarmar: { es: "El sábado a la mañana, a las nueve, desayuno en casa.", partes: [
+          desarmar: { es: "El sábado por la mañana, a las nueve, desayuno en casa.", partes: [
             { txt: "В суббо́ту", rol: "qué día", nota: "в + acusativo: суббо́та → суббо́ту." },
             { txt: "у́тром", rol: "momento", nota: "Sin preposición." },
             { txt: "в де́вять часо́в", rol: "a qué hora", nota: "в + la hora." },
@@ -321,25 +321,25 @@ const UNIDAD_7 = {
       intro: "Palabras para decir cada cuánto haces algo, de siempre a nunca, y cómo contar las veces.",
       secciones: [
         { id: "u7-frec-escala", titulo: "De más a menos",
-          texto: "всегда́ (siempre)\nобы́чно (normalmente)\nча́сто (seguido)\nиногда́ (a veces)\nре́дко (pocas veces)\nникогда́ (nunca)\nПочти́ («casi») suaviza las de los extremos: почти́ всегда́, почти́ никогда́.",
+          texto: "всегда́ (siempre)\nобы́чно (normalmente)\nча́сто (a menudo)\nиногда́ (a veces)\nре́дко (pocas veces)\nникогда́ (nunca)\nПочти́ («casi») suaviza las de los extremos: почти́ всегда́, почти́ никогда́.",
           ejemplos: [
-            { ru: "Я {обы́чно} пью ко́фе у́тром.", es: "Normalmente tomo café a la mañana.", por: "Обы́чно: lo de casi todos los días." },
+            { ru: "Я {обы́чно} пью ко́фе у́тром.", es: "Normalmente tomo café por la mañana.", por: "Обы́чно: lo de casi todos los días." },
             { ru: "Я {ре́дко} гото́влю.", es: "Cocino pocas veces.", por: "Ре́дко: muy de vez en cuando." },
             { ru: "Я {почти́ всегда́} за́втракаю до́ма.", es: "Casi siempre desayuno en casa.", por: "Почти́ va delante de всегда́." }],
           mas: { texto: "Ежедне́вно («a diario») dice lo mismo que ка́ждый день, pero suena más formal: se lee en carteles y horarios. Постоя́нно («todo el tiempo») suele sonar a queja. Сно́ва es «otra vez»: Я сно́ва до́ма («estoy en casa otra vez»). Y обы́чный es el adjetivo de обы́чно: обы́чный день, «un día normal».",
             ejemplos: [
               { ru: "Он {постоя́нно} рабо́тает.", es: "Trabaja todo el tiempo.", por: "Постоя́нно: sin parar." },
               { ru: "Э́то {обы́чный} день.", es: "Es un día normal.", por: "Adjetivo: concuerda con день." }] },
-          chequeo: [{ pide: "¿Qué palabra está entre ча́сто y ре́дко?", opciones: ["иногда́", "всегда́", "обы́чно"], ok: "иногда́", por: "Seguido → a veces → pocas veces." }] },
+          chequeo: [{ pide: "¿Qué palabra está entre ча́сто y ре́дко?", opciones: ["иногда́", "всегда́", "обы́чно"], ok: "иногда́", por: "A menudo → a veces → pocas veces." }] },
         { id: "u7-frec-lugar", titulo: "Antes del verbo",
           texto: "Las palabras de frecuencia van antes del verbo: Я обы́чно за́втракаю до́ма. También pueden abrir la frase, para destacarlas: Обы́чно я за́втракаю до́ма.",
           ejemplos: [
-            { ru: "Я {ча́сто} хожу́ в кино́.", es: "Voy seguido al cine.", por: "Antes del verbo." },
+            { ru: "Я {ча́сто} хожу́ в кино́.", es: "Voy a menudo al cine.", por: "Antes del verbo." },
             { ru: "{Иногда́} я рабо́таю до́ма.", es: "A veces trabajo en casa.", por: "Al principio, para destacarla." }],
           destacado: "Я обы́чно пью ко́фе.",
-          mas: { texto: "Ча́сто, всегда́ y обы́чно piden ходи́ть y е́здить, los verbos de lo habitual, y no идти́ ni е́хать: Я ча́сто хожу́ в кино́. Es la misma regla de «a pie o en vehículo, ahora o seguido».",
+          mas: { texto: "Ча́сто, всегда́ y обы́чно piden ходи́ть y е́здить, los verbos de lo habitual, y no идти́ ni е́хать: Я ча́сто хожу́ в кино́. Es la misma regla de «a pie o en vehículo, ahora o a menudo».",
             ejemplos: [{ ru: "Я {всегда́} е́зжу на рабо́ту.", es: "Siempre voy al trabajo (en vehículo).", por: "всегда́ → е́зжу, no е́ду." }] },
-          chequeo: [{ pide: "«A veces leo a la noche».", opciones: ["Я иногда́ чита́ю ве́чером.", "Я чита́ю ве́чером иногда́ ве́чером."], ok: "Я иногда́ чита́ю ве́чером.", por: "La frecuencia, antes del verbo." }] },
+          chequeo: [{ pide: "«A veces leo por la noche».", opciones: ["Я иногда́ чита́ю ве́чером.", "Я чита́ю ве́чером иногда́ ве́чером."], ok: "Я иногда́ чита́ю ве́чером.", por: "La frecuencia, antes del verbo." }] },
         { id: "u7-nunca-ne", titulo: "Никогда́ … не",
           texto: "Con никогда́ el verbo lleva también не: Я никогда́ не за́втракаю. Lo mismo con почти́ никогда́. Las dos negaciones van juntas, delante del verbo.",
           ejemplos: [
@@ -400,8 +400,8 @@ const UNIDAD_7 = {
             { ru: "Я {опа́здываю} на рабо́ту.", es: "Llego tarde al trabajo.", por: "на + acusativo: adónde." },
             { ru: "Я {тороплю́сь}.", es: "Estoy apurado.", por: "**п** → **пл** en la forma de я, como люблю́." },
             { ru: "Я {бы́стро} за́втракаю.", es: "Desayuno rápido.", por: "бы́стро, antes del verbo." }],
-          mas: { texto: "Спеши́ть y торопи́ться dicen lo mismo; торопи́ться es más común en la charla. Успева́ть es «llegar a tiempo» o «tener tiempo»: Я не успева́ю за́втракать («no llego a desayunar»).\nУстава́ть es «cansarse»: Ве́чером я устаю́ («a la noche me canso»), con la misma raíz que встава́ть (встаю́ → устаю́). Уста́лый es el adjetivo: уста́лый па́па.",
-            ejemplos: [{ ru: "Ве́чером я {устаю́}.", es: "A la noche me canso.", por: "устава́ть → устаю́, como встава́ть → встаю́." }] },
+          mas: { texto: "Спеши́ть y торопи́ться dicen lo mismo; торопи́ться es más común en la charla. Успева́ть es «llegar a tiempo» o «tener tiempo»: Я не успева́ю за́втракать («no llego a desayunar»).\nУстава́ть es «cansarse»: Ве́чером я устаю́ («por la noche me canso»), con la misma raíz que встава́ть (встаю́ → устаю́). Уста́лый es el adjetivo: уста́лый па́па.",
+            ejemplos: [{ ru: "Ве́чером я {устаю́}.", es: "Por la noche me canso.", por: "устава́ть → устаю́, como встава́ть → встаю́." }] },
           chequeo: [{ pide: "«Llego tarde a clase».", opciones: ["Я опа́здываю на уро́к.", "Я опа́здываю на уро́ке."], ok: "Я опа́здываю на уро́к.", por: "Adónde: на + acusativo." }] }
       ] },
     { id: "u7m7", n: 7, tipo: "leccion", nPractica: 10, titulo: "Horarios", resumen: "Во ско́лько? · Уро́к начина́ется в де́вять.",
@@ -454,7 +454,7 @@ const UNIDAD_7 = {
           ejemplos: [
             { ru: "{За́втра} я рабо́таю.", es: "Mañana trabajo.", por: "Presente + за́втра: un plan." },
             { ru: "{В суббо́ту} я иду́ в рестора́н.", es: "El sábado voy al restaurante.", por: "иду́ sirve para «ahora» y para un plan." },
-            { ru: "{Ве́чером} я до́ма.", es: "A la noche estoy en casa.", por: "Sin verbo, como siempre en presente." }],
+            { ru: "{Ве́чером} я до́ма.", es: "Por la noche estoy en casa.", por: "Sin verbo, como siempre en presente." }],
           mas: { texto: "План es «plan»; встре́ча, una reunión o un encuentro; о́тпуск, las vacaciones del trabajo, y выходно́й, el día libre: Сего́дня выходно́й («hoy es mi día libre»). Para planes más lejanos el ruso tiene un futuro propio, que llega más adelante." },
           chequeo: [{ pide: "«El viernes voy al cine».", opciones: ["В пя́тницу я иду́ в кино́.", "В пя́тнице я иду́ в кино́."], ok: "В пя́тницу я иду́ в кино́.", por: "Día: в + acusativo." }] },
         { id: "u7-jugar", titulo: "Jugar y tocar: игра́ть",
@@ -473,7 +473,7 @@ const UNIDAD_7 = {
         { titulo: "Más para el tiempo libre",
           texto: "о́тдых (el descanso), прогу́лка (el paseo), трениро́вка (el entrenamiento), игра́ (el juego), та́нец (el baile), ра́дио, но́вость (la noticia; en plural, но́вости, las noticias), програ́мма (el programa), се́рия (el episodio), спорти́вный (deportivo), весёлый (divertido), вме́сте (juntos) y скуча́ть (aburrirse).",
           ejemplos: [
-            { ru: "Ве́чером я смотрю́ {но́вости}.", es: "A la noche miro las noticias.", por: "но́вость → но́вости, en plural." },
+            { ru: "Ве́чером я смотрю́ {но́вости}.", es: "Por la noche miro las noticias.", por: "но́вость → но́вости, en plural." },
             { ru: "Мы гуля́ем {вме́сте}.", es: "Paseamos juntos.", por: "вме́сте, después del verbo." },
             { ru: "Я слу́шаю {ра́дио}.", es: "Escucho la radio.", por: "ра́дио no cambia." }] }
       ] },
@@ -609,7 +609,7 @@ function ejerciciosUnidad7() {
       explicacion: "**" + (p === "у" ? "утра́" : "ве́чера") + "** va así, como fórmula: " + ru }, base));
     out.push(Object.assign({ id: "U7-uve-" + j, tipo: "momento", forma: "elegir", dificultad: 2, modulo: 2, pide: "Completa: «" + es + "»", grande: "в " + hora(n) + " _____",
       opciones: p === "у" ? ["утра́", "у́тром"] : ["ве́чера", "ве́чером"], correcta: p === "у" ? "утра́" : "ве́чера",
-      explicacion: "Con la hora va **" + (p === "у" ? "утра́" : "ве́чера") + "**; " + (p === "у" ? "у́тром" : "ве́чером") + " es «" + (p === "у" ? "a la mañana" : "a la noche") + "», sin hora." }, base));
+      explicacion: "Con la hora va **" + (p === "у" ? "утра́" : "ве́чера") + "**; " + (p === "у" ? "у́тром" : "ве́чером") + " es «" + (p === "у" ? "por la mañana" : "por la noche") + "», sin hora." }, base));
   });
   /* Cambiar el momento: Я рабо́таю у́тром → ве́чером */
   ["trab", "des", "est", "cen", "peli"].filter(k => U7_ACT[k] && verb[sin(U7_ACT[k][0])]).forEach((k, j) => {
@@ -654,7 +654,7 @@ function ejerciciosUnidad7() {
   /* ── Módulo 5: frecuencia ── */
   const habitos = [["пить", "ко́фе", ["tomo café", "tomas café", "toma café", "tomamos café", "toman café"]], ["гото́вить", "", ["cocino", "cocinas", "cocina", "cocinamos", "cocinan"]],
     ["гуля́ть", "", ["paseo", "paseas", "pasea", "paseamos", "pasean"]], ["чита́ть", "", ["leo", "lees", "lee", "leemos", "leen"]], ["за́втракать", "", ["desayuno", "desayunas", "desayuna", "desayunamos", "desayunan"]],
-    ["рабо́тать", "у́тром", ["trabajo a la mañana", "trabajas a la mañana", "trabaja a la mañana", "trabajamos a la mañana", "trabajan a la mañana"]]];
+    ["рабо́тать", "у́тром", ["trabajo por la mañana", "trabajas por la mañana", "trabaja por la mañana", "trabajamos por la mañana", "trabajan por la mañana"]]];
   Object.keys(U7_FREC).forEach((adv, a) => habitos.forEach(([vk, extra, es], j) => {
     if ((a + j) % 2) return;
     const v = verb[sin(vk)]; if (!v) return;
@@ -733,8 +733,8 @@ function ejerciciosUnidad7() {
   });
 
   /* ── Módulo 8: planes ── */
-  [["За́втра я рабо́таю.", "Mañana trabajo."], ["В суббо́ту я иду́ в рестора́н.", "El sábado voy al restaurante."], ["Ве́чером я до́ма.", "A la noche estoy en casa."],
-   ["Сего́дня выходно́й.", "Hoy es mi día libre."], ["За́втра у́тром я иду́ в парк.", "Mañana a la mañana voy al parque."], ["В пя́тницу я рабо́таю до́ма.", "El viernes trabajo en casa."],
+  [["За́втра я рабо́таю.", "Mañana trabajo."], ["В суббо́ту я иду́ в рестора́н.", "El sábado voy al restaurante."], ["Ве́чером я до́ма.", "Por la noche estoy en casa."],
+   ["Сего́дня выходно́й.", "Hoy es mi día libre."], ["За́втра у́тром я иду́ в парк.", "Mañana por la mañana voy al parque."], ["В пя́тницу я рабо́таю до́ма.", "El viernes trabajo en casa."],
    ["В воскресе́нье пра́здник.", "El domingo es feriado."], ["За́втра встре́ча в о́фисе.", "Mañana hay una reunión en la oficina."], ["Мой о́тпуск в ию́ле.", "Mis vacaciones son en julio."],
    ["Како́й у тебя́ план?", null]].forEach(([ru, es], j) => {
     if (!es) return;
@@ -766,8 +766,8 @@ function ejerciciosUnidad7() {
     L.vf.forEach(([af, v], k) => out.push({ id: "U7-lvf-" + L.id + "-" + k, tipo: "lectura-vf", forma: "vf", dificultad: 2, modulo: 10, grupo: "L7v-" + L.id + "-" + k, items: [],
       afirmacion: af, verdadero: v, audio: todo, texto: lineas, textoOculto: true, explicacion: (v ? "Verdadero. " : "Falso. ") + todo }));
   });
-  [["Я рабо́таю у́тром.", "Trabajo a la mañana."], ["Я рабо́таю в де́вять часо́в.", "Trabajo a las nueve."], ["Я рабо́таю в о́фисе в де́вять часо́в.", "Trabajo en la oficina a las nueve."],
-   ["Я обы́чно рабо́таю в о́фисе у́тром.", "Normalmente trabajo en la oficina a la mañana."]].forEach(([ru, es], j) =>
+  [["Я рабо́таю у́тром.", "Trabajo por la mañana."], ["Я рабо́таю в де́вять часо́в.", "Trabajo a las nueve."], ["Я рабо́таю в о́фисе в де́вять часо́в.", "Trabajo en la oficina a las nueve."],
+   ["Я обы́чно рабо́таю в о́фисе у́тром.", "Normalmente trabajo en la oficina por la mañana."]].forEach(([ru, es], j) =>
     out.push({ id: "U7-niv-" + j, tipo: "dictado", forma: "escribir", dificultad: j < 2 ? 1 : j < 3 ? 2 : 3, modulo: 10, grupo: "NV-" + j, items: [], oir: ru, pide: "Escucha y escribe (nivel " + (j + 1) + ").",
       audio: ru, esperadas: [ru], idioma: "ru", explicacion: ru + " — " + es }));
 

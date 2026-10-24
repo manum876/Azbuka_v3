@@ -4055,7 +4055,7 @@ const MASHA = {
         {
          "ru": "Нет! 😄 «Споко́йной но́чи» — 😴! А «До́брый ве́чер» — 🌙!",
          "tr": "Niet! «Spakóinai nóchi» — ! A «Dóbryi viéchir» — !",
-         "es": "¡No! «Спокойной ночи» es para ir a dormir; «Добрый вечер», para saludar a la noche."
+         "es": "¡No! «Спокойной ночи» es para ir a dormir; «Добрый вечер», para saludar por la noche."
         }
        ],
        "ir": "fin"
@@ -9949,7 +9949,7 @@ const MASHA = {
         {
          "ru": "Да! Торт у́тром! 😂",
          "tr": "Da! Tort útram!",
-         "es": "¡Sí! ¡Torta a la mañana!"
+         "es": "¡Sí! ¡Torta por la mañana!"
         }
        ],
        "ir": "papa"
@@ -16300,7 +16300,7 @@ const MASHA = {
    "titulo": "Хо́дишь и́ли идёшь?",
    "tituloEs": "Ahora o habitualmente",
    "resumen": "Ходи́ть / е́здить (habitual) y идти́ / е́хать (ahora)",
-   "intro": "Masha te pregunta adónde vas seguido y adónde vas ahora. Habitual: хожу́, е́зжу. Ahora mismo: иду́, е́ду.",
+   "intro": "Masha te pregunta adónde vas a menudo y adónde vas ahora. Habitual: хожу́, е́зжу. Ahora mismo: иду́, е́ду.",
    "inicio": "cine",
    "apertura": true,
    "preguntas": [],
@@ -16312,13 +16312,13 @@ const MASHA = {
       {
        "ru": "Я ча́сто хожу́ в кино́. 🎬 А ты? Ты ча́сто хо́дишь в кино́?",
        "tr": "Ya chásta jazhú v kinó. A ty? Ty chásta jódish v kinó?",
-       "es": "Voy mucho al cine. ¿Y tú? ¿Vas seguido?"
+       "es": "Voy mucho al cine. ¿Y tú? ¿Vas a menudo?"
       }
      ],
      "ideas": [
       {
        "ru": "Да, я ча́сто хожу́ в кино́.",
-       "es": "Sí, voy seguido."
+       "es": "Sí, voy a menudo."
       },
       {
        "ru": "Иногда́.",
@@ -19215,7 +19215,7 @@ const MASHA = {
       {
        "ru": "А в кино́ ты хо́дишь ча́сто? Я — раз в ме́сяц. 🎬",
        "tr": "A v kinó ty jódish chásta? Ya — ras v miésits.",
-       "es": "¿Y vas seguido al cine? Yo, una vez al mes."
+       "es": "¿Y vas a menudo al cine? Yo, una vez al mes."
       }
      ],
      "ideas": [
@@ -19320,7 +19320,7 @@ const MASHA = {
      ],
      "ramas": [
       {
-       "etiqueta": "Seguido",
+       "etiqueta": "A menudo",
        "claves": [
         "каждый",
         "часто"

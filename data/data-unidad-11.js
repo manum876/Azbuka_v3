@@ -396,7 +396,7 @@ const UNIDAD_11 = {
           ejemplos: [
             { ru: "{Пришли́} мне а́дрес, пожа́луйста.", es: "Mándame la dirección, por favor.", por: "присла́ть: que llegue a mí. мне, dativo." },
             { ru: "Я тебе́ {отпра́влю} сообще́ние.", es: "Te voy a mandar un mensaje.", por: "Una vez: отпра́вить, en futuro." },
-            { ru: "Я тебе́ {позвоню́} ве́чером.", es: "Te llamo a la noche.", por: "позвони́ть + dativo." }],
+            { ru: "Я тебе́ {позвоню́} ве́чером.", es: "Te llamo por la noche.", por: "позвони́ть + dativo." }],
           errores: [{ mal: "Я отпра́влю тебя́ сообще́ние.", bien: "Я отпра́влю {тебе́} сообще́ние.", por: "A quién se manda: dativo." }],
           chequeo: [{ pide: "«Mándame tu número»", opciones: ["Пришли́ мне но́мер.", "Пришли́ меня́ но́мер."], ok: "Пришли́ мне но́мер.", por: "A quién: dativo." }] },
         { id: "u11-ty-vy", titulo: "ты o вы también al escribir",
@@ -453,7 +453,7 @@ const UNIDAD_11 = {
           texto: "No contestes con una sola palabra: suma un detalle. Una respuesta y un dato más hacen que la charla siga.",
           ejemplos: [
             { ru: "Я из Аргенти́ны, {но} сейча́с живу́ в Барсело́не.", es: "Soy de Argentina, pero ahora vivo en Barcelona.", por: "из + genitivo y, con но, un dato más." },
-            { ru: "Я гуля́л в па́рке, {а ве́чером} смотре́л фильм.", es: "Paseé por el parque y a la noche vi una película.", por: "а ве́чером agrega otro momento." },
+            { ru: "Я гуля́л в па́рке, {а ве́чером} смотре́л фильм.", es: "Paseé por el parque y por la noche vi una película.", por: "а ве́чером agrega otro momento." },
             { ru: "Я рабо́таю {архите́ктором}. А ещё я люблю́ рисова́ть.", es: "Trabajo de arquitecto. Y además me gusta dibujar.", por: "рабо́тать + instrumental, y un gusto." },
             { ru: "Му́зыка — моё {увлече́ние}.", es: "La música es mi pasión.", por: "увлече́ние, la afición." }] },
         { id: "u11-devolver", titulo: "Devolver la pregunta",
@@ -1023,8 +1023,8 @@ function ejerciciosUnidad11() {
     ["3. Tienda", "En un kiosco: pide un mapa de la ciudad y pregunta el precio.", "🗺️", [E("el mapa", "ка́рту|ка́рта"), E("el precio", "ско́лько")], "У вас есть ка́рта? Ско́лько она́ сто́ит?"],
     ["4. Restaurante", "Al mediodía: pide una sopa y pescado.", "🍲", [E("la sopa", u11Pedido("суп").formas), E("el pescado", u11Pedido("ры́ба").formas)], "Я бу́ду суп и ры́бу."],
     ["5. Social", "En la mesa de al lado alguien te pregunta «Отку́да вы?». Contesta y pregúntale lo mismo.", "🙂", [E("de dónde eres", "из"), E("la pregunta", "а вы|отку́да вы")], "Я из Аргенти́ны. А вы?"],
-    ["6. Plan", "Tu nuevo amigo te invita a salir a la noche. Acepta y propón una hora.", "🌙", [E("que sí", U11_SI), E("una hora", HORAS)], "Да, коне́чно! Дава́й в во́семь?"],
-    ["7. Problema", "A la noche, en el hotel, el teléfono no funciona. Avisa en la recepción.", "📱", [E("que no funciona", "не рабо́тает|пробле́ма")], "Извини́те, телефо́н не рабо́тает."]
+    ["6. Plan", "Tu nuevo amigo te invita a salir por la noche. Acepta y propón una hora.", "🌙", [E("que sí", U11_SI), E("una hora", HORAS)], "Да, коне́чно! Дава́й в во́семь?"],
+    ["7. Problema", "Por la noche, en el hotel, el teléfono no funciona. Avisa en la recepción.", "📱", [E("que no funciona", "не рабо́тает|пробле́ма")], "Извини́те, телефо́н не рабо́тает."]
   ].forEach(([t, pide, esc, nec, modelo], j) => situ("dia-" + j, "dia", 12, { pide: "**" + t + "**. " + pide, escena: esc, nec, modelo, grupo: "DIA-" + j }));
 
   /* ── Traducción en contexto y dictado ── */

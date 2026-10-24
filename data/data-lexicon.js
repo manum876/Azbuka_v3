@@ -117992,7 +117992,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "episodio, capítulo",
-    "definitionEs": "Cada parte de una serie o de una película en varias partes: Ве́чером я смотрю́ одну́ се́рию («a la noche miro un episodio»).",
+    "definitionEs": "Cada parte de una serie o de una película en varias partes: Ве́чером я смотрю́ одну́ се́рию («por la noche miro un episodio»).",
     "source": "redactado"
    },
    {
@@ -348270,7 +348270,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "resfriarse",
-    "definitionEs": "Resfriarse, sobre todo como algo que pasa seguido: Зимо́й он ча́сто простужа́ется, «En invierno se resfría seguido».",
+    "definitionEs": "Resfriarse, sobre todo como algo que pasa a menudo: Зимо́й он ча́сто простужа́ется, «En invierno se resfría a menudo».",
     "source": "redactado"
    }
   ],
@@ -359073,7 +359073,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "carrera, correr",
-    "definitionEs": "La actividad de correr: бег по утра́м, «salir a correr a la mañana».",
+    "definitionEs": "La actividad de correr: бег по утра́м, «salir a correr por la mañana».",
     "source": "redactado"
    }
   ],
@@ -373753,8 +373753,8 @@ const LEXICON_COMER = [
   "ipa": "ˈutrʌm",
   "senses": [
    {
-    "es": "a la mañana",
-    "definitionEs": "Durante la mañana: Я пью ко́фе у́тром («tomo café a la mañana»).",
+    "es": "por la mañana, a la mañana (Río de la Plata)",
+    "definitionEs": "Durante la mañana: Я пью ко́фе у́тром («tomo café por la mañana»).",
     "source": "redactado"
    }
   ],
@@ -373819,7 +373819,7 @@ const LEXICON_COMER = [
   "ipa": "dnʲˈɵm",
   "senses": [
    {
-    "es": "a la tarde, de día",
+    "es": "por la tarde, de día, a la tarde (Río de la Plata)",
     "definitionEs": "Durante el día, sobre todo después del mediodía y antes de la noche.",
     "source": "redactado"
    }
@@ -373885,8 +373885,8 @@ const LEXICON_COMER = [
   "ipa": "vʲˈetʃʲɪrʌm",
   "senses": [
    {
-    "es": "a la noche (al anochecer)",
-    "definitionEs": "Durante la noche temprana, después de la tarde: Ве́чером я чита́ю («a la noche leo»).",
+    "es": "por la noche (al anochecer), a la noche (Río de la Plata)",
+    "definitionEs": "Durante la noche temprana, después de la tarde: Ве́чером я чита́ю («por la noche leo»).",
     "source": "redactado"
    }
   ],

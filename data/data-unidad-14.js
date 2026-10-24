@@ -44,7 +44,7 @@ const U14_LECTURAS = [
       "В Москве́ всё сли́шком до́рого, поэ́тому мы ча́сто обе́дали в ма́леньких кафе́.", "Пото́м мы купи́ли пода́рки для на́ших семе́й.",
       "Э́то была́ моя́ са́мая интере́сная пое́здка.", "В сле́дующем году́ я хочу́ пое́хать в Москву́."],
     preguntas: [["¿Con quién viajó?", "с подру́гой", ["с бра́том", "с ма́мой"]], ["¿Cuántos días estuvieron?", "пять дней", ["два дня", "де́сять дней"]],
-      ["¿Qué hicieron el lunes a la noche?", "ходи́ли в теа́тр", ["бы́ли в музе́е", "гуля́ли в па́рке"]], ["¿Por qué almorzaban en bares chicos?", "всё сли́шком до́рого", ["там бы́ло тепло́", "там бы́ло краси́во"]],
+      ["¿Qué hicieron el lunes por la noche?", "ходи́ли в теа́тр", ["бы́ли в музе́е", "гуля́ли в па́рке"]], ["¿Por qué almorzaban en bares chicos?", "всё сли́шком до́рого", ["там бы́ло тепло́", "там бы́ло краси́во"]],
       ["¿Qué piensa ella del viaje?", "са́мая интере́сная пое́здка", ["сли́шком дорога́я пое́здка", "ску́чная пое́здка"]]],
     vf: [["Ей не понра́вилось метро́.", false], ["Она́ хо́чет пое́хать в Москву́ в сле́дующем году́.", true]] },
   { id: "barselona", titulo: "Почему́ я люблю́ Барсело́ну", lineas: [
@@ -119,7 +119,7 @@ const U14_GRAM = {
     ["Я хочу́ _____ э́ту кни́гу.", "купи́ть", ["купи́ть", "покупа́ть"], "una compra concreta: perfectivo", "u12-hochu", "comprarlo, una vez"],
     ["Я люблю́ _____ фи́льмы.", "смотре́ть", ["смотре́ть", "посмотре́ть"], "después de люби́ть: imperfectivo", "u12-inf-imperf"]],
   aspectoPq: [["Вчера́ я весь день чита́л.", "чита́л", "весь день: duró, es proceso", ["Terminé el libro", "Pasó una sola vez y terminó"], "u8-aspecto-pistas"],
-    ["Я уже́ прочита́л э́ту кни́гу.", "прочита́л", "уже́: el resultado, ya está terminado", ["Pasaba seguido", "Duró mucho tiempo"], "u8-aspecto-pistas"],
+    ["Я уже́ прочита́л э́ту кни́гу.", "прочита́л", "уже́: el resultado, ya está terminado", ["Pasaba a menudo", "Duró mucho tiempo"], "u8-aspecto-pistas"],
     ["За́втра я бу́ду рабо́тать весь день.", "бу́ду рабо́тать", "Proceso en el futuro: бу́ду + imperfectivo", ["Un resultado de una vez", "Es pasado"], "u9-fut-cual"]],
   aspectoPar: [["¿Cuál dice que la cena quedó hecha?", "Я пригото́вил у́жин.", "Я гото́вил у́жин.", "El resultado: perfectivo.", "u8-aspecto-idea"],
     ["¿Cuál dice que vas a escribir la carta y terminarla?", "За́втра я напишу́ письмо́.", "За́втра я бу́ду писа́ть письмо́.", "Resultado en el futuro: напишу́.", "u9-fut-cual"],

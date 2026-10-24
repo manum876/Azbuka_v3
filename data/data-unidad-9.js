@@ -24,7 +24,7 @@ const U9_VERBOS = {
   "чита́ть": ["leer", [["кни́гу", "un libro"]]], "писа́ть": ["escribir", [["письмо́", "una carta"]]], "смотре́ть": ["mirar", [["фильм", "una película"]]],
   "слу́шать": ["escuchar", [["му́зыку", "música"]]], "говори́ть": ["hablar", [["по-ру́сски", "en ruso"]]], "изуча́ть": ["estudiar", [["ру́сский", "ruso"]]],
   "отдыха́ть": ["descansar", [["", ""], ["до́ма", "en casa"]]], "гуля́ть": ["pasear", [["в па́рке", "por el parque"]]], "гото́вить": ["cocinar", [["у́жин", "la cena"]]],
-  "покупа́ть": ["comprar", [["хлеб", "pan"]]], "де́лать": ["hacer", [["", ""]]], "путеше́ствовать": ["viajar", [["", ""]]], "игра́ть": ["jugar", [["", ""]]],
+  "покупа́ть": ["comprar", [["хлеб", "pan"]]], "де́лать": ["hacer", [["рабо́ту", "el trabajo"]]], "путеше́ствовать": ["viajar", [["", ""]]], "игра́ть": ["jugar", [["", ""]]],
   "жить": ["vivir", [["в Барсело́не", "en Barcelona"], ["в Москве́", "en Moscú"]]]
 };
 /* Quién: [ruso, español del sujeto, índice de persona 0-5] */
@@ -92,9 +92,9 @@ const U9_AMPLIACION_RU = "";   /* 05/10/2026: посеща́ть pasó a la base
 
 const U9_LECTURAS = [
   { id: "finde", titulo: "Пла́ны на выходны́е", lineas: [
-      ["В суббо́ту я бу́ду до́ма.", "El sábado voy a estar en casa."], ["У́тром я бу́ду чита́ть, а пото́м бу́ду гото́вить обе́д.", "A la mañana voy a leer, y después voy a cocinar el almuerzo."],
-      ["Ве́чером я пойду́ в кино́.", "A la noche voy a ir al cine."], ["В воскресе́нье я бу́ду отдыха́ть.", "El domingo voy a descansar."]],
-    preguntas: [["¿Dónde va a estar el sábado?", "до́ма", ["в кино́", "на рабо́те"]], ["¿Adónde va a ir a la noche?", "в кино́", ["в парк", "в рестора́н"]], ["¿Qué va a hacer el domingo?", "бу́дет отдыха́ть", ["бу́дет рабо́тать", "бу́дет гото́вить"]]],
+      ["В суббо́ту я бу́ду до́ма.", "El sábado voy a estar en casa."], ["У́тром я бу́ду чита́ть, а пото́м бу́ду гото́вить обе́д.", "Por la mañana voy a leer, y después voy a cocinar el almuerzo."],
+      ["Ве́чером я пойду́ в кино́.", "Por la noche voy a ir al cine."], ["В воскресе́нье я бу́ду отдыха́ть.", "El domingo voy a descansar."]],
+    preguntas: [["¿Dónde va a estar el sábado?", "до́ма", ["в кино́", "на рабо́те"]], ["¿Adónde va a ir por la noche?", "в кино́", ["в парк", "в рестора́н"]], ["¿Qué va a hacer el domingo?", "бу́дет отдыха́ть", ["бу́дет рабо́тать", "бу́дет гото́вить"]]],
     vf: [["В суббо́ту я бу́ду на рабо́те.", false], ["Ве́чером я пойду́ в кино́.", true], ["В воскресе́нье я бу́ду отдыха́ть.", true]] },
   { id: "viaje", titulo: "Пое́здка в Москву́", lineas: [
       ["В сле́дующем ме́сяце Ма́ша пое́дет в Москву́.", "El mes que viene Masha va a ir a Moscú."], ["Она́ пое́дет на по́езде.", "Va a ir en tren."],
@@ -108,7 +108,7 @@ const U9_LECTURAS = [
     preguntas: [["¿Dónde trabaja hoy?", "в о́фисе", ["до́ма", "в кафе́"]], ["¿Dónde va a trabajar mañana?", "в кафе́", ["в о́фисе", "до́ма"]], ["¿Qué va a hacer el año que viene?", "бу́дет путеше́ствовать", ["бу́дет рабо́тать", "бу́дет жить в Барсело́не"]]],
     vf: [["Вчера́ Ива́н рабо́тал в о́фисе.", false], ["Сейча́с он живёт в Барсело́не.", true], ["В сле́дующем году́ он бу́дет путеше́ствовать.", true]] }
 ];
-const U9_PREGUNTAS = [["Что ты бу́дешь де́лать за́втра?", "¿Qué vas a hacer mañana?"], ["Что ты бу́дешь де́лать ве́чером?", "¿Qué vas a hacer a la noche?"],
+const U9_PREGUNTAS = [["Что ты бу́дешь де́лать за́втра?", "¿Qué vas a hacer mañana?"], ["Что ты бу́дешь де́лать ве́чером?", "¿Qué vas a hacer por la noche?"],
   ["Что ты бу́дешь де́лать на выходны́х?", "¿Qué vas a hacer el fin de semana?"], ["Каки́е у тебя́ пла́ны?", "¿Qué planes tienes?"], ["Куда́ ты пое́дешь?", "¿Adónde vas a ir?"],
   ["Где ты бу́дешь за́втра?", "¿Dónde vas a estar mañana?"], ["Когда́ ты бу́дешь там?", "¿Cuándo vas a estar allí?"], ["Ты бу́дешь рабо́тать за́втра?", "¿Vas a trabajar mañana?"]];
 
@@ -173,7 +173,7 @@ const UNIDAD_9 = {
           texto: "Un verbo de resultado no puede decir «ahora»: algo que está terminado no está pasando. Por eso, cuando se conjuga como un presente, dice futuro:\nчита́ю (leo) → прочита́ю (voy a leer, lo voy a terminar)\nде́лаю (hago) → сде́лаю (lo voy a hacer)\nпокупа́ю (compro) → куплю́ (voy a comprar)\nLas terminaciones son las del presente: **-ю**, **-ешь**, **-ет**…",
           ejemplos: [
             { ru: "За́втра я {прочита́ю} кни́гу.", es: "Mañana voy a terminar el libro.", por: "прочита́ю: la forma de yo, con sentido de futuro." },
-            { ru: "Ве́чером она́ {пригото́вит} у́жин.", es: "A la noche ella va a preparar la cena.", por: "пригото́вит: la cena va a estar lista." },
+            { ru: "Ве́чером она́ {пригото́вит} у́жин.", es: "Por la noche ella va a preparar la cena.", por: "пригото́вит: la cena va a estar lista." },
             { ru: "Мы {ку́пим} хлеб.", es: "Vamos a comprar pan.", por: "купи́ть → ку́пим." },
             { ru: "Я {сде́лаю} э́то за́втра.", es: "Lo hago mañana.", por: "Sin бу́ду: сде́лаю ya es futuro." }],
           destacado: "прочита́ю = voy a leerlo (entero) · бу́ду чита́ть = voy a estar leyendo",
@@ -212,7 +212,7 @@ const UNIDAD_9 = {
             { ru: "За́втра я {начну́} рабо́тать в де́вять.", es: "Mañana voy a empezar a trabajar a las nueve.", por: "нача́ть → начну́." },
             { ru: "Я {зако́нчу} и {позвоню́}.", es: "Termino y te llamo.", por: "Dos acciones, una tras otra: resultado." },
             { ru: "Я {возьму́} кни́гу.", es: "Voy a llevarme el libro.", por: "взять → возьму́: otra palabra." },
-            { ru: "Ра́ньше я ча́сто {звони́л} домо́й.", es: "Antes llamaba seguido a casa.", por: "Se repetía: звони́ть, de proceso." }],
+            { ru: "Ра́ньше я ча́сто {звони́л} домо́й.", es: "Antes llamaba a menudo a casa.", por: "Se repetía: звони́ть, de proceso." }],
           ojo: "Después de нача́ть y зако́нчить va el infinitivo de proceso: начну́ рабо́тать, зако́нчу чита́ть.",
           mas: { texto: "Con ещё не («todavía no») se dice lo que todavía no pasó: Я ещё не позвони́л («todavía no llamé»). Y обяза́тельно («sin falta») refuerza una promesa: Я обяза́тельно позвоню́ («te llamo sin falta»).",
             ejemplos: [
@@ -328,7 +328,7 @@ const UNIDAD_9 = {
         { id: "u9-poidu", titulo: "Пойду́ y пое́ду",
           texto: "идти́ → пойти́ y е́хать → пое́хать son parejas, como чита́ть → прочита́ть. Su «presente» es futuro: пойду́ (voy a ir, a pie), пое́ду (voy a ir, en un vehículo). Se conjugan como иду́ y е́ду, con **по-** adelante. El destino va en acusativo: adónde.",
           ejemplos: [
-            { ru: "Ве́чером я {пойду́} в кино́.", es: "A la noche voy a ir al cine.", por: "A pie: пойду́." },
+            { ru: "Ве́чером я {пойду́} в кино́.", es: "Por la noche voy a ir al cine.", por: "A pie: пойду́." },
             { ru: "Мы {пое́дем} в Москву́.", es: "Vamos a ir a Moscú.", por: "En un vehículo: пое́дем." },
             { ru: "Она́ {пойдёт} на рабо́ту.", es: "Ella va a ir al trabajo.", por: "на рабо́ту: adónde." }],
           destacado: "пойду́ = voy a ir (a pie) · пое́ду = voy a ir (en vehículo)",
@@ -352,7 +352,7 @@ const UNIDAD_9 = {
             { ru: "Мы пое́дем {на такси́}.", es: "Vamos a ir en taxi.", por: "такси́ no cambia." },
             { ru: "Я пойду́ {пешко́м}.", es: "Voy a ir a pie.", por: "пешко́м, sin preposición." },
             { ru: "В суббо́ту мы {лети́м} в Рим.", es: "El sábado volamos a Roma.", por: "лете́ть en presente, para un plan cercano." }],
-          mas: { texto: "лете́ть y лета́ть son como идти́ y ходи́ть: лете́ть es un vuelo concreto («volar ahora, para allí»), лета́ть, volar en general o ida y vuelta: Я ча́сто лета́ю в Москву́ («vuelo seguido a Moscú»). тра́нспорт es el transporte en general; маршру́т, el recorrido." },
+          mas: { texto: "лете́ть y лета́ть son como идти́ y ходи́ть: лете́ть es un vuelo concreto («volar ahora, para allí»), лета́ть, volar en general o ida y vuelta: Я ча́сто лета́ю в Москву́ («vuelo a menudo a Moscú»). тра́нспорт es el transporte en general; маршру́т, el recorrido." },
           chequeo: [{ pide: "«En avión» es…", opciones: ["на самолёте", "в самолёт"], ok: "на самолёте", por: "на + prepositivo." }] }
       ] },
     { id: "u9m8", n: 8, tipo: "leccion", nPractica: 10, titulo: "Preguntar por los planes", resumen: "Что ты бу́дешь де́лать за́втра?",
@@ -364,7 +364,7 @@ const UNIDAD_9 = {
             { ru: "— Что ты {бу́дешь де́лать} за́втра? — Я {бу́ду рабо́тать}.", es: "—¿Qué vas a hacer mañana? —Voy a trabajar.", por: "La actividad: бу́ду + infinitivo." },
             { ru: "— Куда́ ты {пое́дешь}? — В Мадри́д.", es: "—¿Adónde vas a ir? —A Madrid.", por: "Adónde: acusativo." },
             { ru: "— Ты {сде́лаешь} э́то за́втра? — Да, {сде́лаю}.", es: "—¿Lo vas a hacer mañana? —Sí, lo hago.", por: "La pregunta es por el resultado." },
-            { ru: "— Когда́ ты {позвони́шь}? — Ве́чером.", es: "—¿Cuándo vas a llamar? —A la noche.", por: "Una llamada: resultado." }],
+            { ru: "— Когда́ ты {позвони́шь}? — Ве́чером.", es: "—¿Cuándo vas a llamar? —Por la noche.", por: "Una llamada: resultado." }],
           destacado: "Что ты бу́дешь де́лать за́втра?",
           chequeo: [{ pide: "«¿Qué vas a hacer el fin de semana?»", opciones: ["Что ты бу́дешь де́лать на выходны́х?", "Что ты сде́лаешь на выходны́х?"], ok: "Что ты бу́дешь де́лать на выходны́х?", por: "Por la actividad: бу́дешь де́лать." }] },
         { id: "u9-kogda-fut", titulo: "Cuando termine: когда́ + futuro",
@@ -391,7 +391,7 @@ const UNIDAD_9 = {
           texto: "Como al contar un día pasado, un plan en orden va con verbos de resultado: cada cosa termina y empieza la siguiente. Los conectores son los mismos: снача́ла, пото́м, зате́м, наконе́ц. Para la lista de lo que hay que hacer, спи́сок; para cada cosa, зада́ча. Y si vas a llegar a todo: успе́ю.",
           ejemplos: [
             { ru: "{Снача́ла} я {зако́нчу} рабо́ту, {пото́м} {пойду́} в магази́н.", es: "Primero voy a terminar el trabajo, después voy a ir al negocio.", por: "Una tras otra: resultado." },
-            { ru: "Ве́чером я {напишу́} спи́сок.", es: "A la noche voy a escribir la lista.", por: "Una tarea con un resultado: напишу́." },
+            { ru: "Ве́чером я {напишу́} спи́сок.", es: "Por la noche voy a escribir la lista.", por: "Una tarea con un resultado: напишу́." },
             { ru: "{Наконе́ц} я {отдохну́}.", es: "Por fin voy a descansar.", por: "отдохну́ть → отдохну́." }],
           mas: { texto: "успе́ть es «llegar a tiempo», «alcanzar a hacer algo»: Я успе́ю («voy a llegar»), Я не успе́ю («no voy a llegar»). Va con el infinitivo de resultado: Я успе́ю купи́ть биле́т? («¿voy a llegar a comprar el billete?»).",
             ejemplos: [{ ru: "Я не {успе́ю} пообе́дать.", es: "No voy a llegar a almorzar.", por: "успе́ть + infinitivo de resultado." }] },
@@ -405,7 +405,7 @@ const UNIDAD_9 = {
           ejemplos: [
             { ru: "Я {заброни́рую} гости́ницу.", es: "Voy a reservar el hotel.", por: "заброни́ровать → заброни́рую: resultado." },
             { ru: "Мы {ку́пим} авиабиле́ты.", es: "Vamos a comprar los billetes de avión.", por: "Una compra: resultado." },
-            { ru: "Ве́чером я {соберу́} чемода́н.", es: "A la noche voy a armar la maleta.", por: "собра́ть → соберу́." },
+            { ru: "Ве́чером я {соберу́} чемода́н.", es: "Por la noche voy a armar la maleta.", por: "собра́ть → соберу́." },
             { ru: "Я {возьму́} па́спорт.", es: "Voy a llevar el pasaporte.", por: "взять → возьму́." }],
           destacado: "заброни́рую · куплю́ · соберу́ · возьму́",
           mas: { texto: "Las palabras del aeropuerto: рейс (el vuelo), вы́лет (la salida), прилёт (la llegada), бага́ж (el equipaje), ви́за (la visa), па́спорт (el pasaporte). Y del viaje: тури́ст, путеше́ственник (viajero), гид (guía), тури́зм, отъе́зд (la partida), прие́зд (la llegada), возвраще́ние (la vuelta).",
@@ -508,6 +508,14 @@ function ejerciciosUnidad9() {
     /* «Mañana voy a leer un libro»: también vale el futuro de resultado (прочита́ю), si hay un objeto (11/10/2026) */
     const par = U9_PARES.find(x => x[0] === v.ac), pv = par && verboById((lex(par[1], "verbo") || {}).id);
     if (pv && pv.futuro && comp && comp[0] && !/^(в|на|до́ма)( |$)/.test(comp[0])) esperadas.slice().forEach(x => esperadas.push(x.replace(" " + budu[s[2]] + " " + v.ac + " ", " " + pv.futuro[s[2]] + " ").replace(new RegExp("^" + cap(budu[s[2]]) + " " + v.ac + " "), cap(pv.futuro[s[2]]) + " ")));
+
+    /* El cuándo puede ir al principio, después de quién o al final (24/10/2026): Вчера́ я рабо́тал до́ма =
+       Я вчера́ рабо́тал до́ма = Я рабо́тал до́ма вчера́. */
+    if (t) esperadas.slice().forEach(x => {
+      const ini = cap(t[0]) + " " + sujRu + " "; if (x.indexOf(ini) !== 0) return;
+      const resto = x.slice(ini.length).replace(/[.?!]$/, ""), S = cap(sujRu);
+      [S + " " + t[0] + " " + resto + ".", S + " " + resto + " " + t[0] + "."].forEach(y => { if (esperadas.indexOf(y) < 0) esperadas.push(y); });
+    });
     return { ru, es, esperadas };
   };
   const regla = (i, v) => "**" + PL[i] + " " + budu[i] + " " + v.ac + "**: бу́ду cambia según la persona; " + v.ac + " queda en infinitivo.";
@@ -553,13 +561,13 @@ function ejerciciosUnidad9() {
 
   /* ── Módulo 3: frases con cuándo ── */
   verbos.forEach((v, j) => v.comps.forEach((comp, c) => {
-    const s = U9_SUJ[(j * 2 + c) % U9_SUJ.length], t = [["за́втра", "mañana"], ["в суббо́ту", "el sábado"], ["ве́чером", "a la noche"], ["в воскресе́нье", "el domingo"]][(j + c) % 4];
+    const s = U9_SUJ[(j * 2 + c) % U9_SUJ.length], t = [["за́втра", "mañana"], ["в суббо́ту", "el sábado"], ["ве́чером", "por la noche"], ["в воскресе́нье", "el domingo"]][(j + c) % 4];
     const f = fut(s, v, comp, t), base = { grupo: "F3-" + j + "-" + c, items: ["lex:" + v.id], oir: f.ru };
     out.push(Object.assign({ id: "U9-esru3-" + j + "-" + c, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 3, pide: "Escribe en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
       esperadas: f.esperadas, idioma: "ru", explicacion: regla(s[2], v) + " " + f.ru }, base));
     if (c === 0) out.push(Object.assign({ id: "U9-dic3-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 3, pide: "Escucha y escribe la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: f.ru + " — " + f.es }, base));
     if (c === 0 && j % 2 === 0) { const w = sinP(f.ru).split(" "); let fi = baraja(w, j + 3); if (fi.join(" ") === w.join(" ")) fi = fi.slice(1).concat(fi[0]);
-      out.push(Object.assign({ id: "U9-ord3-" + j, tipo: "construir", forma: "ordenar", dificultad: 2, modulo: 3, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "), explicacion: f.ru }, base, { grupo: "F3o-" + j })); }
+      out.push(Object.assign({ id: "U9-ord3-" + j, tipo: "construir", forma: "ordenar", dificultad: 2, modulo: 3, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "), esperadas: f.esperadas.map(sinP), explicacion: f.ru }, base, { grupo: "F3o-" + j })); }
   }));
 
   /* ── Módulo 4: быть en futuro ── */
@@ -771,14 +779,14 @@ function ejerciciosUnidad9() {
   const ASP = [["чита́ть", "прочита́ть", " кни́гу", "За́втра", "Mañana voy a terminar el libro", "", "весь день", "Voy a leer todo el día"],
     ["писа́ть", "написа́ть", " письмо́", "За́втра", "Mañana voy a escribir la carta (y la mando)", " пи́сьма", "ка́ждый день", "Voy a escribir cartas todos los días"],
     ["де́лать", "сде́лать", " рабо́ту", "За́втра", "Mañana voy a hacer el trabajo (y va a estar hecho)", " рабо́ту", "весь день", "Voy a estar haciendo el trabajo todo el día"],
-    ["смотре́ть", "посмотре́ть", " фильм", "Ве́чером", "A la noche voy a ver la película (entera)", " телеви́зор", "весь ве́чер", "Voy a mirar televisión toda la noche"],
-    ["гото́вить", "пригото́вить", " у́жин", "Ве́чером", "A la noche voy a preparar la cena (va a estar lista)", " у́жин", "два часа́", "Voy a estar cocinando la cena dos horas"],
+    ["смотре́ть", "посмотре́ть", " фильм", "Ве́чером", "Por la noche voy a ver la película (entera)", " телеви́зор", "весь ве́чер", "Voy a mirar televisión toda la noche"],
+    ["гото́вить", "пригото́вить", " у́жин", "Ве́чером", "Por la noche voy a preparar la cena (va a estar lista)", " у́жин", "два часа́", "Voy a estar cocinando la cena dos horas"],
     ["покупа́ть", "купи́ть", " хлеб", "За́втра", "Mañana voy a comprar pan", " хлеб", "ка́ждый день", "Voy a comprar pan todos los días"],
     ["встава́ть", "встать", " в семь часо́в", "За́втра", "Mañana me voy a levantar a las siete", " в семь часо́в", "ка́ждый день", "Me voy a levantar a las siete todos los días"],
     ["возвраща́ться", "верну́ться", " домо́й в во́семь часо́в", "За́втра", "Mañana voy a volver a casa a las ocho", " домо́й по́здно", "ка́ждый день", "Voy a volver tarde a casa todos los días"],
     ["начина́ть", "нача́ть", " рабо́тать", "За́втра", "Mañana voy a empezar a trabajar", " рабо́тать в де́вять часо́в", "ка́ждый день", "Voy a empezar a trabajar a las nueve todos los días"],
     ["зака́нчивать", "зако́нчить", " рабо́тать в шесть часо́в", "За́втра", "Mañana voy a terminar de trabajar a las seis", " рабо́тать в шесть часо́в", "ка́ждый день", "Voy a terminar de trabajar a las seis todos los días"],
-    ["звони́ть", "позвони́ть", " домо́й", "Ве́чером", "A la noche voy a llamar a casa", " домо́й", "ка́ждый день", "Voy a llamar a casa todos los días"],
+    ["звони́ть", "позвони́ть", " домо́й", "Ве́чером", "Por la noche voy a llamar a casa", " домо́й", "ка́ждый день", "Voy a llamar a casa todos los días"],
     ["ложи́ться", "лечь", " спать ра́но", "Сего́дня", "Hoy me voy a acostar temprano", " спать ра́но", "ка́ждый день", "Me voy a acostar temprano todos los días"],
     ["отдыха́ть", "отдохну́ть", "", "В суббо́ту", "El sábado voy a descansar (y recuperarme)", "", "весь день", "Voy a descansar todo el día"]];
   ASP.forEach((a, j) => {
@@ -831,7 +839,7 @@ function ejerciciosUnidad9() {
     const [ik, rk, ro, t] = a, I = VF(ik), R = VF(rk), b0 = "Я " + I.pres[0] + ro + ".";
     push({ id: "U9-cad-fr-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 3, regla: "u9-fut-resultado", grupo: "CF-" + j, items: ["lex:" + I.id, "lex:" + R.id], oir: t + " я " + R.fut[0] + ro + ".",
       pide: "Cambia la frase paso a paso.", base: b0,
-      pasos: [{ pide: "Pásala al futuro, como actividad (бу́ду).", esperadas: ["Я бу́ду " + I.ac + ro + "."] }, { pide: "Ahora di que lo vas a terminar " + low(t === "За́втра" ? "mañana (за́втра)" : "a la noche (ве́чером)") + ".", esperadas: [t + " я " + R.fut[0] + ro + ".", "Я " + R.fut[0] + ro + " " + low(t) + "."] }],
+      pasos: [{ pide: "Pásala al futuro, como actividad (бу́ду).", esperadas: ["Я бу́ду " + I.ac + ro + "."] }, { pide: "Ahora di que lo vas a terminar " + low(t === "За́втра" ? "mañana (за́втра)" : "por la noche (ве́чером)") + ".", esperadas: [t + " я " + R.fut[0] + ro + ".", "Я " + R.fut[0] + ro + " " + low(t) + "."] }],
       explicacion: b0 + " → Я бу́ду " + I.ac + ro + ". → " + t + " я " + R.fut[0] + ro + ". " + ik + " → " + rk + ": del proceso al resultado." });
   });
   [["За́втра", "я", "куплю́", "биле́т"], ["Ве́чером", "она́", "напи́шет", "письмо́"], ["За́втра", "мы", "сде́лаем", "рабо́ту"], ["Ве́чером", "он", "пригото́вит", "у́жин"]].forEach((pal, j) => {

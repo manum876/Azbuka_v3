@@ -34,7 +34,7 @@
    Formas de ejercicio (campo forma):
      elegir    { pide, grande?, audio?, opciones, correcta, escena?, plano? }
      escribir  { pide, grande?, audio?, pista?, esperadas, idioma, mayus?, completa? }
-     ordenar   { pide, audio?, fichas, esperada }
+     ordenar   { pide, audio?, fichas, esperada, esperadas? }   (esperadas: otros órdenes válidos)
      vf        { afirmacion, verdadero }
      emparejar { pide, pares: [[izq, der], …], audioIzq? }  (audioIzq: la izquierda es audio)
      tocar     { pide, palabras: [..], correcta: índice, audio? }  (02/10/2026: toca la palabra de la frase)
@@ -213,7 +213,40 @@
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
-  function Escribir({ ej, onRes, hecho, dark, c, examen, unidad }) {
+  /* Palabra del léxico, ya enseñada hasta la unidad u, que también traduce la consigna de un
+     ejercicio de una sola palabra («Escribe en ruso: «hotel»»). Devuelve su acento o null. */
+  function azOtraPalabra(txt, ej, u) {
+    const m = /^Escribe en ruso: «([^»]+)»$/.exec(ej.pide || "");
+    if (!m || typeof LEXICON_COMER === "undefined" || !(ej.esperadas || []).length) return null;
+    if (ej.esperadas.some(x => /\s/.test(String(x).trim()))) return null;           /* solo palabras sueltas */
+    const w = azTokens(txt); if (w.length !== 1) return null;
+    const sinT = s => String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\([^)]*\)/g, "").trim();
+    const piezas = s => sinT(s).split(/[,;\/]/).map(x => x.trim().replace(/^(el|la|los|las|un|una) /, "")).filter(Boolean);
+    const pide = piezas(m[1]);
+    const k = azNormRu(w[0]).toLowerCase();
+    if (!azOtraPalabra.idx) { azOtraPalabra.idx = {}; LEXICON_COMER.forEach(e => { const c = azNormRu(e.ru).toLowerCase(); (azOtraPalabra.idx[c] = azOtraPalabra.idx[c] || []).push(e); }); }
+    const e = (azOtraPalabra.idx[k] || []).find(e => {
+      const desde = Math.min.apply(null, (e.introducedIn || []).concat(e.appearsIn || []).concat([99]));
+      return desde <= (u || 99) && (e.senses || []).some(s => piezas(s.es || "").some(x => pide.indexOf(x) >= 0));
+    });
+    return e ? (e.acento || e.ru) : null;
+  }
+
+  /* Respuestas de los otros ejercicios con la misma consigna «Escribe en ruso: …» (24/10/2026):
+     «Voy al hotel» vale con гости́ница y con оте́ль, salga el ejercicio que salga. */
+  const AZ_MISMAS = new WeakMap();
+  function azMismaConsigna(pool, ej) {
+    if (!pool || !ej || ej.forma !== "escribir" || ej.idioma !== "ru" || !/^Escribe en ruso/.test(ej.pide || "")) return null;
+    let m = AZ_MISMAS.get(pool);
+    if (!m) {
+      m = {};
+      pool.forEach(x => { if (x.forma === "escribir" && x.idioma === "ru" && /^Escribe en ruso/.test(x.pide || "")) (m[x.pide.trim()] = m[x.pide.trim()] || []).push(...(x.esperadas || [])); });
+      AZ_MISMAS.set(pool, m);
+    }
+    return (m[ej.pide.trim()] || []).filter((x, i, a) => a.indexOf(x) === i && (ej.esperadas || []).indexOf(x) < 0);
+  }
+
+  function Escribir({ ej, onRes, hecho, dark, c, examen, unidad, mismas }) {
     const [txt, setTxt] = useState("");
     const [r, setR] = useState(null);
     const ref = useRef(null);
@@ -223,7 +256,17 @@
       /* Otra forma de la palabra correcta: Casi en las Unidades 1 y 2, y en los ejercicios que lo
          piden (formaCasi), porque ahí la forma no es lo que se evalúa (06/10/2026) */
       const formaCasi = ej.formaCasi != null ? ej.formaCasi : unidad <= 2;
-      const res = azCorregir(txt, ru ? azEsperadasGenero(ej, ej.esperadas) : ej.esperadas, { idioma: ej.idioma, formaCasi });
+      const esperadas = ej.esperadas.concat(mismas || []);
+      let res = azCorregir(txt, ru ? azEsperadasGenero(ej, esperadas) : esperadas, { idioma: ej.idioma, formaCasi });
+      /* Otra palabra que también traduce la consigna (24/10/2026): «hotel» → оте́ль cuando se practica
+         гости́ница. Si ya se enseñó hasta esta unidad, es Bien, con un aviso de cuál se practica. */
+      if (ru && res.resultado !== AZ_BIEN) {
+        const otra = azOtraPalabra(txt, ej, ej.unidad || unidad);
+        if (otra) {
+          res = azCorregir(txt, [otra], { idioma: "ru", formaCasi });
+          if (res.resultado === AZ_BIEN) res.notas.push("También vale. Aquí se practica «" + ej.esperadas[0] + "».");
+        }
+      }
       setR(res);
       if (hecho == null) onRes(res.resultado);
     };
@@ -261,7 +304,8 @@
     const palabra = armado.map(i => ej.fichas[i]).join(sep);
     const norm = t => String(t).replace(/\u0301/g, "").replace(/[.,!?¿¡«»…]/g, "").replace(/ё/g, "е").replace(/\s+/g, " ").trim().toLowerCase();
     const comprobar = () => {
-      const ok = norm(palabra) === norm(ej.esperada);
+      /* esperadas (24/10/2026): otros órdenes que también valen; esperada es el que se muestra */
+      const ok = [ej.esperada].concat(ej.esperadas || []).some(x => norm(palabra) === norm(x));
       setR(ok ? AZ_BIEN : AZ_MAL);
       onRes(ok ? AZ_BIEN : AZ_MAL);
     };
@@ -750,7 +794,7 @@
         h("div", { className: "pr-kick" }, titulo + " · " + (i + 1) + " de " + lista.length),
         h("div", { className: "pr-bar" }, h("div", { style: { width: ((i + (hecho != null ? 1 : 0)) / lista.length * 100) + "%" } })),
         examen && h("div", { className: "pr-pista", style: { textAlign: "left", margin: "-8px 0 10px" } }, "Parte: " + ej.parte),
-        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, unidad, examen: !!examen || !!onFin, medio: entiende === "medio" }) : "Ejercicio desconocido"),
+        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, unidad, examen: !!examen || !!onFin, medio: entiende === "medio", mismas: azMismaConsigna(pool, ej) }) : "Ejercicio desconocido"),
         h("div", { className: "pr-pie" },
           h("button", { className: "pr-btn", style: { width: "100%" }, disabled: hecho == null, onClick: siguiente }, i + 1 < lista.length ? "Siguiente" : "Ver resultado")));
     } else if (examen) {

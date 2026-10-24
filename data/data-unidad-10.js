@@ -102,8 +102,8 @@ const U10_GRUPOS = [
 const U10_LECTURAS = [
   { id: "familia", titulo: "Семья́ А́нны", lineas: [
       ["У А́нны есть брат и сестра́.", "Ana tiene un hermano y una hermana."], ["Брат рабо́тает врачо́м.", "El hermano trabaja de médico."],
-      ["У А́нны нет маши́ны.", "Ana no tiene coche."], ["Она́ ча́сто звони́т ма́ме.", "Llama seguido a su mamá."], ["В суббо́ту она́ гуля́ет с бра́том.", "El sábado pasea con su hermano."]],
-    preguntas: [["¿De qué trabaja el hermano?", "врачо́м", ["учи́телем", "инжене́ром"]], ["¿A quién llama Ana seguido?", "ма́ме", ["ма́му", "ма́ма"]], ["¿Con quién pasea el sábado?", "с бра́том", ["с сестро́й", "с ма́мой"]]],
+      ["У А́нны нет маши́ны.", "Ana no tiene coche."], ["Она́ ча́сто звони́т ма́ме.", "Llama a menudo a su mamá."], ["В суббо́ту она́ гуля́ет с бра́том.", "El sábado pasea con su hermano."]],
+    preguntas: [["¿De qué trabaja el hermano?", "врачо́м", ["учи́телем", "инжене́ром"]], ["¿A quién llama Ana a menudo?", "ма́ме", ["ма́му", "ма́ма"]], ["¿Con quién pasea el sábado?", "с бра́том", ["с сестро́й", "с ма́мой"]]],
     vf: [["У А́нны есть маши́на.", false], ["У А́нны есть сестра́.", true], ["Она́ ча́сто звони́т ма́ме.", true]] },
   { id: "cafe", titulo: "В кафе́", lineas: [
       ["Ива́н и Ма́ша в кафе́.", "Iván y Masha están en el café."], ["Ива́н пьёт ко́фе без молока́.", "Iván toma café sin leche."], ["Ма́ше нра́вится чай.", "A Masha le gusta el té."],
@@ -289,7 +289,7 @@ const UNIDAD_10 = {
             { ru: "{дру́гу}", es: "a mi amigo", por: "consonante: **-у**." },
             { ru: "{учи́телю}", es: "al maestro", por: "**-ь** → **-ю**." }],
           destacado: "кому́? → ма́ме, бра́ту, учи́телю",
-          chequeo: [{ pide: "Я пишу́ ___ (Ива́н).", opciones: ["Ива́ну", "Ива́на", "Ива́не"], ok: "Ива́ну", por: "masculino: **-у**." }] },
+          chequeo: [{ pide: "Я пишу́ ___ (Ива́н).", opciones: ["Ива́ну", "Ива́на", "Ива́не"], ok: "Ива́ну", por: "Le escribes a Iván: a quién, dativo. Masculino: **-у**." }] },
         { id: "u10-k-u", titulo: "Ir a ver a alguien: к + dativo",
           texto: "Para ir a una persona (a su casa, a su consultorio), va к + dativo: Я иду́ к врачу́ («voy al médico»). Y para estar ahí, у + genitivo: Я у врача́ («estoy en el médico»). Es el mismo par que в / на: adónde y dónde.",
           ejemplos: [
@@ -378,7 +378,7 @@ const UNIDAD_10 = {
             { ru: "с {учи́телем}", es: "con el maestro", por: "**-ь** → **-ем**." }],
           destacado: "-ой / -ей · -ом / -ем",
           mas: { texto: "Después de **ж, ш, ч, щ, ц**, si la terminación no lleva acento, **-ой** se escribe **-ей**: с Ма́шей. Las demás palabras en **-а** llevan **-ой**: с ба́бушкой, с колле́гой. En la tabla de Casos de cada palabra está la forma exacta." },
-          chequeo: [{ pide: "с ___ (врач)", opciones: ["врачо́м", "врача́", "врачу́"], ok: "врачо́м", por: "masculino: **-ом**." }] },
+          chequeo: [{ pide: "с ___ (врач)", opciones: ["врачо́м", "врача́", "врачу́"], ok: "врачо́м", por: "{с} («con») pide instrumental. Masculino: **-ом**." }] },
         { id: "u10-my-s", titulo: "Мы с бра́том: «mi hermano y yo»",
           texto: "мы с + instrumental es la forma natural de decir «yo y otra persona»: Мы с бра́том («mi hermano y yo»), Мы с А́нной («Ana y yo»). El verbo va en plural.",
           ejemplos: [

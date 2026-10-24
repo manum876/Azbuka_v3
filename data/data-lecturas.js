@@ -4008,7 +4008,7 @@ const LECTURAS = [
    },
    {
     "ru": "Ка́ждый день под землёй е́здит о́чень мно́го люде́й. Поезда́ хо́дят ча́сто, ка́ждые две мину́ты. У́тром и ве́чером в метро́ о́чень мно́го люде́й, поэ́тому лу́чше е́здить ра́но у́тром и́ли по́здно ве́чером.",
-    "es": "Cada día viaja bajo tierra muchísima gente. Los trenes pasan muy seguido, cada dos minutos. Por la mañana y por la tarde va llenísimo, así que conviene viajar muy temprano o tarde por la noche."
+    "es": "Cada día viaja bajo tierra muchísima gente. Los trenes pasan muy a menudo, cada dos minutos. Por la mañana y por la tarde va llenísimo, así que conviene viajar muy temprano o tarde por la noche."
    },
    {
     "ru": "Как е́здить на метро́? Снача́ла ну́жно купи́ть биле́т и́ли ка́рту. Мо́жно заплати́ть и телефо́ном. Пото́м ну́жно найти́ свою́ ли́нию: у ка́ждой ли́нии свой цвет и свой но́мер. На ста́нции есть схе́ма метро́, и там всё поня́тно.",

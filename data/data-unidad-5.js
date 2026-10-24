@@ -91,8 +91,8 @@ const U5_COMBOS = {
 /* Verbos sin objeto (para las seis personas, la negación y las preguntas) */
 const U5_SOLOS = "рабо́тать гуля́ть отдыха́ть за́втракать обе́дать у́жинать ду́мать спать встава́ть";
 /* Palabras de frecuencia (módulo 5) y del día (módulo 10) */
-const U5_FREC = { "всегда́": "siempre", "ча́сто": "seguido", "иногда́": "a veces", "сейча́с": "ahora" };
-const U5_DIA = { "у́тром": "a la mañana", "днём": "a la tarde", "ве́чером": "a la noche", "но́чью": "de noche" };
+const U5_FREC = { "всегда́": "siempre", "ча́сто": "a menudo", "иногда́": "a veces", "сейча́с": "ahora" };
+const U5_DIA = { "у́тром": "por la mañana", "днём": "por la tarde", "ве́чером": "por la noche", "но́чью": "de noche" };
 /* Qué se hace en cada momento (frases de «Mi día»: verbo y objeto opcional) */
 const U5_RUTINA = [["у́тром", "встава́ть", null], ["у́тром", "пить", "ко́фе"], ["у́тром", "за́втракать", null], ["у́тром", "чита́ть", "газе́та"],
   ["днём", "рабо́тать", null], ["днём", "обе́дать", null], ["днём", "гуля́ть", null], ["днём", "учи́ться", null],
@@ -114,15 +114,15 @@ const U5_AMPLIACION_RU = "стоя́ть сиде́ть петь танцева�
 /* Lecturas del módulo 10 (comprensión): revisadas a mano */
 const U5_LECTURAS = [
   { id: "ivan", titulo: "День Ива́на", lineas: [
-      ["Ива́н встаёт у́тром.", "Iván se levanta a la mañana."], ["Он пьёт ко́фе.", "Toma café."], ["Пото́м он рабо́тает.", "Después trabaja."],
-      ["Днём он обе́дает.", "A la tarde almuerza."], ["Ве́чером он чита́ет кни́гу.", "A la noche lee un libro."], ["Но́чью он спит.", "De noche duerme."]],
-    preguntas: [["¿Qué toma Iván a la mañana?", "ко́фе", ["чай", "сок"]], ["¿Qué hace Iván a la noche?", "чита́ет кни́гу", ["смо́трит фильм", "гото́вит у́жин"]], ["¿Qué hace después del café?", "рабо́тает", ["спит", "гуля́ет"]]],
+      ["Ива́н встаёт у́тром.", "Iván se levanta por la mañana."], ["Он пьёт ко́фе.", "Toma café."], ["Пото́м он рабо́тает.", "Después trabaja."],
+      ["Днём он обе́дает.", "Por la tarde almuerza."], ["Ве́чером он чита́ет кни́гу.", "Por la noche lee un libro."], ["Но́чью он спит.", "De noche duerme."]],
+    preguntas: [["¿Qué toma Iván por la mañana?", "ко́фе", ["чай", "сок"]], ["¿Qué hace Iván por la noche?", "чита́ет кни́гу", ["смо́трит фильм", "гото́вит у́жин"]], ["¿Qué hace después del café?", "рабо́тает", ["спит", "гуля́ет"]]],
     vf: [["Ива́н рабо́тает но́чью.", false], ["Ве́чером он чита́ет кни́гу.", true], ["Днём он обе́дает.", true]] },
   { id: "anna", titulo: "День А́нны", lineas: [
-      ["А́нна у́чится.", "Ana estudia (va a la facultad)."], ["У́тром она́ за́втракает и слу́шает му́зыку.", "A la mañana desayuna y escucha música."],
-      ["Днём она́ у́чится.", "A la tarde estudia."], ["Ве́чером она́ гото́вит у́жин.", "A la noche cocina la cena."],
+      ["А́нна у́чится.", "Ana estudia (va a la facultad)."], ["У́тром она́ за́втракает и слу́шает му́зыку.", "Por la mañana desayuna y escucha música."],
+      ["Днём она́ у́чится.", "Por la tarde estudia."], ["Ве́чером она́ гото́вит у́жин.", "Por la noche cocina la cena."],
       ["Она́ не смо́трит телеви́зор.", "No mira televisión."], ["Она́ чита́ет.", "Lee."]],
-    preguntas: [["¿Qué hace Ana a la tarde?", "у́чится", ["спит", "гуля́ет"]], ["¿Qué cocina Ana a la noche?", "у́жин", ["обе́д", "за́втрак"]], ["¿Ana mira televisión?", "Нет, не смо́трит.", ["Да, смо́трит.", "Да, всегда́ смо́трит."]]],
+    preguntas: [["¿Qué hace Ana por la tarde?", "у́чится", ["спит", "гуля́ет"]], ["¿Qué cocina Ana por la noche?", "у́жин", ["обе́д", "за́втрак"]], ["¿Ana mira televisión?", "Нет, не смо́трит.", ["Да, смо́трит.", "Да, всегда́ смо́трит."]]],
     vf: [["Ве́чером А́нна гото́вит у́жин.", true], ["А́нна смо́трит телеви́зор.", false], ["У́тром она́ слу́шает му́зыку.", true]] },
   { id: "familia", titulo: "Мы до́ма", lineas: [
       ["Сего́дня мы до́ма.", "Hoy estamos en casa."], ["Па́па гото́вит обе́д.", "Papá cocina el almuerzo."], ["Ма́ма чита́ет газе́ту.", "Mamá lee el diario."],
@@ -266,15 +266,15 @@ const UNIDAD_5 = {
         { titulo: "Actividades", texto: "рабо́тать (trabajar), изуча́ть (estudiar una materia), де́лать (hacer), отдыха́ть (descansar), гуля́ть (pasear), ду́мать (pensar), жить (vivir)." },
         { titulo: "Comida y casa", texto: "за́втракать (desayunar), обе́дать (almorzar), у́жинать (cenar), гото́вить (cocinar), пить (tomar), спать (dormir), встава́ть (levantarse). Y lo que se cocina: за́втрак, обе́д, у́жин." },
         { id: "u5-frecuencia", titulo: "Cada cuánto",
-          texto: "всегда́ (siempre), ча́сто (seguido), иногда́ (a veces), сейча́с (ahora). Van casi siempre **antes del verbo**, después de quién hace la acción.",
+          texto: "всегда́ (siempre), ча́сто (a menudo), иногда́ (a veces), сейча́с (ahora). Van casi siempre **antes del verbo**, después de quién hace la acción.",
           ejemplos: [
             { ru: "Я {всегда́} за́втракаю.", es: "Siempre desayuno.", por: "Всегда́ va antes del verbo." },
-            { ru: "Мы {ча́сто} гуля́ем.", es: "Paseamos seguido.", por: "Quién, cada cuánto, el verbo." },
+            { ru: "Мы {ча́сто} гуля́ем.", es: "Paseamos a menudo.", por: "Quién, cada cuánto, el verbo." },
             { ru: "Ты {иногда́} смо́тришь футбо́л?", es: "¿A veces miras fútbol?", por: "También en las preguntas va antes del verbo." },
             { ru: "{Сейча́с} я обе́даю.", es: "Ahora estoy almorzando.", por: "Сейча́с suele ir al principio, y aclara que es «ahora»." }],
           destacado: "Я всегда́ за́втракаю. Мы ча́сто гуля́ем.",
-          mas: { texto: "Сейча́с es la palabra que resuelve la duda del presente: Сейча́с я чита́ю es claramente «estoy leyendo». Всегда́, ча́сто e иногда́ hacen lo contrario: muestran que es algo habitual («leo seguido»). El verbo es el mismo en los dos casos.",
-            ejemplos: [{ ru: "Я {ча́сто} чита́ю. {Сейча́с} я чита́ю.", es: "Leo seguido. Ahora estoy leyendo.", por: "Misma forma del verbo; la palabra de tiempo cambia el sentido." }] },
+          mas: { texto: "Сейча́с es la palabra que resuelve la duda del presente: Сейча́с я чита́ю es claramente «estoy leyendo». Всегда́, ча́сто e иногда́ hacen lo contrario: muestran que es algo habitual («leo a menudo»). El verbo es el mismo en los dos casos.",
+            ejemplos: [{ ru: "Я {ча́сто} чита́ю. {Сейча́с} я чита́ю.", es: "Leo a menudo. Ahora estoy leyendo.", por: "Misma forma del verbo; la palabra de tiempo cambia el sentido." }] },
           chequeo: [{ pide: "¿Cuál suena natural?", opciones: ["Я всегда́ за́втракаю.", "Я за́втракаю всегда́ всегда́."], ok: "Я всегда́ за́втракаю.", por: "Всегда́ antes del verbo." }] }
       ] },
     { id: "u5m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Construir frases", resumen: "Verbo + acusativo: Мы смо́трим фильм.",
@@ -404,9 +404,9 @@ const UNIDAD_5 = {
           mas: { texto: "Las seis formas de учи́ться: учу́сь, у́чишься, у́чится, у́чимся, у́читесь, у́чатся. Fíjate que en у́чишься la terminación -шь termina en **ь**, que no es vocal: por eso va **-ся**. Es el único caso que suele confundir." } }
       ] },
     { id: "u5m10", n: 10, tipo: "lectura", titulo: "Mi día", resumen: "У́тром, днём, ве́чером, но́чью.",
-      intro: "Para contar tu día hacen falta cuatro palabras: у́тром (a la mañana), днём (a la tarde), ве́чером (a la noche) y но́чью (de noche), más пото́м (después). Van al principio de la frase: У́тром я пью ко́фе. Lee los tres textos, escúchalos y después contesta." },
+      intro: "Para contar tu día hacen falta cuatro palabras: у́тром (por la mañana), днём (por la tarde), ве́чером (por la noche) y но́чью (de noche), más пото́м (después). Van al principio de la frase: У́тром я пью ко́фе. Lee los tres textos, escúchalos y después contesta." },
     { id: "u5m11", n: 11, tipo: "proyecto", titulo: "Proyecto: Мой день", resumen: "Tu día, en ruso.",
-      intro: "Escribe tu día en ruso, como un diario: qué haces a la mañana, a la tarde y a la noche, qué no haces y alguna pregunta con su respuesta. Por ejemplo: У́тром я встаю́ и пью ко́фе. Днём я рабо́таю. Я не смотрю́ телеви́зор. Ты рабо́таешь? Да, рабо́таю.",
+      intro: "Escribe tu día en ruso, como un diario: qué haces por la mañana, por la tarde y por la noche, qué no haces y alguna pregunta con su respuesta. Por ejemplo: У́тром я встаю́ и пью ко́фе. Днём я рабо́таю. Я не смотрю́ телеви́зор. Ты рабо́таешь? Да, рабо́таю.",
       requisitos: [], consejos: [] },
     { id: "u5m12", n: 12, tipo: "examen", titulo: "Evaluación", resumen: "Conjugación, negación, preguntas, traducción y audio.",
       intro: "Treinta y cinco ejercicios en siete partes. Cada respuesta vale 1 punto; las que salen «Casi», medio. Con 80 % o más, la unidad está aprobada.",
@@ -506,9 +506,16 @@ function u5Frase(vk, ok, p, quien) {
   const esperadas = [ru];
   if (!quien && (p === 0 || p === 1 || p === 4)) esperadas.push(cap(forma) + (o ? " " + o.acc : "") + ".");
   if (quien && /^Mi /.test(sujEs)) esperadas.push((sust[sin(quien)].g === "f" ? "Моя́ " : "Мой ") + sust[sin(quien)].nom + " " + forma + (o ? " " + o.acc : "") + ".");
+  /* Orden invertido (24/10/2026, como enseña la Unidad 4): Кни́гу чита́ю я. Solo si no es ambiguo. */
+  let ovs = null;
+  if (o) {
+    const sq = quien ? sust[sin(quien)] : null, eq = sq && typeof lexComerById === "function" ? lexComerById(sq.id) : null;
+    const sujMin = eq && eq.propio ? sujRu : sujRu.charAt(0).toLowerCase() + sujRu.slice(1);
+    if (!(sq && sq.nom === sq.acc && o.nom === o.acc)) { ovs = cap(o.acc) + " " + forma + " " + sujMin + "."; esperadas.push(ovs); }
+  }
   /* Español con «no» o «nunca» delante del verbo (para la negación) */
   const con = w => partes ? cap(((partes.sujEs ? partes.sujEs + " " : "") + w + " " + partes.vEs + (partes.obj ? " " + partes.obj : "")).trim()) + "." : null;
-  return { ru, es, esperadas, v, o, i, p, forma, sujRu, quien, esNo: con("no"), esNunca: con("nunca") };
+  return { ru, es, esperadas, ovs, v, o, i, p, forma, sujRu, quien, esNo: con("no"), esNunca: con("nunca") };
 }
 
 function ejerciciosUnidad5() {
@@ -590,10 +597,10 @@ function ejerciciosUnidad5() {
   nuevas.forEach((e, i) => {
     const k = sin(e.acento || e.ru);
     if (U5_DIA[e.acento]) return;                       /* las del día, en el módulo 10 */
-    const es = (V(e.acento) || {}).es || (sust[k] || {}).es || U5_FREC[e.acento] || (e.acento === "никогда́" ? "nunca" : e.acento === "до́ма" ? "en casa" : e.senses[0].es);
+    const es = (V(e.acento) || {}).es || (sust[k] || {}).es || U5_FREC[e.acento] || U5_DIA[e.acento] || (e.acento === "никогда́" ? "nunca" : e.acento === "до́ма" ? "en casa" : e.senses[0].es);
     const mod = e.acento === "никогда́" ? 7 : e.acento === "до́ма" || (V(e.acento) || {}).grupo === "e" ? 9 : 5;
     const amp = ampSet.has(k);
-    const misma = nuevas.filter(x => x.id !== e.id && ampSet.has(sin(x.acento)) === amp && x.posNormalized === e.posNormalized).map(x => (V(x.acento) || {}).es || (sust[sin(x.acento)] || {}).es || U5_FREC[x.acento] || x.senses[0].es);
+    const misma = nuevas.filter(x => x.id !== e.id && ampSet.has(sin(x.acento)) === amp && x.posNormalized === e.posNormalized).map(x => (V(x.acento) || {}).es || (sust[sin(x.acento)] || {}).es || U5_FREC[x.acento] || U5_DIA[x.acento] || x.senses[0].es);
     const base = { grupo: e.id, items: ["lex:" + e.id], oir: e.ru, ampliacion: amp || undefined };
     const dis = baraja(uniq(misma.filter(x => x !== es)), i + 3).slice(0, 3);
     if (dis.length >= 2) out.push(Object.assign({ id: "U5-sig-" + e.id, tipo: "significado", forma: "elegir", dificultad: 1, modulo: mod, pide: "¿Qué significa?", grande: e.acento, audio: e.ru,
@@ -603,7 +610,7 @@ function ejerciciosUnidad5() {
   });
   /* Frecuencia: Я всегда́ за́втракаю. */
   const solos = U5_SOLOS.split(" ");
-  /* Con frecuencia y con никогда́, solo lo que tiene sentido («nunca pienso» o «seguido me levanto», no) */
+  /* Con frecuencia y con никогда́, solo lo que tiene sentido («nunca pienso» o «a menudo me levanto», no) */
   const habitos = "рабо́тать гуля́ть отдыха́ть за́втракать обе́дать у́жинать".split(" ");
   Object.keys(U5_FREC).forEach((adv, a) => habitos.forEach((vk, j) => {
     if ((a + j) % 2) return;
@@ -669,7 +676,9 @@ function ejerciciosUnidad5() {
     }
     /* Ordenar, dictado y traducción */
     if (n % 3 === 0) { let fi = baraja(pals, n + 7); if (fi.join(" ") === pals.join(" ")) fi = fi.slice(1).concat(fi[0]);
-      out.push(Object.assign({ id: "U5-ord-" + n, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 6, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: pals.join(" "), explicacion: exp }, base)); }
+      out.push(Object.assign({ id: "U5-ord-" + n, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 6, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: pals.join(" "),
+        esperadas: [pals.join(" ")].concat(f.ovs ? [sinP(f.ovs)] : []),
+        explicacion: exp + (f.ovs ? " También vale «" + f.ovs.replace(/\.$/, "") + "»: el orden puede cambiar sin que cambie el sentido." : "") }, base)); }
     out.push(Object.assign({ id: "U5-dic-" + n, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 6, pide: "Escucha y escribe la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: exp }, base));
     if (n % 2) out.push(Object.assign({ id: "U5-esru-" + n, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 6, pide: "Escribe en ruso: «" + f.es + "»", audio: f.ru, audioManual: true,
       esperadas: f.esperadas, idioma: "ru", explicacion: exp }, base));

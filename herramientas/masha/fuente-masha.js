@@ -392,7 +392,7 @@ module.exports = {
           ideas: ["До́брый ве́чер! | ¡Buenas noches! (al llegar)", "Споко́йной но́чи! | ¡Buenas noches! (al irse a dormir)"],
           ramas: [
             { et: "Добрый вечер", k: ["вечер"], r: ["Да! До́брый ве́чер! 🌙 👍 | ¡Sí! ¡Добрый вечер!"], ir: "fin" },
-            { et: "Спокойной ночи", k: ["спокойн"], r: ["Нет! 😄 «Споко́йной но́чи» — 😴! А «До́брый ве́чер» — 🌙! | ¡No! «Спокойной ночи» es para ir a dormir; «Добрый вечер», para saludar a la noche."], ir: "fin" },
+            { et: "Спокойной ночи", k: ["спокойн"], r: ["Нет! 😄 «Споко́йной но́чи» — 😴! А «До́брый ве́чер» — 🌙! | ¡No! «Спокойной ночи» es para ir a dormir; «Добрый вечер», para saludar por la noche."], ir: "fin" },
           ],
           com: { r: ["Ве́чер — «До́брый ве́чер»! 🌙 | Para la noche: «Добрый вечер»."], ir: "fin" } },
         fin: fin("Спаси́бо, {nombre}! До за́втра! 👋 Споко́йной но́чи! 😴 | ¡Gracias, {nombre}! ¡Hasta mañana! ¡Que descanses!"),
@@ -879,7 +879,7 @@ module.exports = {
           com: { r: ["Сок! 🧃 | ¡Zumo!"], ir: "abuela" } },
         abuela: { t: "La abuela", bot: "Ба́бушка пьёт чай и ест торт! 🎂 Что ест ба́бушка? 😄 | La abuela toma té y come torta. ¿Qué come la abuela?",
           ideas: ["Торт! | ¡Torta!", "Ба́бушка ест торт. | La abuela come torta."],
-          ramas: [{ et: "Торт", k: ["торт"], r: ["Да! Торт у́тром! 😂 | ¡Sí! ¡Torta a la mañana!"], ir: "papa" }],
+          ramas: [{ et: "Торт", k: ["торт"], r: ["Да! Торт у́тром! 😂 | ¡Sí! ¡Torta por la mañana!"], ir: "papa" }],
           com: { r: ["Торт! 🎂 😂 | ¡Torta!"], ir: "papa" } },
         papa: conc({ t: "Papá", bot: "А па́па пьёт во́ду. 💧 Па́па не лю́бит ко́фе. Что пьёт па́па? | Papá toma agua. No le gusta el café. ¿Qué toma papá?",
           ideas: ["Во́ду. | Agua.", "Па́па пьёт во́ду. | Papá toma agua."], bien: "=воду", raiz: "вод",
@@ -1500,11 +1500,11 @@ module.exports = {
     {
       id: "u6-ir2", desde: 6, ru: "Хо́дишь и́ли идёшь?", es: "Ahora o habitualmente",
       resumen: "Ходи́ть / е́здить (habitual) y идти́ / е́хать (ahora)",
-      intro: "Masha te pregunta adónde vas seguido y adónde vas ahora. Habitual: хожу́, е́зжу. Ahora mismo: иду́, е́ду.",
+      intro: "Masha te pregunta adónde vas a menudo y adónde vas ahora. Habitual: хожу́, е́зжу. Ahora mismo: иду́, е́ду.",
       inicio: "cine",
       nodos: {
-        cine: { t: "El cine", bot: "Я ча́сто хожу́ в кино́. 🎬 А ты? Ты ча́сто хо́дишь в кино́? | Voy mucho al cine. ¿Y tú? ¿Vas seguido?",
-          ideas: ["Да, я ча́сто хожу́ в кино́. | Sí, voy seguido.", "Иногда́. | A veces.", "Нет, я ре́дко хожу́ в кино́. | No, voy poco.", "Я никогда́ не хожу́ в кино́. | Nunca voy al cine."],
+        cine: { t: "El cine", bot: "Я ча́сто хожу́ в кино́. 🎬 А ты? Ты ча́сто хо́дишь в кино́? | Voy mucho al cine. ¿Y tú? ¿Vas a menudo?",
+          ideas: ["Да, я ча́сто хожу́ в кино́. | Sí, voy a menudo.", "Иногда́. | A veces.", "Нет, я ре́дко хожу́ в кино́. | No, voy poco.", "Я никогда́ не хожу́ в кино́. | Nunca voy al cine."],
           ramas: [
             { et: "Poco / no", k: ["редко", "=нет"], r: ["Ре́дко? А я ча́сто! 😄 | ¿Poco? ¡Yo voy mucho!"], ir: "teatro" },
             { et: "Иду (error)", k: ["=часто иду", "=иногда иду"], r: ["Ча́сто — хожу́! «Иду́» — э́то сейча́с. 🙂 | Habitual: хожу. Иду es ahora mismo."], ir: "teatro" },
@@ -1781,7 +1781,7 @@ module.exports = {
             { et: "Раз в …", k: ["раз"], dato: "Deporte", r: ["Отли́чно! 💪 | ¡Genial!"], ir: "cine" },
           ],
           com: { r: ["Поня́тно! 🙂 | Ya veo."], ir: "cine" } },
-        cine: { t: "Cine", bot: "А в кино́ ты хо́дишь ча́сто? Я — раз в ме́сяц. 🎬 | ¿Y vas seguido al cine? Yo, una vez al mes.",
+        cine: { t: "Cine", bot: "А в кино́ ты хо́дишь ча́сто? Я — раз в ме́сяц. 🎬 | ¿Y vas a menudo al cine? Yo, una vez al mes.",
           ideas: ["Я хожу́ в кино́ раз в неде́лю. | Voy al cine una vez por semana.", "Ре́дко. | Pocas veces.", "Я никогда́ не хожу́ в кино́. | Nunca voy al cine."],
           ramas: [
             { et: "Nunca sin не (error)", k: ["=никогда хожу"], r: ["Никогда́ не хожу́: с «никогда́» — «не»! 🙂 | Con никогда va не: никогда не хожу."], ir: "abuela" },
@@ -1792,7 +1792,7 @@ module.exports = {
         abuela: { t: "La abuela", bot: "Я звоню́ ба́бушке ка́ждый день. 📞 А ты? Как ча́сто ты звони́шь роди́телям? | Llamo a la abuela todos los días. ¿Y tú? ¿Cada cuánto llamas a tus padres?",
           ideas: ["Ка́ждый день. | Todos los días.", "Раз в неде́лю. | Una vez por semana.", "Иногда́. | A veces."],
           ramas: [
-            { et: "Seguido", k: ["каждый", "часто"], r: ["Молоде́ц! Роди́тели ра́ды! 😊 | ¡Bien hecho! ¡Tus padres estarán contentos!"], ir: "fin" },
+            { et: "A menudo", k: ["каждый", "часто"], r: ["Молоде́ц! Роди́тели ра́ды! 😊 | ¡Bien hecho! ¡Tus padres estarán contentos!"], ir: "fin" },
             { et: "Respuesta", k: ["раз", "иногда", "редко"], r: ["Поня́тно! 📞 | Ya veo."], ir: "fin" },
           ],
           com: { r: ["Поня́тно! 📞 | Ya veo."], ir: "fin" } },

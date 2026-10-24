@@ -57,12 +57,12 @@ const U8_COMP = {
   "рабо́тать": [["до́ма", "en casa"], ["в о́фисе", "en la oficina"]], "чита́ть": [["кни́гу", "un libro"], ["газе́ту", "el diario"]], "писа́ть": [["письмо́", "una carta"]],
   "смотре́ть": [["фильм", "una película"], ["телеви́зор", "televisión"]], "слу́шать": [["му́зыку", "música"]], "говори́ть": [["по-ру́сски", "en ruso"]],
   "изуча́ть": [["ру́сский", "ruso"]], "гуля́ть": [["в па́рке", "por el parque"]], "отдыха́ть": [["до́ма", "en casa"]], "гото́вить": [["у́жин", "la cena"], ["суп", "sopa"]],
-  "покупа́ть": [["хлеб", "pan"], ["молоко́", "leche"]], "игра́ть": [["", ""]], "спать": [["", ""]], "пить": [["ко́фе", "café"], ["чай", "té"]], "есть": [["пи́ццу", "pizza"], ["суп", "sopa"]],
+  "покупа́ть": [["хлеб", "pan"], ["молоко́", "leche"]], "де́лать": [["рабо́ту", "el trabajo"]], "игра́ть": [["", ""]], "спать": [["", ""]], "пить": [["ко́фе", "café"], ["чай", "té"]], "есть": [["пи́ццу", "pizza"], ["суп", "sopa"]],
   "обе́дать": [["в рестора́не", "en el restaurante"], ["до́ма", "en casa"]], "у́жинать": [["до́ма", "en casa"], ["в кафе́", "en el café"]], "за́втракать": [["до́ма", "en casa"]],
   "ходи́ть": [["в магази́н", "al negocio"], ["в кино́", "al cine"], ["в парк", "al parque"]], "е́здить": [["в Москву́", "a Moscú"], ["в Мадри́д", "a Madrid"], ["в Пари́ж", "a París"]],
   "быть": [["в Москве́", "en Moscú"], ["в рестора́не", "en el restaurante"], ["на рабо́те", "en el trabajo"], ["до́ма", "en casa"], ["в Пари́же", "en París"]]
 };
-const U8_TIEMPO = [["вчера́", "ayer"], ["вчера́ у́тром", "ayer a la mañana"], ["вчера́ ве́чером", "ayer a la noche"], ["неда́вно", "hace poco"], ["на про́шлой неде́ле", "la semana pasada"],
+const U8_TIEMPO = [["вчера́", "ayer"], ["вчера́ у́тром", "ayer por la mañana"], ["вчера́ ве́чером", "ayer por la noche"], ["неда́вно", "hace poco"], ["на про́шлой неде́ле", "la semana pasada"],
   ["в про́шлом ме́сяце", "el mes pasado"], ["в про́шлом году́", "el año pasado"]];
 const U8_CONECT = { "снача́ла": "primero", "пото́м": "después", "зате́м": "luego", "наконе́ц": "finalmente", "но": "pero", "потому́ что": "porque" };
 
@@ -73,7 +73,7 @@ const U8_PARES = [["чита́ть", "прочита́ть", "leer"], ["писа
 const U8_PARES_MAS = [["ложи́ться", "лечь", "acostarse"], ["умыва́ться", "умы́ться", "lavarse"], ["одева́ться", "оде́ться", "vestirse"], ["пить", "вы́пить", "tomar"],
   ["опа́здывать", "опозда́ть", "llegar tarde"], ["отдыха́ть", "отдохну́ть", "descansar"]];
 /* Tabla de la página (módulo 4): cuándo pasó */
-const U8_TIEMPO_TABLA = [["вчера́", "ayer"], ["позавчера́", "anteayer"], ["вчера́ ве́чером", "ayer a la noche"], ["неда́вно", "hace poco"], ["давно́", "hace mucho"],
+const U8_TIEMPO_TABLA = [["вчера́", "ayer"], ["позавчера́", "anteayer"], ["вчера́ ве́чером", "ayer por la noche"], ["неда́вно", "hace poco"], ["давно́", "hace mucho"],
   ["два дня наза́д", "hace dos días"], ["пять лет наза́д", "hace cinco años"], ["на про́шлой неде́ле", "la semana pasada"], ["в про́шлом ме́сяце", "el mes pasado"],
   ["в про́шлом году́", "el año pasado"], ["в про́шлую суббо́ту", "el sábado pasado"]];
 
@@ -119,13 +119,13 @@ const U8_GRUPOS = [
 
 const U8_LECTURAS = [
   { id: "dia", titulo: "Вчера́", lineas: [
-      ["Вчера́ я рабо́тал.", "Ayer trabajé."], ["У́тром я был до́ма.", "A la mañana estuve en casa."], ["Днём я рабо́тал в о́фисе.", "A la tarde trabajé en la oficina."],
-      ["Ве́чером я ходи́л в магази́н.", "A la noche fui al negocio."], ["Пото́м я гото́вил у́жин и смотре́л фильм.", "Después cociné la cena y miré una película."]],
-    preguntas: [["¿Dónde estuvo a la mañana?", "до́ма", ["в о́фисе", "в магази́не"]], ["¿Adónde fue a la noche?", "в магази́н", ["в кино́", "в парк"]], ["¿Qué miró?", "фильм", ["телеви́зор", "футбо́л"]]],
+      ["Вчера́ я рабо́тал.", "Ayer trabajé."], ["У́тром я был до́ма.", "Por la mañana estuve en casa."], ["Днём я рабо́тал в о́фисе.", "Por la tarde trabajé en la oficina."],
+      ["Ве́чером я ходи́л в магази́н.", "Por la noche fui al negocio."], ["Пото́м я гото́вил у́жин и смотре́л фильм.", "Después cociné la cena y miré una película."]],
+    preguntas: [["¿Dónde estuvo por la mañana?", "до́ма", ["в о́фисе", "в магази́не"]], ["¿Adónde fue por la noche?", "в магази́н", ["в кино́", "в парк"]], ["¿Qué miró?", "фильм", ["телеви́зор", "футбо́л"]]],
     vf: [["У́тром я был в о́фисе.", false], ["Ве́чером я гото́вил у́жин.", true], ["Днём я рабо́тал.", true]] },
   { id: "finde", titulo: "В суббо́ту", lineas: [
       ["В суббо́ту А́нна и Ива́н бы́ли в це́нтре.", "El sábado Ana e Iván estuvieron en el centro."], ["Снача́ла они́ гуля́ли в па́рке.", "Primero pasearon por el parque."],
-      ["Пото́м они́ обе́дали в рестора́не.", "Después almorzaron en el restaurante."], ["Ве́чером они́ ходи́ли в кино́.", "A la noche fueron al cine."], ["Э́то бы́ло интере́сно.", "Fue interesante."]],
+      ["Пото́м они́ обе́дали в рестора́не.", "Después almorzaron en el restaurante."], ["Ве́чером они́ ходи́ли в кино́.", "Por la noche fueron al cine."], ["Э́то бы́ло интере́сно.", "Fue interesante."]],
     preguntas: [["¿Qué hicieron primero?", "гуля́ли в па́рке", ["обе́дали в рестора́не", "ходи́ли в кино́"]], ["¿Dónde almorzaron?", "в рестора́не", ["в кафе́", "до́ма"]], ["¿Cómo fue?", "интере́сно", ["хо́лодно", "пло́хо"]]],
     vf: [["Они́ бы́ли в це́нтре.", true], ["Снача́ла они́ ходи́ли в кино́.", false], ["Ве́чером они́ ходи́ли в кино́.", true]] },
   { id: "viaje", titulo: "В Москве́", lineas: [
@@ -170,7 +170,7 @@ const UNIDAD_8 = {
           ejemplos: [
             { ru: "{Вчера́} я рабо́тал.", es: "Ayer trabajé.", por: "вчера́ marca un día concreto." },
             { ru: "{Ра́ньше} я рабо́тал в ба́нке.", es: "Antes trabajaba en un banco.", por: "ра́ньше: lo que hacías en otra época." },
-            { ru: "Я {ча́сто} гуля́л в па́рке.", es: "Paseaba seguido por el parque.", por: "ча́сто: algo que se repetía." },
+            { ru: "Я {ча́сто} гуля́л в па́рке.", es: "Paseaba a menudo por el parque.", por: "ча́сто: algo que se repetía." },
             { ru: "Я рабо́тал {два часа́}.", es: "Estuve trabajando dos horas.", por: "Cuánto duró: «estuve trabajando»." }],
           destacado: "вчера́ → trabajé · ра́ньше, ча́сто → trabajaba",
           truco: "Cuando traduzcas al español, mira primero la palabra de tiempo: casi siempre te dice cuál de los pasados va.",
@@ -206,7 +206,7 @@ const UNIDAD_8 = {
           errores: [
             { mal: "Она́ учи́ласья.", bien: "Она́ {учи́лась}.", por: "Después de vocal, **-сь**, nunca **-ся**." },
             { mal: "Он учи́лсь.", bien: "Он {учи́лся}.", por: "Después de consonante, **-ся**." }],
-          chequeo: [{ pide: "Ма́ма ___ (возвраща́ться) в семь часо́в.", opciones: ["возвраща́лась", "возвраща́лся", "возвраща́ласья"], ok: "возвраща́лась", por: "**возвраща́ла** termina en vocal: **-сь**." }] },
+          chequeo: [{ pide: "Ма́ма ___ (возвраща́ться) в семь часо́в.", opciones: ["возвраща́лась", "возвраща́лся", "возвраща́ласья"], ok: "возвраща́лась", por: "Ма́ма es una mujer: **-ла**, возвраща́ла. Y como termina en vocal, **-ся** pasa a **-сь**: возвраща́лась." }] },
         { id: "u8-especiales", titulo: "Los especiales",
           texto: "Casi todos los verbos siguen la regla. Los pocos que no, de los que ya conoces, son estos, y conviene aprenderlos de memoria:",
           ejemplos: [
@@ -263,7 +263,7 @@ const UNIDAD_8 = {
       intro: "Las palabras para decir cuándo pasó algo. Algunas son sueltas; otras se arman con la forma de contar que ya conoces.",
       secciones: [
         { id: "u8-cuando", titulo: "Ayer, hace poco, hace mucho",
-          texto: "вчера́ (ayer) · позавчера́ (anteayer)\nвчера́ у́тром, вчера́ ве́чером (ayer a la mañana, ayer a la noche)\nнеда́вно (hace poco) · давно́ (hace mucho)\nкогда́-то (en otro tiempo, alguna vez)\nVan al principio o al final de la frase, sin preposición.",
+          texto: "вчера́ (ayer) · позавчера́ (anteayer)\nвчера́ у́тром, вчера́ ве́чером (ayer por la mañana, ayer por la noche)\nнеда́вно (hace poco) · давно́ (hace mucho)\nкогда́-то (en otro tiempo, alguna vez)\nVan al principio o al final de la frase, sin preposición.",
           ejemplos: [
             { ru: "{Позавчера́} я был в кино́.", es: "Anteayer estuve en el cine.", por: "**поза-** + вчера́: el día antes de ayer." },
             { ru: "Я {неда́вно} был в Москве́.", es: "Hace poco estuve en Moscú.", por: "неда́вно = no hace mucho." },
@@ -319,12 +319,12 @@ const UNIDAD_8 = {
         { id: "u8-dia", titulo: "Tu día de ayer",
           texto: "Con los verbos que ya conoces cuentas un día entero. Cada verbo con su terminación y, si quieres, cuándo:",
           ejemplos: [
-            { ru: "У́тром я {за́втракал} до́ма.", es: "A la mañana desayuné en casa.", por: "за́втракать → за́втракал." },
-            { ru: "Днём я {рабо́тал} в о́фисе.", es: "A la tarde trabajé en la oficina.", por: "рабо́тать → рабо́тал." },
-            { ru: "Ве́чером я {гото́вил} у́жин.", es: "A la noche preparé la cena.", por: "гото́вить → гото́вил: la -и- queda." },
+            { ru: "У́тром я {за́втракал} до́ма.", es: "Por la mañana desayuné en casa.", por: "за́втракать → за́втракал." },
+            { ru: "Днём я {рабо́тал} в о́фисе.", es: "Por la tarde trabajé en la oficina.", por: "рабо́тать → рабо́тал." },
+            { ru: "Ве́чером я {гото́вил} у́жин.", es: "Por la noche preparé la cena.", por: "гото́вить → гото́вил: la -и- queda." },
             { ru: "Пото́м я {смотре́л} телеви́зор.", es: "Después miré televisión.", por: "смотре́ть → смотре́л." }],
           truco: "Escribe tu día de ayer en cuatro frases: mañana, tarde, noche y algo que hiciste después.",
-          chequeo: [{ pide: "«A la noche preparé la cena» (eres mujer).", opciones: ["Ве́чером я гото́вила у́жин.", "Ве́чером я гото́вил у́жин."], ok: "Ве́чером я гото́вила у́жин.", por: "Eres mujer: **-ла**." }] },
+          chequeo: [{ pide: "«Por la noche preparé la cena» (eres mujer).", opciones: ["Ве́чером я гото́вила у́жин.", "Ве́чером я гото́вил у́жин."], ok: "Ве́чером я гото́вила у́жин.", por: "Eres mujer: **-ла**." }] },
         { id: "u8-hodil", titulo: "«Fui»: ходи́л y е́здил",
           texto: "Para «fui al cine» el ruso usa ходи́л (a pie) o е́здил (en un vehículo). Los dos quieren decir «fui y volví»: el viaje ya terminó. Después va adónde, con в o на + acusativo, como con идти́.\nА́нна ходи́ла в кино́ («Ana fue al cine»: ya volvió).",
           ejemplos: [
@@ -424,7 +424,7 @@ const UNIDAD_8 = {
           texto: "Algunas palabras casi deciden por ti:\nCon до́лго, весь день, це́лый день, два часа́ (cuánto duró) → proceso.\nCon ча́сто, обы́чно, ка́ждый день, всегда́, ра́ньше (se repetía) → proceso.\nCon уже́ («ya»), наконе́ц («por fin») y cuando hay un resultado a la vista → resultado.\nEn la pregunta «¿qué hiciste?» → proceso.",
           ejemplos: [
             { ru: "Я {до́лго} {чита́л}.", es: "Leí mucho tiempo.", por: "до́лго: proceso." },
-            { ru: "Я {ча́сто} {смотре́л} фи́льмы.", es: "Miraba películas seguido.", por: "ча́сто: se repetía, proceso." },
+            { ru: "Я {ча́сто} {смотре́л} фи́льмы.", es: "Miraba películas a menudo.", por: "ча́сто: se repetía, proceso." },
             { ru: "Я {уже́} {поза́втракал}.", es: "Ya desayuné.", por: "уже́: resultado, está hecho." },
             { ru: "{Наконе́ц} мы {купи́ли} маши́ну.", es: "Por fin compramos el coche.", por: "наконе́ц: llegamos al resultado." }],
           destacado: "до́лго, ча́сто → proceso · уже́, наконе́ц → resultado",
@@ -530,7 +530,7 @@ const UNIDAD_8 = {
           ejemplos: [
             { ru: "{Ра́ньше} я {встава́л} в шесть часо́в.", es: "Antes me levantaba a las seis.", por: "Se repetía: встава́л, no встал." },
             { ru: "{Ра́ньше} она́ {жила́} в Москве́.", es: "Antes ella vivía en Moscú.", por: "Duraba: proceso." },
-            { ru: "{Тогда́} мы {ча́сто} {ходи́ли} в кино́.", es: "En ese entonces íbamos seguido al cine.", por: "тогда́ + ча́сто: costumbre." }],
+            { ru: "{Тогда́} мы {ча́сто} {ходи́ли} в кино́.", es: "En ese entonces íbamos a menudo al cine.", por: "тогда́ + ча́сто: costumbre." }],
           destacado: "Ра́ньше я встава́л… = Antes me levantaba…",
           errores: [{ mal: "Ра́ньше я ка́ждый день встал в шесть часо́в.", bien: "Ра́ньше я ка́ждый день {встава́л} в шесть часо́в.", por: "Lo que se repetía va con el de proceso." }],
           chequeo: [{ pide: "«Antes me despertaba temprano».", opciones: ["Ра́ньше я просыпа́лся ра́но.", "Ра́ньше я просну́лся ра́но."], ok: "Ра́ньше я просыпа́лся ра́но.", por: "Costumbre: proceso." }] },
@@ -542,9 +542,9 @@ const UNIDAD_8 = {
           truco: "ра́ньше / тогда́ → pasado · сейча́с / тепе́рь → presente",
           chequeo: [{ pide: "Тепе́рь я ___ в Барсело́не.", opciones: ["живу́", "жил"], ok: "живу́", por: "тепе́рь: presente." }] },
         { id: "u8-vez-siempre", titulo: "Siempre o una vez",
-          texto: "Con todo lo de la unidad, una sola pregunta te dice qué verbo usar: ¿se repetía o duraba (proceso), o pasó una vez y terminó (resultado)?\nРа́ньше я ча́сто чита́л газе́ту («antes leía el diario seguido»): se repetía.\nВчера́ я прочита́л газе́ту («ayer leí el diario»): una vez, entero.\nY para recordar: по́мнить (acordarse, tener en la memoria) es de proceso; вспо́мнить (acordarse de golpe) y забы́ть (olvidarse), de resultado.",
+          texto: "Con todo lo de la unidad, una sola pregunta te dice qué verbo usar: ¿se repetía o duraba (proceso), o pasó una vez y terminó (resultado)?\nРа́ньше я ча́сто чита́л газе́ту («antes leía el diario a menudo»): se repetía.\nВчера́ я прочита́л газе́ту («ayer leí el diario»): una vez, entero.\nY para recordar: по́мнить (acordarse, tener en la memoria) es de proceso; вспо́мнить (acordarse de golpe) y забы́ть (olvidarse), de resultado.",
           ejemplos: [
-            { ru: "Ра́ньше я {ча́сто} {покупа́л} газе́ту.", es: "Antes compraba el diario seguido.", por: "Se repetía: покупа́л." },
+            { ru: "Ра́ньше я {ча́сто} {покупа́л} газе́ту.", es: "Antes compraba el diario a menudo.", por: "Se repetía: покупа́л." },
             { ru: "Вчера́ я {купи́л} газе́ту.", es: "Ayer compré el diario.", por: "Una vez: купи́л." },
             { ru: "Я {по́мню} де́тство.", es: "Me acuerdo de mi infancia.", por: "по́мнить, en presente: está en la memoria." },
             { ru: "Я {забы́л}, а пото́м {вспо́мнил}.", es: "Me olvidé y después me acordé.", por: "Dos cosas que pasaron una vez." }],
@@ -553,7 +553,7 @@ const UNIDAD_8 = {
             ejemplos: [
               { ru: "Я {не чита́л} э́ту кни́гу.", es: "No leí ese libro.", por: "Nunca lo leí: proceso." },
               { ru: "Я {не прочита́л} кни́гу.", es: "No terminé el libro.", por: "Empecé, pero no llegué al final." }] },
-          chequeo: [{ pide: "«Antes escribía cartas seguido».", opciones: ["Ра́ньше я ча́сто писа́л пи́сьма.", "Ра́ньше я ча́сто написа́л пи́сьма."], ok: "Ра́ньше я ча́сто писа́л пи́сьма.", por: "Se repetía: proceso." }] }
+          chequeo: [{ pide: "«Antes escribía cartas a menudo».", opciones: ["Ра́ньше я ча́сто писа́л пи́сьма.", "Ра́ньше я ча́сто написа́л пи́сьма."], ok: "Ра́ньше я ча́сто писа́л пи́сьма.", por: "Se repetía: proceso." }] }
       ] },
     { id: "u8m11", n: 11, tipo: "lectura", titulo: "Lectura", resumen: "Un día, un fin de semana, un viaje, antes y ahora.",
       intro: "Cuatro textos cortos con todo lo de la unidad. Léelos, escúchalos y después contesta." },
@@ -650,6 +650,14 @@ function ejerciciosUnidad8() {
     /* «Ayer leí un libro»: también vale el de resultado (прочита́л), si hay un objeto (11/10/2026) */
     const r = par[sin(vk)];
     if (r && comp && comp[0] && !/^(в|на|до́ма)( |$)/.test(comp[0])) esperadas.slice().forEach(x => { for (const k of ["m", "f", "pl"]) if (x.indexOf(" " + v.p[k] + " ") >= 0) esperadas.push(x.replace(" " + v.p[k] + " ", " " + r.p[k] + " ")); });
+
+    /* El cuándo puede ir al principio, después de quién o al final (24/10/2026): Вчера́ я рабо́тал до́ма =
+       Я вчера́ рабо́тал до́ма = Я рабо́тал до́ма вчера́. */
+    if (tiempo) esperadas.slice().forEach(x => {
+      const ini = cap(tiempo[0]) + " " + sujRu + " "; if (x.indexOf(ini) !== 0) return;
+      const resto = x.slice(ini.length).replace(/[.?!]$/, ""), S = cap(sujRu);
+      [S + " " + tiempo[0] + " " + resto + ".", S + " " + resto + " " + tiempo[0] + "."].forEach(y => { if (esperadas.indexOf(y) < 0) esperadas.push(y); });
+    });
     return { ru, es, esperadas, v, g, f };
   };
   const pista = s => s[4] ? " (" + (s[0] === "Я" ? "eres " + s[4] : "le hablas " + s[4]) + ")" : "";
@@ -733,7 +741,7 @@ function ejerciciosUnidad8() {
         esperadas: f.esperadas, idioma: "ru", explicacion: exp }, base));
       if (c === 0) out.push(Object.assign({ id: "U8-vdic-" + j, tipo: "dictado", forma: "escribir", dificultad: 2, modulo: 5, pide: "Escucha y escribe la frase.", audio: f.ru, esperadas: [f.ru], idioma: "ru", explicacion: exp }, base));
       if (c === 0 && j % 2 === 0) { const w = sinP(f.ru).split(" "); let fi = baraja(w, j + 3); if (fi.join(" ") === w.join(" ")) fi = fi.slice(1).concat(fi[0]);
-        out.push(Object.assign({ id: "U8-vord-" + j, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 5, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "), explicacion: exp }, base)); }
+        out.push(Object.assign({ id: "U8-vord-" + j, tipo: "ordenar", forma: "ordenar", dificultad: 2, modulo: 5, pide: "Ordena: «" + f.es + "»", audio: f.ru, fichas: fi, sep: " ", esperada: w.join(" "), esperadas: f.esperadas.map(sinP), explicacion: exp }, base)); }
     });
   });
 
@@ -793,7 +801,7 @@ function ejerciciosUnidad8() {
     out.push({ id: "U8-pq-" + j, tipo: "potomu", forma: "escribir", dificultad: 3, modulo: 8, grupo: "PQR-" + j, items: [], oir: r, contexto: [{ p: "—", ru: q }], pide: "Contesta: «" + es + "»", audio: q, audioManual: true,
       esperadas: [r], idioma: "ru", explicacion: "— " + q + " — " + r + " Почему́? → Потому́ что…" });
   });
-  [["Бы́ло хо́лодно, но интере́сно.", "Hizo frío, pero fue interesante."], ["Я рабо́тал, но ве́чером гуля́л.", "Trabajé, pero a la noche paseé."], ["Снача́ла я прочита́л газе́ту, пото́м посмотре́л фильм.", "Primero leí el diario, después miré una película."]].forEach(([ru, es], j) => {
+  [["Бы́ло хо́лодно, но интере́сно.", "Hizo frío, pero fue interesante."], ["Я рабо́тал, но ве́чером гуля́л.", "Trabajé, pero por la noche paseé."], ["Снача́ла я прочита́л газе́ту, пото́м посмотре́л фильм.", "Primero leí el diario, después miré una película."]].forEach(([ru, es], j) => {
     out.push({ id: "U8-coesru-" + j, tipo: "es-ru", forma: "escribir", dificultad: 3, modulo: 8, grupo: "CE-" + j, items: [], oir: ru, pide: "Escribe en ruso: «" + es + "» (eres hombre)", audio: ru, audioManual: true,
       esperadas: [ru, ru.replace(/(рабо́тал|гуля́л|прочита́л|посмотре́л)/g, "$1а")], idioma: "ru", explicacion: ru });
   });
@@ -1076,9 +1084,9 @@ function ejerciciosUnidad8() {
     ["де́лать", "сде́лать", "рабо́ту", "ayer hice el trabajo (está hecho)", "estuve haciendo el trabajo todo el día", "весь день"],
     ["смотре́ть", "посмотре́ть", "фильм", "ayer terminé de mirar la película", "estuve mirando una película dos horas", "два часа́"],
     ["гото́вить", "пригото́вить", "у́жин", "ayer preparé la cena (está lista)", "estuve preparando la cena mucho tiempo", "до́лго"],
-    ["покупа́ть", "купи́ть", "хлеб", "ayer compré pan (ya lo tengo)", "compraba pan seguido", "ча́сто"],
+    ["покупа́ть", "купи́ть", "хлеб", "ayer compré pan (ya lo tengo)", "compraba pan a menudo", "ча́сто"],
     ["за́втракать", "поза́втракать", "", "ya desayuné", "desayunaba en casa todos los días", "ка́ждый день"],
-    ["обе́дать", "пообе́дать", "", "ya almorcé", "almorzaba en casa seguido", "ча́сто"],
+    ["обе́дать", "пообе́дать", "", "ya almorcé", "almorzaba en casa a menudo", "ча́сто"],
     ["у́жинать", "поу́жинать", "", "ya cené", "cenaba siempre a las ocho", "всегда́"],
     ["встава́ть", "встать", "", "ayer me levanté a las siete", "antes me levantaba a las siete", "ра́ньше"],
     ["просыпа́ться", "просну́ться", "", "ayer me desperté temprano", "antes me despertaba temprano", "ра́ньше"],

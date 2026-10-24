@@ -129,7 +129,7 @@ const GRAMATICA_CASOS = {
    ["Instrumento: con qué","Я пишу́ {ру́чкой}.","Escribo con bolígrafo.","ру́чка → ру́чкой (femenino: la -а pasa a -ой). Es con qué escribo."],
    ["Compañía, con с","Я гуля́ю с {дру́гом}.","Paseo con un amigo.","друг → дру́гом (masculino: se agrega -ом). с «con» pide instrumental."],
    ["Profesión o estado, con рабо́тать, быть, стать","Он рабо́тает {врачо́м}.","Trabaja de médico.","врач → врачо́м. Con рабо́тать, la profesión va en instrumental."],
-   ["Momentos del día y estaciones","{у́тром}, {ле́том}","a la mañana, en verano","у́тро → у́тром, ле́то → ле́том: estos instrumentales funcionan como «a la mañana» o «en verano»."]
+   ["Momentos del día y estaciones","{у́тром}, {ле́том}","por la mañana, en verano","у́тро → у́тром, ле́то → ле́том: estos instrumentales funcionan como «por la mañana» o «en verano»."]
   ],
   preposiciones: [
    ["с","con"], ["над","sobre, encima de"], ["под","debajo de (ubicación)"], ["пе́ред","delante de, antes de"], ["за","detrás de (ubicación)"], ["ме́жду","entre"]
