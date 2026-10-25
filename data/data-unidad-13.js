@@ -134,7 +134,7 @@ const U13_LECTURAS = [
     vf: [["Ма́ша хо́чет пойти́ в кафе́.", true], ["Ма́ша сего́дня не рабо́тает.", false]] },
   { id: "anuncio", titulo: "Объявле́ние", lineas: [
       ["Кварти́ра нахо́дится ря́дом с метро́.", "El apartamento queda al lado del metro."], ["В кварти́ре две ко́мнаты и больша́я ку́хня.", "Tiene dos habitaciones y una cocina grande."],
-      ["Ря́дом есть парк и магази́ны.", "Cerca hay un parque y negocios."], ["Цена́: сто ты́сяч рубле́й в ме́сяц.", "Precio: cien mil rublos por mes."], ["Звони́те ве́чером.", "Llamen a la tarde-noche."]],
+      ["Ря́дом есть парк и магази́ны.", "Cerca hay un parque y negocios."], ["Цена́: сто ты́сяч рубле́й в ме́сяц.", "Precio: cien mil rublos por mes."], ["Звони́те ве́чером.", "Llamen por la tarde-noche."]],
     preguntas: [["¿Cuántas habitaciones tiene?", "две ко́мнаты", ["три ко́мнаты", "одна́ ко́мната"]], ["¿Qué hay cerca?", "парк и магази́ны", ["мо́ре и пляж", "музе́й и теа́тр"]], ["¿Cuándo hay que llamar?", "ве́чером", ["у́тром", "днём"]]],
     vf: [["Ку́хня ма́ленькая.", false], ["Кварти́ра ря́дом с метро́.", true]] },
   { id: "horario", titulo: "Расписа́ние музе́я", lineas: [

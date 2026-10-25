@@ -56,7 +56,7 @@ const UNIDAD_2 = {
             { pide: "Entras a un negocio. ¿Qué dices?", opciones: ["Приве́т!", "Здра́вствуйте!"], ok: "Здра́вствуйте!", por: "Es un desconocido: va el saludo formal." },
             { pide: "Te despides de un amigo. ¿Qué dices?", opciones: ["Пока́!", "До свида́ния!"], ok: "Пока́!", por: "Con un amigo, la despedida de confianza. До свида́ния no está mal, pero suena distante." }] },
         { id: "u2-hora", titulo: "Según la hora",
-          texto: "До́брое у́тро va por la mañana, до́брый день durante el día y до́брый ве́чер a la tarde-noche, siempre para saludar al llegar. Споко́йной но́чи no es un saludo: se dice solo al irse a dormir, como «que descanses».",
+          texto: "До́брое у́тро va por la mañana, до́брый день durante el día y до́брый ве́чер por la tarde-noche, siempre para saludar al llegar. Споко́йной но́чи no es un saludo: se dice solo al irse a dormir, como «que descanses».",
           ejemplos: [
             { ru: "{До́брое у́тро}!", es: "¡Buen día!", por: "Por la mañana, más o menos hasta el mediodía." },
             { ru: "{До́брый день}!", es: "¡Buenas tardes!", por: "Del mediodía a la tarde. Es un poco formal: queda bien en un negocio o en una oficina." },
@@ -529,20 +529,37 @@ function ejerciciosUnidad2() {
   });
 
   /* 6. Diálogos: completar una línea (elegir o escribir) y ordenar */
+  /* Líneas que también serían una respuesta posible en ese punto del diálogo: no salen como opción equivocada */
+  const U2_DLG_TAMBIEN = {
+    "DLG-031-1": ["Как дела́?", "Приве́т! Как дела́?"],
+    "DLG-031-5": ["Лу́кас, отку́да ты?", "Ты говори́шь по-испа́нски?", "Приве́т! Рад познако́миться.", "Мне то́же."],
+    "DLG-032-4": ["Да. А ты?", "Да, немно́го. Я учу́ ру́сский."],
+    "DLG-034-2": ["Приве́т! Как дела́?", "Как дела́?", "Приве́т!"],
+    "DLG-034-4": ["Я из Москвы́.", "Да. А ты?"]
+  };
   const dlg = typeof DIALOGOS !== "undefined" ? DIALOGOS.filter(d => d.unidad === 2) : [];
-  const todas = [].concat(...dlg.map(d => d.lineas.map(l => l.ru)));
+  /* Opciones equivocadas: líneas de los diálogos de la unidad, sin las que citan palabras en español («Diccionario») */
+  const todas = [].concat(...dlg.map(d => d.lineas.map(l => l.ru))).filter(x => !/[A-Za-z]/.test(x));
   const personaje = p => (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[p]) ? DLG_PERSONAJES[p].ru : p;
+  /* En las consignas en español, el nombre en español (25/10/2026, Manu: nada mitad en ruso y mitad en español) */
+  const personajeEs = p => {
+    const P = typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[p]; if (!P) return p;
+    /* los roles (camarero, vendedora…) van con artículo: «¿Qué dice el camarero?» */
+    return /^(masha|dima|lucas|olga)$/.test(p) ? P.es : (P.genero === "f" ? "la " : "el ") + P.es.toLowerCase();
+  };
   const modDlg = { "DLG-031": 2, "DLG-032": 4, "DLG-033": 3, "DLG-034": 2, "DLG-035": 6, "DLG-036": 8 };
   dlg.forEach((d, di) => {
     d.lineas.forEach((l, k) => {
       if (k === 0) return;
       const ctx = d.lineas.slice(Math.max(0, k - 3), k).map(x => ({ p: personaje(x.p), ru: x.ru }));
       const base = { modulo: modDlg[d.id] || 9, grupo: d.id + "-" + k, lex: l.lex, items: items(l.lex), oir: l.ru, contexto: ctx, quien: personaje(l.p) };
-      const dis = baraja(todas.filter(x => x !== l.ru), di * 7 + k).slice(0, 2);
-      out.push(Object.assign({ id: "U2-dle-" + d.id + "-" + k, tipo: "dialogo-elegir", forma: "elegir", dificultad: 2, pide: "¿Qué dice " + personaje(l.p) + "?",
+      /* sin las líneas que también servirían como respuesta (25/10/2026, revisadas una por una) */
+      const tambien = (U2_DLG_TAMBIEN[d.id + "-" + k] || []);
+      const dis = baraja(todas.filter(x => x !== l.ru && tambien.indexOf(x) < 0), di * 7 + k).slice(0, 2);
+      out.push(Object.assign({ id: "U2-dle-" + d.id + "-" + k, tipo: "dialogo-elegir", forma: "elegir", dificultad: 2, pide: "¿Qué dice " + personajeEs(l.p) + "?",
         opciones: baraja([l.ru].concat(dis), k + di), correcta: l.ru, explicacion: l.ru + " — " + l.es }, base));
       if (palabras(l.ru).length <= 5) out.push(Object.assign({ id: "U2-dlw-" + d.id + "-" + k, tipo: "dialogo-escribir", forma: "escribir", dificultad: 3,
-        pide: "Escribe lo que dice " + personaje(l.p) + ": «" + l.es + "»", esperadas: [l.ru], idioma: "ru", explicacion: l.ru + " — " + l.es }, base));
+        pide: "Escribe lo que dice " + personajeEs(l.p) + ": «" + l.es + "»", esperadas: [l.ru], idioma: "ru", explicacion: l.ru + " — " + l.es }, base));
     });
     let orden = baraja(d.lineas.map((x, k) => k), di + 3); if (orden.join() === d.lineas.map((x, k) => k).join()) orden = orden.slice(1).concat(orden[0]);
     out.push({ id: "U2-odl-" + d.id, tipo: "ordenar-dialogo", forma: "ordenar", bloques: true, dificultad: 2, modulo: modDlg[d.id] || 9, grupo: d.id, items: [],
@@ -560,9 +577,15 @@ function ejerciciosUnidad2() {
     { m: 1, r: "u2-formal", sit: "Te vas de un negocio.", ok: "До свида́ния!", mal: "Пока́!", rz: "resp" },
     { m: 1, r: "u2-formal", sit: "Te despides de tu hermano.", ok: "Пока́!", mal: "До свида́ния!", rz: "conf" },
     { m: 1, r: "u2-formal", sit: "Saludas a un grupo de personas que no conoces.", ok: "Здра́вствуйте!", mal: "Приве́т!", rz: "resp" },
-    { m: 1, r: "u2-hora", sit: "Llegas a una cena por la noche.", ok: "До́брый ве́чер!", mal: "Споко́йной но́чи!", rz: "llegar" },
-    { m: 1, r: "u2-hora", sit: "Tu amiga se va a dormir.", ok: "Споко́йной но́чи!", mal: "До́брый ве́чер!", rz: "dormir" },
-    { m: 1, r: "u2-hora", sit: "Llegas a la oficina a las nueve de la mañana.", ok: "До́брое у́тро!", mal: "Споко́йной но́чи!", rz: "llegar" },
+    { m: 1, r: "u2-hora", sit: "Llegas a una cena por la noche.", ok: "До́брый ве́чер!", mal: "Споко́йной но́чи!", rz: "llegar",
+      sn: { pide: "Llegas a una cena por la noche y dices «Споко́йной но́чи!». ¿Está bien?", ok: "No: Споко́йной но́чи es solo para irse a dormir.",
+        mal: ["Sí: es el saludo de la noche.", "Sí: sirve para llegar y para irse."] } },
+    { m: 1, r: "u2-hora", sit: "Tu amiga se va a dormir.", ok: "Споко́йной но́чи!", mal: "До́брый ве́чер!", rz: "dormir",
+      sn: { pide: "Tu amiga se va a dormir y le dices «Споко́йной но́чи!». ¿Está bien?", ok: "Sí: es lo que se dice cuando alguien se va a dormir.",
+        mal: ["No: Споко́йной но́чи es para saludar al llegar.", "No: de noche se dice siempre До́брый ве́чер."] } },
+    { m: 1, r: "u2-hora", sit: "Llegas a la oficina a las nueve de la mañana.", ok: "До́брое у́тро!", mal: "Споко́йной но́чи!", rz: "llegar",
+      sn: { pide: "Llegas a la oficina a las nueve de la mañana y dices «До́брое у́тро!». ¿Está bien?", ok: "Sí: es el saludo para llegar por la mañana.",
+        mal: ["No: До́брое у́тро se dice al irse a dormir.", "No: por la mañana se dice До́брый ве́чер."] } },
     { m: 2, r: "u2-genero-hablante", sit: "Ana conoce a alguien nuevo.", ok: "Ра́да познако́миться!", mal: "Рад познако́миться!", rz: "mujer", ella: 1 },
     { m: 2, r: "u2-genero-hablante", sit: "Lucas conoce a alguien nuevo.", ok: "Рад познако́миться!", mal: "Ра́да познако́миться!", rz: "hombre", ella: 1 },
     { m: 2, r: "u2-genero-hablante", sit: "Masha cuenta que estudia.", ok: "Я студе́нтка.", mal: "Я студе́нт.", rz: "mujer", ella: 1 },
@@ -587,7 +610,10 @@ function ejerciciosUnidad2() {
     const otras = baraja(Object.keys(RZ).filter(k => k !== s.rz && (["mujer", "hombre"].includes(s.rz) === ["mujer", "hombre"].includes(k)) && (["dormir", "llegar"].includes(s.rz) === ["dormir", "llegar"].includes(k)) && (s.m >= 3 || k !== "grupo") && !(s.rz === "grupo" && k === "conf")), i + 41).slice(0, 2);
     out.push(Object.assign({ id: "U2-sit-" + i, tipo: "porque", forma: "elegir", dificultad: 2, pide: s.sit + (s.ella ? " ¿Qué dice?" : " ¿Qué dices?"),
       opciones: baraja([s.ok, s.mal], i + 43), correcta: s.ok, explicacion: s.ok + " " + RZ[s.rz] + "." }, base));
-    if (otras.length) out.push(Object.assign({ id: "U2-porq-" + i, tipo: "porque", forma: "elegir", dificultad: 2, pide: s.sit + (s.ella ? " Dice «" : " Dices «") + s.ok + (/[.!?]$/.test(s.ok) ? "» ¿Por qué?" : "». ¿Por qué?"),
+    /* Saludos según la hora (24/10/2026, Manu): «¿Por qué?» no encajaba con las razones; va «¿Está bien?» con Sí / No y el motivo */
+    if (s.sn) out.push(Object.assign({ id: "U2-porq-" + i, tipo: "porque", forma: "elegir", dificultad: 2, pide: s.sn.pide,
+      opciones: baraja([s.sn.ok].concat(s.sn.mal), i * 5 + 44), correcta: s.sn.ok, explicacion: s.sn.ok }, base));
+    else if (otras.length) out.push(Object.assign({ id: "U2-porq-" + i, tipo: "porque", forma: "elegir", dificultad: 2, pide: s.sit + (s.ella ? " Dice «" : " Dices «") + s.ok + (/[.!?]$/.test(s.ok) ? "» ¿Por qué?" : "». ¿Por qué?"),
       opciones: baraja([RZ[s.rz]].concat(otras.map(k => RZ[k])), i + 45), correcta: RZ[s.rz], explicacion: RZ[s.rz] + ": " + s.ok }, base));
   });
 
@@ -634,7 +660,7 @@ function ejerciciosUnidad2() {
     if (k >= 0) st.ok.splice(k, 1, ...U2_NAC_LISTA.map(n => "Я " + n + "."), ...U2_NAC_LISTA.map(n => "Я " + n + ", я из {lugar}."));
   }));
   U2_CHATS.forEach(ch => out.push({ id: "U2-chat-" + ch.id, tipo: "chat", forma: "chat", dificultad: 3, modulo: 9, grupo: ch.id, items: [], chat: ch,
-    pide: ch.titulo, explicacion: "Conversación completa con " + personaje(ch.p) + "." }));
+    pide: ch.titulo, explicacion: "Conversación completa con " + personajeEs(ch.p) + "." }));
 
   return out;
 }
