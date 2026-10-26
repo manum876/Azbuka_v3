@@ -344,7 +344,7 @@
       return h("div", { key: id, className: "voc" },
         h("div", { style: { flex: 1, minWidth: 0 } },
           h("span", { className: "voc-ru" }, h(AzPalabra, { texto: e.acento || e.ru, id })), h("span", { className: "voc-tr az-tl" }, e.translit),
-          h("div", { className: "voc-es" }, e.senses.slice(0, 2).map(x => x.es).join("; "))),
+          h("div", { className: "voc-es" }, e.senses.slice(0, 2).map(x => typeof azEsNeutro === "function" ? azEsNeutro(x.es) : x.es).join("; "))),
         h("button", { className: "play", onClick: () => azHablarRu(e.acento || e.ru), "aria-label": "Escuchar" }, "▶"));
     }));
   }
@@ -453,7 +453,7 @@
           !vuelta ? h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, "Toca para ver qué significa")
             : h(React.Fragment, null,
                 h("div", { className: "az-tl", style: { fontSize: 15, color: c.textSub, fontStyle: "italic", marginTop: 8 } }, e.translit),
-                h("div", { style: { fontSize: 20, fontWeight: 700, color: c.text, marginTop: 12 } }, e.senses.slice(0, 2).map(x => x.es).join("; ")),
+                h("div", { style: { fontSize: 20, fontWeight: 700, color: c.text, marginTop: 12 } }, e.senses.slice(0, 2).map(x => typeof azEsNeutro === "function" ? azEsNeutro(x.es) : x.es).join("; ")),
                 detalle && detalle(e) && h("div", { lang: "ru", style: { fontSize: 14.5, color: c.textSub, marginTop: 8 } }, detalle(e)),
                 h("button", { className: "play", style: { marginTop: 14 }, onClick: ev => { ev.stopPropagation(); azHablarRu(e.acento || e.ru); }, "aria-label": "Escuchar" }, "▶"))),
         h("div", { className: "fc-ctl" },

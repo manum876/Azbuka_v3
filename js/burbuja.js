@@ -79,7 +79,8 @@
     if (!e) return h("div", { className: "az-bb-es" }, "Todavía no está en el diccionario.");
     const f = descForma(d.id, d.forma, e);
     const senses = e.senses || [];
-    const es = d.sentido != null && senses[d.sentido] ? senses[d.sentido].es : senses.slice(0, 3).map(function (s) { return s.es; }).join("; ");
+    const neutro = typeof azEsNeutro === "function" ? azEsNeutro : function (x) { return x; };   /* 26/10/2026: sin regionales */
+    const es = d.sentido != null && senses[d.sentido] ? neutro(senses[d.sentido].es) : senses.slice(0, 3).map(function (s) { return neutro(s.es); }).join("; ");
     const pos = [POS_CORTO[e.posNormalized] || e.posNormalized, e.gender ? GEN[e.gender] : null].filter(Boolean).join(" · ");
     const href = "ficha.html?id=" + e.id;
     return h(React.Fragment, null,

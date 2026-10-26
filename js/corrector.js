@@ -136,7 +136,7 @@ function azAnalizarPalabra(t) {
     const r = porId[id];
     r.lema = e ? (e.acento || e.ru) : "";
     r.pos = e ? e.posNormalized : "";
-    r.es = e ? (e.senses || []).map(function (s) { return s.es; }).slice(0, 2).join(", ") : "";
+    r.es = e ? (e.senses || []).map(function (s) { return typeof azEsNeutro === "function" ? azEsNeutro(s.es) : s.es; }).slice(0, 2).join(", ") : "";
     return r;
   });
 }

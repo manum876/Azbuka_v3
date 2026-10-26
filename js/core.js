@@ -101,6 +101,18 @@ function azModuloColor(m) {
 function azNormRu(s) {
   return (s || "").replace(/ё/g, "е").replace(/Ё/g, "Е").replace(/\u0301/g, "");
 }
+/* 26/10/2026: traducción para las unidades. En el léxico, la palabra neutra va
+   primero y las regionales quedan como sinónimo con su marca de zona
+   («chaqueta, campera (Río de la Plata)»). En las unidades (burbuja, vocabulario,
+   tarjetas, corrector) se muestran sin esas regionales; la ficha y el
+   Diccionario siguen mostrando todo. Si no queda nada, devuelve el original. */
+const AZ_RX_ZONA = /\((?:Río de la Plata|América|Sudamérica|Argentina|Buenos Aires|España)\)/;
+function azEsNeutro(es) {
+  const txt = es || "";
+  if (!AZ_RX_ZONA.test(txt)) return txt;
+  const grupos = txt.split(/\s*;\s*/).map(g => g.split(/\s*,\s*/).filter(x => !AZ_RX_ZONA.test(x)).join(", ")).filter(Boolean);
+  return grupos.length ? grupos.join("; ") : txt;
+}
 function azSearchLexicon(query, pos) {
   if (typeof LEXICON_COMER === "undefined") return [];
   const q = azNormRu((query || "").trim().toLowerCase());

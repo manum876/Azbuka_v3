@@ -1,3 +1,13 @@
+/* ACTUALIZACIÓN 26/10/2026 (revisión de regionalismos, aprobada por Manu): 116 entradas pasan a
+   español neutro siguiendo la regla de NEUTRO_EQUIVALENCIAS.md (neutra primero, la regional queda como
+   sinónimo con su marca de zona; no se quitó ningún sinónimo). Traducciones donde la regional iba
+   primero o sola (бана́н plátano, пена́л estuche, торт tarta, спеши́ть darse prisa, скуча́ть echar de
+   menos, сли́вки nata, санте́хник fontanero…), marcas de zona que faltaban (ты vos, ко́мната pieza,
+   встать pararse…), definiciones en rioplatense (valijas, pizarrón, negocio = tienda, computadoras,
+   manejar = conducir, chico = pequeño, remedio = medicamento, resfrío…) y enojarse → enfadarse.
+   Quedan igual a propósito: plata (metal), colectivo (numeral), departamento (sección),
+   agarrar = asir, allá, almacén, crema agria. */
+
 /* ACTUALIZACIÓN 21/10/2026 (Manu): немно́го pasa a introducedIn [2] (la U2 la enseña en el módulo 5,
    «Я немно́го говорю́ по-ру́сски»); la U10 queda en appearsIn. */
 
@@ -2505,7 +2515,7 @@ const LEXICON_COMER = [
   "ipa": "tˈy",
   "senses": [
    {
-    "es": "tú, vos",
+    "es": "tú, vos (Río de la Plata)",
     "definitionEs": "Pronombre personal de segunda persona singular, informal.",
     "source": "redactado"
    }
@@ -9337,7 +9347,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "simplemente, fácil",
-    "definitionEs": "Adverbio: indica sencillez o actúa como muletilla ('просто так' = así nomás, sin motivo).",
+    "definitionEs": "Adverbio: indica sencillez o actúa como muletilla ('просто так' = porque sí, sin motivo).",
     "source": "redactado"
    }
   ],
@@ -21238,7 +21248,7 @@ const LEXICON_COMER = [
   "ipa": "kˈomnʌtʌ",
   "senses": [
    {
-    "es": "habitación, cuarto, pieza",
+    "es": "habitación, cuarto, pieza (América)",
     "definitionEs": "Espacio delimitado por paredes dentro de una vivienda.",
     "source": "freedict-directo + redactado"
    }
@@ -24007,7 +24017,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "llevar, guiar, conducir (a alguien); dirigir",
-    "definitionEs": "Llevar a alguien o algo hacia un lugar, acompañándolo; también, dirigir o llevar adelante algo: вести́ дела́ = llevar los asuntos. Para manejar un vehículo se usa води́ть.",
+    "definitionEs": "Llevar a alguien o algo hacia un lugar, acompañándolo; también, dirigir o llevar adelante algo: вести́ дела́ = llevar los asuntos. Para conducir un vehículo se usa води́ть.",
     "source": "freedict-directo+inverso"
    }
   ],
@@ -41508,7 +41518,7 @@ const LEXICON_COMER = [
   "ipa": "fstˈɑtʲ",
   "senses": [
    {
-    "es": "levantarse, pararse",
+    "es": "levantarse, ponerse de pie, pararse (América)",
     "definitionEs": "Ponerse de pie o salir de la cama (aspecto perfectivo de 'вставать').",
     "source": "redactado (basado en FreeDict)"
    }
@@ -69838,7 +69848,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pequeño, fino",
-    "definitionEs": "De tamaño reducido o de granos chicos: ме́лкие де́ньги, «dinero suelto»; ме́лкий дождь, «llovizna».",
+    "definitionEs": "De tamaño reducido o de granos pequeños: ме́лкие де́ньги, «dinero suelto»; ме́лкий дождь, «llovizna».",
     "source": "redactado (basado en FreeDict)"
    },
    {
@@ -93084,7 +93094,7 @@ const LEXICON_COMER = [
   "ipa": "trubˈɑ",
   "senses": [
    {
-    "es": "tubo, caño",
+    "es": "tubo, tubería, caño (América)",
     "definitionEs": "Conducto cilíndrico hueco.",
     "source": "redactado (basado en FreeDict)"
    },
@@ -93759,7 +93769,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "traje",
-    "definitionEs": "Conjunto de prendas de vestir formal, generalmente saco y pantalón.",
+    "definitionEs": "Conjunto de prendas de vestir formal, generalmente chaqueta y pantalón.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -96655,7 +96665,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "discusión, disputa",
-    "definitionEs": "Intercambio de opiniones opuestas, a veces con enojo.",
+    "definitionEs": "Intercambio de opiniones opuestas, a veces con enfado.",
     "source": "redactado + Lingea (contraste puntual)"
    }
   ],
@@ -104865,7 +104875,7 @@ const LEXICON_COMER = [
   "ipa": "pɭʌɕˈɑtkʌ",
   "senses": [
    {
-    "es": "plataforma, terreno, cancha",
+    "es": "plataforma, terreno, pista, cancha (América)",
     "definitionEs": "Espacio plano destinado a una actividad determinada.",
     "source": "redactado + Lingea (contraste puntual)"
    }
@@ -106631,7 +106641,7 @@ const LEXICON_COMER = [
   "ipa": "spʲɪʃˈytʲ",
   "senses": [
    {
-    "es": "apurarse, apresurarse",
+    "es": "darse prisa, apresurarse, apurarse (América)",
     "definitionEs": "Hacer algo con rapidez porque hay poco tiempo.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -107610,7 +107620,7 @@ const LEXICON_COMER = [
   "ipa": "fstʌvˈɑtʲ",
   "senses": [
    {
-    "es": "levantarse, pararse",
+    "es": "levantarse, ponerse de pie, pararse (América)",
     "definitionEs": "Ponerse de pie (aspecto imperfectivo de 'встать').",
     "source": "redactado (basado en FreeDict)"
    }
@@ -110421,7 +110431,7 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    },
    {
-    "es": "pizarra, pizarrón",
+    "es": "pizarra, pizarrón (América)",
     "definitionEs": "Superficie del aula donde se escribe con tiza o con marcador.",
     "source": "redactado (separado con Manu, 27/09/2026)"
    }
@@ -123886,7 +123896,7 @@ const LEXICON_COMER = [
   "ipa": "vʌrˈotʌ",
   "senses": [
    {
-    "es": "portón, arco (fútbol)",
+    "es": "portón; portería (fútbol), arco (América)",
     "definitionEs": "Puerta grande de acceso a un espacio cerrado, o el marco donde se anotan goles en el fútbol.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -126895,8 +126905,8 @@ const LEXICON_COMER = [
     "source": "redactado (basado en FreeDict)"
    },
    {
-    "es": "manija",
-    "definitionEs": "Agarradera de un objeto.",
+    "es": "asa, manija (América)",
+    "definitionEs": "Parte de un objeto por donde se sujeta o se abre.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -130242,7 +130252,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "entrada, portal (de edificio)",
-    "definitionEs": "Acceso a un edificio, especialmente un edificio de departamentos.",
+    "definitionEs": "Acceso a un edificio, especialmente un edificio de viviendas.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -136517,7 +136527,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "discutir, debatir",
-    "definitionEs": "Intercambiar opiniones opuestas, a veces con enojo.",
+    "definitionEs": "Intercambiar opiniones opuestas, a veces con enfado.",
     "source": "redactado"
    }
   ],
@@ -137964,7 +137974,7 @@ const LEXICON_COMER = [
   "ipa": "tʌrʌpʲˈitsʌ",
   "senses": [
    {
-    "es": "apurarse, apresurarse",
+    "es": "darse prisa, apresurarse, apurarse (América)",
     "definitionEs": "Hacer algo con rapidez por falta de tiempo.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -166765,7 +166775,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "internet",
-    "definitionEs": "Red mundial de comunicación entre computadoras.",
+    "definitionEs": "Red mundial de comunicación entre ordenadores.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -176214,7 +176224,7 @@ const LEXICON_COMER = [
   "ipa": "ʌdʲɪˈjɑɭʌ",
   "senses": [
    {
-    "es": "manta, frazada, cobija",
+    "es": "manta, frazada (América), cobija (América)",
     "definitionEs": "Pieza de tela gruesa que se usa para abrigarse al dormir.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -178618,7 +178628,7 @@ const LEXICON_COMER = [
   "ipa": "pʲɪdʒˈɑk",
   "senses": [
    {
-    "es": "saco, americana",
+    "es": "americana, saco (América)",
     "definitionEs": "Prenda de vestir formal que cubre el torso y los brazos, parte de un traje.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -192855,7 +192865,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "conducir; guiar (de forma habitual)",
-    "definitionEs": "Manejar un vehículo, o llevar a alguien de un lado a otro, de forma repetida o habitual.",
+    "definitionEs": "Conducir un vehículo, o llevar a alguien de un lado a otro, de forma repetida o habitual.",
     "source": "redactado"
    }
   ],
@@ -195495,7 +195505,7 @@ const LEXICON_COMER = [
   "ipa": "vʲɪdrˈo",
   "senses": [
    {
-    "es": "balde, cubo",
+    "es": "cubo, balde",
     "definitionEs": "Recipiente con asa, usado para llevar líquidos u otras cosas.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -199283,7 +199293,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "informático, de ordenador, de computadora (América)",
-    "definitionEs": "Relativo a las computadoras.",
+    "definitionEs": "Relativo a los ordenadores.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -208424,7 +208434,7 @@ const LEXICON_COMER = [
   "ipa": "mˈyʃkʌ",
   "senses": [
    {
-    "es": "ratoncito; mouse (informal)",
+    "es": "ratoncito; ratón (del ordenador), mouse (América)",
     "definitionEs": "Diminutivo de ratón. También se usa para el dispositivo periférico de un ordenador.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -216206,7 +216216,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "curar, tratar",
-    "definitionEs": "Aplicar remedios para sanar una enfermedad.",
+    "definitionEs": "Aplicar tratamientos o medicamentos para sanar una enfermedad.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -225470,7 +225480,7 @@ const LEXICON_COMER = [
   "ipa": "pʌɭˈɑtkʌ",
   "senses": [
    {
-    "es": "carpa, tienda (de campaña)",
+    "es": "tienda (de campaña), carpa (América)",
     "definitionEs": "Estructura portátil de tela, usada para acampar o como puesto de venta.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -227332,8 +227342,8 @@ const LEXICON_COMER = [
   "ipa": "ɡnʲˈef",
   "senses": [
    {
-    "es": "ira, enojo",
-    "definitionEs": "Sentimiento intenso de enojo.",
+    "es": "ira, enfado, enojo (América)",
+    "definitionEs": "Sentimiento intenso de ira.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -230685,7 +230695,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "maldito",
-    "definitionEs": "Que ha sido objeto de una maldición, o que se usa como insulto para expresar enojo.",
+    "definitionEs": "Que ha sido objeto de una maldición, o que se usa como insulto para expresar enfado.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -255119,7 +255129,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "irritación, molestia",
-    "definitionEs": "Sentimiento de enojo o fastidio causado por algo molesto.",
+    "definitionEs": "Sentimiento de enfado o fastidio causado por algo molesto.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -262091,7 +262101,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "irritar, molestar",
-    "definitionEs": "Causar enojo o fastidio en alguien.",
+    "definitionEs": "Causar enfado o fastidio en alguien.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -268042,7 +268052,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "regañar, reñir",
-    "definitionEs": "Reprender a alguien con enojo por algo que hizo.",
+    "definitionEs": "Reprender a alguien con enfado por algo que hizo.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -268715,7 +268725,7 @@ const LEXICON_COMER = [
   "ipa": "jɪrundˈɑ",
   "senses": [
    {
-    "es": "tontería, pavada",
+    "es": "tontería, pavada (Río de la Plata)",
     "definitionEs": "Cosa sin importancia o sin sentido (coloquial).",
     "source": "redactado"
    }
@@ -271233,7 +271243,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "baya",
-    "definitionEs": "Fruto pequeño y jugoso, como la frutilla o el arándano.",
+    "definitionEs": "Fruto pequeño y jugoso, como la fresa o el arándano.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -273626,7 +273636,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "encenderse de golpe; estallar (una emoción/conflicto)",
-    "definitionEs": "Prender fuego repentinamente, o surgir con fuerza una emoción o un conflicto (aspecto perfectivo de 'вспыхивать').",
+    "definitionEs": "Encenderse de repente, o surgir con fuerza una emoción o un conflicto (aspecto perfectivo de 'вспыхивать').",
     "source": "redactado"
    }
   ],
@@ -277639,7 +277649,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pelearse (verbalmente), maldecir",
-    "definitionEs": "Discutir con enojo, o decir palabrotas.",
+    "definitionEs": "Discutir con enfado, o decir palabrotas.",
     "source": "redactado"
    }
   ],
@@ -280468,8 +280478,8 @@ const LEXICON_COMER = [
   "ipa": "sʲɪrdʲˈitsʌ",
   "senses": [
    {
-    "es": "enojarse, enfadarse",
-    "definitionEs": "Sentir o mostrar enojo.",
+    "es": "enfadarse, enojarse (América)",
+    "definitionEs": "Sentir o mostrar enfado.",
     "source": "redactado (basado en FreeDict)"
    }
   ],
@@ -283148,7 +283158,7 @@ const LEXICON_COMER = [
   "ipa": "ɭˈɑmpʌtʃʲkʌ",
   "senses": [
    {
-    "es": "bombilla, foco",
+    "es": "bombilla, foco (América)",
     "definitionEs": "Dispositivo que produce luz eléctrica.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -289496,7 +289506,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "furia, ira intensa",
-    "definitionEs": "Sentimiento de enojo muy fuerte.",
+    "definitionEs": "Sentimiento de ira muy fuerte.",
     "source": "redactado"
    }
   ],
@@ -294292,7 +294302,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "indignarse",
-    "definitionEs": "Sentir enojo por una injusticia (aspecto perfectivo de 'возмущаться').",
+    "definitionEs": "Sentir indignación por una injusticia (aspecto perfectivo de 'возмущаться').",
     "source": "redactado"
    }
   ],
@@ -296259,7 +296269,7 @@ const LEXICON_COMER = [
   "ipa": "spʲˈitʃʲkʌ",
   "senses": [
    {
-    "es": "fósforo (para encender)",
+    "es": "cerilla, fósforo",
     "definitionEs": "Palito con una punta inflamable, usado para encender fuego.",
     "source": "redactado (basado en FreeDict)"
    }
@@ -302354,8 +302364,8 @@ const LEXICON_COMER = [
   "ipa": "pʌspʲɪʃˈytʲ",
   "senses": [
    {
-    "es": "apurarse, apresurarse",
-    "definitionEs": "Apurarse para hacer algo a tiempo (aspecto perfectivo de 'спешить'): Поспеши́! («¡apúrate!»).",
+    "es": "darse prisa, apresurarse, apurarse (América)",
+    "definitionEs": "Darse prisa para hacer algo a tiempo (aspecto perfectivo de 'спешить'): Поспеши́! («¡date prisa!»).",
     "source": "manual"
    }
   ],
@@ -305875,8 +305885,8 @@ const LEXICON_COMER = [
   "ipa": "pʌtʌrʌpʲˈitsʌ",
   "senses": [
    {
-    "es": "apurarse, apresurarse",
-    "definitionEs": "Darse prisa (aspecto perfectivo de 'торопиться'): Поторопи́сь! («¡apúrate!»).",
+    "es": "darse prisa, apresurarse, apurarse (América)",
+    "definitionEs": "Darse prisa (aspecto perfectivo de 'торопиться'): Поторопи́сь! («¡date prisa!»).",
     "source": "manual"
    }
   ],
@@ -311213,8 +311223,8 @@ const LEXICON_COMER = [
   "ipa": "rʌssʲɪrdʲˈitsʌ",
   "senses": [
    {
-    "es": "enojarse, enfadarse",
-    "definitionEs": "Ponerse de mal humor por algo: Он рассерди́лся, «se enojó».",
+    "es": "enfadarse, enojarse (América)",
+    "definitionEs": "Ponerse de mal humor por algo: Он рассерди́лся, «se enfadó».",
     "source": "redactado"
    }
   ],
@@ -320080,7 +320090,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "girar un poco, darle unas vueltas",
-    "definitionEs": "Hacer girar algo durante un momento: покрути́ть ру́чку, «darle unas vueltas a la manija».",
+    "definitionEs": "Hacer girar algo durante un momento: покрути́ть ру́чку, «darle unas vueltas a la manivela».",
     "source": "redactado"
    }
   ],
@@ -322651,7 +322661,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "encenderse de golpe",
-    "definitionEs": "Prender fuego repentinamente, o surgir con fuerza una emoción o un conflicto.",
+    "definitionEs": "Encenderse de repente, o surgir con fuerza una emoción o un conflicto.",
     "source": "redactado"
    }
   ],
@@ -322834,7 +322844,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pelearse (discutir con alguien)",
-    "definitionEs": "Discutir con alguien y quedar enojados: поруга́ться с сосе́дом, «pelearse con el vecino».",
+    "definitionEs": "Discutir con alguien y quedar enfadados: поруга́ться с сосе́дом, «pelearse con el vecino».",
     "source": "redactado"
    }
   ],
@@ -324179,7 +324189,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "indignarse",
-    "definitionEs": "Sentir enojo por una injusticia.",
+    "definitionEs": "Sentir indignación por una injusticia.",
     "source": "redactado"
    }
   ],
@@ -326081,7 +326091,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "surtir efecto; influir",
-    "definitionEs": "Producir un efecto: Лека́рство поде́йствовало, «el remedio hizo efecto».",
+    "definitionEs": "Producir un efecto: Лека́рство поде́йствовало, «el medicamento hizo efecto».",
     "source": "redactado"
    }
   ],
@@ -326953,7 +326963,7 @@ const LEXICON_COMER = [
   "ipa": "bʌnˈɑn",
   "senses": [
    {
-    "es": "banana",
+    "es": "plátano, banana (América)",
     "definitionEs": "Fruta alargada y curva, de cáscara amarilla, muy común y dulce.",
     "source": "redactado"
    }
@@ -330747,7 +330757,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ir y volver",
-    "definitionEs": "Ir a un lugar cercano y regresar: сходи́ть в магази́н = ir al negocio (y volver).",
+    "definitionEs": "Ir a un lugar cercano y regresar: сходи́ть в магази́н = ir a la tienda (y volver).",
     "source": "redactado",
     "aspectualPartner": [
      "CMR-00342"
@@ -336865,7 +336875,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cartera, monedero, billetera (América)",
-    "definitionEs": "Objeto chico para llevar el dinero y las tarjetas.",
+    "definitionEs": "Objeto pequeño para llevar el dinero y las tarjetas.",
     "source": "redactado"
    }
   ],
@@ -337458,7 +337468,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "vendedora",
-    "definitionEs": "Mujer que atiende en un negocio.",
+    "definitionEs": "Mujer que atiende en una tienda.",
     "source": "redactado"
    }
   ],
@@ -337712,7 +337722,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "tiza",
-    "definitionEs": "Barrita blanca para escribir en el pizarrón.",
+    "definitionEs": "Barrita blanca para escribir en la pizarra.",
     "source": "redactado"
    }
   ],
@@ -338036,8 +338046,8 @@ const LEXICON_COMER = [
   "ipa": "pʲɪnˈɑɭ",
   "senses": [
    {
-    "es": "cartuchera",
-    "definitionEs": "Estuche para llevar lápices, lapiceras y goma.",
+    "es": "estuche, cartuchera (América)",
+    "definitionEs": "Estuche para llevar lápices, bolígrafos y goma.",
     "source": "redactado"
    }
   ],
@@ -339993,7 +340003,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "platito (de la taza)",
-    "definitionEs": "Plato chico que va debajo de la taza.",
+    "definitionEs": "Plato pequeño que va debajo de la taza.",
     "source": "redactado"
    }
   ],
@@ -340182,7 +340192,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "plástico",
-    "definitionEs": "Material sintético liviano que se puede moldear: буты́лка из пла́стика, «botella de plástico».",
+    "definitionEs": "Material sintético ligero que se puede moldear: буты́лка из пла́стика, «botella de plástico».",
     "source": "redactado"
    }
   ],
@@ -340373,7 +340383,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "blusa",
-    "definitionEs": "Prenda de mujer, liviana, para la parte de arriba.",
+    "definitionEs": "Prenda de mujer, ligera, para la parte de arriba.",
     "source": "redactado"
    }
   ],
@@ -340435,8 +340445,8 @@ const LEXICON_COMER = [
   "ipa": "kˈoftʌ",
   "senses": [
    {
-    "es": "saquito, buzo (de abrigo)",
-    "definitionEs": "Prenda de abrigo liviana para la parte de arriba, a menudo tejida o con botones.",
+    "es": "chaqueta de punto, rebeca, saquito (Río de la Plata), buzo (Río de la Plata)",
+    "definitionEs": "Prenda de abrigo ligera para la parte de arriba, a menudo de punto o con botones.",
     "source": "redactado"
    }
   ],
@@ -340754,7 +340764,7 @@ const LEXICON_COMER = [
   "ipa": "trusˈy",
   "senses": [
    {
-    "es": "calzoncillos; bombacha",
+    "es": "calzoncillos; bragas, bombacha (Río de la Plata)",
     "definitionEs": "La ropa interior de abajo, de hombre o de mujer. Va siempre en plural.",
     "source": "redactado"
    }
@@ -340817,7 +340827,7 @@ const LEXICON_COMER = [
   "ipa": "mˈɑjkʌ",
   "senses": [
    {
-    "es": "musculosa; camiseta",
+    "es": "camiseta de tirantes, musculosa (Río de la Plata); camiseta",
     "definitionEs": "Camiseta sin mangas, de tirantes. En el habla se usa también para cualquier camiseta.",
     "source": "redactado"
    }
@@ -340880,7 +340890,7 @@ const LEXICON_COMER = [
   "ipa": "kupˈɑɭʲnʲɪk",
   "senses": [
    {
-    "es": "malla (de mujer)",
+    "es": "bañador, traje de baño (de mujer), malla (Río de la Plata)",
     "definitionEs": "Traje de baño de mujer, entero o de dos piezas.",
     "source": "redactado"
    }
@@ -341263,7 +341273,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "bolso (de mujer), cartera (América)",
-    "definitionEs": "Bolso chico que se lleva en la mano o colgado. Es el diminutivo de су́мка.",
+    "definitionEs": "Bolso pequeño que se lleva en la mano o colgado. Es el diminutivo de су́мка.",
     "source": "redactado"
    }
   ],
@@ -341654,7 +341664,7 @@ const LEXICON_COMER = [
    },
    {
     "es": "alhaja, bijou",
-    "definitionEs": "Objeto que se lleva puesto para adornarse: anillo, collar, aros.",
+    "definitionEs": "Objeto que se lleva puesto para adornarse: anillo, collar, pendientes.",
     "source": "redactado"
    }
   ],
@@ -341908,7 +341918,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pila",
-    "definitionEs": "Pila chica para aparatos: поменя́ть батаре́йку, «cambiar la pila».",
+    "definitionEs": "Pila pequeña para aparatos: поменя́ть батаре́йку, «cambiar la pila».",
     "source": "redactado"
    }
   ],
@@ -342666,8 +342676,8 @@ const LEXICON_COMER = [
   "ipa": "sɭʲˈifkʲɪ",
   "senses": [
    {
-    "es": "crema (de leche)",
-    "definitionEs": "La parte grasa de la leche: ко́фе со сли́вками, «café con crema». Va siempre en plural.",
+    "es": "nata, crema de leche (América)",
+    "definitionEs": "La parte grasa de la leche: ко́фе со сли́вками, «café con nata». Va siempre en plural.",
     "source": "redactado"
    }
   ],
@@ -342852,7 +342862,7 @@ const LEXICON_COMER = [
   "ipa": "kʌktˈɛjɭʲ",
   "senses": [
    {
-    "es": "cóctel, trago",
+    "es": "cóctel, trago (América)",
     "definitionEs": "Bebida hecha mezclando varias bebidas.",
     "source": "redactado"
    },
@@ -343178,7 +343188,7 @@ const LEXICON_COMER = [
    },
    {
     "es": "pimiento, morrón (Río de la Plata), ají (América)",
-    "definitionEs": "La hortaliza: сла́дкий пе́рец, «morrón»; о́стрый пе́рец, «ají picante».",
+    "definitionEs": "La hortaliza: сла́дкий пе́рец, «pimiento dulce»; о́стрый пе́рец, «guindilla, chile picante».",
     "source": "redactado"
    }
   ],
@@ -343241,7 +343251,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "maíz, choclo (América)",
-    "definitionEs": "La planta y sus granos: варёная кукуру́за, «choclo hervido».",
+    "definitionEs": "La planta y sus granos: варёная кукуру́за, «maíz hervido».",
     "source": "redactado"
    }
   ],
@@ -343439,7 +343449,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "mandarina",
-    "definitionEs": "Cítrico chico, dulce y fácil de pelar.",
+    "definitionEs": "Cítrico pequeño, dulce y fácil de pelar.",
     "source": "redactado"
    }
   ],
@@ -343628,7 +343638,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "albaricoque, damasco (Río de la Plata)",
-    "definitionEs": "Fruta chica, anaranjada, de carozo, y el árbol que la da.",
+    "definitionEs": "Fruta pequeña, anaranjada, con hueso, y el árbol que la da.",
     "source": "redactado"
    }
   ],
@@ -343817,7 +343827,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "fresa(s), frutilla(s) (América)",
-    "definitionEs": "Las frutillas, como conjunto: варе́нье из клубни́ки, «dulce de frutilla».",
+    "definitionEs": "Las fresas, como conjunto: варе́нье из клубни́ки, «mermelada de fresa».",
     "source": "redactado"
    }
   ],
@@ -343943,7 +343953,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "guinda, cereza ácida",
-    "definitionEs": "Fruta chica, roja oscura y algo ácida, y el árbol que la da. La cereza dulce es чере́шня.",
+    "definitionEs": "Fruta pequeña, roja oscura y algo ácida, y el árbol que la da. La cereza dulce es чере́шня.",
     "source": "redactado"
    }
   ],
@@ -344258,7 +344268,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pancito, bollo",
-    "definitionEs": "Pan chico, a veces dulce. Es el diminutivo de бу́лка.",
+    "definitionEs": "Pan pequeño, a veces dulce. Es el diminutivo de бу́лка.",
     "source": "redactado"
    }
   ],
@@ -344386,7 +344396,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "de chocolate",
-    "definitionEs": "Hecho con chocolate, o de su color: шокола́дный торт, «torta de chocolate».",
+    "definitionEs": "Hecho con chocolate, o de su color: шокола́дный торт, «tarta de chocolate».",
     "source": "redactado"
    }
   ],
@@ -344445,8 +344455,8 @@ const LEXICON_COMER = [
   "ipa": "pʲɪtʃʲˈenʲjɪ",
   "senses": [
    {
-    "es": "galletitas",
-    "definitionEs": "Galletitas dulces, como conjunto: Хо́чешь пече́нья?, «¿Quieres galletitas?».",
+    "es": "galletas, galletitas (Río de la Plata)",
+    "definitionEs": "Galletas dulces, como conjunto: Хо́чешь пече́нья?, «¿Quieres galletas?».",
     "source": "redactado"
    }
   ],
@@ -344509,7 +344519,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "caramelo; bombón, golosina",
-    "definitionEs": "Golosina chica, envuelta: шокола́дные конфе́ты, «bombones».",
+    "definitionEs": "Golosina pequeña, envuelta: шокола́дные конфе́ты, «bombones».",
     "source": "redactado"
    }
   ],
@@ -344571,8 +344581,8 @@ const LEXICON_COMER = [
   "ipa": "tˈort",
   "senses": [
    {
-    "es": "torta",
-    "definitionEs": "Postre grande de bizcochuelo con crema o relleno, para cortar en porciones.",
+    "es": "tarta, pastel, torta (América)",
+    "definitionEs": "Postre grande de bizcocho con nata, crema o relleno, para cortar en porciones.",
     "source": "redactado"
    }
   ],
@@ -344699,7 +344709,7 @@ const LEXICON_COMER = [
   "ipa": "pʲɪrˈoʒnʌjɪ",
   "senses": [
    {
-    "es": "masita, pastelito",
+    "es": "pastelito, pastel (individual), masita (Río de la Plata)",
     "definitionEs": "Pastel individual de confitería. Se declina como adjetivo.",
     "source": "redactado"
    }
@@ -346308,7 +346318,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "niñera",
-    "definitionEs": "Mujer que cuida chicos en su casa, por trabajo.",
+    "definitionEs": "Mujer que cuida niños en su casa, por trabajo.",
     "source": "redactado"
    }
   ],
@@ -346374,7 +346384,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pelearse (discutir)",
-    "definitionEs": "Discutir con alguien y enojarse: ссо́риться с бра́том, «pelearse con el hermano».",
+    "definitionEs": "Discutir con alguien y enfadarse: ссо́риться с бра́том, «pelearse con el hermano».",
     "source": "redactado"
    }
   ],
@@ -346945,12 +346955,12 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "aburrirse",
-    "definitionEs": "Pasarla mal porque no hay nada que hacer o algo no interesa.",
+    "definitionEs": "Pasarlo mal porque no hay nada que hacer o algo no interesa.",
     "source": "redactado"
    },
    {
-    "es": "extrañar (a alguien)",
-    "definitionEs": "Sentir la falta de alguien o de algo. Se construye con по: Я скуча́ю по тебе́, «Te extraño».",
+    "es": "echar de menos (a alguien), extrañar (América)",
+    "definitionEs": "Sentir la falta de alguien o de algo. Se construye con по: Я скуча́ю по тебе́, «Te echo de menos».",
     "source": "redactado"
    }
   ],
@@ -347893,7 +347903,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pelea, discusión",
-    "definitionEs": "Discusión con enojo entre personas.",
+    "definitionEs": "Discusión con enfado entre personas.",
     "source": "redactado"
    }
   ],
@@ -348018,8 +348028,8 @@ const LEXICON_COMER = [
   "ipa": "sʲɪrdʲˈityj",
   "senses": [
    {
-    "es": "enojado",
-    "definitionEs": "Que está enojado, o que se enoja con facilidad.",
+    "es": "enfadado, enojado (América)",
+    "definitionEs": "Que está enfadado, o que se enfada con facilidad.",
     "source": "redactado"
    }
   ],
@@ -348142,7 +348152,7 @@ const LEXICON_COMER = [
   "ipa": "prʌstˈudʌ",
   "senses": [
    {
-    "es": "resfrío",
+    "es": "resfriado, resfrío (América)",
     "definitionEs": "Enfermedad leve con tos, mocos y a veces fiebre.",
     "source": "redactado"
    }
@@ -348206,7 +348216,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "resfriarse",
-    "definitionEs": "Agarrarse un resfrío (aspecto perfectivo de простужа́ться): Я простуди́лся, «Me resfrié».",
+    "definitionEs": "Contraer un resfriado (aspecto perfectivo de простужа́ться): Я простуди́лся, «Me resfrié».",
     "source": "redactado"
    }
   ],
@@ -348333,8 +348343,8 @@ const LEXICON_COMER = [
   "ipa": "nˈɑsmʌrk",
   "senses": [
    {
-    "es": "mocos, nariz tapada (del resfrío)",
-    "definitionEs": "La congestión y el goteo de nariz del resfrío: У меня́ на́сморк, «Tengo mocos».",
+    "es": "mocos, nariz tapada (del resfriado)",
+    "definitionEs": "La congestión y el goteo de nariz del resfriado: У меня́ на́сморк, «Tengo mocos».",
     "source": "redactado"
    }
   ],
@@ -348777,7 +348787,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "jarabe",
-    "definitionEs": "Remedio líquido y dulce: сиро́п от ка́шля, «jarabe para la tos». También el almíbar de frutas.",
+    "definitionEs": "Medicamento líquido y dulce: сиро́п от ка́шля, «jarabe para la tos». También el almíbar de frutas.",
     "source": "redactado"
    }
   ],
@@ -348903,12 +348913,12 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "inyección",
-    "definitionEs": "Remedio que se pone con jeringa: сде́лать уко́л, «poner una inyección».",
+    "definitionEs": "Medicamento que se pone con jeringa: сде́лать уко́л, «poner una inyección».",
     "source": "redactado"
    },
    {
     "es": "pinchazo",
-    "definitionEs": "Herida chica con algo puntiagudo.",
+    "definitionEs": "Herida pequeña con algo puntiagudo.",
     "source": "redactado"
    }
   ],
@@ -349033,8 +349043,8 @@ const LEXICON_COMER = [
   "ipa": "zʌʒyɡˈɑɭkʌ",
   "senses": [
    {
-    "es": "encendedor",
-    "definitionEs": "Aparato chico para prender fuego.",
+    "es": "mechero, encendedor",
+    "definitionEs": "Aparato pequeño para encender fuego.",
     "source": "redactado"
    }
   ],
@@ -349855,8 +349865,8 @@ const LEXICON_COMER = [
   "ipa": "vʲɪtrʲˈinʌ",
   "senses": [
    {
-    "es": "vidriera",
-    "definitionEs": "Parte de un negocio, con vidrio, donde se exhibe la mercadería.",
+    "es": "escaparate, vidriera (América)",
+    "definitionEs": "Parte de una tienda, con vidrio, donde se exhibe la mercancía.",
     "source": "redactado"
    }
   ],
@@ -349919,7 +349929,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "supermercado",
-    "definitionEs": "Negocio grande de autoservicio donde se compra comida y otras cosas.",
+    "definitionEs": "Tienda grande de autoservicio donde se compra comida y otras cosas.",
     "source": "redactado"
    }
   ],
@@ -350182,7 +350192,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "panadería",
-    "definitionEs": "Negocio donde se vende pan. Se declina como adjetivo.",
+    "definitionEs": "Tienda donde se vende pan. Se declina como adjetivo.",
     "source": "redactado"
    }
   ],
@@ -350306,7 +350316,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "cajero",
-    "definitionEs": "Persona que cobra en la caja de un negocio o de un banco.",
+    "definitionEs": "Persona que cobra en la caja de una tienda o de un banco.",
     "source": "redactado"
    }
   ],
@@ -352183,7 +352193,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "para lavar (ropa)",
-    "definitionEs": "Que sirve para lavar ropa: стира́льная маши́на, «lavarropas»; стира́льный порошо́к, «jabón en polvo».",
+    "definitionEs": "Que sirve para lavar ropa: стира́льная маши́на, «lavadora»; стира́льный порошо́к, «detergente en polvo».",
     "source": "redactado"
    }
   ],
@@ -352242,7 +352252,7 @@ const LEXICON_COMER = [
   "ipa": "buxɡˈɑɭtʲɪr",
   "senses": [
    {
-    "es": "contador (profesión)",
+    "es": "contable, contador (América)",
     "definitionEs": "Persona que lleva las cuentas de una empresa.",
     "source": "redactado"
    }
@@ -352627,7 +352637,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "código",
-    "definitionEs": "Clave de números o letras: код до́мофона, «código del portero eléctrico».",
+    "definitionEs": "Clave de números o letras: код до́мофона, «código del portero automático».",
     "source": "redactado"
    }
   ],
@@ -353714,7 +353724,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "libreta, anotador",
-    "definitionEs": "Cuaderno chico para anotar cosas.",
+    "definitionEs": "Cuaderno pequeño para anotar cosas.",
     "source": "redactado"
    }
   ],
@@ -353777,7 +353787,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "suscribirse",
-    "definitionEs": "Anotarse para recibir algo: подписа́ться на кана́л, «suscribirse a un canal».",
+    "definitionEs": "Inscribirse para recibir algo: подписа́ться на кана́л, «suscribirse a un canal».",
     "source": "redactado",
     "aspectualPartner": [
      "CMR-05828"
@@ -354937,8 +354947,8 @@ const LEXICON_COMER = [
   "ipa": "sʌntʲˈexnʲɪk",
   "senses": [
    {
-    "es": "plomero",
-    "definitionEs": "Persona que arregla caños, canillas e inodoros.",
+    "es": "fontanero, plomero (América)",
+    "definitionEs": "Persona que arregla tuberías, grifos e inodoros.",
     "source": "redactado"
    }
   ],
@@ -356588,7 +356598,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "preposición",
-    "definitionEs": "Palabra chica que va delante del sustantivo y pide un caso: в, на, с.",
+    "definitionEs": "Palabra corta que va delante del sustantivo y pide un caso: в, на, с.",
     "source": "redactado"
    }
   ],
@@ -357601,7 +357611,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "equipaje",
-    "definitionEs": "Las valijas y bolsos de un viaje: сдать бага́ж, «despachar el equipaje».",
+    "definitionEs": "Las maletas y bolsos de un viaje: сдать бага́ж, «facturar el equipaje».",
     "source": "redactado"
    }
   ],
@@ -358183,8 +358193,8 @@ const LEXICON_COMER = [
   "ipa": "pɭˈɑfkʲɪ",
   "senses": [
    {
-    "es": "malla, traje de baño (de hombre)",
-    "definitionEs": "Malla de baño de hombre, tipo slip. Va siempre en plural.",
+    "es": "bañador, traje de baño (de hombre), malla (Río de la Plata)",
+    "definitionEs": "Bañador de hombre, tipo slip. Va siempre en plural.",
     "source": "redactado"
    }
   ],
@@ -359914,7 +359924,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "registrarse; hacer el check-in",
-    "definitionEs": "Anotarse en un registro: en un sitio web, en un hotel o en el aeropuerto (aspecto perfectivo de регистри́роваться).",
+    "definitionEs": "Inscribirse en un registro: en un sitio web, en un hotel o en el aeropuerto (aspecto perfectivo de регистри́роваться).",
     "source": "redactado"
    }
   ],
@@ -361582,7 +361592,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "ardilla",
-    "definitionEs": "Animal chico de cola larga y peluda que vive en los árboles.",
+    "definitionEs": "Animal pequeño de cola larga y peluda que vive en los árboles.",
     "source": "redactado"
    }
   ],
@@ -361771,7 +361781,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "hámster",
-    "definitionEs": "Roedor chico que se tiene como mascota.",
+    "definitionEs": "Roedor pequeño que se tiene como mascota.",
     "source": "redactado"
    }
   ],
@@ -362086,7 +362096,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "burro",
-    "definitionEs": "Animal parecido al caballo, más chico y de orejas largas. También «burro» como insulto.",
+    "definitionEs": "Animal parecido al caballo, más pequeño y de orejas largas. También «burro» como insulto.",
     "source": "redactado"
    }
   ],
@@ -362212,7 +362222,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "gorrión",
-    "definitionEs": "Pájaro chico, marrón, muy común en la ciudad.",
+    "definitionEs": "Pájaro pequeño, marrón, muy común en la ciudad.",
     "source": "redactado"
    }
   ],
@@ -362716,7 +362726,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "insecto",
-    "definitionEs": "Animal chico de seis patas, como la hormiga o la mosca. Se declina como adjetivo.",
+    "definitionEs": "Animal pequeño de seis patas, como la hormiga o la mosca. Se declina como adjetivo.",
     "source": "redactado"
    }
   ],
@@ -362779,7 +362789,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "hormiga",
-    "definitionEs": "Insecto chico que vive en grandes grupos.",
+    "definitionEs": "Insecto pequeño que vive en grandes grupos.",
     "source": "redactado"
    }
   ],
@@ -372480,7 +372490,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "reservar",
-    "definitionEs": "Reservar un lugar, una mesa, una habitación o un pasaje: брони́ровать гости́ницу, «reservar hotel».",
+    "definitionEs": "Reservar un lugar, una mesa, una habitación o un billete: брони́ровать гости́ницу, «reservar hotel».",
     "source": "redactado"
    }
   ],
@@ -372612,7 +372622,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "comer",
-    "definitionEs": "Comer, en el habla familiar y sobre todo con chicos o para invitar: Ку́шайте, пожа́луйста!, «¡Sírvanse, por favor!». Para uno mismo se usa есть.",
+    "definitionEs": "Comer, en el habla familiar y sobre todo con niños o para invitar: Ку́шайте, пожа́луйста!, «¡Sírvanse, por favor!». Para uno mismo se usa есть.",
     "source": "redactado"
    }
   ],
@@ -372937,7 +372947,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "arreglar, reparar",
-    "definitionEs": "Dejar arreglado algo (aspecto perfectivo de чини́ть): Он почини́л кран, «Arregló la canilla».",
+    "definitionEs": "Dejar arreglado algo (aspecto perfectivo de чини́ть): Он почини́л кран, «Arregló el grifo».",
     "source": "redactado"
    }
   ],
@@ -373322,7 +373332,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "pagar (una cuenta, un servicio)",
-    "definitionEs": "Pagar algo concreto (aspecto perfectivo de опла́чивать): Я оплати́л биле́ты, «Pagué los pasajes».",
+    "definitionEs": "Pagar algo concreto (aspecto perfectivo de опла́чивать): Я оплати́л биле́ты, «Pagué los billetes».",
     "source": "redactado"
    }
   ],
@@ -374765,12 +374775,12 @@ const LEXICON_COMER = [
    },
    {
     "es": "cartilla",
-    "definitionEs": "Libro con el que los chicos aprenden a leer y escribir.",
+    "definitionEs": "Libro con el que los niños aprenden a leer y escribir.",
     "source": "redactado"
    },
    {
     "es": "abecé, lo básico",
-    "definitionEs": "Los conocimientos elementales de una materia: а́збука вожде́ния, «lo básico de manejar».",
+    "definitionEs": "Los conocimientos elementales de una materia: а́збука вожде́ния, «lo básico de conducir».",
     "source": "redactado"
    }
   ],
@@ -374896,7 +374906,7 @@ const LEXICON_COMER = [
   "senses": [
    {
     "es": "blini, crepe ruso",
-    "definitionEs": "Torta fina de masa hecha en la sartén, típica de la cocina rusa; se come con miel, mermelada o crema agria. Casi siempre en plural: блины́.",
+    "definitionEs": "Crepe fina de masa hecha en la sartén, típica de la cocina rusa; se come con miel, mermelada o crema agria. Casi siempre en plural: блины́.",
     "source": "redactado"
    }
   ],
