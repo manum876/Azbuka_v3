@@ -12,8 +12,13 @@ function server(op,a){ srv.log.push(op+(a.fn?':'+a.fn:''));
   if(op==='verify'){ if(a.token!=='123456') return err('Token has expired or is invalid'); let u=Object.values(srv.users).find(u=>u.email===a.email); if(!u){u={id:'u-'+a.email,email:a.email}; srv.users[u.id]=u;} return ok({user:u}); }
   if(op==='rpc'){ const me=srv.users[a.uid]; const perm=me&&srv.permitidos[me.email];
     if(a.fn==='es_permitido') return ok(!!perm); if(a.fn==='es_admin') return ok(!!(perm&&perm.admin));
+    if(a.fn==='mi_rol') return ok(!perm?'ninguno':perm.admin?'admin':perm.revisor?'revisor':'alumno');
+    const fila=(e,p)=>{const u=Object.values(srv.users).find(u=>u.email===e); return {email:e,admin:!!p.admin,revisor:!!p.revisor,invitado_por:p.invitado_por||null,nota:p.nota,tiene_cuenta:!!u,ultimo:u&&srv.progreso[u.id]?srv.progreso[u.id].actualizado:null};};
+    if(a.fn==='revisor_resumen'){ if(!(perm&&perm.revisor)) return err('solo revisor'); return ok(Object.entries(srv.permitidos).filter(([e,p])=>p.invitado_por===me.email).map(([e,p])=>fila(e,p))); }
+    if(a.fn==='revisor_habilitar'){ if(!(perm&&perm.revisor)) return err('solo revisor'); const e=a.args.p_email; if(srv.permitidos[e]) return err('duplicate key value violates unique constraint'); srv.permitidos[e]={admin:false,revisor:false,nota:a.args.p_nota||null,invitado_por:me.email}; return ok(null); }
+    if(a.fn==='revisor_quitar'){ if(!(perm&&perm.revisor)) return err('solo revisor'); const e=a.args.p_email, q=srv.permitidos[e]; if(!q||q.invitado_por!==me.email||q.admin||q.revisor) return err('no es tuyo'); const u=Object.values(srv.users).find(u=>u.email===e); if(u){delete srv.users[u.id]; delete srv.progreso[u.id];} delete srv.permitidos[e]; return ok(null); }
     if(a.fn==='borrar_mi_cuenta'){ delete srv.progreso[a.uid]; delete srv.users[a.uid]; return ok(null); }
-    if(a.fn==='admin_resumen'){ if(!(perm&&perm.admin)) return err('solo admin'); return ok(Object.entries(srv.permitidos).map(([e,p])=>{const u=Object.values(srv.users).find(u=>u.email===e); return {email:e,admin:!!p.admin,nota:p.nota,tiene_cuenta:!!u,ultimo:u&&srv.progreso[u.id]?srv.progreso[u.id].actualizado:null};})); }
+    if(a.fn==='admin_resumen'){ if(!(perm&&perm.admin)) return err('solo admin'); return ok(Object.entries(srv.permitidos).map(([e,p])=>fila(e,p))); }
     if(a.fn==='admin_quitar'){ const e=a.args.p_email; const u=Object.values(srv.users).find(u=>u.email===e); if(u){delete srv.users[u.id]; delete srv.progreso[u.id];} delete srv.permitidos[e]; return ok(null); } }
   if(op==='select'){ const r=srv.progreso[a.uid]; if(!r) return ok(null); return ok(a.sel.includes('datos')?r:{actualizado:r.actualizado}); }
   if(op==='upsert'){ srv.progreso[a.row.user_id]={datos:a.row.datos, actualizado:a.row.actualizado}; return ok(null); }
@@ -23,7 +28,8 @@ function server(op,a){ srv.log.push(op+(a.fn?':'+a.fn:''));
     if(op==='lista') return ok(srv.reportes.slice().reverse());
     if(op==='update'){ const r=srv.reportes.find(x=>x.id===a.id); if(r) Object.assign(r,a.row); return ok(null); }
     if(op==='delete'){ srv.reportes=srv.reportes.filter(x=>x.id!==a.id); return ok(null); } }
-  if(op==='insert'){ if(srv.permitidos[a.row.email]) return err('duplicate key value violates unique constraint'); srv.permitidos[a.row.email]={admin:false,nota:a.row.nota}; return ok(null); }
+  if(op==='insert'){ if(srv.permitidos[a.row.email]) return err('duplicate key value violates unique constraint'); srv.permitidos[a.row.email]={admin:false,nota:a.row.nota,invitado_por:a.row.invitado_por||null}; return ok(null); }
+  if(op==='update'&&a.t==='permitidos'){ const me=srv.users[a.me]; const perm=me&&srv.permitidos[me.email]; if(!(perm&&perm.admin)) return err('row-level security'); if(srv.permitidos[a.id]) Object.assign(srv.permitidos[a.id],a.row); return ok(null); }
   return err('?'); }
 const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) problemas.push(m); };
 (async()=>{ const s=await servir(); const b=await navegador();
@@ -70,6 +76,13 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  chk(await p.locator('text=Accesos').count()>0, 'el admin ve Accesos');
  await p.fill('input[placeholder="mail@ejemplo.com"]','Ana@X.com'); await p.fill('input[placeholder^="Nota"]','Ana'); await p.click('button:has-text("Habilitar")'); await p.waitForTimeout(500);
  chk(!!srv.permitidos['ana@x.com'], 'habilitar un mail (queda en minúsculas)');
+ chk(srv.permitidos['ana@x.com'] && srv.permitidos['ana@x.com'].invitado_por==='manuelmunoz87@gmail.com', 'anota quién habilitó el mail');
+ // Abecé en construcción (22/10/2026): el admin la prueba y vuelve
+ chk(await p.locator('text=Abecé en construcción').count()>0, 'el admin ve «Abecé en construcción»');
+ await p.click('button:has-text("Abecé (prueba)")'); await p.waitForLoadState('networkidle'); await p.waitForTimeout(1000);
+ chk(/Abecé/.test(await p.locator('header').innerText()), 'con «Abecé (prueba)» el encabezado pasa a Abecé');
+ await p.click('button:text-is("Azbuka")'); await p.waitForLoadState('networkidle'); await p.waitForTimeout(1000);
+ chk(/Азбука/.test(await p.locator('header').innerText()), 'con «Azbuka» vuelve Azbuka');
  await p.screenshot({path:OUT+'/ajustes.png', fullPage:true});
  // Reportar un error (21/10/2026): el 🐞 del menú, y Ajustes → Reportes
  await p.goto(BASE+'azbuka-3.html',{waitUntil:'networkidle'}); await p.waitForTimeout(600);
@@ -93,13 +106,32 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  chk(!(await d2.p.locator('#az-cuenta').count()), 'Ana entra en su teléfono');
  await d2.p.goto(BASE+'ajustes.html',{waitUntil:'networkidle'}); await d2.p.waitForTimeout(800);
  chk(!(await d2.p.locator('text=Accesos').count()), 'Ana no ve Accesos');
+ chk(!(await d2.p.locator('text=Abecé en construcción').count()), 'Ana (alumna) no ve Abecé');
+ await d2.p.evaluate(()=>{ localStorage.setItem('az_direccion','"abece"'); localStorage.setItem('az_prueba','"si"'); });
+ await d2.p.reload({waitUntil:'networkidle'}); await d2.p.waitForTimeout(800);
+ chk(/Азбука/.test(await d2.p.locator('header').innerText()), 'una alumna no puede abrir Abecé aunque fuerce el modo prueba');
+ // Manu hace revisora a Ana (22/10/2026)
+ await p.goto(BASE+'ajustes.html',{waitUntil:'networkidle'}); await p.waitForTimeout(800);
+ await p.click('button:has-text("Hacer revisor")'); await p.waitForTimeout(500);
+ chk(srv.permitidos['ana@x.com'] && srv.permitidos['ana@x.com'].revisor===true, 'el admin hace revisora a Ana');
+ await d2.p.goto(BASE+'ajustes.html',{waitUntil:'networkidle'}); await d2.p.waitForTimeout(1200);
+ await d2.p.reload({waitUntil:'networkidle'}); await d2.p.waitForTimeout(1200);
+ chk(/Abecé/.test(await d2.p.locator('header').innerText()), 'la revisora ve Abecé en modo prueba');
+ chk(await d2.p.locator('text=Abecé en construcción').count()>0 && await d2.p.locator('text=Alumnos').count()>0, 'la revisora ve «Abecé en construcción» y «Alumnos»');
+ chk(!(await d2.p.locator('text=Accesos').count()) && !(await d2.p.locator('text=Reportes').count()), 'la revisora no ve Accesos ni Reportes');
+ await d2.p.fill('input[placeholder="mail@ejemplo.com"]','Bob@X.com'); await d2.p.fill('input[placeholder^="Nota"]','Bob'); await d2.p.click('button:has-text("Habilitar")'); await d2.p.waitForTimeout(600);
+ chk(srv.permitidos['bob@x.com'] && srv.permitidos['bob@x.com'].invitado_por==='ana@x.com' && !srv.permitidos['bob@x.com'].admin, 'la revisora habilita un alumno (no admin)');
+ chk(await d2.p.locator('text=bob@x.com').count()>0 && !(await d2.p.locator('text=manuelmunoz87@gmail.com').count()), 'la revisora ve solo sus alumnos');
+ await d2.p.screenshot({path:OUT+'/revisora.png', fullPage:true});
+ await d2.p.locator('button:text-is("Quitar")').first().click(); await d2.p.click('button:has-text("Sí, quitar")'); await d2.p.waitForTimeout(500);
+ chk(!srv.permitidos['bob@x.com'], 'la revisora quita a su alumno');
  // C · teléfono 3: Manu en otro teléfono baja su progreso
  const d3=await dispositivo();
  await d3.p.goto(BASE+'index.html',{waitUntil:'networkidle'}); await d3.p.fill('#azc-mail','manuelmunoz87@gmail.com'); await d3.p.click('#azc-enviar'); await d3.p.waitForTimeout(200); await d3.p.fill('#azc-cod','123456'); await d3.p.waitForTimeout(2500);
  chk(await d3.p.evaluate(()=>!!localStorage.getItem('az_ultimo') && !!localStorage.getItem('az_progress')), 'en otro teléfono baja el progreso de la nube');
  // quitar a Ana
  await p.goto(BASE+'ajustes.html',{waitUntil:'networkidle'}); await p.waitForTimeout(800);
- await p.locator('button:has-text("Quitar")').first().click(); await p.click('button:has-text("Sí, quitar")'); await p.waitForTimeout(500);
+ await p.locator('button:text-is("Quitar")').first().click(); await p.click('button:has-text("Sí, quitar")'); await p.waitForTimeout(500);
  chk(!srv.permitidos['ana@x.com'], 'quitar a Ana');
  await d2.p.goto(BASE+'index.html',{waitUntil:'networkidle'}); await d2.p.waitForTimeout(800);
  chk(await d2.p.locator('#az-cuenta').isVisible(), 'Ana queda afuera al abrir la app');
@@ -109,6 +141,6 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  chk(!srv.users['u-manuelmunoz87@gmail.com'] && !srv.progreso['u-manuelmunoz87@gmail.com'], 'eliminar cuenta borra la cuenta y el progreso en la nube');
  chk(await d3.p.evaluate(()=>!localStorage.getItem('az_progress')), 'y lo guardado en el teléfono');
  chk(await d3.p.locator('#az-cuenta').isVisible(), 'y vuelve a la pantalla de entrada');
- for (const x of [p,d2.p,d3.p]) for (const e of x.errs) problemas.push('JS: '+e);
+ for (const x of [p,d2.p,d3.p]) for (const e of x.errs) if (!/error de prueba/.test(e)) problemas.push('JS: '+e);   /* el error que tira la prueba del 🐞 a propósito no cuenta */
  console.log(problemas.length? '✗ '+problemas.length+' problemas':'✓ Todo bien'); problemas.filter(x=>x.startsWith('JS')).forEach(x=>console.log(x));
  await b.close(); s.close(); process.exit(problemas.length?1:0); })();

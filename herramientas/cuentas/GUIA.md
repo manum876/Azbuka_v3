@@ -118,6 +118,26 @@ Para mandar el mail, Supabase usa Brevo, pero con una **clave de API**, que no e
 
 Lo que escribió el alumno y, solo: la pantalla donde estaba (unidad y módulo), la dirección, el teléfono y el navegador, si la app está instalada, el tema, su mail y los últimos errores técnicos de esa página, si hubo. Cada alumno puede mandar hasta 20 por día. Si borra su cuenta, se borran también sus reportes.
 
+## Revisores y Abecé en construcción (22/10/2026)
+
+Un **revisor** (Iván) ve Abecé mientras se construye y puede dar acceso a sus alumnos. No ve la lista completa de Accesos ni los reportes, y no puede nombrar admins ni revisores. Cada revisor ve y quita solo los alumnos que habilitó él.
+
+### 1. Actualizar Supabase (una vez)
+
+1. Supabase → **SQL Editor** → **New query**.
+2. Pegá **todo** `herramientas/cuentas/supabase.sql` (la versión nueva) y tocá **Run**. Tiene que decir *Success*. Se puede correr aunque ya lo hayas corrido antes: no borra nada.
+
+Mientras no lo corras, la app anda igual que antes; lo único que no funciona es «Hacer revisor».
+
+### 2. Hacer revisor a Iván
+
+1. En la app: ⚙️ Ajustes → **Accesos** → habilitá su mail (si todavía no está).
+2. En su fila, tocá **Hacer revisor**. Listo: la próxima vez que abra la app, en Ajustes le aparecen «Abecé en construcción» y «Alumnos».
+
+### 3. Probar Abecé
+
+En ⚙️ Ajustes → **Abecé en construcción**, elegí «Abecé (prueba)». Cambia solo en ese teléfono; para volver, «Azbuka». Los alumnos no ven esa sección y, aunque lo intenten, no pueden abrir Abecé.
+
 ## Google (opcional, más adelante)
 
 Se puede sumar *Entrar con Google*. Hace falta crear una credencial en Google Cloud (unos 20 minutos más) y prenderla en **Authentication → Sign In / Providers → Google**.

@@ -12,7 +12,9 @@
 --   · Funciones para borrar la cuenta propia y para que el admin vea,
 --     habilite y quite accesos.
 --   · reportes (21/10/2026): los errores que mandan los alumnos con el
---     botón 🐞, con un mail al admin por cada uno (al final del archivo).
+--     botón 🐞, con un mail al admin por cada uno.
+--   · revisores (22/10/2026): ven Abecé en construcción y dan acceso
+--     a sus alumnos (al final del archivo).
 -- ============================================================
 
 create table if not exists public.permitidos (
@@ -21,6 +23,9 @@ create table if not exists public.permitidos (
   nota    text,
   creado  timestamptz not null default now()
 );
+-- 22/10/2026: revisores (ver al final del archivo)
+alter table public.permitidos add column if not exists revisor boolean not null default false;
+alter table public.permitidos add column if not exists invitado_por text;
 
 create table if not exists public.progreso (
   user_id     uuid primary key references auth.users(id) on delete cascade,
@@ -83,14 +88,16 @@ begin
   delete from auth.users where id = auth.uid();
 end $$;
 
--- Ajustes → Accesos (solo admin): la lista con la última actividad
+-- Ajustes → Accesos (solo admin): la lista con la última actividad, quién es revisor
+-- y quién habilitó cada mail (22/10/2026). El drop permite cambiar las columnas.
+drop function if exists public.admin_resumen();
 create or replace function public.admin_resumen()
-returns table (email text, admin boolean, nota text, creado timestamptz, tiene_cuenta boolean, ultimo timestamptz)
+returns table (email text, admin boolean, revisor boolean, invitado_por text, nota text, creado timestamptz, tiene_cuenta boolean, ultimo timestamptz)
 language plpgsql stable security definer set search_path = public as $$
 begin
   if not public.es_admin() then raise exception 'solo admin'; end if;
   return query
-    select p.email, p.admin, p.nota, p.creado, (u.id is not null), g.actualizado
+    select p.email, p.admin, p.revisor, p.invitado_por, p.nota, p.creado, (u.id is not null), g.actualizado
     from public.permitidos p
     left join auth.users u on lower(u.email) = p.email
     left join public.progreso g on g.user_id = u.id
@@ -217,3 +224,81 @@ end $$;
 drop trigger if exists az_reportes_mail on public.reportes;
 create trigger az_reportes_mail after insert on public.reportes
   for each row execute function public.reportes_mail();
+
+-- ============================================================
+-- REVISORES (22/10/2026, a pedido de Manu)
+-- Un rol aparte del admin, para Iván: ve Abecé en construcción (el
+-- interruptor de Ajustes) y da acceso a alumnos, pero no ve los
+-- reportes ni la lista completa, ni puede nombrar admins o revisores.
+--   · permitidos.revisor: lo marca el admin en Ajustes → Accesos.
+--   · permitidos.invitado_por: quién habilitó cada mail. El revisor ve y
+--     quita solo los alumnos que habilitó él.
+-- ============================================================
+-- (las columnas revisor e invitado_por se agregan arriba, junto a la tabla)
+
+-- El rol de quien está conectado: 'admin', 'revisor' o 'alumno'
+create or replace function public.mi_rol() returns text
+language sql stable security definer set search_path = public as $$
+  select coalesce((select case when admin then 'admin' when revisor then 'revisor' else 'alumno' end
+                   from public.permitidos where email = public.mi_email()), 'ninguno')
+$$;
+
+create or replace function public.es_revisor() returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.permitidos where email = public.mi_email() and revisor)
+$$;
+
+-- (admin_resumen, con revisor e invitado_por, está arriba)
+
+-- Alumnos del revisor: solo los que habilitó él
+create or replace function public.revisor_resumen()
+returns table (email text, nota text, creado timestamptz, tiene_cuenta boolean, ultimo timestamptz)
+language plpgsql stable security definer set search_path = public as $$
+begin
+  if not public.es_revisor() then raise exception 'solo revisor'; end if;
+  return query
+    select p.email, p.nota, p.creado, (u.id is not null), g.actualizado
+    from public.permitidos p
+    left join auth.users u on lower(u.email) = p.email
+    left join public.progreso g on g.user_id = u.id
+    where p.invitado_por = public.mi_email()
+    order by p.creado;
+end $$;
+
+-- El revisor habilita un alumno (nunca un admin ni otro revisor)
+create or replace function public.revisor_habilitar(p_email text, p_nota text) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if not public.es_revisor() then raise exception 'solo revisor'; end if;
+  if p_email is null or lower(p_email) !~ '^[^\s@]+@[^\s@]+\.[^\s@]+$' then raise exception 'mail'; end if;
+  if exists (select 1 from public.permitidos where email = lower(p_email)) then
+    raise exception 'duplicate key value violates unique constraint';
+  end if;
+  insert into public.permitidos (email, nota, invitado_por) values (lower(p_email), nullif(p_nota, ''), public.mi_email());
+end $$;
+
+-- El revisor quita a un alumno que habilitó él (y se borran su cuenta y su progreso)
+create or replace function public.revisor_quitar(p_email text) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if not public.es_revisor() then raise exception 'solo revisor'; end if;
+  if not exists (select 1 from public.permitidos where email = lower(p_email) and invitado_por = public.mi_email()
+                 and not admin and not revisor) then
+    raise exception 'no es tuyo';
+  end if;
+  delete from auth.users where lower(email) = lower(p_email);
+  delete from public.permitidos where email = lower(p_email);
+end $$;
+
+revoke all on function public.mi_rol()                       from public, anon;
+revoke all on function public.es_revisor()                   from public, anon;
+revoke all on function public.admin_resumen()                from public, anon;
+revoke all on function public.revisor_resumen()              from public, anon;
+revoke all on function public.revisor_habilitar(text, text)  from public, anon;
+revoke all on function public.revisor_quitar(text)           from public, anon;
+grant execute on function public.mi_rol()                      to authenticated;
+grant execute on function public.es_revisor()                  to authenticated;
+grant execute on function public.admin_resumen()               to authenticated;
+grant execute on function public.revisor_resumen()             to authenticated;
+grant execute on function public.revisor_habilitar(text, text) to authenticated;
+grant execute on function public.revisor_quitar(text)          to authenticated;

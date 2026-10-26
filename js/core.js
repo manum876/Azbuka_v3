@@ -22,15 +22,29 @@ if (typeof AZ_CATALOGO === "undefined") {
   } catch (e) {}
 }
 /* Dirección activa. Abecé está bloqueada (abierta: false) hasta que esté
-   terminada: hasta entonces solo se ve con az_direccion = "abece" y
-   az_prueba = "si" en el teléfono (los prende el admin al probar). */
+   terminada: hasta entonces solo se ve en modo prueba, que se prende en
+   Ajustes («Abecé en construcción») y solo vale para admin y revisor
+   (az_direccion = "abece", az_prueba = "si" y az_cuenta_rol, que guarda
+   js/cuenta.js y no viaja a la nube). 22/10/2026. */
 function azDireccion() {
   const cat = typeof AZ_CATALOGO !== "undefined" ? AZ_CATALOGO : null;
   if (!cat) return { id: "azbuka", marca: {}, unidades: [], modulos: [], textos: {} };
   let id = "azbuka", prueba = false;
-  try { id = JSON.parse(localStorage.getItem("az_direccion") || '"azbuka"'); prueba = JSON.parse(localStorage.getItem("az_prueba") || '""') === "si"; } catch (e) {}
+  try {
+    id = JSON.parse(localStorage.getItem("az_direccion") || '"azbuka"');
+    const rol = localStorage.getItem("az_cuenta_rol") || "";
+    prueba = JSON.parse(localStorage.getItem("az_prueba") || '""') === "si" && (rol === "admin" || rol === "revisor");
+  } catch (e) {}
   const d = cat[id];
-  return d && (d.abierta || prueba) ? d : cat.azbuka;
+  if (!d || !(d.abierta || prueba)) return cat.azbuka;
+  /* Mientras se construye, lo que la dirección todavía no tiene se toma de azbuka
+     (unidades, módulos, índice), así ninguna página queda sin menú. */
+  const base = cat.azbuka;
+  return Object.assign({}, d, {
+    unidades: d.unidades && d.unidades.length ? d.unidades : base.unidades,
+    modulos: d.modulos && d.modulos.length ? d.modulos : base.modulos,
+    indice: d.indice || base.indice,
+  });
 }
 const AZ_DIRECCION = azDireccion();
 /* Un texto del shell en el idioma de la dirección; si falta, el de azbuka. */

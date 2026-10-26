@@ -29,10 +29,17 @@
    API para las páginas (window.AzCuenta):
      activa · sesion() · email() · esAdmin() · comprobarAdmin() · listo() · estadoNube()
      subirAhora() · cerrarSesion() · borrarCuenta()
-     accesos() · habilitar(email, nota) · quitar(email)
+     accesos() · habilitar(email, nota) · quitar(email) · marcarRevisor(email, si)  (solo admin)
+     rol() · comprobarRol() → "admin" | "revisor" | "alumno" (22/10/2026)
+     alumnos() · habilitarAlumno(email, nota) · quitarAlumno(email)  (solo revisor)
      alCambiar(fn)  → avisa cuando cambia el estado de la nube
      reportar({ texto, esperado }) → "enviado" | "pendiente" (21/10/2026)
      reportes() · marcarReporte(id, resuelto) · borrarReporte(id)  (solo admin)
+
+   Roles (22/10/2026, Manu): admin (Manu: todo) y revisor (Iván: ve Abecé en
+   construcción y da acceso a sus alumnos, sin reportes ni la lista completa).
+   El rol se guarda en az_cuenta_rol, que no viaja a la nube: core.js lo lee
+   para permitir el modo prueba de Abecé (azDireccion) solo a admin y revisor.
 
    Reportes de errores (21/10/2026): el botón 🐞 del pie del menú
    (js/shell.js) llama a reportar(). Se adjuntan solos la pantalla, la
@@ -89,7 +96,9 @@ const AZ_CUENTA_CONFIG = {
   const leerCola = () => { try { return JSON.parse(localStorage.getItem(COLA) || "[]") || []; } catch (e) { return []; } };
   const guardarCola = q => { try { if (q.length) localStorage.setItem(COLA, JSON.stringify(q)); else localStorage.removeItem(COLA); } catch (e) {} };
 
-  window.AzCuenta = { activa, sesion: () => usuario, email: () => (usuario && usuario.email) || "", esAdmin: () => admin,
+  const ROL = "az_cuenta_rol";
+  const leerRol = () => { try { return localStorage.getItem(ROL) || ""; } catch (e) { return ""; } };
+  window.AzCuenta = { activa, sesion: () => usuario, email: () => (usuario && usuario.email) || "", esAdmin: () => admin, rol: leerRol,
     estadoNube: () => ({ estado, meta: leerMeta() }), alCambiar: f => { oyentes.push(f); return () => { oyentes = oyentes.filter(x => x !== f); }; } };
   if (!activa) {
     window.AzCuenta.reportar = async ({ texto, esperado }) => {
@@ -265,8 +274,26 @@ const AZ_CUENTA_CONFIG = {
     if (location.search.indexOf("code=") >= 0 || location.hash.indexOf("access_token") >= 0) history.replaceState(null, "", location.pathname);
     quitarPantalla();
     avisarListo(usuario);
+    actualizarRol();
     setTimeout(enviarCola, 3000);
     await sincronizarAlEntrar();
+  }
+
+  /* ── Rol (22/10/2026): se guarda en el teléfono para que core.js sepa, al
+     cargar la página, si puede abrir Abecé en modo prueba. Si el rol cambió y
+     la página ya se armó con una dirección que no le toca, se recarga una vez. ── */
+  async function actualizarRol() {
+    let r = null;
+    try { const { data, error } = await cliente.rpc("mi_rol"); if (!error && data) r = data; } catch (e) {}
+    if (r == null) {                      /* SQL viejo (sin mi_rol) o sin red: solo se sabe si es admin */
+      try { const { data, error } = await cliente.rpc("es_admin"); if (error) return leerRol(); r = data === true ? "admin" : "alumno"; } catch (e) { return leerRol(); }
+    }
+    admin = r === "admin";
+    const antes = leerRol();
+    try { setOrig.call(ls, ROL, r); } catch (e) {}
+    const privilegiado = x => x === "admin" || x === "revisor";
+    if (privilegiado(antes) && !privilegiado(r) && typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id !== "azbuka") location.reload();
+    return r;
   }
 
   /* ── Progreso en la nube ── */
@@ -346,6 +373,7 @@ const AZ_CUENTA_CONFIG = {
   Object.assign(window.AzCuenta, {
     subirAhora: () => subir(),
     listo: () => listo,                                /* promesa: se cumple cuando hay sesión */
+    comprobarRol: async () => { await listo; return actualizarRol(); },
     comprobarAdmin: async () => {
       await listo;
       try { const { data } = await cliente.rpc("es_admin"); admin = data === true; } catch (e) {}
@@ -371,10 +399,22 @@ const AZ_CUENTA_CONFIG = {
     habilitar: async (email, nota) => {
       const m = String(email || "").trim().toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) throw new Error("mail");
-      const { error } = await cliente.from("permitidos").insert({ email: m, nota: nota || null });
+      let { error } = await cliente.from("permitidos").insert({ email: m, nota: nota || null, invitado_por: (usuario && usuario.email || "").toLowerCase() || null });
+      /* Si todavía no se corrió el SQL del 22/10/2026 (sin la columna invitado_por), se habilita igual */
+      if (error && /invitado_por/.test(error.message || "")) ({ error } = await cliente.from("permitidos").insert({ email: m, nota: nota || null }));
       if (error) throw error;
     },
     quitar: async (email) => { const { error } = await cliente.rpc("admin_quitar", { p_email: email }); if (error) throw error; },
+    marcarRevisor: async (email, si) => { const { error } = await cliente.from("permitidos").update({ revisor: !!si }).eq("email", email); if (error) throw error; },
+    /* Revisor (22/10/2026): solo los alumnos que habilitó él */
+    alumnos: async () => { const { data, error } = await cliente.rpc("revisor_resumen"); if (error) throw error; return data || []; },
+    habilitarAlumno: async (email, nota) => {
+      const m = String(email || "").trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) throw new Error("mail");
+      const { error } = await cliente.rpc("revisor_habilitar", { p_email: m, p_nota: nota || "" });
+      if (error) throw error;
+    },
+    quitarAlumno: async (email) => { const { error } = await cliente.rpc("revisor_quitar", { p_email: email }); if (error) throw error; },
     /* Reportes de errores (21/10/2026) */
     reportar: async ({ texto, esperado }) => {
       const t = String(texto || "").trim(), es = String(esperado || "").trim();

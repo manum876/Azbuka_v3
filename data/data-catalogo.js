@@ -12,7 +12,10 @@
      azbuka → ruso para hispanohablantes (la app de hoy).
      abece  → español para rusohablantes. BLOQUEADA (abierta: false)
               hasta que esté terminada: nadie la ve. Para probarla mientras
-              se construye, ver azDireccion() en js/core.js.
+              se construye: Ajustes → «Abecé en construcción», que solo ven
+              el admin y los revisores (azDireccion() en js/core.js). Lo que
+              abece todavía no tiene (unidades, módulos, índice) se toma de
+              azbuka.
 
    Se carga en todas las páginas justo antes de js/core.js. Es «var» (no
    «const») para que core.js pueda leerlo también como respaldo.
@@ -98,7 +101,7 @@ var AZ_CATALOGO = {
     id: "abece",
     abierta: false,          /* bloqueada hasta que Abecé esté terminada (Manu, 22/10/2026) */
     marca: { nombre: "Abecé", lema: "Учи испанский с нуля", glyph: "Ab", icon: "red" },
-    indice: "abece-index-1.html",
+    indice: null,            /* abece-index-1.html cuando exista; mientras, el de azbuka */
     buscador: "azSearchLexicon",   /* provisorio: se cambia por el buscador del léxico español (Fase 2) */
     unidades: [],            /* se definen con el programa del curso (Fase 5) */
     modulos: [],             /* se definen con los módulos de apoyo (Fase 4) */
