@@ -56,7 +56,9 @@ const TX = RU ? {
   expKicker: "Экспорт", expTitulo: "Поделиться тетрадью", expSub: "Создаётся файл и открывается меню «Поделиться» телефона: WhatsApp, почта, «Файлы»…",
   queExp: "Что экспортировать", todo: "Вся тетрадь", formato: "Формат", pdf: "PDF · чтобы читать или распечатать", docx: "Word (.docx) · чтобы редактировать дальше",
   preparando: "Готовим файл…", fallo: "Не удалось создать файл. В первый раз для экспорта нужен интернет.",
-  docTitulo: "Тетрадь Abecé", pie: "Abecé", archivo: "abece-tetrad"
+  docTitulo: "Тетрадь Abecé", pie: "Abecé", archivo: "abece-tetrad",
+  borrarTodo: "Удалить всю тетрадь", borrado: "Тетрадь удалена.",
+  confTodo: (n, s) => "Удалить всю тетрадь?\n\nУдалятся все твои заметки (" + n + ")" + (s ? " и разделы (" + s + ")" : "") + ", на всех твоих телефонах. Это нельзя отменить.\n\nЕсли хочешь их сохранить, сначала сделай резервную копию или экспорт."
 } : {
   fecha: "es-AR", titulo: "Cuaderno", bandeja: "Sin ordenar",
   resumen: (n, s) => n + (n === 1 ? " nota" : " notas") + " en " + s + (s === 1 ? " sección." : " secciones."),
@@ -72,7 +74,9 @@ const TX = RU ? {
   expKicker: "Exportar", expTitulo: "Compartir el cuaderno", expSub: "Se genera un archivo y se abre el menú Compartir del teléfono: WhatsApp, Mail, Archivos…",
   queExp: "Qué exportar", todo: "Todo el cuaderno", formato: "Formato", pdf: "PDF · para leer o imprimir", docx: "Word (.docx) · para seguir editando",
   preparando: "Preparando el archivo…", fallo: "No se pudo generar el archivo. Revisa la conexión la primera vez que exportas.",
-  docTitulo: "Cuaderno de Azbuka", pie: "Азбука", archivo: "azbuka-cuaderno"
+  docTitulo: "Cuaderno de Azbuka", pie: "Азбука", archivo: "azbuka-cuaderno",
+  borrarTodo: "Borrar el cuaderno", borrado: "Cuaderno borrado.",
+  confTodo: (n, s) => "¿Borrar todo el cuaderno?\n\nSe borran todas tus notas (" + n + ")" + (s ? " y tus secciones (" + s + ")" : "") + ", en todos tus teléfonos. No se puede deshacer.\n\nSi quieres conservarlas, guarda antes una copia o expórtalas."
 };
 /* El título de la sección fija se muestra en el idioma de la dirección (en los datos dice «Sin ordenar») */
 const tituloSec = s => s.id === "bandeja" ? TX.bandeja : s.titulo;
@@ -354,6 +358,14 @@ function App() {
     const [quitada] = n.secciones.splice(i, 1);
     n.secciones.find(x => x.id === "bandeja").notas.push(...quitada.notas); guardar(n);
   };
+  /* 27/10/2026 (Manu): borrar todo el cuaderno, con confirmación. Queda solo «Sin ordenar», vacía. */
+  const borrarTodo = () => {
+    const nNotas = cu.secciones.reduce((a, s) => a + s.notas.length, 0);
+    if (!confirm(TX.confTodo(nNotas, cu.secciones.length - 1))) return;   /* «Sin ordenar» no se borra */
+    const n = copia();
+    n.secciones = [Object.assign(n.secciones.find(x => x.id === "bandeja") || { id: "bandeja", titulo: "Sin ordenar", fija: true }, { notas: [] })];
+    guardar(n); setOrdenar(false); setQ(""); avisar(TX.borrado);
+  };
   const moverSeccion = (s, d) => {
     const n = copia(); const i = n.secciones.findIndex(x => x.id === s.id), j = i + d;
     if (j < 1 || j >= n.secciones.length) return;   /* «Sin ordenar» queda siempre primera */
@@ -430,6 +442,7 @@ function App() {
         cuerpo,
         h("div", { className: "cu-lbl" }, TX.copia),
         h(AzCopiaSeguridad, { c }),
+        (total > 0 || cu.secciones.length > 1) && h("button", { className: "cu-btn peligro", style: { width: "100%", marginTop: 24 }, onClick: borrarTodo }, TX.borrarTodo),
         aviso && h("div", { style: { marginTop: 10, fontSize: 13, color: "#4CAF82", fontWeight: 600 } }, aviso))),
     exportar && h(HojaExportar, { c, cu, onCerrar: () => setExportar(false) }),
     editor && h(Editor, { c, nota: editor.nota, seccionId: editor.seccionId, secciones: cu.secciones, onGuardar: guardarNota, onBorrar: borrarNota, onCerrar: () => setEditor(null) }));
