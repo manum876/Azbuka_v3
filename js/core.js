@@ -26,21 +26,28 @@ if (typeof AZ_CATALOGO === "undefined") {
    Ajustes («Abecé en construcción») y solo vale para admin y revisor
    (az_direccion = "abece", az_prueba = "si" y az_cuenta_rol, que guarda
    js/cuenta.js y no viaja a la nube). 22/10/2026. */
+/* 27/10/2026 (Manu): la dirección es parte de la CUENTA. Se elige al habilitar el mail
+   (Ajustes → Accesos) y js/cuenta.js la guarda al entrar en az_cuenta_dir (no viaja a la
+   nube: sale de la cuenta). Orden: ?dir= en la dirección (solo admin y revisor) → el modo
+   prueba de Ajustes (admin y revisor: az_prueba = "si" con az_direccion) → la de la cuenta →
+   az_direccion (teléfonos sin cuentas) → azbuka. Una dirección bloqueada solo la ven admin y revisor. */
 function azDireccion() {
   const cat = typeof AZ_CATALOGO !== "undefined" ? AZ_CATALOGO : null;
   if (!cat) return { id: "azbuka", marca: {}, unidades: [], modulos: [], textos: {} };
-  let id = "azbuka", prueba = false;
+  let id = "azbuka", privilegiado = false;
   try {
-    id = JSON.parse(localStorage.getItem("az_direccion") || '"azbuka"');
-    /* ?dir=abece en la dirección (links del cuaderno, 27/10/2026): abre esa página en esa dirección,
-       si está abierta o si quien la abre es admin o revisor, sin cambiar el ajuste del teléfono */
-    const dirUrl = new URLSearchParams(location.search).get("dir");
-    if (dirUrl && cat[dirUrl]) id = dirUrl;
     const rol = localStorage.getItem("az_cuenta_rol") || "";
-    prueba = (!!dirUrl || JSON.parse(localStorage.getItem("az_prueba") || '""') === "si") && (rol === "admin" || rol === "revisor");
+    privilegiado = rol === "admin" || rol === "revisor";
+    const cuenta = localStorage.getItem("az_cuenta_dir") || "";
+    id = cuenta || JSON.parse(localStorage.getItem("az_direccion") || '"azbuka"');
+    if (privilegiado && JSON.parse(localStorage.getItem("az_prueba") || '""') === "si") id = JSON.parse(localStorage.getItem("az_direccion") || '"azbuka"');
+    /* ?dir=abece en la dirección (links del cuaderno, 27/10/2026): abre esa página en esa dirección
+       a admin y revisor, sin cambiar el ajuste del teléfono */
+    const dirUrl = new URLSearchParams(location.search).get("dir");
+    if (dirUrl && cat[dirUrl] && privilegiado) id = dirUrl;
   } catch (e) {}
   const d = cat[id];
-  if (!d || !(d.abierta || prueba)) return cat.azbuka;
+  if (!d || !(d.abierta || privilegiado)) return cat.azbuka;
   /* Mientras se construye, lo que la dirección todavía no tiene se toma de azbuka
      (unidades, módulos, índice), así ninguna página queda sin menú. */
   const base = cat.azbuka;
@@ -58,6 +65,24 @@ function azTexto(k) {
 }
 const AZ_UNITS = AZ_DIRECCION.unidades || [];
 const AZ_MODULES = AZ_DIRECCION.modulos || [];
+
+/* Nombre e ícono de la app instalada según la dirección (27/10/2026, Manu): el manifiesto
+   (Android), el ícono y el título que usa el iPhone al «Agregar a inicio». Sale de
+   AZ_CATALOGO[dir].instalar; las páginas traen los de Azbuka y acá se cambian si hace
+   falta. js/cuenta.js lo usa también en la pantalla de entrada, cuando está en ruso. */
+function azMarcaInstalacion(dir) {
+  try {
+    const cat = typeof AZ_CATALOGO !== "undefined" ? AZ_CATALOGO : {};
+    const ins = (cat[dir] && cat[dir].instalar) || (cat.azbuka && cat.azbuka.instalar);
+    if (!ins) return;
+    const poner = (sel, attr, v) => { const el = document.querySelector(sel); if (el && v && el.getAttribute(attr) !== v) el.setAttribute(attr, v); };
+    poner('link[rel="manifest"]', "href", ins.manifest);
+    poner('link[rel="apple-touch-icon"]', "href", ins.icono);
+    poner('link[rel="icon"]', "href", ins.favicon);
+    poner('meta[name="apple-mobile-web-app-title"]', "content", ins.nombre);
+  } catch (e) {}
+}
+azMarcaInstalacion(AZ_DIRECCION.id);
 
 /* Colores de los íconos, en el orden del arcoíris (01/10/2026): Azbuka
    rojo, Diccionario naranja, Alfabeto amarillo, Diálogos verde, Verbos

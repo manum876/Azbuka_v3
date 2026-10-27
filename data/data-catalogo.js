@@ -29,6 +29,8 @@ var AZ_CATALOGO = {
     id: "azbuka",
     abierta: true,
     marca: { nombre: "Азбука", lema: "Aprende ruso desde cero", glyph: "Аз", icon: "red" },
+    /* La app instalada (27/10/2026): nombre, manifiesto e íconos (azMarcaInstalacion, core.js) */
+    instalar: { nombre: "Азбука", manifest: "manifest.webmanifest", icono: "assets/apple-touch-icon.png", favicon: "assets/icon-192.png" },
     indice: "azbuka-index-1.html",
     buscador: "azSearchLexicon",
     lexico: "data/data-lexicon.js",   /* el léxico de la dirección (27/10/2026): lo carga el Diccionario */
@@ -116,6 +118,7 @@ var AZ_CATALOGO = {
     id: "abece",
     abierta: false,          /* bloqueada hasta que Abecé esté terminada (Manu, 22/10/2026) */
     marca: { nombre: "Abecé", lema: "Учи испанский с нуля", glyph: "Ab", icon: "red" },
+    instalar: { nombre: "Abecé", manifest: "manifest-abece.webmanifest", icono: "assets/apple-touch-icon-abece.png", favicon: "assets/icon-abece-192.png" },
     indice: null,            /* abece-index-1.html cuando exista; mientras, el de azbuka */
     buscador: "azBuscarEs",  /* busca en el léxico español, en español o en ruso (core.js, 27/10/2026) */
     lexico: "data/data-lexicon-es.js",

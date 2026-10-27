@@ -40,6 +40,34 @@
 
 const AZ_AVISOS = { visitasInstalar: 1, instalarPausa: 3, copiaPrimera: 3, copiaCada: 7, copiaPausa: 2 };
 
+/* Textos por dirección (27/10/2026): en Abecé, en ruso (BORRADOR: lo revisa Iván), con su
+   nombre y su ícono; en Azbuka, los de siempre. */
+const AZ_AV_TX = (typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece") ? {
+  glifo: "Ab", cerrar: "Закрыть",
+  porQue: ["Так приложение работает ", "без интернета", ", а твой прогресс ", "надёжно сохраняется", " в телефоне."], tresToques: " Всего три касания:", icono: " Открывается со своего значка, как любое приложение.",
+  noMas: "Больше не показывать", ahoraNo: "Не сейчас",
+  iosTit: "Установи Abecé на iPhone", ios1: "В Safari нажми ", compartir: " Поделиться", ios1b: "Если её не видно, она внутри ", ios2: "Пролистай и выбери ", agregar: " На экран «Домой»",
+  ios3a: "Нажми ", ios3b: "Добавить", ios3c: ". Теперь открывай Abecé с его значка.",
+  andTit: "Установи Abecé на телефон", instalar: "📲 Установить",
+  copiaTit: "Сохрани копию своего прогресса", nunca: "Ты ещё не сохранял ни одной копии.", hace: d => ["Ты не сохранял копию уже ", d + " дн.", "."],
+  vive: " Твой прогресс хранится только в этом телефоне: если данные удалятся или ты сменишь телефон, он пропадёт.",
+  ej: "упражнений сделано", pal: "слов выучено", notas: "заметок в тетради", guardada: "✓ Копия сохранена", guardar: "Сохранить копию сейчас",
+  notaCopia: ["Выбери ", "Сохранить в «Файлы»", " или отправь её себе по почте или в WhatsApp. Чтобы восстановить: Настройки → Восстановить копию."],
+  cada: n => "Каждые " + n + " дн.", recuerda: "Напомнить позже"
+} : {
+  glifo: "Аз", cerrar: "Cerrar",
+  porQue: ["Así funciona ", "sin internet", " y tu progreso queda ", "bien guardado", " en el teléfono."], tresToques: " Son tres toques:", icono: " Se abre desde su ícono, como cualquier app.",
+  noMas: "No mostrar más", ahoraNo: "Ahora no",
+  iosTit: "Instala Azbuka en tu iPhone", ios1: "En Safari, toca ", compartir: " Compartir", ios1b: "Si no lo ves, está adentro de ", ios2: "Baja y elige ", agregar: " Agregar a inicio",
+  ios3a: "Toca ", ios3b: "Agregar", ios3c: ". Desde ahora, abre Azbuka con su ícono.",
+  andTit: "Instala Azbuka en tu teléfono", instalar: "📲 Instalar",
+  copiaTit: "Guarda una copia de tu progreso", nunca: "Todavía no guardaste ninguna copia.", hace: d => ["Hace ", d + " días", " que no guardas una copia."],
+  vive: " Tu progreso vive solo en este teléfono: si se borran los datos o cambias de teléfono, se pierde.",
+  ej: "ejercicios hechos", pal: "palabras dominadas", notas: "notas en el cuaderno", guardada: "✓ Copia guardada", guardar: "Guardar copia ahora",
+  notaCopia: ["Elige ", "Guardar en Archivos", ", o mandátela por mail o WhatsApp. Para recuperarla: Ajustes → Restaurar copia."],
+  cada: n => "Cada " + n + " días", recuerda: "Recuérdamelo después"
+};
+
 function azAvHoy() { return new Date().toISOString().slice(0, 10); }
 function azAvMasDias(n) { const d = new Date(); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); }
 function azAvDiasDesde(iso) { return iso ? Math.floor((Date.now() - new Date(iso).getTime()) / 86400000) : 0; }
@@ -150,48 +178,50 @@ function AzAvisos({ c, pausado }) {
     if (ok) { setListo(true); setTimeout(cerrar, 1600); }
   };
 
+  const T = AZ_AV_TX;
   const ico = svg => h("span", { dangerouslySetInnerHTML: { __html: svg }, style: { display: "inline-flex" } });
   const chip = (...hijos) => h("span", { className: "az-av-chip" }, ...hijos);
   const paso = (n, ...hijos) => h("div", { className: "az-av-paso" }, h("div", { className: "az-av-num" }, n), h("div", null, ...hijos));
   const top = (icono, titulo, nombre) => h("div", { className: "az-av-top" },
     icono, h("div", { className: "az-av-tit", id: "az-av-tit" }, titulo),
-    h("button", { className: "az-av-x", onClick: ahoraNo, "aria-label": "Cerrar" }, "✕"));
-  const icoApp = h("div", { className: "az-av-ico" }, "Аз");
-  const porQue = h("div", { className: "az-av-txt" }, "Así funciona ", h("b", null, "sin internet"), " y tu progreso queda ", h("b", null, "bien guardado"), " en el teléfono.",
-    aviso.tipo === "ios" ? " Son tres toques:" : " Se abre desde su ícono, como cualquier app.");
+    h("button", { className: "az-av-x", onClick: ahoraNo, "aria-label": T.cerrar }, "✕"));
+  const icoApp = h("div", { className: "az-av-ico" }, T.glifo);
+  const porQue = h("div", { className: "az-av-txt" }, T.porQue[0], h("b", null, T.porQue[1]), T.porQue[2], h("b", null, T.porQue[3]), T.porQue[4],
+    aviso.tipo === "ios" ? T.tresToques : T.icono);
   const pieInstalar = h("div", { className: "az-av-pie" },
-    h("button", { className: "az-av-b", onClick: nunca }, "No mostrar más"),
-    h("button", { className: "az-av-a", onClick: ahoraNo }, "Ahora no"));
+    h("button", { className: "az-av-b", onClick: nunca }, T.noMas),
+    h("button", { className: "az-av-a", onClick: ahoraNo }, T.ahoraNo));
 
   let cuerpo;
   if (aviso.tipo === "ios") {
-    cuerpo = [top(icoApp, "Instala Azbuka en tu iPhone"), porQue,
+    cuerpo = [top(icoApp, T.iosTit), porQue,
       h("div", { className: "az-av-pasos" },
-        paso(1, "En Safari, toca ", chip(ico(AZ_AV_ICONOS.compartir), " Compartir"),
-          h("div", { className: "az-av-sub" }, "Si no lo ves, está adentro de ", chip(ico(AZ_AV_ICONOS.puntos)))),
-        paso(2, "Baja y elige ", chip(ico(AZ_AV_ICONOS.mas), " Agregar a inicio")),
-        paso(3, "Toca ", h("b", null, "Agregar"), ". Desde ahora, abre Azbuka con su ícono.")),
+        paso(1, T.ios1, chip(ico(AZ_AV_ICONOS.compartir), T.compartir),
+          h("div", { className: "az-av-sub" }, T.ios1b, chip(ico(AZ_AV_ICONOS.puntos)))),
+        paso(2, T.ios2, chip(ico(AZ_AV_ICONOS.mas), T.agregar)),
+        paso(3, T.ios3a, h("b", null, T.ios3b), T.ios3c)),
       pieInstalar];
   } else if (aviso.tipo === "android") {
-    cuerpo = [top(icoApp, "Instala Azbuka en tu teléfono"), porQue,
-      h("button", { className: "az-av-btn", onClick: instalar }, "📲 Instalar"), pieInstalar];
+    cuerpo = [top(icoApp, T.andTit), porQue,
+      h("button", { className: "az-av-btn", onClick: instalar }, T.instalar), pieInstalar];
   } else {
     const st = aviso.st;
-    cuerpo = [top(h("div", { className: "az-av-ico n" }, "💾"), "Guarda una copia de tu progreso"),
+    const hace = aviso.dias == null ? null : T.hace(aviso.dias);
+    cuerpo = [top(h("div", { className: "az-av-ico n" }, "💾"), T.copiaTit),
       h("div", { className: "az-av-txt" },
-        aviso.dias == null ? "Todavía no guardaste ninguna copia." : h(React.Fragment, null, "Hace ", h("b", null, aviso.dias + " días"), " que no guardas una copia."),
-        " Tu progreso vive solo en este teléfono: si se borran los datos o cambias de teléfono, se pierde."),
+        aviso.dias == null ? T.nunca : h(React.Fragment, null, hace[0], h("b", null, hace[1]), hace[2]),
+        T.vive),
       h("div", { className: "az-av-stats" },
-        h("div", { className: "az-av-stat" }, h("b", null, st.ej), h("span", null, "ejercicios hechos")),
-        h("div", { className: "az-av-stat" }, h("b", null, st.pal), h("span", null, "palabras dominadas")),
-        h("div", { className: "az-av-stat" }, h("b", null, st.notas), h("span", null, "notas en el cuaderno"))),
+        h("div", { className: "az-av-stat" }, h("b", null, st.ej), h("span", null, T.ej)),
+        h("div", { className: "az-av-stat" }, h("b", null, st.pal), h("span", null, T.pal)),
+        h("div", { className: "az-av-stat" }, h("b", null, st.notas), h("span", null, T.notas))),
       listo
-        ? h("div", { className: "az-av-btn ok" }, "✓ Copia guardada")
-        : h("button", { className: "az-av-btn", onClick: guardar }, "Guardar copia ahora"),
-      h("div", { className: "az-av-nota" }, "Elige ", h("b", null, "Guardar en Archivos"), ", o mandátela por mail o WhatsApp. Para recuperarla: Ajustes → Restaurar copia."),
+        ? h("div", { className: "az-av-btn ok" }, T.guardada)
+        : h("button", { className: "az-av-btn", onClick: guardar }, T.guardar),
+      h("div", { className: "az-av-nota" }, T.notaCopia[0], h("b", null, T.notaCopia[1]), T.notaCopia[2]),
       h("div", { className: "az-av-pie" },
-        h("div", { className: "az-av-b" }, "Cada " + AZ_AVISOS.copiaCada + " días"),
-        h("button", { className: "az-av-a", onClick: ahoraNo }, "Recuérdamelo después"))];
+        h("div", { className: "az-av-b" }, T.cada(AZ_AVISOS.copiaCada)),
+        h("button", { className: "az-av-a", onClick: ahoraNo }, T.recuerda))];
   }
 
   return h("div", { className: "az-av-velo", ref: azRefCapa(capa), onClick: e => { if (e.target === e.currentTarget) ahoraNo(); } },

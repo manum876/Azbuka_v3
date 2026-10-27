@@ -114,15 +114,19 @@ function SeccionAccesos({ c, modo = "admin" }) {
   const [lista, setLista] = useState(null);
   const [mail, setMail] = useState(""), [nota, setNota] = useState("");
   const [msg, setMsg] = useState(null), [quitando, setQuitando] = useState(null);
+  const [dir, setDir] = useState(rev ? "abece" : "azbuka");   /* 27/10/2026: los alumnos de un revisor son de Abecé */
   const cargar = async () => { try { setLista(await (rev ? A.alumnos() : A.accesos())); } catch (e) { setMsg({ err: true, t: "No se pudo cargar la lista. Revisa la conexión." }); } };
   useEffect(() => { cargar(); }, []);
   const agregar = async () => { setMsg(null);
-    try { await (rev ? A.habilitarAlumno(mail, nota.trim()) : A.habilitar(mail, nota.trim())); setMsg({ t: mail.trim().toLowerCase() + " ya puede entrar." }); setMail(""); setNota(""); cargar(); }
+    try { await (rev ? A.habilitarAlumno(mail, nota.trim()) : A.habilitar(mail, nota.trim(), dir)); setMsg({ t: mail.trim().toLowerCase() + " ya puede entrar (" + NOMBRE_DIR[dir] + "). Mándale el link de " + NOMBRE_DIR[dir] + " de abajo." }); setMail(""); setNota(""); cargar(); }
     catch (e) { const t = String(e && e.message || e);
       setMsg({ err: true, t: t === "mail" ? "Revisa el mail: parece incompleto." : /duplicate|unique/i.test(t) ? "Ese mail ya estaba habilitado." : "No se pudo habilitar. Prueba de nuevo." }); } };
   const quitar = async email => { setMsg(null);
     try { await (rev ? A.quitarAlumno(email) : A.quitar(email)); setQuitando(null); setMsg({ t: email + " ya no puede entrar. Se borraron su cuenta y su progreso." }); cargar(); }
     catch (e) { setMsg({ err: true, t: "No se pudo quitar. Prueba de nuevo." }); } };
+  const cambiarDir = async (p, d) => { setMsg(null);
+    try { await A.marcarDireccion(p.email, d); setMsg({ t: p.email + " ahora es de " + NOMBRE_DIR[d] + ". Lo ve la próxima vez que abra la app." }); cargar(); }
+    catch (e) { setMsg({ err: true, t: /direccion/.test(String(e && e.message || e)) ? "Falta actualizar Supabase: corre otra vez supabase.sql (GUIA.md)." : "No se pudo cambiar. Prueba de nuevo." }); } };
   const revisor = async (p, si) => { setMsg(null);
     try { await A.marcarRevisor(p.email, si); setMsg({ t: si ? p.email + " ahora es revisor: ve Abecé en construcción y puede dar acceso a alumnos." : p.email + " ya no es revisor." }); cargar(); }
     catch (e) { setMsg({ err: true, t: /revisor/.test(String(e && e.message || e)) ? "Falta actualizar Supabase: corre otra vez supabase.sql (GUIA.md)." : "No se pudo cambiar. Prueba de nuevo." }); } };
@@ -135,6 +139,10 @@ function SeccionAccesos({ c, modo = "admin" }) {
       : "Solo entran los mails de esta lista. Para que alguien entre, agrega su mail y avísale: entra con el código que le llega por mail. Un revisor ve Abecé en construcción y puede dar acceso a sus alumnos, pero no ve esta lista ni los reportes."),
     h("input", { type: "email", inputMode: "email", autoCapitalize: "off", autoCorrect: "off", spellCheck: false, placeholder: "mail@ejemplo.com", value: mail, onInput: e => setMail(e.target.value), style: Object.assign({}, inp, { marginTop: 12 }) }),
     h("input", { type: "text", placeholder: "Nota (opcional): quién es", value: nota, onInput: e => setNota(e.target.value), style: inp }),
+    !rev && h("div", { style: { display: "flex", alignItems: "center", gap: 8, marginTop: 10, flexWrap: "wrap" } },
+      h("span", { style: { fontSize: 12.5, color: c.textMuted } }, "Aprende:"),
+      chipDir(c, dir === "azbuka", () => setDir("azbuka"), "Ruso · Azbuka"),
+      chipDir(c, dir === "abece", () => setDir("abece"), "Español · Abecé")),
     boton(c, "Habilitar", agregar, null, { disabled: !mail.trim() }),
     msg && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, borderRadius: 10, padding: "10px 12px", marginTop: 12, color: msg.err ? ROJO_TXT : c.textSub, background: msg.err ? ROJO + "22" : c.gold + "18" } }, msg.t),
     h("div", { style: { marginTop: 14 } },
@@ -143,15 +151,48 @@ function SeccionAccesos({ c, modo = "admin" }) {
       : lista.map(p => h("div", { key: p.email, style: { borderTop: `1px solid ${c.border}`, padding: "12px 0" } },
           h("div", { style: { display: "flex", alignItems: "center", gap: 8 } },
             h("div", { style: { flex: 1, minWidth: 0 } },
-              h("div", { style: { fontSize: 14.5, fontWeight: 700, color: c.text, wordBreak: "break-all" } }, p.email, p.admin ? etiqueta("Admin") : null, p.revisor ? etiqueta("Revisor") : null),
+              h("div", { style: { fontSize: 14.5, fontWeight: 700, color: c.text, wordBreak: "break-all" } }, p.email, p.admin ? etiqueta("Admin") : null, p.revisor ? etiqueta("Revisor") : null, !rev && p.direccion === "abece" ? etiqueta("Abecé") : null),
               h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 2 } }, (p.nota ? p.nota + " · " : "") + (p.tiene_cuenta ? (p.ultimo ? "Última actividad: " + fechaCorta(p.ultimo) : "Entró, sin progreso todavía") : "Todavía no entró")
                 + (!rev && p.invitado_por && p.invitado_por !== yo ? " · lo habilitó " + p.invitado_por : ""))),
             !p.admin && quitando !== p.email && h("div", { style: { display: "flex", flexDirection: "column", gap: 6, alignItems: "stretch" } },
               !rev && btnFila(p.revisor ? "Quitar revisor" : "Hacer revisor", () => revisor(p, !p.revisor), c.gold),
+              !rev && p.direccion && btnFila(p.direccion === "abece" ? "Pasar a Azbuka" : "Pasar a Abecé", () => cambiarDir(p, p.direccion === "abece" ? "azbuka" : "abece"), c.textSub),
               btnFila("Quitar", () => setQuitando(p.email), ROJO_TXT))),
           quitando === p.email && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: c.text, background: ROJO + "22", border: `1px solid ${ROJO}`, borderRadius: 10, padding: 12, marginTop: 10 } },
             "Deja de poder entrar y se borran su cuenta y su progreso en la nube.",
-            boton(c, "Sí, quitar", () => quitar(p.email), "peligro"), boton(c, "Cancelar", () => setQuitando(null), "sec"))))));
+            boton(c, "Sí, quitar", () => quitar(p.email), "peligro"), boton(c, "Cancelar", () => setQuitando(null), "sec"))))),
+    h(LinksParaMandar, { c, rev }));
+}
+/* 27/10/2026 (Manu): chips de dirección y los links para mandar a cada alumno */
+const NOMBRE_DIR = { azbuka: "Azbuka", abece: "Abecé" };
+function chipDir(c, on, fn, t) {
+  return h("button", { className: "btn", onClick: fn, style: Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
+    on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
+}
+/* El link de cada dirección, con «Copiar». El de Abecé lleva ?dir=abece: la pantalla de
+   entrada sale en ruso y con la marca de Abecé. Después, manda la dirección de la cuenta. */
+function LinksParaMandar({ c, rev }) {
+  const base = location.origin + location.pathname.replace(/[^/]*$/, "");
+  const links = (rev ? ["abece"] : ["azbuka", "abece"]).map(d => [d, d === "abece" ? base + "?dir=abece" : base]);
+  const [copiado, setCopiado] = useState(null);
+  const copiar = async (d, url) => {
+    let ok = false;
+    try { await navigator.clipboard.writeText(url); ok = true; } catch (e) {}
+    if (!ok) { try { const t = document.createElement("textarea"); t.value = url; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t); t.select(); ok = document.execCommand("copy"); t.remove(); } catch (e) {} }
+    setCopiado(ok ? d : "error"); setTimeout(() => setCopiado(null), 2000);
+  };
+  return h("div", { style: { borderTop: `1px solid ${c.border}`, marginTop: 6, paddingTop: 14 } },
+    h("div", { style: { fontSize: 13.5, fontWeight: 700, color: c.text } }, "Links para mandar"),
+    h("div", { style: { fontSize: 12.5, color: c.textMuted, lineHeight: 1.5, marginTop: 4 } }, rev
+      ? "Mándale este link a cada alumno: entra en ruso, con la marca de Abecé."
+      : "El de Abecé abre la pantalla de entrada en ruso. Una vez que entra, cada uno ve la dirección que le pusiste arriba."),
+    links.map(([d, url]) => h("div", { key: d, style: { display: "flex", alignItems: "center", gap: 8, marginTop: 10 } },
+      h("div", { style: { flex: 1, minWidth: 0 } },
+        h("div", { style: { fontSize: 12.5, fontWeight: 700, color: c.gold } }, d === "abece" ? "Español · Abecé" : "Ruso · Azbuka"),
+        h("div", { style: { fontSize: 12.5, color: c.textSub, wordBreak: "break-all" } }, url)),
+      h("button", { className: "btn", onClick: () => copiar(d, url), style: { background: copiado === d ? c.gold + "22" : c.bg3, border: `1px solid ${copiado === d ? c.gold : c.border}`, color: copiado === d ? c.gold : c.text, fontSize: 12.5, fontWeight: 600, padding: "8px 12px", borderRadius: 10, cursor: "pointer", fontFamily: "inherit", flexShrink: 0 } },
+        copiado === d ? "✓ Copiado" : "Copiar"))),
+    copiado === "error" && h("div", { style: { fontSize: 12.5, color: ROJO_TXT, marginTop: 8 } }, "No se pudo copiar: mantén el dedo sobre el link para copiarlo."));
 }
 /* ── Abecé en construcción (22/10/2026): solo admin y revisor. Cambia la
    dirección de este teléfono; los alumnos no ven esta sección ni Abecé. ── */
@@ -161,7 +202,7 @@ function SeccionAbece({ c }) {
     if (v === dir) return;
     setDir(v);
     await azSet("az_direccion", v);
-    await azSet("az_prueba", v === "azbuka" ? "" : "si");
+    await azSet("az_prueba", "si");   /* 27/10/2026: la elección de este teléfono manda sobre la de la cuenta (admin y revisor) */
     location.reload();
   };
   const chip = (v, t) => h("button", { className: "btn", onClick: () => elegir(v),

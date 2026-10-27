@@ -5,9 +5,10 @@
    y senses[].ru / senses[].definitionRu. Ficha y decisiones:
    claude/LEXICO_ABECE_FUENTES.md.
 
-   Estado: 5365 entradas (léxico base completo: 10 tandas, 26/10/2026; correcciones del 27/10/2026:
+   Estado: 5367 entradas (léxico base completo: 10 tandas, 26/10/2026; correcciones del 27/10/2026:
    molar separado en verbo ESP-04818 y sustantivo ESP-05404, muela nueva ESP-05405, linear ESP-03453
-   quitado —su ID no se vuelve a usar—). Lo carga el Diccionario
+   quitado —su ID no se vuelve a usar—; zorra solo con la acepción vulgar, criada → criado con femenino
+   criada, madrastra ESP-05406 aparte de padrastro, madrina nueva ESP-05407). Lo carga el Diccionario
    (ficha.html) en Abecé, y core.js lo pide solo para el buscador (27/10/2026).
 
    Campos:
@@ -69,7 +70,7 @@ const LEXICON_ES_META = {
   "wordfreq, Robyn Speer (CC BY-SA 4.0)",
   "WikDict / FreeDict es-ru (CC BY-SA)"
  ],
- "totalEntries": 5365,
+ "totalEntries": 5367,
  "tandas": [
   1,
   2,
@@ -80687,11 +80688,6 @@ const LEXICON_ES = [
   "gender": "f",
   "numberClass": "regular",
   "senses": [
-   {
-    "ru": "лиса (самка)",
-    "definitionRu": "Самка лисы.",
-    "source": "redactado"
-   },
    {
     "ru": "(вульг.) шлюха",
     "definitionRu": "Грубое оскорбление; в уроках не изучается.",
@@ -171837,17 +171833,17 @@ const LEXICON_ES = [
  },
  {
   "id": "ESP-04146",
-  "es": "criada",
-  "acento": "CRIA·da",
+  "es": "criado",
+  "acento": "CRIA·do",
   "posNormalized": "sustantivo",
-  "translit": "крья́да",
-  "ipa": "kɾˈjaða",
-  "gender": "f",
+  "translit": "крья́до",
+  "ipa": "kɾˈjaðo",
+  "gender": "m/f",
   "numberClass": "regular",
   "senses": [
    {
-    "ru": "служанка, горничная",
-    "definitionRu": "Устаревшее: домработница.",
+    "ru": "слуга",
+    "definitionRu": "Устаревшее: человек, который служит в доме; сегодня говорят «empleado del hogar».",
     "source": "redactado"
    }
   ],
@@ -171866,13 +171862,20 @@ const LEXICON_ES = [
     ]
    },
    "tanda": 9,
-   "clave": "criada|N"
+   "clave": "criado|N",
+   "estimado": "entrada criada pasa a criado con femenino criada (Manu, 27/10/2026)"
   },
   "temas": [],
   "regimen": [],
   "pronominalPartner": [],
   "conjugationClass": "",
-  "femenino": {}
+  "femenino": {
+   "es": "criada",
+   "acento": "CRIA·da",
+   "ipa": "kɾˈjaða",
+   "translit": "крья́да",
+   "ru": "служанка, горничная"
+  }
  },
  {
   "id": "ESP-04147",
@@ -215708,12 +215711,12 @@ const LEXICON_ES = [
   "posNormalized": "sustantivo",
   "translit": "падра́стро",
   "ipa": "paðɾˈastɾo",
-  "gender": "m/f",
+  "gender": "m",
   "numberClass": "regular",
   "senses": [
    {
     "ru": "отчим",
-    "definitionRu": "Муж матери или жена отца, не родные.",
+    "definitionRu": "Муж матери, не родной отец.",
     "source": "redactado"
    }
   ],
@@ -215740,13 +215743,7 @@ const LEXICON_ES = [
   "regimen": [],
   "pronominalPartner": [],
   "conjugationClass": "",
-  "femenino": {
-   "es": "madrastra",
-   "acento": "ma·DRAS·tra",
-   "ipa": "maðɾˈastɾa",
-   "translit": "мадра́стра",
-   "ru": "мачеха"
-  }
+  "femenino": {}
  },
  {
   "id": "ESP-05228",
@@ -223602,6 +223599,90 @@ const LEXICON_ES = [
   },
   "temas": [
    "cuerpo-salud"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05406",
+  "es": "madrastra",
+  "acento": "ma·DRAS·tra",
+  "posNormalized": "sustantivo",
+  "translit": "мадра́стра",
+  "ipa": "maðɾˈastɾa",
+  "gender": "f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "мачеха",
+    "definitionRu": "Жена отца, не родная мать.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 1.86,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "madrastra",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "frecuencia de wordfreq; entrada agregada por Manu (27/10/2026)",
+   "tanda": 12,
+   "clave": "madrastra|N"
+  },
+  "temas": [
+   "familia"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05407",
+  "es": "madrina",
+  "acento": "ma·DRI·na",
+  "posNormalized": "sustantivo",
+  "translit": "мадри́на",
+  "ipa": "maðɾˈina",
+  "gender": "f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "крёстная мать",
+    "definitionRu": "«la madrina del niño» — крёстная ребёнка.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 2.57,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "madrina",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "frecuencia de wordfreq; entrada agregada por Manu (27/10/2026)",
+   "tanda": 12,
+   "clave": "madrina|N"
+  },
+  "temas": [
+   "familia"
   ],
   "regimen": [],
   "pronominalPartner": [],

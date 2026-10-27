@@ -138,6 +138,26 @@ Mientras no lo corras, la app anda igual que antes; lo único que no funciona es
 
 En ⚙️ Ajustes → **Abecé en construcción**, elegí «Abecé (prueba)». Cambia solo en ese teléfono; para volver, «Azbuka». Los alumnos no ven esa sección y, aunque lo intenten, no pueden abrir Abecé.
 
+## Azbuka o Abecé para cada alumno (27/10/2026)
+
+Cada mail habilitado es de **Azbuka** (aprende ruso) o de **Abecé** (aprende español). Al entrar, la app muestra todo en la de su cuenta: inicio, menú, avisos, y el nombre y el ícono con que se instala. Los alumnos que habilita un revisor son de Abecé.
+
+### 1. Actualizar Supabase (una vez)
+
+Igual que antes: Supabase → **SQL Editor** → **New query** → pegá **todo** `herramientas/cuentas/supabase.sql` → **Run** (*Success*). Los mails que ya están quedan como Azbuka.
+
+Mientras no lo corras, la app anda igual que antes; lo único que no funciona es elegir Abecé al habilitar y «Pasar a Abecé».
+
+### 2. Habilitar a alguien
+
+1. ⚙️ Ajustes → **Accesos**: escribí el mail y, en «Aprende», elegí **Ruso · Azbuka** o **Español · Abecé**. Tocá **Habilitar**.
+2. Abajo, en **Links para mandar**, tocá **Copiar** en el link que corresponde y mandáselo. El de Abecé abre la pantalla de entrada en ruso.
+3. Para cambiar a alguien de dirección: **Pasar a Abecé** / **Pasar a Azbuka** en su fila. Lo ve la próxima vez que abra la app.
+
+Mientras Abecé esté bloqueada, un alumno de Abecé sigue viendo Azbuka: solo vos y los revisores la ven, en modo prueba.
+
+**El mail con el código** es uno solo para todos (la plantilla de Supabase, en español). Un alumno de Abecé lo recibe en español; el código se entiende igual.
+
 ## Google (opcional, más adelante)
 
 Se puede sumar *Entrar con Google*. Hace falta crear una credencial en Google Cloud (unos 20 minutos más) y prenderla en **Authentication → Sign In / Providers → Google**.

@@ -13,9 +13,10 @@ function server(op,a){ srv.log.push(op+(a.fn?':'+a.fn:''));
   if(op==='rpc'){ const me=srv.users[a.uid]; const perm=me&&srv.permitidos[me.email];
     if(a.fn==='es_permitido') return ok(!!perm); if(a.fn==='es_admin') return ok(!!(perm&&perm.admin));
     if(a.fn==='mi_rol') return ok(!perm?'ninguno':perm.admin?'admin':perm.revisor?'revisor':'alumno');
-    const fila=(e,p)=>{const u=Object.values(srv.users).find(u=>u.email===e); return {email:e,admin:!!p.admin,revisor:!!p.revisor,invitado_por:p.invitado_por||null,nota:p.nota,tiene_cuenta:!!u,ultimo:u&&srv.progreso[u.id]?srv.progreso[u.id].actualizado:null};};
+    if(a.fn==='mi_direccion') return ok(perm&&perm.direccion||'azbuka');   /* 27/10/2026 */
+    const fila=(e,p)=>{const u=Object.values(srv.users).find(u=>u.email===e); return {email:e,admin:!!p.admin,revisor:!!p.revisor,invitado_por:p.invitado_por||null,nota:p.nota,tiene_cuenta:!!u,ultimo:u&&srv.progreso[u.id]?srv.progreso[u.id].actualizado:null,direccion:p.direccion||'azbuka'};};
     if(a.fn==='revisor_resumen'){ if(!(perm&&perm.revisor)) return err('solo revisor'); return ok(Object.entries(srv.permitidos).filter(([e,p])=>p.invitado_por===me.email).map(([e,p])=>fila(e,p))); }
-    if(a.fn==='revisor_habilitar'){ if(!(perm&&perm.revisor)) return err('solo revisor'); const e=a.args.p_email; if(srv.permitidos[e]) return err('duplicate key value violates unique constraint'); srv.permitidos[e]={admin:false,revisor:false,nota:a.args.p_nota||null,invitado_por:me.email}; return ok(null); }
+    if(a.fn==='revisor_habilitar'){ if(!(perm&&perm.revisor)) return err('solo revisor'); const e=a.args.p_email; if(srv.permitidos[e]) return err('duplicate key value violates unique constraint'); srv.permitidos[e]={admin:false,revisor:false,nota:a.args.p_nota||null,invitado_por:me.email,direccion:'abece'}; return ok(null); }
     if(a.fn==='revisor_quitar'){ if(!(perm&&perm.revisor)) return err('solo revisor'); const e=a.args.p_email, q=srv.permitidos[e]; if(!q||q.invitado_por!==me.email||q.admin||q.revisor) return err('no es tuyo'); const u=Object.values(srv.users).find(u=>u.email===e); if(u){delete srv.users[u.id]; delete srv.progreso[u.id];} delete srv.permitidos[e]; return ok(null); }
     if(a.fn==='borrar_mi_cuenta'){ delete srv.progreso[a.uid]; delete srv.users[a.uid]; return ok(null); }
     if(a.fn==='admin_resumen'){ if(!(perm&&perm.admin)) return err('solo admin'); return ok(Object.entries(srv.permitidos).map(([e,p])=>fila(e,p))); }
@@ -28,7 +29,7 @@ function server(op,a){ srv.log.push(op+(a.fn?':'+a.fn:''));
     if(op==='lista') return ok(srv.reportes.slice().reverse());
     if(op==='update'){ const r=srv.reportes.find(x=>x.id===a.id); if(r) Object.assign(r,a.row); return ok(null); }
     if(op==='delete'){ srv.reportes=srv.reportes.filter(x=>x.id!==a.id); return ok(null); } }
-  if(op==='insert'){ if(srv.permitidos[a.row.email]) return err('duplicate key value violates unique constraint'); srv.permitidos[a.row.email]={admin:false,nota:a.row.nota,invitado_por:a.row.invitado_por||null}; return ok(null); }
+  if(op==='insert'){ if(srv.permitidos[a.row.email]) return err('duplicate key value violates unique constraint'); srv.permitidos[a.row.email]={admin:false,nota:a.row.nota,invitado_por:a.row.invitado_por||null,direccion:a.row.direccion||'azbuka'}; return ok(null); }
   if(op==='update'&&a.t==='permitidos'){ const me=srv.users[a.me]; const perm=me&&srv.permitidos[me.email]; if(!(perm&&perm.admin)) return err('row-level security'); if(srv.permitidos[a.id]) Object.assign(srv.permitidos[a.id],a.row); return ok(null); }
   return err('?'); }
 const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) problemas.push(m); };
@@ -77,6 +78,30 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  await p.fill('input[placeholder="mail@ejemplo.com"]','Ana@X.com'); await p.fill('input[placeholder^="Nota"]','Ana'); await p.click('button:has-text("Habilitar")'); await p.waitForTimeout(500);
  chk(!!srv.permitidos['ana@x.com'], 'habilitar un mail (queda en minúsculas)');
  chk(srv.permitidos['ana@x.com'] && srv.permitidos['ana@x.com'].invitado_por==='manuelmunoz87@gmail.com', 'anota quién habilitó el mail');
+ // Dirección de cada alumno y links para mandar (27/10/2026)
+ chk(srv.permitidos['ana@x.com'].direccion==='azbuka', 'por defecto, un mail habilitado es de Azbuka');
+ await p.fill('input[placeholder="mail@ejemplo.com"]','Carla@X.com'); await p.click('button:has-text("Español · Abecé")'); await p.click('button:has-text("Habilitar")'); await p.waitForTimeout(500);
+ chk(srv.permitidos['carla@x.com'] && srv.permitidos['carla@x.com'].direccion==='abece', 'el admin habilita un mail de Abecé');
+ chk(await p.locator('text=Links para mandar').count()>0 && await p.locator('text=/\\?dir=abece$/').count()>0, 'Ajustes muestra los links para mandar (Azbuka y Abecé)');
+ chk(await p.locator('button:has-text("Copiar")').count()===2, 'cada link tiene «Copiar»');
+ await p.locator('button:has-text("Pasar a Azbuka")').first().click(); await p.waitForTimeout(500);
+ chk(srv.permitidos['carla@x.com'].direccion==='azbuka', '«Pasar a Azbuka» cambia la dirección');
+ await p.locator('button:has-text("Pasar a Abecé")').last().click(); await p.waitForTimeout(500);
+ chk(srv.permitidos['carla@x.com'].direccion==='abece', '«Pasar a Abecé» la vuelve a cambiar');
+ // Teléfono de Carla: el link de Abecé abre la entrada en ruso
+ const d4=await dispositivo();
+ await d4.p.goto(BASE+'index.html?dir=abece',{waitUntil:'networkidle'});
+ chk(/Abecé/.test(await d4.p.locator('#az-cuenta .logo').innerText()) && /Вход/.test(await d4.p.locator('#az-cuenta .tit').innerText()), 'con el link de Abecé, la entrada sale en ruso');
+ chk(/manifest-abece/.test(await d4.p.getAttribute('link[rel="manifest"]','href')) && /abece/.test(await d4.p.getAttribute('link[rel="apple-touch-icon"]','href')), 'en ruso, la app se instalaría como Abecé');
+ await d4.p.screenshot({path:OUT+'/entrar-ru.png'});
+ await d4.p.click('#az-cuenta .idi button[data-i="es"]'); await d4.p.waitForTimeout(200);
+ chk(/Entrar/.test(await d4.p.locator('#az-cuenta .tit').innerText()) && /Азбука/.test(await d4.p.locator('#az-cuenta .logo').innerText()), 'el chip «ES» la pasa al español');
+ await d4.p.click('#az-cuenta .idi button[data-i="ru"]'); await d4.p.waitForTimeout(200);
+ await d4.p.fill('#azc-mail','carla@x.com'); await d4.p.click('#azc-enviar'); await d4.p.waitForTimeout(200);
+ chk(/Проверь почту/.test(await d4.p.locator('#az-cuenta .tit').innerText()), 'el paso del código también en ruso');
+ await d4.p.fill('#azc-cod','123456'); await d4.p.waitForTimeout(1500);
+ chk(await d4.p.evaluate(()=>localStorage.getItem('az_cuenta_dir'))==='abece', 'al entrar, la app guarda la dirección de la cuenta');
+ chk(/Азбука/.test(await d4.p.locator('header').innerText()), 'mientras Abecé esté bloqueada, una alumna de Abecé ve Azbuka');
  // Abecé en construcción (22/10/2026): el admin la prueba y vuelve
  chk(await p.locator('text=Abecé en construcción').count()>0, 'el admin ve «Abecé en construcción»');
  await p.click('button:has-text("Abecé (prueba)")'); await p.waitForLoadState('networkidle'); await p.waitForTimeout(1000);
@@ -122,6 +147,8 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
   chk(!(await d2.p.getByText('Accesos', { exact: true }).count()) && !(await d2.p.getByText('Reportes', { exact: true }).count()), 'la revisora no ve Accesos ni Reportes');
  await d2.p.fill('input[placeholder="mail@ejemplo.com"]','Bob@X.com'); await d2.p.fill('input[placeholder^="Nota"]','Bob'); await d2.p.click('button:has-text("Habilitar")'); await d2.p.waitForTimeout(600);
  chk(srv.permitidos['bob@x.com'] && srv.permitidos['bob@x.com'].invitado_por==='ana@x.com' && !srv.permitidos['bob@x.com'].admin, 'la revisora habilita un alumno (no admin)');
+ chk(srv.permitidos['bob@x.com'].direccion==='abece', 'los alumnos de la revisora son de Abecé');
+ chk(await d2.p.locator('button:has-text("Copiar")').count()===1 && await d2.p.locator('text=/\\?dir=abece$/').count()>0, 'la revisora ve solo el link de Abecé');
  chk(await d2.p.locator('text=bob@x.com').count()>0 && !(await d2.p.locator('text=manuelmunoz87@gmail.com').count()), 'la revisora ve solo sus alumnos');
  await d2.p.screenshot({path:OUT+'/revisora.png', fullPage:true});
  await d2.p.locator('button:text-is("Quitar")').first().click(); await d2.p.click('button:has-text("Sí, quitar")'); await d2.p.waitForTimeout(500);
@@ -142,6 +169,6 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  chk(!srv.users['u-manuelmunoz87@gmail.com'] && !srv.progreso['u-manuelmunoz87@gmail.com'], 'eliminar cuenta borra la cuenta y el progreso en la nube');
  chk(await d3.p.evaluate(()=>!localStorage.getItem('az_progress')), 'y lo guardado en el teléfono');
  chk(await d3.p.locator('#az-cuenta').isVisible(), 'y vuelve a la pantalla de entrada');
- for (const x of [p,d2.p,d3.p]) for (const e of x.errs) if (!/error de prueba/.test(e)) problemas.push('JS: '+e);   /* el error que tira la prueba del 🐞 a propósito no cuenta */
+ for (const x of [p,d2.p,d3.p,d4.p]) for (const e of x.errs) if (!/error de prueba/.test(e)) problemas.push('JS: '+e);   /* el error que tira la prueba del 🐞 a propósito no cuenta */
  console.log(problemas.length? '✗ '+problemas.length+' problemas':'✓ Todo bien'); problemas.filter(x=>x.startsWith('JS')).forEach(x=>console.log(x));
  await b.close(); s.close(); process.exit(problemas.length?1:0); })();

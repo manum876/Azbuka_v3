@@ -35,6 +35,14 @@
      alCambiar(fn)  → avisa cuando cambia el estado de la nube
      reportar({ texto, esperado }) → "enviado" | "pendiente" (21/10/2026)
      reportes() · marcarReporte(id, resuelto) · borrarReporte(id)  (solo admin)
+     direccion() → "azbuka" | "abece" · habilitar(email, nota, direccion) · marcarDireccion(email, dir)  (27/10/2026)
+
+   Dirección de cada alumno (27/10/2026, Manu): se elige al habilitar el mail y viene con la
+   cuenta (mi_direccion). Al entrar se guarda en az_cuenta_dir (no viaja a la nube) y core.js la
+   usa para todo: inicio, menú, módulos, avisos y el nombre y el ícono de la app instalada.
+   La pantalla de entrada es lo único que se ve antes de saber quién es: su idioma sale de los
+   chips «ES · RU» (si se tocaron), del link (?dir=abece → ruso), de la última cuenta que entró
+   en el teléfono o del idioma del teléfono. En ruso muestra la marca de Abecé.
 
    Roles (22/10/2026, Manu): admin (Manu: todo) y revisor (Iván: ve Abecé en
    construcción y da acceso a sus alumnos, sin reportes ni la lista completa).
@@ -142,14 +150,61 @@ const AZ_CUENTA_CONFIG = {
     #az-cuenta .o{display:flex;align-items:center;gap:10px;margin:18px 0 4px;color:${C.textMuted};font-size:12px;}
     #az-cuenta .o:before,#az-cuenta .o:after{content:"";flex:1;height:1px;background:${C.border};}
     #az-cuenta .priv{font-size:12px;line-height:1.5;color:${C.textMuted};margin-top:28px;}
+    #az-cuenta .idi{position:absolute;top:var(--az-top, 68px);right:6vw;display:flex;gap:6px;}
+    #az-cuenta .idi button{padding:6px 10px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;background:${C.bg2};border:1px solid ${C.border};color:${C.textMuted};}
+    #az-cuenta .idi button.on{background:${C.gold}22;border-color:${C.gold};color:${C.gold};}
   `;
   document.head.appendChild(css);
 
   const enUrl = /[?&#](code|error|error_description|access_token)=/.test(location.href);
   if (!haySesionGuardada() || enUrl) document.documentElement.classList.add("az-sin-cuenta");
 
+  /* ── Idioma de la pantalla de entrada (27/10/2026) ── */
+  const IDI = "az_cuenta_idioma", DIR = "az_cuenta_dir";
+  function idioma() {
+    try { const el = ls.getItem(IDI); if (el === "es" || el === "ru") return el; } catch (e) {}
+    const d = new URLSearchParams(location.search).get("dir");
+    if (d === "abece") return "ru"; if (d === "azbuka") return "es";
+    try { const cd = ls.getItem(DIR); if (cd === "abece") return "ru"; if (cd === "azbuka") return "es"; } catch (e) {}
+    const langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+    return langs.some(l => /^ru/i.test(l || "")) ? "ru" : "es";
+  }
+  const TXE = {
+    es: { logo: "Азбука", baja: "Aprende ruso desde cero", entrar: "Entrar",
+      entrarTxt: "Escribe tu mail y te mandamos un código para entrar. No hace falta contraseña.", ph: "tu@mail.com",
+      incompleto: "Revisa el mail: parece incompleto.", enviar: "Enviarme el código", enviando: "Enviando…", o: "o", google: "Entrar con Google",
+      revisa: "Revisa tu mail", revisaTxt: m => `Te mandamos un código a ${m}. Escríbelo aquí. Si no llega en un minuto, mira en «Spam» o «Promociones».`,
+      digitos: n => "El código tiene " + n + " números.", ok: "Entrar", entrando: "Entrando…", otroCod: "Mandarme otro código", otroMail: "Usar otro mail",
+      sinAcceso: "Sin acceso", sinAccesoTxt: "Este mail ya no tiene acceso a Azbuka. Si crees que es un error, escríbele a Manu.", conOtro: "Entrar con otro mail",
+      momento: "Un momento.",
+      priv: "Tu mail se usa solo para entrar y para guardar tu progreso. Puedes eliminar tu cuenta y todos tus datos cuando quieras, desde Ajustes.",
+      errSmtp: "No se pudo mandar el mail con el código. Es un problema del envío de mails, no de tu mail: avísale a Manu.",
+      errNo: "Este mail no tiene acceso a Azbuka. Pídele a Manu que lo habilite.",
+      errMuchos: "Pediste muchos códigos seguidos. Espera un minuto y prueba de nuevo.",
+      errCodigo: "El código no es correcto o ya venció. Revísalo o pide uno nuevo.",
+      errRed: "No hay conexión. Para entrar la primera vez necesitas internet.",
+      errOtro: "No se pudo completar. Prueba de nuevo en un momento.", detalle: "Detalle" },
+    /* BORRADOR: lo revisa Iván */
+    ru: { logo: "Abecé", baja: "Учи испанский с нуля", entrar: "Вход",
+      entrarTxt: "Напиши свою почту, и мы пришлём код для входа. Пароль не нужен.", ph: "name@mail.ru",
+      incompleto: "Проверь адрес: кажется, он неполный.", enviar: "Прислать код", enviando: "Отправляем…", o: "или", google: "Войти через Google",
+      revisa: "Проверь почту", revisaTxt: m => `Мы отправили код на ${m}. Введи его здесь. Если письмо не пришло за минуту, загляни в «Спам» или «Промоакции».`,
+      digitos: n => "В коде " + n + " цифр.", ok: "Войти", entrando: "Входим…", otroCod: "Прислать другой код", otroMail: "Ввести другую почту",
+      sinAcceso: "Нет доступа", sinAccesoTxt: "У этой почты больше нет доступа к Abecé. Если это ошибка, напиши своему преподавателю.", conOtro: "Войти с другой почтой",
+      momento: "Минутку.",
+      priv: "Почта нужна только для входа и чтобы сохранять твой прогресс. Ты можешь удалить аккаунт и все свои данные в любой момент в настройках.",
+      errSmtp: "Не удалось отправить письмо с кодом. Проблема в отправке писем, а не в твоей почте: сообщи преподавателю.",
+      errNo: "У этой почты нет доступа к Abecé. Попроси преподавателя открыть доступ.",
+      errMuchos: "Ты запросил слишком много кодов подряд. Подожди минуту и попробуй снова.",
+      errCodigo: "Код неверный или устарел. Проверь его или запроси новый.",
+      errRed: "Нет соединения. Для первого входа нужен интернет.",
+      errOtro: "Не получилось. Попробуй ещё раз чуть позже.", detalle: "Подробности" }
+  };
+  let L = TXE[idioma()];
+  const marcaEntrada = () => { if (typeof azMarcaInstalacion === "function") azMarcaInstalacion(idioma() === "ru" ? "abece" : (typeof AZ_DIRECCION !== "undefined" ? AZ_DIRECCION.id : "azbuka")); };
+
   /* ── Pantalla de entrada ── */
-  let caja = null, paso = "mail", mailIngresado = "", reenvio = 0, relojReenvio = null;
+  let caja = null, paso = "mail", mailIngresado = "", reenvio = 0, relojReenvio = null, ultimaVista = null;
   const esc = s => String(s).replace(/[&<>"]/g, x => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[x]));
   function montar() {
     if (!caja) { caja = document.createElement("div"); caja.id = "az-cuenta"; caja.setAttribute("role", "dialog"); document.body.appendChild(caja); }
@@ -157,35 +212,43 @@ const AZ_CUENTA_CONFIG = {
   }
   function pantalla(html) {
     const el = montar();
-    el.innerHTML = `<div class="in"><div class="logo">Азбука</div><div class="baja">Aprende ruso desde cero</div>${html}</div>`;
+    const idi = idioma();
+    el.innerHTML = `<div class="idi" role="group" aria-label="Idioma · Язык"><button data-i="es" class="${idi === "es" ? "on" : ""}">ES</button><button data-i="ru" class="${idi === "ru" ? "on" : ""}">RU</button></div><div class="in"><div class="logo">${L.logo}</div><div class="baja">${L.baja}</div>${html}</div>`;
+    el.querySelectorAll(".idi button").forEach(b => b.onclick = () => {
+      try { setOrig.call(ls, IDI, b.getAttribute("data-i")); } catch (e) {}
+      L = TXE[idioma()]; marcaEntrada();
+      if (ultimaVista) ultimaVista();
+    });
+    marcaEntrada();
     return el;
   }
   function msgError(e) {
     const t = String((e && (e.message || e.error_description || e.msg)) || e || "");
-    if (/sending|smtp|mail.*(fail|error)/i.test(t)) return "No se pudo mandar el mail con el código. Es un problema del envío de mails, no de tu mail: avísale a Manu. (Detalle: " + t.slice(0, 120) + ")";
-    if (/AZ_NO_PERMITIDO|Database error saving new user|not allowed|Signups not allowed/i.test(t)) return "Este mail no tiene acceso a Azbuka. Pídele a Manu que lo habilite.";
-    if (/rate|too many|security purposes|seconds/i.test(t)) return "Pediste muchos códigos seguidos. Espera un minuto y prueba de nuevo.";
-    if (/expired|invalid|token/i.test(t)) return "El código no es correcto o ya venció. Revísalo o pide uno nuevo.";
-    if (/fetch|network|Failed/i.test(t)) return "No hay conexión. Para entrar la primera vez necesitas internet.";
-    return "No se pudo completar. Prueba de nuevo en un momento." + (t ? " (Detalle: " + t.slice(0, 120) + ")" : "");
+    if (/sending|smtp|mail.*(fail|error)/i.test(t)) return L.errSmtp + " (" + L.detalle + ": " + t.slice(0, 120) + ")";
+    if (/AZ_NO_PERMITIDO|Database error saving new user|not allowed|Signups not allowed/i.test(t)) return L.errNo;
+    if (/rate|too many|security purposes|seconds/i.test(t)) return L.errMuchos;
+    if (/expired|invalid|token/i.test(t)) return L.errCodigo;
+    if (/fetch|network|Failed/i.test(t)) return L.errRed;
+    return L.errOtro + (t ? " (" + L.detalle + ": " + t.slice(0, 120) + ")" : "");
   }
-  const PRIV = `<div class="priv">Tu mail se usa solo para entrar y para guardar tu progreso. Puedes eliminar tu cuenta y todos tus datos cuando quieras, desde Ajustes.</div>`;
+  const PRIV = () => `<div class="priv">${L.priv}</div>`;
 
   function verMail(error, aviso) {
     paso = "mail";
+    ultimaVista = () => { mailIngresado = (document.getElementById("azc-mail") || {}).value || mailIngresado; verMail(); };
     const el = pantalla(`
-      <div class="tit">Entrar</div>
-      <div class="txt">Escribe tu mail y te mandamos un código para entrar. No hace falta contraseña.</div>
-      <input id="azc-mail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="tu@mail.com" value="${esc(mailIngresado)}">
+      <div class="tit">${L.entrar}</div>
+      <div class="txt">${L.entrarTxt}</div>
+      <input id="azc-mail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${L.ph}" value="${esc(mailIngresado)}">
       ${error ? `<div class="err">${esc(error)}</div>` : ""}${aviso ? `<div class="ok">${esc(aviso)}</div>` : ""}
-      <button class="b" id="azc-enviar">Enviarme el código</button>
-      ${CFG.google ? `<div class="o">o</div><button class="b sec" id="azc-google">Entrar con Google</button>` : ""}
-      ${PRIV}`);
+      <button class="b" id="azc-enviar">${L.enviar}</button>
+      ${CFG.google ? `<div class="o">${L.o}</div><button class="b sec" id="azc-google">${L.google}</button>` : ""}
+      ${PRIV()}`);
     const inp = el.querySelector("#azc-mail"), btn = el.querySelector("#azc-enviar");
     const enviar = async () => {
       const m = inp.value.trim().toLowerCase();
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { verMail("Revisa el mail: parece incompleto."); return; }
-      mailIngresado = m; btn.disabled = true; btn.textContent = "Enviando…";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { verMail(L.incompleto); return; }
+      mailIngresado = m; btn.disabled = true; btn.textContent = L.enviando;
       try {
         const { error } = await cliente.auth.signInWithOtp({ email: m, options: { shouldCreateUser: true } });
         if (error) throw error;
@@ -205,20 +268,21 @@ const AZ_CUENTA_CONFIG = {
 
   function verCodigo(error) {
     paso = "codigo";
+    ultimaVista = () => verCodigo();
     const el = pantalla(`
-      <div class="tit">Revisa tu mail</div>
-      <div class="txt">Te mandamos un código a <b style="color:${C.text}">${esc(mailIngresado)}</b>. Escríbelo aquí. Si no llega en un minuto, mira en «Spam» o «Promociones».</div>
+      <div class="tit">${L.revisa}</div>
+      <div class="txt">${L.revisaTxt(`<b style="color:${C.text}">${esc(mailIngresado)}</b>`)}</div>
       <input id="azc-cod" class="cod" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="${CFG.digitos}" placeholder="${"•".repeat(CFG.digitos)}">
       ${error ? `<div class="err">${esc(error)}</div>` : ""}
-      <button class="b" id="azc-ok">Entrar</button>
-      <button class="lnk" id="azc-re">Mandarme otro código</button>
-      <button class="lnk" id="azc-otro" style="padding-top:6px;color:${C.textMuted}">Usar otro mail</button>
-      ${PRIV}`);
+      <button class="b" id="azc-ok">${L.ok}</button>
+      <button class="lnk" id="azc-re">${L.otroCod}</button>
+      <button class="lnk" id="azc-otro" style="padding-top:6px;color:${C.textMuted}">${L.otroMail}</button>
+      ${PRIV()}`);
     const inp = el.querySelector("#azc-cod"), btn = el.querySelector("#azc-ok"), re = el.querySelector("#azc-re");
     const entrar = async () => {
       const t = inp.value.replace(/\D/g, "");
-      if (t.length < CFG.digitos) { verCodigo("El código tiene " + CFG.digitos + " números."); return; }
-      btn.disabled = true; btn.textContent = "Entrando…";
+      if (t.length < CFG.digitos) { verCodigo(L.digitos(CFG.digitos)); return; }
+      btn.disabled = true; btn.textContent = L.entrando;
       try {
         const { data, error } = await cliente.auth.verifyOtp({ email: mailIngresado, token: t, type: "email" });
         if (error) throw error;
@@ -229,7 +293,7 @@ const AZ_CUENTA_CONFIG = {
     inp.oninput = () => { if (inp.value.replace(/\D/g, "").length === CFG.digitos) entrar(); };
     inp.onkeydown = e => { if (e.key === "Enter") entrar(); };
     const tic = () => { const s = Math.ceil((reenvio - Date.now()) / 1000);
-      if (s > 0) { re.disabled = true; re.textContent = "Mandarme otro código (" + s + " s)"; } else { re.disabled = false; re.textContent = "Mandarme otro código"; clearInterval(relojReenvio); } };
+      if (s > 0) { re.disabled = true; re.textContent = L.otroCod + " (" + s + " " + (L === TXE.ru ? "с" : "s") + ")"; } else { re.disabled = false; re.textContent = L.otroCod; clearInterval(relojReenvio); } };
     clearInterval(relojReenvio); relojReenvio = setInterval(tic, 1000); tic();
     re.onclick = async () => {
       re.disabled = true;
@@ -241,12 +305,13 @@ const AZ_CUENTA_CONFIG = {
   }
 
   function verSinAcceso() {
+    ultimaVista = verSinAcceso;
     pantalla(`
-      <div class="tit">Sin acceso</div>
-      <div class="txt">Este mail ya no tiene acceso a Azbuka. Si crees que es un error, escríbele a Manu.</div>
-      <button class="b sec" id="azc-otro">Entrar con otro mail</button>`).querySelector("#azc-otro").onclick = () => verMail();
+      <div class="tit">${L.sinAcceso}</div>
+      <div class="txt">${L.sinAccesoTxt}</div>
+      <button class="b sec" id="azc-otro">${L.conOtro}</button>`).querySelector("#azc-otro").onclick = () => verMail();
   }
-  function verEntrando() { pantalla(`<div class="tit">Entrando…</div><div class="txt">Un momento.</div>`); }
+  function verEntrando() { ultimaVista = verEntrando; pantalla(`<div class="tit">${L.entrando}</div><div class="txt">${L.momento}</div>`); }
 
   function quitarPantalla() {
     document.documentElement.classList.remove("az-sin-cuenta");
@@ -273,8 +338,9 @@ const AZ_CUENTA_CONFIG = {
     if (ok === false) { await cliente.auth.signOut().catch(() => {}); usuario = null; mostrarPantalla(verSinAcceso); return; }
     if (location.search.indexOf("code=") >= 0 || location.hash.indexOf("access_token") >= 0) history.replaceState(null, "", location.pathname);
     quitarPantalla();
+    if (typeof azMarcaInstalacion === "function" && typeof AZ_DIRECCION !== "undefined") azMarcaInstalacion(AZ_DIRECCION.id);
     avisarListo(usuario);
-    actualizarRol();
+    actualizarRol().then(actualizarDireccion);
     setTimeout(enviarCola, 3000);
     await sincronizarAlEntrar();
   }
@@ -294,6 +360,21 @@ const AZ_CUENTA_CONFIG = {
     const privilegiado = x => x === "admin" || x === "revisor";
     if (privilegiado(antes) && !privilegiado(r) && typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id !== "azbuka") location.reload();
     return r;
+  }
+
+  /* ── Dirección de la cuenta (27/10/2026): azbuka o abece, elegida al habilitar el mail.
+     Si cambió y la página se armó con otra dirección, se recarga una vez. ── */
+  const leerDir = () => { try { return ls.getItem(DIR) || ""; } catch (e) { return ""; } };
+  async function actualizarDireccion() {
+    let d = null;
+    try { const { data, error } = await cliente.rpc("mi_direccion"); if (!error && (data === "azbuka" || data === "abece")) d = data; } catch (e) {}
+    if (!d) return leerDir();                 /* SQL viejo (sin mi_direccion) o sin red: queda la que había */
+    const antes = leerDir();
+    try { setOrig.call(ls, DIR, d); } catch (e) {}
+    if (antes !== d && typeof azDireccion === "function" && typeof AZ_DIRECCION !== "undefined" && azDireccion().id !== AZ_DIRECCION.id) {
+      try { if (!sessionStorage.getItem("az_cuenta_recarga_dir")) { sessionStorage.setItem("az_cuenta_recarga_dir", "1"); location.reload(); } } catch (e) {}
+    }
+    return d;
   }
 
   /* ── Progreso en la nube ── */
@@ -395,15 +476,20 @@ const AZ_CUENTA_CONFIG = {
       limpiarLocales(); usuario = null; admin = false;
       location.href = "index.html";
     },
+    direccion: leerDir,
     accesos: async () => { const { data, error } = await cliente.rpc("admin_resumen"); if (error) throw error; return data || []; },
-    habilitar: async (email, nota) => {
+    habilitar: async (email, nota, direccion) => {
       const m = String(email || "").trim().toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) throw new Error("mail");
-      let { error } = await cliente.from("permitidos").insert({ email: m, nota: nota || null, invitado_por: (usuario && usuario.email || "").toLowerCase() || null });
+      const fila = { email: m, nota: nota || null, invitado_por: (usuario && usuario.email || "").toLowerCase() || null, direccion: direccion === "abece" ? "abece" : "azbuka" };
+      let { error } = await cliente.from("permitidos").insert(fila);
+      /* Si todavía no se corrió el SQL nuevo (sin la columna direccion), se habilita igual */
+      if (error && /direccion/.test(error.message || "")) { delete fila.direccion; ({ error } = await cliente.from("permitidos").insert(fila)); }
       /* Si todavía no se corrió el SQL del 22/10/2026 (sin la columna invitado_por), se habilita igual */
       if (error && /invitado_por/.test(error.message || "")) ({ error } = await cliente.from("permitidos").insert({ email: m, nota: nota || null }));
       if (error) throw error;
     },
+    marcarDireccion: async (email, dir) => { const { error } = await cliente.from("permitidos").update({ direccion: dir === "abece" ? "abece" : "azbuka" }).eq("email", email); if (error) throw error; },
     quitar: async (email) => { const { error } = await cliente.rpc("admin_quitar", { p_email: email }); if (error) throw error; },
     marcarRevisor: async (email, si) => { const { error } = await cliente.from("permitidos").update({ revisor: !!si }).eq("email", email); if (error) throw error; },
     /* Revisor (22/10/2026): solo los alumnos que habilitó él */

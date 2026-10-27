@@ -15,6 +15,8 @@
 --     botón 🐞, con un mail al admin por cada uno.
 --   · revisores (22/10/2026): ven Abecé en construcción y dan acceso
 --     a sus alumnos (al final del archivo).
+--   · dirección (27/10/2026): cada mail habilitado es de Azbuka o de
+--     Abecé; la app la lee al entrar (al final del archivo).
 -- ============================================================
 
 create table if not exists public.permitidos (
@@ -26,6 +28,8 @@ create table if not exists public.permitidos (
 -- 22/10/2026: revisores (ver al final del archivo)
 alter table public.permitidos add column if not exists revisor boolean not null default false;
 alter table public.permitidos add column if not exists invitado_por text;
+-- 27/10/2026: la dirección del alumno (ver al final del archivo)
+alter table public.permitidos add column if not exists direccion text not null default 'azbuka';
 
 create table if not exists public.progreso (
   user_id     uuid primary key references auth.users(id) on delete cascade,
@@ -92,12 +96,12 @@ end $$;
 -- y quién habilitó cada mail (22/10/2026). El drop permite cambiar las columnas.
 drop function if exists public.admin_resumen();
 create or replace function public.admin_resumen()
-returns table (email text, admin boolean, revisor boolean, invitado_por text, nota text, creado timestamptz, tiene_cuenta boolean, ultimo timestamptz)
+returns table (email text, admin boolean, revisor boolean, invitado_por text, nota text, creado timestamptz, tiene_cuenta boolean, ultimo timestamptz, direccion text)
 language plpgsql stable security definer set search_path = public as $$
 begin
   if not public.es_admin() then raise exception 'solo admin'; end if;
   return query
-    select p.email, p.admin, p.revisor, p.invitado_por, p.nota, p.creado, (u.id is not null), g.actualizado
+    select p.email, p.admin, p.revisor, p.invitado_por, p.nota, p.creado, (u.id is not null), g.actualizado, p.direccion
     from public.permitidos p
     left join auth.users u on lower(u.email) = p.email
     left join public.progreso g on g.user_id = u.id
@@ -274,7 +278,8 @@ begin
   if exists (select 1 from public.permitidos where email = lower(p_email)) then
     raise exception 'duplicate key value violates unique constraint';
   end if;
-  insert into public.permitidos (email, nota, invitado_por) values (lower(p_email), nullif(p_nota, ''), public.mi_email());
+  -- 27/10/2026: los alumnos de un revisor son de Abecé
+  insert into public.permitidos (email, nota, invitado_por, direccion) values (lower(p_email), nullif(p_nota, ''), public.mi_email(), 'abece');
 end $$;
 
 -- El revisor quita a un alumno que habilitó él (y se borran su cuenta y su progreso)
@@ -302,3 +307,23 @@ grant execute on function public.admin_resumen()               to authenticated;
 grant execute on function public.revisor_resumen()             to authenticated;
 grant execute on function public.revisor_habilitar(text, text) to authenticated;
 grant execute on function public.revisor_quitar(text)          to authenticated;
+
+-- ============================================================
+-- DIRECCIÓN DE CADA ALUMNO (27/10/2026, a pedido de Manu)
+-- Cada mail habilitado es de Azbuka (ruso para hispanohablantes) o de
+-- Abecé (español para rusohablantes). Se elige al habilitarlo en
+-- Ajustes → Accesos; los alumnos que habilita un revisor son de Abecé.
+-- Al entrar, la app pide mi_direccion() y muestra todo en esa
+-- dirección: así la app instalada (que en el iPhone no comparte lo
+-- guardado con Safari) vuelve sola a la suya.
+-- ============================================================
+-- (la columna direccion se agrega arriba, junto a la tabla)
+alter table public.permitidos drop constraint if exists permitidos_direccion_ok;
+alter table public.permitidos add constraint permitidos_direccion_ok check (direccion in ('azbuka', 'abece'));
+
+create or replace function public.mi_direccion() returns text
+language sql stable security definer set search_path = public as $$
+  select coalesce((select direccion from public.permitidos where email = public.mi_email()), 'azbuka')
+$$;
+revoke all on function public.mi_direccion() from public, anon;
+grant execute on function public.mi_direccion() to authenticated;
