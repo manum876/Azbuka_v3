@@ -22,6 +22,9 @@
    la forma final. Es una guía, no cuenta para el semáforo.
 
    Uso: h(AzEscrituraMano, { letras: ALPHABET, inicial: "Б", c })
+   Abecé (27/10/2026): props opcionales tx (los textos, en ruso: ver
+   MANO_TX abajo), hablar (la voz: azHablarEs) y lang ("es"). Sin ellas,
+   todo queda como en Azbuka (textos en español, voz rusa).
    ============================================================ */
 (function () {
   const h = React.createElement;
@@ -77,7 +80,19 @@
     return { prec, cob, f };
   }
 
-  function AzEscrituraMano({ letras, inicial, c }) {
+  /* Textos por defecto (Azbuka). Abecé pasa los suyos con la prop tx. */
+  const MANO_TX = {
+    calcar: "Calcar", libre: "Libre", may: "Mayúscula", min: "Minúscula", ant: "Letra anterior", sig: "Letra siguiente",
+    libreAyuda: may => "Dibuja la " + (may ? "mayúscula" : "minúscula") + " sin mirar el modelo.",
+    lienzo: "Lienzo para dibujar la letra", borrar: "Borrar", escuchar: "▶ Escuchar", comprobar: "Comprobar",
+    vacio: "Primero dibuja la letra.", bien: "✓ Bien", casi: "≈ Casi", mal: "✗ Mal",
+    resultado: (f, cob, prec) => "Coincidencia: " + f + " %. Cubriste el " + cob + " % de la letra y el " + prec + " % de tu trazo cae sobre ella. En verde, la forma de referencia.",
+    nota: "La app compara la forma final, no el orden ni la dirección de los trazos. Es una guía para practicar: cada persona escribe un poco distinto."
+  };
+  function AzEscrituraMano({ letras, inicial, c, tx, hablar, lang }) {
+    const T = Object.assign({}, MANO_TX, tx || {});
+    const voz = hablar || (t => azHablarRu(t));
+    const idioma = lang || "ru";
     const [i, setI] = useState(Math.max(0, letras.findIndex(l => l.upper === inicial)));
     const [may, setMay] = useState(true);
     const [modo, setModo] = useState("calcar");
@@ -158,34 +173,34 @@
     return h("div", null,
       h("style", null, `.mano-cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;}`),
       h("div", { style: { display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4 } },
-        h("button", { className: "pair-btn", style: chip(modo === "calcar"), onClick: () => setModo("calcar") }, "Calcar"),
-        h("button", { className: "pair-btn", style: chip(modo === "libre"), onClick: () => setModo("libre") }, "Libre"),
+        h("button", { className: "pair-btn", style: chip(modo === "calcar"), onClick: () => setModo("calcar") }, T.calcar),
+        h("button", { className: "pair-btn", style: chip(modo === "libre"), onClick: () => setModo("libre") }, T.libre),
         h("span", { style: { flex: 1 } }),
-        h("button", { className: "pair-btn", style: chip(may), onClick: () => setMay(true) }, "Mayúscula"),
-        h("button", { className: "pair-btn", style: chip(!may), onClick: () => setMay(false) }, "Minúscula")),
+        h("button", { className: "pair-btn", style: chip(may), onClick: () => setMay(true) }, T.may),
+        h("button", { className: "pair-btn", style: chip(!may), onClick: () => setMay(false) }, T.min)),
       h("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 14 } },
-        h("button", { style: Object.assign({}, btn, { flex: "0 0 44px", padding: 0, height: 44 }), onClick: () => ir(-1), "aria-label": "Letra anterior" }, "‹"),
+        h("button", { style: Object.assign({}, btn, { flex: "0 0 44px", padding: 0, height: 44 }), onClick: () => ir(-1), "aria-label": T.ant }, "‹"),
         h("div", { style: { textAlign: "center" } },
-          h("div", { lang: "ru", style: { fontSize: 30, fontWeight: 800, color: c.gold, lineHeight: 1 } }, l.upper + " " + l.lower),
-          h("div", { lang: "ru", style: { fontSize: 12, color: c.textMuted, marginTop: 4 } }, l.name)),
-        h("button", { style: Object.assign({}, btn, { flex: "0 0 44px", padding: 0, height: 44 }), onClick: () => ir(1), "aria-label": "Letra siguiente" }, "›")),
-      modo === "libre" && h("div", { style: { fontSize: 13, color: c.textSub, textAlign: "center", marginTop: 8 } }, "Dibuja la " + (may ? "mayúscula" : "minúscula") + " sin mirar el modelo."),
+          h("div", { lang: idioma, style: { fontSize: 30, fontWeight: 800, color: c.gold, lineHeight: 1 } }, l.upper + " " + l.lower),
+          h("div", { lang: idioma, style: { fontSize: 12, color: c.textMuted, marginTop: 4 } }, l.name)),
+        h("button", { style: Object.assign({}, btn, { flex: "0 0 44px", padding: 0, height: 44 }), onClick: () => ir(1), "aria-label": T.sig }, "›")),
+      modo === "libre" && h("div", { style: { fontSize: 13, color: c.textSub, textAlign: "center", marginTop: 8 } }, T.libreAyuda(may)),
       h("div", { style: { position: "relative", width: "78%", maxWidth: 300, aspectRatio: "1 / 1", margin: "12px auto 0", background: c.card, border: `1px solid ${col || c.border}`, borderRadius: 16, overflow: "hidden" } },
         h("div", { style: { position: "absolute", left: "8%", right: "8%", top: "62%", borderTop: `1px dashed ${c.border}` } }),
         h("canvas", { ref: guia, width: 600, height: 600, className: "mano-cv", style: { pointerEvents: "none" } }),
-        h("canvas", { ref: lienzo, width: 600, height: 600, className: "mano-cv", "aria-label": "Lienzo para dibujar la letra",
+        h("canvas", { ref: lienzo, width: 600, height: 600, className: "mano-cv", "aria-label": T.lienzo,
           onPointerDown: abajo, onPointerMove: mover, onPointerUp: arriba, onPointerCancel: arriba, onPointerLeave: arriba })),
       h("div", { style: { display: "flex", gap: 8, marginTop: 12, maxWidth: 340, marginLeft: "auto", marginRight: "auto" } },
-        h("button", { style: btn, onClick: limpiar }, "Borrar"),
-        h("button", { style: btn, onClick: () => azHablarRu(l.lower) }, "▶ Escuchar"),
-        h("button", { style: Object.assign({}, btn, { background: c.gold, borderColor: c.gold, color: c.bg }), onClick: comprobar }, "Comprobar")),
+        h("button", { style: btn, onClick: limpiar }, T.borrar),
+        h("button", { style: btn, onClick: () => voz(l.hablar || l.lower) }, T.escuchar),
+        h("button", { style: Object.assign({}, btn, { background: c.gold, borderColor: c.gold, color: c.bg }), onClick: comprobar }, T.comprobar)),
       res && h("div", { style: { maxWidth: 340, margin: "12px auto 0", fontSize: 14, lineHeight: 1.5, color: c.textSub } },
-        res.vacio ? "Primero dibuja la letra." : h(React.Fragment, null,
+        res.vacio ? T.vacio : h(React.Fragment, null,
           h("span", { style: { display: "inline-block", fontSize: 13, fontWeight: 800, borderRadius: 8, padding: "3px 10px", color: col, background: col + "22", border: "1px solid " + col, marginRight: 8 } },
-            res.r === 2 ? "✓ Bien" : res.r === 1 ? "≈ Casi" : "✗ Mal"),
-          "Coincidencia: " + Math.round(res.f * 100) + " %. Cubriste el " + Math.round(res.cob * 100) + " % de la letra y el " + Math.round(res.prec * 100) + " % de tu trazo cae sobre ella. En verde, la forma de referencia.")),
+            res.r === 2 ? T.bien : res.r === 1 ? T.casi : T.mal),
+          T.resultado(Math.round(res.f * 100), Math.round(res.cob * 100), Math.round(res.prec * 100)))),
       h("div", { style: { maxWidth: 340, margin: "14px auto 0", fontSize: 12, color: c.textMuted, lineHeight: 1.5 } },
-        "La app compara la forma final, no el orden ni la dirección de los trazos. Es una guía para practicar: cada persona escribe un poco distinto."));
+        T.nota));
   }
 
   window.AzEscrituraMano = AzEscrituraMano;

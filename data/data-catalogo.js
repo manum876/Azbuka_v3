@@ -125,11 +125,12 @@ var AZ_CATALOGO = {
     unidades: [],            /* se definen con el programa del curso (Fase 5) */
     /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo
        orden y con el mismo color que su equivalente de Azbuka, glifo de dos
-       letras latinas. Se suman a medida que se construyen (27/10/2026: Diccionario, Verbos y Gramática).
+       letras latinas. Se suman a medida que se construyen (27/10/2026: Diccionario, Alfabeto, Verbos y Gramática).
        Orden final: Словарь · Алфавит и произношение · Диалоги · Чтение ·
        Болтаем с Лусией · Глаголы · Грамматика · Тетрадь. */
     modulos: [
       { id: "diccionario", title: "Словарь", desc: "Весь словарь, по темам и частям речи", href: "ficha.html", icon: "orange", glyph: "Dc" },
+      { id: "alfabeto", title: "Алфавит и произношение", desc: "Буквы, звуки и письмо от руки", href: "alfabeto.html", icon: "yellow", glyph: "Ab" },
       { id: "verbos", title: "Глаголы", desc: "Спряжение всех глаголов словаря", href: "verbos.html", icon: "blue", glyph: "Vb" },
       { id: "gramatica", title: "Грамматика", desc: "Род, число, артикли и местоимения: формы и таблицы", href: "gramatica.html", icon: "purple", glyph: "Gr" },
       { id: "cuaderno", title: "Тетрадь", desc: "Твои заметки и то, что ты сохраняешь в приложении", href: "cuaderno.html", icon: "pink", glyph: "Cu" },

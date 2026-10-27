@@ -73,32 +73,98 @@
 <body>
 <div id="root"></div>
 <script src="assets/preact.js"></script>
-<script src="data/data-lexicon.js"></script>
 <script src="data/data-catalogo.js"></script>
 <script src="js/core.js"></script>
+<!-- Los datos de la dirección activa (27/10/2026): en Azbuka, el léxico ruso y el
+     alfabeto cirílico; en Abecé, el léxico español y el alfabeto español -->
+<script>
+(AZ_DIRECCION.id === "abece"
+  ? ["data/data-lexicon-es.js", "data/data-alfabeto-es.js"]
+  : ["data/data-lexicon.js", "data/data-alphabet.js"]
+).forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
 <script src="assets/supabase.js"></script>
 <script src="js/cuenta.js"></script>
 <script src="js/progress.js"></script>
-<script src="data/data-alphabet.js"></script>
 <script src="js/shell.js"></script>
 <script src="js/mano.js"></script>
 <script>
 const { useState, useEffect } = htmPreact;
 
+/* ── Dirección (27/10/2026): Azbuka (alfabeto cirílico, textos en español) o
+   Abecé (alfabeto español, textos en ruso: borrador para Iván). La página y
+   las clases son las mismas; cambian los datos (ALFABETO_ES, con «es» en las
+   palabras y los dígrafos ch, ll, rr, qu, gu al final), la voz y los textos. ── */
+const ES = AZ_DIRECCION.id === "abece" && typeof ALFABETO_ES !== "undefined";
+const LETRAS = ES ? ALFABETO_ES : ALPHABET;
+if (ES) document.title = "Abecé · Алфавит";
+const CLAVE = l => (ES ? "abc-es:" : "alfabeto:") + l.upper;   /* semáforo de cada letra */
+const TX = ES ? {
+  buscar: "Найти букву…", heroLetras: "A B C D", heroTitulo: "Испанский алфавит",
+  heroTag: n => "27 букв и " + n + " сочетаний · Звуки, письмо и примеры",
+  total: "Всего", aprendiendo: "Изучаю", dominadas: "Выучено", mano: "✍️ Писать от руки",
+  pron: "Произношение", nombres: "Названия", nada: q => "Нет букв по запросу «" + q + "»",
+  digrafos: "Сочетания букв: один звук",
+  manoTitulo: "Писать от руки", manoDesc: "Так испанцы пишут от руки. Нарисуй букву пальцем: сначала обведи её, потом — сама.",
+  volver: "Алфавит", ant: "Предыдущая буква", sig: "Следующая буква",
+  sonido: (l) => "Звук: /" + l.translit + "/" + (l.ipa && l.ipa.length ? " · IPA: " + l.ipa.map(x => "[" + x + "]").join(", ") : ""),
+  escuchar: "▶ Слушать", escribir: "✍️ Написать",
+  niveles: ["Не изучено", "Изучаю", "Выучено"],
+  comoPron: "Как произносить", parecido: "Похоже в русском", errores: "Частые ошибки", consejo: "Совет",
+  similares: "Похожие буквы", palabras: "Слова для практики", ficha: "Открыть в словаре"
+} : {
+  buscar: "Buscar letra…", heroLetras: "А Б В Г", heroTitulo: "El Alfabeto Cirílico Ruso",
+  heroTag: () => "33 letras · Pronunciación, escritura y uso real",
+  total: "Total", aprendiendo: "Aprendiendo", dominadas: "Dominadas", mano: "✍️ Escribir a mano",
+  pron: "Pronunciación", nombres: "Nombres", nada: q => `No se encontraron letras para "${q}"`,
+  digrafos: "",
+  manoTitulo: "Escribir a mano", manoDesc: "Así escriben los rusos a mano. Dibuja la letra con el dedo: primero calcándola y después sola.",
+  volver: "Alfabeto", ant: "Letra anterior", sig: "Letra siguiente",
+  sonido: (l) => "Transliteración: /" + l.translit + "/",
+  escuchar: "▶ Escuchar letra", escribir: "✍️ Escribirla",
+  niveles: ["No estudiada", "Aprendiendo", "Dominada"],
+  comoPron: "Cómo pronunciarlo", parecido: "Parecido en español", errores: "Errores comunes", consejo: "Consejo",
+  similares: "Letras similares", palabras: "Palabras de práctica", ficha: "Ver en el Diccionario"
+};
+/* Textos de mano.js en Abecé (en Azbuka, los suyos por defecto) */
+const MANO_TX_RU = {
+  calcar: "Обвести", libre: "Самому", may: "Заглавная", min: "Строчная", ant: "Предыдущая буква", sig: "Следующая буква",
+  libreAyuda: may => "Нарисуй " + (may ? "заглавную" : "строчную") + " букву, не глядя на образец.",
+  lienzo: "Поле для рисования буквы", borrar: "Стереть", escuchar: "▶ Слушать", comprobar: "Проверить",
+  vacio: "Сначала нарисуй букву.", bien: "✓ Верно", casi: "≈ Почти", mal: "✗ Неверно",
+  resultado: (f, cob, prec) => "Совпадение: " + f + " %. Ты покрыл " + cob + " % буквы, и " + prec + " % твоей линии лежит на ней. Зелёным — образец.",
+  nota: "Приложение сравнивает только итоговую форму, а не порядок и направление линий. Это подсказка для практики: все пишут немного по-разному."
+};
+const hablarLetra = l => ES ? azHablarEs(l.name) : azHablarRu(l.lower);
+const hablarPalabra = w => ES ? azHablarEs(w.es) : azHablarRu(w.cyrillic);
 function speakRu(text) { azHablarRu(text); }   /* voz compartida: core.js */
 
+/* Resalta la letra en la palabra. En Abecé, sin importar la tilde (a = á) y
+   con los dígrafos como un bloque (ll, rr, qu…). */
 function highlightWord(word, letter) {
-  return word.split("").map((ch, i) => {
-    const match = ch === letter.upper || ch === letter.lower;
-    return match ? React.createElement("span", { key: i, style: { color: "#C9A84C", fontWeight: 800 } }, ch) : ch;
-  });
+  const sty = { color: "#C9A84C", fontWeight: 800 };
+  if (!ES) {
+    return word.split("").map((ch, i) => {
+      const match = ch === letter.upper || ch === letter.lower;
+      return match ? React.createElement("span", { key: i, style: sty }, ch) : ch;
+    });
+  }
+  const base = t => t.toLowerCase().replace(/[áàä]/g, "a").replace(/[éè]/g, "e").replace(/[íï]/g, "i").replace(/[óò]/g, "o").replace(/[úü]/g, "u");
+  const pat = letter.lower === "ñ" || letter.lower === "ü" ? letter.lower : base(letter.lower);
+  const w = letter.lower === "ñ" ? word.toLowerCase() : base(word);
+  const out = [];
+  for (let i = 0; i < word.length;) {
+    if (w.substr(i, pat.length) === pat) { out.push(React.createElement("span", { key: i, style: sty }, word.substr(i, pat.length))); i += pat.length; }
+    else { out.push(word[i]); i++; }
+  }
+  return out;
 }
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const MANO0 = new URLSearchParams(location.search).get("mano");
   const [page, setPage] = useState(MANO0 ? "mano" : "grid"); // grid | detail | mano
-  const [manoLetra, setManoLetra] = useState(MANO0 || "А");
+  const [manoLetra, setManoLetra] = useState(MANO0 || (ES ? "A" : "А"));
   const [selectedId, setSelectedId] = useState(null);
   const [search, setSearch] = useState("");
   const [showPronun, setShowPronun] = useState(true);
@@ -111,14 +177,14 @@ function App() {
       setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
       await azLoadProgress();
       const lv = {};
-      ALPHABET.forEach(l => { lv[l.upper] = azItem('alfabeto:' + l.upper).level; });
+      LETRAS.forEach(l => { lv[l.upper] = azItem(CLAVE(l)).level; });
       setLetterLevels(lv);
       azModuleTouch('alfabeto');
     })();
   }, []);
 
   function setLevel(letter, level) {
-    azSetItemLevel('alfabeto:' + letter.upper, level);
+    azSetItemLevel(CLAVE(letter), level);
     setLetterLevels(prev => ({ ...prev, [letter.upper]: level }));
   }
 
@@ -132,28 +198,28 @@ function App() {
   const yellow = "#C9B369";
   const green = darkMode ? "#4CAF82" : "#2E7D55";
 
-  const selected = selectedId ? ALPHABET.find(l => l.id === selectedId) : null;
-  const idx = selected ? ALPHABET.findIndex(l => l.id === selected.id) : -1;
-  function goPrev() { if (idx > 0) setSelectedId(ALPHABET[idx - 1].id); }
-  function goNext() { if (idx < ALPHABET.length - 1) setSelectedId(ALPHABET[idx + 1].id); }
+  const selected = selectedId ? LETRAS.find(l => l.id === selectedId) : null;
+  const idx = selected ? LETRAS.findIndex(l => l.id === selected.id) : -1;
+  function goPrev() { if (idx > 0) setSelectedId(LETRAS[idx - 1].id); }
+  function goNext() { if (idx < LETRAS.length - 1) setSelectedId(LETRAS[idx + 1].id); }
 
   const learning = Object.values(letterLevels).filter(v => v === 1).length;
   const dominated = Object.values(letterLevels).filter(v => v === 2).length;
-  const pct = Math.round((dominated / ALPHABET.length) * 100);
+  const pct = Math.round((dominated / LETRAS.length) * 100);
 
   const q = search.trim().toLowerCase();
-  const filtered = !q ? ALPHABET : ALPHABET.filter(l =>
+  const filtered = !q ? LETRAS : LETRAS.filter(l =>
     l.upper.toLowerCase().includes(q) || l.lower.includes(q) ||
-    l.name.toLowerCase().includes(q) || azSinMarcas(l.pronunciation).toLowerCase().includes(q)
+    l.name.toLowerCase().includes(q) || azSinMarcas(l.pronunciation).toLowerCase().includes(q) || (l.nameTl || "").includes(q)
   );
 
   const tabs = page === "mano" ? [
-    { id: "back", icon: "⊞", label: "Alfabeto", action: () => setPage("grid") }
+    { id: "back", icon: "⊞", label: TX.volver, action: () => setPage("grid") }
   ] : page === "detail" ? [
-    { id: "back", icon: "⊞", aria: "Alfabeto", action: () => setPage("grid") },
-    { id: "prev", icon: "‹", aria: "Letra anterior", action: goPrev },
-    { id: "count", texto: `${idx + 1} / ${ALPHABET.length}` },
-    { id: "next", icon: "›", aria: "Letra siguiente", action: goNext }
+    { id: "back", icon: "⊞", aria: TX.volver, action: () => setPage("grid") },
+    { id: "prev", icon: "‹", aria: TX.ant, action: goPrev },
+    { id: "count", texto: `${idx + 1} / ${LETRAS.length}` },
+    { id: "next", icon: "›", aria: TX.sig, action: goNext }
   ] : [];
 
   return React.createElement(AzShell, {
@@ -161,38 +227,38 @@ function App() {
   },
 
     page === "mano" && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
-      React.createElement("h1", { style: { fontSize: 24, fontWeight: 800, color: c.text, margin: "4px 0 6px" } }, "Escribir a mano"),
-      React.createElement("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6, marginBottom: 12 } },
-        "Así escriben los rusos a mano. Dibuja la letra con el dedo: primero calcándola y después sola."),
-      React.createElement(AzEscrituraMano, { key: manoLetra, letras: ALPHABET, inicial: manoLetra, c })
+      React.createElement("h1", { style: { fontSize: 24, fontWeight: 800, color: c.text, margin: "4px 0 6px" } }, TX.manoTitulo),
+      React.createElement("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6, marginBottom: 12 } }, TX.manoDesc),
+      ES ? React.createElement(AzEscrituraMano, { key: manoLetra, letras: LETRAS.filter(l => !l.digrafo).map(l => Object.assign({}, l, { hablar: l.name })), inicial: manoLetra, c, tx: MANO_TX_RU, hablar: t => azHablarEs(t), lang: "es" })
+         : React.createElement(AzEscrituraMano, { key: manoLetra, letras: LETRAS, inicial: manoLetra, c })
     ),
 
     page === "grid" && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
 
       React.createElement("input", {
         className: "abc-search", value: search, onInput: (e) => setSearch(e.target.value),
-        placeholder: "Buscar letra…",
+        placeholder: TX.buscar,
         style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text }
       }),
 
       React.createElement("div", { className: "abc-hero", style: { background: c.card, border: `1px solid ${c.border}` } },
-        React.createElement("div", { className: "abc-hero-letters", style: { color: c.gold } }, "А Б В Г"),
-        React.createElement("div", { className: "abc-hero-title", style: { color: c.text } }, "El Alfabeto Cirílico Ruso"),
-        React.createElement("div", { className: "abc-hero-tag", style: { color: c.textMuted } }, "33 letras · Pronunciación, escritura y uso real")
+        React.createElement("div", { className: "abc-hero-letters", style: { color: c.gold } }, TX.heroLetras),
+        React.createElement("div", { className: "abc-hero-title", style: { color: c.text } }, TX.heroTitulo),
+        React.createElement("div", { className: "abc-hero-tag", style: { color: c.textMuted } }, TX.heroTag(LETRAS.filter(l => l.digrafo).length))
       ),
 
       React.createElement("div", { className: "stat-row" },
         React.createElement("div", { className: "stat-card", style: { background: c.card, border: `1px solid ${c.border}` } },
-          React.createElement("div", { className: "stat-num", style: { color: c.text } }, ALPHABET.length),
-          React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, "Total")
+          React.createElement("div", { className: "stat-num", style: { color: c.text } }, LETRAS.length),
+          React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, TX.total)
         ),
         React.createElement("div", { className: "stat-card", style: { background: c.card, border: `1px solid ${c.border}` } },
           React.createElement("div", { className: "stat-num", style: { color: yellow } }, learning),
-          React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, "Aprendiendo")
+          React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, TX.aprendiendo)
         ),
         React.createElement("div", { className: "stat-card", style: { background: c.card, border: `1px solid ${c.border}` } },
           React.createElement("div", { className: "stat-num", style: { color: green } }, dominated),
-          React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, "Dominadas")
+          React.createElement("div", { className: "stat-lbl", style: { color: c.textMuted } }, TX.dominadas)
         )
       ),
 
@@ -201,26 +267,28 @@ function App() {
       ),
 
       React.createElement("button", {
-        className: "btn", onClick: () => { setManoLetra("А"); setPage("mano"); window.scrollTo(0, 0); },
+        className: "btn", onClick: () => { setManoLetra(ES ? "A" : "А"); setPage("mano"); window.scrollTo(0, 0); },
         style: { width: "100%", marginBottom: 14, padding: "12px 16px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 14, fontWeight: 700 }
-      }, "✍️ Escribir a mano"),
+      }, TX.mano),
 
       React.createElement("div", { className: "toggle-row" },
         React.createElement("div", {
           className: "toggle-btn", onClick: () => setShowPronun(v => !v),
           style: { background: showPronun ? c.gold : c.bg3, color: showPronun ? "#0F0F14" : c.textMuted, border: `1px solid ${showPronun ? c.gold : c.border}` }
-        }, "Pronunciación"),
+        }, TX.pron),
         React.createElement("div", {
           className: "toggle-btn", onClick: () => setShowNames(v => !v),
           style: { background: showNames ? c.gold : c.bg3, color: showNames ? "#0F0F14" : c.textMuted, border: `1px solid ${showNames ? c.gold : c.border}` }
-        }, "Nombres")
+        }, TX.nombres)
       ),
 
       React.createElement("div", { className: "lgrid" },
-        filtered.map(letter => {
+        filtered.map((letter, n) => {
           const lvl = letterLevels[letter.upper] || 0;
+          /* Abecé: los dígrafos van al final, con su título a lo ancho */
+          const titulo = ES && letter.digrafo && !(filtered[n - 1] && filtered[n - 1].digrafo);
           const lvlColor = lvl === 2 ? green : lvl === 1 ? yellow : c.textMuted;
-          return React.createElement("div", {
+          const tarjeta = React.createElement("div", {
             key: letter.id, className: "lcard letter-card",
             onClick: () => openLetter(letter),
             style: { background: c.card, border: `1px solid ${lvl > 0 ? lvlColor + "55" : c.border}` }
@@ -234,12 +302,13 @@ function App() {
             showNames && React.createElement("div", { style: { fontSize: 10, color: c.textMuted, marginTop: 6, fontStyle: "italic" } }, letter.name),
             showPronun && React.createElement("div", { style: { fontSize: 10, color: c.textSub, marginTop: 3 } }, "/" + letter.translit + "/")
           );
+          return titulo ? [React.createElement("div", { key: "dg", style: { gridColumn: "1 / -1", fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, margin: "10px 2px 0" } }, TX.digrafos), tarjeta] : tarjeta;
         })
       ),
 
       filtered.length === 0 && React.createElement("div", { style: { textAlign: "center", padding: 40, color: c.textMuted } },
         React.createElement("div", { style: { fontSize: 32, marginBottom: 6 } }, "🔍"),
-        React.createElement("p", null, `No se encontraron letras para "${search}"`))
+        React.createElement("p", null, TX.nada(search)))
     ),
 
     page === "detail" && selected && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.25s ease" } },
@@ -251,26 +320,26 @@ function App() {
             React.createElement("div", { className: "det-cursive", style: { color: c.gold, textAlign: "center" } }, selected.upper + "\u2009" + selected.lower)
           ),
           React.createElement("div", { style: { flex: 1, minWidth: 180 } },
-            React.createElement("div", { className: "det-name", style: { color: c.text } }, selected.name),
-            React.createElement("div", { className: "det-translit", style: { color: c.textSub } }, "Transliteración: /" + selected.translit + "/"),
+            React.createElement("div", { className: "det-name", style: { color: c.text } }, ES ? selected.name + " · " + selected.nameTl : selected.name),
+            React.createElement("div", { className: "det-translit", style: { color: c.textSub } }, TX.sonido(selected)),
             React.createElement("div", { className: "det-pron", style: { color: c.textMuted } }, azFmt(selected.pronunciation)),
             /* Botones en una fila con espacio (14/10/2026): si no entran, bajan alineados */
             React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } },
             React.createElement("button", {
-              className: "btn", onClick: () => speakRu(selected.lower),
+              className: "btn", onClick: () => hablarLetra(selected),
               style: { background: c.gold, color: "#0F0F14", fontWeight: 700, fontSize: 12.5, padding: "9px 16px", borderRadius: 10 }
-            }, "▶ Escuchar letra"),
-            React.createElement("button", {
+            }, TX.escuchar),
+            !(ES && selected.digrafo) && React.createElement("button", {
               className: "btn", onClick: () => { setManoLetra(selected.upper); setPage("mano"); window.scrollTo(0, 0); },
               style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontWeight: 700, fontSize: 12.5, padding: "9px 16px", borderRadius: 10 }
-            }, "✍️ Escribirla"))
+            }, TX.escribir))
           )
         ),
         React.createElement("div", { className: "status-row", style: { borderColor: c.border } },
           [0, 1, 2].map(lvl => {
             const active = (letterLevels[selected.upper] || 0) === lvl;
             const col = lvl === 2 ? green : lvl === 1 ? yellow : orange;
-            const label = lvl === 0 ? "No estudiada" : lvl === 1 ? "Aprendiendo" : "Dominada";
+            const label = TX.niveles[lvl];
             return React.createElement("div", {
               key: lvl, className: "status-btn", onClick: () => setLevel(selected, lvl),
               style: { background: active ? col + "22" : c.bg3, border: `1px solid ${active ? col : c.border}`, color: active ? col : c.textMuted }
@@ -281,42 +350,42 @@ function App() {
 
       React.createElement("div", { className: "info-grid" },
         React.createElement("div", { className: "info-card", style: { background: c.card, border: `1px solid ${c.border}` } },
-          React.createElement("div", { className: "info-title", style: { color: c.gold } }, "Cómo pronunciarlo"),
+          React.createElement("div", { className: "info-title", style: { color: c.gold } }, TX.comoPron),
           React.createElement("div", { className: "info-text", style: { color: c.text } }, azFmt(selected.details.description)),
-          React.createElement("div", { className: "info-sub", style: { color: c.textSub } }, "Parecido en español"),
+          React.createElement("div", { className: "info-sub", style: { color: c.textSub } }, TX.parecido),
           React.createElement("div", { className: "info-text", style: { color: c.textMuted, marginBottom: 0 } }, azFmt(selected.details.similar))
         ),
         React.createElement("div", { className: "info-card", style: { background: c.card, border: `1px solid ${c.border}` } },
-          React.createElement("div", { className: "info-title", style: { color: c.gold } }, "Errores comunes"),
+          React.createElement("div", { className: "info-title", style: { color: c.gold } }, TX.errores),
           React.createElement("div", { className: "info-text", style: { color: c.text } }, azFmt(selected.details.mistakes)),
-          React.createElement("div", { className: "info-sub", style: { color: c.textSub } }, "Consejo"),
+          React.createElement("div", { className: "info-sub", style: { color: c.textSub } }, TX.consejo),
           React.createElement("div", { className: "info-text", style: { color: c.textMuted, marginBottom: 0 } }, azFmt(selected.details.tips))
         )
       ),
 
       React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
-        React.createElement("div", { className: "info-title", style: { color: c.gold } }, "Letras similares"),
+        React.createElement("div", { className: "info-title", style: { color: c.gold } }, TX.similares),
         React.createElement("div", { className: "info-text", style: { color: c.text, marginBottom: 0 } }, azFmt(selected.details.similar_letters))
       ),
 
       React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
-        React.createElement("div", { className: "info-title", style: { color: c.gold, marginBottom: 4 } }, "Palabras de práctica"),
+        React.createElement("div", { className: "info-title", style: { color: c.gold, marginBottom: 4 } }, TX.palabras),
         selected.words.map((w, i) => {
           return React.createElement("div", { key: i, className: "word-row", style: { borderColor: c.border } },
             React.createElement("div", { className: "word-main" },
-              React.createElement("div", { className: "word-ru", style: { color: c.text } }, highlightWord(w.cyrillic, selected)),
-              showTranslit && React.createElement("div", { className: "word-translit", style: { color: c.textSub } }, w.translit),
-              React.createElement("div", { className: "word-cursive", style: { color: c.gold } }, w.cyrillic),
+              React.createElement("div", { className: "word-ru", style: { color: c.text } }, highlightWord(ES ? w.es : w.cyrillic, selected)),
+              showTranslit && React.createElement("div", { className: "word-translit" + (ES ? " az-tl" : ""), style: { color: c.textSub } }, w.translit),
+              React.createElement("div", { className: "word-cursive", style: { color: c.gold } }, ES ? w.es : w.cyrillic),
               React.createElement("div", { className: "word-es", style: { color: c.textMuted } }, w.meaning),
               React.createElement("div", { className: "word-note", style: { color: c.textSub } }, azFmt(w.note))
             ),
             React.createElement("div", { className: "word-btns" },
               React.createElement("button", {
-                className: "word-btn btn", onClick: () => speakRu(w.cyrillic),
+                className: "word-btn btn", onClick: () => hablarPalabra(w),
                 style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
               }, "▶"),
               w.lexId && React.createElement("a", {
-                className: "word-btn btn", href: "ficha.html?id=" + w.lexId,
+                className: "word-btn btn", href: "ficha.html?id=" + w.lexId, "aria-label": TX.ficha,
                 onClick: (e) => azNavigate(e, "ficha.html?id=" + w.lexId),
                 style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.gold, textDecoration: "none" }
               }, "📖")
