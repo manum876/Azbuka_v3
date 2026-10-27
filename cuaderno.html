@@ -37,8 +37,48 @@
 const { useState, useEffect, useRef } = htmPreact;
 const h = React.createElement;
 
+/* ── Textos por dirección (27/10/2026): Azbuka en español, Abecé en ruso (borrador
+   para Iván). Las notas son las mismas en las dos direcciones (az_cuaderno). ── */
+const RU = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
+const nRu = (n, a, b, c) => { const d = n % 10, cc = n % 100; return d === 1 && cc !== 11 ? a : d >= 2 && d <= 4 && (cc < 12 || cc > 14) ? b : c; };
+const TX = RU ? {
+  fecha: "ru-RU", titulo: "Тетрадь", bandeja: "Без раздела",
+  resumen: (n, s) => n + " " + nRu(n, "заметка", "заметки", "заметок") + " в " + s + " " + nRu(s, "разделе", "разделах", "разделах") + ".",
+  vacio: "Твои заметки: то, что ты пишешь сам, и то, что сохраняешь в приложении.",
+  nota: "+ Заметка", seccion: "+ Раздел", buscar: "Поиск в тетради…", borrarBusqueda: "Очистить поиск",
+  exportar: "Экспорт", ordenar: "Порядок", listo: "Готово", resultados: "Результаты", sinHits: q => "Нет заметок с «" + q + "».",
+  bandejaVacia: "Сюда попадает всё, что ты сохраняешь на других экранах приложения.", secVacia: "Раздел пуст.",
+  copia: "Резервная копия", cerrar: "Закрыть", editar: "Редактировать заметку", nueva: "Новая заметка", escribe: "Напиши заметку…",
+  desde: "Сохранено с экрана: ", lblSeccion: "Раздел", guardar: "Сохранить", borrarNota: "Удалить заметку",
+  confBorrar: "Удалить эту заметку?", nombreNueva: "Название нового раздела:", nombreOtro: "Новое название раздела:",
+  confSeccion: (t, conNotas) => "Удалить раздел «" + t + "»?" + (conNotas ? " Его заметки перейдут в «Без раздела»." : ""),
+  subir: "Поднять", bajar: "Опустить", renombrar: "Переименовать", borrarSec: "Удалить раздел",
+  expKicker: "Экспорт", expTitulo: "Поделиться тетрадью", expSub: "Создаётся файл и открывается меню «Поделиться» телефона: WhatsApp, почта, «Файлы»…",
+  queExp: "Что экспортировать", todo: "Вся тетрадь", formato: "Формат", pdf: "PDF · чтобы читать или распечатать", docx: "Word (.docx) · чтобы редактировать дальше",
+  preparando: "Готовим файл…", fallo: "Не удалось создать файл. В первый раз для экспорта нужен интернет.",
+  docTitulo: "Тетрадь Abecé", pie: "Abecé", archivo: "abece-tetrad"
+} : {
+  fecha: "es-AR", titulo: "Cuaderno", bandeja: "Sin ordenar",
+  resumen: (n, s) => n + (n === 1 ? " nota" : " notas") + " en " + s + (s === 1 ? " sección." : " secciones."),
+  vacio: "Tus notas: lo que escribes tú y lo que guardas desde la app.",
+  nota: "+ Nota", seccion: "+ Sección", buscar: "Buscar en el cuaderno…", borrarBusqueda: "Borrar búsqueda",
+  exportar: "Exportar", ordenar: "Ordenar", listo: "Listo", resultados: "Resultados", sinHits: q => "No hay notas con «" + q + "».",
+  bandejaVacia: "Aquí cae lo que guardes desde otras pantallas de la app.", secVacia: "Sección vacía.",
+  copia: "Copia de seguridad", cerrar: "Cerrar", editar: "Editar nota", nueva: "Nota nueva", escribe: "Escribe tu nota…",
+  desde: "Guardada desde: ", lblSeccion: "Sección", guardar: "Guardar", borrarNota: "Borrar nota",
+  confBorrar: "¿Borrar esta nota?", nombreNueva: "Nombre de la sección nueva:", nombreOtro: "Nuevo nombre de la sección:",
+  confSeccion: (t, conNotas) => "¿Borrar la sección «" + t + "»?" + (conNotas ? " Sus notas pasan a «Sin ordenar»." : ""),
+  subir: "Subir", bajar: "Bajar", renombrar: "Renombrar", borrarSec: "Borrar sección",
+  expKicker: "Exportar", expTitulo: "Compartir el cuaderno", expSub: "Se genera un archivo y se abre el menú Compartir del teléfono: WhatsApp, Mail, Archivos…",
+  queExp: "Qué exportar", todo: "Todo el cuaderno", formato: "Formato", pdf: "PDF · para leer o imprimir", docx: "Word (.docx) · para seguir editando",
+  preparando: "Preparando el archivo…", fallo: "No se pudo generar el archivo. Revisa la conexión la primera vez que exportas.",
+  docTitulo: "Cuaderno de Azbuka", pie: "Азбука", archivo: "azbuka-cuaderno"
+};
+/* El título de la sección fija se muestra en el idioma de la dirección (en los datos dice «Sin ordenar») */
+const tituloSec = s => s.id === "bandeja" ? TX.bandeja : s.titulo;
+
 function fecha(iso) {
-  try { const d = new Date(iso); return d.toLocaleDateString("es-AR", { day: "numeric", month: "short", year: "numeric" }); } catch (e) { return ""; }
+  try { const d = new Date(iso); return d.toLocaleDateString(TX.fecha, { day: "numeric", month: "short", year: "numeric" }); } catch (e) { return ""; }
 }
 function normal(t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ё/g, "е"); }
 
@@ -81,18 +121,18 @@ function Editor({ c, nota, seccionId, secciones, onGuardar, onBorrar, onCerrar }
   const ref = useRef(null);
   useEffect(() => { if (!nota && ref.current) ref.current.focus(); }, []);
   return h("div", { className: "sheet", role: "dialog" },
-    h("button", { className: "sheet-x", onClick: onCerrar, "aria-label": "Cerrar" }, "✕"),
+    h("button", { className: "sheet-x", onClick: onCerrar, "aria-label": TX.cerrar }, "✕"),
     h("div", { className: "sheet-in" },
-      h("div", { style: { fontSize: 24, fontWeight: 800, paddingRight: 48, marginBottom: 20 } }, nota ? "Editar nota" : "Nota nueva"),
-      h("textarea", { ref, className: "cu-area", value: texto, placeholder: "Escribe tu nota…", onInput: e => setTexto(e.target.value) }),
-      nota && nota.fuente && h("div", { className: "cu-meta", style: { marginTop: 10 } }, "Guardada desde: ",
+      h("div", { style: { fontSize: 24, fontWeight: 800, paddingRight: 48, marginBottom: 20 } }, nota ? TX.editar : TX.nueva),
+      h("textarea", { ref, className: "cu-area", value: texto, placeholder: TX.escribe, onInput: e => setTexto(e.target.value) }),
+      nota && nota.fuente && h("div", { className: "cu-meta", style: { marginTop: 10 } }, TX.desde,
         h("a", { className: "cu-fuente", href: nota.fuente.href, onClick: e => azNavigate(e, nota.fuente.href) }, nota.fuente.titulo)),
-      h("div", { className: "cu-lbl" }, "Sección"),
+      h("div", { className: "cu-lbl" }, TX.lblSeccion),
       h("select", { className: "cu-select", value: sec, onChange: e => setSec(e.target.value) },
-        secciones.map(s => h("option", { key: s.id, value: s.id }, s.titulo))),
+        secciones.map(s => h("option", { key: s.id, value: s.id }, tituloSec(s)))),
       h("div", { style: { display: "flex", flexDirection: "column", gap: 10, marginTop: 22 } },
-        h("button", { className: "cu-btn", disabled: !texto.trim(), onClick: () => onGuardar(texto.trim(), sec) }, "Guardar"),
-        nota && h("button", { className: "cu-btn peligro", onClick: onBorrar }, "Borrar nota"))));
+        h("button", { className: "cu-btn", disabled: !texto.trim(), onClick: () => onGuardar(texto.trim(), sec) }, TX.guardar),
+        nota && h("button", { className: "cu-btn peligro", onClick: onBorrar }, TX.borrarNota))));
 }
 
 
@@ -145,12 +185,12 @@ async function exportarPDF(cu, cual) {
     doc.setFont("NotoSans", estilo); doc.setFontSize(tam); doc.setTextColor.apply(doc, color);
     doc.splitTextToSize(t, ancho).forEach(l => { salto(tam * interlinea); doc.text(l, M, y + tam); y += tam * interlinea; });
   };
-  texto("Cuaderno de Azbuka", 22, "bold", [26, 26, 32], 1.3);
-  texto(new Date().toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" }), 10, "normal", [120, 120, 130], 1.4);
+  texto(TX.docTitulo, 22, "bold", [26, 26, 32], 1.3);
+  texto(new Date().toLocaleDateString(TX.fecha, { day: "numeric", month: "long", year: "numeric" }), 10, "normal", [120, 120, 130], 1.4);
   y += 10;
   secDeExport(cu, cual).forEach(s => {
     y += 14; salto(40);
-    texto(s.titulo, 15, "bold", [138, 109, 31], 1.3);
+    texto(tituloSec(s), 15, "bold", [138, 109, 31], 1.3);
     doc.setDrawColor(210, 190, 140); doc.line(M, y + 2, W - M, y + 2); y += 10;
     s.notas.forEach(n => {
       y += 6;
@@ -173,7 +213,7 @@ async function exportarPDF(cu, cual) {
   const total = doc.getNumberOfPages();
   for (let i = 1; i <= total; i++) {
     doc.setPage(i); doc.setFont("NotoSans", "normal"); doc.setFontSize(8.5); doc.setTextColor(150, 150, 160);
-    doc.text("Азбука · " + i + " / " + total, W - M, H - 28, { align: "right" });
+    doc.text(TX.pie + " · " + i + " / " + total, W - M, H - 28, { align: "right" });
   }
   return doc.output("blob");
 }
@@ -191,9 +231,9 @@ async function exportarDOCX(cu, cual) {
     const rid = "rIdL" + links.length;
     return '<w:p><w:pPr><w:pStyle w:val="Meta"/></w:pPr><w:hyperlink r:id="' + rid + '"><w:r><w:rPr><w:b/><w:color w:val="8A6D1F"/><w:u w:val="single"/></w:rPr><w:t xml:space="preserve">' + xml(n.fuente.titulo) + '</w:t></w:r></w:hyperlink><w:r><w:t xml:space="preserve"> · ' + f + '</w:t></w:r></w:p>';
   };
-  let cuerpo = p("Cuaderno de Azbuka", "Title") + p(new Date().toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" }), "Meta");
+  let cuerpo = p(TX.docTitulo, "Title") + p(new Date().toLocaleDateString(TX.fecha, { day: "numeric", month: "long", year: "numeric" }), "Meta");
   secDeExport(cu, cual).forEach(s => {
-    cuerpo += p(s.titulo, "Heading1");
+    cuerpo += p(tituloSec(s), "Heading1");
     s.notas.forEach(n => {
       cuerpo += p(n.texto);
       cuerpo += meta(n);
@@ -206,7 +246,7 @@ async function exportarDOCX(cu, cual) {
     "word/_rels/document.xml.rels": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>' +
       links.map((u, i) => '<Relationship Id="rIdL' + (i + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/hyperlink" Target="' + xml(u) + '" TargetMode="External"/>').join("") + '</Relationships>',
     "word/styles.xml": '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles ' + W + '>' +
-      '<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial" w:eastAsia="Arial"/><w:sz w:val="23"/><w:lang w:val="es-AR"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="80" w:line="300" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>' +
+      '<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial" w:eastAsia="Arial"/><w:sz w:val="23"/><w:lang w:val="' + (RU ? "ru-RU" : "es-AR") + '"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="80" w:line="300" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>' +
       '<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/></w:style>' +
       '<w:style w:type="paragraph" w:styleId="Title"><w:name w:val="Title"/><w:basedOn w:val="Normal"/><w:pPr><w:spacing w:after="60"/></w:pPr><w:rPr><w:b/><w:sz w:val="44"/></w:rPr></w:style>' +
       '<w:style w:type="paragraph" w:styleId="Heading1"><w:name w:val="heading 1"/><w:basedOn w:val="Normal"/><w:pPr><w:keepNext/><w:spacing w:before="360" w:after="120"/><w:pBdr><w:bottom w:val="single" w:sz="6" w:space="2" w:color="D2BE8C"/></w:pBdr><w:outlineLvl w:val="0"/></w:pPr><w:rPr><w:b/><w:color w:val="8A6D1F"/><w:sz w:val="30"/></w:rPr></w:style>' +
@@ -225,29 +265,29 @@ function HojaExportar({ c, cu, onCerrar }) {
   const conNotas = cu.secciones.filter(s => s.notas.length);
   const [cual, setCual] = useState("todo");
   const [estado, setEstado] = useState("");
-  const nombre = ext => "azbuka-cuaderno" + (cual === "todo" ? "" : "-" + (cu.secciones.find(s => s.id === cual) || {}).titulo.toLowerCase().normalize("NFD").replace(/[^a-z0-9а-яё]+/gi, "-").replace(/^-|-$/g, "")) + "-" + new Date().toISOString().slice(0, 10) + "." + ext;
+  const nombre = ext => TX.archivo + (cual === "todo" ? "" : "-" + tituloSec(cu.secciones.find(s => s.id === cual) || {}).toLowerCase().normalize("NFD").replace(/[^a-z0-9а-яё]+/gi, "-").replace(/^-|-$/g, "")) + "-" + new Date().toISOString().slice(0, 10) + "." + ext;
   const hacer = async tipo => {
     try {
-      setEstado("Preparando el archivo…");
+      setEstado(TX.preparando);
       const blob = tipo === "pdf" ? await exportarPDF(cu, cual) : await exportarDOCX(cu, cual);
       setEstado("");
       await compartir(blob, nombre(tipo), blob.type);
-    } catch (e) { setEstado("No se pudo generar el archivo. Revisa la conexión la primera vez que exportas."); }
+    } catch (e) { setEstado(TX.fallo); }
   };
   return h("div", { className: "sheet", role: "dialog" },
-    h("button", { className: "sheet-x", onClick: onCerrar, "aria-label": "Cerrar" }, "✕"),
+    h("button", { className: "sheet-x", onClick: onCerrar, "aria-label": TX.cerrar }, "✕"),
     h("div", { className: "sheet-in" },
-      h("div", { className: "cu-lbl", style: { marginTop: 0 } }, "Exportar"),
-      h("div", { style: { fontSize: 24, fontWeight: 800, paddingRight: 48 } }, "Compartir el cuaderno"),
-      h("div", { className: "cu-sub" }, "Se genera un archivo y se abre el menú Compartir del teléfono: WhatsApp, Mail, Archivos…"),
-      h("div", { className: "cu-lbl" }, "Qué exportar"),
+      h("div", { className: "cu-lbl", style: { marginTop: 0 } }, TX.expKicker),
+      h("div", { style: { fontSize: 24, fontWeight: 800, paddingRight: 48 } }, TX.expTitulo),
+      h("div", { className: "cu-sub" }, TX.expSub),
+      h("div", { className: "cu-lbl" }, TX.queExp),
       h("select", { className: "cu-select", value: cual, onChange: e => setCual(e.target.value) },
-        h("option", { value: "todo" }, "Todo el cuaderno"),
-        conNotas.map(s => h("option", { key: s.id, value: s.id }, s.titulo + " (" + s.notas.length + ")"))),
-      h("div", { className: "cu-lbl" }, "Formato"),
+        h("option", { value: "todo" }, TX.todo),
+        conNotas.map(s => h("option", { key: s.id, value: s.id }, tituloSec(s) + " (" + s.notas.length + ")"))),
+      h("div", { className: "cu-lbl" }, TX.formato),
       h("div", { style: { display: "flex", flexDirection: "column", gap: 10 } },
-        h("button", { className: "cu-btn", disabled: !!estado && estado.startsWith("Prep"), onClick: () => hacer("pdf") }, "PDF · para leer o imprimir"),
-        h("button", { className: "cu-btn sec", disabled: !!estado && estado.startsWith("Prep"), onClick: () => hacer("docx") }, "Word (.docx) · para seguir editando")),
+        h("button", { className: "cu-btn", disabled: estado === TX.preparando, onClick: () => hacer("pdf") }, TX.pdf),
+        h("button", { className: "cu-btn sec", disabled: estado === TX.preparando, onClick: () => hacer("docx") }, TX.docx)),
       estado && h("div", { className: "cu-sub", style: { marginTop: 14 } }, estado)));
 }
 
@@ -293,23 +333,23 @@ function App() {
     guardar(n); setEditor(null);
   };
   const borrarNota = () => {
-    if (!confirm("¿Borrar esta nota?")) return;
+    if (!confirm(TX.confBorrar)) return;
     const n = copia();
     n.secciones.forEach(s => { s.notas = s.notas.filter(x => x.id !== editor.nota.id); });
     guardar(n); setEditor(null);
   };
   const nuevaSeccion = () => {
-    const t = prompt("Nombre de la sección nueva:");
+    const t = prompt(TX.nombreNueva);
     if (!t || !t.trim()) return;
     const n = copia(); n.secciones.push({ id: azId(), titulo: t.trim(), notas: [] }); guardar(n);
   };
   const renombrar = s => {
-    const t = prompt("Nuevo nombre de la sección:", s.titulo);
+    const t = prompt(TX.nombreOtro, s.titulo);
     if (!t || !t.trim()) return;
     const n = copia(); n.secciones.find(x => x.id === s.id).titulo = t.trim(); guardar(n);
   };
   const borrarSeccion = s => {
-    if (!confirm("¿Borrar la sección «" + s.titulo + "»?" + (s.notas.length ? " Sus notas pasan a «Sin ordenar»." : ""))) return;
+    if (!confirm(TX.confSeccion(s.titulo, s.notas.length > 0))) return;
     const n = copia(); const i = n.secciones.findIndex(x => x.id === s.id);
     const [quitada] = n.secciones.splice(i, 1);
     n.secciones.find(x => x.id === "bandeja").notas.push(...quitada.notas); guardar(n);
@@ -341,34 +381,34 @@ function App() {
       h("div", { className: "cu-meta" },
         nota.fuente && h("a", { className: "cu-fuente", href: nota.fuente.href, onClick: e => { e.stopPropagation(); azNavigate(e, nota.fuente.href); } }, nota.fuente.titulo),
         h("span", null, fecha(nota.editada || nota.creada)),
-        buscando && h("span", null, "· " + s.titulo))),
+        buscando && h("span", null, "· " + tituloSec(s)))),
     ordenar && h("div", { style: { display: "flex", gap: 6 } },
-      h("button", { className: "cu-ico", disabled: i === 0, onClick: () => moverNota(s, nota, -1), "aria-label": "Subir nota" }, "↑"),
-      h("button", { className: "cu-ico", disabled: i === s.notas.length - 1, onClick: () => moverNota(s, nota, 1), "aria-label": "Bajar nota" }, "↓")));
+      h("button", { className: "cu-ico", disabled: i === 0, onClick: () => moverNota(s, nota, -1), "aria-label": TX.subir }, "↑"),
+      h("button", { className: "cu-ico", disabled: i === s.notas.length - 1, onClick: () => moverNota(s, nota, 1), "aria-label": TX.bajar }, "↓")));
 
   let cuerpo;
   if (buscando) {
     const hits = [];
-    cu.secciones.forEach(s => s.notas.forEach(n => { if (normal(n.texto).includes(nq) || normal(s.titulo).includes(nq)) hits.push({ s, n }); }));
+    cu.secciones.forEach(s => s.notas.forEach(n => { if (normal(n.texto).includes(nq) || normal(tituloSec(s)).includes(nq)) hits.push({ s, n }); }));
     cuerpo = h("div", { className: "cu-sec" },
-      h("div", { className: "cu-sec-h", style: { cursor: "default" } }, h("div", { className: "cu-sec-t" }, "Resultados"), h("span", { className: "cu-count" }, hits.length)),
-      hits.length ? hits.map(x => h(Nota, { key: x.n.id, s: x.s, nota: x.n, i: -1 })) : h("div", { className: "cu-vacio" }, "No hay notas con «" + q.trim() + "»."));
+      h("div", { className: "cu-sec-h", style: { cursor: "default" } }, h("div", { className: "cu-sec-t" }, TX.resultados), h("span", { className: "cu-count" }, hits.length)),
+      hits.length ? hits.map(x => h(Nota, { key: x.n.id, s: x.s, nota: x.n, i: -1 })) : h("div", { className: "cu-vacio" }, TX.sinHits(q.trim())));
   } else {
     cuerpo = cu.secciones.map((s, k) => {
       const cerrada = !!cerradas[s.id] && !ordenar;
       return h("div", { key: s.id, className: "cu-sec" },
         h("div", { className: "cu-sec-h", onClick: () => !ordenar && toggle(s.id) },
-          h("div", { className: "cu-sec-t" }, s.titulo),
+          h("div", { className: "cu-sec-t" }, tituloSec(s)),
           h("span", { className: "cu-count" }, s.notas.length),
           ordenar && !s.fija && h("div", { style: { display: "flex", gap: 6 } },
-            h("button", { className: "cu-ico", disabled: k <= 1, onClick: e => { e.stopPropagation(); moverSeccion(s, -1); }, "aria-label": "Subir sección" }, "↑"),
-            h("button", { className: "cu-ico", disabled: k === cu.secciones.length - 1, onClick: e => { e.stopPropagation(); moverSeccion(s, 1); }, "aria-label": "Bajar sección" }, "↓"),
-            h("button", { className: "cu-ico", onClick: e => { e.stopPropagation(); renombrar(s); }, "aria-label": "Renombrar" }, "✎"),
-            h("button", { className: "cu-ico", onClick: e => { e.stopPropagation(); borrarSeccion(s); }, "aria-label": "Borrar sección", style: { color: "#D9776F" } }, "✕")),
+            h("button", { className: "cu-ico", disabled: k <= 1, onClick: e => { e.stopPropagation(); moverSeccion(s, -1); }, "aria-label": TX.subir }, "↑"),
+            h("button", { className: "cu-ico", disabled: k === cu.secciones.length - 1, onClick: e => { e.stopPropagation(); moverSeccion(s, 1); }, "aria-label": TX.bajar }, "↓"),
+            h("button", { className: "cu-ico", onClick: e => { e.stopPropagation(); renombrar(s); }, "aria-label": TX.renombrar }, "✎"),
+            h("button", { className: "cu-ico", onClick: e => { e.stopPropagation(); borrarSeccion(s); }, "aria-label": TX.borrarSec, style: { color: "#D9776F" } }, "✕")),
           !ordenar && h("span", { className: "cu-chev", style: { transform: cerrada ? "rotate(-90deg)" : "none" } }, "▾")),
         !cerrada && (s.notas.length
           ? s.notas.map((n, i) => h(Nota, { key: n.id, s, nota: n, i }))
-          : h("div", { className: "cu-vacio" }, s.fija ? "Aquí cae lo que guardes desde otras pantallas de la app." : "Sección vacía.")));
+          : h("div", { className: "cu-vacio" }, s.fija ? TX.bandejaVacia : TX.secVacia)));
     });
   }
 
@@ -376,19 +416,19 @@ function App() {
     h(Estilos, { c }),
     h(AzShell, { darkMode, setDarkMode, moduleId: "cuaderno", tabs: [] },
       h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
-        h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, "Cuaderno"),
-        h("div", { className: "cu-sub" }, total ? total + (total === 1 ? " nota" : " notas") + " en " + cu.secciones.length + (cu.secciones.length === 1 ? " sección." : " secciones.") : "Tus notas: lo que escribes tú y lo que guardas desde la app."),
+        h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, TX.titulo),
+        h("div", { className: "cu-sub" }, total ? TX.resumen(total, cu.secciones.length) : TX.vacio),
         h("div", { className: "cu-bar" },
-          h("button", { className: "cu-btn", style: { flex: 1 }, onClick: () => setEditor({ seccionId: "bandeja" }) }, "+ Nota"),
-          h("button", { className: "cu-btn sec", style: { flex: 1 }, onClick: nuevaSeccion }, "+ Sección")),
+          h("button", { className: "cu-btn", style: { flex: 1 }, onClick: () => setEditor({ seccionId: "bandeja" }) }, TX.nota),
+          h("button", { className: "cu-btn sec", style: { flex: 1 }, onClick: nuevaSeccion }, TX.seccion)),
         h("div", { style: { position: "relative", marginTop: 12 } },
-          h("input", { className: "cu-input", value: q, placeholder: "Buscar en el cuaderno…", onInput: e => setQ(e.target.value), style: { paddingRight: 34 } }),
-          q && h("button", { onClick: () => setQ(""), "aria-label": "Borrar búsqueda", style: { position: "absolute", right: 6, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: c.textMuted, fontSize: 15, cursor: "pointer", padding: 6 } }, "✕")),
+          h("input", { className: "cu-input", value: q, placeholder: TX.buscar, onInput: e => setQ(e.target.value), style: { paddingRight: 34 } }),
+          q && h("button", { onClick: () => setQ(""), "aria-label": TX.borrarBusqueda, style: { position: "absolute", right: 6, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", color: c.textMuted, fontSize: 15, cursor: "pointer", padding: 6 } }, "✕")),
         !buscando && h("div", { style: { display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 12 } },
-          total > 0 && !ordenar && h("button", { className: "cu-chip", style: chip(true), onClick: () => setExportar(true) }, "Exportar"),
-          h("button", { className: "cu-chip", style: chip(true), onClick: () => setOrdenar(!ordenar) }, ordenar ? "Listo" : "Ordenar")),
+          total > 0 && !ordenar && h("button", { className: "cu-chip", style: chip(true), onClick: () => setExportar(true) }, TX.exportar),
+          h("button", { className: "cu-chip", style: chip(true), onClick: () => setOrdenar(!ordenar) }, ordenar ? TX.listo : TX.ordenar)),
         cuerpo,
-        h("div", { className: "cu-lbl" }, "Copia de seguridad"),
+        h("div", { className: "cu-lbl" }, TX.copia),
         h(AzCopiaSeguridad, { c }),
         aviso && h("div", { style: { marginTop: 10, fontSize: 13, color: "#4CAF82", fontWeight: 600 } }, aviso))),
     exportar && h(HojaExportar, { c, cu, onCerrar: () => setExportar(false) }),

@@ -398,6 +398,11 @@ function App() {
 
   const id = getWordId();
   const entry = id ? lexPorId(id) : null;
+  /* Abecé: título de la pestaña y origen de las notas del cuaderno en ruso (27/10/2026) */
+  if (ES) {
+    document.title = "Abecé — Словарь" + (entry ? " · " + entry.es : "");
+    window.azFuenteActual = () => "Словарь" + (entry ? " · " + entry.es : "");
+  }
   const c = azColors(darkMode);
   const results = q.trim() && typeof azSearchLexicon === "function" ? azSearchLexicon(q) : [];
 

@@ -38,11 +38,38 @@
    ============================================================ */
 const { useState, useEffect } = htmPreact;
 const h = React.createElement;
+/* ── Textos por dirección (27/10/2026): en Abecé, lo que ve el alumno va en ruso
+   (borrador para Iván). Las herramientas de admin y revisor (Abecé en construcción,
+   Accesos, Alumnos, Reportes) quedan siempre en español: son para Manu y para Iván. ── */
+const RU = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
+const TX = RU ? {
+  fecha: "ru-RU", hoy: "сегодня ", titulo: "Настройки", cuenta: "Аккаунт", translit: "Произношение кириллицей", copia: "Резервная копия",
+  sinCuentas: "Аккаунты в этой версии приложения ещё не включены. Прогресс хранится только в этом телефоне.",
+  alDia: "Твой прогресс сохранён в облаке.", subiendo: "Сохраняем в облако…", pendiente: "Есть изменения, которые ещё не сохранены в облаке.",
+  sinRed: "Нет соединения: новое сохранится в облаке, когда появится интернет.", ultimo: "Последнее сохранение: ",
+  noBorra: "Не удалось удалить. Попробуй ещё раз чуть позже.", borrarSinRed: "Чтобы удалить аккаунт, нужно соединение.",
+  entraste: "Ты вошёл как", salirSinRed: "Нет соединения, и есть изменения, которые ещё не сохранены в облаке. Если выйти сейчас, они пропадут.",
+  salirIgual: "Всё равно выйти", esperar: "Подождать", salir: "Выйти",
+  borrarTit: "Удалить всё?", borrarTxt: " Удалятся твой аккаунт, прогресс в облаке и всё, что сохранено в этом телефоне (прогресс, тетрадь и заметки). Это нельзя отменить. Если хочешь что-то сохранить, сначала сделай резервную копию.",
+  eliminando: "Удаляем…", siBorrar: "Да, удалить всё", cancelar: "Отмена", borrarCuenta: "Удалить мой аккаунт и мои данные",
+  auto: "Автоматически", mostrar: "Показывать", ocultar: "Скрывать"
+} : {
+  fecha: "es-AR", hoy: "hoy ", titulo: "Ajustes", cuenta: "Cuenta", translit: "Transliteración", copia: "Copia de seguridad",
+  sinCuentas: "Las cuentas todavía no están activadas en esta versión de la app. El progreso se guarda solo en este teléfono.",
+  alDia: "Tu progreso está guardado en la nube.", subiendo: "Guardando en la nube…", pendiente: "Hay cambios por guardar en la nube.",
+  sinRed: "Sin conexión: lo nuevo se guarda en la nube cuando vuelva internet.", ultimo: "Último guardado: ",
+  noBorra: "No se pudo eliminar. Prueba de nuevo en un momento.", borrarSinRed: "Para eliminar la cuenta necesitas conexión.",
+  entraste: "Entraste como", salirSinRed: "No hay conexión y hay cambios que todavía no se guardaron en la nube. Si cierras la sesión ahora, se pierden.",
+  salirIgual: "Cerrar sesión igual", esperar: "Esperar", salir: "Cerrar sesión",
+  borrarTit: "¿Eliminar todo?", borrarTxt: " Se borran tu cuenta, tu progreso en la nube y todo lo guardado en este teléfono (progreso, cuaderno y notas). No se puede deshacer. Si quieres conservar algo, antes guarda una copia de seguridad.",
+  eliminando: "Eliminando…", siBorrar: "Sí, eliminar todo", cancelar: "Cancelar", borrarCuenta: "Eliminar mi cuenta y mis datos",
+  auto: "Automática", mostrar: "Mostrar", ocultar: "Ocultar"
+};
 /* ── Cuenta (14/10/2026) ── */
 const ROJO = "#B5605C", ROJO_TXT = "#D9776F";
 const fechaCorta = iso => { if (!iso) return "—"; const d = new Date(iso), hoy = new Date();
-  const hh = d.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
-  return d.toDateString() === hoy.toDateString() ? "hoy " + hh : d.toLocaleDateString("es-AR", { day: "numeric", month: "short" }) + " " + hh; };
+  const hh = d.toLocaleTimeString(TX.fecha, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+  return d.toDateString() === hoy.toDateString() ? TX.hoy + hh : d.toLocaleDateString(TX.fecha, { day: "numeric", month: "short" }) + " " + hh; };
 function boton(c, texto, onClick, tipo, extra) {
   const st = tipo === "peligro" ? { background: ROJO, border: `1px solid ${ROJO}`, color: "#fff" }
     : tipo === "sec" ? { background: c.bg3, border: `1px solid ${c.border}`, color: c.text } : { background: c.gold, border: `1px solid ${c.gold}`, color: c.bg };
@@ -54,29 +81,29 @@ function SeccionCuenta({ c }) {
   const [paso, setPaso] = useState(null);      /* null | "salir-sin-red" | "borrar" | "borrando" */
   const [error, setError] = useState("");
   useEffect(() => { if (!A || !A.activa) return; A.listo().then(() => setNube(A.estadoNube())); return A.alCambiar(() => setNube(A.estadoNube())); }, []);
-  if (!A || !A.activa) return h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, "Las cuentas todavía no están activadas en esta versión de la app. El progreso se guarda solo en este teléfono.");
-  const t = { "al-dia": "Tu progreso está guardado en la nube.", subiendo: "Guardando en la nube…", pendiente: navigator.onLine ? "Hay cambios por guardar en la nube." : "Sin conexión: lo nuevo se guarda en la nube cuando vuelva internet.", apagada: "" }[nube && nube.estado] || "";
-  const ultima = nube && nube.meta && nube.meta.subido ? "Último guardado: " + fechaCorta(new Date(nube.meta.subido).toISOString()) + "." : "";
+  if (!A || !A.activa) return h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, TX.sinCuentas);
+  const t = { "al-dia": TX.alDia, subiendo: TX.subiendo, pendiente: navigator.onLine ? TX.pendiente : TX.sinRed, apagada: "" }[nube && nube.estado] || "";
+  const ultima = nube && nube.meta && nube.meta.subido ? TX.ultimo + fechaCorta(new Date(nube.meta.subido).toISOString()) + "." : "";
   const salir = async () => { setError(""); const ok = await A.cerrarSesion(false); if (!ok) setPaso("salir-sin-red"); };
   const borrar = async () => { setPaso("borrando"); setError("");
-    try { await A.borrarCuenta(); } catch (e) { setPaso("borrar"); setError(navigator.onLine ? "No se pudo eliminar. Prueba de nuevo en un momento." : "Para eliminar la cuenta necesitas conexión."); } };
+    try { await A.borrarCuenta(); } catch (e) { setPaso("borrar"); setError(navigator.onLine ? TX.noBorra : TX.borrarSinRed); } };
   return h(React.Fragment, null,
-    h("div", { style: { fontSize: 12, color: c.textMuted } }, "Entraste como"),
+    h("div", { style: { fontSize: 12, color: c.textMuted } }, TX.entraste),
     h("div", { style: { fontSize: 16, fontWeight: 700, color: c.text, marginTop: 2, wordBreak: "break-all" } }, A.email() || "…"),
     h("div", { style: { fontSize: 13.5, color: c.textSub, lineHeight: 1.6, marginTop: 10 } }, t, ultima ? " " + ultima : ""),
     paso === "salir-sin-red"
       ? h("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: ROJO_TXT, background: ROJO + "22", borderRadius: 10, padding: "10px 12px", marginTop: 12 } },
-          "No hay conexión y hay cambios que todavía no se guardaron en la nube. Si cierras la sesión ahora, se pierden.",
-          boton(c, "Cerrar sesión igual", () => A.cerrarSesion(true), "peligro"), boton(c, "Esperar", () => setPaso(null), "sec"))
-      : boton(c, "Cerrar sesión", salir, "sec"),
+          TX.salirSinRed,
+          boton(c, TX.salirIgual, () => A.cerrarSesion(true), "peligro"), boton(c, TX.esperar, () => setPaso(null), "sec"))
+      : boton(c, TX.salir, salir, "sec"),
     h("div", { style: { height: 1, background: c.border, margin: "18px 0 6px" } }),
     paso === "borrar" || paso === "borrando"
       ? h("div", { style: { fontSize: 13.5, lineHeight: 1.55, color: c.text, background: ROJO + "22", border: `1px solid ${ROJO}`, borderRadius: 10, padding: "12px", marginTop: 10 } },
-          h("b", null, "¿Eliminar todo?"), " Se borran tu cuenta, tu progreso en la nube y todo lo guardado en este teléfono (progreso, cuaderno y notas). No se puede deshacer. Si quieres conservar algo, antes guarda una copia de seguridad.",
+          h("b", null, TX.borrarTit), TX.borrarTxt,
           error && h("div", { style: { color: ROJO_TXT, marginTop: 8 } }, error),
-          boton(c, paso === "borrando" ? "Eliminando…" : "Sí, eliminar todo", borrar, "peligro", { disabled: paso === "borrando" }),
-          boton(c, "Cancelar", () => { setPaso(null); setError(""); }, "sec"))
-      : h("button", { className: "btn", onClick: () => setPaso("borrar"), style: { background: "none", border: "none", color: ROJO_TXT, fontSize: 13.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", padding: "10px 0 0" } }, "Eliminar mi cuenta y mis datos"));
+          boton(c, paso === "borrando" ? TX.eliminando : TX.siBorrar, borrar, "peligro", { disabled: paso === "borrando" }),
+          boton(c, TX.cancelar, () => { setPaso(null); setError(""); }, "sec"))
+      : h("button", { className: "btn", onClick: () => setPaso("borrar"), style: { background: "none", border: "none", color: ROJO_TXT, fontSize: 13.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", padding: "10px 0 0" } }, TX.borrarCuenta));
 }
 /* Accesos (admin, modo "admin") y Alumnos (revisor, modo "revisor", 22/10/2026):
    la misma pantalla; el revisor ve, habilita y quita solo los alumnos que habilitó él. */
@@ -142,7 +169,7 @@ function SeccionAbece({ c }) {
       dir === v ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
   return h(React.Fragment, null,
     h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
-      h("b", { style: { color: c.text } }, "Abecé"), " es la versión para rusohablantes que aprenden español. Está en construcción y los alumnos no la ven. Aquí puedes probarla en este teléfono: por ahora cambian el encabezado y el menú; el resto de las pantallas sigue como en Azbuka."),
+      h("b", { style: { color: c.text } }, "Abecé"), " es la versión para rusohablantes que aprenden español. Está en construcción y los alumnos no la ven. Aquí puedes probarla en este teléfono. Ya están el Diccionario, el Cuaderno, Ajustes y el inicio; las unidades y el resto de los módulos todavía son los de Azbuka. Esta sección, Accesos, Alumnos y Reportes quedan siempre en español."),
     h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("azbuka", "Azbuka"), chip("abece", "Abecé (prueba)")));
 }
 /* ── Reportes de errores (21/10/2026, solo admin) ── */
@@ -213,8 +240,8 @@ function App() {
   }, texto);
   return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
     h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
-      h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, "Ajustes"),
-      lbl("Cuenta"),
+      h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, TX.titulo),
+      lbl(TX.cuenta),
       caja(h(SeccionCuenta, { c })),
       (esAdmin || esRevisor) && lbl("Abecé en construcción"),
       (esAdmin || esRevisor) && caja(h(SeccionAbece, { c })),
@@ -224,13 +251,16 @@ function App() {
       esRevisor && caja(h(SeccionAccesos, { c, modo: "revisor" })),
       esAdmin && lbl("Reportes"),
       esAdmin && caja(h(SeccionReportes, { c })),
-      lbl("Transliteración"),
+      lbl(TX.translit),
       caja(
-        h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
+        RU ? h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
+          "Произношение кириллицей (", h("i", null, "о́ла"), ") помогает читать в начале. Когда ты уже читаешь по-испански, лучше его скрыть: так ты читаешь сам. ",
+          h("b", { style: { color: c.text } }, "Автоматически:"), " видно в уроках 1–3 и скрыто с 4-го (в словаре и других разделах — по уроку, на котором ты сейчас). В «Алфавите» и в уроке 1 оно видно всегда: там произношение и есть то, что ты учишь.")
+        : h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
           "La transliteración (", h("i", null, "jarashó"), ") ayuda a leer al principio. Cuando ya lees el cirílico, ocultarla te obliga a leer en ruso. ",
           h("b", { style: { color: c.text } }, "Automática:"), " se ve en las Unidades 1 a 3 y se oculta desde la 4 (en el Diccionario, Verbos, Casos y Diálogos, según la unidad en la que estás). Siempre se ve en Alfabeto y en la Unidad 1, donde la pronunciación es lo que se aprende, y en los diálogos la puedes volver a prender cuando quieras."),
-        h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("auto", "Automática"), chip("si", "Mostrar"), chip("no", "Ocultar"))),
-      lbl("Copia de seguridad"),
+        h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("auto", TX.auto), chip("si", TX.mostrar), chip("no", TX.ocultar))),
+      lbl(TX.copia),
       caja(h(AzCopiaSeguridad, { c }))));
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));

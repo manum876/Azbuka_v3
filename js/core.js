@@ -32,8 +32,12 @@ function azDireccion() {
   let id = "azbuka", prueba = false;
   try {
     id = JSON.parse(localStorage.getItem("az_direccion") || '"azbuka"');
+    /* ?dir=abece en la dirección (links del cuaderno, 27/10/2026): abre esa página en esa dirección,
+       si está abierta o si quien la abre es admin o revisor, sin cambiar el ajuste del teléfono */
+    const dirUrl = new URLSearchParams(location.search).get("dir");
+    if (dirUrl && cat[dirUrl]) id = dirUrl;
     const rol = localStorage.getItem("az_cuenta_rol") || "";
-    prueba = JSON.parse(localStorage.getItem("az_prueba") || '""') === "si" && (rol === "admin" || rol === "revisor");
+    prueba = (!!dirUrl || JSON.parse(localStorage.getItem("az_prueba") || '""') === "si") && (rol === "admin" || rol === "revisor");
   } catch (e) {}
   const d = cat[id];
   if (!d || !(d.abierta || prueba)) return cat.azbuka;
@@ -814,25 +818,25 @@ function AzCopiaSeguridad({ c }) {
     const r = new FileReader();
     r.onload = () => {
       let copia;
-      try { copia = JSON.parse(r.result); } catch (err) { alert("Ese archivo no es una copia de Azbuka."); return; }
+      try { copia = JSON.parse(r.result); } catch (err) { alert(azTexto("copiaNoEs")); return; }
       const esVieja = copia && Array.isArray(copia.secciones);
-      if (!esVieja && (!copia || copia.app !== "azbuka")) { alert("Ese archivo no es una copia de Azbuka."); return; }
-      const cuando = copia.fecha ? " del " + new Date(copia.fecha).toLocaleDateString("es-AR") : "";
+      if (!esVieja && (!copia || copia.app !== "azbuka")) { alert(azTexto("copiaNoEs")); return; }
+      const cuando = copia.fecha ? azTexto("copiaDel") + new Date(copia.fecha).toLocaleDateString(azTexto("fecha")) : "";
       const msg = esVieja
-        ? "Esta es una copia solo del cuaderno. ¿Reemplazar tu cuaderno actual? El progreso no se toca."
-        : "¿Restaurar la copia" + cuando + "? Se reemplazan tus notas y todo tu progreso por los de la copia.";
+        ? azTexto("copiaSoloCuaderno")
+        : azTexto("copiaConfirmar").replace("{cuando}", cuando);
       if (!confirm(msg)) return;
-      try { azRestaurarDatos(copia); location.reload(); } catch (err) { alert("No se pudo restaurar la copia."); }
+      try { azRestaurarDatos(copia); location.reload(); } catch (err) { alert(azTexto("copiaFallo")); }
     };
     r.readAsText(f);
   };
   const btn = { flex: 1, padding: "11px 14px", borderRadius: 10, border: `1px solid ${c.border}`, background: c.bg3, color: c.text, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" };
   return h("div", null,
     h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
-      "Todo lo que haces en Azbuka (tus notas y tu progreso en unidades, letras y ejercicios) se guarda en este teléfono. Guarda una copia de vez en cuando, en Archivos o mandándotela por mail: si se borran los datos del navegador o cambias de teléfono, la restauras y sigues donde estabas."),
+      azTexto("copiaIntro")),
     h("div", { style: { display: "flex", gap: 8, marginTop: 12 } },
-      h("button", { style: btn, onClick: azGuardarCopia }, "Guardar copia"),
-      h("button", { style: btn, onClick: () => ref.current && ref.current.click() }, "Restaurar copia")),
+      h("button", { style: btn, onClick: azGuardarCopia }, azTexto("copiaGuardar")),
+      h("button", { style: btn, onClick: () => ref.current && ref.current.click() }, azTexto("copiaRestaurar"))),
     h("input", { ref, type: "file", accept: "application/json,.json", style: { display: "none" }, onChange: restaurar }));
 }
 
@@ -844,9 +848,25 @@ function AzCopiaSeguridad({ c }) {
 function azFuentePagina() {
   let titulo = "";
   try { if (typeof window.azFuenteActual === "function") titulo = window.azFuenteActual(); } catch (e) {}
-  if (!titulo) titulo = document.title.replace(/^Азбука\s*[—-]\s*/, "");
-  const href = (location.pathname.split("/").pop() || "index.html") + location.search;
+  if (!titulo) titulo = document.title.replace(/^(Азбука|Abecé)\s*[—-]\s*/, "");
+  let href = (location.pathname.split("/").pop() || "index.html") + location.search;
+  /* En Abecé el link lleva ?dir=abece: así, desde el PDF del cuaderno, abre la pantalla en Abecé (27/10/2026) */
+  if (AZ_DIRECCION.id !== "azbuka" && !/[?&]dir=/.test(href)) href += (href.indexOf("?") >= 0 ? "&" : "?") + "dir=" + AZ_DIRECCION.id;
   return { titulo, href };
+}
+/* azTocarYa(fn) (27/10/2026): props para un botón que aparece con una selección de texto
+   («＋ Guardar en el cuaderno», «📖 Mostrar entrada»). En el iPhone, con texto seleccionado,
+   el primer toque solo cierra la selección y el botón no se enteraba: hacía falta tocar dos
+   veces. Con esto actúa al empezar el toque (touchstart, que además evita el click doble) y
+   con el ratón sigue funcionando el click. */
+function azTocarYa(fn) {
+  let hecho = 0;
+  const una = e => { const t = Date.now(); if (t - hecho < 700) return; hecho = t; fn(e); };
+  return {
+    onTouchStart: e => { try { e.preventDefault(); } catch (x) {} una(e); },
+    onMouseDown: e => e.preventDefault(),
+    onClick: una
+  };
 }
 async function azGuardarEnCuaderno(texto, fuente) {
   const t = String(texto || "").trim();
@@ -877,6 +897,8 @@ function azTranslitVisible() {
   if (document.documentElement.getAttribute("data-tl") === "siempre") return true;
   const modo = azTranslitModo();
   if (modo !== "auto") return modo === "si";
+  /* Abecé (27/10/2026): mientras no tenga unidades, el «dónde estás» de Azbuka no cuenta: se ve */
+  if (AZ_DIRECCION.id !== "azbuka" && !((typeof AZ_CATALOGO !== "undefined" && AZ_CATALOGO[AZ_DIRECCION.id].unidades) || []).length) return true;
   const pag = /azbuka-(\d+)\.html/.exec(location.pathname);
   let n = pag ? Number(pag[1]) : null;
   if (n == null) { try { const u = JSON.parse(localStorage.getItem("az_ultimo") || "null"); n = u && u.unidad ? u.unidad : null; } catch (e) {} }

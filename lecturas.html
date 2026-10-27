@@ -130,7 +130,7 @@ function MostrarEntrada() {
     try { window.getSelection().removeAllRanges(); } catch (e) {}
     setTimeout(() => window.dispatchEvent(new CustomEvent("az-burbuja", { detail: { tipo: "palabra", datos: { id: d ? d.id : null, forma: d ? d.forma : sel.txt }, rect } })), 60);
   };
-  return h("button", { className: "lec-entrada", onMouseDown: e => e.preventDefault(), onClick: abrir }, "📖 Mostrar entrada");
+  return h("button", Object.assign({ className: "lec-entrada" }, azTocarYa(abrir)), "📖 Mostrar entrada");   /* al primer toque en el iPhone (27/10/2026) */
 }
 
 function Portada({ c, hechas }) {

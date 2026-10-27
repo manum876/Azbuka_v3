@@ -150,10 +150,9 @@ function AzCaptura({ c }) {
     borderRadius: 22, padding: "11px 18px", fontSize: 14, fontWeight: 700, fontFamily: "inherit", boxShadow: "0 8px 24px rgba(0,0,0,.35)", whiteSpace: "nowrap" };
   if (cartel) return React.createElement("div", { role: "status", style: Object.assign({}, base, { background: c.card, color: "#4CAF82", border: "1px solid #4CAF82" }) }, T("guardadoCuaderno"));
   if (!sel) return null;
-  return React.createElement("button", {
-    onMouseDown: e => e.preventDefault(), onClick: guardar,
+  return React.createElement("button", Object.assign(typeof azTocarYa === "function" ? azTocarYa(guardar) : { onMouseDown: e => e.preventDefault(), onClick: guardar }, {
     style: Object.assign({}, base, { background: c.gold, color: c.bg, border: "none", cursor: "pointer" })
-  }, T("guardarCuaderno"));
+  }), T("guardarCuaderno"));   /* azTocarYa: actúa al primer toque en el iPhone (27/10/2026) */
 }
 
 /* ── REPORTAR UN ERROR (21/10/2026, a pedido de Manu) ──

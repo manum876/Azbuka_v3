@@ -99,6 +99,16 @@ var AZ_CATALOGO = {
       reporteEnviado: "✓ Enviado. ¡Gracias! Lo vamos a revisar.",
       reportePendiente: "No hay conexión: el reporte quedó guardado y se manda solo cuando vuelva internet.",
       reporteMail: "Se abrió tu app de correo con el reporte escrito: solo falta enviarlo.",
+      /* Copia de seguridad (AzCopiaSeguridad en core.js, 27/10/2026) */
+      copiaIntro: "Todo lo que haces en Azbuka (tus notas y tu progreso en unidades, letras y ejercicios) se guarda en este teléfono. Guarda una copia de vez en cuando, en Archivos o mandándotela por mail: si se borran los datos del navegador o cambias de teléfono, la restauras y sigues donde estabas.",
+      copiaGuardar: "Guardar copia",
+      copiaRestaurar: "Restaurar copia",
+      copiaNoEs: "Ese archivo no es una copia de Azbuka.",
+      copiaSoloCuaderno: "Esta es una copia solo del cuaderno. ¿Reemplazar tu cuaderno actual? El progreso no se toca.",
+      copiaConfirmar: "¿Restaurar la copia{cuando}? Se reemplazan tus notas y todo tu progreso por los de la copia.",
+      copiaDel: " del ",
+      copiaFallo: "No se pudo restaurar la copia.",
+      fecha: "es-AR",
     },
   },
 
@@ -117,6 +127,7 @@ var AZ_CATALOGO = {
        Болтаем с Лусией · Глаголы · Грамматика · Тетрадь. */
     modulos: [
       { id: "diccionario", title: "Словарь", desc: "Весь словарь, по темам и частям речи", href: "ficha.html", icon: "orange", glyph: "Dc" },
+      { id: "cuaderno", title: "Тетрадь", desc: "Твои заметки и то, что ты сохраняешь в приложении", href: "cuaderno.html", icon: "pink", glyph: "Cu" },
     ],
     /* BORRADOR: falta la revisión de Iván. Al alumno se le habla de «ты»,
        como Azbuka usa «tú». Una clave que falte acá se muestra con el texto de azbuka. */
@@ -153,6 +164,15 @@ var AZ_CATALOGO = {
       reporteEnviado: "✓ Отправлено. Спасибо! Мы всё проверим.",
       reportePendiente: "Нет соединения: сообщение сохранено и отправится само, когда появится интернет.",
       reporteMail: "Открылось почтовое приложение с готовым сообщением: осталось только отправить.",
+      copiaIntro: "Всё, что ты делаешь в Abecé (заметки и прогресс в уроках, буквах и упражнениях), хранится в этом телефоне. Время от времени сохраняй копию в «Файлы» или отправляй её себе по почте: если данные браузера сотрутся или ты сменишь телефон, ты её восстановишь и продолжишь с того же места.",
+      copiaGuardar: "Сохранить копию",
+      copiaRestaurar: "Восстановить",
+      copiaNoEs: "Этот файл не является копией приложения.",
+      copiaSoloCuaderno: "Это копия только тетради. Заменить твою нынешнюю тетрадь? Прогресс не изменится.",
+      copiaConfirmar: "Восстановить копию{cuando}? Твои заметки и весь прогресс заменятся данными из копии.",
+      copiaDel: " от ",
+      copiaFallo: "Не удалось восстановить копию.",
+      fecha: "ru-RU",
     },
   },
 };

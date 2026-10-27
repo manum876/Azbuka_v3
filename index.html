@@ -69,6 +69,24 @@
 <script src="js/shell.js"></script>
 <script>
 const { useState, useEffect } = htmPreact;
+/* ── Abecé (27/10/2026): el inicio con la marca de Abecé y sus textos en ruso
+   (borrador para Iván). Mientras Abecé no tenga unidades, no se muestran
+   «Seguir estudiando», «Hoy» ni «Repaso de hoy» (son de las unidades de Azbuka),
+   y los tres niveles quedan bloqueados. ── */
+const ABECE = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
+const SIN_UNIDADES = ABECE && !(AZ_CATALOGO.abece.unidades || []).length;
+const TXI = ABECE ? {
+  glyph: (AZ_DIRECCION.marca || {}).glyph || "Ab", titulo: (AZ_DIRECCION.marca || {}).nombre || "Abecé",
+  desc: "Полный курс испанского с нуля для тех, кто говорит по-русски. Понятная теория, практические упражнения и живые примеры — чтобы ты уверенно шёл вперёд, от первых слов до свободного общения.",
+  buscar: "Поиск по-испански или по-русски…", buscarAria: "Найти слово", limpiar: "Очистить поиск", sinRes: "Ничего не найдено",
+  lexico: "LEXICON_ES"
+} : {
+  glyph: "Аз", titulo: "Азбука",
+  desc: "Un curso completo para aprender ruso desde cero, pensado para hispanohablantes. Combina teoría clara, ejercicios prácticos y ejemplos reales para que avances con confianza, de principiante a avanzado.",
+  buscar: "Buscar en ruso o en español…", buscarAria: "Buscar una palabra", limpiar: "Limpiar búsqueda", sinRes: "Sin resultados",
+  lexico: "LEXICON_COMER"
+};
+const lexCargado = () => typeof window[TXI.lexico] !== "undefined" || (ABECE ? typeof LEXICON_ES !== "undefined" : typeof LEXICON_COMER !== "undefined");
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -83,13 +101,14 @@ function App() {
   /* Léxico (27/10/2026): ya no se carga antes de mostrar la página (eran 8 MB
      que dejaban la pantalla negra unos segundos). Se pide apenas se dibuja el
      inicio; solo lo usan los buscadores, que se actualizan cuando llega. */
-  const [, setLexListo] = useState(typeof LEXICON_COMER !== "undefined");
+  const [, setLexListo] = useState(lexCargado());
   const leerHoy = async () => { const hs = await azGet("az_hoy", {}); setHoyHecho(hs.fecha === azHoyFecha() && !!hs.hecho); return hs; };
 
   useEffect(() => {
-    if (typeof LEXICON_COMER === "undefined") {
+    /* El léxico de la dirección (27/10/2026: en Abecé, el español) */
+    if (!lexCargado()) {
       const sc = document.createElement("script");
-      sc.src = "data/data-lexicon.js";
+      sc.src = AZ_DIRECCION.lexico || "data/data-lexicon.js";
       sc.onload = () => setLexListo(true);
       document.body.appendChild(sc);
     }
@@ -101,6 +120,7 @@ function App() {
       setUltimo(await azLeerUltimo());
       { const pr = await azGet("az_progress", {}), srs = pr.srs || {}, hoy = new Date().toISOString().slice(0, 10);
         setRepasoN(Object.keys(srs).filter(k => srs[k].p && srs[k].p <= hoy && k.indexOf("ej:") === 0).length); }
+      if (SIN_UNIDADES) return;   /* Abecé sin unidades: sin desafío del día */
       const u = await azHoyUnidad(); setHoyUnidad(u);
       const hs = await leerHoy();
       /* Una vez por día, al abrir el inicio, si ya empezó alguna unidad */
@@ -128,15 +148,18 @@ function App() {
         style: { background: c.card, border: `1px solid ${c.border}` }
       },
         React.createElement("div", { className: "hero-top" },
-          React.createElement("div", { className: "hero-icon" }, "Аз"),
+          React.createElement("div", { className: "hero-icon" }, TXI.glyph),
           React.createElement("div", { style: { flex: 1, minWidth: 0 } },
-            React.createElement("div", { className: "hero-title", style: { color: c.gold } }, "Азбука"),
+            React.createElement("div", { className: "hero-title", style: { color: c.gold } }, TXI.titulo),
         React.createElement("div", { className: "hero-desc", style: { color: c.textMuted } },
-          "Un curso completo para aprender ruso desde cero, pensado para hispanohablantes. Combina teoría clara, ejercicios prácticos y ejemplos reales para que avances con confianza, de principiante a avanzado.")
+          TXI.desc)
           )
         ),
         React.createElement("div", { className: "level-row" },
-          React.createElement("a", {
+          SIN_UNIDADES ? React.createElement("div", {
+            className: "level-btn",
+            style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted, opacity: .65 }
+          }, "A1 → B1") : React.createElement("a", {
             className: "level-btn active", href: "azbuka-index-1.html",
             onClick: (e) => azNavigate(e, "azbuka-index-1.html"),
             style: { background: c.gold, color: "#0F0F14" }
@@ -160,7 +183,7 @@ function App() {
 
       /* ── SEGUIR ESTUDIANDO (el último módulo abierto, az_ultimo) y, a la
          derecha, la tarjeta «Hoy» (desafío del día, hoy.js) ── */
-      React.createElement("div", { style: { display: "flex", gap: 10, alignItems: "stretch", marginBottom: ultimo ? 10 : 26 } },
+      !SIN_UNIDADES && React.createElement("div", { style: { display: "flex", gap: 10, alignItems: "stretch", marginBottom: ultimo ? 10 : 26 } },
       (() => {
         const u = ultimo;
         const href = u ? u.href : "azbuka-1.html";
@@ -184,7 +207,7 @@ function App() {
       ),
 
       /* ── REPASO DE HOY (19/10/2026, repaso.html): solo si ya empezó alguna unidad ── */
-      ultimo && React.createElement("a", {
+      ultimo && !SIN_UNIDADES && React.createElement("a", {
         className: "cont", href: "repaso.html", onClick: (e) => azNavigate(e, "repaso.html"),
         style: { background: c.card, border: `1px solid ${repasoN ? c.gold + "66" : c.border}` }
       },
@@ -201,15 +224,15 @@ function App() {
         React.createElement("span", { className: "lupa", style: { color: c.textMuted } }, "⌕"),
         React.createElement("input", {
           value: q, onInput: (e) => setQ(e.target.value),
-          placeholder: "Buscar en ruso o en español…", "aria-label": "Buscar una palabra",
+          placeholder: TXI.buscar, "aria-label": TXI.buscarAria,
           style: { background: c.card, border: `1px solid ${c.gold}66`, color: c.text }
         }),
-        q && React.createElement("button", { className: "limpiar", onClick: () => setQ(""), "aria-label": "Limpiar búsqueda", style: { background: c.border, color: c.text } }, "✕")
+        q && React.createElement("button", { className: "limpiar", onClick: () => setQ(""), "aria-label": TXI.limpiar, style: { background: c.border, color: c.text } }, "✕")
       ),
       q.trim() && React.createElement("div", { className: "res", style: { background: c.card, border: `1px solid ${c.border}` } },
         (() => {
           const r = typeof azSearchLexicon === "function" ? azSearchLexicon(q.trim()) : [];
-          if (!r.length) return React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados");
+          if (!r.length) return React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, TXI.sinRes);
           return r.map((x, i) => React.createElement("a", {
             key: x.id, href: x.href, onClick: (e) => azNavigate(e, x.href),
             style: { borderTop: i ? `1px solid ${c.border}` : "none" }
@@ -221,7 +244,7 @@ function App() {
       ),
 
       /* ── MÓDULOS DE APOYO (antes "Herramientas") — filas horizontales ── */
-      React.createElement("div", { className: "section-lbl", style: { color: c.textMuted } }, "Módulos de apoyo"),
+      React.createElement("div", { className: "section-lbl", style: { color: c.textMuted, marginTop: SIN_UNIDADES ? 26 : undefined } }, azTexto("modulos")),
       React.createElement("div", { className: "mod-list" },
         modules.map(m =>
           React.createElement("a", {
