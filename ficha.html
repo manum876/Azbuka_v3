@@ -21,6 +21,8 @@
 <script src="js/core.js"></script>
 <!-- El léxico de la dirección activa (27/10/2026): data-lexicon.js en Azbuka, data-lexicon-es.js en Abecé -->
 <script>azEscribirLexico();</script>
+<!-- Abecé: las formas de las palabras (plural, femenino, artículo, series) para la sección «Грамматика» -->
+<script>if (AZ_DIRECCION.id === "abece") document.write('<script src="' + "data/data-formas-es.js" + '"><\/script>');</script>
 <script src="assets/supabase.js"></script>
 <script src="js/cuenta.js"></script>
 <script src="js/progress.js"></script>
@@ -236,7 +238,8 @@ function Diccionario({ c }) {
     if (t) {
       if (ES) {  /* Abecé: la palabra (o su femenino) empieza así, o la traducción rusa lo contiene */
         const n = azNormEs(t), r = azNormRu(t.toLowerCase());
-        lista = lista.filter(e => azNormEs(e.es).startsWith(n) || (e.femenino && e.femenino.es && azNormEs(e.femenino.es).startsWith(n)) ||
+        const deForma = new Set(azFormasEsHits(t).map(x => x.id));   /* buenas → bueno, canciones → canción */
+        lista = lista.filter(e => deForma.has(e.id) || azNormEs(e.es).startsWith(n) || (e.femenino && e.femenino.es && azNormEs(e.femenino.es).startsWith(n)) ||
           (e.senses || []).some(s => azNormRu((s.ru || "").toLowerCase()).indexOf(r) >= 0));
       } else { const n = dicSinAc(t), es = t.toLowerCase(); lista = lista.filter(e => dicSinAc(e.ru).startsWith(n) || (e.senses || []).some(s => (s.es || "").toLowerCase().indexOf(es) >= 0)); }
     }
@@ -314,6 +317,54 @@ const POS_RU = { sustantivo: "Существительное", verbo: "Глаг�
 const GEN_RU = { m: "мужской род", f: "женский род", "m/f": "мужской и женский род" };
 const NUMERO_RU = { pluraliaTantum: "Только во множественном числе", singulariaTantum: "Только в единственном числе" };
 const NIVEL_RU = ["Не изучено", "Изучаю", "Выучено"];
+/* ── Formas de la palabra (data-formas-es.js, 27/10/2026): artículo y plural de
+   los sustantivos, las 4 formas de adjetivos, determinantes y numerales, la
+   apócope (buen, gran), la serie de demostrativos, posesivos y artículos, y la
+   función de cada pronombre personal. Devuelve meta-items para «Грамматика». ── */
+const FES_COL = { m: "м. р. ед. ч.", f: "ж. р. ед. ч.", mpl: "м. р. мн. ч.", fpl: "ж. р. мн. ч." };
+function formasEsItems(entry, el) {
+  const d = typeof FORMAS_ES !== "undefined" ? FORMAS_ES[entry.id] : null;
+  if (!d) return [];
+  const it = (k, v, ancho, key) => el("div", { key: key || k, className: "meta-item", style: ancho ? { gridColumn: "1 / -1" } : null },
+    el("div", { className: "meta-k" }, k), [].concat(v).map((x, i) => el("div", { key: i, className: "meta-v" }, x)));
+  const nota = t => el("div", { key: "n" + t.slice(0, 12), className: "meta-item", style: { gridColumn: "1 / -1" } },
+    el("div", { className: "meta-v", style: { fontSize: 12, lineHeight: 1.45 } }, t));
+  const r = [];
+  const sp = (a, w) => a ? a + " " + w : w;
+  if (d.t === "sust") {
+    if (d.soloPl) { r.push(it("Ед. ч.", "нет")); r.push(it("Мн. ч.", sp(d.art[1], d.pl))); }
+    else {
+      r.push(it("Ед. ч.", [sp(d.art[0], d.sg)].concat(d.f ? [sp(d.artF[0], d.f)] : [])));
+      r.push(it("Мн. ч.", d.pl ? [sp(d.art[1], d.pl) + (d.inv ? " (не меняется)" : "")].concat(d.f && d.fpl ? [sp(d.artF[1], d.fpl)] : []) : "нет"));
+    }
+    if (d.elA) r.push(nota("«el», хотя слово женского рода: так перед ударным a- / ha- в начале слова (el " + d.sg + ", un " + d.sg + "). Во множественном числе — «las»" + (d.pl ? ": las " + d.pl + "." : ".")));
+    if (d.sentido) r.push(nota("Род меняет значение: «el " + d.sg + "» и «la " + d.sg + "» — разные слова."));
+  } else if (d.m || d.mpl) {
+    const ks = ["m", "f", "mpl", "fpl"].filter(k => d[k]);
+    if (d.invG) r.push(it("Формы", (d.m ? d.m : "") + (d.mpl && d.mpl !== d.m ? " · " + d.mpl : "") + " (м. и ж. р. одинаково)", true));
+    else r.push(it("Формы", ks.map(k => d[k] + " — " + FES_COL[k]).filter((x, i, a) => a.indexOf(x) === i), true));
+    if (d.apoc) r.push(it(d.apocF ? "Перед сущ. ед. ч." : "Перед сущ. м. р.", d.apoc + (d.apocF ? " (м. и ж. р.)" : "")));
+    if (d.var) r.push(it("Норма RAE", d.var));
+    if (d.nota) r.push(nota(d.nota));
+  } else if (d.serie && typeof FORMAS_ES_SERIES !== "undefined") {
+    const s = FORMAS_ES_SERIES[d.serie];
+    if (d.serie === "personal") {
+      const fila = k => s.filas.find(f => f[0] === k);
+      const col = k => (s.cols.find(c => c[0] === k) || [k, k])[1];
+      r.push(it("Функция", d.celdas.map(([f, k]) => col(k) + " · " + fila(f)[1]), true));
+      if (d.celdas.some(([f, k]) => /^(3|us|uds)/.test(f) && (k === "od" || k === "oi"))) r.push(nota(s.nota));
+    } else {
+      const f = s.filas.find(x => x[0] === d.fila);
+      if (d.serie === "posesivo") {
+        r.push(it("Перед сущ.", f[2].filter((x, i, a) => a.indexOf(x) === i).join(" · ")));
+        r.push(it("После сущ. / без сущ.", f[3].join(" · ")));
+      } else if (d.neutro) r.push(it("Средний род", "не меняется; рядом с существительным — " + f.slice(2, 6).join(" · "), true));
+      else r.push(it("Формы", f.slice(2).filter(Boolean).join(" · ") + (f[6] ? " (" + f[6] + " — средний)" : ""), true));
+    }
+  } else if (d.t === "contr") r.push(it("Слитная форма", d.de.join(" + ") + " = " + entry.es, true));
+  else if (d.nota) r.push(nota(d.nota));
+  return r;
+}
 function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
   const fem = entry.femenino && entry.femenino.es ? entry.femenino : null;
   const gen = entry.posNormalized === "sustantivo" && entry.gender ? (fem ? "m" : entry.gender) : "";
@@ -327,6 +378,7 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
     .map(p => LEXICON_ES.find(x => x.es === p && x.posNormalized === "verbo")).filter(Boolean);
   const soloSe = (entry.pronominalPartner || []).some(p => /SOLO_PRONOMINAL/.test(p));
   const el = React.createElement;
+  const formas = formasEsItems(entry, el);
   return el("div", { style: { animation: "fadeIn 0.3s ease" } },
     el(FichaStyles, { c }),
     el("div", { className: "ficha" },
@@ -354,10 +406,11 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
               el("div", { className: "sense-es", style: { display: "block", marginTop: 10 } }, fem.ru)),
             el("button", { className: "btn", style: { flex: "0 0 auto", padding: "9px 12px" }, "aria-label": "Произношение", onClick: () => azHablarEs(fem.es) }, "▶"))),
         /* ── Грамматика (entrega 2, 27/10/2026): conjugación con link a Verbos, pareja
-           pronominal (ir ↔ irse), régimen y número. El plural llega con data-formas-es.js. ── */
-        (verbo || regimen.length > 0 || pareja.length > 0) && el(React.Fragment, null,
+           pronominal (ir ↔ irse), régimen y las formas de la palabra (formasEsItems). ── */
+        (verbo || regimen.length > 0 || pareja.length > 0 || formas.length > 0) && el(React.Fragment, null,
           el("div", { className: "section-lbl", style: { marginTop: 20 } }, "Грамматика"),
           el("div", { className: "meta-grid" },
+            formas,
             verbo && entry.conjugationClass && el("div", { className: "meta-item" },
               el("div", { className: "meta-k" }, "Спряжение"),
               el("a", { className: "meta-v meta-link", href: "verbos.html?id=" + entry.id, onClick: e => azNavigate(e, "verbos.html?id=" + entry.id) },

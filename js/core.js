@@ -208,6 +208,11 @@ function azSearchLexicon(query, pos) {
      pide la primera vez que se busca y avisa con "az-formas". Si se
      escribe con tilde, la tilde cuenta (hablé ≠ hable). La palabra exacta
      del léxico va primero; después, las formas; después, el resto.
+   · Formas de las palabras (27/10/2026): azBuscarEs encuentra plurales,
+     femeninos y formas de adjetivos, determinantes y artículos (libros →
+     libro, buenas → bueno, buen → bueno, los → el) con formasEsIndice de
+     data/data-formas-es.js. Si la página no lo tiene, azCargarFormasEs lo
+     pide y avisa con "az-formas". Van después de las formas verbales.
    · azHablarEs(texto): la voz del español. Mientras no estén los audios
      de Abece_voces, la voz es-ES del teléfono. */
 function azEscribirLexico() {
@@ -266,8 +271,44 @@ function azBuscarEs(query, pos) {
         href: "verbos.html?id=" + f.id + "&f=" + encodeURIComponent(f.forma) }));
     } else azCargarVerbosEs();
   }
+  /* Formas de las palabras (libros → libro, buenas → bueno, los → el): data-formas-es.js */
+  let formasPal = [];
+  if (typeof formasEsIndice === "function") {
+    const hits = azFormasEsHits(raw);
+    const vistos = {};
+    hits.forEach(x => {
+      const e = LEXICON_ES.find(y => y.id === x.id);
+      if (!e || !posOk(e.posNormalized) || azNormEs(e.es) === qe || vistos[x.id]) return;
+      vistos[x.id] = 1;
+      const f = x.f || raw.toLowerCase();
+      formasPal.push({ id: e.id, ru: f, acento: f, forma: f,
+        es: e.es + " · " + (AZ_FES_K[x.k] || ""), pos: e.posNormalized, gender: null, href: "ficha.html?id=" + e.id });
+    });
+  } else if (pos !== "verbo") azCargarFormasEs();
   const exactas = palabras.filter(p => p.exacta);
-  return exactas.concat(formas, palabras.filter(p => !p.exacta)).slice(0, 40);
+  return exactas.concat(formas, formasPal, palabras.filter(p => !p.exacta)).slice(0, 40);
+}
+let AZ_FES_NORM = null;
+/* Una forma escrita → [{ id, k }] de data-formas-es.js. Con tilde, la tilde
+   cuenta (él ≠ el); si no aparece así, se busca sin tildes. [] si no está cargado. */
+function azFormasEsHits(q) {
+  if (typeof formasEsIndice !== "function") return [];
+  const idx = formasEsIndice(), raw = String(q || "").trim().toLowerCase();
+  if (!raw) return [];
+  if (idx[raw]) return idx[raw];
+  if (!AZ_FES_NORM) { AZ_FES_NORM = {}; Object.keys(idx).forEach(k => { const n = azNormEs(k); AZ_FES_NORM[n] = (AZ_FES_NORM[n] || []).concat(idx[k]); }); }
+  return AZ_FES_NORM[azNormEs(raw)] || [];
+}
+const AZ_FES_K = { sg: "ед. ч.", pl: "мн. ч.", m: "м. р.", f: "ж. р.", mpl: "мн. ч.", fpl: "ж. р. мн. ч.", apoc: "перед сущ.", var: "мн. ч. (норма RAE)", n: "средний род" };
+let AZ_FORMASES_CARGANDO = false;
+function azCargarFormasEs() {
+  if (typeof FORMAS_ES !== "undefined" || AZ_FORMASES_CARGANDO) return;
+  AZ_FORMASES_CARGANDO = true;
+  const sc = document.createElement("script");
+  sc.src = "data/data-formas-es.js";
+  sc.onload = () => { try { window.dispatchEvent(new Event("az-formas")); } catch (e) {} };
+  sc.onerror = () => { AZ_FORMASES_CARGANDO = false; };
+  document.head.appendChild(sc);
 }
 let AZ_VERBES_CARGANDO = false;
 function azCargarVerbosEs() {
