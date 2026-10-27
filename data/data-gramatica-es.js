@@ -18,7 +18,7 @@
    Reglas (claude/INSTRUCCIONES_MODULOS_ABECE.md §4): los ejemplos usan
    solo palabras del léxico español (o sus formas: FORMAS_ES, VERBOS_ES);
    español peninsular. Los textos en ruso son BORRADOR para Iván.
-   Entregas: tanda 1 (27/10/2026) — capítulos 1 a 3; tanda 2 (27/10/2026) — 4 a 6; tanda 3 (27/10/2026) — 7 a 9.
+   Entregas: tanda 1 (27/10/2026) — capítulos 1 a 3; tanda 2 (27/10/2026) — 4 a 6; tanda 3 (27/10/2026) — 7 a 9; tanda 4 (27/10/2026) — 10 y 11. Guía completa.
    ============================================================ */
 const GRAMATICA_ES = {
  titulo: "Как устроена испанская грамматика",
@@ -481,6 +481,62 @@ const GRAMATICA_ES = {
     { fr: "___ me rompió el vaso.", base: "", op: ["Se", "Me", "Le"], ok: "Se", tr: "У меня разбился стакан.", por: "Случайно: se me rompió." },
     { fr: "¿Cómo ___ llamas?", base: "", op: ["te", "se", "tú"], ok: "te", tr: "Как тебя зовут?", por: "llamarse, 2-е лицо: te llamas." },
     { fr: "En esta tienda se ___ libros.", base: "", op: ["venden", "vende", "vendes"], ok: "venden", tr: "В этом магазине продаются книги.", por: "libros — мн. ч., значит venden." }
+   ] }
+  ]
+ }
+ ,
+
+ /* ─── Практика ─── */
+ {
+  id: "trampas", grupo: "Практика",
+  titulo: "Ловушки для русскоговорящих", sub: "las trampas",
+  desc: "Ошибки, которые русскоговорящие делают чаще всего, — и как сказать правильно.",
+  bloques: [
+   { t: "texto", texto: "Эти ошибки появляются не от незнания, а от привычки думать по-русски. Если знать их заранее, их легко избежать. В каждой паре сверху — как правильно, внизу — типичная ошибка и почему." },
+   { t: "lbl", texto: "Знакомство и о себе" },
+   { t: "par", bien: ["{Tengo} veinte años.", "Мне двадцать лет."], mal: ["Soy veinte años.", "Возраст «имеют»: tengo veinte años (буквально «имею двадцать лет»)."] },
+   { t: "par", bien: ["Es {un} libro.", "Это книга."], mal: ["Es libro.", "Перед существительным нужен артикль: es un libro."] },
+   { t: "par", bien: ["{La} profesor{a} es muy simpática.", "Учительница очень приятная."], mal: ["La profesor es muy simpática.", "У женщины — женская форма: la profesora."] },
+   { t: "par", bien: ["{Él} es mi amigo.", "Он мой друг."], mal: ["El es mi amigo.", "él (он) — со знаком ударения, el (артикль) — без. Так же tú (ты) и tu (твой)."] },
+   { t: "lbl", texto: "Где и что есть" },
+   { t: "par", bien: ["El banco {está} en la plaza.", "Банк на площади."], mal: ["El banco es en la plaza.", "Где находится — estar."] },
+   { t: "par", bien: ["{Hay} un banco en la plaza.", "На площади есть банк."], mal: ["En la plaza está un banco.", "Новый предмет (un) — hay."] },
+   { t: "par", bien: ["Es una casa {muy} grande.", "Это очень большой дом."], mal: ["Es una casa mucho grande.", "Перед прилагательным — muy; mucho — с существительным и глаголом: mucho tiempo, trabajo mucho."] },
+   { t: "lbl", texto: "Повседневная жизнь" },
+   { t: "par", bien: ["{Me} levanto a las siete.", "Я встаю в семь."], mal: ["Levanto a las siete.", "levantarse — возвратный глагол: me levanto."] },
+   { t: "par", bien: ["{Es la} una.", "Сейчас час."], mal: ["Son las una.", "Один час — ед. ч.: es la una; дальше — son las dos."] },
+   { t: "par", bien: ["{Me gusta} el fútbol.", "Мне нравится футбол."], mal: ["Yo gusto el fútbol.", "gustar — как «нравиться»: me gusta."] },
+   { t: "lbl", texto: "Покупки и еда" },
+   { t: "par", bien: ["¿La camiseta? {La} compro.", "Футболка? Беру."], mal: ["¿La camiseta? Compro.", "В испанском дополнение нельзя просто опустить, как в русском: его заменяет местоимение — la compro."] },
+   { t: "par", bien: ["Quiero comprar{lo}.", "Я хочу это купить."], mal: ["Quiero comprar lo.", "После инфинитива местоимение пишется слитно: comprarlo."] },
+   { t: "par", bien: ["Quiero {agua}.", "Я хочу воды."], mal: ["Quiero el agua.", "Вода вообще, сколько-нибудь — без артикля (el agua — та самая, конкретная)."] },
+   { t: "lbl", texto: "Город и движение" },
+   { t: "par", bien: ["Voy {a} la playa.", "Я иду на пляж."], mal: ["Voy en la playa.", "Куда? — a (как русское в / на + винительный). Где? — en."] },
+   { t: "par", bien: ["Voy {en} metro.", "Я еду на метро."], mal: ["Voy con metro.", "Транспорт — en: en metro, en coche. Пешком — a pie."] },
+   { t: "lbl", texto: "Письмо" },
+   { t: "par", bien: ["Hablo {ruso} y {español}.", "Я говорю по-русски и по-испански."], mal: ["Hablo Ruso y Español.", "Языки, национальности, дни и месяцы пишутся с маленькой буквы."] },
+   { t: "par", bien: ["{¿}Dónde vives?", "Где ты живёшь?"], mal: ["Dónde vives?", "В начале вопроса — перевёрнутый знак ¿, в начале восклицания — ¡."] }
+  ]
+ },
+ {
+  id: "practica", grupo: "Практика",
+  titulo: "Смешанная практика", sub: "práctica mezclada",
+  desc: "Упражнения по всем главам вперемешку.",
+  bloques: [
+   { t: "texto", texto: "Здесь собраны упражнения по всем главам. Если ошибёшься, прочитай объяснение и вернись к нужной главе." },
+   { t: "practica", items: [
+    { fr: "___ agua de esta fuente está muy fría.", base: "", op: ["El", "La", "Lo"], ok: "El", tr: "Вода в этом источнике очень холодная.", por: "agua — ж. р., но перед ударным a- — el (глава «Артикль»)." },
+    { fr: "Necesito dos ___.", base: "", op: ["lápices", "lápizes", "lápiz"], ok: "lápices", tr: "Мне нужны два карандаша.", por: "-z → -ces (глава «Род и число»)." },
+    { fr: "Tengo una amiga ___.", base: "", op: ["francesa", "francés", "franceses"], ok: "francesa", tr: "У меня есть подруга-француженка.", por: "Национальность в ж. р. — -a (глава «Согласование»)." },
+    { fr: "Mis padres ___ en Barcelona.", base: "", op: ["están", "son", "hay"], ok: "están", tr: "Мои родители в Барселоне.", por: "Где — estar (глава «Ser, estar и hay»)." },
+    { fr: "En mi calle ___ dos farmacias.", base: "", op: ["hay", "están", "son"], ok: "hay", tr: "На моей улице две аптеки.", por: "Есть ли вообще, с числом — hay." },
+    { fr: "¿Las llaves? No ___ encuentro.", base: "", op: ["las", "les", "los"], ok: "las", tr: "Ключи? Не могу их найти.", por: "llaves — ж. р. мн. ч., «что?» — las (глава «Местоимения»)." },
+    { fr: "A mis hijos les ___ los videojuegos.", base: "", op: ["encantan", "encanta", "encantamos"], ok: "encantan", tr: "Мои дети обожают видеоигры.", por: "Нравятся игры (мн. ч.) — encantan (глава «Gustar»)." },
+    { fr: "El sábado pasado ___ a mis abuelos.", base: "", op: ["visité", "he visitado", "visitaba"], ok: "visité", tr: "В прошлую субботу я навестил бабушку и дедушку.", por: "Законченный период — indefinido (глава «Времена»)." },
+    { fr: "Cuando era niño, ___ al fútbol todos los días.", base: "", op: ["jugaba", "jugué", "he jugado"], ok: "jugaba", tr: "В детстве я каждый день играл в футбол.", por: "Привычка в прошлом («каждый день») — imperfecto." },
+    { fr: "Este regalo es ___ ti.", base: "", op: ["para", "por", "a"], ok: "para", tr: "Этот подарок для тебя.", por: "Кому предназначено — para (глава «Предлоги»)." },
+    { fr: "Veo ___ mi hermano en el parque.", base: "", op: ["a", "de", "en"], ok: "a", tr: "Я вижу брата в парке.", por: "Конкретный человек — с a." },
+    { fr: "¿A qué hora ___ acuestas?", base: "", op: ["te", "se", "tú"], ok: "te", tr: "Во сколько ты ложишься спать?", por: "acostarse, 2-е лицо: te acuestas (глава «se»)." }
    ] }
   ]
  }
