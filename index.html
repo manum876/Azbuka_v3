@@ -35,15 +35,14 @@
   .pbar{height:5px;border-radius:3px;overflow:hidden;margin-top:8px;}
 
   /* Tarjeta Azbuka: mismo formato que las de módulos (ícono a la
-     izquierda, título y texto a la derecha), con los niveles debajo. */
-  .hero-card{width:100%;box-sizing:border-box;padding:18px 16px;border-radius:16px;margin-bottom:16px;}
+     izquierda, título y texto a la derecha). 27/10/2026 (Manu): sin los chips
+     de nivel; la tarjeta entera lleva al índice del curso. */
+  .hero-card{display:block;width:100%;box-sizing:border-box;padding:18px 16px;border-radius:16px;margin-bottom:16px;text-decoration:none;transition:.18s;}
+  a.hero-card:active{transform:scale(.98);}
   .hero-top{display:flex;align-items:flex-start;gap:14px;}
   .hero-icon{width:64px;height:64px;border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:#B5605C;letter-spacing:-1px;flex-shrink:0;}
   .hero-title{font-size:24px;font-weight:800;line-height:1.1;margin-bottom:6px;}
   .hero-desc{font-size:13.5px;line-height:1.55;}
-  .level-row{display:flex;gap:8px;margin-top:16px;}
-  .level-btn{flex:1;text-align:center;padding:9px 6px;border-radius:12px;font-size:12px;font-weight:700;text-decoration:none;box-sizing:border-box;transition:.18s;}
-  .level-btn.active:active{transform:scale(.96);}
 
   .section-lbl{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 12px;}
 
@@ -72,17 +71,17 @@ const { useState, useEffect } = htmPreact;
 /* ── Abecé (27/10/2026): el inicio con la marca de Abecé y sus textos en ruso
    (borrador para Iván). Mientras Abecé no tenga unidades, no se muestran
    «Seguir estudiando», «Hoy» ni «Repaso de hoy» (son de las unidades de Azbuka),
-   y los tres niveles quedan bloqueados. ── */
+   y la tarjeta no lleva a ningún índice. ── */
 const ABECE = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
 const SIN_UNIDADES = ABECE && !(AZ_CATALOGO.abece.unidades || []).length;
 const TXI = ABECE ? {
   glyph: (AZ_DIRECCION.marca || {}).glyph || "Ab", titulo: (AZ_DIRECCION.marca || {}).nombre || "Abecé",
-  desc: "Полный курс испанского с нуля для тех, кто говорит по-русски. Понятная теория, практические упражнения и живые примеры — чтобы ты уверенно шёл вперёд, от первых слов до свободного общения.",
+  desc: "Полный курс испанского с нуля для тех, кто говорит по-русски. Понятная теория, практические упражнения и живые примеры — чтобы ты уверенно шёл вперёд, от уровня A1 до B1.",
   buscar: "Поиск по-испански или по-русски…", buscarAria: "Найти слово", limpiar: "Очистить поиск", sinRes: "Ничего не найдено",
   lexico: "LEXICON_ES"
 } : {
   glyph: "Аз", titulo: "Азбука",
-  desc: "Un curso completo para aprender ruso desde cero, pensado para hispanohablantes. Combina teoría clara, ejercicios prácticos y ejemplos reales para que avances con confianza, de principiante a avanzado.",
+  desc: "Un curso completo para aprender ruso desde cero, pensado para hispanohablantes. Combina teoría clara, ejercicios prácticos y ejemplos reales para que avances con confianza, del nivel A1 al B1.",
   buscar: "Buscar en ruso o en español…", buscarAria: "Buscar una palabra", limpiar: "Limpiar búsqueda", sinRes: "Sin resultados",
   lexico: "LEXICON_COMER"
 };
@@ -141,43 +140,22 @@ function App() {
   },
     React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
 
-      /* ── HERO: tarjeta (no es link), ícono/título/descripción centrados,
-         y debajo los 3 botones de nivel ── */
-      React.createElement("div", {
+      /* ── HERO: la tarjeta del curso (ícono, título y descripción). 27/10/2026
+         (Manu): sin los chips de nivel (A1 → B1, B1 → B2, B2 → C1); el nivel
+         queda en la descripción y la tarjeta entera lleva al índice del curso.
+         En Abecé, sin unidades, no es link. ── */
+      React.createElement(SIN_UNIDADES ? "div" : "a", Object.assign({
         className: "hero-card",
         style: { background: c.card, border: `1px solid ${c.border}` }
-      },
+      }, SIN_UNIDADES ? {} : { href: AZ_DIRECCION.indice || "azbuka-index-1.html", onClick: (e) => azNavigate(e, AZ_DIRECCION.indice || "azbuka-index-1.html") }),
         React.createElement("div", { className: "hero-top" },
           React.createElement("div", { className: "hero-icon" }, TXI.glyph),
           React.createElement("div", { style: { flex: 1, minWidth: 0 } },
             React.createElement("div", { className: "hero-title", style: { color: c.gold } }, TXI.titulo),
         React.createElement("div", { className: "hero-desc", style: { color: c.textMuted } },
           TXI.desc)
-          )
-        ),
-        React.createElement("div", { className: "level-row" },
-          SIN_UNIDADES ? React.createElement("div", {
-            className: "level-btn",
-            style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted, opacity: .65 }
-          }, "A1 → B1") : React.createElement("a", {
-            className: "level-btn active", href: "azbuka-index-1.html",
-            onClick: (e) => azNavigate(e, "azbuka-index-1.html"),
-            style: { background: c.gold, color: "#0F0F14" }
-          },
-            "A1 → B1"
           ),
-          React.createElement("div", {
-            className: "level-btn",
-            style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted, opacity: .65 }
-          },
-            "B1 → B2"
-          ),
-          React.createElement("div", {
-            className: "level-btn",
-            style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted, opacity: .65 }
-          },
-            "B2 → C1"
-          )
+          !SIN_UNIDADES && React.createElement("span", { style: { color: c.gold, fontSize: 20, fontWeight: 700, alignSelf: "center", flexShrink: 0 } }, "›")
         )
       ),
 
