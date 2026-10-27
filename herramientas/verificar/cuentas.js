@@ -118,7 +118,8 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  await d2.p.reload({waitUntil:'networkidle'}); await d2.p.waitForTimeout(1200);
  chk(/Abecé/.test(await d2.p.locator('header').innerText()), 'la revisora ve Abecé en modo prueba');
  chk(await d2.p.locator('text=Abecé en construcción').count()>0 && await d2.p.locator('text=Alumnos').count()>0, 'la revisora ve «Abecé en construcción» y «Alumnos»');
- chk(!(await d2.p.locator('text=Accesos').count()) && !(await d2.p.locator('text=Reportes').count()), 'la revisora no ve Accesos ni Reportes');
+ // Se buscan los títulos de sección (texto exacto): el texto de «Abecé en construcción» nombra Accesos y Reportes (27/10/2026)
+  chk(!(await d2.p.getByText('Accesos', { exact: true }).count()) && !(await d2.p.getByText('Reportes', { exact: true }).count()), 'la revisora no ve Accesos ni Reportes');
  await d2.p.fill('input[placeholder="mail@ejemplo.com"]','Bob@X.com'); await d2.p.fill('input[placeholder^="Nota"]','Bob'); await d2.p.click('button:has-text("Habilitar")'); await d2.p.waitForTimeout(600);
  chk(srv.permitidos['bob@x.com'] && srv.permitidos['bob@x.com'].invitado_por==='ana@x.com' && !srv.permitidos['bob@x.com'].admin, 'la revisora habilita un alumno (no admin)');
  chk(await d2.p.locator('text=bob@x.com').count()>0 && !(await d2.p.locator('text=manuelmunoz87@gmail.com').count()), 'la revisora ve solo sus alumnos');

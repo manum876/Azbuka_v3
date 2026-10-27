@@ -5,7 +5,9 @@
    y senses[].ru / senses[].definitionRu. Ficha y decisiones:
    claude/LEXICO_ABECE_FUENTES.md.
 
-   Estado: 5364 entradas (léxico base completo: 10 tandas, 26/10/2026). Lo carga el Diccionario
+   Estado: 5365 entradas (léxico base completo: 10 tandas, 26/10/2026; correcciones del 27/10/2026:
+   molar separado en verbo ESP-04818 y sustantivo ESP-05404, muela nueva ESP-05405, linear ESP-03453
+   quitado —su ID no se vuelve a usar—). Lo carga el Diccionario
    (ficha.html) en Abecé, y core.js lo pide solo para el buscador (27/10/2026).
 
    Campos:
@@ -67,7 +69,7 @@ const LEXICON_ES_META = {
   "wordfreq, Robyn Speer (CC BY-SA 4.0)",
   "WikDict / FreeDict es-ru (CC BY-SA)"
  ],
- "totalEntries": 5364,
+ "totalEntries": 5365,
  "tandas": [
   1,
   2,
@@ -79,7 +81,8 @@ const LEXICON_ES_META = {
   8,
   9,
   10,
-  11
+  11,
+  12
  ]
 };
 const LEXICON_ES = [
@@ -143620,45 +143623,6 @@ const LEXICON_ES = [
   "femenino": {}
  },
  {
-  "id": "ESP-03453",
-  "es": "linear",
-  "acento": "li·ne·AR",
-  "posNormalized": "verbo",
-  "translit": "линэа́р",
-  "ipa": "lineˈaɾ",
-  "gender": "",
-  "numberClass": "",
-  "senses": [
-   {
-    "ru": "линовать, чертить линии",
-    "definitionRu": "«linear el papel» — разлиновать бумагу. Редкое слово; обычно говорят «trazar líneas».",
-    "source": "redactado"
-   }
-  ],
-  "introducedIn": [],
-  "appearsIn": [],
-  "propio": false,
-  "sourceRefs": {
-   "subtitulos": {
-    "porMillon": 12.07,
-    "puesto": 3455
-   },
-   "corpes": {
-    "lema": "linear",
-    "categorias": [
-     "V"
-    ]
-   },
-   "tanda": 8,
-   "clave": "linear|V"
-  },
-  "temas": [],
-  "regimen": [],
-  "pronominalPartner": [],
-  "conjugationClass": "-ar",
-  "femenino": {}
- },
- {
   "id": "ESP-03454",
   "es": "occidental",
   "acento": "oc·ci·den·TAL",
@@ -198893,11 +198857,6 @@ const LEXICON_ES = [
     "ru": "нравиться (разг., Испания)",
     "definitionRu": "Строится как «gustar»: «Me mola» — мне нравится, круто.",
     "source": "redactado"
-   },
-   {
-    "ru": "коренной зуб",
-    "definitionRu": "Как существительное: «un molar».",
-    "source": "redactado"
    }
   ],
   "introducedIn": [],
@@ -223563,6 +223522,90 @@ const LEXICON_ES = [
    "oponerse"
   ],
   "conjugationClass": "-er",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05404",
+  "es": "molar",
+  "acento": "mo·LAR",
+  "posNormalized": "sustantivo",
+  "translit": "мола́р",
+  "ipa": "molˈaɾ",
+  "gender": "m",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "коренной зуб",
+    "definitionRu": "Слово стоматологов: «un molar», «los molares». В обычной речи говорят «muela».",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 1.07,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "molar",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "frecuencia de wordfreq; entrada agregada por Manu (27/10/2026)",
+   "tanda": 12,
+   "clave": "molar|N"
+  },
+  "temas": [
+   "cuerpo-salud"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05405",
+  "es": "muela",
+  "acento": "MUE·la",
+  "posNormalized": "sustantivo",
+  "translit": "муэ́ла",
+  "ipa": "mˈwela",
+  "gender": "f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "коренной зуб",
+    "definitionRu": "«Me duele una muela» — у меня болит зуб. «La muela del juicio» — зуб мудрости.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 2.19,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "muela",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "frecuencia de wordfreq; entrada agregada por Manu (27/10/2026)",
+   "tanda": 12,
+   "clave": "muela|N"
+  },
+  "temas": [
+   "cuerpo-salud"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
   "femenino": {}
  }
 ];

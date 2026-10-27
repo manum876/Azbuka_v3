@@ -51,6 +51,9 @@
    y su propia ficha (FichaEs): la palabra sola con la etiqueta de
    categoría y género, como en Azbuka, y un apartado «Женский род» cuando
    la forma femenina es otra palabra (campo femenino). Lo de Azbuka no cambia.
+   Entrega 2 (27/10/2026): sección «Грамматика» con el grupo del verbo (link a
+   Verbos), la pareja pronominal (ir ↔ irse), «только с «se»» y el régimen
+   («Управление»), y el botón «🗣️ Спряжение» en los verbos.
    ============================================================ */
 const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
 
@@ -318,6 +321,11 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
   const colNivel = [darkMode ? "#E2884A" : "#C85A1A", "#C9B369", darkMode ? "#4CAF82" : "#2E7D55"];
   const marcarNivel = n => { azSetItemLevel("lex:" + entry.id, n); setNivel(n); };
   const tr = (entry.senses || []).map(x => x.ru).join("; ");
+  const verbo = entry.posNormalized === "verbo";
+  const regimen = entry.regimen || [];
+  const pareja = (entry.pronominalPartner || []).filter(p => !/^SIN_PAREJA/.test(p))
+    .map(p => LEXICON_ES.find(x => x.es === p && x.posNormalized === "verbo")).filter(Boolean);
+  const soloSe = (entry.pronominalPartner || []).some(p => /SOLO_PRONOMINAL/.test(p));
   const el = React.createElement;
   return el("div", { style: { animation: "fadeIn 0.3s ease" } },
     el(FichaStyles, { c }),
@@ -345,6 +353,24 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
               el("span", { className: "pos-badge" }, (POS_RU[entry.posNormalized] || "") + " · " + GEN_RU.f),
               el("div", { className: "sense-es", style: { display: "block", marginTop: 10 } }, fem.ru)),
             el("button", { className: "btn", style: { flex: "0 0 auto", padding: "9px 12px" }, "aria-label": "Произношение", onClick: () => azHablarEs(fem.es) }, "▶"))),
+        /* ── Грамматика (entrega 2, 27/10/2026): conjugación con link a Verbos, pareja
+           pronominal (ir ↔ irse), régimen y número. El plural llega con data-formas-es.js. ── */
+        (verbo || regimen.length > 0 || pareja.length > 0) && el(React.Fragment, null,
+          el("div", { className: "section-lbl", style: { marginTop: 20 } }, "Грамматика"),
+          el("div", { className: "meta-grid" },
+            verbo && entry.conjugationClass && el("div", { className: "meta-item" },
+              el("div", { className: "meta-k" }, "Спряжение"),
+              el("a", { className: "meta-v meta-link", href: "verbos.html?id=" + entry.id, onClick: e => azNavigate(e, "verbos.html?id=" + entry.id) },
+                "глагол на " + entry.conjugationClass + " ›")),
+            pareja.length > 0 && el("div", { className: "meta-item" },
+              el("div", { className: "meta-k" }, /se$/.test(entry.es) ? "Без «se»" : "С «se»"),
+              pareja.map(p => el("a", { key: p.id, className: "meta-v meta-link", style: { display: "block" }, href: "ficha.html?id=" + p.id, onClick: e => azNavigate(e, "ficha.html?id=" + p.id) }, p.es + " ›"))),
+            soloSe && el("div", { className: "meta-item" },
+              el("div", { className: "meta-k" }, "С «se»"),
+              el("div", { className: "meta-v" }, "только с «se»")),
+            regimen.length > 0 && el("div", { className: "meta-item", style: { gridColumn: "1 / -1" } },
+              el("div", { className: "meta-k" }, "Управление"),
+              regimen.map((r, i) => el("div", { key: i, className: "meta-v" }, r))))),
         el("div", { className: "section-lbl", style: { marginTop: 20 } }, "Твой прогресс"),
         el("div", { className: "nivel-row" },
           [0, 1, 2].map(n => el("button", {
@@ -355,6 +381,7 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
           }, NIVEL_RU[n]))),
         el("div", { className: "nivel-nota" }, "Отмечается само по упражнениям. Если не совпадает с тем, что ты знаешь, нажми, чтобы исправить."),
         el("div", { className: "buttons" },
+          verbo && el("a", { className: "btn pr", href: "verbos.html?id=" + entry.id, onClick: e => azNavigate(e, "verbos.html?id=" + entry.id) }, "🗣️ Спряжение"),
           el("button", { className: "btn", onClick: () => azHablarEs(entry.es) }, "▶ Произношение"),
           typeof azGuardarEnCuaderno === "function" && el("button", {
             className: "btn", onClick: () => azGuardarEnCuaderno(entry.es + (fem ? " / " + fem.es : "") + " — " + tr + (fem ? "; " + fem.ru : ""), { titulo: "Карточка · " + entry.es, href: "ficha.html?id=" + entry.id })

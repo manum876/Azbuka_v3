@@ -16,7 +16,7 @@
      vez, sin el parámetro.
 
    · ARCHIVOS PESADOS (27/10/2026): los datos grandes (léxicos, casos,
-     verbos, Masha) y todo assets/ (librerías, fuentes, íconos) se
+     verbos —también los de Abecé—, Masha) y todo assets/ (librerías, fuentes, íconos) se
      sirven AL INSTANTE desde la copia guardada, y la versión nueva se
      baja en segundo plano: la ve el alumno la próxima vez que abre la
      app. Antes, con «primero la red», cada apertura esperaba hasta 4 s
@@ -39,7 +39,7 @@
 const AZ_CACHE = "azbuka-v3";
 const AZ_ESPERA = 1500;
 /* Se sirven desde la copia guardada y se actualizan en segundo plano (27/10/2026) */
-const AZ_PESADOS = /\/(assets\/|data\/data-(lexicon|lexicon-es|casos|verbos|masha)\.js$)/;
+const AZ_PESADOS = /\/(assets\/|data\/data-(lexicon|lexicon-es|casos|verbos|verbos-es|masha)\.js$)/;
 const AZ_PRECACHE = [
   "./", "ajustes.html", "alfabeto.html", "azbuka-1.html", "azbuka-2.html", "azbuka-3.html", "azbuka-4.html", "azbuka-5.html", "azbuka-6.html", "azbuka-7.html", "azbuka-8.html", "azbuka-9.html", "azbuka-10.html", "azbuka-11.html", "azbuka-12.html", "azbuka-13.html", "azbuka-14.html",
   "azbuka-index-1.html", "casos.html", "cuaderno.html", "dialogos.html", "ficha.html",

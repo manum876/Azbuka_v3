@@ -16,11 +16,16 @@
 <body>
 <div id="root"></div>
 <script src="assets/preact.js"></script>
-<script src="data/data-lexicon.js"></script>
-<script src="data/data-verbos.js"></script>
-<script src="data/data-gramatica.js"></script>
 <script src="data/data-catalogo.js"></script>
 <script src="js/core.js"></script>
+<!-- Los datos de la dirección activa (27/10/2026): en Azbuka, el léxico ruso, sus
+     verbos y la gramática; en Abecé, el léxico español, sus verbos y js/verbos-es.js -->
+<script>
+(AZ_DIRECCION.id === "abece"
+  ? ["data/data-lexicon-es.js", "data/data-verbos-es.js", "js/verbos-es.js"]
+  : ["data/data-lexicon.js", "data/data-verbos.js", "data/data-gramatica.js"]
+).forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
 <script src="assets/supabase.js"></script>
 <script src="js/cuenta.js"></script>
 <script src="js/progress.js"></script>
@@ -40,6 +45,13 @@
    data-lexicon.js (palabra) y data-verbos.js (formas). Ambos son
    de solo lectura. Las únicas reglas que arma la página son las
    que no tienen excepciones: futuro compuesto (буду + infinitivo).
+
+   ABECÉ (27/10/2026): con la dirección «abece» la página carga el léxico
+   español, data/data-verbos-es.js y js/verbos-es.js, y muestra AzVerbosEs
+   (de ese archivo): las mismas clases y el mismo patrón (portada con
+   buscador, ficha con buscador fijo, ?f= resaltada), con chips de tiempo,
+   la parte irregular en dorado, indefinido e imperfecto lado a lado y
+   los verbos del mismo modelo. Textos en ruso. Lo de Azbuka no cambia.
    ============================================================ */
 const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
 const h = React.createElement;
@@ -521,7 +533,9 @@ function App() {
       id ? h(FichaVerbo, { key: id, id, c }) : portada)
   );
 }
-htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+/* Abecé: la página de verbos del español (js/verbos-es.js), con los mismos estilos */
+const VERBOS_ABECE = AZ_DIRECCION.id === "abece" && typeof AzVerbosEs === "function";
+htmPreact.render(VERBOS_ABECE ? htmPreact.h(AzVerbosEs, { Estilos: VerbosStyles }) : htmPreact.h(App, null), document.getElementById('root'));
 </script>
 </body>
 </html>

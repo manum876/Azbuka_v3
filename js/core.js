@@ -176,6 +176,13 @@ function azSearchLexicon(query, pos) {
      azSearchLexicon (ru = la palabra que se muestra, es = la traducción).
      Si la página no tiene el léxico, lo pide (azCargarLexEs) y avisa con
      el evento "az-formas", como las formas declinadas.
+   · Formas verbales (27/10/2026): azBuscarEs también encuentra formas
+     conjugadas (hablé → hablar, me levanto → levantarse, levántate →
+     levantarse), con vesBuscarForma de js/verbos-es.js. Si la página no
+     tiene data/data-verbos-es.js y js/verbos-es.js, azCargarVerbosEs los
+     pide la primera vez que se busca y avisa con "az-formas". Si se
+     escribe con tilde, la tilde cuenta (hablé ≠ hable). La palabra exacta
+     del léxico va primero; después, las formas; después, el resto.
    · azHablarEs(texto): la voz del español. Mientras no estén los audios
      de Abece_voces, la voz es-ES del teléfono. */
 function azEscribirLexico() {
@@ -219,11 +226,38 @@ function azBuscarEs(query, pos) {
     if (r >= 0) hall.push({ e, r, fem });
   });
   hall.sort((a, b) => a.r - b.r);
-  return hall.slice(0, 40).map(({ e, fem }) => {
+  const palabras = hall.slice(0, 40).map(({ e, fem, r }) => {
     const tr = (e.senses || []).map(x => x.ru).join(" · ");
     const pal = fem ? e.femenino.es : e.es;
     return { id: e.id, ru: pal, acento: pal, es: fem ? e.femenino.ru + " · ж. р. от " + e.es : tr,
-      pos: e.posNormalized, gender: e.gender || null, href: "ficha.html?id=" + e.id };
+      pos: e.posNormalized, gender: e.gender || null, href: "ficha.html?id=" + e.id, exacta: r === 0 };
+  });
+  /* Formas verbales (hablé → hablar): después de la palabra exacta, antes del resto */
+  let formas = [];
+  if (posOk("verbo")) {
+    if (typeof vesBuscarForma === "function" && typeof VERBOS_ES !== "undefined") {
+      formas = vesBuscarForma(raw).map(f => ({ id: f.id, ru: f.forma, acento: f.forma, forma: f.forma,
+        es: VERBOS_ES[f.id].es + " · " + f.etiquetas.join(" / "), pos: "verbo", gender: null,
+        href: "verbos.html?id=" + f.id + "&f=" + encodeURIComponent(f.forma) }));
+    } else azCargarVerbosEs();
+  }
+  const exactas = palabras.filter(p => p.exacta);
+  return exactas.concat(formas, palabras.filter(p => !p.exacta)).slice(0, 40);
+}
+let AZ_VERBES_CARGANDO = false;
+function azCargarVerbosEs() {
+  if (AZ_VERBES_CARGANDO) return;
+  const faltan = [];
+  if (typeof VERBOS_ES === "undefined") faltan.push("data/data-verbos-es.js");
+  if (typeof vesBuscarForma !== "function") faltan.push("js/verbos-es.js");
+  if (!faltan.length) return;
+  AZ_VERBES_CARGANDO = true;
+  let pendientes = faltan.length;
+  faltan.forEach(src => {
+    const sc = document.createElement("script");
+    sc.src = src;
+    sc.onload = sc.onerror = () => { if (--pendientes === 0) { AZ_VERBES_CARGANDO = false; try { window.dispatchEvent(new Event("az-formas")); } catch (e) {} } };
+    document.head.appendChild(sc);
   });
 }
 /* En Abecé, el léxico español se pide en segundo plano al terminar de cargar
