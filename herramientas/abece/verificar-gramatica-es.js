@@ -1,6 +1,6 @@
 /* Abecé — comprueba la guía de Gramática (data/data-gramatica-es.js):
    toda palabra en español de los capítulos existe en el léxico o entre
-   sus formas (FORMAS_ES, VERBOS_ES), y cada práctica tiene su respuesta
+   sus formas (FORMAS_ES, VERBOS_ES; también con pronombre pegado: dámelo), y cada práctica tiene su respuesta
    entre las opciones. Uso: node herramientas/abece/verificar-gramatica-es.js */
 const vm = require("vm"), fs = require("fs"), path = require("path");
 const RAIZ = path.join(__dirname, "..", "..");
@@ -14,11 +14,24 @@ Object.keys(ctx.FORMAS_ES).forEach(id => ctx.formasEsLista(id).forEach(x => add(
 Object.values(ctx.FORMAS_ES_SERIES).forEach(s => JSON.stringify(s.filas).replace(/[a-záéíóúüñ]+/gi, w => add(w)));
 const recorre = v => { if (Array.isArray(v)) v.forEach(recorre); else if (typeof v === "string") add(v); };
 Object.values(ctx.VERBOS_ES).forEach(e => Object.values(e).forEach(recorre));
+/* Formas con pronombre pegado (dámelo, levántate, dártelo): se quita el
+   pronombre y se compara sin tildes con las formas del verbo. */
+const sinTilde = w => w.normalize("NFD").replace(/[\u0301]/g, "").normalize("NFC");
+const conocidasSin = new Set([...conocidas].map(sinTilde));
+const CLIT = /(me|te|se|nos|os|lo|la|los|las|le|les)$/;
+function conPronombre(w) {
+  let x = sinTilde(w.toLowerCase());
+  for (let n = 0; n < 2 && CLIT.test(x); n++) {
+    x = x.replace(CLIT, "");
+    if (x.length > 1 && conocidasSin.has(x)) return true;
+  }
+  return false;
+}
 const problemas = [];
 const LATIN = /(^|[^a-záéíóúüñ\-])([a-záéíóúüñ]+)(?![a-záéíóúüñ])/gi;
 function mira(txt, donde) {
   String(txt).replace(/[{}]/g, "").replace(LATIN, (m, p, w) => {
-    if (!conocidas.has(w.toLowerCase())) problemas.push(donde + ": «" + w + "»");
+    if (!conocidas.has(w.toLowerCase()) && !conPronombre(w)) problemas.push(donde + ": «" + w + "»");
     return m;
   });
 }

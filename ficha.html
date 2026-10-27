@@ -423,7 +423,12 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
               el("div", { className: "meta-v" }, "только с «se»")),
             regimen.length > 0 && el("div", { className: "meta-item", style: { gridColumn: "1 / -1" } },
               el("div", { className: "meta-k" }, "Управление"),
-              regimen.map((r, i) => el("div", { key: i, className: "meta-v" }, r))))),
+              regimen.map((r, i) => el("div", { key: i, className: "meta-v" }, r)),
+              /* «?» al capítulo de preposiciones de la guía de Gramática (27/10/2026) */
+              el("a", { className: "meta-v meta-link", style: { display: "block", marginTop: 4 }, href: "gramatica.html?guia=preposiciones", onClick: e => azNavigate(e, "gramatica.html?guia=preposiciones") }, "Предлоги ?")),
+            (pareja.length > 0 || soloSe) && el("div", { className: "meta-item" },
+              el("div", { className: "meta-k" }, "Маленькое «se»"),
+              el("a", { className: "meta-v meta-link", href: "gramatica.html?guia=se", onClick: e => azNavigate(e, "gramatica.html?guia=se") }, "Что значит se ?")))),
         el("div", { className: "section-lbl", style: { marginTop: 20 } }, "Твой прогресс"),
         el("div", { className: "nivel-row" },
           [0, 1, 2].map(n => el("button", {

@@ -193,6 +193,12 @@ function GramStyles({ c, dark }) {
     .g-p{margin-top:14px;font-size:15px;line-height:1.6;color:${c.textSub};}
     .g-p:first-child{margin-top:18px;}
     .gtab{margin-top:14px;}
+    .flujo{margin-top:14px;}
+    .fl-paso{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:10px 14px;}
+    .fl-fin{background:${c.gold}14;border-color:${c.gold}66;}
+    .fl-k{font-size:12px;font-weight:600;color:${c.textMuted};margin-bottom:4px;line-height:1.4;}
+    .fl-v{font-size:15.5px;font-weight:700;color:${c.text};line-height:1.35;}
+    .fl-arrow{text-align:center;color:${c.gold};font-size:16px;font-weight:700;line-height:1;padding:4px 0;}
     .gtab th{font-size:10.5px;color:${c.textMuted};text-transform:uppercase;letter-spacing:.5px;}
     .gtab td{font-size:13.5px;line-height:1.4;color:${c.text};word-break:break-word;}
     .gtab td:first-child{font-weight:700;}
@@ -431,6 +437,14 @@ function GuiaTabla({ cols, filas }) {
     h("thead", null, h("tr", null, cols.map((t, i) => h("th", { key: i }, t)))),
     h("tbody", null, filas.map((f, i) => h("tr", { key: i }, f.map((x, j) => h("td", { key: j }, h(Marcado, { text: x })))))));
 }
+/* Diagrama de pasos (ser / estar / hay): como el de la guía de Casos */
+function GuiaFlujo({ pasos }) {
+  return h("div", { className: "flujo" }, pasos.map((p, i) => h("div", { key: i },
+    i > 0 && h("div", { className: "fl-arrow" }, "↓"),
+    h("div", { className: "fl-paso" + (i === pasos.length - 1 ? " fl-fin" : "") },
+      h("div", { className: "fl-k" }, p[0]),
+      h("div", { className: "fl-v" }, h(Marcado, { text: p[1] }))))));
+}
 function GuiaPar({ bien, mal, showTr }) {
   return h("div", { className: "par" },
     h("div", { className: "par-row" },
@@ -486,6 +500,7 @@ function GuiaBloque({ b, showTr }) {
     case "lbl": return h("div", { className: "section-lbl", style: { marginTop: 28 } }, b.texto);
     case "nota": return h("div", { className: "nota", style: { marginTop: 14 } }, h(Marcado, { text: b.texto }));
     case "tabla": return h(GuiaTabla, { cols: b.cols, filas: b.filas });
+    case "flujo": return h(GuiaFlujo, { pasos: b.pasos });
     case "par": return h(GuiaPar, { bien: b.bien, mal: b.mal, showTr });
     case "ejemplos": return h("div", { style: { marginTop: 14 } }, b.items.map((e, i) => h(Ejemplo, { key: i, fr: e[0], tr: e[1], por: e[2], titulo: e[3], showTr })));
     case "practica": return h(GuiaPractica, { items: b.items, showTr });
@@ -549,7 +564,7 @@ function GuiaSheet({ inicio, onClose, c }) {
 /* Capítulos de la guía que tocan una palabra (botones «?» de la ficha) */
 function capitulosDe(d) {
   const ids = d.t === "sust" ? ["articulo", "genero"] : (d.t === "adj" || ((d.t === "det" || d.t === "num") && (d.m || d.mpl))) ? ["concordancia"]
-    : (d.t === "art" || d.t === "contr") ? ["articulo"] : [];
+    : (d.t === "art" || d.t === "contr") ? ["articulo"] : d.serie === "personal" ? ["pronombres", "gustar"] : [];
   return HAY_GUIA ? ids.map(gramaticaEsGuia).filter(Boolean) : [];
 }
 
