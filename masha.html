@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Азбука">
-<title>Азбука — Masha</title>
+<title>Азбука — Hablar con Masha</title>
 <meta name="theme-color" content="#0F0F14">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -617,7 +617,7 @@ function Portada({ c, unidad, hechos }) {
       h("div", { className: "intro-top" },
         h("div", { className: "intro-icon", style: { background: col.bg, color: col.fg }, lang: "ru" }, MOD.glyph),
         h("div", null,
-          h("div", { className: "intro-title" }, "Masha"),
+          h("div", { className: "intro-title" }, "Hablar con Masha"),
           h("div", { className: "intro-kicker" }, M.temas.length + " TEMAS · A1 A B1"))),
       h("div", { className: "intro-desc" }, "Charla por escrito con Masha, una estudiante de Moscú. Te pregunta por tu vida y le puedes preguntar por la suya, con lo que ya aprendiste en las unidades."),
       [["Escribe en ruso", "Con el teclado ruso del teléfono, o toca una de las ideas."],
@@ -826,7 +826,7 @@ function App() {
     if (typeof azModuleTouch === "function") azModuleTouch("masha");
   })(); }, []);
   const c = azColors(darkMode);
-  window.azFuenteActual = () => T ? "Masha · " + T.tituloEs : "Masha";
+  window.azFuenteActual = () => T ? "Hablar con Masha · " + T.tituloEs : "Hablar con Masha";
   /* Guarda lo que Masha sabe del alumno y, al terminar, suma una vez el tema */
   const guardarMem = async (alumno, terminado) => {
     const m = await azGet("az_masha", {});

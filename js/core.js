@@ -114,6 +114,7 @@ function azEsNeutro(es) {
   return grupos.length ? grupos.join("; ") : txt;
 }
 function azSearchLexicon(query, pos) {
+  if (AZ_DIRECCION.id === "abece") return azBuscarEs(query, pos);   /* Abecé: léxico español (27/10/2026) */
   if (typeof LEXICON_COMER === "undefined") return [];
   const q = azNormRu((query || "").trim().toLowerCase());
   if (!q) return [];
@@ -153,6 +154,93 @@ function azSearchLexicon(query, pos) {
       href: f.modulo + "?id=" + f.id + "&f=" + encodeURIComponent(f.forma)
     }));
   return formas.concat(base);
+}
+
+/* ── LÉXICO DE ESPAÑOL (Abecé, 27/10/2026) ─────────────────────
+   data/data-lexicon-es.js expone LEXICON_ES (una entrada por palabra:
+   es, acento, translit en cirílico, ipa, senses[{ ru, definitionRu }],
+   gender, femenino…; ficha en claude/LEXICO_ABECE_FUENTES.md),
+   LEXICON_ES_TEMAS y lexEsById(id).
+   · azEscribirLexico(): el Diccionario (ficha.html) carga con esto el
+     léxico de la dirección activa (AZ_DIRECCION.lexico), en lugar de un
+     <script> fijo: así Abecé no baja los 8 MB del léxico ruso.
+   · azBuscarEs(q, pos?): el buscador de Abecé. Busca en español (sin
+     importar las tildes; la ñ cuenta como letra propia), en la forma
+     femenina (hija → hijo) y en las traducciones rusas (е = ё). Primero
+     la palabra exacta, después las que empiezan así, después el resto;
+     dentro de cada grupo, por frecuencia. Devuelve lo mismo que
+     azSearchLexicon (ru = la palabra que se muestra, es = la traducción).
+     Si la página no tiene el léxico, lo pide (azCargarLexEs) y avisa con
+     el evento "az-formas", como las formas declinadas.
+   · azHablarEs(texto): la voz del español. Mientras no estén los audios
+     de Abece_voces, la voz es-ES del teléfono. */
+function azEscribirLexico() {
+  document.write('<script src="' + (AZ_DIRECCION.lexico || "data/data-lexicon.js") + '"><\/script>');
+}
+function azNormEs(s) {
+  return String(s || "").toLowerCase().replace(/ñ/g, "\u0001").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\u0001/g, "ñ");
+}
+let AZ_LEXES_CARGANDO = false;
+function azCargarLexEs() {
+  if (typeof LEXICON_ES !== "undefined" || AZ_LEXES_CARGANDO) return;
+  AZ_LEXES_CARGANDO = true;
+  const sc = document.createElement("script");
+  sc.src = "data/data-lexicon-es.js";
+  sc.onload = () => { try { window.dispatchEvent(new Event("az-formas")); } catch (e) {} };
+  sc.onerror = () => { AZ_LEXES_CARGANDO = false; };
+  document.head.appendChild(sc);
+}
+function azBuscarEs(query, pos) {
+  if (typeof LEXICON_ES === "undefined") { azCargarLexEs(); return []; }
+  const raw = (query || "").trim();
+  if (!raw) return [];
+  const qe = azNormEs(raw), qr = azNormRu(raw.toLowerCase()), qn = qe.replace(/ñ/g, "n");
+  const posOk = Array.isArray(pos) ? (p => pos.includes(p)) : (p => !pos || p === pos);
+  const inicio = new RegExp("(^|[^a-zа-яё0-9])" + qr.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
+  const hall = [];
+  LEXICON_ES.forEach(e => {
+    if (!posOk(e.posNormalized)) return;
+    const w = azNormEs(e.es), fe = e.femenino && e.femenino.es ? azNormEs(e.femenino.es) : "";
+    const wn = w.replace(/ñ/g, "n"), fn = fe.replace(/ñ/g, "n");   /* quien escribe «nino» también encuentra «niño» */
+    let r = -1, fem = false;
+    if (w === qe) r = 0; else if (fe && fe === qe) { r = 0; fem = true; }
+    else if (wn === qn) r = 0.5; else if (fe && fn === qn) { r = 0.5; fem = true; }
+    else if (wn.startsWith(qn)) r = 1; else if (fe && fn.startsWith(qn)) { r = 1; fem = true; }
+    else {
+      const tr = azNormRu((e.senses || []).map(x => x.ru).join(" · ").toLowerCase());
+      const tf = fe ? azNormRu((e.femenino.ru || "").toLowerCase()) : "";
+      if (inicio.test(tr)) r = 2; else if (tf && inicio.test(tf)) { r = 2; fem = true; }
+      else if (wn.includes(qn)) r = 3; else if (tr.includes(qr)) r = 4; else if (tf && tf.includes(qr)) { r = 4; fem = true; }
+    }
+    if (r >= 0) hall.push({ e, r, fem });
+  });
+  hall.sort((a, b) => a.r - b.r);
+  return hall.slice(0, 40).map(({ e, fem }) => {
+    const tr = (e.senses || []).map(x => x.ru).join(" · ");
+    const pal = fem ? e.femenino.es : e.es;
+    return { id: e.id, ru: pal, acento: pal, es: fem ? e.femenino.ru + " · ж. р. от " + e.es : tr,
+      pos: e.posNormalized, gender: e.gender || null, href: "ficha.html?id=" + e.id };
+  });
+}
+/* En Abecé, el léxico español se pide en segundo plano al terminar de cargar
+   la página, para que el buscador del menú lo tenga listo. */
+if (AZ_DIRECCION.id === "abece" && typeof window !== "undefined") {
+  window.addEventListener("load", () => setTimeout(azCargarLexEs, 800));
+}
+const AZ_VOZ_ES_F = /monica|mónica|paulina|marisol|elvira|female|mujer/i;
+function azHablarEs(texto) {
+  try {
+    if (!texto || !("speechSynthesis" in window)) return;
+    azVozTurno++; azVozParar();
+    const s = window.speechSynthesis; s.cancel(); s.resume();
+    const u = new SpeechSynthesisUtterance(String(texto));
+    u.lang = "es-ES"; u.rate = 0.9;
+    const vs = s.getVoices().filter(v => /^es/i.test(v.lang));
+    const v = vs.find(v => /es[-_]ES/i.test(v.lang) && AZ_VOZ_ES_F.test(v.name)) || vs.find(v => /es[-_]ES/i.test(v.lang)) || vs[0];
+    if (v) { u.voice = v; u.lang = v.lang; }
+    window.azVozFrase = u;
+    s.speak(u);
+  } catch (e) {}
 }
 
 /* ── FORMAS DECLINADAS Y CONJUGADAS ──────────────────────────

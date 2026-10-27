@@ -17,6 +17,10 @@
               abece todavía no tiene (unidades, módulos, índice) se toma de
               azbuka.
 
+   lexico: el archivo del léxico de cada dirección. Lo carga el Diccionario
+   (ficha.html) con azEscribirLexico() (core.js); el buscador del menú de
+   Abecé (azBuscarEs) lo pide solo si la página no lo tiene (27/10/2026).
+
    Se carga en todas las páginas justo antes de js/core.js. Es «var» (no
    «const») para que core.js pueda leerlo también como respaldo.
    ============================================================ */
@@ -27,6 +31,7 @@ var AZ_CATALOGO = {
     marca: { nombre: "Азбука", lema: "Aprende ruso desde cero", glyph: "Аз", icon: "red" },
     indice: "azbuka-index-1.html",
     buscador: "azSearchLexicon",
+    lexico: "data/data-lexicon.js",   /* el léxico de la dirección (27/10/2026): lo carga el Diccionario */
     /* Unidades del curso A1 → B1 (pasaron de core.js, 22/10/2026). Numeración
        desde el 06/10/2026 (Manu): 12 Gramática B1 · 13 Consolidación B1 ·
        14 Examen final (examen: true lo separa en el índice). lista: true la
@@ -54,7 +59,7 @@ var AZ_CATALOGO = {
       { id: "alfabeto", title: "Alfabeto", desc: "Letras, sonidos y caligrafía — consulta libre", href: "alfabeto.html", icon: "yellow", glyph: "Аа" },
       { id: "dialogos", title: "Diálogos", desc: "Conversaciones, frases útiles y notas culturales", href: "dialogos.html", icon: "lime", glyph: "Ди" },
       { id: "lecturas", title: "Lecturas", desc: "Textos para leer y entender, con preguntas", href: "lecturas.html", icon: "green", glyph: "Чт" },
-      { id: "masha", title: "Masha", desc: "Charla por escrito con Masha, en ruso", href: "masha.html", icon: "cyan", glyph: "Ма" },
+      { id: "masha", title: "Hablar con Masha", desc: "Charla por escrito con Masha, en ruso", href: "masha.html", icon: "cyan", glyph: "Ма" },
       { id: "verbos", title: "Verbos", desc: "Diccionario de verbos y conjugaciones", href: "verbos.html", icon: "blue", glyph: "Вб" },
       { id: "casos", title: "Casos", desc: "Declinaciones del ruso, los 6 casos", href: "casos.html", icon: "purple", glyph: "Пд" },
       { id: "cuaderno", title: "Cuaderno", desc: "Tus notas y lo que guardas desde la app", href: "cuaderno.html", icon: "pink", glyph: "Тд" },
@@ -102,9 +107,17 @@ var AZ_CATALOGO = {
     abierta: false,          /* bloqueada hasta que Abecé esté terminada (Manu, 22/10/2026) */
     marca: { nombre: "Abecé", lema: "Учи испанский с нуля", glyph: "Ab", icon: "red" },
     indice: null,            /* abece-index-1.html cuando exista; mientras, el de azbuka */
-    buscador: "azSearchLexicon",   /* provisorio: se cambia por el buscador del léxico español (Fase 2) */
+    buscador: "azBuscarEs",  /* busca en el léxico español, en español o en ruso (core.js, 27/10/2026) */
+    lexico: "data/data-lexicon-es.js",
     unidades: [],            /* se definen con el programa del curso (Fase 5) */
-    modulos: [],             /* se definen con los módulos de apoyo (Fase 4) */
+    /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo
+       orden y con el mismo color que su equivalente de Azbuka, glifo de dos
+       letras latinas. Se suman a medida que se construyen (27/10/2026: Diccionario).
+       Orden final: Словарь · Алфавит и произношение · Диалоги · Чтение ·
+       Болтаем с Лусией · Глаголы · Грамматика · Тетрадь. */
+    modulos: [
+      { id: "diccionario", title: "Словарь", desc: "Весь словарь, по темам и частям речи", href: "ficha.html", icon: "orange", glyph: "Dc" },
+    ],
     /* BORRADOR: falta la revisión de Iván. Al alumno se le habla de «ты»,
        como Azbuka usa «tú». Una clave que falte acá se muestra con el texto de azbuka. */
     textos: {

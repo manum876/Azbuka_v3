@@ -94,7 +94,7 @@ Conversaciones de situaciones cotidianas (también en versión con **вы**), co
 
 **48 textos graduados**, cuatro por unidad de la U2 a la U13, de unas 40 palabras al principio a unas 250 al final. Cada uno tiene audio, traducción a pedido y preguntas de comprensión. Una palabra que no conoces se selecciona y se abre su entrada.
 
-### 🙂 Masha
+### 🙂 Hablar con Masha
 
 Una **charla escrita en ruso con Masha**, la estudiante moscovita que acompaña el curso: **72 temas**, seis por unidad, con el vocabulario y la gramática de cada nivel. Masha recuerda lo que le contaste, contesta preguntas sobre su vida, sugiere ideas cuando no sabes qué decir y te propone «💬 Mejor» una versión más correcta de lo que escribiste. No es una IA: la charla está escrita de antemano y se ramifica según lo que contestas.
 

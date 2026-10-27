@@ -94,7 +94,7 @@ Everyday conversations (also in a formal **вы** version), with translation, tr
 
 **48 graded texts**, four per unit from U2 to U13, from about 40 words at the start to about 250 at the end. Each one has audio, translation on demand and comprehension questions. Select a word you don't know to open its entry.
 
-### 🙂 Masha
+### 🙂 Talk with Masha
 
 A **written chat in Russian with Masha**, the Moscow student who accompanies the course: **72 topics**, six per unit, with the vocabulary and grammar of each level. Masha remembers what you told her, answers questions about her life, suggests ideas when you don't know what to say, and offers "💬 Better" versions of what you wrote. It is not AI: the chat is scripted in advance and branches according to your answers.
 

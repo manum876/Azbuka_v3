@@ -16,10 +16,11 @@
 <body>
 <div id="root"></div>
 <script src="assets/preact.js"></script>
-<script src="data/data-lexicon.js"></script>
 <script src="data/data-cultura.js"></script>
 <script src="data/data-catalogo.js"></script>
 <script src="js/core.js"></script>
+<!-- El léxico de la dirección activa (27/10/2026): data-lexicon.js en Azbuka, data-lexicon-es.js en Abecé -->
+<script>azEscribirLexico();</script>
 <script src="assets/supabase.js"></script>
 <script src="js/cuenta.js"></script>
 <script src="js/progress.js"></script>
@@ -44,8 +45,49 @@
 
    La base de datos (data-lexicon.js) es de SOLO LECTURA: esta
    página nunca la modifica, solo la lee y la muestra.
+
+   ABECÉ (27/10/2026): con la dirección «abece» la página lee el léxico
+   español (LEXICON_ES, data-lexicon-es.js), con los textos en ruso (TX)
+   y su propia ficha (FichaEs): la palabra sola con la etiqueta de
+   categoría y género, como en Azbuka, y un apartado «Женский род» cuando
+   la forma femenina es otra palabra (campo femenino). Lo de Azbuka no cambia.
    ============================================================ */
 const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
+
+/* ── Dirección: Azbuka (léxico ruso) o Abecé (léxico español) ── */
+const ES = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece" && typeof LEXICON_ES !== "undefined";
+const LEX = ES ? LEXICON_ES : (typeof LEXICON_COMER !== "undefined" ? LEXICON_COMER : []);
+const LEX_TEMAS = ES ? LEXICON_ES_TEMAS : (typeof LEXICON_TEMAS !== "undefined" ? LEXICON_TEMAS : {});
+const lexPorId = id => ES ? lexEsById(id) : (typeof lexComerById === "function" ? lexComerById(id) : null);
+const palabraDe = e => ES ? e.es : (e.acento || e.ru);           /* la palabra como se muestra */
+const clavePal = e => ES ? e.es : e.ru;                          /* la palabra para ordenar */
+const traduc = s => (s && (ES ? s.ru : s.es)) || "";
+/* Textos de la página por dirección (los de Abecé, en ruso: borrador para Iván) */
+const TX = ES ? {
+  titulo: "Словарь", palabras: n => n + " " + azPluralRu(n, "слово", "слова", "слов"), temasN: n => n + " " + azPluralRu(n, "тема", "темы", "тем"),
+  intro: "Ищи слово или смотри словарь по темам и частям речи. Нажми на слово, чтобы открыть его карточку.",
+  buscar: "Поиск по-испански или по-русски…", buscarEn: t => "Искать в теме «" + t + "»…", buscarAria: "Поиск в словаре", limpiar: "Очистить поиск",
+  categoria: "Часть речи", temas: "Темы", tema: "Тема", todos: "Все", contar: n => n + " " + azPluralRu(n, "слово", "слова", "слов"),
+  nada: "С этими фильтрами ничего не найдено.", mas: n => "Показать ещё (" + n + ")",
+  pos: [["todo", "Все"], ["sustantivo", "Существительные"], ["verbo", "Глаголы"], ["adjetivo", "Прилагательные"], ["adverbio", "Наречия"], ["otro", "Другие"]],
+  abr: { sustantivo: "сущ.", verbo: "гл.", adjetivo: "прил.", adverbio: "нареч." },
+  buscarLex: "Поиск в словаре…", sinRes: "Ничего не найдено", noEncontrada: "Слово не найдено",
+  sinId: id => id ? "В словаре нет слова с номером «" + id + "»." : "В адресе нет параметра ?id=."
+} : {
+  titulo: "Diccionario", palabras: n => n + " PALABRAS", temasN: n => n + " TEMAS",
+  intro: "Busca una palabra o recorre el léxico por tema y por categoría. Toca cualquier palabra para abrir su ficha.",
+  buscar: "Buscar en ruso o en español…", buscarEn: t => "Buscar dentro de " + t + "…", buscarAria: "Buscar en el diccionario", limpiar: "Limpiar búsqueda",
+  categoria: "Categoría", temas: "Temas", tema: "Tema", todos: "Todos", contar: n => n + (n === 1 ? " palabra" : " palabras"),
+  nada: "Sin resultados con estos filtros.", mas: n => "Mostrar más (" + n + ")",
+  pos: null, abr: null,
+  buscarLex: "Buscar en el léxico…", sinRes: "Sin resultados", noEncontrada: "Palabra no encontrada",
+  sinId: id => id ? `No hay ninguna entrada con id "${id}" en el léxico.` : "Faltó el parámetro ?id= en la URL."
+};
+/* Plural ruso: 1 слово, 2 слова, 5 слов (21 слово, 11 слов) */
+function azPluralRu(n, uno, pocos, muchos) {
+  const d = n % 10, c = n % 100;
+  return d === 1 && c !== 11 ? uno : d >= 2 && d <= 4 && (c < 12 || c > 14) ? pocos : muchos;
+}
 
 const POS_LABEL = {
   sustantivo: "Sustantivo", verbo: "Verbo", adjetivo: "Adjetivo", pronombre: "Pronombre", determinante: "Determinante",
@@ -160,9 +202,11 @@ function FichaStyles({ c }) {
    «‹» desde una ficha vuelve a la misma lista. Las palabras sin tema
    solo aparecen con «Todos». */
 const h = React.createElement;
-const DIC_POS = [["todo", "Todo"], ["sustantivo", "Sustantivos"], ["verbo", "Verbos"], ["adjetivo", "Adjetivos"], ["adverbio", "Adverbios"], ["otro", "Otras"]];
-const DIC_ABR = { sustantivo: "sust.", verbo: "verbo", adjetivo: "adj.", adverbio: "adv." };
-const dicSinAc = s => (s || "").replace(/\u0301/g, "").replace(/ё/g, "е").toLowerCase();
+const DIC_POS = TX.pos || [["todo", "Todo"], ["sustantivo", "Sustantivos"], ["verbo", "Verbos"], ["adjetivo", "Adjetivos"], ["adverbio", "Adverbios"], ["otro", "Otras"]];
+const DIC_ABR = TX.abr || { sustantivo: "sust.", verbo: "verbo", adjetivo: "adj.", adverbio: "adv." };
+const dicSinAc = s => ES ? azNormEs(s) : (s || "").replace(/\u0301/g, "").replace(/ё/g, "е").toLowerCase();
+/* Letra del separador: en Abecé, sin tilde (Á va con A), pero la Ñ es una letra propia */
+const dicLetra = e => { const L = clavePal(e)[0].toUpperCase(); return ES && L !== "Ñ" ? L.normalize("NFD")[0] : L; };
 function Diccionario({ c }) {
   const P = new URLSearchParams(location.search);
   const [tema, setTema] = useState(P.get("tema"));
@@ -175,22 +219,28 @@ function Diccionario({ c }) {
     const s = u.toString(); history.replaceState(history.state, "", location.pathname + (s ? "?" + s : ""));
     setMax(150);
   }, [tema, pos, q]);
-  const temas = typeof LEXICON_TEMAS !== "undefined" ? LEXICON_TEMAS : {};
-  const cuenta = {}; LEXICON_COMER.forEach(e => (e.temas || []).forEach(t => cuenta[t] = (cuenta[t] || 0) + 1));
+  const temas = LEX_TEMAS;
+  const cuenta = {}; LEX.forEach(e => (e.temas || []).forEach(t => cuenta[t] = (cuenta[t] || 0) + 1));
   const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "diccionario") || { glyph: "Сл", icon: "orange" };
   const col = typeof azModuloColor === "function" ? azModuloColor(modulo) : { bg: c.gold, fg: "#fff" };
   const chip = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
   const filtrando = !!tema || pos !== "todo" || !!q.trim();
   let lista = [];
   if (filtrando) {
-    lista = LEXICON_COMER.filter(e => (!tema || (e.temas || []).indexOf(tema) >= 0) &&
+    lista = LEX.filter(e => (!tema || (e.temas || []).indexOf(tema) >= 0) &&
       (pos === "todo" || (pos === "otro" ? !DIC_ABR[e.posNormalized] : e.posNormalized === pos)));
     const t = q.trim();
-    if (t) { const n = dicSinAc(t), es = t.toLowerCase(); lista = lista.filter(e => dicSinAc(e.ru).startsWith(n) || (e.senses || []).some(s => (s.es || "").toLowerCase().indexOf(es) >= 0)); }
-    lista.sort((a, b) => a.ru.localeCompare(b.ru, "ru"));
+    if (t) {
+      if (ES) {  /* Abecé: la palabra (o su femenino) empieza así, o la traducción rusa lo contiene */
+        const n = azNormEs(t), r = azNormRu(t.toLowerCase());
+        lista = lista.filter(e => azNormEs(e.es).startsWith(n) || (e.femenino && e.femenino.es && azNormEs(e.femenino.es).startsWith(n)) ||
+          (e.senses || []).some(s => azNormRu((s.ru || "").toLowerCase()).indexOf(r) >= 0));
+      } else { const n = dicSinAc(t), es = t.toLowerCase(); lista = lista.filter(e => dicSinAc(e.ru).startsWith(n) || (e.senses || []).some(s => (s.es || "").toLowerCase().indexOf(es) >= 0)); }
+    }
+    lista.sort((a, b) => clavePal(a).localeCompare(clavePal(b), ES ? "es" : "ru"));
   }
-  const grupos = []; lista.slice(0, max).forEach(e => { const L = e.ru[0].toUpperCase(); const g = grupos[grupos.length - 1]; if (!g || g.L !== L) grupos.push({ L, items: [e] }); else g.items.push(e); });
-  const total = String(LEXICON_COMER.length).replace(/\B(?=(\d{3})+$)/g, ".");
+  const grupos = []; lista.slice(0, max).forEach(e => { const L = dicLetra(e); const g = grupos[grupos.length - 1]; if (!g || g.L !== L) grupos.push({ L, items: [e] }); else g.items.push(e); });
+  const total = String(LEX.length).replace(/\B(?=(\d{3})+$)/g, ES ? "\u00a0" : ".");
   const css = `
     .dic{padding-top:14px;padding-bottom:110px}
     .dic .intro{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:18px 18px 14px;margin-bottom:14px}
@@ -223,30 +273,92 @@ function Diccionario({ c }) {
     .dic .mas{width:100%;margin-top:10px;padding:11px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};font-family:inherit;font-size:13px;cursor:pointer}
   `;
   const buscador = h("div", { className: "srch" }, h("span", { style: { color: c.textMuted } }, "⌕"),
-    h("input", { value: q, placeholder: tema ? "Buscar dentro de " + temas[tema] + "…" : "Buscar en ruso o en español…", "aria-label": "Buscar en el diccionario", onInput: e => setQ(e.target.value) }),
-    q && h("button", { className: "x", onClick: () => setQ(""), "aria-label": "Limpiar búsqueda" }, "✕"));
+    h("input", { value: q, placeholder: tema ? TX.buscarEn(temas[tema]) : TX.buscar, "aria-label": TX.buscarAria, onInput: e => setQ(e.target.value) }),
+    q && h("button", { className: "x", onClick: () => setQ(""), "aria-label": TX.limpiar }, "✕"));
   const chipsPos = h("div", { className: "chips" }, DIC_POS.map(([k, t]) => h("button", { key: k, className: "pair-btn", style: chip(pos === k), onClick: () => setPos(k) }, t)));
   const orden = Object.keys(temas).sort((a, b) => (b === tema) - (a === tema));
-  const chipsTema = h("div", { className: "chips" }, [h("button", { key: "all", className: "pair-btn", style: chip(!tema), onClick: () => setTema(null) }, "Todos")]
+  const chipsTema = h("div", { className: "chips" }, [h("button", { key: "all", className: "pair-btn", style: chip(!tema), onClick: () => setTema(null) }, TX.todos)]
     .concat(orden.map(k => h("button", { key: k, className: "pair-btn", style: chip(tema === k), onClick: () => setTema(k) }, temas[k]))));
   const fila = e => h("a", { key: e.id, className: "res-row", href: "ficha.html?id=" + e.id, onClick: ev => azNavigate(ev, "ficha.html?id=" + e.id) },
-    h("div", null, h("span", { className: "res-ru" }, e.acento || e.ru), h("span", { className: "res-asp" }, DIC_ABR[e.posNormalized] || "")),
-    h("div", { className: "res-es" }, ((e.senses || [])[0] || {}).es || ""));
+    h("div", null, h("span", { className: "res-ru" }, palabraDe(e)), h("span", { className: "res-asp" }, DIC_ABR[e.posNormalized] || "")),
+    h("div", { className: "res-es" }, traduc((e.senses || [])[0])));
   return h("div", { className: "dic" }, h("style", null, css),
     !filtrando && h("div", { className: "intro" },
       h("div", { className: "intro-top" }, h("div", { className: "intro-icon", style: { background: col.bg, color: col.fg } }, modulo.glyph),
-        h("div", null, h("div", { className: "intro-title" }, "Diccionario"), h("div", { className: "intro-kicker" }, total + " PALABRAS · " + Object.keys(temas).length + " TEMAS"))),
-      h("div", { className: "intro-desc" }, "Busca una palabra o recorre el léxico por tema y por categoría. Toca cualquier palabra para abrir su ficha.")),
+        h("div", null, h("div", { className: "intro-title" }, TX.titulo), h("div", { className: "intro-kicker" }, (ES ? TX.palabras(LEX.length).replace(String(LEX.length), total) : TX.palabras(total)) + " · " + TX.temasN(Object.keys(temas).length)))),
+      h("div", { className: "intro-desc" }, TX.intro)),
     buscador,
-    h("div", { className: "lbl" }, "Categoría"), chipsPos,
-    !filtrando && h(React.Fragment, null, h("div", { className: "lbl" }, "Temas"),
-      h("div", { className: "grid" }, Object.keys(temas).map(k => h("button", { key: k, className: "tcard", onClick: () => setTema(k) }, h("b", null, temas[k]), h("span", null, (cuenta[k] || 0) + " palabras"))))),
-    filtrando && h(React.Fragment, null, h("div", { className: "lbl" }, "Tema"), chipsTema,
-      h("div", { className: "sum" }, h("b", null, lista.length + (lista.length === 1 ? " palabra" : " palabras")),
+    h("div", { className: "lbl" }, TX.categoria), chipsPos,
+    !filtrando && h(React.Fragment, null, h("div", { className: "lbl" }, TX.temas),
+      h("div", { className: "grid" }, Object.keys(temas).map(k => h("button", { key: k, className: "tcard", onClick: () => setTema(k) }, h("b", null, temas[k]), h("span", null, TX.contar(cuenta[k] || 0)))))),
+    filtrando && h(React.Fragment, null, h("div", { className: "lbl" }, TX.tema), chipsTema,
+      h("div", { className: "sum" }, h("b", null, TX.contar(lista.length)),
         (tema ? " · " + temas[tema] : "") + (pos !== "todo" ? " · " + DIC_POS.find(p => p[0] === pos)[1] : "") + (q.trim() ? " · «" + q.trim() + "»" : "")),
       lista.length ? h("div", { className: "list" }, grupos.map(g => h("div", { key: g.L, className: "grp" }, h("div", { className: "let" }, g.L), g.items.map(fila))))
-        : h("div", { style: { fontSize: 13, color: c.textMuted, padding: "6px 2px" } }, "Sin resultados con estos filtros."),
-      lista.length > max && h("button", { className: "mas", onClick: () => setMax(m => m + 150) }, "Mostrar más (" + (lista.length - max) + ")")));
+        : h("div", { style: { fontSize: 13, color: c.textMuted, padding: "6px 2px" } }, TX.nada),
+      lista.length > max && h("button", { className: "mas", onClick: () => setMax(m => m + 150) }, TX.mas(lista.length - max))));
+}
+
+/* ── FICHA DE ABECÉ (27/10/2026) ──────────────────────────────
+   Misma estructura y mismas clases que la de Azbuka: la palabra sola
+   (como en un diccionario), su pronunciación en cirílico (az-tl) e IPA,
+   la etiqueta «Categoría · género», las acepciones (ruso y definición),
+   el apartado «Женский род» si la forma femenina es otra palabra
+   (hijo → hija: cada chip de género junto a su palabra) y el semáforo. */
+const POS_RU = { sustantivo: "Существительное", verbo: "Глагол", adjetivo: "Прилагательное", adverbio: "Наречие", pronombre: "Местоимение",
+  determinante: "Определитель", numeral: "Числительное", "preposición": "Предлог", "conjunción": "Союз", "interjección": "Междометие",
+  "artículo": "Артикль", "contracción": "Слитная форма" };
+const GEN_RU = { m: "мужской род", f: "женский род", "m/f": "мужской и женский род" };
+const NUMERO_RU = { pluraliaTantum: "Только во множественном числе", singulariaTantum: "Только в единственном числе" };
+const NIVEL_RU = ["Не изучено", "Изучаю", "Выучено"];
+function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
+  const fem = entry.femenino && entry.femenino.es ? entry.femenino : null;
+  const gen = entry.posNormalized === "sustantivo" && entry.gender ? (fem ? "m" : entry.gender) : "";
+  const badge = (POS_RU[entry.posNormalized] || entry.posNormalized) + (gen ? " · " + GEN_RU[gen] : "");
+  const colNivel = [darkMode ? "#E2884A" : "#C85A1A", "#C9B369", darkMode ? "#4CAF82" : "#2E7D55"];
+  const marcarNivel = n => { azSetItemLevel("lex:" + entry.id, n); setNivel(n); };
+  const tr = (entry.senses || []).map(x => x.ru).join("; ");
+  const el = React.createElement;
+  return el("div", { style: { animation: "fadeIn 0.3s ease" } },
+    el(FichaStyles, { c }),
+    el("div", { className: "ficha" },
+      el("div", { className: "hero" },
+        el("div", { className: "ru" }, entry.es),
+        entry.translit && el("div", { className: "translit az-tl" }, entry.translit),
+        entry.ipa && el("div", { className: "ipa" }, "IPA: /" + entry.ipa + "/"),
+        el("span", { className: "pos-badge" }, badge),
+        NUMERO_RU[entry.numberClass] && el("div", null, el("span", { className: "irregular-tag" }, NUMERO_RU[entry.numberClass]))),
+      el("div", { className: "fbody" },
+        el("div", { className: "section-lbl" }, "Значения"),
+        (entry.senses || []).map((s, i) => el("div", { key: i, className: "sense" },
+          el("span", { className: "sense-num" }, i + 1),
+          el("span", { className: "sense-es" }, s.ru),
+          s.definitionRu && el("div", { className: "sense-def" }, s.definitionRu))),
+        /* ── Женский род: la forma femenina, con su chip y su pronunciación ── */
+        fem && el(React.Fragment, null,
+          el("div", { className: "section-lbl", style: { marginTop: 20 } }, "Женский род"),
+          el("div", { className: "sense", style: { display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 } },
+            el("div", { style: { minWidth: 0 } },
+              el("div", { style: { fontSize: 24, fontWeight: 800, color: c.gold, lineHeight: 1.1 } }, fem.es),
+              el("div", { className: "translit az-tl" }, fem.translit),
+              el("div", { className: "ipa" }, "IPA: /" + fem.ipa + "/"),
+              el("span", { className: "pos-badge" }, (POS_RU[entry.posNormalized] || "") + " · " + GEN_RU.f),
+              el("div", { className: "sense-es", style: { display: "block", marginTop: 10 } }, fem.ru)),
+            el("button", { className: "btn", style: { flex: "0 0 auto", padding: "9px 12px" }, "aria-label": "Произношение", onClick: () => azHablarEs(fem.es) }, "▶"))),
+        el("div", { className: "section-lbl", style: { marginTop: 20 } }, "Твой прогресс"),
+        el("div", { className: "nivel-row" },
+          [0, 1, 2].map(n => el("button", {
+            key: n, className: "nivel-btn", onClick: () => marcarNivel(n),
+            style: nivel === n
+              ? { background: colNivel[n] + "22", border: `1px solid ${colNivel[n]}`, color: colNivel[n] }
+              : { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
+          }, NIVEL_RU[n]))),
+        el("div", { className: "nivel-nota" }, "Отмечается само по упражнениям. Если не совпадает с тем, что ты знаешь, нажми, чтобы исправить."),
+        el("div", { className: "buttons" },
+          el("button", { className: "btn", onClick: () => azHablarEs(entry.es) }, "▶ Произношение"),
+          typeof azGuardarEnCuaderno === "function" && el("button", {
+            className: "btn", onClick: () => azGuardarEnCuaderno(entry.es + (fem ? " / " + fem.es : "") + " — " + tr + (fem ? "; " + fem.ru : ""), { titulo: "Карточка · " + entry.es, href: "ficha.html?id=" + entry.id })
+          }, "＋ Тетрадь")))));
 }
 
 function App() {
@@ -262,7 +374,7 @@ function App() {
      para mostrar su plural. Es la misma carga del buscador de formas:
      avisa con "az-formas" y la ficha se vuelve a dibujar. */
   useEffect(() => {
-    const e = getWordId() && typeof lexComerById === "function" ? lexComerById(getWordId()) : null;
+    const e = getWordId() && !ES && typeof lexComerById === "function" ? lexComerById(getWordId()) : null;
     if (e && e.posNormalized === "sustantivo" && typeof CASOS === "undefined" && typeof azCargarFormas === "function") azCargarFormas();
   }, []);
 
@@ -285,7 +397,7 @@ function App() {
   }, []);
 
   const id = getWordId();
-  const entry = id && typeof lexComerById === "function" ? lexComerById(id) : null;
+  const entry = id ? lexPorId(id) : null;
   const c = azColors(darkMode);
   const results = q.trim() && typeof azSearchLexicon === "function" ? azSearchLexicon(q) : [];
 
@@ -322,12 +434,12 @@ function App() {
         ref: qRef,
         value: q,
         onInput: (e) => setQ(e.target.value),
-        placeholder: "Buscar en el léxico…",
+        placeholder: TX.buscarLex,
         style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 14 }
       }),
       q && React.createElement("button", {
         onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); },
-        "aria-label": "Limpiar búsqueda",
+        "aria-label": TX.limpiar,
         style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
       }, "✕"),
       q.trim() && React.createElement("div", {
@@ -342,7 +454,7 @@ function App() {
               React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: 14 } }, r.acento || r.ru),
               React.createElement("span", { style: { color: c.textMuted, fontSize: 12.5, textAlign: "right" } }, r.es)
             ))
-          : React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Sin resultados")
+          : React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, TX.sinRes)
       )
     )
   );
@@ -350,10 +462,11 @@ function App() {
   let entryContent;
   if (!entry) {
     entryContent = React.createElement("div", { style: { textAlign: "center", padding: "10vh 0" } },
-      React.createElement("h1", { style: { fontSize: 18, marginBottom: 8 } }, "Palabra no encontrada"),
-      React.createElement("p", { style: { fontSize: 13.5, color: c.textMuted } },
-        id ? `No hay ninguna entrada con id "${id}" en el léxico.` : "Faltó el parámetro ?id= en la URL.")
+      React.createElement("h1", { style: { fontSize: 18, marginBottom: 8 } }, TX.noEncontrada),
+      React.createElement("p", { style: { fontSize: 13.5, color: c.textMuted } }, TX.sinId(id))
     );
+  } else if (ES) {
+    entryContent = React.createElement(FichaEs, { entry, c, darkMode, nivel, setNivel });
   } else {
     const senses = entry.senses || [];
     const isVerbo = entry.posNormalized === "verbo";
