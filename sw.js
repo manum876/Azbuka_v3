@@ -15,6 +15,15 @@
    · Las páginas con parámetros (ficha.html?id=…) se guardan una sola
      vez, sin el parámetro.
 
+   · ARCHIVOS PESADOS (27/10/2026): los datos grandes (léxicos, casos,
+     verbos, Masha) y todo assets/ (librerías, fuentes, íconos) se
+     sirven AL INSTANTE desde la copia guardada, y la versión nueva se
+     baja en segundo plano: la ve el alumno la próxima vez que abre la
+     app. Antes, con «primero la red», cada apertura esperaba hasta 4 s
+     a que el servidor mandara los 8 MB del léxico (pantalla negra de
+     5–6 s). El resto (páginas y js/) sigue con «primero la red», pero
+     espera como mucho AZ_ESPERA (1,5 s) antes de usar la copia.
+
    · Las voces generadas (…/Azbuka_voces/, 15/10/2026) no pasan por acá:
      core.js las baja y las guarda en la caché «az-voces», que no se borra al
      cambiar AZ_CACHE.
@@ -28,7 +37,9 @@
    que el alumno lo abre con internet.
    ============================================================ */
 const AZ_CACHE = "azbuka-v3";
-const AZ_ESPERA = 4000;
+const AZ_ESPERA = 1500;
+/* Se sirven desde la copia guardada y se actualizan en segundo plano (27/10/2026) */
+const AZ_PESADOS = /\/(assets\/|data\/data-(lexicon|lexicon-es|casos|verbos|masha)\.js$)/;
 const AZ_PRECACHE = [
   "./", "ajustes.html", "alfabeto.html", "azbuka-1.html", "azbuka-2.html", "azbuka-3.html", "azbuka-4.html", "azbuka-5.html", "azbuka-6.html", "azbuka-7.html", "azbuka-8.html", "azbuka-9.html", "azbuka-10.html", "azbuka-11.html", "azbuka-12.html", "azbuka-13.html", "azbuka-14.html",
   "azbuka-index-1.html", "casos.html", "cuaderno.html", "dialogos.html", "ficha.html",
@@ -79,6 +90,10 @@ self.addEventListener("fetch", e => {
       return r;
     });
     const guardada = await cache.match(clave);
+    if (guardada && AZ_PESADOS.test(url.pathname)) {   /* al instante; lo nuevo, para la próxima vez */
+      e.waitUntil(red.catch(() => {}));
+      return guardada;
+    }
     if (!guardada) {
       try { return await red; }
       catch (err) {

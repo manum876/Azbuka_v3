@@ -60,7 +60,6 @@
 <body>
 <div id="root"></div>
 <script src="assets/preact.js"></script>
-<script src="data/data-lexicon.js"></script>
 <script src="data/data-catalogo.js"></script>
 <script src="js/core.js"></script>
 <script src="assets/supabase.js"></script>
@@ -81,7 +80,20 @@ function App() {
   const [hoyAbierto, setHoyAbierto] = useState(false);
   /* Repaso de hoy (19/10/2026): cuántas cosas tocan hoy (az_progress.srs) */
   const [repasoN, setRepasoN] = useState(null);
+  /* Léxico (27/10/2026): ya no se carga antes de mostrar la página (eran 8 MB
+     que dejaban la pantalla negra unos segundos). Se pide apenas se dibuja el
+     inicio; solo lo usan los buscadores, que se actualizan cuando llega. */
+  const [, setLexListo] = useState(typeof LEXICON_COMER !== "undefined");
   const leerHoy = async () => { const hs = await azGet("az_hoy", {}); setHoyHecho(hs.fecha === azHoyFecha() && !!hs.hecho); return hs; };
+
+  useEffect(() => {
+    if (typeof LEXICON_COMER === "undefined") {
+      const sc = document.createElement("script");
+      sc.src = "data/data-lexicon.js";
+      sc.onload = () => setLexListo(true);
+      document.body.appendChild(sc);
+    }
+  }, []);
 
   useEffect(() => {
     (async () => {
