@@ -435,6 +435,9 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
         el("div", { className: "nivel-nota" }, "Отмечается само по упражнениям. Если не совпадает с тем, что ты знаешь, нажми, чтобы исправить."),
         el("div", { className: "buttons" },
           verbo && el("a", { className: "btn pr", href: "verbos.html?id=" + entry.id, onClick: e => azNavigate(e, "verbos.html?id=" + entry.id) }, "🗣️ Спряжение"),
+          /* Gramática (27/10/2026): las formas en tabla, si la palabra cambia */
+          !verbo && formas.length > 0 && typeof FORMAS_ES !== "undefined" && FORMAS_ES[entry.id] && !(FORMAS_ES[entry.id].inv && FORMAS_ES[entry.id].t !== "sust" && !FORMAS_ES[entry.id].nota) &&
+            el("a", { className: "btn pr", href: "gramatica.html?id=" + entry.id, onClick: e => azNavigate(e, "gramatica.html?id=" + entry.id) }, "📐 Формы"),
           el("button", { className: "btn", onClick: () => azHablarEs(entry.es) }, "▶ Произношение"),
           typeof azGuardarEnCuaderno === "function" && el("button", {
             className: "btn", onClick: () => azGuardarEnCuaderno(entry.es + (fem ? " / " + fem.es : "") + " — " + tr + (fem ? "; " + fem.ru : ""), { titulo: "Карточка · " + entry.es, href: "ficha.html?id=" + entry.id })

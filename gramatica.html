@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<title>Abecé · Грамматика</title>
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="assets/icon-192.png">
+<link rel="stylesheet" href="assets/core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/preact.js"></script>
+<script src="data/data-catalogo.js"></script>
+<script src="js/core.js"></script>
+<!-- Solo Abecé: el léxico español y las formas de las palabras (data-formas-es.js).
+     Cuando exista, también la guía (data-gramatica-es.js). En Azbuka no carga nada. -->
+<script>
+(AZ_DIRECCION.id === "abece" ? ["data/data-lexicon-es.js", "data/data-formas-es.js"] : [])
+  .forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
+<script src="assets/supabase.js"></script>
+<script src="js/cuenta.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/shell.js"></script>
+<script>
+/* ============================================================
+   GRAMATICA.HTML — Módulo Gramática de Abecé (27/10/2026).
+   Ocupa el lugar de Casos (claude/INSTRUCCIONES_MODULOS_ABECE.md §4)
+   y copia su esqueleto: portada, ficha y tablas.
+   · Sin parámetros → portada: presentación, buscador de formas
+     (buenas → bueno, los → el), palabras para probar y las 4 tablas.
+   · ?id=ESP-xxxxx (&f=forma) → ficha: la palabra (léxico español) y sus
+     formas en tabla (data-formas-es.js). Con ?f=, la forma buscada se
+     resalta y se explica arriba.
+   · ?tabla=personal|articulo|demostrativo|posesivo → la tabla completa.
+   · ?guia=<capítulo> → la guía, cuando exista data-gramatica-es.js
+     (entrega 3).
+   En el teléfono, las tablas anchas se ven por partes con un selector
+   (como el selector de género de Casos); desde 640px, enteras.
+   Esta página NO guarda datos de palabras: todo sale de
+   data-lexicon-es.js y data-formas-es.js. Textos en ruso: borrador
+   para Iván. Solo Abecé: en Azbuka muestra un aviso.
+   ============================================================ */
+const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
+const h = React.createElement;
+const ES_OK = AZ_DIRECCION.id === "abece" && typeof FORMAS_ES !== "undefined" && typeof LEXICON_ES !== "undefined";
+
+const POS_RU = { sustantivo: "Существительное", adjetivo: "Прилагательное", pronombre: "Местоимение", determinante: "Определитель",
+  numeral: "Числительное", "artículo": "Артикль", "contracción": "Слитная форма" };
+const POS_CORTO = { sustantivo: "сущ.", adjetivo: "прил.", pronombre: "мест.", determinante: "опр.", numeral: "числ.", "artículo": "арт.", "contracción": "слитн." };
+const GEN_RU = { m: "мужской род", f: "женский род", "m/f": "мужской и женский род" };
+const K_RU = typeof AZ_FES_K !== "undefined" ? AZ_FES_K : {};
+
+/* Plural ruso (el mismo de ficha.html): 1 слово, 2 слова, 5 слов */
+function pluralRu(n, uno, pocos, muchos) {
+  const d = n % 10, c = n % 100;
+  return d === 1 && c !== 11 ? uno : d >= 2 && d <= 4 && (c < 12 || c > 14) ? pocos : muchos;
+}
+function getParam(k) { return new URLSearchParams(window.location.search).get(k); }
+const FORMA_BUSCADA = (getParam("f") || "").trim().toLowerCase();
+const mismaForma = (a, b) => !!a && !!b && (a.toLowerCase() === b || azNormEs(a) === azNormEs(b));
+
+/* Una entrada «tiene formas» si cambia (no las invariables sin nota) */
+function tieneFormas(id) {
+  const d = typeof FORMAS_ES !== "undefined" ? FORMAS_ES[id] : null;
+  return !!d && !(d.inv && d.t !== "sust" && !d.nota);
+}
+function lexEs(id) { return typeof LEXICON_ES !== "undefined" ? LEXICON_ES.find(e => e.id === id) : null; }
+
+/* Pantalla ancha: las tablas entran enteras (mismo corte que Casos). */
+function useWide() {
+  const q = "(min-width: 640px)";
+  const [wide, setWide] = useState(() => window.matchMedia(q).matches);
+  useEffect(() => {
+    const m = window.matchMedia(q);
+    const f = () => setWide(m.matches);
+    m.addEventListener ? m.addEventListener("change", f) : m.addListener(f);
+    return () => { m.removeEventListener ? m.removeEventListener("change", f) : m.removeListener(f); };
+  }, []);
+  return wide;
+}
+
+function GramStyles({ c }) {
+  return h("style", null, `
+    .ficha{background:${c.card};border:1px solid ${c.border};border-radius:14px;overflow:hidden;}
+    .hero{background:linear-gradient(135deg,${c.bg2},${c.bg3});padding:20px 20px 16px;border-bottom:1px solid ${c.border};}
+    .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+    .ru{font-size:34px;font-weight:800;color:${c.gold};line-height:1.05;word-break:break-word;}
+    .translit{font-size:14px;color:${c.textSub};font-style:italic;margin-top:6px;}
+    .ipa{font-size:12px;color:${c.textMuted};margin-top:2px;}
+    .pos-badge{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:${c.gold}33;color:${c.gold};border:1px solid ${c.gold};border-radius:8px;padding:3px 10px;}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+    .tag{font-size:11.5px;font-weight:600;color:${c.textSub};background:${c.bg2};border:1px solid ${c.border};border-radius:8px;padding:4px 9px;}
+    .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
+    .fbody{padding:18px 20px;}
+    .section-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:22px 0 10px;}
+    .section-lbl:first-child{margin-top:0;}
+    .sense{background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:12px 14px;margin-bottom:8px;}
+    .sense-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:${c.gold};color:${c.bg};font-size:11px;font-weight:800;border-radius:50%;margin-right:8px;}
+    .sense-es{font-size:16px;font-weight:700;color:${c.text};display:inline;}
+    .sense-def{font-size:13.5px;color:${c.textSub};margin-top:6px;margin-left:28px;}
+    .pair-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+    .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
+    .ctable{width:100%;border-collapse:collapse;table-layout:fixed;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;overflow:hidden;}
+    .ctable th{font-size:11px;font-weight:700;text-align:left;padding:9px 8px;border-bottom:1px solid ${c.border};vertical-align:bottom;}
+    .ctable th .th-ru{display:block;font-size:14px;color:${c.gold};font-weight:800;word-break:break-word;}
+    .ctable th .th-sub{display:block;font-size:10px;color:${c.textMuted};font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+    .ctable td{padding:8px;border-top:1px solid ${c.border};vertical-align:middle;}
+    .ctable tr:first-child td{border-top:none;}
+    .ctable tr.fila-hit td{background:${c.gold}0F;}
+    .p-ru{font-size:13px;font-weight:700;color:${c.text};word-break:break-word;}
+    .p-es{font-size:10.5px;color:${c.textMuted};margin-top:1px;line-height:1.3;}
+    .f-cell{display:flex;align-items:center;gap:6px;cursor:pointer;min-height:28px;}
+    .f-cell + .f-cell{margin-top:4px;padding-top:4px;border-top:1px dashed ${c.border};}
+    .f-ru{font-size:15px;font-weight:600;color:${c.text};word-break:break-word;line-height:1.25;flex:1;min-width:0;}
+    .f-art{color:${c.textMuted};font-weight:500;}
+    .f-hit{background:${c.gold}26;box-shadow:0 0 0 1px ${c.gold};border-radius:6px;padding:2px 5px;margin:-2px -5px;}
+    .f-cell + .f-cell.f-hit{margin-top:6px;}
+    .busco{background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:12px;padding:12px 14px;font-size:13.5px;line-height:1.5;color:${c.textSub};margin-bottom:12px;}
+    .busco b{color:${c.gold};}
+    .f-play{font-size:10px;color:${c.gold};flex-shrink:0;}
+    .f-none{font-size:15px;color:${c.textMuted};}
+    .tnote{font-size:11.5px;color:${c.textMuted};margin-top:6px;line-height:1.5;}
+    .nota{background:${c.bg2};border:1px solid ${c.border};border-left:3px solid ${c.gold};border-radius:10px;padding:12px 14px;font-size:13.5px;line-height:1.5;color:${c.textSub};margin-top:10px;}
+    .nota b{color:${c.text};}
+    .help-chip{background:${c.bg2};border:1px solid ${c.border};color:${c.text};border-radius:8px;padding:5px 9px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;}
+    .help-chip span{color:${c.gold};margin-left:5px;font-weight:700;}
+    .help-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+    .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:11px 14px;text-decoration:none;}
+    .res-ru{color:${c.text};font-weight:600;font-size:14.5px;}
+    .res-asp{color:${c.textMuted};font-size:11px;margin-left:6px;font-weight:500;}
+    .res-es{color:${c.textMuted};font-size:12.5px;text-align:right;}
+    .buttons{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 4px;}
+    .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit;white-space:nowrap;}
+    .btn.pr{background:${c.gold};border-color:${c.gold};color:${c.bg};font-weight:700;}
+    .intro{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:18px 18px 14px;margin-bottom:14px;animation:fadeIn .3s ease;}
+    .intro-top{display:flex;align-items:center;gap:14px;}
+    .intro-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;flex-shrink:0;}
+    .intro-title{font-size:24px;font-weight:800;color:${c.text};line-height:1.1;}
+    .intro-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-top:4px;}
+    .intro-desc{font-size:13.5px;line-height:1.55;color:${c.textSub};margin-top:14px;}
+    .intro-item{display:flex;gap:10px;padding:9px 0;border-top:1px solid ${c.border};}
+    .intro-item:first-of-type{margin-top:12px;}
+    .intro-dot{width:6px;height:6px;border-radius:50%;background:${c.gold};margin-top:6px;flex-shrink:0;}
+    .intro-it{font-size:13px;font-weight:700;color:${c.text};}
+    .intro-id{font-size:12px;color:${c.textMuted};margin-top:1px;line-height:1.4;}
+    .search-hint{font-size:11.5px;color:${c.textMuted};margin:8px 2px 0;line-height:1.45;}
+    .try-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px;}
+    .try-lbl{font-size:11.5px;color:${c.textMuted};margin-right:2px;}
+    .try-chip{padding:6px 11px;border-radius:10px;font-size:13px;font-weight:600;text-decoration:none;background:${c.bg2};border:1px solid ${c.border};color:${c.text};}
+    .lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.textMuted};margin:20px 2px 8px;}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+    .tcard{display:block;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 12px 10px;text-align:left;font-family:inherit;cursor:pointer;text-decoration:none;}
+    .tcard b{display:block;font-size:13.5px;color:${c.text};line-height:1.25;}
+    .tcard span{display:block;font-size:11.5px;color:${c.gold};font-weight:700;margin-top:3px;}
+    .tab-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};}
+    .tab-title{font-size:26px;font-weight:800;color:${c.text};line-height:1.15;margin-top:6px;}
+    .tab-desc{font-size:14px;line-height:1.55;color:${c.textSub};margin-top:10px;}
+    @media (max-height:720px){.intro{padding:14px 16px 10px;}.intro-desc{margin-top:10px;line-height:1.45;}.intro-id{display:none;}.try-row{margin-top:8px;}.intro-item{padding:4px 0;}}
+  `);
+}
+
+/* ── Celdas ──────────────────────────────────────────────────
+   Una celda puede tener varias formas separadas por « · » (le · se):
+   cada una en su renglón, y cada una suena al tocarla. El artículo
+   va delante en gris (la canción). hit = resaltada. */
+function Celda({ text, art, hit }) {
+  if (!text) return h("span", { className: "f-none" }, "—");
+  const partes = String(text).split(" · ");
+  return h("div", null, partes.map((p, i) => {
+    const marcada = hit === true || (FORMA_BUSCADA && mismaForma(p.replace(/^con /, ""), FORMA_BUSCADA));
+    const dicho = (art ? art + " " : "") + p;
+    return h("div", { key: i, className: "f-cell" + (marcada ? " f-hit" : ""), onClick: () => azHablarEs(dicho) },
+      h("span", { className: "f-ru" }, art && h("span", { className: "f-art" }, art + " "), p),
+      h("span", { className: "f-play" }, "▶"));
+  }));
+}
+
+/* Selector de partes de una tabla ancha (mismo aspecto que el de Casos) */
+function Selector({ c, opciones, sel, setSel }) {
+  return h("div", { className: "pair-row" }, opciones.map((o, i) => h("button", {
+    key: i, className: "pair-btn", onClick: () => setSel(i),
+    style: i === sel
+      ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold }
+      : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }
+  }, o)));
+}
+
+/* Tabla genérica: filas [{ lbl, sub, hit }], columnas [{ titulo, sub, k }],
+   valor(fila, col) → { text, art, hit }. */
+function Tabla({ filas, cols, valor, ancho1 }) {
+  return h("table", { className: "ctable" },
+    h("colgroup", null, h("col", { style: { width: ancho1 || (cols.length > 2 ? "26%" : "31%") } }), cols.map((x, i) => h("col", { key: i }))),
+    h("thead", null, h("tr", null,
+      h("th", null, ""),
+      cols.map((x, i) => h("th", { key: i }, h("span", { className: "th-ru" }, x.titulo), x.sub && h("span", { className: "th-sub" }, x.sub))))),
+    h("tbody", null, filas.map((f, r) => h("tr", { key: r, className: f.hit ? "fila-hit" : "" },
+      h("td", null, h("div", { className: "p-ru" }, f.lbl), f.sub && h("div", { className: "p-es" }, f.sub)),
+      cols.map((x, i) => h("td", { key: i }, h(Celda, valor(f, x))))))));
+}
+
+/* ── Series cerradas (FORMAS_ES_SERIES) ──────────────────────
+   Cómo se parte cada una en el teléfono (grupos) y en pantalla ancha. */
+const PERS_RU = { "1s": "я", "2s": "ты", "3sm": "он", "3sf": "она", us: "Вы", "1p": "мы", "2p": "вы", "3pm": "они", "3pf": "они", uds: "Вы" };
+const COLS_PERS = { suj: ["Подлежащее", "yo, tú…"], od: ["Прямое доп.", "≈ вин. п."], oi: ["Косвенное доп.", "≈ дат. п."],
+  prep: ["После предлога", "para mí"], con: ["С «con»", "со мной…"], refl: ["Возвратное", "me lavo"] };
+const COLS_GEN = { m: ["М. р.", "ед. ч."], f: ["Ж. р.", "ед. ч."], n: ["Ср. р.", "esto, lo"], mpl: ["М. р.", "мн. ч."], fpl: ["Ж. р.", "мн. ч."] };
+const SERIES_UI = {
+  personal: {
+    titulo: "Личные местоимения", corto: "по функциям",
+    desc: "Для русскоговорящего это самое близкое к падежам: у местоимения своя форма для каждой функции. «lo / la» ≈ винительный падеж, «le» ≈ дательный, после предлога — «mí, ti».",
+    grupos: [["Подлежащее", ["suj"]], ["Дополнение", ["od", "oi"]], ["После предлога", ["prep", "con"]], ["Возвратное", ["refl"]]],
+    ancho: [["Все функции", ["suj", "od", "oi", "prep", "con", "refl"]]]
+  },
+  articulo: {
+    titulo: "Артикли", corto: "el, la, un, una",
+    desc: "Определённый артикль (el, la) — о том, что уже известно; неопределённый (un, una) — о новом. «lo» — средний род: lo bueno — хорошее.",
+    grupos: [["Ед. ч.", ["m", "f"]], ["Мн. ч.", ["mpl", "fpl"]], ["Ср. р.", ["n"]]], ancho: [["Все формы", ["m", "f", "n", "mpl", "fpl"]]]
+  },
+  demostrativo: {
+    titulo: "Указательные слова", corto: "este, ese, aquel",
+    desc: "Три расстояния: este — рядом со мной, ese — рядом с тобой, aquel — далеко от обоих. Средний род (esto, eso, aquello) — о том, что не названо: ¿Qué es esto?",
+    grupos: [["Ед. ч.", ["m", "f"]], ["Мн. ч.", ["mpl", "fpl"]], ["Ср. р.", ["n"]]], ancho: [["Все формы", ["m", "f", "n", "mpl", "fpl"]]]
+  },
+  posesivo: {
+    titulo: "Притяжательные слова", corto: "mi, tu, su, mío",
+    desc: "Перед существительным — краткая форма (mi casa), после него или без него — полная (una amiga mía, es mío). Согласуются с предметом, а не с владельцем: nuestras casas.",
+    grupos: [["Перед сущ. · ед. ч.", ["a.m", "a.f"]], ["Перед сущ. · мн. ч.", ["a.mpl", "a.fpl"]], ["После сущ. · ед. ч.", ["t.m", "t.f"]], ["После сущ. · мн. ч.", ["t.mpl", "t.fpl"]]],
+    ancho: [["Перед сущ.", ["a.m", "a.f", "a.mpl", "a.fpl"]], ["После сущ. / без сущ.", ["t.m", "t.f", "t.mpl", "t.fpl"]]]
+  }
+};
+const IDX_GEN = { m: 0, f: 1, mpl: 2, fpl: 3, n: 4 };
+const IDX_PERS = { suj: 0, od: 1, oi: 2, prep: 3, con: 4, refl: 5 };
+
+/* resaltar: { filas: Set, celdas: Set("fila|col"), soloCol } */
+function SerieTabla({ serie, c, resaltar }) {
+  const wide = useWide();
+  const ui = SERIES_UI[serie], s = FORMAS_ES_SERIES[serie];
+  const grupos = wide ? ui.ancho : ui.grupos;
+  /* En el teléfono se abre en la parte que tiene lo resaltado */
+  const inicial = () => {
+    if (!resaltar) return 0;
+    if (resaltar.tipo) { const t = grupos.findIndex(g => g[1][0][0] === (resaltar.tipo === "atono" ? "a" : "t")); if (t >= 0) return t; }
+    const i = grupos.findIndex(g => g[1].some(k => [...(resaltar.celdas || [])].some(x => x.split("|")[1] === k) || (resaltar.col && (k === resaltar.col || k.split(".")[1] === resaltar.col && (!resaltar.tipo || k[0] === resaltar.tipo[0])))));
+    return i >= 0 ? i : 0;
+  };
+  const [sel, setSel] = useState(inicial);
+  const g = grupos[Math.min(sel, grupos.length - 1)];
+  const R = resaltar || {};
+  const filas = s.filas.map(f => {
+    if (serie === "personal") return { id: f[0], lbl: PERS_RU[f[0]], sub: f[1], hit: R.filas && R.filas.has(f[0]), f };
+    const p = f[1].split(" (");
+    return { id: f[0], lbl: serie === "posesivo" ? p[0] : p[0], sub: serie === "posesivo" ? "" : (p[1] ? p[1].replace(/\)$/, "") : ""), hit: R.filas && R.filas.has(f[0]), f };
+  });
+  if (serie === "posesivo") filas.forEach(x => { x.lbl = x.f[2][0] === x.f[3][0] ? x.f[2][0] : x.f[2][0] + " · " + x.f[3][0]; x.sub = x.f[1]; });
+  if (serie === "articulo") filas.forEach(x => { x.sub = x.lbl; x.lbl = x.f[2] + " · " + x.f[3]; });
+  if (serie === "demostrativo") filas.forEach(x => { x.sub = x.f[1]; x.lbl = x.f[2]; });
+  const cols = g[1].map(k => {
+    if (serie === "personal") return { k, titulo: COLS_PERS[k][0], sub: COLS_PERS[k][1] };
+    const kk = k.indexOf(".") > 0 ? k.split(".")[1] : k;
+    return { k, titulo: COLS_GEN[kk][0], sub: COLS_GEN[kk][1] };
+  });
+  const valor = (fila, col) => {
+    let text;
+    if (serie === "personal") text = fila.f[2 + IDX_PERS[col.k]];
+    else if (serie === "posesivo") { const [t, kk] = col.k.split("."); text = (t === "a" ? fila.f[2] : fila.f[3])[IDX_GEN[kk]]; }
+    else text = fila.f[2 + IDX_GEN[col.k]];
+    const kk = col.k.indexOf(".") > 0 ? col.k.split(".")[1] : col.k;
+    let hit = R.celdas && R.celdas.has(fila.id + "|" + col.k);
+    if (!hit && R.filas && R.filas.has(fila.id)) {
+      if (R.col) hit = kk === R.col;                                   /* esto: solo la neutra */
+      else if (R.todaFila) hit = (!R.tipo || col.k[0] === R.tipo[0]) && !(serie === "demostrativo" && kk === "n");
+    }
+    return { text, hit };
+  };
+  return h("div", null,
+    grupos.length > 1 && h(Selector, { c, opciones: grupos.map(x => x[0]), sel, setSel }),
+    h(Tabla, { filas, cols, valor, ancho1: serie === "personal" ? "24%" : "30%" }),
+    h("div", { className: "tnote" }, "Нажми на форму, чтобы её послушать."));
+}
+
+/* ── Formas de una palabra (sustantivo, adjetivo, número…) ── */
+function TablaPalabra({ d, c }) {
+  if (d.t === "sust") {
+    const cols = d.f ? [{ titulo: "М. р.", k: "m" }, { titulo: "Ж. р.", k: "f" }] : [{ titulo: d.g === "m/f" ? "М. и ж. р." : "Форма", k: "m" }];
+    const filas = [{ lbl: "Ед. ч.", n: 0 }, { lbl: "Мн. ч.", n: 1 }];
+    const valor = (fila, col) => {
+      if (col.k === "f") return { art: d.artF[fila.n], text: fila.n ? d.fpl : d.f };
+      return { art: d.art[fila.n], text: fila.n ? d.pl : d.sg };
+    };
+    return h(Tabla, { filas, cols, valor });
+  }
+  const ks = [["m", "f"], ["mpl", "fpl"]];
+  const filas = [];
+  if (!d.soloPl) filas.push({ lbl: "Ед. ч.", n: 0 });
+  filas.push({ lbl: "Мн. ч.", n: 1 });
+  if (d.apoc) filas.push({ lbl: "Перед сущ.", sub: d.apocF ? "м. и ж. р., ед. ч." : "м. р. ед. ч.", apoc: true });
+  const cols = [{ titulo: "М. р.", k: 0 }, { titulo: "Ж. р.", k: 1 }];
+  const valor = (fila, col) => {
+    if (fila.apoc) return { text: col.k === 0 || d.apocF ? d.apoc : null };
+    return { text: d[ks[fila.n][col.k]] };
+  };
+  return h(Tabla, { filas, cols, valor });
+}
+
+/* Notas de la palabra (en ruso; borrador para Iván) */
+function notasPalabra(d, w) {
+  const n = [];
+  if (d.t === "sust") {
+    if (d.elA) n.push(["«el», хотя слово женского рода: так перед ударным a- / ha- в начале слова — ", h("b", { key: "a" }, "el " + w + ", un " + w), ". Прилагательное остаётся женского рода: el " + w + " fría. Во множественном числе — «las»."]);
+    if (d.sentido) n.push(["Род меняет значение: ", h("b", { key: "a" }, "el " + w), " и ", h("b", { key: "b" }, "la " + w), " — разные слова (см. значения)."]);
+    if (d.inv) n.push(["Во множественном числе не меняется: число видно по артиклю — ", h("b", { key: "a" }, d.art[0] + " " + w + " → " + d.art[1] + " " + d.pl), "."]);
+    if (d.soloPl) n.push(["Употребляется только во множественном числе."]);
+    if (!d.pl && !d.soloPl) n.push(["Обычно не употребляется во множественном числе."]);
+    if (d.g === "m/f" && !d.f && !d.sentido) n.push(["Одно слово для мужчины и для женщины: род виден по артиклю — ", h("b", { key: "a" }, "el " + w + " / la " + w), "."]);
+  } else if (d.m || d.mpl) {
+    if (d.invG) n.push(["В мужском и женском роде одинаково: меняется только число."]);
+    if (d.apoc) n.push([h("b", { key: "a" }, d.apoc), d.apocF ? " — перед существительным в ед. ч. любого рода: " : " — перед существительным м. р. в ед. ч.: ",
+      h("b", { key: "b" }, d.apoc + (d.apocF ? " casa, " + d.apoc + " libro" : " libro")), d.apocF ? "." : "; но " + d.f + " casa."]);
+    if (d.var) n.push(["Норма RAE: ", h("b", { key: "a" }, d.var), ". В речи обычно говорят ", h("b", { key: "b" }, d.mpl), "."]);
+    if (d.nota) n.push([d.nota]);
+  } else if (d.t === "contr") {
+    n.push([h("b", { key: "a" }, d.de.join(" + ") + " = " + w), ". Предлог «" + d.de[0] + "» с артиклем «el» всегда сливается: " + (w === "del" ? "la casa del padre" : "voy al cine") + ". С la, los, las — нет: " + (w === "del" ? "de la madre" : "a la playa") + "."]);
+  } else if (d.neutro) n.push(["Средний род: не меняется и не ставится перед существительным. Говорит о том, что не названо: ", h("b", { key: "a" }, "¿Qué es " + w + "?"), " Перед существительным — формы из таблицы: " + FORMAS_ES_SERIES.demostrativo.filas.find(f => f[6] === w).slice(2, 4).join(", ") + "…"]);
+  else if (d.inv) n.push(["Не меняется: одна форма для мужского и женского рода, ед. и мн. ч."]);
+  if (d.nota && d.t === "num" && !(d.m || d.mpl)) n.push([d.nota]);
+  return n;
+}
+
+/* Qué resaltar en la tabla de serie de una entrada */
+function resaltarDe(d) {
+  if (d.serie === "personal") {
+    return { filas: new Set(d.celdas.map(x => x[0])), celdas: new Set(d.celdas.map(x => x[0] + "|" + x[1])) };
+  }
+  if (d.neutro) return { filas: new Set([d.fila]), col: "n" };
+  if (d.t === "art") return { filas: new Set([d.fila]), todaFila: true };
+  return { filas: new Set([d.fila]), tipo: d.serie === "posesivo" ? d.tipo : null, col: null, todaFila: true };
+}
+
+function FichaGram({ id, c }) {
+  const e = lexEs(id);
+  const d = e ? FORMAS_ES[id] : null;
+  if (!e || !d) {
+    return h("div", { style: { textAlign: "center", padding: "10vh 0" } },
+      h("h1", { style: { fontSize: 18, marginBottom: 8, color: c.text } }, "Слово не найдено"),
+      h("p", { style: { fontSize: 13.5, color: c.textMuted } }, e ? "«" + e.es + "» не меняет форму." : "Нет слова с id «" + id + "»."));
+  }
+  const pos = e.posNormalized;
+  const fem = d.t === "sust" && d.f;
+  const badge = (POS_RU[pos] || pos) + (pos === "sustantivo" && e.gender ? " · " + GEN_RU[fem ? "m" : e.gender] : "");
+  const tags = [];
+  if (d.soloPl) tags.push("Только мн. ч.");
+  if (d.t === "sust" && !d.pl && !d.soloPl) tags.push("Только ед. ч.");
+  if (d.inv && d.t === "sust") tags.push("Мн. ч. не меняется");
+  if (d.invG) tags.push("Одинаково в м. и ж. р.");
+  if (d.inv && d.t !== "sust") tags.push("Не меняется");
+  /* La forma buscada (?f=): de dónde viene */
+  let buscada = null;
+  if (FORMA_BUSCADA && typeof formasEsLista === "function") {
+    const x = formasEsLista(id).filter(y => mismaForma(y.f, FORMA_BUSCADA))[0];
+    if (x && azNormEs(x.f) !== azNormEs(e.es)) buscada = x;
+  }
+  const notas = notasPalabra(d, e.es);
+  let tabla;
+  if (d.serie) {
+    const s = SERIES_UI[d.serie];
+    tabla = h("div", null,
+      h(SerieTabla, { serie: d.serie, c, resaltar: resaltarDe(d) }),
+      d.serie === "personal" && h("div", { className: "nota" }, h("b", null, "Функция: "), d.celdas.map(([f, k], i) =>
+        h("span", { key: i }, i ? "; " : "", (FORMAS_ES_SERIES.personal.cols.find(x => x[0] === k) || [k, k])[1] + " — " + FORMAS_ES_SERIES.personal.filas.find(x => x[0] === f)[1]))),
+      d.serie === "personal" && d.celdas.some(([f, k]) => /^(3|us|uds)/.test(f) && (k === "od" || k === "oi")) && h("div", { className: "nota" }, FORMAS_ES_SERIES.personal.nota),
+      h("div", { className: "help-row" }, h("a", { className: "help-chip", href: "gramatica.html?tabla=" + d.serie, onClick: ev => azNavigate(ev, "gramatica.html?tabla=" + d.serie) }, s.titulo, h("span", null, "›"))));
+  } else if (d.t === "sust" || d.m || d.mpl) tabla = h(TablaPalabra, { d, c });
+  return h("div", { style: { animation: "fadeIn 0.3s ease" } },
+    h("div", { className: "ficha" },
+      h("div", { className: "hero" },
+        h("div", { className: "hero-top" },
+          h("div", { style: { minWidth: 0 } },
+            h("div", { className: "ru" }, e.es),
+            e.translit && h("div", { className: "translit az-tl" }, e.translit),
+            e.ipa && h("div", { className: "ipa" }, "IPA: /" + e.ipa + "/")),
+          h("button", { className: "play", onClick: () => azHablarEs(e.es), "aria-label": "Произношение" }, "▶")),
+        h("span", { className: "pos-badge" }, badge),
+        tags.length > 0 && h("div", { className: "tags" }, tags.map((t, i) => h("span", { key: i, className: "tag" }, t)))),
+      h("div", { className: "fbody" },
+        h("div", { className: "section-lbl" }, "Значения"),
+        (e.senses || []).map((s, i) => h("div", { key: i, className: "sense" },
+          h("span", { className: "sense-num" }, i + 1),
+          h("span", { className: "sense-es" }, s.ru),
+          s.definitionRu && h("div", { className: "sense-def" }, s.definitionRu))),
+        h("div", { className: "section-lbl", style: { marginTop: 22 } }, "Формы"),
+        buscada && h("div", { className: "busco" }, h("b", null, buscada.f), " — " + (K_RU[buscada.k] || "форма") + " от ", h("b", null, e.es), ". Выделено в таблице."),
+        tabla,
+        notas.map((n, i) => h("div", { key: i, className: "nota" }, n)),
+        h("div", { className: "buttons" },
+          h("a", { className: "btn pr", href: "ficha.html?id=" + id, onClick: ev => azNavigate(ev, "ficha.html?id=" + id) }, "📖 В словаре"),
+          h("button", { className: "btn", onClick: () => azHablarEs(e.es) }, "▶ Произношение")))));
+}
+
+function TablaPagina({ serie, c }) {
+  const ui = SERIES_UI[serie];
+  if (!ui) return h("div", { style: { textAlign: "center", padding: "10vh 0", color: c.textMuted } }, "Таблица не найдена");
+  const s = FORMAS_ES_SERIES[serie];
+  return h("div", { style: { animation: "fadeIn 0.3s ease" } },
+    h("div", { className: "ficha" }, h("div", { className: "fbody" },
+      h("div", { className: "tab-kicker" }, "Таблица"),
+      h("div", { className: "tab-title" }, ui.titulo),
+      h("div", { className: "tab-desc" }, ui.desc),
+      h("div", { style: { marginTop: 18 } }, h(SerieTabla, { serie, c, resaltar: null })),
+      s.nota && h("div", { className: "nota" }, s.nota),
+      h("div", { className: "lbl" }, "Другие таблицы"),
+      h("div", { className: "help-row" }, Object.keys(SERIES_UI).filter(k => k !== serie).map(k =>
+        h("a", { key: k, className: "help-chip", href: "gramatica.html?tabla=" + k, onClick: ev => azNavigate(ev, "gramatica.html?tabla=" + k) }, SERIES_UI[k].titulo, h("span", null, "›")))))));
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [q, setQ] = useState("");
+  const qRef = useRef(null);
+  const searchWrapRef = useRef(null);
+  const [headerH, setHeaderH] = useState(0);
+  const [searchH, setSearchH] = useState(0);
+  const [, setListo] = useState(0);
+  useEffect(() => {
+    const f = () => setListo(n => n + 1);
+    window.addEventListener("az-formas", f);
+    return () => window.removeEventListener("az-formas", f);
+  }, []);
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      await azLoadProgress();
+      azModuleTouch('gramatica');
+    })();
+  }, []);
+  useLayoutEffect(() => {
+    function measure() {
+      const header = document.querySelector("header");
+      if (header) setHeaderH(header.getBoundingClientRect().height);
+      if (searchWrapRef.current) setSearchH(searchWrapRef.current.getBoundingClientRect().height);
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [darkMode]);
+
+  const c = azColors(darkMode);
+  if (!ES_OK) {
+    return h(AzShell, { darkMode, setDarkMode, moduleId: "gramatica", tabs: [] },
+      h("div", { style: { textAlign: "center", padding: "12vh 6vw", color: c.textSub, fontSize: 14.5, lineHeight: 1.55 } },
+        "Este módulo es de Abecé (español para rusohablantes).", h("br"),
+        h("a", { href: "index.html", style: { color: c.gold, fontWeight: 700 }, onClick: ev => azNavigate(ev, "index.html") }, "Volver al inicio")));
+  }
+  const id = getParam("id");
+  const tabla = getParam("tabla");
+  const enFicha = !!(id || tabla);
+
+  const results = (q.trim() ? azBuscarEs(q) : [])
+    .filter(r => tieneFormas(r.id))
+    .map(r => Object.assign({}, r, { href: "gramatica.html?id=" + r.id + (r.forma ? "&f=" + encodeURIComponent(r.forma) : "") }))
+    .filter((r, i, a) => a.findIndex(x => x.href === r.href) === i);
+  const resultRows = results.map((r, i) => h("a", {
+      key: r.href, href: r.href, className: "res-row",
+      onClick: (ev) => azNavigate(ev, r.href),
+      style: { borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
+    },
+      h("span", null, h("span", { className: "res-ru" }, r.acento || r.ru), h("span", { className: "res-asp" }, POS_CORTO[r.pos] || "")),
+      h("span", { className: "res-es" }, r.es)));
+  const noResults = h("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, "Ничего не найдено");
+  const campo = [
+    h("input", {
+      key: "i", ref: qRef, value: q, onInput: (ev) => setQ(ev.target.value),
+      placeholder: "Слово или форма: buenas, los…",
+      style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 16 }
+    }),
+    q && h("button", {
+      key: "x", onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); }, "aria-label": "Очистить поиск",
+      style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
+    }, "✕")
+  ];
+  const searchBar = enFicha && h("div", {
+    ref: searchWrapRef,
+    style: { position: "fixed", top: headerH, left: 0, right: 0, zIndex: 90, background: c.bg, backdropFilter: "blur(12px)", borderBottom: `1px solid ${c.border}`, padding: "12px 3vw" }
+  },
+    h("div", { style: { maxWidth: 960, margin: "0 auto", position: "relative" } },
+      ...campo,
+      q.trim() && h("div", {
+        style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, boxShadow: "0 16px 40px rgba(0,0,0,.4)" }
+      }, results.length ? resultRows : noResults)));
+
+  /* Portada (patrón de §6.1, como Casos) */
+  const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "gramatica") || { glyph: "Gr", icon: "purple", title: "Грамматика" };
+  const total = Object.keys(FORMAS_ES).filter(tieneFormas).length;
+  const INTRO_ITEMS = [
+    ["Формы каждого слова", "Род, число и артикль: la canción → las canciones, bueno → buena, buenos, buenas."],
+    ["Таблицы", "Местоимения по функциям, артикли, указательные и притяжательные слова."],
+    ["Поиск по любой форме", "Напиши buenas, los или canciones — и попадёшь к нужному слову."]];
+  const EJEMPLOS = ["canción", "agua", "bueno", "este"].map(w => LEXICON_ES.find(x => x.es === w && FORMAS_ES[x.id] && (w !== "este" || x.posNormalized === "determinante"))).filter(Boolean);
+  const buscando = !!q.trim();
+  const portada = h("div", null,
+    !buscando && h("div", { className: "intro" },
+      h("div", { className: "intro-top" },
+        h("div", { className: "intro-icon", style: { background: azModuloColor(modulo).bg, color: azModuloColor(modulo).fg } }, modulo.glyph),
+        h("div", null,
+          h("div", { className: "intro-title" }, modulo.title),
+          h("div", { className: "intro-kicker" }, String(total).replace(/\B(?=(\d{3})+$)/g, "\u00a0") + " " + pluralRu(total, "слово", "слова", "слов") + " · 4 таблицы"))),
+      h("div", { className: "intro-desc" }, "В испанском слова почти не меняются, но у них есть род, число и артикль, а у местоимений — своя форма для каждой функции. Здесь — формы каждого слова словаря и главные таблицы."),
+      INTRO_ITEMS.map((it, i) => h("div", { key: i, className: "intro-item" },
+        h("span", { className: "intro-dot" }),
+        h("div", null, h("div", { className: "intro-it" }, it[0]), h("div", { className: "intro-id" }, it[1]))))),
+    h("div", { style: { position: "relative" } }, ...campo),
+    !buscando && h("div", { className: "search-hint" }, "Можно искать по-испански или по-русски, или написать любую форму: buenas → bueno, canciones → canción."),
+    !buscando && h("div", { className: "try-row" },
+      h("span", { className: "try-lbl" }, "Попробуй:"),
+      EJEMPLOS.map(x => h("a", { key: x.id, className: "try-chip", href: "gramatica.html?id=" + x.id, onClick: (ev) => azNavigate(ev, "gramatica.html?id=" + x.id) }, x.es))),
+    !buscando && h("div", { className: "lbl" }, "Таблицы"),
+    !buscando && h("div", { className: "grid" }, Object.keys(SERIES_UI).map(k => h("a", {
+      key: k, className: "tcard", href: "gramatica.html?tabla=" + k, onClick: ev => azNavigate(ev, "gramatica.html?tabla=" + k)
+    }, h("b", null, SERIES_UI[k].titulo), h("span", null, SERIES_UI[k].corto)))),
+    buscando && h("div", { style: { marginTop: 10, background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, overflow: "hidden", animation: "fadeIn 0.3s ease" } },
+      results.length ? resultRows : noResults));
+
+  return h(AzShell, { darkMode, setDarkMode, moduleId: "gramatica", tabs: [] },
+    h(GramStyles, { c }),
+    searchBar,
+    h("div", { style: { paddingTop: enFicha ? (searchH ? searchH + 14 + "px" : "18px") : "16px", paddingBottom: 40 } },
+      id ? h(FichaGram, { key: id, id, c }) : tabla ? h(TablaPagina, { key: tabla, serie: tabla, c }) : portada));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>
