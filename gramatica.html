@@ -18,10 +18,10 @@
 <script src="assets/preact.js"></script>
 <script src="data/data-catalogo.js"></script>
 <script src="js/core.js"></script>
-<!-- Solo Abecé: el léxico español y las formas de las palabras (data-formas-es.js).
-     Cuando exista, también la guía (data-gramatica-es.js). En Azbuka no carga nada. -->
+<!-- Solo Abecé: el léxico español, las formas de las palabras (data-formas-es.js)
+     y la guía (data-gramatica-es.js). En Azbuka no carga nada. -->
 <script>
-(AZ_DIRECCION.id === "abece" ? ["data/data-lexicon-es.js", "data/data-formas-es.js"] : [])
+(AZ_DIRECCION.id === "abece" ? ["data/data-lexicon-es.js", "data/data-formas-es.js", "data/data-gramatica-es.js"] : [])
   .forEach(src => document.write('<script src="' + src + '"><\/script>'));
 </script>
 <script src="assets/supabase.js"></script>
@@ -39,8 +39,9 @@
      formas en tabla (data-formas-es.js). Con ?f=, la forma buscada se
      resalta y se explica arriba.
    · ?tabla=personal|articulo|demostrativo|posesivo → la tabla completa.
-   · ?guia=<capítulo> → la guía, cuando exista data-gramatica-es.js
-     (entrega 3).
+   · ?guia=<capítulo> (o ?guia= vacío: el índice) → la guía en una hoja a
+     pantalla completa (data-gramatica-es.js, GRAMATICA_ES; entrega 3),
+     con el mismo formato y las mismas piezas que la guía de Casos.
    En el teléfono, las tablas anchas se ven por partes con un selector
    (como el selector de género de Casos); desde 640px, enteras.
    Esta página NO guarda datos de palabras: todo sale de
@@ -86,7 +87,9 @@ function useWide() {
   return wide;
 }
 
-function GramStyles({ c }) {
+function GramStyles({ c, dark }) {
+  /* Colores semánticos (ESTETICA §2.3): verde correcto, naranja incorrecto */
+  const OK = dark ? "#4CAF82" : "#2E7D55", MAL = dark ? "#E2884A" : "#C85A1A";
   return h("style", null, `
     .ficha{background:${c.card};border:1px solid ${c.border};border-radius:14px;overflow:hidden;}
     .hero{background:linear-gradient(135deg,${c.bg2},${c.bg3});padding:20px 20px 16px;border-bottom:1px solid ${c.border};}
@@ -162,6 +165,65 @@ function GramStyles({ c }) {
     .tab-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};}
     .tab-title{font-size:26px;font-weight:800;color:${c.text};line-height:1.15;margin-top:6px;}
     .tab-desc{font-size:14px;line-height:1.55;color:${c.textSub};margin-top:10px;}
+    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};box-shadow:0 0 0 100vmax ${c.bg};overflow-y:auto;-webkit-overflow-scrolling:touch;animation:popIn .25s ease;}
+    .sheet-in{max-width:960px;margin:0 auto;padding:var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px));}
+    .sheet-x{position:fixed;top:var(--az-top,6vh);right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
+    .sheet-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-bottom:8px;}
+    .sheet-title{font-size:26px;font-weight:800;color:${c.text};line-height:1.15;padding-right:48px;}
+    .sheet-sub{margin-top:4px;font-size:15px;color:${c.textSub};font-weight:600;}
+    .sheet-text{margin-top:18px;font-size:15px;line-height:1.6;color:${c.textSub};}
+    .ex{display:flex;align-items:center;gap:12px;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-bottom:8px;}
+    .ex-col{flex-direction:column;align-items:stretch;}
+    .ex-top{display:flex;align-items:center;gap:12px;}
+    .ex-hl{color:${c.gold};border-bottom:2px solid ${c.gold}88;}
+    .ex-why{margin-top:10px;padding-top:9px;border-top:1px dashed ${c.border};font-size:13px;line-height:1.5;color:${c.textSub};}
+    .ex-t{font-size:11px;font-weight:700;color:${c.gold};text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+    .ex-ru{font-size:16px;font-weight:700;color:${c.text};}
+    .ex-es{font-size:13px;color:${c.textMuted};margin-top:3px;}
+    .guia-btn{display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;text-align:left;background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:14px;padding:9px 14px;margin-bottom:12px;cursor:pointer;font-family:inherit;animation:fadeIn .3s ease;}
+    .guia-ic{width:34px;height:34px;border-radius:10px;background:${c.gold};color:${c.bg};font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .guia-txt,.gcap-txt{flex:1;min-width:0;display:flex;flex-direction:column;}
+    .guia-t{font-size:14.5px;font-weight:700;color:${c.text};}
+    .guia-d{font-size:12px;color:${c.textMuted};margin-top:2px;line-height:1.35;}
+    .guia-ch{font-size:22px;color:${c.gold};font-weight:700;flex-shrink:0;line-height:1;}
+    .gcap{display:flex;align-items:center;gap:4px;width:100%;box-sizing:border-box;text-align:left;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer;font-family:inherit;}
+    .gcap-t{font-size:15px;font-weight:700;color:${c.text};}
+    .gcap-d{font-size:12.5px;color:${c.textMuted};margin-top:2px;line-height:1.4;}
+    .gback{margin-bottom:16px;}
+    .g-p{margin-top:14px;font-size:15px;line-height:1.6;color:${c.textSub};}
+    .g-p:first-child{margin-top:18px;}
+    .gtab{margin-top:14px;}
+    .gtab th{font-size:10.5px;color:${c.textMuted};text-transform:uppercase;letter-spacing:.5px;}
+    .gtab td{font-size:13.5px;line-height:1.4;color:${c.text};word-break:break-word;}
+    .gtab td:first-child{font-weight:700;}
+    .par{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-top:10px;}
+    .par-row{display:flex;align-items:flex-start;gap:10px;}
+    .par-mal{margin-top:10px;padding-top:10px;border-top:1px dashed ${c.border};}
+    .par-ic{font-size:15px;font-weight:800;width:16px;flex-shrink:0;margin-top:1px;}
+    .par-tacha{font-size:15px;font-weight:600;color:${c.textMuted};text-decoration:line-through;text-decoration-color:${MAL};}
+    .par-por{font-size:13px;line-height:1.5;color:${c.textSub};margin-top:4px;}
+    .pr-ok-t{color:${OK};}
+    .pr-mal-t{color:${MAL};}
+    .pr{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-top:10px;}
+    .pr-top{display:flex;align-items:flex-start;}
+    .pr-top .sense-num{flex-shrink:0;margin-top:1px;}
+    .pr-ru{font-size:16px;font-weight:700;color:${c.text};line-height:1.6;}
+    .pr-hueco{display:inline-block;min-width:54px;padding:0 8px;margin:0 2px;border:1.5px dashed ${c.gold}88;border-radius:7px;color:${c.textMuted};font-style:italic;font-weight:600;line-height:1.45;}
+    .pr-hueco.pr-ok{border:1.5px solid ${OK};color:${OK};font-style:normal;font-weight:700;background:${OK}1A;}
+    .pr-hueco.pr-mal{border:1.5px solid ${OK};color:${OK};font-style:normal;font-weight:700;}
+    .pr-ops{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;margin-left:28px;}
+    .pr-op{background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:14px;}
+    .pr-op.pr-ok{background:${OK}22;border-color:${OK};color:${OK};}
+    .pr-op.pr-mal{background:${MAL}22;border-color:${MAL};color:${MAL};}
+    .pr-op.pr-off{opacity:.45;}
+    .pr-op:disabled{cursor:default;}
+    .pr-why{display:flex;align-items:center;gap:12px;}
+    .pr-fin{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:14px;font-weight:700;color:${c.text};}
+    .gnav{display:flex;justify-content:space-between;gap:8px;margin-top:32px;}
+    .gnav-b{background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};max-width:48%;text-align:left;}
+    .gnav-sig{background:${c.gold}22;border-color:${c.gold};color:${c.gold};text-align:right;margin-left:auto;}
+    @keyframes popIn{from{opacity:0;transform:scale(.92);}to{opacity:1;transform:scale(1);}}
+    @media (max-height:720px){.guia-btn .guia-d{display:none;}.guia-btn{padding:7px 12px;margin-bottom:10px;}.guia-ic{width:28px;height:28px;font-size:15px;border-radius:8px;}}
     @media (max-height:720px){.intro{padding:14px 16px 10px;}.intro-desc{margin-top:10px;line-height:1.45;}.intro-id{display:none;}.try-row{margin-top:8px;}.intro-item{padding:4px 0;}}
   `);
 }
@@ -333,6 +395,164 @@ function notasPalabra(d, w) {
   return n;
 }
 
+/* ── Guía (GRAMATICA_ES, data-gramatica-es.js) ─────────────────
+   Las mismas piezas que la guía de Casos, con la frase en español
+   (suena con azHablarEs) y la explicación en ruso. {…} se resalta. */
+function useLockScroll() {
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.body.style.overflow = prev; };
+  }, []);
+}
+function Marcado({ text }) {
+  return h("span", null, String(text).split(/(\{[^}]*\})/).map((p, i) =>
+    p.charAt(0) === "{" ? h("span", { key: i, className: "ex-hl" }, p.slice(1, -1)) : p));
+}
+const limpio = t => String(t).replace(/[{}]/g, "");
+function Ejemplo({ fr, tr, por, titulo, showTr }) {
+  return h("div", { className: "ex ex-col" },
+    h("div", { className: "ex-top" },
+      h("div", { style: { flex: 1, minWidth: 0 } },
+        titulo && h("div", { className: "ex-t" }, titulo),
+        h("div", { className: "ex-ru" }, h(Marcado, { text: fr })),
+        showTr && h("div", { className: "ex-es" }, tr)),
+      h("button", { className: "play", onClick: () => azHablarEs(limpio(fr)), "aria-label": "Послушать" }, "▶")),
+    por && h("div", { className: "ex-why" }, h(Marcado, { text: por })));
+}
+function GuiaBoton({ titulo, desc, onClick, style }) {
+  return h("button", { className: "guia-btn", onClick, style },
+    h("span", { className: "guia-ic" }, "?"),
+    h("span", { className: "guia-txt" }, h("span", { className: "guia-t" }, titulo), desc && h("span", { className: "guia-d" }, desc)),
+    h("span", { className: "guia-ch" }, "›"));
+}
+function GuiaTabla({ cols, filas }) {
+  return h("table", { className: "ctable gtab" },
+    h("thead", null, h("tr", null, cols.map((t, i) => h("th", { key: i }, t)))),
+    h("tbody", null, filas.map((f, i) => h("tr", { key: i }, f.map((x, j) => h("td", { key: j }, h(Marcado, { text: x })))))));
+}
+function GuiaPar({ bien, mal, showTr }) {
+  return h("div", { className: "par" },
+    h("div", { className: "par-row" },
+      h("span", { className: "par-ic pr-ok-t" }, "✔"),
+      h("div", { style: { flex: 1, minWidth: 0 } }, h("div", { className: "ex-ru" }, h(Marcado, { text: bien[0] })), showTr && h("div", { className: "ex-es" }, bien[1])),
+      h("button", { className: "play", onClick: () => azHablarEs(limpio(bien[0])), "aria-label": "Послушать" }, "▶")),
+    h("div", { className: "par-row par-mal" },
+      h("span", { className: "par-ic pr-mal-t" }, "✘"),
+      h("div", { style: { flex: 1, minWidth: 0 } }, h("div", { className: "par-tacha" }, mal[0]), h("div", { className: "par-por" }, mal[1]))));
+}
+/* Las opciones salen en orden al azar (Manu, 27/10/2026): en los datos la
+   correcta suele ir primera. Se mezclan al abrir el capítulo y otra vez con
+   «Начать заново». */
+function mezclar(a) {
+  const r = a.slice();
+  for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = r[i]; r[i] = r[j]; r[j] = t; }
+  return r;
+}
+function GuiaPractica({ items, showTr }) {
+  const [resp, setResp] = useState({});
+  const [orden, setOrden] = useState(() => items.map(it => mezclar(it.op)));
+  const hechas = Object.keys(resp).length;
+  const bien = items.filter((it, i) => resp[i] === it.ok).length;
+  return h("div", null,
+    items.map((it, i) => {
+      const r = resp[i], hecho = r != null;
+      const partes = it.fr.split("___");
+      const frase = partes[0] + it.ok + (partes[1] || "");
+      return h("div", { key: i, className: "pr" },
+        h("div", { className: "pr-top" },
+          h("span", { className: "sense-num" }, i + 1),
+          h("div", { className: "pr-ru" }, partes[0],
+            h("span", { className: "pr-hueco" + (hecho ? (r === it.ok ? " pr-ok" : " pr-mal") : "") }, hecho ? it.ok : "\u00a0"),   /* vacío hasta responder (Manu, 27/10/2026) */
+            partes[1] || "")),
+        h("div", { className: "pr-ops" }, (orden[i] || it.op).map(o => {
+          let cls = "pair-btn pr-op";
+          if (hecho) cls += o === it.ok ? " pr-ok" : (o === r ? " pr-mal" : " pr-off");
+          return h("button", { key: o, className: cls, disabled: hecho, onClick: () => setResp(Object.assign({}, resp, { [i]: o })) }, o);
+        })),
+        hecho && h("div", { className: "ex-why pr-why" },
+          h("div", { style: { flex: 1, minWidth: 0 } },
+            h("div", { className: r === it.ok ? "pr-ok-t" : "pr-mal-t", style: { fontWeight: 700 } }, r === it.ok ? "✔ Верно!" : "✘ Правильно: " + it.ok + "."),
+            h("div", { style: { marginTop: 3 } }, showTr && h("i", null, it.tr), showTr && " ", it.por)),
+          h("button", { className: "play", onClick: () => azHablarEs(frase), "aria-label": "Послушать" }, "▶")));
+    }),
+    hechas > 0 && h("div", { className: "pr-fin" },
+      hechas === items.length && h("span", null, "Правильно " + bien + " из " + items.length + "."),
+      h("button", { className: "help-chip", onClick: () => { setResp({}); setOrden(items.map(it => mezclar(it.op))); } }, "Начать заново")));
+}
+function GuiaBloque({ b, showTr }) {
+  switch (b.t) {
+    case "texto": return h("div", { className: "g-p" }, h(Marcado, { text: b.texto }));
+    case "lbl": return h("div", { className: "section-lbl", style: { marginTop: 28 } }, b.texto);
+    case "nota": return h("div", { className: "nota", style: { marginTop: 14 } }, h(Marcado, { text: b.texto }));
+    case "tabla": return h(GuiaTabla, { cols: b.cols, filas: b.filas });
+    case "par": return h(GuiaPar, { bien: b.bien, mal: b.mal, showTr });
+    case "ejemplos": return h("div", { style: { marginTop: 14 } }, b.items.map((e, i) => h(Ejemplo, { key: i, fr: e[0], tr: e[1], por: e[2], titulo: e[3], showTr })));
+    case "practica": return h(GuiaPractica, { items: b.items, showTr });
+    default: return null;
+  }
+}
+const HAY_GUIA = typeof GRAMATICA_ES !== "undefined";
+function GuiaSheet({ inicio, onClose, c }) {
+  useLockScroll();
+  const G = HAY_GUIA ? GRAMATICA_ES : null;
+  const [cap, setCap] = useState(inicio && G && gramaticaEsGuia(inicio) ? inicio : null);
+  /* Chip «Перевод»: muestra u oculta la traducción rusa de las frases (como
+     «Traducción» en Diálogos y Lecturas). Vale para todos los capítulos. */
+  const [showTr, setShowTr] = useState(true);
+  const ref = useRef(null);
+  useEffect(() => { if (ref.current) ref.current.scrollTop = 0; }, [cap]);
+  if (!G) return null;
+  const caps = G.capitulos;
+  const i = cap ? caps.findIndex(x => x.id === cap) : -1;
+  const k = i >= 0 ? caps[i] : null;
+  let cuerpo;
+  if (!k) {
+    const grupos = [];
+    caps.forEach((x, n) => {
+      let g = grupos.find(y => y.t === x.grupo);
+      if (!g) { g = { t: x.grupo, caps: [] }; grupos.push(g); }
+      g.caps.push([x, n]);
+    });
+    cuerpo = [
+      h("div", { key: "k", className: "sheet-kicker" }, "Справочник"),
+      h("div", { key: "t", className: "sheet-title" }, G.titulo),
+      h("div", { key: "i", className: "sheet-text" }, G.intro),
+      grupos.map(g => h("div", { key: g.t },
+        h("div", { className: "section-lbl", style: { marginTop: 26 } }, g.t),
+        g.caps.map(([x, n]) => h("button", { key: x.id, className: "gcap", onClick: () => setCap(x.id) },
+          h("span", { className: "sense-num" }, n + 1),
+          h("span", { className: "gcap-txt" }, h("span", { className: "gcap-t" }, x.titulo), h("span", { className: "gcap-d" }, x.desc)),
+          h("span", { className: "guia-ch" }, "›")))))
+    ];
+  } else {
+    const ant = caps[i - 1], sig = caps[i + 1];
+    cuerpo = [
+      h("button", { key: "b", className: "help-chip gback", onClick: () => setCap(null) }, "‹ Оглавление"),
+      h("div", { key: "k", className: "sheet-kicker" }, "Справочник · " + k.grupo),
+      h("div", { key: "t", className: "sheet-title" }, k.titulo),
+      h("div", { key: "s", className: "sheet-sub" }, k.sub),
+      h("div", { key: "tr", className: "pair-row", style: { marginTop: 14, marginBottom: 0 } },
+        h("button", { className: "pair-btn", onClick: () => setShowTr(!showTr),
+          style: showTr ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted } }, "Перевод")),
+      h("div", { key: "c" }, k.bloques.map((b, n) => h(GuiaBloque, { key: cap + n, b, showTr }))),
+      h("div", { key: "n", className: "gnav" },
+        ant ? h("button", { className: "pair-btn gnav-b", onClick: () => setCap(ant.id) }, "‹ " + ant.titulo) : h("span"),
+        sig ? h("button", { className: "pair-btn gnav-b gnav-sig", onClick: () => setCap(sig.id) }, sig.titulo + " ›")
+            : h("button", { className: "pair-btn gnav-b gnav-sig", onClick: () => setCap(null) }, "К оглавлению"))
+    ];
+  }
+  return h("div", { className: "sheet", role: "dialog", "aria-modal": "true", ref },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Закрыть" }, "✕"),
+    h("div", { className: "sheet-in" }, cuerpo));
+}
+/* Capítulos de la guía que tocan una palabra (botones «?» de la ficha) */
+function capitulosDe(d) {
+  const ids = d.t === "sust" ? ["articulo", "genero"] : (d.t === "adj" || ((d.t === "det" || d.t === "num") && (d.m || d.mpl))) ? ["concordancia"]
+    : (d.t === "art" || d.t === "contr") ? ["articulo"] : [];
+  return HAY_GUIA ? ids.map(gramaticaEsGuia).filter(Boolean) : [];
+}
+
 /* Qué resaltar en la tabla de serie de una entrada */
 function resaltarDe(d) {
   if (d.serie === "personal") {
@@ -343,7 +563,7 @@ function resaltarDe(d) {
   return { filas: new Set([d.fila]), tipo: d.serie === "posesivo" ? d.tipo : null, col: null, todaFila: true };
 }
 
-function FichaGram({ id, c }) {
+function FichaGram({ id, c, onGuia }) {
   const e = lexEs(id);
   const d = e ? FORMAS_ES[id] : null;
   if (!e || !d) {
@@ -398,6 +618,8 @@ function FichaGram({ id, c }) {
         buscada && h("div", { className: "busco" }, h("b", null, buscada.f), " — " + (K_RU[buscada.k] || "форма") + " от ", h("b", null, e.es), ". Выделено в таблице."),
         tabla,
         notas.map((n, i) => h("div", { key: i, className: "nota" }, n)),
+        capitulosDe(d).length > 0 && h("div", { className: "help-row" }, capitulosDe(d).map(k =>
+          h("button", { key: k.id, className: "help-chip", onClick: () => onGuia(k.id) }, k.titulo, h("span", null, "?")))),
         h("div", { className: "buttons" },
           h("a", { className: "btn pr", href: "ficha.html?id=" + id, onClick: ev => azNavigate(ev, "ficha.html?id=" + id) }, "📖 В словаре"),
           h("button", { className: "btn", onClick: () => azHablarEs(e.es) }, "▶ Произношение")))));
@@ -427,6 +649,8 @@ function App() {
   const [headerH, setHeaderH] = useState(0);
   const [searchH, setSearchH] = useState(0);
   const [, setListo] = useState(0);
+  /* Guía: null = cerrada, "" = índice, id = capítulo. gramatica.html?guia=articulo la abre. */
+  const [guia, setGuia] = useState(() => getParam("guia"));
   useEffect(() => {
     const f = () => setListo(n => n + 1);
     window.addEventListener("az-formas", f);
@@ -514,6 +738,7 @@ function App() {
       INTRO_ITEMS.map((it, i) => h("div", { key: i, className: "intro-item" },
         h("span", { className: "intro-dot" }),
         h("div", null, h("div", { className: "intro-it" }, it[0]), h("div", { className: "intro-id" }, it[1]))))),
+    !buscando && HAY_GUIA && h(GuiaBoton, { titulo: GRAMATICA_ES.titulo, desc: "Артикль, род, согласование… — с примерами и упражнениями", onClick: () => setGuia("") }),
     h("div", { style: { position: "relative" } }, ...campo),
     !buscando && h("div", { className: "search-hint" }, "Можно искать по-испански или по-русски, или написать любую форму: buenas → bueno, canciones → canción."),
     !buscando && h("div", { className: "try-row" },
@@ -527,10 +752,11 @@ function App() {
       results.length ? resultRows : noResults));
 
   return h(AzShell, { darkMode, setDarkMode, moduleId: "gramatica", tabs: [] },
-    h(GramStyles, { c }),
+    h(GramStyles, { c, dark: darkMode }),
     searchBar,
     h("div", { style: { paddingTop: enFicha ? (searchH ? searchH + 14 + "px" : "18px") : "16px", paddingBottom: 40 } },
-      id ? h(FichaGram, { key: id, id, c }) : tabla ? h(TablaPagina, { key: tabla, serie: tabla, c }) : portada));
+      id ? h(FichaGram, { key: id, id, c, onGuia: setGuia }) : tabla ? h(TablaPagina, { key: tabla, serie: tabla, c }) : portada),
+    guia != null && h(GuiaSheet, { inicio: guia, onClose: () => setGuia(null), c }));
 }
 htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
 </script>
