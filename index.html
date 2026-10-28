@@ -74,6 +74,9 @@ const { useState, useEffect } = htmPreact;
    y la tarjeta no lleva a ningún índice. ── */
 const ABECE = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
 const SIN_UNIDADES = ABECE && !(AZ_CATALOGO.abece.unidades || []).length;
+/* El desafío del día y el Repaso de hoy son de Azbuka (hoy.js y repaso.html usan sus unidades):
+   en Abecé no se muestran hasta que tenga los suyos (28/10/2026). */
+const SIN_HOY = ABECE;
 const TXI = ABECE ? {
   glyph: (AZ_DIRECCION.marca || {}).glyph || "Ab", titulo: (AZ_DIRECCION.marca || {}).nombre || "Abecé",
   desc: "Полный курс испанского с нуля для тех, кто говорит по-русски. Понятная теория, практические упражнения и живые примеры — чтобы ты уверенно шёл вперёд, от уровня A1 до B1.",
@@ -119,7 +122,7 @@ function App() {
       setUltimo(await azLeerUltimo());
       { const pr = await azGet("az_progress", {}), srs = pr.srs || {}, hoy = new Date().toISOString().slice(0, 10);
         setRepasoN(Object.keys(srs).filter(k => srs[k].p && srs[k].p <= hoy && k.indexOf("ej:") === 0).length); }
-      if (SIN_UNIDADES) return;   /* Abecé sin unidades: sin desafío del día */
+      if (SIN_HOY) return;   /* Abecé: sin desafío del día (todavía) */
       const u = await azHoyUnidad(); setHoyUnidad(u);
       const hs = await leerHoy();
       /* Una vez por día, al abrir el inicio, si ya empezó alguna unidad */
@@ -164,7 +167,7 @@ function App() {
       !SIN_UNIDADES && React.createElement("div", { style: { display: "flex", gap: 10, alignItems: "stretch", marginBottom: ultimo ? 10 : 26 } },
       (() => {
         const u = ultimo;
-        const href = u ? u.href : "azbuka-1.html";
+        const href = u ? u.href : ABECE ? "abece-1.html" : "azbuka-1.html";
         const pct = u && u.total ? Math.round(u.n / u.total * 100) : 0;
         return React.createElement("a", {
           className: "cont", href, onClick: (e) => azNavigate(e, href),
@@ -172,9 +175,9 @@ function App() {
         },
           React.createElement("div", { className: "cont-n" }, u ? u.unidad : "1"),
           React.createElement("div", { style: { flex: 1, minWidth: 0 } },
-            React.createElement("div", { className: "cont-k", style: { color: c.gold } }, u ? "Seguir estudiando" : "Empezar"),
-            React.createElement("div", { className: "cont-t", style: { color: c.text } }, u ? u.titulo : "Unidad 1 · Alfabeto y pronunciación"),
-            u && React.createElement("div", { className: "cont-s", style: { color: c.textMuted } }, "Módulo " + u.n + " de " + u.total),
+            React.createElement("div", { className: "cont-k", style: { color: c.gold } }, ABECE ? (u ? "Продолжить" : "Начать") : u ? "Seguir estudiando" : "Empezar"),
+            React.createElement("div", { className: "cont-t", style: { color: c.text } }, u ? u.titulo : ABECE ? "Урок 1 · Испанский с нуля" : "Unidad 1 · Alfabeto y pronunciación"),
+            u && React.createElement("div", { className: "cont-s", style: { color: c.textMuted } }, (ABECE ? "Модуль " : "Módulo ") + u.n + (ABECE ? " из " : " de ") + u.total),
             u && React.createElement("div", { className: "pbar", style: { background: c.bg3 } },
               React.createElement("div", { style: { width: pct + "%", height: "100%", background: darkMode ? "#4CAF82" : "#2E7D55" } }))
           ),
@@ -185,7 +188,7 @@ function App() {
       ),
 
       /* ── REPASO DE HOY (19/10/2026, repaso.html): solo si ya empezó alguna unidad ── */
-      ultimo && !SIN_UNIDADES && React.createElement("a", {
+      ultimo && !SIN_UNIDADES && !SIN_HOY && React.createElement("a", {
         className: "cont", href: "repaso.html", onClick: (e) => azNavigate(e, "repaso.html"),
         style: { background: c.card, border: `1px solid ${repasoN ? c.gold + "66" : c.border}` }
       },

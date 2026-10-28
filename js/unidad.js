@@ -67,14 +67,72 @@
    Criterios (Manu, 25/09/2026): audio en casi todo; nada de practicar
    transliteración; desordenar lo mismo no es un ejercicio nuevo.
    El resultado de cada uno es AZ_BIEN / AZ_CASI / AZ_MAL.
+
+   Abecé (28/10/2026): el mismo motor lee la dirección (AZ_DIRECCION.id
+   === "abece"). Ahí la lengua que se aprende es el español: los textos de
+   la pantalla van en ruso (TX_RU, borrador para Iván), la voz es la
+   española (azHablarEs, azHablarSecuenciaEs), la corrección es la de
+   corrector-es.js (azCorregirEs: tildes, ¿¡, variantes americanas) y el
+   semáforo nombra las palabras del léxico español. En los ejercicios de
+   Abecé, idioma: "es" (o sin idioma) = se responde en español; "ru" = en
+   ruso. Pueden llevar foco (palabras evaluadas: tu / tú) y variantes:
+   "mal" (el ejercicio evalúa justo la forma peninsular). Todavía no
+   corrigen por intención (situacion, turnos): llegan con las unidades
+   que los usen.
    ============================================================ */
 (function () {
   const h = React.createElement;
   const { useState, useEffect, useRef } = htmPreact;
   const VERDE = "#4CAF82", NARANJA = "#E2884A", ROJO = "#B5605C";
+  /* Abecé (28/10/2026): textos en ruso, voz y corrector del español */
+  const ES = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
+  const LL = ES ? "es" : "ru";                                   /* la lengua que se aprende */
+  const langDe = t => ES ? (/[А-Яа-яЁё]/.test(String(t || "")) ? "ru" : "es") : "ru";
+  const TX_RU = {
+    "Escuchar": "Слушать", "Detener el audio": "Остановить звук", "Mostrar el texto": "Показать текст",
+    "📖 Repasar la regla": "📖 Повторить правило", "✓ Bien": "✓ Верно", "≈ Casi": "≈ Почти", "✗ Mal": "✗ Неверно",
+    "Para recordarlo: ": "Запомни: ", "＋ Guardar en el cuaderno": "＋ Сохранить в тетрадь",
+    "Comprobar": "Проверить", "Intentar de nuevo": "Попробовать ещё раз", "El orden correcto:": "Правильный порядок:",
+    "Chat: ": "Чат: ", "Enviar": "Отправить", "Ver la respuesta y seguir": "Показать ответ и продолжить",
+    "Por ejemplo: ": "Например: ", "Conversación terminada.": "Разговор окончен.",
+    "Escucha. ¿Verdadero o falso?": "Послушай. Правда или нет?", "¿Verdadero o falso?": "Правда или нет?",
+    "Verdadero": "Правда", "Falso": "Неправда",
+    "Toca ▶ para escuchar y después la letra que corresponde.": "Нажми ▶, чтобы послушать, а потом — на нужную букву.",
+    "Toca uno de la izquierda y después su pareja.": "Нажми на вариант слева, а потом — на его пару.",
+    "Ahora dominadas": "Теперь выучено", "Volvieron a «Aprendiendo»": "Вернулись в «Изучаю»",
+    "Toca la palabra que está mal y escríbela bien.": "Найди неправильное слово и напиши его правильно.",
+    "¡Esa es! Ahora escríbela bien:": "Да, это оно! Теперь напиши его правильно:", "La palabra corregida…": "Исправленное слово…",
+    "Cambia la frase paso a paso.": "Меняй фразу шаг за шагом.", "Siguiente paso": "Следующий шаг", "Pasos: ": "Шаги: ",
+    "Esta frase tiene un error. ¿Qué falla?": "В этой фразе есть ошибка. Что не так?", "Ahora escribe la frase bien:": "Теперь напиши фразу правильно:",
+    "Siguiente pregunta": "Следующий вопрос", "💡 Pista": "💡 Подсказка", "Ver una respuesta y seguir": "Показать ответ и продолжить",
+    "Tu turno: ": "Твоя очередь: ", "Decir": "Сказать", "Evaluación": "Проверка", "Práctica": "Практика", "Empezar": "Начать",
+    "Parte: ": "Часть: ", "Ejercicio desconocido": "Неизвестное упражнение", "Siguiente": "Дальше", "Ver resultado": "Результат",
+    "Resultado de la evaluación": "Результат проверки", "Unidad aprobada.": "Урок сдан.",
+    "Todavía no: conviene reforzar antes de seguir.": "Пока нет: лучше повторить, прежде чем идти дальше.",
+    "Para reforzar": "Что повторить", "Repetir la evaluación": "Пройти проверку ещё раз", "Volver a la unidad": "Вернуться к уроку",
+    "Resultado": "Результат", "Bien": "Верно", "Casi": "Почти", "Mal": "Неверно", "Para repasar": "Повторить",
+    "Estos vuelven en las próximas sesiones hasta que te salgan bien.": "Они будут возвращаться в следующих занятиях, пока не получатся.",
+    "Todo bien en esta sesión.": "В этом занятии всё верно.", "Otra sesión": "Ещё одно занятие", "Salir de la práctica": "Выйти из практики",
+    "Mapa": "Карта", "Plano con el camino": "План с маршрутом"
+  };
+  const T = s => ES && TX_RU[s] != null ? TX_RU[s] : s;
+  const TX = T;   /* en Turnos, T es el guion (ej.turnos) */
+  /* 1 упражнение · 2 упражнения · 5 упражнений */
+  const plRu = (n, a, b, c) => { const d = n % 10, dd = n % 100; return d === 1 && dd !== 11 ? a : d >= 2 && d <= 4 && (dd < 12 || dd > 14) ? b : c; };
+  /* Corrección: idioma en el sentido de Azbuka ("ru" = la lengua que se aprende). En Abecé,
+     "ru" = se responde en ruso; cualquier otro (o nada) = en español. */
+  function corr(txt, esperadas, idioma, ej, formaCasi) {
+    if (ES && typeof azCorregirEs === "function")
+      return azCorregirEs(txt, esperadas, { lengua: idioma === "ru" ? "ru" : "es", foco: ej && ej.foco, variantes: ej && ej.variantes, formaCasi });
+    return azCorregir(txt, esperadas, { idioma, formaCasi });
+  }
+  /* La voz de un personaje (chat, turnos) */
+  function decir(t, quien) { if (ES) { if (typeof azHablarEs === "function") azHablarEs(t, null, quien); } else azHablarRu(t, quien); }
 
   /* t puede ser un texto o un diálogo: [{ texto, genero, rate? }] (06/10/2026, U13: dos voces y velocidad) */
-  function hablar(t) { if (Array.isArray(t)) { if (typeof azHablarSecuencia === "function") azHablarSecuencia(t); } else if (typeof azHablarRu === "function") azHablarRu(t); }
+  function hablar(t) {
+    if (ES) { if (Array.isArray(t)) { if (typeof azHablarSecuenciaEs === "function") azHablarSecuenciaEs(t); } else if (typeof azHablarEs === "function") azHablarEs(t); return; }
+    if (Array.isArray(t)) { if (typeof azHablarSecuencia === "function") azHablarSecuencia(t); } else if (typeof azHablarRu === "function") azHablarRu(t); }
   /* Opciones con {я}, {в} (palabras de una letra marcadas en el texto en español): se muestran sin las llaves (10/10/2026) */
   function sinLlavesOp(o) { return String(o).replace(/\{([^}]*)\}/g, "$1"); }
   function mezclar(a) { return a.slice().sort(() => Math.random() - .5); }
@@ -148,16 +206,16 @@
   function Oir({ texto, auto }) {
     useEffect(() => { if (auto && texto) { const t = setTimeout(() => hablar(texto), 250); return () => clearTimeout(t); } }, [texto]);
     /* Textos largos (más de 40 caracteres): también ■ para detener el audio */
-    return h("div", { className: "pr-oir" }, h("button", { onClick: () => hablar(texto), "aria-label": "Escuchar" }, "▶"),
-      texto && (Array.isArray(texto) || texto.length > 40) && typeof azCallar === "function" && h("button", { onClick: azCallar, "aria-label": "Detener el audio" }, "■"));
+    return h("div", { className: "pr-oir" }, h("button", { onClick: () => hablar(texto), "aria-label": T("Escuchar") }, "▶"),
+      texto && (Array.isArray(texto) || texto.length > 40) && typeof azCallar === "function" && h("button", { onClick: azCallar, "aria-label": T("Detener el audio") }, "■"));
   }
 
   /* Texto de lectura: un solo recuadro; con textoOculto, detrás de un botón */
   function Texto({ ej }) {
     const [ver, setVer] = useState(!ej.textoOculto);
     if (!ej.texto || !ej.texto.length) return null;
-    if (!ver) return h("button", { className: "pr-cu", style: { margin: "4px auto 0" }, onClick: () => setVer(true) }, "Mostrar el texto");
-    return h("div", { className: "pr-texto", lang: "ru", style: ej.textoOculto ? { marginTop: 12, marginBottom: 0 } : null }, ej.texto.map((l, i) => h("div", { key: i }, l)));
+    if (!ver) return h("button", { className: "pr-cu", style: { margin: "4px auto 0" }, onClick: () => setVer(true) }, T("Mostrar el texto"));
+    return h("div", { className: "pr-texto", lang: LL, style: ej.textoOculto ? { marginTop: 12, marginBottom: 0 } : null }, ej.texto.map((l, i) => h("div", { key: i }, l)));
   }
 
   /* Los dos géneros (13/10/2026, decisión de Manu): en ruso el género de quien habla (я был / я была́) o de
@@ -166,7 +224,7 @@
      No en los dictados: ahí se escribe lo que se oye. Un ejercicio puede pedir lo contrario con generoFijo: true. */
   const AZ_GENERO_PIDE = /hombre|mujer|señor|señora|chic[oa]s?\b|amig[oa]\b|varón/i;
   function azEsperadasGenero(ej, lista, pideExtra) {
-    if (!lista || ej.generoFijo || typeof azAmbosGeneros !== "function") return lista;
+    if (ES || !lista || ej.generoFijo || typeof azAmbosGeneros !== "function") return lista;
     if (ej.tipo === "dictado" || /^Escuch[aá] y escrib[eí]/.test(ej.pide || "")) return lista;
     if (AZ_GENERO_PIDE.test((ej.pide || "") + " " + (pideExtra || ""))) return lista;
     return azAmbosGeneros(lista);
@@ -175,20 +233,20 @@
   let REGLAS_ON = true;
   function BotonRegla({ ej, r }) {
     if (!REGLAS_ON || r === AZ_BIEN || r == null || !ej.regla || typeof azRegla !== "function" || !azRegla(ej.regla)) return null;
-    return h("button", { className: "pr-cu", onClick: () => window.dispatchEvent(new CustomEvent("az-ver-regla", { detail: ej.regla })) }, "📖 Repasar la regla");
+    return h("button", { className: "pr-cu", onClick: () => window.dispatchEvent(new CustomEvent("az-ver-regla", { detail: ej.regla })) }, T("📖 Repasar la regla"));
   }
   function Explicacion({ ej, r }) {
     const col = r === AZ_BIEN ? VERDE : r === AZ_CASI ? NARANJA : ROJO;
-    const txt = r === AZ_BIEN ? "✓ Bien" : r === AZ_CASI ? "≈ Casi" : "✗ Mal";
+    const txt = T(r === AZ_BIEN ? "✓ Bien" : r === AZ_CASI ? "≈ Casi" : "✗ Mal");
     return h("div", null,
       h("span", { className: "pr-res", style: { color: col, background: col + "22", border: "1px solid " + col } }, txt),
       ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
-      r !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt("Para recordarlo: " + ej.recordar)),
+      r !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt(T("Para recordarlo: ") + ej.recordar)),
       h(BotonRegla, { ej, r }),
       r !== AZ_BIEN && typeof azGuardarEnCuaderno === "function" && h("button", {
         className: "pr-cu",
-        onClick: () => azGuardarEnCuaderno(((ej.pide || ej.afirmacion || "") + (ej.grande ? " " + ej.grande : "")).trim() + "\n" + azSinMarcas(ej.explicacion || "") + (ej.recordar ? "\nPara recordarlo: " + azSinMarcas(ej.recordar) : ""))
-      }, "＋ Guardar en el cuaderno"));
+        onClick: () => azGuardarEnCuaderno(((ej.pide || ej.afirmacion || "") + (ej.grande ? " " + ej.grande : "")).trim() + "\n" + azSinMarcas(ej.explicacion || "") + (ej.recordar ? "\n" + T("Para recordarlo: ") + azSinMarcas(ej.recordar) : ""))
+      }, T("＋ Guardar en el cuaderno")));
   }
 
   /* ── Formas ── */
@@ -203,12 +261,12 @@
       ej.escena && h("div", { className: "pr-escena", "aria-hidden": "true" }, ej.escena),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.plano && h(Plano, { plano: ej.plano, c }),
-      ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: "ru" }, ej.grande),
+      ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: langDe(ej.grande) }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.textoOculto && h(Texto, { ej }),
       h("div", { className: "pr-ops" + (larga ? " una" : "") }, ops.map(o => {
         const cls = !elegida ? "" : o === ej.correcta ? " ok" : o === elegida ? " mal" : "";
-        return h("button", { key: o, className: "pr-op" + cls, disabled: !!elegida, onClick: () => tocar(o), lang: "ru" }, sinLlavesOp(o));
+        return h("button", { key: o, className: "pr-op" + cls, disabled: !!elegida, onClick: () => tocar(o), lang: langDe(o) }, sinLlavesOp(o));
       })),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
@@ -217,7 +275,7 @@
      ejercicio de una sola palabra («Escribe en ruso: «hotel»»). Devuelve su acento o null. */
   function azOtraPalabra(txt, ej, u) {
     const m = /^Escribe en ruso: «([^»]+)»$/.exec(ej.pide || "");
-    if (!m || typeof LEXICON_COMER === "undefined" || !(ej.esperadas || []).length) return null;
+    if (ES || !m || typeof LEXICON_COMER === "undefined" || !(ej.esperadas || []).length) return null;
     if (ej.esperadas.some(x => /\s/.test(String(x).trim()))) return null;           /* solo palabras sueltas */
     const w = azTokens(txt); if (w.length !== 1) return null;
     const sinT = s => String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\([^)]*\)/g, "").trim();
@@ -236,7 +294,7 @@
      «Voy al hotel» vale con гости́ница y con оте́ль, salga el ejercicio que salga. */
   const AZ_MISMAS = new WeakMap();
   function azMismaConsigna(pool, ej) {
-    if (!pool || !ej || ej.forma !== "escribir" || ej.idioma !== "ru" || !/^Escribe en ruso/.test(ej.pide || "")) return null;
+    if (ES || !pool || !ej || ej.forma !== "escribir" || ej.idioma !== "ru" || !/^Escribe en ruso/.test(ej.pide || "")) return null;
     let m = AZ_MISMAS.get(pool);
     if (!m) {
       m = {};
@@ -250,14 +308,15 @@
     const [txt, setTxt] = useState("");
     const [r, setR] = useState(null);
     const ref = useRef(null);
-    const ru = ej.idioma === "ru";
+    const ru = ES ? false : ej.idioma === "ru";             /* Azbuka: se responde en ruso (géneros, otra palabra) */
+    const meta = ES ? ej.idioma !== "ru" : ru;             /* se responde en la lengua que se aprende */
     const comprobar = () => {
       if (!txt.trim()) return;
       /* Otra forma de la palabra correcta: Casi en las Unidades 1 y 2, y en los ejercicios que lo
          piden (formaCasi), porque ahí la forma no es lo que se evalúa (06/10/2026) */
       const formaCasi = ej.formaCasi != null ? ej.formaCasi : unidad <= 2;
       const esperadas = ej.esperadas.concat(mismas || []);
-      let res = azCorregir(txt, ru ? azEsperadasGenero(ej, esperadas) : esperadas, { idioma: ej.idioma, formaCasi });
+      let res = corr(txt, ru ? azEsperadasGenero(ej, esperadas) : esperadas, ej.idioma, ej, formaCasi);
       /* Otra palabra que también traduce la consigna (24/10/2026): «hotel» → оте́ль cuando se practica
          гости́ница. Si ya se enseñó hasta esta unidad, es Bien, con un aviso de cuál se practica. */
       if (ru && res.resultado !== AZ_BIEN) {
@@ -275,25 +334,25 @@
       h(Contexto, { ej }),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.mapa && h(MapaEj, { mapa: ej.mapa, c }),
-      ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: "ru" }, ej.grande),
+      ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: langDe(ej.grande) }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.pista && h("div", { className: "pr-pista" }, ej.pista),
-      ej.voz && h("div", { className: "pr-voz" }, "🎤 Toca el micrófono del teclado ruso y dilo. El teléfono lo escribe por ti."),
+      ej.voz && h("div", { className: "pr-voz" }, ES ? "🎤 Нажми на микрофон на испанской клавиатуре и скажи это. Телефон напишет за тебя." : "🎤 Toca el micrófono del teclado ruso y dilo. El teléfono lo escribe por ti."),
       h("div", { className: "pr-in-row" },
         h("input", {
-          ref, className: "pr-input", value: txt, lang: ru ? "ru" : "es",
+          ref, className: "pr-input", value: txt, lang: ES ? (meta ? "es" : "ru") : ru ? "ru" : "es",
           autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-          placeholder: ru ? "Escribe en ruso…" : ej.idioma === "es" ? "Escribe en español…" : "Escribe con letras latinas…",
+          placeholder: ES ? (meta ? "Пиши по-испански…" : "Пиши по-русски…") : ru ? "Escribe en ruso…" : ej.idioma === "es" ? "Escribe en español…" : "Escribe con letras latinas…",
           onInput: e => { setTxt(e.target.value); setR(null); },
           onKeyDown: e => { if (e.key === "Enter") comprobar(); }
         }),
-        h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || (r && r.resultado === AZ_BIEN) }, "Comprobar")),
-      r && ej.voz && h("div", { className: "pr-exp", lang: "ru" }, "El teléfono entendió: «" + txt + "»"),
+        h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || (r && r.resultado === AZ_BIEN) }, T("Comprobar"))),
+      r && ej.voz && h("div", { className: "pr-exp", lang: LL }, (ES ? "Телефон понял: «" : "El teléfono entendió: «") + txt + "»"),
       r && h(AzCorreccion, { r, dark }),
       hecho != null && r && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
-      hecho != null && r && r.resultado !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt("Para recordarlo: " + ej.recordar)),
+      hecho != null && r && r.resultado !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt(T("Para recordarlo: ") + ej.recordar)),
       hecho != null && r && h(BotonRegla, { ej, r: hecho }),
-      r && r.resultado !== AZ_BIEN && !examen && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: reintentar }, "Intentar de nuevo"));
+      r && r.resultado !== AZ_BIEN && !examen && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: reintentar }, T("Intentar de nuevo")));
   }
 
   function Ordenar({ ej, onRes, hecho }) {
@@ -313,14 +372,14 @@
     return h(React.Fragment, null,
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.audio && h(Oir, { texto: ej.audio, auto: false }),
-      h("div", { className: "pr-armado" + (ej.bloques ? " bloques" : ""), lang: "ru" }, armado.map((i, k) =>
+      h("div", { className: "pr-armado" + (ej.bloques ? " bloques" : ""), lang: LL }, armado.map((i, k) =>
         h("button", { key: k, className: cls, disabled: r != null, onClick: () => setArmado(a => a.filter(x => x !== i)) }, ej.fichas[i]))),
-      h("div", { className: "pr-fichas" + (ej.bloques ? " bloques" : ""), lang: "ru" }, libres.map(i =>
+      h("div", { className: "pr-fichas" + (ej.bloques ? " bloques" : ""), lang: LL }, libres.map(i =>
         h("button", { key: i, className: cls, disabled: r != null, onClick: () => setArmado(a => a.concat(i)) }, ej.fichas[i]))),
-      r == null && h("button", { className: "pr-btn", style: { width: "100%", marginTop: 16 }, disabled: libres.length > 0, onClick: comprobar }, "Comprobar"),
-      r != null && r !== AZ_BIEN && h("div", { className: "pr-exp" }, ej.bloques ? "El orden correcto:" : "Armaste «" + palabra + "»."),
-      r != null && r !== AZ_BIEN && ej.bloques && h("div", { className: "pr-exp", lang: "ru", style: { whiteSpace: "pre-line" } }, ej.esperada),
-      r != null && r !== AZ_BIEN && !ej.bloques && h("div", { className: "pr-exp", lang: "ru" }, "Correcto: «" + ej.esperada + "»."),
+      r == null && h("button", { className: "pr-btn", style: { width: "100%", marginTop: 16 }, disabled: libres.length > 0, onClick: comprobar }, T("Comprobar")),
+      r != null && r !== AZ_BIEN && h("div", { className: "pr-exp" }, ej.bloques ? T("El orden correcto:") : (ES ? "Получилось: «" : "Armaste «") + palabra + "»."),
+      r != null && r !== AZ_BIEN && ej.bloques && h("div", { className: "pr-exp", lang: LL, style: { whiteSpace: "pre-line" } }, ej.esperada),
+      r != null && r !== AZ_BIEN && !ej.bloques && h("div", { className: "pr-exp", lang: LL }, (ES ? "Правильно: «" : "Correcto: «") + ej.esperada + "»."),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
@@ -328,15 +387,15 @@
   function Contexto({ ej }) {
     if (!ej.contexto || !ej.contexto.length) return null;
     return h("div", { className: "pr-ctx" }, ej.contexto.map((l, i) =>
-      h("div", { key: i, className: "pr-ctx-l" }, h("span", { className: "pr-ctx-p", lang: "ru" }, l.p), h("span", { lang: "ru" }, l.ru))),
-      ej.quien && h("div", { className: "pr-ctx-l pr-ctx-q" }, h("span", { className: "pr-ctx-p", lang: "ru" }, ej.quien), h("span", null, "…")));
+      h("div", { key: i, className: "pr-ctx-l" }, h("span", { className: "pr-ctx-p", lang: LL }, l.p), h("span", { lang: LL }, ES ? l.es : l.ru))),
+      ej.quien && h("div", { className: "pr-ctx-l pr-ctx-q" }, h("span", { className: "pr-ctx-p", lang: LL }, ej.quien), h("span", null, "…")));
   }
 
   /* Mapa con un país resaltado (data-mapa.js) */
   function MapaEj({ mapa, c }) {
     if (typeof MAPA === "undefined") return null;
     const v = MAPA.vistas[mapa.vista] || MAPA.vistas.mundo;
-    return h("svg", { viewBox: v.vb, className: "pr-mapa", role: "img", "aria-label": "Mapa" },
+    return h("svg", { viewBox: v.vb, className: "pr-mapa", role: "img", "aria-label": T("Mapa") },
       h("path", { d: MAPA.fondo, fill: c.bg3, stroke: c.bg2, "stroke-width": 2 }),
       Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: k === mapa.iso ? c.gold : c.border, stroke: c.bg2, "stroke-width": 2 })));
   }
@@ -353,22 +412,24 @@
   }
   function Chat({ ej, onRes, hecho, dark, c }) {
     const ch = ej.chat;
-    const quien = (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[ch.p]) ? DLG_PERSONAJES[ch.p] : { ru: ch.p, genero: "f" };
+    const PJ = ES ? (typeof DLG_PERSONAJES_ES !== "undefined" ? DLG_PERSONAJES_ES : null) : (typeof DLG_PERSONAJES !== "undefined" ? DLG_PERSONAJES : null);
+    const quien = (PJ && PJ[ch.p]) ? PJ[ch.p] : { ru: ch.p, es: ch.p, genero: "f" };
+    const NOMBRE = ES ? "Iván" : "Ману", LUGAR = ES ? "Rusia" : "Аргенти́ны";
     const [paso, setPaso] = useState(0);
     const [resp, setResp] = useState([]);           /* lo que contestaste en cada paso */
     const [txt, setTxt] = useState("");
     const [r, setR] = useState(null);
     const [peor, setPeor] = useState(AZ_BIEN);
     const fin = paso >= ch.pasos.length;
-    useEffect(() => { if (!fin) setTimeout(() => azHablarRu(ch.pasos[paso].bot, (typeof DLG_PERSONAJES !== "undefined" && DLG_PERSONAJES[ch.p]) ? ch.p : quien.genero), 300); }, [paso]);
+    useEffect(() => { if (!fin) setTimeout(() => decir(ch.pasos[paso].bot, (PJ && PJ[ch.p]) ? ch.p : quien.genero), 300); }, [paso]);
     const enviar = () => {
       if (!txt.trim() || fin) return;
       const st = ch.pasos[paso];
       let res;
       if (aceptaChat(txt, st.ok)) res = { resultado: AZ_BIEN };
       else {
-        const modelos = st.ok.map(m => m.replace("{nombre}", "Ману").replace("{lugar}", "Аргенти́ны"));
-        res = azCorregir(txt, modelos, { idioma: "ru" });
+        const modelos = st.ok.map(m => m.replace("{nombre}", NOMBRE).replace("{lugar}", LUGAR));
+        res = corr(txt, modelos, LL, ej);
         if (res.resultado === AZ_BIEN) res.resultado = AZ_CASI;
       }
       const np = Math.min(peor, res.resultado);
@@ -379,22 +440,22 @@
       setResp(rs => { const n = rs.slice(); n[paso] = yo; return n; });
       setTimeout(() => { setR(null); setPaso(p => { const n = p + 1; if (n >= ch.pasos.length && hecho == null) onRes(np); return n; }); }, 700);
     };
-    const saltar = () => { setResp(rs => { const n = rs.slice(); n[paso] = ch.pasos[paso].ok[0].replace("{nombre}", "Ману").replace("{lugar}", "Аргенти́ны"); return n; }); setR(null); setPaso(p => { const n = p + 1; if (n >= ch.pasos.length && hecho == null) onRes(Math.min(peor, AZ_MAL)); return n; }); setPeor(AZ_MAL); };
+    const saltar = () => { setResp(rs => { const n = rs.slice(); n[paso] = ch.pasos[paso].ok[0].replace("{nombre}", NOMBRE).replace("{lugar}", LUGAR); return n; }); setR(null); setPaso(p => { const n = p + 1; if (n >= ch.pasos.length && hecho == null) onRes(Math.min(peor, AZ_MAL)); return n; }); setPeor(AZ_MAL); };
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, "Chat: " + ch.titulo),
+      h("div", { className: "pr-pide" }, T("Chat: ") + ch.titulo),
       h("div", { className: "pr-chat" },
         ch.pasos.slice(0, Math.min(paso + 1, ch.pasos.length)).map((st, i) => h(React.Fragment, { key: i },
-          h("div", { className: "pr-msg bot" }, h("div", { className: "pr-ctx-p", lang: "ru" }, quien.ru), h("div", { lang: "ru" }, st.bot),
-            h("div", { className: "pr-msg-es" }, st.es)),
-          i < paso && h("div", { className: "pr-msg yo", lang: "ru" }, resp[i] || "…")))),
+          h("div", { className: "pr-msg bot" }, h("div", { className: "pr-ctx-p", lang: LL }, ES ? quien.es : quien.ru), h("div", { lang: LL }, st.bot),
+            h("div", { className: "pr-msg-es" }, ES ? st.ru : st.es)),
+          i < paso && h("div", { className: "pr-msg yo", lang: LL }, resp[i] || "…")))),
       !fin && h("div", { className: "pr-in-row" },
-        h("input", { className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-          placeholder: "Escribe en ruso…", onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
-        h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, "Enviar")),
+        h("input", { className: "pr-input", value: txt, lang: LL, autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
+          placeholder: ES ? "Пиши по-испански…" : "Escribe en ruso…", onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
+        h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, T("Enviar"))),
       r && r.resultado !== AZ_BIEN && r.palabras && h(AzCorreccion, { r, dark }),
-      r && r.resultado === AZ_MAL && !fin && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, "Ver la respuesta y seguir"),
-      r && r.resultado === AZ_MAL && !fin && h("div", { className: "pr-exp", lang: "ru" }, "Por ejemplo: " + ch.pasos[paso].ok[0].replace("{nombre}", "Ману").replace("{lugar}", "Аргенти́ны")),
-      fin && h("div", { className: "pr-exp" }, "Conversación terminada."),
+      r && r.resultado === AZ_MAL && !fin && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, T("Ver la respuesta y seguir")),
+      r && r.resultado === AZ_MAL && !fin && h("div", { className: "pr-exp", lang: LL }, T("Por ejemplo: ") + ch.pasos[paso].ok[0].replace("{nombre}", NOMBRE).replace("{lugar}", LUGAR)),
+      fin && h("div", { className: "pr-exp" }, T("Conversación terminada.")),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
@@ -403,13 +464,13 @@
     const tocar = v => { if (elegida != null) return; setElegida(v); onRes(v === ej.verdadero ? AZ_BIEN : AZ_MAL); };
     const cls = v => elegida == null ? "" : v === ej.verdadero ? " ok" : v === elegida ? " mal" : "";
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, ej.audio ? "Escucha. ¿Verdadero o falso?" : "¿Verdadero o falso?"),
+      h("div", { className: "pr-pide" }, T(ej.audio ? "Escucha. ¿Verdadero o falso?" : "¿Verdadero o falso?")),
       ej.audio && h(Oir, { texto: ej.audio, auto: true }),
       h(Texto, { ej }),
-      h("div", { className: "pr-grande", style: { fontSize: 24, color: "inherit", fontWeight: 700 }, lang: "ru" }, ej.afirmacion),
+      h("div", { className: "pr-grande", style: { fontSize: 24, color: "inherit", fontWeight: 700 }, lang: langDe(ej.afirmacion) }, ej.afirmacion),
       h("div", { className: "pr-ops" },
-        h("button", { className: "pr-op" + cls(true), disabled: elegida != null, onClick: () => tocar(true) }, "Verdadero"),
-        h("button", { className: "pr-op" + cls(false), disabled: elegida != null, onClick: () => tocar(false) }, "Falso")),
+        h("button", { className: "pr-op" + cls(true), disabled: elegida != null, onClick: () => tocar(true) }, T("Verdadero")),
+        h("button", { className: "pr-op" + cls(false), disabled: elegida != null, onClick: () => tocar(false) }, T("Falso"))),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
@@ -430,20 +491,22 @@
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       h("div", { className: "pr-em" },
         h("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, ej.pares.map((p, i) =>
-          h("button", { key: i, lang: "ru", className: "pr-op" + (listos.indexOf(i) >= 0 ? " ok hecho" : sel === i ? " sel" : ""),
-            "aria-label": ej.audioIzq ? "Sonido " + (i + 1) : null,
+          h("button", { key: i, lang: langDe(p[0]), className: "pr-op" + (listos.indexOf(i) >= 0 ? " ok hecho" : sel === i ? " sel" : ""),
+            "aria-label": ej.audioIzq ? (ES ? "Звук " : "Sonido ") + (i + 1) : null,
             onClick: () => { if (ej.audioIzq) hablar(p[0]); if (listos.indexOf(i) < 0) setSel(i); } }, ej.audioIzq ? "▶ " + (i + 1) : p[0]))),
         h("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, der.map(d => {
           const usada = listos.some(i => ej.pares[i][1] === d);
-          return h("button", { key: d, className: "pr-op" + (usada ? " ok hecho" : malo === d ? " mal" : ""), disabled: usada, onClick: () => tocarDer(d) }, d);
+          return h("button", { key: d, className: "pr-op" + (usada ? " ok hecho" : malo === d ? " mal" : ""), disabled: usada, lang: langDe(d), onClick: () => tocarDer(d) }, d);
         }))),
-      hecho == null && h("div", { className: "pr-pista", style: { marginTop: 12 } }, ej.pista || (ej.audioIzq ? "Toca ▶ para escuchar y después la letra que corresponde." : "Toca uno de la izquierda y después su pareja.")),
+      hecho == null && h("div", { className: "pr-pista", style: { marginTop: 12 } }, ej.pista || T(ej.audioIzq ? "Toca ▶ para escuchar y después la letra que corresponde." : "Toca uno de la izquierda y después su pareja.")),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
   /* Nombre visible de una letra o palabra del semáforo */
   function etiqueta(key) {
     if (key.indexOf("alfabeto:") === 0) return key.slice(9);
+    if (key.indexOf("abc-es:") === 0) return key.slice(7);
+    if (ES && key.indexOf("lex:") === 0 && typeof lexEsById === "function") { const e = lexEsById(key.slice(4)); return e ? e.es : key; }
     if (key.indexOf("lex:") === 0 && typeof lexComerById === "function") { const e = lexComerById(key.slice(4)); if (e) return e.acento || e.ru; }
     return key;
   }
@@ -455,10 +518,10 @@
     if (!sube.length && !baja.length) return null;
     const fila = (t, lista, col) => lista.length > 0 && h("div", { style: { marginTop: 10 } },
       h("div", { style: { fontSize: 13, fontWeight: 700, color: col } }, t),
-      h("div", { lang: "ru", style: { fontSize: 16, fontWeight: 700, marginTop: 4, lineHeight: 1.6 } }, lista.map(etiqueta).join(" · ")));
+      h("div", { lang: LL, style: { fontSize: 16, fontWeight: 700, marginTop: 4, lineHeight: 1.6 } }, lista.map(etiqueta).join(" · ")));
     return h("div", { className: "pr-card", style: { marginTop: 16, padding: "12px 16px" } },
-      fila("Ahora dominadas", sube, VERDE),
-      fila("Volvieron a «Aprendiendo»", baja, NARANJA));
+      fila(T("Ahora dominadas"), sube, VERDE),
+      fila(T("Volvieron a «Aprendiendo»"), baja, NARANJA));
   }
 
   /* Toca la palabra (02/10/2026): una frase en fichas; se toca la que se pide
@@ -469,7 +532,7 @@
     return h(React.Fragment, null,
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.audio && h(Oir, { texto: ej.audio, auto: true }),
-      h("div", { className: "pr-frase", lang: "ru" }, ej.palabras.map((w, i) => {
+      h("div", { className: "pr-frase", lang: LL }, ej.palabras.map((w, i) => {
         const cls = elegida == null ? "" : i === ej.correcta ? " ok" : i === elegida ? " mal" : "";
         return h("button", { key: i, className: "pr-tw" + cls, disabled: elegida != null, onClick: () => tocar(i) }, w);
       })),
@@ -486,22 +549,22 @@
     const ref = useRef(null);
     const arreglos = [].concat(ej.arreglo);
     const tocar = i => { if (elegida != null) return; setElegida(i); if (i !== ej.correcta) onRes(AZ_MAL); else setTimeout(() => ref.current && ref.current.focus(), 50); };
-    const comprobar = () => { if (!txt.trim()) return; const res = azCorregir(txt, arreglos, { idioma: "ru" }); setR(res); if (hecho == null) onRes(res.resultado === AZ_BIEN ? AZ_BIEN : AZ_CASI); };
+    const comprobar = () => { if (!txt.trim()) return; const res = corr(txt, arreglos, LL, ej); setR(res); if (hecho == null) onRes(res.resultado === AZ_BIEN ? AZ_BIEN : AZ_CASI); };
     const encontrada = elegida === ej.correcta;
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Toca la palabra que está mal y escríbela bien.")),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide || T("Toca la palabra que está mal y escríbela bien."))),
       ej.contexto && h("div", { className: "pr-pista" }, ej.contexto),
       ej.audio && h(Oir, { texto: ej.audio, auto: false }),
-      h("div", { className: "pr-frase", lang: "ru" }, ej.palabras.map((w, i) => {
+      h("div", { className: "pr-frase", lang: LL }, ej.palabras.map((w, i) => {
         const cls = elegida == null ? "" : i === ej.correcta ? " ok" : i === elegida ? " mal" : "";
         return h("button", { key: i, className: "pr-tw" + cls, disabled: elegida != null, onClick: () => tocar(i) }, w);
       })),
       encontrada && hecho == null && h(React.Fragment, null,
-        h("div", { className: "pr-pista", style: { marginTop: 14 } }, "¡Esa es! Ahora escríbela bien:"),
+        h("div", { className: "pr-pista", style: { marginTop: 14 } }, T("¡Esa es! Ahora escríbela bien:")),
         h("div", { className: "pr-in-row" },
-          h("input", { ref, className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-            placeholder: "La palabra corregida…", onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
-          h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() }, "Comprobar"))),
+          h("input", { ref, className: "pr-input", value: txt, lang: LL, autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
+            placeholder: T("La palabra corregida…"), onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
+          h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() }, T("Comprobar")))),
       r && h(AzCorreccion, { r, dark }),
       hecho != null && r && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
       hecho != null && r && h(BotonRegla, { ej, r: hecho }),
@@ -523,25 +586,25 @@
     const paso = ej.pasos[k];
     const comprobar = () => {
       if (!txt.trim() || r) return;
-      const res = azCorregir(txt, azEsperadasGenero(ej, paso.esperadas, paso.pide), { idioma: "ru" });
+      const res = corr(txt, azEsperadasGenero(ej, paso.esperadas, paso.pide), LL, ej);
       setR(res); const nrs = rs.concat(res.resultado); setRs(nrs);
       if (k + 1 >= ej.pasos.length && hecho == null) onRes(peor(nrs));
     };
     const seguir = () => { setK(k + 1); setTxt(""); setR(null); setTimeout(() => ref.current && ref.current.focus(), 50); };
     const fin = rs.length === ej.pasos.length;
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Cambia la frase paso a paso.")),
-      h("div", { className: "pr-pista", style: { textAlign: "left" } }, "Paso " + Math.min(k + 1, ej.pasos.length) + " de " + ej.pasos.length),
-      h("div", { className: "pr-grande frase", lang: "ru" }, actual),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide || T("Cambia la frase paso a paso."))),
+      h("div", { className: "pr-pista", style: { textAlign: "left" } }, (ES ? "Шаг " : "Paso ") + Math.min(k + 1, ej.pasos.length) + (ES ? " из " : " de ") + ej.pasos.length),
+      h("div", { className: "pr-grande frase", lang: LL }, actual),
       h(Oir, { texto: actual, auto: false }),
       h("div", { className: "pr-pide", style: { marginTop: 12 } }, azFmt(paso.pide)),
       h("div", { className: "pr-in-row" },
-        h("input", { ref, className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-          placeholder: "Escribe en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
-        h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || !!r }, "Comprobar")),
+        h("input", { ref, className: "pr-input", value: txt, lang: LL, autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
+          placeholder: ES ? "Пиши по-испански…" : "Escribe en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
+        h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || !!r }, T("Comprobar"))),
       r && h(AzCorreccion, { r, dark }),
-      r && !fin && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: seguir }, "Siguiente paso"),
-      fin && h("div", { className: "pr-pista", style: { textAlign: "left", marginTop: 12 } }, "Pasos: " + rs.map(x => x === AZ_BIEN ? "✓" : x === AZ_CASI ? "≈" : "✗").join(" · ")),
+      r && !fin && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: seguir }, T("Siguiente paso")),
+      fin && h("div", { className: "pr-pista", style: { textAlign: "left", marginTop: 12 } }, T("Pasos: ") + rs.map(x => x === AZ_BIEN ? "✓" : x === AZ_CASI ? "≈" : "✗").join(" · ")),
       fin && hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
@@ -554,24 +617,24 @@
     const elegir = o => { if (el) return; setEl(o); setTimeout(() => ref.current && ref.current.focus(), 50); };
     const comprobar = () => {
       if (!txt.trim() || r) return;
-      const res = azCorregir(txt, azEsperadasGenero(ej, ej.esperadas), { idioma: "ru" }); setR(res);
+      const res = corr(txt, azEsperadasGenero(ej, ej.esperadas), LL, ej); setR(res);
       const a = el === ej.correcta, b = res.resultado !== AZ_MAL;
       if (hecho == null) onRes(a && res.resultado === AZ_BIEN ? AZ_BIEN : (a || b) ? AZ_CASI : AZ_MAL);
     };
     return h(React.Fragment, null,
-      h("div", { className: "pr-pide" }, azFmt(ej.pide || "Esta frase tiene un error. ¿Qué falla?")),
-      h("div", { className: "pr-grande frase", lang: "ru" }, ej.grande),
+      h("div", { className: "pr-pide" }, azFmt(ej.pide || T("Esta frase tiene un error. ¿Qué falla?"))),
+      h("div", { className: "pr-grande frase", lang: LL }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: false }),
       h("div", { className: "pr-ops una" }, ej.opciones.map(o => {
         const cls = !el ? "" : o === ej.correcta ? " ok" : o === el ? " mal" : "";
-        return h("button", { key: o, className: "pr-op" + cls, disabled: !!el, onClick: () => elegir(o) }, sinLlavesOp(o));
+        return h("button", { key: o, className: "pr-op" + cls, disabled: !!el, lang: langDe(o), onClick: () => elegir(o) }, sinLlavesOp(o));
       })),
       el && h(React.Fragment, null,
-        h("div", { className: "pr-pide", style: { marginTop: 14 } }, "Ahora escribe la frase bien:"),
+        h("div", { className: "pr-pide", style: { marginTop: 14 } }, T("Ahora escribe la frase bien:")),
         h("div", { className: "pr-in-row" },
-          h("input", { ref, className: "pr-input", value: txt, lang: "ru", autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
-            placeholder: "Escribe en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
-          h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || !!r }, "Comprobar"))),
+          h("input", { ref, className: "pr-input", value: txt, lang: LL, autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
+            placeholder: ES ? "Пиши по-испански…" : "Escribe en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
+          h("button", { className: "pr-btn", onClick: comprobar, disabled: !txt.trim() || !!r }, T("Comprobar")))),
       r && h(AzCorreccion, { r, dark }),
       hecho != null && h(Explicacion, { ej, r: hecho }));
   }
@@ -591,13 +654,13 @@
     return h(React.Fragment, null,
       ej.pide && h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.audio && h(Oir, { texto: ej.audio, auto: true }),
-      h("div", { className: "pr-pista", style: { textAlign: "left" } }, "Pregunta " + Math.min(k + 1, ej.preguntas.length) + " de " + ej.preguntas.length),
+      h("div", { className: "pr-pista", style: { textAlign: "left" } }, (ES ? "Вопрос " : "Pregunta ") + Math.min(k + 1, ej.preguntas.length) + (ES ? " из " : " de ") + ej.preguntas.length),
       h("div", { className: "pr-pide" }, azFmt(q.pide)),
-      h("div", { className: "pr-frase", lang: "ru" }, ej.palabras.map((w, i) => {
+      h("div", { className: "pr-frase", lang: LL }, ej.palabras.map((w, i) => {
         const cls = !m ? "" : i === q.correcta ? " ok" : i === m.i ? " mal" : "";
         return h("button", { key: i, className: "pr-tw" + cls, disabled: !!m, onClick: () => tocar(i) }, w);
       })),
-      m && !fin && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: () => setK(k + 1) }, "Siguiente pregunta"),
+      m && !fin && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: () => setK(k + 1) }, T("Siguiente pregunta")),
       fin && hecho != null && h(Explicacion, { ej, r: hecho }));
   }
 
@@ -625,19 +688,19 @@
     }
     const cuadras = [];
     for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) cuadras.push(h("rect", { key: i + "-" + j, x: X(i) + 9, y: X(j) + 9, width: P - 18, height: P - 18, rx: 6, fill: c.bg2, stroke: c.border }));
-    return h("svg", { viewBox: "0 0 " + (2 * M + 4 * P) + " " + (2 * M + 4 * P + 10), className: "pr-mapa", role: "img", "aria-label": "Plano con el camino" },
+    return h("svg", { viewBox: "0 0 " + (2 * M + 4 * P) + " " + (2 * M + 4 * P + 10), className: "pr-mapa", role: "img", "aria-label": T("Plano con el camino") },
       lineas, cuadras,
       h("polyline", { points: r.pts.map(p => X(p[0]) + "," + X(p[1])).join(" "), fill: "none", stroke: c.gold, "stroke-width": 4, "stroke-dasharray": "8 6", "stroke-linejoin": "round", "stroke-linecap": "round" }),
       h("circle", { cx: X(2), cy: X(4), r: 9, fill: c.gold }),
-      h("text", { x: X(2), y: X(4) + 26, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: c.text }, "Вы"),
+      h("text", { x: X(2), y: X(4) + 26, "text-anchor": "middle", "font-size": 13, "font-weight": 700, fill: c.text }, ES ? "Tú" : "Вы"),
       h("text", { x: X(fin[0]) + r.dx * 22, y: X(fin[1]) + r.dy * 22 + 9, "text-anchor": "middle", "font-size": 26 }, plano.destino));
   }
 
   function Pista({ texto }) {
     const [ver, setVer] = useState(false);
     if (!texto) return null;
-    return ver ? h("div", { className: "pr-pista", lang: "ru" }, azFmt(texto))
-      : h("button", { className: "pr-cu", style: { margin: "6px auto 0" }, onClick: () => setVer(true) }, "💡 Pista");
+    return ver ? h("div", { className: "pr-pista", lang: LL }, azFmt(texto))
+      : h("button", { className: "pr-cu", style: { margin: "6px auto 0" }, onClick: () => setVer(true) }, T("💡 Pista"));
   }
 
   function Situacion({ ej, onRes, hecho, dark, c, examen, medio }) {
@@ -657,12 +720,12 @@
       ej.plano && h(Plano, { plano: ej.plano, c }),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.audioManual }),
       !r && h(Pista, { texto: ej.pista }),
-      h("textarea", { className: "pr-area", rows: 2, value: txt, lang: "ru", autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
-        placeholder: "Escribe en ruso lo que dirías…", onInput: e => { setTxt(e.target.value); if (r && r.nivel === 0) setR(null); } }),
-      h("button", { className: "pr-btn", style: { width: "100%", marginTop: 10 }, onClick: comprobar, disabled: !txt.trim() || (r && r.nivel > 0) }, "Comprobar"),
+      h("textarea", { className: "pr-area", rows: 2, value: txt, lang: LL, autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
+        placeholder: ES ? "Напиши по-испански, что бы ты сказал…" : "Escribe en ruso lo que dirías…", onInput: e => { setTxt(e.target.value); if (r && r.nivel === 0) setR(null); } }),
+      h("button", { className: "pr-btn", style: { width: "100%", marginTop: 10 }, onClick: comprobar, disabled: !txt.trim() || (r && r.nivel > 0) }, T("Comprobar")),
       r && h(AzSituacionRes, { r, dark }),
       hecho != null && r && ej.nota && h("div", { className: "pr-exp" }, azFmt(ej.nota)),   /* el modelo ya lo muestra AzSituacionRes */
-      r && r.nivel === 0 && !examen && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: () => { setTxt(""); setR(null); } }, "Intentar de nuevo"));
+      r && r.nivel === 0 && !examen && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: () => { setTxt(""); setR(null); } }, T("Intentar de nuevo")));
   }
 
   /* Diálogo o chat por turnos: el personaje habla, tú contestas; cada
@@ -679,7 +742,7 @@
     const [salto, setSalto] = useState(false);
     const [peor, setPeor] = useState(AZ_BIEN);      /* Bien a la primera · Casi si hubo que reintentar · Mal si se saltó */
     const fin = paso >= T.pasos.length;
-    useEffect(() => { if (!fin) { const st = T.pasos[paso]; const k = setTimeout(() => azHablarRu(st.bot, st.genero || T.genero), 300); return () => clearTimeout(k); } }, [paso]);
+    useEffect(() => { if (!fin) { const st = T.pasos[paso]; const k = setTimeout(() => decir(st.bot, st.genero || T.genero), 300); return () => clearTimeout(k); } }, [paso]);
     const avanzar = (yo, nota, salte) => {
       setResp(rs => { const n = rs.slice(); n[paso] = { t: yo, nota }; return n; });
       setTxt(""); setR(null);
@@ -693,26 +756,26 @@
       if (res.nivel === 0) { setR(res); setPeor(AZ_CASI); reintento.current = true; return; }
       puntos.current[paso] = reintento.current || (medio && res.nivel === 1) ? .5 : 1; reintento.current = false;
       const formas = res.elementos.filter(e => e.estado === "forma").map(e => "«" + e.escrito + "» → mejor " + e.mejor);
-      avanzar(txt, formas.length ? "💬 Se entiende. " + formas.join("; ") : null);
+      avanzar(txt, formas.length ? (ES ? "💬 Понятно. " : "💬 Se entiende. ") + formas.join("; ") : null);
     };
     const saltar = () => { puntos.current[paso] = 0; reintento.current = false; setSalto(true); avanzar(T.pasos[paso].sit.modelos[0], null, true); };
     return h(React.Fragment, null,
       h("div", { className: "pr-pide" }, azFmt(ej.pide || T.titulo)),
       h("div", { className: "pr-chat" },
         T.pasos.slice(0, Math.min(paso + 1, T.pasos.length)).map((st, i) => h(React.Fragment, { key: i },
-          h("div", { className: "pr-msg bot" }, h("div", { className: "pr-ctx-p", lang: "ru" }, st.quien || T.quien), h("div", { lang: "ru" }, st.bot),
-            h("div", { className: "pr-msg-es" }, st.es)),
-          i < paso && h("div", { className: "pr-msg yo", lang: "ru" }, resp[i] ? resp[i].t : "…",
-            resp[i] && resp[i].nota && h("div", { className: "pr-nota", lang: "es" }, resp[i].nota))))),
-      !fin && h("div", { className: "pr-pista", style: { textAlign: "left", marginTop: 10 } }, azFmt("Tu turno: " + T.pasos[paso].tarea)),
+          h("div", { className: "pr-msg bot" }, h("div", { className: "pr-ctx-p", lang: LL }, st.quien || T.quien), h("div", { lang: LL }, st.bot),
+            h("div", { className: "pr-msg-es" }, ES ? st.ru : st.es)),
+          i < paso && h("div", { className: "pr-msg yo", lang: LL }, resp[i] ? resp[i].t : "…",
+            resp[i] && resp[i].nota && h("div", { className: "pr-nota", lang: ES ? "ru" : "es" }, resp[i].nota))))),
+      !fin && h("div", { className: "pr-pista", style: { textAlign: "left", marginTop: 10 } }, azFmt(TX("Tu turno: ") + T.pasos[paso].tarea)),
       !fin && !r && h(Pista, { texto: T.pasos[paso].pista }),
       !fin && h("div", { className: "pr-in-row" },
-        h("input", { className: "pr-input", value: txt, lang: "ru", autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
-          placeholder: "Escribe en ruso…", onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
-        h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, T.chat ? "Enviar" : "Decir")),
+        h("input", { className: "pr-input", value: txt, lang: LL, autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
+          placeholder: ES ? "Пиши по-испански…" : "Escribe en ruso…", onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
+        h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, TX(T.chat ? "Enviar" : "Decir"))),
       r && h(AzSituacionRes, { r, dark, sinModelo: true }),
-      r && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, "Ver una respuesta y seguir"),
-      fin && h("div", { className: "pr-exp" }, salto ? "Conversación terminada. Algún turno lo viste resuelto: vuelve en otra sesión." : "Conversación terminada. ¡Bien!"),
+      r && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, TX("Ver una respuesta y seguir")),
+      fin && h("div", { className: "pr-exp" }, ES ? (salto ? "Разговор окончен. Какой-то ответ ты подсмотрел: этот разговор вернётся в другом занятии." : "Разговор окончен. Отлично!") : salto ? "Conversación terminada. Algún turno lo viste resuelto: vuelve en otra sesión." : "Conversación terminada. ¡Bien!"),
       hecho != null && ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)));
   }
 
@@ -782,21 +845,23 @@
     let cuerpo;
     if (fase === "inicio") {
       cuerpo = h(React.Fragment, null,
-        h("div", { className: "pr-kick" }, examen ? "Evaluación" : "Práctica"),
+        h("div", { className: "pr-kick" }, T(examen ? "Evaluación" : "Práctica")),
         h("div", { style: { fontSize: 26, fontWeight: 800, marginTop: 6, paddingRight: 48 } }, titulo),
-        h("div", { className: "pr-exp", style: { fontSize: 15 } }, examen ? examen.intro : intro || (n || 12) + " ejercicios elegidos entre " + pool.length + ". Primero salen los que menos practicaste, y los que te costaron vuelven."),
+        h("div", { className: "pr-exp", style: { fontSize: 15 } }, examen ? examen.intro : intro || (ES
+          ? (n || 12) + " " + plRu(n || 12, "упражнение", "упражнения", "упражнений") + " из " + pool.length + ". Сначала идут те, что встречались реже всего, а трудные возвращаются."
+          : (n || 12) + " ejercicios elegidos entre " + pool.length + ". Primero salen los que menos practicaste, y los que te costaron vuelven.")),
         aviso && h("div", { style: { marginTop: 14, background: c.gold + "14", border: `1px solid ${c.gold}66`, borderRadius: 10, padding: "12px 14px", fontSize: 14.5, lineHeight: 1.5, fontWeight: 600 } }, aviso),
-        h("div", { className: "pr-pie" }, h("button", { className: "pr-btn", style: { width: "100%" }, onClick: empezar }, "Empezar")));
+        h("div", { className: "pr-pie" }, h("button", { className: "pr-btn", style: { width: "100%" }, onClick: empezar }, T("Empezar"))));
     } else if (fase === "ej" && ej) {
       const F = FORMAS[ej.forma];
       const hecho = res[ej.id];
       cuerpo = h(React.Fragment, null,
-        h("div", { className: "pr-kick" }, titulo + " · " + (i + 1) + " de " + lista.length),
+        h("div", { className: "pr-kick" }, titulo + " · " + (i + 1) + (ES ? " из " : " de ") + lista.length),
         h("div", { className: "pr-bar" }, h("div", { style: { width: ((i + (hecho != null ? 1 : 0)) / lista.length * 100) + "%" } })),
-        examen && h("div", { className: "pr-pista", style: { textAlign: "left", margin: "-8px 0 10px" } }, "Parte: " + ej.parte),
-        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, unidad, examen: !!examen || !!onFin, medio: entiende === "medio", mismas: azMismaConsigna(pool, ej) }) : "Ejercicio desconocido"),
+        examen && h("div", { className: "pr-pista", style: { textAlign: "left", margin: "-8px 0 10px" } }, T("Parte: ") + ej.parte),
+        h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, unidad, examen: !!examen || !!onFin, medio: entiende === "medio", mismas: azMismaConsigna(pool, ej) }) : T("Ejercicio desconocido")),
         h("div", { className: "pr-pie" },
-          h("button", { className: "pr-btn", style: { width: "100%" }, disabled: hecho == null, onClick: siguiente }, i + 1 < lista.length ? "Siguiente" : "Ver resultado")));
+          h("button", { className: "pr-btn", style: { width: "100%" }, disabled: hecho == null, onClick: siguiente }, T(i + 1 < lista.length ? "Siguiente" : "Ver resultado"))));
     } else if (examen) {
       const pts = e => res[e.id] === AZ_BIEN ? 1 : res[e.id] === AZ_CASI ? .5 : 0;
       const total = lista.reduce((a, e) => a + pts(e), 0) / Math.max(1, lista.length);
@@ -807,49 +872,49 @@
       const ok = total >= examen.aprobado;
       const flojas = partes.filter(x => x.pct < examen.aprobado);
       cuerpo = h(React.Fragment, null,
-        h("div", { className: "pr-kick" }, "Resultado de la evaluación"),
+        h("div", { className: "pr-kick" }, T("Resultado de la evaluación")),
         h("div", { style: { fontSize: 44, fontWeight: 800, marginTop: 8, color: ok ? VERDE : NARANJA } }, Math.round(total * 100) + " %"),
-        h("div", { style: { fontSize: 17, fontWeight: 700, marginTop: 4 } }, ok ? "Unidad aprobada." : "Todavía no: conviene reforzar antes de seguir."),
+        h("div", { style: { fontSize: 17, fontWeight: 700, marginTop: 4 } }, T(ok ? "Unidad aprobada." : "Todavía no: conviene reforzar antes de seguir.")),
         h("div", { className: "pr-card", style: { marginTop: 16, padding: "6px 16px" } }, partes.map(x =>
           h("div", { key: x.p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: x === partes[0] ? "none" : `1px solid ${c.border}` } },
             h("span", { style: { fontWeight: 600 } }, x.p.nombre),
             h("span", { style: { fontWeight: 800, color: x.pct >= examen.aprobado ? VERDE : x.pct >= .5 ? NARANJA : ROJO } }, Math.round(x.pct * 100) + " %")))),
         h(Semaforo, { cambios, c }),
         flojas.length > 0 && h(React.Fragment, null,
-          h("div", { className: "pr-kick", style: { marginTop: 22 } }, "Para reforzar"),
-          flojas.map(x => h("button", { key: x.p.nombre, className: "pr-btn sec", style: { width: "100%", marginTop: 8 }, onClick: () => onReforzar && onReforzar(x.p) }, "Practicar " + x.p.nombre.toLowerCase()))),
+          h("div", { className: "pr-kick", style: { marginTop: 22 } }, T("Para reforzar")),
+          flojas.map(x => h("button", { key: x.p.nombre, className: "pr-btn sec", style: { width: "100%", marginTop: 8 }, onClick: () => onReforzar && onReforzar(x.p) }, (ES ? "Практиковать: " : "Practicar ") + x.p.nombre.toLowerCase()))),
         h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 10 } },
-          h("button", { className: "pr-btn" + (ok ? " sec" : ""), onClick: empezar }, "Repetir la evaluación"),
-          h("button", { className: "pr-btn sec", onClick: onSalir }, "Volver a la unidad")));
+          h("button", { className: "pr-btn" + (ok ? " sec" : ""), onClick: empezar }, T("Repetir la evaluación")),
+          h("button", { className: "pr-btn sec", onClick: onSalir }, T("Volver a la unidad"))));
     } else {
       const vals = lista.map(e => res[e.id]);
       const bien = vals.filter(v => v === AZ_BIEN).length, casi = vals.filter(v => v === AZ_CASI).length, mal = vals.filter(v => v === AZ_MAL).length;
       const costaron = lista.filter(e => res[e.id] != null && res[e.id] !== AZ_BIEN);
       cuerpo = h(React.Fragment, null,
-        h("div", { className: "pr-kick" }, "Resultado"),
+        h("div", { className: "pr-kick" }, T("Resultado")),
         h("div", { style: { fontSize: 26, fontWeight: 800, marginTop: 6, paddingRight: 48 } }, titulo),
         h("div", { style: { display: "flex", gap: 8, marginTop: 16 } },
-          [["Bien", bien, VERDE], ["Casi", casi, NARANJA], ["Mal", mal, ROJO]].map(([t, v, col]) =>
+          [[T("Bien"), bien, VERDE], [T("Casi"), casi, NARANJA], [T("Mal"), mal, ROJO]].map(([t, v, col]) =>
             h("div", { key: t, className: "pr-card", style: { flex: 1, textAlign: "center", padding: "12px 6px" } },
               h("div", { style: { fontSize: 24, fontWeight: 800, color: col } }, v),
               h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 2 } }, t)))),
         costaron.length
           ? h(React.Fragment, null,
-              h("div", { className: "pr-kick", style: { marginTop: 22 } }, "Para repasar"),
-              h("div", { className: "pr-exp", style: { marginTop: 6 } }, "Estos vuelven en las próximas sesiones hasta que te salgan bien."),
+              h("div", { className: "pr-kick", style: { marginTop: 22 } }, T("Para repasar")),
+              h("div", { className: "pr-exp", style: { marginTop: 6 } }, T("Estos vuelven en las próximas sesiones hasta que te salgan bien.")),
               h("div", { className: "pr-lista" }, costaron.map(e => h("div", { key: e.id },
                 h("div", { style: { fontWeight: 700 } }, e.pide || e.afirmacion, e.grande ? " " + e.grande : "", (e.forma === "tocar" || e.forma === "corregir") ? " " + e.palabras.join(" ") : ""),
                 h("div", { style: { color: c.textSub } }, azFmt(e.explicacion))))))
-          : h("div", { className: "pr-exp", style: { marginTop: 18, fontSize: 15 } }, "Todo bien en esta sesión."),
+          : h("div", { className: "pr-exp", style: { marginTop: 18, fontSize: 15 } }, T("Todo bien en esta sesión.")),
         h(Semaforo, { cambios, c }),
         h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 10 } },
-          !sinOtra && h("button", { className: "pr-btn", onClick: empezar }, "Otra sesión"),
-          h("button", { className: "pr-btn" + (sinOtra ? "" : " sec"), onClick: onSalir }, salir || "Volver a la unidad")));
+          !sinOtra && h("button", { className: "pr-btn", onClick: empezar }, T("Otra sesión")),
+          h("button", { className: "pr-btn" + (sinOtra ? "" : " sec"), onClick: onSalir }, salir || T("Volver a la unidad"))));
     }
 
     return h("div", { className: "pr", role: "dialog", ref: azRefCapa(capa) },
       h(Estilos, { c }),
-      h("button", { className: "pr-x", onClick: onSalir, "aria-label": "Salir de la práctica" }, "✕"),
+      h("button", { className: "pr-x", onClick: onSalir, "aria-label": T("Salir de la práctica") }, "✕"),
       h("div", { className: "pr-in" }, cuerpo),
       regla && typeof AzHojaRegla === "function" && h(AzHojaRegla, { id: regla, c, onClose: () => setRegla(null) }));
   }

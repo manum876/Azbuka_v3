@@ -45,6 +45,8 @@ function App() {
   }, []);
 
   const c = azColors(darkMode);
+  /* Abecé (28/10/2026): los mismos textos en ruso */
+  const ES = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
   const allUnits = typeof AZ_UNITS !== "undefined" ? AZ_UNITS : [];
   const units = allUnits.filter(u => !u.examen);
   const exam = allUnits.find(u => u.examen);
@@ -58,7 +60,7 @@ function App() {
       React.createElement("div", { className: "un", style: { color: c.border } }, String(u.id).padStart(2, "0")),
       React.createElement("div", { className: "ut" }, u.title),
       React.createElement("div", { className: "ud", style: { color: c.textMuted } }, u.desc),
-      React.createElement("span", { className: "goLbl", style: { color: c.gold } }, "Empezar →")
+      React.createElement("span", { className: "goLbl", style: { color: c.gold } }, ES ? "Начать →" : "Empezar →")
     );
   }
 
@@ -68,10 +70,10 @@ function App() {
     tabs: []
   },
     React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
-      React.createElement("h1", { style: { fontSize: 26, fontWeight: 800, marginBottom: 8, color: c.text } }, "Твой курс русского"),
-      React.createElement("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, marginBottom: 8 } }, "Nivel A1 → B1"),
+      React.createElement("h1", { style: { fontSize: 26, fontWeight: 800, marginBottom: 8, color: c.text } }, ES ? "Tu curso de español" : "Твой курс русского"),
+      React.createElement("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, marginBottom: 8 } }, ES ? "Уровень A0 → B1" : "Nivel A1 → B1"),
       React.createElement("p", { style: { fontSize: 13.5, color: c.textMuted, marginBottom: 18, lineHeight: 1.6 } },
-        "13 unidades pensadas para un mes cada una, y un examen final."),
+        ES ? "12 уроков, примерно по месяцу каждый, и итоговый экзамен. Уроки появляются по мере готовности." : "13 unidades pensadas para un mes cada una, y un examen final."),
 
       React.createElement("div", { className: "ugrid" },
         units.map(u => unitCard(u)),

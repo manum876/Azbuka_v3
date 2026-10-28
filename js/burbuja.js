@@ -21,11 +21,34 @@
      AzFrase({ id, texto })       → una frase de data-frases.js
    Función: azAbrirBurbuja(tipo, datos, elemento). La voz (azHablarRu)
    está en core.js.
+
+   ABECÉ (28/10/2026): con la dirección «abece» la burbuja lee el léxico
+   español (lexEsById, IDs ESP-…) y muestra la palabra española, su
+   pronunciación en cirílico (az-tl), IPA, «Категория · род» y la
+   traducción rusa, con voz española (azHablarEs) y textos en ruso.
+   Si se tocó una forma (buenas, hablé), dice de qué palabra es
+   (data-formas-es.js, js/verbos-es.js); si es la forma femenina
+   (amiga), muestra su traducción. AzTexto acepta es= en lugar de ru=;
+   las frases salen de FRASES_ES (es, ru, tr, lex) cuando exista.
    ============================================================ */
 (function () {
   const h = React.createElement;
   const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
-  const RX_PALABRA = /[А-Яа-яЁё\u0301]+(?:-[А-Яа-яЁё\u0301]+)*/g;
+  const ES = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
+  const RX_PALABRA = ES ? /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:-[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*/g : /[А-Яа-яЁё\u0301]+(?:-[А-Яа-яЁё\u0301]+)*/g;
+  const PREF = ES ? /^ESP-/ : /^CMR-/;
+  const LANG = ES ? "es" : "ru";
+  const hablar = t => ES ? azHablarEs(t) : azHablarRu(t);
+  /* Textos (Abecé en ruso: borrador para Iván) */
+  const TX = ES ? {
+    noDic: "Этого слова пока нет в словаре.", escuchar: "Слушать", volver: "‹ Фраза", cuaderno: "＋ Тетрадь", ficha: "Открыть в словаре",
+    noFrase: "Фраза не найдена.", dialogos: "Открыть в диалогах", con: "С ", es: " — ", fichaCu: "Карточка · ", fraseCu: "Фраза · "
+  } : {
+    noDic: "Todavía no está en el diccionario.", escuchar: "Escuchar", volver: "‹ Frase", cuaderno: "＋ Cuaderno", ficha: "Ver ficha",
+    noFrase: "Frase no encontrada.", dialogos: "Ver en Diálogos", con: "Con ", es: " es ", fichaCu: "Ficha · ", fraseCu: "Frase · "
+  };
+  const POS_RU = { sustantivo: "существительное", verbo: "глагол", adjetivo: "прилагательное", pronombre: "местоимение", determinante: "определитель", numeral: "числительное", adverbio: "наречие", "preposición": "предлог", "conjunción": "союз", "interjección": "междометие", "artículo": "артикль", "contracción": "слитная форма" };
+  const GEN_RU = { m: "мужской род", f: "женский род", "m/f": "мужской и женский род" };
   const POS_CORTO = { sustantivo: "sustantivo", verbo: "verbo", adjetivo: "adjetivo", pronombre: "pronombre", determinante: "determinante", numeral: "numeral", adverbio: "adverbio", "preposición": "preposición", "conjunción": "conjunción", "partícula": "partícula", "interjección": "interjección" };
   const GEN = { m: "masculino", f: "femenino", n: "neutro" };
 
@@ -35,7 +58,17 @@
   }
 
   /* Qué forma es lo que se tocó (кни́гу → acusativo singular de кни́га) */
+  function descFormaEs(id, texto, e) {
+    if (!texto) return null;
+    const k = texto.toLowerCase();
+    if (k === e.es.toLowerCase()) return null;
+    const et = [];
+    if (typeof formasEsLista === "function") formasEsLista(id).forEach(function (x) { if (x.f.toLowerCase() === k && typeof AZ_FES_K !== "undefined" && AZ_FES_K[x.k] && et.indexOf(AZ_FES_K[x.k]) < 0) et.push(AZ_FES_K[x.k]); });
+    if (typeof vesBuscarForma === "function") (vesBuscarForma(texto) || []).forEach(function (r) { if (r.id === id) (r.etiquetas || []).forEach(function (t) { if (et.indexOf(t) < 0) et.push(t); }); });
+    return et.length ? { forma: texto, etiquetas: et.join(" / ") } : null;
+  }
   function descForma(id, texto, e) {
+    if (ES) return descFormaEs(id, texto, e);
     if (!texto || typeof azFormasDe !== "function" || typeof azFormaClave !== "function") return null;
     const k = azFormaClave(texto);
     if (k === azFormaClave(e.ru)) return null;
@@ -74,7 +107,37 @@
     `);
   }
 
+  /* Abecé: la palabra española, con la traducción rusa */
+  function ContenidoPalabraEs({ d, onVolver }) {
+    const e = typeof lexEsById === "function" ? lexEsById(d.id) : null;
+    if (!e) return h("div", { className: "az-bb-es" }, TX.noDic);
+    const fem = e.femenino && e.femenino.es && d.forma && d.forma.toLowerCase() === e.femenino.es.toLowerCase() ? e.femenino : null;
+    const f = fem ? null : descForma(d.id, d.forma, e);
+    const senses = e.senses || [];
+    const ru = fem ? fem.ru : d.sentido != null && senses[d.sentido] ? senses[d.sentido].ru : senses.slice(0, 3).map(function (s) { return s.ru; }).join("; ");
+    const gen = e.posNormalized === "sustantivo" && e.gender ? (fem ? "f" : (e.femenino && e.femenino.es ? "m" : e.gender)) : null;
+    const pos = [POS_RU[e.posNormalized] || e.posNormalized, gen ? GEN_RU[gen] : null].filter(Boolean).join(" · ");
+    const pal = fem ? fem.es : e.es;
+    const href = "ficha.html?id=" + e.id;
+    return h(React.Fragment, null,
+      h("div", { className: "az-bb-top" },
+        h("div", { className: "az-bb-ru", lang: "es" }, pal),
+        h("button", { className: "az-bb-play", "aria-label": TX.escuchar, onClick: function () { azHablarEs(pal); } }, "▶")),
+      f && h("div", { className: "az-bb-forma" }, h("b", { lang: "es" }, f.forma), " — " + f.etiquetas + " от " + e.es),
+      (fem ? fem.translit : e.translit) && h("div", { className: "az-bb-tr az-tl" }, fem ? fem.translit : e.translit),
+      (fem ? fem.ipa : e.ipa) && h("div", { className: "az-bb-ipa" }, "IPA: /" + (fem ? fem.ipa : e.ipa) + "/"),
+      pos && h("div", { className: "az-bb-pos" }, pos),
+      h("div", { className: "az-bb-es" }, ru),
+      h("div", { className: "az-bb-pie" },
+        onVolver ? h("button", { className: "az-bb-a", onClick: onVolver }, TX.volver)
+          : h("button", { className: "az-bb-a", onClick: function () {
+              azGuardarEnCuaderno(pal + " — " + ru + (f ? "\n" + f.forma + " — " + f.etiquetas + " от " + e.es + "." : ""), { titulo: TX.fichaCu + pal, href: href });
+            } }, TX.cuaderno),
+        h("a", { className: "az-bb-a", href: href, onClick: function (ev) { azNavigate(ev, href); } }, TX.ficha)));
+  }
+
   function ContenidoPalabra({ d, onVolver }) {
+    if (ES) return h(ContenidoPalabraEs, { d: d, onVolver: onVolver });
     const e = typeof lexComerById === "function" ? lexComerById(d.id) : null;
     if (!e) return h("div", { className: "az-bb-es" }, "Todavía no está en el diccionario.");
     const f = descForma(d.id, d.forma, e);
@@ -100,29 +163,35 @@
         h("a", { className: "az-bb-a", href: href, onClick: function (ev) { azNavigate(ev, href); } }, "Ver ficha")));
   }
 
+  /* La frase: en Azbuka de FRASES (ru, es); en Abecé de FRASES_ES (es = la frase, ru = la traducción) */
+  function fraseDe(id) {
+    if (ES) { const L = typeof FRASES_ES !== "undefined" ? FRASES_ES : []; const f = L.filter(function (x) { return x.id === id; })[0]; return f ? { id: f.id, txt: f.es, tr: f.tr, trad: f.ru, lex: f.lex, registro: f.registro } : null; }
+    const f = typeof fraseById === "function" ? fraseById(id) : (typeof FRASES !== "undefined" ? FRASES.filter(function (x) { return x.id === id; })[0] : null);
+    return f ? { id: f.id, txt: f.ru, tr: f.tr, trad: f.es, lex: f.lex, registro: f.registro } : null;
+  }
   function ContenidoFrase({ d, onPalabra }) {
-    const f = typeof fraseById === "function" ? fraseById(d.id) : (typeof FRASES !== "undefined" ? FRASES.filter(function (x) { return x.id === d.id; })[0] : null);
-    if (!f) return h("div", { className: "az-bb-es" }, "Frase no encontrada.");
-    const pals = f.ru.match(RX_PALABRA) || [];
+    const f = fraseDe(d.id);
+    if (!f) return h("div", { className: "az-bb-es" }, TX.noFrase);
+    const pals = f.txt.match(RX_PALABRA) || [];
     const href = "dialogos.html?frase=" + f.id;
     return h(React.Fragment, null,
       h("div", { className: "az-bb-top" },
-        h("div", { className: "az-bb-ru", lang: "ru" }, f.ru),
-        h("button", { className: "az-bb-play", "aria-label": "Escuchar", onClick: function () { azHablarRu(f.ru); } }, "▶")),
+        h("div", { className: "az-bb-ru", lang: LANG }, f.txt),
+        h("button", { className: "az-bb-play", "aria-label": TX.escuchar, onClick: function () { hablar(f.txt); } }, "▶")),
       f.tr && h("div", { className: "az-bb-tr az-tl" }, f.tr),
-      h("div", { className: "az-bb-es" }, f.es),
+      h("div", { className: "az-bb-es" }, f.trad),
       pals.length > 1 && h("div", { className: "az-bb-pals" }, pals.map(function (p, i) {
         const id = (f.lex || [])[i];
-        if (!id || !/^CMR-/.test(id)) return h("span", { key: i, className: "az-bb-pal", lang: "ru", style: { cursor: "default" } }, p);
-        return h("button", { key: i, className: "az-bb-pal", lang: "ru", onClick: function () { onPalabra({ id: id, forma: p }); } }, p);
+        if (!id || !PREF.test(id)) return h("span", { key: i, className: "az-bb-pal", lang: LANG, style: { cursor: "default" } }, p);
+        return h("button", { key: i, className: "az-bb-pal", lang: LANG, onClick: function () { onPalabra({ id: id, forma: p }); } }, p);
       })),
       h("div", { className: "az-bb-pie" },
         h("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
-          f.registro && h("span", { className: "az-bb-reg" }, "Con " + f.registro),
+          f.registro && h("span", { className: "az-bb-reg" }, TX.con + f.registro),
           h("button", { className: "az-bb-a", onClick: function () {
-            azGuardarEnCuaderno(f.ru + "\n" + f.es, { titulo: "Frase · " + f.ru, href: href });
-          } }, "＋ Cuaderno")),
-        h("a", { className: "az-bb-a", href: href, onClick: function (ev) { azNavigate(ev, href); } }, "Ver en Diálogos")));
+            azGuardarEnCuaderno(f.txt + "\n" + f.trad, { titulo: TX.fraseCu + f.txt, href: href });
+          } }, TX.cuaderno)),
+        h("a", { className: "az-bb-a", href: href, onClick: function (ev) { azNavigate(ev, href); } }, TX.dialogos)));
   }
 
   function AzBurbujaHost({ dark }) {
@@ -175,29 +244,30 @@
 
   function AzPalabra({ texto, id, sentido }) {
     const go = function (ev) { ev.stopPropagation(); abrir("palabra", { id: id, forma: texto, sentido: sentido }, ev.currentTarget); };
-    return h("span", { className: "az-link", role: "button", tabIndex: 0, lang: "ru", onClick: go, onKeyDown: tecla(go) }, texto);
+    return h("span", { className: "az-link", role: "button", tabIndex: 0, lang: LANG, onClick: go, onKeyDown: tecla(go) }, texto);
   }
 
   function AzFrase({ id, texto }) {
-    const f = typeof fraseById === "function" ? fraseById(id) : (typeof FRASES !== "undefined" ? FRASES.filter(function (x) { return x.id === id; })[0] : null);
+    const f = fraseDe(id);
     const go = function (ev) { ev.stopPropagation(); abrir("frase", { id: id }, ev.currentTarget); };
-    return h("span", { className: "az-link az-frase", role: "button", tabIndex: 0, lang: "ru", onClick: go, onKeyDown: tecla(go) }, texto || (f ? f.ru : id));
+    return h("span", { className: "az-link az-frase", role: "button", tabIndex: 0, lang: LANG, onClick: go, onKeyDown: tecla(go) }, texto || (f ? f.txt : id));
   }
 
   /* Texto ruso con las palabras objetivo tocables */
-  function AzTexto({ ru, lex, objetivo, sentidos }) {
+  function AzTexto({ ru, es, lex, objetivo, sentidos }) {
+    if (es != null && ru == null) ru = es;   /* Abecé: el texto en español */
     const partes = [];
     let k = 0, ult = 0, m;
     RX_PALABRA.lastIndex = 0;
     while ((m = RX_PALABRA.exec(ru || ""))) {
       if (m.index > ult) partes.push(ru.slice(ult, m.index));
       const id = (lex || [])[k];
-      const enlazar = id && /^CMR-/.test(id) && (!objetivo || objetivo.indexOf(id) >= 0);
+      const enlazar = id && PREF.test(id) && (!objetivo || objetivo.indexOf(id) >= 0);
       partes.push(enlazar ? h(AzPalabra, { key: m.index, texto: m[0], id: id, sentido: sentidos ? sentidos[id] : undefined }) : m[0]);
       ult = m.index + m[0].length; k++;
     }
     if (ult < (ru || "").length) partes.push(ru.slice(ult));
-    return h("span", { lang: "ru" }, partes);
+    return h("span", { lang: LANG }, partes);
   }
 
   window.azAbrirBurbuja = abrir;

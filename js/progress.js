@@ -134,13 +134,19 @@ function azCountByLevel(prefix, level) {
 }
 
 /* ── UNIDADES Y MÓDULOS: actividad general ── */
+/* Abecé (28/10/2026): sus unidades se guardan como "es1", "es2"… para no mezclarse con
+   las de Azbuka (units["1"] es la Unidad 1 de Azbuka). Las páginas siguen usando el número. */
+function azUnidadClave(id) {
+  if (id == null) return id;
+  return typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece" && !/^es/.test(String(id)) ? "es" + id : id;
+}
 function azUnitProgress(id) {
-  const k = String(id);
+  const k = String(azUnidadClave(id));
   if (!AZ_PROGRESS.units[k]) AZ_PROGRESS.units[k] = { exDone: 0, timeSec: 0, lastStudied: null };
   return AZ_PROGRESS.units[k];
 }
 function azSaveUnitProgress(id, data) {
-  AZ_PROGRESS.units[String(id)] = Object.assign(azUnitProgress(id), data, { lastStudied: new Date().toISOString().slice(0, 10) });
+  AZ_PROGRESS.units[String(azUnidadClave(id))] = Object.assign(azUnitProgress(id), data, { lastStudied: new Date().toISOString().slice(0, 10) });
   azTouchStudied();
 }
 function azModuleTouch(id) {
@@ -187,7 +193,7 @@ function azRecordExercise(id, result, unitId, items, regla) {
   }
   const cambios = (items || []).map(k => azRegistrarItem(k, result, id)).filter(Boolean);
   /* Repaso espaciado: el ejercicio, lo que practica y su regla (el examen final no entra) */
-  if (unitId !== 14 && !/^EF-/.test(id)) {
+  if (unitId !== 14 && azUnidadClave(unitId) !== "es13" && !/^EF-/.test(id)) {   /* examen final: Azbuka 14, Abecé 13 */
     azRepasoAnotar("ej:" + id, result, unitId);
     (items || []).forEach(k => azRepasoAnotar(k, result, unitId));
     if (regla) azRepasoAnotar("regla:" + regla, result, unitId);
@@ -212,7 +218,7 @@ function azRepasoAnotar(clave, result, unitId) {
   if (!AZ_PROGRESS.srs) AZ_PROGRESS.srs = {};
   const hoy = azHoy();
   const s = Object.assign({}, AZ_PROGRESS.srs[clave] || {});
-  if (unitId != null) s.u = unitId;
+  if (unitId != null) s.u = azUnidadClave(unitId);
   if (result === AZ_MAL) {
     s.c = 1; s.p = azSumarDias(hoy, 1);
     s.m = (s.m || []).concat([hoy]).slice(-5);

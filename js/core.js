@@ -334,23 +334,59 @@ if (AZ_DIRECCION.id === "abece" && typeof window !== "undefined") {
 }
 const AZ_VOZ_ES_F = /monica|mónica|paulina|marisol|elvira|female|mujer/i;
 /* region (27/10/2026, Alfabeto · variedades): "es-MX", "es-AR"… usa la voz de ese
-   país si el teléfono la tiene; si no, la de España. Devuelve true si la encontró. */
-function azHablarEs(texto, region) {
+   país si el teléfono la tiene; si no, la de España. Devuelve true si la encontró.
+   quien (28/10/2026, unidades de Abecé): el personaje que habla (clave de
+   DLG_PERSONAJES_ES) o "m" / "f": una voz de hombre o de mujer, si el teléfono tiene las dos. */
+function azVozEs(region, quien) {
+  const s = window.speechSynthesis;
+  const vs = s.getVoices().filter(v => /^es/i.test(v.lang));
+  const reg = region ? new RegExp(region.replace("-", "[-_]"), "i") : null;
+  const vr = reg ? vs.find(v => reg.test(v.lang)) : null;
+  const pj = quien && typeof DLG_PERSONAJES_ES !== "undefined" ? DLG_PERSONAJES_ES[quien] : null;
+  const gen = pj ? pj.genero : quien;
+  const esp = vs.filter(v => /es[-_]ES/i.test(v.lang));
+  const hombre = gen === "m" ? esp.find(v => !AZ_VOZ_ES_F.test(v.name)) : null;
+  return { vr, v: vr || hombre || esp.find(v => AZ_VOZ_ES_F.test(v.name)) || esp[0] || vs[0] };
+}
+function azHablarEs(texto, region, quien) {
   try {
     if (!texto || !("speechSynthesis" in window)) return false;
     azVozTurno++; azVozParar();
     const s = window.speechSynthesis; s.cancel(); s.resume();
     const u = new SpeechSynthesisUtterance(String(texto));
     u.lang = "es-ES"; u.rate = 0.9;
-    const vs = s.getVoices().filter(v => /^es/i.test(v.lang));
-    const reg = region ? new RegExp(region.replace("-", "[-_]"), "i") : null;
-    const vr = reg ? vs.find(v => reg.test(v.lang)) : null;
-    const v = vr || vs.find(v => /es[-_]ES/i.test(v.lang) && AZ_VOZ_ES_F.test(v.name)) || vs.find(v => /es[-_]ES/i.test(v.lang)) || vs[0];
+    const { vr, v } = azVozEs(region, quien);
     if (v) { u.voice = v; u.lang = v.lang; }
     window.azVozFrase = u;
     s.speak(u);
     return !!vr;
   } catch (e) { return false; }
+}
+/* Varias líneas seguidas en español (28/10/2026, diálogos de Abecé): items [{ texto, genero }],
+   genero = clave del personaje o "m" / "f". Igual que azHablarSecuencia: cada una empieza
+   cuando termina la anterior, y ■ (azCallar) o un audio nuevo cortan la secuencia. */
+function azHablarSecuenciaEs(items, alEmpezarLinea, alTerminar) {
+  try {
+    if (!("speechSynthesis" in window)) return;
+    const turno = ++azVozTurno;
+    azVozParar();
+    const s = window.speechSynthesis; s.cancel(); s.resume();
+    let i = 0;
+    const siguiente = () => {
+      if (turno !== azVozTurno) return;
+      if (i >= items.length) { if (alTerminar) alTerminar(); return; }
+      const k = i++;
+      const u = new SpeechSynthesisUtterance(String(items[k].texto));
+      u.lang = "es-ES"; u.rate = items[k].rate || 0.9;
+      const { v } = azVozEs(null, items[k].genero);
+      if (v) { u.voice = v; u.lang = v.lang; }
+      u.onstart = () => { if (alEmpezarLinea) alEmpezarLinea(k); };
+      u.onend = () => setTimeout(siguiente, 250);
+      window.azVozFrase = u;
+      s.speak(u);
+    };
+    setTimeout(siguiente, 60);
+  } catch (e) {}
 }
 
 /* ── FORMAS DECLINADAS Y CONJUGADAS ──────────────────────────
@@ -503,7 +539,10 @@ async function azSet(key, value) {
        sola, sin marcarla, salvo que esté dentro de una frase rusa
        (al lado de otra palabra rusa: «я из…», «а у тебя́»).
    Usar solo en texto explicativo en español, nunca en texto ruso
-   (frases, diálogos), donde и, в, я son palabras. */
+   (frases, diálogos), donde и, в, я son palabras.
+   En Abecé (28/10/2026) el texto explicativo ES ruso y las letras que se
+   nombran son latinas: ahí solo vale **x**; и, в, с, к quedan como palabras
+   («r и rr», «z и c»). */
 function azFmt(texto) {
   if (texto == null) return texto;
   const h = window.React && React.createElement;
@@ -529,6 +568,7 @@ function azFmt(texto) {
     if (!p) return;
     if (/^\*\*[^*]+\*\*$/.test(p)) { const x = p.slice(2, -2).replace(/\{([А-Яа-яЁё\u0301]{1,3})\}/g, "$1"); out.push(h ? h("b", { key: "b" + i }, x) : x); return; }
     if (/^\{[А-Яа-яЁё\u0301]{1,3}\}$/.test(p)) { out.push(p.slice(1, -1)); return; }
+    if (AZ_DIRECCION.id === "abece") { out.push(p); return; }
     const rx = /(?<![A-Za-zА-Яа-яЁё\u0301])[А-Яа-яЁё]\u0301?(?![A-Za-zА-Яа-яЁё\u0301])/g;
     let ult = 0, m;
     while ((m = rx.exec(p))) {
@@ -855,8 +895,10 @@ async function azCuadernoAgregar(texto, fuente) {
    Cada unidad guarda el último módulo abierto en az_ultimo, y el
    inicio lo muestra en la tarjeta «Seguir estudiando».
      { unidad, n, total, titulo, href, fecha } */
-async function azGuardarUltimo(u) { await azSet("az_ultimo", Object.assign({ fecha: new Date().toISOString() }, u)); }
-async function azLeerUltimo() { return await azGet("az_ultimo", null); }
+/* En Abecé, az_ultimo_es (28/10/2026): cada curso recuerda su propia unidad */
+const AZ_ULTIMO_K = AZ_DIRECCION.id === "abece" ? "az_ultimo_es" : "az_ultimo";
+async function azGuardarUltimo(u) { await azSet(AZ_ULTIMO_K, Object.assign({ fecha: new Date().toISOString() }, u)); }
+async function azLeerUltimo() { return await azGet(AZ_ULTIMO_K, null); }
 
 /* ── COPIA DE SEGURIDAD DE TODO (26/09/2026) ──────────────────
    Un solo archivo con todo lo que la app guarda en el teléfono

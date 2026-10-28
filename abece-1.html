@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru" data-tl="siempre">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Abecé — Урок 1: Испанский с нуля</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="assets/icon-192.png">
+<link rel="stylesheet" href="assets/core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/preact.js"></script>
+<script src="data/data-lexicon-es.js"></script>
+<script src="data/data-formas-es.js"></script>
+<script src="data/data-alfabeto-es.js"></script>
+<script src="data/data-unidad-es-1.js"></script>
+<script src="data/data-catalogo.js"></script>
+<script src="js/core.js"></script>
+<script src="assets/supabase.js"></script>
+<script src="js/cuenta.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/corrector.js"></script>
+<script src="js/corrector-es.js"></script>
+<script src="js/tilde-es.js"></script>
+<script src="js/burbuja.js"></script>
+<script src="js/unidad-ui.js"></script>
+<script src="js/unidad.js"></script>
+<script>
+/* ============================================================
+   ABECE-1.HTML — Abecé · Урок 1: Испанский с нуля (28/10/2026)
+   ------------------------------------------------------------
+   La Unidad 1 de Abecé, con el mismo esqueleto y las mismas clases que
+   azbuka-1.html: portada, introducción, cuatro grupos de letras con
+   ficha y tarjetas, vocales, sonidos y la tilde. Contenido en
+   data-unidad-es-1.js; letras en data-alfabeto-es.js; palabras en el
+   léxico español. El dominio de cada letra es el mismo que usa Alfabeto
+   en Abecé (abc-es:A). Textos en ruso: borrador para Iván.
+   El motor (unidad.js, unidad-ui.js) lee la dirección y habla español.
+   Solo Abecé: en Azbuka muestra un aviso.
+   URL: abece-1.html (portada) · abece-1.html?m=es1m3 (módulo)
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+const ES_OK = AZ_DIRECCION.id === "abece" && typeof LEXICON_ES !== "undefined" && typeof ALFABETO_ES !== "undefined";
+const U = UNIDAD_ES_1;
+const LETRA = Object.fromEntries(ALFABETO_ES.map(l => [l.upper, l]));
+const YELLOW = "#C9B369";
+const CLAVE = l => "abc-es:" + l.upper;     /* el mismo semáforo que Alfabeto */
+const EJ_U1 = ES_OK ? ejerciciosUnidadEs1() : [];
+const AVISO = "В испанском знак ударения (´) — часть написания: если его забыть, ответ засчитывается как «Почти». Перевёрнутые знаки ¿ и ¡ не обязательны. Для ответов включи испанскую клавиатуру (модуль 1).";
+/* Palabras de la unidad: por ahora, las de las letras (Alfabeto). Las de saludos y números se suman
+   con los módulos 9 y 10, cuando Manu apruebe el vocabulario. */
+const OBJETIVO_U1 = [...new Set(ALFABETO_ES.flatMap(l => l.words.map(w => w.lexId)).filter(Boolean))];
+const muestra = l => l.upper.length > 1 ? l.lower : l.upper + " " + l.lower;
+
+function hablar(t) { azHablarEs(t); }
+function sonidoLetra(l) { hablar(l.name); }
+
+/* La letra resaltada en la palabra (sin importar la tilde; los dígrafos, como un bloque). Toda la palabra abre su burbuja. */
+const sinTilde = t => t.toLowerCase().replace(/[áä]/g, "a").replace(/é/g, "e").replace(/[íï]/g, "i").replace(/ó/g, "o").replace(/[úü]/g, "u");
+function PalabraLetra({ w, letra, c, size }) {
+  const pat = letra.lower === "ñ" ? "ñ" : sinTilde(letra.lower);
+  const base = letra.lower === "ñ" ? w.es.toLowerCase() : sinTilde(w.es);
+  const partes = [];
+  for (let i = 0; i < w.es.length;) {
+    if (base.substr(i, pat.length) === pat) { partes.push(h("span", { key: i, style: { color: c.gold, fontWeight: 800 } }, w.es.substr(i, pat.length))); i += pat.length; }
+    else { partes.push(w.es[i]); i++; }
+  }
+  const abrir = ev => { ev.stopPropagation(); if (w.lexId) azAbrirBurbuja("palabra", { id: w.lexId, forma: w.es }, ev.currentTarget); };
+  return h("span", { className: "az-link", role: "button", tabIndex: 0, lang: "es", onClick: abrir,
+    onKeyDown: ev => { if (ev.key === "Enter") abrir(ev); }, style: { fontSize: size || 17, fontWeight: 700 } }, partes);
+}
+
+/* ── Ficha de una letra (hoja a pantalla completa) ── */
+function HojaLetra({ l, c, nivel, setNivel, onClose, green }) {
+  const cols = { 0: "#E2884A", 1: YELLOW, 2: green };
+  const mano = "alfabeto.html?mano=" + encodeURIComponent(l.upper);
+  return h("div", { className: "sheet", role: "dialog" },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Закрыть" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "u-kicker" }, l.upper.length > 1 ? "Сочетание букв" : "Буква"),
+      h("div", { style: { display: "flex", gap: 20, alignItems: "center", paddingRight: 48 } },
+        h("div", { style: { textAlign: "center" } },
+          h("div", { className: "glyph", lang: "es" }, muestra(l)),
+          h("div", { className: "cursiva", lang: "es" }, l.upper.length > 1 ? l.lower : l.upper + " " + l.lower)),
+        h("div", { style: { flex: 1, minWidth: 0 } },
+          h("div", { style: { fontSize: 20, fontWeight: 800, color: c.text }, lang: "es" }, l.name),
+          h("div", { className: "az-tl", style: { fontSize: 14, color: c.textSub, marginTop: 2 } }, l.nameTl),
+          h("div", { style: { fontSize: 14, color: c.textSub, marginTop: 4 } }, "Звук: /" + l.translit + "/" + (l.ipa && l.ipa.length ? " · IPA: " + l.ipa.map(x => "[" + x + "]").join(", ") : "")),
+          h("div", { style: { display: "flex", gap: 8, marginTop: 10, alignItems: "center" } },
+            h("button", { className: "play", onClick: () => sonidoLetra(l), "aria-label": "Слушать" }, "▶"),
+            l.upper.length === 1 && h("a", { href: mano, onClick: e => azNavigate(e, mano),
+              style: { fontSize: 13, fontWeight: 700, color: c.gold, textDecoration: "none", padding: "8px 10px", border: `1px solid ${c.gold}66`, borderRadius: 10 } }, "✍️ Написать")))),
+      h("div", { className: "u-text", style: { marginTop: 14 } }, azFmt(l.pronunciation)),
+      h("div", { className: "status-row" },
+        [0, 1, 2].map(v => {
+          const on = nivel === v;
+          return h("button", { key: v, className: "status-btn", onClick: () => setNivel(l, v),
+            style: { background: on ? cols[v] + "22" : c.bg3, border: `1px solid ${on ? cols[v] : c.border}`, color: on ? cols[v] : c.textMuted } },
+            ["Не изучено", "Изучаю", "Выучено"][v]);
+        })),
+      h("div", { className: "u-card info" },
+        h("div", { className: "info-t" }, "Как звучит"),
+        h("div", { className: "info-x" }, azFmt(l.details.description + " " + l.details.similar))),
+      h("div", { className: "u-card info" },
+        h("div", { className: "info-t" }, "Частые ошибки"),
+        h("div", { className: "info-x" }, azFmt(l.details.mistakes))),
+      h("div", { className: "u-card info" },
+        h("div", { className: "info-t" }, "Совет"),
+        h("div", { className: "info-x" }, azFmt(l.details.tips + (l.details.similar_letters ? " " + l.details.similar_letters : "")))),
+      h("div", { className: "u-sec" }, "Слова для практики"),
+      h("div", { className: "u-card", style: { padding: "4px 16px" } },
+        l.words.map((w, i) => h("div", { key: i, className: "wrow" },
+          h("div", { style: { flex: 1, minWidth: 0 } },
+            h(PalabraLetra, { w, letra: l, c }),
+            h("div", { className: "az-tl", style: { fontSize: 12.5, color: c.textSub, fontStyle: "italic", marginTop: 2 } }, w.translit),
+            h("div", { style: { fontSize: 14, color: c.text, marginTop: 3 } }, w.meaning),
+            w.note && h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 3, lineHeight: 1.4 } }, azFmt(w.note))),
+          h("button", { className: "play", onClick: () => hablar(w.es), "aria-label": "Слушать" }, "▶"))))));
+}
+
+/* Palabra de ejemplo sin repetir (la misma «bolsa» que en Azbuka) */
+const BOLSAS = {};
+function palabraSiguiente(l) {
+  const b = BOLSAS[l.upper] || (BOLSAS[l.upper] = { resto: [], ult: -1 });
+  if (!b.resto.length) {
+    b.resto = l.words.map((_, k) => k).sort(() => Math.random() - .5);
+    if (b.resto.length > 1 && b.resto[b.resto.length - 1] === b.ult) b.resto.unshift(b.resto.pop());
+  }
+  b.ult = b.resto.pop();
+  return b.ult;
+}
+
+/* ── Tarjetas ── */
+function Tarjetas({ letras, titulo, c, niveles, setNivel, onClose, green }) {
+  const [orden, setOrden] = useState(letras);
+  const [i, setI] = useState(0);
+  const [vuelta, setVuelta] = useState(false);
+  const [wi, setWi] = useState(() => palabraSiguiente(LETRA[letras[0]]));
+  const l = LETRA[orden[i]];
+  const ir = d => { const ni = (i + d + orden.length) % orden.length; setVuelta(false); setI(ni); setWi(palabraSiguiente(LETRA[orden[ni]])); };
+  const mezclar = () => { const o = orden.slice().sort(() => Math.random() - .5); setOrden(o); setI(0); setVuelta(false); setWi(palabraSiguiente(LETRA[o[0]])); };
+  const marcar = v => { setNivel(l, v); ir(1); };
+  useEffect(() => {
+    const k = e => { if (e.key === "ArrowRight") ir(1); else if (e.key === "ArrowLeft") ir(-1); else if (e.key === " ") { e.preventDefault(); setVuelta(v => !v); } else if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", k); return () => window.removeEventListener("keydown", k);
+  }, [orden, i]);
+  const nv = niveles[l.upper] || 0;
+  const w = l.words[wi] || l.words[0];
+  return h("div", { className: "sheet", role: "dialog" },
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Закрыть" }, "✕"),
+    h("div", { className: "sheet-in" },
+      h("div", { className: "u-kicker" }, "Карточки · " + titulo),
+      h("div", { style: { fontSize: 14, color: c.textMuted, marginBottom: 14 } },
+        (i + 1) + " из " + orden.length + (nv ? " · " + (nv === 2 ? "выучено" : "изучаю") : "")),
+      h("div", { className: "fc" + (vuelta ? " dorso" : ""), onClick: () => { if (!vuelta && !(niveles[l.upper] > 0)) setNivel(l, 1, true); if (!vuelta) sonidoLetra(l); setVuelta(v => !v); }, role: "button", tabIndex: 0, "aria-label": "Перевернуть карточку" },
+        !vuelta
+          ? h(React.Fragment, null,
+              h("div", { className: "fc-glyph", lang: "es" }, muestra(l)),
+              h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, "Нажми, чтобы узнать, как звучит"))
+          : h(React.Fragment, null,
+              h("div", { className: "fc-top" },
+                h("div", { className: "fc-glyph", lang: "es" }, muestra(l)),
+                h("div", { className: "fc-cur", lang: "es", "aria-label": "Курсив" }, l.upper.length > 1 ? l.lower : l.upper + " " + l.lower)),
+              h("div", { className: "fc-nombre" },
+                h("span", { style: { fontSize: 24, fontWeight: 800, color: c.text }, lang: "es" }, l.name),
+                h("span", { style: { fontSize: 15, color: c.gold, fontWeight: 700 } }, "/" + l.translit + "/")),
+              h("div", { className: "u-text", style: { marginTop: 8, fontSize: 15 } }, azFmt(l.pronunciation)),
+              h("div", { className: "fc-word" },
+                h("div", { style: { minWidth: 0 } },
+                  h(PalabraLetra, { w, letra: l, c, size: 22 }),
+                  h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 4 } }, h("span", { className: "az-tl" }, w.translit), " · " + w.meaning)),
+                h("button", { className: "play", onClick: e => { e.stopPropagation(); sonidoLetra(l); setTimeout(() => hablar(w.es), 900); }, "aria-label": "Слушать" }, "▶")))),
+      h("div", { className: "fc-ctl" },
+        h("button", { onClick: () => ir(-1) }, "‹ Назад"),
+        h("button", { onClick: mezclar }, "Перемешать"),
+        h("button", { onClick: () => ir(1) }, "Дальше ›")),
+      h("div", { className: "status-row" },
+        h("button", { className: "status-btn", onClick: () => marcar(1),
+          style: { background: nv === 1 ? YELLOW + "22" : c.bg3, border: `1px solid ${nv === 1 ? YELLOW : c.border}`, color: nv === 1 ? YELLOW : c.text } }, "Ещё изучаю"),
+        h("button", { className: "status-btn", onClick: () => marcar(2),
+          style: { background: nv === 2 ? green + "22" : c.bg3, border: `1px solid ${nv === 2 ? green : c.border}`, color: nv === 2 ? green : c.text } }, "Уже знаю"))));
+}
+
+/* ── Pronunciación: par y ejemplo ── */
+function BotonPalabra({ id }) {
+  const e = lexEsById(id);
+  if (!e) return null;
+  return h("button", { className: "par-w", onClick: () => hablar(e.es), lang: "es" },
+    h("span", { className: "par-ru" }, e.es, h("span", { className: "pl" }, " ▶")),
+    h("span", { className: "par-es", lang: "ru" }, (e.senses[0] || {}).ru));
+}
+function Ejemplo({ id, c }) {
+  const e = lexEsById(id);
+  if (!e) return null;
+  return h("div", { className: "wrow" },
+    h("div", { style: { flex: 1, minWidth: 0 } },
+      h(AzPalabra, { texto: e.es, id }),
+      h("span", { className: "az-tl", style: { fontSize: 14, color: c.gold, fontStyle: "italic", fontWeight: 600, marginLeft: 10 } }, "«" + e.translit + "»"),
+      h("div", { style: { fontSize: 13, color: c.textSub, marginTop: 3 } }, (e.senses[0] || {}).ru)),
+    h("button", { className: "play", onClick: () => hablar(e.es), "aria-label": "Слушать" }, "▶"));
+}
+/* Lo propio de la Unidad 1 dentro de cada sección: los pares y la lista de palabras del léxico */
+const extraU1 = c => b => (b.pares || b.palabras) ? h(React.Fragment, null,
+  b.pares && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 14px" } },
+    b.pares.map((p, i) => h("div", { key: i, className: "par" },
+      h("div", { className: "par-l", lang: "es" }, p.letras),
+      h(BotonPalabra, { id: p.a }), h(BotonPalabra, { id: p.b })))),
+  b.palabras && h("div", { className: "u-card", style: { marginTop: 12, padding: "4px 16px" } },
+    b.palabras.map(id => h(Ejemplo, { key: id, id, c })))) : null;
+
+/* ── Leer en voz alta: las palabras de las letras, sin repetir ── */
+const TODAS = [];
+ALFABETO_ES.forEach(l => l.words.forEach(w => { if (w.lexId && !TODAS.some(x => x.lexId === w.lexId)) TODAS.push(w); }));
+let BOLSA_LEER = [];
+function palabraParaLeer() {
+  if (!BOLSA_LEER.length) BOLSA_LEER = TODAS.slice().sort(() => Math.random() - .5);
+  return BOLSA_LEER.pop();
+}
+function LeerEnVoz({ c }) {
+  const [w, setW] = useState(palabraParaLeer);
+  const [ver, setVer] = useState(false);
+  const [n, setN] = useState(0);
+  const mostrar = () => { setVer(true); hablar(w.es); };
+  const otra = () => { setW(palabraParaLeer()); setVer(false); setN(x => x + 1); };
+  const plural = n => n % 10 === 1 && n % 100 !== 11 ? "слово" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? "слова" : "слов";
+  return h("div", { className: "u-card", style: { padding: "22px 18px", marginTop: 12, textAlign: "center" } },
+    h("div", { lang: "es", style: { fontSize: 38, fontWeight: 800, color: c.text, lineHeight: 1.2, wordBreak: "break-word" } }, w.es),
+    ver
+      ? h("div", { style: { marginTop: 10 } },
+          h("div", { className: "az-tl", style: { fontSize: 18, color: c.gold, fontStyle: "italic", fontWeight: 700 } }, "«" + w.translit + "»"),
+          h("div", { style: { fontSize: 14, color: c.textSub, marginTop: 4 } }, w.meaning),
+          h("button", { className: "play", style: { margin: "12px auto 0" }, onClick: () => hablar(w.es), "aria-label": "Слушать" }, "▶"))
+      : h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 10 } }, "Прочитай вслух, а потом проверь."),
+    h("div", { style: { display: "flex", gap: 8, marginTop: 18 } },
+      !ver && h("button", { className: "ubtn", style: { marginTop: 0 }, onClick: mostrar }, "Как читается?"),
+      h("button", { className: "ubtn" + (ver ? "" : " sec"), style: { marginTop: 0 }, onClick: otra }, "Другое слово")),
+    n > 0 && h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 10 } }, "Прочитано: " + n + " " + plural(n)));
+}
+
+function VistaPronunciacion({ mod, c }) {
+  return h(React.Fragment, null,
+    h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
+    h(AzSecciones, { secciones: mod.bloques, extra: extraU1(c) }),
+    mod.id === "es1m7" && h(React.Fragment, null,
+      h("div", { className: "u-sec" }, "Читай вслух"),
+      h(LeerEnVoz, { c })));
+}
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [modId, setModId] = useState(() => new URLSearchParams(location.search).get("m"));
+  const [niveles, setNiveles] = useState({});
+  const [hoja, setHoja] = useState(null);
+  const [tarjetas, setTarjetas] = useState(false);
+  const [practica, setPractica] = useState(null);   /* { titulo, pool } */
+  const [visto, setVisto] = useState(2);
+  const [verPron, setVerPron] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      setVerPron((await azGet('az_es1_pron', true)) !== false);
+      setVisto(await azGet('az_es1_visto', 2));
+      await azLoadProgress();
+      refrescarNiveles();
+      if (ES_OK) azSaveUnitProgress(1, {});
+    })();
+    const pop = () => { setModId(new URLSearchParams(location.search).get("m")); setHoja(null); setTarjetas(false); setPractica(null); };
+    window.addEventListener("popstate", pop);
+    return () => window.removeEventListener("popstate", pop);
+  }, []);
+
+  useEffect(() => {
+    const m = modId ? unidadEs1Modulo(modId) : null;
+    window.azFuenteActual = () => m ? "Урок 1 · " + m.titulo : "Урок 1";
+    if (!ES_OK) return;
+    if (m && m.n > visto && m.tipo !== "pronto") { setVisto(m.n); azSet('az_es1_visto', m.n); }
+    if (m) azGuardarUltimo({ unidad: 1, n: m.n, total: U.modulos.length, titulo: "Урок 1 · " + m.titulo, href: "abece-1.html?m=" + m.id });
+  }, [modId]);
+  function refrescarNiveles() {
+    const lv = {};
+    ALFABETO_ES.forEach(l => { lv[l.upper] = azItem(CLAVE(l)).level; });
+    setNiveles(lv);
+  }
+  const practicarUnidad = () => setPractica({ titulo: "Урок 1", pool: EJ_U1.filter(e => e.modulo <= Math.max(visto, 2)) });
+  const practicarModulo = m => setPractica({ titulo: m.titulo, pool: EJ_U1.filter(e => e.modulo === m.n) });
+  const abrirModulo = id => {
+    history.pushState(null, "", id ? "?m=" + id : location.pathname);
+    setModId(id); window.scrollTo(0, 0);
+  };
+  const setNivel = (l, v, auto) => { azSetItemLevel(CLAVE(l), v, auto); setNiveles(p => Object.assign({}, p, { [l.upper]: v })); };
+  const togglePron = () => { const v = !verPron; setVerPron(v); azSet('az_es1_pron', v); };
+  const chip = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
+
+  const c = azColors(darkMode);
+  const green = darkMode ? "#4CAF82" : "#2E7D55";
+  if (!ES_OK) {
+    return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
+      h("div", { style: { textAlign: "center", padding: "12vh 6vw", color: c.textSub, fontSize: 14.5, lineHeight: 1.55 } },
+        "Esta unidad es de Abecé (español para rusohablantes).", h("br"),
+        h("a", { href: "index.html", style: { color: c.gold, fontWeight: 700 }, onClick: ev => azNavigate(ev, "index.html") }, "Volver al inicio")));
+  }
+  const mod = modId ? unidadEs1Modulo(modId) : null;
+  const dominadas = ALFABETO_ES.filter(l => niveles[l.upper] === 2).length;
+  const palabrasDom = OBJETIVO_U1.filter(id => azItem("lex:" + id).level === 2).length;
+  const idx = mod ? U.modulos.indexOf(mod) : -1;
+  const vecino = d => { for (let k = idx + d; k >= 0 && k < U.modulos.length; k += d) if (U.modulos[k].tipo !== "pronto") return U.modulos[k]; return null; };
+  const prev = mod && vecino(-1), next = mod && vecino(1);
+
+  const tabs = mod ? [
+    { id: "u", icon: "⊞", aria: "Урок", action: () => abrirModulo(null) },
+    { id: "p", icon: "‹", aria: "Предыдущий модуль", disabled: !prev, action: () => prev && abrirModulo(prev.id) },
+    { id: "m", texto: "Модуль " + mod.n },
+    { id: "s", icon: "›", aria: "Следующий модуль", disabled: !next, action: () => next && abrirModulo(next.id) }
+  ] : azTabsUnidad(1);
+
+  /* ── Portada de la unidad ── */
+  const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 2), onPracticar: practicarUnidad, onAbrir: abrirModulo,
+    progreso: [{ label: "Буквы выучены", valor: dominadas, total: ALFABETO_ES.length }, { label: "Слова выучены", valor: palabrasDom, total: OBJETIVO_U1.length }],
+    extraModulo: m => m.letras ? h("div", { className: "mod-l" }, m.letras.map(x => h("span", { key: x, lang: "es",
+      style: niveles[x] === 2 ? { color: green, borderColor: green + "88" } : niveles[x] === 1 ? { color: YELLOW, borderColor: YELLOW + "88" } : null }, x))) : null });
+
+  /* ── Módulo ── */
+  const vistaModulo = mod && h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+    h("div", { className: "u-kicker" }, "Урок 1 · Модуль " + mod.n),
+    h("h1", { className: "u-title" }, mod.titulo),
+    mod.tipo === "pronto" && h("p", { className: "u-text", style: { marginTop: 12 } }, "Этот модуль скоро появится."),
+    mod.tipo === "intro" && h(AzSecciones, { secciones: mod.secciones }),
+    mod.tipo === "intro" && next && h("button", { className: "ubtn", onClick: () => abrirModulo(next.id) }, "Начать с букв"),
+    (mod.tipo === "pronunciacion" || mod.tipo === "reglas") && h(VistaPronunciacion, { mod, c }),
+    mod.tipo === "pronunciacion" && h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Практиковать произношение"),
+    mod.tipo === "reglas" && h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Практиковать ударение"),
+    (mod.tipo === "pronunciacion" || mod.tipo === "reglas") && next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo),
+    mod.tipo === "letras" && h(React.Fragment, null,
+      h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
+      h(AzSecciones, { secciones: mod.secciones, extra: extraU1(c) }),
+      mod.secciones && h("div", { className: "u-sec" }, mod.letras[0].length > 1 ? "Сочетания" : "Буквы"),
+      h("div", { className: "toggle-row" },
+        h("button", { className: "pair-btn", onClick: togglePron, style: chip(verPron) }, "Произношение"),
+        null),
+      h("div", { className: "lgrid" }, mod.letras.map(x => {
+        const l = LETRA[x], nv = niveles[x] || 0, col = nv === 2 ? green : nv === 1 ? YELLOW : null, dig = l.upper.length > 1;
+        return h("div", { key: x, className: "lcard", role: "button", tabIndex: 0, onClick: () => setHoja(x),
+          onKeyDown: e => { if (e.key === "Enter") setHoja(x); },
+          style: { border: `1px solid ${col ? col + "55" : c.border}` } },
+          col && h("span", { style: { position: "absolute", top: 6, right: 8, fontSize: 10, color: col } }, nv === 2 ? "●" : "◑"),
+          /* Igual que la grilla de Alfabeto: letra, cursiva, nombre y sonido */
+          h("div", { lang: "es", style: { display: "flex", alignItems: "baseline", justifyContent: "center", gap: 8, lineHeight: 1 } },
+            dig ? h("span", { style: { fontSize: 28, fontWeight: 800, color: c.gold } }, l.lower)
+              : h(React.Fragment, null,
+                  h("span", { style: { fontSize: 28, fontWeight: 800, color: c.gold } }, l.upper),
+                  h("span", { style: { fontSize: 28, fontWeight: 500, color: c.textSub } }, l.lower))),
+          h("div", { className: "cursiva", lang: "es", style: { fontSize: 28, marginTop: 6, opacity: .7 } }, dig ? l.lower : l.upper + " " + l.lower),
+          h("div", { lang: "es", style: { fontSize: 10, color: c.textMuted, marginTop: 6, fontStyle: "italic" } }, l.name),
+          verPron && h("div", { style: { fontSize: 10, color: c.textSub, marginTop: 3 } }, "/" + l.translit + "/"));
+      })),
+      h("button", { className: "ubtn", onClick: () => setTarjetas(true) }, "Карточки (" + mod.letras.length + ")"),
+      h("button", { className: "ubtn", style: { marginTop: 10 }, onClick: () => practicarModulo(mod) }, "Практиковать эту группу"),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)));
+
+  return h(React.Fragment, null,
+    h(AzEstilosUnidad, { c, green }),
+    h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vistaModulo : portada),
+    hoja && h(HojaLetra, { l: LETRA[hoja], c, green, nivel: niveles[hoja] || 0, setNivel, onClose: () => setHoja(null) }),
+    practica && h(AzPractica, { key: practica.titulo, unidad: 1, titulo: practica.titulo, pool: practica.pool, mezcla: ES1_MEZCLA, n: Math.min(12, azNPractica(practica.pool, 12)), dark: darkMode, aviso: AVISO,
+      onSalir: () => { setPractica(null); refrescarNiveles(); } }),
+    tarjetas && mod && h(Tarjetas, { letras: mod.letras, titulo: mod.titulo, c, green, niveles, setNivel, onClose: () => setTarjetas(false) }),
+    h(AzBurbujaHost, { dark: darkMode }));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>
