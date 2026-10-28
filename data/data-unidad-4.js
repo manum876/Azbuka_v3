@@ -802,7 +802,7 @@ function ejerciciosUnidad4() {
       /* Quien hace la acción en acusativo */
       const mal = cap(S.acc) + " " + f.forma + " " + o.acc + ".", mod = modF(f, Math.max(4, S.mod, o.mod));
       out.push({ id: "U4-nat-s-" + f.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: mod, regla: "u4-nominativo", grupo: "F4-" + f.id, items: ["lex:" + S.id], oir: f.ru,
-        pide: "¿Cuál suena natural?", opciones: baraja([f.ru, mal], i + 71), correcta: f.ru,
+        pide: "¿Cuál es la correcta?", opciones: baraja([f.ru, mal], i + 71), correcta: f.ru,
         explicacion: f.ru + " " + cap(S.nom) + " hace la acción: va en nominativo. Con " + S.acc + " la frase no tiene a nadie que la haga." });
     } else if (k === 1 && !S) {
       /* La forma del verbo no coincide con quien hace la acción */
@@ -810,20 +810,20 @@ function ejerciciosUnidad4() {
       if (otra === f.forma) return;
       const mal = f.suj.ru + " " + otra + " " + o.acc + ".";
       out.push({ id: "U4-nat-v-" + f.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: modF(f, Math.max(3, o.mod)), regla: u4ReglaVerbo(f.v), grupo: "F4-" + f.id, items: ["lex:" + f.v.id], oir: f.ru,
-        pide: "¿Cuál suena natural?", opciones: baraja([f.ru, mal], i + 73), correcta: f.ru,
+        pide: "¿Cuál es la correcta?", opciones: baraja([f.ru, mal], i + 73), correcta: f.ru,
         explicacion: f.ru + " Con " + u4Min(f.suj.ru).replace(/^я$/, "{я}") + ", la forma es " + f.forma + "." });
     } else if (o.nom !== o.acc && (o.anim || o.persona || o.g === "m")) {
       /* El error del español: la persona o el animal sin acusativo */
       const mal = f.suj.ru + " " + f.forma + " " + o.nom + ".";
       out.push({ id: "U4-nat-o-" + f.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: modF(f, o.mod), regla: u4ReglaId(o), grupo: "F4-" + f.id, items: ["lex:" + o.id], oir: f.ru,
-        pide: "¿Cuál suena natural?", opciones: baraja([f.ru, mal], i + 75), correcta: f.ru, explicacion: f.ru + " " + u4Regla(o) });
+        pide: "¿Cuál es la correcta?", opciones: baraja([f.ru, mal], i + 75), correcta: f.ru, explicacion: f.ru + " " + u4Regla(o) });
     }
   });
   /* Э́то + nominativo */
   Object.values(sust).filter(s => !s.amp && s.desde <= 6 && s.nom !== s.acc && !/ребенок/.test(sin(s.nom))).forEach((s, i) => {
     const bien = "Э́то " + s.nom + ".", mal = "Э́то " + s.acc + ".";
     out.push({ id: "U4-nat-eto-" + s.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: Math.max(4, s.mod, s.desde), regla: "u4-eto", grupo: "E4n-" + s.id, items: ["lex:" + s.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], i + 77), correcta: bien, explicacion: bien + " Э́то solo señala: lo que sigue va en nominativo." });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], i + 77), correcta: bien, explicacion: bien + " Э́то solo señala: lo que sigue va en nominativo." });
   });
 
   /* Par mínimo y oído: dos personas, quién espera (ve, busca…) a quién */

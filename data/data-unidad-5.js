@@ -275,7 +275,7 @@ const UNIDAD_5 = {
           destacado: "Я всегда́ за́втракаю. Мы ча́сто гуля́ем.",
           mas: { texto: "Сейча́с es la palabra que resuelve la duda del presente: Сейча́с я чита́ю es claramente «estoy leyendo». Всегда́, ча́сто e иногда́ hacen lo contrario: muestran que es algo habitual («leo a menudo»). El verbo es el mismo en los dos casos.",
             ejemplos: [{ ru: "Я {ча́сто} чита́ю. {Сейча́с} я чита́ю.", es: "Leo a menudo. Ahora estoy leyendo.", por: "Misma forma del verbo; la palabra de tiempo cambia el sentido." }] },
-          chequeo: [{ pide: "¿Cuál suena natural?", opciones: ["Я всегда́ за́втракаю.", "Я за́втракаю всегда́ всегда́."], ok: "Я всегда́ за́втракаю.", por: "Всегда́ antes del verbo." }] }
+          chequeo: [{ pide: "¿Cuál es la correcta?", opciones: ["Я всегда́ за́втракаю.", "Я за́втракаю всегда́ всегда́."], ok: "Я всегда́ за́втракаю.", por: "Всегда́ antes del verbo." }] }
       ] },
     { id: "u5m6", n: 6, tipo: "leccion", nPractica: 12, titulo: "Construir frases", resumen: "Verbo + acusativo: Мы смо́трим фильм.",
       intro: "Ahora se junta todo: quién hace la acción, el verbo en su forma y lo que recibe la acción en acusativo.",
@@ -833,20 +833,20 @@ function ejerciciosUnidad5() {
     const p = (a * 3 + j) % 7, P = U5_PERS[p];
     const bien = cap(P.ru) + " " + m.f[P.i] + " " + w.ac + ".", mal = cap(P.ru) + " " + m.f[P.i] + " " + w.f[P.i] + ".";
     out.push({ id: "U5-nat-inf-" + a + "-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u5-despues-hotet", grupo: "NI-" + a + "-" + j, items: ["lex:" + m.id, "lex:" + w.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], a + j), correcta: bien, explicacion: bien + " Después de " + m.ac + ", el segundo verbo va en infinitivo: " + w.ac + "." });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], a + j), correcta: bien, explicacion: bien + " Después de " + m.ac + ", el segundo verbo va en infinitivo: " + w.ac + "." });
   }));
   /* b) по-ру́сски, no ру́сский, con говори́ть */
   U5_PERS.forEach((P, p) => {
     const v = V("говори́ть"), bien = cap(P.ru) + " " + v.f[P.i] + " по-ру́сски.", mal = cap(P.ru) + " " + v.f[P.i] + " ру́сский.";
     out.push({ id: "U5-nat-po-" + p, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u5-segunda", grupo: "NP-" + p, items: ["lex:" + v.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], p), correcta: bien, explicacion: bien + " Con говори́ть va по-ру́сски: «en ruso»." });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], p), correcta: bien, explicacion: bien + " Con говори́ть va по-ру́сски: «en ruso»." });
   });
   /* c) -сь / -ся cambiados */
   Object.values(verb).filter(v => /ся$/.test(sinAc(v.ac))).forEach((v, vi) => v.f.forEach((f, i) => {
     const mal = /сь$/.test(f) ? f.replace(/сь$/, "ся") : f.replace(/ся$/, "сь");
     const bien = pRu(i) + " " + f + ".";
     out.push({ id: "U5-nat-sya-" + v.id + "-" + i, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u5-sya", grupo: v.id + "-" + i, items: ["lex:" + v.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, pRu(i) + " " + mal + "."], vi + i), correcta: bien,
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, pRu(i) + " " + mal + "."], vi + i), correcta: bien,
       explicacion: bien + " " + (/сь$/.test(f) ? "Después de vocal, **-сь**." : "Después de consonante, **-ся**.") });
   }));
   /* d) вы con una sola persona: igual el verbo en plural */
@@ -854,7 +854,7 @@ function ejerciciosUnidad5() {
     const v = V(vk); if (!v || v.desde > 4) return;
     const bien = "О́льга, вы " + v.f[4] + "?", mal = "О́льга, вы " + v.f[2] + "?";
     out.push({ id: "U5-nat-vy-" + v.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: Math.max(2, v.desde), regla: "u5-ty-vy", grupo: "NV-" + v.id, items: ["lex:" + v.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " Con вы el verbo va siempre en plural, aunque sea una sola persona: " + v.f[4] + "." });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " Con вы el verbo va siempre en plural, aunque sea una sola persona: " + v.f[4] + "." });
   });
   /* e) La consonante de la forma de я, llevada a las otras personas */
   const CONS = [["д", "ж"], ["б", "бл"], ["в", "вл"], ["п", "пл"]];
@@ -868,14 +868,14 @@ function ejerciciosUnidad5() {
       if (sinAc(mal) === plano) return;
       const bien = pRu(i) + " " + f + ".";
       out.push({ id: "U5-nat-cons-" + v.id + "-" + i, tipo: "natural", forma: "elegir", dificultad: 2, modulo: Math.max(4, v.desde), regla: "u5-consonante-ya", grupo: v.id + "-" + i, items: ["lex:" + v.id], oir: bien,
-        pide: "¿Cuál suena natural?", opciones: baraja([bien, pRu(i) + " " + mal + "."], vi + k), correcta: bien,
+        pide: "¿Cuál es la correcta?", opciones: baraja([bien, pRu(i) + " " + mal + "."], vi + k), correcta: bien,
         explicacion: bien + " El cambio de consonante es solo para {я} (" + v.f[0] + "); las demás personas vuelven a la raíz." });
     });
   });
   /* f) Быть no se dice en presente */
   [["Он врач.", "Он есть врач."], ["Ты до́ма?", "Ты есть до́ма?"], ["Они́ до́ма.", "Они́ есть до́ма."], ["Я Ма́ша.", "Я есть Ма́ша."], ["Вы до́ма?", "Вы есть до́ма?"], ["Она́ врач.", "Она́ есть врач."]]
     .forEach(([bien, mal], j) => out.push({ id: "U5-nat-byt-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u5-byt", grupo: "NB-" + j, items: [], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], j + 3), correcta: bien, explicacion: bien + " En presente, быть no se dice." }));
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], j + 3), correcta: bien, explicacion: bien + " En presente, быть no se dice." }));
 
   /* Oído: ¿qué forma sonó? Las terminaciones sin acento casi no se oyen */
   const TRIOS = [[1, 2, 4], [2, 4, 1], [3, 5, 2], [4, 1, 3], [5, 3, 0]];

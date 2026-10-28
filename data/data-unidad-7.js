@@ -260,7 +260,7 @@ const UNIDAD_7 = {
           errores: [{ mal: "в ка́ждый день", bien: "{ка́ждый день}", por: "Con ка́ждый no va в." }],
           mas: { texto: "Ка́ждый concuerda con la palabra que acompaña, como un adjetivo. Con el tiempo está en acusativo, el mismo que en в сре́ду: es el acusativo que dice «cuándo». Por eso con los días femeninos aparecen juntas **-ую** y **-у**: ка́ждую пя́тницу.\nEn español decimos «todos los días», en plural; en ruso, «cada día», en singular.",
             ejemplos: [{ ru: "{Ка́ждый ве́чер} я чита́ю.", es: "Todas las noches leo.", por: "Masculino: ка́ждый ве́чер." }] },
-          chequeo: [{ pide: "«todos los viernes»", opciones: ["ка́ждую пя́тницу", "ка́ждая пя́тница", "в ка́ждую пя́тницу"], ok: "ка́ждую пя́тницу", por: "Acusativo y sin в." }] }
+          chequeo: [{ pide: "«todos los viernes»", opciones: ["ка́ждую пя́тницу", "ка́ждая пя́тница", "ка́ждый пя́тницу"], ok: "ка́ждую пя́тницу", por: "Femenino y en acusativo: **-ую**." }] }
       ] },
     { id: "u7m4", n: 4, tipo: "leccion", nPractica: 12, titulo: "Meses, estaciones y fiestas", resumen: "в ма́е · ле́том · Рождество́ в декабре́.",
       intro: "неде́ля (semana), ме́сяц (mes), год (año), los doce meses, las estaciones y las fiestas. Al final, todas las formas de decir «cuándo», juntas.",
@@ -810,10 +810,10 @@ function ejerciciosUnidad7() {
     if (n >= 2) {
       const mal = U7_NUM[n] + " " + (n <= 4 ? "часо́в" : "часа́");
       push({ id: "U7-nat-h-" + n, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 1, regla: "u7-hora-conteo", grupo: "H-" + n, items: [], oir: cap(hora(n)) + ".",
-        pide: "¿Cuál suena natural?", opciones: baraja([cap(hora(n)) + ".", cap(mal) + "."], n), correcta: cap(hora(n)) + ".", explicacion: cap(hora(n)) + ". " + u7ReglaHora(n) });
+        pide: "¿Cuál es la correcta?", opciones: baraja([cap(hora(n)) + ".", cap(mal) + "."], n), correcta: cap(hora(n)) + ".", explicacion: cap(hora(n)) + ". " + u7ReglaHora(n) });
     }
     push({ id: "U7-nat-eto-" + n, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 1, regla: "u7-hora-pregunta", grupo: "HE-" + n, items: [], oir: cap(hora(n)) + ".",
-      pide: "— Кото́рый час? ¿Cuál suena natural?", opciones: baraja([cap(hora(n)) + ".", "Э́то " + hora(n) + "."], n + 3), correcta: cap(hora(n)) + ".", explicacion: cap(hora(n)) + ". Para la hora no va э́то." });
+      pide: "— Кото́рый час? ¿Cuál es la correcta?", opciones: baraja([cap(hora(n)) + ".", "Э́то " + hora(n) + "."], n + 3), correcta: cap(hora(n)) + ".", explicacion: cap(hora(n)) + ". Para la hora no va э́то." });
     push({ id: "U7-oido-v-" + n, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 1, regla: "u7-hora-a-las", grupo: "HV-" + n, items: [], oir: (n % 2 ? "в " : "") + hora(n),
       pide: "Escucha: ¿qué sonó?", audio: (n % 2 ? "в " : "") + hora(n), opciones: ["в " + hora(n), hora(n)], correcta: (n % 2 ? "в " : "") + hora(n),
       explicacion: "Sonó **" + (n % 2 ? "{в} " : "") + hora(n) + "**: " + (n % 2 ? "«a las…», cuándo pasa algo." : "la hora o cuánto dura, sin {в}.") });
@@ -840,7 +840,7 @@ function ejerciciosUnidad7() {
     if (n !== 3 && n !== 5) push({ id: "U7-desc-min-" + n, tipo: "descubrir", forma: "elegir", dificultad: 2, modulo: 1, regla: "u7-duracion", grupo: "MI-" + n, items: [], oir: ok,
       pide: (n <= 4 ? "три мину́ты" : "пять мину́т · де́сять мину́т") + ". ¿Y " + num + "?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + ": " + (n <= 4 ? "con 3 y 4, мину́ты." : "de 5 en adelante, мину́т.") });
     if (n >= 5) push({ id: "U7-nat-min-" + n, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 1, regla: "u7-duracion", grupo: "MN-" + n, items: [], oir: "Я чита́ю " + ok + ".",
-      pide: "¿Cuál suena natural?", opciones: baraja(["Я чита́ю " + ok + ".", "Я чита́ю " + mal + "."], j + 1), correcta: "Я чита́ю " + ok + ".", explicacion: "Я чита́ю " + ok + ". De 5 en adelante, мину́т." });
+      pide: "¿Cuál es la correcta?", opciones: baraja(["Я чита́ю " + ok + ".", "Я чита́ю " + mal + "."], j + 1), correcta: "Я чита́ю " + ok + ".", explicacion: "Я чита́ю " + ok + ". De 5 en adelante, мину́т." });
   });
   [[7, 15, 50], [9, 30, 13], [8, 50, 15], [6, 13, 30], [10, 40, 14], [11, 15, 50], [5, 30, 13], [12, 50, 15]].forEach(([h, m, otro], j) => {
     const NUM2 = { 13: "трина́дцать", 14: "четы́рнадцать", 15: "пятна́дцать", 30: "три́дцать", 40: "со́рок", 50: "пятьдеся́т" };
@@ -865,7 +865,7 @@ function ejerciciosUnidad7() {
       pide: "¿Por qué " + gen + " y no " + adv + "?", grande: conH, audio: conH, audioManual: true, opciones: ["Va después de la hora", "Va al final de la frase"], correcta: "Va después de la hora",
       explicacion: "Con la hora va **" + gen + "**; " + adv + " es sin hora." });
     push({ id: "U7-nat-uv-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 2, regla: "u7-utra-vechera", grupo: "UVN-" + j, items: [], oir: "Я встаю́ " + conH + ".",
-      pide: "¿Cuál suena natural?", opciones: baraja(["Я " + (p === "у" ? "встаю́" : "у́жинаю") + " " + conH + ".", "Я " + (p === "у" ? "встаю́" : "у́жинаю") + " в " + hora(n) + " " + adv + "."], j), correcta: "Я " + (p === "у" ? "встаю́" : "у́жинаю") + " " + conH + ".",
+      pide: "¿Cuál es la correcta?", opciones: baraja(["Я " + (p === "у" ? "встаю́" : "у́жинаю") + " " + conH + ".", "Я " + (p === "у" ? "встаю́" : "у́жинаю") + " в " + hora(n) + " " + adv + "."], j), correcta: "Я " + (p === "у" ? "встаю́" : "у́жинаю") + " " + conH + ".",
       explicacion: "Después de la hora: **" + gen + "**, nunca " + adv + "." });
     if (j < 4) push({ id: "U7-oido-uv-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 2, regla: "u7-utra-vechera", grupo: "UVO-" + j, items: [], oir: "в " + hora(n) + (j % 2 ? " ве́чера" : " утра́"),
       pide: "Escucha: ¿de la mañana o de la noche?", audio: "в " + hora(n) + (j % 2 ? " ве́чера" : " утра́"), opciones: [u7Es(n, "у"), u7Es(n, "в")], correcta: u7Es(n, j % 2 ? "в" : "у"),
@@ -875,7 +875,7 @@ function ejerciciosUnidad7() {
     const v = vf(vk); if (!v) return;
     const s = SUJ[j % SUJ.length], ok = s[0] + " " + v.f[s[2]] + " " + adv + ".", mal = s[0] + " " + v.f[s[2]] + " в " + nom + ".";
     push({ id: "U7-nat-mo-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 2, regla: "u7-momento-sin-prep", grupo: "MOn-" + j, items: ["lex:" + v.id], oir: ok,
-      pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " El momento del día va sin {в}: " + adv + "." });
+      pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " El momento del día va sin {в}: " + adv + "." });
     push({ id: "U7-pq-mo-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 2, regla: "u7-momento-sin-prep", grupo: "MOn-" + j, items: ["lex:" + v.id], oir: ok,
       pide: "¿Por qué no lleva {в}?", grande: ok, audio: ok, audioManual: true, opciones: ["Es un momento del día: tiene su propia palabra", "Es un día de la semana"], correcta: "Es un momento del día: tiene su propia palabra",
       explicacion: nom + " → **" + adv + "**, sin preposición." });
@@ -889,10 +889,10 @@ function ejerciciosUnidad7() {
       opciones: fem ? ["Es un día: {в} + acusativo, -а → -у", "Es un mes: {в} + prepositivo"] : ["Es un día y una cosa: en acusativo no cambia", "Es un mes: {в} + prepositivo"],
       correcta: fem ? "Es un día: {в} + acusativo, -а → -у" : "Es un día y una cosa: en acusativo no cambia", explicacion: "**" + d.nom + " → " + d.pr + " " + d.acc + "**: los días van en acusativo." }, base));
     const prep = casosById(d.id).sg[5];
-    if (prep !== d.acc) push(Object.assign({ id: "U7-nat-d-" + d.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-dia-acus", oir: cap(d.pr) + " " + d.acc + " я до́ма.", pide: "¿Cuál suena natural?",
+    if (prep !== d.acc) push(Object.assign({ id: "U7-nat-d-" + d.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-dia-acus", oir: cap(d.pr) + " " + d.acc + " я до́ма.", pide: "¿Cuál es la correcta?",
       opciones: baraja([cap(d.pr) + " " + d.acc + " я до́ма.", cap(d.pr) + " " + prep + " я до́ма."], j), correcta: cap(d.pr) + " " + d.acc + " я до́ма.",
       explicacion: "Para los días, acusativo: **" + d.pr + " " + d.acc + "**." }, base, { grupo: "DN-" + d.id }));
-    if (fem) push(Object.assign({ id: "U7-nat-dn-" + d.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-dia-acus", oir: cap(d.pr) + " " + d.acc + " я рабо́таю.", pide: "¿Cuál suena natural?",
+    if (fem) push(Object.assign({ id: "U7-nat-dn-" + d.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-dia-acus", oir: cap(d.pr) + " " + d.acc + " я рабо́таю.", pide: "¿Cuál es la correcta?",
       opciones: baraja([cap(d.pr) + " " + d.acc + " я рабо́таю.", cap(d.pr) + " " + d.nom + " я рабо́таю."], j + 1), correcta: cap(d.pr) + " " + d.acc + " я рабо́таю.",
       explicacion: "Después de {в}, el día cambia: **" + d.nom + " → " + d.acc + "**." }, base, { grupo: "DNN-" + d.id }));
     push(Object.assign({ id: "U7-par-d-" + d.id, tipo: "par", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-dia-hoy", oir: "Сего́дня " + d.nom + ".", pide: "«Hoy es " + d.es + "». ¿Cuál dices?",
@@ -911,8 +911,10 @@ function ejerciciosUnidad7() {
     const fr = i => v.f[i] + (resto ? " " + resto : ""), ok = cap(tiempo) + " я " + fr(0) + ".";
     const gen = { m: "masculino", f: "femenino", n: "neutro" }[g];
     const base = { grupo: "K-" + j, items: ["lex:" + e.id, "lex:" + lex("ка́ждый").id] };
-    push(Object.assign({ id: "U7-nat-k-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-cada", oir: ok, pide: "¿Cuál suena natural?",
-      opciones: baraja([ok, "В " + tiempo + " я " + fr(0) + "."], j), correcta: ok, explicacion: ok + " Con ка́ждый no va {в}." }, base));
+    push(Object.assign({ id: "U7-nat-k-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-cada", oir: ok, pide: "¿Cuál es la correcta?",
+      /* la equivocada, con ка́ждый en otro género (28/10/2026: «в ка́ждую суббо́ту» también se usa, no sirve de error) */
+      opciones: baraja([ok, cap((g === "f" ? (Array.isArray(k.m[3]) ? k.m[3][0] : k.m[3]) : k.f[3]) + " " + c.sg[3]) + " я " + fr(0) + "."], j), correcta: ok,
+      explicacion: ok + " " + cap(nom) + " es " + gen + ": " + kw + "." }, base));
     push(Object.assign({ id: "U7-pq-k-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 3, regla: "u7-cada", oir: tiempo, pide: "¿Por qué " + kw + "?", grande: tiempo, audio: tiempo, audioManual: true,
       opciones: ["Concuerda con " + nom + " (" + gen + "), en acusativo", "Va después de {в}", "Es plural"], correcta: "Concuerda con " + nom + " (" + gen + "), en acusativo",
       explicacion: "**" + tiempo + "**: ка́ждый concuerda con " + nom + " y está en acusativo, el que dice «cuándo»." }, base, { grupo: "KP-" + j }));
@@ -940,7 +942,7 @@ function ejerciciosUnidad7() {
       explicacion: "**" + m.nom + " → в " + m.prep + "**: los meses van en prepositivo" + (finE ? ", con el acento al final." : ".") }, base, { grupo: "MD-" + m.id }));
     push(Object.assign({ id: "U7-pq-m-" + m.id, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 4, regla: "u7-mes-prep", oir: "в " + m.prep, pide: "¿Por qué " + m.prep + "?", grande: "в " + m.prep, audio: "в " + m.prep, audioManual: true,
       opciones: ["Es un mes: {в} + prepositivo", "Es un día: {в} + acusativo", "Es una estación: sin preposición"], correcta: "Es un mes: {в} + prepositivo", explicacion: "**" + m.nom + " → в " + m.prep + "**." }, base));
-    push(Object.assign({ id: "U7-nat-m-" + m.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u7-mes-prep", oir: "Мой о́тпуск в " + m.prep + ".", pide: "¿Cuál suena natural?",
+    push(Object.assign({ id: "U7-nat-m-" + m.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u7-mes-prep", oir: "Мой о́тпуск в " + m.prep + ".", pide: "¿Cuál es la correcta?",
       opciones: baraja(["Мой о́тпуск в " + m.prep + ".", "Мой о́тпуск в " + m.nom + "."], j), correcta: "Мой о́тпуск в " + m.prep + ".", explicacion: "Los meses van en prepositivo: **в " + m.prep + "**." }, base, { grupo: "MN-" + m.id }));
     push(Object.assign({ id: "U7-diag-m-" + m.id, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 4, regla: "u7-mes-prep", oir: "Мой день рожде́ния в " + m.prep + ".",
       pide: "La frase tiene un error. ¿Qué falla?", grande: "Мой день рожде́ния в " + m.nom + ".", opciones: ["La forma del mes", "Falta {в}", "Sobra мой"], correcta: "La forma del mes",
@@ -956,7 +958,7 @@ function ejerciciosUnidad7() {
     const e = lex(adv), base = { grupo: "E-" + j, items: e ? ["lex:" + e.id] : [] }, c = kz(nom);
     ["Я на да́че", "Я до́ма", "Я гуля́ю в па́рке"].forEach((fr, k) => {
       const ok = cap(adv) + " " + fr.charAt(0).toLowerCase() + fr.slice(1) + ".", mal = "В " + c.sg[3] + " " + fr.charAt(0).toLowerCase() + fr.slice(1) + ".";
-      push(Object.assign({ id: "U7-nat-e-" + j + "-" + k, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u7-estaciones", oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j + k), correcta: ok,
+      push(Object.assign({ id: "U7-nat-e-" + j + "-" + k, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u7-estaciones", oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j + k), correcta: ok,
         explicacion: ok + " Las estaciones van sin {в}: " + nom + " → **" + adv + "**." }, base, { grupo: "EN-" + j + "-" + k }));
     });
     push(Object.assign({ id: "U7-pq-e-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 4, regla: "u7-estaciones", oir: adv, pide: "¿Por qué " + adv + " no lleva {в}?", grande: adv, audio: adv, audioManual: true,
@@ -978,7 +980,7 @@ function ejerciciosUnidad7() {
     const ru = U7_NUM[n] + " " + razF(n);
     push({ id: "U7-pq-r-" + n, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 5, regla: "u7-veces", grupo: "R-" + n, items: ["lex:" + lex("раз").id], oir: ru, pide: "¿Por qué «" + razF(n) + "»?", grande: ru, audio: ru, audioManual: true,
       opciones: RAZ3, correcta: RAZ3[n === 1 ? 0 : n <= 4 ? 1 : 2], explicacion: "**" + ru + "**: раз se cuenta como час (1 раз · 2–4 ра́за · 5 o más раз)." });
-    if (n >= 2) push({ id: "U7-nat-r-" + n, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u7-veces", grupo: "RN-" + n, items: [], oir: "Я пью ко́фе " + ru + " в день.", pide: "¿Cuál suena natural?",
+    if (n >= 2) push({ id: "U7-nat-r-" + n, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u7-veces", grupo: "RN-" + n, items: [], oir: "Я пью ко́фе " + ru + " в день.", pide: "¿Cuál es la correcta?",
       opciones: baraja(["Я пью ко́фе " + ru + " в день.", "Я пью ко́фе " + U7_NUM[n] + " " + razF(n <= 4 ? 5 : 3) + " в день."], n), correcta: "Я пью ко́фе " + ru + " в день.", explicacion: "**" + ru + "**: " + (n <= 4 ? "con 2, 3 y 4, ра́за." : "de 5 en adelante, раз.") });
     if (n >= 3 && n !== 5 && n !== 6) push({ id: "U7-desc-r-" + n, tipo: "descubrir", forma: "elegir", dificultad: 2, modulo: 5, regla: "u7-veces", grupo: "R-" + n, items: [], oir: ru,
       pide: (n <= 4 ? "два ра́за" : "пять раз · шесть раз") + ". ¿Y " + U7_NUM[n] + "?", opciones: baraja([ru, U7_NUM[n] + " " + razF(n <= 4 ? 5 : 3)], n + 1), correcta: ru, explicacion: ru + ": el mismo grupo." });
@@ -987,7 +989,7 @@ function ejerciciosUnidad7() {
   HAB.forEach(([vk, extra, es], j) => {
     const v = vf(vk); if (!v) return;
     const s = SUJ[(j + 2) % SUJ.length], f = v.f[s[2]] + (extra ? " " + extra : ""), ok = s[0] + " никогда́ не " + f + ".", mal = s[0] + " никогда́ " + f + ".";
-    push({ id: "U7-nat-n-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u7-nunca-ne", grupo: "NN-" + j, items: ["lex:" + v.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U7-nat-n-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u7-nunca-ne", grupo: "NN-" + j, items: ["lex:" + v.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Con никогда́ va también не." });
     push({ id: "U7-cad-f-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 5, regla: "u7-nunca-ne", grupo: "FC-" + j, items: ["lex:" + v.id], oir: ok, pide: "Cambia la frase paso a paso.", base: "Я " + v.f[0] + (extra ? " " + extra : "") + ".",
       pasos: [{ pide: "Agrega «normalmente» (обы́чно).", esperadas: ["Я обы́чно " + v.f[0] + (extra ? " " + extra : "") + ".", "Обы́чно я " + v.f[0] + (extra ? " " + extra : "") + "."] },
@@ -1010,7 +1012,7 @@ function ejerciciosUnidad7() {
         explicacion: "**" + f + "**: " + (vocal ? "después de vocal, **-сь**." : "después de consonante, **-ся**.") }, base));
     });
     const sinSy = v.f[0].replace(/сь$/, "");
-    push({ id: "U7-nat-sy-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u7-rutina-sya", grupo: "SYN-" + j, items: ["lex:" + v.id], oir: "Я " + v.f[0] + ".", pide: "¿Cuál suena natural?",
+    push({ id: "U7-nat-sy-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u7-rutina-sya", grupo: "SYN-" + j, items: ["lex:" + v.id], oir: "Я " + v.f[0] + ".", pide: "¿Cuál es la correcta?",
       opciones: baraja(["Я " + v.f[0] + ".", "Я " + sinSy + "ся."], j), correcta: "Я " + v.f[0] + ".", explicacion: "Я " + v.f[0] + ". Después de vocal va **-сь**, no **-ся**." });
     push({ id: "U7-oido-sy-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 6, regla: "u7-rutina-sya", grupo: "SYO-" + j, items: ["lex:" + v.id], oir: (j % 2 ? "Они́ " + v.f[5] : "Он " + v.f[2]),
       pide: "Escucha: ¿qué forma sonó?", audio: (j % 2 ? "Они́ " + v.f[5] : "Он " + v.f[2]), opciones: op1([v.f[2], v.f[5]]), correcta: op1([j % 2 ? v.f[5] : v.f[2]])[0],
@@ -1037,7 +1039,7 @@ function ejerciciosUnidad7() {
   [["опа́здывать", "на рабо́ту", "na"], ["торопи́ться", "на уро́к", "na"], ["спеши́ть", "на рабо́ту", "na"]].forEach(([vk, lugar], j) => {
     const v = vf(vk); if (!v) return;
     const loc = lugar.replace("рабо́ту", "рабо́те").replace("уро́к", "уро́ке"), ok = "Я " + v.f[0] + " " + lugar + ".";
-    push({ id: "U7-nat-ap-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u7-rano-tarde", grupo: "AP-" + j, items: ["lex:" + v.id], oir: ok, pide: "¿Cuál suena natural?",
+    push({ id: "U7-nat-ap-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u7-rano-tarde", grupo: "AP-" + j, items: ["lex:" + v.id], oir: ok, pide: "¿Cuál es la correcta?",
       opciones: baraja([ok, "Я " + v.f[0] + " " + loc + "."], j), correcta: ok, explicacion: ok + " Adónde: на + acusativo, como con идти́." });
   });
 
@@ -1047,7 +1049,7 @@ function ejerciciosUnidad7() {
     ["начина́ться", "конча́ться"].forEach((vk, k) => {
       const v = vf(vk), vp = vf(k ? "зака́нчивать" : "начина́ть"), ok = cosa + " " + v.f[2] + " " + h + ".", mal = cosa + " " + vp.f[2] + " " + h + ".";
       const base = { grupo: "EM-" + j + "-" + k, items: ["lex:" + e.id, "lex:" + v.id] };
-      push(Object.assign({ id: "U7-nat-em-" + j + "-" + k, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-empezar", oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j + k), correcta: ok,
+      push(Object.assign({ id: "U7-nat-em-" + j + "-" + k, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-empezar", oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j + k), correcta: ok,
         explicacion: ok + " Lo que " + (k ? "termina" : "empieza") + " es una cosa: " + v.ac + ". " + vp.ac + " es para una persona." }, base));
       if (k === 0) push(Object.assign({ id: "U7-pq-em-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-empezar", oir: ok, pide: "¿Por qué начина́ется, con -ся?", grande: ok, audio: ok, audioManual: true,
         opciones: ["Lo que empieza es una cosa", "Lo que empieza es una persona"], correcta: "Lo que empieza es una cosa", explicacion: es + " empieza sola: **начина́ется**. Una persona начина́ет algo." }, base));
@@ -1063,7 +1065,7 @@ function ejerciciosUnidad7() {
   [0, 1, 2, 3, 4, 5].forEach(j => {
     const q = ["обе́дать", "у́жинать", "за́втракать", "рабо́тать", "встава́ть", "отдыха́ть"][j], v = vf(q); if (!v) return;
     const ok = "Во ско́лько ты " + v.f[1] + "?";
-    push({ id: "U7-nat-vo-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-a-que-hora", grupo: "VO-" + j, items: ["lex:" + v.id], oir: ok, pide: "¿Cuál suena natural?",
+    push({ id: "U7-nat-vo-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-a-que-hora", grupo: "VO-" + j, items: ["lex:" + v.id], oir: ok, pide: "¿Cuál es la correcta?",
       opciones: baraja([ok, "В ско́лько ты " + v.f[1] + "?"], j), correcta: ok, explicacion: ok + " Se dice во ско́лько, con la **о**." });
   });
   [["приходи́ть", "уходи́ть", "домо́й", "Llegas a casa", 7], ["уходи́ть", "приходи́ть", "на рабо́ту", "Te vas al trabajo", 8], ["приходи́ть", "уходи́ть", "на рабо́ту", "Llegas al trabajo", 9], ["уходи́ть", "приходи́ть", "домо́й", "Te vas a casa", 6]].forEach(([a, b, l, es, n], j) => {
@@ -1074,7 +1076,7 @@ function ejerciciosUnidad7() {
   [["за́нятый", "f", "Сего́дня"], ["за́нятый", "m", "За́втра"], ["свобо́дный", "f", "В суббо́ту"], ["свобо́дный", "m", "Ве́чером"]].forEach(([adj, g, cuando], j) => {
     const c = kz(adj).corta, ok = cuando + " я " + c[g] + ".", mal = cuando + " я " + c[g === "f" ? "m" : "f"] + ".";
     push({ id: "U7-nat-zn-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-libre", grupo: "ZN-" + j, items: ["lex:" + lex(adj).id], oir: ok,
-      pide: "Habla " + (g === "f" ? "una mujer" : "un hombre") + ". ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " " + (g === "f" ? "Mujer" : "Hombre") + ": **" + c[g] + "**." });
+      pide: "Habla " + (g === "f" ? "una mujer" : "un hombre") + ". ¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " " + (g === "f" ? "Mujer" : "Hombre") + ": **" + c[g] + "**." });
     push({ id: "U7-oido-zn-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 7, regla: "u7-libre", grupo: "ZO-" + j, items: ["lex:" + lex(adj).id], oir: ok, pide: "Escucha: ¿quién habla?", audio: ok,
       opciones: ["Un hombre", "Una mujer"], correcta: g === "f" ? "Una mujer" : "Un hombre", explicacion: "Sonó **" + c[g] + "**: " + (g === "f" ? "forma de mujer, con **-а**." : "forma de hombre.") });
   });
@@ -1086,7 +1088,7 @@ function ejerciciosUnidad7() {
     [0, 2, 3].forEach((p, k) => {
       const s = SUJ[[0, 2, 4][k]], ok = s[0] + " " + vI.f[s[2]] + " " + pr + " " + forma + ".", mal = s[0] + " " + vI.f[s[2]] + " " + otra + ".";
       const base = { grupo: "IG-" + j + "-" + k, items: ["lex:" + e.id, "lex:" + vI.id] };
-      push(Object.assign({ id: "U7-nat-ig-" + j + "-" + k, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u7-jugar", oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j + k), correcta: ok,
+      push(Object.assign({ id: "U7-nat-ig-" + j + "-" + k, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u7-jugar", oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j + k), correcta: ok,
         explicacion: ok + " " + (pr === "в" ? "Un juego o un deporte: {в} + acusativo." : "Un instrumento: на + prepositivo.") }, base));
       if (k === 0) push(Object.assign({ id: "U7-pq-ig-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 8, regla: "u7-jugar", oir: ok, pide: "¿Por qué " + (pr === "в" ? "{в}" : "на") + "?", grande: ok, audio: ok, audioManual: true,
         opciones: ["Es un juego o un deporte", "Es un instrumento"], correcta: pr === "в" ? "Es un juego o un deporte" : "Es un instrumento", explicacion: pr === "в" ? "Juego o deporte: {в} + acusativo." : "Instrumento: на + prepositivo." }, base, { grupo: "IGP-" + j }));

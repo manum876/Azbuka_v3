@@ -440,7 +440,7 @@ function ejerciciosExamenFinal() {
   G.diag.forEach(([mal, ok, k, regla], j) => add("gramatica", { id: "EF-gd-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, lugar: "diag", regla, grupo: "EFGD-" + j, oir: ok,
     pide: "La frase tiene un error. ¿Qué falla?", grande: mal, opciones: baraja([G.FALLAS[k]].concat(baraja(G.FALLAS.filter((x, i) => i !== k), j).slice(0, 2)), j + 4), correcta: G.FALLAS[k],
     esperadas: [ok], explicacion: ok + " Revisa: " + G.FALLAS[k].charAt(0).toLowerCase() + G.FALLAS[k].slice(1) + "." }));
-  G.natural.forEach(([ok, mal, ex, regla], j) => add("gramatica", { id: "EF-gn-" + j, tipo: "natural", forma: "elegir", lugar: "natural", regla, grupo: "EFGN-" + j, oir: ok, pide: "¿Cuál suena natural?",
+  G.natural.forEach(([ok, mal, ex, regla], j) => add("gramatica", { id: "EF-gn-" + j, tipo: "natural", forma: "elegir", lugar: "natural", regla, grupo: "EFGN-" + j, oir: ok, pide: "¿Cuál es la correcta?",
     opciones: baraja([ok, mal], j + 2), correcta: ok, explicacion: ok + " " + ex }));
   G.porque.forEach(([fr, w, ok, otras, regla], j) => add("gramatica", { id: "EF-gq-" + j, tipo: "porque", forma: "elegir", lugar: "porque", regla, grupo: "EFGQ-" + j, grande: fr, audio: fr, audioManual: true, oir: fr,
     pide: "¿Por qué «" + w + "»?", opciones: baraja([ok].concat(otras), j + 1), correcta: ok, explicacion: fr + " " + ok + "." }));

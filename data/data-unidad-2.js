@@ -99,7 +99,7 @@ const UNIDAD_2 = {
             { ru: "Э́то моя́ подру́га А́нна.", es: "Esta es mi amiga Ana.", por: "Э́то, quién es y el nombre: ningún verbo." }],
           destacado: "Я Лу́кас = Yo (soy) Lucas. Э́то А́нна = Esta (es) Ana.",
           errores: [{ mal: "Я есть Ива́н.", bien: "Я Ива́н.", por: "En presente no se dice есть para «soy»." }],
-          chequeo: [{ pide: "¿Cuál suena natural?", opciones: ["Я студе́нт.", "Я есть студе́нт."], ok: "Я студе́нт.", por: "Sin verbo: я y lo que eres." }] },
+          chequeo: [{ pide: "¿Cuál es la correcta?", opciones: ["Я студе́нт.", "Я есть студе́нт."], ok: "Я студе́нт.", por: "Sin verbo: я y lo que eres." }] },
         { id: "u2-dos-formas", titulo: "Меня́ зову́т Ива́н o я Ива́н",
           texto: "Las dos están bien. Меня́ зову́т Ива́н es la presentación completa; я Ива́н es más corta, como «soy Iván», y se usa mucho al contestar o al presentarse rápido.",
           ejemplos: [
@@ -468,8 +468,11 @@ function ejerciciosUnidad2() {
     if (idx.length && ws.length >= 2) {
       const x = idx[i % idx.length], w = ws[x.k];
       const hueco = f.ru.replace(w, "_____");
+      /* También vale la palabra de otra frase con la misma traducción que encaja en el hueco
+         (28/10/2026: «Я _____ ру́сский язы́к.» → изуча́ю o учу́) */
+      const otrasW = u2Equivalentes(f).map(ru => palabras(ru)).filter(o => o.length === ws.length && o.every((p, j) => j === x.k || p === ws[j])).map(o => o[x.k]).filter(p => p !== w);
       out.push(Object.assign({ id: "U2-comp-" + f.id, tipo: "completar", forma: "escribir", dificultad: 2, pide: "Completa la frase.", grande: hueco, pista: f.es[0], audio: f.ru, audioManual: true,
-        esperadas: [w], idioma: "ru", explicacion: f.ru + " — " + f.es[0] }, base));
+        esperadas: [w].concat(otrasW), idioma: "ru", explicacion: f.ru + " — " + f.es[0] + (otrasW.length ? ". También vale " + otrasW.join(", ") + "." : "") }, base));
     }
     if (f.m >= 2 && i % 2 === 0) {
       out.push(Object.assign({ id: "U2-voz-" + f.id, tipo: "voz", forma: "escribir", voz: true, dificultad: 2, pide: "Dilo en voz alta.", grande: f.ru, pista: f.es[0],
@@ -568,7 +571,7 @@ function ejerciciosUnidad2() {
   });
 
   /* 8. Entender la regla (07/10/2026, PLAN_PROFUNDIZACION.md): ¿qué dices en esta situación?,
-     ¿por qué?, ¿cuál suena natural? y ¿qué oíste? Todo con frases de la unidad. */
+     ¿por qué?, ¿cuál es la correcta? y ¿qué oíste? Todo con frases de la unidad. */
   const RZ = { resp: "Se le habla con respeto", grupo: "Son varias personas", conf: "Hay confianza",
     dormir: "Se dice solo al irse a dormir", llegar: "Es un saludo para llegar", mujer: "Habla una mujer", hombre: "Habla un hombre" };
   const SIT = [
@@ -638,7 +641,7 @@ function ejerciciosUnidad2() {
     if (k < 5) NAT.push({ m: 5, r: "u2-uchit", ok: "Я учу́ " + adj + ".", mal: "Я учу́ " + po + ".", por: "Con учи́ть, el adjetivo: " + adj + "." });
   });
   NAT.forEach((n, i) => out.push({ id: "U2-nat-" + i, tipo: "natural", forma: "elegir", dificultad: 2, modulo: n.m, regla: n.r, grupo: "nat-" + i,
-    lex: n.lex, items: n.lex ? items(n.lex) : [], oir: n.ok, pide: "¿Cuál suena natural?", opciones: baraja([n.ok, n.mal], i + 51), correcta: n.ok, explicacion: n.ok + " " + n.por }));
+    lex: n.lex, items: n.lex ? items(n.lex) : [], oir: n.ok, pide: "¿Cuál es la correcta?", opciones: baraja([n.ok, n.mal], i + 51), correcta: n.ok, explicacion: n.ok + " " + n.por }));
 
   /* Oído: dos formas que se parecen, ¿cuál sonó? */
   const OIDO = [

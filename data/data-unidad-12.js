@@ -276,7 +276,7 @@ const UNIDAD_12 = {
             { ru: "{Кто́-нибудь} зна́ет?", es: "¿Alguien sabe?", por: "Pregunta, quien sea: **-нибудь**." },
             { ru: "Ты {кому́-нибудь} звони́л?", es: "¿Llamaste a alguien?", por: "Pregunta: **-нибудь**, en dativo." }],
           mas: { texto: "La pista: si la cosa ya pasó o está pasando, **-то** (Я что́-то ви́жу, «veo algo»). Si es una pregunta, un pedido o el futuro, **-нибудь** (Ты что́-нибудь хо́чешь?)." },
-          chequeo: [{ pide: "«¿Quieres algo?»", opciones: ["Ты что́-нибудь хо́чешь?", "Ты что́-то хо́чешь?"], ok: "Ты что́-нибудь хо́чешь?", por: "Pregunta: **-нибудь**." }] }
+          chequeo: [{ pide: "«Ayer llamó alguien.»", opciones: ["Вчера́ кто́-то звони́л.", "Вчера́ кто́-нибудь звони́л."], ok: "Вчера́ кто́-то звони́л.", por: "Ya pasó, aunque no sabes quién: **-то**." }] }
       ] },
     { id: "u12m2", n: 2, tipo: "leccion", nPractica: 12, titulo: "Posesivos, свой y э́тот", resumen: "моему́ бра́ту, свою́ ма́му, в э́том до́ме.",
       intro: "мой, твой, наш, ваш y э́тот cambian como los adjetivos: van en el mismo género, número y caso que la palabra que acompañan. Y aparece свой, «su propio», que el español no tiene.",
@@ -1026,7 +1026,7 @@ function ejerciciosUnidad12() {
   const push = o => out.push(o);
   const mez = (a, k) => baraja(a, k + 7);
   const nat = (id, modulo, regla, ok, mal, expl, o) => push(Object.assign({ id: "U12-nat-" + id, tipo: "natural", forma: "elegir", dificultad: 2, modulo, regla, grupo: "NA-" + id, items: [],
-    oir: ok, pide: "¿Cuál suena natural?", opciones: mez([ok, mal], id.length), correcta: ok, explicacion: ok + " " + expl }, o || {}));
+    oir: ok, pide: "¿Cuál es la correcta?", opciones: mez([ok, mal], id.length), correcta: ok, explicacion: ok + " " + expl }, o || {}));
   const pq = (id, modulo, regla, frase, w, ok, otras, expl) => push({ id: "U12-pq-" + id, tipo: "porque", forma: "elegir", dificultad: 2, modulo, regla, grupo: "PQ-" + id, items: [],
     oir: frase, grande: frase, audio: frase, audioManual: true, pide: "¿Por qué «" + w + "»?", opciones: mez([ok].concat(otras), id.length + 3), correcta: ok, explicacion: frase + " " + expl });
   const par = (id, modulo, regla, pide, ok, mal, expl) => push({ id: "U12-par-" + id, tipo: "par", forma: "elegir", dificultad: 2, modulo, regla, grupo: "PA-" + id, items: [],
@@ -1066,8 +1066,8 @@ function ejerciciosUnidad12() {
   desarm("nk-0", 1, "u12-nikto", ["Я", "никого́", "не", "ви́жу."], [["¿A quién? (nadie, en acusativo)", 1], ["¿Qué palabra niega el verbo?", 2]], "никого́ + не + verbo.");
   par("to-0", 1, "u12-to-nibud", "¿Cuál dice que alguien está llamando y no sabes quién?", "Кто́-то звони́т.", "Кто́-нибудь звони́т?", "Hay alguien: **-то**.");
   par("to-1", 1, "u12-to-nibud", "¿Cuál pregunta si alguien (quien sea) sabe?", "Кто́-нибудь зна́ет?", "Кто́-то зна́ет.", "Pregunta: **-нибудь**.");
-  nat("to-0", 1, "u12-to-nibud", "Ты что́-нибудь хо́чешь?", "Ты что́-то хо́чешь?", "En una pregunta: **-нибудь**.");
-  nat("to-1", 1, "u12-to-nibud", "Ты кому́-нибудь звони́л?", "Ты кому́-то звони́л?", "En una pregunta: **-нибудь**.");
+  nat("to-0", 1, "u12-to-nibud", "Вчера́ кто́-то звони́л.", "Вчера́ кто́-нибудь звони́л.", "Ya pasó, aunque no sabes quién: **-то**.");
+  nat("to-1", 1, "u12-to-nibud", "Я что́-то ви́жу.", "Я что́-нибудь ви́жу.", "Está pasando, aunque no sabes qué: **-то**.");
 
   /* ── Módulo 2: posesivos, свой, э́тот ── */
   const MOI2 = A("мой"), SVOI2 = A("свой"), ETOT2 = A("э́тот");
@@ -1082,7 +1082,7 @@ function ejerciciosUnidad12() {
    ["Он", "телефо́н", 3, "Он и́щет ", "его́", "Él busca su teléfono (el de él)."], ["Она́", "кни́га", 3, "Она́ чита́ет ", "её", "Ella lee su libro (el de ella)."]].forEach(([q, ru, c, a, otro, es], j) => {
     const s = S(ru); if (!s || !SVOI2) return; const f = D2.concuerda(SVOI2, s, c), ok = a + (c === 4 && f.startsWith("св") ? "" : "") + f + " " + s.sg[c] + ".", mal = a + otro + " " + s.sg[c] + ".";
     const okF = ok.replace(/ с свое́й/, " со свое́й").replace(/ с своим/, " со свои́м"), malF = mal;
-    nat("sv-" + j, 2, "u12-svoy", okF, malF, "Es de quien hace la acción: свой (" + f + ").", { pide: "«" + es + "» ¿Cuál suena natural?" });
+    nat("sv-" + j, 2, "u12-svoy", okF, malF, "Es de quien hace la acción: свой (" + f + ").", { pide: "«" + es + "» ¿Cuál es la correcta?" });
     if (j < 3) pq("sv-" + j, 2, "u12-svoy", okF, f, "Es de quien hace la acción", ["Es de otra persona", "Es el sujeto de la frase"], "свой: de quien hace la acción.");
   });
   par("sv-0", 2, "u12-svoy", "¿Cuál dice que Iván ama a la esposa de otro hombre?", "Ива́н лю́бит его́ жену́.", "Ива́н лю́бит свою́ жену́.", "его́: de otro hombre. свою́ sería la de Iván.");
@@ -1167,13 +1167,13 @@ function ejerciciosUnidad12() {
   oido("fu-1", 6, "u12-dos-futuros", "За́втра я бу́ду чита́ть кни́гу.", "Escucha. ¿Lo va a terminar?", ["No se sabe: va a estar leyendo", "Sí: lo va a terminar"], "No se sabe: va a estar leyendo", "бу́ду чита́ть: proceso.");
   [["Я на́чал чита́ть.", "Я на́чал прочита́ть.", "Después de нача́ть: proceso."], ["Мы зако́нчили рабо́тать.", "Мы зако́нчили порабо́тать.", "Después de зако́нчить: proceso."], ["Не на́до звони́ть.", "Не на́до позвони́ть.", "Después de не на́до: proceso."], ["Он зако́нчил писа́ть.", "Он зако́нчил написа́ть.", "Después de зако́нчить: proceso."]].forEach(([ok, mal, ex], j) =>
     nat("in-" + j, 6, "u12-inf-imperf", ok, mal, ex));
-  [["Я хочу́ сде́лать зада́ние.", "Я хочу́ де́лать зада́ние.", "Una vez: сде́лать."], ["Мне ну́жно позвони́ть ма́ме.", "Мне ну́жно звони́ть ма́ме.", "Una vez: позвони́ть."]].forEach(([ok, mal, ex], j) => nat("ho-" + j, 6, "u12-hochu", ok, mal, ex));
+  [["Я хочу́ сде́лать зада́ние.", "Я хочу́ де́лать зада́ние.", "Una vez: сде́лать."], ["Мне ну́жно позвони́ть ма́ме.", "Мне ну́жно звони́ть ма́ме.", "Una vez: позвони́ть."]].forEach(([ok, mal, ex], j) => nat("ho-" + j, 6, "u12-hochu", ok, mal, ex, { pide: "Una sola vez. ¿Cuál es la correcta?" }));
   cad("ng-0", 6, "u12-dos-futuros", "Я чита́ю кни́гу.", [["Ahora: mañana la vas a terminar (за́втра).", ["За́втра я прочита́ю кни́гу.", "Я прочита́ю кни́гу за́втра."]], ["Ahora: ayer no la terminaste (eres hombre, вчера́).", ["Вчера́ я не прочита́л кни́гу.", "Я не прочита́л кни́гу вчера́."]]], "Futuro de resultado; не + resultado: no se terminó.");
 
   /* ── Módulo 7: el relato ── */
   [["Ка́ждый день я чита́л газе́ту.", "Ка́ждый день я прочита́л газе́ту.", "Se repite: proceso."], ["Я ча́сто звони́л ма́ме.", "Я ча́сто позвони́л ма́ме.", "ча́сто: proceso."],
    ["Я до́лго писа́л письмо́.", "Я до́лго написа́л письмо́.", "до́лго: proceso."], ["Наконе́ц я вы́учил слова́.", "Наконе́ц я учи́л слова́.", "наконе́ц: resultado."], ["Обы́чно я гото́вил у́жин.", "Обы́чно я пригото́вил у́жин.", "обы́чно: proceso."]].forEach(([ok, mal, ex], j) =>
-    nat("mk-" + j, 7, "u12-marcadores", ok, mal, ex, { pide: "Eres hombre. ¿Cuál suena natural?" }));
+    nat("mk-" + j, 7, "u12-marcadores", ok, mal, ex, { pide: "Eres hombre. ¿Cuál es la correcta?" }));
   pq("mk-0", 7, "u12-marcadores", "Ка́ждый день я чита́л газе́ту.", "чита́л", "Se repite (ка́ждый день): proceso", ["Una vez, terminado: resultado", "Es futuro"], "ка́ждый день pide proceso.");
   par("fi-0", 7, "u12-en-fila", "¿Cuál dice que las acciones fueron una después de la otra?", "Я пообе́дал и отдохну́л.", "Я обе́дал и отдыха́л.", "Resultados en fila.");
   par("fo-0", 7, "u12-fondo", "¿Cuál dice que estabas viendo una película cuando llamó tu hermano?", "Я смотре́л фильм, когда́ позвони́л брат.", "Я посмотре́л фильм, когда́ позвони́л брат.", "Fondo: смотре́л.");
@@ -1198,7 +1198,7 @@ function ejerciciosUnidad12() {
   [["Подожди́те, пожа́луйста.", "Подожди́, пожа́луйста."], ["Прове́рьте, пожа́луйста.", "Прове́рь, пожа́луйста."], ["Сади́тесь, пожа́луйста!", "Сади́сь, пожа́луйста!"]].forEach(([vy, ty], j) =>
     par("tv-" + j, 8, "u12-imp-vy", "Le hablas a un desconocido. ¿Cuál dices?", vy, ty, "Con вы: **-те**."));
   oido("tv-0", 8, "u12-imp-vy", "Позвони́те мне за́втра.", "Escucha. ¿A quién le habla?", ["A varios o de usted (вы)", "A un amigo (ты)"], "A varios o de usted (вы)", "**-те**: вы.");
-  nat("ia-0", 8, "u12-imp-aspecto", "Закро́й окно́, пожа́луйста.", "Закрыва́й окно́, пожа́луйста.", "Un pedido concreto, una vez: закры́ть.");
+  nat("ia-0", 8, "u12-imp-aspecto", "Закро́й окно́, пожа́луйста.", "Закрыва́й окно́, пожа́луйста.", "Un pedido concreto, una vez: закры́ть.", { pide: "Un pedido, una sola vez. ¿Cuál es la correcta?" });
   nat("ia-1", 8, "u12-imp-aspecto", "Звони́ мне ча́сто!", "Позвони́ мне ча́сто!", "Algo que se repite: звони́ть.");
   cad("im-0", 8, "u12-imp-aspecto", "Ты чита́ешь кни́гу.", [["Pídeselo: léela (una vez).", ["Прочита́й кни́гу.", "Прочита́й кни́гу!"]], ["Ahora a varias personas (вы).", ["Прочита́йте кни́гу.", "Прочита́йте кни́гу!"]]], "Una vez: прочита́й; con вы, **-те**.");
   cad("im-1", 8, "u12-imp-ne", "Позвони́ ма́ме.", [["Ahora prohíbelo: no la llames.", ["Не звони́ ма́ме.", "Не звони́ ма́ме!"]], ["Ahora a varias personas (вы).", ["Не звони́те ма́ме.", "Не звони́те ма́ме!"]]], "не + proceso.");

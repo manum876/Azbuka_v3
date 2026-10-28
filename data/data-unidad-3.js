@@ -127,7 +127,7 @@ const UNIDAD_3 = {
           destacado: "Дом = casa, una casa, la casa.",
           mas: { texto: "¿Cómo se sabe si es «una» o «la»? Por la situación. Si alguien señala una casa y dice Э́то дом, es «esta es la casa»; si responde a «¿qué es eso?», es «es una casa». Cuando hace falta precisar, el ruso usa otras palabras, como мой («mi»): мой дом, «mi casa».",
             ejemplos: [{ ru: "Э́то {мой} дом.", es: "Esta es mi casa.", por: "Мой ya dice de quién es: no hace falta nada más." }] },
-          chequeo: [{ pide: "¿Cuál de las dos suena natural en ruso?", opciones: ["Э́то окно́.", "Э́то есть окно́."], ok: "Э́то окно́.", por: "En presente no se dice el verbo «ser»: э́то y la palabra." }] },
+          chequeo: [{ pide: "¿Cuál de las dos es la correcta?", opciones: ["Э́то окно́.", "Э́то есть окно́."], ok: "Э́то окно́.", por: "En presente no se dice el verbo «ser»: э́то y la palabra." }] },
         { id: "u3-tres-generos", titulo: "Tres géneros",
           texto: "En español hay dos géneros; en ruso hay tres: masculino, femenino y **neutro**. El género de cada palabra se aprende mirando la palabra rusa: muchas veces no coincide con el de su traducción.\nUna forma fácil de verlo es con мой («mi»), que tiene una forma para cada género:",
           ejemplos: [
@@ -599,7 +599,7 @@ function ejerciciosUnidad3() {
       const malP = s.g === "f" ? "он" : "она́";
       const mal = "Где " + s.ac + "? — " + malP[0].toUpperCase() + malP.slice(1) + " там.";
       out.push(Object.assign({ id: "U3-nat-" + s.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u3-pronombres", oir: bien,
-        pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], i + 25), correcta: bien,
+        pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], i + 25), correcta: bien,
         explicacion: s.ac + " es " + GENES[s.g] + ": se reemplaza por " + PRON[s.g] + ". Manda el género de la palabra rusa." }, base));
       /* Diagnosticar: el pronombre */
       out.push(Object.assign({ id: "U3-diag-pron-" + s.id, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 9, regla: "u3-pronombres", oir: bien,

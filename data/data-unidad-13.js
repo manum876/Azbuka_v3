@@ -318,7 +318,7 @@ const UNIDAD_13 = {
           errores: [{ mal: "Бы́ло хо́лодно, потому́ что мы не гуля́ли.", bien: "Бы́ло хо́лодно, {поэ́тому} мы не гуля́ли.", por: "La consecuencia va con поэ́тому." }],
           chequeo: [{ pide: "Я уста́л, ___ я лёг спать.", opciones: ["поэ́тому", "потому́ что"], ok: "поэ́тому", por: "Consecuencia: поэ́тому." }] },
         { id: "u13-esli", titulo: "Si y cuando, hablando del futuro",
-          antes: { pide: "«Si hace calor, vamos a la playa.» ¿Cuál?", opciones: ["Е́сли бу́дет тепло́, мы пойдём на пляж.", "Е́сли тепло́, мы пойдём на пляж."], ok: "Е́сли бу́дет тепло́, мы пойдём на пляж.", por: "Si es en el futuro, las dos partes van en futuro." },
+          antes: { pide: "«Si hace calor, vamos a la playa.» ¿Cuál?", opciones: ["Е́сли бу́дет тепло́, мы пойдём на пляж.", "Е́сли бы́ло тепло́, мы пойдём на пляж."], ok: "Е́сли бу́дет тепло́, мы пойдём на пляж.", por: "Si es en el futuro, las dos partes van en futuro." },
           texto: "Con е́сли («si») y когда́ («cuando») hablando del futuro, en ruso las dos partes van en futuro.",
           ejemplos: [
             { ru: "Е́сли {бу́дет} тепло́, мы {пойдём} на пляж.", es: "Si hace calor, vamos a ir a la playa.", por: "Las dos partes en futuro." },
@@ -744,7 +744,7 @@ function ejerciciosUnidad13() {
   /* ── Módulo 9: corrección y autonomía ── */
   U13_CORR_TODO.forEach((c, j) => corr("todo-" + j, 9, c));
   U13_NATURAL.forEach(([ok, mal, es], j) => out.push({ id: "U13-nat-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, grupo: "NA-" + j, items: [], oir: ok,
-    pide: "¿Cuál suena natural? «" + es + "»", opciones: baraja([ok, mal], j), correcta: ok, explicacion: "Así lo dice un ruso: **" + ok + "**" }));
+    pide: "¿Cuál es la correcta? «" + es + "»", opciones: baraja([ok, mal], j), correcta: ok, explicacion: "Así lo dice un ruso: **" + ok + "**" }));
 
   /* ── Módulo 11: la conversación final, como práctica ── */
   out.push({ id: "U13-final", tipo: "final", ampliacion: true, forma: "turnos", dificultad: 3, modulo: 11, grupo: "FIN", items: [], pide: "🗣️ Conversación final", turnos: U13_CONV_FINAL(),
@@ -757,7 +757,7 @@ function ejerciciosUnidad13() {
   const push = o => out.push(o);
   const mez = (a, k) => baraja(a, k + 11);
   const nat = (id, modulo, regla, ok, mal, expl, o) => push(Object.assign({ id: "U13-nat-" + id, tipo: "natural", forma: "elegir", dificultad: 2, modulo, regla, grupo: "NA-" + id, items: [],
-    oir: ok, pide: "¿Cuál suena natural?", opciones: mez([ok, mal], id.length), correcta: ok, explicacion: ok + " " + expl }, o || {}));
+    oir: ok, pide: "¿Cuál es la correcta?", opciones: mez([ok, mal], id.length), correcta: ok, explicacion: ok + " " + expl }, o || {}));
   const pq = (id, modulo, regla, frase, w, ok, otras, expl) => push({ id: "U13-pq-" + id, tipo: "porque", forma: "elegir", dificultad: 2, modulo, regla, grupo: "PQ-" + id, items: [],
     oir: frase, grande: frase, audio: frase, audioManual: true, pide: "¿Por qué «" + w + "»?", opciones: mez([ok].concat(otras), id.length + 3), correcta: ok, explicacion: frase + " " + expl });
   const par = (id, modulo, regla, pide, ok, mal, expl) => push({ id: "U13-par-" + id, tipo: "par", forma: "elegir", dificultad: 2, modulo, regla, grupo: "PA-" + id, items: [],
@@ -796,8 +796,8 @@ function ejerciciosUnidad13() {
   cad("ti-0", 3, "u13-tres-tiempos", "Сего́дня я рабо́таю до́ма.", [["Ahora: ayer (eres hombre, вчера́).", ["Вчера́ я рабо́тал до́ма.", "Я рабо́тал до́ма вчера́."]], ["Ahora: mañana (за́втра).", ["За́втра я бу́ду рабо́тать до́ма.", "Я бу́ду рабо́тать до́ма за́втра."]]], "Los tres tiempos.");
 
   /* ── Módulo 4: contar una experiencia ── */
-  [["Е́сли бу́дет тепло́, мы пойдём на пляж.", "Е́сли тепло́, мы пойдём на пляж."], ["Когда́ я прие́ду в Москву́, я тебе́ позвоню́.", "Когда́ я приезжа́ю в Москву́, я тебе́ позвоню́."],
-   ["Когда́ я зако́нчу, я тебе́ напишу́.", "Когда́ я зака́нчиваю, я тебе́ напишу́."], ["Е́сли у меня́ бу́дет вре́мя, я позвоню́.", "Е́сли у меня́ есть вре́мя, я позвоню́."]].forEach(([ok, mal], j) =>
+  [["Е́сли бу́дет тепло́, мы пойдём на пляж.", "Е́сли бы́ло тепло́, мы пойдём на пляж."], ["Когда́ я прие́ду в Москву́, я тебе́ позвоню́.", "Когда́ я приезжа́ю в Москву́, я тебе́ позвоню́."],
+   ["Когда́ я зако́нчу, я тебе́ напишу́.", "Когда́ я зака́нчиваю, я тебе́ напишу́."], ["Е́сли у меня́ бу́дет вре́мя, я позвоню́.", "Е́сли у меня́ бы́ло вре́мя, я позвоню́."]].forEach(([ok, mal], j) =>
     nat("es-" + j, 4, "u13-esli", ok, mal, "Hablando del futuro, futuro en las dos partes."));
   pq("es-0", 4, "u13-esli", "Е́сли бу́дет тепло́, мы пойдём на пляж.", "бу́дет", "Habla del futuro: futuro en las dos partes", ["Es pasado", "Es una pregunta"], "е́сли + futuro.");
   diag("es-0", 4, "u13-esli", "Когда́ я приезжа́ю в Москву́, я тебе́ позвоню́.", "Когда́ я прие́ду в Москву́, я тебе́ позвоню́.", "El tiempo: hablando del futuro, va futuro", ["El caso de Москва́", "Falta е́сли"], "когда́ + futuro.");
@@ -812,7 +812,7 @@ function ejerciciosUnidad13() {
   pq("se-0", 4, "u13-sentir", "Нам бы́ло ве́село.", "Нам", "Quien siente va en dativo", ["Es el sujeto", "Es el caso de с"], "Como мне хо́лодно: dativo.");
 
   /* ── Módulo 5: opinar ── */
-  nat("ac-0", 5, "u13-acuerdo", "Я согла́сна.", "Я согла́сный.", "«Estoy de acuerdo»: la forma corta, en femenino.", { pide: "Eres mujer. ¿Cuál suena natural?" });
+  nat("ac-0", 5, "u13-acuerdo", "Я согла́сна.", "Я согла́сный.", "«Estoy de acuerdo»: la forma corta, en femenino.", { pide: "Eres mujer. ¿Cuál es la correcta?" });
   nat("ac-1", 5, "u13-acuerdo", "Мы согла́сны.", "Мы согла́сен.", "Plural: согла́сны.");
   nat("ac-2", 5, "u13-acuerdo", "Я согла́сен с тобо́й.", "Я согла́сен с ты.", "с + instrumental: с тобо́й.");
   nat("op-0", 5, "u13-opinion", "Мне ка́жется, что э́то хорошо́.", "Я ка́жется, что э́то хорошо́.", "ка́жется va con dativo.");

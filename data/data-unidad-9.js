@@ -740,7 +740,7 @@ function ejerciciosUnidad9() {
   [["рабо́тать", " до́ма"], ["чита́ть", " кни́гу"], ["смотре́ть", " фильм"], ["гуля́ть", " в па́рке"], ["гото́вить", " у́жин"], ["слу́шать", " му́зыку"], ["отдыха́ть", ""], ["изуча́ть", " ру́сский"]].forEach(([vk, c], j) => {
     const v = VF(vk), p = PERS[j % 4], g = p[1] === 0 ? "m" : p[1] === 2 ? "f" : "pl";
     const fu = "За́втра " + low(p[0]) + " " + budu[p[1]] + " " + v.ac + c + ".", pa = "Вчера́ " + low(p[0]) + " " + v.pas[g] + c + ".", pr = "Сего́дня " + low(p[0]) + " " + v.pres[p[1]] + c + ".";
-    push({ id: "U9-nat-t-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 1, regla: "u9-tres-tiempos", grupo: "NT-" + j, items: ["lex:" + v.id], oir: fu, pide: "¿Cuál suena natural?",
+    push({ id: "U9-nat-t-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 1, regla: "u9-tres-tiempos", grupo: "NT-" + j, items: ["lex:" + v.id], oir: fu, pide: "¿Cuál es la correcta?",
       opciones: baraja([fu, "За́втра " + low(p[0]) + " " + v.pas[g] + c + "."], j), correcta: fu, explicacion: fu + " Con за́втра va el futuro: бу́ду + infinitivo." });
     const k = j % 3, fr = [pa, pr, fu][k];
     push({ id: "U9-oido-t-" + j, tipo: "oido", forma: "elegir", dificultad: 2, modulo: 1, regla: "u9-tres-tiempos", grupo: "OT-" + j, items: ["lex:" + v.id], oir: fr, pide: "Escucha: ¿pasado, presente o futuro?", audio: fr,
@@ -754,12 +754,12 @@ function ejerciciosUnidad9() {
   [["рабо́тать", " до́ма"], ["чита́ть", " газе́ту"], ["гото́вить", " у́жин"], ["гуля́ть", " в па́рке"], ["отдыха́ть", ""], ["смотре́ть", " телеви́зор"], ["слу́шать", " ра́дио"], ["изуча́ть", " ру́сский"], ["учи́ться", " в Москве́"], ["писа́ть", " письмо́"]].forEach(([vk, c], j) => {
     const v = VF(vk), p = PERS[j % 6], ok = p[0] + " " + budu[p[1]] + " " + v.ac + c + ".", mal = p[0] + " " + budu[p[1]] + " " + v.pres[p[1]] + c + ".";
     const base = { grupo: "BI-" + j, items: ["lex:" + v.id], oir: ok };
-    push(Object.assign({ id: "U9-nat-bi-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 2, regla: "u9-budu-inf", pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push(Object.assign({ id: "U9-nat-bi-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 2, regla: "u9-budu-inf", pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Después de бу́ду va el infinitivo: " + v.ac + "." }, base));
     if (j < 8) push(Object.assign({ id: "U9-diag-bi-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 2, regla: "u9-budu-inf", pide: "La frase tiene un error. ¿Qué falla?", grande: mal,
       opciones: ["El segundo verbo: va en infinitivo", "La forma de бу́ду", "El lugar o el objeto"], correcta: "El segundo verbo: va en infinitivo", esperadas: [ok], explicacion: ok }, base, { grupo: "BId-" + j }));
     const p2 = PERS[(j + 1) % 6];
-    if (p2[1] !== p[1]) push(Object.assign({ id: "U9-nat-bf-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 2, regla: "u9-budu-formas", pide: "¿Cuál suena natural?",
+    if (p2[1] !== p[1]) push(Object.assign({ id: "U9-nat-bf-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 2, regla: "u9-budu-formas", pide: "¿Cuál es la correcta?",
       opciones: baraja([p2[0] + " " + budu[p2[1]] + " " + v.ac + c + ".", p2[0] + " " + budu[p[1]] + " " + v.ac + c + "."], j + 1), correcta: p2[0] + " " + budu[p2[1]] + " " + v.ac + c + ".",
       explicacion: "Con " + low(p2[0]) + ", **" + budu[p2[1]] + "**." }, base, { grupo: "BF-" + j }));
   });
@@ -799,9 +799,9 @@ function ejerciciosUnidad9() {
       explicacion: res + " Una acción que va a terminar: " + R.fut[0] + ", sin бу́ду." }, base));
     push(Object.assign({ id: "U9-par-fp-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-cual", grupo: "FP-" + j, oir: pro, pide: "«" + esP + "». ¿Cuál dices?", opciones: baraja([pro, proMal], j + 1), correcta: pro,
       explicacion: pro + " " + marca + ": " + (/ка́ждый/.test(marca) ? "se repite" : "cuánto dura") + ", proceso." }, base));
-    push(Object.assign({ id: "U9-nat-fb-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-resultado", grupo: "FB-" + j, oir: res, pide: "¿Cuál suena natural?", opciones: baraja([res, resB], j + 2), correcta: res,
+    push(Object.assign({ id: "U9-nat-fb-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-resultado", grupo: "FB-" + j, oir: res, pide: "¿Cuál es la correcta?", opciones: baraja([res, resB], j + 2), correcta: res,
       explicacion: res + " El de resultado no va con бу́ду: su presente ya es futuro." }, base));
-    push(Object.assign({ id: "U9-nat-fm-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-cual", grupo: "FM-" + j, oir: pro, pide: "¿Cuál suena natural?", opciones: baraja([pro, proMal], j + 3), correcta: pro,
+    push(Object.assign({ id: "U9-nat-fm-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-cual", grupo: "FM-" + j, oir: pro, pide: "¿Cuál es la correcta?", opciones: baraja([pro, proMal], j + 3), correcta: pro,
       explicacion: pro + " Con " + marca + " va бу́ду + infinitivo." }, base));
     if (!dudoso) push(Object.assign({ id: "U9-pq-fr-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-fut-cual", grupo: "FR-" + j, oir: res, pide: "¿Por qué " + R.fut[0] + " y no бу́ду " + I.ac + "?", grande: res, audio: res, audioManual: true,
       opciones: ["Una acción que va a terminar, una vez", "Cuánto va a durar o lo que se va a repetir"], correcta: "Una acción que va a terminar, una vez", explicacion: res + " Resultado: " + R.fut[0] + "." }, base));
@@ -849,14 +849,14 @@ function ejerciciosUnidad9() {
   });
   [["нача́ть", "рабо́тать", "изуча́ть", "Мы"], ["зако́нчить", "чита́ть", "рабо́тать", "Я"]].forEach(([rk, inf, inf2, s], j) => {
     const R = VF(rk), i = s === "Я" ? 0 : 3, ok = s + " " + R.fut[i] + " " + inf + ".", mal = s + " " + R.fut[i] + " " + VF(inf).pres[i] + ".";
-    push({ id: "U9-nat-pn-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-pares-nuevos", grupo: "PN-" + j, items: ["lex:" + R.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U9-nat-pn-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u9-pares-nuevos", grupo: "PN-" + j, items: ["lex:" + R.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Después de " + rk + " va el infinitivo de proceso." });
   });
 
   /* ── Módulo 4: быть en futuro y el clima ── */
   [["Я", 0, "до́ма"], ["Она́", 2, "на рабо́те"], ["Мы", 3, "в Москве́"], ["Они́", 5, "в рестора́не"], ["Ты", 1, "в о́фисе"], ["Вы", 4, "в па́рке"]].forEach(([s, i, l], j) => {
     const ok = "За́втра " + low(s) + " " + budu[i] + " " + l + ".", mal = "За́втра " + low(s) + " " + budu[i] + " быть " + l + ".";
-    push({ id: "U9-nat-by-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-byt-tres", grupo: "NY-" + j, items: [], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U9-nat-by-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-byt-tres", grupo: "NY-" + j, items: [], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " бу́ду ya es «voy a estar»: no se agrega быть." });
     const g = i === 0 ? "m" : i === 2 ? "f" : "pl", pa = "Вчера́ " + low(s) + " " + VF("быть").pas[i === 1 ? "m" : g] + " " + l + ".";
     const fut = j % 2 === 0;
@@ -869,19 +869,19 @@ function ejerciciosUnidad9() {
   [["дождь", "За́втра бу́дет дождь.", "За́втра бу́дут дождь."], ["со́лнечно", "За́втра бу́дет со́лнечно.", "За́втра бы́ло со́лнечно."], ["о́блачно", "В суббо́ту бу́дет о́блачно.", "В суббо́ту бу́ду о́блачно."],
    ["тума́н", "У́тром бу́дет тума́н.", "У́тром бу́дут тума́н."], ["жара́", "Ле́том бу́дет жара́.", "Ле́том была́ бы жара́."], ["моро́з", "Зимо́й бу́дет моро́з.", "Зимо́й бу́дем моро́з."]].forEach(([w, ok, mal], j) => {
     if (/ бы /.test(mal)) mal = "Ле́том бу́ду жара́.";
-    push({ id: "U9-nat-cl-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-clima", grupo: "CL-" + j, items: ["lex:" + lex(w).id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U9-nat-cl-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-clima", grupo: "CL-" + j, items: ["lex:" + lex(w).id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Para el clima en futuro, siempre бу́дет." });
   });
   [[2, "два"], [4, "четы́ре"], [5, "пять"], [10, "де́сять"], [20, "два́дцать"], [3, "три"]].forEach(([n, num], j) => {
     const c = casosById(lex("гра́дус").id), f = n <= 4 ? (c.conteo || c.sg[1]) : c.pl[1], otra = n <= 4 ? c.pl[1] : (c.conteo || c.sg[1]), ok = "Бу́дет " + num + " " + f + ".";
     push({ id: "U9-pq-gr-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-clima", grupo: "GR-" + j, items: ["lex:" + lex("гра́дус").id], oir: ok, pide: "¿Por qué «" + f + "»?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Va después de 2, 3 o 4", "Va después de 5 o más"], correcta: n <= 4 ? "Va después de 2, 3 o 4" : "Va después de 5 o más", explicacion: ok + " гра́дус se cuenta como час: " + (n <= 4 ? "гра́дуса" : "гра́дусов") + "." });
-    push({ id: "U9-nat-gr-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-clima", grupo: "GRn-" + j, items: [], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, "Бу́дет " + num + " " + otra + "."], j), correcta: ok,
+    push({ id: "U9-nat-gr-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-clima", grupo: "GRn-" + j, items: [], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, "Бу́дет " + num + " " + otra + "."], j), correcta: ok,
       explicacion: ok });
   });
   [["о́тпуск", "бу́дет"], ["пра́здник", "бу́дет"], ["встре́ча", "бу́дет"], ["кани́кулы", "бу́дут"]].forEach(([n0, f], j) => {
     const ok = "За́втра у меня́ " + f + " " + n0 + ".", mal = "За́втра у меня́ " + (f === "бу́дет" ? "бу́ду" : "бу́дет") + " " + n0 + ".";
-    push({ id: "U9-nat-um-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-u-menya-budet", grupo: "UM-" + j, items: [], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U9-nat-um-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-u-menya-budet", grupo: "UM-" + j, items: [], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " бу́дет concuerda con " + n0 + (f === "бу́дут" ? ", que es plural." : ", no con quien habla.") });
     push({ id: "U9-pq-um-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 4, regla: "u9-u-menya-budet", grupo: "UMp-" + j, items: [], oir: ok, pide: "¿Por qué " + f + "?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Concuerda con " + n0, "Concuerda con quien habla"], correcta: "Concuerda con " + n0, explicacion: ok + " " + (f === "бу́дут" ? n0 + " es plural: бу́дут." : "Una cosa: бу́дет.") });
@@ -895,7 +895,7 @@ function ejerciciosUnidad9() {
     const f = cuenta(w, n), otra = cuenta(w, n <= 4 ? 5 : 2), ok = "че́рез " + NUMS[n] + " " + f, fr = "Я бу́ду до́ма " + ok + ".";
     push({ id: "U9-pq-ch-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 5, regla: "u9-cherez", grupo: "CH-" + j, items: ["lex:" + lex("че́рез").id], oir: fr, pide: "¿Por qué «" + f + "»?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Va después de 2, 3 o 4", "Va después de 5 o más"], correcta: n <= 4 ? "Va después de 2, 3 o 4" : "Va después de 5 o más", explicacion: ok + ": la misma cuenta que con наза́д." });
-    push({ id: "U9-nat-ch-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u9-cherez", grupo: "CHn-" + j, items: [], oir: fr, pide: "¿Cuál suena natural?",
+    push({ id: "U9-nat-ch-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u9-cherez", grupo: "CHn-" + j, items: [], oir: fr, pide: "¿Cuál es la correcta?",
       opciones: baraja([fr, j % 2 ? "Я бу́ду до́ма " + NUMS[n] + " " + f + " че́рез." : "Я бу́ду до́ма че́рез " + NUMS[n] + " " + otra + "."], j), correcta: fr,
       explicacion: fr + " " + (j % 2 ? "че́рез va adelante." : (n <= 4 ? "Con 2, 3 y 4: " : "De 5 en adelante: ") + f + ".") });
     if (j % 2 === 0) push({ id: "U9-par-ch-" + j, tipo: "par", forma: "elegir", dificultad: 1, modulo: 5, regla: "u9-cherez", grupo: "CHp-" + j, items: [], oir: ok,
@@ -910,7 +910,7 @@ function ejerciciosUnidad9() {
   });
   [["на сле́дующей неде́ле", "в сле́дующей неде́ле"], ["в сле́дующем году́", "на сле́дующем году́"], ["в бу́дущем году́", "на бу́дущем году́"]].forEach(([ok, mal], j) => {
     const fr = t => cap(t) + " я бу́ду в Москве́.";
-    push({ id: "U9-nat-fo-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u9-formulas", grupo: "FO-" + j, items: [], oir: fr(ok), pide: "¿Cuál suena natural?", opciones: baraja([fr(ok), fr(mal)], j), correcta: fr(ok),
+    push({ id: "U9-nat-fo-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u9-formulas", grupo: "FO-" + j, items: [], oir: fr(ok), pide: "¿Cuál es la correcta?", opciones: baraja([fr(ok), fr(mal)], j), correcta: fr(ok),
       explicacion: fr(ok) + " " + (j === 0 ? "Con неде́ля va на." : "Con год va {в}.") });
   });
   [["когда́-нибудь", "когда́-то", "Algún día voy a vivir en Moscú", "Когда́-нибудь я бу́ду жить в Москве́."], ["когда́-то", "когда́-нибудь", "En otro tiempo viví en Moscú", "Когда́-то я жил в Москве́."]].forEach(([ok, otro, es, fr], j) => {
@@ -925,7 +925,7 @@ function ejerciciosUnidad9() {
     const I = VF(ik), s = ["Я", "Ты", "Она́", "Мы"][[0, 1, 2, 3].indexOf(i)] || "Я", v1 = inf.split(" ")[0], V1 = VF(v1);
     const ok = s + " " + I.pres[i] + " " + inf + ".", malW = V1.pres ? V1.pres[i] : V1.fut[i], mal = s + " " + I.pres[i] + " " + [malW].concat(inf.split(" ").slice(1)).join(" ") + ".";
     const base = { grupo: "IN-" + j, items: ["lex:" + I.id], oir: ok };
-    push(Object.assign({ id: "U9-nat-in-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u9-intencion", pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push(Object.assign({ id: "U9-nat-in-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u9-intencion", pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Después de " + I.pres[i] + " va el infinitivo." }, base));
     if (j < 5) push(Object.assign({ id: "U9-pq-in-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 6, regla: "u9-intencion", pide: "¿Por qué " + v1 + " y no " + malW + "?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Después de " + I.pres[i] + " va el infinitivo", "Es el pasado de " + v1], correcta: "Después de " + I.pres[i] + " va el infinitivo", explicacion: ok }, base, { grupo: "INp-" + j }));
@@ -940,7 +940,7 @@ function ejerciciosUnidad9() {
   [["кино́", "п"], ["парк", "п"], ["магази́н", "п"], ["Москва́", "е"], ["Мадри́д", "е"], ["Пари́ж", "е"]].forEach(([n0, m], j) => {
     const L = lugar(n0), p = PERS[j % 4], i = p[1], forms = m === "п" ? poidu : poedu, ok = p[0] + " " + forms[i] + " в " + L.acc + ".";
     const base = { grupo: "MV-" + j, items: ["lex:" + L.id], oir: ok };
-    push(Object.assign({ id: "U9-nat-mv-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u9-poidu", pide: "¿Cuál suena natural?",
+    push(Object.assign({ id: "U9-nat-mv-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u9-poidu", pide: "¿Cuál es la correcta?",
       opciones: baraja([ok, p[0] + " " + budu[i] + " " + (m === "п" ? "идти́" : "е́хать") + " в " + L.acc + "."], j), correcta: ok, explicacion: ok + " Para un plan, " + forms[i] + ", no бу́ду + идти́ / е́хать." }, base));
     push(Object.assign({ id: "U9-pq-mv-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 7, regla: "u9-poidu", pide: "¿Por qué " + forms[i] + "?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Va a ir en un vehículo", "Va a ir a pie"], correcta: m === "е" ? "Va a ir en un vehículo" : "Va a ir a pie", explicacion: ok + " " + (m === "е" ? "пое́хать: en un vehículo." : "пойти́: a pie.") }, base, { grupo: "MVp-" + j }));
@@ -949,7 +949,7 @@ function ejerciciosUnidad9() {
       push(Object.assign({ id: "U9-par-mv-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 7, regla: "u9-budu-v-poedu-v", grupo: "MVr-" + j, oir: j % 2 ? r1 : ok,
         pide: j % 2 ? "¿Cuál dice dónde va a estar?" : "¿Cuál dice adónde va a ir?", opciones: baraja([ok, r1], j), correcta: j % 2 ? r1 : ok,
         explicacion: (j % 2 ? r1 + " бу́ду + dónde: prepositivo." : ok + " " + forms[i] + " + adónde: acusativo.") }, base));
-      push(Object.assign({ id: "U9-nat-mvc-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u9-budu-v-poedu-v", grupo: "MVc-" + j, oir: ok, pide: "¿Cuál suena natural?",
+      push(Object.assign({ id: "U9-nat-mvc-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u9-budu-v-poedu-v", grupo: "MVc-" + j, oir: ok, pide: "¿Cuál es la correcta?",
         opciones: baraja([ok, p[0] + " " + forms[i] + " в " + L.prep + "."], j + 1), correcta: ok, explicacion: ok + " Adónde: acusativo." }, base));
       if (j >= 3) push(Object.assign({ id: "U9-diag-mv-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 7, regla: "u9-budu-v-poedu-v", grupo: "MVd-" + j, oir: ok, pide: "La frase tiene un error. ¿Qué falla?",
         grande: p[0] + " " + forms[i] + " в " + L.prep + ".", opciones: ["El caso del lugar", "El verbo", "Falta бу́ду"], correcta: "El caso del lugar", esperadas: [ok], explicacion: ok + " Con " + forms[i] + ", adónde: acusativo." }, base));
@@ -957,7 +957,7 @@ function ejerciciosUnidad9() {
   });
   [["по́езд", "Мадри́д"], ["самолёт", "Москва́"], ["маши́на", "Пари́ж"], ["мотоци́кл", "Рим"]].forEach(([tr, d], j) => {
     const T = lugar(tr), D = lugar(d), ok = "Я пое́ду в " + D.acc + " на " + T.prep + ".", mal = "Я пое́ду в " + D.acc + " на " + T.acc + ".";
-    push({ id: "U9-nat-tr-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u9-transporte", grupo: "TRn-" + j, items: ["lex:" + T.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U9-nat-tr-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u9-transporte", grupo: "TRn-" + j, items: ["lex:" + T.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " En qué vas: на + prepositivo." });
     push({ id: "U9-pq-tr-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 7, regla: "u9-transporte", grupo: "TRp-" + j, items: ["lex:" + T.id], oir: ok, pide: "¿Por qué «на " + T.prep + "»?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Es en qué va: на + prepositivo", "Es adónde va: acusativo"], correcta: "Es en qué va: на + prepositivo", explicacion: ok });
@@ -971,7 +971,7 @@ function ejerciciosUnidad9() {
   /* ── Módulo 8: preguntas y когда́ + futuro ── */
   [["зако́нчить", "зака́нчивать", "позвоню́", "Cuando termine, llamo"], ["верну́ться", "возвраща́ться", "бу́ду гото́вить", "Cuando vuelva, voy a cocinar"], ["прочита́ть", "чита́ть", "позвоню́", "Cuando termine de leer, llamo"], ["купи́ть", "покупа́ть", "верну́сь", "Cuando compre, vuelvo"]].forEach(([rk, ik, seg, es], j) => {
     const R = VF(rk), I = VF(ik), ok = "Когда́ я " + R.fut[0] + ", я " + seg + ".", mal = "Когда́ я " + I.pres[0] + ", я " + seg + ".";
-    push({ id: "U9-nat-kg-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u9-kogda-fut", grupo: "KG-" + j, items: ["lex:" + R.id], oir: ok, pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U9-nat-kg-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u9-kogda-fut", grupo: "KG-" + j, items: ["lex:" + R.id], oir: ok, pide: "«" + es + "». ¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Lo que todavía no pasó va en futuro: " + R.fut[0] + "." });
     push({ id: "U9-pq-kg-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 8, regla: "u9-kogda-fut", grupo: "KGp-" + j, items: ["lex:" + R.id], oir: ok, pide: "¿Por qué " + R.fut[0] + " después de когда́?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Todavía no pasó: futuro", "Pasa ahora: presente"], correcta: "Todavía no pasó: futuro", explicacion: ok + " Donde el español dice «cuando termine», el ruso usa el futuro." });
@@ -988,7 +988,7 @@ function ejerciciosUnidad9() {
     const imp = { "зако́нчить": "зака́нчивать", "поза́втракать": "за́втракать", "купи́ть": "покупа́ть", "написа́ть": "писа́ть", "пригото́вить": "гото́вить", "сде́лать": "де́лать", "пойти́": "идти́", "верну́ться": "возвраща́ться", "посмотре́ть": "смотре́ть", "отдохну́ть": "отдыха́ть" };
     const mal = "Снача́ла я бу́ду " + imp[a] + oa + ", пото́м бу́ду " + imp[b] + ob + ".";
     const base = { grupo: "OR-" + j, items: ["lex:" + A.id, "lex:" + B.id], oir: ok };
-    push(Object.assign({ id: "U9-nat-or-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u9-orden-fut", pide: "Un plan en orden. ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push(Object.assign({ id: "U9-nat-or-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u9-orden-fut", pide: "Un plan en orden. ¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Una cosa después de otra, cada una terminada: futuro de resultado." }, base));
     if (j < 4) push(Object.assign({ id: "U9-cad-or-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 9, regla: "u9-orden-fut", pide: "Cambia la frase paso a paso.", base: "Я " + A.fut[0] + oa + ".",
       pasos: [{ pide: "Agrega qué vas a hacer después (пото́м + " + b + ").", esperadas: [ "Я " + A.fut[0] + oa + ", пото́м " + B.fut[0] + ob + ".", "Я " + A.fut[0] + oa + ", а пото́м " + B.fut[0] + ob + ".", "Я " + A.fut[0] + oa + " и пото́м " + B.fut[0] + ob + ".", "Я " + A.fut[0] + oa + ", пото́м я " + B.fut[0] + ob + "."] },
@@ -997,7 +997,7 @@ function ejerciciosUnidad9() {
   });
   [["Я успе́ю.", "Me va a dar el tiempo."], ["Я не успе́ю.", "No voy a llegar."]].forEach(([ru, es], j) => {
     const mal = j ? "Я не успева́ю за́втра." : "Я бу́ду успе́ть.";
-    push({ id: "U9-nat-us-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u9-orden-fut", grupo: "US-" + j, items: ["lex:" + lex("успе́ть").id], oir: ru, pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ru, mal], j), correcta: ru,
+    push({ id: "U9-nat-us-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u9-orden-fut", grupo: "US-" + j, items: ["lex:" + lex("успе́ть").id], oir: ru, pide: "«" + es + "». ¿Cuál es la correcta?", opciones: baraja([ru, mal], j), correcta: ru,
       explicacion: ru + " успе́ть es de resultado: успе́ю ya es futuro." });
   });
 
@@ -1006,7 +1006,7 @@ function ejerciciosUnidad9() {
    ["взять", " па́спорт", "брать", "Voy a llevar el pasaporte"], ["посети́ть", " музе́й", "посеща́ть", "Voy a visitar el museo"], ["сфотографи́ровать", " го́ры", "фотографи́ровать", "Le voy a sacar una foto a las montañas"]].forEach(([rk, o, ik, es], j) => {
     const R = VF(rk), ok = "Я " + R.fut[0] + o + ".", mal = "Я бу́ду " + R.ac + o + ".";
     const base = { grupo: "VP-" + j, items: ["lex:" + R.id], oir: ok };
-    push(Object.assign({ id: "U9-nat-vp-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 10, regla: "u9-viaje-prep", pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push(Object.assign({ id: "U9-nat-vp-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 10, regla: "u9-viaje-prep", pide: "«" + es + "». ¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " El de resultado, sin бу́ду: " + R.fut[0] + "." }, base));
     push(Object.assign({ id: "U9-asp-vp-" + j, tipo: "aspecto", forma: "escribir", dificultad: 3, modulo: 10, regla: "u9-viaje-prep", pide: "Escribe en ruso: «" + es + "».", audio: ok, audioManual: true, esperadas: [ok], idioma: "ru", explicacion: ok }, base, { grupo: "VPw-" + j }));
     if (j % 2 === 0) push(Object.assign({ id: "U9-diag-vp-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 10, regla: "u9-viaje-prep", pide: "La frase tiene un error. ¿Qué falla?", grande: mal,

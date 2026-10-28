@@ -751,17 +751,17 @@ function ejerciciosUnidad10() {
     push({ id: "U10-pq-c-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 1, regla: "u10-seis-casos", grupo: "PC-" + j, items: ["lex:" + p.id], oir: fr[0], pide: "¿Por qué " + fr[2] + "?", grande: fr[0], audio: fr[0], audioManual: true,
       opciones: baraja([QUIEN6[fr[1]]].concat(baraja(ops.filter(x => x !== QUIEN6[fr[1]]), j).slice(0, 2)), j), correcta: QUIEN6[fr[1]], explicacion: fr[0] + " " + u10Cambio(p, fr[1]) });
     const ok = "Я гуля́ю с " + p.ins + ".", mal = "Я гуля́ю с " + p.dat + ".";
-    if (p.ins !== p.dat) push({ id: "U10-nat-c-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 1, regla: "u10-relacion", grupo: "NC-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál suena natural?",
+    if (p.ins !== p.dat) push({ id: "U10-nat-c-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 1, regla: "u10-relacion", grupo: "NC-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál es la correcta?",
       opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " Con quién: instrumental. " + u10Cambio(p, "ins") });
   });
 
   /* ── Módulo 2: tener, de quién, terminaciones, у + persona ── */
   PP.forEach((p, j) => {
     const c = C[(j + 1) % C.length], ok = "У " + p.gen + " есть " + c.nom + ".", mal = "У " + p.nom + " есть " + c.nom + ".";
-    if (j < 10) push({ id: "U10-nat-t-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 2, regla: "u10-tener", grupo: "NT-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál suena natural?",
+    if (j < 10) push({ id: "U10-nat-t-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 2, regla: "u10-tener", grupo: "NT-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál es la correcta?",
       opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " у + genitivo: " + u10Cambio(p, "gen") });
     const d = "Э́то " + c.nom + " " + p.gen + ".", dm = "Э́то " + c.nom + " " + p.nom + ".";
-    if (j % 2 === 0) push({ id: "U10-nat-d-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 2, regla: "u10-de-quien", grupo: "ND-" + j, items: ["lex:" + p.id], oir: d, pide: "¿Cuál suena natural?",
+    if (j % 2 === 0) push({ id: "U10-nat-d-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 2, regla: "u10-de-quien", grupo: "ND-" + j, items: ["lex:" + p.id], oir: d, pide: "¿Cuál es la correcta?",
       opciones: baraja([d, dm], j + 1), correcta: d, explicacion: d + " El dueño, después y en genitivo: " + u10Cambio(p, "gen") });
   });
   [["сестра́", ["ма́ма", "А́нна"]], ["Ма́ша", ["ма́ма", "па́па"]], ["кни́га", ["ба́бушка", "су́мка"]], ["Ива́н", ["брат", "друг"]], ["учи́тель", ["слова́рь", "учи́тель"]], ["компью́тер", ["телефо́н", "брат"]]].forEach(([w, ej], j) => {
@@ -777,7 +777,7 @@ function ejerciciosUnidad10() {
   });
   [["ба́бушка", "en lo de la abuela"], ["брат", "en lo de mi hermano"], ["врач", "en el médico"], ["ма́ма", "en lo de mamá"]].forEach(([w, es], j) => {
     const s = S(w), ok = "Я у " + s.gen + ".", mal = "Я в " + s.prep + ".";
-    push({ id: "U10-nat-u-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 2, regla: "u10-u-kogo", grupo: "NU-" + j, items: ["lex:" + s.id], oir: ok, pide: "«Estoy " + es + "». ¿Cuál suena natural?",
+    push({ id: "U10-nat-u-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 2, regla: "u10-u-kogo", grupo: "NU-" + j, items: ["lex:" + s.id], oir: ok, pide: "«Estoy " + es + "». ¿Cuál es la correcta?",
       opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " En lo de alguien: у + genitivo." });
   });
   [["А́нна", "маши́на"], ["Ива́н", "соба́ка"]].forEach(([w, c], j) => {
@@ -791,7 +791,7 @@ function ejerciciosUnidad10() {
   C.forEach((c, j) => {
     if (c.nom === c.gen) return;
     const ok = "У меня́ нет " + c.gen + ".", mal = "У меня́ нет " + c.nom + ".";
-    push({ id: "U10-nat-n-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 3, regla: "u10-net", grupo: "NN-" + j, items: ["lex:" + c.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-n-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 3, regla: "u10-net", grupo: "NN-" + j, items: ["lex:" + c.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Después de нет, genitivo: " + u10Cambio(c, "gen") });
     if (j % 2 === 0) push({ id: "U10-diag-n-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 3, regla: "u10-net", grupo: "DN-" + j, items: ["lex:" + c.id], oir: ok, pide: "Quieres decir que no tienes. ¿Qué falla?",
       grande: "У меня́ есть не " + c.nom + ".", opciones: ["Para «no tengo»: нет + genitivo", "Falta у меня́", "El orden"], correcta: "Para «no tengo»: нет + genitivo", esperadas: [ok], explicacion: ok });
@@ -802,7 +802,7 @@ function ejerciciosUnidad10() {
   });
   ["маши́на", "соба́ка", "кни́га", "кварти́ра"].forEach((w, j) => {
     const c = S(w), ok = "Вчера́ у меня́ не́ было " + c.gen + ".", mal = "Вчера́ у меня́ не была́ " + c.nom + ".";
-    push({ id: "U10-nat-nb-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u10-net-tiempos", grupo: "NB-" + j, items: ["lex:" + c.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-nb-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 3, regla: "u10-net-tiempos", grupo: "NB-" + j, items: ["lex:" + c.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Con не, siempre не́ было + genitivo." });
     push({ id: "U10-pq-nb-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 3, regla: "u10-net-tiempos", grupo: "PB-" + j, items: ["lex:" + c.id], oir: ok, pide: "¿Por qué не́ было y no не была́?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Con не, siempre не́ было: neutro", "Porque " + c.nom + " es neutro"], correcta: "Con не, siempre не́ было: neutro", explicacion: ok + " No importa el género de lo que falta." });
@@ -816,12 +816,12 @@ function ejerciciosUnidad10() {
   /* ── Módulo 4: cantidad ── */
   [["буты́лка", "вода́"], ["кусо́к", "сыр"], ["килогра́мм", "рис"], ["литр", "молоко́"], ["па́чка", "чай"], ["стака́н", "сок"], ["буты́лка", "вино́"]].forEach(([e0, w], j) => {
     const E = S(e0), X = S(w), ok = cap(E.nom) + " " + X.gen + ".", mal = cap(E.nom) + " " + X.nom + ".";
-    push({ id: "U10-nat-e-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u10-envases", grupo: "NE-" + j, items: ["lex:" + E.id, "lex:" + X.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-e-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 4, regla: "u10-envases", grupo: "NE-" + j, items: ["lex:" + E.id, "lex:" + X.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Lo que contiene, en genitivo: " + u10Cambio(X, "gen") });
   });
   [["мно́го", "рабо́та"], ["ма́ло", "вода́"], ["немно́го", "са́хар"], ["мно́го", "вре́мя"]].forEach(([q, w], j) => {
     const X = S(w), ok = "У меня́ " + q + " " + X.gen + ".", mal = "У меня́ " + q + " " + X.nom + ".";
-    push({ id: "U10-nat-q-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 4, regla: "u10-cantidad", grupo: "NQ-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-q-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 4, regla: "u10-cantidad", grupo: "NQ-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Después de " + q + ", genitivo." });
   });
   [["стака́н", 2, "два"], ["килогра́мм", 3, "три"], ["литр", 4, "четы́ре"], ["кусо́к", 2, "два"]].forEach(([w, n, num], j) => {
@@ -839,7 +839,7 @@ function ejerciciosUnidad10() {
     const ok = pr === "по́сле" ? "По́сле " + X.gen + " я гуля́ю." : pr === "кро́ме" ? "Кро́ме " + X.gen + ", у меня́ есть сестра́." : pre + frag + ".";
     const mal = ok.replace(new RegExp(X.gen + "(?=[ .,])"), X.nom);
     if (ok === mal) return;
-    push({ id: "U10-nat-p-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u10-prep-gen", grupo: "NP-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-p-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 5, regla: "u10-prep-gen", grupo: "NP-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + pr + " + genitivo: " + u10Cambio(X, "gen") });
     if (j % 2 === 0) push({ id: "U10-pq-p-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 5, regla: "u10-prep-gen", grupo: "PP-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Por qué " + X.gen + "?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Después de " + pr + " va genitivo", "Es a quién: dativo"], correcta: "Después de " + pr + " va genitivo", explicacion: ok });
@@ -856,7 +856,7 @@ function ejerciciosUnidad10() {
   PP.slice(0, 8).forEach((p, j) => {
     const v = ["звоню́", "помога́ю", "пишу́", "отвеча́ю"][j % 4], ok = "Я " + v + " " + p.dat + ".", mal = "Я " + v + " " + p.acc + ".";
     if (p.dat === p.acc) return;
-    push({ id: "U10-nat-a-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-dat-verbos", grupo: "NA-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-a-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-dat-verbos", grupo: "NA-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + v + " va con dativo: " + u10Cambio(p, "dat") });
     if (j % 2 === 0) push({ id: "U10-pq-a-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-dat-verbos", grupo: "PA-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Por qué " + p.dat + " y no " + p.acc + "?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Ese verbo va con dativo: a quién", "Es un lugar: prepositivo"], correcta: "Ese verbo va con dativo: a quién", explicacion: ok });
@@ -872,14 +872,14 @@ function ejerciciosUnidad10() {
     const s = S(w), a = "Я иду́ к " + s.dat + ".", b = "Я у " + s.gen + ".", vamos = j % 2 === 0;
     push({ id: "U10-par-ku-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-k-u", grupo: "KU-" + j, items: ["lex:" + s.id], oir: vamos ? a : b, pide: "«" + (vamos ? ir : estar) + "». ¿Cuál dices?", opciones: baraja([a, b], j), correcta: vamos ? a : b,
       explicacion: vamos ? a + " Adónde, a una persona: к + dativo." : b + " Dónde, con una persona: у + genitivo." });
-    push({ id: "U10-nat-k-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-k-u", grupo: "NK-" + j, items: ["lex:" + s.id], oir: a, pide: "¿Cuál suena natural?", opciones: baraja([a, "Я иду́ в " + s.acc + "."], j + 1), correcta: a,
+    push({ id: "U10-nat-k-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-k-u", grupo: "NK-" + j, items: ["lex:" + s.id], oir: a, pide: "¿Cuál es la correcta?", opciones: baraja([a, "Я иду́ в " + s.acc + "."], j + 1), correcta: a,
       explicacion: a + " A una persona se va con к + dativo." });
   });
   const OBJ2 = { "дать": ["кни́гу", "el libro"], "сказа́ть": ["но́вость", "la noticia"] };
   const PAR6 = U10_PARES.map(([i, r, es]) => ({ i: verbo(i), r: verbo(r), es })).filter(x => x.i && x.r && x.r.futuro);
   PAR6.forEach((x, j) => {
     const p = PP[j % PP.length], ok = "За́втра я " + x.r.futuro[0] + " " + p.dat + ".", mal = "За́втра я бу́ду " + x.r.ac + " " + p.dat + ".";
-    push({ id: "U10-nat-pd-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-pares-dat", grupo: "NPD-" + j, items: ["lex:" + x.r.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-pd-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-pares-dat", grupo: "NPD-" + j, items: ["lex:" + x.r.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + x.r.ac + " es de resultado: su futuro, sin бу́ду." });
     push({ id: "U10-parj-" + j, tipo: "pareja", forma: "elegir", dificultad: 1, modulo: 6, regla: "u10-pares-dat", grupo: "PJ-" + j, items: ["lex:" + x.r.id], oir: x.r.futuro[0], pide: "¿Cómo es «voy a " + x.es + "» (я), una vez?",
       opciones: baraja(uniq([x.r.futuro[0], "бу́ду " + x.r.ac, x.i.presente[0]]), j), correcta: x.r.futuro[0], explicacion: x.i.ac + " → " + x.r.ac + ": я " + x.r.futuro[0] + "." });
@@ -899,24 +899,24 @@ function ejerciciosUnidad10() {
   /* ── Módulo 7: gustar, estados, edad, ну́жно ── */
   PP.slice(0, 6).forEach((p, j) => {
     const w = ["му́зыка", "Москва́", "ко́фе", "рабо́та", "чай", "кни́га"][j], ok = cap(p.dat) + " нра́вится " + w + ".", mal = cap(p.nom) + " нра́вится " + w + ".";
-    push({ id: "U10-nat-g-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-gustar", grupo: "NG-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-g-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-gustar", grupo: "NG-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " A quién le gusta: dativo. " + u10Cambio(p, "dat") });
   });
   [["Мне нра́вится му́зыка.", "Я нра́влюсь му́зыка."], ["Мне нра́вятся фи́льмы.", "Мне нра́вится фи́льмы."], ["Мне понра́вился фильм.", "Мне понра́вилась фильм."], ["Нам понра́вилась Москва́.", "Нам понра́вился Москва́."]].forEach(([ok, mal], j) => {
-    push({ id: "U10-nat-g2-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-gustar", grupo: "NG2-" + j, items: [], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-g2-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-gustar", grupo: "NG2-" + j, items: [], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + ["A quién: dativo; lo que gusta, sujeto.", "Lo que gusta es plural: нра́вятся.", "фильм es masculino: понра́вился.", "Москва́ es femenino: понра́вилась."][j] });
     if (j >= 1) push({ id: "U10-pq-g2-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-gustar", grupo: "PG2-" + j, items: [], oir: ok, pide: "¿Por qué " + ok.split(" ")[1].replace(".", "") + "?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Concuerda con lo que gusta", "Concuerda con a quién le gusta"], correcta: "Concuerda con lo que gusta", explicacion: ok + " Lo que gusta es el sujeto." });
   });
   [["хо́лодно", "Я"], ["гру́стно", "Она́"], ["стра́шно", "Мы"], ["ве́село", "Он"], ["жа́рко", "Я"], ["интере́сно", "Они́"]].forEach(([w, s], j) => {
     const dat = { "Я": "Мне", "Она́": "Ей", "Мы": "Нам", "Он": "Ему́", "Они́": "Им" }[s], ok = dat + " " + w + ".", mal = s + " " + w + ".";
-    push({ id: "U10-nat-es-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 7, regla: "u10-estados", grupo: "NES-" + j, items: [], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-es-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 7, regla: "u10-estados", grupo: "NES-" + j, items: [], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " El estado va con dativo: " + low(dat) + "." });
   });
   [[20, "два́дцать", "Мне"], [3, "три", "Ему́"], [30, "три́дцать", "Ей"], [2, "два", "Бра́ту"], [45, null, null], [4, "четы́ре", "Сестре́"]].forEach(([n, num, d], j) => {
     if (!num) return;
     const f = n <= 4 ? "го́да" : "лет", ok = d + " " + num + " " + f + ".";
-    push({ id: "U10-nat-ed-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-edad", grupo: "NED-" + j, items: [], oir: ok, pide: "¿Cuál suena natural?",
+    push({ id: "U10-nat-ed-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-edad", grupo: "NED-" + j, items: [], oir: ok, pide: "¿Cuál es la correcta?",
       opciones: baraja([ok, j % 2 ? d + " " + num + " " + (n <= 4 ? "лет" : "го́да") + "." : "У " + ({ "Мне": "меня́", "Ему́": "него́", "Ей": "неё", "Бра́ту": "бра́та", "Сестре́": "сестры́" }[d]) + " " + num + " " + f + "."], j), correcta: ok,
       explicacion: ok + " La edad: dativo + " + (n <= 4 ? "го́да (2, 3, 4)." : "лет (5 o más).") });
     push({ id: "U10-pq-ed-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 7, regla: "u10-edad", grupo: "PED-" + j, items: [], oir: ok, pide: "¿Por qué «" + f + "»?", grande: ok, audio: ok, audioManual: true,
@@ -933,7 +933,7 @@ function ejerciciosUnidad10() {
   /* ── Módulo 8: con quién ── */
   PP.slice(0, 8).forEach((p, j) => {
     const ok = "Я гуля́ю с " + p.ins + ".", mal = "Я гуля́ю с " + p.nom + ".";
-    push({ id: "U10-nat-i-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 8, regla: "u10-s-kem", grupo: "NI-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-i-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 8, regla: "u10-s-kem", grupo: "NI-" + j, items: ["lex:" + p.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + u10Cambio(p, "ins") });
   });
   [["брат", ["друг", "Ива́н"]], ["сестра́", ["ма́ма", "А́нна"]], ["учи́тель", ["слова́рь", "учи́тель"]], ["па́па", ["ма́ма", "ба́бушка"]], ["Ива́н", ["брат", "друг"]]].forEach(([w, ej], j) => {
@@ -943,7 +943,7 @@ function ejerciciosUnidad10() {
   });
   [["брат", "живём в Москве́", "живу́ в Москве́", "Mi hermano y yo vivimos en Moscú"], ["ма́ма", "гото́вим у́жин", "гото́влю у́жин", "Mamá y yo preparamos la cena"], ["А́нна", "гуля́ем", "гуля́ю", "Ana y yo paseamos"]].forEach(([w, pl, sg, es], j) => {
     const s = S(w), ok = "Мы с " + s.ins + " " + pl + ".", mal = "Мы с " + s.ins + " " + sg + ".";
-    push({ id: "U10-nat-ms-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u10-my-s", grupo: "MS-" + j, items: ["lex:" + s.id], oir: ok, pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-ms-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u10-my-s", grupo: "MS-" + j, items: ["lex:" + s.id], oir: ok, pide: "«" + es + "». ¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " мы с…: son dos, el verbo va en plural." });
     push({ id: "U10-cad-ms-" + j, tipo: "cadena", forma: "cadena", dificultad: 3, modulo: 8, regla: "u10-my-s", grupo: "CMS-" + j, items: ["lex:" + s.id], oir: ok, pide: "Cambia la frase paso a paso.", base: "Я " + sg + ".",
       pasos: [{ pide: "Agrega con quién: " + s.nom + ".", esperadas: ["Я " + sg + " с " + s.ins + ".", "Я с " + s.ins + " " + sg + "."] }, { pide: "Ahora di «" + (s.nom === "ма́ма" ? "mamá" : s.nom === "брат" ? "mi hermano" : "Ana") + " y yo» (мы с…).", esperadas: [ok] }],
@@ -954,7 +954,7 @@ function ejerciciosUnidad10() {
   [["пишу́", "ру́чка", ""], ["ем суп", "ло́жка", ""], ["ре́жу хлеб", "нож", ""], ["ем", "ви́лка", ""], ["пишу́", "каранда́ш", ""]].forEach(([v, w], j) => {
     const X = S(w); if (!X) return;
     const ok = "Я " + v + " " + X.ins + ".", mal = "Я " + v + " с " + X.ins + ".";
-    push({ id: "U10-nat-cq-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u10-con-que", grupo: "NCQ-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-cq-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u10-con-que", grupo: "NCQ-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " La herramienta: instrumental, sin с." });
     if (j < 3) push({ id: "U10-pq-cq-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 9, regla: "u10-con-que", grupo: "PCQ-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Por qué no lleva с?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Es la herramienta: con qué", "Es una persona: con quién"], correcta: "Es la herramienta: con qué", explicacion: ok });
@@ -963,7 +963,7 @@ function ejerciciosUnidad10() {
     const X = S(w); if (!X) return;
     const ok = s0 + " " + pr + " " + X.ins + ".", mal = s0 + " " + pr + " " + X.acc + ".";
     if (ok === mal) return;
-    push({ id: "U10-nat-pn-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u10-pod-nad", grupo: "NPN-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-pn-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u10-pod-nad", grupo: "NPN-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + pr + " + instrumental: dónde." });
   });
   push({ id: "U10-par-nad-0", tipo: "par", forma: "elegir", dificultad: 2, modulo: 9, regla: "u10-pod-nad", grupo: "PNA-0", items: [], oir: "Ла́мпа над столо́м.", pide: "La lámpara cuelga arriba de la mesa, sin tocarla. ¿Cuál dices?",
@@ -973,14 +973,14 @@ function ejerciciosUnidad10() {
   ["води́тель", "журнали́ст", "перево́дчик", "худо́жник", "музыка́нт", "писа́тель", "юри́ст", "продаве́ц"].forEach((w, j) => {
     const X = S(w); if (!X) return;
     const s = j % 2 ? "Она́ рабо́тает" : "Я рабо́таю", ok = s + " " + X.ins + ".", mal = s + " " + X.nom + ".";
-    push({ id: "U10-nat-pr-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 10, regla: "u10-rabotat-kem", grupo: "NPR-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-pr-" + j, tipo: "natural", forma: "elegir", dificultad: 1, modulo: 10, regla: "u10-rabotat-kem", grupo: "NPR-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + u10Cambio(X, "ins") });
     if (j < 3) push({ id: "U10-diag-pr-" + j, tipo: "diagnostico", forma: "diagnostico", dificultad: 3, modulo: 10, regla: "u10-rabotat-kem", grupo: "DPR-" + j, items: ["lex:" + X.id], oir: ok, pide: "La frase tiene un error. ¿Qué falla?", grande: s + " как " + X.nom + ".",
       opciones: ["La profesión va en instrumental, sin как", "El verbo", "Falta есть"], correcta: "La profesión va en instrumental, sin как", esperadas: [ok], explicacion: ok });
   });
   [["студе́нт", "Ра́ньше я был", "Antes era estudiante"], ["врач", "Я хочу́ стать", "Quiero ser médico"], ["писа́тель", "Он стал", "Se hizo escritor"]].forEach(([w, a0, es], j) => {
     const X = S(w), ok = a0 + " " + X.ins + ".", mal = a0 + " " + X.nom + ".";
-    push({ id: "U10-nat-bi-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 10, regla: "u10-byt-ins", grupo: "NBI-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-bi-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 10, regla: "u10-byt-ins", grupo: "NBI-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " Con был, бу́ду y стать, instrumental." });
   });
   push({ id: "U10-par-bi-0", tipo: "par", forma: "elegir", dificultad: 2, modulo: 10, regla: "u10-byt-ins", grupo: "PBI-0", items: [], oir: "Сейча́с я врач.", pide: "«Ahora soy médico». ¿Cuál dices?",
@@ -988,7 +988,7 @@ function ejerciciosUnidad10() {
   [["занима́юсь", "спорт"], ["интересу́юсь", "му́зыка"], ["занима́юсь", "ру́сский"], ["интересу́юсь", "исто́рия"]].forEach(([v, w], j) => {
     const X = S(w); if (!X || !X.ins) return;
     const ok = "Я " + v + " " + X.ins + ".", mal = "Я " + v + " " + X.nom + ".";
-    push({ id: "U10-nat-z-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 10, regla: "u10-zanimatsya", grupo: "NZA-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], j), correcta: ok,
+    push({ id: "U10-nat-z-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 10, regla: "u10-zanimatsya", grupo: "NZA-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + v + " + instrumental." });
     if (j < 2) push({ id: "U10-pq-z-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 10, regla: "u10-zanimatsya", grupo: "PZA-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Por qué " + X.ins + "?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Ese verbo va con instrumental", "Es con quién: с + instrumental"], correcta: "Ese verbo va con instrumental", explicacion: ok + " Sin с." });

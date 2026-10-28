@@ -876,7 +876,7 @@ function ejerciciosUnidad6() {
   U6_SUJ.slice(0, 7).forEach((sj, j) => {
     const bien = sj[0] + " до́ма.", mal = sj[0] + " в до́ма.";
     out.push({ id: "U6-nat-doma-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 1, regla: "u6-sin-prep", grupo: "NDM-" + j, items: [], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " До́ма ya quiere decir «en casa»: no lleva preposición." });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " До́ма ya quiere decir «en casa»: no lleva preposición." });
   });
   /* b) Con movimiento, acusativo; sin movimiento, prepositivo */
   mov.forEach((s, j) => {
@@ -884,14 +884,14 @@ function ejerciciosUnidad6() {
     const sj = U6_SUJ[[0, 2, 3, 4, 6, 1][j % 6]], v = verb[sin("идти́")], p = sj[2];
     const bien = sj[0] + " " + v.f[p] + " " + s.pr + " " + s.acc + ".", mal = sj[0] + " " + v.f[p] + " " + s.pr + " " + s.prep + ".";
     out.push({ id: "U6-nat-mov-" + s.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 8, regla: "u6-adonde-acc", grupo: "M-" + s.id, items: ["lex:" + s.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " " + u6ReglaMov(s) });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " " + u6ReglaMov(s) });
   });
   /* c) Los lugares con на no van con в */
   const FIRMES_NA = "рабо́та у́лица ста́нция по́чта вокза́л ры́нок стадио́н заво́д фа́брика факульте́т конце́рт вы́ставка спекта́кль матч фестива́ль уро́к ле́кция экза́мен семина́р собра́ние совеща́ние конфере́нция се́вер восто́к за́пад да́ча".split(" ").map(sin);
   baseLug.filter(s => s.pr === "на" && FIRMES_NA.indexOf(sin(s.nom)) >= 0).forEach((s, j) => {
     const sj = U6_SUJ[[0, 3, 2, 6, 4][j % 5]], bien = sj[0] + " на " + s.prep + ".", mal = sj[0] + " в " + s.prep + ".";
     out.push({ id: "U6-nat-na-" + s.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: Math.max(2, s.desde), regla: "u6-na-lista", grupo: "PR-" + s.id, items: ["lex:" + s.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " " + porQueNa(s) + ": va con на." });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " " + porQueNa(s) + ": va con на." });
   });
   /* d) Ahora: идти́ / е́хать, no ходи́ть / е́здить */
   [["кафе́", "идти́"], ["парк", "идти́"], ["магази́н", "идти́"], ["шко́ла", "идти́"], ["рабо́та", "е́хать"], ["университе́т", "е́хать"], ["Мадри́д", "е́хать"], ["бассе́йн", "идти́"]].forEach(([dest, vk], j) => {
@@ -899,14 +899,14 @@ function ejerciciosUnidad6() {
     const sj = U6_SUJ[[0, 2, 3, 6][j % 4]], p = sj[2], v = verb[sin(vk)], w = verb[sin(vk === "идти́" ? "ходи́ть" : "е́здить")];
     const bien = "Сейча́с " + sj[0].toLowerCase().replace(/^я$/, "я") + " " + v.f[p] + " " + s.pr + " " + s.acc + ".", mal = "Сейча́с " + sj[0].toLowerCase() + " " + w.f[p] + " " + s.pr + " " + s.acc + ".";
     out.push({ id: "U6-nat-ahora-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 9, regla: "u6-ahora-seguido", grupo: "NA9-" + j, items: ["lex:" + v.id, "lex:" + s.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " Сейча́с habla de ahora: " + v.ac + ", no " + w.ac + "." });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " Сейча́с habla de ahora: " + v.ac + ", no " + w.ac + "." });
   });
   /* e) нигде́ siempre con не */
   U6_SUJ.slice(0, 7).forEach((sj, j) => {
     const v = verb[sin(j % 2 ? "жить" : "рабо́тать")], p = sj[2];
     const bien = sj[0] + " нигде́ не " + v.f[p] + ".", mal = sj[0] + " нигде́ " + v.f[p] + ".";
     out.push({ id: "U6-nat-nig-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 7, regla: "u6-cerca-lejos", grupo: "NNG-" + j, items: ["lex:" + v.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], j + 1), correcta: bien, explicacion: bien + " Нигде́ va siempre con не delante del verbo." });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], j + 1), correcta: bien, explicacion: bien + " Нигде́ va siempre con не delante del verbo." });
   });
   /* f) Las de -у́: no hacen -е */
   baseLug.concat(objetos).filter(s => s.loc2 && sin(s.nom) !== "пол").forEach((s, j) => {
@@ -914,7 +914,7 @@ function ejerciciosUnidad6() {
     const sj = s.tipo === "sobre" ? ["Ко́шка"] : U6_SUJ[[3, 0, 6, 2][j % 4]];
     const bien = sj[0] + " " + s.pr + " " + s.prep + ".", mal = sj[0] + " " + s.pr + " " + malF + ".";
     out.push({ id: "U6-nat-u-" + s.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: conMod(s), regla: "u6-prep-u", grupo: "T-" + s.id, items: ["lex:" + s.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " " + u6Regla(s) });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, mal], j), correcta: bien, explicacion: bien + " " + u6Regla(s) });
   });
   /* g) -ия → -ии, nunca -ие */
   baseLug.concat(geos).filter(s => /ия$/.test(sinAc(s.nom))).forEach((s, j) => {
@@ -922,7 +922,7 @@ function ejerciciosUnidad6() {
     const sj = s.tipo === "pais" ? ["Мы живём"] : U6_SUJ[[0, 3, 2, 6][j % 4]];
     const bien = sj[0] + " " + s.pr + " " + s.prep + ".", malF = sj[0] + " " + s.pr + " " + mal + ".";
     out.push({ id: "U6-nat-ii-" + s.id, tipo: "natural", forma: "elegir", dificultad: 2, modulo: conMod(s), regla: "u6-prep-ii", grupo: "T-" + s.id, items: ["lex:" + s.id], oir: bien,
-      pide: "¿Cuál suena natural?", opciones: baraja([bien, malF], j + 1), correcta: bien, explicacion: bien + " " + u6Regla(s) });
+      pide: "¿Cuál es la correcta?", opciones: baraja([bien, malF], j + 1), correcta: bien, explicacion: bien + " " + u6Regla(s) });
   });
 
   /* Oído: ¿dónde está o adónde va? -е o -у casi no se distinguen sin acento */

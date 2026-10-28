@@ -495,7 +495,7 @@ const UNIDAD_11 = {
         { nombre: "Completar la conversación", tipos: ["completar"], n: 8 },
         { nombre: "Traducción en contexto", tipos: ["traduccion"], n: 8 },
         { nombre: "Mensaje", tipos: ["mensaje"], n: 3 },
-        { nombre: "¿Suena natural?", tipos: ["natural"], n: 3 }
+        { nombre: "¿Cuál es la correcta?", tipos: ["natural"], n: 3 }
       ],
       aprobado: 0.8 }
   ]
@@ -1009,7 +1009,7 @@ function ejerciciosUnidad11() {
     ["Una vendedora te pregunta «Ка́ртой и́ли нали́чными?».", "💳", [E("cómo pagas", "ка́ртой|нали́чными")], "Ка́ртой, пожа́луйста."]
   ].forEach(([pide, esc, nec, modelo], j) => situ("s11-" + j, "situacion", 11, { pide, escena: esc, nec, modelo, grupo: "S11-" + j, dif: 3 }));
   U11_NATURAL.forEach(([sit, ok, otras], j) => out.push({ id: "U11-nt-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 11, grupo: "NT-" + j, items: [],
-    pide: sit + " ¿Cuál es la forma más natural?", opciones: baraja([ok].concat(otras), j), correcta: ok, oir: ok,
+    pide: sit + " ¿Cuál es la más adecuada?", opciones: baraja([ok].concat(otras), j), correcta: ok, oir: ok,
     explicacion: "**" + ok + "**: " + (/Хо́чешь|Извини́,|Извини́ /.test(ok) ? "con un amigo, ты." : "con un desconocido, вы, извини́те o пожа́луйста.") }));
   U11_COMPRENSION.forEach((T, j) => { const todo = T.lineas.join(" ");
     T.preguntas.forEach(([q, ok, malas], k) => out.push({ id: "U11-co-" + T.id + "-" + k, tipo: "comprension", forma: "elegir", dificultad: 2, modulo: 11, grupo: "CO-" + T.id + "-" + k, items: [],
@@ -1054,7 +1054,7 @@ function ejerciciosUnidad11() {
   const it = (...w) => w.map(x => { const e = D.lex(x); return e ? "lex:" + e.id : null; }).filter(Boolean);
   /* ¿Suena natural?: dos frases, la natural y la del error típico */
   const nat = (id, modulo, regla, ok, mal, expl, o) => push(Object.assign({ id: "U11-nat-" + id, tipo: "natural", forma: "elegir", dificultad: 2, modulo, regla, grupo: "NA-" + id, items: [],
-    oir: ok, pide: "¿Cuál suena natural?", opciones: baraja([ok, mal], id.length), correcta: ok, explicacion: ok + " " + expl }, o || {}));
+    oir: ok, pide: "¿Cuál es la correcta?", opciones: baraja([ok, mal], id.length), correcta: ok, explicacion: ok + " " + expl }, o || {}));
   /* ¿Por qué?: una frase, una palabra y tres razones */
   const pq = (id, modulo, regla, frase, w, ok, otras, expl, o) => push(Object.assign({ id: "U11-pq-" + id, tipo: "porque", forma: "elegir", dificultad: 2, modulo, regla, grupo: "PQ-" + id, items: [],
     oir: frase, grande: frase, audio: frase, audioManual: true, pide: "¿Por qué «" + w + "»?", opciones: baraja([ok].concat(otras), id.length + 1), correcta: ok, explicacion: frase + " " + expl }, o || {}));
@@ -1137,9 +1137,9 @@ function ejerciciosUnidad11() {
   pq("asp-2", 2, "u11-hochu-kupit", "Мо́жно заплати́ть ка́ртой?", "заплати́ть", "Es esta compra, ahora", ["Es en general: si se acepta tarjeta", "Es en pasado"], "Una vez, ahora: заплати́ть.");
   par("asp-0", 2, "u11-hochu-kupit", "¿Cuál pregunta si en ese negocio, en general, aceptan tarjeta?", "Здесь мо́жно плати́ть ка́ртой?", "Мо́жно заплати́ть ка́ртой?", "En general: плати́ть.");
   par("asp-1", 2, "u11-hochu-kupit", "¿Cuál dice «quiero comprar este jersey»?", "Я хочу́ купи́ть э́тот сви́тер.", "Я люблю́ покупа́ть сви́теры.", "Una compra concreta: купи́ть.");
-  nat("asp-0", 2, "u11-hochu-kupit", "Я хочу́ купи́ть э́ту ку́ртку.", "Я хочу́ покупа́ть э́ту ку́ртку.", "Una compra concreta: купи́ть.");
-  nat("asp-1", 2, "u11-hochu-kupit", "Мне ну́жно верну́ть ку́ртку.", "Мне ну́жно возвраща́ть ку́ртку.", "Una vez: верну́ть.");
-  nat("asp-2", 6, "u11-naiti", "Я не могу́ найти́ ключ.", "Я не могу́ иска́ть ключ.", "No logras el resultado: найти́.");
+  nat("asp-0", 2, "u11-hochu-kupit", "Я хочу́ купи́ть э́ту ку́ртку.", "Я хочу́ покупа́ть э́ту ку́ртку.", "Una compra concreta: купи́ть.", { pide: "Una compra concreta, ahora. ¿Cuál es la correcta?" });
+  nat("asp-1", 2, "u11-hochu-kupit", "Мне ну́жно верну́ть ку́ртку.", "Мне ну́жно возвраща́ть ку́ртку.", "Una vez: верну́ть.", { pide: "Una sola vez. ¿Cuál es la correcta?" });
+  nat("asp-2", 6, "u11-naiti", "Я не могу́ найти́ ключ.", "Я не могу́ иска́ть ключ.", "No logras el resultado: найти́.", { pide: "Buscas y no aparece. ¿Cuál es la correcta?" });
   diag("asp-0", 2, "u11-hochu-kupit", "Я хочу́ покупа́ть э́ту руба́шку.", "Я хочу́ купи́ть э́ту руба́шку.", "El verbo: tiene que ser el de resultado", ["El caso de руба́шка", "La forma de хочу́"], "Una compra concreta: купи́ть.");
 
   /* ── Módulo 2: precios, сто́ит / сто́ят, cómo es, pagar ── */
@@ -1172,7 +1172,7 @@ function ejerciciosUnidad11() {
 
   /* ── Módulo 3: registro, lo que pides, comentar ── */
   [["суп", "Я бу́ду суп."], ["ры́ба", "Я бу́ду ры́бу."], ["чай", "Мне, пожа́луйста, чай."], ["пи́цца", "Мо́жно пи́ццу, пожа́луйста?"]].forEach(([ru, ok], j) => {
-    const s = S(ru); nat("reg-" + j, 3, "u11-registro", ok, "Я хочу́ " + s.acc + "!", "En un café se pide con бу́ду, Мо́жно…? o Мне, пожа́луйста; Я хочу́ suena directo.", { pide: "Le pides al camarero. ¿Cuál suena más natural?" });
+    const s = S(ru); nat("reg-" + j, 3, "u11-registro", ok, "Я хочу́ " + s.acc + "!", "En un café se pide con бу́ду, Мо́жно…? o Мне, пожа́луйста; Я хочу́ suena directo.", { pide: "Le pides al camarero. ¿Cuál es la más adecuada?" });
   });
   pq("reg-0", 3, "u11-registro", "Мо́жно меню́, пожа́луйста?", "Мо́жно", "Es un pedido amable", ["Pide permiso para entrar", "Es una orden"], "Мо́жно…? y пожа́луйста suavizan el pedido.");
   [["ры́ба", "pescado"], ["пи́цца", "una pizza"], ["вода́", "agua"], ["ку́рица", "pollo"], ["карто́шка", "patatas"]].forEach(([ru, es], j) => {
@@ -1237,7 +1237,7 @@ function ejerciciosUnidad11() {
     if (j < 3) pq("net-" + j, 6, "u11-net", "У меня́ нет " + s.gen + ".", s.gen, "Después de нет: genitivo", ["Recibe la acción: acusativo", "Es lo que hay: nominativo"], s.nom + " → " + s.gen + ".");
   });
   [["гости́ница"], ["ста́нция"], ["остано́вка"], ["ключ"]].forEach(([ru], j) => {
-    const s = S(ru); nat("nai-" + j, 6, "u11-naiti", "Я не могу́ найти́ " + s.acc + ".", "Я не могу́ иска́ть " + s.acc + ".", "No logras encontrarlo: найти́, el resultado.");
+    const s = S(ru); nat("nai-" + j, 6, "u11-naiti", "Я не могу́ найти́ " + s.acc + ".", "Я не могу́ иска́ть " + s.acc + ".", "No logras encontrarlo: найти́, el resultado.", { pide: "Buscas y no aparece. ¿Cuál es la correcta?" });
   });
   pq("nai-0", 6, "u11-naiti", "Я не могу́ найти́ гости́ницу.", "найти́", "No logras el resultado: encontrar", ["Estás buscando, en proceso", "Es algo que se repite"], "иска́ть es buscar; найти́, encontrar.");
   oido("nai-0", 6, "u11-naiti", "Я нашла́ ключ!", "Escucha. ¿Quién habla?", ["Una mujer", "Un hombre"], "Una mujer", "нашла́: femenino.");
@@ -1246,7 +1246,7 @@ function ejerciciosUnidad11() {
   nat("ukr-1", 6, "u11-net", "У меня́ укра́ли па́спорт.", "Меня́ укра́ли па́спорт.", "у меня́ укра́ли + lo que robaron.");
   [["по́езд"], ["авто́бус"], ["самолёт"], ["уро́к"], ["рабо́та"]].forEach(([ru], j) => {
     const s = S(ru); if (!s) return;
-    nat("opo-" + j, 6, "u11-opozdat", "Я опозда́л на " + s.acc + ".", "Я опозда́л в " + s.acc + ".", "опозда́ть на + acusativo.", { pide: "Eres hombre. ¿Cuál suena natural?" });
+    nat("opo-" + j, 6, "u11-opozdat", "Я опозда́л на " + s.acc + ".", "Я опозда́л в " + s.acc + ".", "опозда́ть на + acusativo.", { pide: "Eres hombre. ¿Cuál es la correcta?" });
   });
   diag("net-0", 6, "u11-net", "У меня́ нет па́спорт.", "У меня́ нет па́спорта.", "El caso de па́спорт", ["Falta есть", "La forma de нет"], "нет + genitivo.");
   cad("net-0", 6, "u11-net", "У меня́ есть па́спорт.", [["Di que no tienes.", ["У меня́ нет па́спорта."]], ["Ahora: lo perdiste (eres hombre).", ["Я потеря́л па́спорт."]]], "нет + genitivo; потеря́ть + acusativo.");
@@ -1292,7 +1292,7 @@ function ejerciciosUnidad11() {
 
   /* ── Módulo 11: suavizar ── */
   [["Где банк?", "Извини́те, где банк?"], ["Дай меню́!", "Мо́жно меню́, пожа́луйста?"], ["Повтори́!", "Повтори́те, пожа́луйста."]].forEach(([mal, ok], j) =>
-    nat("sua-" + j, 11, "u11-suavizar", ok, mal, "Con un desconocido: вы, извини́те y пожа́луйста.", { pide: "Le hablas a un desconocido. ¿Cuál suena natural?" }));
+    nat("sua-" + j, 11, "u11-suavizar", ok, mal, "Con un desconocido: вы, извини́те y пожа́луйста.", { pide: "Le hablas a un desconocido. ¿Cuál es la más adecuada?" }));
 
   /* ── Vocabulario nuevo (12/10/2026): significado y palabra-es-ru, en el módulo donde se presenta ── */
   const modDe = {};
