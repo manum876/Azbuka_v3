@@ -45,7 +45,7 @@ const AZ_PRECACHE = [
   "azbuka-index-1.html", "casos.html", "cuaderno.html", "dialogos.html", "ficha.html",
   "index.html",
   "lecturas.html", "data/data-lecturas.js", "masha.html", "data/data-masha.js",
-  "repaso.html", "verbos.html", "gramatica.html", "manifest.webmanifest", "manifest-abece.webmanifest", "js/avisos.js", "js/hoy.js", "js/burbuja.js",
+  "repaso.html", "verbos.html", "gramatica.html", "abece-1.html", "manifest.webmanifest", "manifest-abece.webmanifest", "js/avisos.js", "js/hoy.js", "js/burbuja.js",
   "js/core.js", "js/corrector.js", "js/cuenta.js", "js/mano.js", "js/progress.js", "js/shell.js",
   "js/unidad-ui.js", "js/unidad.js", "data/data-alphabet.js", "data/data-casos.js", "data/data-catalogo.js",
   "data/data-cultura.js", "data/data-dialogos.js", "data/data-frases.js", "data/data-gramatica.js",

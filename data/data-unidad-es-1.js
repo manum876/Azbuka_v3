@@ -14,8 +14,9 @@
      · ejemplos { es, ru, por, lex? }: es = la frase en español, ru = la traducción;
      · pares { letras, a, b } con IDs del léxico español (ESP-…);
      · palabras: IDs del léxico español.
-   Módulos 9 a 12 (saludos, presentarse y números, evaluación y proyecto):
-   «pronto» hasta que Manu apruebe el vocabulario de la U1.
+   Módulos 9 a 12 (entrega 2, 28/10/2026): saludos, presentarse y números,
+   proyecto (es1m11) y evaluación (es1m12): el proyecto va antes de la
+   evaluación, como en las unidades de Azbuka (Manu, 28/10/2026).
    ============================================================ */
 
 const UNIDAD_ES_1 = {
@@ -346,14 +347,160 @@ const UNIDAD_ES_1 = {
         }
       ]
     },
-    { id: "es1m9", n: 9, tipo: "pronto", titulo: "Здравствуйте!", resumen: "Приветствия, прощания и вежливость." },
-    { id: "es1m10", n: 10, tipo: "pronto", titulo: "Знакомство и числа", resumen: "Me llamo…, по буквам и числа от 0 до 20." },
-    { id: "es1m11", n: 11, tipo: "pronto", titulo: "Проверка урока", resumen: "Все темы урока." },
-    { id: "es1m12", n: 12, tipo: "pronto", titulo: "Проект", resumen: "Представься вслух и назови имя по буквам." }
+    {
+      id: "es1m9", n: 9, tipo: "leccion",
+      titulo: "Здравствуйте!",
+      resumen: "Приветствия, прощания и вежливость.",
+      intro: "Первые фразы, которые нужны в Испании с первого дня: поздороваться, спросить «как дела?», попрощаться, поблагодарить и попросить повторить. Фразы ниже можно нажимать: откроется перевод и произношение.",
+      secciones: [
+        {
+          id: "es1-saludos-hora",
+          titulo: "Доброе утро, добрый день, добрый вечер",
+          texto: "**Hola** подходит всегда. Кроме того, есть три приветствия по времени суток, и в Испании время считают по обеду, а не по полудню:\n· **buenos días** — до обеда, примерно до 14–15 часов;\n· **buenas tardes** — после обеда и до темноты, часов до 20–21;\n· **buenas noches** — вечером и ночью.",
+          ojo: "**Buenas noches** говорят и при встрече, и при прощании. Это и «добрый вечер», и «спокойной ночи».",
+          ejemplos: [
+            { es: "¡Hola! ¿Qué tal?", ru: "Привет! Как дела?", por: "Самое частое начало разговора." },
+            { es: "¡Buenas tardes!", ru: "Добрый день!", por: "В 16 часов в Испании — уже «tardes»." }
+          ],
+          chequeo: [
+            { pide: "В Мадриде 13:00. Как поздороваться?", opciones: ["Buenos días", "Buenas tardes", "Buenas noches"], ok: "Buenos días", por: "До обеда (примерно до 14–15 часов) — **buenos días**." }
+          ]
+        },
+        {
+          id: "es1-tu-usted",
+          titulo: "Tú и usted: «ты» и «вы»",
+          texto: "Как в русском «ты» и «вы»: **tú** — с друзьями, родными, ровесниками; **usted** — вежливо, с незнакомыми взрослыми. Но в Испании на **tú** переходят гораздо быстрее, чем в России: с коллегами, соседями и даже с преподавателем.",
+          ejemplos: [
+            { es: "¿Cómo estás?", ru: "Как ты?", por: "На **tú**." },
+            { es: "¿Cómo está usted?", ru: "Как вы?", por: "На **usted**: глагол другой (**está**), а «usted» можно и не говорить." }
+          ],
+          comparacion: "«Вы» во множественном числе (вы все) — это не usted, а **vosotros**. Его ты увидишь в следующем уроке."
+        },
+        {
+          id: "es1-despedidas",
+          titulo: "Прощания",
+          texto: "**Adiós** — «до свидания» и «пока». **Hasta luego** — «до встречи», самое частое прощание, даже если вы больше сегодня не увидитесь. **Hasta mañana** — «до завтра». **Chao** — неформальное «пока»."
+        },
+        {
+          id: "es1-cortesia",
+          titulo: "Спасибо, пожалуйста, извините",
+          texto: "**Gracias** — «спасибо», **muchas gracias** — «большое спасибо». Ответ — **de nada** («не за что»). **Por favor** — «пожалуйста», только когда просишь. **Perdón** — «извините», чтобы извиниться или привлечь внимание; **lo siento** — «мне жаль».",
+          errores: [
+            { mal: "— Gracias. — Por favor.", bien: "— Gracias. — De nada.", por: "На «спасибо» отвечают **de nada**, а не «por favor»: это частая русская ошибка («пожалуйста» в обоих значениях)." }
+          ]
+        },
+        {
+          id: "es1-clase",
+          titulo: "Если не понимаешь",
+          texto: "Эти фразы — твои лучшие друзья на первых занятиях: **No entiendo** («не понимаю»), **¿Puedes repetir, por favor?** («можешь повторить?»), **Más despacio, por favor** («помедленнее»), **¿Cómo se escribe?** («как это пишется?»).",
+          truco: "Не бойся переспрашивать: испанцы говорят быстро и спокойно повторяют. **¡Vale!** — «ладно, договорились» — ответ, который ты будешь слышать каждый день."
+        }
+      ],
+      frases: ["FRE-001", "FRE-002", "FRE-003", "FRE-004", "FRE-005", "FRE-006", "FRE-007", "FRE-008", "FRE-009", "FRE-010", "FRE-011", "FRE-012", "FRE-013",
+        "FRE-014", "FRE-015", "FRE-016", "FRE-017", "FRE-018", "FRE-019", "FRE-020", "FRE-021", "FRE-022", "FRE-023", "FRE-024", "FRE-032"],
+      vocab: ["hola", "adiós", "chao", "bueno", "día", "tarde", "noche", "hasta", "luego", "mañana", "gracias", "favor", "nada", "perdón",
+        "sí", "no", "bien", "mal", "muy", "tal", "vale", "señor", "entender", "repetir", "despacio", "escribir", "palabra"],
+      dialogos: ["DLE-001", "DLE-002", "DLE-003"]
+    },
+    {
+      id: "es1m10", n: 10, tipo: "leccion",
+      titulo: "Знакомство и числа",
+      resumen: "Me llamo…, по буквам и числа от 0 до 20.",
+      intro: "Как представиться, спросить имя, назвать его по буквам и сказать номер телефона. Здесь пригодятся названия букв из первых модулей.",
+      secciones: [
+        {
+          id: "es1-me-llamo",
+          titulo: "Меня зовут…",
+          texto: "**Me llamo Ana** — «меня зовут Аня» (дословно: «я себя называю Аня»). Спросить: **¿Cómo te llamas?** (на tú) или **¿Cómo se llama usted?** (на usted). Можно ответить и просто именем: **Ana**.",
+          ejemplos: [
+            { es: "— ¿Cómo te llamas? — Me llamo Javier.", ru: "— Как тебя зовут? — Меня зовут Хавьер." },
+            { es: "— ¿Cómo se llama usted? — Ana Petrova.", ru: "— Как вас зовут? — Аня Петрова." }
+          ]
+        },
+        {
+          id: "es1-encantado",
+          titulo: "Encantado или encantada",
+          texto: "«Очень приятно» мужчина говорит **encantado**, а женщина — **encantada**, как «рад» и «рада». Всегда подходит и **mucho gusto**: одинаково для всех.",
+          chequeo: [
+            { pide: "Аня знакомится с Хавьером. Что говорит Аня?", opciones: ["Encantada", "Encantado"], ok: "Encantada", por: "Аня — женщина: **encantada**." }
+          ]
+        },
+        {
+          id: "es1-deletrear",
+          titulo: "По буквам",
+          texto: "Испанские фамилии и имена часто переспрашивают: **¿Cómo se escribe?** или **¿Puedes deletrear tu nombre?** («можешь назвать по буквам?»). Отвечают названиями букв: **Petrova** — **pe, e, te, erre, o, uve, a**.",
+          ojo: "**v** называется **uve**, а **b** — **be**. Звучат они одинаково, поэтому при диктовке говорят название: «be» или «uve»."
+        },
+        {
+          id: "es1-numeros",
+          titulo: "Числа от 0 до 20",
+          texto: "Запомни три группы. От **cero** до **diez** — отдельные слова. От **once** до **quince** — тоже. С 16 до 19 — «десять и…» одним словом: **dieciséis** (diez y seis), **diecisiete**, **dieciocho**, **diecinueve**. 20 — **veinte**.",
+          ojo: "**dieciséis** пишется со знаком ударения. **uno** перед существительным становится **un**: un día."
+        }
+      ],
+      tablaNumeros: true,
+      frases: ["FRE-025", "FRE-026", "FRE-027", "FRE-028", "FRE-029", "FRE-030", "FRE-031"],
+      vocab: ["llamarse", "nombre", "apellido", "letra", "deletrear", "encantado",
+        "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez",
+        "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte"],
+      dialogos: ["DLE-004"]
+    },
+    {
+      id: "es1m11", n: 11, tipo: "proyecto",
+      titulo: "Проект",
+      resumen: "Представься вслух и назови имя по буквам.",
+      intro: "Напиши по-испански, как ты представляешься новому знакомому: поздоровайся, скажи, как тебя зовут, назови имя или фамилию по буквам, добавь вежливую фразу и попрощайся. Приложение отмечает пункты, которые уже есть. Потом прочитай текст вслух и запиши себя.",
+      requisitos: [
+        { txt: "Приветствие (hola, buenos días…)", rx: "(hola|buen[oa]s (días|tardes|noches))" },
+        { txt: "Как тебя зовут (me llamo…)", rx: "me llamo" },
+        { txt: "Имя или фамилия по буквам (pe, e, te…)", rx: "\\b(a|be|ce|che|de|e|efe|ge|hache|i|jota|ka|ele|eme|ene|eñe|o|pe|cu|erre|ese|te|u|uve|equis|ye|zeta)[,.]?\\s+(a|be|ce|che|de|e|efe|ge|hache|i|jota|ka|ele|eme|ene|eñe|o|pe|cu|erre|ese|te|u|uve|equis|ye|zeta)[,.]?\\s+(a|be|ce|che|de|e|efe|ge|hache|i|jota|ka|ele|eme|ene|eñe|o|pe|cu|erre|ese|te|u|uve|equis|ye|zeta)\\b" },
+        { txt: "Вежливая фраза (encantado / encantada, mucho gusto, gracias)", rx: "(encantad[oa]|mucho gusto|gracias)" },
+        { txt: "Прощание (adiós, hasta luego…)", rx: "(adiós|hasta (luego|mañana)|chao)" }
+      ],
+      consejos: [
+        { rx: "adios|(^|[^a-záéíóúñh])asta\\b|(^|[^a-záéíóúñh])ola\\b", msg: "Проверь написание: **adiós** со знаком ударения, **hasta** и **hola** с **h**." },
+        { rx: "yo me llamo", msg: "Можно и «yo me llamo», но обычно говорят просто **me llamo**: «yo» по-испански часто опускают." },
+        { fn: t => /\?/.test(t) && !/¿/.test(t) ? ["Вопрос по-испански начинается со знака **¿**: ¿Cómo te llamas?"] : [] }
+      ]
+    },
+    {
+      id: "es1m12", n: 12, tipo: "examen",
+      titulo: "Проверка урока",
+      resumen: "Буквы, чтение, произношение, ударение и общение.",
+      intro: "Двадцать упражнений в пяти частях. Каждый ответ — 1 балл, «Почти» — половина. С 80 % и выше урок сдан. Подсказки и «Повторить правило» здесь не появляются.",
+      partes: [
+        { nombre: "Буквы", tipos: ["audio-letra", "escuchar-letra", "nombre-letra", "unir"], n: 4 },
+        { nombre: "Чтение и письмо", tipos: ["dictado", "completar", "ordenar"], n: 4 },
+        { nombre: "Произношение", tipos: ["pares", "vocal", "ortografia"], n: 4 },
+        { nombre: "Ударение", tipos: ["tonica", "tilde", "dictado-tilde", "diacritica"], n: 4 },
+        { nombre: "Общение", tipos: ["situacion-frase", "respuesta", "numero", "deletreo", "dictado-frase"], n: 4 }
+      ],
+      aprobado: 0.8
+    }
   ]
 };
 
 function unidadEs1Modulo(id) { return UNIDAD_ES_1.modulos.find(m => m.id === id) || null; }
+
+/* El ID del léxico de una palabra del vocabulario. Las que tienen dos entradas (tarde, mañana, vale…)
+   van fijas: la que se enseña en la U1. */
+const ES1_ID_FIJO = { "tarde": "ESP-00217", "mañana": "ESP-05181", "vale": "ESP-05408", "bien": "ESP-00036", "mal": "ESP-00257",
+  "sí": "ESP-00038", "tal": "ESP-05183", "señor": "ESP-00051", "mucho": "ESP-00066", "llamarse": "ESP-02076" };
+function es1Id(w) {
+  if (ES1_ID_FIJO[w]) return ES1_ID_FIJO[w];
+  if (typeof LEXICON_ES === "undefined") return null;
+  const e = LEXICON_ES.find(x => x.es === w && !x.propio) || LEXICON_ES.find(x => x.es === w);
+  return e ? e.id : null;
+}
+/* Vocabulario de cada módulo como IDs (vocab de los datos está en palabras) */
+function es1Vocab(m) { return (m.vocab || []).map(es1Id).filter(Boolean); }
+/* Las palabras que la U1 enseña: las de las letras (Alfabeto) y las de los módulos 9 y 10 */
+function es1Objetivo() {
+  const out = [];
+  if (typeof ALFABETO_ES !== "undefined") ALFABETO_ES.forEach(l => l.words.forEach(w => { if (w.lexId) out.push(w.lexId); }));
+  UNIDAD_ES_1.modulos.forEach(m => es1Vocab(m).forEach(id => out.push(id)));
+  return [...new Set(out)];
+}
 
 /* ── Banco de ejercicios ──
    Sin ejercicios de traducir (PROGRAMA_ABECE.md §0): todo con audio, la
@@ -543,6 +690,65 @@ function ejerciciosUnidadEs1() {
       explicacion: exp });
   });
 
+  /* 17. Saludos y presentaciones (módulos 9 y 10): situación → frase, respuesta, dictado y orden de frases */
+  const OBJ = new Set(es1Objetivo());
+  const lexObj = lx => (lx || []).filter(id => id && OBJ.has(id));
+  const fr = typeof FRASES_ES !== "undefined" ? FRASES_ES : [];
+  const m9 = new Set(U.modulos.find(m => m.id === "es1m9").frases), m10 = new Set(U.modulos.find(m => m.id === "es1m10").frases);
+  const modFr = id => m10.has(id) ? 10 : 9;
+  ES1_SITUACIONES.forEach(([pide, ok, mal, exp, mod], i) => {
+    const f = fr.find(x => x.es === ok);
+    out.push({ id: "ES1-sit-" + i, tipo: "situacion-frase", forma: "elegir", dificultad: 2, modulo: mod, grupo: "sit-" + i, lex: f ? lexObj(f.lex) : undefined,
+      pide, opciones: baraja([ok].concat(mal), i + 101), correcta: ok, oir: ok, explicacion: exp });
+  });
+  ES1_RESPUESTAS.forEach(([dice, ok, mal, exp, mod], i) => {
+    out.push({ id: "ES1-resp-" + i, tipo: "respuesta", forma: "elegir", dificultad: 2, modulo: mod, grupo: "resp-" + i,
+      pide: "Тебе говорят: что ответишь?", grande: dice, audio: dice, opciones: baraja([ok].concat(mal), i + 121), correcta: ok, oir: ok, explicacion: exp });
+  });
+  fr.filter(f => f.unidad === 1).forEach((f, i) => {
+    const mod = modFr(f.id), lx = lexObj(f.lex);
+    out.push({ id: "ES1-dfr-" + f.id, tipo: "dictado-frase", forma: "escribir", dificultad: 3, modulo: mod, grupo: "fr-" + f.id, lex: lx.length ? lx : undefined,
+      pide: "Послушай и напиши фразу.", audio: f.es, esperadas: [f.es], idioma: "es", oir: f.es,
+      explicacion: "**" + f.es + "** — «" + f.ru + "». " + f.uso });
+    const pal = f.es.replace(/[¡!¿?.,…]/g, "").split(/\s+/).filter(Boolean);
+    if (pal.length >= 3) {
+      let fichas = baraja(pal, i + 131);
+      if (fichas.join(" ") === pal.join(" ")) fichas = fichas.slice(1).concat(fichas[0]);
+      out.push({ id: "ES1-ofr-" + f.id, tipo: "ordenar-frase", forma: "ordenar", dificultad: 2, modulo: mod, grupo: "fr-" + f.id, lex: lx.length ? lx : undefined,
+        pide: "Собери фразу, которую слышишь.", audio: f.es, fichas, sep: " ", esperada: pal.join(" "), oir: f.es,
+        explicacion: "**" + f.es + "** — «" + f.ru + "»." });
+    }
+  });
+  /* Chat corto: contestar con tu nombre (módulo 10) */
+  ES1_CONTESTAR.forEach(([dice, pide, esp, exp], i) => {
+    out.push({ id: "ES1-cont-" + i, tipo: "respuesta", forma: "escribir", dificultad: 3, modulo: 10, grupo: "cont-" + i,
+      pide, grande: dice, audio: dice, audioManual: true, esperadas: esp, idioma: "es", explicacion: exp });
+  });
+
+  /* 18. Números del 0 al 20 (módulo 10): oír y elegir, escribir con letras */
+  const NUM = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte"];
+  const CERCA = { 2: [12], 12: [2, 20], 3: [13], 13: [3], 4: [14], 14: [4], 5: [15], 15: [5], 6: [16], 16: [6], 7: [17], 17: [7], 8: [18], 18: [8], 9: [19], 19: [9], 10: [20], 20: [10, 12], 11: [1, 12], 1: [11] };
+  NUM.forEach((w, n) => {
+    const id = es1Id(w), cerca = (CERCA[n] || []).slice(0, 2);
+    const mal = cerca.concat(baraja(NUM.map((_, k) => k).filter(k => k !== n && cerca.indexOf(k) < 0), n + 141)).slice(0, 3);
+    out.push({ id: "ES1-num-o-" + n, tipo: "numero", forma: "elegir", dificultad: 1, modulo: 10, grupo: "num-" + n, lex: id ? [id] : undefined,
+      pide: "Послушай: какое это число?", audio: w, opciones: baraja([String(n)].concat(mal.map(String)), n + 151), correcta: String(n), oir: w,
+      explicacion: "**" + w + "** — " + n + "." });
+    out.push({ id: "ES1-num-e-" + n, tipo: "numero", forma: "escribir", dificultad: n > 15 ? 3 : 2, modulo: 10, grupo: "num-" + n, lex: id ? [id] : undefined,
+      pide: "Напиши это число словами.", grande: String(n), esperadas: [w], idioma: "es", oir: w,
+      explicacion: n + " — **" + w + "**." + (n === 16 ? " Со знаком ударения: dieci**séis**." : n > 15 ? " Одним словом: diez y " + NUM[n - 10] + " → " + w + "." : "") });
+  });
+
+  /* 19. Deletrear (módulo 10): oír las letras y escribir la palabra */
+  const nombreLetra = ch => { const l = L.find(x => x.lower === ch); return l ? l.name : ch; };
+  ES1_DELETREO.forEach((w, i) => {
+    const deletreo = w.split("").map(nombreLetra).join(", ");
+    const id = es1Id(w);
+    out.push({ id: "ES1-del-" + w, tipo: "deletreo", forma: "escribir", dificultad: 2, modulo: 10, grupo: "del-" + w, lex: id && OBJ.has(id) ? [id] : undefined,
+      pide: "Послушай слово по буквам и напиши его.", audio: deletreo, audioManual: false, esperadas: [w], idioma: "es", oir: w,
+      explicacion: deletreo + " → **" + w + "**." });
+  });
+
   /* Semáforo: qué letra o palabra practica cada ejercicio */
   out.forEach(ex => {
     if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id);
@@ -611,11 +817,54 @@ const ES1_FRASES = [
   ["Как правильно пишется «январь»?", "en ___", ["enero", "Enero"], "enero", "Месяцы пишутся со строчной буквы: **enero**.", "es1-mayusculas", "enero"]
 ];
 
+/* ── Módulos 9 y 10 ──
+   Situación → frase: [consigna (ruso), correcta, [otras], explicación, módulo] */
+const ES1_SITUACIONES = [
+  ["10 утра. Ты входишь в кафе. Как поздороваться?", "¡Buenos días!", ["¡Buenas noches!", "¡Hasta luego!"], "До обеда — **buenos días**.", 9],
+  ["17:00. Ты приходишь на урок. Как поздороваться?", "¡Buenas tardes!", ["¡Buenos días!", "¡Buenas noches!"], "После обеда и до темноты — **buenas tardes**.", 9],
+  ["22:00. Ты уходишь из гостей и прощаешься.", "¡Buenas noches!", ["¡Buenas tardes!", "¡Buenos días!"], "Вечером **buenas noches** — и «добрый вечер», и «спокойной ночи».", 9],
+  ["Ты уходишь и увидишь этих людей завтра.", "¡Hasta mañana!", ["¡Hasta luego!", "¡Hola!"], "**Hasta mañana** — «до завтра».", 9],
+  ["Тебе помогли. Что скажешь?", "Gracias.", ["De nada.", "Por favor."], "Благодарят словом **gracias**.", 9],
+  ["Тебе сказали «gracias». Что ответишь?", "De nada.", ["Por favor.", "Gracias."], "На «gracias» отвечают **de nada**, а не «por favor».", 9],
+  ["Ты не понял, что тебе сказали.", "No entiendo.", ["De nada.", "¡Vale!"], "**No entiendo** — «не понимаю».", 9],
+  ["Человек говорит слишком быстро.", "Más despacio, por favor.", ["¿Cómo se escribe?", "Lo siento."], "**Más despacio, por favor** — «помедленнее, пожалуйста».", 9],
+  ["Ты хочешь знать, как пишется слово.", "¿Cómo se escribe?", ["¿Qué tal?", "No entiendo."], "**¿Cómo se escribe?** — «как это пишется?».", 9],
+  ["Ты спрашиваешь у друга, как у него дела.", "¿Cómo estás?", ["¿Cómo está usted?", "¿Cómo te llamas?"], "С другом — на **tú**: **¿cómo estás?**", 9],
+  ["Ты спрашиваешь у пожилого соседа, как у него дела.", "¿Cómo está usted?", ["¿Cómo estás?", "¿Cómo se escribe?"], "Вежливо — на **usted**: **¿cómo está usted?**", 9],
+  ["Друг предлагает встретиться в шесть. Ты согласен.", "¡Vale!", ["Lo siento.", "Perdón."], "**¡Vale!** — «договорились» по-испански.", 9],
+  ["Ты случайно толкнул человека.", "Perdón.", ["De nada.", "¡Vale!"], "**Perdón** — «извините».", 9],
+  ["Ты хочешь узнать имя нового одногруппника.", "¿Cómo te llamas?", ["¿Cómo se llama usted?", "¿Qué tal?"], "С ровесником — на **tú**: **¿cómo te llamas?**", 10],
+  ["Аня знакомится с Лусией. Что говорит Аня?", "Encantada.", ["Encantado.", "De nada."], "Аня — женщина: **encantada**.", 10],
+  ["Хавьер знакомится с Аней. Что говорит Хавьер?", "Encantado.", ["Encantada.", "Gracias."], "Хавьер — мужчина: **encantado**.", 10],
+  ["Ты не понял, как пишется имя, и просишь назвать его по буквам.", "¿Puedes deletrear tu nombre?", ["¿Cómo te llamas?", "No entiendo."], "**¿Puedes deletrear tu nombre?** — «можешь назвать имя по буквам?».", 10]
+];
+/* Respuesta: [lo que te dicen, respuesta, [otras], explicación, módulo] */
+const ES1_RESPUESTAS = [
+  ["¿Qué tal?", "Muy bien, gracias. ¿Y tú?", ["De nada.", "¡Hasta luego!"], "На «¿qué tal?» отвечают, как дела: **muy bien, gracias**.", 9],
+  ["Gracias.", "De nada.", ["Por favor.", "Encantado."], "На «gracias» — **de nada**.", 9],
+  ["¡Hasta mañana!", "¡Adiós!", ["¡Buenos días!", "Me llamo Ana."], "На прощание отвечают прощанием.", 9],
+  ["¿Cómo está usted?", "Bien, gracias. ¿Y usted?", ["Bien, gracias. ¿Y tú?", "De nada."], "Тебя спросили на **usted** — и ты отвечаешь на usted: **¿y usted?**", 9],
+  ["¿Cómo te llamas?", "Me llamo Ana.", ["Muy bien, gracias.", "De nada."], "На «¿cómo te llamas?» — **me llamo…**", 10],
+  ["Encantado.", "Mucho gusto.", ["De nada.", "Lo siento."], "На «очень приятно» отвечают тем же: **mucho gusto** или **encantado / encantada**.", 10]
+];
+/* Contestar escribiendo: [lo que te dicen, consigna, respuestas, explicación] */
+const ES1_CONTESTAR = [
+  ["¿Cómo te llamas?", "Ответь: тебя зовут Аня.", ["Me llamo Ana.", "Ana."], "**Me llamo Ana.** Можно и просто: **Ana**."],
+  ["¿Cómo se llama usted?", "Ответь: тебя зовут Иван.", ["Me llamo Iván.", "Iván."], "**Me llamo Iván.**"],
+  ["¿Qué tal?", "Ответь: очень хорошо, спасибо.", ["Muy bien, gracias.", "Muy bien, gracias. ¿Y tú?"], "**Muy bien, gracias.** И можно спросить в ответ: **¿y tú?**"],
+  ["Gracias.", "Ответь вежливо.", ["De nada."], "На «gracias» — **de nada**."]
+];
+/* Deletrear: palabras sin tilde ni dígrafos (se nombra cada letra) */
+const ES1_DELETREO = ["hola", "nombre", "letra", "palabra", "tarde", "bien", "nada", "favor", "vale", "mal", "uno", "diez", "cero", "seis", "dos", "casa", "mesa", "señor"];
+
 /* Mezcla de la sesión */
 const ES1_MEZCLA = { dictado: 3, "escuchar-letra": 2, completar: 2, ordenar: 2, "audio-letra": 1, "nombre-letra": 1, vf: 1, unir: 1,
-  pares: 1, vocal: 2, ortografia: 2, tonica: 2, tilde: 2, "dictado-tilde": 2, diacritica: 2 };
+  pares: 1, vocal: 2, ortografia: 2, tonica: 2, tilde: 2, "dictado-tilde": 2, diacritica: 2,
+  "situacion-frase": 2, respuesta: 2, "dictado-frase": 2, "ordenar-frase": 2, numero: 2, deletreo: 2 };
 
 window.UNIDAD_ES_1 = UNIDAD_ES_1;
 window.unidadEs1Modulo = unidadEs1Modulo;
 window.ejerciciosUnidadEs1 = ejerciciosUnidadEs1;
+window.es1Vocab = es1Vocab;
+window.es1Objetivo = es1Objetivo;
 window.ES1_MEZCLA = ES1_MEZCLA;

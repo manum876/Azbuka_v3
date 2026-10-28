@@ -16,10 +16,13 @@
 <body>
 <div id="root"></div>
 <script src="assets/preact.js"></script>
-<script src="data/data-lexicon-es.js"></script>
-<script src="data/data-formas-es.js"></script>
-<script src="data/data-alfabeto-es.js"></script>
-<script src="data/data-unidad-es-1.js"></script>
+<!-- Los archivos de Abecé (léxico, formas, conjugaciones, alfabeto, diálogos y la unidad) se
+     cargan con document.write, como en gramatica.html: no entran en AZ_PRECACHE mientras Abecé
+     esté bloqueado; el teléfono los guarda la primera vez que se abre la página con internet. -->
+<script>
+["data/data-lexicon-es.js", "data/data-formas-es.js", "data/data-verbos-es.js", "data/data-alfabeto-es.js", "data/data-dialogos-es.js", "data/data-unidad-es-1.js"]
+  .forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
 <script src="data/data-catalogo.js"></script>
 <script src="js/core.js"></script>
 <script src="assets/supabase.js"></script>
@@ -27,8 +30,9 @@
 <script src="js/progress.js"></script>
 <script src="js/shell.js"></script>
 <script src="js/corrector.js"></script>
-<script src="js/corrector-es.js"></script>
-<script src="js/tilde-es.js"></script>
+<script>
+["js/corrector-es.js", "js/tilde-es.js"].forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
 <script src="js/burbuja.js"></script>
 <script src="js/unidad-ui.js"></script>
 <script src="js/unidad.js"></script>
@@ -38,9 +42,11 @@
    ------------------------------------------------------------
    La Unidad 1 de Abecé, con el mismo esqueleto y las mismas clases que
    azbuka-1.html: portada, introducción, cuatro grupos de letras con
-   ficha y tarjetas, vocales, sonidos y la tilde. Contenido en
-   data-unidad-es-1.js; letras en data-alfabeto-es.js; palabras en el
-   léxico español. El dominio de cada letra es el mismo que usa Alfabeto
+   ficha y tarjetas, vocales, sonidos, la tilde (entrega 1); saludos,
+   presentarse y números, con frases y diálogos, evaluación y proyecto
+   (entrega 2, como los módulos de lección de azbuka-2.html). Contenido en
+   data-unidad-es-1.js; letras en data-alfabeto-es.js; frases y diálogos en
+   data-dialogos-es.js; palabras en el léxico español. El dominio de cada letra es el mismo que usa Alfabeto
    en Abecé (abc-es:A). Textos en ruso: borrador para Iván.
    El motor (unidad.js, unidad-ui.js) lee la dirección y habla español.
    Solo Abecé: en Azbuka muestra un aviso.
@@ -55,9 +61,10 @@ const YELLOW = "#C9B369";
 const CLAVE = l => "abc-es:" + l.upper;     /* el mismo semáforo que Alfabeto */
 const EJ_U1 = ES_OK ? ejerciciosUnidadEs1() : [];
 const AVISO = "В испанском знак ударения (´) — часть написания: если его забыть, ответ засчитывается как «Почти». Перевёрнутые знаки ¿ и ¡ не обязательны. Для ответов включи испанскую клавиатуру (модуль 1).";
-/* Palabras de la unidad: por ahora, las de las letras (Alfabeto). Las de saludos y números se suman
-   con los módulos 9 y 10, cuando Manu apruebe el vocabulario. */
-const OBJETIVO_U1 = [...new Set(ALFABETO_ES.flatMap(l => l.words.map(w => w.lexId)).filter(Boolean))];
+/* Palabras de la unidad: las de las letras (Alfabeto) y las de los módulos 9 y 10 */
+const OBJETIVO_U1 = ES_OK ? es1Objetivo() : [];
+const NUM = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte"];
+const FILAS_NUM = NUM.slice(0, 11).map((w, i) => [{ es: w, ru: String(i) }, NUM[i + 11] ? { es: NUM[i + 11], ru: String(i + 11) } : null]);
 const muestra = l => l.upper.length > 1 ? l.lower : l.upper + " " + l.lower;
 
 function hablar(t) { azHablarEs(t); }
@@ -260,7 +267,10 @@ function App() {
   const [niveles, setNiveles] = useState({});
   const [hoja, setHoja] = useState(null);
   const [tarjetas, setTarjetas] = useState(false);
-  const [practica, setPractica] = useState(null);   /* { titulo, pool } */
+  const [practica, setPractica] = useState(null);   /* { titulo, pool, examen? } */
+  const [dialogo, setDialogo] = useState(null);     /* { id, grabar? } */
+  const [tarjetasP, setTarjetasP] = useState(null); /* { ids, titulo }: tarjetas de palabras */
+  const [examenU1, setExamenU1] = useState(null);
   const [visto, setVisto] = useState(2);
   const [verPron, setVerPron] = useState(true);
 
@@ -273,7 +283,7 @@ function App() {
       refrescarNiveles();
       if (ES_OK) azSaveUnitProgress(1, {});
     })();
-    const pop = () => { setModId(new URLSearchParams(location.search).get("m")); setHoja(null); setTarjetas(false); setPractica(null); };
+    const pop = () => { setModId(new URLSearchParams(location.search).get("m")); setHoja(null); setTarjetas(false); setPractica(null); setDialogo(null); setTarjetasP(null); };
     window.addEventListener("popstate", pop);
     return () => window.removeEventListener("popstate", pop);
   }, []);
@@ -292,6 +302,9 @@ function App() {
   }
   const practicarUnidad = () => setPractica({ titulo: "Урок 1", pool: EJ_U1.filter(e => e.modulo <= Math.max(visto, 2)) });
   const practicarModulo = m => setPractica({ titulo: m.titulo, pool: EJ_U1.filter(e => e.modulo === m.n) });
+  const rendirExamen = m => setPractica({ titulo: "Проверка урока 1", pool: EJ_U1, examen: { intro: m.intro, partes: m.partes, aprobado: m.aprobado } });
+  const reforzar = parte => setPractica({ titulo: "Повторить: " + parte.nombre, pool: EJ_U1.filter(e => parte.tipos.indexOf(e.tipo) >= 0) });
+  useEffect(() => { if (!practica && ES_OK && typeof azUnitProgress === "function") setExamenU1(azUnitProgress(1).examen || null); }, [practica, niveles]);
   const abrirModulo = id => {
     history.pushState(null, "", id ? "?m=" + id : location.pathname);
     setModId(id); window.scrollTo(0, 0);
@@ -323,7 +336,7 @@ function App() {
   ] : azTabsUnidad(1);
 
   /* ── Portada de la unidad ── */
-  const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 2), onPracticar: practicarUnidad, onAbrir: abrirModulo,
+  const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 2), examen: examenU1, onPracticar: practicarUnidad, onAbrir: abrirModulo,
     progreso: [{ label: "Буквы выучены", valor: dominadas, total: ALFABETO_ES.length }, { label: "Слова выучены", valor: palabrasDom, total: OBJETIVO_U1.length }],
     extraModulo: m => m.letras ? h("div", { className: "mod-l" }, m.letras.map(x => h("span", { key: x, lang: "es",
       style: niveles[x] === 2 ? { color: green, borderColor: green + "88" } : niveles[x] === 1 ? { color: YELLOW, borderColor: YELLOW + "88" } : null }, x))) : null });
@@ -333,6 +346,26 @@ function App() {
     h("div", { className: "u-kicker" }, "Урок 1 · Модуль " + mod.n),
     h("h1", { className: "u-title" }, mod.titulo),
     mod.tipo === "pronto" && h("p", { className: "u-text", style: { marginTop: 12 } }, "Этот модуль скоро появится."),
+    (mod.tipo === "leccion" || mod.tipo === "examen" || mod.tipo === "proyecto") && h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
+    mod.tipo === "leccion" && h(React.Fragment, null,
+      h(AzSecciones, { secciones: mod.secciones }),
+      mod.frases && mod.frases.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Фразы"), h(AzFrasesLista, { ids: mod.frases, c })),
+      mod.tablaNumeros && h(React.Fragment, null, h("div", { className: "u-sec" }, "Числа от 0 до 20"),
+        h(AzTablaGrupos, { encabezados: ["0–10", "11–20"], filas: FILAS_NUM, c })),
+      mod.vocab && h(React.Fragment, null, h("div", { className: "u-sec" }, "Слова (" + es1Vocab(mod).length + ")"), h(AzVocabulario, { ids: es1Vocab(mod), c })),
+      mod.dialogos && mod.dialogos.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Диалоги"),
+        h(AzListaDialogos, { ids: mod.dialogos, onAbrir: id => setDialogo({ id, grabar: true }) })),
+      mod.vocab && h("button", { className: "ubtn", onClick: () => setTarjetasP({ ids: es1Vocab(mod), titulo: mod.titulo }) }, "Карточки (" + es1Vocab(mod).length + ")"),
+      h("button", { className: "ubtn", style: { marginTop: 10 }, onClick: () => practicarModulo(mod) }, "Практиковать этот модуль"),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)),
+    mod.tipo === "examen" && h(React.Fragment, null,
+      h("div", { className: "u-card", style: { padding: "6px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
+        h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 14.5 } },
+          h("span", { style: { fontWeight: 600 } }, p.nombre), h("span", { style: { color: c.textMuted } }, p.n + (p.n === 1 ? " упражнение" : p.n < 5 ? " упражнения" : " упражнений"))))),
+      examenU1 && h("div", { style: { marginTop: 14, fontSize: 14, color: examenU1.aprobado ? green : "#E2884A", fontWeight: 700 } },
+        "Последний раз: " + examenU1.pct + " % (" + examenU1.fecha.split("-").reverse().join(".") + ")" + (examenU1.aprobado ? " · сдано" : "")),
+      h("button", { className: "ubtn", onClick: () => rendirExamen(mod) }, examenU1 ? "Пройти ещё раз" : "Начать проверку")),
+    mod.tipo === "proyecto" && h(AzProyecto, { mod, c, green, clave: "az_es1_proyecto", fuente: { titulo: "Урок 1 · Проект", href: "abece-1.html?m=es1m11" }, aviso: AVISO, grabar: true }),
     mod.tipo === "intro" && h(AzSecciones, { secciones: mod.secciones }),
     mod.tipo === "intro" && next && h("button", { className: "ubtn", onClick: () => abrirModulo(next.id) }, "Начать с букв"),
     (mod.tipo === "pronunciacion" || mod.tipo === "reglas") && h(VistaPronunciacion, { mod, c }),
@@ -371,7 +404,9 @@ function App() {
     h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vistaModulo : portada),
     hoja && h(HojaLetra, { l: LETRA[hoja], c, green, nivel: niveles[hoja] || 0, setNivel, onClose: () => setHoja(null) }),
     practica && h(AzPractica, { key: practica.titulo, unidad: 1, titulo: practica.titulo, pool: practica.pool, mezcla: ES1_MEZCLA, n: Math.min(12, azNPractica(practica.pool, 12)), dark: darkMode, aviso: AVISO,
-      onSalir: () => { setPractica(null); refrescarNiveles(); } }),
+      examen: practica.examen, onReforzar: reforzar, onSalir: () => { setPractica(null); refrescarNiveles(); } }),
+    dialogo && h(AzHojaDialogo, { d: dialogoEsById(dialogo.id), c, grabar: dialogo.grabar, objetivo: OBJETIVO_U1, onClose: () => setDialogo(null) }),
+    tarjetasP && h(AzTarjetasPalabras, { ids: tarjetasP.ids, titulo: tarjetasP.titulo, c, green, onClose: () => setTarjetasP(null) }),
     tarjetas && mod && h(Tarjetas, { letras: mod.letras, titulo: mod.titulo, c, green, niveles, setNivel, onClose: () => setTarjetas(false) }),
     h(AzBurbujaHost, { dark: darkMode }));
 }

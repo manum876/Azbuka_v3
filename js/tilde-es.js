@@ -11,7 +11,7 @@
      · tdAnalizar(w) → todo lo que muestra el laboratorio: sílabas,
        tónica, tipo (aguda, llana, esdrújula, sobresdrújula), si lleva
        tilde y la explicación en ruso (borrador para Iván).
-   Lo usa alfabeto.html en Abecé. Comprobado contra las 5.367 entradas
+   Lo usa alfabeto.html en Abecé. Comprobado contra las 5.369 entradas
    del léxico (herramientas/abece/verificar-tilde-es.js).
    ============================================================ */
 (function () {

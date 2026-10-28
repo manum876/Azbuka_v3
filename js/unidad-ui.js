@@ -64,7 +64,8 @@
     "▶ Escucharlo": "▶ Послушать", "＋ Cuaderno": "＋ Тетрадь", "Tiempo estimado: ": "Примерное время: ",
     "Se marcan solas cuando las aciertas en ejercicios distintos, en días distintos. También puedes marcarlas a mano en las tarjetas.": "Отмечаются сами, когда ты отвечаешь верно в разных упражнениях и в разные дни. Их можно отметить и вручную в карточках.",
     "Practicar la unidad": "Практиковать урок", "Módulos": "Модули", "Pronto": "Скоро", " · aprobada": " · сдано", "Anterior": "Назад", "Siguiente": "Дальше",
-    "Toca una palabra para escuchar cómo suena.": "Нажми на слово, чтобы услышать, как оно звучит."
+    "Toca una palabra para escuchar cómo suena.": "Нажми на слово, чтобы услышать, как оно звучит.",
+    "Léelo en voz alta": "Прочитай вслух", "Escucha el modelo, grábate y compara.": "Послушай образец, запиши себя и сравни."
   };
   const T = s => ES && TX_RU[s] != null ? TX_RU[s] : s;
   const hablar = (t, quien) => { if (ES) { if (typeof azHablarEs === "function") azHablarEs(t, null, quien); } else azHablarRu(t, quien); };
@@ -607,7 +608,8 @@
         : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Toca un país dorado."));
   }
 
-  function AzProyecto({ mod, c, green, clave, fuente, aviso }) {
+  /* grabar (28/10/2026, proyecto de la U1 de Abecé): debajo, la grabadora con el texto escrito como modelo */
+  function AzProyecto({ mod, c, green, clave, fuente, aviso, grabar }) {
     const [txt, setTxt] = useState("");
     const [rev, setRev] = useState(null);
     useEffect(() => { (async () => setTxt(await azGet(clave, "")))(); }, []);
@@ -632,7 +634,11 @@
         h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, T("La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática."))),
       h("div", { style: { display: "flex", gap: 8, marginTop: 12 } },
         h("button", { className: "ubtn sec", style: { marginTop: 0 }, disabled: !txt.trim(), onClick: () => hablar(txt) }, T("▶ Escucharlo")),
-        h("button", { className: "ubtn", style: { marginTop: 0 }, disabled: !txt.trim(), onClick: () => azGuardarEnCuaderno(txt, fuente) }, T("＋ Cuaderno"))));
+        h("button", { className: "ubtn", style: { marginTop: 0 }, disabled: !txt.trim(), onClick: () => azGuardarEnCuaderno(txt, fuente) }, T("＋ Cuaderno"))),
+      grabar && txt.trim() && h(React.Fragment, null,
+        h("div", { className: "u-sec" }, T("Léelo en voz alta")),
+        h("div", { className: "u-text", style: { fontSize: 13.5 } }, T("Escucha el modelo, grábate y compara.")),
+        h(AzGrabadora, { texto: txt })));
   }
 
   /* Taller de escritura (06/10/2026, Unidad 13): planificar → escribir →
@@ -786,6 +792,7 @@
     const s = new Set();
     if (typeof LEXICON_ES !== "undefined") LEXICON_ES.forEach(e => { e.es.toLowerCase().split(/\s+/).forEach(x => s.add(x)); if (e.femenino && e.femenino.es) s.add(e.femenino.es.toLowerCase()); });
     if (typeof formasEsIndice === "function") Object.keys(formasEsIndice()).forEach(k => s.add(k));
+    if (typeof ALFABETO_ES !== "undefined") ALFABETO_ES.forEach(l => String(l.name).toLowerCase().split(/[\s,]+/).forEach(x => x && s.add(x)));   /* pe, erre, uve: deletrear */
     if (typeof VERBOS_ES !== "undefined") Object.values(VERBOS_ES).forEach(v => Object.keys(v).forEach(k => { const x = v[k]; (Array.isArray(x) ? x : typeof x === "string" && /^(impTu|ger|part)$/.test(k) ? [x] : []).forEach(f => f && s.add(String(f).toLowerCase())); }));
     return (CONOCIDAS_ES = s);
   }
