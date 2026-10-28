@@ -475,7 +475,8 @@ function VesFicha({ id, c }) {
           irr.map(m => h("span", { key: m, className: "tag" }, VES_MARCA[m] || m)),
           orto.map(m => h("span", { key: m, className: "tag ves-orto" }, "орфография: " + m))),
         (lex.regimen || []).length > 0 && h("div", { className: "gov" }, VES_TX.rige,
-          lex.regimen.map((r, i) => h("span", { key: i, className: "gov-chip", style: { cursor: "default" } }, r))),
+          /* como «Rige:» de Azbuka: cada chip con «?» abre la guía (capítulo de preposiciones, 27/10/2026) */
+          lex.regimen.map((r, i) => h("a", { key: i, className: "gov-chip", href: "gramatica.html?guia=preposiciones", onClick: e => azNavigate(e, "gramatica.html?guia=preposiciones"), style: { display: "inline-block", textDecoration: "none" } }, r, h("span", null, "?")))),
         (partner.length > 0 || soloSe) && h("div", { className: "gov" }, VES_TX.pareja,
           partner.map(p => h("a", { key: p, className: "gov-chip", href: "verbos.html?id=" + p, onClick: ir("verbos.html?id=" + p), style: { textDecoration: "none" } },
             VERBOS_ES[p].es, h("span", null, "›"))),

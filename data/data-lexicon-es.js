@@ -8,7 +8,8 @@
    Estado: 5367 entradas (léxico base completo: 10 tandas, 26/10/2026; correcciones del 27/10/2026:
    molar separado en verbo ESP-04818 y sustantivo ESP-05404, muela nueva ESP-05405, linear ESP-03453
    quitado —su ID no se vuelve a usar—; zorra solo con la acepción vulgar, criada → criado con femenino
-   criada, madrastra ESP-05406 aparte de padrastro, madrina nueva ESP-05407). Lo carga el Diccionario
+   criada, madrastra ESP-05406 aparte de padrastro, madrina nueva ESP-05407; pronunciación de show, sexy, rock, whisky, shock y hockey corregida con
+   las reglas nuevas de herramientas/abece/generador-fonetica-es.py). Lo carga el Diccionario
    (ficha.html) en Abecé, y core.js lo pide solo para el buscador (27/10/2026).
 
    Campos:
@@ -55555,8 +55556,8 @@ const LEXICON_ES = [
   "es": "show",
   "acento": "show",
   "posNormalized": "sustantivo",
-  "translit": "соу",
-  "ipa": "sˈow",
+  "translit": "чоу",
+  "ipa": "tʃˈow",
   "gender": "m",
   "numberClass": "regular",
   "senses": [
@@ -68873,10 +68874,10 @@ const LEXICON_ES = [
  {
   "id": "ESP-01633",
   "es": "sexy",
-  "acento": "sexy",
+  "acento": "SE·xy",
   "posNormalized": "adjetivo",
-  "translit": "сэксй",
-  "ipa": "sˈeksj",
+  "translit": "сэ́кси",
+  "ipa": "sˈeksi",
   "gender": "",
   "numberClass": "",
   "senses": [
@@ -73542,8 +73543,8 @@ const LEXICON_ES = [
   "es": "rock",
   "acento": "rock",
   "posNormalized": "sustantivo",
-  "translit": "рокк",
-  "ipa": "rˈokk",
+  "translit": "рок",
+  "ipa": "rˈok",
   "gender": "m",
   "numberClass": "singulariaTantum",
   "senses": [
@@ -79171,10 +79172,10 @@ const LEXICON_ES = [
  {
   "id": "ESP-01880",
   "es": "whisky",
-  "acento": "whisky",
+  "acento": "WHIS·ky",
   "posNormalized": "sustantivo",
-  "translit": "уискй",
-  "ipa": "ˈwiskj",
+  "translit": "уи́ски",
+  "ipa": "ˈwiski",
   "gender": "m",
   "numberClass": "regular",
   "senses": [
@@ -137028,8 +137029,8 @@ const LEXICON_ES = [
   "es": "shock",
   "acento": "shock",
   "posNormalized": "sustantivo",
-  "translit": "сокк",
-  "ipa": "sˈokk",
+  "translit": "чок",
+  "ipa": "tʃˈok",
   "gender": "m",
   "numberClass": "regular",
   "senses": [
@@ -163182,10 +163183,10 @@ const LEXICON_ES = [
  {
   "id": "ESP-03933",
   "es": "hockey",
-  "acento": "hoc·KEY",
+  "acento": "HOC·key",
   "posNormalized": "sustantivo",
-  "translit": "оккэ́й",
-  "ipa": "okkˈej",
+  "translit": "хо́кэй",
+  "ipa": "xˈokej",
   "gender": "m",
   "numberClass": "singulariaTantum",
   "senses": [

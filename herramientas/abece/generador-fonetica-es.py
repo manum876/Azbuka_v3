@@ -6,6 +6,8 @@
 #   ipa(es)      → IPA peninsular (distinción z / s, yeísmo; la n antes de v o m queda n)
 #   translit(es) → pronunciación figurada en cirílico, tónica con tilde (ка́са)
 # Es el mismo programa que armó data/data-lexicon-es.js. No es parte de la app.
+# 27/10/2026: y final tras consonante = i (whisky, sexy), ck = k (rock) y
+# préstamos que se dicen distinto (PRONUNCIA: show = чоу, hockey = хо́кэй).
 # Uso:  python3 herramientas/abece/generador-fonetica-es.py casa enviar "sin embargo"
 # Para importarlo desde Python, copiarlo como generador_fonetica_es.py.
 # ============================================================
@@ -25,16 +27,21 @@ def letras(w):
         out.append(w[i]); i+=1
     return out
 def esv(u): return u in V
+def y_vocal(w):
+    # y final tras consonante = vocal i (whisky, sexy, jersey no: ahí va tras vocal) — 27/10/2026
+    return len(w)>1 and w[-1]=='y' and w[-2] not in V
 def silabas(w):
     L=letras(w)
+    yv=len(L)-1 if y_vocal(w) else -1
+    def esv(u, idx=None): return u in V or idx==yv
     # núcleos vocálicos: separa hiatos
     nuc=[]  # lista de (inicio,fin) índices de grupo vocálico
     i=0
     while i<len(L):
-        if esv(L[i]):
+        if esv(L[i], i):
             j=i
             grupo=[i]
-            while j+1<len(L) and esv(L[j+1]): j+=1; grupo.append(j)
+            while j+1<len(L) and esv(L[j+1], j+1): j+=1; grupo.append(j)
             # partir hiatos dentro del grupo
             seg=[grupo[0]]; segs=[]
             for k in grupo[1:]:
@@ -71,10 +78,12 @@ def tonica(w,sil):
     for k,s in enumerate(sil):
         if any(c in 'áéíóú' for c in s): return k
     if len(sil)==1: return 0
-    return len(sil)-2 if w[-1] in 'aeiouns' else len(sil)-1
+    return len(sil)-2 if (w[-1] in 'aeiouns' or y_vocal(w)) else len(sil)-1
 ATONAS=set('el la los las lo un? de a en por con sin para que y e o u ni me te se le nos os les mi tu su mis tus sus del al si cuando como donde pero mas aunque porque pues tan muy'.split())
 ATONAS_LOC=set('el la los las lo de a en por con sin para que y e o u ni me te se le nos os les mi tu su del al si'.split())
+ACENTO={'hockey':'HOC·key'}   # se escribe como aguda pero es llana (27/10/2026)
 def acento(es):
+    if es in ACENTO: return ACENTO[es]
     ws=es.split()
     out=[]
     for w in ws:
@@ -84,8 +93,12 @@ def acento(es):
         out.append('·'.join(s.upper() if k==t else s for k,s in enumerate(sil)))
     return ' '.join(out)
 # ---------- fonemas ----------
+# Préstamos que se pronuncian distinto de como se escriben (27/10/2026): para la
+# IPA y la pronunciación figurada se usa esta forma; el acento sigue la escritura.
+PRONUNCIA={'show':'chou','shock':'chok','hockey':'jókey','whisky':'wíski'}
 def fonemas(w):
     """devuelve lista de sílabas, cada una lista de fonemas; y el índice tónico"""
+    w=PRONUNCIA.get(w,w)
     sil=silabas(w); t=tonica(w,sil)
     res=[]
     for k,s in enumerate(sil):
@@ -103,6 +116,7 @@ def sil_fon(s,w,k,sil):
         if two=='qu' and i+2<len(s) and s[i+2] in 'eiéí': p.append('k'); i+=2; continue
         if two=='gu' and i+2<len(s) and s[i+2] in 'eiéí': p.append('g'); i+=2; continue
         if c=='h': i+=1; continue
+        if c=='c' and nx=='k': i+=1; continue          # ck = k (rock, hockey) — 27/10/2026
         if c=='c': p.append('θ' if nx in 'eiéí' else 'k'); i+=1; continue
         if c=='z': p.append('θ'); i+=1; continue
         if c=='g': p.append('x' if nx in 'eiéí' else 'g'); i+=1; continue
@@ -114,7 +128,8 @@ def sil_fon(s,w,k,sil):
         if c=='w': p.append('w'); i+=1; continue
         if c=='y':
             # y vocal al final de sílaba (hoy, rey) o conjunción
-            if i==len(s)-1 and i>0: p.append('j')
+            if i==len(s)-1 and i>0 and s[i-1] not in V: p.append('i')   # sexy: y final tras consonante = i
+            elif i==len(s)-1 and i>0: p.append('j')
             elif len(s)==1: p.append('i')
             else: p.append('ʝ')
             i+=1; continue

@@ -210,9 +210,9 @@ function GramStyles({ c, dark }) {
     .par-por{font-size:13px;line-height:1.5;color:${c.textSub};margin-top:4px;}
     .pr-ok-t{color:${OK};}
     .pr-mal-t{color:${MAL};}
-    .pr{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-top:10px;}
-    .pr-top{display:flex;align-items:flex-start;}
-    .pr-top .sense-num{flex-shrink:0;margin-top:1px;}
+    .prc{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;margin-top:10px;}
+    .prc-top{display:flex;align-items:flex-start;}
+    .prc-top .sense-num{flex-shrink:0;margin-top:1px;}
     .pr-ru{font-size:16px;font-weight:700;color:${c.text};line-height:1.6;}
     .pr-hueco{display:inline-block;min-width:54px;padding:0 8px;margin:0 2px;border:1.5px dashed ${c.gold}88;border-radius:7px;color:${c.textMuted};font-style:italic;font-weight:600;line-height:1.45;}
     .pr-hueco.pr-ok{border:1.5px solid ${OK};color:${OK};font-style:normal;font-weight:700;background:${OK}1A;}
@@ -473,8 +473,8 @@ function GuiaPractica({ items, showTr }) {
       const r = resp[i], hecho = r != null;
       const partes = it.fr.split("___");
       const frase = partes[0] + it.ok + (partes[1] || "");
-      return h("div", { key: i, className: "pr" },
-        h("div", { className: "pr-top" },
+      return h("div", { key: i, className: "prc" },
+        h("div", { className: "prc-top" },
           h("span", { className: "sense-num" }, i + 1),
           h("div", { className: "pr-ru" }, partes[0],
             h("span", { className: "pr-hueco" + (hecho ? (r === it.ok ? " pr-ok" : " pr-mal") : "") }, hecho ? it.ok : "\u00a0"),   /* vacío hasta responder (Manu, 27/10/2026) */
@@ -716,7 +716,7 @@ function App() {
     h("input", {
       key: "i", ref: qRef, value: q, onInput: (ev) => setQ(ev.target.value),
       placeholder: "Слово или форма: buenas, los…",
-      style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 16 }
+      style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 14 }
     }),
     q && h("button", {
       key: "x", onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); }, "aria-label": "Очистить поиск",
@@ -753,7 +753,7 @@ function App() {
       INTRO_ITEMS.map((it, i) => h("div", { key: i, className: "intro-item" },
         h("span", { className: "intro-dot" }),
         h("div", null, h("div", { className: "intro-it" }, it[0]), h("div", { className: "intro-id" }, it[1]))))),
-    !buscando && HAY_GUIA && h(GuiaBoton, { titulo: GRAMATICA_ES.titulo, desc: "Артикль, род, согласование… — с примерами и упражнениями", onClick: () => setGuia("") }),
+    !buscando && HAY_GUIA && h(GuiaBoton, { titulo: "Как устроена грамматика", desc: "Артикль, ser и estar, местоимения, времена", onClick: () => setGuia("") }),
     h("div", { style: { position: "relative" } }, ...campo),
     !buscando && h("div", { className: "search-hint" }, "Можно искать по-испански или по-русски, или написать любую форму: buenas → bueno, canciones → canción."),
     !buscando && h("div", { className: "try-row" },

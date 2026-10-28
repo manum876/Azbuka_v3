@@ -213,7 +213,8 @@ function azSearchLexicon(query, pos) {
      libro, buenas → bueno, buen → bueno, los → el) con formasEsIndice de
      data/data-formas-es.js. Si la página no lo tiene, azCargarFormasEs lo
      pide y avisa con "az-formas". Van después de las formas verbales.
-   · azHablarEs(texto): la voz del español. Mientras no estén los audios
+   · azHablarEs(texto, region?): la voz del español (region: "es-MX", "es-AR"… usa la
+     voz de ese país si existe; 27/10/2026). Mientras no estén los audios
      de Abece_voces, la voz es-ES del teléfono. */
 function azEscribirLexico() {
   document.write('<script src="' + (AZ_DIRECCION.lexico || "data/data-lexicon.js") + '"><\/script>');
@@ -332,19 +333,24 @@ if (AZ_DIRECCION.id === "abece" && typeof window !== "undefined") {
   window.addEventListener("load", () => setTimeout(azCargarLexEs, 800));
 }
 const AZ_VOZ_ES_F = /monica|mónica|paulina|marisol|elvira|female|mujer/i;
-function azHablarEs(texto) {
+/* region (27/10/2026, Alfabeto · variedades): "es-MX", "es-AR"… usa la voz de ese
+   país si el teléfono la tiene; si no, la de España. Devuelve true si la encontró. */
+function azHablarEs(texto, region) {
   try {
-    if (!texto || !("speechSynthesis" in window)) return;
+    if (!texto || !("speechSynthesis" in window)) return false;
     azVozTurno++; azVozParar();
     const s = window.speechSynthesis; s.cancel(); s.resume();
     const u = new SpeechSynthesisUtterance(String(texto));
     u.lang = "es-ES"; u.rate = 0.9;
     const vs = s.getVoices().filter(v => /^es/i.test(v.lang));
-    const v = vs.find(v => /es[-_]ES/i.test(v.lang) && AZ_VOZ_ES_F.test(v.name)) || vs.find(v => /es[-_]ES/i.test(v.lang)) || vs[0];
+    const reg = region ? new RegExp(region.replace("-", "[-_]"), "i") : null;
+    const vr = reg ? vs.find(v => reg.test(v.lang)) : null;
+    const v = vr || vs.find(v => /es[-_]ES/i.test(v.lang) && AZ_VOZ_ES_F.test(v.name)) || vs.find(v => /es[-_]ES/i.test(v.lang)) || vs[0];
     if (v) { u.voice = v; u.lang = v.lang; }
     window.azVozFrase = u;
     s.speak(u);
-  } catch (e) {}
+    return !!vr;
+  } catch (e) { return false; }
 }
 
 /* ── FORMAS DECLINADAS Y CONJUGADAS ──────────────────────────

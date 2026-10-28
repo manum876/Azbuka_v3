@@ -79,7 +79,7 @@
      alfabeto cirílico; en Abecé, el léxico español y el alfabeto español -->
 <script>
 (AZ_DIRECCION.id === "abece"
-  ? ["data/data-lexicon-es.js", "data/data-alfabeto-es.js"]
+  ? ["data/data-lexicon-es.js", "data/data-alfabeto-es.js", "js/tilde-es.js"]
   : ["data/data-lexicon.js", "data/data-alphabet.js"]
 ).forEach(src => document.write('<script src="' + src + '"><\/script>'));
 </script>
@@ -111,7 +111,16 @@ const TX = ES ? {
   escuchar: "▶ Слушать", escribir: "✍️ Написать",
   niveles: ["Не изучено", "Изучаю", "Выучено"],
   comoPron: "Как произносить", parecido: "Похоже в русском", errores: "Частые ошибки", consejo: "Совет",
-  similares: "Похожие буквы", palabras: "Слова для практики", ficha: "Открыть в словаре"
+  similares: "Похожие буквы", palabras: "Слова для практики", ficha: "Открыть в словаре",
+  fenTitulo: "Особенности произношения", fenBoton: n => "Гласные, r и rr, b = v и ещё " + (n - 3) + " правил",
+  fenDesc: "То, что русскоговорящий делает по привычке, когда читает по-испански. У каждого правила — пример, частая ошибка и слова для практики.",
+  fenKicker: "Особенность произношения", fenLetras: "Буквы:", fenComo: "Как это работает", fenPares: "Слова, которые различаются",
+  fenEjemplos: "Слова для практики", fenFrases: "Фразы", varEsp: "Испания: ", varAqui: "Здесь: ", fenMas: "Подробнее", fenAnt: "Предыдущее правило", fenSig: "Следующее правило",
+  tdTitulo: "Лаборатория ударения", tdBoton: "Слоги, ударный слог и знак ударения",
+  tdDesc: "Напиши испанское слово: приложение разделит его на слоги, покажет ударный слог и объяснит, почему знак ударения нужен или не нужен.",
+  tdPh: "Напиши слово: canción, árbol, país…", tdPrueba: "Попробуй:", tdSilabas: "Слоги", tdTipo: "Ударение",
+  tdUno: "один слог", tdCon: "со знаком ударения", tdSin: "без знака ударения", tdQuiza: "Может быть, ты имел в виду:",
+  tdReglas: "Правила", tdNoPalabra: "Напиши слово латинскими буквами."
 } : {
   buscar: "Buscar letra…", heroLetras: "А Б В Г", heroTitulo: "El Alfabeto Cirílico Ruso",
   heroTag: () => "33 letras · Pronunciación, escritura y uso real",
@@ -163,9 +172,14 @@ function highlightWord(word, letter) {
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const MANO0 = new URLSearchParams(location.search).get("mano");
-  const [page, setPage] = useState(MANO0 ? "mano" : "grid"); // grid | detail | mano
+  const FEN0 = new URLSearchParams(location.search).get("fen");
+  const [page, setPage] = useState(MANO0 ? "mano" : FEN0 != null && ES ? (FEN0 ? "fen" : "fenes") : new URLSearchParams(location.search).get("tilde") != null && ES ? "tilde" : "grid"); // grid | detail | mano | fenes | fen | tilde (Abecé)
   const [manoLetra, setManoLetra] = useState(MANO0 || (ES ? "A" : "А"));
   const [selectedId, setSelectedId] = useState(null);
+  const [fenId, setFenId] = useState(FEN0 || null);
+  /* Abecé: laboratorio de la tilde (alfabeto.html?tilde= o ?tilde=canción) */
+  const TD0 = new URLSearchParams(location.search).get("tilde");
+  const [tdQ, setTdQ] = useState(TD0 || "");   /* Abecé: fenómeno abierto (alfabeto.html?fen=vocales) */
   const [search, setSearch] = useState("");
   const [showPronun, setShowPronun] = useState(true);
   const [showNames, setShowNames] = useState(true);
@@ -213,6 +227,65 @@ function App() {
     l.name.toLowerCase().includes(q) || azSinMarcas(l.pronunciation).toLowerCase().includes(q) || (l.nameTl || "").includes(q)
   );
 
+  /* Una palabra de práctica (letras y fenómenos): la palabra con la letra
+     resaltada, su pronunciación, la cursiva, la traducción, la nota, ▶ y 📖 */
+  const filaPalabra = (w, i, letra) => React.createElement("div", { key: i, className: "word-row", style: { borderColor: c.border } },
+    React.createElement("div", { className: "word-main" },
+      React.createElement("div", { className: "word-ru", style: { color: c.text } }, letra ? highlightWord(ES ? w.es : w.cyrillic, letra) : (ES ? w.es : w.cyrillic)),
+      showTranslit && React.createElement("div", { className: "word-translit" + (ES ? " az-tl" : ""), style: { color: c.textSub } }, w.translit),
+      React.createElement("div", { className: "word-cursive", style: { color: c.gold } }, ES ? w.es : w.cyrillic),
+      React.createElement("div", { className: "word-es", style: { color: c.textMuted } }, w.meaning),
+      React.createElement("div", { className: "word-note", style: { color: c.textSub } }, azFmt(w.note))
+    ),
+    React.createElement("div", { className: "word-btns" },
+      React.createElement("button", {
+        className: "word-btn btn", onClick: () => hablarPalabra(w), "aria-label": TX.escuchar,
+        style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
+      }, "▶"),
+      w.lexId && React.createElement("a", {
+        className: "word-btn btn", href: "ficha.html?id=" + w.lexId, "aria-label": TX.ficha,
+        onClick: (e) => azNavigate(e, "ficha.html?id=" + w.lexId),
+        style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.gold, textDecoration: "none" }
+      }, "📖")
+    )
+  );
+
+  /* Botón dorado de las guías (Gramática, Casos): ícono, título y descripción */
+  const botonDorado = (ic, t, d, fn) => React.createElement("button", {
+    className: "btn", onClick: fn,
+    style: { display: "flex", alignItems: "center", gap: 12, width: "100%", boxSizing: "border-box", textAlign: "left", background: c.gold + "14", border: `1px solid ${c.gold}66`, borderRadius: 14, padding: "9px 14px", marginBottom: 14 }
+  },
+    React.createElement("span", { style: { width: 34, height: 34, borderRadius: 10, background: c.gold, color: c.bg, fontSize: 17, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, ic),
+    React.createElement("span", { style: { flex: 1, minWidth: 0, display: "flex", flexDirection: "column" } },
+      React.createElement("span", { style: { fontSize: 14.5, fontWeight: 700, color: c.text } }, t),
+      React.createElement("span", { style: { fontSize: 12, color: c.textMuted, marginTop: 2, lineHeight: 1.35, fontWeight: 500 } }, d)),
+    React.createElement("span", { style: { fontSize: 22, color: c.gold, fontWeight: 700 } }, "›"));
+
+  /* Abecé: laboratorio de la tilde */
+  const td = page === "tilde" && typeof tdAnalizar === "function" ? tdAnalizar(tdQ) : null;
+  const tdNorm = t => azNormEs(t);
+  const tdLex = td && typeof LEXICON_ES !== "undefined" ? LEXICON_ES.find(e => e.es.toLowerCase() === td.palabra) : null;
+  const tdQuiza = td && !tdLex && typeof LEXICON_ES !== "undefined" ? LEXICON_ES.filter(e => !/\s/.test(e.es) && tdNorm(e.es) === tdNorm(td.palabra) && e.es.toLowerCase() !== td.palabra).slice(0, 3) : [];
+  const TD_REGLAS = [
+    ["Ударение на последнем слоге (aguda)", "Знак ставится, если слово кончается на гласную, -n или -s.", ["canción", "café", "después"]],
+    ["Ударение на предпоследнем слоге (llana)", "Знак ставится, если слово кончается НЕ на гласную, -n или -s.", ["árbol", "fácil", "lápiz"]],
+    ["Ударение на третьем слоге от конца (esdrújula)", "Знак ставится всегда.", ["teléfono", "música", "página"]],
+    ["Ударная í, ú рядом с a, e, o", "Знак ставится всегда: гласные в разных слогах.", ["día", "país", "río"]],
+    ["Пары односложных слов", "Знак различает два слова.", ["tú", "tu", "él", "el"]],
+    ["Вопросительные слова", "В вопросе — со знаком.", ["qué", "cómo", "dónde"]]
+  ];
+  const tdChip = (w) => React.createElement("button", {
+    key: w, className: "btn", onClick: () => { setTdQ(w); window.scrollTo(0, 0); },
+    style: { padding: "6px 11px", borderRadius: 10, fontSize: 13, fontWeight: 600, background: c.bg2, border: `1px solid ${c.border}`, color: c.text }
+  }, w);
+
+  /* Abecé: fenómenos clave */
+  const FENES = ES && typeof FENOMENOS_ES !== "undefined" ? FENOMENOS_ES : [];
+  const fenSel = fenId ? FENES.find(f => f.id === fenId) : null;
+  const fenIdx = fenSel ? FENES.indexOf(fenSel) : -1;
+  const fenesDe = l => FENES.filter(f => f.letras.indexOf(l.upper) >= 0);
+  function abrirFen(id) { setFenId(id); setPage("fen"); window.scrollTo(0, 0); }
+
   const tabs = page === "mano" ? [
     { id: "back", icon: "⊞", label: TX.volver, action: () => setPage("grid") }
   ] : page === "detail" ? [
@@ -220,6 +293,15 @@ function App() {
     { id: "prev", icon: "‹", aria: TX.ant, action: goPrev },
     { id: "count", texto: `${idx + 1} / ${LETRAS.length}` },
     { id: "next", icon: "›", aria: TX.sig, action: goNext }
+  ] : page === "fen" ? [
+    { id: "back", icon: "⊞", aria: TX.fenTitulo, action: () => setPage("fenes") },
+    { id: "prev", icon: "‹", aria: TX.fenAnt, action: () => fenIdx > 0 && abrirFen(FENES[fenIdx - 1].id) },
+    { id: "count", texto: `${fenIdx + 1} / ${FENES.length}` },
+    { id: "next", icon: "›", aria: TX.fenSig, action: () => fenIdx < FENES.length - 1 && abrirFen(FENES[fenIdx + 1].id) }
+  ] : page === "tilde" ? [
+    { id: "back", icon: "⊞", label: TX.volver, action: () => setPage("grid") }
+  ] : page === "fenes" ? [
+    { id: "back", icon: "⊞", label: TX.volver, action: () => setPage("grid") }
   ] : [];
 
   return React.createElement(AzShell, {
@@ -270,6 +352,18 @@ function App() {
         className: "btn", onClick: () => { setManoLetra(ES ? "A" : "А"); setPage("mano"); window.scrollTo(0, 0); },
         style: { width: "100%", marginBottom: 14, padding: "12px 16px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 14, fontWeight: 700 }
       }, TX.mano),
+
+      /* Abecé: los fenómenos clave, con el botón dorado de las guías (Gramática, Casos) */
+      ES && FENES.length > 0 && React.createElement("button", {
+        className: "btn", onClick: () => { setPage("fenes"); window.scrollTo(0, 0); },
+        style: { display: "flex", alignItems: "center", gap: 12, width: "100%", boxSizing: "border-box", textAlign: "left", background: c.gold + "14", border: `1px solid ${c.gold}66`, borderRadius: 14, padding: "9px 14px", marginBottom: 14 }
+      },
+        React.createElement("span", { style: { width: 34, height: 34, borderRadius: 10, background: c.gold, color: c.bg, fontSize: 17, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, "?"),
+        React.createElement("span", { style: { flex: 1, minWidth: 0, display: "flex", flexDirection: "column" } },
+          React.createElement("span", { style: { fontSize: 14.5, fontWeight: 700, color: c.text } }, TX.fenTitulo),
+          React.createElement("span", { style: { fontSize: 12, color: c.textMuted, marginTop: 2, lineHeight: 1.35, fontWeight: 500 } }, TX.fenBoton(FENES.length))),
+        React.createElement("span", { style: { fontSize: 22, color: c.gold, fontWeight: 700 } }, "›")),
+      ES && typeof tdAnalizar === "function" && botonDorado("Á", TX.tdTitulo, TX.tdBoton, () => { setPage("tilde"); window.scrollTo(0, 0); }),
 
       React.createElement("div", { className: "toggle-row" },
         React.createElement("div", {
@@ -370,28 +464,145 @@ function App() {
 
       React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
         React.createElement("div", { className: "info-title", style: { color: c.gold, marginBottom: 4 } }, TX.palabras),
-        selected.words.map((w, i) => {
-          return React.createElement("div", { key: i, className: "word-row", style: { borderColor: c.border } },
-            React.createElement("div", { className: "word-main" },
-              React.createElement("div", { className: "word-ru", style: { color: c.text } }, highlightWord(ES ? w.es : w.cyrillic, selected)),
-              showTranslit && React.createElement("div", { className: "word-translit" + (ES ? " az-tl" : ""), style: { color: c.textSub } }, w.translit),
-              React.createElement("div", { className: "word-cursive", style: { color: c.gold } }, ES ? w.es : w.cyrillic),
-              React.createElement("div", { className: "word-es", style: { color: c.textMuted } }, w.meaning),
-              React.createElement("div", { className: "word-note", style: { color: c.textSub } }, azFmt(w.note))
-            ),
-            React.createElement("div", { className: "word-btns" },
-              React.createElement("button", {
-                className: "word-btn btn", onClick: () => hablarPalabra(w),
-                style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
-              }, "▶"),
-              w.lexId && React.createElement("a", {
-                className: "word-btn btn", href: "ficha.html?id=" + w.lexId, "aria-label": TX.ficha,
-                onClick: (e) => azNavigate(e, "ficha.html?id=" + w.lexId),
-                style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.gold, textDecoration: "none" }
-              }, "📖")
-            )
-          );
-        })
+        selected.words.map((w, i) => filaPalabra(w, i, selected))
+      ),
+
+      /* Abecé: los fenómenos que tocan esta letra (27/10/2026) */
+      ES && fenesDe(selected).length > 0 && React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "info-title", style: { color: c.gold } }, TX.fenMas),
+        fenesDe(selected).map(f => React.createElement("button", {
+          key: f.id, className: "btn", onClick: () => abrirFen(f.id),
+          style: { display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", gap: 10, textAlign: "left", marginTop: 8, padding: "11px 14px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 13.5, fontWeight: 600 }
+        }, React.createElement("span", null, f.titulo), React.createElement("span", { style: { color: c.gold, fontSize: 18 } }, "›"))))
+    ),
+
+    /* ── Abecé: laboratorio de la tilde (27/10/2026) ── */
+    page === "tilde" && ES && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.25s ease" } },
+      React.createElement("h1", { style: { fontSize: 24, fontWeight: 800, color: c.text, margin: "4px 0 6px" } }, TX.tdTitulo),
+      React.createElement("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6, marginBottom: 12 } }, TX.tdDesc),
+      React.createElement("div", { style: { position: "relative" } },
+        React.createElement("input", {
+          className: "abc-search", value: tdQ, onInput: (e) => setTdQ(e.target.value), placeholder: TX.tdPh,
+          autocapitalize: "off", autocomplete: "off", autocorrect: "off", spellcheck: false, lang: "es",
+          style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text, marginBottom: 8, paddingRight: 40 }
+        }),
+        tdQ && React.createElement("button", {
+          onClick: () => setTdQ(""), "aria-label": "Очистить",
+          style: { position: "absolute", right: 10, top: 10, width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 12, cursor: "pointer", padding: 0 }
+        }, "✕")),
+      React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginBottom: 14 } },
+        React.createElement("span", { style: { fontSize: 11.5, color: c.textMuted, marginRight: 2 } }, TX.tdPrueba),
+        ["canción", "árbol", "teléfono", "país", "examen", "tú"].map(tdChip)),
+      tdQ.trim() && !td && React.createElement("div", { style: { fontSize: 13.5, color: c.textMuted, marginBottom: 14 } }, TX.tdNoPalabra),
+      td && React.createElement("div", { className: "det-hero", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10 } },
+          React.createElement("div", { style: { fontSize: 30, fontWeight: 800, color: c.gold, wordBreak: "break-word", lineHeight: 1.1 } }, td.palabra),
+          React.createElement("button", { className: "btn", onClick: () => azHablarEs(td.palabra), "aria-label": TX.escuchar,
+            style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, flexShrink: 0, padding: 0 } }, "▶")),
+        tdLex && React.createElement("div", { style: { marginTop: 4 } },
+          React.createElement("span", { className: "az-tl", style: { fontSize: 13.5, color: c.textSub, fontStyle: "italic" } }, tdLex.translit),
+          React.createElement("span", { style: { fontSize: 13, color: c.textMuted } }, " · " + ((tdLex.senses || [])[0] || {}).ru + " "),
+          React.createElement("a", { href: "ficha.html?id=" + tdLex.id, onClick: e => azNavigate(e, "ficha.html?id=" + tdLex.id), style: { fontSize: 13, color: c.gold, textDecoration: "none", fontWeight: 600 } }, "📖")),
+        React.createElement("div", { className: "info-title", style: { color: c.gold, marginTop: 16, marginBottom: 8 } }, TX.tdSilabas),
+        React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6 } },
+          td.silabas.map((sl, k) => React.createElement("span", { key: k, style: k === td.tonica
+            ? { padding: "8px 12px", borderRadius: 10, fontSize: 18, fontWeight: 800, background: c.gold, color: c.bg, border: `1px solid ${c.gold}` }
+            : { padding: "8px 12px", borderRadius: 10, fontSize: 18, fontWeight: 600, background: c.bg3, color: c.text, border: `1px solid ${c.border}` } }, sl))),
+        React.createElement("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 10 } },
+          td.tipo ? React.createElement("span", null, React.createElement("b", { style: { color: c.text } }, td.tipo[0]), " — " + td.tipo[1]) : TX.tdUno,
+          " · ", td.tilde ? TX.tdCon : TX.tdSin),
+        td.explica.map((t, i) => React.createElement("div", { key: i, style: { marginTop: 12, background: c.bg2, border: `1px solid ${c.border}`, borderLeft: i === 0 ? `3px solid ${c.gold}` : `1px solid ${c.border}`, borderRadius: 10, padding: "11px 13px", fontSize: 13.5, lineHeight: 1.55, color: i === 0 ? c.text : c.textSub } }, azFmt(t))),
+        tdQuiza.length > 0 && React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6, alignItems: "center", marginTop: 12 } },
+          React.createElement("span", { style: { fontSize: 12.5, color: c.textMuted } }, TX.tdQuiza),
+          tdQuiza.map(e => tdChip(e.es)))
+      ),
+      React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "info-title", style: { color: c.gold } }, TX.tdReglas),
+        TD_REGLAS.map((r, i) => React.createElement("div", { key: i, style: { padding: "10px 0", borderTop: i ? `1px solid ${c.border}` : "none" } },
+          React.createElement("div", { style: { fontSize: 13.5, fontWeight: 700, color: c.text } }, (i + 1) + ". " + r[0]),
+          React.createElement("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 2, lineHeight: 1.45 } }, r[1]),
+          React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 } }, r[2].map(tdChip)))))
+    ),
+
+    /* ── Abecé: fenómenos clave (27/10/2026) ── */
+    page === "fenes" && ES && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.25s ease" } },
+      React.createElement("h1", { style: { fontSize: 24, fontWeight: 800, color: c.text, margin: "4px 0 6px" } }, TX.fenTitulo),
+      React.createElement("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6, marginBottom: 14 } }, TX.fenDesc),
+      FENOMENOS_ES.map((f, n) => React.createElement("button", {
+        key: f.id, className: "btn", onClick: () => abrirFen(f.id),
+        style: { display: "flex", width: "100%", alignItems: "center", gap: 10, textAlign: "left", marginBottom: 8, padding: "12px 14px", borderRadius: 12, background: c.card, border: `1px solid ${c.border}`, color: c.text }
+      },
+        React.createElement("span", { style: { width: 22, height: 22, borderRadius: "50%", background: c.gold, color: c.bg, fontSize: 11, fontWeight: 800, display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, n + 1),
+        React.createElement("span", { style: { flex: 1, minWidth: 0, display: "flex", flexDirection: "column" } },
+          React.createElement("span", { style: { fontSize: 15, fontWeight: 700, color: c.text } }, f.titulo),
+          React.createElement("span", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 2, fontWeight: 500 } }, f.corto)),
+        React.createElement("span", { style: { color: c.gold, fontSize: 22, fontWeight: 700 } }, "›")))
+    ),
+
+    page === "fen" && ES && fenSel && React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.25s ease" } },
+      React.createElement("div", { className: "det-hero", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold } }, TX.fenKicker),
+        React.createElement("div", { style: { fontSize: 24, fontWeight: 800, color: c.text, lineHeight: 1.2, marginTop: 6 } }, fenSel.titulo),
+        React.createElement("div", { style: { fontSize: 14, color: c.textSub, marginTop: 4 } }, fenSel.corto),
+        React.createElement("div", { style: { marginTop: 14, background: c.bg2, border: `1px solid ${c.border}`, borderLeft: `3px solid ${c.gold}`, borderRadius: 10, padding: "12px 14px", fontSize: 14.5, lineHeight: 1.5, color: c.text, fontWeight: 600 } }, azFmt(fenSel.regla)),
+        fenSel.letras.length > 0 && React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6, marginTop: 12, alignItems: "center" } },
+          React.createElement("span", { style: { fontSize: 11.5, color: c.textMuted, marginRight: 2 } }, TX.fenLetras),
+          fenSel.letras.map(u => React.createElement("button", {
+            key: u, className: "btn", onClick: () => { const l = LETRAS.find(x => x.upper === u); if (l) openLetter(l); },
+            style: { padding: "6px 11px", borderRadius: 10, fontSize: 13, fontWeight: 700, background: c.bg2, border: `1px solid ${c.border}`, color: c.gold }
+          }, u)))
+      ),
+      React.createElement("div", { className: "info-grid" },
+        React.createElement("div", { className: "info-card", style: { background: c.card, border: `1px solid ${c.border}` } },
+          React.createElement("div", { className: "info-title", style: { color: c.gold } }, TX.fenComo),
+          React.createElement("div", { className: "info-text", style: { color: c.text, marginBottom: 0 } }, azFmt(fenSel.texto))
+        ),
+        React.createElement("div", { className: "info-card", style: { background: c.card, border: `1px solid ${c.border}` } },
+          React.createElement("div", { className: "info-title", style: { color: c.gold } }, TX.errores),
+          React.createElement("div", { className: "info-text", style: { color: c.text } }, azFmt(fenSel.error)),
+          React.createElement("div", { className: "info-sub", style: { color: c.textSub } }, TX.consejo),
+          React.createElement("div", { className: "info-text", style: { color: c.textMuted, marginBottom: 0 } }, azFmt(fenSel.consejo))
+        )
+      ),
+      fenSel.pares.length > 0 && React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "info-title", style: { color: c.gold } }, TX.fenPares),
+        fenSel.pares.map((p, i) => React.createElement("div", { key: i, style: { marginTop: i ? 12 : 4 } },
+          React.createElement("div", { style: { display: "flex", gap: 8 } },
+            [[p.a, p.ta], [p.b, p.tb]].map(([w, t]) => React.createElement("button", {
+              key: w, className: "btn", onClick: () => azHablarEs(w),
+              style: { flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 2, padding: "10px 8px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text }
+            }, React.createElement("span", { style: { fontSize: 17, fontWeight: 800 } }, "▶ " + w), React.createElement("span", { className: "az-tl", style: { fontSize: 12, color: c.textSub } }, t)))),
+          React.createElement("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 6, textAlign: "center" } }, p.meaning)))
+      ),
+      /* Entrega 4: frases enteras (entonación), con ▶ */
+      (fenSel.frases || []).length > 0 && React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "info-title", style: { color: c.gold, marginBottom: 4 } }, TX.fenFrases),
+        fenSel.frases.map((f, i) => React.createElement("div", { key: i, className: "word-row", style: { borderColor: c.border } },
+          React.createElement("div", { className: "word-main" },
+            React.createElement("div", { className: "word-ru", style: { color: c.text } }, f.es),
+            React.createElement("div", { className: "word-es", style: { color: c.textMuted } }, f.ru),
+            React.createElement("div", { className: "word-note", style: { color: c.textSub } }, azFmt(f.note))),
+          React.createElement("div", { className: "word-btns" },
+            React.createElement("button", { className: "word-btn btn", onClick: () => azHablarEs(f.es), "aria-label": TX.escuchar,
+              style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted } }, "▶"))))),
+      /* Entrega 4: variedades para reconocer, cada una con su zona y ejemplos (España / variante) */
+      (fenSel.variantes || []).map((v, n) => React.createElement("div", { key: n, className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "info-title", style: { color: c.gold } }, v.nombre),
+        React.createElement("div", { style: { fontSize: 12, color: c.textMuted, marginBottom: 8 } }, "📍 " + v.zona),
+        React.createElement("div", { className: "info-text", style: { color: c.text } }, azFmt(v.texto)),
+        v.ejemplos.map((w, i) => React.createElement("div", { key: i, className: "word-row", style: { borderColor: c.border } },
+          React.createElement("div", { className: "word-main" },
+            React.createElement("div", { className: "word-ru", style: { color: c.text } }, w.es),
+            React.createElement("div", { className: "word-translit" + (w.como === "tl" ? " az-tl" : ""), style: { color: c.textSub } }, TX.varEsp + (w.como === "ipa" ? "[" + w.std + "]" : w.std)),
+            React.createElement("div", { className: "word-translit", style: { color: c.gold } }, TX.varAqui + (w.como === "ipa" ? "[" + w.var + "]" : w.var))),
+          React.createElement("div", { className: "word-btns" },
+            React.createElement("button", { className: "word-btn btn", onClick: () => azHablarEs(w.es), "aria-label": TX.varEsp,
+              style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted } }, "▶"),
+            v.voz && React.createElement("button", { className: "word-btn btn", onClick: () => azHablarEs(w.es, v.voz), "aria-label": TX.varAqui,
+              style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.gold } }, "▶")))))),
+      fenSel.ejemplos.length > 0 && React.createElement("div", { className: "card", style: { background: c.card, border: `1px solid ${c.border}` } },
+        React.createElement("div", { className: "info-title", style: { color: c.gold, marginBottom: 4 } }, TX.fenEjemplos),
+        fenSel.ejemplos.map((w, i) => filaPalabra(w, i, null))
       )
     )
   );
