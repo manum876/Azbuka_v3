@@ -477,7 +477,11 @@ window.azDiff = azDiff;
   if (typeof React === "undefined") return;
   const h = React.createElement;
   const COL = { 2: "#4CAF82", 1: "#E2884A", 0: "#B5605C" };
-  const TXT = { 2: "✓ Bien", 1: "≈ Casi", 0: "✗ Mal" };
+  /* Textos de la vista: en Abecé, en ruso (28/10/2026; borrador para Iván) */
+  const RU = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
+  const TXT = RU ? { 2: "✓ Верно", 1: "≈ Почти", 0: "✗ Неверно" } : { 2: "✓ Bien", 1: "≈ Casi", 0: "✗ Mal" };
+  const L = RU ? { tuya: "Твой ответ", correcta: "Правильный ответ", guardar: "＋ Сохранить ошибку в тетрадь", escribe: "Мой ответ: ", correcto: "Правильно: " }
+    : { tuya: "Tu respuesta", correcta: "Respuesta correcta", guardar: "＋ Guardar este error en el cuaderno", escribe: "Escribe: ", correcto: "Correcto: " };
 
   function Estilos({ c }) {
     return h("style", null, `
@@ -513,10 +517,10 @@ window.azDiff = azDiff;
         h("span", { className: "az-cr-res", style: { color: COL[r.resultado], background: COL[r.resultado] + "22", border: "1px solid " + COL[r.resultado] } }, TXT[r.resultado]),
         h("span", { className: "az-cr-sum" }, r.resumen)),
       r.resultado < 2 && (r.tuya || []).length > 0 && h(React.Fragment, null,
-        h("div", { className: "az-cr-lbl" }, "Tu respuesta"),
+        h("div", { className: "az-cr-lbl" }, L.tuya),
         h("div", { className: "az-cr-linea" }, (r.tuya || []).map(function (p, i) { return h(Palabra, { key: i, p: { escrito: p.t, estado: p.estado } }); }))),
       r.resultado < 2 && h(React.Fragment, null,
-        h("div", { className: "az-cr-lbl" }, "Respuesta correcta"),
+        h("div", { className: "az-cr-lbl" }, L.correcta),
         h("div", { className: "az-cr-ok" }, (r.correcta || [{ t: r.esperada.replace(/[()]/g, "") }]).map(function (s, i) {
           return s.marca ? h("span", { key: i, className: "az-cr-fix" }, s.t) : s.t;
         }))),
@@ -526,8 +530,8 @@ window.azDiff = azDiff;
         const tuya = (r.tuya || []).map(function (p) { return p.t; }).join(" ");
         const bien = r.esperada.replace(/[()]/g, "");
         const porque = errores.map(function (p) { return p.motivo; }).concat(r.notas).join(" ").replace(/\*\*/g, "");
-        azGuardarEnCuaderno("Escribe: " + tuya + "\nCorrecto: " + bien + (porque ? "\n" + porque : ""));
-      } }, "＋ Guardar este error en el cuaderno"));
+        azGuardarEnCuaderno(L.escribe + tuya + "\n" + L.correcto + bien + (porque ? "\n" + porque : ""));
+      } }, L.guardar));
   }
   window.AzCorreccion = AzCorreccion;
 
