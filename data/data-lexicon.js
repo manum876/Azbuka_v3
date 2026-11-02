@@ -1,3 +1,10 @@
+/* ACTUALIZACIÓN 02/11/2026 (vocabulario del habla, aprobado por Manu): 8 palabras nuevas sacadas de la
+   lista de frecuencias de subtítulos (OpenSubtitles 2018; ver VOCABULARIO_HABLA_FUENTES.md):
+   алло́ (CMR-06157), пизде́ц (CMR-06158), су́ка (CMR-06159), блядь (CMR-06160), хуй (CMR-06161),
+   херня́ (CMR-06162), муда́к (CMR-06163) y пизда́ (CMR-06164). Los tacos se marcan como en Abecé: «(vulg.)» al principio
+   de la traducción y «No se enseña en las unidades.» en la definición; sin campo nuevo de registro.
+   Nuevo en sourceRefs: "subtitulos" { porMillon, puesto }, igual que en data-lexicon-es.js. */
+
 /* ACTUALIZACIÓN 26/10/2026 (revisión de regionalismos, aprobada por Manu): 116 entradas pasan a
    español neutro siguiendo la regla de NEUTRO_EQUIVALENCIAS.md (neutra primero, la regional queda como
    sinónimo con su marca de zona; no se quitó ningún sinónimo). Traducciones donde la regional iba
@@ -315,9 +322,10 @@
 const LEXICON_COMER_META = {
   sources: [
     "Comer, K. (Comer 5000). Portland State University, PDXScholar. https://pdxscholar.library.pdx.edu/wll_data/1/",
-    "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)"
+    "FreeDict rus-spa / spa-rus dictionaries. https://freedict.org/downloads/ (CC BY-SA 3.0)",
+    "OpenSubtitles 2018, lista de frecuencias rusas de Hermit Dave. https://github.com/hermitdave/FrequencyWords (CC BY-SA 4.0)"
   ],
-  totalEntries: 6081
+  totalEntries: 6089
 };
 /* Temas del léxico (campo opcional "temas" de cada entrada, desde el
    30/09/2026). Lista cerrada; una palabra lleva como máximo 2 temas y
@@ -375022,6 +375030,519 @@ const LEXICON_COMER = [
   "temas": [
    "estudios"
   ]
+ },
+ {
+  "id": "CMR-06157",
+  "ru": "алло",
+  "acento": "алло́",
+  "posNormalized": "interjección",
+  "translit": "alló",
+  "ipa": "ʌɭɭˈo",
+  "senses": [
+   {
+    "es": "¿hola? (al teléfono), ¿diga? (España), ¿aló? (América)",
+    "definitionEs": "Lo que se dice al atender el teléfono o para comprobar que el otro oye. En el habla también se dice алё.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "алло",
+    "POS": "intj",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada desde la lista de frecuencias de subtítulos (OpenSubtitles 2018), 02/11/2026, aprobada por Manu — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 173.9,
+    "puesto": 580
+   }
+  },
+  "temas": [
+   "comunicacion"
+  ]
+ },
+ {
+  "id": "CMR-06158",
+  "ru": "пиздец",
+  "acento": "пизде́ц",
+  "posNormalized": "sustantivo",
+  "translit": "pizdiéts",
+  "ipa": "pʲɪzdʲˈets",
+  "senses": [
+   {
+    "es": "(vulg.) desastre total; ¡qué putada! (España), ¡qué cagada! (Río de la Plata)",
+    "definitionEs": "Palabra del мат, el registro más grosero del ruso. Casi siempre es una exclamación ante algo muy malo (a veces, increíble): Это пизде́ц! No se enseña en las unidades.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "пиздец",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "6",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada desde la lista de frecuencias de subtítulos (OpenSubtitles 2018), 02/11/2026, aprobada por Manu — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 13.2,
+    "puesto": 4650
+   }
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "temas": []
+ },
+ {
+  "id": "CMR-06159",
+  "ru": "сука",
+  "acento": "су́ка",
+  "posNormalized": "sustantivo",
+  "translit": "súka",
+  "ipa": "sˈukʌ",
+  "senses": [
+   {
+    "es": "(vulg.) zorra, cabrona (insulto)",
+    "definitionEs": "Insulto muy fuerte, sobre todo a una mujer; a un hombre equivale a «cabrón». Sola, como exclamación, es como «¡joder!». No se enseña en las unidades.",
+    "source": "redactado"
+   },
+   {
+    "es": "perra (hembra del perro)",
+    "definitionEs": "El sentido original. Fuera del habla de criadores y cazadores se dice соба́ка.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "сука",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "4",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada desde la lista de frecuencias de subtítulos (OpenSubtitles 2018), 02/11/2026, aprobada por Manu — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 67.2,
+    "puesto": 1352
+   }
+  },
+  "gender": "f",
+  "animate": "sí",
+  "numberClass": "regular",
+  "temas": []
+ },
+ {
+  "id": "CMR-06160",
+  "ru": "блядь",
+  "acento": "блядь",
+  "posNormalized": "interjección",
+  "translit": "bliat",
+  "ipa": "bɭʲˈɑtʲ",
+  "senses": [
+   {
+    "es": "(vulg.) ¡joder!, ¡mierda!, ¡la puta madre! (Río de la Plata)",
+    "definitionEs": "Palabra del мат y el taco más frecuente del ruso: se mete en cualquier frase para descargar o dar énfasis. También se escribe блять; la forma suave es бля, y el eufemismo de todos los días, блин. Su sentido original es «puta». No se enseña en las unidades.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "блядь",
+    "POS": "intj",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada desde la lista de frecuencias de subtítulos (OpenSubtitles 2018), 02/11/2026, aprobada por Manu — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 92.3,
+    "puesto": 1029
+   }
+  },
+  "temas": []
+ },
+ {
+  "id": "CMR-06161",
+  "ru": "хуй",
+  "acento": "хуй",
+  "posNormalized": "sustantivo",
+  "translit": "jui",
+  "ipa": "xˈuj",
+  "senses": [
+   {
+    "es": "(vulg.) polla (España), pija (Río de la Plata)",
+    "definitionEs": "Palabra del мат para el pene. Aparece en muchas expresiones groseras: ни хуя́ «nada de nada», на хуй «a la mierda». No se enseña en las unidades.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "хуй",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "3",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada desde la lista de frecuencias de subtítulos (OpenSubtitles 2018), 02/11/2026, aprobada por Manu — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 30.9,
+    "puesto": 2537
+   }
+  },
+  "gender": "m",
+  "animate": "no",
+  "numberClass": "regular",
+  "temas": []
+ },
+ {
+  "id": "CMR-06162",
+  "ru": "херня",
+  "acento": "херня́",
+  "posNormalized": "sustantivo",
+  "translit": "jirniá",
+  "ipa": "xʲɪrnʲˈɑ",
+  "senses": [
+   {
+    "es": "(vulg.) tontería, chorrada (España), boludez (Río de la Plata)",
+    "definitionEs": "Algo sin valor o una tontería: Что за херня́? «¿Qué es esta mierda?». Es más suave que el мат (viene de хер, que lo disimula), pero sigue siendo grosera. No se enseña en las unidades.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "херня",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada desde la lista de frecuencias de subtítulos (OpenSubtitles 2018), 02/11/2026, aprobada por Manu — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 30.3,
+    "puesto": 2580
+   }
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "singulariaTantum",
+  "temas": []
+ },
+ {
+  "id": "CMR-06163",
+  "ru": "мудак",
+  "acento": "муда́к",
+  "posNormalized": "sustantivo",
+  "translit": "mudák",
+  "ipa": "mudˈɑk",
+  "senses": [
+   {
+    "es": "(vulg.) imbécil, cabrón, gilipollas (España), pelotudo (Río de la Plata)",
+    "definitionEs": "Insulto fuerte para un hombre que se porta como un idiota o como mala persona. No se enseña en las unidades.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "мудак",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada desde la lista de frecuencias de subtítulos (OpenSubtitles 2018), 02/11/2026, aprobada por Manu — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 24.9,
+    "puesto": 2994
+   }
+  },
+  "gender": "m",
+  "animate": "sí",
+  "numberClass": "regular",
+  "temas": []
+ },
+ {
+  "id": "CMR-06164",
+  "ru": "пизда",
+  "acento": "пизда́",
+  "posNormalized": "sustantivo",
+  "translit": "pizdá",
+  "ipa": "pʲɪzdˈɑ",
+  "senses": [
+   {
+    "es": "(vulg.) coño (España), concha (Río de la Plata)",
+    "definitionEs": "Palabra del мат para la vulva, de las más groseras del ruso. Está en muchas expresiones: за три пизды́ «lejísimos», en el quinto pino (España), en la loma del orto (Río de la Plata); иди́ в пизду́ «vete a la mierda». No se enseña en las unidades.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "comer": [
+   {
+    "ID1": "",
+    "Rank": "",
+    "Lemma": "пизда",
+    "POS": "s",
+    "MultipleEntry": "",
+    "Frequency": "",
+    "Fiction 1990-2000": "",
+    "Journalism 1990-2000": "",
+    "Length": "5",
+    "International": "",
+    "Inter_Derived": "",
+    "InterPossible": "",
+    "Compound": "",
+    "Calque": "",
+    "Prefix1": "",
+    "Prefix2": "",
+    "Root": "",
+    "Suffix1": "",
+    "Suffix2": "",
+    "WordFamily": "",
+    "Member1": "",
+    "Member2": "",
+    "Member3": "",
+    "Member4": "",
+    "AdjAdvPair": "",
+    "AspectPair": "",
+    "WordFamilyNumber": "",
+    "Notes": "Agregada desde la lista de frecuencias de subtítulos (OpenSubtitles 2018), 02/11/2026, aprobada por Manu — no forma parte de la lista de frecuencia Comer 5000 original.",
+    "FamilyBranch": "",
+    "BranchMemberNo": "",
+    "Governance": "",
+    "VOM": "",
+    "ReflexPairNumber": ""
+   }
+  ],
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": 6.4,
+    "puesto": 7183
+   }
+  },
+  "gender": "f",
+  "animate": "no",
+  "numberClass": "regular",
+  "temas": []
  }
 ];
 
