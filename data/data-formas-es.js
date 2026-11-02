@@ -1,6 +1,6 @@
 /* Abecé — formas de las palabras que cambian (FORMAS_ES).
    Generado por herramientas/abece/formas-es.py: no editar a mano.
-   3687 entradas. t: sust | adj | det | num | art | pron | contr.
+   3690 entradas. t: sust | adj | det | num | art | pron | contr.
    sust: sg, pl, art [sg, pl], g; f/fpl/artF si tiene femenino; elA (el agua);
          inv (pl = sg); soloPl; sentido (el/la cambia el sentido).
    adj/det/num: m, f, mpl, fpl; invG (igual en m y f); apoc (+ apocF: también ante f); var (la otra forma del plural: la de la RAE).
@@ -3692,7 +3692,10 @@ const FORMAS_ES = {
 "ESP-05416":{"t":"sust","g":"f","sg":"nacionalidad","pl":"nacionalidades","art":["la","las"]},
 "ESP-05417":{"t":"sust","g":"f","sg":"arroba","pl":"arrobas","art":["la","las"]},
 "ESP-05418":{"t":"sust","g":"m/f","sg":"peluquero","pl":"peluqueros","art":["el","los"],"f":"peluquera","fpl":"peluqueras","artF":["la","las"]},
-"ESP-05419":{"t":"adj","m":"jubilado","f":"jubilada","mpl":"jubilados","fpl":"jubiladas"}
+"ESP-05419":{"t":"adj","m":"jubilado","f":"jubilada","mpl":"jubilados","fpl":"jubiladas"},
+"ESP-05420":{"t":"sust","g":"f","sg":"estantería","pl":"estanterías","art":["la","las"]},
+"ESP-05421":{"t":"sust","g":"f","sg":"lavadora","pl":"lavadoras","art":["la","las"]},
+"ESP-05422":{"t":"adj","m":"antipático","f":"antipática","mpl":"antipáticos","fpl":"antipáticas"}
 };
 
 const FORMAS_ES_SERIES = {

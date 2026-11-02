@@ -24,7 +24,9 @@ DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "vale": "
        "llamo": "ESP-02076", "llamas": "ESP-02076", "llama": "ESP-02076", "siento": "ESP-00079", "y": "ESP-00009",
        "señora": "ESP-00051", "pero": "ESP-00031",
        # U2 (02/11/2026)
-       "este": "ESP-00029", "vivo": "ESP-00178", "poco": "ESP-00120", "solo": "ESP-00046"}
+       "este": "ESP-00029", "vivo": "ESP-00178", "poco": "ESP-00120", "solo": "ESP-00046",
+       # U3 (02/11/2026)
+       "hay": "ESP-00012", "muchos": "ESP-00066", "muchas": "ESP-00066"}
 # Nombres propios de varias palabras que no están en el léxico (sus palabras no se enlazan)
 PROPIOS_VARIAS = ["Buenos Aires"]
 # Nombres de personas (no van al léxico). Los países y las ciudades sí: con mayúscula se usa la entrada propia.
@@ -127,7 +129,23 @@ FRASES = [
     ["FRE-044", "datos", "¿Cuál es tu número de teléfono?", "Какой у тебя номер телефона?", "tú", "Не «qué», а **cuál**: «какой (из всех)».", 2],
     ["FRE-045", "datos", "¿Cuál es tu correo?", "Какая у тебя почта?", "tú", "Адрес диктуют так: ana arroba gmail punto com.", 2],
     ["FRE-046", "hablar-de-uno", "¿Tienes hermanos?", "У тебя есть братья или сёстры?", "tú", "**hermanos** — и «братья», и «братья и сёстры».", 2],
-    ["FRE-047", "hablar-de-uno", "Soy profesora.", "Я преподаватель (говорит женщина).", "", "Профессия — без артикля.", 2]
+    ["FRE-047", "hablar-de-uno", "Soy profesora.", "Я преподаватель (говорит женщина).", "", "Профессия — без артикля.", 2],
+    # U3 (02/11/2026)
+    ["FRE-048", "orientarse", "¿Hay un banco cerca?", "Здесь поблизости есть банк?", "", "Любой банк — **hay un…**", 3],
+    ["FRE-049", "describir", "¿Qué hay en tu bolso?", "Что у тебя в сумке?", "tú", "Ответ — с **hay**: hay un móvil, unas gafas…", 3],
+    ["FRE-050", "orientarse", "¿Dónde está la farmacia?", "Где аптека?", "", "Конкретное место — **¿dónde está…?**", 3],
+    ["FRE-051", "orientarse", "¿Está lejos?", "Это далеко?", "", "Ответ: «No, está cerca» — нет, близко.", 3],
+    ["FRE-052", "orientarse", "No, está muy cerca.", "Нет, совсем близко.", "", "**cerca** — близко, **lejos** — далеко.", 3],
+    ["FRE-053", "orientarse", "Está a la derecha.", "Это справа.", "", "Слева — **a la izquierda**.", 3],
+    ["FRE-054", "orientarse", "Está al lado del banco.", "Это рядом с банком.", "", "**de** + **el** = **del**.", 3],
+    ["FRE-055", "describir", "¿En qué piso vives?", "На каком этаже ты живёшь?", "tú", "**piso** — и «квартира», и «этаж».", 3],
+    ["FRE-056", "describir", "Vivo en el tercero.", "Я живу на третьем этаже.", "", "В Испании этажи считают с **planta baja**: el tercero — по-русски четвёртый.", 3],
+    ["FRE-057", "describir", "¿Cómo es tu piso?", "Какая у тебя квартира?", "tú", "**¿Cómo es?** — какой он; ответ с **ser**.", 3],
+    ["FRE-058", "describir", "¿Qué hay en tu barrio?", "Что есть в твоём районе?", "tú", "Ответ: hay un mercado, muchos bares…", 3],
+    ["FRE-059", "describir", "Es pequeño, pero muy bonito.", "Он маленький, но очень красивый.", "", "Описание — **ser**; перед прилагательным — **muy**.", 3],
+    ["FRE-060", "describir", "Estoy cansada.", "Я устала.", "", "Состояние — **estar**. Мужчина говорит «estoy cansado».", 3],
+    ["FRE-061", "describir", "La tienda está cerrada.", "Магазин закрыт.", "", "Закрыт сейчас — **estar**. Открыт — **está abierta**.", 3],
+    ["FRE-062", "describir", "¿Cuál es tu casa?", "Который твой дом?", "tú", "**¿Cuál?** — который из этих.", 3]
 ]
 
 # Diálogos: [id, título ruso, título español, personajes, [[p, es, ru, obs?, deletreo?], …]]
@@ -217,7 +235,56 @@ DIALOGOS = [
         ["lucia", "No, somos amigas. Ana es rusa.", "Нет, мы подруги. Аня русская."],
         ["marta", "¿Rusa? ¡Qué bien! Yo soy de Argentina.", "Русская? Как здорово! А я из Аргентины.", "**Yo** — чтобы противопоставить: «а я…»."],
         ["ana", "¿De Argentina? ¿De dónde?", "Из Аргентины? Откуда?"],
-        ["marta", "De Buenos Aires.", "Из Буэнос-Айреса."]], 2]
+        ["marta", "De Buenos Aires.", "Из Буэнос-Айреса."]], 2],
+    # U3 (02/11/2026)
+    ["DLE-010", "Мой район", "Mi barrio", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿dónde vives ahora?", "Аня, где ты сейчас живёшь?"],
+        ["ana", "Vivo en un piso cerca del centro.", "Я живу в квартире недалеко от центра.", "**cerca del centro**: de + el = **del**."],
+        ["lucia", "¿Cómo es tu barrio?", "Какой у тебя район?"],
+        ["ana", "Es bonito y bastante tranquilo.", "Красивый и довольно тихий.", "Описание — с **ser**: **es bonito**."],
+        ["lucia", "¿Qué hay en tu barrio?", "Что есть в твоём районе?"],
+        ["ana", "Hay una plaza, un mercado y muchos bares.", "Есть площадь, рынок и много баров."],
+        ["lucia", "¿Hay metro?", "Метро есть?"],
+        ["ana", "Sí, la estación de metro está al lado del mercado.", "Да, станция метро рядом с рынком.", "Известная станция — **está**."],
+        ["lucia", "¿Y hay una biblioteca?", "А библиотека есть?"],
+        ["ana", "No, no hay biblioteca. Pero hay un parque muy grande.", "Нет, библиотеки нет. Но есть очень большой парк.", "**no hay** — без артикля."]], 3, "ciudad"],
+    ["DLE-011", "Где банк?", "¿Hay un banco cerca?", ["ana", "javier"], [
+        ["ana", "Perdón, Javier, ¿hay un banco cerca?", "Извини, Хавьер, здесь поблизости есть банк?"],
+        ["javier", "Sí, hay un banco en la plaza.", "Да, на площади есть банк."],
+        ["ana", "¿Y dónde está la plaza? ¿Está lejos?", "А где площадь? Это далеко?", "Теперь площадь уже известна — **¿dónde está…?**"],
+        ["javier", "No, está muy cerca. Está ahí, a la derecha.", "Нет, совсем близко. Вон там, справа."],
+        ["ana", "¿Al lado de la iglesia?", "Рядом с церковью?"],
+        ["javier", "No, enfrente de la iglesia. El banco está entre una farmacia y un bar.", "Нет, напротив церкви. Банк между аптекой и баром."],
+        ["ana", "¡Gracias!", "Спасибо!"],
+        ["javier", "De nada.", "Не за что."]], 3, "ciudad"],
+    ["DLE-012", "Моя квартира", "Mi piso", ["ana", "lucia"], [
+        ["ana", "Este es mi piso. Es pequeño, pero muy luminoso.", "Вот моя квартира. Она маленькая, но очень светлая."],
+        ["lucia", "¡Qué bonito! ¿En qué piso estamos?", "Как красиво! На каком мы этаже?", "**piso** — и «квартира», и «этаж»."],
+        ["ana", "En el tercero. Y hay ascensor.", "На третьем. И есть лифт.", "По-русски это четвёртый этаж: испанцы считают с **planta baja**."],
+        ["lucia", "¿Cuántas habitaciones hay?", "Сколько комнат?"],
+        ["ana", "Hay dos: mi dormitorio y una habitación pequeña. Y el salón, la cocina y el baño.", "Две: моя спальня и маленькая комната. И гостиная, кухня и ванная."],
+        ["lucia", "El salón es muy grande. ¿Y este cuadro?", "Гостиная очень большая. А эта картина?"],
+        ["ana", "Es de mi abuela. Es muy antiguo.", "Это от моей бабушки. Она очень старинная.", "**cuadro** — мужской род: **antiguo**."],
+        ["lucia", "¿Y esa puerta?", "А та дверь?", "**esa** — дверь недалеко от них."],
+        ["ana", "Es la terraza. Es pequeña, pero hay muchas plantas.", "Это терраса. Она маленькая, но там много растений."]], 3, "casa"],
+    ["DLE-013", "Где мои ключи?", "¿Dónde están mis llaves?", ["ana", "lucia"], [
+        ["ana", "Lucía, ¿dónde están mis llaves?", "Лусия, где мои ключи?"],
+        ["lucia", "¿No están en tu bolso?", "Они не в твоей сумке?"],
+        ["ana", "No. En mi bolso están el móvil y las gafas, pero no las llaves.", "Нет. В сумке телефон и очки, а ключей нет.", "Известные вещи — **están**."],
+        ["lucia", "¿Y encima de la mesa?", "А на столе?"],
+        ["ana", "No, en la mesa solo hay una taza y un plato.", "Нет, на столе только чашка и тарелка."],
+        ["lucia", "¿Y en la cocina, al lado de la nevera?", "А на кухне, рядом с холодильником?"],
+        ["ana", "No… ¡Aquí están, debajo del sofá!", "Нет… Вот они, под диваном!"],
+        ["lucia", "¿Debajo del sofá? ¡Muy bien!", "Под диваном? Отлично!"]], 3, "casa"],
+    ["DLE-014", "Ты устала?", "¿Estás cansada?", ["javier", "ana"], [
+        ["javier", "Hola, Ana. ¿Qué tal? ¿Estás cansada?", "Привет, Аня. Как дела? Ты устала?", "Состояние сейчас — **estar**."],
+        ["ana", "Sí, estoy un poco cansada. Mi piso nuevo está lejos.", "Да, я немного устала. Моя новая квартира далеко."],
+        ["javier", "¿Lejos? ¿Dónde está?", "Далеко? Где она?"],
+        ["ana", "Está cerca de la playa.", "Недалеко от пляжа."],
+        ["javier", "¡Qué bien! ¿Y cómo es el barrio?", "Здорово! А какой там район?"],
+        ["ana", "Es bonito, pero un poco ruidoso. Hay muchos bares.", "Красивый, но немного шумный. Там много баров."],
+        ["javier", "Sí, los bares en España son muy ruidosos.", "Да, бары в Испании очень шумные."],
+        ["ana", "¡Sí! Pero los camareros son muy simpáticos.", "Да! Зато официанты очень приятные.", "Характер — **ser**: **son simpáticos**."]], 3, "conocer"]
 ]
 
 def frasesDe(es):
@@ -237,7 +304,7 @@ for fila in FRASES:   # [id, función, es, ru, registro, uso, unidad?]
     tr, lex = linea(es)
     fr_js.append({"id": fid, "funcion": fun, "es": es, "tr": tr, "ru": ru, "registro": reg, "nivel": "A1", "unidad": fila[6] if len(fila) > 6 else 1, "uso": uso, "lex": lex})
 dl_js = []
-for dlg in DIALOGOS:   # [id, título ruso, título español, personajes, líneas, unidad?]
+for dlg in DIALOGOS:   # [id, título ruso, título español, personajes, líneas, unidad?, situación?]
     did, tit, titEs, pers, lineas = dlg[:5]
     ls = []
     for l in lineas:
@@ -250,7 +317,7 @@ for dlg in DIALOGOS:   # [id, título ruso, título español, personajes, línea
         if f: x["f"] = f
         if obs: x["obs"] = obs
         ls.append(x)
-    dl_js.append({"id": did, "titulo": tit, "tituloEs": titEs, "situacion": "conocer", "nivel": "A1", "unidad": dlg[5] if len(dlg) > 5 else 1, "personajes": pers, "lineas": ls})
+    dl_js.append({"id": did, "titulo": tit, "tituloEs": titEs, "situacion": dlg[6] if len(dlg) > 6 else "conocer", "nivel": "A1", "unidad": dlg[5] if len(dlg) > 5 else 1, "personajes": pers, "lineas": ls})
 
 J = lambda o: json.dumps(o, ensure_ascii=False)
 txt = """/* ============================================================
