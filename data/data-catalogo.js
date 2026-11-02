@@ -122,9 +122,10 @@ var AZ_CATALOGO = {
     indice: null,            /* abece-index-1.html cuando exista; mientras, el de azbuka */
     buscador: "azBuscarEs",  /* busca en el léxico español, en español o en ruso (core.js, 27/10/2026) */
     lexico: "data/data-lexicon-es.js",
-    /* Unidades (claude/PROGRAMA_ABECE.md): se suman a medida que se construyen (28/10/2026: la U1, entrega 1) */
+    /* Unidades (claude/PROGRAMA_ABECE.md): se suman a medida que se construyen (28/10/2026: la U1; 02/11/2026: la U2) */
     unidades: [
       { id: 1, title: "Испанский с нуля", desc: "Буквы, звуки и ударение; приветствия и числа до 20.", href: "abece-1.html", lista: true },
+      { id: 2, title: "Кто я и кто мы", desc: "Ser, tener, страны и национальности, семья, артикли и числа до 100.", href: "abece-2.html", lista: true },
     ],
     /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo
        orden y con el mismo color que su equivalente de Azbuka, glifo de dos

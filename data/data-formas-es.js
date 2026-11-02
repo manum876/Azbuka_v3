@@ -1,6 +1,6 @@
 /* Abecé — formas de las palabras que cambian (FORMAS_ES).
    Generado por herramientas/abece/formas-es.py: no editar a mano.
-   3682 entradas. t: sust | adj | det | num | art | pron | contr.
+   3687 entradas. t: sust | adj | det | num | art | pron | contr.
    sust: sg, pl, art [sg, pl], g; f/fpl/artF si tiene femenino; elA (el agua);
          inv (pl = sg); soloPl; sentido (el/la cambia el sentido).
    adj/det/num: m, f, mpl, fpl; invG (igual en m y f); apoc (+ apocF: también ante f); var (la otra forma del plural: la de la RAE).
@@ -117,7 +117,7 @@ const FORMAS_ES = {
 "ESP-00223":{"t":"pron","serie":"personal","celdas":[["2s","con"]]},
 "ESP-00224":{"t":"adj","m":"único","f":"única","mpl":"únicos","fpl":"únicas"},
 "ESP-00228":{"t":"pron","serie":"posesivo","fila":"2s","tipo":"tonico"},
-"ESP-00229":{"t":"sust","g":"f","sg":"policía","pl":"policías","art":["la","las"]},
+"ESP-00229":{"t":"sust","g":"m/f","sg":"policía","pl":"policías","art":["el · la","los · las"],"sentido":true},
 "ESP-00230":{"t":"sust","g":"m","sg":"minuto","pl":"minutos","art":["el","los"]},
 "ESP-00231":{"t":"sust","g":"f","sg":"semana","pl":"semanas","art":["la","las"]},
 "ESP-00234":{"t":"sust","g":"f","sg":"familia","pl":"familias","art":["la","las"]},
@@ -319,7 +319,7 @@ const FORMAS_ES = {
 "ESP-00599":{"t":"pron","serie":"personal","celdas":[["3sf","od"],["us","od"]]},
 "ESP-00601":{"t":"sust","g":"m","sg":"sistema","pl":"sistemas","art":["el","los"]},
 "ESP-00602":{"t":"sust","g":"m","sg":"campo","pl":"campos","art":["el","los"]},
-"ESP-00603":{"t":"sust","g":"m","sg":"frente","pl":"frentes","art":["el","los"]},
+"ESP-00603":{"t":"sust","g":"m/f","sg":"frente","pl":"frentes","art":["el · la","los · las"],"sentido":true},
 "ESP-00605":{"t":"sust","g":"f","sg":"caja","pl":"cajas","art":["la","las"]},
 "ESP-00606":{"t":"sust","g":"m","sg":"baño","pl":"baños","art":["el","los"]},
 "ESP-00607":{"t":"adj","m":"lleno","f":"llena","mpl":"llenos","fpl":"llenas"},
@@ -550,7 +550,7 @@ const FORMAS_ES = {
 "ESP-00962":{"t":"sust","g":"f","sg":"prisión","pl":"prisiones","art":["la","las"]},
 "ESP-00963":{"t":"adj","m":"privado","f":"privada","mpl":"privados","fpl":"privadas"},
 "ESP-00964":{"t":"sust","g":"m","sg":"pase","pl":"pases","art":["el","los"]},
-"ESP-00966":{"t":"sust","g":"m/f","sg":"inglés","pl":"ingleses","art":["el","los"],"f":"inglesa","fpl":"inglesas","artF":["la","las"]},
+"ESP-00966":{"t":"adj","m":"inglés","f":"inglesa","mpl":"ingleses","fpl":"inglesas"},
 "ESP-00967":{"t":"adj","m":"excelente","f":"excelente","mpl":"excelentes","fpl":"excelentes","invG":true},
 "ESP-00969":{"t":"sust","g":"m","sg":"intento","pl":"intentos","art":["el","los"]},
 "ESP-00971":{"t":"sust","g":"f","sg":"banda","pl":"bandas","art":["la","las"]},
@@ -584,7 +584,7 @@ const FORMAS_ES = {
 "ESP-01005":{"t":"adj","m":"principal","f":"principal","mpl":"principales","fpl":"principales","invG":true},
 "ESP-01006":{"t":"sust","g":"f","sg":"pareja","pl":"parejas","art":["la","las"]},
 "ESP-01009":{"t":"adj","m":"sospechoso","f":"sospechosa","mpl":"sospechosos","fpl":"sospechosas"},
-"ESP-01010":{"t":"sust","g":"f","sg":"radio","pl":"radios","art":["la","las"]},
+"ESP-01010":{"t":"sust","g":"m/f","sg":"radio","pl":"radios","art":["el · la","los · las"],"sentido":true},
 "ESP-01011":{"t":"sust","g":"f","sg":"salida","pl":"salidas","art":["la","las"]},
 "ESP-01013":{"t":"sust","g":"m/f","sg":"coronel","pl":"coroneles","art":["el · la","los · las"]},
 "ESP-01015":{"t":"adj","m":"culpable","f":"culpable","mpl":"culpables","fpl":"culpables","invG":true},
@@ -1511,7 +1511,7 @@ const FORMAS_ES = {
 "ESP-02313":{"t":"sust","g":"f","sg":"temperatura","pl":"temperaturas","art":["la","las"]},
 "ESP-02314":{"t":"sust","g":"m","sg":"guion","pl":"guiones","art":["el","los"]},
 "ESP-02315":{"t":"sust","g":"m","sg":"asalto","pl":"asaltos","art":["el","los"]},
-"ESP-02318":{"t":"sust","g":"m/f","sg":"guía","pl":"guías","art":["el · la","los · las"]},
+"ESP-02318":{"t":"sust","g":"m/f","sg":"guía","pl":"guías","art":["el · la","los · las"],"sentido":true},
 "ESP-02319":{"t":"sust","g":"m","sg":"abrazo","pl":"abrazos","art":["el","los"]},
 "ESP-02320":{"t":"adj","m":"sensible","f":"sensible","mpl":"sensibles","fpl":"sensibles","invG":true},
 "ESP-02322":{"t":"sust","g":"m/f","sg":"candidato","pl":"candidatos","art":["el","los"],"f":"candidata","fpl":"candidatas","artF":["la","las"]},
@@ -2433,7 +2433,7 @@ const FORMAS_ES = {
 "ESP-03558":{"t":"sust","g":"m/f","sg":"enviado","pl":"enviados","art":["el","los"],"f":"enviada","fpl":"enviadas","artF":["la","las"]},
 "ESP-03561":{"t":"sust","g":"f","sg":"ópera","pl":"óperas","art":["la","las"]},
 "ESP-03562":{"t":"adj","m":"estricto","f":"estricta","mpl":"estrictos","fpl":"estrictas"},
-"ESP-03563":{"t":"sust","g":"m","sg":"cometa","pl":"cometas","art":["el","los"]},
+"ESP-03563":{"t":"sust","g":"m/f","sg":"cometa","pl":"cometas","art":["el · la","los · las"],"sentido":true},
 "ESP-03564":{"t":"sust","g":"f","sg":"lotería","pl":"loterías","art":["la","las"]},
 "ESP-03566":{"t":"sust","g":"f","sg":"lógica","pl":"lógicas","art":["la","las"]},
 "ESP-03567":{"t":"sust","g":"m","sg":"ascenso","pl":"ascensos","art":["el","los"]},
@@ -3687,7 +3687,12 @@ const FORMAS_ES = {
 "ESP-05404":{"t":"sust","g":"m","sg":"molar","pl":"molares","art":["el","los"]},
 "ESP-05405":{"t":"sust","g":"f","sg":"muela","pl":"muelas","art":["la","las"]},
 "ESP-05406":{"t":"sust","g":"f","sg":"madrastra","pl":"madrastras","art":["la","las"]},
-"ESP-05407":{"t":"sust","g":"f","sg":"madrina","pl":"madrinas","art":["la","las"]}
+"ESP-05407":{"t":"sust","g":"f","sg":"madrina","pl":"madrinas","art":["la","las"]},
+"ESP-05415":{"t":"sust","g":"m/f","sg":"dependiente","pl":"dependientes","art":["el","los"],"f":"dependienta","fpl":"dependientas","artF":["la","las"]},
+"ESP-05416":{"t":"sust","g":"f","sg":"nacionalidad","pl":"nacionalidades","art":["la","las"]},
+"ESP-05417":{"t":"sust","g":"f","sg":"arroba","pl":"arrobas","art":["la","las"]},
+"ESP-05418":{"t":"sust","g":"m/f","sg":"peluquero","pl":"peluqueros","art":["el","los"],"f":"peluquera","fpl":"peluqueras","artF":["la","las"]},
+"ESP-05419":{"t":"adj","m":"jubilado","f":"jubilada","mpl":"jubilados","fpl":"jubiladas"}
 };
 
 const FORMAS_ES_SERIES = {

@@ -5,10 +5,10 @@
    y senses[].ru / senses[].definitionRu. Ficha y decisiones:
    claude/LEXICO_ABECE_FUENTES.md.
 
-   Estado: 5369 entradas (léxico base completo: 10 tandas, 26/10/2026; correcciones del 27/10/2026:
+   Estado: 5379 entradas (léxico base completo: 10 tandas, 26/10/2026; correcciones del 27/10/2026:
    molar separado en verbo ESP-04818 y sustantivo ESP-05404, muela nueva ESP-05405, linear ESP-03453
    quitado —su ID no se vuelve a usar—; zorra solo con la acepción vulgar, criada → criado con femenino
-   criada, madrastra ESP-05406 aparte de padrastro, madrina nueva ESP-05407; 28/10/2026: vale separado en sustantivo ESP-04369 e interjección ESP-05408, deletrear nuevo ESP-05409, valer (ESP-00168) sin la acepción «ладно (vale)»; introducedIn [1] en las 169 palabras de la U1 (las de las letras y las de saludos, presentarse y números); pronunciación de show, sexy, rock, whisky, shock y hockey corregida con
+   criada, madrastra ESP-05406 aparte de padrastro, madrina nueva ESP-05407; 28/10/2026: vale separado en sustantivo ESP-04369 e interjección ESP-05408, deletrear nuevo ESP-05409, valer (ESP-00168) sin la acepción «ладно (vale)»; introducedIn [1] en las 169 palabras de la U1; 02/11/2026: 10 entradas nuevas para la U2 (ESP-05410 a ESP-05419: Argentina, China, Estados Unidos, París, Roma, dependiente, nacionalidad, arroba, peluquero, jubilado), inglés pasa a adjetivo, policía, frente, radio y cometa pasan a m/f (cometa con los géneros corregidos); introducedIn [2] en las 153 palabras nuevas de la U2 (las de las letras y las de saludos, presentarse y números); pronunciación de show, sexy, rock, whisky, shock y hockey corregida con
    las reglas nuevas de herramientas/abece/generador-fonetica-es.py). Lo carga el Diccionario
    (ficha.html) en Abecé, y core.js lo pide solo para el buscador (27/10/2026).
 
@@ -71,7 +71,7 @@ const LEXICON_ES_META = {
   "wordfreq, Robyn Speer (CC BY-SA 4.0)",
   "WikDict / FreeDict es-ru (CC BY-SA)"
  ],
- "totalEntries": 5369,
+ "totalEntries": 5379,
  "tandas": [
   1,
   2,
@@ -104,7 +104,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -244,7 +246,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -375,7 +379,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -561,7 +567,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -2595,7 +2603,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -2952,7 +2962,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -2991,7 +3003,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -4136,7 +4150,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -4498,7 +4514,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -5085,7 +5103,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -6158,7 +6178,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -6338,7 +6360,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -6512,7 +6536,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -6770,7 +6796,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -7471,7 +7499,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -7786,7 +7816,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -7959,7 +7991,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -10110,21 +10144,23 @@ const LEXICON_ES = [
   "posNormalized": "sustantivo",
   "translit": "полиси́а",
   "ipa": "poliθˈia",
-  "gender": "f",
+  "gender": "m/f",
   "numberClass": "regular",
   "senses": [
    {
-    "ru": "полиция",
+    "ru": "полиция (ж. р.)",
     "definitionRu": "«llamar a la policía» — вызвать полицию.",
     "source": "redactado"
    },
    {
-    "ru": "полицейский",
+    "ru": "полицейский (м. и ж. р.)",
     "definitionRu": "О человеке: «el policía», «la policía».",
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -10472,7 +10508,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -10796,7 +10834,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -10889,7 +10929,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -11266,7 +11308,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -11999,7 +12043,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -13887,7 +13933,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -15406,7 +15454,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -16003,7 +16053,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -19319,7 +19371,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -20567,7 +20621,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -21304,7 +21360,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -21655,7 +21713,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -23624,7 +23684,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -24531,7 +24593,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -26081,7 +26145,7 @@ const LEXICON_ES = [
   "posNormalized": "sustantivo",
   "translit": "фрэ́нтэ",
   "ipa": "fɾˈente",
-  "gender": "m",
+  "gender": "m/f",
   "numberClass": "regular",
   "senses": [
    {
@@ -26362,7 +26426,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -28996,7 +29062,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -30370,7 +30438,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -30584,7 +30654,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -31763,7 +31835,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -40907,7 +40981,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -41314,24 +41390,26 @@ const LEXICON_ES = [
   "id": "ESP-00966",
   "es": "inglés",
   "acento": "in·GLÉS",
-  "posNormalized": "sustantivo",
+  "posNormalized": "adjetivo",
   "translit": "инглэ́с",
   "ipa": "iŋɡlˈes",
-  "gender": "m/f",
-  "numberClass": "regular",
+  "gender": "",
+  "numberClass": "",
   "senses": [
    {
-    "ru": "английский язык; англичанин",
-    "definitionRu": "«Hablo inglés» — я говорю по-английски.",
+    "ru": "английский",
+    "definitionRu": "«la comida inglesa» — английская кухня.",
     "source": "redactado"
    },
    {
-    "ru": "английский",
-    "definitionRu": "Как прилагательное: «la comida inglesa».",
+    "ru": "англичанин; английский язык",
+    "definitionRu": "Как существительное: «Hablo inglés» — я говорю по-английски. Ж. р.: inglesa.",
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -41354,13 +41432,7 @@ const LEXICON_ES = [
   "regimen": [],
   "pronominalPartner": [],
   "conjugationClass": "",
-  "femenino": {
-   "es": "inglesa",
-   "acento": "in·GLE·sa",
-   "ipa": "iŋɡlˈesa",
-   "translit": "инглэ́са",
-   "ru": "англичанка"
-  }
+  "femenino": {}
  },
  {
   "id": "ESP-00967",
@@ -42899,7 +42971,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -42984,7 +43058,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -43140,7 +43216,7 @@ const LEXICON_ES = [
   "posNormalized": "sustantivo",
   "translit": "ра́дьо",
   "ipa": "rˈaðjo",
-  "gender": "f",
+  "gender": "m/f",
   "numberClass": "regular",
   "senses": [
    {
@@ -44465,7 +44541,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -44716,7 +44794,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -46775,7 +46855,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -47037,7 +47119,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -49395,7 +49479,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -50063,7 +50149,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -52727,7 +52815,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -54175,7 +54265,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -54956,7 +55048,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -58056,7 +58150,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -59069,7 +59165,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -65774,7 +65872,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -66889,7 +66989,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -67020,7 +67122,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -73727,7 +73831,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -75740,7 +75846,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -76204,7 +76312,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -76454,7 +76564,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -79491,7 +79603,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -79941,7 +80055,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -80413,7 +80529,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -81920,7 +82038,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -83408,7 +83528,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -106545,7 +106667,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -107688,7 +107812,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -108358,7 +108484,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -109135,7 +109263,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -111693,7 +111823,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -119403,7 +119535,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -125143,7 +125277,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -125847,7 +125983,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -127886,7 +128024,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -138960,7 +139100,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -144379,7 +144521,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -144916,7 +145060,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -145257,7 +145403,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -148391,17 +148539,17 @@ const LEXICON_ES = [
   "posNormalized": "sustantivo",
   "translit": "комэ́та",
   "ipa": "komˈeta",
-  "gender": "m",
+  "gender": "m/f",
   "numberClass": "regular",
   "senses": [
    {
-    "ru": "комета (ж. р.)",
-    "definitionRu": "«una cometa en el cielo» — комета в небе.",
+    "ru": "комета (м. р.)",
+    "definitionRu": "«un cometa en el cielo» — комета в небе.",
     "source": "redactado"
    },
    {
-    "ru": "воздушный змей (ж. р. в Испании)",
-    "definitionRu": "«volar una cometa» — запускать змея.",
+    "ru": "воздушный змей (ж. р.)",
+    "definitionRu": "«volar una cometa» — запускать воздушного змея.",
     "source": "redactado"
    }
   ],
@@ -152831,7 +152979,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -156250,7 +156400,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -158833,7 +158985,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -171742,7 +171896,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -172681,7 +172837,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -178208,7 +178366,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -184739,7 +184899,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204200,7 +204362,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204455,7 +204619,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204496,7 +204662,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204621,7 +204789,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204703,7 +204873,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204744,7 +204916,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204785,7 +204959,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204826,7 +205002,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204908,7 +205086,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204949,7 +205129,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -204990,7 +205172,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -205113,7 +205297,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -205154,7 +205340,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -205568,7 +205756,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -206595,7 +206785,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -206800,7 +206992,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -207533,7 +207727,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -208117,7 +208313,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -208963,7 +209161,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -209499,7 +209699,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -211006,7 +211208,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -211053,7 +211257,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -211221,7 +211427,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -211263,7 +211471,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -211473,7 +211683,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -211562,7 +211774,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -211604,7 +211818,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -211646,7 +211862,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -211688,7 +211906,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -211898,7 +212118,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -211940,7 +212162,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -211982,7 +212206,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212024,7 +212250,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212066,7 +212294,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212150,7 +212380,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212234,7 +212466,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212488,7 +212722,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212530,7 +212766,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212572,7 +212810,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212614,7 +212854,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212656,7 +212898,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212698,7 +212942,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212740,7 +212986,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212782,7 +213030,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212824,7 +213074,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212866,7 +213118,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212908,7 +213162,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212950,7 +213206,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -212992,7 +213250,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213034,7 +213294,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213204,7 +213466,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213246,7 +213510,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213288,7 +213554,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213414,7 +213682,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213456,7 +213726,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213582,7 +213854,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213624,7 +213898,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213666,7 +213942,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -213708,7 +213986,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   2
+  ],
   "appearsIn": [],
   "propio": true,
   "sourceRefs": {
@@ -224101,6 +224381,459 @@ const LEXICON_ES = [
   "regimen": [],
   "pronominalPartner": [],
   "conjugationClass": "-ar",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05410",
+  "es": "Argentina",
+  "acento": "ar·gen·TI·na",
+  "posNormalized": "sustantivo",
+  "translit": "архэнти́на",
+  "ipa": "aɾxentˈina",
+  "gender": "f",
+  "numberClass": "",
+  "senses": [
+   {
+    "ru": "Аргентина",
+    "definitionRu": "Страна в Южной Америке.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": true,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "argentina",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "argentina|N"
+  },
+  "temas": [
+   "paises"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05411",
+  "es": "China",
+  "acento": "CHI·na",
+  "posNormalized": "sustantivo",
+  "translit": "чи́на",
+  "ipa": "tʃˈina",
+  "gender": "f",
+  "numberClass": "",
+  "senses": [
+   {
+    "ru": "Китай",
+    "definitionRu": "Страна в Восточной Азии.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": true,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "china",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "china|N"
+  },
+  "temas": [
+   "paises"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05412",
+  "es": "Estados Unidos",
+  "acento": "es·TA·dos u·NI·dos",
+  "posNormalized": "sustantivo",
+  "translit": "эста́дос уни́дос",
+  "ipa": "estˈaðos unˈiðos",
+  "gender": "m",
+  "numberClass": "",
+  "senses": [
+   {
+    "ru": "США, Соединённые Штаты",
+    "definitionRu": "Обычно без артикля: «Soy de Estados Unidos». Сокращённо — EE. UU.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": true,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "estados unidos",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "estados unidos|N"
+  },
+  "temas": [
+   "paises"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05413",
+  "es": "París",
+  "acento": "pa·RÍS",
+  "posNormalized": "sustantivo",
+  "translit": "пари́с",
+  "ipa": "paɾˈis",
+  "gender": "m",
+  "numberClass": "",
+  "senses": [
+   {
+    "ru": "Париж",
+    "definitionRu": "Столица Франции.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": true,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "parís",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "parís|N"
+  },
+  "temas": [
+   "paises"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05414",
+  "es": "Roma",
+  "acento": "RO·ma",
+  "posNormalized": "sustantivo",
+  "translit": "ро́ма",
+  "ipa": "rˈoma",
+  "gender": "f",
+  "numberClass": "",
+  "senses": [
+   {
+    "ru": "Рим",
+    "definitionRu": "Столица Италии.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": true,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "roma",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "roma|N"
+  },
+  "temas": [
+   "paises"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05415",
+  "es": "dependiente",
+  "acento": "de·pen·DIEN·te",
+  "posNormalized": "sustantivo",
+  "translit": "дэпэндье́нтэ",
+  "ipa": "dependˈjente",
+  "gender": "m/f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "продавец (в магазине)",
+    "definitionRu": "«Trabajo de dependiente en una tienda» — я работаю продавцом в магазине.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "dependiente",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "dependiente|N"
+  },
+  "temas": [
+   "trabajo",
+   "dinero-compras"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {
+   "es": "dependienta",
+   "acento": "de·pen·DIEN·ta",
+   "ipa": "dependˈjenta",
+   "translit": "дэпэндье́нта",
+   "ru": "продавщица"
+  }
+ },
+ {
+  "id": "ESP-05416",
+  "es": "nacionalidad",
+  "acento": "na·cio·na·li·DAD",
+  "posNormalized": "sustantivo",
+  "translit": "насьоналида́д",
+  "ipa": "naθjonaliðˈað",
+  "gender": "f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "гражданство; национальность",
+    "definitionRu": "«¿De qué nacionalidad eres?» — какое у тебя гражданство? В документах — «гражданство».",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "nacionalidad",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "nacionalidad|N"
+  },
+  "temas": [
+   "paises"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05417",
+  "es": "arroba",
+  "acento": "a·RRO·ba",
+  "posNormalized": "sustantivo",
+  "translit": "арро́ба",
+  "ipa": "arˈoβa",
+  "gender": "f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "собака (@)",
+    "definitionRu": "Значок @ в адресе почты: «ana arroba gmail punto com».",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "arroba",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "arroba|N"
+  },
+  "temas": [
+   "comunicacion"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {}
+ },
+ {
+  "id": "ESP-05418",
+  "es": "peluquero",
+  "acento": "pe·lu·QUE·ro",
+  "posNormalized": "sustantivo",
+  "translit": "пэлукэ́ро",
+  "ipa": "pelukˈeɾo",
+  "gender": "m/f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "парикмахер",
+    "definitionRu": "«Mi hermana es peluquera» — моя сестра парикмахер.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "peluquero",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "peluquero|N"
+  },
+  "temas": [
+   "trabajo"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {
+   "es": "peluquera",
+   "acento": "pe·lu·QUE·ra",
+   "ipa": "pelukˈeɾa",
+   "translit": "пэлукэ́ра",
+   "ru": "парикмахер (о женщине)"
+  }
+ },
+ {
+  "id": "ESP-05419",
+  "es": "jubilado",
+  "acento": "ju·bi·LA·do",
+  "posNormalized": "adjetivo",
+  "translit": "хубила́до",
+  "ipa": "xuβilˈaðo",
+  "gender": "",
+  "numberClass": "",
+  "senses": [
+   {
+    "ru": "на пенсии; пенсионер",
+    "definitionRu": "«Mi padre está jubilado» — мой отец на пенсии. Как существительное: «un jubilado» — пенсионер.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [
+   2
+  ],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "jubilado",
+    "categorias": [
+     "A"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (02/11/2026, U2 de Abecé)",
+   "tanda": 12,
+   "clave": "jubilado|A"
+  },
+  "temas": [
+   "trabajo"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
   "femenino": {}
  }
 ];

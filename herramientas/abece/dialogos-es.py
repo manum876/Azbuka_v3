@@ -22,8 +22,13 @@ OUT = os.path.join(RAIZ, "data", "data-dialogos-es.js")
 DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "vale": "ESP-05408", "bien": "ESP-00036", "mucho": "ESP-00066",
        "la": "ESP-00001", "lo": "ESP-00025", "tarde": "ESP-00217", "nada": "ESP-00070", "gusto": "ESP-00673", "encantado": "ESP-00942",
        "llamo": "ESP-02076", "llamas": "ESP-02076", "llama": "ESP-02076", "siento": "ESP-00079", "y": "ESP-00009",
-       "señora": "ESP-00051", "pero": "ESP-00031"}
-PROPIOS = {"ana", "javier", "lucía", "petrova", "barcelona", "moscú", "pérez"}
+       "señora": "ESP-00051", "pero": "ESP-00031",
+       # U2 (02/11/2026)
+       "este": "ESP-00029", "vivo": "ESP-00178", "poco": "ESP-00120", "solo": "ESP-00046"}
+# Nombres propios de varias palabras que no están en el léxico (sus palabras no se enlazan)
+PROPIOS_VARIAS = ["Buenos Aires"]
+# Nombres de personas (no van al léxico). Los países y las ciudades sí: con mayúscula se usa la entrada propia.
+PROPIOS = {"ana", "javier", "lucía", "petrova", "pérez", "pablo", "marta", "olga", "iván", "gmail"}
 LETRAS = {"a", "be", "ce", "de", "e", "efe", "ge", "hache", "i", "jota", "ka", "ele", "eme", "ene", "eñe", "o", "pe", "cu", "erre", "ese", "te", "u", "uve", "equis", "ye", "zeta"}
 RX = re.compile(r"[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:-[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*")
 faltan = set()
@@ -33,7 +38,11 @@ def idDe(w, deletreo=False):
     if k in PROPIOS: return None
     if deletreo and k in LETRAS: return None
     if k in DEF: return DEF[k]
-    L = [x for x in M["lex"].get(k, []) if not x.get("propio")]
+    todas = M["lex"].get(k, [])
+    if w[:1].isupper():   # Rusia, Madrid, China: la entrada propia, si hay
+        P = [x for x in todas if x.get("propio")]
+        if len(P) == 1: return P[0]["id"]
+    L = [x for x in todas if not x.get("propio")]
     if len(L) == 1: return L[0]["id"]
     if len(L) > 1: faltan.add("ambigua: " + k); return L[0]["id"]
     F = M["formas"].get(k)
@@ -43,18 +52,20 @@ def idDe(w, deletreo=False):
     faltan.add("sin id: " + k)
     return None
 
+TR_FIJA = {"gmail": "хэмэ́йл"}   # préstamos que se dicen distinto de como se escriben
 def trDe(w):
     k = w.lower()
     L = M["lex"].get(k)
-    t = L[0]["tr"] if L and L[0].get("tr") else gf.translit(k)
+    t = TR_FIJA[k] if k in TR_FIJA else L[0]["tr"] if L and L[0].get("tr") else gf.translit(k)
     if w[0].isupper(): t = t[0].upper() + t[1:]
     return t
 
 def linea(txt, deletreo=False):
     lex, partes, ult = [], [], 0
+    fuera = [(m.start(), m.end()) for p in PROPIOS_VARIAS for m in re.finditer(re.escape(p), txt)]
     for m in RX.finditer(txt):
         partes.append(txt[ult:m.start()]); partes.append(trDe(m.group(0))); ult = m.end()
-        lex.append(idDe(m.group(0), deletreo))
+        lex.append(None if any(a <= m.start() < b for a, b in fuera) else idDe(m.group(0), deletreo))
     partes.append(txt[ult:])
     return "".join(partes), lex
 
@@ -62,7 +73,9 @@ PERSONAJES = {
     "ana": {"es": "Ana", "ru": "Аня", "genero": "f", "desc": "Аня из Москвы, переезжает в Барселону."},
     "javier": {"es": "Javier", "ru": "Хавьер", "genero": "m", "desc": "Преподаватель Ани."},
     "lucia": {"es": "Lucía", "ru": "Лусия", "genero": "f", "desc": "Испанская подруга Ани."},
-    "recepcion": {"es": "Recepcionista", "ru": "Администратор", "genero": "m", "desc": "Администратор на ресепшене."}
+    "recepcion": {"es": "Recepcionista", "ru": "Администратор", "genero": "m", "desc": "Администратор на ресепшене."},
+    "pablo": {"es": "Pablo", "ru": "Пабло", "genero": "m", "desc": "Брат Лусии, из Мадрида."},
+    "marta": {"es": "Marta", "ru": "Марта", "genero": "f", "desc": "Девушка Пабло, из Аргентины."}
 }
 
 # Frases: [id, función, es, ru (traducción), registro, uso (ruso)]
@@ -98,7 +111,23 @@ FRASES = [
     ["FRE-029", "presentarse", "Encantada.", "Очень приятно (говорит женщина).", "", "Женщина говорит «encantada»."],
     ["FRE-030", "presentarse", "Mucho gusto.", "Очень приятно.", "", "Одинаково для мужчин и женщин."],
     ["FRE-031", "presentarse", "¿Puedes deletrear tu nombre?", "Можешь назвать своё имя по буквам?", "tú", "Ответ — названия букв: «a, ene, a»."],
-    ["FRE-032", "agradecer", "¡Vale!", "Ладно! Хорошо! Договорились!", "", "Самое испанское «да, договорились». В Латинской Америке так почти не говорят."]
+    ["FRE-032", "agradecer", "¡Vale!", "Ладно! Хорошо! Договорились!", "", "Самое испанское «да, договорились». В Латинской Америке так почти не говорят."],
+    # U2 (02/11/2026)
+    ["FRE-033", "hablar-de-uno", "¿De dónde eres?", "Откуда ты?", "tú", "С usted: «¿De dónde es usted?».", 2],
+    ["FRE-034", "hablar-de-uno", "Soy de Rusia.", "Я из России.", "", "**de** + страна или город: soy de Moscú.", 2],
+    ["FRE-035", "hablar-de-uno", "¿Cuántos años tienes?", "Сколько тебе лет?", "tú", "Дословно: «сколько лет ты имеешь?». С usted: «¿Cuántos años tiene?».", 2],
+    ["FRE-036", "hablar-de-uno", "Tengo veinte años.", "Мне двадцать лет.", "", "Возраст — с глаголом **tener**, а не ser.", 2],
+    ["FRE-037", "hablar-de-uno", "¿Hablas inglés?", "Ты говоришь по-английски?", "tú", "Язык — без предлога и без артикля: hablo español.", 2],
+    ["FRE-038", "hablar-de-uno", "Hablo un poco de español.", "Я немного говорю по-испански.", "", "«Un poco de» — немного.", 2],
+    ["FRE-039", "hablar-de-uno", "Vivo en Barcelona.", "Я живу в Барселоне.", "", "**en** + город: vivo en Madrid.", 2],
+    ["FRE-040", "hablar-de-uno", "¿Eres de aquí?", "Ты местный? (Ты отсюда?)", "tú", "Частый вопрос при знакомстве.", 2],
+    ["FRE-041", "presentarse", "Este es mi hermano.", "Это мой брат.", "", "Представить мужчину: **este es**; женщину — **esta es**.", 2],
+    ["FRE-042", "presentarse", "Esta es mi amiga Lucía.", "Это моя подруга Лусия.", "", "**esta es** — о женщине.", 2],
+    ["FRE-043", "presentarse", "¿Quién es?", "Кто это?", "", "Вопрос о человеке.", 2],
+    ["FRE-044", "datos", "¿Cuál es tu número de teléfono?", "Какой у тебя номер телефона?", "tú", "Не «qué», а **cuál**: «какой (из всех)».", 2],
+    ["FRE-045", "datos", "¿Cuál es tu correo?", "Какая у тебя почта?", "tú", "Адрес диктуют так: ana arroba gmail punto com.", 2],
+    ["FRE-046", "hablar-de-uno", "¿Tienes hermanos?", "У тебя есть братья или сёстры?", "tú", "**hermanos** — и «братья», и «братья и сёстры».", 2],
+    ["FRE-047", "hablar-de-uno", "Soy profesora.", "Я преподаватель (говорит женщина).", "", "Профессия — без артикля.", 2]
 ]
 
 # Diálogos: [id, título ruso, título español, personajes, [[p, es, ru, obs?, deletreo?], …]]
@@ -142,7 +171,53 @@ DIALOGOS = [
         ["lucia", "Más despacio, por favor.", "Помедленнее, пожалуйста."],
         ["ana", "Seis… cero… cinco… uno… ocho… dos… nueve… siete… tres.", "Шесть… ноль… пять… один… восемь… два… девять… семь… три."],
         ["lucia", "¡Vale, gracias! ¡Hasta mañana!", "Хорошо, спасибо! До завтра!"],
-        ["ana", "¡Chao!", "Пока!"]]]
+        ["ana", "¡Chao!", "Пока!"]]],
+    # U2 (02/11/2026)
+    ["DLE-005", "Откуда ты?", "¿De dónde eres?", ["pablo", "ana"], [
+        ["pablo", "¡Hola! Soy Pablo, el hermano de Lucía.", "Привет! Я Пабло, брат Лусии.", "**el hermano de Lucía** — «брат Лусии»: «de» передаёт русский родительный падеж."],
+        ["ana", "Hola, Pablo. Me llamo Ana.", "Привет, Пабло. Меня зовут Аня."],
+        ["pablo", "¿De dónde eres, Ana?", "Откуда ты, Аня?"],
+        ["ana", "Soy de Rusia, de Moscú. Soy rusa.", "Я из России, из Москвы. Я русская."],
+        ["pablo", "¿Hablas inglés?", "Ты говоришь по-английски?"],
+        ["ana", "Sí, hablo ruso, inglés y un poco de español.", "Да, я говорю по-русски, по-английски и немного по-испански."],
+        ["pablo", "¡Hablas muy bien!", "Ты очень хорошо говоришь!"],
+        ["ana", "Gracias. ¿Y tú? ¿Eres de Barcelona?", "Спасибо. А ты? Ты из Барселоны?"],
+        ["pablo", "No, soy de Madrid. Pero vivo en Barcelona.", "Нет, я из Мадрида. Но живу в Барселоне."]], 2],
+    ["DLE-006", "Сколько тебе лет?", "¿Cuántos años tienes?", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿cuántos años tienes?", "Аня, сколько тебе лет?"],
+        ["ana", "Tengo veintiocho años. ¿Y tú?", "Мне двадцать восемь. А тебе?"],
+        ["lucia", "Treinta y dos. ¿Eres estudiante?", "Тридцать два. Ты студентка?", "**treinta y dos** — после 30 числа пишутся через «y»."],
+        ["ana", "No, soy programadora. ¿Y tú?", "Нет, я программист. А ты?", "Профессия — без артикля и в женском роде: **programadora**."],
+        ["lucia", "Soy profesora de inglés.", "Я преподаватель английского."],
+        ["ana", "¡Qué bien!", "Как здорово!"]], 2],
+    ["DLE-007", "Анкета", "En la academia", ["recepcion", "ana"], [
+        ["recepcion", "Buenos días. ¿Su nombre, por favor?", "Доброе утро. Ваше имя, пожалуйста?", "Администратор говорит на **usted**: **su** — «ваш»."],
+        ["ana", "Ana Petrova.", "Аня Петрова."],
+        ["recepcion", "¿Nacionalidad?", "Гражданство?"],
+        ["ana", "Rusa.", "Русская."],
+        ["recepcion", "¿Cuántos años tiene?", "Сколько вам лет?"],
+        ["ana", "Veintiocho.", "Двадцать восемь."],
+        ["recepcion", "¿Y su número de teléfono?", "А ваш номер телефона?"],
+        ["ana", "Seis, cuatro, uno, treinta y dos, cincuenta, noventa y ocho.", "Шесть, четыре, один, тридцать два, пятьдесят, девяносто восемь.", "Номер часто называют так: первые три цифры по одной, потом парами."],
+        ["recepcion", "¿Cuál es su correo?", "Какая у вас электронная почта?"],
+        ["ana", "Ana punto petrova arroba gmail punto com.", "ana.petrova@gmail.com", "**arroba** — «собака» (@), **punto** — точка."],
+        ["recepcion", "Muy bien. Gracias, Ana.", "Очень хорошо. Спасибо, Аня."]], 2],
+    ["DLE-008", "Моя семья", "Mi familia", ["lucia", "ana"], [
+        ["lucia", "¿Quién es?", "Кто это?"],
+        ["ana", "Es mi madre. Se llama Olga. Es médica.", "Это моя мама. Её зовут Ольга. Она врач."],
+        ["lucia", "¿Y este chico?", "А этот парень?"],
+        ["ana", "Es mi hermano, Iván. Tiene veinte años. Es estudiante.", "Это мой брат Иван. Ему двадцать лет. Он студент."],
+        ["lucia", "¿Tienes más hermanos?", "У тебя есть ещё братья или сёстры?"],
+        ["ana", "No, solo un hermano. ¿Y tú?", "Нет, только один брат. А у тебя?"],
+        ["lucia", "Tengo un hermano, Pablo, y una hermana.", "У меня есть брат Пабло и сестра."]], 2],
+    ["DLE-009", "Знакомьтесь!", "Os presento a…", ["lucia", "ana", "marta"], [
+        ["lucia", "Ana, este es Pablo, mi hermano, y esta es Marta, su novia.", "Аня, это Пабло, мой брат, а это Марта, его девушка."],
+        ["ana", "¡Hola! Encantada.", "Привет! Очень приятно."],
+        ["marta", "Encantada. ¿Vosotras sois compañeras de clase?", "Очень приятно. Вы однокурсницы?", "**vosotras** — Марта говорит с двумя женщинами на «ты»."],
+        ["lucia", "No, somos amigas. Ana es rusa.", "Нет, мы подруги. Аня русская."],
+        ["marta", "¿Rusa? ¡Qué bien! Yo soy de Argentina.", "Русская? Как здорово! А я из Аргентины.", "**Yo** — чтобы противопоставить: «а я…»."],
+        ["ana", "¿De Argentina? ¿De dónde?", "Из Аргентины? Откуда?"],
+        ["marta", "De Buenos Aires.", "Из Буэнос-Айреса."]], 2]
 ]
 
 def frasesDe(es):
@@ -157,11 +232,13 @@ def frasesDe(es):
     return out
 
 fr_js = []
-for fid, fun, es, ru, reg, uso in FRASES:
+for fila in FRASES:   # [id, función, es, ru, registro, uso, unidad?]
+    fid, fun, es, ru, reg, uso = fila[:6]
     tr, lex = linea(es)
-    fr_js.append({"id": fid, "funcion": fun, "es": es, "tr": tr, "ru": ru, "registro": reg, "nivel": "A1", "unidad": 1, "uso": uso, "lex": lex})
+    fr_js.append({"id": fid, "funcion": fun, "es": es, "tr": tr, "ru": ru, "registro": reg, "nivel": "A1", "unidad": fila[6] if len(fila) > 6 else 1, "uso": uso, "lex": lex})
 dl_js = []
-for did, tit, titEs, pers, lineas in DIALOGOS:
+for dlg in DIALOGOS:   # [id, título ruso, título español, personajes, líneas, unidad?]
+    did, tit, titEs, pers, lineas = dlg[:5]
     ls = []
     for l in lineas:
         p, es, ru = l[0], l[1], l[2]
@@ -173,7 +250,7 @@ for did, tit, titEs, pers, lineas in DIALOGOS:
         if f: x["f"] = f
         if obs: x["obs"] = obs
         ls.append(x)
-    dl_js.append({"id": did, "titulo": tit, "tituloEs": titEs, "situacion": "conocer", "nivel": "A1", "unidad": 1, "personajes": pers, "lineas": ls})
+    dl_js.append({"id": did, "titulo": tit, "tituloEs": titEs, "situacion": "conocer", "nivel": "A1", "unidad": dlg[5] if len(dlg) > 5 else 1, "personajes": pers, "lineas": ls})
 
 J = lambda o: json.dumps(o, ensure_ascii=False)
 txt = """/* ============================================================

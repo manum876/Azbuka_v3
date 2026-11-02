@@ -51,7 +51,7 @@ PLURAL_EXCEP = {
 # Solo se usan en plural aunque el léxico no lo marque (la palabra ya es el plural).
 SOLO_PLURAL = {"modales", "afueras", "cosquillas", "gases"}
 # El género cambia el sentido: «el orden» ≠ «la orden».
-GENERO_SENTIDO = {"orden", "corte", "capital", "coma", "cura", "papa", "final", "frente", "cometa"}
+GENERO_SENTIDO = {"orden", "corte", "capital", "coma", "cura", "papa", "final", "frente", "cometa", "radio", "policía", "guía"}   # 02/11/2026: radio, policía, guía
 
 
 def plural(w):
