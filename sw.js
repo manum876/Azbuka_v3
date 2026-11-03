@@ -24,7 +24,7 @@
      5–6 s). El resto (páginas y js/) sigue con «primero la red», pero
      espera como mucho AZ_ESPERA (1,5 s) antes de usar la copia.
 
-   · Las voces generadas (…/Azbuka_voces/, 15/10/2026) no pasan por acá:
+   · Las voces generadas (…/Azbuka_voces/, 15/10/2026, y …/Abece_voces/, 03/11/2026) no pasan por acá:
      core.js las baja y las guarda en la caché «az-voces», que no se borra al
      cambiar AZ_CACHE.
 
@@ -80,8 +80,9 @@ self.addEventListener("fetch", e => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;
-  /* Las voces generadas (repo Azbuka_voces) las guarda core.js en su propia caché, «az-voces» (15/10/2026) */
-  if (url.pathname.indexOf("/Azbuka_voces/") >= 0) return;
+  /* Las voces generadas (repos Azbuka_voces y, desde el 03/11/2026, Abece_voces) las guarda core.js
+     en su propia caché, «az-voces» (15/10/2026) */
+  if (url.pathname.indexOf("/Azbuka_voces/") >= 0 || url.pathname.indexOf("/Abece_voces/") >= 0) return;
   e.respondWith((async () => {
     const cache = await caches.open(AZ_CACHE);
     const clave = azClave(req);

@@ -213,9 +213,9 @@ function azSearchLexicon(query, pos) {
      libro, buenas → bueno, buen → bueno, los → el) con formasEsIndice de
      data/data-formas-es.js. Si la página no lo tiene, azCargarFormasEs lo
      pide y avisa con "az-formas". Van después de las formas verbales.
-   · azHablarEs(texto, region?): la voz del español (region: "es-MX", "es-AR"… usa la
-     voz de ese país si existe; 27/10/2026). Mientras no estén los audios
-     de Abece_voces, la voz es-ES del teléfono. */
+   · azHablarEs(texto, region?, quien?): la voz del español. Desde el 03/11/2026, los
+     audios de Abece_voces (ver «VOCES GENERADAS DE ABECÉ»); si un texto no tiene audio,
+     la voz es-ES del teléfono. region ya no cambia la voz (03/11/2026). */
 function azEscribirLexico() {
   document.write('<script src="' + (AZ_DIRECCION.lexico || "data/data-lexicon.js") + '"><\/script>');
 }
@@ -348,18 +348,18 @@ function azVozEs(region, quien) {
   const hombre = gen === "m" ? esp.find(v => !AZ_VOZ_ES_F.test(v.name)) : null;
   return { vr, v: vr || hombre || esp.find(v => AZ_VOZ_ES_F.test(v.name)) || esp[0] || vs[0] };
 }
+/* Voces generadas de Abecé (03/11/2026): azHablarEs y azHablarSecuenciaEs tocan el audio de
+   Abece_voces si existe (azVozDecirEs, más abajo, junto a las voces de Azbuka) y si no, la voz
+   es-ES del teléfono, como antes. region (variedades del Alfabeto) ya no cambia la voz (Manu,
+   03/11/2026: la voz de narración para todo, también en los regionalismos); se acepta y se ignora. */
 function azHablarEs(texto, region, quien) {
   try {
-    if (!texto || !("speechSynthesis" in window)) return false;
-    azVozTurno++; azVozParar();
-    const s = window.speechSynthesis; s.cancel(); s.resume();
-    const u = new SpeechSynthesisUtterance(String(texto));
-    u.lang = "es-ES"; u.rate = 0.9;
-    const { vr, v } = azVozEs(region, quien);
-    if (v) { u.voice = v; u.lang = v.lang; }
-    window.azVozFrase = u;
-    s.speak(u);
-    return !!vr;
+    if (!texto) return false;
+    const turno = ++azVozTurno;
+    azVozParar();
+    if ("speechSynthesis" in window) { window.speechSynthesis.cancel(); window.speechSynthesis.resume(); }
+    azVozDecirEs(turno, texto, quien);
+    return false;
   } catch (e) { return false; }
 }
 /* Varias líneas seguidas en español (28/10/2026, diálogos de Abecé): items [{ texto, genero }],
@@ -367,23 +367,17 @@ function azHablarEs(texto, region, quien) {
    cuando termina la anterior, y ■ (azCallar) o un audio nuevo cortan la secuencia. */
 function azHablarSecuenciaEs(items, alEmpezarLinea, alTerminar) {
   try {
-    if (!("speechSynthesis" in window)) return;
     const turno = ++azVozTurno;
     azVozParar();
-    const s = window.speechSynthesis; s.cancel(); s.resume();
+    if ("speechSynthesis" in window) { window.speechSynthesis.cancel(); window.speechSynthesis.resume(); }
     let i = 0;
     const siguiente = () => {
       if (turno !== azVozTurno) return;
       if (i >= items.length) { if (alTerminar) alTerminar(); return; }
       const k = i++;
-      const u = new SpeechSynthesisUtterance(String(items[k].texto));
-      u.lang = "es-ES"; u.rate = items[k].rate || 0.9;
-      const { v } = azVozEs(null, items[k].genero);
-      if (v) { u.voice = v; u.lang = v.lang; }
-      u.onstart = () => { if (alEmpezarLinea) alEmpezarLinea(k); };
-      u.onend = () => setTimeout(siguiente, 250);
-      window.azVozFrase = u;
-      s.speak(u);
+      azVozDecirEs(turno, items[k].texto, items[k].genero, items[k].rate,
+        () => { if (alEmpezarLinea) alEmpezarLinea(k); },
+        () => setTimeout(siguiente, 250));
     };
     setTimeout(siguiente, 60);
   } catch (e) {}
@@ -680,20 +674,84 @@ function azVozDe(quien) {
   const voz = AZ_VOCES_PERSONAJE[quien || "narra"] || (genero ? AZ_VOCES_PERSONAJE[genero] : AZ_VOCES_PERSONAJE.narra);
   return { voz, genero };
 }
-let azVocesIndice = null;            /* { ext, voces: { baya: Set } } cuando cargó */
-const azVocesListo = (async () => {
+/* El índice de un repo de voces: { ext, voces: { voz: Set de claves } }, o null.
+   03/11/2026: cada dirección baja solo el suyo (Azbuka_voces o Abece_voces). */
+async function azVocesCargarIndice(base) {
   try {
-    const url = AZ_VOCES_BASE + "indice.json";
+    const url = base + "indice.json";
     let r = null;
     try { r = await fetch(url, { cache: "no-cache" }); if (r && r.ok && typeof caches !== "undefined") { const c = await caches.open(AZ_VOCES_CACHE); c.put(url, r.clone()); } } catch (e) { r = null; }
     if ((!r || !r.ok) && typeof caches !== "undefined") { const c = await caches.open(AZ_VOCES_CACHE); r = await c.match(url); }
     if (!r || !r.ok) return null;
     const d = await r.json(), voces = {};
     Object.keys(d.voces || {}).forEach(v => { voces[v] = new Set(String(d.voces[v]).split(" ").filter(Boolean)); });
-    azVocesIndice = { ext: d.ext || ".m4a", voces };
-    return azVocesIndice;
+    return { ext: d.ext || ".m4a", voces };
   } catch (e) { return null; }
-})();
+}
+const AZ_VOCES_ES_ACTIVA = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
+let azVocesIndice = null;            /* Azbuka: { ext, voces: { baya: Set } } cuando cargó */
+const azVocesListo = AZ_VOCES_ES_ACTIVA ? Promise.resolve(null) : azVocesCargarIndice(AZ_VOCES_BASE).then(i => (azVocesIndice = i));
+
+/* ── VOCES GENERADAS DE ABECÉ (03/11/2026) ─────────────────────
+   Los textos en español tienen su audio en el repo aparte Abece_voces, publicado en
+   …/Abece_voces/v1/<voz>/<clave>.m4a, con el mismo formato que Azbuka (AAC 48 kbps,
+   mono, 24 kHz) y el mismo índice (v1/indice.json, v1/paginas/<página>.json).
+   · Clave: azVozClave(azVozTextoEs(texto)): el texto sin llaves { } ni marcas ** de negrita.
+     herramientas/voces/inventario-es.js usa estas mismas funciones y esta tabla.
+   · Elenco (PLAN_IDA_Y_VUELTA.md §3.1, Manu 22/10/2026): Ana narra y es personaje
+     (Piper sharvard 1, más aguda); Lucía (sharvard 1, más grave); Javier (sharvard 0);
+     secundarios: mujeres con sharvard 1 en su tono, hombres con Silero es_2 y es_1.
+     Un personaje nuevo sin entrada propia toma la voz de su género. */
+const AZ_VOCES_ES_PERSONAJE = { "narra": "ana", "ana": "ana", "lucia": "lucia", "javier": "javier",
+  "recepcion": "hombre", "pablo": "hombre2", "marta": "mujer", "f": "mujer", "m": "hombre" };
+const AZ_VOCES_ES_BASE = (() => { try { return new URL("../Abece_voces/v1/", location.href).href; } catch (e) { return "../Abece_voces/v1/"; } })();
+function azVozTextoEs(t) { return azVozTexto(String(t == null ? "" : t).replace(/\*\*/g, "")); }
+function azVozDeEs(quien) {
+  const pj = (typeof DLG_PERSONAJES_ES !== "undefined" && quien && DLG_PERSONAJES_ES[quien]) || null;
+  const genero = quien === "m" || quien === "f" ? quien : (pj ? pj.genero : undefined);
+  const voz = AZ_VOCES_ES_PERSONAJE[quien || "narra"] || (genero ? AZ_VOCES_ES_PERSONAJE[genero] : AZ_VOCES_ES_PERSONAJE.narra);
+  return { voz, genero };
+}
+let azVocesIndiceEs = null;
+const azVocesListoEs = AZ_VOCES_ES_ACTIVA ? azVocesCargarIndice(AZ_VOCES_ES_BASE).then(i => (azVocesIndiceEs = i)) : Promise.resolve(null);
+function azVozUrlEs(texto, quien) {
+  if (!azVocesIndiceEs) return null;
+  const { voz } = azVozDeEs(quien), k = azVozClave(azVozTextoEs(texto)), s = azVocesIndiceEs.voces[voz];
+  return s && s.has(k) ? AZ_VOCES_ES_BASE + voz + "/" + k + azVocesIndiceEs.ext : null;
+}
+/* Como azVozDecir, en español: el audio de Abece_voces o, si falta, la voz es-ES del teléfono
+   (la velocidad «normal» del teléfono en español es 0,9). */
+function azVozDecirEs(turno, texto, quien, rate, alEmpezar, alTerminar) {
+  const telefono = () => {
+    if (turno !== azVozTurno) return;
+    try {
+      if (!("speechSynthesis" in window)) { if (alTerminar) alTerminar(); return; }
+      const u = new SpeechSynthesisUtterance(String(texto));
+      u.lang = "es-ES"; u.rate = rate || 0.9;
+      const { v } = azVozEs(null, quien);
+      if (v) { u.voice = v; u.lang = v.lang; }
+      u.onstart = () => { if (alEmpezar) alEmpezar(); };
+      u.onend = () => { if (alTerminar) alTerminar(); };
+      u.onerror = () => { if (alTerminar) alTerminar(); };
+      window.azVozFrase = u;
+      window.speechSynthesis.speak(u);
+    } catch (e) { if (alTerminar) alTerminar(); }
+  };
+  const url = azVozUrlEs(texto, quien);
+  if (!url || !azVozAudio) { telefono(); return; }
+  azVozBlob(url).then(src => {
+    if (turno !== azVozTurno) return;
+    const a = azVozAudio;
+    a.onended = () => { if (turno === azVozTurno && alTerminar) alTerminar(); };
+    a.onerror = null;
+    a.src = src;
+    a.playbackRate = Math.max(0.5, Math.min(1.5, (rate || 0.9) / 0.9));
+    a.preservesPitch = true; a.webkitPreservesPitch = true;
+    const p = a.play();
+    if (alEmpezar) alEmpezar();
+    if (p) p.catch(() => telefono());
+  }).catch(() => telefono());
+}
 /* URL del audio de este texto con esta voz, o null si no hay */
 function azVozUrl(texto, quien) {
   if (!azVocesIndice) return null;
@@ -842,15 +900,17 @@ async function azVozColaSeguir() {
   const empezar = async () => {
     try {
       if (navigator.connection && navigator.connection.saveData) return;
-      const ind = await azVocesListo; if (!ind || corte) return;
+      /* 03/11/2026: en Abecé, los audios de su repo (Abece_voces) */
+      const base = AZ_VOCES_ES_ACTIVA ? AZ_VOCES_ES_BASE : AZ_VOCES_BASE;
+      const ind = await (AZ_VOCES_ES_ACTIVA ? azVocesListoEs : azVocesListo); if (!ind || corte) return;
       const pag = (location.pathname.split("/").pop() || "index.html").replace(/\.html$/, "") || "index";
-      const r = await fetch(AZ_VOCES_BASE + "paginas/" + pag + ".json").catch(() => null);
+      const r = await fetch(base + "paginas/" + pag + ".json").catch(() => null);
       if (!r || !r.ok) return;
       const lista = await r.json();
       const c = await caches.open(AZ_VOCES_CACHE);
       for (const vk of lista) {
         if (corte) return;
-        const url = AZ_VOCES_BASE + vk + ind.ext;
+        const url = base + vk + ind.ext;
         if (await c.match(url)) continue;
         try { const x = await fetch(url, { priority: "low" }); if (x.ok) await c.put(url, x); } catch (e) { return; }
       }
