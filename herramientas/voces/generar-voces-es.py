@@ -10,15 +10,15 @@
 # Formato: el mismo que Azbuka (decidido por Manu, 15/10/2026; repetido para Abecé el 03/11/2026):
 # AAC 48 kbps, mono, 24 kHz, .m4a con faststart.
 #
-# Elenco (PLAN_IDA_Y_VUELTA.md §3.1, Manu 22/10/2026; las claves son las de AZ_VOCES_ES_PERSONAJE
-# en js/core.js):
-#   ana     → Piper es_ES sharvard, voz 1 (mujer), tono más agudo ×1,08: Ana y la narración
-#   lucia   → Piper sharvard, voz 1, tono más grave ×0,93
-#   javier  → Piper sharvard, voz 0 (hombre, «voz de profesor»)
-#   mujer   → Piper sharvard, voz 1 en su tono: personajes secundarios mujeres
-#   hombre  → Silero v3_es es_2: personajes secundarios hombres
-#   hombre2 → Silero v3_es es_1: el segundo hombre secundario (que no suenen iguales)
-#   mayor   → Silero v3_es es_0: personas mayores (para cuando haga falta)
+# Elenco (Manu, 03/11/2026, tras la prueba de palabras: Piper pronunciaba mal las palabras sueltas,
+# Silero bien; las claves son las de AZ_VOCES_ES_PERSONAJE en js/core.js y las carpetas de los audios):
+#   es2   → Silero v3_es es_2: la narración (todo lo que no es un personaje) y Pablo
+#   es1   → Silero v3_es es_1: Javier
+#   es0   → Silero v3_es es_0: los hombres secundarios (recepcionista…)
+#   ana   → Piper es_ES sharvard, voz 1 (mujer), tono más agudo ×1,08: las líneas de Ana
+#   lucia → Piper sharvard, voz 1, tono más grave ×0,93: las líneas de Lucía
+#   mujer → Piper sharvard, voz 1 en su tono: las mujeres secundarias (Marta…)
+# Silero no tiene voces de mujer: por eso las mujeres siguen con Piper, solo en sus líneas de diálogo.
 # El tono se cambia con ffmpeg sin cambiar la velocidad, como en la prueba de voces.
 # Licencias: Piper sharvard, CC BY 3.0 (corpus Sharvard); Silero, CC BY-NC 4.0 (uso no comercial).
 import json, os, re, subprocess, sys, time, urllib.request, wave
@@ -27,13 +27,12 @@ EXT = ".m4a"
 PIPER_URL = "https://huggingface.co/rhasspy/piper-voices/resolve/main/es/es_ES/sharvard/medium/es_ES-sharvard-medium"
 PIPER_MODELO = "es_ES-sharvard-medium.onnx"
 VOCES = {
-    "ana":     ("piper", 1, 1.08),
-    "lucia":   ("piper", 1, 0.93),
-    "javier":  ("piper", 0, 1.0),
-    "mujer":   ("piper", 1, 1.0),
-    "hombre":  ("silero", "es_2", 1.0),
-    "hombre2": ("silero", "es_1", 1.0),
-    "mayor":   ("silero", "es_0", 1.0),
+    "es2":   ("silero", "es_2", 1.0),
+    "es1":   ("silero", "es_1", 1.0),
+    "es0":   ("silero", "es_0", 1.0),
+    "ana":   ("piper", 1, 1.08),
+    "lucia": ("piper", 1, 0.93),
+    "mujer": ("piper", 1, 1.0),
 }
 
 ORD_M = ["", "primero", "segundo", "tercero", "cuarto", "quinto", "sexto", "séptimo", "octavo", "noveno", "décimo"]
@@ -49,7 +48,15 @@ def preparar(t, silero=False):
     t = re.sub(r"\s*[→—–/·]\s*", ", ", t)
     if silero:
         t = re.sub(r"[¿¡]", "", t)                                         # Silero no los lee (prueba de voces)
+        t = re.sub(r"\d+", numero, t)                                    # ni los números: 60 → sesenta
     return re.sub(r"\s+", " ", t).strip(" ,")
+
+def numero(m):
+    try:
+        from num2words import num2words
+        return num2words(int(m.group(0)), lang="es")
+    except Exception:
+        return m.group(0)
 
 def trozos(t, largo=220):
     """Los textos largos, por oraciones."""

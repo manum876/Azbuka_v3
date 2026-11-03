@@ -698,12 +698,15 @@ const azVocesListo = AZ_VOCES_ES_ACTIVA ? Promise.resolve(null) : azVocesCargarI
    mono, 24 kHz) y el mismo índice (v1/indice.json, v1/paginas/<página>.json).
    · Clave: azVozClave(azVozTextoEs(texto)): el texto sin llaves { } ni marcas ** de negrita.
      herramientas/voces/inventario-es.js usa estas mismas funciones y esta tabla.
-   · Elenco (PLAN_IDA_Y_VUELTA.md §3.1, Manu 22/10/2026): Ana narra y es personaje
-     (Piper sharvard 1, más aguda); Lucía (sharvard 1, más grave); Javier (sharvard 0);
-     secundarios: mujeres con sharvard 1 en su tono, hombres con Silero es_2 y es_1.
+   · Elenco (Manu, 03/11/2026, tras la prueba de palabras: Piper pronunciaba mal las palabras
+     sueltas —ñ, g, j—, Silero bien): la narración (palabras, frases, ejercicios, Diccionario,
+     Verbos, Gramática, Alfabeto) con Silero v3_es es_2; Javier con Silero es_1; los hombres
+     secundarios con es_0 (Pablo con es_2). Silero no tiene voces de mujer: Ana (Piper sharvard 1,
+     más aguda), Lucía (sharvard 1, más grave) y las mujeres secundarias (sharvard 1) siguen con
+     Piper, y solo dicen sus líneas de diálogo. La clave de cada voz es la carpeta de sus audios.
      Un personaje nuevo sin entrada propia toma la voz de su género. */
-const AZ_VOCES_ES_PERSONAJE = { "narra": "ana", "ana": "ana", "lucia": "lucia", "javier": "javier",
-  "recepcion": "hombre", "pablo": "hombre2", "marta": "mujer", "f": "mujer", "m": "hombre" };
+const AZ_VOCES_ES_PERSONAJE = { "narra": "es2", "javier": "es1", "recepcion": "es0", "pablo": "es2", "m": "es0",
+  "ana": "ana", "lucia": "lucia", "marta": "mujer", "f": "mujer" };
 const AZ_VOCES_ES_BASE = (() => { try { return new URL("../Abece_voces/v1/", location.href).href; } catch (e) { return "../Abece_voces/v1/"; } })();
 function azVozTextoEs(t) { return azVozTexto(String(t == null ? "" : t).replace(/\*\*/g, "")); }
 function azVozDeEs(quien) {
