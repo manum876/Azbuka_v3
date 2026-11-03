@@ -85,10 +85,10 @@ function vesAcentuar(forma, clitico) {
 
 /* ── Datos ── */
 const VES_PERS = ["yo", "tú", "él, ella, usted", "nosotros", "vosotros", "ellos, ellas, ustedes"];
-const VES_PERS_RU = ["я", "ты", "он, она, Вы", "мы", "вы (на «ты»)", "они, Вы (мн.)"];
+const VES_PERS_RU = ["я", "ты", "он, она, Вы", "мы", "вы (на «ты»)", "они, вы (вежл.)"];
 const VES_CLIT = ["me", "te", "se", "nos", "os", "se"];
 const VES_HABER = { pres: ["he", "has", "ha", "hemos", "habéis", "han"] };
-const VES_IMP = [["tu", "tú", "ты"], ["usted", "usted", "Вы"], ["vosotros", "vosotros", "вы (на «ты»)"], ["ustedes", "ustedes", "Вы (мн.)"]];
+const VES_IMP = [["tu", "tú", "ты"], ["usted", "usted", "Вы"], ["vosotros", "vosotros", "вы (на «ты»)"], ["ustedes", "ustedes", "вы (вежл.)"]];
 
 function vesLex(id) { return typeof lexEsById === "function" ? lexEsById(id) : null; }
 function vesPorEs(es) {
@@ -299,29 +299,29 @@ window.vesAcentuar = vesAcentuar;
 /* ── Pantallas ─────────────────────────────────────────────── */
 const VES_TX = {
   titulo: "Глаголы", glaroles: n => n.toLocaleString("ru-RU") + " " + vesPlural(n, "глагол", "глагола", "глаголов"),
-  intro: "Как спрягается каждый глагол словаря: все времена, неправильные формы и возвратные глаголы с «se».",
-  items: [["Все времена", "Настоящее, прошедшие, будущее, сослагательное и повелительное — со звуком."],
-          ["Неправильные формы", "То, что меняется, выделено цветом: pienso, tengo, hice."],
-          ["Два прошедших", "Indefinido и imperfecto рядом, как совершенный и несовершенный вид."]],
+  intro: "Спряжение всех глаголов словаря: все времена, неправильные формы и возвратные глаголы с «se».",
+  items: [["Все времена", "Настоящее, прошедшие и будущее время, сослагательное и повелительное наклонения — с аудио."],
+          ["Неправильные формы", "Всё, что отличается от модели, выделено цветом: pienso, tengo, hice."],
+          ["Два прошедших времени", "Indefinido и imperfecto рядом. Их удобно сравнивать с совершенным и несовершенным видом, хотя совпадают они не всегда."]],
   buscar: "Найти глагол…", buscarAria: "Поиск глагола", limpiar: "Очистить поиск",
-  pista: "Ищи по-испански или по-русски. Можно написать и форму: hablé приведёт к hablar, me levanto — к levantarse.",
+  pista: "Ищи по-испански или по-русски. Можно ввести и отдельную форму: hablé покажет hablar, а me levanto — levantarse.",
   prueba: "Попробуй:", sinRes: "Ничего не найдено", noEncontrado: "Глагол не найден",
   sinId: id => id ? "В словаре нет глагола с номером «" + id + "»." : "",
   glagol: "Глагол", irr: "неправильный", reg: "правильный",
-  rige: "Управление:", pareja: "Пара:", soloSe: "Только с «se»", sinSe: "без «se»", conSe: "с «se»",
+  rige: "Управление:", pareja: "С «se» и без:", soloSe: "Только с «se»", sinSe: "без «se»", conSe: "с «se»",
   significados: "Значения", conjugacion: "Спряжение", nota: "Примечание", comoEste: "Спрягается так же",
   pron: "▶ Произношение", dic: "Словарь ›", cuaderno: "＋ Тетрадь",
-  buscada: (f, inf, et) => ["«", f, "» — форма глагола ", inf, ": " + et.join(" / ") + ". Она выделена в таблице."],
+  buscada: (f, inf, et) => ["«", f, "» — форма глагола ", inf, ": " + et.join(" / ") + ". Эта форма выделена в таблице."],
   sinImp: "У этого глагола нет повелительного наклонения.",
-  marcas: "Что меняется", leyenda: "Цветом выделено то, что отличается от правильного спряжения."
+  marcas: "Особенности спряжения", leyenda: "Цветом выделены формы, которые отличаются от стандартной модели спряжения."
 };
 /* Etiquetas de las marcas de irregularidad (ruso, borrador) */
 const VES_MARCA = {
   "e → ie": "e → ie в корне", "o → ue": "o → ue в корне", "u → ue": "u → ue в корне", "e → i": "e → i в корне", "o → u": "o → u в корне",
   "i → ie": "i → ie в корне", "o → hue": "o → hue в корне", "-go": "-go в форме yo", "-zco": "-zco в форме yo", "y": "y в корне",
-  "tilde": "ударение на корне: í, ú", "pretérito fuerte": "особый претерит", "futuro": "особое будущее",
-  "imperativo": "особый императив", "participio": "особое причастие", "presente": "особое настоящее", "indefinido": "особый претерит",
-  "imperfecto": "особый имперфект", "subjuntivo": "особое сослагательное", "gerundio": "особый герундий"
+  "tilde": "ударная í, ú в корне", "pretérito fuerte": "особая основа indefinido", "futuro": "особая основа будущего",
+  "imperativo": "неправильное повелительное", "participio": "неправильное причастие", "presente": "неправильное настоящее", "indefinido": "неправильный indefinido",
+  "imperfecto": "неправильный imperfecto", "subjuntivo": "неправильное сослагательное", "gerundio": "неправильный герундий"
 };
 const VES_ORTO = /^(c → qu|g → gu|z → c|gu → gü|c → z|g → j|gu → g|i → y)$/;
 function vesPlural(n, uno, pocos, muchos) {
@@ -332,11 +332,11 @@ function vesPlural(n, uno, pocos, muchos) {
 /* Grupos de tiempos (chips). Cada tabla: [clave en vesFormas, nombre en español, explicación en ruso] */
 const VES_GRUPOS = [
   ["pres", "Настоящее", [["pres", "Presente", "настоящее время"]]],
-  ["pas", "Прошедшие", [["dos", "Indefinido e imperfecto", ""], ["perf", "Pretérito perfecto", "прошлое, связанное с настоящим: сегодня, в этом году, когда-нибудь"], ["plus", "Pluscuamperfecto", "давнопрошедшее: что случилось раньше другого действия в прошлом"]]],
-  ["fut", "Будущее и условное", [["irA", "Ir a + infinitivo", "ближайшие планы: «я собираюсь…»"], ["fut", "Futuro", "будущее время"], ["cond", "Condicional", "условное: «я бы…»"], ["futPerf", "Futuro perfecto", "будущее, которое закончится до другого момента"], ["condPerf", "Condicional perfecto", "«я бы сделал (но не сделал)»"]]],
-  ["subj", "Сослагательное", [["subj", "Presente de subjuntivo", "желание, сомнение, оценка: «quiero que…»"], ["subjImp", "Imperfecto de subjuntivo", "то же в прошлом и в условных фразах: «si tuviera…»"], ["subjPerf", "Pretérito perfecto de subjuntivo", "haya + причастие"], ["subjPlus", "Pluscuamperfecto de subjuntivo", "hubiera + причастие"]]],
+  ["pas", "Прошедшие", [["dos", "Indefinido e imperfecto", ""], ["perf", "Pretérito perfecto", "прошлое, связанное с настоящим: сегодня, в этом году, когда-нибудь"], ["plus", "Pluscuamperfecto", "действие, которое произошло раньше другого действия в прошлом"]]],
+  ["fut", "Будущее и условное", [["irA", "Ir a + infinitivo", "ближайшие планы: «я собираюсь…»"], ["fut", "Futuro", "будущее время"], ["cond", "Condicional", "условное: «я бы…»"], ["futPerf", "Futuro perfecto", "действие, которое завершится к определённому моменту в будущем"], ["condPerf", "Condicional perfecto", "«я бы сделал (но не сделал)»"]]],
+  ["subj", "Сослагательное", [["subj", "Presente de subjuntivo", "желание, сомнение, оценка: «quiero que…»"], ["subjImp", "Imperfecto de subjuntivo", "в условных фразах и после глаголов в прошедшем времени: «si tuviera…»"], ["subjPerf", "Pretérito perfecto de subjuntivo", "haya + причастие"], ["subjPlus", "Pluscuamperfecto de subjuntivo", "hubiera / hubiese + причастие"]]],
   ["imp", "Повелительное", [["imp", "Imperativo", "просьба, приказ, совет"]]],
-  ["formas", "Неличные формы", [["formas", "Formas no personales", ""]]]
+  ["formas", "Неличные формы", [["formas", "Formas no personales", "инфинитив, герундий и причастие"]]]
 ];
 const VES_GRUPO_DE = { pres: "pres", indef: "pas", imperf: "pas", perf: "pas", plus: "pas", irA: "fut", fut: "fut", cond: "fut", futPerf: "fut", condPerf: "fut",
   subj: "subj", subjImp: "subj", subjSe: "subj", subjPerf: "subj", subjPlus: "subj", impAf: "imp", impNeg: "imp", inf: "formas", ger: "formas", part: "formas", part2: "formas" };
@@ -448,14 +448,14 @@ function VesFicha({ id, c }) {
       h(VesTabla, { filas: filas6, clave, columnas: [
         { titulo: "indefinido", sub: "≈ сделал", celdas: f => T.indef[f.i] },
         { titulo: "imperfecto", sub: "≈ делал", celdas: f => T.imperf[f.i] }] }),
-      h("div", { className: "tnote" }, "Indefinido — законченное действие, как совершенный вид: hice ≈ сделал. Imperfecto — процесс, привычка или фон, как несовершенный вид: hacía ≈ делал.")),
+      h("div", { className: "tnote" }, "Indefinido — законченное действие: hice ≈ сделал. Imperfecto — процесс, привычка или фон: hacía ≈ делал. Это похоже на совершенный и несовершенный вид, но совпадает не всегда: Estuve dos horas esperando — «я два часа ждал».")),
     imp: () => T.impAf ? h(VesTabla, { clave, filas: VES_IMP.map(([k, es, ru]) => ({ k, es, ru })), columnas: [
         { titulo: "да", sub: "утвердительное", celdas: f => T.impAf[f.k] },
         { titulo: "нет", sub: "отрицательное", celdas: f => T.impNeg[f.k] }] })
       : h("div", { className: "tnote" }, VES_TX.sinImp),
     formas: () => h(VesTabla, { clave, filas: [
-        { k: "inf", es: "infinitivo", ru: "инфинитив" }, { k: "ger", es: "gerundio", ru: "деепричастие: estar + gerundio = «сейчас делаю»" },
-        { k: "part", es: "participio", ru: "причастие: haber + participio" }, { k: "part2", es: "participio", ru: "второе, тоже правильное" }],
+        { k: "inf", es: "infinitivo", ru: "инфинитив" }, { k: "ger", es: "gerundio", ru: "герундий: hablando ≈ говоря; estar + gerundio = «сейчас делаю»" },
+        { k: "part", es: "participio", ru: "причастие: haber + participio" }, { k: "part2", es: "participio", ru: "второй допустимый вариант" }],
       columnas: [{ celdas: f => T[f.k] }] })
   };
   const tablaDe = k => tablas[k] ? tablas[k]() : h(VesTabla, { filas: filas6, columnas: [col(k)], clave });

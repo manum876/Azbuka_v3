@@ -626,24 +626,24 @@ def marca_ortografia(inf):
 
 # Notas (ruso, borrador para Iván)
 NOTAS = {
-    "haber": "Безличная форма настоящего времени — hay: «Hay un banco aquí». Как вспомогательный: he hablado.",
-    "soler": "Неполный глагол: настоящее, имперфект и сложные времена. Будущего, условного и повелительного нет.",
-    "llover": "Безличный: только 3-е лицо (llueve, llovió). Множественное — в переносном смысле: «Llueven críticas».",
+    "haber": "Безличная форма настоящего времени — hay: «Hay un banco aquí». Также haber используется как вспомогательный глагол: he hablado.",
+    "soler": "Глагол употребляется не во всех формах: есть настоящее время, imperfecto и сложные времена, но нет будущего времени, условного и повелительного наклонения.",
+    "llover": "Обычно употребляется безлично, в 3-м лице единственного числа: llueve, llovió. Форма множественного числа возможна в переносном смысле: «Llueven críticas».",
     "concernir": "Только 3-е лицо: «Eso no te concierne».",
-    "amanecer": "Обычно безличный: amanece — светает. В личных формах — «проснуться каким-то»: «Amanecí cansado».",
-    "yacer": "В 1-м лице настоящего также yazgo и yago.",
-    "evacuar": "Допустимы обе формы: evacuo и evacúo.",
-    "imprimir": "Два причастия, оба правильные: impreso и imprimido.",
-    "freír": "Два причастия, оба правильные: frito и freído.",
+    "amanecer": "Обычно употребляется безлично: amanece — светает. В личном употреблении может означать «проснуться в каком-либо состоянии»: «Amanecí cansado».",
+    "yacer": "В 1-м лице единственного числа настоящего времени встречаются также формы yazgo и yago.",
+    "evacuar": "Допустимы оба варианта формы 1-го лица единственного числа: evacuo и evacúo.",
+    "imprimir": "У глагола два нормативных причастия: impreso и imprimido.",
+    "freír": "У глагола два нормативных причастия: frito и freído.",
     "proveer": "Два причастия, оба правильные: provisto и proveído.",
-    "predecir": "Будущее: predeciré (также prediré).",
-    "satisfacer": "Повелительное: satisfaz или satisface.",
-    "valer": "Повелительное: vale (редко val).",
+    "predecir": "В будущем времени употребляются формы predeciré и prediré.",
+    "satisfacer": "Повелительные формы: satisfaz и satisface.",
+    "valer": "Повелительная форма: vale; вариант val встречается редко.",
 }
 NOTA_ES = {  # notas de entradas pronominales / locuciones
-    "irse": "Повелительное для vosotros: idos (в разговорной речи — iros).",
-    "hay que": "Безличное выражение: только hay que, hubo que, había que, habrá que, habría que, haya que, hubiera que.",
-    "hacer falta": "Обычно в 3-м лице: «Hace falta pan», «Me hacen falta dos sillas».",
+    "irse": "Повелительная форма для vosotros: idos. В разговорной речи также употребляется вариант iros.",
+    "hay que": "Безличное выражение. Употребляется в формах: hay que, hubo que, había que, habrá que, habría que, haya que, hubiera que.",
+    "hacer falta": "Обычно употребляется в 3-м лице: «Hace falta pan», «Me hacen falta dos sillas».",
 }
 
 # Defectivos: qué se anula

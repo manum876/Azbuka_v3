@@ -313,8 +313,8 @@ function Diccionario({ c }) {
    el apartado «Женский род» si la forma femenina es otra palabra
    (hijo → hija: cada chip de género junto a su palabra) y el semáforo. */
 const POS_RU = { sustantivo: "Существительное", verbo: "Глагол", adjetivo: "Прилагательное", adverbio: "Наречие", pronombre: "Местоимение",
-  determinante: "Определитель", numeral: "Числительное", "preposición": "Предлог", "conjunción": "Союз", "interjección": "Междометие",
-  "artículo": "Артикль", "contracción": "Слитная форма" };
+  determinante: "Определительное слово", numeral: "Числительное", "preposición": "Предлог", "conjunción": "Союз", "interjección": "Междометие",
+  "artículo": "Артикль", "contracción": "Слияние" };
 const GEN_RU = { m: "мужской род", f: "женский род", "m/f": "мужской и женский род" };
 const NUMERO_RU = { pluraliaTantum: "Только во множественном числе", singulariaTantum: "Только в единственном числе" };
 const NIVEL_RU = ["Не изучено", "Изучаю", "Выучено"];
@@ -362,7 +362,7 @@ function formasEsItems(entry, el) {
       } else if (d.neutro) r.push(it("Средний род", "не меняется; рядом с существительным — " + f.slice(2, 6).join(" · "), true));
       else r.push(it("Формы", f.slice(2).filter(Boolean).join(" · ") + (f[6] ? " (" + f[6] + " — средний)" : ""), true));
     }
-  } else if (d.t === "contr") r.push(it("Слитная форма", d.de.join(" + ") + " = " + entry.es, true));
+  } else if (d.t === "contr") r.push(it("Слияние", d.de.join(" + ") + " = " + entry.es, true));
   else if (d.nota) r.push(nota(d.nota));
   return r;
 }
@@ -414,7 +414,7 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
               ? { background: colNivel[n] + "22", border: `1px solid ${colNivel[n]}`, color: colNivel[n] }
               : { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
           }, NIVEL_RU[n]))),
-        el("div", { className: "nivel-nota" }, "Отмечается само по упражнениям. Если не совпадает с тем, что ты знаешь, нажми, чтобы исправить."),
+        el("div", { className: "nivel-nota" }, "Уровень определяется автоматически по твоим ответам в упражнениях. Если он не совпадает с твоей оценкой, нажми, чтобы изменить его."),
         /* ── Грамматика (entrega 2, 27/10/2026; después del progreso, como la «Clasificación pedagógica» de Azbuka): conjugación con link a Verbos, pareja
            pronominal (ir ↔ irse), régimen y las formas de la palabra (formasEsItems). ── */
         (verbo || regimen.length > 0 || pareja.length > 0 || formas.length > 0) && el(React.Fragment, null,
@@ -435,10 +435,10 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
               el("div", { className: "meta-k" }, "Управление"),
               regimen.map((r, i) => el("div", { key: i, className: "meta-v" }, r)),
               /* «?» al capítulo de preposiciones de la guía de Gramática (27/10/2026) */
-              el("a", { className: "meta-v meta-link", style: { display: "block", marginTop: 4 }, href: "gramatica.html?guia=preposiciones", onClick: e => azNavigate(e, "gramatica.html?guia=preposiciones") }, "Предлоги ?")),
+              el("a", { className: "meta-v meta-link", style: { display: "block", marginTop: 4 }, href: "gramatica.html?guia=preposiciones", onClick: e => azNavigate(e, "gramatica.html?guia=preposiciones") }, "Как работают предлоги?")),
             (pareja.length > 0 || soloSe) && el("div", { className: "meta-item" },
-              el("div", { className: "meta-k" }, "Маленькое «se»"),
-              el("a", { className: "meta-v meta-link", href: "gramatica.html?guia=se", onClick: e => azNavigate(e, "gramatica.html?guia=se") }, "Что значит se ?")))),
+              el("div", { className: "meta-k" }, "Местоимение «se»"),
+              el("a", { className: "meta-v meta-link", href: "gramatica.html?guia=se", onClick: e => azNavigate(e, "gramatica.html?guia=se") }, "Что значит «se»?")))),
         el("div", { className: "buttons" },
           verbo && el("a", { className: "btn pr", href: "verbos.html?id=" + entry.id, onClick: e => azNavigate(e, "verbos.html?id=" + entry.id) }, "🗣️ Спряжение"),
           /* Gramática (27/10/2026): las formas en tabla, si la palabra cambia */

@@ -126,7 +126,7 @@ var AZ_CATALOGO = {
     unidades: [
       { id: 1, title: "Испанский с нуля", desc: "Буквы, звуки и ударение; приветствия и числа до 20.", href: "abece-1.html", lista: true },
       { id: 2, title: "Кто я и кто мы", desc: "Ser, tener, страны и национальности, семья, артикли и числа до 100.", href: "abece-2.html", lista: true },
-      { id: 3, title: "Мой мир вокруг", desc: "Hay, estar и ser, квартира и район, прилагательные, этот и мой.", href: "abece-3.html", lista: true },
+      { id: 3, title: "Мир вокруг меня", desc: "Hay, estar и ser, квартира и район, прилагательные, этот и мой.", href: "abece-3.html", lista: true },
     ],
     /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo
        orden y con el mismo color que su equivalente de Azbuka, glifo de dos
