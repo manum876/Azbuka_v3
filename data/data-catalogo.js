@@ -10,12 +10,13 @@
 
    Direcciones:
      azbuka → ruso para hispanohablantes (la app de hoy).
-     abece  → español para rusohablantes. BLOQUEADA (abierta: false)
-              hasta que esté terminada: nadie la ve. Para probarla mientras
-              se construye: Ajustes → «Abecé en construcción», que solo ven
-              el admin y los revisores (azDireccion() en js/core.js). Lo que
-              abece todavía no tiene (unidades, módulos, índice) se toma de
-              azbuka.
+     abece  → español para rusohablantes. ABIERTA desde el 04/11/2026 (Manu):
+              la ven las cuentas habilitadas como Abecé (Ajustes → Accesos).
+              Antes estaba bloqueada (abierta: false) y solo la veían admin y
+              revisores con Ajustes → «Abecé en construcción», que sigue
+              sirviendo para cambiar de dirección en su teléfono
+              (azDireccion() en js/core.js). Lo que abece todavía no tiene
+              (índice, algunos módulos) se toma de azbuka.
 
    lexico: el archivo del léxico de cada dirección. Lo carga el Diccionario
    (ficha.html) con azEscribirLexico() (core.js); el buscador del menú de
@@ -116,7 +117,7 @@ var AZ_CATALOGO = {
 
   abece: {
     id: "abece",
-    abierta: false,          /* bloqueada hasta que Abecé esté terminada (Manu, 22/10/2026) */
+    abierta: true,           /* abierta a los alumnos el 04/11/2026 (Manu); antes, bloqueada desde el 22/10/2026 */
     marca: { nombre: "Abecé", lema: "Учи испанский с нуля", glyph: "Ab", icon: "red" },
     instalar: { nombre: "Abecé", manifest: "manifest-abece.webmanifest", icono: "assets/apple-touch-icon-abece.png", favicon: "assets/icon-abece-192.png" },
     indice: null,            /* abece-index-1.html cuando exista; mientras, el de azbuka */
