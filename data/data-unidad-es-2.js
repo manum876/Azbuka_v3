@@ -218,7 +218,7 @@ const UNIDAD_ES_2 = {
         "español", "ruso", "ucraniano", "bielorruso", "kazajo", "georgiano", "francés", "alemán", "italiano", "inglés", "irlandés", "portugués", "polaco", "griego", "sueco", "turco",
         "chino", "japonés", "estadounidense", "americano", "canadiense", "mexicano", "cubano", "colombiano", "peruano", "venezolano", "argentino", "uruguayo", "brasileño", "catalán",
         "Madrid", "Barcelona", "Moscú", "Kiev", "Minsk", "Londres", "París", "Berlín", "Roma", "Lisboa",
-        "hablar", "vivir", "país", "ciudad", "idioma", "nacionalidad"],
+        "hablar", "vivir", "país", "ciudad", "idioma", "nacionalidad", "poco"],
       dialogos: ["DLE-005"]
     },
     {
@@ -267,7 +267,7 @@ const UNIDAD_ES_2 = {
           ojo: "**tener** — неправильный глагол: **tengo** (с **g**), **tienes** (с **ie**). Позже ты встретишь и другие глаголы с таким же изменением корня."
         }
       ],
-      vocab: ["llamarse", "tener", "año", "edad"]
+      vocab: ["llamarse", "tener", "año", "edad", "nos", "os"]
     },
     {
       id: "es2m5", n: 5, tipo: "leccion",
@@ -316,7 +316,7 @@ const UNIDAD_ES_2 = {
       ],
       frases: ["FRE-035", "FRE-036", "FRE-044", "FRE-045"],
       vocab: ["veintiuno", "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve",
-        "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa", "cien", "número", "teléfono", "correo", "arroba", "punto", "dirección"],
+        "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa", "cien", "número", "teléfono", "correo", "arroba", "punto", "dirección", "guion"],
       dialogos: ["DLE-006", "DLE-007"]
     },
     {
@@ -517,7 +517,7 @@ window.UNIDAD_ES_2 = UNIDAD_ES_2;
 window.unidadEs2Modulo = unidadEs2Modulo;
 
 /* ── Vocabulario: palabras → IDs ── */
-const ES2_ID_FIJO = { "este": "ESP-00029", "llamarse": "ESP-02076", "punto": "ESP-00317" };
+const ES2_ID_FIJO = { "poco": "ESP-00120", "este": "ESP-00029", "llamarse": "ESP-02076", "punto": "ESP-00317" };
 function es2Id(w) {
   if (ES2_ID_FIJO[w]) return ES2_ID_FIJO[w];
   if (typeof LEXICON_ES === "undefined") return null;
@@ -610,7 +610,7 @@ function ejerciciosUnidadEs2() {
   /* 11. Dictado de las palabras de la unidad (sin nombres propios) */
   UNIDAD_ES_2.modulos.forEach(m => (m.vocab || []).forEach(w => {
     const id = es2Id(w), e = id && lexEs(id);
-    if (!e || e.propio || /\s/.test(w) || ["el", "un", "o"].indexOf(w) >= 0) return;
+    if (!e || e.propio || /\s/.test(w) || ["el", "un", "o", "nos", "os"].indexOf(w) >= 0) return;
     if (out.some(x => x.id === "ES2-dic-" + id)) return;
     out.push({ id: "ES2-dic-" + id, tipo: "dictado", forma: "escribir", dificultad: w.length > 6 ? 3 : 2, modulo: m.n, grupo: id, lex: [id],
       pide: "Послушай и напиши слово.", audio: w, esperadas: [w], idioma: "es", oir: w,

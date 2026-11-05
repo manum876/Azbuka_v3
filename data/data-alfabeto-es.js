@@ -871,7 +871,7 @@ const ALFABETO_ES = [
   "upper": "Ñ",
   "lower": "ñ",
   "name": "eñe",
-  "nameTl": "э́ньэ",
+  "nameTl": "э́не",
   "translit": "нь",
   "ipa": [
    "ɲ"
@@ -1538,7 +1538,7 @@ const ALFABETO_ES = [
   "upper": "Y",
   "lower": "y",
   "name": "ye",
-  "nameTl": "йе",
+  "nameTl": "е",
   "translit": "й · и",
   "ipa": [
    "ʝ",

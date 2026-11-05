@@ -32,8 +32,9 @@
    az_progress.units[N].examen y el mejor puntaje en mejorExamen.
 
    Formas de ejercicio (campo forma):
-     elegir    { pide, grande?, audio?, opciones, correcta, escena?, plano? }
-     escribir  { pide, grande?, audio?, pista?, esperadas, idioma, mayus?, completa? }
+     elegir    { pide, grande?, audio?, opciones, correcta, escena?, plano?, reloj? }
+     escribir  { pide, grande?, audio?, pista?, esperadas, idioma, mayus?, completa?, reloj? }
+               reloj: { h, m } dibuja un reloj con esa hora (04/11/2026, U4 de Abecé).
      ordenar   { pide, audio?, fichas, esperada, esperadas? }   (esperadas: otros órdenes válidos)
      vf        { afirmacion, verdadero }
      emparejar { pide, pares: [[izq, der], …], audioIzq? }  (audioIzq: la izquierda es audio)
@@ -261,6 +262,7 @@
       ej.escena && h("div", { className: "pr-escena", "aria-hidden": "true" }, ej.escena),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.plano && h(Plano, { plano: ej.plano, c }),
+      h(RelojEj, { ej, c }),
       ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: langDe(ej.grande) }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.textoOculto && h(Texto, { ej }),
@@ -334,6 +336,7 @@
       h(Contexto, { ej }),
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.mapa && h(MapaEj, { mapa: ej.mapa, c }),
+      h(RelojEj, { ej, c }),
       ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: langDe(ej.grande) }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.pista && h("div", { className: "pr-pista" }, ej.pista),
@@ -696,6 +699,20 @@
       h("text", { x: X(fin[0]) + r.dx * 22, y: X(fin[1]) + r.dy * 22 + 9, "text-anchor": "middle", "font-size": 26 }, plano.destino));
   }
 
+  /* Reloj dibujado (04/11/2026): `h` hora, `m` minutos (0 = en punto). Lo usan la U7 de Azbuka
+     (antes en azbuka-7.html) y la U4 de Abecé; en los ejercicios, `reloj: { h, m }`. */
+  function Reloj({ h: hh, m, c, size }) {
+    m = m || 0;
+    const S = size || 150, r = S / 2 - 6, cx = S / 2, ang = ((hh % 12) + m / 60) / 12 * 2 * Math.PI, am = m / 60 * 2 * Math.PI;
+    return h("svg", { viewBox: "0 0 " + S + " " + S, width: S, height: S, role: "img", "aria-label": ES ? "Часы" : "Reloj" },
+      h("circle", { cx, cy: cx, r, fill: c.bg2, stroke: c.gold, "stroke-width": 3 }),
+      [...Array(12)].map((_, k) => { const a = k / 12 * 2 * Math.PI; return h("line", { key: k, x1: cx + Math.sin(a) * (r - 4), y1: cx - Math.cos(a) * (r - 4), x2: cx + Math.sin(a) * (r - (k % 3 ? 10 : 16)), y2: cx - Math.cos(a) * (r - (k % 3 ? 10 : 16)), stroke: c.textMuted, "stroke-width": k % 3 ? 2 : 3 }); }),
+      h("line", { x1: cx, y1: cx, x2: cx + Math.sin(ang) * r * 0.5, y2: cx - Math.cos(ang) * r * 0.5, stroke: c.text, "stroke-width": 6, "stroke-linecap": "round" }),
+      h("line", { x1: cx, y1: cx, x2: cx + Math.sin(am) * r * 0.78, y2: cx - Math.cos(am) * r * 0.78, stroke: c.gold, "stroke-width": 4, "stroke-linecap": "round" }),
+      h("circle", { cx, cy: cx, r: 5, fill: c.gold }));
+  }
+  const RelojEj = ({ ej, c }) => ej.reloj ? h("div", { style: { display: "flex", justifyContent: "center", margin: "4px 0 10px" } }, h(Reloj, { h: ej.reloj.h, m: ej.reloj.m, c, size: 140 })) : null;
+
   function Pista({ texto }) {
     const [ver, setVer] = useState(false);
     if (!texto) return null;
@@ -921,4 +938,5 @@
 
   window.AzPractica = AzPractica;
   window.AzPlano = Plano;   /* el plano de calles, también para las lecciones */
+  window.AzReloj = Reloj;   /* el reloj dibujado, también para las lecciones (04/11/2026) */
 })();

@@ -95,10 +95,12 @@ def acento(es):
 # ---------- fonemas ----------
 # Préstamos que se pronuncian distinto de como se escriben (27/10/2026): para la
 # IPA y la pronunciación figurada se usa esta forma; el acento sigue la escritura.
-PRONUNCIA={'show':'chou','shock':'chok','hockey':'jókey','whisky':'wíski'}
+PRONUNCIA={'show':'chou','shock':'chok','hockey':'jókey','whisky':'wíski',
+           # x = j en México y sus derivados (05/11/2026)
+           'méxico':'méjico','mexicano':'mejicano','mexicana':'mejicana','mexicanos':'mejicanos','mexicanas':'mejicanas'}
 def fonemas(w):
     """devuelve lista de sílabas, cada una lista de fonemas; y el índice tónico"""
-    w=PRONUNCIA.get(w,w)
+    w=PRONUNCIA.get(w.lower(),w)
     sil=silabas(w); t=tonica(w,sil)
     res=[]
     for k,s in enumerate(sil):

@@ -473,7 +473,7 @@ for v in list(M):
 M["lucir"] = dict(modelo="lucir", yo="luzco", irregular=["-zco"])
 
 # e → ie (-ar, -er)
-modelo("pensar", "pensar empezar comenzar cerrar despertar sentar negar enterrar confesar encerrar atravesar "
+modelo("pensar", "pensar nevar empezar comenzar cerrar despertar sentar negar enterrar confesar encerrar atravesar "
        "recomendar calentar temblar gobernar apretar reventar quebrar tropezar tentar acertar denegar",
        cambio="ie", irregular=["e → ie"])
 modelo("entender", "entender perder defender encender tender extender ascender descender atender",
@@ -628,6 +628,7 @@ def marca_ortografia(inf):
 NOTAS = {
     "haber": "Безличная форма настоящего времени — hay: «Hay un banco aquí». Также haber используется как вспомогательный глагол: he hablado.",
     "soler": "Глагол употребляется не во всех формах: есть настоящее время, imperfecto и сложные времена, но нет будущего времени, условного и повелительного наклонения.",
+    "nevar": "Употребляется безлично, в 3-м лице единственного числа: nieva, nevó, nevará.",
     "llover": "Обычно употребляется безлично, в 3-м лице единственного числа: llueve, llovió. Форма множественного числа возможна в переносном смысле: «Llueven críticas».",
     "concernir": "Только 3-е лицо: «Eso no te concierne».",
     "amanecer": "Обычно употребляется безлично: amanece — светает. В личном употреблении может означать «проснуться в каком-либо состоянии»: «Amanecí cansado».",
@@ -650,7 +651,7 @@ NOTA_ES = {  # notas de entradas pronominales / locuciones
 def defectivo(inf, f):
     if inf == "soler":
         f["fut"] = [None] * 6; f["cond"] = [None] * 6; f["impTu"] = None
-    if inf == "llover":
+    if inf in ("llover", "nevar"):
         for t in TS:
             f[t] = [None, None, f[t][2], None, None, f[t][5]]
         f["impTu"] = None

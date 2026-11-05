@@ -47,6 +47,8 @@ PLURAL_EXCEP = {
     "whisky": "whiskies", "alien": "aliens", "test": "tests", "blues": "blues",
     # en -y tras vocal que hacen -is
     "jersey": "jerséis", "espray": "espráis",
+    # expresiones de varias palabras: cambia el sustantivo (04/11/2026, U4)
+    "fin de semana": "fines de semana",
 }
 # Solo se usan en plural aunque el léxico no lo marque (la palabra ya es el plural).
 SOLO_PLURAL = {"modales", "afueras", "cosquillas", "gases"}

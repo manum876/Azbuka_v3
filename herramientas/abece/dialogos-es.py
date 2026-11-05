@@ -26,7 +26,10 @@ DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "vale": "
        # U2 (02/11/2026)
        "este": "ESP-00029", "vivo": "ESP-00178", "poco": "ESP-00120", "solo": "ESP-00046",
        # U3 (02/11/2026)
-       "hay": "ESP-00012", "muchos": "ESP-00066", "muchas": "ESP-00066"}
+       "hay": "ESP-00012", "muchos": "ESP-00066", "muchas": "ESP-00066",
+       # U4 (04/11/2026)
+       "frío": "ESP-05434", "media": "ESP-05193", "cuarto": "ESP-00508",
+       "levanto": "ESP-01196", "levantas": "ESP-01196", "ducho": "ESP-05423", "desayuno": "ESP-02377"}
 # Nombres propios de varias palabras que no están en el léxico (sus palabras no se enlazan)
 PROPIOS_VARIAS = ["Buenos Aires"]
 # Nombres de personas (no van al léxico). Los países y las ciudades sí: con mayúscula se usa la entrada propia.
@@ -145,7 +148,26 @@ FRASES = [
     ["FRE-059", "describir", "Es pequeño, pero muy bonito.", "Он маленький, но очень красивый.", "", "Описание — **ser**; перед прилагательным — **muy**.", 3],
     ["FRE-060", "describir", "Estoy cansada.", "Я устала.", "", "Состояние — **estar**. Мужчина говорит «estoy cansado».", 3],
     ["FRE-061", "describir", "La tienda está cerrada.", "Магазин закрыт.", "", "Закрыт сейчас — **estar**. Открыт — **está abierta**.", 3],
-    ["FRE-062", "describir", "¿Cuál es tu casa?", "Который твой дом?", "tú", "**¿Cuál?** — который из этих.", 3]
+    ["FRE-062", "describir", "¿Cuál es tu casa?", "Который твой дом?", "tú", "**¿Cuál?** — который из этих.", 3],
+    # U4 (04/11/2026)
+    ["FRE-063", "datos", "¿En qué trabajas?", "Кем ты работаешь?", "tú", "Вопрос о работе. Ответ: «Trabajo en…» или «Soy médico».", 4],
+    ["FRE-064", "tiempo", "¿Qué hora es?", "Который час?", "", "Ответ: «Es la una» или «Son las dos…».", 4],
+    ["FRE-065", "tiempo", "¿A qué hora abre?", "Во сколько открывается?", "", "О магазине, музее, банке. Ответ: «A las diez».", 4],
+    ["FRE-066", "tiempo", "Son las ocho en punto.", "Ровно восемь.", "", "**en punto** — ровно, без минут.", 4],
+    ["FRE-067", "rutina", "Me levanto a las siete.", "Я встаю в семь.", "", "Глагол с **se**: **me levanto**.", 4],
+    ["FRE-068", "rutina", "Primero me ducho y después desayuno.", "Сначала я принимаю душ, а потом завтракаю.", "", "Рассказ по порядку: **primero… después…**", 4],
+    ["FRE-069", "rutina", "Vuelvo a casa a las seis.", "Я возвращаюсь домой в шесть.", "", "**volver** — o → **ue**: **vuelvo**.", 4],
+    ["FRE-070", "rutina", "Salgo de casa a las ocho.", "Я выхожу из дома в восемь.", "", "**salir** → **salgo**.", 4],
+    ["FRE-071", "tiempo", "¿Qué tiempo hace?", "Какая погода?", "", "Ответ с **hace**: «Hace sol», «Hace frío».", 4],
+    ["FRE-072", "tiempo", "Hace mucho calor.", "Очень жарко.", "", "Погода — **hace**; «очень» перед существительным — **mucho**.", 4],
+    ["FRE-073", "tiempo", "¿Qué día es hoy?", "Какой сегодня день?", "", "Ответ без артикля: «Hoy es martes».", 4],
+    ["FRE-074", "gustos", "¿Qué haces los fines de semana?", "Что ты делаешь по выходным?", "tú", "**los fines de semana** — каждые выходные.", 4],
+    ["FRE-075", "rutina", "No desayuno nunca.", "Я никогда не завтракаю.", "", "Можно и так: «Nunca desayuno».", 4],
+    ["FRE-076", "rutina", "¿Qué estás haciendo?", "Что ты (сейчас) делаешь?", "tú", "Прямо сейчас — **estar** + gerundio.", 4],
+    ["FRE-077", "rutina", "Estoy trabajando.", "Я (сейчас) работаю.", "", "Удобный ответ, когда звонят не вовремя.", 4],
+    ["FRE-078", "gustos", "¿Te gusta el fútbol?", "Тебе нравится футбол?", "tú", "После **gusta** — артикль: **el fútbol**.", 4],
+    ["FRE-079", "gustos", "¡Me encanta!", "Обожаю! Очень нравится!", "", "Сильнее, чем «me gusta». **mucho** к нему не добавляют.", 4],
+    ["FRE-080", "gustos", "No me gusta nada.", "Мне совсем не нравится.", "", "**nada** — «совсем», «нисколько».", 4]
 ]
 
 # Diálogos: [id, título ruso, título español, personajes, [[p, es, ru, obs?, deletreo?], …]]
@@ -284,7 +306,45 @@ DIALOGOS = [
         ["javier", "¡Qué bien! ¿Y cómo es el barrio?", "Здорово! А какой там район?"],
         ["ana", "Es bonito, pero un poco ruidoso. Hay muchos bares.", "Красивый, но немного шумный. Там много баров."],
         ["javier", "Sí, los bares en España son muy ruidosos.", "Да, бары в Испании очень шумные."],
-        ["ana", "¡Sí! Pero los camareros son muy simpáticos.", "Да! Зато официанты очень приятные.", "Характер — **ser**: **son simpáticos**."]], 3, "conocer"]
+        ["ana", "¡Sí! Pero los camareros son muy simpáticos.", "Да! Зато официанты очень приятные.", "Характер — **ser**: **son simpáticos**."]], 3, "conocer"],
+    # U4 (04/11/2026)
+    ["DLE-015", "Утро Ани", "Por la mañana", ["lucia", "ana"], [
+        ["lucia", "¡Buenos días, Ana! ¿Qué hora es?", "Доброе утро, Аня! Который час?"],
+        ["ana", "Son las siete y media.", "Полвосьмого."],
+        ["lucia", "¿A qué hora te levantas normalmente?", "Во сколько ты обычно встаёшь?"],
+        ["ana", "Me levanto a las siete. Primero me ducho y después desayuno.", "Я встаю в семь. Сначала принимаю душ, потом завтракаю.", "Глаголы с **se**: **me levanto**, **me ducho**."],
+        ["lucia", "¿Y a qué hora sales de casa?", "А во сколько ты выходишь из дома?"],
+        ["ana", "Salgo a las ocho y cuarto. La clase empieza a las nueve.", "Выхожу в четверть девятого. Урок начинается в девять.", "**salgo** — неправильная форма yo; **empieza** — e → ie."],
+        ["lucia", "¡Uf! Yo hoy no trabajo. Vuelvo a la cama.", "Уф! А я сегодня не работаю. Иду обратно в кровать."]], 4, "dia"],
+    ["DLE-016", "Расписание", "¿A qué hora empieza la clase?", ["javier", "ana"], [
+        ["javier", "Ana, ¿qué días tienes clase de español?", "Аня, в какие дни у тебя испанский?"],
+        ["ana", "Los lunes, los miércoles y los viernes.", "По понедельникам, средам и пятницам.", "Каждую неделю — **los lunes**."],
+        ["javier", "¿Y a qué hora empieza la clase?", "А во сколько начинается урок?"],
+        ["ana", "Empieza a las diez y termina a las doce menos cuarto.", "Начинается в десять и заканчивается без четверти двенадцать."],
+        ["javier", "¿Estudias también en casa?", "А дома ты тоже занимаешься?"],
+        ["ana", "Sí, estudio todos los días por la tarde. Leo y escucho música en español.", "Да, занимаюсь каждый день после обеда. Читаю и слушаю музыку на испанском."],
+        ["javier", "¡Muy bien!", "Очень хорошо!"]], 4, "dia"],
+    ["DLE-017", "Что тебе нравится?", "¿Qué te gusta hacer?", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿qué te gusta hacer los fines de semana?", "Аня, что ты любишь делать по выходным?"],
+        ["ana", "Me gusta mucho leer y pasear por la playa.", "Я очень люблю читать и гулять по пляжу.", "Действия — **me gusta** + инфинитив."],
+        ["lucia", "¿Te gusta el deporte?", "Тебе нравится спорт?"],
+        ["ana", "Sí, me encanta nadar. Pero no me gusta nada el fútbol.", "Да, обожаю плавать. Но футбол мне совсем не нравится."],
+        ["lucia", "¿No? Pablo juega al fútbol todos los domingos.", "Нет? А Пабло играет в футбол каждое воскресенье."],
+        ["ana", "¿Y tú? ¿Qué te gusta?", "А ты? Что нравится тебе?"],
+        ["lucia", "Me gustan las películas y las series. ¡Y bailar! Me encanta bailar.", "Мне нравятся фильмы и сериалы. И танцевать! Обожаю танцевать.", "Несколько — **me gustan**; действие — **me encanta**."]], 4, "gustos"],
+    ["DLE-018", "Что ты делаешь?", "¿Qué estás haciendo?", ["pablo", "ana"], [
+        ["pablo", "¡Hola, Ana! Soy Pablo. ¿Qué estás haciendo?", "Привет, Аня! Это Пабло. Что делаешь?", "Прямо сейчас — **estar** + gerundio."],
+        ["ana", "Hola, Pablo. Estoy cocinando. ¿Y tú?", "Привет, Пабло. Готовлю. А ты?"],
+        ["pablo", "Estoy viendo una película con Marta.", "Смотрю фильм с Мартой."],
+        ["ana", "¿Una película? ¿Es buena?", "Фильм? Хороший?"],
+        ["pablo", "Sí, es muy divertida. ¿Y qué estás cocinando?", "Да, очень смешной. А что ты готовишь?"],
+        ["ana", "Una sopa. ¡Hace frío y me encanta la sopa!", "Суп. Холодно, а я обожаю суп!"]], 4, "dia"],
+    ["DLE-019", "Какая погода?", "¿Qué tiempo hace?", ["marta", "ana"], [
+        ["marta", "Ana, ¿qué tiempo hace hoy en Barcelona?", "Аня, какая сегодня погода в Барселоне?"],
+        ["ana", "Hace sol y mucho calor. ¿Y en Madrid?", "Солнечно и очень жарко. А в Мадриде?"],
+        ["marta", "Aquí hace frío y está nublado. En invierno en Madrid hace mucho frío.", "Здесь холодно и пасмурно. Зимой в Мадриде очень холодно.", "Погода — **hace**; облачно — **está nublado**."],
+        ["ana", "En Moscú en invierno nieva mucho y hace mucho más frío.", "В Москве зимой много снега и гораздо холоднее."],
+        ["marta", "¡Uf! Me gusta más el calor.", "Уф! Мне больше нравится тепло."]], 4, "tiempo"]
 ]
 
 def frasesDe(es):

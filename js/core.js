@@ -1110,9 +1110,11 @@ function azTranslitVisible() {
   if (modo !== "auto") return modo === "si";
   /* Abecé (27/10/2026): mientras no tenga unidades, el «dónde estás» de Azbuka no cuenta: se ve */
   if (AZ_DIRECCION.id !== "azbuka" && !((typeof AZ_CATALOGO !== "undefined" && AZ_CATALOGO[AZ_DIRECCION.id].unidades) || []).length) return true;
-  const pag = /azbuka-(\d+)\.html/.exec(location.pathname);
+  /* La unidad de la página (azbuka-N o, en Abecé, abece-N; 04/11/2026) o, si no, la última abierta de esa dirección */
+  const ab = AZ_DIRECCION.id === "abece";
+  const pag = (ab ? /abece-(\d+)\.html/ : /azbuka-(\d+)\.html/).exec(location.pathname);
   let n = pag ? Number(pag[1]) : null;
-  if (n == null) { try { const u = JSON.parse(localStorage.getItem("az_ultimo") || "null"); n = u && u.unidad ? u.unidad : null; } catch (e) {} }
+  if (n == null) { try { const u = JSON.parse(localStorage.getItem(ab ? "az_ultimo_es" : "az_ultimo") || "null"); n = u && u.unidad ? u.unidad : null; } catch (e) {} }
   return n == null || n <= AZ_TRANSLIT_HASTA;
 }
 function azAplicarTranslit() {

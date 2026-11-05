@@ -127,7 +127,7 @@ const UNIDAD_ES_3 = {
         }
       ],
       frases: ["FRE-050", "FRE-051", "FRE-052"],
-      vocab: ["estar", "aquí", "ahí", "allí", "cerca", "lejos"],
+      vocab: ["estar", "aquí", "ahí", "allí", "cerca", "lejos", "cerca de", "lejos de"],
       dialogos: ["DLE-011"]
     },
     {
@@ -179,7 +179,7 @@ const UNIDAD_ES_3 = {
         }
       ],
       frases: ["FRE-053", "FRE-054"],
-      vocab: ["en", "de", "a", "al", "del", "encima", "debajo", "delante", "detrás", "lado", "entre", "dentro", "fuera", "enfrente", "izquierda", "derecha"],
+      vocab: ["en", "de", "a", "al", "del", "encima", "debajo", "delante", "detrás", "lado", "entre", "dentro", "fuera", "enfrente", "izquierda", "derecha", "encima de", "debajo de", "delante de", "detrás de", "al lado de", "dentro de", "fuera de", "a la izquierda", "a la derecha"],
       dialogos: ["DLE-013"]
     },
     {

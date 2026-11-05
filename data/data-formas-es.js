@@ -1,6 +1,6 @@
 /* Abecé — formas de las palabras que cambian (FORMAS_ES).
    Generado por herramientas/abece/formas-es.py: no editar a mano.
-   3690 entradas. t: sust | adj | det | num | art | pron | contr.
+   3695 entradas. t: sust | adj | det | num | art | pron | contr.
    sust: sg, pl, art [sg, pl], g; f/fpl/artF si tiene femenino; elA (el agua);
          inv (pl = sg); soloPl; sentido (el/la cambia el sentido).
    adj/det/num: m, f, mpl, fpl; invG (igual en m y f); apoc (+ apocF: también ante f); var (la otra forma del plural: la de la RAE).
@@ -3695,7 +3695,12 @@ const FORMAS_ES = {
 "ESP-05419":{"t":"adj","m":"jubilado","f":"jubilada","mpl":"jubilados","fpl":"jubiladas"},
 "ESP-05420":{"t":"sust","g":"f","sg":"estantería","pl":"estanterías","art":["la","las"]},
 "ESP-05421":{"t":"sust","g":"f","sg":"lavadora","pl":"lavadoras","art":["la","las"]},
-"ESP-05422":{"t":"adj","m":"antipático","f":"antipática","mpl":"antipáticos","fpl":"antipáticas"}
+"ESP-05422":{"t":"adj","m":"antipático","f":"antipática","mpl":"antipáticos","fpl":"antipáticas"},
+"ESP-05426":{"t":"adj","m":"nublado","f":"nublada","mpl":"nublados","fpl":"nubladas"},
+"ESP-05427":{"t":"sust","g":"m","sg":"fin de semana","pl":"fines de semana","art":["el","los"]},
+"ESP-05432":{"t":"sust","g":"f","sg":"merienda","pl":"meriendas","art":["la","las"]},
+"ESP-05433":{"t":"sust","g":"f","sg":"natación","pl":null,"art":["la","las"]},
+"ESP-05434":{"t":"sust","g":"m","sg":"frío","pl":"fríos","art":["el","los"]}
 };
 
 const FORMAS_ES_SERIES = {
