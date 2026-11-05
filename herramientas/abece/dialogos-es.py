@@ -24,12 +24,14 @@ DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "vale": "
        "llamo": "ESP-02076", "llamas": "ESP-02076", "llama": "ESP-02076", "siento": "ESP-00079", "y": "ESP-00009",
        "señora": "ESP-00051", "pero": "ESP-00031",
        # U2 (02/11/2026)
-       "este": "ESP-00029", "vivo": "ESP-00178", "poco": "ESP-00120", "solo": "ESP-00046",
+       "este": "ESP-00029", "vivo": "ESP-00178", "poco": "ESP-05177", "solo": "ESP-00046",   # poco: «un poco», el adverbio (05/11/2026)
        # U3 (02/11/2026)
        "hay": "ESP-00012", "muchos": "ESP-00066", "muchas": "ESP-00066",
        # U4 (04/11/2026)
        "frío": "ESP-05434", "media": "ESP-05193", "cuarto": "ESP-00508",
-       "levanto": "ESP-01196", "levantas": "ESP-01196", "ducho": "ESP-05423", "desayuno": "ESP-02377"}
+       "levanto": "ESP-01196", "levantas": "ESP-01196", "ducho": "ESP-05423", "desayuno": "ESP-02377",
+       # U5 (05/11/2026)
+       "mucha": "ESP-00066", "rica": "ESP-00778", "rico": "ESP-00778", "cuenta": "ESP-00331", "compra": "ESP-01268", "medio": "ESP-05193", "primero": "ESP-00146", "segundo": "ESP-00258", "helado": "ESP-01432"}
 # Nombres propios de varias palabras que no están en el léxico (sus palabras no se enlazan)
 PROPIOS_VARIAS = ["Buenos Aires"]
 # Nombres de personas (no van al léxico). Los países y las ciudades sí: con mayúscula se usa la entrada propia.
@@ -57,6 +59,7 @@ def idDe(w, deletreo=False):
     faltan.add("sin id: " + k)
     return None
 
+PRON_OD = {"lo": "ESP-00025", "la": "ESP-00599", "los": "ESP-00885", "las": "ESP-01288"}
 TR_FIJA = {"gmail": "хэмэ́йл"}   # préstamos que se dicen distinto de como se escriben
 def trDe(w):
     k = w.lower()
@@ -72,6 +75,14 @@ def linea(txt, deletreo=False):
         partes.append(txt[ult:m.start()]); partes.append(trDe(m.group(0))); ult = m.end()
         lex.append(None if any(a <= m.start() < b for a, b in fuera) else idDe(m.group(0), deletreo))
     partes.append(txt[ult:])
+    # lo / la / los / las delante de un verbo son pronombres de objeto (U5, 05/11/2026): «La compro»,
+    # «Aquí la tiene»; delante de un sustantivo, artículo («la cuenta»).
+    toks = [m.group(0).lower() for m in RX.finditer(txt)]
+    for i, t in enumerate(toks[:-1]):
+        sig = toks[i + 1]
+        es_sust = any(x.get("posNormalized") in ("sustantivo", "adjetivo") for x in M["lex"].get(sig, [])) or bool(M["formas"].get(sig))
+        if t in PRON_OD and M["verb"].get(sig) and not es_sust and lex[i] is not None:
+            lex[i] = PRON_OD[t]
     return "".join(partes), lex
 
 PERSONAJES = {
@@ -80,7 +91,9 @@ PERSONAJES = {
     "lucia": {"es": "Lucía", "ru": "Лусия", "genero": "f", "desc": "Испанская подруга Ани."},
     "recepcion": {"es": "Recepcionista", "ru": "Администратор", "genero": "m", "desc": "Администратор на ресепшене."},
     "pablo": {"es": "Pablo", "ru": "Пабло", "genero": "m", "desc": "Брат Лусии, из Мадрида."},
-    "marta": {"es": "Marta", "ru": "Марта", "genero": "f", "desc": "Девушка Пабло, из Аргентины."}
+    "marta": {"es": "Marta", "ru": "Марта", "genero": "f", "desc": "Девушка Пабло, из Аргентины."},
+    "camarero": {"es": "Camarero", "ru": "Официант", "genero": "m", "desc": "Официант в кафе и в ресторане."},
+    "dependienta": {"es": "Dependienta", "ru": "Продавщица", "genero": "f", "desc": "Продавщица на рынке и в магазине."}
 }
 
 # Frases: [id, función, es, ru (traducción), registro, uso (ruso)]
@@ -167,7 +180,25 @@ FRASES = [
     ["FRE-077", "rutina", "Estoy trabajando.", "Я (сейчас) работаю.", "", "Удобный ответ, когда звонят не вовремя.", 4],
     ["FRE-078", "gustos", "¿Te gusta el fútbol?", "Тебе нравится футбол?", "tú", "После **gusta** — артикль: **el fútbol**.", 4],
     ["FRE-079", "gustos", "¡Me encanta!", "Обожаю! Очень нравится!", "", "Сильнее, чем «me gusta». **mucho** к нему не добавляют.", 4],
-    ["FRE-080", "gustos", "No me gusta nada.", "Мне совсем не нравится.", "", "**nada** — «совсем», «нисколько».", 4]
+    ["FRE-080", "gustos", "No me gusta nada.", "Мне совсем не нравится.", "", "**nada** — «совсем», «нисколько».", 4],
+    # U5 (05/11/2026)
+    ["FRE-081", "necesidades", "Quiero un café, por favor.", "Я хочу кофе, пожалуйста.", "", "Простая просьба. В кафе ещё вежливее: «¿Me pone un café?».", 5],
+    ["FRE-082", "necesidades", "¿Puedo pagar con tarjeta?", "Можно заплатить картой?", "", "**poder** + инфинитив — «можно мне…?».", 5],
+    ["FRE-083", "necesidades", "Tengo hambre.", "Я хочу есть. Я голоден.", "", "Буквально «у меня голод»: **tener** + существительное, как «tengo frío».", 5],
+    ["FRE-084", "necesidades", "Tengo sed.", "Я хочу пить.", "", "Так же, как «tengo hambre».", 5],
+    ["FRE-085", "compras", "¿Cuánto cuesta?", "Сколько это стоит?", "", "Об одной вещи. О нескольких — «¿Cuánto cuestan?».", 5],
+    ["FRE-086", "compras", "¿Cuánto cuestan?", "Сколько они стоят?", "", "О нескольких вещах: «¿Cuánto cuestan las fresas?».", 5],
+    ["FRE-087", "compras", "¿Cuánto es?", "Сколько с меня?", "", "Когда пора платить: спрашивают общую сумму.", 5],
+    ["FRE-088", "compras", "¿Me pone un kilo de naranjas?", "Дайте мне килограмм апельсинов.", "usted", "Вежливая просьба в магазине и в баре, очень по-испански.", 5],
+    ["FRE-089", "compras", "Quería una barra de pan.", "Я бы хотел(а) батон хлеба.", "", "**Quería** — вежливое «я бы хотел». Это готовая формула.", 5],
+    ["FRE-090", "compras", "¿Algo más?", "Что-нибудь ещё?", "", "Так спрашивает продавец.", 5],
+    ["FRE-091", "compras", "Nada más, gracias.", "Больше ничего, спасибо.", "", "Ответ на «¿Algo más?».", 5],
+    ["FRE-092", "compras", "¿Qué talla tiene?", "Какой у вас размер?", "usted", "Продавец к покупателю — на «usted». Другу: «¿Qué talla tienes?».", 5],
+    ["FRE-093", "compras", "¿Dónde está el probador?", "Где примерочная?", "", "В магазине одежды.", 5],
+    ["FRE-094", "comer", "¿Me pone un café con leche?", "Можно мне кофе с молоком?", "usted", "Так заказывают в испанском баре.", 5],
+    ["FRE-095", "comer", "Para mí, una ensalada.", "Мне — салат.", "", "**Para mí** — «для меня, мне»: так заказывают в ресторане.", 5],
+    ["FRE-096", "comer", "La cuenta, por favor.", "Счёт, пожалуйста.", "", "В Испании счёт приносят, только когда его попросишь.", 5],
+    ["FRE-097", "comer", "¡Qué rico!", "Как вкусно!", "", "**rico** о еде — «вкусный».", 5]
 ]
 
 # Diálogos: [id, título ruso, título español, personajes, [[p, es, ru, obs?, deletreo?], …]]
@@ -344,7 +375,53 @@ DIALOGOS = [
         ["ana", "Hace sol y mucho calor. ¿Y en Madrid?", "Солнечно и очень жарко. А в Мадриде?"],
         ["marta", "Aquí hace frío y está nublado. En invierno en Madrid hace mucho frío.", "Здесь холодно и пасмурно. Зимой в Мадриде очень холодно.", "Погода — **hace**; облачно — **está nublado**."],
         ["ana", "En Moscú en invierno nieva mucho y hace mucho más frío.", "В Москве зимой много снега и гораздо холоднее."],
-        ["marta", "¡Uf! Me gusta más el calor.", "Уф! Мне больше нравится тепло."]], 4, "tiempo"]
+        ["marta", "¡Uf! Me gusta más el calor.", "Уф! Мне больше нравится тепло."]], 4, "tiempo"],
+    # U5 (05/11/2026)
+    ["DLE-020", "На рынке", "En el mercado", ["dependienta", "ana"], [
+        ["dependienta", "¡Buenos días! ¿Qué le pongo?", "Доброе утро! Что вам дать?", "**¿Qué le pongo?** — так спрашивает продавец. **le** — «вам» (урок 7)."],
+        ["ana", "Buenos días. ¿Me pone un kilo de naranjas?", "Доброе утро. Дайте мне, пожалуйста, килограмм апельсинов."],
+        ["dependienta", "Aquí tiene. ¿Algo más?", "Вот, пожалуйста. Что-нибудь ещё?", "**Aquí tiene** — «вот, пожалуйста»."],
+        ["ana", "Sí, quería medio kilo de fresas. ¿Cuánto cuestan?", "Да, я бы хотела полкило клубники. Сколько она стоит?"],
+        ["dependienta", "Cuestan cuatro euros el kilo.", "Четыре евро за килограмм.", "Цена за килограмм — **el kilo**."],
+        ["ana", "Vale. Nada más, gracias. ¿Cuánto es?", "Хорошо. Больше ничего, спасибо. Сколько с меня?"],
+        ["dependienta", "Son tres euros con cincuenta.", "Три евро пятьдесят."],
+        ["ana", "Aquí tiene. ¡Adiós!", "Вот, пожалуйста. До свидания!"]], 5, "compras"],
+    ["DLE-021", "В кафе", "En la cafetería", ["camarero", "lucia", "ana"], [
+        ["camarero", "Hola, chicas. ¿Qué queréis tomar?", "Привет, девушки. Что будете?", "**tomar** — «брать, пить, есть» в кафе."],
+        ["lucia", "Para mí, un café con leche.", "Мне кофе с молоком."],
+        ["ana", "Yo quiero un zumo de naranja. ¿Tenéis tortilla?", "А я хочу апельсиновый сок. У вас есть тортилья?"],
+        ["camarero", "Sí, claro. ¿Quieres un trozo?", "Да, конечно. Хочешь кусочек?"],
+        ["ana", "Sí, por favor. Tengo mucha hambre.", "Да, пожалуйста. Я очень голодна.", "**hambre** — женского рода: **mucha hambre**."],
+        ["lucia", "¿Qué tal la tortilla?", "Ну как тортилья?"],
+        ["ana", "¡Muy rica! La cuenta, por favor.", "Очень вкусная! Счёт, пожалуйста."]], 5, "comer"],
+    ["DLE-022", "Какой размер?", "¿Qué talla tiene?", ["ana", "lucia", "dependienta"], [
+        ["ana", "Lucía, ¿te gusta esta falda?", "Лусия, тебе нравится эта юбка?"],
+        ["lucia", "Sí, es muy bonita. Y no es cara.", "Да, очень красивая. И недорогая."],
+        ["ana", "Hola, ¿tiene esta falda en la talla M?", "Здравствуйте, у вас есть эта юбка размера M?"],
+        ["dependienta", "Sí, aquí está. El probador está a la derecha.", "Да, вот она. Примерочная справа."],
+        ["ana", "Es un poco pequeña. ¿Tiene una talla más grande?", "Она немного маловата. У вас есть размер побольше?"],
+        ["dependienta", "Sí, la L. Aquí la tiene.", "Да, L. Вот, пожалуйста.", "**la tiene** — **la** вместо «la falda»."],
+        ["ana", "¡Ahora sí! La compro. ¿Puedo pagar con tarjeta?", "Вот теперь да! Беру. Можно заплатить картой?", "**La compro** — «её покупаю»: юбку уже назвали, поэтому **la**."],
+        ["dependienta", "Sí, claro. Son treinta y cinco euros.", "Да, конечно. Тридцать пять евро."]], 5, "compras"],
+    ["DLE-023", "Меню дня", "El menú del día", ["camarero", "marta", "pablo"], [
+        ["camarero", "Buenas tardes. ¿Qué quieren de primero?", "Добрый день. Что будете на первое?", "**de primero** — «на первое»."],
+        ["marta", "Para mí, una ensalada.", "Мне салат."],
+        ["pablo", "Yo, sopa. Y de segundo, pollo.", "Мне суп. А на второе — курицу."],
+        ["marta", "Yo prefiero pescado. ¿Es fresco?", "А я лучше рыбу. Она свежая?"],
+        ["camarero", "Sí, muy fresco. ¿Y para beber?", "Да, очень свежая. А пить что будете?"],
+        ["pablo", "Agua sin gas y una copa de vino.", "Воду без газа и бокал вина."],
+        ["camarero", "¿Quieren postre?", "Десерт будете?"],
+        ["marta", "Sí, un helado de chocolate.", "Да, шоколадное мороженое."],
+        ["pablo", "Yo no, gracias. La cuenta, por favor.", "Мне не надо, спасибо. Счёт, пожалуйста."]], 5, "comer"],
+    ["DLE-024", "Список покупок", "Tenemos que comprar…", ["javier", "ana"], [
+        ["javier", "Ana, el viernes hay una fiesta en clase. Tenemos que comprar comida y bebida.", "Аня, в пятницу в классе праздник. Нам надо купить еду и напитки.", "**tener que** + инфинитив — «надо, должен»."],
+        ["ana", "¿Qué necesitamos?", "Что нам нужно?"],
+        ["javier", "Pan, queso, jamón y mucha fruta.", "Хлеб, сыр, хамон и много фруктов.", "Без артикля: просто «хлеб, сыр» вообще."],
+        ["ana", "¿Y cuántas botellas de agua?", "А сколько бутылок воды?"],
+        ["javier", "Seis botellas de agua y zumo. No hay que comprar vino.", "Шесть бутылок воды и сок. Вино покупать не нужно."],
+        ["ana", "¿Cuánto dinero tenemos?", "Сколько у нас денег?"],
+        ["javier", "Cincuenta euros. Es bastante.", "Пятьдесят евро. Этого достаточно."],
+        ["ana", "Vale. Yo compro la fruta y tú compras el pan.", "Хорошо. Я покупаю фрукты, а ты — хлеб."]], 5, "compras"]
 ]
 
 def frasesDe(es):

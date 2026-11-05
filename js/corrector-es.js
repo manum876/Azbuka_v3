@@ -8,7 +8,7 @@
    muestra igual. Los motivos y el resumen van en ruso (borrador para
    Iván).
 
-   azCorregirEs(respuesta, esperadas, opts)
+   azCorregirEs(respuesta, esperadas, opts)  ·  azSituacionEs(respuesta, sit): por intención (al final)
      opts.lengua: "es" (por defecto) → la respuesta es en ESPAÑOL, la
        lengua que se aprende. Decisiones de Manu (PROGRAMA_ABECE.md §7):
        · falta o sobra una tilde → Casi, con aviso;
@@ -252,5 +252,91 @@
     return out;
   }
 
+  /* ── azSituacionEs(respuesta, sit) (05/11/2026, U5): corregir por intención en español ──
+     El mismo formato y los mismos tres resultados que azSituacion (corrector.js), para los
+     tipos situacion y turnos de Abecé:
+       sit = { necesita: [{ es: "что нужно (по-русски)", formas: ["un café", "~café"], rx?, pregunta?, consigna? }],
+               orden?: true, modelos: ["Un café con leche, por favor."] }
+       · una forma con «~» es mínima: vale solo si no aparece ninguna completa;
+       · ✓ Верно — aparece todo, tal cual;
+       · 💬 Понятно — aparece todo, pero alguna palabra está en otra forma (compro por compra),
+         sin la tilde o con un error de tipeo: comunica (vale el punto entero, como en Azbuka);
+       · ✗ Непонятно — falta algo esencial (o el orden no coincide). Resumen en ruso. */
+  let IDX_V = null;
+  function idsDe(w) {
+    const k = exacta(w), out = new Set();
+    formaDe(w).forEach(x => out.add(x.id));
+    if (!IDX_V) {
+      IDX_V = {};
+      if (typeof VERBOS_ES !== "undefined") Object.keys(VERBOS_ES).forEach(id => {
+        const v = VERBOS_ES[id]; if (!v || v.base) return;
+        const add = f => { if (f) (IDX_V[exacta(f)] = IDX_V[exacta(f)] || []).push(id); };
+        ["pres", "indef", "imperf", "fut", "cond", "subj", "subjImp"].forEach(t => (v[t] || []).forEach(add));
+        ["impTu", "ger", "part"].forEach(t => add(v[t]));
+      });
+    }
+    (IDX_V[k] || []).forEach(id => out.add(id));
+    return out;
+  }
+  function cercaEs(u, e) {
+    if (exacta(u) === exacta(e)) return true;
+    if (claveEs(u) === claveEs(e)) return true;                                    /* solo la tilde */
+    const a = idsDe(u), b = idsDe(e);
+    for (const x of a) if (b.has(x)) return true;                                  /* otra forma de la misma palabra */
+    return e.length >= 4 && typeof azDiff === "function" && azDiff(claveEs(u), claveEs(e)).dist <= (e.length >= 8 ? 2 : 1);   /* tipeo */
+  }
+  function azSituacionEs(respuesta, sit) {
+    const crudos = typeof azTokens === "function" ? azTokens(respuesta) : String(respuesta || "").split(/\s+/).filter(Boolean);
+    const K = crudos.map(exacta);
+    const usados = {};
+    const out = { elementos: [], modelo: (sit.modelos || [])[0] || "", tuya: [] };
+    const tok = f => (typeof azTokens === "function" ? azTokens(f) : f.split(/\s+/)).map(exacta);
+    (sit.necesita || []).forEach(el => {
+      let hallado = null;
+      if (el.pregunta && /\?/.test(respuesta)) hallado = { estado: "ok", pos: Math.max(0, K.length - 1), n: 0 };
+      if (!hallado && el.rx) { const R = new RegExp(el.rx, "i"); for (let i = 0; i < K.length; i++) if (!usados[i] && R.test(K[i])) { hallado = { estado: "ok", pos: i, n: 1 }; break; } }
+      const todas = el.formas || [];
+      const plenas = todas.filter(f => f.charAt(0) !== "~"), minimas = todas.filter(f => f.charAt(0) === "~").map(f => f.slice(1));
+      const buscar = (lista, igual, estado) => lista.some(f => {
+        const F = tok(f);
+        for (let i = 0; i + F.length <= K.length; i++) {
+          if (F.every((w, j) => !usados[i + j] && igual(K[i + j], w))) {
+            hallado = estado === "ok" ? { estado, pos: i, n: F.length } : { estado, pos: i, n: F.length, escrito: crudos.slice(i, i + F.length).join(" "), mejor: f };
+            return true;
+          }
+        }
+        return false;
+      });
+      const igual = (u, e) => u === e;
+      if (!hallado) buscar(plenas, igual, "ok");
+      if (!hallado) buscar(plenas, cercaEs, "forma");
+      if (!hallado) buscar(minimas, igual, "ok");
+      if (!hallado) buscar(minimas, cercaEs, "forma");
+      if (hallado) for (let j = 0; j < hallado.n; j++) usados[hallado.pos + j] = hallado.estado;
+      out.elementos.push(Object.assign({ es: el.es, consigna: el.consigna, ver: ((el.formas || [])[0] || "").replace(/^~/, "") }, hallado || { estado: "falta" }));
+    });
+    let nivel = out.elementos.some(e => e.estado === "falta") ? 0 : out.elementos.some(e => e.estado === "forma") ? 1 : 2;
+    if (nivel > 0 && sit.orden) {
+      const pos = out.elementos.map(e => e.pos);
+      if (pos.some((p, i) => i > 0 && p <= pos[i - 1])) { nivel = 0; out.desorden = true; }
+    }
+    if (!crudos.length) nivel = 0;
+    const faltan = out.elementos.filter(e => e.estado === "falta");
+    const deConsigna = faltan.filter(e => e.consigna);
+    out.consigna = nivel === 0 && !out.desorden && crudos.length > 0 && deConsigna.length > 0 && deConsigna.length === faltan.length;
+    out.nivel = nivel;
+    out.entiende = nivel === 1;
+    out.resultado = nivel === 0 ? MAL : BIEN;
+    out.tuya = crudos.map((t, i) => ({ t, estado: usados[i] === "forma" ? "forma" : "ok" }));
+    out.resumen = nivel === 2 ? "Понятно и правильно." :
+      nivel === 1 ? "Понятно. Одну деталь можно улучшить." :
+      !crudos.length ? "Ты ничего не написал." :
+      out.desorden ? "Всё есть, но в другом порядке." :
+      out.consigna ? deConsigna.map(e => e.consigna).join(" ") :
+      "Не хватает: " + faltan.map(e => e.es).join(", ") + ".";
+    return out;
+  }
+
   window.azCorregirEs = azCorregirEs;
+  window.azSituacionEs = azSituacionEs;
 })();

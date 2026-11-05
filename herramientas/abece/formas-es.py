@@ -49,6 +49,7 @@ PLURAL_EXCEP = {
     "jersey": "jerséis", "espray": "espráis",
     # expresiones de varias palabras: cambia el sustantivo (04/11/2026, U4)
     "fin de semana": "fines de semana",
+    "centro comercial": "centros comerciales",
 }
 # Solo se usan en plural aunque el léxico no lo marque (la palabra ya es el plural).
 SOLO_PLURAL = {"modales", "afueras", "cosquillas", "gases"}
@@ -200,6 +201,7 @@ CUATRO = {  # m, f, mpl, fpl (None = no existe)
 NUM_NOTA = {
     "cien": "«cien» перед существительным и перед mil/millones; «ciento» — в составных числах: ciento uno, ciento veinte.",
     "mil": "Как числительное не меняется: dos mil. «miles» — существительное: miles de personas.",
+    "ciento": "Не меняется: ciento veinte. Одно «сто» — «cien»: cien euros. «cientos» — существительное: cientos de personas.",
 }
 
 
@@ -318,9 +320,9 @@ def armar(lex):
                 out[i] = {"t": "num", "m": m, "f": f, "mpl": mpl, "fpl": fpl}
             elif w in ("uno", "veintiuno"):
                 out[i] = {"t": "num", "m": w, "f": w[:-1] + "a", "apoc": APOCOPE[w]}
-            elif w.endswith("cientos"):
+            elif w.endswith("cientos") or w == "quinientos":
                 out[i] = {"t": "num", "m": w, "f": w[:-2] + "as", "soloPl": True}
-            elif w.endswith(("ero", "do", "to", "mo", "vo", "no")) and w not in ("cuatro", "ocho", "cinco", "cero", "nueve"):
+            elif w.endswith(("ero", "do", "to", "mo", "vo", "no")) and w not in ("cuatro", "ocho", "cinco", "cero", "nueve", "ciento"):
                 # ordinales: primero, segundo, tercero, cuarto, quinto, sexto, séptimo, octavo, noveno, décimo, vigésimo
                 d = {"t": "num", "m": w, "f": w[:-1] + "a", "mpl": w + "s", "fpl": w[:-1] + "as", "ord": True}
                 if w in APOCOPE:

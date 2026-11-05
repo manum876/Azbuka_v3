@@ -540,7 +540,10 @@ window.azDiff = azDiff;
     if (!r) return null;
     const c = azColors(dark !== false);
     const col = r.nivel === 2 ? COL[2] : r.nivel === 1 ? c.gold : COL[0];
-    const txt = r.nivel === 2 ? "✓ Bien" : r.nivel === 1 ? "💬 Se entiende" : r.consigna ? "✗ Mal" : "✗ No se entiende";
+    const S = RU ? { bien: "✓ Верно", entiende: "💬 Понятно", mal: "✗ Неверно", no: "✗ Непонятно", tuya: "Твой ответ", mejor: "» → лучше ", perfecto: "Так будет идеально", forma: "Можно сказать так", otra: "Ещё вариант: ", cu: "＋ Сохранить в тетрадь", escribe: "Мой ответ: ", mejorCu: "\nЛучше: " }
+      : { bien: "✓ Bien", entiende: "💬 Se entiende", mal: "✗ Mal", no: "✗ No se entiende", tuya: "Tu respuesta", mejor: "» → mejor ", perfecto: "Así queda perfecto", forma: "Una forma de decirlo", otra: "Otra forma: ", cu: "＋ Guardar en el cuaderno", escribe: "Escribe: ", mejorCu: "\nMejor: " };   /* Abecé, en ruso (05/11/2026) */
+    const LL = RU ? "es" : "ru";
+    const txt = r.nivel === 2 ? S.bien : r.nivel === 1 ? S.entiende : r.consigna ? S.mal : S.no;
     const formas = r.elementos.filter(function (e) { return e.estado === "forma"; });
     return h("div", { className: "az-cr", role: "status" },
       h(Estilos, { c: c }),
@@ -548,18 +551,18 @@ window.azDiff = azDiff;
         h("span", { className: "az-cr-res", style: { color: col, background: col + "22", border: "1px solid " + col } }, txt),
         h("span", { className: "az-cr-sum" }, r.resumen)),
       r.nivel === 1 && h(React.Fragment, null,
-        h("div", { className: "az-cr-lbl" }, "Tu respuesta"),
-        h("div", { className: "az-cr-linea", lang: "ru" }, r.tuya.map(function (p, i) {
+        h("div", { className: "az-cr-lbl" }, S.tuya),
+        h("div", { className: "az-cr-linea", lang: LL }, r.tuya.map(function (p, i) {
           return h("span", { key: i, className: "az-cr-w", style: p.estado === "forma" ? { color: c.gold, textDecoration: "underline 2px " + c.gold, textUnderlineOffset: 4 } : null }, p.t); })),
-        formas.map(function (e, i) { return h("div", { key: i, className: "az-cr-exp" }, azFmt("«" + e.escrito + "» → mejor **" + e.mejor + "**")); })),
+        formas.map(function (e, i) { return h("div", { key: i, className: "az-cr-exp" }, azFmt("«" + e.escrito + S.mejor + "**" + e.mejor + "**")); })),
       !sinModelo && r.modelo && r.nivel < 2 && h(React.Fragment, null,
-        h("div", { className: "az-cr-lbl" }, r.nivel === 1 ? "Así queda perfecto" : "Una forma de decirlo"),
-        h("div", { className: "az-cr-ok", lang: "ru" }, r.modelo)),
-      !sinModelo && r.modelo && r.nivel === 2 && h("div", { className: "az-cr-exp", lang: "ru", style: { borderLeftColor: COL[2] } }, "Otra forma: " + r.modelo),
+        h("div", { className: "az-cr-lbl" }, r.nivel === 1 ? S.perfecto : S.forma),
+        h("div", { className: "az-cr-ok", lang: LL }, r.modelo)),
+      !sinModelo && r.modelo && r.nivel === 2 && h("div", { className: "az-cr-exp", lang: LL, style: { borderLeftColor: COL[2] } }, S.otra + r.modelo),
       r.nivel < 2 && typeof azGuardarEnCuaderno === "function" && h("button", { className: "az-cr-cu", onClick: function () {
-        azGuardarEnCuaderno("Escribe: " + r.tuya.map(function (p) { return p.t; }).join(" ") + "\nMejor: " + r.modelo +
+        azGuardarEnCuaderno(S.escribe + r.tuya.map(function (p) { return p.t; }).join(" ") + S.mejorCu + r.modelo +
           (formas.length ? "\n" + formas.map(function (e) { return e.escrito + " → " + e.mejor; }).join("; ") : ""));
-      } }, "＋ Guardar en el cuaderno"));
+      } }, S.cu));
   }
   window.AzSituacionRes = AzSituacionRes;
 })();

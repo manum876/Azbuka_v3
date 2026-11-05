@@ -33,7 +33,7 @@
 
    Formas de ejercicio (campo forma):
      elegir    { pide, grande?, audio?, opciones, correcta, escena?, plano?, reloj? }
-     escribir  { pide, grande?, audio?, pista?, esperadas, idioma, mayus?, completa?, reloj? }
+     escribir  { pide, grande?, audio?, pista?, esperadas, idioma, mayus?, completa?, reloj?, escena? }
                reloj: { h, m } dibuja un reloj con esa hora (04/11/2026, U4 de Abecé).
      ordenar   { pide, audio?, fichas, esperada, esperadas? }   (esperadas: otros órdenes válidos)
      vf        { afirmacion, verdadero }
@@ -49,7 +49,7 @@
      desarmar  { pide?, palabras, preguntas: [{ pide, correcta: índice }] }  (06/10/2026) la misma frase,
                varias preguntas («¿quién?», «¿qué?»): sin errores → Bien, uno → Casi, más → Mal.
      situacion { pide, escena?, contexto?, audio?, plano?, pista?, sit }  (05/10/2026, Unidad 11)
-               respuesta libre corregida por intención con azSituacion (corrector.js):
+               respuesta libre corregida por intención con azSituacion (corrector.js; en Abecé, azSituacionEs de corrector-es.js):
                ✓ Bien · 💬 Se entiende (vale el punto entero, decisión de Manu) · ✗ No se entiende.
                plano: { ruta: "S2 R S1 L S1", destino: "🏦" } dibuja un plano con el camino.
      turnos    { turnos: { titulo, quien, genero, chat?, pasos: [{ bot, es, tarea, sit, pista?, quien?, genero? }] } }
@@ -337,6 +337,7 @@
       h("div", { className: "pr-pide" }, azFmt(ej.pide)),
       ej.mapa && h(MapaEj, { mapa: ej.mapa, c }),
       h(RelojEj, { ej, c }),
+      ej.escena && h("div", { className: "pr-escena", "aria-hidden": "true" }, ej.escena),   /* 05/11/2026: también al escribir (U4 y U5 de Abecé) */
       ej.grande && h("div", { className: "pr-grande" + (String(ej.grande).length > 16 ? " frase" : ""), lang: langDe(ej.grande) }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: !ej.grande && !ej.audioManual }),
       ej.pista && h("div", { className: "pr-pista" }, ej.pista),
@@ -725,7 +726,7 @@
     const [r, setR] = useState(null);
     const comprobar = () => {
       if (!txt.trim()) return;
-      const res = azSituacion(txt, ej.sit);
+      const res = (ES && typeof azSituacionEs === "function" ? azSituacionEs : azSituacion)(txt, ej.sit);   /* Abecé: en español (05/11/2026) */
       setR(res);
       /* medio (examen final, Manu 06/10/2026): «Se entiende» vale medio punto */
       if (hecho == null) onRes(medio && res.nivel === 1 ? AZ_CASI : res.resultado);
@@ -769,10 +770,10 @@
     };
     const enviar = () => {
       if (!txt.trim() || fin) return;
-      const res = azSituacion(txt, T.pasos[paso].sit);
+      const res = (ES && typeof azSituacionEs === "function" ? azSituacionEs : azSituacion)(txt, T.pasos[paso].sit);
       if (res.nivel === 0) { setR(res); setPeor(AZ_CASI); reintento.current = true; return; }
       puntos.current[paso] = reintento.current || (medio && res.nivel === 1) ? .5 : 1; reintento.current = false;
-      const formas = res.elementos.filter(e => e.estado === "forma").map(e => "«" + e.escrito + "» → mejor " + e.mejor);
+      const formas = res.elementos.filter(e => e.estado === "forma").map(e => "«" + e.escrito + "» → " + (ES ? "лучше " : "mejor ") + e.mejor);
       avanzar(txt, formas.length ? (ES ? "💬 Понятно. " : "💬 Se entiende. ") + formas.join("; ") : null);
     };
     const saltar = () => { puntos.current[paso] = 0; reintento.current = false; setSalto(true); avanzar(T.pasos[paso].sit.modelos[0], null, true); };

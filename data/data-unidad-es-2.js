@@ -517,7 +517,7 @@ window.UNIDAD_ES_2 = UNIDAD_ES_2;
 window.unidadEs2Modulo = unidadEs2Modulo;
 
 /* ── Vocabulario: palabras → IDs ── */
-const ES2_ID_FIJO = { "poco": "ESP-00120", "este": "ESP-00029", "llamarse": "ESP-02076", "punto": "ESP-00317" };
+const ES2_ID_FIJO = { "poco": "ESP-05177", "este": "ESP-00029", "llamarse": "ESP-02076", "punto": "ESP-00317" };
 function es2Id(w) {
   if (ES2_ID_FIJO[w]) return ES2_ID_FIJO[w];
   if (typeof LEXICON_ES === "undefined") return null;

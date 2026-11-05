@@ -1,6 +1,6 @@
 /* Abecé — formas de las palabras que cambian (FORMAS_ES).
    Generado por herramientas/abece/formas-es.py: no editar a mano.
-   3695 entradas. t: sust | adj | det | num | art | pron | contr.
+   3714 entradas. t: sust | adj | det | num | art | pron | contr.
    sust: sg, pl, art [sg, pl], g; f/fpl/artF si tiene femenino; elA (el agua);
          inv (pl = sg); soloPl; sentido (el/la cambia el sentido).
    adj/det/num: m, f, mpl, fpl; invG (igual en m y f); apoc (+ apocF: también ante f); var (la otra forma del plural: la de la RAE).
@@ -663,7 +663,7 @@ const FORMAS_ES = {
 "ESP-01121":{"t":"sust","g":"f","sg":"piedra","pl":"piedras","art":["la","las"]},
 "ESP-01123":{"t":"sust","g":"m","sg":"camión","pl":"camiones","art":["el","los"]},
 "ESP-01124":{"t":"sust","g":"m","sg":"monstruo","pl":"monstruos","art":["el","los"]},
-"ESP-01125":{"t":"sust","g":"m","sg":"ciento","pl":"cientos","art":["el","los"]},
+"ESP-01125":{"t":"num","inv":true,"nota":"Не меняется: ciento veinte. Одно «сто» — «cien»: cien euros. «cientos» — существительное: cientos de personas."},
 "ESP-01129":{"t":"sust","g":"m/f","sg":"ladrón","pl":"ladrones","art":["el","los"],"f":"ladrona","fpl":"ladronas","artF":["la","las"]},
 "ESP-01131":{"t":"sust","g":"m","sg":"registro","pl":"registros","art":["el","los"]},
 "ESP-01132":{"t":"sust","g":"f","sg":"marcha","pl":"marchas","art":["la","las"]},
@@ -3493,7 +3493,7 @@ const FORMAS_ES = {
 "ESP-04938":{"t":"num","m":"décimo","f":"décima","mpl":"décimos","fpl":"décimas","ord":true},
 "ESP-04939":{"t":"adj","m":"morado","f":"morada","mpl":"morados","fpl":"moradas"},
 "ESP-04940":{"t":"num","inv":true},
-"ESP-04941":{"t":"num","inv":true},
+"ESP-04941":{"t":"num","m":"quinientos","f":"quinientas","soloPl":true},
 "ESP-04942":{"t":"num","inv":true},
 "ESP-04943":{"t":"num","inv":true},
 "ESP-04944":{"t":"sust","g":"f","sg":"nuera","pl":"nueras","art":["la","las"]},
@@ -3700,7 +3700,26 @@ const FORMAS_ES = {
 "ESP-05427":{"t":"sust","g":"m","sg":"fin de semana","pl":"fines de semana","art":["el","los"]},
 "ESP-05432":{"t":"sust","g":"f","sg":"merienda","pl":"meriendas","art":["la","las"]},
 "ESP-05433":{"t":"sust","g":"f","sg":"natación","pl":null,"art":["la","las"]},
-"ESP-05434":{"t":"sust","g":"m","sg":"frío","pl":"fríos","art":["el","los"]}
+"ESP-05434":{"t":"sust","g":"m","sg":"frío","pl":"fríos","art":["el","los"]},
+"ESP-05435":{"t":"sust","g":"m","sg":"céntimo","pl":"céntimos","art":["el","los"]},
+"ESP-05436":{"t":"sust","g":"f","sg":"carnicería","pl":"carnicerías","art":["la","las"]},
+"ESP-05437":{"t":"sust","g":"f","sg":"frutería","pl":"fruterías","art":["la","las"]},
+"ESP-05438":{"t":"sust","g":"f","sg":"pescadería","pl":"pescaderías","art":["la","las"]},
+"ESP-05439":{"t":"sust","g":"m","sg":"probador","pl":"probadores","art":["el","los"]},
+"ESP-05440":{"t":"sust","g":"f","sg":"tortilla","pl":"tortillas","art":["la","las"]},
+"ESP-05441":{"t":"sust","g":"f","sg":"pera","pl":"peras","art":["la","las"]},
+"ESP-05442":{"t":"sust","g":"m","sg":"centro comercial","pl":"centros comerciales","art":["el","los"]},
+"ESP-05443":{"t":"sust","g":"m","sg":"marisco","pl":"mariscos","art":["el","los"]},
+"ESP-05444":{"t":"sust","g":"f","sg":"gamba","pl":"gambas","art":["la","las"]},
+"ESP-05445":{"t":"sust","g":"m","sg":"pimiento","pl":"pimientos","art":["el","los"]},
+"ESP-05446":{"t":"sust","g":"m","sg":"melocotón","pl":"melocotones","art":["el","los"]},
+"ESP-05447":{"t":"sust","g":"m","sg":"melón","pl":"melones","art":["el","los"]},
+"ESP-05448":{"t":"sust","g":"f","sg":"pimienta","pl":"pimientas","art":["la","las"]},
+"ESP-05449":{"t":"sust","g":"f","sg":"servilleta","pl":"servilletas","art":["la","las"]},
+"ESP-05450":{"t":"sust","g":"f","sg":"ración","pl":"raciones","art":["la","las"]},
+"ESP-05451":{"t":"sust","g":"f","sg":null,"pl":"rebajas","art":[null,"las"],"soloPl":true},
+"ESP-05452":{"t":"sust","g":"m","sg":"efectivo","pl":null,"art":["el","los"]},
+"ESP-05453":{"t":"adj","m":"helado","f":"helada","mpl":"helados","fpl":"heladas"}
 };
 
 const FORMAS_ES_SERIES = {
