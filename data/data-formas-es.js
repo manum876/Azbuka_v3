@@ -1,6 +1,6 @@
 /* Abecé — formas de las palabras que cambian (FORMAS_ES).
    Generado por herramientas/abece/formas-es.py: no editar a mano.
-   3714 entradas. t: sust | adj | det | num | art | pron | contr.
+   3722 entradas. t: sust | adj | det | num | art | pron | contr.
    sust: sg, pl, art [sg, pl], g; f/fpl/artF si tiene femenino; elA (el agua);
          inv (pl = sg); soloPl; sentido (el/la cambia el sentido).
    adj/det/num: m, f, mpl, fpl; invG (igual en m y f); apoc (+ apocF: también ante f); var (la otra forma del plural: la de la RAE).
@@ -3719,7 +3719,15 @@ const FORMAS_ES = {
 "ESP-05450":{"t":"sust","g":"f","sg":"ración","pl":"raciones","art":["la","las"]},
 "ESP-05451":{"t":"sust","g":"f","sg":null,"pl":"rebajas","art":[null,"las"],"soloPl":true},
 "ESP-05452":{"t":"sust","g":"m","sg":"efectivo","pl":null,"art":["el","los"]},
-"ESP-05453":{"t":"adj","m":"helado","f":"helada","mpl":"helados","fpl":"heladas"}
+"ESP-05453":{"t":"adj","m":"helado","f":"helada","mpl":"helados","fpl":"heladas"},
+"ESP-05455":{"t":"sust","g":"f","sg":"rotonda","pl":"rotondas","art":["la","las"]},
+"ESP-05456":{"t":"sust","g":"f","sg":"ida y vuelta","pl":null,"art":["la","las"]},
+"ESP-05457":{"t":"sust","g":"f","sg":"tos","pl":"toses","art":["la","las"]},
+"ESP-05458":{"t":"sust","g":"f","sg":null,"pl":"urgencias","art":[null,"las"],"soloPl":true},
+"ESP-05460":{"t":"sust","g":"f","sg":"alergia","pl":"alergias","art":["la","las"]},
+"ESP-05461":{"t":"sust","g":"f","sg":"tirita","pl":"tiritas","art":["la","las"]},
+"ESP-05462":{"t":"adj","m":"plano","f":"plana","mpl":"planos","fpl":"planas"},
+"ESP-05463":{"t":"adj","m":"pasajero","f":"pasajera","mpl":"pasajeros","fpl":"pasajeras"}
 };
 
 const FORMAS_ES_SERIES = {

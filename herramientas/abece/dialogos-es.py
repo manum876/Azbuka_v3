@@ -93,7 +93,10 @@ PERSONAJES = {
     "pablo": {"es": "Pablo", "ru": "Пабло", "genero": "m", "desc": "Брат Лусии, из Мадрида."},
     "marta": {"es": "Marta", "ru": "Марта", "genero": "f", "desc": "Девушка Пабло, из Аргентины."},
     "camarero": {"es": "Camarero", "ru": "Официант", "genero": "m", "desc": "Официант в кафе и в ресторане."},
-    "dependienta": {"es": "Dependienta", "ru": "Продавщица", "genero": "f", "desc": "Продавщица на рынке и в магазине."}
+    "dependienta": {"es": "Dependienta", "ru": "Продавщица", "genero": "f", "desc": "Продавщица на рынке и в магазине."},
+    "senor": {"es": "Señor", "ru": "Прохожий", "genero": "m", "desc": "Человек на улице, у которого Аня спрашивает дорогу."},
+    "empleado": {"es": "Empleado", "ru": "Сотрудник метро", "genero": "m", "desc": "Сотрудник в кассе метро."},
+    "farmaceutica": {"es": "Farmacéutica", "ru": "Фармацевт", "genero": "f", "desc": "Фармацевт в аптеке."}
 }
 
 # Frases: [id, función, es, ru (traducción), registro, uso (ruso)]
@@ -198,7 +201,24 @@ FRASES = [
     ["FRE-094", "comer", "¿Me pone un café con leche?", "Можно мне кофе с молоком?", "usted", "Так заказывают в испанском баре.", 5],
     ["FRE-095", "comer", "Para mí, una ensalada.", "Мне — салат.", "", "**Para mí** — «для меня, мне»: так заказывают в ресторане.", 5],
     ["FRE-096", "comer", "La cuenta, por favor.", "Счёт, пожалуйста.", "", "В Испании счёт приносят, только когда его попросишь.", 5],
-    ["FRE-097", "comer", "¡Qué rico!", "Как вкусно!", "", "**rico** о еде — «вкусный».", 5]
+    ["FRE-097", "comer", "¡Qué rico!", "Как вкусно!", "", "**rico** о еде — «вкусный».", 5],
+    # U6 (05/11/2026)
+    ["FRE-098", "ciudad", "Perdone, ¿dónde está la estación?", "Простите, где вокзал?", "usted", "К незнакомому человеку на улице — **Perdone**, на «вы».", 6],
+    ["FRE-099", "ciudad", "¿Cómo llego a la plaza?", "Как мне пройти на площадь?", "", "**llegar a** — дойти, доехать куда.", 6],
+    ["FRE-100", "ciudad", "Sigue todo recto.", "Иди прямо.", "tú", "Повелительное на «ты»: **sigue**.", 6],
+    ["FRE-101", "ciudad", "Gira a la derecha.", "Поверни направо.", "tú", "**gira** — повелительное от **girar**.", 6],
+    ["FRE-102", "ciudad", "¿Está lejos?", "Это далеко?", "", "Где находится — **está**.", 6],
+    ["FRE-103", "transporte", "¿Cuánto tardas?", "Сколько тебе ехать?", "tú", "**tardar** — сколько времени занимает дорога.", 6],
+    ["FRE-104", "transporte", "Voy en metro.", "Я еду на метро.", "", "Транспорт — **en**, без артикля.", 6],
+    ["FRE-105", "transporte", "Voy a pie.", "Я иду пешком.", "", "Пешком — **a pie**.", 6],
+    ["FRE-106", "transporte", "Un billete de ida y vuelta, por favor.", "Билет туда и обратно, пожалуйста.", "", "В кассе — как в магазине.", 6],
+    ["FRE-107", "planes", "¿Qué vas a hacer el sábado?", "Что ты будешь делать в субботу?", "tú", "Планы — **ir a** + инфинитив.", 6],
+    ["FRE-108", "planes", "¡Vamos a comer!", "Пойдём поедим!", "", "**¡Vamos a…!** — давай(те)…!", 6],
+    ["FRE-109", "salud", "Me duele la cabeza.", "У меня болит голова.", "", "**doler** — как **gustar**: **me duele**.", 6],
+    ["FRE-110", "salud", "Tengo fiebre.", "У меня температура.", "", "Болезни — с **tener**.", 6],
+    ["FRE-111", "salud", "¿Qué te pasa?", "Что с тобой?", "tú", "Так спрашивают, что случилось.", 6],
+    ["FRE-112", "salud", "Quería pedir cita.", "Я бы хотел(а) записаться к врачу.", "", "**pedir cita** — записаться на приём.", 6],
+    ["FRE-113", "salud", "Debes descansar.", "Тебе надо отдохнуть.", "tú", "Совет — **deber** + инфинитив.", 6]
 ]
 
 # Diálogos: [id, título ruso, título español, personajes, [[p, es, ru, obs?, deletreo?], …]]
@@ -421,7 +441,51 @@ DIALOGOS = [
         ["javier", "Seis botellas de agua y zumo. No hay que comprar vino.", "Шесть бутылок воды и сок. Вино покупать не нужно."],
         ["ana", "¿Cuánto dinero tenemos?", "Сколько у нас денег?"],
         ["javier", "Cincuenta euros. Es bastante.", "Пятьдесят евро. Этого достаточно."],
-        ["ana", "Vale. Yo compro la fruta y tú compras el pan.", "Хорошо. Я покупаю фрукты, а ты — хлеб."]], 5, "compras"]
+        ["ana", "Vale. Yo compro la fruta y tú compras el pan.", "Хорошо. Я покупаю фрукты, а ты — хлеб."]], 5, "compras"],
+    # U6 (05/11/2026)
+    ["DLE-025", "Где вокзал?", "¿Dónde está la estación?", ["ana", "senor"], [
+        ["ana", "Perdone, ¿dónde está la estación de tren?", "Простите, где железнодорожный вокзал?", "**Perdone** — к незнакомому, на «вы»."],
+        ["senor", "Está un poco lejos. Sigue todo recto hasta la plaza.", "Немного далеко. Иди прямо до площади.", "**sigue** — повелительное на «ты»."],
+        ["ana", "¿Y después?", "А потом?"],
+        ["senor", "En la plaza, gira a la izquierda y cruza el puente. La estación está a la derecha.", "На площади поверни налево и перейди мост. Вокзал будет справа."],
+        ["ana", "¿Cuánto tardo a pie?", "Сколько мне идти пешком?"],
+        ["senor", "Unos veinte minutos. También puedes coger el autobús catorce.", "Минут двадцать. Можешь ещё сесть на четырнадцатый автобус."],
+        ["ana", "Muchas gracias.", "Большое спасибо."],
+        ["senor", "De nada.", "Не за что."]], 6, "ciudad"],
+    ["DLE-026", "В метро", "Un billete, por favor", ["ana", "empleado"], [
+        ["ana", "Hola. Un billete de ida y vuelta, por favor.", "Здравствуйте. Билет туда и обратно, пожалуйста."],
+        ["empleado", "Son tres euros. ¿Adónde vas?", "Три евро. Куда едешь?"],
+        ["ana", "Voy al aeropuerto. ¿Qué línea tengo que coger?", "Еду в аэропорт. На какую линию мне садиться?"],
+        ["empleado", "Coge la línea uno y cambia a la línea ocho en la próxima estación.", "Садись на первую линию и пересядь на восьмую на следующей станции.", "**cambiar a la línea…** — пересесть на линию…"],
+        ["ana", "¿Cuánto tardo?", "Сколько ехать?"],
+        ["empleado", "Unos cuarenta minutos.", "Минут сорок."],
+        ["ana", "Gracias.", "Спасибо."]], 6, "transporte"],
+    ["DLE-027", "Планы на субботу", "¿Qué vas a hacer?", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿qué vas a hacer el sábado?", "Аня, что ты будешь делать в субботу?"],
+        ["ana", "Nada. ¿Y tú?", "Ничего. А ты?"],
+        ["lucia", "Voy a ir al museo con Pablo. ¿Vienes?", "Я пойду в музей с Пабло. Пойдёшь с нами?", "**voy a ir** — оба глагола могут быть **ir**."],
+        ["ana", "¡Sí! ¿Cómo vamos?", "Да! А как поедем?"],
+        ["lucia", "Vamos a ir en metro. Después vamos a comer en el centro.", "Поедем на метро. А потом пообедаем в центре."],
+        ["ana", "¿A qué hora salimos?", "Во сколько выходим?"],
+        ["lucia", "A las diez. Te llamo mañana.", "В десять. Позвоню тебе завтра."]], 6, "planes"],
+    ["DLE-028", "В аптеке", "En la farmacia", ["farmaceutica", "ana"], [
+        ["farmaceutica", "Buenas tardes. ¿Qué te pasa?", "Добрый день. Что с тобой?"],
+        ["ana", "Me duele mucho la garganta y tengo tos.", "У меня сильно болит горло и кашель.", "**me duele** — как **me gusta**."],
+        ["farmaceutica", "¿Tienes fiebre?", "Температура есть?"],
+        ["ana", "No, fiebre no.", "Нет, температуры нет."],
+        ["farmaceutica", "Toma estas pastillas, una cada ocho horas. Y debes beber mucha agua.", "Принимай эти таблетки, по одной каждые восемь часов. И тебе надо пить много воды.", "Совет — **debes** + инфинитив."],
+        ["ana", "¿Necesito receta?", "Нужен рецепт?"],
+        ["farmaceutica", "No. Son seis euros.", "Нет. Шесть евро."],
+        ["ana", "Aquí tiene. Gracias.", "Вот, пожалуйста. Спасибо."]], 6, "salud"],
+    ["DLE-029", "Записаться к врачу", "Quería pedir cita", ["recepcion", "pablo"], [
+        ["recepcion", "Centro de salud, buenos días.", "Поликлиника, доброе утро."],
+        ["pablo", "Buenos días. Quería pedir cita con el médico.", "Доброе утро. Я бы хотел записаться к врачу."],
+        ["recepcion", "¿Qué le pasa?", "Что у вас?", "**le** — «вам» (урок 7)."],
+        ["pablo", "Me duele la espalda desde el lunes.", "У меня с понедельника болит спина.", "**desde el lunes** — с понедельника."],
+        ["recepcion", "¿Puede venir mañana a las diez?", "Можете прийти завтра в десять?"],
+        ["pablo", "Mañana no puedo: tengo que trabajar. ¿Y el jueves?", "Завтра не могу: мне надо работать. А в четверг?"],
+        ["recepcion", "El jueves a las cinco de la tarde, ¿vale?", "В четверг в пять вечера, хорошо?"],
+        ["pablo", "Muy bien, gracias.", "Хорошо, спасибо."]], 6, "salud"]
 ]
 
 def frasesDe(es):
