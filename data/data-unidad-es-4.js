@@ -18,7 +18,7 @@
    U1–U4): entrega 2.
    ============================================================ */
 
-const ES4_PERS = [["yo", "я"], ["tú", "ты"], ["él / ella / usted", "он / она / вы"], ["nosotros / nosotras", "мы"], ["vosotros / vosotras", "вы (на «ты»)"], ["ellos / ellas / ustedes", "они / вы"]];
+const ES4_PERS = [["yo", "я"], ["tú", "ты"], ["él / ella / usted", "он / она / вы (вежливо, одному)"], ["nosotros / nosotras", "мы"], ["vosotros / vosotras", "вы (неформально, нескольким)"], ["ellos / ellas / ustedes", "они / вы (вежливо, нескольким)"]];
 
 /* Formas del presente y gerundio, leídas de data-verbos-es.js (reflexivos: pronombre + forma de la base) */
 const ES4_SE = ["me", "te", "se", "nos", "os", "se"];
@@ -98,7 +98,7 @@ const UNIDAD_ES_4 = {
         {
           id: "es4-acento-presente",
           titulo: "Ударение и знак ударения",
-          texto: "В формах **yo**, **tú**, **él**, **ellos** ударение падает на основу: **TRA**-ba-jo, **CO**-mes, **VI**-ven. В **nosotros** и **vosotros** — на окончание: tra-ba-**JA**-mos, co-**MÉIS**, vi-**VÍS**. У **vosotros** всегда пишется знак ударения: **trabajáis**, **coméis**, **vivís**.",
+          texto: "В формах **yo**, **tú**, **él**, **ellos** ударение падает на основу: **TRA**-ba-jo, **CO**-mes, **VI**-ven. В **nosotros** и **vosotros** — на окончание: tra-ba-**JA**-mos, co-**MÉIS**, vi-**VÍS**. В настоящем времени правильных глаголов на **-ar**, **-er** и **-ir** у **vosotros** пишется знак ударения: **trabajáis**, **coméis**, **vivís**. (У короткой формы **sois** от **ser** его нет.)",
           errores: [
             { mal: "Vosotros trabajais mucho.", bien: "Vosotros trabajáis mucho.", por: "**-áis**, **-éis**, **-ís** — со знаком ударения." }
           ],
@@ -157,13 +157,13 @@ const UNIDAD_ES_4 = {
           ],
           mas: {
             titulo: "Расписания и 24 часа",
-            texto: "В расписаниях поездов, в кино и на работе часто говорят по 24-часовой системе: **a las quince treinta** (15:30). В разговоре обычно: **a las tres y media de la tarde**. «Утро» — до обеда (примерно до 13–14 часов), **la tarde** — после обеда и до темноты, **la noche** — с темноты."
+            texto: "В расписаниях поездов, в кино и на работе часто говорят по 24-часовой системе: **a las quince treinta** (15:30). В разговоре обычно: **a las tres y media de la tarde**. «Утро» — до обеда (примерно до 13–14 часов), **la tarde** — после полудня и до вечера, **la noche** — вечер и ночь. Точных границ нет."
           }
         },
         {
           id: "es4-temprano-tarde",
           titulo: "Temprano и tarde",
-          texto: "**temprano** — «рано», **tarde** — «поздно»: **El museo abre temprano**, **Trabajo hasta tarde**. Не путай наречие **tarde** («поздно») и существительное **la tarde** («день, вечер»): **Es tarde** — «поздно»; **por la tarde** — «днём, после обеда».",
+          texto: "**temprano** — «рано», **tarde** — «поздно»: **El museo abre temprano**, **Trabajo hasta tarde**. Не путай наречие **tarde** («поздно») и существительное **la tarde** («время после обеда, вечер»): **Es tarde** — «поздно»; **por la tarde** — «во второй половине дня».",
           ejemplos: [
             { es: "Es muy tarde. Son las doce.", ru: "Уже очень поздно. Двенадцать часов." }
           ]
@@ -176,13 +176,13 @@ const UNIDAD_ES_4 = {
       id: "es4m3", n: 3, tipo: "leccion",
       titulo: "Mi rutina",
       resumen: "Me levanto, me ducho: глаголы с «se». Завтрак, обед и ужин.",
-      intro: "Чтобы рассказать о своём дне, нужны глаголы с **se**: **levantarse** («вставать»), **ducharse** («принимать душ»). В словаре у них на конце **-se**, а в предложении это **se** превращается в **me**, **te**, **se**, **nos**, **os**, **se** и встаёт перед глаголом.",
+      intro: "Чтобы рассказать о своём дне, нужны глаголы с **se**: **levantarse** («вставать»), **ducharse** («принимать душ»). В инфинитиве у них на конце **-se**. В личной форме местоимение меняется по лицам — **me**, **te**, **se**, **nos**, **os**, **se** — и стоит перед глаголом.",
       tablas: [{ titulo: "Levantarse — вставать", encabezados: ["Кто", "Форма"], filas: es4Tabla("levantarse") }],
       secciones: [
         {
           id: "es4-reflexivo",
           titulo: "Глаголы с se",
-          texto: "У таких глаголов два изменения: окончание (как у обычного глагола) и местоимение перед ним — **me**, **te**, **se**, **nos**, **os**, **se**. Местоимение показывает, что действие направлено на себя: **Me levanto** — «я встаю», **Te duchas** — «ты принимаешь душ», **Se lava** — «он умывается».",
+          texto: "У таких глаголов два элемента: окончание, которое меняется по лицам (как у обычного глагола), и местоимение перед ним — **me**, **te**, **se**, **nos**, **os**, **se**. У многих глаголов местоимение показывает, что действие направлено на самого себя: **Te duchas** — «ты принимаешь душ», **Se lava** — «он умывается». Но не у всех: **Me levanto** — просто «я встаю».",
           comparacion: "Похоже на русское «-ся»: мыть — мыться, **lavar** — **lavarse**. Но совпадает не всегда: «вставать» по-испански тоже с **se** — **levantarse**.",
           ejemplos: [
             { es: "Me levanto a las siete.", ru: "Я встаю в семь.", por: "**yo** → **me** **levanto**." },
@@ -208,18 +208,18 @@ const UNIDAD_ES_4 = {
         {
           id: "es4-con-sin-se",
           titulo: "Lavar и lavarse",
-          texto: "Многие глаголы бывают и с **se**, и без него. Без **se** действие направлено на кого-то или что-то другое, с **se** — на себя:\n· **Lavo la ropa** — «стираю одежду»; **Me lavo** — «умываюсь»;\n· **Levanto la mano** — «поднимаю руку»; **Me levanto** — «встаю».",
+          texto: "Многие глаголы бывают и с **se**, и без него, и значение при этом меняется. Часто без **se** действие направлено на кого-то или что-то другое, а с **se** — на себя, но не всегда только в этом разница:\n· **Lavo la ropa** — «стираю одежду»; **Me lavo** — «умываюсь»;\n· **Levanto la mano** — «поднимаю руку»; **Me levanto** — «встаю».",
           ejemplos: [
             { es: "Me lavo los dientes.", ru: "Я чищу зубы.", por: "Дословно «мою себе зубы»: «мои» не говорят — **los dientes**." }
           ],
-          ojo: "Части тела и одежду с **se** называют с артиклем, а не с **mi**: **me lavo las manos**, а не «me lavo mis manos»."
+          ojo: "С частями тела и одеждой после глаголов с **se** обычно ставят артикль, а не **mi**: **me lavo las manos**, **me lavo el pelo** (а не «me lavo mis manos»)."
         },
         {
           id: "es4-comidas",
           titulo: "Desayunar, comer, cenar",
           texto: "Три главных приёма пищи и глаголы к ним:\n· **el desayuno** — завтрак, **desayunar** — завтракать;\n· **la comida** — обед (и вообще еда), **comer** — обедать (и вообще есть);\n· **la cena** — ужин, **cenar** — ужинать.\nВ Испании обедают поздно, около 14–15 часов, а ужинают около 21–22.",
           ejemplos: [
-            { es: "Desayuno un café y pan.", ru: "На завтрак я пью кофе и ем хлеб.", por: "**desayunar** + что: «завтракать чем-то»." },
+            { es: "Desayuno café y pan.", ru: "На завтрак я пью кофе и ем хлеб.", por: "**desayunar** + что: «завтракать чем-то»." },
             { es: "Comemos a las dos y media.", ru: "Мы обедаем в полтретьего." }
           ],
           mas: {
@@ -241,7 +241,7 @@ const UNIDAD_ES_4 = {
       vocab: ["levantarse", "ducharse", "lavarse", "afeitarse", "levantar", "lavar", "desayunar", "comer", "cenar", "tomar", "llegar", "terminar", "descansar", "desayuno", "comida", "cena", "diente", "pelo", "ropa", "primero", "después", "luego", "antes"],
       ampliacion: {
         titulo: "Ещё для твоего дня",
-        intro: "Ещё несколько слов для рассказа о дне. Они не входят в проверку урока. **La merienda** — лёгкая еда около шести вечера, это очень по-испански.",
+        intro: "Ещё несколько слов для рассказа о дне. Они не входят в проверку урока. **La merienda** — лёгкий перекус во второй половине дня; в Испании это обычная часть распорядка.",
         vocab: ["peinarse", "maquillarse", "limpiar", "ayudar", "merienda"]
       }
     },
@@ -491,7 +491,7 @@ const UNIDAD_ES_4 = {
           texto: "Вопрос «да или нет» — та же фраза с вопросительной интонацией: **¿Trabajas hoy?** С вопросительным словом подлежащее обычно идёт после глагола: **¿Dónde trabaja tu hermano?**, **¿A qué hora empieza la clase?**, **¿Cuándo vuelves?**, **¿Qué haces los domingos?**",
           ejemplos: [
             { es: "¿Cuándo descansas?", ru: "Когда ты отдыхаешь?" },
-            { es: "¿Qué hace Ana por la tarde?", ru: "Что Аня делает днём?", por: "Сначала глагол, потом **Ana**." }
+            { es: "¿Qué hace Ana por la tarde?", ru: "Что Аня делает во второй половине дня?", por: "Сначала глагол, потом **Ana**." }
           ]
         }
       ],
@@ -502,7 +502,7 @@ const UNIDAD_ES_4 = {
       id: "es4m8", n: 8, tipo: "leccion",
       titulo: "Ahora estoy comiendo",
       resumen: "Estar + gerundio: что происходит прямо сейчас.",
-      intro: "Чтобы сказать, что происходит **прямо сейчас**, испанцы говорят **estar** + форма на **-ando / -iendo** (gerundio): **Estoy comiendo** — «Я сейчас ем». А обычное настоящее время — для того, что бывает всегда или регулярно.",
+      intro: "Чтобы подчеркнуть, что действие идёт **прямо сейчас**, испанцы говорят **estar** + форма на **-ando / -iendo** (gerundio): **Estoy comiendo** — «Я сейчас ем». Простое настоящее тоже может говорить о том, что происходит сейчас (**¿Qué haces? —Como.**), но чаще оно — для того, что бывает всегда или регулярно.",
       tablas: [
         { titulo: "Gerundio", encabezados: ["Инфинитив", "Gerundio"], filas: [
           [{ es: "hablar", ru: "-ar" }, { es: "hablando" }], [{ es: "comer", ru: "-er" }, { es: "comiendo" }], [{ es: "vivir", ru: "-ir" }, { es: "viviendo" }],
@@ -513,7 +513,7 @@ const UNIDAD_ES_4 = {
         {
           id: "es4-gerundio-formas",
           titulo: "Как образовать gerundio",
-          texto: "У **-ar** — **-ando**: habl**ando**, trabaj**ando**. У **-er** и **-ir** — **-iendo**: com**iendo**, viv**iendo**.\nОсобые случаи: после гласной **-iendo** превращается в **-yendo** (**leer** → **leyendo**); у **dormir** — **durmiendo**; у **pedir**, **repetir**, **vestirse** — **i**: **pidiendo**, **repitiendo**.",
+          texto: "У **-ar** — **-ando**: habl**ando**, trabaj**ando**. У **-er** и **-ir** — **-iendo**: com**iendo**, viv**iendo**.\nОсобые случаи: если основа глагола кончается на гласную, пишется **-yendo** (**leer** → **leyendo**); у **dormir** — **durmiendo**; у **pedir**, **repetir**, **vestirse** — **i**: **pidiendo**, **repitiendo**.",
           chequeo: [
             { pide: "escribir → ?", opciones: ["escribiendo", "escribando", "escribendo"], ok: "escribiendo", por: "**-ir** → **-iendo**." }
           ]
@@ -535,7 +535,7 @@ const UNIDAD_ES_4 = {
         {
           id: "es4-ahora-siempre",
           titulo: "Сейчас или обычно",
-          texto: "· Обычно, всегда, регулярно — простое настоящее: **Trabajo en un banco**, **Todos los días como a las dos**.\n· Прямо сейчас — **estar** + gerundio: **Ahora estoy comiendo**.\nПодсказки: **ahora** → estar + gerundio; **siempre**, **normalmente**, **todos los días**, **los lunes** → простое настоящее.",
+          texto: "· Привычки и то, что бывает регулярно, — простое настоящее: **Trabajo en un banco**, **Todos los días como a las dos**.\n· Действие в процессе, когда это хочется подчеркнуть, — **estar** + gerundio: **Ahora estoy comiendo**.\nПодсказки: **siempre**, **normalmente**, **todos los días**, **los lunes** обычно ведут к простому настоящему; **ahora** часто идёт с **estar** + gerundio.",
           comparacion: "По-русски и «я ем в два часа», и «я сейчас ем» — одна форма. В испанском для «прямо сейчас» обычно берут **estar** + gerundio.",
           chequeo: [
             { pide: "«Сейчас Пабло читает»", opciones: ["Ahora Pablo está leyendo.", "Ahora Pablo es leyendo.", "Ahora Pablo está lee."], ok: "Ahora Pablo está leyendo.", por: "**estar** + gerundio: **está leyendo**." }
@@ -596,7 +596,7 @@ const UNIDAD_ES_4 = {
         {
           id: "es4-te-gusta",
           titulo: "¿Te gusta? Me encanta",
-          texto: "Ответить на **¿Te gusta…?** можно так: **Sí, mucho** — «да, очень»; **Sí, me encanta** — «очень нравится, обожаю»; **No mucho** — «не очень»; **No, no me gusta nada** — «совсем не нравится».\n**encantar** устроен так же, как **gustar**: **me encanta**, **me encantan**. Он уже значит «очень», поэтому **mucho** к нему не добавляют.",
+          texto: "Ответить на **¿Te gusta…?** можно так: **Sí, mucho** — «да, очень»; **Sí, me encanta** — «очень нравится, обожаю»; **No mucho** — «не очень»; **No, no me gusta nada** — «совсем не нравится».\n**encantar** устроен так же, как **gustar**: **me encanta**, **me encantan**. Он уже значит «очень», поэтому **mucho** к нему обычно не добавляют.",
           ejemplos: [
             { es: "—¿Te gusta nadar? —¡Me encanta!", ru: "— Тебе нравится плавать? — Обожаю!" },
             { es: "No me gusta nada la lluvia.", ru: "Мне совсем не нравится дождь." }
@@ -623,7 +623,7 @@ const UNIDAD_ES_4 = {
       id: "es4m11", n: 11, tipo: "proyecto",
       titulo: "Проект",
       resumen: "«Mi día»: твой обычный день.",
-      intro: "Напиши по-испански (8–12 фраз) свой обычный день: во сколько ты встаёшь, что делаешь утром, днём и вечером, что делаешь всегда, иногда и никогда, что тебе нравится. В конце сравни свой день с днём другого человека (друга, мамы, брата): **Yo me levanto a las siete, pero mi hermano se levanta a las nueve.** Приложение отмечает, какие пункты ты уже включил в текст. Потом можно записать, как ты его читаешь.",
+      intro: "Напиши по-испански (8–12 фраз) свой обычный день: во сколько ты встаёшь, что делаешь утром, днём и вечером, что делаешь всегда, иногда и никогда, что тебе нравится. В конце сравни свой день с днём другого человека (друга, мамы, брата): **Yo me levanto a las siete, pero mi hermano se levanta a las nueve.** Приложение отмечает, какие пункты уже есть в твоём тексте. Потом можно записать, как ты его читаешь.",
       requisitos: [
         { txt: "Время (a las siete, es la una…)", rx: "(\\ba las [a-z]+|\\ba la una\\b|\\bes la una\\b|\\bson las\\b)" },
         { txt: "Распорядок с местоимением (me levanto, me ducho…)", rx: "\\b(me|te|se|nos|os) (levanto|levantas|levanta|ducho|duchas|ducha|acuesto|acuestas|acuesta|despierto|despiertas|despierta|visto|vistes|viste|lavo|lavas|lava|levantamos|duchamos|acostamos)\\b" },

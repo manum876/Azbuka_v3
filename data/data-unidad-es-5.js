@@ -1,5 +1,5 @@
 /* ============================================================
-   DATA-UNIDAD-ES-5.JS — Abecé · Урок 5: Еда, покупки и что мне нужно
+   DATA-UNIDAD-ES-5.JS — Abecé · Урок 5: Еда и покупки
    (Comer, comprar y resolver necesidades). Completa (05/11/2026).
    ------------------------------------------------------------
    Contenido propio de la unidad (claude/PROGRAMA_ABECE.md §2, U5;
@@ -14,7 +14,7 @@
    por intención —azSituacionEs, js/corrector-es.js— y evaluación).
    ============================================================ */
 
-const ES5_PERS = [["yo", "я"], ["tú", "ты"], ["él / ella / usted", "он / она / вы"], ["nosotros / nosotras", "мы"], ["vosotros / vosotras", "вы (на «ты»)"], ["ellos / ellas / ustedes", "они / вы"]];
+const ES5_PERS = [["yo", "я"], ["tú", "ты"], ["él / ella / usted", "он / она / вы (вежливо, одному)"], ["nosotros / nosotras", "мы"], ["vosotros / vosotras", "вы (неформально, нескольким)"], ["ellos / ellas / ustedes", "они / вы (вежливо, нескольким)"]];
 const ES5_SE = ["me", "te", "se", "nos", "os", "se"];
 function es5Verbo(inf) {
   if (typeof LEXICON_ES === "undefined" || typeof VERBOS_ES === "undefined") return null;
@@ -45,7 +45,7 @@ function es5Num(n) {
 
 const UNIDAD_ES_5 = {
   id: 5,
-  titulo: "Еда, покупки и что мне нужно",
+  titulo: "Еда и покупки",
   tituloEs: "Comer, comprar y resolver necesidades",
   objetivo: "Купить продукты и одежду, спросить цену, заказать в баре и в ресторане, сказать, что тебе нужно, что ты хочешь и что ты должен сделать.",
   tiempo: "3–4 недели ежедневной практики (примерно 20–25 часов)",
@@ -54,7 +54,7 @@ const UNIDAD_ES_5 = {
       id: "es5m1", n: 1, tipo: "leccion",
       titulo: "Quiero, necesito, prefiero",
       resumen: "querer, poder, preferir, necesitar + существительное или инфинитив.",
-      intro: "С этими четырьмя глаголами можно попросить почти что угодно: **quiero** — «хочу», **puedo** — «могу», **prefiero** — «предпочитаю», **necesito** — «мне нужно». Три из них меняют корень, как глаголы-«сапожки» из урока 4.",
+      intro: "С помощью этих четырёх глаголов можно выразить самые разные желания и потребности: **quiero** — «хочу», **puedo** — «могу», **prefiero** — «предпочитаю», **necesito** — «мне нужно». Три из них меняют корень, как глаголы-«сапожки» из урока 4.",
       tablas: [
         { titulo: "Querer (e → ie)", encabezados: ["Кто", "Форма"], filas: es5Tabla("querer") },
         { titulo: "Poder (o → ue)", encabezados: ["Кто", "Форма"], filas: es5Tabla("poder") },
@@ -85,11 +85,21 @@ const UNIDAD_ES_5 = {
           ],
           chequeo: [
             { pide: "¿___ repetir, por favor? (tú)", opciones: ["Puedes", "Podes", "Puedas"], ok: "Puedes", por: "**tú** → **puedes**: o → ue." }
+          ] 
+        },
+        {
+          id: "es5-saber",
+          titulo: "Poder и saber",
+          texto: "По-русски «могу» и «умею» — разные слова, и в испанском тоже. **saber** + инфинитив — «уметь»: владеть навыком, знать, как это делается: **Sé nadar** — «Я умею плавать». **poder** + инфинитив — «мочь»: есть возможность, ничто не мешает, или можно (разрешение): **Hoy no puedo nadar** — «Сегодня я не могу плавать».\nУ **saber** неправильная только форма **yo**: **sé**, **sabes**, **sabe**, **sabemos**, **sabéis**, **saben**.",
+          comparacion: "«Умею» — **sé**, «могу» — **puedo**: **Sé nadar, pero hoy no puedo** — «Плавать я умею, но сегодня не могу».",
+          ojo: "Не «sabo», а **sé** — со знаком ударения. Без него **se** — местоимение (**se levanta**).",
+          ejemplos: [
+            { es: "Sé nadar, pero hoy no puedo.", ru: "Плавать я умею, но сегодня не могу." },
+            { es: "¿Sabes cocinar?", ru: "Ты умеешь готовить?" }
           ],
-          mas: {
-            titulo: "Poder и saber",
-            texto: "«Я умею плавать» по-испански говорят другим глаголом — ты выучишь его позже. **Puedo nadar** — «могу плавать сейчас, мне ничто не мешает». Пока запомни: **puedo** — можно, есть возможность."
-          }
+          chequeo: [
+            { pide: "Mi hijo tiene cinco años y ya ___ nadar.", opciones: ["sabe", "puede", "sabo"], ok: "sabe", por: "Навык — **saber**: **sabe nadar**." }
+          ]
         },
         {
           id: "es5-preferir",
@@ -103,7 +113,7 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-necesitar",
           titulo: "Necesito…",
-          texto: "**necesitar** — «нуждаться», а по смыслу — русское «мне нужно». Это правильный глагол на **-ar**: necesito, necesitas, necesita, necesitamos, necesitáis, necesitan.\nВ испанском тот, кому нужно, — подлежащее: **Necesito una mesa** — «Мне нужен стол» (буквально «я нуждаюсь в столе»).",
+          texto: "**necesitar** — «нуждаться (в чём-то)», а по смыслу — русское «мне нужно». Это правильный глагол на **-ar**: necesito, necesitas, necesita, necesitamos, necesitáis, necesitan.\nВ испанском тот, кому нужно, — подлежащее: **Necesito una mesa** — «Мне нужен стол» (буквально «я нуждаюсь в столе»).",
           comparacion: "Русское «мне нужно» строится с дательным падежом, а испанское **necesito** — как «я хочу»: **yo** + глагол.",
           ejemplos: [
             { es: "Necesito una mesa nueva.", ru: "Мне нужен новый стол." },
@@ -125,7 +135,7 @@ const UNIDAD_ES_5 = {
         }
       ],
       frases: ["FRE-081"],
-      vocab: ["querer", "poder", "preferir", "necesitar"]
+      vocab: ["querer", "poder", "saber", "preferir", "necesitar"]
     },
     {
       id: "es5m2", n: 2, tipo: "leccion",
@@ -159,8 +169,8 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-hay-que",
           titulo: "Hay que pagar",
-          texto: "**hay que** + инфинитив — «надо» **вообще, всем**: правило, совет, без конкретного человека. **Hay que estudiar todos los días** — «Надо заниматься каждый день». **hay** не меняется.",
-          destacado: "**tengo que** — надо **мне**; **hay que** — надо **всем, вообще**.",
+          texto: "**hay que** + инфинитив — безличное «надо, нужно»: так говорят, когда не называют, кто именно должен это сделать (правило, совет). **Hay que estudiar todos los días** — «Нужно заниматься каждый день». **hay** не меняется.",
+          destacado: "**tengo que** — надо **мне** (понятно, кому); **hay que** — надо, **без указания, кому**.",
           ejemplos: [
             { es: "En clase hay que hablar español.", ru: "На уроке надо говорить по-испански." },
             { es: "No hay que llegar temprano.", ru: "Приходить рано не нужно." }
@@ -188,7 +198,7 @@ const UNIDAD_ES_5 = {
       resumen: "Еда и напитки. Quiero agua — без артикля; el agua está fría — с артиклем.",
       intro: "Здесь — слова для рынка, магазина и кафе. И главный вопрос урока: когда говорить **quiero agua**, без артикля, а когда **el agua**, с артиклем.",
       tablas: [
-        { titulo: "Fruta y verdura", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "Fruta y verdura", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "la fruta", ru: "фрукты" }, { es: "la verdura", ru: "овощи" }],
           [{ es: "la manzana", ru: "яблоко" }, { es: "el tomate", ru: "помидор" }],
           [{ es: "la pera", ru: "груша" }, { es: "la patata", ru: "картофель" }],
@@ -197,7 +207,7 @@ const UNIDAD_ES_5 = {
           [{ es: "la uva", ru: "виноград" }, { es: "el ajo", ru: "чеснок" }],
           [{ es: "la fresa", ru: "клубника" }, { es: "el limón", ru: "лимон" }],
           [{ es: "la sandía", ru: "арбуз" }, { es: "", ru: "" }]] },
-        { titulo: "Carne, pescado y más", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "Carne, pescado y más", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "la carne", ru: "мясо" }, { es: "la pasta", ru: "макароны" }],
           [{ es: "el pollo", ru: "курица" }, { es: "la ensalada", ru: "салат" }],
           [{ es: "el pescado", ru: "рыба (еда)" }, { es: "la tortilla", ru: "тортилья, омлет" }],
@@ -205,7 +215,7 @@ const UNIDAD_ES_5 = {
           [{ es: "el huevo", ru: "яйцо" }, { es: "el aceite", ru: "растительное масло" }],
           [{ es: "la mantequilla", ru: "сливочное масло" }, { es: "la sal", ru: "соль" }],
           [{ es: "el yogur", ru: "йогурт" }, { es: "el azúcar", ru: "сахар" }]] },
-        { titulo: "Lo dulce y las bebidas", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "Lo dulce y las bebidas", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "el chocolate", ru: "шоколад" }, { es: "la bebida", ru: "напиток" }],
           [{ es: "la galleta", ru: "печенье" }, { es: "el zumo", ru: "сок" }],
           [{ es: "la tarta", ru: "торт" }, { es: "el refresco", ru: "газировка" }],
@@ -215,7 +225,7 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-incontable",
           titulo: "Quiero agua — без артикля",
-          texto: "Когда говорят о веществе вообще или о неопределённом количестве («воды», «мяса»), артикль **не нужен**: **Quiero agua**, **No como carne**, **¿Hay pan?**\nТо, что можно сосчитать, по одной штуке — с **un / una**: **una manzana**, **un huevo**. Много штук вообще — во мн. ч. без артикля: **Quiero manzanas**.",
+          texto: "Когда говорят о веществе вообще или о неопределённом количестве («воды», «мяса»), артикль обычно **не нужен**: **Quiero agua**, **No como carne**, **¿Hay pan?** А о конкретной воде, которую уже знают, — с артиклем: **el agua** (вот эта).\nТо, что можно сосчитать, по одной штуке — с **un / una**: **una manzana**, **un huevo**. Много штук вообще — во мн. ч. без артикля: **Quiero manzanas**.",
           comparacion: "Русское «хочу воды», «нет хлеба» — та же идея: какое-то количество, а не конкретная вода.",
           ejemplos: [
             { es: "Quiero agua, por favor.", ru: "Дайте воды, пожалуйста." },
@@ -223,7 +233,7 @@ const UNIDAD_ES_5 = {
             { es: "Quiero una manzana y dos peras.", ru: "Я хочу одно яблоко и две груши." }
           ],
           errores: [
-            { mal: "Quiero el agua.", bien: "Quiero agua.", por: "Просто «воды», любой — без артикля." }
+            { mal: "Quiero el agua. (просто «хочу воды»)", bien: "Quiero agua.", por: "Просто «воды», любой — без артикля. **Quiero el agua** — «хочу ту воду», о конкретной." }
           ],
           chequeo: [
             { pide: "¿Hay ___ pan en casa?", opciones: ["—", "el", "los"], ok: "—", por: "**¿Hay pan?** — без артикля: есть ли хлеб вообще." }
@@ -249,7 +259,7 @@ const UNIDAD_ES_5 = {
           ejemplos: [
             { es: "El agua está fría.", ru: "Вода холодная.", por: "**el**, но **fría** — ж. р." }
           ],
-          ojo: "Запоминай существительные сразу с артиклем: **la leche**, **el azúcar**, **la sal**. Так род не потеряется."
+          ojo: "Запоминай существительные сразу с артиклем: **la leche**, **el azúcar**, **la sal**. Так род не потеряется. (**azúcar** бывает и женского рода, но **el azúcar** — обычнее.)"
         }
       ],
       vocab: ["fruta", "manzana", "pera", "naranja", "plátano", "uva", "fresa", "sandía", "limón", "verdura", "tomate", "patata", "lechuga", "cebolla", "ajo",
@@ -272,7 +282,7 @@ const UNIDAD_ES_5 = {
           [{ es: "muchos tomates", ru: "много помидоров" }, { es: "muchas manzanas", ru: "много яблок" }],
           [{ es: "poco dinero", ru: "мало денег" }, { es: "poca fruta", ru: "мало фруктов" }],
           [{ es: "demasiado chocolate", ru: "слишком много шоколада" }, { es: "demasiadas cosas", ru: "слишком много вещей" }]] },
-        { titulo: "¿Cuánto? Un kilo de…", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "¿Cuánto? Un kilo de…", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "un kilo de naranjas", ru: "килограмм апельсинов" }, { es: "una botella de agua", ru: "бутылка воды" }],
           [{ es: "medio kilo de fresas", ru: "полкило клубники" }, { es: "un litro de leche", ru: "литр молока" }],
           [{ es: "cien gramos de jamón", ru: "сто граммов хамона" }, { es: "una lata de tomate", ru: "банка томатов" }],
@@ -307,7 +317,7 @@ const UNIDAD_ES_5 = {
           ],
           mas: {
             titulo: "Un poco и poco",
-            texto: "**un poco** — «немного» (это хорошо, хватает): **Hablo un poco de español**. **poco** — «мало» (это не хватает): **Hablo poco** — «я мало говорю». С существительным — **un poco de**: **un poco de agua** — «немного воды»."
+            texto: "**un poco** — «немного»: **Hablo un poco de español** — «Я немного говорю по-испански». **poco** — «мало, недостаточно»: **Hablo poco** — «Я мало говорю». С существительным — **un poco de**: **un poco de agua** — «немного воды»."
           }
         },
         {
@@ -322,7 +332,7 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-cantidades",
           titulo: "Un kilo de naranjas",
-          texto: "После слова количества всегда стоит **de**, а артикля нет: **un kilo de naranjas**, **una botella de agua**, **un trozo de tarta**.\n«Пол» — **medio** (урок 4): **medio kilo de fresas**. «Сто граммов» — **cien gramos**.",
+          texto: "После слова количества ставят **de**, а артикля обычно нет: **un kilo de naranjas**, **una botella de agua**, **un trozo de tarta**.\n«Пол» — **medio** (урок 4): **medio kilo de fresas**. «Сто граммов» — **cien gramos**.",
           comparacion: "Где в русском родительный падеж («бутылка воды»), в испанском — **de**: **una botella de agua**.",
           errores: [
             { mal: "Un kilo naranjas.", bien: "Un kilo de naranjas.", por: "Без **de** нельзя." },
@@ -342,18 +352,18 @@ const UNIDAD_ES_5 = {
       resumen: "Числа от 100 до 1 000 000, цены в евро, cuesta и cuestan.",
       intro: "Цены, адреса, годы: нужны большие числа. Их немного, и они собираются из того, что ты уже знаешь: **doscientos cincuenta**, **mil doscientos**. А цена — это **euros con céntimos**: **tres euros con cincuenta**.",
       tablas: [
-        { titulo: "Сотни", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "Сотни", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "cien", ru: "100" }, { es: "ciento veinte", ru: "120" }],
           [{ es: "doscientos, doscientas", ru: "200" }, { es: "trescientos, trescientas", ru: "300" }],
           [{ es: "cuatrocientos", ru: "400" }, { es: "quinientos", ru: "500 (не «cincocientos»)" }],
           [{ es: "seiscientos", ru: "600" }, { es: "setecientos", ru: "700 (не «sietecientos»)" }],
           [{ es: "ochocientos", ru: "800" }, { es: "novecientos", ru: "900 (не «nuevecientos»)" }]] },
-        { titulo: "Тысячи и миллион", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "Тысячи и миллион", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "mil", ru: "1.000 (без «un»)" }, { es: "dos mil", ru: "2.000" }],
           [{ es: "dos mil veintiséis", ru: "2.026" }, { es: "diez mil", ru: "10.000" }],
           [{ es: "cien mil", ru: "100.000" }, { es: "un millón", ru: "1.000.000" }],
           [{ es: "dos millones", ru: "2.000.000" }, { es: "un millón de personas", ru: "миллион человек" }]] },
-        { titulo: "Цены", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "Цены", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "un euro", ru: "1 €" }, { es: "un euro con veinte", ru: "1,20 €" }],
           [{ es: "tres euros con cincuenta", ru: "3,50 € (или: tres cincuenta)" }, { es: "ochenta céntimos", ru: "0,80 €" }],
           [{ es: "doscientos cincuenta euros", ru: "250 €" }, { es: "veintiún euros", ru: "21 €" }]] }
@@ -386,7 +396,7 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-mil-millon",
           titulo: "Mil, un millón",
-          texto: "1000 — **mil**, без «un»; **mil** не меняется: **dos mil**, **diez mil**. Годы читают так же: **dos mil veintiséis** (2026).\nМиллион — существительное: **un millón**, **dos millones**, а с существительным — через **de**: **un millón de personas**.\nНа письме испанцы отделяют тысячи точкой, а дробную часть — запятой: **1.500** — «тысяча пятьсот», **3,50 €** — «три евро пятьдесят».",
+          texto: "1000 — **mil**, без «un»; **mil** не меняется: **dos mil**, **diez mil**. Годы читают так же: **dos mil veintiséis** (2026).\nМиллион — существительное: **un millón**, **dos millones**, а с существительным — через **de**: **un millón de personas**.\nВ Испании в ценах и числах тысячи обычно отделяют точкой, а дробную часть — запятой: **1.500** — «тысяча пятьсот», **3,50 €** — «три евро пятьдесят».",
           errores: [
             { mal: "Un mil euros.", bien: "Mil euros.", por: "**mil** — без **un**." },
             { mal: "Un millón personas.", bien: "Un millón de personas.", por: "После **millón** — **de**." }
@@ -413,7 +423,7 @@ const UNIDAD_ES_5 = {
     {
       id: "es5m6", n: 6, tipo: "leccion",
       titulo: "En la tienda y el mercado",
-      resumen: "Магазины, ¿Me pone…?, Quería…, ¿Algo más?, платить наличными или картой.",
+      resumen: "Магазины, ¿Me pones…?, Quería…, ¿Algo más?, платить наличными или картой.",
       intro: "В Испании продукты часто покупают на рынке и в маленьких магазинах: в булочной, мясной, фруктовой лавке. Разговор там почти всегда один и тот же. Выучи несколько формул — и ты сможешь купить что угодно.",
       tablas: [
         { titulo: "Tiendas", encabezados: ["Магазин", "Что там продают"], filas: [
@@ -424,8 +434,8 @@ const UNIDAD_ES_5 = {
           [{ es: "el supermercado", ru: "супермаркет" }, { es: "de todo", ru: "всё" }],
           [{ es: "el centro comercial", ru: "торговый центр" }, { es: "muchas tiendas", ru: "много магазинов" }]] },
         { titulo: "Формулы", encabezados: ["Покупатель", "Продавец"], filas: [
-          [{ es: "¿Me pone un kilo de…?", ru: "Дайте мне килограмм…" }, { es: "¿Qué le pongo?", ru: "Что вам дать?" }],
-          [{ es: "Quería…", ru: "Я бы хотел(а)…" }, { es: "Aquí tiene.", ru: "Вот, пожалуйста." }],
+          [{ es: "¿Me pones un kilo de…?", ru: "Можно мне килограмм…?" }, { es: "¿Qué te pongo?", ru: "Что тебе дать?" }],
+          [{ es: "Quería…", ru: "Я бы хотел(а)…" }, { es: "Aquí tienes.", ru: "Вот, пожалуйста." }],
           [{ es: "¿Cuánto cuesta?", ru: "Сколько стоит?" }, { es: "¿Algo más?", ru: "Что-нибудь ещё?" }],
           [{ es: "Nada más, gracias.", ru: "Больше ничего, спасибо." }, { es: "Son tres euros.", ru: "С вас три евро." }],
           [{ es: "¿Cuánto es?", ru: "Сколько с меня?" }, { es: "¿Efectivo o tarjeta?", ru: "Наличными или картой?" }]] }
@@ -433,11 +443,11 @@ const UNIDAD_ES_5 = {
       secciones: [
         {
           id: "es5-me-pone",
-          titulo: "¿Me pone…?",
-          texto: "Самая испанская просьба в магазине и в баре — **¿Me pone…?** (буквально «вы мне поставите…?», от **poner**): **¿Me pone un kilo de naranjas?** К продавцу обращаются на **usted**, поэтому **pone**. С другом — **¿Me pones…?**\nПродавец спрашивает **¿Qué le pongo?** — «Что вам дать?». **le** — «вам», это урок 7; пока просто узнавай фразу.",
+          titulo: "¿Me pones…?",
+          texto: "Одна из самых обычных просьб в магазине и в баре — **¿Me pones…?** (буквально «ты мне поставишь…?», от **poner**): **¿Me pones un kilo de naranjas?**\nВ Испании в магазинах, на рынке, в барах и в кафе обычно сразу говорят на **tú** — и продавец, и покупатель. Это не грубость, а норма. С пожилым человеком или в более официальном месте ты услышишь и **usted**: **¿Me pone…?**\nПродавец спрашивает **¿Qué te pongo?** — «Что тебе дать?». **te** здесь — «тебе», это урок 7; пока просто узнавай фразу.",
           ejemplos: [
-            { es: "¿Me pone medio kilo de fresas?", ru: "Дайте мне полкило клубники." },
-            { es: "¿Me pone una barra de pan?", ru: "Дайте мне батон хлеба." }
+            { es: "¿Me pones medio kilo de fresas?", ru: "Можно мне полкило клубники?" },
+            { es: "¿Me pones una barra de pan?", ru: "Можно мне батон хлеба?" }
           ]
         },
         {
@@ -452,8 +462,8 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-algo-mas",
           titulo: "¿Algo más? — Nada más, gracias",
-          texto: "Обычный разговор в магазине:\n· продавец: **¿Qué le pongo?**\n· ты: **¿Me pone…?** или **Quería…**\n· продавец: **Aquí tiene. ¿Algo más?**\n· ты: **Sí, …** или **Nada más, gracias. ¿Cuánto es?**\n· продавец: **Son… euros.**",
-          comparacion: "**Aquí tiene** — «вот, пожалуйста», когда что-то даёшь. Его говорят и продавец, и покупатель, когда даёт деньги."
+          texto: "Обычный разговор в магазине:\n· продавец: **¿Qué te pongo?**\n· ты: **¿Me pones…?** или **Quería…**\n· продавец: **Aquí tienes. ¿Algo más?**\n· ты: **Sí, …** или **Nada más, gracias. ¿Cuánto es?**\n· продавец: **Son… euros.**",
+          comparacion: "**Aquí tienes** — «вот, пожалуйста», когда что-то даёшь: продавец — покупку, покупатель — деньги."
         },
         {
           id: "es5-pagar",
@@ -477,7 +487,7 @@ const UNIDAD_ES_5 = {
       resumen: "Одежда, цвета, размеры; llevar, probarse, el probador.",
       intro: "Одежда — ещё одна большая покупка. Нужны названия вещей, цвета из урока 3, размер и пара глаголов: **llevar** (носить) и **probarse** (примерять).",
       tablas: [
-        { titulo: "La ropa", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "La ropa", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "la camisa", ru: "рубашка" }, { es: "el abrigo", ru: "пальто" }],
           [{ es: "la camiseta", ru: "футболка" }, { es: "el jersey", ru: "свитер" }],
           [{ es: "el pantalón / los pantalones", ru: "брюки" }, { es: "la bufanda", ru: "шарф" }],
@@ -486,8 +496,8 @@ const UNIDAD_ES_5 = {
           [{ es: "la chaqueta", ru: "куртка, пиджак" }, { es: "el zapato", ru: "туфля, ботинок" }],
           [{ es: "la bota", ru: "сапог" }, { es: "la zapatilla", ru: "кроссовка; тапочка" }]] },
         { titulo: "Tallas y números", encabezados: ["Вопрос", "Ответ"], filas: [
-          [{ es: "¿Qué talla tiene?", ru: "Какой у вас размер (одежды)?" }, { es: "La M. / La 38.", ru: "M. / 38-й." }],
-          [{ es: "¿Qué número tiene?", ru: "Какой у вас размер обуви?" }, { es: "El 40.", ru: "40-й." }],
+          [{ es: "¿Qué talla tienes?", ru: "Какой у тебя размер (одежды)?" }, { es: "La M. / La 38.", ru: "M. / 38-й." }],
+          [{ es: "¿Qué número tienes?", ru: "Какой у тебя размер обуви?" }, { es: "El 40.", ru: "40-й." }],
           [{ es: "pequeña, mediana, grande", ru: "S, M, L" }, { es: "¿Tiene una talla más grande?", ru: "У вас есть размер побольше?" }]] }
       ],
       secciones: [
@@ -505,20 +515,20 @@ const UNIDAD_ES_5 = {
         },
         {
           id: "es5-talla",
-          titulo: "¿Qué talla tiene?",
-          texto: "Размер одежды — **la talla**: **la S, la M, la L** или числом: **la 38**. Размер обуви — **el número**: **el 40**.\nК продавцу и от продавца — на **usted**: **¿Qué talla tiene?** Другу — **¿Qué talla tienes?**\nИскать — **buscar**: **Busco un jersey**. Если мало: **¿Tiene una talla más grande?**",
+          titulo: "¿Qué talla tienes?",
+          texto: "Размер одежды — **la talla**: **la S, la M, la L** или числом: **la 38**. Размер обуви — **el número**: **el 40**.\nВ магазине обычно на **tú**: **¿Qué talla tienes?** (на **usted** — **¿Qué talla tiene?**).\nИскать — **buscar**: **Busco un jersey**. Если мало: **¿Tienes una talla más grande?**",
           ejemplos: [
-            { es: "—¿Qué número tiene? —El 39.", ru: "— Какой у вас размер обуви? — 39-й." },
+            { es: "—¿Qué número tienes? —El 39.", ru: "— Какой у тебя размер обуви? — 39-й." },
             { es: "Es un poco pequeña. ¿Tiene una talla más grande?", ru: "Немного маловата. У вас есть размер побольше?" }
           ],
           errores: [
-            { mal: "¿Qué número tiene de camiseta?", bien: "¿Qué talla tiene?", por: "Одежда — **talla**, обувь — **número**." }
+            { mal: "¿Qué número tienes de camiseta?", bien: "¿Qué talla tienes?", por: "Одежда — **talla**, обувь — **número**." }
           ]
         },
         {
           id: "es5-probarse",
           titulo: "Probarse: ¿puedo probarme…?",
-          texto: "«Примерять» — **probarse**, с местоимением, как глаголы из урока 4: **me pruebo**, **te pruebas**, **se prueba**… Корень меняется o → ue.\nПосле **poder**, **querer** местоимение прирастает к инфинитиву: **¿Puedo probarme esta camisa?** Примерочная — **el probador**.\nБез **se** — **probar**, «пробовать» еду: **Quiero probar la tortilla**.",
+          texto: "«Примерять» — **probarse**, с местоимением, как глаголы из урока 4: **me pruebo**, **te pruebas**, **se prueba**… Корень меняется o → ue.\nПосле **poder**, **querer** местоимение можно поставить в двух местах: приклеить к инфинитиву (**¿Puedo probarme esta camisa?**) или поставить перед **poder** (**¿Me puedo probar esta camisa?**). Оба варианта правильные. Примерочная — **el probador**.\nБез **se** — **probar**, «пробовать» еду: **Quiero probar la tortilla**.",
           comparacion: "Как «примерять» и «пробовать» в русском — два разных слова: **probarse** и **probar**.",
           ejemplos: [
             { es: "¿Puedo probarme esta camisa?", ru: "Можно примерить эту рубашку?" },
@@ -534,7 +544,7 @@ const UNIDAD_ES_5 = {
         "llevar", "buscar", "probar", "probarse", "probador"],
       ampliacion: {
         titulo: "Ещё о покупках",
-        intro: "Ещё два слова для магазина. Они не входят в проверку урока. **Las rebajas** — большие распродажи в январе и в июле, их ждёт вся Испания.",
+        intro: "Ещё два слова для магазина. Они не входят в проверку урока. **Las rebajas** — сезон распродаж. В Испании большие распродажи обычно бывают зимой и летом, хотя даты зависят от магазина.",
         vocab: ["rebajas", "vendedor"]
       }
     },
@@ -542,14 +552,14 @@ const UNIDAD_ES_5 = {
       id: "es5m8", n: 8, tipo: "leccion",
       titulo: "¿La camiseta? La compro",
       resumen: "lo, la, los, las вместо уже названной вещи.",
-      intro: "По-русски можно ответить без дополнения: «— Купишь футболку? — Куплю». По-испански так нельзя: вещь, о которой уже говорили, заменяют местоимением **lo, la, los, las**: **—¿Compras la camiseta? —Sí, la compro.**",
+      intro: "По-русски можно ответить без дополнения: «— Купишь футболку? — Куплю». В испанском конкретную вещь, которую уже назвали, обычно заменяют местоимением **lo, la, los, las**: **—¿Compras la camiseta? —Sí, la compro.**",
       tablas: [
         { titulo: "Lo, la, los, las", encabezados: ["Вещь", "Местоимение"], filas: [
           [{ es: "el pan", ru: "м. р., ед. ч." }, { es: "Lo compro.", ru: "Я его покупаю." }],
           [{ es: "la leche", ru: "ж. р., ед. ч." }, { es: "La compro.", ru: "Я его покупаю." }],
           [{ es: "los zapatos", ru: "м. р., мн. ч." }, { es: "Los compro.", ru: "Я их покупаю." }],
-          [{ es: "las fresas", ru: "ж. р., мн. ч." }, { es: "Las compro.", ru: "Я её покупаю." }]] },
-        { titulo: "Где стоит", encabezados: ["Испанский", "Испанский"], filas: [
+          [{ es: "las fresas", ru: "ж. р., мн. ч." }, { es: "Las compro.", ru: "Я их покупаю." }]] },
+        { titulo: "Где стоит", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "La compro.", ru: "перед глаголом" }, { es: "No la compro.", ru: "с no: no + la + глагол" }],
           [{ es: "Quiero comprarla.", ru: "с инфинитивом: в конце" }, { es: "La quiero comprar.", ru: "или перед первым глаголом" }]] }
       ],
@@ -557,8 +567,8 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-od-que-es",
           titulo: "Вещь уже назвали — нужно местоимение",
-          texto: "Если вещь уже прозвучала, второй раз её не повторяют, а заменяют на **lo, la, los, las**. Пропустить совсем, как в русском «— Купишь? — Куплю», нельзя: **—¿Compras el pan? —Sí, lo compro.**",
-          comparacion: "Как русское «его, её, их»: **lo compro** — «покупаю его». Только в испанском оно обязательно.",
+          texto: "Если конкретная вещь уже прозвучала, второй раз её не повторяют, а заменяют на **lo, la, los, las**: **—¿Compras el pan? —Sí, lo compro.** Просто пропустить её, как в русском «— Купишь? — Куплю», здесь нельзя. Другое дело — когда речь о чём-то вообще: **—¿Tomas café? —Sí, mucho.**",
+          comparacion: "Как русское «его, её, их»: **lo compro** — «покупаю его». Только в испанском с конкретной вещью оно нужно почти всегда.",
           ejemplos: [
             { es: "—¿Tienes el libro? —Sí, lo tengo.", ru: "— Книга у тебя? — Да, у меня." },
             { es: "—¿Quieres la tortilla? —No, no la quiero.", ru: "— Хочешь тортилью? — Нет, не хочу." }
@@ -599,20 +609,20 @@ const UNIDAD_ES_5 = {
       id: "es5m9", n: 9, tipo: "leccion",
       titulo: "En el bar y en el restaurante",
       resumen: "Меню дня, de primero / de segundo / de postre, para mí, la cuenta.",
-      intro: "Испанцы много едят вне дома. В обед почти в каждом ресторане есть **menú del día** — комплексный обед: первое, второе, десерт, хлеб и напиток за одну цену. А в баре заказывают кофе и **tapas** — маленькие закуски.",
+      intro: "Испанцы много едят вне дома. В обед многие рестораны предлагают **menú del día** — комплексный обед за одну цену: обычно первое, второе, десерт, хлеб и напиток (состав бывает разный). А в баре заказывают кофе и **tapas** — маленькие закуски.",
       tablas: [
         { titulo: "El menú del día", encabezados: ["Что", "Например"], filas: [
           [{ es: "de primero", ru: "на первое" }, { es: "ensalada, sopa, pasta", ru: "" }],
           [{ es: "de segundo", ru: "на второе" }, { es: "pollo, pescado, carne", ru: "" }],
           [{ es: "de postre", ru: "на десерт" }, { es: "fruta, helado, tarta", ru: "" }],
           [{ es: "para beber", ru: "пить" }, { es: "agua, vino, cerveza", ru: "" }]] },
-        { titulo: "En la mesa", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "En la mesa", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "la cuchara", ru: "ложка" }, { es: "el vaso", ru: "стакан" }],
           [{ es: "el cuchillo", ru: "нож" }, { es: "la copa", ru: "бокал" }],
           [{ es: "el tenedor", ru: "вилка" }, { es: "el plato", ru: "тарелка; блюдо" }]] },
         { titulo: "Фразы", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "La carta, por favor.", ru: "Меню, пожалуйста." }, { es: "Para mí, el pollo.", ru: "Мне — курицу." }],
-          [{ es: "¿Me pone un café con leche?", ru: "Можно кофе с молоком?" }, { es: "Una caña, por favor.", ru: "Маленькое пиво, пожалуйста." }],
+          [{ es: "¿Me pones un café con leche?", ru: "Можно кофе с молоком?" }, { es: "Una caña, por favor.", ru: "Маленькое пиво, пожалуйста." }],
           [{ es: "La cuenta, por favor.", ru: "Счёт, пожалуйста." }, { es: "¡Qué rico!", ru: "Как вкусно!" }]] }
       ],
       secciones: [
@@ -629,7 +639,7 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-pedir",
           titulo: "Para mí… — как заказать",
-          texto: "Официант спрашивает **¿Qué quieren?** или **¿Qué van a tomar?** Отвечают так:\n· **Para mí, una ensalada** — «Мне салат» (**para mí** — «для меня»);\n· **De primero, sopa**;\n· **¿Me pone un café con leche?**\n**pedir** (урок 4) — «заказывать»: **Pido el pollo**.\n**mí** в **para mí** пишется со знаком ударения, а **mi** без него — «мой».",
+          texto: "Официант спрашивает компанию **¿Qué queréis?** или **¿Qué vais a tomar?** (тоже на «ты»: **vosotros**). Отвечают так:\n· **Para mí, una ensalada** — «Мне салат» (**para mí** — «для меня»);\n· **De primero, sopa**;\n· **¿Me pones un café con leche?**\n**pedir** (урок 4) — «заказывать»: **Pido el pollo**.\n**mí** в **para mí** пишется со знаком ударения, а **mi** без него — «мой».",
           errores: [
             { mal: "Para mi, el pollo.", bien: "Para mí, el pollo.", por: "«Для меня» — **mí** со знаком ударения." }
           ],
@@ -640,7 +650,7 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-cuenta",
           titulo: "La cuenta, por favor",
-          texto: "В Испании счёт приносят, только когда его попросишь: **La cuenta, por favor**. Чаевые — **la propina** — не обязательны: обычно оставляют немного мелочи или около 5–10 %.\nО еде говорят: **¡Qué rico!** — «Как вкусно!», **está muy rico** — «очень вкусно». **rico** о еде — «вкусный», о человеке — «богатый».",
+          texto: "Счёт часто нужно попросить: **La cuenta, por favor**. Чаевые — **la propina** — в Испании не обязательны: иногда оставляют мелочь или округляют сумму, если всё понравилось.\nО еде говорят: **¡Qué rico!** — «Как вкусно!», **está muy rico** — «очень вкусно». **rico** о еде — «вкусный», о человеке — «богатый».",
           ejemplos: [
             { es: "La tortilla está muy rica.", ru: "Тортилья очень вкусная.", por: "**tortilla** — ж. р.: **rica**." },
             { es: "La sopa está muy caliente.", ru: "Суп очень горячий." }
@@ -649,7 +659,7 @@ const UNIDAD_ES_5 = {
         {
           id: "es5-bar",
           titulo: "En el bar",
-          texto: "В баре: **un café solo** (чёрный), **un café con leche**, **una caña** (маленький бокал разливного пива), **un zumo**. К напитку часто дают **una tapa** — маленькую закуску.\nСтол на вечер можно заказать заранее — **reservar**: **Tengo una reserva para dos personas**.",
+          texto: "В баре: **un café solo** (чёрный), **un café con leche**, **una caña** (небольшой бокал разливного пива; размер зависит от бара), **un zumo**. К напитку часто дают **una tapa** — маленькую закуску.\nСтол на вечер можно заказать заранее — **reservar**: **Tengo una reserva para dos personas**.",
           ejemplos: [
             { es: "Una caña y una tapa de tortilla, por favor.", ru: "Маленькое пиво и кусочек тортильи, пожалуйста." },
             { es: "Tengo una reserva para dos personas.", ru: "У меня бронь на двоих." }
@@ -661,7 +671,7 @@ const UNIDAD_ES_5 = {
       vocab: ["carta", "menú", "cuenta", "propina", "postre", "tapa", "caña", "copa", "cuchara", "cuchillo", "tenedor", "reserva", "reservar", "rico", "fresco", "caliente", "para", "mí", "solo"],
       ampliacion: {
         titulo: "Ещё за столом",
-        intro: "Ещё три слова для ресторана. Они не входят в проверку урока. **Una ración** — большая тарелка закуски на компанию.",
+        intro: "Ещё три слова для ресторана. Они не входят в проверку урока. **Una ración** — порция блюда; её часто берут на нескольких человек.",
         vocab: ["pimienta", "servilleta", "ración"]
       }
     },
@@ -676,11 +686,11 @@ const UNIDAD_ES_5 = {
       id: "es5m11", n: 11, tipo: "proyecto",
       titulo: "Проект",
       resumen: "Покупка и обед в ресторане: разговор по ролям.",
-      intro: "Две части. **Сначала разговор по ролям:** продавщица и официант говорят с тобой, а ты отвечаешь своими словами — приложение проверяет, понятно ли тебя (не нужно повторять слово в слово). **Потом напиши** по-испански (8–12 фраз) свою покупку на рынке или в магазине и обед в ресторане: что ты просишь, сколько, сколько это стоит и что ты заказываешь. Приложение отмечает, какие пункты ты уже включил в текст.",
+      intro: "Две части. **Сначала разговор по ролям:** продавщица и официант говорят с тобой, а ты отвечаешь своими словами — приложение проверяет, понятно ли тебя (не нужно повторять слово в слово). **Потом напиши** по-испански (8–12 фраз) свою покупку на рынке или в магазине и обед в ресторане: что ты просишь, сколько, сколько это стоит и что ты заказываешь. Приложение отмечает, какие пункты уже есть в твоём тексте.",
       turnos: true,
       requisitos: [
         { txt: "Приветствие (hola, buenos días…)", rx: "(hola|buenos días|buenas tardes|buenas noches)" },
-        { txt: "Просьба (¿me pone…?, quería…, quiero…)", rx: "(me pone|me pones|quería|quiero|para mí|prefiero)" },
+        { txt: "Просьба (¿me pones…?, quería…, quiero…)", rx: "(me pone|me pones|quería|quiero|para mí|prefiero)" },
         { txt: "Количество (un kilo de, una botella de…)", rx: "(kilo|litro|gramos|botella|docena|paquete|lata|trozo|barra|poco) de" },
         { txt: "Цена (¿cuánto cuesta?, … euros)", rx: "(cuánto (cuesta|cuestan|es)|euros?\\b|céntimos)" },
         { txt: "Надо (tengo que, hay que)", rx: "\\b(tengo|tienes|tiene|tenemos|tenéis|tienen|hay) que " },
@@ -708,7 +718,7 @@ const UNIDAD_ES_5 = {
       resumen: "Хочу и надо, еда и количество, цены, магазин, одежда, lo / la, общение.",
       intro: "Двадцать упражнений в пяти частях. Каждый ответ — 1 балл, «Почти» — половина. Чтобы сдать урок, нужно набрать не менее 80 %. В большинстве заданий ответ нужно написать, а не выбрать.",
       partes: [
-        { nombre: "Хочу, могу, надо", tipos: ["conjugar", "verbo-infinitivo", "tener-hay", "hambre-sed", "cambia-persona"], n: 4 },
+        { nombre: "Хочу, могу, надо", tipos: ["conjugar", "verbo-infinitivo", "poder-saber", "tener-hay", "hambre-sed", "cambia-persona"], n: 4 },
         { nombre: "Еда и количество", tipos: ["comida-escribir", "articulo-cero", "mucho", "mucho-escribir", "cantidad", "algo-nada"], n: 4 },
         { nombre: "Числа и цены", tipos: ["numero-oir", "numero-escribir", "cientos", "precio-oir", "precio-escribir", "cuesta"], n: 4 },
         { nombre: "Магазин, одежда и lo / la", tipos: ["tienda", "pagar", "ropa-escribir", "ropa-color", "talla", "pronombre-od", "pronombre-od-escribir", "pronombre-infinitivo", "error"], n: 4 },
@@ -806,6 +816,7 @@ function ejerciciosUnidadEs5() {
   /* 3. Verbo + infinitivo; tener que / hay que; tengo hambre */
   frases("inf", "verbo-infinitivo", ES5_INFINITIVO, "Какая фраза правильная?", 2, 11);
   elegir("th", "tener-hay", ES5_TENER_HAY, 2, "es5-hay-que", "Tener que или hay que? Что подходит?", 2, 21);
+  elegir("sb", "poder-saber", ES5_SABER, 1, "es5-saber", "Poder или saber? Что подходит?", 2, 23);
   elegir("hs", "hambre-sed", ES5_HAMBRE, 2, "es5-hambre", "Что подходит?", 1, 31);
   /* 4. Comida: escenas; con artículo o sin él */
   escenas("co", "comida", ES5_COMIDA, 3, "es5-incontable", 41);
@@ -995,6 +1006,16 @@ const ES5_INFINITIVO = [
   ["No tengo que trabajar hoy.", ["Tengo no que trabajar hoy.", "No tengo trabajar hoy."], "**no** — перед **tengo**.", 2, "es5-tener-que"],
   ["Queremos aprender español.", ["Quieremos aprender español.", "Queremos aprendemos español."], "**nosotros** → **queremos** + инфинитив.", 1, "es5-querer"]
 ];
+/* Poder / saber (06/11/2026): [frase, correcta, opciones, explicación] */
+const ES5_SABER = [
+  ["Hoy no ___ nadar: tengo que trabajar.", "puedo", ["puedo", "sé", "sabo"], "Умею, но сегодня нет возможности — **poder**: **no puedo**."],
+  ["Mi hijo tiene cinco años y ya ___ nadar.", "sabe", ["sabe", "puede", "sabo"], "Это навык — **saber**: **sabe nadar**."],
+  ["—¿___ cocinar? —Sí, cocino muy bien.", "Sabes", ["Sabes", "Puedes", "Sabe"], "Спрашивают об умении — **saber**: **¿Sabes cocinar?**"],
+  ["Lo siento, mañana no ___ venir.", "puedo", ["puedo", "sé", "sabo"], "Нет возможности — **poder**: **no puedo venir**."],
+  ["Ana ___ hablar inglés y francés.", "sabe", ["sabe", "sabes", "puedes"], "Знать язык, уметь говорить — **saber**: **Ana sabe hablar…**"],
+  ["¿___ abrir la ventana? Hace calor.", "Puedo", ["Puedo", "Sé", "Sabo"], "Просят разрешения — **poder**: **¿Puedo…?**"],
+  ["Yo no ___ bailar, pero me gusta la música.", "sé", ["sé", "se", "sabo"], "**yo** → **sé**, со знаком ударения."]
+];
 /* Tener que / hay que: [frase, correcta, opciones, explicación] */
 const ES5_TENER_HAY = [
   ["Mañana ___ que trabajar. (yo)", "tengo", ["tengo", "hay", "tiene"], "Обязанность конкретного человека — **tengo que**.", null, 2, "es5-tener-que"],
@@ -1070,7 +1091,7 @@ const ES5_CANTIDAD_DE = [
   ["¿Quieres un poco ___ leche?", "de", ["de", "—", "la"], "**un poco de** + существительное."],
   ["Una ___ de pan, por favor.", "barra", ["barra", "botella", "lata"], "Хлеб — **una barra de pan**."],
   ["Una ___ de huevos.", "docena", ["docena", "barra", "botella"], "12 яиц — **una docena de huevos**."],
-  ["Cien ___ de jamón.", "gramos", ["gramos", "litros", "botellas"], "Хамон весят: **cien gramos**."],
+  ["Cien ___ de jamón.", "gramos", ["gramos", "litros", "botellas"], "Сто граммов хамона — **cien gramos de jamón**."],
   ["Medio ___ de fresas.", "kilo", ["kilo", "litro", "paquete"], "Полкило — **medio kilo**."]
 ];
 const ES5_ALGO_NADA = [
@@ -1129,7 +1150,7 @@ const ES5_PAGAR = [
   ["Pago ___ efectivo.", "en", ["en", "con", "de"], "Наличными — **en efectivo**."],
   ["Hay que pagar en la ___.", "caja", ["caja", "bolsa", "lista"], "Платят в кассе — **en la caja**."],
   ["En la frutería ___ fruta y verdura.", "venden", ["venden", "compran", "pagan"], "Продают — **venden**."],
-  ["¿Me pone una ___? —Sí, son diez céntimos.", "bolsa", ["bolsa", "caja", "tarjeta"], "Пакет — **una bolsa**; он платный."]
+  ["¿Me pones una ___? —Sí, son diez céntimos.", "bolsa", ["bolsa", "caja", "tarjeta"], "Пакет — **una bolsa**; он платный."]
 ];
 /* Escenas de ropa */
 const ES5_ROPA = [
@@ -1147,8 +1168,8 @@ const ES5_ROPA_COLOR = [
   ["una camisa ___", "naranja", ["naranja", "naranjas", "naranjo"], "**naranja** как цвет не меняется (урок 3)."]
 ];
 const ES5_TALLA = [
-  ["—¿Qué ___ tiene? —La M.", "talla", ["talla", "número", "precio"], "Размер одежды — **talla**."],
-  ["—¿Qué ___ tiene de zapato? —El 39.", "número", ["número", "talla", "precio"], "Размер обуви — **número**."],
+  ["—¿Qué ___ tienes? —La M.", "talla", ["talla", "número", "precio"], "Размер одежды — **talla**."],
+  ["—¿Qué ___ tienes de zapato? —El 39.", "número", ["número", "talla", "precio"], "Размер обуви — **número**."],
   ["Hoy Ana ___ un vestido azul.", "lleva", ["lleva", "llevo", "llevan"], "**Ana** → **lleva**."],
   ["Es un poco pequeña. ¿Tiene una talla más ___?", "grande", ["grande", "pequeña", "cara"], "Мало — нужен размер побольше: **más grande**."],
   ["¿Puedo ___ esta camisa?", "probarme", ["probarme", "me probar", "probar me"], "Местоимение прирастает к инфинитиву: **probarme**.", null, 7, "es5-probarse"],
@@ -1165,8 +1186,8 @@ const ES5_OD = [
   ["—¿Tienes el libro? —Sí, ___ tengo.", "lo", ["lo", "la", "los"], "**el libro** → **lo**."],
   ["—¿Quieres la tortilla? —No, no ___ quiero.", "la", ["la", "lo", "las"], "**la tortilla** → **la**; **no** — перед ним."],
   ["—¿Dónde compras la fruta? —___ compro en el mercado.", "La", ["La", "Lo", "Las"], "**la fruta** → **la**."],
-  ["—¿Comes pescado? —Sí, ___ como mucho.", "lo", ["lo", "la", "los"], "**el pescado** → **lo**."],
-  ["—¿Me pone las naranjas? —Sí, aquí ___ tiene.", "las", ["las", "los", "la"], "**las naranjas** → **las**."],
+  ["—¿Compras el pescado aquí? —Sí, ___ compro aquí.", "lo", ["lo", "la", "los"], "**el pescado** → **lo**."],
+  ["—¿Me pones las naranjas? —Sí, aquí ___ tienes.", "las", ["las", "los", "la"], "**las naranjas** → **las**."],
   ["La camiseta es bonita. ¿___ compras?", "La", ["La", "Lo", "Los"], "**la camiseta** → **¿La compras?**"],
   ["Mis gafas… ¿dónde ___ tengo?", "las", ["las", "los", "la"], "**las gafas** — ж. р., мн. ч.: **las**."],
   ["El café ___ tomo sin azúcar.", "lo", ["lo", "la", "los"], "**el café** уже назван в начале — повторяем **lo**."]
@@ -1176,7 +1197,7 @@ const ES5_OD_ESC = [
   ["—¿Compras la camisa? —Sí, ___ compro.", "la", "**la camisa** → **la**.", 8, "es5-od-concordancia"],
   ["—¿Quieres los tomates? —Sí, ___ quiero.", "los", "**los tomates** → **los**.", 8, "es5-od-concordancia"],
   ["—¿Compramos las peras? —Sí, ___ compramos.", "las", "**las peras** → **las**.", 8, "es5-od-concordancia"],
-  ["—¿Bebes leche? —No, no ___ bebo.", "la", "**la leche** — ж. р.: **la**.", 8, "es5-od-concordancia"],
+  ["—¿Dónde está la leche? —No ___ veo.", "la", "**la leche** — ж. р.: **la**.", 8, "es5-od-concordancia"],
   ["—¿Quieres el abrigo negro? —Sí, ___ quiero.", "lo", "**el abrigo** → **lo**.", 8, "es5-od-concordancia"]
 ];
 /* Con infinitivo: [frase, una forma, la otra, explicación] */
@@ -1215,7 +1236,7 @@ const ES5_MENU = [
 /* Preguntas: [pregunta con ___, respuesta, correcta, opciones, módulo, regla] */
 const ES5_PREGUNTAS = [
   ["¿___ cuesta?", "Dos euros.", "Cuánto", ["Cuánto", "Qué", "Dónde"], 5, "es5-precio"],
-  ["¿___ talla tiene?", "La M.", "Qué", ["Qué", "Cuánto", "Dónde"], 7, "es5-talla"],
+  ["¿___ talla tienes?", "La M.", "Qué", ["Qué", "Cuánto", "Dónde"], 7, "es5-talla"],
   ["¿___ está el probador?", "A la derecha.", "Dónde", ["Dónde", "Qué", "Cuánto"], 7, "es5-talla"],
   ["¿___ botellas de agua necesitamos?", "Seis.", "Cuántas", ["Cuántas", "Cuántos", "Dónde"], 4, "es5-cantidades"],
   ["¿___ pagas, en efectivo o con tarjeta?", "Con tarjeta.", "Cómo", ["Cómo", "Dónde", "Cuánto"], 6, "es5-pagar"],
@@ -1249,7 +1270,7 @@ const ES5_SITUACIONES = [
   ["Продавец спрашивает «¿Algo más?», а тебе больше ничего не нужно.", "Nada más, gracias.", ["Algo más, gracias.", "No más nada, gracias."], "**Nada más, gracias.**", 6],
   ["Ты спрашиваешь, можно ли заплатить картой.", "¿Puedo pagar con tarjeta?", ["¿Puedo pago con tarjeta?", "¿Puedo pagar en tarjeta?"], "**poder** + инфинитив; картой — **con tarjeta**.", 6],
   ["Ты хочешь спросить, где примерочная.", "¿Dónde está el probador?", ["¿Dónde hay el probador?", "¿Dónde es el probador?"], "Где находится известное — **está**.", 7],
-  ["Ты вежливо просишь в баре кофе с молоком.", "¿Me pone un café con leche?", ["¿Pone me un café con leche?", "¿Me pone un café con la leche?"], "**¿Me pone…?** — вежливая просьба в баре.", 9],
+  ["Ты просишь в баре кофе с молоком.", "¿Me pones un café con leche?", ["¿Pones me un café con leche?", "¿Me pones un café con la leche?"], "**¿Me pones…?** — обычная просьба в баре.", 9],
   ["Ты заказываешь в ресторане салат.", "Para mí, una ensalada.", ["Para mi, una ensalada.", "Para yo, una ensalada."], "**para mí** — со знаком ударения.", 9],
   ["Ты просишь счёт в ресторане.", "La cuenta, por favor.", ["La carta, por favor.", "El cuenta, por favor."], "Счёт — **la cuenta**; **la carta** — меню.", 9],
   ["Ты говоришь, что предпочитаешь чай.", "Prefiero té.", ["Prefiero a té.", "Prefiero tomo té."], "**preferir** + существительное.", 1]
@@ -1258,8 +1279,8 @@ const ES5_SITUACIONES = [
 const ES5_RESPUESTAS = [
   ["¿Algo más?", "No, nada más, gracias.", ["Sí, nada más.", "No, algo más."], "**Nada más, gracias.**", 6],
   ["¿Cuánto es?", "Son cinco euros con veinte.", ["Es cinco euros con veinte.", "Cuestan cinco euros con veinte."], "Сумма — **son… euros**.", 6],
-  ["¿Qué talla tiene?", "La M.", ["El 40 euros.", "Tengo M años."], "Размер одежды — **la M**.", 7],
-  ["¿Qué quieren de primero?", "Para mí, sopa.", ["De postre, sopa.", "Para mi sopa."], "**Para mí, sopa.**", 9],
+  ["¿Qué talla tienes?", "La M.", ["El 40 euros.", "Tengo M años."], "Размер одежды — **la M**.", 7],
+  ["¿Qué queréis de primero?", "Para mí, sopa.", ["De postre, sopa.", "Para mi sopa."], "**Para mí, sopa.**", 9],
   ["¿Efectivo o tarjeta?", "Con tarjeta, por favor.", ["En tarjeta, por favor.", "De tarjeta."], "Картой — **con tarjeta**.", 6],
   ["¿Tienes hambre?", "Sí, mucha.", ["Sí, mucho.", "Sí, muchas."], "**hambre** — ж. р.: **mucha**.", 2],
   ["¿Quieres la tortilla?", "Sí, la quiero.", ["Sí, lo quiero.", "Sí, quiero la."], "**la tortilla** → **la quiero**.", 8],
@@ -1272,9 +1293,9 @@ function es5Turnos(quien, genero, titulo, pasos) {
 }
 const ES5_TURNOS = [
   es5Turnos("Dependienta", "f", "En el mercado", [
-    ["¡Buenos días! ¿Qué le pongo?", "Доброе утро! Что вам дать?", "Поздоровайся и попроси килограмм апельсинов.",
-      [["приветствие", "buenos días|hola|buenas"], ["килограмм апельсинов", "un kilo de naranjas|~kilo de naranjas|~naranjas"]], "Buenos días. ¿Me pone un kilo de naranjas?", "**¿Me pone…?** или **Quería…**"],
-    ["Aquí tiene. ¿Algo más?", "Вот, пожалуйста. Что-нибудь ещё?", "Попроси ещё полкило клубники.",
+    ["¡Buenos días! ¿Qué te pongo?", "Доброе утро! Что тебе дать?", "Поздоровайся и попроси килограмм апельсинов.",
+      [["приветствие", "buenos días|hola|buenas"], ["килограмм апельсинов", "un kilo de naranjas|~kilo de naranjas|~naranjas"]], "Buenos días. ¿Me pones un kilo de naranjas?", "**¿Me pones…?** или **Quería…**"],
+    ["Aquí tienes. ¿Algo más?", "Вот, пожалуйста. Что-нибудь ещё?", "Попроси ещё полкило клубники.",
       [["полкило", "medio kilo|~medio"], ["клубника", "de fresas|~fresas"]], "Sí, quería medio kilo de fresas.", "Полкило — **medio kilo de…**"],
     ["Muy bien. ¿Algo más?", "Хорошо. Что-нибудь ещё?", "Скажи, что больше ничего не нужно, и спроси, сколько с тебя.",
       [["больше ничего", "nada más|no gracias|~nada|~no"], ["сколько с меня", "cuánto es|~cuánto"]], "Nada más, gracias. ¿Cuánto es?"],
@@ -1284,11 +1305,11 @@ const ES5_TURNOS = [
       [["прощание", "adiós|hasta luego|hasta mañana|chao|gracias"]], "¡Gracias, adiós!"]
   ]),
   es5Turnos("Dependienta", "f", "En la tienda de ropa", [
-    ["Hola, buenas tardes. ¿Qué busca?", "Здравствуйте, добрый день. Что вы ищете?", "Скажи, что ищешь чёрный свитер.",
+    ["Hola, buenas tardes. ¿Qué buscas?", "Привет, добрый день. Что ищешь?", "Скажи, что ищешь чёрный свитер.",
       [["свитер", "un jersey|~jersey"], ["чёрный", "negro"]], "Busco un jersey negro."],
-    ["¿Qué talla tiene?", "Какой у вас размер?", "Скажи, что у тебя размер M.",
+    ["¿Qué talla tienes?", "Какой у тебя размер?", "Скажи, что у тебя размер M.",
       [["размер M", "la m|talla m|~m"]], "La M.", "Размер одежды — **la M**."],
-    ["Aquí tiene. El probador está a la derecha.", "Вот, пожалуйста. Примерочная справа.", "Спроси, сколько он стоит.",
+    ["Aquí tienes. El probador está a la derecha.", "Вот, пожалуйста. Примерочная справа.", "Спроси, сколько он стоит.",
       [["сколько стоит", "cuánto cuesta|~cuánto"]], "¿Cuánto cuesta?"],
     ["Cuesta treinta y cinco euros.", "Тридцать пять евро.", "Скажи, что берёшь его (замени свитер местоимением).",
       [["беру его", "lo compro|lo quiero|~lo"]], "Vale, lo compro.", "**el jersey** → **lo**: **lo compro**."],
@@ -1296,15 +1317,15 @@ const ES5_TURNOS = [
       [["наличными", "en efectivo|~efectivo"]], "No, en efectivo."]
   ]),
   es5Turnos("Camarero", "m", "En el restaurante", [
-    ["Buenas tardes. ¿Qué quiere de primero?", "Добрый день. Что будете на первое?", "Закажи на первое салат.",
+    ["Buenas tardes. ¿Qué quieres de primero?", "Добрый день. Что будешь на первое?", "Закажи на первое салат.",
       [["салат", "una ensalada|~ensalada"]], "De primero, una ensalada.", "**Para mí, …** или **De primero, …**"],
     ["¿Y de segundo?", "А на второе?", "Закажи на второе рыбу или курицу.",
       [["рыба или курица", "el pescado|el pollo|~pescado|~pollo"]], "De segundo, el pescado."],
-    ["¿Y para beber?", "А пить что будете?", "Попроси воду без газа.",
+    ["¿Y para beber?", "А пить что будешь?", "Попроси воду без газа.",
       [["вода", "agua"], ["без газа", "sin gas"]], "Agua sin gas, por favor."],
-    ["¿Quiere postre?", "Десерт будете?", "Закажи шоколадное мороженое.",
+    ["¿Quieres postre?", "Десерт будешь?", "Закажи шоколадное мороженое.",
       [["мороженое", "un helado|~helado"], ["шоколадное", "de chocolate|~chocolate"]], "Sí, un helado de chocolate."],
-    ["¿Qué tal todo?", "Как вам всё?", "Скажи, что было очень вкусно, и попроси счёт.",
+    ["¿Qué tal todo?", "Как тебе всё?", "Скажи, что было очень вкусно, и попроси счёт.",
       [["вкусно", "muy rico|rico|muy bueno|bueno|qué rico"], ["счёт", "la cuenta|~cuenta"]], "¡Muy rico! La cuenta, por favor."]
   ])
 ];
@@ -1313,7 +1334,7 @@ window.es5Vocab = es5Vocab;
 window.es5Ampliacion = es5Ampliacion;
 window.es5Objetivo = es5Objetivo;
 window.es5Num = es5Num;
-const ES5_MEZCLA = { conjugar: 3, "cambia-persona": 1, "verbo-infinitivo": 2, "tener-hay": 2, "hambre-sed": 1, comida: 1, "comida-escribir": 1, "articulo-cero": 2,
+const ES5_MEZCLA = { conjugar: 3, "cambia-persona": 1, "verbo-infinitivo": 2, "poder-saber": 1, "tener-hay": 2, "hambre-sed": 1, comida: 1, "comida-escribir": 1, "articulo-cero": 2,
   mucho: 2, "mucho-escribir": 1, cantidad: 2, "algo-nada": 1, "numero-oir": 1, "numero-escribir": 1, cientos: 1, "precio-oir": 1, "precio-escribir": 1, cuesta: 1,
   tienda: 1, pagar: 1, ropa: 1, "ropa-escribir": 1, "ropa-color": 1, talla: 1, "pronombre-od": 2, "pronombre-od-escribir": 1, "pronombre-infinitivo": 1, "pronombre-orden": 1,
   mesa: 1, "mesa-escribir": 1, menu: 1, turnos: 1, pregunta: 1, error: 2, dictado: 2, "situacion-frase": 2, respuesta: 2, "dictado-frase": 2, "ordenar-frase": 1 };

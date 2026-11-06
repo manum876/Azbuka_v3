@@ -15,7 +15,7 @@
    cambian; mío / tuyo / suyo y listo quedan para más adelante.
    ============================================================ */
 
-const ES3_PRON = [["yo", "я"], ["tú", "ты"], ["él / ella / usted", "он / она / вы"], ["nosotros / nosotras", "мы"], ["vosotros / vosotras", "вы (на «ты»)"], ["ellos / ellas / ustedes", "они / вы"]];
+const ES3_PRON = [["yo", "я"], ["tú", "ты"], ["él / ella / usted", "он / она / вы (вежливо, одному)"], ["nosotros / nosotras", "мы"], ["vosotros / vosotras", "вы (неформально, нескольким)"], ["ellos / ellas / ustedes", "они / вы (вежливо, нескольким)"]];
 const es3Tabla = (formas) => ES3_PRON.map(([p, r], i) => [{ es: p, ru: r }, { es: formas[i] }]);
 
 const UNIDAD_ES_3 = {
@@ -506,7 +506,7 @@ const UNIDAD_ES_3 = {
       id: "es3m10", n: 10, tipo: "proyecto",
       titulo: "Проект",
       resumen: "Твоя квартира и твой район.",
-      intro: "Напиши по-испански короткий текст (8–12 фраз): где ты живёшь, какая у тебя квартира или комната, что где находится и что есть в твоём районе. Опиши хотя бы одну вещь цветом и одно место — с **estar**. Приложение отмечает, какие пункты ты уже включил в текст.",
+      intro: "Напиши по-испански короткий текст (8–12 фраз): где ты живёшь, какая у тебя квартира или комната, что где находится и что есть в твоём районе. Опиши хотя бы одну вещь цветом и одно место — с **estar**. Приложение отмечает, какие пункты уже есть в твоём тексте.",
       requisitos: [
         { txt: "Где ты живёшь и на каком этаже (vivo en…, en el tercero…)", rx: "(vivo en|primero|primer |segundo|tercero|tercer |cuarto|quinto|sexto|séptimo|octavo|noveno|décimo|planta baja)" },
         { txt: "Что есть (hay…)", rx: "\\bhay\\b" },

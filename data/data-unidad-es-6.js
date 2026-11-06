@@ -14,7 +14,7 @@
    (tipo ruta, forma situacion), corregidos por intención con azSituacionEs (js/corrector-es.js).
    ============================================================ */
 
-const ES6_PERS = [["yo", "я"], ["tú", "ты"], ["él / ella / usted", "он / она / вы"], ["nosotros / nosotras", "мы"], ["vosotros / vosotras", "вы (на «ты»)"], ["ellos / ellas / ustedes", "они / вы"]];
+const ES6_PERS = [["yo", "я"], ["tú", "ты"], ["él / ella / usted", "он / она / вы (вежливо, одному)"], ["nosotros / nosotras", "мы"], ["vosotros / vosotras", "вы (неформально, нескольким)"], ["ellos / ellas / ustedes", "они / вы (вежливо, нескольким)"]];
 const ES6_SE = ["me", "te", "se", "nos", "os", "se"];
 function es6Verbo(inf) {
   if (typeof LEXICON_ES === "undefined" || typeof VERBOS_ES === "undefined") return null;
@@ -43,12 +43,12 @@ const UNIDAD_ES_6 = {
       id: "es6m1", n: 1, tipo: "leccion",
       titulo: "Voy a Madrid, estoy en Madrid",
       resumen: "ir a (куда), estar en (где), venir de (откуда); llevar и traer.",
-      intro: "Главное правило урока: **куда** — **a**, **где** — **en**, **откуда** — **de**. **Voy a Madrid**, **Estoy en Madrid**, **Vengo de Madrid**. В русском это разные падежи: «в Мадрид», «в Мадриде», «из Мадрида». В испанском — три разных предлога.",
+      intro: "Для основных фраз этого урока запомни: **куда** — **a**, **где** — **en**, **откуда** — **de**. **Voy a Madrid**, **Estoy en Madrid**, **Vengo de Madrid**. В русском это разные падежи: «в Мадрид», «в Мадриде», «из Мадрида». В испанском в этих фразах — три разных предлога (у каждого из них есть и другие значения).",
       tablas: [
         { titulo: "¿Adónde? ¿Dónde? ¿De dónde?", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "Voy a Madrid.", ru: "Я еду в Мадрид. (куда?)" }, { es: "Voy al cine.", ru: "Я иду в кино." }],
           [{ es: "Estoy en Madrid.", ru: "Я в Мадриде. (где?)" }, { es: "Estoy en el cine.", ru: "Я в кино." }],
-          [{ es: "Vengo de Madrid.", ru: "Я из Мадрида. (откуда?)" }, { es: "Vengo del cine.", ru: "Я из кино." }]] },
+          [{ es: "Vengo de Madrid.", ru: "Я из Мадрида. (откуда?)" }, { es: "Vengo del cine.", ru: "Я иду из кино." }]] },
         { titulo: "Llevar y traer", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "Llevo el libro a clase.", ru: "Я несу книгу в класс (туда)." }, { es: "Traigo el libro a casa.", ru: "Я приношу книгу домой (сюда)." }],
           [{ es: "¿Me traes un café?", ru: "Принесёшь мне кофе?" }, { es: "Te llevo a la estación.", ru: "Я отвезу тебя на вокзал." }]] }
@@ -106,7 +106,7 @@ const UNIDAD_ES_6 = {
           id: "es6-llevar-traer",
           titulo: "Llevar и traer",
           texto: "**llevar** — нести, везти **туда** (от того, кто говорит): **Llevo el libro a clase**.\n**traer** — нести, везти **сюда** (к тому, кто говорит): **¿Me traes un café?** У **traer** неправильная форма **yo**: **traigo**.\nТак же **ir** (туда) и **venir** (сюда): **—¿Vienes a mi casa? —Sí, voy.**",
-          comparacion: "Как «отнести» и «принести»: смотри, где стоит говорящий.",
+          comparacion: "Как «отнести» и «принести»: ориентируйся на то, где находится говорящий.",
           errores: [
             { mal: "¿Me llevas un café? (сюда)", bien: "¿Me traes un café?", por: "Сюда, ко мне — **traer**." }
           ]
@@ -118,15 +118,15 @@ const UNIDAD_ES_6 = {
       id: "es6m2", n: 2, tipo: "leccion",
       titulo: "En metro, a pie",
       resumen: "Транспорт: ir en metro, ir a pie; coger, subir, bajar, cambiar de línea; tardar.",
-      intro: "В испанских городах много ездят на метро и на автобусе. Нужны названия транспорта, предлог **en** («на метро» — **en metro**) и несколько глаголов: сесть, выйти, пересесть, сколько ехать.",
+      intro: "В испанских городах многие пользуются метро и автобусами. Нужны названия транспорта, предлог **en** («на метро» — **en metro**) и несколько глаголов: сесть, выйти, пересесть, сколько ехать.",
       tablas: [
-        { titulo: "El transporte", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "El transporte", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "en metro", ru: "на метро" }, { es: "en autobús", ru: "на автобусе" }],
           [{ es: "en tren", ru: "на поезде" }, { es: "en coche", ru: "на машине" }],
           [{ es: "en taxi", ru: "на такси" }, { es: "en bicicleta", ru: "на велосипеде" }],
           [{ es: "en moto", ru: "на мотоцикле" }, { es: "en avión", ru: "на самолёте" }],
           [{ es: "en barco", ru: "на корабле" }, { es: "a pie", ru: "пешком" }]] },
-        { titulo: "En la estación", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "En la estación", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "la estación", ru: "станция, вокзал" }, { es: "la parada", ru: "остановка" }],
           [{ es: "el andén", ru: "перрон, платформа" }, { es: "la línea", ru: "линия, маршрут" }],
           [{ es: "el billete", ru: "билет" }, { es: "de ida y vuelta", ru: "туда и обратно" }],
@@ -150,7 +150,7 @@ const UNIDAD_ES_6 = {
         {
           id: "es6-coger",
           titulo: "Coger el autobús, subir, bajar",
-          texto: "«Сесть на автобус», «поехать на метро» — **coger** или **tomar**: **Cojo el metro** (у **coger** — **cojo** в форме **yo**). В Испании **coger** — самое обычное слово; в Латинской Америке говорят **tomar** (об этом есть статья в словаре).\nВойти в автобус — **subir al autobús**, выйти — **bajar del autobús** (или **subirse**, **bajarse**). Пересесть — **cambiar de línea**. Ждать — **esperar**: **Espero el autobús**.",
+          texto: "«Сесть на автобус», «поехать на метро» — **coger** или **tomar**: **Cojo el metro** (у **coger** — **cojo** в форме **yo**). В Испании **coger** — самое обычное слово для транспорта. Во многих странах Латинской Америки чаще говорят **tomar**: там у **coger** бывает грубое значение (об этом есть статья в словаре).\nВойти в автобус — **subir al autobús**, выйти — **bajar del autobús** (или **subirse**, **bajarse**). Пересесть — **cambiar de línea**. Ждать — **esperar**: **Espero el autobús**.",
           ejemplos: [
             { es: "Cojo el autobús en la parada de la plaza.", ru: "Я сажусь на автобус на остановке на площади." },
             { es: "Bajo en la próxima estación.", ru: "Я выхожу на следующей станции." },
@@ -213,7 +213,7 @@ const UNIDAD_ES_6 = {
           id: "es6-por",
           titulo: "Por: через, по, мимо",
           texto: "**por** в маршруте — «через, по, мимо»: **Paseo por el parque** — гуляю по парку; **Vamos por la plaza** — идём через площадь; **Voy por la calle Mayor** — иду по улице Майор.",
-          comparacion: "Если в русском «по» или «через» — в испанском почти всегда **por**.",
+          comparacion: "В описании маршрута **por** часто соответствует русским «по» или «через»: **por el parque** — «по парку, через парк». Но у **por** есть и другие значения, их разберём позже.",
           errores: [
             { mal: "Paseo en el parque por la tarde. (по парку)", bien: "Paseo por el parque por la tarde.", por: "«По парку» — **por el parque**." }
           ],
@@ -240,7 +240,7 @@ const UNIDAD_ES_6 = {
       id: "es6m4", n: 4, tipo: "leccion",
       titulo: "Sigue todo recto",
       resumen: "Повелительное наклонение на «ты»: gira, cruza, sigue, ve, ven. Как объяснить дорогу.",
-      intro: "Чтобы объяснить дорогу, нужен повелительный: «иди», «поверни», «перейди». На «ты» это очень простая форма: почти всегда она совпадает с формой **él** настоящего времени: **gira**, **cruza**, **coge**, **sube**.",
+      intro: "Чтобы объяснить дорогу, нужен повелительный: «иди», «поверни», «перейди». На «ты» у правильных глаголов это простая форма: она совпадает с формой **él** настоящего времени: **gira**, **cruza**, **coge**, **sube**. У нескольких частых глаголов форма особая — её нужно запомнить.",
       tablas: [
         { titulo: "Imperativo de tú", encabezados: ["Инфинитив", "Повелительное"], filas: [
           [{ es: "girar", ru: "поворачивать" }, { es: "gira", ru: "поверни" }],
@@ -256,8 +256,9 @@ const UNIDAD_ES_6 = {
           [{ es: "poner", ru: "класть" }, { es: "pon", ru: "положи" }],
           [{ es: "tener", ru: "иметь" }, { es: "ten", ru: "держи" }],
           [{ es: "hacer", ru: "делать" }, { es: "haz", ru: "сделай" }],
-          [{ es: "decir", ru: "говорить" }, { es: "di", ru: "скажи" }]] },
-        { titulo: "En la calle", encabezados: ["Испанский", "Испанский"], filas: [
+          [{ es: "decir", ru: "говорить" }, { es: "di", ru: "скажи" }],
+          [{ es: "ser", ru: "быть" }, { es: "sé", ru: "будь" }]] },
+        { titulo: "En la calle", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "todo recto", ru: "прямо" }, { es: "la esquina", ru: "угол" }],
           [{ es: "a la derecha", ru: "направо" }, { es: "el semáforo", ru: "светофор" }],
           [{ es: "a la izquierda", ru: "налево" }, { es: "el cruce", ru: "перекрёсток" }],
@@ -281,8 +282,8 @@ const UNIDAD_ES_6 = {
         },
         {
           id: "es6-imperativo-irregular",
-          titulo: "Ve, ven, sal, pon, ten, haz, di",
-          texto: "Семь частых глаголов дают короткую неправильную форму: **ve** (ir), **ven** (venir), **sal** (salir), **pon** (poner), **ten** (tener), **haz** (hacer), **di** (decir). Их надо просто выучить.",
+          titulo: "Ve, ven, sal, pon, ten, haz, di, sé",
+          texto: "Восемь частых глаголов дают короткую неправильную форму: **ve** (ir), **ven** (venir), **sal** (salir), **pon** (poner), **ten** (tener), **haz** (hacer), **di** (decir), **sé** (ser). Их надо просто выучить.\n**sé** от **ser** — «будь»: **Sé bueno** — «Будь хорошим». Не путай с **sé** от **saber** — «я умею, я знаю» (урок 5).",
           ejemplos: [
             { es: "¡Ven aquí!", ru: "Иди сюда!" },
             { es: "Ve a la farmacia.", ru: "Сходи в аптеку." },
@@ -295,7 +296,7 @@ const UNIDAD_ES_6 = {
         {
           id: "es6-indicaciones",
           titulo: "Как объяснить дорогу",
-          texto: "· **Sigue todo recto** — иди прямо;\n· **Gira a la derecha / a la izquierda** — поверни направо / налево;\n· **Coge la segunda calle a la izquierda** — сверни на вторую улицу налево;\n· **Cruza la calle / el puente** — перейди улицу / мост;\n· **en la esquina**, **en el semáforo**, **en la rotonda**, **al final de la calle**.\nСпросить: **¿Cómo llego a…?** — как мне дойти до…? **¿Está lejos?** — это далеко?",
+          texto: "· **Sigue todo recto** — иди прямо;\n· **Gira a la derecha / a la izquierda** — поверни направо / налево;\n· **Coge la segunda calle a la izquierda** — сверни на вторую улицу налево;\n· **Cruza la calle / el puente** — перейди улицу / мост;\n· **en la esquina**, **en el semáforo**, **en la rotonda**, **al final de la calle**.\nКак спросить дорогу: **¿Cómo llego a…?** — как мне дойти до…? **¿Está lejos?** — это далеко?",
           ejemplos: [
             { es: "Sigue todo recto y en el semáforo gira a la izquierda.", ru: "Иди прямо, а на светофоре поверни налево." },
             { es: "El banco está al final de la calle, en la esquina.", ru: "Банк в конце улицы, на углу." }
@@ -307,7 +308,7 @@ const UNIDAD_ES_6 = {
         {
           id: "es6-perdone",
           titulo: "Perdone, oiga",
-          texto: "Чтобы обратиться к незнакомому человеку на улице, говорят **Perdone** или **Oiga** (на «вы», **usted**). На «ты» — **Perdona**, **Oye**, **Disculpa**. Пока это готовые формулы: повелительное на «вы» будет позже.\n«Заблудиться» — **perderse**: **Siempre me pierdo en el centro**. «Не могу найти вокзал» — **No encuentro la estación**.",
+          texto: "Чтобы обратиться к незнакомому человеку на улице, говорят **Perdone** (на «вы», **usted**): это вежливо и подходит всегда. **Oiga** тоже на «вы», но, смотря по тону, может звучать резковато. На «ты» — **Perdona**, **Oye**, **Disculpa**. Пока это готовые формулы: повелительное на «вы» будет позже.\n«Заблудиться» — **perderse**: **Siempre me pierdo en el centro**. «Не могу найти вокзал» — **No encuentro la estación**.",
           ejemplos: [
             { es: "Perdone, ¿dónde está la estación?", ru: "Простите, где вокзал?" },
             { es: "Oye, ¿cómo llego a la plaza?", ru: "Слушай, как мне пройти на площадь?" }
@@ -323,9 +324,9 @@ const UNIDAD_ES_6 = {
       id: "es6m5", n: 5, tipo: "leccion",
       titulo: "Tómalo, llámame",
       resumen: "Местоимение пишется слитно с повелительным: tómalo, llámame, ponlo.",
-      intro: "С обычной формой глагола местоимение стоит перед ним: **lo tomo**. С повелительным — **после** и **слитно**: **tómalo**, **cógela**, **llámame**. И почти всегда появляется знак ударения.",
+      intro: "С обычной формой глагола местоимение стоит перед ним: **lo tomo**. С повелительным — **после** и **слитно**: **tómalo**, **cógela**, **llámame**. Часто при этом появляется знак ударения (**tómalo**), но не всегда: **ponlo**, **dime**. Почему — ниже.",
       tablas: [
-        { titulo: "Повелительное + местоимение", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "Повелительное + местоимение", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "tómalo", ru: "toma + lo: возьми его" }, { es: "cógela", ru: "coge + la: возьми её" }],
           [{ es: "míralos", ru: "mira + los: посмотри на них" }, { es: "llámame", ru: "llama + me: позвони мне" }],
           [{ es: "espérame", ru: "espera + me: подожди меня" }, { es: "cómpralas", ru: "compra + las: купи их" }],
@@ -371,7 +372,7 @@ const UNIDAD_ES_6 = {
       intro: "О планах на ближайшее будущее говорят так: **ir a** + инфинитив: **Voy a comer** — «Я собираюсь поесть», «Я поем». Спрягается только **ir**, который ты уже знаешь.",
       tablas: [
         { titulo: "Ir a + инфинитив", encabezados: ["Кто", "Форма"], filas: es6Tabla("ir", "a comer") },
-        { titulo: "¿Cuándo?", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "¿Cuándo?", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "esta tarde", ru: "сегодня днём" }, { es: "esta noche", ru: "сегодня вечером" }],
           [{ es: "mañana", ru: "завтра" }, { es: "pasado mañana", ru: "послезавтра" }],
           [{ es: "el próximo lunes", ru: "в следующий понедельник" }, { es: "este fin de semana", ru: "в эти выходные" }],
@@ -443,7 +444,7 @@ const UNIDAD_ES_6 = {
         {
           id: "es6-deber",
           titulo: "Debes descansar",
-          texto: "**deber** + инфинитив — «следует, нужно бы»: так дают совет. Это правильный глагол на **-er**: debo, debes, debe, debemos, debéis, deben.\n**tener que** звучит сильнее: обязанность, правило. **deber** — мягче, совет: **Debes descansar** — «тебе надо бы отдохнуть».\n«Не стоит» — **no debes**: **No debes trabajar mucho**.",
+          texto: "**deber** + инфинитив — «следует, должен»: так часто дают совет, но им можно выразить и обязанность. Это правильный глагол на **-er**: debo, debes, debe, debemos, debéis, deben.\n**tener que** обычно звучит как конкретная необходимость: **Tienes que pagar**. **deber** чаще звучит как рекомендация: **Debes descansar** — «тебе следует отдохнуть». Разница не строгая: оба могут значить и совет, и обязанность — смотря по ситуации.\n«Не стоит» — **no debes**: **No debes trabajar mucho**.",
           comparacion: "**tengo que** — «я должен, обязан»; **debo** — «мне следует».",
           ejemplos: [
             { es: "Estás muy cansado. Debes dormir más.", ru: "Ты очень устал. Тебе надо больше спать." },
@@ -461,15 +462,15 @@ const UNIDAD_ES_6 = {
       id: "es6m8", n: 8, tipo: "leccion",
       titulo: "Me duele la cabeza",
       resumen: "Части тела; me duele / me duelen; tengo fiebre, tos, gripe.",
-      intro: "Чтобы сказать, что болит, испанский использует ту же схему, что и **gustar** (урок 4): **Me duele la cabeza** — буквально «мне болит голова». А болезни — с **tener**: **tengo fiebre**, **tengo tos**.",
+      intro: "Чтобы сказать, что болит, испанский использует ту же схему, что и **gustar** (урок 4): **Me duele la cabeza** — «у меня болит голова» (болит **голова**, а **me** — кому). А болезни и симптомы — с **tener**: **tengo fiebre**, **tengo tos**.",
       tablas: [
-        { titulo: "El cuerpo", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "El cuerpo", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "la cabeza", ru: "голова" }, { es: "la espalda", ru: "спина" }],
-          [{ es: "el ojo", ru: "глаз" }, { es: "el brazo", ru: "рука (вся)" }],
+          [{ es: "el ojo", ru: "глаз" }, { es: "el brazo", ru: "рука (от плеча до кисти)" }],
           [{ es: "la oreja", ru: "ухо" }, { es: "la mano", ru: "кисть руки" }],
           [{ es: "la nariz", ru: "нос" }, { es: "el dedo", ru: "палец" }],
-          [{ es: "la boca", ru: "рот" }, { es: "el estómago", ru: "желудок, живот" }],
-          [{ es: "el diente, la muela", ru: "зуб, коренной зуб" }, { es: "la pierna", ru: "нога (вся)" }],
+          [{ es: "la boca", ru: "рот" }, { es: "el estómago", ru: "желудок; живот" }],
+          [{ es: "el diente, la muela", ru: "зуб, коренной зуб" }, { es: "la pierna", ru: "нога" }],
           [{ es: "la garganta", ru: "горло" }, { es: "el pie", ru: "ступня" }]] },
         { titulo: "Doler", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "Me duele la cabeza.", ru: "У меня болит голова." }, { es: "Me duelen los pies.", ru: "У меня болят ноги." }],
@@ -524,12 +525,12 @@ const UNIDAD_ES_6 = {
       id: "es6m9", n: 9, tipo: "leccion",
       titulo: "En la farmacia y en el médico",
       resumen: "Аптека, записаться к врачу, неотложка; cada ocho horas.",
-      intro: "В Испании с лёгкой болезнью сначала идут в аптеку: фармацевт даёт совет и лекарство. К врачу записываются в **centro de salud** — районную поликлинику. В экстренном случае — **urgencias** в больнице или телефон 112.",
+      intro: "В Испании при лёгком недомогании часто сначала идут в аптеку: фармацевт советует лекарство без рецепта. К врачу записываются в **centro de salud** — районную поликлинику (центр первичной помощи). В экстренном случае — **urgencias** в больнице или телефон 112.",
       tablas: [
-        { titulo: "En la farmacia", encabezados: ["Испанский", "Испанский"], filas: [
+        { titulo: "En la farmacia", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "el medicamento", ru: "лекарство" }, { es: "la pastilla", ru: "таблетка" }],
           [{ es: "la receta", ru: "рецепт" }, { es: "cada ocho horas", ru: "каждые восемь часов" }],
-          [{ es: "¿Tiene algo para la tos?", ru: "У вас есть что-нибудь от кашля?" }, { es: "Toma una pastilla cada ocho horas.", ru: "Принимай таблетку каждые восемь часов." }]] },
+          [{ es: "¿Tienes algo para la tos?", ru: "У тебя есть что-нибудь от кашля?" }, { es: "Toma una pastilla cada ocho horas.", ru: "Принимай таблетку каждые восемь часов." }]] },
         { titulo: "En el médico", encabezados: ["Испанский", "По-русски"], filas: [
           [{ es: "Quería pedir cita.", ru: "Я бы хотел(а) записаться на приём." }, { es: "el centro de salud", ru: "поликлиника" }],
           [{ es: "el médico, la médica", ru: "врач" }, { es: "el doctor, la doctora", ru: "доктор" }],
@@ -538,17 +539,17 @@ const UNIDAD_ES_6 = {
       secciones: [
         {
           id: "es6-farmacia",
-          titulo: "¿Tiene algo para la tos?",
-          texto: "В аптеке просят так: **¿Tiene algo para la tos?** — «У вас есть что-нибудь от кашля?» (**para** — «для, от»). Или: **Quería algo para el dolor de cabeza**.\nКак принимать: **Toma una pastilla cada ocho horas** — «принимай одну таблетку каждые восемь часов». Некоторые лекарства продают только по рецепту — **con receta**.",
+          titulo: "¿Tienes algo para la tos?",
+          texto: "В аптеке, как и в магазине, обычно говорят на **tú** (урок 5): **¿Tienes algo para la tos?** — «Есть что-нибудь от кашля?» (**para** — «для, от»). На **usted** — **¿Tiene algo…?** Или: **Quería algo para el dolor de cabeza**.\nКак принимать: **Toma una pastilla cada ocho horas** — «принимай одну таблетку каждые восемь часов». Некоторые лекарства продают только по рецепту — **con receta**.",
           ejemplos: [
-            { es: "¿Tiene algo para el dolor de garganta?", ru: "У вас есть что-нибудь от боли в горле?" },
+            { es: "¿Tienes algo para el dolor de garganta?", ru: "Есть что-нибудь от боли в горле?" },
             { es: "Este medicamento necesita receta.", ru: "Это лекарство только по рецепту." }
           ]
         },
         {
           id: "es6-medico",
           titulo: "Pedir cita",
-          texto: "Записаться к врачу — **pedir cita**: **Quería pedir cita con el médico** (формула **quería** — из урока 5). Регистратура спросит: **¿Qué le pasa?** — «что у вас?» (**le** — урок 7) и предложит время: **¿Puede venir el jueves a las cinco?**\nВрач даёт советы с **tener que** и **deber**: **Tienes que descansar**, **Debes beber mucha agua**.",
+          texto: "Записаться к врачу — **pedir cita**: **Quería pedir cita con el médico** (формула **quería** — из урока 5). Регистратура спросит: **¿Qué te pasa?** — «что случилось?» (**te** — урок 7; и здесь часто на «tú») и предложит время: **¿Puedes venir el jueves a las cinco?**\nВрач даёт советы с **tener que** и **deber**: **Tienes que descansar**, **Debes beber mucha agua**.",
           ejemplos: [
             { es: "Quería pedir cita para mañana.", ru: "Я бы хотел(а) записаться на завтра." },
             { es: "Tienes que tomar una pastilla cada doce horas.", ru: "Тебе надо принимать таблетку каждые двенадцать часов." }
@@ -576,7 +577,7 @@ const UNIDAD_ES_6 = {
       id: "es6m11", n: 11, tipo: "proyecto",
       titulo: "Проект",
       resumen: "Как пройти: разговор по ролям, маршрут на плане и твой текст.",
-      intro: "Три части. **Разговор по ролям:** прохожий, сотрудник метро и фармацевт говорят с тобой, а ты отвечаешь своими словами. **Маршрут на плане:** турист спрашивает дорогу — объясни путь по нарисованному плану. **Потом напиши** по-испански (8–12 фраз): как дойти от твоего дома до какого-нибудь места и как ты проведёшь выходные с друзьями — куда вы пойдёте, на чём поедете, во сколько. Приложение отмечает, какие пункты ты уже включил в текст.",
+      intro: "Три части. **Разговор по ролям:** прохожий, сотрудник метро и фармацевт говорят с тобой, а ты отвечаешь своими словами. **Маршрут на плане:** турист спрашивает дорогу — объясни путь по нарисованному плану. **Потом напиши** по-испански (8–12 фраз): как дойти от твоего дома до какого-нибудь места и как ты проведёшь выходные с друзьями — куда вы пойдёте, на чём поедете, во сколько. Приложение отмечает, какие пункты уже есть в твоём тексте.",
       turnos: true,
       rutas: true,
       requisitos: [
@@ -1010,7 +1011,7 @@ const ES6_ENFERMO = [
   ["Ya no estoy enfermo: estoy ___.", "sano", ["sano", "enfermo", "cansado"], "Здоровый — **sano**."]
 ];
 const ES6_FARMACIA = [
-  ["¿Tiene algo ___ la tos?", "para", ["para", "por", "de"], "«От кашля» — **para la tos**."],
+  ["¿Tienes algo ___ la tos?", "para", ["para", "por", "de"], "«От кашля» — **para la tos**."],
   ["Toma una pastilla ___ ocho horas.", "cada", ["cada", "todos", "por"], "«Каждые восемь часов» — **cada ocho horas**."],
   ["Quería pedir ___ con el médico.", "cita", ["cita", "receta", "cuenta"], "Записаться — **pedir cita**."],
   ["Este medicamento necesita ___.", "receta", ["receta", "cita", "pastilla"], "Только по рецепту — **necesita receta**."],
@@ -1051,7 +1052,7 @@ const ES6_SITUACIONES = [
   ["Ты говоришь, что у тебя болит голова.", "Me duele la cabeza.", ["Me duelo la cabeza.", "Me duele mi cabeza."], "**Me duele la cabeza.**", 8],
   ["Ты советуешь другу отдохнуть.", "Debes descansar.", ["Debes a descansar.", "Debes descansas."], "Совет — **debes** + инфинитив.", 7],
   ["Ты звонишь в поликлинику, чтобы записаться к врачу.", "Quería pedir cita.", ["Quería pedir receta.", "Quería pedir la cuenta."], "Записаться — **pedir cita**.", 9],
-  ["Ты просишь в аптеке что-нибудь от кашля.", "¿Tiene algo para la tos?", ["¿Tiene algo por la tos?", "¿Tiene nada para la tos?"], "«От кашля» — **para la tos**.", 9]
+  ["Ты просишь в аптеке что-нибудь от кашля.", "¿Tienes algo para la tos?", ["¿Tienes algo por la tos?", "¿Tienes nada para la tos?"], "«От кашля» — **para la tos**.", 9]
 ];
 const ES6_RESPUESTAS = [
   ["Perdone, ¿la estación está lejos?", "No, está cerca: sigue todo recto.", ["No, es cerca: sigue todo recto.", "No, está cerca: sigues todo recto."], "Где — **está**; дорогу — повелительным.", 4],
@@ -1078,17 +1079,17 @@ const ES6_TURNOS = [
       [["спасибо", "gracias"]], "Muchas gracias."]
   ]),
   es6Turnos("Empleado", "m", "En el metro", [
-    ["Hola, ¿qué quieres?", "Здравствуй, что тебе?", "Попроси билет туда и обратно.",
+    ["Hola, ¿qué quieres?", "Привет! Что тебе нужно?", "Попроси билет туда и обратно.",
       [["билет", "un billete|~billete"], ["туда и обратно", "de ida y vuelta|~ida y vuelta"]], "Un billete de ida y vuelta, por favor."],
     ["Son tres euros. ¿Adónde vas?", "Три евро. Куда едешь?", "Скажи, что едешь в аэропорт.",
       [["в аэропорт", "al aeropuerto|~aeropuerto"]], "Voy al aeropuerto.", "Куда — **a**: **al aeropuerto**"],
-    ["Coge la línea ocho.", "Садись на восьмую линию.", "Спроси, сколько ехать.",
+    ["Coge la línea ocho.", "Садись на восьмую ветку.", "Спроси, сколько ехать.",
       [["сколько ехать", "cuánto tardo|cuánto tarda|~cuánto"]], "¿Cuánto tardo?"],
     ["Unos cuarenta minutos. ¡Buen viaje!", "Минут сорок. Счастливого пути!", "Поблагодари и попрощайся.",
       [["спасибо или прощание", "gracias|adiós|hasta luego|chao"]], "Gracias, adiós."]
   ]),
   es6Turnos("Farmacéutica", "f", "En la farmacia", [
-    ["Hola, ¿qué te pasa?", "Здравствуй, что с тобой?", "Скажи, что у тебя болит голова.",
+    ["Hola, ¿qué te pasa?", "Привет! Что с тобой?", "Скажи, что у тебя болит голова.",
       [["болит", "me duele|~duele"], ["голова", "la cabeza|~cabeza"]], "Me duele la cabeza.", "**Me duele…** — как **me gusta**"],
     ["¿Tienes fiebre?", "Температура есть?", "Скажи, что температуры нет, но есть кашель.",
       [["нет", "no"], ["кашель", "tengo tos|~tos"]], "No, pero tengo tos."],

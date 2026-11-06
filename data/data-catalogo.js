@@ -129,7 +129,7 @@ var AZ_CATALOGO = {
       { id: 2, title: "Кто я и кто мы", desc: "Ser, tener, страны и национальности, семья, артикли и числа до 100.", href: "abece-2.html", lista: true },
       { id: 3, title: "Мир вокруг меня", desc: "Hay, estar и ser, квартира и район, прилагательные, этот и мой.", href: "abece-3.html", lista: true },
       { id: 4, title: "Мой день и привычки", desc: "Настоящее время, распорядок дня, время, погода и что тебе нравится.", href: "abece-4.html", lista: true },
-      { id: 5, title: "Еда, покупки и что мне нужно", desc: "Хочу, могу и надо; еда и одежда, цены, магазин и ресторан, lo и la.", href: "abece-5.html", lista: true },
+      { id: 5, title: "Еда и покупки", desc: "Хочу, могу и надо; еда и одежда, цены, магазин и ресторан, lo и la.", href: "abece-5.html", lista: true },
       { id: 6, title: "По городу", desc: "Куда и где, транспорт, как пройти, планы, здоровье и аптека.", href: "abece-6.html", lista: true },
     ],
     /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo

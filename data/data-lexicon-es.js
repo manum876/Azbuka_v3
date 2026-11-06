@@ -1297,7 +1297,9 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [
+   5
+  ],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -18285,7 +18287,7 @@ const LEXICON_ES = [
   "senses": [
    {
     "ru": "брать",
-    "definitionRu": "«Coge el libro» — возьми книгу. В Испании это обычное слово. В большей части Латинской Америки оно грубое (вульг.): там говорят «tomar» или «agarrar».",
+    "definitionRu": "«Coge el libro» — возьми книгу. В Испании это обычное слово. Во многих странах Латинской Америки оно грубое (вульг.): там говорят «tomar» или «agarrar».",
     "source": "redactado"
    },
    {
@@ -226507,7 +226509,7 @@ const LEXICON_ES = [
   "senses": [
    {
     "ru": "полдник",
-    "definitionRu": "Лёгкая еда между обедом и ужином, около шести вечера: «la merienda de los niños».",
+    "definitionRu": "Лёгкий перекус во второй половине дня, между обедом и ужином: «la merienda de los niños».",
     "source": "redactado"
    }
   ],
@@ -227306,7 +227308,7 @@ const LEXICON_ES = [
   "senses": [
    {
     "ru": "порция",
-    "definitionRu": "В баре — большая тарелка закуски на несколько человек: «una ración de calamares».",
+    "definitionRu": "Порция блюда; в баре её часто берут на нескольких человек: «una ración de calamares».",
     "source": "redactado"
    }
   ],
