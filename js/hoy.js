@@ -29,7 +29,32 @@
    Los datos de la unidad se cargan recién al abrir el desafío
    (azHoyCargar), con las mismas dependencias que su página.
    Guarda az_hoy: { fecha, mostrado, hecho, nivel, unidad }.
+
+   ABECÉ (06/11/2026): el mismo desafío para el curso de español, con los
+   textos en ruso (borrador para Iván) y la unidad de az_ultimo_es. Guarda
+   az_hoy_es (cada curso lleva su propio desafío). Corrige con
+   corrector-es.js (azCorregirEs, azSituacionEs: la tilde que falta es Casi):
+     U1 диктант дня (escuchar una palabra de la U1 y escribirla)
+     U2 фраза дня (traducir al español una frase de la U1–U2, FRASES_ES)
+     U3 слово дня (un sustantivo de la U3 en una frase propia; el artículo
+        que no concuerda es Casi)
+     U4 глагол дня (una frase sobre uno mismo en presente, con yo)
+     U5 число или цена дня (un número o un precio, en letras; un día cada uno)
+     U6 указание дня (la frase entera con el imperativo de tú)
+   Las unidades de Abecé sin desafío propio usan el de la última que lo
+   tiene (AZ_HOY_ES_MAX).
    ============================================================ */
+const AZ_HOY_ES = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
+const AZ_HOY_K = AZ_HOY_ES ? "az_hoy_es" : "az_hoy";
+const AZ_HOY_ES_MAX = 6;
+/* Abecé: lo mismo que carga abece-N.html (las unidades anteriores, para las palabras ya vistas).
+   [src, global]: si la página ya pidió ese archivo y todavía no llegó, se espera a que llegue. */
+function azHoyDepsEs(n) {
+  const out = [["data/data-lexicon-es.js", "LEXICON_ES"], ["data/data-formas-es.js", "FORMAS_ES"], ["data/data-verbos-es.js", "VERBOS_ES"],
+    ["data/data-alfabeto-es.js", "ALFABETO_ES"], ["data/data-dialogos-es.js", "FRASES_ES"], ["js/corrector.js", "azCorregir"], ["js/corrector-es.js", "azCorregirEs"], ["js/tilde-es.js", "tdAnalizar"]];
+  for (let k = 1; k <= n; k++) out.push(["data/data-unidad-es-" + k + ".js", "UNIDAD_ES_" + k]);
+  return out;
+}
 const AZ_HOY_DEPS = {
   1: ["data/data-alphabet.js", "data/data-unidad-1.js"],
   2: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "data/data-mapa.js", "data/data-unidad-2.js"],
@@ -46,10 +71,18 @@ const AZ_HOY_DEPS = {
   13: ["data/data-casos.js", "data/data-verbos.js", "data/data-frases.js", "data/data-dialogos.js", "js/corrector.js", "data/data-unidad-13.js"]
 };
 const AZ_HOY_CARGADOS = {};
+const azHoyHay = g => { try { return new Function("return typeof " + g + " !== 'undefined'")(); } catch (e) { return false; } };
 function azHoyCargar(n) {
-  const deps = AZ_HOY_DEPS[n] || [];
-  return deps.reduce((p, src) => p.then(() => new Promise(res => {
-    if (AZ_HOY_CARGADOS[src] || document.querySelector('script[src="' + src + '"]')) { AZ_HOY_CARGADOS[src] = true; return res(); }
+  const deps = AZ_HOY_ES ? azHoyDepsEs(n) : (AZ_HOY_DEPS[n] || []);
+  return deps.reduce((p, dep) => p.then(() => new Promise(res => {
+    const src = Array.isArray(dep) ? dep[0] : dep, g = Array.isArray(dep) ? dep[1] : null;
+    if (AZ_HOY_CARGADOS[src] || (g && azHoyHay(g))) { AZ_HOY_CARGADOS[src] = true; return res(); }
+    if (document.querySelector('script[src="' + src + '"]')) {
+      /* Ya pedido por la página (el léxico del inicio): esperar a que llegue, hasta 20 s */
+      if (!g) { AZ_HOY_CARGADOS[src] = true; return res(); }
+      let t = 0; const iv = setInterval(() => { if (azHoyHay(g) || ++t > 200) { clearInterval(iv); AZ_HOY_CARGADOS[src] = true; res(); } }, 100);
+      return;
+    }
     const s = document.createElement("script"); s.src = src;
     s.onload = s.onerror = () => { AZ_HOY_CARGADOS[src] = true; res(); };
     document.head.appendChild(s);
@@ -58,7 +91,10 @@ function azHoyCargar(n) {
 function azHoyFecha() { return new Date().toISOString().slice(0, 10); }
 function azHoyNumero() { const d = new Date(); return Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000); }
 /* La unidad del desafío: la del último módulo abierto (hasta la 8) */
-async function azHoyUnidad() { const u = await azGet("az_ultimo", null); return u && u.unidad ? Math.min(11, Math.max(1, u.unidad)) : null; }
+async function azHoyUnidad() {
+  if (AZ_HOY_ES) { const u = await azGet("az_ultimo_es", null); return u && u.unidad ? Math.min(AZ_HOY_ES_MAX, Math.max(1, u.unidad)) : null; }
+  const u = await azGet("az_ultimo", null); return u && u.unidad ? Math.min(11, Math.max(1, u.unidad)) : null;
+}
 
 /* ── Ayudas para revisar ─────────────────────────────────────── */
 const azHoyPal = t => t.match(/[А-Яа-яЁё\u0301-]+/g) || [];
@@ -97,6 +133,7 @@ function azHoyConcordancia(txt) {
 
 /* ── Los desafíos ────────────────────────────────────────────── */
 function azHoyDesafio(n) {
+  if (AZ_HOY_ES) return azHoyDesafioEs(n);
   const num = azHoyNumero();
   const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
 
@@ -275,6 +312,115 @@ function azHoyDesafio(n) {
   return null;
 }
 
+/* ── Abecé: los desafíos (06/11/2026, textos en ruso: borrador para Iván) ── */
+const azHoyEsTok = t => (typeof azTokens === "function" ? azTokens(t) : String(t || "").split(/\s+/)).map(w => String(w).toLowerCase());
+/* Lo que devuelve azCorregirEs, como nivel y mensaje del desafío */
+function azHoyEsCorr(txt, esperadas, opts, glosa) {
+  const r = azCorregirEs(txt, esperadas, opts || {});
+  const nivel = r.resultado === 2 ? "bien" : r.resultado === 1 ? "casi" : "mal";
+  const ok = (r.correcta && r.correcta.length ? r.correcta.map(x => x.t).join("") : r.esperada) || esperadas[0];
+  /* Los motivos, si son pocos (con todo mal, la forma correcta ya lo dice) */
+  const malas = (r.palabras || []).filter(p => p.estado !== "ok" && p.motivo);
+  const mot = malas.length <= 2 ? [...new Set(malas.map(p => p.motivo))].join(" ") : "";
+  const g = glosa ? " (" + glosa + ")" : "", pt = /[.!?…]$/.test(ok) && !g ? "" : ".";
+  return { nivel, oir: ok, msg: nivel === "bien" ? "**" + ok + "**" + g + pt : (nivel === "casi" ? "Почти: " : "Правильно: ") + "**" + ok + "**" + g + pt + (mot ? " " + mot : "") };
+}
+function azHoyEsLex(id) { return typeof LEXICON_ES !== "undefined" ? LEXICON_ES.find(e => e.id === id) : null; }
+const azHoyEsRu = e => e && e.senses && e.senses[0] ? e.senses[0].ru : "";
+function azHoyDesafioEs(n) {
+  const num = azHoyNumero();
+  const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+  if (typeof azCorregirEs !== "function") return null;
+
+  if (n === 1 && typeof ES1_DELETREO !== "undefined") {
+    const lista = [...new Set(ES1_DELETREO.concat(typeof ES1_TONICA !== "undefined" ? ES1_TONICA : []))].filter(w => es1Id(w));
+    const w = lista[num % lista.length], ru = azHoyEsRu(azHoyEsLex(es1Id(w)));
+    return { titulo: "Диктант дня", emoji: "🎧", sub: "Послушай (▶) и напиши слово по-испански.", audio: w, consigna: "Напиши слово, которое слышишь.",
+      pista: "Начинается на «" + w.charAt(0).toUpperCase() + "», в нём " + [...w].length + " " + (/[2-4]$/.test([...w].length) && !/1[2-4]$/.test([...w].length) ? "буквы" : "букв") + (ru ? ", значит «" + ru + "»" : "") + ".",
+      revisar: txt => azHoyEsCorr(txt, [w], {}, ru) };
+  }
+  if (n === 2 && typeof FRASES_ES !== "undefined") {
+    const seg = t => String(t).replace(/\([^)]*\)/g, "").split(/(?<=[!?.])\s+/).map(x => x.trim()).filter(Boolean);
+    const fr = FRASES_ES.filter(f => f.unidad && f.unidad <= 2 && f.es && f.ru && f.es.split(" ").length >= 2);
+    const F = fr[num % fr.length], ru = seg(F.ru)[0] || F.ru;
+    const nr = t => t.toLowerCase().replace(/[!?.,«»]/g, "").trim();
+    const validas = [F.es].concat(FRASES_ES.filter(f => f !== F && f.es && f.ru && seg(f.ru).some(x => nr(x) === nr(ru))).map(f => f.es));
+    const p0 = F.es.replace(/^[¿¡]/, "").split(" ")[0].replace(/[!?.,]/g, "");
+    return { titulo: "Фраза дня", grande: "«" + ru + "»", sub: "Напиши по-испански", consigna: "Переведи эту фразу на испанский.",
+      pista: "Начинается с «" + p0 + "», в ней " + F.es.split(" ").length + " " + (F.es.split(" ").length < 5 ? "слова" : "слов") + ".",
+      revisar: txt => azHoyEsCorr(txt, validas) };
+  }
+  if (n === 3 && typeof UNIDAD_ES_3 !== "undefined" && typeof es3Vocab === "function") {
+    const ids = [...new Set([].concat(...UNIDAD_ES_3.modulos.map(m => es3Vocab(m))))];
+    const nombres = ids.map(azHoyEsLex).filter(e => e && e.posNormalized === "sustantivo" && (e.gender === "m" || e.gender === "f"));
+    const e = nombres[num % nombres.length], m = e.gender === "m", soloPl = e.numberClass === "pluraliaTantum";
+    const formas = typeof formasEsLista === "function" ? formasEsLista(e.id) : [{ f: e.es, k: soloPl ? "pl" : "sg" }];
+    const lista = [...new Set([e.es].concat(formas.map(x => x.f)))];
+    const art = soloPl ? (m ? ["los", "unos"] : ["las", "unas"]) : m ? ["el", "un"] : ["la", "una"];
+    return { titulo: "Слово дня", grande: e.es, sub: azHoyEsRu(e) + " · " + (m ? "мужской род" : "женский род") + (soloPl ? ", только множественное число" : ""), audio: e.es,
+      consigna: "Напиши свою фразу с этим словом: что где находится? (hay… / … está…)",
+      pista: "Род " + (m ? "мужской" : "женский") + ": **" + art[0] + " / " + art[1] + "** " + e.es + ". Например: «En mi casa hay " + art[1] + " …»",
+      revisar: txt => {
+        const r = azSituacionEs(txt, { necesita: [{ es: azHoyEsRu(e), formas: lista }] }), el = r.elementos[0];
+        if (r.nivel === 0) return { nivel: "mal", msg: "Не нахожу в твоей фразе слово **" + e.es + "**." };
+        const T = azHoyEsTok(txt), w = T[el.pos], prev = T[el.pos - 1];
+        const pl = formas.some(x => x.k === "pl" && x.f.toLowerCase() === (el.mejor || w || "").toLowerCase());
+        const ART = { el: "m0", un: "m0", la: "f0", una: "f0", los: "m1", unos: "m1", las: "f1", unas: "f1" };
+        const debe = (m ? "m" : "f") + (pl ? 1 : 0);
+        if (prev && ART[prev] && ART[prev] !== debe) {
+          const bueno = { m0: ["el", "un"], f0: ["la", "una"], m1: ["los", "unos"], f1: ["las", "unas"] }[debe], palabra = el.mejor || w;
+          return { nivel: "casi", msg: "Почти: «" + prev + " " + palabra + "» — слово " + (m ? "мужского" : "женского") + " рода: **" + bueno[0] + " " + palabra + "** / **" + bueno[1] + " " + palabra + "**." };
+        }
+        if (r.nivel === 1) return { nivel: "casi", msg: "Почти: **" + el.mejor + "**, а не «" + el.escrito + "»." };
+        return { nivel: "bien", msg: "Есть **" + w + "**: " + azHoyEsRu(e) + "." };
+      } };
+  }
+  if (n === 4 && typeof ES4_CONJ !== "undefined" && typeof es4Pres === "function") {
+    const verbos = [...new Set(ES4_CONJ.map(x => x[1]))].filter(v => es4Pres(v, 0));
+    const inf = verbos[num % verbos.length], yo = es4Pres(inf, 0), refl = /se$/.test(inf);
+    const lex = typeof LEXICON_ES !== "undefined" ? LEXICON_ES.find(e => e.es === inf && e.posNormalized === "verbo") : null;
+    return { titulo: "Глагол дня", grande: inf, sub: azHoyEsRu(lex), audio: inf,
+      consigna: "Напиши фразу о себе с этим глаголом: что ты делаешь (**yo**, настоящее время)?",
+      pista: (refl ? "Возвратный глагол: с yo — **me** + глагол. " : "") + "Например: «Normalmente… » или «Todos los días…».",
+      revisar: txt => {
+        const r = azSituacionEs(txt, { necesita: [{ es: inf, formas: [yo] }] }), el = r.elementos[0];
+        if (r.nivel === 2) return { nivel: "bien", msg: "**" + yo + "** — форма yo." };
+        if (r.nivel === 1) return { nivel: "casi", msg: "Почти: с yo — **" + yo + "**, а не «" + el.escrito + "»." };
+        if (refl) { const b = azSituacionEs(txt, { necesita: [{ es: inf, formas: [yo.split(" ").pop()] }] });
+          if (b.nivel > 0) return { nivel: "casi", msg: "Почти: глагол возвратный, нужно **" + yo + "** (с **me**)." }; }
+        const otro = azSituacionEs(txt, { necesita: [{ es: inf, formas: [inf] }] });
+        if (otro.nivel > 0) return { nivel: "casi", msg: "Почти: о себе (yo) — **" + yo + "**." };
+        return { nivel: "mal", msg: "Не нахожу в твоей фразе глагол **" + inf + "**. С yo: **" + yo + "**." };
+      } };
+  }
+  if (n === 5 && typeof es5Num === "function" && typeof ES5_NUMEROS !== "undefined") {
+    if (num % 2 && typeof ES5_PRECIOS !== "undefined") {
+      const P = ES5_PRECIOS[Math.floor(num / 2) % ES5_PRECIOS.length];
+      return { titulo: "Цена дня", grande: P[0], sub: "Как сказать эту цену?", consigna: "Напиши цену словами по-испански.",
+        pista: /,/.test(P[0]) ? "Евро и центы соединяются словом **con**." : "После числа — **euro / euros**.",
+        revisar: txt => azHoyEsCorr(txt, [P[1]].concat(P[2] || [])) };
+    }
+    const N = ES5_NUMEROS[Math.floor(num / 2) % ES5_NUMEROS.length], w = es5Num(N);
+    return { titulo: "Число дня", grande: N.toLocaleString("es-ES"), sub: "Как сказать это число?", consigna: "Напиши число словами по-испански.",
+      pista: N >= 1000 ? "Тысяча — **mil** (без «un»), миллион — **un millón**." : N >= 200 ? "Сотни согласуются: dos**cientos**, quin**ientos**." : "Сто ровно — **cien**, дальше — **ciento**…",
+      revisar: txt => azHoyEsCorr(txt, [w]) };
+  }
+  if (n === 6 && typeof ES6_IMP !== "undefined" && typeof es6Imp === "function") {
+    const lista = ES6_IMP.filter(x => es6Imp(x[1])), X = lista[num % lista.length];
+    const imp = es6Imp(X[1]), base = X[0].replace(/\s*\([^)]*\)\s*$/, "");
+    const frase = base.replace(/(^|¡)___/, (a, b) => b + cap(imp));
+    const irreg = /irregular/.test(X[3] || ""), raiz = typeof ES6_IMP_NOTA !== "undefined" && ES6_IMP_NOTA[X[1]] && !irreg;
+    return { titulo: "Указание дня", grande: X[0], sub: "Говоришь другу, на «tú»", audio: null,
+      consigna: "Напиши всю фразу с повелительной формой глагола **" + X[1] + "**.",
+      pista: irreg ? "Это одна из неправильных форм: ven, di, sal, haz, ten, ve, pon, sé." : raiz ? "Как форма **él** в настоящем — с той же особенностью корня." : "Как форма **él** в настоящем: él habla → ¡habla!",
+      revisar: txt => {
+        if (azHoyEsTok(txt).length === 1) return azHoyEsCorr(txt, [imp], { foco: [imp] });
+        return azHoyEsCorr(txt, [frase], { foco: [imp] });
+      } };
+  }
+  return null;
+}
+
 /* ── La tarjeta flotante ─────────────────────────────────────── */
 function AzHoy({ c, unidad, onCerrar }) {
   const h = React.createElement;
@@ -285,23 +431,29 @@ function AzHoy({ c, unidad, onCerrar }) {
   const [pista, setPista] = useState(false);
   const [res, setRes] = useState(null);
   const VERDE = "#4CAF82";
+  /* Abecé (06/11/2026): textos en ruso, voz en español, se escribe en español */
+  const T = AZ_HOY_ES ? { hoy: "Сегодня · Урок ", def: "Задание дня", cargando: "Загрузка…", nada: "Для этого урока задания дня пока нет.", oir: "Послушать", escribe: "Пиши по-испански…",
+      pista: "💡 Подсказка", revisar: "Проверить", et: { bien: "✓ Верно", casi: "≈ Почти", mal: "✗ Неверно" }, cuaderno: "＋ Тетрадь", listo: "Готово", cerrar: "Закрыть", reloj: "Часы", lang: "es" }
+    : { hoy: "Hoy · Unidad ", def: "Desafío del día", cargando: "Cargando…", nada: "Todavía no hay desafío para esta unidad.", oir: "Escuchar", escribe: "Escribe en ruso…",
+      pista: "💡 Pista", revisar: "Revisar", et: { bien: "✓ Bien", casi: "≈ Casi", mal: "✗ Mal" }, cuaderno: "＋ Cuaderno", listo: "Listo", cerrar: "Cerrar", reloj: "Reloj", lang: "ru" };
+  const hablar = t => (AZ_HOY_ES ? azHablarEs(t) : azHablarRu(t));
   useEffect(() => { let vivo = true; azHoyCargar(unidad).then(() => { if (vivo) setD(azHoyDesafio(unidad) || false); }); return () => { vivo = false; }; }, [unidad]);
   const revisar = async () => {
     let r = d.revisar(txt);
     /* Si la consigna está bien pero el verbo no coincide con el pronombre: Casi */
-    if (d.concordancia && r.nivel === "bien") { const m = azHoyConcordancia(txt); if (m) r = { nivel: "casi", msg: r.msg + " " + m }; }
+    if (d.concordancia && !AZ_HOY_ES && r.nivel === "bien") { const m = azHoyConcordancia(txt); if (m) r = { nivel: "casi", msg: r.msg + " " + m }; }
     /* Consejos del proyecto de la unidad (funciones propias, sin depender de unidad-ui.js) */
     let tips = d.tips ? [...new Set([].concat(...d.tips.map(k => k.fn ? (k.fn(txt) || []) : [])))] : [];
     /* Sin repetir lo que ya dice la corrección (misma forma en negrita) */
     const negr = (r.msg.match(/\*\*([^*]+)\*\*/g) || []).map(x => azHoyK(x));
     tips = tips.filter(tp => !(tp.match(/\*\*([^*]+)\*\*/g) || []).some(x => negr.indexOf(azHoyK(x)) >= 0));
     setRes(Object.assign({ tips }, r));
-    const prev = await azGet("az_hoy", {});
-    await azSet("az_hoy", Object.assign(prev, { fecha: azHoyFecha(), hecho: true, nivel: r.nivel, unidad }));
+    const prev = await azGet(AZ_HOY_K, {});
+    await azSet(AZ_HOY_K, Object.assign(prev, { fecha: azHoyFecha(), hecho: true, nivel: r.nivel, unidad }));
   };
   const reloj = n => {
     const S = 132, r = S / 2 - 6, cx = S / 2, a = (n % 12) / 12 * 2 * Math.PI;
-    return h("svg", { viewBox: "0 0 " + S + " " + S, width: S, height: S, role: "img", "aria-label": "Reloj" },
+    return h("svg", { viewBox: "0 0 " + S + " " + S, width: S, height: S, role: "img", "aria-label": T.reloj },
       h("circle", { cx, cy: cx, r, fill: c.bg2, stroke: c.gold, "stroke-width": 3 }),
       [...Array(12)].map((_, k) => { const b = k / 12 * 2 * Math.PI; return h("line", { key: k, x1: cx + Math.sin(b) * (r - 4), y1: cx - Math.cos(b) * (r - 4), x2: cx + Math.sin(b) * (r - (k % 3 ? 10 : 15)), y2: cx - Math.cos(b) * (r - (k % 3 ? 10 : 15)), stroke: c.textMuted, "stroke-width": k % 3 ? 2 : 3 }); }),
       h("line", { x1: cx, y1: cx, x2: cx + Math.sin(a) * r * 0.5, y2: cx - Math.cos(a) * r * 0.5, stroke: c.text, "stroke-width": 6, "stroke-linecap": "round" }),
@@ -333,49 +485,50 @@ function AzHoy({ c, unidad, onCerrar }) {
       .az-hoy-r{margin-top:12px;font-size:14px;line-height:1.5;}
       .az-hoy .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}   /* igual que .play de unidad-ui.js */
     `),
-    h("div", { className: "az-hoy", role: "dialog", "aria-modal": "true", "aria-label": "Desafío del día" },
+    h("div", { className: "az-hoy", role: "dialog", "aria-modal": "true", "aria-label": T.def },
       h("div", { className: "az-hoy-top" },
-        h("div", null, h("div", { className: "az-hoy-k" }, "Hoy · Unidad " + unidad), h("div", { className: "az-hoy-t" }, d ? d.titulo : "Desafío del día")),
-        h("button", { className: "az-hoy-x", onClick: onCerrar, "aria-label": "Cerrar" }, "✕")),
-      d === null && h("div", { className: "az-hoy-c", style: { color: c.textMuted } }, "Cargando…"),
-      d === false && h("div", { className: "az-hoy-c" }, "Todavía no hay desafío para esta unidad."),
+        h("div", null, h("div", { className: "az-hoy-k" }, T.hoy + unidad), h("div", { className: "az-hoy-t" }, d ? d.titulo : T.def)),
+        h("button", { className: "az-hoy-x", onClick: onCerrar, "aria-label": T.cerrar }, "✕")),
+      d === null && h("div", { className: "az-hoy-c", style: { color: c.textMuted } }, T.cargando),
+      d === false && h("div", { className: "az-hoy-c" }, T.nada),
       d && h(React.Fragment, null,
         /* Si solo hay emoji (situación del día), no hay recuadro: el emoji va al lado de la consigna */
         !soloEmoji && h("div", { className: "az-hoy-pres" },
           d.reloj ? reloj(d.reloj) : d.emoji ? h("div", { style: { fontSize: 40 } }, d.emoji) : null,
           h("div", { style: { flex: 1, minWidth: 0 } },
-            d.grande && h("div", { className: "az-hoy-g", lang: d.titulo === "Frase del día" ? "es" : "ru" }, d.id && typeof AzPalabra === "function" ? h(AzPalabra, { texto: d.grande, id: d.id }) : d.grande),
+            d.grande && h("div", { className: "az-hoy-g", lang: AZ_HOY_ES ? (d.titulo === "Фраза дня" ? "ru" : "es") : d.titulo === "Frase del día" ? "es" : "ru" }, d.id && !AZ_HOY_ES && typeof AzPalabra === "function" ? h(AzPalabra, { texto: d.grande, id: d.id }) : d.grande),
             d.sub && h("div", { className: "az-hoy-s" }, d.sub)),
-          d.audio && h("button", { className: "play", onClick: () => azHablarRu(d.audio), "aria-label": "Escuchar" }, "▶")),
+          d.audio && h("button", { className: "play", onClick: () => hablar(d.audio), "aria-label": T.oir }, "▶")),
         soloEmoji
           ? h("div", { className: "az-hoy-c", style: { display: "flex", alignItems: "center", gap: 12 } },
               h("div", { style: { fontSize: 32, lineHeight: 1, flexShrink: 0 }, "aria-hidden": "true" }, d.emoji),
               h("div", { style: { flex: 1, minWidth: 0 } }, azFmt(d.consigna)))
           : h("div", { className: "az-hoy-c" }, azFmt(d.consigna)),
-        h("input", { className: "az-hoy-in", lang: "ru", value: txt, placeholder: "Escribe en ruso…", onInput: e => { setTxt(e.target.value); setRes(null); },
+        h("input", { className: "az-hoy-in", lang: T.lang, value: txt, placeholder: T.escribe, onInput: e => { setTxt(e.target.value); setRes(null); },
           autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off" }),
         h("div", { className: "az-hoy-row" },
-          h("button", { className: "az-hoy-b2", onClick: () => setPista(!pista) }, "💡 Pista"),
-          h("button", { className: "az-hoy-b", disabled: !txt.trim(), onClick: revisar }, "Revisar")),
+          h("button", { className: "az-hoy-b2", onClick: () => setPista(!pista) }, T.pista),
+          h("button", { className: "az-hoy-b", disabled: !txt.trim(), onClick: revisar }, T.revisar)),
         pista && h("div", { className: "az-hoy-p" }, azFmt(d.pista)),
         res && h("div", { className: "az-hoy-r" },
-          h("div", { style: { fontWeight: 800, color: colRes } }, res.etiqueta || { bien: "✓ Bien", casi: "≈ Casi", mal: "✗ Mal" }[res.nivel]),
+          h("div", { style: { fontWeight: 800, color: colRes } }, res.etiqueta || T.et[res.nivel]),
           h("div", { style: { display: "flex", alignItems: "center", gap: 10, marginTop: 4 } }, h("div", { style: { flex: 1 } }, azFmt(res.msg)),
-            res.oir && h("button", { className: "play", onClick: () => azHablarRu(res.oir), "aria-label": "Escuchar" }, "▶")),
+            res.oir && h("button", { className: "play", onClick: () => hablar(res.oir), "aria-label": T.oir }, "▶")),
           res.tips && res.nivel !== "bien" && res.tips.map((t, i) => h("div", { key: i, style: { marginTop: 6, color: c.textSub } }, azFmt(t))),
-          res.nivel === "bien" && h("button", { className: "az-hoy-b2", style: { marginTop: 10, width: "100%" }, onClick: () => { azGuardarEnCuaderno(txt, { titulo: "Hoy · " + d.titulo, href: "index.html" }); } }, "＋ Cuaderno"),
-          h("button", { className: "az-hoy-b2", style: { marginTop: 8, width: "100%" }, onClick: onCerrar }, "Listo")))));
+          res.nivel === "bien" && h("button", { className: "az-hoy-b2", style: { marginTop: 10, width: "100%" }, onClick: () => { azGuardarEnCuaderno(txt, { titulo: (AZ_HOY_ES ? "Сегодня · " : "Hoy · ") + d.titulo, href: "index.html" }); } }, T.cuaderno),
+          h("button", { className: "az-hoy-b2", style: { marginTop: 8, width: "100%" }, onClick: onCerrar }, T.listo)))));
 }
 
 /* Tarjeta «Hoy» del inicio (cuadrada, al lado de «Seguir estudiando») */
 function AzHoyTarjeta({ c, hecho, onAbrir, alto }) {
   const h = React.createElement;
-  return h("button", { onClick: onAbrir, "aria-label": "Desafío del día",
+  const ES = AZ_HOY_ES;
+  return h("button", { onClick: onAbrir, "aria-label": ES ? "Задание дня" : "Desafío del día",
     style: { width: alto, minHeight: alto, flexShrink: 0, borderRadius: 16, background: c.card, border: `1px solid ${hecho ? c.border : c.gold + "88"}`, color: c.text, cursor: "pointer",
       display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, fontFamily: "inherit", padding: 8 } },
     h("div", { style: { fontSize: 26 } }, hecho ? "✅" : "🎯"),
-    h("div", { style: { fontSize: 15, fontWeight: 800, color: c.gold } }, "Hoy"),
-    h("div", { style: { fontSize: 11, color: c.textMuted, lineHeight: 1.2, textAlign: "center" } }, hecho ? "Hecho" : "Desafío del día"));
+    h("div", { style: { fontSize: 15, fontWeight: 800, color: c.gold } }, ES ? "Сегодня" : "Hoy"),
+    h("div", { style: { fontSize: 11, color: c.textMuted, lineHeight: 1.2, textAlign: "center" } }, hecho ? (ES ? "Сделано" : "Hecho") : ES ? "Задание дня" : "Desafío del día"));
 }
 
 window.AzHoy = AzHoy;
@@ -384,3 +537,5 @@ window.azHoyUnidad = azHoyUnidad;
 window.azHoyFecha = azHoyFecha;
 window.azHoyDesafio = azHoyDesafio;
 window.azHoyCargar = azHoyCargar;
+window.AZ_HOY_K = AZ_HOY_K;
+window.AZ_HOY_ES = AZ_HOY_ES;

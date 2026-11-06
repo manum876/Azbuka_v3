@@ -70,13 +70,12 @@
 const { useState, useEffect } = htmPreact;
 /* ── Abecé (27/10/2026): el inicio con la marca de Abecé y sus textos en ruso
    (borrador para Iván). Mientras Abecé no tenga unidades, no se muestran
-   «Seguir estudiando», «Hoy» ni «Repaso de hoy» (son de las unidades de Azbuka),
-   y la tarjeta no lleva a ningún índice. ── */
+   «Seguir estudiando», «Hoy» ni «Repaso de hoy», y la tarjeta no lleva a ningún índice. ── */
 const ABECE = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
 const SIN_UNIDADES = ABECE && !(AZ_CATALOGO.abece.unidades || []).length;
-/* El desafío del día y el Repaso de hoy son de Azbuka (hoy.js y repaso.html usan sus unidades):
-   en Abecé no se muestran hasta que tenga los suyos (28/10/2026). */
-const SIN_HOY = ABECE;
+/* El desafío del día y el Repaso de hoy: desde el 06/11/2026 también en Abecé (hoy.js y
+   repaso.html usan las unidades de la dirección; el desafío se guarda en az_hoy_es). */
+const SIN_HOY = SIN_UNIDADES;
 const TXI = ABECE ? {
   glyph: (AZ_DIRECCION.marca || {}).glyph || "Ab", titulo: (AZ_DIRECCION.marca || {}).nombre || "Abecé",
   desc: "Полный курс испанского с нуля для тех, кто говорит по-русски. Понятная теория, практические упражнения и живые примеры — чтобы ты уверенно шёл вперёд, от уровня A1 до B1.",
@@ -104,7 +103,7 @@ function App() {
      que dejaban la pantalla negra unos segundos). Se pide apenas se dibuja el
      inicio; solo lo usan los buscadores, que se actualizan cuando llega. */
   const [, setLexListo] = useState(lexCargado());
-  const leerHoy = async () => { const hs = await azGet("az_hoy", {}); setHoyHecho(hs.fecha === azHoyFecha() && !!hs.hecho); return hs; };
+  const leerHoy = async () => { const hs = await azGet(AZ_HOY_K, {}); setHoyHecho(hs.fecha === azHoyFecha() && !!hs.hecho); return hs; };
 
   useEffect(() => {
     /* El léxico de la dirección (27/10/2026: en Abecé, el español) */
@@ -121,13 +120,15 @@ function App() {
       setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
       setUltimo(await azLeerUltimo());
       { const pr = await azGet("az_progress", {}), srs = pr.srs || {}, hoy = new Date().toISOString().slice(0, 10);
-        setRepasoN(Object.keys(srs).filter(k => srs[k].p && srs[k].p <= hoy && k.indexOf("ej:") === 0).length); }
-      if (SIN_HOY) return;   /* Abecé: sin desafío del día (todavía) */
+        /* Solo lo del curso activo: en Abecé, las unidades se guardan como "es1"… (progress.js) */
+        const delCurso = k => ABECE ? /^es/.test(String(srs[k].u || "")) : !/^es/.test(String(srs[k].u || ""));
+        setRepasoN(Object.keys(srs).filter(k => srs[k].p && srs[k].p <= hoy && k.indexOf("ej:") === 0 && delCurso(k)).length); }
+      if (SIN_HOY) return;   /* sin unidades: sin desafío del día */
       const u = await azHoyUnidad(); setHoyUnidad(u);
       const hs = await leerHoy();
       /* Una vez por día, al abrir el inicio, si ya empezó alguna unidad */
       if (u && hs.mostrado !== azHoyFecha()) {
-        await azSet("az_hoy", Object.assign({}, hs, { mostrado: azHoyFecha() }));
+        await azSet(AZ_HOY_K, Object.assign({}, hs, { mostrado: azHoyFecha() }));
         setTimeout(() => setHoyAbierto(true), 700);
       }
     })();
@@ -194,9 +195,9 @@ function App() {
       },
         React.createElement("div", { className: "cont-n", style: { background: repasoN ? c.gold : c.bg3, color: repasoN ? "#0F0F14" : c.textMuted } }, repasoN ? (repasoN > 99 ? "99+" : repasoN) : "✓"),
         React.createElement("div", { style: { flex: 1, minWidth: 0 } },
-          React.createElement("div", { className: "cont-k", style: { color: c.gold } }, "Repaso de hoy"),
-          React.createElement("div", { className: "cont-t", style: { color: c.text } }, repasoN ? "Lo que estás por olvidar" : "Estás al día"),
-          React.createElement("div", { className: "cont-s", style: { color: c.textMuted } }, repasoN ? repasoN + " por repasar · sesiones de unos 10 minutos" : "Igual puedes practicar un poco de tu unidad")),
+          React.createElement("div", { className: "cont-k", style: { color: c.gold } }, ABECE ? "Повторение дня" : "Repaso de hoy"),
+          React.createElement("div", { className: "cont-t", style: { color: c.text } }, ABECE ? (repasoN ? "То, что скоро забудется" : "Всё повторено") : repasoN ? "Lo que estás por olvidar" : "Estás al día"),
+          React.createElement("div", { className: "cont-s", style: { color: c.textMuted } }, ABECE ? (repasoN ? "Повторить: " + repasoN + " · занятие минут на 10" : "Можно немного потренировать свой урок") : repasoN ? repasoN + " por repasar · sesiones de unos 10 minutos" : "Igual puedes practicar un poco de tu unidad")),
         React.createElement("span", { style: { color: c.textMuted, fontSize: 20 } }, "›")
       ),
 
