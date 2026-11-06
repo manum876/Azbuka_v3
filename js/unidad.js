@@ -21,6 +21,8 @@
        dark, onSalir,
        aviso: "…",                // recuadro destacado al empezar (opcional)
        examen: { intro, partes: [{ nombre, tipos, n }], aprobado: .8 },  // modo evaluación
+                                       // repaso acumulativo (06/11/2026): partes: [{ nombre, bloque, n }] elige por e.bloque;
+                                       // clave: "repaso" guarda aparte; kick, textoOk, textoNo, repetir: los textos del final
        onReforzar: parte => …     // en el examen, «Practicar <parte>»
        onFin: lista => …          // al terminar: [{ id, tipo, parte, r, p }] con los puntos (0–1) de cada uno (06/10/2026)
        entiende: "medio"          // «Se entiende» vale medio punto (examen final, Manu 06/10/2026)
@@ -823,7 +825,7 @@
         /* Examen: n ejercicios por parte, sin filtro de dificultad; se marcan con su parte */
         const sel = [];
         examen.partes.forEach(p => {
-          const pp = pool.filter(e => p.tipos.indexOf(e.tipo) >= 0 && !sel.some(x => x.grupo && x.grupo === e.grupo));
+          const pp = pool.filter(e => (p.bloque ? e.bloque === p.bloque : p.tipos.indexOf(e.tipo) >= 0) && !sel.some(x => x.grupo && x.grupo === e.grupo));   /* bloque: repaso acumulativo (06/11/2026) */
           azPickExercises(pp, { n: p.n, repaso: 0 }).forEach(e => sel.push(Object.assign({}, e, { parte: p.nombre })));
         });
         setLista(sel); setI(0); setRes({}); setCambios([]); setFase("ej");
@@ -853,8 +855,9 @@
         const pts = e => res[e.id] === AZ_BIEN ? 1 : res[e.id] === AZ_CASI ? .5 : 0;
         const pct = Math.round(lista.reduce((a, e) => a + pts(e), 0) / Math.max(1, lista.length) * 100);
         const u = azUnitProgress(unidad);
-        u.examen = { pct: pct, aprobado: pct >= examen.aprobado * 100, fecha: new Date().toISOString().slice(0, 10) };
-        if (!u.mejorExamen || pct > u.mejorExamen) u.mejorExamen = pct;
+        const clave = examen.clave || "examen";   /* el repaso acumulativo se guarda aparte: clave "repaso" (06/11/2026) */
+        u[clave] = { pct: pct, aprobado: pct >= examen.aprobado * 100, fecha: new Date().toISOString().slice(0, 10) };
+        if (clave === "examen" && (!u.mejorExamen || pct > u.mejorExamen)) u.mejorExamen = pct;
         azSaveProgress();
       }
       setFase("fin");
@@ -890,9 +893,9 @@
       const ok = total >= examen.aprobado;
       const flojas = partes.filter(x => x.pct < examen.aprobado);
       cuerpo = h(React.Fragment, null,
-        h("div", { className: "pr-kick" }, T("Resultado de la evaluación")),
+        h("div", { className: "pr-kick" }, examen.kick || T("Resultado de la evaluación")),
         h("div", { style: { fontSize: 44, fontWeight: 800, marginTop: 8, color: ok ? VERDE : NARANJA } }, Math.round(total * 100) + " %"),
-        h("div", { style: { fontSize: 17, fontWeight: 700, marginTop: 4 } }, T(ok ? "Unidad aprobada." : "Todavía no: conviene reforzar antes de seguir.")),
+        h("div", { style: { fontSize: 17, fontWeight: 700, marginTop: 4 } }, ok ? (examen.textoOk || T("Unidad aprobada.")) : (examen.textoNo || T("Todavía no: conviene reforzar antes de seguir."))),
         h("div", { className: "pr-card", style: { marginTop: 16, padding: "6px 16px" } }, partes.map(x =>
           h("div", { key: x.p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: x === partes[0] ? "none" : `1px solid ${c.border}` } },
             h("span", { style: { fontWeight: 600 } }, x.p.nombre),
@@ -902,7 +905,7 @@
           h("div", { className: "pr-kick", style: { marginTop: 22 } }, T("Para reforzar")),
           flojas.map(x => h("button", { key: x.p.nombre, className: "pr-btn sec", style: { width: "100%", marginTop: 8 }, onClick: () => onReforzar && onReforzar(x.p) }, (ES ? "Практиковать: " : "Practicar ") + x.p.nombre.toLowerCase()))),
         h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 10 } },
-          h("button", { className: "pr-btn" + (ok ? " sec" : ""), onClick: empezar }, T("Repetir la evaluación")),
+          h("button", { className: "pr-btn" + (ok ? " sec" : ""), onClick: empezar }, examen.repetir || T("Repetir la evaluación")),
           h("button", { className: "pr-btn sec", onClick: onSalir }, T("Volver a la unidad"))));
     } else {
       const vals = lista.map(e => res[e.id]);

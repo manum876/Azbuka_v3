@@ -1,6 +1,6 @@
 /* ============================================================
    DATA-UNIDAD-ES-4.JS — Abecé · Урок 4: Мой день и привычки
-   (Mi día y mis hábitos). Entrega 1, 04/11/2026: módulos 1–9.
+   (Mi día y mis hábitos). Módulos 1–9: 04/11/2026; 10–13: 06/11/2026.
    ------------------------------------------------------------
    Contenido propio de la unidad (claude/PROGRAMA_ABECE.md §2, U4;
    propuesta aprobada por Manu: claude/PROPUESTA_U4_ABECE.md):
@@ -612,10 +612,69 @@ const UNIDAD_ES_4 = {
         vocab: ["natación", "videojuego", "concierto", "viajar", "caminar"]
       }
     },
-    { id: "es4m10", n: 10, tipo: "pronto", titulo: "Разговоры", resumen: "Диалоги с записью голоса." },
-    { id: "es4m11", n: 11, tipo: "pronto", titulo: "Проект", resumen: "«Mi día»: твой обычный день." },
-    { id: "es4m12", n: 12, tipo: "pronto", titulo: "Проверка урока", resumen: "Настоящее время, распорядок дня, время, погода, вкусы." },
-    { id: "es4m13", n: 13, tipo: "pronto", titulo: "Повторение: уроки 1–4", resumen: "Большая проверка всего, что ты уже знаешь." }
+    {
+      id: "es4m10", n: 10, tipo: "conversaciones",
+      titulo: "Разговоры",
+      resumen: "Диалоги с записью голоса.",
+      intro: "Теперь всё вместе: утро, время, вкусы, что ты делаешь сейчас и погода. Прочитай и послушай разговоры, запиши, как ты произносишь каждую реплику, и сравни с образцом. Для тренировки чтения выключи подсказку кириллицей и перевод.",
+      dialogos: ["DLE-015", "DLE-016", "DLE-017", "DLE-018", "DLE-019"]
+    },
+    {
+      id: "es4m11", n: 11, tipo: "proyecto",
+      titulo: "Проект",
+      resumen: "«Mi día»: твой обычный день.",
+      intro: "Напиши по-испански (8–12 фраз) свой обычный день: во сколько ты встаёшь, что делаешь утром, днём и вечером, что делаешь всегда, иногда и никогда, что тебе нравится. В конце сравни свой день с днём другого человека (друга, мамы, брата): **Yo me levanto a las siete, pero mi hermano se levanta a las nueve.** Приложение отмечает, какие пункты ты уже включил в текст. Потом можно записать, как ты его читаешь.",
+      requisitos: [
+        { txt: "Время (a las siete, es la una…)", rx: "(\\ba las [a-z]+|\\ba la una\\b|\\bes la una\\b|\\bson las\\b)" },
+        { txt: "Распорядок с местоимением (me levanto, me ducho…)", rx: "\\b(me|te|se|nos|os) (levanto|levantas|levanta|ducho|duchas|ducha|acuesto|acuestas|acuesta|despierto|despiertas|despierta|visto|vistes|viste|lavo|lavas|lava|levantamos|duchamos|acostamos)\\b" },
+        { txt: "Часть дня (por la mañana, por la tarde…)", rx: "por la (mañana|tarde|noche)" },
+        { txt: "Как часто (siempre, a veces, nunca…)", rx: "\\b(siempre|a veces|nunca|normalmente|todos los días)\\b" },
+        { txt: "Дни недели (el lunes, los sábados…)", rx: "\\b(lunes|martes|miércoles|jueves|viernes|sábados?|domingos?|fin de semana)\\b" },
+        { txt: "Глагол-«сапожок» (empiezo, vuelvo, pido…)", rx: "\\b(empiezo|empieza|empiezas|vuelvo|vuelve|vuelves|pido|pide|pides|duermo|duerme|duermes|quiero|quiere|almuerzo|almuerza|juego|juega)\\b" },
+        { txt: "Что тебе нравится (me gusta, me encanta…)", rx: "\\b(me|te|le|nos|os|les) (gusta|gustan|encanta|encantan)\\b" },
+        { txt: "Другой человек (mi hermano, mi amiga…)", rx: "\\bmi (hermano|hermana|amigo|amiga|madre|padre|novio|novia|marido|mujer|hijo|hija|compañero|compañera)\\b" }
+      ],
+      consejos: [
+        { rx: "\\bson la una\\b", msg: "Час — **es la una**, а не «son la una»." },
+        { rx: "\\bes las\\b", msg: "Больше одного часа — **son las**: **son las dos**." },
+        { rx: "\\ben la (mañana|tarde|noche)\\b", msg: "«Утром» в Испании — **por la mañana**." },
+        { rx: "\\byo (levanto|ducho|acuesto|despierto|visto)\\b", msg: "Нужно **me**: **me levanto**, **me ducho**." },
+        { rx: "\\b(me|te|le|nos|os|les) gusta (los|las|mis|tus) ", msg: "Несколько вещей — **gustan**: **me gustan los libros**." },
+        { rx: "\\byo gusto\\b", msg: "**gustar** — **me gusta**, а не «yo gusto»." },
+        { rx: "\\bnunca no\\b", msg: "**nunca** перед глаголом — без **no**: **nunca como carne**." },
+        { rx: "\\b(empezo|empezas|empeza|volvo|volves|podo|dormo|dormes|pedo)\\b", msg: "Это глагол-«сапожок»: **empiezo**, **vuelvo**, **puedo**, **duermo**, **pido**." },
+        { rx: "\\b(estoy|estás|está|estamos|estáis|están) (como|hablo|leo|trabajo|estudio)\\b", msg: "«Сейчас делаю» — **estar** + герундий: **estoy comiendo**." },
+        { fn: t => /\?/.test(t) && !/¿/.test(t) ? ["Вопрос по-испански начинается со знака **¿**."] : [] }
+      ]
+    },
+    {
+      id: "es4m12", n: 12, tipo: "examen",
+      titulo: "Проверка урока",
+      resumen: "Настоящее время, распорядок дня, время, погода, вкусы.",
+      intro: "Двадцать упражнений в пяти частях. Каждый ответ — 1 балл, «Почти» — половина. Чтобы сдать урок, нужно набрать не менее 80 %. В большинстве заданий ответ нужно написать, а не выбрать.",
+      partes: [
+        { nombre: "Настоящее время", tipos: ["conjugar", "cambia-persona", "bota", "reflexivo"], n: 4 },
+        { nombre: "Время и календарь", tipos: ["hora-escribir", "hora-oir", "hora-es-son", "calendario"], n: 4 },
+        { nombre: "Погода и как часто", tipos: ["tiempo-escribir", "hace-tengo", "frecuencia", "negacion"], n: 4 },
+        { nombre: "Сейчас и вкусы", tipos: ["estar-gerundio", "gerundio", "ahora-siempre", "gustar", "gustar-escribir", "gustar-frase"], n: 4 },
+        { nombre: "Общение", tipos: ["situacion-frase", "respuesta", "dictado-frase", "ordenar-frase", "error", "pregunta"], n: 4 }
+      ],
+      aprobado: 0.8
+    },
+    {
+      id: "es4m13", n: 13, tipo: "repaso",
+      titulo: "Повторение: уроки 1–4",
+      resumen: "Большая проверка всего, что ты уже знаешь.",
+      intro: "Это не проверка урока 4, а проверка всего пройденного: по пять упражнений из каждого урока и пять на общение. Упражнения берутся из уроков 1–4 и меняются при каждой попытке. Чтобы сдать, нужно 80 %. Если какой-то урок не дотянул, приложение предложит его повторить.",
+      bloques: [
+        { nombre: "Урок 1 · Буквы, звуки, ударение", bloque: "u1", unidad: 1, n: 5 },
+        { nombre: "Урок 2 · Ser, tener, артикли, числа", bloque: "u2", unidad: 2, n: 5 },
+        { nombre: "Урок 3 · Hay, estar, ser, где что", bloque: "u3", unidad: 3, n: 5 },
+        { nombre: "Урок 4 · Мой день", bloque: "u4", unidad: 4, n: 5 },
+        { nombre: "Общение · уроки 1–4", bloque: "com", n: 5 }
+      ],
+      aprobado: 0.8
+    }
   ]
 };
 
@@ -1057,6 +1116,29 @@ const ES4_RESPUESTAS = [
 ];
 
 window.ejerciciosUnidadEs4 = ejerciciosUnidadEs4;
+
+/* ── Repaso acumulativo U1–U4 (módulo 13, 06/11/2026; PROPUESTA_U4_ABECE.md §4) ──
+   Los ejercicios se toman de los bancos de cada unidad: los tipos que van a su evaluación
+   (sin los de comunicación, que forman el quinto bloque, y sin la ampliación). Cada uno
+   lleva su bloque (u1…u4, com) y su unidad (el progreso se anota en la unidad de origen).
+   No se escribe nada nuevo: si cambia una unidad, el repaso cambia solo. */
+const ES4_COMUNICACION = ["situacion-frase", "respuesta", "dictado-frase", "ordenar-frase"];
+function es4Repaso() {
+  const pool = [];
+  for (let n = 1; n <= 4; n++) {
+    const fn = window["ejerciciosUnidadEs" + n], U = window["UNIDAD_ES_" + n];
+    if (typeof fn !== "function" || !U) continue;
+    const ex = U.modulos.find(m => m.tipo === "examen");
+    const tipos = new Set([].concat(...(ex ? ex.partes.map(p => p.tipos) : [])));
+    fn().forEach(e => {
+      if (e.ampliacion || !tipos.has(e.tipo)) return;
+      pool.push(Object.assign({}, e, { bloque: ES4_COMUNICACION.indexOf(e.tipo) >= 0 ? "com" : "u" + n, unidad: n }));
+    });
+  }
+  const m = UNIDAD_ES_4.modulos.find(x => x.tipo === "repaso");
+  return { pool, partes: m.bloques.map(b => ({ nombre: b.nombre, bloque: b.bloque, unidad: b.unidad, tipos: [], n: b.n })), aprobado: m.aprobado, intro: m.intro };
+}
+window.es4Repaso = es4Repaso;
 window.es4Vocab = es4Vocab;
 window.es4Ampliacion = es4Ampliacion;
 window.es4Objetivo = es4Objetivo;
