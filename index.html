@@ -165,7 +165,7 @@ function App() {
 
       /* ── SEGUIR ESTUDIANDO (el último módulo abierto, az_ultimo) y, a la
          derecha, la tarjeta «Hoy» (desafío del día, hoy.js) ── */
-      !SIN_UNIDADES && React.createElement("div", { style: { display: "flex", gap: 12, alignItems: "stretch", marginBottom: ultimo ? 10 : 26 } },
+      !SIN_UNIDADES && React.createElement("div", { style: { display: "flex", gap: 12, alignItems: "stretch", marginBottom: 12 } },
       (() => {
         const u = ultimo;
         const href = u ? u.href : ABECE ? "abece-1.html" : "azbuka-1.html";
@@ -226,7 +226,7 @@ function App() {
       ),
 
       /* ── MÓDULOS DE APOYO (antes "Herramientas") — filas horizontales ── */
-      React.createElement("div", { className: "section-lbl", style: { color: c.textMuted, marginTop: SIN_UNIDADES ? 26 : undefined } }, azTexto("modulos")),
+      React.createElement("div", { className: "section-lbl", style: { color: c.textMuted, marginTop: SIN_UNIDADES ? 24 : undefined } }, azTexto("modulos")),
       React.createElement("div", { className: "mod-list" },
         modules.map(m =>
           React.createElement("a", {
