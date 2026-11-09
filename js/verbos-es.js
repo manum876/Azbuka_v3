@@ -550,7 +550,7 @@ function AzVerbosEs({ Estilos }) {
       style: { borderTop: i === 0 ? "none" : `1px solid ${c.border}` } },
     h("span", null, h("span", { className: "res-ru" }, r.ru)),
     h("span", { className: "res-es" }, r.es)));
-  const nada = h("div", { style: { padding: "12px 14px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, VES_TX.sinRes);
+  const nada = h("div", { style: { padding: "12px 16px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, VES_TX.sinRes);
   const campo = [
     h("input", { key: "i", ref: qRef, value: q, onInput: ev => setQ(ev.target.value), placeholder: VES_TX.buscar, "aria-label": VES_TX.buscarAria,
       autocapitalize: "off", autocorrect: "off", spellcheck: false,

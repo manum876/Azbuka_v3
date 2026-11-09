@@ -24,7 +24,7 @@
   .srch .lupa{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:var(--az-fs-destacado);opacity:.6;pointer-events:none;}
   .srch .limpiar{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;border:none;font-size:var(--az-fs-nota);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}
   .res{margin:-8px 0 16px;border-radius:var(--az-r);overflow:hidden;}
-  .res a{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;text-decoration:none;}
+  .res a{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;text-decoration:none;}
 
   /* Seguir estudiando */
   .cont{display:flex;align-items:center;gap:12px;padding:16px;border-radius:var(--az-r);text-decoration:none;margin-bottom:24px;}
@@ -214,7 +214,7 @@ function App() {
       q.trim() && React.createElement("div", { className: "res", style: { background: c.card, border: `1px solid ${c.border}` } },
         (() => {
           const r = typeof azSearchLexicon === "function" ? azSearchLexicon(q.trim()) : [];
-          if (!r.length) return React.createElement("div", { style: { padding: "12px 14px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, TXI.sinRes);
+          if (!r.length) return React.createElement("div", { style: { padding: "12px 16px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, TXI.sinRes);
           return r.map((x, i) => React.createElement("a", {
             key: x.id, href: x.href, onClick: (e) => azNavigate(e, x.href),
             style: { borderTop: i ? `1px solid ${c.border}` : "none" }

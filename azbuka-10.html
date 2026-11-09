@@ -79,7 +79,7 @@ function TablaSeis({ c, lista }) {
     h("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: .5, color: c.textMuted } }, pr), h("div", { style: { fontSize: "var(--az-fs-cuerpo)", fontWeight: 700 } }, f));
   return h(React.Fragment, null,
     h("div", { className: "u-text", style: { fontSize: "var(--az-fs-chico)", marginTop: 8 } }, "Toca una forma para escuchar cómo suena."),
-    lista.filter(Boolean).map(v => h("div", { key: v.titulo, className: "u-card", style: { padding: "12px 14px", marginTop: 12 } },
+    lista.filter(Boolean).map(v => h("div", { key: v.titulo, className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
       h("div", { style: { display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" } },
         h("span", { lang: "ru", style: { fontSize: "var(--az-fs-subtitulo)", fontWeight: 800, color: c.gold } }, v.titulo),
         h("span", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted } }, v.es)),

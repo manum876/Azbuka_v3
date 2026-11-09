@@ -135,7 +135,7 @@ function GramStyles({ c, dark }) {
     .help-chip{background:${c.bg2};border:1px solid ${c.border};color:${c.text};border-radius:var(--az-r);padding:7px 12px;font-size:var(--az-fs-nota);font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;}
     .help-chip span{color:${c.gold};margin-left:4px;font-weight:700;}
     .help-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
-    .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:12px 14px;text-decoration:none;}
+    .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:12px 16px;text-decoration:none;}
     .res-ru{color:${c.text};font-weight:600;font-size:var(--az-fs-cuerpo);}
     .res-asp{color:${c.textMuted};font-size:var(--az-fs-micro);margin-left:8px;font-weight:500;}
     .res-es{color:${c.textMuted};font-size:var(--az-fs-nota);text-align:right;}
@@ -710,7 +710,7 @@ function App() {
     },
       h("span", null, h("span", { className: "res-ru" }, r.acento || r.ru), h("span", { className: "res-asp" }, POS_CORTO[r.pos] || "")),
       h("span", { className: "res-es" }, r.es)));
-  const noResults = h("div", { style: { padding: "12px 14px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, "Ничего не найдено");
+  const noResults = h("div", { style: { padding: "12px 16px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, "Ничего не найдено");
   const campo = [
     h("input", {
       key: "i", ref: qRef, value: q, onInput: (ev) => setQ(ev.target.value),

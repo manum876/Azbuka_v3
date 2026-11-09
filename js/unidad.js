@@ -871,7 +871,7 @@
         h("div", { className: "pr-exp", style: { fontSize: "var(--az-fs-cuerpo)" } }, examen ? examen.intro : intro || (ES
           ? (n || 12) + " " + plRu(n || 12, "упражнение", "упражнения", "упражнений") + " из " + pool.length + ". Сначала идут те, что встречались реже всего, а трудные возвращаются."
           : (n || 12) + " ejercicios elegidos entre " + pool.length + ". Primero salen los que menos practicaste, y los que te costaron vuelven.")),
-        aviso && h("div", { style: { marginTop: 12, background: c.gold + "14", border: `1px solid ${c.gold}88`, borderRadius: "var(--az-r)", padding: "12px 14px", fontSize: "var(--az-fs-cuerpo)", lineHeight: 1.5, fontWeight: 600 } }, aviso),
+        aviso && h("div", { style: { marginTop: 12, background: c.gold + "14", border: `1px solid ${c.gold}88`, borderRadius: "var(--az-r)", padding: "12px 16px", fontSize: "var(--az-fs-cuerpo)", lineHeight: 1.5, fontWeight: 600 } }, aviso),
         h("div", { className: "pr-pie" }, h("button", { className: "pr-btn", style: { width: "100%" }, onClick: empezar }, T("Empezar"))));
     } else if (fase === "ej" && ej) {
       const F = FORMAS[ej.forma];

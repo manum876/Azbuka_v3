@@ -183,7 +183,7 @@ function App() {
             return [{ ru: pr + " " + s.prep, es: "" }, { ru: pr + " " + s.acc, es: "" }, { ru: (pr === "в" ? "из " : "с ") + s.gen, es: "" }]; }) }),
           sec("En la estación"), h(Conversacion, { T: CONV.estacion[0], c })),
       5: h(React.Fragment, null, sec("Un camino en el plano"),
-          h("div", { className: "u-card", style: { padding: "12px 14px", marginTop: 12 } }, h(AzPlano, { plano: { ruta: "S1 R S1 L S1", destino: "🏦" }, c })),
+          h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } }, h(AzPlano, { plano: { ruta: "S1 R S1 L S1", destino: "🏦" }, c })),
           h(Formulas, { c, filas: [["Иди́те пря́мо, пото́м поверни́те напра́во, пото́м поверни́те нале́во.", "Siga derecho, después doble a la derecha y después a la izquierda."]] }),
           sec("Para escuchar"), h(Formulas, { c, filas: [["Банк ря́дом.", "El banco está cerca."], ["Музе́й далеко́.", "El museo está lejos."], ["Кафе́ напро́тив ста́нции.", "El café está enfrente de la estación."],
             ["Банк ме́жду магази́ном и рестора́ном.", "El banco está entre la tienda y el restaurante."], ["Где нахо́дится апте́ка?", "¿Dónde queda la farmacia?"]] })),

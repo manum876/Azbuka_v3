@@ -492,7 +492,7 @@
           h("button", { className: "pair-btn", onClick: () => setEs(v => !v), style: chipSt(c, es) }, T("Traducción"))),
         h("div", { className: "u-text", style: { fontSize: "var(--az-fs-chico)", marginBottom: 12 } },
           T(grabar ? "Escucha cada línea, grábate diciéndola y compara." : "Para practicar la lectura, apaga la transliteración y la traducción.")),
-        d.lineas.map((l, i) => h("div", { key: i, className: "u-card", style: { padding: "12px 14px", marginBottom: 8 } },
+        d.lineas.map((l, i) => h("div", { key: i, className: "u-card", style: { padding: "12px 16px", marginBottom: 8 } },
           h("div", { style: { display: "flex", gap: 12, alignItems: "flex-start" } },
             h("div", { style: { flex: 1, minWidth: 0 } },
               h("div", { lang: LL, style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1, color: c.gold, textTransform: "uppercase", marginBottom: 4 } }, personaje(l.p).ru),
@@ -681,7 +681,7 @@
       h("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.2, color: c.gold, textTransform: "uppercase" } }, titulo),
       h("div", { lang: "ru", style: { fontSize: "var(--az-fs-destacado)", lineHeight: 1.55, marginTop: 8, whiteSpace: "pre-wrap", color: c.text } }, t));
     return h("div", null,
-      h("div", { className: "u-card", style: { padding: "12px 14px", marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" } }, AZ_TALLER_PASOS.map((p, i) =>
+      h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" } }, AZ_TALLER_PASOS.map((p, i) =>
         h("button", { key: p, className: "ubtn" + (i === paso ? "" : " sec"), style: { marginTop: 0, flex: "1 1 40%", fontSize: "var(--az-fs-chico)", padding: "8px 8px" }, disabled: !puede[i], onClick: () => ir(i) }, (i + 1) + " · " + p))),
       h("div", { className: "u-sec" }, "Paso " + (paso + 1) + " de 4 · " + AZ_TALLER_PASOS[paso]),
       paso === 0 && h(React.Fragment, null,

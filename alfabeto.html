@@ -474,7 +474,7 @@ function App() {
         React.createElement("div", { className: "info-title", style: { color: c.gold } }, TX.fenMas),
         fenesDe(selected).map(f => React.createElement("button", {
           key: f.id, className: "btn", onClick: () => abrirFen(f.id),
-          style: { display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", gap: 12, textAlign: "left", marginTop: 8, padding: "12px 14px", borderRadius: "var(--az-r)", background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontSize: "var(--az-fs-chico)", fontWeight: 600 }
+          style: { display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", gap: 12, textAlign: "left", marginTop: 8, padding: "12px 16px", borderRadius: "var(--az-r)", background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontSize: "var(--az-fs-chico)", fontWeight: 600 }
         }, React.createElement("span", null, f.titulo), React.createElement("span", { style: { color: c.gold, fontSize: "var(--az-fs-subtitulo)" } }, "›"))))
     ),
 
@@ -532,7 +532,7 @@ function App() {
       React.createElement("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6, marginBottom: 12 } }, TX.fenDesc),
       FENOMENOS_ES.map((f, n) => React.createElement("button", {
         key: f.id, className: "btn", onClick: () => abrirFen(f.id),
-        style: { display: "flex", width: "100%", alignItems: "center", gap: 12, textAlign: "left", marginBottom: 8, padding: "12px 14px", borderRadius: "var(--az-r)", background: c.card, border: `1px solid ${c.border}`, color: c.text }
+        style: { display: "flex", width: "100%", alignItems: "center", gap: 12, textAlign: "left", marginBottom: 8, padding: "12px 16px", borderRadius: "var(--az-r)", background: c.card, border: `1px solid ${c.border}`, color: c.text }
       },
         React.createElement("span", { style: { width: 22, height: 22, borderRadius: "50%", background: c.gold, color: c.bg, fontSize: "var(--az-fs-micro)", fontWeight: 800, display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, n + 1),
         React.createElement("span", { style: { flex: 1, minWidth: 0, display: "flex", flexDirection: "column" } },
@@ -546,7 +546,7 @@ function App() {
         React.createElement("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold } }, TX.fenKicker),
         React.createElement("div", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, color: c.text, lineHeight: 1.2, marginTop: 8 } }, fenSel.titulo),
         React.createElement("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textSub, marginTop: 4 } }, fenSel.corto),
-        React.createElement("div", { style: { marginTop: 12, background: c.bg2, border: `1px solid ${c.border}`, borderLeft: `3px solid ${c.gold}`, borderRadius: "var(--az-r)", padding: "12px 14px", fontSize: "var(--az-fs-cuerpo)", lineHeight: 1.5, color: c.text, fontWeight: 600 } }, azFmt(fenSel.regla)),
+        React.createElement("div", { style: { marginTop: 12, background: c.bg2, border: `1px solid ${c.border}`, borderLeft: `3px solid ${c.gold}`, borderRadius: "var(--az-r)", padding: "12px 16px", fontSize: "var(--az-fs-cuerpo)", lineHeight: 1.5, color: c.text, fontWeight: 600 } }, azFmt(fenSel.regla)),
         fenSel.letras.length > 0 && React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12, alignItems: "center" } },
           React.createElement("span", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginRight: 4 } }, TX.fenLetras),
           fenSel.letras.map(u => React.createElement("button", {
