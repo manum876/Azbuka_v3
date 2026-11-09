@@ -96,8 +96,8 @@ covered by this content license. Each keeps its own license:
   License text: assets/supabase-LICENSE.txt.
 - jsPDF (MIT) and fflate (MIT), in assets/. License texts:
   assets/jspdf-LICENSE.txt and assets/fflate-LICENSE.txt.
-- Noto Sans and Marck Script fonts (SIL Open Font License 1.1), in assets/.
-  License texts: assets/noto-sans-OFL.txt and assets/marck-script-OFL.txt.
+- Noto Sans, Azbuka Script (a modified version of Marck Script: larger lowercase and a combining acute accent) and Azbuka Símbolos (interface symbols taken from Noto Sans Symbols, Noto Sans Symbols 2 and Noto Sans Math) fonts (SIL Open Font License 1.1), in assets/.
+  License texts: assets/noto-sans-OFL.txt (also covers Azbuka Símbolos) and assets/azbuka-script-OFL.txt.
 - Map data from Natural Earth (public domain), in data/data-mapa.js.
 - Vocabulary sources: Comer, K. "Comer 5000" (Portland State University) and
   the FreeDict Russian–Spanish dictionaries (CC BY-SA 3.0). Translations and

@@ -112,7 +112,7 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  // Reportar un error (21/10/2026): el 🐞 del menú, y Ajustes → Reportes
  await p.goto(BASE+'azbuka-3.html',{waitUntil:'networkidle'}); await p.waitForTimeout(600);
  await p.evaluate(()=>{ setTimeout(()=>{ throw new Error('error de prueba'); },0); }); await p.waitForTimeout(200);
- await p.click('text=Menú'); await p.waitForTimeout(300); await p.click('[aria-label="Reportar un error"]'); await p.waitForTimeout(400);
+ await p.click('[aria-label="Menú"]');   /* desde el 09/11/2026 el botón es solo ☰ (manual §1.5) */ await p.waitForTimeout(300); await p.click('[aria-label="Reportar un error"]'); await p.waitForTimeout(400);
  chk(await p.locator('text=Reportar un error').first().isVisible(), 'el 🐞 del menú abre «Reportar un error»');
  await p.screenshot({path:OUT+'/reportar.png'});
  await p.locator('[role=dialog] textarea').first().fill('La palabra no suena'); await p.click('[role=dialog] button:has-text("Enviar")'); await p.waitForTimeout(600);

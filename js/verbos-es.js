@@ -404,8 +404,8 @@ function VesFicha({ id, c }) {
   const setGrupo = g => { setGrupoSt(g); try { const u = new URL(location.href); u.searchParams.set("t", g); history.replaceState(history.state, "", u.pathname + u.search); } catch (er) {} };
 
   if (!e || !lex || !T) return h("div", { style: { textAlign: "center", padding: "10vh 0" } },
-    h("h1", { style: { fontSize: 18, marginBottom: 8, color: c.text } }, VES_TX.noEncontrado),
-    h("p", { style: { fontSize: 13.5, color: c.textMuted } }, VES_TX.sinId(id)));
+    h("h1", { style: { fontSize: "var(--az-fs-subtitulo)", marginBottom: 8, color: c.text } }, VES_TX.noEncontrado),
+    h("p", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted } }, VES_TX.sinId(id)));
 
   document.title = "Abecé — Глаголы · " + e.es;
   window.azFuenteActual = () => "Глаголы · " + e.es;
@@ -420,7 +420,7 @@ function VesFicha({ id, c }) {
   const impersonal = !!(e.locucion && e.locucion.impersonal);
   const filas6 = VES_PERS.map((es, i) => impersonal ? { i, es: "—", ru: "безличная форма" } : { i, es, ru: VES_PERS_RU[i] });
   const col = (k) => ({ celdas: f => T[k] ? T[k][f.i] : null });
-  const sec = (txt, sub) => h(React.Fragment, null, h("div", { className: "section-lbl", style: { marginTop: 18 } }, txt), sub && h("div", { className: "tnote", style: { marginTop: -4, marginBottom: 8 } }, sub));
+  const sec = (txt, sub) => h(React.Fragment, null, h("div", { className: "section-lbl", style: { marginTop: 16 } }, txt), sub && h("div", { className: "tnote", style: { marginTop: -4, marginBottom: 8 } }, sub));
 
   /* verbos del mismo modelo, por frecuencia */
   const ortoKey = orto[0] || "";
@@ -461,7 +461,7 @@ function VesFicha({ id, c }) {
   const tablaDe = k => tablas[k] ? tablas[k]() : h(VesTabla, { filas: filas6, columnas: [col(k)], clave });
   const g = VES_GRUPOS.find(x => x[0] === grupo) || VES_GRUPOS[0];
 
-  return h("div", { style: { animation: "fadeIn 0.3s ease" } },
+  return h("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
     h("div", { className: "ficha" },
       h("div", { className: "hero" },
         h("div", { className: "hero-top" },
@@ -486,12 +486,12 @@ function VesFicha({ id, c }) {
         (lex.senses || []).map((x, i) => h("div", { key: i, className: "sense" },
           h("span", { className: "sense-num" }, i + 1), h("span", { className: "sense-es" }, x.ru),
           x.definitionRu && h("div", { className: "sense-def" }, x.definitionRu))),
-        h("div", { className: "section-lbl", style: { marginTop: 22 } }, VES_TX.conjugacion),
+        h("div", { className: "section-lbl", style: { marginTop: 24 } }, VES_TX.conjugacion),
         buscadaEt.length > 0 && h("div", { className: "busco" }, ...VES_TX.buscada(fBuscada, e.es, buscadaEt).map((t, i) => i === 1 || i === 3 ? h("b", { key: i }, t) : t)),
         h("div", { className: "pair-row" }, VES_GRUPOS.map(([k, lbl]) => {
           const on = k === grupo;
           return h("button", { key: k, className: "pair-btn", onClick: () => setGrupo(k),
-            style: on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted } }, lbl);
+            style: on ? { background: c.gold + "14", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted } }, lbl);
         })),
         irr.length > 0 && h("div", { className: "tnote", style: { marginBottom: 4 } }, h("span", { className: "f-irr" }, "Цветом"), " выделено то, что отличается от правильного спряжения."),
         g[2].map(([k, es, ru]) => h("div", { key: k },
@@ -499,10 +499,10 @@ function VesFicha({ id, c }) {
           tablaDe(k),
           k === "subjImp" && T.subjSe && h("div", { className: "tnote" }, "Другая форма, на -se (то же значение): " + T.subjSe.filter(Boolean).map(vesTexto).join(", ") + ".")
         )),
-        e.nota && h(React.Fragment, null, h("div", { className: "section-lbl", style: { marginTop: 18 } }, VES_TX.nota), h("div", { className: "nota" }, e.nota)),
+        e.nota && h(React.Fragment, null, h("div", { className: "section-lbl", style: { marginTop: 16 } }, VES_TX.nota), h("div", { className: "nota" }, e.nota)),
         s !== e && s.nota && !e.locucion && h("div", { className: "nota", style: { marginTop: 8 } }, h("b", { style: { color: c.text } }, s.es + ": "), s.nota),
         comoEste.length > 0 && h(React.Fragment, null,
-          h("div", { className: "section-lbl", style: { marginTop: 18 } }, VES_TX.comoEste),
+          h("div", { className: "section-lbl", style: { marginTop: 16 } }, VES_TX.comoEste),
           h("div", { className: "try-row", style: { marginTop: 0 } }, comoEste.map(([k, es]) =>
             h("a", { key: k, className: "try-chip", href: "verbos.html?id=" + k, onClick: ir("verbos.html?id=" + k) }, es)))),
         h("div", { className: "buttons" },
@@ -550,17 +550,17 @@ function AzVerbosEs({ Estilos }) {
       style: { borderTop: i === 0 ? "none" : `1px solid ${c.border}` } },
     h("span", null, h("span", { className: "res-ru" }, r.ru)),
     h("span", { className: "res-es" }, r.es)));
-  const nada = h("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, VES_TX.sinRes);
+  const nada = h("div", { style: { padding: "12px 14px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, VES_TX.sinRes);
   const campo = [
     h("input", { key: "i", ref: qRef, value: q, onInput: ev => setQ(ev.target.value), placeholder: VES_TX.buscar, "aria-label": VES_TX.buscarAria,
       autocapitalize: "off", autocorrect: "off", spellcheck: false,
-      style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 14 } }),
+      style: { width: "100%", boxSizing: "border-box", background: c.bg2, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", padding: "12px 34px 12px 14px", color: c.text, fontSize: "var(--az-fs-chico)" } }),
     q && h("button", { key: "x", onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); }, "aria-label": VES_TX.limpiar,
-      style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 } }, "✕")
+      style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: "var(--az-fs-chico)", lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 } }, "✕")
   ];
   const barra = id && h("div", { ref: searchWrapRef, style: { position: "fixed", top: headerH, left: 0, right: 0, zIndex: 90, background: c.bg, backdropFilter: "blur(12px)", borderBottom: `1px solid ${c.border}`, padding: "12px 3vw" } },
     h("div", { style: { maxWidth: 960, margin: "0 auto", position: "relative" } }, ...campo,
-      q.trim() && h("div", { style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, boxShadow: "0 16px 40px rgba(0,0,0,.4)" } },
+      q.trim() && h("div", { style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", boxShadow: "0 16px 40px rgba(0,0,0,.4)" } },
         results.length ? filas : nada)));
 
   const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "verbos") || {};
@@ -579,7 +579,7 @@ function AzVerbosEs({ Estilos }) {
     !buscando && h("div", { className: "search-hint" }, VES_TX.pista),
     !buscando && h("div", { className: "try-row" }, h("span", { className: "try-lbl" }, VES_TX.prueba),
       EJ.map(([k, es]) => h("a", { key: k, className: "try-chip", href: "verbos.html?id=" + k, onClick: ev => azNavigate(ev, "verbos.html?id=" + k) }, es))),
-    buscando && h("div", { style: { marginTop: 10, background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, overflow: "hidden", animation: "fadeIn 0.3s ease" } },
+    buscando && h("div", { style: { marginTop: 12, background: c.card, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", overflow: "hidden", animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
       results.length ? filas : nada));
 
   return h(AzShell, { darkMode, setDarkMode, moduleId: "verbos", tabs: [] },
@@ -587,15 +587,15 @@ function AzVerbosEs({ Estilos }) {
     h("style", null, `
       .f-irr{color:${c.gold};font-weight:800;}
       .f-pre{color:${c.textSub};font-weight:500;}
-      .ves-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
-      .tag{font-size:11.5px;font-weight:600;color:${c.textSub};background:${c.bg2};border:1px solid ${c.border};border-radius:8px;padding:4px 9px;}
+      .ves-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+      .tag{font-size:var(--az-fs-nota);font-weight:600;color:${c.textSub};background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r-chico);padding:4px 8px;}
       .ves-orto{color:${c.textMuted};}
-      .buttons{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 4px;}
-      .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit;white-space:nowrap;}
-      .pair-row{margin-bottom:8px;}
+      .buttons{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px;}
+      .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:var(--az-r);border:1px solid ${c.border};background:${c.bg2};color:${c.text};font-size:var(--az-fs-chico);font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit;white-space:nowrap;}
+      .pair-row{margin-bottom:8px;;gap:8px}
       .ves-apilada .ves-pers td{padding:8px 8px 0;}
       .ves-apilada .ves-pers .p-ru,.ves-apilada .ves-pers .p-es{display:inline;}
-      .ves-apilada .ves-fs td{border-top:none;padding-top:2px;}
+      .ves-apilada .ves-fs td{border-top:none;padding-top:4px;}
       .ves-apilada tbody tr.ves-pers:first-child td{border-top:none;}
     `),
     barra,

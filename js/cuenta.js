@@ -124,9 +124,9 @@ const AZ_CUENTA_CONFIG = {
   let oscuro = true;
   try { oscuro = JSON.parse(ls.getItem("az_theme") || '"dark"') !== "light"; } catch (e) {}
   const C = (window.azColors ? window.azColors(oscuro) : null) || (oscuro
-    ? { bg: "#0F0F14", bg2: "#17171E", bg3: "#1E1E28", card: "#1A1A24", border: "#2A2A38", gold: "#C9A84C", text: "#F0EEE8", textMuted: "#888080", textSub: "#B8B0A8" }
-    : { bg: "#F7F5F0", bg2: "#EDEAE4", bg3: "#E2DED7", card: "#FFFFFF", border: "#D5D0C8", gold: "#C9A84C", text: "#1A1812", textMuted: "#8A847A", textSub: "#5A5450" });
-  const ROJO = "#B5605C", ROJO_TXT = "#D9776F";
+    ? { bg: "#0F0F14", bg2: "#17171E", bg3: "#17171E", card: "#1A1A24", border: "#2A2A38", gold: "#C9A84C", text: "#F0EEE8", textMuted: "#888080", textSub: "#B8B0A8" }
+    : { bg: "#F7F5F0", bg2: "#EDEAE4", bg3: "#EDEAE4", card: "#FFFFFF", border: "#D5D0C8", gold: "#A68B3F", text: "#1A1812", textMuted: "#8A847A", textSub: "#5A5450" });
+  const ROJO = "#B5605C", ROJO_TXT = "#B5605C";
   const css = document.createElement("style");
   css.textContent = `
     html.az-sin-cuenta, html.az-sin-cuenta body { background:${C.bg}; overflow:hidden; }
@@ -134,25 +134,25 @@ const AZ_CUENTA_CONFIG = {
     #az-cuenta{position:fixed;inset:0;z-index:2000;background:${C.bg};box-shadow:0 0 0 100vmax ${C.bg};color:${C.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
     #az-cuenta .in{max-width:420px;margin:0 auto;padding:calc(var(--az-top, 68px) + 6vh) 6vw var(--az-bottom, 88px);display:flex;flex-direction:column;}
     #az-cuenta .logo{font-size:44px;line-height:1;color:${C.gold};font-weight:900;letter-spacing:-1.5px;}
-    #az-cuenta .baja{font-size:14px;color:${C.textMuted};margin-top:6px;}
-    #az-cuenta .tit{font-size:20px;font-weight:800;margin:34px 0 6px;}
-    #az-cuenta .txt{font-size:14px;line-height:1.55;color:${C.textSub};}
-    #az-cuenta input{width:100%;box-sizing:border-box;font-size:18px;padding:13px 12px;border-radius:10px;background:${C.bg3};border:1px solid ${C.border};color:${C.text};font-family:inherit;margin-top:16px;outline:none;}
+    #az-cuenta .baja{font-size:var(--az-fs-chico);color:${C.textMuted};margin-top:4px;}
+    #az-cuenta .tit{font-size:var(--az-fs-subtitulo);font-weight:800;margin:24px 0 12px;}
+    #az-cuenta .txt{font-size:var(--az-fs-chico);line-height:1.55;color:${C.textSub};}
+    #az-cuenta input{width:100%;box-sizing:border-box;font-size:var(--az-fs-subtitulo);padding:12px;border-radius:var(--az-r);background:${C.bg2};border:1px solid ${C.border};color:${C.text};font-family:inherit;margin-top:16px;outline:none;}
     #az-cuenta input:focus{border-color:${C.gold};}
-    #az-cuenta input.cod{letter-spacing:8px;text-align:center;font-weight:700;font-size:24px;}
-    #az-cuenta .b{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 16px;border-radius:10px;border:1px solid ${C.gold};background:${C.gold};color:${C.bg};font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:12px;}
-    #az-cuenta .b:disabled{opacity:.5;cursor:default;}
-    #az-cuenta .b.sec{background:${C.bg3};border-color:${C.border};color:${C.text};}
-    #az-cuenta .lnk{background:none;border:none;color:${C.gold};font-size:13.5px;font-weight:600;font-family:inherit;cursor:pointer;padding:12px 0 0;align-self:center;}
+    #az-cuenta input.cod{letter-spacing:8px;text-align:center;font-weight:700;font-size:var(--az-fs-titulo);}
+    #az-cuenta .b{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:var(--az-r);border:1px solid ${C.gold};background:${C.gold};color:${C.bg};font-size:var(--az-fs-cuerpo);font-weight:700;cursor:pointer;font-family:inherit;margin-top:12px;}
+    #az-cuenta .b:disabled{opacity:.4;cursor:default;}
+    #az-cuenta .b.sec{background:${C.bg2};border-color:${C.border};color:${C.text};}
+    #az-cuenta .lnk{background:none;border:none;color:${C.gold};font-size:var(--az-fs-chico);font-weight:600;font-family:inherit;cursor:pointer;padding:12px 0 0;align-self:center;}
     #az-cuenta .lnk:disabled{color:${C.textMuted};cursor:default;}
-    #az-cuenta .err{font-size:13.5px;line-height:1.5;color:${ROJO_TXT};background:${ROJO}22;border-radius:10px;padding:10px 12px;margin-top:12px;}
-    #az-cuenta .ok{font-size:13.5px;line-height:1.5;color:${C.textSub};background:${C.gold}18;border-radius:10px;padding:10px 12px;margin-top:12px;}
-    #az-cuenta .o{display:flex;align-items:center;gap:10px;margin:18px 0 4px;color:${C.textMuted};font-size:12px;}
+    #az-cuenta .err{font-size:var(--az-fs-chico);line-height:1.5;color:${ROJO_TXT};background:${ROJO}14;border:1px solid ${ROJO};border-radius:var(--az-r);padding:12px 16px;margin-top:12px;}
+    #az-cuenta .ok{font-size:var(--az-fs-chico);line-height:1.5;color:${C.textSub};background:${C.gold}14;border:1px solid ${C.gold}88;border-radius:var(--az-r);padding:12px 16px;margin-top:12px;}
+    #az-cuenta .o{display:flex;align-items:center;gap:10px;margin:18px 0 4px;color:${C.textMuted};font-size:var(--az-fs-nota);}
     #az-cuenta .o:before,#az-cuenta .o:after{content:"";flex:1;height:1px;background:${C.border};}
-    #az-cuenta .priv{font-size:12px;line-height:1.5;color:${C.textMuted};margin-top:28px;}
+    #az-cuenta .priv{font-size:var(--az-fs-nota);line-height:1.5;color:${C.textMuted};margin-top:24px;}
     #az-cuenta .idi{position:absolute;top:var(--az-top, 68px);right:6vw;display:flex;gap:6px;}
-    #az-cuenta .idi button{padding:6px 10px;border-radius:10px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;background:${C.bg2};border:1px solid ${C.border};color:${C.textMuted};}
-    #az-cuenta .idi button.on{background:${C.gold}22;border-color:${C.gold};color:${C.gold};}
+    #az-cuenta .idi button{padding:7px 12px;border-radius:var(--az-r);font-size:var(--az-fs-nota);font-weight:600;cursor:pointer;font-family:inherit;background:${C.bg2};border:1px solid ${C.border};color:${C.textMuted};}
+    #az-cuenta .idi button.on{background:${C.gold}14;border-color:${C.gold};color:${C.gold};}
   `;
   document.head.appendChild(css);
 

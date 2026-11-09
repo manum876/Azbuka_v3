@@ -1041,11 +1041,11 @@ function AzCopiaSeguridad({ c }) {
     };
     r.readAsText(f);
   };
-  const btn = { flex: 1, padding: "11px 14px", borderRadius: 10, border: `1px solid ${c.border}`, background: c.bg3, color: c.text, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit" };
+  const btn = { flex: "1 1 auto", whiteSpace: "nowrap", padding: "11px 14px", borderRadius: 10, border: `1px solid ${c.border}`, background: c.bg3, color: c.text, fontSize: "var(--az-fs-chico)", fontWeight: 700, cursor: "pointer", fontFamily: "inherit" };
   return h("div", null,
-    h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
+    h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } },
       azTexto("copiaIntro")),
-    h("div", { style: { display: "flex", gap: 8, marginTop: 12 } },
+    h("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 } },
       h("button", { style: btn, onClick: azGuardarCopia }, azTexto("copiaGuardar")),
       h("button", { style: btn, onClick: () => ref.current && ref.current.click() }, azTexto("copiaRestaurar"))),
     h("input", { ref, type: "file", accept: "application/json,.json", style: { display: "none" }, onChange: restaurar }));
@@ -1121,6 +1121,17 @@ function azAplicarTranslit() {
   document.documentElement.classList.toggle("az-sin-tl", !azTranslitVisible());
 }
 azAplicarTranslit();
+/* ── TAMAÑO DE LETRA (06/11/2026): Ajustes → «Tamaño de letra». Multiplica
+   toda la escala tipográfica de core.css (--az-escala). Clave az_letra. ── */
+const AZ_LETRA = { normal: 1, grande: 1.12, muy: 1.2 };
+function azLetraModo() {
+  try { const v = JSON.parse(localStorage.getItem("az_letra") || '"normal"'); return AZ_LETRA[v] ? v : "normal"; } catch (e) { return "normal"; }
+}
+function azAplicarLetra() { document.documentElement.style.setProperty("--az-escala", String(AZ_LETRA[azLetraModo()])); }
+azAplicarLetra();
+window.AZ_LETRA = AZ_LETRA;
+window.azLetraModo = azLetraModo;
+window.azAplicarLetra = azAplicarLetra;
 window.azTranslitVisible = azTranslitVisible;
 window.azTranslitModo = azTranslitModo;
 window.azAplicarTranslit = azAplicarTranslit;
@@ -1163,3 +1174,44 @@ function azRefCapa(capa) {
 }
 window.azCapaFija = azCapaFija;
 window.azRefCapa = azRefCapa;
+
+/* ── ATRÁS CIERRA LA HOJA (manual §7, 09/11/2026) ───────────────
+   Con una hoja abierta (lo que tapa la página entera: .sheet, .pr, o un
+   role="dialog" fijo a pantalla completa), el gesto o el botón «atrás»
+   del teléfono cierra la hoja y deja al alumno donde estaba, en vez de
+   sacarlo de la página. Funciona para todas las hojas sin tocarlas:
+   - al abrirse una hoja se agrega una entrada al historial;
+   - «atrás» toca su ✕ (o su botón de cerrar) y se come ese popstate,
+     para que la página (las unidades usan ?m=…) no navegue;
+   - si la hoja se cierra con su ✕, se saca la entrada (history.back())
+     y también se come ese popstate. */
+(function azAtrasCierraHojas() {
+  if (typeof MutationObserver === "undefined") return;
+  const esHoja = el => el.nodeType === 1 && (el.matches(".sheet, .pr, [role=dialog]")) && getComputedStyle(el).position === "fixed" && el.getBoundingClientRect().height > window.innerHeight * 0.6;
+  const abiertas = [];          // hojas con su entrada en el historial
+  let comer = 0;                // popstates propios que la página no tiene que ver
+  const cerrarBoton = h => h.querySelector(".sheet-x, .pr-x, [data-cerrar]") || [...h.querySelectorAll("button")].find(b => b.textContent.trim() === "✕");
+  function revisar() {
+    const nuevas = [...document.querySelectorAll(".sheet, .pr, [role=dialog]")].filter(h => !abiertas.includes(h) && esHoja(h));
+    let cerradas = 0;
+    for (let i = abiertas.length - 1; i >= 0; i--) if (!abiertas[i].isConnected) { abiertas.splice(i, 1); cerradas++; }
+    // una hoja que se redibuja (sale una y entra otra en el mismo momento) no toca el historial
+    const cambio = Math.min(cerradas, nuevas.length);
+    nuevas.forEach((h, i) => {
+      abiertas.push(h);
+      if (i >= cambio) history.pushState(Object.assign({}, history.state, { azHoja: abiertas.length }), "");
+    });
+    for (let i = cambio; i < cerradas; i++) { comer++; history.back(); }   // se cerró con su ✕: se saca su entrada
+  }
+  window.addEventListener("popstate", e => {
+    if (comer > 0) { comer--; e.stopImmediatePropagation(); return; }
+    const h = abiertas[abiertas.length - 1];
+    if (!h) return;
+    e.stopImmediatePropagation();
+    abiertas.pop();
+    const b = h.isConnected && cerrarBoton(h);
+    if (b) b.click();
+  }, true);
+  const iniciar = () => new MutationObserver(() => requestAnimationFrame(revisar)).observe(document.body, { childList: true, subtree: true });
+  if (document.body) iniciar(); else document.addEventListener("DOMContentLoaded", iniciar);
+})();

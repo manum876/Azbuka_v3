@@ -109,7 +109,7 @@ function App() {
   const green = darkMode ? "#4CAF82" : "#2E7D55";
   if (!ES_OK) {
     return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
-      h("div", { style: { textAlign: "center", padding: "12vh 6vw", color: c.textSub, fontSize: 14.5, lineHeight: 1.55 } },
+      h("div", { style: { textAlign: "center", padding: "12vh 6vw", color: c.textSub, fontSize: "var(--az-fs-cuerpo)", lineHeight: 1.55 } },
         "Esta unidad es de Abecé (español para rusohablantes).", h("br"),
         h("a", { href: "index.html", style: { color: c.gold, fontWeight: 700 }, onClick: ev => azNavigate(ev, "index.html") }, "Volver al inicio")));
   }
@@ -127,11 +127,11 @@ function App() {
   ] : azTabsUnidad(4);
 
   const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 1), examen, onPracticar: practicarUnidad, onAbrir: abrirModulo,
-    extraModulo: m => m.tipo === "repaso" && repaso && h("div", { style: { fontSize: 12.5, fontWeight: 700, marginTop: 6, color: repaso.aprobado ? green : "#E2884A" } },
+    extraModulo: m => m.tipo === "repaso" && repaso && h("div", { style: { fontSize: "var(--az-fs-nota)", fontWeight: 700, marginTop: 8, color: repaso.aprobado ? green : "#E2884A" } },
       "Последняя: " + repaso.pct + " %" + (repaso.aprobado ? " · сдано" : "")),
     progreso: [{ label: "Слова выучены", valor: palabrasDom, total: OBJETIVO_U4.length }] });
 
-  const vistaModulo = mod && h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+  const vistaModulo = mod && h("div", { key: mod.id, style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16 } },
     h("div", { className: "u-kicker" }, "Урок 4 · Модуль " + mod.n),
     h("h1", { className: "u-title" }, mod.titulo),
     mod.intro && h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
@@ -143,32 +143,32 @@ function App() {
       mod.dialogos && mod.dialogos.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Диалоги"),
         h(AzListaDialogos, { ids: mod.dialogos, onAbrir: id => setDialogo({ id }) })),
       mod.vocab && h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: es4Vocab(mod), titulo: mod.titulo }) }, "Карточки (" + es4Vocab(mod).length + ")"),
-      h("button", { className: "ubtn", style: { marginTop: 10 }, onClick: () => practicarModulo(mod) }, "Практиковать этот модуль"),
-      mod.ampliacion && h("div", { style: { marginTop: 28, paddingTop: 6, borderTop: `1px solid ${c.border}` } },
+      h("button", { className: "ubtn", style: { marginTop: 12 }, onClick: () => practicarModulo(mod) }, "Практиковать этот модуль"),
+      mod.ampliacion && h("div", { style: { marginTop: 24, paddingTop: 8, borderTop: `1px solid ${c.border}` } },
         h("div", { className: "u-sec" }, mod.ampliacion.titulo + " · по желанию"),
-        h("p", { className: "u-text", style: { fontSize: 14.5 } }, azFmt(mod.ampliacion.intro)),
+        h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, azFmt(mod.ampliacion.intro)),
         h("div", { className: "u-sec" }, "Ещё слова (" + es4Ampliacion(mod).length + ")"), h(AzVocabulario, { ids: es4Ampliacion(mod), c }),
         h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: es4Ampliacion(mod), titulo: mod.ampliacion.titulo }) }, "Карточки (" + es4Ampliacion(mod).length + ")"),
-        h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => practicarAmpliacion(mod) }, "Практиковать дополнительные слова")),
-      next && h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)),
+        h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => practicarAmpliacion(mod) }, "Практиковать дополнительные слова")),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)),
     mod.tipo === "conversaciones" && h(React.Fragment, null,
       h("div", { className: "u-sec" }, "Диалоги, чтобы слушать и записывать себя"),
       h(AzListaDialogos, { ids: mod.dialogos, onAbrir: id => setDialogo({ id, grabar: true }) }),
-      h("button", { className: "ubtn", style: { marginTop: 18 }, onClick: () => practicarModulo(mod) }, "Практиковать общение"),
-      next && h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)),
+      h("button", { className: "ubtn", style: { marginTop: 16 }, onClick: () => practicarModulo(mod) }, "Практиковать общение"),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)),
     mod.tipo === "proyecto" && h(AzProyecto, { mod, c, green, clave: "az_es4_proyecto", fuente: { titulo: "Урок 4 · Проект", href: "abece-4.html?m=" + mod.id }, aviso: AVISO, grabar: true }),
     mod.tipo === "examen" && h(React.Fragment, null,
-      h("div", { className: "u-card", style: { padding: "6px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
-        h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 14.5 } },
+      h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
+        h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "12px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: "var(--az-fs-cuerpo)" } },
           h("span", { style: { fontWeight: 600 } }, p.nombre), h("span", { style: { color: c.textMuted } }, p.n + (p.n === 1 ? " упражнение" : p.n < 5 ? " упражнения" : " упражнений"))))),
-      examen && h("div", { style: { marginTop: 14, fontSize: 14, color: examen.aprobado ? green : "#E2884A", fontWeight: 700 } },
+      examen && h("div", { style: { marginTop: 12, fontSize: "var(--az-fs-chico)", color: examen.aprobado ? green : "#E2884A", fontWeight: 700 } },
         "Последний раз: " + examen.pct + " % (" + examen.fecha.split("-").reverse().join(".") + ")" + (examen.aprobado ? " · сдано" : "")),
       h("button", { className: "ubtn", onClick: () => rendirExamen(mod) }, examen ? "Пройти ещё раз" : "Начать проверку")),
     mod.tipo === "repaso" && h(React.Fragment, null,   /* 06/11/2026: repaso acumulativo U1–U4 */
-      h("div", { className: "u-card", style: { padding: "6px 16px", marginTop: 16 } }, mod.bloques.map((b, k) =>
-        h("div", { key: b.bloque, style: { display: "flex", justifyContent: "space-between", gap: 10, padding: "10px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 14.5 } },
+      h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 16 } }, mod.bloques.map((b, k) =>
+        h("div", { key: b.bloque, style: { display: "flex", justifyContent: "space-between", gap: 12, padding: "12px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: "var(--az-fs-cuerpo)" } },
           h("span", { style: { fontWeight: 600 } }, b.nombre), h("span", { style: { color: c.textMuted, flexShrink: 0 } }, b.n + " упражнений")))),
-      repaso && h("div", { style: { marginTop: 14, fontSize: 14, color: repaso.aprobado ? green : "#E2884A", fontWeight: 700 } },
+      repaso && h("div", { style: { marginTop: 12, fontSize: "var(--az-fs-chico)", color: repaso.aprobado ? green : "#E2884A", fontWeight: 700 } },
         "Последний раз: " + repaso.pct + " % (" + repaso.fecha.split("-").reverse().join(".") + ")" + (repaso.aprobado ? " · сдано" : "")),
       h("button", { className: "ubtn", onClick: rendirRepaso }, repaso ? "Пройти ещё раз" : "Начать повторение")));
 

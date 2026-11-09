@@ -124,7 +124,7 @@
       const g = guia.current;
       if (!g) return;
       const ctx = g.getContext("2d");
-      if (modo === "calcar" && listo) dibujarGlifo(ctx, c.textMuted + "55"); else ctx.clearRect(0, 0, g.width, g.height);
+      if (modo === "calcar" && listo) dibujarGlifo(ctx, c.textMuted + "33"); else ctx.clearRect(0, 0, g.width, g.height);
     }, [i, may, modo, listo, c.textMuted]);
 
     const pos = e => {
@@ -161,45 +161,48 @@
       /* La nota sale de un solo número: el promedio armónico de las dos medidas */
       p.r = p.f >= 0.75 ? 2 : p.f >= 0.55 ? 1 : 0;
       setRes(p);
-      dibujarGlifo(guia.current.getContext("2d"), "#4CAF8266");   /* la letra de referencia, en verde */
+      dibujarGlifo(guia.current.getContext("2d"), "#4CAF8288");   /* la letra de referencia, en verde */
     };
 
     const ir = d => { setI(x => (x + d + letras.length) % letras.length); };
-    const chip = on => Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
-      on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted });
+    /* Controles de la herramienta (chips, letra y botones): tamaño fijo, no siguen al selector de
+       Ajustes (06/11/2026). En una fila de 340 px no entran más grandes; los textos de ayuda sí crecen. */
+    const chip = on => Object.assign({ padding: "7px 12px", borderRadius: "var(--az-r)", fontSize: 13.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
+      on ? { background: c.gold + "14", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted });
     const col = res && !res.vacio ? (res.r === 2 ? "#4CAF82" : res.r === 1 ? "#E2884A" : "#B5605C") : null;
-    const btn = { padding: "11px 12px", borderRadius: 10, border: `1px solid ${c.border}`, background: c.bg3, color: c.text, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", flex: 1 };
+    const btn = { padding: "12px 16px", borderRadius: "var(--az-r)", border: `1px solid ${c.border}`, background: c.bg2, color: c.text, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", flex: "1 1 auto", whiteSpace: "nowrap" };
 
     return h("div", null,
       h("style", null, `.mano-cv{position:absolute;inset:0;width:100%;height:100%;touch-action:none;}`),
       h("div", { style: { display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4 } },
-        h("button", { className: "pair-btn", style: chip(modo === "calcar"), onClick: () => setModo("calcar") }, T.calcar),
-        h("button", { className: "pair-btn", style: chip(modo === "libre"), onClick: () => setModo("libre") }, T.libre),
-        h("span", { style: { flex: 1 } }),
-        h("button", { className: "pair-btn", style: chip(may), onClick: () => setMay(true) }, T.may),
-        h("button", { className: "pair-btn", style: chip(!may), onClick: () => setMay(false) }, T.min)),
+        h("div", { style: { display: "flex", gap: 8 } },
+          h("button", { className: "pair-btn", style: chip(modo === "calcar"), onClick: () => setModo("calcar") }, T.calcar),
+          h("button", { className: "pair-btn", style: chip(modo === "libre"), onClick: () => setModo("libre") }, T.libre)),
+        h("div", { style: { display: "flex", gap: 8, marginLeft: "auto" } },
+          h("button", { className: "pair-btn", style: chip(may), onClick: () => setMay(true) }, T.may),
+          h("button", { className: "pair-btn", style: chip(!may), onClick: () => setMay(false) }, T.min))),
       h("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 14 } },
         h("button", { style: Object.assign({}, btn, { flex: "0 0 44px", padding: 0, height: 44 }), onClick: () => ir(-1), "aria-label": T.ant }, "‹"),
         h("div", { style: { textAlign: "center" } },
-          h("div", { lang: idioma, style: { fontSize: 30, fontWeight: 800, color: c.gold, lineHeight: 1 } }, l.upper + " " + l.lower),
-          h("div", { lang: idioma, style: { fontSize: 12, color: c.textMuted, marginTop: 4 } }, l.name)),
+          h("div", { lang: idioma, style: { fontSize: 34, fontWeight: 800, color: c.gold, lineHeight: 1 } }, l.upper + " " + l.lower),
+          h("div", { lang: idioma, style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 4 } }, l.name)),
         h("button", { style: Object.assign({}, btn, { flex: "0 0 44px", padding: 0, height: 44 }), onClick: () => ir(1), "aria-label": T.sig }, "›")),
-      modo === "libre" && h("div", { style: { fontSize: 13, color: c.textSub, textAlign: "center", marginTop: 8 } }, T.libreAyuda(may)),
-      h("div", { style: { position: "relative", width: "78%", maxWidth: 300, aspectRatio: "1 / 1", margin: "12px auto 0", background: c.card, border: `1px solid ${col || c.border}`, borderRadius: 16, overflow: "hidden" } },
+      modo === "libre" && h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textSub, textAlign: "center", marginTop: 8 } }, T.libreAyuda(may)),
+      h("div", { style: { position: "relative", width: "78%", maxWidth: 300, aspectRatio: "1 / 1", margin: "12px auto 0", background: c.card, border: `1px solid ${col || c.border}`, borderRadius: "var(--az-r)", overflow: "hidden" } },
         h("div", { style: { position: "absolute", left: "8%", right: "8%", top: "62%", borderTop: `1px dashed ${c.border}` } }),
         h("canvas", { ref: guia, width: 600, height: 600, className: "mano-cv", style: { pointerEvents: "none" } }),
         h("canvas", { ref: lienzo, width: 600, height: 600, className: "mano-cv", "aria-label": T.lienzo,
           onPointerDown: abajo, onPointerMove: mover, onPointerUp: arriba, onPointerCancel: arriba, onPointerLeave: arriba })),
-      h("div", { style: { display: "flex", gap: 8, marginTop: 12, maxWidth: 340, marginLeft: "auto", marginRight: "auto" } },
+      h("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12, maxWidth: 340, marginLeft: "auto", marginRight: "auto" } },
         h("button", { style: btn, onClick: limpiar }, T.borrar),
         h("button", { style: btn, onClick: () => voz(l.hablar || l.lower) }, T.escuchar),
         h("button", { style: Object.assign({}, btn, { background: c.gold, borderColor: c.gold, color: c.bg }), onClick: comprobar }, T.comprobar)),
-      res && h("div", { style: { maxWidth: 340, margin: "12px auto 0", fontSize: 14, lineHeight: 1.5, color: c.textSub } },
+      res && h("div", { style: { maxWidth: 340, margin: "12px auto 0", fontSize: "var(--az-fs-chico)", lineHeight: 1.5, color: c.textSub } },
         res.vacio ? T.vacio : h(React.Fragment, null,
-          h("span", { style: { display: "inline-block", fontSize: 13, fontWeight: 800, borderRadius: 8, padding: "3px 10px", color: col, background: col + "22", border: "1px solid " + col, marginRight: 8 } },
+          h("span", { style: { display: "inline-block", fontSize: "var(--az-fs-chico)", fontWeight: 800, borderRadius: "var(--az-r-chico)", padding: "3px 10px", color: col, background: col + "14", border: "1px solid " + col, marginRight: 8 } },
             res.r === 2 ? T.bien : res.r === 1 ? T.casi : T.mal),
           T.resultado(Math.round(res.f * 100), Math.round(res.cob * 100), Math.round(res.prec * 100)))),
-      h("div", { style: { maxWidth: 340, margin: "14px auto 0", fontSize: 12, color: c.textMuted, lineHeight: 1.5 } },
+      h("div", { style: { maxWidth: 340, margin: "14px auto 0", fontSize: "var(--az-fs-nota)", color: c.textMuted, lineHeight: 1.5 } },
         T.nota));
   }
 

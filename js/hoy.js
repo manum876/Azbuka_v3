@@ -460,30 +460,28 @@ function AzHoy({ c, unidad, onCerrar }) {
       h("line", { x1: cx, y1: cx, x2: cx, y2: cx - r * 0.78, stroke: c.gold, "stroke-width": 4, "stroke-linecap": "round" }),
       h("circle", { cx, cy: cx, r: 5, fill: c.gold }));
   };
-  const colRes = res ? { bien: VERDE, casi: "#C9B369", mal: "#D9776F" }[res.nivel] : null;
+  const colRes = res ? { bien: VERDE, casi: "#E2884A", mal: "#B5605C" }[res.nivel] : null;
   const soloEmoji = !!(d && d.emoji && !d.grande && !d.sub && !d.audio && !d.reloj);
   return h("div", { className: "az-hoy-velo", ref: azRefCapa(capa), onClick: e => { if (e.target === e.currentTarget) onCerrar(); } },
     h("style", null, `
-      .az-hoy-velo{position:fixed;inset:0;z-index:520;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:6vh 16px 4vh;animation:azHoyIn .2s ease both;}
-      .az-hoy{width:100%;max-width:360px;max-height:100%;overflow-y:auto;background:${c.card};border:1px solid ${c.border};border-radius:16px;box-shadow:0 16px 40px rgba(0,0,0,.4);padding:16px;color:${c.text};font-family:'Noto Sans',sans-serif;}
-      @keyframes azHoyIn{from{opacity:0;}to{opacity:1;}}
-      @media (prefers-reduced-motion:reduce){.az-hoy-velo{animation:none;}}
+      .az-hoy-velo{position:fixed;inset:0;z-index:520;background:rgba(0,0,0,.55);box-shadow:0 0 0 100vmax rgba(0,0,0,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:6vh 16px 4vh;animation:azVelo var(--az-t-media) var(--az-curva) both;}
+      .az-hoy{width:100%;max-width:360px;max-height:100%;overflow-y:auto;background:${c.card};border:1px solid ${c.border};border-radius:var(--az-r);box-shadow:0 16px 40px rgba(0,0,0,.4);padding:12px 16px;color:${c.text};font-family:'Noto Sans',sans-serif;animation:azFlota var(--az-t-media) var(--az-curva) both;}
       .az-hoy-top{display:flex;align-items:flex-start;gap:10px;}
-      .az-hoy-k{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};}
-      .az-hoy-t{font-size:19px;font-weight:800;margin-top:2px;}
-      .az-hoy-x{width:32px;height:32px;border-radius:9px;background:${c.bg3};border:1px solid ${c.border};color:${c.textSub};font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;padding:0;font-family:inherit;margin-left:auto;}
-      .az-hoy-pres{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px;border-radius:12px;background:${c.bg2};border:1px solid ${c.border};}
-      .az-hoy-g{font-size:26px;font-weight:800;color:${c.gold};line-height:1.2;}
-      .az-hoy-s{font-size:13px;color:${c.textSub};margin-top:2px;}
-      .az-hoy-c{font-size:14.5px;line-height:1.45;margin-top:14px;}
-      .az-hoy-in{width:100%;box-sizing:border-box;margin-top:8px;background:${c.bg3};border:1px solid ${c.border};border-radius:10px;padding:11px 12px;color:${c.text};font-size:16px;font-family:inherit;}
+      .az-hoy-k{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};}
+      .az-hoy-t{font-size:var(--az-fs-subtitulo);font-weight:800;margin-top:2px;}
+      .az-hoy-x{width:40px;height:40px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};font-size:var(--az-fs-chico);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;padding:0;font-family:inherit;margin-left:auto;}
+      .az-hoy-pres{display:flex;align-items:center;gap:12px;margin-top:12px;padding:12px 16px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};}
+      .az-hoy-g{font-size:var(--az-fs-titulo);font-weight:800;color:${c.gold};line-height:1.2;}
+      .az-hoy-s{font-size:var(--az-fs-chico);color:${c.textSub};margin-top:2px;}
+      .az-hoy-c{font-size:var(--az-fs-cuerpo);line-height:1.45;margin-top:14px;}
+      .az-hoy-in{width:100%;box-sizing:border-box;margin-top:8px;background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r);padding:10px 12px;color:${c.text};font-size:var(--az-fs-destacado);font-family:inherit;}
       .az-hoy-row{display:flex;gap:8px;margin-top:10px;}
-      .az-hoy-b{flex:1;padding:12px;border-radius:10px;border:none;background:${c.gold};color:${c.bg};font-size:15px;font-weight:800;font-family:inherit;cursor:pointer;}
-      .az-hoy-b:disabled{opacity:.5;cursor:default;}
-      .az-hoy-b2{padding:12px 14px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;}
-      .az-hoy-p{margin-top:10px;padding:9px 12px;border-radius:10px;border-left:3px solid ${c.gold};background:${c.gold}14;font-size:14px;line-height:1.45;}
-      .az-hoy-r{margin-top:12px;font-size:14px;line-height:1.5;}
-      .az-hoy .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}   /* igual que .play de unidad-ui.js */
+      .az-hoy-b{flex:1;padding:12px 16px;border-radius:var(--az-r);border:none;background:${c.gold};color:${c.bg};font-size:var(--az-fs-cuerpo);font-weight:700;font-family:inherit;cursor:pointer;}
+      .az-hoy-b:disabled{opacity:.4;cursor:default;}
+      .az-hoy-b2{padding:12px 16px;border-radius:var(--az-r);border:1px solid ${c.border};background:${c.bg2};color:${c.text};font-size:var(--az-fs-chico);font-weight:700;font-family:inherit;cursor:pointer;}
+      .az-hoy-p{margin-top:8px;padding:12px 16px;border-radius:var(--az-r);border:1px solid ${c.border};border-left:3px solid ${c.gold};background:${c.bg2};font-size:var(--az-fs-chico);line-height:1.45;}
+      .az-hoy-r{margin-top:12px;font-size:var(--az-fs-chico);line-height:1.5;}
+      .az-hoy .play{width:40px;height:40px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:var(--az-fs-chico);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}   /* igual que .play de unidad-ui.js */
     `),
     h("div", { className: "az-hoy", role: "dialog", "aria-modal": "true", "aria-label": T.def },
       h("div", { className: "az-hoy-top" },
@@ -501,7 +499,7 @@ function AzHoy({ c, unidad, onCerrar }) {
           d.audio && h("button", { className: "play", onClick: () => hablar(d.audio), "aria-label": T.oir }, "▶")),
         soloEmoji
           ? h("div", { className: "az-hoy-c", style: { display: "flex", alignItems: "center", gap: 12 } },
-              h("div", { style: { fontSize: 32, lineHeight: 1, flexShrink: 0 }, "aria-hidden": "true" }, d.emoji),
+              h("div", { style: { fontSize: "var(--az-fs-heroe)", lineHeight: 1, flexShrink: 0 }, "aria-hidden": "true" }, d.emoji),
               h("div", { style: { flex: 1, minWidth: 0 } }, azFmt(d.consigna)))
           : h("div", { className: "az-hoy-c" }, azFmt(d.consigna)),
         h("input", { className: "az-hoy-in", lang: T.lang, value: txt, placeholder: T.escribe, onInput: e => { setTxt(e.target.value); setRes(null); },
@@ -524,11 +522,11 @@ function AzHoyTarjeta({ c, hecho, onAbrir, alto }) {
   const h = React.createElement;
   const ES = AZ_HOY_ES;
   return h("button", { onClick: onAbrir, "aria-label": ES ? "Задание дня" : "Desafío del día",
-    style: { width: alto, minHeight: alto, flexShrink: 0, borderRadius: 16, background: c.card, border: `1px solid ${hecho ? c.border : c.gold + "88"}`, color: c.text, cursor: "pointer",
+    style: { width: alto, minHeight: alto, flexShrink: 0, borderRadius: "var(--az-r)", background: c.card, border: `1px solid ${hecho ? c.border : c.gold + "88"}`, color: c.text, cursor: "pointer",
       display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, fontFamily: "inherit", padding: 8 } },
-    h("div", { style: { fontSize: 26 } }, hecho ? "✅" : "🎯"),
-    h("div", { style: { fontSize: 15, fontWeight: 800, color: c.gold } }, ES ? "Сегодня" : "Hoy"),
-    h("div", { style: { fontSize: 11, color: c.textMuted, lineHeight: 1.2, textAlign: "center" } }, hecho ? (ES ? "Сделано" : "Hecho") : ES ? "Задание дня" : "Desafío del día"));
+    h("div", { style: { fontSize: "var(--az-fs-titulo)" } }, hecho ? "✅" : "🎯"),
+    h("div", { style: { fontSize: "var(--az-fs-cuerpo)", fontWeight: 800, color: c.gold } }, ES ? "Сегодня" : "Hoy"),
+    h("div", { style: { fontSize: "var(--az-fs-micro)", color: c.textMuted, lineHeight: 1.2, textAlign: "center" } }, hecho ? (ES ? "Сделано" : "Hecho") : ES ? "Задание дня" : "Desafío del día"));
 }
 
 window.AzHoy = AzHoy;

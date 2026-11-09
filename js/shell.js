@@ -50,10 +50,11 @@ function azColors(dark) {
   return {
     bg: dark ? "#0F0F14" : "#F7F5F0",
     bg2: dark ? "#17171E" : "#EDEAE4",
-    bg3: dark ? "#1E1E28" : "#E2DED7",
+    bg3: dark ? "#17171E" : "#EDEAE4",   /* 06/11/2026: igual que bg2 (una sola superficie hundida, manual §2.1).
+                                           Queda como alias mientras quede alguna página que lo pida; lo nuevo usa bg2. */
     card: dark ? "#1A1A24" : "#FFFFFF",
     border: dark ? "#2A2A38" : "#D5D0C8",
-    gold: "#C9A84C",
+    gold: dark ? "#C9A84C" : "#A68B3F",
     text: dark ? "#F0EEE8" : "#1A1812",
     textMuted: dark ? "#888080" : "#8A847A",
     textSub: dark ? "#B8B0A8" : "#5A5450",
@@ -147,7 +148,7 @@ function AzCaptura({ c }) {
     await azGuardarEnCuaderno(txt);
   };
   const base = { position: "fixed", left: "50%", transform: "translateX(-50%)", bottom: "calc(env(safe-area-inset-bottom, 0px) + 86px)", zIndex: 450,
-    borderRadius: 22, padding: "11px 18px", fontSize: 14, fontWeight: 700, fontFamily: "inherit", boxShadow: "0 8px 24px rgba(0,0,0,.35)", whiteSpace: "nowrap" };
+    borderRadius: "var(--az-r-pildora)", padding: "var(--az-esp-bloque) var(--az-esp-borde)", fontSize: "var(--az-fs-chico)", fontWeight: 700, fontFamily: "inherit", boxShadow: "0 8px 24px rgba(0,0,0,.4)", whiteSpace: "nowrap" };
   if (cartel) return React.createElement("div", { role: "status", style: Object.assign({}, base, { background: c.card, color: "#4CAF82", border: "1px solid #4CAF82" }) }, T("guardadoCuaderno"));
   if (!sel) return null;
   return React.createElement("button", Object.assign(typeof azTocarYa === "function" ? azTocarYa(guardar) : { onMouseDown: e => e.preventDefault(), onClick: guardar }, {
@@ -180,36 +181,36 @@ function AzReportar({ c, onClose }) {
       setEstado({ err: m === "limite" ? T("reporteLimite") : T("reporteFallo") });
     }
   };
-  const lbl = t => React.createElement("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "20px 0 8px" } }, t);
+  const lbl = t => React.createElement("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "var(--az-esp-seccion) 0 var(--az-esp-junto)" } }, t);
   const area = (v, set, filas, ph) => React.createElement("textarea", { value: v, rows: filas, placeholder: ph, maxLength: 4000, onInput: e => set(e.target.value),
-    style: { width: "100%", boxSizing: "border-box", fontSize: 16, lineHeight: 1.5, padding: 12, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", resize: "vertical", outline: "none" } });
+    style: { width: "100%", boxSizing: "border-box", fontSize: "var(--az-fs-destacado)", lineHeight: 1.5, padding: "var(--az-esp-bloque)", borderRadius: "var(--az-r)", background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", resize: "vertical", outline: "none" } });
   const boton = (t, fn, sec, dis) => React.createElement("button", { className: "btn", onClick: fn, disabled: !!dis,
-    style: { width: "100%", padding: "13px 16px", borderRadius: 10, fontSize: 14.5, fontWeight: 700, cursor: dis ? "default" : "pointer", fontFamily: "inherit", marginTop: 10, opacity: dis ? 0.6 : 1,
-      background: sec ? c.bg3 : c.gold, border: `1px solid ${sec ? c.border : c.gold}`, color: sec ? c.text : c.bg } }, t);
+    style: { width: "100%", padding: "var(--az-esp-bloque) var(--az-esp-borde)", borderRadius: "var(--az-r)", fontSize: "var(--az-fs-cuerpo)", fontWeight: 700, cursor: dis ? "default" : "pointer", fontFamily: "inherit", marginTop: "var(--az-esp-grupo)", opacity: dis ? 0.4 : 1,
+      background: sec ? c.bg2 : c.gold, border: `1px solid ${sec ? c.border : c.gold}`, color: sec ? c.text : c.bg } }, t);
   const listo = estado === "enviado" || estado === "pendiente" || estado === "mail";
   const aviso = { enviado: T("reporteEnviado"), pendiente: T("reportePendiente"), mail: T("reporteMail") }[estado];
   return React.createElement("div", { ref: azRefCapa(capa), role: "dialog", "aria-label": T("reportar"),
-      style: { position: "fixed", inset: 0, zIndex: 300, background: c.bg, boxShadow: `0 0 0 100vmax ${c.bg}`, color: c.text, fontFamily: "'Noto Sans',sans-serif", overflowY: "auto", WebkitOverflowScrolling: "touch", animation: "fadeIn .25s ease" } },
+      style: { position: "fixed", inset: 0, zIndex: 300, background: c.bg, boxShadow: `0 0 0 100vmax ${c.bg}`, color: c.text, fontFamily: "'Noto Sans',sans-serif", overflowY: "auto", WebkitOverflowScrolling: "touch", animation: "azSube var(--az-t-media) var(--az-curva) both" } },
     React.createElement("button", { onClick: onClose, "aria-label": T("reporteCerrar"),
-      style: { position: "fixed", top: "var(--az-top,6vh)", right: "3vw", width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 16, cursor: "pointer", zIndex: 2 } }, "✕"),
-    React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", padding: "var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px))" } },
-      React.createElement("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, paddingRight: 48, lineHeight: "36px" } }, T("reporteAyuda")),
-      React.createElement("div", { style: { fontSize: 26, fontWeight: 800, marginTop: 4 } }, T("reportar")),
-      React.createElement("div", { style: { fontSize: 15, lineHeight: 1.6, color: c.textSub, marginTop: 8 } },
+      style: { position: "fixed", top: "var(--az-top,6vh)", right: "3vw", width: 40, height: 40, borderRadius: "var(--az-r)", background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontSize: 16, cursor: "pointer", zIndex: 2 } }, "✕"),
+    React.createElement("div", { style: { maxWidth: 760, margin: "0 auto", padding: "var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px))" } },
+      React.createElement("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, paddingRight: 52, lineHeight: "40px" } }, T("reporteAyuda")),
+      React.createElement("div", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, lineHeight: 1.2, marginTop: "var(--az-esp-junto)", paddingRight: 52 } }, T("reportar")),
+      React.createElement("div", { style: { fontSize: "var(--az-fs-cuerpo)", lineHeight: 1.6, color: c.textSub, marginTop: "var(--az-esp-bloque)" } },
         T("reporteIntro")),
       listo
         ? React.createElement(React.Fragment, null,
-            React.createElement("div", { role: "status", style: { fontSize: 15, lineHeight: 1.55, marginTop: 20, padding: "12px 14px", borderRadius: 10,
-              color: estado === "enviado" ? "#4CAF82" : c.text, background: estado === "enviado" ? "#4CAF8222" : c.gold + "18", border: `1px solid ${estado === "enviado" ? "#4CAF82" : c.gold + "66"}` } }, aviso),
+            React.createElement("div", { role: "status", style: { fontSize: "var(--az-fs-cuerpo)", lineHeight: 1.55, marginTop: "var(--az-esp-seccion)", padding: "var(--az-esp-bloque) var(--az-esp-borde)", borderRadius: "var(--az-r)",
+              color: estado === "enviado" ? "#4CAF82" : c.text, background: estado === "enviado" ? "#4CAF8214" : c.gold + "14", border: `1px solid ${estado === "enviado" ? "#4CAF82" : c.gold + "88"}` } }, aviso),
             boton(T("reporteCerrar"), onClose))
         : React.createElement(React.Fragment, null,
             lbl(T("reporteQuePaso")),
             area(texto, setTexto, 5, T("reporteQuePasoEj")),
             lbl(T("reporteEsperabas")),
             area(esperado, setEsperado, 3, T("reporteEsperabasEj")),
-            React.createElement("div", { style: { fontSize: 12.5, lineHeight: 1.55, color: c.textMuted, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: 10, padding: "10px 12px", marginTop: 14 } },
+            React.createElement("div", { style: { fontSize: "var(--az-fs-nota)", lineHeight: 1.55, color: c.textMuted, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", padding: "var(--az-esp-bloque) var(--az-esp-borde)", marginTop: "var(--az-esp-bloque)" } },
               T("reporteAdjunto1"), React.createElement("b", { style: { color: c.textSub } }, pantalla), T("reporteAdjunto2")),
-            estado && estado.err && React.createElement("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: "#D9776F", background: "#B5605C22", borderRadius: 10, padding: "10px 12px", marginTop: 12 } }, estado.err),
+            estado && estado.err && React.createElement("div", { style: { fontSize: "var(--az-fs-chico)", lineHeight: 1.5, color: "#B5605C", background: "#B5605C14", border: "1px solid #B5605C", borderRadius: "var(--az-r)", padding: "var(--az-esp-bloque) var(--az-esp-borde)", marginTop: "var(--az-esp-bloque)" } }, estado.err),
             boton(estado === "enviando" ? T("reporteEnviando") : T("reporteEnviar"), enviar, false, estado === "enviando"),
             boton(T("reporteCancelar"), onClose, true))));
 }
@@ -252,7 +253,7 @@ function AzShell(props) {
   }, []);
 
   return React.createElement("div", {
-    style: { background: c.bg, color: c.text, minHeight: "100vh", fontFamily: "'Noto Sans',sans-serif", transition: "background .3s, color .3s" }
+    style: { background: c.bg, color: c.text, minHeight: "100vh", fontFamily: "'Noto Sans',sans-serif", transition: "background var(--az-t-media) var(--az-curva), color var(--az-t-media) var(--az-curva)" }
   },
     /* Fondo de html/body/#root sigue el tema — esto sí es dinámico */
     /* --az-top: zona segura superior compartida (cabecera, drawer y
@@ -272,7 +273,7 @@ function AzShell(props) {
     /* ── OVERLAY (el contenido central queda detrás, sin ajustarse) ── */
     drawerOpen && React.createElement("div", {
       onClick: () => setDrawerOpen(false),
-      style: { position: "fixed", inset: 0, background: "rgba(0,0,0,.55)", zIndex: 200 }
+      style: { position: "fixed", inset: 0, background: "rgba(0,0,0,.55)", boxShadow: "0 0 0 100vmax rgba(0,0,0,.55)", zIndex: 200 }  /* la sombra extiende el velo más allá del área visible (iOS lo cortaba a la altura de la barra) */
     }),
 
     /* ── DRAWER ── */
@@ -282,7 +283,7 @@ function AzShell(props) {
         background: c.bg2, borderRight: `1px solid ${c.border}`,
         display: "flex", flexDirection: "column",
         transform: drawerOpen ? "translateX(0)" : "translateX(-100%)",
-        transition: "transform .28s cubic-bezier(.4,0,.2,1)"
+        transition: "transform var(--az-t-media) var(--az-curva)"
       }
     },
       /* Buscador — va directo al léxico de la dirección (catálogo:
@@ -295,7 +296,7 @@ function AzShell(props) {
             onInput: (e) => setLexQuery(e.target.value),
             onFocus: () => { if (listRef.current) listRef.current.scrollTop = 0; },
             placeholder: T("buscar"),
-            style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "9px 32px 9px 12px", color: c.text, fontSize: 13.5 }
+            style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "9px 32px 9px 12px", color: c.text, fontSize: "var(--az-fs-chico)" }
           }),
           lexQuery && React.createElement("button", {
             onClick: () => { setLexQuery(""); if (searchRef.current) searchRef.current.focus(); },
@@ -316,31 +317,31 @@ function AzShell(props) {
           }
         },
           React.createElement("div", { style: { display: "flex", justifyContent: "space-between", gap: 8 } },
-            React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: 13.5 } }, r.ru),
-            React.createElement("span", { style: { color: c.textMuted, fontSize: 12, textAlign: "right" } }, r.es)
+            React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: "var(--az-fs-chico)" } }, r.ru),
+            React.createElement("span", { style: { color: c.textMuted, fontSize: "var(--az-fs-nota)", textAlign: "right" } }, r.es)
           )
         ))
       ),
       q && results.length === 0 && React.createElement("div", {
-        style: { margin: "0 16px 8px", fontSize: 12, color: c.textMuted, flexShrink: 0 }
+        style: { margin: "0 16px 8px", fontSize: "var(--az-fs-nota)", color: c.textMuted, flexShrink: 0 }
       }, T("sinResultados")),
 
       /* Índice + listado de unidades, y por separado los módulos de
          apoyo — esta es la única zona que scrollea dentro del drawer. */
       React.createElement("div", { ref: listRef, style: { flex: 1, overflowY: "auto", padding: "6px 8px" } },
-        React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "10px 10px 6px" } }, T("curso")),
+        React.createElement("div", { style: { fontSize: "var(--az-fs-micro)", letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "10px 10px 6px" } }, T("curso")),
         React.createElement("a", {
           href: DIR().indice,
           onClick: (e) => azNavigate(e, DIR().indice),
-          style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: 13.5, textDecoration: "none" }
-        }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, "00"), T("indice")),
+          style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: "var(--az-fs-chico)", textDecoration: "none" }
+        }, React.createElement("span", { style: { fontSize: "var(--az-fs-micro)", color: c.textMuted, minWidth: 18 } }, "00"), T("indice")),
         (typeof AZ_UNITS !== "undefined" ? AZ_UNITS : []).map(u => React.createElement("a", {
           key: u.id, href: u.href,
           onClick: (e) => azNavigate(e, u.href),
-          style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: 13.5, textDecoration: "none" }
-        }, React.createElement("span", { style: { fontSize: 11, color: c.textMuted, minWidth: 18 } }, String(u.id).padStart(2, "0")), u.title)),
+          style: { display: "flex", alignItems: "center", gap: 8, padding: "9px 12px", borderRadius: 10, color: c.textSub, fontSize: "var(--az-fs-chico)", textDecoration: "none" }
+        }, React.createElement("span", { style: { fontSize: "var(--az-fs-micro)", color: c.textMuted, minWidth: 18 } }, String(u.id).padStart(2, "0")), u.title)),
 
-        React.createElement("div", { style: { fontSize: 10, letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "16px 10px 6px" } }, T("modulos")),
+        React.createElement("div", { style: { fontSize: "var(--az-fs-micro)", letterSpacing: 1.5, textTransform: "uppercase", color: c.textMuted, padding: "16px 10px 6px" } }, T("modulos")),
         /* Módulos de apoyo como tarjetas (01/10/2026): ícono de color,
            título, descripción y «›». El activo, con borde dorado. */
         (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).map(m => {
@@ -351,10 +352,10 @@ function AzShell(props) {
             onClick: (e) => azNavigate(e, m.href),
             style: { display: "flex", alignItems: "center", gap: 10, margin: "0 2px 6px", padding: "9px 12px", borderRadius: 10, background: act ? c.bg3 : c.card, border: `1px solid ${act ? c.gold : c.border}`, textDecoration: "none" }
           },
-            React.createElement("span", { style: { width: 26, height: 26, borderRadius: 7, background: col.bg, color: col.fg, fontSize: 11, fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, m.glyph),
+            React.createElement("span", { style: { width: 26, height: 26, borderRadius: "var(--az-r-chico)", background: col.bg, color: col.fg, fontSize: "var(--az-fs-micro)", fontWeight: 700, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 } }, m.glyph),
             React.createElement("span", { style: { flex: 1, minWidth: 0 } },
-              React.createElement("span", { style: { display: "block", color: act ? c.gold : c.text, fontSize: 13.5, fontWeight: 600 } }, m.title),
-              React.createElement("span", { style: { display: "block", color: c.textMuted, fontSize: 11.5, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } }, m.desc)),
+              React.createElement("span", { style: { display: "block", color: act ? c.gold : c.text, fontSize: "var(--az-fs-chico)", fontWeight: 600 } }, m.title),
+              React.createElement("span", { style: { display: "block", color: c.textMuted, fontSize: "var(--az-fs-nota)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" } }, m.desc)),
             React.createElement("span", { style: { color: c.gold, fontSize: 15 } }, "›"));
         })
       ),
@@ -400,8 +401,8 @@ function AzShell(props) {
           style: { width: 36, height: 36, borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: c.text, cursor: "pointer", padding: 0, flexShrink: 0, marginTop: 0 }
         }, "<"),
         React.createElement("div", { style: { display: "flex", alignItems: "baseline", gap: 8, minWidth: 0 } },
-          React.createElement("span", { style: { fontSize: 24, lineHeight: 1, color: c.gold, fontWeight: 900, letterSpacing: -1, flexShrink: 0 } }, DIR().marca.nombre),
-          React.createElement("span", { style: { fontSize: 12.5, color: c.textMuted, fontWeight: 500, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0 } }, DIR().marca.lema)
+          React.createElement("span", { style: { fontSize: 26, lineHeight: 1, color: c.gold, fontWeight: 900, letterSpacing: -1, flexShrink: 0 } }, DIR().marca.nombre),
+          React.createElement("span", { style: { fontSize: 13.5, color: c.textMuted, fontWeight: 500, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", minWidth: 0 } }, DIR().marca.lema)
         )
       )
     ),
@@ -421,8 +422,9 @@ function AzShell(props) {
       React.createElement("div", { style: { maxWidth: 960, margin: "0 auto", display: "flex", alignItems: "center", padding: "6px 3vw" } },
         React.createElement("button", {
           onClick: () => setDrawerOpen(true),
-          style: { flexShrink: 0, background: "none", border: "none", padding: "6px 14px 6px 0", display: "flex", flexDirection: "column", alignItems: "center", gap: 3, color: c.textMuted, cursor: "pointer", fontFamily: "inherit" }
-        }, React.createElement("span", { style: { fontSize: 20 } }, "☰"), React.createElement("span", { style: { fontSize: 11, fontWeight: 600 } }, T("menu"))),
+          "aria-label": T("menu"),
+          style: { flexShrink: 0, height: 57, background: "none", border: "none", padding: "0 14px 0 0", display: "flex", alignItems: "center", justifyContent: "center", color: c.textMuted, cursor: "pointer", fontFamily: "inherit" }
+        }, React.createElement("span", { style: { fontSize: 24, lineHeight: 1 } }, "☰")),
 
         tabs.length > 0 && React.createElement("div", { style: { width: 1, height: 32, background: c.border, margin: "0 8px", flexShrink: 0 } }),
 
@@ -434,16 +436,15 @@ function AzShell(props) {
         React.createElement("div", { className: "bnav-scroll", style: { display: "flex", alignItems: "center", gap: 8, overflowX: "auto", flex: 1, justifyContent: tabs.some(t => t.texto) ? "space-between" : "flex-start" } },
           tabs.map(tab => {
             if (tab.texto) return React.createElement("div", { key: tab.id,
-              style: { flex: 1, minWidth: 0, textAlign: "center", fontSize: 14, fontWeight: 800, color: c.text, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", padding: "0 4px" } }, tab.texto);
+              style: { flex: 1, minWidth: 0, textAlign: "center", fontSize: "var(--az-fs-chico)", fontWeight: 800, color: c.text, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", padding: "0 4px" } }, tab.texto);
             const activo = view === tab.id;
             return React.createElement("button", {
               key: tab.id, className: "btn", disabled: !!tab.disabled, "aria-label": tab.label || tab.aria || tab.id,
               onClick: () => { if (tab.disabled) return; if (tab.action) tab.action(); else setView(tab.id); },
-              style: { flexShrink: 0, minWidth: 44, height: tab.label ? 48 : 40, padding: tab.label ? "4px 12px" : "0 12px", borderRadius: 10,
-                background: activo ? c.gold + "22" : c.bg3, border: `1px solid ${activo ? c.gold : c.border}`, color: activo ? c.gold : c.text,
+              style: { flexShrink: 0, minWidth: 44, height: 40, padding: "0 12px", borderRadius: 10,
+                background: activo ? c.gold + "14" : c.bg3, border: `1px solid ${activo ? c.gold : c.border}`, color: activo ? c.gold : c.text,
                 display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 2, opacity: tab.disabled ? 0.35 : 1, cursor: tab.disabled ? "default" : "pointer", fontFamily: "inherit" }
-            }, React.createElement("span", { style: { fontSize: tab.label ? 16 : 18, lineHeight: 1 } }, tab.icon),
-               tab.label && React.createElement("span", { style: { fontSize: 10.5, fontWeight: 600, lineHeight: 1.1 } }, tab.label));
+            }, React.createElement("span", { style: { fontSize: 18, lineHeight: 1 } }, tab.icon));
           })
         )
       )

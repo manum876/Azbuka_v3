@@ -20,40 +20,40 @@
 
   /* Buscador general (va a la ficha de la palabra, como el del menú) */
   .srch{position:relative;margin-bottom:16px;}
-  .srch input{width:100%;box-sizing:border-box;border-radius:12px;padding:13px 40px 13px 40px;font-size:16px;font-family:inherit;}
-  .srch .lupa{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;opacity:.6;pointer-events:none;}
-  .srch .limpiar{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;border:none;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}
-  .res{margin:-8px 0 16px;border-radius:12px;overflow:hidden;}
-  .res a{display:flex;justify-content:space-between;gap:10px;padding:11px 14px;text-decoration:none;}
+  .srch input{width:100%;box-sizing:border-box;border-radius:var(--az-r);padding:12px 40px 12px 40px;font-size:var(--az-fs-destacado);font-family:inherit;}
+  .srch .lupa{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:var(--az-fs-destacado);opacity:.6;pointer-events:none;}
+  .srch .limpiar{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;border:none;font-size:var(--az-fs-nota);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}
+  .res{margin:-8px 0 16px;border-radius:var(--az-r);overflow:hidden;}
+  .res a{display:flex;justify-content:space-between;gap:12px;padding:12px 14px;text-decoration:none;}
 
   /* Seguir estudiando */
-  .cont{display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;text-decoration:none;margin-bottom:26px;}
-  .cont-n{width:48px;height:48px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;background:#B5605C;flex-shrink:0;}
-  .cont-k{font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;}
-  .cont-t{font-size:16px;font-weight:700;margin-top:2px;}
-  .cont-s{font-size:12px;margin-top:2px;}
-  .pbar{height:5px;border-radius:3px;overflow:hidden;margin-top:8px;}
+  .cont{display:flex;align-items:center;gap:12px;padding:16px;border-radius:var(--az-r);text-decoration:none;margin-bottom:24px;}
+  .cont-n{width:44px;height:44px;border-radius:var(--az-r);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;background:#B5605C;flex-shrink:0;}
+  .cont-k{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.3px;text-transform:uppercase;}
+  .cont-t{font-size:var(--az-fs-destacado);font-weight:700;margin-top:4px;}
+  .cont-s{font-size:var(--az-fs-nota);margin-top:4px;}
+  .pbar{height:5px;border-radius:var(--az-r-pildora);overflow:hidden;margin-top:8px;}
 
   /* Tarjeta Azbuka: mismo formato que las de módulos (ícono a la
      izquierda, título y texto a la derecha). 27/10/2026 (Manu): sin los chips
      de nivel; la tarjeta entera lleva al índice del curso. */
-  .hero-card{display:block;width:100%;box-sizing:border-box;padding:18px 16px;border-radius:16px;margin-bottom:16px;text-decoration:none;transition:.18s;}
-  a.hero-card:active{transform:scale(.98);}
-  .hero-top{display:flex;align-items:flex-start;gap:14px;}
-  .hero-icon{width:64px;height:64px;border-radius:17px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:#B5605C;letter-spacing:-1px;flex-shrink:0;}
-  .hero-title{font-size:24px;font-weight:800;line-height:1.1;margin-bottom:6px;}
-  .hero-desc{font-size:13.5px;line-height:1.55;}
+  .hero-card{display:block;width:100%;box-sizing:border-box;padding:12px 16px;border-radius:var(--az-r);margin-bottom:12px;text-decoration:none;transition:transform var(--az-t-rapida) var(--az-curva),background-color var(--az-t-rapida),border-color var(--az-t-rapida),color var(--az-t-rapida);}
+  a.hero-card:active{transform:scale(.97);}
+  .hero-top{display:flex;align-items:flex-start;gap:12px;}
+  .hero-icon{width:56px;height:56px;border-radius:var(--az-r);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;background:#B5605C;letter-spacing:-1px;flex-shrink:0;}
+  .hero-title{font-size:var(--az-fs-titulo);font-weight:800;line-height:1.1;margin-bottom:8px;}
+  .hero-desc{font-size:var(--az-fs-chico);line-height:1.55;}
 
-  .section-lbl{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:0 0 12px;}
+  .section-lbl{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin:24px 0 4px;}
 
-  .mod-list{display:flex;flex-direction:column;gap:10px;}
-  .mod-card{display:flex;align-items:center;gap:14px;text-decoration:none;padding:14px 16px;border-radius:16px;cursor:pointer;transition:.18s;box-sizing:border-box;}
-  .mod-card:active{transform:scale(.98);}
-  .mod-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0;}
+  .mod-list{display:flex;flex-direction:column;gap:12px;}
+  .mod-card{display:flex;align-items:center;gap:12px;text-decoration:none;padding:12px 16px;border-radius:var(--az-r);cursor:pointer;transition:transform var(--az-t-rapida) var(--az-curva),background-color var(--az-t-rapida),border-color var(--az-t-rapida),color var(--az-t-rapida);box-sizing:border-box;}
+  .mod-card:active{transform:scale(.97);}
+  .mod-icon{width:44px;height:44px;border-radius:var(--az-r);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0;}
   /* 20/10/2026: el color de cada ícono sale de core.js (azModuloColor), igual que en el resto de la app */
-  .mod-text{display:flex;flex-direction:column;gap:2px;text-align:left;min-width:0;}
-  .mod-title{font-size:14.5px;font-weight:700;}
-  .mod-desc{font-size:11.5px;line-height:1.35;}
+  .mod-text{display:flex;flex-direction:column;gap:4px;text-align:left;min-width:0;}
+  .mod-title{font-size:var(--az-fs-cuerpo);font-weight:700;}
+  .mod-desc{font-size:var(--az-fs-nota);line-height:1.35;}
 </style>
 </head>
 <body>
@@ -142,7 +142,7 @@ function App() {
     moduleId: null,
     tabs: []
   },
-    React.createElement("div", { className: "page-gap", style: { animation: "fadeIn 0.3s ease" } },
+    React.createElement("div", { className: "page-gap", style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
 
       /* ── HERO: la tarjeta del curso (ícono, título y descripción). 27/10/2026
          (Manu): sin los chips de nivel (A1 → B1, B1 → B2, B2 → C1); el nivel
@@ -159,30 +159,30 @@ function App() {
         React.createElement("div", { className: "hero-desc", style: { color: c.textMuted } },
           TXI.desc)
           ),
-          !SIN_UNIDADES && React.createElement("span", { style: { color: c.gold, fontSize: 20, fontWeight: 700, alignSelf: "center", flexShrink: 0 } }, "›")
+          !SIN_UNIDADES && React.createElement("span", { style: { color: c.gold, fontSize: "var(--az-fs-subtitulo)", fontWeight: 700, alignSelf: "center", flexShrink: 0 } }, "›")
         )
       ),
 
       /* ── SEGUIR ESTUDIANDO (el último módulo abierto, az_ultimo) y, a la
          derecha, la tarjeta «Hoy» (desafío del día, hoy.js) ── */
-      !SIN_UNIDADES && React.createElement("div", { style: { display: "flex", gap: 10, alignItems: "stretch", marginBottom: ultimo ? 10 : 26 } },
+      !SIN_UNIDADES && React.createElement("div", { style: { display: "flex", gap: 12, alignItems: "stretch", marginBottom: ultimo ? 10 : 26 } },
       (() => {
         const u = ultimo;
         const href = u ? u.href : ABECE ? "abece-1.html" : "azbuka-1.html";
         const pct = u && u.total ? Math.round(u.n / u.total * 100) : 0;
         return React.createElement("a", {
           className: "cont", href, onClick: (e) => azNavigate(e, href),
-          style: { background: c.card, border: `1px solid ${c.gold}66`, flex: 1, minWidth: 0, marginBottom: 0 }
+          style: { background: c.card, border: `1px solid ${c.gold}88`, flex: 1, minWidth: 0, marginBottom: 0 }
         },
           React.createElement("div", { className: "cont-n" }, u ? u.unidad : "1"),
           React.createElement("div", { style: { flex: 1, minWidth: 0 } },
             React.createElement("div", { className: "cont-k", style: { color: c.gold } }, ABECE ? (u ? "Продолжить" : "Начать") : u ? "Seguir estudiando" : "Empezar"),
             React.createElement("div", { className: "cont-t", style: { color: c.text } }, u ? u.titulo : ABECE ? "Урок 1 · Испанский с нуля" : "Unidad 1 · Alfabeto y pronunciación"),
             u && React.createElement("div", { className: "cont-s", style: { color: c.textMuted } }, (ABECE ? "Модуль " : "Módulo ") + u.n + (ABECE ? " из " : " de ") + u.total),
-            u && React.createElement("div", { className: "pbar", style: { background: c.bg3 } },
+            u && React.createElement("div", { className: "pbar", style: { background: c.bg2 } },
               React.createElement("div", { style: { width: pct + "%", height: "100%", background: darkMode ? "#4CAF82" : "#2E7D55" } }))
           ),
-          React.createElement("span", { style: { color: c.textMuted, fontSize: 20 } }, "›")
+          React.createElement("span", { style: { color: c.textMuted, fontSize: "var(--az-fs-subtitulo)" } }, "›")
         );
       })(),
       hoyUnidad && React.createElement(AzHoyTarjeta, { c, hecho: hoyHecho, alto: 92, onAbrir: () => setHoyAbierto(true) })
@@ -191,14 +191,14 @@ function App() {
       /* ── REPASO DE HOY (19/10/2026, repaso.html): solo si ya empezó alguna unidad ── */
       ultimo && !SIN_UNIDADES && !SIN_HOY && React.createElement("a", {
         className: "cont", href: "repaso.html", onClick: (e) => azNavigate(e, "repaso.html"),
-        style: { background: c.card, border: `1px solid ${repasoN ? c.gold + "66" : c.border}` }
+        style: { background: c.card, border: `1px solid ${repasoN ? c.gold + "88" : c.border}` }
       },
-        React.createElement("div", { className: "cont-n", style: { background: repasoN ? c.gold : c.bg3, color: repasoN ? "#0F0F14" : c.textMuted } }, repasoN ? (repasoN > 99 ? "99+" : repasoN) : "✓"),
+        React.createElement("div", { className: "cont-n", style: { background: repasoN ? c.gold : c.bg2, color: repasoN ? c.bg : c.textMuted } }, repasoN ? (repasoN > 99 ? "99+" : repasoN) : "✓"),
         React.createElement("div", { style: { flex: 1, minWidth: 0 } },
           React.createElement("div", { className: "cont-k", style: { color: c.gold } }, ABECE ? "Повторение дня" : "Repaso de hoy"),
           React.createElement("div", { className: "cont-t", style: { color: c.text } }, ABECE ? (repasoN ? "То, что скоро забудется" : "Всё повторено") : repasoN ? "Lo que estás por olvidar" : "Estás al día"),
           React.createElement("div", { className: "cont-s", style: { color: c.textMuted } }, ABECE ? (repasoN ? "Повторить: " + repasoN + " · занятие минут на 10" : "Можно немного потренировать свой урок") : repasoN ? repasoN + " por repasar · sesiones de unos 10 minutos" : "Igual puedes practicar un poco de tu unidad")),
-        React.createElement("span", { style: { color: c.textMuted, fontSize: 20 } }, "›")
+        React.createElement("span", { style: { color: c.textMuted, fontSize: "var(--az-fs-subtitulo)" } }, "›")
       ),
 
       /* ── BUSCADOR GENERAL ── */
@@ -207,20 +207,20 @@ function App() {
         React.createElement("input", {
           value: q, onInput: (e) => setQ(e.target.value),
           placeholder: TXI.buscar, "aria-label": TXI.buscarAria,
-          style: { background: c.card, border: `1px solid ${c.gold}66`, color: c.text }
+          style: { background: c.card, border: `1px solid ${c.gold}88`, color: c.text }
         }),
         q && React.createElement("button", { className: "limpiar", onClick: () => setQ(""), "aria-label": TXI.limpiar, style: { background: c.border, color: c.text } }, "✕")
       ),
       q.trim() && React.createElement("div", { className: "res", style: { background: c.card, border: `1px solid ${c.border}` } },
         (() => {
           const r = typeof azSearchLexicon === "function" ? azSearchLexicon(q.trim()) : [];
-          if (!r.length) return React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, TXI.sinRes);
+          if (!r.length) return React.createElement("div", { style: { padding: "12px 14px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, TXI.sinRes);
           return r.map((x, i) => React.createElement("a", {
             key: x.id, href: x.href, onClick: (e) => azNavigate(e, x.href),
             style: { borderTop: i ? `1px solid ${c.border}` : "none" }
           },
-            React.createElement("span", { style: { color: c.text, fontWeight: 700, fontSize: 15 } }, x.ru),
-            React.createElement("span", { style: { color: c.textMuted, fontSize: 13, textAlign: "right" } }, x.es)
+            React.createElement("span", { style: { color: c.text, fontWeight: 700, fontSize: "var(--az-fs-cuerpo)" } }, x.ru),
+            React.createElement("span", { style: { color: c.textMuted, fontSize: "var(--az-fs-chico)", textAlign: "right" } }, x.es)
           ));
         })()
       ),
@@ -239,7 +239,7 @@ function App() {
               React.createElement("div", { className: "mod-title", style: { color: c.text } }, m.title),
               React.createElement("div", { className: "mod-desc", style: { color: c.textMuted } }, m.desc)
             ),
-            React.createElement("span", { style: { color: c.gold, fontSize: 18, flexShrink: 0, marginLeft: "auto", paddingLeft: 8 } }, "›")
+            React.createElement("span", { style: { color: c.gold, fontSize: "var(--az-fs-subtitulo)", flexShrink: 0, marginLeft: "auto", paddingLeft: 8 } }, "›")
           )
         )
       )

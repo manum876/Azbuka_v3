@@ -164,36 +164,36 @@ function azSpeak(ru) { azHablarRu(ru); }   /* voz compartida: core.js */
    toggle de tema del shell. */
 function FichaStyles({ c }) {
   return React.createElement("style", null, `
-    .ficha{background:${c.card};border:1px solid ${c.border};border-radius:14px;overflow:hidden;}
-    .hero{background:linear-gradient(135deg,${c.bg2},${c.bg3});padding:20px 20px 16px;border-bottom:1px solid ${c.border};}
-    .ru{font-size:34px;font-weight:800;color:${c.gold};line-height:1;}
-    .translit{font-size:14px;color:${c.textSub};font-style:italic;margin-top:6px;}
-    .ipa{font-size:12px;color:${c.textMuted};margin-top:2px;}
-    .pos-badge{display:inline-block;margin-top:10px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:${c.gold}33;color:${c.gold};border:1px solid ${c.gold};border-radius:8px;padding:3px 10px;}
-    .sense-pair{margin-top:6px;margin-left:28px;font-size:12px;color:${c.textSub};}
+    .ficha{background:${c.card};border:1px solid ${c.border};border-radius:var(--az-r);overflow:hidden;}
+    .hero{background:linear-gradient(135deg,${c.bg2},${c.bg2});padding:16px;border-bottom:1px solid ${c.border};}
+    .ru{font-size:var(--az-fs-heroe);font-weight:800;color:${c.gold};line-height:1;}
+    .translit{font-size:var(--az-fs-chico);color:${c.textSub};font-style:italic;margin-top:4px;}
+    .ipa{font-size:var(--az-fs-nota);color:${c.textMuted};margin-top:4px;}
+    .pos-badge{display:inline-block;margin-top:8px;font-size:var(--az-fs-micro);font-weight:700;letter-spacing:.5px;text-transform:uppercase;background:${c.gold}33;color:${c.gold};border:1px solid ${c.gold};border-radius:var(--az-r-chico);padding:4px 12px;}
+    .sense-pair{margin-top:8px;margin-left:24px;font-size:var(--az-fs-nota);color:${c.textSub};}
     .sense-pair a{color:${c.gold};text-decoration:none;font-weight:600;}
     .sense-pair.empty{color:${c.textMuted};font-style:italic;}
-    .governance{margin-top:4px;font-size:12.5px;color:${c.textSub};}
+    .governance{margin-top:4px;font-size:var(--az-fs-nota);color:${c.textSub};}
     .governance b{color:${c.text};font-weight:600;}
-    .irregular-tag{display:inline-block;margin-top:6px;font-size:10.5px;font-weight:700;color:#E2884A;background:${c.bg3};border-radius:6px;padding:2px 8px;}
-    .fbody{padding:18px 20px;}
-    .section-lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:20px 0 10px;}
+    .irregular-tag{display:inline-block;margin-top:8px;font-size:var(--az-fs-micro);font-weight:700;color:#E2884A;background:${c.bg2};border-radius:var(--az-r-chico);padding:4px 8px;}
+    .fbody{padding:16px;}
+    .section-lbl{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:24px 0 4px;}
     .section-lbl:first-child{margin-top:0;}
-    .sense{background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:12px 14px;margin-bottom:8px;}
-    .sense-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:${c.gold};color:${c.bg};font-size:11px;font-weight:800;border-radius:50%;margin-right:8px;}
-    .sense-es{font-size:16px;font-weight:700;color:${c.text};display:inline;}
-    .sense-def{font-size:13.5px;color:${c.textSub};margin-top:6px;margin-left:28px;}
+    .sense{background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r);padding:12px 16px;margin-bottom:12px;}
+    .sense-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:${c.gold};color:${c.bg};font-size:var(--az-fs-micro);font-weight:800;border-radius:50%;margin-right:8px;}
+    .sense-es{font-size:var(--az-fs-destacado);font-weight:700;color:${c.text};display:inline;}
+    .sense-def{font-size:var(--az-fs-chico);color:${c.textSub};margin-top:4px;margin-left:24px;}
     .buttons{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px;}
-    .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit;white-space:nowrap;}
+    .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:var(--az-r);border:1px solid ${c.border};background:${c.bg2};color:${c.text};font-size:var(--az-fs-chico);font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit;white-space:nowrap;}
     .btn.pr{background:${c.gold};border-color:${c.gold};color:${c.bg};font-weight:700;}
-    .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
+    .play{width:40px;height:40px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:var(--az-fs-chico);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
     .nivel-row{display:flex;gap:8px;}
-    .nivel-btn{flex:1;text-align:center;padding:9px 4px;border-radius:10px;font-size:11px;font-weight:700;cursor:pointer;transition:.18s;font-family:inherit;}
-    .nivel-nota{margin-top:8px;font-size:12px;color:${c.textMuted};line-height:1.5;}
-    .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12.5px;}
-    .meta-item{background:${c.bg2};border-radius:8px;padding:8px 10px;}
-    .meta-k{color:${c.textMuted};font-size:10px;text-transform:uppercase;letter-spacing:.5px;}
-    .meta-v{color:${c.text};margin-top:2px;}
+    .nivel-btn{flex:1;text-align:center;padding:8px 4px;white-space:nowrap;border-radius:var(--az-r);font-size:var(--az-fs-micro);font-weight:700;cursor:pointer;transition:transform var(--az-t-rapida) var(--az-curva),background-color var(--az-t-rapida),border-color var(--az-t-rapida),color var(--az-t-rapida);font-family:inherit;}
+    .nivel-nota{margin-top:8px;font-size:var(--az-fs-nota);color:${c.textMuted};line-height:1.5;}
+    .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:var(--az-fs-nota);}
+    .meta-item{background:${c.bg2};border-radius:var(--az-r-chico);padding:8px 12px;}
+    .meta-k{color:${c.textMuted};font-size:var(--az-fs-micro);text-transform:uppercase;letter-spacing:.5px;}
+    .meta-v{color:${c.text};margin-top:4px;}
     .meta-v.empty{color:${c.textMuted};font-style:italic;}
     .meta-v.meta-link{color:${c.gold};text-decoration:none;font-weight:600;cursor:pointer;}
     .meta-v.meta-link:hover{text-decoration:underline;}
@@ -229,7 +229,7 @@ function Diccionario({ c }) {
   const cuenta = {}; LEX.forEach(e => (e.temas || []).forEach(t => cuenta[t] = (cuenta[t] || 0) + 1));
   const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "diccionario") || { glyph: "Сл", icon: "orange" };
   const col = typeof azModuloColor === "function" ? azModuloColor(modulo) : { bg: c.gold, fg: "#fff" };
-  const chip = on => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
+  const chip = on => on ? { background: c.gold + "14", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
   const filtrando = !!tema || pos !== "todo" || !!q.trim();
   let lista = [];
   if (filtrando) {
@@ -250,34 +250,34 @@ function Diccionario({ c }) {
   const total = String(LEX.length).replace(/\B(?=(\d{3})+$)/g, ES ? "\u00a0" : ".");
   const css = `
     .dic{padding-top:14px;padding-bottom:110px}
-    .dic .intro{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:18px 18px 14px;margin-bottom:14px}
-    .dic .intro-top{display:flex;align-items:center;gap:14px}
-    .dic .intro-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;flex-shrink:0}
-    .dic .intro-title{font-size:24px;font-weight:800;color:${c.text};line-height:1.1}
-    .dic .intro-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-top:4px}
-    .dic .intro-desc{font-size:13.5px;line-height:1.55;color:${c.textSub};margin-top:12px}
-    .dic .srch{display:flex;align-items:center;gap:8px;background:${c.bg3};border:1px solid ${c.border};border-radius:9px;padding:0 10px}
-    .dic .srch input{flex:1;min-width:0;background:none;border:0;outline:0;color:${c.text};font-size:16px;padding:11px 0;font-family:inherit}
-    .dic .x{width:24px;height:24px;border-radius:50%;background:${c.border};border:0;color:${c.text};font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
-    .dic .lbl{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.textMuted};margin:16px 2px 8px}
-    .dic .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -3vw;padding:0 3vw}
+    .dic .intro{background:${c.card};border:1px solid ${c.border};border-radius:var(--az-r);padding:16px 16px 14px;margin-bottom:12px}
+    .dic .intro-top{display:flex;align-items:center;gap:12px}
+    .dic .intro-icon{width:44px;height:44px;border-radius:var(--az-r);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0}
+    .dic .intro-title{font-size:var(--az-fs-titulo);font-weight:800;color:${c.text};line-height:1.1}
+    .dic .intro-kicker{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-top:4px}
+    .dic .intro-desc{font-size:var(--az-fs-chico);line-height:1.55;color:${c.textSub};margin-top:12px}
+    .dic .srch{display:flex;align-items:center;gap:8px;background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r);padding:0 12px}
+    .dic .srch input{flex:1;min-width:0;background:none;border:0;outline:0;color:${c.text};font-size:var(--az-fs-destacado);padding:12px 0;font-family:inherit}
+    .dic .x{width:24px;height:24px;border-radius:50%;background:${c.border};border:0;color:${c.text};font-size:var(--az-fs-micro);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+    .dic .lbl{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.textMuted};margin:16px 4px 8px}
+    .dic .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -3vw;padding:0 3vw}
     .dic .chips::-webkit-scrollbar{display:none}
-    .dic .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;white-space:nowrap;font-family:inherit;flex-shrink:0;cursor:pointer;transition:.18s}
+    .dic .pair-btn{padding:8px 12px;border-radius:var(--az-r);font-size:var(--az-fs-nota);font-weight:600;white-space:nowrap;font-family:inherit;flex-shrink:0;cursor:pointer;transition:transform var(--az-t-rapida) var(--az-curva),background-color var(--az-t-rapida),border-color var(--az-t-rapida),color var(--az-t-rapida)}
     .dic .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .dic .tcard{background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 12px 10px;text-align:left;font-family:inherit;cursor:pointer}
-    .dic .tcard b{display:block;font-size:13.5px;color:${c.text};line-height:1.25}
-    .dic .tcard span{font-size:11.5px;color:${c.gold};font-weight:700}
-    .dic .sum{font-size:12.5px;color:${c.textMuted};margin:14px 2px 8px}
+    .dic .tcard{background:${c.card};border:1px solid ${c.border};border-radius:var(--az-r);padding:12px 12px 12px;text-align:left;font-family:inherit;cursor:pointer}
+    .dic .tcard b{display:block;font-size:var(--az-fs-chico);color:${c.text};line-height:1.25}
+    .dic .tcard span{font-size:var(--az-fs-nota);color:${c.gold};font-weight:700}
+    .dic .sum{font-size:var(--az-fs-nota);color:${c.textMuted};margin:12px 4px 8px}
     .dic .sum b{color:${c.text}}
-    .dic .list{background:${c.card};border:1px solid ${c.border};border-radius:12px;overflow:hidden}
-    .dic .let{font-size:11px;font-weight:800;color:${c.gold};background:${c.bg2};padding:5px 14px;border-top:1px solid ${c.border}}
+    .dic .list{background:${c.card};border:1px solid ${c.border};border-radius:var(--az-r);overflow:hidden}
+    .dic .let{font-size:var(--az-fs-micro);font-weight:800;color:${c.gold};background:${c.bg2};padding:4px 14px;border-top:1px solid ${c.border}}
     .dic .grp:first-child .let{border-top:0}
-    .dic .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:11px 14px;border-top:1px solid ${c.border};text-decoration:none}
+    .dic .res-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 14px;border-top:1px solid ${c.border};text-decoration:none}
     .dic .let+.res-row{border-top:0}
-    .dic .res-ru{color:${c.text};font-weight:600;font-size:14.5px}
-    .dic .res-asp{color:${c.textMuted};font-size:11px;margin-left:6px;font-weight:500}
-    .dic .res-es{color:${c.textMuted};font-size:12.5px;text-align:right}
-    .dic .mas{width:100%;margin-top:10px;padding:11px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};font-family:inherit;font-size:13px;cursor:pointer}
+    .dic .res-ru{color:${c.text};font-weight:600;font-size:var(--az-fs-cuerpo)}
+    .dic .res-asp{color:${c.textMuted};font-size:var(--az-fs-micro);margin-left:8px;font-weight:500}
+    .dic .res-es{color:${c.textMuted};font-size:var(--az-fs-nota);text-align:right}
+    .dic .mas{width:100%;margin-top:12px;padding:12px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};font-family:inherit;font-size:var(--az-fs-chico);cursor:pointer}
   `;
   const buscador = h("div", { className: "srch" }, h("span", { style: { color: c.textMuted } }, "⌕"),
     h("input", { value: q, placeholder: tema ? TX.buscarEn(temas[tema]) : TX.buscar, "aria-label": TX.buscarAria, onInput: e => setQ(e.target.value) }),
@@ -302,7 +302,7 @@ function Diccionario({ c }) {
       h("div", { className: "sum" }, h("b", null, TX.contar(lista.length)),
         (tema ? " · " + temas[tema] : "") + (pos !== "todo" ? " · " + DIC_POS.find(p => p[0] === pos)[1] : "") + (q.trim() ? " · «" + q.trim() + "»" : "")),
       lista.length ? h("div", { className: "list" }, grupos.map(g => h("div", { key: g.L, className: "grp" }, h("div", { className: "let" }, g.L), g.items.map(fila))))
-        : h("div", { style: { fontSize: 13, color: c.textMuted, padding: "6px 2px" } }, TX.nada),
+        : h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, padding: "8px 4px" } }, TX.nada),
       lista.length > max && h("button", { className: "mas", onClick: () => setMax(m => m + 150) }, TX.mas(lista.length - max))));
 }
 
@@ -329,7 +329,7 @@ function formasEsItems(entry, el) {
   const it = (k, v, ancho, key) => el("div", { key: key || k, className: "meta-item", style: ancho ? { gridColumn: "1 / -1" } : null },
     el("div", { className: "meta-k" }, k), [].concat(v).map((x, i) => el("div", { key: i, className: "meta-v" }, x)));
   const nota = t => el("div", { key: "n" + t.slice(0, 12), className: "meta-item", style: { gridColumn: "1 / -1" } },
-    el("div", { className: "meta-v", style: { fontSize: 12, lineHeight: 1.45 } }, t));
+    el("div", { className: "meta-v", style: { fontSize: "var(--az-fs-nota)", lineHeight: 1.45 } }, t));
   const r = [];
   const sp = (a, w) => a ? a + " " + w : w;
   if (d.t === "sust") {
@@ -370,7 +370,7 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
   const fem = entry.femenino && entry.femenino.es ? entry.femenino : null;
   const gen = entry.posNormalized === "sustantivo" && entry.gender ? (fem ? "m" : entry.gender) : "";
   const badge = (POS_RU[entry.posNormalized] || entry.posNormalized) + (gen ? " · " + GEN_RU[gen] : "");
-  const colNivel = [darkMode ? "#E2884A" : "#C85A1A", "#C9B369", darkMode ? "#4CAF82" : "#2E7D55"];
+  const colNivel = [c.textSub, "#C9B369", darkMode ? "#4CAF82" : "#2E7D55"];
   const marcarNivel = n => { azSetItemLevel("lex:" + entry.id, n); setNivel(n); };
   const tr = (entry.senses || []).map(x => x.ru).join("; ");
   const verbo = entry.posNormalized === "verbo";
@@ -380,7 +380,7 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
   const soloSe = (entry.pronominalPartner || []).some(p => /SOLO_PRONOMINAL/.test(p));
   const el = React.createElement;
   const formas = formasEsItems(entry, el);
-  return el("div", { style: { animation: "fadeIn 0.3s ease" } },
+  return el("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
     el(FichaStyles, { c }),
     el("div", { className: "ficha" },
       el("div", { className: "hero" },
@@ -397,28 +397,28 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
           s.definitionRu && el("div", { className: "sense-def" }, s.definitionRu))),
         /* ── Женский род: la forma femenina, con su chip y su pronunciación ── */
         fem && el(React.Fragment, null,
-          el("div", { className: "section-lbl", style: { marginTop: 20 } }, "Женский род"),
+          el("div", { className: "section-lbl", style: { marginTop: 24 } }, "Женский род"),
           el("div", { className: "sense", style: { display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 } },
             el("div", { style: { minWidth: 0 } },
-              el("div", { style: { fontSize: 24, fontWeight: 800, color: c.gold, lineHeight: 1.1 } }, fem.es),
+              el("div", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, color: c.gold, lineHeight: 1.1 } }, fem.es),
               el("div", { className: "translit az-tl" }, fem.translit),
               el("div", { className: "ipa" }, "IPA: /" + fem.ipa + "/"),
               el("span", { className: "pos-badge" }, (POS_RU[entry.posNormalized] || "") + " · " + GEN_RU.f),
-              el("div", { className: "sense-es", style: { display: "block", marginTop: 10 } }, fem.ru)),
+              el("div", { className: "sense-es", style: { display: "block", marginTop: 12 } }, fem.ru)),
             el("button", { className: "play", "aria-label": "Произношение", onClick: () => azHablarEs(fem.es) }, "▶"))),
-        el("div", { className: "section-lbl", style: { marginTop: 20 } }, "Твой прогресс"),
+        el("div", { className: "section-lbl", style: { marginTop: 24 } }, "Твой прогресс"),
         el("div", { className: "nivel-row" },
           [0, 1, 2].map(n => el("button", {
             key: n, className: "nivel-btn", onClick: () => marcarNivel(n),
             style: nivel === n
-              ? { background: colNivel[n] + "22", border: `1px solid ${colNivel[n]}`, color: colNivel[n] }
-              : { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
+              ? { background: colNivel[n] + "14", border: `1px solid ${colNivel[n]}`, color: colNivel[n] }
+              : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }
           }, NIVEL_RU[n]))),
         el("div", { className: "nivel-nota" }, "Уровень определяется автоматически по твоим ответам в упражнениях. Если он не совпадает с твоей оценкой, нажми, чтобы изменить его."),
         /* ── Грамматика (entrega 2, 27/10/2026; después del progreso, como la «Clasificación pedagógica» de Azbuka): conjugación con link a Verbos, pareja
            pronominal (ir ↔ irse), régimen y las formas de la palabra (formasEsItems). ── */
         (verbo || regimen.length > 0 || pareja.length > 0 || formas.length > 0) && el(React.Fragment, null,
-          el("div", { className: "section-lbl", style: { marginTop: 20 } }, "Грамматика"),
+          el("div", { className: "section-lbl", style: { marginTop: 24 } }, "Грамматика"),
           el("div", { className: "meta-grid" },
             formas,
             verbo && entry.conjugationClass && el("div", { className: "meta-item" },
@@ -529,26 +529,26 @@ function App() {
         value: q,
         onInput: (e) => setQ(e.target.value),
         placeholder: TX.buscarLex,
-        style: { width: "100%", boxSizing: "border-box", background: c.bg3, border: `1px solid ${c.border}`, borderRadius: 9, padding: "10px 34px 10px 14px", color: c.text, fontSize: 14 }
+        style: { width: "100%", boxSizing: "border-box", background: c.bg2, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", padding: "12px 34px 12px 14px", color: c.text, fontSize: "var(--az-fs-chico)" }
       }),
       q && React.createElement("button", {
         onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); },
         "aria-label": TX.limpiar,
-        style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: 13, lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
+        style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: "var(--az-fs-chico)", lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
       }, "✕"),
       q.trim() && React.createElement("div", {
-        style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: 10, boxShadow: "0 16px 40px rgba(0,0,0,.4)" }
+        style: { position: "absolute", top: "calc(100% + 6px)", left: 0, right: 0, zIndex: 50, maxHeight: "50vh", overflowY: "auto", background: c.card, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", boxShadow: "0 16px 40px rgba(0,0,0,.4)" }
       },
         results.length > 0
           ? results.map((r, i) => React.createElement("a", {
               key: r.href, href: r.href,
               onClick: (e) => azNavigate(e, r.href),
-              style: { display: "flex", justifyContent: "space-between", gap: 10, padding: "10px 14px", textDecoration: "none", borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
+              style: { display: "flex", justifyContent: "space-between", gap: 12, padding: "12px 14px", textDecoration: "none", borderTop: i === 0 ? "none" : `1px solid ${c.border}` }
             },
-              React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: 14 } }, r.acento || r.ru),
-              React.createElement("span", { style: { color: c.textMuted, fontSize: 12.5, textAlign: "right" } }, r.es)
+              React.createElement("span", { style: { color: c.text, fontWeight: 600, fontSize: "var(--az-fs-chico)" } }, r.acento || r.ru),
+              React.createElement("span", { style: { color: c.textMuted, fontSize: "var(--az-fs-nota)", textAlign: "right" } }, r.es)
             ))
-          : React.createElement("div", { style: { padding: "12px 14px", fontSize: 13, color: c.textMuted } }, TX.sinRes)
+          : React.createElement("div", { style: { padding: "12px 14px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, TX.sinRes)
       )
     )
   );
@@ -556,8 +556,8 @@ function App() {
   let entryContent;
   if (!entry) {
     entryContent = React.createElement("div", { style: { textAlign: "center", padding: "10vh 0" } },
-      React.createElement("h1", { style: { fontSize: 18, marginBottom: 8 } }, TX.noEncontrada),
-      React.createElement("p", { style: { fontSize: 13.5, color: c.textMuted } }, TX.sinId(id))
+      React.createElement("h1", { style: { fontSize: "var(--az-fs-subtitulo)", marginBottom: 8 } }, TX.noEncontrada),
+      React.createElement("p", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted } }, TX.sinId(id))
     );
   } else if (ES) {
     entryContent = React.createElement(FichaEs, { entry, c, darkMode, nivel, setNivel });
@@ -584,10 +584,10 @@ function App() {
       .filter(Boolean)
       .map(u => "Unidad " + u.id + " — " + u.title);
 
-    const colNivel = [darkMode ? "#E2884A" : "#C85A1A", "#C9B369", darkMode ? "#4CAF82" : "#2E7D55"];
+    const colNivel = [c.textSub, "#C9B369", darkMode ? "#4CAF82" : "#2E7D55"];
     const marcarNivel = n => { azSetItemLevel("lex:" + entry.id, n); setNivel(n); };
 
-    entryContent = React.createElement("div", { style: { animation: "fadeIn 0.3s ease" } },
+    entryContent = React.createElement("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
       React.createElement(FichaStyles, { c }),
       React.createElement("div", { className: "ficha" },
 
@@ -643,7 +643,7 @@ function App() {
             const notas = typeof culturaDePalabra === "function" ? culturaDePalabra(entry.id) : [];
             if (!notas.length) return null;
             return React.createElement("div", null,
-              React.createElement("div", { className: "section-lbl", style: { marginTop: 20 } }, "Cultura"),
+              React.createElement("div", { className: "section-lbl", style: { marginTop: 24 } }, "Cultura"),
               notas.map(n => {
                 const href = "dialogos.html?cul=" + n.id;
                 return React.createElement("a", {
@@ -651,7 +651,7 @@ function App() {
                   onClick: (e) => azNavigate(e, href),
                   style: { display: "block", textDecoration: "none" }
                 },
-                  React.createElement("span", { className: "sense-es" }, n.titulo, React.createElement("span", { style: { color: c.gold, marginLeft: 6 } }, "›")),
+                  React.createElement("span", { className: "sense-es" }, n.titulo, React.createElement("span", { style: { color: c.gold, marginLeft: 8 } }, "›")),
                   React.createElement("div", { className: "sense-def", style: { marginLeft: 0 } }, n.resumen)
                 );
               })
@@ -665,8 +665,8 @@ function App() {
             [0, 1, 2].map(n => React.createElement("button", {
               key: n, className: "nivel-btn", onClick: () => marcarNivel(n),
               style: nivel === n
-                ? { background: colNivel[n] + "22", border: `1px solid ${colNivel[n]}`, color: colNivel[n] }
-                : { background: c.bg3, border: `1px solid ${c.border}`, color: c.textMuted }
+                ? { background: colNivel[n] + "14", border: `1px solid ${colNivel[n]}`, color: colNivel[n] }
+                : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }
             }, NIVEL_LABEL[n]))),
           React.createElement("div", { className: "nivel-nota" }, "Se marca solo con los ejercicios. Si no coincide con lo que sabes, toca para corregirlo."),
 

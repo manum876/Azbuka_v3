@@ -78,10 +78,10 @@ function detalleTarjeta(e) {
 function Formulas({ filas, c }) {
   const idx = azIndiceFormas();
   const lexDe = ru => (ru.match(/[А-Яа-яЁё\u0301]+/g) || []).map(w => { const r = idx.get(azFormaClave(w)); return r && r[0] ? r[0][0] : null; });
-  return h("div", { className: "u-card", style: { padding: "2px 16px", marginTop: 12 } }, filas.map(([ru, es], k) =>
+  return h("div", { className: "u-card", style: { padding: "4px 16px", marginTop: 12 } }, filas.map(([ru, es], k) =>
     h("div", { key: k, className: "voc" },
       h("div", { style: { flex: 1, minWidth: 0 } },
-        h("div", { className: "voc-ru", style: { fontSize: 17 } }, h(AzTexto, { ru, lex: lexDe(ru), objetivo: OBJETIVO_U11 })),
+        h("div", { className: "voc-ru", style: { fontSize: "var(--az-fs-destacado)" } }, h(AzTexto, { ru, lex: lexDe(ru), objetivo: OBJETIVO_U11 })),
         h("div", { className: "voc-es" }, es)),
       h("button", { className: "play", onClick: () => azHablarRu(ru), "aria-label": "Escuchar" }, "▶"))));
 }
@@ -94,16 +94,16 @@ function Conversacion({ T, c }) {
   const lineas = [];
   T.pasos.forEach(p => { lineas.push({ q: p.quien || T.quien, ru: p.bot, es: p.es, g: p.genero || T.genero }); lineas.push({ q: "Вы", ru: p.sit.modelos[0], es: p.tarea, yo: true }); });
   return h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 12 } },
-    h("div", { style: { display: "flex", alignItems: "center", gap: 10 } },
-      h("div", { style: { flex: 1, fontSize: 16, fontWeight: 800, color: c.gold } }, T.titulo),
+    h("div", { style: { display: "flex", alignItems: "center", gap: 12 } },
+      h("div", { style: { flex: 1, fontSize: "var(--az-fs-destacado)", fontWeight: 800, color: c.gold } }, T.titulo),
       h("button", { className: "play", onClick: () => azHablarSecuencia(lineas.map(l => ({ texto: l.ru, genero: l.g }))), "aria-label": "Escuchar la conversación" }, "▶"),
       h("button", { className: "play", onClick: azCallar, "aria-label": "Detener el audio" }, "■")),
-    h("div", { style: { display: "flex", flexDirection: "column", gap: 6, marginTop: 10 } }, lineas.map((l, k) =>
-      h("div", { key: k, style: { alignSelf: l.yo ? "flex-end" : "flex-start", maxWidth: "88%", padding: "8px 12px", borderRadius: 14,
-        background: l.yo ? c.gold + "22" : c.bg2, border: `1px solid ${l.yo ? c.gold + "66" : c.border}` } },
-        h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: c.gold }, lang: "ru" }, l.q),
-        h("div", { style: { fontSize: 16, lineHeight: 1.45 } }, h(AzTexto, { ru: l.ru, lex: lexDe(l.ru), objetivo: OBJETIVO_U11 })),
-        es && h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 2 } }, l.yo ? "(" + l.es.replace(/\.$/, "") + ")" : l.es)))),
+    h("div", { style: { display: "flex", flexDirection: "column", gap: 8, marginTop: 12 } }, lineas.map((l, k) =>
+      h("div", { key: k, style: { alignSelf: l.yo ? "flex-end" : "flex-start", maxWidth: "88%", padding: "8px 12px", borderRadius: "var(--az-r)",
+        background: l.yo ? c.gold + "14" : c.bg2, border: `1px solid ${l.yo ? c.gold + "88" : c.border}` } },
+        h("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1, textTransform: "uppercase", color: c.gold }, lang: "ru" }, l.q),
+        h("div", { style: { fontSize: "var(--az-fs-destacado)", lineHeight: 1.45 } }, h(AzTexto, { ru: l.ru, lex: lexDe(l.ru), objetivo: OBJETIVO_U11 })),
+        es && h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 4 } }, l.yo ? "(" + l.es.replace(/\.$/, "") + ")" : l.es)))),
     h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => setEs(!es) }, es ? "Ocultar la traducción" : "Ver la traducción"));
 }
 
@@ -172,7 +172,7 @@ function App() {
       2: h(React.Fragment, null, sec("Los precios"),
           h(AzTablaGrupos, { encabezados: ["Número", "Precio"], c, filas: [1, 2, 3, 4, 5, 10, 12].map(n => [{ ru: U11_NUM[n], es: String(n) }, { ru: U11_NUM[n] + " " + (n === 1 ? "рубль" : n <= 4 ? "рубля́" : "рубле́й"), es: n + " ₽" }])
             .concat([[{ ru: "сто", es: "100" }, { ru: "сто рубле́й", es: "100 ₽" }], [{ ru: "ты́сяча", es: "1000" }, { ru: "ты́сяча рубле́й", es: "1000 ₽" }]]) }),
-          sec("Las parejas"), h("p", { className: "u-text", style: { fontSize: 14.5 } }, azFmt("A la izquierda, el verbo de proceso (lo general, lo que se repite); a la derecha, el de resultado (una vez), con su futuro de {я}.")),
+          sec("Las parejas"), h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, azFmt("A la izquierda, el verbo de proceso (lo general, lo que se repite); a la derecha, el de resultado (una vez), con su futuro de {я}.")),
           h(AzTablaGrupos, { encabezados: ["Proceso", "Resultado"], c, filas: filasPares() }),
           sec("Una compra"), h(Conversacion, { T: CONV.tienda, c })),
       3: h(React.Fragment, null, sec("Lo que pides: acusativo"),
@@ -183,7 +183,7 @@ function App() {
             return [{ ru: pr + " " + s.prep, es: "" }, { ru: pr + " " + s.acc, es: "" }, { ru: (pr === "в" ? "из " : "с ") + s.gen, es: "" }]; }) }),
           sec("En la estación"), h(Conversacion, { T: CONV.estacion[0], c })),
       5: h(React.Fragment, null, sec("Un camino en el plano"),
-          h("div", { className: "u-card", style: { padding: "10px 14px", marginTop: 12 } }, h(AzPlano, { plano: { ruta: "S1 R S1 L S1", destino: "🏦" }, c })),
+          h("div", { className: "u-card", style: { padding: "12px 14px", marginTop: 12 } }, h(AzPlano, { plano: { ruta: "S1 R S1 L S1", destino: "🏦" }, c })),
           h(Formulas, { c, filas: [["Иди́те пря́мо, пото́м поверни́те напра́во, пото́м поверни́те нале́во.", "Siga derecho, después doble a la derecha y después a la izquierda."]] }),
           sec("Para escuchar"), h(Formulas, { c, filas: [["Банк ря́дом.", "El banco está cerca."], ["Музе́й далеко́.", "El museo está lejos."], ["Кафе́ напро́тив ста́нции.", "El café está enfrente de la estación."],
             ["Банк ме́жду магази́ном и рестора́ном.", "El banco está entre la tienda y el restaurante."], ["Где нахо́дится апте́ка?", "¿Dónde queda la farmacia?"]] })),
@@ -198,7 +198,7 @@ function App() {
             ["Что ты лю́бишь де́лать?", "¿Qué te gusta hacer?"], ["Что ты де́лал на выходны́х?", "¿Qué hiciste el fin de semana?"], ["Каки́е у тебя́ пла́ны?", "¿Qué planes tienes?"], ["Тебе́ нра́вится Барсело́на?", "¿Te gusta Barcelona?"]] })),
       11: h(React.Fragment, null, sec("Más natural"), h(Formulas, { c, filas: U11_NATURAL.slice(0, 6).map(x => [x[1], x[0]]) }))
     };
-    vista = h("div", { key: mod.id, style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+    vista = h("div", { key: mod.id, style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16 } },
       h("div", { className: "u-kicker" }, "Unidad 11 · Módulo " + mod.n),
       h("h1", { className: "u-title" }, mod.titulo),
       h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
@@ -209,11 +209,11 @@ function App() {
         grupos(mod.n).map(g => h(React.Fragment, { key: g.titulo },
           h("div", { className: "u-sec" }, g.titulo),
           h(AzVocabulario, { ids: g.ids, c }),
-          h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: () => setTarjetas({ ids: g.ids, titulo: g.titulo }) }, "Tarjetas (" + g.ids.length + ")"))),
-        h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo")),
+          h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => setTarjetas({ ids: g.ids, titulo: g.titulo }) }, "Tarjetas (" + g.ids.length + ")"))),
+        h("button", { className: "ubtn", style: { marginTop: 24 }, onClick: () => practicarModulo(mod) }, "Practicar este módulo")),
       mod.tipo === "conversaciones" && h(React.Fragment, null,
         CONV.completas.map((T, k) => h(Conversacion, { key: k, T, c })),
-        h("button", { className: "ubtn", style: { marginTop: 18 }, onClick: () => practicarModulo(mod) }, "Practicar las conversaciones")),
+        h("button", { className: "ubtn", style: { marginTop: 16 }, onClick: () => practicarModulo(mod) }, "Practicar las conversaciones")),
       mod.tipo === "proyecto" && h(React.Fragment, null,
         sec("1. Las siete situaciones del día"),
         h("p", { className: "u-text" }, "Transporte, llegada, tienda, restaurante, una charla, un plan y un problema. Resuélvelas una por una, como en la práctica."),
@@ -222,13 +222,13 @@ function App() {
         h("p", { className: "u-text" }, azFmt("Cuenta tu día en Rusia en 20 a 25 frases: qué hiciste, qué pasa ahora y qué vas a hacer mañana. Por ejemplo: Сего́дня я в Санкт-Петербу́рге. У́тром я был на вокза́ле. Пото́м я обе́дал в рестора́не и говори́л с официа́нтом. По-мо́ему, го́род о́чень краси́вый. За́втра я пое́ду в Москву́…")),
         h(AzProyecto, { mod, c, green, clave: "az_u11_proyecto", fuente: { titulo: "Unidad 11 · Мой день в Росси́и", href: "azbuka-11.html?m=u11m12" }, aviso: AVISO_ACENTOS })),
       mod.tipo === "examen" && h(React.Fragment, null,
-        h("div", { className: "u-card", style: { padding: "6px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
-          h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 14.5 } },
+        h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
+          h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "12px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: "var(--az-fs-cuerpo)" } },
             h("span", { style: { fontWeight: 600 } }, p.nombre), h("span", { style: { color: c.textMuted } }, p.n + " ejercicios")))),
-        examen && h("div", { style: { marginTop: 14, fontSize: 14, color: examen.aprobado ? green : "#E2884A", fontWeight: 700 } },
+        examen && h("div", { style: { marginTop: 12, fontSize: "var(--az-fs-chico)", color: examen.aprobado ? green : "#E2884A", fontWeight: 700 } },
           "Última vez: " + examen.pct + " % (" + examen.fecha.split("-").reverse().join("/") + ")" + (examen.aprobado ? " · aprobada" : "")),
         h("button", { className: "ubtn", onClick: () => rendirExamen(mod) }, examen ? "Rendir de nuevo" : "Empezar la evaluación")),
-      next && h("button", { className: "ubtn sec", style: { marginTop: 22 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo));
+      next && h("button", { className: "ubtn sec", style: { marginTop: 24 }, onClick: () => abrirModulo(next.id) }, "Siguiente: " + next.titulo));
   }
 
   return h(React.Fragment, null,

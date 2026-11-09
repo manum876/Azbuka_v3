@@ -87,133 +87,133 @@
   const frById = id => ES ? (typeof fraseEsById === "function" ? fraseEsById(id) : null) : fraseById(id);
   /* Palabras de un texto en la lengua que se aprende */
   const RX_MIN = ES ? "[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]" : "[А-Яа-яЁё\\u0301]";
-  const chipSt = (c, on) => on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
+  const chipSt = (c, on) => on ? { background: c.gold + "14", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted };
 
   function AzEstilosUnidad({ c, green }) {
     return h("style", null, `
-    .u-kicker{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-bottom:6px;}
-    .u-title{font-size:26px;font-weight:800;color:${c.text};line-height:1.15;}
-    .u-ru{font-size:15px;color:${c.textSub};font-style:italic;margin-top:4px;}
-    .u-text{font-size:15px;line-height:1.6;color:${c.textSub};}
-    .u-sec{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:24px 0 10px;}
-    .u-dest{margin-top:12px;background:${c.gold}14;border:1px solid ${c.gold}66;border-radius:10px;padding:12px 14px;font-size:14.5px;line-height:1.5;color:${c.text};font-weight:600;}
-    .u-truco{margin-top:10px;font-size:14px;line-height:1.5;color:${c.textSub};padding-left:10px;border-left:2px solid ${c.gold}66;}
+    .u-kicker{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin-bottom:8px;}
+    .u-title{font-size:var(--az-fs-titulo);font-weight:800;color:${c.text};line-height:1.2;;margin-top:4px}
+    .u-ru{font-size:var(--az-fs-cuerpo);color:${c.textSub};font-style:italic;margin-top:4px;}
+    .u-text{font-size:var(--az-fs-cuerpo);line-height:1.6;color:${c.textSub};;margin-top:12px}
+    .u-sec{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};margin:24px 0 4px;}
+    .u-dest{margin-top:12px;background:${c.gold}14;border:1px solid ${c.gold}88;border-radius:var(--az-r);padding:12px 16px;font-size:var(--az-fs-cuerpo);line-height:1.5;color:${c.text};font-weight:600;}
+    .u-truco{margin-top:8px;font-size:var(--az-fs-chico);line-height:1.5;color:${c.textSub};padding-left:12px;border-left:3px solid ${c.gold}88;}
     .u-truco b{color:${c.gold};font-weight:700;}
-    .u-card{background:${c.card};border:1px solid ${c.border};border-radius:14px;}
-    .pbar-track{width:100%;height:6px;border-radius:3px;overflow:hidden;background:${c.bg3};margin-top:10px;}
-    .pbar-fill{height:100%;border-radius:3px;background:${green};transition:width .3s ease;}
-    .mod{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;margin-bottom:10px;cursor:pointer;text-decoration:none;color:${c.text};}
-    .mod.off{opacity:.45;cursor:default;}
-    .mod-n{font-size:22px;font-weight:800;color:${c.border};min-width:30px;line-height:1.1;}
-    .mod-t{font-size:16px;font-weight:700;}
-    .mod-d{font-size:13px;color:${c.textMuted};margin-top:2px;}
-    .mod-l{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;}
-    .mod-l span{font-size:13px;font-weight:700;min-width:24px;text-align:center;padding:2px 5px;border-radius:6px;background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};}
-    .tag-pronto{font-size:11px;font-weight:600;color:${c.textMuted};background:${c.bg2};border:1px solid ${c.border};border-radius:8px;padding:2px 8px;margin-left:8px;vertical-align:middle;}
+    .u-card{background:${c.card};border:1px solid ${c.border};border-radius:var(--az-r);;padding:12px 16px}
+    .pbar-track{width:100%;height:6px;border-radius:var(--az-r-pildora);overflow:hidden;background:${c.bg2};margin-top:12px;}
+    .pbar-fill{height:100%;border-radius:var(--az-r-pildora);background:${green};transition:width var(--az-t-media) var(--az-curva);}
+    .mod{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;margin-bottom:12px;cursor:pointer;text-decoration:none;color:${c.text};;border-radius:var(--az-r)}
+    .mod.off{opacity:.4;cursor:default;}
+    .mod-n{font-size:var(--az-fs-titulo);font-weight:800;color:${c.border};min-width:30px;line-height:1.1;}
+    .mod-t{font-size:var(--az-fs-destacado);font-weight:700;}
+    .mod-d{font-size:var(--az-fs-chico);color:${c.textMuted};margin-top:4px;}
+    .mod-l{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+    .mod-l span{font-size:var(--az-fs-chico);font-weight:700;min-width:24px;text-align:center;padding:4px 4px;border-radius:var(--az-r-chico);background:${c.bg2};border:1px solid ${c.border};color:${c.textSub};}
+    .tag-pronto{font-size:var(--az-fs-micro);font-weight:600;color:${c.textMuted};background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r-chico);padding:4px 8px;margin-left:8px;vertical-align:middle;}
     .lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
     @media (min-width:600px){.lgrid{grid-template-columns:repeat(5,1fr);}}
-    .lcard{position:relative;border-radius:14px;padding:14px 6px;text-align:center;cursor:pointer;background:${c.card};}
+    .lcard{position:relative;border-radius:var(--az-r);padding:14px 8px;text-align:center;cursor:pointer;background:${c.card};}
     .lcard:active{transform:scale(.97);}
-    .toggle-row{display:flex;gap:8px;margin:16px 0 12px;}
-    .pair-btn{padding:7px 11px;border-radius:10px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
-    .ubtn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:13px 16px;border-radius:10px;border:1px solid ${c.gold};background:${c.gold};color:${c.bg};font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:18px;}
-    .ubtn.sec{background:${c.bg3};border-color:${c.border};color:${c.text};}
-    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};box-shadow:0 0 0 100vmax ${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:fadeIn .25s ease;}
-    .sheet-in{max-width:960px;margin:0 auto;padding:var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px));}
-    .sheet-x{position:fixed;top:var(--az-top,6vh);right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
+    .toggle-row{display:flex;gap:8px;margin:12px 0;}
+    .pair-btn{padding:7px 12px;border-radius:var(--az-r);font-size:var(--az-fs-nota);font-weight:600;cursor:pointer;font-family:inherit;transition:transform var(--az-t-rapida) var(--az-curva),background-color var(--az-t-rapida),border-color var(--az-t-rapida),color var(--az-t-rapida);}
+    .ubtn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 16px;border-radius:var(--az-r);border:1px solid ${c.gold};background:${c.gold};color:${c.bg};font-size:var(--az-fs-cuerpo);font-weight:700;cursor:pointer;font-family:inherit;margin-top:16px;}
+    .ubtn.sec{background:${c.bg2};border-color:${c.border};color:${c.text};}
+    .sheet{position:fixed;inset:0;z-index:300;background:${c.bg};box-shadow:0 0 0 100vmax ${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:azSube var(--az-t-media) var(--az-curva) both;}
+    .sheet-in{max-width:760px;margin:0 auto;padding:var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px));}
+    .sheet-x{position:fixed;top:var(--az-top,6vh);right:3vw;width:40px;height:40px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:var(--az-fs-cuerpo);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
     .glyph{font-size:64px;font-weight:800;color:${c.gold};line-height:1;}
-    .cursiva{font-family:'CyrCursive',cursive;font-size:44px;color:${c.gold};opacity:.7;margin-top:6px;}
-    .play{width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:14px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
+    .cursiva{font-family:'CyrCursive',cursive;font-size:44px;color:${c.gold};opacity:.7;margin-top:8px;}
+    .play{width:40px;height:40px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:var(--az-fs-chico);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;padding:0;font-family:inherit;}
     .status-row{display:flex;gap:8px;margin-top:16px;}
-    .status-btn{flex:1;text-align:center;padding:10px 4px;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;transition:.18s;}
-    .info{padding:16px;margin-top:12px;}
-    .info-t{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:${c.gold};margin-bottom:6px;}
-    .info-x{font-size:14px;line-height:1.55;color:${c.textSub};}
+    .status-btn{flex:1;text-align:center;padding:12px 4px;border-radius:var(--az-r);font-size:var(--az-fs-nota);font-weight:700;cursor:pointer;font-family:inherit;transition:transform var(--az-t-rapida) var(--az-curva),background-color var(--az-t-rapida),border-color var(--az-t-rapida),color var(--az-t-rapida);}
+    .info{padding:12px 16px;margin-top:12px;}
+    .info-t{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:${c.gold};margin-bottom:8px;}
+    .info-x{font-size:var(--az-fs-chico);line-height:1.55;color:${c.textSub};}
     .wrow{display:flex;align-items:center;gap:12px;padding:12px 0;}
     .wrow + .wrow{border-top:1px solid ${c.border};}
-    .ctable{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;overflow:hidden;margin-top:14px;}
-    .ctable th{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.textMuted};text-align:left;padding:10px 12px;border-bottom:1px solid ${c.border};}
-    .ctable td{padding:9px 12px;border-top:1px solid ${c.border};}
+    .ctable{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r);overflow:hidden;margin-top:12px;}
+    .ctable th{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.textMuted};text-align:left;padding:8px 10px;border-bottom:1px solid ${c.border};}
+    .ctable td{padding:8px 10px;border-top:1px solid ${c.border};}
     .ctable tr:nth-child(2) td{border-top:none;}
-    .f-ru{font-size:17px;font-weight:700;color:${c.text};cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:6px;background:none;border:none;padding:0;width:100%;font-family:inherit;text-align:left;}
-    .f-ru .pl{font-size:10px;color:${c.gold};}
+    .f-ru{font-size:var(--az-fs-destacado);font-weight:700;color:${c.text};cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:8px;background:none;border:none;padding:0;width:100%;font-family:inherit;text-align:left;}
+    .f-ru .pl{font-size:var(--az-fs-micro);color:${c.gold};}
     .f-ru.blanda{color:${c.gold};}
-    .fc{min-height:46vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 18px;cursor:pointer;border-radius:18px;background:${c.card};border:1px solid ${c.border};user-select:none;-webkit-user-select:none;}
-    .par{display:flex;align-items:center;gap:10px;padding:10px 0;}
+    .fc{min-height:46vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 16px;cursor:pointer;border-radius:var(--az-r);background:${c.card};border:1px solid ${c.border};user-select:none;-webkit-user-select:none;}
+    .par{display:flex;align-items:center;gap:12px;padding:12px 0;}
     .par + .par{border-top:1px solid ${c.border};}
-    .par-l{width:52px;flex-shrink:0;font-size:13px;font-weight:800;color:${c.gold};}
-    .par-w{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:8px 10px;cursor:pointer;font-family:inherit;text-align:left;color:${c.text};}
-    .par-ru{font-size:18px;font-weight:700;}
-    .par-ru .pl{font-size:10px;color:${c.gold};}
-    .par-es{font-size:12px;color:${c.textMuted};}
-    .fc.dorso{align-items:stretch;justify-content:flex-start;text-align:left;padding:22px 20px;}
+    .par-l{width:52px;flex-shrink:0;font-size:var(--az-fs-chico);font-weight:800;color:${c.gold};}
+    .par-w{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px;background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r);padding:8px 12px;cursor:pointer;font-family:inherit;text-align:left;color:${c.text};}
+    .par-ru{font-size:var(--az-fs-subtitulo);font-weight:700;}
+    .par-ru .pl{font-size:var(--az-fs-micro);color:${c.gold};}
+    .par-es{font-size:var(--az-fs-nota);color:${c.textMuted};}
+    .fc.dorso{align-items:stretch;justify-content:flex-start;text-align:left;padding:24px 16px;}
     .fc-glyph{font-size:clamp(60px,19vw,96px);font-weight:800;color:${c.gold};line-height:1;white-space:nowrap;}
     .fc-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;}
     .fc-cur{font-family:'CyrCursive',cursive;font-size:clamp(60px,19vw,96px);color:${c.gold};opacity:.7;line-height:1;white-space:nowrap;}
-    .fc-nombre{display:flex;align-items:baseline;gap:10px;margin-top:22px;}
-    .fc-word{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid ${c.border};}
+    .fc-nombre{display:flex;align-items:baseline;gap:12px;margin-top:24px;}
+    .fc-word{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:24px;padding-top:16px;border-top:1px solid ${c.border};}
     .fc-ctl{display:flex;gap:8px;margin-top:12px;}
-    .fc-ctl button{flex:1;padding:11px 6px;border-radius:10px;border:1px solid ${c.border};background:${c.bg3};color:${c.text};font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;}
+    .fc-ctl button{flex:1;padding:12px 8px;border-radius:var(--az-r);border:1px solid ${c.border};background:${c.bg2};color:${c.text};font-size:var(--az-fs-chico);font-weight:600;cursor:pointer;font-family:inherit;}
   
-    .voc{display:flex;align-items:center;gap:10px;padding:10px 0;}
+    .voc{display:flex;align-items:center;gap:12px;padding:12px 0;}
     .voc + .voc{border-top:1px solid ${c.border};}
-    .voc-ru{font-size:17px;font-weight:700;}
-    .voc-tr{font-size:12.5px;color:${c.textSub};font-style:italic;margin-left:8px;}
-    .voc-es{font-size:13.5px;color:${c.textSub};margin-top:2px;}
-    .ptabla{width:100%;border-collapse:separate;border-spacing:0;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;overflow:hidden;margin-top:12px;}
-    .ptabla td{padding:9px 12px;border-top:1px solid ${c.border};font-size:15px;}
+    .voc-ru{font-size:var(--az-fs-destacado);font-weight:700;}
+    .voc-tr{font-size:var(--az-fs-nota);color:${c.textSub};font-style:italic;margin-left:8px;}
+    .voc-es{font-size:var(--az-fs-chico);color:${c.textSub};margin-top:4px;}
+    .ptabla{width:100%;border-collapse:separate;border-spacing:0;background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r);overflow:hidden;margin-top:12px;}
+    .ptabla td{padding:8px 12px;border-top:1px solid ${c.border};font-size:var(--az-fs-cuerpo);}
     .ptabla tr:first-child td{border-top:none;}
-    .mapa-v{width:100%;display:block;border-radius:12px;background:${c.bg2};border:1px solid ${c.border};margin-top:10px;touch-action:manipulation;}
+    .mapa-v{width:100%;display:block;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};margin-top:12px;touch-action:manipulation;}
     .mapa-v path.pais{cursor:pointer;}
-    .grab{display:flex;gap:6px;align-items:center;margin-top:8px;flex-wrap:wrap;}
-    .grab button{padding:6px 10px;border-radius:9px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;background:${c.bg3};border:1px solid ${c.border};color:${c.text};}
-    .grab button.rec{border-color:#B5605C;color:#D9776F;}
-    .req{display:flex;gap:8px;align-items:center;font-size:14px;padding:6px 0;}
-    .proy{width:100%;box-sizing:border-box;min-height:36vh;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:14px;color:${c.text};font-size:16px;line-height:1.55;font-family:inherit;margin-top:12px;}
+    .grab{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap;}
+    .grab button{padding:7px 12px;border-radius:var(--az-r);font-size:var(--az-fs-nota);font-weight:700;cursor:pointer;font-family:inherit;background:${c.bg2};border:1px solid ${c.border};color:${c.text};}
+    .grab button.rec{border-color:#B5605C;color:#B5605C;}
+    .req{display:flex;gap:8px;align-items:center;font-size:var(--az-fs-chico);padding:8px 0;}
+    .proy{width:100%;box-sizing:border-box;min-height:36vh;background:${c.card};border:1px solid ${c.border};border-radius:var(--az-r);padding:12px;color:${c.text};font-size:var(--az-fs-destacado);line-height:1.55;font-family:inherit;margin-top:12px;}
   
     .grp-wrap{overflow-x:auto;margin-top:12px;}
-    .grp{width:100%;border-collapse:separate;border-spacing:0;background:${c.bg2};border:1px solid ${c.border};border-radius:10px;overflow:hidden;}
-    .grp th{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.textMuted};text-align:left;padding:9px 10px;border-bottom:1px solid ${c.border};}
-    .grp td{padding:8px 10px;border-top:1px solid ${c.border};vertical-align:top;}
+    .grp{width:100%;border-collapse:separate;border-spacing:0;background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r);overflow:hidden;}
+    .grp th{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.textMuted};text-align:left;padding:8px 12px;border-bottom:1px solid ${c.border};}
+    .grp td{padding:8px 12px;border-top:1px solid ${c.border};vertical-align:top;}
     .grp tr:first-child td{border-top:none;}
     .grp-w{background:none;border:none;padding:0;color:${c.text};font-family:inherit;cursor:pointer;text-align:left;}
-    .grp-ru{font-size:15px;font-weight:700;}
-    .grp-w .pl{font-size:9px;color:${c.gold};}
-    .grp-es{font-size:11.5px;color:${c.textMuted};margin-top:1px;}
-    .grp.compacta th{padding:8px 4px;font-size:9px;letter-spacing:.3px;}
-    .grp.compacta td{padding:7px 4px;}
-    .grp.compacta .grp-ru{font-size:12.5px;}
-    .grp.compacta .grp-es{font-size:10.5px;}
+    .grp-ru{font-size:var(--az-fs-cuerpo);font-weight:700;}
+    .grp-w .pl{font-size:var(--az-fs-micro);color:${c.gold};}
+    .grp-es{font-size:var(--az-fs-nota);color:${c.textMuted};margin-top:1px;}
+    .grp.compacta th{padding:8px 4px;font-size:var(--az-fs-micro);letter-spacing:.3px;}
+    .grp.compacta td{padding:8px 4px;}
+    .grp.compacta .grp-ru{font-size:var(--az-fs-nota);}
+    .grp.compacta .grp-es{font-size:var(--az-fs-micro);}
     /* Teoría ampliada (06/10/2026, PLAN_PROFUNDIZACION §3) */
-    .u-ej{background:${c.bg2};border:1px solid ${c.border};border-radius:10px;padding:10px 12px;margin-top:8px;}
-    .u-ej-top{display:flex;align-items:flex-start;gap:10px;}
-    .u-ej-ru{flex:1;min-width:0;font-size:17px;font-weight:700;color:${c.text};line-height:1.4;}
+    .u-ej{background:${c.bg2};border:1px solid ${c.border};border-radius:var(--az-r);padding:12px 16px;margin-top:12px;}
+    .u-ej-top{display:flex;align-items:flex-start;gap:12px;}
+    .u-ej-ru{flex:1;min-width:0;font-size:var(--az-fs-destacado);font-weight:700;color:${c.text};line-height:1.4;}
     .u-ej-hi{color:${c.gold};}
-    .u-ej-es{font-size:13.5px;color:${c.textMuted};margin-top:2px;}
-    .u-ej-por{font-size:13.5px;line-height:1.5;color:${c.textSub};margin-top:6px;padding-left:8px;border-left:2px solid ${c.gold}66;}
-    .u-ej .play{width:32px;height:32px;border-radius:9px;font-size:12px;}
-    .u-des{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
-    .u-des-p{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:8px 10px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-family:inherit;cursor:pointer;text-align:left;transition:.18s;}
-    .u-des-p.on{background:${c.gold}22;border-color:${c.gold};}
-    .u-des-ru{font-size:17px;font-weight:700;}
-    .u-des-rol{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:${c.textMuted};}
+    .u-ej-es{font-size:var(--az-fs-chico);color:${c.textMuted};margin-top:4px;}
+    .u-ej-por{font-size:var(--az-fs-chico);line-height:1.5;color:${c.textSub};margin-top:8px;padding-left:12px;border-left:3px solid ${c.gold}88;}
+    .u-ej .play{width:32px;height:32px;border-radius:var(--az-r);font-size:var(--az-fs-nota);}
+    .u-des{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+    .u-des-p{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:8px 12px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-family:inherit;cursor:pointer;text-align:left;transition:transform var(--az-t-rapida) var(--az-curva),background-color var(--az-t-rapida),border-color var(--az-t-rapida),color var(--az-t-rapida);}
+    .u-des-p.on{background:${c.gold}14;border-color:${c.gold};}
+    .u-des-ru{font-size:var(--az-fs-destacado);font-weight:700;}
+    .u-des-rol{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:${c.textMuted};}
     .u-des-p.on .u-des-rol{color:${c.gold};}
-    .u-err{margin-top:8px;font-size:15px;line-height:1.45;}
+    .u-err{margin-top:8px;font-size:var(--az-fs-cuerpo);line-height:1.45;}
     .u-err-f{display:flex;gap:8px;align-items:baseline;}
-    .u-err-mal{color:#D9776F;text-decoration:line-through;text-decoration-color:#B5605C;}
+    .u-err-mal{color:#B5605C;text-decoration:line-through;text-decoration-color:#B5605C;}
     .u-err-bien{color:${green};font-weight:700;}
-    .u-err-por{font-size:13.5px;color:${c.textSub};margin:2px 0 0 22px;}
-    .u-chq{margin-top:14px;background:${c.card};border:1px solid ${c.border};border-radius:12px;padding:12px 14px;}
-    .u-chq-item + .u-chq-item{margin-top:14px;padding-top:12px;border-top:1px solid ${c.border};}
-    .u-chq-k{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};}
-    .u-chq-p{font-size:15px;font-weight:600;color:${c.text};margin-top:6px;line-height:1.45;}
-    .u-chq-ops{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
-    .u-chq-op{padding:8px 12px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;background:${c.bg2};border:1px solid ${c.border};color:${c.text};transition:.18s;}
-    .u-chq-op.ok{background:${green}22;border-color:${green};color:${green};}
-    .u-chq-op.mal{background:#B5605C22;border-color:#B5605C;color:#D9776F;}
-    .u-chq-r{font-size:13.5px;line-height:1.5;color:${c.textSub};margin-top:8px;}
-    .u-mas-b{display:flex;align-items:center;gap:6px;margin-top:14px;padding:9px 12px;width:100%;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.gold};font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;text-align:left;}
-    .u-mas{margin-top:2px;padding:4px 0 2px 12px;border-left:2px solid ${c.border};}
+    .u-err-por{font-size:var(--az-fs-chico);color:${c.textSub};margin:4px 0 0 24px;}
+    .u-chq{margin-top:12px;background:${c.card};border:1px solid ${c.border};border-radius:var(--az-r);padding:12px 16px;}
+    .u-chq-item + .u-chq-item{margin-top:12px;padding-top:12px;border-top:1px solid ${c.border};}
+    .u-chq-k{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};}
+    .u-chq-p{font-size:var(--az-fs-cuerpo);font-weight:600;color:${c.text};margin-top:8px;line-height:1.45;}
+    .u-chq-ops{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+    .u-chq-op{padding:8px 12px;border-radius:var(--az-r);font-size:var(--az-fs-cuerpo);font-weight:600;cursor:pointer;font-family:inherit;background:${c.bg2};border:1px solid ${c.border};color:${c.text};transition:transform var(--az-t-rapida) var(--az-curva),background-color var(--az-t-rapida),border-color var(--az-t-rapida),color var(--az-t-rapida);}
+    .u-chq-op.ok{background:${green}14;border-color:${green};color:${green};}
+    .u-chq-op.mal{background:#B5605C14;border-color:#B5605C;color:#B5605C;}
+    .u-chq-r{font-size:var(--az-fs-chico);line-height:1.5;color:${c.textSub};margin-top:8px;}
+    .u-mas-b{display:flex;align-items:center;gap:8px;margin-top:12px;padding:12px 16px;width:100%;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.gold};font-size:var(--az-fs-chico);font-weight:700;cursor:pointer;font-family:inherit;text-align:left;}
+    .u-mas{margin-top:8px;padding:4px 0 4px 12px;border-left:3px solid ${c.gold}88;}
   `);
   }
 
@@ -329,7 +329,7 @@
       h("div", { className: "u-des" }, d.partes.map((x, i) => h("button", { key: i, className: "u-des-p" + (sel === i ? " on" : ""), onClick: () => { setSel(i); hablar(sinLlaves(x.txt)); } },
         h("span", { className: "u-des-ru", lang: LL }, sinLlaves(x.txt)), h("span", { className: "u-des-rol" }, x.rol)))),
       h("div", { className: "u-ej-por", style: { marginTop: 8 } }, azFmtLink(p ? (p.nota || p.rol) : T("Toca cada parte para ver qué hace en la frase."))),
-      (ES ? d.ru : d.es) && h("div", { className: "u-ej-es", style: { marginTop: 6 } }, "«" + (ES ? d.ru : d.es) + "»"));
+      (ES ? d.ru : d.es) && h("div", { className: "u-ej-es", style: { marginTop: 8 } }, "«" + (ES ? d.ru : d.es) + "»"));
   }
   function Errores({ lista }) {
     return h(React.Fragment, null, lista.map((e, i) => h("div", { key: i, className: "u-err" },
@@ -349,7 +349,7 @@
         const meta = ES ? !esRu(o) : /[а-яё]/i.test(o);
         return h("button", { key: o, className: "u-chq-op" + cls, disabled: el != null, lang: esRu(o) ? "ru" : "es", onClick: () => { setEl(o); if (meta) hablar(sinLlaves(o)); } }, o);
       })),
-      el != null && h("div", { className: "u-chq-r" }, h("b", { style: { color: el === q.ok ? "#4CAF82" : "#D9776F" } }, el === q.ok ? (ES ? "✓ Верно. " : "✓ Bien. ") : (ES ? "✗ Нет: правильно — " : "✗ No: va ") + String(q.ok).replace(/[.?!]$/, "") + ". "), azFmt(q.por || "")));
+      el != null && h("div", { className: "u-chq-r" }, h("b", { style: { color: el === q.ok ? "#4CAF82" : "#B5605C" } }, el === q.ok ? (ES ? "✓ Верно. " : "✓ Bien. ") : (ES ? "✗ Нет: правильно — " : "✗ No: va ") + String(q.ok).replace(/[.?!]$/, "") + ". "), azFmt(q.por || "")));
   }
   /* El cuerpo de una sección (también el de «Más a fondo») */
   function Cuerpo({ x }) {
@@ -367,7 +367,7 @@
     const [ab, setAb] = useState(false);
     return h(React.Fragment, null,
       h("button", { className: "u-mas-b", onClick: () => setAb(!ab), "aria-expanded": ab }, (ab ? "▾ " : "▸ ") + (m.titulo || T("Más a fondo"))),
-      ab && h("div", { className: "u-mas", style: { animation: "fadeIn .3s ease" } }, h(Cuerpo, { x: m })));
+      ab && h("div", { className: "u-mas", style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } }, h(Cuerpo, { x: m })));
   }
   /* extra(x): lo propio de una unidad, después del cuerpo y antes de «Más a fondo» (07/10/2026: los pares y las listas de palabras de la Unidad 1) */
   function Seccion({ x, extra }) {
@@ -411,7 +411,7 @@
   }
 
   function AzVocabulario({ ids, c }) {
-    return h("div", { className: "u-card", style: { padding: "2px 16px", marginTop: 12 } }, ids.map(id => {
+    return h("div", { className: "u-card", style: { padding: "4px 16px", marginTop: 12 } }, ids.map(id => {
       const x = lexDe(id); if (!x) return null;
       return h("div", { key: id, className: "voc" },
         h("div", { style: { flex: 1, minWidth: 0 } },
@@ -422,7 +422,7 @@
   }
 
   function AzFrasesLista({ ids, c }) {
-    return h("div", { className: "u-card", style: { padding: "2px 16px", marginTop: 12 } }, ids.map(id => {
+    return h("div", { className: "u-card", style: { padding: "4px 16px", marginTop: 12 } }, ids.map(id => {
       const f = frById(id); if (!f) return null;
       const meta = ES ? f.es : f.ru, trad = ES ? f.ru : f.es;
       return h("div", { key: id, className: "voc" },
@@ -459,7 +459,7 @@
       estado !== "grabando" ? h("button", { className: "rec", onClick: grabar }, T(estado === "grabado" ? "● Grabar de nuevo" : "● Grabarme"))
         : h("button", { className: "rec", onClick: () => rec.current && rec.current.stop() }, T("■ Parar")),
       url && h("button", { onClick: () => new Audio(url).play() }, T("▶ Mi voz")),
-      estado === "sin-mic" && h("span", { style: { fontSize: 12 } }, T("Sin permiso para el micrófono.")));
+      estado === "sin-mic" && h("span", { style: { fontSize: "var(--az-fs-nota)" } }, T("Sin permiso para el micrófono.")));
   }
 
   function AzHojaDialogo({ d, c, onClose, grabar, objetivo }) {
@@ -484,27 +484,27 @@
       h("button", { className: "sheet-x", onClick: onClose, "aria-label": T("Cerrar") }, "✕"),
       h("div", { className: "sheet-in" },
         h("div", { className: "u-kicker" }, T("Diálogo")),
-        h("div", { style: { fontSize: 26, fontWeight: 800, paddingRight: 48 } }, d.titulo),
+        h("div", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, paddingRight: 48 } }, d.titulo),
         (ES ? d.tituloEs : d.tituloRu) && h("div", { className: "u-ru", lang: LL }, ES ? d.tituloEs : d.tituloRu),
         h("div", { className: "toggle-row" },
           h("button", { className: "pair-btn", onClick: () => setTr(v => !v), style: chipSt(c, tr) }, T("Transliteración")),
           h("button", { className: "pair-btn", onClick: () => setEs(v => !v), style: chipSt(c, es) }, T("Traducción"))),
-        h("div", { className: "u-text", style: { fontSize: 13, marginBottom: 12 } },
+        h("div", { className: "u-text", style: { fontSize: "var(--az-fs-chico)", marginBottom: 12 } },
           T(grabar ? "Escucha cada línea, grábate diciéndola y compara." : "Para practicar la lectura, apaga la transliteración y la traducción.")),
         d.lineas.map((l, i) => h("div", { key: i, className: "u-card", style: { padding: "12px 14px", marginBottom: 8 } },
-          h("div", { style: { display: "flex", gap: 10, alignItems: "flex-start" } },
+          h("div", { style: { display: "flex", gap: 12, alignItems: "flex-start" } },
             h("div", { style: { flex: 1, minWidth: 0 } },
-              h("div", { lang: LL, style: { fontSize: 11, fontWeight: 700, letterSpacing: 1, color: c.gold, textTransform: "uppercase", marginBottom: 4 } }, personaje(l.p).ru),
-              h("div", { style: { fontSize: 17, fontWeight: 700, lineHeight: 1.5 } }, ES ? h(AzTexto, { es: l.es, lex: l.lex, objetivo }) : h(AzTexto, { ru: l.ru, lex: l.lex, objetivo })),
-              tr && h("div", { className: ES ? "az-tl" : null, style: { fontSize: 13.5, color: c.textSub, fontStyle: "italic", marginTop: 2 } }, l.tr),
-              es && h("div", { lang: ES ? "ru" : "es", style: { fontSize: 14, color: c.text, marginTop: 4 } }, trad(l))),
-            h("div", { style: { display: "flex", flexDirection: "column", gap: 6 } },
+              h("div", { lang: LL, style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1, color: c.gold, textTransform: "uppercase", marginBottom: 4 } }, personaje(l.p).ru),
+              h("div", { style: { fontSize: "var(--az-fs-destacado)", fontWeight: 700, lineHeight: 1.5 } }, ES ? h(AzTexto, { es: l.es, lex: l.lex, objetivo }) : h(AzTexto, { ru: l.ru, lex: l.lex, objetivo })),
+              tr && h("div", { className: ES ? "az-tl" : null, style: { fontSize: "var(--az-fs-chico)", color: c.textSub, fontStyle: "italic", marginTop: 4 } }, l.tr),
+              es && h("div", { lang: ES ? "ru" : "es", style: { fontSize: "var(--az-fs-chico)", color: c.text, marginTop: 4 } }, trad(l))),
+            h("div", { style: { display: "flex", flexDirection: "column", gap: 8 } },
               h("button", { className: "play", onClick: () => hablar(meta(l), gen(l)), "aria-label": T("Escuchar") }, "▶"),
               h("button", { className: "play", onClick: () => azGuardarEnCuaderno(meta(l) + "\n" + trad(l), { titulo: (ES ? "Диалоги · " : "Diálogos · ") + d.titulo, href: ES ? null : href }), "aria-label": T("Guardar en el cuaderno") }, "＋"))),
           grabar && h(AzGrabadora, { texto: meta(l), onGrabado: u => setMias(m => Object.assign({}, m, { [i]: u })) }))),
         h("button", { className: "ubtn", onClick: () => hablarSec(d.lineas.map(l => ({ texto: meta(l), genero: gen(l) }))) }, T("▶ Escuchar el diálogo")),
-        grabar && Object.keys(mias).length > 0 && h("button", { className: "ubtn sec", style: { marginTop: 10 }, onClick: escucharMias }, T("▶ Escuchar mis grabaciones")),
-        !ES && h("a", { className: "ubtn sec", style: { marginTop: 10, textDecoration: "none" }, href, onClick: ev => azNavigate(ev, href) }, "Ver en Diálogos")));   /* Abecé: hasta que exista su módulo de Diálogos */
+        grabar && Object.keys(mias).length > 0 && h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: escucharMias }, T("▶ Escuchar mis grabaciones")),
+        !ES && h("a", { className: "ubtn sec", style: { marginTop: 12, textDecoration: "none" }, href, onClick: ev => azNavigate(ev, href) }, "Ver en Diálogos")));   /* Abecé: hasta que exista su módulo de Diálogos */
   }
 
   function AzTarjetasPalabras({ ids, titulo, c, green, onClose, detalle }) {
@@ -521,22 +521,22 @@
       h("button", { className: "sheet-x", onClick: onClose, "aria-label": T("Cerrar") }, "✕"),
       h("div", { className: "sheet-in" },
         h("div", { className: "u-kicker" }, (ES ? "Карточки · " : "Tarjetas · ") + titulo),
-        h("div", { style: { fontSize: 14, color: c.textMuted, marginBottom: 14 } }, (i + 1) + (ES ? " из " : " de ") + orden.length + (nv ? " · " + T(nv === 2 ? "dominada" : "aprendiendo") : "")),
+        h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, marginBottom: 12 } }, (i + 1) + (ES ? " из " : " de ") + orden.length + (nv ? " · " + T(nv === 2 ? "dominada" : "aprendiendo") : "")),
         h("div", { className: "fc", role: "button", tabIndex: 0, onClick: () => { if (!vuelta && !nv) azSetItemLevel("lex:" + e.id, 1, true); if (!vuelta) hablar(x.voz); setVuelta(v => !v); } },
           h("div", { lang: LL, style: { fontSize: 38, fontWeight: 800, color: c.gold, lineHeight: 1.2, wordBreak: "break-word" } }, x.meta + (x.fem ? " / " + x.fem : "")),
-          !vuelta ? h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 18 } }, T("Toca para ver qué significa"))
+          !vuelta ? h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, marginTop: 16 } }, T("Toca para ver qué significa"))
             : h(React.Fragment, null,
-                h("div", { className: "az-tl", style: { fontSize: 15, color: c.textSub, fontStyle: "italic", marginTop: 8 } }, x.tr),
-                h("div", { lang: ES ? "ru" : "es", style: { fontSize: 20, fontWeight: 700, color: c.text, marginTop: 12 } }, x.trad),
-                detalle && detalle(e) && h("div", { lang: LL, style: { fontSize: 14.5, color: c.textSub, marginTop: 8 } }, detalle(e)),
-                h("button", { className: "play", style: { marginTop: 14 }, onClick: ev => { ev.stopPropagation(); hablar(x.voz); }, "aria-label": T("Escuchar") }, "▶"))),
+                h("div", { className: "az-tl", style: { fontSize: "var(--az-fs-cuerpo)", color: c.textSub, fontStyle: "italic", marginTop: 8 } }, x.tr),
+                h("div", { lang: ES ? "ru" : "es", style: { fontSize: "var(--az-fs-subtitulo)", fontWeight: 700, color: c.text, marginTop: 12 } }, x.trad),
+                detalle && detalle(e) && h("div", { lang: LL, style: { fontSize: "var(--az-fs-cuerpo)", color: c.textSub, marginTop: 8 } }, detalle(e)),
+                h("button", { className: "play", style: { marginTop: 12 }, onClick: ev => { ev.stopPropagation(); hablar(x.voz); }, "aria-label": T("Escuchar") }, "▶"))),
         h("div", { className: "fc-ctl" },
           h("button", { onClick: () => ir(-1) }, T("‹ Anterior")),
           h("button", { onClick: () => { setOrden(orden.slice().sort(() => Math.random() - .5)); setI(0); setVuelta(false); } }, T("Mezclar")),
           h("button", { onClick: () => ir(1) }, T("Siguiente ›"))),
         h("div", { className: "status-row" },
-          h("button", { className: "status-btn", onClick: () => marcar(1), style: { background: nv === 1 ? YELLOW + "22" : c.bg3, border: `1px solid ${nv === 1 ? YELLOW : c.border}`, color: nv === 1 ? YELLOW : c.text } }, T("Volver a estudiar")),
-          h("button", { className: "status-btn", onClick: () => marcar(2), style: { background: nv === 2 ? green + "22" : c.bg3, border: `1px solid ${nv === 2 ? green : c.border}`, color: nv === 2 ? green : c.text } }, T("Ya la sé")))));
+          h("button", { className: "status-btn", onClick: () => marcar(1), style: { background: nv === 1 ? YELLOW + "14" : c.bg2, border: `1px solid ${nv === 1 ? YELLOW : c.border}`, color: nv === 1 ? YELLOW : c.text } }, T("Volver a estudiar")),
+          h("button", { className: "status-btn", onClick: () => marcar(2), style: { background: nv === 2 ? green + "14" : c.bg2, border: `1px solid ${nv === 2 ? green : c.border}`, color: nv === 2 ? green : c.text } }, T("Ya la sé")))));
   }
 
   /* modo "ciudades" (04/10/2026, Unidad 6): los países de fondo, sin tocar, y
@@ -565,25 +565,25 @@
       h("div", { className: "toggle-row", style: { flexWrap: "wrap" } }, ["europa-oeste", "europa-este", "america-ciudades", "asia-este"].map(k =>
         h("button", { key: k, className: "pair-btn", style: chipSt(c, vista === k), onClick: () => setVista(k) }, MAPA.vistas[k].titulo))),
       h("svg", { viewBox: MAPA.vistas[vista].vb, className: "mapa-v", role: "img", "aria-label": "Mapa de ciudades" },
-        h("path", { d: MAPA.fondo, fill: c.bg3, stroke: c.bg2, "stroke-width": w / 400 }),
+        h("path", { d: MAPA.fondo, fill: c.bg2, stroke: c.bg2, "stroke-width": w / 400 }),
         /* Solo se marcan los países que tienen una ciudad (05/10/2026); los demás, como el fondo */
-        Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: conCiudad.has(k) ? c.gold + "33" : c.bg3, stroke: c.bg2, "stroke-width": w / 400, style: { pointerEvents: "none" } })),
+        Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: conCiudad.has(k) ? c.gold + "33" : c.bg2, stroke: c.bg2, "stroke-width": w / 400, style: { pointerEvents: "none" } })),
         /* Países que no se enseñan pero tienen una ciudad, como Chequia (14/10/2026) */
         Object.keys(MAPA.contornos || {}).filter(k => conCiudad.has(k)).map(k => h("path", { key: "c-" + k, d: MAPA.contornos[k].d, fill: c.gold + "33", stroke: c.bg2, "stroke-width": w / 400, style: { pointerEvents: "none" } })),
         (MAPA.vistas[vista].ciudades || Object.keys(MAPA.ciudades)).map(k => {
           const p = MAPA.ciudades[k], on = k === sel, e = lexComerById(p.lex);
           return h("g", { key: k, onClick: () => tocar(k), style: { cursor: "pointer" } },
             h("circle", { cx: p.x, cy: p.y, r: w * 0.045, fill: "transparent" }),   /* zona de toque grande */
-            h("circle", { cx: p.x, cy: p.y, r: w * (on ? 0.018 : 0.013), fill: on ? c.gold : c.gold + "cc", stroke: c.bg, "stroke-width": w / 300 }),
+            h("circle", { cx: p.x, cy: p.y, r: w * (on ? 0.018 : 0.013), fill: on ? c.gold : c.gold + "88", stroke: c.bg, "stroke-width": w / 300 }),
             h("text", { x: p.x, y: p.y + w * 0.05, "text-anchor": "middle", "font-size": w * 0.036, "font-weight": on ? 800 : 600, fill: on ? c.gold : c.text, lang: "ru", style: { pointerEvents: "none" } },
               (e.acento || e.ru).replace(/\u0301/g, "")));
         })),
-      s ? h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 10, display: "flex", alignItems: "center", gap: 12 } },
+      s ? h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12, display: "flex", alignItems: "center", gap: 12 } },
             h("div", { style: { flex: 1 } },
-              h("div", { lang: "ru", style: { fontSize: 20, fontWeight: 800 } }, h(AzPalabra, { texto: s.e.acento, id: s.e.id })),
-              h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 2 } }, s.e.senses[0].es + " · ", h("span", { lang: "ru", style: { color: c.text, fontWeight: 700 } }, s.frase))),
+              h("div", { lang: "ru", style: { fontSize: "var(--az-fs-subtitulo)", fontWeight: 800 } }, h(AzPalabra, { texto: s.e.acento, id: s.e.id })),
+              h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textSub, marginTop: 4 } }, s.e.senses[0].es + " · ", h("span", { lang: "ru", style: { color: c.text, fontWeight: 700 } }, s.frase))),
             h("button", { className: "play", onClick: () => azHablarRu(s.frase), "aria-label": "Escuchar" }, "▶"))
-        : onTocar ? null : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Toca una ciudad."));   /* en una actividad, la consigna la da la página */
+        : onTocar ? null : h("div", { className: "u-text", style: { fontSize: "var(--az-fs-chico)", marginTop: 8 } }, "Toca una ciudad."));   /* en una actividad, la consigna la da la página */
   }
   function AzMapaPaises({ c }) {
     const [vista, setVista] = useState("europa");
@@ -597,15 +597,15 @@
       h("div", { className: "toggle-row", style: { flexWrap: "wrap" } }, ["europa", "america", "asia", "africa", "oceania", "mundo"].map(k =>
         h("button", { key: k, className: "pair-btn", style: chipSt(c, vista === k), onClick: () => setVista(k) }, MAPA.vistas[k].titulo))),
       h("svg", { viewBox: MAPA.vistas[vista].vb, className: "mapa-v", role: "img", "aria-label": "Mapa de países" },
-        h("path", { d: MAPA.fondo, fill: c.bg3, stroke: c.bg2, "stroke-width": vista === "mundo" ? 4 : 2 }),
+        h("path", { d: MAPA.fondo, fill: c.bg2, stroke: c.bg2, "stroke-width": vista === "mundo" ? 4 : 2 }),
         Object.keys(MAPA.paises).map(k => h("path", { key: k, className: "pais", d: MAPA.paises[k].d, onClick: () => tocar(k),
-          fill: k === sel ? c.gold : c.gold + "55", stroke: c.bg2, "stroke-width": vista === "mundo" ? 4 : 2 }))),
-      e ? h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 10, display: "flex", alignItems: "center", gap: 12 } },
+          fill: k === sel ? c.gold : c.gold + "33", stroke: c.bg2, "stroke-width": vista === "mundo" ? 4 : 2 }))),
+      e ? h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12, display: "flex", alignItems: "center", gap: 12 } },
             h("div", { style: { flex: 1 } },
-              h("div", { lang: "ru", style: { fontSize: 20, fontWeight: 800 } }, h(AzPalabra, { texto: e.acento, id: e.id })),
-              h("div", { style: { fontSize: 13.5, color: c.textSub, marginTop: 2 } }, e.senses[0].es + " · ", h("span", { lang: "ru", style: { color: c.text, fontWeight: 700 } }, "я из " + gen))),
+              h("div", { lang: "ru", style: { fontSize: "var(--az-fs-subtitulo)", fontWeight: 800 } }, h(AzPalabra, { texto: e.acento, id: e.id })),
+              h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textSub, marginTop: 4 } }, e.senses[0].es + " · ", h("span", { lang: "ru", style: { color: c.text, fontWeight: 700 } }, "я из " + gen))),
             h("button", { className: "play", onClick: () => azHablarRu("Я из " + gen), "aria-label": "Escuchar" }, "▶"))
-        : h("div", { className: "u-text", style: { fontSize: 13.5, marginTop: 8 } }, "Toca un país dorado."));
+        : h("div", { className: "u-text", style: { fontSize: "var(--az-fs-chico)", marginTop: 8 } }, "Toca un país dorado."));
   }
 
   /* grabar (28/10/2026, proyecto de la U1 de Abecé): debajo, la grabadora con el texto escrito como modelo */
@@ -618,26 +618,26 @@
     const ok = mod.requisitos.map(r => r.fn ? !!r.fn(txt) : new RegExp(r.rx).test(n(txt)));
     const cambiar = v => { setTxt(v); setRev(null); azSet(clave, v); };
     return h("div", null,
-      h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 14 } }, mod.requisitos.map((r, i) =>
+      h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 12 } }, mod.requisitos.map((r, i) =>
         h("div", { key: i, className: "req" }, h("span", { style: { color: ok[i] ? green : c.textMuted, fontWeight: 800 } }, ok[i] ? "✓" : "○"), h("span", { style: { color: ok[i] ? c.text : c.textSub } }, r.txt)))),
       aviso && h("div", { className: "u-dest" }, aviso),
       h("textarea", { className: "proy", lang: LL, value: txt, placeholder: ES ? "Пиши по-испански…" : "Escribe en ruso…", onInput: e => cambiar(e.target.value) }),
-      ok.every(Boolean) && h("div", { style: { marginTop: 10, color: green, fontWeight: 700, fontSize: 14 } }, T("¡Están todos los puntos! Léelo en voz alta y guárdalo en el cuaderno.")),
+      ok.every(Boolean) && h("div", { style: { marginTop: 12, color: green, fontWeight: 700, fontSize: "var(--az-fs-chico)" } }, T("¡Están todos los puntos! Léelo en voz alta y guárdalo en el cuaderno.")),
       h("button", { className: "ubtn", disabled: !txt.trim(), onClick: () => setRev(azRevisarTexto(txt, mod.requisitos, mod.consejos)) }, T("Revisar mi texto")),
       rev && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
-        !rev.dudas.length && !rev.faltan.length && !rev.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: 14 } }, T("✓ No encontré errores y están todos los puntos.")),
+        !rev.dudas.length && !rev.faltan.length && !rev.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: "var(--az-fs-chico)" } }, T("✓ No encontré errores y están todos los puntos.")),
         rev.dudas.map((d, i) => h("div", { key: "d" + i, className: "u-truco", lang: LL }, ES
           ? "«" + d.t + "» — такого слова нет в словаре" + (d.sugerencia ? ". Может быть, «" + d.sugerencia + "»?" : ": проверь, как оно пишется.")
           : "«" + d.t + "» no la encuentro en el diccionario" + (d.sugerencia ? ". ¿Quisiste decir «" + d.sugerencia + "»?" : ": revisa cómo se escribe."))),
         rev.tips.map((t, i) => h("div", { key: "t" + i, className: "u-truco" }, azFmt(t))),
         rev.faltan.length > 0 && h("div", { className: "u-truco" }, T("Falta: ") + rev.faltan.join(", ").toLowerCase() + "."),
-        h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, T("La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática."))),
+        h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, T("La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática."))),
       h("div", { style: { display: "flex", gap: 8, marginTop: 12 } },
         h("button", { className: "ubtn sec", style: { marginTop: 0 }, disabled: !txt.trim(), onClick: () => hablar(txt) }, T("▶ Escucharlo")),
         h("button", { className: "ubtn", style: { marginTop: 0 }, disabled: !txt.trim(), onClick: () => azGuardarEnCuaderno(txt, fuente) }, T("＋ Cuaderno"))),
       grabar && txt.trim() && h(React.Fragment, null,
         h("div", { className: "u-sec" }, T("Léelo en voz alta")),
-        h("div", { className: "u-text", style: { fontSize: 13.5 } }, T("Escucha el modelo, grábate y compara.")),
+        h("div", { className: "u-text", style: { fontSize: "var(--az-fs-chico)" } }, T("Escucha el modelo, grábate y compara.")),
         h(AzGrabadora, { texto: txt })));
   }
 
@@ -662,7 +662,7 @@
     const ok = t => req.map(r => !!r.fn(t));
     const [min, max] = tarea.palabras;
     const contador = t => { const n = azContarPalabras(t), bien = n >= min && n <= max;
-      return h("div", { style: { fontSize: 13.5, marginTop: 8, fontWeight: 700, color: bien ? green : c.textMuted } }, n + " palabras · meta: " + min + "–" + max); };
+      return h("div", { style: { fontSize: "var(--az-fs-chico)", marginTop: 8, fontWeight: 700, color: bien ? green : c.textMuted } }, n + " palabras · meta: " + min + "–" + max); };
     const lista = t => req.length > 0 && h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 12 } }, ok(t).map((b, i) =>
       h("div", { key: i, className: "req" }, h("span", { style: { color: b ? green : c.textMuted, fontWeight: 800 } }, b ? "✓" : "○"), h("span", { style: { color: b ? c.text : c.textSub } }, req[i].txt))));
     const ir = n => { setRev(null); guardar({ paso: n, v2: n === 3 && !d.v2 ? d.v1 : d.v2 }); window.scrollTo(0, 0); };
@@ -671,20 +671,20 @@
     const area = (k, lang, ph) => h("textarea", { className: "proy", lang, value: d[k], placeholder: ph, onInput: e => { setRev(null); guardar({ [k]: e.target.value }); } });
     const revision = t => azRevisarTexto(t, req, tarea.consejos || []);
     const cajaRev = r => r && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
-      !r.dudas.length && !r.faltan.length && !r.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: 14 } }, "✓ No encontré errores y están todos los puntos."),
+      !r.dudas.length && !r.faltan.length && !r.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: "var(--az-fs-chico)" } }, "✓ No encontré errores y están todos los puntos."),
       r.dudas.map((x, i) => h("div", { key: "d" + i, className: "u-truco", lang: "ru" }, "«" + x.t + "» no la encuentro en el diccionario" + (x.sugerencia ? ". ¿Quisiste decir «" + x.sugerencia + "»?" : ": revisa cómo se escribe."))),
       r.tips.map((x, i) => h("div", { key: "t" + i, className: "u-truco" }, azFmt(x))),
       r.faltan.length > 0 && h("div", { className: "u-truco" }, "Falta: " + r.faltan.join(", ").toLowerCase() + "."),
-      h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, "La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática."));
+      h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, "La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática."));
     const texto = (t, titulo) => h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
-      h("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: 1.2, color: c.gold, textTransform: "uppercase" } }, titulo),
-      h("div", { lang: "ru", style: { fontSize: 16, lineHeight: 1.55, marginTop: 6, whiteSpace: "pre-wrap", color: c.text } }, t));
+      h("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.2, color: c.gold, textTransform: "uppercase" } }, titulo),
+      h("div", { lang: "ru", style: { fontSize: "var(--az-fs-destacado)", lineHeight: 1.55, marginTop: 8, whiteSpace: "pre-wrap", color: c.text } }, t));
     return h("div", null,
-      h("div", { className: "u-card", style: { padding: "10px 14px", marginTop: 14, display: "flex", gap: 6, flexWrap: "wrap" } }, AZ_TALLER_PASOS.map((p, i) =>
-        h("button", { key: p, className: "ubtn" + (i === paso ? "" : " sec"), style: { marginTop: 0, flex: "1 1 40%", fontSize: 13.5, padding: "9px 6px" }, disabled: !puede[i], onClick: () => ir(i) }, (i + 1) + " · " + p))),
+      h("div", { className: "u-card", style: { padding: "12px 14px", marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" } }, AZ_TALLER_PASOS.map((p, i) =>
+        h("button", { key: p, className: "ubtn" + (i === paso ? "" : " sec"), style: { marginTop: 0, flex: "1 1 40%", fontSize: "var(--az-fs-chico)", padding: "8px 8px" }, disabled: !puede[i], onClick: () => ir(i) }, (i + 1) + " · " + p))),
       h("div", { className: "u-sec" }, "Paso " + (paso + 1) + " de 4 · " + AZ_TALLER_PASOS[paso]),
       paso === 0 && h(React.Fragment, null,
-        h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Antes de escribir, anota tus ideas: palabras sueltas, en ruso o en español. Estas preguntas te pueden guiar:"),
+        h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, "Antes de escribir, anota tus ideas: palabras sueltas, en ruso o en español. Estas preguntas te pueden guiar:"),
         h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 8 } }, tarea.ideas.map((q, i) => h("div", { key: i, className: "req" }, h("span", { style: { color: c.gold, fontWeight: 800 } }, "·"), h("span", null, azFmt(q))))),
         area("plan", "es", "Tus ideas…"),
         h("button", { className: "ubtn", onClick: () => ir(1) }, "Escribir el texto")),
@@ -701,7 +701,7 @@
         h("div", { className: "u-card", style: { padding: "8px 16px" } }, AZ_TALLER_CHEQUEO.map((q, i) => h("div", { key: i, className: "req" }, h("span", { style: { color: c.gold, fontWeight: 800 } }, "?"), h("span", null, q)))),
         h("button", { className: "ubtn", onClick: () => ir(3) }, "Reescribir")),
       paso === 3 && h(React.Fragment, null,
-        h("p", { className: "u-text", style: { fontSize: 14.5 } }, "Corrige lo que encontraste y mejóralo: suma un conector, una razón o un detalle. La primera versión queda guardada."),
+        h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, "Corrige lo que encontraste y mejóralo: suma un conector, una razón o un detalle. La primera versión queda guardada."),
         area("v2", "ru", "Tu versión final…"), contador(d.v2), lista(d.v2),
         h("button", { className: "ubtn sec", disabled: !d.v2.trim(), onClick: () => setRev(revision(d.v2)) }, "Revisar la versión final"),
         cajaRev(rev),
@@ -713,21 +713,21 @@
 
   /* Portada: kicker, título, objetivo, barras de progreso, «Practicar la unidad» y módulos */
   function AzPortadaUnidad({ u, c, green, progreso, visto, onPracticar, onAbrir, examen, extraModulo }) {
-    return h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
+    return h("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16 } },
       h("div", { className: "u-kicker" }, (ES ? "Урок " : "Unidad ") + u.id),
       h("h1", { className: "u-title" }, u.titulo),
       h("div", { className: "u-ru", lang: LL }, ES ? u.tituloEs : u.tituloRu),
-      h("p", { className: "u-text", style: { marginTop: 12, fontSize: 14 } }, u.objetivo),
-      h("div", { style: { fontSize: 13, color: c.textMuted, marginTop: 6 } }, T("Tiempo estimado: ") + u.tiempo),
-      h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 18 } },
+      h("p", { className: "u-text", style: { marginTop: 12, fontSize: "var(--az-fs-chico)" } }, u.objetivo),
+      h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, marginTop: 8 } }, T("Tiempo estimado: ") + u.tiempo),
+      h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 16 } },
         progreso.map((p, k) => h("div", { key: k, style: { marginTop: k ? 14 : 0 } },
           h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } },
-            h("span", { style: { fontSize: 14, fontWeight: 700, color: c.text } }, p.label),
-            h("span", { style: { fontSize: 14, fontWeight: 800, color: green } }, p.valor + (ES ? " из " : " de ") + p.total)),
+            h("span", { style: { fontSize: "var(--az-fs-chico)", fontWeight: 700, color: c.text } }, p.label),
+            h("span", { style: { fontSize: "var(--az-fs-chico)", fontWeight: 800, color: green } }, p.valor + (ES ? " из " : " de ") + p.total)),
           h("div", { className: "pbar-track" }, h("div", { className: "pbar-fill", style: { width: (p.valor / Math.max(1, p.total) * 100) + "%" } })))),
-        h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 10, lineHeight: 1.5 } }, T("Se marcan solas cuando las aciertas en ejercicios distintos, en días distintos. También puedes marcarlas a mano en las tarjetas."))),
+        h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 12, lineHeight: 1.5 } }, T("Se marcan solas cuando las aciertas en ejercicios distintos, en días distintos. También puedes marcarlas a mano en las tarjetas."))),
       h("button", { className: "ubtn", onClick: onPracticar }, T("Practicar la unidad")),
-      h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 6, textAlign: "center" } }, ES ? "Упражнения по всему пройденному до модуля " + visto + "." : "Ejercicios de todo lo que viste hasta el módulo " + visto + "."),
+      h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 8, textAlign: "center" } }, ES ? "Упражнения по всему пройденному до модуля " + visto + "." : "Ejercicios de todo lo que viste hasta el módulo " + visto + "."),
       h("div", { className: "u-sec" }, T("Módulos")),
       u.modulos.map(m => {
         const off = m.tipo === "pronto";
@@ -738,7 +738,7 @@
             h("div", { className: "mod-t" }, m.titulo, off && h("span", { className: "tag-pronto" }, T("Pronto"))),
             h("div", { className: "mod-d" }, azFmt(m.resumen)),
             extraModulo && extraModulo(m),
-            m.tipo === "examen" && examen && h("div", { style: { fontSize: 12.5, fontWeight: 700, marginTop: 6, color: examen.aprobado ? green : "#E2884A" } },
+            m.tipo === "examen" && examen && h("div", { style: { fontSize: "var(--az-fs-nota)", fontWeight: 700, marginTop: 8, color: examen.aprobado ? green : "#E2884A" } },
               (ES ? "Последняя: " : "Última: ") + examen.pct + " %" + (examen.aprobado ? T(" · aprobada") : ""))));
       }));
   }
@@ -777,7 +777,7 @@
         trad && h("div", { className: "grp-es", lang: ES ? "ru" : "es" }, trad));
     };
     return h(React.Fragment, null,
-      h("div", { className: "u-text", style: { fontSize: 13, marginTop: 8 } }, T("Toca una palabra para escuchar cómo suena.")),
+      h("div", { className: "u-text", style: { fontSize: "var(--az-fs-chico)", marginTop: 8 } }, T("Toca una palabra para escuchar cómo suena.")),
       h("div", { className: "grp-wrap", style: { marginTop: 8 } }, h("table", { className: "grp" + (encabezados.length >= 4 ? " compacta" : "") },
         h("thead", null, h("tr", null, encabezados.map((t, k) => h("th", { key: k }, t)))),
         h("tbody", null, filas.map((f, i) => h("tr", { key: i }, f.map(celda)))))));

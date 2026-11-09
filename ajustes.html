@@ -25,7 +25,8 @@
 <script>
 /* ============================================================
    AJUSTES.HTML — Ajustes de la app (26/09/2026)
-   Se abre desde el ⚙️ del pie del menú. Secciones: Transliteración
+   Se abre desde el ⚙️ del pie del menú. Secciones: Tamaño de letra
+   (06/11/2026, az_letra: "normal" | "grande" | "muy", ver core.js), Transliteración
    (02/10/2026, az_translit: "auto" | "si" | "no", ver core.js; "auto" desde el 19/10/2026) y Copia de
    seguridad (AzCopiaSeguridad, en core.js).
    14/10/2026: Cuenta (mail, progreso en la nube, cerrar sesión y
@@ -52,7 +53,8 @@ const TX = RU ? {
   salirIgual: "Всё равно выйти", esperar: "Подождать", salir: "Выйти",
   borrarTit: "Удалить всё?", borrarTxt: " Удалятся твой аккаунт, прогресс в облаке и всё, что сохранено в этом телефоне (прогресс, тетрадь и заметки). Это нельзя отменить. Если хочешь что-то сохранить, сначала сделай резервную копию.",
   eliminando: "Удаляем…", siBorrar: "Да, удалить всё", cancelar: "Отмена", borrarCuenta: "Удалить мой аккаунт и мои данные",
-  auto: "Автоматически", mostrar: "Показывать", ocultar: "Скрывать"
+  auto: "Автоматически", mostrar: "Показывать", ocultar: "Скрывать",
+  letra: "Размер текста", letraTxt: "Меняет размер всего текста в приложении.", normal: "Обычный", grande: "Крупный", muy: "Очень крупный", muestra: "Пример: так будет выглядеть текст урока."
 } : {
   fecha: "es-AR", hoy: "hoy ", titulo: "Ajustes", cuenta: "Cuenta", translit: "Transliteración", copia: "Copia de seguridad",
   sinCuentas: "Las cuentas todavía no están activadas en esta versión de la app. El progreso se guarda solo en este teléfono.",
@@ -63,17 +65,18 @@ const TX = RU ? {
   salirIgual: "Cerrar sesión igual", esperar: "Esperar", salir: "Cerrar sesión",
   borrarTit: "¿Eliminar todo?", borrarTxt: " Se borran tu cuenta, tu progreso en la nube y todo lo guardado en este teléfono (progreso, cuaderno y notas). No se puede deshacer. Si quieres conservar algo, antes guarda una copia de seguridad.",
   eliminando: "Eliminando…", siBorrar: "Sí, eliminar todo", cancelar: "Cancelar", borrarCuenta: "Eliminar mi cuenta y mis datos",
-  auto: "Automática", mostrar: "Mostrar", ocultar: "Ocultar"
+  auto: "Automática", mostrar: "Mostrar", ocultar: "Ocultar",
+  letra: "Tamaño de letra", letraTxt: "Cambia el tamaño de todos los textos de la app.", normal: "Normal", grande: "Grande", muy: "Muy grande", muestra: "Ejemplo: así se verá el texto de las unidades."
 };
 /* ── Cuenta (14/10/2026) ── */
-const ROJO = "#B5605C", ROJO_TXT = "#D9776F";
+const ROJO = "#B5605C", ROJO_TXT = "#B5605C";
 const fechaCorta = iso => { if (!iso) return "—"; const d = new Date(iso), hoy = new Date();
   const hh = d.toLocaleTimeString(TX.fecha, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
   return d.toDateString() === hoy.toDateString() ? TX.hoy + hh : d.toLocaleDateString(TX.fecha, { day: "numeric", month: "short" }) + " " + hh; };
 function boton(c, texto, onClick, tipo, extra) {
   const st = tipo === "peligro" ? { background: ROJO, border: `1px solid ${ROJO}`, color: "#fff" }
-    : tipo === "sec" ? { background: c.bg3, border: `1px solid ${c.border}`, color: c.text } : { background: c.gold, border: `1px solid ${c.gold}`, color: c.bg };
-  return h("button", Object.assign({ className: "btn", onClick, style: Object.assign({ width: "100%", padding: "13px 16px", borderRadius: 10, fontSize: 14.5, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", marginTop: 10 }, st) }, extra || {}), texto);
+    : tipo === "sec" ? { background: c.bg2, border: `1px solid ${c.border}`, color: c.text } : { background: c.gold, border: `1px solid ${c.gold}`, color: c.bg };
+  return h("button", Object.assign({ className: "btn", onClick, style: Object.assign({ width: "100%", padding: "12px 16px", borderRadius: "var(--az-r)", fontSize: "var(--az-fs-cuerpo)", fontWeight: 700, cursor: "pointer", fontFamily: "inherit", marginTop: 12 }, st) }, extra || {}), texto);
 }
 function SeccionCuenta({ c }) {
   const A = window.AzCuenta;
@@ -81,29 +84,29 @@ function SeccionCuenta({ c }) {
   const [paso, setPaso] = useState(null);      /* null | "salir-sin-red" | "borrar" | "borrando" */
   const [error, setError] = useState("");
   useEffect(() => { if (!A || !A.activa) return; A.listo().then(() => setNube(A.estadoNube())); return A.alCambiar(() => setNube(A.estadoNube())); }, []);
-  if (!A || !A.activa) return h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, TX.sinCuentas);
+  if (!A || !A.activa) return h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } }, TX.sinCuentas);
   const t = { "al-dia": TX.alDia, subiendo: TX.subiendo, pendiente: navigator.onLine ? TX.pendiente : TX.sinRed, apagada: "" }[nube && nube.estado] || "";
   const ultima = nube && nube.meta && nube.meta.subido ? TX.ultimo + fechaCorta(new Date(nube.meta.subido).toISOString()) + "." : "";
   const salir = async () => { setError(""); const ok = await A.cerrarSesion(false); if (!ok) setPaso("salir-sin-red"); };
   const borrar = async () => { setPaso("borrando"); setError("");
     try { await A.borrarCuenta(); } catch (e) { setPaso("borrar"); setError(navigator.onLine ? TX.noBorra : TX.borrarSinRed); } };
   return h(React.Fragment, null,
-    h("div", { style: { fontSize: 12, color: c.textMuted } }, TX.entraste),
-    h("div", { style: { fontSize: 16, fontWeight: 700, color: c.text, marginTop: 2, wordBreak: "break-all" } }, A.email() || "…"),
-    h("div", { style: { fontSize: 13.5, color: c.textSub, lineHeight: 1.6, marginTop: 10 } }, t, ultima ? " " + ultima : ""),
+    h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted } }, TX.entraste),
+    h("div", { style: { fontSize: "var(--az-fs-destacado)", fontWeight: 700, color: c.text, marginTop: 4, wordBreak: "break-all" } }, A.email() || "…"),
+    h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textSub, lineHeight: 1.6, marginTop: 12 } }, t, ultima ? " " + ultima : ""),
     paso === "salir-sin-red"
-      ? h("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: ROJO_TXT, background: ROJO + "22", borderRadius: 10, padding: "10px 12px", marginTop: 12 } },
+      ? h("div", { style: { fontSize: "var(--az-fs-chico)", lineHeight: 1.5, color: ROJO_TXT, background: ROJO + "14", borderRadius: "var(--az-r)", padding: "12px 12px", marginTop: 12 } },
           TX.salirSinRed,
           boton(c, TX.salirIgual, () => A.cerrarSesion(true), "peligro"), boton(c, TX.esperar, () => setPaso(null), "sec"))
       : boton(c, TX.salir, salir, "sec"),
-    h("div", { style: { height: 1, background: c.border, margin: "18px 0 6px" } }),
+    h("div", { style: { height: 1, background: c.border, margin: "16px 0 8px" } }),
     paso === "borrar" || paso === "borrando"
-      ? h("div", { style: { fontSize: 13.5, lineHeight: 1.55, color: c.text, background: ROJO + "22", border: `1px solid ${ROJO}`, borderRadius: 10, padding: "12px", marginTop: 10 } },
+      ? h("div", { style: { fontSize: "var(--az-fs-chico)", lineHeight: 1.55, color: c.text, background: ROJO + "14", border: `1px solid ${ROJO}`, borderRadius: "var(--az-r)", padding: "12px", marginTop: 12 } },
           h("b", null, TX.borrarTit), TX.borrarTxt,
           error && h("div", { style: { color: ROJO_TXT, marginTop: 8 } }, error),
           boton(c, paso === "borrando" ? TX.eliminando : TX.siBorrar, borrar, "peligro", { disabled: paso === "borrando" }),
           boton(c, TX.cancelar, () => { setPaso(null); setError(""); }, "sec"))
-      : h("button", { className: "btn", onClick: () => setPaso("borrar"), style: { background: "none", border: "none", color: ROJO_TXT, fontSize: 13.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit", padding: "10px 0 0" } }, TX.borrarCuenta));
+      : h("button", { className: "btn", onClick: () => setPaso("borrar"), style: { background: "none", border: "none", color: ROJO_TXT, fontSize: "var(--az-fs-chico)", fontWeight: 600, cursor: "pointer", fontFamily: "inherit", padding: "12px 0 0" } }, TX.borrarCuenta));
 }
 /* Accesos (admin, modo "admin") y Alumnos (revisor, modo "revisor", 22/10/2026):
    la misma pantalla; el revisor ve, habilita y quita solo los alumnos que habilitó él. */
@@ -130,35 +133,35 @@ function SeccionAccesos({ c, modo = "admin" }) {
   const revisor = async (p, si) => { setMsg(null);
     try { await A.marcarRevisor(p.email, si); setMsg({ t: si ? p.email + " ahora es revisor: ve Abecé en construcción y puede dar acceso a alumnos." : p.email + " ya no es revisor." }); cargar(); }
     catch (e) { setMsg({ err: true, t: /revisor/.test(String(e && e.message || e)) ? "Falta actualizar Supabase: corre otra vez supabase.sql (GUIA.md)." : "No se pudo cambiar. Prueba de nuevo." }); } };
-  const etiqueta = t => h("span", { style: { fontSize: 10.5, fontWeight: 700, color: c.gold, marginLeft: 8, letterSpacing: 1, textTransform: "uppercase" } }, t);
-  const btnFila = (t, fn, col) => h("button", { className: "btn", onClick: fn, style: { background: c.bg3, border: `1px solid ${c.border}`, color: col, fontSize: 12.5, fontWeight: 600, padding: "8px 12px", borderRadius: 10, cursor: "pointer", fontFamily: "inherit", flexShrink: 0 } }, t);
-  const inp = { width: "100%", boxSizing: "border-box", fontSize: 16, padding: "12px", borderRadius: 10, background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", marginTop: 8, outline: "none" };
+  const etiqueta = t => h("span", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, color: c.gold, marginLeft: 8, letterSpacing: 1, textTransform: "uppercase" } }, t);
+  const btnFila = (t, fn, col) => h("button", { className: "btn", onClick: fn, style: { background: c.bg2, border: `1px solid ${c.border}`, color: col, fontSize: "var(--az-fs-nota)", fontWeight: 600, padding: "8px 12px", borderRadius: "var(--az-r)", cursor: "pointer", fontFamily: "inherit", flexShrink: 0 } }, t);
+  const inp = { width: "100%", boxSizing: "border-box", fontSize: "var(--az-fs-destacado)", padding: "12px", borderRadius: "var(--az-r)", background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontFamily: "inherit", marginTop: 8, outline: "none" };
   return h(React.Fragment, null,
-    h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, rev
+    h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } }, rev
       ? "Los alumnos que habilitas tú. Para que alguien entre, agrega su mail y avísale: entra con el código que le llega por mail."
       : "Solo entran los mails de esta lista. Para que alguien entre, agrega su mail y avísale: entra con el código que le llega por mail. Un revisor ve Abecé en construcción y puede dar acceso a sus alumnos, pero no ve esta lista ni los reportes."),
     h("input", { type: "email", inputMode: "email", autoCapitalize: "off", autoCorrect: "off", spellCheck: false, placeholder: "mail@ejemplo.com", value: mail, onInput: e => setMail(e.target.value), style: Object.assign({}, inp, { marginTop: 12 }) }),
     h("input", { type: "text", placeholder: "Nota (opcional): quién es", value: nota, onInput: e => setNota(e.target.value), style: inp }),
-    !rev && h("div", { style: { display: "flex", alignItems: "center", gap: 8, marginTop: 10, flexWrap: "wrap" } },
-      h("span", { style: { fontSize: 12.5, color: c.textMuted } }, "Aprende:"),
+    !rev && h("div", { style: { display: "flex", alignItems: "center", gap: 8, marginTop: 12, flexWrap: "wrap" } },
+      h("span", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted } }, "Aprende:"),
       chipDir(c, dir === "azbuka", () => setDir("azbuka"), "Ruso · Azbuka"),
       chipDir(c, dir === "abece", () => setDir("abece"), "Español · Abecé")),
     boton(c, "Habilitar", agregar, null, { disabled: !mail.trim() }),
-    msg && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, borderRadius: 10, padding: "10px 12px", marginTop: 12, color: msg.err ? ROJO_TXT : c.textSub, background: msg.err ? ROJO + "22" : c.gold + "18" } }, msg.t),
-    h("div", { style: { marginTop: 14 } },
-      lista == null ? h("div", { style: { fontSize: 13.5, color: c.textMuted } }, "Cargando…")
-      : rev && lista.length === 0 ? h("div", { style: { fontSize: 13.5, color: c.textMuted } }, "Todavía no habilitaste a nadie.")
+    msg && h("div", { style: { fontSize: "var(--az-fs-chico)", lineHeight: 1.5, borderRadius: "var(--az-r)", padding: "12px 12px", marginTop: 12, color: msg.err ? ROJO_TXT : c.textSub, background: msg.err ? ROJO + "14" : c.gold + "14" } }, msg.t),
+    h("div", { style: { marginTop: 12 } },
+      lista == null ? h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted } }, "Cargando…")
+      : rev && lista.length === 0 ? h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted } }, "Todavía no habilitaste a nadie.")
       : lista.map(p => h("div", { key: p.email, style: { borderTop: `1px solid ${c.border}`, padding: "12px 0" } },
           h("div", { style: { display: "flex", alignItems: "center", gap: 8 } },
             h("div", { style: { flex: 1, minWidth: 0 } },
-              h("div", { style: { fontSize: 14.5, fontWeight: 700, color: c.text, wordBreak: "break-all" } }, p.email, p.admin ? etiqueta("Admin") : null, p.revisor ? etiqueta("Revisor") : null, !rev && p.direccion === "abece" ? etiqueta("Abecé") : null),
-              h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 2 } }, (p.nota ? p.nota + " · " : "") + (p.tiene_cuenta ? (p.ultimo ? "Última actividad: " + fechaCorta(p.ultimo) : "Entró, sin progreso todavía") : "Todavía no entró")
+              h("div", { style: { fontSize: "var(--az-fs-cuerpo)", fontWeight: 700, color: c.text, wordBreak: "break-all" } }, p.email, p.admin ? etiqueta("Admin") : null, p.revisor ? etiqueta("Revisor") : null, !rev && p.direccion === "abece" ? etiqueta("Abecé") : null),
+              h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 4 } }, (p.nota ? p.nota + " · " : "") + (p.tiene_cuenta ? (p.ultimo ? "Última actividad: " + fechaCorta(p.ultimo) : "Entró, sin progreso todavía") : "Todavía no entró")
                 + (!rev && p.invitado_por && p.invitado_por !== yo ? " · lo habilitó " + p.invitado_por : ""))),
-            !p.admin && quitando !== p.email && h("div", { style: { display: "flex", flexDirection: "column", gap: 6, alignItems: "stretch" } },
+            !p.admin && quitando !== p.email && h("div", { style: { display: "flex", flexDirection: "column", gap: 8, alignItems: "stretch" } },
               !rev && btnFila(p.revisor ? "Quitar revisor" : "Hacer revisor", () => revisor(p, !p.revisor), c.gold),
               !rev && p.direccion && btnFila(p.direccion === "abece" ? "Pasar a Azbuka" : "Pasar a Abecé", () => cambiarDir(p, p.direccion === "abece" ? "azbuka" : "abece"), c.textSub),
               btnFila("Quitar", () => setQuitando(p.email), ROJO_TXT))),
-          quitando === p.email && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: c.text, background: ROJO + "22", border: `1px solid ${ROJO}`, borderRadius: 10, padding: 12, marginTop: 10 } },
+          quitando === p.email && h("div", { style: { fontSize: "var(--az-fs-chico)", lineHeight: 1.5, color: c.text, background: ROJO + "14", border: `1px solid ${ROJO}`, borderRadius: "var(--az-r)", padding: 12, marginTop: 12 } },
             "Deja de poder entrar y se borran su cuenta y su progreso en la nube.",
             boton(c, "Sí, quitar", () => quitar(p.email), "peligro"), boton(c, "Cancelar", () => setQuitando(null), "sec"))))),
     h(LinksParaMandar, { c, rev }));
@@ -166,8 +169,8 @@ function SeccionAccesos({ c, modo = "admin" }) {
 /* 27/10/2026 (Manu): chips de dirección y los links para mandar a cada alumno */
 const NOMBRE_DIR = { azbuka: "Azbuka", abece: "Abecé" };
 function chipDir(c, on, fn, t) {
-  return h("button", { className: "btn", onClick: fn, style: Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
-    on ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
+  return h("button", { className: "btn", onClick: fn, style: Object.assign({ padding: "8px 12px", borderRadius: "var(--az-r)", fontSize: "var(--az-fs-nota)", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
+    on ? { background: c.gold + "14", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
 }
 /* El link de cada dirección, con «Copiar». El de Abecé lleva ?dir=abece: la pantalla de
    entrada sale en ruso y con la marca de Abecé. Después, manda la dirección de la cuenta. */
@@ -181,18 +184,18 @@ function LinksParaMandar({ c, rev }) {
     if (!ok) { try { const t = document.createElement("textarea"); t.value = url; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0"; document.body.appendChild(t); t.select(); ok = document.execCommand("copy"); t.remove(); } catch (e) {} }
     setCopiado(ok ? d : "error"); setTimeout(() => setCopiado(null), 2000);
   };
-  return h("div", { style: { borderTop: `1px solid ${c.border}`, marginTop: 6, paddingTop: 14 } },
-    h("div", { style: { fontSize: 13.5, fontWeight: 700, color: c.text } }, "Links para mandar"),
-    h("div", { style: { fontSize: 12.5, color: c.textMuted, lineHeight: 1.5, marginTop: 4 } }, rev
+  return h("div", { style: { borderTop: `1px solid ${c.border}`, marginTop: 8, paddingTop: 14 } },
+    h("div", { style: { fontSize: "var(--az-fs-chico)", fontWeight: 700, color: c.text } }, "Links para mandar"),
+    h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, lineHeight: 1.5, marginTop: 4 } }, rev
       ? "Mándale este link a cada alumno: entra en ruso, con la marca de Abecé."
       : "El de Abecé abre la pantalla de entrada en ruso. Una vez que entra, cada uno ve la dirección que le pusiste arriba."),
-    links.map(([d, url]) => h("div", { key: d, style: { display: "flex", alignItems: "center", gap: 8, marginTop: 10 } },
+    links.map(([d, url]) => h("div", { key: d, style: { display: "flex", alignItems: "center", gap: 8, marginTop: 12 } },
       h("div", { style: { flex: 1, minWidth: 0 } },
-        h("div", { style: { fontSize: 12.5, fontWeight: 700, color: c.gold } }, d === "abece" ? "Español · Abecé" : "Ruso · Azbuka"),
-        h("div", { style: { fontSize: 12.5, color: c.textSub, wordBreak: "break-all" } }, url)),
-      h("button", { className: "btn", onClick: () => copiar(d, url), style: { background: copiado === d ? c.gold + "22" : c.bg3, border: `1px solid ${copiado === d ? c.gold : c.border}`, color: copiado === d ? c.gold : c.text, fontSize: 12.5, fontWeight: 600, padding: "8px 12px", borderRadius: 10, cursor: "pointer", fontFamily: "inherit", flexShrink: 0 } },
+        h("div", { style: { fontSize: "var(--az-fs-nota)", fontWeight: 700, color: c.gold } }, d === "abece" ? "Español · Abecé" : "Ruso · Azbuka"),
+        h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textSub, wordBreak: "break-all" } }, url)),
+      h("button", { className: "btn", onClick: () => copiar(d, url), style: { background: copiado === d ? c.gold + "14" : c.bg2, border: `1px solid ${copiado === d ? c.gold : c.border}`, color: copiado === d ? c.gold : c.text, fontSize: "var(--az-fs-nota)", fontWeight: 600, padding: "8px 12px", borderRadius: "var(--az-r)", cursor: "pointer", fontFamily: "inherit", flexShrink: 0 } },
         copiado === d ? "✓ Copiado" : "Copiar"))),
-    copiado === "error" && h("div", { style: { fontSize: 12.5, color: ROJO_TXT, marginTop: 8 } }, "No se pudo copiar: mantén el dedo sobre el link para copiarlo."));
+    copiado === "error" && h("div", { style: { fontSize: "var(--az-fs-nota)", color: ROJO_TXT, marginTop: 8 } }, "No se pudo copiar: mantén el dedo sobre el link para copiarlo."));
 }
 /* ── Abecé en construcción (22/10/2026): solo admin y revisor. Cambia la
    dirección de este teléfono; los alumnos no ven esta sección ni Abecé. ── */
@@ -206,10 +209,10 @@ function SeccionAbece({ c }) {
     location.reload();
   };
   const chip = (v, t) => h("button", { className: "btn", onClick: () => elegir(v),
-    style: Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
-      dir === v ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
+    style: Object.assign({ padding: "8px 12px", borderRadius: "var(--az-r)", fontSize: "var(--az-fs-nota)", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
+      dir === v ? { background: c.gold + "14", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
   return h(React.Fragment, null,
-    h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
+    h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } },
       h("b", { style: { color: c.text } }, "Abecé"), " es la versión para rusohablantes que aprenden español. Está en construcción y los alumnos no la ven. Aquí puedes probarla en este teléfono. Ya están el Diccionario, Verbos, el Cuaderno, Ajustes y el inicio; las unidades y el resto de los módulos todavía son los de Azbuka. Esta sección, Accesos, Alumnos y Reportes quedan siempre en español."),
     h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("azbuka", "Azbuka"), chip("abece", "Abecé (prueba)")));
 }
@@ -224,41 +227,41 @@ function SeccionReportes({ c }) {
   const marcar = async (r, v) => { try { await A.marcarReporte(r.id, v); setLista(l => l.map(x => x.id === r.id ? Object.assign({}, x, { resuelto: v }) : x)); } catch (e) { setError("No se pudo guardar. Prueba de nuevo."); } };
   const borrar = async r => { try { await A.borrarReporte(r.id); setBorrando(null); setLista(l => l.filter(x => x.id !== r.id)); } catch (e) { setError("No se pudo borrar. Prueba de nuevo."); } };
   const chip = (v, t) => h("button", { className: "btn", onClick: () => setVer(v),
-    style: Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
-      ver === v ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
+    style: Object.assign({ padding: "8px 12px", borderRadius: "var(--az-r)", fontSize: "var(--az-fs-nota)", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
+      ver === v ? { background: c.gold + "14", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
   const pend = (lista || []).filter(r => !r.resuelto), res = (lista || []).filter(r => r.resuelto);
   const mostrar = ver === "pend" ? pend : res;
-  const peq = (t, extra) => h("div", { style: Object.assign({ fontSize: 12.5, color: c.textMuted, lineHeight: 1.5 }, extra || {}) }, t);
+  const peq = (t, extra) => h("div", { style: Object.assign({ fontSize: "var(--az-fs-nota)", color: c.textMuted, lineHeight: 1.5 }, extra || {}) }, t);
   const btnChico = (t, fn, col) => h("button", { className: "btn", onClick: fn,
-    style: { background: c.bg3, border: `1px solid ${c.border}`, color: col || c.text, fontSize: 12.5, fontWeight: 600, padding: "8px 12px", borderRadius: 10, cursor: "pointer", fontFamily: "inherit" } }, t);
+    style: { background: c.bg2, border: `1px solid ${c.border}`, color: col || c.text, fontSize: "var(--az-fs-nota)", fontWeight: 600, padding: "8px 12px", borderRadius: "var(--az-r)", cursor: "pointer", fontFamily: "inherit" } }, t);
   return h(React.Fragment, null,
-    h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } }, "Los errores que mandan los alumnos con el botón 🐞 del menú. También te llega un mail por cada uno."),
+    h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } }, "Los errores que mandan los alumnos con el botón 🐞 del menú. También te llega un mail por cada uno."),
     h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap", alignItems: "center" } },
       chip("pend", "Pendientes" + (lista ? " (" + pend.length + ")" : "")), chip("res", "Resueltos" + (lista ? " (" + res.length + ")" : "")),
-      h("button", { className: "btn", onClick: cargar, "aria-label": "Actualizar", style: { marginLeft: "auto", background: "none", border: "none", color: c.gold, fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" } }, "↻ Actualizar")),
-    error && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, borderRadius: 10, padding: "10px 12px", marginTop: 12, color: ROJO_TXT, background: ROJO + "22" } }, error),
-    h("div", { style: { marginTop: 10 } },
+      h("button", { className: "btn", onClick: cargar, "aria-label": "Actualizar", style: { marginLeft: "auto", background: "none", border: "none", color: c.gold, fontSize: "var(--az-fs-chico)", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" } }, "↻ Actualizar")),
+    error && h("div", { style: { fontSize: "var(--az-fs-chico)", lineHeight: 1.5, borderRadius: "var(--az-r)", padding: "12px 12px", marginTop: 12, color: ROJO_TXT, background: ROJO + "14" } }, error),
+    h("div", { style: { marginTop: 12 } },
       lista == null ? !error && peq("Cargando…")
       : mostrar.length === 0 ? peq(ver === "pend" ? "No hay reportes pendientes." : "Todavía no hay reportes resueltos.", { padding: "8px 0" })
       : mostrar.map(r => { const ab = abierto === r.id, ctx = r.contexto || {};
           return h("div", { key: r.id, style: { borderTop: `1px solid ${c.border}`, padding: "12px 0" } },
             h("div", { onClick: () => setAbierto(ab ? null : r.id), style: { cursor: "pointer" } },
               peq(fechaCorta(r.creado) + " · " + (r.email || "?")),
-              h("div", { style: { fontSize: 14.5, fontWeight: 600, color: c.text, marginTop: 3, lineHeight: 1.45, whiteSpace: "pre-wrap", wordBreak: "break-word" } },
+              h("div", { style: { fontSize: "var(--az-fs-cuerpo)", fontWeight: 600, color: c.text, marginTop: 4, lineHeight: 1.45, whiteSpace: "pre-wrap", wordBreak: "break-word" } },
                 ab || r.texto.length <= 140 ? r.texto : r.texto.slice(0, 140) + "…"),
-              peq((r.pantalla || "?") + (ab ? "" : "  ·  ver más"), { marginTop: 3, color: ab ? c.textMuted : c.gold })),
-            ab && h("div", { style: { fontSize: 13, lineHeight: 1.55, color: c.textSub, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: 10, padding: "10px 12px", marginTop: 8, wordBreak: "break-word" } },
+              peq((r.pantalla || "?") + (ab ? "" : "  ·  ver más"), { marginTop: 4, color: ab ? c.textMuted : c.gold })),
+            ab && h("div", { style: { fontSize: "var(--az-fs-chico)", lineHeight: 1.55, color: c.textSub, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", padding: "12px 12px", marginTop: 8, wordBreak: "break-word" } },
               r.esperado && h("div", { style: { marginBottom: 8 } }, h("b", { style: { color: c.text } }, "Qué esperaba: "), r.esperado),
               r.url && h("div", null, h("b", { style: { color: c.text } }, "Dirección: "), h("a", { href: r.url, style: { color: c.gold } }, r.url)),
               ctx.dispositivo && h("div", null, h("b", { style: { color: c.text } }, "Teléfono: "), ctx.dispositivo),
               ctx.ultimo && ctx.ultimo.titulo && h("div", null, h("b", { style: { color: c.text } }, "Estudiaba: "), ctx.ultimo.titulo),
-              ctx.errores && h("div", { style: { marginTop: 6 } }, h("b", { style: { color: c.text } }, "Errores de la página:"),
-                h("div", { style: { fontFamily: "ui-monospace, Menlo, monospace", fontSize: 11.5, whiteSpace: "pre-wrap", marginTop: 4, color: c.textMuted } }, ctx.errores))),
+              ctx.errores && h("div", { style: { marginTop: 8 } }, h("b", { style: { color: c.text } }, "Errores de la página:"),
+                h("div", { style: { fontFamily: "ui-monospace, Menlo, monospace", fontSize: "var(--az-fs-nota)", whiteSpace: "pre-wrap", marginTop: 4, color: c.textMuted } }, ctx.errores))),
             h("div", { style: { display: "flex", gap: 8, marginTop: 8, flexWrap: "wrap" } },
               r.resuelto ? btnChico("Volver a pendientes", () => marcar(r, false)) : btnChico("✓ Resuelto", () => marcar(r, true), "#4CAF82"),
-              r.email && h("a", { href: "mailto:" + r.email + "?subject=" + encodeURIComponent("Azbuka: tu reporte"), style: { background: c.bg3, border: `1px solid ${c.border}`, color: c.text, fontSize: 12.5, fontWeight: 600, padding: "8px 12px", borderRadius: 10, textDecoration: "none" } }, "Responder"),
+              r.email && h("a", { href: "mailto:" + r.email + "?subject=" + encodeURIComponent("Azbuka: tu reporte"), style: { background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontSize: "var(--az-fs-nota)", fontWeight: 600, padding: "8px 12px", borderRadius: "var(--az-r)", textDecoration: "none" } }, "Responder"),
               borrando !== r.id && btnChico("Borrar", () => setBorrando(r.id), ROJO_TXT)),
-            borrando === r.id && h("div", { style: { fontSize: 13.5, lineHeight: 1.5, color: c.text, background: ROJO + "22", border: `1px solid ${ROJO}`, borderRadius: 10, padding: 12, marginTop: 10 } },
+            borrando === r.id && h("div", { style: { fontSize: "var(--az-fs-chico)", lineHeight: 1.5, color: c.text, background: ROJO + "14", border: `1px solid ${ROJO}`, borderRadius: "var(--az-r)", padding: 12, marginTop: 12 } },
               "Se borra este reporte para siempre.",
               boton(c, "Sí, borrar", () => borrar(r), "peligro"), boton(c, "Cancelar", () => setBorrando(null), "sec")));
         })));
@@ -266,22 +269,24 @@ function SeccionReportes({ c }) {
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [translit, setTranslit] = useState(azTranslitModo());
+  const [letra, setLetra] = useState(azLetraModo());
+  const elegirLetra = async v => { setLetra(v); await azSet("az_letra", v); azAplicarLetra(); };
   useEffect(() => { (async () => setDarkMode((await azGet('az_theme', 'dark')) !== 'light'))(); }, []);
   const [rol, setRol] = useState("");
   useEffect(() => { if (window.AzCuenta && AzCuenta.activa) AzCuenta.comprobarRol().then(r => setRol(r || "")); }, []);
   const esAdmin = rol === "admin", esRevisor = rol === "revisor";
   const c = azColors(darkMode);
   const elegir = async v => { setTranslit(v); await azSet("az_translit", v); azAplicarTranslit(); };
-  const lbl = t => h("div", { style: { fontSize: 10.5, fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "24px 0 10px" } }, t);
-  const caja = (...hijos) => h("div", { style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: 16, padding: 16 } }, ...hijos);
-  const chip = (v, texto) => h("button", {
-    className: "btn", onClick: () => elegir(v),
-    style: Object.assign({ padding: "7px 11px", borderRadius: 10, fontSize: 12.5, fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
-      translit === v ? { background: c.gold + "22", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted })
+  const lbl = t => h("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, margin: "24px 0 4px" } }, t);
+  const caja = (...hijos) => h("div", { style: { background: c.card, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", padding: 16 } }, ...hijos);
+  const chip = (v, texto, act = translit, fn = elegir, fijo = false) => h("button", {
+    className: "btn", onClick: () => fn(v),
+    style: Object.assign({ padding: "8px 12px", borderRadius: "var(--az-r)", fontSize: fijo ? 13.5 : "var(--az-fs-nota)", fontWeight: 600, cursor: "pointer", fontFamily: "inherit" },
+      act === v ? { background: c.gold + "14", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted })
   }, texto);
   return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
-    h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18 } },
-      h("h1", { style: { fontSize: 26, fontWeight: 800, color: c.text } }, TX.titulo),
+    h("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16 } },
+      h("h1", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, color: c.text } }, TX.titulo),
       lbl(TX.cuenta),
       caja(h(SeccionCuenta, { c })),
       (esAdmin || esRevisor) && lbl("Abecé en construcción"),
@@ -292,12 +297,19 @@ function App() {
       esRevisor && caja(h(SeccionAccesos, { c, modo: "revisor" })),
       esAdmin && lbl("Reportes"),
       esAdmin && caja(h(SeccionReportes, { c })),
+      lbl(TX.letra),
+      caja(
+        h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } }, TX.letraTxt),
+        h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } },
+          /* los chips del tamaño no cambian con el tamaño: siempre se pueden encontrar y tocar */
+          chip("normal", TX.normal, letra, elegirLetra, true), chip("grande", TX.grande, letra, elegirLetra, true), chip("muy", TX.muy, letra, elegirLetra, true)),
+        h("div", { style: { fontSize: "var(--az-fs-cuerpo)", color: c.textSub, lineHeight: 1.6, marginTop: 12, padding: "12px 12px", background: c.bg2, borderRadius: "var(--az-r)" } }, TX.muestra)),
       lbl(TX.translit),
       caja(
-        RU ? h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
+        RU ? h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } },
           "Подсказка кириллицей (", h("i", null, "о́ла"), ") помогает читать в начале. Когда ты уже читаешь по-испански, лучше его скрыть: так ты читаешь сам. ",
           h("b", { style: { color: c.text } }, "Автоматически:"), " видно в уроках 1–3 и скрыто с 4-го (в словаре и других разделах — по уроку, на котором ты сейчас). В «Алфавите» и в уроке 1 оно видно всегда: там произношение и есть то, что ты учишь.")
-        : h("div", { style: { fontSize: 13.5, color: c.textMuted, lineHeight: 1.6 } },
+        : h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } },
           "La transliteración (", h("i", null, "jarashó"), ") ayuda a leer al principio. Cuando ya lees el cirílico, ocultarla te obliga a leer en ruso. ",
           h("b", { style: { color: c.text } }, "Automática:"), " se ve en las Unidades 1 a 3 y se oculta desde la 4 (en el Diccionario, Verbos, Casos y Diálogos, según la unidad en la que estás). Siempre se ve en Alfabeto y en la Unidad 1, donde la pronunciación es lo que se aprende, y en los diálogos la puedes volver a prender cuando quieras."),
         h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("auto", TX.auto), chip("si", TX.mostrar), chip("no", TX.ocultar))),

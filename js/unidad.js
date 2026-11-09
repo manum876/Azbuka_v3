@@ -142,67 +142,67 @@
 
   function Estilos({ c }) {
     return h("style", null, `
-      .pr{position:fixed;inset:0;z-index:300;background:${c.bg};box-shadow:0 0 0 100vmax ${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-      .pr-in{max-width:640px;margin:0 auto;padding:var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px));min-height:100%;display:flex;flex-direction:column;}
-      .pr-x{position:fixed;top:var(--az-top,6vh);right:3vw;width:36px;height:36px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
-      .pr-kick{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};padding-right:48px;}
-      .pr-bar{height:4px;border-radius:2px;background:${c.bg3};margin:10px 48px 18px 0;overflow:hidden;}
-      .pr-bar > div{height:100%;background:${c.gold};transition:width .3s ease;}
-      .pr-card{background:${c.card};border:1px solid ${c.border};border-radius:16px;padding:20px 18px;}
-      .pr-pide{font-size:17px;font-weight:700;line-height:1.4;}
-      .pr-grande{font-size:clamp(34px,11vw,48px);font-weight:800;color:${c.gold};text-align:center;margin:18px 0 6px;line-height:1.15;word-break:break-word;letter-spacing:.5px;}
+      .pr{position:fixed;inset:0;z-index:300;background:${c.bg};box-shadow:0 0 0 100vmax ${c.bg};color:${c.text};font-family:'Noto Sans',sans-serif;overflow-y:auto;-webkit-overflow-scrolling:touch;;animation:azSube var(--az-t-media) var(--az-curva) both}
+      .pr-in{max-width:760px;margin:0 auto;padding:var(--az-top,6vh) 3vw calc(4vh + var(--az-bottom,0px));min-height:100%;display:flex;flex-direction:column;}
+      .pr-x{position:fixed;top:var(--az-top,6vh);right:3vw;width:40px;height:40px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:var(--az-fs-cuerpo);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;z-index:301;font-family:inherit;}
+      .pr-kick{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${c.gold};padding-right:52px;}
+      .pr-bar{height:4px;border-radius:var(--az-r-pildora);background:${c.bg2};margin:12px 48px 16px 0;overflow:hidden;}
+      .pr-bar > div{height:100%;background:${c.gold};transition:width var(--az-t-media) var(--az-curva);}
+      .pr-card{background:${c.card};border:1px solid ${c.border};border-radius:var(--az-r);padding:12px 16px;}
+      .pr-pide{font-size:var(--az-fs-destacado);font-weight:700;line-height:1.4;}
+      .pr-grande{font-size:clamp(34px,11vw,48px);font-weight:800;color:${c.gold};text-align:center;margin:16px 0 8px;line-height:1.15;word-break:break-word;letter-spacing:.5px;}
       .pr-grande.frase{font-size:clamp(22px,7vw,30px);letter-spacing:0;}   /* frases (02/10/2026): no se cortan en renglones sueltos */
       .pr-oir{display:flex;justify-content:center;gap:12px;margin:16px 0 4px;}
-      .pr-texto{margin-bottom:14px;padding:12px 14px;border-radius:12px;background:${c.bg2};border:1px solid ${c.border};font-size:16px;line-height:1.6;}
-      .pr-oir button{width:64px;height:64px;border-radius:32px;background:${c.gold}22;border:1px solid ${c.gold};color:${c.gold};font-size:22px;cursor:pointer;font-family:inherit;}
-      .pr-pista{font-size:13px;color:${c.textMuted};text-align:center;margin-top:6px;}
-      .pr-ops{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px;}
+      .pr-texto{margin-bottom:12px;padding:12px 16px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};font-size:var(--az-fs-destacado);line-height:1.6;}
+      .pr-oir button{width:64px;height:64px;border-radius:var(--az-r-pildora);background:${c.gold}14;border:1px solid ${c.gold};color:${c.gold};font-size:var(--az-fs-titulo);cursor:pointer;font-family:inherit;}
+      .pr-pista{font-size:var(--az-fs-chico);color:${c.textMuted};text-align:center;margin-top:8px;}
+      .pr-ops{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
       .pr-ops.una{grid-template-columns:1fr;}
-      .pr-op{min-height:52px;padding:10px 12px;border-radius:12px;background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:16px;font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3;}
-      .pr-op.ok{background:${VERDE}22;border-color:${VERDE};color:${VERDE};}
-      .pr-op.mal{background:${ROJO}22;border-color:${ROJO};color:#D9776F;}
+      .pr-op{min-height:52px;padding:12px 16px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:var(--az-fs-cuerpo);font-weight:600;cursor:pointer;font-family:inherit;line-height:1.3;}
+      .pr-op.ok{background:${VERDE}14;border-color:${VERDE};color:${VERDE};}
+      .pr-op.mal{background:${ROJO}14;border-color:${ROJO};color:#B5605C;}
       .pr-op:disabled{cursor:default;}
-      .pr-in-row{display:flex;gap:8px;margin-top:18px;}
-      .pr-input{flex:1;min-width:0;font-size:18px;padding:12px 12px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};}
-      .pr-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px 16px;border-radius:10px;border:1px solid ${c.gold};background:${c.gold};color:${c.bg};font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;}
-      .pr-btn.sec{background:${c.bg3};border-color:${c.border};color:${c.text};}
-      .pr-btn:disabled{opacity:.45;cursor:default;}
-      .pr-exp{margin-top:14px;font-size:14px;line-height:1.55;color:${c.textSub};}
+      .pr-in-row{display:flex;gap:8px;margin-top:12px;}
+      .pr-input{flex:1;min-width:0;font-size:var(--az-fs-subtitulo);padding:10px 12px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};}
+      .pr-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 16px;border-radius:var(--az-r);border:1px solid ${c.gold};background:${c.gold};color:${c.bg};font-size:var(--az-fs-cuerpo);font-weight:700;cursor:pointer;font-family:inherit;}
+      .pr-btn.sec{background:${c.bg2};border-color:${c.border};color:${c.text};}
+      .pr-btn:disabled{opacity:.4;cursor:default;}
+      .pr-exp{margin-top:12px;font-size:var(--az-fs-chico);line-height:1.55;color:${c.textSub};}
       .pr-exp b{color:${c.text};}
-      .pr-rec{margin-top:8px;font-size:13.5px;line-height:1.5;color:${c.textSub};padding-left:10px;border-left:2px solid ${c.gold}66;}
-      .pr-cu{display:block;margin-top:12px;background:none;border:none;padding:4px 0;color:${c.gold};font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
-      .pr-res{display:inline-block;font-size:13px;font-weight:800;border-radius:8px;padding:3px 10px;margin-top:14px;}
-      .pr-pie{margin-top:auto;padding-top:18px;}
-      .pr-fichas{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;min-height:48px;}
-      .pr-ficha{min-width:44px;height:48px;padding:0 10px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:22px;font-weight:700;cursor:pointer;font-family:inherit;}
-      .pr-armado{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:56px;padding:4px;border-bottom:2px solid ${c.gold}66;margin-top:14px;}
-      .pr-armado .pr-ficha{background:${c.gold}22;border-color:${c.gold};}
+      .pr-rec{margin-top:8px;font-size:var(--az-fs-chico);line-height:1.5;color:${c.textSub};padding-left:12px;border-left:3px solid ${c.gold}88;}
+      .pr-cu{display:block;margin-top:12px;background:none;border:none;padding:4px 0;color:${c.gold};font-size:var(--az-fs-chico);font-weight:700;cursor:pointer;font-family:inherit;}
+      .pr-res{display:inline-block;font-size:var(--az-fs-chico);font-weight:800;border-radius:var(--az-r-chico);padding:4px 12px;margin-top:12px;}
+      .pr-pie{margin-top:auto;padding-top:16px;}
+      .pr-fichas{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px;min-height:48px;}
+      .pr-ficha{min-width:44px;height:48px;padding:0 12px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:var(--az-fs-titulo);font-weight:700;cursor:pointer;font-family:inherit;}
+      .pr-armado{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:56px;padding:4px;border-bottom:2px solid ${c.gold}88;margin-top:12px;}
+      .pr-armado .pr-ficha{background:${c.gold}14;border-color:${c.gold};}
       .pr-fichas.bloques,.pr-armado.bloques{flex-direction:column;align-items:stretch;}
-      .pr-ficha.bloque{height:auto;min-height:44px;padding:9px 12px;font-size:15px;font-weight:600;text-align:left;line-height:1.35;}
-      .pr-ctx{margin-bottom:14px;display:flex;flex-direction:column;gap:6px;}
-      .pr-ctx-l{display:flex;gap:8px;align-items:baseline;font-size:15px;line-height:1.4;padding:8px 10px;border-radius:10px;background:${c.bg2};border:1px solid ${c.border};}
+      .pr-ficha.bloque{height:auto;min-height:44px;padding:8px 12px;font-size:var(--az-fs-cuerpo);font-weight:600;text-align:left;line-height:1.35;}
+      .pr-ctx{margin-bottom:12px;display:flex;flex-direction:column;gap:8px;}
+      .pr-ctx-l{display:flex;gap:8px;align-items:baseline;font-size:var(--az-fs-cuerpo);line-height:1.4;padding:8px 12px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};}
       .pr-ctx-q{border-style:dashed;color:${c.textMuted};}
-      .pr-ctx-p{font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.gold};flex-shrink:0;}
-      .pr-mapa{width:100%;display:block;margin:12px 0 4px;border-radius:12px;background:${c.bg2};border:1px solid ${c.border};}
-      .pr-voz{margin-top:10px;font-size:13px;line-height:1.5;color:${c.textSub};background:${c.gold}14;border:1px solid ${c.gold}55;border-radius:10px;padding:9px 12px;}
+      .pr-ctx-p{font-size:var(--az-fs-micro);font-weight:700;letter-spacing:1px;text-transform:uppercase;color:${c.gold};flex-shrink:0;}
+      .pr-mapa{width:100%;display:block;margin:12px 0 4px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};}
+      .pr-voz{margin-top:12px;font-size:var(--az-fs-chico);line-height:1.5;color:${c.textSub};background:${c.gold}14;border:1px solid ${c.gold}33;border-radius:var(--az-r);padding:8px 12px;}
       .pr-chat{display:flex;flex-direction:column;gap:8px;margin-top:12px;}
-      .pr-msg{max-width:85%;padding:9px 12px;border-radius:14px;font-size:16px;line-height:1.4;}
+      .pr-msg{max-width:85%;padding:8px 12px;border-radius:var(--az-r);font-size:var(--az-fs-destacado);line-height:1.4;}
       .pr-msg.bot{align-self:flex-start;background:${c.bg2};border:1px solid ${c.border};border-bottom-left-radius:4px;}
-      .pr-msg.yo{align-self:flex-end;background:${c.gold}22;border:1px solid ${c.gold}66;border-bottom-right-radius:4px;}
-      .pr-msg-es{font-size:12px;color:${c.textMuted};margin-top:3px;}
+      .pr-msg.yo{align-self:flex-end;background:${c.gold}14;border:1px solid ${c.gold}88;border-bottom-right-radius:4px;}
+      .pr-msg-es{font-size:var(--az-fs-nota);color:${c.textMuted};margin-top:4px;}
       .pr-em{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;}
-      .pr-em .pr-op.sel{border-color:${c.gold};background:${c.gold}22;color:${c.gold};}
+      .pr-em .pr-op.sel{border-color:${c.gold};background:${c.gold}14;color:${c.gold};}
       .pr-em .pr-op.hecho{opacity:.35;}
-      .pr-lista{margin-top:10px;}
-      .pr-frase{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px;}
-      .pr-tw{min-height:50px;padding:8px 14px;border-radius:12px;background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:21px;font-weight:700;cursor:pointer;font-family:inherit;}
-      .pr-tw.ok{background:${VERDE}22;border-color:${VERDE};color:${VERDE};}
-      .pr-tw.mal{background:${ROJO}22;border-color:${ROJO};color:#D9776F;}
+      .pr-lista{margin-top:8px;}
+      .pr-frase{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px;}
+      .pr-tw{min-height:50px;padding:8px 16px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-size:var(--az-fs-titulo);font-weight:700;cursor:pointer;font-family:inherit;}
+      .pr-tw.ok{background:${VERDE}14;border-color:${VERDE};color:${VERDE};}
+      .pr-tw.mal{background:${ROJO}14;border-color:${ROJO};color:#B5605C;}
       .pr-tw:disabled{cursor:default;}
-      .pr-area{width:100%;box-sizing:border-box;font-size:17px;line-height:1.4;padding:12px;border-radius:10px;background:${c.bg3};border:1px solid ${c.border};color:${c.text};font-family:inherit;resize:none;margin-top:16px;display:block;}
+      .pr-area{width:100%;box-sizing:border-box;font-size:var(--az-fs-destacado);line-height:1.4;padding:12px;border-radius:var(--az-r);background:${c.bg2};border:1px solid ${c.border};color:${c.text};font-family:inherit;resize:none;margin-top:16px;display:block;}
       .pr-escena{font-size:44px;text-align:center;margin:4px 0 8px;line-height:1.1;}
-      .pr-nota{font-size:12.5px;color:${c.gold};margin-top:4px;}
-      .pr-lista > div{padding:10px 0;border-top:1px solid ${c.border};font-size:14px;line-height:1.45;}
+      .pr-nota{font-size:var(--az-fs-nota);color:${c.gold};margin-top:4px;}
+      .pr-lista > div{padding:12px 0;border-top:1px solid ${c.border};font-size:var(--az-fs-chico);line-height:1.45;}
     `);
   }
 
@@ -242,7 +242,7 @@
     const col = r === AZ_BIEN ? VERDE : r === AZ_CASI ? NARANJA : ROJO;
     const txt = T(r === AZ_BIEN ? "✓ Bien" : r === AZ_CASI ? "≈ Casi" : "✗ Mal");
     return h("div", null,
-      h("span", { className: "pr-res", style: { color: col, background: col + "22", border: "1px solid " + col } }, txt),
+      h("span", { className: "pr-res", style: { color: col, background: col + "14", border: "1px solid " + col } }, txt),
       ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)),
       r !== AZ_BIEN && ej.recordar && h("div", { className: "pr-rec" }, azFmt(T("Para recordarlo: ") + ej.recordar)),
       h(BotonRegla, { ej, r }),
@@ -402,7 +402,7 @@
     if (typeof MAPA === "undefined") return null;
     const v = MAPA.vistas[mapa.vista] || MAPA.vistas.mundo;
     return h("svg", { viewBox: v.vb, className: "pr-mapa", role: "img", "aria-label": T("Mapa") },
-      h("path", { d: MAPA.fondo, fill: c.bg3, stroke: c.bg2, "stroke-width": 2 }),
+      h("path", { d: MAPA.fondo, fill: c.bg2, stroke: c.bg2, "stroke-width": 2 }),
       Object.keys(MAPA.paises).map(k => h("path", { key: k, d: MAPA.paises[k].d, fill: k === mapa.iso ? c.gold : c.border, stroke: c.bg2, "stroke-width": 2 })));
   }
 
@@ -459,7 +459,7 @@
           placeholder: ES ? "Пиши по-испански…" : "Escribe en ruso…", onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
         h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, T("Enviar"))),
       r && r.resultado !== AZ_BIEN && r.palabras && h(AzCorreccion, { r, dark }),
-      r && r.resultado === AZ_MAL && !fin && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, T("Ver la respuesta y seguir")),
+      r && r.resultado === AZ_MAL && !fin && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 12 }, onClick: saltar }, T("Ver la respuesta y seguir")),
       r && r.resultado === AZ_MAL && !fin && h("div", { className: "pr-exp", lang: LL }, T("Por ejemplo: ") + ch.pasos[paso].ok[0].replace("{nombre}", NOMBRE).replace("{lugar}", LUGAR)),
       fin && h("div", { className: "pr-exp" }, T("Conversación terminada.")),
       hecho != null && h(Explicacion, { ej, r: hecho }));
@@ -473,7 +473,7 @@
       h("div", { className: "pr-pide" }, T(ej.audio ? "Escucha. ¿Verdadero o falso?" : "¿Verdadero o falso?")),
       ej.audio && h(Oir, { texto: ej.audio, auto: true }),
       h(Texto, { ej }),
-      h("div", { className: "pr-grande", style: { fontSize: 24, color: "inherit", fontWeight: 700 }, lang: langDe(ej.afirmacion) }, ej.afirmacion),
+      h("div", { className: "pr-grande", style: { fontSize: "var(--az-fs-titulo)", color: "inherit", fontWeight: 700 }, lang: langDe(ej.afirmacion) }, ej.afirmacion),
       h("div", { className: "pr-ops" },
         h("button", { className: "pr-op" + cls(true), disabled: elegida != null, onClick: () => tocar(true) }, T("Verdadero")),
         h("button", { className: "pr-op" + cls(false), disabled: elegida != null, onClick: () => tocar(false) }, T("Falso"))),
@@ -522,9 +522,9 @@
     const sube = Object.keys(ultimo).filter(k => ultimo[k].despues === 2 && ultimo[k].antes !== 2);
     const baja = Object.keys(ultimo).filter(k => ultimo[k].despues === 1 && ultimo[k].antes === 2);
     if (!sube.length && !baja.length) return null;
-    const fila = (t, lista, col) => lista.length > 0 && h("div", { style: { marginTop: 10 } },
-      h("div", { style: { fontSize: 13, fontWeight: 700, color: col } }, t),
-      h("div", { lang: LL, style: { fontSize: 16, fontWeight: 700, marginTop: 4, lineHeight: 1.6 } }, lista.map(etiqueta).join(" · ")));
+    const fila = (t, lista, col) => lista.length > 0 && h("div", { style: { marginTop: 12 } },
+      h("div", { style: { fontSize: "var(--az-fs-chico)", fontWeight: 700, color: col } }, t),
+      h("div", { lang: LL, style: { fontSize: "var(--az-fs-destacado)", fontWeight: 700, marginTop: 4, lineHeight: 1.6 } }, lista.map(etiqueta).join(" · ")));
     return h("div", { className: "pr-card", style: { marginTop: 16, padding: "12px 16px" } },
       fila(T("Ahora dominadas"), sube, VERDE),
       fila(T("Volvieron a «Aprendiendo»"), baja, NARANJA));
@@ -566,7 +566,7 @@
         return h("button", { key: i, className: "pr-tw" + cls, disabled: elegida != null, onClick: () => tocar(i) }, w);
       })),
       encontrada && hecho == null && h(React.Fragment, null,
-        h("div", { className: "pr-pista", style: { marginTop: 14 } }, T("¡Esa es! Ahora escríbela bien:")),
+        h("div", { className: "pr-pista", style: { marginTop: 12 } }, T("¡Esa es! Ahora escríbela bien:")),
         h("div", { className: "pr-in-row" },
           h("input", { ref, className: "pr-input", value: txt, lang: LL, autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
             placeholder: T("La palabra corregida…"), onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
@@ -636,7 +636,7 @@
         return h("button", { key: o, className: "pr-op" + cls, disabled: !!el, lang: langDe(o), onClick: () => elegir(o) }, sinLlavesOp(o));
       })),
       el && h(React.Fragment, null,
-        h("div", { className: "pr-pide", style: { marginTop: 14 } }, T("Ahora escribe la frase bien:")),
+        h("div", { className: "pr-pide", style: { marginTop: 12 } }, T("Ahora escribe la frase bien:")),
         h("div", { className: "pr-in-row" },
           h("input", { ref, className: "pr-input", value: txt, lang: LL, autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
             placeholder: ES ? "Пиши по-испански…" : "Escribe en ruso…", disabled: !!r, onInput: e => setTxt(e.target.value), onKeyDown: e => { if (e.key === "Enter") comprobar(); } }),
@@ -689,8 +689,8 @@
     const fin = r.pts[r.pts.length - 1];
     const lineas = [];
     for (let i = 0; i <= 4; i++) {
-      lineas.push(h("line", { key: "h" + i, x1: X(0), y1: X(i), x2: X(4), y2: X(i), stroke: c.bg3, "stroke-width": 14, "stroke-linecap": "round" }));
-      lineas.push(h("line", { key: "v" + i, x1: X(i), y1: X(0), x2: X(i), y2: X(4), stroke: c.bg3, "stroke-width": 14, "stroke-linecap": "round" }));
+      lineas.push(h("line", { key: "h" + i, x1: X(0), y1: X(i), x2: X(4), y2: X(i), stroke: c.bg2, "stroke-width": 14, "stroke-linecap": "round" }));
+      lineas.push(h("line", { key: "v" + i, x1: X(i), y1: X(0), x2: X(i), y2: X(4), stroke: c.bg2, "stroke-width": 14, "stroke-linecap": "round" }));
     }
     const cuadras = [];
     for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) cuadras.push(h("rect", { key: i + "-" + j, x: X(i) + 9, y: X(j) + 9, width: P - 18, height: P - 18, rx: 6, fill: c.bg2, stroke: c.border }));
@@ -714,7 +714,7 @@
       h("line", { x1: cx, y1: cx, x2: cx + Math.sin(am) * r * 0.78, y2: cx - Math.cos(am) * r * 0.78, stroke: c.gold, "stroke-width": 4, "stroke-linecap": "round" }),
       h("circle", { cx, cy: cx, r: 5, fill: c.gold }));
   }
-  const RelojEj = ({ ej, c }) => ej.reloj ? h("div", { style: { display: "flex", justifyContent: "center", margin: "4px 0 10px" } }, h(Reloj, { h: ej.reloj.h, m: ej.reloj.m, c, size: 140 })) : null;
+  const RelojEj = ({ ej, c }) => ej.reloj ? h("div", { style: { display: "flex", justifyContent: "center", margin: "4px 0 12px" } }, h(Reloj, { h: ej.reloj.h, m: ej.reloj.m, c, size: 140 })) : null;
 
   function Pista({ texto }) {
     const [ver, setVer] = useState(false);
@@ -742,7 +742,7 @@
       !r && h(Pista, { texto: ej.pista }),
       h("textarea", { className: "pr-area", rows: 2, value: txt, lang: LL, autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
         placeholder: ES ? "Напиши по-испански, что бы ты сказал…" : "Escribe en ruso lo que dirías…", onInput: e => { setTxt(e.target.value); if (r && r.nivel === 0) setR(null); } }),
-      h("button", { className: "pr-btn", style: { width: "100%", marginTop: 10 }, onClick: comprobar, disabled: !txt.trim() || (r && r.nivel > 0) }, T("Comprobar")),
+      h("button", { className: "pr-btn", style: { width: "100%", marginTop: 12 }, onClick: comprobar, disabled: !txt.trim() || (r && r.nivel > 0) }, T("Comprobar")),
       r && h(AzSituacionRes, { r, dark }),
       hecho != null && r && ej.nota && h("div", { className: "pr-exp" }, azFmt(ej.nota)),   /* el modelo ya lo muestra AzSituacionRes */
       r && r.nivel === 0 && !examen && h("button", { className: "pr-btn sec", style: { marginTop: 12, width: "100%" }, onClick: () => { setTxt(""); setR(null); } }, T("Intentar de nuevo")));
@@ -787,14 +787,14 @@
             h("div", { className: "pr-msg-es" }, ES ? st.ru : st.es)),
           i < paso && h("div", { className: "pr-msg yo", lang: LL }, resp[i] ? resp[i].t : "…",
             resp[i] && resp[i].nota && h("div", { className: "pr-nota", lang: ES ? "ru" : "es" }, resp[i].nota))))),
-      !fin && h("div", { className: "pr-pista", style: { textAlign: "left", marginTop: 10 } }, azFmt(TX("Tu turno: ") + T.pasos[paso].tarea)),
+      !fin && h("div", { className: "pr-pista", style: { textAlign: "left", marginTop: 12 } }, azFmt(TX("Tu turno: ") + T.pasos[paso].tarea)),
       !fin && !r && h(Pista, { texto: T.pasos[paso].pista }),
       !fin && h("div", { className: "pr-in-row" },
         h("input", { className: "pr-input", value: txt, lang: LL, autocapitalize: "sentences", autocorrect: "off", spellcheck: false, autocomplete: "off",
           placeholder: ES ? "Пиши по-испански…" : "Escribe en ruso…", onInput: e => { setTxt(e.target.value); setR(null); }, onKeyDown: e => { if (e.key === "Enter") enviar(); } }),
         h("button", { className: "pr-btn", onClick: enviar, disabled: !txt.trim() }, TX(T.chat ? "Enviar" : "Decir"))),
       r && h(AzSituacionRes, { r, dark, sinModelo: true }),
-      r && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 10 }, onClick: saltar }, TX("Ver una respuesta y seguir")),
+      r && h("button", { className: "pr-btn sec", style: { width: "100%", marginTop: 12 }, onClick: saltar }, TX("Ver una respuesta y seguir")),
       fin && h("div", { className: "pr-exp" }, ES ? (salto ? "Разговор окончен. Какой-то ответ ты подсмотрел: этот разговор вернётся в другом занятии." : "Разговор окончен. Отлично!") : salto ? "Conversación terminada. Algún turno lo viste resuelto: vuelve en otra sesión." : "Conversación terminada. ¡Bien!"),
       hecho != null && ej.explicacion && h("div", { className: "pr-exp" }, azFmt(ej.explicacion)));
   }
@@ -867,11 +867,11 @@
     if (fase === "inicio") {
       cuerpo = h(React.Fragment, null,
         h("div", { className: "pr-kick" }, T(examen ? "Evaluación" : "Práctica")),
-        h("div", { style: { fontSize: 26, fontWeight: 800, marginTop: 6, paddingRight: 48 } }, titulo),
-        h("div", { className: "pr-exp", style: { fontSize: 15 } }, examen ? examen.intro : intro || (ES
+        h("div", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, marginTop: 8, paddingRight: 48 } }, titulo),
+        h("div", { className: "pr-exp", style: { fontSize: "var(--az-fs-cuerpo)" } }, examen ? examen.intro : intro || (ES
           ? (n || 12) + " " + plRu(n || 12, "упражнение", "упражнения", "упражнений") + " из " + pool.length + ". Сначала идут те, что встречались реже всего, а трудные возвращаются."
           : (n || 12) + " ejercicios elegidos entre " + pool.length + ". Primero salen los que menos practicaste, y los que te costaron vuelven.")),
-        aviso && h("div", { style: { marginTop: 14, background: c.gold + "14", border: `1px solid ${c.gold}66`, borderRadius: 10, padding: "12px 14px", fontSize: 14.5, lineHeight: 1.5, fontWeight: 600 } }, aviso),
+        aviso && h("div", { style: { marginTop: 12, background: c.gold + "14", border: `1px solid ${c.gold}88`, borderRadius: "var(--az-r)", padding: "12px 14px", fontSize: "var(--az-fs-cuerpo)", lineHeight: 1.5, fontWeight: 600 } }, aviso),
         h("div", { className: "pr-pie" }, h("button", { className: "pr-btn", style: { width: "100%" }, onClick: empezar }, T("Empezar"))));
     } else if (fase === "ej" && ej) {
       const F = FORMAS[ej.forma];
@@ -879,7 +879,7 @@
       cuerpo = h(React.Fragment, null,
         h("div", { className: "pr-kick" }, titulo + " · " + (i + 1) + (ES ? " из " : " de ") + lista.length),
         h("div", { className: "pr-bar" }, h("div", { style: { width: ((i + (hecho != null ? 1 : 0)) / lista.length * 100) + "%" } })),
-        examen && h("div", { className: "pr-pista", style: { textAlign: "left", margin: "-8px 0 10px" } }, T("Parte: ") + ej.parte),
+        examen && h("div", { className: "pr-pista", style: { textAlign: "left", margin: "-8px 0 12px" } }, T("Parte: ") + ej.parte),
         h("div", { className: "pr-card", key: ej.id }, F ? h(F, { ej, onRes: anotar, hecho, dark, c, unidad, examen: !!examen || !!onFin, medio: entiende === "medio", mismas: azMismaConsigna(pool, ej) }) : T("Ejercicio desconocido")),
         h("div", { className: "pr-pie" },
           h("button", { className: "pr-btn", style: { width: "100%" }, disabled: hecho == null, onClick: siguiente }, T(i + 1 < lista.length ? "Siguiente" : "Ver resultado"))));
@@ -895,16 +895,16 @@
       cuerpo = h(React.Fragment, null,
         h("div", { className: "pr-kick" }, examen.kick || T("Resultado de la evaluación")),
         h("div", { style: { fontSize: 44, fontWeight: 800, marginTop: 8, color: ok ? VERDE : NARANJA } }, Math.round(total * 100) + " %"),
-        h("div", { style: { fontSize: 17, fontWeight: 700, marginTop: 4 } }, ok ? (examen.textoOk || T("Unidad aprobada.")) : (examen.textoNo || T("Todavía no: conviene reforzar antes de seguir."))),
-        h("div", { className: "pr-card", style: { marginTop: 16, padding: "6px 16px" } }, partes.map(x =>
-          h("div", { key: x.p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: x === partes[0] ? "none" : `1px solid ${c.border}` } },
+        h("div", { style: { fontSize: "var(--az-fs-destacado)", fontWeight: 700, marginTop: 4 } }, ok ? (examen.textoOk || T("Unidad aprobada.")) : (examen.textoNo || T("Todavía no: conviene reforzar antes de seguir."))),
+        h("div", { className: "pr-card", style: { marginTop: 16, padding: "8px 16px" } }, partes.map(x =>
+          h("div", { key: x.p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "12px 0", borderTop: x === partes[0] ? "none" : `1px solid ${c.border}` } },
             h("span", { style: { fontWeight: 600 } }, x.p.nombre),
             h("span", { style: { fontWeight: 800, color: x.pct >= examen.aprobado ? VERDE : x.pct >= .5 ? NARANJA : ROJO } }, Math.round(x.pct * 100) + " %")))),
         h(Semaforo, { cambios, c }),
         flojas.length > 0 && h(React.Fragment, null,
-          h("div", { className: "pr-kick", style: { marginTop: 22 } }, T("Para reforzar")),
+          h("div", { className: "pr-kick", style: { marginTop: 24 } }, T("Para reforzar")),
           flojas.map(x => h("button", { key: x.p.nombre, className: "pr-btn sec", style: { width: "100%", marginTop: 8 }, onClick: () => onReforzar && onReforzar(x.p) }, (ES ? "Практиковать: " : "Practicar ") + x.p.nombre.toLowerCase()))),
-        h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 10 } },
+        h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 12 } },
           h("button", { className: "pr-btn" + (ok ? " sec" : ""), onClick: empezar }, examen.repetir || T("Repetir la evaluación")),
           h("button", { className: "pr-btn sec", onClick: onSalir }, T("Volver a la unidad"))));
     } else {
@@ -913,22 +913,22 @@
       const costaron = lista.filter(e => res[e.id] != null && res[e.id] !== AZ_BIEN);
       cuerpo = h(React.Fragment, null,
         h("div", { className: "pr-kick" }, T("Resultado")),
-        h("div", { style: { fontSize: 26, fontWeight: 800, marginTop: 6, paddingRight: 48 } }, titulo),
+        h("div", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, marginTop: 8, paddingRight: 48 } }, titulo),
         h("div", { style: { display: "flex", gap: 8, marginTop: 16 } },
           [[T("Bien"), bien, VERDE], [T("Casi"), casi, NARANJA], [T("Mal"), mal, ROJO]].map(([t, v, col]) =>
-            h("div", { key: t, className: "pr-card", style: { flex: 1, textAlign: "center", padding: "12px 6px" } },
-              h("div", { style: { fontSize: 24, fontWeight: 800, color: col } }, v),
-              h("div", { style: { fontSize: 12, color: c.textMuted, marginTop: 2 } }, t)))),
+            h("div", { key: t, className: "pr-card", style: { flex: 1, textAlign: "center", padding: "12px 8px" } },
+              h("div", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, color: col } }, v),
+              h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 4 } }, t)))),
         costaron.length
           ? h(React.Fragment, null,
-              h("div", { className: "pr-kick", style: { marginTop: 22 } }, T("Para repasar")),
-              h("div", { className: "pr-exp", style: { marginTop: 6 } }, T("Estos vuelven en las próximas sesiones hasta que te salgan bien.")),
+              h("div", { className: "pr-kick", style: { marginTop: 24 } }, T("Para repasar")),
+              h("div", { className: "pr-exp", style: { marginTop: 8 } }, T("Estos vuelven en las próximas sesiones hasta que te salgan bien.")),
               h("div", { className: "pr-lista" }, costaron.map(e => h("div", { key: e.id },
                 h("div", { style: { fontWeight: 700 } }, e.pide || e.afirmacion, e.grande ? " " + e.grande : "", (e.forma === "tocar" || e.forma === "corregir") ? " " + e.palabras.join(" ") : ""),
                 h("div", { style: { color: c.textSub } }, azFmt(e.explicacion))))))
-          : h("div", { className: "pr-exp", style: { marginTop: 18, fontSize: 15 } }, T("Todo bien en esta sesión.")),
+          : h("div", { className: "pr-exp", style: { marginTop: 16, fontSize: "var(--az-fs-cuerpo)" } }, T("Todo bien en esta sesión.")),
         h(Semaforo, { cambios, c }),
-        h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 10 } },
+        h("div", { className: "pr-pie", style: { display: "flex", flexDirection: "column", gap: 12 } },
           !sinOtra && h("button", { className: "pr-btn", onClick: empezar }, T("Otra sesión")),
           h("button", { className: "pr-btn" + (sinOtra ? "" : " sec"), onClick: onSalir }, salir || T("Volver a la unidad"))));
     }

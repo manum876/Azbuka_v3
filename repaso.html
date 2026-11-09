@@ -174,44 +174,44 @@ function App() {
   const ir = href => e => azNavigate(e, href);
 
   let cuerpo;
-  if (!ses) cuerpo = h("div", { className: "u-text", style: { marginTop: 18 } }, TX.armando);
-  else if (ses.error) cuerpo = h("div", { className: "u-text", style: { marginTop: 18 } }, TX.error);
+  if (!ses) cuerpo = h("div", { className: "u-text", style: { marginTop: 16 } }, TX.armando);
+  else if (ses.error) cuerpo = h("div", { className: "u-text", style: { marginTop: 16 } }, TX.error);
   else if (!ses.lista.length) cuerpo = h(React.Fragment, null,
-    h("div", { className: "u-card", style: { padding: "16px 18px", marginTop: 16 } },
-      h("div", { style: { fontSize: 17, fontWeight: 800 } }, ultimo ? TX.nadaHoy : TX.nadaTodavia),
-      h("div", { className: "u-text", style: { fontSize: 14.5, marginTop: 6 } }, ultimo ? TX.vuelve : TX.empieza)),
+    h("div", { className: "u-card", style: { padding: "16px 16px", marginTop: 16 } },
+      h("div", { style: { fontSize: "var(--az-fs-destacado)", fontWeight: 800 } }, ultimo ? TX.nadaHoy : TX.nadaTodavia),
+      h("div", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)", marginTop: 8 } }, ultimo ? TX.vuelve : TX.empieza)),
     h("a", { className: "ubtn", href: ultimo ? ultimo.href : TX.inicio, onClick: ir(ultimo ? ultimo.href : TX.inicio), style: { display: "block", textAlign: "center", textDecoration: "none", boxSizing: "border-box" } }, ultimo ? TX.seguir : TX.primera));
   else {
     const r = ses.regla && typeof azRegla === "function" ? azRegla(ses.regla.id) : null;
     const s = r && r.seccion;
     const ej = s && s.ejemplos && s.ejemplos[0];
     cuerpo = h(React.Fragment, null,
-      h("div", { className: "u-card", style: { padding: "14px 18px", marginTop: 16 } },
+      h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 16 } },
         [[TX.paraRepasar, ses.cuentas.repaso + ses.lista.filter(e => e.motivo === "regla").length],
          [ses.actual ? TX.deUnidad(ses.actual) : TX.nuevos, ses.cuentas.unidad]].map(([t, v], k) =>
-          h("div", { key: t, style: { display: "flex", justifyContent: "space-between", padding: "8px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: 15 } },
+          h("div", { key: t, style: { display: "flex", justifyContent: "space-between", padding: "8px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: "var(--az-fs-cuerpo)" } },
             h("span", { style: { fontWeight: 600 } }, t), h("span", { style: { fontWeight: 800, color: c.gold } }, v))),
-        h("div", { style: { fontSize: 12.5, color: c.textMuted, marginTop: 6, lineHeight: 1.5 } },
+        h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 8, lineHeight: 1.5 } },
           TX.resumen(ses.lista.length, ses.cuentas.manana, ses.cuentas.aprendidos))),
       s && h(React.Fragment, null,
         h("div", { className: "u-sec" }, TX.regla),
-        h("div", { className: "u-card", style: { padding: "14px 18px" } },
-          h("div", { style: { fontSize: 11, fontWeight: 700, letterSpacing: 1.2, textTransform: "uppercase", color: c.textMuted } }, TX.unidad(r.unidad) + " · " + r.modulo.titulo),
-          h("div", { style: { fontSize: 17, fontWeight: 800, marginTop: 4 } }, s.titulo),
-          ses.regla.floja > 0 && h("div", { style: { fontSize: 13, color: "#E2884A", fontWeight: 700, marginTop: 4 } }, TX.costo(ses.regla.floja)),
-          s.destacado && h("div", { className: "u-dest", style: { marginTop: 10 } }, azFmt(s.destacado)),
-          ej && h("div", { style: { marginTop: 10, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: 10, padding: "10px 12px" } },
+        h("div", { className: "u-card", style: { padding: "14px 16px" } },
+          h("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.2, textTransform: "uppercase", color: c.textMuted } }, TX.unidad(r.unidad) + " · " + r.modulo.titulo),
+          h("div", { style: { fontSize: "var(--az-fs-destacado)", fontWeight: 800, marginTop: 4 } }, s.titulo),
+          ses.regla.floja > 0 && h("div", { style: { fontSize: "var(--az-fs-chico)", color: "#E2884A", fontWeight: 700, marginTop: 4 } }, TX.costo(ses.regla.floja)),
+          s.destacado && h("div", { className: "u-dest", style: { marginTop: 12 } }, azFmt(s.destacado)),
+          ej && h("div", { style: { marginTop: 12, background: c.bg2, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", padding: "12px 12px" } },
             /* La frase en la lengua que se aprende y, abajo, la traducción (Abecé: es / ru) */
-            h("div", { lang: ABECE ? "es" : "ru", style: { fontSize: 16, fontWeight: 700 } }, String(ABECE ? ej.es : ej.ru).replace(/[{}]/g, "")),
-            h("div", { lang: ABECE ? "ru" : "es", style: { fontSize: 13.5, color: c.textMuted, marginTop: 2 } }, ABECE ? ej.ru : ej.es)),
+            h("div", { lang: ABECE ? "es" : "ru", style: { fontSize: "var(--az-fs-destacado)", fontWeight: 700 } }, String(ABECE ? ej.es : ej.ru).replace(/[{}]/g, "")),
+            h("div", { lang: ABECE ? "ru" : "es", style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, marginTop: 4 } }, ABECE ? ej.ru : ej.es)),
           h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => setVerRegla(true) }, TX.verRegla))),
-      h("button", { className: "ubtn", style: { marginTop: 22 }, onClick: () => setPractica(true) }, TX.empezar));
+      h("button", { className: "ubtn", style: { marginTop: 24 }, onClick: () => setPractica(true) }, TX.empezar));
   }
 
   return h(React.Fragment, null,
     h(AzEstilosUnidad, { c, green }),
     h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
-      h("div", { style: { animation: "fadeIn 0.3s ease", paddingTop: 18, paddingBottom: 24 } },
+      h("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16, paddingBottom: 24 } },
         h("div", { className: "u-kicker" }, TX.kicker),
         h("h1", { className: "u-title" }, TX.titulo),
         h("div", { className: "u-text", style: { marginTop: 8 } }, TX.intro),

@@ -22,15 +22,72 @@
   font-style: normal;
   font-display: swap;
 }
+/* Símbolos de la interfaz (manual de estilo §1.1 y §8, 09/11/2026):
+   Azbuka Símbolos, con el MISMO nombre de familia y solo para estos
+   caracteres (unicode-range). Va después de Noto Sans, así gana para
+   ellos en cualquier lugar que pida 'Noto Sans': ▶ ■ ✕ ☰ ‹ › → ⊞ ▸ ▾
+   ✓ ≈ ✗ ＋ ✎ ↑ ↓ ↻ ↺ ⌕ ◑ ● ○ ★ ☆ ← ↔ ≠ ≤ ≥. Se ven iguales en todos
+   los teléfonos, ▶ nunca sale como emoji y todos quedan centrados a la
+   misma altura. Se genera con herramientas/fuentes/azbuka-simbolos.py;
+   un símbolo nuevo en la interfaz se agrega primero a esa fuente. */
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('azbuka-simbolos.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+2039-203A, U+2190-2194, U+21BA-21BB, U+2248, U+2260, U+2264-2265, U+229E, U+2315, U+25A0, U+25B6, U+25B8, U+25BE, U+25CB, U+25CF, U+25D1, U+2605-2606, U+2630, U+270E, U+2713, U+2715, U+2717, U+FF0B;
+}
 body { font-family: 'Noto Sans', sans-serif; }
 
-/* Cursiva cirílica (25/09/2026): Marck Script, embebida para que se vea
-   igual en todos los navegadores (la cursiva genérica del sistema cambia
-   según el navegador y en algunos es Comic Sans). Licencia OFL:
-   marck-script-OFL.txt. Se usa con font-family: 'CyrCursive', cursive. */
+/* Escala tipográfica (manual de estilo, 06/11/2026). Toda la app pide
+   los tamaños por nombre: font-size: var(--az-fs-cuerpo) en CSS y
+   fontSize: "var(--az-fs-cuerpo)" en los estilos de JS. Nunca un número.
+   --az-escala es el «Tamaño de letra» de Ajustes (1 · 1.12 · 1.2), que
+   pone core.js. Las letras gigantes (display: Alfabeto, tarjetas, emoji
+   de escena) y los íconos del shell quedan en px y no cambian. */
+:root {
+  --az-escala: 1;
+  --az-fs-micro:     calc(12px   * var(--az-escala));  /* etiquetas en mayúsculas, kickers, contadores */
+  --az-fs-nota:      calc(13.5px * var(--az-escala));  /* pistas, fechas, descripciones de una línea */
+  --az-fs-chico:     calc(15px   * var(--az-escala));  /* definiciones, chips, botones, resultados */
+  --az-fs-cuerpo:    calc(16.5px * var(--az-escala));  /* teoría, texto de hojas, campos de texto */
+  --az-fs-destacado: calc(18px   * var(--az-escala));  /* acepciones, diálogos, frases de ejemplo */
+  --az-fs-subtitulo: calc(20px   * var(--az-escala));  /* títulos de tarjeta y de bloque */
+  --az-fs-titulo:    calc(26px   * var(--az-escala));  /* títulos de página y de hoja */
+  --az-fs-heroe:     calc(34px   * var(--az-escala));  /* palabra principal de la ficha */
+
+  /* Espacios (manual §3). Todo espacio sale de esta escala; las páginas
+     piden la situación por nombre: margin-top: var(--az-esp-bloque). */
+  --az-esp-junto:   4px;   /* etiqueta → contenido, título → subtítulo */
+  --az-esp-grupo:   8px;   /* texto → elemento, entre botones, en fila */
+  --az-esp-bloque:  12px;  /* entre bloques, tarjetas de una lista, ícono ↔ texto, relleno vertical */
+  --az-esp-borde:   16px;  /* costados de tarjetas y botones, header → contenido */
+  --az-esp-seccion: 24px;  /* entre secciones */
+
+  /* Radios (manual §4) */
+  --az-r-chico: 8px;       /* piezas chicas: etiqueta de categoría, número, botoncito */
+  --az-r:       14px;      /* todo lo demás: tarjetas, hojas, botones, chips, campos */
+  --az-r-pildora: 999px;   /* barras de progreso, botones flotantes, botones redondos */
+
+  /* Animaciones (manual §9) */
+  --az-t-rapida: 150ms;    /* responder a un toque, giro de la flecha */
+  --az-t-media:  300ms;    /* todo lo que aparece o se mueve */
+  --az-curva:    cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Cursiva (25/09/2026; Azbuka Script desde el 06/11/2026): Marck Script
+   modificada para Azbuka, embebida para que se vea igual en todos los
+   navegadores. Cambios: las minúsculas (cirílicas y latinas) un 20 % más
+   grandes, para que se lean al lado de Noto Sans, y la marca de acento
+   (U+0301) dibujada con el trazo de la cursiva y anclada sobre cada vocal.
+   Como «Marck Script» es nombre reservado (OFL), la versión modificada se
+   llama Azbuka Script. Licencia: azbuka-script-OFL.txt. Se genera con
+   herramientas/fuentes/azbuka-script.py. Se usa con
+   font-family: 'CyrCursive', cursive. */
 @font-face {
   font-family: 'CyrCursive';
-  src: url('marck-script.woff2') format('woff2');
+  src: url('azbuka-script.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -42,26 +99,36 @@ body { font-family: 'Noto Sans', sans-serif; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #2A2A38; border-radius: 3px; }
 
+/* Animaciones (manual §9). fadeIn: entrar a una página, módulo, pestaña
+   o desplegable (sube 8 px). azSube: abrir una hoja (sube 24 px).
+   azFlota: avisos, desafío, burbuja, corrector. azVelo: el velo. */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+@keyframes azSube {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes azFlota {
+  from { opacity: 0; transform: translateY(4px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes azVelo { from { opacity: 0; } to { opacity: 1; } }
 
 .letter-card {
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  transition: transform var(--az-t-rapida) var(--az-curva);
   cursor: pointer;
-  animation: fadeIn 0.3s ease both;
-}
-.letter-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 32px #C9A84C20;
-  border-color: #C9A84C60 !important;
+  animation: fadeIn var(--az-t-media) var(--az-curva) both;
 }
 .letter-card:active { transform: scale(0.97); }
 
-.btn { transition: all 0.18s; cursor: pointer; border: none; font-family: inherit; }
-.btn:hover { opacity: 0.85; }
-.btn:active { transform: scale(0.96); }
+/* Tocar (manual §5.1 y §9): todo lo tocable se achica al 97 %. Sin efecto
+   al pasar el mouse (09/11/2026). */
+.btn { transition: transform var(--az-t-rapida) var(--az-curva), background-color var(--az-t-rapida), border-color var(--az-t-rapida), color var(--az-t-rapida); cursor: pointer; border: none; font-family: inherit; }
+.btn:active { transform: scale(0.97); }
+.btn:disabled, .btn[aria-disabled="true"] { opacity: 0.4; cursor: default; }
+.btn:disabled:active { transform: none; }
 
 input { font-family: inherit; }
 input:focus { outline: none; border-color: #C9A84C !important; }
@@ -73,3 +140,9 @@ input:focus { outline: none; border-color: #C9A84C !important; }
 /* Transliteración oculta desde Ajustes (02/10/2026): core.js pone la
    clase az-sin-tl en <html>; todo lo marcado az-tl desaparece. */
 .az-sin-tl .az-tl { display: none !important; }
+
+/* Reducir movimiento (manual §9): si el teléfono lo pide (Accesibilidad),
+   nada se desplaza ni se agranda: solo cambia. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+}

@@ -253,7 +253,7 @@ Azbuka uses **two licenses**, because software and educational content have diff
 | Preact and htm (`assets/preact.js`) | MIT and Apache 2.0 (`assets/preact-LICENSE.txt`) |
 | supabase-js (`assets/supabase.js`) | MIT (`assets/supabase-LICENSE.txt`) |
 | jsPDF and fflate | MIT (`assets/jspdf-LICENSE.txt`, `assets/fflate-LICENSE.txt`) |
-| Noto Sans and Marck Script fonts | SIL Open Font License (`assets/*-OFL.txt`) |
+| Noto Sans, Azbuka Script (modified Marck Script) and Azbuka Símbolos (from Noto Sans Symbols, Symbols 2 and Math) fonts | SIL Open Font License (`assets/*-OFL.txt`) |
 | Natural Earth map | Public domain |
 | Silero voices (`Azbuka_voces` repository) | CC BY-NC 4.0: non-commercial use only |
 

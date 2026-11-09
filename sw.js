@@ -36,7 +36,7 @@
    sumarlo a AZ_PRECACHE con su carpeta. Si no está, igual se guarda la primera vez
    que el alumno lo abre con internet.
    ============================================================ */
-const AZ_CACHE = "azbuka-v3";
+const AZ_CACHE = "azbuka-v4";   /* v4 (09/11/2026): manual de estilo, tanda 1 */
 const AZ_ESPERA = 1500;
 /* Se sirven desde la copia guardada y se actualizan en segundo plano (27/10/2026) */
 const AZ_PESADOS = /\/(assets\/|data\/data-(lexicon|lexicon-es|casos|verbos|verbos-es|formas-es|masha)\.js$)/;
@@ -55,8 +55,8 @@ const AZ_PRECACHE = [
   "data/data-lexicon.js", "data/data-mapa.js", "data/data-unidad-1.js", "data/data-unidad-2.js",
   "data/data-unidad-3.js", "data/data-unidad-4.js", "data/data-unidad-5.js", "data/data-unidad-6.js", "data/data-unidad-7.js", "data/data-unidad-8.js", "data/data-unidad-9.js", "data/data-unidad-10.js", "data/data-unidad-11.js", "data/data-unidad-12.js", "data/data-unidad-13.js", "data/data-unidad-14.js", "data/data-verbos.js", "assets/apple-touch-icon.png", "assets/core.css",
   "assets/fflate.min.js", "assets/icon-192.png", "assets/icon-512.png",
-  "assets/icon-maskable-512.png", "assets/apple-touch-icon-abece.png", "assets/icon-abece-192.png", "assets/icon-abece-512.png", "assets/icon-abece-maskable-512.png", "assets/jspdf.umd.min.js", "assets/marck-script.woff2",
-  "assets/noto-sans-azbuka.woff2", "assets/noto-sans-pdf-400.ttf", "assets/noto-sans-pdf-700.ttf",
+  "assets/icon-maskable-512.png", "assets/apple-touch-icon-abece.png", "assets/icon-abece-192.png", "assets/icon-abece-512.png", "assets/icon-abece-maskable-512.png", "assets/jspdf.umd.min.js", "assets/azbuka-script.woff2",
+  "assets/noto-sans-azbuka.woff2", "assets/azbuka-simbolos.woff2", "assets/noto-sans-pdf-400.ttf", "assets/noto-sans-pdf-700.ttf",
   "assets/preact.js", "assets/supabase.js"
 ];
 
