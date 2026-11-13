@@ -1,7 +1,7 @@
 /* ============================================================
    ABECÉ — Conjugaciones de los verbos del léxico español (VERBOS_ES)
    ------------------------------------------------------------
-   Una entrada por cada verbo de data-lexicon-es.js (1253), con el mismo
+   Una entrada por cada verbo de data-lexicon-es.js (1254), con el mismo
    ID (ESP-xxxxx) y «es» como ancla de control. Generado el 27/10/2026
    con herramientas/abece/conjugador-es.py (reglas del español y modelos
    de irregularidad); para regenerarlo, se corre ese script.
@@ -1312,7 +1312,8 @@ const VERBOS_ES = {
  "ESP-05428": { es:"peinarse", base:"ESP-05429" },
  "ESP-05429": { es:"peinar", grupo:"-ar", modelo:"hablar", irregular:[], pres:["peino","peinas","peina","peinamos","peináis","peinan"], indef:["peiné","peinaste","peinó","peinamos","peinasteis","peinaron"], imperf:["peinaba","peinabas","peinaba","peinábamos","peinabais","peinaban"], fut:["peinaré","peinarás","peinará","peinaremos","peinaréis","peinarán"], cond:["peinaría","peinarías","peinaría","peinaríamos","peinaríais","peinarían"], subj:["peine","peines","peine","peinemos","peinéis","peinen"], subjImp:["peinara","peinaras","peinara","peináramos","peinarais","peinaran"], impTu:"peina", ger:"peinando", part:"peinado" },
  "ESP-05430": { es:"maquillarse", base:"ESP-05431" },
- "ESP-05431": { es:"maquillar", grupo:"-ar", modelo:"hablar", irregular:[], pres:["maquillo","maquillas","maquilla","maquillamos","maquilláis","maquillan"], indef:["maquillé","maquillaste","maquilló","maquillamos","maquillasteis","maquillaron"], imperf:["maquillaba","maquillabas","maquillaba","maquillábamos","maquillabais","maquillaban"], fut:["maquillaré","maquillarás","maquillará","maquillaremos","maquillaréis","maquillarán"], cond:["maquillaría","maquillarías","maquillaría","maquillaríamos","maquillaríais","maquillarían"], subj:["maquille","maquilles","maquille","maquillemos","maquilléis","maquillen"], subjImp:["maquillara","maquillaras","maquillara","maquilláramos","maquillarais","maquillaran"], impTu:"maquilla", ger:"maquillando", part:"maquillado" }
+ "ESP-05431": { es:"maquillar", grupo:"-ar", modelo:"hablar", irregular:[], pres:["maquillo","maquillas","maquilla","maquillamos","maquilláis","maquillan"], indef:["maquillé","maquillaste","maquilló","maquillamos","maquillasteis","maquillaron"], imperf:["maquillaba","maquillabas","maquillaba","maquillábamos","maquillabais","maquillaban"], fut:["maquillaré","maquillarás","maquillará","maquillaremos","maquillaréis","maquillarán"], cond:["maquillaría","maquillarías","maquillaría","maquillaríamos","maquillaríais","maquillarían"], subj:["maquille","maquilles","maquille","maquillemos","maquilléis","maquillen"], subjImp:["maquillara","maquillaras","maquillara","maquilláramos","maquillarais","maquillaran"], impTu:"maquilla", ger:"maquillando", part:"maquillado" },
+ "ESP-05469": { es:"jubilarse", pronominal:true, grupo:"-ar", modelo:"hablar", irregular:[], pres:["jubilo","jubilas","jubila","jubilamos","jubiláis","jubilan"], indef:["jubilé","jubilaste","jubiló","jubilamos","jubilasteis","jubilaron"], imperf:["jubilaba","jubilabas","jubilaba","jubilábamos","jubilabais","jubilaban"], fut:["jubilaré","jubilarás","jubilará","jubilaremos","jubilaréis","jubilarán"], cond:["jubilaría","jubilarías","jubilaría","jubilaríamos","jubilaríais","jubilarían"], subj:["jubile","jubiles","jubile","jubilemos","jubiléis","jubilen"], subjImp:["jubilara","jubilaras","jubilara","jubiláramos","jubilarais","jubilaran"], impTu:"jubila", ger:"jubilando", part:"jubilado" }
 };
 
 /* Devuelve la entrada de un verbo por ID, o null. */

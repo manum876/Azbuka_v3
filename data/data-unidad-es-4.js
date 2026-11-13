@@ -848,6 +848,9 @@ function ejerciciosUnidadEs4() {
     }
   });
 
+  /* Profundización y formas (13/11/2026) */
+  if (typeof es4Prof === "function") es4Prof(out, baraja, lex);
+
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
 }
@@ -1146,3 +1149,128 @@ const ES4_MEZCLA = { conjugar: 3, "cambia-persona": 1, "hora-escribir": 2, "hora
   "hace-tengo": 1, frecuencia: 1, negacion: 2, gerundio: 1, "estar-gerundio": 2, "ahora-siempre": 2, gustar: 2, "gustar-escribir": 1, "gustar-frase": 1, pregunta: 2, error: 2,
   dictado: 2, "situacion-frase": 2, respuesta: 2, "dictado-frase": 2, "ordenar-frase": 1 };
 window.ES4_MEZCLA = ES4_MEZCLA;
+
+/* ── Profundización (13/11/2026, repaso Abecé / Azbuka pedido por Manu) ──────────────
+   Más a fondo que se suma a la teoría al cargar; tipos de profundización de Azbuka y
+   el presente y el gerundio generados desde data-verbos-es.js. */
+const ES4_MAS = {
+  "es4-presente-ar": { titulo: "Vosotros: habláis", texto: "У **vosotros** окончание со знаком ударения: **habláis**, **coméis**, **vivís**. В Латинской Америке вместо **vosotros** говорят **ustedes**: **ustedes hablan** — это тоже правильно, просто в Испании так говорят только вежливо.", ejemplos: [{ es: "¿Vosotros habláis ruso?", ru: "Вы (ребята) говорите по-русски?" }] },
+  "es4-sin-sujeto": { titulo: "Когда yo всё-таки нужно", texto: "Местоимение говорят, когда хотят противопоставить или выделить: **Yo trabajo y tú descansas** — я работаю, а ты отдыхаешь. В остальных случаях **yo** звучит лишним: **Trabajo en un banco**.", ejemplos: [{ es: "Yo trabajo y tú descansas.", ru: "Я работаю, а ты отдыхаешь." }] },
+  "es4-hora-es-son": { titulo: "¿Qué hora es? — по-разговорному", texto: "Часто говорят **¿Qué hora es?** и **¿Tienes hora?** — «у тебя есть время / который час?». В поездах и по радио — 24 часа: **las quince horas** = **las tres de la tarde**.", ejemplos: [{ es: "¿Tienes hora? — Sí, son las tres.", ru: "Не подскажешь, который час? — Да, три." }] },
+  "es4-hora-minutos": { titulo: "Menos — до", texto: "После половины считают **до** следующего часа: **las cinco menos diez** — без десяти пять (4:50). **y** — после: **las cinco y diez** — 5:10.", ejemplos: [{ es: "Son las ocho menos veinte.", ru: "Без двадцати восемь." }] },
+  "es4-reflexivo": { titulo: "Se = «-ся», но не всегда", texto: "Часто **se** похоже на русское «-ся»: **lavarse** — мыться, **vestirse** — одеваться. Но не всегда: **levantarse** — вставать (без «-ся»), **llamarse** — зваться. Учи глагол вместе с **se**.", ejemplos: [{ es: "Me llamo Ana y me levanto a las siete.", ru: "Меня зовут Аня, и я встаю в семь." }] },
+  "es4-reflexivo-lugar": { titulo: "Voy a ducharme", texto: "С инфинитивом **se** меняется по лицу и прицепляется в конце: **Voy a ducharme**, **¿Vas a ducharte?** Можно и впереди: **Me voy a duchar**.", ejemplos: [{ es: "Tengo que levantarme temprano.", ru: "Мне нужно рано вставать." }] },
+  "es4-e-ie": { titulo: "Nosotros без изменения", texto: "В **nosotros** и **vosotros** ударение уходит с корня, поэтому корень не меняется: **pensamos**, **pensáis**, но **pienso**, **piensas**. Отсюда название «ботинок»: меняются формы, которые на схеме внутри ботинка.", ejemplos: [{ es: "Cerramos la tienda a las ocho, pero Ana cierra a las nueve.", ru: "Мы закрываем магазин в восемь, а Аня — в девять." }] },
+  "es4-o-ue": { titulo: "Jugar — u → ue", texto: "**jugar** — единственный глагол, где меняется **u**: **juego, juegas, juega, jugamos**. Играть во что — **jugar al** (fútbol, tenis).", ejemplos: [{ es: "Los domingos juego al fútbol.", ru: "По воскресеньям я играю в футбол." }] },
+  "es4-yo-go": { titulo: "Tengo, vengo", texto: "**tener** и **venir** — сразу две особенности: **-go** у yo и **e → ie** в остальных: **tengo, tienes**; **vengo, vienes**.", ejemplos: [{ es: "Tengo dos hermanos y vienen mañana.", ru: "У меня два брата, и они приезжают завтра." }] },
+  "es4-ir-venir": { titulo: "Voy — «иду» и «еду»", texto: "**ir** — и «идти», и «ехать»: **Voy al trabajo en metro**. А **venir** — «приходить сюда»: если друг зовёт тебя, отвечают **¡Ya voy!** — уже иду (к тебе, но с моей точки зрения — туда).", ejemplos: [{ es: "—¡Ana, ven! —¡Ya voy!", ru: "— Аня, иди сюда! — Иду!" }] },
+  "es4-meses": { titulo: "En verano, en julio", texto: "Месяцы и времена года — с **en** и без артикля: **en julio**, **en verano**. С днём — **el**: **el 5 de julio**. Месяцы пишут с маленькой буквы.", ejemplos: [{ es: "En agosto vamos a la playa.", ru: "В августе мы ездим на пляж." }] },
+  "es4-tiempo": { titulo: "Llueve или está lloviendo?", texto: "**En invierno llueve mucho** — вообще; **Está lloviendo** — прямо сейчас за окном. Так же **Nieva** / **Está nevando**.", ejemplos: [{ es: "No salgo: está lloviendo.", ru: "Я не выхожу: идёт дождь." }] },
+  "es4-frecuencia": { titulo: "Todos los días, cada día", texto: "**todos los días** и **cada día** значат одно и то же — «каждый день». Так же **todas las semanas** = **cada semana**. **una vez a la semana** — раз в неделю.", ejemplos: [{ es: "Voy al gimnasio dos veces a la semana.", ru: "Я хожу в спортзал два раза в неделю." }] },
+  "es4-nunca": { titulo: "Tampoco, nadie, nada", texto: "Как **nunca**, работают и другие отрицательные слова: перед глаголом — без **no**, после — с **no**: **Nada me gusta** / **No me gusta nada**.", ejemplos: [{ es: "No me gusta nada.", ru: "Мне совсем не нравится." }] },
+  "es4-gerundio-formas": { titulo: "Durmiendo, pidiendo, leyendo", texto: "У некоторых глаголов на **-ir** корень в gerundio меняется: **dormir → durmiendo**, **pedir → pidiendo**. Между гласными **-iendo → -yendo**: **leer → leyendo**, **ir → yendo**.", ejemplos: [{ es: "El niño está durmiendo.", ru: "Ребёнок спит." }] },
+  "es4-gustar": { titulo: "Me gusta + инфинитив", texto: "С глаголом — всегда **gusta** (ед. ч.), даже если глаголов два: **Me gusta leer y cantar**.", ejemplos: [{ es: "Me gusta leer y escuchar música.", ru: "Я люблю читать и слушать музыку." }] },
+  "es4-te-gusta": { titulo: "Me encanta — без mucho", texto: "**encantar** — уже «очень нравится», поэтому **mucho** с ним не говорят: **Me encanta el mar** (не «me encanta mucho»).", ejemplos: [{ es: "Me encanta el mar.", ru: "Я обожаю море." }] }
+};
+UNIDAD_ES_4.modulos.forEach(m => (m.secciones || []).forEach(s => { if (ES4_MAS[s.id] && !s.mas) s.mas = ES4_MAS[s.id]; }));
+
+const ES4_NAT = [
+  ["Trabajo en un banco.", ["Yo trabajo en un banco, yo.", "Trabaja en un banco yo."], "Окончание **-o** уже говорит «я».", 1, "es4-sin-sujeto"],
+  ["¿Vosotros habláis ruso?", ["¿Vosotros hablais ruso?", "¿Vosotros hablan ruso?"], "**habláis**, со знаком.", 1, "es4-presente-ar"],
+  ["Es la una.", ["Son la una.", "Es las una."], "Один час — **es la una**.", 2, "es4-hora-es-son"],
+  ["Son las tres y media.", ["Es las tres y media.", "Son tres y media las."], "**son las…**", 2, "es4-hora-es-son"],
+  ["Me levanto a las siete.", ["Levanto a las siete.", "Me levanto en las siete."], "**me levanto**; время — **a las**.", 3, "es4-reflexivo"],
+  ["Cierro la puerta.", ["Cerro la puerta.", "Cierramos la puerta yo."], "e → ie: **cierro**.", 4, "es4-e-ie"],
+  ["Dormimos ocho horas.", ["Duermimos ocho horas.", "Dormemos ocho horas."], "В nosotros корень не меняется.", 4, "es4-bota"],
+  ["Hago la cena.", ["Hace la cena yo.", "Haco la cena."], "**hacer → hago**.", 5, "es4-yo-go"],
+  ["Voy al trabajo.", ["Vo al trabajo.", "Voy a el trabajo."], "**voy**; **a + el = al**.", 5, "es4-ir"],
+  ["El lunes tengo clase.", ["En lunes tengo clase.", "Lunes tengo clase en."], "День — **el lunes**.", 6, "es4-dias"],
+  ["Hace frío.", ["Es frío.", "Está frío el tiempo hoy hace."], "Погода — **hace frío**.", 6, "es4-hace-tengo"],
+  ["Tengo frío.", ["Hago frío.", "Estoy frío."], "Мне холодно — **tengo frío**.", 6, "es4-hace-tengo"],
+  ["Nunca bebo café.", ["Nunca no bebo café.", "No nunca bebo café."], "**nunca** перед глаголом — без **no**.", 7, "es4-nunca"],
+  ["Estoy leyendo.", ["Estoy leiendo.", "Soy leyendo."], "**estar** + **leyendo**.", 8, "es4-gerundio-formas"],
+  ["Me gustan los perros.", ["Me gusta los perros.", "Yo gusto los perros."], "Мн. ч. — **gustan**.", 9, "es4-gusta-gustan"],
+  ["Me gusta el fútbol.", ["Me gusta fútbol.", "Me gusto el fútbol."], "С артиклем: **el fútbol**.", 9, "es4-gustar-articulo"]
+];
+const ES4_POR = [
+  ["Trabajo en casa.", "Почему нет «yo»?", "Окончание -o уже говорит, кто", ["Это ошибка", "Так говорят только в Испании"], "Местоимение обычно не нужно.", 1, "es4-sin-sujeto"],
+  ["Es la una.", "Почему «es», а не «son»?", "Один час — ед. ч.", ["Так говорят днём", "Это ошибка"], "**es la una**.", 2, "es4-hora-es-son"],
+  ["Me ducho.", "Зачем «me»?", "Глагол ducharse — с se", ["Это «мне»", "Это вежливость"], "**ducharse → me ducho**.", 3, "es4-reflexivo"],
+  ["Dormimos ocho horas.", "Почему «dormimos», а не «duermimos»?", "В nosotros ударение не на корне", ["Это исключение", "Dormimos — прошедшее"], "Ботинок: nosotros снаружи.", 4, "es4-bota"],
+  ["Hace frío.", "Почему «hace»?", "Так говорят о погоде", ["Это «я делаю»", "Это «мне холодно»"], "Погода — **hace**.", 6, "es4-hace-tengo"],
+  ["Estoy comiendo.", "Почему «estoy comiendo», а не «como»?", "Прямо сейчас, в этот момент", ["Это привычка", "Это будущее"], "Сейчас — **estar** + gerundio.", 8, "es4-estar-gerundio"],
+  ["Me gustan las flores.", "Почему «gustan»?", "Las flores — мн. ч.", ["Потому что «me»", "Это вежливо"], "Глагол — по вещи.", 9, "es4-gusta-gustan"],
+  ["No bebo nunca café.", "Почему здесь «no»?", "Nunca стоит после глагола", ["Это ошибка", "Так вежливее"], "**no** + глагол + **nunca**.", 7, "es4-nunca"]
+];
+const ES4_OIDO = [
+  ["Hablo.", "Послушай: кто?", "yo", ["yo", "él / ella", "tú"], "**-o** — я.", 1, "es4-presente-ar"],
+  ["Hablas.", "Послушай: кто?", "tú", ["yo", "tú", "nosotros"], "**-as** — ты.", 1, "es4-presente-ar"],
+  ["Comemos.", "Послушай: кто?", "nosotros", ["nosotros", "ellos", "yo"], "**-emos** — мы.", 1, "es4-presente-er-ir"],
+  ["Son las dos y cuarto.", "Послушай: который час?", "2:15", ["2:15", "2:45", "1:45"], "**y cuarto** — 15 минут.", 2, "es4-hora-minutos"],
+  ["Son las tres menos cuarto.", "Послушай: который час?", "2:45", ["3:15", "2:45", "3:45"], "**menos cuarto** — без четверти.", 2, "es4-hora-minutos"],
+  ["Estoy durmiendo.", "Послушай: сейчас или обычно?", "Сейчас", ["Сейчас", "Обычно"], "**estar** + gerundio.", 8, "es4-ahora-siempre"],
+  ["Me encanta.", "Послушай: нравится или нет?", "Очень нравится", ["Очень нравится", "Не нравится", "Немного"], "**encantar** — обожать.", 9, "es4-te-gusta"],
+  ["Vienen mañana.", "Послушай: какой глагол?", "venir", ["venir", "ver", "ir"], "**vienen** — от venir.", 5, "es4-ir-venir"]
+];
+const ES4_PAR = [
+  ["Ты говоришь, что тебе холодно.", "Tengo frío.", "Hace frío.", "Мне — **tengo frío**.", 6, "es4-hace-tengo"],
+  ["Ты говоришь, что на улице холодно.", "Hace frío.", "Tengo frío.", "Погода — **hace frío**.", 6, "es4-hace-tengo"],
+  ["Ты говоришь, что сейчас читаешь.", "Estoy leyendo.", "Leo siempre.", "Сейчас — **estoy leyendo**.", 8, "es4-ahora-siempre"],
+  ["Ты говоришь, что обычно читаешь по вечерам.", "Leo por la noche.", "Estoy leyendo por la noche.", "Обычно — настоящее.", 8, "es4-ahora-siempre"],
+  ["Ты говоришь, что моешь машину.", "Lavo el coche.", "Me lavo el coche.", "Не себя — без **se**.", 3, "es4-con-sin-se"],
+  ["Ты говоришь, что моешься (принимаешь душ).", "Me ducho.", "Ducho.", "Себя — **me ducho**.", 3, "es4-con-sin-se"]
+];
+const ES4_DESC = [
+  ["hablar → hablo · trabajar → trabajo. А estudiar?", "estudio", ["estudo", "estudia"], "**-ar**, yo — **-o**.", 1, "es4-presente-ar"],
+  ["pensar → pienso · empezar → empiezo. А cerrar?", "cierro", ["cerro", "cierra"], "e → ie.", 4, "es4-e-ie"],
+  ["volver → vuelvo · dormir → duermo. А almorzar?", "almuerzo", ["almorzo", "almuerza"], "o → ue.", 4, "es4-o-ue"],
+  ["hacer → hago · poner → pongo. А salir?", "salgo", ["salo", "salgio"], "**-go** у yo.", 5, "es4-yo-go"],
+  ["hablar → hablando · comer → comiendo. А vivir?", "viviendo", ["vivando", "viviando"], "**-ir → -iendo**.", 8, "es4-gerundio-formas"]
+];
+const ES4_CAD = [
+  ["Hablo español.", [["Теперь: nosotros.", "Hablamos español."], ["Теперь: ellos.", "Hablan español."]], 1, "es4-presente-ar"],
+  ["Me levanto a las siete.", [["Теперь: tú.", "Te levantas a las siete."], ["Теперь: nosotros.", "Nos levantamos a las siete."]], 3, "es4-reflexivo"],
+  ["Cierro la ventana.", [["Теперь: tú.", "Cierras la ventana."], ["Теперь: nosotros.", "Cerramos la ventana."]], 4, "es4-bota"],
+  ["Leo un libro.", [["Теперь: прямо сейчас (estar + gerundio).", "Estoy leyendo un libro."], ["Теперь: nosotros.", "Estamos leyendo un libro."]], 8, "es4-estar-gerundio"]
+];
+const ES4_DIAG = [
+  ["Son la una.", "Один час — es la una", ["Нужно las", "Нужно y"], "Es la una.", 2, "es4-hora-es-son"],
+  ["Levanto a las siete.", "Не хватает me", ["Нужно en", "Нужно levantas"], "Me levanto a las siete.", 3, "es4-reflexivo"],
+  ["Duermimos ocho horas.", "В nosotros корень не меняется", ["Нужно a", "Нужно dormemos"], "Dormimos ocho horas.", 4, "es4-bota"],
+  ["Hago frío.", "Мне холодно — tengo frío", ["Нужно hace", "Нужно estoy"], "Tengo frío.", 6, "es4-hace-tengo"],
+  ["Nunca no voy al cine.", "Перед глаголом nunca — без no", ["Нужно al", "Нужно nada"], "Nunca voy al cine.", 7, "es4-nunca"],
+  ["Me gusta los libros.", "Мн. ч. — gustan", ["Нужно gusto", "Нужно los"], "Me gustan los libros.", 9, "es4-gusta-gustan"]
+];
+const ES4_DES = [
+  ["Los lunes me levanto a las siete", [["Какое слово — местоимение se?", 2], ["Когда (какой день)?", 1], ["Во сколько?", 6]], 3, "es4-reflexivo"],
+  ["Ahora estoy comiendo en casa", [["Какое слово — gerundio?", 2], ["Когда?", 0]], 8, "es4-estar-gerundio"]
+];
+const ES4_VERBOS_P = ["hablar", "trabajar", "estudiar", "comer", "beber", "vivir", "escribir", "pensar", "empezar", "cerrar", "almorzar", "volver", "dormir", "jugar", "pedir", "repetir",
+  "hacer", "poner", "salir", "tener", "venir", "ir", "levantarse", "ducharse", "acostarse", "vestirse"];
+function es4Prof(out, baraja, lex) {
+  const P = (id, tipo, forma, mod, regla, x) => out.push(Object.assign({ id: "ES4-" + id, tipo, forma, dificultad: 2, modulo: mod, regla, grupo: id }, x));
+  ES4_NAT.forEach(([ok, mal, exp, mod, regla], i) => P("nat-" + i, "natural", "elegir", mod, regla, { pide: "Какая фраза правильная?", opciones: baraja([ok].concat(mal), i + 201), correcta: ok, oir: ok, explicacion: "**" + ok + "** " + exp }));
+  ES4_POR.forEach(([fr, q, ok, otras, exp, mod, regla], i) => P("por-" + i, "porque", "elegir", mod, regla, { pide: q, grande: fr, audio: fr, opciones: baraja([ok].concat(otras), i + 211), correcta: ok, oir: fr, explicacion: exp }));
+  ES4_OIDO.forEach(([au, q, ok, ops, exp, mod, regla], i) => P("oid-" + i, "oido", "elegir", mod, regla, { pide: q, audio: au, opciones: ops, correcta: ok, oir: au, explicacion: "«" + au + "» — " + exp }));
+  ES4_PAR.forEach(([sit, ok, otra, exp, mod, regla], i) => P("par-" + i, "par", "elegir", mod, regla, { pide: sit + " Как ты скажешь?", opciones: baraja([ok, otra], i + 221), correcta: ok, oir: ok, explicacion: exp }));
+  ES4_DESC.forEach(([q, ok, otras, exp, mod, regla], i) => P("dsc-" + i, "descubrir", "elegir", mod, regla, { pide: q, opciones: baraja([ok].concat(otras), i + 231), correcta: ok, oir: ok, explicacion: exp }));
+  ES4_CAD.forEach(([base, pasos, mod, regla], i) => P("cdn-" + i, "cadena", "cadena", mod, regla, { dificultad: 3, pide: "Измени фразу шаг за шагом.", base, oir: pasos[pasos.length - 1][1], idioma: "es",
+    pasos: pasos.map(([q, e]) => ({ pide: q, esperadas: [e] })), explicacion: [base].concat(pasos.map(p => p[1])).join(" → ") }));
+  ES4_DIAG.forEach(([fr, ok, otros, bien, mod, regla], i) => P("dg-" + i, "diagnostico", "diagnostico", mod, regla, { dificultad: 3, pide: "В этой фразе ошибка. Что не так?", grande: fr,
+    opciones: baraja([ok].concat(otros), i + 241), correcta: ok, esperadas: [bien], idioma: "es", oir: bien, explicacion: "**" + bien + "**" }));
+  ES4_DES.forEach(([fr, qs, mod, regla], i) => P("ds-" + i, "desarmar", "desarmar", mod, regla, { pide: "Отвечай, нажимая на слова фразы.", palabras: fr.split(" "), audio: fr + ".", oir: fr + ".",
+    preguntas: qs.map(([q, k]) => ({ pide: q, correcta: k })), explicacion: fr + "." }));
+  const PERS = ["yo", "tú", "él", "nosotros", "vosotros", "ellos"];
+  const reg = inf => /^(hablar|trabajar|estudiar|comer|beber|vivir|escribir)$/.test(inf) ? [1, "es4-presente-ar"] : /^(hacer|poner|salir|tener|venir)$/.test(inf) ? [5, "es4-yo-go"] : inf === "ir" ? [5, "es4-ir"] : /se$/.test(inf) ? [3, "es4-reflexivo"] : [4, "es4-bota"];
+  ES4_VERBOS_P.forEach((inf, i) => [0, 2, 4].map(k => (k + i) % 6).forEach(p => {
+    const f = es4Pres(inf, p); if (!f) return;
+    const [mod, regla] = reg(inf);
+    P("pf-" + inf + "-" + p, "presente-forma", "escribir", mod, regla, { grupo: "pf-" + inf, lex: lex(inf), pide: "Напиши форму в presente.", grande: inf + " — " + PERS[p],
+      esperadas: [f], idioma: "es", foco: true, formaCasi: false, oir: f, explicacion: "**" + inf + "**, " + PERS[p] + " → **" + f + "**." });
+  }));
+  ["hablar", "comer", "vivir", "leer", "dormir", "pedir", "escribir", "trabajar", "estudiar", "jugar", "ir"].forEach(inf => {
+    const f = es4Ger(inf); if (!f) return;
+    P("gf-" + inf, "gerundio-forma", "escribir", 8, "es4-gerundio-formas", { grupo: "gef-" + inf, lex: lex(inf), pide: "Напиши gerundio.", grande: inf, esperadas: [f], idioma: "es", foco: true, formaCasi: false, oir: f, explicacion: "**" + inf + " → " + f + "**." });
+  });
+}
+Object.assign(ES4_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1, "presente-forma": 2, "gerundio-forma": 1 });

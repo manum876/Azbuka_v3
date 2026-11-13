@@ -397,9 +397,9 @@ const UNIDAD_ES_1 = {
         }
       ],
       frases: ["FRE-001", "FRE-002", "FRE-003", "FRE-004", "FRE-005", "FRE-006", "FRE-007", "FRE-008", "FRE-009", "FRE-010", "FRE-011", "FRE-012", "FRE-013",
-        "FRE-014", "FRE-015", "FRE-016", "FRE-017", "FRE-018", "FRE-019", "FRE-020", "FRE-021", "FRE-022", "FRE-023", "FRE-024", "FRE-032"],
+        "FRE-014", "FRE-015", "FRE-016", "FRE-017", "FRE-018", "FRE-019", "FRE-020", "FRE-021", "FRE-022", "FRE-023", "FRE-024", "FRE-032", "FRE-131"],
       vocab: ["hola", "adiós", "chao", "bueno", "día", "tarde", "noche", "hasta", "luego", "mañana", "gracias", "favor", "nada", "perdón",
-        "sí", "no", "bien", "mal", "muy", "tal", "vale", "señor", "entender", "repetir", "despacio", "escribir", "palabra", "buenos días", "buenas tardes", "buenas noches", "qué tal", "hasta luego", "hasta mañana", "por favor", "muchas gracias", "de nada", "lo siento", "y"],
+        "sí", "no", "bien", "mal", "muy", "tal", "vale", "señor", "entender", "repetir", "despacio", "escribir", "palabra", "y"],
       dialogos: ["DLE-001", "DLE-002", "DLE-003"]
     },
     {
@@ -442,7 +442,7 @@ const UNIDAD_ES_1 = {
       frases: ["FRE-025", "FRE-026", "FRE-027", "FRE-028", "FRE-029", "FRE-030", "FRE-031"],
       vocab: ["llamarse", "nombre", "apellido", "letra", "deletrear", "encantado",
         "cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez",
-        "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "me", "te", "se", "mucho gusto"],
+        "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "me", "te", "se"],
       dialogos: ["DLE-004"]
     },
     {
@@ -755,6 +755,8 @@ function ejerciciosUnidadEs1() {
     else if (ex.tipo === "unir") ex.items = ex.pares.map(p => "abc-es:" + (p[1].length > 2 ? p[1].charAt(0) : p[1].toUpperCase()));
     else if (letraDe(ex.grupo || "")) ex.items = ["abc-es:" + ex.grupo];
   });
+  /* Profundización (13/11/2026) */
+  if (typeof es1Prof === "function") es1Prof(out, (a, k) => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { k = (k * 9301 + 49297) % 233280; const j = Math.floor(k / 233280 * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }, () => undefined);
   return out;
 }
 
@@ -868,3 +870,62 @@ window.ejerciciosUnidadEs1 = ejerciciosUnidadEs1;
 window.es1Vocab = es1Vocab;
 window.es1Objetivo = es1Objetivo;
 window.ES1_MEZCLA = ES1_MEZCLA;
+
+/* ── Profundización (13/11/2026, repaso Abecé / Azbuka pedido por Manu) ──────────────
+   Más a fondo que se suma a la teoría al cargar y algunos tipos de profundización. */
+const ES1_MAS = {
+  "es1-como-se-escribe": { titulo: "Почти всегда", texto: "Испанский читается почти так, как пишется. Немногие исключения ты уже знаешь: **h** не читается, **u** в **que, qui, gue, gui** не читается, а **c** и **g** читаются по-разному перед **e, i**. Всё остальное — буква = звук.", ejemplos: [{ es: "hola", ru: "привет («ола»)" }] },
+  "es1-tilde-intro": { titulo: "Знак ударения — не украшение", texto: "В испанском знак ударения — часть правописания: без него слово написано с ошибкой, а иногда это уже другое слово: **tú** — ты, **tu** — твой.", ejemplos: [{ es: "tú", ru: "ты" }] },
+  "es1-teclado": { titulo: "Добавь испанскую клавиатуру", texto: "В настройках телефона добавь испанскую раскладку: на ней есть **ñ**, а буквы со знаком ударения появляются, если подержать палец на гласной. Знаки **¿** и **¡** — на клавиатуре с цифрами.", ejemplos: [] },
+  "es1-e-dura": { titulo: "Не смягчай перед e и i", texto: "Русские согласные перед **е, и** становятся мягкими. В испанском — нет: **te** звучит как «тэ», **de** — «дэ», **ti** — твёрже русского «ти». Попробуй сказать «тэ», а не «те».", ejemplos: [{ es: "teléfono", ru: "телефон («тэлэфоно»)" }] },
+  "es1-o-clara": { titulo: "Безударное o — тоже «о»", texto: "В русском безударное **о** звучит как «а» («малако»). В испанском — всегда «о»: **Barcelona** — «барсэлОна», а не «барсилона».", ejemplos: [{ es: "Barcelona", ru: "Барселона («барсэлона»)" }] },
+  "es1-c-dos": { titulo: "Ce, ci — как английское th", texto: "В Испании **c** перед **e, i** и буква **z** звучат как английское «th» в слове *think*: **gracias** — «грасьяс» с этим звуком. В Латинской Америке — просто «с». Оба варианта правильные.", ejemplos: [{ es: "cinco", ru: "пять" }] },
+  "es1-v-b": { titulo: "Между гласными — мягче", texto: "**b** и **v** в начале фразы — как русское «б». Между гласными губы почти не смыкаются: звук мягче, похож на что-то между «б» и «в».", ejemplos: [] },
+  "es1-ll": { titulo: "Ll и y — одинаково", texto: "В большинстве мест **ll** и **y** читаются одинаково, как русское «й» или мягкое «дж»: **calle** — «кайе», **yo** — «йо». В Аргентине — «ш»: «каше», «шо».", ejemplos: [{ es: "calle", ru: "улица" }] },
+  "es1-saludos-hora": { titulo: "Когда «buenas tardes»", texto: "В Испании день длинный: **buenos días** — до обеда (примерно до двух), **buenas tardes** — после обеда и до темноты (часто до девяти), **buenas noches** — вечером и перед сном.", ejemplos: [] },
+  "es1-tu-usted": { titulo: "Tú — почти везде", texto: "В Испании **tú** говорят очень часто: коллегам, в магазине, молодым людям. **usted** — пожилым, в официальных ситуациях, в гостинице. Если не уверен, начни с **usted** — тебе быстро скажут «**de tú**, por favor».", ejemplos: [] },
+  "es1-encantado": { titulo: "Mucho gusto — для всех", texto: "**Encantado / encantada** меняется по тому, кто говорит. **Mucho gusto** — одинаково для всех, это проще.", ejemplos: [] },
+  "es1-numeros": { titulo: "Veintiuno и одним словом", texto: "До 29 числа пишут одним словом: **dieciséis**, **veintiuno**. Обрати внимание на знак: **dieciséis**, **veintidós**, **veintitrés**.", ejemplos: [{ es: "dieciséis", ru: "шестнадцать" }] }
+};
+const ES1_NAT = [
+  ["hola", ["ola", "jola"], "**h** пишется, но не читается.", 3, "es1-falsas"],
+  ["gracias", ["grasias", "graçias"], "**gracias** — через **c**.", 3, "es1-c-dos"],
+  ["calle", ["caye", "cale"], "**calle** — через **ll**.", 5, "es1-ll"],
+  ["guerra", ["gerra", "guera"], "**gue** — u не читается; **rr** — раскатисто.", 5, "es1-gue"],
+  ["teléfono", ["telefono", "teléfóno"], "Один знак ударения: **teléfono**.", 8, "es1-tilde-intro"],
+  ["España", ["Espana", "Espanya"], "**ñ**, не «ny».", 4, "es1-teclado"],
+  ["queso", ["keso", "cueso"], "«ке» — **que**.", 4, "es1-como-se-escribe"],
+  ["vino", ["bino", "vinno"], "**vino** — через **v**.", 4, "es1-v-b"]
+];
+const ES1_OIDO = [
+  ["pero", "Послушай: какое слово?", "pero", ["pero", "perro"], "Одно **r** — один удар.", 7, "es1-como-se-escribe"],
+  ["perro", "Послушай: какое слово?", "perro", ["pero", "perro"], "**rr** — раскатисто.", 7, "es1-como-se-escribe"],
+  ["café", "Послушай: где ударение?", "ca-FÉ", ["CA-fe", "ca-FÉ"], "**café** — на последнем.", 8, "es1-tilde-intro"],
+  ["casa", "Послушай: какое слово?", "casa", ["casa", "caza"], "В Испании **s** и **z** звучат по-разному.", 3, "es1-c-dos"],
+  ["hola", "Послушай: первая буква слышна?", "Нет: h не читается", ["Нет: h не читается", "Да, как «х»"], "**h** — немая.", 3, "es1-falsas"],
+  ["gente", "Послушай: g звучит как…", "«х»", ["«х»", "«г»"], "**ge** — «хе».", 4, "es1-g-j"]
+];
+const ES1_POR = [
+  ["guitarra", "Почему здесь «u»?", "Чтобы g читалась как «г» перед i", ["Это гласная «у»", "Это ошибка"], "**gui** — u немая.", 5, "es1-gue"],
+  ["queso", "Почему не «keso»?", "Звук «к» перед e пишут qu", ["Так короче", "k — тоже правильно"], "**que, qui**.", 4, "es1-como-se-escribe"],
+  ["café", "Зачем знак ударения?", "Ударение на последнем, а слово кончается на гласную", ["Чтобы читать «кафе» мягко", "Это украшение"], "Правило знака.", 8, "es1-tilde-intro"],
+  ["hola", "Почему пишется h?", "Так пишется, но h не читается", ["Она читается как «х»", "Это ошибка"], "**h** — немая.", 3, "es1-falsas"]
+];
+const ES1_PAR = [], ES1_DESC = [], ES1_CAD = [], ES1_DIAG = [], ES1_DES = [];
+UNIDAD_ES_1.modulos.forEach(m => (m.secciones || []).concat(...(m.bloques || []).map(b => b.secciones || [])).forEach(s => { if (s.id && ES1_MAS[s.id] && !s.mas) s.mas = ES1_MAS[s.id]; }));
+
+function es1Prof(out, baraja, lex) {
+  const P = (id, tipo, forma, mod, regla, x) => out.push(Object.assign({ id: "ES1-" + id, tipo, forma, dificultad: 2, modulo: mod, regla, grupo: id }, x));
+  ES1_NAT.forEach(([ok, mal, exp, mod, regla], i) => P("nat-" + i, "natural", "elegir", mod, regla, { pide: "Какая фраза правильная?", opciones: baraja([ok].concat(mal), i + 201), correcta: ok, oir: ok, explicacion: "**" + ok + "** " + exp }));
+  ES1_POR.forEach(([fr, q, ok, otras, exp, mod, regla], i) => P("por-" + i, "porque", "elegir", mod, regla, { pide: q, grande: fr, audio: fr, opciones: baraja([ok].concat(otras), i + 211), correcta: ok, oir: fr, explicacion: exp }));
+  ES1_OIDO.forEach(([au, q, ok, ops, exp, mod, regla], i) => P("oid-" + i, "oido", "elegir", mod, regla, { pide: q, audio: au, opciones: ops, correcta: ok, oir: au, explicacion: "«" + au + "» — " + exp }));
+  ES1_PAR.forEach(([sit, ok, otra, exp, mod, regla], i) => P("par-" + i, "par", "elegir", mod, regla, { pide: sit + " Как ты скажешь?", opciones: baraja([ok, otra], i + 221), correcta: ok, oir: ok, explicacion: exp }));
+  ES1_DESC.forEach(([q, ok, otras, exp, mod, regla], i) => P("dsc-" + i, "descubrir", "elegir", mod, regla, { pide: q, opciones: baraja([ok].concat(otras), i + 231), correcta: ok, oir: ok, explicacion: exp }));
+  ES1_CAD.forEach(([base, pasos, mod, regla], i) => P("cdn-" + i, "cadena", "cadena", mod, regla, { dificultad: 3, pide: "Измени фразу шаг за шагом.", base, oir: pasos[pasos.length - 1][1], idioma: "es",
+    pasos: pasos.map(([q, e]) => ({ pide: q, esperadas: [e] })), explicacion: [base].concat(pasos.map(p => p[1])).join(" → ") }));
+  ES1_DIAG.forEach(([fr, ok, otros, bien, mod, regla], i) => P("dg-" + i, "diagnostico", "diagnostico", mod, regla, { dificultad: 3, pide: "В этой фразе ошибка. Что не так?", grande: fr,
+    opciones: baraja([ok].concat(otros), i + 241), correcta: ok, esperadas: [bien], idioma: "es", oir: bien, explicacion: "**" + bien + "**" }));
+  ES1_DES.forEach(([fr, qs, mod, regla], i) => P("ds-" + i, "desarmar", "desarmar", mod, regla, { pide: "Отвечай, нажимая на слова фразы.", palabras: fr.split(" "), audio: fr + ".", oir: fr + ".",
+    preguntas: qs.map(([q, k]) => ({ pide: q, correcta: k })), explicacion: fr + "." }));
+}
+Object.assign(ES1_MEZCLA, { natural: 1, porque: 1, oido: 1 });

@@ -23,6 +23,8 @@
 <script>azEscribirLexico();</script>
 <!-- Abecé: las formas de las palabras (plural, femenino, artículo, series) para la sección «Грамматика» -->
 <script>if (AZ_DIRECCION.id === "abece") document.write('<script src="' + "data/data-formas-es.js" + '"><\/script>');</script>
+<!-- Abecé: sus notas culturales (12/11/2026), para la sección «Культура» de la ficha -->
+<script>if (AZ_DIRECCION.id === "abece") document.write('<script src="' + "data/data-cultura-es.js" + '"><\/script>');</script>
 <script src="assets/supabase.js"></script>
 <script src="js/cuenta.js"></script>
 <script src="js/progress.js"></script>
@@ -380,6 +382,7 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
   const soloSe = (entry.pronominalPartner || []).some(p => /SOLO_PRONOMINAL/.test(p));
   const el = React.createElement;
   const formas = formasEsItems(entry, el);
+  const culturaEs = typeof culturaEsDePalabra === "function" ? culturaEsDePalabra(entry.id) : [];
   return el("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
     el(FichaStyles, { c }),
     el("div", { className: "ficha" },
@@ -439,6 +442,16 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
             (pareja.length > 0 || soloSe) && el("div", { className: "meta-item" },
               el("div", { className: "meta-k" }, "Местоимение «se»"),
               el("a", { className: "meta-v meta-link", href: "gramatica.html?guia=se", onClick: e => azNavigate(e, "gramatica.html?guia=se") }, "Что значит «se»?")))),
+        /* ── Культура (12/11/2026): las notas de data-cultura-es.js que hablan de esta palabra;
+           cada una abre su hoja en Диалоги (como «Cultura» en la ficha de Azbuka) ── */
+        culturaEs.length > 0 && el(React.Fragment, null,
+          el("div", { className: "section-lbl", style: { marginTop: 24 } }, "Культура"),
+          culturaEs.map(n => {
+            const href = "dialogos.html?cul=" + n.id;
+            return el("a", { key: n.id, href, className: "sense", onClick: e => azNavigate(e, href), style: { display: "block", textDecoration: "none" } },
+              el("span", { className: "sense-es" }, n.titulo, el("span", { style: { color: c.gold, marginLeft: 8 } }, "›")),
+              el("div", { className: "sense-def", style: { marginLeft: 0 } }, n.resumen));
+          })),
         el("div", { className: "buttons" },
           verbo && el("a", { className: "btn pr", href: "verbos.html?id=" + entry.id, onClick: e => azNavigate(e, "verbos.html?id=" + entry.id) }, "🗣️ Спряжение"),
           /* Gramática (27/10/2026): las formas en tabla, si la palabra cambia */

@@ -651,6 +651,9 @@ function ejerciciosUnidadEs2() {
     }
   });
 
+  /* Profundización (13/11/2026) */
+  if (typeof es2Prof === "function") es2Prof(out, baraja, lex);
+
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
 }
@@ -781,3 +784,109 @@ window.es2Objetivo = es2Objetivo;
 const ES2_MEZCLA = { forma: 2, "forma-escribir": 2, pronombre: 1, error: 2, nacionalidad: 2, articulo: 2, plural: 2, concordancia: 2, pregunta: 2,
   numero: 2, dictado: 2, familia: 1, "este-esta": 1, "situacion-frase": 2, respuesta: 2, "dictado-frase": 2, "ordenar-frase": 1 };
 window.ES2_MEZCLA = ES2_MEZCLA;
+
+/* ── Profundización (13/11/2026, repaso Abecé / Azbuka pedido por Manu) ──────────────
+   Más a fondo que se suma a la teoría al cargar y los tipos de profundización de Azbuka. */
+const ES2_MAS = {
+  "es2-cuatro-vy": { titulo: "Ustedes в Латинской Америке", texto: "В Латинской Америке **vosotros** почти не говорят: и друзьям, и незнакомым — **ustedes**. В Испании **ustedes** — только вежливо. Ты будешь говорить **vosotros**, но понимать надо оба.", ejemplos: [{ es: "¿Ustedes son de aquí?", ru: "Вы (вежливо, несколько) отсюда?" }] },
+  "es2-sin-sujeto": { titulo: "Él и ella — для ясности", texto: "Если в разговоре двое и непонятно, кто, — местоимение говорят: **Ella es médica y él es profesor.** Иначе его обычно опускают.", ejemplos: [{ es: "Ella es de Madrid y él es de Moscú.", ru: "Она из Мадрида, а он из Москвы." }] },
+  "es2-ser-siempre": { titulo: "По-русски «есть» молчит", texto: "По-русски говорят «Я студент», без глагола. По-испански глагол нужен всегда: **Soy estudiante**. «Yo estudiante» — ошибка.", ejemplos: [{ es: "Soy estudiante.", ru: "Я студент." }] },
+  "es2-profesion": { titulo: "С прилагательным — с артиклем", texto: "Профессия без артикля: **Soy médico**. Но если есть прилагательное, артикль нужен: **Es un médico nuevo** — это новый врач.", ejemplos: [{ es: "Es un profesor nuevo.", ru: "Это новый учитель." }] },
+  "es2-ser-de": { titulo: "Soy de — и город, и страна", texto: "**Soy de** + город или страна: **Soy de Moscú**, **Soy de Rusia**. Вопрос: **¿De dónde eres?** — предлог стоит в начале.", ejemplos: [{ es: "—¿De dónde eres? —Soy de Moscú.", ru: "— Откуда ты? — Я из Москвы." }] },
+  "es2-nacionalidad-genero": { titulo: "С маленькой буквы", texto: "Национальности и языки пишут с маленькой буквы: **ruso**, **español**, **inglesa**. С большой — только страны и города: **Rusia**, **España**.", ejemplos: [{ es: "Ana es rusa y vive en España.", ru: "Аня русская и живёт в Испании." }] },
+  "es2-idiomas": { titulo: "Hablo ruso — без артикля", texto: "После **hablar** язык — без артикля: **Hablo ruso**. Но **el español es mi idioma** — с артиклем, когда язык — подлежащее.", ejemplos: [{ es: "El español es mi idioma.", ru: "Испанский — мой язык." }] },
+  "es2-llamarse": { titulo: "Mi nombre es…", texto: "Можно сказать и **Mi nombre es Ana**, но обычно говорят **Me llamo Ana**. Ответ на **¿Cómo te llamas?** — **Me llamo…** или просто имя.", ejemplos: [{ es: "—¿Cómo te llamas? —Ana.", ru: "— Как тебя зовут? — Аня." }] },
+  "es2-edad": { titulo: "¿Cuántos años tienes?", texto: "Вопрос — тоже с **tener**: **¿Cuántos años tienes?** **años** нельзя пропустить: не «Tengo 25», а **Tengo 25 años**.", ejemplos: [{ es: "—¿Cuántos años tienes? —Tengo treinta años.", ru: "— Сколько тебе лет? — Мне тридцать." }] },
+  "es2-veinti": { titulo: "Veintiún años", texto: "Перед существительным **uno** сокращается: **veintiún años**, **un libro**. С ж. р.: **veintiuna personas**.", ejemplos: [{ es: "Tengo veintiún años.", ru: "Мне двадцать один год." }] },
+  "es2-genero": { titulo: "-a — не всегда ж. р.", texto: "Большинство слов на **-a** — женского рода, но есть исключения: **el día**. Поэтому учи слово вместе с артиклем.", ejemplos: [{ es: "Buenos días.", ru: "Добрый день." }] },
+  "es2-padres": { titulo: "Los hermanos — брат и сестра", texto: "Мужская форма во мн. ч. — это часто «все вместе»: **mis hermanos** — мои братья или брат и сестра; **mis hijos** — мои дети.", ejemplos: [{ es: "Tengo dos hermanos: Pablo y Lucía.", ru: "У меня двое — брат и сестра: Пабло и Лусия." }] },
+  "es2-mi-tu": { titulo: "Tú и tu", texto: "**tú** (со знаком) — «ты»; **tu** (без знака) — «твой»: **Tú eres mi amigo y tu casa es nueva.** Так же **él** — «он», **el** — артикль.", ejemplos: [{ es: "Tú eres de Moscú y tu hermano también.", ru: "Ты из Москвы, и твой брат тоже." }] },
+  "es2-preguntas": { titulo: "Порядок в вопросе", texto: "В вопросе с вопросительным словом глагол обычно сразу после него: **¿Dónde vive Ana?** (а не «¿Dónde Ana vive?»). В вопросе да/нет хватает интонации: **¿Ana vive aquí?**", ejemplos: [{ es: "¿Dónde vive tu hermano?", ru: "Где живёт твой брат?" }] }
+};
+const ES2_NAT = [
+  ["Soy estudiante.", ["Yo estudiante.", "Soy un estudiante de."], "Глагол нужен всегда.", 2, "es2-ser-siempre"],
+  ["Soy médico.", ["Soy un médico.", "Soy el médico yo."], "Профессия — без артикля.", 2, "es2-profesion"],
+  ["Vosotros sois de Madrid.", ["Vosotros sóis de Madrid.", "Vosotros son de Madrid."], "**sois**, без знака.", 2, "es2-sois"],
+  ["Soy de Rusia.", ["Soy en Rusia.", "Soy desde Rusia."], "Откуда — **de**.", 3, "es2-ser-de"],
+  ["Ana es rusa.", ["Ana es ruso.", "Ana es Rusa."], "Ж. р., с маленькой буквы.", 3, "es2-nacionalidad-genero"],
+  ["Hablo español.", ["Hablo el español mucho.", "Hablo Español."], "Язык — без артикля, с маленькой.", 3, "es2-idiomas"],
+  ["Me llamo Ana.", ["Me llama Ana.", "Yo llamo Ana."], "**me llamo**.", 4, "es2-llamarse"],
+  ["Tengo veinte años.", ["Soy veinte años.", "Tengo veinte."], "Возраст — **tener … años**.", 4, "es2-edad"],
+  ["Tengo veintiún años.", ["Tengo veintiuno años.", "Tengo veinte y uno años."], "Перед сущ. — **veintiún**.", 5, "es2-veinti"],
+  ["Treinta y dos.", ["Treintaydos.", "Treinta dos."], "После 30 — через **y**, раздельно.", 5, "es2-treinta-y"],
+  ["El libro es nuevo.", ["La libro es nuevo.", "El libro es nueva."], "**libro** — м. р.", 6, "es2-genero"],
+  ["Las casas son nuevas.", ["Las casa son nuevas.", "Los casas son nuevas."], "Всё согласуется.", 6, "es2-concordancia"],
+  ["Mis padres son de Moscú.", ["Mi padres son de Moscú.", "Mis padres es de Moscú."], "**mis padres son**.", 7, "es2-padres"],
+  ["Esta es mi hermana.", ["Este es mi hermana.", "Esta es mía hermana."], "О ней — **esta es**.", 7, "es2-este-es"],
+  ["¿De dónde eres?", ["¿Dónde eres de?", "¿De dónde estás?"], "Предлог — в начале.", 8, "es2-de-donde"]
+];
+const ES2_POR = [
+  ["Soy médico.", "Почему без «un»?", "Профессия — без артикля", ["Médico — ж. р.", "Это ошибка"], "Профессия — без артикля.", 2, "es2-profesion"],
+  ["Tengo veinte años.", "Почему «tengo»?", "Возраст по-испански «имеют»", ["Это ошибка", "Так говорят только в Испании"], "**tener … años**.", 4, "es2-edad"],
+  ["¿De dónde eres?", "Почему «de» в начале?", "Предлог стоит перед вопросительным словом", ["Это ошибка", "Так вежливее"], "**¿De dónde…?**", 8, "es2-de-donde"],
+  ["Usted es de Madrid.", "Почему «es», а не «eres»?", "Usted — с формой 3-го лица", ["Это ошибка", "Usted — мн. ч."], "**usted es**.", 1, "es2-usted-verbo"],
+  ["Ana es rusa.", "Почему «rusa» с маленькой буквы?", "Национальности — с маленькой буквы", ["Это ошибка", "Потому что это ж. р."], "Как языки.", 3, "es2-nacionalidad-genero"],
+  ["Mis padres.", "Что значит «padres»?", "Родители", ["Отцы", "Деды"], "**padres** — родители.", 7, "es2-padres"],
+  ["Tú eres mi amigo.", "Почему «tú» со знаком, а «mi» без?", "Tú — «ты»; tu — «твой»", ["Так красивее", "Это ошибка"], "Знак различает слова.", 7, "es2-mi-tu"],
+  ["Trabajo en casa.", "Почему нет «yo»?", "Окончание уже говорит, кто", ["Это ошибка", "Так говорят только с usted"], "Местоимение можно опустить.", 1, "es2-sin-sujeto"]
+];
+const ES2_OIDO = [
+  ["Eres de Madrid.", "Послушай: кто?", "tú", ["yo", "tú", "él / ella"], "**eres** — ты.", 2, "es2-ser-usos"],
+  ["Somos rusos.", "Послушай: кто?", "nosotros", ["nosotros", "ellos", "vosotros"], "**somos** — мы.", 2, "es2-ser-usos"],
+  ["Sois de Barcelona.", "Послушай: кто?", "vosotros", ["vosotros", "ellos", "nosotros"], "**sois** — вы (неформально).", 2, "es2-sois"],
+  ["Tengo treinta y cinco años.", "Послушай: сколько лет?", "35", ["35", "25", "53"], "35.", 5, "es2-treinta-y"],
+  ["Veintisiete.", "Послушай: какое число?", "27", ["27", "77", "17"], "27.", 5, "es2-veinti"],
+  ["Es rusa.", "Послушай: о ком?", "О женщине", ["О мужчине", "О женщине"], "**rusa** — ж. р.", 3, "es2-nacionalidad-genero"],
+  ["Se llama Pablo.", "Послушай: о ком говорят?", "О другом человеке", ["Обо мне", "О другом человеке"], "**se llama** — его зовут.", 4, "es2-llamarse"],
+  ["¿Tú eres Ana?", "Послушай: это вопрос или ответ?", "Вопрос", ["Вопрос", "Ответ"], "Интонация вопроса.", 8, "es2-preguntas"]
+];
+const ES2_PAR = [
+  ["Ты говоришь, что ты врач.", "Soy médico.", "Soy un médico.", "Без артикля.", 2, "es2-profesion"],
+  ["Ты говоришь, сколько тебе лет.", "Tengo treinta años.", "Soy treinta años.", "Возраст — **tengo**.", 4, "es2-edad"],
+  ["Ты спрашиваешь незнакомого пожилого мужчину, откуда он.", "¿De dónde es usted?", "¿De dónde eres?", "Вежливо — **usted es**.", 1, "es2-cuatro-vy"],
+  ["Ты спрашиваешь друга, откуда он.", "¿De dónde eres?", "¿De dónde es usted?", "Другу — **tú**.", 1, "es2-cuatro-vy"],
+  ["Ты представляешь сестру.", "Esta es mi hermana.", "Este es mi hermana.", "О ней — **esta**.", 7, "es2-este-es"],
+  ["Ты говоришь двум друзьям: «Вы из Мадрида».", "Vosotros sois de Madrid.", "Ustedes son de Madrid, amigos.", "Друзьям в Испании — **vosotros**.", 2, "es2-sois"]
+];
+const ES2_DESC = [
+  ["ruso → rusa · italiano → italiana. А americano?", "americana", ["americane", "americanas"], "**-o → -a**.", 3, "es2-nacionalidad-genero"],
+  ["español → española · inglés → inglesa. А francés?", "francesa", ["francés", "francésa"], "Согласная → **+a**, без знака.", 3, "es2-nacionalidad-genero"],
+  ["libro → libros · casa → casas. А ciudad?", "ciudades", ["ciudads", "ciudadas"], "На согласную — **-es**.", 6, "es2-plural"],
+  ["veinte + uno → veintiuno · veinte + dos → veintidós. А veinte + tres?", "veintitrés", ["veintitres", "veinte y tres"], "Со знаком: **veintitrés**.", 5, "es2-veinti"],
+  ["el padre → los padres · el hijo → los hijos. А el hermano?", "los hermanos", ["las hermanos", "los hermanas"], "**los hermanos**.", 7, "es2-padres"]
+];
+const ES2_CAD = [
+  ["Soy de Moscú.", [["Теперь: ella.", "Ella es de Moscú."], ["Теперь: nosotros.", "Somos de Moscú."]], 3, "es2-ser-de"],
+  ["El libro es nuevo.", [["Теперь: мн. ч.", "Los libros son nuevos."], ["Теперь: la casa.", "La casa es nueva."]], 6, "es2-concordancia"],
+  ["Me llamo Ana.", [["Теперь: о ней (ella).", "Se llama Ana."], ["Теперь: вопрос «как тебя зовут?»", "¿Cómo te llamas?"]], 4, "es2-llamarse"],
+  ["Pablo es español.", [["Теперь: Lucía.", "Lucía es española."], ["Теперь: Pablo y Lucía.", "Pablo y Lucía son españoles."]], 3, "es2-nacionalidad-genero"]
+];
+const ES2_DIAG = [
+  ["Soy un profesor.", "Профессия — без артикля", ["Нужно es", "Нужно la"], "Soy profesor.", 2, "es2-profesion"],
+  ["Soy veinte años.", "Возраст — tener", ["Нужно veintiún", "Нужно de"], "Tengo veinte años.", 4, "es2-edad"],
+  ["Ana es Rusa.", "Национальность — с маленькой буквы", ["Нужно ruso", "Нужно está"], "Ana es rusa.", 3, "es2-nacionalidad-genero"],
+  ["Mi padres son de Moscú.", "Мн. ч. — mis", ["Нужно es", "Нужно la"], "Mis padres son de Moscú.", 7, "es2-padres"],
+  ["¿Dónde eres de?", "Предлог — в начале", ["Нужно estás", "Нужно qué"], "¿De dónde eres?", 8, "es2-de-donde"],
+  ["La libro es nueva.", "Libro — м. р.", ["Нужно son", "Нужно una"], "El libro es nuevo.", 6, "es2-genero"]
+];
+const ES2_DES = [
+  ["Me llamo Ana y soy de Moscú", [["Как зовут?", 2], ["Откуда?", 6], ["Какое слово — ser?", 4]], 3, "es2-ser-de"],
+  ["Mi hermano tiene veinte años", [["Кто?", 1], ["Сколько лет?", 3], ["Какое слово — tener?", 2]], 4, "es2-edad"]
+];
+UNIDAD_ES_2.modulos.forEach(m => (m.secciones || []).forEach(s => { if (ES2_MAS[s.id] && !s.mas) s.mas = ES2_MAS[s.id]; }));
+
+function es2Prof(out, baraja, lex) {
+  const P = (id, tipo, forma, mod, regla, x) => out.push(Object.assign({ id: "ES2-" + id, tipo, forma, dificultad: 2, modulo: mod, regla, grupo: id }, x));
+  ES2_NAT.forEach(([ok, mal, exp, mod, regla], i) => P("nat-" + i, "natural", "elegir", mod, regla, { pide: "Какая фраза правильная?", opciones: baraja([ok].concat(mal), i + 201), correcta: ok, oir: ok, explicacion: "**" + ok + "** " + exp }));
+  ES2_POR.forEach(([fr, q, ok, otras, exp, mod, regla], i) => P("por-" + i, "porque", "elegir", mod, regla, { pide: q, grande: fr, audio: fr, opciones: baraja([ok].concat(otras), i + 211), correcta: ok, oir: fr, explicacion: exp }));
+  ES2_OIDO.forEach(([au, q, ok, ops, exp, mod, regla], i) => P("oid-" + i, "oido", "elegir", mod, regla, { pide: q, audio: au, opciones: ops, correcta: ok, oir: au, explicacion: "«" + au + "» — " + exp }));
+  ES2_PAR.forEach(([sit, ok, otra, exp, mod, regla], i) => P("par-" + i, "par", "elegir", mod, regla, { pide: sit + " Как ты скажешь?", opciones: baraja([ok, otra], i + 221), correcta: ok, oir: ok, explicacion: exp }));
+  ES2_DESC.forEach(([q, ok, otras, exp, mod, regla], i) => P("dsc-" + i, "descubrir", "elegir", mod, regla, { pide: q, opciones: baraja([ok].concat(otras), i + 231), correcta: ok, oir: ok, explicacion: exp }));
+  ES2_CAD.forEach(([base, pasos, mod, regla], i) => P("cdn-" + i, "cadena", "cadena", mod, regla, { dificultad: 3, pide: "Измени фразу шаг за шагом.", base, oir: pasos[pasos.length - 1][1], idioma: "es",
+    pasos: pasos.map(([q, e]) => ({ pide: q, esperadas: [e] })), explicacion: [base].concat(pasos.map(p => p[1])).join(" → ") }));
+  ES2_DIAG.forEach(([fr, ok, otros, bien, mod, regla], i) => P("dg-" + i, "diagnostico", "diagnostico", mod, regla, { dificultad: 3, pide: "В этой фразе ошибка. Что не так?", grande: fr,
+    opciones: baraja([ok].concat(otros), i + 241), correcta: ok, esperadas: [bien], idioma: "es", oir: bien, explicacion: "**" + bien + "**" }));
+  ES2_DES.forEach(([fr, qs, mod, regla], i) => P("ds-" + i, "desarmar", "desarmar", mod, regla, { pide: "Отвечай, нажимая на слова фразы.", palabras: fr.split(" "), audio: fr + ".", oir: fr + ".",
+    preguntas: qs.map(([q, k]) => ({ pide: q, correcta: k })), explicacion: fr + "." }));
+}
+Object.assign(ES2_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1 });

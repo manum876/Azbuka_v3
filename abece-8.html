@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Abecé — Урок 8: Рассказываем о прошлом</title>
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="assets/icon-192.png">
+<link rel="stylesheet" href="assets/core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/preact.js"></script>
+<!-- Archivos de Abecé con document.write, como en abece-4.html (todos en AZ_PRECACHE desde la apertura).
+     La U1 a la U5 y el alfabeto se cargan para saber qué palabras ya se vieron. -->
+<script>
+["data/data-lexicon-es.js", "data/data-formas-es.js", "data/data-verbos-es.js", "data/data-alfabeto-es.js", "data/data-dialogos-es.js", "data/data-unidad-es-1.js", "data/data-unidad-es-2.js", "data/data-unidad-es-3.js", "data/data-unidad-es-4.js", "data/data-unidad-es-5.js", "data/data-unidad-es-6.js", "data/data-unidad-es-7.js", "data/data-unidad-es-8.js"]
+  .forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
+<script src="data/data-catalogo.js"></script>
+<script src="js/core.js"></script>
+<script src="assets/supabase.js"></script>
+<script src="js/cuenta.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/corrector.js"></script>
+<script>
+["js/corrector-es.js"].forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
+<script src="js/burbuja.js"></script>
+<script src="js/unidad-ui.js"></script>
+<script src="js/unidad.js"></script>
+<script>
+/* ============================================================
+   ABECE-8.HTML — Abecé · Урок 8: Рассказываем о прошлом (13/11/2026)
+   ------------------------------------------------------------
+   Mismo esqueleto y mismas clases que abece-4.html: portada, módulos de
+   lección (intro, tablas, teoría, frases, palabras, diálogos, tarjetas,
+   práctica) con la ampliación opcional de azbuka-2.html (sus ejercicios,
+   ampliacion: true, quedan fuera de la práctica de la unidad y de la
+   evaluación). El proyecto (módulo 11) empieza con diálogos por turnos (tipo turnos,
+   corregidos con azSituacionEs de corrector-es.js) y sigue con el texto (AzProyecto); el módulo 13 es el repaso U2–U8 (es8Repaso, en units["es8"].repaso). Contenido en data-unidad-es-8.js;
+   frases y diálogos en data-dialogos-es.js; palabras en el léxico español.
+   Textos en ruso: borrador para Iván. Solo Abecé: en Azbuka, un aviso.
+   URL: abece-8.html (portada) · abece-8.html?m=es8m3 (módulo)
+   ============================================================ */
+const { useState, useEffect } = htmPreact;
+const h = React.createElement;
+const ES_OK = AZ_DIRECCION.id === "abece" && typeof LEXICON_ES !== "undefined" && typeof UNIDAD_ES_8 !== "undefined";
+const U = typeof UNIDAD_ES_8 !== "undefined" ? UNIDAD_ES_8 : { modulos: [] };
+const EJ_U8_TODOS = ES_OK ? ejerciciosUnidadEs8() : [];
+const EJ_U8 = EJ_U8_TODOS.filter(e => !e.ampliacion);   /* la ampliación queda fuera de la práctica de la unidad y de la evaluación */
+const OBJETIVO_U8 = ES_OK ? es8Objetivo() : [];
+const OBJETIVO_DLG = ES_OK ? es1Objetivo().concat(es2Objetivo(), es3Objetivo(), es4Objetivo(), es5Objetivo(), es6Objetivo(), es7Objetivo(), OBJETIVO_U8) : [];   /* en los diálogos se tocan las palabras de la U1 a la U8 */
+const AVISO = "В испанском знак ударения (´) — часть написания: если его забыть, ответ засчитывается как «Почти». Перевёрнутые знаки ¿ и ¡ не обязательны.";
+const REPASO = ES_OK && typeof es8Repaso === "function" ? es8Repaso() : { pool: [], partes: [] };   /* módulo 13: repaso U2–U8 por temas */
+const TIPOS_CONVERSACION = ["situacion-frase", "respuesta", "dictado-frase", "ordenar-frase", "turnos"];
+
+function App() {
+  const [darkMode, setDarkMode] = useState(true);
+  const [modId, setModId] = useState(() => new URLSearchParams(location.search).get("m"));
+  const [practica, setPractica] = useState(null);   /* { titulo, pool, examen? } */
+  const [dialogo, setDialogo] = useState(null);     /* { id, grabar? } */
+  const [tarjetas, setTarjetas] = useState(null);   /* { ids, titulo } */
+  const [visto, setVisto] = useState(1);
+  const [examen, setExamen] = useState(null);
+  const [, refrescar] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      setDarkMode((await azGet('az_theme', 'dark')) !== 'light');
+      setVisto(await azGet('az_es8_visto', 1));
+      await azLoadProgress();
+      if (ES_OK) azSaveUnitProgress(8, {});
+      refrescar(x => x + 1);
+    })();
+    const pop = () => { setModId(new URLSearchParams(location.search).get("m")); setPractica(null); setDialogo(null); setTarjetas(null); };
+    window.addEventListener("popstate", pop);
+    return () => window.removeEventListener("popstate", pop);
+  }, []);
+
+  useEffect(() => {
+    const m = modId && U.modulos.find(x => x.id === modId);
+    window.azFuenteActual = () => m ? "Урок 8 · " + m.titulo : "Урок 8";
+    if (!ES_OK) return;
+    if (m && m.n > visto) { setVisto(m.n); azSet('az_es8_visto', m.n); }
+    if (m) azGuardarUltimo({ unidad: 8, n: m.n, total: U.modulos.length, titulo: "Урок 8 · " + m.titulo, href: "abece-8.html?m=" + m.id });
+  }, [modId]);
+  const [repaso, setRepaso] = useState(null);   /* el repaso U2–U8 (módulo 13), aparte de la evaluación */
+  useEffect(() => { if (!practica && ES_OK && typeof azUnitProgress === "function") { setExamen(azUnitProgress(8).examen || null); setRepaso(azUnitProgress(8).repaso || null); } }, [practica]);
+
+  const practicarUnidad = () => setPractica({ titulo: "Урок 8", pool: EJ_U8.filter(e => e.modulo <= Math.max(visto, 1)) });
+  const practicarModulo = m => setPractica({ titulo: m.titulo, pool: m.tipo === "conversaciones" ? EJ_U8.filter(e => TIPOS_CONVERSACION.indexOf(e.tipo) >= 0) : EJ_U8.filter(e => e.modulo === m.n) });
+  const rendirExamen = m => setPractica({ titulo: "Проверка урока 8", pool: EJ_U8, examen: { intro: m.intro, partes: m.partes, aprobado: m.aprobado } });
+  const practicarAmpliacion = m => setPractica({ titulo: m.ampliacion.titulo, pool: EJ_U8_TODOS.filter(e => e.ampliacion && e.modulo === m.n) });
+  const reforzar = parte => parte.bloque
+    ? setPractica({ titulo: "Повторить: " + parte.nombre, pool: REPASO.pool.filter(e => e.bloque === parte.bloque), mezcla: {} })   /* repaso: los ejercicios de ese tema */
+    : setPractica({ titulo: "Повторить: " + parte.nombre, pool: EJ_U8.filter(e => parte.tipos.indexOf(e.tipo) >= 0) });
+  const rendirRepaso = () => setPractica({ titulo: "Повторение: уроки 2–8", pool: REPASO.pool, mezcla: {}, examen: { intro: REPASO.intro, partes: REPASO.partes, aprobado: REPASO.aprobado,
+    clave: "repaso", kick: "Результат повторения", textoOk: "Повторение сдано.", textoNo: "Пока нет: повтори темы, где меньше 80 %.", repetir: "Пройти повторение ещё раз" } });
+  const abrirModulo = id => { history.pushState(null, "", id ? "?m=" + id : location.pathname); setModId(id); window.scrollTo(0, 0); };
+
+  const c = azColors(darkMode);
+  const green = darkMode ? "#4CAF82" : "#2E7D55";
+  if (!ES_OK) {
+    return h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs: [] },
+      h("div", { style: { textAlign: "center", padding: "12vh 6vw", color: c.textSub, fontSize: "var(--az-fs-cuerpo)", lineHeight: 1.55 } },
+        "Esta unidad es de Abecé (español para rusohablantes).", h("br"),
+        h("a", { href: "index.html", style: { color: c.gold, fontWeight: 700 }, onClick: ev => azNavigate(ev, "index.html") }, "Volver al inicio")));
+  }
+  const mod = modId ? U.modulos.find(x => x.id === modId) : null;
+  const palabrasDom = OBJETIVO_U8.filter(id => azItem("lex:" + id).level === 2).length;
+  const idx = mod ? U.modulos.indexOf(mod) : -1;
+  const vecino = d => { for (let k = idx + d; k >= 0 && k < U.modulos.length; k += d) if (U.modulos[k].tipo !== "pronto") return U.modulos[k]; return null; };
+  const prev = mod && vecino(-1), next = mod && vecino(1);
+
+  const tabs = mod ? [
+    { id: "u", icon: "⊞", aria: "Урок", action: () => abrirModulo(null) },
+    { id: "p", icon: "‹", aria: "Предыдущий модуль", disabled: !prev, action: () => prev && abrirModulo(prev.id) },
+    { id: "m", texto: "Модуль " + mod.n },
+    { id: "s", icon: "›", aria: "Следующий модуль", disabled: !next, action: () => next && abrirModulo(next.id) }
+  ] : azTabsUnidad(8);
+
+  const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 1), examen, onPracticar: practicarUnidad, onAbrir: abrirModulo,
+    extraModulo: m => m.tipo === "repaso" && repaso && h("div", { style: { fontSize: "var(--az-fs-nota)", fontWeight: 700, marginTop: 8, color: repaso.aprobado ? green : "#E2884A" } },
+      "Последняя: " + repaso.pct + " %" + (repaso.aprobado ? " · сдано" : "")),
+    progreso: [{ label: "Слова выучены", valor: palabrasDom, total: OBJETIVO_U8.length }] });
+
+  const vistaModulo = mod && h("div", { key: mod.id, style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16 } },
+    h("div", { className: "u-kicker" }, "Урок 8 · Модуль " + mod.n),
+    h("h1", { className: "u-title" }, mod.titulo),
+    mod.intro && h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(mod.intro)),
+    mod.tipo === "leccion" && h(React.Fragment, null,
+      (mod.tablas || []).map((t, k) => h(React.Fragment, { key: k }, h("div", { className: "u-sec" }, t.titulo), h(AzTablaGrupos, { encabezados: t.encabezados, filas: t.filas, c }))),
+      h(AzSecciones, { secciones: mod.secciones }),
+      mod.frases && mod.frases.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Фразы"), h(AzFrasesLista, { ids: mod.frases, c })),
+      mod.vocab && h(React.Fragment, null, h("div", { className: "u-sec" }, "Слова (" + es8Vocab(mod).length + ")"), h(AzVocabulario, { ids: es8Vocab(mod), c })),
+      mod.dialogos && mod.dialogos.length > 0 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Диалоги"),
+        h(AzListaDialogos, { ids: mod.dialogos, onAbrir: id => setDialogo({ id }) })),
+      mod.vocab && h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: es8Vocab(mod), titulo: mod.titulo }) }, "Карточки (" + es8Vocab(mod).length + ")"),
+      h("button", { className: "ubtn", style: { marginTop: 12 }, onClick: () => practicarModulo(mod) }, "Практиковать этот модуль"),
+      mod.ampliacion && h("div", { style: { marginTop: 24, paddingTop: 8, borderTop: `1px solid ${c.border}` } },
+        h("div", { className: "u-sec" }, mod.ampliacion.titulo + " · по желанию"),
+        h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, azFmt(mod.ampliacion.intro)),
+        h("div", { className: "u-sec" }, "Ещё слова (" + es8Ampliacion(mod).length + ")"), h(AzVocabulario, { ids: es8Ampliacion(mod), c }),
+        h("button", { className: "ubtn", onClick: () => setTarjetas({ ids: es8Ampliacion(mod), titulo: mod.ampliacion.titulo }) }, "Карточки (" + es8Ampliacion(mod).length + ")"),
+        h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => practicarAmpliacion(mod) }, "Практиковать дополнительные слова")),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)),
+    mod.tipo === "conversaciones" && h(React.Fragment, null,
+      h("div", { className: "u-sec" }, "Диалоги, чтобы слушать и записывать себя"),
+      h(AzListaDialogos, { ids: mod.dialogos, onAbrir: id => setDialogo({ id, grabar: true }) }),
+      h("button", { className: "ubtn", style: { marginTop: 16 }, onClick: () => practicarModulo(mod) }, "Практиковать общение"),
+      next && h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)),
+    mod.tipo === "proyecto" && h(React.Fragment, null,
+      mod.turnos && h(React.Fragment, null,   /* U5 (05/11/2026): primero los diálogos por turnos, corregidos por intención */
+        h("div", { className: "u-sec" }, "Разговор по ролям (" + EJ_U8.filter(e => e.tipo === "turnos").length + ")"),
+        h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, "Тебе говорят по-испански — ты отвечаешь своими словами. Если тебя понятно, разговор идёт дальше."),
+        h("button", { className: "ubtn", onClick: () => setPractica({ titulo: "Разговор по ролям", pool: EJ_U8.filter(e => e.tipo === "turnos"), enOrden: true }) }, "Начать разговор"),
+        mod.rutas && h(React.Fragment, null,   /* U6 (05/11/2026): explicar el camino sobre el plano */
+          h("div", { className: "u-sec", style: { marginTop: 24 } }, "Маршрут на плане (" + EJ_U8.filter(e => e.tipo === "ruta").length + ")"),
+          h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, "Турист спрашивает дорогу. Посмотри на план и объясни путь по-испански."),
+          h("button", { className: "ubtn", onClick: () => setPractica({ titulo: "Маршрут на плане", pool: EJ_U8.filter(e => e.tipo === "ruta"), enOrden: true }) }, "Объяснить дорогу")),
+        h("div", { className: "u-sec", style: { marginTop: 24 } }, "Твой текст")),
+      h(AzProyecto, { mod, c, green, clave: "az_es8_proyecto", fuente: { titulo: "Урок 8 · Проект", href: "abece-8.html?m=" + mod.id }, aviso: AVISO, grabar: true })),
+    mod.tipo === "examen" && h(React.Fragment, null,
+      h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 16 } }, mod.partes.map((p, k) =>
+        h("div", { key: p.nombre, style: { display: "flex", justifyContent: "space-between", padding: "12px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: "var(--az-fs-cuerpo)" } },
+          h("span", { style: { fontWeight: 600 } }, p.nombre), h("span", { style: { color: c.textMuted } }, p.n + (p.n === 1 ? " упражнение" : p.n < 5 ? " упражнения" : " упражнений"))))),
+      examen && h("div", { style: { marginTop: 12, fontSize: "var(--az-fs-chico)", color: examen.aprobado ? green : "#E2884A", fontWeight: 700 } },
+        "Последний раз: " + examen.pct + " % (" + examen.fecha.split("-").reverse().join(".") + ")" + (examen.aprobado ? " · сдано" : "")),
+      h("button", { className: "ubtn", onClick: () => rendirExamen(mod) }, examen ? "Пройти ещё раз" : "Начать проверку")),
+    mod.tipo === "repaso" && h(React.Fragment, null,   /* 13/11/2026: repaso acumulativo U2–U8, 5 temas de 6 */
+      h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 16 } }, mod.bloques.map((b, k) =>
+        h("div", { key: b.bloque, style: { display: "flex", justifyContent: "space-between", gap: 12, padding: "12px 0", borderTop: k ? `1px solid ${c.border}` : "none", fontSize: "var(--az-fs-cuerpo)" } },
+          h("span", { style: { fontWeight: 600 } }, b.nombre), h("span", { style: { color: c.textMuted, flexShrink: 0 } }, b.n + " упражнений")))),
+      repaso && h("div", { style: { marginTop: 12, fontSize: "var(--az-fs-chico)", color: repaso.aprobado ? green : "#E2884A", fontWeight: 700 } },
+        "Последний раз: " + repaso.pct + " % (" + repaso.fecha.split("-").reverse().join(".") + ")" + (repaso.aprobado ? " · сдано" : "")),
+      h("button", { className: "ubtn", onClick: rendirRepaso }, repaso ? "Пройти ещё раз" : "Начать повторение")));
+
+  return h(React.Fragment, null,
+    h(AzEstilosUnidad, { c, green }),
+    h(AzShell, { darkMode, setDarkMode, moduleId: null, tabs }, mod ? vistaModulo : portada),
+    practica && h(AzPractica, { key: practica.titulo, unidad: 8, titulo: practica.titulo, pool: practica.pool, mezcla: practica.mezcla || ES8_MEZCLA, n: Math.min(12, azNPractica(practica.pool, 12)), dark: darkMode, aviso: AVISO, enOrden: practica.enOrden,
+      examen: practica.examen, onReforzar: reforzar, onSalir: () => { setPractica(null); refrescar(x => x + 1); } }),
+    dialogo && h(AzHojaDialogo, { d: dialogoEsById(dialogo.id), c, grabar: dialogo.grabar, objetivo: OBJETIVO_DLG, onClose: () => setDialogo(null) }),
+    tarjetas && h(AzTarjetasPalabras, { ids: tarjetas.ids, titulo: tarjetas.titulo, c, green, onClose: () => setTarjetas(null) }),
+    h(AzBurbujaHost, { dark: darkMode }));
+}
+htmPreact.render(htmPreact.h(App, null), document.getElementById('root'));
+</script>
+</body>
+</html>

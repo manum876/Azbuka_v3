@@ -45,10 +45,10 @@ const AZ_PRECACHE = [
   "azbuka-index-1.html", "casos.html", "cuaderno.html", "dialogos.html", "ficha.html",
   "index.html",
   "lecturas.html", "data/data-lecturas.js", "masha.html", "data/data-masha.js",
-  "repaso.html", "verbos.html", "gramatica.html", "abece-1.html", "abece-2.html", "abece-3.html", "abece-4.html", "abece-5.html", "abece-6.html",
+  "repaso.html", "verbos.html", "gramatica.html", "abece-1.html", "abece-2.html", "abece-3.html", "abece-4.html", "abece-5.html", "abece-6.html", "abece-7.html", "abece-8.html", "abece-9.html",
   /* Abecé, abierta el 04/11/2026: sus datos y su código también se guardan al instalar */
-  "data/data-lexicon-es.js", "data/data-formas-es.js", "data/data-verbos-es.js", "data/data-alfabeto-es.js", "data/data-dialogos-es.js", "data/data-gramatica-es.js",
-  "data/data-unidad-es-1.js", "data/data-unidad-es-2.js", "data/data-unidad-es-3.js", "data/data-unidad-es-4.js", "data/data-unidad-es-5.js", "data/data-unidad-es-6.js", "js/corrector-es.js", "js/tilde-es.js", "js/verbos-es.js", "manifest.webmanifest", "manifest-abece.webmanifest", "js/avisos.js", "js/hoy.js", "js/burbuja.js",
+  "data/data-lexicon-es.js", "data/data-formas-es.js", "data/data-verbos-es.js", "data/data-alfabeto-es.js", "data/data-dialogos-es.js", "data/data-cultura-es.js", "data/data-gramatica-es.js",
+  "data/data-unidad-es-1.js", "data/data-unidad-es-2.js", "data/data-unidad-es-3.js", "data/data-unidad-es-4.js", "data/data-unidad-es-5.js", "data/data-unidad-es-6.js", "data/data-unidad-es-7.js", "data/data-unidad-es-8.js", "data/data-unidad-es-9.js", "js/corrector-es.js", "js/tilde-es.js", "js/verbos-es.js", "manifest.webmanifest", "manifest-abece.webmanifest", "js/avisos.js", "js/hoy.js", "js/burbuja.js",
   "js/core.js", "js/corrector.js", "js/cuenta.js", "js/mano.js", "js/progress.js", "js/shell.js",
   "js/unidad-ui.js", "js/unidad.js", "data/data-alphabet.js", "data/data-casos.js", "data/data-catalogo.js",
   "data/data-cultura.js", "data/data-dialogos.js", "data/data-frases.js", "data/data-gramatica.js",

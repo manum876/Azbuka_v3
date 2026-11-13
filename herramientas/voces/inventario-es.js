@@ -168,7 +168,9 @@ if (GRUPO === "unidades" || TODO) {
     }));
   }
   /* 6. Lo que todavía no existe (se saltea solo): Cultura, Lecturas y la charla con Lucía */
-  if (ctx.CULTURA_ES) recorrer(ctx.CULTURA_ES, "dialogos", null, new Set());
+  /* Cultura (12/11/2026): solo los ejemplos en español, sin las llaves { } que marcan la palabra
+     (dialogos.html los dice así); el texto, la comparación y las explicaciones son rusos. */
+  if (ctx.CULTURA_ES) ctx.CULTURA_ES.forEach(n => (n.ejemplos || []).forEach(ej => sumar(String(ej[0]).replace(/[{}]/g, ""), null, "dialogos")));
   if (existe("data/data-lecturas-es.js")) {
     cargar("data/data-lecturas-es.js", ["LECTURAS_ES"]);
     (ctx.LECTURAS_ES || []).forEach(L => {

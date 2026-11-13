@@ -1,6 +1,6 @@
 /* Abecé — formas de las palabras que cambian (FORMAS_ES).
    Generado por herramientas/abece/formas-es.py: no editar a mano.
-   3722 entradas. t: sust | adj | det | num | art | pron | contr.
+   3729 entradas. t: sust | adj | det | num | art | pron | contr.
    sust: sg, pl, art [sg, pl], g; f/fpl/artF si tiene femenino; elA (el agua);
          inv (pl = sg); soloPl; sentido (el/la cambia el sentido).
    adj/det/num: m, f, mpl, fpl; invG (igual en m y f); apoc (+ apocF: también ante f); var (la otra forma del plural: la de la RAE).
@@ -3727,7 +3727,14 @@ const FORMAS_ES = {
 "ESP-05460":{"t":"sust","g":"f","sg":"alergia","pl":"alergias","art":["la","las"]},
 "ESP-05461":{"t":"sust","g":"f","sg":"tirita","pl":"tiritas","art":["la","las"]},
 "ESP-05462":{"t":"adj","m":"plano","f":"plana","mpl":"planos","fpl":"planas"},
-"ESP-05463":{"t":"adj","m":"pasajero","f":"pasajera","mpl":"pasajeros","fpl":"pasajeras"}
+"ESP-05463":{"t":"adj","m":"pasajero","f":"pasajera","mpl":"pasajeros","fpl":"pasajeras"},
+"ESP-05465":{"t":"sust","g":"m","sg":"chat","pl":"chats","art":["el","los"]},
+"ESP-05466":{"t":"sust","g":"m","sg":"finde","pl":"findes","art":["el","los"]},
+"ESP-05467":{"t":"sust","g":"f","sg":"sobremesa","pl":null,"art":["la","las"]},
+"ESP-05470":{"t":"adj","m":"rizado","f":"rizada","mpl":"rizados","fpl":"rizadas"},
+"ESP-05471":{"t":"sust","g":"m","sg":null,"pl":"deberes","art":[null,"los"],"soloPl":true},
+"ESP-05472":{"t":"sust","g":"m","sg":"recreo","pl":"recreos","art":["el","los"]},
+"ESP-05473":{"t":"sust","g":"m","sg":null,"pl":"dibujos animados","art":[null,"los"],"soloPl":true}
 };
 
 const FORMAS_ES_SERIES = {

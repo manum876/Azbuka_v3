@@ -16,12 +16,16 @@
 <body>
 <div id="root"></div>
 <script src="assets/preact.js"></script>
-<script src="data/data-lexicon.js"></script>
-<script src="data/data-dialogos.js"></script>
-<script src="data/data-frases.js"></script>
-<script src="data/data-cultura.js"></script>
 <script src="data/data-catalogo.js"></script>
 <script src="js/core.js"></script>
+<!-- Los datos de la dirección activa (12/11/2026): en Azbuka, el léxico ruso, sus diálogos,
+     frases y notas; en Abecé, el léxico español, data-dialogos-es.js y data-cultura-es.js -->
+<script>
+(AZ_DIRECCION.id === "abece"
+  ? ["data/data-lexicon-es.js", "data/data-dialogos-es.js", "data/data-cultura-es.js"]
+  : ["data/data-lexicon.js", "data/data-dialogos.js", "data/data-frases.js", "data/data-cultura.js"]
+).forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
 <script src="assets/supabase.js"></script>
 <script src="js/cuenta.js"></script>
 <script src="js/progress.js"></script>
@@ -42,27 +46,138 @@
      (?frase=FRS-xxx y ?cul=CUL-xxx también las abren al cargar).
    Esta página NO guarda datos: todo sale de data-dialogos.js,
    data-frases.js, data-cultura.js y el léxico.
+   · Abecé (12/11/2026): la misma página lee la dirección y usa
+     data-dialogos-es.js (DIALOGOS_ES, FRASES_ES, situaciones y
+     funciones en ruso) y data-cultura-es.js (CULTURA_ES). Lo que se
+     aprende es el español (campo es) y la traducción, el ruso (ru);
+     textos de pantalla en ruso (TX, borrador para Iván), voz
+     azHablarEs y «palabra por palabra» con data-formas-es.js y
+     data-verbos-es.js (se cargan al abrir una línea).
    ============================================================ */
 const { useState, useEffect, useRef, useLayoutEffect } = htmPreact;
 const h = React.createElement;
 
 const PARAMS = new URLSearchParams(window.location.search);
-const POS_SHORT = { sustantivo: "sust.", verbo: "verbo", adjetivo: "adj.", pronombre: "pron.", determinante: "det.", numeral: "num.", adverbio: "adv.", "preposición": "prep.", "conjunción": "conj.", "partícula": "part.", "interjección": "interj." };
-const RX_PALABRA = /[А-Яа-яЁё́]+(?:-[А-Яа-яЁё́]+)*/g;
-const SIT = Object.fromEntries(DLG_SITUACIONES);
-const FUN = Object.fromEntries(DLG_FUNCIONES);
-const TIPOS_CUL = ["Pragmática", "Nombres", "Rituales", "Vida práctica"];
 
-/* Para buscar: sin acentos (ruso y español), ё = е, minúsculas. */
+/* ── Dirección: Azbuka (diálogos rusos) o Abecé (diálogos españoles) ── */
+const ES = AZ_DIRECCION.id === "abece" && typeof DIALOGOS_ES !== "undefined";
+const DIALOGOS_D = ES ? DIALOGOS_ES : DIALOGOS;
+const FRASES_D = ES ? FRASES_ES : FRASES;
+const CULTURA_D = ES ? CULTURA_ES : CULTURA;
+const PERSONAJES_D = ES ? DLG_PERSONAJES_ES : DLG_PERSONAJES;
+const SITUACIONES_D = ES ? DLG_SITUACIONES_ES : DLG_SITUACIONES;
+const FUNCIONES_D = ES ? DLG_FUNCIONES_ES : DLG_FUNCIONES;
+const dlgPorId = id => DIALOGOS_D.find(d => d.id === id) || null;
+const frasePorId = id => FRASES_D.find(f => f.id === id) || null;
+const culPorId = id => CULTURA_D.find(n => n.id === id) || null;
+const lexPorId = id => ES ? (typeof lexEsById === "function" ? lexEsById(id) : null) : lexComerById(id);
+/* Lo que se aprende y su traducción (en Abecé, los campos van al revés) */
+const meta = x => ES ? x.es : x.ru;
+const trad = x => ES ? x.ru : x.es;
+const tituloMeta = d => ES ? d.tituloEs : d.tituloRu;     /* d.titulo es la traducción en las dos */
+const nombreMeta = p => ES ? p.es : p.ru;                  /* el personaje, en la lengua que se aprende */
+const nombreTrad = p => ES ? p.ru : p.es;
+const palabraLex = e => ES ? e.es : (e.acento || e.ru);
+/* Notas de Abecé con **negrita** (las de las unidades): azFmt de core.js. Las de Azbuka van tal cual. */
+const fmt = t => ES && t ? azFmt(t) : t;
+/* Plural ruso: 1 диалог, 2 диалога, 5 диалогов */
+function pluralRu(n, uno, pocos, muchos) {
+  const d = n % 10, c = n % 100;
+  return d === 1 && c !== 11 ? uno : d >= 2 && d <= 4 && (c < 12 || c > 14) ? pocos : muchos;
+}
+/* Textos de la página (los de Abecé, en ruso: borrador para Iván) */
+const TX = ES ? {
+  titulo: "Диалоги", docTitulo: "Abecé · Диалоги",
+  kicker: (d, f, n) => d + " " + pluralRu(d, "диалог", "диалога", "диалогов") + " · " + f + " " + pluralRu(f, "фраза", "фразы", "фраз") + " · " + n + " " + pluralRu(n, "заметка", "заметки", "заметок"),
+  intro: "Короткие разговоры из жизни в Испании, с аудио, подсказкой кириллицей и переводом. Каждое слово связано со словарём.",
+  introItems: [
+    ["Диалоги по ситуациям", "От знакомства до аптеки: в кафе, в магазине, в городе и дома."],
+    ["Слово за словом", "Нажми на испанскую строку, чтобы увидеть каждое слово, его форму и карточку в словаре."],
+    ["Фразы и культура", "Выражения, которые стоит запомнить целиком, и обычаи Испании, которые за ними стоят."]
+  ],
+  ejemplos: ["DLE-002", "DLE-021", "DLE-025"],
+  buscar: "Поиск: диалог, фраза или заметка…", limpiar: "Очистить поиск", sinRes: "Ничего не найдено",
+  pista: "Ищи по-испански или по-русски: «gracias», «счёт».", prueba: "Попробуй:",
+  tipo: { dialogo: "диалог", frase: "фраза", cultura: "культура" },
+  tabs: ["Начало", "Диалоги", "Фразы", "Культура"],
+  listaD: "Диалоги", descD: "По ситуациям. Рядом с названием — урок, в котором встречается диалог.",
+  listaF: "Фразы", descF: "Выражения, которые стоит выучить целиком, по тому, что ты хочешь сделать. Нажми на фразу, чтобы узнать, когда её говорят.",
+  misFrases: "Мои фразы",
+  listaC: "Культура", descC: "Как испанский живёт в повседневной жизни Испании, в сравнении с Россией.",
+  asp: d => "урок " + d.unidad,
+  badge: d => d.nivel + " · Урок " + d.unidad,
+  noDlg: "Диалог не найден", noDlgTxt: id => "Нет диалога с номером «" + id + "».",
+  dialogo: "Диалог", tr: "Кириллица", trad: "Перевод", practicar: "Практика:", todo: "Всё", soy: p => "Я — " + p.ru,
+  turno: "Твоя очередь: скажи по-испански и нажми, чтобы проверить ›",
+  notaPractica: "Прочитай перевод, скажи реплику по-испански вслух и нажми, чтобы проверить.",
+  notaVer: "Нажми на испанскую строку, чтобы увидеть каждое слово. ▶ — одна реплика; верхний ▶ — весь диалог.",
+  frasesDe: "Фразы из этого диалога", cultura: "Культура", culturaDe: n => "Культура: " + n.titulo,
+  escuchar: "Слушать", escucharTodo: "Слушать весь диалог", detener: "Стоп", guardar: "Сохранить в тетрадь", cerrar: "Закрыть",
+  cuDlg: "Диалоги · ", cuFrase: "Фраза · ",
+  frase: "Фраза · ", registro: r => r === "tú" ? "На «tú»" : r === "usted" ? "На «usted»" : "Для «tú» и «usted»",
+  favSi: "★ В моих фразах", favNo: "☆ Сохранить в мои фразы",
+  cuando: "Когда говорят", palabraPorPalabra: "Слово за словом", enDialogos: "В диалогах",
+  culKicker: n => "Культура · " + (Object.fromEntries(CULTURA_ES_TIPOS)[n.tipo] || n.tipo),
+  comparar: "В России", campoComparar: "rusia", ejemplosLbl: "Примеры", palabras: "Слова", frases: "Фразы",
+  tiposCul: CULTURA_ES_TIPOS,
+  propio: "имя собственное", letra: "название буквы", noDic: "пока нет в словаре", de: " от ",
+  pos: { sustantivo: "сущ.", verbo: "гл.", adjetivo: "прил.", pronombre: "мест.", determinante: "опр.", numeral: "числ.", adverbio: "нареч.", "preposición": "предл.", "conjunción": "союз", "partícula": "част.", "interjección": "межд.", "artículo": "арт.", "contracción": "слитн." }
+} : {
+  titulo: "Diálogos", docTitulo: null,
+  kicker: (d, f, n) => d + " diálogos · " + f + " frases · " + n + " notas",
+  intro: "Conversaciones cortas de la vida real, con audio y transliteración, y cada palabra conectada al diccionario.",
+  introItems: [
+    ["Diálogos por situación", "Del saludo a una emergencia, muchos con versión informal (ты) y formal (вы)."],
+    ["Palabra por palabra", "Toca una línea para ver cada palabra, de qué forma viene y su ficha."],
+    ["Frases y cultura", "Las fórmulas que conviene saber enteras y las costumbres que hay detrás."]
+  ],
+  ejemplos: ["DLG-001", "DLG-008", "DLG-028"],
+  buscar: "Buscar diálogo, frase o nota…", limpiar: "Limpiar búsqueda", sinRes: "Sin resultados",
+  pista: "Puedes buscar en ruso o en español: «gracias», «кафе́», «cumpleaños».", prueba: "Prueba con:",
+  tipo: { dialogo: "diálogo", frase: "frase", cultura: "cultura" },
+  tabs: ["Inicio", "Diálogos", "Frases", "Cultura"],
+  listaD: "Diálogos", descD: "Ordenados por situación. El nivel va al lado del título; «ты/вы» indica que tiene versión informal y formal.",
+  listaF: "Frases", descF: "Expresiones que conviene aprender enteras, ordenadas por lo que quieres hacer. Toca una para ver cuándo se usa.",
+  misFrases: "Mis frases",
+  listaC: "Cultura", descC: "Cómo se usa el idioma en la vida real, comparado con lo que se hace en España.",
+  asp: d => d.nivel + (d.vy ? " · ты/вы" : ""),
+  badge: d => d.nivel + " · " + (FUN[d.funcion] || ""),
+  noDlg: "Diálogo no encontrado", noDlgTxt: id => `No hay ningún diálogo con id "${id}".`,
+  dialogo: "Diálogo", tr: "Transliteración", trad: "Traducción", practicar: "Practicar:", todo: "Ver todo", soy: p => "Soy " + p.es,
+  turno: "Tu turno: dilo en ruso y toca para ver ›",
+  notaPractica: "Lee la traducción, di la línea en ruso en voz alta y toca para comprobar.",
+  notaVer: "Toca una línea en ruso para ver cada palabra. ▶ escucha una línea; el de arriba, todo el diálogo.",
+  frasesDe: "Frases de este diálogo", cultura: "Cultura", culturaDe: n => "Cultura: " + n.titulo,
+  escuchar: "Escuchar", escucharTodo: "Escuchar todo el diálogo", detener: "Detener", guardar: "Guardar en el cuaderno", cerrar: "Cerrar",
+  cuDlg: "Diálogos · ", cuFrase: "Frase · ",
+  frase: "Frase · ", registro: r => r === "ты" ? "Informal (ты)" : r === "вы" ? "Formal (вы)" : "Informal y formal",
+  favSi: "★ Guardada en mis frases", favNo: "☆ Guardar en mis frases",
+  cuando: "Cuándo se usa", palabraPorPalabra: "Palabra por palabra", enDialogos: "En los diálogos",
+  culKicker: n => "Cultura · " + n.tipo,
+  comparar: "En España", campoComparar: "rio", ejemplosLbl: "Ejemplos", palabras: "Palabras", frases: "Frases",
+  tiposCul: [["Pragmática", "Pragmática"], ["Nombres", "Nombres"], ["Rituales", "Rituales"], ["Vida práctica", "Vida práctica"]],
+  propio: "nombre propio", letra: "letra", noDic: "todavía no está en el diccionario", de: " de ",
+  pos: { sustantivo: "sust.", verbo: "verbo", adjetivo: "adj.", pronombre: "pron.", determinante: "det.", numeral: "num.", adverbio: "adv.", "preposición": "prep.", "conjunción": "conj.", "partícula": "part.", "interjección": "interj." }
+};
+if (TX.docTitulo) document.title = TX.docTitulo;
+const RX_PALABRA = ES ? /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:-[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*/g : /[А-Яа-яЁё́]+(?:-[А-Яа-яЁё́]+)*/g;
+const SIT = Object.fromEntries(SITUACIONES_D);
+const FUN = Object.fromEntries(FUNCIONES_D);
+
+/* Para buscar: sin acentos (ruso y español), ё = е, ñ = n, minúsculas. */
 function norm(s) {
   return (s || "").toLowerCase().normalize("NFD").replace(/[̀́̃̈]/g, "").normalize("NFC");
 }
 
-/* ── Voz: la compartida de core.js (azHablarRu), con el género de
-   cada personaje. Las llaves { } del texto marcan palabras y no se leen. */
-function speakRu(text, genero) { azHablarRu(String(text || "").replace(/[{}]/g, ""), genero); }
+/* ── Voz: la compartida de core.js (azHablarRu / azHablarEs), con la voz
+   de cada personaje. Las llaves { } del texto marcan palabras y no se leen. */
+function speakRu(text, genero) {
+  const t = String(text || "").replace(/[{}]/g, "");
+  if (ES) azHablarEs(t, null, genero); else azHablarRu(t, genero);
+}
 function speakSeq(items, onLine, onEnd) {
-  azHablarSecuencia(items.map(it => ({ texto: String(it.text).replace(/[{}]/g, ""), genero: it.genero })), onLine, onEnd);
+  const lista = items.map(it => ({ texto: String(it.text).replace(/[{}]/g, ""), genero: it.genero }));
+  if (ES) azHablarSecuenciaEs(lista, onLine, onEnd); else azHablarSecuencia(lista, onLine, onEnd);
 }
 function stopSpeech() { azCallar(); }
 
@@ -77,19 +192,19 @@ function useLockScroll() {
 /* Personaje de una línea, según el registro elegido */
 function personajeDe(d, clave, registro) {
   const k = registro === "вы" && d.vy && d.vy[clave] ? d.vy[clave] : clave;
-  return Object.assign({ clave: k }, DLG_PERSONAJES[k] || { ru: k, es: k });
+  return Object.assign({ clave: k }, PERSONAJES_D[k] || { ru: k, es: k });
 }
 function lineaEn(l, registro) {
   return registro === "вы" && l.vy ? Object.assign({}, l, l.vy) : l;
 }
 /* Diálogos que usan una frase / una nota cultural */
 function dialogosConFrase(fid) {
-  return DIALOGOS.filter(d => d.lineas.some(l => (l.f || []).includes(fid) || (l.vy && (l.vy.f || []).includes(fid))));
+  return DIALOGOS_D.filter(d => d.lineas.some(l => (l.f || []).includes(fid) || (l.vy && (l.vy.f || []).includes(fid))));
 }
 function dialogosConCultura(cid) {
-  return DIALOGOS.filter(d => d.lineas.some(l => l.cul === cid || (l.vy && l.vy.cul === cid)));
+  return DIALOGOS_D.filter(d => d.lineas.some(l => l.cul === cid || (l.vy && l.vy.cul === cid)));
 }
-function frasesConCultura(cid) { return FRASES.filter(f => f.cul === cid); }
+function frasesConCultura(cid) { return FRASES_D.filter(f => f.cul === cid); }
 
 function DlgStyles({ c }) {
   return h("style", null, `
@@ -190,7 +305,7 @@ function Ejemplo({ ru, es, por }) {
         h("div", { className: "ex-ru" }, h(RuMarcado, { text: ru })),
         h("div", { className: "ex-es" }, es)
       ),
-      h("button", { className: "play", onClick: () => speakRu(ru), "aria-label": "Escuchar" }, "▶")
+      h("button", { className: "play", onClick: () => speakRu(ru), "aria-label": TX.escuchar }, "▶")
     ),
     por && h("div", { className: "ex-why" }, por)
   );
@@ -200,7 +315,59 @@ function Ejemplo({ ru, es, por }) {
    Cada palabra rusa de un texto, con su ID del léxico (campo lex).
    Si es una forma (тебе́, зову́t), dice de qué palabra viene y lleva
    a Casos o Verbos con la forma resaltada; si no, a la ficha. */
+/* Formas para «palabra por palabra»: en Azbuka, Casos y Verbos; en Abecé, data-formas-es.js
+   y data-verbos-es.js. Se cargan la primera vez y avisan con el evento "az-formas". */
+function cargarFormas() {
+  if (ES) { if (typeof azCargarFormasEs === "function") azCargarFormasEs(); if (typeof azCargarVerbosEs === "function") azCargarVerbosEs(); }
+  else if (typeof azCargarFormas === "function") azCargarFormas();
+}
+const LETRAS_ES = new Set(["a", "be", "ce", "de", "e", "efe", "ge", "hache", "i", "jota", "ka", "ele", "eme", "ene", "eñe", "o", "pe", "cu", "erre", "ese", "te", "u", "uve", "equis", "ye", "zeta"]);
+/* Abecé: cada palabra española de una línea, con su ID (campo lex). Si es una forma
+   (tienes, buenas, llaves), dice de qué palabra viene (como la burbuja) y lleva a
+   Verbos o Gramática con la forma resaltada; si no, a la ficha. */
+function DesgloseEs({ texto }) {
+  const toks = texto.es.match(RX_PALABRA) || [];
+  const vistos = new Set();
+  const filas = [];
+  toks.forEach((t, i) => {
+    const id = (texto.lex || [])[i];
+    const k = t.toLowerCase() + "|" + id;
+    if (vistos.has(k)) return;
+    vistos.add(k);
+    filas.push([t, id]);
+  });
+  return h("div", null, filas.map(([t, id], i) => {
+    const e = id ? lexPorId(id) : null;
+    if (!e) {
+      const deletreo = LETRAS_ES.has(t.toLowerCase()) && (texto.lex || []).every(x => !x);   /* «Pe, e, te, erre…» */
+      const que = deletreo ? TX.letra : t.charAt(0) !== t.charAt(0).toLowerCase() ? TX.propio : TX.noDic;
+      return h("div", { key: i, className: "w-row" }, h("span", { className: "w-ru", lang: "es" }, t), h("span", { className: "w-es" }, que));
+    }
+    const k = t.toLowerCase();
+    const esLema = k === e.es.toLowerCase();
+    const etiq = [];
+    let modulo = null;
+    if (!esLema) {
+      if (typeof formasEsLista === "function") formasEsLista(id).forEach(x => {
+        if (x.f.toLowerCase() === k && AZ_FES_K[x.k] && etiq.indexOf(AZ_FES_K[x.k]) < 0) { etiq.push(AZ_FES_K[x.k]); modulo = "gramatica.html"; }
+      });
+      if (typeof vesBuscarForma === "function") (vesBuscarForma(t) || []).forEach(r => {
+        if (r.id === id) { (r.etiquetas || []).forEach(x => { if (etiq.indexOf(x) < 0) etiq.push(x); }); modulo = "verbos.html"; }
+      });
+    }
+    const href = !esLema && modulo ? modulo + "?id=" + id + "&f=" + encodeURIComponent(k) : "ficha.html?id=" + id;
+    return h("a", { key: i, className: "w-row", href, onClick: (ev) => azNavigate(ev, href) },
+      h("span", null,
+        h("span", { className: "w-ru", lang: "es" }, k),
+        h("span", { className: "w-pos" }, TX.pos[e.posNormalized] || ""),
+        !esLema && h("span", { className: "w-sub" }, (etiq.length ? etiq.join(" / ") + TX.de : TX.de.trim() + " ") + e.es)
+      ),
+      h("span", { className: "w-es" }, (e.senses || []).map(s => s.ru).filter(Boolean).slice(0, 2).join(" · "), h("span", { className: "w-go" }, "›"))
+    );
+  }));
+}
 function Desglose({ texto }) {
+  if (ES) return h(DesgloseEs, { texto });
   const toks = texto.ru.match(RX_PALABRA) || [];
   const vistos = new Set();
   const filas = [];
@@ -213,10 +380,10 @@ function Desglose({ texto }) {
   });
   return h("div", null, filas.map(([t, id], i) => {
     if (id === "PROPIO") return h("div", { key: i, className: "w-row" },
-      h("span", { className: "w-ru" }, t), h("span", { className: "w-es" }, "nombre propio"));
-    const e = id ? lexComerById(id) : null;
+      h("span", { className: "w-ru" }, t), h("span", { className: "w-es" }, TX.propio));
+    const e = id ? lexPorId(id) : null;
     if (!e) return h("div", { key: i, className: "w-row" },
-      h("span", { className: "w-ru" }, t), h("span", { className: "w-es" }, "todavía no está en el diccionario"));
+      h("span", { className: "w-ru" }, t), h("span", { className: "w-es" }, TX.noDic));
     const lema = e.acento || e.ru;
     const esLema = azFormaClave(lema) === azFormaClave(t);
     let etiq = [];
@@ -231,7 +398,7 @@ function Desglose({ texto }) {
     return h("a", { key: i, className: "w-row", href, onClick: (ev) => azNavigate(ev, href) },
       h("span", null,
         h("span", { className: "w-ru" }, t.toLowerCase()),
-        h("span", { className: "w-pos" }, POS_SHORT[e.posNormalized] || ""),
+        h("span", { className: "w-pos" }, TX.pos[e.posNormalized] || ""),
         !esLema && h("span", { className: "w-sub" }, (etiq.length ? etiq.join(" / ") + " de " : "de ") + lema)
       ),
       h("span", { className: "w-es" }, (e.senses || []).map(s => s.es).slice(0, 2).join(" · "), h("span", { className: "w-go" }, "›"))
@@ -242,47 +409,47 @@ function Desglose({ texto }) {
 /* ── Hoja de frase ── */
 function FraseSheet({ fid, onClose, onCultura, favs, toggleFav }) {
   useLockScroll();
-  const f = fraseById(fid);
+  const f = frasePorId(fid);
   const [, setFormas] = useState(0);
   useEffect(() => {
     const on = () => setFormas(n => n + 1);
     window.addEventListener("az-formas", on);
-    if (typeof azCargarFormas === "function") azCargarFormas();
+    cargarFormas();
     return () => window.removeEventListener("az-formas", on);
   }, []);
   if (!f) return null;
   const dls = dialogosConFrase(fid);
-  const cul = f.cul ? culturaById(f.cul) : null;
+  const cul = f.cul ? culPorId(f.cul) : null;
   const key = "frases:" + f.id;
   const fav = favs.indexOf(key) >= 0;
   return h("div", { className: "sheet", role: "dialog", "aria-modal": "true" },
-    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": TX.cerrar }, "✕"),
     h("div", { className: "sheet-in" },
-      h("div", { className: "sheet-kicker" }, "Frase · " + (FUN[f.funcion] || "")),
+      h("div", { className: "sheet-kicker" }, TX.frase + (FUN[f.funcion] || "")),
       h("div", { className: "sheet-title-row" },
-        h("div", { className: "sheet-title" }, f.ru),
-        h("button", { className: "play", onClick: () => speakRu(f.ru), "aria-label": "Escuchar" }, "▶"),
-        h("button", { className: "play", onClick: () => azGuardarEnCuaderno(f.ru + "\n" + f.es, { titulo: "Frase · " + f.ru, href: "dialogos.html?frase=" + f.id }), "aria-label": "Guardar en el cuaderno" }, "＋")
+        h("div", { className: "sheet-title", lang: ES ? "es" : "ru" }, meta(f)),
+        h("button", { className: "play", onClick: () => speakRu(meta(f)), "aria-label": TX.escuchar }, "▶"),
+        h("button", { className: "play", onClick: () => azGuardarEnCuaderno(meta(f) + "\n" + trad(f), { titulo: TX.cuFrase + meta(f), href: "dialogos.html?frase=" + f.id }), "aria-label": TX.guardar }, "＋")
       ),
       h("div", { className: "sheet-sub az-tl" }, f.tr),
-      h("div", { className: "sheet-q" }, f.es),
+      h("div", { className: "sheet-q" }, trad(f)),
       h("div", { className: "tags" },
-        h("span", { className: "tag" }, f.registro === "ты" ? "Informal (ты)" : f.registro === "вы" ? "Formal (вы)" : "Informal y formal"),
+        h("span", { className: "tag" }, TX.registro(f.registro)),
         h("span", { className: "tag" }, f.nivel)
       ),
       h("div", { className: "help-row" },
-        h("button", { className: "help-chip", onClick: () => toggleFav(key) }, fav ? "★ Guardada en mis frases" : "☆ Guardar en mis frases")
+        h("button", { className: "help-chip", onClick: () => toggleFav(key) }, fav ? TX.favSi : TX.favNo)
       ),
-      h("div", { className: "section-lbl" }, "Cuándo se usa"),
-      h("div", { className: "sheet-text", style: { marginTop: 0 } }, f.uso),
-      h("div", { className: "section-lbl" }, "Palabra por palabra"),
+      h("div", { className: "section-lbl" }, TX.cuando),
+      h("div", { className: "sheet-text", style: { marginTop: 0 } }, fmt(f.uso)),
+      h("div", { className: "section-lbl" }, TX.palabraPorPalabra),
       h("div", { className: "list", style: { padding: "8px 14px" } }, h(Desglose, { texto: f })),
       cul && h("div", null,
-        h("div", { className: "section-lbl" }, "Cultura"),
+        h("div", { className: "section-lbl" }, TX.cultura),
         h("button", { className: "help-chip", onClick: () => onCultura(cul.id) }, cul.titulo, h("span", null, "?"))
       ),
       dls.length > 0 && h("div", null,
-        h("div", { className: "section-lbl" }, "En los diálogos"),
+        h("div", { className: "section-lbl" }, TX.enDialogos),
         h(ListaDialogos, { lista: dls })
       )
     )
@@ -292,39 +459,39 @@ function FraseSheet({ fid, onClose, onCultura, favs, toggleFav }) {
 /* ── Hoja de nota cultural ── */
 function CulturaSheet({ cid, onClose, onFrase }) {
   useLockScroll();
-  const n = culturaById(cid);
+  const n = culPorId(cid);
   if (!n) return null;
   const dls = dialogosConCultura(cid);
   const frs = frasesConCultura(cid);
   return h("div", { className: "sheet", role: "dialog", "aria-modal": "true" },
-    h("button", { className: "sheet-x", onClick: onClose, "aria-label": "Cerrar" }, "✕"),
+    h("button", { className: "sheet-x", onClick: onClose, "aria-label": TX.cerrar }, "✕"),
     h("div", { className: "sheet-in" },
-      h("div", { className: "sheet-kicker" }, "Cultura · " + n.tipo),
+      h("div", { className: "sheet-kicker" }, TX.culKicker(n)),
       h("div", { className: "sheet-title" }, n.titulo),
       h("div", { className: "sheet-text" }, n.texto),
-      n.rio && h("div", null,
-        h("div", { className: "section-lbl" }, "En España"),
-        h("div", { className: "nota" }, n.rio)
+      n[TX.campoComparar] && h("div", null,
+        h("div", { className: "section-lbl" }, TX.comparar),
+        h("div", { className: "nota" }, n[TX.campoComparar])
       ),
       n.ejemplos && n.ejemplos.length > 0 && h("div", null,
-        h("div", { className: "section-lbl" }, "Ejemplos"),
+        h("div", { className: "section-lbl" }, TX.ejemplosLbl),
         n.ejemplos.map((ej, i) => h(Ejemplo, { key: i, ru: ej[0], es: ej[1], por: ej[2] }))
       ),
       n.lex && n.lex.length > 0 && h("div", null,
-        h("div", { className: "section-lbl" }, "Palabras"),
+        h("div", { className: "section-lbl" }, TX.palabras),
         h("div", { className: "try-row", style: { marginTop: 0 } }, n.lex.map(id => {
-          const e = lexComerById(id);
+          const e = lexPorId(id);
           if (!e) return null;
           const href = "ficha.html?id=" + id;
-          return h("a", { key: id, className: "try-chip", href, onClick: (ev) => azNavigate(ev, href) }, e.acento || e.ru);
+          return h("a", { key: id, className: "try-chip", href, onClick: (ev) => azNavigate(ev, href) }, palabraLex(e));
         }))
       ),
       frs.length > 0 && h("div", null,
-        h("div", { className: "section-lbl" }, "Frases"),
+        h("div", { className: "section-lbl" }, TX.frases),
         h("div", { className: "list" }, frs.map(f => h(FilaFrase, { key: f.id, f, onClick: () => onFrase(f.id) })))
       ),
       dls.length > 0 && h("div", null,
-        h("div", { className: "section-lbl" }, "En los diálogos"),
+        h("div", { className: "section-lbl" }, TX.enDialogos),
         h(ListaDialogos, { lista: dls })
       )
     )
@@ -335,7 +502,7 @@ function CulturaSheet({ cid, onClose, onFrase }) {
 function FilaDialogo({ d }) {
   const href = "dialogos.html?id=" + d.id;
   return h("a", { className: "res-row", href, onClick: (e) => { stopSpeech(); azNavigate(e, href); } },
-    h("span", null, h("span", { className: "res-ru" }, d.tituloRu), h("span", { className: "res-asp" }, d.nivel + (d.vy ? " · ты/вы" : ""))),
+    h("span", null, h("span", { className: "res-ru" }, tituloMeta(d)), h("span", { className: "res-asp" }, TX.asp(d))),
     h("span", { className: "res-es" }, d.titulo)
   );
 }
@@ -344,8 +511,8 @@ function ListaDialogos({ lista }) {
 }
 function FilaFrase({ f, onClick }) {
   return h("button", { className: "res-row", onClick },
-    h("span", null, h("span", { className: "res-ru" }, f.ru), f.registro && h("span", { className: "res-asp" }, f.registro)),
-    h("span", { className: "res-es" }, f.es)
+    h("span", null, h("span", { className: "res-ru" }, meta(f)), f.registro && h("span", { className: "res-asp" }, f.registro)),
+    h("span", { className: "res-es" }, trad(f))
   );
 }
 function FilaCultura({ n, onClick }) {
@@ -359,31 +526,31 @@ function FilaCultura({ n, onClick }) {
 function Linea({ d, l, idx, registro, showTr, showEs, oculta, onRevelar, abierta, onAbrir, sonando, onCultura }) {
   const t = lineaEn(l, registro);
   const p = personajeDe(d, l.p, registro);
-  const cul = t.cul ? culturaById(t.cul) : null;
-  const cab = h("div", { className: "ex-t" }, p.ru, h("span", null, p.es));
+  const cul = t.cul ? culPorId(t.cul) : null;
+  const cab = h("div", { className: "ex-t" }, nombreMeta(p), h("span", null, nombreTrad(p)));
   if (oculta) {
     return h("div", { className: "ex ex-col ln" },
       cab,
-      h("div", { className: "ex-es", style: { marginTop: 0 } }, "«" + t.es + "»"),
-      h("div", { className: "ln-turno", onClick: onRevelar }, "Tu turno: dilo en ruso y toca para ver ›")
+      h("div", { className: "ex-es", style: { marginTop: 0 } }, "«" + trad(t) + "»"),
+      h("div", { className: "ln-turno", onClick: onRevelar }, TX.turno)
     );
   }
   return h("div", { className: "ex ex-col ln" + (sonando ? " ln-on" : "") },
     h("div", { className: "ex-top" },
       h("div", { style: { flex: 1, minWidth: 0 } },
         cab,
-        h("div", { className: "ex-ru ln-ru", onClick: onAbrir }, t.ru, h("span", { className: "ln-hint", style: { display: "inline-block", transition: "transform var(--az-t-rapida) var(--az-curva)", transform: abierta ? "none" : "rotate(-90deg)" } }, "▾")),
+        h("div", { className: "ex-ru ln-ru", lang: ES ? "es" : "ru", onClick: onAbrir }, meta(t), h("span", { className: "ln-hint", style: { display: "inline-block", transition: "transform var(--az-t-rapida) var(--az-curva)", transform: abierta ? "none" : "rotate(-90deg)" } }, "▾")),
         showTr && h("div", { className: "ln-tr" }, t.tr),
-        showEs && h("div", { className: "ex-es" }, t.es)
+        showEs && h("div", { className: "ex-es" }, trad(t))
       ),
       h("div", { style: { display: "flex", flexDirection: "column", gap: 8 } },
-        h("button", { className: "play", onClick: () => speakRu(t.ru, p.clave), "aria-label": "Escuchar" }, "▶"),
-        h("button", { className: "play", onClick: () => azGuardarEnCuaderno(String(t.ru).replace(/[{}]/g, "") + "\n" + t.es, { titulo: "Diálogos · " + d.titulo, href: "dialogos.html?id=" + d.id }), "aria-label": "Guardar en el cuaderno" }, "＋"))
+        h("button", { className: "play", onClick: () => speakRu(meta(t), p.clave), "aria-label": TX.escuchar }, "▶"),
+        h("button", { className: "play", onClick: () => azGuardarEnCuaderno(String(meta(t)).replace(/[{}]/g, "") + "\n" + trad(t), { titulo: TX.cuDlg + (ES ? d.tituloEs : d.titulo), href: "dialogos.html?id=" + d.id }), "aria-label": TX.guardar }, "＋"))
     ),
     (t.obs || cul) && h("div", { className: "ex-why" },
-      t.obs,
+      fmt(t.obs),
       cul && h("div", { className: "help-row", style: { marginTop: t.obs ? 8 : 0 } },
-        h("button", { className: "help-chip", onClick: () => onCultura(cul.id) }, "Cultura: " + cul.titulo, h("span", null, "?")))
+        h("button", { className: "help-chip", onClick: () => onCultura(cul.id) }, TX.culturaDe(cul), h("span", null, "?")))
     ),
     abierta && h("div", { className: "ex-why" }, h(Desglose, { texto: t }))
   );
@@ -391,7 +558,7 @@ function Linea({ d, l, idx, registro, showTr, showEs, oculta, onRevelar, abierta
 
 /* ── Ficha del diálogo ── */
 function FichaDialogo({ id, c, onFrase, onCultura }) {
-  const d = dialogoById(id);
+  const d = dlgPorId(id);
   const [registro, setRegistro] = useState("ты");
   const [showTr, setShowTr] = useState(azTranslitVisible());
   const [showEs, setShowEs] = useState(true);
@@ -409,8 +576,8 @@ function FichaDialogo({ id, c, onFrase, onCultura }) {
 
   if (!d) {
     return h("div", { style: { textAlign: "center", padding: "10vh 0" } },
-      h("h1", { style: { fontSize: "var(--az-fs-subtitulo)", marginBottom: 8, color: c.text } }, "Diálogo no encontrado"),
-      h("p", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted } }, `No hay ningún diálogo con id "${id}".`)
+      h("h1", { style: { fontSize: "var(--az-fs-subtitulo)", marginBottom: 8, color: c.text } }, TX.noDlg),
+      h("p", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted } }, TX.noDlgTxt(id))
     );
   }
 
@@ -423,22 +590,22 @@ function FichaDialogo({ id, c, onFrase, onCultura }) {
 
   const reg = d.vy ? registro : "ты";
   const personajes = [...new Set(d.lineas.map(l => l.p))].map(k => personajeDe(d, k, reg));
-  const tituloRu = d.tituloRu;
+  const tituloRu = tituloMeta(d);
   const todas = () => {
     if (sonando !== null) { stopSpeech(); setSonando(null); return; }
-    const items = d.lineas.map(l => ({ text: lineaEn(l, reg).ru, genero: personajeDe(d, l.p, reg).clave }));
+    const items = d.lineas.map(l => ({ text: meta(lineaEn(l, reg)), genero: personajeDe(d, l.p, reg).clave }));
     setSonando(0);
     speakSeq(items, i => setSonando(i), () => setSonando(null));
   };
   const abrir = (i) => {
     setAbierta(abierta === i ? null : i);
-    if (typeof azCargarFormas === "function") azCargarFormas();
+    cargarFormas();
   };
   const frIds = [...new Set(d.lineas.flatMap(l => [...(lineaEn(l, reg).f || [])]))];
   const culIds = [...new Set(d.lineas.map(l => lineaEn(l, reg).cul).filter(Boolean))];
 
   /* anterior / siguiente, en el orden de la lista (por situación) */
-  const orden = DLG_SITUACIONES.flatMap(s => DIALOGOS.filter(x => x.situacion === s[0]));
+  const orden = SITUACIONES_D.flatMap(s => DIALOGOS_D.filter(x => x.situacion === s[0]));
   const pos = orden.findIndex(x => x.id === d.id);
   const prev = orden[pos - 1], next = orden[pos + 1];
   const navLink = (x, label) => {
@@ -451,28 +618,28 @@ function FichaDialogo({ id, c, onFrase, onCultura }) {
       h("div", { className: "hero" },
         h("div", { className: "hero-top" },
           h("div", { style: { minWidth: 0 } },
-            h("div", { className: "ru" }, tituloRu),
+            h("div", { className: "ru", lang: ES ? "es" : "ru" }, tituloRu),
             h("div", { className: "translit" }, d.titulo)
           ),
-          h("button", { className: "play", onClick: todas, "aria-label": sonando !== null ? "Detener" : "Escuchar todo el diálogo" }, sonando !== null ? "■" : "▶")
+          h("button", { className: "play", onClick: todas, "aria-label": sonando !== null ? TX.detener : TX.escucharTodo }, sonando !== null ? "■" : "▶")
         ),
-        h("span", { className: "pos-badge" }, d.nivel + " · " + (FUN[d.funcion] || "")),
+        h("span", { className: "pos-badge" }, TX.badge(d)),
         h("div", { className: "tags" },
           h("span", { className: "tag" }, SIT[d.situacion] || ""),
-          personajes.map(p => h("span", { key: p.clave, className: "tag" }, p.ru))
+          personajes.map(p => h("span", { key: p.clave, className: "tag" }, nombreMeta(p)))
         )
       ),
       h("div", { className: "fbody" },
-        h("div", { className: "section-lbl" }, "Diálogo"),
+        h("div", { className: "section-lbl" }, TX.dialogo),
         h("div", { className: "pair-row" },
           d.vy && [chip(reg === "ты", "ты · informal", () => setRegistro("ты"), "ty"), chip(reg === "вы", "вы · formal", () => setRegistro("вы"), "vy")],
-          chip(showTr, "Transliteración", () => setShowTr(!showTr), "tr"),
-          chip(showEs, "Traducción", () => setShowEs(!showEs), "es")
+          chip(showTr, TX.tr, () => setShowTr(!showTr), "tr"),
+          chip(showEs, TX.trad, () => setShowEs(!showEs), "es")
         ),
         h("div", { className: "pair-row" },
-          h("span", { className: "pair-lbl" }, "Practicar:"),
-          chip(practica === null, "Ver todo", () => { setPractica(null); setReveladas({}); }, "all"),
-          personajes.map(p => chip(practica === p.clave, "Soy " + p.es, () => { setPractica(p.clave); setReveladas({}); }, p.clave))
+          h("span", { className: "pair-lbl" }, TX.practicar),
+          chip(practica === null, TX.todo, () => { setPractica(null); setReveladas({}); }, "all"),
+          personajes.map(p => chip(practica === p.clave, TX.soy(p), () => { setPractica(p.clave); setReveladas({}); }, p.clave))
         ),
         d.lineas.map((l, i) => h(Linea, {
           key: i, d, l, idx: i, registro: reg, showTr, showEs,
@@ -481,23 +648,21 @@ function FichaDialogo({ id, c, onFrase, onCultura }) {
           abierta: abierta === i, onAbrir: () => abrir(i),
           sonando: sonando === i, onCultura
         })),
-        h("div", { className: "tnote" }, practica
-          ? "Lee la traducción, di la línea en ruso en voz alta y toca para comprobar."
-          : "Toca una línea en ruso para ver cada palabra. ▶ escucha una línea; el de arriba, todo el diálogo."),
+        h("div", { className: "tnote" }, practica ? TX.notaPractica : TX.notaVer),
 
         frIds.length > 0 && h("div", null,
-          h("div", { className: "section-lbl" }, "Frases de este diálogo"),
-          h("div", { className: "list" }, frIds.map(fid => { const f = fraseById(fid); return f && h(FilaFrase, { key: fid, f, onClick: () => onFrase(fid) }); }))
+          h("div", { className: "section-lbl" }, TX.frasesDe),
+          h("div", { className: "list" }, frIds.map(fid => { const f = frasePorId(fid); return f && h(FilaFrase, { key: fid, f, onClick: () => onFrase(fid) }); }))
         ),
         culIds.length > 0 && h("div", null,
-          h("div", { className: "section-lbl" }, "Cultura"),
-          h("div", { className: "list" }, culIds.map(cid => { const n = culturaById(cid); return n && h(FilaCultura, { key: cid, n, onClick: () => onCultura(cid) }); }))
+          h("div", { className: "section-lbl" }, TX.cultura),
+          h("div", { className: "list" }, culIds.map(cid => { const n = culPorId(cid); return n && h(FilaCultura, { key: cid, n, onClick: () => onCultura(cid) }); }))
         )
       )
     ),
     h("div", { className: "nav-row" },
-      prev ? navLink(prev, "‹ " + prev.titulo) : h("span"),
-      next ? navLink(next, next.titulo + " ›") : h("span")
+      prev ? navLink(prev, "‹ " + (ES ? prev.tituloEs : prev.titulo)) : h("span"),
+      next ? navLink(next, (ES ? next.tituloEs : next.titulo) + " ›") : h("span")
     )
   );
 }
@@ -507,12 +672,12 @@ function buscar(q) {
   const k = norm(q.trim());
   if (!k) return [];
   const out = [];
-  DIALOGOS.forEach(d => {
-    const textos = [d.titulo, d.tituloRu].concat(d.lineas.flatMap(l => [l.ru, l.es].concat(l.vy ? [l.vy.ru, l.vy.es] : [])));
+  DIALOGOS_D.forEach(d => {
+    const textos = [d.titulo, tituloMeta(d)].concat(d.lineas.flatMap(l => [l.ru, l.es].concat(l.vy ? [l.vy.ru, l.vy.es] : [])));
     if (textos.some(t => norm(t).includes(k))) out.push({ tipo: "dialogo", d });
   });
-  FRASES.forEach(f => { if (norm(f.ru).includes(k) || norm(f.es).includes(k)) out.push({ tipo: "frase", f }); });
-  CULTURA.forEach(n => { if (norm(n.titulo).includes(k) || norm(n.resumen).includes(k)) out.push({ tipo: "cultura", n }); });
+  FRASES_D.forEach(f => { if (norm(f.ru).includes(k) || norm(f.es).includes(k)) out.push({ tipo: "frase", f }); });
+  CULTURA_D.forEach(n => { if (norm(n.titulo).includes(k) || norm(n.resumen).includes(k)) out.push({ tipo: "cultura", n }); });
   return out.slice(0, 40);
 }
 
@@ -556,33 +721,34 @@ function App() {
   const abrirCultura = (cid) => { setQ(""); setSheet({ t: "cul", id: cid }); };
 
   const results = q.trim() ? buscar(q) : [];
-  const TIPO_LBL = { dialogo: "diálogo", frase: "frase", cultura: "cultura" };
+  const TIPO_LBL = TX.tipo;
+  const TIPO_CUL = Object.fromEntries(TX.tiposCul);
   const resultRows = results.map((r, i) => {
     if (r.tipo === "dialogo") {
       const href = "dialogos.html?id=" + r.d.id;
       return h("a", { key: "d" + r.d.id, className: "res-row", href, onClick: (e) => azNavigate(e, href) },
-        h("span", null, h("span", { className: "res-ru" }, r.d.tituloRu), h("span", { className: "res-asp" }, TIPO_LBL.dialogo)),
+        h("span", null, h("span", { className: "res-ru" }, tituloMeta(r.d)), h("span", { className: "res-asp" }, TIPO_LBL.dialogo)),
         h("span", { className: "res-es" }, r.d.titulo));
     }
     if (r.tipo === "frase") return h("button", { key: "f" + r.f.id, className: "res-row", onClick: () => abrirFrase(r.f.id) },
-      h("span", null, h("span", { className: "res-ru" }, r.f.ru), h("span", { className: "res-asp" }, TIPO_LBL.frase)),
-      h("span", { className: "res-es" }, r.f.es));
+      h("span", null, h("span", { className: "res-ru" }, meta(r.f)), h("span", { className: "res-asp" }, TIPO_LBL.frase)),
+      h("span", { className: "res-es" }, trad(r.f)));
     return h("button", { key: "c" + r.n.id, className: "res-row", onClick: () => abrirCultura(r.n.id) },
       h("span", null, h("span", { className: "res-ru" }, r.n.titulo), h("span", { className: "res-asp" }, TIPO_LBL.cultura)),
-      h("span", { className: "res-es" }, r.n.tipo));
+      h("span", { className: "res-es" }, TIPO_CUL[r.n.tipo] || r.n.tipo));
   });
-  const noResults = h("div", { style: { padding: "12px 16px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, "Sin resultados");
+  const noResults = h("div", { style: { padding: "12px 16px", fontSize: "var(--az-fs-chico)", color: c.textMuted } }, TX.sinRes);
 
   const campo = [
     h("input", {
       ref: qRef, value: q,
       onInput: (e) => setQ(e.target.value),
-      placeholder: "Buscar diálogo, frase o nota…",
+      placeholder: TX.buscar,
       style: { width: "100%", boxSizing: "border-box", background: c.bg2, border: `1px solid ${c.border}`, borderRadius: "var(--az-r)", padding: "12px 34px 12px 14px", color: c.text, fontSize: "var(--az-fs-chico)" }
     }),
     q && h("button", {
       onClick: () => { setQ(""); if (qRef.current) qRef.current.focus(); },
-      "aria-label": "Limpiar búsqueda",
+      "aria-label": TX.limpiar,
       style: { position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", width: 24, height: 24, borderRadius: "50%", background: c.border, border: "none", color: c.text, fontSize: "var(--az-fs-chico)", lineHeight: 1, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", padding: 0 }
     }, "✕")
   ];
@@ -600,60 +766,56 @@ function App() {
 
   /* ── Portada ── */
   const modulo = (typeof AZ_MODULES !== "undefined" ? AZ_MODULES : []).find(m => m.id === "dialogos") || {};
-  const kicker = DIALOGOS.length + " diálogos · " + FRASES.length + " frases · " + CULTURA.length + " notas";
-  const INTRO_ITEMS = [
-    ["Diálogos por situación", "Del saludo a una emergencia, muchos con versión informal (ты) y formal (вы)."],
-    ["Palabra por palabra", "Toca una línea para ver cada palabra, de qué forma viene y su ficha."],
-    ["Frases y cultura", "Las fórmulas que conviene saber enteras y las costumbres que hay detrás."]
-  ];
-  const EJEMPLOS = ["DLG-001", "DLG-008", "DLG-028"].map(dialogoById).filter(Boolean);
+  const kicker = TX.kicker(DIALOGOS_D.length, FRASES_D.length, CULTURA_D.length);
+  const INTRO_ITEMS = TX.introItems;
+  const EJEMPLOS = TX.ejemplos.map(dlgPorId).filter(Boolean);
   const buscando = !!q.trim();
   const portada = h("div", null,
     !buscando && h("div", { className: "intro" },
       h("div", { className: "intro-top" },
         h("div", { className: "intro-icon", style: { background: azModuloColor(modulo).bg, color: azModuloColor(modulo).fg } }, modulo.glyph || ""),
         h("div", null,
-          h("div", { className: "intro-title" }, modulo.title || "Diálogos"),
+          h("div", { className: "intro-title" }, modulo.title || TX.titulo),
           h("div", { className: "intro-kicker" }, kicker)
         )
       ),
-      h("div", { className: "intro-desc" }, "Conversaciones cortas de la vida real, con audio y transliteración, y cada palabra conectada al diccionario."),
+      h("div", { className: "intro-desc" }, TX.intro),
       INTRO_ITEMS.map((it, i) => h("div", { key: i, className: "intro-item" },
         h("span", { className: "intro-dot" }),
         h("div", null, h("div", { className: "intro-it" }, it[0]), h("div", { className: "intro-id" }, it[1]))
       ))
     ),
     h("div", { style: { position: "relative" } }, ...campo),
-    !buscando && h("div", { className: "search-hint" }, "Puedes buscar en ruso o en español: «gracias», «кафе́», «cumpleaños»."),
+    !buscando && h("div", { className: "search-hint" }, TX.pista),
     !buscando && h("div", { className: "try-row" },
-      h("span", { className: "try-lbl" }, "Prueba con:"),
-      EJEMPLOS.map(d => { const href = "dialogos.html?id=" + d.id; return h("a", { key: d.id, className: "try-chip", href, onClick: (ev) => azNavigate(ev, href) }, d.titulo); })
+      h("span", { className: "try-lbl" }, TX.prueba),
+      EJEMPLOS.map(d => { const href = "dialogos.html?id=" + d.id; return h("a", { key: d.id, className: "try-chip", href, onClick: (ev) => azNavigate(ev, href) }, ES ? d.tituloEs : d.titulo); })
     ),
     buscando && h("div", { className: "list", style: { marginTop: 12, animation: "fadeIn var(--az-t-media) var(--az-curva)" } }, results.length ? resultRows : noResults)
   );
 
   /* ── Listas ── */
   const vistaDialogos = h("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
-    h("div", { className: "page-title" }, "Diálogos"),
-    h("div", { className: "page-desc" }, "Ordenados por situación. El nivel va al lado del título; «ты/вы» indica que tiene versión informal y formal."),
-    DLG_SITUACIONES.map(s => {
-      const lista = DIALOGOS.filter(d => d.situacion === s[0]);
+    h("div", { className: "page-title" }, TX.listaD),
+    h("div", { className: "page-desc" }, TX.descD),
+    SITUACIONES_D.map(s => {
+      const lista = DIALOGOS_D.filter(d => d.situacion === s[0]);
       return lista.length > 0 && h("div", { key: s[0] },
         h("div", { className: "section-lbl" }, s[1]),
         h(ListaDialogos, { lista })
       );
     })
   );
-  const favFrases = favs.map(k => fraseById(k.slice(7))).filter(Boolean);
+  const favFrases = favs.map(k => frasePorId(k.slice(7))).filter(Boolean);
   const vistaFrases = h("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
-    h("div", { className: "page-title" }, "Frases"),
-    h("div", { className: "page-desc" }, "Expresiones que conviene aprender enteras, ordenadas por lo que quieres hacer. Toca una para ver cuándo se usa."),
+    h("div", { className: "page-title" }, TX.listaF),
+    h("div", { className: "page-desc" }, TX.descF),
     favFrases.length > 0 && h("div", null,
-      h("div", { className: "section-lbl" }, "Mis frases"),
+      h("div", { className: "section-lbl" }, TX.misFrases),
       h("div", { className: "list" }, favFrases.map(f => h(FilaFrase, { key: f.id, f, onClick: () => abrirFrase(f.id) })))
     ),
-    DLG_FUNCIONES.map(fn => {
-      const lista = FRASES.filter(f => f.funcion === fn[0]);
+    FUNCIONES_D.map(fn => {
+      const lista = FRASES_D.filter(f => f.funcion === fn[0]);
       return lista.length > 0 && h("div", { key: fn[0] },
         h("div", { className: "section-lbl" }, fn[1]),
         h("div", { className: "list" }, lista.map(f => h(FilaFrase, { key: f.id, f, onClick: () => abrirFrase(f.id) })))
@@ -661,12 +823,12 @@ function App() {
     })
   );
   const vistaCultura = h("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
-    h("div", { className: "page-title" }, "Cultura"),
-    h("div", { className: "page-desc" }, "Cómo se usa el idioma en la vida real, comparado con lo que se hace en España."),
-    TIPOS_CUL.map(t => {
-      const lista = CULTURA.filter(n => n.tipo === t);
+    h("div", { className: "page-title" }, TX.listaC),
+    h("div", { className: "page-desc" }, TX.descC),
+    TX.tiposCul.map(([t, nombre]) => {
+      const lista = CULTURA_D.filter(n => n.tipo === t);
       return lista.length > 0 && h("div", { key: t },
-        h("div", { className: "section-lbl" }, t),
+        h("div", { className: "section-lbl" }, nombre),
         h("div", { className: "list" }, lista.map(n => h(FilaCultura, { key: n.id, n, onClick: () => abrirCultura(n.id) })))
       );
     })
@@ -678,10 +840,10 @@ function App() {
     else setView(v);
   };
   const tabs = [
-    { id: "inicio", icon: "⊞", label: "Inicio", action: irA("inicio") },
-    { id: "dialogos", icon: "💬", label: "Diálogos", action: irA("dialogos") },
-    { id: "frases", icon: "🗣️", label: "Frases", action: irA("frases") },
-    { id: "cultura", icon: "🏛️", label: "Cultura", action: irA("cultura") }
+    { id: "inicio", icon: "⊞", label: TX.tabs[0], action: irA("inicio") },
+    { id: "dialogos", icon: "💬", label: TX.tabs[1], action: irA("dialogos") },
+    { id: "frases", icon: "🗣️", label: TX.tabs[2], action: irA("frases") },
+    { id: "cultura", icon: "🏛️", label: TX.tabs[3], action: irA("cultura") }
   ];
 
   let contenido;

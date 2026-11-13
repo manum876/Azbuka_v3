@@ -88,7 +88,10 @@ def acento(es):
     out=[]
     for w in ws:
         sil=silabas(w)
-        if len(sil)==1 or (len(ws)>1 and w in ATONAS_LOC): out.append('·'.join(sil)); continue
+        if len(ws)>1 and w in ATONAS_LOC: out.append('·'.join(sil)); continue
+        # Monosílabo solo: sin mayúscula. Dentro de una locución, el monosílabo
+        # tónico va en mayúscula como cualquier tónica (por FIN, tal VEZ; 13/11/2026).
+        if len(sil)==1: out.append(w.upper() if len(ws)>1 else w); continue
         t=tonica(w,sil)
         out.append('·'.join(s.upper() if k==t else s for k,s in enumerate(sil)))
     return ' '.join(out)

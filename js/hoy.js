@@ -41,12 +41,15 @@
      U4 глагол дня (una frase sobre uno mismo en presente, con yo)
      U5 число или цена дня (un número o un precio, en letras; un día cada uno)
      U6 указание дня (la frase entera con el imperativo de tú)
+     U7 реакция дня (responder «yo también», «a mí tampoco»… a una frase; 12/11/2026)
+     U8 что ты сделал (una frase sobre uno mismo con el pasado que pide el marcador; 13/11/2026)
+     U9 раньше и сейчас (una frase sobre uno mismo en imperfecto; 13/11/2026)
    Las unidades de Abecé sin desafío propio usan el de la última que lo
    tiene (AZ_HOY_ES_MAX).
    ============================================================ */
 const AZ_HOY_ES = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
 const AZ_HOY_K = AZ_HOY_ES ? "az_hoy_es" : "az_hoy";
-const AZ_HOY_ES_MAX = 6;
+const AZ_HOY_ES_MAX = 9;
 /* Abecé: lo mismo que carga abece-N.html (las unidades anteriores, para las palabras ya vistas).
    [src, global]: si la página ya pidió ese archivo y todavía no llegó, se espera a que llegue. */
 function azHoyDepsEs(n) {
@@ -417,6 +420,52 @@ function azHoyDesafioEs(n) {
         if (azHoyEsTok(txt).length === 1) return azHoyEsCorr(txt, [imp], { foco: [imp] });
         return azHoyEsCorr(txt, [frase], { foco: [imp] });
       } };
+  }
+  if (n === 8 && typeof ES8_HOY !== "undefined" && typeof es8Perf === "function") {
+    const [inf, cuando] = ES8_HOY[num % ES8_HOY.length];
+    const abierto = /^(hoy|esta |este )/.test(cuando);   /* el período no terminó: perfecto */
+    const ok = abierto ? es8Perf(inf, 0) : es8Indef(inf, 0), otra = abierto ? es8Indef(inf, 0) : es8Perf(inf, 0);
+    const sinTilde = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const lex = typeof LEXICON_ES !== "undefined" ? LEXICON_ES.find(e => e.es === inf && e.posNormalized === "verbo") : null;
+    return { titulo: "Что ты сделал?", grande: inf + " · " + cuando, sub: azHoyEsRu(lex), audio: inf,
+      consigna: "Напиши фразу о себе (**yo**) с этим глаголом и словом «" + cuando + "».",
+      pista: abierto ? "«" + cuando + "» — период ещё идёт: **perfecto** (he + причастие)." : "«" + cuando + "» — период закончился: **indefinido**.",
+      revisar: txt => {
+        const r = azSituacionEs(txt, { necesita: [{ es: inf, formas: [ok] }] }), el = r.elementos[0];
+        if (r.nivel === 2) return { nivel: "bien", msg: "**" + ok + "** — " + (abierto ? "perfecto" : "indefinido") + ", форма yo." };
+        if (r.nivel === 1 && el.escrito && sinTilde(el.escrito.toLowerCase()) === sinTilde(ok.toLowerCase()))
+          return { nivel: "mal", msg: "Знак ударения меняет лицо и время: нужно **" + ok + "**." };
+        const b = azSituacionEs(txt, { necesita: [{ es: inf, formas: [otra] }] });
+        if (b.nivel === 2) return { nivel: "casi", msg: "Почти: с «" + cuando + "» — " + (abierto ? "perfecto" : "indefinido") + ": **" + ok + "**." };
+        if (r.nivel === 1) return { nivel: "casi", msg: "Почти: с yo — **" + ok + "**, а не «" + el.escrito + "»." };
+        return { nivel: "mal", msg: "Не нахожу глагол **" + inf + "** в прошедшем времени. С yo: **" + ok + "**." };
+      } };
+  }
+  if (n === 9 && typeof ES9_HOY !== "undefined" && typeof es9Imperf === "function") {
+    const [inf, cuando] = ES9_HOY[num % ES9_HOY.length];
+    const ok = es9Imperf(inf, 0), indef = es9Indef(inf, 0), pres = es9Pres(inf, 0);
+    const lex = typeof LEXICON_ES !== "undefined" ? LEXICON_ES.find(e => e.es === inf && e.posNormalized === "verbo") : null;
+    const hay = f => f && azSituacionEs(txt0, { necesita: [{ es: inf, formas: [f] }] });
+    let txt0 = "";
+    return { titulo: "Раньше и сейчас", grande: inf + " · " + cuando, sub: azHoyEsRu(lex), audio: inf,
+      consigna: "Напиши фразу о себе (**yo**): что было или что ты обычно делал(а) — «" + cuando + "».",
+      pista: "Как было, что повторялось — **imperfecto**: -aba / -ía." + (["ser", "ir", "ver"].indexOf(inf) >= 0 ? " Этот глагол неправильный." : ""),
+      revisar: txt => {
+        txt0 = txt;
+        const r = hay(ok), el = r.elementos[0];
+        if (r.nivel === 2) return { nivel: "bien", msg: "**" + ok + "** — imperfecto, форма yo." };
+        if (hay(indef).nivel === 2) return { nivel: "casi", msg: "Почти: о привычке и о том, как было, — imperfecto: **" + ok + "**." };
+        if (hay(pres).nivel === 2) return { nivel: "mal", msg: "Это настоящее время. О прошлом — **" + ok + "**." };
+        if (r.nivel === 1) return { nivel: "casi", msg: "Почти: **" + ok + "**, а не «" + el.escrito + "»." };
+        return { nivel: "mal", msg: "Не нахожу глагол **" + inf + "** в imperfecto. С yo: **" + ok + "**." };
+      } };
+  }
+  if (n === 7 && typeof ES7_REACCION !== "undefined") {
+    const X = ES7_REACCION[num % ES7_REACCION.length];
+    return { titulo: "Реакция дня", grande: X[0], sub: "Ответь: ты " + X[1] + ".",
+      consigna: "Напиши короткий ответ по-испански.",
+      pista: /gust|encant|interes|molest/.test(X[0]) ? "Глагол как **gustar** — ответ с **a mí**." : "Обычный глагол — ответ с **yo**. На фразу с **no**: **tampoco** или **sí**.",
+      revisar: txt => azHoyEsCorr(txt, [X[2]]) };
   }
   return null;
 }

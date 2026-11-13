@@ -51,7 +51,7 @@
     "Antes de leer: ¿te animas?": "Прежде чем читать: попробуешь?", "Chequeo rápido": "Быстрая проверка", "Más a fondo": "Подробнее",
     "En español: ": "По-русски: ", "Truco: ": "Совет: ", "Ojo: ": "Внимание: ", "Cerrar": "Закрыть", "Volver al ejercicio": "Вернуться к упражнению",
     "Escuchar": "Слушать", "Toca cada parte para ver qué hace en la frase.": "Нажми на каждую часть, чтобы увидеть, что она делает во фразе.",
-    "▶ Modelo": "▶ Образец", "● Grabar de nuevo": "● Записать ещё раз", "● Grabarme": "● Записать себя", "■ Parar": "■ Стоп", "▶ Mi voz": "▶ Мой голос",
+    "Ver en Diálogos": "Открыть в диалогах", "▶ Modelo": "▶ Образец", "● Grabar de nuevo": "● Записать ещё раз", "● Grabarme": "● Записать себя", "■ Parar": "■ Стоп", "▶ Mi voz": "▶ Мой голос",
     "Sin permiso para el micrófono.": "Нет доступа к микрофону.", "Diálogo": "Диалог", "Transliteración": "Кириллица", "Traducción": "Перевод",
     "Escucha cada línea, grábate diciéndola y compara.": "Послушай каждую реплику, запиши себя и сравни.",
     "Para practicar la lectura, apaga la transliteración y la traducción.": "Чтобы потренировать чтение, выключи подсказку кириллицей и перевод.",
@@ -505,7 +505,7 @@
           grabar && h(AzGrabadora, { texto: meta(l), onGrabado: u => setMias(m => Object.assign({}, m, { [i]: u })) }))),
         h("button", { className: "ubtn", onClick: () => hablarSec(d.lineas.map(l => ({ texto: meta(l), genero: gen(l) }))) }, T("▶ Escuchar el diálogo")),
         grabar && Object.keys(mias).length > 0 && h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: escucharMias }, T("▶ Escuchar mis grabaciones")),
-        !ES && h("a", { className: "ubtn sec", style: { marginTop: 12, textDecoration: "none" }, href, onClick: ev => azNavigate(ev, href) }, "Ver en Diálogos")));   /* Abecé: hasta que exista su módulo de Diálogos */
+        h("a", { className: "ubtn sec", style: { marginTop: 12, textDecoration: "none" }, href, onClick: ev => azNavigate(ev, href) }, T("Ver en Diálogos"))));   /* Abecé: desde el 12/11/2026, con su módulo de Диалоги */
   }
 
   function AzTarjetasPalabras({ ids, titulo, c, green, onClose, detalle }) {

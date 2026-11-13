@@ -71,7 +71,7 @@ const MEDIR = () => {
     }
     const fijas = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'alfabeto.html', 'alfabeto.html?mano=1', 'verbos.html', 'cuaderno.html', 'ajustes.html', 'repaso.html'];
     const az = ['ficha.html?id=CMR-00230', 'verbos.html?id=CMR-00058', 'casos.html', 'casos.html?id=CMR-00230', 'dialogos.html', 'dialogos.html?id=DLG-001', 'lecturas.html', 'lecturas.html?id=LEC-zima', 'masha.html'];
-    const ab = ['gramatica.html', 'ficha.html?id=ESP-00100', 'verbos.html?id=ESP-00010', 'alfabeto.html?tilde=canción'];
+    const ab = ['gramatica.html', 'dialogos.html', 'dialogos.html?id=DLE-001', 'dialogos.html?v=frases', 'dialogos.html?cul=CUE-008', 'ficha.html?id=ESP-00100', 'verbos.html?id=ESP-00010', 'alfabeto.html?tilde=canción'];
     for (const u of fijas.concat(dir === 'abece' ? ab : az)) await revisar(u);
     const pref = dir === 'abece' ? 'abece-' : 'azbuka-', glob = dir === 'abece' ? 'UNIDAD_ES_' : 'UNIDAD_';
     const unidades = await p.evaluate(() => (typeof AZ_UNITS !== 'undefined' ? AZ_UNITS : []).map(u => u.href).filter(Boolean));

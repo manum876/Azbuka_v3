@@ -688,6 +688,9 @@ function ejerciciosUnidadEs3() {
     }
   });
 
+  /* Profundización (13/11/2026) */
+  if (typeof es3Prof === "function") es3Prof(out, baraja, lex);
+
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
 }
@@ -905,3 +908,110 @@ window.es3Objetivo = es3Objetivo;
 const ES3_MEZCLA = { "hay-esta": 2, "estar-forma": 2, preposicion: 2, lugar: 2, ordinal: 2, concordancia: 2, "orden-adjetivo": 1, "muy-mucho": 1, antonimo: 1,
   "ser-estar": 2, "ser-estar-escribir": 2, demostrativo: 2, posesivo: 2, pregunta: 2, error: 2, dictado: 2, "situacion-frase": 2, respuesta: 2, "dictado-frase": 2, "ordenar-frase": 1 };
 window.ES3_MEZCLA = ES3_MEZCLA;
+
+/* ── Profundización (13/11/2026, repaso Abecé / Azbuka pedido por Manu) ──────────────
+   Más a fondo que se suma a la teoría al cargar y los tipos de profundización de Azbuka. */
+const ES3_MAS = {
+  "es3-hay": { titulo: "Hay — от haber", texto: "**hay** — особая форма глагола **haber**. Она одна и для ед. ч., и для мн. ч.: **hay un libro**, **hay tres libros**. Вопрос — та же форма: **¿Hay un banco cerca?**", ejemplos: [{ es: "¿Hay un banco cerca?", ru: "Здесь рядом есть банк?" }] },
+  "es3-no-hay": { titulo: "No hay nada", texto: "**No hay nada** — ничего нет;  Двойное отрицание в испанском нормально, как в русском: «ничего нет».", ejemplos: [{ es: "En la nevera no hay nada.", ru: "В холодильнике ничего нет." }] },
+  "es3-estar-donde": { titulo: "Estar — и «находиться», и «быть»", texto: "**estar** нужен, когда говоришь, где кто-то или что-то: **Estoy en casa**, **El libro está en la mesa**. По-русски часто без глагола: «Я дома». По-испански глагол нужен всегда.", ejemplos: [{ es: "¿Dónde estás? — Estoy en casa.", ru: "Где ты? — Я дома." }] },
+  "es3-hay-esta": { titulo: "Как выбрать", texto: "Спроси себя: я говорю о вещи **впервые** (что-то есть) — **hay** + **un / una / число**; или о **конкретной**, уже известной вещи (где она) — **está** + **el / la / mi**. **Hay un parque. El parque está cerca.**", ejemplos: [{ es: "Hay un bar. El bar está enfrente.", ru: "Есть бар. Бар — напротив." }] },
+  "es3-aqui": { titulo: "Aquí, ahí, allí — как este, ese, aquel", texto: "Три расстояния, как у указательных: **aquí** — у меня (**este**), **ahí** — у тебя (**ese**), **allí** — далеко от нас обоих (**aquel**).", ejemplos: [{ es: "Este libro está aquí y ese está ahí.", ru: "Эта книга здесь, а та — там (у тебя)." }] },
+  "es3-en": { titulo: "En и encima de", texto: "**en la mesa** — на столе (обычно так). **encima de** — «на, сверху» (подчёркивает положение).", ejemplos: [{ es: "El libro está encima de la mesa.", ru: "Книга лежит на столе." }] },
+  "es3-del-al": { titulo: "Только с el", texto: "Сливаются только **de + el** и **a + el**. С **la, los, las** — нет: **de la casa**, **a los niños**. И не сливаются с **él** (он): **el libro de él**.", ejemplos: [{ es: "Está al lado de la ventana.", ru: "Это рядом с окном." }] },
+  "es3-piso": { titulo: "Piso — квартира и этаж", texto: "**piso** — и «квартира», и «этаж»: **Vivo en un piso** — живу в квартире; **Vivo en el tercer piso** — на третьем этаже. Понятно по артиклю и по числу.", ejemplos: [{ es: "Mi piso está en el segundo piso.", ru: "Моя квартира на втором этаже." }] },
+  "es3-primer": { titulo: "Primero и primer", texto: "Перед существительным м. р. — **primer**, **tercer**: **el primer piso**. Без существительного — **primero**, **tercero**: **Vivo en el primero**.", ejemplos: [{ es: "Vivo en el tercero.", ru: "Я живу на третьем (этаже)." }] },
+  "es3-despues": { titulo: "Bueno и gran — впереди", texto: "Некоторые прилагательные часто стоят впереди: **un buen libro**, **una gran ciudad**. Тогда **bueno → buen**, **grande → gran**. Но обычный порядок — после: **un libro bueno**.", ejemplos: [{ es: "Madrid es una gran ciudad.", ru: "Мадрид — большой город." }] },
+  "es3-muy-mucho": { titulo: "Mucho — после глагола", texto: "**muy** — перед прилагательным: **muy grande**. **mucho** — с существительным (**muchos libros**). «Mucho grande» — ошибка.", ejemplos: [{ es: "La casa es muy grande y tiene muchas ventanas.", ru: "Дом очень большой, и в нём много окон." }] },
+  "es3-color": { titulo: "Colores — как прилагательные", texto: "Цвет согласуется: **una mesa blanca**, **unos coches blancos**. Не меняются **rosa** и **naranja**: **unas sillas rosa**. И **azul**, **verde**, **gris** меняют только число: **azules**, **verdes**.", ejemplos: [{ es: "Tengo dos bolsos azules.", ru: "У меня две синие сумки." }] },
+  "es3-ser-estar": { titulo: "Проверка", texto: "Спроси: **какой он вообще?** — **ser**; **как он сейчас?** — **estar**. **Pablo es simpático** (такой человек), **Pablo está triste** (сейчас грустит).", ejemplos: [{ es: "Pablo es simpático, pero hoy está triste.", ru: "Пабло симпатичный, но сегодня грустный." }] },
+  "es3-cambia": { titulo: "Ещё пары", texto: "**ser aburrido** — быть скучным; **estar aburrido** — скучать. Смысл меняется вместе с глаголом.", ejemplos: [{ es: "La clase es aburrida y estoy aburrido.", ru: "Урок скучный, и мне скучно." }] },
+  "es3-este-ese": { titulo: "Esto, eso", texto: "Если не знаешь, как называется вещь, — **esto** (это), **eso** (то): **¿Qué es esto?** Они не меняются по роду.", ejemplos: [{ es: "¿Qué es esto?", ru: "Что это?" }] },
+  "es3-su": { titulo: "Su — неясно чей?", texto: "**su casa** — его, её, их или ваш дом. Если непонятно, уточняют: **la casa de Pablo**, **la casa de ella**.", ejemplos: [{ es: "Es la casa de Ana.", ru: "Это дом Ани." }] }
+};
+const ES3_NAT = [
+  ["Hay un banco en la plaza.", ["Está un banco en la plaza.", "Hay el banco en la plaza."], "Впервые — **hay un…**", 1, "es3-hay-articulo"],
+  ["No hay café.", ["No hay un café nada.", "No está café."], "**no hay** + без артикля.", 1, "es3-no-hay"],
+  ["El banco está en la plaza.", ["El banco es en la plaza.", "El banco hay en la plaza."], "Где — **está**.", 2, "es3-estar-donde"],
+  ["Estoy en casa.", ["Soy en casa.", "Hay en casa yo."], "Где — **estar**.", 2, "es3-estar-donde"],
+  ["El libro está en la mesa.", ["El libro está a la mesa.", "El libro está de la mesa."], "«На столе» — **en**.", 3, "es3-en"],
+  ["Está al lado del bar.", ["Está al lado de el bar.", "Está a lado del bar."], "**de + el = del**.", 3, "es3-del-al"],
+  ["Vivo en el tercer piso.", ["Vivo en el tercero piso.", "Vivo en tercer el piso."], "Перед сущ. — **tercer**.", 4, "es3-primer"],
+  ["Es una casa grande.", ["Es una grande casa.", "Es una casa grando."], "Прилагательное — после.", 6, "es3-despues"],
+  ["Las mesas son blancas.", ["Las mesas son blancos.", "Las mesas son blanca."], "Согласование: **blancas**.", 6, "es3-adj-concordancia"],
+  ["La casa es muy bonita.", ["La casa es mucho bonita.", "La casa es muy mucho bonita."], "Перед прилагательным — **muy**.", 6, "es3-muy-mucho"],
+  ["Estoy cansado.", ["Soy cansado.", "Hay cansado."], "Состояние — **estar**.", 7, "es3-estados"],
+  ["Ana es simpática.", ["Ana está simpática.", "Ana es simpático."], "Характер — **ser**.", 7, "es3-caracter"],
+  ["Esta casa es grande.", ["Este casa es grande.", "Esto casa es grande."], "**casa** — ж. р.: **esta**.", 8, "es3-este-ese"],
+  ["Mis libros están aquí.", ["Mi libros están aquí.", "Mis libro están aquí."], "Мн. ч. — **mis**.", 8, "es3-posesivos"]
+];
+const ES3_POR = [
+  ["Hay un parque.", "Почему «hay»?", "О парке говорят впервые", ["Парк — конкретный, известный", "Это состояние"], "Впервые — **hay**.", 2, "es3-hay-esta"],
+  ["El parque está cerca.", "Почему «está»?", "Парк уже известен, говорим где он", ["Говорим впервые", "Это характеристика"], "Где — **está**.", 2, "es3-hay-esta"],
+  ["Pablo está triste.", "Почему «está»?", "Это состояние сейчас", ["Это характер", "Это место"], "Состояние — **estar**.", 7, "es3-ser-estar"],
+  ["Pablo es simpático.", "Почему «es»?", "Это характер", ["Это состояние сейчас", "Это место"], "Характер — **ser**.", 7, "es3-ser-estar"],
+  ["Una casa blanca.", "Почему «blanca»?", "Casa — ж. р.", ["Так всегда пишут цвета", "Это мн. ч."], "Согласование.", 6, "es3-adj-concordancia"],
+  ["Mis libros.", "Почему «mis»?", "Libros — мн. ч.", ["Потому что «мой» — м. р.", "Это вежливо"], "Согласуется с вещью.", 8, "es3-posesivos"],
+  ["Está al lado del bar.", "Почему «del»?", "de + el = del", ["Это ошибка", "Al — это «в»"], "Слияние.", 3, "es3-del-al"],
+  ["No hay leche.", "Почему без артикля?", "После no hay обычно без артикля", ["Leche — ж. р.", "Это ошибка"], "**no hay** + без артикля.", 1, "es3-no-hay"]
+];
+const ES3_OIDO = [
+  ["Hay un perro.", "Послушай: hay или está?", "hay", ["hay", "está"], "**hay**.", 1, "es3-hay"],
+  ["El perro está aquí.", "Послушай: hay или está?", "está", ["hay", "está"], "**está**.", 2, "es3-estar-donde"],
+  ["Está a la izquierda.", "Послушай: где?", "Слева", ["Слева", "Справа", "Напротив"], "**a la izquierda** — слева.", 3, "es3-izquierda"],
+  ["Está enfrente.", "Послушай: где?", "Напротив", ["Слева", "Справа", "Напротив"], "**enfrente** — напротив.", 3, "es3-izquierda"],
+  ["Vivo en el segundo.", "Послушай: на каком этаже?", "На втором", ["На втором", "На первом", "На десятом"], "**segundo**.", 4, "es3-plantas"],
+  ["Estoy cansada.", "Послушай: кто говорит?", "Женщина", ["Мужчина", "Женщина"], "**cansada** — ж. р.", 7, "es3-estados"],
+  ["Ese libro.", "Послушай: где книга?", "У тебя, недалеко", ["У меня", "У тебя, недалеко", "Далеко"], "**ese** — у собеседника.", 8, "es3-este-ese"],
+  ["Aquella casa.", "Послушай: где дом?", "Далеко", ["Здесь", "У тебя", "Далеко"], "**aquella** — далеко.", 8, "es3-este-ese"]
+];
+const ES3_PAR = [
+  ["Ты говоришь, что в районе есть парк.", "Hay un parque en el barrio.", "Está un parque en el barrio.", "Впервые — **hay**.", 2, "es3-hay-esta"],
+  ["Ты говоришь, где находится твой дом.", "Mi casa está cerca del parque.", "Mi casa hay cerca del parque.", "Где — **está**.", 2, "es3-hay-esta"],
+  ["Ты говоришь, что ты устал.", "Estoy cansado.", "Soy cansado.", "Состояние — **estoy**.", 7, "es3-estados"],
+  ["Ты говоришь, что Аня скучная (вообще).", "Ana es aburrida.", "Ana está aburrida.", "Характер — **es**.", 7, "es3-cambia"],
+  ["Ты говоришь, что Ане сейчас скучно.", "Ana está aburrida.", "Ana es aburrida.", "Состояние — **está**.", 7, "es3-cambia"],
+  ["Ты показываешь на книгу у себя в руках.", "Este libro es bueno.", "Aquel libro es bueno.", "У меня — **este**.", 8, "es3-este-ese"]
+];
+const ES3_DESC = [
+  ["blanco → blanca · rojo → roja. А negro?", "negra", ["negre", "negros"], "**-o → -a**.", 6, "es3-adj-concordancia"],
+  ["verde → verde · grande → grande. А azul?", "azul", ["azula", "azulo"], "Не на -o — род не меняется.", 6, "es3-adj-concordancia"],
+  ["el libro → este libro · la mesa → esta mesa. А la silla?", "esta silla", ["este silla", "esto silla"], "Ж. р. — **esta**.", 8, "es3-este-ese"],
+  ["mi libro → mis libros · tu casa → tus casas. А su coche → (мн. ч.)?", "sus coches", ["su coches", "sus coche"], "Мн. ч. — **sus**.", 8, "es3-posesivos"],
+  ["uno → primero / primer · tres → tercero / tercer. А el ___ piso (1)?", "primer", ["primero", "primera"], "Перед сущ. м. р. — **primer**.", 4, "es3-primer"]
+];
+const ES3_CAD = [
+  ["Hay un libro.", [["Теперь: три книги.", "Hay tres libros."], ["Теперь: нет книг (no).", "No hay libros."]], 1, "es3-hay"],
+  ["La casa es blanca.", [["Теперь: las casas.", "Las casas son blancas."], ["Теперь: el coche.", "El coche es blanco."]], 6, "es3-adj-concordancia"],
+  ["Estoy en casa.", [["Теперь: tú.", "Estás en casa."], ["Теперь: nosotros.", "Estamos en casa."]], 2, "es3-estar-donde"],
+  ["Este libro es bonito.", [["Теперь: la mesa.", "Esta mesa es bonita."], ["Теперь: далеко (aquel).", "Aquella mesa es bonita."]], 8, "es3-este-ese"]
+];
+const ES3_DIAG = [
+  ["Está un banco en la plaza.", "Впервые — hay un…", ["Нужно es", "Нужно del"], "Hay un banco en la plaza.", 2, "es3-hay-esta"],
+  ["El banco es en la plaza.", "Где — está", ["Нужно hay", "Нужно al"], "El banco está en la plaza.", 2, "es3-estar-donde"],
+  ["La casa es mucho grande.", "Перед прилагательным — muy", ["Нужно está", "Нужно grandes"], "La casa es muy grande.", 6, "es3-muy-mucho"],
+  ["Soy cansado.", "Состояние — estar", ["Нужно cansada", "Нужно muy"], "Estoy cansado.", 7, "es3-estados"],
+  ["Está al lado de el bar.", "de + el = del", ["Нужно en", "Нужно hay"], "Está al lado del bar.", 3, "es3-del-al"],
+  ["Hay el parque cerca.", "После hay — un, una", ["Нужно está", "Нужно es"], "Hay un parque cerca.", 1, "es3-hay-articulo"]
+];
+const ES3_DES = [
+  ["En mi barrio hay un parque muy bonito", [["Какое слово — «есть»?", 3], ["Где?", 2], ["Какой парк?", 7]], 6, "es3-muy-mucho"],
+  ["El banco está al lado del bar", [["Какое слово — «находится»?", 2], ["Где — слитный предлог?", 5]], 3, "es3-del-al"]
+];
+UNIDAD_ES_3.modulos.forEach(m => (m.secciones || []).forEach(s => { if (ES3_MAS[s.id] && !s.mas) s.mas = ES3_MAS[s.id]; }));
+
+function es3Prof(out, baraja, lex) {
+  const P = (id, tipo, forma, mod, regla, x) => out.push(Object.assign({ id: "ES3-" + id, tipo, forma, dificultad: 2, modulo: mod, regla, grupo: id }, x));
+  ES3_NAT.forEach(([ok, mal, exp, mod, regla], i) => P("nat-" + i, "natural", "elegir", mod, regla, { pide: "Какая фраза правильная?", opciones: baraja([ok].concat(mal), i + 201), correcta: ok, oir: ok, explicacion: "**" + ok + "** " + exp }));
+  ES3_POR.forEach(([fr, q, ok, otras, exp, mod, regla], i) => P("por-" + i, "porque", "elegir", mod, regla, { pide: q, grande: fr, audio: fr, opciones: baraja([ok].concat(otras), i + 211), correcta: ok, oir: fr, explicacion: exp }));
+  ES3_OIDO.forEach(([au, q, ok, ops, exp, mod, regla], i) => P("oid-" + i, "oido", "elegir", mod, regla, { pide: q, audio: au, opciones: ops, correcta: ok, oir: au, explicacion: "«" + au + "» — " + exp }));
+  ES3_PAR.forEach(([sit, ok, otra, exp, mod, regla], i) => P("par-" + i, "par", "elegir", mod, regla, { pide: sit + " Как ты скажешь?", opciones: baraja([ok, otra], i + 221), correcta: ok, oir: ok, explicacion: exp }));
+  ES3_DESC.forEach(([q, ok, otras, exp, mod, regla], i) => P("dsc-" + i, "descubrir", "elegir", mod, regla, { pide: q, opciones: baraja([ok].concat(otras), i + 231), correcta: ok, oir: ok, explicacion: exp }));
+  ES3_CAD.forEach(([base, pasos, mod, regla], i) => P("cdn-" + i, "cadena", "cadena", mod, regla, { dificultad: 3, pide: "Измени фразу шаг за шагом.", base, oir: pasos[pasos.length - 1][1], idioma: "es",
+    pasos: pasos.map(([q, e]) => ({ pide: q, esperadas: [e] })), explicacion: [base].concat(pasos.map(p => p[1])).join(" → ") }));
+  ES3_DIAG.forEach(([fr, ok, otros, bien, mod, regla], i) => P("dg-" + i, "diagnostico", "diagnostico", mod, regla, { dificultad: 3, pide: "В этой фразе ошибка. Что не так?", grande: fr,
+    opciones: baraja([ok].concat(otros), i + 241), correcta: ok, esperadas: [bien], idioma: "es", oir: bien, explicacion: "**" + bien + "**" }));
+  ES3_DES.forEach(([fr, qs, mod, regla], i) => P("ds-" + i, "desarmar", "desarmar", mod, regla, { pide: "Отвечай, нажимая на слова фразы.", palabras: fr.split(" "), audio: fr + ".", oir: fr + ".",
+    preguntas: qs.map(([q, k]) => ({ pide: q, correcta: k })), explicacion: fr + "." }));
+}
+Object.assign(ES3_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1 });

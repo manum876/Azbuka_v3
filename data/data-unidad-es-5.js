@@ -939,6 +939,9 @@ function ejerciciosUnidadEs5() {
       explicacion: "Образец: " + T.pasos.map(p => "«" + p.sit.modelos[0] + "»").join(" · ") });
   });
 
+  /* Profundización (13/11/2026) */
+  if (typeof es5Prof === "function") es5Prof(out, baraja, lex);
+
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
 }
@@ -1339,3 +1342,112 @@ const ES5_MEZCLA = { conjugar: 3, "cambia-persona": 1, "verbo-infinitivo": 2, "p
   tienda: 1, pagar: 1, ropa: 1, "ropa-escribir": 1, "ropa-color": 1, talla: 1, "pronombre-od": 2, "pronombre-od-escribir": 1, "pronombre-infinitivo": 1, "pronombre-orden": 1,
   mesa: 1, "mesa-escribir": 1, menu: 1, turnos: 1, pregunta: 1, error: 2, dictado: 2, "situacion-frase": 2, respuesta: 2, "dictado-frase": 2, "ordenar-frase": 1 };
 window.ES5_MEZCLA = ES5_MEZCLA;
+
+/* ── Profundización (13/11/2026, repaso Abecé / Azbuka pedido por Manu) ──────────────
+   Más a fondo que se suma a la teoría al cargar y los tipos de profundización de Azbuka. */
+const ES5_MAS = {
+  "es5-querer": { titulo: "Quiero или quería?", texto: "**Quiero un café** — прямо и нормально между друзьями. В магазине или баре мягче звучит **Quería…** или **¿Me pones…?** А **Te quiero** — это «я тебя люблю», не «хочу тебя».", ejemplos: [{ es: "Te quiero mucho.", ru: "Я тебя очень люблю." }] },
+  "es5-saber": { titulo: "Sé nadar — умею", texto: "**saber** + инфинитив — «уметь» (научился): **Sé nadar**, **Sé cocinar**. **poder** — «могу» (есть возможность сейчас): **Hoy no puedo nadar, hace frío**.", ejemplos: [{ es: "Sé nadar, pero hoy no puedo.", ru: "Я умею плавать, но сегодня не могу." }] },
+  "es5-preferir": { titulo: "Prefiero… a…", texto: "Сравнить: **prefiero** + одно + **a** + другое: **Prefiero el té al café** — я предпочитаю чай кофе. Чаще проще: **Prefiero té**.", ejemplos: [{ es: "Prefiero el té al café.", ru: "Я предпочитаю чай кофе." }] },
+  "es5-tener-que": { titulo: "No tengo que…", texto: "**No tengo que trabajar** — «мне не нужно работать» (не обязан), а не «мне нельзя». «Нельзя» — **no puedo**.", ejemplos: [{ es: "Mañana no tengo que trabajar.", ru: "Завтра мне не нужно работать." }] },
+  "es5-hay-que": { titulo: "Hay que — только инфинитив", texto: "**hay que** не меняется и не говорит, кто: **Hay que pagar** — надо заплатить (всем, вообще). Если нужно сказать кто — **tener que**: **Tengo que pagar**.", ejemplos: [{ es: "En este bar hay que pagar antes.", ru: "В этом баре надо платить заранее." }] },
+  "es5-hambre": { titulo: "Mucha hambre", texto: "**hambre** и **sed** — женского рода, поэтому **mucha hambre**, **mucha sed** (хотя **el hambre** — из-за ударного a, как **el agua**).", ejemplos: [{ es: "Tengo mucha sed.", ru: "Я очень хочу пить." }] },
+  "es5-incontable": { titulo: "Un café — это чашка", texto: "**café**, **agua**, **cerveza** — без артикля, когда вообще: **Bebo café**. А **un café**, **una cerveza**, **un agua** — это порция, чашка, бутылка: **¿Me pones un café?**", ejemplos: [{ es: "¿Me pones dos cafés?", ru: "Сделаешь мне два кофе?" }] },
+  "es5-mucho": { titulo: "Muy или mucho?", texto: "**muy** — перед прилагательным: **muy caro**; **mucho** — с существительным (согласуется) и после глагола (не меняется): **mucha gente**, **trabajo mucho**. Не «muy mucho».", ejemplos: [{ es: "Es muy caro y no tengo mucho dinero.", ru: "Это очень дорого, а у меня мало денег." }] },
+  "es5-cantidades": { titulo: "Medio kilo, un cuarto", texto: "**medio kilo** — полкило (без «un»), **un cuarto de kilo** — 250 г, **una docena de huevos** — дюжина яиц. После количества — **de** и без артикля: **un kilo de tomates**.", ejemplos: [{ es: "Medio kilo de tomates, por favor.", ru: "Полкило помидоров, пожалуйста." }] },
+  "es5-cien-ciento": { titulo: "Cien por cien", texto: "Ровно сто — **cien**: **cien euros**, **cien personas**. С продолжением — **ciento**: **ciento veinte**. Проценты: **el cien por cien** (в Испании) — сто процентов.", ejemplos: [{ es: "Tengo cien euros.", ru: "У меня сто евро." }] },
+  "es5-precio": { titulo: "Con или y?", texto: "Цена с центами: **tres euros con cincuenta** или просто **tres cincuenta**. В магазине часто говорят второе: **Son tres cincuenta**.", ejemplos: [{ es: "Son tres cincuenta.", ru: "С вас три пятьдесят." }] },
+  "es5-pagar": { titulo: "Pagar algo", texto: "**pagar** — без предлога: **Pago la cuenta**, **Pago el café** (не «pago por el café», если просто платишь). Как — **en efectivo**, **con tarjeta**.", ejemplos: [{ es: "Pago yo la cuenta.", ru: "Я заплачу по счёту." }] },
+  "es5-llevar": { titulo: "Llevar — носить и нести", texto: "**llevar** — и «носить (одежду)», и «нести»: **Llevo una chaqueta** — я в куртке; **Llevo el bolso** — я несу сумку. Смысл понятен по фразе.", ejemplos: [{ es: "Hoy llevo una camiseta azul.", ru: "Сегодня я в голубой футболке." }] },
+  "es5-od-que-es": { titulo: "Lo — и о вещах мужского рода, и «это»", texto: "**lo** — «его» (вещь мужского рода): **¿El pan? Lo compro.** А ещё **lo** заменяет целую мысль: **—¿Sabes dónde está? —No lo sé.** — Не знаю (этого).", ejemplos: [{ es: "No lo sé.", ru: "Я не знаю." }] },
+  "es5-od-lugar": { titulo: "Lo quiero comprar = Quiero comprarlo", texto: "С двумя глаголами оба порядка правильные: **Lo quiero comprar** и **Quiero comprarlo**. Нельзя только посередине: не «quiero lo comprar».", ejemplos: [{ es: "La voy a comprar. = Voy a comprarla.", ru: "Я её куплю." }] },
+  "es5-pedir": { titulo: "De primero, de segundo", texto: "В меню дня: **de primero** — на первое, **de segundo** — на второе, **de postre** — на десерт: **De primero quiero ensalada**.", ejemplos: [{ es: "De primero, sopa, y de segundo, pescado.", ru: "На первое — суп, на второе — рыба." }] }
+};
+UNIDAD_ES_5.modulos.forEach(m => (m.secciones || []).forEach(s => { if (ES5_MAS[s.id] && !s.mas) s.mas = ES5_MAS[s.id]; }));
+
+const ES5_NAT = [
+  ["Quiero comer.", ["Quiero como.", "Quiero a comer."], "Второй глагол — инфинитив.", 1, "es5-infinitivo"],
+  ["¿Puedo pagar con tarjeta?", ["¿Puedo pago con tarjeta?", "¿Puedo de pagar con tarjeta?"], "**puedo** + инфинитив.", 1, "es5-poder"],
+  ["Sé nadar.", ["Puedo nadar siempre, sé.", "Sé a nadar."], "Уметь — **sé** + инфинитив.", 1, "es5-saber"],
+  ["Tengo que trabajar.", ["Tengo trabajar.", "Tengo de trabajar."], "**tener que** + инфинитив.", 2, "es5-tener-que"],
+  ["Tengo hambre.", ["Estoy hambre.", "Soy hambre."], "**tener hambre**.", 2, "es5-hambre"],
+  ["Quiero agua.", ["Quiero el agua de todo.", "Quiero una agua mucha."], "Вообще — без артикля.", 3, "es5-incontable"],
+  ["El agua está fría.", ["La agua está fría.", "Agua está fría."], "**el agua** (ударное a).", 3, "es5-genero-comida"],
+  ["Hay mucha gente.", ["Hay mucho gente.", "Hay muy gente."], "**gente** — ж. р.: **mucha**.", 4, "es5-mucho"],
+  ["Un kilo de naranjas.", ["Un kilo naranjas.", "Un kilo de las naranjas."], "**un kilo de** + без артикля.", 4, "es5-cantidades"],
+  ["Cuesta cien euros.", ["Cuesta ciento euros.", "Cuesta un cien euros."], "Ровно сто — **cien**.", 5, "es5-cien-ciento"],
+  ["Doscientas personas.", ["Doscientos personas.", "Dos cientas personas."], "Согласуется: **doscientas**.", 5, "es5-cientos"],
+  ["¿Cuánto cuestan los tomates?", ["¿Cuánto cuesta los tomates?", "¿Cuántos cuestan los tomates?"], "Мн. ч. — **cuestan**.", 5, "es5-precio"],
+  ["¿La camiseta? La compro.", ["¿La camiseta? Compro.", "¿La camiseta? Lo compro."], "Нужно местоимение, по роду вещи: **la**.", 8, "es5-od-que-es"],
+  ["Quiero comprarlo.", ["Quiero lo comprar.", "Quiero comprar lo."], "Слитно с инфинитивом.", 8, "es5-od-lugar"],
+  ["¿Puedo probarme esta falda?", ["¿Puedo probar me esta falda?", "¿Puedo probarse esta falda?"], "**probarme** — я примеряю.", 7, "es5-probarse"],
+  ["La cuenta, por favor.", ["El cuenta, por favor.", "Una cuenta, por favor."], "**la cuenta**.", 9, "es5-cuenta"]
+];
+const ES5_POR = [
+  ["Quiero agua.", "Почему без артикля?", "Вода вообще, сколько-нибудь", ["Потому что вода — ж. р.", "Это ошибка"], "Неисчисляемое вообще — без артикля.", 3, "es5-incontable"],
+  ["El agua está fría.", "Почему «el», а не «la»?", "Agua начинается с ударного a", ["Agua — м. р.", "Это ошибка"], "**el agua**, но **fría**.", 3, "es5-genero-comida"],
+  ["¿Los zapatos? Los compro.", "Почему «los»?", "Los zapatos — м. р., мн. ч.", ["Потому что «я покупаю»", "Это артикль"], "Местоимение — по вещи.", 8, "es5-od-concordancia"],
+  ["Cuesta cien euros.", "Почему «cien», а не «ciento»?", "Ровно сто, без продолжения", ["Перед euros всегда cien", "Ciento — устаревшее"], "**cien** — ровно 100.", 5, "es5-cien-ciento"],
+  ["Hay que pagar.", "Кто должен заплатить?", "Все, вообще (не сказано кто)", ["Я", "Ты"], "**hay que** — безлично.", 2, "es5-hay-que"],
+  ["Sé cocinar.", "Почему «sé», а не «puedo»?", "Это умение", ["Это разрешение", "Это будущее"], "Умение — **saber**.", 1, "es5-saber"],
+  ["Mucha gente.", "Почему «mucha»?", "Gente — ж. р., ед. ч.", ["Gente — мн. ч.", "После hay всегда mucha"], "**la gente** — ед. ч.", 4, "es5-mucho"],
+  ["Trabajo mucho.", "Почему «mucho» не меняется?", "После глагола mucho — наречие", ["Потому что я — мужчина", "Это ошибка"], "С глаголом — **mucho**.", 4, "es5-mucho"]
+];
+const ES5_OIDO = [
+  ["Ciento veinte.", "Послушай: какое число?", "120", ["120", "100", "200"], "**ciento veinte** — 120.", 5, "es5-cien-ciento"],
+  ["Quinientos.", "Послушай: какое число?", "500", ["500", "50", "5000"], "**quinientos** — 500.", 5, "es5-cientos"],
+  ["Setecientos.", "Послушай: какое число?", "700", ["700", "70", "600"], "**setecientos** — 700.", 5, "es5-cientos"],
+  ["Novecientos.", "Послушай: какое число?", "900", ["900", "90", "800"], "**novecientos** — 900.", 5, "es5-cientos"],
+  ["Tres euros con cincuenta.", "Послушай: сколько стоит?", "3,50 €", ["3,50 €", "3,15 €", "35 €"], "3,50 €.", 5, "es5-precio"],
+  ["Lo compro.", "Послушай: что покупают?", "Что-то м. р.", ["Что-то м. р.", "Что-то ж. р.", "Несколько вещей"], "**lo** — м. р.", 8, "es5-od-que-es"],
+  ["Las compro.", "Послушай: что покупают?", "Несколько вещей ж. р.", ["Что-то м. р.", "Что-то ж. р.", "Несколько вещей ж. р."], "**las** — ж. р., мн. ч.", 8, "es5-od-concordancia"],
+  ["Tengo que salir.", "Послушай: это обязанность или желание?", "Обязанность", ["Обязанность", "Желание"], "**tener que** — нужно.", 2, "es5-tener-que"]
+];
+const ES5_PAR = [
+  ["Ты говоришь, что умеешь плавать.", "Sé nadar.", "Puedo nadar.", "Умение — **sé**.", 1, "es5-saber"],
+  ["Ты спрашиваешь, можно ли заплатить картой.", "¿Puedo pagar con tarjeta?", "¿Sé pagar con tarjeta?", "Возможность — **puedo**.", 1, "es5-poder"],
+  ["Ты говоришь, что тебе нужно работать.", "Tengo que trabajar.", "Hay que trabajar.", "Кто — я: **tengo que**.", 2, "es5-tener-que"],
+  ["Ты говоришь, что вообще пьёшь кофе.", "Bebo café.", "Bebo el café.", "Вообще — без артикля.", 3, "es5-incontable"],
+  ["Ты заказываешь одну чашку кофе.", "Un café, por favor.", "Café, por favor, mucho.", "Порция — **un café**.", 3, "es5-incontable"],
+  ["Ты говоришь, что стоит ровно сто евро.", "Cuesta cien euros.", "Cuesta ciento euros.", "**cien**.", 5, "es5-cien-ciento"]
+];
+const ES5_DESC = [
+  ["el tomate → lo compro · el pan → lo compro. А la camiseta?", "la compro", ["lo compro", "compro"], "Ж. р. — **la**.", 8, "es5-od-concordancia"],
+  ["la falda → la · el vestido → lo. А los zapatos?", "los", ["las", "lo"], "М. р., мн. ч. — **los**.", 8, "es5-od-concordancia"],
+  ["doscientos euros · doscientas personas. А trescientos + naranjas?", "trescientas naranjas", ["trescientos naranjas", "trescienta naranjas"], "Согласуется по роду.", 5, "es5-cientos"],
+  ["querer → quiero · preferir → prefiero. А pensar?", "pienso", ["penso", "piense"], "e → ie.", 1, "es5-preferir"],
+  ["poder → puedo · volver → vuelvo. А costar? (él)", "cuesta", ["costa", "cuestan"], "o → ue.", 5, "es5-precio"]
+];
+const ES5_CAD = [
+  ["Compro la camiseta.", [["Замени «la camiseta» местоимением.", "La compro."], ["Теперь: quiero + инфинитив, слитно.", "Quiero comprarla."]], 8, "es5-od-lugar"],
+  ["Quiero un café.", [["Теперь: вежливо (¿Me pones…?).", "¿Me pones un café?"], ["Теперь: два кофе.", "¿Me pones dos cafés?"]], 6, "es5-me-pone"],
+  ["Tengo que pagar.", [["Теперь: для всех, вообще (hay que).", "Hay que pagar."], ["Теперь: ты (tú, tener que).", "Tienes que pagar."]], 2, "es5-hay-que"],
+  ["Hay un tomate.", [["Теперь: много (mucho).", "Hay muchos tomates."], ["Теперь: вода (agua), много.", "Hay mucha agua."]], 4, "es5-mucho"]
+];
+const ES5_DIAG = [
+  ["Quiero el agua.", "Вообще — без артикля", ["Нужно la agua", "Нужно quiero de"], "Quiero agua.", 3, "es5-incontable"],
+  ["¿La camiseta? Compro.", "Не хватает местоимения la", ["Нужно lo", "Нужно el"], "¿La camiseta? La compro.", 8, "es5-od-que-es"],
+  ["Quiero comprar lo.", "Местоимение — слитно", ["Нужно la", "Нужно compro"], "Quiero comprarlo.", 8, "es5-od-lugar"],
+  ["Hay mucho gente.", "Gente — ж. р.: mucha", ["Нужно muy", "Нужно muchos"], "Hay mucha gente.", 4, "es5-mucho"],
+  ["Cuesta ciento euros.", "Ровно сто — cien", ["Нужно cientos", "Нужно un"], "Cuesta cien euros.", 5, "es5-cien-ciento"],
+  ["Tengo trabajar.", "Не хватает que", ["Нужно de", "Нужно trabajo"], "Tengo que trabajar.", 2, "es5-tener-que"]
+];
+const ES5_DES = [
+  ["Quiero un kilo de naranjas", [["Какое слово — сколько?", 2], ["Что?", 4]], 4, "es5-cantidades"],
+  ["La camiseta roja la compro", [["Какое слово — местоимение?", 3], ["Какого цвета?", 2]], 8, "es5-od-que-es"]
+];
+function es5Prof(out, baraja, lex) {
+  const P = (id, tipo, forma, mod, regla, x) => out.push(Object.assign({ id: "ES5-" + id, tipo, forma, dificultad: 2, modulo: mod, regla, grupo: id }, x));
+  ES5_NAT.forEach(([ok, mal, exp, mod, regla], i) => P("nat-" + i, "natural", "elegir", mod, regla, { pide: "Какая фраза правильная?", opciones: baraja([ok].concat(mal), i + 201), correcta: ok, oir: ok, explicacion: "**" + ok + "** " + exp }));
+  ES5_POR.forEach(([fr, q, ok, otras, exp, mod, regla], i) => P("por-" + i, "porque", "elegir", mod, regla, { pide: q, grande: fr, audio: fr, opciones: baraja([ok].concat(otras), i + 211), correcta: ok, oir: fr, explicacion: exp }));
+  ES5_OIDO.forEach(([au, q, ok, ops, exp, mod, regla], i) => P("oid-" + i, "oido", "elegir", mod, regla, { pide: q, audio: au, opciones: ops, correcta: ok, oir: au, explicacion: "«" + au + "» — " + exp }));
+  ES5_PAR.forEach(([sit, ok, otra, exp, mod, regla], i) => P("par-" + i, "par", "elegir", mod, regla, { pide: sit + " Как ты скажешь?", opciones: baraja([ok, otra], i + 221), correcta: ok, oir: ok, explicacion: exp }));
+  ES5_DESC.forEach(([q, ok, otras, exp, mod, regla], i) => P("de-" + i, "descubrir", "elegir", mod, regla, { pide: q, opciones: baraja([ok].concat(otras), i + 231), correcta: ok, oir: ok, explicacion: exp }));
+  ES5_CAD.forEach(([base, pasos, mod, regla], i) => P("cdn-" + i, "cadena", "cadena", mod, regla, { dificultad: 3, pide: "Измени фразу шаг за шагом.", base, oir: pasos[pasos.length - 1][1], idioma: "es",
+    pasos: pasos.map(([q, e]) => ({ pide: q, esperadas: [e] })), explicacion: [base].concat(pasos.map(p => p[1])).join(" → ") }));
+  ES5_DIAG.forEach(([fr, ok, otros, bien, mod, regla], i) => P("dg-" + i, "diagnostico", "diagnostico", mod, regla, { dificultad: 3, pide: "В этой фразе ошибка. Что не так?", grande: fr,
+    opciones: baraja([ok].concat(otros), i + 241), correcta: ok, esperadas: [bien], idioma: "es", oir: bien, explicacion: "**" + bien + "**" }));
+  ES5_DES.forEach(([fr, qs, mod, regla], i) => P("ds-" + i, "desarmar", "desarmar", mod, regla, { pide: "Отвечай, нажимая на слова фразы.", palabras: fr.split(" "), audio: fr + ".", oir: fr + ".",
+    preguntas: qs.map(([q, k]) => ({ pide: q, correcta: k })), explicacion: fr + "." }));
+}
+Object.assign(ES5_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1 });

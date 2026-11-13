@@ -123,7 +123,7 @@ var AZ_CATALOGO = {
     indice: null,            /* abece-index-1.html cuando exista; mientras, el de azbuka */
     buscador: "azBuscarEs",  /* busca en el léxico español, en español o en ruso (core.js, 27/10/2026) */
     lexico: "data/data-lexicon-es.js",
-    /* Unidades (claude/PROGRAMA_ABECE.md): se suman a medida que se construyen (28/10/2026: la U1; 02/11/2026: la U2 y la U3; 04/11/2026: la U4; 05/11/2026: la U5 y la U6) */
+    /* Unidades (claude/PROGRAMA_ABECE.md): se suman a medida que se construyen (28/10/2026: la U1; 02/11/2026: la U2 y la U3; 04/11/2026: la U4; 05/11/2026: la U5 y la U6; 12/11/2026: la U7; 13/11/2026: la U8) */
     unidades: [
       { id: 1, title: "Испанский с нуля", desc: "Буквы, звуки и ударение; приветствия и числа до 20.", href: "abece-1.html", lista: true },
       { id: 2, title: "Кто я и кто мы", desc: "Ser, tener, страны и национальности, семья, артикли и числа до 100.", href: "abece-2.html", lista: true },
@@ -131,15 +131,19 @@ var AZ_CATALOGO = {
       { id: 4, title: "Мой день и привычки", desc: "Настоящее время, распорядок дня, время, погода и что тебе нравится.", href: "abece-4.html", lista: true },
       { id: 5, title: "Еда и покупки", desc: "Хочу, могу и надо; еда и одежда, цены, магазин и ресторан, lo и la.", href: "abece-5.html", lista: true },
       { id: 6, title: "По городу", desc: "Куда и где, транспорт, как пройти, планы, здоровье и аптека.", href: "abece-6.html", lista: true },
+      { id: 7, title: "Общение и отношения", desc: "Встречи и приглашения, кому (le, les), как gustar, согласие, сравнение и сообщения.", href: "abece-7.html", lista: true },
+      { id: 8, title: "Рассказываем о прошлом", desc: "Pretérito perfecto и indefinido, когда что, поездки и биография; повторение уроков 2–8.", href: "abece-8.html", lista: true },
+      { id: 9, title: "Истории, привычки и перемены", desc: "Imperfecto, каким было что-то раньше, что происходило и что случилось; рассказ и перемены.", href: "abece-9.html", lista: true },
     ],
     /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo
        orden y con el mismo color que su equivalente de Azbuka, glifo de dos
-       letras latinas. Se suman a medida que se construyen (27/10/2026: Diccionario, Alfabeto, Verbos y Gramática).
+       letras latinas. Se suman a medida que se construyen (27/10/2026: Diccionario, Alfabeto, Verbos y Gramática; 12/11/2026: Диалоги).
        Orden final: Словарь · Алфавит и произношение · Диалоги · Чтение ·
        Болтаем с Лусией · Глаголы · Грамматика · Тетрадь. */
     modulos: [
       { id: "diccionario", title: "Словарь", desc: "Весь словарь, по темам и частям речи", href: "ficha.html", icon: "orange", glyph: "Dc" },
       { id: "alfabeto", title: "Алфавит и произношение", desc: "Буквы, звуки и письмо от руки", href: "alfabeto.html", icon: "yellow", glyph: "Ab" },
+      { id: "dialogos", title: "Диалоги", desc: "Разговоры, полезные фразы и культура Испании", href: "dialogos.html", icon: "lime", glyph: "Dl" },
       { id: "verbos", title: "Глаголы", desc: "Спряжение всех глаголов словаря", href: "verbos.html", icon: "blue", glyph: "Vb" },
       { id: "gramatica", title: "Грамматика", desc: "Род, число, артикли и местоимения: формы и таблицы", href: "gramatica.html", icon: "purple", glyph: "Gr" },
       { id: "cuaderno", title: "Тетрадь", desc: "Твои заметки и то, что ты сохраняешь в приложении", href: "cuaderno.html", icon: "pink", glyph: "Cu" },

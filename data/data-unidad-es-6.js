@@ -808,6 +808,9 @@ function ejerciciosUnidadEs6() {
       explicacion: modelo });
   });
 
+  /* Profundización y formas (13/11/2026) */
+  if (typeof es6Prof === "function") es6Prof(out, baraja, lex);
+
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
 }
@@ -1110,3 +1113,126 @@ const ES6_MEZCLA = { conjugar: 2, "a-en-de": 3, "llevar-traer": 1, transporte: 1
   "ir-a": 2, "ir-a-frase": 1, cuando: 1, consejo: 2, cuerpo: 1, "cuerpo-escribir": 1, doler: 2, "doler-escribir": 1, enfermo: 1, farmacia: 1,
   pregunta: 1, error: 2, dictado: 2, "situacion-frase": 2, respuesta: 2, "dictado-frase": 2, "ordenar-frase": 1, turnos: 1, ruta: 1 };
 window.ES6_MEZCLA = ES6_MEZCLA;
+
+/* ── Profundización (13/11/2026, repaso Abecé / Azbuka pedido por Manu) ──────────────
+   Más a fondo que se suma a la teoría al cargar; tipos de profundización de Azbuka y
+   ejercicios de formas generados (imperativo de tú, ir a + infinitivo). */
+const ES6_MAS = {
+  "es6-a-en-de": { titulo: "Estar en, ir a", texto: "Простая проверка: если есть движение (**ir, venir, llegar, volver**) — **a**; если нет (**estar, vivir, trabajar**) — **en**. Но **entrar en** — исключение: в Испании говорят **Entro en el bar** (в Латинской Америке чаще **entrar a**).", ejemplos: [{ es: "Trabajo en Madrid, pero voy a Barcelona.", ru: "Я работаю в Мадриде, но еду в Барселону." }] },
+  "es6-al-del": { titulo: "A casa, en casa", texto: "С **casa** (своим домом) артикль не нужен: **Voy a casa**, **Estoy en casa**, **Salgo de casa**. Если дом чужой: **a casa de Lucía**. С названием города тоже без артикля: **Voy a Madrid**.", ejemplos: [{ es: "Esta noche ceno en casa de Lucía.", ru: "Сегодня вечером я ужинаю у Лусии." }] },
+  "es6-llevar-traer": { titulo: "Llevar и traer — как «уносить» и «приносить»", texto: "Смотри, где говорящий: **traer** — сюда, ко мне; **llevar** — туда, от меня. **¿Me traes un vaso de agua?** — принеси мне. **Llevo a los niños al colegio** — отвожу. Так же **venir** (сюда) и **ir** (туда).", ejemplos: [{ es: "Te llevo a casa en coche.", ru: "Я отвезу тебя домой на машине." }] },
+  "es6-en-metro": { titulo: "Ir en / ir a", texto: "Вид транспорта — **en**: **en metro, en coche, en avión**. Пешком — **a pie**. Но если сказано, на каком именно: **Voy en el autobús de las ocho**.", ejemplos: [{ es: "Voy en el autobús de las ocho.", ru: "Я еду на автобусе в восемь." }] },
+  "es6-coger": { titulo: "Coger и tomar", texto: "В Испании говорят **coger el autobús**; в Латинской Америке — **tomar el autobús** (там **coger** — грубое слово). **tomar** понимают везде, так что его тоже можно говорить и в Испании.", ejemplos: [{ es: "Tomo el metro todos los días.", ru: "Я каждый день езжу на метро." }] },
+  "es6-tardar": { titulo: "Tardar en", texto: "Сколько времени — **tardar** + время: **Tardo diez minutos**. На что — **tardar en**: **Tardo diez minutos en llegar** — я добираюсь за десять минут.", ejemplos: [{ es: "¿Cuánto tardas en llegar al trabajo?", ru: "Сколько ты добираешься до работы?" }] },
+  "es6-desde-hasta": { titulo: "De… a… — короче", texto: "**de… a…** и **desde… hasta…** значат одно и то же; **desde… hasta** — чуть точнее, подчёркивает начало и конец. С часами: **de nueve a cinco**, **desde las nueve hasta las cinco**.", ejemplos: [{ es: "Trabajo de nueve a cinco.", ru: "Я работаю с девяти до пяти." }] },
+  "es6-por": { titulo: "Por — ещё и «примерно где»", texto: "**por** + место — ещё и «где-то здесь, в районе»: **¿Hay una farmacia por aquí?** — тут поблизости есть аптека? **Vivo por el centro** — я живу где-то в центре.", ejemplos: [{ es: "¿Hay un banco por aquí?", ru: "Здесь поблизости есть банк?" }] },
+  "es6-imperativo": { titulo: "Imperativo = él в настоящем", texto: "Самая простая проверка: форма **tú** в imperativo совпадает с **él** в настоящем: **él habla → ¡habla!**, **él come → ¡come!**, **él cierra → ¡cierra!** Это работает почти всегда, кроме восьми неправильных.", ejemplos: [{ es: "Ana cierra la puerta. — ¡Cierra la puerta!", ru: "Аня закрывает дверь. — Закрой дверь!" }] },
+  "es6-imperativo-irregular": { titulo: "Ve или ven?", texto: "**ve** — иди (туда, от меня), от **ir**; **ven** — иди сюда, ко мне, от **venir**. **¡Ven aquí!** — иди сюда! **Ve a la farmacia** — сходи в аптеку.", ejemplos: [{ es: "¡Ven aquí, por favor!", ru: "Иди сюда, пожалуйста!" }] },
+  "es6-indicaciones": { titulo: "La primera a la derecha", texto: "Порядковые числа в объяснении пути: **la primera calle a la derecha**, **la segunda a la izquierda** — «calle» можно не говорить: **Coge la segunda a la izquierda**.", ejemplos: [{ es: "Coge la segunda a la izquierda.", ru: "Сверни на вторую налево." }] },
+  "es6-pegado": { titulo: "С инфинитивом — тоже слитно", texto: "Местоимение пишут слитно и с инфинитивом: **Quiero comprarlo** = **Lo quiero comprar** — оба варианта правильные. А с imperativo — только после: **Cómpralo**, не «lo compra».", ejemplos: [{ es: "Quiero comprarlo.", ru: "Я хочу его купить." }] },
+  "es6-ir-a": { titulo: "Ir a + инфинитив и настоящее", texto: "О ближайших планах испанцы часто говорят и просто настоящим: **Mañana voy al médico** = **Mañana voy a ir al médico**. **ir a** + инфинитив подчёркивает намерение: **Voy a estudiar más**.", ejemplos: [{ es: "Mañana trabajo en casa.", ru: "Завтра я работаю дома." }] },
+  "es6-deber": { titulo: "Deber и tener que", texto: "**tengo que** — так надо (обязанность, обстоятельства): **Tengo que trabajar mañana**. **debes** — совет, «тебе следует»: **Debes descansar**. Мягче совета — **deberías** (это форма, которую ты выучишь позже).", ejemplos: [{ es: "Tengo que ir al médico.", ru: "Мне нужно сходить к врачу." }] },
+  "es6-doler": { titulo: "Me duele la cabeza — с артиклем", texto: "Часть тела — с артиклем, а не с «mi»: **Me duele la cabeza** (не «mi cabeza»): **me** уже говорит, чья. Так же **Me lavo las manos**.", ejemplos: [{ es: "Me duelen los pies.", ru: "У меня болят ноги (ступни)." }] },
+  "es6-medico": { titulo: "El médico или la médica", texto: "К врачу: **ir al médico** (врач вообще, даже если врач — женщина). О конкретной женщине-враче — **la médica** или **la doctora**: **La doctora es muy simpática**.", ejemplos: [{ es: "Mañana voy al médico.", ru: "Завтра я иду к врачу." }] }
+};
+UNIDAD_ES_6.modulos.forEach(m => (m.secciones || []).forEach(s => { if (ES6_MAS[s.id] && !s.mas) s.mas = ES6_MAS[s.id]; }));
+
+const ES6_NAT = [
+  ["Voy a Madrid.", ["Voy en Madrid.", "Voy de Madrid a."], "Куда — **a**.", 1, "es6-a-en-de"],
+  ["Estoy en casa.", ["Estoy a casa.", "Estoy en la mi casa."], "Где — **en**.", 1, "es6-a-en-de"],
+  ["Vengo del trabajo.", ["Vengo de el trabajo.", "Vengo a el trabajo."], "**de + el = del**.", 1, "es6-al-del"],
+  ["Voy al cine.", ["Voy a el cine.", "Voy en el cine."], "**a + el = al**.", 1, "es6-al-del"],
+  ["Voy al trabajo en metro.", ["Voy al trabajo con metro.", "Voy al trabajo por metro."], "Транспорт — **en**.", 2, "es6-en-metro"],
+  ["Voy a pie.", ["Voy en pie.", "Voy con pies."], "Пешком — **a pie**.", 2, "es6-en-metro"],
+  ["Tardo veinte minutos.", ["Tardo en veinte minutos.", "Me tardo veinte minutos."], "**tardar** + время.", 2, "es6-tardar"],
+  ["Gira a la derecha.", ["Gira en la derecha.", "Giras a la derecha."], "**gira** — imperativo; **a la derecha**.", 4, "es6-imperativo"],
+  ["Ven aquí.", ["Viene aquí.", "Ve aquí."], "Сюда — **ven**.", 4, "es6-imperativo-irregular"],
+  ["Haz la cena.", ["Hace la cena.", "Haces la cena."], "**hacer → haz**.", 4, "es6-imperativo-irregular"],
+  ["Tómalo.", ["Lo toma.", "Tomalo lo."], "После imperativo, слитно, со знаком: **tómalo**.", 5, "es6-pegado"],
+  ["Llámame mañana.", ["Me llama mañana.", "Llama me mañana."], "**llámame** — слитно.", 5, "es6-pegado"],
+  ["Voy a comer.", ["Voy comer.", "Voy de comer."], "**ir a** + инфинитив.", 6, "es6-ir-a"],
+  ["Me duele la cabeza.", ["Me duele mi cabeza.", "Me duelen la cabeza."], "Часть тела — с артиклем; ед. ч. — **duele**.", 8, "es6-doler"],
+  ["Me duelen los ojos.", ["Me duele los ojos.", "Me duelen mis ojos."], "Мн. ч. — **duelen**.", 8, "es6-doler"],
+  ["Tengo fiebre.", ["Estoy fiebre.", "Tengo la fiebre alta mucho."], "**tener fiebre**.", 8, "es6-enfermo"]
+];
+const ES6_POR = [
+  ["Voy a Madrid.", "Почему «a», а не «en»?", "Есть движение — куда", ["Это где", "Это откуда"], "Куда — **a**.", 1, "es6-a-en-de"],
+  ["Vivo en Madrid.", "Почему «en»?", "Нет движения — где", ["Это куда", "Это откуда"], "Где — **en**.", 1, "es6-a-en-de"],
+  ["¿Me traes un café?", "Почему «traes», а не «llevas»?", "Кофе несут сюда, к говорящему", ["Кофе уносят от говорящего", "Это прошедшее"], "Сюда — **traer**.", 1, "es6-llevar-traer"],
+  ["¡Cómelo!", "Почему знак ударения на «có»?", "С местоимением ударение остаётся на том же слоге", ["Это прошедшее время", "Так пишут все глаголы"], "**come** + **lo** → **cómelo**.", 5, "es6-tilde-imperativo"],
+  ["Ve a la farmacia.", "Почему «ve», а не «ven»?", "Туда, от говорящего — от ir", ["Сюда — от venir", "Это настоящее"], "**ir → ve**.", 4, "es6-imperativo-irregular"],
+  ["Me duelen los pies.", "Почему «duelen»?", "Болят «los pies» — мн. ч.", ["Потому что «me» — мн. ч.", "Это прошедшее"], "Как gustar.", 8, "es6-doler"],
+  ["Debes descansar.", "Это совет или обязанность?", "Совет: тебе следует", ["Обязанность: так надо", "Разрешение"], "**deber** — совет.", 7, "es6-deber"],
+  ["Pasa por el parque.", "Что значит «por» здесь?", "Через парк", ["В сторону парка", "Для парка"], "**por** — через.", 3, "es6-por"]
+];
+const ES6_OIDO = [
+  ["Voy a la playa.", "Послушай: куда или где?", "Куда", ["Куда", "Где", "Откуда"], "**a** — куда.", 1, "es6-a-en-de"],
+  ["Vengo de la playa.", "Послушай: куда или откуда?", "Откуда", ["Куда", "Где", "Откуда"], "**de** — откуда.", 1, "es6-a-en-de"],
+  ["Ven aquí.", "Послушай: какой глагол?", "venir", ["venir", "ver", "ir"], "**ven** — от venir.", 4, "es6-imperativo-irregular"],
+  ["Ve al médico.", "Послушай: какой глагол?", "ir", ["ir", "ver", "venir"], "**ve** — от ir.", 4, "es6-imperativo-irregular"],
+  ["Voy a comer.", "Послушай: сейчас или в будущем?", "В будущем", ["Сейчас", "В будущем", "В прошлом"], "**ir a** + инфинитив — планы.", 6, "es6-ir-a"],
+  ["Me duelen.", "Послушай: болит одно или несколько?", "Несколько", ["Одно", "Несколько"], "**duelen** — мн. ч.", 8, "es6-doler"],
+  ["Gira a la izquierda.", "Послушай: куда повернуть?", "Налево", ["Налево", "Направо", "Прямо"], "**a la izquierda** — налево.", 4, "es6-indicaciones"],
+  ["Cógelo.", "Послушай: сколько слов?", "Одно: глагол и местоимение вместе", ["Одно: глагол и местоимение вместе", "Два"], "**cógelo** — одно слово.", 5, "es6-pegado"]
+];
+const ES6_PAR = [
+  ["Ты просишь друга принести тебе воды.", "¿Me traes agua?", "¿Me llevas agua?", "Сюда — **traer**.", 1, "es6-llevar-traer"],
+  ["Ты говоришь, что отвезёшь детей в школу.", "Llevo a los niños al colegio.", "Traigo a los niños al colegio.", "Туда — **llevar**.", 1, "es6-llevar-traer"],
+  ["Ты зовёшь друга к себе.", "¡Ven aquí!", "¡Ve aquí!", "Сюда — **ven**.", 4, "es6-imperativo-irregular"],
+  ["Ты говоришь, что идёшь пешком.", "Voy a pie.", "Voy en pie.", "Пешком — **a pie**.", 2, "es6-en-metro"],
+  ["Ты говоришь, что тебе нужно сходить к врачу (обязательно).", "Tengo que ir al médico.", "Debes ir al médico.", "Обязанность — **tengo que**.", 7, "es6-deber"],
+  ["Ты советуешь другу отдохнуть.", "Debes descansar.", "Tengo que descansar.", "Совет — **debes**.", 7, "es6-deber"]
+];
+const ES6_DESC = [
+  ["hablar → habla · tomar → toma. А girar?", "gira", ["giras", "giro"], "**tú** в imperativo = **él** в настоящем.", 4, "es6-imperativo"],
+  ["comer → come · beber → bebe. А leer?", "lee", ["lees", "lea"], "**-er → -e**.", 4, "es6-imperativo"],
+  ["cerrar → cierra · pensar → piensa. А empezar?", "empieza", ["empeza", "empiezas"], "Корень меняется, как в настоящем.", 4, "es6-imperativo"],
+  ["toma + lo → tómalo · come + lo → cómelo. А compra + lo?", "cómpralo", ["compralo", "compra lo"], "Знак ударения, слитно.", 5, "es6-tilde-imperativo"],
+  ["yo voy a · tú vas a. А nosotros?", "vamos a", ["vemos a", "vamos de"], "**ir**: **vamos a**.", 6, "es6-ir-a"]
+];
+const ES6_CAD = [
+  ["Voy a casa.", [["Теперь: где (estar).", "Estoy en casa."], ["Теперь: откуда (venir).", "Vengo de casa."]], 1, "es6-a-en-de"],
+  ["Tomas el metro.", [["Теперь: imperativo (tú).", "Toma el metro."], ["Теперь: замени «el metro» на lo.", "Tómalo."]], 5, "es6-pegado"],
+  ["Como en casa.", [["Теперь: планы (ir a), завтра.", "Mañana voy a comer en casa."], ["Теперь: nosotros.", "Mañana vamos a comer en casa."]], 6, "es6-ir-a"],
+  ["Me duele la cabeza.", [["Теперь: los pies.", "Me duelen los pies."], ["Теперь: тебе (te).", "Te duelen los pies."]], 8, "es6-doler"]
+];
+const ES6_DIAG = [
+  ["Voy en Madrid.", "Куда — a", ["Нужно de", "Нужно al"], "Voy a Madrid.", 1, "es6-a-en-de"],
+  ["Estoy a casa.", "Где — en", ["Нужно al", "Нужно de"], "Estoy en casa.", 1, "es6-a-en-de"],
+  ["Voy al trabajo con metro.", "Транспорт — en", ["Нужно a", "Нужно el"], "Voy al trabajo en metro.", 2, "es6-en-metro"],
+  ["¡Lo toma!", "Местоимение — после imperativo, слитно", ["Нужно la", "Нужно tomas"], "¡Tómalo!", 5, "es6-pegado"],
+  ["Voy comer.", "Не хватает a", ["Нужно de", "Нужно comiendo"], "Voy a comer.", 6, "es6-ir-a"],
+  ["Me duele mi cabeza.", "Часть тела — с артиклем la", ["Нужно duelen", "Нужно a mí"], "Me duele la cabeza.", 8, "es6-doler"]
+];
+const ES6_DES = [
+  ["Sigue todo recto y gira a la derecha", [["Какое слово — «поверни»?", 4], ["Куда повернуть?", 7], ["Какое слово — «иди дальше»?", 0]], 4, "es6-indicaciones"],
+  ["Mañana voy a ir al médico", [["Какое слово — когда?", 0], ["Какой глагол — ir a?", 1], ["Куда?", 5]], 6, "es6-ir-a"]
+];
+const ES6_VERBOS_IMP = ["hablar", "tomar", "coger", "girar", "cruzar", "seguir", "subir", "bajar", "esperar", "llamar", "comer", "beber", "leer", "escribir", "abrir", "cerrar", "empezar", "pensar", "volver",
+  "dormir", "pedir", "venir", "ir", "salir", "poner", "tener", "hacer", "decir", "ser", "descansar", "comprar", "mirar"];
+function es6Prof(out, baraja, lex) {
+  const P = (id, tipo, forma, mod, regla, x) => out.push(Object.assign({ id: "ES6-" + id, tipo, forma, dificultad: 2, modulo: mod, regla, grupo: id }, x));
+  ES6_NAT.forEach(([ok, mal, exp, mod, regla], i) => P("nat-" + i, "natural", "elegir", mod, regla, { pide: "Какая фраза правильная?", opciones: baraja([ok].concat(mal), i + 201), correcta: ok, oir: ok, explicacion: "**" + ok + "** " + exp }));
+  ES6_POR.forEach(([fr, q, ok, otras, exp, mod, regla], i) => P("por-" + i, "porque", "elegir", mod, regla, { pide: q, grande: fr, audio: fr, opciones: baraja([ok].concat(otras), i + 211), correcta: ok, oir: fr, explicacion: exp }));
+  ES6_OIDO.forEach(([au, q, ok, ops, exp, mod, regla], i) => P("oi-" + i, "oido", "elegir", mod, regla, { pide: q, audio: au, opciones: ops, correcta: ok, oir: au, explicacion: "«" + au + "» — " + exp }));
+  ES6_PAR.forEach(([sit, ok, otra, exp, mod, regla], i) => P("par-" + i, "par", "elegir", mod, regla, { pide: sit + " Как ты скажешь?", opciones: baraja([ok, otra], i + 221), correcta: ok, oir: ok, explicacion: exp }));
+  ES6_DESC.forEach(([q, ok, otras, exp, mod, regla], i) => P("de-" + i, "descubrir", "elegir", mod, regla, { pide: q, opciones: baraja([ok].concat(otras), i + 231), correcta: ok, oir: ok, explicacion: exp }));
+  ES6_CAD.forEach(([base, pasos, mod, regla], i) => P("cad-" + i, "cadena", "cadena", mod, regla, { dificultad: 3, pide: "Измени фразу шаг за шагом.", base, oir: pasos[pasos.length - 1][1], idioma: "es",
+    pasos: pasos.map(([q, e]) => ({ pide: q, esperadas: [e] })), explicacion: [base].concat(pasos.map(p => p[1])).join(" → ") }));
+  ES6_DIAG.forEach(([fr, ok, otros, bien, mod, regla], i) => P("dg-" + i, "diagnostico", "diagnostico", mod, regla, { dificultad: 3, pide: "В этой фразе ошибка. Что не так?", grande: fr,
+    opciones: baraja([ok].concat(otros), i + 241), correcta: ok, esperadas: [bien], idioma: "es", oir: bien, explicacion: "**" + bien + "**" }));
+  ES6_DES.forEach(([fr, qs, mod, regla], i) => P("ds-" + i, "desarmar", "desarmar", mod, regla, { pide: "Отвечай, нажимая на слова фразы.", palabras: fr.split(" "), audio: fr + ".", oir: fr + ".",
+    preguntas: qs.map(([q, k]) => ({ pide: q, correcta: k })), explicacion: fr + "." }));
+  const IRR = /^(ir|venir|salir|poner|tener|hacer|decir|ser)$/;
+  ES6_VERBOS_IMP.forEach(inf => {
+    const f = es6Imp(inf); if (!f) return;
+    P("imf-" + inf, "imperativo-forma", "escribir", 4, IRR.test(inf) ? "es6-imperativo-irregular" : "es6-imperativo", { grupo: "imf-" + inf, lex: lex(inf), pide: "Напиши imperativo (tú).",
+      grande: inf + " → ¡…!", esperadas: [f], idioma: "es", foco: true, formaCasi: false, oir: f, explicacion: "**" + inf + " → " + f + "**." + (IRR.test(inf) ? " Неправильный." : " Как **él** в настоящем: **" + es6Pres(inf, 2) + "**.") });
+  });
+  ["comer", "trabajar", "estudiar", "viajar", "descansar", "salir", "llamar", "comprar", "ver", "hacer", "leer", "dormir"].forEach((inf, i) => {
+    const p = [0, 1, 2, 3, 4, 5][i % 6], f = es6Pres("ir", p) + " a " + inf;
+    P("iaf-" + inf, "ir-a-forma", "escribir", 6, "es6-ir-a", { grupo: "iaf-" + inf, lex: lex(inf), pide: "Напиши «ir a + инфинитив».", grande: inf + " — " + ES6_PERS[p][0].split(" / ")[0],
+      esperadas: [f], idioma: "es", foco: true, formaCasi: false, oir: f, explicacion: "**" + f + "**." });
+  });
+}
+Object.assign(ES6_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1, "imperativo-forma": 2, "ir-a-forma": 1 });

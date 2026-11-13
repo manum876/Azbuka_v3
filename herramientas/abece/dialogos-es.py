@@ -19,7 +19,7 @@ subprocess.run(["node", os.path.join(AQUI, "dialogos-es-mapas.js"), RAIZ, MAPAS]
 M = json.load(open(MAPAS)); os.remove(MAPAS)
 OUT = os.path.join(RAIZ, "data", "data-dialogos-es.js")
 
-DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "vale": "ESP-05408", "bien": "ESP-00036", "mucho": "ESP-00066",
+DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "fuisteis": "ESP-00016", "fui": "ESP-00016", "fuimos": "ESP-00016", "vale": "ESP-05408", "bien": "ESP-00036", "mucho": "ESP-00066",
        "la": "ESP-00001", "lo": "ESP-00025", "tarde": "ESP-00217", "nada": "ESP-00070", "gusto": "ESP-00673", "encantado": "ESP-00942",
        "llamo": "ESP-02076", "llamas": "ESP-02076", "llama": "ESP-02076", "siento": "ESP-00079", "y": "ESP-00009",
        "señora": "ESP-00051", "pero": "ESP-00031",
@@ -31,7 +31,11 @@ DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "vale": "
        "frío": "ESP-05434", "media": "ESP-05193", "cuarto": "ESP-00508",
        "levanto": "ESP-01196", "levantas": "ESP-01196", "ducho": "ESP-05423", "desayuno": "ESP-02377",
        # U5 (05/11/2026)
-       "mucha": "ESP-00066", "rica": "ESP-00778", "rico": "ESP-00778", "cuenta": "ESP-00331", "compra": "ESP-01268", "medio": "ESP-05193", "primero": "ESP-00146", "segundo": "ESP-00258", "helado": "ESP-01432"}
+       "mucha": "ESP-00066", "rica": "ESP-00778", "rico": "ESP-00778", "cuenta": "ESP-00331", "compra": "ESP-01268", "medio": "ESP-05193", "primero": "ESP-00146", "segundo": "ESP-00258", "helado": "ESP-01432",
+       # U7 (12/11/2026)
+       "mejor": "ESP-00098",
+       # U9 (13/11/2026): «¿Cómo fue?» es ser; «de repente», la locución
+       "fue": "ESP-00004", "repente": "ESP-03126"}
 # Nombres propios de varias palabras que no están en el léxico (sus palabras no se enlazan)
 PROPIOS_VARIAS = ["Buenos Aires"]
 # Nombres de personas (no van al léxico). Los países y las ciudades sí: con mayúscula se usa la entrada propia.
@@ -218,7 +222,39 @@ FRASES = [
     ["FRE-110", "salud", "Tengo fiebre.", "У меня температура.", "", "Болезни — с **tener**.", 6],
     ["FRE-111", "salud", "¿Qué te pasa?", "Что с тобой?", "tú", "Так спрашивают, что случилось.", 6],
     ["FRE-112", "salud", "Quería pedir cita.", "Я бы хотел(а) записаться к врачу.", "", "**pedir cita** — записаться на приём.", 6],
-    ["FRE-113", "salud", "Debes descansar.", "Тебе надо отдохнуть.", "tú", "Совет — **deber** + инфинитив.", 6]
+    ["FRE-113", "salud", "Debes descansar.", "Тебе надо отдохнуть.", "tú", "Совет — **deber** + инфинитив.", 6],
+    # U7 (12/11/2026): quedar, aceptar y rechazar, opinar, felicitar
+    ["FRE-114", "planes", "¿Quedamos?", "Встретимся?", "", "Самый частый способ предложить встречу. Ответ: «Vale» или «¿A qué hora?».", 7],
+    ["FRE-115", "planes", "¿Te apetece ir al cine?", "Хочешь пойти в кино?", "tú", "**¿Te apetece…?** + инфинитив или существительное — мягкое предложение. С usted: «¿Le apetece…?».", 7],
+    ["FRE-116", "planes", "¿A qué hora quedamos?", "Во сколько встретимся?", "", "**quedar** — договориться о встрече.", 7],
+    ["FRE-117", "planes", "Lo siento, no puedo.", "Извини, не могу.", "", "Вежливый отказ. Обычно добавляют причину: «…tengo que trabajar».", 7],
+    ["FRE-118", "planes", "¿Y mejor el sábado?", "А может, лучше в субботу?", "", "Так предлагают другой день: **mejor** — «лучше».", 7],
+    ["FRE-119", "planes", "¡Qué pena!", "Как жаль!", "", "Когда план не получается. Так же: «¡Qué lástima!».", 7],
+    ["FRE-120", "planes", "No hay problema.", "Без проблем.", "", "Ответ, когда кто-то меняет план или извиняется.", 7],
+    ["FRE-121", "opinar", "Yo también.", "Я тоже.", "", "Согласие с обычным глаголом: «Vivo en Barcelona. — Yo también.»", 7],
+    ["FRE-122", "opinar", "A mí tampoco.", "Мне тоже нет.", "", "Согласие с отрицанием у глаголов как **gustar**: «No me gusta el fútbol. — A mí tampoco.»", 7],
+    ["FRE-123", "opinar", "Tienes razón.", "Ты прав(а).", "tú", "Согласие с мнением. С usted: «Tiene razón».", 7],
+    ["FRE-124", "opinar", "No estoy de acuerdo.", "Я не согласен (не согласна).", "", "Несогласие; «Estoy de acuerdo» — согласен.", 7],
+    ["FRE-125", "opinar", "Me parece bien.", "Меня устраивает. По-моему, хорошо.", "", "Согласие с планом или идеей: **parecer** работает как **gustar**.", 7],
+    ["FRE-126", "opinar", "Me cae muy bien.", "Он (она) мне очень нравится.", "", "О человеке: **caer bien** — нравиться как человек.", 7],
+    ["FRE-127", "felicitar", "¡Felicidades!", "Поздравляю!", "", "С днём рождения, праздником или успехом. Всегда во множественном числе.", 7],
+    ["FRE-128", "despedirse", "Un beso.", "Целую.", "", "Так заканчивают сообщение или разговор с друзьями и семьёй.", 7],
+    ["FRE-129", "despedirse", "Un abrazo.", "Обнимаю.", "", "Как «Un beso», но чуть сдержаннее: так пишут и друзьям-мужчинам.", 7],
+    ["FRE-130", "planes", "No pasa nada.", "Ничего страшного.", "", "Ответ, когда кто-то опаздывает или отменяет план. Это выражение, его учат целиком.", 7],
+    # 12/11/2026 (Manu): las fórmulas sociales se enseñan como frases, no como palabras del léxico
+    ["FRE-131", "agradecer", "¡Muchas gracias!", "Большое спасибо!", "", "Сильнее, чем «gracias». Ответ — «De nada».", 1],
+    # U8 (13/11/2026): contar lo que pasó
+    ["FRE-132", "contar", "¿Qué has hecho hoy?", "Что ты сегодня делал(а)?", "tú", "О сегодняшнем дне — **pretérito perfecto**: **has hecho**.", 8],
+    ["FRE-133", "contar", "¿Qué tal el fin de semana?", "Как выходные?", "", "Вопрос без глагола. Так же: «¿Qué tal el viaje?», «¿Qué tal las vacaciones?».", 8],
+    ["FRE-134", "contar", "Lo pasé muy bien.", "Я отлично провёл (провела) время.", "", "**pasarlo bien** — хорошо провести время. Плохо: «Lo pasé mal».", 8],
+    ["FRE-135", "contar", "¿Qué pasó?", "Что случилось?", "", "**pasar** — «происходить». О том, что было только что: «¿Qué ha pasado?».", 8],
+    ["FRE-136", "contar", "¡Qué mala suerte!", "Вот невезение!", "", "Когда у кого-то что-то пошло не так: потерялся чемодан, сломался телефон.", 8],
+    # U9 (13/11/2026): historias, hábitos y cambios
+    ["FRE-137", "contar", "Érase una vez…", "Жили-были…", "", "Так начинаются сказки. Дальше — **imperfecto**: «Érase una vez una niña que vivía en un bosque».", 9],
+    ["FRE-138", "contar", "¡Qué susto!", "Как страшно! / Ну и напугал(а)!", "", "Когда что-то случилось неожиданно и было страшно.", 9],
+    ["FRE-139", "contar", "¿Te acuerdas de…?", "Помнишь…?", "tú", "**acordarse de** — помнить: «¿Te acuerdas de tu primer colegio?».", 9],
+    ["FRE-140", "contar", "Cuando era pequeño…", "Когда я был маленьким…", "", "Начало рассказа о детстве. Женщина говорит «Cuando era pequeña…». Дальше — **imperfecto**.", 9],
+    ["FRE-141", "contar", "¡Cómo has cambiado!", "Как ты изменился (изменилась)!", "tú", "Человеку, которого давно не видел. **has cambiado** — perfecto: изменение до сегодняшнего дня.", 9]
 ]
 
 # Diálogos: [id, título ruso, título español, personajes, [[p, es, ru, obs?, deletreo?], …]]
@@ -485,8 +521,169 @@ DIALOGOS = [
         ["recepcion", "¿Puedes venir mañana a las diez?", "Можешь прийти завтра в десять?"],
         ["pablo", "Mañana no puedo: tengo que trabajar. ¿Y el jueves?", "Завтра не могу: мне надо работать. А в четверг?"],
         ["recepcion", "El jueves a las cinco de la tarde, ¿vale?", "В четверг в пять вечера, хорошо?"],
-        ["pablo", "Muy bien, gracias.", "Хорошо, спасибо."]], 6, "salud"]
+        ["pablo", "Muy bien, gracias.", "Хорошо, спасибо."]], 6, "salud"],
+    # U7 (12/11/2026)
+    ["DLE-030", "Встретимся в пятницу?", "¿Quedamos el viernes?", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿te apetece ir al cine el viernes?", "Аня, хочешь пойти в кино в пятницу?", "**¿Te apetece…?** — «тебе хочется…?»: так предлагают планы."],
+        ["ana", "Lo siento, el viernes no puedo: tengo clase hasta las nueve.", "Извини, в пятницу не могу: у меня занятия до девяти."],
+        ["lucia", "¡Qué pena! ¿Y mejor el sábado?", "Как жаль! А может, лучше в субботу?"],
+        ["ana", "El sábado sí. ¿A qué hora quedamos?", "В субботу — да. Во сколько встретимся?"],
+        ["lucia", "A las siete en la plaza. Después podemos cenar algo.", "В семь на площади. Потом можем где-нибудь поужинать."],
+        ["ana", "¡Genial! Me parece un plan perfecto.", "Отлично! По-моему, прекрасный план.", "**Me parece** — «мне кажется»: как **me gusta**."],
+        ["lucia", "Vale. Te escribo mañana.", "Хорошо. Напишу тебе завтра."],
+        ["ana", "Perfecto. ¡Hasta el sábado!", "Отлично. До субботы!"]], 7, "planes"],
+    ["DLE-031", "День рождения Марты", "El cumpleaños de Marta", ["pablo", "ana"], [
+        ["pablo", "Hola, Ana. El domingo es el cumpleaños de Marta. ¿Vienes a la fiesta?", "Привет, Аня. В воскресенье у Марты день рождения. Придёшь на праздник?"],
+        ["ana", "¡Claro! ¿A qué hora?", "Конечно! Во сколько?"],
+        ["pablo", "A las ocho, en nuestra casa.", "В восемь, у нас дома."],
+        ["ana", "¿Qué le regalo? ¿Qué le gusta?", "Что ей подарить? Что ей нравится?", "**le** — «ей»: кому дарим."],
+        ["pablo", "Le encantan los libros y le gusta mucho viajar.", "Она обожает книги и очень любит путешествовать."],
+        ["ana", "Entonces le regalamos un libro de viajes.", "Тогда подарим ей книгу о путешествиях."],
+        ["pablo", "¡Perfecto! Le va a gustar mucho.", "Отлично! Ей очень понравится."],
+        ["ana", "¡Genial! Hasta el domingo. Un beso.", "Здорово! До воскресенья. Целую."],
+        ["pablo", "Un abrazo.", "Обнимаю."]], 7, "planes"],
+    ["DLE-032", "Как тебе Барселона?", "¿Qué te parece Barcelona?", ["javier", "ana"], [
+        ["javier", "Ana, ¿qué te parece Barcelona?", "Аня, как тебе Барселона?", "**¿Qué te parece…?** — «как тебе…?», «что ты думаешь о…?»"],
+        ["ana", "Me encanta. Me gusta mucho el mar y me interesan los museos.", "Очень нравится. Мне очень нравится море, и меня интересуют музеи."],
+        ["javier", "¿Y no te molesta nada?", "А тебе ничего не мешает?"],
+        ["ana", "Sí, me molesta un poco la música de los bares por la noche.", "Да, меня немного раздражает музыка из баров по ночам."],
+        ["javier", "A mí también. ¿Y la comida?", "Меня тоже. А еда?", "**A mí también** — согласие, когда в первой фразе **me molesta**."],
+        ["ana", "La comida me parece muy buena, pero cenáis muy tarde.", "Еда, по-моему, очень хорошая, но вы очень поздно ужинаете."],
+        ["javier", "Tienes razón. Y en Rusia, ¿a qué hora cenáis?", "Ты права. А в России во сколько вы ужинаете?"],
+        ["ana", "Normalmente a las siete.", "Обычно в семь."]], 7, "gustos"],
+    ["DLE-033", "Какая квартира лучше?", "¿Qué piso es mejor?", ["ana", "lucia"], [
+        ["ana", "Lucía, me gustan dos pisos. ¿Cuál es mejor?", "Лусия, мне нравятся две квартиры. Какая лучше?"],
+        ["lucia", "¿Cómo son?", "А какие они?"],
+        ["ana", "El piso del centro es más pequeño que el otro, pero es más bonito.", "Квартира в центре меньше, чем другая, но красивее.", "**más** + прилагательное + **que** — сравнение."],
+        ["lucia", "¿Y cuál es más caro?", "А какая дороже?"],
+        ["ana", "El del centro es un poco más caro. El otro es tan grande como mi piso de Moscú.", "Та, что в центре, немного дороже. Другая такая же большая, как моя квартира в Москве."],
+        ["lucia", "Para mí, el del centro es mejor: está cerca de todo.", "По-моему, та, что в центре, лучше: всё рядом.", "**mejor** — «лучше», а не «más bueno»."],
+        ["ana", "Tienes razón. Además, el otro está lejos del metro.", "Ты права. К тому же другая далеко от метро."],
+        ["lucia", "Entonces, ¡el del centro!", "Значит, та, что в центре!"]], 7, "casa"],
+    ["DLE-034", "Соседи", "Los vecinos", ["marta", "ana"], [
+        ["marta", "Ana, ¿te llevas bien con tus vecinos?", "Аня, ты ладишь с соседями?", "**llevarse bien con** — ладить с кем-то."],
+        ["ana", "Sí, muy bien. Mi vecina es muy simpática. Me cae muy bien.", "Да, очень. Моя соседка очень приятная. Она мне очень нравится."],
+        ["marta", "Yo no. Mi vecino es muy antipático y siempre discute con todos.", "А я нет. Мой сосед очень неприятный и всё время со всеми спорит."],
+        ["ana", "¿Por qué?", "Почему?"],
+        ["marta", "Porque le molesta todo: la música, las fiestas…", "Потому что его всё раздражает: музыка, вечеринки…", "**¿Por qué?** — вопрос; **porque** — ответ."],
+        ["ana", "¡Qué pena! No me cae bien la gente antipática.", "Как жаль! Мне не нравятся неприятные люди."],
+        ["marta", "A mí tampoco.", "Мне тоже."]], 7, "conocer"],
+    # U8 (13/11/2026)
+    ["DLE-035", "Что ты сегодня делала?", "¿Qué has hecho hoy?", ["lucia", "ana"], [
+        ["lucia", "Hola, Ana. ¿Qué tal? ¿Qué has hecho hoy?", "Привет, Аня. Как дела? Что ты сегодня делала?", "О сегодняшнем дне — **perfecto**: **has hecho**."],
+        ["ana", "Esta mañana he ido a clase y después he comido con Javier.", "Утром я ходила на занятия, а потом пообедала с Хавьером."],
+        ["lucia", "¿Ya has terminado el libro de español?", "Ты уже дочитала книгу по испанскому?", "**ya** — «уже»."],
+        ["ana", "Todavía no. Esta semana he tenido mucho trabajo.", "Ещё нет. На этой неделе у меня было много работы.", "**todavía no** — «ещё не»."],
+        ["lucia", "Yo hoy no he hecho nada. ¡He dormido hasta las doce!", "А я сегодня ничего не делала. Я спала до двенадцати!"],
+        ["ana", "¡Qué bien! ¿Y has comido ya?", "Здорово! А ты уже поела?"],
+        ["lucia", "No, todavía no. ¿Vamos a tomar algo?", "Нет, ещё нет. Пойдём перекусим?"],
+        ["ana", "Vale, vamos.", "Давай, пойдём."]], 8, "pasado"],
+    ["DLE-036", "Выходные в Мадриде", "El fin de semana en Madrid", ["pablo", "ana"], [
+        ["pablo", "Ana, ¿qué tal el fin de semana?", "Аня, как выходные?"],
+        ["ana", "Muy bien. Fui a Madrid con Lucía.", "Очень хорошо. Я ездила в Мадрид с Лусией.", "О прошедших выходных — **indefinido**: **fui**."],
+        ["pablo", "¡Qué bien! ¿Cómo fuisteis?", "Здорово! На чём вы ездили?"],
+        ["ana", "En tren. Salimos el sábado por la mañana y llegamos a las once.", "На поезде. Мы выехали в субботу утром и приехали в одиннадцать."],
+        ["pablo", "¿Y qué hicisteis?", "И что вы делали?"],
+        ["ana", "Primero visitamos el centro y después comimos en un mercado.", "Сначала мы посмотрели центр, а потом поели на рынке.", "**primero… después…** — по порядку."],
+        ["pablo", "¿Y el domingo?", "А в воскресенье?"],
+        ["ana", "Fuimos a un museo y por la tarde volvimos a Barcelona. Lo pasé muy bien.", "Мы сходили в музей, а вечером вернулись в Барселону. Я отлично провела время."]], 8, "pasado"],
+    ["DLE-037", "Ты когда-нибудь был в России?", "¿Alguna vez has estado en Rusia?", ["javier", "ana"], [
+        ["javier", "Ana, ¿cuándo llegaste a Barcelona?", "Аня, когда ты приехала в Барселону?"],
+        ["ana", "Llegué hace dos meses, en septiembre.", "Я приехала два месяца назад, в сентябре.", "**hace dos meses** — «два месяца назад»."],
+        ["javier", "¿Y has estado en otras ciudades de España?", "А ты была в других городах Испании?"],
+        ["ana", "Sí, he estado en Madrid. ¿Y tú? ¿Alguna vez has estado en Rusia?", "Да, я была в Мадриде. А ты? Ты когда-нибудь был в России?", "**alguna vez** — опыт за всю жизнь: perfecto."],
+        ["javier", "Sí, una vez. Fui a Moscú hace cinco años, en invierno.", "Да, один раз. Я ездил в Москву пять лет назад, зимой."],
+        ["ana", "¿Y qué tal?", "И как?"],
+        ["javier", "Me encantó, pero hizo mucho frío.", "Мне очень понравилось, но было очень холодно."],
+        ["ana", "¡Claro! En invierno siempre hace frío en Moscú.", "Конечно! Зимой в Москве всегда холодно."]], 8, "pasado"],
+    ["DLE-038", "Я потеряла чемодан", "He perdido la maleta", ["ana", "lucia"], [
+        ["lucia", "¡Ana! ¿Qué tal el viaje? ¿Qué ha pasado?", "Аня! Как поездка? Что случилось?"],
+        ["ana", "¡Qué día! Mi maleta no ha llegado.", "Ну и день! Мой чемодан не прилетел."],
+        ["lucia", "¡Qué mala suerte! ¿Y dónde está?", "Вот невезение! А где он?"],
+        ["ana", "Se quedó en Madrid: el vuelo llegó muy tarde.", "Он остался в Мадриде: рейс прилетел очень поздно."],
+        ["lucia", "¿Y qué te han dicho en el aeropuerto?", "А что тебе сказали в аэропорту?"],
+        ["ana", "Que llega mañana por la mañana y lo traen a casa.", "Что он прилетит завтра утром и его привезут домой."],
+        ["lucia", "Bueno, por fin algo bueno.", "Ну, наконец-то что-то хорошее."]], 8, "transporte"],
+    ["DLE-039", "Жизнь моей бабушки", "La vida de mi abuela", ["marta", "ana"], [
+        ["ana", "Marta, ¿esta es tu abuela?", "Марта, это твоя бабушка?"],
+        ["marta", "Sí. Nació en un pueblo pequeño de España en 1940.", "Да. Она родилась в маленькой деревне в Испании в 1940 году.", "Биография — **indefinido**: **nació**."],
+        ["ana", "¿Y cuándo llegó a Argentina?", "А когда она приехала в Аргентину?"],
+        ["marta", "En 1960. Allí conoció a mi abuelo y se casaron dos años después.", "В 1960-м. Там она познакомилась с моим дедушкой, и через два года они поженились."],
+        ["ana", "¿Tuvieron hijos?", "У них были дети?"],
+        ["marta", "Sí, tres. Mi abuela trabajó en un colegio muchos años y se jubiló en 2005.", "Да, трое. Бабушка много лет работала в школе и вышла на пенсию в 2005 году."],
+        ["ana", "¿Y ahora dónde vive?", "А сейчас где она живёт?"],
+        ["marta", "Volvió a España hace diez años. Vive en Madrid, cerca de nosotros.", "Она вернулась в Испанию десять лет назад. Живёт в Мадриде, рядом с нами."]], 8, "pasado"],
+    # U9 (13/11/2026)
+    ["DLE-040", "Какой была Москва?", "¿Cómo era Moscú?", ["javier", "ana"], [
+        ["javier", "Ana, ¿cómo era Moscú cuando eras pequeña?", "Аня, какой была Москва, когда ты была маленькой?", "Описание в прошлом — **imperfecto**: **era**, **eras**."],
+        ["ana", "Era muy diferente. Había menos coches y no había tantas tiendas.", "Она была совсем другой. Было меньше машин и не было столько магазинов.", "**había** — прошедшее от **hay**."],
+        ["javier", "¿Y dónde vivías?", "А где ты жила?"],
+        ["ana", "Vivía con mis padres en un piso pequeño, cerca del centro.", "Я жила с родителями в маленькой квартире, недалеко от центра."],
+        ["javier", "¿Tus padres todavía viven allí?", "Твои родители всё ещё там живут?"],
+        ["ana", "No, ya no. Ahora viven en una casa en el campo.", "Нет, уже нет. Теперь они живут в доме за городом.", "**ya no** — «уже не»."],
+        ["javier", "¿Y la ciudad ha cambiado mucho?", "А город сильно изменился?"],
+        ["ana", "Sí, mucho. Antes era más tranquila; ahora es más moderna.", "Да, очень. Раньше он был спокойнее, а сейчас — современнее."]], 9, "pasado"],
+    ["DLE-041", "В детстве…", "De pequeña…", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿qué hacías de pequeña?", "Аня, что ты делала в детстве?", "**de pequeña** — «в детстве» (о женщине)."],
+        ["ana", "Jugaba mucho en el patio con mis amigos. ¿Y tú?", "Я много играла во дворе с друзьями. А ты?"],
+        ["lucia", "Yo vivía en un pueblo. En verano solía ir al río con mi hermano.", "Я жила в деревне. Летом мы с братом обычно ходили на речку.", "**solía** + инфинитив — «обычно… (раньше)»."],
+        ["ana", "¿Y ibas al colegio en el pueblo?", "А в школу ты ходила в деревне?"],
+        ["lucia", "Sí. Me encantaba el recreo, pero no me gustaban los deberes.", "Да. Я обожала перемены, но не любила домашние задания."],
+        ["ana", "¡A mí tampoco! Mi abuela me ayudaba con los deberes por las tardes.", "Я тоже! Бабушка помогала мне с уроками по вечерам."],
+        ["lucia", "¿Te acuerdas de tus juguetes?", "Ты помнишь свои игрушки?"],
+        ["ana", "Sí, tenía una muñeca muy bonita. ¡Todavía está en casa de mis padres!", "Да, у меня была очень красивая кукла. Она до сих пор у родителей дома!"]], 9, "pasado"],
+    ["DLE-042", "Что ты делала?", "¿Qué estabas haciendo?", ["pablo", "marta"], [
+        ["pablo", "Marta, te llamé ayer a las diez, pero no contestaste.", "Марта, я звонил тебе вчера в десять, но ты не ответила."],
+        ["marta", "Lo siento, estaba durmiendo cuando sonó el teléfono.", "Прости, я спала, когда зазвонил телефон.", "Фон — **estaba durmiendo**; то, что случилось, — **sonó**."],
+        ["pablo", "¿A las diez de la noche?", "В десять вечера?"],
+        ["marta", "Sí, estaba muy cansada. Ayer trabajé nueve horas.", "Да, я очень устала. Вчера я работала девять часов.", "Долгое, но законченное действие — **indefinido**: **trabajé**."],
+        ["pablo", "¡Nueve horas! ¿Y qué hiciste después?", "Девять часов! А что ты делала потом?"],
+        ["marta", "Cené, vi la tele y después me fui a la cama.", "Я поужинала, посмотрела телевизор и потом пошла спать."]], 9, "pasado"],
+    ["DLE-043", "Я только что пришла", "Acabo de llegar", ["lucia", "ana"], [
+        ["lucia", "¡Ana! ¿Estás aquí desde hace mucho?", "Аня! Ты давно здесь?"],
+        ["ana", "No, acabo de llegar.", "Нет, я только что пришла.", "**acabo de** + инфинитив — «только что»."],
+        ["lucia", "¿Sigues estudiando español por las tardes?", "Ты всё ещё учишь испанский по вечерам?", "**seguir** + gerundio — «продолжать, всё ещё»."],
+        ["ana", "Sí, sigo yendo a clase con Javier. ¿Y tú? ¿Todavía juegas al tenis?", "Да, я всё ещё хожу на занятия к Хавьеру. А ты? Всё ещё играешь в теннис?"],
+        ["lucia", "No, ya no. Dejé de jugar el año pasado.", "Нет, уже нет. Я перестала играть в прошлом году.", "**dejar de** — «перестать»."],
+        ["ana", "¡Qué pena! ¿No quieres volver a jugar?", "Как жаль! Не хочешь снова играть?", "**volver a** — «снова»."],
+        ["lucia", "Quizá. Empecé a correr en septiembre y me encanta.", "Может быть. В сентябре я начала бегать, и мне очень нравится."]], 9, "conocer"],
+    ["DLE-044", "У меня украли телефон!", "¡Me robaron el móvil!", ["marta", "ana"], [
+        ["marta", "Ana, ¿qué te pasa? ¿Estás bien?", "Аня, что с тобой? Ты в порядке?"],
+        ["ana", "¡Ayer me robaron el móvil en el metro!", "Вчера у меня украли телефон в метро!"],
+        ["marta", "¡Qué mala suerte! ¿Cómo fue?", "Вот невезение! Как это было?"],
+        ["ana", "Había mucha gente. Yo estaba escuchando música y de repente un chico cogió mi móvil y bajó del metro.", "Было много народу. Я слушала музыку, и вдруг какой-то парень схватил мой телефон и вышел из вагона.", "Фон — **había**, **estaba escuchando**; что случилось — **cogió**, **bajó**."],
+        ["marta", "¿Y qué hiciste?", "И что ты сделала?"],
+        ["ana", "Lo vi, pero el ladrón corrió muy rápido.", "Я его видела, но вор очень быстро убежал."],
+        ["marta", "¿Y has ido a la policía?", "А ты ходила в полицию?"],
+        ["ana", "Sí, he ido esta mañana. ¡Qué susto!", "Да, сходила сегодня утром. Ну и страху я натерпелась!"]], 9, "pasado"]
+
 ]
+
+# Situaciones y funciones con su nombre en ruso (12/11/2026, página de Диалоги): el orden es el de las listas
+SITUACIONES = [["conocer", "Знакомство"], ["casa", "Дом"], ["ciudad", "Город"], ["dia", "Распорядок дня"], ["gustos", "Что нравится"],
+               ["tiempo", "Погода"], ["comer", "Кафе и ресторан"], ["compras", "Покупки"], ["transporte", "Транспорт"],
+               ["planes", "Планы"], ["salud", "Здоровье"], ["pasado", "Что было"]]
+FUNCIONES = [["saludar", "Поздороваться"], ["despedirse", "Попрощаться"], ["agradecer", "Вежливость"], ["entender", "Если не понимаешь"],
+             ["presentarse", "Познакомиться"], ["hablar-de-uno", "Рассказать о себе"], ["datos", "Личные данные"], ["orientarse", "Где это?"],
+             ["describir", "Описать"], ["tiempo", "Время и погода"], ["rutina", "Распорядок дня"], ["gustos", "Что нравится"],
+             ["necesidades", "Хочу и нужно"], ["compras", "Покупки"], ["comer", "В кафе и ресторане"], ["ciudad", "Как пройти"],
+             ["transporte", "Транспорт"], ["planes", "Планы"], ["salud", "Здоровье"], ["opinar", "Мнение"], ["felicitar", "Поздравить"], ["contar", "Рассказать о прошлом"]]
+# Notas culturales (data-cultura-es.js) que cita cada frase y cada línea (12/11/2026): campo cul
+CUL_FRASES = {"FRE-007": "CUE-001", "FRE-026": "CUE-001", "FRE-032": "CUE-002", "FRE-030": "CUE-003", "FRE-001": "CUE-004",
+              "FRE-011": "CUE-004", "FRE-003": "CUE-006", "FRE-088": "CUE-008", "FRE-094": "CUE-008", "FRE-096": "CUE-008",
+              "FRE-055": "CUE-009", "FRE-056": "CUE-009", "FRE-112": "CUE-010",
+              "FRE-116": "CUE-011", "FRE-128": "CUE-003"}
+CUL_LINEAS = {("DLE-001", 2): "CUE-001", ("DLE-002", 6): "CUE-001", ("DLE-007", 0): "CUE-001",
+              ("DLE-002", 7): "CUE-002", ("DLE-004", 8): "CUE-002", ("DLE-020", 5): "CUE-002",
+              ("DLE-004", 3): "CUE-003", ("DLE-009", 1): "CUE-003",
+              ("DLE-001", 7): "CUE-004", ("DLE-020", 7): "CUE-004",
+              ("DLE-001", 3): "CUE-005", ("DLE-007", 1): "CUE-005",
+              ("DLE-002", 0): "CUE-006", ("DLE-015", 3): "CUE-006",
+              ("DLE-023", 2): "CUE-007",
+              ("DLE-020", 1): "CUE-008", ("DLE-021", 6): "CUE-008", ("DLE-023", 8): "CUE-008",
+              ("DLE-012", 2): "CUE-009",
+              ("DLE-028", 5): "CUE-010", ("DLE-029", 1): "CUE-010",
+              ("DLE-030", 3): "CUE-011", ("DLE-031", 7): "CUE-003", ("DLE-030", 6): "CUE-002", ("DLE-032", 5): "CUE-006"}
 
 def frasesDe(es):
     """Frases (FRE) que aparecen en una línea."""
@@ -503,12 +700,14 @@ fr_js = []
 for fila in FRASES:   # [id, función, es, ru, registro, uso, unidad?]
     fid, fun, es, ru, reg, uso = fila[:6]
     tr, lex = linea(es)
-    fr_js.append({"id": fid, "funcion": fun, "es": es, "tr": tr, "ru": ru, "registro": reg, "nivel": "A1", "unidad": fila[6] if len(fila) > 6 else 1, "uso": uso, "lex": lex})
+    x = {"id": fid, "funcion": fun, "es": es, "tr": tr, "ru": ru, "registro": reg, "nivel": "A2" if (fila[6] if len(fila) > 6 else 1) >= 6 else "A1", "unidad": fila[6] if len(fila) > 6 else 1, "uso": uso, "lex": lex}
+    if fid in CUL_FRASES: x["cul"] = CUL_FRASES[fid]
+    fr_js.append(x)
 dl_js = []
 for dlg in DIALOGOS:   # [id, título ruso, título español, personajes, líneas, unidad?, situación?]
     did, tit, titEs, pers, lineas = dlg[:5]
     ls = []
-    for l in lineas:
+    for n, l in enumerate(lineas):
         p, es, ru = l[0], l[1], l[2]
         obs = l[3] if len(l) > 3 else None
         dl = len(l) > 4 and l[4]
@@ -517,8 +716,9 @@ for dlg in DIALOGOS:   # [id, título ruso, título español, personajes, línea
         f = frasesDe(es)
         if f: x["f"] = f
         if obs: x["obs"] = obs
+        if (did, n) in CUL_LINEAS: x["cul"] = CUL_LINEAS[(did, n)]
         ls.append(x)
-    dl_js.append({"id": did, "titulo": tit, "tituloEs": titEs, "situacion": dlg[6] if len(dlg) > 6 else "conocer", "nivel": "A1", "unidad": dlg[5] if len(dlg) > 5 else 1, "personajes": pers, "lineas": ls})
+    dl_js.append({"id": did, "titulo": tit, "tituloEs": titEs, "situacion": dlg[6] if len(dlg) > 6 else "conocer", "nivel": "A2" if (dlg[5] if len(dlg) > 5 else 1) >= 6 else "A1", "unidad": dlg[5] if len(dlg) > 5 else 1, "personajes": pers, "lineas": ls})
 
 J = lambda o: json.dumps(o, ensure_ascii=False)
 txt = """/* ============================================================
@@ -536,12 +736,18 @@ txt = """/* ============================================================
           propio, letra deletreada o palabra que no está en el léxico
      f    frases (FRASES_ES) que aparecen en la línea
      obs  nota en ruso (opcional)
+     cul  nota cultural (CULTURA_ES, data-cultura-es.js) que cita (opcional)
+   DLG_SITUACIONES_ES / DLG_FUNCIONES_ES: [clave, nombre en ruso], en el
+   orden de las listas de la página de Диалоги (12/11/2026).
    DLG_PERSONAJES_ES: es = nombre en español, ru = en ruso, genero
    (elige la voz: core.js, azHablarEs). Registro de las frases: "tú",
    "usted" o "" (sirve para los dos).
    ============================================================ */
 
 const DLG_PERSONAJES_ES = """ + json.dumps(PERSONAJES, ensure_ascii=False, indent=1) + """;
+
+const DLG_SITUACIONES_ES = """ + J(SITUACIONES) + """;
+const DLG_FUNCIONES_ES = """ + J(FUNCIONES) + """;
 
 const FRASES_ES = [
 """ + ",\n".join(" " + J(f) for f in fr_js) + """
@@ -553,8 +759,11 @@ const DIALOGOS_ES = [
 
 function dialogoEsById(id) { return DIALOGOS_ES.find(d => d.id === id) || null; }
 function fraseEsById(id) { return FRASES_ES.find(f => f.id === id) || null; }
-if (typeof window !== "undefined") Object.assign(window, { DLG_PERSONAJES_ES, FRASES_ES, DIALOGOS_ES, dialogoEsById, fraseEsById });
+if (typeof window !== "undefined") Object.assign(window, { DLG_PERSONAJES_ES, DLG_SITUACIONES_ES, DLG_FUNCIONES_ES, FRASES_ES, DIALOGOS_ES, dialogoEsById, fraseEsById });
 """
+for d in dl_js: assert d["situacion"] in dict(SITUACIONES), d["id"]
+for f in fr_js: assert f["funcion"] in dict(FUNCIONES), f["id"]
+for k in CUL_LINEAS: assert any(d["id"] == k[0] and len(d["lineas"]) > k[1] for d in dl_js), k
 open(OUT, "w").write(txt)
 print("frases", len(fr_js), "diálogos", len(dl_js))
 print("\n".join(sorted(faltan)))
