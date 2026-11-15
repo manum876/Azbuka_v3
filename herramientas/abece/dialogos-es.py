@@ -35,11 +35,17 @@ DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "fuisteis
        # U7 (12/11/2026)
        "mejor": "ESP-00098",
        # U9 (13/11/2026): «¿Cómo fue?» es ser; «de repente», la locución
-       "fue": "ESP-00004", "repente": "ESP-03126"}
+       "fue": "ESP-00004", "repente": "ESP-03126",
+       # U10 (13/11/2026)
+       "sé": "ESP-00026", "ven": "ESP-00074", "creo": "ESP-00049", "ayudarme": "ESP-00164",
+       "avisarme": "ESP-01326", "ayudarla": "ESP-00164", "buscarte": "ESP-00176", "escríbeles": "ESP-00321", "informarles": "ESP-01130",
+       "llámame": "ESP-00094", "rellénelo": "ESP-04055", "venga": "ESP-00074", "tanto": "ESP-00196",
+       # U12 (14/11/2026)
+       "embargo": "ESP-00218", "dile": "ESP-00024", "dártelos": "ESP-00059", "déjame": "ESP-00073", "pensarlo": "ESP-00072", "usarlas": "ESP-00205", "venderlo": "ESP-00423"}
 # Nombres propios de varias palabras que no están en el léxico (sus palabras no se enlazan)
 PROPIOS_VARIAS = ["Buenos Aires"]
 # Nombres de personas (no van al léxico). Los países y las ciudades sí: con mayúscula se usa la entrada propia.
-PROPIOS = {"ana", "javier", "lucía", "petrova", "pérez", "pablo", "marta", "olga", "iván", "gmail"}
+PROPIOS = {"ana", "javier", "lucía", "petrova", "pérez", "pablo", "marta", "olga", "iván", "gmail", "ruiz"}
 LETRAS = {"a", "be", "ce", "de", "e", "efe", "ge", "hache", "i", "jota", "ka", "ele", "eme", "ene", "eñe", "o", "pe", "cu", "erre", "ese", "te", "u", "uve", "equis", "ye", "zeta"}
 RX = re.compile(r"[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:-[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*")
 faltan = set()
@@ -100,7 +106,9 @@ PERSONAJES = {
     "dependienta": {"es": "Dependienta", "ru": "Продавщица", "genero": "f", "desc": "Продавщица на рынке и в магазине."},
     "senor": {"es": "Señor", "ru": "Прохожий", "genero": "m", "desc": "Человек на улице, у которого Аня спрашивает дорогу."},
     "empleado": {"es": "Empleado", "ru": "Сотрудник метро", "genero": "m", "desc": "Сотрудник в кассе метро."},
-    "farmaceutica": {"es": "Farmacéutica", "ru": "Фармацевт", "genero": "f", "desc": "Фармацевт в аптеке."}
+    "farmaceutica": {"es": "Farmacéutica", "ru": "Фармацевт", "genero": "f", "desc": "Фармацевт в аптеке."},
+    "casero": {"es": "Casero", "ru": "Хозяин квартиры", "genero": "m", "desc": "Хозяин квартиры, которую снимает Аня."},
+    "funcionaria": {"es": "Funcionaria", "ru": "Служащая", "genero": "f", "desc": "Служащая в мэрии (ayuntamiento)."}
 }
 
 # Frases: [id, función, es, ru (traducción), registro, uso (ruso)]
@@ -254,7 +262,25 @@ FRASES = [
     ["FRE-138", "contar", "¡Qué susto!", "Как страшно! / Ну и напугал(а)!", "", "Когда что-то случилось неожиданно и было страшно.", 9],
     ["FRE-139", "contar", "¿Te acuerdas de…?", "Помнишь…?", "tú", "**acordarse de** — помнить: «¿Te acuerdas de tu primer colegio?».", 9],
     ["FRE-140", "contar", "Cuando era pequeño…", "Когда я был маленьким…", "", "Начало рассказа о детстве. Женщина говорит «Cuando era pequeña…». Дальше — **imperfecto**.", 9],
-    ["FRE-141", "contar", "¡Cómo has cambiado!", "Как ты изменился (изменилась)!", "tú", "Человеку, которого давно не видел. **has cambiado** — perfecto: изменение до сегодняшнего дня.", 9]
+    ["FRE-141", "contar", "¡Cómo has cambiado!", "Как ты изменился (изменилась)!", "tú", "Человеку, которого давно не видел. **has cambiado** — perfecto: изменение до сегодняшнего дня.", 9],
+    # U10 (13/11/2026): el futuro, las decisiones y las posibilidades
+    ["FRE-142", "futuro", "¡Suerte!", "Удачи!", "", "Перед экзаменом, собеседованием, поездкой.", 10],
+    ["FRE-143", "futuro", "¿Qué harías tú?", "А ты бы что сделал(а)?", "tú", "Попросить совета. **harías** — condicional.", 10],
+    ["FRE-144", "futuro", "Yo que tú…", "Я бы на твоём месте…", "", "Начало совета: «Yo que tú, aceptaría el trabajo». Дальше — condicional.", 10],
+    ["FRE-145", "futuro", "¡Ya veremos!", "Посмотрим!", "", "Когда ещё ничего не решено. **veremos** — futuro от ver.", 10],
+    ["FRE-146", "futuro", "Me encantaría.", "С удовольствием! / Я бы очень хотел(а).", "", "Вежливо и тепло принять предложение. **encantaría** — condicional.", 10],
+    ["FRE-147", "resolver", "¡Ojalá!", "Хоть бы! / Дай бог!", "", "Короткий ответ, когда очень хочется, чтобы что-то случилось. Полная фраза — с subjuntivo: **¡Ojalá haga sol!**", 11],
+    ["FRE-148", "resolver", "¡Que te mejores!", "Выздоравливай!", "", "Тому, кто болеет. **que** + subjuntivo — пожелание.", 11],
+    ["FRE-149", "resolver", "¡Que lo pases bien!", "Хорошо тебе провести время!", "", "Тому, кто идёт на праздник или едет отдыхать. С usted: **¡Que lo pase bien!**", 11],
+    ["FRE-150", "resolver", "No se preocupe.", "Не волнуйтесь.", "formal", "С usted — imperativo de usted: **no se preocupe**. С ты: **no te preocupes**.", 11],
+    ["FRE-151", "resolver", "Le escribo para…", "Пишу вам, чтобы…", "formal", "Начало официального письма после «Estimado/a…»: **Le escribo para informarle de un problema.**", 11],
+    ["FRE-152", "resolver", "Un saludo.", "С приветом. / Всего доброго.", "", "Конец письма или сообщения: вежливо, но не так официально, как **Atentamente**.", 11],
+    ["FRE-153", "resolver", "¡Te echo de menos!", "Я по тебе скучаю!", "", "**echar de menos** — скучать по кому-то (в Испании). Тот, по кому скучают, — после глагола: **Echo de menos a mi familia.**", 11],
+    ["FRE-154", "opinar", "¡Ni hablar!", "Ни за что! / Об этом не может быть и речи!", "", "Резко отказаться или не согласиться. Между друзьями и дома.", 12],
+    ["FRE-155", "opinar", "¡Qué va!", "Да ну! / Ничего подобного!", "", "Разговорное «нет, это не так»: **—¿Estás cansado? —¡Qué va!**", 12],
+    ["FRE-156", "opinar", "Depende.", "Смотря как. / Зависит от обстоятельств.", "", "Когда не можешь ответить ни «да», ни «нет». С продолжением: **Depende del precio.**", 12],
+    ["FRE-157", "opinar", "¡Hombre, claro!", "Ну конечно!", "", "Горячо согласиться. **hombre** здесь — не «мужчина», а восклицание; так говорят и женщинам.", 12],
+    ["FRE-158", "opinar", "Yo lo veo de otra manera.", "Я смотрю на это иначе.", "", "Вежливо не согласиться, не говоря «ты не прав».", 12]
 ]
 
 # Diálogos: [id, título ruso, título español, personajes, [[p, es, ru, obs?, deletreo?], …]]
@@ -655,19 +681,151 @@ DIALOGOS = [
         ["marta", "¿Y qué hiciste?", "И что ты сделала?"],
         ["ana", "Lo vi, pero el ladrón corrió muy rápido.", "Я его видела, но вор очень быстро убежал."],
         ["marta", "¿Y has ido a la policía?", "А ты ходила в полицию?"],
-        ["ana", "Sí, he ido esta mañana. ¡Qué susto!", "Да, сходила сегодня утром. Ну и страху я натерпелась!"]], 9, "pasado"]
+        ["ana", "Sí, he ido esta mañana. ¡Qué susto!", "Да, сходила сегодня утром. Ну и страху я натерпелась!"]], 9, "pasado"],
+    # U10 (13/11/2026)
+    ["DLE-045", "Что ты будешь делать после курса?", "¿Qué harás después del curso?", ["javier", "ana"], [
+        ["javier", "Ana, el curso termina en junio. ¿Qué harás después?", "Аня, курс заканчивается в июне. Что ты будешь делать потом?", "**harás** — futuro от hacer."],
+        ["ana", "Todavía no lo sé. Me gustaría hacer un máster en Barcelona.", "Ещё не знаю. Я бы хотела поступить в магистратуру в Барселоне.", "**me gustaría** + инфинитив — желание."],
+        ["javier", "¡Qué buena idea! ¿Y de qué será el máster?", "Отличная идея! А какая будет магистратура?"],
+        ["ana", "De traducción. Si consigo una beca, empezaré en septiembre.", "По переводу. Если получу стипендию, начну в сентябре.", "После **si** — настоящее: **si consigo**."],
+        ["javier", "Seguro que la conseguirás. Tienes muy buenas notas.", "Уверен, ты её получишь. У тебя очень хорошие оценки."],
+        ["ana", "Gracias, Javier. ¡Ya veremos!", "Спасибо, Хавьер. Посмотрим!"]], 10, "planes"],
+    ["DLE-046", "Собеседование", "Una entrevista de trabajo", ["pablo", "marta"], [
+        ["pablo", "Marta, ¿cuándo es la entrevista?", "Марта, когда собеседование?"],
+        ["marta", "Mañana a las diez. Estoy un poco nerviosa.", "Завтра в десять. Я немного волнуюсь."],
+        ["pablo", "¿Qué te preguntarán?", "Что тебя спросят?", "**preguntarán** — futuro."],
+        ["marta", "Supongo que me preguntarán por mi experiencia y por qué quiero el puesto.", "Наверное, спросят про мой опыт и почему я хочу эту должность.", "**supongo que** + futuro — предположение."],
+        ["pablo", "Yo que tú, hablaría de tus prácticas en la empresa de Madrid.", "Я бы на твоём месте рассказал о стажировке в мадридской компании.", "**Yo que tú…** + condicional — совет."],
+        ["marta", "Tienes razón. ¿Y el sueldo? ¿Debería preguntar?", "Ты прав. А зарплата? Мне стоит спросить?", "**debería** — мягкий совет самому себе."],
+        ["pablo", "Mejor espera. Ellos te lo dirán al final.", "Лучше подожди. Они сами скажут в конце."],
+        ["marta", "Vale. ¡Gracias!", "Хорошо. Спасибо!"],
+        ["pablo", "¡Suerte!", "Удачи!"]], 10, "trabajo"],
+    ["DLE-047", "Если будет хорошая погода…", "Si hace buen tiempo…", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿qué haces el sábado?", "Аня, что ты делаешь в субботу?"],
+        ["ana", "No sé todavía. Si hace buen tiempo, iré a la playa.", "Ещё не знаю. Если будет хорошая погода, поеду на пляж.", "**si hace** — настоящее; **iré** — futuro."],
+        ["lucia", "¿Y si llueve?", "А если пойдёт дождь?"],
+        ["ana", "Si llueve, me quedaré en casa y repasaré los apuntes.", "Если пойдёт дождь, останусь дома и повторю конспекты."],
+        ["lucia", "¡Qué aburrido! Si llueve, ven al cine conmigo.", "Как скучно! Если пойдёт дождь, приходи со мной в кино.", "**si** + настоящее + imperativo."],
+        ["ana", "Me encantaría. ¡Vale!", "С удовольствием. Договорились!"]], 10, "planes"],
+    ["DLE-048", "Ты не мог бы мне помочь?", "¿Podrías ayudarme?", ["ana", "javier"], [
+        ["ana", "Javier, ¿podrías ayudarme con una cosa?", "Хавьер, ты не мог бы помочь мне с одним делом?", "**¿Podrías…?** — вежливая просьба."],
+        ["javier", "Claro. ¿Qué pasa?", "Конечно. Что случилось?"],
+        ["ana", "Tengo que escribir mi currículum en español y no sé cómo empezar.", "Мне нужно написать резюме по-испански, и я не знаю, с чего начать."],
+        ["javier", "Primero, yo pondría tu carrera y después tu experiencia.", "Сначала я бы написал твою учёбу в вузе, а потом опыт.", "**pondría** — condicional от poner."],
+        ["ana", "¿Y debería poner una foto?", "А стоит ли добавить фотографию?"],
+        ["javier", "En España, normalmente sí. Y deberías escribir una carta corta.", "В Испании обычно да. И тебе стоит написать короткое письмо."],
+        ["ana", "¡Muchas gracias! ¿Qué harías tú con la carta?", "Большое спасибо! А что бы ты сделал с письмом?"],
+        ["javier", "Yo que tú, hablaría de por qué te interesa la empresa.", "Я бы на твоём месте рассказал, почему тебя интересует эта компания."]], 10, "trabajo"],
+    ["DLE-049", "Плюсы и минусы", "Ventajas y desventajas", ["ana", "lucia"], [
+        ["ana", "Lucía, tengo dos opciones de trabajo y no sé cuál elegir.", "Лусия, у меня два варианта работы, и я не знаю, какое выбрать."],
+        ["lucia", "¡Qué bien! ¿Cuáles son?", "Как здорово! Какие?"],
+        ["ana", "Una es en una empresa grande. El sueldo es mejor, pero la jornada es muy larga.", "Одно — в большой компании. Зарплата лучше, но рабочий день очень длинный."],
+        ["lucia", "¿Y la otra?", "А другое?"],
+        ["ana", "La otra es de traductora autónoma. Ganaría menos, pero tendría más tiempo libre.", "Другое — переводчицей на себя. Я бы зарабатывала меньше, но у меня было бы больше свободного времени.", "**ganaría**, **tendría** — condicional: что было бы."],
+        ["lucia", "Las dos tienen ventajas y desventajas. ¿Qué es más importante para ti?", "У обоих есть плюсы и минусы. Что для тебя важнее?"],
+        ["ana", "Sobre todo, aprender. Creo que elegiré la empresa grande.", "Прежде всего — учиться. Думаю, я выберу большую компанию."],
+        ["lucia", "Es una buena decisión. ¡Suerte!", "Хорошее решение. Удачи!"]], 10, "trabajo"],
+    ["DLE-050", "Хоть бы было солнце!", "¡Ojalá haga sol!", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿vienes a la playa el sábado?", "Аня, поедешь на пляж в субботу?"],
+        ["ana", "¡Sí! Ojalá haga sol. La semana pasada llovió todos los días.", "Да! Хоть бы было солнце. На прошлой неделе каждый день шёл дождь.", "**ojalá** + subjuntivo: **haga** (от hacer)."],
+        ["lucia", "Espero que no llueva. Quiero que conozcas a mis amigos.", "Надеюсь, что не будет дождя. Я хочу, чтобы ты познакомилась с моими друзьями.", "**espero que**, **quiero que** + subjuntivo: **llueva**, **conozcas**."],
+        ["ana", "¡Qué bien! ¿Qué tengo que llevar?", "Здорово! Что мне взять?"],
+        ["lucia", "Nada especial. Cuando llegues a la estación, llámame y voy a buscarte.", "Ничего особенного. Когда приедешь на станцию, позвони мне, и я тебя встречу.", "**cuando llegues** — о будущем: subjuntivo, а не «cuando llegarás»."],
+        ["ana", "Vale. Te llamo en cuanto baje del tren.", "Хорошо. Позвоню, как только выйду из поезда.", "**en cuanto** + subjuntivo: **baje**."],
+        ["lucia", "¡Perfecto! ¡Que lo pases bien hasta el sábado!", "Отлично! Хорошей тебе недели до субботы!"]], 11, "planes"],
+    ["DLE-051", "Сломалось отопление", "Se ha roto la calefacción", ["ana", "casero"], [
+        ["ana", "Buenos días, señor Ruiz. Soy Ana, la inquilina del tercero.", "Доброе утро, сеньор Руис. Это Аня, жилица с четвёртого этажа.", "С хозяином — на usted."],
+        ["casero", "Hola, Ana. ¿Qué tal? ¿Pasa algo?", "Здравствуйте, Аня. Как дела? Что-то случилось?"],
+        ["ana", "Sí. Se ha estropeado la calefacción y en el piso hace mucho frío.", "Да. Сломалось отопление, и в квартире очень холодно.", "**se ha estropeado** — сломалось (само)."],
+        ["casero", "Vaya. ¿Y el agua caliente funciona?", "Вот как. А горячая вода есть?"],
+        ["ana", "No, tampoco. Y además el grifo de la cocina gotea. Necesito que venga un técnico pronto.", "Нет, тоже нет. И к тому же кран на кухне капает. Мне нужно, чтобы скорее пришёл мастер.", "**necesito que venga** — subjuntivo после «necesito que»."],
+        ["casero", "No se preocupe. Llamo ahora al técnico para que vaya mañana por la mañana.", "Не волнуйтесь. Сейчас позвоню мастеру, чтобы он пришёл завтра утром.", "**para que vaya** — чтобы он пошёл: subjuntivo."],
+        ["ana", "Muchas gracias. ¿Podría avisarme antes de que venga?", "Большое спасибо. Не могли бы вы предупредить меня, прежде чем он придёт?", "**antes de que** + subjuntivo."],
+        ["casero", "Claro. Le mando un mensaje esta tarde.", "Конечно. Пришлю вам сообщение сегодня вечером."]], 11, "casa"],
+    ["DLE-052", "В мэрии", "En el ayuntamiento", ["funcionaria", "ana"], [
+        ["funcionaria", "Buenos días. ¿En qué puedo ayudarla?", "Доброе утро. Чем могу вам помочь?", "Служащая говорит на usted: **ayudarla** — помочь вам (женщине)."],
+        ["ana", "Buenos días. Tengo que renovar un documento y no sé qué papeles necesito.", "Доброе утро. Мне нужно продлить документ, и я не знаю, какие бумаги нужны."],
+        ["funcionaria", "Es imprescindible que traiga el pasaporte y una fotocopia.", "Обязательно принесите паспорт и копию.", "**es imprescindible que** + subjuntivo: **traiga**."],
+        ["ana", "Vale. ¿Y tengo que rellenar algún formulario?", "Хорошо. А нужно заполнить какую-то форму?"],
+        ["funcionaria", "Sí, este. Rellénelo y firme aquí, por favor. No olvide poner la fecha.", "Да, вот эту. Заполните её и подпишите здесь, пожалуйста. Не забудьте поставить дату.", "Imperativo de usted: **rellénelo**, **firme**, **no olvide**."],
+        ["ana", "Perdone, ¿cuánto tiempo tarda el trámite?", "Извините, сколько времени занимает оформление?"],
+        ["funcionaria", "Unas dos semanas. Cuando lo tengamos, le enviamos un mensaje.", "Около двух недель. Когда документ будет у нас, мы пришлём вам сообщение.", "**cuando lo tengamos** — о будущем: subjuntivo."],
+        ["ana", "Perfecto. Muchas gracias.", "Отлично. Большое спасибо."],
+        ["funcionaria", "A usted. Que tenga un buen día.", "Вам спасибо. Хорошего дня.", "**que tenga** — пожелание с subjuntivo."]], 11, "tramites"],
+    ["DLE-053", "Советую тебе…", "Te recomiendo que…", ["javier", "ana"], [
+        ["ana", "Javier, Lucía quiere alquilar un piso. ¿Qué le recomiendas?", "Хавьер, Лусия хочет снять квартиру. Что ты ей посоветуешь?"],
+        ["javier", "Le recomiendo que lea bien el contrato antes de firmar.", "Я советую ей внимательно прочитать договор, прежде чем подписывать.", "**le recomiendo que lea** — subjuntivo; **antes de firmar** — тот же человек: инфинитив."],
+        ["ana", "¿Y la fianza? ¿Es normal que pidan dos meses?", "А залог? Это нормально, что просят за два месяца?"],
+        ["javier", "Sí, es bastante normal. Pero es importante que te den un recibo.", "Да, это довольно нормально. Но важно, чтобы тебе дали расписку.", "**es importante que te den** — subjuntivo от dar."],
+        ["ana", "¿Algo más?", "Что-нибудь ещё?"],
+        ["javier", "Que no pague nada sin ver el piso. Y que haga fotos de todo antes de entrar.", "Пусть ничего не платит, не посмотрев квартиру. И пусть всё сфотографирует до того, как въедет.", "**que no pague**, **que haga** — передать совет: «пусть…»."],
+        ["ana", "Muy buena idea. No creo que lo sepa.", "Очень хорошая идея. Не думаю, что она это знает.", "**no creo que** + subjuntivo: **sepa**."]], 11, "casa"],
+    ["DLE-054", "Ошибка в счёте", "Una factura con un error", ["pablo", "marta"], [
+        ["pablo", "Marta, mira esta factura de la luz. ¡Es mucho más que el mes pasado!", "Марта, посмотри на этот счёт за свет. Намного больше, чем в прошлом месяце!"],
+        ["marta", "¡Qué raro! No creo que hayamos gastado tanto.", "Как странно! Не думаю, что мы столько потратили.", "**no creo que hayamos** — subjuntivo от haber."],
+        ["pablo", "Me molesta mucho que siempre haya errores con esta compañía.", "Меня очень злит, что у этой компании всегда ошибки.", "**me molesta que** + subjuntivo."],
+        ["marta", "Tienes que reclamar. Escríbeles un correo.", "Тебе нужно пожаловаться. Напиши им письмо."],
+        ["pablo", "¿Qué pongo?", "Что написать?"],
+        ["marta", "«Estimados señores: Les escribo para informarles de un error en la factura.»", "«Уважаемые господа! Пишу вам, чтобы сообщить об ошибке в счёте.»", "Начало официального письма."],
+        ["pablo", "Y al final: «Les agradecería que me devolvieran el dinero. Atentamente, Pablo».", "А в конце: «Буду благодарен, если вы вернёте мне деньги. С уважением, Пабло».", "Пока достаточно узнать **les agradecería que…** как формулу."],
+        ["marta", "¡Perfecto! Y no te olvides de adjuntar la factura.", "Отлично! И не забудь приложить счёт.", "**no te olvides** — imperativo negativo от olvidarse."]], 11, "tramites"],
+    ["DLE-055", "Одолжишь мне?", "¿Me lo dejas?", ["ana", "lucia"], [
+        ["ana", "Lucía, ¿tienes el libro de español? Lo necesito para el examen.", "Лусия, у тебя есть учебник испанского? Он мне нужен к экзамену."],
+        ["lucia", "Sí, pero no es mi libro: me lo prestó Pablo.", "Да, но он не мой: мне его одолжил Пабло.", "**me lo prestó** — мне (me) его (lo): сначала «кому», потом «что»."],
+        ["ana", "¿Y me lo puedes dejar hasta el viernes?", "А можешь дать мне его до пятницы?", "**dejar** — здесь «одолжить, дать на время»."],
+        ["lucia", "Claro, te lo dejo. Pero el viernes devuélveselo a Pablo, por favor.", "Конечно, дам. Но в пятницу верни его Пабло, пожалуйста.", "**devuélveselo** — верни (devuelve) ему (se) его (lo): le + lo → **se lo**."],
+        ["ana", "Se lo devuelvo el viernes, te lo prometo. ¿Me das también tus apuntes?", "Верну ему в пятницу, обещаю. Дашь мне ещё свой конспект?"],
+        ["lucia", "Los apuntes no puedo dártelos: se los he dejado a Marta.", "Конспект дать не могу: я отдала его Марте.", "**dártelos** = **te los puedo dar**; **se los he dejado a Marta** — ей (se) их (los)."],
+        ["ana", "No pasa nada. Se los pido a ella.", "Ничего страшного. Попрошу у неё."],
+        ["lucia", "Vale. Y dile que te los dé pronto: el examen es el lunes.", "Хорошо. И скажи ей, чтобы дала тебе их поскорее: экзамен в понедельник.", "**dile que te los dé** — скажи ей, чтобы…: subjuntivo."]], 12, "trabajo"],
+    ["DLE-056", "Девушка, с которой я познакомился", "La chica que conocí", ["javier", "pablo"], [
+        ["javier", "Pablo, ¿quién es la chica que estaba contigo ayer?", "Пабло, кто та девушка, которая была с тобой вчера?", "**la chica que estaba** — **que** = «которая»."],
+        ["pablo", "Es Marta, la chica con quien vivo.", "Это Марта, девушка, с которой я живу.", "После предлога о человеке — **quien**: **con quien**."],
+        ["javier", "¿La que es de Argentina?", "Та, что из Аргентины?", "**la que** — «та, которая»."],
+        ["pablo", "Sí. La conocí en el bar donde trabajaba su hermano.", "Да. Я познакомился с ней в баре, где работал её брат.", "**donde** — «где», о месте."],
+        ["javier", "¿Y qué es lo que más te gusta de ella?", "И что тебе в ней нравится больше всего?"],
+        ["pablo", "Lo que más me gusta es que siempre dice lo que piensa.", "Больше всего мне нравится, что она всегда говорит то, что думает.", "**lo que** — «то, что»."],
+        ["javier", "¡Qué bien! Tengo ganas de conocerla.", "Здорово! Хочу с ней познакомиться."],
+        ["pablo", "El sábado hacemos una cena en casa. Ven y trae a quien quieras.", "В субботу у нас дома ужин. Приходи и приводи кого хочешь.", "**a quien quieras** — кого захочешь: subjuntivo."]], 12, "conocer"],
+    ["DLE-057", "Машина или велосипед?", "¿Coche o bici?", ["marta", "pablo"], [
+        ["marta", "Pablo, creo que deberíamos vender el coche.", "Пабло, я думаю, нам стоило бы продать машину."],
+        ["pablo", "¿Venderlo? ¡Ni hablar! Lo necesito para ir al trabajo.", "Продать? Ни за что! Она мне нужна, чтобы ездить на работу.", "**para ir** — цель: **para**."],
+        ["marta", "Por un lado, es cómodo. Pero, por otro lado, gastamos mucho en gasolina y casi no lo usamos.", "С одной стороны, это удобно. Но, с другой стороны, мы много тратим на бензин и почти ею не пользуемся.", "**por un lado… por otro lado…**"],
+        ["pablo", "Ya, pero el metro tarda mucho. Por eso voy en coche.", "Да, но метро едет долго. Поэтому я езжу на машине.", "**por eso** — следствие."],
+        ["marta", "Aunque tarde un poco más, es más barato. Y además no contamina tanto.", "Даже если оно едет чуть дольше, это дешевле. И к тому же не так загрязняет.", "**aunque tarde** — «даже если»: subjuntivo."],
+        ["pablo", "En eso tienes razón. Sin embargo, los fines de semana lo usamos para ir al pueblo.", "В этом ты права. Однако по выходным мы ездим на ней в деревню."],
+        ["marta", "Para eso podemos alquilar uno. Se alquilan coches por treinta euros al día.", "Для этого можно взять напрокат. Машины сдаются за тридцать евро в день.", "**se alquilan coches** — мн. ч.; **por treinta euros** — цена: **por**."],
+        ["pablo", "Depende… Déjame pensarlo.", "Смотря как… Дай мне подумать."]], 12, "opinion"],
+    ["DLE-058", "Ты читала новость?", "¿Has leído la noticia?", ["javier", "ana"], [
+        ["javier", "Ana, ¿has leído la noticia de hoy? El ayuntamiento quiere prohibir los coches en el centro.", "Аня, ты читала сегодняшнюю новость? Мэрия хочет запретить машины в центре."],
+        ["ana", "Sí, la he leído en el periódico. En mi opinión, es una buena idea.", "Да, прочитала в газете. По-моему, это хорошая идея.", "**en mi opinión** — по моему мнению."],
+        ["javier", "¿Por qué lo dices?", "Почему ты так говоришь?"],
+        ["ana", "Porque hay demasiada contaminación. Además, según una encuesta, la mayoría de los vecinos está a favor.", "Потому что слишком много загрязнения. Кроме того, согласно опросу, большинство жителей — за.", "**según** — согласно; **estar a favor** — быть за."],
+        ["javier", "Yo no estoy tan seguro. No creo que sea tan fácil: mucha gente necesita el coche para trabajar.", "Я не так уверен. Не думаю, что это так просто: многим машина нужна для работы."],
+        ["ana", "Es verdad, pero se puede mejorar el transporte público.", "Это правда, но можно улучшить общественный транспорт.", "**se puede** — «можно»."],
+        ["javier", "Desde mi punto de vista, primero hay que mejorar el transporte y después prohibir los coches.", "С моей точки зрения, сначала нужно улучшить транспорт, а потом запрещать машины."],
+        ["ana", "En eso estoy de acuerdo contigo.", "В этом я с тобой согласна.", "**estar de acuerdo con** — быть согласным с."]], 12, "opinion"],
+    ["DLE-059", "Социальные сети", "Las redes sociales", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿por qué no tienes redes sociales? ¡Hoy en día las tiene todo el mundo!", "Аня, почему у тебя нет соцсетей? В наши дни они есть у всех!"],
+        ["ana", "Las tenía, pero las dejé. Perdía demasiado tiempo delante de la pantalla.", "Были, но я их бросила. Я теряла слишком много времени перед экраном."],
+        ["lucia", "¡Qué va! Yo las uso para hablar con mis amigos, que viven lejos.", "Да ну! Я пользуюсь ими, чтобы общаться с друзьями, которые живут далеко."],
+        ["ana", "Eso es una ventaja, claro. Pero no me gusta que las empresas sepan todo sobre mí.", "Это плюс, конечно. Но мне не нравится, что компании знают обо мне всё.", "**no me gusta que… sepan** — subjuntivo; **sobre mí** — обо мне."],
+        ["lucia", "No exageres. ¿A quién le interesan tus fotos de la playa?", "Не преувеличивай. Кому интересны твои фотографии с пляжа?"],
+        ["ana", "No es por las fotos, es por los datos. La privacidad es importante para mí.", "Дело не в фотографиях, а в данных. Конфиденциальность для меня важна.", "**por** — причина; **para mí** — для меня."],
+        ["lucia", "Yo lo veo de otra manera: lo importante es usarlas bien.", "Я смотрю на это иначе: главное — пользоваться ими с умом.", "**lo importante** — «главное, важное»."],
+        ["ana", "En conclusión, cada una hace lo que quiere. ¡Y seguimos siendo amigas!", "В общем, каждая делает что хочет. И мы остаёмся подругами!"]], 12, "opinion"]
 
 ]
 
 # Situaciones y funciones con su nombre en ruso (12/11/2026, página de Диалоги): el orden es el de las listas
 SITUACIONES = [["conocer", "Знакомство"], ["casa", "Дом"], ["ciudad", "Город"], ["dia", "Распорядок дня"], ["gustos", "Что нравится"],
                ["tiempo", "Погода"], ["comer", "Кафе и ресторан"], ["compras", "Покупки"], ["transporte", "Транспорт"],
-               ["planes", "Планы"], ["salud", "Здоровье"], ["pasado", "Что было"]]
+               ["planes", "Планы"], ["salud", "Здоровье"], ["pasado", "Что было"], ["trabajo", "Работа и учёба"], ["tramites", "Учреждения и услуги"], ["opinion", "Мнения и споры"]]
 FUNCIONES = [["saludar", "Поздороваться"], ["despedirse", "Попрощаться"], ["agradecer", "Вежливость"], ["entender", "Если не понимаешь"],
              ["presentarse", "Познакомиться"], ["hablar-de-uno", "Рассказать о себе"], ["datos", "Личные данные"], ["orientarse", "Где это?"],
              ["describir", "Описать"], ["tiempo", "Время и погода"], ["rutina", "Распорядок дня"], ["gustos", "Что нравится"],
              ["necesidades", "Хочу и нужно"], ["compras", "Покупки"], ["comer", "В кафе и ресторане"], ["ciudad", "Как пройти"],
-             ["transporte", "Транспорт"], ["planes", "Планы"], ["salud", "Здоровье"], ["opinar", "Мнение"], ["felicitar", "Поздравить"], ["contar", "Рассказать о прошлом"]]
+             ["transporte", "Транспорт"], ["planes", "Планы"], ["salud", "Здоровье"], ["opinar", "Мнение"], ["felicitar", "Поздравить"], ["contar", "Рассказать о прошлом"], ["futuro", "Планы и советы"], ["resolver", "Пожелать, попросить, пожаловаться"]]
 # Notas culturales (data-cultura-es.js) que cita cada frase y cada línea (12/11/2026): campo cul
 CUL_FRASES = {"FRE-007": "CUE-001", "FRE-026": "CUE-001", "FRE-032": "CUE-002", "FRE-030": "CUE-003", "FRE-001": "CUE-004",
               "FRE-011": "CUE-004", "FRE-003": "CUE-006", "FRE-088": "CUE-008", "FRE-094": "CUE-008", "FRE-096": "CUE-008",

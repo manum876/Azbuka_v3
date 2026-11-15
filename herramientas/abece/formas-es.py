@@ -50,6 +50,8 @@ PLURAL_EXCEP = {
     # expresiones de varias palabras: cambia el sustantivo (04/11/2026, U4)
     "fin de semana": "fines de semana",
     "centro comercial": "centros comerciales",
+    "aire acondicionado": "aires acondicionados",   # 13/11/2026, U11
+    "punto de vista": "puntos de vista", "red social": "redes sociales", "cambio climático": "cambios climáticos",   # 14/11/2026, U12
 }
 # Solo se usan en plural aunque el léxico no lo marque (la palabra ya es el plural).
 SOLO_PLURAL = {"modales", "afueras", "cosquillas", "gases"}

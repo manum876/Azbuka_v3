@@ -134,6 +134,9 @@ var AZ_CATALOGO = {
       { id: 7, title: "Общение и отношения", desc: "Встречи и приглашения, кому (le, les), как gustar, согласие, сравнение и сообщения.", href: "abece-7.html", lista: true },
       { id: 8, title: "Рассказываем о прошлом", desc: "Pretérito perfecto и indefinido, когда что, поездки и биография; повторение уроков 2–8.", href: "abece-8.html", lista: true },
       { id: 9, title: "Истории, привычки и перемены", desc: "Imperfecto, каким было что-то раньше, что происходило и что случилось; рассказ и перемены.", href: "abece-9.html", lista: true },
+      { id: 10, title: "Планы, решения и возможности", desc: "Futuro и condicional, вежливые просьбы и советы, «если…», работа и учёба, плюсы и минусы.", href: "abece-10.html", lista: true },
+      { id: 11, title: "Решаем проблемы", desc: "Subjuntivo, «не делай» и вежливое usted; поломки в квартире, учреждения, банк и официальное письмо.", href: "abece-11.html", lista: true },
+      { id: 12, title: "Мнения и аргументы", desc: "Se lo doy и dímelo, que / lo que, por и para, «хотя» и «поэтому», se vende; мнение, новости, природа и технологии.", href: "abece-12.html", lista: true },
     ],
     /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo
        orden y con el mismo color que su equivalente de Azbuka, glifo de dos

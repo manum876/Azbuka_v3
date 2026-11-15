@@ -706,7 +706,8 @@ const azVocesListo = AZ_VOCES_ES_ACTIVA ? Promise.resolve(null) : azVocesCargarI
      Piper, y solo dicen sus líneas de diálogo. La clave de cada voz es la carpeta de sus audios.
      Un personaje nuevo sin entrada propia toma la voz de su género. */
 const AZ_VOCES_ES_PERSONAJE = { "narra": "es2", "javier": "es1", "recepcion": "es0", "pablo": "es2", "m": "es0",
-  "ana": "ana", "lucia": "lucia", "marta": "mujer", "f": "mujer" };
+  "ana": "ana", "lucia": "lucia", "marta": "mujer", "f": "mujer",
+  "casero": "es0", "funcionaria": "mujer" };   /* 13/11/2026, U11: personajes nuevos con las voces de siempre */
 const AZ_VOCES_ES_BASE = (() => { try { return new URL("../Abece_voces/v1/", location.href).href; } catch (e) { return "../Abece_voces/v1/"; } })();
 function azVozTextoEs(t) { return azVozTexto(String(t == null ? "" : t).replace(/\*\*/g, "")); }
 function azVozDeEs(quien) {

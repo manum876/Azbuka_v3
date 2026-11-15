@@ -1,6 +1,6 @@
 /* Abecé — formas de las palabras que cambian (FORMAS_ES).
    Generado por herramientas/abece/formas-es.py: no editar a mano.
-   3729 entradas. t: sust | adj | det | num | art | pron | contr.
+   3785 entradas. t: sust | adj | det | num | art | pron | contr.
    sust: sg, pl, art [sg, pl], g; f/fpl/artF si tiene femenino; elA (el agua);
          inv (pl = sg); soloPl; sentido (el/la cambia el sentido).
    adj/det/num: m, f, mpl, fpl; invG (igual en m y f); apoc (+ apocF: también ante f); var (la otra forma del plural: la de la RAE).
@@ -3734,7 +3734,63 @@ const FORMAS_ES = {
 "ESP-05470":{"t":"adj","m":"rizado","f":"rizada","mpl":"rizados","fpl":"rizadas"},
 "ESP-05471":{"t":"sust","g":"m","sg":null,"pl":"deberes","art":[null,"los"],"soloPl":true},
 "ESP-05472":{"t":"sust","g":"m","sg":"recreo","pl":"recreos","art":["el","los"]},
-"ESP-05473":{"t":"sust","g":"m","sg":null,"pl":"dibujos animados","art":[null,"los"],"soloPl":true}
+"ESP-05473":{"t":"sust","g":"m","sg":null,"pl":"dibujos animados","art":[null,"los"],"soloPl":true},
+"ESP-05475":{"t":"sust","g":"m","sg":"currículum","pl":"currículums","art":["el","los"]},
+"ESP-05476":{"t":"sust","g":"f","sg":"asignatura","pl":"asignaturas","art":["la","las"]},
+"ESP-05477":{"t":"sust","g":"m","sg":"máster","pl":"másteres","art":["el","los"]},
+"ESP-05478":{"t":"sust","g":"m","sg":null,"pl":"apuntes","art":[null,"los"],"soloPl":true},
+"ESP-05479":{"t":"sust","g":"f","sg":null,"pl":"prácticas","art":[null,"las"],"soloPl":true},
+"ESP-05480":{"t":"sust","g":"m/f","sg":"autónomo","pl":"autónomos","art":["el","los"],"f":"autónoma","fpl":"autónomas","artF":["la","las"]},
+"ESP-05481":{"t":"sust","g":"f","sg":null,"pl":"oposiciones","art":[null,"las"],"soloPl":true},
+"ESP-05482":{"t":"sust","g":"f","sg":"jubilación","pl":"jubilaciones","art":["la","las"]},
+"ESP-05483":{"t":"sust","g":"m/f","sg":"electricista","pl":"electricistas","art":["el · la","los · las"]},
+"ESP-05484":{"t":"sust","g":"m/f","sg":"fontanero","pl":"fontaneros","art":["el","los"],"f":"fontanera","fpl":"fontaneras","artF":["la","las"]},
+"ESP-05488":{"t":"adj","m":"imprescindible","f":"imprescindible","mpl":"imprescindibles","fpl":"imprescindibles","invG":true},
+"ESP-05489":{"t":"sust","g":"f","sg":"avería","pl":"averías","art":["la","las"]},
+"ESP-05491":{"t":"sust","g":"f","sg":"devolución","pl":"devoluciones","art":["la","las"]},
+"ESP-05492":{"t":"sust","g":"f","sg":"reclamación","pl":"reclamaciones","art":["la","las"]},
+"ESP-05493":{"t":"sust","g":"f","sg":"calefacción","pl":"calefacciones","art":["la","las"]},
+"ESP-05494":{"t":"sust","g":"m","sg":"aire acondicionado","pl":"aires acondicionados","art":["el","los"]},
+"ESP-05495":{"t":"sust","g":"m","sg":"grifo","pl":"grifos","art":["el","los"]},
+"ESP-05496":{"t":"sust","g":"m","sg":"enchufe","pl":"enchufes","art":["el","los"]},
+"ESP-05497":{"t":"sust","g":"f","sg":"bombilla","pl":"bombillas","art":["la","las"]},
+"ESP-05499":{"t":"sust","g":"f","sg":"mudanza","pl":"mudanzas","art":["la","las"]},
+"ESP-05500":{"t":"sust","g":"m","sg":"electrodoméstico","pl":"electrodomésticos","art":["el","los"]},
+"ESP-05501":{"t":"sust","g":"m","sg":"wifi","pl":"wifis","art":["el","los"]},
+"ESP-05502":{"t":"sust","g":"m","sg":"trámite","pl":"trámites","art":["el","los"]},
+"ESP-05503":{"t":"sust","g":"f","sg":"ventanilla","pl":"ventanillas","art":["la","las"]},
+"ESP-05504":{"t":"sust","g":"m","sg":"requisito","pl":"requisitos","art":["el","los"]},
+"ESP-05506":{"t":"sust","g":"f","sg":"fotocopia","pl":"fotocopias","art":["la","las"]},
+"ESP-05509":{"t":"sust","g":"m/f","sg":"usuario","pl":"usuarios","art":["el","los"],"f":"usuaria","fpl":"usuarias","artF":["la","las"]},
+"ESP-05510":{"t":"adj","m":"puntual","f":"puntual","mpl":"puntuales","fpl":"puntuales","invG":true},
+"ESP-05511":{"t":"adj","m":"mensual","f":"mensual","mpl":"mensuales","fpl":"mensuales","invG":true},
+"ESP-05512":{"t":"sust","g":"f","sg":"gotera","pl":"goteras","art":["la","las"]},
+"ESP-05513":{"t":"sust","g":"f","sg":"humedad","pl":"humedades","art":["la","las"]},
+"ESP-05514":{"t":"sust","g":"m","sg":"lavavajillas","pl":"lavavajillas","art":["el","los"],"inv":true},
+"ESP-05515":{"t":"sust","g":"m","sg":"fregadero","pl":"fregaderos","art":["el","los"]},
+"ESP-05516":{"t":"sust","g":"m/f","sg":"cerrajero","pl":"cerrajeros","art":["el","los"],"f":"cerrajera","fpl":"cerrajeras","artF":["la","las"]},
+"ESP-05517":{"t":"sust","g":"m","sg":"saldo","pl":"saldos","art":["el","los"]},
+"ESP-05518":{"t":"sust","g":"m","sg":"padrón","pl":"padrones","art":["el","los"]},
+"ESP-05519":{"t":"pron","inv":true},
+"ESP-05522":{"t":"adj","m":"polémico","f":"polémica","mpl":"polémicos","fpl":"polémicas"},
+"ESP-05523":{"t":"sust","g":"m","sg":"punto de vista","pl":"puntos de vista","art":["el","los"]},
+"ESP-05529":{"t":"sust","g":"f","sg":"política","pl":"políticas","art":["la","las"]},
+"ESP-05530":{"t":"sust","g":"f","sg":"igualdad","pl":"igualdades","art":["la","las"]},
+"ESP-05531":{"t":"sust","g":"m","sg":null,"pl":"medios de comunicación","art":[null,"los"],"soloPl":true},
+"ESP-05532":{"t":"sust","g":"f","sg":"red social","pl":"redes sociales","art":["la","las"]},
+"ESP-05533":{"t":"sust","g":"m","sg":"porcentaje","pl":"porcentajes","art":["el","los"]},
+"ESP-05534":{"t":"sust","g":"m","sg":"medio ambiente","pl":null,"art":["el","los"]},
+"ESP-05535":{"t":"sust","g":"f","sg":"contaminación","pl":"contaminaciones","art":["la","las"]},
+"ESP-05537":{"t":"sust","g":"m","sg":"reciclaje","pl":"reciclajes","art":["el","los"]},
+"ESP-05538":{"t":"sust","g":"m","sg":"cambio climático","pl":"cambios climáticos","art":["el","los"]},
+"ESP-05539":{"t":"adj","m":"renovable","f":"renovable","mpl":"renovables","fpl":"renovables","invG":true},
+"ESP-05540":{"t":"adj","m":"sostenible","f":"sostenible","mpl":"sostenibles","fpl":"sostenibles","invG":true},
+"ESP-05541":{"t":"adj","m":"ecológico","f":"ecológica","mpl":"ecológicos","fpl":"ecológicas"},
+"ESP-05542":{"t":"adj","m":"tecnológico","f":"tecnológica","mpl":"tecnológicos","fpl":"tecnológicas"},
+"ESP-05543":{"t":"adj","m":"virtual","f":"virtual","mpl":"virtuales","fpl":"virtuales","invG":true},
+"ESP-05544":{"t":"sust","g":"m","sg":"coste","pl":"costes","art":["el","los"]},
+"ESP-05545":{"t":"sust","g":"f","sg":"desigualdad","pl":"desigualdades","art":["la","las"]},
+"ESP-05546":{"t":"sust","g":"m","sg":"calentamiento global","pl":null,"art":["el","los"]}
 };
 
 const FORMAS_ES_SERIES = {

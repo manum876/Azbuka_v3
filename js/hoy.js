@@ -44,12 +44,15 @@
      U7 реакция дня (responder «yo también», «a mí tampoco»… a una frase; 12/11/2026)
      U8 что ты сделал (una frase sobre uno mismo con el pasado que pide el marcador; 13/11/2026)
      U9 раньше и сейчас (una frase sobre uno mismo en imperfecto; 13/11/2026)
+     U12 кому и что (la frase con los dos pronombres: «Doy el libro a Ana» → «Se lo doy»; 14/11/2026)
+     U11 желание дня (la frase entera con el subjuntivo tras «ojalá / quiero que / cuando…»; 13/11/2026)
+     U10 планы (una frase sobre uno mismo en futuro o con ir a; tras «si», presente; 13/11/2026)
    Las unidades de Abecé sin desafío propio usan el de la última que lo
    tiene (AZ_HOY_ES_MAX).
    ============================================================ */
 const AZ_HOY_ES = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
 const AZ_HOY_K = AZ_HOY_ES ? "az_hoy_es" : "az_hoy";
-const AZ_HOY_ES_MAX = 9;
+const AZ_HOY_ES_MAX = 12;
 /* Abecé: lo mismo que carga abece-N.html (las unidades anteriores, para las palabras ya vistas).
    [src, global]: si la página ya pidió ese archivo y todavía no llegó, se espera a que llegue. */
 function azHoyDepsEs(n) {
@@ -458,6 +461,68 @@ function azHoyDesafioEs(n) {
         if (hay(pres).nivel === 2) return { nivel: "mal", msg: "Это настоящее время. О прошлом — **" + ok + "**." };
         if (r.nivel === 1) return { nivel: "casi", msg: "Почти: **" + ok + "**, а не «" + el.escrito + "»." };
         return { nivel: "mal", msg: "Не нахожу глагол **" + inf + "** в imperfecto. С yo: **" + ok + "**." };
+      } };
+  }
+  if (n === 12 && typeof ES12_HOY !== "undefined") {
+    const [frase, oi, od, verbo, inf] = ES12_HOY[num % ES12_HOY.length];
+    const ok = oi + " " + od + " " + verbo;
+    return { titulo: "Кому и что", grande: frase, sub: "", audio: frase,
+      consigna: "Скажи то же самое с двумя местоимениями: **кому** и **что**.",
+      pista: "Сначала «кому» (me, te, se, nos, os), потом «что» (lo, la, los, las), потом глагол. **le / les + lo → se lo**.",
+      revisar: txt => {
+        const t = " " + txt.toLowerCase().replace(/[¿?¡!.,;:«»"]/g, " ").replace(/\s+/g, " ").trim() + " ";
+        const hay = x => t.indexOf(" " + x + " ") >= 0;
+        if (/ (le|les) (lo|la|los|las) /.test(t)) return { nivel: "mal", msg: "«le lo» сказать нельзя: **le / les** перед **lo, la, los, las** → **se**. Нужно: **" + cap(ok) + "**." };
+        if (hay(ok)) return { nivel: "bien", msg: "**" + cap(ok) + "** — сначала «кому» (" + oi + "), потом «что» (" + od + ")." };
+        const verboBien = hay(verbo), dosPron = / (me|te|se|nos|os) (lo|la|los|las) /.test(t), alReves = / (lo|la|los|las) (me|te|se|nos|os) /.test(t);
+        if (alReves) return { nivel: "casi", msg: "Почти: порядок другой — сначала «кому», потом «что»: **" + cap(ok) + "**." };
+        if (dosPron && verboBien) return { nivel: "casi", msg: "Почти: проверь местоимения — **" + cap(ok) + "**." };
+        if (hay(oi + " " + od)) return { nivel: "casi", msg: "Почти: местоимения верные, проверь глагол — **" + cap(ok) + "**." };
+        if (dosPron) return { nivel: "casi", msg: "Почти: нужно **" + cap(ok) + "**." };
+        return { nivel: "mal", msg: "Нужны два местоимения перед глаголом: **" + cap(ok) + "**." };
+      } };
+  }
+  if (n === 11 && typeof ES11_HOY !== "undefined" && typeof es11Subj === "function") {
+    const [inf, inicio, p] = ES11_HOY[num % ES11_HOY.length];
+    const ok = es11Subj(inf, p), pres = es11Pres(inf, p), fut = es11Fut(inf, p);
+    const otras = [0, 1, 2, 3, 4, 5].map(k => es11Subj(inf, k)).filter(f => f && f !== ok);
+    const lex = typeof LEXICON_ES !== "undefined" ? LEXICON_ES.find(e => e.es === inf && e.posNormalized === "verbo") : null;
+    const futuro = /^(cuando|llámame antes|espera hasta)/i.test(inicio);
+    let txt0 = "";
+    const hay = f => f && azSituacionEs(txt0, { necesita: [{ es: inf, formas: [f] }] });
+    return { titulo: "Желание дня", grande: inf + " · " + inicio + "…", sub: azHoyEsRu(lex), audio: inf,
+      consigna: "Допиши фразу по-испански: «" + inicio + "…» с глаголом **" + inf + "**.",
+      pista: "После «" + inicio + "…» — subjuntivo" + (futuro ? " (это о будущем)" : "") + ": **" + ok + "**.",
+      revisar: txt => {
+        txt0 = txt;
+        const r = hay(ok), el = r.elementos[0];
+        if (r.nivel === 2) return { nivel: "bien", msg: "**" + ok + "** — subjuntivo." };
+        if (hay(pres).nivel === 2 || hay(fut).nivel === 2) return { nivel: "mal", msg: "Здесь нужен subjuntivo, а не обычное время: **" + ok + "**." };
+        if (otras.some(f => hay(f).nivel === 2)) return { nivel: "casi", msg: "Почти: subjuntivo верный, но лицо другое: **" + ok + "**." };
+        if (r.nivel === 1) return { nivel: "casi", msg: "Почти: **" + ok + "**, а не «" + el.escrito + "»." };
+        return { nivel: "mal", msg: "Не нахожу глагол **" + inf + "** в subjuntivo. Нужно: **" + ok + "**." };
+      } };
+  }
+  if (n === 10 && typeof ES10_HOY !== "undefined" && typeof es10Fut === "function") {
+    const [inf, cuando] = ES10_HOY[num % ES10_HOY.length];
+    const ok = es10Fut(inf, 0), pres = es10Pres(inf, 0), ira = "voy a " + inf;
+    const lex = typeof LEXICON_ES !== "undefined" ? LEXICON_ES.find(e => e.es === inf && e.posNormalized === "verbo") : null;
+    const conSi = /^si /.test(cuando);
+    let txt0 = "";
+    const hay = f => azSituacionEs(txt0, { necesita: [{ es: inf, formas: [f] }] });
+    return { titulo: "Планы", grande: inf + " · " + cuando, sub: azHoyEsRu(lex), audio: inf,
+      consigna: "Напиши фразу о себе (**yo**): что ты сделаешь — «" + cuando + "».",
+      pista: "Будущее — **futuro** (-é: **" + ok + "**) или **voy a** + инфинитив." + (conSi ? " После **si** — настоящее время: **" + cuando + "**." : ""),
+      revisar: txt => {
+        txt0 = txt;
+        const t = txt.toLowerCase();
+        const siFut = t.match(/\bsi\s+(no\s+)?(tendré|podré|habrá|haré|sabré|querré|saldré|vendré|diré|[a-záéíóúñ]+(aré|eré|iré|ará|erá|irá))(?![a-záéíóúñ])/);
+        if (siFut) return { nivel: "mal", msg: "После **si** будущее нельзя: нужно настоящее время, а не «" + siFut[0] + "»." };
+        const r = hay(ok), el = r.elementos[0];
+        if (r.nivel === 2 || hay(ira).nivel === 2) return { nivel: "bien", msg: r.nivel === 2 ? "**" + ok + "** — futuro, форма yo." : "**" + ira + "** — план (ir a + инфинитив)." };
+        if (hay(pres).nivel === 2) return { nivel: "casi", msg: "Почти: о будущем лучше **" + ok + "** или **" + ira + "**." };
+        if (r.nivel === 1) return { nivel: "casi", msg: "Почти: **" + ok + "**, а не «" + el.escrito + "»." };
+        return { nivel: "mal", msg: "Не нахожу глагол **" + inf + "** в будущем. С yo: **" + ok + "**." };
       } };
   }
   if (n === 7 && typeof ES7_REACCION !== "undefined") {
