@@ -54,7 +54,7 @@ const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer:
 const OBJETIVO_U1 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(1) >= 0).map(e => e.id);
 
 function hablar(t) { azHablarRu(t); }
-function sonidoLetra(l) { hablar(l.upper === "Ь" || l.upper === "Ъ" ? l.name : l.lower); }
+function sonidoLetra(l) { hablar(azNombreLetra(l)); }
 
 /* Palabra con la letra resaltada; toda la palabra abre su burbuja */
 function PalabraLetra({ w, letra, c, size }) {
@@ -83,7 +83,7 @@ function HojaLetra({ l, c, nivel, setNivel, onClose, green }) {
           h("div", { style: { fontSize: "var(--az-fs-subtitulo)", fontWeight: 800, color: c.text }, lang: "ru" }, l.name),
           h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textSub, marginTop: 4 } }, "Suena: /" + l.translit + "/"),
           h("div", { style: { display: "flex", gap: 8, marginTop: 12, alignItems: "center" } },
-            h("button", { className: "play", onClick: () => sonidoLetra(l), "aria-label": "Escuchar" }, "▶"),
+            !azLetraSinSonido(l) && h("button", { className: "play", onClick: () => sonidoLetra(l), "aria-label": "Escuchar" }, "▶"),
             h("a", { href: "alfabeto.html?mano=" + encodeURIComponent(l.upper), onClick: e => azNavigate(e, "alfabeto.html?mano=" + encodeURIComponent(l.upper)),
               style: { fontSize: "var(--az-fs-chico)", fontWeight: 700, color: c.gold, textDecoration: "none", padding: "8px 12px", border: `1px solid ${c.gold}88`, borderRadius: "var(--az-r)" } }, "✍️ Escribirla a mano")))),
       h("div", { className: "u-text", style: { marginTop: 12 } }, azFmt(l.pronunciation)),
@@ -170,7 +170,7 @@ function Tarjetas({ letras, titulo, c, niveles, setNivel, onClose, green, cursiv
                 h("div", { style: { minWidth: 0 } },
                   h(PalabraLetra, { w, letra: l, c, size: 22 }),
                   h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textSub, marginTop: 4 } }, w.translit + " · " + w.meaning)),
-                h("button", { className: "play", onClick: e => { e.stopPropagation(); sonidoLetra(l); setTimeout(() => hablar(lexComerById(w.lexId).ru), 900); }, "aria-label": "Escuchar" }, "▶")))),
+                h("button", { className: "play", onClick: e => { e.stopPropagation(); if (azLetraSinSonido(l)) { hablar(lexComerById(w.lexId).ru); return; } sonidoLetra(l); setTimeout(() => hablar(lexComerById(w.lexId).ru), 900); }, "aria-label": "Escuchar" }, "▶")))),
       h("div", { className: "fc-ctl" },
         h("button", { onClick: () => ir(-1) }, "‹ Anterior"),
         h("button", { onClick: mezclar }, "Mezclar"),

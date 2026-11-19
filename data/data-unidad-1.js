@@ -385,21 +385,21 @@ function ejerciciosUnidad1() {
   /* Todo con audio: el alumno escucha y reconoce la letra en cirílico.
      No hay ejercicios de transliteración: la transliteración es solo
      una ayuda de lectura, no algo que se practique. */
-  const conSonido = L.filter(l => !U1_SONIDO[l.upper] || l.upper === "Й");   /* Ъ y Ь no suenan */
+  const conSonido = L.filter(l => !U1_SONIDO[l.upper]);   /* Ъ y Ь no suenan; Й suelta tampoco se oye clara (19/11/2026, Manu) */
 
   /* 1. Escuchar y elegir la letra */
   conSonido.forEach((l, i) => {
     const vistas = conSonido.filter(x => modDe[x.upper] <= Math.max(modDe[l.upper], 3));
     const mal = otros(vistas, [l], 3, i + 7).map(x => x.upper + " " + x.lower);
     out.push({ id: "U1-ae-" + l.upper, tipo: "audio-letra", forma: "elegir", dificultad: 1, modulo: modDe[l.upper], grupo: l.upper,
-      pide: "Escucha: ¿qué letra es?", audio: l.lower, opciones: baraja([l.upper + " " + l.lower].concat(mal), i + 3), correcta: l.upper + " " + l.lower,
+      pide: "Escucha: ¿qué letra es?", audio: azNombreLetra(l), opciones: baraja([l.upper + " " + l.lower].concat(mal), i + 3), correcta: l.upper + " " + l.lower,
       explicacion: "Sonó la " + l.upper + " (" + l.name + "). " + l.pronunciation + ".", recordar: l.details.tips });
   });
 
   /* 2. Escuchar la letra y escribirla */
   conSonido.forEach(l => {
     out.push({ id: "U1-el-" + l.upper, tipo: "escuchar-letra", forma: "escribir", dificultad: 2, modulo: modDe[l.upper], grupo: l.upper,
-      pide: "Escucha y escribe la letra.", audio: l.lower, esperadas: [l.lower], idioma: "ru", mayus: true,
+      pide: "Escucha y escribe la letra.", audio: azNombreLetra(l), esperadas: [l.lower], idioma: "ru", mayus: true,
       explicacion: "Sonó la " + l.upper + ", que se llama " + l.name + ".", recordar: l.details.tips });
   });
 
@@ -407,10 +407,10 @@ function ejerciciosUnidad1() {
   conSonido.forEach((l, i) => {
     const otra = otros(conSonido.filter(x => modDe[x.upper] <= Math.max(modDe[l.upper], 3)), [l], 1, i + 11)[0];
     out.push({ id: "U1-vf-" + l.upper + "-v", tipo: "vf", forma: "vf", dificultad: 1, modulo: modDe[l.upper], grupo: l.upper,
-      audio: l.lower, afirmacion: "Suena la letra " + l.upper + " " + l.lower + ".", verdadero: true,
+      audio: azNombreLetra(l), afirmacion: "Suena la letra " + l.upper + " " + l.lower + ".", verdadero: true,
       explicacion: "Verdadero: sonó la " + l.upper + " (" + l.name + ")." });
     out.push({ id: "U1-vf-" + l.upper + "-f", tipo: "vf", forma: "vf", dificultad: 1, modulo: modDe[l.upper], grupo: l.upper,
-      audio: otra.lower, afirmacion: "Suena la letra " + l.upper + " " + l.lower + ".", verdadero: false,
+      audio: azNombreLetra(otra), afirmacion: "Suena la letra " + l.upper + " " + l.lower + ".", verdadero: false,
       explicacion: "Falso: sonó la " + otra.upper + " (" + otra.name + "), no la " + l.upper + "." });
   });
 

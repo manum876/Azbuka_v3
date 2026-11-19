@@ -1901,3 +1901,12 @@ function generateQuizQuestion(letter, allLetters) {
     }))
   };
 }
+
+/* Lo que suena cuando se pide oír una letra (19/11/2026, Manu): su nombre, no la letra sola,
+   que la voz no sabe leer suelta («б» → «бэ»). Con acento en los nombres de más de una sílaba. */
+/* Ъ y Ь no tienen sonido, y Й suelta no se reconoce (19/11/2026, Manu): no llevan botón de escuchar */
+function azLetraSinSonido(l) { return l.upper === "Ъ" || l.upper === "Ь" || l.upper === "Й"; }
+function azNombreLetra(l) {
+  const largos = { "Ъ": "твёрдый знак", "Ь": "мя́гкий знак" };
+  return largos[l.upper] || String(l.name || l.lower).toLowerCase();
+}

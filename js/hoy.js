@@ -147,7 +147,8 @@ function azHoyDesafio(n) {
     const letras = ALPHABET.filter(a => a.words && a.words.length);
     const L = letras[num % letras.length], w = L.words[num % L.words.length];
     return { titulo: "Letra del día", grande: L.upper + " " + L.lower, sub: L.name + " · " + (L.pronunciation || "").replace(/\*\*/g, ""),
-      audio: w.cyrillic, consigna: "Escucha la palabra (▶) y escríbela en ruso.", pista: "Empieza con " + L.upper + ", tiene " + w.cyrillic.length + " letras y significa «" + w.meaning + "».",
+      audio: w.cyrillic, consigna: "Escucha la palabra (▶) y escríbela en ruso.", /* la primera letra de la palabra, no la del día (17/11/2026: «теа́тр» no empieza con Р) */
+      pista: "Empieza con " + w.cyrillic.charAt(0).toUpperCase() + (w.cyrillic.charAt(0).toUpperCase() !== L.upper ? ", lleva la " + L.upper : "") + ", tiene " + w.cyrillic.replace(/[\u0301\s-]/g, "").length + " letras y significa «" + w.meaning + "».",
       revisar: txt => { const a = azHoyK(txt.trim()), b = azHoyK(w.cyrillic);
         if (a === b) return { nivel: "bien", msg: "**" + w.cyrillic + "** (" + w.meaning + ")." };
         if (azHoyDist(a, b) <= 1) return { nivel: "casi", msg: "Casi: es **" + w.cyrillic + "** (" + w.meaning + ")." };

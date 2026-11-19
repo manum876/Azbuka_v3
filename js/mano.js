@@ -195,7 +195,7 @@
           onPointerDown: abajo, onPointerMove: mover, onPointerUp: arriba, onPointerCancel: arriba, onPointerLeave: arriba })),
       h("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12, maxWidth: 340, marginLeft: "auto", marginRight: "auto" } },
         h("button", { style: btn, onClick: limpiar }, T.borrar),
-        h("button", { style: btn, onClick: () => voz(l.hablar || l.lower) }, T.escuchar),
+        !(!l.hablar && typeof azLetraSinSonido === "function" && azLetraSinSonido(l)) && h("button", { style: btn, onClick: () => voz(l.hablar || (typeof azNombreLetra === "function" ? azNombreLetra(l) : l.lower)) }, T.escuchar),
         h("button", { style: Object.assign({}, btn, { background: c.gold, borderColor: c.gold, color: c.bg }), onClick: comprobar }, T.comprobar)),
       res && h("div", { style: { maxWidth: 340, margin: "12px auto 0", fontSize: "var(--az-fs-chico)", lineHeight: 1.5, color: c.textSub } },
         res.vacio ? T.vacio : h(React.Fragment, null,

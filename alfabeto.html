@@ -144,7 +144,7 @@ const MANO_TX_RU = {
   resultado: (f, cob, prec) => "Совпадение: " + f + " %. Ты покрыл " + cob + " % буквы, и " + prec + " % твоей линии лежит на ней. Зелёным — образец.",
   nota: "Приложение сравнивает только итоговую форму, а не порядок и направление линий. Это подсказка для практики: все пишут немного по-разному."
 };
-const hablarLetra = l => ES ? azHablarEs(l.name) : azHablarRu(l.lower);
+const hablarLetra = l => ES ? azHablarEs(l.name) : azHablarRu(azNombreLetra(l));
 const hablarPalabra = w => ES ? azHablarEs(w.es) : azHablarRu(w.cyrillic);
 function speakRu(text) { azHablarRu(text); }   /* voz compartida: core.js */
 
@@ -421,7 +421,7 @@ function App() {
             React.createElement("div", { className: "det-pron", style: { color: c.textMuted } }, azFmt(selected.pronunciation)),
             /* Botones en una fila con espacio (14/10/2026): si no entran, bajan alineados */
             React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } },
-            React.createElement("button", {
+            !(!ES && azLetraSinSonido(selected)) && React.createElement("button", {
               className: "btn", onClick: () => hablarLetra(selected),
               style: { background: c.gold, color: "#0F0F14", fontWeight: 700, fontSize: "var(--az-fs-nota)", padding: "8px 16px", borderRadius: "var(--az-r)" }
             }, TX.escuchar),
