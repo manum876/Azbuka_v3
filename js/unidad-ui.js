@@ -846,8 +846,21 @@
       const k = norm(m[0]); if (tokens.indexOf(k) < 0) tokens.push(k);
     }
     const dudas = [];
+    /* Abecé (20/11/2026): imperativo, infinitivo o gerundio con pronombres pegados (escríbeme, dímelo, decírselo) */
+    const sinTilde = x => x.normalize("NFD").replace(/[\u0300-\u036f]/g, "").normalize("NFC").replace(/u\u0308/g, "ü");
+    const conPegado = t => {
+      const CL = /(me|te|se|lo|la|los|las|le|les|nos|os)$/;
+      let w = t;
+      for (let i = 0; i < 2; i++) {
+        const m = w.match(CL); if (!m || w.length - m[0].length < 2) return false;
+        w = w.slice(0, -m[0].length);
+        if (conocidas.has(w) || conocidas.has(sinTilde(w))) return true;
+      }
+      return false;
+    };
     tokens.forEach(t => {
       if (conocidas.has(t)) return;
+      if (ES && conPegado(t)) return;
       let mejor = null, dist = 3;
       conocidas.forEach(k => {
         if (Math.abs(k.length - t.length) > 1 || k[0] !== t[0]) return;

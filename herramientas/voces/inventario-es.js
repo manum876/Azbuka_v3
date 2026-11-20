@@ -139,6 +139,7 @@ if (GRUPO === "unidades" || TODO) {
     const vistos = new Set();
     constantes(f).forEach(c => { if (typeof ctx[c] !== "function") recorrer(ctx[c], pag, null, vistos); });
     const fn = n === 14 ? ctx.ejerciciosExamenFinalEs : ctx["ejerciciosUnidadEs" + n];
+    if (n === 14) sumar("Hablas español.", null, pag);   /* la pantalla final del examen (abece-14.html, ▶ Послушать) */
     if (typeof fn === "function") { try { recorrer(fn(), pag, null, vistos); } catch (e) { console.log("  (aviso) ejercicios U" + n, e.message); } }
     (LEXICON_ES || []).forEach(e => {
       if ((e.introducedIn || []).indexOf(n) < 0) return;

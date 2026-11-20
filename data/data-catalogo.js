@@ -138,6 +138,7 @@ var AZ_CATALOGO = {
       { id: 11, title: "Решаем проблемы", desc: "Subjuntivo, «не делай» и вежливое usted; поломки в квартире, учреждения, банк и официальное письмо.", href: "abece-11.html", lista: true },
       { id: 12, title: "Мнения и аргументы", desc: "Se lo doy и dímelo, que / lo que, por и para, «хотя» и «поэтому», se vende; мнение, новости, природа и технологии.", href: "abece-12.html", lista: true },
       { id: 13, title: "Испанский для жизни", desc: "Pluscuamperfecto, косвенная речь (dijo que…), чувства, жизнь в Испании, настоящие тексты и аудио; мастерская письма и проект.", href: "abece-13.html", lista: true },
+      { id: 14, title: "Финальный экзамен", desc: "Шесть частей, которые проверяют все 13 уроков.", href: "abece-14.html", lista: true, examen: true },
     ],
     /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo
        orden y con el mismo color que su equivalente de Azbuka, glifo de dos
