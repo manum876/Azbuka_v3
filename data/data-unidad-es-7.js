@@ -741,6 +741,7 @@ function ejerciciosUnidadEs7() {
 
   /* Profundización y formas (13/11/2026) */
   if (typeof es7Prof === "function") es7Prof(out, baraja, lex);
+  if (typeof es7Basicas === "function") es7Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -1098,3 +1099,97 @@ function es7Prof(out, baraja, lex) {
     esperadas: [ok], idioma: "es", foco: true, formaCasi: false, oir: ok, explicacion: "**" + ok + "**" }));
 }
 Object.assign(ES7_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1, "gustar-forma": 2, "oi-escribir": 1 });
+
+/* ── Palabras básicas sumadas (19/11/2026, Manu) ──
+   Palabras muy frecuentes que ninguna unidad enseñaba (revisión general del 15/11/2026,
+   claude/REVISION_GENERAL_2026-11-15.md §8). Entran en la lista del módulo que les
+   corresponde, con una sección corta de teoría y sus ejercicios; no cambia el orden de
+   los módulos ni lo que ya había. Formato de ES7_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES7_BASICAS_MOD = [
+  ["es7m4", ["loco", "tonto"], {
+    id: "es7-loco",
+    titulo: "Loco, tonto",
+    texto: "**loco** — «сумасшедший»: **¡Estás loco!** — «Ты с ума сошёл!» (часто в шутку); **una idea loca** — «безумная идея». **tonto** — «глупый»: **una pregunta tonta**. Сейчас, в этот момент — **estar loco**; о характере — **ser tonto**.",
+    ejemplos: [
+      { es: "Me parece una idea loca.", ru: "По-моему, это безумная идея." },
+      { es: "No es tonto: es muy inteligente.", ru: "Он не глупый: он очень умный." }
+    ]
+  }],
+  ["es7m5", ["de verdad"], {
+    id: "es7-de-verdad",
+    titulo: "¿De verdad?",
+    texto: "**¿De verdad?** — «Правда?», когда удивляешься. **de verdad** — «по-настоящему, правда»: **Me gusta de verdad** — мне правда нравится.",
+    ejemplos: [
+      { es: "— Mañana me voy a vivir a Madrid. — ¿De verdad?", ru: "— Завтра я переезжаю в Мадрид. — Правда?" },
+      { es: "Me gusta de verdad.", ru: "Мне правда нравится." }
+    ]
+  }],
+  ["es7m7", ["a la vez"], {
+    id: "es7-a-la-vez",
+    titulo: "A la vez — одновременно",
+    texto: "**a la vez** — «одновременно, в одно и то же время»: **Trabajo y estudio a la vez**.",
+    ejemplos: [
+      { es: "Trabajo y estudio a la vez: estoy muy cansado.", ru: "Я одновременно работаю и учусь: я очень устал." }
+    ]
+  }],
+  ["es7m8", ["amor", "cariño"], {
+    id: "es7-amor",
+    titulo: "El amor, el cariño",
+    texto: "**el amor** — «любовь». **el cariño** — «нежность, тёплое отношение»: **con cariño** — «с любовью» в конце письма. Оба слова — ласковые обращения: **¡Hola, cariño!**, **Gracias, amor.** В Испании **cariño** говорят и паре, и детям.",
+    ejemplos: [
+      { es: "Para mí, el amor es muy importante.", ru: "Для меня любовь очень важна." },
+      { es: "Gracias, cariño.", ru: "Спасибо, дорогой." }
+    ]
+  }],
+  ["es7m1", ["junto"], {
+    id: "es7-juntos",
+    titulo: "Juntos — вместе",
+    texto: "**juntos** — «вместе». Это прилагательное: меняется по роду и числу — **juntos**, **juntas** (если это только женщины). **¿Vamos juntos?** — Пойдём вместе?",
+    ejemplos: [
+      { es: "¿Vamos juntos al cine?", ru: "Пойдём вместе в кино?" },
+      { es: "Ana y Lucía viven juntas.", ru: "Аня и Лусия живут вместе.", por: "Две женщины — **juntas**." }
+    ]
+  }],
+  ["es7m2", ["tal vez"], {
+    id: "es7-tal-vez",
+    titulo: "Tal vez",
+    texto: "**tal vez** — «может быть», как **quizá** и **a lo mejor**. **a lo mejor** чаще звучит в разговоре; **tal vez** и **quizá** — чуть аккуратнее. Пишется с **z**: **vez**. В уроке 11 ты увидишь, что после **tal vez** бывает и сослагательное наклонение.",
+    ejemplos: [
+      { es: "— ¿Vienes el sábado? — Tal vez.", ru: "— Придёшь в субботу? — Может быть." }
+    ]
+  }],
+];
+const ES7_BASICAS = [
+  ["opinion", "elegir", 4, "es7-loco", "Что подходит?", "¿Comer helado en enero? ¡Estás ___!", "loco", ["cansado", "contento"], "**¡Estás loco!** — «Ты с ума сошёл!».", "loco"],
+  ["opinion", "elegir", 4, "es7-loco", "Что подходит?", "No es una pregunta ___: es muy interesante.", "tonta", ["tonto", "loca"], "**la pregunta** — женский род: **tonta**.", "tonto"],
+  ["respuesta", "elegir", 5, "es7-de-verdad", "Тебе говорят: что ответишь?", "Mañana me voy a vivir a Madrid.", "¿De verdad? ¡Qué bien!", ["¿Verdad de? ¡Qué bien!", "¿Es de verdad de? ¡Qué bien!"], "Удивление — **¿De verdad?**", "de verdad"],
+  ["conector", "elegir", 7, "es7-a-la-vez", "Что подходит?", "Trabajo y estudio ___: estoy muy cansado.", "a la vez", ["entonces", "porque"], "**a la vez** — «одновременно».", "a la vez"],
+  ["situacion-frase", "elegir", 8, "es7-amor", "Ты заканчиваешь письмо близкой подруге.", "", "Con cariño, Ana.", ["De cariño, Ana.", "Por cariño, Ana."], "**con cariño** — «с любовью».", "cariño"],
+  ["relacion", "elegir", 8, "es7-amor", "Что подходит?", "Para mí, el ___ es muy importante.", "amor", ["amiga", "vecina"], "**el amor** — мужской род: **el amor**.", "amor"],
+  ["plan", "elegir", 1, "es7-juntos", "Что подходит?", "Ana y Lucía siempre van ___ al cine.", "juntas", ["juntos", "junto"], "Две женщины — **juntas**.", "junto"],
+  ["situacion-frase", "elegir", 1, "es7-juntos", "Ты предлагаешь другу пойти вместе.", "", "¿Vamos juntos?", ["¿Vamos junto?", "¿Vamos juntas?"], "С другом (мужчиной) — **juntos**.", "junto"],
+  ["respuesta", "elegir", 2, "es7-tal-vez", "Тебе говорят: что ответишь?", "¿Vienes a la fiesta el sábado?", "Tal vez, no lo sé.", ["Tal vez de, no lo sé.", "Tal ves, no lo sé."], "**tal vez** — «может быть»; пишется с **z**.", "tal vez"],
+  ["plan", "elegir", 2, "es7-tal-vez", "Что подходит?", "Hoy tengo mucho trabajo: ___ voy más tarde.", "tal vez", ["por supuesto", "genial"], "Неуверенность — **tal vez**.", "tal vez"],
+];
+(function () {
+  const M = id => UNIDAD_ES_7.modulos.find(m => m.id === id);
+  ES7_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es7Basicas(out, baraja, lex) {
+  ES7_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES7-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (tipo === "respuesta") ex.audio = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

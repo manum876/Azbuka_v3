@@ -740,6 +740,7 @@ window.unidadEs5Modulo = unidadEs5Modulo;
 const ES5_ID_FIJO = { "frío": "ESP-00657", "poco": "ESP-00120", "demasiado": "ESP-05191", "efectivo": "ESP-05452", "helado": "ESP-01432", "mil": "ESP-00461", "segundo": "ESP-00258", "solo": "ESP-05178",
   "lo": "ESP-00025", "la": "ESP-00599", "los": "ESP-00885", "las": "ESP-01288" };
 function es5Id(w) {
+  if (/^ESP-\d+$/.test(w)) return w;   /* id directo, para palabras con dos entradas (19/11/2026) */
   if (ES5_ID_FIJO[w]) return ES5_ID_FIJO[w];
   if (typeof LEXICON_ES === "undefined") return null;
   const mayus = /^[A-ZÁÉÍÓÚÑ]/.test(w);
@@ -907,7 +908,7 @@ function ejerciciosUnidadEs5() {
     out.push(x);
   };
   UNIDAD_ES_5.modulos.forEach(m => {
-    (m.vocab || []).forEach(w => { const id = es5Id(w); if (id && OBJ.has(id)) dictado(w, id, m.n); });
+    (m.vocab || []).forEach(w => { const id = es5Id(w); if (id && OBJ.has(id) && !/^ESP-/.test(w)) dictado(w, id, m.n); });   /* un id directo ya tiene el dictado de su gemela */
     if (m.ampliacion) m.ampliacion.vocab.forEach(w => { const id = es5Id(w); if (id) dictado(w, id, m.n, true); });
   });
   /* 14. Situaciones y respuestas; dictado y orden de las frases de la U5 */
@@ -941,6 +942,7 @@ function ejerciciosUnidadEs5() {
 
   /* Profundización (13/11/2026) */
   if (typeof es5Prof === "function") es5Prof(out, baraja, lex);
+  if (typeof es5Basicas === "function") es5Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -1451,3 +1453,84 @@ function es5Prof(out, baraja, lex) {
     preguntas: qs.map(([q, k]) => ({ pide: q, correcta: k })), explicacion: fr + "." }));
 }
 Object.assign(ES5_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1 });
+
+/* ── Palabras básicas sumadas (19/11/2026, Manu) ──
+   Palabras muy frecuentes que ninguna unidad enseñaba (revisión general del 15/11/2026,
+   claude/REVISION_GENERAL_2026-11-15.md §8). Entran en la lista del módulo que les
+   corresponde, con una sección corta de teoría y sus ejercicios; no cambia el orden de
+   los módulos ni lo que ya había. Formato de ES5_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES5_BASICAS_MOD = [
+  ["es5m4", ["ESP-05176", "ESP-00222"], null],   /* mucho y demasiado como adverbio: «trabajo mucho», «es demasiado caro» */
+  ["es5m4", ["alguien", "nadie", "ninguno"], {
+    id: "es5-alguien",
+    titulo: "Alguien, nadie, ninguno",
+    texto: "**algo** и **nada** — «что-то» и «ничего» (о вещах). **alguien** и **nadie** — «кто-то» и «никто» (о людях): **¿Hay alguien en casa? — No, no hay nadie.** После глагола нужно **no**, как в русском «никого **не**т».\n\n**ninguno** — «ни один, никакой». Перед существительным мужского рода — **ningún**, женского — **ninguna**: **No tengo ningún hermano**, **No hay ninguna tienda abierta**.",
+    ejemplos: [
+      { es: "¿Hay alguien en la tienda?", ru: "В магазине кто-нибудь есть?" },
+      { es: "No hay nadie en la oficina.", ru: "В офисе никого нет." },
+      { es: "No hay ninguna tienda abierta.", ru: "Ни один магазин не открыт." }
+    ],
+    errores: [
+      { mal: "Hay nadie.", bien: "No hay nadie.", por: "**nadie** после глагола — с **no**." },
+      { mal: "No tengo ninguno hermano.", bien: "No tengo ningún hermano.", por: "Перед существительным — **ningún**." }
+    ]
+  }],
+  ["es5m7", ["mismo", "cualquiera"], {
+    id: "es5-mismo",
+    titulo: "El mismo · cualquier",
+    texto: "**mismo** — «тот же, такой же», всегда с артиклем: **la misma talla**, **el mismo color**. **cualquiera** — «любой». Перед существительным — **cualquier**: **cualquier color**. Без существительного — **cualquiera**: **— ¿Qué camiseta quieres? — Cualquiera.**",
+    ejemplos: [
+      { es: "Ana y yo tenemos la misma talla.", ru: "У нас с Аней один и тот же размер." },
+      { es: "Puedes llevar cualquier camiseta.", ru: "Можешь надеть любую футболку." }
+    ],
+    errores: [
+      { mal: "Tenemos misma talla.", bien: "Tenemos la misma talla.", por: "**mismo** — с артиклем." }
+    ]
+  }],
+  ["es5m4", ["ESP-00046", "par"], {   /* solo como adverbio: «только» */
+    id: "es5-solo-par",
+    titulo: "Solo · un par de",
+    texto: "**solo** — «только»: **Solo quiero agua** — я хочу только воды. (**un café solo** — другое: «чёрный кофе», без молока.) **un par de** — «пара, несколько»: **un par de botellas** — пара бутылок; **un par de días** — пару дней.",
+    ejemplos: [
+      { es: "Solo tengo diez euros.", ru: "У меня только десять евро." },
+      { es: "Quiero un par de botellas de agua.", ru: "Мне пару бутылок воды." }
+    ]
+  }],
+];
+const ES5_BASICAS = [
+  ["algo-nada", "elegir", 4, "es5-alguien", "Что подходит?", "— ¿Hay ___ en la cocina? — No, no hay nadie.", "alguien", ["algo", "nadie"], "О людях — **alguien**.", "alguien"],
+  ["algo-nada", "elegir", 4, "es5-alguien", "Что подходит?", "— ¿Quién quiere café? — ___. Todos quieren té.", "Nadie", ["Nada", "Alguien"], "О людях — **nadie**, «никто».", "nadie"],
+  ["algo-nada", "elegir", 4, "es5-alguien", "Что подходит?", "No hay ___ en la oficina: todos están en casa.", "nadie", ["nada", "alguien"], "**No hay nadie** — «никого нет».", "nadie"],
+  ["algo-nada", "elegir", 4, "es5-alguien", "Что подходит?", "No tengo ___ hermano.", "ningún", ["ninguno", "ninguna"], "Перед существительным мужского рода — **ningún**.", "ninguno"],
+  ["algo-nada", "elegir", 4, "es5-alguien", "Что подходит?", "No hay ___ tienda abierta.", "ninguna", ["ningún", "nada"], "**la tienda** — женский род: **ninguna**.", "ninguno"],
+  ["error", "elegir", 4, "es5-alguien", "Какая фраза правильная?", "", "No hay nadie.", ["Hay nadie.", "No hay alguien."], "**nadie** после глагола — с **no**.", "nadie"],
+  ["talla", "elegir", 7, "es5-mismo", "Что подходит?", "Ana y yo tenemos la ___ talla.", "misma", ["mismo", "mismas"], "**la talla** — женский род: **la misma**.", "mismo"],
+  ["talla", "elegir", 7, "es5-mismo", "Что подходит?", "Llevo las ___ zapatillas que tú.", "mismas", ["misma", "mismos"], "**las zapatillas**: **las mismas**.", "mismo"],
+  ["talla", "elegir", 7, "es5-mismo", "Что подходит?", "— ¿Qué color quieres? — ___: todos son bonitos.", "Cualquiera", ["Cualquier", "Ninguno"], "Без существительного — **cualquiera**.", "cualquiera"],
+  ["talla", "elegir", 7, "es5-mismo", "Что подходит?", "Puedes llevar ___ camiseta.", "cualquier", ["cualquiera", "misma"], "Перед существительным — **cualquier**.", "cualquiera"],
+  ["mucho", "elegir", 4, "es5-solo-par", "Что подходит?", "No quiero mucho: ___ un poco, por favor.", "solo", ["nada", "demasiado"], "**solo** — «только».", "ESP-00046"],
+  ["mucho-escribir", "escribir", 4, "es5-solo-par", "Впиши слово: «только».", "Tengo ___ diez euros: no puedo comprar más.", "solo", [], "**solo** — «только».", "ESP-00046"],
+  ["cantidad", "elegir", 4, "es5-solo-par", "Что подходит?", "Compro un ___ de botellas de agua.", "par", ["poco", "algo"], "**un par de** — «пара, несколько».", "par"],
+];
+(function () {
+  const M = id => UNIDAD_ES_5.modulos.find(m => m.id === id);
+  ES5_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es5Basicas(out, baraja, lex) {
+  ES5_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES5-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (tipo === "respuesta") ex.audio = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

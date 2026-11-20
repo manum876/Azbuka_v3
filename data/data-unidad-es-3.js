@@ -690,6 +690,7 @@ function ejerciciosUnidadEs3() {
 
   /* Profundización (13/11/2026) */
   if (typeof es3Prof === "function") es3Prof(out, baraja, lex);
+  if (typeof es3Basicas === "function") es3Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -1015,3 +1016,95 @@ function es3Prof(out, baraja, lex) {
     preguntas: qs.map(([q, k]) => ({ pide: q, correcta: k })), explicacion: fr + "." }));
 }
 Object.assign(ES3_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1 });
+
+/* ── Palabras básicas sumadas (19/11/2026, Manu) ──
+   Palabras muy frecuentes que ninguna unidad enseñaba (revisión general del 15/11/2026,
+   claude/REVISION_GENERAL_2026-11-15.md §8). Entran en la lista del módulo que les
+   corresponde, con una sección corta de teoría y sus ejercicios; no cambia el orden de
+   los módulos ni lo que ya había. Formato de ES3_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES3_BASICAS_MOD = [
+  ["es3m2", ["allá"], {
+    id: "es3-alla",
+    titulo: "Allá — там, далеко",
+    texto: "**allá** — «там», как **allí**, но дальше и не так точно: **allá, en Rusia** — «там, в России». В Испании для места, которое видно, обычно говорят **allí**; **allá** — для далёкого.",
+    ejemplos: [
+      { es: "Mi familia está allá, en Moscú.", ru: "Моя семья там, в Москве." },
+      { es: "¿El banco? Está allí, en la plaza.", ru: "Банк? Вон там, на площади.", por: "Место видно — **allí**." }
+    ]
+  }],
+  ["es3m3", ["arriba", "abajo", "junto a", "frente a"], {
+    id: "es3-arriba",
+    titulo: "Arriba, abajo · junto a, frente a",
+    texto: "**encima de** и **debajo de** — «на» и «под» что-то. **arriba** и **abajo** — «наверху» и «внизу» без предмета: в доме, на улице. **junto a** — «рядом с», как **al lado de**; **frente a** — «напротив», как **enfrente de**.",
+    ejemplos: [
+      { es: "Los dormitorios están arriba y la cocina está abajo.", ru: "Спальни наверху, а кухня внизу." },
+      { es: "La silla está junto a la mesa.", ru: "Стул рядом со столом." },
+      { es: "El bar está frente a la farmacia.", ru: "Бар напротив аптеки." }
+    ],
+    errores: [
+      { mal: "El libro está arriba de la mesa.", bien: "El libro está encima de la mesa.", por: "Предмет на предмете — **encima de**. «arriba de» говорят в Латинской Америке." }
+    ]
+  }],
+  ["es3m5", ["sitio"], {
+    id: "es3-sitio",
+    titulo: "El sitio — место",
+    texto: "**el sitio** — «место»: **un sitio bonito**, **un sitio tranquilo**. **No hay sitio** — «нет места» (свободного). В Испании это очень частое слово.",
+    ejemplos: [
+      { es: "Es un sitio muy bonito.", ru: "Это очень красивое место." },
+      { es: "En el bar no hay sitio.", ru: "В баре нет места." }
+    ]
+  }],
+  ["es3m8", ["esto", "mío", "tuyo", "suyo"], {
+    id: "es3-esto-mio",
+    titulo: "Esto · mío, tuyo, suyo",
+    texto: "**esto** и **eso** — «это» о вещи, которую не называют: **¿Qué es esto?** — Что это? Они не меняются и никогда не стоят перед существительным: **este bolso**, но **¿Qué es esto?**\n\n**mío, tuyo, suyo** — «мой, твой, его / её» **без существительного**, чаще всего после **ser**: **— ¿Es tuyo? — Sí, es mío.** Они меняются, как прилагательные: **mío, mía, míos, mías**. Сравни: **mi bolso** — **el bolso es mío**. **nuestro** и **vuestro** одинаковы в обоих случаях: **nuestro piso** — **es nuestro**.",
+    ejemplos: [
+      { es: "¿Qué es esto? — Es un móvil nuevo.", ru: "Что это? — Новый мобильный." },
+      { es: "— ¿Es tuya esta mochila? — Sí, es mía.", ru: "— Это твой рюкзак? — Да, мой.", por: "**la mochila** — женский род: **tuya**, **mía**." },
+      { es: "— ¿Es de Javier el bolso? — Sí, es suyo.", ru: "— Это сумка Хавьера? — Да, его." }
+    ],
+    errores: [
+      { mal: "¿Qué es este?", bien: "¿Qué es esto?", por: "О неизвестной вещи, без существительного — **esto**." },
+      { mal: "— ¿Es tu móvil? — Sí, es mi.", bien: "— ¿Es tu móvil? — Sí, es mío.", por: "Без существительного — **mío**." }
+    ]
+  }]
+];
+const ES3_BASICAS = [
+  ["situacion-frase", "elegir", 2, "es3-alla", "Твоя семья далеко, в Москве. Как сказать?", "", "Mi familia está allá, en Moscú.", ["Mi familia es allá, en Moscú.", "Mi familia hay allá, en Moscú."], "Где находится — **estar**: **está allá**.", "allá"],
+  ["preposicion", "elegir", 3, "es3-arriba", "Что подходит по смыслу?", "Los dormitorios están arriba y la cocina está ___.", "abajo", ["debajo", "detrás"], "Без предмета — **abajo**, «внизу».", "abajo"],
+  ["preposicion", "elegir", 3, "es3-arriba", "Что подходит по смыслу?", "La cocina está abajo y el baño está ___.", "arriba", ["encima", "delante"], "Без предмета — **arriba**, «наверху».", "arriba"],
+  ["preposicion", "elegir", 3, "es3-arriba", "Что подходит по смыслу?", "La silla está ___ la mesa: al lado.", "junto a", ["debajo de", "frente a"], "**junto a** = **al lado de**.", "junto a"],
+  ["preposicion", "elegir", 3, "es3-arriba", "Что подходит по смыслу?", "El bar está ___ el banco: la calle está entre los dos.", "frente a", ["encima de", "dentro de"], "**frente a** = **enfrente de**, «напротив».", "frente a"],
+  ["lugar", "escribir", 5, "es3-sitio", "Какое это слово? Напиши.", "En la cafetería no hay ___: está llena.", "sitio", [], "**No hay sitio** — «нет места».", "sitio"],
+  ["situacion-frase", "elegir", 5, "es3-sitio", "Тебе нравится место в центре. Как сказать?", "", "Es un sitio muy bonito.", ["Es una sitio muy bonito.", "Es un sitio muy bonita."], "**el sitio** — мужской род: **un sitio bonito**.", "sitio"],
+  ["demostrativo", "elegir", 8, "es3-esto-mio", "Что подходит?", "¿Qué es ___? — Es una taza.", "esto", ["este", "esta"], "О неизвестной вещи — **esto**.", "esto"],
+  ["demostrativo", "elegir", 8, "es3-esto-mio", "Что подходит?", "___ bolso es mío.", "Este", ["Esto", "Esta"], "С существительным — **este**; **esto** не стоит перед существительным.", "esto"],
+  ["posesivo", "elegir", 8, "es3-esto-mio", "Что подходит?", "— ¿Es tu móvil? — Sí, es ___.", "mío", ["mi", "mía"], "Без существительного — **mío**; **el móvil** — мужской род.", "mío"],
+  ["posesivo", "elegir", 8, "es3-esto-mio", "Что подходит?", "— ¿Es tu mochila? — Sí, es ___.", "mía", ["mío", "mi"], "**la mochila** — женский род: **mía**.", "mío"],
+  ["posesivo", "elegir", 8, "es3-esto-mio", "Что подходит?", "— ¿Son tuyas estas gafas? — Sí, son ___.", "mías", ["míos", "mis"], "**las gafas** — женский род, множественное число: **mías**.", "mío"],
+  ["posesivo", "elegir", 8, "es3-esto-mio", "Что подходит?", "— Ana, ¿es ___ esta taza? — Sí, es mía.", "tuya", ["tu", "tuyo"], "**la taza** — женский род: **tuya**.", "tuyo"],
+  ["posesivo", "elegir", 8, "es3-esto-mio", "Что подходит?", "— ¿Es de Javier el bolso? — Sí, es ___.", "suyo", ["su", "suya"], "«Его» без существительного — **suyo**; **el bolso** — мужской род.", "suyo"],
+  ["posesivo", "escribir", 8, "es3-esto-mio", "Впиши слово: «твой».", "¿Este móvil es ___?", "tuyo", [], "**el móvil** — мужской род: **tuyo**.", "tuyo"]
+];
+(function () {
+  const M = id => UNIDAD_ES_3.modulos.find(m => m.id === id);
+  ES3_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es3Basicas(out, baraja, lex) {
+  ES3_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES3-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (tipo === "respuesta") ex.audio = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

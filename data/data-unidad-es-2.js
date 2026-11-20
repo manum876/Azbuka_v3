@@ -653,6 +653,7 @@ function ejerciciosUnidadEs2() {
 
   /* Profundización (13/11/2026) */
   if (typeof es2Prof === "function") es2Prof(out, baraja, lex);
+  if (typeof es2Basicas === "function") es2Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -890,3 +891,50 @@ function es2Prof(out, baraja, lex) {
     preguntas: qs.map(([q, k]) => ({ pide: q, correcta: k })), explicacion: fr + "." }));
 }
 Object.assign(ES2_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1 });
+
+/* ── Palabras básicas sumadas (19/11/2026, Manu) ──
+   Palabras muy frecuentes que ninguna unidad enseñaba (revisión general del 15/11/2026,
+   claude/REVISION_GENERAL_2026-11-15.md §8). Entran en la lista del módulo que les
+   corresponde, con una sección corta de teoría y sus ejercicios; no cambia el orden de
+   los módulos ni lo que ya había. Formato de ES2_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES2_BASICAS_MOD = [
+  ["es2m7", ["mamá", "papá", "bebé"], {
+    id: "es2-mama",
+    titulo: "Mamá, papá, el bebé",
+    texto: "**madre** и **padre** — «мать» и «отец». О своих родителях в разговоре обычно говорят **mamá** и **papá** — «мама» и «папа». Ударение на последнем слоге, поэтому пишется знак: **mamá**, **papá**. **El bebé** — «младенец, малыш».",
+    ejemplos: [
+      { es: "Mi mamá es profesora y mi papá es médico.", ru: "Моя мама — учительница, а папа — врач." },
+      { es: "Mi hermana tiene un bebé.", ru: "У моей сестры малыш." }
+    ],
+    ojo: "**mamá** и **papá** — во множественном числе **mamás**, **papás**; **mis papás** иногда значит «мои родители», но в Испании чаще говорят **mis padres**."
+  }]
+];
+const ES2_BASICAS = [
+  ["familia", "escribir", 7, "es2-mama", "Кто это? Напиши слово.", "Mi hermana tiene un hijo de un año: es un ___.", "bebé", [], "**bebé** — «малыш».", "bebé"],
+  ["familia", "escribir", 7, "es2-mama", "Напиши слово, как говорят дома.", "Mi madre y mi padre: mi ___ y mi papá.", "mamá", [], "**mamá** — со знаком ударения на последнем слоге.", "mamá"],
+  ["familia", "escribir", 7, "es2-mama", "Напиши слово, как говорят дома.", "Mi padre y mi madre: mi ___ y mi mamá.", "papá", [], "**papá** — со знаком ударения на последнем слоге.", "papá"],
+  ["situacion-frase", "elegir", 7, "es2-mama", "Ты показываешь фото малыша сестры.", "", "Este es el bebé de mi hermana.", ["Esta es el bebé de mi hermana.", "Este es bebé de mi hermana."], "**el bebé** — мужской род, с артиклем.", "bebé"],
+  ["respuesta", "elegir", 7, "es2-mama", "Тебе говорят: что ответишь?", "¿Quién es?", "Es mi papá.", ["Soy mi papá.", "Es mi papás."], "**Es mi papá.**", "papá"]
+];
+(function () {
+  const M = id => UNIDAD_ES_2.modulos.find(m => m.id === id);
+  ES2_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es2Basicas(out, baraja, lex) {
+  ES2_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES2-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (tipo === "respuesta") ex.audio = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

@@ -810,6 +810,7 @@ function ejerciciosUnidadEs6() {
 
   /* Profundización y formas (13/11/2026) */
   if (typeof es6Prof === "function") es6Prof(out, baraja, lex);
+  if (typeof es6Basicas === "function") es6Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -1236,3 +1237,75 @@ function es6Prof(out, baraja, lex) {
   });
 }
 Object.assign(ES6_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1, "imperativo-forma": 2, "ir-a-forma": 1 });
+
+/* ── Palabras básicas sumadas (19/11/2026, Manu) ──
+   Palabras muy frecuentes que ninguna unidad enseñaba (revisión general del 15/11/2026,
+   claude/REVISION_GENERAL_2026-11-15.md §8). Entran en la lista del módulo que les
+   corresponde, con una sección corta de teoría y sus ejercicios; no cambia el orden de
+   los módulos ni lo que ya había. Formato de ES6_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES6_BASICAS_MOD = [
+  ["es6m2", ["vuelta"], null],
+  ["es6m3", ["a través de"], {
+    id: "es6-a-traves",
+    titulo: "A través de — через",
+    texto: "**a través de** — «через, сквозь»: **Voy al trabajo a través del parque** — иду на работу через парк. **por el parque** значит почти то же; **a través de** подчёркивает, что проходишь насквозь.",
+    ejemplos: [
+      { es: "Voy al trabajo a través del parque.", ru: "Я иду на работу через парк." }
+    ]
+  }],
+  ["es6m4", ["adelante", "atrás", "acercarse"], {
+    id: "es6-adelante",
+    titulo: "Adelante, atrás · acercarse",
+    texto: "**delante** и **detrás** — где: «впереди», «сзади». **adelante** и **atrás** — куда, движение: **Sigue adelante** — иди дальше вперёд; **Vuelve atrás** — вернись назад. **¡Adelante!** — «Входите!», когда стучат в дверь.\n\n**acercarse** — «подходить, приближаться»: **Acércate** — подойди; **Me acerco a la ventana** — я подхожу к окну.",
+    ejemplos: [
+      { es: "Sigue adelante hasta el semáforo.", ru: "Иди дальше вперёд до светофора." },
+      { es: "La plaza no está aquí: vuelve atrás.", ru: "Площадь не здесь: вернись назад." },
+      { es: "Acércate, por favor.", ru: "Подойди, пожалуйста." }
+    ]
+  }],
+  ["es6m8", ["cara", "corazón", "sangre", "sentirse"], {
+    id: "es6-sentirse",
+    titulo: "Me siento mal · la cara, el corazón",
+    texto: "**sentirse** — «чувствовать себя»: **Me siento mal** — мне плохо; **¿Cómo te sientes?** — как ты себя чувствуешь? Корень меняется **e → ie**, как у **querer**: **me siento, te sientes, se siente, nos sentimos, os sentís, se sienten**.\n\nЕщё о теле: **la cara** — лицо, **el corazón** — сердце, **la sangre** — кровь.",
+    ejemplos: [
+      { es: "Hoy me siento mal: me duele la cabeza.", ru: "Сегодня мне плохо: болит голова." },
+      { es: "— ¿Cómo te sientes? — Bien, gracias.", ru: "— Как ты себя чувствуешь? — Хорошо, спасибо." },
+      { es: "Tienes la cara roja: ¿tienes fiebre?", ru: "У тебя красное лицо: у тебя температура?" }
+    ],
+    ojo: "«Я сажусь» тоже звучит **me siento** (от другого глагола). Что имеется в виду, понятно по смыслу."
+  }]
+];
+const ES6_BASICAS = [
+  ["situacion-frase", "elegir", 3, "es6-a-traves", "Ты идёшь на работу через парк.", "", "Voy al trabajo a través del parque.", ["Voy al trabajo a través el parque.", "Voy al trabajo través del parque."], "**a través de** + **el** = **a través del**.", "a través de"],
+  ["situacion-frase", "elegir", 4, "es6-adelante", "Кто-то стучит в дверь, ты разрешаешь войти.", "", "¡Adelante!", ["¡Delante!", "¡Atrás!"], "**¡Adelante!** — «Входите!».", "adelante"],
+  ["imperativo-elegir", "elegir", 4, "es6-adelante", "Что подходит?", "Sigue ___ hasta el puente.", "adelante", ["delante", "atrás"], "Движение вперёд — **adelante**.", "adelante"],
+  ["imperativo-elegir", "elegir", 4, "es6-adelante", "Что подходит?", "La plaza no está aquí: vuelve ___.", "atrás", ["detrás", "adelante"], "Движение назад — **atrás**.", "atrás"],
+  ["imperativo-elegir", "elegir", 4, "es6-adelante", "Что подходит?", "___, Ana: aquí hay sitio.", "Acércate", ["Acerca", "Te acerca"], "Императив с **te**: **acércate**.", "acercarse"],
+  ["cuerpo-escribir", "escribir", 8, "es6-sentirse", "Какая это часть тела? Напиши.", "La nariz y la boca están en la ___.", "cara", [], "**la cara** — «лицо».", "cara"],
+  ["cuerpo", "elegir", 8, "es6-sentirse", "Что подходит?", "El médico escucha el ___.", "corazón", ["pelo", "pie"], "**el corazón** — «сердце».", "corazón"],
+  ["cuerpo", "elegir", 8, "es6-sentirse", "Что подходит?", "La ___ es roja.", "sangre", ["cara", "nariz"], "**la sangre** — «кровь».", "sangre"],
+  ["enfermo", "elegir", 8, "es6-sentirse", "Тебе плохо. Как сказать?", "", "Me siento mal.", ["Siento mal.", "Me siente mal."], "**sentirse**, я — **me siento**.", "sentirse"],
+  ["respuesta", "elegir", 8, "es6-sentirse", "Тебе говорят: что ответишь?", "¿Cómo te sientes hoy?", "Me siento bien, gracias.", ["Siento bien, gracias.", "Me sientes bien, gracias."], "**Me siento bien.**", "sentirse"]
+];
+(function () {
+  const M = id => UNIDAD_ES_6.modulos.find(m => m.id === id);
+  ES6_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es6Basicas(out, baraja, lex) {
+  ES6_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES6-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (tipo === "respuesta") ex.audio = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

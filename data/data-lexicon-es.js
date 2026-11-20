@@ -2256,7 +2256,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [5],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -2349,7 +2349,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -2695,7 +2695,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [12],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -5225,7 +5225,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [5],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -5890,7 +5890,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [5],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -5979,7 +5979,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [4],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -7047,7 +7047,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [5],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -7537,7 +7537,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -8613,7 +8613,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -8705,7 +8705,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [5],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -8790,7 +8790,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [2],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -8962,7 +8962,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [2],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -9811,7 +9811,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [7],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -10299,7 +10299,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [5],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -10567,7 +10567,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -10926,7 +10926,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [4],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -11079,7 +11079,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [7],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -11125,7 +11125,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [6],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -11364,7 +11364,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [7],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -11505,7 +11505,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [5],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -11721,7 +11721,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [4],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -12078,7 +12078,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [7],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -12165,7 +12165,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [7],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -14321,7 +14321,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [6],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -14581,7 +14581,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [12],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -14893,7 +14893,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [12],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -14938,7 +14938,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -14978,7 +14978,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [12],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -15983,7 +15983,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [6],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -16027,7 +16027,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [6],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -16150,7 +16150,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [6],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -16326,7 +16326,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [6],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -16503,7 +16503,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [4],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -16814,7 +16814,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [4],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -17288,7 +17288,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -17508,7 +17508,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -17547,7 +17547,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [7],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -17587,7 +17587,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [6],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -17674,7 +17674,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [2],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -18826,7 +18826,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [12],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -18876,7 +18876,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [4],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -18917,7 +18917,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -19002,7 +19002,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [6],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -19090,7 +19090,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [12],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -19489,7 +19489,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [6],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -19797,7 +19797,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -20025,7 +20025,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [12],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -21196,7 +21196,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [3],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -21904,7 +21904,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [5],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -22332,7 +22332,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [7],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -25725,7 +25725,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [12],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -47590,7 +47590,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [7],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {
@@ -216795,7 +216795,7 @@ const LEXICON_ES = [
     "source": "redactado"
    }
   ],
-  "introducedIn": [],
+  "introducedIn": [5],
   "appearsIn": [],
   "propio": false,
   "sourceRefs": {

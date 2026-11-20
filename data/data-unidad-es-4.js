@@ -850,6 +850,7 @@ function ejerciciosUnidadEs4() {
 
   /* Profundización y formas (13/11/2026) */
   if (typeof es4Prof === "function") es4Prof(out, baraja, lex);
+  if (typeof es4Basicas === "function") es4Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -1274,3 +1275,84 @@ function es4Prof(out, baraja, lex) {
   });
 }
 Object.assign(ES4_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1, "presente-forma": 2, "gerundio-forma": 1 });
+
+/* ── Palabras básicas sumadas (19/11/2026, Manu) ──
+   Palabras muy frecuentes que ninguna unidad enseñaba (revisión general del 15/11/2026,
+   claude/REVISION_GENERAL_2026-11-15.md §8). Entran en la lista del módulo que les
+   corresponde, con una sección corta de teoría y sus ejercicios; no cambia el orden de
+   los módulos ni lo que ya había. Formato de ES4_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES4_BASICAS_MOD = [
+  ["es4m3", ["después de"], null],
+  ["es4m2", ["a tiempo", "más o menos"], {
+    id: "es4-a-tiempo",
+    titulo: "A tiempo · más o menos",
+    texto: "**a tiempo** — «вовремя»: **Llego a tiempo**. **más o menos** — «примерно»: **Son más o menos las tres** — сейчас примерно три часа. И в ответ на **¿Qué tal?**: **Más o menos** — «так себе».",
+    ejemplos: [
+      { es: "El tren llega a tiempo.", ru: "Поезд приходит вовремя." },
+      { es: "Son más o menos las cinco.", ru: "Сейчас примерно пять часов." }
+    ]
+  }],
+  ["es4m5", ["irse"], {
+    id: "es4-irse",
+    titulo: "Irse — уходить",
+    texto: "**ir** — «идти, ехать» куда-то. **irse** — «уходить, уезжать» откуда-то. Формы — как у **ir**, с **me, te, se…**: **me voy, te vas, se va, nos vamos, os vais, se van**. **¡Me voy!** — «Я пошёл!»",
+    ejemplos: [
+      { es: "Me voy. ¡Hasta mañana!", ru: "Я ухожу. До завтра!" },
+      { es: "¿A qué hora te vas de casa?", ru: "Во сколько ты уходишь из дома?" },
+      { es: "Javier se va a las seis.", ru: "Хавьер уходит в шесть." }
+    ],
+    errores: [
+      { mal: "Voy. ¡Hasta mañana!", bien: "Me voy. ¡Hasta mañana!", por: "Когда уходишь — **me voy**." }
+    ]
+  }],
+  ["es4m8", ["de momento"], {
+    id: "es4-de-momento",
+    titulo: "De momento — пока",
+    texto: "**de momento** — «пока, на данный момент»: **De momento vivo en Barcelona** — пока живу в Барселоне (потом может быть по-другому). Часто с **estar** + герундий: **De momento estoy trabajando en casa**.",
+    ejemplos: [
+      { es: "De momento vivo en Barcelona.", ru: "Пока я живу в Барселоне." },
+      { es: "De momento estoy estudiando español.", ru: "Пока я учу испанский." }
+    ]
+  }],
+  ["es4m6", ["cielo"], {
+    id: "es4-cielo",
+    titulo: "El cielo — небо",
+    texto: "**el cielo** — «небо»: **El cielo está azul**, **El cielo está gris**. В разговоре **mi cielo** — ласковое обращение, как «солнышко».",
+    ejemplos: [
+      { es: "Hoy hace sol y el cielo está azul.", ru: "Сегодня солнечно, и небо голубое." }
+    ]
+  }],
+];
+const ES4_BASICAS = [
+  ["situacion-frase", "elegir", 2, "es4-a-tiempo", "Ты не знаешь точное время, только примерно.", "", "Son más o menos las cinco.", ["Es más o menos las cinco.", "Son las cinco más o menos de."], "**Son más o menos las cinco.**", "más o menos"],
+  ["respuesta", "elegir", 2, "es4-a-tiempo", "Тебе говорят: что ответишь?", "¿Llegas tarde?", "No, llego a tiempo.", ["No, llego en tiempo.", "No, llego al tiempo."], "**a tiempo** — «вовремя».", "a tiempo"],
+  ["situacion-frase", "elegir", 5, "es4-irse", "Ты уходишь и прощаешься.", "", "Me voy. ¡Hasta mañana!", ["Voy. ¡Hasta mañana!", "Se voy. ¡Hasta mañana!"], "Когда уходишь — **me voy**.", "irse"],
+  ["reflexivo", "elegir", 5, "es4-irse", "Что подходит?", "¿A qué hora ___ (tú) de casa?", "te vas", ["vas", "se va"], "**irse**, ты — **te vas**.", "irse"],
+  ["reflexivo", "elegir", 5, "es4-irse", "Что подходит?", "Es tarde: nosotros ___. ¡Adiós!", "nos vamos", ["vamos", "se van"], "**irse**, мы — **nos vamos**.", "irse"],
+  ["reflexivo", "escribir", 5, "es4-irse", "Впиши форму глагола «irse».", "Lucía ___ a las nueve.", "se va", [], "**irse**, она — **se va**.", "irse"],
+  ["situacion-frase", "elegir", 8, "es4-de-momento", "Пока, на время, ты живёшь в Барселоне.", "", "De momento vivo en Barcelona.", ["En momento vivo en Barcelona.", "Del momento vivo en Barcelona."], "**de momento** — «пока».", "de momento"],
+  ["tiempo", "elegir", 6, "es4-cielo", "Что подходит?", "Hoy no hace sol: el ___ está gris.", "cielo", ["sol", "viento"], "**el cielo** — «небо».", "cielo"],
+  ["tiempo-escribir", "escribir", 6, "es4-cielo", "Какое это слово? Напиши.", "Hace sol y el ___ está azul.", "cielo", [], "**el cielo** — «небо».", "cielo"],
+];
+(function () {
+  const M = id => UNIDAD_ES_4.modulos.find(m => m.id === id);
+  ES4_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es4Basicas(out, baraja, lex) {
+  ES4_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES4-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (tipo === "respuesta") ex.audio = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

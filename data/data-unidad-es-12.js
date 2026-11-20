@@ -740,6 +740,7 @@ function ejerciciosUnidadEs12() {
   });
   /* 10. Profundización y formas */
   es12Prof(out, baraja, lex);
+  if (typeof es12Basicas === "function") es12Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -1174,3 +1175,66 @@ function es12Prof(out, baraja, lex) {
   });
 }
 UNIDAD_ES_12.modulos.forEach(m => (m.secciones || []).forEach(s => { if (ES12_MAS[s.id] && !s.mas) s.mas = ES12_MAS[s.id]; }));
+
+/* ── Palabras básicas sumadas (19/11/2026, Manu) ──
+   Palabras muy frecuentes que ninguna unidad enseñaba (revisión general del 15/11/2026,
+   claude/REVISION_GENERAL_2026-11-15.md §8). Entran en la lista del módulo que les
+   corresponde, con una sección corta de teoría y sus ejercicios; no cambia el orden de
+   los módulos ni lo que ya había. Formato de ES12_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES12_BASICAS_MOD = [
+  ["es12m4", ["así", "además de", "a pesar de", "a partir de", "modo", "así como"], {
+    id: "es12-a-pesar",
+    titulo: "A pesar de, además de, a partir de · así",
+    texto: "**a pesar de** + существительное или инфинитив — «несмотря на»: **A pesar de la lluvia, salimos** — то же, что **aunque llueve, salimos**. **además de** — «кроме, помимо»: **Además de inglés, hablo español**. **a partir de** — «начиная с»: **a partir del lunes**. **así como** — «а также» (в письменной речи).\n\n**así** — «так, таким образом»: **Lo hago así**; **Así es** — «Именно так». **el modo** — «способ»: **de este modo** — «таким образом», **de todos modos** — «всё равно, в любом случае».",
+    ejemplos: [
+      { es: "A pesar de la lluvia, salimos a la calle.", ru: "Несмотря на дождь, мы вышли на улицу.", por: "После **a pesar de** — существительное; с глаголом в личной форме — **aunque**." },
+      { es: "Además de trabajar, estudio por la tarde.", ru: "Кроме работы, я учусь по вечерам." },
+      { es: "A partir del lunes, la tienda abre a las diez.", ru: "С понедельника магазин открывается в десять." },
+      { es: "No sé si es verdad, pero de todos modos voy a ir.", ru: "Не знаю, правда ли это, но я всё равно пойду." }
+    ],
+    errores: [
+      { mal: "A pesar de llueve, salimos.", bien: "Aunque llueve, salimos.", por: "С глаголом в личной форме — **aunque**; **a pesar de** — с существительным или инфинитивом." }
+    ]
+  }],
+  ["es12m8", ["en contra de", "a favor de"], {
+    id: "es12-en-contra",
+    titulo: "A favor de, en contra de",
+    texto: "**estar a favor de** — «быть за», **estar en contra de** — «быть против»: **Estoy a favor de esta idea**, **Estoy en contra de esta idea**. Без существительного — **a favor**, **en contra**: **Yo estoy en contra**.",
+    ejemplos: [
+      { es: "Muchos vecinos están en contra de la nueva ley.", ru: "Многие соседи против нового закона." },
+      { es: "La mayoría está a favor de reciclar.", ru: "Большинство — за переработку мусора." }
+    ]
+  }]
+];
+const ES12_BASICAS = [
+  ["conector", "elegir", 4, "es12-a-pesar", "Что подходит?", "___ la lluvia, salimos a la calle.", "A pesar de", ["Aunque", "Por eso"], "С существительным — **a pesar de**; **aunque** — с глаголом.", "a pesar de"],
+  ["conector", "elegir", 4, "es12-a-pesar", "Что подходит?", "___ trabajar, estudio por la tarde.", "Además de", ["A pesar de", "Así que"], "**además de** — «кроме, помимо».", "además de"],
+  ["conector", "elegir", 4, "es12-a-pesar", "Что подходит?", "___ el lunes, la tienda abre a las diez.", "A partir de", ["A pesar de", "Además de"], "**a partir de** — «начиная с».", "a partir de"],
+  ["conector", "elegir", 4, "es12-a-pesar", "Что подходит?", "No sé si es verdad, pero de todos ___ voy a ir.", "modos", ["modo", "formas"], "**de todos modos** — «всё равно».", "modo"],
+  ["conector", "elegir", 4, "es12-a-pesar", "Что подходит?", "Para el país es importante la salud, ___ la educación.", "así como", ["así que", "a pesar de"], "**así como** — «а также».", "así como"],
+  ["respuesta", "elegir", 4, "es12-a-pesar", "Тебе говорят: что ответишь?", "Entonces, ¿primero lo pienso y después lo hago?", "Sí, así es.", ["Sí, así que.", "Sí, como así."], "**Así es** — «Именно так».", "así"],
+  ["opinion", "elegir", 8, "es12-en-contra", "Что подходит?", "No estoy de acuerdo: estoy ___ esa idea.", "en contra de", ["contra de", "en contra"], "Перед существительным — **en contra de**.", "en contra de"],
+  ["opinion", "elegir", 8, "es12-en-contra", "Что подходит?", "Me parece una idea muy buena: estoy ___ ella.", "a favor de", ["en contra de", "contra de"], "«За» — **a favor de**.", "a favor de"],
+];
+(function () {
+  const M = id => UNIDAD_ES_12.modulos.find(m => m.id === id);
+  ES12_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es12Basicas(out, baraja, lex) {
+  ES12_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES12-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (tipo === "respuesta") ex.audio = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}
