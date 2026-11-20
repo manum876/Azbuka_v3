@@ -165,7 +165,8 @@ const UNIDAD_ES_8 = {
         }
       ],
       dialogos: ["DLE-037"],
-      vocab: ["ya", "todavía", "alguna vez", "nunca", "romper", "descubrir", "morir"]
+      frases: ["alguna vez"],
+      vocab: ["ya", "todavía", "nunca", "romper", "descubrir", "morir"]
     },
     {
       id: "es8m3", n: 3, tipo: "leccion",
@@ -264,8 +265,7 @@ const UNIDAD_ES_8 = {
             { pide: "Ayer ___ a Pablo en la calle. (yo, ver)", opciones: ["vi", "ví", "veí"], ok: "vi", por: "**vi** — без знака ударения." }
           ]
         }
-      ],
-      vocab: []
+      ]
     },
     {
       id: "es8m5", n: 5, tipo: "leccion",
@@ -358,8 +358,7 @@ const UNIDAD_ES_8 = {
             texto: "О том, что случилось несколько минут назад, в Испании почти всегда говорят perfecto: **¿Qué ha pasado?** — что случилось? **Se ha roto el vaso.** — стакан разбился."
           }
         }
-      ],
-      vocab: []
+      ]
     },
     {
       id: "es8m7", n: 7, tipo: "leccion",
@@ -441,7 +440,8 @@ const UNIDAD_ES_8 = {
         }
       ],
       dialogos: ["DLE-038"],
-      vocab: ["después", "luego", "entonces", "al final", "por fin", "otra vez", "maleta", "equipaje", "vuelo", "pasaporte", "excursión", "turista", "extranjero", "pueblo", "alojarse", "sacar", "bañarse"],
+      frases: ["al final", "por fin", "otra vez"],
+      vocab: ["después", "luego", "entonces", "maleta", "equipaje", "vuelo", "pasaporte", "excursión", "turista", "extranjero", "pueblo", "alojarse", "sacar", "bañarse", "fin"],
       ampliacion: {
         titulo: "Ещё о поездках",
         intro: "Ещё два слова. Они не входят в проверку урока. **recorrer** — объехать: **Recorrimos el país en coche.** **jamás** — никогда (сильнее, чем **nunca**): **Jamás he visto una ciudad tan bonita.**",

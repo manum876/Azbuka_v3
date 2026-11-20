@@ -126,8 +126,8 @@ const UNIDAD_ES_3 = {
           ]
         }
       ],
-      frases: ["FRE-050", "FRE-051", "FRE-052"],
-      vocab: ["estar", "aquí", "ahí", "allí", "cerca", "lejos", "cerca de", "lejos de"],
+      frases: ["FRE-050", "FRE-051", "FRE-052", "cerca de", "lejos de"],
+      vocab: ["estar", "aquí", "ahí", "allí", "cerca", "lejos"],
       dialogos: ["DLE-011"]
     },
     {
@@ -178,8 +178,8 @@ const UNIDAD_ES_3 = {
           ]
         }
       ],
-      frases: ["FRE-053", "FRE-054"],
-      vocab: ["en", "de", "a", "al", "del", "encima", "debajo", "delante", "detrás", "lado", "entre", "dentro", "fuera", "enfrente", "izquierda", "derecha", "encima de", "debajo de", "delante de", "detrás de", "al lado de", "dentro de", "fuera de", "a la izquierda", "a la derecha"],
+      frases: ["FRE-053", "FRE-054", "encima de", "debajo de", "delante de", "detrás de", "al lado de", "dentro de", "fuera de", "a la izquierda", "a la derecha", "junto a"],
+      vocab: ["en", "de", "a", "al", "del", "encima", "debajo", "delante", "detrás", "lado", "entre", "dentro", "fuera", "enfrente", "izquierda", "derecha"],
       dialogos: ["DLE-013"]
     },
     {
@@ -1033,7 +1033,7 @@ const ES3_BASICAS_MOD = [
       { es: "¿El banco? Está allí, en la plaza.", ru: "Банк? Вон там, на площади.", por: "Место видно — **allí**." }
     ]
   }],
-  ["es3m3", ["arriba", "abajo", "junto a", "frente a"], {
+  ["es3m3", ["arriba", "abajo", "frente a"], {
     id: "es3-arriba",
     titulo: "Arriba, abajo · junto a, frente a",
     texto: "**encima de** и **debajo de** — «на» и «под» что-то. **arriba** и **abajo** — «наверху» и «внизу» без предмета: в доме, на улице. **junto a** — «рядом с», как **al lado de**; **frente a** — «напротив», как **enfrente de**.",
@@ -1091,7 +1091,7 @@ const ES3_BASICAS = [
   const M = id => UNIDAD_ES_3.modulos.find(m => m.id === id);
   ES3_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
     const m = M(id); if (!m) return;
-    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));   /* sin palabras, no se crea una lista vacía («Слова (0)») */
     if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
   });
 })();

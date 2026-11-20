@@ -239,7 +239,7 @@ function azBuscarEs(query, pos) {
   const qe = azNormEs(raw), qr = azNormRu(raw.toLowerCase()), qn = qe.replace(/ñ/g, "n");
   const posOk = Array.isArray(pos) ? (p => pos.includes(p)) : (p => !pos || p === pos);
   const inicio = new RegExp("(^|[^a-zа-яё0-9])" + qr.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i");
-  const hall = [];
+  const hall = [], frasesHall = [];
   LEXICON_ES.forEach(e => {
     if (!posOk(e.posNormalized)) return;
     const w = azNormEs(e.es), fe = e.femenino && e.femenino.es ? azNormEs(e.femenino.es) : "";
@@ -255,8 +255,21 @@ function azBuscarEs(query, pos) {
       else if (wn.includes(qn)) r = 3; else if (tr.includes(qr)) r = 4; else if (tf && tf.includes(qr)) { r = 4; fem = true; }
     }
     if (r >= 0) hall.push({ e, r, fem });
+    /* Frases de la palabra (20/11/2026): «por suerte» → la ficha de suerte con la frase resaltada */
+    (e.frases || []).forEach(f => {
+      const fn = azNormEs(f.es).replace(/ñ/g, "n");
+      let rf = -1;
+      if (fn === qn) rf = 0; else if (qn.length >= 3 && fn.startsWith(qn)) rf = 1;
+      else if (qn.length >= 3 && fn.includes(qn) && / /.test(qn)) rf = 3;
+      else if (qr.length >= 3 && inicio.test(azNormRu((f.ru || "").toLowerCase()))) rf = 2;
+      if (rf >= 0) frasesHall.push({ e, f, r: rf });
+    });
   });
   hall.sort((a, b) => a.r - b.r);
+  frasesHall.sort((a, b) => a.r - b.r);
+  const frasesRes = frasesHall.slice(0, 10).map(({ e, f, r }) => ({ id: e.id, ru: f.es, acento: f.es, forma: f.es,
+    es: f.ru + " · фраза: " + e.es, pos: e.posNormalized, gender: null, exacta: r === 0,
+    href: "ficha.html?id=" + e.id + "&fr=" + encodeURIComponent(f.es) }));
   const palabras = hall.slice(0, 40).map(({ e, fem, r }) => {
     const tr = (e.senses || []).map(x => x.ru).join(" · ");
     const pal = fem ? e.femenino.es : e.es;
@@ -287,7 +300,7 @@ function azBuscarEs(query, pos) {
     });
   } else if (pos !== "verbo") azCargarFormasEs();
   const exactas = palabras.filter(p => p.exacta);
-  return exactas.concat(formas, formasPal, palabras.filter(p => !p.exacta)).slice(0, 40);
+  return frasesRes.filter(p => p.exacta).concat(exactas, formas, formasPal, frasesRes.filter(p => !p.exacta && p.ru.length), palabras.filter(p => !p.exacta)).slice(0, 40);
 }
 let AZ_FES_NORM = null;
 /* Una forma escrita → [{ id, k }] de data-formas-es.js. Con tilde, la tilde

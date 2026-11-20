@@ -921,7 +921,7 @@ const ES2_BASICAS = [
   const M = id => UNIDAD_ES_2.modulos.find(m => m.id === id);
   ES2_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
     const m = M(id); if (!m) return;
-    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));   /* sin palabras, no se crea una lista vacía («Слова (0)») */
     if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
   });
 })();

@@ -41,7 +41,9 @@ DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "fuisteis
        "avisarme": "ESP-01326", "ayudarla": "ESP-00164", "buscarte": "ESP-00176", "escríbeles": "ESP-00321", "informarles": "ESP-01130",
        "llámame": "ESP-00094", "rellénelo": "ESP-04055", "venga": "ESP-00074", "tanto": "ESP-00196",
        # U12 (14/11/2026)
-       "embargo": "ESP-00218", "dile": "ESP-00024", "dártelos": "ESP-00059", "déjame": "ESP-00073", "pensarlo": "ESP-00072", "usarlas": "ESP-00205", "venderlo": "ESP-00423"}
+       "embargo": "ESP-00218", "dile": "ESP-00024", "dártelos": "ESP-00059", "déjame": "ESP-00073", "pensarlo": "ESP-00072", "usarlas": "ESP-00205", "venderlo": "ESP-00423",
+       # U13 (20/11/2026)
+       "visto": "ESP-00034", "equivocarme": "ESP-00802", "oírlo": "ESP-00131", "quedarme": "ESP-00225"}
 # Nombres propios de varias palabras que no están en el léxico (sus palabras no se enlazan)
 PROPIOS_VARIAS = ["Buenos Aires"]
 # Nombres de personas (no van al léxico). Los países y las ciudades sí: con mayúscula se usa la entrada propia.
@@ -280,7 +282,12 @@ FRASES = [
     ["FRE-155", "opinar", "¡Qué va!", "Да ну! / Ничего подобного!", "", "Разговорное «нет, это не так»: **—¿Estás cansado? —¡Qué va!**", 12],
     ["FRE-156", "opinar", "Depende.", "Смотря как. / Зависит от обстоятельств.", "", "Когда не можешь ответить ни «да», ни «нет». С продолжением: **Depende del precio.**", 12],
     ["FRE-157", "opinar", "¡Hombre, claro!", "Ну конечно!", "", "Горячо согласиться. **hombre** здесь — не «мужчина», а восклицание; так говорят и женщинам.", 12],
-    ["FRE-158", "opinar", "Yo lo veo de otra manera.", "Я смотрю на это иначе.", "", "Вежливо не согласиться, не говоря «ты не прав».", 12]
+    ["FRE-158", "opinar", "Yo lo veo de otra manera.", "Я смотрю на это иначе.", "", "Вежливо не согласиться, не говоря «ты не прав».", 12],
+    ["FRE-159", "contar", "¡No me digas!", "Да ты что! / Не может быть!", "", "Удивиться новости собеседника. Это не просьба молчать: так реагируют на интересный рассказ.", 13],
+    ["FRE-160", "contar", "¡Qué fuerte!", "Ничего себе! / Вот это да!", "tú", "Очень разговорное (Испания): удивление или возмущение. Только с друзьями.", 13],
+    ["FRE-161", "contar", "¡Menos mal!", "Слава богу! / Хорошо ещё, что…", "", "Облегчение: всё кончилось хорошо. **Menos mal que** + обычное время: **Menos mal que llegaste.**", 13],
+    ["FRE-162", "contar", "¡Quién lo iba a decir!", "Кто бы мог подумать!", "", "Когда случилось то, чего никто не ожидал.", 13],
+    ["FRE-163", "despedirse", "Ya te contaré.", "Потом расскажу.", "", "Обещание рассказать новости позже. Часто в конце разговора или сообщения.", 13]
 ]
 
 # Diálogos: [id, título ruso, título español, personajes, [[p, es, ru, obs?, deletreo?], …]]
@@ -813,7 +820,52 @@ DIALOGOS = [
         ["lucia", "No exageres. ¿A quién le interesan tus fotos de la playa?", "Не преувеличивай. Кому интересны твои фотографии с пляжа?"],
         ["ana", "No es por las fotos, es por los datos. La privacidad es importante para mí.", "Дело не в фотографиях, а в данных. Конфиденциальность для меня важна.", "**por** — причина; **para mí** — для меня."],
         ["lucia", "Yo lo veo de otra manera: lo importante es usarlas bien.", "Я смотрю на это иначе: главное — пользоваться ими с умом.", "**lo importante** — «главное, важное»."],
-        ["ana", "En conclusión, cada una hace lo que quiere. ¡Y seguimos siendo amigas!", "В общем, каждая делает что хочет. И мы остаёмся подругами!"]], 12, "opinion"]
+        ["ana", "En conclusión, cada una hace lo que quiere. ¡Y seguimos siendo amigas!", "В общем, каждая делает что хочет. И мы остаёмся подругами!"]], 12, "opinion"],
+    ["DLE-060", "Никогда такого не видела!", "¡Nunca lo había visto!", ["ana", "lucia"], [
+        ["lucia", "Ana, ¿qué tal el fin de semana en la playa?", "Аня, как прошли выходные на пляже?"],
+        ["ana", "¡Precioso! Nunca había visto el mar en invierno.", "Чудесно! Я никогда раньше не видела море зимой.", "**nunca había visto** — «никогда раньше не видела»: pluscuamperfecto."],
+        ["lucia", "¿En serio? ¿No habías ido nunca a la playa en enero?", "Серьёзно? Ты никогда не ездила на пляж в январе?"],
+        ["ana", "No. En Rusia, en invierno el mar está helado. Aquí había gente en la playa tomando el sol.", "Нет. В России зимой море замёрзшее. А здесь люди были на пляже и загорали.", "**había gente** — imperfecto: фон, описание."],
+        ["lucia", "¿Y te bañaste?", "А ты купалась?"],
+        ["ana", "¡Qué va! Cuando llegué, el sol ya se había ido y hacía mucho frío.", "Да нет! Когда я приехала, солнце уже ушло и было очень холодно.", "**se había ido** — это случилось раньше, чем **llegué**."],
+        ["lucia", "¡Qué pena! Pero volverás en verano, ¿no?", "Жаль! Но ты вернёшься летом, правда?"],
+        ["ana", "Seguramente. Me di cuenta de que me encanta esa zona.", "Наверняка. Я поняла, что мне очень нравятся эти места.", "**darse cuenta de que** — понять, заметить."]], 13, "pasado"],
+    ["DLE-061", "Что она тебе сказала?", "¿Qué te dijo?", ["lucia", "pablo"], [
+        ["lucia", "Pablo, ¿has hablado con Marta? ¿Qué te dijo?", "Пабло, ты говорил с Мартой? Что она тебе сказала?"],
+        ["pablo", "Me llamó anoche. Me dijo que estaba muy cansada y que no vendría a la cena.", "Она позвонила мне вчера вечером. Сказала, что очень устала и не придёт на ужин.", "**estaba** (estoy), **vendría** (vendré): после **dijo** время сдвигается."],
+        ["lucia", "¡No me digas! ¿Y por qué?", "Да ты что! А почему?"],
+        ["pablo", "Me explicó que había trabajado doce horas.", "Она объяснила, что проработала двенадцать часов.", "**había trabajado** — «He trabajado» в прошлом становится pluscuamperfecto."],
+        ["lucia", "¡Qué fuerte! ¿Y te preguntó algo?", "Ничего себе! А она что-нибудь спрашивала?"],
+        ["pablo", "Sí, me preguntó si podíamos quedar al día siguiente.", "Да, спросила, можем ли мы встретиться на следующий день.", "**me preguntó si** — «спросила, …ли»; **mañana** → **al día siguiente**."],
+        ["lucia", "¿Y qué le dijiste?", "А ты что ей сказал?"],
+        ["pablo", "Que sí, claro. Ya te contaré.", "Что да, конечно. Потом расскажу."]], 13, "pasado"],
+    ["DLE-062", "Мне немного одиноко", "Me siento un poco sola", ["ana", "marta"], [
+        ["marta", "Ana, te veo triste. ¿Qué te pasa?", "Аня, ты какая-то грустная. Что с тобой?"],
+        ["ana", "No sé… Me siento un poco sola. Echo de menos a mi familia.", "Не знаю… Мне немного одиноко. Я скучаю по семье.", "**echar de menos** — скучать по кому-то."],
+        ["marta", "Te entiendo. Cuando llegué de Argentina, me pasó lo mismo.", "Я тебя понимаю. Когда я приехала из Аргентины, со мной было то же самое."],
+        ["ana", "¿De verdad? Pero tú hablas español.", "Правда? Но ты же говоришь по-испански."],
+        ["marta", "Sí, pero todo era diferente: las costumbres, los horarios, el acento… Al principio me ponía nerviosa con cualquier cosa.", "Да, но всё было другим: обычаи, распорядок, акцент… Сначала я нервничала из-за любой мелочи.", "**me ponía nerviosa** — **ponerse** + прилагательное: «становиться»."],
+        ["ana", "¿Y cómo lo superaste?", "И как ты с этим справилась?"],
+        ["marta", "Poco a poco. Hice amigos, empecé un curso… Hay que darse tiempo para adaptarse.", "Постепенно. Завела друзей, пошла на курсы… Нужно дать себе время привыкнуть."],
+        ["ana", "Gracias, Marta. Me da mucha esperanza oírlo.", "Спасибо, Марта. Мне очень приятно это слышать — даёт надежду."]], 13, "conocer"],
+    ["DLE-063", "Виноград в новогоднюю ночь", "Las uvas de Nochevieja", ["lucia", "ana"], [
+        ["lucia", "Ana, ¿dónde vas a pasar la Nochevieja?", "Аня, где ты будешь встречать Новый год?"],
+        ["ana", "Todavía no lo sé. ¿Es verdad que aquí coméis uvas?", "Ещё не знаю. Правда, что здесь едят виноград?"],
+        ["lucia", "Sí, doce uvas, una cada vez que suena el reloj a las doce. Si las comes todas, tendrás suerte todo el año.", "Да, двенадцать виноградин, по одной на каждый удар часов в полночь. Если съешь все, весь год будет везти.", "**si las comes, tendrás** — si + presente, futuro."],
+        ["ana", "¡Qué divertido! En Rusia el gran día es el Año Nuevo, con regalos.", "Как весело! В России главный день — Новый год, с подарками."],
+        ["lucia", "Aquí los regalos los traen los Reyes, el 6 de enero.", "А здесь подарки приносят короли-волхвы, 6 января.", "**los Reyes (Magos)** — праздник 6 января."],
+        ["ana", "¡Quién lo iba a decir! ¿Y qué hacéis ese día?", "Кто бы мог подумать! А что вы делаете в этот день?"],
+        ["lucia", "Comemos el roscón con la familia. Ven a mi casa, si quieres.", "Едим с семьёй сладкий пирог «roscón». Приходи ко мне, если хочешь."],
+        ["ana", "¡Me encantaría! Y para Nochevieja, ¿me ayudas con las uvas?", "С удовольствием! А в новогоднюю ночь поможешь мне с виноградом?"]], 13, "planes"],
+    ["DLE-064", "Год в Барселоне", "Un año en Barcelona", ["javier", "ana"], [
+        ["javier", "Ana, ya llevas un año en Barcelona. ¿Cómo ha sido?", "Аня, ты уже год в Барселоне. Как всё было?"],
+        ["ana", "Al principio fue duro. Cuando llegué, no había hablado nunca con un español.", "Сначала было тяжело. Когда я приехала, я ни разу не говорила с испанцем.", "**no había hablado nunca** — до приезда: pluscuamperfecto."],
+        ["javier", "Me acuerdo: el primer día me dijiste que no entendías nada.", "Я помню: в первый день ты сказала мне, что ничего не понимаешь.", "**me dijiste que no entendías** — «No entiendo nada» в прошлом."],
+        ["ana", "¡Es verdad! Ahora hablo con todo el mundo y me siento en casa.", "Это правда! Теперь я разговариваю со всеми и чувствую себя как дома."],
+        ["javier", "¿Qué es lo que más te ha ayudado?", "Что тебе больше всего помогло?"],
+        ["ana", "La gente. Y no tener miedo a equivocarme.", "Люди. И то, что я не боялась ошибаться."],
+        ["javier", "¿Y qué planes tienes ahora?", "А какие у тебя теперь планы?"],
+        ["ana", "Me gustaría quedarme. Cuando tenga el carné de conducir, buscaré trabajo fuera de la ciudad.", "Я бы хотела остаться. Когда получу права, поищу работу за городом.", "**cuando tenga** — cuando + subjuntivo о будущем."]], 13, "conocer"]
 
 ]
 
@@ -831,6 +883,7 @@ CUL_FRASES = {"FRE-007": "CUE-001", "FRE-026": "CUE-001", "FRE-032": "CUE-002", 
               "FRE-011": "CUE-004", "FRE-003": "CUE-006", "FRE-088": "CUE-008", "FRE-094": "CUE-008", "FRE-096": "CUE-008",
               "FRE-055": "CUE-009", "FRE-056": "CUE-009", "FRE-112": "CUE-010",
               "FRE-116": "CUE-011", "FRE-128": "CUE-003"}
+CUL_LINEAS_13 = {("DLE-063", 0): "CUE-013", ("DLE-063", 4): "CUE-013"}
 CUL_LINEAS = {("DLE-001", 2): "CUE-001", ("DLE-002", 6): "CUE-001", ("DLE-007", 0): "CUE-001",
               ("DLE-002", 7): "CUE-002", ("DLE-004", 8): "CUE-002", ("DLE-020", 5): "CUE-002",
               ("DLE-004", 3): "CUE-003", ("DLE-009", 1): "CUE-003",
@@ -875,6 +928,7 @@ for dlg in DIALOGOS:   # [id, título ruso, título español, personajes, línea
         if f: x["f"] = f
         if obs: x["obs"] = obs
         if (did, n) in CUL_LINEAS: x["cul"] = CUL_LINEAS[(did, n)]
+        elif (did, n) in CUL_LINEAS_13: x["cul"] = CUL_LINEAS_13[(did, n)]
         ls.append(x)
     dl_js.append({"id": did, "titulo": tit, "tituloEs": titEs, "situacion": dlg[6] if len(dlg) > 6 else "conocer", "nivel": "A2" if (dlg[5] if len(dlg) > 5 else 1) >= 6 else "A1", "unidad": dlg[5] if len(dlg) > 5 else 1, "personajes": pers, "lineas": ls})
 

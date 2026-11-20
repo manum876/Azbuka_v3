@@ -383,6 +383,25 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
   const el = React.createElement;
   const formas = formasEsItems(entry, el);
   const culturaEs = typeof culturaEsDePalabra === "function" ? culturaEsDePalabra(entry.id) : [];
+  /* Expresiones y frases (20/11/2026, claude/EXPRESIONES_LEXICO_ABECE.md): las expresiones que contienen
+     esta palabra (expresiones), las palabras que forman una expresión (partes) y las frases que se entienden
+     por sus partes, guardadas en su palabra principal (frases). ?fr=<frase> resalta una (viene del buscador). */
+  const lexDe = id => LEXICON_ES.find(x => x.id === id);
+  const expresiones = (entry.expresiones || []).map(lexDe).filter(Boolean);
+  const partes = (entry.partes || []).map(lexDe).filter(Boolean);
+  const frases = entry.frases || [];
+  const frMarcada = (() => { try { return new URLSearchParams(location.search).get("fr") || ""; } catch (e) { return ""; } })();
+  useEffect(() => {
+    if (!frMarcada) return;
+    const n = document.querySelector("[data-frase-marcada]");
+    if (n) n.scrollIntoView({ block: "center" });
+  }, [entry.id]);
+  const linkLex = (x, extra) => {
+    const href = "ficha.html?id=" + x.id;
+    return el("a", { key: x.id, href, className: "sense", onClick: e => azNavigate(e, href), style: { display: "block", textDecoration: "none" } },
+      el("span", { className: "sense-es" }, x.es, el("span", { style: { color: c.gold, marginLeft: 8 } }, "›")),
+      el("div", { className: "sense-def", style: { marginLeft: 0 } }, extra || (x.senses || []).map(s => s.ru).join("; ")));
+  };
   return el("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
     el(FichaStyles, { c }),
     el("div", { className: "ficha" },
@@ -409,6 +428,26 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
               el("span", { className: "pos-badge" }, (POS_RU[entry.posNormalized] || "") + " · " + GEN_RU.f),
               el("div", { className: "sense-es", style: { display: "block", marginTop: 12 } }, fem.ru)),
             el("button", { className: "play", "aria-label": "Произношение", onClick: () => azHablarEs(fem.es) }, "▶"))),
+        /* ── Из каких слов: las palabras de una expresión, cada una con su ficha ── */
+        partes.length > 0 && el(React.Fragment, null,
+          el("div", { className: "section-lbl", style: { marginTop: 24 } }, "Из каких слов"),
+          partes.map(x => linkLex(x))),
+        /* ── Выражения: las expresiones que llevan esta palabra ── */
+        expresiones.length > 0 && el(React.Fragment, null,
+          el("div", { className: "section-lbl", style: { marginTop: 24 } }, "Выражения"),
+          expresiones.map(x => linkLex(x))),
+        /* ── Фразы: las frases de esta palabra, con su audio ── */
+        frases.length > 0 && el(React.Fragment, null,
+          el("div", { className: "section-lbl", style: { marginTop: 24 } }, "Фразы"),
+          frases.map(f => {
+            const marcada = frMarcada && azNormEs(frMarcada) === azNormEs(f.es);
+            return el("div", { key: f.es, className: "sense", "data-frase-marcada": marcada ? "1" : undefined,
+                style: Object.assign({ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }, marcada ? { border: `1px solid ${c.gold}`, borderRadius: 12 } : {}) },
+              el("div", { style: { minWidth: 0 } },
+                el("span", { className: "sense-es", style: { fontWeight: 700 } }, f.es),
+                el("div", { className: "sense-def", style: { marginLeft: 0 } }, f.ru)),
+              el("button", { className: "play", "aria-label": "Произношение", onClick: () => azHablarEs(f.es) }, "▶"));
+          })),
         el("div", { className: "section-lbl", style: { marginTop: 24 } }, "Твой прогресс"),
         el("div", { className: "nivel-row" },
           [0, 1, 2].map(n => el("button", {

@@ -36,8 +36,8 @@
    Los datos de Abecé invierten los campos: { es: lo que se aprende, ru: la
    traducción } en ejemplos, frases, diálogos (lineas: { p, es, ru, tr, lex })
    y tablas de grupos. Las unidades se llaman UNIDAD_ES_1…13 (azRegla las
-   busca ahí), con tituloEs en lugar de tituloRu. Los mapas y el taller de
-   escritura todavía son solo de Azbuka.
+   busca ahí), con tituloEs en lugar de tituloRu. Los mapas son solo de Azbuka; el taller de
+   escritura (AzTaller) también es de Abecé desde el 20/11/2026 (U13).
    ============================================================ */
 (function () {
   const h = React.createElement;
@@ -65,7 +65,14 @@
     "Se marcan solas cuando las aciertas en ejercicios distintos, en días distintos. También puedes marcarlas a mano en las tarjetas.": "Слова отмечаются автоматически, когда ты правильно отвечаешь в разных упражнениях и в разные дни. Их можно отметить и вручную в карточках.",
     "Practicar la unidad": "Повторить урок", "Módulos": "Модули", "Pronto": "Скоро", " · aprobada": " · сдано", "Anterior": "Назад", "Siguiente": "Дальше",
     "Toca una palabra para escuchar cómo suena.": "Нажми на слово, чтобы услышать, как оно звучит.",
-    "Léelo en voz alta": "Прочитай вслух", "Escucha el modelo, grábate y compara.": "Послушай образец, запиши себя и сравни."
+    "Léelo en voz alta": "Прочитай вслух", "Escucha el modelo, grábate y compara.": "Послушай образец, запиши себя и сравни.",
+    "Planificar": "План", "Escribir": "Написать", "Revisar": "Проверить", "Reescribir": "Переписать", "Paso ": "Шаг ", " de 4 · ": " из 4 · ",
+    " palabras · meta: ": " слов · цель: ", "Tus ideas…": "Твои идеи…", "Escribir el texto": "Написать текст", "Tus ideas": "Твои идеи",
+    "Tu primera versión": "Твой первый вариант", "Revisión automática": "Автоматическая проверка", "Revísalo tú": "Проверь сам",
+    "Tu versión final…": "Твой окончательный вариант…", "Revisar la versión final": "Проверить окончательный вариант", "Antes y después": "До и после",
+    "Primera versión": "Первый вариант", "Versión final": "Окончательный вариант",
+    "Antes de escribir, anota tus ideas: palabras sueltas, en ruso o en español. Estas preguntas te pueden guiar:": "Прежде чем писать, запиши свои идеи: отдельные слова, по-испански или по-русски. Тебе помогут эти вопросы:",
+    "Corrige lo que encontraste y mejóralo: suma un conector, una razón o un detalle. La primera versión queda guardada.": "Исправь то, что нашёл, и улучши текст: добавь связку, причину или деталь. Первый вариант сохранится."
   };
   const T = s => ES && TX_RU[s] != null ? TX_RU[s] : s;
   const hablar = (t, quien) => { if (ES) { if (typeof azHablarEs === "function") azHablarEs(t, null, quien); } else azHablarRu(t, quien); };
@@ -422,8 +429,24 @@
     }));
   }
 
+  /* Abecé (20/11/2026): además de las frases de Диалоги (FRE-…), un módulo puede listar frases del
+     léxico por su texto («cerca de», «por la mañana»): son las que se entienden por sus partes y viven
+     en la ficha de su palabra principal (campo frases de LEXICON_ES; claude/EXPRESIONES_LEXICO_ABECE.md). */
+  let FRASES_LEX = null;
+  const fraseLex = es => {
+    if (!FRASES_LEX) { FRASES_LEX = {}; if (typeof LEXICON_ES !== "undefined") LEXICON_ES.forEach(e => (e.frases || []).forEach(x => { FRASES_LEX[x.es] = { es: x.es, ru: x.ru, cab: e }; })); }
+    return FRASES_LEX[es] || null;
+  };
   function AzFrasesLista({ ids, c }) {
     return h("div", { className: "u-card", style: { padding: "4px 16px", marginTop: 12 } }, ids.map(id => {
+      if (ES && !/^FRE-/.test(id)) {   /* solo Abecé: Azbuka usa sus ids FRS- */
+        const x = fraseLex(id); if (!x) return null;
+        return h("div", { key: id, className: "voc" },
+          h("div", { style: { flex: 1, minWidth: 0 } },
+            h("span", { className: "voc-ru", lang: LL }, x.es),
+            h("div", { className: "voc-es", lang: ES ? "ru" : "es" }, x.ru)),
+          h("button", { className: "play", onClick: () => hablar(x.es), "aria-label": T("Escuchar") }, "▶"));
+      }
       const f = frById(id); if (!f) return null;
       const meta = ES ? f.es : f.ru, trad = ES ? f.ru : f.es;
       return h("div", { key: id, className: "voc" },
@@ -647,6 +670,10 @@
      ven las dos versiones. tarea = { titulo, formato, palabras: [min, max],
      ideas: [preguntas guía], requisitos: [{ txt, fn }], consejos } */
   const AZ_TALLER_PASOS = ["Planificar", "Escribir", "Revisar", "Reescribir"];
+  /* Abecé (20/11/2026, U13): la misma lista, para un texto en español */
+  const AZ_TALLER_CHEQUEO_ES = ["Глагол согласуется с лицом (yo vivo, ella vive)?", "Прошедшее время подходит: indefinido — событие, imperfecto — фон, pluscuamperfecto — то, что было раньше?",
+    "Ser или estar, por или para — выбрано правильно?", "Есть связки (primero, después, además, por eso, sin embargo)?",
+    "Знаки ударения на месте (está, también, después) и вопрос начинается с ¿?"];
   const AZ_TALLER_CHEQUEO = ["¿Cada verbo va con su persona (я чита́ю, она́ чита́ет)?", "¿El pasado tiene el género correcto (он был, она́ была́)?",
     "¿Después de cada preposición va el caso que pide (в Москве́, с дру́гом, у меня́)?", "¿Usaste conectores (снача́ла, пото́м, поэ́тому, потому́ что, но)?",
     "¿El aspecto dice lo que quieres: proceso o resultado?"];
@@ -658,12 +685,13 @@
     const [d, setD] = useState({ paso: 0, plan: "", v1: "", v2: "" });
     const [rev, setRev] = useState(null);
     useEffect(() => { (async () => { const g = await azGet(clave, null); if (g) setD(Object.assign({ paso: 0, plan: "", v1: "", v2: "" }, g)); })(); }, [clave]);
+    const CHEQUEO = ES ? AZ_TALLER_CHEQUEO_ES : AZ_TALLER_CHEQUEO;
     const guardar = cambio => { const nd = Object.assign({}, d, cambio); setD(nd); azSet(clave, nd); };
     const req = tarea.requisitos || [];
     const ok = t => req.map(r => !!r.fn(t));
     const [min, max] = tarea.palabras;
     const contador = t => { const n = azContarPalabras(t), bien = n >= min && n <= max;
-      return h("div", { style: { fontSize: "var(--az-fs-chico)", marginTop: 8, fontWeight: 700, color: bien ? green : c.textMuted } }, n + " palabras · meta: " + min + "–" + max); };
+      return h("div", { style: { fontSize: "var(--az-fs-chico)", marginTop: 8, fontWeight: 700, color: bien ? green : c.textMuted } }, n + T(" palabras · meta: ") + min + "–" + max); };
     const lista = t => req.length > 0 && h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 12 } }, ok(t).map((b, i) =>
       h("div", { key: i, className: "req" }, h("span", { style: { color: b ? green : c.textMuted, fontWeight: 800 } }, b ? "✓" : "○"), h("span", { style: { color: b ? c.text : c.textSub } }, req[i].txt))));
     const ir = n => { setRev(null); guardar({ paso: n, v2: n === 3 && !d.v2 ? d.v1 : d.v2 }); window.scrollTo(0, 0); };
@@ -672,44 +700,46 @@
     const area = (k, lang, ph) => h("textarea", { className: "proy", lang, value: d[k], placeholder: ph, onInput: e => { setRev(null); guardar({ [k]: e.target.value }); } });
     const revision = t => azRevisarTexto(t, req, tarea.consejos || []);
     const cajaRev = r => r && h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
-      !r.dudas.length && !r.faltan.length && !r.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: "var(--az-fs-chico)" } }, "✓ No encontré errores y están todos los puntos."),
-      r.dudas.map((x, i) => h("div", { key: "d" + i, className: "u-truco", lang: "ru" }, "«" + x.t + "» no la encuentro en el diccionario" + (x.sugerencia ? ". ¿Quisiste decir «" + x.sugerencia + "»?" : ": revisa cómo se escribe."))),
+      !r.dudas.length && !r.faltan.length && !r.tips.length && h("div", { style: { color: green, fontWeight: 700, fontSize: "var(--az-fs-chico)" } }, T("✓ No encontré errores y están todos los puntos.")),
+      r.dudas.map((x, i) => h("div", { key: "d" + i, className: "u-truco", lang: LL }, ES
+        ? "«" + x.t + "» — такого слова нет в словаре" + (x.sugerencia ? ". Может быть, «" + x.sugerencia + "»?" : ": проверь, как оно пишется.")
+        : "«" + x.t + "» no la encuentro en el diccionario" + (x.sugerencia ? ". ¿Quisiste decir «" + x.sugerencia + "»?" : ": revisa cómo se escribe."))),
       r.tips.map((x, i) => h("div", { key: "t" + i, className: "u-truco" }, azFmt(x))),
-      r.faltan.length > 0 && h("div", { className: "u-truco" }, "Falta: " + r.faltan.join(", ").toLowerCase() + "."),
-      h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, "La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática."));
+      r.faltan.length > 0 && h("div", { className: "u-truco" }, T("Falta: ") + r.faltan.join(", ").toLowerCase() + "."),
+      h("div", { style: { fontSize: "var(--az-fs-nota)", color: c.textMuted, marginTop: 8, lineHeight: 1.5 } }, T("La revisión encuentra palabras mal escritas y errores típicos, pero no corrige toda la gramática.")));
     const texto = (t, titulo) => h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12 } },
-      h("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.2, color: c.gold, textTransform: "uppercase" } }, titulo),
-      h("div", { lang: "ru", style: { fontSize: "var(--az-fs-destacado)", lineHeight: 1.55, marginTop: 8, whiteSpace: "pre-wrap", color: c.text } }, t));
+      h("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.2, color: c.gold, textTransform: "uppercase" } }, T(titulo)),
+      h("div", { lang: LL, style: { fontSize: "var(--az-fs-destacado)", lineHeight: 1.55, marginTop: 8, whiteSpace: "pre-wrap", color: c.text } }, t));
     return h("div", null,
       h("div", { className: "u-card", style: { padding: "12px 16px", marginTop: 12, display: "flex", gap: 8, flexWrap: "wrap" } }, AZ_TALLER_PASOS.map((p, i) =>
-        h("button", { key: p, className: "ubtn" + (i === paso ? "" : " sec"), style: { marginTop: 0, flex: "1 1 40%", fontSize: "var(--az-fs-chico)", padding: "8px 8px" }, disabled: !puede[i], onClick: () => ir(i) }, (i + 1) + " · " + p))),
-      h("div", { className: "u-sec" }, "Paso " + (paso + 1) + " de 4 · " + AZ_TALLER_PASOS[paso]),
+        h("button", { key: p, className: "ubtn" + (i === paso ? "" : " sec"), style: { marginTop: 0, flex: "1 1 40%", fontSize: "var(--az-fs-chico)", padding: "8px 8px" }, disabled: !puede[i], onClick: () => ir(i) }, (i + 1) + " · " + T(p)))),
+      h("div", { className: "u-sec" }, T("Paso ") + (paso + 1) + T(" de 4 · ") + T(AZ_TALLER_PASOS[paso])),
       paso === 0 && h(React.Fragment, null,
-        h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, "Antes de escribir, anota tus ideas: palabras sueltas, en ruso o en español. Estas preguntas te pueden guiar:"),
+        h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, T("Antes de escribir, anota tus ideas: palabras sueltas, en ruso o en español. Estas preguntas te pueden guiar:")),
         h("div", { className: "u-card", style: { padding: "8px 16px", marginTop: 8 } }, tarea.ideas.map((q, i) => h("div", { key: i, className: "req" }, h("span", { style: { color: c.gold, fontWeight: 800 } }, "·"), h("span", null, azFmt(q))))),
-        area("plan", "es", "Tus ideas…"),
-        h("button", { className: "ubtn", onClick: () => ir(1) }, "Escribir el texto")),
+        area("plan", ES ? "ru" : "es", T("Tus ideas…")),
+        h("button", { className: "ubtn", onClick: () => ir(1) }, T("Escribir el texto"))),
       paso === 1 && h(React.Fragment, null,
         aviso && h("div", { className: "u-dest" }, aviso),
         d.plan.trim() && texto(d.plan, "Tus ideas"),
-        area("v1", "ru", "Escribe en ruso…"), contador(d.v1), lista(d.v1),
-        h("button", { className: "ubtn", disabled: !d.v1.trim(), onClick: () => ir(2) }, "Revisar")),
+        area("v1", LL, ES ? "Пиши по-испански…" : "Escribe en ruso…"), contador(d.v1), lista(d.v1),
+        h("button", { className: "ubtn", disabled: !d.v1.trim(), onClick: () => ir(2) }, T("Revisar"))),
       paso === 2 && h(React.Fragment, null,
         texto(d.v1, "Tu primera versión"),
-        h("button", { className: "ubtn sec", onClick: () => setRev(revision(d.v1)) }, "Revisión automática"),
+        h("button", { className: "ubtn sec", onClick: () => setRev(revision(d.v1)) }, T("Revisión automática")),
         cajaRev(rev),
-        h("div", { className: "u-sec" }, "Revísalo tú"),
-        h("div", { className: "u-card", style: { padding: "8px 16px" } }, AZ_TALLER_CHEQUEO.map((q, i) => h("div", { key: i, className: "req" }, h("span", { style: { color: c.gold, fontWeight: 800 } }, "?"), h("span", null, q)))),
-        h("button", { className: "ubtn", onClick: () => ir(3) }, "Reescribir")),
+        h("div", { className: "u-sec" }, T("Revísalo tú")),
+        h("div", { className: "u-card", style: { padding: "8px 16px" } }, CHEQUEO.map((q, i) => h("div", { key: i, className: "req" }, h("span", { style: { color: c.gold, fontWeight: 800 } }, "?"), h("span", null, azFmt(q))))),
+        h("button", { className: "ubtn", onClick: () => ir(3) }, T("Reescribir"))),
       paso === 3 && h(React.Fragment, null,
-        h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, "Corrige lo que encontraste y mejóralo: suma un conector, una razón o un detalle. La primera versión queda guardada."),
-        area("v2", "ru", "Tu versión final…"), contador(d.v2), lista(d.v2),
-        h("button", { className: "ubtn sec", disabled: !d.v2.trim(), onClick: () => setRev(revision(d.v2)) }, "Revisar la versión final"),
+        h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, T("Corrige lo que encontraste y mejóralo: suma un conector, una razón o un detalle. La primera versión queda guardada.")),
+        area("v2", LL, T("Tu versión final…")), contador(d.v2), lista(d.v2),
+        h("button", { className: "ubtn sec", disabled: !d.v2.trim(), onClick: () => setRev(revision(d.v2)) }, T("Revisar la versión final")),
         cajaRev(rev),
-        d.v2.trim() && d.v2 !== d.v1 && h(React.Fragment, null, h("div", { className: "u-sec" }, "Antes y después"), texto(d.v1, "Primera versión"), texto(d.v2, "Versión final")),
+        d.v2.trim() && d.v2 !== d.v1 && h(React.Fragment, null, h("div", { className: "u-sec" }, T("Antes y después")), texto(d.v1, "Primera versión"), texto(d.v2, "Versión final")),
         h("div", { style: { display: "flex", gap: 8, marginTop: 12 } },
-          h("button", { className: "ubtn sec", style: { marginTop: 0 }, disabled: !d.v2.trim(), onClick: () => azHablarRu(d.v2) }, "▶ Escucharlo"),
-          h("button", { className: "ubtn", style: { marginTop: 0 }, disabled: !d.v2.trim(), onClick: () => azGuardarEnCuaderno(d.v2, fuente) }, "＋ Cuaderno"))));
+          h("button", { className: "ubtn sec", style: { marginTop: 0 }, disabled: !d.v2.trim(), onClick: () => hablar(d.v2) }, T("▶ Escucharlo")),
+          h("button", { className: "ubtn", style: { marginTop: 0 }, disabled: !d.v2.trim(), onClick: () => azGuardarEnCuaderno(d.v2, fuente) }, T("＋ Cuaderno")))));
   }
 
   /* Portada: kicker, título, objetivo, barras de progreso, «Practicar la unidad» y módulos */

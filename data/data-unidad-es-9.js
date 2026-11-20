@@ -430,9 +430,9 @@ const UNIDAD_ES_9 = {
           ]
         }
       ],
-      frases: ["FRE-137"],
+      frases: ["FRE-137", "hasta que", "antes de"],
       dialogos: ["DLE-044"],
-      vocab: ["cuento", "lobo", "bosque", "oscuridad", "accidente", "ladrón", "robar", "esconder", "llorar", "reír", "aunque", "sin embargo", "mientras tanto", "hasta que", "antes de"]
+      vocab: ["cuento", "lobo", "bosque", "oscuridad", "accidente", "ladrón", "robar", "esconder", "llorar", "reír", "aunque", "sin embargo", "mientras tanto"]
     },
     {
       id: "es9m9", n: 9, tipo: "leccion",

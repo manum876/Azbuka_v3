@@ -354,7 +354,7 @@ const UNIDAD_ES_7 = {
           ]
         }
       ],
-      frases: ["FRE-121", "FRE-122", "FRE-123", "FRE-124"],
+      frases: ["FRE-121", "FRE-122", "FRE-123", "FRE-124", "de verdad"],
       vocab: ["tampoco", "creer", "opinión", "tener razón", "de acuerdo"]
     },
     {
@@ -1116,7 +1116,7 @@ const ES7_BASICAS_MOD = [
       { es: "No es tonto: es muy inteligente.", ru: "Он не глупый: он очень умный." }
     ]
   }],
-  ["es7m5", ["de verdad"], {
+  ["es7m5", [], {
     id: "es7-de-verdad",
     titulo: "¿De verdad?",
     texto: "**¿De verdad?** — «Правда?», когда удивляешься. **de verdad** — «по-настоящему, правда»: **Me gusta de verdad** — мне правда нравится.",
@@ -1176,7 +1176,7 @@ const ES7_BASICAS = [
   const M = id => UNIDAD_ES_7.modulos.find(m => m.id === id);
   ES7_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
     const m = M(id); if (!m) return;
-    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));   /* sin palabras, no se crea una lista vacía («Слова (0)») */
     if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
   });
 })();

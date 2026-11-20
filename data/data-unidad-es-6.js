@@ -178,10 +178,9 @@ const UNIDAD_ES_6 = {
           ]
         }
       ],
-      frases: ["FRE-103", "FRE-104", "FRE-105", "FRE-106"],
+      frases: ["FRE-103", "FRE-104", "FRE-105", "FRE-106", "a pie"],
       dialogos: ["DLE-026"],
-      vocab: ["bicicleta", "moto", "avión", "barco", "a pie", "andar", "próximo", "coger", "subir", "bajar", "subirse", "bajarse", "cambiar", "esperar", "tardar",
-        "andén", "línea", "aeropuerto", "viaje", "ida y vuelta", "horario", "salida", "llegada", "pasajero"],
+      vocab: ["bicicleta", "moto", "avión", "barco", "andar", "próximo", "coger", "subir", "bajar", "subirse", "bajarse", "cambiar", "esperar", "tardar", "andén", "línea", "aeropuerto", "viaje", "ida y vuelta", "horario", "salida", "llegada", "pasajero"],
       ampliacion: {
         titulo: "Ещё о транспорте",
         intro: "Ещё одно слово. Оно не входит в проверку урока. В некоторых испанских городах есть трамвай.",
@@ -315,10 +314,9 @@ const UNIDAD_ES_6 = {
           ]
         }
       ],
-      frases: ["FRE-098", "FRE-099", "FRE-100", "FRE-101", "FRE-102"],
+      frases: ["FRE-098", "FRE-099", "FRE-100", "FRE-101", "FRE-102", "todo recto"],
       dialogos: ["DLE-025"],
-      vocab: ["girar", "cruzar", "seguir", "parar", "todo recto", "esquina", "semáforo", "cruce", "rotonda", "puente", "avenida", "final", "mapa", "plano",
-        "perdonar", "oír", "disculpar", "encontrar", "perderse", "decir"]
+      vocab: ["girar", "cruzar", "seguir", "parar", "esquina", "semáforo", "cruce", "rotonda", "puente", "avenida", "final", "mapa", "plano", "perdonar", "oír", "disculpar", "encontrar", "perderse", "decir", "recto"]
     },
     {
       id: "es6m5", n: 5, tipo: "leccion",
@@ -362,8 +360,7 @@ const UNIDAD_ES_6 = {
           texto: "Два местоимения подряд («скажи мне это» — **dímelo**) — это урок 11. И «не бери» (**no lo tomes**) использует другую форму, она тоже будет позже. Пока — только утвердительное повелительное с одним местоимением.",
           ojo: "**Dime** — «скажи мне», очень частое слово. Так начинают разговор по телефону и в магазине: **Dime** — «слушаю тебя»."
         }
-      ],
-      vocab: []
+      ]
     },
     {
       id: "es6m6", n: 6, tipo: "leccion",
@@ -1292,7 +1289,7 @@ const ES6_BASICAS = [
   const M = id => UNIDAD_ES_6.modulos.find(m => m.id === id);
   ES6_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
     const m = M(id); if (!m) return;
-    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));   /* sin palabras, no se crea una lista vacía («Слова (0)») */
     if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
   });
 })();

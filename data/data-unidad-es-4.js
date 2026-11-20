@@ -169,8 +169,8 @@ const UNIDAD_ES_4 = {
           ]
         }
       ],
-      frases: ["FRE-064", "FRE-065", "FRE-066"],
-      vocab: ["hora", "minuto", "medio", "cuarto", "menos", "en punto", "mediodía", "medianoche", "temprano", "tarde", "por la mañana", "por la tarde", "por la noche"]
+      frases: ["FRE-064", "FRE-065", "FRE-066", "por la mañana", "por la tarde", "por la noche", "a tiempo", "más o menos"],
+      vocab: ["hora", "minuto", "medio", "cuarto", "menos", "en punto", "mediodía", "medianoche", "temprano", "tarde", "por"]
     },
     {
       id: "es4m3", n: 3, tipo: "leccion",
@@ -237,7 +237,7 @@ const UNIDAD_ES_4 = {
           ]
         }
       ],
-      frases: ["FRE-067", "FRE-068"],
+      frases: ["FRE-067", "FRE-068", "después de"],
       vocab: ["levantarse", "ducharse", "lavarse", "afeitarse", "levantar", "lavar", "desayunar", "comer", "cenar", "tomar", "llegar", "terminar", "descansar", "desayuno", "comida", "cena", "diente", "pelo", "ropa", "primero", "después", "luego", "antes"],
       ampliacion: {
         titulo: "Ещё для твоего дня",
@@ -546,7 +546,7 @@ const UNIDAD_ES_4 = {
           }
         }
       ],
-      frases: ["FRE-076", "FRE-077"],
+      frases: ["FRE-076", "FRE-077", "de momento"],
       dialogos: ["DLE-018"]
     },
     {
@@ -1283,8 +1283,7 @@ Object.assign(ES4_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1
    los módulos ni lo que ya había. Formato de ES4_BASICAS:
    [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
 const ES4_BASICAS_MOD = [
-  ["es4m3", ["después de"], null],
-  ["es4m2", ["a tiempo", "más o menos"], {
+  ["es4m2", [], {
     id: "es4-a-tiempo",
     titulo: "A tiempo · más o menos",
     texto: "**a tiempo** — «вовремя»: **Llego a tiempo**. **más o menos** — «примерно»: **Son más o menos las tres** — сейчас примерно три часа. И в ответ на **¿Qué tal?**: **Más o menos** — «так себе».",
@@ -1306,7 +1305,7 @@ const ES4_BASICAS_MOD = [
       { mal: "Voy. ¡Hasta mañana!", bien: "Me voy. ¡Hasta mañana!", por: "Когда уходишь — **me voy**." }
     ]
   }],
-  ["es4m8", ["de momento"], {
+  ["es4m8", [], {
     id: "es4-de-momento",
     titulo: "De momento — пока",
     texto: "**de momento** — «пока, на данный момент»: **De momento vivo en Barcelona** — пока живу в Барселоне (потом может быть по-другому). Часто с **estar** + герундий: **De momento estoy trabajando en casa**.",
@@ -1339,7 +1338,7 @@ const ES4_BASICAS = [
   const M = id => UNIDAD_ES_4.modulos.find(m => m.id === id);
   ES4_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
     const m = M(id); if (!m) return;
-    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));   /* sin palabras, no se crea una lista vacía («Слова (0)») */
     if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
   });
 })();

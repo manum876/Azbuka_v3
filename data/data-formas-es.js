@@ -1,6 +1,6 @@
 /* Abecé — formas de las palabras que cambian (FORMAS_ES).
    Generado por herramientas/abece/formas-es.py: no editar a mano.
-   3785 entradas. t: sust | adj | det | num | art | pron | contr.
+   3793 entradas. t: sust | adj | det | num | art | pron | contr.
    sust: sg, pl, art [sg, pl], g; f/fpl/artF si tiene femenino; elA (el agua);
          inv (pl = sg); soloPl; sentido (el/la cambia el sentido).
    adj/det/num: m, f, mpl, fpl; invG (igual en m y f); apoc (+ apocF: también ante f); var (la otra forma del plural: la de la RAE).
@@ -3790,7 +3790,15 @@ const FORMAS_ES = {
 "ESP-05543":{"t":"adj","m":"virtual","f":"virtual","mpl":"virtuales","fpl":"virtuales","invG":true},
 "ESP-05544":{"t":"sust","g":"m","sg":"coste","pl":"costes","art":["el","los"]},
 "ESP-05545":{"t":"sust","g":"f","sg":"desigualdad","pl":"desigualdades","art":["la","las"]},
-"ESP-05546":{"t":"sust","g":"m","sg":"calentamiento global","pl":null,"art":["el","los"]}
+"ESP-05546":{"t":"sust","g":"m","sg":"calentamiento global","pl":null,"art":["el","los"]},
+"ESP-05549":{"t":"sust","g":"f","sg":"nostalgia","pl":"nostalgias","art":["la","las"]},
+"ESP-05550":{"t":"adj","m":"agobiado","f":"agobiada","mpl":"agobiados","fpl":"agobiadas"},
+"ESP-05553":{"t":"sust","g":"m","sg":"carné","pl":"carnés","art":["el","los"]},
+"ESP-05554":{"t":"sust","g":"f","sg":"Nochevieja","pl":"Nocheviejas","art":["la","las"]},
+"ESP-05556":{"t":"sust","g":"f","sg":"reseña","pl":"reseñas","art":["la","las"]},
+"ESP-05557":{"t":"sust","g":"m","sg":"párrafo","pl":"párrafos","art":["el","los"]},
+"ESP-05558":{"t":"sust","g":"m","sg":"borrador","pl":"borradores","art":["el","los"]},
+"ESP-05559":{"t":"sust","g":"f","sg":"introducción","pl":"introducciones","art":["la","las"]}
 };
 
 const FORMAS_ES_SERIES = {

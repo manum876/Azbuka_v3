@@ -1,4 +1,4 @@
-const ES12_V = {"1":["explicación","propuesta","mentira","duda"],"3":["quien","donde","lo que","cuyo","cual"],"4":["consecuencia","causa","efecto","motivo","por eso","así que","es decir","o sea","mientras que","ya que","pues","por lo tanto","debido a","gracias a","a causa de","comparar","comparación","parecido","distinto","contrario","sino"],"5":["sobre","según","contra"],"6":["cartel","fumar","aparcar","prohibido","permitido","entrada"],"7":["listo","vivo","despierto","atento","interesado","callado","consciente"],"8":["opinar","argumento","argumentar","razón","debate","debatir","defender","convencer","acuerdo","desacuerdo","postura","tema","cuestión","aspecto","inconveniente","razonable","exagerado","exagerar","grave","fundamental","principal","ejemplo","conclusión","polémico","punto de vista","por un lado","por otro lado","en primer lugar","en conclusión","por ejemplo","criticar","crítica","apoyar","apoyo","rechazar","demostrar","insistir","añadir","resumir","resumen","falso","obvio","mayoría","totalmente","ni"],"9":["noticia","periódico","prensa","radio","artículo","titular","encuesta","dato","cifra","porcentaje","estudio","medios de comunicación","publicar","programa","publicidad","canal","sociedad","social","político","política","gobierno","ciudadano","libertad","igualdad","población","habitante","crisis","paz","economía","económico","cultura","tradición","transporte","tráfico","coste","inmigrante","presidente","alcalde","votar","voto","manifestación","protestar","impuesto","justicia","mundial","nacional","internacional","aumentar","disminuir","empeorar","afectar","depender"],"10":["medio ambiente","naturaleza","contaminación","contaminar","reciclar","reciclaje","residuo","plástico","clima","cambio climático","renovable","sostenible","ecológico","proteger","protección","destruir","animal","ambiente","consumir","producir","producto","recurso","salvar","desaparecer","gasolina","eléctrico","solar","pantalla","red","red social","digital","inteligencia","artificial","máquina","tecnológico","virtual","privacidad","progreso","avance","desarrollo","batería","enlace","vídeo","seguidor","conectar","inventar","invento","científico","descubrimiento","evitar","provocar","causar","reducir"],"a9":["pobreza","riqueza","violencia","conflicto","inmigración","desigualdad"],"a10":["especie","destrucción","dispositivo","calentamiento global"]};
+const ES12_V = {"1":["explicación","propuesta","mentira","duda"],"3":["quien","donde","lo que","cuyo","cual"],"4":["consecuencia", "causa", "efecto", "motivo", "es decir", "o sea", "ya que", "pues", "por lo tanto", "debido a", "comparar", "comparación", "parecido", "distinto", "contrario", "sino"],"5":["sobre","según","contra"],"6":["cartel","fumar","aparcar","prohibido","permitido","entrada"],"7":["listo","vivo","despierto","atento","interesado","callado","consciente"],"8":["opinar", "argumento", "argumentar", "razón", "debate", "debatir", "defender", "convencer", "acuerdo", "desacuerdo", "postura", "tema", "cuestión", "aspecto", "inconveniente", "razonable", "exagerado", "exagerar", "grave", "fundamental", "principal", "ejemplo", "conclusión", "polémico", "punto de vista", "criticar", "crítica", "apoyar", "apoyo", "rechazar", "demostrar", "insistir", "añadir", "resumir", "resumen", "falso", "obvio", "mayoría", "totalmente", "ni"],"9":["noticia","periódico","prensa","radio","artículo","titular","encuesta","dato","cifra","porcentaje","estudio","medios de comunicación","publicar","programa","publicidad","canal","sociedad","social","político","política","gobierno","ciudadano","libertad","igualdad","población","habitante","crisis","paz","economía","económico","cultura","tradición","transporte","tráfico","coste","inmigrante","presidente","alcalde","votar","voto","manifestación","protestar","impuesto","justicia","mundial","nacional","internacional","aumentar","disminuir","empeorar","afectar","depender"],"10":["medio ambiente","naturaleza","contaminación","contaminar","reciclar","reciclaje","residuo","plástico","clima","cambio climático","renovable","sostenible","ecológico","proteger","protección","destruir","animal","ambiente","consumir","producir","producto","recurso","salvar","desaparecer","gasolina","eléctrico","solar","pantalla","red","red social","digital","inteligencia","artificial","máquina","tecnológico","virtual","privacidad","progreso","avance","desarrollo","batería","enlace","vídeo","seguidor","conectar","inventar","invento","científico","descubrimiento","evitar","provocar","causar","reducir"],"a9":["pobreza","riqueza","violencia","conflicto","inmigración","desigualdad"],"a10":["especie","destrucción","dispositivo","calentamiento global"]};
 
 /* ============================================================
    DATA-UNIDAD-ES-12.JS — Abecé · Урок 12: Мнения и аргументы
@@ -242,6 +242,7 @@ const UNIDAD_ES_12 = {
         }
       ],
       dialogos: ["DLE-057"],
+      frases: ["por eso", "así que", "mientras que", "gracias a", "a causa de", "además de"],
       vocab: ES12_V["4"]
     },
     {
@@ -446,7 +447,7 @@ const UNIDAD_ES_12 = {
           ]
         }
       ],
-      frases: ["FRE-154", "FRE-155", "FRE-157", "FRE-158"],
+      frases: ["FRE-154", "FRE-155", "FRE-157", "FRE-158", "por un lado", "por otro lado", "en primer lugar", "en conclusión", "por ejemplo", "en contra de"],
       dialogos: ["DLE-058"],
       vocab: ES12_V["8"]
     },
@@ -1183,7 +1184,7 @@ UNIDAD_ES_12.modulos.forEach(m => (m.secciones || []).forEach(s => { if (ES12_MA
    los módulos ni lo que ya había. Formato de ES12_BASICAS:
    [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
 const ES12_BASICAS_MOD = [
-  ["es12m4", ["así", "además de", "a pesar de", "a partir de", "modo", "así como"], {
+  ["es12m4", ["así", "a pesar de", "a partir de", "modo", "así como"], {
     id: "es12-a-pesar",
     titulo: "A pesar de, además de, a partir de · así",
     texto: "**a pesar de** + существительное или инфинитив — «несмотря на»: **A pesar de la lluvia, salimos** — то же, что **aunque llueve, salimos**. **además de** — «кроме, помимо»: **Además de inglés, hablo español**. **a partir de** — «начиная с»: **a partir del lunes**. **así como** — «а также» (в письменной речи).\n\n**así** — «так, таким образом»: **Lo hago así**; **Así es** — «Именно так». **el modo** — «способ»: **de este modo** — «таким образом», **de todos modos** — «всё равно, в любом случае».",
@@ -1197,7 +1198,7 @@ const ES12_BASICAS_MOD = [
       { mal: "A pesar de llueve, salimos.", bien: "Aunque llueve, salimos.", por: "С глаголом в личной форме — **aunque**; **a pesar de** — с существительным или инфинитивом." }
     ]
   }],
-  ["es12m8", ["en contra de", "a favor de"], {
+  ["es12m8", ["a favor de"], {
     id: "es12-en-contra",
     titulo: "A favor de, en contra de",
     texto: "**estar a favor de** — «быть за», **estar en contra de** — «быть против»: **Estoy a favor de esta idea**, **Estoy en contra de esta idea**. Без существительного — **a favor**, **en contra**: **Yo estoy en contra**.",
@@ -1221,7 +1222,7 @@ const ES12_BASICAS = [
   const M = id => UNIDAD_ES_12.modulos.find(m => m.id === id);
   ES12_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
     const m = M(id); if (!m) return;
-    m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));   /* sin palabras, no se crea una lista vacía («Слова (0)») */
     if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
   });
 })();

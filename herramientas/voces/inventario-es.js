@@ -10,7 +10,7 @@
 //                 chats), los diálogos con la voz de cada personaje, las frases, el Alfabeto
 //                 y la guía de Gramática; y, cuando existan, Lecturas, Cultura y la charla
 //                 con Lucía. Las palabras de cada unidad (introducedIn) van con su página.
-//   diccionario → cada entrada del léxico español y su femenino (la ficha, la burbuja).
+//   diccionario → cada entrada del léxico español, su femenino y sus frases (la ficha, la burbuja).
 //   formas      → las formas de Gramática (plurales con su artículo, las 4 formas de los
 //                 adjetivos, las series) y las tablas de Verbos, como las muestra cada página,
 //                 de los VERBOS_TOP verbos más frecuentes más todos los que enseña alguna unidad
@@ -199,7 +199,8 @@ if (GRUPO === "unidades" || TODO) {
 
 /* Tanda 2: el Diccionario, cada entrada y su femenino. Sin página: se bajan al tocarlas. */
 if (GRUPO === "diccionario" || TODO) {
-  (LEXICON_ES || []).forEach(e => { sumar(e.es, null, null); if (e.femenino && e.femenino.es) sumar(e.femenino.es, null, null); });
+  (LEXICON_ES || []).forEach(e => { sumar(e.es, null, null); if (e.femenino && e.femenino.es) sumar(e.femenino.es, null, null);
+    (e.frases || []).forEach(f => sumar(f.es, null, null)); });   /* frases de la ficha (20/11/2026) */
 }
 
 /* Tanda 3: las formas de Gramática y de Verbos, como las dice cada tabla. */

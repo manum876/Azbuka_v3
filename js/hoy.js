@@ -45,6 +45,8 @@
      U8 что ты сделал (una frase sobre uno mismo con el pasado que pide el marcador; 13/11/2026)
      U9 раньше и сейчас (una frase sobre uno mismo en imperfecto; 13/11/2026)
      U12 кому и что (la frase con los dos pronombres: «Doy el libro a Ana» → «Se lo doy»; 14/11/2026)
+     U13 что он сказал? (la frase en estilo indirecto, en pasado: «Tengo frío» → «Lucía dijo que tenía
+         frío»; el tiempo sin cambiar es Casi; 20/11/2026)
      U11 желание дня (la frase entera con el subjuntivo tras «ojalá / quiero que / cuando…»; 13/11/2026)
      U10 планы (una frase sobre uno mismo en futuro o con ir a; tras «si», presente; 13/11/2026)
    Las unidades de Abecé sin desafío propio usan el de la última que lo
@@ -52,7 +54,7 @@
    ============================================================ */
 const AZ_HOY_ES = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
 const AZ_HOY_K = AZ_HOY_ES ? "az_hoy_es" : "az_hoy";
-const AZ_HOY_ES_MAX = 12;
+const AZ_HOY_ES_MAX = 13;
 /* Abecé: lo mismo que carga abece-N.html (las unidades anteriores, para las palabras ya vistas).
    [src, global]: si la página ya pidió ese archivo y todavía no llegó, se espera a que llegue. */
 function azHoyDepsEs(n) {
@@ -462,6 +464,25 @@ function azHoyDesafioEs(n) {
         if (hay(pres).nivel === 2) return { nivel: "mal", msg: "Это настоящее время. О прошлом — **" + ok + "**." };
         if (r.nivel === 1) return { nivel: "casi", msg: "Почти: **" + ok + "**, а не «" + el.escrito + "»." };
         return { nivel: "mal", msg: "Не нахожу глагол **" + inf + "** в imperfecto. С yo: **" + ok + "**." };
+      } };
+  }
+  if (n === 13 && typeof ES13_HOY !== "undefined") {
+    const [quien, frase, ok, casi, malas, regla] = ES13_HOY[num % ES13_HOY.length];
+    const norm = t => " " + String(t).toLowerCase().replace(/[¿?¡!.,;:«»"]/g, " ").replace(/\s+/g, " ").trim() + " ";
+    const sinT = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const cola = t => { const x = norm(t), k = x.indexOf(" que "); return k >= 0 ? x.slice(k + 5).trim() : x.trim(); };
+    return { titulo: "Что он сказал?", grande: quien + ": «" + frase + "»", sub: "", audio: frase,
+      consigna: "Передай в прошлом: **" + quien + " dijo que…**",
+      pista: "После **dijo que** время сдвигается назад: presente → imperfecto, perfecto и indefinido → pluscuamperfecto, futuro → condicional.",
+      revisar: txt => {
+        const t = cola(txt);
+        if (t === cola(ok)) return { nivel: "bien", msg: "**" + ok.replace(/\.$/, "") + "** — " + regla + "." };
+        if (sinT(t) === sinT(cola(ok))) return { nivel: "casi", msg: "Почти: проверь знаки ударения — **" + ok + "**" };
+        if (t === cola(casi) || sinT(t) === sinT(cola(casi))) return { nivel: "casi", msg: "Почти: так можно, только если это до сих пор правда. Обычно время сдвигается: **" + ok.replace(/\.$/, "") + "** (" + regla + ")." };
+        if (malas.some(m => sinT(t) === sinT(cola(m)))) return { nivel: "mal", msg: "Не то время: " + regla + ". Нужно: **" + ok + "**" };
+        const W = sinT(cola(ok)).split(" "), T2 = sinT(t).split(" "), falta = W.filter(w => T2.indexOf(w) < 0);
+        if (falta.length === 1 && T2.length === W.length) return { nivel: "casi", msg: "Почти: время верное, но проверь «" + falta[0] + "»: **" + ok + "**" };
+        return { nivel: "mal", msg: "Нужно: **" + ok.replace(/\.$/, "") + "** (" + regla + ")." };
       } };
   }
   if (n === 12 && typeof ES12_HOY !== "undefined") {
