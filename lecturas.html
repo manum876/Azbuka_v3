@@ -16,17 +16,24 @@
 <body>
 <div id="root"></div>
 <script src="assets/preact.js"></script>
-<script src="data/data-lexicon.js"></script>
-<script src="data/data-casos.js"></script>
-<script src="data/data-verbos.js"></script>
-<script src="data/data-lecturas.js"></script>
 <script src="data/data-catalogo.js"></script>
 <script src="js/core.js"></script>
+<!-- Los datos de la dirección activa (20/11/2026): en Azbuka, el léxico ruso, Casos, Verbos y
+     data-lecturas.js; en Abecé, el léxico español, sus formas y verbos, y data-lecturas-es.js -->
+<script>
+(AZ_DIRECCION.id === "abece"
+  ? ["data/data-lexicon-es.js", "data/data-formas-es.js", "data/data-verbos-es.js", "data/data-lecturas-es.js"]
+  : ["data/data-lexicon.js", "data/data-casos.js", "data/data-verbos.js", "data/data-lecturas.js"]
+).forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
 <script src="assets/supabase.js"></script>
 <script src="js/cuenta.js"></script>
 <script src="js/progress.js"></script>
 <script src="js/shell.js"></script>
 <script src="js/corrector.js"></script>
+<script>
+if (AZ_DIRECCION.id === "abece") document.write('<script src="js/corrector-es.js"><\/script>');
+</script>
 <script src="js/burbuja.js"></script>
 <script src="js/unidad-ui.js"></script>
 <script src="js/unidad.js"></script>
@@ -47,13 +54,49 @@
      19/10/2026; solo en este módulo). «＋ Guardar en el cuaderno» sigue
      funcionando como en toda la app.
    Guarda az_lecturas: { id: { fecha, pct } }.
+   · Abecé (20/11/2026, PROPUESTA_LECTURAS_ABECE): la misma página con
+     data-lecturas-es.js (LECTURAS_ES, LEE-…): el texto en español, la
+     traducción en ruso, la pantalla en ruso (TX), la voz española
+     (azHablarSecuenciaEs) y la burbuja del léxico español. Guarda
+     az_lecturas_es.
    ============================================================ */
 const { useState, useEffect, useLayoutEffect, useRef } = htmPreact;
 const h = React.createElement;
 const PARAMS = new URLSearchParams(location.search);
 /* Los textos de una unidad, en el orden del archivo */
-const deUnidad = u => LECTURAS.filter(l => l.desde === u);
-const UNIDADES = [...new Set(LECTURAS.map(l => l.desde))].sort((a, b) => a - b);
+const ES = AZ_DIRECCION.id === "abece" && typeof LECTURAS_ES !== "undefined";
+const LECT = ES ? LECTURAS_ES : LECTURAS;
+const lecPorId = id => ES ? lecturaEsById(id) : lecturaById(id);
+const CLAVE = ES ? "az_lecturas_es" : "az_lecturas";
+const LANG = ES ? "es" : "ru";
+const meta = p => ES ? p.es : p.ru;                 /* el texto, en la lengua que se aprende */
+const trad = p => ES ? p.ru : p.es;
+const tituloMeta = l => l.titulo;                  /* en las dos, titulo va en la lengua que se aprende */
+const tituloTrad = l => ES ? l.tituloRu : l.tituloEs;
+const TX = ES ? {
+  modulo: "Чтение", textos: n => n + " ТЕКСТОВ · A1–B1",
+  desc: "Тексты, которые читаются целиком, на настоящие темы — только с тем, что ты уже знаешь из уроков. Читай, слушай и проверь, всё ли понял.",
+  items: [["Со звуком", "«Слушать» читает весь текст; звучащий абзац отмечается."],
+          ["Выдели слово", "Появится «Показать слово» с переводом; его можно сохранить в тетрадь."],
+          ["Вопросы в конце", "Чтобы проверить, понял ли ты; они попадают в повторение."]],
+  unidad: "Урок ", lectura: "Чтение", escuchar: "▶ Слушать", detener: "■ Стоп", ariaEsc: "Слушать текст", ariaDet: "Стоп",
+  traduccion: "Перевод", nota: "Не знаешь слово? Подержи на нём палец и нажми «Показать слово».",
+  preguntas: n => "Вопросы (" + n + ")", ant: "‹ Назад", sig: "Дальше ›", salir: "Вернуться к тексту",
+  intro: n => n + " вопросов по тексту. Если хочешь, сначала перечитай его.", entrada: "📖 Показать слово"
+} : {
+  modulo: "Lecturas", textos: n => n + " TEXTOS · A1 A B1",
+  desc: "Textos para leer de corrido, sobre temas de verdad, con lo que ya aprendiste en las unidades. Lee, escucha y comprueba si entendiste.",
+  items: [["Con audio", "«Escuchar» lee el texto entero; el párrafo que suena se marca."],
+          ["Selecciona una palabra", "Aparece «Mostrar entrada» con su traducción, y la puedes guardar en el cuaderno."],
+          ["Preguntas al final", "Para ver si entendiste; entran al repaso."]],
+  unidad: "Unidad ", lectura: "Lectura", escuchar: "▶ Escuchar", detener: "■ Detener", ariaEsc: "Escuchar el texto", ariaDet: "Detener",
+  traduccion: "Traducción", nota: "¿No sabes una palabra? Mantén el dedo sobre ella y toca «Mostrar entrada».",
+  preguntas: n => "Preguntas (" + n + ")", ant: "‹ Anterior", sig: "Siguiente ›", salir: "Volver a la lectura",
+  intro: n => n + " preguntas sobre el texto. Si quieres, vuelve a leerlo antes.", entrada: "📖 Mostrar entrada"
+};
+const RX_PAL = ES ? /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:-[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*/ : /[А-Яа-яЁё́]+(?:-[А-Яа-яЁё́]+)*/;
+const deUnidad = u => LECT.filter(l => l.desde === u);
+const UNIDADES = [...new Set(LECT.map(l => l.desde))].sort((a, b) => a - b);
 
 function Estilos({ c }) {
   return h("style", null, `
@@ -93,7 +136,28 @@ function Estilos({ c }) {
 /* La palabra del léxico que corresponde a lo que se seleccionó: por su forma (Casos y Verbos)
    o por la palabra misma; si la selección trae acento, se prefiere la que coincide; si hay
    varias, la que se enseña antes en el curso. */
+/* Abecé: la palabra española por su forma (léxico, formas declinadas y verbos conjugados);
+   si hay varias, la que se enseña antes en el curso. */
+let LEX_ES_IDX = null;
+function lexDeSeleccionEs(txt) {
+  const w = (String(txt).match(RX_PAL) || [])[0];
+  if (!w) return null;
+  if (!LEX_ES_IDX) {
+    LEX_ES_IDX = {};
+    const add = (f, id) => { if (!f || !id) return; const k = String(f).toLowerCase(); const L = (LEX_ES_IDX[k] = LEX_ES_IDX[k] || []); if (L.indexOf(id) < 0) L.push(id); };
+    LEXICON_ES.forEach(e => add(e.es, e.id));
+    if (typeof formasEsIndice === "function") { const I = formasEsIndice(); Object.keys(I).forEach(k => I[k].forEach(x => add(k, x.id))); }
+    if (typeof VERBOS_ES !== "undefined") Object.keys(VERBOS_ES).forEach(id => { const v = VERBOS_ES[id]; if (!v || v.base) return;
+      ["pres", "indef", "imperf", "fut", "cond", "subj"].forEach(k => (v[k] || []).forEach(f => add(f, id))); ["ger", "part", "impTu"].forEach(k => add(v[k], id)); });
+  }
+  const ids = (LEX_ES_IDX[w.toLowerCase()] || []).slice();
+  if (!ids.length) return { id: null, forma: w };
+  const unidad = id => { const e = lexEsById(id) || {}; const u = [].concat(e.introducedIn || [], e.appearsIn || []); return u.length ? Math.min(...u) : 99; };
+  ids.sort((a, b) => unidad(a) - unidad(b));
+  return { id: ids[0], forma: w };
+}
 function lexDeSeleccion(txt) {
+  if (ES) return lexDeSeleccionEs(txt);
   const w = (String(txt).match(/[А-Яа-яЁё́]+(?:-[А-Яа-яЁё́]+)*/) || [])[0];
   if (!w) return null;
   const k = azFormaClave(w);
@@ -116,7 +180,7 @@ function MostrarEntrada() {
       const s = window.getSelection && window.getSelection();
       const txt = s ? String(s).trim() : "";
       const nodo = s && s.anchorNode ? (s.anchorNode.nodeType === 1 ? s.anchorNode : s.anchorNode.parentElement) : null;
-      if (!txt || !/[а-яё]/i.test(txt) || txt.split(/\s+/).length > 3 || !nodo || !nodo.closest || !nodo.closest(".lec-ru")) { setSel(null); return; }
+      if (!txt || !RX_PAL.test(txt) || txt.split(/\s+/).length > 3 || !nodo || !nodo.closest || !nodo.closest(".lec-ru")) { setSel(null); return; }
       let rect = null; try { rect = s.getRangeAt(0).getBoundingClientRect(); } catch (e) {}
       setSel({ txt, rect });
     };
@@ -130,7 +194,7 @@ function MostrarEntrada() {
     try { window.getSelection().removeAllRanges(); } catch (e) {}
     setTimeout(() => window.dispatchEvent(new CustomEvent("az-burbuja", { detail: { tipo: "palabra", datos: { id: d ? d.id : null, forma: d ? d.forma : sel.txt }, rect } })), 60);
   };
-  return h("button", Object.assign({ className: "lec-entrada" }, azTocarYa(abrir)), "📖 Mostrar entrada");   /* al primer toque en el iPhone (27/10/2026) */
+  return h("button", Object.assign({ className: "lec-entrada" }, azTocarYa(abrir)), TX.entrada);   /* al primer toque en el iPhone (27/10/2026) */
 }
 
 function Portada({ c, hechas }) {
@@ -141,21 +205,19 @@ function Portada({ c, hechas }) {
       h("div", { className: "intro-top" },
         h("div", { className: "intro-icon", style: { background: col.bg, color: col.fg } }, m.glyph),
         h("div", null,
-          h("div", { className: "intro-title" }, "Lecturas"),
-          h("div", { className: "intro-kicker" }, LECTURAS.length + " TEXTOS · A1 A B1"))),
-      h("div", { className: "intro-desc" }, "Textos para leer de corrido, sobre temas de verdad, con lo que ya aprendiste en las unidades. Lee, escucha y comprueba si entendiste."),
-      [["Con audio", "«Escuchar» lee el texto entero; el párrafo que suena se marca."],
-       ["Selecciona una palabra", "Aparece «Mostrar entrada» con su traducción, y la puedes guardar en el cuaderno."],
-       ["Preguntas al final", "Para ver si entendiste; entran al repaso."]].map(([t, d]) =>
+          h("div", { className: "intro-title" }, TX.modulo),
+          h("div", { className: "intro-kicker" }, TX.textos(LECT.length)))),
+      h("div", { className: "intro-desc" }, TX.desc),
+      TX.items.map(([t, d]) =>
         h("div", { key: t, className: "intro-item" }, h("div", { className: "intro-dot" }), h("div", null, h("div", { className: "intro-it" }, t), h("div", { className: "intro-id" }, d))))),
     UNIDADES.map(u => {
       const ls = deUnidad(u), un = AZ_UNITS.find(x => x.id === u);
       return h(React.Fragment, { key: u },
-        h("div", { className: "section-lbl" }, "Unidad " + u + (un ? " · " + un.title : "")),
+        h("div", { className: "section-lbl" }, TX.unidad + u + (un ? " · " + un.title : "")),
         h("div", { className: "list" }, ls.map(l => {
           const href = "lecturas.html?id=" + l.id, hh = hechas[l.id];
           return h("a", { key: l.id, className: "res-row", href, onClick: e => azNavigate(e, href) },
-            h("div", { style: { minWidth: 0 } }, h("div", { className: "res-ru", lang: "ru" }, l.titulo), h("div", { className: "res-es" }, l.tituloEs + " · " + l.tema)),
+            h("div", { style: { minWidth: 0 } }, h("div", { className: "res-ru", lang: LANG }, tituloMeta(l)), h("div", { className: "res-es" }, tituloTrad(l) + " · " + l.tema)),
             h("div", { className: "res-der" }, hh ? h("span", { style: { color: "#4CAF82", fontWeight: 700 } }, "✓ " + hh.pct + " %") : l.nivel));
         })));
     }));
@@ -169,26 +231,26 @@ function Lectura({ c, L, dark, alHacer }) {
   const todo = () => {
     if (sonando != null) { azCallar(); setSonando(null); return; }
     setSonando(0);
-    azHablarSecuencia(L.parrafos.map(p => ({ texto: p.ru })), k => setSonando(k), () => setSonando(null));
+    (ES ? azHablarSecuenciaEs : azHablarSecuencia)(L.parrafos.map(p => ({ texto: meta(p) })), k => setSonando(k), () => setSonando(null));
   };
   useEffect(() => () => azCallar(), []);
   const misma = deUnidad(L.desde), idx = misma.indexOf(L), ant = misma[idx - 1], sig = misma[idx + 1];
   const nav = (x, txt) => x ? h("a", { className: "ubtn sec", style: { flex: 1, textAlign: "center", textDecoration: "none", boxSizing: "border-box", marginTop: 0 }, href: "lecturas.html?id=" + x.id, onClick: e => { azCallar(); azNavigate(e, "lecturas.html?id=" + x.id); } }, txt) : h("span", { style: { flex: 1 } });
   return h(React.Fragment, null,
-    h("div", { className: "lec-kicker" }, "Lectura · " + L.nivel + " · Unidad " + L.desde),
-    h("div", { className: "lec-title", lang: "ru" }, L.titulo),
-    h("div", { className: "lec-sub" }, L.tituloEs + " · " + L.tema),
+    h("div", { className: "lec-kicker" }, TX.lectura + " · " + L.nivel + " · " + TX.unidad + L.desde),
+    h("div", { className: "lec-title", lang: LANG }, tituloMeta(L)),
+    h("div", { className: "lec-sub" }, tituloTrad(L) + " · " + L.tema),
     h("div", { className: "pair-row" },
-      h("button", { className: "pair-btn", onClick: todo, style: chip(sonando != null), "aria-label": sonando != null ? "Detener" : "Escuchar el texto" }, sonando != null ? "■ Detener" : "▶ Escuchar"),
-      h("button", { className: "pair-btn", onClick: () => setEs(v => !v), style: chip(es) }, "Traducción")),
-    h("div", { className: "tnote" }, "¿No sabes una palabra? Mantén el dedo sobre ella y toca «Mostrar entrada»."),
+      h("button", { className: "pair-btn", onClick: todo, style: chip(sonando != null), "aria-label": sonando != null ? TX.ariaDet : TX.ariaEsc }, sonando != null ? TX.detener : TX.escuchar),
+      h("button", { className: "pair-btn", onClick: () => setEs(v => !v), style: chip(es) }, TX.traduccion)),
+    h("div", { className: "tnote" }, TX.nota),
     L.parrafos.map((p, k) => h("div", { key: k, className: "lec-par" + (sonando === k ? " lec-on" : "") },
-      h("div", { className: "lec-ru", lang: "ru" }, p.ru),
-      es && h("div", { className: "lec-es" }, p.es))),
-    h("button", { className: "ubtn", style: { marginTop: 12 }, onClick: () => { azCallar(); setSonando(null); setPreguntas(true); } }, "Preguntas (" + L.preguntas.length + ")"),
-    (ant || sig) && h("div", { style: { display: "flex", justifyContent: "space-between", gap: 12, marginTop: 12 } }, nav(ant, "‹ Anterior"), nav(sig, "Siguiente ›")),
-    preguntas && h(AzPractica, { key: "lec-" + L.id, unidad: L.desde, titulo: L.titulo, pool: L.preguntas, enOrden: true, n: L.preguntas.length, dark, sinOtra: true, salir: "Volver a la lectura",
-      intro: L.preguntas.length + " preguntas sobre el texto. Si quieres, vuelve a leerlo antes.",
+      h("div", { className: "lec-ru", lang: LANG }, meta(p)),
+      es && h("div", { className: "lec-es", lang: ES ? "ru" : "es" }, trad(p)))),
+    h("button", { className: "ubtn", style: { marginTop: 12 }, onClick: () => { azCallar(); setSonando(null); setPreguntas(true); } }, TX.preguntas(L.preguntas.length)),
+    (ant || sig) && h("div", { style: { display: "flex", justifyContent: "space-between", gap: 12, marginTop: 12 } }, nav(ant, TX.ant), nav(sig, TX.sig)),
+    preguntas && h(AzPractica, { key: "lec-" + L.id, unidad: L.desde, titulo: tituloMeta(L), pool: L.preguntas, enOrden: true, n: L.preguntas.length, dark, sinOtra: true, salir: TX.salir,
+      intro: TX.intro(L.preguntas.length),
       onFin: lista => alHacer(L.id, Math.round(lista.reduce((a, x) => a + (x.p || 0), 0) / Math.max(1, lista.length) * 100)),
       onSalir: () => setPreguntas(false) }));
 }
@@ -199,14 +261,14 @@ function App() {
   useEffect(() => { (async () => {
     setDarkMode((await azGet("az_theme", "dark")) !== "light");
     await azLoadProgress();
-    setHechas(await azGet("az_lecturas", {}));
+    setHechas(await azGet(CLAVE, {}));
     if (typeof azModuleTouch === "function") azModuleTouch("lecturas");
   })(); }, []);
   const c = azColors(darkMode);
   const green = darkMode ? "#4CAF82" : "#2E7D55";
-  const L = PARAMS.get("id") ? lecturaById(PARAMS.get("id")) : null;
-  const alHacer = async (id, pct) => { const x = Object.assign({}, await azGet("az_lecturas", {}), { [id]: { fecha: new Date().toISOString().slice(0, 10), pct } }); await azSet("az_lecturas", x); setHechas(x); };
-  window.azFuenteActual = () => L ? "Lecturas · " + L.tituloEs : "Lecturas";
+  const L = PARAMS.get("id") ? lecPorId(PARAMS.get("id")) : null;
+  const alHacer = async (id, pct) => { const x = Object.assign({}, await azGet(CLAVE, {}), { [id]: { fecha: new Date().toISOString().slice(0, 10), pct } }); await azSet(CLAVE, x); setHechas(x); };
+  window.azFuenteActual = () => L ? TX.modulo + " · " + (ES ? L.titulo : L.tituloEs) : TX.modulo;
   return h(React.Fragment, null,
     h(Estilos, { c }),
     h(AzEstilosUnidad, { c, green }),
