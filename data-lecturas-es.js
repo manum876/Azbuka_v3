@@ -35,15 +35,19 @@ const LECTURAS_ES = [
    },
    {
     "es": "Soy enfermera, pero ahora soy estudiante de español. Vivo en Barcelona.",
-    "ru": "Я медсестра, но сейчас я студентка, учу испанский. Живу в Барселоне."
+    "ru": "Я медсестра, но сейчас я учу испанский. Живу в Барселоне."
+   },
+   {
+    "es": "Mi profesor de español se llama Javier. Mi amiga se llama Lucía: es española, de Barcelona.",
+    "ru": "Моего преподавателя испанского зовут Хавьер. Мою подругу зовут Лусия: она испанка, из Барселоны."
    },
    {
     "es": "Hablo ruso, inglés y un poco de español.",
     "ru": "Я говорю по-русски, по-английски и немного по-испански."
    },
    {
-    "es": "¿Y tú? ¿Cómo te llamas? ¿De dónde eres?",
-    "ru": "А ты? Как тебя зовут? Откуда ты?"
+    "es": "¿Y tú? ¿Cómo te llamas? ¿De dónde eres? ¿Cuántos años tienes?",
+    "ru": "А ты? Как тебя зовут? Откуда ты? Сколько тебе лет?"
    }
   ],
   "preguntas": [
@@ -93,13 +97,27 @@ const LECTURAS_ES = [
     "id": "LEE-perfil-4",
     "tipo": "lectura",
     "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Как зовут её подругу?",
+    "opciones": [
+     "Lucía",
+     "Javier",
+     "Marta"
+    ],
+    "correcta": "Lucía",
+    "explicacion": "«Mi amiga se llama Lucía»."
+   },
+   {
+    "id": "LEE-perfil-5",
+    "tipo": "lectura",
+    "dificultad": 1,
     "forma": "vf",
     "afirmacion": "Ana habla muy bien español.",
     "verdadero": false,
     "explicacion": "«Hablo… un poco de español»: только немного."
    },
    {
-    "id": "LEE-perfil-5",
+    "id": "LEE-perfil-6",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "situacion",
@@ -141,16 +159,16 @@ const LECTURAS_ES = [
     "ru": "Это урок испанского. Преподавателя зовут Хавьер. Он испанец, из Мадрида."
    },
    {
-    "es": "Los estudiantes son de muchos países.",
-    "ru": "Студенты из многих стран."
+    "es": "Los estudiantes son de cuatro países.",
+    "ru": "Студенты из четырёх стран."
    },
    {
-    "es": "Ana es rusa. Tom es inglés y es ingeniero. Li es china y es médica.",
-    "ru": "Аня — русская. Том — англичанин, он инженер. Ли — китаянка, она врач."
+    "es": "Ana es rusa y es enfermera. Tom es inglés y es ingeniero. Li es china y es médica. Paulo es brasileño y es estudiante.",
+    "ru": "Аня — русская, она медсестра. Том — англичанин, он инженер. Ли — китаянка, она врач. Паулу — бразилец, он студент."
    },
    {
-    "es": "Todos tienen un libro nuevo.",
-    "ru": "У всех новый учебник."
+    "es": "Todos tienen un libro nuevo. Javier habla español, inglés y un poco de ruso.",
+    "ru": "У всех новый учебник. Хавьер говорит по-испански, по-английски и немного по-русски."
    }
   ],
   "preguntas": [
@@ -163,7 +181,7 @@ const LECTURAS_ES = [
     "opciones": [
      "Javier",
      "Tom",
-     "Pablo"
+     "Paulo"
     ],
     "correcta": "Javier",
     "explicacion": "«El profesor se llama Javier»."
@@ -186,10 +204,38 @@ const LECTURAS_ES = [
     "id": "LEE-clase-3",
     "tipo": "lectura",
     "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Откуда Паулу?",
+    "opciones": [
+     "De Brasil",
+     "De China",
+     "De Inglaterra"
+    ],
+    "correcta": "De Brasil",
+    "explicacion": "«Paulo es brasileño»."
+   },
+   {
+    "id": "LEE-clase-4",
+    "tipo": "lectura",
+    "dificultad": 1,
     "forma": "vf",
     "afirmacion": "Li es médica.",
     "verdadero": true,
     "explicacion": "«Li es china y es médica»."
+   },
+   {
+    "id": "LEE-clase-5",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "На каких языках говорит Хавьер?",
+    "opciones": [
+     "Español, inglés y un poco de ruso",
+     "Solo español",
+     "Español y chino"
+    ],
+    "correcta": "Español, inglés y un poco de ruso",
+    "explicacion": "«Javier habla español, inglés y un poco de ruso»."
    }
   ]
  },
@@ -206,16 +252,20 @@ const LECTURAS_ES = [
     "ru": "Меня зовут Лусия, я из Барселоны. Мне двадцать пять лет."
    },
    {
-    "es": "Mi padre se llama Jorge y es profesor. Mi madre, Carmen, es médica.",
-    "ru": "Моего папу зовут Хорхе, он учитель. Мою маму, Кармен, — врач."
+    "es": "Mi padre se llama Jorge y es profesor. Mi madre se llama Carmen y es médica.",
+    "ru": "Моего папу зовут Хорхе, он учитель. Мою маму зовут Кармен, она врач."
    },
    {
-    "es": "Tengo un hermano: Pablo. Tiene treinta años y vive en Madrid.",
-    "ru": "У меня есть брат — Пабло. Ему тридцать лет, и он живёт в Мадриде."
+    "es": "Tengo un hermano, Pablo. Tiene treinta años, es ingeniero y vive en Madrid.",
+    "ru": "У меня есть брат, Пабло. Ему тридцать лет, он инженер и живёт в Мадриде."
    },
    {
-    "es": "Su novia es Marta. Es argentina.",
-    "ru": "Его девушка — Марта. Она аргентинка."
+    "es": "Su novia se llama Marta. Es argentina, de Buenos Aires.",
+    "ru": "Его девушку зовут Марта. Она аргентинка, из Буэнос-Айреса."
+   },
+   {
+    "es": "Y tú, ¿tienes hermanos?",
+    "ru": "А у тебя есть братья или сёстры?"
    }
   ],
   "preguntas": [
@@ -252,6 +302,20 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
+    "pide": "Кем работает Пабло?",
+    "opciones": [
+     "Ingeniero",
+     "Profesor",
+     "Médico"
+    ],
+    "correcta": "Ingeniero",
+    "explicacion": "«…es ingeniero»."
+   },
+   {
+    "id": "LEE-familia-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
     "pide": "Откуда Марта?",
     "opciones": [
      "De Argentina",
@@ -259,10 +323,10 @@ const LECTURAS_ES = [
      "De Rusia"
     ],
     "correcta": "De Argentina",
-    "explicacion": "«Es argentina»."
+    "explicacion": "«Es argentina, de Buenos Aires»."
    },
    {
-    "id": "LEE-familia-4",
+    "id": "LEE-familia-5",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "vf",
@@ -277,12 +341,16 @@ const LECTURAS_ES = [
   "nivel": "A1",
   "desde": 2,
   "tema": "Знакомство",
-  "titulo": "Un correo de Pablo",
-  "tituloRu": "Письмо от Пабло",
+  "titulo": "Un mensaje de Pablo",
+  "tituloRu": "Сообщение от Пабло",
   "parrafos": [
    {
     "es": "¡Hola, Ana! Soy Pablo, el hermano de Lucía.",
     "ru": "Привет, Аня! Я Пабло, брат Лусии."
+   },
+   {
+    "es": "Soy ingeniero y vivo en Madrid con mi novia, Marta.",
+    "ru": "Я инженер и живу в Мадриде со своей девушкой, Мартой."
    },
    {
     "es": "Mi número de teléfono es el seis, uno, dos, cuarenta y cinco, sesenta, ochenta.",
@@ -293,8 +361,8 @@ const LECTURAS_ES = [
     "ru": "Моя почта — pablo собака correo точка es."
    },
    {
-    "es": "¡Hasta luego!",
-    "ru": "Пока!"
+    "es": "¿Y tu número? ¿Tienes correo? ¡Hasta luego!",
+    "ru": "А твой номер? У тебя есть почта? Пока!"
    }
   ],
   "preguntas": [
@@ -317,6 +385,20 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
+    "pide": "Кто такая Марта?",
+    "opciones": [
+     "La novia de Pablo",
+     "La hermana de Pablo",
+     "La madre de Pablo"
+    ],
+    "correcta": "La novia de Pablo",
+    "explicacion": "«…con mi novia, Marta»."
+   },
+   {
+    "id": "LEE-mensaje-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
     "pide": "Что Пабло даёт Ане?",
     "opciones": [
      "Su teléfono y su correo",
@@ -327,16 +409,16 @@ const LECTURAS_ES = [
     "explicacion": "Номер телефона и почту."
    },
    {
-    "id": "LEE-mensaje-3",
+    "id": "LEE-mensaje-4",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "vf",
-    "afirmacion": "Pablo es de Moscú.",
+    "afirmacion": "Pablo vive en Barcelona.",
     "verdadero": false,
-    "explicacion": "Pablo — брат Лусии, испанец."
+    "explicacion": "«…vivo en Madrid»."
    },
    {
-    "id": "LEE-mensaje-4",
+    "id": "LEE-mensaje-5",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "situacion",
@@ -383,20 +465,20 @@ const LECTURAS_ES = [
   "tituloRu": "Моя квартира в Барселоне",
   "parrafos": [
    {
-    "es": "Vivo en un piso pequeño en el centro de Barcelona. Está en el tercero.",
-    "ru": "Я живу в маленькой квартире в центре Барселоны. Она на четвёртом этаже."
+    "es": "Vivo en un piso pequeño en el barrio de Gràcia, en Barcelona. Está en el tercero y no hay ascensor.",
+    "ru": "Я живу в маленькой квартире в районе Грасия, в Барселоне. Она на четвёртом этаже, и лифта нет."
    },
    {
-    "es": "El piso tiene dos habitaciones, una cocina y un baño. El salón es pequeño, pero muy bonito.",
-    "ru": "В квартире две комнаты, кухня и ванная. Гостиная маленькая, но очень красивая."
+    "es": "El piso tiene dos habitaciones, un salón, una cocina y un baño. El salón es pequeño, pero muy bonito.",
+    "ru": "В квартире две комнаты, гостиная, кухня и ванная. Гостиная маленькая, но очень красивая."
    },
    {
-    "es": "En mi habitación hay una cama, una mesa, una estantería y muchos libros.",
-    "ru": "В моей комнате кровать, стол и стеллаж и много книг."
+    "es": "En mi habitación hay una cama, una mesa, una silla, una estantería y muchos libros.",
+    "ru": "В моей комнате кровать, стол, стул, стеллаж и много книг."
    },
    {
-    "es": "La cocina es vieja, pero la nevera es nueva. ¡Mi piso es muy bonito!",
-    "ru": "Кухня старая, но холодильник новый. Моя квартира очень красивая!"
+    "es": "La cocina es vieja, pero la nevera y la lavadora son nuevas. Vivo sola y estoy muy contenta.",
+    "ru": "Кухня старая, но холодильник и стиральная машина новые. Я живу одна и очень довольна."
    }
   ],
   "preguntas": [
@@ -407,15 +489,24 @@ const LECTURAS_ES = [
     "forma": "elegir",
     "pide": "Где квартира Ани?",
     "opciones": [
-     "En el centro",
-     "Lejos del centro",
-     "En Madrid"
+     "En Gràcia",
+     "En el centro de Madrid",
+     "Cerca de la playa"
     ],
-    "correcta": "En el centro",
-    "explicacion": "«…en el centro de Barcelona»."
+    "correcta": "En Gràcia",
+    "explicacion": "«…en el barrio de Gràcia»."
    },
    {
     "id": "LEE-piso-2",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "vf",
+    "afirmacion": "El edificio tiene ascensor.",
+    "verdadero": false,
+    "explicacion": "«…no hay ascensor»."
+   },
+   {
+    "id": "LEE-piso-3",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
@@ -429,7 +520,7 @@ const LECTURAS_ES = [
     "explicacion": "«El salón es pequeño, pero muy bonito»."
    },
    {
-    "id": "LEE-piso-3",
+    "id": "LEE-piso-4",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "vf",
@@ -438,18 +529,32 @@ const LECTURAS_ES = [
     "explicacion": "«La cocina es vieja»."
    },
    {
-    "id": "LEE-piso-4",
+    "id": "LEE-piso-5",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
     "pide": "Что новое на кухне?",
     "opciones": [
-     "La nevera",
-     "La mesa",
+     "La nevera y la lavadora",
+     "La mesa y la silla",
      "La cama"
     ],
-    "correcta": "La nevera",
-    "explicacion": "«…la nevera es nueva»."
+    "correcta": "La nevera y la lavadora",
+    "explicacion": "«…la nevera y la lavadora son nuevas»."
+   },
+   {
+    "id": "LEE-piso-6",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "С кем живёт Аня?",
+    "opciones": [
+     "Sola",
+     "Con Lucía",
+     "Con su familia"
+    ],
+    "correcta": "Sola",
+    "explicacion": "«Vivo sola»."
    }
   ]
  },
@@ -462,20 +567,24 @@ const LECTURAS_ES = [
   "tituloRu": "Квартира в Грасии",
   "parrafos": [
    {
-    "es": "Piso en el barrio de Gràcia.",
-    "ru": "Квартира в районе Грасия."
+    "es": "Piso en alquiler en el barrio de Gràcia, en Barcelona.",
+    "ru": "Сдаётся квартира в районе Грасия, в Барселоне."
    },
    {
-    "es": "Tiene tres habitaciones, un salón grande, una cocina, una lavadora y dos baños.",
-    "ru": "В ней три комнаты, большая гостиная, кухня, стиральная машина и две ванные."
+    "es": "Tiene tres habitaciones, un salón grande, una cocina con lavadora y dos baños.",
+    "ru": "В ней три комнаты, большая гостиная, кухня со стиральной машиной и две ванные."
    },
    {
-    "es": "Está en el segundo y tiene un balcón muy bonito.",
-    "ru": "Она на третьем этаже, и у неё очень красивый балкон."
+    "es": "Está en el segundo, tiene ascensor y un balcón muy bonito. Es un piso luminoso y tranquilo.",
+    "ru": "Она на третьем этаже, есть лифт и очень красивый балкон. Квартира светлая и тихая."
    },
    {
-    "es": "Cerca hay una parada de autobús, un supermercado y un parque.",
-    "ru": "Рядом автобусная остановка, супермаркет и парк."
+    "es": "Cerca hay una parada de metro, una parada de autobús, un supermercado y un parque.",
+    "ru": "Рядом есть станция метро, автобусная остановка, супермаркет и парк."
+   },
+   {
+    "es": "Precio: mil seiscientos euros al mes.",
+    "ru": "Цена: тысяча шестьсот евро в месяц."
    },
    {
     "es": "Teléfono: seis, dos, nueve, cuarenta, cincuenta, setenta.",
@@ -497,17 +606,31 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
-    "pide": "Что ещё есть в квартире?",
+    "pide": "Что есть на кухне?",
     "opciones": [
      "Una lavadora",
      "Una cama",
      "Un sofá"
     ],
     "correcta": "Una lavadora",
-    "explicacion": "«…una lavadora»."
+    "explicacion": "«…una cocina con lavadora»."
    },
    {
     "id": "LEE-anuncio-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Какая квартира?",
+    "opciones": [
+     "Luminosa y tranquila",
+     "Oscura y pequeña",
+     "Vieja y fea"
+    ],
+    "correcta": "Luminosa y tranquila",
+    "explicacion": "«Es un piso luminoso y tranquilo»."
+   },
+   {
+    "id": "LEE-anuncio-4",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
@@ -521,7 +644,7 @@ const LECTURAS_ES = [
     "explicacion": "«Cerca hay… un parque»."
    },
    {
-    "id": "LEE-anuncio-4",
+    "id": "LEE-anuncio-5",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
@@ -533,6 +656,20 @@ const LECTURAS_ES = [
     ],
     "correcta": "En el segundo",
     "explicacion": "«Está en el segundo»."
+   },
+   {
+    "id": "LEE-anuncio-6",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Сколько стоит квартира в месяц?",
+    "opciones": [
+     "Mil seiscientos euros",
+     "Seiscientos euros",
+     "Mil euros"
+    ],
+    "correcta": "Mil seiscientos euros",
+    "explicacion": "«Precio: mil seiscientos euros al mes»."
    }
   ]
  },
@@ -545,20 +682,20 @@ const LECTURAS_ES = [
   "tituloRu": "Мой район",
   "parrafos": [
    {
-    "es": "Mi barrio es tranquilo y muy bonito. Las calles son pequeñas y no hay muchos coches.",
-    "ru": "Мой район тихий и очень красивый. Улицы маленькие, и машин немного."
+    "es": "Mi barrio es Gràcia. Es un barrio tranquilo y muy bonito. Las calles son pequeñas y no hay muchos coches.",
+    "ru": "Мой район — Грасия. Это тихий и очень красивый район. Улицы маленькие, и машин немного."
    },
    {
-    "es": "Al lado de mi casa hay una tienda y enfrente está la farmacia.",
-    "ru": "Рядом с моим домом магазин, а напротив — аптека."
+    "es": "Al lado de mi casa hay una tienda y enfrente está la farmacia. El supermercado está a la derecha del banco.",
+    "ru": "Рядом с моим домом есть магазин, а напротив — аптека. Супермаркет справа от банка."
    },
    {
-    "es": "El supermercado está a la derecha del banco.",
-    "ru": "Супермаркет справа от банка."
+    "es": "La plaza está cerca. En la plaza hay un bar, una cafetería y muchos árboles.",
+    "ru": "Площадь близко. На площади есть бар, кафе и много деревьев."
    },
    {
-    "es": "La plaza está cerca. En la plaza hay un bar y una cafetería. El parque está un poco lejos.",
-    "ru": "Площадь близко. На площади есть бар и кафе. Парк немного далеко."
+    "es": "El parque está un poco lejos, pero la parada de metro está muy cerca, al lado de la plaza.",
+    "ru": "Парк немного далеко, зато станция метро совсем рядом, возле площади."
    }
   ],
   "preguntas": [
@@ -574,7 +711,7 @@ const LECTURAS_ES = [
      "Feo"
     ],
     "correcta": "Tranquilo",
-    "explicacion": "«Mi barrio es tranquilo»."
+    "explicacion": "«Es un barrio tranquilo»."
    },
    {
     "id": "LEE-barrio-2",
@@ -608,6 +745,20 @@ const LECTURAS_ES = [
     "id": "LEE-barrio-4",
     "tipo": "lectura",
     "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Что есть на площади?",
+    "opciones": [
+     "Un bar, una cafetería y árboles",
+     "Un banco y una farmacia",
+     "Un supermercado"
+    ],
+    "correcta": "Un bar, una cafetería y árboles",
+    "explicacion": "«En la plaza hay un bar, una cafetería y muchos árboles»."
+   },
+   {
+    "id": "LEE-barrio-5",
+    "tipo": "lectura",
+    "dificultad": 1,
     "forma": "vf",
     "afirmacion": "El parque está muy cerca.",
     "verdadero": false,
@@ -624,16 +775,16 @@ const LECTURAS_ES = [
   "tituloRu": "Что у меня в рюкзаке?",
   "parrafos": [
    {
-    "es": "Mi mochila es negra y bastante grande.",
-    "ru": "Мой рюкзак чёрный и довольно большой."
+    "es": "Mi mochila es negra y bastante grande. Es vieja, pero es muy buena.",
+    "ru": "Мой рюкзак чёрный и довольно большой. Он старый, но очень хороший."
    },
    {
-    "es": "¿Qué hay en mi mochila? Hay dos libros, unos papeles y tres fotos.",
-    "ru": "Что у меня в рюкзаке? Две книги, какие-то бумаги и три фотографии."
+    "es": "¿Qué hay en mi mochila? Hay dos libros de español, un cuaderno, unos papeles y tres fotos de mi familia.",
+    "ru": "Что у меня в рюкзаке? Две книги по испанскому, тетрадь, какие-то бумаги и три фотографии моей семьи."
    },
    {
-    "es": "También hay unas llaves, un móvil y unas gafas.",
-    "ru": "Ещё там ключи, телефон и очки."
+    "es": "También hay unas llaves, un móvil, unas gafas y una botella de agua.",
+    "ru": "Ещё там ключи, телефон, очки и бутылка воды."
    },
    {
     "es": "¿Y el ordenador? El ordenador no está en la mochila: está en casa, encima de la mesa.",
@@ -660,6 +811,20 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
+    "pide": "Какие фотографии в рюкзаке?",
+    "opciones": [
+     "De su familia",
+     "De Barcelona",
+     "De sus amigos"
+    ],
+    "correcta": "De su familia",
+    "explicacion": "«…tres fotos de mi familia»."
+   },
+   {
+    "id": "LEE-mochila-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
     "pide": "Сколько фотографий?",
     "opciones": [
      "Tres",
@@ -670,7 +835,7 @@ const LECTURAS_ES = [
     "explicacion": "«…tres fotos»."
    },
    {
-    "id": "LEE-mochila-3",
+    "id": "LEE-mochila-4",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "vf",
@@ -679,7 +844,7 @@ const LECTURAS_ES = [
     "explicacion": "«El ordenador no está en la mochila»."
    },
    {
-    "id": "LEE-mochila-4",
+    "id": "LEE-mochila-5",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
@@ -703,20 +868,20 @@ const LECTURAS_ES = [
   "tituloRu": "Один день Хавьера",
   "parrafos": [
    {
-    "es": "Javier es profesor de español. De lunes a viernes se levanta a las siete.",
-    "ru": "Хавьер — преподаватель испанского. С понедельника по пятницу он встаёт в семь."
+    "es": "Javier es profesor de español en una escuela de Barcelona. De lunes a viernes se levanta a las siete.",
+    "ru": "Хавьер — преподаватель испанского в школе в Барселоне. С понедельника по пятницу он встаёт в семь."
    },
    {
-    "es": "Se ducha, desayuna un café y sale de casa a las ocho menos cuarto. Va al trabajo en metro.",
-    "ru": "Он принимает душ, выпивает кофе на завтрак и выходит из дома без четверти восемь. На работу ездит на метро."
+    "es": "Se ducha, desayuna un café con leche y pan con tomate y sale de casa a las ocho menos cuarto. Va al trabajo en metro: tarda veinte minutos.",
+    "ru": "Он принимает душ, завтракает кофе с молоком и хлебом с помидором и выходит из дома без четверти восемь. На работу ездит на метро: дорога занимает двадцать минут."
    },
    {
-    "es": "Las clases empiezan a las nueve y terminan a las dos. Después come en un bar.",
-    "ru": "Занятия начинаются в девять и заканчиваются в два. Потом он обедает в баре."
+    "es": "Las clases empiezan a las nueve y terminan a las dos. Después come con sus compañeros en un bar.",
+    "ru": "Занятия начинаются в девять и заканчиваются в два. Потом он обедает с коллегами в баре."
    },
    {
-    "es": "Por la tarde lee, trabaja en casa y a veces juega al fútbol. Se acuesta a las once y media.",
-    "ru": "Днём он читает, работает дома и иногда играет в футбол. Ложится спать в половине двенадцатого."
+    "es": "Por la tarde prepara las clases en casa, lee o juega al fútbol con unos amigos. Cena a las nueve y media y se acuesta a las once y media.",
+    "ru": "Во второй половине дня он готовится к урокам дома, читает или играет в футбол с друзьями. Ужинает в половине десятого и ложится спать в половине двенадцатого."
    }
   ],
   "preguntas": [
@@ -752,24 +917,52 @@ const LECTURAS_ES = [
     "id": "LEE-javier-3",
     "tipo": "lectura",
     "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Сколько времени у него занимает дорога?",
+    "opciones": [
+     "Veinte minutos",
+     "Una hora",
+     "Cinco minutos"
+    ],
+    "correcta": "Veinte minutos",
+    "explicacion": "«…tarda veinte minutos»."
+   },
+   {
+    "id": "LEE-javier-4",
+    "tipo": "lectura",
+    "dificultad": 1,
     "forma": "vf",
     "afirmacion": "Las clases terminan a las dos.",
     "verdadero": true,
     "explicacion": "«…y terminan a las dos»."
    },
    {
-    "id": "LEE-javier-4",
+    "id": "LEE-javier-5",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
-    "pide": "Что он иногда делает вечером?",
+    "pide": "С кем он обедает?",
+    "opciones": [
+     "Con sus compañeros",
+     "Solo",
+     "Con su familia"
+    ],
+    "correcta": "Con sus compañeros",
+    "explicacion": "«…come con sus compañeros en un bar»."
+   },
+   {
+    "id": "LEE-javier-6",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Что он иногда делает днём?",
     "opciones": [
      "Juega al fútbol",
      "Ve la televisión",
      "Va al cine"
     ],
     "correcta": "Juega al fútbol",
-    "explicacion": "«…a veces juega al fútbol»."
+    "explicacion": "«…o juega al fútbol con unos amigos»."
    }
   ]
  },
@@ -782,20 +975,20 @@ const LECTURAS_ES = [
   "tituloRu": "Выходные Лусии",
   "parrafos": [
    {
-    "es": "Los sábados Lucía no trabaja. Se levanta tarde, a las diez. Ella y su amiga Marta desayunan en un bar.",
-    "ru": "По субботам Лусия не работает. Она встаёт поздно, в десять. Они с подругой Мартой завтракают в баре."
+    "es": "Los sábados Lucía no trabaja. Se levanta tarde, a las diez, y desayuna con su amiga Ana en un bar de la plaza.",
+    "ru": "По субботам Лусия не работает. Она встаёт поздно, в десять, и завтракает с подругой Аней в баре на площади."
    },
    {
-    "es": "Después van a las tiendas o caminan por el centro.",
-    "ru": "Потом они ходят по магазинам или гуляют по центру."
+    "es": "Después van de compras o caminan por el centro. A veces van a la playa, porque en Barcelona la playa está muy cerca.",
+    "ru": "Потом они ходят по магазинам или гуляют по центру. Иногда они идут на пляж: в Барселоне пляж совсем рядом."
    },
    {
-    "es": "Por la noche Lucía cena en casa y a veces sale a un bar.",
-    "ru": "Вечером Лусия ужинает дома, а иногда идёт в бар."
+    "es": "Por la noche Lucía cena en casa y a veces sale con sus amigos.",
+    "ru": "Вечером Лусия ужинает дома, а иногда встречается с друзьями."
    },
    {
-    "es": "Los domingos siempre come en casa de sus padres. Su madre cocina muy bien. Por la tarde Lucía descansa y lee un libro.",
-    "ru": "По воскресеньям она всегда обедает у родителей. Её мама очень хорошо готовит. Днём Лусия отдыхает и читает книгу."
+    "es": "Los domingos siempre come en casa de sus padres. Su madre cocina muy bien y su padre prepara el postre. Por la tarde Lucía descansa, lee un libro o ve una película.",
+    "ru": "По воскресеньям она всегда обедает у родителей. Мама очень хорошо готовит, а папа делает десерт. После обеда Лусия отдыхает, читает книгу или смотрит фильм."
    }
   ],
   "preguntas": [
@@ -820,15 +1013,29 @@ const LECTURAS_ES = [
     "forma": "elegir",
     "pide": "С кем она завтракает?",
     "opciones": [
-     "Marta",
-     "Su madre",
-     "Javier"
+     "Con Ana",
+     "Con su madre",
+     "Con Javier"
     ],
-    "correcta": "Marta",
-    "explicacion": "«Ella y su amiga Marta desayunan en un bar»."
+    "correcta": "Con Ana",
+    "explicacion": "«…desayuna con su amiga Ana»."
    },
    {
     "id": "LEE-finde-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Почему они иногда идут на пляж?",
+    "opciones": [
+     "Está muy cerca",
+     "Hace frío",
+     "No hay tiendas"
+    ],
+    "correcta": "Está muy cerca",
+    "explicacion": "«…en Barcelona la playa está muy cerca»."
+   },
+   {
+    "id": "LEE-finde-4",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
@@ -836,13 +1043,27 @@ const LECTURAS_ES = [
     "opciones": [
      "En casa de sus padres",
      "En un bar",
-     "En casa de Marta"
+     "En casa de Ana"
     ],
     "correcta": "En casa de sus padres",
     "explicacion": "«…come en casa de sus padres»."
    },
    {
-    "id": "LEE-finde-4",
+    "id": "LEE-finde-5",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Что делает её папа?",
+    "opciones": [
+     "Prepara el postre",
+     "Cocina la comida",
+     "Lee un libro"
+    ],
+    "correcta": "Prepara el postre",
+    "explicacion": "«…su padre prepara el postre»."
+   },
+   {
+    "id": "LEE-finde-6",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "vf",
@@ -861,16 +1082,16 @@ const LECTURAS_ES = [
   "tituloRu": "Времена года в Испании",
   "parrafos": [
    {
-    "es": "En España hay cuatro estaciones.",
-    "ru": "В Испании четыре времени года."
+    "es": "En España hay cuatro estaciones, pero el tiempo no es igual en todo el país.",
+    "ru": "В Испании четыре времени года, но погода не везде одинаковая."
    },
    {
-    "es": "En primavera hace buen tiempo: no hace frío y no hace mucho calor. En verano hace mucho calor. En julio y agosto mucha gente va a la playa.",
-    "ru": "Весной хорошая погода: не холодно и не очень жарко. Летом очень жарко. В июле и августе многие едут на пляж."
+    "es": "En primavera hace buen tiempo: no hace frío y no hace mucho calor. En verano hace mucho calor, sobre todo en el sur. En julio y agosto mucha gente va a la playa.",
+    "ru": "Весной хорошая погода: не холодно и не очень жарко. Летом очень жарко, особенно на юге. В июле и августе многие едут на пляж."
    },
    {
-    "es": "En otoño llueve a veces y hace viento.",
-    "ru": "Осенью иногда идёт дождь и дует ветер."
+    "es": "En otoño llueve a veces y hace viento. En el norte, en Galicia o en Asturias, llueve mucho.",
+    "ru": "Осенью иногда идёт дождь и дует ветер. На севере, в Галисии или в Астурии, дожди идут часто."
    },
    {
     "es": "En invierno hace frío en Madrid y en las montañas nieva. Pero en Sevilla o en Málaga casi nunca hace mucho frío.",
@@ -897,6 +1118,20 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
+    "pide": "Где летом особенно жарко?",
+    "opciones": [
+     "En el sur",
+     "En el norte",
+     "En las montañas"
+    ],
+    "correcta": "En el sur",
+    "explicacion": "«…sobre todo en el sur»."
+   },
+   {
+    "id": "LEE-estaciones-3",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
     "pide": "Когда многие едут на пляж?",
     "opciones": [
      "En julio y agosto",
@@ -907,7 +1142,21 @@ const LECTURAS_ES = [
     "explicacion": "«En julio y agosto mucha gente va a la playa»."
    },
    {
-    "id": "LEE-estaciones-3",
+    "id": "LEE-estaciones-4",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Где часто идут дожди?",
+    "opciones": [
+     "En el norte",
+     "En Sevilla",
+     "En Málaga"
+    ],
+    "correcta": "En el norte",
+    "explicacion": "«En el norte, en Galicia o en Asturias, llueve mucho»."
+   },
+   {
+    "id": "LEE-estaciones-5",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
@@ -921,7 +1170,7 @@ const LECTURAS_ES = [
     "explicacion": "«…en las montañas nieva»."
    },
    {
-    "id": "LEE-estaciones-4",
+    "id": "LEE-estaciones-6",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "vf",
@@ -940,20 +1189,20 @@ const LECTURAS_ES = [
   "tituloRu": "Что мне нравится",
   "parrafos": [
    {
-    "es": "Me llamo Pablo y vivo en Madrid. Me gusta mucho el deporte: juego al fútbol los martes y los jueves.",
-    "ru": "Меня зовут Пабло, я живу в Мадриде. Я очень люблю спорт: играю в футбол по вторникам и четвергам."
+    "es": "Me llamo Pablo y vivo en Madrid. Me gusta mucho el deporte: juego al fútbol los martes y los jueves con mis amigos del trabajo.",
+    "ru": "Меня зовут Пабло, я живу в Мадриде. Я очень люблю спорт: играю в футбол по вторникам и четвергам с друзьями с работы."
    },
    {
     "es": "También me encanta la música. Por las noches escucho música y a veces voy a un concierto.",
     "ru": "Ещё я обожаю музыку. По вечерам слушаю музыку, а иногда хожу на концерт."
    },
    {
-    "es": "No me gusta ver la televisión, pero me gustan las películas.",
-    "ru": "Я не люблю смотреть телевизор, но мне нравятся фильмы."
+    "es": "No me gusta ver la televisión, pero me gustan mucho las películas. Los domingos voy al cine.",
+    "ru": "Я не люблю смотреть телевизор, но очень люблю фильмы. По воскресеньям хожу в кино."
    },
    {
-    "es": "¿Y Marta, mi novia? Marta lee mucho y tiene dos gatos.",
-    "ru": "А Марта, моя девушка? Марта много читает, и у неё две кошки."
+    "es": "¿Y Marta, mi novia? A ella no le gusta el fútbol. Le encanta leer, cocinar y viajar, y tiene dos gatos.",
+    "ru": "А Марта, моя девушка? Она не любит футбол. Она обожает читать, готовить и путешествовать, и у неё две кошки."
    }
   ],
   "preguntas": [
@@ -975,27 +1224,55 @@ const LECTURAS_ES = [
     "id": "LEE-gustos-2",
     "tipo": "lectura",
     "dificultad": 1,
+    "forma": "elegir",
+    "pide": "С кем он играет?",
+    "opciones": [
+     "Con sus amigos del trabajo",
+     "Con Marta",
+     "Con su padre"
+    ],
+    "correcta": "Con sus amigos del trabajo",
+    "explicacion": "«…con mis amigos del trabajo»."
+   },
+   {
+    "id": "LEE-gustos-3",
+    "tipo": "lectura",
+    "dificultad": 1,
     "forma": "vf",
     "afirmacion": "Pablo ve mucho la televisión.",
     "verdadero": false,
     "explicacion": "«No me gusta ver la televisión»."
    },
    {
-    "id": "LEE-gustos-3",
+    "id": "LEE-gustos-4",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "elegir",
-    "pide": "Что есть у Марты?",
+    "pide": "Куда он ходит по воскресеньям?",
     "opciones": [
-     "Dos gatos",
-     "Un perro",
-     "Dos hermanos"
+     "Al cine",
+     "Al fútbol",
+     "A un concierto"
     ],
-    "correcta": "Dos gatos",
-    "explicacion": "«…tiene dos gatos»."
+    "correcta": "Al cine",
+    "explicacion": "«Los domingos voy al cine»."
    },
    {
-    "id": "LEE-gustos-4",
+    "id": "LEE-gustos-5",
+    "tipo": "lectura",
+    "dificultad": 1,
+    "forma": "elegir",
+    "pide": "Что не нравится Марте?",
+    "opciones": [
+     "El fútbol",
+     "Leer",
+     "Viajar"
+    ],
+    "correcta": "El fútbol",
+    "explicacion": "«A ella no le gusta el fútbol»."
+   },
+   {
+    "id": "LEE-gustos-6",
     "tipo": "lectura",
     "dificultad": 1,
     "forma": "situacion",
@@ -1028,20 +1305,24 @@ const LECTURAS_ES = [
   "tituloRu": "На рынке",
   "parrafos": [
    {
-    "es": "Los sábados por la mañana Ana va al mercado de su barrio. Prefiere el mercado al supermercado: la fruta y la verdura son más frescas y la gente es muy simpática.",
-    "ru": "По субботам утром Аня ходит на рынок в своём районе. Рынок ей нравится больше супермаркета: фрукты и овощи свежее, а люди очень приятные."
+    "es": "Los sábados por la mañana Ana va al mercado de su barrio. Prefiere el mercado al supermercado: la fruta y la verdura son muy frescas y la gente es muy simpática.",
+    "ru": "По субботам утром Аня ходит на рынок в своём районе. Рынок ей нравится больше супермаркета: фрукты и овощи очень свежие, а люди очень приятные."
    },
    {
     "es": "Primero va a la frutería. Compra un kilo de naranjas, medio kilo de fresas y unos plátanos.",
-    "ru": "Сначала она идёт в овощной магазин. Покупает килограмм апельсинов, полкило клубники и несколько бананов."
+    "ru": "Сначала она идёт во фруктовую лавку. Покупает килограмм апельсинов, полкило клубники и несколько бананов."
    },
    {
     "es": "Después va a la pescadería. Hoy el pescado está muy bien de precio: un kilo cuesta doce euros.",
-    "ru": "Потом идёт в рыбный. Сегодня рыба по хорошей цене: килограмм стоит двенадцать евро."
+    "ru": "Потом она идёт в рыбную лавку. Сегодня рыба по хорошей цене: килограмм стоит двенадцать евро."
    },
    {
-    "es": "En la carnicería compra pollo para la semana. Paga con tarjeta: hoy no tiene efectivo. ¡Y vuelve a casa muy contenta!",
-    "ru": "В мясной лавке она покупает курицу на неделю. Платит картой: сегодня у неё нет наличных. И возвращается домой очень довольная!"
+    "es": "En la carnicería compra pollo y un poco de jamón para la semana. En total paga treinta euros. Paga con tarjeta, porque hoy no tiene efectivo.",
+    "ru": "В мясной лавке она покупает курицу и немного хамона на неделю. Всего она платит тридцать евро. Платит картой, потому что сегодня у неё нет наличных."
+   },
+   {
+    "es": "Ana vuelve a casa muy contenta. Ahora tiene que cocinar: ¡quiere comer bien toda la semana!",
+    "ru": "Аня возвращается домой очень довольная. Теперь ей нужно готовить: она хочет хорошо питаться всю неделю!"
    }
   ],
   "preguntas": [
@@ -1050,21 +1331,35 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué día va Ana al mercado?",
+    "pide": "¿Por qué prefiere Ana el mercado?",
     "opciones": [
-     "El sábado",
-     "El domingo",
-     "El lunes"
+     "La fruta es muy fresca",
+     "Es más barato",
+     "Está más cerca"
     ],
-    "correcta": "El sábado",
-    "explicacion": "«Los sábados por la mañana»."
+    "correcta": "La fruta es muy fresca",
+    "explicacion": "«…la fruta y la verdura son muy frescas»."
    },
    {
     "id": "LEE-mercado-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuánto cuesta un kilo de pescado?",
+    "pide": "¿Qué compra en la frutería?",
+    "opciones": [
+     "Naranjas, fresas y plátanos",
+     "Pollo y jamón",
+     "Pan y queso"
+    ],
+    "correcta": "Naranjas, fresas y plátanos",
+    "explicacion": "«Compra un kilo de naranjas, medio kilo de fresas y unos plátanos»."
+   },
+   {
+    "id": "LEE-mercado-3",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Cuánto cuesta un kilo de pescado hoy?",
     "opciones": [
      "Doce euros",
      "Dos euros",
@@ -1074,47 +1369,62 @@ const LECTURAS_ES = [
     "explicacion": "«…un kilo cuesta doce euros»."
    },
    {
-    "id": "LEE-mercado-3",
-    "tipo": "lectura",
-    "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Ana paga en efectivo.",
-    "verdadero": false,
-    "explicacion": "«Paga con tarjeta: hoy no tiene efectivo»."
-   },
-   {
     "id": "LEE-mercado-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué compra en la carnicería?",
+    "pide": "¿Cuánto paga en total?",
     "opciones": [
-     "Pollo",
-     "Pescado",
-     "Fresas"
+     "Treinta euros",
+     "Doce euros",
+     "Trece euros"
     ],
-    "correcta": "Pollo",
-    "explicacion": "«…compra pollo para la semana»."
+    "correcta": "Treinta euros",
+    "explicacion": "«En total paga treinta euros»."
    },
    {
     "id": "LEE-mercado-5",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Ana paga en efectivo.",
+    "verdadero": false,
+    "explicacion": "«Paga con tarjeta, porque hoy no tiene efectivo»."
+   },
+   {
+    "id": "LEE-mercado-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "situacion",
-    "pide": "А ты что обычно покупаешь на неделю? Ответь по-испански.",
+    "pide": "Ты в овощной лавке. Попроси что-нибудь купить (количество + продукт).",
     "sit": {
      "necesita": [
       {
-       "es": "что покупаешь",
+       "es": "количество",
        "formas": [
-        "compro",
-        "necesito",
-        "quiero"
+        "un kilo",
+        "medio kilo",
+        "dos kilos",
+        "cien gramos",
+        "unos",
+        "unas",
+        "un",
+        "una"
+       ]
+      },
+      {
+       "es": "просьба",
+       "formas": [
+        "quería",
+        "quiero",
+        "me pones",
+        "póngame",
+        "necesito"
        ]
       }
      ],
      "modelos": [
-      "Normalmente compro fruta, pan, leche y pollo."
+      "Hola, quería un kilo de naranjas, por favor."
      ]
     }
    }
@@ -1129,20 +1439,24 @@ const LECTURAS_ES = [
   "tituloRu": "Комплексный обед",
   "parrafos": [
    {
-    "es": "En España muchos restaurantes tienen menú del día de lunes a viernes. Normalmente cuesta entre doce y quince euros.",
-    "ru": "В Испании во многих ресторанах с понедельника по пятницу есть комплексный обед. Обычно он стоит от двенадцати до пятнадцати евро."
+    "es": "En España muchos restaurantes tienen menú del día de lunes a viernes a la hora de comer. Normalmente cuesta entre doce y quince euros.",
+    "ru": "В Испании во многих ресторанах с понедельника по пятницу, в обеденное время, есть комплексный обед. Обычно он стоит от двенадцати до пятнадцати евро."
    },
    {
-    "es": "El menú tiene un primer plato, un segundo plato y un postre o un café. El pan y la bebida no cuestan más: están en el precio.",
-    "ru": "В меню есть первое блюдо, второе блюдо и десерт или кофе. Хлеб и напиток не стоят дороже: они входят в цену."
+    "es": "El menú tiene un primer plato, un segundo plato y un postre o un café. El pan y la bebida están en el precio: agua, vino o un refresco.",
+    "ru": "В меню есть первое, второе и десерт или кофе. Хлеб и напиток входят в цену: вода, вино или газировка."
    },
    {
-    "es": "De primero hay ensalada, sopa o arroz. De segundo, carne o pescado con patatas.",
-    "ru": "На первое — салат, суп или рис. На второе — мясо или рыба с картошкой."
+    "es": "De primero hay ensalada, sopa, verdura o arroz. De segundo, carne o pescado con patatas. De postre, fruta o helado.",
+    "ru": "На первое — салат, суп, овощи или рис. На второе — мясо или рыба с картошкой. На десерт — фрукты или мороженое."
    },
    {
-    "es": "Javier come el menú del día casi todos los días: es bueno, hay mucha comida y no es caro.",
-    "ru": "Хавьер обедает комплексным обедом почти каждый день: это вкусно, еды много, и это недорого."
+    "es": "Muchos trabajadores comen el menú del día, porque es rápido y barato. Javier lo come casi todos los días con sus compañeros. «Es bueno, hay mucha comida y no es caro», dice.",
+    "ru": "Многие работающие люди обедают комплексным обедом, потому что это быстро и дёшево. Хавьер ест его почти каждый день с коллегами. «Вкусно, еды много, и недорого», — говорит он."
+   },
+   {
+    "es": "Pero cuidado: los fines de semana muchos restaurantes no tienen menú del día.",
+    "ru": "Но будь внимателен: по выходным во многих ресторанах комплексного обеда нет."
    }
   ],
   "preguntas": [
@@ -1154,11 +1468,11 @@ const LECTURAS_ES = [
     "pide": "¿Cuándo hay menú del día?",
     "opciones": [
      "De lunes a viernes",
-     "Los domingos",
-     "Todos los días del año"
+     "Solo los domingos",
+     "Por la noche"
     ],
     "correcta": "De lunes a viernes",
-    "explicacion": "«…de lunes a viernes»."
+    "explicacion": "«…de lunes a viernes, a la hora de comer»."
    },
    {
     "id": "LEE-menu-2",
@@ -1169,47 +1483,56 @@ const LECTURAS_ES = [
     "opciones": [
      "Entre doce y quince euros",
      "Cinco euros",
-     "Treinta euros"
+     "Más de treinta euros"
     ],
     "correcta": "Entre doce y quince euros",
-    "explicacion": "«…entre doce y quince euros»."
+    "explicacion": "«Normalmente cuesta entre doce y quince euros»."
    },
    {
     "id": "LEE-menu-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "elegir",
-    "pide": "¿Qué hay de segundo?",
-    "opciones": [
-     "Carne o pescado",
-     "Sopa",
-     "Ensalada"
-    ],
-    "correcta": "Carne o pescado",
-    "explicacion": "«De segundo, carne o pescado»."
+    "forma": "vf",
+    "afirmacion": "El pan y la bebida cuestan más.",
+    "verdadero": false,
+    "explicacion": "«El pan y la bebida están en el precio»."
    },
    {
     "id": "LEE-menu-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "El pan cuesta más.",
-    "verdadero": false,
-    "explicacion": "«El pan y la bebida no cuestan más»."
+    "forma": "elegir",
+    "pide": "¿Qué hay de postre?",
+    "opciones": [
+     "Fruta o helado",
+     "Sopa",
+     "Pescado"
+    ],
+    "correcta": "Fruta o helado",
+    "explicacion": "«De postre, fruta o helado»."
    },
    {
     "id": "LEE-menu-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Por qué come Javier el menú?",
+    "pide": "¿Por qué come Javier el menú del día?",
     "opciones": [
      "Es bueno y no es caro",
      "No sabe cocinar",
-     "Es muy caro"
+     "Le gusta comer solo"
     ],
     "correcta": "Es bueno y no es caro",
-    "explicacion": "«…es bueno, hay mucha comida y no es caro»."
+    "explicacion": "«Es bueno, hay mucha comida y no es caro»."
+   },
+   {
+    "id": "LEE-menu-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Los sábados todos los restaurantes tienen menú del día.",
+    "verdadero": false,
+    "explicacion": "«…los fines de semana muchos restaurantes no tienen menú del día»."
    }
   ]
  },
@@ -1230,12 +1553,16 @@ const LECTURAS_ES = [
     "ru": "Тапа — это маленькая тарелка: немного тортильи, хамона, сыра или картошки."
    },
    {
-    "es": "En Granada pides una bebida y la tapa no cuesta nada.",
-    "ru": "В Гранаде, например, заказываешь напиток — и тапа ничего не стоит."
+    "es": "En muchos bares de Granada, de León o de Jaén, pides una bebida y la tapa no cuesta nada: es gratis.",
+    "ru": "Во многих барах Гранады, Леона или Хаэна заказываешь напиток — и тапа ничего не стоит: она бесплатная."
    },
    {
-    "es": "¿Tienes mucha hambre? Puedes pedir una ración: es un plato más grande, para dos o tres personas.",
-    "ru": "Очень голоден? Можно заказать порцию: это блюдо побольше, на двух-трёх человек."
+    "es": "En otras ciudades una tapa cuesta entre dos y cinco euros. ¿Tienes mucha hambre? Puedes pedir una ración: es un plato grande, para dos o tres personas.",
+    "ru": "В других городах тапа стоит от двух до пяти евро. Очень голоден? Можно заказать порцию: это большое блюдо на двух-трёх человек."
+   },
+   {
+    "es": "Ir de tapas es una costumbre muy española: la gente come de pie, habla mucho y va de bar en bar.",
+    "ru": "Ходить по тапас — очень испанская традиция: люди едят стоя, много разговаривают и переходят из бара в бар."
    }
   ],
   "preguntas": [
@@ -1248,7 +1575,7 @@ const LECTURAS_ES = [
     "opciones": [
      "Un plato pequeño",
      "Una bebida",
-     "Un postre"
+     "Un postre grande"
     ],
     "correcta": "Un plato pequeño",
     "explicacion": "«Una tapa es un plato pequeño»."
@@ -1258,37 +1585,51 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde la tapa no cuesta nada?",
+    "pide": "¿Qué piden para beber?",
     "opciones": [
-     "En Granada",
-     "En Madrid",
-     "En Barcelona"
+     "Una caña o un vino",
+     "Un café",
+     "Un zumo"
     ],
-    "correcta": "En Granada",
-    "explicacion": "«En Granada… la tapa no cuesta nada»."
+    "correcta": "Una caña o un vino",
+    "explicacion": "«…piden una caña o un vino»."
    },
    {
     "id": "LEE-tapas-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Una ración es más pequeña que una tapa.",
-    "verdadero": false,
-    "explicacion": "«…es un plato más grande»."
+    "forma": "elegir",
+    "pide": "¿Dónde la tapa es gratis en muchos bares?",
+    "opciones": [
+     "En Granada",
+     "En Barcelona",
+     "En Madrid"
+    ],
+    "correcta": "En Granada",
+    "explicacion": "«En muchos bares de Granada, de León o de Jaén… es gratis»."
    },
    {
     "id": "LEE-tapas-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué piden en el bar?",
+    "pide": "¿Para cuántas personas es una ración?",
     "opciones": [
-     "Una caña o un vino",
-     "Un té",
-     "Un zumo de naranja"
+     "Para dos o tres",
+     "Para una",
+     "Para diez"
     ],
-    "correcta": "Una caña o un vino",
-    "explicacion": "«…piden una caña o un vino»."
+    "correcta": "Para dos o tres",
+    "explicacion": "«…para dos o tres personas»."
+   },
+   {
+    "id": "LEE-tapas-5",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Para ir de tapas, la gente se queda en un solo bar.",
+    "verdadero": false,
+    "explicacion": "«…va de bar en bar»."
    }
   ]
  },
@@ -1301,28 +1642,36 @@ const LECTURAS_ES = [
   "tituloRu": "Ужин в субботу",
   "parrafos": [
    {
-    "es": "Lucía: Ana, el sábado es la cena en casa. ¿Qué compramos?",
+    "es": "Lucía: Ana, el sábado es la cena en mi casa. ¿Qué compramos?",
     "ru": "Лусия: Аня, в субботу ужин у меня дома. Что купим?"
    },
    {
-    "es": "Ana: Somos seis, ¿no? Podemos hacer una tortilla y una ensalada.",
-    "ru": "Аня: Нас шестеро, да? Можем сделать тортилью и салат."
+    "es": "Ana: Somos seis, ¿no? Podemos hacer una tortilla de patatas y una ensalada.",
+    "ru": "Аня: Нас шестеро, да? Можем сделать картофельную тортилью и салат."
    },
    {
     "es": "Lucía: Vale. Para la tortilla necesitamos patatas, huevos y cebolla. Tengo aceite en casa.",
-    "ru": "Лусия: Хорошо. Для тортильи нужны картошка, яйца и лук. Масло у меня дома есть."
+    "ru": "Лусия: Хорошо. Для тортильи нужны картошка, яйца и лук. Масло у меня есть."
    },
    {
-    "es": "Ana: Yo compro el pan y el queso. ¿Y la bebida?",
-    "ru": "Аня: Я куплю хлеб и сыр. А напитки?"
+    "es": "Ana: ¿Y para la ensalada? Lucía: Lechuga, tomates y un poco de queso. Hay que comprar casi todo: mi nevera está vacía.",
+    "ru": "Аня: А для салата? Лусия: Салат-латук, помидоры и немного сыра. Купить нужно почти всё: холодильник у меня пустой."
    },
    {
-    "es": "Lucía: Pablo compra el vino. Tú, ¿puedes comprar agua y zumo?",
-    "ru": "Лусия: Вино покупает Пабло. А ты можешь купить воду и сок?"
+    "es": "Ana: Yo compro el pan, el queso y la verdura. ¿Y la bebida?",
+    "ru": "Аня: Я куплю хлеб, сыр и овощи. А напитки?"
    },
    {
-    "es": "Ana: Sí, claro. ¿Y el postre? Lucía: ¡Yo hago una tarta!",
-    "ru": "Аня: Да, конечно. А десерт? Лусия: Я испеку торт!"
+    "es": "Lucía: Pablo y Marta vienen de Madrid y traen el vino. Tú, ¿puedes comprar agua y zumo?",
+    "ru": "Лусия: Пабло и Марта приезжают из Мадрида и привезут вино. А ты можешь купить воду и сок?"
+   },
+   {
+    "es": "Ana: Sí, claro. ¿Y el postre? Lucía: ¡Yo hago una tarta de chocolate!",
+    "ru": "Аня: Да, конечно. А десерт? Лусия: Я испеку шоколадный торт!"
+   },
+   {
+    "es": "Ana: ¡Qué rica! ¿A qué hora voy? Lucía: A las nueve. ¡Hasta el sábado!",
+    "ru": "Аня: Как вкусно! Во сколько мне прийти? Лусия: В девять. До субботы!"
    }
   ],
   "preguntas": [
@@ -1334,11 +1683,11 @@ const LECTURAS_ES = [
     "pide": "¿Cuántas personas van a la cena?",
     "opciones": [
      "Seis",
-     "Dos",
-     "Doce"
+     "Tres",
+     "Diez"
     ],
     "correcta": "Seis",
-    "explicacion": "«Somos seis»."
+    "explicacion": "«Somos seis, ¿no?»."
    },
    {
     "id": "LEE-chat-2",
@@ -1348,56 +1697,71 @@ const LECTURAS_ES = [
     "pide": "¿Qué necesitan para la tortilla?",
     "opciones": [
      "Patatas, huevos y cebolla",
-     "Pan y queso",
-     "Agua y zumo"
+     "Lechuga y tomates",
+     "Pan y queso"
     ],
     "correcta": "Patatas, huevos y cebolla",
-    "explicacion": "«…necesitamos patatas, huevos y cebolla»."
+    "explicacion": "«Para la tortilla necesitamos patatas, huevos y cebolla»."
    },
    {
     "id": "LEE-chat-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "elegir",
-    "pide": "¿Quién compra el vino?",
-    "opciones": [
-     "Pablo",
-     "Ana",
-     "Lucía"
-    ],
-    "correcta": "Pablo",
-    "explicacion": "«Pablo compra el vino»."
+    "forma": "vf",
+    "afirmacion": "La nevera de Lucía está llena.",
+    "verdadero": false,
+    "explicacion": "«…mi nevera está vacía»."
    },
    {
     "id": "LEE-chat-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Lucía no tiene aceite en casa.",
-    "verdadero": false,
-    "explicacion": "«Tengo aceite en casa»."
+    "forma": "elegir",
+    "pide": "¿Quién trae el vino?",
+    "opciones": [
+     "Pablo y Marta",
+     "Ana",
+     "Lucía"
+    ],
+    "correcta": "Pablo y Marta",
+    "explicacion": "«Pablo y Marta vienen de Madrid y traen el vino»."
    },
    {
     "id": "LEE-chat-5",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué postre hace Lucía?",
+    "opciones": [
+     "Una tarta de chocolate",
+     "Un helado",
+     "Fruta"
+    ],
+    "correcta": "Una tarta de chocolate",
+    "explicacion": "«¡Yo hago una tarta de chocolate!»."
+   },
+   {
+    "id": "LEE-chat-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "situacion",
-    "pide": "Что ты принесёшь на ужин? Ответь Лусии.",
+    "pide": "Ты тоже идёшь на ужин. Напиши, что ты купишь или приготовишь.",
     "sit": {
      "necesita": [
       {
-       "es": "что принесёшь",
+       "es": "что",
        "formas": [
         "compro",
         "traigo",
-        "llevo",
         "hago",
-        "puedo"
+        "puedo",
+        "llevo",
+        "preparo"
        ]
       }
      ],
      "modelos": [
-      "Yo compro el pan y una tarta de chocolate."
+      "Yo compro el pan y hago una ensalada."
      ]
     }
    }
@@ -1412,20 +1776,24 @@ const LECTURAS_ES = [
   "tituloRu": "Мадрид",
   "parrafos": [
    {
-    "es": "Madrid está en el centro de España. Es una ciudad muy grande y mucha gente vive allí.",
-    "ru": "Мадрид находится в центре Испании. Это очень большой город, и в нём живёт много людей."
+    "es": "Madrid es la capital de España y está en el centro del país. Es una ciudad muy grande: allí viven más de tres millones de personas.",
+    "ru": "Мадрид — столица Испании, он находится в центре страны. Это очень большой город: там живут больше трёх миллионов человек."
    },
    {
-    "es": "En el centro está la Puerta del Sol. Desde allí puedes ir a pie a la Plaza Mayor y al Palacio Real.",
-    "ru": "В центре находится площадь Пуэрта-дель-Соль. Оттуда можно дойти пешком до Пласа-Майор и до Королевского дворца."
+    "es": "En el centro está la Puerta del Sol. Desde allí puedes ir a pie a la Plaza Mayor y al Palacio Real. Muy cerca está también la Gran Vía, con muchas tiendas, cines y teatros.",
+    "ru": "В центре находится площадь Пуэрта-дель-Соль. Оттуда можно дойти пешком до Пласа-Майор и до Королевского дворца. Совсем рядом и Гран-Виа, где много магазинов, кинотеатров и театров."
    },
    {
-    "es": "¿Quieres descansar? Ve al parque del Retiro: es muy grande y muy bonito. Los domingos hay muchas familias allí.",
-    "ru": "Хочешь отдохнуть? Иди в парк Ретиро: он очень большой и красивый. По воскресеньям там много семей."
+    "es": "¿Te gusta el arte? Madrid tiene museos muy importantes: el Prado, el Reina Sofía y el Thyssen.",
+    "ru": "Любишь искусство? В Мадриде очень важные музеи: Прадо, Музей королевы Софии и Тиссен."
    },
    {
-    "es": "Para ir por la ciudad, coge el metro. Tiene doce líneas y llega a todos los barrios.",
-    "ru": "Чтобы передвигаться по городу, садись на метро. В нём двенадцать линий, и оно доходит до всех районов."
+    "es": "¿Quieres descansar? Ve al parque del Retiro: es muy grande y muy bonito, y tiene un lago pequeño. Los domingos hay muchas familias allí.",
+    "ru": "Хочешь отдохнуть? Иди в парк Ретиро: он очень большой и красивый, и в нём есть небольшое озеро. По воскресеньям там много семей."
+   },
+   {
+    "es": "Para ir por la ciudad, coge el metro: tiene doce líneas y llega a casi todos los barrios.",
+    "ru": "Чтобы передвигаться по городу, садись на метро: в нём двенадцать линий, и оно доходит почти до всех районов."
    },
    {
     "es": "La gente de Madrid dice: «De Madrid al cielo».",
@@ -1438,51 +1806,65 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde está Madrid?",
+    "pide": "¿Cuántas personas viven en Madrid?",
     "opciones": [
-     "En el centro de España",
-     "Al lado del mar",
-     "Cerca de Barcelona"
+     "Más de tres millones",
+     "Trescientas mil",
+     "Más de treinta millones"
     ],
-    "correcta": "En el centro de España",
-    "explicacion": "«Madrid está en el centro de España»."
+    "correcta": "Más de tres millones",
+    "explicacion": "«…allí viven más de tres millones de personas»."
    },
    {
     "id": "LEE-madrid-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cómo puedes ir de la Puerta del Sol a la Plaza Mayor?",
+    "pide": "¿Adónde puedes ir a pie desde la Puerta del Sol?",
     "opciones": [
-     "A pie",
-     "En avión",
-     "En barco"
+     "A la Plaza Mayor",
+     "Al aeropuerto",
+     "A la playa"
     ],
-    "correcta": "A pie",
-    "explicacion": "«…puedes ir a pie»."
+    "correcta": "A la Plaza Mayor",
+    "explicacion": "«Desde allí puedes ir a pie a la Plaza Mayor…»."
    },
    {
     "id": "LEE-madrid-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué es el Retiro?",
+    "pide": "¿Qué hay en la Gran Vía?",
     "opciones": [
-     "Un parque",
-     "Una plaza",
+     "Tiendas, cines y teatros",
+     "Un lago",
      "Un museo"
     ],
-    "correcta": "Un parque",
-    "explicacion": "«…el parque del Retiro»."
+    "correcta": "Tiendas, cines y teatros",
+    "explicacion": "«…la Gran Vía, con muchas tiendas, cines y teatros»."
    },
    {
     "id": "LEE-madrid-4",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Dónde puedes descansar?",
+    "opciones": [
+     "En el parque del Retiro",
+     "En el Palacio Real",
+     "En el metro"
+    ],
+    "correcta": "En el parque del Retiro",
+    "explicacion": "«¿Quieres descansar? Ve al parque del Retiro»."
+   },
+   {
+    "id": "LEE-madrid-5",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "vf",
-    "afirmacion": "Madrid es una ciudad pequeña.",
+    "afirmacion": "El metro de Madrid tiene tres líneas.",
     "verdadero": false,
-    "explicacion": "«Es una ciudad muy grande»."
+    "explicacion": "«…tiene doce líneas»."
    }
   ]
  },
@@ -1495,20 +1877,24 @@ const LECTURAS_ES = [
   "tituloRu": "Барселонское метро",
   "parrafos": [
    {
-    "es": "Ana va todos los días a clase en metro. Vive cerca de la estación de Sants y la escuela de español está en el centro, al lado de la plaza de Catalunya.",
-    "ru": "Аня каждый день ездит на занятия на метро. Она живёт рядом со станцией Сантс, а школа испанского — в центре, рядом с площадью Каталонии."
+    "es": "Ana va todos los días a clase en metro. Vive en Gràcia, cerca de la estación de Fontana, y la escuela de español está en el centro, al lado de la plaza de Catalunya.",
+    "ru": "Аня каждый день ездит на занятия на метро. Она живёт в Грасии, рядом со станцией Фонтана, а школа испанского — в центре, рядом с площадью Каталонии."
    },
    {
-    "es": "Coge la línea tres, la verde. Son siete paradas y tarda unos quince minutos.",
-    "ru": "Она садится на третью, зелёную линию. Это семь остановок, дорога занимает около пятнадцати минут."
+    "es": "Coge la línea tres, la verde. Son solo tres paradas y tarda unos diez minutos.",
+    "ru": "Она садится на третью, зелёную линию. Всего три остановки, дорога занимает минут десять."
    },
    {
-    "es": "Ana no compra un billete cada día: tiene una tarjeta para todo el mes. Es más barato.",
-    "ru": "Аня не покупает билет каждый день: у неё проездной на весь месяц. Так дешевле."
+    "es": "Ana no compra un billete cada día: tiene una tarjeta para todo el mes. Con esta tarjeta puede coger el metro, el autobús y el tren en la ciudad. Es mucho más barato.",
+    "ru": "Аня не покупает билет каждый день: у неё проездной на весь месяц. С ним можно ездить на метро, автобусе и поезде по городу. Так гораздо дешевле."
    },
    {
-    "es": "Por la mañana el metro va muy lleno. A veces Ana sale de casa más temprano y va a pie: tarda cuarenta minutos.",
-    "ru": "Утром в метро очень много людей. Иногда Аня выходит из дома пораньше и идёт пешком: это сорок минут."
+    "es": "Por la mañana el metro va muy lleno. Cuando hace buen tiempo, Ana sale de casa más temprano y va a pie: baja por el paseo de Gràcia y tarda media hora.",
+    "ru": "Утром в метро очень много людей. Когда хорошая погода, Аня выходит из дома пораньше и идёт пешком: спускается по проспекту Пасеч-де-Грасия, это полчаса."
+   },
+   {
+    "es": "¿Un consejo? En el metro de Barcelona, ten cuidado con el bolso y con el móvil.",
+    "ru": "Совет? В барселонском метро следи за сумкой и телефоном."
    }
   ],
   "preguntas": [
@@ -1517,51 +1903,79 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué línea coge Ana?",
+    "pide": "¿Dónde vive Ana?",
     "opciones": [
-     "La tres",
-     "La uno",
-     "La cinco"
+     "En Gràcia",
+     "En el centro",
+     "Cerca de la playa"
     ],
-    "correcta": "La tres",
-    "explicacion": "«Coge la línea tres, la verde»."
+    "correcta": "En Gràcia",
+    "explicacion": "«Vive en Gràcia, cerca de la estación de Fontana»."
    },
    {
     "id": "LEE-metro-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuánto tarda en metro?",
+    "pide": "¿Qué línea coge?",
     "opciones": [
-     "Unos quince minutos",
-     "Una hora",
-     "Cinco minutos"
+     "La tres, la verde",
+     "La uno, la roja",
+     "La cinco, la azul"
     ],
-    "correcta": "Unos quince minutos",
-    "explicacion": "«…tarda unos quince minutos»."
+    "correcta": "La tres, la verde",
+    "explicacion": "«Coge la línea tres, la verde»."
    },
    {
     "id": "LEE-metro-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Ana compra un billete cada día.",
-    "verdadero": false,
-    "explicacion": "«Ana no compra un billete cada día»."
+    "forma": "elegir",
+    "pide": "¿Cuántas paradas son?",
+    "opciones": [
+     "Tres",
+     "Siete",
+     "Diez"
+    ],
+    "correcta": "Tres",
+    "explicacion": "«Son solo tres paradas»."
    },
    {
     "id": "LEE-metro-4",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Ana compra un billete cada día.",
+    "verdadero": false,
+    "explicacion": "«Ana no compra un billete cada día: tiene una tarjeta para todo el mes»."
+   },
+   {
+    "id": "LEE-metro-5",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cómo va el metro por la mañana?",
+    "pide": "¿Cuánto tarda a pie?",
     "opciones": [
-     "Muy lleno",
-     "Vacío",
-     "Muy caro"
+     "Media hora",
+     "Diez minutos",
+     "Dos horas"
     ],
-    "correcta": "Muy lleno",
-    "explicacion": "«…el metro va muy lleno»."
+    "correcta": "Media hora",
+    "explicacion": "«…y tarda media hora»."
+   },
+   {
+    "id": "LEE-metro-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué consejo da el texto?",
+    "opciones": [
+     "Tener cuidado con el bolso",
+     "Ir siempre a pie",
+     "Comprar un billete cada día"
+    ],
+    "correcta": "Tener cuidado con el bolso",
+    "explicacion": "«…ten cuidado con el bolso y con el móvil»."
    }
   ]
  },
@@ -1574,24 +1988,28 @@ const LECTURAS_ES = [
   "tituloRu": "Музей Прадо",
   "parrafos": [
    {
-    "es": "El Museo del Prado está en Madrid. Es un museo muy grande y muy antiguo.",
-    "ru": "Музей Прадо находится в Мадриде. Это очень большой и очень старый музей."
+    "es": "El Museo del Prado está en Madrid, en el paseo del Prado. Es un museo muy importante y muy antiguo: tiene más de doscientos años.",
+    "ru": "Музей Прадо находится в Мадриде, на бульваре Прадо. Это очень важный и очень старый музей: ему больше двухсот лет."
    },
    {
-    "es": "Tiene cuadros de Velázquez, Goya y El Greco.",
-    "ru": "В нём картины Веласкеса, Гойи и Эль Греко."
+    "es": "Tiene cuadros de pintores españoles muy famosos, como Velázquez, Goya y El Greco. Allí está «Las meninas», el famoso cuadro de Velázquez.",
+    "ru": "В нём картины очень известных испанских художников: Веласкеса, Гойи и Эль Греко. Там висят «Менины», знаменитая картина Веласкеса."
    },
    {
-    "es": "El museo abre todos los días. De lunes a sábado, de seis a ocho de la tarde, no pagas.",
-    "ru": "Музей открыт каждый день. С понедельника по субботу с шести до восьми вечера вход бесплатный."
+    "es": "También tiene cuadros de pintores de otros países, como Rubens, Tiziano o el Bosco.",
+    "ru": "Есть и картины художников из других стран: Рубенса, Тициана или Босха."
    },
    {
-    "es": "Para llegar, coge el metro hasta la estación de Atocha. Desde allí, camina diez minutos.",
-    "ru": "Чтобы добраться, доезжай на метро до станции Аточа. Оттуда — десять минут пешком."
+    "es": "El museo abre todos los días. De lunes a sábado, de seis a ocho de la tarde, y los domingos, de cinco a siete, no pagas.",
+    "ru": "Музей открыт каждый день. С понедельника по субботу с шести до восьми вечера, а по воскресеньям с пяти до семи вход бесплатный."
    },
    {
-    "es": "El museo es muy grande: no tienes que verlo todo en un día. ¡Puedes volver!",
-    "ru": "Музей очень большой: не нужно смотреть всё за один день. Можно вернуться!"
+    "es": "Para llegar, coge la línea uno del metro hasta Estación del Arte. Desde allí, camina cinco minutos.",
+    "ru": "Чтобы добраться, поезжай по первой линии метро до станции Эстасьон-дель-Арте. Оттуда — пять минут пешком."
+   },
+   {
+    "es": "El museo es muy grande: no tienes que verlo todo en un día. Elige unas salas, mira bien los cuadros y vuelve otro día.",
+    "ru": "Музей очень большой: не нужно смотреть всё за один день. Выбери несколько залов, внимательно посмотри картины и приходи в другой раз."
    }
   ],
   "preguntas": [
@@ -1600,64 +2018,78 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde está el Museo del Prado?",
+    "pide": "¿Cuántos años tiene el museo?",
     "opciones": [
-     "En Madrid",
-     "En Barcelona",
-     "En Sevilla"
+     "Más de doscientos",
+     "Veinte",
+     "Cincuenta"
     ],
-    "correcta": "En Madrid",
-    "explicacion": "«…está en Madrid»."
+    "correcta": "Más de doscientos",
+    "explicacion": "«…tiene más de doscientos años»."
    },
    {
     "id": "LEE-prado-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué hay en el museo?",
+    "pide": "¿De quién es «Las meninas»?",
     "opciones": [
-     "Cuadros",
-     "Coches",
-     "Libros"
+     "De Velázquez",
+     "De Goya",
+     "De Picasso"
     ],
-    "correcta": "Cuadros",
-    "explicacion": "«Tiene cuadros de Velázquez, Goya…»."
+    "correcta": "De Velázquez",
+    "explicacion": "«…«Las meninas», el famoso cuadro de Velázquez»."
    },
    {
     "id": "LEE-prado-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "vf",
-    "afirmacion": "El museo está cerrado los lunes.",
+    "afirmacion": "En el Prado solo hay pintores españoles.",
     "verdadero": false,
-    "explicacion": "«El museo abre todos los días»."
+    "explicacion": "«También tiene cuadros de pintores de otros países»."
    },
    {
     "id": "LEE-prado-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuándo no pagas?",
+    "pide": "¿Cuándo no pagas los domingos?",
     "opciones": [
-     "De seis a ocho de la tarde",
-     "Por la mañana",
-     "Los domingos todo el día"
+     "De cinco a siete",
+     "De seis a ocho",
+     "Por la mañana"
     ],
-    "correcta": "De seis a ocho de la tarde",
-    "explicacion": "«…de seis a ocho de la tarde, no pagas»."
+    "correcta": "De cinco a siete",
+    "explicacion": "«…y los domingos, de cinco a siete, no pagas»."
    },
    {
     "id": "LEE-prado-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué dice el texto?",
+    "pide": "¿En qué estación bajas?",
     "opciones": [
-     "No tienes que verlo todo en un día",
-     "Tienes que ir en coche",
-     "Solo abre los domingos"
+     "Estación del Arte",
+     "Puerta del Sol",
+     "Gran Vía"
     ],
-    "correcta": "No tienes que verlo todo en un día",
+    "correcta": "Estación del Arte",
+    "explicacion": "«…coge la línea uno del metro hasta Estación del Arte»."
+   },
+   {
+    "id": "LEE-prado-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué consejo da el texto?",
+    "opciones": [
+     "No verlo todo en un día",
+     "Ir solo por la mañana",
+     "Ir siempre en coche"
+    ],
+    "correcta": "No verlo todo en un día",
     "explicacion": "«…no tienes que verlo todo en un día»."
    }
   ]
@@ -1671,24 +2103,24 @@ const LECTURAS_ES = [
   "tituloRu": "В поликлинике",
   "parrafos": [
    {
-    "es": "Hoy Marta está enferma: tiene tos y está muy cansada.",
-    "ru": "Сегодня Марта заболела: у неё кашель, и она очень устала."
+    "es": "Hoy Marta está enferma: tiene tos, le duele la garganta y está muy cansada.",
+    "ru": "Сегодня Марта заболела: у неё кашель, болит горло, и она очень устала."
    },
    {
-    "es": "Por la mañana llama al centro de salud y pide cita. La médica la ve a las once.",
-    "ru": "Утром она звонит в поликлинику и записывается на приём. Врач принимает её в одиннадцать."
+    "es": "Por la mañana llama al centro de salud y pide cita. Tiene que dar su nombre y su número de teléfono. La médica la puede ver a las once.",
+    "ru": "Утром она звонит в поликлинику и записывается на приём. Нужно назвать имя и номер телефона. Врач может принять её в одиннадцать."
    },
    {
-    "es": "—¿Qué te pasa? —Tengo tos y me duele mucho la cabeza. —Tienes que descansar y beber mucha agua.",
-    "ru": "— Что с тобой? — У меня кашель и сильно болит голова. — Тебе нужно отдыхать и пить много воды."
+    "es": "En la consulta, la médica pregunta: «¿Qué te pasa?». «Tengo tos y me duele mucho la cabeza», dice Marta. La médica la mira y dice: «No es nada grave. Tienes que descansar y beber mucha agua».",
+    "ru": "В кабинете врач спрашивает: «Что с тобой?». «У меня кашель и сильно болит голова», — говорит Марта. Врач её осматривает и говорит: «Ничего серьёзного. Тебе нужно отдыхать и пить много воды»."
    },
    {
-    "es": "Después Marta va a la farmacia y compra unas pastillas para la tos.",
-    "ru": "Потом Марта идёт в аптеку и покупает таблетки от кашля."
+    "es": "Después Marta va a la farmacia y compra unas pastillas para la tos y otras para la cabeza.",
+    "ru": "Потом Марта идёт в аптеку и покупает таблетки от кашля и от головной боли."
    },
    {
-    "es": "Marta debe tomar una pastilla cada ocho horas. Hoy no va a trabajar: va a estar en la cama todo el día.",
-    "ru": "Марта должна принимать по таблетке каждые восемь часов. Сегодня она не идёт на работу: весь день будет в постели."
+    "es": "Tiene que tomar una pastilla cada ocho horas. Hoy no va a trabajar: va a estar en la cama todo el día. Con fiebre, tiene que volver al médico.",
+    "ru": "Ей нужно принимать по таблетке каждые восемь часов. Сегодня она не идёт на работу: весь день будет в постели. Если поднимется температура, нужно снова идти к врачу."
    }
   ],
   "preguntas": [
@@ -1697,14 +2129,14 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué tiene Marta?",
+    "pide": "¿Qué le pasa a Marta?",
     "opciones": [
-     "Tos",
-     "Hambre",
-     "Frío"
+     "Tiene tos y le duele la garganta",
+     "Le duele la pierna",
+     "Tiene hambre"
     ],
-    "correcta": "Tos",
-    "explicacion": "«…tiene tos y está muy cansada»."
+    "correcta": "Tiene tos y le duele la garganta",
+    "explicacion": "«…tiene tos, le duele la garganta…»."
    },
    {
     "id": "LEE-salud-2",
@@ -1715,13 +2147,36 @@ const LECTURAS_ES = [
     "opciones": [
      "A las once",
      "A las ocho",
-     "A las tres"
+     "A las cinco"
     ],
     "correcta": "A las once",
-    "explicacion": "«La médica la ve a las once»."
+    "explicacion": "«La médica la puede ver a las once»."
    },
    {
     "id": "LEE-salud-3",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "La médica dice que es algo grave.",
+    "verdadero": false,
+    "explicacion": "«No es nada grave»."
+   },
+   {
+    "id": "LEE-salud-4",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué tiene que hacer Marta?",
+    "opciones": [
+     "Descansar y beber agua",
+     "Ir a trabajar",
+     "Hacer deporte"
+    ],
+    "correcta": "Descansar y beber agua",
+    "explicacion": "«Tienes que descansar y beber mucha agua»."
+   },
+   {
+    "id": "LEE-salud-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
@@ -1735,33 +2190,29 @@ const LECTURAS_ES = [
     "explicacion": "«…una pastilla cada ocho horas»."
    },
    {
-    "id": "LEE-salud-4",
-    "tipo": "lectura",
-    "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Hoy Marta va a trabajar.",
-    "verdadero": false,
-    "explicacion": "«Hoy no va a trabajar»."
-   },
-   {
-    "id": "LEE-salud-5",
+    "id": "LEE-salud-6",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "situacion",
-    "pide": "Тебе плохо. Скажи врачу по-испански, что у тебя болит.",
+    "pide": "Ты у врача. Скажи, что с тобой (что болит).",
     "sit": {
      "necesita": [
       {
-       "es": "болит",
+       "es": "симптом",
        "formas": [
         "me duele",
         "me duelen",
-        "tengo"
+        "tengo tos",
+        "tengo fiebre",
+        "estoy enfermo",
+        "estoy enferma",
+        "estoy cansado",
+        "estoy cansada"
        ]
       }
      ],
      "modelos": [
-      "Me duele mucho la cabeza y tengo tos."
+      "Me duele la cabeza y tengo tos."
      ]
     }
    }
@@ -1784,20 +2235,28 @@ const LECTURAS_ES = [
     "ru": "Аня: Привет! В субботу днём не могу: у меня танцы. А вечером?"
    },
    {
-    "es": "Lucía: Vale. Hay una película nueva a las nueve y media. Dicen que es muy buena.",
-    "ru": "Лусия: Хорошо. Есть новый фильм в половине десятого. Говорят, очень хороший."
+    "es": "Lucía: Vale. Hay una película española nueva a las nueve y media. Dicen que es muy buena.",
+    "ru": "Лусия: Хорошо. В половине десятого идёт новый испанский фильм. Говорят, очень хороший."
+   },
+   {
+    "es": "Ana: ¿Es una comedia? Me gustan más que las películas de miedo. Lucía: Sí, es una comedia. A mí tampoco me gustan las de miedo.",
+    "ru": "Аня: Это комедия? Они мне нравятся больше, чем фильмы ужасов. Лусия: Да, комедия. Мне фильмы ужасов тоже не нравятся."
    },
    {
     "es": "Ana: ¡Perfecto! ¿Quedamos a las nueve en la puerta del cine?",
     "ru": "Аня: Отлично! Встретимся в девять у входа в кинотеатр?"
    },
    {
-    "es": "Lucía: Mejor a las nueve menos cuarto: los sábados hay mucha gente. ¿Y después cenamos algo?",
-    "ru": "Лусия: Лучше без четверти девять: по субботам много людей. А потом поужинаем где-нибудь?"
+    "es": "Lucía: Mejor a las nueve menos cuarto: los sábados hay mucha gente. ¿Compro yo las entradas por internet?",
+    "ru": "Лусия: Лучше без четверти девять: по субботам много людей. Купить мне билеты через интернет?"
    },
    {
-    "es": "Ana: ¡Claro! Conozco un bar muy bueno al lado del cine. ¡Hasta el sábado!",
-    "ru": "Аня: Конечно! Я знаю очень хороший бар рядом с кинотеатром. До субботы!"
+    "es": "Ana: Sí, gracias. Te pago el sábado. ¿Y después cenamos algo? ¿Llamamos también a Javier? Le encanta el cine.",
+    "ru": "Аня: Да, спасибо. Я тебе отдам в субботу. А потом поужинаем где-нибудь? Позовём и Хавьера? Он обожает кино."
+   },
+   {
+    "es": "Lucía: ¡Buena idea! Conozco un bar muy bueno al lado del cine, con tapas muy ricas. ¡Hasta el sábado!",
+    "ru": "Лусия: Отличная идея! Я знаю очень хороший бар рядом с кинотеатром, там очень вкусные тапас. До субботы!"
    }
   ],
   "preguntas": [
@@ -1834,6 +2293,20 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
+    "pide": "¿Qué películas le gustan más a Ana?",
+    "opciones": [
+     "Las comedias",
+     "Las de miedo",
+     "Las antiguas"
+    ],
+    "correcta": "Las comedias",
+    "explicacion": "«Me gustan más que las películas de miedo»."
+   },
+   {
+    "id": "LEE-quedamos-4",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
     "pide": "¿A qué hora quedan al final?",
     "opciones": [
      "A las nueve menos cuarto",
@@ -1844,16 +2317,16 @@ const LECTURAS_ES = [
     "explicacion": "«Mejor a las nueve menos cuarto»."
    },
    {
-    "id": "LEE-quedamos-4",
+    "id": "LEE-quedamos-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "vf",
-    "afirmacion": "Después de la película van a cenar.",
-    "verdadero": true,
-    "explicacion": "«¿Y después cenamos algo? —¡Claro!»."
+    "afirmacion": "Ana compra las entradas.",
+    "verdadero": false,
+    "explicacion": "Las compra Lucía: «¿Compro yo las entradas por internet?»."
    },
    {
-    "id": "LEE-quedamos-5",
+    "id": "LEE-quedamos-6",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "situacion",
@@ -1869,7 +2342,8 @@ const LECTURAS_ES = [
         "no puedo",
         "lo siento",
         "perfecto",
-        "genial"
+        "genial",
+        "me apetece"
        ]
       }
      ],
@@ -1889,28 +2363,28 @@ const LECTURAS_ES = [
   "tituloRu": "Соседи Ани",
   "parrafos": [
    {
-    "es": "Ana vive en un edificio antiguo en el barrio de Gràcia. Se lleva muy bien con sus vecinos.",
-    "ru": "Аня живёт в старом доме в районе Грасия. Она отлично ладит с соседями."
+    "es": "Ana vive en un edificio antiguo en el barrio de Gràcia, en el tercero. Se lleva muy bien con casi todos sus vecinos.",
+    "ru": "Аня живёт в старом доме в районе Грасия, на четвёртом этаже. Она прекрасно ладит почти со всеми соседями."
    },
    {
-    "es": "En el primero vive la señora Rosa. Tiene ochenta años y es muy simpática. A veces Ana le compra el pan.",
-    "ru": "На втором этаже живёт сеньора Роса. Ей восемьдесят лет, и она очень милая. Иногда Аня покупает ей хлеб."
+    "es": "En el primero vive la señora Rosa. Tiene ochenta años y es muy simpática. Vive sola, y a veces Ana le compra el pan o le sube la compra, porque el edificio no tiene ascensor.",
+    "ru": "На втором этаже живёт сеньора Роса. Ей восемьдесят лет, и она очень милая. Она живёт одна, и Аня иногда покупает ей хлеб или поднимает ей продукты, потому что в доме нет лифта."
    },
    {
-    "es": "En el segundo viven Jordi y Laura con sus dos hijos. Los niños son muy simpáticos, pero no son nada tranquilos.",
-    "ru": "На третьем живут Жорди и Лаура с двумя детьми. Дети очень милые, но совсем не спокойные."
+    "es": "En el segundo viven Jordi y Laura con sus dos hijos. Los niños son muy simpáticos, pero no son nada tranquilos: por las tardes juegan al fútbol en el pasillo.",
+    "ru": "На третьем живут Жорди и Лаура с двумя детьми. Дети очень милые, но совсем не спокойные: по вечерам они играют в футбол в коридоре."
    },
    {
     "es": "El vecino del cuarto es un chico joven. Pone la música muy alta por la noche, y a Ana no le gusta nada.",
     "ru": "Сосед с пятого этажа — молодой парень. По ночам он очень громко включает музыку, и Ане это совсем не нравится."
    },
    {
-    "es": "Un día Ana habla con él. Él dice: «¡Lo siento!». Ahora la música está más baja.",
-    "ru": "Однажды Аня с ним поговорила. Он сказал: «Извини!». Теперь музыка тише."
+    "es": "Un día Ana sube y habla con él. Él dice: «¡Lo siento! Ahora la bajo». Ahora la música está más baja y los dos se saludan en la escalera.",
+    "ru": "Однажды Аня поднимается и говорит с ним. Он отвечает: «Извини! Сейчас сделаю тише». Теперь музыка тише, и они здороваются на лестнице."
    },
    {
-    "es": "A Ana le parece que tener buenos vecinos es lo mejor.",
-    "ru": "Ане кажется, что хорошие соседи — это самое лучшее."
+    "es": "Para Ana, tener buenos vecinos es tan importante como tener un buen piso.",
+    "ru": "Для Ани хорошие соседи так же важны, как хорошая квартира."
    }
   ],
   "preguntas": [
@@ -1923,7 +2397,7 @@ const LECTURAS_ES = [
     "opciones": [
      "Ochenta",
      "Dieciocho",
-     "Ocho"
+     "Cincuenta"
     ],
     "correcta": "Ochenta",
     "explicacion": "«Tiene ochenta años»."
@@ -1933,37 +2407,51 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué hace Ana para la señora Rosa?",
+    "pide": "¿Por qué Ana le sube la compra?",
     "opciones": [
-     "Le compra el pan",
-     "Le limpia la casa",
-     "Le hace la comida"
+     "No hay ascensor",
+     "La señora Rosa está enferma",
+     "Es su abuela"
     ],
-    "correcta": "Le compra el pan",
-    "explicacion": "«A veces Ana le compra el pan»."
+    "correcta": "No hay ascensor",
+    "explicacion": "«…porque el edificio no tiene ascensor»."
    },
    {
     "id": "LEE-vecinos-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuál es el problema con el vecino del cuarto?",
+    "pide": "¿Dónde juegan los niños al fútbol?",
     "opciones": [
-     "La música muy alta",
-     "Tiene un perro",
-     "Es antipático"
+     "En el pasillo",
+     "En el parque",
+     "En la calle"
     ],
-    "correcta": "La música muy alta",
-    "explicacion": "«Pone la música muy alta por la noche»."
+    "correcta": "En el pasillo",
+    "explicacion": "«…juegan al fútbol en el pasillo»."
    },
    {
     "id": "LEE-vecinos-4",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué problema hay con el vecino del cuarto?",
+    "opciones": [
+     "Pone la música muy alta",
+     "No saluda",
+     "Tiene un perro"
+    ],
+    "correcta": "Pone la música muy alta",
+    "explicacion": "«Pone la música muy alta por la noche»."
+   },
+   {
+    "id": "LEE-vecinos-5",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "vf",
-    "afirmacion": "Ana se lleva mal con sus vecinos.",
+    "afirmacion": "Ahora Ana y el chico no se hablan.",
     "verdadero": false,
-    "explicacion": "«Se lleva muy bien con sus vecinos»."
+    "explicacion": "«…los dos se saludan en la escalera»."
    }
   ]
  },
@@ -1980,16 +2468,20 @@ const LECTURAS_ES = [
     "ru": "В Испании обед — это гораздо больше, чем просто еда. После обеда люди не встают из-за стола: они остаются, пьют кофе и разговаривают. Это называется «собремеса»."
    },
    {
-    "es": "Los domingos, en las comidas de familia, la sobremesa a veces es de una hora o más.",
-    "ru": "По воскресеньям, на семейных обедах, собремеса иногда длится час и больше."
+    "es": "En la sobremesa la gente habla de todo: de la familia, del trabajo, de fútbol, de política… A veces hay discusiones, pero normalmente terminan bien.",
+    "ru": "За собремесой говорят обо всём: о семье, о работе, о футболе, о политике… Иногда бывают споры, но обычно они хорошо заканчиваются."
    },
    {
-    "es": "A la gente de otros países le parece diferente. En Rusia, después de comer, normalmente la gente se levanta y se va.",
-    "ru": "Людям из других стран это кажется непривычным. В России после обеда люди обычно встают и уходят."
+    "es": "Los domingos, en las comidas de familia, la sobremesa a veces es de una hora o más. En Navidad, ¡puede ser de toda la tarde!",
+    "ru": "По воскресеньям, на семейных обедах, собремеса иногда длится час и больше. А на Рождество — хоть весь вечер!"
    },
    {
-    "es": "Ana cree que la sobremesa es muy bonita. Para ella, es la mejor hora del día para hablar.",
-    "ru": "Аня считает, что собремеса — это очень красиво. Для неё это лучшее время дня, чтобы поговорить."
+    "es": "En Rusia la gente también habla mucho en la mesa, sobre todo en casa, con un té y algo dulce. Pero en un restaurante, después de comer, normalmente se levanta y se va.",
+    "ru": "В России за столом тоже много разговаривают, особенно дома, за чаем со сладким. Но в ресторане после еды люди обычно встают и уходят."
+   },
+   {
+    "es": "Ana cree que la sobremesa es muy bonita. Para ella, es la mejor hora del día para hablar con sus amigos españoles y practicar español.",
+    "ru": "Аня считает, что собремеса — это очень хорошо. Для неё это лучшее время дня, чтобы поговорить с испанскими друзьями и попрактиковать испанский."
    }
   ],
   "preguntas": [
@@ -2005,44 +2497,83 @@ const LECTURAS_ES = [
      "Una mesa grande"
     ],
     "correcta": "Hablar en la mesa después de comer",
-    "explicacion": "«…se queda allí, toma un café y habla»."
+    "explicacion": "«…se queda allí, toma un café y habla. Esto se llama la sobremesa»."
    },
    {
     "id": "LEE-sobremesa-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuándo es más larga?",
+    "pide": "¿De qué habla la gente en la sobremesa?",
     "opciones": [
-     "Los domingos",
-     "Los lunes",
-     "Por la mañana"
+     "De todo",
+     "Solo de fútbol",
+     "Solo de comida"
     ],
-    "correcta": "Los domingos",
-    "explicacion": "«Los domingos, en las comidas de familia…»."
+    "correcta": "De todo",
+    "explicacion": "«…la gente habla de todo»."
    },
    {
     "id": "LEE-sobremesa-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "En Rusia la gente hace lo mismo.",
-    "verdadero": false,
-    "explicacion": "«En Rusia, después de comer, normalmente la gente se levanta y se va»."
+    "forma": "elegir",
+    "pide": "¿Cuándo puede durar toda la tarde?",
+    "opciones": [
+     "En Navidad",
+     "Los lunes",
+     "En el trabajo"
+    ],
+    "correcta": "En Navidad",
+    "explicacion": "«En Navidad, ¡puede ser de toda la tarde!»."
    },
    {
     "id": "LEE-sobremesa-4",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "En la sobremesa nunca hay discusiones.",
+    "verdadero": false,
+    "explicacion": "«A veces hay discusiones, pero normalmente terminan bien»."
+   },
+   {
+    "id": "LEE-sobremesa-5",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué piensa Ana?",
+    "pide": "¿Por qué le gusta la sobremesa a Ana?",
     "opciones": [
-     "Que es muy bonita",
-     "Que es aburrida",
-     "Que es demasiado larga"
+     "Puede hablar y practicar español",
+     "Le gusta el café",
+     "No le gusta cocinar"
     ],
-    "correcta": "Que es muy bonita",
-    "explicacion": "«Ana cree que la sobremesa es muy bonita»."
+    "correcta": "Puede hablar y practicar español",
+    "explicacion": "«…para hablar con sus amigos españoles y practicar español»."
+   },
+   {
+    "id": "LEE-sobremesa-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "situacion",
+    "pide": "Как у тебя дома после обеда: вы сразу встаёте или остаётесь за столом? Ответь по-испански.",
+    "sit": {
+     "necesita": [
+      {
+       "es": "что делаете",
+       "formas": [
+        "nos quedamos",
+        "nos levantamos",
+        "hablamos",
+        "tomamos",
+        "me levanto",
+        "me quedo"
+       ]
+      }
+     ],
+     "modelos": [
+      "En mi casa nos quedamos en la mesa y tomamos un té."
+     ]
+    }
    }
   ]
  },
@@ -2055,24 +2586,28 @@ const LECTURAS_ES = [
   "tituloRu": "Мадрид или Барселона?",
   "parrafos": [
    {
-    "es": "Pablo vive en Madrid y su hermana Lucía, en Barcelona. Siempre discuten: ¿qué ciudad es mejor?",
-    "ru": "Пабло живёт в Мадриде, а его сестра Лусия — в Барселоне. Они всегда спорят: какой город лучше?"
+    "es": "Pablo vive en Madrid y su hermana Lucía, en Barcelona. Cuando hablan por teléfono, siempre discuten: ¿qué ciudad es mejor?",
+    "ru": "Пабло живёт в Мадриде, а его сестра Лусия — в Барселоне. Когда они говорят по телефону, всегда спорят: какой город лучше?"
    },
    {
-    "es": "Para Pablo, Madrid es mejor. Es más grande que Barcelona y tiene más museos. Además, la gente sale mucho por la noche.",
-    "ru": "Для Пабло лучше Мадрид. Он больше Барселоны, и в нём больше музеев. Кроме того, люди там много гуляют по вечерам."
+    "es": "Para Pablo, Madrid es mejor. Es más grande que Barcelona y tiene más museos. Además, la gente sale mucho por la noche y los bares están siempre llenos.",
+    "ru": "Для Пабло лучше Мадрид. Он больше Барселоны, и в нём больше музеев. Кроме того, люди там много гуляют по вечерам, и бары всегда полные."
    },
    {
-    "es": "Lucía no está de acuerdo. Barcelona tiene mar y playa, y en invierno no hace tanto frío como en Madrid.",
-    "ru": "Лусия не согласна. В Барселоне есть море и пляж, и зимой не так холодно, как в Мадриде."
+    "es": "Lucía no está de acuerdo. Barcelona tiene mar y playa, y en invierno no hace tanto frío como en Madrid. Además, tiene montañas muy cerca y los edificios de Gaudí, como la Sagrada Familia.",
+    "ru": "Лусия не согласна. В Барселоне есть море и пляж, и зимой не так холодно, как в Мадриде. К тому же рядом горы, а ещё здания Гауди, например Саграда Фамилия."
+   },
+   {
+    "es": "«En Madrid, en verano, hace demasiado calor», dice Lucía. «Y en Barcelona hay demasiados turistas», contesta Pablo.",
+    "ru": "«В Мадриде летом слишком жарко», — говорит Лусия. «А в Барселоне слишком много туристов», — отвечает Пабло."
    },
    {
     "es": "Pero los dos están de acuerdo en una cosa: los pisos son muy caros en las dos ciudades.",
     "ru": "Но в одном они согласны: квартиры очень дорогие в обоих городах."
    },
    {
-    "es": "¿Y Ana? A ella le gustan las dos, pero prefiere Barcelona, porque es menos grande y más tranquila.",
-    "ru": "А Аня? Ей нравятся оба, но она предпочитает Барселону, потому что она меньше и спокойнее."
+    "es": "¿Y Ana? A ella le gustan las dos, pero prefiere Barcelona, porque es menos grande y más tranquila. Y porque allí viven sus amigos.",
+    "ru": "А Аня? Ей нравятся оба, но она предпочитает Барселону, потому что она меньше и спокойнее. И потому что там живут её друзья."
    }
   ],
   "preguntas": [
@@ -2081,80 +2616,96 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde vive Pablo?",
+    "pide": "¿Por qué discuten Pablo y Lucía?",
     "opciones": [
-     "En Madrid",
-     "En Barcelona",
-     "En Moscú"
+     "Por qué ciudad es mejor",
+     "Por dinero",
+     "Por el fútbol"
     ],
-    "correcta": "En Madrid",
-    "explicacion": "«Pablo vive en Madrid»."
+    "correcta": "Por qué ciudad es mejor",
+    "explicacion": "«…siempre discuten: ¿qué ciudad es mejor?»."
    },
    {
     "id": "LEE-madridbcn-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "Para Lucía, ¿qué tiene Barcelona?",
+    "pide": "¿Qué tiene Madrid, según Pablo?",
     "opciones": [
-     "Mar y playa",
      "Más museos",
-     "Pisos baratos"
+     "Mar y playa",
+     "Menos turistas"
     ],
-    "correcta": "Mar y playa",
-    "explicacion": "«Barcelona tiene mar y playa»."
+    "correcta": "Más museos",
+    "explicacion": "«…tiene más museos»."
    },
    {
     "id": "LEE-madridbcn-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "vf",
-    "afirmacion": "En invierno hace más frío en Madrid que en Barcelona.",
-    "verdadero": true,
-    "explicacion": "«…no hace tanto frío como en Madrid»."
+    "afirmacion": "Según Lucía, en Barcelona hace más frío en invierno.",
+    "verdadero": false,
+    "explicacion": "«…en invierno no hace tanto frío como en Madrid»."
    },
    {
     "id": "LEE-madridbcn-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿En qué están de acuerdo los dos?",
+    "pide": "¿Qué problema tiene Barcelona, según Pablo?",
     "opciones": [
-     "Los pisos son caros",
-     "Madrid es mejor",
-     "Barcelona tiene más museos"
+     "Hay demasiados turistas",
+     "Hace demasiado frío",
+     "No hay playa"
     ],
-    "correcta": "Los pisos son caros",
-    "explicacion": "«…los pisos son muy caros en las dos ciudades»."
+    "correcta": "Hay demasiados turistas",
+    "explicacion": "«Y en Barcelona hay demasiados turistas»."
    },
    {
     "id": "LEE-madridbcn-5",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿En qué están de acuerdo los dos?",
+    "opciones": [
+     "Los pisos son muy caros",
+     "Madrid es mejor",
+     "Barcelona es fea"
+    ],
+    "correcta": "Los pisos son muy caros",
+    "explicacion": "«…los pisos son muy caros en las dos ciudades»."
+   },
+   {
+    "id": "LEE-madridbcn-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "situacion",
-    "pide": "А тебе какой город нравится больше? Почему? Ответь по-испански.",
+    "pide": "Какой город тебе нравится больше и почему? Сравни два города по-испански.",
     "sit": {
      "necesita": [
       {
-       "es": "что больше",
+       "es": "сравнение",
        "formas": [
-        "prefiero",
-        "me gusta más",
+        "más",
+        "menos",
         "mejor",
-        "más"
+        "peor",
+        "tan",
+        "como",
+        "que"
        ]
       },
       {
        "es": "почему",
        "formas": [
         "porque",
-        "además",
-        "también"
+        "además"
        ]
       }
      ],
      "modelos": [
-      "Prefiero Barcelona, porque tiene mar."
+      "Prefiero Barcelona, porque es más tranquila que Madrid."
      ]
     }
    }
@@ -2164,7 +2715,7 @@ const LECTURAS_ES = [
   "id": "LEE-cervantes",
   "nivel": "A2",
   "desde": 8,
-  "tema": "История",
+  "tema": "Известные люди",
   "titulo": "Miguel de Cervantes",
   "tituloRu": "Мигель де Сервантес",
   "parrafos": [
@@ -2173,20 +2724,20 @@ const LECTURAS_ES = [
     "ru": "Мигель де Сервантес — самый известный писатель Испании. Он родился в 1547 году в Алькала-де-Энарес, городе недалеко от Мадрида."
    },
    {
-    "es": "Su vida fue muy difícil. De joven estuvo en la guerra y allí una de sus manos quedó muy mal.",
-    "ru": "Его жизнь была очень трудной. В молодости он был на войне и там тяжело ранил руку."
+    "es": "De joven se fue a Italia y fue soldado. En 1571 luchó en la batalla de Lepanto, en el mar. Allí perdió el uso de la mano izquierda.",
+    "ru": "В молодости он уехал в Италию и стал солдатом. В 1571 году он сражался в морской битве при Лепанто. Там у него перестала действовать левая рука."
    },
    {
-    "es": "Después pasó cinco años en Argel, lejos de su familia. Volvió a España en 1580.",
-    "ru": "Потом он пять лет провёл в Алжире, вдали от семьи (в плену). Вернулся в Испанию в 1580 году."
+    "es": "En 1575, en el viaje de vuelta a España, unos piratas lo cogieron y lo llevaron a Argel. Pasó cinco años allí, lejos de su familia, y volvió a España en 1580.",
+    "ru": "В 1575 году, на обратном пути в Испанию, его захватили пираты и увезли в Алжир. Он провёл там пять лет, вдали от семьи, и вернулся в Испанию в 1580 году."
    },
    {
-    "es": "En 1605 salió la primera parte de su libro más famoso: «Don Quijote de la Mancha». Es la historia de un hombre que lee demasiados libros y sale de casa a vivir historias como las de sus libros.",
-    "ru": "В 1605 году вышла первая часть его самой известной книги — «Дон Кихот Ламанчский». Это история человека, который читает слишком много книг и уходит из дома, чтобы пережить такие же истории, как в его книгах."
+    "es": "En 1605 salió la primera parte de su libro más famoso: «Don Quijote de la Mancha». Es la historia de un hombre que lee demasiados libros de caballeros y sale de casa a vivir aventuras con su amigo Sancho Panza. La segunda parte salió en 1615.",
+    "ru": "В 1605 году вышла первая часть его самой известной книги — «Дон Кихот Ламанчский». Это история человека, который читает слишком много рыцарских романов и уходит из дома искать приключений со своим другом Санчо Пансой. Вторая часть вышла в 1615 году."
    },
    {
-    "es": "Cervantes murió en Madrid en 1616. Hoy el español también se llama «el idioma de Cervantes».",
-    "ru": "Сервантес умер в Мадриде в 1616 году. Сегодня испанский язык называют ещё и «языком Сервантеса»."
+    "es": "Cervantes murió en Madrid en 1616. Hoy el español también se llama «la lengua de Cervantes», y el premio más importante de la literatura en español es el Premio Cervantes.",
+    "ru": "Сервантес умер в Мадриде в 1616 году. Сегодня испанский язык называют также «языком Сервантеса», а самая важная премия литературы на испанском — премия Сервантеса."
    }
   ],
   "preguntas": [
@@ -2199,61 +2750,75 @@ const LECTURAS_ES = [
     "opciones": [
      "En Alcalá de Henares",
      "En Madrid",
-     "En Sevilla"
+     "En Argel"
     ],
     "correcta": "En Alcalá de Henares",
-    "explicacion": "«Nació… en Alcalá de Henares»."
+    "explicacion": "«Nació en 1547 en Alcalá de Henares»."
    },
    {
     "id": "LEE-cervantes-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuántos años pasó en Argel?",
+    "pide": "¿Qué le pasó en la batalla de Lepanto?",
     "opciones": [
-     "Cinco",
-     "Dos",
-     "Diez"
+     "Perdió el uso de una mano",
+     "Murió",
+     "Conoció a su mujer"
     ],
-    "correcta": "Cinco",
-    "explicacion": "«…pasó cinco años en Argel»."
+    "correcta": "Perdió el uso de una mano",
+    "explicacion": "«Allí perdió el uso de la mano izquierda»."
    },
    {
     "id": "LEE-cervantes-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuándo salió la primera parte del Quijote?",
+    "pide": "¿Cuántos años pasó en Argel?",
     "opciones": [
-     "En 1605",
-     "En 1547",
-     "En 1616"
+     "Cinco",
+     "Uno",
+     "Diez"
     ],
-    "correcta": "En 1605",
-    "explicacion": "«En 1605 salió la primera parte»."
+    "correcta": "Cinco",
+    "explicacion": "«Pasó cinco años allí»."
    },
    {
     "id": "LEE-cervantes-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Cervantes murió en Alcalá de Henares.",
-    "verdadero": false,
-    "explicacion": "«Cervantes murió en Madrid»."
+    "forma": "elegir",
+    "pide": "¿Qué hace don Quijote?",
+    "opciones": [
+     "Lee muchos libros y sale a vivir aventuras",
+     "Viaja a Italia",
+     "Cobra impuestos"
+    ],
+    "correcta": "Lee muchos libros y sale a vivir aventuras",
+    "explicacion": "«…lee demasiados libros de caballeros y sale de casa a vivir aventuras»."
    },
    {
     "id": "LEE-cervantes-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué hace Don Quijote?",
+    "pide": "¿Cuándo salió la segunda parte del Quijote?",
     "opciones": [
-     "Sale de casa a vivir historias",
-     "Escribe libros",
-     "Vende libros"
+     "En 1615",
+     "En 1605",
+     "En 1547"
     ],
-    "correcta": "Sale de casa a vivir historias",
-    "explicacion": "«…sale de casa a vivir historias como las de sus libros»."
+    "correcta": "En 1615",
+    "explicacion": "«La segunda parte salió en 1615»."
+   },
+   {
+    "id": "LEE-cervantes-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "El Premio Cervantes es un premio de literatura.",
+    "verdadero": true,
+    "explicacion": "«…el premio más importante de la literatura en español es el Premio Cervantes»."
    }
   ]
  },
@@ -2261,29 +2826,33 @@ const LECTURAS_ES = [
   "id": "LEE-picasso",
   "nivel": "A2",
   "desde": 8,
-  "tema": "История",
+  "tema": "Известные люди",
   "titulo": "Pablo Picasso",
   "tituloRu": "Пабло Пикассо",
   "parrafos": [
    {
-    "es": "Pablo Picasso nació en Málaga en 1881. Su padre fue profesor, y Pablo empezó a hacer cuadros de muy pequeño.",
-    "ru": "Пабло Пикассо родился в Малаге в 1881 году. Его отец был преподавателем, и Пабло начал писать картины совсем маленьким."
+    "es": "Pablo Picasso nació en Málaga en 1881. Su padre fue profesor de dibujo, y Pablo empezó a pintar de muy pequeño.",
+    "ru": "Пабло Пикассо родился в Малаге в 1881 году. Его отец был учителем рисования, и Пабло начал рисовать совсем маленьким."
    },
    {
-    "es": "Con catorce años se fue con su familia a Barcelona. Allí estudió y conoció a otros pintores jóvenes.",
-    "ru": "В четырнадцать лет он с семьёй переехал в Барселону. Там он учился и познакомился с другими молодыми художниками."
+    "es": "En 1895, con trece años, se fue con su familia a Barcelona. Allí estudió en una escuela de arte, donde su padre trabajó como profesor, y conoció a otros pintores jóvenes.",
+    "ru": "В 1895 году, в тринадцать лет, он переехал с семьёй в Барселону. Там он учился в художественной школе, где преподавал его отец, и познакомился с другими молодыми художниками."
    },
    {
-    "es": "En 1904 se fue a vivir a París. Allí hizo cuadros muy diferentes de los cuadros de antes.",
-    "ru": "В 1904 году он переехал жить в Париж. Там он писал картины, совсем не похожие на прежние."
+    "es": "En 1904 se fue a vivir a París. Allí pintó cuadros muy diferentes de los de antes y, con el pintor Georges Braque, creó un estilo de pintura completamente nuevo.",
+    "ru": "В 1904 году он переехал жить в Париж. Там он писал картины, совсем не похожие на прежние, и вместе с художником Жоржем Браком создал совершенно новый стиль живописи — кубизм."
    },
    {
-    "es": "Su cuadro más famoso es el «Guernica». Lo hizo en 1937, durante la guerra en España. Es un cuadro muy grande y muy triste.",
-    "ru": "Его самая известная картина — «Герника». Он написал её в 1937 году, во время войны в Испании. Это очень большая и очень грустная картина."
+    "es": "Su cuadro más famoso es el «Guernica». Lo pintó en 1937, durante la guerra civil española, después del bombardeo de Guernica, una pequeña ciudad del País Vasco. Es un cuadro enorme, en blanco y negro, y muy triste.",
+    "ru": "Его самая известная картина — «Герника». Он написал её в 1937 году, во время гражданской войны в Испании, после бомбардировки Герники, небольшого города в Стране Басков. Это огромная картина, чёрно-белая и очень печальная."
    },
    {
-    "es": "Hoy el «Guernica» está en un museo de Madrid. Y en Barcelona y en Málaga hay un Museo Picasso.",
-    "ru": "Сегодня «Герника» находится в музее в Мадриде. А в Барселоне и в Малаге есть музеи Пикассо."
+    "es": "Picasso vivió casi toda su vida en Francia y murió allí en 1973, a los noventa y un años. Pintó miles de cuadros y también hizo muchos dibujos.",
+    "ru": "Пикассо прожил почти всю жизнь во Франции и умер там в 1973 году, в девяносто один год. Он написал тысячи картин и сделал множество рисунков."
+   },
+   {
+    "es": "Hoy el «Guernica» está en el Museo Reina Sofía de Madrid. Y en Barcelona y en Málaga hay un Museo Picasso.",
+    "ru": "Сегодня «Герника» находится в Музее королевы Софии в Мадриде. А в Барселоне и Малаге есть музеи Пикассо."
    }
   ],
   "preguntas": [
@@ -2306,60 +2875,65 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuándo se fue a París?",
+    "pide": "¿Qué trabajo tuvo su padre?",
     "opciones": [
-     "En 1904",
-     "En 1881",
-     "En 1937"
+     "Profesor de dibujo",
+     "Médico",
+     "Escritor"
     ],
-    "correcta": "En 1904",
-    "explicacion": "«En 1904 se fue a vivir a París»."
+    "correcta": "Profesor de dibujo",
+    "explicacion": "«Su padre fue profesor de dibujo»."
    },
    {
     "id": "LEE-picasso-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "El «Guernica» está en Barcelona.",
-    "verdadero": false,
-    "explicacion": "«…el Guernica está en un museo de Madrid»."
+    "forma": "elegir",
+    "pide": "¿Cuántos años tenía cuando se fue a Barcelona?",
+    "opciones": [
+     "Trece",
+     "Veinte",
+     "Cinco"
+    ],
+    "correcta": "Trece",
+    "explicacion": "«En 1895, con trece años, se fue con su familia a Barcelona»."
    },
    {
     "id": "LEE-picasso-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde hay un Museo Picasso?",
+    "pide": "¿Qué creó en París con Georges Braque?",
     "opciones": [
-     "En Barcelona y en Málaga",
-     "Solo en París",
-     "En Sevilla"
+     "Un estilo de pintura nuevo",
+     "Un museo",
+     "Una escuela"
     ],
-    "correcta": "En Barcelona y en Málaga",
-    "explicacion": "«…en Barcelona y en Málaga hay un Museo Picasso»."
+    "correcta": "Un estilo de pintura nuevo",
+    "explicacion": "«…creó un estilo de pintura completamente nuevo»."
    },
    {
     "id": "LEE-picasso-5",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "situacion",
-    "pide": "Какой художник или писатель тебе нравится? Ответь по-испански.",
-    "sit": {
-     "necesita": [
-      {
-       "es": "кто",
-       "formas": [
-        "me gusta",
-        "me gustan",
-        "me encanta",
-        "prefiero"
-       ]
-      }
-     ],
-     "modelos": [
-      "Me gusta mucho Picasso."
-     ]
-    }
+    "forma": "vf",
+    "afirmacion": "El «Guernica» es un cuadro pequeño y alegre.",
+    "verdadero": false,
+    "explicacion": "«Es un cuadro enorme… y muy triste»."
+   },
+   {
+    "id": "LEE-picasso-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Dónde está hoy el «Guernica»?",
+    "opciones": [
+     "En el Museo Reina Sofía",
+     "En el Museo del Prado",
+     "En Málaga"
+    ],
+    "correcta": "En el Museo Reina Sofía",
+    "explicacion": "«Hoy el «Guernica» está en el Museo Reina Sofía de Madrid»."
    }
   ]
  },
@@ -2367,29 +2941,29 @@ const LECTURAS_ES = [
   "id": "LEE-primerdia",
   "nivel": "A2",
   "desde": 8,
-  "tema": "Путешествия",
+  "tema": "Жизнь в Испании",
   "titulo": "Mi primer día en Barcelona",
   "tituloRu": "Мой первый день в Барселоне",
   "parrafos": [
    {
-    "es": "Llegué a Barcelona un día de septiembre. El avión salió de Moscú a las ocho de la mañana y llegó a las doce.",
-    "ru": "Я прилетела в Барселону в один из сентябрьских дней. Самолёт вылетел из Москвы в восемь утра и прилетел в двенадцать."
+    "es": "Llegué a Barcelona un día de septiembre. No hay vuelo directo de Moscú a Barcelona: hice escala en Estambul. El viaje fue muy largo: salí de casa a las cinco de la mañana y llegué por la noche.",
+    "ru": "Я прилетела в Барселону в один из сентябрьских дней. Прямого рейса из Москвы в Барселону нет: я летела с пересадкой в Стамбуле. Дорога была очень долгой: я вышла из дома в пять утра и прилетела вечером."
    },
    {
-    "es": "En el aeropuerto cogí un taxi. El conductor me habló mucho, pero no entendí casi nada.",
-    "ru": "В аэропорту я взяла такси. Водитель много со мной говорил, но я почти ничего не поняла."
+    "es": "En el aeropuerto cogí un taxi. El taxista me habló mucho, pero no entendí casi nada. Solo entendí «¿De dónde eres?» y «¡Bienvenida!».",
+    "ru": "В аэропорту я взяла такси. Таксист много со мной разговаривал, но я почти ничего не поняла. Поняла только «Откуда ты?» и «Добро пожаловать!»."
    },
    {
-    "es": "Por la tarde fui a mi piso nuevo. Lucía me esperó en la puerta y me dio las llaves. ¡Fue muy simpática!",
-    "ru": "Днём я поехала в свою новую квартиру. Лусия ждала меня у двери и отдала ключи. Она была очень милой!"
+    "es": "Llegué a mi piso nuevo a las diez de la noche. Allí me esperó Lucía, una amiga del casero, con las llaves. ¡Fue muy simpática! Me enseñó el piso y me explicó cómo funciona todo.",
+    "ru": "В новую квартиру я приехала в десять вечера. Там меня ждала Лусия, подруга хозяина квартиры, с ключами. Она была очень милой! Она показала мне квартиру и объяснила, как всё работает."
    },
    {
-    "es": "Después salimos a cenar. Probé el jamón y la tortilla por primera vez.",
-    "ru": "Потом мы пошли ужинать. Я впервые попробовала хамон и тортилью."
+    "es": "Después salimos a cenar a un bar del barrio. Cenamos a las once de la noche: ¡para mí fue muy tarde! Probé el jamón y la tortilla por primera vez y me encantaron.",
+    "ru": "Потом мы пошли ужинать в бар нашего района. Мы ужинали в одиннадцать вечера — для меня это было очень поздно! Я впервые попробовала хамон и тортилью, и они мне очень понравились."
    },
    {
-    "es": "Ese día estuve muy cansada, pero también muy contenta. Desde entonces he aprendido mucho español.",
-    "ru": "В тот день я очень устала, но была и очень довольна. С тех пор я выучила много испанского."
+    "es": "Ese día estuve muy cansada, pero también muy contenta. Desde entonces he aprendido mucho español, y Lucía es mi mejor amiga en Barcelona.",
+    "ru": "В тот день я очень устала, но и была очень довольна. С тех пор я многому научилась в испанском, а Лусия — моя лучшая подруга в Барселоне."
    }
   ],
   "preguntas": [
@@ -2398,51 +2972,79 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿En qué mes llegó Ana?",
+    "pide": "¿Cuándo llegó Ana a Barcelona?",
     "opciones": [
      "En septiembre",
      "En enero",
-     "En julio"
+     "En agosto"
     ],
     "correcta": "En septiembre",
-    "explicacion": "«…un día de septiembre»."
+    "explicacion": "«Llegué a Barcelona un día de septiembre»."
    },
    {
     "id": "LEE-primerdia-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cómo fue del aeropuerto?",
+    "pide": "¿Dónde hizo escala?",
     "opciones": [
-     "En taxi",
-     "En metro",
-     "En autobús"
+     "En Estambul",
+     "En Madrid",
+     "En París"
     ],
-    "correcta": "En taxi",
-    "explicacion": "«En el aeropuerto cogí un taxi»."
+    "correcta": "En Estambul",
+    "explicacion": "«…hice escala en Estambul»."
    },
    {
     "id": "LEE-primerdia-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Quién le dio las llaves?",
+    "pide": "¿Qué entendió del taxista?",
     "opciones": [
-     "Lucía",
-     "El conductor",
-     "Pablo"
+     "Casi nada",
+     "Todo",
+     "La dirección"
     ],
-    "correcta": "Lucía",
-    "explicacion": "«Lucía me esperó en la puerta y me dio las llaves»."
+    "correcta": "Casi nada",
+    "explicacion": "«…no entendí casi nada»."
    },
    {
     "id": "LEE-primerdia-4",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Quién la esperó en el piso?",
+    "opciones": [
+     "Lucía",
+     "El casero",
+     "Javier"
+    ],
+    "correcta": "Lucía",
+    "explicacion": "«Allí me esperó Lucía, una amiga del casero»."
+   },
+   {
+    "id": "LEE-primerdia-5",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué probó por primera vez?",
+    "opciones": [
+     "El jamón y la tortilla",
+     "La sopa",
+     "El vino"
+    ],
+    "correcta": "El jamón y la tortilla",
+    "explicacion": "«Probé el jamón y la tortilla por primera vez»."
+   },
+   {
+    "id": "LEE-primerdia-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "vf",
-    "afirmacion": "Ana entendió todo lo que dijo el conductor.",
+    "afirmacion": "Ana llegó al piso por la mañana.",
     "verdadero": false,
-    "explicacion": "«…no entendí casi nada»."
+    "explicacion": "«Llegué a mi piso nuevo a las diez de la noche»."
    }
   ]
  },
@@ -2452,31 +3054,31 @@ const LECTURAS_ES = [
   "desde": 8,
   "tema": "Повседневная жизнь",
   "titulo": "Un mal día",
-  "tituloRu": "Неудачный день",
+  "tituloRu": "Плохой день",
   "parrafos": [
    {
-    "es": "Hoy he tenido un día muy malo. Esta mañana no he escuchado el móvil y me he levantado a las nueve. ¡Tarde!",
-    "ru": "Сегодня у меня был ужасный день. Утром я не услышал телефон и встал в девять. Поздно!"
+    "es": "Hoy he tenido un día horrible. Esta mañana no he oído el despertador y me he levantado a las nueve. ¡Tarde!",
+    "ru": "Сегодня у меня был ужасный день. Утром я не услышал будильник и встал в девять. Поздно!"
    },
    {
-    "es": "No he desayunado y he salido de casa corriendo. En la calle ha empezado a llover.",
-    "ru": "Я не позавтракал и выбежал из дома. На улице пошёл дождь."
+    "es": "No he desayunado y he salido de casa corriendo. En la calle ha empezado a llover y, claro, no he cogido el paraguas.",
+    "ru": "Я не позавтракал и выбежал из дома. На улице начался дождь, и, конечно, я не взял зонт."
    },
    {
-    "es": "He llegado al trabajo a las diez menos cuarto. Mi compañero no me ha dicho nada, pero ha mirado el reloj.",
-    "ru": "Я пришёл на работу без четверти десять. Мой коллега ничего не сказал, но посмотрел на часы."
+    "es": "He llegado a la oficina a las diez menos cuarto, mojado de la cabeza a los pies. Mi jefe no me ha dicho nada, pero ha mirado el reloj.",
+    "ru": "Я пришёл в офис без четверти десять, мокрый с головы до ног. Начальник ничего мне не сказал, но посмотрел на часы."
    },
    {
-    "es": "A la hora de comer he ido a un bar, pero no he encontrado sitio.",
-    "ru": "В обед я пошёл в бар, но не нашёл места."
+    "es": "A la hora de comer he ido a un bar, pero no he encontrado sitio. Al final he comido un bocadillo en la oficina, delante del ordenador.",
+    "ru": "В обед я пошёл в бар, но не нашёл свободного места. В итоге я съел бутерброд в офисе, перед компьютером."
    },
    {
-    "es": "Por la tarde he perdido el móvil en el metro. Una chica lo ha encontrado y me lo ha dado.",
-    "ru": "Днём я потерял телефон в метро. Одна девушка нашла его и отдала мне."
+    "es": "Por la tarde he perdido el móvil en el metro. Por suerte, una chica lo ha encontrado y lo ha dejado en la oficina de la estación. Allí lo he recogido a las ocho.",
+    "ru": "Вечером я потерял телефон в метро. К счастью, девушка его нашла и оставила в бюро на станции. Там я его забрал в восемь."
    },
    {
-    "es": "Ahora estoy en casa, en el sofá. ¡Mañana va a ser un día mejor!",
-    "ru": "Сейчас я дома, на диване. Завтра будет день получше!"
+    "es": "Ahora estoy en casa, en el sofá, con Marta y una pizza. ¡Mañana va a ser un día mejor!",
+    "ru": "Сейчас я дома, на диване, с Мартой и пиццей. Завтра будет день получше!"
    }
   ],
   "preguntas": [
@@ -2499,61 +3101,72 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué ha hecho su compañero?",
+    "pide": "¿Por qué ha llegado mojado?",
     "opciones": [
-     "Ha mirado el reloj",
-     "Ha dicho muchas cosas",
-     "Ha llegado tarde"
+     "Ha llovido y no tenía paraguas",
+     "Se ha duchado",
+     "Ha ido a la playa"
     ],
-    "correcta": "Ha mirado el reloj",
-    "explicacion": "«…ha mirado el reloj»."
+    "correcta": "Ha llovido y no tenía paraguas",
+    "explicacion": "«…ha empezado a llover y… no he cogido el paraguas»."
    },
    {
     "id": "LEE-maldia-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde ha perdido el móvil?",
+    "pide": "¿Qué ha hecho su jefe?",
     "opciones": [
-     "En el metro",
-     "En el bar",
-     "En el trabajo"
+     "Ha mirado el reloj",
+     "Le ha gritado",
+     "Le ha dado un café"
     ],
-    "correcta": "En el metro",
-    "explicacion": "«…he perdido el móvil en el metro»."
+    "correcta": "Ha mirado el reloj",
+    "explicacion": "«Mi jefe no me ha dicho nada, pero ha mirado el reloj»."
    },
    {
     "id": "LEE-maldia-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Una chica ha encontrado el móvil.",
-    "verdadero": true,
-    "explicacion": "«…una chica lo ha encontrado»."
+    "forma": "elegir",
+    "pide": "¿Dónde ha comido?",
+    "opciones": [
+     "En la oficina",
+     "En un bar",
+     "En casa"
+    ],
+    "correcta": "En la oficina",
+    "explicacion": "«…he comido un bocadillo en la oficina»."
    },
    {
     "id": "LEE-maldia-5",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Ha perdido el móvil para siempre.",
+    "verdadero": false,
+    "explicacion": "«…una chica lo ha encontrado… Allí lo he recogido»."
+   },
+   {
+    "id": "LEE-maldia-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "situacion",
-    "pide": "Расскажи по-испански о своём неудачном дне (одна-две фразы, в прошедшем).",
+    "pide": "А какой у тебя был день сегодня? Расскажи 2–3 фразами в pretérito perfecto.",
     "sit": {
      "necesita": [
       {
-       "es": "прошедшее",
+       "es": "перфект",
        "formas": [
-        "he",
-        "ha",
-        "fui",
-        "perdí",
-        "llegué",
-        "me levanté",
-        "tuve"
+        "he ",
+        "has ",
+        "ha ",
+        "hemos "
        ]
       }
      ],
      "modelos": [
-      "Hoy he perdido el autobús y he llegado tarde."
+      "Hoy he trabajado mucho y por la tarde he ido al cine."
      ]
     }
    }
@@ -2568,24 +3181,28 @@ const LECTURAS_ES = [
   "tituloRu": "Когда я была маленькой",
   "parrafos": [
    {
-    "es": "Cuando era pequeña, vivía con mis padres y mi hermano en un piso pequeño de Moscú. Mi madre era profesora y mi padre trabajaba en un hospital.",
-    "ru": "Когда я была маленькой, я жила с родителями и братом в маленькой квартире в Москве. Мама была учительницей, а папа работал в больнице."
+    "es": "Cuando era pequeña, vivía con mis padres y mi hermano en un piso de Moscú, en un edificio alto de nueve plantas.",
+    "ru": "Когда я была маленькой, я жила с родителями и братом в квартире в Москве, в высоком девятиэтажном доме."
    },
    {
-    "es": "Todos los días iba al colegio a pie con mi hermano. Las clases empezaban a las ocho y media.",
-    "ru": "Каждый день я ходила в школу пешком с братом. Уроки начинались в половине девятого."
+    "es": "Mi madre era profesora en un colegio y mi padre trabajaba en un hospital: era médico.",
+    "ru": "Мама была учительницей в школе, а папа работал в больнице: он был врачом."
    },
    {
-    "es": "Por la tarde hacía los deberes y después jugaba en el parque con mis amigas. En invierno siempre hacía mucho frío y había nieve.",
-    "ru": "Днём я делала уроки, а потом играла в парке с подругами. Зимой всегда было очень холодно и лежал снег."
+    "es": "Todos los días iba al colegio a pie con mi hermano. Las clases empezaban a las ocho y media y terminaban a la una o a las dos. Mi hermano tenía tres años más que yo y siempre me ayudaba con los deberes. A veces también discutíamos, como todos los hermanos.",
+    "ru": "Каждый день я ходила в школу пешком с братом. Уроки начинались в половине девятого и заканчивались в час или в два. Брат был на три года старше и всегда помогал мне с уроками. Иногда мы и ссорились, как все братья и сёстры."
    },
    {
-    "es": "Los domingos solíamos ir a casa de mis abuelos. Mi abuela cocinaba muy bien y siempre nos contaba historias.",
-    "ru": "По воскресеньям мы обычно ездили к бабушке с дедушкой. Бабушка очень хорошо готовила и всегда рассказывала нам истории."
+    "es": "Por la tarde hacía los deberes y después jugaba en el patio con mis amigas. En invierno siempre hacía mucho frío y había mucha nieve: patinábamos y hacíamos muñecos de nieve.",
+    "ru": "После обеда я делала уроки, а потом играла во дворе с подругами. Зимой всегда было очень холодно и много снега: мы катались на коньках и лепили снеговиков."
    },
    {
-    "es": "Era una niña muy tranquila, pero un poco tímida. Me encantaba leer. Quería ser médica, ¡y ahora soy enfermera!",
-    "ru": "Я была очень спокойной девочкой, но немного застенчивой. Я обожала читать. Хотела стать врачом — и теперь я медсестра!"
+    "es": "En verano solíamos ir a la dacha de mis abuelos, cerca de Moscú. Mi abuela cocinaba muy bien y siempre nos contaba historias.",
+    "ru": "Летом мы обычно ездили на дачу к бабушке с дедушкой, недалеко от Москвы. Бабушка очень хорошо готовила и всегда рассказывала нам истории."
+   },
+   {
+    "es": "Era una niña muy tranquila, pero un poco tímida. Me encantaba leer y quería ser médica, como mi padre. ¡Y ahora soy enfermera!",
+    "ru": "Я была очень спокойной девочкой, но немного застенчивой. Я обожала читать и хотела стать врачом, как папа. А теперь я медсестра!"
    }
   ],
   "preguntas": [
@@ -2594,79 +3211,79 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde vivía Ana de pequeña?",
+    "pide": "¿Dónde vivía Ana?",
     "opciones": [
-     "En Moscú",
-     "En Barcelona",
-     "En un pueblo"
+     "En un piso de Moscú",
+     "En una casa en el campo",
+     "En Barcelona"
     ],
-    "correcta": "En Moscú",
-    "explicacion": "«…vivía… en un piso pequeño de Moscú»."
+    "correcta": "En un piso de Moscú",
+    "explicacion": "«…vivía… en un piso de Moscú»."
    },
    {
     "id": "LEE-pequena-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cómo iba al colegio?",
+    "pide": "¿En qué trabajaba su padre?",
     "opciones": [
-     "A pie",
-     "En autobús",
-     "En coche"
+     "Era médico",
+     "Era profesor",
+     "Era ingeniero"
     ],
-    "correcta": "A pie",
-    "explicacion": "«…iba al colegio a pie»."
+    "correcta": "Era médico",
+    "explicacion": "«…mi padre trabajaba en un hospital: era médico»."
    },
    {
     "id": "LEE-pequena-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué hacían los domingos?",
+    "pide": "¿Cómo iba al colegio?",
     "opciones": [
-     "Iban a casa de los abuelos",
-     "Iban al cine",
-     "Trabajaban"
+     "A pie con su hermano",
+     "En coche con su padre",
+     "En autobús"
     ],
-    "correcta": "Iban a casa de los abuelos",
-    "explicacion": "«…solíamos ir a casa de mis abuelos»."
+    "correcta": "A pie con su hermano",
+    "explicacion": "«…iba al colegio a pie con mi hermano»."
    },
    {
     "id": "LEE-pequena-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "De pequeña, Ana era un poco tímida.",
-    "verdadero": true,
-    "explicacion": "«…pero un poco tímida»."
+    "forma": "elegir",
+    "pide": "¿Qué hacían en invierno?",
+    "opciones": [
+     "Patinaban y hacían muñecos de nieve",
+     "Iban a la playa",
+     "Jugaban al fútbol en el patio"
+    ],
+    "correcta": "Patinaban y hacían muñecos de nieve",
+    "explicacion": "«…patinábamos y hacíamos muñecos de nieve»."
    },
    {
     "id": "LEE-pequena-5",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "situacion",
-    "pide": "Расскажи по-испански, что ты любил делать в детстве.",
-    "sit": {
-     "necesita": [
-      {
-       "es": "imperfecto",
-       "formas": [
-        "me gustaba",
-        "me encantaba",
-        "jugaba",
-        "iba",
-        "leía",
-        "veía",
-        "era",
-        "tenía"
-       ],
-       "rx": "^[a-záéíóúñ]+(aba|ía)$"
-      }
-     ],
-     "modelos": [
-      "De pequeño me encantaba jugar al fútbol."
-     ]
-    }
+    "forma": "elegir",
+    "pide": "¿Adónde iban en verano?",
+    "opciones": [
+     "A la dacha de sus abuelos",
+     "A España",
+     "A un hotel"
+    ],
+    "correcta": "A la dacha de sus abuelos",
+    "explicacion": "«En verano solíamos ir a la dacha de mis abuelos»."
+   },
+   {
+    "id": "LEE-pequena-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "De pequeña, Ana quería ser enfermera.",
+    "verdadero": false,
+    "explicacion": "«…quería ser médica, como mi padre»."
    }
   ]
  },
@@ -2679,28 +3296,28 @@ const LECTURAS_ES = [
   "tituloRu": "Деревня моей бабушки",
   "parrafos": [
    {
-    "es": "Mi abuela Carmen nació en un pueblo pequeño de Asturias.",
-    "ru": "Моя бабушка Кармен родилась в маленькой деревне в Астурии."
+    "es": "Mi abuela Pilar nació en 1950 en un pueblo pequeño de Asturias, en el norte de España.",
+    "ru": "Моя бабушка Пилар родилась в 1950 году в маленькой деревне в Астурии, на севере Испании."
    },
    {
-    "es": "Cuando era joven, la vida allí era muy diferente. No había coches y no había televisión. La gente trabajaba en el campo desde muy temprano.",
-    "ru": "Когда она была молодой, жизнь там была совсем другой. Не было машин, не было телевизора. Люди работали в поле с самого раннего утра."
+    "es": "Cuando era joven, la vida allí era muy diferente. Casi nadie tenía coche y no había televisión. La gente trabajaba en el campo desde muy temprano y casi todas las familias tenían vacas. Para ir a la ciudad, la gente cogía un autobús que pasaba una vez al día.",
+    "ru": "Когда она была молодой, жизнь там была совсем другой. Машины почти ни у кого не было, телевизора не было. Люди работали в поле с самого утра, и почти в каждой семье были коровы. Чтобы съездить в город, люди садились на автобус, который ходил раз в день."
    },
    {
-    "es": "Mi abuela tenía cinco hermanos. Por la mañana ayudaba a su madre en casa y por la tarde iba a la escuela.",
-    "ru": "У бабушки было пятеро братьев и сестёр. Утром она помогала маме по дому, а днём ходила в школу."
+    "es": "Mi abuela tenía cinco hermanos. Por la mañana iba a la escuela y por la tarde ayudaba a su madre en casa y con los animales.",
+    "ru": "У бабушки было пятеро братьев и сестёр. Утром она ходила в школу, а после обеда помогала маме по дому и с животными."
    },
    {
-    "es": "Los domingos todo el pueblo iba a la plaza. Había música y la gente bailaba hasta la noche.",
-    "ru": "По воскресеньям вся деревня собиралась на площади. Играла музыка, и люди танцевали до ночи."
+    "es": "Los domingos todo el pueblo iba a la plaza después de misa. Había música y la gente bailaba hasta la noche.",
+    "ru": "По воскресеньям после мессы вся деревня шла на площадь. Играла музыка, и люди танцевали до ночи."
    },
    {
-    "es": "A los veinte años mi abuela se fue a vivir a Madrid. Allí conoció a mi abuelo.",
-    "ru": "В двадцать лет бабушка уехала жить в Мадрид. Там она познакомилась с дедушкой."
+    "es": "A los veinte años mi abuela se fue a vivir a Barcelona, como muchos jóvenes de los pueblos en aquella época. Allí trabajó en una fábrica y conoció a mi abuelo.",
+    "ru": "В двадцать лет бабушка уехала жить в Барселону, как многие молодые люди из деревень в то время. Там она работала на фабрике и познакомилась с дедушкой."
    },
    {
-    "es": "Ahora el pueblo es muy tranquilo: solo viven allí cien personas. Pero cada verano mi abuela vuelve.",
-    "ru": "Сейчас деревня очень тихая: там живут всего сто человек. Но каждое лето бабушка возвращается туда."
+    "es": "Ahora el pueblo es muy tranquilo: solo viven allí cien personas, casi todas mayores. Pero cada verano mi abuela vuelve y dice que es el sitio más bonito del mundo.",
+    "ru": "Сейчас в деревне очень тихо: там живут всего сто человек, почти все пожилые. Но каждое лето бабушка возвращается туда и говорит, что это самое красивое место на свете."
    }
   ],
   "preguntas": [
@@ -2712,62 +3329,76 @@ const LECTURAS_ES = [
     "pide": "¿Dónde nació la abuela?",
     "opciones": [
      "En un pueblo de Asturias",
-     "En Madrid",
-     "En Barcelona"
+     "En Barcelona",
+     "En Madrid"
     ],
     "correcta": "En un pueblo de Asturias",
-    "explicacion": "«…nació en un pueblo pequeño de Asturias»."
+    "explicacion": "«…nació… en un pueblo pequeño de Asturias»."
    },
    {
     "id": "LEE-pueblo-2",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "elegir",
-    "pide": "¿Cuántos hermanos tenía?",
-    "opciones": [
-     "Cinco",
-     "Dos",
-     "Diez"
-    ],
-    "correcta": "Cinco",
-    "explicacion": "«Mi abuela tenía cinco hermanos»."
+    "forma": "vf",
+    "afirmacion": "En el pueblo había televisión.",
+    "verdadero": false,
+    "explicacion": "«…no había televisión»."
    },
    {
     "id": "LEE-pueblo-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué hacía la gente los domingos?",
+    "pide": "¿Qué hacía la abuela por la tarde?",
     "opciones": [
-     "Bailaba en la plaza",
-     "Trabajaba en el campo",
+     "Ayudaba a su madre",
+     "Iba a la escuela",
      "Veía la televisión"
     ],
-    "correcta": "Bailaba en la plaza",
-    "explicacion": "«…la gente bailaba hasta la noche»."
+    "correcta": "Ayudaba a su madre",
+    "explicacion": "«…por la tarde ayudaba a su madre en casa y con los animales»."
    },
    {
     "id": "LEE-pueblo-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Ahora en el pueblo vive mucha gente.",
-    "verdadero": false,
-    "explicacion": "«…solo viven allí cien personas»."
+    "forma": "elegir",
+    "pide": "¿Qué pasaba los domingos?",
+    "opciones": [
+     "Había música y la gente bailaba",
+     "Todos trabajaban en el campo",
+     "La gente iba a la playa"
+    ],
+    "correcta": "Había música y la gente bailaba",
+    "explicacion": "«Había música y la gente bailaba hasta la noche»."
    },
    {
     "id": "LEE-pueblo-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde conoció a su marido?",
+    "pide": "¿Por qué se fue a Barcelona?",
     "opciones": [
-     "En Madrid",
-     "En el pueblo",
-     "En la escuela"
+     "Como muchos jóvenes de su época",
+     "Para estudiar en la universidad",
+     "Por su abuelo"
     ],
-    "correcta": "En Madrid",
-    "explicacion": "«Allí conoció a mi abuelo»."
+    "correcta": "Como muchos jóvenes de su época",
+    "explicacion": "«…como muchos jóvenes de los pueblos en aquella época»."
+   },
+   {
+    "id": "LEE-pueblo-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Cuántas personas viven hoy en el pueblo?",
+    "opciones": [
+     "Cien",
+     "Mil",
+     "Cinco"
+    ],
+    "correcta": "Cien",
+    "explicacion": "«…solo viven allí cien personas»."
    }
   ]
  },
@@ -2775,33 +3406,33 @@ const LECTURAS_ES = [
   "id": "LEE-bcnantes",
   "nivel": "A2",
   "desde": 9,
-  "tema": "Города",
+  "tema": "Город",
   "titulo": "Barcelona antes y ahora",
   "tituloRu": "Барселона раньше и сейчас",
   "parrafos": [
    {
-    "es": "Javier llegó a Barcelona hace treinta años. Cuenta que la ciudad era muy diferente.",
-    "ru": "Хавьер приехал в Барселону тридцать лет назад. Он рассказывает, что город был совсем другим."
+    "es": "Javier llegó a Barcelona en 1988, cuando era estudiante. Cuenta que la ciudad era muy diferente. En aquella época compartía piso con tres estudiantes y por las noches salían por el barrio Gótico, porque allí todo era barato.",
+    "ru": "Хавьер приехал в Барселону в 1988 году, когда был студентом. Он рассказывает, что город был совсем другим. В то время он снимал квартиру с тремя студентами, и по вечерам они гуляли по Готическому кварталу, потому что там всё было дёшево."
    },
    {
-    "es": "Antes la playa no era bonita: no estaba limpia y la gente casi no iba allí. Ahora hay playas muy bonitas y en verano están llenas.",
-    "ru": "Раньше пляж не был красивым: она была грязной, и люди почти туда не ходили. Теперь там очень красивые пляжи, и летом они полные."
+    "es": "Antes de los Juegos Olímpicos de 1992, la playa no era bonita: no estaba limpia y la gente casi no iba allí. Después la ciudad cambió mucho. Ahora hay playas muy bonitas y en verano están llenas.",
+    "ru": "До Олимпийских игр 1992 года пляж был некрасивым: он был грязным, и люди туда почти не ходили. Потом город сильно изменился. Теперь здесь очень красивые пляжи, и летом они полные."
    },
    {
-    "es": "Antes había pocos turistas. Ahora vienen millones de personas cada año.",
-    "ru": "Раньше туристов было мало. Теперь каждый год приезжают миллионы людей."
+    "es": "Antes había pocos turistas. Ahora vienen millones de personas cada año, y en el centro a veces es difícil caminar.",
+    "ru": "Раньше туристов было мало. Теперь каждый год приезжают миллионы людей, и в центре иногда трудно пройти."
    },
    {
-    "es": "Los pisos eran baratos: Javier pagaba muy poco por un piso en el centro. Hoy un piso igual cuesta mucho más.",
-    "ru": "Квартиры были дешёвыми: Хавьер платил совсем немного за квартиру в центре. Сегодня такая же квартира стоит гораздо дороже."
+    "es": "Los pisos eran baratos: Javier pagaba muy poco por un piso en el centro. Hoy un piso igual cuesta mucho más, y muchos jóvenes no pueden vivir solos.",
+    "ru": "Квартиры были дешёвыми: Хавьер платил совсем немного за квартиру в центре. Сегодня такая же квартира стоит гораздо дороже, и многие молодые люди не могут жить отдельно."
    },
    {
-    "es": "También había menos líneas de metro. Ahora hay muchas más.",
-    "ru": "И линий метро было меньше. Теперь их гораздо больше."
+    "es": "También había menos líneas de metro y casi nadie iba en bici. Ahora hay muchas más líneas y calles para bicis.",
+    "ru": "Ещё было меньше линий метро, и почти никто не ездил на велосипеде. Теперь линий гораздо больше, и есть велодорожки."
    },
    {
-    "es": "¿Le gusta más la Barcelona de antes o la de ahora? «Las dos», dice Javier. «Antes era más tranquila, pero ahora es más bonita».",
-    "ru": "Ему больше нравится прежняя Барселона или сегодняшняя? «Обе, — говорит Хавьер. — Раньше она была спокойнее, но сейчас красивее»."
+    "es": "¿Le gusta más la Barcelona de antes o la de ahora? «Las dos», dice Javier. «Antes era más tranquila y más barata, pero ahora es más bonita y más internacional».",
+    "ru": "Какая Барселона ему нравится больше — прежняя или нынешняя? «Обе, — говорит Хавьер. — Раньше она была спокойнее и дешевле, а теперь красивее и интернациональнее»."
    }
   ],
   "preguntas": [
@@ -2812,74 +3443,86 @@ const LECTURAS_ES = [
     "forma": "elegir",
     "pide": "¿Cuándo llegó Javier a Barcelona?",
     "opciones": [
-     "Hace treinta años",
-     "Hace tres años",
-     "El año pasado"
+     "En 1988",
+     "En 1992",
+     "Hace dos años"
     ],
-    "correcta": "Hace treinta años",
-    "explicacion": "«…hace treinta años»."
+    "correcta": "En 1988",
+    "explicacion": "«Javier llegó a Barcelona en 1988»."
    },
    {
     "id": "LEE-bcnantes-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cómo era la playa antes?",
+    "pide": "¿Cómo era la playa antes de 1992?",
     "opciones": [
-     "No era bonita",
-     "Era muy bonita",
-     "Estaba llena"
+     "No estaba limpia",
+     "Estaba llena",
+     "Era muy bonita"
     ],
-    "correcta": "No era bonita",
-    "explicacion": "«Antes la playa no era bonita»."
+    "correcta": "No estaba limpia",
+    "explicacion": "«…no estaba limpia y la gente casi no iba allí»."
    },
    {
     "id": "LEE-bcnantes-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "vf",
-    "afirmacion": "Antes los pisos eran caros.",
+    "afirmacion": "Antes había muchos turistas.",
     "verdadero": false,
-    "explicacion": "«Los pisos eran baratos»."
+    "explicacion": "«Antes había pocos turistas»."
    },
    {
     "id": "LEE-bcnantes-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué piensa Javier?",
+    "pide": "¿Cómo eran los pisos antes?",
     "opciones": [
-     "Le gustan las dos",
-     "Prefiere la de antes",
-     "Prefiere la de ahora"
+     "Baratos",
+     "Muy caros",
+     "Muy grandes"
     ],
-    "correcta": "Le gustan las dos",
-    "explicacion": "«Las dos», dice Javier."
+    "correcta": "Baratos",
+    "explicacion": "«Los pisos eran baratos»."
    },
    {
     "id": "LEE-bcnantes-5",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué hay ahora que antes no había?",
+    "opciones": [
+     "Calles para bicis",
+     "Pisos baratos",
+     "Playas sucias"
+    ],
+    "correcta": "Calles para bicis",
+    "explicacion": "«Ahora hay muchas más líneas y calles para bicis»."
+   },
+   {
+    "id": "LEE-bcnantes-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "situacion",
-    "pide": "Как изменился твой город? Скажи по-испански одну вещь «раньше» и одну «сейчас».",
+    "pide": "Как изменился твой город? Сравни «раньше» и «сейчас» по-испански.",
     "sit": {
      "necesita": [
       {
        "es": "раньше",
        "formas": [
         "antes",
-        "era",
+        "cuando era",
         "había",
-        "tenía"
+        "era"
        ]
       },
       {
        "es": "сейчас",
        "formas": [
         "ahora",
-        "hoy",
-        "es",
-        "hay"
+        "hoy"
        ]
       }
      ],
@@ -2894,29 +3537,33 @@ const LECTURAS_ES = [
   "id": "LEE-susto",
   "nivel": "A2",
   "desde": 9,
-  "tema": "Истории",
+  "tema": "Путешествия",
   "titulo": "Un viaje en tren",
   "tituloRu": "Поездка на поезде",
   "parrafos": [
    {
-    "es": "El verano pasado Lucía fue a Valencia en tren. Era muy temprano y en el tren había poca gente.",
-    "ru": "Прошлым летом Лусия ездила в Валенсию на поезде. Было очень рано, и в поезде было мало людей."
+    "es": "El verano pasado Lucía fue a Valencia en tren para visitar a una amiga. Era muy temprano, las siete de la mañana, y en el tren había poca gente.",
+    "ru": "Прошлым летом Лусия ездила в Валенсию на поезде к подруге. Было очень рано, семь утра, и в поезде было мало людей."
    },
    {
-    "es": "Lucía estaba leyendo un libro cuando, de repente, el tren paró.",
-    "ru": "Лусия читала книгу, когда вдруг поезд остановился."
+    "es": "Lucía estaba leyendo un libro y escuchaba música cuando, de repente, el tren paró en medio del campo.",
+    "ru": "Лусия читала книгу и слушала музыку, когда вдруг поезд остановился посреди поля."
    },
    {
-    "es": "Nadie sabía qué pasaba. Unas personas se levantaron y miraron por la ventana. Una señora estaba muy nerviosa.",
-    "ru": "Никто не знал, что происходит. Несколько человек встали и посмотрели в окно. Одна женщина очень нервничала."
+    "es": "Nadie sabía qué pasaba. Unas personas se levantaron y miraron por la ventana. Una señora mayor estaba muy nerviosa y un niño empezó a llorar.",
+    "ru": "Никто не знал, что происходит. Несколько человек встали и посмотрели в окно. Пожилая женщина очень нервничала, а один ребёнок заплакал."
    },
    {
-    "es": "Después de veinte minutos, un chico del tren dijo: «No pasa nada. Era un problema pequeño».",
-    "ru": "Через двадцать минут парень из поездной бригады сказал: «Ничего страшного. Это была небольшая проблема»."
+    "es": "Lucía también estaba un poco nerviosa, pero quiso ayudar a la señora: habló con ella de su viaje y le dio un poco de agua.",
+    "ru": "Лусия тоже немного нервничала, но захотела помочь женщине: поговорила с ней о поездке и дала ей немного воды."
    },
    {
-    "es": "El tren siguió y llegó a Valencia una hora tarde. Lucía perdió el autobús, ¡pero llegó!",
-    "ru": "Поезд поехал дальше и прибыл в Валенсию с опозданием на час. Лусия опоздала на автобус, но доехала!"
+    "es": "Después de veinte minutos, un chico del tren pasó por los vagones y dijo: «No pasa nada. Era un problema pequeño. Vamos a continuar el viaje».",
+    "ru": "Через двадцать минут сотрудник поезда прошёл по вагонам и сказал: «Ничего страшного. Это была небольшая проблема. Сейчас поедем дальше»."
+   },
+   {
+    "es": "El tren siguió y llegó a Valencia una hora tarde. Lucía perdió el autobús a la playa, pero no le importó: ¡llegó bien y tenía una historia para contar! Por la noche llamó a Ana y le contó todo. «¡Qué susto!», dijo Ana.",
+    "ru": "Поезд поехал дальше и прибыл в Валенсию с опозданием на час. Лусия опоздала на автобус до пляжа, но ей было всё равно: она добралась благополучно, и ей было что рассказать! Вечером она позвонила Ане и всё ей рассказала. «Вот это да, как страшно!» — сказала Аня."
    }
   ],
   "preguntas": [
@@ -2925,50 +3572,78 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Adónde iba Lucía?",
+    "pide": "¿Adónde fue Lucía?",
     "opciones": [
      "A Valencia",
      "A Madrid",
      "A Sevilla"
     ],
     "correcta": "A Valencia",
-    "explicacion": "«Lucía fue a Valencia en tren»."
+    "explicacion": "«…Lucía fue a Valencia en tren»."
    },
    {
     "id": "LEE-susto-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué estaba haciendo cuando paró el tren?",
+    "pide": "¿Qué hacía cuando el tren paró?",
     "opciones": [
-     "Estaba leyendo",
-     "Estaba durmiendo",
-     "Estaba comiendo"
+     "Leía un libro y escuchaba música",
+     "Dormía",
+     "Hablaba por teléfono"
     ],
-    "correcta": "Estaba leyendo",
-    "explicacion": "«Lucía estaba leyendo un libro»."
+    "correcta": "Leía un libro y escuchaba música",
+    "explicacion": "«Lucía estaba leyendo un libro y escuchaba música cuando…»."
    },
    {
     "id": "LEE-susto-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Había mucha gente en el tren.",
-    "verdadero": false,
-    "explicacion": "«…en el tren había poca gente»."
+    "forma": "elegir",
+    "pide": "¿Cómo estaba la señora mayor?",
+    "opciones": [
+     "Muy nerviosa",
+     "Muy contenta",
+     "Dormida"
+    ],
+    "correcta": "Muy nerviosa",
+    "explicacion": "«Una señora mayor estaba muy nerviosa»."
    },
    {
     "id": "LEE-susto-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuándo llegó a Valencia?",
+    "pide": "¿Qué hizo Lucía?",
     "opciones": [
-     "Una hora tarde",
-     "A tiempo",
-     "Dos días después"
+     "Ayudó a la señora",
+     "Llamó a la policía",
+     "Salió del tren"
     ],
-    "correcta": "Una hora tarde",
+    "correcta": "Ayudó a la señora",
+    "explicacion": "«…quiso ayudar a la señora»."
+   },
+   {
+    "id": "LEE-susto-5",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "El problema del tren fue grave.",
+    "verdadero": false,
+    "explicacion": "«Era un problema pequeño»."
+   },
+   {
+    "id": "LEE-susto-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Con cuánto retraso llegó el tren?",
+    "opciones": [
+     "Una hora",
+     "Veinte minutos",
+     "Tres horas"
+    ],
+    "correcta": "Una hora",
     "explicacion": "«…llegó a Valencia una hora tarde»."
    }
   ]
@@ -2986,16 +3661,24 @@ const LECTURAS_ES = [
     "ru": "Этим летом у Ани будет три недели отпуска, и у неё уже много планов."
    },
    {
-    "es": "Primero irá a Moscú a ver a su familia. Estará allí diez días. Su madre está muy contenta: dice que le preparará todos los platos que más le gustan.",
-    "ru": "Сначала она поедет в Москву повидать семью. Пробудет там десять дней. Мама очень рада: говорит, что приготовит ей все её любимые блюда."
+    "es": "Primero irá a Moscú a ver a su familia. No hay vuelos directos: hará escala en Estambul. Estará allí diez días. Su madre está muy contenta: dice que le preparará todos los platos que más le gustan.",
+    "ru": "Сначала она полетит в Москву к семье. Прямых рейсов нет: будет пересадка в Стамбуле. Она пробудет там десять дней. Мама очень рада: говорит, что приготовит ей все её любимые блюда."
    },
    {
-    "es": "Después volverá a España y viajará con Lucía por Andalucía. Visitarán Sevilla, Granada y Córdoba. Dormirán en hoteles pequeños y alquilarán un coche.",
-    "ru": "Потом она вернётся в Испанию и поедет с Лусией по Андалусии. Они побывают в Севилье, Гранаде и Кордове. Будут ночевать в маленьких гостиницах и возьмут машину напрокат."
+    "es": "Después volverá a España y viajará con Lucía por Andalucía. Visitarán Sevilla, Granada y Córdoba. Dormirán en hoteles pequeños y alquilarán un coche, porque Lucía tiene carné de conducir.",
+    "ru": "Потом она вернётся в Испанию и поедет с Лусией по Андалусии. Они побывают в Севилье, Гранаде и Кордове. Будут ночевать в маленьких гостиницах и возьмут машину напрокат, потому что у Лусии есть права."
    },
    {
-    "es": "Ana sabe que en agosto hará mucho calor en Andalucía. Por eso, saldrán temprano por la mañana y descansarán por la tarde, como hace la gente de allí.",
-    "ru": "Аня знает, что в августе на юге будет очень жарко. Поэтому они будут выходить рано утром и отдыхать днём, как делают местные."
+    "es": "En Granada verán la Alhambra. Ana ya ha comprado las entradas por internet, porque en verano hay mucha gente y se acaban pronto.",
+    "ru": "В Гранаде они увидят Альгамбру. Аня уже купила билеты через интернет, потому что летом очень много людей и билеты быстро заканчиваются."
+   },
+   {
+    "es": "Ana sabe que en agosto hará mucho calor en Andalucía: en Sevilla o en Córdoba puede haber más de cuarenta grados. Por eso, saldrán temprano por la mañana y descansarán por la tarde, como hace la gente de allí.",
+    "ru": "Аня знает, что в августе в Андалусии будет очень жарко: в Севилье или Кордове может быть больше сорока градусов. Поэтому они будут выходить рано утром и отдыхать днём, как делают местные."
+   },
+   {
+    "es": "Ana también quiere probar la comida del sur: el pescado de Cádiz y las tapas gratis de Granada.",
+    "ru": "Ещё Аня хочет попробовать андалусскую кухню: рыбу в Кадисе и бесплатные тапас в Гранаде."
    },
    {
     "es": "Si tienen tiempo, al final del viaje pasarán dos días en la playa de Cádiz.",
@@ -3012,90 +3695,97 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuántas semanas de vacaciones tendrá Ana?",
+    "pide": "¿Cuántos días estará Ana en Moscú?",
     "opciones": [
+     "Diez",
      "Tres",
-     "Dos",
-     "Cuatro"
+     "Veinte"
     ],
-    "correcta": "Tres",
-    "explicacion": "«…tres semanas de vacaciones»."
+    "correcta": "Diez",
+    "explicacion": "«Estará allí diez días»."
    },
    {
     "id": "LEE-verano-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué hará primero?",
+    "pide": "¿Qué ciudades visitarán en Andalucía?",
     "opciones": [
-     "Irá a Moscú",
-     "Irá a la playa",
-     "Viajará por Andalucía"
+     "Sevilla, Granada y Córdoba",
+     "Madrid y Valencia",
+     "Málaga y Cádiz"
     ],
-    "correcta": "Irá a Moscú",
-    "explicacion": "«Primero irá a Moscú»."
+    "correcta": "Sevilla, Granada y Córdoba",
+    "explicacion": "«Visitarán Sevilla, Granada y Córdoba»."
    },
    {
     "id": "LEE-verano-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Por qué saldrán temprano?",
+    "pide": "¿Por qué alquilarán un coche?",
     "opciones": [
-     "Porque hará mucho calor",
-     "Porque el hotel cierra",
-     "Porque no tienen coche"
+     "Lucía tiene carné de conducir",
+     "No hay trenes",
+     "Es más barato que el hotel"
     ],
-    "correcta": "Porque hará mucho calor",
-    "explicacion": "«…en agosto hará mucho calor en Andalucía»."
+    "correcta": "Lucía tiene carné de conducir",
+    "explicacion": "«…alquilarán un coche, porque Lucía tiene carné de conducir»."
    },
    {
     "id": "LEE-verano-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "vf",
-    "afirmacion": "Ana y Lucía viajarán en tren.",
+    "afirmacion": "Ana todavía no ha comprado las entradas de la Alhambra.",
     "verdadero": false,
-    "explicacion": "«…alquilarán un coche»."
+    "explicacion": "«Ana ya ha comprado las entradas por internet»."
    },
    {
     "id": "LEE-verano-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué harán si tienen tiempo?",
+    "pide": "¿Qué harán por la tarde?",
     "opciones": [
-     "Pasarán dos días en la playa",
-     "Volverán a Moscú",
-     "Visitarán Madrid"
+     "Descansarán",
+     "Irán a la playa",
+     "Visitarán museos"
     ],
-    "correcta": "Pasarán dos días en la playa",
-    "explicacion": "«Si tienen tiempo… pasarán dos días en la playa»."
+    "correcta": "Descansarán",
+    "explicacion": "«…saldrán temprano por la mañana y descansarán por la tarde»."
    },
    {
     "id": "LEE-verano-6",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "situacion",
-    "pide": "А ты что будешь делать летом? Ответь по-испански (futuro или ir a).",
+    "pide": "Какие у тебя планы на лето? Напиши 2–3 фразы в futuro.",
     "sit": {
      "necesita": [
       {
        "es": "будущее",
        "formas": [
-        "voy a",
+        "é ",
+        "ás ",
+        "á ",
+        "emos ",
+        "án ",
         "iré",
+        "haré",
+        "tendré",
+        "podré",
+        "saldré",
         "viajaré",
-        "estaré",
         "visitaré",
-        "pasaré",
-        "me quedaré"
-       ],
-       "rx": "^[a-záéíóúñ]+(ré|rás|rá|remos|rán)$"
+        "estaré",
+        "iremos",
+        "voy a"
+       ]
       }
      ],
      "modelos": [
-      "Este verano iré a la playa con mi familia."
+      "Este verano iré a la playa y visitaré a mi familia."
      ]
     }
    }
@@ -3114,24 +3804,32 @@ const LECTURAS_ES = [
     "ru": "Добрый вечер. Прогноз погоды на выходные."
    },
    {
-    "es": "El sábado hará sol en casi toda España. En Andalucía las temperaturas subirán: en Sevilla llegaremos a los treinta y cinco grados.",
-    "ru": "В субботу почти по всей Испании будет солнечно. В Андалусии температура поднимется: в Севилье будет до тридцати пяти градусов."
+    "es": "El sábado hará sol en casi toda España. En Andalucía las temperaturas subirán: en Sevilla llegaremos a los treinta y cinco grados, y en Córdoba, a los treinta y siete.",
+    "ru": "В субботу почти по всей Испании будет солнечно. В Андалусии температура поднимется: в Севилье до тридцати пяти градусов, а в Кордове — до тридцати семи."
    },
    {
-    "es": "En Galicia y en Asturias estará nublado y por la tarde lloverá. Si vais a salir, vais a necesitar un abrigo.",
-    "ru": "В Галисии и Астурии будет облачно, а днём пойдёт дождь. Если собираетесь выходить, понадобится куртка."
+    "es": "En Galicia y en Asturias estará nublado y por la tarde lloverá. Si vais a salir, vais a necesitar un paraguas y un abrigo.",
+    "ru": "В Галисии и Астурии будет облачно, а после обеда пойдёт дождь. Если собираетесь выходить, понадобятся зонт и пальто."
    },
    {
-    "es": "En Madrid y en el centro hará buen tiempo, pero por la noche hará fresco: unos doce grados.",
-    "ru": "В Мадриде и в центре будет хорошая погода, но ночью будет прохладно: около двенадцати градусов."
+    "es": "En Madrid y en el centro hará buen tiempo durante el día, pero por la noche hará fresco: unos doce grados.",
+    "ru": "В Мадриде и в центре страны днём будет хорошая погода, но ночью будет прохладно: около двенадцати градусов."
    },
    {
-    "es": "El domingo cambiará el tiempo. Llegará viento frío y las temperaturas bajarán en todo el país. En las montañas podrá nevar.",
-    "ru": "В воскресенье погода изменится. Придёт холодный ветер, и температура понизится по всей стране. В горах может пойти снег."
+    "es": "En Valencia y en Murcia hará calor, pero por la mañana estará nublado; por la tarde saldrá el sol. Si vais a la playa, llevad crema para el sol.",
+    "ru": "В Валенсии и Мурсии будет жарко, но утром будет облачно; после обеда выглянет солнце. Если пойдёте на пляж, возьмите солнцезащитный крем."
    },
    {
-    "es": "En Barcelona, el sábado será un día perfecto para la playa; el domingo, mejor quedarse en casa.",
-    "ru": "В Барселоне суббота будет идеальным днём для пляжа, а в воскресенье лучше остаться дома."
+    "es": "En las islas Canarias, como siempre, tendrán unos veinticuatro grados y un poco de viento.",
+    "ru": "На Канарских островах, как всегда, будет около двадцати четырёх градусов и небольшой ветер."
+   },
+   {
+    "es": "El domingo cambiará el tiempo. Llegará viento frío del norte y las temperaturas bajarán en todo el país, entre cinco y ocho grados. En los Pirineos podrá nevar por encima de los dos mil metros.",
+    "ru": "В воскресенье погода изменится. С севера придёт холодный ветер, и температура по всей стране опустится на пять–восемь градусов. В Пиренеях выше двух тысяч метров возможен снег."
+   },
+   {
+    "es": "En Barcelona, el sábado será un día perfecto para la playa; el domingo, mejor quedarse en casa con una buena película. ¡Buen fin de semana!",
+    "ru": "В Барселоне суббота будет идеальным днём для пляжа, а в воскресенье лучше остаться дома с хорошим фильмом. Хороших выходных!"
    }
   ],
   "preguntas": [
@@ -3140,76 +3838,79 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué tiempo hará el sábado en Sevilla?",
+    "pide": "¿Cuántos grados hará en Córdoba el sábado?",
     "opciones": [
-     "Mucho calor",
-     "Lloverá",
-     "Nevará"
+     "Treinta y siete",
+     "Treinta y cinco",
+     "Doce"
     ],
-    "correcta": "Mucho calor",
-    "explicacion": "«…en Sevilla llegaremos a los treinta y cinco grados»."
+    "correcta": "Treinta y siete",
+    "explicacion": "«…y en Córdoba, a los treinta y siete»."
    },
    {
     "id": "LEE-tiempo-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde lloverá el sábado?",
+    "pide": "¿Qué tiempo hará en Galicia?",
     "opciones": [
-     "En Galicia y en Asturias",
-     "En Sevilla",
-     "En Barcelona"
+     "Nublado y con lluvia",
+     "Mucho calor",
+     "Nieve"
     ],
-    "correcta": "En Galicia y en Asturias",
-    "explicacion": "«…lloverá en Galicia y en Asturias»."
+    "correcta": "Nublado y con lluvia",
+    "explicacion": "«En Galicia y en Asturias estará nublado y por la tarde lloverá»."
    },
    {
     "id": "LEE-tiempo-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "El domingo las temperaturas subirán.",
-    "verdadero": false,
-    "explicacion": "«…las temperaturas bajarán en todo el país»."
+    "forma": "elegir",
+    "pide": "¿Qué necesitarás en Asturias?",
+    "opciones": [
+     "Un paraguas y un abrigo",
+     "Ropa de verano",
+     "Gafas de sol"
+    ],
+    "correcta": "Un paraguas y un abrigo",
+    "explicacion": "«…vais a necesitar un paraguas y un abrigo»."
    },
    {
     "id": "LEE-tiempo-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué día es mejor para ir a la playa en Barcelona?",
+    "pide": "¿Qué pasará el domingo?",
     "opciones": [
-     "El sábado",
-     "El domingo",
-     "Los dos días"
+     "Bajarán las temperaturas",
+     "Hará más calor",
+     "Lloverá en Sevilla"
     ],
-    "correcta": "El sábado",
-    "explicacion": "«…el sábado será un día perfecto para la playa»."
+    "correcta": "Bajarán las temperaturas",
+    "explicacion": "«…las temperaturas bajarán en todo el país»."
    },
    {
     "id": "LEE-tiempo-5",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "situacion",
-    "pide": "Какая погода будет завтра у тебя в городе? Ответь по-испански.",
-    "sit": {
-     "necesita": [
-      {
-       "es": "погода",
-       "formas": [
-        "hará",
-        "lloverá",
-        "nevará",
-        "estará",
-        "va a hacer",
-        "va a llover"
-       ]
-      }
-     ],
-     "modelos": [
-      "Mañana hará sol, pero hará un poco de frío."
-     ]
-    }
+    "forma": "vf",
+    "afirmacion": "En los Pirineos podrá nevar el domingo.",
+    "verdadero": true,
+    "explicacion": "«En los Pirineos podrá nevar por encima de los dos mil metros»."
+   },
+   {
+    "id": "LEE-tiempo-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué día es mejor para la playa en Barcelona?",
+    "opciones": [
+     "El sábado",
+     "El domingo",
+     "Ninguno"
+    ],
+    "correcta": "El sábado",
+    "explicacion": "«…el sábado será un día perfecto para la playa»."
    }
   ]
  },
@@ -3219,31 +3920,35 @@ const LECTURAS_ES = [
   "desde": 10,
   "tema": "Работа",
   "titulo": "Buscar trabajo en España",
-  "tituloRu": "Искать работу в Испании",
+  "tituloRu": "Поиск работы в Испании",
   "parrafos": [
    {
-    "es": "Pablo es ingeniero y lleva un año buscando un trabajo nuevo. Ahora trabaja en una empresa pequeña, pero quiere un puesto mejor.",
-    "ru": "Пабло — инженер, и уже год ищет новую работу. Сейчас он работает в небольшой компании, но хочет должность получше."
+    "es": "Pablo es ingeniero y lleva un año buscando un trabajo nuevo. Ahora trabaja en una empresa pequeña de Madrid, pero quiere un puesto mejor, con más responsabilidad.",
+    "ru": "Пабло — инженер, и уже год ищет новую работу. Сейчас он работает в небольшой компании в Мадриде, но хочет должность получше, с большей ответственностью."
    },
    {
-    "es": "Cada semana mira los anuncios de trabajo en internet y manda su currículum. A veces lo llaman para una entrevista.",
-    "ru": "Каждую неделю он смотрит вакансии в интернете и отправляет резюме. Иногда его приглашают на собеседование."
+    "es": "Cada semana mira los anuncios de trabajo en internet y manda su currículum. Muchas empresas no contestan, pero a veces lo llaman para una entrevista. Por ahora ha hecho seis entrevistas.",
+    "ru": "Каждую неделю он смотрит вакансии в интернете и отправляет резюме. Многие компании не отвечают, но иногда его приглашают на собеседование. Пока он прошёл шесть собеседований."
    },
    {
-    "es": "Ayer tuvo una entrevista en una empresa grande de Madrid. Le preguntaron por su experiencia, por los idiomas que habla y por sus planes para el futuro.",
-    "ru": "Вчера у него было собеседование в большой мадридской компании. Его спросили об опыте, о языках, которыми он владеет, и о планах на будущее."
+    "es": "Ayer tuvo una entrevista en una empresa grande. Le preguntaron por su experiencia, por los idiomas que habla y por sus planes para el futuro. También le preguntaron: «¿Dónde se ve dentro de cinco años?».",
+    "ru": "Вчера у него было собеседование в крупной компании. Его спросили об опыте, о языках, которые он знает, и о планах на будущее. А ещё спросили: «Где вы видите себя через пять лет?»."
    },
    {
     "es": "Pablo contestó bien, pero estaba un poco nervioso. Al final le dijeron: «Le llamaremos la semana que viene».",
-    "ru": "Пабло отвечал хорошо, но немного нервничал. В конце ему сказали: «Мы позвоним вам на следующей неделе»."
+    "ru": "Пабло хорошо ответил, но немного нервничал. В конце ему сказали: «Мы вам позвоним на следующей неделе»."
    },
    {
-    "es": "Si le dan el trabajo, ganará más dinero y tendrá un contrato mejor. Pero tendrá que trabajar más horas.",
-    "ru": "Если ему дадут эту работу, он будет больше зарабатывать и получит контракт получше. Но ему придётся работать больше часов."
+    "es": "Si le dan el trabajo, ganará más dinero y tendrá un contrato fijo. Pero también tendrá que trabajar más horas y viajar mucho. Además, la empresa está lejos de su casa: tardaría una hora en llegar.",
+    "ru": "Если его возьмут, он будет больше зарабатывать и получит бессрочный договор. Но ему также придётся работать больше часов и много ездить в командировки. К тому же компания далеко от дома: дорога занимала бы час."
    },
    {
-    "es": "Marta le dice: «Tranquilo. Si no es esta, será otra. Tienes mucha experiencia».",
-    "ru": "Марта говорит ему: «Не волнуйся. Не эта, так другая. У тебя большой опыт»."
+    "es": "Pablo no sabe qué hará. «Me gustaría tener más tiempo libre, pero también quiero crecer en mi profesión», dice.",
+    "ru": "Пабло не знает, что будет делать. «Мне хотелось бы иметь больше свободного времени, но я также хочу расти в профессии», — говорит он."
+   },
+   {
+    "es": "Marta le dice: «Tranquilo. Si no es esta empresa, será otra. Tienes mucha experiencia y hablas inglés. Seguro que encontrarás algo bueno».",
+    "ru": "Марта говорит ему: «Не волнуйся. Не эта компания — так другая. У тебя большой опыт, и ты говоришь по-английски. Наверняка найдёшь что-нибудь хорошее»."
    }
   ],
   "preguntas": [
@@ -3256,27 +3961,13 @@ const LECTURAS_ES = [
     "opciones": [
      "Un año",
      "Un mes",
-     "Tres años"
+     "Cinco años"
     ],
     "correcta": "Un año",
     "explicacion": "«…lleva un año buscando un trabajo nuevo»."
    },
    {
     "id": "LEE-trabajo-2",
-    "tipo": "lectura",
-    "dificultad": 2,
-    "forma": "elegir",
-    "pide": "¿Dónde busca trabajo?",
-    "opciones": [
-     "En internet",
-     "En la calle",
-     "En la universidad"
-    ],
-    "correcta": "En internet",
-    "explicacion": "«…mira los anuncios de trabajo en internet»."
-   },
-   {
-    "id": "LEE-trabajo-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
@@ -3287,30 +3978,70 @@ const LECTURAS_ES = [
      "Por su coche"
     ],
     "correcta": "Por su experiencia y sus idiomas",
-    "explicacion": "«Le preguntaron por su experiencia, por los idiomas…»."
+    "explicacion": "«Le preguntaron por su experiencia, por los idiomas que habla…»."
+   },
+   {
+    "id": "LEE-trabajo-3",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Cómo estaba Pablo en la entrevista?",
+    "opciones": [
+     "Un poco nervioso",
+     "Muy tranquilo",
+     "Enfadado"
+    ],
+    "correcta": "Un poco nervioso",
+    "explicacion": "«…pero estaba un poco nervioso»."
    },
    {
     "id": "LEE-trabajo-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Pablo ya tiene el trabajo nuevo.",
-    "verdadero": false,
-    "explicacion": "«Le llamaremos la semana que viene»: ещё неизвестно."
+    "forma": "elegir",
+    "pide": "¿Qué pasará si le dan el trabajo?",
+    "opciones": [
+     "Ganará más, pero trabajará más horas",
+     "Ganará menos",
+     "Trabajará desde casa"
+    ],
+    "correcta": "Ganará más, pero trabajará más horas",
+    "explicacion": "«…ganará más dinero… Pero también tendrá que trabajar más horas»."
    },
    {
     "id": "LEE-trabajo-5",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "elegir",
-    "pide": "¿Qué tendrá que hacer en el trabajo nuevo?",
-    "opciones": [
-     "Trabajar más horas",
-     "Viajar mucho",
-     "Vivir en otra ciudad"
-    ],
-    "correcta": "Trabajar más horas",
-    "explicacion": "«…tendrá que trabajar más horas»."
+    "forma": "vf",
+    "afirmacion": "Pablo está seguro de que quiere el trabajo.",
+    "verdadero": false,
+    "explicacion": "«Pablo no sabe qué hará»."
+   },
+   {
+    "id": "LEE-trabajo-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "situacion",
+    "pide": "Что бы ты сказал Пабло? Дай ему совет (condicional или futuro).",
+    "sit": {
+     "necesita": [
+      {
+       "es": "совет",
+       "formas": [
+        "deberías",
+        "podrías",
+        "yo que tú",
+        "tendrás",
+        "encontrarás",
+        "será",
+        "seguro que"
+       ]
+      }
+     ],
+     "modelos": [
+      "Deberías esperar la respuesta. Seguro que encontrarás algo."
+     ]
+    }
    }
   ]
  },
@@ -3323,28 +4054,32 @@ const LECTURAS_ES = [
   "tituloRu": "Учиться в Испании",
   "parrafos": [
    {
-    "es": "Muchos estudiantes de otros países vienen a estudiar a España. Les gusta el tiempo, la comida y, sobre todo, aprender español.",
-    "ru": "Многие студенты из других стран приезжают учиться в Испанию. Им нравится климат, еда и, главное, возможность учить испанский."
+    "es": "Muchos estudiantes de otros países vienen a estudiar a España. Les gusta el clima, la comida, la vida en la calle y, sobre todo, aprender español.",
+    "ru": "Многие студенты из других стран приезжают учиться в Испанию. Им нравится климат, еда, жизнь на улице и, главное, возможность выучить испанский."
    },
    {
-    "es": "En España la carrera normalmente es de cuatro años. Después, muchos estudiantes hacen un máster de uno o dos años.",
-    "ru": "В Испании обучение в университете обычно длится четыре года. Потом многие студенты идут в магистратуру на год или два."
+    "es": "En España una carrera universitaria normalmente dura cuatro años. Después, muchos estudiantes hacen un máster de uno o dos años.",
+    "ru": "В Испании обучение в университете обычно длится четыре года. Потом многие студенты идут в магистратуру на один-два года."
    },
    {
-    "es": "Muchas universidades no son muy caras: una asignatura cuesta entre veinte y cincuenta euros, más o menos.",
-    "ru": "Многие университеты не очень дорогие: предмет стоит примерно от двадцати до пятидесяти евро."
+    "es": "Las universidades públicas no son muy caras: un curso entero cuesta normalmente entre setecientos y dos mil euros, según la región. Las privadas son mucho más caras.",
+    "ru": "Государственные университеты не очень дорогие: учебный год обычно стоит от семисот до двух тысяч евро, в зависимости от региона. Частные — гораздо дороже."
    },
    {
-    "es": "Para estudiar aquí, hace falta hablar bien español. Por eso muchos estudiantes hacen primero un curso de idiomas.",
-    "ru": "Чтобы учиться здесь, нужно хорошо говорить по-испански. Поэтому многие сначала проходят языковые курсы."
+    "es": "Para estudiar aquí hace falta hablar bien español. Muchas universidades piden un examen oficial, como el DELE. Por eso muchos estudiantes hacen primero un curso de idiomas.",
+    "ru": "Чтобы учиться здесь, нужно хорошо говорить по-испански. Многие университеты требуют официальный экзамен, например DELE. Поэтому многие студенты сначала идут на языковые курсы."
    },
    {
-    "es": "Ana está pensando en estudiar un máster en Barcelona. «Primero aprobaré el examen de español. Después miraré las universidades», dice.",
-    "ru": "Аня думает пойти в магистратуру в Барселоне. «Сначала сдам экзамен по испанскому. Потом посмотрю университеты», — говорит она."
+    "es": "En las universidades españolas las clases son normalmente en español, pero cada vez hay más cursos de máster en inglés. Además, muchos estudiantes europeos vienen un año con el programa Erasmus.",
+    "ru": "В испанских университетах занятия обычно идут на испанском, но магистерских программ на английском становится всё больше. Кроме того, многие европейские студенты приезжают на год по программе Erasmus."
    },
    {
-    "es": "Lucía le aconseja: «Deberías hacer prácticas en un hospital. Te ayudarán mucho».",
-    "ru": "Лусия советует ей: «Тебе стоит пройти практику в больнице. Это тебе очень поможет»."
+    "es": "Ana está pensando en estudiar un máster de enfermería en Barcelona. «Primero aprobaré el examen de español. Después miraré las universidades y pediré información», dice. Si quiere trabajar aquí como enfermera, también tendrá que pedir que España reconozca su título.",
+    "ru": "Аня думает поступить в магистратуру по сестринскому делу в Барселоне. «Сначала сдам экзамен по испанскому. Потом посмотрю университеты и запрошу информацию», — говорит она. А чтобы работать здесь медсестрой, ей нужно будет подтвердить свой диплом в Испании."
+   },
+   {
+    "es": "Lucía le aconseja: «Deberías hacer prácticas en un hospital. Conocerás a gente y mejorarás tu español muy rápido». Ana cree que es un buen consejo.",
+    "ru": "Лусия советует ей: «Тебе стоит пройти практику в больнице. Познакомишься с людьми и очень быстро улучшишь испанский». Аня считает, что это хороший совет."
    }
   ],
   "preguntas": [
@@ -3353,61 +4088,75 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Por qué vienen estudiantes a España?",
-    "opciones": [
-     "Para aprender español",
-     "Porque es barato vivir",
-     "Porque no hay exámenes"
-    ],
-    "correcta": "Para aprender español",
-    "explicacion": "«…sobre todo, aprender español»."
-   },
-   {
-    "id": "LEE-estudiar-2",
-    "tipo": "lectura",
-    "dificultad": 2,
-    "forma": "elegir",
-    "pide": "¿De cuántos años es la carrera normalmente?",
+    "pide": "¿Cuántos años dura normalmente una carrera?",
     "opciones": [
      "Cuatro",
      "Dos",
      "Seis"
     ],
     "correcta": "Cuatro",
-    "explicacion": "«…la carrera normalmente es de cuatro años»."
+    "explicacion": "«…una carrera universitaria normalmente dura cuatro años»."
+   },
+   {
+    "id": "LEE-estudiar-2",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Cuánto cuesta un curso en una universidad pública?",
+    "opciones": [
+     "Entre setecientos y dos mil euros",
+     "Más de diez mil euros",
+     "Nada"
+    ],
+    "correcta": "Entre setecientos y dos mil euros",
+    "explicacion": "«…entre setecientos y dos mil euros, según la región»."
    },
    {
     "id": "LEE-estudiar-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Todas las universidades son muy caras.",
-    "verdadero": false,
-    "explicacion": "«Muchas universidades no son muy caras»."
+    "forma": "elegir",
+    "pide": "¿Qué piden muchas universidades?",
+    "opciones": [
+     "Un examen oficial de español",
+     "Un carné de conducir",
+     "Un contrato de trabajo"
+    ],
+    "correcta": "Un examen oficial de español",
+    "explicacion": "«Muchas universidades piden un examen oficial, como el DELE»."
    },
    {
     "id": "LEE-estudiar-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué hará Ana primero?",
+    "pide": "¿Qué quiere estudiar Ana?",
     "opciones": [
-     "Aprobará el examen de español",
-     "Buscará trabajo",
-     "Hará prácticas"
+     "Un máster de enfermería",
+     "Medicina",
+     "Español"
     ],
-    "correcta": "Aprobará el examen de español",
-    "explicacion": "«Primero aprobaré el examen de español»."
+    "correcta": "Un máster de enfermería",
+    "explicacion": "«…un máster de enfermería en Barcelona»."
    },
    {
     "id": "LEE-estudiar-5",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Ana puede trabajar como enfermera en España sin hacer nada.",
+    "verdadero": false,
+    "explicacion": "«…también tendrá que pedir que España reconozca su título»."
+   },
+   {
+    "id": "LEE-estudiar-6",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
     "pide": "¿Qué le aconseja Lucía?",
     "opciones": [
      "Hacer prácticas en un hospital",
-     "Volver a Moscú",
+     "Volver a Rusia",
      "Estudiar en Madrid"
     ],
     "correcta": "Hacer prácticas en un hospital",
@@ -3428,24 +4177,28 @@ const LECTURAS_ES = [
     "ru": "В понедельник утром Аня встала, открыла кран в душе и… горячая вода не шла. Вот невезение! На улице было холодно, и отопление тоже не работало."
    },
    {
-    "es": "Llamó al casero. «Es que se ha roto algo», le explicó él. «Mañana vendrá alguien a mirarlo. Espero que no sea nada malo».",
-    "ru": "Она позвонила хозяину квартиры. «Что-то сломалось, — объяснил он. — Завтра кто-нибудь придёт посмотреть. Надеюсь, ничего серьёзного»."
+    "es": "Primero miró el aparato del agua caliente, en la cocina, pero no entendía nada: solo veía una luz roja. Entonces llamó al casero.",
+    "ru": "Сначала она посмотрела на водонагреватель на кухне, но ничего не поняла: горела только красная лампочка. Тогда она позвонила хозяину квартиры."
    },
    {
-    "es": "Esa noche Ana se duchó en casa de Lucía. «Ojalá lo arreglen pronto», le dijo.",
-    "ru": "В тот вечер Аня приняла душ у Лусии. «Надеюсь, скоро починят», — сказала она ей."
+    "es": "«Es que se ha roto algo», le explicó él. «Mañana vendrá alguien de la empresa a mirarlo. Espero que no sea nada grave». Ana le dijo: «Por favor, que venga por la mañana, porque por la tarde trabajo».",
+    "ru": "«Видимо, что-то сломалось, — объяснил он. — Завтра придёт мастер из компании и посмотрит. Надеюсь, ничего серьёзного». Аня сказала: «Пожалуйста, пусть придёт утром, потому что днём я работаю»."
    },
    {
-    "es": "El martes vino el hombre de la empresa. Trabajó dos horas y al final todo funcionó otra vez.",
-    "ru": "Во вторник пришёл мастер из компании. Он работал два часа, и в конце концов всё снова заработало."
+    "es": "Esa noche Ana se duchó en casa de Lucía y cenaron juntas. «Ojalá lo arreglen pronto», dijo Ana. «No te preocupes», contestó Lucía. «Si mañana no viene nadie, llama otra vez y no aceptes un no». Lucía le dejó una toalla y le preparó una sopa caliente.",
+    "ru": "В тот вечер Аня приняла душ у Лусии, и они вместе поужинали. «Хоть бы поскорее починили», — сказала Аня. «Не волнуйся, — ответила Лусия. — Если завтра никто не придёт, позвони ещё раз и не соглашайся на отказ». Лусия дала ей полотенце и приготовила горячий суп."
    },
    {
-    "es": "Antes de irse le explicó: «Cuando haga mucho frío, no apague la calefacción por la noche. Si no, se estropeará otra vez».",
-    "ru": "Перед уходом он объяснил: «Когда очень холодно, не выключайте отопление на ночь. Иначе оно снова сломается»."
+    "es": "El martes a las nueve vino el técnico. Trabajó dos horas y cambió una pieza. Al final todo funcionó otra vez.",
+    "ru": "Во вторник в девять пришёл мастер. Он работал два часа и заменил одну деталь. В итоге всё снова заработало."
    },
    {
-    "es": "Ana no pagó nada: pagó el casero. «Menos mal», pensó Ana.",
-    "ru": "Аня ничего не заплатила: заплатил хозяин. «Слава богу», — подумала Аня."
+    "es": "Antes de irse le explicó: «Cuando haga mucho frío, no apague la calefacción por la noche. Y si vuelve a ver la luz roja, llámenos enseguida».",
+    "ru": "Перед уходом он объяснил: «Когда будет очень холодно, не выключайте отопление на ночь. А если снова увидите красную лампочку, сразу звоните нам»."
+   },
+   {
+    "es": "Ana no pagó nada: la reparación la pagó el casero, porque en un piso alquilado las reparaciones importantes las paga el propietario. «Menos mal», pensó Ana.",
+    "ru": "Аня ничего не заплатила: ремонт оплатил хозяин, потому что в съёмной квартире серьёзный ремонт оплачивает владелец. «Слава богу», — подумала Аня."
    }
   ],
   "preguntas": [
@@ -3454,11 +4207,11 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué problema tenía Ana?",
+    "pide": "¿Qué problema tenía Ana el lunes?",
     "opciones": [
      "No había agua caliente",
      "No había luz",
-     "No funcionaba el wifi"
+     "No podía abrir la puerta"
     ],
     "correcta": "No había agua caliente",
     "explicacion": "«…no salía agua caliente»."
@@ -3468,48 +4221,53 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿A quién llamó primero?",
+    "pide": "¿Qué veía en el aparato del agua caliente?",
     "opciones": [
-     "Al casero",
-     "A Lucía",
-     "A su madre"
+     "Una luz roja",
+     "Agua",
+     "Fuego"
     ],
-    "correcta": "Al casero",
-    "explicacion": "«Llamó… al casero»."
+    "correcta": "Una luz roja",
+    "explicacion": "«…solo veía una luz roja»."
    },
    {
     "id": "LEE-averia-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde se duchó esa noche?",
+    "pide": "¿Cuándo quiere Ana que venga el técnico?",
+    "opciones": [
+     "Por la mañana",
+     "Por la tarde",
+     "Por la noche"
+    ],
+    "correcta": "Por la mañana",
+    "explicacion": "«Por favor, que venga por la mañana, porque por la tarde trabajo»."
+   },
+   {
+    "id": "LEE-averia-4",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Dónde se duchó Ana esa noche?",
     "opciones": [
      "En casa de Lucía",
      "En un hotel",
      "En el gimnasio"
     ],
     "correcta": "En casa de Lucía",
-    "explicacion": "«…se duchó en casa de Lucía»."
-   },
-   {
-    "id": "LEE-averia-4",
-    "tipo": "lectura",
-    "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Ana pagó la reparación.",
-    "verdadero": false,
-    "explicacion": "«Ana no pagó nada: pagó el casero»."
+    "explicacion": "«Esa noche Ana se duchó en casa de Lucía»."
    },
    {
     "id": "LEE-averia-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué le explicó el hombre?",
+    "pide": "¿Qué le aconsejó el técnico?",
     "opciones": [
      "No apagar la calefacción por la noche",
      "Cambiar de piso",
-     "Comprar una calefacción nueva"
+     "No ducharse por la mañana"
     ],
     "correcta": "No apagar la calefacción por la noche",
     "explicacion": "«…no apague la calefacción por la noche»."
@@ -3518,8 +4276,17 @@ const LECTURAS_ES = [
     "id": "LEE-averia-6",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Ana pagó la reparación.",
+    "verdadero": false,
+    "explicacion": "«Ana no pagó nada: la reparación la pagó el casero»."
+   },
+   {
+    "id": "LEE-averia-7",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "situacion",
-    "pide": "У тебя дома что-то сломалось. Напиши хозяину по-испански: что случилось и что ты хочешь, чтобы он сделал.",
+    "pide": "У тебя дома что-то сломалось. Напиши хозяину квартиры короткое сообщение: что случилось и чего ты хочешь.",
     "sit": {
      "necesita": [
       {
@@ -3528,23 +4295,26 @@ const LECTURAS_ES = [
         "se ha roto",
         "no funciona",
         "está roto",
-        "se ha estropeado",
-        "avería"
+        "está rota",
+        "no sale",
+        "hay un problema"
        ]
       },
       {
        "es": "просьба",
        "formas": [
-        "quiero que",
-        "necesito que",
+        "que venga",
+        "que mande",
         "puede",
         "podría",
-        "por favor"
+        "necesito",
+        "por favor",
+        "quiero que"
        ]
       }
      ],
      "modelos": [
-      "Hola, se ha roto la lavadora. ¿Puede venir alguien mañana, por favor?"
+      "Hola, se ha roto la calefacción. ¿Puede mandar a alguien mañana, por favor?"
      ]
     }
    }
@@ -3559,28 +4329,36 @@ const LECTURAS_ES = [
   "tituloRu": "В мэрии",
   "parrafos": [
    {
-    "es": "Marta necesitaba un papel del ayuntamiento para su trabajo. Primero quiso hacerlo por internet, pero la página no funcionaba.",
-    "ru": "Марте нужна была справка из мэрии для работы. Сначала она хотела сделать это через интернет, но сайт не работал."
+    "es": "Marta necesitaba un certificado del ayuntamiento para su trabajo nuevo. Primero quiso pedir cita por internet, pero no había citas libres hasta dentro de un mes.",
+    "ru": "Марте нужна была справка из мэрии для новой работы. Сначала она хотела записаться на приём через интернет, но свободных мест не было в течение месяца."
    },
    {
-    "es": "Entonces fue al ayuntamiento. Había mucha gente: cogió un número y esperó su turno. Esperó casi una hora.",
-    "ru": "Тогда она пошла в мэрию. Там было много людей: она взяла номерок и ждала своей очереди. Ждала почти час."
+    "es": "Una compañera le dijo: «Ve muy temprano. A veces atienden a gente sin cita, pero es importante que llegues antes de que abran».",
+    "ru": "Коллега сказала ей: «Иди пораньше. Иногда принимают и без записи, но важно прийти до открытия»."
    },
    {
-    "es": "Cuando llegó a la ventanilla, la funcionaria le dijo: «Para este trámite es necesario que traiga el pasaporte, una fotocopia y un papel de su empresa».",
-    "ru": "Когда она подошла к окошку, сотрудница сказала: «Для этой процедуры нужно, чтобы вы принесли паспорт, ксерокопию и справку с работы»."
+    "es": "El jueves Marta se levantó a las seis y media y a las ocho ya estaba en la puerta. Había mucha gente. Cuando abrieron, cogió un número y esperó su turno casi una hora.",
+    "ru": "В четверг Марта встала в половине седьмого и в восемь уже была у дверей. Людей было много. Когда открыли, она взяла номерок и ждала своей очереди почти час."
    },
    {
-    "es": "Marta tenía el pasaporte, pero no tenía la fotocopia. «Hay una tienda aquí al lado», le dijo la funcionaria. «Vaya y vuelva. No hace falta que espere otra vez».",
-    "ru": "Паспорт у Марты был, а ксерокопии не было. «Здесь рядом есть магазин, — сказала сотрудница. — Сходите и возвращайтесь. Ждать заново не нужно»."
+    "es": "Mientras esperaba, leyó las noticias en el móvil y ayudó a una señora mayor con un formulario.",
+    "ru": "Пока она ждала, она читала новости в телефоне и помогла пожилой женщине заполнить бланк."
    },
    {
-    "es": "Diez minutos después Marta volvió con la fotocopia. La funcionaria le dio el papel y le dijo: «Que tenga un buen día».",
-    "ru": "Через десять минут Марта вернулась с ксерокопией. Сотрудница выдала ей справку и сказала: «Хорошего дня»."
+    "es": "Cuando llegó a la ventanilla, la funcionaria le dijo: «Para este trámite es necesario que traiga el pasaporte, una fotocopia y un papel de su empresa». Marta tenía el pasaporte y el papel, pero no tenía la fotocopia.",
+    "ru": "Когда она подошла к окошку, сотрудница сказала: «Для этой процедуры нужно принести паспорт, копию и бумагу от вашей компании». У Марты были паспорт и бумага, но копии не было."
    },
    {
-    "es": "Marta salió contenta. «A veces los trámites no son tan difíciles», pensó.",
-    "ru": "Марта вышла довольная. «Иногда бумажные дела не такие уж трудные», — подумала она."
+    "es": "«No se preocupe», le dijo la funcionaria. «Hay una tienda aquí al lado. Vaya, haga la fotocopia y vuelva. No hace falta que coja otro número».",
+    "ru": "«Не волнуйтесь, — сказала ей сотрудница. — Рядом есть магазин. Сходите, сделайте копию и возвращайтесь. Новый номерок брать не нужно»."
+   },
+   {
+    "es": "Diez minutos después Marta volvió con la fotocopia. La funcionaria le dio el certificado y le dijo: «Que tenga un buen día».",
+    "ru": "Через десять минут Марта вернулась с копией. Сотрудница выдала ей справку и сказала: «Хорошего вам дня»."
+   },
+   {
+    "es": "Marta salió contenta. «A veces los trámites no son tan difíciles», pensó. «Lo importante es tener paciencia y llevar todos los papeles».",
+    "ru": "Марта вышла довольная. «Иногда бумажные дела не такие уж сложные, — подумала она. — Главное — терпение и все документы с собой»."
    }
   ],
   "preguntas": [
@@ -3589,65 +4367,79 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Por qué fue Marta al ayuntamiento?",
+    "pide": "¿Para qué necesitaba Marta el certificado?",
     "opciones": [
-     "La página de internet no funcionaba",
-     "Quería ver a un amigo",
-     "Tenía una cita"
+     "Para su trabajo nuevo",
+     "Para alquilar un piso",
+     "Para estudiar"
     ],
-    "correcta": "La página de internet no funcionaba",
-    "explicacion": "«…la página no funcionaba»."
+    "correcta": "Para su trabajo nuevo",
+    "explicacion": "«…un certificado del ayuntamiento para su trabajo nuevo»."
    },
    {
     "id": "LEE-ayuntamiento-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuánto tiempo esperó?",
+    "pide": "¿Por qué no pidió cita por internet?",
     "opciones": [
-     "Casi una hora",
-     "Diez minutos",
-     "Todo el día"
+     "No había citas libres",
+     "La página no funcionaba",
+     "No tenía ordenador"
     ],
-    "correcta": "Casi una hora",
-    "explicacion": "«Esperó casi una hora»."
+    "correcta": "No había citas libres",
+    "explicacion": "«…no había citas libres hasta dentro de un mes»."
    },
    {
     "id": "LEE-ayuntamiento-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué no tenía?",
+    "pide": "¿Qué le aconsejó su compañera?",
     "opciones": [
-     "La fotocopia",
-     "El pasaporte",
-     "El dinero"
+     "Ir muy temprano",
+     "Ir por la tarde",
+     "Llamar por teléfono"
     ],
-    "correcta": "La fotocopia",
-    "explicacion": "«…no tenía la fotocopia»."
+    "correcta": "Ir muy temprano",
+    "explicacion": "«Ve muy temprano»."
    },
    {
     "id": "LEE-ayuntamiento-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Marta tuvo que esperar otra vez.",
-    "verdadero": false,
-    "explicacion": "«No hace falta que espere otra vez»."
+    "forma": "elegir",
+    "pide": "¿Cuánto tiempo esperó su turno?",
+    "opciones": [
+     "Casi una hora",
+     "Diez minutos",
+     "Todo el día"
+    ],
+    "correcta": "Casi una hora",
+    "explicacion": "«…esperó su turno casi una hora»."
    },
    {
     "id": "LEE-ayuntamiento-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cómo salió Marta?",
+    "pide": "¿Qué le faltaba a Marta?",
     "opciones": [
-     "Contenta",
-     "Enfadada",
-     "Cansada"
+     "La fotocopia",
+     "El pasaporte",
+     "El papel de su empresa"
     ],
-    "correcta": "Contenta",
-    "explicacion": "«Marta salió contenta»."
+    "correcta": "La fotocopia",
+    "explicacion": "«…no tenía la fotocopia»."
+   },
+   {
+    "id": "LEE-ayuntamiento-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Marta tuvo que coger otro número.",
+    "verdadero": false,
+    "explicacion": "«No hace falta que coja otro número»."
    }
   ]
  },
@@ -3655,7 +4447,7 @@ const LECTURAS_ES = [
   "id": "LEE-reclamacion",
   "nivel": "B1",
   "desde": 11,
-  "tema": "Жалобы",
+  "tema": "Письма",
   "titulo": "Una reclamación",
   "tituloRu": "Жалоба",
   "parrafos": [
@@ -3664,28 +4456,32 @@ const LECTURAS_ES = [
     "ru": "Уважаемые господа!"
    },
    {
-    "es": "Les escribo para hacer una reclamación. El día 3 de marzo compré una lavadora en su tienda de la calle Mayor. Pagué cuatrocientos euros.",
-    "ru": "Пишу вам, чтобы подать жалобу. 3 марта я купил стиральную машину в вашем магазине на улице Майор. Я заплатил четыреста евро."
+    "es": "Les escribo para hacer una reclamación por una lavadora que compré en su tienda de la calle Mayor el día 3 de marzo. Pagué cuatrocientos euros.",
+    "ru": "Пишу вам, чтобы подать жалобу на стиральную машину, которую я купил в вашем магазине на улице Майор 3 марта. Я заплатил четыреста евро."
    },
    {
-    "es": "La lavadora llegó a mi casa el día 10, pero desde el primer día no funciona bien: hace mucho ruido y no sale el agua.",
-    "ru": "Машину доставили 10-го, но с первого дня она плохо работает: очень шумит, и вода не сливается."
+    "es": "La lavadora llegó a mi casa el día 10, dos días más tarde de lo prometido. Desde el primer día no funciona bien: hace mucho ruido, no sale el agua y la ropa queda sucia. El técnico de su empresa vino el día 15, pero no pudo arreglarla y me dijo que tenía que llamar a la tienda.",
+    "ru": "Машину доставили 10-го, на два дня позже обещанного. С первого дня она плохо работает: очень шумит, вода не сливается, и бельё остаётся грязным. Мастер вашей компании приходил 15-го, но не смог её починить и сказал, что нужно звонить в магазин."
    },
    {
-    "es": "Llamé tres veces a su tienda, pero nadie me contestó.",
-    "ru": "Я три раза звонил в ваш магазин, но никто не ответил."
+    "es": "Desde entonces he llamado cuatro veces a su tienda, pero nadie me ha dado una solución. Una vez esperé media hora al teléfono y después se cortó la llamada.",
+    "ru": "С тех пор я четыре раза звонил в ваш магазин, но никто не предложил решения. Однажды я полчаса ждал на линии, а потом звонок оборвался."
    },
    {
-    "es": "Por eso les pido que cambien la lavadora por una nueva o que me devuelvan el dinero. Es importante que me contesten lo antes posible, porque no puedo lavar la ropa.",
-    "ru": "Поэтому прошу вас заменить машину на новую или вернуть мне деньги. Важно, чтобы вы ответили как можно скорее, потому что я не могу стирать."
+    "es": "Les recuerdo que la lavadora tiene tres años de garantía y que, según la ley, la tienda tiene que arreglar o cambiar un producto con defectos. Por eso les pido que la cambien por una nueva o que me devuelvan el dinero. Es importante que me contesten lo antes posible, porque ahora tengo que lavar la ropa en una lavandería.",
+    "ru": "Напоминаю, что на машину действует гарантия три года и что по закону магазин обязан отремонтировать или заменить товар с дефектом. Поэтому прошу заменить её на новую или вернуть мне деньги. Мне важно, чтобы вы ответили как можно скорее, потому что сейчас мне приходится стирать в прачечной."
    },
    {
-    "es": "Adjunto una fotocopia de la factura.",
-    "ru": "Прилагаю копию чека."
+    "es": "Si no recibo una respuesta en quince días, pediré la hoja de reclamaciones y buscaré ayuda en una asociación que defiende a los clientes.",
+    "ru": "Если в течение пятнадцати дней я не получу ответа, я потребую официальный бланк жалобы и обращусь за помощью в общество защиты прав потребителей."
    },
    {
-    "es": "Atentamente, Pablo García",
-    "ru": "С уважением, Пабло Гарсия"
+    "es": "Adjunto una fotocopia de la factura y de la garantía.",
+    "ru": "Прилагаю копию счёта и гарантийного талона."
+   },
+   {
+    "es": "Atentamente,\nPablo García",
+    "ru": "С уважением,\nПабло Гарсия"
    }
   ],
   "preguntas": [
@@ -3694,79 +4490,79 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué compró Pablo?",
+    "pide": "¿Cuándo compró Pablo la lavadora?",
     "opciones": [
-     "Una lavadora",
-     "Una nevera",
-     "Un móvil"
+     "El 3 de marzo",
+     "El 10 de marzo",
+     "El 15 de marzo"
     ],
-    "correcta": "Una lavadora",
-    "explicacion": "«…compré una lavadora en su tienda»."
+    "correcta": "El 3 de marzo",
+    "explicacion": "«…el día 3 de marzo»."
    },
    {
     "id": "LEE-reclamacion-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuánto pagó?",
+    "pide": "¿Qué problema tiene la lavadora?",
     "opciones": [
-     "Cuatrocientos euros",
-     "Cuarenta euros",
-     "Cuatro mil euros"
+     "Hace mucho ruido y no lava bien",
+     "No llegó nunca",
+     "Es muy pequeña"
     ],
-    "correcta": "Cuatrocientos euros",
-    "explicacion": "«Pagué cuatrocientos euros»."
+    "correcta": "Hace mucho ruido y no lava bien",
+    "explicacion": "«…hace mucho ruido, no sale el agua y la ropa queda sucia»."
    },
    {
     "id": "LEE-reclamacion-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué problema tiene la lavadora?",
+    "pide": "¿Qué pasó cuando vino el técnico?",
     "opciones": [
-     "Hace mucho ruido",
-     "Es demasiado grande",
-     "Es de otro color"
+     "No pudo arreglarla",
+     "La arregló",
+     "No vino"
     ],
-    "correcta": "Hace mucho ruido",
-    "explicacion": "«…hace mucho ruido y no sale el agua»."
+    "correcta": "No pudo arreglarla",
+    "explicacion": "«…no pudo arreglarla»."
    },
    {
     "id": "LEE-reclamacion-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "La tienda contestó a sus llamadas.",
-    "verdadero": false,
-    "explicacion": "«…nadie me contestó»."
+    "forma": "elegir",
+    "pide": "¿Qué pide Pablo?",
+    "opciones": [
+     "Una lavadora nueva o su dinero",
+     "Un descuento",
+     "Otro técnico"
+    ],
+    "correcta": "Una lavadora nueva o su dinero",
+    "explicacion": "«…les pido que la cambien por una nueva o que me devuelvan el dinero»."
    },
    {
     "id": "LEE-reclamacion-5",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué pide Pablo?",
+    "pide": "¿Qué hará si no recibe respuesta?",
     "opciones": [
-     "Una lavadora nueva o el dinero",
-     "Otra factura",
-     "Una cita"
+     "Pedirá la hoja de reclamaciones",
+     "Comprará otra lavadora",
+     "No hará nada"
     ],
-    "correcta": "Una lavadora nueva o el dinero",
-    "explicacion": "«…que cambien la lavadora por una nueva o que me devuelvan el dinero»."
+    "correcta": "Pedirá la hoja de reclamaciones",
+    "explicacion": "«…pediré la hoja de reclamaciones»."
    },
    {
     "id": "LEE-reclamacion-6",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "elegir",
-    "pide": "¿Qué manda con la carta?",
-    "opciones": [
-     "Una fotocopia de la factura",
-     "Una foto de la lavadora",
-     "Su pasaporte"
-    ],
-    "correcta": "Una fotocopia de la factura",
-    "explicacion": "«Adjunto una fotocopia de la factura»."
+    "forma": "vf",
+    "afirmacion": "Pablo escribe a un amigo.",
+    "verdadero": false,
+    "explicacion": "Es una carta formal a una tienda: «Estimados señores», «Les escribo», «Atentamente»."
    }
   ]
  },
@@ -3779,28 +4575,32 @@ const LECTURAS_ES = [
   "tituloRu": "Как снять квартиру",
   "parrafos": [
    {
-    "es": "Alquilar un piso en una ciudad grande como Madrid o Barcelona no es fácil. Esto es lo que tienes que saber.",
-    "ru": "Снять квартиру в большом городе вроде Мадрида или Барселоны непросто. Вот что нужно знать."
+    "es": "Alquilar un piso en una ciudad grande como Madrid o Barcelona no es fácil: hay pocos pisos y son caros. Esto es lo que tienes que saber.",
+    "ru": "Снять квартиру в большом городе, например в Мадриде или Барселоне, непросто: квартир мало, и они дорогие. Вот что нужно знать."
    },
    {
-    "es": "Primero, es importante que decidas cuánto puedes pagar. Normalmente el alquiler no debería ser demasiado alto.",
-    "ru": "Сначала важно, чтобы ты решил, сколько можешь платить. Обычно аренда не должна быть слишком высокой."
+    "es": "Primero, es importante que decidas cuánto puedes pagar. Los expertos aconsejan que el alquiler no sea más de un tercio de lo que ganas. En Madrid y en Barcelona, un piso de dos habitaciones cuesta hoy más de mil euros al mes.",
+    "ru": "Во-первых, важно решить, сколько ты можешь платить. Специалисты советуют, чтобы аренда составляла не больше трети твоего дохода. В Мадриде и Барселоне квартира с двумя спальнями стоит сегодня больше тысячи евро в месяц."
    },
    {
     "es": "Cuando visites un piso, mira bien todo: la cocina, el baño, las ventanas, la calefacción. Abre los grifos y enciende las luces. Es mejor que encuentres los problemas antes, no después.",
-    "ru": "Когда будешь смотреть квартиру, внимательно осмотри всё: кухню, ванную, окна, отопление. Открой краны и включи свет. Лучше найти проблемы до, а не после."
+    "ru": "Когда будешь смотреть квартиру, внимательно проверь всё: кухню, ванную, окна, отопление. Открой краны и включи свет. Лучше найти проблемы до, а не после."
    },
    {
-    "es": "Antes de firmar el contrato, léelo con calma. Si no entiendes algo, pregunta. No firmes nada sin entenderlo.",
-    "ru": "Прежде чем подписывать договор, спокойно прочитай его. Если что-то непонятно, спроси. Ничего не подписывай, не поняв."
+    "es": "Antes de firmar el contrato, léelo con calma. Si no entiendes algo, pregunta. No firmes nada sin entenderlo. Normalmente el contrato es de un año, pero si quieres, puedes quedarte en el piso hasta cinco años.",
+    "ru": "Прежде чем подписать договор, спокойно прочитай его. Если что-то непонятно, спроси. Ничего не подписывай, не поняв. Обычно договор заключается на год, но, если захочешь, можно жить в квартире до пяти лет."
    },
    {
-    "es": "Normalmente tendrás que pagar un mes antes. Pide siempre un papel cuando pagues.",
-    "ru": "Обычно нужно будет заплатить за месяц вперёд. Всегда проси бумагу, когда платишь."
+    "es": "Normalmente tendrás que pagar el primer mes y una fianza de un mes. El propietario te devuelve la fianza al final, si dejas el piso bien. Y una cosa importante: si alquilas con una agencia, no tienes que pagarle nada a la agencia; lo paga el propietario.",
+    "ru": "Обычно нужно заплатить за первый месяц и залог в размере месячной платы. Владелец возвращает залог в конце, если ты оставишь квартиру в порядке. И важный момент: если снимаешь через агентство, агентству ты ничего не платишь — платит владелец."
    },
    {
-    "es": "Y una última cosa: habla con los vecinos. Ellos te dirán si el barrio es tranquilo y si el casero es buena persona.",
-    "ru": "И последнее: поговори с соседями. Они скажут, тихий ли район и хороший ли человек хозяин."
+    "es": "Paga siempre por el banco o pide un papel cuando pagues: así tendrás una prueba.",
+    "ru": "Всегда плати через банк или проси расписку при оплате: так у тебя будет доказательство."
+   },
+   {
+    "es": "Y un último consejo: habla con los vecinos. Ellos te dirán si el barrio es tranquilo y si el casero es buena persona.",
+    "ru": "И последний совет: поговори с соседями. Они расскажут, тихий ли район и хороший ли человек хозяин."
    }
   ],
   "preguntas": [
@@ -3809,75 +4609,90 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué es importante decidir primero?",
+    "pide": "¿Cuánto debería ser el alquiler, según los expertos?",
     "opciones": [
-     "Cuánto puedes pagar",
-     "Qué muebles quieres",
-     "Dónde trabajas"
+     "No más de un tercio de lo que ganas",
+     "La mitad de lo que ganas",
+     "Todo lo que ganas"
     ],
-    "correcta": "Cuánto puedes pagar",
-    "explicacion": "«…es importante que decidas cuánto puedes pagar»."
+    "correcta": "No más de un tercio de lo que ganas",
+    "explicacion": "«…el alquiler no sea más de un tercio de lo que ganas»."
    },
    {
     "id": "LEE-alquilar-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué debes hacer cuando visitas un piso?",
+    "pide": "¿Qué tienes que hacer cuando visitas un piso?",
     "opciones": [
-     "Mirar bien todo",
-     "Firmar el primer día",
-     "Pagar el primer mes"
+     "Mirarlo todo bien",
+     "Firmar enseguida",
+     "Pagar la fianza"
     ],
-    "correcta": "Mirar bien todo",
+    "correcta": "Mirarlo todo bien",
     "explicacion": "«…mira bien todo»."
    },
    {
     "id": "LEE-alquilar-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Es mejor firmar el contrato sin leerlo.",
-    "verdadero": false,
-    "explicacion": "«…léelo con calma… No firmes nada sin entenderlo»."
+    "forma": "elegir",
+    "pide": "¿Hasta cuántos años puedes quedarte en el piso?",
+    "opciones": [
+     "Hasta cinco",
+     "Solo uno",
+     "Toda la vida"
+    ],
+    "correcta": "Hasta cinco",
+    "explicacion": "«…puedes quedarte en el piso hasta cinco años»."
    },
    {
     "id": "LEE-alquilar-4",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Quién te puede decir si el barrio es tranquilo?",
+    "pide": "¿Cuándo te devuelven la fianza?",
     "opciones": [
-     "Los vecinos",
-     "El casero",
-     "El banco"
+     "Al final, si dejas el piso bien",
+     "Nunca",
+     "Al primer mes"
     ],
-    "correcta": "Los vecinos",
-    "explicacion": "«Ellos te dirán si el barrio es tranquilo»."
+    "correcta": "Al final, si dejas el piso bien",
+    "explicacion": "«El propietario te devuelve la fianza al final, si dejas el piso bien»."
    },
    {
     "id": "LEE-alquilar-5",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Si alquilas con una agencia, tienes que pagar a la agencia.",
+    "verdadero": false,
+    "explicacion": "«…no tienes que pagarle nada a la agencia; lo paga el propietario»."
+   },
+   {
+    "id": "LEE-alquilar-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "situacion",
-    "pide": "Друг снимает квартиру. Дай ему по-испански один совет (es importante que / te recomiendo que…).",
+    "pide": "Твой друг ищет квартиру в Испании. Дай ему два совета по-испански.",
     "sit": {
      "necesita": [
       {
        "es": "совет",
        "formas": [
         "es importante que",
-        "te recomiendo que",
+        "te aconsejo que",
         "es mejor que",
         "deberías",
-        "tienes que",
         "no firmes",
-        "mira"
+        "mira",
+        "pregunta",
+        "habla"
        ]
       }
      ],
      "modelos": [
-      "Te recomiendo que hables con los vecinos."
+      "Es importante que leas bien el contrato. No firmes nada sin entenderlo."
      ]
     }
    }
@@ -3892,24 +4707,32 @@ const LECTURAS_ES = [
   "tituloRu": "Машина или велосипед?",
   "parrafos": [
    {
-    "es": "En las ciudades españolas hay más calles para bicis que antes, y cada vez más personas van al trabajo en bici. Pero no todo el mundo está de acuerdo.",
-    "ru": "В испанских городах стало больше улиц для велосипедов, и всё больше людей ездят на работу на велосипеде. Но не все с этим согласны."
+    "es": "En las ciudades españolas hay cada vez más calles para bicis, y cada vez más personas van al trabajo en bici. Pero no todo el mundo está de acuerdo con este cambio.",
+    "ru": "В испанских городах становится всё больше велодорожек, и всё больше людей ездят на работу на велосипеде. Но не все согласны с этими переменами."
    },
    {
-    "es": "Pablo ha vendido su coche. «En mi opinión, en Madrid el coche no es necesario», dice. «Por un lado, el metro funciona muy bien. Por otro lado, aparcar es muy caro. Además, la bici es buena para la salud y para el medio ambiente».",
-    "ru": "Пабло продал машину. «По-моему, в Мадриде машина не нужна, — говорит он. — С одной стороны, метро работает очень хорошо. С другой стороны, парковка очень дорогая. К тому же велосипед полезен для здоровья и для окружающей среды»."
+    "es": "Pablo vendió su coche el año pasado. «En mi opinión, en Madrid el coche no es necesario», dice. «Por un lado, el metro funciona muy bien. Por otro lado, aparcar es muy caro y en el centro hay calles por las que ya no se puede pasar en coche. Además, la bici es buena para la salud y para el medio ambiente».",
+    "ru": "Пабло продал машину в прошлом году. «По-моему, в Мадриде машина не нужна, — говорит он. — С одной стороны, метро отлично работает. С другой стороны, парковка очень дорогая, а в центре есть улицы, по которым на машине уже не проедешь. Кроме того, велосипед полезен для здоровья и для окружающей среды»."
    },
    {
-    "es": "Su padre no piensa lo mismo. «Yo vivo lejos del centro y trabajo en otra ciudad. Sin coche, tardaría dos horas en llegar. Para mí, el coche es necesario».",
-    "ru": "Его отец думает иначе. «Я живу далеко от центра и работаю в другом городе. Без машины я бы добирался два часа. Для меня машина необходима»."
+    "es": "Ahora Pablo usa las bicis públicas de la ciudad, que se alquilan con una aplicación del móvil. «Es barato y no tengo que preocuparme de que me la roben», explica.",
+    "ru": "Теперь Пабло пользуется городскими прокатными велосипедами, которые берут через приложение в телефоне. «Это дёшево, и мне не нужно волноваться, что его украдут», — объясняет он."
    },
    {
-    "es": "Marta está en el medio: «Depende. Para ir por el centro, la bici es perfecta. Pero cuando llueve o hace mucho calor, prefiero el metro».",
-    "ru": "Марта где-то посередине: «Зависит от ситуации. Для поездок по центру велосипед — идеален. Но когда идёт дождь или очень жарко, я предпочитаю метро»."
+    "es": "Su padre no piensa lo mismo. «Yo vivo en las afueras de Barcelona y trabajo en otra ciudad. Sin coche, tardaría dos horas en llegar, porque el tren no pasa cerca de mi casa. Para mí, el coche es necesario».",
+    "ru": "Его отец думает иначе. «Я живу в пригороде Барселоны и работаю в другом городе. Без машины я бы добирался два часа, потому что поезд не ходит рядом с моим домом. Для меня машина необходима»."
+   },
+   {
+    "es": "Marta está en el medio: «Depende. Para ir por el centro, la bici es perfecta. Pero cuando llueve o hace mucho calor, prefiero el metro. Y para viajar los fines de semana, alquilamos un coche».",
+    "ru": "Марта где-то посередине: «Зависит от ситуации. Чтобы ездить по центру, велосипед идеален. Но когда идёт дождь или очень жарко, я предпочитаю метро. А для поездок на выходных мы берём машину напрокат»."
+   },
+   {
+    "es": "Lo que está claro es que las ciudades están cambiando: se construyen calles para bicis, se cierran calles a los coches y el objetivo es que haya menos contaminación.",
+    "ru": "Ясно одно: города меняются. Строят велодорожки, закрывают улицы для машин, и цель в том, чтобы загрязнения стало меньше."
    },
    {
     "es": "¿Y tú? ¿Qué es mejor para ti: el coche, la bici o el transporte público?",
-    "ru": "А ты? Что для тебя лучше: машина, велосипед или общественный транспорт?"
+    "ru": "А ты? Что лучше для тебя: машина, велосипед или общественный транспорт?"
    }
   ],
   "preguntas": [
@@ -3918,58 +4741,86 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué ha hecho Pablo?",
+    "pide": "¿Por qué vendió Pablo su coche?",
     "opciones": [
-     "Ha vendido su coche",
-     "Ha comprado un coche",
-     "Ha perdido su bici"
+     "No lo necesita en Madrid",
+     "Era muy viejo",
+     "Necesitaba dinero"
     ],
-    "correcta": "Ha vendido su coche",
-    "explicacion": "«Pablo ha vendido su coche»."
+    "correcta": "No lo necesita en Madrid",
+    "explicacion": "«En mi opinión, en Madrid el coche no es necesario»."
    },
    {
     "id": "LEE-cochebici-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "Según Pablo, ¿por qué no necesita el coche?",
+    "pide": "¿Qué bici usa Pablo ahora?",
     "opciones": [
-     "El metro funciona bien",
-     "No sabe conducir",
-     "Vive en el campo"
+     "Las bicis públicas de la ciudad",
+     "La bici de su padre",
+     "Una bici muy cara"
     ],
-    "correcta": "El metro funciona bien",
-    "explicacion": "«…el metro funciona muy bien»."
+    "correcta": "Las bicis públicas de la ciudad",
+    "explicacion": "«Ahora Pablo usa las bicis públicas de la ciudad»."
    },
    {
     "id": "LEE-cochebici-3",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Por qué necesita el coche su padre?",
+    "pide": "¿Por qué necesita el coche el padre de Pablo?",
     "opciones": [
-     "Trabaja en otra ciudad",
+     "Vive lejos y el tren no pasa cerca",
      "Le gusta conducir",
-     "No hay metro en Madrid"
+     "Trabaja en el centro"
     ],
-    "correcta": "Trabaja en otra ciudad",
-    "explicacion": "«…trabajo en otra ciudad»."
+    "correcta": "Vive lejos y el tren no pasa cerca",
+    "explicacion": "«…el tren no pasa cerca de mi casa»."
    },
    {
     "id": "LEE-cochebici-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Marta siempre va en bici.",
-    "verdadero": false,
-    "explicacion": "«…cuando llueve o hace mucho calor, prefiero el metro»."
+    "forma": "elegir",
+    "pide": "¿Qué opina Marta?",
+    "opciones": [
+     "Depende de la situación",
+     "La bici es siempre mejor",
+     "El coche es siempre mejor"
+    ],
+    "correcta": "Depende de la situación",
+    "explicacion": "«Depende»."
    },
    {
     "id": "LEE-cochebici-5",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Cuál es el objetivo de los cambios en las ciudades?",
+    "opciones": [
+     "Que haya menos contaminación",
+     "Que haya más coches",
+     "Que el metro sea más barato"
+    ],
+    "correcta": "Que haya menos contaminación",
+    "explicacion": "«…el objetivo es que haya menos contaminación»."
+   },
+   {
+    "id": "LEE-cochebici-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Marta usa la bici también cuando llueve.",
+    "verdadero": false,
+    "explicacion": "«…cuando llueve o hace mucho calor, prefiero el metro»."
+   },
+   {
+    "id": "LEE-cochebici-7",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "situacion",
-    "pide": "А ты что думаешь? Выскажи мнение по-испански и объясни почему.",
+    "pide": "Что ты предпочитаешь: машину, велосипед или общественный транспорт? Выскажи мнение и приведи аргумент по-испански.",
     "sit": {
      "necesita": [
       {
@@ -3983,17 +4834,18 @@ const LECTURAS_ES = [
        ]
       },
       {
-       "es": "почему",
+       "es": "аргумент",
        "formas": [
         "porque",
         "ya que",
+        "además",
         "por eso",
-        "además"
+        "aunque"
        ]
       }
      ],
      "modelos": [
-      "Para mí, la bici es mejor porque es más barata."
+      "En mi opinión, el metro es mejor, porque es rápido y barato."
      ]
     }
    }
@@ -4003,25 +4855,37 @@ const LECTURAS_ES = [
   "id": "LEE-redes",
   "nivel": "B1",
   "desde": 12,
-  "tema": "Технологии",
+  "tema": "Общество",
   "titulo": "Las redes sociales",
   "tituloRu": "Социальные сети",
   "parrafos": [
    {
-    "es": "Hoy casi todo el mundo está en las redes sociales. Se dice que los españoles pasan más de una hora y media al día en ellas.",
-    "ru": "Сегодня почти все сидят в социальных сетях. Говорят, что испанцы проводят в них больше полутора часов в день."
+    "es": "Hoy casi todo el mundo está en las redes sociales. Según algunos estudios, los españoles pasan casi dos horas al día en ellas, y los jóvenes, todavía más.",
+    "ru": "Сегодня почти все сидят в социальных сетях. Согласно некоторым исследованиям, испанцы проводят в них почти два часа в день, а молодёжь — ещё больше."
    },
    {
-    "es": "Las redes tienen ventajas. Son buenas para hablar con amigos que viven lejos, para leer las noticias y para conocer gente nueva. Para Ana, son muy buenas, porque ve las fotos de su familia en Rusia.",
-    "ru": "У соцсетей есть плюсы. Они хороши, чтобы общаться с друзьями, которые живут далеко, читать новости и знакомиться с новыми людьми. Для Ани они очень полезны: она видит фото своей семьи в России."
+    "es": "Las redes tienen ventajas. Son útiles para hablar con amigos que viven lejos, para leer las noticias y para conocer gente nueva. Para Ana son muy importantes, porque gracias a ellas ve las fotos de su familia en Rusia todos los días.",
+    "ru": "У соцсетей есть плюсы. Они удобны, чтобы общаться с друзьями, которые живут далеко, читать новости и знакомиться с новыми людьми. Для Ани они очень важны: благодаря им она каждый день видит фотографии своей семьи в России."
    },
    {
-    "es": "Pero también tienen desventajas. Mucha gente pasa demasiado tiempo con el móvil y habla menos con las personas que tiene al lado. Además, en internet hay muchas noticias falsas.",
-    "ru": "Но у них есть и минусы. Многие проводят слишком много времени с телефоном и меньше разговаривают с теми, кто рядом. Кроме того, в интернете много фальшивых новостей."
+    "es": "Pero también tienen desventajas. Mucha gente pasa demasiado tiempo con el móvil y habla menos con las personas que tiene al lado. Además, en internet hay muchas noticias falsas, y no siempre es fácil saber lo que es verdad.",
+    "ru": "Но есть и минусы. Многие проводят слишком много времени в телефоне и меньше разговаривают с теми, кто рядом. Кроме того, в интернете много фейковых новостей, и не всегда легко понять, что правда."
    },
    {
-    "es": "Javier lo tiene claro: el móvil no entra en la mesa. «Cuando comemos, hablamos», dice. Aunque a veces es difícil, cree que es una buena idea.",
-    "ru": "У Хавьера всё чётко: телефона за столом нет. «Когда мы едим — мы разговариваем», — говорит он. Хотя иногда это трудно, он считает, что это хорошая идея."
+    "es": "Otro problema es la privacidad: lo que se publica en internet se queda allí para siempre. Por eso los expertos aconsejan que pensemos bien antes de publicar una foto o un comentario.",
+    "ru": "Ещё одна проблема — личные данные: то, что публикуется в интернете, остаётся там навсегда. Поэтому специалисты советуют хорошо подумать, прежде чем выложить фото или комментарий."
+   },
+   {
+    "es": "Las redes también han cambiado el trabajo: hoy muchas empresas buscan trabajadores en internet, y algunas personas ganan dinero publicando vídeos.",
+    "ru": "Соцсети изменили и работу: сегодня многие компании ищут сотрудников в интернете, а некоторые люди зарабатывают, публикуя видео."
+   },
+   {
+    "es": "En España se habla mucho de los niños y las redes. Muchos padres creen que los niños no deberían tener móvil antes de los dieciséis años, y en muchos colegios ya no se puede usar el móvil en clase.",
+    "ru": "В Испании много говорят о детях и соцсетях. Многие родители считают, что детям не стоит иметь телефон до шестнадцати лет, и во многих школах телефоном на уроках пользоваться уже нельзя."
+   },
+   {
+    "es": "Javier lo tiene claro: el móvil no entra en la mesa. «Cuando comemos, hablamos», dice. Aunque a veces es difícil, cree que es una buena idea, y algunos de sus amigos ya lo hacen también.",
+    "ru": "У Хавьера чёткое правило: телефон за стол не берут. «Когда мы едим, мы разговариваем», — говорит он. Хотя иногда это непросто, он считает, что это хорошая идея, и некоторые его друзья уже делают так же."
    }
   ],
   "preguntas": [
@@ -4032,26 +4896,26 @@ const LECTURAS_ES = [
     "forma": "elegir",
     "pide": "¿Cuánto tiempo pasan los españoles en las redes?",
     "opciones": [
-     "Más de una hora y media al día",
+     "Casi dos horas al día",
      "Diez minutos al día",
-     "Cinco horas a la semana"
+     "Ocho horas al día"
     ],
-    "correcta": "Más de una hora y media al día",
-    "explicacion": "«…más de una hora y media al día»."
+    "correcta": "Casi dos horas al día",
+    "explicacion": "«…pasan casi dos horas al día en ellas»."
    },
    {
     "id": "LEE-redes-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Para qué usa Ana las redes?",
+    "pide": "¿Por qué son importantes las redes para Ana?",
     "opciones": [
-     "Para ver fotos de su familia",
-     "Para buscar trabajo",
-     "Para vender cosas"
+     "Ve las fotos de su familia",
+     "Trabaja en internet",
+     "Lee las noticias de España"
     ],
-    "correcta": "Para ver fotos de su familia",
-    "explicacion": "«…ve las fotos de su familia en Rusia»."
+    "correcta": "Ve las fotos de su familia",
+    "explicacion": "«…gracias a ellas ve las fotos de su familia en Rusia»."
    },
    {
     "id": "LEE-redes-3",
@@ -4060,35 +4924,49 @@ const LECTURAS_ES = [
     "forma": "elegir",
     "pide": "¿Qué desventaja tienen las redes?",
     "opciones": [
-     "Hay noticias falsas",
+     "Hay muchas noticias falsas",
      "Son muy caras",
-     "No funcionan bien"
+     "No hay fotos"
     ],
-    "correcta": "Hay noticias falsas",
+    "correcta": "Hay muchas noticias falsas",
     "explicacion": "«…en internet hay muchas noticias falsas»."
    },
    {
     "id": "LEE-redes-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Javier usa el móvil cuando come.",
-    "verdadero": false,
-    "explicacion": "«…el móvil no entra en la mesa»."
+    "forma": "elegir",
+    "pide": "¿Qué aconsejan los expertos?",
+    "opciones": [
+     "Pensar bien antes de publicar",
+     "No usar nunca internet",
+     "Publicar muchas fotos"
+    ],
+    "correcta": "Pensar bien antes de publicar",
+    "explicacion": "«…aconsejan que pensemos bien antes de publicar»."
    },
    {
     "id": "LEE-redes-5",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "En muchos colegios españoles se puede usar el móvil en clase.",
+    "verdadero": false,
+    "explicacion": "«…en muchos colegios ya no se puede usar el móvil en clase»."
+   },
+   {
+    "id": "LEE-redes-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué piensa Javier de su idea?",
+    "pide": "¿Cuál es la regla de Javier?",
     "opciones": [
-     "Que es buena, aunque difícil",
-     "Que es imposible",
-     "Que es aburrida"
+     "El móvil no entra en la mesa",
+     "No tener redes sociales",
+     "No ver la televisión"
     ],
-    "correcta": "Que es buena, aunque difícil",
-    "explicacion": "«Aunque a veces es difícil, cree que es una buena idea»."
+    "correcta": "El móvil no entra en la mesa",
+    "explicacion": "«…el móvil no entra en la mesa»."
    }
   ]
  },
@@ -4096,29 +4974,41 @@ const LECTURAS_ES = [
   "id": "LEE-reciclar",
   "nivel": "B1",
   "desde": 12,
-  "tema": "Окружающая среда",
+  "tema": "Экология",
   "titulo": "Reciclar en casa",
   "tituloRu": "Сортировка мусора дома",
   "parrafos": [
    {
-    "es": "En España la basura va en contenedores de colores. Antes a Ana le parecía difícil, pero ahora lo hace todos los días.",
-    "ru": "В Испании мусор сортируют по разноцветным контейнерам. Раньше Ане это казалось трудным, но сейчас она делает это каждый день."
+    "es": "En España la basura se separa en contenedores de colores. Al principio a Ana le parecía difícil, pero ahora lo hace todos los días sin pensar.",
+    "ru": "В Испании мусор сортируют по разноцветным контейнерам. Сначала Ане это казалось сложным, но теперь она делает это каждый день не задумываясь."
    },
    {
-    "es": "El contenedor amarillo es para el plástico. El azul, para el papel. El verde, para las botellas.",
-    "ru": "Жёлтый контейнер — для пластика. Синий — для бумаги. Зелёный — для бутылок."
+    "es": "El contenedor amarillo es para el plástico y las latas. El azul es para el papel y las cajas.",
+    "ru": "Жёлтый контейнер — для пластика и банок. Синий — для бумаги и коробок."
    },
    {
-    "es": "El marrón es para la comida. En el gris va lo que no va en los otros.",
-    "ru": "Коричневый — для пищевых отходов. В серый — всё остальное."
+    "es": "El verde es para el vidrio: las botellas de vino, de cerveza o de aceite. El marrón es para los restos de comida, y en el gris va todo lo demás.",
+    "ru": "Зелёный — для стекла: бутылок из-под вина, пива или масла. Коричневый — для остатков еды, а в серый идёт всё остальное."
    },
    {
-    "es": "Según el ayuntamiento, en Barcelona se recicla cada año más, pero todavía no es bastante.",
-    "ru": "По данным мэрии, в Барселоне с каждым годом сортируют всё больше, но пока недостаточно."
+    "es": "Las botellas de vidrio que se reciclan sirven para hacer botellas nuevas, una y otra vez. Y en algunos barrios de Barcelona la basura ya no se deja en la calle: cada día se recoge un tipo de basura en la puerta de las casas.",
+    "ru": "Переработанные стеклянные бутылки идут на новые бутылки — снова и снова. А в некоторых районах Барселоны мусор уже не оставляют на улице: каждый день у дверей домов забирают определённый вид отходов."
+   },
+   {
+    "es": "Hay cosas que no van en ningún contenedor de la calle: las pilas, los muebles viejos o los aparatos electrónicos. Para eso hay puntos limpios, donde se recogen y se reciclan.",
+    "ru": "Есть вещи, которые нельзя выбрасывать ни в один уличный контейнер: батарейки, старую мебель или электронику. Для этого есть специальные пункты приёма, где их собирают и перерабатывают."
+   },
+   {
+    "es": "Según los datos oficiales, en España se recicla cada año más, pero todavía no es bastante: se recicla menos de la mitad de la basura de las casas.",
+    "ru": "По официальным данным, в Испании с каждым годом перерабатывают больше, но этого всё ещё недостаточно: перерабатывается меньше половины бытового мусора."
    },
    {
     "es": "Ana cree que reciclar es muy importante para el medio ambiente. «Es fácil y no cuesta nada», dice. «Si todos lo hacemos, el planeta estará un poco mejor».",
-    "ru": "Аня считает, что сортировать мусор очень важно для окружающей среды. «Это просто и ничего не стоит, — говорит она. — Если все будем это делать, планете станет немного лучше»."
+    "ru": "Аня считает, что сортировка очень важна для окружающей среды. «Это просто и ничего не стоит, — говорит она. — Если мы все будем так делать, планете станет немного лучше»."
+   },
+   {
+    "es": "Lo que más le cuesta es no usar bolsas de plástico. Como en las tiendas las bolsas se pagan, ahora siempre lleva una bolsa de tela en la mochila.",
+    "ru": "Труднее всего ей отказаться от пластиковых пакетов. Поскольку в магазинах пакеты платные, теперь она всегда носит в рюкзаке тканевую сумку."
    }
   ],
   "preguntas": [
@@ -4127,51 +5017,79 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Para qué es el contenedor azul?",
+    "pide": "¿Para qué es el contenedor amarillo?",
     "opciones": [
+     "Para el plástico y las latas",
      "Para el papel",
-     "Para las botellas",
-     "Para la comida"
+     "Para el vidrio"
     ],
-    "correcta": "Para el papel",
-    "explicacion": "«El azul, para el papel»."
+    "correcta": "Para el plástico y las latas",
+    "explicacion": "«El contenedor amarillo es para el plástico y las latas»."
    },
    {
     "id": "LEE-reciclar-2",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Dónde va una botella?",
+    "pide": "¿Dónde van las botellas de vino?",
     "opciones": [
      "En el verde",
-     "En el amarillo",
+     "En el azul",
      "En el marrón"
     ],
     "correcta": "En el verde",
-    "explicacion": "«El verde, para las botellas»."
+    "explicacion": "«El verde es para el vidrio: las botellas de vino…»."
    },
    {
     "id": "LEE-reciclar-3",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Antes a Ana le parecía fácil reciclar.",
-    "verdadero": false,
-    "explicacion": "«Antes a Ana le parecía difícil»."
+    "forma": "elegir",
+    "pide": "¿Dónde se llevan las pilas?",
+    "opciones": [
+     "A un punto limpio",
+     "Al contenedor gris",
+     "Al supermercado"
+    ],
+    "correcta": "A un punto limpio",
+    "explicacion": "«Para eso hay puntos limpios»."
    },
    {
     "id": "LEE-reciclar-4",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "En España se recicla más de la mitad de la basura de las casas.",
+    "verdadero": false,
+    "explicacion": "«…se recicla menos de la mitad de la basura de las casas»."
+   },
+   {
+    "id": "LEE-reciclar-5",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué piensa Ana de reciclar?",
+    "pide": "¿Qué le cuesta más a Ana?",
     "opciones": [
-     "Que es muy importante",
-     "Que es demasiado difícil",
-     "Que no sirve para nada"
+     "No usar bolsas de plástico",
+     "Separar el papel",
+     "Bajar la basura"
     ],
-    "correcta": "Que es muy importante",
-    "explicacion": "«Ana cree que reciclar es muy importante»."
+    "correcta": "No usar bolsas de plástico",
+    "explicacion": "«Lo que más le cuesta es no usar bolsas de plástico»."
+   },
+   {
+    "id": "LEE-reciclar-6",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Por qué lleva Ana una bolsa de tela?",
+    "opciones": [
+     "Porque las bolsas se pagan",
+     "Porque es más bonita",
+     "Porque no hay bolsas"
+    ],
+    "correcta": "Porque las bolsas se pagan",
+    "explicacion": "«Como en las tiendas las bolsas se pagan…»."
    }
   ]
  },
@@ -4179,29 +5097,33 @@ const LECTURAS_ES = [
   "id": "LEE-turismo",
   "nivel": "B1",
   "desde": 12,
-  "tema": "Мнения",
+  "tema": "Общество",
   "titulo": "El turismo en Barcelona",
   "tituloRu": "Туризм в Барселоне",
   "parrafos": [
    {
-    "es": "Barcelona es una ciudad con muchos turistas: cada año llegan más de diez millones. El turismo es muy importante para la ciudad, pero también trae problemas.",
-    "ru": "В Барселоне очень много туристов: каждый год приезжает больше десяти миллионов человек. Туризм очень важен для города, но он приносит и проблемы."
+    "es": "Barcelona es una de las ciudades con más turistas de Europa: cada año llegan más de diez millones de visitantes. El turismo es muy importante para la ciudad, pero también trae problemas.",
+    "ru": "Барселона — один из самых туристических городов Европы: каждый год сюда приезжают больше десяти миллионов человек. Туризм очень важен для города, но он приносит и проблемы."
    },
    {
-    "es": "Por un lado, los turistas dejan mucho dinero en hoteles, restaurantes y tiendas. Gracias a ellos, miles de personas tienen trabajo.",
-    "ru": "С одной стороны, туристы оставляют много денег в гостиницах, ресторанах и магазинах. Благодаря им тысячи людей имеют работу."
+    "es": "Por un lado, los turistas dejan mucho dinero en hoteles, restaurantes y tiendas. Gracias a ellos, miles de personas tienen trabajo. Pero muchos turistas llegan en grandes barcos y pasan solo unas horas en la ciudad.",
+    "ru": "С одной стороны, туристы оставляют много денег в гостиницах, ресторанах и магазинах. Благодаря им тысячи людей имеют работу. Но многие туристы приплывают на больших кораблях и проводят в городе всего несколько часов."
    },
    {
-    "es": "Por otro lado, muchos vecinos están hartos. En el centro hay tanta gente que es difícil caminar. Además, muchos pisos se alquilan a turistas y por eso los precios de los pisos han subido mucho.",
-    "ru": "С другой стороны, многие жители устали. В центре столько людей, что трудно пройти. К тому же многие квартиры сдают туристам, и поэтому цены на жильё сильно выросли."
+    "es": "Por otro lado, muchos vecinos están hartos. En el centro y en zonas como la Sagrada Familia o el parque Güell hay tanta gente que es difícil caminar. Además, muchos pisos se alquilan a turistas, y por eso los alquileres para los vecinos han subido mucho.",
+    "ru": "С другой стороны, многим жителям это надоело. В центре и в таких местах, как Саграда Фамилия или парк Гуэль, столько людей, что трудно пройти. Кроме того, многие квартиры сдают туристам, и поэтому аренда для местных жителей сильно подорожала."
    },
    {
-    "es": "El ayuntamiento ha decidido que los turistas paguen un impuesto más alto.",
-    "ru": "Мэрия решила, что туристы должны платить более высокий налог."
+    "es": "Por eso el ayuntamiento ha tomado varias medidas. Los turistas pagan un impuesto más alto por cada noche de hotel, y la ciudad ha decidido que los pisos para turistas desaparezcan antes de 2029.",
+    "ru": "Поэтому мэрия приняла ряд мер. Туристы платят более высокий налог за каждую ночь в гостинице, а город решил, что туристических квартир не должно остаться до 2029 года."
    },
    {
-    "es": "Lucía lo ve así: «Me gusta que la gente venga a conocer mi ciudad. Pero es necesario que Barcelona sea una ciudad para vivir, no solo para visitar».",
-    "ru": "Лусия видит это так: «Мне нравится, что люди приезжают познакомиться с моим городом. Но нужно, чтобы Барселона была городом для жизни, а не только для туристов»."
+    "es": "En el verano de 2024 miles de vecinos salieron a la calle para protestar contra el turismo masivo. Algunos llevaban carteles con frases como «Turistas, volved a casa». No están en contra de los turistas, dicen, sino de que la ciudad sea solo para ellos.",
+    "ru": "Летом 2024 года тысячи жителей вышли на улицы протестовать против массового туризма. У некоторых были плакаты с надписями вроде «Туристы, возвращайтесь домой». Они говорят, что выступают не против туристов, а против того, чтобы город был только для них."
+   },
+   {
+    "es": "Lucía lo ve así: «Me gusta que la gente venga a conocer mi ciudad. Pero es necesario que Barcelona sea una ciudad para vivir, no solo para visitar». Pablo, que vive en Madrid, dice que en el centro de su ciudad pasa lo mismo.",
+    "ru": "Лусия смотрит на это так: «Мне нравится, что люди приезжают посмотреть мой город. Но нужно, чтобы Барселона была городом для жизни, а не только для туристов». Пабло, который живёт в Мадриде, говорит, что в центре его города происходит то же самое."
    }
   ],
   "preguntas": [
@@ -4210,14 +5132,14 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Cuántos turistas llegan cada año?",
+    "pide": "¿Cuántos visitantes llegan a Barcelona cada año?",
     "opciones": [
      "Más de diez millones",
      "Un millón",
      "Cien mil"
     ],
     "correcta": "Más de diez millones",
-    "explicacion": "«…más de diez millones de turistas»."
+    "explicacion": "«…cada año llegan más de diez millones de visitantes»."
    },
    {
     "id": "LEE-turismo-2",
@@ -4226,11 +5148,11 @@ const LECTURAS_ES = [
     "forma": "elegir",
     "pide": "¿Qué ventaja tiene el turismo?",
     "opciones": [
-     "Hay más trabajo",
-     "Los pisos son más baratos",
-     "Hay menos gente"
+     "Da trabajo a miles de personas",
+     "Baja los precios",
+     "Hay menos gente en el centro"
     ],
-    "correcta": "Hay más trabajo",
+    "correcta": "Da trabajo a miles de personas",
     "explicacion": "«Gracias a ellos, miles de personas tienen trabajo»."
    },
    {
@@ -4238,53 +5160,69 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Por qué han subido los precios de los pisos?",
+    "pide": "¿Por qué han subido los alquileres?",
     "opciones": [
-     "Muchos se alquilan a turistas",
+     "Muchos pisos se alquilan a turistas",
      "Hay más vecinos",
-     "El metro es caro"
+     "Los pisos son nuevos"
     ],
-    "correcta": "Muchos se alquilan a turistas",
-    "explicacion": "«…muchos pisos se alquilan a turistas»."
+    "correcta": "Muchos pisos se alquilan a turistas",
+    "explicacion": "«…muchos pisos se alquilan a turistas, y por eso los alquileres… han subido mucho»."
    },
    {
     "id": "LEE-turismo-4",
     "tipo": "lectura",
     "dificultad": 2,
-    "forma": "vf",
-    "afirmacion": "Lucía no quiere que vengan turistas.",
-    "verdadero": false,
-    "explicacion": "«Me gusta que la gente venga a conocer mi ciudad»."
+    "forma": "elegir",
+    "pide": "¿Qué ha decidido el ayuntamiento?",
+    "opciones": [
+     "Que desaparezcan los pisos para turistas",
+     "Cerrar los hoteles",
+     "Bajar los impuestos"
+    ],
+    "correcta": "Que desaparezcan los pisos para turistas",
+    "explicacion": "«…la ciudad ha decidido que los pisos para turistas desaparezcan antes de 2029»."
    },
    {
     "id": "LEE-turismo-5",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "vf",
+    "afirmacion": "Los vecinos que protestaron están en contra de todos los turistas.",
+    "verdadero": false,
+    "explicacion": "«No están en contra de los turistas… sino de que la ciudad sea solo para ellos»."
+   },
+   {
+    "id": "LEE-turismo-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "situacion",
-    "pide": "Что ты думаешь о туризме в твоём городе? Ответь по-испански: плюс и минус.",
+    "pide": "Что ты думаешь о массовом туризме? Напиши мнение с аргументами «за» и «против».",
     "sit": {
      "necesita": [
       {
-       "es": "плюс",
+       "es": "за",
        "formas": [
         "por un lado",
         "es bueno",
-        "me gusta",
-        "gracias a"
+        "gracias a",
+        "ventaja"
        ]
       },
       {
-       "es": "минус",
+       "es": "против",
        "formas": [
         "por otro lado",
         "pero",
         "sin embargo",
-        "aunque"
+        "aunque",
+        "desventaja",
+        "problema"
        ]
       }
      ],
      "modelos": [
-      "Por un lado, el turismo da trabajo; por otro lado, hay demasiada gente."
+      "Por un lado, el turismo da trabajo. Por otro lado, los pisos son cada vez más caros."
      ]
     }
    }
@@ -4301,6 +5239,14 @@ const LECTURAS_ES = [
    {
     "es": "El Camino de Santiago es un camino muy antiguo que termina en Santiago de Compostela, en Galicia. Cada año lo hacen más de cuatrocientas mil personas de todo el mundo, a pie o en bici.",
     "ru": "Путь Святого Иакова — очень древний маршрут, который заканчивается в Сантьяго-де-Компостела, в Галисии. Каждый год его проходят больше четырёхсот тысяч человек со всего мира — пешком или на велосипеде."
+   },
+   {
+    "es": "El Camino tiene más de mil años. Según la tradición, en Santiago está la tumba de un santo muy importante para los cristianos, y por eso en la Edad Media miles de personas iban allí a pie desde toda Europa.",
+    "ru": "Этому пути больше тысячи лет. По преданию, в Сантьяго находится могила святого, очень почитаемого христианами, и поэтому в Средние века тысячи людей шли туда пешком со всей Европы."
+   },
+   {
+    "es": "Hoy hay muchos caminos, pero el más famoso es el Camino Francés. Para no perderse, solo hay que seguir las flechas amarillas. Y para recibir la Compostela, el documento que dice que has hecho el Camino, hay que caminar por lo menos los últimos cien kilómetros.",
+    "ru": "Сегодня маршрутов много, но самый известный — Французский путь. Чтобы не заблудиться, достаточно следовать за жёлтыми стрелками. А чтобы получить «Компостелу» — документ о том, что ты прошёл Путь, — нужно пройти пешком как минимум последние сто километров."
    },
    {
     "es": "El verano pasado Javier hizo los últimos cien kilómetros con un amigo. Caminaron cinco días, unos veinte kilómetros al día.",
@@ -4394,6 +5340,20 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
+    "pide": "¿Qué hay que hacer para recibir la Compostela?",
+    "opciones": [
+     "Caminar por lo menos cien kilómetros",
+     "Caminar ochocientos kilómetros",
+     "Ir en coche"
+    ],
+    "correcta": "Caminar por lo menos cien kilómetros",
+    "explicacion": "«…hay que caminar por lo menos los últimos cien kilómetros»."
+   },
+   {
+    "id": "LEE-camino-7",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
     "pide": "¿Qué quiere hacer ahora?",
     "opciones": [
      "Hacer el Camino entero",
@@ -4414,16 +5374,24 @@ const LECTURAS_ES = [
   "tituloRu": "Праздники Испании",
   "parrafos": [
    {
-    "es": "En España hay fiestas durante todo el año, y cada pueblo y cada ciudad tiene las suyas.",
-    "ru": "В Испании праздники идут круглый год, и у каждой деревни и каждого города — свои."
+    "es": "En España hay fiestas durante todo el año, y cada pueblo y cada ciudad tiene las suyas. Algunas son famosas en todo el mundo.",
+    "ru": "В Испании праздники идут круглый год, и у каждой деревни и каждого города — свои. Некоторые из них известны во всём мире."
    },
    {
-    "es": "En marzo, en Valencia, se celebran las Fallas. Durante varios días hay por las calles enormes muñecos de papel. La última noche todos desaparecen en el fuego. «La primera vez que lo vi, no me lo podía creer», recuerda Marta.",
-    "ru": "В марте в Валенсии празднуют Фальяс. Несколько дней на улицах стоят огромные куклы из папье-маше. В последнюю ночь их все сжигают. «Когда я впервые это увидела, не могла поверить», — вспоминает Марта."
+    "es": "En marzo, en Valencia, se celebran las Fallas. Durante varios días hay por las calles enormes muñecos de madera y papel, algunos tan altos como un edificio. La noche del 19 de marzo todos desaparecen en el fuego. «La primera vez que lo vi, no me lo podía creer», recuerda Marta.",
+    "ru": "В марте в Валенсии празднуют Фальяс. Несколько дней на улицах стоят огромные фигуры из дерева и папье-маше, некоторые высотой с дом. В ночь на 19 марта их все сжигают. «Когда я впервые это увидела, не могла поверить», — вспоминает Марта."
    },
    {
-    "es": "En abril, Sevilla celebra su Feria: la gente baila, come y bebe en la calle durante una semana entera.",
-    "ru": "В апреле Севилья празднует свою Ярмарку: целую неделю люди танцуют, едят и пьют на улице."
+    "es": "En marzo o en abril, según el año, llega la Semana Santa. En muchas ciudades, sobre todo en Andalucía, hay desfiles religiosos por las calles durante toda la semana.",
+    "ru": "В марте или апреле, в зависимости от года, наступает Страстная неделя. Во многих городах, особенно в Андалусии, всю неделю по улицам идут религиозные шествия."
+   },
+   {
+    "es": "Después, normalmente en abril, Sevilla celebra su Feria: durante una semana entera la gente baila, come y bebe hasta muy tarde.",
+    "ru": "Потом, обычно в апреле, Севилья празднует свою Ярмарку: целую неделю люди танцуют, едят и пьют до поздней ночи."
+   },
+   {
+    "es": "La noche del 23 de junio es la de San Juan. En Cataluña y en otras regiones la gente hace fuegos en la playa y celebra la llegada del verano hasta la mañana.",
+    "ru": "Ночь на 24 июня — ночь Сан-Хуана. В Каталонии и других регионах люди жгут костры на пляже и до утра празднуют приход лета."
    },
    {
     "es": "En julio, en Pamplona, son los Sanfermines. Es una semana de fiesta, de día y de noche, y es famosa en todo el mundo. Pero una parte de la fiesta es peligrosa.",
@@ -4458,14 +5426,14 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
-    "pide": "¿Qué pasa la última noche de las Fallas?",
+    "pide": "¿Qué pasa la noche del 19 de marzo en Valencia?",
     "opciones": [
      "Los muñecos desaparecen en el fuego",
      "Llegan los Reyes",
      "Empieza la Feria"
     ],
     "correcta": "Los muñecos desaparecen en el fuego",
-    "explicacion": "«La última noche todos desaparecen en el fuego»."
+    "explicacion": "«La noche del 19 de marzo todos desaparecen en el fuego»."
    },
    {
     "id": "LEE-fiestas-3",
@@ -4558,8 +5526,16 @@ const LECTURAS_ES = [
     "ru": "«К счастью, в первый же день я познакомилась с Лусией. Она сказала, что поможет мне во всём, — и помогла. Она помогла мне с квартирой, с документами и с языком»."
    },
    {
-    "es": "«También fue difícil acostumbrarme al horario. En Rusia ceno a las siete; aquí la gente cena a las diez. ¡Al principio tenía mucha hambre!».",
-    "ru": "«Ещё было трудно привыкнуть к распорядку. В России я ужинаю в семь, а здесь люди ужинают в десять. Сначала я очень хотела есть!»."
+    "es": "«Con el idioma cometí muchos errores. Una vez, en el ayuntamiento, me preguntaron por mi familia y yo dije mi apellido, porque en ruso la palabra que suena como “familia” significa “apellido”. ¡La funcionaria no entendía nada! Ahora me río, pero en ese momento me dio mucha vergüenza».",
+    "ru": "«С языком я делала много ошибок. Однажды в мэрии меня спросили про мою семью (familia), а я назвала свою фамилию — ведь по-русски «фамилия» значит apellido. Сотрудница ничего не поняла! Сейчас мне смешно, но тогда мне было очень стыдно»."
+   },
+   {
+    "es": "«También fue difícil acostumbrarme al horario. En Rusia cenaba a las siete; aquí la gente cena a las diez. ¡Al principio tenía mucha hambre!».",
+    "ru": "«Ещё было трудно привыкнуть к распорядку. В России я ужинала в семь, а здесь люди ужинают в десять. Сначала я очень хотела есть!»."
+   },
+   {
+    "es": "«Otra cosa que me sorprendió fueron los dos besos. En Rusia no saludamos así a una persona que acabamos de conocer. Al principio me ponía nerviosa, pero ahora lo hago sin pensar. Y cuando vuelvo a Moscú, ¡a veces quiero dar dos besos a todo el mundo!».",
+    "ru": "«Ещё меня удивили два поцелуя при встрече. В России так не здороваются с человеком, с которым только что познакомились. Сначала я нервничала, а теперь делаю это не задумываясь. А когда приезжаю в Москву, мне иногда хочется расцеловать всех подряд!»."
    },
    {
     "es": "«Ahora me siento en casa. Tengo amigos, me he integrado en el barrio y hablo español todos los días. Todavía tengo acento, claro, pero ya no me da vergüenza hablar».",
@@ -4617,13 +5593,41 @@ const LECTURAS_ES = [
     "id": "LEE-primerano-4",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué error cometió Ana en el ayuntamiento?",
+    "opciones": [
+     "Confundió «familia» con «apellido»",
+     "Olvidó su pasaporte",
+     "Habló en inglés"
+    ],
+    "correcta": "Confundió «familia» con «apellido»",
+    "explicacion": "«…me preguntaron por mi familia y yo dije mi apellido»."
+   },
+   {
+    "id": "LEE-primerano-5",
+    "tipo": "lectura",
+    "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué le sorprendió a Ana?",
+    "opciones": [
+     "Los dos besos al saludar",
+     "Los precios",
+     "El metro"
+    ],
+    "correcta": "Los dos besos al saludar",
+    "explicacion": "«Otra cosa que me sorprendió fueron los dos besos»."
+   },
+   {
+    "id": "LEE-primerano-6",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "vf",
     "afirmacion": "Ana todavía tiene vergüenza al hablar.",
     "verdadero": false,
     "explicacion": "«…ya no me da vergüenza hablar»."
    },
    {
-    "id": "LEE-primerano-5",
+    "id": "LEE-primerano-7",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
@@ -4637,7 +5641,7 @@ const LECTURAS_ES = [
     "explicacion": "«…quiero conocer toda España»."
    },
    {
-    "id": "LEE-primerano-6",
+    "id": "LEE-primerano-8",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "situacion",
@@ -4678,20 +5682,20 @@ const LECTURAS_ES = [
   "tituloRu": "Город или деревня?",
   "parrafos": [
    {
-    "es": "Cada vez más españoles se van de las grandes ciudades a vivir a un pueblo. Hemos hablado con dos personas que han tomado decisiones muy diferentes.",
-    "ru": "Всё больше испанцев уезжают из больших городов жить в деревню. Мы поговорили с двумя людьми, которые приняли совсем разные решения."
+    "es": "Cada vez más españoles se van de las grandes ciudades a vivir a un pueblo. Pero todavía no son muchos: en España hay miles de pueblos que se están quedando vacíos: en más de la mitad viven menos de mil personas. Por eso algunos ofrecen casas baratas o ayudas para que lleguen familias jóvenes. Hemos hablado con dos personas que han tomado decisiones muy diferentes.",
+    "ru": "Всё больше испанцев уезжают из больших городов жить в деревню. Но их пока немного: в Испании тысячи деревень пустеют: больше чем в половине из них живёт меньше тысячи человек. Поэтому некоторые предлагают дешёвое жильё или помощь, чтобы туда приезжали молодые семьи. Мы поговорили с двумя людьми, которые приняли совсем разные решения."
    },
    {
-    "es": "Carlos, un amigo de Pablo, se fue de Madrid hace dos años. «Estaba agobiado: trabajaba diez horas al día y tardaba una hora en llegar a la oficina. Ahora trabajo desde casa, en un pueblo en la montaña. Tengo menos estrés, el aire es limpio y conozco a todos mis vecinos».",
-    "ru": "Карлос, друг Пабло, уехал из Мадрида два года назад. «Я был измотан: работал по десять часов в день и час добирался до офиса. Теперь я работаю из дома, в деревне в горах. У меня меньше стресса, я дышу чистым воздухом и знаю всех соседей»."
+    "es": "Carlos, un amigo de Pablo, se fue de Madrid hace dos años. «Estaba agobiado: trabajaba diez horas al día y tardaba una hora en llegar a la oficina. Ahora trabajo desde casa, en un pueblo en la montaña. Tengo menos estrés, el aire es limpio y conozco a todos mis vecinos. Ahora tengo un huerto y por las mañanas salgo a caminar con el perro».",
+    "ru": "Карлос, друг Пабло, уехал из Мадрида два года назад. «Я был измотан: работал по десять часов в день и час добирался до офиса. Теперь я работаю из дома, в деревне в горах. У меня меньше стресса, я дышу чистым воздухом и знаю всех соседей. Теперь у меня есть огород, а по утрам я гуляю с собакой»."
    },
    {
-    "es": "Pero reconoce que no todo es perfecto: «En el pueblo no hay cine y no hay hospital, y el autobús pasa solo dos veces al día».",
-    "ru": "Но он признаёт, что не всё идеально: «В деревне нет ни кинотеатра, ни больницы, а автобус ходит всего два раза в день»."
+    "es": "Pero reconoce que no todo es perfecto: «En el pueblo no hay cine y no hay hospital, y el autobús pasa solo dos veces al día. Si necesito algo, tengo que coger el coche y conducir media hora».",
+    "ru": "Но он признаёт, что не всё идеально: «В деревне нет ни кинотеатра, ни больницы, а автобус ходит всего два раза в день. Если что-то нужно, приходится садиться в машину и ехать полчаса»."
    },
    {
-    "es": "Lucía piensa lo contrario. «Yo nací en Barcelona y siempre he vivido aquí. En la ciudad hay de todo: trabajo, cultura, gente de todo el mundo. Nunca me aburro».",
-    "ru": "Лусия думает наоборот. «Я родилась в Барселоне и всегда здесь жила. В городе есть всё: работа, культура, люди со всего мира. Мне никогда не скучно»."
+    "es": "Lucía piensa lo contrario. «Yo nací en Barcelona y siempre he vivido aquí. En la ciudad hay de todo: trabajo, cultura, gente de todo el mundo. Nunca me aburro. Puedo ir a pie a casi todas partes y, si quiero, cada noche puedo ver una obra de teatro o un concierto diferente».",
+    "ru": "Лусия думает наоборот. «Я родилась в Барселоне и всегда здесь жила. В городе есть всё: работа, культура, люди со всего мира. Мне никогда не скучно. Почти везде можно дойти пешком, и, если захочу, каждый вечер могу пойти на новый спектакль или концерт»."
    },
    {
     "es": "Eso sí, admite que la vida en Barcelona es cara y que a veces echa de menos el silencio.",
@@ -4749,13 +5753,27 @@ const LECTURAS_ES = [
     "id": "LEE-ciudadpueblo-4",
     "tipo": "lectura",
     "dificultad": 2,
+    "forma": "elegir",
+    "pide": "¿Qué ofrecen algunos pueblos?",
+    "opciones": [
+     "Casas baratas o ayudas",
+     "Trabajo en la ciudad",
+     "Más autobuses"
+    ],
+    "correcta": "Casas baratas o ayudas",
+    "explicacion": "«…algunos ofrecen casas baratas o ayudas para que lleguen familias jóvenes»."
+   },
+   {
+    "id": "LEE-ciudadpueblo-5",
+    "tipo": "lectura",
+    "dificultad": 2,
     "forma": "vf",
     "afirmacion": "Lucía nació en un pueblo.",
     "verdadero": false,
     "explicacion": "«Yo nací en Barcelona»."
    },
    {
-    "id": "LEE-ciudadpueblo-5",
+    "id": "LEE-ciudadpueblo-6",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "elegir",
@@ -4769,7 +5787,7 @@ const LECTURAS_ES = [
     "explicacion": "«…a veces echa de menos el silencio»."
    },
    {
-    "id": "LEE-ciudadpueblo-6",
+    "id": "LEE-ciudadpueblo-7",
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "situacion",
