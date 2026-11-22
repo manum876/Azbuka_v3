@@ -136,6 +136,8 @@ Tus notas, ordenadas por secciones. Se guarda cualquier texto seleccionado en la
 
 **Abecé** es la dirección inversa: un curso de **español peninsular** para quien habla ruso, con toda la app en ruso. Tiene su propio programa, pensado para lo que a un rusohablante le cuesta: los artículos, ser / estar / hay, los pronombres átonos, los pasados y la tilde.
 
+<img src="assets/abece-structure.svg" alt="Estructura de Abecé: el curso A1-B1 conectado con los módulos de apoyo y el diccionario central de español" width="900">
+
 | Unidad | Tema |
 |---|---|
 | **01** | Испанский с нуля: letras, sonidos, sílaba tónica y tilde |

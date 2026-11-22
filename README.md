@@ -40,7 +40,7 @@ Each direction has **its own syllabus, theory, exercises, dictionary and reading
 
 ## How it is organised
 
-<img src="assets/azbuka-structure.svg" alt="Azbuka structure: the A1-B1 course connected to the support modules and the central dictionary" width="900">
+<img src="assets/azbuka-structure-en.svg" alt="Azbuka structure: the A1-B1 course connected to the support modules and the central dictionary" width="900">
 
 - **Course:** 13 progressive units, A1 to B1, plus a final exam.
 - **Support modules:** reference and free practice, outside the course order.
@@ -135,6 +135,8 @@ Your notes, organised in sections. Save any text selected in the app, a word, a 
 ## Abecé: Spanish for Russian speakers
 
 **Abecé** is the reverse direction: a course of **Spanish from Spain** for Russian speakers, with the whole app in Russian. It has its own syllabus, built around what is hard for a Russian speaker: articles, ser / estar / hay, clitic pronouns, the past tenses and written accents.
+
+<img src="assets/abece-structure-en.svg" alt="Abecé structure: the A1-B1 course connected to the support modules and the central Spanish dictionary" width="900">
 
 | Unit | Topic |
 |---|---|

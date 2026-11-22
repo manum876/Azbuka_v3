@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc" lang="es">
+  <title id="title">Estructura de Abecé</title>
+  <desc id="desc">El diccionario central de Abecé conectado con el curso de 13 unidades y examen final y con ocho módulos de apoyo.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-opacity=".12"/>
+    </filter>
+    <style>
+      .title{font:800 30px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#fff}
+      .sub{font:500 15px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#fff;opacity:.92}
+      .label{font:700 18px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#202124}
+      .small{font:500 13px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#5f6368}
+      .tool{font:700 15px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#202124}
+      .toolsub{font:500 12px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#6b7280}
+      .unit{font:700 13px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:#fff}
+      .glyph{font:800 13px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1200" height="800" rx="28" fill="#F7F5F0"/>
+
+  <rect x="370" y="35" width="460" height="105" rx="24" fill="#C9A84C" filter="url(#shadow)"/>
+  <text x="600" y="80" text-anchor="middle" class="title">ABECÉ</text>
+  <text x="600" y="107" text-anchor="middle" class="sub">Español desde cero para rusohablantes</text>
+
+  <path d="M600 140 V176" stroke="#b8b2a7" stroke-width="3" fill="none"/>
+  <path d="M600 176 H285 V207" stroke="#b8b2a7" stroke-width="3" fill="none"/>
+  <path d="M600 176 H915 V207" stroke="#b8b2a7" stroke-width="3" fill="none"/>
+
+  <rect x="70" y="207" width="430" height="520" rx="24" fill="#fff" stroke="#dedad2" filter="url(#shadow)"/>
+  <path d="M94 207 H476 A24 24 0 0 1 500 231 V283 H70 V231 A24 24 0 0 1 94 207 Z" fill="#B5605C"/>
+  <text x="100" y="242" class="title" style="font-size:22px">🎓 CURSO</text>
+  <text x="100" y="266" class="sub">13 unidades y examen final · A1 → B1</text>
+
+  <text x="100" y="318" class="label">Aprendizaje progresivo</text>
+  <text x="100" y="342" class="small">Teoría con ejemplos · vocabulario · ejercicios</text>
+  <text x="100" y="361" class="small">escuchar · escribir · conversar · proyecto · evaluación</text>
+  <g transform="translate(100,388)">
+    <rect x="0" y="0" width="46" height="44" rx="12" fill="#B5605C" opacity="1.0"/><text x="23" y="27" text-anchor="middle" class="unit">01</text>
+    <rect x="54" y="0" width="46" height="44" rx="12" fill="#B5605C" opacity="0.965"/><text x="77" y="27" text-anchor="middle" class="unit">02</text>
+    <rect x="108" y="0" width="46" height="44" rx="12" fill="#B5605C" opacity="0.93"/><text x="131" y="27" text-anchor="middle" class="unit">03</text>
+    <rect x="162" y="0" width="46" height="44" rx="12" fill="#B5605C" opacity="0.895"/><text x="185" y="27" text-anchor="middle" class="unit">04</text>
+    <rect x="216" y="0" width="46" height="44" rx="12" fill="#B5605C" opacity="0.86"/><text x="239" y="27" text-anchor="middle" class="unit">05</text>
+    <rect x="270" y="0" width="46" height="44" rx="12" fill="#B5605C" opacity="0.825"/><text x="293" y="27" text-anchor="middle" class="unit">06</text>
+    <rect x="324" y="0" width="46" height="44" rx="12" fill="#B5605C" opacity="0.79"/><text x="347" y="27" text-anchor="middle" class="unit">07</text>
+    <rect x="0" y="56" width="46" height="44" rx="12" fill="#B5605C" opacity="0.755"/><text x="23" y="83" text-anchor="middle" class="unit">08</text>
+    <rect x="54" y="56" width="46" height="44" rx="12" fill="#B5605C" opacity="0.72"/><text x="77" y="83" text-anchor="middle" class="unit">09</text>
+    <rect x="108" y="56" width="46" height="44" rx="12" fill="#B5605C" opacity="0.685"/><text x="131" y="83" text-anchor="middle" class="unit">10</text>
+    <rect x="162" y="56" width="46" height="44" rx="12" fill="#B5605C" opacity="0.65"/><text x="185" y="83" text-anchor="middle" class="unit">11</text>
+    <rect x="216" y="56" width="46" height="44" rx="12" fill="#B5605C" opacity="0.615"/><text x="239" y="83" text-anchor="middle" class="unit">12</text>
+    <rect x="270" y="56" width="46" height="44" rx="12" fill="#B5605C" opacity="0.58"/><text x="293" y="83" text-anchor="middle" class="unit">13</text>
+    <rect x="324" y="56" width="46" height="44" rx="12" fill="#C9A84C" opacity="1"/><text x="347" y="83" text-anchor="middle" class="unit">EF</text>
+  </g>
+  <text x="100" y="530" class="small">EF = examen final: seis bloques, 100 puntos</text>
+
+  <rect x="100" y="560" width="370" height="64" rx="14" fill="#faf8f3" stroke="#e4e0d7"/>
+  <text x="118" y="587" class="tool">🔁 Repaso de hoy</text>
+  <text x="118" y="608" class="toolsub">repaso espaciado de ejercicios, palabras y reglas</text>
+  <rect x="100" y="636" width="370" height="64" rx="14" fill="#faf8f3" stroke="#e4e0d7"/>
+  <text x="118" y="663" class="tool">🎯 Desafío del día</text>
+  <text x="118" y="684" class="toolsub">un ejercicio por día de tu unidad</text>
+
+  <rect x="700" y="207" width="430" height="520" rx="24" fill="#fff" stroke="#dedad2" filter="url(#shadow)"/>
+  <text x="730" y="242" class="label" style="font-size:22px">🧰 MÓDULOS DE APOYO</text>
+  <text x="730" y="268" class="small">Se abren en cualquier momento · consulta y práctica libre</text>
+  <g transform="translate(730,290)">
+    <rect y="0" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <rect x="10" y="8" width="29" height="29" rx="8" fill="#C48254"/><text x="24.5" y="27" text-anchor="middle" class="glyph" fill="#fff">Dc</text>
+    <text x="52" y="28" class="tool">Diccionario</text>
+    <text x="160" y="28" class="toolsub">unas 5.400 palabras · cirílico</text>
+    <rect y="53" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <rect x="10" y="61" width="29" height="29" rx="8" fill="#C9B369"/><text x="24.5" y="80" text-anchor="middle" class="glyph" fill="#1A1812">Ab</text>
+    <text x="52" y="81" class="tool">Alfabeto</text>
+    <text x="160" y="81" class="toolsub">letras · sonidos · tilde</text>
+    <rect y="106" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <rect x="10" y="114" width="29" height="29" rx="8" fill="#9BAA5C"/><text x="24.5" y="133" text-anchor="middle" class="glyph" fill="#1A1812">Dl</text>
+    <text x="52" y="134" class="tool">Diálogos</text>
+    <text x="160" y="134" class="toolsub">64 diálogos · frases · cultura</text>
+    <rect y="159" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <rect x="10" y="167" width="29" height="29" rx="8" fill="#5C9B78"/><text x="24.5" y="186" text-anchor="middle" class="glyph" fill="#fff">Le</text>
+    <text x="52" y="187" class="tool">Lecturas</text>
+    <text x="160" y="187" class="toolsub">48 textos graduados · preguntas</text>
+    <rect y="212" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <rect x="10" y="220" width="29" height="29" rx="8" fill="#5FA3B8"/><text x="24.5" y="239" text-anchor="middle" class="glyph" fill="#fff">Lu</text>
+    <text x="52" y="240" class="tool">Lucía</text>
+    <text x="160" y="240" class="toolsub">72 charlas escritas en español</text>
+    <rect y="265" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <rect x="10" y="273" width="29" height="29" rx="8" fill="#5D7DA6"/><text x="24.5" y="292" text-anchor="middle" class="glyph" fill="#fff">Vb</text>
+    <text x="52" y="293" class="tool">Verbos</text>
+    <text x="160" y="293" class="toolsub">unos 1.260 verbos · con vosotros</text>
+    <rect y="318" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <rect x="10" y="326" width="29" height="29" rx="8" fill="#8871A8"/><text x="24.5" y="345" text-anchor="middle" class="glyph" fill="#fff">Gr</text>
+    <text x="52" y="346" class="tool">Gramática</text>
+    <text x="160" y="346" class="toolsub">artículos · pronombres · tiempos</text>
+    <rect y="371" width="370" height="45" rx="13" fill="#faf8f3" stroke="#e4e0d7"/>
+    <rect x="10" y="379" width="29" height="29" rx="8" fill="#B0688E"/><text x="24.5" y="398" text-anchor="middle" class="glyph" fill="#fff">Cu</text>
+    <text x="52" y="399" class="tool">Cuaderno</text>
+    <text x="160" y="399" class="toolsub">tus notas · PDF y Word</text>
+  </g>
+
+  <rect x="230" y="748" width="740" height="32" rx="16" fill="#ede9df"/>
+  <text x="600" y="770" text-anchor="middle" class="small">🔎 Buscador con formas · 🔊 Voces generadas · 📱 Sin conexión · ☁️ Progreso en la nube · 🚫 Sin gamificación</text>
+</svg>

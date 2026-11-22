@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
-  <title id="title">Azbuka learning structure</title>
-  <desc id="desc">The Azbuka central dictionary connected to a progressive A1 to B1 course of 13 units and a final exam, and to eight support modules.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc" lang="es">
+  <title id="title">Estructura de Azbuka</title>
+  <desc id="desc">El diccionario central de Azbuka conectado con el curso de 13 unidades y examen final y con ocho módulos de apoyo.</desc>
   <defs>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="6" stdDeviation="8" flood-opacity=".12"/>
@@ -19,7 +19,6 @@
 
   <rect width="1200" height="800" rx="28" fill="#F7F5F0"/>
 
-  <!-- Centro: diccionario -->
   <rect x="370" y="35" width="460" height="105" rx="24" fill="#C9A84C" filter="url(#shadow)"/>
   <text x="600" y="80" text-anchor="middle" class="title">АЗБУКА</text>
   <text x="600" y="107" text-anchor="middle" class="sub">Ruso desde cero · un diccionario central para todo</text>
@@ -28,7 +27,6 @@
   <path d="M600 176 H285 V207" stroke="#b8b2a7" stroke-width="3" fill="none"/>
   <path d="M600 176 H915 V207" stroke="#b8b2a7" stroke-width="3" fill="none"/>
 
-  <!-- Curso -->
   <rect x="70" y="207" width="430" height="520" rx="24" fill="#fff" stroke="#dedad2" filter="url(#shadow)"/>
   <path d="M94 207 H476 A24 24 0 0 1 500 231 V283 H70 V231 A24 24 0 0 1 94 207 Z" fill="#B5605C"/>
   <text x="100" y="242" class="title" style="font-size:22px">🎓 CURSO</text>
@@ -62,7 +60,6 @@
   <text x="118" y="663" class="tool">🎯 Desafío del día</text>
   <text x="118" y="684" class="toolsub">un ejercicio por día de tu unidad</text>
 
-  <!-- Módulos de apoyo -->
   <rect x="700" y="207" width="430" height="520" rx="24" fill="#fff" stroke="#dedad2" filter="url(#shadow)"/>
   <text x="730" y="242" class="label" style="font-size:22px">🧰 MÓDULOS DE APOYO</text>
   <text x="730" y="268" class="small">Se abren en cualquier momento · consulta y práctica libre</text>
@@ -101,6 +98,6 @@
     <text x="160" y="399" class="toolsub">tus notas · PDF y Word</text>
   </g>
 
-  <rect x="270" y="748" width="660" height="32" rx="16" fill="#ede9df"/>
+  <rect x="230" y="748" width="740" height="32" rx="16" fill="#ede9df"/>
   <text x="600" y="770" text-anchor="middle" class="small">🔎 Buscador con formas · 🔊 Voces generadas · 📱 Sin conexión · ☁️ Progreso en la nube · 🚫 Sin gamificación</text>
 </svg>
