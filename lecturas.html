@@ -73,6 +73,7 @@ const meta = p => ES ? p.es : p.ru;                 /* el texto, en la lengua qu
 const trad = p => ES ? p.ru : p.es;
 const tituloMeta = l => l.titulo;                  /* en las dos, titulo va en la lengua que se aprende */
 const tituloTrad = l => ES ? l.tituloRu : l.tituloEs;
+if (ES) document.title = "Abecé — Чтение";
 const TX = ES ? {
   modulo: "Чтение", textos: n => n + " ТЕКСТОВ · A1–B1",
   desc: "Тексты, которые читаются целиком, на настоящие темы — только с тем, что ты уже знаешь из уроков. Читай, слушай и проверь, всё ли понял.",

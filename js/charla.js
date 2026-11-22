@@ -460,6 +460,16 @@ function azCharla(CFG) {
     const decirATi = () => { if (!aTiOk()) return false; n.aTi.forEach(L => decir(L)); if (n.aTiTema) st.preg.push(n.aTiTema); return true; };
     const pregunta = I.esPregunta(raw, T);
 
+    /* «No entiendo», «¿Puedes repetir?» (mensaje corto): siempre repite, antes que las ramas,
+       para que no se tome como un «no» (22/11/2026) */
+    if (T.length <= 4 && st.nodo !== "__ap" && st.nodo !== "FIN" && !st.fin && st.ultima) {
+      const rep = M.utiles.find(u => u.accion === "repetir" && clavesOk(T, u.claves));
+      /* …salvo que el paso tenga su propia rama para eso (Masha: «Повтори́» en el paso de hablar rápido) */
+      const raices = rep ? rep.claves.map(c => c.replace(/^[=~]/, "").split(" ").pop()) : [];
+      const propia = rep && (n.ramas || []).some(r => !r.comodin && r.claves && clavesOk(T, r.claves) && r.claves.some(k => raices.some(x => k.includes(x))));
+      if (rep && !propia) { ver(rep.resp, X.nivel).forEach(L => decir(L)); decir(st.ultima, { lento: true, verEs: true }); return { st, out, notas }; }
+    }
+
     /* 2. Ramas del paso */
     for (const r of n.ramas || []) {
       if (r.comodin) continue;

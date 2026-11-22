@@ -9,8 +9,7 @@ const ES12_V = {"1":["explicación","propuesta","mentira","duda"],"3":["quien","
    módulos, teoría en ruso (borrador para Iván), tablas y ejercicios.
    Mismo formato que data-unidad-es-11.js, con la profundización desde el
    principio (tipos de Azbuka, «Más a fondo», formas generadas).
-   Las formas salen de data-verbos-es.js: presente (es12Pres), subjuntivo
-   (es12Subj) e imperativo de tú (es12Imp).
+   Las formas salen de data-verbos-es.js: presente (es12Pres).
    Decisiones de Manu (14/11/2026): 28 entradas nuevas (lo que, punto de
    vista, por ejemplo, medio ambiente, red social, coste…); toda la
    ampliación; **sin** nota cultural (las tertulias no van); costo queda
@@ -27,8 +26,6 @@ function es12Verbo(inf) {
 }
 function es12Tiempo(t) { return (inf, p) => { const v = es12Verbo(inf); return v && v[t] && v[t][p] ? v[t][p] : ""; }; }
 const es12Pres = es12Tiempo("pres");
-const es12Subj = es12Tiempo("subj");
-function es12Imp(inf) { const v = es12Verbo(inf); return v && v.impTu ? v.impTu : ""; }
 const es12Mayus = t => t.replace(/^([¿¡—]*)([a-záéíóúñ])/, (x, a, b) => a + b.toUpperCase());
 
 const UNIDAD_ES_12 = {
@@ -1206,6 +1203,25 @@ const ES12_BASICAS_MOD = [
       { es: "Muchos vecinos están en contra de la nueva ley.", ru: "Многие соседи против нового закона." },
       { es: "La mayoría está a favor de reciclar.", ru: "Большинство — за переработку мусора." }
     ]
+  }],
+  /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
+  ["es12m10", ["luchar", "actuar"], {
+    id: "es12-luchar",
+    titulo: "Luchar contra · actuar",
+    texto: "**luchar** — «бороться»: **luchar contra el cambio climático**, **luchar por un mundo mejor** (по / за — **por**). **actuar** — «действовать, поступать» (и «играть роль»): **Hay que actuar ya**. Ударение: **actúo, actúas, actúa**.",
+    ejemplos: [
+      { es: "Muchos jóvenes luchan contra el cambio climático.", ru: "Многие молодые люди борются с изменением климата." },
+      { es: "Los gobiernos tienen que actuar ahora.", ru: "Правительства должны действовать сейчас." }
+    ]
+  }],
+  ["es12m8", ["profundo", "directo"], {
+    id: "es12-profundo",
+    titulo: "Un cambio profundo · ser directo",
+    texto: "**profundo** — «глубокий»: **un río profundo, un cambio profundo**. **directo** — «прямой»: **un tren directo** (без пересадок); **ser directo** — говорить прямо: **Te lo digo de forma directa**.",
+    ejemplos: [
+      { es: "Creo que necesitamos un cambio profundo.", ru: "Я думаю, нам нужны глубокие перемены." },
+      { es: "Lucía es muy directa: siempre dice lo que piensa.", ru: "Лусия очень прямая: всегда говорит, что думает." }
+    ]
   }]
 ];
 const ES12_BASICAS = [
@@ -1216,7 +1232,11 @@ const ES12_BASICAS = [
   ["conector", "elegir", 4, "es12-a-pesar", "Что подходит?", "Para el país es importante la salud, ___ la educación.", "así como", ["así que", "a pesar de"], "**así como** — «а также».", "así como"],
   ["respuesta", "elegir", 4, "es12-a-pesar", "Тебе говорят: что ответишь?", "Entonces, ¿primero lo pienso y después lo hago?", "Sí, así es.", ["Sí, así que.", "Sí, como así."], "**Así es** — «Именно так».", "así"],
   ["opinion", "elegir", 8, "es12-en-contra", "Что подходит?", "No estoy de acuerdo: estoy ___ esa idea.", "en contra de", ["contra de", "en contra"], "Перед существительным — **en contra de**.", "en contra de"],
-  ["opinion", "elegir", 8, "es12-en-contra", "Что подходит?", "Me parece una idea muy buena: estoy ___ ella.", "a favor de", ["en contra de", "contra de"], "«За» — **a favor de**.", "a favor de"],
+  ["opinion", "elegir", 8, "es12-en-contra", "Что подходит?", "Me parece una idea muy buena: estoy ___ ella.", "a favor de", ["en contra de", "contra de"], "«За» — **a favor de**.", "a favor de"],,
+  ["basica", "elegir", 10, "es12-luchar", "Что подходит?", "Tenemos que luchar ___ la contaminación.", "contra", ["a", "con"], "Бороться с чем-то — **luchar contra**.", "luchar"],
+  ["basica", "elegir", 10, "es12-luchar", "Что подходит?", "Es importante que el gobierno ___ pronto.", "actúe", ["actúa", "actuar"], "**Es importante que** + subjuntivo: **actúe**.", "actuar"],
+  ["basica", "elegir", 8, "es12-profundo", "Что подходит?", "Es un problema ___: no tiene una solución fácil.", "profundo", ["profunda", "directo"], "**el problema** — мужской род: **profundo**.", "profundo"],
+  ["basica", "elegir", 8, "es12-profundo", "Поезд без пересадок — это…", "", "un tren directo", ["un tren derecho", "un tren directa"], "Без пересадок — **directo**.", "directo"]
 ];
 (function () {
   const M = id => UNIDAD_ES_12.modulos.find(m => m.id === id);

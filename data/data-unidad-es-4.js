@@ -599,12 +599,13 @@ const UNIDAD_ES_4 = {
           texto: "Ответить на **¿Te gusta…?** можно так: **Sí, mucho** — «да, очень»; **Sí, me encanta** — «очень нравится, обожаю»; **No mucho** — «не очень»; **No, no me gusta nada** — «совсем не нравится».\n**encantar** устроен так же, как **gustar**: **me encanta**, **me encantan**. Он уже значит «очень», поэтому **mucho** к нему обычно не добавляют.",
           ejemplos: [
             { es: "—¿Te gusta nadar? —¡Me encanta!", ru: "— Тебе нравится плавать? — Обожаю!" },
-            { es: "No me gusta nada la lluvia.", ru: "Мне совсем не нравится дождь." }
+            { es: "No me gusta nada la lluvia.", ru: "Мне совсем не нравится дождь." },
+            { es: "Me gusta pasear y hacer ejercicio.", ru: "Мне нравится гулять и заниматься спортом." }
           ]
         }
       ],
       frases: ["FRE-078", "FRE-079", "FRE-080"],
-      vocab: ["gustar", "encantar", "deporte", "fútbol", "tenis", "música", "película", "serie", "fiesta", "paseo", "cine", "libro", "bailar", "cantar", "nadar", "nada"],
+      vocab: ["gustar", "encantar", "deporte", "fútbol", "tenis", "música", "película", "serie", "fiesta", "paseo", "pasear", "ejercicio", "cine", "libro", "bailar", "cantar", "nadar", "nada"],
       dialogos: ["DLE-017"],
       ampliacion: {
         titulo: "Ещё о свободном времени",
@@ -1321,7 +1322,27 @@ const ES4_BASICAS_MOD = [
     ejemplos: [
       { es: "Hoy hace sol y el cielo está azul.", ru: "Сегодня солнечно, и небо голубое." }
     ]
+  }],,
+  /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
+  ["es4m3", ["sentarse", "despertar"], {
+    id: "es4-sentarse",
+    titulo: "Me siento · despierto a mi hijo",
+    texto: "**sentarse** — «садиться»: **me siento, te sientas, se sienta, nos sentamos, os sentáis, se sientan** (e → ie). **Siéntate** — «садись» — услышишь часто.\n\n**despertar** — «будить» (кого-то), а **despertarse** — «просыпаться» (самому): **Me despierto a las siete y despierto a mi hijo a las siete y media**.",
+    ejemplos: [
+      { es: "En clase me siento al lado de la ventana.", ru: "На уроке я сажусь у окна." },
+      { es: "Me despierto a las siete y despierto a los niños a las ocho.", ru: "Я просыпаюсь в семь и бужу детей в восемь." }
+    ],
+    ojo: "С **se** действие — с самим собой: **despertarse** — проснуться самому, **despertar a alguien** — разбудить кого-то."
   }],
+  ["es4m9", ["favorito", "baile"], {
+    id: "es4-favorito",
+    titulo: "Mi deporte favorito · el baile",
+    texto: "**favorito** — «любимый»: **mi película favorita, mis libros favoritos**. Как любое прилагательное, стоит **после** существительного и меняет окончание.\n\n**el baile** — «танец, танцы»: **Me gusta el baile** — мне нравятся танцы (от **bailar** — танцевать).",
+    ejemplos: [
+      { es: "Mi comida favorita es la tortilla.", ru: "Моя любимая еда — тортилья." },
+      { es: "A Lucía le encanta el baile.", ru: "Лусия обожает танцы." }
+    ]
+  }]
 ];
 const ES4_BASICAS = [
   ["situacion-frase", "elegir", 2, "es4-a-tiempo", "Ты не знаешь точное время, только примерно.", "", "Son más o menos las cinco.", ["Es más o menos las cinco.", "Son las cinco más o menos de."], "**Son más o menos las cinco.**", "más o menos"],
@@ -1332,7 +1353,11 @@ const ES4_BASICAS = [
   ["reflexivo", "escribir", 5, "es4-irse", "Впиши форму глагола «irse».", "Lucía ___ a las nueve.", "se va", [], "**irse**, она — **se va**.", "irse"],
   ["situacion-frase", "elegir", 8, "es4-de-momento", "Пока, на время, ты живёшь в Барселоне.", "", "De momento vivo en Barcelona.", ["En momento vivo en Barcelona.", "Del momento vivo en Barcelona."], "**de momento** — «пока».", "de momento"],
   ["tiempo", "elegir", 6, "es4-cielo", "Что подходит?", "Hoy no hace sol: el ___ está gris.", "cielo", ["sol", "viento"], "**el cielo** — «небо».", "cielo"],
-  ["tiempo-escribir", "escribir", 6, "es4-cielo", "Какое это слово? Напиши.", "Hace sol y el ___ está azul.", "cielo", [], "**el cielo** — «небо».", "cielo"],
+  ["tiempo-escribir", "escribir", 6, "es4-cielo", "Какое это слово? Напиши.", "Hace sol y el ___ está azul.", "cielo", [], "**el cielo** — «небо».", "cielo"],,
+  ["basica", "elegir", 3, "es4-sentarse", "Что подходит?", "Llego a clase y ___ al lado de Ana.", "me siento", ["me sento", "siento"], "**sentarse**, я — **me siento** (e → ie).", "sentarse"],
+  ["basica", "elegir", 3, "es4-sentarse", "Что подходит?", "Mi madre ___ a mi hermano a las siete.", "despierta", ["se despierta", "despiertan"], "Будить кого-то — **despertar**, без **se**.", "despertar"],
+  ["basica", "elegir", 9, "es4-favorito", "Что подходит?", "Mi película ___ es «Volver».", "favorita", ["favorito", "favoritas"], "**la película** — женский род: **favorita**.", "favorito"],
+  ["basica", "escribir", 9, "es4-favorito", "Танец — как по-испански? Напиши.", "Me gusta mucho el ___.", "baile", [], "**el baile** — «танец».", "baile"]
 ];
 (function () {
   const M = id => UNIDAD_ES_4.modulos.find(m => m.id === id);

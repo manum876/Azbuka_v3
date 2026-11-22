@@ -1158,7 +1158,28 @@ const ES7_BASICAS_MOD = [
     ejemplos: [
       { es: "— ¿Vienes el sábado? — Tal vez.", ru: "— Придёшь в субботу? — Может быть." }
     ]
+  }],,
+  /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
+  ["es7m4", ["pobre", "agradable", "tontería", "ridículo"], {
+    id: "es7-pobre",
+    titulo: "¡Pobre Ana! · ¡Qué tontería!",
+    texto: "**pobre** — «бедный»: **una familia pobre** — бедная семья. Перед существительным — «бедняга, несчастный»: **¡Pobre Ana!** — бедная Аня!\n\n**agradable** — «приятный» (о человеке, месте, погоде). **la tontería** — «глупость»: **¡Qué tontería!** **ridículo** — «смешной, нелепый»: **Me parece ridículo**.",
+    ejemplos: [
+      { es: "¡Pobre Pablo! Tiene que trabajar el domingo.", ru: "Бедный Пабло! Ему придётся работать в воскресенье." },
+      { es: "Tu vecina es muy agradable.", ru: "Твоя соседка очень приятная." },
+      { es: "Eso es una tontería.", ru: "Это глупость." },
+      { es: "Me parece ridículo pagar tanto por un café.", ru: "По-моему, нелепо платить столько за кофе." }
+    ]
   }],
+  ["es7m8", ["familiar", "encuentro"], {
+    id: "es7-familiar",
+    titulo: "Una fiesta familiar · el encuentro",
+    texto: "**familiar** — «семейный»: **una comida familiar** — семейный обед. Ещё **un familiar** — «родственник».\n\n**el encuentro** — «встреча» (от **encontrar(se)**): **un encuentro de amigos**. Договориться о встрече — **quedar**.",
+    ejemplos: [
+      { es: "El domingo tenemos una comida familiar.", ru: "В воскресенье у нас семейный обед." },
+      { es: "Un encuentro con amigos siempre es agradable.", ru: "Встреча с друзьями всегда приятна." }
+    ]
+  }]
 ];
 const ES7_BASICAS = [
   ["opinion", "elegir", 4, "es7-loco", "Что подходит?", "¿Comer helado en enero? ¡Estás ___!", "loco", ["cansado", "contento"], "**¡Estás loco!** — «Ты с ума сошёл!».", "loco"],
@@ -1170,7 +1191,13 @@ const ES7_BASICAS = [
   ["plan", "elegir", 1, "es7-juntos", "Что подходит?", "Ana y Lucía siempre van ___ al cine.", "juntas", ["juntos", "junto"], "Две женщины — **juntas**.", "junto"],
   ["situacion-frase", "elegir", 1, "es7-juntos", "Ты предлагаешь другу пойти вместе.", "", "¿Vamos juntos?", ["¿Vamos junto?", "¿Vamos juntas?"], "С другом (мужчиной) — **juntos**.", "junto"],
   ["respuesta", "elegir", 2, "es7-tal-vez", "Тебе говорят: что ответишь?", "¿Vienes a la fiesta el sábado?", "Tal vez, no lo sé.", ["Tal vez de, no lo sé.", "Tal ves, no lo sé."], "**tal vez** — «может быть»; пишется с **z**.", "tal vez"],
-  ["plan", "elegir", 2, "es7-tal-vez", "Что подходит?", "Hoy tengo mucho trabajo: ___ voy más tarde.", "tal vez", ["por supuesto", "genial"], "Неуверенность — **tal vez**.", "tal vez"],
+  ["plan", "elegir", 2, "es7-tal-vez", "Что подходит?", "Hoy tengo mucho trabajo: ___ voy más tarde.", "tal vez", ["por supuesto", "genial"], "Неуверенность — **tal vez**.", "tal vez"],,
+  ["basica", "elegir", 4, "es7-pobre", "Пабло работает в воскресенье. Что скажешь?", "", "¡Pobre Pablo!", ["¡Pablo pobre!", "¡Qué pobre Pablo!"], "Сочувствие — **pobre** перед именем: **¡Pobre Pablo!**", "pobre"],
+  ["basica", "elegir", 4, "es7-pobre", "Что подходит?", "Tu profesora es muy ___: siempre sonríe.", "agradable", ["agradabla", "ridícula"], "**agradable** — «приятный», одинаков в обоих родах.", "agradable"],
+  ["basica", "escribir", 4, "es7-pobre", "Глупость — как по-испански? Напиши.", "¡Qué ___! No es verdad.", "tontería", [], "**la tontería** — «глупость».", "tontería"],
+  ["basica", "elegir", 4, "es7-pobre", "Что подходит?", "Ese sombrero me parece ___.", "ridículo", ["ridícula", "pobre"], "**el sombrero** — мужской род: **ridículo**.", "ridículo"],
+  ["basica", "elegir", 8, "es7-familiar", "Что подходит?", "El domingo hay una comida ___.", "familiar", ["familia", "familiara"], "Семейный — **familiar**.", "familiar"],
+  ["basica", "elegir", 8, "es7-familiar", "Встреча — как по-испански?", "", "el encuentro", ["la encuentra", "el encontrar"], "**el encuentro** — «встреча».", "encuentro"]
 ];
 (function () {
   const M = id => UNIDAD_ES_7.modulos.find(m => m.id === id);

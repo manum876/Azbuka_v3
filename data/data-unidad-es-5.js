@@ -1496,7 +1496,18 @@ const ES5_BASICAS_MOD = [
       { es: "Solo tengo diez euros.", ru: "У меня только десять евро." },
       { es: "Quiero un par de botellas de agua.", ru: "Мне пару бутылок воды." }
     ]
-  }],
+  }],,
+  /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
+  ["es5m9", ["dulce", "salado", "pedido", "completo"], {
+    id: "es5-dulce",
+    titulo: "Dulce o salado · el pedido",
+    texto: "**dulce** — «сладкий», **salado** — «солёный»: **¿Prefieres algo dulce o salado?** **dulce** не меняется по роду: **un café dulce, una tarta dulce**.\n\n**el pedido** — «заказ»: **¿Ya tienes el pedido?** **completo** — «полный»: **El restaurante está completo** — мест нет; **la información completa** — вся информация.",
+    ejemplos: [
+      { es: "Para desayunar prefiero algo salado: pan con tomate.", ru: "На завтрак я предпочитаю что-нибудь солёное: хлеб с помидором." },
+      { es: "Lo siento, hoy el restaurante está completo.", ru: "Извините, сегодня в ресторане нет мест." },
+      { es: "Aquí tienes tu pedido: un café y un zumo.", ru: "Вот твой заказ: кофе и сок." }
+    ]
+  }]
 ];
 const ES5_BASICAS = [
   ["algo-nada", "elegir", 4, "es5-alguien", "Что подходит?", "— ¿Hay ___ en la cocina? — No, no hay nadie.", "alguien", ["algo", "nadie"], "О людях — **alguien**.", "alguien"],
@@ -1511,7 +1522,11 @@ const ES5_BASICAS = [
   ["talla", "elegir", 7, "es5-mismo", "Что подходит?", "Puedes llevar ___ camiseta.", "cualquier", ["cualquiera", "misma"], "Перед существительным — **cualquier**.", "cualquiera"],
   ["mucho", "elegir", 4, "es5-solo-par", "Что подходит?", "No quiero mucho: ___ un poco, por favor.", "solo", ["nada", "demasiado"], "**solo** — «только».", "ESP-00046"],
   ["mucho-escribir", "escribir", 4, "es5-solo-par", "Впиши слово: «только».", "Tengo ___ diez euros: no puedo comprar más.", "solo", [], "**solo** — «только».", "ESP-00046"],
-  ["cantidad", "elegir", 4, "es5-solo-par", "Что подходит?", "Compro un ___ de botellas de agua.", "par", ["poco", "algo"], "**un par de** — «пара, несколько».", "par"],
+  ["cantidad", "elegir", 4, "es5-solo-par", "Что подходит?", "Compro un ___ de botellas de agua.", "par", ["poco", "algo"], "**un par de** — «пара, несколько».", "par"],,
+  ["basica", "elegir", 9, "es5-dulce", "Что подходит?", "El chocolate es ___.", "dulce", ["salado", "completo"], "**dulce** — «сладкий».", "dulce"],
+  ["basica", "elegir", 9, "es5-dulce", "Что подходит?", "El jamón es muy ___.", "salado", ["salada", "dulce"], "**el jamón** — мужской род: **salado**.", "salado"],
+  ["basica", "escribir", 9, "es5-dulce", "Заказ — как по-испански? Напиши.", "Aquí tienes tu ___: un café y un zumo.", "pedido", [], "**el pedido** — «заказ».", "pedido"],
+  ["basica", "elegir", 9, "es5-dulce", "В ресторане нет свободных мест. Что тебе скажут?", "", "Está completo.", ["Es lleno.", "Es completo."], "О месте, где нет мест, — **está completo**.", "completo"]
 ];
 (function () {
   const M = id => UNIDAD_ES_5.modulos.find(m => m.id === id);

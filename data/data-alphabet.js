@@ -3,7 +3,7 @@
    Usado por: azbuka-1.html (sección "Alfabeto") y alfabeto.html
    (módulo independiente). Cargar ANTES del script propio de cada
    archivo: <script src="data-alphabet.js"></script>
-   Expone: ALPHABET (33 letras) y generateQuizQuestion(letter, allLetters)
+   Expone: ALPHABET (33 letras), azNombreLetra y azLetraSinSonido
    Si corriges una nota de pronunciación o agregas una palabra de
    ejemplo, se edita UNA sola vez acá y se refleja en ambos módulos.
    Transliteración (24/09/2026): sigue la Parte B de CONVENCION_IPA.md,
@@ -1837,71 +1837,6 @@ const ALPHABET=[
 /* Aplana ALPHABET a su lista de palabras de ejemplo — usado por el
    buscador transversal (azRegisterAllKnownSearchIndexes en core.js).
    Mismo patrón que getAllDiccionarioWords() y getAllCasosWords(). */
-/* Fix: varias palabras se usan como ejemplo de MÁS DE UNA letra (ej.
-   "город" ilustra tanto Г como О) — intencional para el estudio del
-   alfabeto letra por letra. Pero al aplanar TODAS las palabras para
-   el buscador transversal, eso las duplicaba en los resultados de
-   búsqueda. Acá se deduplica por texto ruso (se conserva la primera
-   aparición); las tarjetas de cada letra individual NO se tocan —
-   siguen mostrando la palabra completa como antes. */
-function getAllAlphabetWords(){
-  const out=[];
-  const seen=new Set();
-  ALPHABET.forEach(l=>l.words.forEach(w=>{
-    const key=w.cyrillic.trim().toLowerCase();
-    if(seen.has(key))return;
-    seen.add(key);
-    out.push({ru:w.cyrillic, es:w.meaning, tr:w.translit});
-  }));
-  return out;
-}
-function generateQuizQuestion(letter, allLetters) {
-  const types = ["sound", "letter", "word"];
-  const type = types[Math.floor(Math.random() * types.length)];
-  if (type === "sound") {
-    const wrong = allLetters.filter(l => l.id !== letter.id).sort(() => Math.random() - 0.5).slice(0, 3);
-    const options = [letter, ...wrong].sort(() => Math.random() - 0.5);
-    return {
-      type: "sound",
-      question: `¿Cómo se pronuncia la letra ${letter.upper}?`,
-      hint: "Elige la pronunciación correcta",
-      options: options.map(l => ({
-        id: l.id,
-        text: l.pronunciation.replace(/\*\*/g, ""),
-        isCorrect: l.id === letter.id
-      }))
-    };
-  }
-  if (type === "letter") {
-    const wrong = allLetters.filter(l => l.id !== letter.id).sort(() => Math.random() - 0.5).slice(0, 3);
-    const options = [letter, ...wrong].sort(() => Math.random() - 0.5);
-    return {
-      type: "letter",
-      question: `¿Qué letra representa el sonido "${letter.translit}"?`,
-      hint: "Elige la letra correcta",
-      options: options.map(l => ({
-        id: l.id,
-        text: l.upper,
-        isCorrect: l.id === letter.id
-      }))
-    };
-  }
-  // word type
-  const word = letter.words[Math.floor(Math.random() * letter.words.length)];
-  const wrongLetters = allLetters.filter(l => l.id !== letter.id).sort(() => Math.random() - 0.5).slice(0, 3);
-  const options = [letter, ...wrongLetters].sort(() => Math.random() - 0.5);
-  return {
-    type: "word",
-    question: `En la palabra "${word.cyrillic}" (${word.meaning}), ¿cuál es el sonido de la letra ${letter.upper}?`,
-    hint: word.note,
-    options: options.map(l => ({
-      id: l.id,
-      text: l.upper + " → " + l.pronunciation.split(",")[0].slice(0, 30),
-      isCorrect: l.id === letter.id
-    }))
-  };
-}
-
 /* Lo que suena cuando se pide oír una letra (19/11/2026, Manu): su nombre, no la letra sola,
    que la voz no sabe leer suelta («б» → «бэ»). Con acento en los nombres de más de una sílaba. */
 /* Ъ y Ь no tienen sonido, y Й suelta no se reconoce (19/11/2026, Manu): no llevan botón de escuchar */

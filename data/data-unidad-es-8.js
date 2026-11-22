@@ -694,6 +694,7 @@ function ejerciciosUnidadEs8() {
 
   /* 14. Profundización y formas (13/11/2026) */
   if (typeof es8Prof === "function") es8Prof(out, baraja, lex);
+  if (typeof es8Basicas === "function") es8Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -1076,3 +1077,47 @@ function es8Prof(out, baraja, lex) {
   });
 }
 Object.assign(ES8_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1, "perfecto-forma": 2, "indefinido-forma": 2 });
+
+/* ── Palabras frecuentes, segunda ronda (Manu, 22/11/2026) ──
+   claude/PROPUESTA_FRECUENTES_2_ABECE.md. Como las palabras básicas de las U2–U7 (19/11/2026):
+   entran en la lista del módulo que les corresponde, con una sección corta de teoría y sus
+   ejercicios; no cambia el orden de los módulos ni lo que ya había. Formato de ES8_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES8_BASICAS_MOD = [
+  /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
+  ["es8m9", ["matrimonio", "anillo", "bienvenido"], {
+    id: "es8-matrimonio",
+    titulo: "El matrimonio, el anillo · ¡bienvenido!",
+    texto: "**el matrimonio** — «брак» и «супружеская пара»: **Llevan veinte años de matrimonio**; **un matrimonio joven**. Свадьба — **la boda**.\n\n**el anillo** — «кольцо». **bienvenido** — «добро пожаловать»: меняется по роду и числу, как прилагательное: **¡Bienvenida, Ana! ¡Bienvenidos a Barcelona!**",
+    ejemplos: [
+      { es: "Mis padres se casaron en 1990: llevan muchos años de matrimonio.", ru: "Мои родители поженились в 1990 году: они давно в браке." },
+      { es: "En la boda, el novio le dio el anillo a la novia.", ru: "На свадьбе жених надел невесте кольцо." },
+      { es: "¡Bienvenida a España, Ana!", ru: "Добро пожаловать в Испанию, Аня!" }
+    ]
+  }]
+];
+const ES8_BASICAS = [
+  ["basica", "elegir", 9, "es8-matrimonio", "Что подходит?", "Mis abuelos llevan cincuenta años de ___.", "matrimonio", ["boda", "anillo"], "Сколько лет в браке — **años de matrimonio**.", "matrimonio"],
+  ["basica", "escribir", 9, "es8-matrimonio", "Кольцо — как по-испански? Напиши.", "En la boda le dio un ___.", "anillo", [], "**el anillo** — «кольцо».", "anillo"],
+  ["basica", "elegir", 9, "es8-matrimonio", "Аня приехала. Что ей скажешь?", "", "¡Bienvenida, Ana!", ["¡Bienvenido, Ana!", "¡Bien venida, Ana!"], "Ана — женщина: **bienvenida**.", "bienvenido"]
+];
+(function () {
+  const M = id => UNIDAD_ES_8.modulos.find(m => m.id === id);
+  ES8_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es8Basicas(out, baraja, lex) {
+  ES8_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES8-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

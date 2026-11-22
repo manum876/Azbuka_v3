@@ -55,7 +55,6 @@ const D9 = u9Datos();
 const OBJETIVO_U9 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(9) >= 0 || (e.appearsIn || []).indexOf(9) >= 0).map(e => e.id);
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
 const PERS6 = ["я", "ты", "он / она́", "мы", "вы", "они́"];
-const cap9 = t => t.charAt(0).toUpperCase() + t.slice(1);
 
 /* Grupos de vocabulario de un módulo (U9_GRUPOS), con los IDs del léxico */
 const grupos = n => U9_GRUPOS.filter(g => g[0] === n).map(([m, titulo, pal]) => ({ titulo,

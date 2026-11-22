@@ -1,11 +1,13 @@
 // 5 · Pantallas chicas y tema claro: abre todas las pantallas a 375 × 667 (iPhone SE) en tema claro
 // y busca scroll horizontal, errores y contenido cortado (algo que se sale del ancho sin poder
 // desplazarse). Los dibujos del mapa que quedan fuera del recuadro no cuentan.
+// DIR=abece node pantallas.js: lo mismo en Abecé (22/11/2026).
+const AB = process.env.DIR === 'abece';
 const { BASE, servir, navegador } = require('./comun');
 (async () => {
   const srv = await servir(); const b = await navegador();
   const ctx = await b.newContext({ viewport: { width: 375, height: 667 }, serviceWorkers: 'block' });
-  await ctx.addInitScript(() => { try { localStorage.setItem('az_theme', '"light"'); } catch (e) {} });
+  await ctx.addInitScript(ab => { try { localStorage.setItem('az_theme', '"light"'); if (ab) localStorage.setItem('az_direccion', '"abece"'); } catch (e) {} }, AB);
   const p = await ctx.newPage(); const problemas = []; let n = 0; let errs = [];
   p.on('pageerror', e => errs.push(e.message.slice(0, 120)));
   async function revisar(url) {
@@ -29,13 +31,15 @@ const { BASE, servir, navegador } = require('./comun');
     if (r.length || errs.length) problemas.push([url, r.concat(errs.map(x => 'JS: ' + x))]);
   }
   const fijas = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?id=CMR-00058', 'verbos.html?id=CMR-00058', 'casos.html?id=CMR-00230', 'alfabeto.html', 'dialogos.html?id=DLG-001', 'lecturas.html', 'lecturas.html?id=LEC-zima', 'masha.html', 'cuaderno.html', 'ajustes.html'];
-  for (const u of fijas) await revisar(u);
+  const fijasAb = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?id=ESP-00786', 'verbos.html?id=ESP-00786', 'gramatica.html', 'alfabeto.html', 'dialogos.html?id=DLE-001', 'lecturas.html', 'lecturas.html?id=LEE-perfil', 'lucia.html', 'cuaderno.html', 'ajustes.html'];
+  for (const u of (AB ? fijasAb : fijas)) await revisar(u);
+  const PAG = AB ? 'abece-' : 'azbuka-', VAR = AB ? 'UNIDAD_ES_' : 'UNIDAD_';
   for (let u = 1; u <= 14; u++) {
-    await revisar('azbuka-' + u + '.html');
-    const mods = await p.evaluate(u => window['UNIDAD_' + u] ? window['UNIDAD_' + u].modulos.map(m => m.id) : [], u);
-    for (const m of mods) await revisar('azbuka-' + u + '.html?m=' + m);
+    await revisar(PAG + u + '.html');
+    const mods = await p.evaluate(([u, VAR]) => window[VAR + u] ? window[VAR + u].modulos.map(m => m.id) : [], [u, VAR]);
+    for (const m of mods) await revisar(PAG + u + '.html?m=' + m);
   }
-  console.log('Pantallas revisadas a 375 × 667 en tema claro: ' + n);
+  console.log('Pantallas revisadas a 375 × 667 en tema claro' + (AB ? ' (Abecé)' : '') + ': ' + n);
   if (!problemas.length) console.log('✓ Nada cortado ni scroll horizontal.');
   else { console.log('✗ Problemas:'); problemas.forEach(([u, r]) => console.log('  ' + u + ': ' + r.join(' · '))); }
   await b.close(); srv.close(); process.exit(problemas.length ? 1 : 0);

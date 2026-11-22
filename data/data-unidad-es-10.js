@@ -10,7 +10,7 @@ const ES10_V = {"1": ["futuro", "proyecto", "objetivo", "meta", "sueño", "soña
    Mismo formato que data-unidad-es-9.js, con la profundización desde el
    principio (tipos de Azbuka, «Más a fondo», formas generadas).
    Las formas salen de data-verbos-es.js: futuro (es10Fut), condicional
-   (es10Cond), presente (es10Pres) e imperativo de tú (es10Imp).
+   (es10Cond) y presente (es10Pres).
    Decisiones de Manu (13/11/2026): la meta del curso es ~1.900 palabras, así
    que la U10 enseña unas 190; 10 entradas nuevas (currículum, asignatura,
    máster, apuntes, prácticas, autónomo, oposiciones, jubilación, electricista,
@@ -35,8 +35,6 @@ function es10Tiempo(t) {
 const es10Fut = es10Tiempo("fut");
 const es10Cond = es10Tiempo("cond");
 const es10Pres = es10Tiempo("pres");
-function es10Imp(inf) { const v = es10Verbo(inf); return v && v.impTu ? v.impTu : ""; }
-const es10Tabla = (inf, fn) => ES10_PERS.map(([p, r], i) => [{ es: p, ru: r }, { es: fn(inf, i) }]);
 const es10Tabla2 = (a, b, fn) => ES10_PERS.map(([p, r], i) => [{ es: p, ru: r }, { es: fn(a, i) + " · " + fn(b, i) }]);
 
 const UNIDAD_ES_10 = {
@@ -601,6 +599,7 @@ function ejerciciosUnidadEs10() {
   });
   /* 10. Profundización y formas */
   es10Prof(out, baraja, lex);
+  if (typeof es10Basicas === "function") es10Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -940,3 +939,66 @@ function es10Prof(out, baraja, lex) {
   }));
 }
 UNIDAD_ES_10.modulos.forEach(m => (m.secciones || []).forEach(s => { if (ES10_MAS[s.id] && !s.mas) s.mas = ES10_MAS[s.id]; }));
+
+/* ── Palabras frecuentes, segunda ronda (Manu, 22/11/2026) ──
+   claude/PROPUESTA_FRECUENTES_2_ABECE.md. Como las palabras básicas de las U2–U7 (19/11/2026):
+   entran en la lista del módulo que les corresponde, con una sección corta de teoría y sus
+   ejercicios; no cambia el orden de los módulos ni lo que ya había. Formato de ES10_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES10_BASICAS_MOD = [
+  /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
+  ["es10m6", ["director", "dueño"], {
+    id: "es10-director",
+    titulo: "El director · el dueño",
+    texto: "**el director / la directora** — «директор, руководитель» (в кино — режиссёр). **el dueño / la dueña** — «владелец, хозяин»: **el dueño del bar**.",
+    ejemplos: [
+      { es: "Algún día seré directora de una escuela.", ru: "Когда-нибудь я стану директором школы." },
+      { es: "El dueño del restaurante es muy simpático.", ru: "Хозяин ресторана очень приятный." }
+    ]
+  }],
+  ["es10m7", ["hacerse", "convertirse"], {
+    id: "es10-hacerse",
+    titulo: "Hacerse médico · convertirse en",
+    texto: "«Стать»: **hacerse** + профессия или качество, когда к этому идут сами: **Se hizo médico** — он стал врачом. **convertirse en** — «превратиться в»: **Barcelona se convirtió en una ciudad turística**.\n\n**llegar a ser** тоже значит «стать» — после долгого пути.",
+    ejemplos: [
+      { es: "Quiero hacerme profesora de español.", ru: "Я хочу стать преподавательницей испанского." },
+      { es: "El pueblo se convertirá en una ciudad.", ru: "Деревня превратится в город." }
+    ],
+    ojo: "**convertirse** всегда с **en**: **se convirtió en**."
+  }],
+  ["es10m9", ["elección"], {
+    id: "es10-eleccion",
+    titulo: "La elección",
+    texto: "**la elección** — «выбор» (от **elegir** — выбирать): **Es una elección difícil**. Во мн. ч. **las elecciones** — «выборы».",
+    ejemplos: [
+      { es: "Estudiar o trabajar: es una elección difícil.", ru: "Учиться или работать — трудный выбор." }
+    ]
+  }]
+];
+const ES10_BASICAS = [
+  ["basica", "elegir", 6, "es10-director", "Что подходит?", "Mi madre es ___ de un hospital.", "directora", ["director", "dueño"], "Мама — **la directora**.", "director"],
+  ["basica", "elegir", 6, "es10-director", "Что подходит?", "El ___ del bar se llama Paco.", "dueño", ["dueña", "director"], "Хозяин — **el dueño**.", "dueño"],
+  ["basica", "elegir", 7, "es10-hacerse", "Что подходит?", "Después de la universidad, Ana se ___ programadora.", "hizo", ["hació", "hice"], "**hacerse**, она, indefinido: **se hizo**.", "hacerse"],
+  ["basica", "elegir", 7, "es10-hacerse", "Что подходит?", "La pequeña tienda se convirtió ___ un supermercado.", "en", ["a", "de"], "**convertirse en**.", "convertirse"],
+  ["basica", "escribir", 9, "es10-eleccion", "Выбор — как по-испански? Напиши.", "No sé qué hacer: es una ___ difícil.", "elección", [], "**la elección** — «выбор».", "elección"]
+];
+(function () {
+  const M = id => UNIDAD_ES_10.modulos.find(m => m.id === id);
+  ES10_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es10Basicas(out, baraja, lex) {
+  ES10_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES10-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

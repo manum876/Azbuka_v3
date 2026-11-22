@@ -43,7 +43,9 @@ DEF = {"sí": "ESP-00038", "tal": "ESP-05183", "mañana": "ESP-05181", "fuisteis
        # U12 (14/11/2026)
        "embargo": "ESP-00218", "dile": "ESP-00024", "dártelos": "ESP-00059", "déjame": "ESP-00073", "pensarlo": "ESP-00072", "usarlas": "ESP-00205", "venderlo": "ESP-00423",
        # U13 (20/11/2026)
-       "visto": "ESP-00034", "equivocarme": "ESP-00802", "oírlo": "ESP-00131", "quedarme": "ESP-00225"}
+       "visto": "ESP-00034", "equivocarme": "ESP-00802", "oírlo": "ESP-00131", "quedarme": "ESP-00225",
+       # Revisión general (22/11/2026): formas con pronombre pegado que no se enlazaban
+       "devuélveselo": "ESP-00786", "conocerla": "ESP-00127"}
 # Nombres propios de varias palabras que no están en el léxico (sus palabras no se enlazan)
 PROPIOS_VARIAS = ["Buenos Aires"]
 # Nombres de personas (no van al léxico). Los países y las ciudades sí: con mayúscula se usa la entrada propia.
@@ -274,8 +276,8 @@ FRASES = [
     ["FRE-147", "resolver", "¡Ojalá!", "Хоть бы! / Дай бог!", "", "Короткий ответ, когда очень хочется, чтобы что-то случилось. Полная фраза — с subjuntivo: **¡Ojalá haga sol!**", 11],
     ["FRE-148", "resolver", "¡Que te mejores!", "Выздоравливай!", "", "Тому, кто болеет. **que** + subjuntivo — пожелание.", 11],
     ["FRE-149", "resolver", "¡Que lo pases bien!", "Хорошо тебе провести время!", "", "Тому, кто идёт на праздник или едет отдыхать. С usted: **¡Que lo pase bien!**", 11],
-    ["FRE-150", "resolver", "No se preocupe.", "Не волнуйтесь.", "formal", "С usted — imperativo de usted: **no se preocupe**. С ты: **no te preocupes**.", 11],
-    ["FRE-151", "resolver", "Le escribo para…", "Пишу вам, чтобы…", "formal", "Начало официального письма после «Estimado/a…»: **Le escribo para informarle de un problema.**", 11],
+    ["FRE-150", "resolver", "No se preocupe.", "Не волнуйтесь.", "usted", "С usted — imperativo de usted: **no se preocupe**. С ты: **no te preocupes**.", 11],
+    ["FRE-151", "resolver", "Le escribo para…", "Пишу вам, чтобы…", "usted", "Начало официального письма после «Estimado/a…»: **Le escribo para informarle de un problema.**", 11],
     ["FRE-152", "resolver", "Un saludo.", "С приветом. / Всего доброго.", "", "Конец письма или сообщения: вежливо, но не так официально, как **Atentamente**.", 11],
     ["FRE-153", "resolver", "¡Te echo de menos!", "Я по тебе скучаю!", "", "**echar de menos** — скучать по кому-то (в Испании). Тот, по кому скучают, — после глагола: **Echo de menos a mi familia.**", 11],
     ["FRE-154", "opinar", "¡Ni hablar!", "Ни за что! / Об этом не может быть и речи!", "", "Резко отказаться или не согласиться. Между друзьями и дома.", 12],

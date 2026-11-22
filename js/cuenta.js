@@ -94,7 +94,7 @@ const AZ_CUENTA_CONFIG = {
     let tema = "oscuro"; try { tema = JSON.parse(localStorage.getItem("az_theme") || '"dark"') === "light" ? "claro" : "oscuro"; } catch (e) {}
     let ultimo = null; try { ultimo = JSON.parse(localStorage.getItem("az_ultimo") || "null"); } catch (e) {}
     const pantalla = (typeof window.azFuenteActual === "function" && (() => { try { return window.azFuenteActual(); } catch (e) { return ""; } })())
-      || String(document.title || "").replace(/^Азбука\s*[—-]\s*/, "") || location.pathname.split("/").pop();
+      || String(document.title || "").replace(/^(Азбука|Abecé)\s*[—·-]\s*/, "") || location.pathname.split("/").pop();
     const dispositivo = so + " · " + nav + (instalada ? " · app instalada" : " · navegador") + " · " + innerWidth + "×" + innerHeight + " · tema " + tema + (navigator.onLine ? "" : " · sin conexión");
     const ctx = { dispositivo, ua, ultimo };
     if (ERRS.length) ctx.errores = ERRS.join("\n");

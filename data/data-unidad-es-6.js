@@ -1241,6 +1241,7 @@ Object.assign(ES6_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1
    corresponde, con una sección corta de teoría y sus ejercicios; no cambia el orden de
    los módulos ni lo que ya había. Formato de ES6_BASICAS:
    [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+Object.assign(ES6_ID_FIJO, {"este·sust": "ESP-01431"});
 const ES6_BASICAS_MOD = [
   ["es6m2", ["vuelta"], null],
   ["es6m3", ["a través de"], {
@@ -1271,6 +1272,46 @@ const ES6_BASICAS_MOD = [
       { es: "Tienes la cara roja: ¿tienes fiebre?", ru: "У тебя красное лицо: у тебя температура?" }
     ],
     ojo: "«Я сажусь» тоже звучит **me siento** (от другого глагола). Что имеется в виду, понятно по смыслу."
+  }],
+  /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
+  ["es6m4", ["norte", "sur", "este·sust", "oeste", "señal"], {
+    id: "es6-norte",
+    titulo: "Norte, sur, este, oeste · la señal",
+    texto: "Стороны света: **el norte** — север, **el sur** — юг, **el este** — восток, **el oeste** — запад. Все мужского рода: **en el norte de España, al sur de Madrid**.\n\n**la señal** — «знак, сигнал»: дорожный знак, сигнал телефона (**No tengo señal** — нет сети).",
+    ejemplos: [
+      { es: "Barcelona está en el este de España.", ru: "Барселона — на востоке Испании." },
+      { es: "Sigue la señal hasta la estación.", ru: "Иди по указателю до вокзала." },
+      { es: "En el metro no tengo señal.", ru: "В метро у меня нет сети." }
+    ],
+    ojo: "**este** — это ещё и «этот». Восток — существительное: **el este**."
+  }],
+  ["es6m2", ["asiento"], {
+    id: "es6-asiento",
+    titulo: "El asiento",
+    texto: "**el asiento** — «место, сиденье» в транспорте: **¿Está libre este asiento?** — это место свободно? От **sentarse** — садиться.",
+    ejemplos: [
+      { es: "Perdona, ¿está libre este asiento?", ru: "Извини, это место свободно?" }
+    ]
+  }],
+  ["es6m8", ["piel", "cuello", "respirar"], {
+    id: "es6-piel",
+    titulo: "La piel, el cuello · respirar",
+    texto: "Ещё о теле: **la piel** — кожа (женский род!), **el cuello** — шея. **respirar** — «дышать»: **Respira hondo** — дыши глубже, **No puedo respirar bien** — мне трудно дышать.",
+    ejemplos: [
+      { es: "Me duele el cuello.", ru: "У меня болит шея." },
+      { es: "Tienes la piel roja: es el sol.", ru: "У тебя красная кожа: это от солнца." },
+      { es: "Respira despacio.", ru: "Дыши медленно." }
+    ]
+  }],
+  ["es6m9", ["enfermedad", "paciente"], {
+    id: "es6-enfermedad",
+    titulo: "La enfermedad · el paciente",
+    texto: "**la enfermedad** — «болезнь» (от **enfermo** — больной). **el / la paciente** — «пациент, пациентка»: одно слово для обоих родов, род показывает артикль.",
+    ejemplos: [
+      { es: "La gripe es una enfermedad común en invierno.", ru: "Грипп — частая болезнь зимой." },
+      { es: "La doctora tiene muchos pacientes hoy.", ru: "У врача сегодня много пациентов." }
+    ],
+    ojo: "**paciente** — ещё и «терпеливый»: **Es muy paciente**."
   }]
 ];
 const ES6_BASICAS = [
@@ -1283,7 +1324,18 @@ const ES6_BASICAS = [
   ["cuerpo", "elegir", 8, "es6-sentirse", "Что подходит?", "El médico escucha el ___.", "corazón", ["pelo", "pie"], "**el corazón** — «сердце».", "corazón"],
   ["cuerpo", "elegir", 8, "es6-sentirse", "Что подходит?", "La ___ es roja.", "sangre", ["cara", "nariz"], "**la sangre** — «кровь».", "sangre"],
   ["enfermo", "elegir", 8, "es6-sentirse", "Тебе плохо. Как сказать?", "", "Me siento mal.", ["Siento mal.", "Me siente mal."], "**sentirse**, я — **me siento**.", "sentirse"],
-  ["respuesta", "elegir", 8, "es6-sentirse", "Тебе говорят: что ответишь?", "¿Cómo te sientes hoy?", "Me siento bien, gracias.", ["Siento bien, gracias.", "Me sientes bien, gracias."], "**Me siento bien.**", "sentirse"]
+  ["respuesta", "elegir", 8, "es6-sentirse", "Тебе говорят: что ответишь?", "¿Cómo te sientes hoy?", "Me siento bien, gracias.", ["Siento bien, gracias.", "Me sientes bien, gracias."], "**Me siento bien.**", "sentirse"],
+  ["basica", "elegir", 4, "es6-norte", "Что подходит?", "Sevilla está en el ___ de España.", "sur", ["norte", "señal"], "Севилья — на юге: **el sur**.", "sur"],
+  ["basica", "elegir", 4, "es6-norte", "Что подходит?", "Galicia está en el ___ de España.", "norte", ["sur", "este"], "Галисия — на севере: **el norte**.", "norte"],
+  ["basica", "elegir", 4, "es6-norte", "Восток — как по-испански?", "", "el este", ["el oeste", "el norte"], "**el este** — «восток».", "este·sust"],
+  ["basica", "elegir", 4, "es6-norte", "Запад — как по-испански?", "", "el oeste", ["el este", "el sur"], "**el oeste** — «запад».", "oeste"],
+  ["basica", "elegir", 4, "es6-norte", "Телефон не ловит. Что скажешь?", "", "No tengo señal.", ["No tengo signo.", "No hay la señal."], "Сеть, сигнал телефона — **la señal**.", "señal"],
+  ["basica", "elegir", 2, "es6-asiento", "В автобусе ты хочешь сесть. Что спросишь?", "", "¿Está libre este asiento?", ["¿Es libre este asiento?", "¿Está libre esta asiento?"], "Свободно ли — **estar libre**; **el asiento** — мужской род.", "asiento"],
+  ["basica", "elegir", 8, "es6-piel", "Что подходит?", "Me duele el ___: no puedo mover la cabeza.", "cuello", ["piel", "pie"], "Шея — **el cuello**.", "cuello"],
+  ["basica", "elegir", 8, "es6-piel", "Что подходит?", "Con el sol, la ___ está roja.", "piel", ["cuello", "pelo"], "**la piel** — «кожа», женский род.", "piel"],
+  ["basica", "escribir", 8, "es6-piel", "Дышать — как по-испански? Напиши.", "Tengo tos y no puedo ___ bien.", "respirar", [], "**respirar** — «дышать».", "respirar"],
+  ["basica", "elegir", 9, "es6-enfermedad", "Что подходит?", "La gripe es una ___.", "enfermedad", ["enferma", "paciente"], "Болезнь — **la enfermedad**.", "enfermedad"],
+  ["basica", "elegir", 9, "es6-enfermedad", "Что подходит?", "El médico habla con ___.", "la paciente", ["el paciente enferma", "la pacienta"], "**paciente** не меняется: **el paciente / la paciente**.", "paciente"]
 ];
 (function () {
   const M = id => UNIDAD_ES_6.modulos.find(m => m.id === id);

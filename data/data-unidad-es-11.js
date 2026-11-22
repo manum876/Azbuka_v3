@@ -1,4 +1,4 @@
-const ES11_V = {"1":["ojalá","temer","desear","rogar","cierto","injusto","lógico"],"2":["entregar","devolver","cancelar","confirmar","informar","comunicar","traer","tocar","olvidar"],"3":["prohibir","notificar","consultar","aclarar"],"4":["imprescindible", "conveniente", "urgente", "raro", "extraño", "evidente", "terrible", "fatal"],"5":["alegrar","alegrarse","sorprender","sorprenderse","preocuparse","sentir","lamentar","dudar","negar","culpa","molesto","molestia","culpable","responsable","harto","mentir"],"6":["en cuanto", "plazo", "retraso", "retrasar", "puntual", "mensual", "anual"],"7":["cola","turno","permiso","norma","ley","multa","derecho","obligación","condición","regla","cuidado","peligro","peligroso","seguridad","prisa","calma","paciencia"],"8":["vivienda","alquiler","casero","propietario","inquilino","comunidad","vecindario","portero","portal","buzón","cerradura","tubería","aire","electricidad","horno","mueble","fuga","ruido","basura","contenedor","fianza","roto","estropear","estropearse","arreglar","reparar","reparación","técnico","instalar","instalación","revisar","revisión","presupuesto","mantenimiento","obra","avería","calefacción","aire acondicionado","grifo","enchufe","bombilla","gotear","mudanza","electrodoméstico","wifi","apagar","encender","romperse","limpieza","compartir","agencia","visita","quitar"],"9":["trámite","documento","certificado","ayuntamiento","firma","sello","requisito","renovar","caducar","copia","fotocopia","original","rellenar","ventanilla","residencia","oficial","público","privado","gratuito","gratis","transferencia","cajero","ingresar","retirar","pago","recibo","contraseña","código","usuario","conexión"],"10":["hoja","queja","quejarse","reclamar","reclamación","devolución","factura","garantía","solución","solucionar","resolver","equivocarse","equivocación","estimado","saludo","adjunto","adjuntar","asunto","atentamente","agradecer","disculpa","disculparse","envío","entrega","mensajero","objeto","perdido","urgencia","resultado","daño","aviso","anular"],"a8":["gotera","humedad","lavavajillas","fregadero","cerrajero"],"a9":["préstamo","hipoteca","comisión","suministro","saldo","padrón"],"a10":["denuncia","denunciar","robo","emergencia","incendio","fuego","humo"]};
+const ES11_V = {"1":["ojalá","temer","desear","rogar","cierto","injusto","lógico"],"2":["entregar","devolver","cancelar","confirmar","informar","comunicar","traer","tocar","olvidar"],"3":["prohibir","notificar","consultar","aclarar"],"4":["imprescindible","conveniente","urgente","raro","extraño","evidente","terrible","fatal"],"5":["alegrar","alegrarse","sorprender","sorprenderse","preocuparse","sentir","lamentar","dudar","negar","culpa","molesto","molestia","culpable","responsable","harto","mentir","echar de menos"],"6":["en cuanto","plazo","retraso","retrasar","puntual","mensual","anual"],"7":["cola","turno","permiso","norma","ley","multa","derecho","obligación","condición","regla","cuidado","peligro","peligroso","seguridad","prisa","calma","paciencia"],"8":["vivienda","alquiler","casero","propietario","inquilino","comunidad","vecindario","portero","portal","buzón","cerradura","tubería","aire","electricidad","horno","mueble","fuga","ruido","basura","contenedor","fianza","roto","estropear","estropearse","arreglar","reparar","reparación","técnico","instalar","instalación","revisar","revisión","presupuesto","mantenimiento","obra","avería","calefacción","aire acondicionado","grifo","enchufe","bombilla","gotear","mudanza","electrodoméstico","wifi","apagar","encender","romperse","limpieza","compartir","agencia","visita","quitar"],"9":["trámite","documento","certificado","ayuntamiento","firma","sello","requisito","renovar","caducar","copia","fotocopia","original","rellenar","ventanilla","residencia","oficial","público","privado","gratuito","gratis","transferencia","cajero","ingresar","retirar","pago","recibo","contraseña","código","usuario","conexión"],"10":["hoja","queja","quejarse","reclamar","reclamación","devolución","factura","garantía","solución","solucionar","resolver","equivocarse","equivocación","estimado","saludo","adjunto","adjuntar","asunto","atentamente","agradecer","disculpa","disculparse","envío","entrega","mensajero","objeto","perdido","urgencia","resultado","daño","aviso","anular"],"a8":["gotera","humedad","lavavajillas","fregadero","cerrajero"],"a9":["préstamo","hipoteca","comisión","suministro","saldo","padrón"],"a10":["denuncia","denunciar","robo","emergencia","incendio","fuego","humo"]};
 
 /* ============================================================
    DATA-UNIDAD-ES-11.JS — Abecé · Урок 11: Решаем проблемы
@@ -16,7 +16,8 @@ const ES11_V = {"1":["ojalá","temer","desear","rogar","cierto","injusto","lógi
    Decisiones de Manu (13/11/2026): 34 entradas nuevas (sin cita previa ni
    empadronarse); toda la ampliación; sin nota cultural nueva; dos
    personajes nuevos —el casero y la funcionaria— con las voces de siempre;
-   «echar de menos» es una fórmula: va como frase (FRE-153); desafío
+   «echar de menos»: frase FRE-153 y, desde el 22/11/2026, también palabra del
+   módulo 5 (es una expresión del léxico, ESP-02990); desafío
    «Желание дня».
    ============================================================ */
 
@@ -39,7 +40,6 @@ const es11Fut = es11Tiempo("fut");
 function es11Imp(inf) { const v = es11Verbo(inf); return v && v.impTu ? v.impTu : ""; }
 function es11ImpNeg(inf) { const f = es11Subj(inf, 1); return f ? "no " + f : ""; }
 function es11ImpUd(inf) { const v = es11Verbo(inf); return v && !v.se && v.subj ? v.subj[2] : ""; }
-const es11Tabla2 = (a, b, fn) => ES11_PERS.map(([p, r], i) => [{ es: p, ru: r }, { es: fn(a, i) + " · " + fn(b, i) }]);
 
 const UNIDAD_ES_11 = {
   id: 11,
@@ -224,7 +224,8 @@ const UNIDAD_ES_11 = {
           ejemplos: [
             { es: "Me alegra que te guste el piso.", ru: "Я рад, что тебе нравится квартира." },
             { es: "Me molesta que haya tanto ruido.", ru: "Меня раздражает, что так шумно." },
-            { es: "¡Qué pena que no puedas venir!", ru: "Как жаль, что ты не можешь прийти!" }
+            { es: "¡Qué pena que no puedas venir!", ru: "Как жаль, что ты не можешь прийти!" },
+            { es: "Te echo de menos.", ru: "Я по тебе скучаю." }
           ],
           chequeo: [
             { pide: "Me preocupa que no ___ nada. (él, decir)", opciones: ["diga", "dice", "dirá"], ok: "diga", por: "Чувство — subjuntivo: **diga**." }
@@ -678,6 +679,7 @@ function ejerciciosUnidadEs11() {
   });
   /* 10. Profundización y formas */
   es11Prof(out, baraja, lex);
+  if (typeof es11Basicas === "function") es11Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -1022,3 +1024,60 @@ function es11Prof(out, baraja, lex) {
   }));
 }
 UNIDAD_ES_11.modulos.forEach(m => (m.secciones || []).forEach(s => { if (ES11_MAS[s.id] && !s.mas) s.mas = ES11_MAS[s.id]; }));
+
+/* ── Palabras frecuentes, segunda ronda (Manu, 22/11/2026) ──
+   claude/PROPUESTA_FRECUENTES_2_ABECE.md. Como las palabras básicas de las U2–U7 (19/11/2026):
+   entran en la lista del módulo que les corresponde, con una sección corta de teoría y sus
+   ejercicios; no cambia el orden de los módulos ni lo que ya había. Formato de ES11_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES11_BASICAS_MOD = [
+  /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
+  ["es11m8", ["colgar", "pegar", "mover", "meter", "tirar"], {
+    id: "es11-colgar",
+    titulo: "Colgar, mover, tirar",
+    texto: "Глаголы для дома: **colgar** — «вешать» (o → ue: **cuelgo**; и «класть трубку»), **pegar** — «клеить», **mover** — «двигать» (o → ue: **muevo**), **meter** — «класть внутрь, засовывать», **tirar** — «бросать, выбрасывать»: **tirar la basura** — выносить мусор.",
+    ejemplos: [
+      { es: "¿Puedes ayudarme a mover el sofá?", ru: "Поможешь мне передвинуть диван?" },
+      { es: "No cuelgues la ropa en el balcón: va a llover.", ru: "Не вешай бельё на балконе: будет дождь." },
+      { es: "Mete la leche en la nevera y tira la basura, por favor.", ru: "Положи молоко в холодильник и вынеси мусор, пожалуйста." }
+    ],
+    ojo: "**colgar** в subjuntivo: **cuelgue** (с **u**, чтобы сохранить звук [г])."
+  }],
+  ["es11m4", ["hacer falta"], {
+    id: "es11-hace-falta",
+    titulo: "(No) hace falta que…",
+    texto: "**hacer falta** — «быть нужным»: **Hace falta paciencia** — нужно терпение; **Me hace falta un ordenador** — мне нужен компьютер. С другим лицом — **que + subjuntivo**: **No hace falta que vengas** — тебе не нужно приходить.",
+    ejemplos: [
+      { es: "No hace falta que me llames: te escribo yo.", ru: "Не нужно мне звонить: я сама тебе напишу." },
+      { es: "Para este trámite hace falta el pasaporte.", ru: "Для этой процедуры нужен паспорт." }
+    ]
+  }]
+];
+const ES11_BASICAS = [
+  ["basica", "elegir", 8, "es11-colgar", "Что подходит?", "¿Dónde ___ los cuadros? ¿En el salón?", "cuelgo", ["colgo", "cuelga"], "**colgar**, я — **cuelgo** (o → ue).", "colgar"],
+  ["basica", "elegir", 8, "es11-colgar", "Что подходит?", "Necesito ___ el sofá para limpiar.", "mover", ["meter", "pegar"], "Передвинуть — **mover**.", "mover"],
+  ["basica", "elegir", 8, "es11-colgar", "Что подходит?", "___ la comida en la nevera, por favor.", "Mete", ["Tira", "Pega"], "Положить внутрь — **meter**: **mete**.", "meter"],
+  ["basica", "elegir", 8, "es11-colgar", "Как сказать «вынеси мусор»?", "", "Tira la basura.", ["Pega la basura.", "Mueve la basura."], "**tirar la basura** — выносить мусор.", "tirar"],
+  ["basica", "escribir", 8, "es11-colgar", "Клеить — как по-испански? Напиши.", "Voy a ___ esta foto en la pared.", "pegar", [], "**pegar** — «клеить».", "pegar"],
+  ["basica", "elegir", 4, "es11-hace-falta", "Что подходит?", "No hace falta que ___ mañana.", "vengas", ["vienes", "venir"], "**No hace falta que** + subjuntivo: **vengas**.", "hacer falta"]
+];
+(function () {
+  const M = id => UNIDAD_ES_11.modulos.find(m => m.id === id);
+  ES11_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es11Basicas(out, baraja, lex) {
+  ES11_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES11-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

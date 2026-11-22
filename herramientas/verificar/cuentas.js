@@ -101,7 +101,7 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  chk(/Проверь почту/.test(await d4.p.locator('#az-cuenta .tit').innerText()), 'el paso del código también en ruso');
  await d4.p.fill('#azc-cod','123456'); await d4.p.waitForTimeout(1500);
  chk(await d4.p.evaluate(()=>localStorage.getItem('az_cuenta_dir'))==='abece', 'al entrar, la app guarda la dirección de la cuenta');
- chk(/Азбука/.test(await d4.p.locator('header').innerText()), 'mientras Abecé esté bloqueada, una alumna de Abecé ve Azbuka');
+ chk(/Abecé/.test(await d4.p.locator('header').innerText()), 'Abecé está abierta (04/11/2026): una alumna de Abecé ve Abecé');
  // Abecé en construcción (22/10/2026): el admin la prueba y vuelve
  chk(await p.locator('text=Abecé en construcción').count()>0, 'el admin ve «Abecé en construcción»');
  await p.click('button:has-text("Abecé (prueba)")'); await p.waitForLoadState('networkidle'); await p.waitForTimeout(1000);

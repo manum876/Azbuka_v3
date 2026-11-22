@@ -77,8 +77,32 @@ function recorrer(x, pagina, quien, vistos) {
   Object.keys(x).forEach(k => { if (k !== "bot") recorrer(x[k], pagina, quien, vistos); });
 }
 /* Cadenas sueltas de un archivo (también las que el código arma, como «Я из …») */
+/* Lo que es de Abecé no se oye en Azbuka (revisión general, 22/11/2026): se saca del texto
+   el bloque de la otra dirección —«ES ? { … }», «ABECE ? { … }», el diccionario de pantalla
+   TX_RU— y las cadenas «ES ? "…"» antes de buscar ruso. */
+function sinAbece(src) {
+  const cierre = i => {   /* desde una «{», hasta su «}» (saltando cadenas) */
+    let d = 0, q = null;
+    for (let k = i; k < src.length; k++) {
+      const ch = src[k];
+      if (q) { if (ch === "\\") k++; else if (ch === q) q = null; continue; }
+      if (ch === '"' || ch === "'" || ch === "`") q = ch;
+      else if (ch === "{") d++;
+      else if (ch === "}" && --d === 0) return k;
+    }
+    return src.length - 1;
+  };
+  const rx = /\b(?:ES|ABECE|AZ_HOY_ES)\s*\?\s*\{|\bconst TX_RU\s*=\s*\{/g;
+  let m;
+  while ((m = rx.exec(src))) {
+    const i = m.index + m[0].length - 1, j = cierre(i);
+    src = src.slice(0, i) + "{}" + src.slice(j + 1);
+    rx.lastIndex = i + 2;
+  }
+  return src.replace(/\b(?:ES|ABECE|AZ_HOY_ES)\s*\?\s*("(?:[^"\\\n]|\\.)*"|'(?:[^'\\\n]|\\.)*')/g, "ES ? \"\"");
+}
 function literales(f, pagina) {
-  const src = leer(f);
+  const src = sinAbece(leer(f));
   for (const m of src.matchAll(/"((?:[^"\\\n]|\\.)*)"|'((?:[^'\\\n]|\\.)*)'/g)) {
     let s = m[1] != null ? m[1] : m[2];
     if (!/[а-яё]/i.test(s)) continue;

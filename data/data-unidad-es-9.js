@@ -34,7 +34,6 @@ const es9Indef = es9Tiempo("indef");
 const es9Pres = es9Tiempo("pres");
 function es9Estaba(inf, p) { const v = es9Verbo(inf); if (!v || !v.ger) return ""; return ES9_ESTAR[p] + " " + v.ger; }
 const es9Tabla = (inf, fn) => ES9_PERS.map(([p, r], i) => [{ es: p, ru: r }, { es: fn(inf, i) }]);
-const es9Tabla3 = inf => [[{ es: "él / ella", ru: "он / она" }, { es: es9Indef(inf, 2) }], [{ es: "ellos / ellas", ru: "они" }, { es: es9Indef(inf, 5) }]];
 
 const UNIDAD_ES_9 = {
   id: 9,
@@ -645,6 +644,7 @@ function ejerciciosUnidadEs9() {
 
   /* 12. Profundización y formas (13/11/2026) */
   if (typeof es9Prof === "function") es9Prof(out, baraja, lex);
+  if (typeof es9Basicas === "function") es9Basicas(out, baraja, lex);
 
   out.forEach(ex => { if (ex.lex) ex.items = ex.lex.map(id => "lex:" + id); });
   return out;
@@ -1013,3 +1013,49 @@ function es9Prof(out, baraja, lex) {
   });
 }
 Object.assign(ES9_MEZCLA, { natural: 2, porque: 1, oido: 1, par: 1, descubrir: 1, cadena: 1, diagnostico: 1, desarmar: 1, "imperf-forma": 2, "indef-cambio-forma": 1, "estaba-forma": 1 });
+
+/* ── Palabras frecuentes, segunda ronda (Manu, 22/11/2026) ──
+   claude/PROPUESTA_FRECUENTES_2_ABECE.md. Como las palabras básicas de las U2–U7 (19/11/2026):
+   entran en la lista del módulo que les corresponde, con una sección corta de teoría y sus
+   ejercicios; no cambia el orden de los módulos ni lo que ya había. Formato de ES9_BASICAS:
+   [tipo, forma, módulo, regla, consigna, frase o texto grande, correcta, otras opciones, explicación, palabra] */
+const ES9_BASICAS_MOD = [
+  /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
+  ["es9m8", ["saltar", "oler", "golpe", "quieto"], {
+    id: "es9-saltar",
+    titulo: "Saltó, olía · un golpe",
+    texto: "Для историй: **saltar** — «прыгать» (**el perro saltó** — собака прыгнула); **oler** — «пахнуть»: корень **o → hue**: **huele, olía** (**La casa olía a pan** — в доме пахло хлебом).\n\n**el golpe** — «удар»: **De repente, oímos un golpe**. **quieto** — «неподвижный»: **estar quieto** — не двигаться; **¡Estate quieto!** — не вертись!",
+    ejemplos: [
+      { es: "De repente, el gato saltó a la mesa.", ru: "Вдруг кошка прыгнула на стол." },
+      { es: "La cocina de mi abuela siempre olía a café.", ru: "На кухне у бабушки всегда пахло кофе." },
+      { es: "Oímos un golpe y todos nos quedamos quietos.", ru: "Мы услышали удар, и все замерли." }
+    ],
+    ojo: "**oler** в настоящем: **huelo, hueles, huele** — с **h** в начале."
+  }]
+];
+const ES9_BASICAS = [
+  ["basica", "elegir", 8, "es9-saltar", "Что подходит?", "De repente, el perro ___ por la ventana.", "saltó", ["saltaba", "salió"], "Одно действие в истории — indefinido: **saltó**.", "saltar"],
+  ["basica", "elegir", 8, "es9-saltar", "Что подходит?", "Cuando era pequeño, la casa de mi abuela ___ a pan.", "olía", ["huele", "olió"], "Описание в прошлом — imperfecto: **olía**.", "oler"],
+  ["basica", "escribir", 8, "es9-saltar", "Удар — как по-испански? Напиши.", "Estaba durmiendo cuando oí un ___.", "golpe", [], "**el golpe** — «удар».", "golpe"],
+  ["basica", "elegir", 8, "es9-saltar", "Что подходит?", "Los niños no estaban ___: corrían por toda la casa.", "quietos", ["quietas", "quieto"], "**los niños** — мужской род, мн. ч.: **quietos**.", "quieto"]
+];
+(function () {
+  const M = id => UNIDAD_ES_9.modulos.find(m => m.id === id);
+  ES9_BASICAS_MOD.forEach(([id, vocab, seccion]) => {
+    const m = M(id); if (!m) return;
+    if (vocab.length) m.vocab = (m.vocab || []).concat(vocab.filter(w => (m.vocab || []).indexOf(w) < 0));
+    if (seccion) m.secciones = (m.secciones || []).concat([seccion]);
+  });
+})();
+function es9Basicas(out, baraja, lex) {
+  ES9_BASICAS.forEach(([tipo, forma, mod, regla, pide, grande, ok, otras, exp, w], i) => {
+    const hueco = grande && grande.indexOf("___") >= 0;
+    const oir = hueco ? grande.replace("___", ok) : ok;
+    const ex = { id: "ES9-bas-" + i, tipo, forma, dificultad: forma === "escribir" ? 3 : 2, modulo: mod, regla: regla || undefined, grupo: "bas-" + i,
+      lex: w ? lex(w) : undefined, pide, oir, explicacion: exp };
+    if (grande) ex.grande = grande;
+    if (forma === "elegir") { ex.opciones = baraja([ok].concat(otras), i + 211); ex.correcta = ok; }
+    else { ex.esperadas = [ok].concat(otras || []).concat(hueco ? [oir] : []); ex.idioma = "es"; if (hueco) { ex.foco = true; ex.completa = oir; } }
+    out.push(ex);
+  });
+}

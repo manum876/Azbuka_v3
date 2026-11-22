@@ -53,7 +53,6 @@ const OBJETIVO_U4 = LEXICON_COMER.filter(e => (e.introducedIn || []).indexOf(4) 
 const AVISO_ACENTOS = "En Azbuka, los acentos (´) son solo una ayuda para leer: en ruso no se escriben, así que no hace falta que los pongas. La е vale por ё.";
 const sin4 = D4.sin;
 const sust4 = ru => D4.sust[sin4(ru)];
-const verb4 = ru => D4.verb[sin4(ru)];
 
 /* Dorso de las tarjetas: el acusativo de los sustantivos, las cuatro formas de los verbos */
 function detalleTarjeta(e) {
