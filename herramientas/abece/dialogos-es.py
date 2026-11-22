@@ -342,7 +342,7 @@ DIALOGOS = [
         ["ana", "Sí, hablo ruso, inglés y un poco de español.", "Да, я говорю по-русски, по-английски и немного по-испански."],
         ["pablo", "¡Hablas muy bien!", "Ты очень хорошо говоришь!"],
         ["ana", "Gracias. ¿Y tú? ¿Eres de Barcelona?", "Спасибо. А ты? Ты из Барселоны?"],
-        ["pablo", "No, soy de Madrid. Pero vivo en Barcelona.", "Нет, я из Мадрида. Но живу в Барселоне."]], 2],
+        ["pablo", "No, soy de Madrid. Vivo en Madrid.", "Нет, я из Мадрида. Живу в Мадриде."]], 2],
     ["DLE-006", "Сколько тебе лет?", "¿Cuántos años tienes?", ["lucia", "ana"], [
         ["lucia", "Ana, ¿cuántos años tienes?", "Аня, сколько тебе лет?"],
         ["ana", "Tengo veintiocho años. ¿Y tú?", "Мне двадцать восемь. А тебе?"],

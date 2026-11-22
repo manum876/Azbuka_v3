@@ -142,13 +142,15 @@ var AZ_CATALOGO = {
     ],
     /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo
        orden y con el mismo color que su equivalente de Azbuka, glifo de dos
-       letras latinas. Se suman a medida que se construyen (27/10/2026: Diccionario, Alfabeto, Verbos y Gramática; 12/11/2026: Диалоги).
+       letras latinas. Se suman a medida que se construyen (27/10/2026: Diccionario, Alfabeto, Verbos y Gramática; 12/11/2026: Диалоги; 20/11/2026: Чтение; 21/11/2026: Болтаем с Лусией).
        Orden final: Словарь · Алфавит и произношение · Диалоги · Чтение ·
        Болтаем с Лусией · Глаголы · Грамматика · Тетрадь. */
     modulos: [
       { id: "diccionario", title: "Словарь", desc: "Весь словарь, по темам и частям речи", href: "ficha.html", icon: "orange", glyph: "Dc" },
       { id: "alfabeto", title: "Алфавит и произношение", desc: "Буквы, звуки и письмо от руки", href: "alfabeto.html", icon: "yellow", glyph: "Ab" },
       { id: "dialogos", title: "Диалоги", desc: "Разговоры, полезные фразы и культура Испании", href: "dialogos.html", icon: "lime", glyph: "Dl" },
+      { id: "lecturas", title: "Чтение", desc: "Тексты для чтения и понимания, с вопросами", href: "lecturas.html", icon: "green", glyph: "Le" },
+      { id: "lucia", title: "Болтаем с Лусией", desc: "Переписка с Лусией по-испански", href: "lucia.html", icon: "cyan", glyph: "Lu" },
       { id: "verbos", title: "Глаголы", desc: "Спряжение всех глаголов словаря", href: "verbos.html", icon: "blue", glyph: "Vb" },
       { id: "gramatica", title: "Грамматика", desc: "Род, число, артикли и местоимения: формы и таблицы", href: "gramatica.html", icon: "purple", glyph: "Gr" },
       { id: "cuaderno", title: "Тетрадь", desc: "Твои заметки и то, что ты сохраняешь в приложении", href: "cuaderno.html", icon: "pink", glyph: "Cu" },

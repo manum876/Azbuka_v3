@@ -44,10 +44,10 @@ const AZ_PRECACHE = [
   "./", "ajustes.html", "alfabeto.html", "azbuka-1.html", "azbuka-2.html", "azbuka-3.html", "azbuka-4.html", "azbuka-5.html", "azbuka-6.html", "azbuka-7.html", "azbuka-8.html", "azbuka-9.html", "azbuka-10.html", "azbuka-11.html", "azbuka-12.html", "azbuka-13.html", "azbuka-14.html",
   "azbuka-index-1.html", "casos.html", "cuaderno.html", "dialogos.html", "ficha.html",
   "index.html",
-  "lecturas.html", "data/data-lecturas.js", "masha.html", "data/data-masha.js",
+  "lecturas.html", "data/data-lecturas.js", "masha.html", "data/data-masha.js", "lucia.html", "js/charla.js", "js/charla-es.js",
   "repaso.html", "verbos.html", "gramatica.html", "abece-1.html", "abece-2.html", "abece-3.html", "abece-4.html", "abece-5.html", "abece-6.html", "abece-7.html", "abece-8.html", "abece-9.html", "abece-10.html", "abece-11.html", "abece-12.html", "abece-13.html", "abece-14.html",
   /* Abecé, abierta el 04/11/2026: sus datos y su código también se guardan al instalar */
-  "data/data-lexicon-es.js", "data/data-formas-es.js", "data/data-verbos-es.js", "data/data-alfabeto-es.js", "data/data-dialogos-es.js", "data/data-lecturas-es.js", "data/data-cultura-es.js", "data/data-gramatica-es.js",
+  "data/data-lexicon-es.js", "data/data-formas-es.js", "data/data-verbos-es.js", "data/data-alfabeto-es.js", "data/data-dialogos-es.js", "data/data-lecturas-es.js", "data/data-lucia.js", "data/data-cultura-es.js", "data/data-gramatica-es.js",
   "data/data-unidad-es-1.js", "data/data-unidad-es-2.js", "data/data-unidad-es-3.js", "data/data-unidad-es-4.js", "data/data-unidad-es-5.js", "data/data-unidad-es-6.js", "data/data-unidad-es-7.js", "data/data-unidad-es-8.js", "data/data-unidad-es-9.js", "data/data-unidad-es-10.js", "data/data-unidad-es-11.js", "data/data-unidad-es-12.js", "data/data-unidad-es-13.js", "data/data-unidad-es-14.js", "js/corrector-es.js", "js/tilde-es.js", "js/verbos-es.js", "manifest.webmanifest", "manifest-abece.webmanifest", "js/avisos.js", "js/hoy.js", "js/burbuja.js",
   "js/core.js", "js/corrector.js", "js/cuenta.js", "js/mano.js", "js/progress.js", "js/shell.js",
   "js/unidad-ui.js", "js/unidad.js", "data/data-alphabet.js", "data/data-casos.js", "data/data-catalogo.js",

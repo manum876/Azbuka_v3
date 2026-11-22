@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Азбука">
+<title>Abecé · Болтаем с Лусией</title>
+<meta name="theme-color" content="#0F0F14">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="stylesheet" href="assets/core.css">
+</head>
+<body>
+<div id="root"></div>
+<script src="assets/preact.js"></script>
+<script src="data/data-catalogo.js"></script>
+<script src="js/core.js"></script>
+<!-- Solo Abecé: el léxico español, sus formas y verbos, los personajes (data-dialogos-es.js)
+     y el guion de Lucía. En Azbuka, la charla es la de Masha. -->
+<script>
+if (AZ_DIRECCION.id !== "abece") location.replace("masha.html");
+else ["data/data-lexicon-es.js", "data/data-formas-es.js", "data/data-verbos-es.js", "data/data-dialogos-es.js", "data/data-lucia.js"]
+  .forEach(src => document.write('<script src="' + src + '"><\/script>'));
+</script>
+<script src="assets/supabase.js"></script>
+<script src="js/cuenta.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/shell.js"></script>
+<script src="js/burbuja.js"></script>
+<script src="js/charla.js"></script>
+<script src="js/charla-es.js"></script>
+<script>
+/* ============================================================
+   LUCIA.HTML — «Болтаем с Лусией» (Abecé, 21/11/2026; Contexto §6.29;
+   claude/PROPUESTA_LUCIA_ABECE.md)
+   El espejo de «Hablar con Masha»: el motor es js/charla.js, las reglas
+   del español js/charla-es.js y el guion data/data-lucia.js (generado
+   desde herramientas/lucia/fuente-lucia.js). Acá solo van los textos
+   de la pantalla, en ruso (borrador para Iván).
+   Guarda az_lucia: { alumno: { S, datos }, temas: { id: { v, f } } }.
+   ============================================================ */
+const TX_LUCIA = {
+  titulo: "Болтаем с Лусией", kicker: n => n + (n % 10 === 1 && n % 100 !== 11 ? " ТЕМА" : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? " ТЕМЫ" : " ТЕМ") + " · A1–B1",
+  desc: "Переписка с Лусией — испанкой, которая преподаёт английский и живёт в Барселоне. Она спрашивает о твоей жизни, а ты можешь спрашивать о её — с тем, что ты уже знаешь из уроков.",
+  items: [["Пиши по-испански", "На испанской клавиатуре телефона или выбери одну из идей."],
+    ["Спрашивай что угодно", "О её семье, работе, городе… А она запомнит, что ты рассказал."],
+    ["Растёт вместе с курсом", "С каждым уроком появляются новые темы."]],
+  charlar: "Поболтать с Лусией", tema: "Тема: ", yaCharlaste: n => " · тем пройдено: " + n,
+  unidad: "Урок ", masAdelante: "Позже", escuchar: "Слушать",
+  gKicker: "Сценарий · Урок ", gIntro: "Весь сценарий темы: что спрашивает Лусия, как она реагирует на разные ответы и что рассказывает о себе.",
+  gComo: "Как Лусия понимает",
+  gReglas: ["Она не ищет точных фраз: узнаёт начало ключевых слов (llam…, viv…, trabaj…) и прощает одну ошибку в длинном слове.",
+    "Тильды для неё не важны: «como» и «cómo» — одно и то же. Подсказку про тильду ты увидишь в «💬 Лучше».",
+    "У каждого шага несколько веток: первая подходящая решает, что она ответит и куда пойдёт разговор.",
+    "Если ты что-то спросишь, она расскажет о себе и вернётся к своему вопросу. Если спросишь «¿Y tú?», ответит про себя.",
+    "Она помнит, и в других разговорах тоже, твоё имя, откуда ты и мужчина ты или женщина.",
+    "Понимает «¿Qué significa…?» и «¿Cómo se dice … en español?»: ищет слово в словаре.",
+    "Если не понимает, говорит об этом и спрашивает ещё раз; со второго раза предлагает воспользоваться идеями."],
+  gRecorrido: "Сценарий", gFin: "Конец разговора", gQueda: "Остаётся на этом шаге", gSalta: "Если ты уже назвал имя, шаг пропускается: ",
+  gIdeas: "Идеи для ответа", gSi: "Если ты ответишь…", gOtroPais: "Другая страна", gNombre: "Любое имя", gSiTeLlamas: "Если тебя зовут ",
+  gATi: "Если ты спросишь в ответ («¿Y tú?»)", gVolver: "Чтобы вернуться к теме", gVida: "Что Лусия рассказывает о себе",
+  gVidaSub: "Об этом можно спросить в любой момент разговора.", gEj: "Например: ", gUtiles: "Фразы, которые она понимает всегда",
+  gAccFin: "→ Конец разговора", gAccRep: "→ Повторяет последнее, медленно и с переводом", gAccVuelve: "→ Возвращается к своему вопросу",
+  gNoEnt: "Если она не понимает",
+  gCasos: [["Не узнаёт ответ", "noEntendi"], ["Ты спрашиваешь то, чего она не знает", "noSe"], ["Ты пишешь кириллицей", "latin"], ["Ты пишешь «привет»", "hola"]],
+  kicker2: "Разговор · Урок ", chTrad: "Перевод", chTr: "Кириллица", chVoz: "Голос", chIdeas: "Идеи",
+  ayuda: "Нажми на сообщение Лусии, чтобы увидеть перевод, или ▶, чтобы послушать ещё раз. Если не понимаешь, напиши ей «No entiendo» или «¿Qué significa…?».",
+  aviso: "Тильда (´) в испанском — часть написания: «está» и «esta» — разные слова. Но если ты её забудешь, Лусия всё равно тебя поймёт.",
+  empezar: "Начать разговор", mejor: "💬 Лучше: ", enLugar: " вместо ", escribiendo: "Лусия печатает",
+  ideasPreg: "Идеи для вопросов", ideasResp: "Идеи для ответа", placeholder: "Пиши по-испански…", enviar: "Отправить",
+  tip: "Используй испанскую клавиатуру телефона (ñ, á, ¿). Можно и диктовать: нажми 🎤 на испанской клавиатуре и говори.", deNuevo: "↺ Начать заново",
+  finKicker: "Конец разговора", sabeDeTi: "Что Лусия знает о тебе", sabesDe: "Что ты знаешь о Лусии",
+  nadaVida: "В этот раз ты ничего не спросил о её жизни.", proxima: "В следующий раз спроси", otroTema: "Другая тема: ",
+  otraVez: "Поболтать ещё раз", todos: "Все темы", tabTemas: "Темы", tabCharla: "Разговор", tabGuion: "Сценарий",
+  notaAlfabeto: "Пиши на испанской клавиатуре телефона.", notaNoEntendio: "Лусия тебя не поняла. Попробуй одну из идей ниже.",
+  nombre: "Имя", mostrarEntrada: "📖 Показать слово",
+};
+if (typeof LUCIA !== "undefined") azCharla({
+  datos: LUCIA, id: "lucia", archivo: "lucia.html", clave: "az_lucia",
+  idioma: AZ_CHARLA_ES, tx: TX_LUCIA,
+  personaje: (typeof DLG_PERSONAJES_ES !== "undefined" && DLG_PERSONAJES_ES.lucia) || { es: "Lucía", ru: "Лусия", genero: "f", desc: "" },
+  modulo: { id: "lucia", glyph: "Lu", icon: "cyan" },
+});
+</script>
+</body>
+</html>

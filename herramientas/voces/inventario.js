@@ -114,15 +114,18 @@ if (GRUPO === "unidades" || GRUPO === "todo") {
     .forEach(([f, pag]) => { if (fs.existsSync(path.join(APP, f))) literales(f, pag); });
   /* Módulo Masha (21/10/2026): cada línea como la dice masha.html (sin emoji ni palabras en
      español entre «»), con las dos formas de {él/ella}. Las líneas con el nombre, el país o
-     una palabra capturada se arman en el momento: suenan con la voz del teléfono. */
+     una palabra capturada se arman en el momento: suenan con la voz del teléfono. Las que
+     solo llevan «, {nombre}» suenan sin el nombre (Manu, 21/11/2026). */
   if (fs.existsSync(path.join(APP, "data/data-masha.js"))) {
     cargar("data/data-masha.js", ["MASHA"]);
     const mashaVoz = s => String(s || "").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}♀♂]/gu, "").replace(/«[^»]*[a-zñ][^»]*»/gi, "").trim();
     const linea = (o, vistos) => {
       if (!o || typeof o !== "object" || vistos.has(o)) return; vistos.add(o);
       if (Array.isArray(o)) return o.forEach(x => linea(x, vistos));
-      if (typeof o.ru === "string" && typeof o.es === "string" && !/\{(nombre|pais|pais_gen|nac|nac_es|x|ru|es)\}/.test(o.ru)) {
-        const alt = [o.ru.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$1"), o.ru.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$2")];
+      /* Con «, {nombre}» y nada más personal: el audio es la frase sin el nombre (21/11/2026) */
+      const ruV = typeof o.ru === "string" && /,\s?\{nombre\}/.test(o.ru) && !/\{(pais|pais_gen|nac|nac_es|x|ru|es)\}/.test(o.ru) ? o.ru.replace(/,\s?\{nombre\}/g, "") : o.ru;
+      if (typeof ruV === "string" && typeof o.es === "string" && !/\{(nombre|pais|pais_gen|nac|nac_es|x|ru|es)\}/.test(ruV)) {
+        const alt = [ruV.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$1"), ruV.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$2")];
         new Set(alt).forEach(t => { const v = mashaVoz(t); if (/[а-яё]/i.test(v)) sumar(v, "masha", "masha"); });
       }
       Object.keys(o).forEach(k => { if (k !== "ideas" && k !== "idea") linea(o[k], vistos); });

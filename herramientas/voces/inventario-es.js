@@ -180,16 +180,18 @@ if (GRUPO === "unidades" || TODO) {
     });
   }
   /* Lucía (espejo de Masha): cada línea { es, ru } como la dice lucia.html, con las dos formas de
-     {cansado/cansada}. Las que llevan el nombre, el país o una palabra capturada se arman en el
-     momento: suenan con la voz del teléfono. */
+     {cansado/cansada}. Las que llevan el país o una palabra capturada se arman en el momento:
+     suenan con la voz del teléfono; las que solo llevan «, {nombre}», sin el nombre (21/11/2026). */
   if (existe("data/data-lucia.js")) {
     cargar("data/data-lucia.js", ["LUCIA"]);
     const luciaVoz = s => String(s || "").replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{200D}♀♂]/gu, "").replace(/«[^»]*[а-яё][^»]*»/gi, "").trim();
     const linea = (o, vistos) => {
       if (!o || typeof o !== "object" || vistos.has(o)) return; vistos.add(o);
       if (Array.isArray(o)) return o.forEach(x => linea(x, vistos));
-      if (typeof o.es === "string" && typeof o.ru === "string" && !/\{(nombre|pais|pais_gen|nac|nac_es|x|ru|es)\}/.test(o.es)) {
-        const alt = [o.es.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$1"), o.es.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$2")];
+      /* Con «, {nombre}» y nada más personal: el audio es la frase sin el nombre (21/11/2026, como Masha) */
+      const esV = typeof o.es === "string" && /,\s?\{nombre\}/.test(o.es) && !/\{(pais|pais_ru|nac|nac_ru|x|ru|es)\}/.test(o.es) ? o.es.replace(/,\s?\{nombre\}/g, "") : o.es;
+      if (typeof esV === "string" && typeof o.ru === "string" && !/\{(nombre|pais|pais_ru|nac|nac_ru|x|ru|es)\}/.test(esV)) {
+        const alt = [esV.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$1"), esV.replace(/\{([^{}/]+)\/([^{}]+)\}/g, "$2")];
         new Set(alt).forEach(t => sumar(luciaVoz(t), "lucia", "lucia"));
       }
       Object.keys(o).forEach(k => { if (k !== "ideas" && k !== "idea") linea(o[k], vistos); });

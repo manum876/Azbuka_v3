@@ -1,0 +1,18 @@
+/* ============================================================
+   DATA-LUCIA.JS — Charla con Lucía, «Болтаем с Лусией» (Abecé, 21/11/2026)
+   ARCHIVO GENERADO: no se edita a mano. La fuente es
+   herramientas/lucia/fuente-lucia.js; después de cambiarla se corre
+   «node herramientas/lucia/armar.js», que pone la pronunciación en
+   cirílico y verifica el vocabulario y la gramática de cada tema.
+
+   El espejo de data-masha.js (Contexto §6.24 y §6.29): las líneas son
+   { es, tr, ru } (español, pronunciación en cirílico, traducción rusa).
+   LUCIA.temas: 6 por unidad (U2–U13), cada uno con desde, inicio,
+     nodos (los pasos) y preguntas.
+   LUCIA.vida: lo que Lucía cuenta de sí misma, con versiones por unidad
+     (v: [{ d, l }]); se elige la más alta que el alumno ya entiende.
+   LUCIA.apertura, comodines, utiles: lo que sirve en todos los temas.
+   LUCIA.naciones: [país, él, ella, país (ru), él (ru), ella (ru)].
+   Plantillas: {nombre}, {pais}, {nac}, {pais_ru}, {nac_ru}, {x} y
+   {cansado/cansada} (según el género del alumno).
+   ============================================================ */
