@@ -140,7 +140,7 @@ function SeccionAccesos({ c, modo = "admin" }) {
   return h(React.Fragment, null,
     h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } }, rev
       ? "Los alumnos que habilitas tú. Para que alguien entre, agrega su mail y avísale: entra con el código que le llega por mail."
-      : "Solo entran los mails de esta lista. Para que alguien entre, agrega su mail y avísale: entra con el código que le llega por mail. Un revisor ve Abecé en construcción y puede dar acceso a sus alumnos, pero no ve esta lista ni los reportes."),
+      : "Desde el 22/11/2026 cada uno crea su cuenta solo con su mail y el código, y aparece en esta lista («Se registró solo»), en Azbuka o en Abecé según el idioma que eligió al entrar. También puedes agregar un mail a mano. «Quitar» borra la cuenta y bloquea el mail: no puede volver a registrarse hasta que lo habilites de nuevo aquí. Un revisor puede dar acceso a sus alumnos, pero no ve esta lista ni los reportes."),
     h("input", { type: "email", inputMode: "email", autoCapitalize: "off", autoCorrect: "off", spellCheck: false, placeholder: "mail@ejemplo.com", value: mail, onInput: e => setMail(e.target.value), style: Object.assign({}, inp, { marginTop: 12 }) }),
     h("input", { type: "text", placeholder: "Nota (opcional): quién es", value: nota, onInput: e => setNota(e.target.value), style: inp }),
     !rev && h("div", { style: { display: "flex", alignItems: "center", gap: 8, marginTop: 12, flexWrap: "wrap" } },
@@ -163,7 +163,7 @@ function SeccionAccesos({ c, modo = "admin" }) {
               !rev && p.direccion && btnFila(p.direccion === "abece" ? "Pasar a Azbuka" : "Pasar a Abecé", () => cambiarDir(p, p.direccion === "abece" ? "azbuka" : "abece"), c.textSub),
               btnFila("Quitar", () => setQuitando(p.email), ROJO_TXT))),
           quitando === p.email && h("div", { style: { fontSize: "var(--az-fs-chico)", lineHeight: 1.5, color: c.text, background: ROJO + "14", border: `1px solid ${ROJO}`, borderRadius: "var(--az-r)", padding: 12, marginTop: 12 } },
-            "Deja de poder entrar y se borran su cuenta y su progreso en la nube.",
+            "Deja de poder entrar, se borran su cuenta y su progreso en la nube, y el mail queda bloqueado: no puede volver a registrarse (salvo que lo habilites de nuevo).",
             boton(c, "Sí, quitar", () => quitar(p.email), "peligro"), boton(c, "Cancelar", () => setQuitando(null), "sec"))))),
     h(LinksParaMandar, { c, rev }));
 }
@@ -215,7 +215,7 @@ function SeccionAbece({ c }) {
   return h(React.Fragment, null,
     h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } },
       h("b", { style: { color: c.text } }, "Abecé"), " es la versión para rusohablantes que aprenden español. Está en construcción y los alumnos no la ven. Aquí puedes probarla en este teléfono. Ya están el Diccionario, Verbos, el Cuaderno, Ajustes y el inicio; las unidades y el resto de los módulos todavía son los de Azbuka. Esta sección, Accesos, Alumnos y Reportes quedan siempre en español."),
-    h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("azbuka", "Azbuka"), chip("abece", "Abecé (prueba)")));
+    h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("azbuka", "Azbuka"), chip("abece", "Abecé")));
 }
 /* ── Reportes de errores (21/10/2026, solo admin) ── */
 function SeccionReportes({ c }) {

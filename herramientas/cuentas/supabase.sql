@@ -7,8 +7,9 @@
 --   · permitidos: los mails que pueden entrar (los maneja Manu desde
 --     Ajustes → Accesos). admin = true puede habilitar y quitar mails.
 --   · progreso: una fila por alumno con todo lo que la app guarda.
---   · Un control que impide crear una cuenta con un mail que no está
---     en permitidos (ni con código por mail ni con Google).
+--   · Registro abierto (22/11/2026): cualquiera crea su cuenta solo, con
+--     el código por mail; al crearla, su mail entra en permitidos. Solo
+--     no pueden los mails bloqueados (los que se quitaron desde Accesos).
 --   · Funciones para borrar la cuenta propia y para que el admin vea,
 --     habilite y quite accesos.
 --   · reportes (21/10/2026): los errores que mandan los alumnos con el
@@ -70,12 +71,28 @@ create policy "cada uno el suyo" on public.progreso for all
   using (user_id = auth.uid() and public.es_permitido())
   with check (user_id = auth.uid() and public.es_permitido());
 
--- Nadie crea una cuenta con un mail que no está habilitado
+-- Registro abierto (22/11/2026, Manu): la cuenta es obligatoria, pero cada uno
+-- la crea solo. Al crearse, el mail entra en permitidos (si no estaba), con la
+-- dirección que eligió en la pantalla de entrada (ES → Azbuka, RU → Abecé).
+-- Los mails bloqueados (quitados desde Accesos) no pueden volver a crearla.
+create table if not exists public.bloqueados (
+  email  text primary key,
+  creado timestamptz not null default now()
+);
+alter table public.bloqueados enable row level security;
+revoke all on public.bloqueados from anon, authenticated;
+
 create or replace function public.solo_permitidos() returns trigger
 language plpgsql security definer set search_path = public as $$
+declare d text;
 begin
-  if not exists (select 1 from public.permitidos where email = lower(new.email)) then
+  if exists (select 1 from public.bloqueados where email = lower(new.email)) then
     raise exception 'AZ_NO_PERMITIDO';
+  end if;
+  if not exists (select 1 from public.permitidos where email = lower(new.email)) then
+    d := coalesce(new.raw_user_meta_data ->> 'direccion', 'azbuka');
+    if d not in ('azbuka', 'abece') then d := 'azbuka'; end if;
+    insert into public.permitidos (email, nota, direccion) values (lower(new.email), 'Se registró solo', d);
   end if;
   return new;
 end $$;
@@ -116,7 +133,20 @@ begin
   if lower(p_email) = public.mi_email() then raise exception 'no podés quitarte a vos'; end if;
   delete from auth.users where lower(email) = lower(p_email);
   delete from public.permitidos where email = lower(p_email);
+  -- 22/11/2026: con el registro abierto, quitar también bloquea el mail
+  insert into public.bloqueados (email) values (lower(p_email)) on conflict do nothing;
 end $$;
+
+-- Habilitar a mano un mail bloqueado lo desbloquea (22/11/2026)
+create or replace function public.desbloquear_al_habilitar() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  delete from public.bloqueados where email = lower(new.email);
+  return new;
+end $$;
+drop trigger if exists az_desbloquear on public.permitidos;
+create trigger az_desbloquear after insert on public.permitidos
+  for each row execute function public.desbloquear_al_habilitar();
 
 -- Permisos de las tablas para los usuarios con sesión (las reglas de arriba deciden qué filas)
 grant select, insert, update, delete on public.permitidos to authenticated;
@@ -293,6 +323,7 @@ begin
   end if;
   delete from auth.users where lower(email) = lower(p_email);
   delete from public.permitidos where email = lower(p_email);
+  insert into public.bloqueados (email) values (lower(p_email)) on conflict do nothing;   -- 22/11/2026
 end $$;
 
 revoke all on function public.mi_rol()                       from public, anon;

@@ -7,7 +7,7 @@
     const ses = () => { try { return JSON.parse(localStorage.getItem(KEY)); } catch(e){ return null; } };
     const call = (op, args) => new Promise((res) => { window.__llamar(op, args).then(r => res(r)); });
     const auth = {
-      async signInWithOtp({email}){ const r = await call('otp',{email}); return r; },
+      async signInWithOtp({email, options}){ const r = await call('otp',{email, data: options && options.data}); return r; },
       async verifyOtp({email, token}){ const r = await call('verify',{email, token}); if(r.error) return r;
         const s={user:r.data.user, access_token:'x'}; localStorage.setItem(KEY, JSON.stringify(s)); oyentes.forEach(f=>f('SIGNED_IN',s)); return {data:{session:s}, error:null}; },
       async getSession(){ return {data:{session:ses()}, error:null}; },

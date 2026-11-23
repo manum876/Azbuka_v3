@@ -1206,6 +1206,7 @@ window.azRefCapa = azRefCapa;
   let comer = 0;                // popstates propios que la página no tiene que ver
   const cerrarBoton = h => h.querySelector(".sheet-x, .pr-x, [data-cerrar]") || [...h.querySelectorAll("button")].find(b => b.textContent.trim() === "✕");
   function revisar() {
+    if (window.azRecargando) return;   /* js/cuenta.js está recargando la página (cambio de dirección) */
     const nuevas = [...document.querySelectorAll(".sheet, .pr, [role=dialog]")].filter(h => !abiertas.includes(h) && esHoja(h));
     let cerradas = 0;
     for (let i = abiertas.length - 1; i >= 0; i--) if (!abiertas[i].isConnected) { abiertas.splice(i, 1); cerradas++; }

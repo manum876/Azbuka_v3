@@ -5,9 +5,13 @@
      entrada y no deja ver nada más.
    · Se entra con un código de 6 números que llega por mail (anda
      también en la app instalada) o, si está activado, con Google.
-   · Solo entran los mails que Manu habilitó (tabla «permitidos» en
-     Supabase, Ajustes → Accesos). Si a alguien le quitan el acceso,
-     la próxima vez que abra la app con internet queda afuera.
+   · Registro abierto (22/11/2026, Manu): la cuenta sigue siendo
+     obligatoria, pero cada uno la crea solo con su mail y el código.
+     Al crearla, su mail entra en «permitidos» (Ajustes → Accesos) con
+     la dirección del idioma que eligió en la pantalla de entrada (ES →
+     Azbuka, RU → Abecé). Si a alguien le quitan el acceso, queda
+     bloqueado: la próxima vez que abra la app con internet queda afuera
+     y no puede volver a registrarse (Manu lo desbloquea habilitándolo).
    · Progreso en la nube: todo lo que la app guarda (las claves az_…,
      lo mismo que la copia de seguridad) se sube solo, unos segundos
      después de cada cambio. Al entrar en otro teléfono se baja.
@@ -169,9 +173,11 @@ const AZ_CUENTA_CONFIG = {
     const langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
     return langs.some(l => /^ru/i.test(l || "")) ? "ru" : "es";
   }
+  /* Registro abierto (22/11/2026): la dirección de una cuenta nueva sale del idioma de esta pantalla */
+  const dirNueva = () => idioma() === "ru" ? "abece" : "azbuka";
   const TXE = {
     es: { logo: "Азбука", baja: "Aprende ruso desde cero", entrar: "Entrar",
-      entrarTxt: "Escribe tu mail y te mandamos un código para entrar. No hace falta contraseña.", ph: "tu@mail.com",
+      entrarTxt: "Escribe tu mail y te mandamos un código para entrar. Si es la primera vez, así se crea tu cuenta. No hace falta contraseña.", ph: "tu@mail.com",
       incompleto: "Revisa el mail: parece incompleto.", enviar: "Enviarme el código", enviando: "Enviando…", o: "o", google: "Entrar con Google",
       revisa: "Revisa tu mail", revisaTxt: m => `Te mandamos un código a ${m}. Escríbelo aquí. Si no llega en un minuto, mira en «Spam» o «Promociones».`,
       digitos: n => "El código tiene " + n + " números.", ok: "Entrar", entrando: "Entrando…", otroCod: "Mandarme otro código", otroMail: "Usar otro mail",
@@ -179,22 +185,22 @@ const AZ_CUENTA_CONFIG = {
       momento: "Un momento.",
       priv: "Tu mail se usa solo para entrar y para guardar tu progreso. Puedes eliminar tu cuenta y todos tus datos cuando quieras, desde Ajustes.",
       errSmtp: "No se pudo mandar el mail con el código. Es un problema del envío de mails, no de tu mail: avísale a Manu.",
-      errNo: "Este mail no tiene acceso a Azbuka. Pídele a Manu que lo habilite.",
+      errNo: "Este mail no puede entrar en Azbuka. Si crees que es un error, escríbele a Manu.",
       errMuchos: "Pediste muchos códigos seguidos. Espera un minuto y prueba de nuevo.",
       errCodigo: "El código no es correcto o ya venció. Revísalo o pide uno nuevo.",
       errRed: "No hay conexión. Para entrar la primera vez necesitas internet.",
       errOtro: "No se pudo completar. Prueba de nuevo en un momento.", detalle: "Detalle" },
     /* BORRADOR: lo revisa Iván */
     ru: { logo: "Abecé", baja: "Учи испанский с нуля", entrar: "Вход",
-      entrarTxt: "Напиши свою почту, и мы пришлём код для входа. Пароль не нужен.", ph: "name@mail.ru",
+      entrarTxt: "Напиши свою почту, и мы пришлём код для входа. Если ты здесь впервые, так создаётся твой аккаунт. Пароль не нужен.", ph: "name@mail.ru",
       incompleto: "Проверь адрес: кажется, он неполный.", enviar: "Прислать код", enviando: "Отправляем…", o: "или", google: "Войти через Google",
       revisa: "Проверь почту", revisaTxt: m => `Мы отправили код на ${m}. Введи его здесь. Если письмо не пришло за минуту, загляни в «Спам» или «Промоакции».`,
       digitos: n => "В коде " + n + " цифр.", ok: "Войти", entrando: "Входим…", otroCod: "Прислать другой код", otroMail: "Ввести другую почту",
-      sinAcceso: "Нет доступа", sinAccesoTxt: "У этой почты больше нет доступа к Abecé. Если это ошибка, напиши своему преподавателю.", conOtro: "Войти с другой почтой",
+      sinAcceso: "Нет доступа", sinAccesoTxt: "У этой почты больше нет доступа к Abecé. Если это ошибка, напиши нам.", conOtro: "Войти с другой почтой",
       momento: "Минутку.",
       priv: "Почта нужна только для входа и чтобы сохранять твой прогресс. Ты можешь удалить аккаунт и все свои данные в любой момент в настройках.",
       errSmtp: "Не удалось отправить письмо с кодом. Проблема в отправке писем, а не в твоей почте: сообщи преподавателю.",
-      errNo: "У этой почты нет доступа к Abecé. Попроси преподавателя открыть доступ.",
+      errNo: "С этой почтой нельзя войти в Abecé. Если это ошибка, напиши нам.",
       errMuchos: "Ты запросил слишком много кодов подряд. Подожди минуту и попробуй снова.",
       errCodigo: "Код неверный или устарел. Проверь его или запроси новый.",
       errRed: "Нет соединения. Для первого входа нужен интернет.",
@@ -250,7 +256,7 @@ const AZ_CUENTA_CONFIG = {
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) { verMail(L.incompleto); return; }
       mailIngresado = m; btn.disabled = true; btn.textContent = L.enviando;
       try {
-        const { error } = await cliente.auth.signInWithOtp({ email: m, options: { shouldCreateUser: true } });
+        const { error } = await cliente.auth.signInWithOtp({ email: m, options: { shouldCreateUser: true, data: { direccion: dirNueva() } } });
         if (error) throw error;
         reenvio = Date.now() + 60000; verCodigo();
       } catch (e) { verMail(msgError(e)); }
@@ -297,7 +303,7 @@ const AZ_CUENTA_CONFIG = {
     clearInterval(relojReenvio); relojReenvio = setInterval(tic, 1000); tic();
     re.onclick = async () => {
       re.disabled = true;
-      try { const { error } = await cliente.auth.signInWithOtp({ email: mailIngresado, options: { shouldCreateUser: true } }); if (error) throw error; reenvio = Date.now() + 60000; verCodigo(); }
+      try { const { error } = await cliente.auth.signInWithOtp({ email: mailIngresado, options: { shouldCreateUser: true, data: { direccion: dirNueva() } } }); if (error) throw error; reenvio = Date.now() + 60000; verCodigo(); }
       catch (e) { verCodigo(msgError(e)); }
     };
     el.querySelector("#azc-otro").onclick = () => verMail();
@@ -372,7 +378,11 @@ const AZ_CUENTA_CONFIG = {
     const antes = leerDir();
     try { setOrig.call(ls, DIR, d); } catch (e) {}
     if (antes !== d && typeof azDireccion === "function" && typeof AZ_DIRECCION !== "undefined" && azDireccion().id !== AZ_DIRECCION.id) {
-      try { if (!sessionStorage.getItem("az_cuenta_recarga_dir")) { sessionStorage.setItem("az_cuenta_recarga_dir", "1"); location.reload(); } } catch (e) {}
+      /* la marca guarda a qué dirección se recargó: recarga una vez por cambio (antes era una sola vez por pestaña y un segundo cambio no recargaba) */
+      /* 22/11/2026: se avisa a core.js (window.azRecargando) para que no toque el historial al cerrarse
+         la pantalla de entrada: un history.back() justo después cancelaba la recarga y la alumna
+         seguía viendo la otra dirección hasta volver a abrir la app. */
+      try { if (sessionStorage.getItem("az_cuenta_recarga_dir") !== d) { sessionStorage.setItem("az_cuenta_recarga_dir", d); window.azRecargando = true; setTimeout(() => location.reload(), 50); } } catch (e) {}
     }
     return d;
   }

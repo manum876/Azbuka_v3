@@ -81,8 +81,9 @@ Te devuelvo `js/cuenta.js` con las claves. Cuando lo subas, la app empieza a ped
 
 ## Después: el día a día
 
-- **Habilitar a alguien:** en la app, **Ajustes → Accesos** (solo lo ves vos). Escribís su mail, tocás *Habilitar* y le avisás. Entra con el código que le llega por mail.
-- **Quitar a alguien:** en la misma lista, *Quitar*. No vuelve a entrar y se borran su cuenta y su progreso.
+- **Registro abierto (desde el 22/11/2026):** cualquiera entra solo con su mail; ver la sección «Registro abierto» más abajo.
+- **Habilitar a alguien a mano:** en la app, **Ajustes → Accesos** (solo lo ves vos). Escribís su mail, tocás *Habilitar* y le avisás. Sirve para elegirle la dirección o para volver a dejar entrar a alguien que quitaste.
+- **Quitar a alguien:** en la misma lista, *Quitar*. Se borran su cuenta y su progreso, y el mail queda bloqueado: no puede volver a registrarse hasta que lo habilites de nuevo.
 - **Tu primera vez:** entrás con tu mail y el progreso que ya tenés en el teléfono sube solo a la nube.
 - **Otro teléfono:** entrás con el mismo mail y se baja tu progreso.
 - **Eliminar la cuenta:** cada uno lo hace desde **Ajustes → Eliminar mi cuenta y mis datos**. Se borra todo: la cuenta, el progreso en la nube y lo guardado en el teléfono.
@@ -157,6 +158,25 @@ Mientras no lo corras, la app anda igual que antes; lo único que no funciona es
 Mientras Abecé esté bloqueada, un alumno de Abecé sigue viendo Azbuka: solo vos y los revisores la ven, en modo prueba.
 
 **El mail con el código** es uno solo para todos (la plantilla de Supabase, en español). Un alumno de Abecé lo recibe en español; el código se entiende igual.
+
+## Registro abierto (22/11/2026)
+
+Ya no hace falta poner a cada uno en la lista: cualquiera escribe su mail en la pantalla de entrada, le llega el código y queda registrado. En **Ajustes → Accesos** aparece con la nota «Se registró solo».
+
+- **Azbuka o Abecé:** sale del idioma de la pantalla de entrada. Si entra en español (o con el link de Azbuka) es de Azbuka; si entra en ruso (o con el link de Abecé) es de Abecé. Se cambia después con **Pasar a Abecé / Pasar a Azbuka**.
+- **Quitar** borra la cuenta y bloquea el mail. **Habilitar** ese mail lo desbloquea.
+- Los revisores siguen pudiendo sumar alumnos a mano, como antes.
+
+### 1. Actualizar Supabase (una vez, obligatorio)
+
+1. Supabase → **SQL Editor** → **New query** → pegá **todo** `herramientas/cuentas/supabase.sql` → **Run** (*Success*). Nadie pierde nada: los mails que ya están siguen igual.
+2. Supabase → **Authentication** → **Sign In / Providers** (o **Settings**): revisá que **Allow new users to sign up** esté **prendido**. Si está apagado, los mails nuevos no pueden entrar.
+
+**Mientras no corras el SQL, la app sigue cerrada:** un mail nuevo ve «Este mail no puede entrar».
+
+### 2. Límites de mails
+
+Cada código es un mail que manda Brevo, gratis hasta **300 por día**. Alcanza de sobra para empezar; si algún día se queda corto, se pasa a un plan pago o a otro servicio. Supabase además limita los pedidos de código seguidos de un mismo mail (para frenar abusos): si alguien pide muchos seguidos, tiene que esperar un rato.
 
 ## Google (opcional, más adelante)
 

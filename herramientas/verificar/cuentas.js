@@ -1,14 +1,16 @@
-// 7 · Cuentas: prueba la entrada con código, el acceso por lista, la nube, Ajustes → Accesos y
+// 7 · Cuentas: prueba la entrada con código, el registro abierto y los bloqueados (22/11/2026), la nube, Ajustes → Accesos y
 // «Eliminar mi cuenta», con un Supabase falso (supabase-falso.js) que vive en esta prueba. No toca
 // el Supabase real. Uso: node cuentas.js
 const fs=require('fs'), os=require('os');
 const { BASE, servir, navegador } = require('./comun');
 const FAKE=fs.readFileSync(__dirname+'/supabase-falso.js','utf8'); const OUT=os.tmpdir();
-const srv={ permitidos:{'manuelmunoz87@gmail.com':{admin:true,nota:'Manu'}}, users:{}, progreso:{}, reportes:[], log:[] };
+const srv={ permitidos:{'manuelmunoz87@gmail.com':{admin:true,nota:'Manu'}}, bloqueados:{'bloq@x.com':1}, users:{}, progreso:{}, reportes:[], log:[] };
 function server(op,a){ srv.log.push(op+(a.fn?':'+a.fn:''));
   const ok=d=>({data:d,error:null}), err=m=>({data:null,error:{message:m}});
   if(srv.offline) return err('Failed to fetch');
-  if(op==='otp'){ if(!srv.permitidos[a.email]&&!Object.values(srv.users).find(u=>u.email===a.email)) return err('Database error saving new user'); return ok({}); }
+  /* Registro abierto (22/11/2026): un mail nuevo entra en permitidos con la dirección elegida; uno bloqueado, no */
+  if(op==='otp'){ if(srv.bloqueados[a.email]) return err('Database error saving new user');
+    if(!srv.permitidos[a.email]) srv.permitidos[a.email]={admin:false,nota:'Se registró solo',direccion:(a.data&&a.data.direccion==='abece')?'abece':'azbuka'}; return ok({}); }
   if(op==='verify'){ if(a.token!=='123456') return err('Token has expired or is invalid'); let u=Object.values(srv.users).find(u=>u.email===a.email); if(!u){u={id:'u-'+a.email,email:a.email}; srv.users[u.id]=u;} return ok({user:u}); }
   if(op==='rpc'){ const me=srv.users[a.uid]; const perm=me&&srv.permitidos[me.email];
     if(a.fn==='es_permitido') return ok(!!perm); if(a.fn==='es_admin') return ok(!!(perm&&perm.admin));
@@ -20,7 +22,7 @@ function server(op,a){ srv.log.push(op+(a.fn?':'+a.fn:''));
     if(a.fn==='revisor_quitar'){ if(!(perm&&perm.revisor)) return err('solo revisor'); const e=a.args.p_email, q=srv.permitidos[e]; if(!q||q.invitado_por!==me.email||q.admin||q.revisor) return err('no es tuyo'); const u=Object.values(srv.users).find(u=>u.email===e); if(u){delete srv.users[u.id]; delete srv.progreso[u.id];} delete srv.permitidos[e]; return ok(null); }
     if(a.fn==='borrar_mi_cuenta'){ delete srv.progreso[a.uid]; delete srv.users[a.uid]; return ok(null); }
     if(a.fn==='admin_resumen'){ if(!(perm&&perm.admin)) return err('solo admin'); return ok(Object.entries(srv.permitidos).map(([e,p])=>fila(e,p))); }
-    if(a.fn==='admin_quitar'){ const e=a.args.p_email; const u=Object.values(srv.users).find(u=>u.email===e); if(u){delete srv.users[u.id]; delete srv.progreso[u.id];} delete srv.permitidos[e]; return ok(null); } }
+    if(a.fn==='admin_quitar'){ const e=a.args.p_email; const u=Object.values(srv.users).find(u=>u.email===e); if(u){delete srv.users[u.id]; delete srv.progreso[u.id];} delete srv.permitidos[e]; srv.bloqueados[e]=1; return ok(null); } }
   if(op==='select'){ const r=srv.progreso[a.uid]; if(!r) return ok(null); return ok(a.sel.includes('datos')?r:{actualizado:r.actualizado}); }
   if(op==='upsert'){ srv.progreso[a.row.user_id]={datos:a.row.datos, actualizado:a.row.actualizado}; return ok(null); }
   if(a.t==='reportes'){ const me=srv.users[a.me]; const perm=me&&srv.permitidos[me.email];
@@ -29,7 +31,7 @@ function server(op,a){ srv.log.push(op+(a.fn?':'+a.fn:''));
     if(op==='lista') return ok(srv.reportes.slice().reverse());
     if(op==='update'){ const r=srv.reportes.find(x=>x.id===a.id); if(r) Object.assign(r,a.row); return ok(null); }
     if(op==='delete'){ srv.reportes=srv.reportes.filter(x=>x.id!==a.id); return ok(null); } }
-  if(op==='insert'){ if(srv.permitidos[a.row.email]) return err('duplicate key value violates unique constraint'); srv.permitidos[a.row.email]={admin:false,nota:a.row.nota,invitado_por:a.row.invitado_por||null,direccion:a.row.direccion||'azbuka'}; return ok(null); }
+  if(op==='insert'){ delete srv.bloqueados[a.row.email]; if(srv.permitidos[a.row.email]) return err('duplicate key value violates unique constraint'); srv.permitidos[a.row.email]={admin:false,nota:a.row.nota,invitado_por:a.row.invitado_por||null,direccion:a.row.direccion||'azbuka'}; return ok(null); }
   if(op==='update'&&a.t==='permitidos'){ const me=srv.users[a.me]; const perm=me&&srv.permitidos[me.email]; if(!(perm&&perm.admin)) return err('row-level security'); if(srv.permitidos[a.id]) Object.assign(srv.permitidos[a.id],a.row); return ok(null); }
   return err('?'); }
 const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) problemas.push(m); };
@@ -46,8 +48,12 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  chk(await p.locator('#az-cuenta').isVisible(), 'sin sesión aparece la pantalla de entrada');
  chk(await p.evaluate(()=>getComputedStyle(document.getElementById('root')).visibility)==='hidden', 'la app queda tapada');
  await p.screenshot({path:OUT+'/entrar.png'});
+ await p.fill('#azc-mail','bloq@x.com'); await p.click('#azc-enviar'); await p.waitForTimeout(200);
+ chk(/no puede entrar/.test(await p.locator('#az-cuenta .err').innerText().catch(()=>'')), 'mail bloqueado: aviso');
  await p.fill('#azc-mail','otro@x.com'); await p.click('#azc-enviar'); await p.waitForTimeout(200);
- chk(/no tiene acceso/.test(await p.locator('#az-cuenta .err').innerText().catch(()=>'')), 'mail no habilitado: aviso');
+ chk(await p.locator('#azc-cod').isVisible() && srv.permitidos['otro@x.com'] && srv.permitidos['otro@x.com'].nota==='Se registró solo' && srv.permitidos['otro@x.com'].direccion==='azbuka', 'registro abierto: un mail nuevo se registra solo (Azbuka, por el idioma)');
+ await p.click('#azc-otro'); await p.waitForTimeout(200);
+ delete srv.permitidos['otro@x.com'];   /* para que el resto de la prueba vea la misma lista que antes */
  await p.fill('#azc-mail','ManuelMunoz87@gmail.com'); await p.click('#azc-enviar'); await p.waitForTimeout(200);
  chk(await p.locator('#azc-cod').isVisible(), 'pasa a pedir el código');
  await p.screenshot({path:OUT+'/codigo.png'});
@@ -101,11 +107,13 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  chk(/Проверь почту/.test(await d4.p.locator('#az-cuenta .tit').innerText()), 'el paso del código también en ruso');
  await d4.p.fill('#azc-cod','123456'); await d4.p.waitForTimeout(1500);
  chk(await d4.p.evaluate(()=>localStorage.getItem('az_cuenta_dir'))==='abece', 'al entrar, la app guarda la dirección de la cuenta');
- chk(/Abecé/.test(await d4.p.locator('header').innerText()), 'Abecé está abierta (04/11/2026): una alumna de Abecé ve Abecé');
+ /* la página se recarga sola al saber la dirección: se espera hasta 8 s a que el encabezado cambie (antes fallaba a veces) */
+ let hdr=''; for(let k=0;k<16 && !/Abecé/.test(hdr);k++){ await d4.p.waitForTimeout(500); hdr=await d4.p.locator('header').innerText().catch(()=>''); }
+ chk(/Abecé/.test(hdr), 'Abecé está abierta (04/11/2026): una alumna de Abecé ve Abecé');
  // Abecé en construcción (22/10/2026): el admin la prueba y vuelve
  chk(await p.locator('text=Abecé en construcción').count()>0, 'el admin ve «Abecé en construcción»');
- await p.click('button:has-text("Abecé (prueba)")'); await p.waitForLoadState('networkidle'); await p.waitForTimeout(1000);
- chk(/Abecé/.test(await p.locator('header').innerText()), 'con «Abecé (prueba)» el encabezado pasa a Abecé');
+ await p.click('button:text-is("Abecé")'); await p.waitForLoadState('networkidle'); await p.waitForTimeout(1000);
+ chk(/Abecé/.test(await p.locator('header').innerText()), 'con «Abecé» el encabezado pasa a Abecé');
  await p.click('button:text-is("Azbuka")'); await p.waitForLoadState('networkidle'); await p.waitForTimeout(1000);
  chk(/Азбука/.test(await p.locator('header').innerText()), 'con «Azbuka» vuelve Azbuka');
  await p.screenshot({path:OUT+'/ajustes.png', fullPage:true});
