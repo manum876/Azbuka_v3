@@ -1465,14 +1465,14 @@ const ES5_BASICAS_MOD = [
   ["es5m4", ["alguien", "nadie", "ninguno"], {
     id: "es5-alguien",
     titulo: "Alguien, nadie, ninguno",
-    texto: "**algo** и **nada** — «что-то» и «ничего» (о вещах). **alguien** и **nadie** — «кто-то» и «никто» (о людях): **¿Hay alguien en casa? — No, no hay nadie.** После глагола нужно **no**, как в русском «никого **не**т».\n\n**ninguno** — «ни один, никакой». Перед существительным мужского рода — **ningún**, женского — **ninguna**: **No tengo ningún hermano**, **No hay ninguna tienda abierta**.",
+    texto: "**algo** и **nada** — «что-то» и «ничего» (о вещах). **alguien** и **nadie** — «кто-то» и «никто» (о людях): ¿Hay alguien en casa? — «Дома кто-нибудь есть?» — No, **no** hay nadie — «Нет, никого **не**т». Если nadie стоит после глагола, перед глаголом ставят no.\n\n**ninguno** — «ни один», «никакой». Перед существительным мужского рода употребляется **ningún**, женского — **ninguna**: **No tengo ningún hermano**, **No hay ninguna tienda abierta**.",
     ejemplos: [
       { es: "¿Hay alguien en la tienda?", ru: "В магазине кто-нибудь есть?" },
       { es: "No hay nadie en la oficina.", ru: "В офисе никого нет." },
       { es: "No hay ninguna tienda abierta.", ru: "Ни один магазин не открыт." }
     ],
     errores: [
-      { mal: "Hay nadie.", bien: "No hay nadie.", por: "**nadie** после глагола — с **no**." },
+      { mal: "Hay nadie.", bien: "No hay nadie.", por: "Если **nadie** стоит после глагола, перед глаголом ставится **no**: No hay nadie — «Никого нет»." },
       { mal: "No tengo ninguno hermano.", bien: "No tengo ningún hermano.", por: "Перед существительным — **ningún**." }
     ]
   }],
@@ -1485,7 +1485,7 @@ const ES5_BASICAS_MOD = [
       { es: "Puedes llevar cualquier camiseta.", ru: "Можешь надеть любую футболку." }
     ],
     errores: [
-      { mal: "Tenemos misma talla.", bien: "Tenemos la misma talla.", por: "**mismo** — с артиклем." }
+      { mal: "Tenemos misma talla.", bien: "Tenemos la misma talla.", por: "**mismo** в значении «тот же самый» — с артиклем: **la misma talla**." }
     ]
   }],
   ["es5m4", ["ESP-00046", "par"], {   /* solo como adverbio: «только» */
@@ -1494,7 +1494,7 @@ const ES5_BASICAS_MOD = [
     texto: "**solo** — «только»: **Solo quiero agua** — я хочу только воды. (**un café solo** — другое: «чёрный кофе», без молока.) **un par de** — «пара, несколько»: **un par de botellas** — пара бутылок; **un par de días** — пару дней.",
     ejemplos: [
       { es: "Solo tengo diez euros.", ru: "У меня только десять евро." },
-      { es: "Quiero un par de botellas de agua.", ru: "Мне пару бутылок воды." }
+      { es: "Quiero un par de botellas de agua.", ru: "Я хочу пару бутылок воды." }
     ]
   }],,
   /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
@@ -1515,7 +1515,7 @@ const ES5_BASICAS = [
   ["algo-nada", "elegir", 4, "es5-alguien", "Что подходит?", "No hay ___ en la oficina: todos están en casa.", "nadie", ["nada", "alguien"], "**No hay nadie** — «никого нет».", "nadie"],
   ["algo-nada", "elegir", 4, "es5-alguien", "Что подходит?", "No tengo ___ hermano.", "ningún", ["ninguno", "ninguna"], "Перед существительным мужского рода — **ningún**.", "ninguno"],
   ["algo-nada", "elegir", 4, "es5-alguien", "Что подходит?", "No hay ___ tienda abierta.", "ninguna", ["ningún", "nada"], "**la tienda** — женский род: **ninguna**.", "ninguno"],
-  ["error", "elegir", 4, "es5-alguien", "Какая фраза правильная?", "", "No hay nadie.", ["Hay nadie.", "No hay alguien."], "**nadie** после глагола — с **no**.", "nadie"],
+  ["error", "elegir", 4, "es5-alguien", "Какая фраза правильная?", "", "No hay nadie.", ["Hay nadie.", "No hay alguien."], "Если **nadie** стоит после глагола, перед глаголом ставится **no**: No hay nadie — «Никого нет».", "nadie"],
   ["talla", "elegir", 7, "es5-mismo", "Что подходит?", "Ana y yo tenemos la ___ talla.", "misma", ["mismo", "mismas"], "**la talla** — женский род: **la misma**.", "mismo"],
   ["talla", "elegir", 7, "es5-mismo", "Что подходит?", "Llevo las ___ zapatillas que tú.", "mismas", ["misma", "mismos"], "**las zapatillas**: **las mismas**.", "mismo"],
   ["talla", "elegir", 7, "es5-mismo", "Что подходит?", "— ¿Qué color quieres? — ___: todos son bonitos.", "Cualquiera", ["Cualquier", "Ninguno"], "Без существительного — **cualquiera**.", "cualquiera"],

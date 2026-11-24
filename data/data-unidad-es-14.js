@@ -1,5 +1,5 @@
 /* ============================================================
-   DATA-UNIDAD-ES-14.JS — Abecé · Финальный экзамен (Unidad 14)
+   DATA-UNIDAD-ES-14.JS — Abecé · Итоговый экзамен (Unidad 14)
    ------------------------------------------------------------
    20/11/2026. La misma lógica que el examen final de Azbuka
    (data-unidad-14.js; Manu: «sigamos la misma lógica que tiene
@@ -92,13 +92,13 @@ const ES14_GRAM = {
     ["En mi calle ___ una farmacia.", "hay", ["hay", "está", "es"], "Что есть — **hay** + un / una.", "es3-hay-esta"],
     ["Ana ___ muy simpática.", "es", ["es", "está", "hay"], "Характер — **ser**.", "es3-ser-estar"],
     ["Hoy Pablo ___ cansado.", "está", ["está", "es", "hay"], "Состояние — **estar**.", "es3-estados"],
-    ["La sopa ___ muy rica.", "está", ["está", "es", "hay"], "Вкусный (сейчас) — **estar rico**.", "es12-ser-estar-cambio"],
+    ["La sopa ___ muy rica.", "está", ["está", "es", "hay"], "О вкусе блюда — **estar rico**.", "es12-ser-estar-cambio"],
     ["La fiesta ___ en mi casa.", "es", ["es", "está", "hay"], "Событие — **ser**.", "es12-ser-estar-repaso"]],
   concord: [["Tengo dos hermanas ___.", "mayores", ["mayores", "mayor", "mayoras"], "Согласование: **hermanas mayores**.", "es3-adj-concordancia"],
     ["Quiero ___ agua, por favor.", "—", ["—", "la", "una"], "Неисчисляемое в общем — без артикля: **quiero agua**.", "es5-incontable"],
     ["___ problema es muy grande.", "El", ["El", "La", "Lo"], "**el problema** — м. р.", "es2-el-un"],
     ["Las ciudades ___ son caras.", "grandes", ["grandes", "grande", "grandas"], "Мн. ч.: **grandes**.", "es3-adj-concordancia"],
-    ["La mayoría de mis amigos ___ en Madrid.", "vive", ["vive", "vivo", "vivís"], "**la mayoría** + глагол в ед. ч. (можно и мн.).", "es13-concordancia"]],
+    ["La mayoría de mis amigos ___ en Madrid.", "vive", ["vive", "vivo", "vivís"], "**la mayoría** + глагол обычно в ед. ч. (можно и во мн. ч.).", "es13-concordancia"]],
   presente: [["Yo ___ las ocho horas cada noche. (dormir)", "duermo", ["duermo", "dormo", "durmo"], "o → ue: **duermo**.", "es4-o-ue"],
     ["Yo ___ deporte los sábados. (hacer)", "hago", ["hago", "haco", "hazo"], "yo -go: **hago**.", "es4-yo-go"],
     ["Mis padres ___ temprano. (levantarse)", "se levantan", ["se levantan", "levantan", "se levanta"], "С **se**: **se levantan**.", "es4-reflexivo"],
@@ -108,9 +108,9 @@ const ES14_GRAM = {
     ["De niño ___ en un pueblo.", "vivía", ["vivía", "viví", "he vivido"], "Привычка, фон — imperfecto.", "es9-imperf-uso"],
     ["___ sol y fuimos a la playa.", "Hacía", ["Hacía", "Hizo", "Ha hecho"], "Фон — imperfecto.", "es9-fondo-suceso"],
     ["Estaba en casa cuando ___ el teléfono.", "sonó", ["sonó", "sonaba", "ha sonado"], "Событие прерывает фон — indefinido.", "es9-interrumpida"],
-    ["Cuando llegué, el tren ya ___.", "había salido", ["había salido", "salió", "sale"], "Раньше другого прошлого — pluscuamperfecto.", "es13-pluscuam-uso"]],
+    ["Cuando llegué, el tren ya ___.", "había salido", ["había salido", "salió", "sale"], "Раньше другого события в прошлом — pluscuamperfecto.", "es13-pluscuam-uso"]],
   futuro: [["Si tengo tiempo, te ___.", "llamaré", ["llamaré", "llame", "llamaría"], "**si** + presente → futuro.", "es10-si"],
-    ["Si ___ dinero, compraré un coche.", "tengo", ["tengo", "tendré", "tenga"], "После **si** — presente.", "es10-si"],
+    ["Si ___ dinero, compraré un coche.", "tengo", ["tengo", "tendré", "tenga"], "В реальном условии после si — presente.", "es10-si"],
     ["¿___ abrir la ventana, por favor?", "Podrías", ["Podrías", "Podrás", "Puedas"], "Вежливая просьба — condicional.", "es10-cortesia"],
     ["El año que viene ___ a Rusia.", "viajaré", ["viajaré", "viajé", "viajaba"], "Будущее — futuro.", "es10-futuro-reg"]],
   subj: [["Quiero que ___ a mi fiesta.", "vengas", ["vengas", "vienes", "vendrás"], "**quiero que** + subjuntivo.", "es11-querer-que"],
@@ -148,9 +148,9 @@ const ES14_GRAM = {
   /* «¿Suena natural?»: [bien, calco, explicación, regla] */
   natural: [["Tengo treinta años.", "Soy treinta años.", "Возраст — **tener**.", "es2-edad"], ["Me gusta esta película.", "Yo gusto esta película.", "То, что нравится, — подлежащее.", "es4-gustar"],
     ["Soy médico.", "Soy un médico.", "Профессия — без артикля.", "es2-profesion"], ["Tengo frío.", "Estoy frío.", "Мне холодно — **tengo frío**.", "es4-hace-tengo"],
-    ["Me pongo nervioso antes de los exámenes.", "Estoy nervioso siempre antes de los exámenes.", "Перемена — **ponerse**.", "es13-ponerse"], ["Habla español mejor que yo.", "Habla español más bien que yo.", "Сравнительная от bien — **mejor**.", "es7-mejor-peor"]],
+    ["Me pongo nervioso antes de los exámenes.", "Estoy nervioso siempre antes de los exámenes.", "Перемена — **ponerse**.", "es13-ponerse"], ["Habla español mejor que yo.", "Habla español más bien que yo.", "Сравнительная степень от bien — **mejor**.", "es7-mejor-peor"]],
   /* «¿Por qué?»: [frase, palabra, correcta, otras, regla] */
-  porque: [["Cuando llegué, ya se había ido.", "se había ido", "Это случилось раньше другого прошлого", ["Это будущее", "Это привычка"], "es13-pluscuam-uso"],
+  porque: [["Cuando llegué, ya se había ido.", "se había ido", "Это произошло раньше другого события в прошлом.", ["Это будущее", "Это привычка"], "es13-pluscuam-uso"],
     ["Quiero que vengas.", "vengas", "После «quiero que» — subjuntivo", ["Это прошлое", "Это вопрос"], "es11-querer-que"],
     ["Hacía sol y fuimos a la playa.", "Hacía", "Это фон рассказа", ["Это событие", "Это будущее"], "es9-fondo-suceso"],
     ["Ana dijo que estaba cansada.", "estaba", "После «dijo que» время сдвигается назад", ["Она устала давно", "Это ошибка"], "es13-dijo-que"],
@@ -230,13 +230,13 @@ function ES14_CONV() {
 /* Los seis bloques. es = título en español (lo que se aprende), ru = en ruso (la pantalla) */
 const ES14_BLOQUES = [
   { id: "lectura", es: "Comprensión lectora", ru: "Чтение", puntos: 15, emoji: "📖", min: "30–40 мин", intro: "Три текста по возрастающей сложности: сообщение, рассказ о поездке и мнение. Не нужно переводить всё: найди то, о чём спрашивают.", repaso: "урок 13, модуль 7 (Textos de la vida real)" },
-  { id: "audio", es: "Comprensión auditiva", ru: "Аудирование", puntos: 15, emoji: "🎧", min: "30–40 мин", intro: "Диалог, разговор и рассказ, три короткие фразы, чтобы расслышать форму, и в конце два аудио, на которые нужно ответить письменно по-испански. Слушай сколько хочешь.", repaso: "урок 13, модуль 8 (Escuchar y conversar)" },
-  { id: "gramatica", es: "Gramática en contexto", ru: "Грамматика", puntos: 20, emoji: "🧩", min: "40–50 мин", intro: "Ser, estar и hay, согласование, настоящее и прошедшие времена, будущее и si, subjuntivo, местоимения, предлоги, косвенная речь, порядок слов, исправить ошибку и сказать, что не так. Каждый раз вопросы другие.", repaso: "уроки 8–13 (в конце «Что повторить» покажет правила)" },
+  { id: "audio", es: "Comprensión auditiva", ru: "Аудирование", puntos: 15, emoji: "🎧", min: "30–40 мин", intro: "В этой части — диалог, разговор и рассказ, а также три короткие фразы для тренировки восприятия грамматических форм. В конце — два аудио, на которые нужно ответить письменно по-испански. Слушай, сколько хочешь.", repaso: "урок 13, модуль 8 («Аудио и разговоры»)" },
+  { id: "gramatica", es: "Gramática en contexto", ru: "Грамматика", puntos: 20, emoji: "🧩", min: "40–50 мин", intro: "В этой части проверяются ser, estar и hay, согласование, настоящее и прошедшие времена, будущее и si, subjuntivo, местоимения, предлоги, косвенная речь и порядок слов. Нужно будет исправить ошибку и объяснить, что не так. Вопросы каждый раз разные.", repaso: "уроки 8–13 (в конце «Что повторить» покажет правила)" },
   { id: "lexica", es: "Vocabulario en contexto", ru: "Лексика", puntos: 10, emoji: "🗂️", min: "20–30 мин", intro: "Слова в деле: выбери подходящее по ситуации, скажи, что они значат, и напиши слово, которое слышишь. Каждый раз слова другие.", repaso: "уроки 6–13 и Словарь" },
   { id: "escritura", es: "Producción escrita", ru: "Письмо", puntos: 20, emoji: "✍️", min: "40–50 мин", intro: "Два текста: сообщение (80–100 слов) и «Mi historia» (200–250 слов).", repaso: "урок 13, модули 11 и 12 (мастерская и проект)" },
   { id: "comunicacion", es: "Comunicación", ru: "Общение", puntos: 20, emoji: "💬", min: "20–30 мин", intro: "Ситуации, вопросы со свободным ответом и разговор из десяти реплик. Единственного правильного ответа нет.", repaso: "уроки 11–13 (проекты и разговоры)" }
 ];
-const ES14_NIVELES = [[90, "Отличный уровень", "Ты общаешься довольно самостоятельно и уверенно пользуешься конструкциями."], [80, "Очень хороший уровень", "Ты хорошо общаешься, с редкими ошибками."],
+const ES14_NIVELES = [[90, "Отличный уровень", "Ты уже довольно свободно общаешься и уверенно пользуешься изученными конструкциями."], [80, "Очень хороший уровень", "Ты хорошо общаешься, с редкими ошибками."],
   [70, "Рабочий уровень", "Ты справляешься, но некоторые конструкции нужно закрепить."], [60, "Уровень в развитии", "Ты многое понимаешь, но говорить и писать пока трудно."], [0, "Нужно закрепить", "Стоит повторить некоторые уроки, прежде чем идти дальше."]];
 
 /* Lugares con sorteo: cuántos salen en cada intento */

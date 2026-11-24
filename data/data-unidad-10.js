@@ -7,7 +7,7 @@
      fórmulas (с друзья́ми, мно́го люде́й, нет де́нег, нет вре́мени, пять
      часо́в / лет). Por qué два часа́: genitivo singular después de 2–4.
    · Entran нра́виться / понра́виться, «У меня́ есть», не́ было / не бу́дет
-     + genitivo, у + persona («en lo de»), к + dativo, la edad (мне … лет),
+     + genitivo, у + persona («en casa de»), к + dativo, la edad (мне … лет),
      над / под / пе́ред / за + instrumental, стать, занима́ться.
    · Aspecto: parejas con dativo (U10_PARES: дать, сказа́ть, помо́чь…) y
      ну́жно / мо́жно + el infinitivo que va.
@@ -180,13 +180,13 @@ const UNIDAD_10 = {
           destacado: "-а → -ы / -и · consonante → -а · -ь, -й → -я",
           mas: { texto: "до́ма («en casa») no es el genitivo de дом, aunque se escriba igual: el genitivo es до́ма también, pero «en casa» es una palabra aparte. El contexto los separa: у до́ма («junto a la casa») / Я до́ма («estoy en casa»)." },
           chequeo: [{ pide: "у ___ (врач)", opciones: ["врача́", "врачи́"], ok: "врача́", por: "masculino: se agrega **-а**." }] },
-        { id: "u10-u-kogo", titulo: "En lo de alguien: у + genitivo",
-          texto: "у + una persona también es «en lo de», «en la casa de» o «en el consultorio de»: Я у ба́бушки («estoy en lo de la abuela»), Он у врача́ («está en el médico»).",
+        { id: "u10-u-kogo", titulo: "En casa de alguien: у + genitivo",
+          texto: "у + una persona también es «en casa de» o «en el consultorio de»: Я у ба́бушки («estoy en casa de la abuela»), Он у врача́ («está en el médico»).",
           ejemplos: [
-            { ru: "Сейча́с я {у ба́бушки}.", es: "Ahora estoy en lo de la abuela.", por: "у + genitivo: dónde, con una persona." },
+            { ru: "Сейча́с я {у ба́бушки}.", es: "Ahora estoy en casa de la abuela.", por: "у + genitivo: dónde, con una persona." },
             { ru: "Ма́ма {у врача́}.", es: "Mamá está en el médico.", por: "врач → врача́." }],
-          comparacion: "Para un lugar se dice в / на + prepositivo (в шко́ле); para la casa de una persona, у + genitivo (у ба́бушки), como «en lo de».",
-          chequeo: [{ pide: "«Estoy en lo de mi hermano»", opciones: ["Я у бра́та.", "Я в бра́те."], ok: "Я у бра́та.", por: "En lo de alguien: у + genitivo." }] }
+          comparacion: "Para un lugar se dice в / на + prepositivo (в шко́ле); para la casa de una persona, у + genitivo (у ба́бушки), como «en casa de».",
+          chequeo: [{ pide: "«Estoy en casa de mi hermano»", opciones: ["Я у бра́та.", "Я в бра́те."], ok: "Я у бра́та.", por: "En casa de alguien: у + genitivo." }] }
       ] },
     { id: "u10m3", n: 3, tipo: "leccion", nPractica: 12, titulo: "Genitivo: lo que no hay", resumen: "У меня́ нет маши́ны.",
       intro: "Para decir que no tienes algo, есть se vuelve нет y lo que falta pasa a genitivo.",
@@ -259,7 +259,7 @@ const UNIDAD_10 = {
           mas: { texto: "Я из Аргенти́ны, que usas desde el principio, ya era genitivo: Аргенти́на → Аргенти́ны. La frase venía armada; ahora sabes por qué termina así." },
           chequeo: [{ pide: "ко́фе без ___ (са́хар)", opciones: ["са́хара", "са́хар", "са́харом"], ok: "са́хара", por: "без + genitivo." }] },
         { id: "u10-iz-ot", titulo: "Из o от",
-          texto: "Las dos son «de», pero no se cruzan:\nиз: de un lugar (de adentro de algo): из Москвы́, из магази́на.\nот: de una persona: письмо́ от бра́та («una carta de mi hermano»), пода́рок от ма́мы.",
+          texto: "Las dos son «de», pero no se cruzan:\nиз: de un lugar (de dentro de algo): из Москвы́, из магази́на.\nот: de una persona: письмо́ от бра́та («una carta de mi hermano»), пода́рок от ма́мы.",
           ejemplos: [
             { ru: "Я {из Москвы́}.", es: "Soy de Moscú.", por: "Un lugar: из." },
             { ru: "Письмо́ {от бра́та}.", es: "Una carta de mi hermano.", por: "Una persona: от." },
@@ -295,10 +295,10 @@ const UNIDAD_10 = {
           ejemplos: [
             { ru: "Я иду́ {к врачу́}.", es: "Voy al médico.", por: "Adónde, a una persona: к + dativo." },
             { ru: "Я {у врача́}.", es: "Estoy en el médico.", por: "Dónde, con una persona: у + genitivo." },
-            { ru: "За́втра мы пое́дем {к ба́бушке}.", es: "Mañana vamos a ir a lo de la abuela.", por: "ба́бушка → ба́бушке." }],
+            { ru: "За́втра мы пое́дем {к ба́бушке}.", es: "Mañana vamos a ir a casa de la abuela.", por: "ба́бушка → ба́бушке." }],
           destacado: "в / на шко́лу (adónde, lugar) · к врачу́ (adónde, persona) · у врача́ (dónde, persona)",
           errores: [{ mal: "Я иду́ в врача́.", bien: "Я иду́ {к врачу́}.", por: "A una persona se va con к." }],
-          chequeo: [{ pide: "«Voy a lo de mi hermano»", opciones: ["Я иду́ к бра́ту.", "Я иду́ у бра́та."], ok: "Я иду́ к бра́ту.", por: "Adónde, a una persona: к + dativo." }] },
+          chequeo: [{ pide: "«Voy a casa de mi hermano»", opciones: ["Я иду́ к бра́ту.", "Я иду́ у бра́та."], ok: "Я иду́ к бра́ту.", por: "Adónde, a una persona: к + dativo." }] },
         { id: "u10-pares-dat", titulo: "Las parejas: dar, decir, ayudar, responder",
           texto: "Casi todos los verbos con dativo tienen pareja de resultado, con su futuro sin бу́ду:\nдава́ть → дать: дам, дашь, даст, дади́м, дади́те, даду́т\nговори́ть → сказа́ть: скажу́, ска́жешь\nпомога́ть → помо́чь: помогу́, помо́жешь\nотвеча́ть → отве́тить: отве́чу, отве́тишь\nсове́товать → посове́товать · объясня́ть → объясни́ть · пока́зывать → показа́ть · звони́ть → позвони́ть",
           ejemplos: [
@@ -775,10 +775,10 @@ function ejerciciosUnidad10() {
     push({ id: "U10-pq-g-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 2, regla: "u10-gen-fin", grupo: "PG-" + j, items: ["lex:" + s.id], oir: ru, pide: "¿Por qué «" + s.gen + "»?", grande: ru, audio: ru, audioManual: true,
       opciones: ops, correcta: r.replace(/\*\*/g, ""), explicacion: u10Cambio(s, "gen") });
   });
-  [["ба́бушка", "en lo de la abuela"], ["брат", "en lo de mi hermano"], ["врач", "en el médico"], ["ма́ма", "en lo de mamá"]].forEach(([w, es], j) => {
+  [["ба́бушка", "en casa de la abuela"], ["брат", "en casa de mi hermano"], ["врач", "en el médico"], ["ма́ма", "en casa de mamá"]].forEach(([w, es], j) => {
     const s = S(w), ok = "Я у " + s.gen + ".", mal = "Я в " + s.prep + ".";
     push({ id: "U10-nat-u-" + j, tipo: "natural", forma: "elegir", dificultad: 2, modulo: 2, regla: "u10-u-kogo", grupo: "NU-" + j, items: ["lex:" + s.id], oir: ok, pide: "«Estoy " + es + "». ¿Cuál es la correcta?",
-      opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " En lo de alguien: у + genitivo." });
+      opciones: baraja([ok, mal], j), correcta: ok, explicacion: ok + " En casa de alguien: у + genitivo." });
   });
   [["А́нна", "маши́на"], ["Ива́н", "соба́ка"]].forEach(([w, c], j) => {
     const s = S(w), pal = ["У", s.gen, "есть", S(c).nom];
@@ -844,7 +844,7 @@ function ejerciciosUnidad10() {
     if (j % 2 === 0) push({ id: "U10-pq-p-" + j, tipo: "porque", forma: "elegir", dificultad: 2, modulo: 5, regla: "u10-prep-gen", grupo: "PP-" + j, items: ["lex:" + X.id], oir: ok, pide: "¿Por qué " + X.gen + "?", grande: ok, audio: ok, audioManual: true,
       opciones: ["Después de " + pr + " va genitivo", "Es a quién: dativo"], correcta: "Después de " + pr + " va genitivo", explicacion: ok });
   });
-  [["брат", "от", "Una carta de mi hermano", "Письмо́"], ["ма́ма", "от", "Un regalo de mamá", "Пода́рок"], ["Москва́", "из", "Soy de Moscú", "Я"], ["магази́н", "из", "Vuelvo del negocio", "Я иду́"]].forEach(([w, pr, es, a0], j) => {
+  [["брат", "от", "Una carta de mi hermano", "Письмо́"], ["ма́ма", "от", "Un regalo de mamá", "Пода́рок"], ["Москва́", "из", "Soy de Moscú", "Я"], ["магази́н", "из", "Vuelvo de la tienda", "Я иду́"]].forEach(([w, pr, es, a0], j) => {
     const X = S(w), otro = pr === "от" ? "из" : "от", ok = a0 + " " + pr + " " + X.gen + ".", mal = a0 + " " + otro + " " + X.gen + ".";
     push({ id: "U10-par-io-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 5, regla: "u10-iz-ot", grupo: "IO-" + j, items: ["lex:" + X.id], oir: ok, pide: "«" + es + "». ¿Cuál dices?", opciones: baraja([ok, mal], j), correcta: ok,
       explicacion: ok + " " + (pr === "от" ? "De una persona: от." : "De un lugar: из.") });
@@ -868,7 +868,7 @@ function ejerciciosUnidad10() {
     push({ id: "U10-desc-d-" + j, tipo: "descubrir", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-dat-fin", grupo: "DD-" + j, items: ["lex:" + s.id], oir: s.dat,
       pide: E.map(x => x.nom + " → " + x.dat).join(" · ") + ". ¿Y " + s.nom + "?", opciones: baraja(uniq([s.dat, s.gen]), j), correcta: s.dat, explicacion: u10Cambio(s, "dat") });
   });
-  [["врач", "Vas al médico", "Estás en el médico"], ["ма́ма", "Vas a lo de mamá", "Estás en lo de mamá"], ["брат", "Vas a lo de tu hermano", "Estás en lo de tu hermano"], ["ба́бушка", "Vas a lo de la abuela", "Estás en lo de la abuela"]].forEach(([w, ir, estar], j) => {
+  [["врач", "Vas al médico", "Estás en el médico"], ["ма́ма", "Vas a casa de mamá", "Estás en casa de mamá"], ["брат", "Vas a casa de tu hermano", "Estás en casa de tu hermano"], ["ба́бушка", "Vas a casa de la abuela", "Estás en casa de la abuela"]].forEach(([w, ir, estar], j) => {
     const s = S(w), a = "Я иду́ к " + s.dat + ".", b = "Я у " + s.gen + ".", vamos = j % 2 === 0;
     push({ id: "U10-par-ku-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 6, regla: "u10-k-u", grupo: "KU-" + j, items: ["lex:" + s.id], oir: vamos ? a : b, pide: "«" + (vamos ? ir : estar) + "». ¿Cuál dices?", opciones: baraja([a, b], j), correcta: vamos ? a : b,
       explicacion: vamos ? a + " Adónde, a una persona: к + dativo." : b + " Dónde, con una persona: у + genitivo." });

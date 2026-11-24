@@ -1287,7 +1287,7 @@ const ES4_BASICAS_MOD = [
   ["es4m2", [], {
     id: "es4-a-tiempo",
     titulo: "A tiempo · más o menos",
-    texto: "**a tiempo** — «вовремя»: **Llego a tiempo**. **más o menos** — «примерно»: **Son más o menos las tres** — сейчас примерно три часа. И в ответ на **¿Qué tal?**: **Más o menos** — «так себе».",
+    texto: "**a tiempo** — «вовремя»: **Llego a tiempo**. **más o menos** — «примерно»: **Son más o menos las tres** — сейчас примерно три часа. А в ответ на **¿Qué tal?** можно сказать **Más o menos** — «так себе».",
     ejemplos: [
       { es: "El tren llega a tiempo.", ru: "Поезд приходит вовремя." },
       { es: "Son más o menos las cinco.", ru: "Сейчас примерно пять часов." }
@@ -1327,12 +1327,12 @@ const ES4_BASICAS_MOD = [
   ["es4m3", ["sentarse", "despertar"], {
     id: "es4-sentarse",
     titulo: "Me siento · despierto a mi hijo",
-    texto: "**sentarse** — «садиться»: **me siento, te sientas, se sienta, nos sentamos, os sentáis, se sientan** (e → ie). **Siéntate** — «садись» — услышишь часто.\n\n**despertar** — «будить» (кого-то), а **despertarse** — «просыпаться» (самому): **Me despierto a las siete y despierto a mi hijo a las siete y media**.",
+    texto: "**sentarse** — «садиться»: **me siento, te sientas, se sienta, nos sentamos, os sentáis, se sientan** (e → ie). **Siéntate** — «садись» — ты будешь часто это слышать.\n\n**despertar** — «будить» (кого-то), а **despertarse** — «просыпаться» (самому): **Me despierto a las siete y despierto a mi hijo a las siete y media.**",
     ejemplos: [
       { es: "En clase me siento al lado de la ventana.", ru: "На уроке я сажусь у окна." },
       { es: "Me despierto a las siete y despierto a los niños a las ocho.", ru: "Я просыпаюсь в семь и бужу детей в восемь." }
     ],
-    ojo: "С **se** действие — с самим собой: **despertarse** — проснуться самому, **despertar a alguien** — разбудить кого-то."
+    ojo: "Возвратная форма с **se** обозначает действие, которое субъект совершает по отношению к себе: **despertarse** — просыпаться самому; **despertar a alguien** — будить кого-то."
   }],
   ["es4m9", ["favorito", "baile"], {
     id: "es4-favorito",
@@ -1345,17 +1345,17 @@ const ES4_BASICAS_MOD = [
   }]
 ];
 const ES4_BASICAS = [
-  ["situacion-frase", "elegir", 2, "es4-a-tiempo", "Ты не знаешь точное время, только примерно.", "", "Son más o menos las cinco.", ["Es más o menos las cinco.", "Son las cinco más o menos de."], "**Son más o menos las cinco.**", "más o menos"],
+  ["situacion-frase", "elegir", 2, "es4-a-tiempo", "Ты знаешь время только примерно.", "", "Son más o menos las cinco.", ["Es más o menos las cinco.", "Son las cinco más o menos de."], "**Son más o menos las cinco.**", "más o menos"],
   ["respuesta", "elegir", 2, "es4-a-tiempo", "Тебе говорят: что ответишь?", "¿Llegas tarde?", "No, llego a tiempo.", ["No, llego en tiempo.", "No, llego al tiempo."], "**a tiempo** — «вовремя».", "a tiempo"],
   ["situacion-frase", "elegir", 5, "es4-irse", "Ты уходишь и прощаешься.", "", "Me voy. ¡Hasta mañana!", ["Voy. ¡Hasta mañana!", "Se voy. ¡Hasta mañana!"], "Когда уходишь — **me voy**.", "irse"],
   ["reflexivo", "elegir", 5, "es4-irse", "Что подходит?", "¿A qué hora ___ (tú) de casa?", "te vas", ["vas", "se va"], "**irse**, ты — **te vas**.", "irse"],
   ["reflexivo", "elegir", 5, "es4-irse", "Что подходит?", "Es tarde: nosotros ___. ¡Adiós!", "nos vamos", ["vamos", "se van"], "**irse**, мы — **nos vamos**.", "irse"],
   ["reflexivo", "escribir", 5, "es4-irse", "Впиши форму глагола «irse».", "Lucía ___ a las nueve.", "se va", [], "**irse**, она — **se va**.", "irse"],
-  ["situacion-frase", "elegir", 8, "es4-de-momento", "Пока, на время, ты живёшь в Барселоне.", "", "De momento vivo en Barcelona.", ["En momento vivo en Barcelona.", "Del momento vivo en Barcelona."], "**de momento** — «пока».", "de momento"],
+  ["situacion-frase", "elegir", 8, "es4-de-momento", "Ты пока живёшь в Барселоне; возможно, позже ситуация изменится.", "", "De momento vivo en Barcelona.", ["En momento vivo en Barcelona.", "Del momento vivo en Barcelona."], "**de momento** — «пока».", "de momento"],
   ["tiempo", "elegir", 6, "es4-cielo", "Что подходит?", "Hoy no hace sol: el ___ está gris.", "cielo", ["sol", "viento"], "**el cielo** — «небо».", "cielo"],
   ["tiempo-escribir", "escribir", 6, "es4-cielo", "Какое это слово? Напиши.", "Hace sol y el ___ está azul.", "cielo", [], "**el cielo** — «небо».", "cielo"],,
   ["basica", "elegir", 3, "es4-sentarse", "Что подходит?", "Llego a clase y ___ al lado de Ana.", "me siento", ["me sento", "siento"], "**sentarse**, я — **me siento** (e → ie).", "sentarse"],
-  ["basica", "elegir", 3, "es4-sentarse", "Что подходит?", "Mi madre ___ a mi hermano a las siete.", "despierta", ["se despierta", "despiertan"], "Будить кого-то — **despertar**, без **se**.", "despertar"],
+  ["basica", "elegir", 3, "es4-sentarse", "Что подходит?", "Mi madre ___ a mi hermano a las siete.", "despierta", ["se despierta", "despiertan"], "Когда нужно разбудить кого-то, используют **despertar** без **se**.", "despertar"],
   ["basica", "elegir", 9, "es4-favorito", "Что подходит?", "Mi película ___ es «Volver».", "favorita", ["favorito", "favoritas"], "**la película** — женский род: **favorita**.", "favorito"],
   ["basica", "escribir", 9, "es4-favorito", "Танец — как по-испански? Напиши.", "Me gusta mucho el ___.", "baile", [], "**el baile** — «танец».", "baile"]
 ];

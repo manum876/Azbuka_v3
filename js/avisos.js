@@ -44,7 +44,7 @@ const AZ_AVISOS = { visitasInstalar: 1, instalarPausa: 3, copiaPrimera: 3, copia
    nombre y su ícono; en Azbuka, los de siempre. */
 const AZ_AV_TX = (typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece") ? {
   glifo: "Ab", cerrar: "Закрыть",
-  porQue: ["Так приложение работает ", "без интернета", ", а твой прогресс ", "надёжно сохраняется", " в телефоне."], tresToques: " Всего три касания:", icono: " Открывается со своего значка, как любое приложение.",
+  porQue: ["Так приложение работает ", "без интернета", " и открывается ", "быстрее", "."], tresToques: " Всего три касания:", icono: " Открывается со своего значка, как любое приложение.",
   noMas: "Больше не показывать", ahoraNo: "Не сейчас",
   iosTit: "Установи Abecé на iPhone", ios1: "В Safari нажми ", compartir: " Поделиться", ios1b: "Если её не видно, она внутри ", ios2: "Пролистай и выбери ", agregar: " На экран «Домой»",
   ios3a: "Нажми ", ios3b: "Добавить", ios3c: ". Теперь открывай Abecé с его значка.",
@@ -56,15 +56,15 @@ const AZ_AV_TX = (typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "ab
   cada: n => "Каждые " + n + " дн.", recuerda: "Напомнить позже"
 } : {
   glifo: "Аз", cerrar: "Cerrar",
-  porQue: ["Así funciona ", "sin internet", " y tu progreso queda ", "bien guardado", " en el teléfono."], tresToques: " Son tres toques:", icono: " Se abre desde su ícono, como cualquier app.",
+  porQue: ["Así funciona ", "sin internet", " y se abre ", "más rápido", "."], tresToques: " Son tres toques:", icono: " Se abre desde su ícono, como cualquier app.",
   noMas: "No mostrar más", ahoraNo: "Ahora no",
-  iosTit: "Instala Azbuka en tu iPhone", ios1: "En Safari, toca ", compartir: " Compartir", ios1b: "Si no lo ves, está adentro de ", ios2: "Baja y elige ", agregar: " Agregar a inicio",
+  iosTit: "Instala Azbuka en tu iPhone", ios1: "En Safari, toca ", compartir: " Compartir", ios1b: "Si no lo ves, está dentro de ", ios2: "Baja y elige ", agregar: " Agregar a inicio",
   ios3a: "Toca ", ios3b: "Agregar", ios3c: ". Desde ahora, abre Azbuka con su ícono.",
   andTit: "Instala Azbuka en tu teléfono", instalar: "📲 Instalar",
   copiaTit: "Guarda una copia de tu progreso", nunca: "Todavía no guardaste ninguna copia.", hace: d => ["Hace ", d + " días", " que no guardas una copia."],
   vive: " Tu progreso vive solo en este teléfono: si se borran los datos o cambias de teléfono, se pierde.",
   ej: "ejercicios hechos", pal: "palabras dominadas", notas: "notas en el cuaderno", guardada: "✓ Copia guardada", guardar: "Guardar copia ahora",
-  notaCopia: ["Elige ", "Guardar en Archivos", ", o mandátela por mail o WhatsApp. Para recuperarla: Ajustes → Restaurar copia."],
+  notaCopia: ["Elige ", "Guardar en Archivos", ", o envíatela por mail o WhatsApp. Para recuperarla: Ajustes → Restaurar copia."],
   cada: n => "Cada " + n + " días", recuerda: "Recuérdamelo después"
 };
 

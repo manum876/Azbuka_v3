@@ -33,7 +33,7 @@
    14/10/2026: Cuenta (mail, progreso en la nube, cerrar sesión y
    eliminar la cuenta con todos los datos) y, solo para el admin,
    Accesos (habilitar y quitar mails, y marcar revisores). Para admin y
-   revisor, «Abecé en construcción» (22/10/2026); para el revisor, «Alumnos»
+   revisor, «Dirección de este teléfono» (22/10/2026); para el revisor, «Alumnos»
    (los que habilitó él). Todo lo hace js/cuenta.js.
    21/10/2026: Reportes (solo admin): los errores que mandan los
    alumnos con el botón 🐞 del menú, con «Pendientes» / «Resueltos».
@@ -41,8 +41,8 @@
 const { useState, useEffect } = htmPreact;
 const h = React.createElement;
 /* ── Textos por dirección (27/10/2026): en Abecé, lo que ve el alumno va en ruso
-   (borrador para Iván). Las herramientas de admin y revisor (Abecé en construcción,
-   Accesos, Alumnos, Reportes) quedan siempre en español: son para Manu y para Iván. ── */
+   Las herramientas de admin y revisor (Dirección de este teléfono,
+   Accesos, Alumnos, Reportes) quedan siempre en español. ── */
 const RU = typeof AZ_DIRECCION !== "undefined" && AZ_DIRECCION.id === "abece";
 const TX = RU ? {
   fecha: "ru-RU", hoy: "сегодня ", titulo: "Настройки", cuenta: "Аккаунт", translit: "Подсказка кириллицей", copia: "Резервная копия",
@@ -57,7 +57,7 @@ const TX = RU ? {
   auto: "Автоматически", mostrar: "Показывать", ocultar: "Скрывать",
   letra: "Размер текста", letraTxt: "Меняет размер всего текста в приложении.", normal: "Обычный", grande: "Крупный", muy: "Очень крупный", muestra: "Пример: так будет выглядеть текст урока."
 } : {
-  fecha: "es-AR", hoy: "hoy ", titulo: "Ajustes", cuenta: "Cuenta", translit: "Transliteración", copia: "Copia de seguridad",
+  fecha: "es-ES", hoy: "hoy ", titulo: "Ajustes", cuenta: "Cuenta", translit: "Transliteración", copia: "Copia de seguridad",
   sinCuentas: "Las cuentas todavía no están activadas en esta versión de la app. El progreso se guarda solo en este teléfono.",
   alDia: "Tu progreso está guardado en la nube.", subiendo: "Guardando en la nube…", pendiente: "Hay cambios por guardar en la nube.",
   sinRed: "Sin conexión: lo nuevo se guarda en la nube cuando vuelva internet.", ultimo: "Último guardado: ",
@@ -132,7 +132,7 @@ function SeccionAccesos({ c, modo = "admin" }) {
     try { await A.marcarDireccion(p.email, d); setMsg({ t: p.email + " ahora es de " + NOMBRE_DIR[d] + ". Lo ve la próxima vez que abra la app." }); cargar(); }
     catch (e) { setMsg({ err: true, t: /direccion/.test(String(e && e.message || e)) ? "Falta actualizar Supabase: corre otra vez supabase.sql (GUIA.md)." : "No se pudo cambiar. Prueba de nuevo." }); } };
   const revisor = async (p, si) => { setMsg(null);
-    try { await A.marcarRevisor(p.email, si); setMsg({ t: si ? p.email + " ahora es revisor: ve Abecé en construcción y puede dar acceso a alumnos." : p.email + " ya no es revisor." }); cargar(); }
+    try { await A.marcarRevisor(p.email, si); setMsg({ t: si ? p.email + " ahora es revisor: puede probar las dos direcciones en su teléfono y dar acceso a alumnos." : p.email + " ya no es revisor." }); cargar(); }
     catch (e) { setMsg({ err: true, t: /revisor/.test(String(e && e.message || e)) ? "Falta actualizar Supabase: corre otra vez supabase.sql (GUIA.md)." : "No se pudo cambiar. Prueba de nuevo." }); } };
   const etiqueta = t => h("span", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, color: c.gold, marginLeft: 8, letterSpacing: 1, textTransform: "uppercase" } }, t);
   const btnFila = (t, fn, col) => h("button", { className: "btn", onClick: fn, style: { background: c.bg2, border: `1px solid ${c.border}`, color: col, fontSize: "var(--az-fs-nota)", fontWeight: 600, padding: "8px 12px", borderRadius: "var(--az-r)", cursor: "pointer", fontFamily: "inherit", flexShrink: 0 } }, t);
@@ -198,8 +198,9 @@ function LinksParaMandar({ c, rev }) {
         copiado === d ? "✓ Copiado" : "Copiar"))),
     copiado === "error" && h("div", { style: { fontSize: "var(--az-fs-nota)", color: ROJO_TXT, marginTop: 8 } }, "No se pudo copiar: mantén el dedo sobre el link para copiarlo."));
 }
-/* ── Abecé en construcción (22/10/2026): solo admin y revisor. Cambia la
-   dirección de este teléfono; los alumnos no ven esta sección ni Abecé. ── */
+/* ── Dirección de este teléfono (22/10/2026; renombrada el 24/11/2026): solo
+   admin y revisor. Cambia este teléfono entre Azbuka y Abecé para probar la
+   otra dirección; no cambia la dirección de la cuenta. ── */
 function SeccionAbece({ c }) {
   const [dir, setDir] = useState(typeof AZ_DIRECCION !== "undefined" ? AZ_DIRECCION.id : "azbuka");
   const elegir = async v => {
@@ -214,7 +215,7 @@ function SeccionAbece({ c }) {
       dir === v ? { background: c.gold + "14", border: `1px solid ${c.gold}`, color: c.gold } : { background: c.bg2, border: `1px solid ${c.border}`, color: c.textMuted }) }, t);
   return h(React.Fragment, null,
     h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } },
-      h("b", { style: { color: c.text } }, "Abecé"), " es la versión para rusohablantes que aprenden español. Está en construcción y los alumnos no la ven. Aquí puedes probarla en este teléfono. Ya están el Diccionario, Verbos, el Cuaderno, Ajustes y el inicio; las unidades y el resto de los módulos todavía son los de Azbuka. Esta sección, Accesos, Alumnos y Reportes quedan siempre en español."),
+      h("b", { style: { color: c.text } }, "Abecé"), " es la versión para rusohablantes que aprenden español. Aquí puedes cambiar este teléfono entre Azbuka y Abecé para probar la otra dirección. No cambia la dirección de tu cuenta. Esta sección, Accesos, Alumnos y Reportes quedan siempre en español."),
     h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("azbuka", "Azbuka"), chip("abece", "Abecé")));
 }
 /* ── Reportes de errores (21/10/2026, solo admin) ── */
@@ -290,7 +291,7 @@ function App() {
       h("h1", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, color: c.text } }, TX.titulo),
       lbl(TX.cuenta),
       caja(h(SeccionCuenta, { c })),
-      (esAdmin || esRevisor) && lbl("Abecé en construcción"),
+      (esAdmin || esRevisor) && lbl("Dirección de este teléfono"),
       (esAdmin || esRevisor) && caja(h(SeccionAbece, { c })),
       esAdmin && lbl("Accesos"),
       esAdmin && caja(h(SeccionAccesos, { c })),
@@ -308,11 +309,11 @@ function App() {
       lbl(TX.translit),
       caja(
         RU ? h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } },
-          "Подсказка кириллицей (", h("i", null, "о́ла"), ") помогает читать в начале. Когда ты уже читаешь по-испански, лучше его скрыть: так ты читаешь сам. ",
-          h("b", { style: { color: c.text } }, "Автоматически:"), " видно в уроках 1–3 и скрыто с 4-го (в словаре и других разделах — по уроку, на котором ты сейчас). В «Алфавите» и в уроке 1 оно видно всегда: там произношение и есть то, что ты учишь.")
+          "Подсказка кириллицей (", h("i", null, "о́ла"), ") помогает читать в начале. Когда ты уже читаешь по-испански, лучше её скрыть: так ты читаешь сам. ",
+          h("b", { style: { color: c.text } }, "Автоматически:"), " видна в уроках 1–3 и скрыта с 4-го (в словаре и других разделах — по уроку, на котором ты сейчас). В «Алфавите» и в уроке 1 она видна всегда: там произношение и есть то, что ты учишь.")
         : h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, lineHeight: 1.6 } },
           "La transliteración (", h("i", null, "jarashó"), ") ayuda a leer al principio. Cuando ya lees el cirílico, ocultarla te obliga a leer en ruso. ",
-          h("b", { style: { color: c.text } }, "Automática:"), " se ve en las Unidades 1 a 3 y se oculta desde la 4 (en el Diccionario, Verbos, Casos y Diálogos, según la unidad en la que estás). Siempre se ve en Alfabeto y en la Unidad 1, donde la pronunciación es lo que se aprende, y en los diálogos la puedes volver a prender cuando quieras."),
+          h("b", { style: { color: c.text } }, "Automática:"), " se ve en las Unidades 1 a 3 y se oculta desde la 4 (en el Diccionario, Verbos, Casos y Diálogos, según la unidad en la que estás). Siempre se ve en Alfabeto y en la Unidad 1, donde la pronunciación es lo que se aprende, y en los diálogos la puedes volver a activar cuando quieras."),
         h("div", { style: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" } }, chip("auto", TX.auto), chip("si", TX.mostrar), chip("no", TX.ocultar))),
       lbl(TX.copia),
       caja(h(AzCopiaSeguridad, { c }))));

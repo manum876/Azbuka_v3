@@ -43,7 +43,7 @@ const UNIDAD_ES_13 = {
   id: 13,
   titulo: "Испанский для жизни",
   tituloEs: "Español para la vida real",
-  objetivo: "Рассказать историю, передать чужие слова, говорить о чувствах и о жизни в Испании, понимать настоящие тексты и писать связный текст — самостоятельно.",
+  objetivo: "Научиться рассказывать истории, передавать чужие слова, говорить о чувствах и о жизни в Испании, понимать тексты из реальной жизни и самостоятельно писать связные тексты.",
   tiempo: "4 недели ежедневной практики (примерно 25–30 часов)",
   modulos: [
     {
@@ -64,7 +64,7 @@ const UNIDAD_ES_13 = {
         {
           id: "es13-pluscuam",
           titulo: "Había + participio",
-          texto: "Pluscuamperfecto строится как pretérito perfecto (**he comido**), только **haber** стоит в imperfecto: **había, habías, había, habíamos, habíais, habían** + participio. Participio не меняется: **Ana había salido**, **ellas habían salido**.\nНеправильные participios ты уже знаешь из урока 8: **hecho, dicho, visto, escrito, puesto, vuelto, abierto, roto**.\nМежду **había** и participio ничего не ставят; **no** и местоимения — перед **había**: **No lo había visto.**",
+          texto: "Pluscuamperfecto образуется так же, как pretérito perfecto (**he comido**), но вспомогательный глагол **haber** стоит в imperfecto: ****había**, habías, había, habíamos, habíais, habían** + participio. Participio не изменяется: **Ana había salido**, **ellas habían salido**.\nНеправильные participios ты уже знаешь из урока 8: **hecho, dicho, visto, escrito, puesto, vuelto, abierto, roto**.\nОтрицание **no** и местоимения-дополнения ставятся перед формой había: **No lo había visto.**",
           ejemplos: [
             { es: "Cuando llegué a la estación, el tren ya había salido.", ru: "Когда я пришёл на вокзал, поезд уже ушёл.", por: "Сначала ушёл поезд (**había salido**), потом пришёл я (**llegué**)." },
             { es: "Ana no había visto nunca el mar en invierno.", ru: "Аня никогда раньше не видела море зимой." },
@@ -81,7 +81,7 @@ const UNIDAD_ES_13 = {
         {
           id: "es13-pluscuam-uso",
           titulo: "Что было раньше",
-          texto: "Когда рассказываешь о прошлом, у тебя есть «главный момент» (**indefinido**: llegué, abrí, vi). Всё, что случилось **до** него, — в **pluscuamperfecto**:\n**Abrí la puerta y me di cuenta de que había perdido las llaves.** — Я открыл дверь и понял, что потерял ключи (раньше).\nЧасто рядом стоят **ya** (уже) и **todavía no** (ещё не): **Cuando llamé, todavía no se había levantado.**\nЕсли события идут **по порядку**, хватает indefinido: **Llegué, cené y me acosté.**",
+          texto: "Когда рассказываешь о прошлом, есть «главный момент» (**indefinido**: llegué, abrí, vi). То, что произошло **до** него, выражается **pluscuamperfecto**:\n**Abrí la puerta y me di cuenta de que había perdido las llaves.** — «Я открыл дверь и понял, что потерял ключи» (потерял их раньше).\nЧасто рядом стоят **ya** («уже») и **todavía no** («ещё не»): **Cuando llamé, todavía no se había levantado.**\nЕсли события следуют одно за другим, обычно достаточно indefinido: **Llegué, cené y me acosté.**",
           ejemplos: [
             { es: "Cuando me di cuenta, ya era tarde: había perdido el autobús.", ru: "Когда я спохватился, было уже поздно: я опоздал на автобус." },
             { es: "Cuando llamé a Lucía, todavía no se había levantado.", ru: "Когда я позвонил Лусии, она ещё не встала." },
@@ -96,8 +96,8 @@ const UNIDAD_ES_13 = {
         },
         {
           id: "es13-nunca-habia",
-          titulo: "Nunca había… — первый раз",
-          texto: "Чтобы сказать, что что-то случилось **в первый раз**, испанцы часто говорят **nunca había…** — «никогда раньше не…»:\n**Nunca había comido algo tan rico.** — Никогда раньше не ел ничего такого вкусного.\n**¡Nunca había visto tanta gente!**\nТо же самое: **Era la primera vez que…** — Это было в первый раз, что…",
+          titulo: "Nunca había… — «никогда раньше не…»",
+          texto: "Чтобы сказать, что раньше чего-то никогда не происходило или что ты делаешь что-то впервые, по-испански часто используют **nunca había…** — «никогда раньше не…»:\n**Nunca había comido algo tan rico.** — «Никогда раньше я не ел ничего такого вкусного».\n**¡Nunca había visto tanta gente!** — «Никогда раньше я не видел столько людей!»\nПохожее значение можно выразить так: **Era la primera vez que…** — «Это был первый раз, когда…».",
           ejemplos: [
             { es: "Nunca había estado en una fiesta tan grande.", ru: "Я никогда раньше не был на таком большом празднике." },
             { es: "Era la primera vez que viajaba sola.", ru: "Она впервые путешествовала одна." }
@@ -126,7 +126,7 @@ const UNIDAD_ES_13 = {
         {
           id: "es13-dice-que",
           titulo: "Dice que…",
-          texto: "После **dice que, explica que, comenta que, asegura que, cuenta que** время не меняется: **«Tengo frío» → Dice que tiene frío.**\nМеняются **лица и притяжательные**: **yo → él / ella**, **mi → su**, **nosotros → ellos**: **«Mi casa es pequeña» → Dice que su casa es pequeña.**\n**que** опускать нельзя: «Dice tiene frío» — неправильно.",
+          texto: "После **dice **que**, explica que, comenta que, asegura que, cuenta que** время глагола в придаточной части обычно не меняется, если глагол сообщения стоит в настоящем времени: **«Tengo frío» → Dice que tiene frío.**\nМеняются **лица и притяжательные** местоимения: **yo → él / ella**, **mi → su**, **nosotros → ellos**: **«Mi casa es pequeña» → Dice que su casa es pequeña.**\nСоюз que опускать нельзя: «Dice tiene frío» — неправильно.",
           ejemplos: [
             { es: "Javier dice que el examen es el viernes.", ru: "Хавьер говорит, что экзамен в пятницу." },
             { es: "Lucía comenta que su piso es muy pequeño.", ru: "Лусия говорит, что её квартира очень маленькая.", por: "**mi piso** → **su piso**." },
@@ -142,11 +142,11 @@ const UNIDAD_ES_13 = {
         {
           id: "es13-pregunta-si",
           titulo: "Pregunta si… / pregunta dónde…",
-          texto: "Вопрос **без вопросительного слова** («¿Vienes?») передают через **si** — «ли»: **Pregunta si vienes.**\nВопрос **с вопросительным словом** (dónde, cuándo, qué, cómo, por qué) — через это слово, со знаком ударения: **Pregunta dónde vives. Quiere saber qué haces.**\n**que** перед **si** и перед вопросительным словом не ставят: «Pregunta que si vienes» — так говорят в разговоре, но правильно **Pregunta si vienes.**",
+          texto: "Вопрос без вопросительного слова («¿Vienes?») передают через **si** — «ли»: **Pregunta si vienes.**\nВопрос с вопросительным словом (dónde, cuándo, qué, cómo, por qué) — через это слово, со знаком ударения: **Pregunta dónde vives. Quiere saber qué haces.**\nПеред **si** и перед вопросительным словом **que** не ставят. «Pregunta que si vienes» можно услышать в разговоре, но правильно **Pregunta si vienes**.",
           ejemplos: [
             { es: "Marta pregunta si vamos a la fiesta.", ru: "Марта спрашивает, пойдём ли мы на праздник." },
             { es: "Javier quiere saber cuándo empieza la clase.", ru: "Хавьер хочет знать, когда начинается урок." },
-            { es: "Me pregunta por qué estoy triste.", ru: "Он спрашивает меня, почему я грустный." }
+            { es: "Me pregunta por qué estoy triste.", ru: "Он спрашивает меня, почему мне грустно." }
           ],
           errores: [
             { mal: "Pregunta que si vienes.", bien: "Pregunta si vienes.", por: "Перед **si** — без **que**." },
@@ -197,7 +197,7 @@ const UNIDAD_ES_13 = {
         {
           id: "es13-dijo-que",
           titulo: "Dijo que estaba…",
-          texto: "После **dijo que, explicó que, contó que, aseguró que, me escribió que** время делает шаг назад:\n**presente → imperfecto:** «Tengo frío» → **Dijo que tenía frío.**\n**perfecto и indefinido → pluscuamperfecto:** «He comido» / «Comí» → **Dijo que había comido.**\n**futuro → condicional:** «Llamaré» → **Dijo que llamaría.**\n**imperfecto** и **condicional** не меняются.\nЕсли то, что сказали, **до сих пор правда**, можно не менять время: **Me dijo que es de Moscú** (она и сейчас из Москвы). Но сдвиг никогда не ошибка.",
+          texto: "После **dijo que, explicó que, contó que, aseguró que, me escribió que** время в придаточной части обычно сдвигается на шаг назад:\n**presente → **imperfecto**:** «Tengo frío» → **Dijo que tenía frío.**\npretérito **perfecto и indefinido → pluscuamperfecto:** «He comido» / «Comí» → **Dijo que había comido.**\n**futuro → **condicional**:** «Llamaré» → **Dijo que llamaría.**\nimperfecto и condicional обычно не меняются.\nЕсли сказанное **до сих пор правда**, время можно оставить без изменения: **Me dijo que es de Moscú** (она и сейчас из Москвы). Сдвиг времени тоже может быть уместен.",
           comparacion: "По-русски: «Она сказала, что **устала**», «…что **придёт**» — время не меняется. По-испански: **estaba cansada**, **vendría**.",
           ejemplos: [
             { es: "Lucía me dijo que estaba muy cansada.", ru: "Лусия сказала мне, что очень устала." },
@@ -250,7 +250,7 @@ const UNIDAD_ES_13 = {
       tablas: [
         { titulo: "Кто что делает в рассказе", encabezados: ["Время", "Пример"], filas: [
           [{ es: "imperfecto", ru: "фон, описание" }, { es: "Era tarde y llovía mucho.", ru: "Было поздно, шёл сильный дождь." }],
-          [{ es: "indefinido", ru: "события" }, { es: "De repente, se fue la luz.", ru: "Вдруг выключили свет." }],
+          [{ es: "indefinido", ru: "события" }, { es: "De repente, se fue la luz.", ru: "Вдруг погас свет." }],
           [{ es: "pluscuamperfecto", ru: "то, что было раньше" }, { es: "No había cerrado la ventana.", ru: "Я не закрыл окно (до этого)." }],
           [{ es: "perfecto", ru: "итог на сегодня" }, { es: "Desde entonces, siempre la he cerrado.", ru: "С тех пор я всегда его закрываю." }]] },
         { titulo: "Связки рассказа", encabezados: ["Связка", "Связка"], filas: [
@@ -271,7 +271,7 @@ const UNIDAD_ES_13 = {
           ],
           errores: [
             { mal: "Fue un día precioso y hizo sol cuando salí.", bien: "Era un día precioso y hacía sol cuando salí.", por: "Описание фона — **imperfecto**." },
-            { mal: "Cuando llegué, ya salió.", bien: "Cuando llegué, ya había salido.", por: "Раньше другого прошлого — **pluscuamperfecto**." }
+            { mal: "Cuando llegué, ya salió.", bien: "Cuando llegué, ya había salido.", por: "Раньше другого события в прошлом — **pluscuamperfecto**." }
           ],
           chequeo: [
             { pide: "___ mucho frío y no había nadie en la calle.", opciones: ["Hacía", "Hizo", "Había hecho"], ok: "Hacía", por: "Это фон — **imperfecto**." },
@@ -324,15 +324,15 @@ const UNIDAD_ES_13 = {
         {
           id: "es13-ponerse",
           titulo: "Estar nervioso и ponerse nervioso",
-          texto: "**estar** + прилагательное — состояние: **Estoy nervioso** — я нервничаю (сейчас).\n**ponerse** + прилагательное — изменение, «становиться»: **Me pongo nervioso antes de los exámenes** — я начинаю нервничать перед экзаменами.\nТак говорят о чувствах и о цвете лица: **ponerse triste, contento, rojo, enfermo**.\n**ponerse** ты знаешь как «надевать» (урок 6). Здесь — его второе значение.",
-          comparacion: "Русское «я нервничаю перед экзаменами» — это не состояние сейчас, а то, что с тобой происходит: **me pongo nervioso**.",
+          texto: "**estar** + прилагательное — состояние: **Estoy nervioso** — я нервничаю (сейчас).\n**ponerse** + прилагательное — изменение, «становиться»: **Me pongo nervioso antes de los exámenes** — я начинаю нервничать перед экзаменами.\nТак говорят о чувствах и о цвете лица: **ponerse triste, contento, rojo, enfermo**.\nПервое значение **ponerse** — «надевать»: **Me pongo el abrigo**. Здесь — второе значение.",
+          comparacion: "По-русски «я нервничаю перед экзаменами» может описывать и состояние, и повторяющееся изменение состояния. Если подчёркиваешь, что начинаешь нервничать перед экзаменом, используй **me pongo nervioso**; если говоришь о состоянии — estoy nervioso.",
           ejemplos: [
             { es: "Me pongo muy nerviosa cuando hablo en público.", ru: "Я очень нервничаю, когда выступаю перед людьми." },
             { es: "Cuando le dije la verdad, se puso rojo.", ru: "Когда я сказал ему правду, он покраснел." },
-            { es: "Hoy estoy contento: he aprobado el examen.", ru: "Сегодня я довольный: я сдал экзамен.", por: "Состояние сейчас — **estar**." }
+            { es: "Hoy estoy contento: he aprobado el examen.", ru: "Сегодня я доволен: я сдал экзамен.", por: "Состояние сейчас — **estar**." }
           ],
           errores: [
-            { mal: "Siempre estoy nervioso antes de un examen.", bien: "Siempre me pongo nervioso antes de un examen.", por: "Повторяющаяся перемена — **ponerse**." }
+            { mal: "Antes de un examen siempre soy nervioso.", bien: "Antes de un examen siempre me pongo nervioso.", por: "Перемена состояния, которая повторяется, — **ponerse**. **Soy nervioso** — это черта характера, а не то, что с тобой происходит перед экзаменом." }
           ],
           chequeo: [
             { pide: "Cuando veo una película triste, ___ triste.", opciones: ["me pongo", "estoy", "soy"], ok: "me pongo", por: "Становлюсь грустным — **me pongo**." }
@@ -343,7 +343,7 @@ const UNIDAD_ES_13 = {
           titulo: "Me da miedo, me dan miedo",
           texto: "**dar** + чувство работает как **gustar**: **me da miedo** — мне страшно (меня пугает), **me da pena** — мне жаль, **me da vergüenza** — мне стыдно, **me da igual** — мне всё равно.\nЕсли «что пугает» во мн. ч. — **me dan**: **Me dan miedo los perros.**\nС глаголом — инфинитив: **Me da vergüenza hablar en público.** С другим человеком — **que** + subjuntivo: **Me da pena que te vayas.**",
           ejemplos: [
-            { es: "Me dan miedo los aviones.", ru: "Я боюсь летать на самолётах." },
+            { es: "Me dan miedo los aviones.", ru: "Я боюсь самолётов." },
             { es: "¿No te da vergüenza llegar tan tarde?", ru: "Тебе не стыдно приходить так поздно?" },
             { es: "Me da mucha pena que te vayas.", ru: "Мне очень жаль, что ты уезжаешь.", por: "**que** + subjuntivo: **te vayas**." }
           ],
@@ -361,7 +361,7 @@ const UNIDAD_ES_13 = {
           texto: "**tener ganas de** + инфинитив — «очень хотеть»: **Tengo ganas de verte.** — Очень хочу тебя увидеть. **No tengo ganas** — неохота.\n**disfrutar de** — наслаждаться: **Disfruta del viaje.** **sufrir** — страдать. **superar** — преодолеть: **superar el miedo**. **calmarse, relajarse** — успокоиться, расслабиться: **¡Cálmate!**\n**la ilusión** — радостное ожидание: **Me hace mucha ilusión el viaje** — я очень жду поездку (с радостью). Это не «иллюзия».\n**agobiado** — в Испании очень частое «замученный, в стрессе»: **Estoy agobiado con tanto trabajo.**",
           ejemplos: [
             { es: "Tengo muchas ganas de ver a mi familia.", ru: "Я очень хочу увидеть свою семью." },
-            { es: "Me hace mucha ilusión ir a Madrid.", ru: "Я с радостью жду поездку в Мадрид." },
+            { es: "Me hace mucha ilusión ir a Madrid.", ru: "Я с нетерпением жду поездки в Мадрид." },
             { es: "Esta semana estoy agobiada: tengo tres exámenes.", ru: "На этой неделе у меня завал: три экзамена." }
           ],
           chequeo: [
@@ -378,7 +378,7 @@ const UNIDAD_ES_13 = {
       id: "es13m6", n: 6, tipo: "leccion",
       titulo: "Mi vida en España",
       resumen: "Привыкнуть, освоиться, праздники.",
-      intro: "Переехать в другую страну — это и радость, и **el choque cultural**. В этом модуле — слова, чтобы рассказать, как ты привыкаешь, по чему скучаешь и какие испанские праздники уже знаешь.",
+      intro: "Переезд в другую страну — это и радость, и культурный шок (**el choque cultural**). В этом модуле — слова, которые помогут рассказать, как ты привыкаешь к новой жизни, по чему скучаешь и какие испанские праздники уже знаешь.",
       secciones: [
         {
           id: "es13-acostumbrarse",
@@ -444,8 +444,8 @@ const UNIDAD_ES_13 = {
     },
     {
       id: "es13m8", n: 8, tipo: "leccion",
-      titulo: "Escuchar y conversar",
-      resumen: "Аудио в четыре уровня и пять диалогов.",
+      titulo: "Аудио и разговоры",
+      resumen: "Аудио четырёх уровней и пять диалогов.",
       intro: "Четыре уровня аудирования: от медленного голоса до живого разговора двух человек. Слушай сколько хочешь; текст спрятан за кнопкой «Показать текст». А потом — пять диалогов урока: послушай, запиши себя и сравни.",
       secciones: [
         {
@@ -471,25 +471,25 @@ const UNIDAD_ES_13 = {
     },
     {
       id: "es13m9", n: 9, tipo: "leccion",
-      titulo: "Todos los tiempos",
+      titulo: "Все времена",
       resumen: "Повторение: какое время выбрать.",
-      intro: "Ты знаешь уже много времён. Главный вопрос теперь не «как образовать», а «какое выбрать». Подсказку почти всегда дают слова рядом: **ayer, ya, mañana, si, cuando, quiero que…**",
+      intro: "Ты уже знаешь много времён. Главный вопрос теперь не «как образовать», а «какое выбрать». Подсказку почти всегда дают слова рядом: ayer, ya, mañana, si, cuando, quiero que…",
       tablas: [
         { titulo: "Подсказки рядом с глаголом", encabezados: ["Слова", "Время"], filas: [
           [{ es: "siempre, normalmente, cada día", ru: "что бывает обычно" }, { es: "presente: trabajo", ru: "" }],
-          [{ es: "hoy, esta semana, ya, nunca", ru: "прошлое, связанное с сегодня" }, { es: "perfecto: he trabajado", ru: "" }],
+          [{ es: "hoy, esta semana, ya, nunca", ru: "прошлое, связанное с настоящим" }, { es: "perfecto: he trabajado", ru: "" }],
           [{ es: "ayer, en 2020, el lunes pasado", ru: "закрытое прошлое" }, { es: "indefinido: trabajé", ru: "" }],
           [{ es: "antes, de niño, siempre (en el pasado)", ru: "фон, привычка в прошлом" }, { es: "imperfecto: trabajaba", ru: "" }],
-          [{ es: "cuando llegué, ya…", ru: "раньше другого прошлого" }, { es: "pluscuamperfecto: había trabajado", ru: "" }],
+          [{ es: "cuando llegué, ya…", ru: "раньше другого события в прошлом" }, { es: "pluscuamperfecto: había trabajado", ru: "" }],
           [{ es: "mañana, el año que viene", ru: "будущее" }, { es: "futuro: trabajaré", ru: "" }],
-          [{ es: "si fuera…, me gustaría…", ru: "вежливо, мечта" }, { es: "condicional: trabajaría", ru: "" }],
+          [{ es: "si fuera…, me gustaría…", ru: "гипотеза или желание" }, { es: "condicional: trabajaría", ru: "" }],
           [{ es: "quiero que, cuando (будущее), para que", ru: "желание, будущее после cuando" }, { es: "subjuntivo: trabaje", ru: "" }]] }
       ],
       secciones: [
         {
           id: "es13-elegir-tiempo",
           titulo: "Как выбрать время",
-          texto: "Задай себе три вопроса:\n1. **Когда?** Сейчас, в прошлом или в будущем?\n2. **Если в прошлом:** это закрытый момент (**indefinido**), фон и привычка (**imperfecto**), связь с сегодня (**perfecto**) или то, что было ещё раньше (**pluscuamperfecto**)?\n3. **Есть ли перед глаголом que, cuando, para que, ojalá?** Если это желание, просьба или будущее после **cuando** — **subjuntivo**.",
+          texto: "Задай себе три вопроса:\n1. Когда происходит действие — сейчас, в прошлом или в будущем?\n2. **Если в прошлом:** это завершённое событие (**indefinido**), фон или привычка (**im**perfecto****), прошлое, связанное с настоящим (perfecto), или событие, которое произошло ещё раньше (**pluscuamperfecto**)?\n3. Есть ли конструкция, которая требует **subjuntivo**: желание или просьба с que, цель с para que, будущее после **cuando** или пожелание с ojalá?",
           ejemplos: [
             { es: "Cuando era pequeño, vivía en un pueblo.", ru: "Когда я был маленьким, я жил в деревне.", por: "Привычка, фон — **imperfecto**." },
             { es: "Cuando sea mayor, viviré en el campo.", ru: "Когда я стану старше, я буду жить за городом.", por: "**cuando** о будущем — **subjuntivo**, потом **futuro**." },
@@ -519,14 +519,14 @@ const UNIDAD_ES_13 = {
     },
     {
       id: "es13m10", n: 10, tipo: "leccion",
-      titulo: "Pronombres y preposiciones",
+      titulo: "Местоимения и предлоги",
       resumen: "Повторение и самопроверка: найди свою ошибку.",
       intro: "Самые частые ошибки русскоязычных — в местоимениях (**lo / le / se lo**), предлогах (**por / para, a / en**) и в выборе **ser / estar / hay**. Здесь ты не только повторяешь правила, но и учишься находить ошибки сам.",
       secciones: [
         {
           id: "es13-pronombres",
           titulo: "Lo, le, se lo — повторение",
-          texto: "**lo, la, los, las** — кого? что?: **La veo. Lo compro.**\n**le, les** — кому?: **Le escribo.**\nДва вместе: сначала «кому», потом «что»; **le / les** + **lo, la** → **se**: **Se lo doy.**\nМесто: перед глаголом в личной форме; слитно — после инфинитива и утвердительного imperativo: **Voy a dártelo. Dámelo.**\n**«a» перед человеком**: **Veo a Ana. Echo de menos a mi madre.**",
+          texto: "****lo, la**, los, las** — кого? что?: **La veo. Lo compro.**\n**le, les** — кому?: **Le escribo.**\nДва местоимения вместе: сначала «кому», потом «что»; **le / les** + lo, la → **se**: **Se lo doy.**\nМестоимения ставятся перед глаголом в личной форме; после инфинитива, герундия и утвердительного повелительного наклонения их присоединяют к глаголу: Voy a dártelo. Estoy dándotelo. Dámelo.\nЛичное a ставится перед одушевлённым прямым дополнением, например перед конкретным человеком: **Veo a Ana. Echo de menos a mi madre.**",
           errores: [
             { mal: "Le lo he dicho.", bien: "Se lo he dicho.", por: "**le + lo → se lo**." },
             { mal: "Veo Ana todos los días.", bien: "Veo a Ana todos los días.", por: "Перед человеком — **a**." },
@@ -552,10 +552,10 @@ const UNIDAD_ES_13 = {
         {
           id: "es13-autocorreccion",
           titulo: "Найди свою ошибку",
-          texto: "Прежде чем отправить текст, прочитай его **несколько раз**, и каждый раз ищи **одно**:\n1. Согласование (род, число, лицо глагола).\n2. Прошедшие времена (indefinido, imperfecto, pluscuamperfecto).\n3. **ser / estar / hay**.\n4. Предлоги и **a** перед человеком.\n5. Местоимения и их место.\n6. Знаки ударения и **¿ ¡**.\nКогда находишь ошибку, назови правило: «здесь нужно **estar**, потому что это место». Так она больше не повторится.",
+          texto: "Прежде чем отправить текст, прочитай его **несколько раз** и каждый раз проверяй что-то **одно**:\n1. Согласование (род, число, лицо глагола).\n2. Прошедшие времена (indefinido, imperfecto, pluscu**a**mperfecto).\n3. **ser / **estar** / hay**.\n4. Предлоги и личное a перед одушевлённым дополнением.\n5. Местоимения и их место.\n6. Знаки ударения и **¿ ¡**.\nКогда находишь ошибку, назови правило: «здесь нужно estar, потому что речь идёт о местонахождении». Так ты сможешь не повторять её.",
           ejemplos: [
             { es: "Madrid es en el centro de España. → Madrid está en el centro de España.", ru: "Мадрид находится в центре Испании.", por: "Где находится — **estar**." },
-            { es: "Hay el libro en la mesa. → El libro está en la mesa.", ru: "Книга лежит на столе.", por: "Конкретный предмет — **estar**; **hay** — с **un, una**, без артикля." }
+            { es: "Hay el libro en la mesa. → El libro está en la mesa.", ru: "Книга лежит на столе.", por: "Конкретный предмет — **estar**; **hay** используют, когда сообщают о наличии или существовании чего-либо, обычно с неопределённым артиклем или без артикля." }
           ],
           truco: "Читай текст вслух: многие ошибки слышно, даже если их не видно."
         }
@@ -563,16 +563,16 @@ const UNIDAD_ES_13 = {
     },
     {
       id: "es13m11", n: 11, tipo: "taller",
-      titulo: "Taller de escritura",
+      titulo: "Мастерская письма",
       resumen: "Пять текстов в четыре шага.",
       intro: "Хороший текст пишут в четыре шага: **план, черновик (el borrador), проверка и новый вариант**. Выбери текст и пройди все шаги. Оба варианта сохраняются, так что видно, насколько текст стал лучше. Не забудь о структуре: **la introducción**, основная часть по абзацам (**los párrafos**) и вывод.",
       vocab: ES13_V["11"]
     },
     {
       id: "es13m12", n: 12, tipo: "proyecto6",
-      titulo: "Proyecto: Mi historia en España",
+      titulo: "Проект: Mi historia en España",
       resumen: "Твой рассказ по-испански в шести частях.",
-      intro: "Твой портрет по-испански в шести частях: кто ты, твоя жизнь раньше, как ты приехал, твоя жизнь сейчас, твои планы и твоё мнение. А потом — разговор с Хавьером без готовых ответов. Части можно делать в любом порядке и возвращаться к ним: всё сохраняется."
+      intro: "Твой рассказ по-испански в шести частях: кто ты, твоя жизнь раньше, как ты приехал, твоя жизнь сейчас, твои планы и твоё мнение. А потом — разговор с Хавьером без готовых ответов. Части можно делать в любом порядке и возвращаться к ним: всё сохраняется."
     },
     {
       id: "es13m13", n: 13, tipo: "examen",
@@ -757,7 +757,7 @@ const ES13_PLUSCUAM = [
   ["Cuando llegué a la fiesta, Ana ya ___.", "se había ido", ["se había ido", "se fue", "se va"], "Аня ушла **раньше**, чем я пришёл."],
   ["Llegué a casa, ___ y me acosté.", "cené", ["cené", "había cenado", "cenaba"], "События по порядку — **indefinido**."],
   ["No pude entrar porque ___ las llaves.", "había perdido", ["había perdido", "perdí", "pierdo"], "Ключи потерялись **раньше**.", "perder"],
-  ["Nunca ___ un lugar tan bonito.", "había visto", ["había visto", "vi", "veía"], "**nunca había…** — в первый раз.", null, 1, "es13-nunca-habia"],
+  ["Nunca ___ un lugar tan bonito.", "había visto", ["había visto", "vi", "veía"], "**nunca había…** — «никогда раньше не…».", null, 1, "es13-nunca-habia"],
   ["Cuando me di cuenta, el autobús ya ___.", "había salido", ["había salido", "salía", "sale"], "Автобус ушёл раньше.", "darse cuenta"],
   ["Cuando llamé, todavía no ___.", "se había levantado", ["se había levantado", "se levantó", "se levanta"], "**todavía no** + pluscuamperfecto."],
   ["Era la primera vez que ___ en avión.", "viajaba", ["viajaba", "viajé", "viajo"], "**era la primera vez que** + imperfecto.", null, 1, "es13-nunca-habia"],
@@ -768,8 +768,8 @@ const ES13_PLUSCUAM = [
 const ES13_UNIR = [
   ["Соедини: cuando + ya.", "Llegué a la estación. El tren ya se había ido.", ["Cuando llegué a la estación, el tren ya se había ido."], "**Cuando llegué…, ya se había ido.**", 1, "es13-pluscuam-uso"],
   ["Соедини: cuando + ya.", "Llegamos al cine. La película ya había empezado.", ["Cuando llegamos al cine, la película ya había empezado."], "**Cuando llegamos…, ya había empezado.**", 1, "es13-pluscuam-uso"],
-  ["Скажи, что это было в первый раз: Nunca había…", "Vi el mar por primera vez.", ["Nunca había visto el mar.", "Nunca antes había visto el mar."], "**Nunca había visto…**", 1, "es13-nunca-habia"],
-  ["Скажи, что это было в первый раз: Nunca había…", "Comí tortilla por primera vez.", ["Nunca había comido tortilla.", "Nunca antes había comido tortilla."], "**Nunca había comido…**", 1, "es13-nunca-habia"]
+  ["Скажи, что до этого ты никогда не видел моря: Nunca había…", "Vi el mar por primera vez.", ["Nunca había visto el mar.", "Nunca antes había visto el mar."], "**Nunca había visto…**", 1, "es13-nunca-habia"],
+  ["Скажи, что до этого ты никогда не видел моря: Nunca había…", "Comí tortilla por primera vez.", ["Nunca había comido tortilla.", "Nunca antes había comido tortilla."], "**Nunca había comido…**", 1, "es13-nunca-habia"]
 ];
 /* [infinitivo, persona, frase con ___, regla?] */
 const ES13_PLUS_GEN = [
@@ -822,7 +822,7 @@ const ES13_RELATO = [
   ["___ no había leído mi mensaje: no vino.", "Por lo visto", ["Por lo visto", "Por suerte", "Ni siquiera"], "**por lo visto** — судя по всему.", "por lo visto", 4, "es13-conectores-relato"]
 ];
 const ES13_EMOCION = [
-  ["Siempre ___ nervioso antes de un examen.", "me pongo", ["me pongo", "estoy", "soy"], "Повторяющаяся перемена — **ponerse**.", "ponerse"],
+  ["Antes de un examen siempre ___ nervioso.", "me pongo", ["me pongo", "soy", "me hago"], "Перемена состояния, которая повторяется, — ponerse. «Soy nervioso» — черта характера; «me hago» говорят о статусе (se hizo médico).", "ponerse"],
   ["Hoy ___ muy contenta: he aprobado.", "estoy", ["estoy", "me pongo", "soy"], "Состояние сейчас — **estar**."],
   ["Me ___ miedo los perros grandes.", "dan", ["dan", "da", "doy"], "**los perros** — мн. ч.: **me dan**.", null, 5, "es13-me-da"],
   ["Me ___ vergüenza hablar en público.", "da", ["da", "dan", "doy"], "С инфинитивом — **da**.", null, 5, "es13-me-da"],
@@ -832,7 +832,7 @@ const ES13_EMOCION = [
   ["Después de la noticia, todos estábamos llenos de ___.", "alegría", ["alegría", "alegre", "contento"], "Существительное — **la alegría**.", "alegría"],
   ["Cuando vivo lejos de casa, siento ___.", "nostalgia", ["nostalgia", "felicidad", "confianza"], "**la nostalgia** — тоска по дому.", "nostalgia"],
   ["¡___ de las vacaciones!", "Disfruta", ["Disfruta", "Sufre", "Odia"], "**disfrutar de** — наслаждаться.", "disfrutar", 5, "es13-ganas"],
-  ["Me hace mucha ___ el viaje a Madrid.", "ilusión", ["ilusión", "ganas", "esperanza"], "**hacer ilusión** — радостно ждать.", "ilusión", 5, "es13-ganas"],
+  ["Me hace mucha ___ el viaje a Madrid.", "ilusión", ["ilusión", "ganas", "esperanza"], "**hacer ilusión** — «очень радоваться чему-либо, с нетерпением ждать чего-либо».", "ilusión", 5, "es13-ganas"],
   ["Tranquilo, ___. No pasa nada.", "cálmate", ["cálmate", "enamórate", "abrázate"], "**calmarse** — успокоиться.", "calmarse", 5, "es13-ganas"]
 ];
 const ES13_VIDA = [
@@ -853,18 +853,18 @@ const ES13_LECTURAS = [
       ["Se busca camarero o camarera para bar en el centro de Valencia.", "Требуется официант или официантка в бар в центре Валенсии."],
       ["Horario: de jueves a domingo, de seis de la tarde a doce de la noche.", "График: с четверга по воскресенье, с шести вечера до двенадцати ночи."],
       ["Es necesario hablar español e inglés. No hace falta experiencia.", "Нужно говорить по-испански и по-английски. Опыт не обязателен."],
-      ["Si te interesa, manda tu currículum por correo.", "Если тебе интересно, пришли резюме по электронной почте."]],
+      ["Si te interesa, manda tu currículum por correo.", "Если тебя заинтересовало предложение, пришли резюме по электронной почте."]],
     preguntas: [["¿Qué días es el trabajo?", "De jueves a domingo", ["De lunes a viernes", "Solo los sábados"]], ["¿Qué idiomas hay que hablar?", "Español e inglés", ["Solo español", "Español y francés"]], ["¿Cómo hay que mandar el currículum?", "Por correo", ["Por teléfono", "En persona"]]],
     vf: [["Hace falta tener experiencia.", false], ["El bar está en el centro.", true]] },
   { id: "noticia", titulo: "Noticia", lineas: [
-      ["Barcelona tendrá veinte kilómetros más de calles para bicis el año que viene.", "В следующем году в Барселоне станет на двадцать километров больше улиц для велосипедов."],
-      ["Según el ayuntamiento, el número de personas que van en bici ha aumentado un 30 % en dos años.", "По данным мэрии, число людей на велосипедах выросло на 30 % за два года."],
-      ["Los vecinos están a favor, pero algunas tiendas se quejan de que habrá menos sitio para aparcar.", "Жители — за, но некоторые магазины жалуются, что будет меньше мест для парковки."]],
+      ["Barcelona tendrá veinte kilómetros más de calles para bicis el año que viene.", "В следующем году в Барселоне появится ещё двадцать километров велодорожек."],
+      ["Según el ayuntamiento, el número de personas que van en bici ha aumentado un 30 % en dos años.", "По данным мэрии, за два года число людей, передвигающихся на велосипеде, выросло на 30 %."],
+      ["Los vecinos están a favor, pero algunas tiendas se quejan de que habrá menos sitio para aparcar.", "Жители поддерживают эту инициативу, но некоторые владельцы магазинов жалуются, что мест для парковки станет меньше."]],
     preguntas: [["¿Qué va a pasar?", "Habrá más calles para bicis", ["Habrá más coches", "Cerrarán el centro"]], ["¿Cuánto ha aumentado la gente que va en bici?", "Un 30 %", ["Un 20 %", "Un 50 %"]], ["¿Quién se queja?", "Algunas tiendas", ["Los vecinos", "El ayuntamiento"]]],
     vf: [["Todos están en contra del proyecto.", false], ["Habrá menos sitio para aparcar.", true]] },
   { id: "resena", titulo: "Reseña", lineas: [
       ["★★★★☆ Un restaurante pequeño con comida casera.", "★★★★☆ Маленький ресторан с домашней едой."],
-      ["Fuimos un sábado sin reservar y tuvimos que esperar media hora, pero mereció la pena.", "Мы пришли в субботу без брони и полчаса ждали, но оно того стоило."],
+      ["Fuimos un sábado sin reservar y tuvimos que esperar media hora, pero mereció la pena.", "Мы пришли в субботу без брони и ждали полчаса, но это того стоило."],
       ["La tortilla estaba muy rica y el camarero fue muy amable. Lo único malo: la música estaba demasiado alta.", "Тортилья была очень вкусной, а официант — очень любезным. Единственный минус: музыка играла слишком громко."],
       ["Lo recomiendo, pero es mejor reservar.", "Рекомендую, но лучше бронировать."]],
     preguntas: [["¿Cuántas estrellas le da?", "Cuatro", ["Tres", "Cinco"]], ["¿Qué fue lo malo?", "La música", ["La comida", "El camarero"]], ["¿Qué recomienda el autor?", "Reservar", ["Ir un sábado", "Pedir pescado"]]],
@@ -873,15 +873,15 @@ const ES13_LECTURAS = [
       ["—¿Cuándo empezó a cantar?", "— Когда вы начали петь?"],
       ["—De niña. Mi abuela cantaba en casa todo el día, y yo cantaba con ella.", "— В детстве. Моя бабушка пела дома целый день, а я пела вместе с ней."],
       ["—¿Y cómo llegó a ser artista?", "— А как вы стали артисткой?"],
-      ["—Por suerte, alguien de la radio me oyó en un bar. Al principio no me lo creía: ¡nunca había cantado delante de tanta gente!", "— К счастью, меня услышал в баре человек с радио. Сначала я не могла в это поверить: я никогда раньше не пела перед столькими людьми!"],
+      ["—Por suerte, alguien de la radio me oyó en un bar. Al principio no me lo creía: ¡nunca había cantado delante de tanta gente!", "— К счастью, меня услышал в баре сотрудник радиостанции. Сначала я не могла в это поверить: я никогда раньше не пела перед столькими людьми!"],
       ["—¿Qué planes tiene?", "— Какие у вас планы?"],
-      ["—Este verano sale mi primera canción, y en otoño haré conciertos por toda España.", "— Этим летом выходит моя первая песня, а осенью у меня концерты по всей Испании."]],
+      ["—Este verano sale mi primera canción, y en otoño haré conciertos por toda España.", "— Этим летом выходит моя первая песня, а осенью я буду выступать с концертами по всей Испании."]],
     preguntas: [["¿Quién cantaba en casa?", "Su abuela", ["Su madre", "Su hermana"]], ["¿Dónde la oyeron?", "En un bar", ["En un concierto", "En la calle"]], ["¿Qué hará en otoño?", "Conciertos", ["Una canción", "Una película"]]],
     vf: [["Antes ya había cantado muchas veces ante mucha gente.", false], ["Su primera canción sale este verano.", true]] },
   { id: "correo", titulo: "Correo", lineas: [
       ["Hola, Lucía:", "Привет, Лусия!"],
       ["¿Qué tal todo? Te escribo desde Sevilla. Llegué el lunes y estoy encantada.", "Как дела? Пишу тебе из Севильи. Я приехала в понедельник и в восторге."],
-      ["Ayer fui a un espectáculo de música. ¡Nunca había visto nada igual!", "Вчера я была на музыкальном представлении. Никогда не видела ничего подобного!"],
+      ["Ayer fui a un espectáculo de música. ¡Nunca había visto nada igual!", "Вчера я была на музыкальном шоу. Никогда раньше не видела ничего подобного!"],
       ["Mañana vuelvo a Barcelona. ¿Quedamos el sábado y te lo cuento todo?", "Завтра возвращаюсь в Барселону. Встретимся в субботу, и я тебе всё расскажу?"],
       ["Un abrazo, Ana", "Обнимаю, Аня"]],
     preguntas: [["¿Dónde está Ana?", "En Sevilla", ["En Barcelona", "En Madrid"]], ["¿Qué hizo ayer?", "Fue a un espectáculo de música", ["Fue a la playa", "Fue a un museo"]], ["¿Qué propone?", "Quedar el sábado", ["Llamar el lunes", "Ir a Sevilla juntas"]]],
@@ -911,7 +911,7 @@ const ES13_TIEMPOS = [
   ["Si tengo tiempo, te ___.", "ayudaré", ["ayudaré", "ayude", "ayudaría"], "**si** + presente → **futuro**."],
   ["Quiero que ___ a mi fiesta.", "vengas", ["vengas", "vienes", "vendrás"], "**quiero que** — **subjuntivo**."],
   ["Me ___ vivir cerca del mar.", "gustaría", ["gustaría", "gustará", "guste"], "Мечта, вежливо — **condicional**."],
-  ["Cuando llegué, todos ___.", "se habían ido", ["se habían ido", "se fueron", "se van"], "Раньше другого прошлого — **pluscuamperfecto**."],
+  ["Cuando llegué, todos ___.", "se habían ido", ["se habían ido", "se fueron", "se van"], "Раньше другого события в прошлом — **pluscuamperfecto**."],
   ["Normalmente ___ en metro.", "voy", ["voy", "fui", "iré"], "Обычно — **presente**."]
 ];
 /* [frase, correcta, explicación, módulo, regla, palabra?] */
@@ -951,7 +951,7 @@ const ES13_PREGUNTAS = [
 ];
 /* [palabras, índice de la equivocada, arreglo, módulo, regla, explicación] */
 const ES13_ERRORES = [
-  [["Cuando", "llegué,", "ya", "salió."], 3, "había salido.", 1, "es13-pluscuam-uso", "Раньше другого прошлого — **había salido**."],
+  [["Cuando", "llegué,", "ya", "salió."], 3, "había salido.", 1, "es13-pluscuam-uso", "Раньше другого события в прошлом — **había salido**."],
   [["Me", "dijo", "que", "vendrá", "al", "día", "siguiente."], 3, "vendría", 3, "es13-dijo-que", "После **dijo**: futuro → **condicional**."],
   [["Me", "preguntó", "donde", "vivía."], 2, "dónde", 3, "es13-pregunto-si", "Вопросительное слово — со знаком ударения: **dónde**."],
   [["Siempre", "estoy", "nervioso", "antes", "de", "un", "examen."], 1, "me pongo", 5, "es13-ponerse", "Повторяющаяся перемена — **me pongo**."],
@@ -1000,7 +1000,7 @@ const ES13_TURNOS = [
       [["чувство", "me siento|estoy|echo de menos|tengo|me pongo|nostalgia|triste|cansado|cansada|agobiado|agobiada|solo|sola"]], "Me siento un poco solo. Echo de menos a mi familia.", "**Me siento…, Echo de menos…**"],
     ["¿Y qué te da miedo?", "А чего ты боишься?", "Ответь: me da miedo / me dan miedo…",
       [["me da(n) miedo", "me da miedo|me dan miedo|me da|me dan"]], "Me da miedo no encontrar trabajo.", "**Me da miedo…**"],
-    ["¿Y qué te hace ilusión?", "А чего ты с радостью ждёшь?", "Ответь: me hace ilusión… / tengo ganas de…",
+    ["¿Y qué te hace ilusión?", "А чего ты с нетерпением ждёшь?", "Ответь: me hace ilusión… / tengo ganas de…",
       [["ilusión / ganas", "me hace ilusión|tengo ganas|tengo muchas ganas|me hace mucha ilusión|me hacen ilusión"]], "Tengo muchas ganas de ver a mis padres en Navidad.", "**Tengo ganas de…**"]
   ]),
   es13Turnos("Ana", "ana", "¿Qué te pasó?", false, 4, [
@@ -1098,13 +1098,13 @@ const ES13_R = {
 };
 /* Consejos del corrector (los de las U10–U12 y los propios de la U13) */
 const ES13_CONSEJOS = [
-  { rx: "\\bcuando (llegué|llegamos|entré|entramos|volví|volvimos),? (ya|todavía no) (salió|se fue|empezó|terminó|comió|llegó)\\b", msg: "То, что было раньше другого прошлого, — **pluscuamperfecto**: **cuando llegué, ya había salido**." },
+  { rx: "\\bcuando (llegué|llegamos|entré|entramos|volví|volvimos),? (ya|todavía no) (salió|se fue|empezó|terminó|comió|llegó)\\b", msg: "То, что было раньше другого события в прошлом, — **pluscuamperfecto**: cuando llegué, ya había salido." },
   { rx: "\\b(dijo|dijeron|explicó|contó) que [a-záéíóúñ]+(ré|rás|rá|remos|rán)\\b", msg: "После **dijo que** будущее → **condicional**: **dijo que vendría**." },
   { rx: "\\bpreguntó que si\\b", msg: "**Me preguntó si…** — без **que**." },
   { rx: "\\bsiempre (estoy|está|estaba) (nervioso|nerviosa|triste|rojo|roja)\\b", msg: "Перемена — **ponerse**: **siempre me pongo nervioso**." },
   { rx: "\\bme da miedo (los|las) ", msg: "Мн. ч.: **me dan miedo los…**" },
   { rx: "\\becho de menos (mi|mis|tu|su|sus) ", msg: "О человеке — с **a**: **echo de menos a mi madre**." },
-  { rx: "\\bsi (tendré|tendrás|tendrá|podré|podrá|será|habrá)\\b", msg: "После **si** — presente: **si tengo tiempo…**" },
+  { rx: "\\bsi (tendré|tendrás|tendrá|podré|podrá|será|habrá)\\b", msg: "В реальном условии после **si** — presente: si tengo tiempo…" },
   { rx: "\\bcuando (llegaré|tendré|seré|terminaré|podré)\\b", msg: "**cuando** о будущем — subjuntivo: **cuando llegue, cuando tenga**." },
   { rx: "\\b(le|les) (lo|la|los|las) (?!que\\b)[a-záéíóúñ]+", msg: "**le / les** перед **lo, la** → **se**: **se lo dije**." },
   { rx: "\\bquiero que (vienes|tienes|haces|eres|estás|puedes|vas)\\b", msg: "**quiero que** + subjuntivo: **vengas, tengas, hagas…**" },
@@ -1164,37 +1164,37 @@ window.ES13_CONSEJOS = ES13_CONSEJOS;
 /* ── Profundización (desde el principio, regla del 13/11/2026) ───────────────
    Más a fondo que se suma a la teoría al cargar y los tipos de profundización de Azbuka. */
 const ES13_MAS = {
-  "es13-pluscuam": { titulo: "Había + participio всегда вместе", texto: "**había** и participio не разделяют: **Ya lo había hecho**, а не «Lo había ya hecho». Наречия **ya, nunca, todavía** ставят перед **había** или после всей формы: **Nunca había estado aquí. Había estado aquí antes.**", ejemplos: [{ es: "Todavía no había llegado nadie.", ru: "Ещё никто не пришёл." }] },
+  "es13-pluscuam": { titulo: "Había + participio всегда вместе", texto: "Формы **había** и participio обычно употребляются вместе: **Ya lo había hecho**. Местоимения-дополнения ставятся перед había. Наречия **ya, nunca, todavía** обычно ставят перед había или после всей глагольной формы: **Nunca había estado aquí. Había estado aquí antes.**", ejemplos: [{ es: "Todavía no había llegado nadie.", ru: "Ещё никто не пришёл." }] },
   "es13-pluscuam-uso": { titulo: "Antes de que llegara…", texto: "Порядок можно показать и словами: **antes de** + инфинитив (**Antes de salir, cerré la ventana**) или **después de** + инфинитив (**Después de cenar, salimos**). Тогда pluscuamperfecto не нужен — порядок уже понятен.", ejemplos: [{ es: "Después de comer, descansé un rato.", ru: "Пообедав, я немного отдохнул." }] },
   "es13-nunca-habia": { titulo: "Ya había… — уже успел", texto: "**ya había** + participio — «уже успел» к тому моменту: **A los veinte años ya había vivido en tres países.** — К двадцати годам он уже пожил в трёх странах.", ejemplos: [{ es: "A las ocho ya había terminado.", ru: "К восьми я уже закончил." }] },
   "es13-dice-que": { titulo: "Глаголы вместо decir", texto: "Чтобы не повторять **dice que**, испанцы говорят: **comenta que** (замечает), **cuenta que** (рассказывает), **explica que** (объясняет), **asegura que** (уверяет), **reconoce que** (признаёт), **menciona que** (упоминает). Здесь **reconocer** — «признавать» (второе значение; первое — «узнавать»).", ejemplos: [{ es: "Pablo reconoce que se equivocó.", ru: "Пабло признаёт, что ошибся." }] },
   "es13-pregunta-si": { titulo: "Quiere saber si…", texto: "Вместо **pregunta** часто говорят **quiere saber** (хочет знать): **Quiere saber si vienes.** А **no sé si…** — «не знаю, …ли»: **No sé si tengo tiempo.**", ejemplos: [{ es: "No sé si Ana viene a la fiesta.", ru: "Не знаю, придёт ли Аня на праздник." }] },
   "es13-pide-que": { titulo: "Dile que venga", texto: "Передать просьбу третьему человеку: **dile que** + subjuntivo — «скажи ему, чтобы…»: **Dile a Pablo que me llame.** — Скажи Пабло, чтобы он мне позвонил.", ejemplos: [{ es: "Dile que no se preocupe.", ru: "Скажи ему, чтобы не волновался." }] },
-  "es13-dijo-que": { titulo: "Когда время не сдвигается", texto: "Если сказанное **до сих пор правда**, можно оставить настоящее: **Me dijo que es de Moscú** (он и сейчас оттуда). **Me dijo que estaba cansada** — о том моменте. Сдвиг — никогда не ошибка; отсутствие сдвига — не всегда.", ejemplos: [{ es: "Me dijo que la tierra es redonda.", ru: "Он сказал мне, что Земля круглая.", por: "Всегда правда — **es**." }] },
+  "es13-dijo-que": { titulo: "Когда время не сдвигается", texto: "Если сказанное **до сих пор правда**, можно оставить настоящее: **Me dijo que es de Moscú** («Он / она сказал(а), что родом из Москвы» — и сейчас это так). **Me dijo que estaba cansada** — речь о состоянии в тот момент. Сдвиг времени тоже может быть уместен; отсутствие сдвига — не всегда.", ejemplos: [{ es: "Me dijo que la tierra es redonda.", ru: "Он сказал мне, что Земля круглая.", por: "Всегда правда — **es**." }] },
   "es13-palabras-tiempo": { titulo: "Venir → ir, traer → llevar", texto: "Если меняется место, меняются и глаголы движения: «Ven a mi casa» → **Me dijo que fuera a su casa**; «Trae el vino» → **Me pidió que llevara el vino**. Пока достаточно узнавать.", ejemplos: [{ es: "Me dijo que fuera a su casa.", ru: "Он сказал, чтобы я пришёл к нему домой." }] },
   "es13-pregunto-si": { titulo: "Me pidió que viniera", texto: "Просьба в прошлом: **me pidió que** + **imperfecto de subjuntivo**: **viniera, hiciera, fuera, llamara**. Эти формы ты пока только **узнаёшь**: они кончаются на **-ra** (**hablara, comiera**). В своей речи можно сказать **Me pidió venir** или передать дословно: **Me dijo: «Ven».**", ejemplos: [{ es: "Me pidió que la llamara.", ru: "Она попросила меня ей позвонить." }] },
   "es13-relato": { titulo: "Estaba + gerundio: «как раз делал»", texto: "Фон часто описывают через **estaba** + gerundio: **Estaba cocinando cuando sonó el teléfono.** — Я как раз готовил, когда зазвонил телефон. Длительное действие прерывается событием.", ejemplos: [{ es: "Estábamos cenando cuando llegó Pablo.", ru: "Мы как раз ужинали, когда пришёл Пабло." }] },
   "es13-conectores-relato": { titulo: "Echar una mano, echar un vistazo", texto: "**echar** — «бросать», но в выражениях смысл другой: **echar una mano** — помочь, **echar un vistazo** — взглянуть, **echar de menos** — скучать. Значение выражения не складывается из слов — учи его целиком.", ejemplos: [{ es: "¿Me echas una mano con la mudanza?", ru: "Поможешь мне с переездом?" }, { es: "Échale un vistazo a mi texto.", ru: "Взгляни на мой текст." }] },
   "es13-parrafos": { titulo: "Desde entonces · al cabo de", texto: "Для финала рассказа: **desde entonces** (с тех пор), **un mes después** (через месяц), **a partir de ese día** (с того дня). Они показывают, что история изменила твою жизнь.", ejemplos: [{ es: "A partir de ese día, nunca más llegué tarde.", ru: "С того дня я больше никогда не опаздывал." }] },
-  "es13-ponerse": { titulo: "Ponerse, volverse, hacerse", texto: "Есть и другие глаголы «становиться»: **hacerse** — по своей воле, постепенно (**se hizo médico, se hizo rico**), **volverse** — сильная перемена характера (**se volvió muy serio**). **ponerse** — быстрая перемена, чувство или цвет. Пока достаточно узнавать.", ejemplos: [{ es: "Se hizo famoso con su primera novela.", ru: "Он стал знаменитым после первого романа." }] },
-  "es13-me-da": { titulo: "Qué pena · qué vergüenza · qué miedo", texto: "Короткие восклицания: **¡Qué pena!** — Как жаль! **¡Qué vergüenza!** — Какой стыд! **¡Qué miedo!** — Как страшно! **¡Qué rabia!** — Как обидно! (злость).", ejemplos: [{ es: "¡Qué pena que no puedas venir!", ru: "Как жаль, что ты не можешь прийти!" }] },
-  "es13-ganas": { titulo: "Ilusión — ложный друг", texto: "**la ilusión** почти никогда не «иллюзия». **Me hace ilusión** — мне очень радостно (это ждать). **¡Qué ilusión!** — Как здорово! (радостное ожидание).", ejemplos: [{ es: "¡Qué ilusión verte!", ru: "Как я рад тебя видеть!" }] },
-  "es13-acostumbrarse": { titulo: "Llevar + время", texto: "Сколько ты уже где-то: **llevar** + время: **Llevo dos años en España.** — Я уже два года в Испании. **¿Cuánto tiempo llevas aquí?** Очень частый вопрос к иностранцам.", ejemplos: [{ es: "Llevo un año estudiando español.", ru: "Я уже год учу испанский." }] },
-  "es13-choque": { titulo: "Sentirse como en casa", texto: "**sentirse como en casa** — чувствовать себя как дома. Хозяева говорят гостям: **¡Estás en tu casa!** — Будь как дома!", ejemplos: [{ es: "Por fin me siento como en casa.", ru: "Наконец я чувствую себя как дома." }] },
+  "es13-ponerse": { titulo: "Ponerse, volverse, hacerse", texto: "Есть и другие глаголы со значением «становиться»: **hacerse** — изменение статуса или качества, часто по своей воле и постепенно (**se hizo médico, se hizo rico**); **volverse** — заметное изменение характера (**se volvió muy serio**); **ponerse** — изменение состояния, эмоции или цвета лица (**se puso nervioso, se puso rojo**). Пока достаточно узнавать.", ejemplos: [{ es: "Se hizo famoso con su primera novela.", ru: "Он прославился благодаря своему первому роману." }] },
+  "es13-me-da": { titulo: "Qué pena · qué vergüenza · qué miedo", texto: "Короткие восклицания: **¡Qué pena!** — «Как жаль!»; **¡Qué vergüenza!** — «Какой стыд!»; **¡Qué miedo!** — «Как страшно!»; **¡Qué rabia!** — «Какая досада!» / «Как бесит!» (раздражение, злость).", ejemplos: [{ es: "¡Qué pena que no puedas venir!", ru: "Как жаль, что ты не можешь прийти!" }] },
+  "es13-ganas": { titulo: "Ilusión — ложный друг", texto: "**la ilusión** почти никогда не «иллюзия». **Me hace ilusión** — «очень жду, очень хочется»; **Me hace mucha ilusión el viaje** — «я с нетерпением жду поездки». **¡Qué ilusión!** — «Как здорово!», «Как я рад!» (радостное ожидание).", ejemplos: [{ es: "¡Qué ilusión verte!", ru: "Как я рад тебя видеть!" }] },
+  "es13-acostumbrarse": { titulo: "Llevar + время", texto: "Как сказать, сколько времени ты уже где-то живёшь или что-то делаешь: **llevar** + время. Llevo dos años en España — «Я уже два года в Испании». **¿Cuánto tiempo llevas aquí?** — «Как давно ты здесь?» Это очень частый вопрос, который задают иностранцам.", ejemplos: [{ es: "Llevo un año estudiando español.", ru: "Я уже год учу испанский." }] },
+  "es13-choque": { titulo: "Sentirse como en casa", texto: "**sentirse como en casa** — «чувствовать себя как дома». Хозяева могут сказать гостям: **¡Estás en tu casa!** — «Чувствуй себя как дома!»", ejemplos: [{ es: "Por fin me siento como en casa.", ru: "Наконец я чувствую себя как дома." }] },
   "es13-fiestas": { titulo: "Feliz Navidad y próspero Año Nuevo", texto: "Поздравления: **¡Feliz Navidad!**, **¡Feliz Año Nuevo!**, **¡Felices fiestas!** В полночь 31 декабря друг другу говорят просто **¡Feliz año!**", ejemplos: [{ es: "¡Feliz año a todos!", ru: "С Новым годом всех!" }] },
-  "es13-elegir-tiempo": { titulo: "Perfecto или indefinido в Испании", texto: "В Испании о том, что было **сегодня**, говорят perfecto: **Hoy he comido tortilla.** В Латинской Америке и на Канарах чаще indefinido: **Hoy comí tortilla.** В Abecé мы учим испанский вариант.", ejemplos: [{ es: "¿Qué has hecho hoy?", ru: "Что ты сегодня делал?" }] },
+  "es13-elegir-tiempo": { titulo: "Perfecto или indefinido в Испании", texto: "Во многих регионах Испании о событиях, относящихся к ещё не завершившемуся периоду (например, **сегодня**шнему дню), часто говорят с pretérito perfecto: **Hoy he comido tortilla.** В Латинской Америке и на Канарских островах в таких случаях чаще используют indefinido: **Hoy comí tortilla.** В Abecé мы изучаем вариант, распространённый в Испании.", ejemplos: [{ es: "¿Qué has hecho hoy?", ru: "Что ты сегодня делал?" }] },
   "es13-pronombres": { titulo: "Lo в ответе: «да, это так»", texto: "**lo** заменяет целую мысль: **—¿Sabías que Ana se va? —Sí, lo sabía.** **—¿Estás cansado? —Sí, lo estoy.** По-русски здесь ничего не ставят.", ejemplos: [{ es: "—¿Es verdad? —No lo sé.", ru: "— Это правда? — Не знаю." }] },
   "es13-preposiciones": { titulo: "Soñar con, casarse con", texto: "Ещё глаголы со своим предлогом: **soñar con** (мечтать о), **casarse con** (жениться на, выйти замуж за), **contar con** (рассчитывать на), **quedar con** (договориться встретиться с).", ejemplos: [{ es: "Puedes contar conmigo.", ru: "Можешь на меня рассчитывать." }] }
 };
 /* [correcta, equivocadas, explicación, módulo, regla] */
 const ES13_NAT = [
-  ["Cuando llegué, ya se había ido.", ["Cuando llegué, ya se fue.", "Cuando llegaba, ya se va."], "Раньше другого прошлого — **pluscuamperfecto**.", 1, "es13-pluscuam-uso"],
+  ["Cuando llegué, ya se había ido.", ["Cuando llegué, ya se fue.", "Cuando llegaba, ya se va."], "Раньше другого события в прошлом — **pluscuamperfecto**.", 1, "es13-pluscuam-uso"],
   ["Nunca había visto tanta gente.", ["Nunca vi tanta gente antes ahora.", "Nunca había ver tanta gente."], "**nunca había visto**.", 1, "es13-nunca-habia"],
   ["Ana dice que está cansada.", ["Ana dice está cansada.", "Ana dice que estoy cansada."], "**que** + смена лица.", 2, "es13-dice-que"],
   ["Me pregunta si vienes.", ["Me pregunta que si vienes.", "Me pregunta si que vienes."], "Перед **si** — без **que**.", 2, "es13-pregunta-si"],
   ["Me dijo que vendría.", ["Me dijo que vendrá.", "Me dijo que venga ayer."], "**futuro → condicional**.", 3, "es13-dijo-que"],
   ["Era tarde y llovía.", ["Fue tarde y llovió.", "Ha sido tarde y llueve."], "Фон — **imperfecto**.", 4, "es13-relato"],
-  ["Me pongo nervioso en los exámenes.", ["Estoy nervioso siempre en los exámenes.", "Me hago nervioso en los exámenes."], "Перемена — **ponerse**.", 5, "es13-ponerse"],
+  ["Me pongo nervioso en los exámenes.", ["Soy nervioso en los exámenes.", "Me hago nervioso en los exámenes."], "Перемена — **ponerse**.", 5, "es13-ponerse"],
   ["Me dan miedo los aviones.", ["Me da miedo los aviones.", "Yo doy miedo de los aviones."], "Мн. ч. — **dan**.", 5, "es13-me-da"],
   ["Echo de menos a mi familia.", ["Echo de menos mi familia.", "Echo menos a mi familia."], "О человеке — **a**.", 6, "es13-acostumbrarse"],
   ["Me he acostumbrado a cenar tarde.", ["Me he acostumbrado cenar tarde.", "Me he acostumbrado de cenar tarde."], "**acostumbrarse a**.", 6, "es13-acostumbrarse"],
@@ -1203,11 +1203,11 @@ const ES13_NAT = [
 ];
 /* [frase, pregunta, correcta, otras, explicación, módulo, regla] */
 const ES13_POR = [
-  ["Cuando llegué, ya había salido.", "Почему «había salido»?", "Он ушёл раньше, чем я пришёл", ["Он уходит сейчас", "Это будущее"], "Раньше другого прошлого — **pluscuamperfecto**.", 1, "es13-pluscuam-uso"],
+  ["Cuando llegué, ya había salido.", "Почему «había salido»?", "Он ушёл раньше, чем я пришёл", ["Он уходит сейчас", "Это будущее"], "Раньше другого события в прошлом — **pluscuamperfecto**.", 1, "es13-pluscuam-uso"],
   ["Dijo que estaba cansada.", "Почему «estaba», а не «está»?", "После «dijo» время сдвигается назад", ["Она устала давно", "Это ошибка"], "**presente → imperfecto**.", 3, "es13-dijo-que"],
   ["Me pide que venga.", "Почему «venga»?", "Это просьба: que + subjuntivo", ["Это прошлое", "Это вопрос"], "Просьба — **subjuntivo**.", 2, "es13-pide-que"],
   ["Me pongo nervioso.", "Почему «me pongo», а не «estoy»?", "Это перемена: «становлюсь»", ["Это постоянная черта", "Это прошлое"], "**ponerse** — становиться.", 5, "es13-ponerse"],
-  ["Me dan miedo los perros.", "Почему «dan»?", "«Los perros» — мн. ч.", ["Я их боюсь много", "Это ошибка"], "Как **gustan**.", 5, "es13-me-da"],
+  ["Me dan miedo los perros.", "Почему «dan»?", "«Los perros» — мн. ч.", ["Я очень боюсь собак.", "Это ошибка"], "Как **gustan**.", 5, "es13-me-da"],
   ["Echo de menos a Ana.", "Почему «a»?", "Ana — человек", ["Это направление", "Это ошибка"], "Перед человеком — **a**.", 6, "es13-acostumbrarse"]
 ];
 /* [audio, pregunta, correcta, opciones, explicación, módulo, regla] */
@@ -1240,7 +1240,7 @@ const ES13_DESC = [
 /* [frase base, pasos [[consigna, esperada]], módulo, regla] */
 const ES13_CAD = [
   ["Ana: «Estoy cansada.»", [["Передай в настоящем: Ana dice que…", "Ana dice que está cansada."], ["Теперь в прошлом: Ana dijo que…", "Ana dijo que estaba cansada."]], 3, "es13-dijo-que"],
-  ["Pablo: «Iré mañana.»", [["Передай в настоящем: Pablo dice que…", "Pablo dice que irá mañana."], ["Теперь в прошлом, через неделю: Pablo dijo que…", "Pablo dijo que iría al día siguiente."]], 3, "es13-palabras-tiempo"],
+  ["Pablo: «Iré mañana.»", [["Передай в настоящем: Pablo dice que…", "Pablo dice que irá mañana."], ["Передай эти слова в прошедшем времени, если рассказываешь о них через неделю: Pablo dijo que…", "Pablo dijo que iría al día siguiente."]], 3, "es13-palabras-tiempo"],
   ["Llegué. Ana se fue.", [["Скажи, что Аня ушла после тебя: Cuando llegué, Ana…", "Cuando llegué, Ana se fue."], ["Теперь — что она ушла раньше: …ya…", "Cuando llegué, Ana ya se había ido."]], 1, "es13-pluscuam-uso"],
   ["Estoy nervioso.", [["Скажи, что так бывает всегда перед экзаменами: Siempre…", "Siempre me pongo nervioso antes de los exámenes."], ["Теперь о прошлом разе: Ayer…", "Ayer me puse nervioso antes del examen."]], 5, "es13-ponerse"]
 ];
@@ -1250,7 +1250,7 @@ const ES13_DIAG = [
   ["Me dijo que vendrá.", "После dijo будущее становится condicional", ["Нужен subjuntivo", "Нужно убрать que"], "Me dijo que vendría.", 3, "es13-dijo-que"],
   ["Me preguntó que si venía.", "Перед si не ставят que", ["Нужен subjuntivo", "Нужно qué"], "Me preguntó si venía.", 3, "es13-pregunto-si"],
   ["Me da miedo los perros.", "Los perros — мн. ч.: dan", ["Нужно estar", "Нужно de"], "Me dan miedo los perros.", 5, "es13-me-da"],
-  ["Echo de menos mi madre.", "Перед человеком нужна a", ["Нужно la madre", "Нужно echo menos"], "Echo de menos a mi madre.", 6, "es13-acostumbrarse"],
+  ["Echo de menos mi madre.", "Перед человеком в роли дополнения нужна **a**.", ["Нужно la madre", "Нужно echo menos"], "Echo de menos a mi madre.", 6, "es13-acostumbrarse"],
   ["Me he dado cuenta que es tarde.", "Darse cuenta de que", ["Нужен subjuntivo", "Нужно me di"], "Me he dado cuenta de que es tarde.", 10, "es13-preposiciones"]
 ];
 /* [frase, preguntas [[qué, índice]], módulo, regla] */

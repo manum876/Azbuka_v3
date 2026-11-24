@@ -79,7 +79,7 @@ const GRAMATICA_CASOS = {
    ["Desde 5 en adelante va el genitivo plural","пять {книг}","cinco libros","кни́га → книг: el genitivo plural no tiene terminación (se cae la -а). Va así después de пять."]
   ],
   preposiciones: [
-   ["без","sin"], ["для","para"], ["до","hasta, antes de"], ["из","de (desde adentro)"], ["от","de (de parte de alguien), desde"], ["у","junto a, en lo de; у меня́ = yo tengo"], ["с","desde (de arriba de)"], ["о́коло","cerca de"], ["по́сле","después de"], ["кро́ме","excepto, además de"], ["вокру́г","alrededor de"], ["ми́мо","por al lado de"], ["про́тив","contra"], ["из-за","por culpa de, de atrás de"], ["из-под","de debajo de"]
+   ["без","sin"], ["для","para"], ["до","hasta, antes de"], ["из","de (desde dentro)"], ["от","de (de parte de alguien), desde"], ["у","junto a, en casa de; у меня́ = yo tengo"], ["с","desde (de arriba de)"], ["о́коло","cerca de"], ["по́сле","después de"], ["кро́ме","excepto, además de"], ["вокру́г","alrededor de"], ["ми́мо","por al lado de"], ["про́тив","contra"], ["из-за","por culpa de, de atrás de"], ["из-под","de debajo de"]
   ],
   ejemplos: [
    ["Э́то дом {моего́ дру́га}.","Esta es la casa de mi amigo.","мой друг → моего́ дру́га: el posesivo (-его́) y el sustantivo (-а) van los dos en genitivo. Dice de quién es la casa."],
@@ -97,7 +97,7 @@ const GRAMATICA_CASOS = {
    ["Lo que a alguien le gusta, con нра́виться","{Мне} нра́вится му́зыка.","Me gusta la música.","я → мне. Con нра́виться, la persona a la que le gusta algo va en dativo, y lo que gusta (му́зыка) es el sujeto."]
   ],
   preposiciones: [
-   ["к","hacia, a lo de (una persona)"], ["по","por, a lo largo de; по телефо́ну = por teléfono"], ["благодаря́","gracias a"]
+   ["к","hacia, a casa de (una persona)"], ["по","por, a lo largo de; по телефо́ну = por teléfono"], ["благодаря́","gracias a"]
   ],
   ejemplos: [
    ["Я звоню́ {дру́гу}.","Llamo a mi amigo.","друг → дру́гу (masculino: se agrega -у). Звони́ть pide dativo: a quién llamo."],
@@ -114,7 +114,7 @@ const GRAMATICA_CASOS = {
    ["Duración o momento","Я рабо́тал {всю неде́лю}.","Trabajé toda la semana.","вся неде́ля → всю неде́лю: cuánto duró algo va en acusativo, sin preposición."]
   ],
   preposiciones: [
-   ["в","a, hacia adentro de (dirección)"], ["на","a, hacia (dirección); para (un tiempo)"], ["за","por (a cambio de)"], ["че́рез","a través de; dentro de (tiempo)"], ["про","sobre, acerca de (coloquial)"]
+   ["в","a, hacia dentro de (dirección)"], ["на","a, hacia (dirección); para (un tiempo)"], ["за","por (a cambio de)"], ["че́рез","a través de; dentro de (tiempo)"], ["про","sobre, acerca de (coloquial)"]
   ],
   ejemplos: [
    ["Я ви́жу {ма́му}.","Veo a mamá.","ма́ма → ма́му: es a quién veo, el complemento directo."],
@@ -149,7 +149,7 @@ const GRAMATICA_CASOS = {
    ["Medio de transporte con на","Я е́ду на {авто́бусе}.","Voy en autobús.","авто́бус → авто́бусе. на + preposicional: en qué medio de transporte voy."]
   ],
   preposiciones: [
-   ["в","en (adentro de)"], ["на","en, sobre (superficie o evento)"], ["о / об / обо","sobre, acerca de"], ["при","en presencia de, en tiempos de"]
+   ["в","en (dentro de)"], ["на","en, sobre (superficie o evento)"], ["о / об / обо","sobre, acerca de"], ["при","en presencia de, en tiempos de"]
   ],
   ejemplos: [
    ["Кни́га лежи́т на {столе́}.","El libro está sobre la mesa.","стол → столе́: на + preposicional dice dónde está (sin movimiento)."],
@@ -247,11 +247,11 @@ const GRAMATICA_RECCION = {
    ejemplos: [["Я пишу́ ру́чкой.", "Escribo con bolígrafo."], ["Он рабо́тает врачо́м.", "Trabaja de médico."]] },
  o_prep: { titulo: "о + preposicional", caso: "preposicional", prep: "о", preguntas: "о ком? о чём?", explicacion: "Indica de qué o de quién se habla, se piensa o se sabe algo.",
    ejemplos: [["Мы говори́м о фи́льме.", "Hablamos de la película."], ["Я ду́маю о тебе́.", "Pienso en ti."]] },
- na_acc: { titulo: "на + acusativo", caso: "acusativo", prep: "на", preguntas: "на кого? на что?", explicacion: "Indica hacia qué o hacia quién se dirige la acción (mirar a, contar con, enojarse con…).",
+ na_acc: { titulo: "на + acusativo", caso: "acusativo", prep: "на", preguntas: "на кого? на что?", explicacion: "Indica hacia qué o hacia quién se dirige la acción (mirar a, contar con, enfadarse con…).",
    ejemplos: [["Я смотрю́ на не́бо.", "Miro el cielo."], ["Я наде́юсь на тебя́.", "Cuento contigo."]] },
  na_prep: { titulo: "на + preposicional", caso: "preposicional", prep: "на", preguntas: "на ком? на чём?", explicacion: "Indica sobre qué o en qué se apoya la acción. También se usa para tocar instrumentos y para casarse (un hombre).",
    ejemplos: [["Он игра́ет на гита́ре.", "Toca la guitarra."], ["Он жени́лся на А́не.", "Se casó con Ana."]] },
- v_acc: { titulo: "в + acusativo", caso: "acusativo", prep: "в", preguntas: "в кого? во что?", explicacion: "Indica hacia adentro de qué va la acción, o en qué se cree. También se usa para jugar juegos y deportes.",
+ v_acc: { titulo: "в + acusativo", caso: "acusativo", prep: "в", preguntas: "в кого? во что?", explicacion: "Indica hacia dentro de qué va la acción, o en qué se cree. También se usa para jugar juegos y deportes.",
    ejemplos: [["Я ве́рю в тебя́.", "Creo en ti."], ["Де́ти игра́ют в футбо́л.", "Los chicos juegan al fútbol."]] },
  v_prep: { titulo: "в + preposicional", caso: "preposicional", prep: "в", preguntas: "в ком? в чём?", explicacion: "Indica en qué terreno o asunto ocurre la acción (dudar de algo, ayudar en algo…).",
    ejemplos: [["Я сомнева́юсь в э́том.", "Lo dudo."], ["Она́ помога́ет мне в рабо́те.", "Me ayuda en el trabajo."]] },
@@ -273,12 +273,12 @@ const GRAMATICA_RECCION = {
    ejemplos: [["Он рабо́тает над прое́ктом.", "Trabaja en un proyecto."], ["Не сме́йся надо мной.", "No te rías de mí."]] },
  do_gen: { titulo: "до + genitivo", caso: "genitivo", prep: "до", preguntas: "до кого? до чего?", explicacion: "Indica el límite: hasta dónde o hasta quién se llega.",
    ejemplos: [["Мы дошли́ до па́рка.", "Llegamos hasta el parque."], ["Я не могу́ дозвони́ться до него́.", "No logro comunicarme con él."]] },
- iz_gen: { titulo: "из + genitivo", caso: "genitivo", prep: "из", preguntas: "из кого? из чего?", explicacion: "Indica de adentro de dónde sale algo, o de qué está hecho.",
+ iz_gen: { titulo: "из + genitivo", caso: "genitivo", prep: "из", preguntas: "из кого? из чего?", explicacion: "Indica de dentro de dónde sale algo, o de qué está hecho.",
    ejemplos: [["Он вы́шел из до́ма.", "Salió de casa."], ["Суп де́лают из овоще́й.", "La sopa se hace con verduras."]] },
  po_dat: { titulo: "по + dativo", caso: "dativo", prep: "по", preguntas: "по кому? по чему?", explicacion: "Indica por dónde se mueve uno, o a quién se extraña.",
    ejemplos: [["Я скуча́ю по тебе́.", "Te extraño."], ["Он гуля́ет по па́рку.", "Pasea por el parque."]] },
  mimo_gen: { titulo: "ми́мо + genitivo", caso: "genitivo", prep: "ми́мо", preguntas: "мимо кого? мимо чего?", explicacion: "Indica que se pasa por al lado de algo o de alguien, sin detenerse.",
-   ejemplos: [["Мы прошли́ ми́мо магази́на.", "Pasamos por al lado del negocio."]] },
+   ejemplos: [["Мы прошли́ ми́мо магази́на.", "Pasamos por delante de la tienda."]] },
  ob_acc: { titulo: "о (обо) + acusativo", caso: "acusativo", prep: "о", preguntas: "обо что?", explicacion: "Indica contra qué se choca o se golpea algo.",
    ejemplos: [["Он уда́рился голово́й о дверь.", "Se golpeó la cabeza contra la puerta."]] },
  cherez_acc: { titulo: "че́рез + acusativo", caso: "acusativo", prep: "че́рез", preguntas: "через что?", explicacion: "Indica que se atraviesa algo: a través de, de un lado al otro.",
@@ -381,7 +381,7 @@ const GRAMATICA_GUIA = {
     ["Preposicional", "о ком? о чём?", "¿de quién? ¿de qué? (hablar de…)"]
    ] },
    { t: "lbl", texto: "Por qué funcionan" },
-   { t: "texto", texto: "Las preguntas son las mismas palabras кто («quién») y что («qué») declinadas. Кто cambia así: кто → {кого́} → {кому́} → {кем} → о {ком}. Что cambia así: что → {чего́} → {чему́} → {чем} → о {чём}. Por eso sirven de modelo: la pregunta ya tiene el caso adentro." },
+   { t: "texto", texto: "Las preguntas son las mismas palabras кто («quién») y что («qué») declinadas. Кто cambia así: кто → {кого́} → {кому́} → {кем} → о {ком}. Что cambia así: что → {чего́} → {чему́} → {чем} → о {чём}. Por eso sirven de modelo: la pregunta ya tiene el caso dentro." },
    { t: "lbl", texto: "La regla de oro" },
    { t: "nota", texto: "La respuesta va en el mismo caso que la pregunta. Si la pregunta es кому́? (dativo), la respuesta también va en dativo." },
    { t: "ejemplos", items: [
@@ -422,7 +422,7 @@ const GRAMATICA_GUIA = {
     ["Я иду́ в {шко́лу}.", "Voy a la escuela.", "Hay movimiento, куда́?: в + acusativo."],
     ["Я в {шко́ле}.", "Estoy en la escuela.", "No hay movimiento, где?: в + preposicional."]
    ] },
-   { t: "lbl", texto: "Por qué no alcanza con traducir" },
+   { t: "lbl", texto: "Por qué no basta con traducir" },
    { t: "nota", texto: "En español, «veo a mamá» y «ayudo a mamá» tienen la misma forma. En ruso piden casos distintos: ви́жу {ма́му} (acusativo) y помога́ю {ма́ме} (dativo). La única forma segura es preguntarle al verbo, no al español." }
   ]
  },

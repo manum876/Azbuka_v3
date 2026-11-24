@@ -376,6 +376,19 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
   const marcarNivel = n => { azSetItemLevel("lex:" + entry.id, n); setNivel(n); };
   const tr = (entry.senses || []).map(x => x.ru).join("; ");
   const verbo = entry.posNormalized === "verbo";
+  /* 24/11/2026 (Manu): los irregulares dicen «неправильный» también acá, como en Verbos.
+     Las conjugaciones (data-verbos-es.js) se piden solo si la ficha es de un verbo.
+     Los cambios ortográficos (c → qu, g → j…) no cuentan como irregulares, igual que en Verbos. */
+  const [vesListo, setVesListo] = useState(typeof VERBOS_ES !== "undefined");
+  useEffect(() => {
+    if (!verbo || vesListo) return;
+    if (typeof VERBOS_ES !== "undefined") { setVesListo(true); return; }
+    let sc = document.getElementById("az-verbos-es");
+    if (!sc) { sc = document.createElement("script"); sc.id = "az-verbos-es"; sc.src = "data/data-verbos-es.js"; document.body.appendChild(sc); }
+    sc.addEventListener("load", () => setVesListo(true));
+  }, [verbo]);
+  const vInfo = verbo && vesListo && typeof VERBOS_ES !== "undefined" ? VERBOS_ES[entry.id] : null;
+  const irregular = !!vInfo && (vInfo.irregular || []).some(m => !/^(c → qu|g → gu|z → c|gu → gü|c → z|g → j|gu → g|i → y)$/.test(m));
   const regimen = entry.regimen || [];
   const pareja = (entry.pronominalPartner || []).filter(p => !/^SIN_PAREJA/.test(p))
     .map(p => LEXICON_ES.find(x => x.es === p && x.posNormalized === "verbo")).filter(Boolean);
@@ -466,7 +479,7 @@ function FichaEs({ entry, c, darkMode, nivel, setNivel }) {
             verbo && entry.conjugationClass && el("div", { className: "meta-item" },
               el("div", { className: "meta-k" }, "Спряжение"),
               el("a", { className: "meta-v meta-link", href: "verbos.html?id=" + entry.id, onClick: e => azNavigate(e, "verbos.html?id=" + entry.id) },
-                "глагол на " + entry.conjugationClass + " ›")),
+                "глагол на " + entry.conjugationClass + (irregular ? " · неправильный" : "") + " ›")),
             pareja.length > 0 && el("div", { className: "meta-item" },
               el("div", { className: "meta-k" }, /se$/.test(entry.es) ? "Без «se»" : "С «se»"),
               pareja.map(p => el("a", { key: p.id, className: "meta-v meta-link", style: { display: "block" }, href: "ficha.html?id=" + p.id, onClick: e => azNavigate(e, "ficha.html?id=" + p.id) }, p.es + " ›"))),

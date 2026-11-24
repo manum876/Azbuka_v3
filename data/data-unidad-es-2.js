@@ -183,7 +183,7 @@ const UNIDAD_ES_2 = {
           id: "es2-nacionalidad-genero",
           titulo: "Ruso, rusa: национальность по роду",
           texto: "Национальность выражается прилагательным, и оно согласуется по роду:\n· на **-o** → **-a**: ruso → **rusa**, italiano → **italiana**;\n· на согласную → добавь **-a**: español → **española**, alemán → **alemana**, francés → **francesa**;\n· на **-e** и на **-a** — одинаково для обоих: **canadiense**, **estadounidense**.",
-          ojo: "**francés → francesa**, **alemán → alemana**, **inglés → inglesa**: в женском роде знак ударения пропадает — ударение теперь падает по правилу (U1, модуль 8).",
+          ojo: "**francés → francesa**, **alemán → alemana**, **inglés → inglesa**: в женском роде знак ударения пропадает — ударение теперь падает по правилу (урок 1, модуль 8).",
           errores: [
             { mal: "Ana es ruso.", bien: "Ana es rusa.", por: "Аня — женщина: **rusa**." },
             { mal: "Lucía es españolа.", bien: "Lucía es española.", por: "Последняя буква — латинская **a**, а не русская «а»: на русской клавиатуре легко перепутать." }
@@ -359,7 +359,7 @@ const UNIDAD_ES_2 = {
           texto: "Артикль, существительное и прилагательное стоят в одном роде и числе: **la profesora española**, **los profesores españoles**. Если в группе есть хотя бы один мужчина — мужской род: **Ana y Javier son españoles**.",
           errores: [
             { mal: "la profesor", bien: "la profesora", por: "Женщина-преподаватель — **profesora**: артикль и слово в одном роде." },
-            { mal: "Ana es español.", bien: "Ana es española.", por: "Ана — женщина: **española**." }
+            { mal: "Ana es español.", bien: "Ana es española.", por: "Аня — женщина: **española**." }
           ],
           chequeo: [
             { pide: "Аня и Лусия — …", opciones: ["españolas", "españoles", "española"], ok: "españolas", por: "Две женщины — женский род, множественное число: **españolas**." }
@@ -633,7 +633,7 @@ function ejerciciosUnidadEs2() {
   });
   ES2_RESPUESTAS.forEach(([dice, ok, mal, exp, mod], i) => {
     out.push({ id: "ES2-resp-" + i, tipo: "respuesta", forma: "elegir", dificultad: 2, modulo: mod, grupo: "resp-" + i,
-      pide: "Тебе говорят: что ответишь?", grande: dice, audio: dice, opciones: baraja([ok].concat(mal), i + 121), correcta: ok, oir: ok, explicacion: exp });
+      pide: "Тебе говорят: что ты ответишь?", grande: dice, audio: dice, opciones: baraja([ok].concat(mal), i + 121), correcta: ok, oir: ok, explicacion: exp });
   });
   const OBJ = new Set(es2Objetivo());
   const fr = typeof FRASES_ES !== "undefined" ? FRASES_ES.filter(f => f.unidad === 2) : [];
@@ -902,20 +902,20 @@ const ES2_BASICAS_MOD = [
   ["es2m7", ["mamá", "papá", "bebé"], {
     id: "es2-mama",
     titulo: "Mamá, papá, el bebé",
-    texto: "**madre** и **padre** — «мать» и «отец». О своих родителях в разговоре обычно говорят **mamá** и **papá** — «мама» и «папа». Ударение на последнем слоге, поэтому пишется знак: **mamá**, **papá**. **El bebé** — «младенец, малыш».",
+    texto: "**madre** и **padre** — «мать» и «отец». О своих родителях в разговоре обычно говорят **mamá** и **papá** — «мама» и «папа». Ударение падает на последний слог, поэтому на письме ставится знак ударения: **mamá, papá**. **El bebé** — «младенец», «малыш».",
     ejemplos: [
       { es: "Mi mamá es profesora y mi papá es médico.", ru: "Моя мама — учительница, а папа — врач." },
       { es: "Mi hermana tiene un bebé.", ru: "У моей сестры малыш." }
     ],
-    ojo: "**mamá** и **papá** — во множественном числе **mamás**, **papás**; **mis papás** иногда значит «мои родители», но в Испании чаще говорят **mis padres**."
+    ojo: "Формы **mamá** и **papá** во множественном числе — **mamás** и **papás**. Выражение **mis papás** иногда означает «мои родители», но в Испании чаще говорят **mis padres**."
   }]
 ];
 const ES2_BASICAS = [
   ["familia", "escribir", 7, "es2-mama", "Кто это? Напиши слово.", "Mi hermana tiene un hijo de un año: es un ___.", "bebé", [], "**bebé** — «малыш».", "bebé"],
   ["familia", "escribir", 7, "es2-mama", "Напиши слово, как говорят дома.", "Mi madre y mi padre: mi ___ y mi papá.", "mamá", [], "**mamá** — со знаком ударения на последнем слоге.", "mamá"],
   ["familia", "escribir", 7, "es2-mama", "Напиши слово, как говорят дома.", "Mi padre y mi madre: mi ___ y mi mamá.", "papá", [], "**papá** — со знаком ударения на последнем слоге.", "papá"],
-  ["situacion-frase", "elegir", 7, "es2-mama", "Ты показываешь фото малыша сестры.", "", "Este es el bebé de mi hermana.", ["Esta es el bebé de mi hermana.", "Este es bebé de mi hermana."], "**el bebé** — мужской род, с артиклем.", "bebé"],
-  ["respuesta", "elegir", 7, "es2-mama", "Тебе говорят: что ответишь?", "¿Quién es?", "Es mi papá.", ["Soy mi papá.", "Es mi papás."], "**Es mi papá.**", "papá"]
+  ["situacion-frase", "elegir", 7, "es2-mama", "Ты показываешь фото малыша сестры.", "", "Este es el bebé de mi hermana.", ["Esta es el bebé de mi hermana.", "Este es bebé de mi hermana."], "Существительное bebé — мужского рода: **el bebé**.", "bebé"],
+  ["respuesta", "elegir", 7, "es2-mama", "Тебе говорят: что ты ответишь?", "¿Quién es?", "Es mi papá.", ["Soy mi papá.", "Es mi papás."], "**Es mi papá.**", "papá"]
 ];
 (function () {
   const M = id => UNIDAD_ES_2.modulos.find(m => m.id === id);

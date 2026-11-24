@@ -1208,7 +1208,7 @@ const ES12_BASICAS_MOD = [
   ["es12m10", ["luchar", "actuar"], {
     id: "es12-luchar",
     titulo: "Luchar contra · actuar",
-    texto: "**luchar** — «бороться»: **luchar contra el cambio climático**, **luchar por un mundo mejor** (по / за — **por**). **actuar** — «действовать, поступать» (и «играть роль»): **Hay que actuar ya**. Ударение: **actúo, actúas, actúa**.",
+    texto: "**luchar** — «бороться»: **luchar contra el cambio climático** — «бороться с изменением климата»; **luchar **por** un mundo mejor** — «бороться за лучший мир» (por). **actuar** — «действовать, поступать» (а также «играть роль»): **Hay que actuar ya**. Ударение: **actúo, actúas, actúa**.",
     ejemplos: [
       { es: "Muchos jóvenes luchan contra el cambio climático.", ru: "Многие молодые люди борются с изменением климата." },
       { es: "Los gobiernos tienen que actuar ahora.", ru: "Правительства должны действовать сейчас." }
@@ -1220,7 +1220,7 @@ const ES12_BASICAS_MOD = [
     texto: "**profundo** — «глубокий»: **un río profundo, un cambio profundo**. **directo** — «прямой»: **un tren directo** (без пересадок); **ser directo** — говорить прямо: **Te lo digo de forma directa**.",
     ejemplos: [
       { es: "Creo que necesitamos un cambio profundo.", ru: "Я думаю, нам нужны глубокие перемены." },
-      { es: "Lucía es muy directa: siempre dice lo que piensa.", ru: "Лусия очень прямая: всегда говорит, что думает." }
+      { es: "Lucía es muy directa: siempre dice lo que piensa.", ru: "Лусия очень прямолинейная: всегда говорит то, что думает." }
     ]
   }]
 ];

@@ -217,7 +217,7 @@ const UNIDAD_3 = {
         { id: "u3-neutro-mia", titulo: "Las de -мя",
           texto: "Вре́мя y и́мя terminan en **-я**, pero son neutras. Son pocas y muy usadas: vale la pena recordarlas.",
           ejemplos: [{ ru: "{Моё} и́мя.", es: "Mi nombre.", por: "Termina en **-я**, pero es de las de **-мя**: neutro, va моё." }],
-          mas: { texto: "Son palabras muy antiguas que conservaron una terminación propia. Por eso no siguen la regla de **-я**. En el nivel de este curso, alcanza con recordar dos: вре́мя (tiempo) e и́мя (nombre)." } },
+          mas: { texto: "Son palabras muy antiguas que conservaron una terminación propia. Por eso no siguen la regla de **-я**. En el nivel de este curso, basta con recordar dos: вре́мя (tiempo) e и́мя (nombre)." } },
         { id: "u3-indeclinables", titulo: "Palabras que vienen de otros idiomas",
           texto: "Кафе́ y метро́ vienen de otros idiomas. Son neutras y no cambian nunca, ni en plural: «un metro» y «dos metros» se dicen igual, метро́. Más adelante vas a ver otras palabras como estas, y todas funcionan así.",
           ejemplos: [
@@ -327,7 +327,7 @@ const UNIDAD_3 = {
           mas: { texto: "Una más, para leer bien: después de **ж**, **ш**, **ч**, **щ**, cuando la terminación no lleva el acento, la **о** se escribe **е**. Por eso el neutro de хоро́ший es хоро́шее: хоро́шее окно́." } }
 ] },
     { id: "u3m8", n: 8, tipo: "vocabulario", titulo: "Vocabulario temático", resumen: "Personas, casa, ciudad, objetos, animales…",
-      intro: "Unas diez palabras por tema, las más útiles para empezar. Toca cada una para escucharla y ver su ficha; con las tarjetas las repasas de a una." },
+      intro: "Unas diez palabras por tema, las más útiles para empezar. Toca cada una para escucharla y ver su ficha; con las tarjetas las repasas una por una." },
     { id: "u3m9", n: 9, tipo: "leccion", tablaAdj: "m9", titulo: "Describir objetos", resumen: "Э́то большо́й дом. Дом большо́й.",
       intro: "Con lo que ya sabes alcanza para describir: qué es algo y cómo es.",
       secciones: [

@@ -705,7 +705,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "El parque está un poco lejos, pero la parada de metro está muy cerca, al lado de la plaza.",
-    "ru": "Парк немного далеко, зато станция метро совсем рядом, возле площади."
+    "ru": "Парк далековато, зато станция метро совсем рядом, возле площади."
    }
   ],
   "preguntas": [
@@ -1406,7 +1406,7 @@ const LECTURAS_ES = [
     "tipo": "lectura",
     "dificultad": 2,
     "forma": "situacion",
-    "pide": "Ты в овощной лавке. Попроси что-нибудь купить (количество + продукт).",
+    "pide": "Ты в овощной лавке. Попроси нужный продукт, назвав его количество.",
     "sit": {
      "necesita": [
       {
@@ -1450,7 +1450,7 @@ const LECTURAS_ES = [
   "parrafos": [
    {
     "es": "En España muchos restaurantes tienen menú del día de lunes a viernes a la hora de comer. Normalmente cuesta entre doce y quince euros.",
-    "ru": "В Испании во многих ресторанах с понедельника по пятницу, в обеденное время, есть комплексный обед. Обычно он стоит от двенадцати до пятнадцати евро."
+    "ru": "В Испании во многих ресторанах с понедельника по пятницу в обеденное время подают комплексный обед. Обычно он стоит от двенадцати до пятнадцати евро."
    },
    {
     "es": "El menú tiene un primer plato, un segundo plato y un postre o un café. El pan y la bebida están en el precio: agua, vino o un refresco.",
@@ -1466,7 +1466,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Pero cuidado: los fines de semana muchos restaurantes no tienen menú del día.",
-    "ru": "Но будь внимателен: по выходным во многих ресторанах комплексного обеда нет."
+    "ru": "Но учти: по выходным во многих ресторанах комплексного обеда нет."
    }
   ],
   "preguntas": [
@@ -1560,7 +1560,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Una tapa es un plato pequeño: un poco de tortilla, jamón, queso o patatas.",
-    "ru": "Тапа — это маленькая тарелка: немного тортильи, хамона, сыра или картошки."
+    "ru": "Тапа — это небольшая порция: немного тортильи, хамона, сыра или картошки."
    },
    {
     "es": "En muchos bares de Granada, de León o de Jaén, pides una bebida y la tapa no cuesta nada: es gratis.",
@@ -1568,7 +1568,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "En otras ciudades una tapa cuesta entre dos y cinco euros. ¿Tienes mucha hambre? Puedes pedir una ración: es un plato grande, para dos o tres personas.",
-    "ru": "В других городах тапа стоит от двух до пяти евро. Очень голоден? Можно заказать порцию: это большое блюдо на двух-трёх человек."
+    "ru": "В других городах тапа стоит от двух до пяти евро. Очень голоден? Можно заказать порцию (ración): это большое блюдо на двух-трёх человек."
    },
    {
     "es": "Ir de tapas es una costumbre muy española: la gente come de pie, habla mucho y va de bar en bar.",
@@ -1673,7 +1673,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Lucía: Pablo y Marta vienen de Madrid y traen el vino. Tú, ¿puedes comprar agua y zumo?",
-    "ru": "Лусия: Пабло и Марта приезжают из Мадрида и привезут вино. А ты можешь купить воду и сок?"
+    "ru": "Лусия: Пабло и Марта приедут из Мадрида и привезут вино. А ты можешь купить воду и сок?"
    },
    {
     "es": "Ana: Sí, claro. ¿Y el postre? Lucía: ¡Yo hago una tarta de chocolate!",
@@ -1795,7 +1795,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "¿Te gusta el arte? Madrid tiene museos muy importantes: el Prado, el Reina Sofía y el Thyssen.",
-    "ru": "Любишь искусство? В Мадриде очень важные музеи: Прадо, Музей королевы Софии и Тиссен."
+    "ru": "Любишь искусство? В Мадриде есть несколько очень известных музеев: Прадо, Музей королевы Софии и Тиссен."
    },
    {
     "es": "¿Quieres descansar? Ve al parque del Retiro: es muy grande y muy bonito, y tiene un lago pequeño. Los domingos hay muchas familias allí.",
@@ -1900,7 +1900,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Por la mañana el metro va muy lleno. Cuando hace buen tiempo, Ana sale de casa más temprano y va a pie: baja por el paseo de Gràcia y tarda media hora.",
-    "ru": "Утром в метро очень много людей. Когда хорошая погода, Аня выходит из дома пораньше и идёт пешком: спускается по проспекту Пасеч-де-Грасия, это полчаса."
+    "ru": "Утром в метро очень много людей. Когда хорошая погода, Аня выходит из дома пораньше и идёт пешком: спускается по проспекту Пасео-де-Грасия — дорога занимает полчаса."
    },
    {
     "es": "¿Un consejo? En el metro de Barcelona, ten cuidado con el bolso y con el móvil.",
@@ -2003,7 +2003,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Tiene cuadros de pintores españoles muy famosos, como Velázquez, Goya y El Greco. Allí está «Las meninas», el famoso cuadro de Velázquez.",
-    "ru": "В нём картины очень известных испанских художников: Веласкеса, Гойи и Эль Греко. Там висят «Менины», знаменитая картина Веласкеса."
+    "ru": "В музее представлены картины очень известных испанских художников: Веласкеса, Гойи и Эль Греко. Там можно увидеть знаменитую картину Веласкеса «Менины»."
    },
    {
     "es": "También tiene cuadros de pintores de otros países, como Rubens, Tiziano o el Bosco.",
@@ -2378,7 +2378,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "En el primero vive la señora Rosa. Tiene ochenta años y es muy simpática. Vive sola, y a veces Ana le compra el pan o le sube la compra, porque el edificio no tiene ascensor.",
-    "ru": "На втором этаже живёт сеньора Роса. Ей восемьдесят лет, и она очень милая. Она живёт одна, и Аня иногда покупает ей хлеб или поднимает ей продукты, потому что в доме нет лифта."
+    "ru": "На втором этаже живёт сеньора Роса. Ей восемьдесят лет, и она очень милая. Она живёт одна, и Аня иногда покупает ей хлеб или помогает донести покупки до квартиры, потому что в доме нет лифта."
    },
    {
     "es": "En el segundo viven Jordi y Laura con sus dos hijos. Los niños son muy simpáticos, pero no son nada tranquilos: por las tardes juegan al fútbol en el pasillo.",
@@ -2390,7 +2390,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Un día Ana sube y habla con él. Él dice: «¡Lo siento! Ahora la bajo». Ahora la música está más baja y los dos se saludan en la escalera.",
-    "ru": "Однажды Аня поднимается и говорит с ним. Он отвечает: «Извини! Сейчас сделаю тише». Теперь музыка тише, и они здороваются на лестнице."
+    "ru": "Однажды Аня поднимается к нему и разговаривает с ним. Он отвечает: «Извини! Сейчас убавлю музыку». Теперь музыка играет тише, и они здороваются на лестнице."
    },
    {
     "es": "Para Ana, tener buenos vecinos es tan importante como tener un buen piso.",
@@ -2479,7 +2479,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "En la sobremesa la gente habla de todo: de la familia, del trabajo, de fútbol, de política… A veces hay discusiones, pero normalmente terminan bien.",
-    "ru": "За собремесой говорят обо всём: о семье, о работе, о футболе, о политике… Иногда бывают споры, но обычно они хорошо заканчиваются."
+    "ru": "Во время собремесы люди говорят обо всём: о семье, о работе, о футболе, о политике… Иногда бывают споры, но обычно они хорошо заканчиваются."
    },
    {
     "es": "Los domingos, en las comidas de familia, la sobremesa a veces es de una hora o más. En Navidad, ¡puede ser de toda la tarde!",
@@ -2491,7 +2491,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Ana cree que la sobremesa es muy bonita. Para ella, es la mejor hora del día para hablar con sus amigos españoles y practicar español.",
-    "ru": "Аня считает, что собремеса — это очень хорошо. Для неё это лучшее время дня, чтобы поговорить с испанскими друзьями и попрактиковать испанский."
+    "ru": "Аня считает, что собремеса — это очень хорошо. Для неё это лучшее время дня, чтобы поговорить с испанскими друзьями и попрактиковаться в испанском."
    }
   ],
   "preguntas": [
@@ -2601,7 +2601,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Para Pablo, Madrid es mejor. Es más grande que Barcelona y tiene más museos. Además, la gente sale mucho por la noche y los bares están siempre llenos.",
-    "ru": "Для Пабло лучше Мадрид. Он больше Барселоны, и в нём больше музеев. Кроме того, люди там много гуляют по вечерам, и бары всегда полные."
+    "ru": "Для Пабло лучше Мадрид. Он больше Барселоны, и в нём больше музеев. Кроме того, люди там много гуляют по вечерам, и в барах всегда полно народу."
    },
    {
     "es": "Lucía no está de acuerdo. Barcelona tiene mar y playa, y en invierno no hace tanto frío como en Madrid. Además, tiene montañas muy cerca y los edificios de Gaudí, como la Sagrada Familia.",
@@ -2617,7 +2617,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "¿Y Ana? A ella le gustan las dos, pero prefiere Barcelona, porque es menos grande y más tranquila. Y porque allí viven sus amigos.",
-    "ru": "А Аня? Ей нравятся оба, но она предпочитает Барселону, потому что она меньше и спокойнее. И потому что там живут её друзья."
+    "ru": "А Аня? Ей нравятся оба города, но она предпочитает Барселону, потому что она меньше и спокойнее. И потому что там живут её друзья."
    }
   ],
   "preguntas": [
@@ -2735,7 +2735,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "De joven se fue a Italia y fue soldado. En 1571 luchó en la batalla de Lepanto, en el mar. Allí perdió el uso de la mano izquierda.",
-    "ru": "В молодости он уехал в Италию и стал солдатом. В 1571 году он сражался в морской битве при Лепанто. Там у него перестала действовать левая рука."
+    "ru": "В молодости он уехал в Италию и был солдатом. В 1571 году он сражался в морской битве при Лепанто. Там у него перестала действовать левая рука."
    },
    {
     "es": "En 1575, en el viaje de vuelta a España, unos piratas lo cogieron y lo llevaron a Argel. Pasó cinco años allí, lejos de su familia, y volvió a España en 1580.",
@@ -2747,7 +2747,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Cervantes murió en Madrid en 1616. Hoy el español también se llama «la lengua de Cervantes», y el premio más importante de la literatura en español es el Premio Cervantes.",
-    "ru": "Сервантес умер в Мадриде в 1616 году. Сегодня испанский язык называют также «языком Сервантеса», а самая важная премия литературы на испанском — премия Сервантеса."
+    "ru": "Сервантес умер в Мадриде в 1616 году. Сегодня испанский язык также называют «языком Сервантеса», а самая престижная литературная премия испаноязычного мира — премия Сервантеса."
    }
   ],
   "preguntas": [
@@ -2858,7 +2858,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Picasso vivió casi toda su vida en Francia y murió allí en 1973, a los noventa y un años. Pintó miles de cuadros y también hizo muchos dibujos.",
-    "ru": "Пикассо прожил почти всю жизнь во Франции и умер там в 1973 году, в девяносто один год. Он написал тысячи картин и сделал множество рисунков."
+    "ru": "Пикассо прожил почти всю жизнь во Франции и умер там в 1973 году в возрасте девяноста одного года. Он написал тысячи картин и создал множество рисунков."
    },
    {
     "es": "Hoy el «Guernica» está en el Museo Reina Sofía de Madrid. Y en Barcelona y en Málaga hay un Museo Picasso.",
@@ -2969,11 +2969,11 @@ const LECTURAS_ES = [
    },
    {
     "es": "Después salimos a cenar a un bar del barrio. Cenamos a las once de la noche: ¡para mí fue muy tarde! Probé el jamón y la tortilla por primera vez y me encantaron.",
-    "ru": "Потом мы пошли ужинать в бар нашего района. Мы ужинали в одиннадцать вечера — для меня это было очень поздно! Я впервые попробовала хамон и тортилью, и они мне очень понравились."
+    "ru": "Потом мы пошли ужинать в один из баров нашего района. Мы ужинали в одиннадцать вечера — для меня это было очень поздно! Я впервые попробовала хамон и тортилью, и они мне очень понравились."
    },
    {
     "es": "Ese día estuve muy cansada, pero también muy contenta. Desde entonces he aprendido mucho español, y Lucía es mi mejor amiga en Barcelona.",
-    "ru": "В тот день я очень устала, но и была очень довольна. С тех пор я многому научилась в испанском, а Лусия — моя лучшая подруга в Барселоне."
+    "ru": "В тот день я очень устала, но и была очень довольна. С тех пор я многому научилась и стала лучше говорить по-испански, а Лусия — моя лучшая подруга в Барселоне."
    }
   ],
   "preguntas": [
@@ -3084,7 +3084,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Por la tarde he perdido el móvil en el metro. Por suerte, una chica lo ha encontrado y lo ha dejado en la oficina de la estación. Allí lo he recogido a las ocho.",
-    "ru": "Вечером я потерял телефон в метро. К счастью, девушка его нашла и оставила в бюро на станции. Там я его забрал в восемь."
+    "ru": "Вечером я потерял телефон в метро. К счастью, девушка его нашла и отнесла в бюро находок на станции. Там я забрал его в восемь."
    },
    {
     "es": "Ahora estoy en casa, en el sofá, con Marta y una pizza. ¡Mañana va a ser un día mejor!",
@@ -3166,7 +3166,7 @@ const LECTURAS_ES = [
     "sit": {
      "necesita": [
       {
-       "es": "перфект",
+       "es": "pretérito perfecto",
        "formas": [
         "he ",
         "has ",
@@ -3422,7 +3422,7 @@ const LECTURAS_ES = [
   "parrafos": [
    {
     "es": "Javier llegó a Barcelona en 1988, cuando era estudiante. Cuenta que la ciudad era muy diferente. En aquella época compartía piso con tres estudiantes y por las noches salían por el barrio Gótico, porque allí todo era barato.",
-    "ru": "Хавьер приехал в Барселону в 1988 году, когда был студентом. Он рассказывает, что город был совсем другим. В то время он снимал квартиру с тремя студентами, и по вечерам они гуляли по Готическому кварталу, потому что там всё было дёшево."
+    "ru": "Хавьер приехал в Барселону в 1988 году, когда был студентом. Он рассказывает, что город был совсем другим. В то время он снимал квартиру вместе с тремя студентами, и по вечерам они гуляли по Готическому кварталу, потому что там всё было дёшево."
    },
    {
     "es": "Antes de los Juegos Olímpicos de 1992, la playa no era bonita: no estaba limpia y la gente casi no iba allí. Después la ciudad cambió mucho. Ahora hay playas muy bonitas y en verano están llenas.",
@@ -3569,11 +3569,11 @@ const LECTURAS_ES = [
    },
    {
     "es": "Después de veinte minutos, un chico del tren pasó por los vagones y dijo: «No pasa nada. Era un problema pequeño. Vamos a continuar el viaje».",
-    "ru": "Через двадцать минут сотрудник поезда прошёл по вагонам и сказал: «Ничего страшного. Это была небольшая проблема. Сейчас поедем дальше»."
+    "ru": "Через двадцать минут проводник прошёл по вагонам и сказал: «Ничего страшного. Это была небольшая проблема. Сейчас поедем дальше»."
    },
    {
     "es": "El tren siguió y llegó a Valencia una hora tarde. Lucía perdió el autobús a la playa, pero no le importó: ¡llegó bien y tenía una historia para contar! Por la noche llamó a Ana y le contó todo. «¡Qué susto!», dijo Ana.",
-    "ru": "Поезд поехал дальше и прибыл в Валенсию с опозданием на час. Лусия опоздала на автобус до пляжа, но ей было всё равно: она добралась благополучно, и ей было что рассказать! Вечером она позвонила Ане и всё ей рассказала. «Вот это да, как страшно!» — сказала Аня."
+    "ru": "Поезд поехал дальше и прибыл в Валенсию с опозданием на час. Лусия опоздала на автобус до пляжа, но её это уже не волновало: она благополучно добралась до места, и ей было что рассказать! Вечером она позвонила Ане и всё ей рассказала. «Вот это да, как страшно!» — сказала Аня."
    }
   ],
   "preguntas": [
@@ -3680,7 +3680,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "En Granada verán la Alhambra. Ana ya ha comprado las entradas por internet, porque en verano hay mucha gente y se acaban pronto.",
-    "ru": "В Гранаде они увидят Альгамбру. Аня уже купила билеты через интернет, потому что летом очень много людей и билеты быстро заканчиваются."
+    "ru": "В Гранаде они увидят Альгамбру. Аня уже купила билеты через интернет, потому что летом очень много людей и билеты быстро раскупают."
    },
    {
     "es": "Ana sabe que en agosto hará mucho calor en Andalucía: en Sevilla o en Córdoba puede haber más de cuarenta grados. Por eso, saldrán temprano por la mañana y descansarán por la tarde, como hace la gente de allí.",
@@ -3819,7 +3819,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "En Galicia y en Asturias estará nublado y por la tarde lloverá. Si vais a salir, vais a necesitar un paraguas y un abrigo.",
-    "ru": "В Галисии и Астурии будет облачно, а после обеда пойдёт дождь. Если собираетесь выходить, понадобятся зонт и пальто."
+    "ru": "В Галисии и Астурии будет облачно, а после обеда пойдёт дождь. Если собираетесь выходить, возьмите с собой зонт и куртку."
    },
    {
     "es": "En Madrid y en el centro hará buen tiempo durante el día, pero por la noche hará fresco: unos doce grados.",
@@ -4065,7 +4065,7 @@ const LECTURAS_ES = [
   "parrafos": [
    {
     "es": "Muchos estudiantes de otros países vienen a estudiar a España. Les gusta el clima, la comida, la vida en la calle y, sobre todo, aprender español.",
-    "ru": "Многие студенты из других стран приезжают учиться в Испанию. Им нравится климат, еда, жизнь на улице и, главное, возможность выучить испанский."
+    "ru": "Многие студенты из других стран приезжают учиться в Испанию. Им нравятся климат, еда, оживлённая уличная жизнь и, главное, возможность выучить испанский."
    },
    {
     "es": "En España una carrera universitaria normalmente dura cuatro años. Después, muchos estudiantes hacen un máster de uno o dos años.",
@@ -4077,7 +4077,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Para estudiar aquí hace falta hablar bien español. Muchas universidades piden un examen oficial, como el DELE. Por eso muchos estudiantes hacen primero un curso de idiomas.",
-    "ru": "Чтобы учиться здесь, нужно хорошо говорить по-испански. Многие университеты требуют официальный экзамен, например DELE. Поэтому многие студенты сначала идут на языковые курсы."
+    "ru": "Чтобы учиться здесь, нужно хорошо говорить по-испански. Многие университеты требуют сдать официальный экзамен, например DELE. Поэтому многие студенты сначала проходят языковой курс."
    },
    {
     "es": "En las universidades españolas las clases son normalmente en español, pero cada vez hay más cursos de máster en inglés. Además, muchos estudiantes europeos vienen un año con el programa Erasmus.",
@@ -4085,11 +4085,11 @@ const LECTURAS_ES = [
    },
    {
     "es": "Ana está pensando en estudiar un máster de inteligencia artificial en Barcelona. «Primero aprobaré el examen de español. Después miraré las universidades y pediré información», dice. Para entrar en el máster, también tendrá que pedir que España reconozca su título de Rusia.",
-    "ru": "Аня думает поступить в магистратуру по искусственному интеллекту в Барселоне. «Сначала сдам экзамен по испанскому. Потом посмотрю университеты и запрошу информацию», — говорит она. А чтобы поступить в магистратуру, ей нужно будет подтвердить в Испании свой российский диплом."
+    "ru": "Аня думает поступить в магистратуру по искусственному интеллекту в Барселоне. «Сначала сдам экзамен по испанскому. Потом изучу предложения университетов и узнаю подробности», — говорит она. А чтобы поступить в магистратуру, ей нужно будет подтвердить в Испании свой российский диплом."
    },
    {
     "es": "Lucía le aconseja: «Deberías hacer prácticas en una empresa. Conocerás a gente y mejorarás tu español muy rápido». Ana cree que es un buen consejo.",
-    "ru": "Лусия советует ей: «Тебе стоит пройти практику в компании. Познакомишься с людьми и очень быстро улучшишь испанский». Аня считает, что это хороший совет."
+    "ru": "Лусия советует ей: «Тебе стоит пройти стажировку в компании. Познакомишься с людьми и очень быстро улучшишь испанский». Аня считает, что это хороший совет."
    }
   ],
   "preguntas": [
@@ -4192,11 +4192,11 @@ const LECTURAS_ES = [
    },
    {
     "es": "«Es que se ha roto algo», le explicó él. «Mañana vendrá alguien de la empresa a mirarlo. Espero que no sea nada grave». Ana le dijo: «Por favor, que venga por la mañana, porque por la tarde trabajo».",
-    "ru": "«Видимо, что-то сломалось, — объяснил он. — Завтра придёт мастер из компании и посмотрит. Надеюсь, ничего серьёзного». Аня сказала: «Пожалуйста, пусть придёт утром, потому что днём я работаю»."
+    "ru": "«Видимо, что-то сломалось, — объяснил он. — Завтра придёт мастер из компании и посмотрит. Надеюсь, ничего серьёзного». Аня сказала: «Пожалуйста, пусть придёт утром, потому что во второй половине дня я работаю»."
    },
    {
     "es": "Esa noche Ana se duchó en casa de Lucía y cenaron juntas. «Ojalá lo arreglen pronto», dijo Ana. «No te preocupes», contestó Lucía. «Si mañana no viene nadie, llama otra vez y no aceptes un no». Lucía le dejó una toalla y le preparó una sopa caliente.",
-    "ru": "В тот вечер Аня приняла душ у Лусии, и они вместе поужинали. «Хоть бы поскорее починили», — сказала Аня. «Не волнуйся, — ответила Лусия. — Если завтра никто не придёт, позвони ещё раз и не соглашайся на отказ». Лусия дала ей полотенце и приготовила горячий суп."
+    "ru": "В тот вечер Аня приняла душ у Лусии, и они вместе поужинали. «Хоть бы поскорее починили», — сказала Аня. «Не волнуйся, — ответила Лусия. — Если завтра никто не придёт, позвони ещё раз и не отступай, если тебе откажут». Лусия дала ей полотенце и приготовила горячий суп."
    },
    {
     "es": "El martes a las nueve vino el técnico. Trabajó dos horas y cambió una pieza. Al final todo funcionó otra vez.",
@@ -4340,7 +4340,7 @@ const LECTURAS_ES = [
   "parrafos": [
    {
     "es": "Marta necesitaba un certificado del ayuntamiento para su trabajo nuevo. Primero quiso pedir cita por internet, pero no había citas libres hasta dentro de un mes.",
-    "ru": "Марте нужна была справка из мэрии для новой работы. Сначала она хотела записаться на приём через интернет, но свободных мест не было в течение месяца."
+    "ru": "Марте нужна была справка из мэрии для новой работы. Сначала она хотела записаться на приём через интернет, но на ближайший месяц свободных мест для записи не было."
    },
    {
     "es": "Una compañera le dijo: «Ve muy temprano. A veces atienden a gente sin cita, pero es importante que llegues antes de que abran».",
@@ -4356,7 +4356,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Cuando llegó a la ventanilla, la funcionaria le dijo: «Para este trámite es necesario que traiga el pasaporte, una fotocopia y un papel de su empresa». Marta tenía el pasaporte y el papel, pero no tenía la fotocopia.",
-    "ru": "Когда она подошла к окошку, сотрудница сказала: «Для этой процедуры нужно принести паспорт, копию и бумагу от вашей компании». У Марты были паспорт и бумага, но копии не было."
+    "ru": "Когда она подошла к окошку, сотрудница сказала: «Для этой процедуры нужно принести паспорт, копию и документ от вашей компании». У Марты были паспорт и документ, но копии не было."
    },
    {
     "es": "«No se preocupe», le dijo la funcionaria. «Hay una tienda aquí al lado. Vaya, haga la fotocopia y vuelva. No hace falta que coja otro número».",
@@ -4368,7 +4368,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Marta salió contenta. «A veces los trámites no son tan difíciles», pensó. «Lo importante es tener paciencia y llevar todos los papeles».",
-    "ru": "Марта вышла довольная. «Иногда бумажные дела не такие уж сложные, — подумала она. — Главное — терпение и все документы с собой»."
+    "ru": "Марта вышла довольная. «Иногда оформление документов не такое уж сложное, — подумала она. — Главное — терпение и все документы с собой»."
    }
   ],
   "preguntas": [
@@ -4467,11 +4467,11 @@ const LECTURAS_ES = [
    },
    {
     "es": "Les escribo para hacer una reclamación por una lavadora que compré en su tienda de la calle Mayor el día 3 de marzo. Pagué cuatrocientos euros.",
-    "ru": "Пишу вам, чтобы подать жалобу на стиральную машину, которую я купил в вашем магазине на улице Майор 3 марта. Я заплатил четыреста евро."
+    "ru": "Пишу вам, чтобы подать претензию по поводу стиральной машины, которую я купил в вашем магазине на улице Майор 3 марта. Я заплатил четыреста евро."
    },
    {
     "es": "La lavadora llegó a mi casa el día 10, dos días más tarde de lo prometido. Desde el primer día no funciona bien: hace mucho ruido, no sale el agua y la ropa queda sucia. El técnico de su empresa vino el día 15, pero no pudo arreglarla y me dijo que tenía que llamar a la tienda.",
-    "ru": "Машину доставили 10-го, на два дня позже обещанного. С первого дня она плохо работает: очень шумит, вода не сливается, и бельё остаётся грязным. Мастер вашей компании приходил 15-го, но не смог её починить и сказал, что нужно звонить в магазин."
+    "ru": "Стиральную машину доставили 10-го, на два дня позже обещанного. С первого дня она плохо работает: очень шумит, вода не сливается, и бельё остаётся грязным. Мастер вашей компании приходил 15-го, но не смог её починить и сказал, что нужно звонить в магазин."
    },
    {
     "es": "Desde entonces he llamado cuatro veces a su tienda, pero nadie me ha dado una solución. Una vez esperé media hora al teléfono y después se cortó la llamada.",
@@ -4479,11 +4479,11 @@ const LECTURAS_ES = [
    },
    {
     "es": "Les recuerdo que la lavadora tiene tres años de garantía y que, según la ley, la tienda tiene que arreglar o cambiar un producto con defectos. Por eso les pido que la cambien por una nueva o que me devuelvan el dinero. Es importante que me contesten lo antes posible, porque ahora tengo que lavar la ropa en una lavandería.",
-    "ru": "Напоминаю, что на машину действует гарантия три года и что по закону магазин обязан отремонтировать или заменить товар с дефектом. Поэтому прошу заменить её на новую или вернуть мне деньги. Мне важно, чтобы вы ответили как можно скорее, потому что сейчас мне приходится стирать в прачечной."
+    "ru": "Напоминаю, что на стиральную машину действует трёхлетняя гарантия и что по закону магазин обязан отремонтировать или заменить товар с дефектом. Поэтому прошу заменить её на новую или вернуть мне деньги. Мне важно, чтобы вы ответили как можно скорее, потому что сейчас мне приходится стирать в прачечной."
    },
    {
     "es": "Si no recibo una respuesta en quince días, pediré la hoja de reclamaciones y buscaré ayuda en una asociación que defiende a los clientes.",
-    "ru": "Если в течение пятнадцати дней я не получу ответа, я потребую официальный бланк жалобы и обращусь за помощью в общество защиты прав потребителей."
+    "ru": "Если в течение пятнадцати дней я не получу ответа, я попрошу официальный бланк для подачи жалобы и обращусь за помощью в общество защиты прав потребителей."
    },
    {
     "es": "Adjunto una fotocopia de la factura y de la garantía.",
@@ -4594,11 +4594,11 @@ const LECTURAS_ES = [
    },
    {
     "es": "Cuando visites un piso, mira bien todo: la cocina, el baño, las ventanas, la calefacción. Abre los grifos y enciende las luces. Es mejor que encuentres los problemas antes, no después.",
-    "ru": "Когда будешь смотреть квартиру, внимательно проверь всё: кухню, ванную, окна, отопление. Открой краны и включи свет. Лучше найти проблемы до, а не после."
+    "ru": "Когда будешь смотреть квартиру, внимательно проверь всё: кухню, ванную, окна, отопление. Открой краны и включи свет. Лучше обнаружить проблемы заранее, а не потом."
    },
    {
     "es": "Antes de firmar el contrato, léelo con calma. Si no entiendes algo, pregunta. No firmes nada sin entenderlo. Normalmente el contrato es de un año, pero si quieres, puedes quedarte en el piso hasta cinco años.",
-    "ru": "Прежде чем подписать договор, спокойно прочитай его. Если что-то непонятно, спроси. Ничего не подписывай, не поняв. Обычно договор заключается на год, но, если захочешь, можно жить в квартире до пяти лет."
+    "ru": "Прежде чем подписать договор, спокойно прочитай его. Если что-то непонятно, спроси. Не подписывай ничего, пока всё не поймёшь. Обычно договор заключается на год, но, если захочешь, можно жить в квартире до пяти лет."
    },
    {
     "es": "Normalmente tendrás que pagar el primer mes y una fianza de un mes. El propietario te devuelve la fianza al final, si dejas el piso bien. Y una cosa importante: si alquilas con una agencia, no tienes que pagarle nada a la agencia; lo paga el propietario.",
@@ -4610,7 +4610,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Y un último consejo: habla con los vecinos. Ellos te dirán si el barrio es tranquilo y si el casero es buena persona.",
-    "ru": "И последний совет: поговори с соседями. Они расскажут, тихий ли район и хороший ли человек хозяин."
+    "ru": "И последний совет: поговори с соседями. Они расскажут, тихо ли в районе и какой человек хозяин квартиры."
    }
   ],
   "preguntas": [
@@ -4730,15 +4730,15 @@ const LECTURAS_ES = [
    },
    {
     "es": "Pablo no piensa lo mismo. «¿Vender mi coche? ¡Ni hablar! Trabajo fuera de Madrid y, sin coche, tardaría dos horas en llegar, porque el tren no pasa cerca de la empresa. Además, los fines de semana lo usamos para ir al pueblo de mis padres.».",
-    "ru": "Пабло думает иначе. «Продать машину? Ни за что! Я работаю за городом, и без машины добирался бы два часа, потому что поезд не ходит рядом с компанией. К тому же по выходным мы ездим на ней в деревню к моим родителям.»."
+    "ru": "Пабло думает иначе. «Продать машину? Ни за что! Я работаю за городом, и без машины добирался бы два часа, потому что поезд не проходит рядом с компанией. К тому же по выходным мы ездим на ней в деревню к моим родителям»."
    },
    {
     "es": "Marta está en el medio: «Depende. Para ir por el centro, la bici es perfecta. Pero cuando llueve o hace mucho calor, prefiero el metro. Y para ir al pueblo, el coche de Pablo es muy cómodo».",
-    "ru": "Марта где-то посередине: «Зависит от ситуации. Чтобы ездить по центру, велосипед идеален. Но когда идёт дождь или очень жарко, я предпочитаю метро. А чтобы ездить в деревню, машина Пабло очень удобна»."
+    "ru": "Марта придерживается промежуточной позиции: «Зависит от ситуации. Для поездок по центру велосипед идеален. Но когда идёт дождь или очень жарко, я предпочитаю метро. А чтобы ездить в деревню, машина Пабло очень удобна»."
    },
    {
     "es": "Lo que está claro es que las ciudades están cambiando: se construyen calles para bicis, se cierran calles a los coches y el objetivo es que haya menos contaminación.",
-    "ru": "Ясно одно: города меняются. Строят велодорожки, закрывают улицы для машин, и цель в том, чтобы загрязнения стало меньше."
+    "ru": "Ясно одно: города меняются. Строят велодорожки, закрывают улицы для машин, и цель этих мер — уменьшить загрязнение."
    },
    {
     "es": "¿Y tú? ¿Qué es mejor para ti: el coche, la bici o el transporte público?",
@@ -4883,7 +4883,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Otro problema es la privacidad: lo que se publica en internet se queda allí para siempre. Por eso los expertos aconsejan que pensemos bien antes de publicar una foto o un comentario.",
-    "ru": "Ещё одна проблема — личные данные: то, что публикуется в интернете, остаётся там навсегда. Поэтому специалисты советуют хорошо подумать, прежде чем выложить фото или комментарий."
+    "ru": "Ещё одна проблема — конфиденциальность: всё, что публикуется в интернете, остаётся там навсегда. Поэтому специалисты советуют хорошо подумать, прежде чем выкладывать фото или комментарий."
    },
    {
     "es": "Las redes también han cambiado el trabajo: hoy muchas empresas buscan trabajadores en internet, y algunas personas ganan dinero publicando vídeos.",
@@ -4990,7 +4990,7 @@ const LECTURAS_ES = [
   "parrafos": [
    {
     "es": "En España la basura se separa en contenedores de colores. Al principio a Ana le parecía difícil, pero ahora lo hace todos los días sin pensar.",
-    "ru": "В Испании мусор сортируют по разноцветным контейнерам. Сначала Ане это казалось сложным, но теперь она делает это каждый день не задумываясь."
+    "ru": "В Испании мусор сортируют и раскладывают по контейнерам разных цветов. Сначала Ане это казалось сложным, но теперь она делает это каждый день не задумываясь."
    },
    {
     "es": "El contenedor amarillo es para el plástico y las latas. El azul es para el papel y las cajas.",
@@ -5002,7 +5002,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Las botellas de vidrio que se reciclan sirven para hacer botellas nuevas, una y otra vez. Y en algunos barrios de Barcelona la basura ya no se deja en la calle: cada día se recoge un tipo de basura en la puerta de las casas.",
-    "ru": "Переработанные стеклянные бутылки идут на новые бутылки — снова и снова. А в некоторых районах Барселоны мусор уже не оставляют на улице: каждый день у дверей домов забирают определённый вид отходов."
+    "ru": "Из переработанного стекла снова и снова делают новые бутылки. А в некоторых районах Барселоны мусор уже не оставляют на улице: каждый день у дверей домов забирают определённый вид отходов."
    },
    {
     "es": "Hay cosas que no van en ningún contenedor de la calle: las pilas, los muebles viejos o los aparatos electrónicos. Para eso hay puntos limpios, donde se recogen y se reciclan.",
@@ -5010,11 +5010,11 @@ const LECTURAS_ES = [
    },
    {
     "es": "Según los datos oficiales, en España se recicla cada año más, pero todavía no es bastante: se recicla menos de la mitad de la basura de las casas.",
-    "ru": "По официальным данным, в Испании с каждым годом перерабатывают больше, но этого всё ещё недостаточно: перерабатывается меньше половины бытового мусора."
+    "ru": "По официальным данным, в Испании с каждым годом перерабатывают всё больше отходов, но этого всё ещё недостаточно: перерабатывается меньше половины бытового мусора."
    },
    {
     "es": "Ana cree que reciclar es muy importante para el medio ambiente. «Es fácil y no cuesta nada», dice. «Si todos lo hacemos, el planeta estará un poco mejor».",
-    "ru": "Аня считает, что сортировка очень важна для окружающей среды. «Это просто и ничего не стоит, — говорит она. — Если мы все будем так делать, планете станет немного лучше»."
+    "ru": "Аня считает, что переработка отходов очень важна для окружающей среды. «Это просто и ничего не стоит, — говорит она. — Если мы все будем так делать, планете станет немного лучше»."
    },
    {
     "es": "Lo que más le cuesta es no usar bolsas de plástico. Como en las tiendas las bolsas se pagan, ahora siempre lleva una bolsa de tela en la mochila.",
@@ -5117,7 +5117,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Por un lado, los turistas dejan mucho dinero en hoteles, restaurantes y tiendas. Gracias a ellos, miles de personas tienen trabajo. Pero muchos turistas llegan en grandes barcos y pasan solo unas horas en la ciudad.",
-    "ru": "С одной стороны, туристы оставляют много денег в гостиницах, ресторанах и магазинах. Благодаря им тысячи людей имеют работу. Но многие туристы приплывают на больших кораблях и проводят в городе всего несколько часов."
+    "ru": "С одной стороны, туристы оставляют много денег в гостиницах, ресторанах и магазинах. Благодаря им тысячи людей работают в сфере туризма. Но многие туристы прибывают на больших круизных лайнерах и проводят в городе всего несколько часов."
    },
    {
     "es": "Por otro lado, muchos vecinos están hartos. En el centro y en zonas como la Sagrada Familia o el parque Güell hay tanta gente que es difícil caminar. Además, muchos pisos se alquilan a turistas, y por eso los alquileres para los vecinos han subido mucho.",
@@ -5125,7 +5125,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Por eso el ayuntamiento ha tomado varias medidas. Los turistas pagan un impuesto más alto por cada noche de hotel, y la ciudad ha decidido que los pisos para turistas desaparezcan antes de 2029.",
-    "ru": "Поэтому мэрия приняла ряд мер. Туристы платят более высокий налог за каждую ночь в гостинице, а город решил, что туристических квартир не должно остаться до 2029 года."
+    "ru": "Поэтому мэрия приняла ряд мер. Туристы платят более высокий налог за каждую ночь в гостинице, а город решил, что к 2029 году в нём не должно остаться квартир, сдаваемых туристам."
    },
    {
     "es": "En el verano de 2024 miles de vecinos salieron a la calle para protestar contra el turismo masivo. Algunos llevaban carteles con frases como «Turistas, volved a casa». No están en contra de los turistas, dicen, sino de que la ciudad sea solo para ellos.",
@@ -5256,7 +5256,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Hoy hay muchos caminos, pero el más famoso es el Camino Francés. Para no perderse, solo hay que seguir las flechas amarillas. Y para recibir la Compostela, el documento que dice que has hecho el Camino, hay que caminar por lo menos los últimos cien kilómetros.",
-    "ru": "Сегодня маршрутов много, но самый известный — Французский путь. Чтобы не заблудиться, достаточно следовать за жёлтыми стрелками. А чтобы получить «Компостелу» — документ о том, что ты прошёл Путь, — нужно пройти пешком как минимум последние сто километров."
+    "ru": "Сегодня маршрутов много, но самый известный — Французский путь. Чтобы не заблудиться, достаточно следовать жёлтым стрелкам. А чтобы получить «Компостелу» — документ, подтверждающий, что ты прошёл Путь, — нужно пройти пешком как минимум последние сто километров."
    },
    {
     "es": "El verano pasado Javier hizo los últimos cien kilómetros con un amigo. Caminaron cinco días, unos veinte kilómetros al día.",
@@ -5272,7 +5272,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Cuando por fin llegaron a Santiago, Javier estaba muy emocionado. «Fue una de las experiencias más bonitas de mi vida. Me di cuenta de que había aprendido mucho sobre mí mismo».",
-    "ru": "Когда они наконец пришли в Сантьяго, Хавьер был очень взволнован. «Это был один из самых прекрасных опытов в моей жизни. Я понял, что многое узнал о себе»."
+    "ru": "Когда они наконец пришли в Сантьяго, Хавьер был очень взволнован. «Это было одно из самых прекрасных впечатлений в моей жизни. Я понял, что многое узнал о себе»."
    },
    {
     "es": "Ahora quiere volver y hacer el Camino entero: ochocientos kilómetros desde Francia.",
@@ -5385,7 +5385,7 @@ const LECTURAS_ES = [
   "parrafos": [
    {
     "es": "En España hay fiestas durante todo el año, y cada pueblo y cada ciudad tiene las suyas. Algunas son famosas en todo el mundo.",
-    "ru": "В Испании праздники идут круглый год, и у каждой деревни и каждого города — свои. Некоторые из них известны во всём мире."
+    "ru": "В Испании праздники отмечают круглый год, и у каждой деревни и каждого города есть свои праздники. Некоторые из них известны во всём мире."
    },
    {
     "es": "En marzo, en Valencia, se celebran las Fallas. Durante varios días hay por las calles enormes muñecos de madera y papel, algunos tan altos como un edificio. La noche del 19 de marzo todos desaparecen en el fuego. «La primera vez que lo vi, no me lo podía creer», recuerda Marta.",
@@ -5397,7 +5397,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Después, normalmente en abril, Sevilla celebra su Feria: durante una semana entera la gente baila, come y bebe hasta muy tarde.",
-    "ru": "Потом, обычно в апреле, Севилья празднует свою Ярмарку: целую неделю люди танцуют, едят и пьют до поздней ночи."
+    "ru": "Затем, обычно в апреле, в Севилье проходит ярмарка: целую неделю люди танцуют, едят и пьют до поздней ночи."
    },
    {
     "es": "La noche del 23 de junio es la de San Juan. En Cataluña y en otras regiones la gente hace fuegos en la playa y celebra la llegada del verano hasta la mañana.",
@@ -5405,7 +5405,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "En julio, en Pamplona, son los Sanfermines. Es una semana de fiesta, de día y de noche, y es famosa en todo el mundo. Pero una parte de la fiesta es peligrosa.",
-    "ru": "В июле в Памплоне проходят Сан-Фермин. Это неделя праздника днём и ночью, известная во всём мире. Но часть праздника опасна (бег с быками)."
+    "ru": "В июле в Памплоне проходит праздник Сан-Фермин. Это неделя гуляний днём и ночью, известная во всём мире. Но одна из частей праздника опасна (бег с быками)."
    },
    {
     "es": "Y en diciembre llegan la Navidad y la Nochevieja, y el 6 de enero, los Reyes.",
@@ -5537,7 +5537,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "«Con el idioma cometí muchos errores. Una vez, en el ayuntamiento, me preguntaron por mi familia y yo dije mi apellido, porque en ruso la palabra que suena como “familia” significa “apellido”. ¡La funcionaria no entendía nada! Ahora me río, pero en ese momento me dio mucha vergüenza».",
-    "ru": "«С языком я делала много ошибок. Однажды в мэрии меня спросили про мою семью (familia), а я назвала свою фамилию — ведь по-русски «фамилия» значит apellido. Сотрудница ничего не поняла! Сейчас мне смешно, но тогда мне было очень стыдно»."
+    "ru": "«Я часто ошибалась, когда говорила по-испански. Однажды в мэрии меня спросили о моей семье (familia), а я назвала свою фамилию — ведь русское слово „фамилия“ похоже на испанское familia, но означает apellido. Сотрудница ничего не поняла! Сейчас мне смешно, но тогда мне было очень стыдно»."
    },
    {
     "es": "«También fue difícil acostumbrarme al horario. En Rusia cenaba a las siete; aquí la gente cena a las diez. ¡Al principio tenía mucha hambre!».",
@@ -5705,7 +5705,7 @@ const LECTURAS_ES = [
    },
    {
     "es": "Lucía piensa lo contrario. «Yo crecí en un pueblo cerca de Madrid y, cuando terminé la universidad, me vine a Barcelona. Y no vuelvo al pueblo: aquí lo tengo todo. En la ciudad hay de todo: trabajo, cultura, gente de todo el mundo. Nunca me aburro.».",
-    "ru": "Лусия думает наоборот. «Я выросла в деревне под Мадридом, а после университета переехала в Барселону. И в деревню не вернусь: здесь у меня есть всё. В городе есть всё: работа, культура, люди со всего мира. Мне никогда не скучно.»."
+    "ru": "Лусия думает иначе. «Я выросла в деревне под Мадридом, а после университета переехала в Барселону. И в деревню не вернусь: здесь у меня есть всё. В городе есть всё: работа, культура, люди со всего мира. Мне никогда не скучно»."
    },
    {
     "es": "Eso sí, admite que la vida en Barcelona es cara y que a veces echa de menos el silencio.",

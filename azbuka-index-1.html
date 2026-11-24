@@ -72,9 +72,9 @@ function App() {
   },
     React.createElement("div", { className: "page-gap", style: { animation: "fadeIn var(--az-t-media) var(--az-curva)" } },
       React.createElement("h1", { style: { fontSize: "var(--az-fs-titulo)", fontWeight: 800, marginBottom: 8, color: c.text } }, ES ? "Tu curso de español" : "Твой курс русского"),
-      React.createElement("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, marginBottom: 8 } }, ES ? "Уровень A0 → B1" : "Nivel A1 → B1"),
+      React.createElement("div", { style: { fontSize: "var(--az-fs-micro)", fontWeight: 700, letterSpacing: 1.5, textTransform: "uppercase", color: c.gold, marginBottom: 8 } }, ES ? "Уровень A1 → B1" : "Nivel A1 → B1"),
       React.createElement("p", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, marginBottom: 16, lineHeight: 1.6 } },
-        ES ? "13 уроков, примерно по месяцу каждый, и итоговый экзамен. Уроки появляются по мере готовности." : "13 unidades pensadas para un mes cada una, y un examen final."),
+        ES ? "13 уроков, примерно по 3–4 недели каждый, и итоговый экзамен." : "13 unidades pensadas para unas 2 a 5 semanas cada una, y un examen final."),
 
       React.createElement("div", { className: "ugrid" },
         units.map(u => unitCard(u)),

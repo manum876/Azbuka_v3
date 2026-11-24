@@ -36,7 +36,7 @@
    sumarlo a AZ_PRECACHE con su carpeta. Si no está, igual se guarda la primera vez
    que el alumno lo abre con internet.
    ============================================================ */
-const AZ_CACHE = "azbuka-v4";   /* v4 (09/11/2026): manual de estilo, tanda 1 */
+const AZ_CACHE = "azbuka-v5";   /* v5 (24/11/2026): revisión completa y ruso de Abecé revisado */
 const AZ_ESPERA = 1500;
 /* Se sirven desde la copia guardada y se actualizan en segundo plano (27/10/2026) */
 const AZ_PESADOS = /\/(assets\/|data\/data-(lexicon|lexicon-es|casos|verbos|verbos-es|formas-es|masha)\.js$)/;

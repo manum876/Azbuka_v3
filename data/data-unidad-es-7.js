@@ -1139,7 +1139,7 @@ const ES7_BASICAS_MOD = [
     texto: "**el amor** — «любовь». **el cariño** — «нежность, тёплое отношение»: **con cariño** — «с любовью» в конце письма. Оба слова — ласковые обращения: **¡Hola, cariño!**, **Gracias, amor.** В Испании **cariño** говорят и паре, и детям.",
     ejemplos: [
       { es: "Para mí, el amor es muy importante.", ru: "Для меня любовь очень важна." },
-      { es: "Gracias, cariño.", ru: "Спасибо, дорогой." }
+      { es: "Gracias, cariño.", ru: "Спасибо, дорогой / дорогая." }
     ]
   }],
   ["es7m1", ["junto"], {
@@ -1148,13 +1148,13 @@ const ES7_BASICAS_MOD = [
     texto: "**juntos** — «вместе». Это прилагательное: меняется по роду и числу — **juntos**, **juntas** (если это только женщины). **¿Vamos juntos?** — Пойдём вместе?",
     ejemplos: [
       { es: "¿Vamos juntos al cine?", ru: "Пойдём вместе в кино?" },
-      { es: "Ana y Lucía viven juntas.", ru: "Аня и Лусия живут вместе.", por: "Две женщины — **juntas**." }
+      { es: "Ana y Lucía desayunan juntas los sábados.", ru: "Аня и Лусия завтракают вместе по субботам.", por: "Две женщины — **juntas**." }
     ]
   }],
   ["es7m2", ["tal vez"], {
     id: "es7-tal-vez",
     titulo: "Tal vez",
-    texto: "**tal vez** — «может быть», как **quizá** и **a lo mejor**. **a lo mejor** чаще звучит в разговоре; **tal vez** и **quizá** — чуть аккуратнее. Пишется с **z**: **vez**. В уроке 11 ты увидишь, что после **tal vez** бывает и сослагательное наклонение.",
+    texto: "**tal ve**z**** — «может быть», как **quizá** и **a lo mejor**. A lo mejor особенно часто звучит в разговорной речи; tal **vez** и quizá нейтральны. Пишется с z: vez. В уроке 11 ты увидишь, что после **tal vez** может употребляться и сослагательное наклонение.",
     ejemplos: [
       { es: "— ¿Vienes el sábado? — Tal vez.", ru: "— Придёшь в субботу? — Может быть." }
     ]

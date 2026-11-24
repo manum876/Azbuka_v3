@@ -1046,9 +1046,9 @@ const ES11_BASICAS_MOD = [
   ["es11m4", ["hacer falta"], {
     id: "es11-hace-falta",
     titulo: "(No) hace falta que…",
-    texto: "**hacer falta** — «быть нужным»: **Hace falta paciencia** — нужно терпение; **Me hace falta un ordenador** — мне нужен компьютер. С другим лицом — **que + subjuntivo**: **No hace falta que vengas** — тебе не нужно приходить.",
+    texto: "**hacer falta** — «быть необходимым», «быть нужным»: **Hace falta paciencia** — «Нужно терпение»; **Me hace falta un ordenador** — «Мне нужен компьютер». Если в придаточной части другой субъект, используется **que + subjuntivo**: **No hace falta que vengas** — «Тебе не нужно приходить».",
     ejemplos: [
-      { es: "No hace falta que me llames: te escribo yo.", ru: "Не нужно мне звонить: я сама тебе напишу." },
+      { es: "No hace falta que me llames: te escribo yo.", ru: "Не нужно мне звонить: я тебе сама напишу." },
       { es: "Para este trámite hace falta el pasaporte.", ru: "Для этой процедуры нужен паспорт." }
     ]
   }]

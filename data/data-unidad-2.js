@@ -42,24 +42,24 @@ const UNIDAD_2 = {
       intro: "En ruso hay un saludo para la confianza y otro para el respeto, y conviene no mezclarlos. En este módulo vas a aprender a saludar, despedirte y agradecer según a quién le hablas y a qué hora.",
       secciones: [
         { id: "u2-formal", titulo: "Formal e informal",
-          texto: "Приве́т y пока́ son de confianza: amigos, familia, gente joven de tu edad. Здра́вствуйте y до свида́ния son formales: un profesor, alguien mayor, un desconocido, un negocio, o cuando le hablas a varias personas.\nNo tiene que ver con la simpatía: alguien puede ser muy amable y aun así decirte здра́вствуйте, porque todavía no hay confianza.",
+          texto: "Приве́т y пока́ son de confianza: amigos, familia, gente joven de tu edad. Здра́вствуйте y до свида́ния son formales: un profesor, alguien mayor, un desconocido, una tienda, o cuando le hablas a varias personas.\nNo tiene que ver con la simpatía: alguien puede ser muy amable y aun así decirte здра́вствуйте, porque todavía no hay confianza.",
           ejemplos: [
             { ru: "{Приве́т}, Ма́ша!", es: "¡Hola, Masha!", por: "Ма́ша es una amiga: va el saludo de confianza." },
             { ru: "{Здра́вствуйте}, А́нна!", es: "¡Buenos días, Ana!", por: "Si А́нна es tu profesora o alguien que conoces poco, va el saludo formal." },
             { ru: "{Пока́}, Ди́ма!", es: "¡Adiós, Dima!", por: "Con un amigo, la despedida de confianza." },
-            { ru: "{До свида́ния}!", es: "¡Hasta luego!", por: "Al irte de un negocio o de una clase: la despedida formal." }],
+            { ru: "{До свида́ния}!", es: "¡Hasta luego!", por: "Al irte de una tienda o de una clase: la despedida formal." }],
           destacado: "Con dudas, usa la forma formal: nunca queda mal.",
           truco: "Приве́т ↔ пока́ (confianza). Здра́вствуйте ↔ до свида́ния (respeto).",
           ojo: "En здра́вствуйте la primera **в** no se pronuncia: suena «zdrástvuiti».",
           mas: { texto: "¿Y si saludas a un grupo de amigos? Con varios amigos, lo natural sigue siendo приве́т. Pero si en el grupo hay alguien mayor o alguien que no conoces, здра́вствуйте es lo seguro.\nЗдра́вствуйте sirve a cualquier hora del día. Por eso es el saludo formal más útil: si no sabes cuál usar, usa ese. Y saludar a un profesor con приве́т suena demasiado familiar, aunque sea joven y simpático." },
           chequeo: [
-            { pide: "Entras a un negocio. ¿Qué dices?", opciones: ["Приве́т!", "Здра́вствуйте!"], ok: "Здра́вствуйте!", por: "Es un desconocido: va el saludo formal." },
+            { pide: "Entras a una tienda. ¿Qué dices?", opciones: ["Приве́т!", "Здра́вствуйте!"], ok: "Здра́вствуйте!", por: "Es un desconocido: va el saludo formal." },
             { pide: "Te despides de un amigo. ¿Qué dices?", opciones: ["Пока́!", "До свида́ния!"], ok: "Пока́!", por: "Con un amigo, la despedida de confianza. До свида́ния no está mal, pero suena distante." }] },
         { id: "u2-hora", titulo: "Según la hora",
           texto: "До́брое у́тро va por la mañana, до́брый день durante el día y до́брый ве́чер por la tarde-noche, siempre para saludar al llegar. Споко́йной но́чи no es un saludo: se dice solo al irse a dormir, como «que descanses».",
           ejemplos: [
             { ru: "{До́брое у́тро}!", es: "¡Buen día!", por: "Por la mañana, más o menos hasta el mediodía." },
-            { ru: "{До́брый день}!", es: "¡Buenas tardes!", por: "Del mediodía a la tarde. Es un poco formal: queda bien en un negocio o en una oficina." },
+            { ru: "{До́брый день}!", es: "¡Buenas tardes!", por: "Del mediodía a la tarde. Es un poco formal: queda bien en una tienda o en una oficina." },
             { ru: "{До́брый ве́чер}!", es: "¡Buenas noches!", por: "Al llegar por la noche, por ejemplo a una cena." },
             { ru: "{Споко́йной но́чи}!", es: "¡Que descanses!", por: "Solo cuando alguien se va a dormir, nunca al llegar." }],
           mas: { texto: "До́брое у́тро, до́брый день y до́брый ве́чер son un poco formales, pero se usan con todos: a un amigo, por la mañana, до́брое у́тро le queda perfecto. Entre amigos, a cualquier hora, lo más común sigue siendo приве́т.\nPara despedirse por la noche no hay una fórmula especial: до свида́ния o пока́. Споко́йной но́чи queda solo para cuando alguien se va a dormir." },
@@ -77,7 +77,7 @@ const UNIDAD_2 = {
     },
     {
       id: "u2m2", n: 2, tipo: "leccion", titulo: "Presentarse", resumen: "Меня́ зову́т…, я…, э́то…",
-      intro: "Para decir tu nombre hay dos formas, y para presentar a alguien alcanza con э́то. En este módulo aparece además una sorpresa del ruso: en presente no se dice el verbo «ser».",
+      intro: "Para decir tu nombre hay dos formas, y para presentar a alguien basta con э́то. En este módulo aparece además una sorpresa del ruso: en presente no se dice el verbo «ser».",
       secciones: [
         { id: "u2-me-llaman", titulo: "Меня́ зову́т…",
           texto: "Es la forma más común de decir tu nombre. Literalmente dice «a mí me llaman…». El nombre va al final, tal cual, sin cambios.",
@@ -92,7 +92,7 @@ const UNIDAD_2 = {
           mas: { texto: "Зову́т no cambia nunca: sirve para «me llaman», «te llaman», «lo llaman». Lo que cambia es la palabra de adelante, que dice a quién. Por ahora conoces меня́, «a mí»; las demás aparecen cuando aprendas a preguntar el nombre.\nTambién vas a oír и́мя («nombre») y фами́лия («apellido»), sobre todo en formularios y en situaciones formales." },
           chequeo: [{ pide: "¿Cuál está bien?", opciones: ["Меня́ зову́т Ма́ша.", "Я зову́т Ма́ша."], ok: "Меня́ зову́т Ма́ша.", por: "Зову́т va con меня́: «a mí me llaman»." }] },
         { id: "u2-sin-ser", titulo: "Sin verbo «ser»",
-          texto: "En presente, el ruso no usa «soy», «es», «somos»: я Лу́кас es «yo (soy) Lucas», э́то Ди́ма es «este (es) Dima», я студе́нт es «yo (soy) estudiante». Para decir quién o qué es alguien, alcanza con poner las dos palabras juntas.",
+          texto: "En presente, el ruso no usa «soy», «es», «somos»: я Лу́кас es «yo (soy) Lucas», э́то Ди́ма es «este (es) Dima», я студе́нт es «yo (soy) estudiante». Para decir quién o qué es alguien, basta con poner las dos palabras juntas.",
           ejemplos: [
             { ru: "Я студе́нт.", es: "Soy estudiante.", por: "Я y lo que eres, uno al lado del otro." },
             { ru: "Э́то Ди́ма.", es: "Este es Dima.", por: "Э́то presenta a alguien: «este (es)»." },
@@ -106,7 +106,7 @@ const UNIDAD_2 = {
             { ru: "Здра́вствуйте! {Меня́ зову́т} О́льга.", es: "¡Buenos días! Me llamo Olga.", por: "Presentación completa: en una clase, en una reunión." },
             { ru: "Приве́т! {Я} Ди́ма.", es: "¡Hola! Soy Dima.", por: "Corta y rápida: entre gente joven." }] },
         { id: "u2-genero-hablante", titulo: "Рад o ра́да: el género",
-          texto: "Algunas palabras cambian según quién habla. Un hombre dice рад познако́миться («encantado»); una mujer, ра́да познако́миться («encantada»). Pasa lo mismo con студе́нт y студе́нтка, друг y подру́га. Es el género, que en ruso se ve en muchas palabras; por ahora alcanza con notarlo.",
+          texto: "Algunas palabras cambian según quién habla. Un hombre dice рад познако́миться («encantado»); una mujer, ра́да познако́миться («encantada»). Pasa lo mismo con студе́нт y студе́нтка, друг y подру́га. Es el género, que en ruso se ve en muchas palabras; por ahora basta con notarlo.",
           ejemplos: [
             { ru: "{Рад} познако́миться!", es: "¡Encantado!", por: "Lo dice Лу́кас: habla un hombre." },
             { ru: "{Ра́да} познако́миться!", es: "¡Encantada!", por: "Lo dice А́нна: la **-а** final muestra que habla una mujer." },
@@ -260,7 +260,7 @@ const UNIDAD_2 = {
     },
     {
       id: "u2m7", n: 7, tipo: "leccion", titulo: "Pronombres personales", resumen: "Я, ты, он, она́, мы, вы, они́.",
-      intro: "Los pronombres personales son la base de cualquier frase. Por ahora alcanza con reconocerlos y usarlos sin verbo: я Ива́н, она́ А́нна, они́ до́ма.",
+      intro: "Los pronombres personales son la base de cualquier frase. Por ahora basta con reconocerlos y usarlos sin verbo: я Ива́н, она́ А́нна, они́ до́ма.",
       pronombres: [["я", "yo"], ["ты", "tú"], ["он", "él"], ["она́", "ella"], ["оно́", "ello (neutro)"], ["мы", "nosotros"], ["вы", "usted / ustedes"], ["они́", "ellos, ellas"]],
       secciones: [
         { id: "u2-sin-verbo-pron", titulo: "Sin verbo",
@@ -577,7 +577,7 @@ function ejerciciosUnidad2() {
   const SIT = [
     { m: 1, r: "u2-formal", sit: "Llegas a clase y saludas a tu profesora.", ok: "Здра́вствуйте!", mal: "Приве́т!", rz: "resp" },
     { m: 1, r: "u2-formal", sit: "Te encuentras con un amigo en la calle.", ok: "Приве́т!", mal: "Здра́вствуйте!", rz: "conf" },
-    { m: 1, r: "u2-formal", sit: "Te vas de un negocio.", ok: "До свида́ния!", mal: "Пока́!", rz: "resp" },
+    { m: 1, r: "u2-formal", sit: "Te vas de una tienda.", ok: "До свида́ния!", mal: "Пока́!", rz: "resp" },
     { m: 1, r: "u2-formal", sit: "Te despides de tu hermano.", ok: "Пока́!", mal: "До свида́ния!", rz: "conf" },
     { m: 1, r: "u2-formal", sit: "Saludas a un grupo de personas que no conoces.", ok: "Здра́вствуйте!", mal: "Приве́т!", rz: "resp" },
     { m: 1, r: "u2-hora", sit: "Llegas a una cena por la noche.", ok: "До́брый ве́чер!", mal: "Споко́йной но́чи!", rz: "llegar",

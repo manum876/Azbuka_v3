@@ -2,7 +2,12 @@
 // a 390 × 844 y revisa errores de JavaScript, archivos que faltan y scroll horizontal.
 // Además revisa el banco de cada unidad: ids repetidas, la correcta entre las opciones,
 // que cada `regla` exista y que cada tipo esté en la mezcla.
+// DIR=abece node recorrido.js: lo mismo en Abecé (24/11/2026).
 const { BASE, servir, navegador } = require('./comun');
+const AB = process.env.DIR === 'abece';
+const PAGINAS_AB = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?id=ESP-00786', 'ficha.html?tema=comida',
+  'alfabeto.html', 'dialogos.html', 'dialogos.html?id=DLE-001', 'dialogos.html?v=frases', 'lecturas.html', 'lecturas.html?id=LEE-perfil',
+  'lucia.html', 'verbos.html', 'verbos.html?id=ESP-00786', 'gramatica.html', 'cuaderno.html', 'ajustes.html', 'repaso.html'];
 const PAGINAS = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?id=CMR-00058', 'ficha.html?tema=comida',
   'alfabeto.html', 'alfabeto.html?mano=Б', 'dialogos.html', 'dialogos.html?id=DLG-001', 'dialogos.html?v=frases',
   'dialogos.html?frase=FRS-001', 'lecturas.html', 'lecturas.html?id=LEC-barcelona', 'lecturas.html?id=LEC-transsib', 'masha.html', 'dialogos.html?cul=CUL-001', 'verbos.html', 'verbos.html?id=CMR-00058',
@@ -10,11 +15,12 @@ const PAGINAS = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?
 (async () => {
   const srv = await servir(); const b = await navegador();
   const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, serviceWorkers: 'block' });
+  if (AB) await ctx.addInitScript(() => { try { localStorage.setItem('az_direccion', '"abece"'); } catch (e) {} });
   const problemas = []; let n = 0;
   async function visitar(url, extra) {
     const p = await ctx.newPage(); const errs = [];
     p.on('pageerror', e => errs.push('JS: ' + e.message.slice(0, 200)));
-    p.on('response', r => { if (r.status() >= 400 && !r.url().endsWith('favicon.ico') && r.url().indexOf('/Azbuka_voces/') < 0 /* las voces viven en otro repo (Contexto §6.4) */) errs.push('Falta ' + r.url().replace(BASE, '')); });
+    p.on('response', r => { if (r.status() >= 400 && !r.url().endsWith('favicon.ico') && r.url().indexOf('/Azbuka_voces/') < 0 && r.url().indexOf('/Abece_voces/') < 0 /* las voces viven en otro repo (Contexto §6.4) */) errs.push('Falta ' + r.url().replace(BASE, '')); });
     await p.goto(BASE + url, { waitUntil: 'networkidle', timeout: 60000 }).catch(e => errs.push('No abre: ' + e.message.slice(0, 80)));
     await p.waitForTimeout(400);
     const sw = await p.evaluate(() => document.documentElement.scrollWidth).catch(() => -1);
@@ -23,10 +29,11 @@ const PAGINAS = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?
     n++; if (errs.length) problemas.push([url, [...new Set(errs)]]);
     await p.close(); return ex;
   }
-  for (const u of PAGINAS) await visitar(u);
+  for (const u of (AB ? PAGINAS_AB : PAGINAS)) await visitar(u);
+  const PAG = AB ? 'abece-' : 'azbuka-', VAR = AB ? 'UNIDAD_ES_' : 'UNIDAD_', FN = AB ? 'ejerciciosUnidadEs' : 'ejerciciosUnidad', MZ = AB ? 'ES' : 'U';
   for (let u = 1; u <= 14; u++) {
-    const info = await visitar('azbuka-' + u + '.html', `(() => {
-      const U = window['UNIDAD_${u}'], f = window['ejerciciosUnidad${u}'], mz = window['U${u}_MEZCLA'];
+    const info = await visitar(PAG + u + '.html', `(() => {
+      const U = window['${VAR}${u}'], f = window['${FN}${u}'], mz = window['${MZ}${u}_MEZCLA'];
       const mods = U ? U.modulos.map(m => m.id) : []; const banco = [];
       if (f) { const B = f(), ids = {};
         for (const e of B) {
@@ -40,9 +47,9 @@ const PAGINAS = ['index.html', 'azbuka-index-1.html', 'ficha.html', 'ficha.html?
       return { mods, banco };
     })()`);
     if (info && info.banco && info.banco.length) console.log('Unidad ' + u + ' · ' + info.banco.join(' · '));
-    if (info && info.mods) for (const m of info.mods) await visitar('azbuka-' + u + '.html?m=' + m);
+    if (info && info.mods) for (const m of info.mods) await visitar(PAG + u + '.html?m=' + m);
   }
-  console.log('\nPantallas abiertas: ' + n);
+  console.log('\nPantallas abiertas' + (AB ? ' (Abecé)' : '') + ': ' + n);
   if (!problemas.length) console.log('✓ Sin errores ni scroll horizontal.');
   else { console.log('✗ Problemas:'); for (const [u, e] of problemas) console.log('  ' + u + '\n    ' + e.join('\n    ')); }
   await b.close(); srv.close(); process.exit(problemas.length ? 1 : 0);

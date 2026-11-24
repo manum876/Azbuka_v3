@@ -57,6 +57,9 @@ const U = typeof UNIDAD_ES_13 !== "undefined" ? UNIDAD_ES_13 : { modulos: [] };
 const EJ_U13_TODOS = ES_OK ? ejerciciosUnidadEs13() : [];
 const EJ_U13 = EJ_U13_TODOS.filter(e => !e.ampliacion);   /* la ampliación (y la entrevista final) queda fuera de la práctica de la unidad y de la evaluación */
 const OBJETIVO_U13 = ES_OK ? es13Objetivo() : [];
+/* «Слова выучены» (24/11/2026, Manu): mismo criterio que Azbuka, las palabras del léxico
+   con la unidad en introducedIn o en appearsIn. */
+const CONTEO_U13 = ES_OK ? LEXICON_ES.filter(e => (e.introducedIn || []).indexOf(13) >= 0 || (e.appearsIn || []).indexOf(13) >= 0).map(e => e.id) : [];
 const OBJETIVO_DLG = ES_OK ? es1Objetivo().concat(es2Objetivo(), es3Objetivo(), es4Objetivo(), es5Objetivo(), es6Objetivo(), es7Objetivo(), es8Objetivo(), es9Objetivo(), es10Objetivo(), es11Objetivo(), es12Objetivo(), OBJETIVO_U13) : [];   /* en los diálogos y las lecturas se tocan las palabras de la U1 a la U13 */
 const AVISO = "В испанском знак ударения (´) — часть написания: если его забыть, ответ засчитывается как «Почти». Перевёрнутые знаки ¿ и ¡ не обязательны.";
 
@@ -165,7 +168,7 @@ function App() {
         h("a", { href: "index.html", style: { color: c.gold, fontWeight: 700 }, onClick: ev => azNavigate(ev, "index.html") }, "Volver al inicio")));
   }
   const mod = modId ? U.modulos.find(x => x.id === modId) : null;
-  const palabrasDom = OBJETIVO_U13.filter(id => azItem("lex:" + id).level === 2).length;
+  const palabrasDom = CONTEO_U13.filter(id => azItem("lex:" + id).level === 2).length;
   const idx = mod ? U.modulos.indexOf(mod) : -1;
   const vecino = d => { for (let k = idx + d; k >= 0 && k < U.modulos.length; k += d) if (U.modulos[k].tipo !== "pronto") return U.modulos[k]; return null; };
   const prev = mod && vecino(-1), next = mod && vecino(1);
@@ -178,7 +181,7 @@ function App() {
   ] : azTabsUnidad(13);
 
   const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 1), examen, onPracticar: practicarUnidad, onAbrir: abrirModulo,
-    progreso: [{ label: "Слова выучены", valor: palabrasDom, total: OBJETIVO_U13.length }] });
+    progreso: [{ label: "Слова выучены", valor: palabrasDom, total: CONTEO_U13.length }] });
 
   const vistaModulo = mod && h("div", { key: mod.id, style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16 } },
     h("div", { className: "u-kicker" }, "Урок 13 · Модуль " + mod.n),
@@ -209,7 +212,7 @@ function App() {
       next && h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)),
     mod.tipo === "proyecto6" && h(React.Fragment, null,
       h("div", { className: "u-sec" }, "Разговор по ролям (" + EJ_U13.filter(e => e.tipo === "turnos").length + ")"),
-      h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, "Тебе говорят по-испански — ты отвечаешь своими словами. Если тебя понятно, разговор идёт дальше."),
+      h("p", { className: "u-text", style: { fontSize: "var(--az-fs-cuerpo)" } }, "Тебе говорят по-испански — ты отвечаешь своими словами. Если твой ответ понятен, разговор продолжается."),
       h("button", { className: "ubtn", onClick: () => setPractica({ titulo: "Разговор по ролям", pool: EJ_U13.filter(e => e.tipo === "turnos"), enOrden: true }) }, "Начать разговор"),
       h(ProyectoEs, { c, green, onConversar: () => setPractica({ titulo: "Entrevista con Javier", pool: EJ_U13_TODOS.filter(e => e.id === "ES13-final"), enOrden: true }) }),
       next && h("button", { className: "ubtn sec", style: { marginTop: 12 }, onClick: () => abrirModulo(next.id) }, "Дальше: " + next.titulo)),

@@ -40,7 +40,7 @@ const U4_COSAS = {
   /* Ampliación */
   "ло́жка": ["cuchara", "una cuchara", "la cuchara", "🥄"], "таре́лка": ["plato", "un plato", "el plato", ""], "колбаса́": ["embutido", "embutido", "el embutido", ""],
   "ку́ртка": ["chaqueta", "una chaqueta", "la chaqueta", ""], "гита́ра": ["guitarra", "una guitarra", "la guitarra", "🎸"],
-  "сыр": ["queso", "queso", "el queso", "🧀"], "торт": ["torta", "una torta", "la torta", "🎂"], "сала́т": ["ensalada", "una ensalada", "la ensalada", "🥗"],
+  "сыр": ["queso", "queso", "el queso", "🧀"], "торт": ["tarta", "una tarta", "la tarta", "🎂"], "сала́т": ["ensalada", "una ensalada", "la ensalada", "🥗"],
   "бутербро́д": ["sándwich", "un sándwich", "el sándwich", "🥪"], "мяч": ["pelota", "una pelota", "la pelota", "⚽"], "пода́рок": ["regalo", "un regalo", "el regalo", "🎁"],
   "велосипе́д": ["bicicleta", "una bicicleta", "la bicicleta", "🚲"], "рюкза́к": ["mochila", "una mochila", "la mochila", "🎒"], "пальто́": ["abrigo", "un abrigo", "el abrigo", "🧥"]
 };
@@ -168,7 +168,7 @@ const UNIDAD_4 = {
         { id: "u4-nom-acu", titulo: "Кни́га y кни́гу",
           texto: "Es la misma palabra con dos terminaciones. Кни́га es la forma del diccionario, la que ya conoces: se llama **nominativo**. Кни́гу es la forma de lo que recibe la acción: se llama **acusativo**.\nEn la tabla de abajo ves doce palabras en los dos casos: algunas cambian y otras quedan igual. Las reglas que deciden cuáles cambian llegan más adelante en esta unidad.",
           destacado: "nominativo = quién hace · acusativo = qué recibe",
-          mas: { texto: "El ruso tiene seis casos. Cada uno responde a una pregunta distinta: ¿quién?, ¿qué?, ¿dónde?, ¿a quién?, ¿con quién?, ¿de quién? En esta unidad ves los dos primeros, y los otros cuatro llegan de a uno en las próximas unidades.\nNo hace falta aprenderlos de memoria ahora: cada caso aparece cuando lo necesitas para decir algo nuevo." } },
+          mas: { texto: "El ruso tiene seis casos. Cada uno responde a una pregunta distinta: ¿quién?, ¿qué?, ¿dónde?, ¿a quién?, ¿con quién?, ¿de quién? En esta unidad ves los dos primeros, y los otros cuatro llegan uno a uno en las próximas unidades.\nNo hace falta aprenderlos de memoria ahora: cada caso aparece cuando lo necesitas para decir algo nuevo." } },
         { id: "u4-kto-chto", titulo: "Кто? Что?",
           texto: "Para encontrar cada parte, haz dos preguntas. ¿Quién hace la acción? Кто? (¿quién?). ¿Qué recibe la acción? Что? (¿qué?). La respuesta a кто? va en nominativo; la respuesta a что?, en acusativo.",
           ejemplos: [
@@ -233,14 +233,14 @@ const UNIDAD_4 = {
             { pide: "Мы ___ пе́сню. (слу́шать)", opciones: ["слу́шаю", "слу́шает", "слу́шаем", "слу́шают"], ok: "слу́шаем", por: "Con мы, **-ем**." },
             { pide: "А́нна ___ кни́гу. (чита́ть)", opciones: ["чита́ю", "чита́ет", "чита́ют"], ok: "чита́ет", por: "А́нна es una persona: forma de он / она́." }] },
         { id: "u4-verbos-otros", titulo: "Los que cambian más",
-          texto: "Otros verbos cambian un poco más. No hace falta buscarles una regla ahora: conviene aprenderlos de a uno con la tabla de abajo, que tiene las cuatro formas de cada verbo de la unidad.",
+          texto: "Otros verbos cambian un poco más. No hace falta buscarles una regla ahora: conviene aprenderlos uno por uno con la tabla de abajo, que tiene las cuatro formas de cada verbo de la unidad.",
           ejemplos: [
             { ru: "Я {пью} чай.", es: "Tomo té.", por: "Пить pierde la **и**: {я} пью, он пьёт." },
             { ru: "Кот {ест} ры́бу.", es: "El gato come pescado.", por: "Есть es irregular: {я} ем, он ест." },
             { ru: "Мы {ждём} ма́му.", es: "Esperamos a mamá.", por: "Ждать: {я} жду, мы ждём. La **ё** siempre lleva el acento." },
             { ru: "Она́ {пи́шет} письмо́.", es: "Ella escribe una carta.", por: "Писа́ть cambia la **с** por **ш**: {я} пишу́, она́ пи́шет." }],
           truco: "Casi todas las formas de {я} terminan en **-у** o **-ю** (la excepción es {я} ем, de есть), y las de они́ en **-ут**, **-ют**, **-ат** o **-ят**.",
-          mas: { titulo: "La л de люблю́", texto: "En algunos verbos, la forma de {я} cambia la última consonante de la raíz: люби́ть → люблю́, ви́деть → ви́жу. Las otras personas vuelven a la raíz de siempre: он лю́бит, он ви́дит.\nEn la Unidad 5 vas a ver este cambio como un patrón; por ahora alcanza con reconocerlo.",
+          mas: { titulo: "La л de люблю́", texto: "En algunos verbos, la forma de {я} cambia la última consonante de la raíz: люби́ть → люблю́, ви́деть → ви́жу. Las otras personas vuelven a la raíz de siempre: он лю́бит, он ви́дит.\nEn la Unidad 5 vas a ver este cambio como un patrón; por ahora basta con reconocerlo.",
             ejemplos: [
               { ru: "Я {люблю́} ко́фе.", es: "Me encanta el café.", por: "Люби́ть suma una **л** solo con {я}: люблю́, pero он лю́бит." },
               { ru: "Я {ви́жу} кота́.", es: "Veo al gato.", por: "Ви́деть: la **д** pasa a **ж** solo con {я}." }] } },

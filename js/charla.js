@@ -310,7 +310,7 @@ const TX_MASHA = {
     ["Pregúntale lo que quieras", "Su familia, su ciudad, qué estudia… y se acuerda de lo que le cuentas."],
     ["Crece con el curso", "Cada unidad suma temas nuevos de charla."]],
   charlar: "Charlar con Masha", tema: "Tema: ", yaCharlaste: n => " · ya charlaste en " + n + (n === 1 ? " tema" : " temas"),
-  unidad: "Unidad ", masAdelante: "Más adelante", escuchar: "Escuchar",
+  unidad: "Unidad ", escuchar: "Escuchar",
   gKicker: "Guion · Unidad ", gIntro: "El recorrido completo de este tema: lo que pregunta Masha, cómo reacciona según lo que contestes y lo que sabe contar de su vida.",
   gComo: "Cómo entiende Masha",
   gReglas: ["No busca frases exactas: reconoce raíces de palabras clave (хорош…, плох…, из…) y tolera una letra mal.",
@@ -709,14 +709,14 @@ function azCharla(CFG) {
       h("a", { className: "ch-btn pri", href: href(toca), onClick: e => azNavigate(e, href(toca)) }, TX.charlar),
       h("div", { className: "ch-btn-sub" }, TX.tema, h("span", { lang: I.lang, style: { color: c.textSub, fontWeight: 600 } }, toca.titulo), " · " + trT(toca) + (hechosN ? TX.yaCharlaste(hechosN) : "")),
       UNIDADES.map(u => {
-        const un = AZ_UNITS.find(x => x.id === u), despues = unidad != null && u > unidad;
+        const un = AZ_UNITS.find(x => x.id === u);   /* 24/11/2026 (Manu): todos los temas se ven igual, sin «Más adelante» ni atenuado; el alumno elige. «Charlar» sigue proponiendo el de su unidad. */
         return h(React.Fragment, { key: u },
           h("div", { className: "section-lbl" }, TX.unidad + u + (un ? " · " + un.title : "")),
-          h("div", { className: "list", style: despues ? { opacity: .45 } : null }, M.temas.filter(t => t.desde === u).map(t => {
+          h("div", { className: "list" }, M.temas.filter(t => t.desde === u).map(t => {
             const hh = hechos[t.id];
             return h("a", { key: t.id, className: "res-row", href: href(t), onClick: e => azNavigate(e, href(t)) },
               h("div", { style: { minWidth: 0 } }, h("div", { className: "res-ru", lang: I.lang }, t.titulo), h("div", { className: "res-es" }, trT(t) + " · " + t.resumen)),
-              h("div", { className: "res-der" }, hh && hh.v ? h("span", { style: { color: "#4CAF82", fontWeight: 700 } }, "✓" + (hh.v > 1 ? " ×" + hh.v : "")) : despues ? TX.masAdelante : ""));
+              h("div", { className: "res-der" }, hh && hh.v ? h("span", { style: { color: "#4CAF82", fontWeight: 700 } }, "✓" + (hh.v > 1 ? " ×" + hh.v : "")) : ""));
           })));
       }));
   }
@@ -787,7 +787,7 @@ function azCharla(CFG) {
     const [verTr, setVerTr] = useState(() => !document.documentElement.classList.contains("az-sin-tl"));
     const [verEs, setVerEs] = useState(false);
     const [voz, setVoz] = useState(true);
-    const [ideas, setIdeas] = useState(true);
+    const [ideas, setIdeas] = useState(false);   /* 24/11/2026 (Manu): las ideas arrancan apagadas; el alumno las prende con «Ideas». */
     const inRef = useRef(null);
     const timers = useRef([]);
     const vozRef = useRef(voz); vozRef.current = voz;
@@ -824,6 +824,7 @@ function azCharla(CFG) {
       setSt(r.st);
       guardarMem({ S: r.st.S, datos: r.st.datos }, r.st.fin ? T.id : null);
       mostrar(r.out, r.notas);
+      if (r.notas.indexOf(TX.notaNoEntendio) >= 0) setIdeas(true);   /* si no te entendió dos veces, aparecen las ideas que te sugiere */
       if (r.st.fin) alFin();
     };
     const usarIdea = t => { setTxt(t.replace(/\s*…\s*$/, "").trim() + (/…$/.test(t) ? " " : "")); setTimeout(() => inRef.current && inRef.current.focus(), 30); };

@@ -72,7 +72,7 @@
     "Tu versión final…": "Твой окончательный вариант…", "Revisar la versión final": "Проверить окончательный вариант", "Antes y después": "До и после",
     "Primera versión": "Первый вариант", "Versión final": "Окончательный вариант",
     "Antes de escribir, anota tus ideas: palabras sueltas, en ruso o en español. Estas preguntas te pueden guiar:": "Прежде чем писать, запиши свои идеи: отдельные слова, по-испански или по-русски. Тебе помогут эти вопросы:",
-    "Corrige lo que encontraste y mejóralo: suma un conector, una razón o un detalle. La primera versión queda guardada.": "Исправь то, что нашёл, и улучши текст: добавь связку, причину или деталь. Первый вариант сохранится."
+    "Corrige lo que encontraste y mejóralo: suma un conector, una razón o un detalle. La primera versión queda guardada.": "Исправь найденные ошибки и улучши текст: добавь связку, причину или деталь. Первый вариант сохранится."
   };
   const T = s => ES && TX_RU[s] != null ? TX_RU[s] : s;
   const hablar = (t, quien) => { if (ES) { if (typeof azHablarEs === "function") azHablarEs(t, null, quien); } else azHablarRu(t, quien); };

@@ -1091,7 +1091,7 @@ const ES8_BASICAS_MOD = [
     texto: "**el matrimonio** — «брак» и «супружеская пара»: **Llevan veinte años de matrimonio**; **un matrimonio joven**. Свадьба — **la boda**.\n\n**el anillo** — «кольцо». **bienvenido** — «добро пожаловать»: меняется по роду и числу, как прилагательное: **¡Bienvenida, Ana! ¡Bienvenidos a Barcelona!**",
     ejemplos: [
       { es: "Mis padres se casaron en 1990: llevan muchos años de matrimonio.", ru: "Мои родители поженились в 1990 году: они давно в браке." },
-      { es: "En la boda, el novio le dio el anillo a la novia.", ru: "На свадьбе жених надел невесте кольцо." },
+      { es: "En la boda, el novio le dio el anillo a la novia.", ru: "На свадьбе жених вручил невесте кольцо." },
       { es: "¡Bienvenida a España, Ana!", ru: "Добро пожаловать в Испанию, Аня!" }
     ]
   }]
@@ -1099,7 +1099,7 @@ const ES8_BASICAS_MOD = [
 const ES8_BASICAS = [
   ["basica", "elegir", 9, "es8-matrimonio", "Что подходит?", "Mis abuelos llevan cincuenta años de ___.", "matrimonio", ["boda", "anillo"], "Сколько лет в браке — **años de matrimonio**.", "matrimonio"],
   ["basica", "escribir", 9, "es8-matrimonio", "Кольцо — как по-испански? Напиши.", "En la boda le dio un ___.", "anillo", [], "**el anillo** — «кольцо».", "anillo"],
-  ["basica", "elegir", 9, "es8-matrimonio", "Аня приехала. Что ей скажешь?", "", "¡Bienvenida, Ana!", ["¡Bienvenido, Ana!", "¡Bien venida, Ana!"], "Ана — женщина: **bienvenida**.", "bienvenido"]
+  ["basica", "elegir", 9, "es8-matrimonio", "Аня приехала. Что ей скажешь?", "", "¡Bienvenida, Ana!", ["¡Bienvenido, Ana!", "¡Bien venida, Ana!"], "Аня — женщина: **bienvenida**.", "bienvenido"]
 ];
 (function () {
   const M = id => UNIDAD_ES_8.modulos.find(m => m.id === id);

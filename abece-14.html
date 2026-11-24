@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Abecé — Финальный экзамен</title>
+<title>Abecé — Итоговый экзамен</title>
 <meta name="apple-mobile-web-app-title" content="Азбука">
 <meta name="theme-color" content="#0F0F14">
 <link rel="manifest" href="manifest.webmanifest">
@@ -37,7 +37,7 @@
 <script src="js/unidad.js"></script>
 <script>
 /* ============================================================
-   ABECE-14.HTML — Abecé · Финальный экзамен (Unidad 14), 20/11/2026.
+   ABECE-14.HTML — Abecé · Итоговый экзамен (Unidad 14), 20/11/2026.
    La misma página que azbuka-14.html (Manu: «la misma lógica que tiene
    Azbuka»), con los textos en ruso, la voz española y sus datos en
    data-unidad-es-14.js (ES14_…). Se guarda en az_es_examen_final y en
@@ -107,7 +107,7 @@ function QueRepasar({ fallos, c, onRegla, titulo }) {
   const MAX = 8, ver = todas ? reglas : reglas.slice(0, MAX);
   return h(React.Fragment, null,
     h("div", { className: "u-sec" }, titulo || "Что повторить"),
-    reglas.length > 0 && h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textSub, margin: "-4px 0 12px", lineHeight: 1.5 } }, "Правила из вопросов, на которые ответ был неверным, в порядке курса. Нажми, чтобы прочитать."),
+    reglas.length > 0 && h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textSub, margin: "-4px 0 12px", lineHeight: 1.5 } }, "Правила по вопросам с неверным ответом, в порядке курса. Нажми на правило, чтобы прочитать его."),
     ver.map(id => { const r = R[id];
       return h("div", { key: id, className: "u-card mod", role: "button", tabIndex: 0, onClick: () => onRegla(id), onKeyDown: e => { if (e.key === "Enter") onRegla(id); } },
         h("div", { className: "mod-n" }, "📖"),
@@ -129,7 +129,7 @@ function juntarFallos(est) {
 /* Pantalla final al aprobar */
 function Final({ total, onCerrar, c }) {
   return h("div", { style: { position: "fixed", inset: 0, zIndex: 300, background: c.bg, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "calc(env(safe-area-inset-top) + 24px) 28px calc(env(safe-area-inset-bottom) + 24px)", textAlign: "center", animation: "fadeIn 0.6s ease" } },
-    h("div", { style: { fontSize: "var(--az-fs-nota)", fontWeight: 700, letterSpacing: 2, color: c.gold, textTransform: "uppercase" } }, "Финальный экзамен · " + total + " " + azBallov(total)),
+    h("div", { style: { fontSize: "var(--az-fs-nota)", fontWeight: 700, letterSpacing: 2, color: c.gold, textTransform: "uppercase" } }, "Итоговый экзамен · " + total + " " + azBallov(total)),
     h("div", { lang: "es", style: { fontSize: "var(--az-fs-heroe)", fontWeight: 800, color: c.gold, marginTop: 16, lineHeight: 1.2 } }, "Hablas español."),
     h("div", { style: { fontSize: "var(--az-fs-destacado)", color: c.textSub, marginTop: 8, fontStyle: "italic" } }, "Ты говоришь по-испански."),
     h("div", { lang: "es", style: { fontSize: "var(--az-fs-destacado)", color: c.text, marginTop: 24, lineHeight: 1.6 } }, "Sabes leer, entender, escribir y hablar en español.", h("br"), "Puedes hablar de ti, de tu pasado, de tu vida ahora y de tus planes."),
@@ -157,7 +157,7 @@ function App() {
     window.addEventListener("popstate", pop);
     return () => window.removeEventListener("popstate", pop);
   }, []);
-  useEffect(() => { window.azFuenteActual = () => "Финальный экзамен"; }, []);
+  useEffect(() => { window.azFuenteActual = () => "Итоговый экзамен"; }, []);
 
   const hechos = U14_BLOQUES.filter(b => est.bloques[b.id]);
   const total = Math.round(hechos.reduce((a, b) => a + puntosDe(est, b), 0));
@@ -215,9 +215,9 @@ function App() {
   const nv = nivelDe(total);
   const portada = h("div", { style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16 } },
     h("div", { className: "u-kicker" }, "Урок 14"),
-    h("h1", { className: "u-title" }, "Финальный экзамен"),
+    h("h1", { className: "u-title" }, "Итоговый экзамен"),
     h("div", { className: "u-ru", lang: "es" }, "Examen final"),
-    h("p", { className: "u-text", style: { marginTop: 12, fontSize: "var(--az-fs-chico)" } }, "Шесть частей проверяют всё, что ты выучил: чтение, аудирование, грамматику, лексику, письмо и общение. Проходи их в любом порядке и за несколько раз: каждая часть сохраняется."),
+    h("p", { className: "u-text", style: { marginTop: 12, fontSize: "var(--az-fs-chico)" } }, "Шесть частей проверяют все основные навыки: чтение, аудирование, грамматику, лексику, письмо и общение. Проходи их в любом порядке и за несколько раз: каждая часть сохраняется."),
     h("div", { style: { fontSize: "var(--az-fs-chico)", color: c.textMuted, marginTop: 8 } }, "Примерное время: 3–4 часа в сумме. Экзамен сдан, если набрано " + APROBADO + " баллов."),
     h("div", { className: "u-card", style: { padding: "14px 16px", marginTop: 16 } },
       h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "baseline" } },
@@ -244,7 +244,7 @@ function App() {
   if (b) {
     const p = puntosDe(est, b);
     vista = h("div", { key: b.id, style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16 } },
-      h("div", { className: "u-kicker" }, "Финальный экзамен · Часть " + (k + 1)),
+      h("div", { className: "u-kicker" }, "Итоговый экзамен · Часть " + (k + 1)),
       h("h1", { className: "u-title" }, b.ru),
       h("div", { className: "u-ru" }, h("span", { lang: "es" }, b.es), " · " + b.puntos + " " + azBallov(b.puntos)),
       h("p", { className: "u-text", style: { marginTop: 12 } }, azFmt(b.intro)),

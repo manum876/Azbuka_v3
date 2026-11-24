@@ -853,7 +853,7 @@ const ES3_POSESIVOS = [
   ["Ana tiene un hermano. ___ hermano se llama Iván.", "Su", ["Su", "Sus", "Mi"], "Её брат — **su**."],
   ["Nosotros tenemos tres armarios. Son ___ armarios.", "nuestros", ["nuestros", "nuestras", "nuestro"], "**armarios** — м. р., мн. ч.: **nuestros**."],
   ["Tú tienes unas gafas nuevas. ___ gafas son bonitas.", "Tus", ["Tus", "Tu", "Sus"], "Несколько, твои — **tus**."],
-  ["Javier y Lucía tienen un piso. ___ piso está en el centro.", "Su", ["Su", "Sus", "Vuestro"], "Их квартира — **su**."],
+  ["Jordi y Laura tienen un piso. ___ piso está en el centro.", "Su", ["Su", "Sus", "Vuestro"], "Их квартира — **su**."],
   ["Vosotras tenéis una terraza. ___ terraza es muy grande.", "Vuestra", ["Vuestra", "Vuestro", "Nuestra"], "**terraza** — ж. р., vosotras: **vuestra**."]
 ];
 /* Preguntas: [pregunta con ___, respuesta, correcta, opciones, módulo] */
@@ -1027,23 +1027,23 @@ const ES3_BASICAS_MOD = [
   ["es3m2", ["allá"], {
     id: "es3-alla",
     titulo: "Allá — там, далеко",
-    texto: "**allá** — «там», как **allí**, но дальше и не так точно: **allá, en Rusia** — «там, в России». В Испании для места, которое видно, обычно говорят **allí**; **allá** — для далёкого.",
+    texto: "**allá** — «там», как **allí**, но обычно с менее точным указанием места или с оттенком удалённости: **allá, en Rusia** — «там, в России». В Испании allí чаще используют, когда место можно конкретно указать, а allá — когда говорят о более далёком или неопределённом месте.",
     ejemplos: [
       { es: "Mi familia está allá, en Moscú.", ru: "Моя семья там, в Москве." },
-      { es: "¿El banco? Está allí, en la plaza.", ru: "Банк? Вон там, на площади.", por: "Место видно — **allí**." }
+      { es: "¿El banco? Está allí, en la plaza.", ru: "Банк? Вон там, на площади.", por: "Если место видно и его можно конкретно указать, обычно используют **allí**." }
     ]
   }],
   ["es3m3", ["arriba", "abajo", "frente a"], {
     id: "es3-arriba",
     titulo: "Arriba, abajo · junto a, frente a",
-    texto: "**encima de** и **debajo de** — «на» и «под» что-то. **arriba** и **abajo** — «наверху» и «внизу» без предмета: в доме, на улице. **junto a** — «рядом с», как **al lado de**; **frente a** — «напротив», как **enfrente de**.",
+    texto: "**encima de** и **debajo de** означают «над/на» и «под» чем-либо. **arriba** и **abajo** — «наверху» и «внизу», когда положение описывают без указания предмета, относительно которого оно определяется: например, в доме или на улице. **junto a** — «рядом с», как **al lado de**; **frente a** — «напротив», как **enfrente de**.",
     ejemplos: [
       { es: "Los dormitorios están arriba y la cocina está abajo.", ru: "Спальни наверху, а кухня внизу." },
       { es: "La silla está junto a la mesa.", ru: "Стул рядом со столом." },
       { es: "El bar está frente a la farmacia.", ru: "Бар напротив аптеки." }
     ],
     errores: [
-      { mal: "El libro está arriba de la mesa.", bien: "El libro está encima de la mesa.", por: "Предмет на предмете — **encima de**. «arriba de» говорят в Латинской Америке." }
+      { mal: "El libro está arriba de la mesa.", bien: "El libro está encima de la mesa.", por: "Когда один предмет находится на поверхности другого, используют **encima de**. В Латинской Америке также говорят arriba de." }
     ]
   }],
   ["es3m5", ["sitio"], {
@@ -1058,7 +1058,7 @@ const ES3_BASICAS_MOD = [
   ["es3m8", ["esto", "mío", "tuyo", "suyo"], {
     id: "es3-esto-mio",
     titulo: "Esto · mío, tuyo, suyo",
-    texto: "**esto** и **eso** — «это» о вещи, которую не называют: **¿Qué es esto?** — Что это? Они не меняются и никогда не стоят перед существительным: **este bolso**, но **¿Qué es esto?**\n\n**mío, tuyo, suyo** — «мой, твой, его / её» **без существительного**, чаще всего после **ser**: **— ¿Es tuyo? — Sí, es mío.** Они меняются, как прилагательные: **mío, mía, míos, mías**. Сравни: **mi bolso** — **el bolso es mío**. **nuestro** и **vuestro** одинаковы в обоих случаях: **nuestro piso** — **es nuestro**.",
+    texto: "**esto** и **eso** — «это», когда предмет не называют по имени: **¿Qué es esto?** — «Что это?» Эти формы не изменяются и не употребляются перед существительным: **este bolso**, но ¿Qué es esto?\n\n**mío, tuyo, suyo** — «мой», «твой», «его/её» **без существительного**; часто они употребляются после **ser**: **— ¿Es tuyo? — Sí, es mío.** Эти формы изменяются по роду и числу, как прилагательные: **mío, mía, míos, mías**. Сравни: **mi bolso** — **el bolso es mío**. Формы **nuestro** и **vuestro** совпадают у притяжательных прилагательных и местоимений: **nuestro piso** — **es nuestro**.",
     ejemplos: [
       { es: "¿Qué es esto? — Es un móvil nuevo.", ru: "Что это? — Новый мобильный." },
       { es: "— ¿Es tuya esta mochila? — Sí, es mía.", ru: "— Это твой рюкзак? — Да, мой.", por: "**la mochila** — женский род: **tuya**, **mía**." },
@@ -1066,19 +1066,19 @@ const ES3_BASICAS_MOD = [
     ],
     errores: [
       { mal: "¿Qué es este?", bien: "¿Qué es esto?", por: "О неизвестной вещи, без существительного — **esto**." },
-      { mal: "— ¿Es tu móvil? — Sí, es mi.", bien: "— ¿Es tu móvil? — Sí, es mío.", por: "Без существительного — **mío**." }
+      { mal: "— ¿Es tu móvil? — Sí, es mi.", bien: "— ¿Es tu móvil? — Sí, es mío.", por: "Без существительного нужна форма **mío**." }
     ]
   }]
 ];
 const ES3_BASICAS = [
-  ["situacion-frase", "elegir", 2, "es3-alla", "Твоя семья далеко, в Москве. Как сказать?", "", "Mi familia está allá, en Moscú.", ["Mi familia es allá, en Moscú.", "Mi familia hay allá, en Moscú."], "Где находится — **estar**: **está allá**.", "allá"],
+  ["situacion-frase", "elegir", 2, "es3-alla", "Твоя семья далеко, в Москве. Как сказать?", "", "Mi familia está allá, en Moscú.", ["Mi familia es allá, en Moscú.", "Mi familia hay allá, en Moscú."], "В конструкции с **estar** речь идёт о местонахождении: **está allá** — «находится там».", "allá"],
   ["preposicion", "elegir", 3, "es3-arriba", "Что подходит по смыслу?", "Los dormitorios están arriba y la cocina está ___.", "abajo", ["debajo", "detrás"], "Без предмета — **abajo**, «внизу».", "abajo"],
   ["preposicion", "elegir", 3, "es3-arriba", "Что подходит по смыслу?", "La cocina está abajo y el baño está ___.", "arriba", ["encima", "delante"], "Без предмета — **arriba**, «наверху».", "arriba"],
   ["preposicion", "elegir", 3, "es3-arriba", "Что подходит по смыслу?", "La silla está ___ la mesa: al lado.", "junto a", ["debajo de", "frente a"], "**junto a** = **al lado de**.", "junto a"],
   ["preposicion", "elegir", 3, "es3-arriba", "Что подходит по смыслу?", "El bar está ___ el banco: la calle está entre los dos.", "frente a", ["encima de", "dentro de"], "**frente a** = **enfrente de**, «напротив».", "frente a"],
   ["lugar", "escribir", 5, "es3-sitio", "Какое это слово? Напиши.", "En la cafetería no hay ___: está llena.", "sitio", [], "**No hay sitio** — «нет места».", "sitio"],
-  ["situacion-frase", "elegir", 5, "es3-sitio", "Тебе нравится место в центре. Как сказать?", "", "Es un sitio muy bonito.", ["Es una sitio muy bonito.", "Es un sitio muy bonita."], "**el sitio** — мужской род: **un sitio bonito**.", "sitio"],
-  ["demostrativo", "elegir", 8, "es3-esto-mio", "Что подходит?", "¿Qué es ___? — Es una taza.", "esto", ["este", "esta"], "О неизвестной вещи — **esto**.", "esto"],
+  ["situacion-frase", "elegir", 5, "es3-sitio", "Тебе очень понравилось одно место в центре. Как ты его опишешь?", "", "Es un sitio muy bonito.", ["Es una sitio muy bonito.", "Es un sitio muy bonita."], "**el sitio** — мужской род: **un sitio bonito**.", "sitio"],
+  ["demostrativo", "elegir", 8, "es3-esto-mio", "Что подходит?", "¿Qué es ___? — Es una taza.", "esto", ["este", "esta"], "Если речь идёт о неизвестном предмете, используют **esto**.", "esto"],
   ["demostrativo", "elegir", 8, "es3-esto-mio", "Что подходит?", "___ bolso es mío.", "Este", ["Esto", "Esta"], "С существительным — **este**; **esto** не стоит перед существительным.", "esto"],
   ["posesivo", "elegir", 8, "es3-esto-mio", "Что подходит?", "— ¿Es tu móvil? — Sí, es ___.", "mío", ["mi", "mía"], "Без существительного — **mío**; **el móvil** — мужской род.", "mío"],
   ["posesivo", "elegir", 8, "es3-esto-mio", "Что подходит?", "— ¿Es tu mochila? — Sí, es ___.", "mía", ["mío", "mi"], "**la mochila** — женский род: **mía**.", "mío"],

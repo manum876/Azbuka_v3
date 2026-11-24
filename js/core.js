@@ -232,6 +232,26 @@ function azCargarLexEs() {
   sc.onerror = () => { AZ_LEXES_CARGANDO = false; };
   document.head.appendChild(sc);
 }
+/* ── Léxico de la dirección para el buscador del menú (24/11/2026) ──
+   Algunas páginas no lo traen (Cuaderno, Ajustes) y el inicio lo pide después
+   de dibujarse. azLexicoListo() dice si ya está; azPedirLexico(cb) lo pide (o
+   espera al <script> que ya lo está bajando) y llama a cb cuando llega. */
+function azLexicoListo() {
+  return AZ_DIRECCION.id === "abece" ? typeof LEXICON_ES !== "undefined" : typeof LEXICON_COMER !== "undefined";
+}
+function azPedirLexico(cb) {
+  if (azLexicoListo()) { cb && cb(); return; }
+  const src = AZ_DIRECCION.lexico || "data/data-lexicon.js";
+  let sc = [].slice.call(document.scripts).find(x => (x.getAttribute("src") || "").split("?")[0] === src);
+  if (!sc) {
+    if (AZ_DIRECCION.id === "abece") AZ_LEXES_CARGANDO = true;
+    sc = document.createElement("script");
+    sc.src = src;
+    sc.onerror = () => { if (AZ_DIRECCION.id === "abece") AZ_LEXES_CARGANDO = false; };
+    document.head.appendChild(sc);
+  }
+  sc.addEventListener("load", () => { try { window.dispatchEvent(new Event("az-formas")); } catch (e) {} if (cb) cb(); });
+}
 function azBuscarEs(query, pos) {
   if (typeof LEXICON_ES === "undefined") { azCargarLexEs(); return []; }
   const raw = (query || "").trim();

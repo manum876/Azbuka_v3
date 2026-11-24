@@ -56,6 +56,9 @@ const U = typeof UNIDAD_ES_8 !== "undefined" ? UNIDAD_ES_8 : { modulos: [] };
 const EJ_U8_TODOS = ES_OK ? ejerciciosUnidadEs8() : [];
 const EJ_U8 = EJ_U8_TODOS.filter(e => !e.ampliacion);   /* la ampliación queda fuera de la práctica de la unidad y de la evaluación */
 const OBJETIVO_U8 = ES_OK ? es8Objetivo() : [];
+/* «Слова выучены» (24/11/2026, Manu): mismo criterio que Azbuka, las palabras del léxico
+   con la unidad en introducedIn o en appearsIn. */
+const CONTEO_U8 = ES_OK ? LEXICON_ES.filter(e => (e.introducedIn || []).indexOf(8) >= 0 || (e.appearsIn || []).indexOf(8) >= 0).map(e => e.id) : [];
 const OBJETIVO_DLG = ES_OK ? es1Objetivo().concat(es2Objetivo(), es3Objetivo(), es4Objetivo(), es5Objetivo(), es6Objetivo(), es7Objetivo(), OBJETIVO_U8) : [];   /* en los diálogos se tocan las palabras de la U1 a la U8 */
 const AVISO = "В испанском знак ударения (´) — часть написания: если его забыть, ответ засчитывается как «Почти». Перевёрнутые знаки ¿ и ¡ не обязательны.";
 const REPASO = ES_OK && typeof es8Repaso === "function" ? es8Repaso() : { pool: [], partes: [] };   /* módulo 13: repaso U2–U8 por temas */
@@ -114,7 +117,7 @@ function App() {
         h("a", { href: "index.html", style: { color: c.gold, fontWeight: 700 }, onClick: ev => azNavigate(ev, "index.html") }, "Volver al inicio")));
   }
   const mod = modId ? U.modulos.find(x => x.id === modId) : null;
-  const palabrasDom = OBJETIVO_U8.filter(id => azItem("lex:" + id).level === 2).length;
+  const palabrasDom = CONTEO_U8.filter(id => azItem("lex:" + id).level === 2).length;
   const idx = mod ? U.modulos.indexOf(mod) : -1;
   const vecino = d => { for (let k = idx + d; k >= 0 && k < U.modulos.length; k += d) if (U.modulos[k].tipo !== "pronto") return U.modulos[k]; return null; };
   const prev = mod && vecino(-1), next = mod && vecino(1);
@@ -129,7 +132,7 @@ function App() {
   const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 1), examen, onPracticar: practicarUnidad, onAbrir: abrirModulo,
     extraModulo: m => m.tipo === "repaso" && repaso && h("div", { style: { fontSize: "var(--az-fs-nota)", fontWeight: 700, marginTop: 8, color: repaso.aprobado ? green : "#E2884A" } },
       "Последняя: " + repaso.pct + " %" + (repaso.aprobado ? " · сдано" : "")),
-    progreso: [{ label: "Слова выучены", valor: palabrasDom, total: OBJETIVO_U8.length }] });
+    progreso: [{ label: "Слова выучены", valor: palabrasDom, total: CONTEO_U8.length }] });
 
   const vistaModulo = mod && h("div", { key: mod.id, style: { animation: "fadeIn var(--az-t-media) var(--az-curva)", paddingTop: 16 } },
     h("div", { className: "u-kicker" }, "Урок 8 · Модуль " + mod.n),

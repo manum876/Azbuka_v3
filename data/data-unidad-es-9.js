@@ -1024,7 +1024,7 @@ const ES9_BASICAS_MOD = [
   ["es9m8", ["saltar", "oler", "golpe", "quieto"], {
     id: "es9-saltar",
     titulo: "Saltó, olía · un golpe",
-    texto: "Для историй: **saltar** — «прыгать» (**el perro saltó** — собака прыгнула); **oler** — «пахнуть»: корень **o → hue**: **huele, olía** (**La casa olía a pan** — в доме пахло хлебом).\n\n**el golpe** — «удар»: **De repente, oímos un golpe**. **quieto** — «неподвижный»: **estar quieto** — не двигаться; **¡Estate quieto!** — не вертись!",
+    texto: "В рассказах: **saltar** — «прыгать» (**el perro saltó** — «собака прыгнула»); **oler** — «пахнуть». В формах настоящего времени под ударением o меняется на ue: huele; в imperfecto — olía (**La casa olía a pan** — «В доме пахло хлебом»).\n\n**el golpe** — «удар»: **De repente, oímos un golpe**. **quieto** — «неподвижный»: **estar quieto** — «стоять/сидеть спокойно», не двигаться; **¡Estate quieto!** — «Не вертись!»",
     ejemplos: [
       { es: "De repente, el gato saltó a la mesa.", ru: "Вдруг кошка прыгнула на стол." },
       { es: "La cocina de mi abuela siempre olía a café.", ru: "На кухне у бабушки всегда пахло кофе." },

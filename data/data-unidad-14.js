@@ -207,7 +207,7 @@ const U14_VOC = "буди́льник=despertador|полоте́нце=toalla|р
   "самолёт=avión|по́езд=tren|обеща́ть=prometer|цель=objetivo|реше́ние=decisión|бага́ж=equipaje|па́спорт=pasaporte|рейс=vuelo|тума́н=niebla|пешко́м=a pie|оста́ться=quedarse|" +
   "нож=cuchillo|буты́лка=botella|кусо́к=pedazo|са́хар=azúcar|соль=sal|рис=arroz|нача́льник=jefe|внук=nieto|юри́ст=abogado|перево́дчик=traductor|худо́жник=pintor|писа́тель=escritor|продаве́ц=vendedor|" +
   "о́чередь=cola, fila|сда́ча=cambio|ски́дка=descuento|паке́т=bolsa|футбо́лка=camiseta|ю́бка=falda|шарф=bufanda|десе́рт=postre|моро́женое=helado|яйцо́=huevo|сла́дкий=dulce|о́стрый=picante|" +
-  "солёный=salado|переходи́ть=cruzar|паро́ль=contraseña|приглаше́ние=invitación|мне́ние=opinión|полови́на=mitad|большинство́=mayoría|стро́ить=construir|включа́ть=prender|выключа́ть=apagar|" +
+  "солёный=salado|переходи́ть=cruzar|паро́ль=contraseña|приглаше́ние=invitación|мне́ние=opinión|полови́на=mitad|большинство́=mayoría|стро́ить=construir|включа́ть=encender|выключа́ть=apagar|" +
   "просто́й=simple|сло́жный=complicado|у́мный=inteligente|сла́бый=débil|далёкий=lejano|мла́дший=menor|о́пыт=experiencia|воспомина́ние=recuerdo|сча́стье=felicidad|страх=miedo|" +
   "удивле́ние=sorpresa|счастли́вый=feliz|вопро́с=pregunta|отве́т=respuesta|рекла́ма=publicidad|статья́=artículo|экра́н=pantalla|че́стный=honesto|смешно́й=gracioso|тала́нтливый=talentoso|" +
   "разгово́р=conversación|пра́вило=regla";
@@ -232,7 +232,7 @@ const U14_REGLAS = {
   "u4-acu-a": [4,4,"Acusativo femenino","-а → -у"],
   "u5-una-forma": [5,1,"El verbo ruso","Una forma por persona"],
   "u5-byt": [5,9,"Verbos especiales","Быть: el verbo que no se dice"],
-  "u6-v": [6,2,"В y на","В: adentro"],
+  "u6-v": [6,2,"В y на","В: dentro"],
   "u6-na-lista": [6,2,"В y на","Los lugares que van con на"],
   "u6-prep-e": [6,3,"El prepositivo","Casi siempre, -е"],
   "u6-donde-prep": [6,8,"Ubicación o movimiento","Dónde estás: prepositivo"],

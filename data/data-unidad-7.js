@@ -81,7 +81,7 @@ const U7_GLOSA = {
   "засыпа́ть": "dormirse", "устава́ть": "cansarse", "уста́лый": "cansado", "щётка": "cepillo", "расчёска": "peine", "полоте́нце": "toalla", "посте́ль": "cama", "оде́жда": "ropa",
   "посу́да": "platos, vajilla", "ча́йник": "hervidor", "кру́жка": "taza, jarro", "снача́ла": "primero", "зате́м": "luego", "сра́зу": "enseguida", "бы́стро": "rápido",
   "спеши́ть": "apurarse", "торопи́ться": "apurarse, estar apurado", "опа́здывать": "llegar tarde", "успева́ть": "llegar a tiempo",
-  "расписа́ние": "horario", "переры́в": "pausa", "заня́тие": "clase (de un curso)", "начина́ться": "empezar (una cosa)", "конча́ться": "terminar (una cosa)", "открыва́ться": "abrir (un negocio)",
+  "расписа́ние": "horario", "переры́в": "pausa", "заня́тие": "clase (de un curso)", "начина́ться": "empezar (una cosa)", "конча́ться": "terminar (una cosa)", "открыва́ться": "abrir (una tienda)",
   "рабо́чий": "de trabajo", "за́нятый": "ocupado", "свобо́дный": "libre", "приходи́ть": "llegar", "уходи́ть": "irse",
   "о́тдых": "descanso", "прогу́лка": "paseo", "трениро́вка": "entrenamiento", "игра́": "juego", "игра́ть": "jugar, tocar", "та́нец": "baile", "ра́дио": "radio", "но́вость": "noticia",
   "програ́мма": "programa", "се́рия": "episodio", "спорти́вный": "deportivo", "те́ннис": "tenis", "ша́хматы": "ajedrez", "пиани́но": "piano", "весёлый": "divertido", "скуча́ть": "aburrirse", "вме́сте": "juntos"
@@ -132,7 +132,7 @@ const UNIDAD_7 = {
           ejemplos: [
             { ru: "— Кото́рый час? — {Семь часо́в}.", es: "—¿Qué hora es? —Son las siete.", por: "Sin «son» ni «las»: el número y час." },
             { ru: "Сейча́с {три часа́}.", es: "Son las tres.", por: "Сейча́с suma «ahora»; sin él, la frase dice lo mismo." },
-            { ru: "Сейча́с {час}.", es: "Es la una.", por: "Para la una alcanza con час, sin número." }],
+            { ru: "Сейча́с {час}.", es: "Es la una.", por: "Para la una basta con час, sin número." }],
           destacado: "Кото́рый час? — Семь часо́в.",
           errores: [{ mal: "Э́то семь часо́в.", bien: "{Семь часо́в}.", por: "Para la hora no va э́то: el número y час, nada más." }],
           mas: { texto: "Кото́рый quiere decir «cuál» en una serie: Кото́рый час? es, palabra por palabra, «¿cuál hora?», como preguntar qué número de la serie de las horas toca ahora.\nPara la una, оди́н se omite porque час solo ya quiere decir «una hora». Si alguien dice оди́н час, se entiende igual, pero al dar la hora suena de más.",
@@ -150,7 +150,7 @@ const UNIDAD_7 = {
           errores: [
             { mal: "Пять часа́.", bien: "Пять {часо́в}.", por: "De 5 en adelante va часо́в." },
             { mal: "Три часо́в.", bien: "Три {часа́}.", por: "Con 2, 3 y 4 va часа́." }],
-          mas: { texto: "¿Por qué 2, 3 y 4 van aparte? Hace siglos el ruso tenía una forma especial para contar de a dos, y el 3 y el 4 se sumaron a ella. Lo que quedó es la forma de contar часа́, que solo aparece después de 2, 3 y 4.\nDesde 5, la palabra va en plural y en otro caso: часо́в. Los números del 11 al 19 van siempre con часо́в, aunque terminen en «uno» o «cuatro»: lo que cuenta es la palabra entera, no la última cifra. Con 20, 30, 40 y 50, también часо́в.",
+          mas: { texto: "¿Por qué 2, 3 y 4 van aparte? Hace siglos el ruso tenía una forma especial para contar de dos en dos, y el 3 y el 4 se sumaron a ella. Lo que quedó es la forma de contar часа́, que solo aparece después de 2, 3 y 4.\nDesde 5, la palabra va en plural y en otro caso: часо́в. Los números del 11 al 19 van siempre con часо́в, aunque terminen en «uno» o «cuatro»: lo que cuenta es la palabra entera, no la última cifra. Con 20, 30, 40 y 50, también часо́в.",
             ejemplos: [
               { ru: "Оди́ннадцать {часо́в}.", es: "Son las once.", por: "11 es una palabra entera: va con часо́в." },
               { ru: "Четы́рнадцать {часо́в}.", es: "Catorce horas.", por: "Termina en «cuatro», pero va con часо́в." }] },
@@ -248,7 +248,7 @@ const UNIDAD_7 = {
           errores: [
             { mal: "в понеде́льнике", bien: "{в понеде́льник}", por: "Los días van en acusativo: понеде́льник queda igual." },
             { mal: "в среда́", bien: "{в сре́ду}", por: "Después de в, el día cambia: **-а** → **-у**." }],
-          mas: { texto: "¿Por qué acusativo y no prepositivo, como en в Москве́? Porque aquí в no dice «adentro de»: marca un punto en el tiempo, igual que en в семь часо́в. Un día se piensa como un punto en la semana.\nВо aparece cuando la palabra siguiente empieza con **в** o **ф** más otra consonante: во вто́рник. Es la misma в, con una vocal para poder pronunciarla.",
+          mas: { texto: "¿Por qué acusativo y no prepositivo, como en в Москве́? Porque aquí в no dice «dentro de»: marca un punto en el tiempo, igual que en в семь часо́в. Un día se piensa como un punto en la semana.\nВо aparece cuando la palabra siguiente empieza con **в** o **ф** más otra consonante: во вто́рник. Es la misma в, con una vocal para poder pronunciarla.",
             ejemplos: [{ ru: "{В суббо́ту} в во́семь часо́в я за́втракаю.", es: "El sábado a las ocho desayuno.", por: "Dos «cuándo» con в, los dos en acusativo." }] },
           chequeo: [{ pide: "«el sábado»", opciones: ["в суббо́ту", "в суббо́те", "в суббо́та"], ok: "в суббо́ту", por: "в + acusativo: **-а** → **-у**." }] },
         { id: "u7-cada", titulo: "Todos los días: ка́ждый",
@@ -279,7 +279,7 @@ const UNIDAD_7 = {
           errores: [
             { mal: "в май", bien: "{в ма́е}", por: "Los meses van en prepositivo." },
             { mal: "в сентя́бре", bien: "в сентябр{е́}", por: "En los de **-брь**, el acento pasa al final." }],
-          mas: { texto: "¿Por qué los meses van en prepositivo y los días en acusativo? Un mes se piensa como un espacio: algo pasa «adentro» de él, igual que en в Москве́. Un día, en cambio, es un punto.\nLa **ь** de los meses se va en el prepositivo, como en слова́рь → в словаре́: сентя́брь → сентябре́.",
+          mas: { texto: "¿Por qué los meses van en prepositivo y los días en acusativo? Un mes se piensa como un espacio: algo pasa «dentro» de él, igual que en в Москве́. Un día, en cambio, es un punto.\nLa **ь** de los meses se va en el prepositivo, como en слова́рь → в словаре́: сентя́брь → сентябре́.",
             ejemplos: [{ ru: "{В декабре́} я до́ма, а {в ма́е} на да́че.", es: "En diciembre estoy en casa y en mayo, en la casa de campo.", por: "Dos meses, los dos en prepositivo." }] },
           chequeo: [{ pide: "«en marzo»", opciones: ["в ма́рте", "в март"], ok: "в ма́рте", por: "Prepositivo: **-е**." }] },
         { id: "u7-estaciones", titulo: "Las estaciones: зимо́й, ле́том",
@@ -302,7 +302,7 @@ const UNIDAD_7 = {
             { txt: "за́втракаю", rol: "acción" },
             { txt: "до́ма", rol: "dónde" }] },
           destacado: "в семь часо́в · в сре́ду · в ма́е · у́тром · ле́том",
-          mas: { texto: "Con los días y con ка́ждый, el acusativo dice «cuándo», como un punto: в сре́ду, ка́ждый день. Con los meses, el prepositivo dice «adentro de»: в ма́е. Las palabras como у́тром o ле́том no necesitan nada: ya dicen «cuándo» solas.",
+          mas: { texto: "Con los días y con ка́ждый, el acusativo dice «cuándo», como un punto: в сре́ду, ка́ждый день. Con los meses, el prepositivo dice «dentro de»: в ма́е. Las palabras como у́тром o ле́том no necesitan nada: ya dicen «cuándo» solas.",
             ejemplos: [{ ru: "{Ле́том}, {в ию́ле}, я на мо́ре.", es: "En verano, en julio, estoy en el mar.", por: "Estación sin в y mes con в + prepositivo." }] },
           chequeo: [
             { pide: "«el jueves»", opciones: ["в четве́рг", "в четверге́", "четверго́м"], ok: "в четве́рг", por: "Día: в + acusativo, igual que el nominativo." },
@@ -313,7 +313,7 @@ const UNIDAD_7 = {
             { ru: "{Рождество́} в декабре́.", es: "Navidad es en diciembre.", por: "Sin verbo, como Я до́ма." },
             { ru: "Мой {день рожде́ния} в ма́е.", es: "Mi cumpleaños es en mayo.", por: "День рожде́ния, entero; el mes, en prepositivo." },
             { ru: "Мы {пра́зднуем} Рождество́ до́ма.", es: "Festejamos la Navidad en casa.", por: "пра́здновать → пра́зднуем: **-ова-** pasa a **-у-**." }],
-          mas: { texto: "Para una fecha exacta («el 10 de septiembre») hacen falta los números ordinales, que llegan más adelante; por ahora alcanza con el mes. Да́та es «fecha»; календа́рь, «calendario»; сезо́н, «temporada»; полго́да, «medio año», y век, «siglo».\nКани́кулы, las vacaciones de la escuela o la facultad, existe solo en plural. Las del trabajo son о́тпуск.",
+          mas: { texto: "Para una fecha exacta («el 10 de septiembre») hacen falta los números ordinales, que llegan más adelante; por ahora basta con el mes. Да́та es «fecha»; календа́рь, «calendario»; сезо́н, «temporada»; полго́да, «medio año», y век, «siglo».\nКани́кулы, las vacaciones de la escuela o la facultad, existe solo en plural. Las del trabajo son о́тпуск.",
             ejemplos: [{ ru: "{Кани́кулы} ле́том.", es: "Las vacaciones (de la escuela) son en verano.", por: "Кани́кулы, siempre en plural." }] },
           chequeo: [{ pide: "«Mi cumpleaños es en julio».", opciones: ["Мой день рожде́ния в ию́ле.", "Мой день рожде́ния в ию́ль."], ok: "Мой день рожде́ния в ию́ле.", por: "El mes, en prepositivo." }] }
       ] },
@@ -352,7 +352,7 @@ const UNIDAD_7 = {
           texto: "Раз es «vez», y se cuenta como час: оди́н раз, два ра́за (con 2, 3 y 4), пять раз (de 5 en adelante; esa forma no lleva terminación). Para «por día» o «por semana», в + acusativo: раз в день, два ра́за в неде́лю.",
           ejemplos: [
             { ru: "Я пью ко́фе {три ра́за} в день.", es: "Tomo café tres veces por día.", por: "3: ра́за." },
-            { ru: "Я гуля́ю {раз в неде́лю}.", es: "Paseo una vez por semana.", por: "Para «una vez», alcanza con раз; неде́ля → неде́лю." },
+            { ru: "Я гуля́ю {раз в неде́лю}.", es: "Paseo una vez por semana.", por: "Para «una vez», basta con раз; неде́ля → неде́лю." },
             { ru: "Я хожу́ в бассе́йн {два ра́за} в неде́лю.", es: "Voy a la piscina dos veces por semana.", por: "2: ра́за." }],
           destacado: "раз · два ра́за · пять раз",
           errores: [{ mal: "пять ра́за", bien: "пять {раз}", por: "De 5 en adelante: раз, sin terminación." }],
@@ -414,7 +414,7 @@ const UNIDAD_7 = {
             { ru: "— {Во ско́лько} ты рабо́таешь? — В де́вять часо́в.", es: "—¿A qué hora trabajas? —A las nueve.", por: "La misma pregunta para cualquier acción." }],
           destacado: "Во ско́лько? — В де́вять часо́в.",
           errores: [{ mal: "В ско́лько ты обе́даешь?", bien: "{Во} ско́лько ты обе́даешь?", por: "Se dice во ско́лько: con la **о**, como во вто́рник." }],
-          mas: { texto: "Ско́лько es «cuánto». Во ско́лько es, literalmente, «¿en cuánto?»: en qué número del reloj. Para contestar, alcanza con la hora: В семь. La frase entera también vale: Я обе́даю в час.",
+          mas: { texto: "Ско́лько es «cuánto». Во ско́лько es, literalmente, «¿en cuánto?»: en qué número del reloj. Para contestar, basta con la hora: В семь. La frase entera también vale: Я обе́даю в час.",
             ejemplos: [{ ru: "— Во ско́лько ты встаёшь? — {В семь}.", es: "—¿A qué hora te levantas? —A las siete.", por: "La respuesta corta, sin часо́в, es muy común." }] },
           chequeo: [{ pide: "«¿A qué hora cenas?»", opciones: ["Во ско́лько ты у́жинаешь?", "Ско́лько ты у́жинаешь?"], ok: "Во ско́лько ты у́жинаешь?", por: "«A qué hora»: во ско́лько." }] },
         { id: "u7-empezar", titulo: "Empezar y terminar: quién o qué",
@@ -423,7 +423,7 @@ const UNIDAD_7 = {
             { ru: "Я {начина́ю} рабо́тать в де́вять.", es: "Empiezo a trabajar a las nueve.", por: "Una persona empieza algo." },
             { ru: "Уро́к {начина́ется} в де́вять часо́в.", es: "La clase empieza a las nueve.", por: "La clase empieza sola: **-ся**." },
             { ru: "Фильм {конча́ется} в оди́ннадцать.", es: "La película termina a las once.", por: "конча́ться, para las cosas." },
-            { ru: "Магази́н {открыва́ется} в во́семь часо́в.", es: "El negocio abre a las ocho.", por: "En ruso, el negocio «se abre»." }],
+            { ru: "Магази́н {открыва́ется} в во́семь часо́в.", es: "La tienda abre a las ocho.", por: "En ruso, la tienda «se abre»." }],
           errores: [{ mal: "Уро́к начина́ет в де́вять.", bien: "Уро́к {начина́ется} в де́вять.", por: "La clase no empieza algo: empieza ella, con **-ся**." }],
           mas: { texto: "Es el mismo **-ся** de умыва́ться: la acción vuelve sobre quien la hace. Una persona empieza (начина́ет) algo; una cosa «se empieza» (начина́ется).\nDespués de начина́ть y зака́нчивать va el infinitivo: начина́ю рабо́тать, зака́нчиваю чита́ть.",
             ejemplos: [{ ru: "Рабо́та {начина́ется} в де́вять, а я {начина́ю} в во́семь.", es: "El trabajo empieza a las nueve, pero yo empiezo a las ocho.", por: "Una cosa con **-ся**; una persona, sin." }] },
@@ -447,7 +447,7 @@ const UNIDAD_7 = {
           chequeo: [{ pide: "Una mujer dice: «Hoy estoy ocupada».", opciones: ["Сего́дня я занята́.", "Сего́дня я за́нят."], ok: "Сего́дня я занята́.", por: "Mujer: занята́." }] }
       ] },
     { id: "u7m8", n: 8, tipo: "leccion", nPractica: 10, titulo: "Planes y tiempo libre", resumen: "За́втра я рабо́таю · Я игра́ю в те́ннис.",
-      intro: "Para hablar de planes cercanos no hace falta el futuro: alcanza con el presente y un día, como en español («mañana trabajo»). Y lo que haces en tu tiempo libre.",
+      intro: "Para hablar de planes cercanos no hace falta el futuro: basta con el presente y un día, como en español («mañana trabajo»). Y lo que haces en tu tiempo libre.",
       secciones: [
         { id: "u7-presente-planes", titulo: "Presente para planes",
           texto: "Con за́втра, ве́чером o un día de la semana, el presente ya habla de un plan cercano: За́втра я рабо́таю («mañana trabajo»).",
@@ -481,7 +481,7 @@ const UNIDAD_7 = {
       intro: "Una semana entera, día por día. Primero mira la agenda de Ana y después arma la tuya en el proyecto.",
       secciones: [
         { id: "u7-agenda", titulo: "De la agenda a la frase",
-          texto: "En una agenda alcanza con el día y una palabra. Para contarlo, el día pasa a в + acusativo y la palabra se vuelve una acción.",
+          texto: "En una agenda basta con el día y una palabra. Para contarlo, el día pasa a в + acusativo y la palabra se vuelve una acción.",
           ejemplos: [
             { ru: "Понеде́льник — рабо́та → {В понеде́льник} я рабо́таю.", es: "Lunes — trabajo → El lunes trabajo.", por: "понеде́льник no cambia." },
             { ru: "Вто́рник — ру́сский → {Во вто́рник} я изуча́ю ру́сский.", es: "Martes — ruso → El martes estudio ruso.", por: "во вто́рник." },

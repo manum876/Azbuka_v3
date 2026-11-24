@@ -29607,7 +29607,7 @@ const LEXICON_ES = [
    },
    {
     "ru": "документы (los papeles)",
-    "definitionRu": "«Tener los papeles» — иметь документы, вид на жительство.",
+    "definitionRu": "«Tener los papeles» — иметь документы для легального проживания (вид на жительство и т. п.).",
     "source": "redactado"
    }
   ],

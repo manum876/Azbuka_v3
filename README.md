@@ -153,7 +153,7 @@ Your notes, organised in sections. Save any text selected in the app, a word, a 
 | **11** | Решаем проблемы: the subjunctive |
 | **12** | Мнения и аргументы: combined pronouns, por / para, connectors |
 | **13** | Испанский для жизни: pluperfect, reported speech |
-| **14** | Финальный экзамен: six blocks, 100 points |
+| **14** | Итоговый экзамен: six blocks, 100 points |
 
 Its support modules are the same as Azbuka's, with their own content:
 
@@ -163,7 +163,7 @@ Its support modules are the same as Azbuka's, with their own content:
 - **Алфавит и произношение, Диалоги (64 dialogues, useful phrases and cultural notes comparing Spain and Russia) and Чтение (48 readings).**
 - **Болтаем с Лусией:** the mirror of Masha. A written chat in Spanish with **Lucía**, an English teacher in Barcelona: **72 topics**, six per unit. Its «💬 Лучше» corrects a Russian speaker's typical mistakes («yo es», «soy 25 años», «yo gusto», adjective gender, missing accents), and Lucía asks «¡En español, por favor!» if you write in Cyrillic.
 
-Abecé is opened through the account: the direction is chosen when a learner is invited.
+Each learner picks Azbuka or Abecé when signing up (ES / RU on the sign-in screen); the direction is stored in their account.
 
 ---
 
@@ -216,7 +216,7 @@ Abecé's Spanish works the same way, with audio in [`Abece_voces`](https://githu
 - HTML, CSS and JavaScript, **no build step**.
 - [Preact](https://preactjs.com/) + [htm](https://github.com/developit/htm), bundled in the repository (`assets/preact.js`).
 - **Service worker** for offline use; `localStorage` for progress on the phone.
-- **Accounts:** [Supabase](https://supabase.com/) (invitation-only access and cloud progress) and Brevo for the email with the code.
+- **Accounts:** [Supabase](https://supabase.com/) (sign-up by email and cloud progress) and Brevo for the email with the code.
 - **Voices:** Silero (and Piper for Abecé), generated with GitHub Actions in the `Azbuka_voces` and `Abece_voces` repositories.
 - **Notebook:** jsPDF and fflate, to export to PDF and Word on the phone itself.
 - Published with **GitHub Pages**.

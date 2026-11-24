@@ -110,8 +110,8 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  /* la página se recarga sola al saber la dirección: se espera hasta 8 s a que el encabezado cambie (antes fallaba a veces) */
  let hdr=''; for(let k=0;k<16 && !/Abecé/.test(hdr);k++){ await d4.p.waitForTimeout(500); hdr=await d4.p.locator('header').innerText().catch(()=>''); }
  chk(/Abecé/.test(hdr), 'Abecé está abierta (04/11/2026): una alumna de Abecé ve Abecé');
- // Abecé en construcción (22/10/2026): el admin la prueba y vuelve
- chk(await p.locator('text=Abecé en construcción').count()>0, 'el admin ve «Abecé en construcción»');
+ // «Dirección de este teléfono» (antes «Abecé en construcción», 24/11/2026): el admin la prueba y vuelve
+ chk(await p.locator('text=Dirección de este teléfono').count()>0, 'el admin ve «Dirección de este teléfono»');
  await p.click('button:text-is("Abecé")'); await p.waitForLoadState('networkidle'); await p.waitForTimeout(1000);
  chk(/Abecé/.test(await p.locator('header').innerText()), 'con «Abecé» el encabezado pasa a Abecé');
  await p.click('button:text-is("Azbuka")'); await p.waitForLoadState('networkidle'); await p.waitForTimeout(1000);
@@ -139,7 +139,7 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  chk(!(await d2.p.locator('#az-cuenta').count()), 'Ana entra en su teléfono');
  await d2.p.goto(BASE+'ajustes.html',{waitUntil:'networkidle'}); await d2.p.waitForTimeout(800);
  chk(!(await d2.p.locator('text=Accesos').count()), 'Ana no ve Accesos');
- chk(!(await d2.p.locator('text=Abecé en construcción').count()), 'Ana (alumna) no ve Abecé');
+ chk(!(await d2.p.locator('text=Dirección de este teléfono').count()), 'Ana (alumna) no ve Abecé');
  await d2.p.evaluate(()=>{ localStorage.setItem('az_direccion','"abece"'); localStorage.setItem('az_prueba','"si"'); });
  await d2.p.reload({waitUntil:'networkidle'}); await d2.p.waitForTimeout(800);
  chk(/Азбука/.test(await d2.p.locator('header').innerText()), 'una alumna no puede abrir Abecé aunque fuerce el modo prueba');
@@ -150,8 +150,8 @@ const problemas=[]; const chk=(c,m)=>{ console.log((c?'✓ ':'✗ ')+m); if(!c) 
  await d2.p.goto(BASE+'ajustes.html',{waitUntil:'networkidle'}); await d2.p.waitForTimeout(1200);
  await d2.p.reload({waitUntil:'networkidle'}); await d2.p.waitForTimeout(1200);
  chk(/Abecé/.test(await d2.p.locator('header').innerText()), 'la revisora ve Abecé en modo prueba');
- chk(await d2.p.locator('text=Abecé en construcción').count()>0 && await d2.p.locator('text=Alumnos').count()>0, 'la revisora ve «Abecé en construcción» y «Alumnos»');
- // Se buscan los títulos de sección (texto exacto): el texto de «Abecé en construcción» nombra Accesos y Reportes (27/10/2026)
+ chk(await d2.p.locator('text=Dirección de este teléfono').count()>0 && await d2.p.locator('text=Alumnos').count()>0, 'la revisora ve «Dirección de este teléfono» y «Alumnos»');
+ // Se buscan los títulos de sección (texto exacto): el texto de «Dirección de este teléfono» nombra Accesos y Reportes (27/10/2026)
   chk(!(await d2.p.getByText('Accesos', { exact: true }).count()) && !(await d2.p.getByText('Reportes', { exact: true }).count()), 'la revisora no ve Accesos ni Reportes');
  await d2.p.fill('input[placeholder="mail@ejemplo.com"]','Bob@X.com'); await d2.p.fill('input[placeholder^="Nota"]','Bob'); await d2.p.click('button:has-text("Habilitar")'); await d2.p.waitForTimeout(600);
  chk(srv.permitidos['bob@x.com'] && srv.permitidos['bob@x.com'].invitado_por==='ana@x.com' && !srv.permitidos['bob@x.com'].admin, 'la revisora habilita un alumno (no admin)');

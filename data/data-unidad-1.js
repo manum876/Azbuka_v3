@@ -269,7 +269,7 @@ const UNIDAD_1 = {
           comparacion: "Es como el «antes de **p** y **b** se escribe **m**» del español: una regla de posición, que se cumple siempre.",
           palabras: ["CMR-00126", "CMR-00066", "CMR-00187", "CMR-00173", "CMR-00200", "CMR-01447", "CMR-03298"],
           chequeo: [
-            { pide: "маш_на (auto): ¿qué va?", opciones: ["и", "ы"], ok: "и", por: "Después de **ш** va **и**, nunca **ы**." },
+            { pide: "маш_на (coche): ¿qué va?", opciones: ["и", "ы"], ok: "и", por: "Después de **ш** va **и**, nunca **ы**." },
             { pide: "ч_с (hora): ¿qué va?", opciones: ["а", "я"], ok: "а", por: "Después de **ч** va **а**, nunca **я**." }]
         },
         {
@@ -299,7 +299,7 @@ const UNIDAD_1 = {
         {
           id: "u1-e-e", titulo: "Э o Е",
           texto: "Э va casi siempre al principio de la palabra (э́то, э́хо, эта́ж) o después de otra vocal (поэ́т). Después de consonante se escribe Е, incluso en palabras extranjeras donde suena una **e** dura: кафе́, тест.",
-          truco: "Adentro de la palabra, después de consonante: Е.",
+          truco: "Dentro de la palabra, después de consonante: Е.",
           palabras: ["CMR-00012", "CMR-05414", "CMR-01181", "CMR-02986", "CMR-04144", "CMR-00747"]
         },
         {

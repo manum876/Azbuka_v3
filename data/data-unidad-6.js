@@ -3,7 +3,7 @@
    ------------------------------------------------------------
    Versión 04/10/2026. Contenido, vocabulario y banco de ejercicios.
    Decisiones (con Manu, 04/10/2026):
-   · в = adentro; на = sobre una superficie, y una lista corta de
+   · в = dentro; на = sobre una superficie, y una lista corta de
      excepciones que se aprenden de memoria (на рабо́те, на у́лице,
      на ста́нции, на ку́хне, на балко́не; en la ampliación, на вокза́ле,
      на по́чте, на пля́же).
@@ -23,7 +23,7 @@ const U6_LUGARES = {
   "кварти́ра": ["apartamento", "en el apartamento", "al apartamento", "в", "🏢", "идти́"], "ко́мната": ["habitación", "en la habitación", "a la habitación", "в", "🚪", "идти́"],
   "ку́хня": ["cocina", "en la cocina", "a la cocina", "на", "🍳", "идти́"], "спа́льня": ["dormitorio", "en el dormitorio", "al dormitorio", "в", "🛏️", "идти́"],
   "балко́н": ["balcón", "en el balcón", "al balcón", "на", "🌇", "идти́"], "о́фис": ["oficina", "en la oficina", "a la oficina", "в", "💼", "е́хать"],
-  "рабо́та": ["trabajo", "en el trabajo", "al trabajo", "на", "🧑‍💻", "е́хать"], "магази́н": ["negocio", "en el negocio", "al negocio", "в", "🛒", "идти́"],
+  "рабо́та": ["trabajo", "en el trabajo", "al trabajo", "на", "🧑‍💻", "е́хать"], "магази́н": ["tienda", "en la tienda", "a la tienda", "в", "🛒", "идти́"],
   "рестора́н": ["restaurante", "en el restaurante", "al restaurante", "в", "🍽️", "идти́"], "кафе́": ["café", "en el café", "al café", "в", "☕", "идти́"],
   "банк": ["banco", "en el banco", "al banco", "в", "🏦", "идти́"], "университе́т": ["universidad", "en la universidad", "a la universidad", "в", "🎓", "е́хать"],
   "шко́ла": ["escuela", "en la escuela", "a la escuela", "в", "🏫", "идти́"], "метро́": ["metro", "en el metro", "al metro", "в", "🚇", "идти́"],
@@ -69,7 +69,7 @@ const U6_LUGARES = {
   "собо́р": ["catedral", "en la catedral", "a la catedral", "в", "⛪", "идти́", 6], "храм": ["templo", "en el templo", "al templo", "в", "🛕", "идти́", 6],
   "дворе́ц": ["palacio", "en el palacio", "al palacio", "во", "🏰", "е́хать", 6], "мост": ["puente", "en el puente", "al puente", "на", "🌉", "идти́", 6],
   "проспе́кт": ["avenida", "en la avenida", "a la avenida", "на", "🛣️", "идти́", 6], "переу́лок": ["callejón", "en el callejón", "al callejón", "в", "🏚️", "идти́", 6],
-  "тротуа́р": ["vereda", "en la vereda", "a la vereda", "на", "🚶", "идти́", 6], "оте́ль": ["hotel", "en el hotel", "al hotel", "в", "🛎️", "е́хать", 6],
+  "тротуа́р": ["acera", "en la acera", "a la acera", "на", "🚶", "идти́", 6], "оте́ль": ["hotel", "en el hotel", "al hotel", "в", "🛎️", "е́хать", 6],
   "общежи́тие": ["residencia estudiantil", "en la residencia estudiantil", "a la residencia estudiantil", "в", "🏘️", "идти́", 6],
   "заво́д": ["fábrica", "en la fábrica", "a la fábrica", "на", "🏭", "е́хать", 6], "фа́брика": ["fábrica", "en la fábrica", "a la fábrica", "на", "🏭", "е́хать", 6],
   "фи́рма": ["empresa", "en la empresa", "a la empresa", "в", "🏢", "е́хать", 6], "кабине́т": ["despacho", "en el despacho", "al despacho", "в", "🗄️", "идти́", 6],
@@ -87,7 +87,7 @@ const U6_LUGARES = {
   /* Módulo 9: viajes y transporte */
   "порт": ["puerto", "en el puerto", "al puerto", "в", "⚓", "е́хать", 9], "ваго́н": ["vagón", "en el vagón", "al vagón", "в", "🚃", "идти́", 9],
   "кора́бль": ["barco", "en el barco", "al barco", "на", "🚢", "идти́", 9], "платфо́рма": ["andén", "en el andén", "al andén", "на", "🚉", "идти́", 9],
-  "ка́сса": ["boletería", "en la boletería", "a la boletería", "в", "🎟️", "идти́", 9], "ло́дка": ["bote", "en el bote", "al bote", "в", "🛶", "идти́", 9],
+  "ка́сса": ["taquilla", "en la taquilla", "a la taquilla", "в", "🎟️", "идти́", 9], "ло́дка": ["bote", "en el bote", "al bote", "в", "🛶", "идти́", 9],
   /* Antes eran de la ampliación; desde el 07/10/2026, en la base (el último campo es el módulo) */
   "аэропо́рт": ["aeropuerto", "en el aeropuerto", "al aeropuerto", "в", "✈️", "е́хать", 9], "больни́ца": ["hospital", "en el hospital", "al hospital", "в", "🏥", "е́хать", 6],
   "гости́ница": ["hotel", "en el hotel", "al hotel", "в", "🏨", "е́хать", 6], "кинотеа́тр": ["cine", "en el cine", "al cine", "в", "🎬", "идти́", 6],
@@ -153,7 +153,7 @@ const U6_LECTURAS = [
     vf: [["Университе́т ря́дом.", false], ["А́нна живёт в Москве́.", true], ["Сейча́с она́ в университе́те.", false]] },
   { id: "casa", titulo: "В кварти́ре", lineas: [
       ["Ма́ма на ку́хне.", "Mamá está en la cocina."], ["Па́па на балко́не.", "Papá está en el balcón."], ["Брат в ко́мнате.", "Mi hermano está en la habitación."],
-      ["Сестра́ идёт в магази́н.", "Mi hermana va al negocio."], ["А я здесь, в спа́льне.", "Y yo estoy aquí, en el dormitorio."]],
+      ["Сестра́ идёт в магази́н.", "Mi hermana va a la tienda."], ["А я здесь, в спа́льне.", "Y yo estoy aquí, en el dormitorio."]],
     preguntas: [["¿Dónde está papá?", "на балко́не", ["на ку́хне", "в ко́мнате"]], ["¿Adónde va la hermana?", "в магази́н", ["в магази́не", "в ко́мнату"]], ["¿Dónde está mamá?", "на ку́хне", ["в ку́хне", "на балко́не"]]],
     vf: [["Ма́ма на балко́не.", false], ["Брат в ко́мнате.", true], ["Сестра́ в магази́не.", false]] }
 ];
@@ -176,7 +176,7 @@ const UNIDAD_6 = {
             { ru: "Где ма́ма? — Ма́ма {на рабо́те}.", es: "¿Dónde está mamá? — Mamá está en el trabajo.", por: "Lo mismo con una persona." },
             { ru: "Где телефо́н? — Телефо́н {на столе́}.", es: "¿Dónde está el teléfono? — El teléfono está en la mesa.", por: "La pregunta no cambia: где sirve para cosas y para personas." }],
           destacado: "Где кни́га? — Кни́га на столе́.",
-          mas: { texto: "Где también sirve para preguntar dónde hace algo alguien: Где ты рабо́таешь? («¿dónde trabajas?»). La respuesta es la misma: un lugar con su preposición.\nEn una charla, para contestar alcanza con el lugar solo, sin repetir quién: Где ма́ма? — На рабо́те. Es la respuesta más natural; la frase completa también está bien, pero suena más a ejercicio.",
+          mas: { texto: "Где también sirve para preguntar dónde hace algo alguien: Где ты рабо́таешь? («¿dónde trabajas?»). La respuesta es la misma: un lugar con su preposición.\nEn una charla, para contestar basta con el lugar solo, sin repetir quién: Где ма́ма? — На рабо́те. Es la respuesta más natural; la frase completa también está bien, pero suena más a ejercicio.",
             ejemplos: [{ ru: "— Где ты? — {На рабо́те}.", es: "—¿Dónde estás? —En el trabajo.", por: "Se contesta con el lugar solo." }] },
           chequeo: [{ pide: "¿Cómo preguntas dónde está mamá?", opciones: ["Где ма́ма?", "Что ма́ма?", "Кто ма́ма?"], ok: "Где ма́ма?", por: "Где es «¿dónde?»." }] },
         { id: "u6-sin-prep", titulo: "Respuestas sin preposición",
@@ -186,7 +186,7 @@ const UNIDAD_6 = {
             { ru: "Кни́га {здесь}.", es: "El libro está aquí.", por: "Здесь: donde está el que habla." },
             { ru: "Ма́ма {там}.", es: "Mamá está allí.", por: "Там: en otro lugar." }],
           errores: [{ mal: "Я в до́ма.", bien: "Я {до́ма}.", por: "До́ма ya incluye el «en»: no lleva preposición." }],
-          mas: { texto: "До́ма viene de дом («casa»), pero es una palabra aparte: quiere decir «en casa», la tuya o la de quien habla. Para hablar de la casa como edificio se usa дом con preposición: в до́ме («adentro de la casa»). Para «estoy en casa», siempre Я до́ма.\nЗдесь y там funcionan como «aquí» y «allí»: здесь es donde está el que habla; там, cualquier otro lugar.",
+          mas: { texto: "До́ма viene de дом («casa»), pero es una palabra aparte: quiere decir «en casa», la tuya o la de quien habla. Para hablar de la casa como edificio se usa дом con preposición: в до́ме («dentro de la casa»). Para «estoy en casa», siempre Я до́ма.\nЗдесь y там funcionan como «aquí» y «allí»: здесь es donde está el que habla; там, cualquier otro lugar.",
             ejemplos: [{ ru: "Ма́ма {до́ма}, а па́па {на рабо́те}.", es: "Mamá está en casa y papá, en el trabajo.", por: "Una respuesta sin preposición y otra con на." }] } },
         { id: "u6-cambia", titulo: "La palabra cambia",
           texto: "Fíjate en на столе́: стол cambió, le apareció una **-е** al final. Después de в o на, cuando la frase dice dónde está algo, la palabra cambia la terminación. Esa forma es un caso nuevo, el **prepositivo**: se llama así porque siempre va con una preposición.",
@@ -197,28 +197,28 @@ const UNIDAD_6 = {
           mas: { texto: "Ya conoces dos casos: el nominativo, la forma del diccionario, y el acusativo, la de lo que recibe la acción. El prepositivo es el tercero. A diferencia de los otros dos, nunca aparece solo: siempre va detrás de una preposición. Por eso, cuando veas в o на seguidos de una palabra que termina en **-е**, ya sabes qué caso es.\nLa buena noticia es que su regla es de las más parejas del ruso: casi todas las palabras terminan en **-е**." },
           chequeo: [{ pide: "Кни́га на ___.", opciones: ["стол", "столе́"], ok: "столе́", por: "Después de на, para decir dónde: prepositivo." }] }
       ] },
-    { id: "u6m2", n: 2, tipo: "leccion", nPractica: 10, titulo: "В y на", resumen: "в = adentro · на = encima, y algunas de memoria.",
+    { id: "u6m2", n: 2, tipo: "leccion", nPractica: 10, titulo: "В y на", resumen: "в = dentro · на = encima, y algunas de memoria.",
       intro: "En español todo es «en». En ruso, «en» se dice de dos maneras, y elegir bien es la mitad del trabajo.",
       secciones: [
-        { id: "u6-v", titulo: "В: adentro",
-          antes: { pide: "Ко́шка ___ ко́мнате. ¿Cuál va?", opciones: ["в", "на"], ok: "в", por: "La gata está adentro de la habitación: в." },
-          texto: "в es «adentro de»: un lugar cerrado o con límites, que te rodea. Es la más común de las dos: ante la duda, в.",
+        { id: "u6-v", titulo: "В: dentro",
+          antes: { pide: "Ко́шка ___ ко́мнате. ¿Cuál va?", opciones: ["в", "на"], ok: "в", por: "La gata está dentro de la habitación: в." },
+          texto: "в es «dentro de»: un lugar cerrado o con límites, que te rodea. Es la más común de las dos: ante la duda, в.",
           ejemplos: [
-            { ru: "Ко́шка {в ко́мнате}.", es: "La gata está en la habitación.", por: "Adentro de la habitación: в." },
-            { ru: "Я {в магази́не}.", es: "Estoy en el negocio.", por: "Adentro del negocio." },
-            { ru: "Они́ {в па́рке}.", es: "Están en el parque.", por: "El parque tiene límites: se está «adentro»." }],
+            { ru: "Ко́шка {в ко́мнате}.", es: "La gata está en la habitación.", por: "Dentro de la habitación: в." },
+            { ru: "Я {в магази́не}.", es: "Estoy en la tienda.", por: "Dentro de la tienda." },
+            { ru: "Они́ {в па́рке}.", es: "Están en el parque.", por: "El parque tiene límites: se está «dentro»." }],
           destacado: "в ко́мнате · в магази́не · в па́рке",
-          mas: { texto: "«Adentro» en sentido amplio: una ciudad, un barrio o un parque también son lugares con límites, aunque no tengan techo. Por eso в Барсело́не, в це́нтре, в па́рке. Lo que importa no es si hay paredes, sino si te imaginas el lugar como un espacio que te rodea.",
+          mas: { texto: "«Dentro» en sentido amplio: una ciudad, un barrio o un parque también son lugares con límites, aunque no tengan techo. Por eso в Барсело́не, в це́нтре, в па́рке. Lo que importa no es si hay paredes, sino si te imaginas el lugar como un espacio que te rodea.",
             ejemplos: [{ ru: "Он живёт {в це́нтре}.", es: "Vive en el centro.", por: "El centro de la ciudad es una zona: в." }] } },
         { id: "u6-na", titulo: "На: encima",
           texto: "на es «sobre, encima de», y también «contra» una superficie: lo que está apoyado en algo.",
           ejemplos: [
             { ru: "Телефо́н {на столе́}.", es: "El teléfono está en la mesa.", por: "Apoyado encima: на." },
-            { ru: "Кни́га {на столе́}, а телефо́н {в су́мке}.", es: "El libro está en la mesa y el teléfono, en el bolso.", por: "Encima: на. Adentro: в." }],
-          errores: [{ mal: "Телефо́н в столе́.", bien: "Телефо́н {на столе́}.", por: "El teléfono está encima de la mesa, no adentro: на." }],
+            { ru: "Кни́га {на столе́}, а телефо́н {в су́мке}.", es: "El libro está en la mesa y el teléfono, en el bolso.", por: "Encima: на. Dentro: в." }],
+          errores: [{ mal: "Телефо́н в столе́.", bien: "Телефо́н {на столе́}.", por: "El teléfono está encima de la mesa, no dentro: на." }],
           chequeo: [{ pide: "Кни́га ___ су́мке.", opciones: ["в", "на"], ok: "в", por: "Dentro del bolso: в." }] },
         { id: "u6-na-lista", titulo: "Los lugares que van con на",
-          texto: "Algunos lugares van con на aunque uno esté adentro. No hay que buscarle la lógica a cada uno: se aprenden con la preposición puesta, como un bloque.\nна рабо́те (en el trabajo)\nна у́лице (en la calle)\nна ста́нции (en la estación)\nна ку́хне (en la cocina)\nна балко́не (en el balcón)",
+          texto: "Algunos lugares van con на aunque uno esté dentro. No hay que buscarle la lógica a cada uno: se aprenden con la preposición puesta, como un bloque.\nна рабо́те (en el trabajo)\nна у́лице (en la calle)\nна ста́нции (en la estación)\nна ку́хне (en la cocina)\nна балко́не (en el balcón)",
           ejemplos: [
             { ru: "Па́па {на ку́хне}.", es: "Papá está en la cocina.", por: "Ку́хня va con на: se aprende así." },
             { ru: "Мы {на у́лице}.", es: "Estamos en la calle.", por: "У́лица, con на." }],
@@ -333,11 +333,11 @@ const UNIDAD_6 = {
           mas: { titulo: "Во дворе́", texto: "Delante de algunas palabras que empiezan con dos consonantes, la в se convierte en **во**, para que se pueda pronunciar: двор → во дворе́ (en el patio). Es solo una cuestión de sonido: la preposición es la misma.",
             ejemplos: [{ ru: "Ко́шка {во дворе́}.", es: "La gata está en el patio.", por: "в + **дв** → во." }] } },
         { id: "u6-donde-cosa", titulo: "Dónde está cada cosa",
-          antes: { pide: "Ключ ___ карма́не.", opciones: ["в", "на"], ok: "в", por: "Adentro del bolsillo: в." },
-          texto: "Para los muebles y los objetos vale la idea de base: adentro, в; encima o contra una superficie, на. Lo que cuelga de la pared o del techo también va con на.",
+          antes: { pide: "Ключ ___ карма́не.", opciones: ["в", "на"], ok: "в", por: "Dentro del bolsillo: в." },
+          texto: "Para los muebles y los objetos vale la idea de base: dentro, в; encima o contra una superficie, на. Lo que cuelga de la pared o del techo también va con на.",
           ejemplos: [
             { ru: "Кни́га {на по́лке}.", es: "El libro está en el estante.", por: "Encima: на." },
-            { ru: "Молоко́ {в холоди́льнике}.", es: "La leche está en la nevera.", por: "Adentro: в." },
+            { ru: "Молоко́ {в холоди́льнике}.", es: "La leche está en la nevera.", por: "Dentro: в." },
             { ru: "Ко́шка {на полу́}.", es: "La gata está en el piso.", por: "пол → на полу́, del grupo de **-у́**." },
             { ru: "Ла́мпа {на потолке́}.", es: "La lámpara está en el techo.", por: "Colgada de una superficie: на. Se cae la **о**." }],
           errores: [{ mal: "Кни́га в по́лке.", bien: "Кни́га {на по́лке}.", por: "El libro está apoyado encima del estante: на." }],
@@ -414,7 +414,7 @@ const UNIDAD_6 = {
             { txt: "шко́лу", rol: "adónde", nota: "Acusativo: шко́ла → шко́лу, porque hay movimiento." }] },
           ejemplos: [
             { ru: "Я иду́ {на рабо́ту}.", es: "Voy al trabajo.", por: "рабо́та → рабо́ту." },
-            { ru: "Ма́ма идёт {в магази́н}.", es: "Mamá va al negocio.", por: "Магази́н es masculino y es una cosa: en acusativo queda igual." }],
+            { ru: "Ма́ма идёт {в магази́н}.", es: "Mamá va a la tienda.", por: "Магази́н es masculino y es una cosa: en acusativo queda igual." }],
           destacado: "Где? → в шко́ле · Куда́? → в шко́лу",
           errores: [{ mal: "Я иду́ в шко́ле.", bien: "Я иду́ {в шко́лу}.", por: "Con movimiento, acusativo: **-у**." }],
           mas: { texto: "Como en acusativo las palabras masculinas que son cosas no cambian, muchas veces lo único que avisa si es «dónde» o «adónde» es el verbo: Я в па́рке («estoy en el parque») y Я иду́ в парк («voy al parque»). Con las femeninas en **-а** o **-я**, la terminación lo dice sola: в шко́ле / в шко́лу, на ку́хне / на ку́хню. Y las que no cambian, como кафе́ o метро́, quedan iguales en los dos casos.",
@@ -430,15 +430,15 @@ const UNIDAD_6 = {
           chequeo: [{ pide: "Я иду́ ___ у́лицу.", opciones: ["в", "на"], ok: "на", por: "У́лица va con на, también en movimiento." }] }
       ] },
     { id: "u6m9", n: 9, tipo: "leccion", nPractica: 12, titulo: "Ir: a pie o en vehículo", resumen: "идти́ / е́хать · ходи́ть / е́здить.",
-      intro: "El ruso tiene varios verbos para «ir». Por ahora, alcanza con dos preguntas: ¿a pie o en vehículo? ¿ahora o a menudo?",
+      intro: "El ruso tiene varios verbos para «ir». Por ahora, basta con dos preguntas: ¿a pie o en vehículo? ¿ahora o a menudo?",
       secciones: [
         { id: "u6-pie-vehiculo", titulo: "A pie o en vehículo",
-          texto: "идти́ es ir a pie; е́хать es ir en un vehículo: auto, autobús, tren, barco o avión.",
+          texto: "идти́ es ir a pie; е́хать es ir en un vehículo: coche, autobús, tren, barco o avión.",
           ejemplos: [
-            { ru: "Я {иду́} в магази́н.", es: "Voy al negocio.", por: "A pie: идти́." },
+            { ru: "Я {иду́} в магази́н.", es: "Voy a la tienda.", por: "A pie: идти́." },
             { ru: "Мы {е́дем} в Мадри́д.", es: "Vamos a Madrid.", por: "A otra ciudad, en vehículo: е́хать." },
             { ru: "Они́ {е́дут} в аэропо́рт.", es: "Van al aeropuerto.", por: "En coche o en autobús: е́хать." }],
-          mas: { titulo: "Los lugares del viaje", texto: "Si la distancia es larga, otra ciudad u otro país, es casi seguro е́хать. Dentro del barrio, lo normal es идти́.\nLos lugares del viaje siguen las mismas reglas: на вокза́ле (en la estación de tren), на платфо́рме (en el andén), в ваго́не, в ка́ссе (en la boletería), на корабле́ (en el barco) pero в ло́дке (en el bote). Аэропо́рт y порт son del grupo de **-у́**: в аэропорту́, в порту́.",
+          mas: { titulo: "Los lugares del viaje", texto: "Si la distancia es larga, otra ciudad u otro país, es casi seguro е́хать. Dentro del barrio, lo normal es идти́.\nLos lugares del viaje siguen las mismas reglas: на вокза́ле (en la estación de tren), на платфо́рме (en el andén), в ваго́не, в ка́ссе (en la taquilla), на корабле́ (en el barco) pero в ло́дке (en el bote). Аэропо́рт y порт son del grupo de **-у́**: в аэропорту́, в порту́.",
             ejemplos: [{ ru: "Мы {в аэропорту́}.", es: "Estamos en el aeropuerto.", por: "аэропо́рт → в аэропорту́, con **-у́**." }] } },
         { id: "u6-ahora-seguido", titulo: "Ahora o a menudo",
           texto: "Para algo que pasa ahora, o un viaje concreto: идти́ / е́хать. Para lo habitual, lo que se hace a menudo: ходи́ть / е́здить. Palabras como ча́сто, всегда́ o иногда́ avisan que es habitual.",
@@ -553,7 +553,7 @@ function u6Regla(s) {
   else if (fin === "я") r = "termina en -я: pasa a -е";
   else if (fin === "й") r = "termina en -й: pasa a -е";
   else r = "termina en consonante: se agrega -е";
-  const por = s.tipo === "sobre" ? (s.pr === "на" ? " Va con на porque está «sobre» o «contra» eso." : " Va con в porque está adentro.") : s.pr === "на" ? " Va con на: es de las que se aprenden con на." : s.pr === "во" ? " Delante de **дв-** la в se dice во." : "";
+  const por = s.tipo === "sobre" ? (s.pr === "на" ? " Va con на porque está «sobre» o «contra» eso." : " Va con в porque está dentro.") : s.pr === "на" ? " Va con на: es de las que se aprenden con на." : s.pr === "во" ? " Delante de **дв-** la в se dice во." : "";
   const pos = w => { const i = w.indexOf("\u0301"); return i < 0 ? -1 : (w.slice(0, i).match(/[аеёиоуыэюя]/gi) || []).length; };
   const mueve = s.nom !== s.prep && pos(s.nom) >= 0 && pos(s.prep) >= 0 && pos(s.nom) !== pos(s.prep) ? " Fíjate que el acento se mueve." : "";
   return "**" + s.nom + " → " + s.pr + " " + s.prep + "**: " + r + "." + por + mueve;
@@ -592,7 +592,7 @@ function ejerciciosUnidad6() {
     if (s.amp) return;
     out.push({ id: "U6-pr-" + s.id, tipo: "prepo", forma: "elegir", dificultad: 1, modulo: 2, grupo: "PR-" + s.id, items: ["lex:" + s.id], oir: s.pr + " " + s.prep,
       pide: "Completa: «" + s.en + "»", grande: "_____ " + s.prep, opciones: [s.pr === "во" ? "во" : "в", "на"], correcta: s.pr,
-      explicacion: "**" + s.pr + " " + s.prep + "**: " + (s.tipo === "sobre" ? (s.pr === "на" ? "на, porque está encima o contra la superficie." : "в, porque está adentro.") : s.desde === 7 ? "на: es un evento o una actividad." : s.pr === "на" ? "va con на: es de los lugares que se aprenden con на." : s.pr === "во" ? "во: delante de **дв-**, la в se dice во." : "в: un lugar con límites, que te rodea.") });
+      explicacion: "**" + s.pr + " " + s.prep + "**: " + (s.tipo === "sobre" ? (s.pr === "на" ? "на, porque está encima o contra la superficie." : "в, porque está dentro.") : s.desde === 7 ? "на: es un evento o una actividad." : s.pr === "на" ? "va con на: es de los lugares que se aprenden con на." : s.pr === "во" ? "во: delante de **дв-**, la в se dice во." : "в: un lugar con límites, que te rodea.") });
     const exp = "**" + s.pr + " " + s.prep + "** = " + s.en + (s.pr === "на" && s.tipo !== "sobre" ? ". Va con на, de memoria." : ".");
     if (j % 2 === 0) out.push({ id: "U6-pres-" + s.id, tipo: "es-ru", forma: "escribir", dificultad: 2, modulo: 2, grupo: "PR-" + s.id, items: ["lex:" + s.id], oir: s.pr + " " + s.prep,
       pide: "Escribe en ruso: «" + s.en + "»", audio: s.pr + " " + s.prep, audioManual: true, esperadas: [s.pr + " " + s.prep], idioma: "ru", explicacion: exp });
@@ -843,8 +843,8 @@ function ejerciciosUnidad6() {
     return "u6-prep-e";
   };
   const reglaPr = s => s.tipo === "sobre" ? (s.pr === "на" ? "u6-na" : "u6-v") : s.tipo === "ciudad" ? "u6-ciudades" : s.tipo === "pais" ? "u6-paises" : s.pr === "на" ? "u6-na-lista" : "u6-v";
-  const porQueNa = s => s.tipo === "sobre" ? (s.pr === "на" ? "Está encima o contra una superficie" : "Está adentro") : s.desde === 7 ? "Es un evento o una actividad" : s.pr === "на" ? "Es de los lugares que van con на" : "Es un lugar con límites, que te rodea";
-  const POR_PR = ["Está encima o contra una superficie", "Está adentro", "Es un evento o una actividad", "Es de los lugares que van con на", "Es un lugar con límites, que te rodea"];
+  const porQueNa = s => s.tipo === "sobre" ? (s.pr === "на" ? "Está encima o contra una superficie" : "Está dentro") : s.desde === 7 ? "Es un evento o una actividad" : s.pr === "на" ? "Es de los lugares que van con на" : "Es un lugar con límites, que te rodea";
+  const POR_PR = ["Está encima o contra una superficie", "Está dentro", "Es un evento o una actividad", "Es de los lugares que van con на", "Es un lugar con límites, que te rodea"];
   const porQueTerm = s => {
     const n = sinAc(s.nom), f = n.slice(-1);
     if (s.indecl) return "Viene de otro idioma: no cambia";
@@ -864,7 +864,7 @@ function ejerciciosUnidad6() {
       oir: s.pr + " " + s.prep, pide: "¿Por qué queda así?", grande: s.nom + " → " + s.pr + " " + s.prep, audio: s.pr + " " + s.prep, audioManual: true,
       opciones: baraja([ok].concat(otras), j + 1), correcta: ok, explicacion: u6Regla(s) });
     if (s.tipo === "ciudad" || s.tipo === "pais" || s.pr === "во" || (s.pr !== "на" && j % 3)) return;
-    const okP = porQueNa(s), otrasP = baraja(POR_PR.filter(x => x !== okP && !(s.tipo === "sobre" ? /lugares|evento|límites/ : /superficie|Está adentro/).test(x)), j).slice(0, 1)
+    const okP = porQueNa(s), otrasP = baraja(POR_PR.filter(x => x !== okP && !(s.tipo === "sobre" ? /lugares|evento|límites/ : /superficie|Está dentro/).test(x)), j).slice(0, 1)
       .concat(s.tipo === "sobre" ? [] : [s.pr === "на" ? "Es un lugar con límites, que te rodea" : "Está encima o contra una superficie"]);
     out.push({ id: "U6-porqp-" + s.id, tipo: "porque", forma: "elegir", dificultad: 2, modulo: Math.max(2, s.desde), regla: reglaPr(s), grupo: "PR-" + s.id, items: ["lex:" + s.id],
       oir: s.pr + " " + s.prep, pide: "¿Por qué va con " + s.pr + "?", grande: s.pr + " " + s.prep, audio: s.pr + " " + s.prep, audioManual: true,
@@ -1006,7 +1006,7 @@ function ejerciciosUnidad6() {
     });
   });
 
-  /* Par: ¿adentro o encima? La misma cosa, dos lugares */
+  /* Par: ¿dentro o encima? La misma cosa, dos lugares */
   [["кни́га", "коро́бка", 0], ["ко́шка", "коро́бка", 1], ["телефо́н", "я́щик", 0], ["кни́га", "я́щик", 1], ["кот", "шкаф", 1], ["су́мка", "шкаф", 0], ["кни́га", "холоди́льник", 1], ["ко́шка", "холоди́льник", 1]].forEach(([c0, l0, encima], j) => {
     const o = cosas[sin(c0)], s = lug[sin(l0)]; if (!o || !s) return;
     const czL = casosById(s.id), prepNa = s.loc2 ? s.prep : (czL && czL.sg ? czL.sg[5] : s.prep);
@@ -1014,8 +1014,8 @@ function ejerciciosUnidad6() {
     const otra = cap(o.ac) + (enc ? " в " + s.prep : " на " + prepNa) + ".";
     const art = /^(gata|cartera|lapicera|computadora)$/.test(o.es) ? "La " : "El ", lugEs = s.es;
     out.push({ id: "U6-par-" + j, tipo: "par", forma: "elegir", dificultad: 2, modulo: 5, regla: enc ? "u6-na" : "u6-v", grupo: "PV-" + s.id + "-" + j, items: ["lex:" + o.id, "lex:" + s.id], oir: ok,
-      pide: art + o.es + " está " + (enc ? "encima " : "adentro ") + (/^(caja|nevera)$/.test(lugEs) ? "de la " : "del ") + lugEs + ". ¿Cuál dices?", opciones: baraja([ok, otra], j), correcta: ok,
-      explicacion: ok + " " + (enc ? "Encima: на." : "Adentro: в.") });
+      pide: art + o.es + " está " + (enc ? "encima " : "dentro ") + (/^(caja|nevera)$/.test(lugEs) ? "de la " : "del ") + lugEs + ". ¿Cuál dices?", opciones: baraja([ok, otra], j), correcta: ok,
+      explicacion: ok + " " + (enc ? "Encima: на." : "Dentro: в.") });
   });
 
   /* Desarmar: toca las palabras que responden cada pregunta */

@@ -84,7 +84,7 @@ const U12_PL = {
   "письмо́": ["una carta", "cartas", "✉️"], "друг": ["un amigo", "amigos", "🧑‍🤝‍🧑"], "брат": ["un hermano", "hermanos", "👦"], "сестра́": ["una hermana", "hermanas", "👧"],
   "учи́тель": ["un maestro", "maestros", "🧑‍🏫"], "врач": ["un médico", "médicos", "🩺"], "музе́й": ["un museo", "museos", "🏛️"], "ру́чка": ["un bolígrafo", "bolígrafos", "🖊️"],
   "го́род": ["una ciudad", "ciudades", "🏙️"], "телефо́н": ["un teléfono", "teléfonos", "📱"], "фильм": ["una película", "películas", "🎬"], "страна́": ["un país", "países", "🌍"],
-  "ко́шка": ["una gata", "gatas", "🐈"], "соба́ка": ["un perro", "perros", "🐕"], "у́лица": ["una calle", "calles", "🛣️"], "магази́н": ["un negocio", "negocios", "🏪"],
+  "ко́шка": ["una gata", "gatas", "🐈"], "соба́ка": ["un perro", "perros", "🐕"], "у́лица": ["una calle", "calles", "🛣️"], "магази́н": ["una tienda", "tiendas", "🏪"],
   "биле́т": ["un billete", "billetes", "🎫"], "язы́к": ["un idioma", "idiomas", "🗣️"], "ко́мната": ["una habitación", "habitaciones", "🚪"], "окно́": ["una ventana", "ventanas", "🪟"],
   "газе́та": ["un diario", "diarios", "📰"], "подру́га": ["una amiga", "amigas", "👭"], "сын": ["un hijo", "hijos", "👦"], "день": ["un día", "días", "📅"], "год": ["un año", "años", "🗓️"]
 };
@@ -196,7 +196,7 @@ const U12_GLOSA = {
   "нарисова́ть": "dibujar (una vez)", "спеть": "cantar (una vez)", "стро́ить": "construir", "постро́ить": "construir (una vez)", "класть": "poner (acostado)",
   "положи́ть": "poner (acostado, una vez)", "проверя́ть": "revisar", "прове́рить": "revisar (una vez)", "подожда́ть": "esperar (un momento)", "встреча́ть": "ir a buscar, recibir",
   "прийти́": "llegar (a pie)", "уйти́": "irse (a pie)", "приезжа́ть": "llegar (en vehículo)", "прие́хать": "llegar (en vehículo, una vez)", "уезжа́ть": "irse (en vehículo)",
-  "уе́хать": "irse (en vehículo, una vez)", "ста́вить": "poner (parado)", "поста́вить": "poner (parado, una vez)", "включа́ть": "prender", "включи́ть": "prender (una vez)",
+  "уе́хать": "irse (en vehículo, una vez)", "ста́вить": "poner (de pie)", "поста́вить": "poner (de pie, una vez)", "включа́ть": "encender", "включи́ть": "encender (una vez)",
   "выключа́ть": "apagar", "вы́ключить": "apagar (una vez)", "позва́ть": "llamar (a alguien)", "гро́мко": "fuerte (en voz alta)", "ти́хо": "bajo, en voz baja",
   "лёгкий": "fácil, liviano", "просто́й": "simple", "сло́жный": "complicado", "ти́хий": "tranquilo", "гро́мкий": "ruidoso, fuerte", "бли́зкий": "cercano", "далёкий": "lejano",
   "у́мный": "inteligente", "си́льный": "fuerte", "сла́бый": "débil", "тру́дный": "difícil", "лу́чший": "el mejor", "ста́рший": "mayor", "мла́дший": "menor"
@@ -205,8 +205,8 @@ const U12_GLOSA = {
 const U12_PARES_NUEVAS = [["рисова́ть", "нарисова́ть", "dibujar", "prefijo"], ["петь", "спеть", "cantar", "prefijo"], ["стро́ить", "постро́ить", "construir", "prefijo"],
   ["стира́ть", "постира́ть", "lavar la ropa", "prefijo"], ["мыть", "помы́ть", "lavar", "prefijo"], ["убира́ть", "убра́ть", "ordenar", "final"],
   ["получа́ть", "получи́ть", "recibir", "final"], ["реша́ть", "реши́ть", "decidir", "final"], ["забыва́ть", "забы́ть", "olvidar", "final"], ["проверя́ть", "прове́рить", "revisar", "final"],
-  ["включа́ть", "включи́ть", "prender", "final"], ["выключа́ть", "вы́ключить", "apagar", "final"], ["встреча́ть", "встре́тить", "ir a buscar, encontrarse", "final"],
-  ["ста́вить", "поста́вить", "poner (parado)", "prefijo"], ["класть", "положи́ть", "poner (acostado)", "otra"], ["приходи́ть", "прийти́", "llegar (a pie)", "final"],
+  ["включа́ть", "включи́ть", "encender", "final"], ["выключа́ть", "вы́ключить", "apagar", "final"], ["встреча́ть", "встре́тить", "ir a buscar, encontrarse", "final"],
+  ["ста́вить", "поста́вить", "poner (de pie)", "prefijo"], ["класть", "положи́ть", "poner (acostado)", "otra"], ["приходи́ть", "прийти́", "llegar (a pie)", "final"],
   ["уходи́ть", "уйти́", "irse (a pie)", "final"], ["приезжа́ть", "прие́хать", "llegar (en vehículo)", "final"], ["уезжа́ть", "уе́хать", "irse (en vehículo)", "final"], ["ждать", "подожда́ть", "esperar", "prefijo"]];
 
 const UNIDAD_12 = {
@@ -396,7 +396,7 @@ const UNIDAD_12 = {
             { ru: "Вчера́ я {прочита́л} кни́гу.", es: "Ayer leí el libro (lo terminé).", por: "Resultado." }],
           destacado: "proceso · resultado" },
         { id: "u12-asp-prefijo", titulo: "Con un prefijo",
-          texto: "La forma más común: al de proceso se le agrega un prefijo. No hay regla para saber cuál: **по-**, **на-**, **с-**, **про-**, **при-**, **вы-**… Se aprenden de a dos.",
+          texto: "La forma más común: al de proceso se le agrega un prefijo. No hay regla para saber cuál: **по-**, **на-**, **с-**, **про-**, **при-**, **вы-**… Se aprenden en parejas.",
           ejemplos: [
             { ru: "рисова́ть → {на}рисова́ть", es: "dibujar", por: "**на-**." },
             { ru: "петь → {с}петь", es: "cantar", por: "**с-**." },

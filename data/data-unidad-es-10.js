@@ -875,7 +875,7 @@ const ES10_PAR = [
   ["Ты обещаешь позвонить другу.", "Te llamaré.", "Te llamo ayer.", "Обещание — **futuro**.", 3, "es10-ir-a-futuro"],
   ["Ты вежливо просишь коллегу помочь.", "¿Podrías ayudarme?", "¡Ayúdame ya!", "Вежливо — **¿Podrías…?**", 4, "es10-cortesia"],
   ["Ты советуешь подруге отдохнуть.", "Deberías descansar.", "Debiste descansar.", "Совет — **deberías**.", 4, "es10-consejo"],
-  ["Ты говоришь, что не знаешь, где Ана, но, наверное, на работе.", "Estará en el trabajo.", "Estuvo en el trabajo mañana.", "Догадка — **estará**.", 3, "es10-probabilidad"],
+  ["Ты говоришь, что не знаешь, где Аня, но, наверное, на работе.", "Estará en el trabajo.", "Estuvo en el trabajo mañana.", "Догадка — **estará**.", 3, "es10-probabilidad"],
   ["Ты говоришь: если сдашь экзамен, устроишь праздник.", "Si apruebo, haré una fiesta.", "Si aprobaré, haré una fiesta.", "**si apruebo**.", 5, "es10-si"],
   ["Тебя приглашают в кино, и ты очень рад.", "¡Me encantaría!", "¡Me encantó mañana!", "**¡Me encantaría!**", 8, "es10-deseos"]
 ];
@@ -964,7 +964,7 @@ const ES10_BASICAS_MOD = [
       { es: "Quiero hacerme profesora de español.", ru: "Я хочу стать преподавательницей испанского." },
       { es: "El pueblo se convertirá en una ciudad.", ru: "Деревня превратится в город." }
     ],
-    ojo: "**convertirse** всегда с **en**: **se convirtió en**."
+    ojo: "В значении «превращаться во что-либо» глагол **convertirse** употребляется с предлогом **en**: **se convirtió en**."
   }],
   ["es10m9", ["elección"], {
     id: "es10-eleccion",

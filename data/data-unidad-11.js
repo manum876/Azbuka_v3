@@ -153,7 +153,7 @@ const UNIDAD_11 = {
             { ru: "{Скажи́те}, пожа́луйста, где банк?", es: "Dígame, por favor, ¿dónde está el banco?", por: "Скажи́те abre una pregunta a un desconocido." },
             { ru: "Как {сказа́ть} «tarjeta» по-ру́сски?", es: "¿Cómo se dice «tarjeta» en ruso?", por: "Как сказа́ть…? sirve para cualquier palabra que te falte." }],
           ojo: "Повтори́те, Скажи́те, Помоги́те e Извини́те son pedidos a otra persona con вы. Por ahora van como fórmulas: más adelante vas a ver cómo se forman.",
-          mas: { texto: "Si en una fila (о́чередь) alguien te habla rápido, alcanza con Ещё раз, пожа́луйста («otra vez, por favor»). Y si te piden un documento, te van a decir Па́спорт, пожа́луйста o А́дрес?: con la palabra ya sabes qué buscar." },
+          mas: { texto: "Si en una fila (о́чередь) alguien te habla rápido, basta con Ещё раз, пожа́луйста («otra vez, por favor»). Y si te piden un documento, te van a decir Па́спорт, пожа́луйста o А́дрес?: con la palabra ya sabes qué buscar." },
           chequeo: [{ pide: "Una mujer te habló y no entendiste nada. Eres mujer.", opciones: ["Я не поняла́.", "Я не по́нял."], ok: "Я не поняла́.", por: "Habla una mujer: поняла́." }] },
         { id: "u11-sprosit", titulo: "Preguntar o pedir: спроси́ть, попроси́ть",
           texto: "En español «pedir» y «preguntar» se usan para muchas cosas. En ruso hay un verbo para cada una:\nспра́шивать / спроси́ть → preguntar (una información)\nпроси́ть / попроси́ть → pedirle algo a alguien\nзака́зывать / заказа́ть → pedir comida o un servicio\nCon спроси́ть y попроси́ть, la persona va en acusativo: «le pregunto a mamá» es спрошу́ ма́му.",
@@ -268,7 +268,7 @@ const UNIDAD_11 = {
     { id: "u11m4", n: 4, tipo: "leccion", nPractica: 12, titulo: "Transporte", resumen: "Как дое́хать до це́нтра? Где мне вы́йти?",
       intro: "Moverte por una ciudad: encontrar el transporte, comprar el billete, subir, bajar y saber adónde vas.",
       secciones: [
-        { titulo: "Las palabras", texto: "метро́, авто́бус, трамва́й, по́езд, самолёт y такси́; остано́вка (parada), ста́нция (estación), вокза́л (estación de tren), аэропо́рт, биле́т (billete), вход (entrada), вы́ход (salida), касси́р (el de la boletería), такси́ст (taxista), пассажи́р (pasajero)." },
+        { titulo: "Las palabras", texto: "метро́, авто́бус, трамва́й, по́езд, самолёт y такси́; остано́вка (parada), ста́нция (estación), вокза́л (estación de tren), аэропо́рт, биле́т (billete), вход (entrada), вы́ход (salida), касси́р (el de la taquilla), такси́ст (taxista), пассажи́р (pasajero)." },
         { id: "u11-doehat", titulo: "Как дое́хать до…?",
           texto: "Para preguntar cómo llegar en transporte: Как дое́хать до + el lugar en genitivo. до = «hasta». Para un billete: биле́т до Москвы́.",
           desarmar: { es: "¿Cómo llego al centro?", partes: [
@@ -673,7 +673,7 @@ const U11_EXPR = [
   ["Quieres saber el precio de algo.", "Ско́лько сто́ит?", "🏷️"], ["Te perdiste y necesitas ayuda.", "Помоги́те, пожа́луйста!", "🆘"],
   ["Ves una palabra que no conoces en un cartel.", "Что э́то зна́чит?", "🪧"], ["Quieres saber si en el kiosco tienen agua.", "У вас есть вода́?", "💧"],
   ["Le pisaste el pie a alguien sin querer.", "Извини́те!", "😬"], ["No sabes cómo se dice «tarjeta» en ruso.", "Как сказа́ть «tarjeta» по-ру́сски?", "💬"],
-  ["Estás buscando el metro.", "Я ищу́ метро́.", "🚇"], ["En la boletería: necesitas un billete.", "Мне ну́жен биле́т.", "🎫"],
+  ["Estás buscando el metro.", "Я ищу́ метро́.", "🚇"], ["En la taquilla: necesitas un billete.", "Мне ну́жен биле́т.", "🎫"],
   ["En la oficina de turismo: necesitas un mapa.", "Мне нужна́ ка́рта.", "🗺️"], ["Quieres saber dónde queda el banco.", "Где банк?", "🏦"],
   ["Quieres pedir permiso para sentarte en una silla libre.", "Мо́жно?", "🪑"], ["En un café: quieres un café.", "Мо́жно мне ко́фе?", "☕"]
 ];
@@ -694,10 +694,10 @@ const U11_TRAD = [
   [3, "Al camarero", "¿Qué recomienda?", "Что вы рекоменду́ете?"], [3, "Al camarero", "Voy a querer pescado.", "Я бу́ду ры́бу."],
   [3, "Al camarero", "Tráigame agua, por favor.", "Принеси́те, пожа́луйста, во́ду."], [3, "El camarero pregunta si quieres algo más", "No, gracias.", "Нет, спаси́бо."],
   [3, "Comiendo", "La sopa está muy rica.", "Суп о́чень вку́сный."], [3, "Al camarero", "Disculpe, el té está frío.", "Извини́те, чай холо́дный."],
-  [4, "En la calle", "¿Dónde está la parada?", "Где остано́вка?"], [4, "En la boletería", "Necesito un billete a Moscú.", "Мне ну́жен биле́т до Москвы́."],
+  [4, "En la calle", "¿Dónde está la parada?", "Где остано́вка?"], [4, "En la taquilla", "Necesito un billete a Moscú.", "Мне ну́жен биле́т до Москвы́."],
   [4, "En la estación", "¿Cuándo sale el tren?", "Когда́ отправля́ется по́езд?"], [4, "A un desconocido", "¿Cómo llego al centro?", "Как дое́хать до це́нтра?"],
   [4, "En el aeropuerto", "¿Dónde está la salida?", "Где вы́ход?"], [4, "Al taxista", "Al aeropuerto, por favor.", "В аэропо́рт, пожа́луйста."],
-  [4, "A un amigo", "Voy al centro en metro.", "Я е́ду в центр на метро́."], [4, "En la boletería", "¿Cuánto cuesta el billete?", "Ско́лько сто́ит биле́т?"],
+  [4, "A un amigo", "Voy al centro en metro.", "Я е́ду в центр на метро́."], [4, "En la taquilla", "¿Cuánto cuesta el billete?", "Ско́лько сто́ит биле́т?"],
   [5, "A un turista", "Siga derecho.", "Иди́те пря́мо."], [5, "A un turista", "Doble a la izquierda.", "Поверни́те нале́во."],
   [5, "A un turista", "Doble a la derecha.", "Поверни́те напра́во."], [5, "A un desconocido", "¿Dónde queda el banco?", "Где нахо́дится банк?"],
   [5, "A un turista", "El banco está cerca.", "Банк ря́дом."], [5, "A un turista", "El museo está lejos.", "Музе́й далеко́."],
@@ -783,7 +783,7 @@ function ejerciciosUnidad11() {
     ["Te hablaron muy rápido. Pide que lo repitan.", "🔁", [E("que lo repitan", "повтори́те|повтори́|ещё раз")], "Повтори́те, пожа́луйста."],
     ["Quieres saber cuánto cuesta el pan.", "🍞", [E("cuánto cuesta", "ско́лько сто́ит|ско́лько"), E("el pan", "хлеб")], "Ско́лько сто́ит хлеб?"],
     ["En un kiosco: pregunta si tienen agua.", "💧", [E("si tienen", "у вас есть|есть"), E("agua", "вода́")], "У вас есть вода́?"],
-    ["En la boletería: di que necesitas un billete.", "🎫", [E("que lo necesitas o lo quieres", "ну́жен|ну́жно|хочу́|мо́жно|да́йте"), E("un billete", "биле́т")], "Мне ну́жен биле́т."],
+    ["En la taquilla: di que necesitas un billete.", "🎫", [E("que lo necesitas o lo quieres", "ну́жен|ну́жно|хочу́|мо́жно|да́йте"), E("un billete", "биле́т")], "Мне ну́жен биле́т."],
     ["Te perdiste. Pide ayuda.", "🆘", [E("un pedido de ayuda", "помоги́те|помоги́")], "Извини́те, помоги́те, пожа́луйста!"],
     ["Ves una palabra en un cartel y no sabes qué es. Pregunta qué significa.", "🪧", [E("qué significa", "что э́то зна́чит|что зна́чит")], "Что э́то зна́чит?"],
     ["Buscas el metro. Pregúntale a alguien.", "🚇", [E("que lo buscas o dónde está", "ищу́|где"), E("el metro", "метро́")], "Извини́те, где метро́?"],
@@ -858,7 +858,7 @@ function ejerciciosUnidad11() {
     ["Quieres tomar el autobús. Pregunta dónde está la parada.", "🚌", [E("dónde", "где"), E("la parada", "остано́вка")], "Извини́те, где остано́вка?"],
     ["Pregunta dónde está la estación de metro.", "🚇", [E("dónde", "где|ищу́"), E("el metro", "ста́нция метро́|метро́|~ста́нция")], "Где ста́нция метро́?"],
     ["Pregunta cómo llegar al centro.", "🏙️", [E("cómo llegar", "как дое́хать|как"), E("al centro", "до це́нтра|в центр|~центр")], "Как дое́хать до це́нтра?"],
-    ["En la boletería: pide un billete a Moscú.", "🎫", [E("el billete", "биле́т"), E("adónde", "до Москвы́|в Москву́|~Москва́")], "Мне ну́жен биле́т до Москвы́."],
+    ["En la taquilla: pide un billete a Moscú.", "🎫", [E("el billete", "биле́т"), E("adónde", "до Москвы́|в Москву́|~Москва́")], "Мне ну́жен биле́т до Москвы́."],
     ["Pregunta cuánto cuesta el billete.", "🎫", [E("cuánto cuesta", "ско́лько сто́ит|ско́лько"), E("el billete", "биле́т")], "Ско́лько сто́ит биле́т?"],
     ["Pregunta cuándo sale el tren.", "🚆", [E("cuándo", "когда́"), E("el tren", "по́езд|отправля́ется")], "Когда́ отправля́ется по́езд?"],
     ["Estás en el aeropuerto. Pregunta dónde está la salida.", "🚪", [E("dónde", "где"), E("la salida", "вы́ход")], "Где вы́ход?"],
@@ -914,9 +914,9 @@ function ejerciciosUnidad11() {
     ["No encuentras tu hotel. Pídele ayuda a alguien en la calle.", "🏨", [E("qué buscas", "не могу́ найти́ гости́ницу|ищу́ гости́ницу|где гости́ница|~гости́ница")], "Извини́те, я не могу́ найти́ гости́ницу."],
     ["Tu teléfono no anda. Cuéntalo en la recepción.", "📱", [E("el teléfono", "телефо́н"), E("que no funciona", "не рабо́тает")], "Телефо́н не рабо́тает."],
     ["Quieres tomar un taxi, pero no tienes dinero. Cuéntaselo a un amigo.", "💸", [E("que no tienes dinero", "нет де́нег")], "У меня́ нет де́нег."],
-    ["Perdiste el tren. Pregunta en la boletería cuándo sale el próximo.", "🚆", [E("cuándo", "когда́"), E("el próximo", "сле́дующий|по́езд")], "Когда́ сле́дующий по́езд?"],
+    ["Perdiste el tren. Pregunta en la taquilla cuándo sale el próximo.", "🚆", [E("cuándo", "когда́"), E("el próximo", "сле́дующий|по́езд")], "Когда́ сле́дующий по́езд?"],
     ["En la habitación del hotel algo no funciona. Avisa en la recepción.", "🔧", [E("que hay un problema", "не рабо́тает|пробле́ма")], "Здесь что́-то не рабо́тает."],
-    ["No sabes qué hacer. Pregúntale a la persona de la boletería.", "🤔", [E("qué hacer", "что мне де́лать|что де́лать")], "Что мне де́лать?"],
+    ["No sabes qué hacer. Pregúntale a la persona de la taquilla.", "🤔", [E("qué hacer", "что мне де́лать|что де́лать")], "Что мне де́лать?"],
     ["Buscas la estación de metro y no la encuentras.", "🚇", [E("qué buscas", "не могу́ найти́ ста́нцию|ищу́ ста́нцию|ищу́ метро́|где ста́нция|где метро́|~метро́|~ста́нция")], "Извини́те, я не могу́ найти́ ста́нцию метро́."],
     ["Llegas a la recepción. Di que tienes un problema.", "⚠️", [E("que tienes un problema", "пробле́ма")], "У меня́ пробле́ма."]
   ].forEach(([pide, esc, nec, modelo], j) => situ("s6-" + j, "situacion", 6, { pide, escena: esc, nec, modelo, grupo: "S6-" + j }));
@@ -1004,7 +1004,7 @@ function ejerciciosUnidad11() {
     ["Pediste una ensalada y te trajeron sopa. Avísale al camarero.", "🥗", [E("lo que pediste", "сала́т")], "Извини́те, я хоте́л сала́т."],
     ["Alguien te habla en ruso muy rápido.", "🗯️", [E("que no entiendes", "не понима́ю|повтори́те|ещё раз")], "Извини́те, я не понима́ю. Повтори́те, пожа́луйста."],
     ["Te preguntan si hablas ruso. Contesta.", "🇷🇺", [E("tu respuesta", "говорю́|немно́го|да|нет")], "Да, немно́го говорю́ по-ру́сски."],
-    ["Perdiste el tren. Explícalo en la boletería y pregunta qué hacer.", "🚆", [E("qué pasó", "опозда́л|опозда́ла"), E("qué hacer", "что мне де́лать|что де́лать|когда́|сле́дующий")], "Я опозда́л на по́езд. Что мне де́лать?"],
+    ["Perdiste el tren. Explícalo en la taquilla y pregunta qué hacer.", "🚆", [E("qué pasó", "опозда́л|опозда́ла"), E("qué hacer", "что мне де́лать|что де́лать|когда́|сле́дующий")], "Я опозда́л на по́езд. Что мне де́лать?"],
     ["No encuentras tu hotel y le preguntas a un policía.", "👮", [E("qué buscas", "не могу́ найти́ гости́ницу|ищу́ гости́ницу|где гости́ница|~гости́ница")], "Извини́те, где гости́ница?"],
     ["Una vendedora te pregunta «Ка́ртой и́ли нали́чными?».", "💳", [E("cómo pagas", "ка́ртой|нали́чными")], "Ка́ртой, пожа́луйста."]
   ].forEach(([pide, esc, nec, modelo], j) => situ("s11-" + j, "situacion", 11, { pide, escena: esc, nec, modelo, grupo: "S11-" + j, dif: 3 }));
@@ -1135,7 +1135,7 @@ function ejerciciosUnidad11() {
   pq("asp-0", 2, "u11-hochu-kupit", "Я хочу́ купи́ть э́ту руба́шку.", "купи́ть", "Es una compra concreta, una vez", ["Es algo que se repite", "Es en pasado"], "Una vez: el verbo de resultado.");
   pq("asp-1", 2, "u11-hochu-kupit", "Я люблю́ покупа́ть оде́жду.", "покупа́ть", "Es algo que se repite, en general", ["Es una compra concreta, una vez", "Es en pasado"], "En general: el verbo de proceso.");
   pq("asp-2", 2, "u11-hochu-kupit", "Мо́жно заплати́ть ка́ртой?", "заплати́ть", "Es esta compra, ahora", ["Es en general: si se acepta tarjeta", "Es en pasado"], "Una vez, ahora: заплати́ть.");
-  par("asp-0", 2, "u11-hochu-kupit", "¿Cuál pregunta si en ese negocio, en general, aceptan tarjeta?", "Здесь мо́жно плати́ть ка́ртой?", "Мо́жно заплати́ть ка́ртой?", "En general: плати́ть.");
+  par("asp-0", 2, "u11-hochu-kupit", "¿Cuál pregunta si en esa tienda, en general, aceptan tarjeta?", "Здесь мо́жно плати́ть ка́ртой?", "Мо́жно заплати́ть ка́ртой?", "En general: плати́ть.");
   par("asp-1", 2, "u11-hochu-kupit", "¿Cuál dice «quiero comprar este jersey»?", "Я хочу́ купи́ть э́тот сви́тер.", "Я люблю́ покупа́ть сви́теры.", "Una compra concreta: купи́ть.");
   nat("asp-0", 2, "u11-hochu-kupit", "Я хочу́ купи́ть э́ту ку́ртку.", "Я хочу́ покупа́ть э́ту ку́ртку.", "Una compra concreta: купи́ть.", { pide: "Una compra concreta, ahora. ¿Cuál es la correcta?" });
   nat("asp-1", 2, "u11-hochu-kupit", "Мне ну́жно верну́ть ку́ртку.", "Мне ну́жно возвраща́ть ку́ртку.", "Una vez: верну́ть.", { pide: "Una sola vez. ¿Cuál es la correcta?" });

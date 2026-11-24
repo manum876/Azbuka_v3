@@ -63,6 +63,9 @@ const EJ_U1 = ES_OK ? ejerciciosUnidadEs1() : [];
 const AVISO = "В испанском знак ударения (´) — часть написания: если его забыть, ответ засчитывается как «Почти». Перевёрнутые знаки ¿ и ¡ не обязательны. Для ответов включи испанскую клавиатуру (модуль 1).";
 /* Palabras de la unidad: las de las letras (Alfabeto) y las de los módulos 9 y 10 */
 const OBJETIVO_U1 = ES_OK ? es1Objetivo() : [];
+/* «Слова выучены» (24/11/2026, Manu): mismo criterio que Azbuka, las palabras del léxico
+   con la unidad en introducedIn o en appearsIn. */
+const CONTEO_U1 = ES_OK ? LEXICON_ES.filter(e => (e.introducedIn || []).indexOf(1) >= 0 || (e.appearsIn || []).indexOf(1) >= 0).map(e => e.id) : [];
 const NUM = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte"];
 const FILAS_NUM = NUM.slice(0, 11).map((w, i) => [{ es: w, ru: String(i) }, NUM[i + 11] ? { es: NUM[i + 11], ru: String(i + 11) } : null]);
 const muestra = l => l.upper.length > 1 ? l.lower : l.upper + " " + l.lower;
@@ -323,7 +326,7 @@ function App() {
   }
   const mod = modId ? unidadEs1Modulo(modId) : null;
   const dominadas = ALFABETO_ES.filter(l => niveles[l.upper] === 2).length;
-  const palabrasDom = OBJETIVO_U1.filter(id => azItem("lex:" + id).level === 2).length;
+  const palabrasDom = CONTEO_U1.filter(id => azItem("lex:" + id).level === 2).length;
   const idx = mod ? U.modulos.indexOf(mod) : -1;
   const vecino = d => { for (let k = idx + d; k >= 0 && k < U.modulos.length; k += d) if (U.modulos[k].tipo !== "pronto") return U.modulos[k]; return null; };
   const prev = mod && vecino(-1), next = mod && vecino(1);
@@ -337,7 +340,7 @@ function App() {
 
   /* ── Portada de la unidad ── */
   const portada = h(AzPortadaUnidad, { u: U, c, green, visto: Math.max(visto, 2), examen: examenU1, onPracticar: practicarUnidad, onAbrir: abrirModulo,
-    progreso: [{ label: "Буквы выучены", valor: dominadas, total: ALFABETO_ES.length }, { label: "Слова выучены", valor: palabrasDom, total: OBJETIVO_U1.length }],
+    progreso: [{ label: "Буквы выучены", valor: dominadas, total: ALFABETO_ES.length }, { label: "Слова выучены", valor: palabrasDom, total: CONTEO_U1.length }],
     extraModulo: m => m.letras ? h("div", { className: "mod-l" }, m.letras.map(x => h("span", { key: x, lang: "es",
       style: niveles[x] === 2 ? { color: green, borderColor: green + "88" } : niveles[x] === 1 ? { color: YELLOW, borderColor: YELLOW + "88" } : null }, x))) : null });
 

@@ -59,7 +59,7 @@ const U8_COMP = {
   "изуча́ть": [["ру́сский", "ruso"]], "гуля́ть": [["в па́рке", "por el parque"]], "отдыха́ть": [["до́ма", "en casa"]], "гото́вить": [["у́жин", "la cena"], ["суп", "sopa"]],
   "покупа́ть": [["хлеб", "pan"], ["молоко́", "leche"]], "де́лать": [["рабо́ту", "el trabajo"]], "игра́ть": [["", ""]], "спать": [["", ""]], "пить": [["ко́фе", "café"], ["чай", "té"]], "есть": [["пи́ццу", "pizza"], ["суп", "sopa"]],
   "обе́дать": [["в рестора́не", "en el restaurante"], ["до́ма", "en casa"]], "у́жинать": [["до́ма", "en casa"], ["в кафе́", "en el café"]], "за́втракать": [["до́ма", "en casa"]],
-  "ходи́ть": [["в магази́н", "al negocio"], ["в кино́", "al cine"], ["в парк", "al parque"]], "е́здить": [["в Москву́", "a Moscú"], ["в Мадри́д", "a Madrid"], ["в Пари́ж", "a París"]],
+  "ходи́ть": [["в магази́н", "a la tienda"], ["в кино́", "al cine"], ["в парк", "al parque"]], "е́здить": [["в Москву́", "a Moscú"], ["в Мадри́д", "a Madrid"], ["в Пари́ж", "a París"]],
   "быть": [["в Москве́", "en Moscú"], ["в рестора́не", "en el restaurante"], ["на рабо́те", "en el trabajo"], ["до́ма", "en casa"], ["в Пари́же", "en París"]]
 };
 const U8_TIEMPO = [["вчера́", "ayer"], ["вчера́ у́тром", "ayer por la mañana"], ["вчера́ ве́чером", "ayer por la noche"], ["неда́вно", "hace poco"], ["на про́шлой неде́ле", "la semana pasada"],
@@ -120,7 +120,7 @@ const U8_GRUPOS = [
 const U8_LECTURAS = [
   { id: "dia", titulo: "Вчера́", lineas: [
       ["Вчера́ я рабо́тал.", "Ayer trabajé."], ["У́тром я был до́ма.", "Por la mañana estuve en casa."], ["Днём я рабо́тал в о́фисе.", "Por la tarde trabajé en la oficina."],
-      ["Ве́чером я ходи́л в магази́н.", "Por la noche fui al negocio."], ["Пото́м я гото́вил у́жин и смотре́л фильм.", "Después cociné la cena y miré una película."]],
+      ["Ве́чером я ходи́л в магази́н.", "Por la noche fui a la tienda."], ["Пото́м я гото́вил у́жин и смотре́л фильм.", "Después cociné la cena y miré una película."]],
     preguntas: [["¿Dónde estuvo por la mañana?", "до́ма", ["в о́фисе", "в магази́не"]], ["¿Adónde fue por la noche?", "в магази́н", ["в кино́", "в парк"]], ["¿Qué miró?", "фильм", ["телеви́зор", "футбо́л"]]],
     vf: [["У́тром я был в о́фисе.", false], ["Ве́чером я гото́вил у́жин.", true], ["Днём я рабо́тал.", true]] },
   { id: "finde", titulo: "В суббо́ту", lineas: [
@@ -329,8 +329,8 @@ const UNIDAD_8 = {
           texto: "Para «fui al cine» el ruso usa ходи́л (a pie) o е́здил (en un vehículo). Los dos quieren decir «fui y volví»: el viaje ya terminó. Después va adónde, con в o на + acusativo, como con идти́.\nА́нна ходи́ла в кино́ («Ana fue al cine»: ya volvió).",
           ejemplos: [
             { ru: "Вчера́ я {ходи́л} в кино́.", es: "Ayer fui al cine.", por: "A pie, ida y vuelta: ходи́л." },
-            { ru: "Мы {е́здили} в Москву́.", es: "Fuimos a Moscú.", por: "En un vehículo (tren, avión, auto): е́здили." },
-            { ru: "Она́ {ходи́ла} в магази́н.", es: "Ella fue al negocio.", por: "Fue y ya volvió." }],
+            { ru: "Мы {е́здили} в Москву́.", es: "Fuimos a Moscú.", por: "En un vehículo (tren, avión, coche): е́здили." },
+            { ru: "Она́ {ходи́ла} в магази́н.", es: "Ella fue a la tienda.", por: "Fue y ya volvió." }],
           destacado: "Я ходи́л в кино́. = Fui al cine (y volví).",
           errores: [{ mal: "Я ходи́л в Пари́ж.", bien: "Я {е́здил} в Пари́ж.", por: "A París no se va a pie: е́здил, en un vehículo." }],
           mas: { texto: "¿Y шёл? шёл es el pasado de идти́: «iba», en camino, sin decir si llegó. Sirve para contar qué pasaba mientras: Я шёл домо́й («iba para casa»). Para «fui y volví», siempre ходи́л o е́здил.",
@@ -406,7 +406,7 @@ const UNIDAD_8 = {
             { pide: "«Ayer escribí la carta (y la mandé)».", opciones: ["Вчера́ я написа́л письмо́.", "Вчера́ я писа́л письмо́."], ok: "Вчера́ я написа́л письмо́.", por: "La carta está terminada: resultado." },
             { pide: "«Estuve mirando televisión toda la noche».", opciones: ["Я смотре́л телеви́зор весь ве́чер.", "Я посмотре́л телеви́зор весь ве́чер."], ok: "Я смотре́л телеви́зор весь ве́чер.", por: "Cuánto duró: proceso." }] },
         { id: "u8-aspecto-pares", titulo: "Cómo se forman las parejas",
-          texto: "La mayoría de las veces, el de resultado es el mismo verbo con algo adelante. Cada verbo tiene el suyo, así que se aprenden de a dos:\nчита́ть → **про**чита́ть · писа́ть → **на**писа́ть · де́лать → **с**де́лать\nсмотре́ть → **по**смотре́ть · за́втракать → **по**за́втракать · обе́дать → **по**обе́дать · у́жинать → **по**у́жинать\nгото́вить → **при**гото́вить\nOtras veces cambia el final o es otra palabra:\nпокупа́ть → купи́ть · встава́ть → встать · просыпа́ться → просну́ться · возвраща́ться → верну́ться",
+          texto: "La mayoría de las veces, el de resultado es el mismo verbo con algo adelante. Cada verbo tiene el suyo, así que se aprenden en parejas:\nчита́ть → **про**чита́ть · писа́ть → **на**писа́ть · де́лать → **с**де́лать\nсмотре́ть → **по**смотре́ть · за́втракать → **по**за́втракать · обе́дать → **по**обе́дать · у́жинать → **по**у́жинать\nгото́вить → **при**гото́вить\nOtras veces cambia el final o es otra palabra:\nпокупа́ть → купи́ть · встава́ть → встать · просыпа́ться → просну́ться · возвраща́ться → верну́ться",
           ejemplos: [
             { ru: "Я {сде́лал} рабо́ту.", es: "Hice el trabajo (está hecho).", por: "**с-** + де́лал." },
             { ru: "Она́ {пригото́вила} у́жин.", es: "Ella preparó la cena (está lista).", por: "**при-** + гото́вила." },
@@ -496,13 +496,13 @@ const UNIDAD_8 = {
             { mal: "Я е́здил в Пари́же.", bien: "Я е́здил {в Пари́ж}.", por: "Con е́здил, adónde: acusativo." }],
           chequeo: [{ pide: "Мы бы́ли ___.", opciones: ["в Мадри́де", "в Мадри́д"], ok: "в Мадри́де", por: "Con бы́ли, dónde: prepositivo." }] },
         { id: "u8-nunca", titulo: "Nunca, por primera vez",
-          texto: "Para las experiencias:\nникогда́ не + verbo: Я никогда́ не́ был в Москве́ («nunca estuve en Moscú»).\nвпервы́е (por primera vez): Я впервы́е был в Москве́ в про́шлом году́.\nPara preguntar si alguien estuvo alguna vez, alcanza con la pregunta: Ты был в Москве́?",
+          texto: "Para las experiencias:\nникогда́ не + verbo: Я никогда́ не́ был в Москве́ («nunca estuve en Moscú»).\nвпервы́е (por primera vez): Я впервы́е был в Москве́ в про́шлом году́.\nPara preguntar si alguien estuvo alguna vez, basta con la pregunta: Ты был в Москве́?",
           ejemplos: [
             { ru: "Я {никогда́ не́ был} в Ри́ме.", es: "Nunca estuve en Roma.", por: "никогда́ + не, como en presente." },
             { ru: "Мы {впервы́е} е́здили на мо́ре.", es: "Fuimos al mar por primera vez.", por: "впервы́е, sin preposición." },
             { ru: "Ты {был} на экску́рсии?", es: "¿Estuviste en la excursión?", por: "на экску́рсии: prepositivo." }],
           errores: [{ mal: "Я никогда́ был в Москве́.", bien: "Я никогда́ {не́} был в Москве́.", por: "Con никогда́ hace falta не." }],
-          mas: { texto: "Para contar un viaje sirve todo lo de la unidad: Ле́том мы е́здили на мо́ре. Бы́ло жа́рко. Мы ходи́ли на экску́рсии, купи́ли сувени́ры и сфотографи́ровали го́ры… El viaje (fuimos y volvimos), cómo fue, lo que pasaba y lo que hicimos de a una cosa.",
+          mas: { texto: "Para contar un viaje sirve todo lo de la unidad: Ле́том мы е́здили на мо́ре. Бы́ло жа́рко. Мы ходи́ли на экску́рсии, купи́ли сувени́ры и сфотографи́ровали го́ры… El viaje (fuimos y volvimos), cómo fue, lo que pasaba y lo que hicimos, una cosa tras otra.",
             ejemplos: [
               { ru: "Мы {купи́ли} сувени́р.", es: "Compramos un recuerdo.", por: "Resultado: lo tenemos." },
               { ru: "Я {сфотографи́ровал} го́ру.", es: "Le saqué una foto a la montaña.", por: "сфотографи́ровать: de resultado." }] },

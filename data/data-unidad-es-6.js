@@ -357,7 +357,7 @@ const UNIDAD_ES_6 = {
         {
           id: "es6-solo-uno",
           titulo: "Пока — одно местоимение",
-          texto: "Два местоимения подряд («скажи мне это» — **dímelo**) — это урок 11. И «не бери» (**no lo tomes**) использует другую форму, она тоже будет позже. Пока — только утвердительное повелительное с одним местоимением.",
+          texto: "Два местоимения подряд («скажи мне это» — **dímelo**) — это урок 12. И «не бери» (**no lo tomes**) использует другую форму, она тоже будет позже. Пока — только утвердительное повелительное с одним местоимением.",
           ojo: "**Dime** — «скажи мне», очень частое слово. Так начинают разговор по телефону и в магазине: **Dime** — «слушаю тебя»."
         }
       ]
@@ -1255,10 +1255,10 @@ const ES6_BASICAS_MOD = [
   ["es6m4", ["adelante", "atrás", "acercarse"], {
     id: "es6-adelante",
     titulo: "Adelante, atrás · acercarse",
-    texto: "**delante** и **detrás** — где: «впереди», «сзади». **adelante** и **atrás** — куда, движение: **Sigue adelante** — иди дальше вперёд; **Vuelve atrás** — вернись назад. **¡Adelante!** — «Входите!», когда стучат в дверь.\n\n**acercarse** — «подходить, приближаться»: **Acércate** — подойди; **Me acerco a la ventana** — я подхожу к окну.",
+    texto: "a**delante** и **atrás** часто указывают направление движения: «вперёд» и «назад». delante и **detrás** обозначают положение: «впереди» и «сзади». Sigue **adelante** — «продолжай идти вперёд»; **Vuelve atrás** — «вернись назад». **¡Adelante!** — «Входите!» или «Проходите!» — так приглашают войти.\n\n**acercarse** — «подходить, приближаться»: **Acércate** — «подойди»; **Me acerco a la ventana** — «я подхожу к окну».",
     ejemplos: [
-      { es: "Sigue adelante hasta el semáforo.", ru: "Иди дальше вперёд до светофора." },
-      { es: "La plaza no está aquí: vuelve atrás.", ru: "Площадь не здесь: вернись назад." },
+      { es: "Sigue adelante hasta el semáforo.", ru: "Иди прямо до светофора." },
+      { es: "La plaza no está aquí: vuelve atrás.", ru: "Площадь не здесь: вернись." },
       { es: "Acércate, por favor.", ru: "Подойди, пожалуйста." }
     ]
   }],
@@ -1271,7 +1271,7 @@ const ES6_BASICAS_MOD = [
       { es: "— ¿Cómo te sientes? — Bien, gracias.", ru: "— Как ты себя чувствуешь? — Хорошо, спасибо." },
       { es: "Tienes la cara roja: ¿tienes fiebre?", ru: "У тебя красное лицо: у тебя температура?" }
     ],
-    ojo: "«Я сажусь» тоже звучит **me siento** (от другого глагола). Что имеется в виду, понятно по смыслу."
+    ojo: "Форма **me siento** означает и «я сажусь» (от sentarse), и «я себя чувствую» (от sentirse). Значение понятно по контексту."
   }],
   /* Segunda ronda de frecuentes (Manu, 22/11/2026) */
   ["es6m4", ["norte", "sur", "este·sust", "oeste", "señal"], {
@@ -1280,7 +1280,7 @@ const ES6_BASICAS_MOD = [
     texto: "Стороны света: **el norte** — север, **el sur** — юг, **el este** — восток, **el oeste** — запад. Все мужского рода: **en el norte de España, al sur de Madrid**.\n\n**la señal** — «знак, сигнал»: дорожный знак, сигнал телефона (**No tengo señal** — нет сети).",
     ejemplos: [
       { es: "Barcelona está en el este de España.", ru: "Барселона — на востоке Испании." },
-      { es: "Sigue la señal hasta la estación.", ru: "Иди по указателю до вокзала." },
+      { es: "Sigue la señal hasta la estación.", ru: "Следуй указателю до вокзала." },
       { es: "En el metro no tengo señal.", ru: "В метро у меня нет сети." }
     ],
     ojo: "**este** — это ещё и «этот». Восток — существительное: **el este**."
@@ -1316,7 +1316,7 @@ const ES6_BASICAS_MOD = [
 ];
 const ES6_BASICAS = [
   ["situacion-frase", "elegir", 3, "es6-a-traves", "Ты идёшь на работу через парк.", "", "Voy al trabajo a través del parque.", ["Voy al trabajo a través el parque.", "Voy al trabajo través del parque."], "**a través de** + **el** = **a través del**.", "a través de"],
-  ["situacion-frase", "elegir", 4, "es6-adelante", "Кто-то стучит в дверь, ты разрешаешь войти.", "", "¡Adelante!", ["¡Delante!", "¡Atrás!"], "**¡Adelante!** — «Входите!».", "adelante"],
+  ["situacion-frase", "elegir", 4, "es6-adelante", "Кто-то стучит в дверь, и ты приглашаешь его войти.", "", "¡Adelante!", ["¡Delante!", "¡Atrás!"], "**¡Adelante!** — «Входите!».", "adelante"],
   ["imperativo-elegir", "elegir", 4, "es6-adelante", "Что подходит?", "Sigue ___ hasta el puente.", "adelante", ["delante", "atrás"], "Движение вперёд — **adelante**.", "adelante"],
   ["imperativo-elegir", "elegir", 4, "es6-adelante", "Что подходит?", "La plaza no está aquí: vuelve ___.", "atrás", ["detrás", "adelante"], "Движение назад — **atrás**.", "atrás"],
   ["imperativo-elegir", "elegir", 4, "es6-adelante", "Что подходит?", "___, Ana: aquí hay sitio.", "Acércate", ["Acerca", "Te acerca"], "Императив с **te**: **acércate**.", "acercarse"],
@@ -1330,7 +1330,7 @@ const ES6_BASICAS = [
   ["basica", "elegir", 4, "es6-norte", "Восток — как по-испански?", "", "el este", ["el oeste", "el norte"], "**el este** — «восток».", "este·sust"],
   ["basica", "elegir", 4, "es6-norte", "Запад — как по-испански?", "", "el oeste", ["el este", "el sur"], "**el oeste** — «запад».", "oeste"],
   ["basica", "elegir", 4, "es6-norte", "Телефон не ловит. Что скажешь?", "", "No tengo señal.", ["No tengo signo.", "No hay la señal."], "Сеть, сигнал телефона — **la señal**.", "señal"],
-  ["basica", "elegir", 2, "es6-asiento", "В автобусе ты хочешь сесть. Что спросишь?", "", "¿Está libre este asiento?", ["¿Es libre este asiento?", "¿Está libre esta asiento?"], "Свободно ли — **estar libre**; **el asiento** — мужской род.", "asiento"],
+  ["basica", "elegir", 2, "es6-asiento", "Ты хочешь сесть в автобусе. Что спросишь?", "", "¿Está libre este asiento?", ["¿Es libre este asiento?", "¿Está libre esta asiento?"], "Свободно ли — **estar libre**; **el asiento** — мужской род.", "asiento"],
   ["basica", "elegir", 8, "es6-piel", "Что подходит?", "Me duele el ___: no puedo mover la cabeza.", "cuello", ["piel", "pie"], "Шея — **el cuello**.", "cuello"],
   ["basica", "elegir", 8, "es6-piel", "Что подходит?", "Con el sol, la ___ está roja.", "piel", ["cuello", "pelo"], "**la piel** — «кожа», женский род.", "piel"],
   ["basica", "escribir", 8, "es6-piel", "Дышать — как по-испански? Напиши.", "Tengo tos y no puedo ___ bien.", "respirar", [], "**respirar** — «дышать».", "respirar"],

@@ -10,13 +10,12 @@
 
    Direcciones:
      azbuka → ruso para hispanohablantes (la app de hoy).
-     abece  → español para rusohablantes. ABIERTA desde el 04/11/2026 (Manu):
-              la ven las cuentas habilitadas como Abecé (Ajustes → Accesos).
-              Antes estaba bloqueada (abierta: false) y solo la veían admin y
-              revisores con Ajustes → «Abecé en construcción», que sigue
-              sirviendo para cambiar de dirección en su teléfono
-              (azDireccion() en js/core.js). Lo que abece todavía no tiene
-              (índice, algunos módulos) se toma de azbuka.
+     abece  → español para rusohablantes. ABIERTA desde el 04/11/2026 (Manu);
+              desde el 22/11/2026 cada alumno elige ES o RU al registrarse.
+              Admin y revisores cambian la dirección de su teléfono en
+              Ajustes → «Dirección de este teléfono» (azDireccion() en
+              js/core.js). El índice es el mismo archivo para las dos
+              (azbuka-index-1.html), con los textos de cada dirección.
 
    lexico: el archivo del léxico de cada dirección. Lo carga el Diccionario
    (ficha.html) con azEscribirLexico() (core.js); el buscador del menú de
@@ -73,6 +72,7 @@ var AZ_CATALOGO = {
       buscar: "Buscar en el léxico…",
       limpiarBusqueda: "Limpiar búsqueda",
       sinResultados: "Sin resultados",
+      cargando: "Cargando…",
       curso: "Azbuka",
       indice: "Índice",
       modulos: "Módulos de apoyo",
@@ -103,7 +103,7 @@ var AZ_CATALOGO = {
       reportePendiente: "No hay conexión: el reporte quedó guardado y se manda solo cuando vuelva internet.",
       reporteMail: "Se abrió tu app de correo con el reporte escrito: solo falta enviarlo.",
       /* Copia de seguridad (AzCopiaSeguridad en core.js, 27/10/2026) */
-      copiaIntro: "Todo lo que haces en Azbuka (tus notas y tu progreso en unidades, letras y ejercicios) se guarda en este teléfono. Guarda una copia de vez en cuando, en Archivos o mandándotela por mail: si se borran los datos del navegador o cambias de teléfono, la restauras y sigues donde estabas.",
+      copiaIntro: "Tu progreso y tus notas ya se guardan en la nube con tu cuenta. Si quieres, guarda además una copia en Archivos o envíatela por mail.",
       copiaGuardar: "Guardar copia",
       copiaRestaurar: "Restaurar copia",
       copiaNoEs: "Ese archivo no es una copia de Azbuka.",
@@ -111,7 +111,7 @@ var AZ_CATALOGO = {
       copiaConfirmar: "¿Restaurar la copia{cuando}? Se reemplazan tus notas y todo tu progreso por los de la copia.",
       copiaDel: " del ",
       copiaFallo: "No se pudo restaurar la copia.",
-      fecha: "es-AR",
+      fecha: "es-ES",
     },
   },
 
@@ -120,7 +120,7 @@ var AZ_CATALOGO = {
     abierta: true,           /* abierta a los alumnos el 04/11/2026 (Manu); antes, bloqueada desde el 22/10/2026 */
     marca: { nombre: "Abecé", lema: "Учи испанский с нуля", glyph: "Ab", icon: "red" },
     instalar: { nombre: "Abecé", manifest: "manifest-abece.webmanifest", icono: "assets/apple-touch-icon-abece.png", favicon: "assets/icon-abece-192.png" },
-    indice: null,            /* abece-index-1.html cuando exista; mientras, el de azbuka */
+    indice: null,            /* usa azbuka-index-1.html, que arma el índice de cada dirección */
     buscador: "azBuscarEs",  /* busca en el léxico español, en español o en ruso (core.js, 27/10/2026) */
     lexico: "data/data-lexicon-es.js",
     /* Unidades (claude/PROGRAMA_ABECE.md): se suman a medida que se construyen (28/10/2026: la U1; 02/11/2026: la U2 y la U3; 04/11/2026: la U4; 05/11/2026: la U5 y la U6; 12/11/2026: la U7; 13/11/2026: la U8) */
@@ -138,7 +138,7 @@ var AZ_CATALOGO = {
       { id: 11, title: "Решаем проблемы", desc: "Subjuntivo, «не делай» и вежливое usted; поломки в квартире, учреждения, банк и официальное письмо.", href: "abece-11.html", lista: true },
       { id: 12, title: "Мнения и аргументы", desc: "Se lo doy и dímelo, que / lo que, por и para, «хотя» и «поэтому», se vende; мнение, новости, природа и технологии.", href: "abece-12.html", lista: true },
       { id: 13, title: "Испанский для жизни", desc: "Pluscuamperfecto, косвенная речь (dijo que…), чувства, жизнь в Испании, настоящие тексты и аудио; мастерская письма и проект.", href: "abece-13.html", lista: true },
-      { id: 14, title: "Финальный экзамен", desc: "Шесть частей, которые проверяют все 13 уроков.", href: "abece-14.html", lista: true, examen: true },
+      { id: 14, title: "Итоговый экзамен", desc: "Шесть частей, которые проверяют все 13 уроков.", href: "abece-14.html", lista: true, examen: true },
     ],
     /* Módulos de apoyo (claude/INSTRUCCIONES_MODULOS_ABECE.md §9): en el mismo
        orden y con el mismo color que su equivalente de Azbuka, glifo de dos
@@ -155,12 +155,13 @@ var AZ_CATALOGO = {
       { id: "gramatica", title: "Грамматика", desc: "Род, число, артикли и местоимения: формы и таблицы", href: "gramatica.html", icon: "purple", glyph: "Gr" },
       { id: "cuaderno", title: "Тетрадь", desc: "Твои заметки и то, что ты сохраняешь в приложении", href: "cuaderno.html", icon: "pink", glyph: "Cu" },
     ],
-    /* BORRADOR: falta la revisión de Iván. Al alumno se le habla de «ты»,
+    /* Revisado por una hablante nativa (24/11/2026). Al alumno se le habla de «ты»,
        como Azbuka usa «tú». Una clave que falte acá se muestra con el texto de azbuka. */
     textos: {
       buscar: "Поиск в словаре…",
       limpiarBusqueda: "Очистить поиск",
       sinResultados: "Ничего не найдено",
+      cargando: "Загрузка…",
       curso: "Abecé",
       indice: "Оглавление",
       modulos: "Справочные разделы",
@@ -190,7 +191,7 @@ var AZ_CATALOGO = {
       reporteEnviado: "✓ Отправлено. Спасибо! Мы всё проверим.",
       reportePendiente: "Нет соединения: сообщение сохранено и отправится само, когда появится интернет.",
       reporteMail: "Открылось почтовое приложение с готовым сообщением: осталось только отправить.",
-      copiaIntro: "Всё, что ты делаешь в Abecé (заметки и прогресс в уроках, буквах и упражнениях), хранится в этом телефоне. Время от времени сохраняй копию в «Файлы» или отправляй её себе по почте: если данные браузера сотрутся или ты сменишь телефон, ты её восстановишь и продолжишь с того же места.",
+      copiaIntro: "Твой прогресс и заметки уже сохраняются в облаке вместе с аккаунтом. Если хочешь, сохрани ещё копию в «Файлы» или отправь её себе по почте.",
       copiaGuardar: "Сохранить копию",
       copiaRestaurar: "Восстановить",
       copiaNoEs: "Этот файл не является копией приложения.",

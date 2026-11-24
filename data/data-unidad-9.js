@@ -36,7 +36,7 @@ const U9_TIEMPO = [["за́втра", "mañana"], ["послеза́втра", "
 const U9_INTENCION = { "хоте́ть": ["quiero", "quieres", "quiere", "queremos", "quieren", "quieren"], "плани́ровать": ["planeo", "planeas", "planea", "planeamos", "planean", "planean"],
   "собира́ться": ["tengo pensado", "tienes pensado", "tiene pensado", "tenemos pensado", "tienen pensado", "tienen pensado"], "мечта́ть": ["sueño con", "sueñas con", "sueña con", "soñamos con", "sueñan con", "sueñan con"] };
 /* Destinos: [ruso del lugar, a pie (пойду́) o en vehículo (пое́ду), español «a…», «en…»] */
-const U9_DESTINOS = [["рестора́н", "п", "al restaurante", "en el restaurante"], ["магази́н", "п", "al negocio", "en el negocio"], ["парк", "п", "al parque", "en el parque"],
+const U9_DESTINOS = [["рестора́н", "п", "al restaurante", "en el restaurante"], ["магази́н", "п", "a la tienda", "en la tienda"], ["парк", "п", "al parque", "en el parque"],
   ["кино́", "п", "al cine", "en el cine"], ["рабо́та", "е", "al trabajo", "en el trabajo"], ["Москва́", "е", "a Moscú", "en Moscú"], ["Мадри́д", "е", "a Madrid", "en Madrid"],
   ["Испа́ния", "е", "a España", "en España"], ["Росси́я", "е", "a Rusia", "en Rusia"], ["Пари́ж", "е", "a París", "en París"]];
 const U9_TRANSPORTE = [["по́езд", "en tren", "🚆"], ["самолёт", "en avión", "✈️"], ["маши́на", "en coche", "🚗"]];
@@ -303,7 +303,7 @@ const UNIDAD_9 = {
             { ru: "Мы {собира́емся} вы́учить ру́сский.", es: "Tenemos pensado aprender ruso.", por: "собира́ться + infinitivo." },
             { ru: "Моя́ {мечта́} — жить в Москве́.", es: "Mi sueño es vivir en Moscú.", por: "мечта́, el sustantivo: el sueño." }],
           destacado: "хочу́ / плани́рую / собира́юсь / мечта́ю / наде́юсь + infinitivo",
-          mas: { texto: "Después de estos verbos, el infinitivo puede ser de proceso o de resultado, con la misma lógica de siempre: para una acción concreta, que va a terminar, el de resultado (Я хочу́ купи́ть маши́ну, «quiero comprar un auto»); para una actividad o algo que se repite, el de proceso (Я хочу́ путеше́ствовать, «quiero viajar»).",
+          mas: { texto: "Después de estos verbos, el infinitivo puede ser de proceso o de resultado, con la misma lógica de siempre: para una acción concreta, que va a terminar, el de resultado (Я хочу́ купи́ть маши́ну, «quiero comprar un coche»); para una actividad o algo que se repite, el de proceso (Я хочу́ путеше́ствовать, «quiero viajar»).",
             ejemplos: [
               { ru: "Я хочу́ {купи́ть} биле́т.", es: "Quiero comprar el billete.", por: "Una compra concreta: resultado." },
               { ru: "Я хочу́ {рабо́тать} до́ма.", es: "Quiero trabajar en casa.", por: "Una actividad: proceso." }] },
@@ -390,7 +390,7 @@ const UNIDAD_9 = {
         { id: "u9-orden-fut", titulo: "Un plan en orden",
           texto: "Como al contar un día pasado, un plan en orden va con verbos de resultado: cada cosa termina y empieza la siguiente. Los conectores son los mismos: снача́ла, пото́м, зате́м, наконе́ц. Para la lista de lo que hay que hacer, спи́сок; para cada cosa, зада́ча. Y si vas a llegar a todo: успе́ю.",
           ejemplos: [
-            { ru: "{Снача́ла} я {зако́нчу} рабо́ту, {пото́м} {пойду́} в магази́н.", es: "Primero voy a terminar el trabajo, después voy a ir al negocio.", por: "Una tras otra: resultado." },
+            { ru: "{Снача́ла} я {зако́нчу} рабо́ту, {пото́м} {пойду́} в магази́н.", es: "Primero voy a terminar el trabajo, después voy a ir a la tienda.", por: "Una tras otra: resultado." },
             { ru: "Ве́чером я {напишу́} спи́сок.", es: "Por la noche voy a escribir la lista.", por: "Una tarea con un resultado: напишу́." },
             { ru: "{Наконе́ц} я {отдохну́}.", es: "Por fin voy a descansar.", por: "отдохну́ть → отдохну́." }],
           mas: { texto: "успе́ть es «llegar a tiempo», «alcanzar a hacer algo»: Я успе́ю («voy a llegar»), Я не успе́ю («no voy a llegar»). Va con el infinitivo de resultado: Я успе́ю купи́ть биле́т? («¿voy a llegar a comprar el billete?»).",
@@ -398,7 +398,7 @@ const UNIDAD_9 = {
           chequeo: [{ pide: "«Primero voy a desayunar, después voy a ir al trabajo».", opciones: ["Снача́ла я поза́втракаю, пото́м пойду́ на рабо́ту.", "Снача́ла я бу́ду за́втракать, пото́м бу́ду идти́ на рабо́ту."], ok: "Снача́ла я поза́втракаю, пото́м пойду́ на рабо́ту.", por: "Un plan en orden: resultado." }] }
       ] },
     { id: "u9m10", n: 10, tipo: "leccion", nPractica: 10, titulo: "Viajes", resumen: "Я пое́ду в Испа́нию на самолёте.",
-      intro: "Un viaje es el mejor lugar para usar los dos futuros: lo que vas a preparar, de a una cosa, y lo que vas a hacer allí.",
+      intro: "Un viaje es el mejor lugar para usar los dos futuros: lo que vas a preparar, una cosa tras otra, y lo que vas a hacer allí.",
       secciones: [
         { id: "u9-viaje-prep", titulo: "Preparar el viaje",
           texto: "Antes de viajar hay cosas que vas a hacer una vez y terminar: van con el de resultado.\nзаброни́рую гости́ницу (voy a reservar el hotel)\nкуплю́ авиабиле́т (voy a comprar el billete de avión)\nсоберу́ чемода́н (voy a armar la maleta)\nвозьму́ па́спорт (voy a llevar el pasaporte)",

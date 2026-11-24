@@ -50,7 +50,7 @@ const U5_VERBOS = {
   "есть": ["comer", "como", "comes", "come", "comemos", "comen", "e"], "учи́ться": ["estudiar (cursar)", "estudio", "estudias", "estudia", "estudiamos", "estudian", "e"],
   "просыпа́ться": ["despertarse", "me despierto", "te despiertas", "se despierta", "nos despertamos", "se despiertan", "e"],
   "возвраща́ться": ["volver", "vuelvo", "vuelves", "vuelve", "volvemos", "vuelven", "e"],
-  "стоя́ть": ["estar parado", "estoy parado", "estás parado", "está parado", "estamos parados", "están parados", "a"],
+  "стоя́ть": ["estar de pie", "estoy de pie", "estás de pie", "está de pie", "estamos de pie", "están de pie", "a"],
   "сиде́ть": ["estar sentado", "estoy sentado", "estás sentado", "está sentado", "estamos sentados", "están sentados", "a"],
   "петь": ["cantar", "canto", "cantas", "canta", "cantamos", "cantan", "a"], "танцева́ть": ["bailar", "bailo", "bailas", "baila", "bailamos", "bailan", "a"],
   "рисова́ть": ["dibujar", "dibujo", "dibujas", "dibuja", "dibujamos", "dibujan", "a"], "пла́вать": ["nadar", "nado", "nadas", "nada", "nadamos", "nadan", "a"],
@@ -133,7 +133,7 @@ const U5_LECTURAS = [
 
 /* ¿ты o вы? Situaciones (módulo 2) */
 const U5_TYVY = [["Le hablas a tu amigo.", "ты"], ["Le hablas a tu profesora.", "вы"], ["Les hablas a dos amigos.", "вы"], ["Le hablas a tu mamá.", "ты"],
-  ["Le hablas a un médico que no conoces.", "вы"], ["Le hablas a tu hermano.", "ты"], ["Le hablas a una vendedora en un negocio.", "вы"], ["Le hablas a un chico de tu edad en una fiesta.", "ты"]];
+  ["Le hablas a un médico que no conoces.", "вы"], ["Le hablas a tu hermano.", "ты"], ["Le hablas a una vendedora en una tienda.", "вы"], ["Le hablas a un chico de tu edad en una fiesta.", "ты"]];
 
 const UNIDAD_5 = {
   id: 5,
@@ -302,7 +302,7 @@ const UNIDAD_5 = {
           errores: [
             { mal: "Мы чита́ет кни́гу.", bien: "Мы {чита́ем} кни́гу.", por: "Con мы, **-ем**." },
             { mal: "Я чита́ю кни́га.", bien: "Я чита́ю {кни́гу}.", por: "Кни́га recibe la acción: acusativo." }],
-          truco: "Revisa de a una pieza: ¿quién?, ¿qué forma del verbo?, ¿acusativo?",
+          truco: "Revisa pieza por pieza: ¿quién?, ¿qué forma del verbo?, ¿acusativo?",
           chequeo: [{ pide: "Ты слу́шаешь му́зыка. ¿Dónde está el error?", opciones: ["En el verbo", "En lo que recibe la acción"], ok: "En lo que recibe la acción", por: "Му́зыка tiene que ir en acusativo: му́зыку." }] }
       ] },
     { id: "u5m7", n: 7, tipo: "leccion", nPractica: 10, titulo: "Negación", resumen: "Я не чита́ю.",
@@ -338,7 +338,7 @@ const UNIDAD_5 = {
           chequeo: [{ pide: "¿Cuál está bien?", opciones: ["Она́ никогда́ не гуля́ет.", "Она́ никогда́ гуля́ет."], ok: "Она́ никогда́ не гуля́ет.", por: "Никогда́ pide не." }] }
       ] },
     { id: "u5m8", n: 8, tipo: "leccion", nPractica: 10, titulo: "Preguntas", resumen: "Ты рабо́таешь? Где ты живёшь?",
-      intro: "Hacer preguntas en ruso es más simple que en español: muchas veces alcanza con cambiar la entonación.",
+      intro: "Hacer preguntas en ruso es más simple que en español: muchas veces basta con cambiar la entonación.",
       secciones: [
         { id: "u5-entonacion", titulo: "Con la entonación",
           texto: "Las palabras son las mismas que en la afirmación; cambia la voz, que sube en la palabra que se pregunta. No se cambia el orden ni se agrega nada. Escucha el audio de cada ejemplo.",
@@ -346,7 +346,7 @@ const UNIDAD_5 = {
             { ru: "Ты рабо́таешь.", es: "Trabajas.", por: "Afirmación: la voz baja al final." },
             { ru: "Ты {рабо́таешь}?", es: "¿Trabajas?", por: "Pregunta: la voz sube en рабо́таешь." },
             { ru: "{Ты} рабо́таешь?", es: "¿Tú trabajas?", por: "Si la voz sube en ты, se pregunta por la persona: ¿tú, o alguien más?" }],
-          mas: { texto: "La voz sube justo en la sílaba acentuada de la palabra que se pregunta y baja enseguida. Es la manera más común de preguntar en ruso cuando la respuesta es «sí» o «no». Al escribir, alcanza con el signo de pregunta final: en ruso no hay signo de apertura «¿»." } },
+          mas: { texto: "La voz sube justo en la sílaba acentuada de la palabra que se pregunta y baja enseguida. Es la manera más común de preguntar en ruso cuando la respuesta es «sí» o «no». Al escribir, basta con el signo de pregunta final: en ruso no hay signo de apertura «¿»." } },
         { id: "u5-palabras-pregunta", titulo: "Con palabras para preguntar",
           texto: "что (qué), кто (quién), где (dónde), как (cómo), почему́ (por qué), когда́ (cuándo). Van al principio, y después viene la frase en su orden normal.",
           ejemplos: [
@@ -363,7 +363,7 @@ const UNIDAD_5 = {
           chequeo: [{ pide: "— Вы понима́ете? — Да, ___.", opciones: ["понима́ете", "понима́ем"], ok: "понима́ем", por: "Si te preguntan a ti y a otros, contestas con мы." }] }
       ] },
     { id: "u5m9", n: 9, tipo: "leccion", grupo: "e", titulo: "Verbos especiales", resumen: "Быть, хоте́ть, мочь, есть y los verbos con -ся.",
-      intro: "Unos pocos verbos muy usados no siguen los modelos. No hace falta la teoría: alcanza con aprenderlos de a uno.",
+      intro: "Unos pocos verbos muy usados no siguen los modelos. No hace falta la teoría: basta con aprenderlos uno por uno.",
       secciones: [
         { id: "u5-byt", titulo: "Быть: el verbo que no se dice",
           texto: "Быть es «ser» y «estar», pero en presente no se dice. Por eso, para presentarse, Ма́ша dice Я Ма́ша y Лу́кас dice Я Лу́кас: «soy Masha», «soy Lucas», sin verbo.",

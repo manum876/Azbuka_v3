@@ -9515,17 +9515,17 @@ const MASHA = {
       {
        "ru": "Тётя покупа́ет торт. 🎂 Что покупа́ет тётя?",
        "tr": "Tiótia pakupáyit tort. Shto pakupáyit tiótia?",
-       "es": "La tía compra una torta. ¿Qué compra la tía?"
+       "es": "La tía compra una tarta. ¿Qué compra la tía?"
       }
      ],
      "ideas": [
       {
        "ru": "Торт.",
-       "es": "Una torta."
+       "es": "Una tarta."
       },
       {
        "ru": "Тётя покупа́ет торт.",
-       "es": "La tía compra una torta."
+       "es": "La tía compra una tarta."
       }
      ],
      "ramas": [
@@ -9549,7 +9549,7 @@ const MASHA = {
         {
          "ru": "Торт! 🎂",
          "tr": "Tort!",
-         "es": "¡Una torta!"
+         "es": "¡Una tarta!"
         }
        ],
        "ir": "quien",
@@ -9637,7 +9637,7 @@ const MASHA = {
       },
       {
        "ru": "Я покупа́ю торт.",
-       "es": "Compro una torta."
+       "es": "Compro una tarta."
       },
       {
        "ru": "Я пишу́ письмо́.",
@@ -9926,17 +9926,17 @@ const MASHA = {
       {
        "ru": "Ба́бушка пьёт чай и ест торт! 🎂 Что ест ба́бушка? 😄",
        "tr": "Bábushka pyot chai i yest tort! Shto yest bábushka?",
-       "es": "La abuela toma té y come torta. ¿Qué come la abuela?"
+       "es": "La abuela toma té y come tarta. ¿Qué come la abuela?"
       }
      ],
      "ideas": [
       {
        "ru": "Торт!",
-       "es": "¡Torta!"
+       "es": "¡Tarta!"
       },
       {
        "ru": "Ба́бушка ест торт.",
-       "es": "La abuela come torta."
+       "es": "La abuela come tarta."
       }
      ],
      "ramas": [
@@ -9949,7 +9949,7 @@ const MASHA = {
         {
          "ru": "Да! Торт у́тром! 😂",
          "tr": "Da! Tort útram!",
-         "es": "¡Sí! ¡Torta por la mañana!"
+         "es": "¡Sí! ¡Tarta por la mañana!"
         }
        ],
        "ir": "papa"
@@ -9960,7 +9960,7 @@ const MASHA = {
         {
          "ru": "Торт! 🎂 😂",
          "tr": "Tort!",
-         "es": "¡Torta!"
+         "es": "¡Tarta!"
         }
        ],
        "ir": "papa",
@@ -31303,7 +31303,7 @@ const MASHA = {
       {
        "ru": "Я всегда́ покупа́ю хлеб в э́том магази́не. 🍞 А вчера́ я купи́ла торт! 🎂 Почему́ «покупа́ю», а пото́м «купи́ла»?",
        "tr": "Ya fsigdá pakupáyu jliep v étam magazíni. A fchirá ya kupíla tort! Pachimú «pakupáyu», a patóm «kupíla»?",
-       "es": "Siempre compro el pan en esta tienda. Y ayer compré una torta. ¿Por qué покупаю y después купила?"
+       "es": "Siempre compro el pan en esta tienda. Y ayer compré una tarta. ¿Por qué покупаю y después купила?"
       }
      ],
      "ideas": [

@@ -153,7 +153,7 @@ Tus notas, ordenadas por secciones. Se guarda cualquier texto seleccionado en la
 | **11** | Решаем проблемы: el subjuntivo |
 | **12** | Мнения и аргументы: pronombres combinados, por / para, conectores |
 | **13** | Испанский для жизни: pluscuamperfecto, estilo indirecto |
-| **14** | Финальный экзамен: seis bloques, 100 puntos |
+| **14** | Итоговый экзамен: seis bloques, 100 puntos |
 
 Sus módulos de apoyo son los mismos que los de Azbuka, con contenido propio:
 
@@ -163,7 +163,7 @@ Sus módulos de apoyo son los mismos que los de Azbuka, con contenido propio:
 - **Алфавит и произношение, Диалоги (64 diálogos, frases útiles y notas culturales que comparan España con Rusia) y Чтение (48 lecturas).**
 - **Болтаем с Лусией:** el espejo de Masha. Una charla escrita en español con **Lucía**, profesora de inglés en Barcelona: **72 temas**, seis por unidad. Corrige con «💬 Лучше» los errores típicos de un rusohablante («yo es», «soy 25 años», «yo gusto», el género del adjetivo, la tilde) y pide «¡En español, por favor!» si escribes en cirílico.
 
-Abecé se abre con la cuenta: al invitar a un alumno se elige su dirección.
+Cada alumno elige Azbuka o Abecé al registrarse (ES / RU en la pantalla de entrada); la dirección queda en su cuenta.
 
 ---
 
@@ -216,7 +216,7 @@ El español de Abecé suena igual, con audios en [`Abece_voces`](https://github.
 - HTML, CSS y JavaScript, **sin proceso de build**.
 - [Preact](https://preactjs.com/) + [htm](https://github.com/developit/htm), incluidos en el repositorio (`assets/preact.js`).
 - **Service worker** para usarla sin conexión; `localStorage` para el progreso en el teléfono.
-- **Cuentas:** [Supabase](https://supabase.com/) (acceso por invitación y progreso en la nube) y Brevo para el mail con el código.
+- **Cuentas:** [Supabase](https://supabase.com/) (registro con el mail y progreso en la nube) y Brevo para el mail con el código.
 - **Voces:** Silero (y Piper para Abecé), generadas con GitHub Actions en los repositorios `Azbuka_voces` y `Abece_voces`.
 - **Cuaderno:** jsPDF y fflate, para exportar a PDF y Word en el propio teléfono.
 - Publicada con **GitHub Pages**.

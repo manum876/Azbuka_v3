@@ -231,8 +231,15 @@ function AzShell(props) {
   const c = azColors(dark);
 
   const q = lexQuery.trim();
+  /* 24/11/2026: si el léxico todavía no llegó (inicio recién abierto, Cuaderno,
+     Ajustes), se pide, se muestra «Cargando…» y se vuelve a buscar al llegar,
+     en vez de decir «Sin resultados». */
+  const [lexListo, setLexListo] = useState(() => typeof azLexicoListo !== "function" || azLexicoListo());
+  useEffect(() => {
+    if (q && !lexListo && typeof azPedirLexico === "function") azPedirLexico(() => setLexListo(true));
+  }, [q, lexListo]);
   const buscar = window[DIR().buscador || "azSearchLexicon"];
-  const results = q && typeof buscar === "function" ? buscar(q) : [];
+  const results = q && lexListo && typeof buscar === "function" ? buscar(q) : [];
 
   useEffect(() => { azInterceptLinks(); }, []);
 
@@ -322,7 +329,10 @@ function AzShell(props) {
           )
         ))
       ),
-      q && results.length === 0 && React.createElement("div", {
+      q && !lexListo && React.createElement("div", {
+        style: { margin: "0 16px 8px", fontSize: "var(--az-fs-nota)", color: c.textMuted, flexShrink: 0 }
+      }, T("cargando")),
+      q && lexListo && results.length === 0 && React.createElement("div", {
         style: { margin: "0 16px 8px", fontSize: "var(--az-fs-nota)", color: c.textMuted, flexShrink: 0 }
       }, T("sinResultados")),
 
