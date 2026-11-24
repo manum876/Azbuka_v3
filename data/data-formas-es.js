@@ -1,6 +1,6 @@
 /* Abecé — formas de las palabras que cambian (FORMAS_ES).
    Generado por herramientas/abece/formas-es.py: no editar a mano.
-   3793 entradas. t: sust | adj | det | num | art | pron | contr.
+   3799 entradas. t: sust | adj | det | num | art | pron | contr.
    sust: sg, pl, art [sg, pl], g; f/fpl/artF si tiene femenino; elA (el agua);
          inv (pl = sg); soloPl; sentido (el/la cambia el sentido).
    adj/det/num: m, f, mpl, fpl; invG (igual en m y f); apoc (+ apocF: también ante f); var (la otra forma del plural: la de la RAE).
@@ -3798,7 +3798,13 @@ const FORMAS_ES = {
 "ESP-05556":{"t":"sust","g":"f","sg":"reseña","pl":"reseñas","art":["la","las"]},
 "ESP-05557":{"t":"sust","g":"m","sg":"párrafo","pl":"párrafos","art":["el","los"]},
 "ESP-05558":{"t":"sust","g":"m","sg":"borrador","pl":"borradores","art":["el","los"]},
-"ESP-05559":{"t":"sust","g":"f","sg":"introducción","pl":"introducciones","art":["la","las"]}
+"ESP-05559":{"t":"sust","g":"f","sg":"introducción","pl":"introducciones","art":["la","las"]},
+"ESP-05560":{"t":"sust","g":"m","sg":"cubismo","pl":"cubismos","art":["el","los"]},
+"ESP-05561":{"t":"sust","g":"f","sg":"procesión","pl":"procesiones","art":["la","las"]},
+"ESP-05562":{"t":"sust","g":"f","sg":"hoguera","pl":"hogueras","art":["la","las"]},
+"ESP-05563":{"t":"sust","g":"f","sg":"aceituna","pl":"aceitunas","art":["la","las"]},
+"ESP-05564":{"t":"sust","g":"f","sg":"caldera","pl":"calderas","art":["la","las"]},
+"ESP-05565":{"t":"sust","g":"m","sg":"carril","pl":"carriles","art":["el","los"]}
 };
 
 const FORMAS_ES_SERIES = {

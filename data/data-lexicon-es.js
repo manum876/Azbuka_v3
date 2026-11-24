@@ -5,6 +5,9 @@
    y senses[].ru / senses[].definitionRu. Ficha y decisiones:
    claude/LEXICO_ABECE_FUENTES.md.
 
+   24/11/2026 (Manu): 6 entradas nuevas, las palabras que se habían evitado en Lecturas: cubismo, procesión, hoguera,
+   aceituna, caldera y carril (ESP-05560 a ESP-05565; ninguna unidad las enseña). Total: 5442 entradas.
+
    20/11/2026 (Manu): las frases que se entienden por sus partes salen del léxico (70; frente a se queda: «frente» sola es «лоб») y quedan en la ficha
    de su palabra principal (campo frases [{es, ru}]); las expresiones se enlazan con sus palabras (expresiones /
    partes); echar una mano (ESP-05547) y echar un vistazo (ESP-05548) nuevas. claude/EXPRESIONES_LEXICO_ABECE.md.
@@ -81,7 +84,7 @@ const LEXICON_ES_META = {
   "wordfreq, Robyn Speer (CC BY-SA 4.0)",
   "WikDict / FreeDict es-ru (CC BY-SA)"
  ],
- "totalEntries": 5436,
+ "totalEntries": 5442,
  "tandas": [
   1,
   2,
@@ -248155,6 +248158,277 @@ const LEXICON_ES = [
   "temas": [
    "estudios",
    "comunicacion"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {},
+  "frases": [],
+  "expresiones": [],
+  "partes": []
+ },
+ {
+  "id": "ESP-05560",
+  "es": "cubismo",
+  "acento": "cu·BIS·mo",
+  "posNormalized": "sustantivo",
+  "translit": "куби́смо",
+  "ipa": "kuβˈismo",
+  "gender": "m",
+  "numberClass": "",
+  "senses": [
+   {
+    "ru": "кубизм (направление в живописи)",
+    "definitionRu": "«Picasso creó el cubismo» — Пикассо создал кубизм.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "cubismo",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (24/11/2026, palabras evitadas en Lecturas)",
+   "tanda": 12,
+   "clave": "cubismo|N"
+  },
+  "temas": [
+   "sociedad"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {},
+  "frases": [],
+  "expresiones": [],
+  "partes": []
+ },
+ {
+  "id": "ESP-05561",
+  "es": "procesión",
+  "acento": "pro·ce·SIÓN",
+  "posNormalized": "sustantivo",
+  "translit": "просэсьо́н",
+  "ipa": "pɾoθesˈjon",
+  "gender": "f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "процессия, (крестный) ход",
+    "definitionRu": "«las procesiones de Semana Santa» — шествия на Страстной неделе.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "procesión",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (24/11/2026, palabras evitadas en Lecturas)",
+   "tanda": 12,
+   "clave": "procesión|N"
+  },
+  "temas": [
+   "sociedad"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {},
+  "frases": [],
+  "expresiones": [],
+  "partes": []
+ },
+ {
+  "id": "ESP-05562",
+  "es": "hoguera",
+  "acento": "ho·GUE·ra",
+  "posNormalized": "sustantivo",
+  "translit": "огэ́ра",
+  "ipa": "oɣˈeɾa",
+  "gender": "f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "костёр",
+    "definitionRu": "«las hogueras de San Juan» — костры в ночь Сан-Хуана (23 июня).",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "hoguera",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (24/11/2026, palabras evitadas en Lecturas)",
+   "tanda": 12,
+   "clave": "hoguera|N"
+  },
+  "temas": [
+   "naturaleza",
+   "viajes-ocio"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {},
+  "frases": [],
+  "expresiones": [],
+  "partes": []
+ },
+ {
+  "id": "ESP-05563",
+  "es": "aceituna",
+  "acento": "a·cei·TU·na",
+  "posNormalized": "sustantivo",
+  "translit": "асэйту́на",
+  "ipa": "aθejtˈuna",
+  "gender": "f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "оливка, маслина",
+    "definitionRu": "«unas aceitunas con el vermut» — оливки к вермуту.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "aceituna",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (24/11/2026, palabras evitadas en Lecturas)",
+   "tanda": 12,
+   "clave": "aceituna|N"
+  },
+  "temas": [
+   "comida"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {},
+  "frases": [],
+  "expresiones": [],
+  "partes": []
+ },
+ {
+  "id": "ESP-05564",
+  "es": "caldera",
+  "acento": "cal·DE·ra",
+  "posNormalized": "sustantivo",
+  "translit": "калдэ́ра",
+  "ipa": "kaldˈeɾa",
+  "gender": "f",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "котёл, бойлер (отопления и горячей воды)",
+    "definitionRu": "«Se ha roto la caldera y no hay agua caliente» — сломался котёл, и нет горячей воды.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "caldera",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (24/11/2026, palabras evitadas en Lecturas)",
+   "tanda": 12,
+   "clave": "caldera|N"
+  },
+  "temas": [
+   "casa"
+  ],
+  "regimen": [],
+  "pronominalPartner": [],
+  "conjugationClass": "",
+  "femenino": {},
+  "frases": [],
+  "expresiones": [],
+  "partes": []
+ },
+ {
+  "id": "ESP-05565",
+  "es": "carril",
+  "acento": "ca·RRIL",
+  "posNormalized": "sustantivo",
+  "translit": "карри́л",
+  "ipa": "karˈil",
+  "gender": "m",
+  "numberClass": "regular",
+  "senses": [
+   {
+    "ru": "полоса (движения)",
+    "definitionRu": "«el carril de la derecha» — правая полоса; «el carril bici» — велодорожка.",
+    "source": "redactado"
+   }
+  ],
+  "introducedIn": [],
+  "appearsIn": [],
+  "propio": false,
+  "sourceRefs": {
+   "subtitulos": {
+    "porMillon": null,
+    "puesto": null
+   },
+   "corpes": {
+    "lema": "carril",
+    "categorias": [
+     "N"
+    ]
+   },
+   "estimado": "entrada agregada por Manu (24/11/2026, palabras evitadas en Lecturas)",
+   "tanda": 12,
+   "clave": "carril|N"
+  },
+  "temas": [
+   "ciudad-transporte"
   ],
   "regimen": [],
   "pronominalPartner": [],
