@@ -420,7 +420,7 @@ function ejerciciosUnidad1() {
      uno por sesión. */
   const usadosEm = new Set();
   UNIDAD_1.modulos.filter(m => m.letras).forEach(m => {
-    const propias = m.letras.filter(x => !U1_SONIDO[x] || x === "Й");
+    const propias = m.letras.filter(x => !U1_SONIDO[x]);   /* sin Ъ, Ь ni Й (19/11/2026) */
     const anteriores = conSonido.filter(l => modDe[l.upper] < m.n).map(l => l.upper);
     for (let k = 0; k < propias.length; k += 4) {
       let set = propias.slice(k, k + 4);
@@ -431,7 +431,7 @@ function ejerciciosUnidad1() {
       usadosEm.add(clave);
       const ls = set.map(x => L.find(l => l.upper === x));
       out.push({ id: "U1-em-" + clave, tipo: "unir", forma: "emparejar", dificultad: 1, modulo: m.n, grupo: "unir",
-        pide: "Escucha cada sonido y únelo con su letra.", audioIzq: true, pares: ls.map(l => [l.lower, l.upper + " " + l.lower]),
+        pide: "Escucha cada letra y únela con la que corresponde.", audioIzq: true, pares: ls.map(l => [azNombreLetra(l), l.upper + " " + l.lower]),   /* suena el nombre (24/11/2026) */
         explicacion: ls.map(l => l.upper + " (" + l.name + ")").join(" · ") });
     }
   });

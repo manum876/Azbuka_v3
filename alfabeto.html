@@ -40,9 +40,12 @@
 
   /* ── Vista detalle ── */
   .det-hero{border-radius:var(--az-r);padding:24px 16px;margin-bottom:12px;}
-  .det-top{display:flex;gap:24px;align-items:center;flex-wrap:wrap;}
-  .det-glyph{font-size:56px;font-weight:800;line-height:1;text-align:center;flex-shrink:0;}
-  .det-cursive{font-family:'CyrCursive',cursive;font-size:56px;opacity:.7;margin-top:4px;}
+  /* Dos columnas fijas, letra 36 % y explicación el resto (24/11/2026, Manu: «todas como la Ш»);
+     la letra se achica para entrar en su columna (Щ, Ж, dígrafos) y el texto se acomoda en la suya */
+  .det-top{display:grid;grid-template-columns:36% minmax(0,1fr);gap:24px;align-items:center;}
+  .det-letra{container-type:inline-size;min-width:0;}
+  .det-glyph{font-size:min(56px,40cqw);font-weight:800;line-height:1;text-align:center;white-space:nowrap;}
+  .det-cursive{font-family:'CyrCursive',cursive;font-size:min(56px,40cqw);opacity:.7;margin-top:4px;white-space:nowrap;}
   .det-name{font-size:var(--az-fs-subtitulo);font-weight:800;margin-bottom:4px;}
   .det-translit{font-size:var(--az-fs-chico);margin-bottom:8px;}
   .det-pron{font-size:var(--az-fs-chico);line-height:1.5;margin-bottom:12px;}
@@ -411,23 +414,23 @@ function App() {
 
       React.createElement("div", { className: "det-hero", style: { background: c.card, border: `1px solid ${c.border}` } },
         React.createElement("div", { className: "det-top" },
-          React.createElement("div", null,
+          React.createElement("div", { className: "det-letra" },
             React.createElement("div", { className: "det-glyph", style: { color: c.gold } }, selected.upper + " " + selected.lower),
             React.createElement("div", { className: "det-cursive", style: { color: c.gold, textAlign: "center" } }, selected.upper + "\u2009" + selected.lower)
           ),
-          React.createElement("div", { style: { flex: 1, minWidth: 180 } },
+          React.createElement("div", { style: { minWidth: 0 } },
             React.createElement("div", { className: "det-name", style: { color: c.text } }, ES ? selected.name + " · " + selected.nameTl : selected.name),
             React.createElement("div", { className: "det-translit", style: { color: c.textSub } }, TX.sonido(selected)),
             React.createElement("div", { className: "det-pron", style: { color: c.textMuted } }, azFmt(selected.pronunciation)),
-            /* Botones en una fila con espacio (14/10/2026): si no entran, bajan alineados */
-            React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 } },
+            /* Botones siempre apilados y del mismo ancho (24/11/2026, Manu) */
+            React.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "stretch", gap: 8, marginTop: 4, maxWidth: 260 } },
             !(!ES && azLetraSinSonido(selected)) && React.createElement("button", {
               className: "btn", onClick: () => hablarLetra(selected),
-              style: { background: c.gold, color: "#0F0F14", fontWeight: 700, fontSize: "var(--az-fs-nota)", padding: "8px 16px", borderRadius: "var(--az-r)" }
+              style: { background: c.gold, color: "#0F0F14", fontWeight: 700, fontSize: "var(--az-fs-nota)", padding: "8px 16px", borderRadius: "var(--az-r)", width: "100%", textAlign: "center" }
             }, TX.escuchar),
             !(ES && selected.digrafo) && React.createElement("button", {
               className: "btn", onClick: () => { setManoLetra(selected.upper); setPage("mano"); window.scrollTo(0, 0); },
-              style: { background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontWeight: 700, fontSize: "var(--az-fs-nota)", padding: "8px 16px", borderRadius: "var(--az-r)" }
+              style: { background: c.bg2, border: `1px solid ${c.border}`, color: c.text, fontWeight: 700, fontSize: "var(--az-fs-nota)", padding: "8px 16px", borderRadius: "var(--az-r)", width: "100%", textAlign: "center" }
             }, TX.escribir))
           )
         ),

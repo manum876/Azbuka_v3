@@ -620,22 +620,28 @@
     const [txt, setTxt] = useState("");
     const [r, setR] = useState(null);
     const ref = useRef(null);
-    const elegir = o => { if (el) return; setEl(o); setTimeout(() => ref.current && ref.current.focus(), 50); };
+    /* 25/11/2026 (Manu): al elegir, las demás opciones se van para que la pantalla no salte.
+       Si acierta, queda su opción y aparece el campo para escribir la frase bien;
+       si no, quedan la elegida y la correcta, y el ejercicio termina (Mal) con la explicación. */
+    const elegir = o => {
+      if (el) return; setEl(o);
+      if (o === ej.correcta) setTimeout(() => ref.current && ref.current.focus(), 50);
+      else if (hecho == null) onRes(AZ_MAL);
+    };
     const comprobar = () => {
       if (!txt.trim() || r) return;
       const res = corr(txt, azEsperadasGenero(ej, ej.esperadas), LL, ej); setR(res);
-      const a = el === ej.correcta, b = res.resultado !== AZ_MAL;
-      if (hecho == null) onRes(a && res.resultado === AZ_BIEN ? AZ_BIEN : (a || b) ? AZ_CASI : AZ_MAL);
+      if (hecho == null) onRes(res.resultado === AZ_BIEN ? AZ_BIEN : AZ_CASI);   /* el diagnóstico ya está bien: la frase decide Bien o Casi */
     };
     return h(React.Fragment, null,
       h("div", { className: "pr-pide" }, azFmt(ej.pide || T("Esta frase tiene un error. ¿Qué falla?"))),
       h("div", { className: "pr-grande frase", lang: LL }, ej.grande),
       ej.audio && h(Oir, { texto: ej.audio, auto: false }),
-      h("div", { className: "pr-ops una" }, ej.opciones.map(o => {
+      h("div", { className: "pr-ops una" }, ej.opciones.filter(o => !el || o === el || o === ej.correcta).map(o => {
         const cls = !el ? "" : o === ej.correcta ? " ok" : o === el ? " mal" : "";
         return h("button", { key: o, className: "pr-op" + cls, disabled: !!el, lang: langDe(o), onClick: () => elegir(o) }, sinLlavesOp(o));
       })),
-      el && h(React.Fragment, null,
+      el === ej.correcta && h(React.Fragment, null,
         h("div", { className: "pr-pide", style: { marginTop: 12 } }, T("Ahora escribe la frase bien:")),
         h("div", { className: "pr-in-row" },
           h("input", { ref, className: "pr-input", value: txt, lang: LL, autocapitalize: "off", autocorrect: "off", spellcheck: false, autocomplete: "off",
